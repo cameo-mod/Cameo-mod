@@ -138,9 +138,9 @@ MMRA2SMCV:
 		Prerequisite: mmsovietra2
 
 MMYRPCV:
-	Inherits@MCV: YRPCV
+	Inherits@MCV: yuri_mobileconstructionvehicle
 	Transforms:
-		IntoActor: yrnacnst
+		IntoActor: yuri_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Yuri)
 	Buildable:
@@ -148,7 +148,7 @@ MMYRPCV:
 		-Description:
 		Prerequisites: !mmyuri
 	RenderSprites:
-		Image: yrpcv
+		Image: yuri_mobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmyuri
 

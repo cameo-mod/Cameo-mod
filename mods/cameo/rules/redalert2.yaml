@@ -41,7 +41,7 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: yuri
-		BaseActor: yrpcv
+		BaseActor: yuri_mobileconstructionvehicle
 	StartingUnits@defaultra2allies:
 		Class: light
 		ClassName: Light Support
@@ -70,14 +70,14 @@ World:
 		Class: light
 		ClassName: Light Support
 		Factions: yuri
-		BaseActor: yrpcv
-		SupportActors: yrinit,yrinit,yrinit,yrbrute,yrbrute,yrslav,yrytnk,yrltnk
+		BaseActor: yuri_mobileconstructionvehicle
+		SupportActors: yuri_initiate,yuri_initiate,yuri_initiate,yuri_brute,yuri_brute,yrslav,yuri_gatlingtank,yuri_lashertank
 	StartingUnits@heavyyuri:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: yuri
-		BaseActor: yrpcv
-		SupportActors: yrinit,yrinit,yrinit,yrbrute,yrbrute,yrslav,yrytnk,yrltnk,yrltnk,yrltnk,yrltnk,yrytnk
+		BaseActor: yuri_mobileconstructionvehicle
+		SupportActors: yuri_initiate,yuri_initiate,yuri_initiate,yuri_brute,yuri_brute,yrslav,yuri_gatlingtank,yuri_lashertank,yuri_lashertank,yuri_lashertank,yuri_lashertank,yuri_gatlingtank
 
 Player:
 	ProvidesPrerequisite@anyallies:
@@ -518,7 +518,7 @@ RA2Flameguy:
 
 ^RA2YSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: ra2engineer.yuri, yrinit, yrinit, yrbrute
+		ActorTypes: yuri_engineer, yuri_initiate, yuri_initiate, yuri_brute
 
 ##############################################
 #   Red Alert 2 Allies Structures
@@ -1522,19 +1522,19 @@ ra2_soviets_concretebarrier:
 		PlayerPalette: playerra2
 		Type: ra2_soviets_concretebarrier
 
-ra2_ywall:
+yuri_concretebarrier:
 	Inherits: BRIK
 	RenderSprites:
-		Image: ra2_ywall
+		Image: yuri_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
 	Buildable:
-		Prerequisites: ~yrnacnst
+		Prerequisites: ~yuri_constructionyard
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
 		PlayerPalette: playerra2
-		Type: ra2_ywall
+		Type: yuri_concretebarrier
 
 ###########################
 ##############################################
@@ -2376,13 +2376,13 @@ ra2nayard:
 ##############################################
 #   Red Alert 2 Yuri Structures
 ##############################################
-yrnacnst:
+yuri_constructionyard:
 	Inherits: ra2_allies_alliedconstructionyard
 	Inherits@sell: ^RA2YSpawnActorsOnSell
 	Tooltip:
 		Name: Yuri Construction Yard
 	Transforms:
-		IntoActor: yrpcv
+		IntoActor: yuri_mobileconstructionvehicle
 	-WithIdleOverlay@fans:
 	WithIdleOverlay@top:
 		Sequence: idle-top
@@ -2408,24 +2408,24 @@ yrnacnst.infiltrated:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: yrnacnst
+		Prerequisite: yuri_constructionyard
 	RenderSprites:
-		Image: yrnacnst
+		Image: yuri_constructionyard
 
-yrygweap:
+yuri_warfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^RA2YSpawnActorsOnSell
 	Tooltip:
 		Name: Yuri War Factory
 	Buildable:
-		Prerequisites: ~yrnacnst, yryarefn
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
 	WithIdleOverlay@bib:
 		Sequence: bib
 
-yryapowr:
+yuri_bioreactor:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
@@ -2439,7 +2439,7 @@ yryapowr:
 		Name: Bio Reactor
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~yrnacnst
+		Prerequisites: ~yuri_constructionyard
 		Queue: Building, RABuilding
 		Description: actor_yapowr.description
 	Building:
@@ -2454,7 +2454,7 @@ yryapowr:
 		Range: 4c0
 	ScalePowerWithHealth:
 	Selectable:
-		Class: yryapowr
+		Class: yuri_bioreactor
 	AcceptsDeliveredExperience:
 		ValidTypes: building
 	ProvidesPrerequisite@buildingname:
@@ -2490,12 +2490,12 @@ yryapowr:
 	Power@5:
 		Amount: 400
 		RequiresCondition: PowerLoad >= 5
-	PowerMultiplier@ra2_yuri_upgrade_bioreactorefficiency:
+	PowerMultiplier@yuri_upgrade_bioreactorefficiency:
 		Modifier: 200
-		RequiresCondition: ra2_yuri_upgrade_bioreactorefficiency
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_bioreactorefficiency:
-		Condition: ra2_yuri_upgrade_bioreactorefficiency
-		Prerequisites: ra2_yuri_upgrade_bioreactorefficiency
+		RequiresCondition: yuri_upgrade_bioreactorefficiency
+	GrantConditionOnPrerequisite@yuri_upgrade_bioreactorefficiency:
+		Condition: yuri_upgrade_bioreactorefficiency
+		Prerequisites: yuri_upgrade_bioreactorefficiency
 	FireWarheadsOnDeathCA@4:
 		Weapon: ReactorNukeWeak
 		EmptyWeapon: ReactorNukeWeak
@@ -2521,9 +2521,9 @@ yryapowr:
 	ActorStatValues:
 		Stats: Armor, Sight, Power, Cargo
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_bioreactorefficiency
+		Upgrades: yuri_upgrade_bioreactorefficiency
 
-yryabrck:
+yuri_barracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
@@ -2532,7 +2532,7 @@ yryabrck:
 	Tooltip:
 		Name: Yuri Barracks
 	Buildable:
-		Prerequisites: ~yrnacnst, yryapowr
+		Prerequisites: ~yuri_constructionyard, yuri_bioreactor
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -2545,7 +2545,7 @@ yryabrck:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-yryarefn:
+yuri_slaveminer_2:
 	Inherits@2: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@shape: ^2x2Shape
@@ -2565,7 +2565,7 @@ yryarefn:
 	Buildable:
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~yrnacnst, yryapowr
+		Prerequisites: ~yuri_constructionyard, yuri_bioreactor
 		Description: actor_yarefn.description
 	Building:
 		Footprint: xx x+
@@ -2597,7 +2597,7 @@ yryarefn:
 	DrawLineToTarget:
 	Selectable:
 		Bounds: 2048, 2048
-		Class: yryarefn
+		Class: yuri_slaveminer_2
 	SlaveMinerSpawnerMaster:
 		Actors: yrslav, yrslav, yrslav, yrslav
 		SlavesHaveFreeWill: true
@@ -2608,7 +2608,7 @@ yryarefn:
 	BodyOrientation:
 	Transforms:
 		RequiresCondition: !build-incomplete && !disabled
-		IntoActor: yrsmin
+		IntoActor: yuri_slaveminer
 		Facing: 128
 		Voice: Undeploy
 	Turreted:
@@ -2627,9 +2627,9 @@ yryarefn:
 		VoiceSet: SlaveMinerVoice
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines
 
-yryggrnd:
+yuri_grinder:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
@@ -2640,14 +2640,14 @@ yryggrnd:
 	Tooltip:
 		Name: Grinder
 	ProvidesPrerequisite:
-		Prerequisite: yryggrnd
+		Prerequisite: yuri_grinder
 	Buildable:
 		BuildPaletteOrder: 60
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Queue: Building, RABuilding
 		Description: Recycles units into cash.
-		Prerequisites: ~yrnacnst, yrygweap
+		Prerequisites: ~yuri_constructionyard, yuri_warfactory
 	Building:
 		Footprint: xxx =x=
 		Dimensions: 3,2
@@ -2662,7 +2662,7 @@ yryggrnd:
 	AcceptsDeliveredCash:
 		ValidTypes: GrinderCash
 
-ra2napsis:
+yuri_psychicsensor:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@radar: ^RadarBuilding
@@ -2677,7 +2677,7 @@ ra2napsis:
 	Tooltip:
 		Name: Psychic Sensor
 	Buildable:
-		Prerequisites: ~yrnacnst, yryarefn
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2
 		Description: actor_napsis.description
 	Building:
 		Footprint: xx xx
@@ -2713,36 +2713,36 @@ ra2napsis:
 		EffectSequence: idle
 		BlockedCursor: move-blocked
 	SupportPowerChargeBar:
-	RevealsShroudMultiplier@ra2_yuri_upgrade_psychicvision:
+	RevealsShroudMultiplier@yuri_upgrade_psychicvision:
 		Modifier: 150
-	DetectCloakedMultiplier@ra2_yuri_upgrade_psychicvision:
+	DetectCloakedMultiplier@yuri_upgrade_psychicvision:
 		Modifier: 150
 	RangedGpsProvider:
 		Range: 20000
-		RequiresCondition: !disabled && !ra2_yuri_upgrade_psychicvision
+		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
 	WithRangeCircle:
 		Range: 20000
 		Color: FF000088
-		RequiresCondition: !disabled && !ra2_yuri_upgrade_psychicvision
+		RequiresCondition: !disabled && !yuri_upgrade_psychicvision
 	RangedGpsProvider@upgrade:
 		Range: 30000
-		RequiresCondition: !disabled && ra2_yuri_upgrade_psychicvision
+		RequiresCondition: !disabled && yuri_upgrade_psychicvision
 	WithRangeCircle@upgrade:
 		Range: 30000
 		Color: FF000088
-		RequiresCondition: !disabled && ra2_yuri_upgrade_psychicvision
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psychicvision:
-		Condition: ra2_yuri_upgrade_psychicvision
-		Prerequisites: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: !disabled && yuri_upgrade_psychicvision
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicvision:
+		Condition: yuri_upgrade_psychicvision
+		Prerequisites: yuri_upgrade_psychicvision
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psychicvision
+		Upgrades: yuri_upgrade_psychicvision
 
 yuriinvisibleplane:
 	Inherits: U2
 	-Contrail@1:
 	-Contrail@2:
 
-yrygtech:
+yuri_battlelab:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
@@ -2750,7 +2750,7 @@ yrygtech:
 	Selectable:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
-		Prerequisites: ~yrnacnst, ra2napsis
+		Prerequisites: ~yuri_constructionyard, yuri_psychicsensor
 	Tooltip:
 		Name: Yuri Battle Lab
 	Building:
@@ -2763,7 +2763,7 @@ yrygtech:
 		Sequence: idle-critical
 		RequiresCondition: !build-incomplete
 
-yrygcomd:
+yuri_lunarcommandcenter:
 	Inherits: ^RA2Building
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -2775,7 +2775,7 @@ yrygcomd:
 		Queue: Building, RABuilding
 		BuildLimit: 1
 		BuildPaletteOrder: 150
-		Prerequisites: ~yrnacnst, yrygtech, derricklimit
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, derricklimit
 		Description: template_airfield.description
 	Building:
 		Footprint: =xx= xxxx xxxx
@@ -2820,7 +2820,7 @@ yrygcomd:
 		ProductionType: RAAircraft
 		RequiresCondition: classicproductionqueues
 
-ra2yclon:
+yuri_cloningvats:
 	Inherits: ^RA2Building
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -2830,7 +2830,7 @@ ra2yclon:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Buildable:
 		BuildPaletteOrder: 160
-		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, derricklimit
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, yuri_lunarcommandcenter, derricklimit
 		Queue: Building, RABuilding
 		Description: Clones produced infantry.
 		BuildLimit: 1
@@ -2854,7 +2854,7 @@ ra2yclon:
 	RenderSprites:
 		Image: ra2naclon
 
-yrygppet:
+yuri_psychicdominator:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -2862,7 +2862,7 @@ yrygppet:
 	Tooltip:
 		Name: Psychic Dominator
 	Buildable:
-		Prerequisites: ~yrnacnst, yrygtech, !psydom, ~techlevel.superweapons
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, !psydom, ~techlevel.superweapons
 		Description: actor_yappet.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -2931,7 +2931,7 @@ blastradius.dominate:
 		Color: 66339988
 		Visible: Always
 
-yryggntc:
+yuri_geneticmutator:
 	Inherits: ^RA2Building
 	Inherits@sell: ^RA2YSpawnActorsOnSell
 	Inherits@SW: ^Superweapon
@@ -2940,7 +2940,7 @@ yryggntc:
 	Tooltip:
 		Name: Genetic Mutator
 	Buildable:
-		Prerequisites: ~yrnacnst, yrygtech, ~techlevel.superweapons
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab, ~techlevel.superweapons
 		Description: actor_yagntc.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -2984,7 +2984,7 @@ yryggntc:
 		IncomingSound: sgenopen.wav
 	SupportPowerChargeBar:
 
-yrngtbnk:
+yuri_tankbunker:
 	Inherits@2: ^RA2Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@shape: ^2x2Shape
@@ -2993,7 +2993,7 @@ yrngtbnk:
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Selectable:
 		Bounds: 2048, 2048
-		Class: yrngtbnk
+		Class: yuri_tankbunker
 	Tooltip:
 		Name: Tank Bunker
 	Building:
@@ -3002,7 +3002,7 @@ yrngtbnk:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~yrnacnst, yrygweap
+		Prerequisites: ~yuri_constructionyard, yuri_warfactory
 		Description: actor_natbnk.description
 	Valued:
 		Cost: 1000
@@ -3058,7 +3058,7 @@ yrngtbnk:
 		DisplayCargoRelationships: Ally, Neutral, Enemy
 		Stats: Armor, Sight, Cargo, Kills
 
-yrygggun:
+yuri_gatlingcannon:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -3071,7 +3071,7 @@ yrygggun:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~yrnacnst, yryabrck
+		Prerequisites: ~yuri_constructionyard, yuri_barracks
 		Description: actor_yaggun.description
 	Valued:
 		Cost: 1000
@@ -3157,9 +3157,9 @@ yrygggun:
 	DetectCloaked:
 		Range: 4125
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_gatlingpower, ra2_yuri_upgrade_gatlingspeed
+		Upgrades: yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
 
-yrygpsyt:
+yuri_psychictower:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -3173,7 +3173,7 @@ yrygpsyt:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~yrnacnst, yrygtech
+		Prerequisites: ~yuri_constructionyard, yuri_battlelab
 		Description: actor_yapsyt.description
 	Valued:
 		Cost: 2000
@@ -3193,17 +3193,17 @@ yrygpsyt:
 		TicksToControl: 30
 		Capacity: 3
 		RequiresCondition: !disabled
-	MindControllerCapacityModifier@ra2_yuri_upgrade_domination:
+	MindControllerCapacityModifier@yuri_upgrade_domination:
 		Amount: 3
-		RequiresCondition: ra2_yuri_upgrade_domination
-	ReloadDelayMultiplier@ra2_yuri_upgrade_domination:
+		RequiresCondition: yuri_upgrade_domination
+	ReloadDelayMultiplier@yuri_upgrade_domination:
 		Modifier: 75
-		RequiresCondition: ra2_yuri_upgrade_domination
-	RangeMultiplier@ra2_yuri_upgrade_psychicrange:
+		RequiresCondition: yuri_upgrade_domination
+	RangeMultiplier@yuri_upgrade_psychicrange:
 		Modifier: 130
-	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+	RangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 15000
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: yuri_upgrade_psychicvision
 	RenderRangeCircle:
 		RangeCircleType: mindcontrol
 		Color: 663399b0
@@ -3225,7 +3225,7 @@ yrygpsyt:
 	DetectCloaked:
 		Range: 5000
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor, ra2_yuri_upgrade_psychicvision
+		Upgrades: yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor, yuri_upgrade_psychicvision
 
 yrygyard:
 	Inherits: ^RA2Building
@@ -3237,7 +3237,7 @@ yrygyard:
 	Tooltip:
 		Name: Yuri Sub Pen
 	Buildable:
-		Prerequisites: ~yrnacnst, yryarefn, ~globalnaval
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -3803,10 +3803,10 @@ ra2_soviets_engineer:
 	Voiced:
 		VoiceSet: SovietEngineer
 
-ra2engineer.yuri:
+yuri_engineer:
 	Inherits: ra2_allies_engineer
 	Buildable:
-		Prerequisites: ~yryabrck
+		Prerequisites: ~yuri_barracks
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: ra2_allies_engineer
@@ -4654,7 +4654,7 @@ ra2_soviets_boris:
 #   Red Alert 2 Yuri Infantry
 ##############################################
 
-YRINIT:
+yuri_initiate:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -4676,7 +4676,7 @@ YRINIT:
 		Name: Yuri Initiate
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~yryabrck
+		Prerequisites: ~yuri_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -4706,18 +4706,18 @@ YRINIT:
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@SplashCompensation:
 		Modifier: 50
-	FirepowerMultiplier@ra2_yuri_upgrade_initiatepower:
+	FirepowerMultiplier@yuri_upgrade_initiatepowersurge:
 		Modifier: 150
-		RequiresCondition: ra2_yuri_upgrade_initiatepower
-	RangeMultiplier@ra2_yuri_upgrade_initiatepower:
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	RangeMultiplier@yuri_upgrade_initiatepowersurge:
 		Modifier: 115
-		RequiresCondition: ra2_yuri_upgrade_initiatepower
-	ReloadDelayMultiplier@ra2_yuri_upgrade_initiatepower:
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	ReloadDelayMultiplier@yuri_upgrade_initiatepowersurge:
 		Modifier: 85
-		RequiresCondition: ra2_yuri_upgrade_initiatepower
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_initiatepower:
-		Condition: ra2_yuri_upgrade_initiatepower
-		Prerequisites: ra2_yuri_upgrade_initiatepower
+		RequiresCondition: yuri_upgrade_initiatepowersurge
+	GrantConditionOnPrerequisite@yuri_upgrade_initiatepowersurge:
+		Condition: yuri_upgrade_initiatepowersurge
+		Prerequisites: yuri_upgrade_initiatepowersurge
 	AttackFrontal:
 		FacingTolerance: 0
 	AcceptsDeliveredExperience:
@@ -4725,9 +4725,9 @@ YRINIT:
 	Voiced:
 		VoiceSet: InitiateVoice
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_psionicarmor, ra2_yuri_upgrade_stealthsuits, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_initiatepower
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_psionicarmor, yuri_upgrade_infantrystealthsuits, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_initiatepowersurge
 
-YRBRUTE:
+yuri_brute:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4746,7 +4746,7 @@ YRBRUTE:
 		Name: Brute
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~yryabrck
+		Prerequisites: ~yuri_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_brute.description
 	Mobile:
@@ -4770,20 +4770,20 @@ YRBRUTE:
 	-TakeCover:
 	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
-	FirepowerMultiplier@ra2_yuri_upgrade_brutestrength:
+	FirepowerMultiplier@yuri_upgrade_brutestrengthmutations:
 		Modifier: 140
-		RequiresCondition: ra2_yuri_upgrade_brutestrength
-	SpeedMultiplier@ra2_yuri_upgrade_brutestrength:
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	SpeedMultiplier@yuri_upgrade_brutestrengthmutations:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_brutestrength
-	DamageMultiplier@ra2_yuri_upgrade_brutestrength:
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	DamageMultiplier@yuri_upgrade_brutestrengthmutations:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_brutestrength
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_brutestrength:
-		Condition: ra2_yuri_upgrade_brutestrength
-		Prerequisites: ra2_yuri_upgrade_brutestrength
+		RequiresCondition: yuri_upgrade_brutestrengthmutations
+	GrantConditionOnPrerequisite@yuri_upgrade_brutestrengthmutations:
+		Condition: yuri_upgrade_brutestrengthmutations
+		Prerequisites: yuri_upgrade_brutestrengthmutations
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_brutestrength
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_brutestrengthmutations
 
 YRSLAV:
 	Inherits: ^Soldier
@@ -4810,7 +4810,7 @@ YRSLAV:
 		RequiresCondition: freed
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~yryabrck
+		Prerequisites: ~yuri_barracks
 		#Queue: Infantry, RAInfantry
 		Description: Yuri resource collector.
 	Mobile:
@@ -4894,9 +4894,9 @@ YRSLAV:
 		RequiresSelection: true
 		PipCount: 1
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision
 
-YRVIRUS:
+yuri_virus:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4916,7 +4916,7 @@ YRVIRUS:
 		Name: Virus
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yuri_psychicsensor
 		Queue: Infantry, RAInfantry
 		Description: actor_virus.description
 	Mobile:
@@ -4928,15 +4928,15 @@ YRVIRUS:
 	Armament@PRIMARY:
 		Weapon: RA2Virusgun
 		LocalOffset: 0,0,427
-		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_meltingvirus
+		RequiresCondition: !rank-elite && !yuri_upgrade_meltingvirus
 	Armament@PRIMARY2:
 		Weapon: RA2Virusgun2
 		LocalOffset: 0,0,427
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_meltingvirus && !ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo
 	Armament@PRIMARY3:
 		Weapon: RA2Virusgun3
 		LocalOffset: 0,0,427
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@ELITE:
 		Weapon: RA2VirusgunE
 		LocalOffset: 0,0,427
@@ -4944,15 +4944,15 @@ YRVIRUS:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2Virusgun
-		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_meltingvirus
+		RequiresCondition: !rank-elite && !yuri_upgrade_meltingvirus
 	Armament@GARRISONED2:
 		Name: garrisoned
 		Weapon: RA2Virusgun2
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_meltingvirus && !ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo
 	Armament@GARRISONED3:
 		Name: garrisoned
 		Weapon: RA2Virusgun3
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: RA2VirusgunE
@@ -4966,12 +4966,12 @@ YRVIRUS:
 	DeliversCash:
 		Payload: 350
 	GrantConditionOnPrerequisite@viruscloud:
-		Condition: ra2_yuri_upgrade_meltingvirus
-		Prerequisites: ra2_yuri_upgrade_meltingvirus
+		Condition: yuri_upgrade_meltingvirus
+		Prerequisites: yuri_upgrade_meltingvirus
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_meltingvirus, ra2_yuri_upgrade_corrosiveammo
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_meltingvirus, yuri_upgrade_corrosiveammo
 
-YRYURI:
+yuri_clone:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4996,7 +4996,7 @@ YRYURI:
 		Name: Yuri Clone
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yuri_psychicsensor
 		Queue: Infantry, RAInfantry
 		Description: actor_yuri.description
 	Mobile:
@@ -5021,7 +5021,7 @@ YRYURI:
 		ControllingCondition: controlling
 	ReloadArmamentsBar:
 	AutoTarget:
-		RequiresCondition: (!controlling && !ra2_yuri_upgrade_domination) || (controlling < 3 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (!controlling && !yuri_upgrade_domination) || (controlling < 3 && yuri_upgrade_domination)
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
@@ -5051,9 +5051,9 @@ YRYURI:
 		Range: 6000
 		Type: mindcontrol
 		Color: 663399b0
-	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+	RangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 15000
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: yuri_upgrade_psychicvision
 	Voiced:
 		VoiceSet: YuriVoice
 	ProximityCaptor@MC:
@@ -5065,9 +5065,9 @@ YRYURI:
 	RenderSprites:
 		Image: RA2YURI
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor
 
-YRYURIX:
+yuri_yurix:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -5095,7 +5095,7 @@ YRYURIX:
 		Name: actor_yurix.name
 	Buildable:
 		BuildPaletteOrder: 150
-		Prerequisites: ~yryabrck, yrygcomd
+		Prerequisites: ~yuri_barracks, yuri_lunarcommandcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_yurix.description
@@ -5115,13 +5115,13 @@ YRYURIX:
 		Name: secondary
 		ReloadingCondition: reload-splash
 		PauseOnCondition: reload-structure
-		RequiresCondition: !ra2_yuri_upgrade_domination
+		RequiresCondition: !yuri_upgrade_domination
 	Armament@Splash2:
 		Weapon: RA2XMindControlSplash2
 		Name: secondary
 		ReloadingCondition: reload-splash
 		PauseOnCondition: reload-structure
-		RequiresCondition: ra2_yuri_upgrade_domination
+		RequiresCondition: yuri_upgrade_domination
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 100
@@ -5220,9 +5220,9 @@ YRYURIX:
 		Range: 8000
 		Type: mindcontrol
 		Color: 663399bb
-	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+	RangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 30000
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: yuri_upgrade_psychicvision
 	AcceptsDeliveredExperience:
 		ValidTypes: infantry
 	Voiced:
@@ -5234,9 +5234,9 @@ YRYURIX:
 	#-Cloneable:
 	KeepsDistance:
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor
 
-YRGTRP:
+yuri_gatlingtrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -5257,7 +5257,7 @@ YRGTRP:
 		Name: Gatling Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~yryabrck, yrygtech
+		Prerequisites: ~yuri_barracks, yuri_battlelab
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2cameo
 		Description: actor_gtrp.description
@@ -5321,9 +5321,9 @@ YRGTRP:
 	RenderSprites:
 		Image: yrarnd
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_gatlingpower, ra2_yuri_upgrade_gatlingspeed
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
 
-yrbiot:
+yuri_biotrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA2
@@ -5341,7 +5341,7 @@ yrbiot:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~yryabrck, ra2yclon
+		Prerequisites: ~yuri_barracks, yuri_cloningvats
 		Description: actor_biot.description
 	Valued:
 		Cost: 400
@@ -5359,11 +5359,11 @@ yrbiot:
 		Weapon: RA2Chemspray
 		LocalOffset: 600,0,512
 		FireDelay: 5
-		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && !yuri_upgrade_corrosiveammo
 	Armament@Upgrade:
 		Weapon: RA2Chemspray2
 		LocalOffset: 0,0,427
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@ELITE:
 		Weapon: RA2ChemsprayE
 		LocalOffset: 0,0,427
@@ -5371,11 +5371,11 @@ yrbiot:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2Chemspray
-		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && !yuri_upgrade_corrosiveammo
 	Armament@GARRISONEDUpgrade:
 		Name: garrisoned
 		Weapon: RA2Chemspray2
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+		RequiresCondition: !rank-elite && yuri_upgrade_corrosiveammo
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: RA2ChemsprayE
@@ -5390,7 +5390,7 @@ yrbiot:
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_corrosiveammo
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_corrosiveammo
 	GrantExternalConditionToTransport:
 		Condition: ifv-chem
 
@@ -7160,7 +7160,7 @@ ra2_soviets_terrordrone:
 #   Red Alert 2 Yuri Vehicles
 ##############################################
 
-YRPCV:
+yuri_mobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7173,9 +7173,9 @@ YRPCV:
 	Tooltip:
 		Name: Yuri Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~yrygweap, yryggrnd
+		Prerequisites: ~yuri_warfactory, yuri_grinder
 	Transforms:
-		IntoActor: yrnacnst
+		IntoActor: yuri_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -7188,9 +7188,9 @@ YRPCV:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines
 
-YRSMIN:
+yuri_slaveminer:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -7203,7 +7203,7 @@ YRSMIN:
 	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
 	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
 	ProvidesPrerequisite:
-		Prerequisite: yryarefn
+		Prerequisite: yuri_slaveminer_2
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -7212,13 +7212,13 @@ YRSMIN:
 		BuildPaletteOrder: 10
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~yrygweap
+		Prerequisites: ~yuri_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_smin.description
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536
-		Class: yrsmin
+		Class: yuri_slaveminer
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -7244,7 +7244,7 @@ YRSMIN:
 	DetectCloaked:
 		Range: 3333
 	Transforms:
-		IntoActor: yryarefn
+		IntoActor: yuri_slaveminer_2
 		Facing: 128
 		TransformSounds: uplace.wav
 		NoTransformNotification: BuildingCannotPlaceAudio
@@ -7257,8 +7257,8 @@ YRSMIN:
 		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
 		SpawnOffset: 511,511,0, 511,511,0, 511,511,0, 511,511,0
 		PauseOnCondition: !deployed
-	ProvidesPrerequisite@yryarefn:
-		Prerequisite: yryarefn
+	ProvidesPrerequisite@yuri_slaveminer_2:
+		Prerequisite: yuri_slaveminer_2
 	Voiced:
 		VoiceSet: SlaveMinerVoice
 	DeliversCash:
@@ -7278,20 +7278,20 @@ YRSMIN:
 	WithMuzzleOverlay:
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: yrsmin
+		Image: yuri_slaveminer
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines
 
 yrsmin.empy:
-	Inherits: YRSMIN
+	Inherits: yuri_slaveminer
 	-Buildable:
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: yrsmin
+		Image: yuri_slaveminer
 	-MapEditorData:
 
-YRYTNK:
+yuri_gatlingtank:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7312,7 +7312,7 @@ YRYTNK:
 		Name: Yuri Gatling Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~yrygweap
+		Prerequisites: ~yuri_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_ytnk.description
 	Mobile:
@@ -7378,9 +7378,9 @@ YRYTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_gatlingpower, ra2_yuri_upgrade_gatlingspeed
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
 
-YRLTNK:
+yuri_lashertank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -7399,7 +7399,7 @@ YRLTNK:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~yrygweap
+		Prerequisites: ~yuri_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -7420,50 +7420,50 @@ YRLTNK:
 		Name: primary
 		Weapon: RA2LasherCannon
 		LocalOffset: 1000,0,500
-		RequiresCondition: !ra2_yuri_upgrade_lashertoxic && !ra2_yuri_upgrade_lasherlaser && !rank-elite
+		RequiresCondition: !yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && !rank-elite
 	Armament@ELITE:
 		Name: primary
 		Weapon: RA2LasherCannon_elite
 		LocalOffset: 1000,0,500
-		RequiresCondition: !ra2_yuri_upgrade_lashertoxic && !ra2_yuri_upgrade_lasherlaser && rank-elite
+		RequiresCondition: !yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && rank-elite
 	Armament@Toxic:
 		Name: primary
 		Weapon: RA2LasherToxicMortar
 		LocalOffset: 1000,0,500
-		RequiresCondition: ra2_yuri_upgrade_lashertoxic && !rank-elite
+		RequiresCondition: yuri_doctrine_lashertoxicgasshells && !rank-elite
 	Armament@ToxicELITE:
 		Name: primary
 		Weapon: RA2LasherToxicMortar_elite
 		LocalOffset: 1000,0,500
-		RequiresCondition: ra2_yuri_upgrade_lashertoxic && rank-elite
+		RequiresCondition: yuri_doctrine_lashertoxicgasshells && rank-elite
 	Armament@Laser:
 		Name: primary
 		Weapon: RA2LasherLaser
 		LocalOffset: 1000,0,500
-		RequiresCondition: ra2_yuri_upgrade_lasherlaser && !rank-elite
+		RequiresCondition: yuri_doctrine_lasherlasercannon && !rank-elite
 	Armament@LaserELITE:
 		Name: primary
 		Weapon: RA2LasherLaser_elite
 		LocalOffset: 1000,0,500
-		RequiresCondition: ra2_yuri_upgrade_lasherlaser && rank-elite
-	FirepowerMultiplier@ra2_yuri_upgrade_lashercannon:
+		RequiresCondition: yuri_doctrine_lasherlasercannon && rank-elite
+	FirepowerMultiplier@yuri_doctrine_lasherhecannon:
 		Modifier: 200
-		RequiresCondition: ra2_yuri_upgrade_lashercannon
-	DamageMultiplier@ra2_yuri_upgrade_lasherarmor:
+		RequiresCondition: yuri_doctrine_lasherhecannon
+	DamageMultiplier@yuri_upgrade_lasherarmorimprovements:
 		Modifier: 65
-		RequiresCondition: ra2_yuri_upgrade_lasherarmor
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lashercannon:
-		Condition: ra2_yuri_upgrade_lashercannon
-		Prerequisites: ra2_yuri_upgrade_lashercannon
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lashertoxic:
-		Condition: ra2_yuri_upgrade_lashertoxic
-		Prerequisites: ra2_yuri_upgrade_lashertoxic
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lasherlaser:
-		Condition: ra2_yuri_upgrade_lasherlaser
-		Prerequisites: ra2_yuri_upgrade_lasherlaser
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lasherarmor:
-		Condition: ra2_yuri_upgrade_lasherarmor
-		Prerequisites: ra2_yuri_upgrade_lasherarmor
+		RequiresCondition: yuri_upgrade_lasherarmorimprovements
+	GrantConditionOnPrerequisite@yuri_doctrine_lasherhecannon:
+		Condition: yuri_doctrine_lasherhecannon
+		Prerequisites: yuri_doctrine_lasherhecannon
+	GrantConditionOnPrerequisite@yuri_doctrine_lashertoxicgasshells:
+		Condition: yuri_doctrine_lashertoxicgasshells
+		Prerequisites: yuri_doctrine_lashertoxicgasshells
+	GrantConditionOnPrerequisite@yuri_doctrine_lasherlasercannon:
+		Condition: yuri_doctrine_lasherlasercannon
+		Prerequisites: yuri_doctrine_lasherlasercannon
+	GrantConditionOnPrerequisite@yuri_upgrade_lasherarmorimprovements:
+		Condition: yuri_upgrade_lasherarmorimprovements
+		Prerequisites: yuri_upgrade_lasherarmorimprovements
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -7474,9 +7474,9 @@ YRLTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_lashercannon, ra2_yuri_upgrade_lashertoxic, ra2_yuri_upgrade_lasherlaser, ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_lasherarmor
+		Upgrades: yuri_doctrine_lasherhecannon, yuri_doctrine_lashertoxicgasshells, yuri_doctrine_lasherlasercannon, yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines, yuri_upgrade_lasherarmorimprovements
 
-YRTELE:
+yuri_magnetron:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7494,7 +7494,7 @@ YRTELE:
 		Name: Magnetron
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yuri_psychicsensor
 		Queue: Vehicle, RAVehicle
 		Description: actor_tele.description
 	Mobile:
@@ -7517,31 +7517,31 @@ YRTELE:
 		Name: primary
 		Weapon: RA2Magnet
 		LocalOffset: 400,0,300
-		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_supermagnets
+		RequiresCondition: !rank-elite && !yuri_upgrade_supermagnets
 	Armament@Upgraded:
 		Name: secondary
 		Weapon: RA2MagnetAA
 		LocalOffset: 400,0,300
-		RequiresCondition: !rank-elite && ra2_yuri_upgrade_supermagnets
+		RequiresCondition: !rank-elite && yuri_upgrade_supermagnets
 	Armament@elite:
 		Name: primary
 		Weapon: RA2Magnet_elite
 		LocalOffset: 400,0,300
-		RequiresCondition: rank-elite && !ra2_yuri_upgrade_supermagnets
+		RequiresCondition: rank-elite && !yuri_upgrade_supermagnets
 	Armament@elite_aa:
 		Name: secondary
 		Weapon: RA2MagnetAA_elite
 		LocalOffset: 400,0,300
-		RequiresCondition: rank-elite && ra2_yuri_upgrade_supermagnets
+		RequiresCondition: rank-elite && yuri_upgrade_supermagnets
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 		RequiresCondition: !rank-elite
-	RangeMultiplier@ra2_yuri_upgrade_supermagnets:
+	RangeMultiplier@yuri_upgrade_supermagnets:
 		Modifier: 125
-		RequiresCondition: ra2_yuri_upgrade_supermagnets
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_supermagnets:
-		Condition: ra2_yuri_upgrade_supermagnets
-		Prerequisites: ra2_yuri_upgrade_supermagnets
+		RequiresCondition: yuri_upgrade_supermagnets
+	GrantConditionOnPrerequisite@yuri_upgrade_supermagnets:
+		Condition: yuri_upgrade_supermagnets
+		Prerequisites: yuri_upgrade_supermagnets
 	AttackTurreted:
 	WithSpriteTurret:
 	SelectionDecorations:
@@ -7554,9 +7554,9 @@ YRTELE:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_supermagnets
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines, yuri_upgrade_supermagnets
 
-YRCAOS:
+yuri_chaosdrone:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7577,7 +7577,7 @@ YRCAOS:
 		Name: Chaos Drone
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yuri_psychicsensor
 		Queue: Vehicle, RAVehicle
 		Description: actor_caos.description
 	Mobile:
@@ -7622,9 +7622,9 @@ YRCAOS:
 	Capturable:
 		Types: thiefproof
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines
 
-YRMIND:
+yuri_mastermind:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7647,7 +7647,7 @@ YRMIND:
 		Name: Master Mind
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~yrygweap, yrygtech
+		Prerequisites: ~yuri_warfactory, yuri_battlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_mind.description
 	Mobile:
@@ -7677,40 +7677,40 @@ YRMIND:
 		Step: -10
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 3 && !ra2_yuri_upgrade_domination) || (slaves > 6 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 3 && !yuri_upgrade_domination) || (slaves > 6 && yuri_upgrade_domination)
 	ChangesHealth@2:
 		Step: -20
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 4 && !ra2_yuri_upgrade_domination) || (slaves > 7 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 4 && !yuri_upgrade_domination) || (slaves > 7 && yuri_upgrade_domination)
 	ChangesHealth@3:
 		Step: -30
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 5 && !ra2_yuri_upgrade_domination) || (slaves > 8 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 5 && !yuri_upgrade_domination) || (slaves > 8 && yuri_upgrade_domination)
 	ChangesHealth@4:
 		Step: -40
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 6 && !ra2_yuri_upgrade_domination) || (slaves > 9 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 6 && !yuri_upgrade_domination) || (slaves > 9 && yuri_upgrade_domination)
 	ChangesHealth@5:
 		Step: -50
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 7 && !ra2_yuri_upgrade_domination) || (slaves > 10 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 7 && !yuri_upgrade_domination) || (slaves > 10 && yuri_upgrade_domination)
 	ChangesHealth@6:
 		Step: -60
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 8 && !ra2_yuri_upgrade_domination) || (slaves > 11 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 8 && !yuri_upgrade_domination) || (slaves > 11 && yuri_upgrade_domination)
 	ChangesHealth@7:
 		Step: -70
 		Delay: 1
 		StartIfBelow: 101
-		RequiresCondition: (slaves > 9 && !ra2_yuri_upgrade_domination) || (slaves > 12 && ra2_yuri_upgrade_domination)
-	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+		RequiresCondition: (slaves > 9 && !yuri_upgrade_domination) || (slaves > 12 && yuri_upgrade_domination)
+	RangedGpsProvider@yuri_upgrade_psychicvision:
 		Range: 15000
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: yuri_upgrade_psychicvision
 	ReloadArmamentsBar:
 	RenderRangeCircle:
 		RangeCircleType: mindcontrol
@@ -7721,7 +7721,7 @@ YRMIND:
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
 	VoiceAnnouncement@Overload:
-		RequiresCondition: (slaves > 3 && !ra2_yuri_upgrade_domination) || (slaves > 6 && ra2_yuri_upgrade_domination)
+		RequiresCondition: (slaves > 3 && !yuri_upgrade_domination) || (slaves > 6 && yuri_upgrade_domination)
 		Voice: Overload
 		ValidRelationships: None
 	Voiced:
@@ -7729,7 +7729,7 @@ YRMIND:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+		Upgrades: yuri_doctrine_scrapvehiclearmor, yuri_doctrine_chaosgasemitters, yuri_doctrine_psionicvehicleshields, yuri_upgrade_toxicengines, yuri_upgrade_domination, yuri_upgrade_psychicrange, yuri_upgrade_psionicarmor
 
 ############################################
 #   Red Alert 2 Naval
@@ -8482,7 +8482,7 @@ ra2dmisl:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 
-yrbsub:
+yuri_boomersubmarine:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ArtilleryShipTemplate
@@ -8499,7 +8499,7 @@ yrbsub:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yuri_psychicsensor
 		Queue: Naval, RANaval
 		Description: actor_bsub.description
 	Mobile:
@@ -9434,7 +9434,7 @@ ra2_allies_nighthawk:
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
 
-YRDISK:
+yuri_floatingdisk:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -9452,7 +9452,7 @@ YRDISK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~yrygweap, yrygtech
+		Prerequisites: ~yuri_warfactory, yuri_battlelab
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor_disk.description
 	Aircraft:
@@ -9483,25 +9483,25 @@ YRDISK:
 		Weapon: RA2DiskDrain
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: ra2_yuri_upgrade_siphonattack
+		RequiresCondition: yuri_upgrade_disksiphonattack
 	Armament@Steal:
 		Name: secondary
 		Weapon: RA2DiskSteal
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		Voice: Steal
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_siphonattack:
-		Condition: ra2_yuri_upgrade_siphonattack
-		Prerequisites: ra2_yuri_upgrade_siphonattack
-	ReloadDelayMultiplier@ra2_yuri_upgrade_disklasers:
+	GrantConditionOnPrerequisite@yuri_upgrade_disksiphonattack:
+		Condition: yuri_upgrade_disksiphonattack
+		Prerequisites: yuri_upgrade_disksiphonattack
+	ReloadDelayMultiplier@yuri_upgrade_diskhighfrequencylasers:
 		Modifier: 50
-		RequiresCondition: ra2_yuri_upgrade_disklasers
-	ReloadAmmoDelayMultiplier@ra2_yuri_upgrade_disklasers:
+		RequiresCondition: yuri_upgrade_diskhighfrequencylasers
+	ReloadAmmoDelayMultiplier@yuri_upgrade_diskhighfrequencylasers:
 		Modifier: 75
-		RequiresCondition: ra2_yuri_upgrade_disklasers
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_disklasers:
-		Condition: ra2_yuri_upgrade_disklasers
-		Prerequisites: ra2_yuri_upgrade_disklasers
+		RequiresCondition: yuri_upgrade_diskhighfrequencylasers
+	GrantConditionOnPrerequisite@yuri_upgrade_diskhighfrequencylasers:
+		Condition: yuri_upgrade_diskhighfrequencylasers
+		Prerequisites: yuri_upgrade_diskhighfrequencylasers
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Hover
@@ -9555,7 +9555,7 @@ YRDISK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_gravitondrive, ra2_yuri_upgrade_siphonattack, ra2_yuri_upgrade_disklasers, ra2_yuri_upgrade_psionicplasmabeams
+		Upgrades: yuri_upgrade_gravitondrive, yuri_upgrade_disksiphonattack, yuri_upgrade_diskhighfrequencylasers, yuri_upgrade_psionicplasmabeams
 
 ra2_allies_rocketeer:
 	Inherits: ^JumpjetInfantry
@@ -9669,7 +9669,7 @@ ra2rock.husk:
 		ForceToGround: true
 	-WithShadow:
 
-yrlunr:
+yuri_cosmonaut:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -9691,7 +9691,7 @@ yrlunr:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~yrygcomd
+		Prerequisites: ~yuri_lunarcommandcenter
 		Description: actor_ra2rock.description
 	Aircraft:
 		TurnSpeed: 33
@@ -9738,12 +9738,12 @@ yrlunr:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_gravitondrive, ra2_yuri_upgrade_psionicplasmabeams
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_gravitondrive, yuri_upgrade_psionicplasmabeams
 
 yrlunr.husk:
 	Inherits: ra2rock.husk
 	RenderSprites:
-		Image: yrlunr
+		Image: yuri_cosmonaut
 	Tooltip:
 		Name: Cosmonaut
 
@@ -12359,7 +12359,7 @@ YRDISK.Husk:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: yrdisk
+		Image: yuri_floatingdisk
 		PlayerPalette: playerra2
 
 ra2asw.Husk:
@@ -13839,7 +13839,7 @@ ra2_allies_upgrade_chronoengine:
 ## Yuri promotions
 ### Biological tree
 
-# ra2_yuri_upgrade_meltingvirus:
+# yuri_upgrade_meltingvirus:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Upgrade Virus
@@ -13847,12 +13847,12 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 85
 # 		Queue: Promotions
 # 		Description: Allows Viruses to attack vehicles.
-# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_meltingvirus, rank1
+# 		Prerequisites: ~yuri_constructionyard, !yuri_upgrade_meltingvirus, rank1
 # 	RenderSprites:
-# 		Image: yrvirus
+# 		Image: yuri_virus
 # 	ProvidesPrerequisite:
 
-# ra2_yuri_upgrade_brutestrength:
+# yuri_upgrade_brutestrengthmutations:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Upgrade Brute
@@ -13860,9 +13860,9 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 88
 # 		-Queue:
 # 		Description: Makes Brutes more resilient.
-# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_meltingvirus, rank1
+# 		Prerequisites: ~yuri_constructionyard, yuri_upgrade_meltingvirus, rank1
 # 	RenderSprites:
-# 		Image: yrbrute
+# 		Image: yuri_brute
 # 	ProvidesPrerequisite:
 
 # upchaossurprise:
@@ -13873,9 +13873,9 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 88
 # 		Queue: Promotions
 # 		Description: Vehicles have a chance of releasing chaos gas on destruction.
-# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_meltingvirus, rank1
+# 		Prerequisites: ~yuri_constructionyard, yuri_upgrade_meltingvirus, rank1
 # 	RenderSprites:
-# 		Image: yrcaos
+# 		Image: yuri_chaosdrone
 # 	ProvidesPrerequisite:
 
 # upyryaclon:
@@ -13886,7 +13886,7 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 91
 # 		Queue: Promotions
 # 		Description: Allows construction of the Cloning Vats.
-# 		Prerequisites: ~yrnacnst, upchaossurprise, rank1
+# 		Prerequisites: ~yuri_constructionyard, upchaossurprise, rank1
 # 	RenderSprites:
 # 		Image: ra2naclon
 # 	ProvidesPrerequisite:
@@ -13903,7 +13903,7 @@ ra2_allies_upgrade_chronoengine:
 # 	ActorStatValues:
 # 		Upgrades: upchaossurprise
 
-# ra2_yuri_upgrade_geneticboost:
+# yuri_upgrade_geneticmodificationboost:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Genetic Modification
@@ -13912,14 +13912,14 @@ ra2_allies_upgrade_chronoengine:
 # 		Queue: Promotions
 # 		Icon: ra2mutate
 # 		Description: Makes Yuri infantry more resilient and self-heal.
-# 		Prerequisites: ~yrnacnst, upyryaclon, rank1
+# 		Prerequisites: ~yuri_constructionyard, upyryaclon, rank1
 # 	RenderSprites:
 # 		Image: icon
 # 	ProvidesPrerequisite:
 
 # ### Psychic tree
 
-# ra2_yuri_upgrade_initiatepower:
+# yuri_upgrade_initiatepowersurge:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Upgrade Initiate
@@ -13927,9 +13927,9 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 86
 # 		Queue: Promotions
 # 		Description: Increases the range of Initiates.
-# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_initiatepower, rank1
+# 		Prerequisites: ~yuri_constructionyard, !yuri_upgrade_initiatepowersurge, rank1
 # 	RenderSprites:
-# 		Image: yrinit
+# 		Image: yuri_initiate
 # 	ProvidesPrerequisite:
 
 # upyryuri:
@@ -13940,7 +13940,7 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 89
 # 		Queue: Promotions
 # 		Description: Increases the range of Yuri Clones.
-# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_initiatepower, rank1
+# 		Prerequisites: ~yuri_constructionyard, yuri_upgrade_initiatepowersurge, rank1
 # 	RenderSprites:
 # 		Image: ra2yuri
 # 	ProvidesPrerequisite:
@@ -13953,12 +13953,12 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 91
 # 		Queue: Promotions
 # 		Description: Allows Psychic Sensors to detect nearby unit positions.
-# 		Prerequisites: ~yrnacnst, upyryuri, rank1
+# 		Prerequisites: ~yuri_constructionyard, upyryuri, rank1
 # 	RenderSprites:
-# 		Image: ra2napsis
+# 		Image: yuri_psychicsensor
 # 	ProvidesPrerequisite:
 
-# ra2_yuri_upgrade_domination:
+# yuri_upgrade_domination:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Mind Control Capacity
@@ -13966,14 +13966,14 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 94
 # 		Queue: Promotions
 # 		Description: Increases mind controllers' capacities and control speed.
-# 		Prerequisites: ~yrnacnst, upyrnapsis, rank1
+# 		Prerequisites: ~yuri_constructionyard, upyrnapsis, rank1
 # 	RenderSprites:
-# 		Image: yrmind
+# 		Image: yuri_mastermind
 # 	ProvidesPrerequisite:
 
 # ### Lunar tree
 
-# ra2_yuri_upgrade_supermagnets:
+# yuri_upgrade_supermagnets:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Upgrade Magnetron
@@ -13981,12 +13981,12 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 87
 # 		Queue: Promotions
 # 		Description: Makes Magnetrons attack air and gain range.
-# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_supermagnets, rank1
+# 		Prerequisites: ~yuri_constructionyard, !yuri_upgrade_supermagnets, rank1
 # 	RenderSprites:
-# 		Image: yrtele
+# 		Image: yuri_magnetron
 # 	ProvidesPrerequisite:
 
-# ra2_yuri_upgrade_siphonattack:
+# yuri_upgrade_disksiphonattack:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Upgrade Floating Discs
@@ -13994,9 +13994,9 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 90
 # 		Queue: Promotions
 # 		Description: Makes Floating Discs able to destroy units and buildings underneath.
-# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_supermagnets, rank1
+# 		Prerequisites: ~yuri_constructionyard, yuri_upgrade_supermagnets, rank1
 # 	RenderSprites:
-# 		Image: yrdisk
+# 		Image: yuri_floatingdisk
 # 	ProvidesPrerequisite:
 
 # upyrlunr:
@@ -14007,12 +14007,12 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 93
 # 		Queue: Promotions
 # 		Description: Allows training of Cosmonauts.
-# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_siphonattack, rank1
+# 		Prerequisites: ~yuri_constructionyard, yuri_upgrade_disksiphonattack, rank1
 # 	RenderSprites:
-# 		Image: yrlunr
+# 		Image: yuri_cosmonaut
 # 	ProvidesPrerequisite:
 
-# ra2_yuri_upgrade_gatlingpower:
+# yuri_upgrade_gatlingfirepowerupgrade:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Chainguns
@@ -14020,9 +14020,9 @@ ra2_allies_upgrade_chronoengine:
 # 		BuildPaletteOrder: 96
 # 		Queue: Promotions
 # 		Description: Uprades Gatling weapons to become more powerful.
-# 		Prerequisites: ~yrnacnst, upyrlunr, rank1
+# 		Prerequisites: ~yuri_constructionyard, upyrlunr, rank1
 # 	RenderSprites:
-# 		Image: yrygggun
+# 		Image: yuri_gatlingcannon
 # 	ProvidesPrerequisite:
 
 ####################################################################################################
@@ -14031,167 +14031,167 @@ ra2_allies_upgrade_chronoengine:
 
 ### Radar ###
 
-ra2_yuri_upgrade_psioniclegion:
+yuri_doctrine_psioniclegion:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Psionic Legion
 	Buildable:
 		Description: All Yuri Infantry costs 25% less und train 25% faster.
-		Prerequisites: ~ra2napsis, !ra2_yuri_doctrine_1, !global_conscription_buff
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1, !global_conscription_buff
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psioniclegion
+		Image: yuri_doctrine_psioniclegion
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
 		Prerequisite: ra2_yuri_doctrine_1
 	ProvidesPrerequisite@global_conscription_buff:
 		Prerequisite: global_conscription_buff
 
 ^RA2YuriPsionicLegion:
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psioniclegion:
-		Condition: ra2_yuri_upgrade_psioniclegion
-		Prerequisites: ra2_yuri_upgrade_psioniclegion
+	GrantConditionOnPrerequisite@yuri_doctrine_psioniclegion:
+		Condition: yuri_doctrine_psioniclegion
+		Prerequisites: yuri_doctrine_psioniclegion
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psioniclegion
+		Upgrades: yuri_doctrine_psioniclegion
 
-ra2_yuri_upgrade_psionicfanatics:
+yuri_doctrine_psionicfanatics:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Psionic Fanatics
 	Buildable:
 		Description: All Yuri Infantry gain 20% more Damage Resistance, Rate of Fire, Speed and extra regeneration.
-		Prerequisites: ~ra2napsis, !ra2_yuri_doctrine_1
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psionicfanatics
+		Image: yuri_doctrine_psionicfanatics
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
 		Prerequisite: ra2_yuri_doctrine_1
 
 ^RA2YuriPsionicFanatics:
-	ChangesHealth@ra2_yuri_upgrade_psionicfanatics:
+	ChangesHealth@yuri_doctrine_psionicfanatics:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
-	DamageMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	DamageMultiplier@yuri_doctrine_psionicfanatics:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
-	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	ReloadDelayMultiplier@yuri_doctrine_psionicfanatics:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
-	SpeedMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	SpeedMultiplier@yuri_doctrine_psionicfanatics:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicfanatics:
-		Condition: ra2_yuri_upgrade_psionicfanatics
-		Prerequisites: ra2_yuri_upgrade_psionicfanatics
+		RequiresCondition: yuri_doctrine_psionicfanatics
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicfanatics:
+		Condition: yuri_doctrine_psionicfanatics
+		Prerequisites: yuri_doctrine_psionicfanatics
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psionicfanatics
+		Upgrades: yuri_doctrine_psionicfanatics
 
-ra2_yuri_upgrade_psionicelite:
+yuri_doctrine_psionicelite:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Psionic Elite
 	Buildable:
 		Description: All Yuri Infantry start at veteran rank and gain 10% more Range, Speed, Firepower, Rate of Fire and Damage Resistance.
-		Prerequisites: ~ra2napsis, !ra2_yuri_doctrine_1
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psionicelite
-	ProvidesPrerequisite@ra2_yuri_upgrade_psionicelite:
+		Image: yuri_doctrine_psionicelite
+	ProvidesPrerequisite@yuri_doctrine_psionicelite:
 		Prerequisite: infantry.upgraded
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
 		Prerequisite: ra2_yuri_doctrine_1
 
 ^RA2YuriPsionicElite:
-	RangeMultiplier@ra2_yuri_upgrade_psionicelite:
+	RangeMultiplier@yuri_doctrine_psionicelite:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_psionicelite
-	FirepowerMultiplier@ra2_yuri_upgrade_psionicelite:
+		RequiresCondition: yuri_doctrine_psionicelite
+	FirepowerMultiplier@yuri_doctrine_psionicelite:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_psionicelite
-	SpeedMultiplier@ra2_yuri_upgrade_psionicelite:
+		RequiresCondition: yuri_doctrine_psionicelite
+	SpeedMultiplier@yuri_doctrine_psionicelite:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_psionicelite
-	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicelite:
+		RequiresCondition: yuri_doctrine_psionicelite
+	ReloadDelayMultiplier@yuri_doctrine_psionicelite:
 		Modifier: 90
-		RequiresCondition: ra2_yuri_upgrade_psionicelite
-	DamageMultiplier@ra2_yuri_upgrade_psionicelite:
+		RequiresCondition: yuri_doctrine_psionicelite
+	DamageMultiplier@yuri_doctrine_psionicelite:
 		Modifier: 90
-		RequiresCondition: ra2_yuri_upgrade_psionicelite
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicelite:
-		Condition: ra2_yuri_upgrade_psionicelite
-		Prerequisites: ra2_yuri_upgrade_psionicelite
+		RequiresCondition: yuri_doctrine_psionicelite
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicelite:
+		Condition: yuri_doctrine_psionicelite
+		Prerequisites: yuri_doctrine_psionicelite
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psionicelite
+		Upgrades: yuri_doctrine_psionicelite
 
-ra2_yuri_upgrade_lashercannon:
+yuri_doctrine_lasherhecannon:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Lasher HE Cannon
 	Buildable:
 		Description: Increases Lasher Cannon Firepower by 100%.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
-		Image: ra2_yuri_upgrade_lashercannon
+		Image: yuri_doctrine_lasherhecannon
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
-ra2_yuri_upgrade_lashertoxic:
+yuri_doctrine_lashertoxicgasshells:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Lasher Toxic Gas Shells
 	Buildable:
 		Description: Replaces the Lasher Cannon with a Toxic Gas Mortar.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
-		Image: ra2_yuri_upgrade_lashertoxic
+		Image: yuri_doctrine_lashertoxicgasshells
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
-ra2_yuri_upgrade_lasherlaser:
+yuri_doctrine_lasherlasercannon:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Lasher Laser Cannon
 	Buildable:
 		Description: Replaces the Lasher Cannon with a powerful Laser Cannon.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
-		Image: ra2_yuri_upgrade_lasherlaser
+		Image: yuri_doctrine_lasherlasercannon
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
-ra2_yuri_upgrade_scraparmor:
+yuri_doctrine_scrapvehiclearmor:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Scrap Vehicle Armor
 	Buildable:
 		Description: Yuri Vehicles gain 15% more Damage Resistance and Speed.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
-		Image: ra2_yuri_upgrade_scraparmor
+		Image: yuri_doctrine_scrapvehiclearmor
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
 ^RA2YuriScrapArmor:
-	SpeedMultiplier@ra2_yuri_upgrade_scraparmor:
+	SpeedMultiplier@yuri_doctrine_scrapvehiclearmor:
 		Modifier: 115
-		RequiresCondition: ra2_yuri_upgrade_scraparmor
-	DamageMultiplier@ra2_yuri_upgrade_scraparmor:
+		RequiresCondition: yuri_doctrine_scrapvehiclearmor
+	DamageMultiplier@yuri_doctrine_scrapvehiclearmor:
 		Modifier: 85
-		RequiresCondition: ra2_yuri_upgrade_scraparmor
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_scraparmor:
-		Condition: ra2_yuri_upgrade_scraparmor
-		Prerequisites: ra2_yuri_upgrade_scraparmor
+		RequiresCondition: yuri_doctrine_scrapvehiclearmor
+	GrantConditionOnPrerequisite@yuri_doctrine_scrapvehiclearmor:
+		Condition: yuri_doctrine_scrapvehiclearmor
+		Prerequisites: yuri_doctrine_scrapvehiclearmor
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_scraparmor
+		Upgrades: yuri_doctrine_scrapvehiclearmor
 
-ra2_yuri_upgrade_chaosgasemitters:
+yuri_doctrine_chaosgasemitters:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Chaos Gas Emitters
 	Buildable:
 		Description: Yuri Vehicles periodically emit Chaos Gas in a small radius after taking damage. Increases Damage Resistance and Speed by 5% and doubles if enemies are nearby.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
-		Image: ra2_yuri_upgrade_chaosgasemitters
+		Image: yuri_doctrine_chaosgasemitters
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
@@ -14199,16 +14199,16 @@ ra2_yuri_upgrade_chaosgasemitters:
 	Inherits@EnemyInProximity: ^EnemyInProximity
 	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && EnemyInProximity
+		RequiresCondition: yuri_doctrine_chaosgasemitters && EnemyInProximity
 	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
 		Modifier: 105
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !EnemyInProximity
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !EnemyInProximity
 	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
 		Modifier: 90
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && EnemyInProximity
+		RequiresCondition: yuri_doctrine_chaosgasemitters && EnemyInProximity
 	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
 		Modifier: 95
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !EnemyInProximity
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !EnemyInProximity
 	FireWarheads@Tesla:
 		Weapons: RA2Dronegas
 		Interval: 1
@@ -14219,7 +14219,7 @@ ra2_yuri_upgrade_chaosgasemitters:
 		Condition: chaosgasemitterscooldown
 		Duration: 5
 	GrantConditionOnDamage@chaosgasemitters:
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !disabled
+		RequiresCondition: yuri_doctrine_chaosgasemitters && !disabled
 		Condition: chaosgasemitters
 		Duration: 10
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -14229,45 +14229,45 @@ ra2_yuri_upgrade_chaosgasemitters:
 		Delay: 1
 		RequiresCondition: chaosgasemitters && !chaosgasemitterscooldown && EnemyInMaxProximity
 	PhysicalStateBar@EnemyProximity:
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters
+		RequiresCondition: yuri_doctrine_chaosgasemitters
 	WithPhysicalStateColoredOverlay@EnemyProximity:
-		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_chaosgasemitters:
-		Condition: ra2_yuri_upgrade_chaosgasemitters
-		Prerequisites: ra2_yuri_upgrade_chaosgasemitters
+		RequiresCondition: yuri_doctrine_chaosgasemitters
+	GrantConditionOnPrerequisite@yuri_doctrine_chaosgasemitters:
+		Condition: yuri_doctrine_chaosgasemitters
+		Prerequisites: yuri_doctrine_chaosgasemitters
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_chaosgasemitters
+		Upgrades: yuri_doctrine_chaosgasemitters
 
-ra2_yuri_upgrade_psionicshields:
+yuri_doctrine_psionicvehicleshields:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Psionic Vehicle Shields
 	Buildable:
 		Description: Yuri vehicles charge with psionic shields when enemies are nearby. Psionic shields are also provided to allied units in a small radius. After taking damage the shield quickly charges up.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psionicshields
+		Image: yuri_doctrine_psionicvehicleshields
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
 ^RA2YuriPsionicShields:
 	Inherits@EnemyInProximity: ^EnemyInProximity
-	DamageMultiplier@ra2_yuri_upgrade_psionicshields:
+	DamageMultiplier@yuri_doctrine_psionicvehicleshields:
 		Modifier: 75
-		RequiresCondition: ra2_yuri_upgrade_psionicshields
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
 	Armor@shielded:
 		Type: Shield
 		RequiresCondition: shielded
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: ra2_yuri_upgrade_psionicshields
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
 	Shielded:
 		DamageRegenDelay: 125
 		RegenAmount: 10
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
 		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && ((ra2_yuri_upgrade_psionicshields && EnemyInProximity) || shieldgen || shielded)
+		RequiresCondition: !disabled && ((yuri_doctrine_psionicvehicleshields && EnemyInProximity) || shieldgen || shielded)
 	ChangesShield@shielddischarge:
 		Delay: 10
 	GrantTimedCondition@supershielded:
@@ -14295,7 +14295,7 @@ ra2_yuri_upgrade_psionicshields:
 		AmountPerTick: 250
 		Interval: 1
 		ValidRelationships: Ally
-		RequiresCondition: ra2_yuri_upgrade_psionicshields && EnemyInProximity
+		RequiresCondition: yuri_doctrine_psionicvehicleshields && EnemyInProximity
 	PhysicalStateAura@psionicshielded:
 		PhysicalStateName: AlliedShield
 		Range: 5000
@@ -14319,7 +14319,7 @@ ra2_yuri_upgrade_psionicshields:
 		Condition: psionicshieldscooldown
 		Duration: 5
 	GrantConditionOnDamage@psionicshields:
-		RequiresCondition: ra2_yuri_upgrade_psionicshields && !disabled
+		RequiresCondition: yuri_doctrine_psionicvehicleshields && !disabled
 		Condition: psionicshields
 		Duration: 10
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -14329,57 +14329,57 @@ ra2_yuri_upgrade_psionicshields:
 		Delay: 1
 		RequiresCondition: psionicshields && !psionicshieldscooldown && EnemyInMaxProximity
 	PhysicalStateBar@EnemyProximity:
-		RequiresCondition: ra2_yuri_upgrade_psionicshields
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
 	WithPhysicalStateColoredOverlay@EnemyProximity:
-		RequiresCondition: ra2_yuri_upgrade_psionicshields
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicshields:
-		Condition: ra2_yuri_upgrade_psionicshields
-		Prerequisites: ra2_yuri_upgrade_psionicshields
+		RequiresCondition: yuri_doctrine_psionicvehicleshields
+	GrantConditionOnPrerequisite@yuri_doctrine_psionicvehicleshields:
+		Condition: yuri_doctrine_psionicvehicleshields
+		Prerequisites: yuri_doctrine_psionicvehicleshields
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psionicshields
+		Upgrades: yuri_doctrine_psionicvehicleshields
 
-ra2_yuri_upgrade_initiatepower:
+yuri_upgrade_initiatepowersurge:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Initiate Power Surge
 	Buildable:
 		Description: Yuri Initiates gain 50% more Firepower and 15% more Rate of Fire and Range.
-		Prerequisites: ~ra2napsis, !ra2_yuri_upgrade_initiatepower
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_initiatepowersurge
 	RenderSprites:
-		Image: ra2_yuri_upgrade_initiatepower
+		Image: yuri_upgrade_initiatepowersurge
 
-ra2_yuri_upgrade_brutestrength:
+yuri_upgrade_brutestrengthmutations:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Brute Strength Mutations
 	Buildable:
 		Description: Yuri Brutes gain 40% more Firepower and 20% more Damage Resistance and Speed.
-		Prerequisites: ~ra2napsis, !ra2_yuri_upgrade_brutestrength
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_brutestrengthmutations
 	RenderSprites:
-		Image: ra2_yuri_upgrade_brutestrength
+		Image: yuri_upgrade_brutestrengthmutations
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_lasherarmor:
+yuri_upgrade_lasherarmorimprovements:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Lasher Armor Improvements
 	Buildable:
 		Description: Improves Lasher Tank Damage Resistance by 35%.
-		Prerequisites: ~ra2napsis, !ra2_yuri_upgrade_lasherarmor
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_lasherarmorimprovements
 	RenderSprites:
-		Image: ra2_yuri_upgrade_lasherarmor
+		Image: yuri_upgrade_lasherarmorimprovements
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_gatlingpower:
+yuri_upgrade_gatlingfirepowerupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Gatling Firepower Upgrade
 	Buildable:
 		Queue: Research
 		Description: All Gatling weapons have 20% more Firepower and 10% more Range.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_gatlingpower
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_gatlingfirepowerupgrade
 	RenderSprites:
-		Image: ra2_yuri_upgrade_gatlingpower
+		Image: yuri_upgrade_gatlingfirepowerupgrade
 
 ^RA2YuriGatlingPower:
 	GrantConditionOnAttack@gatling:
@@ -14402,217 +14402,217 @@ ra2_yuri_upgrade_gatlingpower:
 		IsCyclic: false
 		RevokeOnNewTarget: false
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@ra2_yuri_upgrade_gatlingpower:
+	FirepowerMultiplier@yuri_upgrade_gatlingfirepowerupgrade:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_gatlingpower
-	RangeMultiplier@ra2_yuri_upgrade_gatlingpower:
+		RequiresCondition: yuri_upgrade_gatlingfirepowerupgrade
+	RangeMultiplier@yuri_upgrade_gatlingfirepowerupgrade:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_gatlingpower
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gatlingpower:
-		Condition: ra2_yuri_upgrade_gatlingpower
-		Prerequisites: ra2_yuri_upgrade_gatlingpower
+		RequiresCondition: yuri_upgrade_gatlingfirepowerupgrade
+	GrantConditionOnPrerequisite@yuri_upgrade_gatlingfirepowerupgrade:
+		Condition: yuri_upgrade_gatlingfirepowerupgrade
+		Prerequisites: yuri_upgrade_gatlingfirepowerupgrade
 
-ra2_yuri_upgrade_meltingvirus:
+yuri_upgrade_meltingvirus:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Melting Virus
 	Buildable:
 		Queue: Research
 		Description: Allows Viruses to attack vehicles and structures. Increases Firepower by 50%.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_meltingvirus
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_meltingvirus
 	RenderSprites:
-		Image: ra2_yuri_upgrade_meltingvirus
+		Image: yuri_upgrade_meltingvirus
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_domination:
+yuri_upgrade_domination:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Domination
 	Buildable:
 		Description: Doubles mind control capacity and mind control speed.
-		Prerequisites: ~ra2napsis, yrygtech, !ra2_yuri_upgrade_domination
+		Prerequisites: ~yuri_psychicsensor, yuri_battlelab, !yuri_upgrade_domination
 	RenderSprites:
-		Image: ra2_yuri_upgrade_domination
+		Image: yuri_upgrade_domination
 	ProvidesPrerequisite:
 
 ^RA2YuriMindControlCap:
-	MindControllerCapacityModifier@ra2_yuri_upgrade_domination:
+	MindControllerCapacityModifier@yuri_upgrade_domination:
 		Amount: 2
-		RequiresCondition: ra2_yuri_upgrade_domination
-	MindControllerDelayModifier@ra2_yuri_upgrade_domination:
+		RequiresCondition: yuri_upgrade_domination
+	MindControllerDelayModifier@yuri_upgrade_domination:
 		Modifier: 50
-		RequiresCondition: ra2_yuri_upgrade_domination
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_domination:
-		Condition: ra2_yuri_upgrade_domination
-		Prerequisites: ra2_yuri_upgrade_domination
+		RequiresCondition: yuri_upgrade_domination
+	GrantConditionOnPrerequisite@yuri_upgrade_domination:
+		Condition: yuri_upgrade_domination
+		Prerequisites: yuri_upgrade_domination
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_domination
+		Upgrades: yuri_upgrade_domination
 	Targetable@Psionic:
 		TargetTypes: Psionic
 
-ra2_yuri_upgrade_gatlingspeed:
+yuri_upgrade_gatlingspeedupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Gatling Speed Upgrade
 	Buildable:
 		Queue: Research
 		Description: All Gatling weapons have 30% more Rate of Fire.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_upgrade_gatlingpower, !ra2_yuri_upgrade_gatlingspeed
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_upgrade_gatlingfirepowerupgrade, !yuri_upgrade_gatlingspeedupgrade
 	RenderSprites:
-		Image: ra2_yuri_upgrade_gatlingspeed
+		Image: yuri_upgrade_gatlingspeedupgrade
 	ProvidesPrerequisite:
 
 ^RA2YuriGatlingSpeed:
-	ReloadDelayMultiplier@ra2_yuri_upgrade_gatlingspeed:
+	ReloadDelayMultiplier@yuri_upgrade_gatlingspeedupgrade:
 		Modifier: 70
-		RequiresCondition: ra2_yuri_upgrade_gatlingspeed
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gatlingspeed:
-		Condition: ra2_yuri_upgrade_gatlingspeed
-		Prerequisites: ra2_yuri_upgrade_gatlingspeed
+		RequiresCondition: yuri_upgrade_gatlingspeedupgrade
+	GrantConditionOnPrerequisite@yuri_upgrade_gatlingspeedupgrade:
+		Condition: yuri_upgrade_gatlingspeedupgrade
+		Prerequisites: yuri_upgrade_gatlingspeedupgrade
 
-ra2_yuri_upgrade_corrosiveammo:
+yuri_upgrade_corrosiveammo:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Corrosive Ammo
 	Buildable:
 		Queue: Research
 		Description: Adds a powerful corrosive effect to the Virus ra1_allies_alliedsniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_upgrade_meltingvirus, !ra2_yuri_upgrade_corrosiveammo
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_upgrade_meltingvirus, !yuri_upgrade_corrosiveammo
 	RenderSprites:
-		Image: ra2_yuri_upgrade_corrosiveammo
+		Image: yuri_upgrade_corrosiveammo
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_supermagnets:
+yuri_upgrade_supermagnets:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Super Magnets
 	Buildable:
 		Queue: Research
 		Description: Allows Magnetrons to attack air and gain 25% more Range.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_supermagnets
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_supermagnets
 	RenderSprites:
-		Image: ra2_yuri_upgrade_supermagnets
+		Image: yuri_upgrade_supermagnets
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_bioreactorefficiency:
+yuri_upgrade_bioreactorefficiency:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Bio Reactor Efficiency
 	Buildable:
 		Queue: Research
 		Description: Doubles the power output of Bio Reactors.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioreactorefficiency
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_bioreactorefficiency
 	RenderSprites:
-		Image: ra2_yuri_upgrade_bioreactorefficiency
+		Image: yuri_upgrade_bioreactorefficiency
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_bioengineering:
+yuri_upgrade_bioengineering:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Bio Engineering
 	Buildable:
 		Queue: Research
 		Description: All Infantry Cost and Build Time is reduced by 40%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioengineering
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_bioengineering
 	RenderSprites:
-		Image: ra2_yuri_upgrade_bioengineering
+		Image: yuri_upgrade_bioengineering
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_psychicrange:
+yuri_upgrade_psychicrange:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Psychic Range
 	Buildable:
 		Queue: Research
 		Description: Increases Mind Control Range of all Psychic Units by 15%. Pyshic Towers gain 30% more Range.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_psychicrange
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_psychicrange
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psychicrange
+		Image: yuri_upgrade_psychicrange
 
 ^RA2YuriPsychicRange:
-	RangeMultiplier@ra2_yuri_upgrade_psychicrange:
+	RangeMultiplier@yuri_upgrade_psychicrange:
 		Modifier: 115
-		RequiresCondition: ra2_yuri_upgrade_psychicrange
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psychicrange:
-		Condition: ra2_yuri_upgrade_psychicrange
-		Prerequisites: ra2_yuri_upgrade_psychicrange
+		RequiresCondition: yuri_upgrade_psychicrange
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicrange:
+		Condition: yuri_upgrade_psychicrange
+		Prerequisites: yuri_upgrade_psychicrange
 
 ### Battle Lab ###
 
-ra2_yuri_upgrade_psionicarmor:
+yuri_upgrade_psionicarmor:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Psionic Armor
 	Buildable:
 		Description: Psychic Units and Towers gain 30% more Damage Resistance.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_psionicarmor
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_psionicarmor
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psionicarmor
+		Image: yuri_upgrade_psionicarmor
 
 ^RA2YuriPsionicArmor:
-	DamageMultiplier@ra2_yuri_upgrade_psionicarmor:
+	DamageMultiplier@yuri_upgrade_psionicarmor:
 		Modifier: 70
-		RequiresCondition: ra2_yuri_upgrade_psionicarmor
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicarmor:
-		Condition: ra2_yuri_upgrade_psionicarmor
-		Prerequisites: ra2_yuri_upgrade_psionicarmor
+		RequiresCondition: yuri_upgrade_psionicarmor
+	GrantConditionOnPrerequisite@yuri_upgrade_psionicarmor:
+		Condition: yuri_upgrade_psionicarmor
+		Prerequisites: yuri_upgrade_psionicarmor
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psionicarmor
+		Upgrades: yuri_upgrade_psionicarmor
 
-ra2_yuri_upgrade_toxicengines:
+yuri_upgrade_toxicengines:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Toxic Engines
 	Buildable:
 		Description: Yuri Vehicle gain 20% more Speed and Damage Resistance nd periodically release toxic gas clouds.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_toxicengines
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_toxicengines
 	RenderSprites:
-		Image: ra2_yuri_upgrade_toxicengines
+		Image: yuri_upgrade_toxicengines
 
 ^RA2YuriToxicEngines:
-	FireWarheads@ra2_yuri_upgrade_toxicengines:
+	FireWarheads@yuri_upgrade_toxicengines:
 		Weapons: ToxicEngineCloudSpawner
 		Interval: 200
-		RequiresCondition: ra2_yuri_upgrade_toxicengines
-	DamageMultiplier@ra2_yuri_upgrade_toxicengines:
+		RequiresCondition: yuri_upgrade_toxicengines
+	DamageMultiplier@yuri_upgrade_toxicengines:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_toxicengines
-	SpeedMultiplier@ra2_yuri_upgrade_toxicengines:
+		RequiresCondition: yuri_upgrade_toxicengines
+	SpeedMultiplier@yuri_upgrade_toxicengines:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_toxicengines
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_toxicengines:
-		Condition: ra2_yuri_upgrade_toxicengines
-		Prerequisites: ra2_yuri_upgrade_toxicengines
+		RequiresCondition: yuri_upgrade_toxicengines
+	GrantConditionOnPrerequisite@yuri_upgrade_toxicengines:
+		Condition: yuri_upgrade_toxicengines
+		Prerequisites: yuri_upgrade_toxicengines
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_toxicengines
+		Upgrades: yuri_upgrade_toxicengines
 
-ra2_yuri_upgrade_psionicplasmabeams:
+yuri_upgrade_psionicplasmabeams:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Psionic Plasma Beams
 	Buildable:
 		Description: All Yuri energy weapons gain 40% more Firepower, 20% more Rate of Fire and 10% more Range.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_psionicplasmabeams
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_psionicplasmabeams
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psionicplasmabeams
+		Image: yuri_upgrade_psionicplasmabeams
 
 ^RA2YuriPsionicPlasmaBeams:
-	FirepowerMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+	FirepowerMultiplier@yuri_upgrade_psionicplasmabeams:
 		Modifier: 140
-		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
-	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	ReloadDelayMultiplier@yuri_upgrade_psionicplasmabeams:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
-	RangeMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	RangeMultiplier@yuri_upgrade_psionicplasmabeams:
 		Modifier: 110
-		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicplasmabeams:
-		Condition: ra2_yuri_upgrade_psionicplasmabeams
-		Prerequisites: ra2_yuri_upgrade_psionicplasmabeams
+		RequiresCondition: yuri_upgrade_psionicplasmabeams
+	GrantConditionOnPrerequisite@yuri_upgrade_psionicplasmabeams:
+		Condition: yuri_upgrade_psionicplasmabeams
+		Prerequisites: yuri_upgrade_psionicplasmabeams
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psionicplasmabeams
+		Upgrades: yuri_upgrade_psionicplasmabeams
 
-ra2_yuri_upgrade_gravitondrive:
+yuri_upgrade_gravitondrive:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Graviton Drive
@@ -14620,24 +14620,24 @@ ra2_yuri_upgrade_gravitondrive:
 		Cost: 5000
 	Buildable:
 		Description: Floating Disks and Cosmonauts gain 20% more Speed and Damage Resistance.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_gravitondrive
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_gravitondrive
 	RenderSprites:
-		Image: ra2_yuri_upgrade_gravitondrive
+		Image: yuri_upgrade_gravitondrive
 
 ^RA2YuriGravitonDrive:
-	SpeedMultiplier@ra2_yuri_upgrade_gravitondrive:
+	SpeedMultiplier@yuri_upgrade_gravitondrive:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_gravitondrive
-	DamageMultiplier@ra2_yuri_upgrade_gravitondrive:
+		RequiresCondition: yuri_upgrade_gravitondrive
+	DamageMultiplier@yuri_upgrade_gravitondrive:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_gravitondrive
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gravitondrive:
-		Condition: ra2_yuri_upgrade_gravitondrive
-		Prerequisites: ra2_yuri_upgrade_gravitondrive
+		RequiresCondition: yuri_upgrade_gravitondrive
+	GrantConditionOnPrerequisite@yuri_upgrade_gravitondrive:
+		Condition: yuri_upgrade_gravitondrive
+		Prerequisites: yuri_upgrade_gravitondrive
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_gravitondrive
+		Upgrades: yuri_upgrade_gravitondrive
 
-ra2_yuri_upgrade_siphonattack:
+yuri_upgrade_disksiphonattack:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Disk Siphon Attack
@@ -14645,11 +14645,11 @@ ra2_yuri_upgrade_siphonattack:
 		Cost: 5000
 	Buildable:
 		Description: Allows Floating Disks to directly attack units below with its siphon.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_siphonattack
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_disksiphonattack
 	RenderSprites:
-		Image: ra2_yuri_upgrade_siphonattack
+		Image: yuri_upgrade_disksiphonattack
 
-ra2_yuri_upgrade_disklasers:
+yuri_upgrade_diskhighfrequencylasers:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Disk High Frequency Lasers
@@ -14657,19 +14657,19 @@ ra2_yuri_upgrade_disklasers:
 		Cost: 5000
 	Buildable:
 		Description: Increases the Rate of Fire of Floating Disks by 100% and reduces the Ammo Reload Delay by 25%.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_disklasers
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_diskhighfrequencylasers
 	RenderSprites:
-		Image: ra2_yuri_upgrade_disklasers
+		Image: yuri_upgrade_diskhighfrequencylasers
 
-ra2_yuri_upgrade_stealthsuits:
+yuri_upgrade_infantrystealthsuits:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Infantry Stealth Suits
 	Buildable:
 		Description: TEAM Upgrade: All Scout and Anti Tank Anti Air Infantry in your team receive stealth suits with personal shield generators.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_stealthsuits
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_infantrystealthsuits
 	RenderSprites:
-		Image: ra2_yuri_upgrade_stealthsuits
+		Image: yuri_upgrade_infantrystealthsuits
 	ProvidesTeamProxyActor:
 		Actor: ra2_yuri_upgrade_stealthsuits_proxy_actor
 
@@ -14681,39 +14681,39 @@ ra2_yuri_upgrade_stealthsuits_proxy_actor:
 		Description: TEAM Upgrade: All Scout and Anti Tank Anti Air Infantry in your team receive stealth suits with personal shield generators.
 	PlayerDisplayUpgrade:
 	RenderSprites:
-		Image: ra2_yuri_upgrade_stealthsuits
+		Image: yuri_upgrade_infantrystealthsuits
 	ProvidesPrerequisite:
-		Prerequisite: ra2_yuri_upgrade_stealthsuits
+		Prerequisite: yuri_upgrade_infantrystealthsuits
 
 ^RA2YuriStealthSuits:
-	Cloak@ra2_yuri_upgrade_stealthsuits:
+	Cloak@yuri_upgrade_infantrystealthsuits:
 		InitialDelay: 125
 		CloakDelay: 75
 		CloakSound: appear1.aud
 		UncloakSound: trans1.aud
 		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
-		RequiresCondition: ra2_yuri_upgrade_stealthsuits
-	SpeedMultiplier@ra2_yuri_upgrade_stealthsuits:
-		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
+	SpeedMultiplier@yuri_upgrade_infantrystealthsuits:
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
 		Modifier: 110
-	DamageMultiplier@ra2_yuri_upgrade_stealthsuits:
-		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+	DamageMultiplier@yuri_upgrade_infantrystealthsuits:
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
 		Modifier: 90
 	Shielded:
 		DamageRegenDelay: 125
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (ra2_yuri_upgrade_stealthsuits || shieldgen || shielded)
+		RequiresCondition: !disabled && (yuri_upgrade_infantrystealthsuits || shieldgen || shielded)
 		SelectionBarColor: 8888FFFF
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
 	ChangesShield@personal_shield:
 		Step: 30
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 125
-		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+		RequiresCondition: yuri_upgrade_infantrystealthsuits
 	Armor:
 		RequiresCondition: !shielded
 	Armor@shielded:
@@ -14724,21 +14724,21 @@ ra2_yuri_upgrade_stealthsuits_proxy_actor:
 		Modifier: 90
 	ChangesShield@shielddischarge:
 		Delay: 10
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_stealthsuits:
-		Condition: ra2_yuri_upgrade_stealthsuits
-		Prerequisites: ra2_yuri_upgrade_stealthsuits
+	GrantConditionOnPrerequisite@yuri_upgrade_infantrystealthsuits:
+		Condition: yuri_upgrade_infantrystealthsuits
+		Prerequisites: yuri_upgrade_infantrystealthsuits
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_stealthsuits
+		Upgrades: yuri_upgrade_infantrystealthsuits
 
-ra2_yuri_upgrade_geneticboost:
+yuri_upgrade_geneticmodificationboost:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Genetic Modification Boost
 	Buildable:
 		Description: TEAM Upgrade: All Infantry in your team gain 20% more Damage Resistance, Speed and Regeneration.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_geneticboost
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_geneticmodificationboost
 	RenderSprites:
-		Image: ra2_yuri_upgrade_geneticboost
+		Image: yuri_upgrade_geneticmodificationboost
 	ProvidesTeamProxyActor:
 		Actor: ra2_yuri_upgrade_geneticboost_proxy_actor
 
@@ -14750,39 +14750,39 @@ ra2_yuri_upgrade_geneticboost_proxy_actor:
 		Description: TEAM Upgrade: All Infantry in your team gain 20% more Damage Resistance, Speed and Regeneration.
 	PlayerDisplayUpgrade:
 	RenderSprites:
-		Image: ra2_yuri_upgrade_geneticboost
+		Image: yuri_upgrade_geneticmodificationboost
 	ProvidesPrerequisite:
-		Prerequisite: ra2_yuri_upgrade_geneticboost
+		Prerequisite: yuri_upgrade_geneticmodificationboost
 
 ^RA2YuriGeneMod:
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_geneticboost:
-		Condition: ra2_yuri_upgrade_geneticboost
-		Prerequisites: ra2_yuri_upgrade_geneticboost
-	DamageMultiplier@ra2_yuri_upgrade_geneticboost:
+	GrantConditionOnPrerequisite@yuri_upgrade_geneticmodificationboost:
+		Condition: yuri_upgrade_geneticmodificationboost
+		Prerequisites: yuri_upgrade_geneticmodificationboost
+	DamageMultiplier@yuri_upgrade_geneticmodificationboost:
 		Modifier: 80
-		RequiresCondition: ra2_yuri_upgrade_geneticboost
-	SpeedMultiplier@ra2_yuri_upgrade_geneticboost:
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
+	SpeedMultiplier@yuri_upgrade_geneticmodificationboost:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_geneticboost
-	ChangesHealth@ra2_yuri_upgrade_geneticboost:
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
+	ChangesHealth@yuri_upgrade_geneticmodificationboost:
 		PercentageStep: 1
 		Delay: 25
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: ra2_yuri_upgrade_geneticboost
+		RequiresCondition: yuri_upgrade_geneticmodificationboost
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_geneticboost
+		Upgrades: yuri_upgrade_geneticmodificationboost
 	ProvidesPrerequisite:
 
-ra2_yuri_upgrade_psychicvision:
+yuri_upgrade_psychicvision:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Psychic Vision
 	Buildable:
 		Description: TEAM Upgrade: Increases Infantry Vision and Detection Range by 20%. For Yuri: Increases Psychic Sensor Vision and Detection Range by 50%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_psychicvision
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_psychicvision
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psychicvision
+		Image: yuri_upgrade_psychicvision
 	ProvidesTeamProxyActor:
 		Actor: ra2_yuri_upgrade_psychicvision_proxy_actor
 
@@ -14794,22 +14794,22 @@ ra2_yuri_upgrade_psychicvision_proxy_actor:
 		Description: TEAM Upgrade: Increases Infantry Vision and Stealth Detection Range by 20%. For Yuri: Increases Psychic Sensor Vision and Stealth Detection Range by 50%. Psychic Units can sense enemies in the fog of war in a 15 tile radius (30 for Yuri Prime).
 	PlayerDisplayUpgrade:
 	RenderSprites:
-		Image: ra2_yuri_upgrade_psychicvision
+		Image: yuri_upgrade_psychicvision
 	ProvidesPrerequisite:
-		Prerequisite: ra2_yuri_upgrade_psychicvision
+		Prerequisite: yuri_upgrade_psychicvision
 
 ^RA2YuriPsychicVision:
-	RevealsShroudMultiplier@ra2_yuri_upgrade_psychicvision:
+	RevealsShroudMultiplier@yuri_upgrade_psychicvision:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
-	DetectCloakedMultiplier@ra2_yuri_upgrade_psychicvision:
+		RequiresCondition: yuri_upgrade_psychicvision
+	DetectCloakedMultiplier@yuri_upgrade_psychicvision:
 		Modifier: 120
-		RequiresCondition: ra2_yuri_upgrade_psychicvision
-	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psychicvision:
-		Condition: ra2_yuri_upgrade_psychicvision
-		Prerequisites: ra2_yuri_upgrade_psychicvision
+		RequiresCondition: yuri_upgrade_psychicvision
+	GrantConditionOnPrerequisite@yuri_upgrade_psychicvision:
+		Condition: yuri_upgrade_psychicvision
+		Prerequisites: yuri_upgrade_psychicvision
 	ActorStatValues:
-		Upgrades: ra2_yuri_upgrade_psychicvision
+		Upgrades: yuri_upgrade_psychicvision
 
 ##############################################
 #   Red Alert 2 Civilian Vehicles

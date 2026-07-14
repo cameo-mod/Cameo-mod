@@ -2125,7 +2125,7 @@
 		CargoType: Vehicle
 		Weight: 3
 		CargoConditions:
-			yrngtbnk: tankbunkered
+			yuri_tankbunker: tankbunkered
 	RangeMultiplier@tankbunker:
 		Modifier: 125
 		RequiresCondition: tankbunkered
@@ -2918,12 +2918,12 @@
 	ProductionTimeMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
-	ProductionCostMultiplier@ra2_yuri_upgrade_bioengineering:
+	ProductionCostMultiplier@yuri_upgrade_bioengineering:
 		Multiplier: 80
-		Prerequisites: ra2_yuri_upgrade_bioengineering
-	ProductionTimeMultiplier@ra2_yuri_upgrade_bioengineering:
+		Prerequisites: yuri_upgrade_bioengineering
+	ProductionTimeMultiplier@yuri_upgrade_bioengineering:
 		Multiplier: 80
-		Prerequisites: ra2_yuri_upgrade_bioengineering
+		Prerequisites: yuri_upgrade_bioengineering
 	Crushable:
 		WarnProbability: 75
 		CrushSound: squish2.aud
@@ -5551,16 +5551,16 @@
 		Prerequisites: global_conscription_buff
 	# ProvidesPrerequisite@global_conscription_buff:
 	# 	Prerequisite: global_conscription_buff
-	# 	RequiresCondition: ra1_soviet_doctrine_conscription || ra2_soviets_doctrine_conscription || ra2_yuri_upgrade_psioniclegion
+	# 	RequiresCondition: ra1_soviet_doctrine_conscription || ra2_soviets_doctrine_conscription || yuri_doctrine_psioniclegion
 	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscription:
 	# 	Condition: ra1_soviet_doctrine_conscription
 	# 	Prerequisites: ra1_soviet_doctrine_conscription
 	# GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
 	# 	Condition: ra2_soviets_doctrine_conscription
 	# 	Prerequisites: ra2_soviets_doctrine_conscription
-	# GrantConditionOnPrerequisite@ra2_yuri_upgrade_psioniclegion:
-	# 	Condition: ra2_yuri_upgrade_psioniclegion
-	# 	Prerequisites: ra2_yuri_upgrade_psioniclegion
+	# GrantConditionOnPrerequisite@yuri_doctrine_psioniclegion:
+	# 	Condition: yuri_doctrine_psioniclegion
+	# 	Prerequisites: yuri_doctrine_psioniclegion
 
 ^Mine:
 	Inherits: ^SpriteActor
@@ -6604,11 +6604,11 @@ CPQDEBUGDUMMY:
 		Condition: prevent-mindcontrol
 	MindControllableCA:
 		ControlledConditions:
-			yryuri: controlled
-			yryurix: controlled
-			yrmind: controlled
-			yrygpsyt: controlled
-			yrygppet: controlled
+			yuri_clone: controlled
+			yuri_yurix: controlled
+			yuri_mastermind: controlled
+			yuri_psychictower: controlled
+			yuri_psychicdominator: controlled
 		RevokeControlSounds: gmindcle.wav
 		PauseOnCondition: untargetable
 	WithMindControlArcCA:
@@ -6630,7 +6630,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^MindControllable
 	MindControllableCA:
 		ControlledConditions:
-			yryurix: controlled
+			yuri_yurix: controlled
 		PauseOnCondition: prevent-mindcontrol || untargetable
 	Targetable@MC:
 		TargetTypes: MindControlStructure
@@ -8859,7 +8859,7 @@ CPQDEBUGDUMMY:
 			# terran_scv: ifv-repair
 			# ra2_allies_engineer: ifv-repair
 			# ra2_soviets_engineer: ifv-repair
-			# ra2engineer.yuri: ifv-repair
+			# yuri_engineer: ifv-repair
 			# yrslav: ifv-repair
 			# tsengineer: ifv-repair
 			# ts_nod_engineer: ifv-repair
@@ -8891,7 +8891,7 @@ CPQDEBUGDUMMY:
 			# td_nod_flamethrower: ifv-fire
 			# ra1_soviet_flamethrower: ifv-fire
 			# raje4: ifv-fire
-			# yrinit: ifv-fire
+			# yuri_initiate: ifv-fire
 			# flam.asian: ifv-fire
 			# terran_firebat: ifv-fire
 			# td_nod_chemicalwarrior: ifv-chem
@@ -8913,7 +8913,7 @@ CPQDEBUGDUMMY:
 			# leangburton: ifv-hero
 			# terran_ghost: ifv-ra1_allies_alliedsniper
 			# ra2_allies_sniper: ifv-ra1_allies_alliedsniper
-			# yrvirus: ifv-ra1_allies_alliedsniper
+			# yuri_virus: ifv-ra1_allies_alliedsniper
 			# ra1_allies_raspy: ifv-spy
 			# ra2_allies_ra2spy: ifv-spy
 			# shinobi.asian: ifv-spy
@@ -9237,7 +9237,7 @@ CPQDEBUGDUMMY:
 			hakurei: hero
 			ra2_allies_tanyaii: hero
 			ra2_soviets_boris: hero
-			yryurix: hero
+			yuri_yurix: hero
 	WithDisguisingInfantryBody:
 	WithDisguiseTargetPalette:
 	WithDecoration@disguise:
