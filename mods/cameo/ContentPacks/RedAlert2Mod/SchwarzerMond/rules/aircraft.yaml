@@ -1,4 +1,4 @@
-zep.nax2:
+schwarzer_mond_spacezeppelin:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -14,7 +14,7 @@ zep.nax2:
 		OverrideActor: naxis_transportzeppelin
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap.nax2, airfield.nax2, radar.nax2
+		Prerequisites: ~schwarzer_mond_warfactory, schwarzer_mond_airfield, schwarzer_mond_radar
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor_shad.description
 	Aircraft:
@@ -58,7 +58,7 @@ zep.nax2:
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: lunar.nax2, lunar.nax2, lunar.nax2, lunar.nax2, lunar2.nax2, lunar2.nax2, panzer.nax2, panzer.nax2, panzer.nax2, panzer.nax2
+		InitialUnits: schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarrocket, schwarzer_mond_lunarrocket, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 12
 		AfterLoadDelay: 0
@@ -74,7 +74,7 @@ zep.nax2:
 		Class: ra2_allies_nighthawk
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: zep.nax2
+		Image: schwarzer_mond_spacezeppelin
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiTankVoice
@@ -97,7 +97,7 @@ zep_husk.nax2:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: zep.nax2
+		Image: schwarzer_mond_spacezeppelin
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -107,7 +107,7 @@ zep_husk.nax2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-bbomb.nax2:
+schwarzer_mond_blackbomb:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -121,7 +121,7 @@ bbomb.nax2:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_piercer.description
 	Health:
@@ -165,7 +165,7 @@ bbomb.nax2:
 		Actor: bbomb3_husk.nax2
 		Offset: -48,-48
 	RenderSprites:
-		Image: bbomb.nax2
+		Image: schwarzer_mond_blackbomb
 		PlayerPalette: playerra2
 	EjectOnDeath:
 		PilotActor: alien.nax
@@ -211,7 +211,7 @@ bbomb3_husk.nax2:
 #		Red Alert 2 Future Structures
 ####################################################################################################
 
-haunebu.nax2:
+schwarzer_mond_haunebuii:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -227,7 +227,7 @@ haunebu.nax2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~airfield.nax2
+		Prerequisites: ~schwarzer_mond_airfield
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu.description
 	Aircraft:
@@ -293,10 +293,10 @@ haunebu_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: haunebu.nax2
+		Image: schwarzer_mond_haunebuii
 		PlayerPalette: playerra2
 
-haunebu2.nax2:
+schwarzer_mond_haunebuiii:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -312,7 +312,7 @@ haunebu2.nax2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~airfield.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu2.description
 	Aircraft:
@@ -383,10 +383,10 @@ haunebu2_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: haunebu2.nax2
+		Image: schwarzer_mond_haunebuiii
 		PlayerPalette: playerra2
 
-piercer.nax2:
+schwarzer_mond_corruptorpiercer:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -400,7 +400,7 @@ piercer.nax2:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_piercer.description
 	Health:
@@ -445,7 +445,7 @@ piercer.nax2:
 	SpawnActorOnDeath:
 		Actor: piercer_husk.nax2
 	RenderSprites:
-		Image: piercer.nax2
+		Image: schwarzer_mond_corruptorpiercer
 		PlayerPalette: playerra2
 	EjectOnDeath:
 		PilotActor: alien.nax
@@ -466,11 +466,11 @@ piercer_husk.nax2:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: piercer.nax2
+		Image: schwarzer_mond_corruptorpiercer
 	RenderSprites:
 		PlayerPalette: playerra2
 
-dieglocke.nax2:
+schwarzer_mond_dieglocke:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -485,7 +485,7 @@ dieglocke.nax2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~airfield.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_dieglocke.description
@@ -563,5 +563,5 @@ dieglocke_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: dieglocke.nax2
+		Image: schwarzer_mond_dieglocke
 		PlayerPalette: playerra2

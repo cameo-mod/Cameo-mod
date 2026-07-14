@@ -539,7 +539,7 @@
 		RequiresCondition: !in_water
 ^SpaceNaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: lunar.nax2, lunar.nax2, lunar.nax2, lunar2.nax2
+		ActorTypes: schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarrocket
 		RequiresCondition: !in_water
 
 ^NaxiUndeadRevive:
@@ -682,16 +682,16 @@
 ##############################################
 
 ^NaxiYellowLaserUpgrade:
-	GrantConditionOnPrerequisite@up_ylaser.nax2:
-		Condition: up_ylaser.nax2
-		Prerequisites: up_ylaser.nax2
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_crystallens:
+		Condition: schwarzer_mond_upgrade_crystallens
+		Prerequisites: schwarzer_mond_upgrade_crystallens
 
 ^NaxiGreenPlasmaUpgrade:
-	GrantConditionOnPrerequisite@up_gplasma.nax2:
-		Condition: up_gplasma.nax2
-		Prerequisites: up_gplasma.nax2
-	FirepowerMultiplier@up_gplasma.nax2:
-		RequiresCondition: up_gplasma.nax2
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_greenplasmashells:
+		Condition: schwarzer_mond_upgrade_greenplasmashells
+		Prerequisites: schwarzer_mond_upgrade_greenplasmashells
+	FirepowerMultiplier@schwarzer_mond_upgrade_greenplasmashells:
+		RequiresCondition: schwarzer_mond_upgrade_greenplasmashells
 		Modifier: 125
 
 ^FutureTechSpawnActorsOnSell:

@@ -6,11 +6,11 @@ conyard_infiltrated.nax2:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: conyard.nax2
+		Prerequisite: schwarzer_mond_constructionyard
 	RenderSprites:
-		Image: conyard.nax2
+		Image: schwarzer_mond_constructionyard
 
-up_ylaser.nax2:
+schwarzer_mond_upgrade_crystallens:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Crystal Lens
@@ -20,12 +20,12 @@ up_ylaser.nax2:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Yellow lasers upgrades shooting range and burst
-		Prerequisites: ~radar.nax2, !up_ylaser.nax2
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_crystallens
 	RenderSprites:
-		Image: up_ylaser.nax2
+		Image: schwarzer_mond_upgrade_crystallens
 	ProvidesPrerequisite:
 
-up_gplasma.nax2:
+schwarzer_mond_upgrade_greenplasmashells:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Green Plasma Shells
@@ -35,7 +35,7 @@ up_gplasma.nax2:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Tanks deals more damage and Tesla type damage
-		Prerequisites: ~radar.nax2, !up_gplasma.nax2
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_greenplasmashells
 	RenderSprites:
-		Image: up_gplasma.nax2
+		Image: schwarzer_mond_upgrade_greenplasmashells
 	ProvidesPrerequisite:

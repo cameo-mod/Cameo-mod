@@ -1,45 +1,45 @@
-conyard.nax2:
+schwarzer_mond_constructionyard:
 	Defaults:
 		Offset: -8,8
 	idle:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 32
 	make:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Length: 32
 	build:
 		Filename: invisibleitem.shp
 	damaged-idle:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 63
 	idle-fans:
 		Filename: invisibleitem.shp
 	damaged-idle-fans:
 		Filename: invisibleitem.shp
 	crane-overlay:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 32
 		Length: 30
 	damaged-crane-overlay:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 63
 		Length: 30
 	dead:
-		Filename: nax2_conyard.shp
+		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 63
 	icon:
-		Filename: lunarnaxisconyard.png
+		Filename: schwarzer_mond_constructionyard_icon.png
 		Offset: 0,0
 
-weap.nax2:
+schwarzer_mond_warfactory:
 	Defaults:
 		Offset: -16,16
 	idle:
-		Filename: nax2_weap.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap.shp
 		Length: 16
 		ZOffset: 1024
 	damaged-idle:
-		Filename: nax2_weap.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap.shp
 		Length: 16
 		ZOffset: 1024
 	build-ramp:
@@ -47,11 +47,11 @@ weap.nax2:
 	damaged-build-ramp:
 		Filename: invisibleitem.shp
 	build-top:
-		Filename: nax2_weap.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap.shp
 		Length: 16
 		ZOffset: 1024
 	damaged-build-top:
-		Filename: nax2_weap.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap.shp
 		Length: 16
 		ZOffset: 1024
 	build-door:
@@ -68,10 +68,10 @@ weap.nax2:
 	damaged-air-inside:
 		Filename: invisibleitem.shp
 	bib:
-		Filename: nax2_weap_bottom.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap_bottom.shp
 		ZOffset: -1024
 	damaged-bib:
-		Filename: nax2_weap_bottom.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap_bottom.shp
 		ZOffset: -1024
 	idle-flag:
 		Filename: invisibleitem.shp
@@ -80,53 +80,53 @@ weap.nax2:
 	overlay-fan:
 		Filename: invisibleitem.shp
 	make:
-		Filename: nax2_weap_mk.shp
+		Filename: schwarzer_mond_warfactory_nax2_weap_mk.shp
 		Length: 56
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: nax2_weap_icon.png
+		Filename: schwarzer_mond_warfactory_icon.png
 		Offset: 0,0
 
-powr.nax2:
+schwarzer_mond_hydrogenplant:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: nax2_powr.shp
+		Filename: schwarzer_mond_hydrogenplant_nax2_powr.shp
 		Start: 33
 	damaged-idle:
-		Filename: nax2_powr.shp
+		Filename: schwarzer_mond_hydrogenplant_nax2_powr.shp
 		Start: 33
 	make:
-		Filename: nax2_powr.shp
+		Filename: schwarzer_mond_hydrogenplant_nax2_powr.shp
 		Length: 32
 	dead:
-		Filename: nax2_powr.shp
+		Filename: schwarzer_mond_hydrogenplant_nax2_powr.shp
 		Start: 33
 	icon:
-		Filename: nax2_powr_icon.png
+		Filename: schwarzer_mond_hydrogenplant_icon.png
 		Offset: 0,0
 
-barr.nax2:
+schwarzer_mond_barracks:
 	Defaults:
 		Offset: -16,20
 	idle:
-		Filename: nax2_barr.shp
+		Filename: schwarzer_mond_barracks_nax2_barr.shp
 		Start: 33
 	damaged-idle:
-		Filename: nax2_barr.shp
+		Filename: schwarzer_mond_barracks_nax2_barr.shp
 		Start: 33
 	dead:
-		Filename: nax2_barr.shp
+		Filename: schwarzer_mond_barracks_nax2_barr.shp
 		Start: 33
 	make:
-		Filename: nax2_barr.shp
+		Filename: schwarzer_mond_barracks_nax2_barr.shp
 		Length: 32
 	icon:
-		Filename: nax2_barr_icon.png
+		Filename: schwarzer_mond_barracks_icon.png
 		Offset: 0,0
 
-refin.nax2:
+schwarzer_mond_orerefinery:
 	Defaults:
 		Offset: -1,-6
 	idle:
@@ -134,132 +134,132 @@ refin.nax2:
 	damaged-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: nax2_refin.shp
+		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Length: 32
 	idle-bib:
-		Filename: nax2_refin.shp
+		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Start: 33
 	damaged-idle-bib:
-		Filename: nax2_refin.shp
+		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Start: 64
 	dead:
-		Filename: nax2_refin.shp
+		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Start: 64
 	resources:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: nax2_refin_icon.png
+		Filename: schwarzer_mond_orerefinery_icon.png
 		Offset: 0,0
 
-radar.nax2:
+schwarzer_mond_radar:
 	Defaults:
 		Offset: 6,12
 	idle:
-		Filename: nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2_radar.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2_radar.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2_radar.shp
 		Length: 16
 	dead:
-		Filename: nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2_radar.shp
 		Start: 32
 	icon:
-		Filename: nax2_radar_icon.png
+		Filename: schwarzer_mond_radar_icon.png
 		Offset: 0,0
 
-airfield.nax2:
+schwarzer_mond_airfield:
 	Defaults:
 		Offset: 2, 8
 	idle:
-		Filename: nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2_airfield.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2_airfield.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2_airfield.shp
 		Length: 16
 	dead:
-		Filename: nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2_airfield.shp
 		Start: 32
 	icon:
-		Filename: nax2_airfield_icon.png
+		Filename: schwarzer_mond_airfield_icon.png
 		Offset: 0,0
 
-tech.nax2:
+schwarzer_mond_techcenter:
 	Defaults:
 		Offset: 2, 6
 	idle:
-		Filename: nax2_tech.shp
+		Filename: schwarzer_mond_techcenter_nax2_tech.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: nax2_tech.shp
+		Filename: schwarzer_mond_techcenter_nax2_tech.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: nax2_tech.shp
+		Filename: schwarzer_mond_techcenter_nax2_tech.shp
 		Length: 16
 	dead:
-		Filename: nax2_tech.shp
+		Filename: schwarzer_mond_techcenter_nax2_tech.shp
 		Start: 32
 	icon:
-		Filename: nax2_tech_icon.png
+		Filename: schwarzer_mond_techcenter_icon.png
 		Offset: 0,0
 
-gcore.nax2:
+schwarzer_mond_gravitycore:
 	Defaults:
 		Offset: -8,16
 	idle:
-		Filename: nax2_gcore.shp
+		Filename: schwarzer_mond_gravitycore_nax2_gcore.shp
 		Start: 32
 		Length: 32
 	damaged-idle:
-		Filename: nax2_gcore.shp
+		Filename: schwarzer_mond_gravitycore_nax2_gcore.shp
 		Start: 32
 		Length: 32
 	make:
-		Filename: nax2_gcore.shp
+		Filename: schwarzer_mond_gravitycore_nax2_gcore.shp
 		Length: 32
 	dead:
-		Filename: nax2_gcore.shp
+		Filename: schwarzer_mond_gravitycore_nax2_gcore.shp
 		Start: 32
 	icon:
-		Filename: nax2_gcore_icon.png
+		Filename: schwarzer_mond_gravitycore_icon.png
 		Offset: 0,0
 
-dairy.nax2:
+schwarzer_mond_moondairyfarm:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: nax2_dairy.shp
+		Filename: schwarzer_mond_moondairyfarm_nax2_dairy.shp
 		Start: 32
 		Length: 32
 	damaged-idle:
-		Filename: nax2_dairy.shp
+		Filename: schwarzer_mond_moondairyfarm_nax2_dairy.shp
 		Start: 32
 		Length: 32
 	make:
-		Filename: nax2_dairy.shp
+		Filename: schwarzer_mond_moondairyfarm_nax2_dairy.shp
 		Length: 32
 	dead:
-		Filename: nax2_dairy.shp
+		Filename: schwarzer_mond_moondairyfarm_nax2_dairy.shp
 		Start: 33
 	icon:
-		Filename: nax2_dairy_icon.png
+		Filename: schwarzer_mond_moondairyfarm_icon.png
 		Offset: 0,0
 
-meteorray.nax2:
+schwarzer_mond_meteortractionray:
 	Defaults:
 		Offset: 0,-10
-		Filename: nax2_meteorray.shp
+		Filename: schwarzer_mond_meteortractionray_nax2_meteorray.shp
 	idle:
 		Start: 52
 		Length: 14
@@ -282,37 +282,37 @@ meteorray.nax2:
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: nax2_meteorray_icon.png
+		Filename: schwarzer_mond_meteortractionray_icon.png
 		Offset: 0,0
 
-twr.nax2:
+schwarzer_mond_lasertower:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,2
 	idle:
-		Filename: nax2_twr.shp
+		Filename: schwarzer_mond_lasertower_nax2_twr.shp
 		Length: 16
 		Start: 16
 	damaged-idle:
-		Filename: nax2_twr.shp
+		Filename: schwarzer_mond_lasertower_nax2_twr.shp
 		Length: 16
 		Start: 32
 	critical-idle:
-		Filename: nax2_twr.shp
+		Filename: schwarzer_mond_lasertower_nax2_twr.shp
 		Length: 16
 		Start: 16
 	make:
-		Filename: nax2_twr.shp
+		Filename: schwarzer_mond_lasertower_nax2_twr.shp
 		Length: 16
 	dead:
 		Filename: invisibleitem.shp
 	turret:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: nax2_twr_icon.png
+		Filename: schwarzer_mond_lasertower_icon.png
 		Offset: 0,0
 
-sturmcann.nax2:
+schwarzer_mond_sturmcannon:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-8
@@ -324,22 +324,22 @@ sturmcann.nax2:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: nax2_sturmcannmk.shp
+		Filename: schwarzer_mond_sturmcannon_nax2_sturmcannmk.shp
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: nax2_sturmcann.shp
+		Filename: schwarzer_mond_sturmcannon_nax2_sturmcann.shp
 		Facings: 64
 	icon:
-		Filename: nax2_sturmcann_icon.png
+		Filename: schwarzer_mond_sturmcannon_icon.png
 		Offset: 0,0
 
-parv.nax2:
+schwarzer_mond_parzival:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax2_parzi.shp
+		Filename: schwarzer_mond_parzival_nax2_parzi.shp
 	run:
 		Tick: 100
 		Start: 8
@@ -371,30 +371,30 @@ parv.nax2:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: nax_parzival_icon.png
+		Filename: schwarzer_mond_parzival_icon.png
 
-dalek.nax2:
+schwarzer_mond_dalek:
 	Defaults:
-		Filename: nax2_dalek.png
+		Filename: schwarzer_mond_dalek_nax2_dalek.png
 	idle:
 		Facings: 64
 		Offset: 0, 24
 	icon:
-		Filename: naxdalekicon.png
+		Filename: schwarzer_mond_dalek_icon.png
 
-mcv.nax2:
+schwarzer_mond_naxismobileconstructionvehicle:
 	Defaults:
-		Filename: nax2_mcv.shp
+		Filename: schwarzer_mond_naxismobileconstructionvehicle_nax2_mcv.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
 	icon:
-		Filename: nax2_mcv_icon.png
+		Filename: schwarzer_mond_naxismobileconstructionvehicle_icon.png
 
-panzer.nax2:
+schwarzer_mond_lunarpanzer:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax2_panzer.shp
+		Filename: schwarzer_mond_lunarpanzer_nax2_panzer.shp
 		Scale: 0.75
 		Offset: 0,24
 	idle:
@@ -403,7 +403,7 @@ panzer.nax2:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: nax2_panzer_icon.png
+		Filename: schwarzer_mond_lunarpanzer_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -412,10 +412,10 @@ panzer.nax2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-tiger.nax2:
+schwarzer_mond_lunartiger:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax2_tiger.shp
+		Filename: schwarzer_mond_lunartiger_nax2_tiger.shp
 		Scale: 0.8
 		Offset: 0,24
 	idle:
@@ -424,7 +424,7 @@ tiger.nax2:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: nax2_tiger_icon.png
+		Filename: schwarzer_mond_lunartiger_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -433,10 +433,10 @@ tiger.nax2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-grille.nax2:
+schwarzer_mond_lunargrille:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax2_grille.shp
+		Filename: schwarzer_mond_lunargrille_nax2_grille.shp
 		Scale: 0.8
 		Offset: 0,24
 	idle:
@@ -444,7 +444,7 @@ grille.nax2:
 	turret:
 		Facings: 64
 	icon:
-		Filename: nax2_grille_icon.png
+		Filename: schwarzer_mond_lunargrille_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -453,17 +453,17 @@ grille.nax2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-jager.nax2:
+schwarzer_mond_neojagdpanzer:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax2_jager.shp
+		Filename: schwarzer_mond_neojagdpanzer_nax2_jager.shp
 		Scale: 0.9
 	idle:
 		Filename: invisibleitem.shp
 	turret:
 		Facings: 64
 	icon:
-		Filename: nax2_jager_icon.png
+		Filename: schwarzer_mond_neojagdpanzer_icon.png
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -471,10 +471,10 @@ jager.nax2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-crystal.nax2:
+schwarzer_mond_crystaltank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax2_crystal.shp
+		Filename: schwarzer_mond_crystaltank_nax2_crystal.shp
 		Scale: 0.9
 	idle:
 		Filename: invisibleitem.shp
@@ -487,12 +487,12 @@ crystal.nax2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 	icon:
-		Filename: naxcrystaltankicon.png
+		Filename: schwarzer_mond_crystaltank_icon.png
 
-gravity.nax2:
+schwarzer_mond_gravitycoretank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: nax_gravity.shp
+		Filename: schwarzer_mond_gravitycoretank_nax_gravity.shp
 		Scale: 0.9
 		Offset: 0,24
 	idle:
@@ -538,9 +538,9 @@ hole.nax2:
 	die:
 		Length: 64
 
-haunebu.nax2:
+schwarzer_mond_haunebuii:
 	Defaults:
-		Filename: nax_haunebu.shp
+		Filename: schwarzer_mond_haunebuii_nax_haunebu.shp
 	idle:
 		Length: 64
 		Tick: 20
@@ -554,11 +554,11 @@ haunebu.nax2:
 		Length: 4
 		Tick: 100
 	icon:
-		Filename: nax_haunebu_icon.png
+		Filename: schwarzer_mond_haunebuii_icon.png
 
-haunebu2.nax2:
+schwarzer_mond_haunebuiii:
 	Defaults:
-		Filename: nax_ufox.shp
+		Filename: schwarzer_mond_haunebuiii_nax_ufox.shp
 		Offset: 0, 16
 	idle:
 		Length: 32
@@ -573,12 +573,12 @@ haunebu2.nax2:
 		Length: 4
 		Tick: 100
 	icon:
-		Filename: nax_haunebu2_icon.png
+		Filename: schwarzer_mond_haunebuiii_icon.png
 		Offset: 0, 0
 
-dieglocke.nax2:
+schwarzer_mond_dieglocke:
 	Defaults:
-		Filename: nax_dieglocke.shp
+		Filename: schwarzer_mond_dieglocke_nax_dieglocke.shp
 	idle:
 		Length: 64
 		Tick: 20
@@ -592,11 +592,11 @@ dieglocke.nax2:
 		Length: 4
 		Tick: 100
 	icon:
-		Filename: nax_glocke_icon.png
+		Filename: schwarzer_mond_dieglocke_icon.png
 
-zep.nax2:
+schwarzer_mond_spacezeppelin:
 	Defaults:
-		Filename: nax2_zep.shp
+		Filename: schwarzer_mond_spacezeppelin_nax2_zep.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -605,32 +605,32 @@ zep.nax2:
 		Facings: 64
 		Offset: 0,0
 	icon:
-		Filename: naxspacezeppelinicon.png
+		Filename: schwarzer_mond_spacezeppelin_icon.png
 
-piercer.nax2:
+schwarzer_mond_corruptorpiercer:
 	Defaults:
 		Scale: 0.8
 	idle:
-		Filename: nax_piercer.shp
+		Filename: schwarzer_mond_corruptorpiercer_nax_piercer.shp
 		Facings: 64
 	move:
-		Filename: nax_piercer.shp
+		Filename: schwarzer_mond_corruptorpiercer_nax_piercer.shp
 		Facings: 64
 	move-l:
-		Filename: nax_piercer.shp
+		Filename: schwarzer_mond_corruptorpiercer_nax_piercer.shp
 		Facings: 64
 		Start: 64
 	move-r:
-		Filename: nax_piercer.shp
+		Filename: schwarzer_mond_corruptorpiercer_nax_piercer.shp
 		Facings: 64
 		Start: 128
 	icon:
-		Filename: nax_piercer_icon.png
+		Filename: schwarzer_mond_corruptorpiercer_icon.png
 
-bradley.nax2:
+schwarzer_mond_mars:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: nax2_bradley.shp
+		Filename: schwarzer_mond_mars_nax2_bradley.shp
 		Scale: 1
 	idle:
 		Filename: invisibleitem.shp
@@ -645,10 +645,10 @@ bradley.nax2:
 	icon:
 		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_icon.png
 
-aatank.nax2:
+schwarzer_mond_m200bjagerline:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: nax2_aatank.shp
+		Filename: schwarzer_mond_m200bjagerline_nax2_aatank.shp
 		Scale: 0.8
 	idle:
 		Filename: invisibleitem.shp
@@ -662,9 +662,9 @@ aatank.nax2:
 	icon:
 		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_icon.png
 
-armor_mg.nax2:
+schwarzer_mond_noidmgarmor:
 	Defaults:
-		Filename: nax2_armor_mg.shp
+		Filename: schwarzer_mond_noidmgarmor_nax2_armor_mg.shp
 		Scale: 0.9
 	idle1:
 		Facings: 32
@@ -683,12 +683,12 @@ armor_mg.nax2:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: nax2_armor_mg_icon.png
+		Filename: schwarzer_mond_noidmgarmor_icon.png
 		Offset: 0,0
 
-engi.nax2:
+schwarzer_mond_engineeringarmor:
 	Defaults:
-		Filename: nax2_engi.shp
+		Filename: schwarzer_mond_engineeringarmor_nax2_engi.shp
 		Scale: 0.9
 	idle1:
 		Facings: 32
@@ -704,12 +704,12 @@ engi.nax2:
 	shoot:
 		Facings: 32
 	icon:
-		Filename: nax2_engi_icon.png
+		Filename: schwarzer_mond_engineeringarmor_icon.png
 		Offset: 0,0
 
-giant_rk.nax2:
+schwarzer_mond_korruptesbiest:
 	Defaults:
-		Filename: nax2_giant_rk.shp
+		Filename: schwarzer_mond_korruptesbiest_nax2_giant_rk.shp
 		Scale: 0.9
 	idle1:
 		Facings: 32
@@ -728,12 +728,12 @@ giant_rk.nax2:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: nax2_giant_rk_icon.png
+		Filename: schwarzer_mond_korruptesbiest_icon.png
 		Offset: 0,0
 
-armor_harv.nax2:
+schwarzer_mond_noidharvester:
 	Defaults:
-		Filename: nax2_armor_harv.shp
+		Filename: schwarzer_mond_noidharvester_nax2_armor_harv.shp
 		Scale: 0.9
 	idle1:
 		Facings: 32
@@ -760,13 +760,13 @@ armor_harv.nax2:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: nax2_armor_harv_icon.png
+		Filename: schwarzer_mond_noidharvester_icon.png
 		Offset: 0,0
 
-beetle.nax2:
+schwarzer_mond_laserbeetle:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax2_beetle.shp
+		Filename: schwarzer_mond_laserbeetle_nax2_beetle.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -776,12 +776,12 @@ beetle.nax2:
 		Facings: 64
 		Offset: 0,5
 	icon:
-		Filename: nax2_beetle_icon.png
+		Filename: schwarzer_mond_laserbeetle_icon.png
 
-lasert.nax2:
+schwarzer_mond_lasertank:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax2_lasert.shp
+		Filename: schwarzer_mond_lasertank_nax2_lasert.shp
 		Scale: 0.8
 		Offset: 0,24
 	idle:
@@ -790,14 +790,14 @@ lasert.nax2:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: naxlasertankicon.png
+		Filename: schwarzer_mond_lasertank_icon.png
 		Offset: 0,0
 
-lunar.nax2:
+schwarzer_mond_lunarsoldier:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax_lunar.shp
+		Filename: schwarzer_mond_lunarsoldier_nax_lunar.shp
 	run:
 		Tick: 100
 		Start: 8
@@ -829,13 +829,13 @@ lunar.nax2:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: nax2_lunar_icon.png
+		Filename: schwarzer_mond_lunarsoldier_icon.png
 
-lunar2.nax2:
+schwarzer_mond_lunarrocket:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax_lunar2.shp
+		Filename: schwarzer_mond_lunarrocket_nax_lunar2.shp
 	run:
 		Tick: 100
 		Start: 8
@@ -867,13 +867,13 @@ lunar2.nax2:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: nax2_lunar2_icon.png
+		Filename: schwarzer_mond_lunarrocket_icon.png
 
-uber.nax2:
+schwarzer_mond_bermensch:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: nax2_uber.shp
+		Filename: schwarzer_mond_bermensch_nax2_uber.shp
 	run:
 		Tick: 100
 		Start: 8
@@ -905,33 +905,33 @@ uber.nax2:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: nax2_uber_icon.png
+		Filename: schwarzer_mond_bermensch_icon.png
 
-bbomb.nax2:
+schwarzer_mond_blackbomb:
 	Defaults:
 		Scale: 0.8
 	idle:
-		Filename: nax2_bbomb.shp
+		Filename: schwarzer_mond_blackbomb_nax2_bbomb.shp
 		Facings: 64
 	move:
-		Filename: nax2_bbomb.shp
+		Filename: schwarzer_mond_blackbomb_nax2_bbomb.shp
 		Facings: 64
 	move-l:
-		Filename: nax2_bbomb.shp
+		Filename: schwarzer_mond_blackbomb_nax2_bbomb.shp
 		Facings: 64
 	move-r:
-		Filename: nax2_bbomb.shp
+		Filename: schwarzer_mond_blackbomb_nax2_bbomb.shp
 		Facings: 64
 	icon:
-		Filename: nax_piercer_icon.png
+		Filename: schwarzer_mond_corruptorpiercer_icon.png
 
-up_ylaser.nax2:
+schwarzer_mond_upgrade_crystallens:
 	icon:
-		Filename: upnax2_ylaser.png
+		Filename: schwarzer_mond_upgrade_crystallens_icon.png
 
-up_gplasma.nax2:
+schwarzer_mond_upgrade_greenplasmashells:
 	icon:
-		Filename: upnax2_gplasma.png
+		Filename: schwarzer_mond_upgrade_greenplasmashells_icon.png
 
 ##############################################
 #   Red Alert 2 Future Tech

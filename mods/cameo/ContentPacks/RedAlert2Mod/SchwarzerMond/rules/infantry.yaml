@@ -1,4 +1,4 @@
-uber.nax2:
+schwarzer_mond_bermensch:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -13,7 +13,7 @@ uber.nax2:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~barr.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_techcenter
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -45,7 +45,7 @@ uber.nax2:
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
 
-parv.nax2:
+schwarzer_mond_parzival:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -61,7 +61,7 @@ parv.nax2:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~barr.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_techcenter
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -96,7 +96,7 @@ parv.nax2:
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
 
-armor_mg.nax2:
+schwarzer_mond_noidmgarmor:
 	Inherits: ^Walker
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -116,7 +116,7 @@ armor_mg.nax2:
 		Name: Noid MG Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~barr.nax2, radar.nax2
+		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_radar
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -134,19 +134,19 @@ armor_mg.nax2:
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !up_ylaser.nax2
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@ELITE:
 		Weapon: NaxiMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !up_ylaser.nax2
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && up_ylaser.nax2
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && up_ylaser.nax2
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:
@@ -164,7 +164,7 @@ armor_mg.nax2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-armor_harv.nax2:
+schwarzer_mond_noidharvester:
 	Inherits: ^Walker
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -185,7 +185,7 @@ armor_harv.nax2:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 75
-		Prerequisites: ~refin.nax2
+		Prerequisites: ~schwarzer_mond_orerefinery
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -241,7 +241,7 @@ armor_harv.nax2:
 	Mobile:
 		Locomotor: chem
 
-engi.nax2:
+schwarzer_mond_engineeringarmor:
 	Inherits: ^Walker
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -259,7 +259,7 @@ engi.nax2:
 		Name: Engineering Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~barr.nax2
+		Prerequisites: ~schwarzer_mond_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -316,7 +316,7 @@ engi.nax2:
 		EnterBlockedCursor: move-blocked
 		Voice: Move
 
-lunar.nax2:
+schwarzer_mond_lunarsoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -331,7 +331,7 @@ lunar.nax2:
 		Name: Lunar Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax2
+		Prerequisites: ~schwarzer_mond_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -343,41 +343,41 @@ lunar.nax2:
 	Armament@PRIMARY:
 		Weapon: NaxiRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !up_ylaser.nax2
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@ELITE:
 		Weapon: NaxiRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !up_ylaser.nax2
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && up_ylaser.nax2
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && up_ylaser.nax2
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: NaxiRifleLaser
-		RequiresCondition: !rank-elite && !up_ylaser.nax2
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: NaxiRifleLaserE
-		RequiresCondition: rank-elite && !up_ylaser.nax2
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens
 	Armament@GARRISONED_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaser
-		RequiresCondition: !rank-elite && up_ylaser.nax2
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaserE
-		RequiresCondition: rank-elite && up_ylaser.nax2
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: NaxiLunarTroopVoice
 
-lunar2.nax2:
+schwarzer_mond_lunarrocket:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -391,7 +391,7 @@ lunar2.nax2:
 		Name: Lunar Rocket
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax2
+		Prerequisites: ~schwarzer_mond_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:

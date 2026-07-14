@@ -1,4 +1,4 @@
-conyard.nax2:
+schwarzer_mond_constructionyard:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
@@ -9,7 +9,7 @@ conyard.nax2:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: mcv.nax2
+		IntoActor: schwarzer_mond_naxismobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -25,7 +25,7 @@ conyard.nax2:
 		Proxy: conyard_infiltrated.nax2
 		Types: TechStealerInfiltrate
 
-powr.nax2:
+schwarzer_mond_hydrogenplant:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -38,7 +38,7 @@ powr.nax2:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template_power.description
-		Prerequisites: ~conyard.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -53,7 +53,7 @@ powr.nax2:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-barr.nax2:
+schwarzer_mond_barracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -62,7 +62,7 @@ barr.nax2:
 	Tooltip:
 		Name: Schwarzer Mond Barracks
 	Buildable:
-		Prerequisites: ~conyard.nax2, powr.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_hydrogenplant
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -75,7 +75,7 @@ barr.nax2:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-refin.nax2:
+schwarzer_mond_orerefinery:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -83,7 +83,7 @@ refin.nax2:
 	Tooltip:
 		Name: Schwarzer Mond Ore Refinery
 	Buildable:
-		Prerequisites: ~conyard.nax2, powr.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_hydrogenplant
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -95,11 +95,11 @@ refin.nax2:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
-		Actor: armor_harv.nax2
+		Actor: schwarzer_mond_noidharvester
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@2:
-		Actor: armor_harv.nax2
+		Actor: schwarzer_mond_noidharvester
 		SpawnOffset: 2,1
 		Facing: 256
 	SelectionDecorations:
@@ -108,14 +108,14 @@ refin.nax2:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-radar.nax2:
+schwarzer_mond_radar:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~conyard.nax2, refin.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_orerefinery
 		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Radar
@@ -129,7 +129,7 @@ radar.nax2:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-airfield.nax2:
+schwarzer_mond_airfield:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -147,7 +147,7 @@ airfield.nax2:
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~conyard.nax2, radar.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_radar
 		Queue: Building, RABuilding
 		Description: Produces aircraft.
 	Building:
@@ -183,7 +183,7 @@ airfield.nax2:
 		Weapon: NaxDefensivePlaneTarget
 	AutoTarget:
 
-twr.nax2:
+schwarzer_mond_lasertower:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -195,7 +195,7 @@ twr.nax2:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~conyard.nax2, barr.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_barracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
@@ -220,13 +220,13 @@ twr.nax2:
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_ylaser.nax2
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens
 	Armament@UP:
 		Weapon: Lunar_YellowLaserT
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_ylaser.nax2
+		RequiresCondition: schwarzer_mond_upgrade_crystallens
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -241,7 +241,7 @@ twr.nax2:
 		Range: 4090
 	ProvidesPrerequisite@buildingname:
 
-sturmcann.nax2:
+schwarzer_mond_sturmcannon:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
@@ -254,7 +254,7 @@ sturmcann.nax2:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~conyard.nax2, weap.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_warfactory
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 1200
@@ -279,13 +279,13 @@ sturmcann.nax2:
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_gplasma.nax2
+		RequiresCondition: !schwarzer_mond_upgrade_greenplasmashells
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_GreenSturmArty
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_gplasma.nax2
+		RequiresCondition: schwarzer_mond_upgrade_greenplasmashells
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -298,13 +298,13 @@ sturmcann.nax2:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 
-tech.nax2:
+schwarzer_mond_techcenter:
 	Inherits: ^RA2Building
 	Inherits@radar: ^IsTechnoBuilding
 	Inherits@shape: ^4x3Shape
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~conyard.nax2, radar.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_radar
 		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Tech Center
@@ -314,7 +314,7 @@ tech.nax2:
 	Production@Research:
 		Produces: Research
 
-weap.nax2:
+schwarzer_mond_warfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Tooltip:
@@ -325,7 +325,7 @@ weap.nax2:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Description: template_factory.description
-		Prerequisites: ~conyard.nax2, refin.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_orerefinery
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -338,7 +338,7 @@ weap.nax2:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-meteorray.nax2:
+schwarzer_mond_meteortractionray:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -347,7 +347,7 @@ meteorray.nax2:
 		Name: Meteor Traction Ray
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~conyard.nax2, tech.nax2, !meteorray.nax2, ~techlevel.superweapons
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter, !schwarzer_mond_meteortractionray, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor_namisl.description
 	Building:
@@ -404,7 +404,7 @@ meteorray.nax2:
 	SupportPowerChargeBar:
 	WithSupportPowerActivationAnimation:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: meteorray.nax2
+		Prerequisite: schwarzer_mond_meteortractionray
 
 # nax2_chrono:
 # 	Inherits: ^RA2Building
@@ -414,7 +414,7 @@ meteorray.nax2:
 # 	HitShape:
 # 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 # 	Buildable:
-# 		Prerequisites: ~tech.nax2
+# 		Prerequisites: ~schwarzer_mond_techcenter
 # 	Tooltip:
 # 		Name: Dark Chronosphere
 # 	Building:
@@ -469,7 +469,7 @@ meteorray.nax2:
 # 	Power:
 # 		Amount: -200
 
-gcore.nax2:
+schwarzer_mond_gravitycore:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -486,7 +486,7 @@ gcore.nax2:
 		Amount: -125
 	Buildable:
 		Description: Reduces movement speed and range of nearby vehicles.
-		Prerequisites: ~conyard.nax2, tech.nax2
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter
 		Queue: Defence, RADefence
 	ProximityExternalCondition@gravity_1:
 		Range: 15000
@@ -549,7 +549,7 @@ gcore.nax2:
 		Color: 20027788
 		RequiresCondition: !disabled
 
-dairy.nax2:
+schwarzer_mond_moondairyfarm:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@cashtrickler: ^CashTricklerWithExperience
@@ -561,7 +561,7 @@ dairy.nax2:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Produces Passive income and adds hp bonus with Infantry
-		Prerequisites: ~conyard.nax2, tech.nax2, ~techlevel.medium, derricklimit
+		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter, ~techlevel.medium, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2

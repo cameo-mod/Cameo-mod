@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: lnaxis
-		BaseActor: mcv.nax2
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
 	StartingUnits@defaultlnaxis:
 		Class: light
 		ClassName: Light Support
 		Factions: lnaxis
-		BaseActor: mcv.nax2
-		SupportActors: lunar.nax2,lunar.nax2,lunar.nax2,lunar2.nax2,lunar2.nax2,beetle.nax2,tiger.nax2
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
+		SupportActors: schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_laserbeetle,schwarzer_mond_lunartiger
 	StartingUnits@heavylnaxis:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: lnaxis
-		BaseActor: mcv.nax2
-		SupportActors: lunar.nax2,lunar.nax2,lunar2.nax2,lunar2.nax2,lunar2.nax2,beetle.nax2,tiger.nax2,panzer.nax2,panzer.nax2,beetle.nax2,beetle.nax2
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
+		SupportActors: schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_laserbeetle,schwarzer_mond_lunartiger,schwarzer_mond_lunarpanzer,schwarzer_mond_lunarpanzer,schwarzer_mond_laserbeetle,schwarzer_mond_laserbeetle

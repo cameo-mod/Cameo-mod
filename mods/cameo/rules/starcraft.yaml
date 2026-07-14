@@ -1074,7 +1074,7 @@ terran_sentinel:
 		LocalOffset: 600,0,600
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_ylaser.nax2
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens
 	ProvidesPrerequisite@buildingname:
 	Transforms:
 		IntoActor: scsentinelm
