@@ -186,8 +186,18 @@ factions, everything through the balance workbook._
 
 ### N11. Descriptions + AI
 - [x] All CABAL units have Fluent descriptions (converted 8 inline \n
-  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`).
+  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`; plus 2 more
+  fixed: cabal_refinery + cabal_mobileconstructionvehicle).
 - [x] AI wiring: all CABAL units in UnitsToBuild list with weights.
+  cabal_engineer added to CapturingActorTypes; stale tscyc2.cabal removed.
+- [x] CABAL added to global Random + RandomTournament faction pools;
+  "(WIP)" suffix removed from faction name.
+- [x] Fluent key naming fixed: actor-cabal_core/actor-cabal_techcenter
+  → underscores (actor_cabal_core/actor_cabal_techcenter).
+- [x] Building name capitalization fixed: "Cabal Tech Center" → "CABAL
+  Tech Center", "Heavy Cabal Obelisk" → "Heavy CABAL Obelisk".
+- [x] Manticore description updated: removed trap net references (trap
+  weapon removed from unit).
 
 ### CE (carried). Effect-warhead naming sweep, mod-wide
 - [x] CABAL: 1 violation fixed (CabalBerserkerBlades @3Eff -> @Effect,
