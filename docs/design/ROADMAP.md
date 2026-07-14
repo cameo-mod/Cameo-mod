@@ -181,12 +181,10 @@ factions, everything through the balance workbook._
 ### CE (carried). Effect-warhead naming sweep, mod-wide
 - [x] CABAL: 1 violation fixed (CabalBerserkerBlades @3Eff -> @Effect,
   `63c859fde`). CABAL is fully compliant.
-- [ ] Beyond CABAL: ~998 violations remain across other factions.
-  Rename stray `CreateEffect` warheads to the per-surface canonical
-  set (`@Effect` / `@EffectAir` / `@EffectWater` / `@ShieldHitEffect`).
-  NOTE: a child that overrides its template's own effect-warhead name
-  (e.g. `@3Eff` from `^TSCannonEffect`) is CORRECT, not a violation.
-  DESIGN §8. Large mechanical sweep — batch via script.
+- [x] Mod-wide: 202 renames across 40 files via scripted sweep
+  (`2ad0f35e1`). Audit: `tools/audit/audit_effect_warhead_names.py`
+  (0 violations). Template override names preserved; suffixed variants
+  (@Effect2, @EffectAir2, etc.) recognized as canonical.
 
 ---
 
