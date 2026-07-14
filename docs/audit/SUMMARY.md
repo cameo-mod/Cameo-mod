@@ -14,7 +14,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 | B3 | upgrade direction | 12 anti-buff combos (2 suspicious, 1 verify, rest intended drawbacks), 4 dead upgrades, 5 dead-wiring families on 300–1,042 actors each | balance |
 | B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots | balance |
 | B6 | art/sequence refs | 11 missing images, 11 missing sequences, 542 orphan images | cosmetic→crash-risk |
-| B7 | metadata rot | 24 duplicate-tooltip groups, 5 missing tooltips | cosmetic |
+| B7 | metadata rot | 24 duplicate-tooltip groups, 0 missing tooltips | cosmetic |
 | B9 | numeric drift | bounds screen **clean** (TB23 fix held); 163 outlier leads | balance-minor |
 | B10 | dead content | 345 orphan weapons, 542 orphan images, 16 dead conditions | hygiene |
 | B11 | asset norms | 3,632 / 8,776 WAVs off-norm (mono/16-bit/22050 Hz); 131 PNGs over budget | hygiene |
