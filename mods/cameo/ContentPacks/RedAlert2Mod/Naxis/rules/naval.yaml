@@ -67,7 +67,7 @@ muboat.nax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~naval.nax, tech.nax
+		Prerequisites: ~naval.nax, naxis_techcenter
 		Queue: Naval, RANaval
 		Description: actor_msub.description
 	Mobile:
@@ -118,7 +118,7 @@ muboat.nax:
 		Image: muboat.nax
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax
+		Upgrades: naxis_upgrade_wunderwaffe
 
 ####################################################################################################
 #		Red Alert 2 Naxis Tree

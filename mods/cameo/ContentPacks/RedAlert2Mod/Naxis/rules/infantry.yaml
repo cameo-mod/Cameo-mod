@@ -1,4 +1,4 @@
-rifle.nax:
+naxis_naxiriflesoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -15,7 +15,7 @@ rifle.nax:
 		Name: Naxi Rifle Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~naxis_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -49,9 +49,9 @@ rifle.nax:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 
-cons.nax:
+naxis_naxiriflerecruit:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -68,7 +68,7 @@ cons.nax:
 		Name: Naxi Rifle Recruit
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~naxis_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -102,9 +102,9 @@ cons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 
-mp40.nax:
+naxis_sssoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -121,7 +121,7 @@ mp40.nax:
 		Name: SS Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_mp40.description
 	Mobile:
@@ -155,9 +155,9 @@ mp40.nax:
 	Voiced:
 		VoiceSet: NaxiSSVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-fcons.nax:
+naxis_naxiflamer:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -174,7 +174,7 @@ fcons.nax:
 		Name: Naxi Flamer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, radar.nax
+		Prerequisites: ~naxis_barracks, naxis_radar
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Mobile:
@@ -210,9 +210,9 @@ fcons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-merc.nax:
+naxis_naximercenarysniper:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -230,7 +230,7 @@ merc.nax:
 		Name: Naxi Mercenary ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_merc.description
 	Mobile:
@@ -264,9 +264,9 @@ merc.nax:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 
-shrek.nax:
+naxis_panzerschreck:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -282,7 +282,7 @@ shrek.nax:
 		Name: Panzerschreck
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_infantry.description
 	Mobile:
@@ -316,9 +316,9 @@ shrek.nax:
 	Voiced:
 		VoiceSet: NaxiTroopVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-tcons.nax:
+naxis_panzerfausttrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -334,7 +334,7 @@ tcons.nax:
 		Name: Panzerfaust Trooper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~naxis_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_infantry.description
 	Mobile:
@@ -368,9 +368,9 @@ tcons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-litt.nax:
+naxis_skymage:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -384,7 +384,7 @@ litt.nax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_litt.description
 	Aircraft:
@@ -440,9 +440,9 @@ litt.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-slavemaster.nax:
+naxis_slaveoverseer:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -459,7 +459,7 @@ slavemaster.nax:
 		Name: Slave Overseer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, refin.nax
+		Prerequisites: ~naxis_barracks, naxis_orerefinery
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_slavemaster.description
 	Mobile:
@@ -505,14 +505,14 @@ slavemaster.nax:
 	Voiced:
 		VoiceSet: NaxiFemVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-slav.nax:
+naxis_slave:
 	Inherits: YRSLAV
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, refin.nax
+		Prerequisites: ~naxis_barracks, naxis_orerefinery
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_slavemaster.description
 	Targetable@SlaveFaster:
@@ -531,7 +531,7 @@ slav.nax:
 		Modifier: 250
 		RequiresCondition: SlaveFaster >= 3
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
 frank.nax:
 	Inherits: ^Soldier
@@ -576,9 +576,9 @@ frank.nax:
 	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-hmg.nax:
+naxis_naximachinegunners:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -596,7 +596,7 @@ hmg.nax:
 		Name: Naxi Machinegunners
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_hmg.description
 	Mobile:
@@ -688,9 +688,9 @@ hmg.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
-quadflak.nax:
+naxis_portableflak:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -710,7 +710,7 @@ quadflak.nax:
 		Name: Portable Flak
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~barr.nax
+		Prerequisites: ~naxis_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_quadflak.description
 	Mobile:
@@ -804,7 +804,7 @@ quadflak.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 
 undead.nax:
 	Inherits: ^Soldier
@@ -856,9 +856,9 @@ undead.nax:
 	Voiced:
 		VoiceSet: NaxiZombie
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 
-conehead.nax:
+naxis_coneheadsknights:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -875,9 +875,9 @@ conehead.nax:
 		Name: Coneheads Knights
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~naxis_barracks, naxis_academy
 		Queue: Infantry, RAInfantry
-		AdditionalActors: conehead.nax, conehead.nax, conehead.nax, conehead.nax, conehead2.nax
+		AdditionalActors: naxis_coneheadsknights, naxis_coneheadsknights, naxis_coneheadsknights, naxis_coneheadsknights, conehead2.nax
 		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 90
@@ -905,7 +905,7 @@ conehead.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -926,7 +926,7 @@ conehead2.nax:
 		Name: Conehead Leader
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, ~disabled
+		Prerequisites: ~naxis_barracks, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -960,14 +960,14 @@ conehead2.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 	RenderSprites:
 		PlayerPalette: player_rgba
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Infantry
 ####################################################################################################
 
-atankcann.nax:
+naxis_antitankcannon:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -983,7 +983,7 @@ atankcann.nax:
 		Name: Anti Tank Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~barr.nax
+		Prerequisites: ~naxis_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_atankcann.description
 	Mobile:
@@ -1019,9 +1019,9 @@ atankcann.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-bmwbike.nax:
+naxis_bmwbike:
 	Inherits: ^Tank
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1036,7 +1036,7 @@ bmwbike.nax:
 		Name: BMW td_nod_reconbike
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~barr.nax, weap.nax
+		Prerequisites: ~naxis_barracks, naxis_warfactory
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_bmwbike.description
 	Mobile:
@@ -1071,12 +1071,12 @@ bmwbike.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_massopticsintegration
 
 litt_husk.nax:
 	Inherits: ^HelicopterHusk
 	RenderSprites:
-		Image: litt.nax
+		Image: naxis_skymage
 		PlayerPalette: playerra2
 	Tooltip:
 		Name: Sky Mage
@@ -1114,7 +1114,7 @@ alien.nax:
 		Name: Naxi Alien
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, ~disabled
+		Prerequisites: ~naxis_barracks, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_alien.description
 	Mobile:
@@ -1148,5 +1148,5 @@ alien.nax:
 	Voiced:
 		VoiceSet: NaxiUFOVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 	-TakeCover:

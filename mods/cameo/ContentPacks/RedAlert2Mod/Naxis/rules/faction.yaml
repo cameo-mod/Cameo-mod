@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: naxis
-		BaseActor: mcv.nax
+		BaseActor: naxis_naximobileconstructionvehicle
 	StartingUnits@defaultnaxis:
 		Class: light
 		ClassName: Light Support
 		Factions: naxis
-		BaseActor: mcv.nax
-		SupportActors: rifle.nax,rifle.nax,rifle.nax,mp40.nax,mp40.nax,wirbelwind.nax,tiger.nax
+		BaseActor: naxis_naximobileconstructionvehicle
+		SupportActors: naxis_naxiriflesoldier,naxis_naxiriflesoldier,naxis_naxiriflesoldier,naxis_sssoldier,naxis_sssoldier,wirbelwind.nax,tiger.nax
 	StartingUnits@heavynaxis:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: naxis
-		BaseActor: mcv.nax
-		SupportActors: rifle.nax,rifle.nax,rifle.nax,mp40.nax,mp40.nax,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,wirbelwind.nax,wirbelwind.nax
+		BaseActor: naxis_naximobileconstructionvehicle
+		SupportActors: naxis_naxiriflesoldier,naxis_naxiriflesoldier,naxis_naxiriflesoldier,naxis_sssoldier,naxis_sssoldier,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,wirbelwind.nax,wirbelwind.nax

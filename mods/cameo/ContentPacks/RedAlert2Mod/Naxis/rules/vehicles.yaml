@@ -59,7 +59,7 @@ corpse_big.nax:
 	SpawnActorOnDeath@NaxiRevive:
 		Actor: frank.nax
 
-halftrack.nax:
+naxis_halftrack:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -76,7 +76,7 @@ halftrack.nax:
 		Name: Halftrack
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~naxis_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_apc.description
 	Mobile:
@@ -112,11 +112,11 @@ halftrack.nax:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
-		InitialUnits: cons.nax, cons.nax, cons.nax, cons.nax, fcons.nax, fcons.nax, mp40.nax, mp40.nax, merc.nax, shrek.nax
+		InitialUnits: naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiflamer, naxis_naxiflamer, naxis_sssoldier, naxis_sssoldier, naxis_naximercenarysniper, naxis_panzerschreck
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_massopticsintegration
 
-kubel.nax:
+naxis_kbelwagen:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -133,7 +133,7 @@ kubel.nax:
 		Name: Kübelwagen
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~naxis_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_kubel.description
 	Mobile:
@@ -165,9 +165,9 @@ kubel.nax:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: cons.nax, cons.nax, rifle.nax, rifle.nax, mp40.nax
+		InitialUnits: naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_sssoldier
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_massopticsintegration
 
 wirbelwind.nax:
 	Inherits: ^Tank
@@ -186,7 +186,7 @@ wirbelwind.nax:
 		Name: Wirbelwind
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_wirbelwind.description
 	Mobile:
@@ -250,9 +250,9 @@ wirbelwind.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-mcv.nax:
+naxis_naximobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -261,9 +261,9 @@ mcv.nax:
 	Tooltip:
 		Name: Naxi Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~weap.nax, powr.nax, tek.nax
+		Prerequisites: ~naxis_warfactory, naxis_naxpetrolplant, naxis_academy
 	Transforms:
-		IntoActor: conyard.nax
+		IntoActor: naxis_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -276,7 +276,7 @@ mcv.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
 tiger.nax:
 	Inherits: ^Tank
@@ -293,7 +293,7 @@ tiger.nax:
 		Name: Tiger Heavy Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~!up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, ~!naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -339,9 +339,9 @@ tiger.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
-kingtiger.nax:
+naxis_kingtigerheavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -356,7 +356,7 @@ kingtiger.nax:
 		Name: King Tiger Heavy Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, ~naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -402,9 +402,9 @@ kingtiger.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
-maus.nax:
+naxis_maus:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -420,7 +420,7 @@ maus.nax:
 		Name: Maus
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, up_sturmtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_heavyvehicles
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -466,9 +466,9 @@ maus.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax
+		Upgrades: naxis_upgrade_wunderwaffe
 
-ratte.nax:
+naxis_ratte:
 	Inherits: ^Tank
 	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -486,7 +486,7 @@ ratte.nax:
 	Buildable:
 		BuildPaletteOrder: 150
 		BuildLimit: 1
-		Prerequisites: ~weap.nax, tech.nax, up_ratte.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_theratte
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -548,9 +548,9 @@ ratte.nax:
 	Passenger:
 		Weight: 6
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-grille.nax:
+naxis_grille:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -566,7 +566,7 @@ grille.nax:
 		Name: Grille
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~!naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_grille.description
 	Mobile:
@@ -595,14 +595,14 @@ grille.nax:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: grille.nax
+		Image: naxis_grille
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-brummbar.nax:
+naxis_brummbr:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -618,7 +618,7 @@ brummbar.nax:
 		Name: Brummbär
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_brummbar.description
 	Mobile:
@@ -651,9 +651,9 @@ brummbar.nax:
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-sturmtiger.nax:
+naxis_sturmtiger:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -669,7 +669,7 @@ sturmtiger.nax:
 		Name: Sturm Tiger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, up_sturmtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_heavyvehicles
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_sturmtiger.description
 	Mobile:
@@ -698,9 +698,9 @@ sturmtiger.nax:
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-hetzer.nax:
+naxis_hetzer:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -716,7 +716,7 @@ hetzer.nax:
 		Name: Hetzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~!naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_hetzer.description
 	Mobile:
@@ -752,9 +752,9 @@ hetzer.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-jagdpanzer.nax:
+naxis_jagdpanzer:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -770,7 +770,7 @@ jagdpanzer.nax:
 		Name: Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_jagdpanzer.description
 	Mobile:
@@ -806,9 +806,9 @@ jagdpanzer.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
-eng.nax:
+naxis_engineeringtruck:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -822,7 +822,7 @@ eng.nax:
 		Name: Engineering Truck
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, powr.nax
+		Prerequisites: ~naxis_warfactory, naxis_naxpetrolplant
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_eng.description
 	Mobile:
@@ -876,7 +876,7 @@ eng.nax:
 		EnterBlockedCursor: move-blocked
 		Voice: Move
 
-brad.nax:
+naxis_donnerschlag:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -890,7 +890,7 @@ brad.nax:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~weap.nax, tech.nax, up_brad.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_donnerschlagmodelandotheradvancedmissiles
 		Description: actor_nax_brad.description
 	Valued:
 		Cost: 2300
@@ -971,9 +971,9 @@ brad.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-sarubia.nax:
+naxis_nop03sarubia:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -989,7 +989,7 @@ sarubia.nax:
 		Name: Nop-03 Sarubia
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, up_sarubia.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_sarubiamodel
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_sarubia.description
 	Mobile:
@@ -1022,9 +1022,9 @@ sarubia.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-shoe.nax:
+naxis_shoekarn:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1041,7 +1041,7 @@ shoe.nax:
 		Name: Shoe Karn
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~weap.nax, tech.nax, up_shoe.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_shoekarnandking
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_shoe.description
 	Mobile:
@@ -1093,7 +1093,7 @@ shoe.nax:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 2
-		InitialUnits: rifle.nax,rifle.nax
+		InitialUnits: naxis_naxiriflesoldier,naxis_naxiriflesoldier
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -1109,9 +1109,9 @@ shoe.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-nokana.nax:
+naxis_nokana:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1129,7 +1129,7 @@ nokana.nax:
 	Buildable:
 		BuildPaletteOrder: 80
 		BuildLimit: 1
-		Prerequisites: ~weap.nax, tech.nax, up_nokana.nax
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_bossestanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_nokana.description
 	Mobile:
@@ -1183,9 +1183,9 @@ nokana.nax:
 	Passenger:
 		Weight: 5
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_wunderwaffe, naxis_upgrade_massopticsintegration
 
-zombietank.nax:
+naxis_oldtank:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1201,10 +1201,10 @@ zombietank.nax:
 	Tooltip:
 		Name: Old Tank
 	UpdatesPlayerStatistics:
-		OverrideActor: zombietank.nax
+		OverrideActor: naxis_oldtank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:
@@ -1250,14 +1250,14 @@ zombietank.nax:
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128
-		Class: zombietank.nax
+		Class: naxis_oldtank
 	Voiced:
 		VoiceSet: NaxiZombieTank
 	RenderSprites:
-		Image: zombietank.nax
+		Image: naxis_oldtank
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 	#RenderVoxels:
 	#	Image: ra2_allies_battlefortress
 
@@ -1278,7 +1278,7 @@ assault.nax:
 		Name: Imperial Assault Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~disabled, ~up_kingtiger.nax
+		Prerequisites: ~naxis_warfactory, ~disabled, ~naxis_promotion_generationiitanks
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -1329,9 +1329,9 @@ assault.nax:
 	FirepowerMultiplier@tiger.nax:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
-imperial.nax:
+naxis_imperialturbotank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1347,7 +1347,7 @@ imperial.nax:
 		Name: Imperial Turbo Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, !disabled
+		Prerequisites: ~naxis_warfactory, naxis_radar, !disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -1392,7 +1392,7 @@ imperial.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
 
 #		Support Tanks
 
@@ -1412,7 +1412,7 @@ panzer.nax:
 		Name: Panzer III
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap.nax, ~disabled
+		Prerequisites: ~naxis_warfactory, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -1459,7 +1459,7 @@ panzer.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
 car.nax:
 	Inherits: ^Tank
@@ -1477,7 +1477,7 @@ car.nax:
 		Name: Combat Car
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~disabled
+		Prerequisites: ~naxis_warfactory, naxis_radar, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -1523,7 +1523,7 @@ car.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_massopticsintegration
 
 ####################################################################################################
 #		Naxis Ships

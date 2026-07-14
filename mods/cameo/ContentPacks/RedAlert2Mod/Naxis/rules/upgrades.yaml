@@ -6,9 +6,9 @@ conyard_infiltrated.nax:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: conyard.nax
+		Prerequisite: naxis_constructionyard
 	RenderSprites:
-		Image: conyard.nax
+		Image: naxis_constructionyard
 
 up_resurrection.nax:
 	Inherits: ^researched_upgrade.template
@@ -20,19 +20,19 @@ up_resurrection.nax:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
-		Prerequisites: ~tech.nax, ~disabled
+		Prerequisites: ~naxis_techcenter, ~disabled
 	RenderSprites:
 		Image: undead.nax
 
-up_me262.nax:
+naxis_upgrade_unlockme262:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Me 262
 	Buildable:
 		Description: Upgrades the BF 109 to the Me 262
-		Prerequisites: ~radar.nax, !up_me262.nax
+		Prerequisites: ~naxis_radar, !naxis_upgrade_unlockme262
 	RenderSprites:
-		Image: me262.nax
+		Image: naxis_me262
 
 miniv2.nax:
 	Inherits: ^ShootableMissile
@@ -63,7 +63,7 @@ miniv2.nax:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax
+		Upgrades: naxis_upgrade_wunderwaffe
 
 sarubia_bomb.nax:
 	Inherits: ^ShootableMissile
@@ -88,13 +88,13 @@ sarubia_bomb.nax:
 		DetonateClasses: mine
 		BlockFriendly: true
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax
+		Upgrades: naxis_upgrade_wunderwaffe
 
 ####################################################################################################
 #		Upgrades Naxis (moved from FutureTech content pack — implementations already live here)
 ####################################################################################################
 
-up_ostfrontexperience.nax:
+naxis_upgrade_ostfrontexperience:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ostfront Experience
@@ -104,12 +104,12 @@ up_ostfrontexperience.nax:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Infantry gets 15% to range, damage and armor
-		Prerequisites: ~radar.nax, !up_ostfrontexperience.nax
+		Prerequisites: ~naxis_radar, !naxis_upgrade_ostfrontexperience
 	RenderSprites:
 		Image: ostfrontexperienceicon
 	ProvidesPrerequisite:
 
-up_atlantikwall.nax:
+naxis_upgrade_atlantikwall:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Atlantikwall
@@ -119,12 +119,12 @@ up_atlantikwall.nax:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Defenses get 20% armor and automatic repair.
-		Prerequisites: ~radar.nax, !up_atlantikwall.nax
+		Prerequisites: ~naxis_radar, !naxis_upgrade_atlantikwall
 	RenderSprites:
 		Image: atlantikwallicon
 	ProvidesPrerequisite:
 
-up_tankarsenalrenovation.nax:
+naxis_upgrade_tankarsenalrenovation:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tank Arsenal Renovation
@@ -134,12 +134,12 @@ up_tankarsenalrenovation.nax:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
-		Prerequisites: ~tech.nax, !up_tankarsenalrenovation.nax
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_tankarsenalrenovation
 	RenderSprites:
 		Image: tankarsenalrenovationicon
 	ProvidesPrerequisite:
 
-up_massopticsintegration.nax:
+naxis_upgrade_massopticsintegration:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mass Optics Integration
@@ -149,12 +149,12 @@ up_massopticsintegration.nax:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
-		Prerequisites: ~tech.nax, !up_massopticsintegration.nax
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_massopticsintegration
 	RenderSprites:
 		Image: massopticsintegrationicon
 	ProvidesPrerequisite:
 
-up_wunderwaffe.nax:
+naxis_upgrade_wunderwaffe:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Wunderwaffe
@@ -164,12 +164,12 @@ up_wunderwaffe.nax:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: High Tier vehicles get 20% to attack speed, damage and armor
-		Prerequisites: ~tech.nax, !up_wunderwaffe.nax
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_wunderwaffe
 	RenderSprites:
 		Image: wunderwaffeicon
 	ProvidesPrerequisite:
 
-up_blitzkrieg.nax:
+naxis_upgrade_blitzkrieg:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Blitzkrieg
@@ -179,7 +179,7 @@ up_blitzkrieg.nax:
 		BuildPaletteOrder: 130
 		Queue: Research
 		Description: Blitzkrieg doctrine: all allied vehicles move 25% faster.
-		Prerequisites: ~tech.nax, !up_blitzkrieg.nax
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_blitzkrieg
 	RenderSprites:
 		Image: blitzkriegicon
 	# ProvidesPrerequisite:
@@ -189,7 +189,7 @@ up_blitzkrieg.nax:
 up_team_blitzkrieg.nax:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_blitzkrieg.nax
+		Prerequisite: naxis_upgrade_blitzkrieg
 	RenderSprites:
 		Image: blitzkriegicon
 	Tooltip:
@@ -198,7 +198,7 @@ up_team_blitzkrieg.nax:
 		Description: Increase all vehicles movement speed by 25%
 	PlayerDisplayUpgrade:
 
-up_nax_horten.nax:
+naxis_promotion_hortenbomberstrike:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Horten Bomber Strike
@@ -206,12 +206,12 @@ up_nax_horten.nax:
 		BuildPaletteOrder: 118
 		Queue: Promotions
 		Description: Upgrades Horten Bombers from 3 to 5 Planes.
-		Prerequisites: ~conyard.nax, up_shrek.nax, !up_nax_horten.nax, rank1
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_shrek, !naxis_promotion_hortenbomberstrike, rank1
 	RenderSprites:
 		Image: nax_horten
 	ProvidesPrerequisite:
 
-up_nax_horten2.nax:
+naxis_promotion_hortenbomberstrike_2:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Horten Bomber Strike
@@ -219,7 +219,7 @@ up_nax_horten2.nax:
 		BuildPaletteOrder: 121
 		Queue: Promotions
 		Description: Upgrades Horten Bombers from 5 to 7 Planes.
-		Prerequisites: ~conyard.nax, up_nax_horten.nax, !up_nax_horten2.nax, rank1
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_hortenbomberstrike, !naxis_promotion_hortenbomberstrike_2, rank1
 	RenderSprites:
 		Image: nax_horten
 	ProvidesPrerequisite:

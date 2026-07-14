@@ -214,7 +214,7 @@ drone_husk.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-bf109.nax:
+naxis_bf109:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -228,7 +228,7 @@ bf109.nax:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax, radar.nax, ~!up_me262.nax
+		Prerequisites: ~naxis_airfield, naxis_radar, ~!naxis_upgrade_unlockme262
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -277,7 +277,7 @@ bf109.nax:
 	SpawnActorOnDeath:
 		Actor: me262_husk.nax
 	RenderSprites:
-		Image: bf109.nax
+		Image: naxis_bf109
 		PlayerPalette: playerra2
 
 bf109_husk.nax:
@@ -296,11 +296,11 @@ bf109_husk.nax:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: bf109.nax
+		Image: naxis_bf109
 	RenderSprites:
 		PlayerPalette: playerra2
 
-me262.nax:
+naxis_me262:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -314,7 +314,7 @@ me262.nax:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax, ~up_me262.nax
+		Prerequisites: ~naxis_airfield, ~naxis_upgrade_unlockme262
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -385,7 +385,7 @@ me262.nax:
 	SpawnActorOnDeath:
 		Actor: me262_husk.nax
 	RenderSprites:
-		Image: me262.nax
+		Image: naxis_me262
 		PlayerPalette: playerra2
 
 me262_husk.nax:
@@ -404,11 +404,11 @@ me262_husk.nax:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: me262.nax
+		Image: naxis_me262
 	RenderSprites:
 		PlayerPalette: playerra2
 
-zep.nax:
+naxis_transportzeppelin:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -421,10 +421,10 @@ zep.nax:
 		Name: Transport Zeppelin
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: zep.nax
+		OverrideActor: naxis_transportzeppelin
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap.nax, radar.nax
+		Prerequisites: ~naxis_warfactory, naxis_radar
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor_shad.description
 	Aircraft:
@@ -468,7 +468,7 @@ zep.nax:
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: rifle.nax, rifle.nax, rifle.nax, rifle.nax, rifle.nax, rifle.nax, panzer.nax, panzer.nax, panzer.nax, panzer.nax
+		InitialUnits: naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, panzer.nax, panzer.nax, panzer.nax, panzer.nax
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 12
 		AfterLoadDelay: 0
@@ -484,7 +484,7 @@ zep.nax:
 		Class: ra2_allies_nighthawk
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: zep.nax
+		Image: naxis_transportzeppelin
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiAircraftVoice
@@ -507,7 +507,7 @@ zep_husk.nax:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: zep.nax
+		Image: naxis_transportzeppelin
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false

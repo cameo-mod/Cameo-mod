@@ -2866,7 +2866,7 @@
 			ra1_allies_bastionartillerybunker: garrisoned
 			ra2_allies_pillbox: garrisoned
 			ra2_soviets_battlebunker: garrisoned
-			bunk.nax: garrisoned
+			naxis_naxibunker: garrisoned
 			terran_bunker: garrisoned
 			cgpile.latin: biggarrisoned
 			cgup.latin: biggarrisoned
@@ -2879,8 +2879,8 @@
 			cartel.latin: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
 			scrapcar2_driveby.latin: battlefortresspassenger
-			zombietank.nax: battlefortresspassenger
-			shoe.nax: battlefortresspassenger
+			naxis_oldtank: battlefortresspassenger
+			naxis_shoekarn: battlefortresspassenger
 			steel_consortium_poseidontank: battlefortresspassenger
 			terran_pythean: battlefortresspassenger
 			zerg_behemoth: battlefortresspassenger
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,cgair.latin,naxis_airfield,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:

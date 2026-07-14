@@ -535,7 +535,7 @@
 
 ^NaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: rifle.nax, rifle.nax, rifle.nax, tcons.nax, cons.nax, cons.nax, cons.nax
+		ActorTypes: naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_panzerfausttrooper, naxis_naxiriflerecruit, naxis_naxiriflerecruit, naxis_naxiriflerecruit
 		RequiresCondition: !in_water
 ^SpaceNaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
@@ -564,118 +564,118 @@
 		Actor: corpse_big.nax
 
 ^OstfrontExperience:
-	DamageMultiplier@up_ostfrontexperience.nax:
-		RequiresCondition: up_ostfrontexperience.nax
+	DamageMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
 		Modifier: 85
-	FirepowerMultiplier@up_ostfrontexperience.nax:
-		RequiresCondition: up_ostfrontexperience.nax
+	FirepowerMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
 		Modifier: 115
-	SpeedMultiplier@up_ostfrontexperience.nax:
-		RequiresCondition: up_ostfrontexperience.nax
+	SpeedMultiplier@naxis_upgrade_ostfrontexperience:
+		RequiresCondition: naxis_upgrade_ostfrontexperience
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_ostfrontexperience.nax:
-		Condition: up_ostfrontexperience.nax
-		Prerequisites: up_ostfrontexperience.nax
-	FirepowerMultiplier@beer.nax:
-		RequiresCondition: beer.nax
+	GrantConditionOnPrerequisite@naxis_upgrade_ostfrontexperience:
+		Condition: naxis_upgrade_ostfrontexperience
+		Prerequisites: naxis_upgrade_ostfrontexperience
+	FirepowerMultiplier@naxis_beerfactory:
+		RequiresCondition: naxis_beerfactory
 		Modifier: 125
-	GrantConditionOnPrerequisite@beer.nax:
-		Condition: beer.nax
-		Prerequisites: beer.nax
-	DamageMultiplier@sausage.nax:
-		RequiresCondition: sausage.nax
+	GrantConditionOnPrerequisite@naxis_beerfactory:
+		Condition: naxis_beerfactory
+		Prerequisites: naxis_beerfactory
+	DamageMultiplier@naxis_sausagefactory:
+		RequiresCondition: naxis_sausagefactory
 		Modifier: 80
-	GrantConditionOnPrerequisite@sausage.nax:
-		Condition: sausage.nax
-		Prerequisites: sausage.nax
+	GrantConditionOnPrerequisite@naxis_sausagefactory:
+		Condition: naxis_sausagefactory
+		Prerequisites: naxis_sausagefactory
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.nax
+		Upgrades: naxis_upgrade_ostfrontexperience
 
 ^Atlantikwall:
-	DamageMultiplier@up_atlantikwall.nax:
-		RequiresCondition: up_atlantikwall.nax
+	DamageMultiplier@naxis_upgrade_atlantikwall:
+		RequiresCondition: naxis_upgrade_atlantikwall
 		Modifier: 80
 	ChangesHealth@up_atlantikwall1:
 		PercentageStep: 1
 		Delay: 40
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_atlantikwall.nax
+		RequiresCondition: naxis_upgrade_atlantikwall
 	ChangesHealth@up_atlantikwall2:
 		Step: 50
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_atlantikwall.nax
-	GrantConditionOnPrerequisite@up_atlantikwall.nax:
-		Condition: up_atlantikwall.nax
-		Prerequisites: up_atlantikwall.nax
+		RequiresCondition: naxis_upgrade_atlantikwall
+	GrantConditionOnPrerequisite@naxis_upgrade_atlantikwall:
+		Condition: naxis_upgrade_atlantikwall
+		Prerequisites: naxis_upgrade_atlantikwall
 	ActorStatValues:
-		Upgrades: up_atlantikwall.nax
+		Upgrades: naxis_upgrade_atlantikwall
 
 ^TankArsenalRenovation:
-	DamageMultiplier@up_tankarsenalrenovation.nax:
-		RequiresCondition: up_tankarsenalrenovation.nax
+	DamageMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
 		Modifier: 85
-	FirepowerMultiplier@up_tankarsenalrenovation.nax:
-		RequiresCondition: up_tankarsenalrenovation.nax
+	FirepowerMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
 		Modifier: 115
-	ReloadDelayMultiplier@up_tankarsenalrenovation.nax:
-		RequiresCondition: up_tankarsenalrenovation.nax
+	ReloadDelayMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
 		Modifier: 85
-	SpeedMultiplier@up_tankarsenalrenovation.nax:
-		RequiresCondition: up_tankarsenalrenovation.nax
+	SpeedMultiplier@naxis_upgrade_tankarsenalrenovation:
+		RequiresCondition: naxis_upgrade_tankarsenalrenovation
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_tankarsenalrenovation.nax:
-		Condition: up_tankarsenalrenovation.nax
-		Prerequisites: up_tankarsenalrenovation.nax
+	GrantConditionOnPrerequisite@naxis_upgrade_tankarsenalrenovation:
+		Condition: naxis_upgrade_tankarsenalrenovation
+		Prerequisites: naxis_upgrade_tankarsenalrenovation
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.nax
+		Upgrades: naxis_upgrade_tankarsenalrenovation
 
 ^MassOpticsIntegration:
-	RevealsShroudMultiplier@up_massopticsintegration.nax:
-		RequiresCondition: up_massopticsintegration.nax
+	RevealsShroudMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
 		Modifier: 125
-	DetectCloakedMultiplier@up_massopticsintegration.nax:
-		RequiresCondition: up_massopticsintegration.nax
+	DetectCloakedMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
 		Modifier: 125
-	InaccuracyMultiplier@up_massopticsintegration.nax:
-		RequiresCondition: up_massopticsintegration.nax
+	InaccuracyMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
 		Modifier: 75
-	RangeMultiplier@up_massopticsintegration.nax:
-		RequiresCondition: up_massopticsintegration.nax
+	RangeMultiplier@naxis_upgrade_massopticsintegration:
+		RequiresCondition: naxis_upgrade_massopticsintegration
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_massopticsintegration.nax:
-		Condition: up_massopticsintegration.nax
-		Prerequisites: up_massopticsintegration.nax
+	GrantConditionOnPrerequisite@naxis_upgrade_massopticsintegration:
+		Condition: naxis_upgrade_massopticsintegration
+		Prerequisites: naxis_upgrade_massopticsintegration
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.nax
+		Upgrades: naxis_upgrade_massopticsintegration
 
 ^Wunderwaffe:
-	DamageMultiplier@up_wunderwaffe.nax:
-		RequiresCondition: up_wunderwaffe.nax
+	DamageMultiplier@naxis_upgrade_wunderwaffe:
+		RequiresCondition: naxis_upgrade_wunderwaffe
 		Modifier: 80
 	FirepowerMultiplier@up_wunderwaffee:
-		RequiresCondition: up_wunderwaffe.nax
+		RequiresCondition: naxis_upgrade_wunderwaffe
 		Modifier: 120
-	ReloadDelayMultiplier@up_wunderwaffe.nax:
-		RequiresCondition: up_wunderwaffe.nax
+	ReloadDelayMultiplier@naxis_upgrade_wunderwaffe:
+		RequiresCondition: naxis_upgrade_wunderwaffe
 		Modifier: 80
-	GrantConditionOnPrerequisite@up_wunderwaffe.nax:
-		Condition: up_wunderwaffe.nax
-		Prerequisites: up_wunderwaffe.nax
+	GrantConditionOnPrerequisite@naxis_upgrade_wunderwaffe:
+		Condition: naxis_upgrade_wunderwaffe
+		Prerequisites: naxis_upgrade_wunderwaffe
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.nax
+		Upgrades: naxis_upgrade_wunderwaffe
 
 ^Blitzkrieg:
-	GrantConditionOnPrerequisite@up_blitzkrieg.nax:
-		Condition: up_blitzkrieg.nax
-		Prerequisites: up_blitzkrieg.nax
-	SpeedMultiplier@up_blitzkrieg.nax:
-		RequiresCondition: up_blitzkrieg.nax
+	GrantConditionOnPrerequisite@naxis_upgrade_blitzkrieg:
+		Condition: naxis_upgrade_blitzkrieg
+		Prerequisites: naxis_upgrade_blitzkrieg
+	SpeedMultiplier@naxis_upgrade_blitzkrieg:
+		RequiresCondition: naxis_upgrade_blitzkrieg
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_blitzkrieg.nax
+		Upgrades: naxis_upgrade_blitzkrieg
 
 ##############################################
 #   Red Alert 2 Lunar Naxis Upgrades

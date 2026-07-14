@@ -5832,7 +5832,7 @@ yuri_initiate:
 yrslav:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: yr_slav.shp
+		Filename: naxis_slave_yr_slav.shp
 	idle:
 		Filename: invisibleitem.shp
 	run:
@@ -5868,7 +5868,7 @@ yrslav:
 	cheer:
 		Start: 276
 	icon:
-		Filename: workericon.png
+		Filename: naxis_slave_icon.png
 
 yuri_brute:
 	Inherits: ^RA2BasicInfantry
