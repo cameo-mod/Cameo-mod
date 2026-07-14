@@ -32,7 +32,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 5. **RA2 Allies hero-infantry stack measures 36×** fresh-self power (Assault Squad + Vanguard + Infiltrators + Chromium/Prismatic lines) — worst in game; Yuri 30× behind it.
 6. **ai.yaml: 200 references defined nowhere** — incl. `ra2naclon`, `nax2_chrono` (CABAL refs `tsgtcnstcabalb`/`tsntpulscabal` already removed).
 7. **Stale "BuildingFractions Dune Universe" block** uses pre-ContentPacks names — entire section steers nothing.
-8. **`raider.ordos` not in any AI build list** — the freshly reworked Ordos Raider is never built by bots (also `runner.steel`, `orion.futu`, `yrrobo.futu`, 5 Naxis units).
+8. **`raider.ordos` not in any AI build list** — FIXED: added to Dune Universe `UnitsToBuild` with weight 7 (also `runner.steel`, `orion.futu`, `yrrobo.futu`, 5 Naxis units still pending).
 9. **`ra_doctrine_teslatech` doubles reload (Modifier 200) on 2 actors** — suspected Dark-Armament-class inversion; verify.
 10. **`up_energizedarrows` has ReloadDelayMultiplier 125** on one actor — suspected inversion; verify.
 11. **328 concrete→concrete inherits** — the Slave-Miner bug factory; Phase-1 queue, full grouped list in FINDINGS.
