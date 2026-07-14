@@ -1060,3 +1060,59 @@ cabal_coredefender:
 		MoveSequence: run
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
+
+cabal_ravager:
+	Inherits: ^Walker
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Superheavy
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Ravager
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~cabal_mechfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_cabal_ravager.description
+	Mobile:
+		TurnSpeed: 16
+		Speed: 40
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 140
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalRavagerPlasmaNeutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Voiced:
+		VoiceSet: TSCobra
+	RenderSprites:
+		PlayerPalette: playerra2
