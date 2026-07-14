@@ -63,14 +63,14 @@ cabal_promotion_spidercnc4:
 		Image: cabal_laserspider
 	ProvidesPrerequisite:
 
-cabal_promotion_heavyreaper:
+cabal_promotion_manticore:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Heavy Reaper
 	Buildable:
 		BuildPaletteOrder: 5
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_heavyreaper, cabal_promotion_spidercnc4, rank1
+		Prerequisites: !cabal_promotion_manticore, cabal_promotion_spidercnc4, rank1
 		Description: actor_cabal_promotion_heavyreaper.description
 	RenderSprites:
 		Image: cabal_cyborgreaper
@@ -83,7 +83,7 @@ cabal_promotion_widow:
 	Buildable:
 		BuildPaletteOrder: 8
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_widow, cabal_promotion_heavyreaper, rank1
+		Prerequisites: !cabal_promotion_widow, cabal_promotion_manticore, rank1
 		Description: actor_cabal_promotion_widow.description
 	RenderSprites:
 		Image: cabal_manticore

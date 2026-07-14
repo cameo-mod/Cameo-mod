@@ -3,7 +3,7 @@ cabal_cyborginfantry:
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
-		Filename: altcyborg.shp
+		Filename: cabal_cyborginfantry_altcyborg.shp
 	stand:
 		Facings: 8
 		ShadowStart: 370
@@ -48,7 +48,7 @@ cabal_devout:
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
-		Filename: cabal_devout.shp
+		Filename: cabal_promotion_devout_cabal_devout.shp
 		Scale: 1
 	stand:
 		Start: 0
@@ -110,7 +110,7 @@ cabal_devout:
 		ShadowStart: 468
 		ZOffset: -511
 	icon:
-		Filename: cabal_devout_icon.png
+		Filename: cabal_promotion_devout_icon.png
 
 cabal_ascended:
 	Inherits: ^TSBasicInfantry
@@ -295,7 +295,7 @@ cabal_hackercyborg:
 		ShadowStart: 504
 		ZOffset: -511
 	icon:
-		Filename: cabalhackericon.png
+		Filename: cabal_hackercyborg_icon.png
 
 tscabalengi:
 	Inherits: ^TSBasicInfantry
@@ -365,7 +365,7 @@ tscabalengi:
 		ShadowStart: 484
 		ZOffset: -511
 	icon:
-		Filename: cabalhackericon.png
+		Filename: cabal_hackercyborg_icon.png
 
 cabal_cyborgcommando:
 	Inherits: ^TSBasicInfantry
@@ -566,22 +566,22 @@ cabal_tiberiumharvester:
 
 cabal_laserspider:
 	idle:
-		Filename: cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
 		Facings: 64
 		Start: 64
 		Scale: 1
 	icon:
-		Filename: cabal_laserspider_icon.png
+		Filename: cabal_promotion_spidercnc4_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
 		Facings: 64
 		Start: 64
 		Scale: 1
 	walk:
-		Filename: cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
 		Length: 8
 		Facings: 8
 		Tick: 60
@@ -668,31 +668,31 @@ cabal_ravager:
 
 cabal_manticore:
 	idle:
-		Filename: cabal_manticore.shp
+		Filename: cabal_avatar_cabal_manticore.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	icon:
-		Filename: cabal_manticore_icon.png
+		Filename: cabal_avatar_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_manticore.shp
+		Filename: cabal_avatar_cabal_manticore.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	walk:
-		Filename: cabal_manticore.shp
+		Filename: cabal_avatar_cabal_manticore.shp
 		Length: 21
 		Facings: -8
 		Tick: 60
 		Scale: 1
 		ShadowStart: 344
 	shoot:
-		Filename: cabal_manticore.shp
+		Filename: cabal_avatar_cabal_manticore.shp
 		Facings: -8
 		Start: 168
 		Length: 21
@@ -1661,7 +1661,7 @@ cabal_refinery:
 tsgtsilo.cabal:
 	Inherits: tsgtsilo.gdi
 	icon:
-		Filename: cabal_silo_icon.png
+		Filename: cabal_missilesilo_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -1746,7 +1746,7 @@ cabal_orb_drone:
 		Facings: 64
 		Length: 1
 	icon:
-		Filename: cabal_wasp_icon.png
+		Filename: cabal_wasp_striker_icon.png
 
 cabal_cyborg_assassin:
 	Defaults:
@@ -1943,7 +1943,7 @@ cabal_dissolver:
 
 cabal_berserker:
 	Defaults:
-		Filename: cabal_eliminator1000.shp
+		Filename: cabal_berserker_cabal_eliminator1000.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -2031,7 +2031,7 @@ cabal_berserker:
 		Facings: 8
 		Scale: 1.25
 	icon:
-		Filename: cabal_eliminator1000_icon.shp
+		Filename: cabal_berserker_icon.shp
 
 cabal_eliminator800:
 	Inherits: ^RA2ArmedInfantry
@@ -2094,7 +2094,7 @@ cabal_eliminator800:
 
 cabal_upgrade_backupsystems:
 	icon:
-		Filename: cabal_upgrade_backupsystems_icon.png
+		Filename: cabal_upgrade_reclamationprotocols_icon.png
 
 cabal_upgrade_neutronnuclearcatalyst:
 	icon:
@@ -2102,27 +2102,27 @@ cabal_upgrade_neutronnuclearcatalyst:
 
 cabal_upgrade_darkarmament:
 	icon:
-		Filename: cabal_upgrade_darkarmament_icon.png
+		Filename: cabal_upgrade_overchargedservos_icon.png
 
 cabal_upgrade_cyberneticplating:
 	icon:
-		Filename: cabal_upgrade_darkarmament_icon.png
+		Filename: cabal_upgrade_overchargedservos_icon.png
 
 cabal_upgrade_mobilitymatrix:
 	icon:
-		Filename: cabal_upgrade_mobilitymatrix_icon.png
+		Filename: cabal_upgrade_reinforcedchassis_icon.png
 
 cabal_upgrade_handof:
 	icon:
-		Filename: cabal_upgrade_handof_icon.png
+		Filename: cabal_upgrade_neuraluplink_icon.png
 
 cabal_upgrade_radarhack:
 	icon:
-		Filename: cabal_upgrade_radarhack_icon.png
+		Filename: cabal_upgrade_networkedcombatprotocols_icon.png
 
 cabal_upgrade_dataworm:
 	icon:
-		Filename: cabal_upgrade_dataworm_icon.png
+		Filename: cabal_upgrade_fullassimilation_icon.png
 cabal_rockettrail:
 	idle:
 		Filename: cabal_rockettrail.png

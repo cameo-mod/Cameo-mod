@@ -130,7 +130,7 @@ cabal_cyborgreaper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_heavyreaper
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_manticore
 		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
@@ -805,7 +805,7 @@ cabal_heavyreaper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 12
-		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_heavyreaper
+		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_manticore
 		Description: actor_cabal_heavyreaper.description
 	Health:
 		HP: 75000
