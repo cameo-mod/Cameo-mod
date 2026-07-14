@@ -27,7 +27,7 @@ PROC.GDI:
 PYLE:
 	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Inherits@shape: ^2x2Shape
 	Tooltip:
 		Name: GDI Barracks

@@ -1218,7 +1218,7 @@ harv.latin:
 		Palette: ra2effect
 
 ra2dtruck.latin:
-	Inherits: DTRK
+	Inherits: ra1_soviet_nukedemotruck
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@vo: ^AttackFrontalVoice
@@ -1256,7 +1256,7 @@ ra2dtruck.latin:
 #   Pass those units to Syndicate
 
 nuketruk.latin:
-	Inherits: DTRK
+	Inherits: ra1_soviet_nukedemotruck
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

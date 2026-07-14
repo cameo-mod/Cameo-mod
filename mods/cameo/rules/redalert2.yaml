@@ -661,7 +661,7 @@ ra2gapile:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Tooltip:
 		Name: Allied Barracks
 	ProvidesPrerequisite:
@@ -1666,7 +1666,7 @@ ra2nahand:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Selectable:
 		Bounds: 2048, 2560, 0, -256
 	SelectionDecorations:
@@ -2000,7 +2000,7 @@ ra2nairon:
 		Prerequisites: ~ra2nacnst, ra2natech, ~techlevel.superweapons
 		Description: actor_iron.description
 	Tooltip:
-		Name: Iron Curtain
+		Name: ra1_soviet_ironcurtain Curtain
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -2527,7 +2527,7 @@ yryabrck:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	SelectionDecorations:
 	Tooltip:
 		Name: Yuri Barracks
@@ -3280,8 +3280,8 @@ RA2ADOG:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack Dog
-		GenericName: Dog
+		Name: Attack ra1_soviet_attackdog
+		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -4043,8 +4043,8 @@ RA2DOG:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack Dog
-		GenericName: Dog
+		Name: Attack ra1_soviet_attackdog
+		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -4768,7 +4768,7 @@ YRBRUTE:
 	Passenger:
 		Weight: 2
 	-TakeCover:
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	FirepowerMultiplier@ra2_yuri_upgrade_brutestrength:
 		Modifier: 140
@@ -7150,7 +7150,7 @@ ra2dron:
 		EmptyWeapon: RA2UnitExplodeSmall
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	-TemporaryOwnerManager:
 	ActorStatValues:
@@ -8839,7 +8839,7 @@ yrbpln:
 	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
 	Selectable:
 	Tooltip:
-		Name: MiG Bomber
+		Name: ra1_soviet_migattackbomber Bomber
 	Buildable:
 		Description: template_airstrike_slave.description
 	Valued:
@@ -8943,7 +8943,7 @@ yrbpln1:
 	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
 	Selectable:
 	Tooltip:
-		Name: MiG Bomber
+		Name: ra1_soviet_migattackbomber Bomber
 	Valued:
 		Cost: 2000
 	Buildable:
@@ -11857,7 +11857,7 @@ ra2_ctmsc01:
 		Footprint: x
 		Dimensions: 1,1
 	Tooltip:
-		Name: Hot Dog Cart
+		Name: Hot ra1_soviet_attackdog Cart
 	Crushable:
 		CrushClasses: wall
 ra2_ctmsc02:
@@ -12414,7 +12414,7 @@ ra2shad.Husk:
 yrbpln.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: MiG Bomber
+		Name: ra1_soviet_migattackbomber Bomber
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 176
@@ -12690,11 +12690,11 @@ ra2shkhero:
 # upra2mig:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
-# 		Name: Unlock MiG Bomber
+# 		Name: Unlock ra1_soviet_migattackbomber Bomber
 # 	Buildable:
 # 		BuildPaletteOrder: 63
 # 		Queue: Promotions
-# 		Description: Allows construction of the MiG Bomber.
+# 		Description: Allows construction of the ra1_soviet_migattackbomber Bomber.
 # 		Prerequisites: ~ra2nacnst, !upra2mig, rank1
 # 	RenderSprites:
 # 		Image: yrbpln
@@ -12786,8 +12786,8 @@ ra2_soviets_upgrade_infantryconditioning:
 		Prerequisites: ~ra2naradr, !ra2_soviet_doctrine_1
 	RenderSprites:
 		Image: ra2_soviets_upgrade_infantryconditioning
-	ProvidesPrerequisite@ra_upgrade_hazmatsuits:
-		Prerequisite: ra_upgrade_hazmatsuits
+	ProvidesPrerequisite@ra1_soviet_upgrade_hazmatsuits:
+		Prerequisite: ra1_soviet_upgrade_hazmatsuits
 	ProvidesPrerequisite@ra2_soviet_doctrine_1:
 		Prerequisite: ra2_soviet_doctrine_1
 
@@ -15828,7 +15828,7 @@ ra2_tractor_driveby:
 # 	Valued:
 # 		Cost: 3200
 # 	Tooltip:
-# 		Name: Mig
+# 		Name: ra1_soviet_migattackbomber
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -15896,7 +15896,7 @@ ra2_tractor_driveby:
 # ra2mig.husk:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Mig
+# 		Name: ra1_soviet_migattackbomber
 # 	Contrail:
 # 		Offset: -853,0,0
 # 	Aircraft:

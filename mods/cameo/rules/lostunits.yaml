@@ -61,9 +61,9 @@ RNBIKE:
 	-MapEditorData:
 
 RNV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviet_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviet_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
@@ -180,7 +180,7 @@ RNE5:
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
-E3FLAMER:
+ra1_soviet_firerocketsoldier:
 	Inherits: E3
 	Valued:
 		Cost: 400
@@ -1030,9 +1030,9 @@ BHLTNK:
 		Image: rnltnk
 
 BHV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviet_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviet_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 70

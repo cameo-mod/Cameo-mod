@@ -177,7 +177,7 @@ WEAF:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: RAWEAP
+		Image: ra1_soviet_warfactory
 	WithBuildingBib:
 	WithProductionDoorOverlay:
 		RequiresCondition: !build-incomplete
@@ -381,7 +381,7 @@ MSLF:
 		Footprint: xx
 		Dimensions: 2,1
 	RenderSprites:
-		Image: MSLO
+		Image: ra1_soviet_missilesilo
 	Valued:
 		Cost: 250
 	Health:

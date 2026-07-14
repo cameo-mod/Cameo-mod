@@ -93,9 +93,9 @@ MM1RAMCV:
 		Image: mm1ramcv
 
 MM2RAMCV:
-	Inherits@MCV: RAMCV.SOVIET
+	Inherits@MCV: ra1_soviet_mobileconstructionvehicle
 	Transforms:
-		IntoActor: rafact.soviet
+		IntoActor: ra1_soviet_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Soviet)
 	Buildable:

@@ -156,7 +156,7 @@ nodbio.husk:
 	idle: bio
 		Start: 2
 
-e3flamer:
+ra1_soviet_firerocketsoldier:
 	Inherits: e3
 	-icon:
 	icon: te3ficon
@@ -354,7 +354,7 @@ techrctiger:
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
-	turret2: ftrk
+	turret2: ra1_soviet_flaktruck
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -866,16 +866,16 @@ siloworker:
 	icon: swharvicnh.tem
 		AddExtension: False
 furry1:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furry2:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furry3:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furryi:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 
 furryinf:

@@ -783,7 +783,7 @@ SCBARRACKS:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Tooltip:
 		Name: Barracks
 	Power:
@@ -1576,7 +1576,7 @@ SCGATEWAY:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Tooltip:
@@ -2224,7 +2224,7 @@ SCHATCHERY:
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@breedfaster: ^SCBREEDFASTER
-	#Inherits@barr: ^IsBarrack
+	#Inherits@ra1_soviet_barracks: ^IsBarrack
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Hatchery
@@ -4153,7 +4153,7 @@ SCSPIDERMINE:
 		VoiceSet: TerrorDroneVoice
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	GrantConditionOnMovement:
 		Condition: unborrow
@@ -8691,7 +8691,7 @@ upidol:
 
 ^LargeZerg:
 	Inherits: ^BasicZerg
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Mobile:
 		Locomotor: wheeled

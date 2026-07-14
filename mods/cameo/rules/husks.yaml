@@ -176,7 +176,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: 3tnk
+		IntoActor: ra1_soviet_heavytank
 	RenderSprites:
 		Image: 3tnk.destroyed
 
@@ -187,7 +187,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: 4tnk
+		IntoActor: ra1_soviet_mammothtank
 	RenderSprites:
 		Image: 4tnk.destroyed
 
@@ -273,7 +273,7 @@ jsuperbomber.Husk:
 MIG.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: MiG Attack Plane
+		Name: ra1_soviet_migattackbomber Attack Plane
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -290,7 +290,7 @@ MIG.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: mig
+		Image: ra1_soviet_migattackbomber
 		PlayerPalette: raplayer
 
 su57.Husk:
@@ -313,13 +313,13 @@ su57.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: su57
+		Image: ra1_soviet_su57attackbomber
 		PlayerPalette: raplayer
 
 YAK.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Yak Attack Plane
+		Name: ra1_soviet_yakscoutplane Attack Plane
 	Contrail:
 		Offset: -853,0,0
 	Aircraft:
@@ -334,19 +334,19 @@ YAK.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: yak
+		Image: ra1_soviet_yakscoutplane
 		PlayerPalette: raplayer
 
 yaktesla.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: yaktesla
+		Image: ra1_soviet_teslayak
 		PlayerPalette: player_rgba
 
 yakarmored.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: yakarmored
+		Image: ra1_soviet_armoredyak
 		PlayerPalette: player_rgba
 
 modkami.Husk:
@@ -416,7 +416,7 @@ HELI.Husk:
 HIND.Husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: Hind
+		Name: ra1_soviet_hindattackhelicopter
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112
@@ -431,13 +431,13 @@ HIND.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: hind
+		Image: ra1_soviet_hindattackhelicopter
 		PlayerPalette: raplayer
 
 ra_kamov.Husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: Hind
+		Name: ra1_soviet_hindattackhelicopter
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112
@@ -452,7 +452,7 @@ ra_kamov.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra_kamov
+		Image: ra1_soviet_kamovattackhelicopter
 		PlayerPalette: player_rgba
 
 JHIND.Husk:

@@ -9,7 +9,7 @@ ra2hind.latin:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: Hind Transport
+		Name: ra1_soviet_hindattackhelicopter Transport
 	Buildable:
 		BuildPaletteOrder: 97
 		Prerequisites: ~cgair.latin
@@ -73,7 +73,7 @@ ra2hind.latin:
 ra2hind_husk.latin:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: Hind Transport
+		Name: ra1_soviet_hindattackhelicopter Transport
 	Aircraft:
 		TurnSpeed: 17
 		Speed: 85
@@ -201,7 +201,7 @@ mig.latin:
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Selectable:
 	Tooltip:
-		Name: MiG-21
+		Name: ra1_soviet_migattackbomber-21
 	Valued:
 		Cost: 1000
 	Buildable:
@@ -282,7 +282,7 @@ mig.latin:
 mig_husk.latin:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: MiG-21
+		Name: ra1_soviet_migattackbomber-21
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 185

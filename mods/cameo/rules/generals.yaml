@@ -6436,7 +6436,7 @@ chinternetcenter:
 		LoadedCondition: cond_loaded
 	RevealActorsPower@SATHACK:
 		CameraActor: camera.sathack
-		TargetActors: fact.gdi, fact.nod, ra1_allies_alliedconstructionyard, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
+		TargetActors: fact.gdi, fact.nod, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
 		LifeTime: 500
 		OrderName: satellitehack1
 		Icon: sathack1
@@ -8692,7 +8692,7 @@ upneutronshell:
 upmigarmor:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: MiG Armor
+		Name: ra1_soviet_migattackbomber Armor
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -8744,7 +8744,7 @@ upsubliminal:
 upmignuke:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Tactical Nuke MiG
+		Name: Tactical Nuke ra1_soviet_migattackbomber
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -8804,7 +8804,7 @@ CHMIG:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: MiG
+		Name: ra1_soviet_migattackbomber
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -8913,7 +8913,7 @@ CHMIG2:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Tactical Nuke MiG
+		Name: Tactical Nuke ra1_soviet_migattackbomber
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -8995,7 +8995,7 @@ CHMIG2:
 chmig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: MiG
+		Name: ra1_soviet_migattackbomber
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:

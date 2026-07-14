@@ -484,7 +484,7 @@ tkmbarracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TKMSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Tooltip:
 		Name: TKM Barracks
 	ProvidesPrerequisite:
@@ -2514,7 +2514,7 @@ tkmhuey:
 tkmhuey.husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: Hind
+		Name: ra1_soviet_hindattackhelicopter
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112
@@ -2649,7 +2649,7 @@ tkmviper:
 tkmviper.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: TKM Mig
+		Name: TKM ra1_soviet_migattackbomber
 	Contrail:
 		Offset: -853,0,0
 	Aircraft:

@@ -1034,7 +1034,7 @@
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
-# 	Inherits@barr: ^IsBarrack
+# 	Inherits@ra1_soviet_barracks: ^IsBarrack
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^2x2Shape
 # 	Buildable:
@@ -1080,7 +1080,7 @@
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
-# 	Inherits@barr: ^IsBarrack
+# 	Inherits@ra1_soviet_barracks: ^IsBarrack
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^2x2Shape
 # 	Buildable:
@@ -4326,7 +4326,7 @@
 # 	-DamagedByTerrain:
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 	Targetable@dog:
+# 	Targetable@ra1_soviet_attackdog:
 # 		TargetTypes: DogImmune
 # 	ActorStatValues:
 # 		Upgrades: up_toxin.ordos
@@ -4902,7 +4902,7 @@
 # 		PlayerPalette: player_rgba
 # 	Targetable@vehicleexplodedamage:
 # 		TargetTypes: TerrorDrone
-# 	Targetable@dog:
+# 	Targetable@ra1_soviet_attackdog:
 # 		TargetTypes: DogImmune
 # 	-TemporaryOwnerManager:
 # 	ActorStatValues:

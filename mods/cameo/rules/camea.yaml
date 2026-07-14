@@ -333,7 +333,7 @@ RAWEAPA.camea:
 	ProvidesPrerequisite:
 		Prerequisite: vehicleproduction
 	RenderSprites:
-		Image: raweap
+		Image: ra1_soviet_warfactory
 
 HQ.camea:
 	Inherits: HQ
@@ -453,7 +453,7 @@ NUK2.camea:
 		Image: NUK2
 
 stek.camea:
-	Inherits: STEK
+	Inherits: ra1_soviet_techcenter
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
@@ -473,7 +473,7 @@ stek.camea:
 	Power:
 		Amount: -100
 	RenderSprites:
-		Image: STEK
+		Image: ra1_soviet_techcenter
 	ProvidesPrerequisite@ra1_allies_alliedtechcenter:
 		Prerequisite: ra1_allies_alliedtechcenter
 	ProvidesPrerequisite@techcenter:
@@ -566,7 +566,7 @@ SILO.camea:
 		Image: silo
 
 mslo.camea:
-	Inherits: MSLO
+	Inherits: ra1_soviet_missilesilo
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -614,7 +614,7 @@ mslo.camea:
 	Power:
 		Amount: -150
 	RenderSprites:
-		Image: MSLO
+		Image: ra1_soviet_missilesilo
 	ProvidesPrerequisite@buildingname:
 
 PDOX.camea:
@@ -726,13 +726,13 @@ OBLI.camea:
 		Image: OBLI
 
 TSLA.camea:
-	Inherits: TSLA
+	Inherits: ra1_soviet_teslacoil
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: vehicleproduction, ~techlevel.high
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: TSLA
+		Image: ra1_soviet_teslacoil
 
 RAGUN.camea:
 	Inherits: ra1_allies_alliedgunturret
@@ -753,14 +753,14 @@ HBOX.camea:
 		Image: ra1_allies_camopillbox
 
 RASAM.camea:
-	Inherits: RASAM
+	Inherits: ra1_soviet_samsite
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 100
 		Prerequisites: hq.camea, ~techlevel.medium
 		Description: Anti-Air base defense.\nRequires power to operate.\n  Strong vs Aircraft\n  Weak vs Ground units
 	RenderSprites:
-		Image: RASAM
+		Image: ra1_soviet_samsite
 
 GAP.camea:
 	Inherits: ra1_allies_gapgenerator
@@ -832,12 +832,12 @@ E7.camea:
 		Image: ra1_allies_tanya
 
 SHOK.camea:
-	Inherits: SHOK
+	Inherits: ra1_soviet_shocktrooper
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: stek.camea, ~techlevel.high
 	RenderSprites:
-		Image: SHOK
+		Image: ra1_soviet_shocktrooper
 
 E1.para:
 	Inherits: E1
@@ -897,20 +897,20 @@ MTNK.camea:
 		Image: MTNK
 
 3TNK.camea:
-	Inherits: 3TNK
+	Inherits: ra1_soviet_heavytank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: 3TNK
+		Image: ra1_soviet_heavytank
 
 V2RL.camea:
-	Inherits: V2RL
+	Inherits: ra1_soviet_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: hq.camea, ~techlevel.medium
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviet_v2rocketlauncher
 
 FTNK.camea:
 	Inherits: FTNK
@@ -937,12 +937,12 @@ STNK.camea:
 		Image: STNK
 
 TTNK.camea:
-	Inherits: TTNK
+	Inherits: ra1_soviet_teslatank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: hq.camea, ~techlevel.high
 	RenderSprites:
-		Image: TTNK
+		Image: ra1_soviet_teslatank
 
 CTNK.camea:
 	Inherits: ra1_allies_chronotank
@@ -966,12 +966,12 @@ raapc.camea:
 		DeployTicks: 0
 
 DTRK.camea:
-	Inherits: DTRK
+	Inherits: ra1_soviet_nukedemotruck
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: mslo.camea, ~techlevel.high
 	RenderSprites:
-		Image: DTRK
+		Image: ra1_soviet_nukedemotruck
 
 MSAM.camea:
 	Inherits: MSAM
@@ -1006,12 +1006,12 @@ RAHELI.camea:
 		Image: ra1_allies_longbow
 
 HIND.camea:
-	Inherits: HIND
+	Inherits: ra1_soviet_hindattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: HIND
+		Image: ra1_soviet_hindattackhelicopter
 
 ORCA.camea:
 	Inherits: ORCA
@@ -1022,20 +1022,20 @@ ORCA.camea:
 		Image: ORCA
 
 YAK.camea:
-	Inherits: YAK
+	Inherits: ra1_soviet_yakscoutplane
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: YAK
+		Image: ra1_soviet_yakscoutplane
 
 MIG.camea:
-	Inherits: MIG
+	Inherits: ra1_soviet_migattackbomber
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: stek.camea, ~techlevel.high
 	RenderSprites:
-		Image: MIG
+		Image: ra1_soviet_migattackbomber
 
 TRAN.camea:
 	Inherits: TRAN
@@ -1045,7 +1045,7 @@ TRAN.camea:
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, e4, e4, e5, e5, rae4, rae4, shok, shok
+		InitialUnits: e1, e1, e2, e2, e4, e4, e5, e5, ra1_soviet_flamethrower, ra1_soviet_flamethrower, ra1_soviet_shocktrooper, ra1_soviet_shocktrooper
 		LoadedCondition: loaded
 	Armament:
 		Weapon: deploytargeting.5c0

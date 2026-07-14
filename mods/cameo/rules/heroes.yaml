@@ -637,13 +637,13 @@ volkovcc:
 		Queue: Heroes
 		BuildPaletteOrder: 140
 		Prerequisites: ra2naweap, ra2natech, ~techlevel.high, ~anysovietsallra, !1hero
-		Description: Controls and provides Volkov\nBuilding must be sold and rebuilt for another Volkov to appear
+		Description: Controls and provides ra1_soviet_volkov\nBuilding must be sold and rebuilt for another ra1_soviet_volkov to appear
 		IconPalette: ra2
 		BuildLimit: 1
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Volkov Control Center
+		Name: ra1_soviet_volkov Control Center
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -664,30 +664,30 @@ volkovcc:
 	-WithMakeAnimation:
 	-WithDeathAnimation:
 	FreeActor:
-		Actor: VOLKOV
+		Actor: ra1_soviet_volkov
 		RequiresCondition: novolkov
 	CustomSellValue:
 		Value: 100
-	GrantConditionOnPrerequisite@volkov:
-		Prerequisites: !volkov
+	GrantConditionOnPrerequisite@ra1_soviet_volkov:
+		Prerequisites: !ra1_soviet_volkov
 		Condition: novolkov
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 		
-VOLKOV:
+ra1_soviet_volkov:
 	Inherits@HEROES: ^Heroes
 	Inherits: GNRL
 	-Buildable:
 	Tooltip:
-		Name: Volkov
+		Name: ra1_soviet_volkov
 	Armament:
 		Weapon: RA2VolkovGun
 	Health:
 		HP: 500000
 	Armor:
 		Type: Concrete
-	ProvidesPrerequisite@volkov:
-		Prerequisite: volkov
+	ProvidesPrerequisite@ra1_soviet_volkov:
+		Prerequisite: ra1_soviet_volkov
 	Mobile:
 		Speed: 44
 		PauseOnCondition: nocc
@@ -704,7 +704,7 @@ VOLKOV:
 	GrantConditionOnPrerequisite@poweroff:
 		Prerequisites: !volkovcontrol
 		Condition: nocc
-	MobSpawnerMaster@dog:
+	MobSpawnerMaster@ra1_soviet_attackdog:
 		Actors: CHITZKOI
 		Offset: 0,0,0
 		RespawnTicks: 5000

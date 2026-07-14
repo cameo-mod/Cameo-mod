@@ -2190,7 +2190,7 @@
 		Modifier: 85
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra_upgrade_massproduction
+		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@IndustrialPlant:
 		Multiplier: 75
 		Prerequisites: yrngindp
@@ -2482,7 +2482,7 @@
 		RequiresCondition: disabled
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra_upgrade_massproduction
+		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
 		Prerequisites: up_industrial.latin
@@ -2559,7 +2559,7 @@
 
 ^AircraftEjectOnDeath:
 	EjectOnDeath:
-		PilotActor: RARE1
+		PilotActor: ra1_soviet_rifleinfantry
 		SuccessRate: 100
 		EjectOnGround: false
 		EjectInAir: true
@@ -2960,7 +2960,7 @@
 		Prerequisites: upra2deso
 	GrantConditionOnPrerequisite@hazmatsuits:
 		Condition: hazmatsuits
-		Prerequisites: ra_upgrade_hazmatsuits
+		Prerequisites: ra1_soviet_upgrade_hazmatsuits
 	DamagedByTintedCells@rad:
 		Damage: 120
 		DamageInterval: 1
@@ -5551,10 +5551,10 @@
 		Prerequisites: global_conscription_buff
 	# ProvidesPrerequisite@global_conscription_buff:
 	# 	Prerequisite: global_conscription_buff
-	# 	RequiresCondition: ra_doctrine_conscription || ra2_soviets_upgrade_conscription || ra2_yuri_upgrade_psioniclegion
-	# GrantConditionOnPrerequisite@ra_doctrine_conscription:
-	# 	Condition: ra_doctrine_conscription
-	# 	Prerequisites: ra_doctrine_conscription
+	# 	RequiresCondition: ra1_soviet_doctrine_conscriptiondoctrine || ra2_soviets_upgrade_conscription || ra2_yuri_upgrade_psioniclegion
+	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscriptiondoctrine:
+	# 	Condition: ra1_soviet_doctrine_conscriptiondoctrine
+	# 	Prerequisites: ra1_soviet_doctrine_conscriptiondoctrine
 	# GrantConditionOnPrerequisite@ra2_soviets_upgrade_conscription:
 	# 	Condition: ra2_soviets_upgrade_conscription
 	# 	Prerequisites: ra2_soviets_upgrade_conscription
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,ra1_allies_alliedhelipad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7192,7 +7192,7 @@ CPQDEBUGDUMMY:
 ^RASovietSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,rare1,rare1,rare1
+		ActorTypes: rae6,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry
 
 ^AIForceShield:
 	GrantConditionOnDamageState@AIFS:
@@ -7668,17 +7668,17 @@ CPQDEBUGDUMMY:
 	Power:
 		Amount: -10
 	RallyPoint:
-		ForceSetType: Dog
+		ForceSetType: ra1_soviet_attackdog
 	Production@NORMAL:
-		Produces: Infantry, Dog
+		Produces: Infantry, ra1_soviet_attackdog
 		RequiresCondition: !classicproductionqueues
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry, Dog
+		Produces: RAInfantry, ra1_soviet_attackdog
 		RequiresCondition: classicproductionqueues
 	Production:
-		Produces: Dog
+		Produces: ra1_soviet_attackdog
 	ProductionQueue@INFANTRY:
-		Type: Dog
+		Type: ra1_soviet_attackdog
 		DisplayOrder: 2
 		Group: Infantry
 		LowPowerModifier: 300
@@ -7693,27 +7693,27 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,1
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 3
 	Exit@1:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: 0,1
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 2
 	Exit@2:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,0
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 2
 	CommandBarBlacklist:
 		DisableStop: false
 	ProductionBar@INFANTRY:
-		ProductionType: Dog
+		ProductionType: ra1_soviet_attackdog
 		RequiresCondition: !classicproductionqueues
 	ProductionBar@RAINFANTRY:
-		ProductionType: Dog
+		ProductionType: ra1_soviet_attackdog
 		RequiresCondition: classicproductionqueues
 
 ^IsWeaponFactory:
@@ -8819,7 +8819,7 @@ CPQDEBUGDUMMY:
 		# PassengerConditions:
 			# e1: ifv-mg
 			# rae1: ifv-mg
-			# rare1: ifv-mg
+			# ra1_soviet_rifleinfantry: ifv-mg
 			# ra2e1: ifv-mg
 			# ra2e2: ifv-mg
 			# gren.asian: ifv-mg
@@ -8845,7 +8845,7 @@ CPQDEBUGDUMMY:
 			# sgldemorebel: ifv-mg
 			# japrif.asian: ifv-mg
 			# e2: ifv-cannon
-			# rae2: ifv-cannon
+			# ra1_soviet_grenadier: ifv-cannon
 			# ts_gdi_discthrower: ifv-cannon
 			# tse2para: ifv-cannon
 			# forgotten_mutantsergeant: ifv-cannon
@@ -8873,7 +8873,7 @@ CPQDEBUGDUMMY:
 			# leanglotus: ifv-repair
 			# e3: ifv-miss
 			# rae3: ifv-miss
-			# rare3: ifv-miss
+			# ra1_soviet_rocketsoldier: ifv-miss
 			# yrggi: ifv-miss
 			# tkiller.asian: ifv-miss
 			# tse3: ifv-miss
@@ -8886,10 +8886,10 @@ CPQDEBUGDUMMY:
 			# sglrpgtrooper_toxin: ifv-miss
 			# leange3: ifv-miss
 			# ra2flakt: ifv-flak
-			# shok: ifv-tesla
+			# ra1_soviet_shocktrooper: ifv-tesla
 			# ra2shk: ifv-tesla
 			# e4: ifv-fire
-			# rae4: ifv-fire
+			# ra1_soviet_flamethrower: ifv-fire
 			# raje4: ifv-fire
 			# yrinit: ifv-fire
 			# flam.asian: ifv-fire
@@ -9233,7 +9233,7 @@ CPQDEBUGDUMMY:
 			gdihavoc: hero
 			nodlasercommando: hero
 			ra1_allies_tanya: hero
-			volkov: hero
+			ra1_soviet_volkov: hero
 			hakurei: hero
 			ra2tany: hero
 			yrboris: hero

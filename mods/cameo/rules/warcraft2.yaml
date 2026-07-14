@@ -997,7 +997,7 @@ Player:
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Buildable:
 		BuildPaletteOrder: 12
 	Building:
@@ -1182,7 +1182,7 @@ Player:
 	ProvidesPrerequisite@buildingname:
 
 ^wc2_temple:
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
@@ -3047,7 +3047,7 @@ wc2_human_militia2:
 	Armament:
 		Weapon: wc2footmanslice
 		FireDelay: 5
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voicehumanpeasant
@@ -3093,7 +3093,7 @@ wc2_human_footman:
 	Armament:
 		Weapon: wc2footmanslice
 		FireDelay: 5
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voicehumanfootman
@@ -3136,7 +3136,7 @@ wc2_human_footman2:
 	Armament:
 		Weapon: wc2footmanslice2
 		FireDelay: 5
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voicehumanfootman2
@@ -3779,7 +3779,7 @@ wc2_human_mortarteam2:
 		RevokeDelay: 25
 	Mobile:
 		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voicehumanfootman
@@ -5526,7 +5526,7 @@ wc2_orc_grunt:
 	Armament:
 		Weapon: wc2gruntslice
 		FireDelay: 5
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voiceorcpeongrunt
@@ -5569,7 +5569,7 @@ wc2_orc_grunt2:
 	Armament:
 		Weapon: wc2gruntslice2
 		FireDelay: 5
-	Targetable@dog:
+	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	Voiced:
 		VoiceSet: wc2voiceorcpeongrunt

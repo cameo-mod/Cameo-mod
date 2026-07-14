@@ -1385,7 +1385,7 @@ Player:
 		IconPalette: ra2
 		ChargeInterval: 6000
 		Name: Napalm Strike
-		Description: Calls Iron Dragon Squadron to bombard an area with Napalm rockets
+		Description: Calls ra1_soviet_ironcurtain Dragon Squadron to bombard an area with Napalm rockets
 		SelectTargetSpeechNotification: SelectTarget
 		CameraActor: camera
 		CameraRemoveDelay: 150
@@ -12747,7 +12747,7 @@ upschnapalmstrike:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
-		Description: Calls squadron of Iron Dragons to bombard an area with napalm rockets
+		Description: Calls squadron of ra1_soviet_ironcurtain Dragons to bombard an area with napalm rockets
 		Prerequisites: !upschnapalmstrike, ~techlevel.high, ~schina_regular, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
@@ -13212,7 +13212,7 @@ schempmig:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: EMP MiG
+		Name: EMP ra1_soviet_migattackbomber
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -13288,7 +13288,7 @@ schempmig:
 schempmig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: EMP MiG
+		Name: EMP ra1_soviet_migattackbomber
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -13415,11 +13415,11 @@ schtiger.husk:
 upschmigspeed:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: MiG Afterburner
+		Name: ra1_soviet_migattackbomber Afterburner
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Aircraft, RAAircraft
-		Description: MiG fighters gain more fuel efficient engines gaining up to 25% movement speed
+		Description: ra1_soviet_migattackbomber fighters gain more fuel efficient engines gaining up to 25% movement speed
 		Prerequisites: ~!upschmigspeed, ~schina_regular
 		IconPalette: ra2
 	Valued:
@@ -15914,7 +15914,7 @@ schnuclearmig:
 	Valued:
 		Cost: 1400
 	Tooltip:
-		Name: Nuclear MiG
+		Name: Nuclear ra1_soviet_migattackbomber
 	RenderSprites:
 		Image: chmig
 	Armament@1:
@@ -16054,7 +16054,7 @@ schleangtransporthelix:
 		Image: schtransporthelix
 
 CHE4:
-	Inherits: RAE4
+	Inherits: ra1_soviet_flamethrower
 	Inherits@horde: ^HordeBonus
 	Inherits@RadiationSuits: ^RadiationSuits
 	Buildable:

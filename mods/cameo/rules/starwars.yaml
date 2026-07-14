@@ -2884,7 +2884,7 @@ swpyleh:
 	Selectable:
 		Bounds: 2048, 1792, 0, -213
 	RenderSprites:
-		Image: barr
+		Image: ra1_soviet_barracks
 
 swnurseh:
 	Inherits: swnurse
@@ -7423,7 +7423,7 @@ swquad:
 		Name: TB2 Light Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviet_flaktruck
 	Health:
 		HP: 25000
 	Armor:
@@ -7452,7 +7452,7 @@ swquad:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviet_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: RussianVehicleVoice

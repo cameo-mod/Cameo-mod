@@ -836,7 +836,7 @@ Player:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@AP: ^2100BuildingArmorUpgrades
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
@@ -7630,7 +7630,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: 2100ChopShopAdv
 		BuildPaletteOrder: 120
-		Description: Transports tins of dog food to other players.\n Armed with self-defense cannon
+		Description: Transports tins of ra1_soviet_attackdog food to other players.\n Armed with self-defense cannon
 	Turreted:
 		TurnSpeed: 32
 		Offset: -10,0,150
