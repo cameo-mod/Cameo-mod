@@ -5,7 +5,7 @@ title OpenRA (debug map)
 REM ============================================================================
 REM Launch Cameo straight into a local skirmish on a test map (auto-readies).
 REM
-REM   debug-launch.cmd                -> loads debug.oramap
+REM   debug-launch.cmd                -> loads volcanic_debug.oramap
 REM   debug-launch.cmd mymap.oramap   -> loads the named map
 REM
 REM Why this is more than `Launch.Map=debug.oramap`:
@@ -25,7 +25,7 @@ set MOD_ID=%MOD_ID:"=%
 
 REM --- resolve the test map in the User (SupportDir) map folder ---
 set MAPNAME=%~1
-if "%MAPNAME%"=="" set MAPNAME=debug.oramap
+if "%MAPNAME%"=="" set MAPNAME=volcanic_debug.oramap
 set "MAPPATH=%APPDATA%\OpenRA\maps\cameo\{DEV_VERSION}\%MAPNAME%"
 if not exist "%MAPPATH%" (
 	echo [debug-launch] Map not found: %MAPPATH%
