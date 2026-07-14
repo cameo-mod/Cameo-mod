@@ -12,7 +12,7 @@ from PIL import Image
 
 import generate_sh04_alpha_beach_prototype as shore
 import prototype_donor_recolored_bridge_ground as strategy
-from shptd import write_shptd
+from shptd import read_shptd, write_shptd
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,6 +38,8 @@ def main() -> int:
     lookup, calibration = build_family_lookup(
         temperate_palette, volcanic_palette
     )
+    donor_ground_indices = clear_ground_indices()
+    production_ground = production_ground_frames()
 
     panels = []
     audit = []
@@ -51,38 +53,55 @@ def main() -> int:
         donor_rgb = shore.indices_rgb(donor, temperate_palette)
         donor_rgb[~domain] = shore.BACKGROUND
 
-        indices, mixed_blocks = map_at_24(donor, domain, lookup)
+        old_indices, mixed_blocks, source24 = map_at_24(donor, domain, lookup)
+        indices, ground_pixels = integrate_production_ground(
+            old_indices,
+            source24,
+            domain,
+            spec,
+            donor_ground_indices,
+            production_ground,
+        )
         path = vols / (name + ".vol")
         write_template(path, indices, spec)
 
+        installed = ROOT / "mods/cameo/bits/volcanic" / f"{name}.vol"
+        old_result = read_template(installed, spec)
+        old_rgb = shore.indices_rgb(old_result, volcanic_palette)
+        old_rgb[~domain] = shore.BACKGROUND
         result_rgb = shore.indices_rgb(indices, volcanic_palette)
         result_rgb[~domain] = shore.BACKGROUND
         donor_image = Image.fromarray(donor_rgb, mode="RGB")
+        old_image = Image.fromarray(old_rgb, mode="RGB")
         result_image = Image.fromarray(result_rgb, mode="RGB")
         donor_image.save(out / f"temperate_donor_{name}.png")
+        old_image.save(out / f"installed_road_{name}.png")
         result_image.save(out / f"volcanic_road_candidate_{name}.png")
         panels.extend((
             (f"{name}: RA Temperate donor", donor_image),
-            (f"{name}: Volcanic global LUT", result_image),
+            (f"{name}: installed global LUT", old_image),
+            (f"{name}: production-ground integration", result_image),
         ))
         audit.append({
             "template": name,
             "size": [spec.columns, spec.rows],
             "source_mixed_2x_blocks": mixed_blocks,
+            "donor_ground_pixels_replaced": ground_pixels,
             "strict_2x_cadence": cadence_errors(indices) == 0,
             "candidate_vol": str(path.resolve()),
         })
 
     for start in range(0, len(ROADS), args.page_size):
         names = ROADS[start:start + args.page_size]
-        page = panels[start * 2:(start + len(names)) * 2]
+        page = panels[start * 3:(start + len(names)) * 3]
         path = out / f"volcanic_roads_review_{names[0]}_{names[-1]}.png"
-        shore.write_review_sheet(path, page, columns=2, scale=2)
+        shore.write_review_sheet(path, page, columns=3, scale=2)
         print(path.resolve())
 
     (out / "volcanic_roads_audit.json").write_text(
         json.dumps({
             "method": "one-family-global-palette-lut",
+            "ground_integration": "exact RA Temperate clear1 palette-index membership replaced by installed Volcanic clear1 frames",
             "tile_specific_normalization": False,
             "yaml_pixel_recoloring": False,
             "local_shadow_detection": False,
@@ -199,7 +218,62 @@ def map_at_24(donor, domain, lookup):
             ).argmax()
     indices = np.repeat(np.repeat(lookup[source24], 2, axis=0), 2, axis=1)
     indices[~domain] = 0
-    return indices, mixed
+    return indices, mixed, source24
+
+
+def clear_ground_indices():
+    _, _, frames = read_shptd(ROOT / "mods/cameo/bits/temp/clear1.tem")
+    return np.unique(np.concatenate([
+        np.frombuffer(frame, dtype=np.uint8) for frame in frames
+    ]))
+
+
+def production_ground_frames():
+    width, height, frames = read_shptd(
+        ROOT / "mods/cameo/bits/volcanic/clear1.vol"
+    )
+    if (width, height, len(frames)) != (48, 48, 16):
+        raise ValueError("production clear1.vol must contain sixteen 48x48 frames")
+    return [
+        np.frombuffer(frame, dtype=np.uint8).reshape(48, 48)
+        for frame in frames
+    ]
+
+
+def integrate_production_ground(
+    mapped, source24, domain, spec, donor_ground_indices, ground_frames
+):
+    result = mapped.copy()
+    ground = np.zeros_like(mapped)
+    for index in range(spec.columns * spec.rows):
+        row, column = divmod(index, spec.columns)
+        frame = ground_frames[(index * 7 + spec.columns * 3 + spec.rows) % len(ground_frames)]
+        ground[
+            row * 48:(row + 1) * 48,
+            column * 48:(column + 1) * 48,
+        ] = frame
+
+    ground24 = np.isin(source24, donor_ground_indices)
+    ground_mask = np.repeat(np.repeat(ground24, 2, axis=0), 2, axis=1) & domain
+    result[ground_mask] = ground[ground_mask]
+    result[~domain] = 0
+    return result, int(ground_mask.sum())
+
+
+def read_template(path, spec):
+    width, height, frames = read_shptd(path)
+    if (width, height) != (48, 48):
+        raise ValueError(f"unexpected road frame size in {path}")
+    result = np.zeros((spec.rows * 48, spec.columns * 48), dtype=np.uint8)
+    for index in range(spec.columns * spec.rows):
+        if index >= len(frames):
+            continue
+        row, column = divmod(index, spec.columns)
+        result[
+            row * 48:(row + 1) * 48,
+            column * 48:(column + 1) * 48,
+        ] = np.frombuffer(frames[index], dtype=np.uint8).reshape(48, 48)
+    return result
 
 
 def write_template(path, indices, spec):
