@@ -3117,11 +3117,11 @@ mdkchaingun:
 mdkmortar:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Mortar Sniper
+		Name: Mortar ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrade.Kurt
-		Description: Kurt uses Mortar aganist buildings in Sniper Mode
+		Description: Kurt uses Mortar aganist buildings in ra1_allies_alliedsniper Mode
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000
@@ -3132,11 +3132,11 @@ mdkmortar:
 mdkmissile:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Mortar Sniper
+		Name: Mortar ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrade.Kurt
-		Description: Kurt uses Missiles aganist vehicles in Sniper Mode
+		Description: Kurt uses Missiles aganist vehicles in ra1_allies_alliedsniper Mode
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000

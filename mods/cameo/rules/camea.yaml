@@ -474,8 +474,8 @@ stek.camea:
 		Amount: -100
 	RenderSprites:
 		Image: STEK
-	ProvidesPrerequisite@atek:
-		Prerequisite: atek
+	ProvidesPrerequisite@ra1_allies_alliedtechcenter:
+		Prerequisite: ra1_allies_alliedtechcenter
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 	ProvidesPrerequisite@buildingname:
@@ -618,7 +618,7 @@ mslo.camea:
 	ProvidesPrerequisite@buildingname:
 
 PDOX.camea:
-	Inherits: PDOX
+	Inherits: ra1_allies_chronosphere
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 120
@@ -679,7 +679,7 @@ PDOX.camea:
 	Power:
 		Amount: -200
 	RenderSprites:
-		Image: PDOX
+		Image: ra1_allies_chronosphere
 
 HOSP.camea:
 	Inherits: ^BaseBuilding
@@ -735,22 +735,22 @@ TSLA.camea:
 		Image: TSLA
 
 RAGUN.camea:
-	Inherits: RAGUN
+	Inherits: ra1_allies_alliedgunturret
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: barracks, ~techlevel.medium
 	RenderSprites:
-		Image: RAGUN
+		Image: ra1_allies_alliedgunturret
 
 HBOX.camea:
-	Inherits: HBOX
+	Inherits: ra1_allies_camopillbox
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: barracks, ~techlevel.medium
 	RenderSprites:
-		Image: HBOX
+		Image: ra1_allies_camopillbox
 
 RASAM.camea:
 	Inherits: RASAM
@@ -763,14 +763,14 @@ RASAM.camea:
 		Image: RASAM
 
 GAP.camea:
-	Inherits: GAP
+	Inherits: ra1_allies_gapgenerator
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 110
 		Prerequisites: stek.camea, ~techlevel.medium
 		Description: Obscures the enemy's view with shroud.\nRequires power to operate.
 	RenderSprites:
-		Image: GAP
+		Image: ra1_allies_gapgenerator
 
 MAMMOTHBUNKER.camea:
 	Inherits: ^Defense
@@ -824,12 +824,12 @@ MAMMOTHBUNKER.camea:
 ###############################################
 
 E7.camea:
-	Inherits: E7
+	Inherits: ra1_allies_tanya
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: stek.camea, ~techlevel.high
 	RenderSprites:
-		Image: E7
+		Image: ra1_allies_tanya
 
 SHOK.camea:
 	Inherits: SHOK
@@ -857,12 +857,12 @@ RMBO.camea:
 		Image: RMBO
 
 MECH.camea:
-	Inherits: MECH
+	Inherits: ra1_allies_mechanic
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: hq.camea, ~techlevel.medium
 	RenderSprites:
-		Image: MECH
+		Image: ra1_allies_mechanic
 
 JEEP.camea:
 	Inherits: JEEP
@@ -881,12 +881,12 @@ BIKE.camea:
 		Image: BIKE
 
 1TNK.camea:
-	Inherits: 1TNK
+	Inherits: ra1_allies_alliedlighttank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: 1TNK
+		Image: ra1_allies_alliedlighttank
 
 MTNK.camea:
 	Inherits: MTNK
@@ -945,12 +945,12 @@ TTNK.camea:
 		Image: TTNK
 
 CTNK.camea:
-	Inherits: CTNK
+	Inherits: ra1_allies_chronotank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: stek.camea, ~techlevel.high
 	RenderSprites:
-		Image: CTNK
+		Image: ra1_allies_chronotank
 
 raapc.camea:
 	Inherits: RAAPC
@@ -960,7 +960,7 @@ raapc.camea:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks
 	Cargo:
-		InitialUnits: SHOK.camea, SHOK.camea, SHOK.camea, SHOK.camea, medi
+		InitialUnits: SHOK.camea, SHOK.camea, SHOK.camea, SHOK.camea, ra1_allies_medic
 	AutoDeployer:
 		DeployChance: 100
 		DeployTicks: 0
@@ -982,11 +982,11 @@ MSAM.camea:
 		Image: MSAM
 
 RAARTY.camea:
-	Inherits: RAARTY
+	Inherits: ra1_allies_alliedartillery
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: RAARTY
+		Image: ra1_allies_alliedartillery
 
 MSSM.camea:
 	Inherits: MSSM
@@ -998,12 +998,12 @@ MSSM.camea:
 		Image: mlrs
 
 RAHELI.camea:
-	Inherits: RAHELI
+	Inherits: ra1_allies_longbow
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: RAHELI
+		Image: ra1_allies_longbow
 
 HIND.camea:
 	Inherits: HIND

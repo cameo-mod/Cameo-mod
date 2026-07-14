@@ -5198,12 +5198,12 @@ swrmbo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4
@@ -5221,12 +5221,12 @@ swgreedo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament@PRIMARY:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Infiltrates:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
@@ -5725,7 +5725,7 @@ swltnk:
 		BuildPaletteOrder: 20
 		Prerequisites: hpad, anyhq, ~techlevel.medium
 		Queue: Aircraft, RAAircraft
-		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker Mech\n  Weak vs Infantry
+		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker ra1_allies_mechanic\n  Weak vs Infantry
 		BuildDurationModifier: 50
 	Aircraft:
 		CruiseAltitude: 900
@@ -8438,12 +8438,12 @@ swrmbo.hutt:
 		BuildPaletteOrder: 10
 		Prerequisites: ~techlevel.low
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
 		Weapon: SWBikeLaserSalvage
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4

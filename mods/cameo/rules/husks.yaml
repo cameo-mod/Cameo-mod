@@ -154,7 +154,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: 1tnk
+		IntoActor: ra1_allies_alliedlighttank
 	RenderSprites:
 		Image: 1tnk.destroyed
 
@@ -165,7 +165,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: 2tnk
+		IntoActor: ra1_allies_alliedmediumtank
 	RenderSprites:
 		Image: 2tnk.destroyed
 
@@ -515,7 +515,7 @@ MH60.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: MH60
+		Image: ra1_allies_blackhawk
 
 C17.Husk:
 	Inherits: ^PlaneHusk

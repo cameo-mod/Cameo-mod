@@ -33,19 +33,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: allies
-		BaseActor: ramcv.allies
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
 	StartingUnits@defaultallies:
 		Class: light
 		ClassName: Light Support
 		Factions: allies
-		BaseActor: ramcv.allies
-		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank
 	StartingUnits@heavyallies:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: allies
-		BaseActor: ramcv.allies
-		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk,2tnk,2tnk,2tnk
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank
 	StartingUnits@mcvonlyrasoviet:
 		Class: none
 		ClassName: MCV Only
@@ -215,160 +215,160 @@ World:
 ####################################################################################################
 
 ^AdvancedRadarSystems:
-	RevealsShroudMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	RevealsShroudMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 110
-	DetectCloakedMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	DetectCloakedMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 110
-	InaccuracyMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	InaccuracyMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 90
-	RangeMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	RangeMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 110
-	FirepowerMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	FirepowerMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 110
-	ReloadDelayMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	ReloadDelayMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_advancedradarsystems:
-		Condition: up_advancedradarsystems
-		Prerequisites: up_advancedradarsystems
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_advancedradarsystems:
+		Condition: ra1_allies_upgrade_advancedradarsystems
+		Prerequisites: ra1_allies_upgrade_advancedradarsystems
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems
+		Upgrades: ra1_allies_upgrade_advancedradarsystems
 
 ^InfantryArmorPlating:
-	DamageMultiplier@up_infantryarmorplating:
-		RequiresCondition: up_infantryarmorplating
+	DamageMultiplier@ra1_allies_upgrade_infantryarmorplating:
+		RequiresCondition: ra1_allies_upgrade_infantryarmorplating
 		Modifier: 70
-	ReloadDelayMultiplier@up_infantryarmorplating:
-		RequiresCondition: up_infantryarmorplating
+	ReloadDelayMultiplier@ra1_allies_upgrade_infantryarmorplating:
+		RequiresCondition: ra1_allies_upgrade_infantryarmorplating
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_infantryarmorplating:
-		Condition: up_infantryarmorplating
-		Prerequisites: up_infantryarmorplating
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_infantryarmorplating:
+		Condition: ra1_allies_upgrade_infantryarmorplating
+		Prerequisites: ra1_allies_upgrade_infantryarmorplating
 	ActorStatValues:
-		Upgrades: up_infantryarmorplating
+		Upgrades: ra1_allies_upgrade_infantryarmorplating
 
 ^ReinforcedStructures:
-	DamageMultiplier@up_reinforcedstructures:
-		RequiresCondition: up_reinforcedstructures
+	DamageMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		RequiresCondition: ra1_allies_upgrade_reinforcedstructures
 		Modifier: 75
-	ProductionCostMultiplier@up_reinforcedstructures:
-		Prerequisites: up_reinforcedstructures
+	ProductionCostMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
 		Multiplier: 75
-	ProductionTimeMultiplier@up_reinforcedstructures:
-		Prerequisites: up_reinforcedstructures
+	ProductionTimeMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
 		Multiplier: 75
-	GrantConditionOnPrerequisite@up_reinforcedstructures:
-		Condition: up_reinforcedstructures
-		Prerequisites: up_reinforcedstructures
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_reinforcedstructures:
+		Condition: ra1_allies_upgrade_reinforcedstructures
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures
+		Upgrades: ra1_allies_upgrade_reinforcedstructures
 
 ^AirSuperiorityDoctrine:
-	DamageMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	DamageMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 85
-	FirepowerMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	FirepowerMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 115
-	ReloadDelayMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	ReloadDelayMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 85
-	ReloadAmmoDelayMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	ReloadAmmoDelayMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 85
-	SpeedMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	SpeedMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 115
-	RangeMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	RangeMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 115
-	RevealsShroudMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	RevealsShroudMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 115
-	DetectCloakedMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	DetectCloakedMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 115
-	InaccuracyMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	InaccuracyMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 85
-	GrantConditionOnPrerequisite@up_airsuperioritydoctrine:
-		Condition: up_airsuperioritydoctrine
-		Prerequisites: up_airsuperioritydoctrine
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_airsuperioritydoctrine:
+		Condition: ra1_allies_upgrade_airsuperioritydoctrine
+		Prerequisites: ra1_allies_upgrade_airsuperioritydoctrine
 	ActorStatValues:
-		Upgrades: up_airsuperioritydoctrine
+		Upgrades: ra1_allies_upgrade_airsuperioritydoctrine
 
 ^LaserTargetingSystems:
-	FirepowerMultiplier@up_lasertargetingsystems:
-		RequiresCondition: up_lasertargetingsystems
+	FirepowerMultiplier@ra1_allies_upgrade_lasertargetingsystems:
+		RequiresCondition: ra1_allies_upgrade_lasertargetingsystems
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_lasertargetingsystems:
-		Condition: up_lasertargetingsystems
-		Prerequisites: up_lasertargetingsystems
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_lasertargetingsystems:
+		Condition: ra1_allies_upgrade_lasertargetingsystems
+		Prerequisites: ra1_allies_upgrade_lasertargetingsystems
 	ActorStatValues:
-		Upgrades: up_lasertargetingsystems
+		Upgrades: ra1_allies_upgrade_lasertargetingsystems
 
 ^ChronoArmor:
-	WithColoredOverlay@up_chronoarmor:
+	WithColoredOverlay@ra1_allies_upgrade_chronoarmor:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Color: 0000FF44
-	DamageMultiplier@up_chronoarmor:
+	DamageMultiplier@ra1_allies_upgrade_chronoarmor:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 65
-	SpeedMultiplier@up_chronoarmor:
+	SpeedMultiplier@ra1_allies_upgrade_chronoarmor:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 150
-	ReloadDelayMultiplier@up_chronoarmor:
+	ReloadDelayMultiplier@ra1_allies_upgrade_chronoarmor:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 65
-	GrantTimedCondition@up_chronoarmor:
+	GrantTimedCondition@ra1_allies_upgrade_chronoarmor:
 		RequiresCondition: chronoarmordamage
 		PauseOnCondition: !chronoarmordamage
 		Condition: chronoarmordamagecooldown
 		Duration: 12
-	GrantConditionOnDamage@up_chronoarmor:
-		RequiresCondition: up_chronoarmor
+	GrantConditionOnDamage@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: ra1_allies_upgrade_chronoarmor
 		Condition: chronoarmordamage
 		Duration: 24
 		PlayerRelationship: Ally, Neutral, Enemy
-	GrantConditionOnPrerequisite@up_chronoarmor:
-		Condition: up_chronoarmor
-		Prerequisites: up_chronoarmor
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_chronoarmor:
+		Condition: ra1_allies_upgrade_chronoarmor
+		Prerequisites: ra1_allies_upgrade_chronoarmor
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: ra1_allies_upgrade_chronoarmor
 
 ^CryoMissiles:
-	FirepowerMultiplier@up_cryomissiles:
-		RequiresCondition: up_cryomissiles
+	FirepowerMultiplier@ra1_allies_upgrade_cryomissiles:
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 		Modifier: 75
-	GrantConditionOnPrerequisite@up_cryomissiles:
-		Condition: up_cryomissiles
-		Prerequisites: up_cryomissiles
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_cryomissiles:
+		Condition: ra1_allies_upgrade_cryomissiles
+		Prerequisites: ra1_allies_upgrade_cryomissiles
 	ActorStatValues:
-		Upgrades: up_cryomissiles
+		Upgrades: ra1_allies_upgrade_cryomissiles
 
 ^GPSSatelliteSupport:
-	RangeMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
 		Modifier: 110
-	RevealsShroudMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
 		Modifier: 110
-	DetectCloakedMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
 		Modifier: 110
-	InaccuracyMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_gpssatellitesupport:
-		Condition: up_gpssatellitesupport
-		Prerequisites: up_gpssatellitesupport
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
+		Condition: ra1_allies_upgrade_gpssatellitesupport
+		Prerequisites: ra1_allies_upgrade_gpssatellitesupport
 	ActorStatValues:
-		Upgrades: up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_gpssatellitesupport
 
 
 ####################################################################################################
@@ -858,27 +858,27 @@ RAE1:
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
-		Prerequisites: ~tent
+		Prerequisites: ~ra1_allies_alliedbarracks
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: M1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: CryoM1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: CryoM1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
 RARE1:
 	Inherits: ^RAE1
@@ -1276,27 +1276,27 @@ RAE3:
 	Tooltip:
 		Name: Allied Rocket Soldier
 	Buildable:
-		Prerequisites: ~tent
+		Prerequisites: ~ra1_allies_alliedbarracks
 	Armament@PRIMARY: ##########
 		Weapon: RocketsRA
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: RocketsRA
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: RocketsRACryo
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: RocketsRACryo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
 RARE3:
 	Inherits: ^RAE3
@@ -1321,7 +1321,7 @@ ra_dragunov:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
-		Name: Dragunov Anti Material Sniper
+		Name: Dragunov Anti Material ra1_allies_alliedsniper
 	Valued:
 		Cost: 400
 	UpdatesPlayerStatistics:
@@ -1836,7 +1836,7 @@ ra_commissar:
 	ActorStatValues:
 		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
 
-SNIPER:
+ra1_allies_alliedsniper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^SniperInfantryTemplate
@@ -1852,13 +1852,13 @@ SNIPER:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Allied Sniper
+		Name: Allied ra1_allies_alliedsniper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~tent, dome.allies
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedradardome
 		Description: actor_rasniper.description
 	Health:
 		HP: 10000
@@ -1872,21 +1872,21 @@ SNIPER:
 	Armament@PRIMARY:
 		Weapon: LightSniper
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: LightSniper
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: CryoLightSniper
 		LocalOffset: 128,0,256
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: CryoLightSniper
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	Cloak:
@@ -1897,7 +1897,7 @@ SNIPER:
 		DeathSequencePalette: raplayer
 	-MustBeDestroyed:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
 RAE6:
 	Inherits: E6
@@ -1912,7 +1912,7 @@ RAE6:
 	RenderSprites:
 		Image: rae6
 
-E7:
+ra1_allies_tanya:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeroInfantryTemplate
@@ -1928,7 +1928,7 @@ E7:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~tent, atek
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedtechcenter
 		BuildLimit: 1
 		Description: template_commando.description
 	Valued:
@@ -1978,9 +1978,9 @@ E7:
 		VoiceSet: TanyaVoice
 	ProvidesPrerequisite:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
-MEDI:
+ra1_allies_medic:
 	Inherits: ^Soldier
 	Inherits@Template: ^MedicTemplate
 	Inherits@anim: ^TDRAInfantry
@@ -1990,7 +1990,7 @@ MEDI:
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@Heal: ^PrioritizeHeal
 	Buildable:
-		Prerequisites: ~tent
+		Prerequisites: ~ra1_allies_alliedbarracks
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 25
 		Description: actor_medi.description
@@ -2026,11 +2026,11 @@ MEDI:
 		ValidTargets: Infantry
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 
-MECH:
+ra1_allies_mechanic:
 	Inherits: ^Soldier
 	Inherits@Template: ^MechanicTemplate
 	Inherits@anim: ^TDRAInfantry
@@ -2041,7 +2041,7 @@ MECH:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~tent, rafix.allies
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedservicedepot
 		Description: actor_mech.description
 	Valued:
 		Cost: 500
@@ -2091,7 +2091,7 @@ MECH:
 	KeepsDistance:
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
 
 EINSTEIN:
 	Inherits: ^CivInfantry
@@ -2150,7 +2150,7 @@ GNRL:
 	WithInfantryBody:
 		IdleSequences: idle1
 
-RASPY:
+ra1_allies_raspy:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@anim: ^TDRAInfantry
@@ -2162,7 +2162,7 @@ RASPY:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 25
-		Prerequisites: ~tent, dome.allies
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_alliedradardome
 		Description: actor_spy.description
 	Valued:
 		Cost: 500
@@ -2205,7 +2205,7 @@ RASPY:
 	Voiced:
 		VoiceSet: SpyVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_gpssatellitesupport
 	GrantExternalConditionToTransport:
 		Condition: ifv-spy
 
@@ -2519,7 +2519,7 @@ V2RLNUKE:
 	ActorStatValues:
 		Upgrades: ra_doctrine_inferno, ra_doctrine_nuclearwar, ra_upgrade_nuclearrockets, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
 
-1TNK:
+ra1_allies_alliedlighttank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -2533,7 +2533,7 @@ V2RLNUKE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~raweapa, ~!upsheridan
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocksheridan
 		Description: actor_ltnk.description
 	Valued:
 		Cost: 500
@@ -2577,9 +2577,9 @@ V2RLNUKE:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-2TNK:
+ra1_allies_alliedmediumtank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -2591,7 +2591,7 @@ V2RLNUKE:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~raweapa, ~!upalliedtiger
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocktigerheavytank
 		BuildPaletteOrder: 110
 		Description: template_mbt.description
 	Valued:
@@ -2634,7 +2634,7 @@ V2RLNUKE:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 3TNK:
 	Inherits: ^Tank
@@ -3284,7 +3284,7 @@ Kotin:
 	ActorStatValues:
 		Upgrades: ra_promotion_targetingcomputer, ra_upgrade_autoloaders, ra_upgrade_highexplosiverockets, ra_upgrade_nuclearshells, ra_upgrade_stalinium
 
-heavyaatank:
+ra1_allies_alliedheavyaatank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -3299,7 +3299,7 @@ heavyaatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~raweapa, dome.allies
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
 		Description: actor_heavyaatank.description
 	Valued:
 		Cost: 1250
@@ -3331,7 +3331,7 @@ heavyaatank:
 		Recoil: 85
 		LocalOffset: 800,80,360, 800,-80,360
 		MuzzleSequence: muzzle
-	FirepowerMultiplier@heavyaatank:
+	FirepowerMultiplier@ra1_allies_alliedheavyaatank:
 		Modifier: 25
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -3342,7 +3342,7 @@ heavyaatank:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: heavyaatank
+		Image: ra1_allies_alliedheavyaatank
 		PlayerPalette: player_rgba
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
@@ -3383,9 +3383,9 @@ heavyaatank:
 	KeepsDistance:
 	RenderRangeCircle:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
-RAARTY:
+ra1_allies_alliedartillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -3396,7 +3396,7 @@ RAARTY:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~raweapa, dome.allies
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
 		BuildPaletteOrder: 70
 		Description: actor_arty.description
 	Valued:
@@ -3421,12 +3421,12 @@ RAARTY:
 		Weapon: 155mm
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: 155mmCryo
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
@@ -3435,7 +3435,7 @@ RAARTY:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
 ^RAHARV:
 	Inherits: ^Tank
@@ -3487,18 +3487,18 @@ RAARTY:
 		Image: raharv
 		PlayerPalette: raplayer
 
-RAHARV.ALLIES:
+ra1_allies_alliedoretruck:
 	Inherits: ^RAHARV
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@ChronoArmor: ^ChronoArmor
 	Tooltip:
 		Name: Allied Ore Truck
 	Buildable:
-		Prerequisites: ~raproc.allies
+		Prerequisites: ~ra1_allies_alliedorerefinery
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 RAHARV.SOVIET:
 	Inherits: ^RAHARV
@@ -3582,7 +3582,7 @@ RAHARV.JAPAN:
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
 	Transforms:
-		IntoActor: rafact.allies
+		IntoActor: ra1_allies_alliedconstructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: placbldg.aud, build5.aud
@@ -3593,20 +3593,20 @@ RAHARV.JAPAN:
 		Image: ramcv
 		PlayerPalette: raplayer
 
-RAMCV.ALLIES:
+ra1_allies_alliedmobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@ChronoArmor: ^ChronoArmor
 	Tooltip:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~raweapa, rafix.allies
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
 	Transforms:
-		IntoActor: rafact.allies
+		IntoActor: ra1_allies_alliedconstructionyard
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 RAMCV.SOVIET:
 	Inherits: ^RAMCV
@@ -3635,7 +3635,7 @@ RAMCV.JAPAN:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 
-RAJEEP:
+ra1_allies_ranger:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -3646,7 +3646,7 @@ RAJEEP:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~raweapa, ~!upreconranger
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlockreconranger
 		Description: actor_jeep.description
 	Valued:
 		Cost: 300
@@ -3680,7 +3680,7 @@ RAJEEP:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_gpssatellitesupport
 
 RAAPC:
 	Inherits: ^Tank
@@ -3702,7 +3702,7 @@ RAAPC:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~tent, ~!upphasetransport
+		Prerequisites: ~ra1_allies_alliedbarracks, ~!ra1_allies_promotion_unlockphasetransport
 		Description: actor_apc.description
 	Mobile:
 		Speed: 105
@@ -3736,7 +3736,7 @@ RAAPC:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: rae1, rae1, medi, rae3, rae3
+		InitialUnits: rae1, rae1, ra1_allies_medic, rae3, rae3
 	RenderSprites:
 		Image: raapc
 	Voiced:
@@ -3746,9 +3746,9 @@ RAAPC:
 	Selectable:
 		Class: raapc
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-MNLY:
+ra1_allies_minelayer:
 	Inherits: ^Tank
 	Inherits@mines: ^DeployToClearMines
 	Inherits@rearm: ^RearmAtServiceDepot
@@ -3757,7 +3757,7 @@ MNLY:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 310
-		Prerequisites: ~raweapa, rafix.allies
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
 		Description: actor_mnly.description
 	Valued:
 		Cost: 800
@@ -3789,7 +3789,7 @@ MNLY:
 	FireWarheadsOnDeath:
 		Weapon: ATMine
 	RenderSprites:
-		Image: MNLY
+		Image: ra1_allies_minelayer
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	WithAmmoPipsDecoration:
@@ -3798,7 +3798,7 @@ MNLY:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 TTNK:
 	Inherits: ^Tank
@@ -5747,7 +5747,7 @@ ra_kamov:
 	ActorStatValues:
 		Upgrades: ra_promotion_hurricanerocketpod, ra_upgrade_incendiarybullets, ra_upgrade_teslaarcing, ra_upgrade_teslarockets, ra_upgrade_stalinium
 
-MH60:
+ra1_allies_blackhawk:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -5760,7 +5760,7 @@ MH60:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~rahpad
+		Prerequisites: ~ra1_allies_alliedhelipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_mh60.description
 	Valued:
@@ -5807,7 +5807,7 @@ MH60:
 	SpawnActorOnDeath:
 		Actor: MH60.Husk
 	EjectOnDeath:
-		PilotActor: alliedmachinegunner
+		PilotActor: ra1_allies_machinegunner
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -5850,9 +5850,9 @@ MH60:
 		RequiresSelection: True
 		PipCount: 6
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
-RAHELI:
+ra1_allies_longbow:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -5868,7 +5868,7 @@ RAHELI:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~rahpad, atek
+		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_raheli.description
 	Valued:
@@ -5889,14 +5889,14 @@ RAHELI:
 		LocalYaw: -75, 75
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: HellfireCryo
 		LocalOffset: 50,250,-100, 50,-250,-100
 		LocalYaw: -75, 75
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -5965,7 +5965,7 @@ RAHELI:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
 JHIND:
 	Inherits: ^Helicopter
@@ -6090,7 +6090,7 @@ JHIND:
 	ActorStatValues:
 		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_advancedplasmaweapons, up_nanotechrepairs
 
-RATRAN:
+ra1_allies_alliedchinooktransport:
 	Inherits: ^Helicopter
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -6105,12 +6105,12 @@ RATRAN:
 		Cost: 3600
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~rahpad
+		Prerequisites: ~ra1_allies_alliedhelipad
 		BuildPaletteOrder: 10
 		Description: actor_tran.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ratran
+		OverrideActor: ra1_allies_alliedchinooktransport
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 125
@@ -6141,7 +6141,7 @@ RATRAN:
 		RequiresCondition: !airborne
 		PauseOnCondition: disabled
 	Cargo:
-		InitialUnits: rae1, rae3, sniper, medi, alliedmachinegunner, rae1, rae3, sniper, medi, alliedmachinegunner
+		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		AfterLoadDelay: 0
@@ -6153,17 +6153,17 @@ RATRAN:
 		PilotActor: RAE1
 	SelectionDecorations:
 	Selectable:
-		Class: ratran
+		Class: ra1_allies_alliedchinooktransport
 		DecorationBounds: 1920, 1920
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: ratran
+		Image: ra1_allies_alliedchinooktransport
 		PlayerPalette: raplayer
 	FireWarheadsOnDeath:
 		Weapon: LargeHeliExplode
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
 RATRAN.Husk:
 	Inherits: ^LargeHelicopterHusk
@@ -6173,7 +6173,7 @@ RATRAN.Husk:
 		TurnSpeed: 15
 		Speed: 100
 	RenderSprites:
-		Image: ratran
+		Image: ra1_allies_alliedchinooktransport
 		PlayerPalette: raplayer
 
 modhip:
@@ -6913,7 +6913,7 @@ PT:
 		Image: pt
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 DD:
 	Inherits: ^BoatUnit
@@ -6934,7 +6934,7 @@ DD:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1syrd, dome.allies
+		Prerequisites: ~ra1syrd, ra1_allies_alliedradardome
 		Queue: Naval, RANaval
 		Description: actor_dd.description
 	Mobile:
@@ -6954,13 +6954,13 @@ DD:
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: StingerCryo
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -6989,7 +6989,7 @@ DD:
 		Image: radd
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 CA:
 	Inherits: ^BoatUnit
@@ -7008,7 +7008,7 @@ CA:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1syrd, atek
+		Prerequisites: ~ra1syrd, ra1_allies_alliedtechcenter
 		Queue: Naval, RANaval
 		Description: actor_ca.description
 	Mobile:
@@ -7061,7 +7061,7 @@ CA:
 		Image: raca
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
 japanspeedboat:
 	Inherits: ^BoatUnit
@@ -7569,7 +7569,7 @@ RALST:
 		LocalCenterOffset: 0,-512,0
 	WithBuildingBib:
 	Transforms:
-		IntoActor: ramcv.allies
+		IntoActor: ra1_allies_alliedmobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -7586,13 +7586,13 @@ RALST:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RAFACT.ALLIES:
+ra1_allies_alliedconstructionyard:
 	Inherits: ^RAFACT
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Tooltip:
 		Name: Allied Construction Yard
 	Transforms:
-		IntoActor: ramcv.allies
+		IntoActor: ra1_allies_alliedmobileconstructionvehicle
 	ProvidesPrerequisite@sandbagbarrier:
 		Prerequisite: sandbagbarrier
 
@@ -7812,14 +7812,14 @@ BARR:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-TENT:
+ra1_allies_alliedbarracks:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RASpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
-		Prerequisites: ~rafact.allies, powr
+		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
 	Tooltip:
 		Name: Allied Barracks
 	Building:
@@ -7915,11 +7915,11 @@ MODTENTJ:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RAPROC.ALLIES:
+ra1_allies_alliedorerefinery:
 	Inherits: ^RAPROC
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	FreeActor:
-		Actor: RAHARV.ALLIES
+		Actor: ra1_allies_alliedoretruck
 		SpawnOffset: 1,2
 		Facing: 256
 	Tooltip:
@@ -7927,7 +7927,7 @@ RAPROC.ALLIES:
 	RenderSprites:
 		Image: raproc
 	Buildable:
-		Prerequisites: ~rafact.allies, powr
+		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
 	ProvidesPrerequisite@buildingname:
 
 RAPROC.SOVIET:
@@ -8015,7 +8015,7 @@ RASILO:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RAWEAPA:
+ra1_allies_alliedwarfactory:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RASpawnActorsOnSell
@@ -8023,7 +8023,7 @@ RAWEAPA:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~rafact.allies, raproc.allies
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery
 		Description: template_factory.description
 	Tooltip:
 		Name: Allied War Factory
@@ -8045,7 +8045,7 @@ RAWEAPA:
 	RenderSprites:
 		Image: raweap
 	ProvidesPrerequisite@inherits:
-		Prerequisite: raweapa
+		Prerequisite: ra1_allies_alliedwarfactory
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -8158,36 +8158,36 @@ MODRAWEAPJ:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-DOME.Allies:
+ra1_allies_alliedradardome:
 	Inherits: ^BaseBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Inherits@dome: ^Dome
 	Buildable:
-		Prerequisites: ~rafact.allies, raproc.allies
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery
 	Tooltip:
 		Name: Allied Radar Dome
-	RevealsShroudMultiplier@up_advancedradarsystems:
+	RevealsShroudMultiplier@ra1_allies_upgrade_advancedradarsystems:
 		Modifier: 150
-	DetectCloakedMultiplier@up_advancedradarsystems:
+	DetectCloakedMultiplier@ra1_allies_upgrade_advancedradarsystems:
 		Modifier: 150
 	RangedGpsProvider:
 		Range: 20000
-		RequiresCondition: !disabled && !up_advancedradarsystems
+		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
 	WithRangeCircle:
 		Range: 20000
 		Color: FF000088
-		RequiresCondition: !disabled && !up_advancedradarsystems
+		RequiresCondition: !disabled && !ra1_allies_upgrade_advancedradarsystems
 	RangedGpsProvider@upgrade:
 		Range: 30000
-		RequiresCondition: !disabled && up_advancedradarsystems
+		RequiresCondition: !disabled && ra1_allies_upgrade_advancedradarsystems
 	WithRangeCircle@upgrade:
 		Range: 30000
 		Color: FF000088
-		RequiresCondition: !disabled && up_advancedradarsystems
+		RequiresCondition: !disabled && ra1_allies_upgrade_advancedradarsystems
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -8227,14 +8227,14 @@ DOME.Japan:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-RAHPAD:
+ra1_allies_alliedhelipad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RASpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
-		Prerequisites: ~rafact.allies, dome.allies
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
 	Tooltip:
 		Name: Allied Helipad
 	Building:
@@ -8762,7 +8762,7 @@ MODRAAFLD:
 		Image: jraafld
 		PlayerPalette: player
 
-ATEK:
+ra1_allies_alliedtechcenter:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RASpawnActorsOnSell
@@ -8770,7 +8770,7 @@ ATEK:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Inherits@GPSSatelliteSupport: ^GPSSatelliteSupport
 	Buildable:
-		Prerequisites: ~rafact.allies, dome.allies
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
 		Description: actor_atek.description
 	Tooltip:
 		Name: Allied Tech Center
@@ -8782,7 +8782,7 @@ ATEK:
 	WithBuildingBib:
 	GpsPower:
 		Prerequisites:
-			1: up_gpssatellitesupport
+			1: ra1_allies_upgrade_gpssatellitesupport
 		Icons:
 			1: gps
 		OneShot: true
@@ -8811,7 +8811,7 @@ ATEK:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_gpssatellitesupport
 
 STEK:
 	Inherits: ^BaseBuilding
@@ -8937,7 +8937,7 @@ JSHRINE:
 	Inherits@repair: ^RepairsUnits
 	Inherits@repair: ^RepairFacility
 	Buildable:
-		Prerequisites: ~rafact.allies, raweapa
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
 	Tooltip:
 		Name: Service Depot
 	Building:
@@ -8967,13 +8967,13 @@ JSHRINE:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RAFIX.Allies:
+ra1_allies_alliedservicedepot:
 	Inherits: ^RAFIX
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Tooltip:
 		Name: Allied Service Depot
 	Buildable:
-		Prerequisites: ~rafact.allies, raweapa
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
 	RenderSprites:
 		Image: rafixa
 
@@ -9006,7 +9006,7 @@ RA1SYRD:
 	Tooltip:
 		Name: Allied Naval Yard
 	Buildable:
-		Prerequisites: ~rafact.allies, raproc.allies, ~globalnaval
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -9197,7 +9197,7 @@ IRON:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-PDOX:
+ra1_allies_chronosphere:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@SW: ^PrimarySuperweapon
@@ -9205,7 +9205,7 @@ PDOX:
 	Inherits@sell: ^RASpawnActorsOnSell
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~atek, ~techlevel.superweapons, !pdox
+		Prerequisites: ~ra1_allies_alliedtechcenter, ~techlevel.superweapons, !ra1_allies_chronosphere
 		Description: actor_pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -9255,7 +9255,7 @@ PDOX:
 		OrderName: ChronoReinforcements
 		Cost: 1000
 		Prerequisites:
-			1: up_chronoarmor, ~techlevel.superweapons
+			1: ra1_allies_upgrade_chronoarmor, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:
 			1: chronoreinforcements
@@ -9282,7 +9282,7 @@ PDOX:
 		OrderName: ChronoVortex
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: pdox
+		IconImage: ra1_allies_chronosphere
 		Icons:
 			1: chronovortex
 		Cursor: ability
@@ -9321,7 +9321,7 @@ PDOX:
 		BeaconActor: BLASTRADIUS.super
 		CameraRange: 12345
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: pdox
+		Prerequisite: ra1_allies_chronosphere
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -9379,7 +9379,7 @@ ChronoVortexFade:
 	-PeriodicExplosion:
 	-AmbientSound:
 
-PBOX:
+ra1_allies_pillbox:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -9395,7 +9395,7 @@ PBOX:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~rafact.allies, tent, ~!uphbox
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks, ~!ra1_allies_promotion_unlockcamopillbox
 		Description: actor_pbox.description
 	Valued:
 		Cost: 400
@@ -9411,7 +9411,7 @@ PBOX:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 1
-		InitialUnits: alliedmachinegunner
+		InitialUnits: ra1_allies_machinegunner
 	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
@@ -9435,9 +9435,9 @@ PBOX:
 		ReloadDelay: 48
 		Range: 6570
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
-RAGUN:
+ra1_allies_alliedgunturret:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -9451,7 +9451,7 @@ RAGUN:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
-		Prerequisites: ~rafact.allies, tent
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks
 		Description: actor_gun.description
 	Valued:
 		Cost: 800
@@ -9485,9 +9485,9 @@ RAGUN:
 	RevealsShroud:
 		Range: 8683
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_reinforcedstructures, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_gpssatellitesupport
 
-AGUN:
+ra1_allies_alliedaagun:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AntiAirDefenseTemplate
@@ -9499,7 +9499,7 @@ AGUN:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~rafact.allies, dome.allies
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
 		Description: actor_agun.description
 	Valued:
 		Cost: 500
@@ -9537,7 +9537,7 @@ AGUN:
 	DetectCloaked:
 		Range: 5706
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
 FTUR:
 	Inherits: ^Defense
@@ -9932,7 +9932,7 @@ modpillboxfort:
 	#		Upgrades Allies
 	####################################################################################################
 
-up_advancedradarsystems:
+ra1_allies_upgrade_advancedradarsystems:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Radar Systems
@@ -9942,12 +9942,12 @@ up_advancedradarsystems:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_advancedradarsystems.description
-		Prerequisites: ~dome.allies, !up_advancedradarsystems
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_advancedradarsystems
 	RenderSprites:
 		Image: advancedradarsystemicon
 	ProvidesPrerequisite:
 
-up_infantryarmorplating:
+ra1_allies_upgrade_infantryarmorplating:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Armor Plating
@@ -9957,12 +9957,12 @@ up_infantryarmorplating:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_infantryarmorplating.description
-		Prerequisites: ~dome.allies, !up_infantryarmorplating
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_infantryarmorplating
 	RenderSprites:
 		Image: infantryarmorplatingicon
 	ProvidesPrerequisite:
 
-up_reinforcedstructures:
+ra1_allies_upgrade_reinforcedstructures:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Reinforced Structures
@@ -9972,12 +9972,12 @@ up_reinforcedstructures:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_reinforcedstructures.description
-		Prerequisites: ~dome.allies, !up_reinforcedstructures
+		Prerequisites: ~ra1_allies_alliedradardome, !ra1_allies_upgrade_reinforcedstructures
 	RenderSprites:
 		Image: reinforcedstructuresicon
 	ProvidesPrerequisite:
 
-up_airsuperioritydoctrine:
+ra1_allies_upgrade_airsuperioritydoctrine:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Superiority Doctrine
@@ -9987,12 +9987,12 @@ up_airsuperioritydoctrine:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_airsuperioritydoctrine.description
-		Prerequisites: ~atek, !up_airsuperioritydoctrine
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_airsuperioritydoctrine
 	RenderSprites:
 		Image: airsuperiorityicon
 	ProvidesPrerequisite:
 
-up_lasertargetingsystems:
+ra1_allies_upgrade_lasertargetingsystems:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Laser Targeting Systems
@@ -10002,12 +10002,12 @@ up_lasertargetingsystems:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_lasertargetingsystems.description
-		Prerequisites: ~atek, !up_lasertargetingsystems
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_lasertargetingsystems
 	RenderSprites:
 		Image: lasertargetingsystemicon
 	ProvidesPrerequisite:
 
-up_chronoarmor:
+ra1_allies_upgrade_chronoarmor:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Chrono Armor
@@ -10017,12 +10017,12 @@ up_chronoarmor:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_chronoarmor.description
-		Prerequisites: ~atek, !up_chronoarmor
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_chronoarmor
 	RenderSprites:
 		Image: chronoarmoricon
 	ProvidesPrerequisite:
 
-up_cryomissiles:
+ra1_allies_upgrade_cryomissiles:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cryo Missiles
@@ -10032,12 +10032,12 @@ up_cryomissiles:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_cryomissiles.description
-		Prerequisites: ~atek, !up_cryomissiles
+		Prerequisites: ~ra1_allies_alliedtechcenter, !ra1_allies_upgrade_cryomissiles
 	RenderSprites:
 		Image: cryomissilesicon
 	ProvidesPrerequisite:
 
-up_gpssatellitesupport:
+ra1_allies_upgrade_gpssatellitesupport:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: GPS Satellite Support
@@ -10047,7 +10047,7 @@ up_gpssatellitesupport:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_gpssatellitesupport.description
-		Prerequisites: ~atek, up_advancedradarsystems, !up_gpssatellitesupport
+		Prerequisites: ~ra1_allies_alliedtechcenter, ra1_allies_upgrade_advancedradarsystems, !ra1_allies_upgrade_gpssatellitesupport
 	RenderSprites:
 		Image: gpssatellitesupporticon
 	#ProvidesPrerequisite:
@@ -10057,7 +10057,7 @@ up_gpssatellitesupport:
 team_upgrade.up_gpssatellitesupport:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_gpssatellitesupport
+		Prerequisite: ra1_allies_upgrade_gpssatellitesupport
 	RenderSprites:
 		Image: gpssatellitesupporticon
 	Tooltip:
@@ -10070,7 +10070,7 @@ team_upgrade.up_gpssatellitesupport:
 	#		Promotions Allies
 	####################################################################################################
 
-upalliedmachinegunner:
+ra1_allies_promotion_unlockmachinegunner:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Machine Gunner
@@ -10078,27 +10078,27 @@ upalliedmachinegunner:
 		BuildPaletteOrder: 25
 		Queue: Promotions
 		Description: Allows training of Machine Gunners.
-		Prerequisites: ~rafact.allies, !upalliedmachinegunner, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockmachinegunner, rank1
 	RenderSprites:
-		Image: alliedmachinegunner
+		Image: ra1_allies_machinegunner
 	ProvidesPrerequisite:
-		Prerequisite: upalliedmachinegunner
+		Prerequisite: ra1_allies_promotion_unlockmachinegunner
 
-upsheridan:
+ra1_allies_promotion_unlocksheridan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Sheridan
+		Name: Unlock ra1_allies_sheridanassaulttank
 	Buildable:
 		BuildPaletteOrder: 28
 		Queue: Promotions
-		Description: Allows construction of the Sheridan Light Tank.
-		Prerequisites: ~rafact.allies, !upsheridan, upalliedmachinegunner, rank1
+		Description: Allows construction of the ra1_allies_sheridanassaulttank Light Tank.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlocksheridan, ra1_allies_promotion_unlockmachinegunner, rank1
 	RenderSprites:
-		Image: sheridan
+		Image: ra1_allies_sheridanassaulttank
 	ProvidesPrerequisite:
-		Prerequisite: upsheridan
+		Prerequisite: ra1_allies_promotion_unlocksheridan
 
-uprapierjumpjet:
+ra1_allies_promotion_unlockrapierjumpjet:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Rapier Jumpjet
@@ -10106,13 +10106,13 @@ uprapierjumpjet:
 		BuildPaletteOrder: 31
 		Queue: Promotions
 		Description: Allows construction of the Rapier Jumpjet.
-		Prerequisites: ~rafact.allies, !uprapierjumpjet, upsheridan, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockrapierjumpjet, ra1_allies_promotion_unlocksheridan, rank1
 	RenderSprites:
-		Image: rapierjumpjet
+		Image: ra1_allies_rapierjumpjet
 	ProvidesPrerequisite:
-		Prerequisite: uprapierjumpjet
+		Prerequisite: ra1_allies_promotion_unlockrapierjumpjet
 
-upmodspaceport:
+ra1_allies_promotion_unlockreinforcementpad:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Reinforcement Pad
@@ -10120,13 +10120,13 @@ upmodspaceport:
 		BuildPaletteOrder: 34
 		Queue: Promotions
 		Description: Allows construction of the Reinforcement Pad.
-		Prerequisites: ~rafact.allies, !upmodspaceport, uprapierjumpjet, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockreinforcementpad, ra1_allies_promotion_unlockrapierjumpjet, rank1
 	RenderSprites:
-		Image: modspaceport
+		Image: ra1_allies_reinforcementpad
 	ProvidesPrerequisite:
-		Prerequisite: upmodspaceport
+		Prerequisite: ra1_allies_promotion_unlockreinforcementpad
 
-upreconranger:
+ra1_allies_promotion_unlockreconranger:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Recon Ranger.
@@ -10134,13 +10134,13 @@ upreconranger:
 		BuildPaletteOrder: 26
 		Queue: Promotions
 		Description: Allows construction of the Recon Ranger.
-		Prerequisites: ~rafact.allies, !upreconranger, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockreconranger, rank1
 	RenderSprites:
-		Image: reconranger
+		Image: ra1_allies_reconranger
 	ProvidesPrerequisite:
-		Prerequisite: upreconranger
+		Prerequisite: ra1_allies_promotion_unlockreconranger
 
-upalliedtiger:
+ra1_allies_promotion_unlocktigerheavytank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Tiger Heavy Tank
@@ -10148,13 +10148,13 @@ upalliedtiger:
 		BuildPaletteOrder: 29
 		Queue: Promotions
 		Description: Allows construction of the Tiger Heavy Tank.
-		Prerequisites: ~rafact.allies, !upalliedtiger, upreconranger, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlocktigerheavytank, ra1_allies_promotion_unlockreconranger, rank1
 	RenderSprites:
 		Image: alliedtiger
 	ProvidesPrerequisite:
-		Prerequisite: upalliedtiger
+		Prerequisite: ra1_allies_promotion_unlocktigerheavytank
 
-upalliedtankdestroyer:
+ra1_allies_promotion_unlocktankdestroyer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Tank Destroyer
@@ -10162,13 +10162,13 @@ upalliedtankdestroyer:
 		BuildPaletteOrder: 32
 		Queue: Promotions
 		Description: Allows construction of the Tank Destroyer.
-		Prerequisites: ~rafact.allies, !upalliedtankdestroyer, upalliedtiger, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlocktankdestroyer, ra1_allies_promotion_unlocktigerheavytank, rank1
 	RenderSprites:
 		Image: modtnkd2
 	ProvidesPrerequisite:
-		Prerequisite: upalliedtankdestroyer
+		Prerequisite: ra1_allies_promotion_unlocktankdestroyer
 
-upctnk:
+ra1_allies_promotion_unlockchronotank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chrono Tank
@@ -10176,13 +10176,13 @@ upctnk:
 		BuildPaletteOrder: 35
 		Queue: Promotions
 		Description: Allows construction of the Chrono Tank.
-		Prerequisites: ~rafact.allies, !upctnk, upalliedtankdestroyer, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockchronotank, ra1_allies_promotion_unlocktankdestroyer, rank1
 	RenderSprites:
-		Image: ctnk
+		Image: ra1_allies_chronotank
 	ProvidesPrerequisite:
-		Prerequisite: upctnk
+		Prerequisite: ra1_allies_promotion_unlockchronotank
 
-uphbox:
+ra1_allies_promotion_unlockcamopillbox:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Camo Pillbox
@@ -10190,13 +10190,13 @@ uphbox:
 		BuildPaletteOrder: 27
 		Queue: Promotions
 		Description: Allows construction of the Camo Pillbox.
-		Prerequisites: ~rafact.allies, !uphbox, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockcamopillbox, rank1
 	RenderSprites:
-		Image: hbox
+		Image: ra1_allies_camopillbox
 	ProvidesPrerequisite:
-		Prerequisite: uphbox
+		Prerequisite: ra1_allies_promotion_unlockcamopillbox
 
-upphasetransport:
+ra1_allies_promotion_unlockphasetransport:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Phase Transport
@@ -10204,13 +10204,13 @@ upphasetransport:
 		BuildPaletteOrder: 30
 		Queue: Promotions
 		Description: Allows construction of Phase Transports.
-		Prerequisites: ~rafact.allies, !upphasetransport, uphbox, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockphasetransport, ra1_allies_promotion_unlockcamopillbox, rank1
 	RenderSprites:
-		Image: sapc
+		Image: ra1_allies_phasetransport
 	ProvidesPrerequisite:
-		Prerequisite: upphasetransport
+		Prerequisite: ra1_allies_promotion_unlockphasetransport
 
-upbastion:
+ra1_allies_promotion_unlockbastion:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Bastion
@@ -10218,31 +10218,31 @@ upbastion:
 		BuildPaletteOrder: 33
 		Queue: Promotions
 		Description: Allows construction of Bastion Artillery Bunkers.
-		Prerequisites: ~rafact.allies, !upbastion, upphasetransport, rank1
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockbastion, ra1_allies_promotion_unlockphasetransport, rank1
 	RenderSprites:
-		Image: modartyturret
+		Image: ra1_allies_bastionartillerybunker
 	ProvidesPrerequisite:
-		Prerequisite: upbastion
+		Prerequisite: ra1_allies_promotion_unlockbastion
 
-upgapgeneratorradarjammer:
+ra1_allies_promotion_unlockgapgeneratorandradarjammer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Gap Generator and Radar Jammer
+		Name: Unlock ra1_allies_gapgenerator Generator and Radar Jammer
 	Buildable:
 		BuildPaletteOrder: 36
 		Queue: Promotions
-		Description: Allows construction of the Gap Generator and Mobile Radar Jammer.
-		Prerequisites: ~rafact.allies, !upgapgeneratorradarjammer, upbastion, rank1
+		Description: Allows construction of the ra1_allies_gapgenerator Generator and Mobile Radar Jammer.
+		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockgapgeneratorandradarjammer, ra1_allies_promotion_unlockbastion, rank1
 	RenderSprites:
 		Image: gapgeneratorradarjammer
 	ProvidesPrerequisite:
-		Prerequisite: upgapgeneratorradarjammer
+		Prerequisite: ra1_allies_promotion_unlockgapgeneratorandradarjammer
 
 	####################################################################################################
 	#		Promotion Units Allies
 	####################################################################################################
 
-alliedmachinegunner:
+ra1_allies_machinegunner:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -10262,7 +10262,7 @@ alliedmachinegunner:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: actor_e1.description
-		Prerequisites: ~tent, upalliedmachinegunner
+		Prerequisites: ~ra1_allies_alliedbarracks, ra1_allies_promotion_unlockmachinegunner
 	Mobile:
 		Speed: 50
 	Health:
@@ -10285,7 +10285,7 @@ alliedmachinegunner:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	RenderSprites:
-		Image: alliedmachinegunner
+		Image: ra1_allies_machinegunner
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
@@ -10294,11 +10294,11 @@ alliedmachinegunner:
 	Selectable:
 		Class: rae1
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 	GrantExternalConditionToTransport:
 		Condition: ifv-hmg
 
-sheridan:
+ra1_allies_sheridanassaulttank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -10314,12 +10314,12 @@ sheridan:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Sheridan Assault Tank
+		Name: ra1_allies_sheridanassaulttank Assault Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~raweapa, ~upsheridan
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocksheridan
 		Queue: Vehicle, RAVehicle
 		Description: actor_sheridan.description
 	Mobile:
@@ -10351,7 +10351,7 @@ sheridan:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
 		Weapon: SheridanMissilesCryo
 		Recoil: 64
@@ -10360,7 +10360,7 @@ sheridan:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@MG:
 		Weapon: SheridanVulcan
 		LocalOffset: 384,-64,128
@@ -10394,9 +10394,9 @@ sheridan:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-rapierjumpjet:
+ra1_allies_rapierjumpjet:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -10413,7 +10413,7 @@ rapierjumpjet:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~rahpad, atek, uprapierjumpjet
+		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockrapierjumpjet
 		Description: actor_rapierjumpjet.description
 	Valued:
 		Cost: 1300
@@ -10431,12 +10431,12 @@ rapierjumpjet:
 		Weapon: RapierBombs
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
 		Weapon: RapierBombsCryo
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: Aphid
@@ -10444,7 +10444,7 @@ rapierjumpjet:
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARYUpgrade:
 		Name: secondary
 		Weapon: AphidCryo
@@ -10452,7 +10452,7 @@ rapierjumpjet:
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	AttackAircraft:
@@ -10473,7 +10473,7 @@ rapierjumpjet:
 	SpawnActorOnDeath:
 		Actor: rapierjumpjet.Husk
 	EjectOnDeath:
-		PilotActor: sniper
+		PilotActor: ra1_allies_alliedsniper
 	LeavesTrails:
 		Offsets: -1000,0,200
 		MovingInterval: 2
@@ -10488,7 +10488,7 @@ rapierjumpjet:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: rapierjumpjet
+		Image: ra1_allies_rapierjumpjet
 		PlayerPalette: player_rgba
 	AmmoPool:
 		Ammo: 12
@@ -10501,7 +10501,7 @@ rapierjumpjet:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
 rapierjumpjet.Husk:
 	Inherits: ^PlaneHusk
@@ -10522,10 +10522,10 @@ rapierjumpjet.Husk:
 		Type: CenterPosition
 		RequiresCondition: enable-smoke
 	RenderSprites:
-		Image: rapierjumpjet
+		Image: ra1_allies_rapierjumpjet
 		PlayerPalette: player_rgba
 
-MODSPACEPORT:
+ra1_allies_reinforcementpad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^5x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -10539,7 +10539,7 @@ MODSPACEPORT:
 		BuildPaletteOrder: 150
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~rafact.allies, atek, upmodspaceport, derricklimit
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockreinforcementpad, derricklimit
 		Description: Dropzone for quick reinforcements, and passive income.
 	Building:
 		Footprint: XXXXX xxxx+ =====
@@ -10628,7 +10628,7 @@ MODSPACEPORT:
 		Descriptions:
 			1: power_reinforcements.description
 		DropItems:
-			1: alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3,alliedmachinegunner,sheridan,rae3
+			1: ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 32
@@ -10649,7 +10649,7 @@ MODSPACEPORT:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	SupportPowerChargeBar:
 
-reconranger:
+ra1_allies_reconranger:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -10663,7 +10663,7 @@ reconranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~raweapa, ~upreconranger
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlockreconranger
 		Description: actor_jeep.description2
 	Valued:
 		Cost: 500
@@ -10687,12 +10687,12 @@ reconranger:
 		Weapon: ReconRangerRecoillessGun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: CryoReconRangerRecoillessGun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -10740,9 +10740,9 @@ reconranger:
 		RequiresCondition: firing3
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-MODTIGER:
+ra1_allies_alliedtigerheavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -10755,7 +10755,7 @@ MODTIGER:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~raweapa, ~upalliedtiger
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocktigerheavytank
 		BuildPaletteOrder: 110
 		Description: actor_tiger.description
 	Tooltip:
@@ -10798,7 +10798,7 @@ MODTIGER:
 		Image: alliedtiger
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
 alliedcybertank:
 	Inherits: ^Tank
@@ -10855,9 +10855,9 @@ alliedcybertank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-MODTNKD:
+ra1_allies_alliedtankdestroyer:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -10873,7 +10873,7 @@ MODTNKD:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor_tnkd.description
-		Prerequisites: ~raweapa, upalliedtankdestroyer, dome.allies
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -10911,9 +10911,9 @@ MODTNKD:
 		Image: modtnkd2
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-CTNK:
+ra1_allies_chronotank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -10931,7 +10931,7 @@ CTNK:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: ~raweapa, atek, upctnk
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockchronotank
 		Description: actor_ctnk.description
 	Valued:
 		Cost: 2000
@@ -10957,25 +10957,25 @@ CTNK:
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@SECONDARY:
 		Weapon: ChronoTusk
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade:
 		Weapon: ChronoTuskCryo
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeSECONDARY:
 		Weapon: ChronoTuskCryo
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	AttackFrontal:
 		FacingTolerance: 10
 	WithMuzzleOverlay:
@@ -10991,9 +10991,9 @@ CTNK:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-HBOX:
+ra1_allies_camopillbox:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -11011,7 +11011,7 @@ HBOX:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~rafact.allies, ~uphbox
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_unlockcamopillbox
 		Description: actor_hbox.description
 	Valued:
 		Cost: 1300
@@ -11029,7 +11029,7 @@ HBOX:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 2
-		InitialUnits: alliedmachinegunner, rae3
+		InitialUnits: ra1_allies_machinegunner, rae3
 	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
@@ -11056,9 +11056,9 @@ HBOX:
 		ReloadDelay: 50
 		Range: 7640
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
-SAPC:
+ra1_allies_phasetransport:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -11077,7 +11077,7 @@ SAPC:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 130
-		Prerequisites: ~raweapa, atek, ~upphasetransport
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockphasetransport
 		Description: actor_sapc.description
 	Valued:
 		Cost: 1800
@@ -11103,12 +11103,12 @@ SAPC:
 		Weapon: APTusk
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: APTuskCryo
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Turreted:
 		TurnSpeed: 25
 	AttackTurreted:
@@ -11116,7 +11116,7 @@ SAPC:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: rae1, rae3, sniper, medi, alliedmachinegunner
+		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
 	Cloak:
 		InitialDelay: 125
 		CloakDelay: 75
@@ -11126,16 +11126,16 @@ SAPC:
 		VoiceSet: RAVehicleVoice
 	WithMuzzleOverlay:
 	Selectable:
-		Class: sapc
+		Class: ra1_allies_phasetransport
 	RenderSprites:
-		Image: sapc
+		Image: ra1_allies_phasetransport
 		PlayerPalette: raplayer
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-modartyturret:
+ra1_allies_bastionartillerybunker:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -11152,7 +11152,7 @@ modartyturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~rafact.allies, upbastion
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_promotion_unlockbastion
 		Description: actor_bastion.description
 	-WithTurretSearchlight:
 	Valued:
@@ -11182,14 +11182,14 @@ modartyturret:
 		MuzzleSequence: muzzle
 		Turret: cannon
 		Name: cannon
-		RequiresCondition: !disabled && !lowpower && !up_cryomissiles
+		RequiresCondition: !disabled && !lowpower && !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
 		Weapon: 155mmBastionCryo
 		LocalOffset: 1000,0,900
 		MuzzleSequence: muzzle
 		Turret: cannon
 		Name: cannon
-		RequiresCondition: !disabled && !lowpower && up_cryomissiles
+		RequiresCondition: !disabled && !lowpower && ra1_allies_upgrade_cryomissiles
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -11208,7 +11208,7 @@ modartyturret:
 	WithSpriteTurret@cannon:
 		Turret: cannon
 	RenderSprites:
-		Image: modartyturret
+		Image: ra1_allies_bastionartillerybunker
 		PlayerPalette: player_rgba
 	-WithDeathAnimation:
 	#WithRangeCircle:
@@ -11223,9 +11223,9 @@ modartyturret:
 	DetectCloaked:
 		Range: 5092
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_reinforcedstructures, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-GAP:
+ra1_allies_gapgenerator:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@COMMANDOSKULL: ^CommandoSkull
@@ -11236,15 +11236,15 @@ GAP:
 	-RenderRangeCircle:
 	-ExternalCondition@shrouded:
 	-ExternalCondition@lockon:
-	-RangeMultiplier@up_gpssatellitesupport:
-	-RevealsShroudMultiplier@up_gpssatellitesupport:
-	-DetectCloakedMultiplier@up_gpssatellitesupport:
-	-InaccuracyMultiplier@up_gpssatellitesupport:
-	-GrantConditionOnPrerequisite@up_gpssatellitesupport:
+	-RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: Gap Generator
+		Name: ra1_allies_gapgenerator Generator
 	Building:
 		BuildSounds: placbldg.aud, build5.aud
 	Buildable:
@@ -11252,7 +11252,7 @@ GAP:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: ~rafact.allies, atek, upgapgeneratorradarjammer
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512
@@ -11272,7 +11272,7 @@ GAP:
 	ProximityExternalCondition@shrouded:
 		Range: 10000
 		ValidRelationships: Ally
-		Condition: gap-shroud
+		Condition: ra1_allies_gapgenerator-shroud
 		RequiresCondition: !lowpower && !disabled
 	-RenderDetectionCircle:
 	RenderShroudCircle:
@@ -11301,9 +11301,9 @@ GAP:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures
+		Upgrades: ra1_allies_upgrade_reinforcedstructures
 
-RAMGG:
+ra1_allies_mobilegapgenerator:
 	Inherits: ^Tank
 	Inherits@EXT: ^ExternalConditions
 	Inherits@COMMANDOSKULL: ^CommandoSkull
@@ -11318,10 +11318,10 @@ RAMGG:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: ~raweapa, atek, upgapgeneratorradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_mgg.description
 	Tooltip:
-		Name: Mobile Gap Generator
+		Name: Mobile ra1_allies_gapgenerator Generator
 	Valued:
 		Cost: 5000
 	UpdatesPlayerStatistics:
@@ -11364,7 +11364,7 @@ RAMGG:
 	ProximityExternalCondition@shrouded:
 		Range: 8000
 		ValidRelationships: Ally
-		Condition: gap-shroud
+		Condition: ra1_allies_gapgenerator-shroud
 		RequiresCondition: !disabled
 	RenderShroudCircle:
 	RevealsShroud@SWReveal:
@@ -11388,9 +11388,9 @@ RAMGG:
 	TooltipExtras@Support:
 		Description: Support Vehicle
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: ra1_allies_upgrade_chronoarmor
 
-MRJ:
+ra1_allies_mobileradarjammer:
 	Inherits: ^Tank
 	Inherits@EXT: ^ExternalConditions
 	Inherits@COMMANDOSKULL: ^CommandoSkull
@@ -11410,7 +11410,7 @@ MRJ:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: ~raweapa, atek, upgapgeneratorradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
 		HP: 25000
@@ -11493,7 +11493,7 @@ MRJ:
 	TooltipExtras@Support:
 		Description: Support Vehicle
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: ra1_allies_upgrade_chronoarmor
 
 	####################################################################################################
 	#		Doctrines Soviets

@@ -2147,9 +2147,9 @@ GTWR.ANSWER:
 	Health:
 		HP: 60000
 PBOX.TOMORROW:
-	Inherits: PBOX
+	Inherits: ra1_allies_pillbox
 	RenderSprites:
-		Image: PBOX
+		Image: ra1_allies_pillbox
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks, ~disabled
@@ -2279,7 +2279,7 @@ ATEK.ANSWER:
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 	RenderSprites:
-		Image: ATEK
+		Image: ra1_allies_alliedtechcenter
 DTWOOD:
 	Inherits: ^Wall
 	Valued:
@@ -2815,7 +2815,7 @@ DTRMBO:
 		BuildPaletteOrder: 50
 		Prerequisites: anyhq, ~techlevel.high, dtpropaganda
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildDuration: 375
 		BuildDurationModifier: 100
 		BuildLimit: 1
@@ -2834,10 +2834,10 @@ DTRMBO:
 	AutoTarget:
 		ScanRadius: 8
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -3117,9 +3117,9 @@ DTE2:
 		ValidTypes: infantry ##########
 		
 rajeep.answer:
-	Inherits: RAJEEP
+	Inherits: ra1_allies_ranger
 	RenderSprites:
-		Image: RAJEEP
+		Image: ra1_allies_ranger
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: vehicleproduction
@@ -3210,9 +3210,9 @@ apc.answer:
 	-MapEditorData:
 
 mrj.answer:
-	Inherits: MRJ
+	Inherits: ra1_allies_mobileradarjammer
 	RenderSprites:
-		Image: MRJ
+		Image: ra1_allies_mobileradarjammer
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: atek.answer, anyhq
@@ -3640,7 +3640,7 @@ dtapc2:
 		Position: BottomLeft
 		RequiresSelection: true
 dtltnk:
-	Inherits: 1TNK
+	Inherits: ra1_allies_alliedlighttank
 	Valued:
 		Cost: 600
 	Tooltip:

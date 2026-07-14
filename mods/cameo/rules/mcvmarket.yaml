@@ -78,9 +78,9 @@ MM2MCV:
 		Image: mm2mcv
 
 MM1RAMCV:
-	Inherits@MCV: RAMCV.ALLIES
+	Inherits@MCV: ra1_allies_alliedmobileconstructionvehicle
 	Transforms:
-		IntoActor: rafact.allies
+		IntoActor: ra1_allies_alliedconstructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Allies)
 	Buildable:

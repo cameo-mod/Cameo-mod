@@ -563,11 +563,11 @@ Actors:
 	Actor446: brik
 		Owner: Neutral
 		Location: 28,84
-	Actor448: modspaceport
+	Actor448: ra1_allies_reinforcementpad
 		Owner: Neutral
 		Location: 24,79
 		Health: 11
-	Actor452: raweapa
+	Actor452: ra1_allies_alliedwarfactory
 		Owner: Neutral
 		Health: 10
 		Location: 32,83
@@ -586,7 +586,7 @@ Actors:
 	Actor457: gtwr
 		Owner: NewHopeTwo
 		Location: 39,80
-	Actor459: raarty
+	Actor459: ra1_allies_alliedartillery
 		Owner: NewHopeTwo
 		Location: 37,79
 		Facing: 893
@@ -809,7 +809,7 @@ Actors:
 	Actor525: atwr
 		Owner: NewHopeTwo
 		Location: 57,88
-	Actor526: raarty
+	Actor526: ra1_allies_alliedartillery
 		Owner: NewHopeTwo
 		Location: 55,87
 		Facing: 886
@@ -1498,7 +1498,7 @@ Actors:
 	Actor731: raproc.soviet
 		Owner: Nitro
 		Location: 74,9
-	Actor732: dome.allies
+	Actor732: ra1_allies_alliedradardome
 		Owner: Nitro
 		Location: 103,8
 	Actor733: stek
@@ -2415,18 +2415,18 @@ Actors:
 		Owner: Neutral
 		Location: 51,92
 		Health: 23
-	Actor1006: modartyturret
+	Actor1006: ra1_allies_bastionartillerybunker
 		Owner: NewHopeOne
 		Location: 14,75
-	Actor1007: modartyturret
+	Actor1007: ra1_allies_bastionartillerybunker
 		Owner: NewHopeOne
 		Location: 25,75
-	Actor1008: modartyturret
+	Actor1008: ra1_allies_bastionartillerybunker
 		Owner: NewHopeTwo
 		Location: 36,80
 		TurretFacing: 0
 		TurretFacing@cannon: 832
-	Actor1009: modartyturret
+	Actor1009: ra1_allies_bastionartillerybunker
 		Owner: NewHopeTwo
 		Location: 53,87
 		TurretFacing@cannon: 832

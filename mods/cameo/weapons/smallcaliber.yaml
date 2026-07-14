@@ -19,7 +19,7 @@ D2K_Personal_Shield_Impact:
 		Condition: SmallCaliberShieldHits
 		Duration: 300
 		ValidTargets: PersonalShielded, PersonalShieldedSard, PersonalShieldedHeavy
-Sniper:
+ra1_allies_alliedsniper:
     Inherits@personalshield: D2K_Personal_Shield_Impact
 	Report: ramgun2.aud
 	ValidTargets: Ground, Infantry
@@ -36,7 +36,7 @@ Sniper:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 
 camea_sniper:
-    Inherits: Sniper
+    Inherits: ra1_allies_alliedsniper
     ReloadDelay: 60
     Range: 11264
     

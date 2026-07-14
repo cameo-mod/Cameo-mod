@@ -2012,7 +2012,7 @@ dramp:
 	RenderSprites:
 	Voiced:
 		VoiceSet: DRAmperVoice
-	InaccuracyMultiplier@Sniper:
+	InaccuracyMultiplier@ra1_allies_alliedsniper:
 		Modifier: 50
 
 drshreder:
@@ -3751,14 +3751,14 @@ drsnipe:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Sniper
+		Name: ra1_allies_alliedsniper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: drfgbarr2
 		Queue: Infantry, RAInfantry
-		Description: With a long range electro-magnetic needle gun, the Sniper is lethal against\ninfantry targets. Like the Scout, the Sniper can morph into objects for camouflage.\n\nType: Walker\nSpeed: Medium\nWeapon: Sniper Rail\nRange: Long\nArmor: Light
+		Description: With a long range electro-magnetic needle gun, the ra1_allies_alliedsniper is lethal against\ninfantry targets. Like the Scout, the ra1_allies_alliedsniper can morph into objects for camouflage.\n\nType: Walker\nSpeed: Medium\nWeapon: ra1_allies_alliedsniper Rail\nRange: Long\nArmor: Light
 	Mobile:
 		Speed: 80
 	Health:
@@ -5186,7 +5186,7 @@ drreaper:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, drmadrix.shadowhand
 		Queue: Infantry, RAInfantry
-		Description: Shock Sniper Infantry.\n  Strong vs Light Vehicles and Creatures \n  Weak vs Infantry
+		Description: Shock ra1_allies_alliedsniper Infantry.\n  Strong vs Light Vehicles and Creatures \n  Weak vs Infantry
 	Mobile:
 		Speed: 50
 	Health:
@@ -10569,7 +10569,7 @@ drdsupport:
 	Valued:
 		Cost: 500 #300
 	Tooltip:
-		Name: Support Tent
+		Name: Support ra1_allies_alliedbarracks
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3

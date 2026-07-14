@@ -455,7 +455,7 @@ crab:
 #		BUILDINGS
 ####################################################################################################
 qnest:
-	Inherits: RAFACT.ALLIES
+	Inherits: ra1_allies_alliedconstructionyard
 	GrantExternalConditionToOwner@AntHillsOwned:
 		Condition: AntHillsOwned
 	Inherits@ref: ^Refinery

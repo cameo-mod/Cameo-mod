@@ -199,7 +199,7 @@ japanesesoldier:
 e1sniper:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e1sniper.shp
+		Filename: ra1_allies_alliedsniper_e1sniper.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -295,7 +295,7 @@ e1sniper:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: e1snipericon.png
+		Filename: ra1_allies_alliedsniper_icon.png
 
 mortarsoldier:
 	Defaults:
@@ -396,10 +396,10 @@ mortarsoldier:
 	icon:
 		Filename: MortarSoldierIcon.png
 
-alliedmachinegunner:
+ra1_allies_machinegunner:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e1lmg.shp
+		Filename: ra1_allies_promotion_unlockmachinegunner_e1lmg.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -495,7 +495,7 @@ alliedmachinegunner:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: machinegunner.png
+		Filename: ra1_allies_promotion_unlockmachinegunner_icon.png
 
 rae1:
 	Inherits: e1
@@ -605,9 +605,9 @@ rae6:
 	Inherits: e6
 	icon:
 		Filename: e6icon.png
-medi:
+ra1_allies_medic:
 	Defaults:
-		Filename: medi.shp
+		Filename: ra1_allies_medic.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -664,11 +664,11 @@ medi:
 		Facings: 8
 		Tick: 100
 	icon:
-		Filename: mediicon.shp
+		Filename: ra1_allies_medic_icon.shp
 
-mech:
+ra1_allies_mechanic:
 	Defaults:
-		Filename: mech.shp
+		Filename: ra1_allies_mechanic.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -725,7 +725,7 @@ mech:
 		Facings: 8
 		Tick: 100
 	icon:
-		Filename: mechicon.shp
+		Filename: ra1_allies_mechanic_icon.shp
 
 dog:
 	Defaults:
@@ -798,9 +798,9 @@ cyberdog:
 	icon:
 		Filename: cyberdogicon.png
 
-e7:
+ra1_allies_tanya:
 	Defaults:
-		Filename: e7.shp
+		Filename: ra1_allies_tanya.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -866,7 +866,7 @@ e7:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: e7icon.shp
+		Filename: ra1_allies_tanya_icon.shp
 
 gnrl:
 	Defaults:
@@ -1291,9 +1291,9 @@ ra_zapper:
 	icon:
 		Filename: ra_zappericon.png
 
-raspy:
+ra1_allies_raspy:
 	Defaults:
-		Filename: raspy.shp
+		Filename: ra1_allies_raspy.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -1361,7 +1361,7 @@ raspy:
 		Length: 8
 		Facings: 8
 	icon:
-		Filename: raspyicon.png
+		Filename: ra1_allies_raspy_icon.png
 
 einstein:
 	Defaults:
@@ -1753,12 +1753,12 @@ shogunexecutioner:
 
 ramcv:
 	Defaults:
-		Filename: ramcv.shp
+		Filename: ra1_allies_alliedmobileconstructionvehicle_ramcv.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: ramcvicon.shp
+		Filename: ra1_allies_alliedmobileconstructionvehicle_icon.shp
 
 ramcvhusk:
 	Defaults:
@@ -1770,7 +1770,7 @@ ramcvhusk:
 
 raharv:
 	Defaults:
-		Filename: raharv.shp
+		Filename: ra1_allies_alliedoretruck_raharv.shp
 	idle:
 		Facings: 32
 		UseClassicFacings: True
@@ -1786,9 +1786,9 @@ raharv:
 		Length: 7
 	icon:
 		Start: 0
-		Filename: raharvicon.shp
+		Filename: ra1_allies_alliedoretruck_icon.shp
 	cityicon:
-		Filename: cityharvestericon.shp
+		Filename: ra1_allies_alliedoretruck_cityharvestericon.shp
 
 raharvempty:
 	Defaults:
@@ -1838,9 +1838,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -1023
 
-1tnk:
+ra1_allies_alliedlighttank:
 	Defaults:
-		Filename: 1tnk.shp
+		Filename: ra1_allies_alliedlighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1852,11 +1852,11 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 2
 	icon:
-		Filename: 1tnkicon.shp
+		Filename: ra1_allies_alliedlighttank_icon.shp
 
 1tnk.destroyed:
 	Defaults:
-		Filename: 1tnk.shp
+		Filename: ra1_allies_alliedlighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1867,9 +1867,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-2tnk:
+ra1_allies_alliedmediumtank:
 	Defaults:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1881,11 +1881,11 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 2tnkicon.shp
+		Filename: ra1_allies_alliedmediumtank_icon.shp
 
 2tnk.destroyed:
 	Defaults:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2019,9 +2019,9 @@ v2rlnuke:
 	icon:
 		Filename: nukelaunchericon.png
 
-raarty:
+ra1_allies_alliedartillery:
 	Defaults:
-		Filename: raarty.shp
+		Filename: ra1_allies_alliedartillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2029,11 +2029,11 @@ raarty:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: raartyicon.shp
+		Filename: ra1_allies_alliedartillery_icon.shp
 
-rajeep:
+ra1_allies_ranger:
 	Defaults:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2046,13 +2046,13 @@ rajeep:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: rajeepicon.shp
+		Filename: ra1_allies_ranger_icon.shp
 
 rajeep2:
 	Defaults:
 		Filename: RocketRanger.png
 	idle:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
@@ -2064,16 +2064,16 @@ rajeep2:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: rajeepicon.shp
+		Filename: ra1_allies_ranger_icon.shp
 
-mnly:
+ra1_allies_minelayer:
 	Defaults:
-		Filename: mnly.shp
+		Filename: ra1_allies_minelayer.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: mnlyicon.shp
+		Filename: ra1_allies_minelayer_icon.shp
 
 raapc:
 	Defaults:
@@ -2100,9 +2100,9 @@ raapc:
 	icon:
 		Filename: raapcicon.png
 
-mrj:
+ra1_allies_mobileradarjammer:
 	Defaults:
-		Filename: mrj.shp
+		Filename: ra1_allies_mobileradarjammer.shp
 		Offset: 0,-10
 	idle:
 		Facings: 32
@@ -2111,14 +2111,14 @@ mrj:
 		Start: 32
 		Length: 32
 	jamsignal:
-		Filename: jamsignal.shp
+		Filename: ra1_allies_mobileradarjammer_jamsignal.shp
 		Scale: 2
 		Length: *
 		BlendMode: Alpha
 		Alpha: 0.3
 		Offset: 0,-5
 	icon:
-		Filename: mrjicon.shp
+		Filename: ra1_allies_mobileradarjammer_icon.shp
 		Offset: 0,0
 
 jamfield:
@@ -2130,28 +2130,28 @@ jamfield:
 		Alpha: 0.15
 		Scale: 2
 
-ramgg:
+ra1_allies_mobilegapgenerator:
 	idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	spinner:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Start: 32
 		Length: 8
 	spinner-idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Start: 32
 		Length: 1
 	gapfield:
-		Filename: gapgeneratoranimation.shp
+		Filename: ra1_allies_mobilegapgenerator_gapgeneratoranimation.shp
 		Length: *
 		BlendMode: Alpha
 		ZOffset: 1023
 		Alpha: 0.15
 		Scale: 1.75
 	icon:
-		Filename: ramggicon.shp
+		Filename: ra1_allies_mobilegapgenerator_icon.shp
 
 vortexanim:
 	Defaults:
@@ -2178,7 +2178,7 @@ vortexanim:
 	dead:
 		Alpha: 0
 	icon:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 
 ttnk:
 	Defaults:
@@ -2242,9 +2242,9 @@ dtrk:
 	icon:
 		Filename: dtrkicon.shp
 
-ctnk:
+ra1_allies_chronotank:
 	Defaults:
-		Filename: ctnk.shp
+		Filename: ra1_allies_promotion_unlockchronotank_ctnk.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2253,7 +2253,7 @@ ctnk:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ctnkicon.shp
+		Filename: ra1_allies_promotion_unlockchronotank_icon.shp
 
 qtnk:
 	Defaults:
@@ -2292,7 +2292,7 @@ modgtnk:
 
 modtnkd2:
 	Defaults:
-		Filename: AlliedTankDestroyerTSpritesheet.png
+		Filename: ra1_allies_promotion_unlocktankdestroyer_alliedtankdestroyertspritesheet.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2300,11 +2300,11 @@ modtnkd2:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: Ra1TankDestroyerIcon.shp
+		Filename: ra1_allies_promotion_unlocktankdestroyer_icon.shp
 
 modflak88:
 	idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
@@ -2336,22 +2336,22 @@ modbtr:
 	icon:
 		Filename: modbtricon.shp
 
-sheridan:
+ra1_allies_sheridanassaulttank:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: SheridanChassisSpriteSheet.png
+		Filename: ra1_allies_promotion_unlocksheridan_sheridanchassisspritesheet.png
 		Facings: 64
 	turret:
 		Scale: 1
-		Filename: SheridanTurret2Spritesheet.png
+		Filename: ra1_allies_promotion_unlocksheridan_sheridanturret2spritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: SheridanIcon.shp
+		Filename: ra1_allies_promotion_unlocksheridan_icon.shp
 
 modkubel:
 	Defaults:
@@ -2359,7 +2359,7 @@ modkubel:
 	idle:
 		Facings: 64
 	turret:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2465,9 +2465,9 @@ modcore:
 	idle:
 		Facings: -32
 	icon:
-		Filename: raweapicon.png
+		Filename: ra1_allies_alliedwarfactory_icon.png
 	icon1:
-		Filename: raprocicon.png
+		Filename: ra1_allies_alliedorerefinery_icon.png
 	icon2:
 		Filename: JapPowerplanIcon.shp
 	icon3:
@@ -2553,10 +2553,10 @@ jballista:
 rafact:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: rafact.shp
+		Filename: ra1_allies_alliedconstructionyard_rafact.shp
 	idle:
 	make:
-		Filename: rafactmake.shp
+		Filename: ra1_allies_alliedconstructionyard_rafactmake.shp
 		Length: *
 	build:
 		Start: 1
@@ -2567,11 +2567,11 @@ rafact:
 		Start: 27
 		Length: 25
 	dead:
-		Filename: rafactdead.shp
+		Filename: ra1_allies_alliedconstructionyard_rafactdead.shp
 		Tick: 800
 	bib:
 	icon:
-		Filename: rafacticon.png
+		Filename: ra1_allies_alliedconstructionyard_icon.png
 
 rafactj:
 	Inherits: ^WithBuildingBib2
@@ -2604,32 +2604,32 @@ rafactcolor:
 		Filename: rafactcolor.shp
 	idle:
 	icon:
-		Filename: rafacticon.png
+		Filename: ra1_allies_alliedconstructionyard_icon.png
 
 raproc:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: raproc.shp
+		Filename: ra1_allies_alliedorerefinery_raproc.shp
 	idle:
 		ZOffset: -1c511
 	damaged-idle:
 		ZOffset: -1c511
 	idle-top:
-		Filename: raproctop.shp
+		Filename: ra1_allies_alliedorerefinery_raproctop.shp
 		ZOffset: 0
 	damaged-idle-top:
-		Filename: raproctop.shp
+		Filename: ra1_allies_alliedorerefinery_raproctop.shp
 		Start: 1
 		ZOffset: 0
 	make:
-		Filename: raprocmake.shp
+		Filename: ra1_allies_alliedorerefinery_raprocmake.shp
 		Length: *
 	dead:
-		Filename: raprocdead.shp
+		Filename: ra1_allies_alliedorerefinery_raprocdead.shp
 		Tick: 800
 	bib:
 	icon:
-		Filename: raprocicon.png
+		Filename: ra1_allies_alliedorerefinery_icon.png
 
 rasilo:
 	Inherits: ^WithBuildingBibSilo
@@ -2715,10 +2715,10 @@ barr:
 	icon:
 		Filename: barricon.png
 
-tent:
+ra1_allies_alliedbarracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: tent.shp
+		Filename: ra1_allies_alliedbarracks.shp
 		TilesetFilenames:
 			DESERT: tent.des
 			SNOW: tent.sno
@@ -2734,7 +2734,7 @@ tent:
 		Start: 10
 		Length: 10
 	make:
-		Filename: tentmake.shp
+		Filename: ra1_allies_alliedbarracks_tentmake.shp
 		TilesetFilenames:
 			DESERT: tentmake.des
 			SNOW: tentmake.sno
@@ -2748,7 +2748,7 @@ tent:
 	dead:
 	bib:
 	icon:
-		Filename: tenticon.png
+		Filename: ra1_allies_alliedbarracks_icon.png
 		TilesetFilenames:
 
 kenn:
@@ -2769,39 +2769,39 @@ kenn:
 dome:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: dome.shp
+		Filename: ra1_allies_alliedradardome_dome.shp
 	idle:
 		Offset: 0,-8
 	damaged-idle:
 		Start: 1
 		Offset: 0,-8
 	make:
-		Filename: domemake.shp
+		Filename: ra1_allies_alliedradardome_domemake.shp
 		Length: *
 		Offset: 0,-8
 	dead:
 	bib:
 	icon:
-		Filename: domeicon.png
+		Filename: ra1_allies_alliedradardome_icon.png
 
-atek:
+ra1_allies_alliedtechcenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: atek.shp
+		Filename: ra1_allies_alliedtechcenter.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: atekmake.shp
+		Filename: ra1_allies_alliedtechcenter_atekmake.shp
 		Length: *
 	active:
-		Filename: sputdoor.shp
+		Filename: ra1_allies_alliedtechcenter_sputdoor.shp
 		Length: *
 		Offset: -8,0
 	dead:
 	bib:
 	icon:
-		Filename: atekicon.png
+		Filename: ra1_allies_alliedtechcenter_icon.png
 
 stek:
 	Inherits: ^WithBuildingBib2
@@ -2821,55 +2821,55 @@ stek:
 raweap:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: raweap.shp
+		Filename: ra1_allies_alliedwarfactory_raweap.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: raweapmake.shp
+		Filename: ra1_allies_alliedwarfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	dead:
 	bib:
 	icon:
-		Filename: raweapicon.png
+		Filename: ra1_allies_alliedwarfactory_icon.png
 
 ra_gigafactory:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: raweap.shp
+		Filename: ra1_allies_alliedwarfactory_raweap.shp
 		Scale: 1.333
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: raweapmake.shp
+		Filename: ra1_allies_alliedwarfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	smoke:
@@ -2883,10 +2883,10 @@ ra_gigafactory:
 	icon:
 		Filename: ra_gigafactoryicon.png
 
-rahpad:
+ra1_allies_alliedhelipad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: rahpad.shp
+		Filename: ra1_allies_alliedhelipad.shp
 	idle:
 		ZOffset: -1023
 	damaged-idle:
@@ -2901,12 +2901,12 @@ rahpad:
 		Length: 6
 		ZOffset: -1023
 	make:
-		Filename: rahpadmake.shp
+		Filename: ra1_allies_alliedhelipad_rahpadmake.shp
 		Length: *
 	dead:
 	bib:
 	icon:
-		Filename: rahpadicon.png
+		Filename: ra1_allies_alliedhelipad_icon.png
 
 raafld:
 	Defaults:
@@ -3022,7 +3022,7 @@ rafix:
 rafixa:
 	Inherits: rafix
 	Defaults:
-		Filename: rafixa.shp
+		Filename: ra1_allies_alliedservicedepot_rafixa.shp
 
 rafixs:
 	Inherits: rafix
@@ -3034,17 +3034,17 @@ rafixj:
 	Defaults:
 		Filename: rafixj.shp
 
-ragun:
+ra1_allies_alliedgunturret:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: ragun.shp
+		Filename: ra1_allies_alliedgunturret.shp
 	idle:
 		Facings: 32
 	recoil:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ragunmake.shp
+		Filename: ra1_allies_alliedgunturret_ragunmake.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3059,12 +3059,12 @@ ragun:
 	bib:
 		Offset: -1,-1
 	icon:
-		Filename: ragunicon.png
+		Filename: ra1_allies_alliedgunturret_icon.png
 
-agun:
+ra1_allies_alliedaagun:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: agun.shp
+		Filename: ra1_allies_alliedaagun.shp
 		Offset: 0,-26
 	idle:
 		Facings: 32
@@ -3072,7 +3072,7 @@ agun:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: agunmake.shp
+		Filename: ra1_allies_alliedaagun_agunmake.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3089,7 +3089,7 @@ agun:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: agunicon.png
+		Filename: ra1_allies_alliedaagun_icon.png
 		Offset: 0,0
 
 rasam:
@@ -3162,15 +3162,15 @@ tsla:
 		Filename: tslaicon.png
 		Offset: 0,0
 
-pbox:
+ra1_allies_pillbox:
 	Inherits: ^WithBuildingBibPbox
 	Defaults:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: pboxmake.shp
+		Filename: ra1_allies_pillbox_pboxmake.shp
 		Length: *
 	dead:
 	muzzle:
@@ -3180,13 +3180,13 @@ pbox:
 	bib:
 		Offset: 0,-1
 	icon:
-		Filename: pboxicon.png
+		Filename: ra1_allies_pillbox_icon.png
 
-hbox:
+ra1_allies_camopillbox:
 	Defaults:
-		Filename: hbox.shp
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.shp
 	idle:
-		Filename: hbox.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.tem
 		TilesetFilenames:
 			DESERT: hbox.des
 			WINTER: hbox.win
@@ -3198,7 +3198,7 @@ hbox:
 			ARRAKIS: hbox.des
 			ARRAKIS2: hbox.des
 	damaged-idle:
-		Filename: hbox.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.tem
 		TilesetFilenames:
 			DESERT: hbox.des
 			WINTER: hbox.win
@@ -3211,7 +3211,7 @@ hbox:
 			ARRAKIS2: hbox.des
 		Start: 2
 	make:
-		Filename: hboxmake.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hboxmake.tem
 		TilesetFilenames:
 			DESERT: hboxmake.des
 			WINTER: hboxmake.win
@@ -3229,12 +3229,12 @@ hbox:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: hboxicon.png
+		Filename: ra1_allies_promotion_unlockcamopillbox_icon.png
 
-gap:
+ra1_allies_gapgenerator:
 	Inherits: ^WithBuildingBibGap
 	Defaults:
-		Filename: gap.shp
+		Filename: ra1_allies_gapgenerator.shp
 	idle:
 		Length: 32
 		Offset: 0,-28
@@ -3244,11 +3244,11 @@ gap:
 		Offset: 0,-28
 	dead:
 	make:
-		Filename: gapmake.shp
+		Filename: ra1_allies_gapgenerator_gapmake.shp
 		Length: *
 		Offset: 0,-28
 	gapfield:
-		Filename: gapgeneratoranimation.shp
+		Filename: ra1_allies_mobilegapgenerator_gapgeneratoranimation.shp
 		Length: *
 		BlendMode: Alpha
 		ZOffset: 1023
@@ -3257,7 +3257,7 @@ gap:
 		Tick: 32
 	bib:
 	icon:
-		Filename: gapicon.png
+		Filename: ra1_allies_gapgenerator_icon.png
 
 iron:
 	Inherits: ^WithBuildingBibIron
@@ -3284,10 +3284,10 @@ iron:
 	icon:
 		Filename: ironicon.png
 
-pdox:
+ra1_allies_chronosphere:
 	Inherits: ^WithBuildingBibPdox
 	Defaults:
-		Filename: pdox.shp
+		Filename: ra1_allies_chronosphere.shp
 	idle:
 	damaged-idle:
 		Start: 29
@@ -3298,13 +3298,13 @@ pdox:
 		Length: 29
 	dead:
 	make:
-		Filename: pdoxmake.shp
+		Filename: ra1_allies_chronosphere_pdoxmake.shp
 		Length: *
 	bib:
 	icon:
-		Filename: pdoxicon.png
+		Filename: ra1_allies_chronosphere_icon.png
 	chronovortex:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 
 mslo:
 	Defaults:
@@ -3359,17 +3359,17 @@ fenc:
 	icon:
 		Filename: fencicon.shp
 
-modspaceport:
+ra1_allies_reinforcementpad:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: alliedreinforcementpadwhole.png
+		Filename: ra1_allies_promotion_unlockreinforcementpad_alliedreinforcementpadwhole.png
 		Offset: 5,10
 		#Scale: 1.25
 	idle:
 		Start: 10
 		Length: 11
 	damaged-idle:
-		Filename: alliedreinforcementpaddamaged.png
+		Filename: ra1_allies_promotion_unlockreinforcementpad_alliedreinforcementpaddamaged.png
 		Length: *
 	make:
 		Start: 0
@@ -3379,7 +3379,7 @@ modspaceport:
 		Offset: 0,5
 		Frames: 0,1,1,2,3,4,5,5,6,7
 	icon:
-		Filename: modspaceporticon.shp
+		Filename: ra1_allies_promotion_unlockreinforcementpad_icon.shp
 		Offset: 0,0
 
 jpwr:
@@ -3761,9 +3761,9 @@ yaknuclear:
 	icon:
 		Filename: ra_nuclearyakicon.png
 
-raheli:
+ra1_allies_longbow:
 	Defaults:
-		Filename: raheli.shp
+		Filename: ra1_allies_longbow.shp
 		Scale: 1.25
 	idle:
 		Facings: 32
@@ -3781,7 +3781,7 @@ raheli:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: raheliicon.png
+		Filename: ra1_allies_longbow_icon.png
 
 hind:
 	Defaults:
@@ -3885,9 +3885,9 @@ jhind:
 	icon:
 		Filename: skyhawkicon.png
 
-ratran:
+ra1_allies_alliedchinooktransport:
 	Defaults:
-		Filename: ratran2.shp
+		Filename: ra1_allies_alliedchinooktransport_ratran2.shp
 		Scale: 2
 	idle:
 		Facings: 32
@@ -3916,7 +3916,7 @@ ratran:
 	unload:
 		Start: 35
 	icon:
-		Filename: ratranicon.png
+		Filename: ra1_allies_alliedchinooktransport_icon.png
 
 u2:
 	Defaults:
@@ -3936,18 +3936,18 @@ badr:
 	icon:
 		Filename: badricon.png
 
-mh60:
+ra1_allies_blackhawk:
 	Defaults:
-		Filename: mh60.shp
+		Filename: ra1_allies_blackhawk.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		Scale: 2
 	rotor:
-		Filename: yrotorlg.shp
+		Filename: ra1_allies_blackhawk_yrotorlg.shp
 		Length: 4
 	slow-rotor:
-		Filename: yrotorlg.shp
+		Filename: ra1_allies_blackhawk_yrotorlg.shp
 		Start: 4
 		Length: 8
 	muzzle:
@@ -3955,7 +3955,7 @@ mh60:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: mh60icon.shp
+		Filename: ra1_allies_blackhawk_icon.shp
 
 su57:
 	Defaults:
@@ -4294,7 +4294,7 @@ mant:
 		Tick: 400
 		ZOffset: -511
 	turret:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Start: 38
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4370,7 +4370,7 @@ tant:
 		Tick: 400
 		ZOffset: -511
 	turret:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4784,12 +4784,12 @@ alliedtiger:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: TigerTankChassis.png
+		Filename: ra1_allies_promotion_unlocktigerheavytank_tigertankchassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 		Scale: 1.1
 	turret:
-		Filename: TigerTurret2Spritesheet.png
+		Filename: ra1_allies_promotion_unlocktigerheavytank_tigerturret2spritesheet.png
 		Facings: 64
 		#Offset: 0,0,-4098
 	muzzle:
@@ -4797,7 +4797,7 @@ alliedtiger:
 		Length: *
 		#Offset: 0,0,-4098
 	icon:
-		Filename: TigerCameo.shp
+		Filename: ra1_allies_promotion_unlocktigerheavytank_icon.shp
 
 alliedcybertank:
 	Defaults:
@@ -4820,16 +4820,16 @@ alliedcybertank:
 	icon:
 		Filename: CyberTankIcon.png
 
-heavyaatank:
+ra1_allies_alliedheavyaatank:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: HeavyAntiAirTankChassis.png
+		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankchassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 		Scale: 1
 	turret:
-		Filename: HeavyAntiAirTankTurret.png
+		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankturret.png
 		Facings: 64
 		#Offset: 0,0,-4098
 		Scale: 1
@@ -4838,34 +4838,34 @@ heavyaatank:
 		Length: *
 		#Offset: 0,0,-4098
 	icon:
-		Filename: heavyaatankicon.png
+		Filename: ra1_allies_alliedheavyaatank_icon.png
 
-reconranger:
+ra1_allies_reconranger:
 	Defaults:
 		Scale: 0.666
 	idle:
-		Filename: ReconRangerChassisSpritesheet.png
+		Filename: ra1_allies_promotion_unlockreconranger_reconrangerchassisspritesheet.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ReconRangerWeaponSpritesheet.png
+		Filename: ra1_allies_promotion_unlockreconranger_reconrangerweaponspritesheet.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ReconRangerIcon.png
+		Filename: ra1_allies_promotion_unlockreconranger_icon.png
 
-sapc:
+ra1_allies_phasetransport:
 	Defaults:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 	idle:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Start: 38
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4879,11 +4879,11 @@ sapc:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: sapcicon.png
+		Filename: ra1_allies_promotion_unlockphasetransport_icon.png
 
 gapgeneratorradarjammer:
 	icon:
-		Filename: gapgeneratorradarjammer.png
+		Filename: ra1_allies_promotion_unlockgapgeneratorandradarjammer_icon.png
 
 ralst:
 	idle:
@@ -4991,10 +4991,10 @@ jballistat:
 	icon:
 		Filename: jballistaticon.shp
 
-modartyturret:
+ra1_allies_bastionartillerybunker:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: AlliedBastionIdle.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionidle.png
 	idle:
 		Offset: 0,-6
 		Scale: 0.7
@@ -5003,11 +5003,11 @@ modartyturret:
 		Offset: 0,-6
 		Scale: 0.7
 	turret:
-		Filename: AlliedBastionTurret.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionturret.png
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: AlliedBastionBuildup.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionbuildup.png
 		Length: *
 		Offset: 0,-4
 		Tick: 150
@@ -5020,7 +5020,7 @@ modartyturret:
 	bib:
 		Offset: 0, 1
 	icon:
-		Filename: AlliedBastionIcon.shp
+		Filename: ra1_allies_promotion_unlockbastion_icon.shp
 
 modpillboxfort:
 	Inherits: ^WithBuildingBibIron
@@ -5121,9 +5121,9 @@ modnano:
 	icon:
 		Filename: modnanoicon.shp
 
-rapierjumpjet:
+ra1_allies_rapierjumpjet:
 	Defaults:
-		Filename: AlliedRapierSpritesheet.png
+		Filename: ra1_allies_promotion_unlockrapierjumpjet_alliedrapierspritesheet.png
 		Scale: .9
 	idle:
 		Scale: 1
@@ -5132,7 +5132,7 @@ rapierjumpjet:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: RapierJumpJetIcon.shp
+		Filename: ra1_allies_promotion_unlockrapierjumpjet_icon.shp
 
 hakurei:
 	Defaults:
@@ -5470,35 +5470,35 @@ bushido_icon:
 
 advancedradarsystemicon:
 	icon:
-		Filename: advancedradarsystemicon.png
+		Filename: ra1_allies_upgrade_advancedradarsystems_icon.png
 
 infantryarmorplatingicon:
 	icon:
-		Filename: infantryarmorplatingicon.png
+		Filename: ra1_allies_upgrade_infantryarmorplating_icon.png
 
 reinforcedstructuresicon:
 	icon:
-		Filename: reinforcedstructuresicon.png
+		Filename: ra1_allies_upgrade_reinforcedstructures_icon.png
 
 lasertargetingsystemicon:
 	icon:
-		Filename: lasertargetingsystemicon.png
+		Filename: ra1_allies_upgrade_lasertargetingsystems_icon.png
 
 airsuperiorityicon:
 	icon:
-		Filename: airsuperiorityicon.png
+		Filename: ra1_allies_upgrade_airsuperioritydoctrine_icon.png
 
 cryomissilesicon:
 	icon:
-		Filename: cryomissilesicon.png
+		Filename: ra1_allies_upgrade_cryomissiles_icon.png
 
 chronoarmoricon:
 	icon:
-		Filename: chronoarmoricon.png
+		Filename: ra1_allies_upgrade_chronoarmor_icon.png
 
 gpssatellitesupporticon:
 	icon:
-		Filename: gpssicon.shp
+		Filename: ra1_allies_upgrade_gpssatellitesupport_icon.shp
 
 conscriptionicon:
 	icon:

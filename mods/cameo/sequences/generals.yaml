@@ -30,7 +30,7 @@ glabomber:
 		Facings: 32
 
 gle1:
-	Inherits: sniper
+	Inherits: ra1_allies_alliedsniper
 	idle1:
 		Start: 384
 		Length: 14
@@ -72,8 +72,8 @@ gle1:
 	icon: gle1icon
 
 glsabo:
-	Inherits: raspy
-	Defaults: raspy
+	Inherits: ra1_allies_raspy
+	Defaults: ra1_allies_raspy
 	icon: glsaboicon
 
 glhijack:
@@ -652,7 +652,7 @@ gltractor:
 glpickup:
 	idle:
 		Facings: 16
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -672,7 +672,7 @@ glvan:
 		Facings: 32
 		UseClassicFacings: True
     Scale: 1.08
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -730,7 +730,7 @@ glgunboat:
 		Facings: 32
 		UseClassicFacings: True
 		Scale: 0.70
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -826,7 +826,7 @@ glscrapcar:
 		Facings: 32
 		UseClassicFacings: True
 		Scale: 0.83
-	turret: rajeep
+	turret: ra1_allies_ranger
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1090,7 +1090,7 @@ chbunker:
 
 che1:
 	Inherits: gle1
-	Defaults: sniper
+	Defaults: ra1_allies_alliedsniper
 		Scale: 0.85
 	icon: che1icon
 	redstar: chhorde

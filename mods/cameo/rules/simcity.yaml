@@ -2123,7 +2123,7 @@ CITYSWATGL:
 		Prerequisites: citylibrary, citybank, cityairport, ~techlevel.high
 		BuildDurationModifier: 50
 		Queue: Vehicle, RAVehicle
-		Description: Stealth Elite law enforcement equipped with silenced Sniper Rifle\nCan he upgraded to get Grenade Launcher\nStrong vs Infantry, Air
+		Description: Stealth Elite law enforcement equipped with silenced ra1_allies_alliedsniper Rifle\nCan he upgraded to get Grenade Launcher\nStrong vs Infantry, Air
 		Icon: iconcomm
 	Tooltip:
 		Name: S.W.A.T. Specialist
@@ -2145,7 +2145,7 @@ CITYSWATGL:
 		Range: 7c0
 	AutoTarget:
 		ScanRadius: 8
-	Armament@Sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: SwatSniper
 		LocalOffset: 0,0,25
 	Armament@GL:

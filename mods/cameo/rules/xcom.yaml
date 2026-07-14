@@ -549,12 +549,12 @@ xcomsharpshooter:
 		Image: ra2snipe
 AutoSniperUpgrade:
 	Tooltip:
-		Name: Auto Sniper Upgrade
+		Name: Auto ra1_allies_alliedsniper Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 2
 		Queue: Addons
-		Description: Gives the Sniper an automatic Sniper Rifle
+		Description: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
 	Valued:
 		Cost: 800
 	RenderSprites:
@@ -571,9 +571,9 @@ AutoSniperUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Auto Sniper Upgrade
+			1: Auto ra1_allies_alliedsniper Upgrade
 		Descriptions:
-			1: Gives the Sniper an automatic Sniper Rifle
+			1: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
 		Condition: AutoSniperUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -1096,7 +1096,7 @@ xcom_infirmary:
 	Valued:
 		Cost: 1750
 	RenderSprites:
-		Image: medi
+		Image: ra1_allies_medic
 
 xcom_defense_matrix:
 	Inherits: ^researched_upgrade.template
@@ -1140,7 +1140,7 @@ xcom_satellite_uplink:
 	Valued:
 		Cost: 1000
 	RenderSprites:
-		Image: atek
+		Image: ra1_allies_alliedtechcenter
 
 xcom_satellite_nexus:
 	Inherits: ^researched_upgrade.template
@@ -1321,7 +1321,7 @@ xcom_builder:
 		Condition: moving
 
 xcom_buildable_turret:
-	Inherits: RAGUN
+	Inherits: ra1_allies_alliedgunturret
 	Buildable:
 		Queue: Builder
 		Prerequisites: ~xcomhq
@@ -1333,4 +1333,4 @@ xcom_buildable_turret:
 		Amount: 0
 	InstantlyPlaced:
 	RenderSprites:
-		Image: ragun
+		Image: ra1_allies_alliedgunturret

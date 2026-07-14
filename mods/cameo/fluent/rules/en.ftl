@@ -31,7 +31,7 @@ actor_dog =
       Strong vs Infantry
 
 actor_rasniper =
-   .name = Allied Sniper
+   .name = Allied ra1_allies_alliedsniper
    .description = Camouflaged soldier that can detect cloaked units.
         Strong vs Infantry
 
@@ -126,7 +126,7 @@ actor_mgg =
    .description = Regenerates the shroud nearby,
     obscuring the area.
         Unarmed
-   .name = Mobile Gap Generator
+   .name = Mobile ra1_allies_gapgenerator Generator
 
 actor_mrj =
    .name = Mobile Radar Jammer
@@ -155,7 +155,7 @@ actor_sheridan =
    .description = General-purpose light tank.
       Can attack air with missiles.
         Strong vs Infantry, vehicles
-   .name = Sheridan
+   .name = ra1_allies_sheridanassaulttank
 
 actor_rapierjumpjet =
    .description = Fast multirole fighter-bomber.
@@ -163,9 +163,9 @@ actor_rapierjumpjet =
    .name = Rapier Jumpjet
 
 upgrade_gapgen =
-   .description = Allows construction of the Gap Generator
-      and the Mobile Gap Generator and the Phase Transport.
-   .name = Unlock Gap Generator Technology
+   .description = Allows construction of the ra1_allies_gapgenerator Generator
+      and the Mobile ra1_allies_gapgenerator Generator and the Phase Transport.
+   .name = Unlock ra1_allies_gapgenerator Generator Technology
 
 actor_mortarsoldier =
    .name = Mortar Soldier
@@ -335,7 +335,7 @@ actor_agun =
    .name = AA Gun
 
 actor_gap =
-   .name = Gap Generator
+   .name = ra1_allies_gapgenerator Generator
    .description = Obscures the enemy's view with shroud.
     Requires power to operate.
 
@@ -539,7 +539,7 @@ actor_cleg =
         Weak vs Aircraft
 
 actor_ra2snipe =
-   .name = Sniper
+   .name = ra1_allies_alliedsniper
    .description = Strong vs Infantry
 
 actor_seal =
@@ -977,7 +977,7 @@ actor_forgotten_zombiemutant =
       Weak vs Aircraft
 
 actor_forgotten_mutantsniper =
-   .name = Mutant Sniper
+   .name = Mutant ra1_allies_alliedsniper
    .description = Long-range marksman.
       Can only target infantry, and picks them out of garrisoned structures.
       Strong vs Infantry
@@ -2004,7 +2004,7 @@ upgrade_tsprojectileimprovements =
       Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and SAM Towers by 20%
 
 upgrade_mechengineering =
-   .name = Mech Engineering
+   .name = ra1_allies_mechanic Engineering
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance of walkers by 20%.
       Increases Speed by 25%.

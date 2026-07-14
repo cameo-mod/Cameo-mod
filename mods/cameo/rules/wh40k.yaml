@@ -3999,7 +3999,7 @@ wh40ksentinel:
 			wh40kkarsgrenade: ifv-cannon
 			e6: ifv-repair
 			rae6: ifv-repair
-			mech: ifv-repair
+			ra1_allies_mechanic: ifv-repair
 			scscv: ifv-repair
 			ra2engineer: ifv-repair
 			ra2engineer.soviet: ifv-repair
@@ -4040,7 +4040,7 @@ wh40ksentinel:
 			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
 			rmbo: ifv-hero
-			e7: ifv-hero
+			ra1_allies_tanya: ifv-hero
 			ra2tany: ifv-hero
 			cityswat: ifv-hero
 			yrboris: ifv-hero
@@ -4051,19 +4051,19 @@ wh40ksentinel:
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			scghost: ifv-sniper
-			ra2snipe: ifv-sniper
-			yrvirus: ifv-sniper
-			raspy: ifv-sniper
-			ra2spy: ifv-sniper
-			ts_nod_chameleonspy: ifv-sniper
-			forgotten_mutantsniper: ifv-sniper
-			glkell: ifv-sniper
-			leangkell: ifv-sniper
-			glsabo: ifv-sniper
-			usapath: ifv-sniper
-			leangpath: ifv-sniper
-			wh40kcommisair: ifv-sniper
+			scghost: ifv-ra1_allies_alliedsniper
+			ra2snipe: ifv-ra1_allies_alliedsniper
+			yrvirus: ifv-ra1_allies_alliedsniper
+			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
+			ra2spy: ifv-ra1_allies_alliedsniper
+			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			glkell: ifv-ra1_allies_alliedsniper
+			leangkell: ifv-ra1_allies_alliedsniper
+			glsabo: ifv-ra1_allies_alliedsniper
+			usapath: ifv-ra1_allies_alliedsniper
+			leangpath: ifv-ra1_allies_alliedsniper
+			wh40kcommisair: ifv-ra1_allies_alliedsniper
 			ra2cleg: ifv-chrono
 			ra2ivan: ifv-demo
 			ra2terror: ifv-demo
@@ -4078,7 +4078,7 @@ wh40ksentinel:
 		RecoilRecovery: 38
 		LocalOffset: 768,12,20, 768,-12,20
 		MuzzleSequence: muzzle
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@MG1:
 		Weapon: WH40KHeavyBolterMG
 		Recoil: 128
@@ -4099,11 +4099,11 @@ wh40ksentinel:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: WH40KSentinelCannon
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: WH40KOgrynGun
 		LocalOffset: 171,0,255
@@ -5797,21 +5797,21 @@ wh40kscoutsniper:
 	Power:
 		Amount: -15
 	Tooltip:
-		Name: Sniper Scout
+		Name: ra1_allies_alliedsniper Scout
 	Buildable:
 		BuildPaletteOrder: 63
 		Prerequisites: barracks, wh40karmorym
 		Queue: Defence, RADefence
 		Description: Armed Long Ranged Weapon.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 		MuzzleSequence: garrison-muzzle
 	WithDecoration@addon:
 		Image: wh40kitems
-		Sequence: sniper
+		Sequence: ra1_allies_alliedsniper
 		Position: TopRight
 		BlinkInterval: 32
 		BlinkPattern: Off, On, Off, Off

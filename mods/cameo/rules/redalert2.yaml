@@ -979,15 +979,15 @@ ra2gagap:
 	-RenderRangeCircle:
 	-ExternalCondition@shrouded:
 	-ExternalCondition@lockon:
-	-RangeMultiplier@up_gpssatellitesupport:
-	-RevealsShroudMultiplier@up_gpssatellitesupport:
-	-DetectCloakedMultiplier@up_gpssatellitesupport:
-	-InaccuracyMultiplier@up_gpssatellitesupport:
-	-GrantConditionOnPrerequisite@up_gpssatellitesupport:
+	-RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+	-GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: Gap Generator
+		Name: ra1_allies_gapgenerator Generator
 	Buildable:
 		BuildLimit: 1
 		BuildDuration: 1500
@@ -1013,7 +1013,7 @@ ra2gagap:
 	ProximityExternalCondition@shrouded:
 		Range: 10000
 		ValidRelationships: Ally
-		Condition: gap-shroud
+		Condition: ra1_allies_gapgenerator-shroud
 		RequiresCondition: !lowpower && !disabled
 	-RenderDetectionCircle:
 	RenderShroudCircle:
@@ -3738,7 +3738,7 @@ RA2SNIPE:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Sniper
+		Name: ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gapile, ra2gatech
@@ -5648,7 +5648,7 @@ RA2FV:
 		Cost: 500
 	Tooltip:
 		Name: actor_fv.name
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~ra2gaweap
@@ -5719,42 +5719,42 @@ RA2FV:
 		Name: primary
 		Weapon: RA2HoverMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryelite:
 		Name: primary
 		Weapon: RA2HoverMissile_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryAA:
 		Name: primary
 		Weapon: RA2HoverMissileAA
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteAA:
 		Name: primary
 		Weapon: RA2HoverMissileAA_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissile_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryAAThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissileAA
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@primaryeliteAAThunderbolt:
 		Name: primary
 		Weapon: RA2ThunderboltMissileAA_elite
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
 	Armament@missile:
 		Weapon: RA2MultiHoverMissile
 		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
@@ -5814,12 +5814,12 @@ RA2FV:
 	FirepowerMultiplier@repair:
 		Modifier: 50
 		RequiresCondition: ifv-repair || ifv-healer
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: RA2AWP
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
 		MuzzlePalette: ra2effect
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: RA2DoublePistolsIFV
 		LocalOffset: 171,0,255
@@ -5873,10 +5873,10 @@ RA2FV:
 	###################
 	WithSpriteTurret@default:
 		Sequence: turret-missile
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
 	WithSpriteTurret@mg:
 		Sequence: turret-mg
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
 	WithSpriteTurret@flame:
 		Sequence: turret-flame
 		RequiresCondition: ifv-chem || ifv-fire
@@ -5906,8 +5906,8 @@ RA2FV:
 		Name: Repair IFV
 		RequiresCondition: ifv-repair
 	Tooltip@SNIPE:
-		Name: Sniper IFV
-		RequiresCondition: ifv-sniper
+		Name: ra1_allies_alliedsniper IFV
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Tooltip@HERO:
 		Name: Hero IFV
 		RequiresCondition: ifv-hero
@@ -13222,7 +13222,7 @@ ra2_soviets_upgrade_kirovnuclearshells:
 # upra2snipe:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
-# 		Name: Unlock Sniper
+# 		Name: Unlock ra1_allies_alliedsniper
 # 	Buildable:
 # 		BuildPaletteOrder: 79
 # 		Queue: Promotions
@@ -14476,7 +14476,7 @@ ra2_yuri_upgrade_corrosiveammo:
 		Name: Corrosive Ammo
 	Buildable:
 		Queue: Research
-		Description: Adds a powerful corrosive effect to the Virus Sniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
+		Description: Adds a powerful corrosive effect to the Virus ra1_allies_alliedsniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
 		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_upgrade_meltingvirus, !ra2_yuri_upgrade_corrosiveammo
 	RenderSprites:
 		Image: ra2_yuri_upgrade_corrosiveammo

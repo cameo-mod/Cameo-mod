@@ -7528,7 +7528,7 @@ awifv:
 			leange2: ifv-cannon
 			e6: ifv-repair
 			rae6: ifv-repair
-			mech: ifv-repair
+			ra1_allies_mechanic: ifv-repair
 			scscv: ifv-repair
 			ra2engineer: ifv-repair
 			ra2engineer.soviet: ifv-repair
@@ -7571,7 +7571,7 @@ awifv:
 			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
 			rmbo: ifv-hero
-			e7: ifv-hero
+			ra1_allies_tanya: ifv-hero
 			ra2tany: ifv-hero
 			cityswat: ifv-hero
 			yrboris: ifv-hero
@@ -7582,18 +7582,18 @@ awifv:
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			scghost: ifv-sniper
-			ra2snipe: ifv-sniper
-			yrvirus: ifv-sniper
-			raspy: ifv-sniper
-			ra2spy: ifv-sniper
-			ts_nod_chameleonspy: ifv-sniper
-			forgotten_mutantsniper: ifv-sniper
-			glkell: ifv-sniper
-			leangkell: ifv-sniper
-			glsabo: ifv-sniper
-			usapath: ifv-sniper
-			leangpath: ifv-sniper
+			scghost: ifv-ra1_allies_alliedsniper
+			ra2snipe: ifv-ra1_allies_alliedsniper
+			yrvirus: ifv-ra1_allies_alliedsniper
+			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
+			ra2spy: ifv-ra1_allies_alliedsniper
+			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			glkell: ifv-ra1_allies_alliedsniper
+			leangkell: ifv-ra1_allies_alliedsniper
+			glsabo: ifv-ra1_allies_alliedsniper
+			usapath: ifv-ra1_allies_alliedsniper
+			leangpath: ifv-ra1_allies_alliedsniper
 			ra2cleg: ifv-chrono
 			ra2ivan: ifv-demo
 			ra2terror: ifv-demo
@@ -7605,7 +7605,7 @@ awifv:
 	Armament@primary:
 		Weapon: AWRA2HoverMissile
 		LocalOffset: 768,99,290, 768,-99,290
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@mg:
 		Weapon: AWMachinegunIFV
 		LocalOffset: 171,0,255
@@ -7617,11 +7617,11 @@ awifv:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: GENAWP
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: BorisAKM
 		LocalOffset: 171,0,255
@@ -7680,12 +7680,12 @@ awifv:
 		IdleSequences: stand
 		StandSequences: stand
 		MoveSequence: run
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	WithInfantryBody@mg:
 		IdleSequences: stand2
 		StandSequences: stand2
 		MoveSequence: run2
-		RequiresCondition: ifv-mg || ifv-sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
+		RequiresCondition: ifv-mg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-chem || ifv-fire
 	WithInfantryBody@hitech:
 		IdleSequences: stand3
 		StandSequences: stand3
@@ -9956,7 +9956,7 @@ awe3:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Mech Infantry
+		Name: ra1_allies_mechanic Infantry
 	UpdatesPlayerStatistics:
 		AddToArmyValue: True
 	Buildable:

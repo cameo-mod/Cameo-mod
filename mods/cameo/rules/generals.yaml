@@ -6436,7 +6436,7 @@ chinternetcenter:
 		LoadedCondition: cond_loaded
 	RevealActorsPower@SATHACK:
 		CameraActor: camera.sathack
-		TargetActors: fact.gdi, fact.nod, rafact.allies, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
+		TargetActors: fact.gdi, fact.nod, ra1_allies_alliedconstructionyard, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
 		LifeTime: 500
 		OrderName: satellitehack1
 		Icon: sathack1
@@ -9456,7 +9456,7 @@ chasub:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 chmnly:
-	Inherits: MNLY
+	Inherits: ra1_allies_minelayer
 	Inherits@GeneralsVehicle: ^GeneralsVehicle
 	Buildable:
 		Queue: Building, RABuilding
@@ -9824,7 +9824,7 @@ usapath:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Stealthed sniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: Stealthed ra1_allies_alliedsniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 		Prerequisites: barracks, upusapath, ~!anysusa
 	Valued:
 		Cost: 600

@@ -1296,7 +1296,7 @@ WORMDYNAMITE:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 1000
 		BuildDurationModifier: 40
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Mobile:
 		Speed: 71
 	Guard:
@@ -1311,7 +1311,7 @@ WORMDYNAMITE:
 	Demolition:
 		DetonationDelay: 45
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		-IdleSequences: idle1,idle2,idle3

@@ -1224,7 +1224,7 @@
 	-InaccuracyMultiplier@RANK-2:
 	-InaccuracyMultiplier@RANK-3:
 	-InaccuracyMultiplier@RANK-ELITE:
-	-InaccuracyMultiplier@up_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
 	-InaccuracyMultiplier@COMMANDOCALL:
 
 ^SniperInfantryTemplate:
@@ -1249,10 +1249,10 @@
 		IconPalette: cameo
 	KeepsDistance:
 		Distance: 10
-	TooltipExtras@Sniper:
-		Description: Sniper
+	TooltipExtras@ra1_allies_alliedsniper:
+		Description: ra1_allies_alliedsniper
 	GrantExternalConditionToTransport:
-		Condition: ifv-sniper
+		Condition: ifv-ra1_allies_alliedsniper
 
 ^HackableRobot:
 	Targetable@HackableRobot:
@@ -2861,9 +2861,9 @@
 			fcom: garrisoned
 			miss: garrisoned
 			ramiss: garrisoned
-			pbox: garrisoned
-			hbox: garrisoned
-			modartyturret: garrisoned
+			ra1_allies_pillbox: garrisoned
+			ra1_allies_camopillbox: garrisoned
+			ra1_allies_bastionartillerybunker: garrisoned
 			ra2gapill: garrisoned
 			yrngbnkr: garrisoned
 			bunk.nax: garrisoned
@@ -4757,15 +4757,15 @@
 
 ^Shroudable:
 	ExternalCondition@shrouded:
-		Condition: gap-shroud
+		Condition: ra1_allies_gapgenerator-shroud
 	GrantConditionOnAttack@unshroud:
 		Condition: firing
 		RevokeDelay: 50
 		ArmamentNames: primary, secondary, deployed, garrisoned
-		RequiresCondition: gap-shroud
+		RequiresCondition: ra1_allies_gapgenerator-shroud
 	GrantCondition@shrouded:
 		Condition: shrouded
-		RequiresCondition: gap-shroud && !firing
+		RequiresCondition: ra1_allies_gapgenerator-shroud && !firing
 	WithColoredOverlay@shrouded:
 		RequiresCondition: shrouded
 		Color: 11223344
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,ra1_allies_alliedhelipad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: fix.gdi, fix.nod, ra1_allies_alliedservicedepot, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8801,8 +8801,8 @@ CPQDEBUGDUMMY:
 		Condition: ifv-chem
 	ExternalCondition@hero:
 		Condition: ifv-hero
-	ExternalCondition@sniper:
-		Condition: ifv-sniper
+	ExternalCondition@ra1_allies_alliedsniper:
+		Condition: ifv-ra1_allies_alliedsniper
 	ExternalCondition@spy:
 		Condition: ifv-spy
 	ExternalCondition@chrono:
@@ -8854,8 +8854,8 @@ CPQDEBUGDUMMY:
 			# plast.asian: ifv-cannon
 			# e6: ifv-repair
 			# rae6: ifv-repair
-			# medi: ifv-healer
-			# mech: ifv-repair
+			# ra1_allies_medic: ifv-healer
+			# ra1_allies_mechanic: ifv-repair
 			# scscv: ifv-repair
 			# ra2engineer: ifv-repair
 			# ra2engineer.soviet: ifv-repair
@@ -8899,7 +8899,7 @@ CPQDEBUGDUMMY:
 			# forgotten_chemsprayinfantry: ifv-chem
 			# gle1toxin: ifv-thrax
 			# rmbo: ifv-hero
-			# e7: ifv-hero
+			# ra1_allies_tanya: ifv-hero
 			# ra2tany: ifv-hero
 			# cityswat: ifv-hero
 			# yrboris: ifv-hero
@@ -8911,20 +8911,20 @@ CPQDEBUGDUMMY:
 			# usaburton: ifv-hero
 			# susaburton: ifv-hero
 			# leangburton: ifv-hero
-			# scghost: ifv-sniper
-			# ra2snipe: ifv-sniper
-			# yrvirus: ifv-sniper
-			# raspy: ifv-spy
+			# scghost: ifv-ra1_allies_alliedsniper
+			# ra2snipe: ifv-ra1_allies_alliedsniper
+			# yrvirus: ifv-ra1_allies_alliedsniper
+			# ra1_allies_raspy: ifv-spy
 			# ra2spy: ifv-spy
 			# shinobi.asian: ifv-spy
-			# ts_nod_chameleonspy: ifv-sniper
-			# forgotten_mutantsniper: ifv-sniper
-			# glkell: ifv-sniper
-			# leangkell: ifv-sniper
-			# glsabo: ifv-sniper
-			# usapath: ifv-sniper
-			# susapath: ifv-sniper
-			# leangpath: ifv-sniper
+			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			# glkell: ifv-ra1_allies_alliedsniper
+			# leangkell: ifv-ra1_allies_alliedsniper
+			# glsabo: ifv-ra1_allies_alliedsniper
+			# usapath: ifv-ra1_allies_alliedsniper
+			# susapath: ifv-ra1_allies_alliedsniper
+			# leangpath: ifv-ra1_allies_alliedsniper
 			# ra2cleg: ifv-chrono
 			# ra2ivan: ifv-demo
 			# ra2terror: ifv-demo
@@ -8963,8 +8963,8 @@ CPQDEBUGDUMMY:
 			# nsfremen: ifv-fremen
 			# plasma_infantry: ifv-plasma
 			# fedaykin: ifv-sonic
-			# d2k_sniper: ifv-sniper
-			# d2k_marksman: ifv-sniper
+			# d2k_sniper: ifv-ra1_allies_alliedsniper
+			# d2k_marksman: ifv-ra1_allies_alliedsniper
 			# flamethrower: ifv-fire
 			# d2k_mechanic: ifv-repair
 			# drguardian: ifv-litlaser
@@ -8974,7 +8974,7 @@ CPQDEBUGDUMMY:
 			# drraid: ifv-litlaser
 			# drscout: ifv-fremen
 			# drmercenary: ifv-cannon
-			# drsnipe: ifv-sniper
+			# drsnipe: ifv-ra1_allies_alliedsniper
 			# drmartyr: ifv-demo
 			# drsabot: ifv-demo
 			# drmech: ifv-repair
@@ -9042,7 +9042,7 @@ CPQDEBUGDUMMY:
 			# wh40kmarineflamer: ifv-fire
 			# wh40kscoutflamer: ifv-fire
 			# wh40kmarinerocket: ifv-miss
-			# wh40kscoutsniper: ifv-sniper
+			# wh40kscoutsniper: ifv-ra1_allies_alliedsniper
 			# wh40kforcecmd: ifv-hero
 			# wh40kterminator1: ifv-hvmg
 			# wh40kterminator2: ifv-hvmg
@@ -9069,7 +9069,7 @@ CPQDEBUGDUMMY:
 			# raje3: ifv-miss
 			# ramaid: ifv-archermaiden
 			# archer.asian: ifv-archermaiden
-			# sniper: ifv-sniper
+			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer
 			# wc_o_grunt: ifv-archer
@@ -9107,9 +9107,9 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: LightSniper
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: BorisAKM
 		RequiresCondition: ifv-hero
@@ -9232,7 +9232,7 @@ CPQDEBUGDUMMY:
 			rmbo: hero
 			gdihavoc: hero
 			nodlasercommando: hero
-			e7: hero
+			ra1_allies_tanya: hero
 			volkov: hero
 			hakurei: hero
 			ra2tany: hero

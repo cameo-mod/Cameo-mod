@@ -278,7 +278,7 @@ TACONFESSOR:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, Addonshand3
 		Queue: Infantry, RAInfantry
-		Description: Similar to the GDI Sniper Team, the Nod Confessors are a lightly-armoured infantry unit capable of eliminating enemy infantry quickly and efficiently while maintaining a safe distance. Unfortunately, they’re pretty much weak against anything else.
+		Description: Similar to the GDI ra1_allies_alliedsniper Team, the Nod Confessors are a lightly-armoured infantry unit capable of eliminating enemy infantry quickly and efficiently while maintaining a safe distance. Unfortunately, they’re pretty much weak against anything else.
 	Health:
 		HP: 14000
 	Armament@PRIMARY:
@@ -344,7 +344,7 @@ TASNIPE:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Sniper
+		Name: ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: Addonsbarr3, ~techlevel.medium
@@ -392,7 +392,7 @@ TAMUTSNIPE:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Mutant Sniper
+		Name: Mutant ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 95
 		Prerequisites: barracks, upgrade.tamutbarr2
@@ -1662,7 +1662,7 @@ tauplaserscope:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Increase Sniper Shoot Range
+		Description: Increase ra1_allies_alliedsniper Shoot Range
 		Prerequisites: ~!tauplaserscope, barracks
 	Valued:
 		Cost: 1500
