@@ -1429,13 +1429,13 @@ ordos_raider:
 	WithMuzzleOverlay:
 	Armament@damage:
 		Weapon: HMGo
-		LocalOffset: 210,135,75, 210,-135,75
+		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
 		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@damageLaser:
 		Weapon: HMGo_upgrade
-		LocalOffset: 210,135,75, 210,-135,75
+		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
 		RequiresCondition: ordos_upgrade_lasercartridges

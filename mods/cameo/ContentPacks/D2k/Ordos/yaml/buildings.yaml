@@ -6,8 +6,6 @@ ordos_constructionyard:
 		IntoActor: ordos_mobileconstructionvehicle
 	RenderSprites:
 		Image: conyard.ordos
-	ProvidesPrerequisite@faction:
-		Prerequisite: faction.ordos
 
 # Generic wind trap template. Common traits live here; each faction actor below
 # only sets its own build prerequisite (owning construction yard) and sprite image.
