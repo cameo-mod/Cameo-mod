@@ -497,7 +497,7 @@ td_nod_flamethrower:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_nod_chemicalwarrior_e4rot.shp
@@ -638,7 +638,7 @@ td_nod_chemicalwarrior:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_nod_chemicalwarrior_e4rot.shp
@@ -796,7 +796,7 @@ td_nod_stealthsoldier:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -911,7 +911,7 @@ td_nod_lasertrooper:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -1243,7 +1243,7 @@ td_nod_lasercommando:
 	#	Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Scale: 1
 		Length: *
 	die-crushed:
