@@ -266,6 +266,47 @@ factions, everything through the balance workbook._
   (0 violations). Template override names preserved; suffixed variants
   (@Effect2, @EffectAir2, etc.) recognized as canonical.
 
+### CE2. CreateEffect Image field audit + explosion sequence consolidation
+- [x] **CABAL CreateEffect Image: removal** (2026-07-15): Removed explicit
+  `Image:` fields from all CABAL `CreateEffect` warheads in
+  `CABAL/yaml/weapons.yaml`. All impact animations now use the default
+  `explosion` image (engine default when `Image:` is omitted).
+- [x] **CABAL impact animations moved to misc.yaml** (2026-07-15):
+  `cabal_greenplasmaimpact`, `cabal_missileexplosion`,
+  `cabal_laserimpact_s`, `cabal_laserimpact_m`, `cabal_laserimpact_l`,
+  `cabal_dissolveimpact` moved from `CABAL/yaml/sequences.yaml` to
+  `sequences/misc.yaml` under the `explosion:` key. Removed the old
+  top-level definitions from the CABAL sequences file.
+- [x] **Mod-wide CE-only Image: fixes** (2026-07-15): Moved CE-only
+  image `wc2_building_collapse` under `explosion:` in misc.yaml; removed
+  `Image:` from 7 CE warheads in `weapons/warcraft2.yaml`. Removed
+  redundant `Image: explosion` from `weapons/halloween.yaml`. Shared
+  images (used by both CE and other traits) keep their `Image:` field
+  per the shared-image exception in DESIGN.md §8. `ra2corpse` reverted —
+  corpse spawner needs `Image:` for random-pick from its own
+  sub-sequences (corpse-spawner exception, DESIGN.md §8).
+- [x] **DESIGN.md updated** (2026-07-15): Added rules to §8 documenting
+  that `CreateEffect` must never carry `Image:` (CE-only), the
+  shared-image exception, and that all impact animations must live in
+  `misc.yaml` under `explosion:`.
+- [x] **Audit tooling** (2026-07-15): `tools/audit_createeffect_image.py`
+  flags all CE `Image:` fields; `tools/audit_ce_image_usage.py`
+  classifies CE-only vs shared.
+- [ ] **Future**: If a shared image's non-CE references are ever removed,
+  it becomes CE-only and should be moved under `explosion:` at that time.
+
+### CE3. Map actor renaming (delivery + deliverycoop)
+- [x] **Actor rename in new maps** (2026-07-15): Commit
+  `e6ad4ded5fa08c6b41fde63a256f2f5c15917241` added new maps
+  (`delivery/map.yaml`, `deliverycoop/map.yaml`) with old compressed
+  actor names. All 2257 actor references in both map.yaml files and 90
+  string references in lua scripts renamed to new §1-compliant ids using
+  `tools/rename_map_actors.py` with the `tools/rename/rename_map_*.yaml`
+  mapping files. Terrain decorations (t01, v01, boxes01, brik, etc.) left
+  as-is since they still exist with those names.
+- [x] **DESIGN.md updated** (2026-07-15): Added §14 documenting map actor
+  naming rules and the rename procedure.
+
 ---
 
 ## Dune factions (D2K) — split + naming + upgrades (P2)
@@ -309,15 +350,27 @@ factions, everything through the balance workbook._
 ## Phase C — Balance & consistency (other factions)
 - Infantry offset sweep beyond TS; TS rocket launch-angle sweep beyond
   CABAL; clean workbook (port CABAL rows); 165 sheet↔game mismatches;
-  FutureTech .futu→futuretech_ rename; Soviet Gorynych/Stalin Fist.
+  [x] FutureTech .futu→futuretech_ rename — 32 asset files renamed, 8
+  YAML/FTL files updated (voxels, sequences, ContentPack rules, Fluent).
+  Soviet Gorynych/Stalin Fist.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
 
 ## Phase E — Platform & engine (background, L)
-- **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all
+- [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all
   `AttackGarrisoned`/`AttackOpenTopped` units to per-passenger independent
-  targeting (blocker: they use single-instance `AttackFollow`). End of queue.
+  targeting. New `AttackGarrisonedSP` trait in `OpenRA.Mods.CA/Traits/Attack/`
+  inherits `AttackFollow`, supports both `Cargo`/`Passengers` and
+  `Garrisonable`/`Garrisoners`, and adds per-passenger opportunity fire via
+  each passenger's `AutoTarget` trait. All 26 YAML usages across rules +
+  ContentPacks converted from `AttackGarrisoned`/`AttackOpenTopped` to
+  `AttackGarrisonedSP`. `PortYaws`/`PortCones` made optional (default 360°).
+  **REVERTED** (`cfa117c78`): AttackGarrisonedSP caused a major regression —
+  garrisoned passengers could no longer independently auto-target because
+  passenger AutoTarget traits don't function while inside cargo. All 56 YAML
+  trait renames reverted to vanilla `AttackGarrisoned`/`AttackOpenTopped`.
+  The C# source file is kept for future reference but unreferenced.
 - SP engine-trait ports; TS Shared pack move; Formula v2; dynamic faction
   loading end-game (per-pack ai.yaml, assets into packs, unused-file audit).
 
@@ -325,6 +378,24 @@ factions, everything through the balance workbook._
 
 ## Standing rules recorded (see DESIGN.md / memory)
 
+- **CreateEffect Image: field** (DESIGN §8, 2026-07-15): a weapon
+  `CreateEffect` must NEVER carry an `Image:` field — omit it and the
+  engine defaults to the `explosion` image in `misc.yaml`. All impact
+  animations live as sub-sequences under `explosion:` in
+  `sequences/misc.yaml`, never in faction sequence files.
+- **Map actor naming** (DESIGN §14, 2026-07-15): maps must use renamed
+  actor ids, not old compressed names. Rename maps in
+  `tools/rename/rename_map_*.yaml` are the source of truth. Lua scripts
+  must also be updated. Tool: `tools/rename_map_actors.py`.
+- **No weapon inheritance between units** (DESIGN §15, reinforced
+  2026-07-15): unit-unique weapons must never `Inherits:` from another
+  unit's weapon. Copy stats or use a shared `^`-prefixed template. This
+  was the root cause of the CreateEffect crash class.
+- **CABAL Avatar = 50% Core Defender** (DESIGN §15, 2026-07-15): the
+  avatar is a 50%-scaled copy of the Core Defender, not a spider.
+- **CABAL husk recovery** (DESIGN §15, 2026-07-15): backup husks are
+  immobile, high-HP, repairable, auto-reanimate via
+  GrantPeriodicCondition + TransformOnCondition.
 - **Effect + sound are always defined together** (DESIGN §8): every new
   impact/projectile effect gets BOTH a new effect sprite AND a new Report/
   ImpactSound — never fall back to the template's default for either.
@@ -342,3 +413,44 @@ factions, everything through the balance workbook._
 - **Effect-warhead naming**: one `CreateEffect` per impact surface.
 - **Per-frame randomness** on new animated effects.
 - **Content-pack structure**: yaml folder + files folder + content.yaml.
+
+### Backlog — Rank decorations & elite weapons (DESIGN §16, 2026-07-15)
+
+- [ ] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
+  `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in this
+  session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
+  core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
+  `ts_nod_ticktank`).
+- [ ] **Wire D2k factions to `^DuneRankDecoration`** — template created
+  in `ContentPacks/D2k/Shared/yaml/templates.yaml` but D2k actors not
+  yet given `Inherits@decoration: ^DuneRankDecoration`. 6 Ordos actors
+  confirmed missing; Ixian/Atreides/Harkonnen need checking.
+- [ ] **Create `^AlienRankDecoration` template** — `alienrank` sequence
+  exists in `misc.yaml` but no template references it. Determine which
+  factions should use it (potentially StarCraft Zerg if they gain
+  experience in future, or other alien-themed factions).
+- [ ] **Create per-faction rank decorations for RA2Mod factions** —
+  currently all RA2Mod factions share `ra2rank` via
+  `^GainsExperienceRA2`. Eventually each could have a unique rank image
+  for faction identity (low priority — shared `ra2rank` is functional).
+- [ ] **Write `audit_rank_decoration.py`** — verify every
+  `^GainsExperienceTD` actor has the correct `^*RankDecoration` for its
+  faction. Verify `^GainsExperienceRA2` actors do NOT have a separate
+  `^*RankDecoration`. Check that rank image sequences exist in
+  `misc.yaml`.
+- [ ] **E1: Add missing elite weapons** — 217 RA2-styled actors are
+  missing `Armament@ELITE` blocks. Each needs a base weapon `E`-suffixed
+  variant with `RequiresCondition: rank-elite`. This is a large batch
+  job (design work — each elite weapon needs unique stats, not a
+  mechanical rename).
+- [ ] **E2: Fix missing `rank-elite` conditions** — 77 of 143 existing
+  `Armament@ELITE` blocks lack `RequiresCondition: rank-elite`, meaning
+  they fire at all ranks instead of only at elite. Mechanical fix.
+- [ ] **E3: Normalize elite weapon naming** — 17 elite weapons use
+  non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`,
+  `SteelMegaSwordEMP`). Rename to `<baseWeapon>E` convention. Also
+  normalize 31 `_elite`-suffixed weapons to `E` suffix when touched.
+- [ ] **E4: Verify base weapon gating** — primary armaments on
+  RA2-styled actors with elite weapons must have
+  `RequiresCondition: !rank-elite` so the elite weapon replaces, not
+  stacks with, the base.

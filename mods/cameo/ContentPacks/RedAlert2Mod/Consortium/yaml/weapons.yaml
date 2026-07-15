@@ -1524,6 +1524,7 @@ SteelKatyCannons:
 SteelKatyCannonsE:
 	Inherits: SteelKatyCannons
 	Range: 8250
+	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
 
@@ -1600,6 +1601,7 @@ SteelKatyCannonsEMP:
 SteelKatyCannonsEMPE:
 	Inherits: SteelKatyCannonsEMP
 	Range: 8250
+	MinRange: 1650
 	Burst: 4
 	BurstDelays: 5
 
@@ -1796,7 +1798,7 @@ HammerheadArtillery:
 	Inherits: ^SteelMediumCannon
 	ReloadDelay: 111
 	Range: 11111
-	MinRange: 2222
+	MinRange: 2220
 	Report: vdesatta.wav, vdesattb.wav
 	Projectile: Bullet
 		LaunchAngle: 111
@@ -1891,6 +1893,7 @@ SteelDaggerCannon:
 SteelDaggerCannonE:
 	Inherits: SteelDaggerCannon
 	Range: 25000
+	MinRange: 5000
 	Burst: 8
 
 SteelCruiserArtillery:
@@ -1923,6 +1926,7 @@ SteelCruiserArtillery:
 SteelCruiserArtilleryE:
 	Inherits: SteelCruiserArtillery
 	Range: 8000
+	MinRange: 1600
 	Burst: 2
 	BurstDelays: 3
 

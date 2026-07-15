@@ -135,7 +135,8 @@ cabal_cyborginfantry:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 
@@ -240,7 +241,8 @@ cabal_rocketcyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 cabal_devout:
@@ -345,7 +347,8 @@ cabal_devout:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 cabal_ascended:
@@ -453,7 +456,8 @@ cabal_ascended:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 cabal_hackercyborg:
@@ -572,7 +576,8 @@ cabal_hackercyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 	MindControllerCA:
 		ArmamentNames: primary
@@ -648,6 +653,14 @@ cabal_cyborgcommando:
 		Weapon: CabalCommandoPlasmaNeutron
 		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasma
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONEDUpgraded:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaNeutron
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -664,7 +677,8 @@ cabal_cyborgcommando:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 cabal_cyborgcommandov2:
@@ -726,6 +740,14 @@ cabal_cyborgcommandov2:
 		Weapon: CabalCommandoPlasmaMk2Neutron
 		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaMk2
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONEDUpgraded:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaMk2Neutron
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -742,7 +764,8 @@ cabal_cyborgcommandov2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
 cabal_eliminator800:

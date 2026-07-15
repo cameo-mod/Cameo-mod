@@ -1,3 +1,21 @@
+^DuneRankDecoration:
+	WithDecoration@RANK-1:
+		Image: dunerank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: dunerank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: dunerank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: dunerank
+		Sequence: rank-elite
+		Palette: greyscale
+
 ^D2K_MunitionsSiloBuff:
 	ExternalCondition@d2krearm:
 		Condition: d2k_rearm

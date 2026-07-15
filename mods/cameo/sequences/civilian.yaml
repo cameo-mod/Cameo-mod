@@ -127,3 +127,55 @@ moebius:
 
 chan:
 	Inherits: moebius
+
+tech1:
+	Inherits: c1
+	Defaults:
+		Filename: tech1.shp
+
+techbcannon:
+	Defaults:
+		Filename: techbcannon.shp
+	idle:
+		Facings: 16
+	recoil:
+		Facings: 16
+	damaged-idle:
+		Facings: 16
+	damaged-recoil:
+		Facings: 16
+	make:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: napalm2.shp
+	bib: mbGUN
+		UseTilesetExtension: true
+		TilesetOverrides:
+			WINTER: TEMPERAT
+			JUNGLE: TEMPERAT
+			SNOW: TEMPERAT
+			CAMEO: TEMPERAT
+		Length: *
+		Offset: -1,-1
+
+techbcannon2:
+	Inherits: techbcannon
+	Defaults:
+		Filename: techbcannon2.shp
+
+techcementffact:
+	Defaults:
+		Filename: techcementffact.shp
+	idle:
+		Offset: 0, -10
+	damaged-idle:
+		Offset: 0, -10
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: invisibleitem.shp
+
+techmetalffact:
+	Inherits: techcementffact
+	Defaults:
+		Filename: techmetalffact.shp

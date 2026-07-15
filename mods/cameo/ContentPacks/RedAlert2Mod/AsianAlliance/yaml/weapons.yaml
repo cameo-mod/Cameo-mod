@@ -218,7 +218,7 @@ AsianMaidenBow:
 	Inherits: ^ArrowWeapon
 	ReloadDelay: 68
 	Range: 6740
-	MinRange: 1348
+	MinRange: 1350
 	Burst: 3
 	BurstDelays: 0
 	Report: dragbull.aud
@@ -292,6 +292,7 @@ AsianMaidenBow:
 AsianMaidenBowE:
 	Inherits: AsianMaidenBow
 	Range: 7740
+	MinRange: 1550
 	Burst: 6
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Spread: 125
@@ -889,6 +890,7 @@ AsianHowitzerCannon:
 AsianHowitzerCannonE:
 	Inherits: AsianHowitzerCannon
 	Range: 20000
+	MinRange: 4000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
 		Duration: 100
@@ -1769,6 +1771,7 @@ AsianPhoenixRocket:
 AsianPhoenixRocket_elite:
 	Inherits: AsianPhoenixRocket
 	Range: 7500
+	MinRange: 1500
 	Burst: 4
 	Projectile: Missile
 		Image: V2

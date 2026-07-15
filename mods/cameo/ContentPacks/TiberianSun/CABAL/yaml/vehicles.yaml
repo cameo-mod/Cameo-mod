@@ -861,7 +861,7 @@ cabal_avatar:
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 2250
+		Cost: 7500
 	Tooltip:
 		Name: Avatar
 	Buildable:
@@ -870,21 +870,36 @@ cabal_avatar:
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_avatar.description
 	Mobile:
-		Locomotor: wheeled
-		TurnSpeed: 28
-		Speed: 70
+		TurnSpeed: 10
+		Speed: 25
 	Health:
-		HP: 80000
+		HP: 1000000
 	ChangesHealth@SelfHealing:
-		Step: 32
+		Step: 400
 	Armament@PRIMARY:
-		Weapon: CabalAvatarPlasma
+		Weapon: CabalAvatarLaser
+		LocalOffset: 0, -250, 550
+	Armament@RIGHT:
+		Weapon: CabalAvatarLaser
+		LocalOffset: 0, 250, 550
 	AttackFrontal:
-		FacingTolerance: 0
+		FacingTolerance: 12
 		Voice: Attack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	Selectable:
+		Bounds: 1124, 1124
 	RenderSprites:
-		Image: cabal_manticore
-		PlayerPalette: player_rgba
+		Image: cabal_avatar
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: run
+		ValidMovementTypes: Horizontal, Turn
 	SpawnActorOnDeath@backup:
 		Actor: cabal_avatar_backup
 		RequiresCondition: cabal_upgrade_backupsystems

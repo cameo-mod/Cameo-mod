@@ -412,6 +412,7 @@ LatinMonkeyGrenade1:
 LatinMonkeyGrenade2:
 	Inherits: LatinMonkeyGrenade1
 	Range: 7000
+	MinRange: 1400
 	Burst: 2
 	BurstDelays: 3
 	Warhead@FireShrapnel: FireShrapnel
@@ -420,6 +421,7 @@ LatinMonkeyGrenade2:
 LatinMonkeyGrenade3:
 	Inherits: LatinMonkeyGrenade2
 	Range: 7500
+	MinRange: 1500
 	Burst: 3
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment

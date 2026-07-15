@@ -1,26 +1,26 @@
-actor_futu_enforcer =
+actor_futuretech_enforcer =
    .name = Enforcer
    .description = Plate-armored infantry armed with a shotgun.
       Can deploy for increased range and protection.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-actor_futu_javelinsoldier =
+actor_futuretech_javelinsoldier =
    .description = Light anti-armor and anti-air infantry.
       Cannot deploy.
       Strong vs Vehicles, Aircraft
       Weak vs Infantry
 
-actor_futu_fedeng =
+actor_futuretech_fedeng =
    .name = Engineer
    .description = Captures enemy and neutral buildings and repairs friendly structures.
 
-actor_futu_engi =
+actor_futuretech_engi =
    .name = Repair Droid
    .description = Unarmed robotic unit.
       Repairs friendly vehicles and structures with a repair beam.
 
-actor_futu_wheel =
+actor_futuretech_wheel =
    .description = Fast robotic scout.
       Strong vs Infantry
       Weak vs Vehicles
@@ -52,55 +52,55 @@ actor_future_mech_plasma =
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 
-actor_futu_ifv =
+actor_futuretech_ifv =
    .description = Infantry Fighting Vehicle equipped with a missile launcher
       that is effective against air and decent against armor.
       Adapts its weapon to its passenger type.
 
-actor_futu_mbt =
+actor_futuretech_mbt =
    .description = Main battle tank.
       Can deploy to paint targets, weakening targets for follow-up attacks.
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor_futu_orion =
+actor_futuretech_orion =
    .description = Advanced heavy tank destroyer
       More effective against heavier armor, less effective against lighter armor
       Strong vs Heavy and Superheavy Vehicles
       Weak vs Structures
 
-actor_futu_hvrt =
+actor_futuretech_hvrt =
    .description = Amphibious hover transport armed with a machine gun.
       Can traverse water.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-actor_futu_phal =
+actor_futuretech_phal =
    .description = Hover tank capable of chronoshifting across the battlefield.
       Effective at striking the rear of enemy forces.
       Strong vs Buildings
       Weak vs Aircraft
 
-actor_futu_landcarr =
+actor_futuretech_landcarr =
    .name = Beehive Drone Carrier
    .description = Mobile drone carrier.
       Deploys combat drones to attack targets.
         Strong vs Ground, Air
         Weak vs Direct Combat
 
-actor_futu_athena =
+actor_futuretech_athena =
    .description = Long-range artillery that calls down orbital strikes.
       Must land the target painter on a target to fire.
       Strong vs Buildings, Infantry
       Weak vs Vehicles, Aircraft
 
-actor_futu_coiler =
+actor_futuretech_coiler =
    .description = Lightly armored support vehicle.
       Uses energy discharges to buff nearby robotic units or damage enemies.
       Strong vs Ground
       Weak vs Aircraft
 
-actor_futu_futu =
+actor_futuretech_futu =
    .description = Advanced heavy tank and FutureTech's signature ground unit.
       Fires twin energy cannons.
       Strong vs Ground
@@ -112,7 +112,7 @@ actor_future_twister =
       Strong vs Vehicles, Aircraft
       Weak vs Air Defense
 
-actor_futu_cryo =
+actor_futuretech_cryo =
    .description = Helicopter armed with a cryo beam and missiles.
       Cryo beam stacks debuffs on targets, increasing their
       vulnerability with each stack.
@@ -125,51 +125,51 @@ actor_future_harbinger =
       Strong vs Ground, Aircraft
       Weak vs Air Defense
 
-actor_futu_mcv =
+actor_futuretech_mcv =
    .description = Deploys into a Construction Yard.
       Unarmed.
 
-actor_futu_egcnst =
+actor_futuretech_egcnst =
    .description = Constructs and manages FutureTech base defenses and structures.
 
-actor_futu_egrefn =
+actor_futuretech_egrefn =
    .description = Processes raw resources into credits.
       Comes with a free Prospector.
 
-actor_futu_egpile =
+actor_futuretech_egpile =
    .description = Trains infantry and robotic units.
 
-actor_futu_egweap2 =
+actor_futuretech_egweap2 =
    .description = Produces and warps in FutureTech vehicles.
 
-actor_futu_egtf =
+actor_futuretech_egtf =
    .description = Provides radar and unlocks further FutureTech research and technologies.
 
-actor_futu_egtech =
+actor_futuretech_egtech =
    .description = Unlocks the most advanced FutureTech units and technologies.
 
-actor_futu_egshock =
+actor_futuretech_egshock =
    .description = Powers the base using experimental energy technology.
       Unlocks cutting-edge FutureTech units.
       Explodes violently when destroyed.
 
-actor_futu_gggun =
+actor_futuretech_gggun =
    .description = Defense turret that fires a cryobeam, freezing enemy units.
       Stacks freeze debuffs, increasing target vulnerability.
       Strong vs Infantry, Vehicles
       Weak vs Aircraft
 
-actor_futu_ggmlt =
+actor_futuretech_ggmlt =
    .description = Versatile defense turret that fires AA/AG missiles by default.
       Adapts its weapon to the infantry garrisoned inside.
 
-actor_futu_launchpad =
+actor_futuretech_launchpad =
    .description = Produces and repairs aircraft.
 
-actor_futu_harv =
+actor_futuretech_harv =
    .description = Collects resources and returns them to the refinery.
 
-actor_futu_harv2 =
+actor_futuretech_harv2 =
    .description = Upgraded harvester with hover capability and onboard sensors.
       Collects resources and returns them to the refinery.
 
@@ -178,14 +178,14 @@ actor_yrgarobo =
       If destroyed, sold, or depowered, all active robotic units
       will be disabled until control is restored.
 
-actor_futu_cryoleg =
+actor_futuretech_cryoleg =
    .name = Cryo Legionnaire
    .description = Heavily armored commando equipped with a cryo sprayer.
       Fires a freezing cone that slows and damages enemies in a wide arc.
       Strong vs Ground
       Weak vs Aircraft
 
-actor_futu_blackwidow =
+actor_futuretech_blackwidow =
    .name = Black Widow
    .description = Elite amphibious operative.
       Can demolish buildings and ships.

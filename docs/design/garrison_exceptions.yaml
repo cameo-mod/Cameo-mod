@@ -7,37 +7,40 @@
 # (the Ordos Face Dancer is a commando in Cameo — not an exception).
 
 melee:  # blades, claws, jaws, fists cannot fire from windows
-  - sczealot
-  - scdarktemplar
-  - sczeratul
-  - scamaranth
-  - sclegionnaire
-  - sctalon
-  - sczergling
-  - sckerriganzerg
-  - wc2_human_footman
-  - wc2_human_footman2
-  - wc2_orc_grunt
-  - wc2_orc_grunt2
-  - samurai.asian
-  - alligator.asian
-  - yrbrute
+  - protoss_zealot
+  - protoss_darktemplar
+  - protoss_zeratul
+  - protoss_amaranth
+  - protoss_legionnaire
+  - zerg_talon
+  - zerg_zergling
+  - zerg_kerrigan
+  - humans_footman
+  - humans_warcraft3footman
+  - orcs_grunt
+  - orcs_warcraft3grunt
+  - asian_alliance_japanesesamurai
+  - asian_alliance_alligator
+  - yuri_brute
   - ts_nod_chameleonspy
   - dog
-  - cyberdog
-  - ra2adog
+  - ra1_soviet_cyberdog
+  - ra2_allies_attackdog
+  - cabal_berserker
 
 suicide:  # one-shot mechanics make no sense from a window
   - ra2terror.latin
   - scinfestedterran
-  - ra2ivan
+  - ra2_soviets_crazyivan
   - saboteur.ordos
 
-casters:  # special-mechanic attacks (mind control, spells, spy work)
+casters:  # special-mechanic attacks (mind control, spells, spy work, repair)
   - yryuri
   - yryurix
-  - schightemplar
-  - scdefiler
-  - raspy
-  - wc2_human_high_elf_priest
-  - wc2_human_high_elf_sorceress
+  - protoss_hightemplar
+  - zerg_defiler
+  - ra1_allies_raspy
+  - humans_highelfpriest
+  - humans_highelfsorceress
+  - cabal_engineer
+  - cabal_dissolver

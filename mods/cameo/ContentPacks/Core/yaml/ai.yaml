@@ -1,0 +1,23 @@
+# ai.yaml — Core faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files —
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits —
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+# (No faction-specific entries found in global ai.yaml for this faction.
+#  This faction may share AI data with a parent theme section.)
+Player:
+

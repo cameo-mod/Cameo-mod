@@ -2,7 +2,7 @@
 # Red Alert 2
 #
 ra2_allies_aegiscruiser:
-	idle:
+	idle: ra2aegis
 
 ra2asw:
 	idle:
@@ -65,9 +65,6 @@ ra2sub: #Typhoon Attack Sub
 ra2subt: #Sub Torpedo needs voxel projectiles
 	idle:
 
-ra2_allies_patriotmissilesystem:
-	turret: td_nod_samsite
-
 #
 # Yuri's Revenge
 #
@@ -86,7 +83,7 @@ yrschd:
 	turret: yrschdtur
 
 ra2_soviets_siegechopper:
-	idle:
+	idle: yrschd
 	deployed: yrschd
 	turret: yrschdtur
 
@@ -208,10 +205,6 @@ forgotten_experimentalmammothtank:
 	idle:
 	turret: ts4tnktur
 	barrel: ts4tnkbarl
-
-td_gdi_mammothtank:
-	idle:
-	turret: htnktur
 
 tstrucka:
 	idle:
@@ -347,14 +340,14 @@ tsm_emp:
 
 ##FutureTech##
 
-futu_mbt:
-	idle: futu_mbt
-	turret: futu_mbttur
+futuretech_mbt:
+	idle: futuretech_mbt
+	turret: futuretech_mbttur
 
-futu_orion:
-	idle: futu_orion
-	turret: futu_oriontur
+futuretech_orion:
+	idle: futuretech_orion
+	turret: futuretech_oriontur
 
-futu_landcarr:
-	idle: futu_landcarr
+futuretech_landcarr:
+	idle: futuretech_landcarr
 	turret:

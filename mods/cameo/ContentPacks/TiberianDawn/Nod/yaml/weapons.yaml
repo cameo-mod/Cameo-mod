@@ -120,7 +120,7 @@ ArtilleryShellUpgrade:
 	Inherits: ^HeavyBomb
 	ReloadDelay: 96
 	Range: 12345
-	MinRange: 2468
+	MinRange: 2470
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -271,7 +271,7 @@ HonestJohn:
 	Burst: 2
 	BurstDelays: 25
 	Range: 8940
-	MinRange: 1788
+	MinRange: 1790
 	Report: rocket2.aud
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
@@ -741,7 +741,7 @@ ChemicalHonestJohn:
 	Inherits: ^HeavyChemicalWeapon
 	ReloadDelay: 142
 	Range: 12345
-	MinRange: 2468
+	MinRange: 2470
 	Report: rocket2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1167,7 +1167,7 @@ SpecterArtilleryShell:
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
-	MinRange: 2528
+	MinRange: 2530
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet

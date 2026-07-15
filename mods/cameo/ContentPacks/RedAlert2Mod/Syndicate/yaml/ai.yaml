@@ -1,0 +1,38 @@
+# ai.yaml — Syndicate faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files —
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits —
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+#
+# --- BuildingLimits (9 entries for latin_syndicate) ---
+# 			latin_syndicate_recyclingrefinery: 10
+# 			latin_syndicate_combatbarracks: 10
+# 			latin_syndicate_syndicatefactory: 10
+# 			latin_syndicate_airstation: 10
+# 			latin_syndicate_latinempradar: 1
+# 			latin_syndicate_recyclingcenter: 1
+# 			latin_syndicate_spycenter: 2
+# 			latin_syndicate_syndicateservicedepot: 1
+# 			latin_syndicate_topolsilo: 1
+
+# Player: actor — no traits defined yet.
+# When the engine supports per-faction bot conditions, move the
+# faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
+# entries here as a BaseBuilderBotModuleCA@<faction> /
+# UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
+Player:
+

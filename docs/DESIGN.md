@@ -415,6 +415,63 @@ cheapest provider wins).
   each gaussian centre so `2.5*sigma` stays within a margin of the edge,
   and ASSERT the 2px border alpha is 0 on every frame. Render the preview
   with the frame border drawn (a red box) and Read it before committing.
+- **CreateEffect `Image:` field — ALWAYS OMIT for the default explosion
+  image (design 2026-07-15).** The `Warhead@Effect: CreateEffect` trait
+  looks up its `Explosions:` sequence inside the image named by `Image:`.
+  When `Image:` is omitted, the engine defaults to the `explosion` image
+  defined in `sequences/misc.yaml`. All weapon impact animations
+  (`magicnuke`, `magicnuke_med`, `magicnuke_small`, `magicnuke_micro`,
+  `cabal_greenplasmaimpact`, `cabal_missileexplosion`,
+  `cabal_laserimpact_s`, `cabal_laserimpact_m`, `cabal_laserimpact_l`,
+  `cabal_dissolveimpact`, `poof`, `drplasmaex2`, …) are defined as
+  sub-sequences under the `explosion:` key in `sequences/misc.yaml`.
+  Setting `Image: explosion` explicitly is redundant but harmless; setting
+  `Image: <custom>` for a sequence that lives under `explosion:` causes
+  the engine to look for it inside the wrong image and **crashes with a
+  missing-sequence exception**. The rule: **a weapon `CreateEffect` must
+  never carry an `Image:` field** — leave it out and let the engine
+  default to `explosion`. If a truly custom impact image is needed (one
+  that does NOT live under `explosion:` in misc.yaml), define a new
+  sub-sequence under `explosion:` instead and reference it by name in
+  `Explosions:`.
+- **Impact animations live in `misc.yaml` under `explosion:`, never in
+  faction sequence files (design 2026-07-15).** All weapon impact/explosion
+  animations — regardless of faction — are defined as sub-sequences under
+  the `explosion:` image key in `sequences/misc.yaml`. This centralizes
+  explosion rendering (full brightness, `IgnoreWorldTint: true`,
+  `ZOffset: 2047` via the `Defaults:` block) and ensures the default
+  `Image:` lookup works. Faction-specific sequence files (e.g.
+  `CABAL/yaml/sequences.yaml`) must NOT define top-level image keys for
+  impact animations. When a new impact animation is created, add it under
+  `explosion:` in `misc.yaml` and reference it by name in the weapon's
+  `CreateEffect` `Explosions:` field with no `Image:`.
+- **Shared-image exception (design 2026-07-15).** When an image is used
+  BOTH by a `CreateEffect` warhead AND by other traits (building
+  `Effect:`, projectile `Image:`/`TrailImage:`,
+  `SubterraneanTransitionImage:`, `HelixAnimSequence:`, `RingImage:`,
+  etc.), the top-level image definition MUST stay in its sequence file
+  for the non-CE traits. In this case the `CreateEffect` warhead KEEPS
+  its `Image:` field — do NOT duplicate the sequence under `explosion:`.
+  Only images used EXCLUSIVELY by `CreateEffect` warheads are moved
+  under `explosion:` and have their `Image:` field removed. The audit
+  tool `tools/audit_createeffect_image.py` flags all CE `Image:` fields;
+  `tools/audit_ce_image_usage.py` determines which are CE-only vs shared.
+  Known CE-only images already moved: `wc2_building_collapse`.
+  Known shared images that keep `Image:`:
+  `tsdig`, `tsioncannon`, `ionsfx`, `tspodring`, `tsmcnealmechdrop`,
+  `tsdroppod`, `hakurei_giphy`, `hakurei_dream`, `wc2_effect_sparkle`,
+  `wc2_effect_sparkle_circle`, `wc2_effect_heal`, `wc2_exorcism`,
+  `wc2_catapult_impact`, `wc2_lightng`, `wc2_effect_blizzard`,
+  `wc2_catapult_stone_projectile_medium`, `wc2_effect_death_and_decay`,
+  `wc2_effect_daemon_attack`, `wc2_cannon_impact`, `wh40kcapsule`.
+- **Corpse-spawner exception (design 2026-07-15).** `ra2corpse` is NOT
+  an explosion — it is a corpse spawner that uses `CreateEffect` with
+  multiple `Explosions:` entries (`death_a`–`death_f`) to pick a RANDOM
+  corpse animation each time. The `Image:` field MUST be kept because
+  the engine needs to resolve the random sequence from the `ra2corpse`
+  image's own sub-sequences, not from the `explosion:` image. Moving
+  these under `explosion:` would break the random-pick behaviour.
+  `ra2corpse` stays as a top-level image in `sequences/redalert2.yaml`.
 
 ## 9. Operating rules for agents
 
@@ -778,9 +835,35 @@ detector and fixes land as ordered batches, never silently.
   weapons**: no weapon lists Obstacle in Valid/InvalidTargets — props are
   hit as plain Ground.
 
+## 14. Map actor naming (compatibility with renamed actors)
+
+- **Maps must use the current renamed actor ids, not the original
+  compressed names** (design 2026-07-15). When a map is added or updated,
+  every `ActorNN: <type>` line in `map.yaml` and every actor-type string
+  in lua scripts must use the new §1-compliant actor id (e.g.
+  `td_nod_minigunner`, not `e1.nod`). The old compressed names no longer
+  exist as actor definitions and will crash the game on map load.
+- **Rename maps are the source of truth.** The mapping from old → new
+  actor ids lives in `tools/rename/rename_map_<faction>.yaml` files.
+  When renaming actors in a map, look up each old name in these files to
+  find the new id. Actors that already exist with their old name (terrain
+  decorations like `t01`, `v01`, `boxes01`, `brik`, `fenc`, `gmine`,
+  `tanktrap1`, `split2`, `silo`, `nuk2`, `nuke`, `sbag`, `fcom`, etc.)
+  are NOT renamed and stay as-is.
+- **Lua scripts must also be updated.** Actor-type strings in lua
+  (reinforcement lists, `Actor.Create` calls, `GetActorsByType` checks,
+  `Reinforcements.ReinforceWithTransport` unit lists) must use the new
+  ids. A map's `campaign.lua` may reference actor types in utility
+  functions (e.g. `GetAirstrikeTarget` checking for `"sam"`) — these must
+  also be renamed.
+- **Tooling.** `tools/rename_map_actors.py` applies the rename maps to
+  map.yaml and lua files in bulk. It matches `ActorNN: <type>` lines in
+  yaml and quoted `"oldname"` strings in lua, replacing them with the
+  new ids from the rename maps.
+
 ---
 
-## 14. CABAL faction design rules
+## 15. CABAL faction design rules
 
 The full CABAL faction design lives in the local document
 `C:\Users\AedisToru\Documents\DevinCameoProject\CABAL_FACTION_DESIGN.md`.
@@ -872,12 +955,25 @@ armament node. A unit that has a primary weapon should not receive a
 separate garrison-only pistol; the garrison armament reuses the same weapon
 as the primary.
 
-**No weapon inheritance between units.** A weapon definition must never
-`Inherits:` from another unit-unique weapon (e.g. `CabalSpiderCnc4Laser`
-inherting `CabalSpiderLaser`). If two units need similar firepower,
-create a shared base weapon in the faction weapons file and inherit from
-that base, or copy the stats explicitly. Unit-unique weapons are not
-stable extension points.
+**No weapon inheritance between units (reinforced 2026-07-15).** A
+weapon definition must never `Inherits:` from another unit-unique weapon
+(e.g. `CabalAvatarLaser` inheriting `CabalCoreDefenderLaser`,
+`CabalReaperMissilesAA` inheriting `CabalReaperMissiles`,
+`CabalHeavyReaperMissilesAA` inheriting `CabalHeavyReaperMissiles`,
+`CabalHeavyReaperTrap` inheriting `CabalReaperTrap`,
+`CabalRocketCyborgRocketsUpgraded` inheriting `CabalRocketCyborgRockets`,
+`CabalWaspLaserStriker` inheriting `CabalWaspLaser`,
+`CabalWidowPlasma` inheriting `CabalRavagerPlasma`,
+`CabalCommandoPlasmaNeutron` inheriting `CabalCommandoPlasma`,
+`CabalCommandoPlasmaMk2Neutron` inheriting `CabalCommandoPlasmaMk2`,
+`CabalRavagerPlasmaNeutron` inheriting `CabalRavagerPlasma`). If two
+units need similar firepower, create a shared `^`-prefixed base weapon
+template in the faction weapons file and inherit from that template, or
+copy the stats explicitly. Unit-unique weapons are not stable extension
+points. **This was the root cause of the CreateEffect crash class**:
+inheriting a weapon also inherits its `CreateEffect` warhead, and if the
+parent's explosion sequence was moved or changed, the child silently
+breaks. Copy stats, do not inherit between units.
 
 **Effect inheritance order.** Visual effect templates such as
 `^TSLaserEffect`, `^TSSparkEffect`, or faction laser-trail templates
@@ -924,3 +1020,152 @@ warheads appropriate to their role, never `^SmallArms`.
 `docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and
 land in YAML in the same pass. The workbook wins on mismatch. Promotions
 add `^PromotionUnitBuff` on top of the sheet stats.
+
+**CABAL Avatar — 50% scaled Core Defender (design 2026-07-15).** The
+`cabal_avatar` is a mass-produced variant of the Core Defender, NOT a
+spider. It is the Core Defender at 50% scale: all visual offsets, weapon
+damage, HP, and stats are halved from the `cabal_coredefender` reference.
+The avatar uses its own weapon (`CabalAvatarLaser`) which is a copy of
+`CabalCoreDefenderLaser` with damage and offsets scaled to 50%, NOT an
+inherits-from relationship (§15 no weapon inheritance between units).
+The avatar's sequence scale, muzzle offsets, and visual effects are all
+50% of the Core Defender's values. This makes the avatar a smaller,
+faster-to-produce walker that retains the Core Defender's identity.
+
+**CABAL husk recovery (design 2026-07-15).** CABAL vehicles with the
+Backup Systems upgrade leave a `_backup` husk on death. The husk is
+immobile (Speed/TurnSpeed = 0), has 2–5× the base unit's HP, is
+Repairable, and auto-reanimates after a delay via
+`GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
+back into the original unit. The recovery time is currently a fixed
+delay (not scalable with remaining/max health in YAML-only — a C# trait
+would be needed for health-scaled recovery). The husk carries
+`WithColoredOverlay@backup` for a visual indicator. Each CABAL vehicle
+needs three things for backup systems:
+1. `Inherits@BACKUP: ^cabal_upgrade_backupsystems` (in vehicles.yaml)
+   — grants the condition.
+2. `SpawnActorOnDeath@backup` trait with
+   `RequiresCondition: cabal_upgrade_backupsystems` and
+   `Actor: <unit>_backup`.
+3. A `<unit>_backup` actor definition in `rules/tiberiansun.yaml` that
+   inherits the base unit, sets Speed/TurnSpeed=0, high HP, Repairable,
+   removes `SpawnActorOnDeath@backup`, adds
+   `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
+   for auto-reanimation, and `WithColoredOverlay@backup` for the visual.
+
+## 16. Rank decorations, experience systems & elite weapons
+
+Cameo uses **two distinct experience systems** with different rank counts,
+stat curves, and decoration images. Every faction must use exactly one
+system consistently across all its actors.
+
+### 16.1 The two experience systems
+
+**TD/TS system** (`^GainsExperienceTD` in
+`ContentPacks/TiberianDawn/Shared/yaml/templates.yaml`):
+- 4 veteran ranks + elite (5 pips total).
+- XP thresholds: 200, 400, 600, 800. Elite at `rank-veteran >= 4`.
+- `^GainsExperienceTD` does NOT include `WithDecoration` — rank icons
+  come from a separate `^*RankDecoration` template that the actor must
+  also inherit via `Inherits@decoration`.
+- No elite weapons by design — stat multipliers scale progression.
+- Building variant: `^GainsExperienceTDBuilding` (250/500/750/1000 XP).
+
+**RA2 system** (`^GainsExperienceRA2` in `rules/redalert2.yaml`):
+- 5 veteran ranks + elite (6 pips total).
+- XP thresholds: 100, 250, 450, 700, 1000. Elite at `rank-veteran >= 5`.
+- `^GainsExperienceRA2` includes `WithDecoration` with `Image: ra2rank`
+  and a `rank-veteran-4` sequence — rank icons are built-in, no separate
+  decoration template needed.
+- **Elite weapons**: every RA2-styled actor with a primary armament must
+  also have an `Armament@ELITE` block gated on `RequiresCondition:
+  rank-elite` (see §16.3).
+- Stronger multipliers than TD/TS: damage reduction to 50%, firepower to
+  200%, speed to 125%. Reload/Range/Detect multipliers stay at 100 (RA2
+  favors raw damage/speed over utility scaling).
+- Building variant: `^GainsExperienceBuildings` (inherits
+  `^GainsExperience`, adds firepower multipliers).
+
+The default `^GainsExperience` in `defaults.yaml` is a third variant used
+by RA1 and other non-TD/TS/RA2 factions. It has 4 veteran ranks (like
+TD/TS) but includes `WithDecoration` with `Image: rank` (the generic
+rank sprite) and crate-powerup decorations. Factions using this system
+do not need a separate `^*RankDecoration` inherit.
+
+### 16.2 Rank decoration images
+
+Every faction should eventually have its own rank decoration image and
+`^*RankDecoration` template. The sequence images are defined in
+`sequences/misc.yaml` under their respective keys.
+
+| Image key | Template | Used by |
+|---|---|---|
+| `rank` | (built into `^GainsExperience`) | RA1, default factions |
+| `gdirank` | `^GDIRankDecoration` | TD GDI, TS GDI (shared) |
+| `nodrank` | `^NodRankDecoration` | TD Nod, TS Nod (shared) |
+| `cabalrank` | `^CABALRankDecoration` | TS CABAL |
+| `forgotrank` | `^ForgottenRankDecoration` | TS Forgotten |
+| `dunerank` | `^DuneRankDecoration` | D2k factions (Atreides, Harkonnen, Ixian, Ordos) |
+| `alienrank` | `^AlienRankDecoration` | Alien factions (TODO — template not yet created) |
+| `ra2rank` | (built into `^GainsExperienceRA2`) | RA2, RA2Mod factions, TKM |
+
+**Rules:**
+- TD and TS share rank images per side: both TD GDI and TS GDI use
+  `gdirank`, both TD Nod and TS Nod use `nodrank`.
+- RA2 factions all share `ra2rank` (baked into `^GainsExperienceRA2`).
+  RA2Mod factions (AsianAlliance, Consortium, FutureTech, Naxis,
+  SchwarzerMond, Syndicate) also use `ra2rank` via `^GainsExperienceRA2`.
+- `^*RankDecoration` templates use `Palette: greyscale` (not `effect`)
+  for TD/TS/CABAL/Forgotten/Dune factions. The RA2 system uses
+  `Palette: effect`.
+- Actors using `^GainsExperienceTD` MUST also inherit the appropriate
+  `^*RankDecoration` via `Inherits@decoration` — otherwise they show no
+  rank pips at all.
+- Actors using `^GainsExperienceRA2` or `^GainsExperience` do NOT need
+  a separate `^*RankDecoration` — their rank icons are built-in.
+
+**Audit rule** (`audit_rank_decoration.py`, TODO): every actor with
+`Inherits@EXPERIENCE: ^GainsExperienceTD` must also have
+`Inherits@decoration: ^*RankDecoration` matching its faction. Actors
+with `^GainsExperienceRA2` must NOT have a separate `^*RankDecoration`
+(it would conflict with the built-in decorations).
+
+### 16.3 Elite weapons (RA2 system only)
+
+**Every RA2-styled actor with a primary armament must have an elite
+weapon.** When a unit reaches elite rank, its primary weapon is
+replaced by an upgraded version via `Armament@ELITE`.
+
+**Pattern:**
+```yaml
+Armament@PRIMARY:
+    Weapon: <baseWeapon>
+    RequiresCondition: !rank-elite
+Armament@ELITE:
+    Weapon: <baseWeapon>E
+    RequiresCondition: rank-elite
+```
+
+**Naming convention:** the elite weapon name is the base weapon name
+with a capital `E` suffix (e.g. `BorisAKM` → `BorisAKME`). This is the
+dominant pattern (95 of 143 existing elite weapons). The `_elite` suffix
+(e.g. `RA2120mm_elite`) is a secondary pattern used in some RA2Mod
+factions — these should be normalized to the `E` suffix when touched.
+Non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`) are bugs and
+must be renamed to follow the `E` suffix convention.
+
+**Audit rules** (`audit_elite_weapons.py`, TODO):
+1. **E1 — Missing elite weapon**: every actor using
+   `^GainsExperienceRA2` with at least one `Armament@PRIMARY` (or
+   `Armament@PRIMARY`-equivalent without `RequiresCondition: rank-elite`)
+   must also have an `Armament@ELITE` block. 217 actors currently fail
+   this check.
+2. **E2 — Missing rank-elite condition**: every `Armament@ELITE` block
+   must have `RequiresCondition: rank-elite` (or a condition that
+   includes `rank-elite`). 77 of 143 elite armaments currently fail
+   this check — they fire at all ranks, not just elite.
+3. **E3 — Non-standard naming**: elite weapon names must end with a
+   capital `E` suffix. 17 weapons currently use non-standard names.
+4. **E4 — Base weapon must not fire at elite**: the primary armament
+   must have `RequiresCondition: !rank-elite` (or equivalent) so the
+   elite weapon replaces it, not stacks with it.

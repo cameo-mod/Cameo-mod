@@ -2192,7 +2192,7 @@ yrygyard:
 		Length: 15
 		ShadowStart: 48
 	make:
-		Filename: yr_ygyardmk.shp
+		Filename: yr_ygyardmake.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -2749,11 +2749,23 @@ ra2ctbunk02: #civil bunker (2x2)
 	Inherits@1: ra2ctbunk01
 	Defaults:
 		Filename: ra2_ctbunk02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 7
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 7
 
 ra2ctbarn02: #farm house (2x2)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctbarn02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctchig01: #chicago departament (3x2)
 	Inherits@1: ra2ctfarm01
@@ -2884,11 +2896,23 @@ ra2ctfrma: #france house (2x2)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctfrma.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctgas01: #gas station (3x3)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctgas01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2cthse01: #texan house (2x2)
 	Inherits@1: ra2ctfarm01
@@ -3197,36 +3221,78 @@ ra2ctarmy01: #army tents (2x2)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctarmy01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctarmy02: #small army tents (1x1)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctarmy02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctarmy03: #small army tents (1x1)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctarmy03.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctarmy04: #small army tents (1x1)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctarmy04.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctmsc07: #island hut (2x2)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctmsc07.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctmsc08: #small island hut (1x1)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctmsc08.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctmsc09: #small island hut (1x1)
 	Inherits@1: ra2ctfarm01
 	Defaults:
 		Filename: ra2_ctmsc08.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
 
 ra2ctmsc10: #burger kong (3x3)
 	Inherits@1: ra2ctfarm01
@@ -8302,6 +8368,17 @@ ra2corpse:
 		Length: *
 		ZOffset: -512
 		Tick: 2500
+
+ra2ctnewy26:
+	Inherits@1: ra2ctchig01
+	Defaults:
+		Filename: ra2_ctchig01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
 
 ra2zbomb:
 	idle:

@@ -1,0 +1,188 @@
+# ai.yaml — Warcraft 2 Humans faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files —
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits —
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+#
+# --- BuildingLimits (12 entries for humans) ---
+# 			humans_peasant: 50
+# 			humans_elvenlumbermill: 10
+# 			humans_barracks: 15
+# 			humans_gnomishinventor: 5
+# 			humans_gryphonaviary: 10
+# 			humans_townhall: 1
+# 			humans_keep: 1
+# 			humans_castle: 1
+# 			humans_blacksmith: 2
+# 			humans_stables: 1
+# 			humans_church: 1
+# 			humans_magetower: 1
+#
+# --- BuildingFractions (19 entries for humans) ---
+# 			humans_peasant: 20
+# 			humans_townhall: 1
+# 			humans_keep: 1
+# 			humans_castle: 1
+# 			humans_elvenlumbermill: 15
+# 			humans_barracks: 20
+# 			humans_gnomishinventor: 5
+# 			humans_gryphonaviary: 10
+# 			humans_blacksmith: 5
+# 			humans_stables: 1
+# 			humans_church: 1
+# 			humans_sunwell: 1
+# 			humans_magetower: 1
+# 			humans_humanscouttower: 20
+# 			humans_guardtower: 10
+# 			humans_cannontower: 10
+# 			humans_guardtower_2: 1
+# 			humans_cannontower_2: 1
+# 			humans_humangoldmine_2: 1
+#
+# --- UnitsToBuild (48 entries for humans) ---
+# 			humans_peasant: 10
+# 			humans_militiapeasant: 10
+# 			humans_footman: 5
+# 			humans_warcraft3footman: 5
+# 			humans_elvenarcher: 3
+# 			humans_elvenranger: 5
+# 			humans_highelvenarcher: 5
+# 			humans_dwarvenrifleman: 5
+# 			humans_knight: 3
+# 			humans_warcraft3knight: 3
+# 			humans_paladin: 5
+# 			humans_ballista: 1
+# 			humans_siegeengine: 1
+# 			humans_demolitionsquad: 1
+# 			humans_mortarteam: 1
+# 			humans_mage: 1
+# 			humans_archmage: 1
+# 			humans_highelfpriest: 1
+# 			humans_highelfsorceress: 1
+# 			humans_flyingmachine: 1
+# 			humans_gryphonrider: 3
+# 			humans_keep: 1
+# 			humans_castle: 1
+# 			humans_upgrade_betterfarm: 1
+# 			humans_upgrade_bestfarm: 1
+# 			humans_upgrade_swordstrength: 1
+# 			humans_upgrade_swordstrengthii: 1
+# 			humans_upgrade_armorstrength: 1
+# 			humans_upgrade_armorstrengthii: 1
+# 			humans_upgrade_arrowstrength: 1
+# 			humans_upgrade_arrowstrengthii: 1
+# 			humans_upgrade_warcraft3footman: 1
+# 			humans_upgrade_ranger: 1
+# 			humans_upgrade_highelvenarcher: 1
+# 			humans_upgrade_rangerlongbow: 1
+# 			humans_upgrade_rangerscouting: 1
+# 			humans_upgrade_rangermarksman: 1
+# 			humans_upgrade_ballistastrength: 1
+# 			humans_upgrade_ballistastrengthii: 1
+# 			humans_upgrade_cannondamage: 1
+# 			humans_upgrade_cannondamageii: 1
+# 			humans_upgrade_paladin: 1
+# 			humans_upgrade_warcraft3knightwip: 1
+# 			humans_upgrade_healing: 1
+# 			humans_upgrade_exorcism: 1
+# 			humans_upgrade_slow: 1
+# 			humans_upgrade_polymorph: 1
+# 			humans_upgrade_blizzard: 1
+
+# Player: actor — no traits defined yet.
+# When the engine supports per-faction bot conditions, move the
+# faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
+# entries here as a BaseBuilderBotModuleCA@<faction> /
+# UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
+Player:
+#
+# --- Additional faction: Warcraft 2 Orcs (orcs) — BuildingLimits (12 entries) ---
+# 			orcs_peon: 50
+# 			orcs_trolllumbermill: 10
+# 			orcs_barracks: 15
+# 			orcs_golbinalchemist: 5
+# 			orcs_dragonroost: 10
+# 			orcs_greathall: 1
+# 			orcs_stronghold: 1
+# 			orcs_fortress: 1
+# 			orcs_blacksmith: 2
+# 			orcs_ogremound: 1
+# 			orcs_altarofstorms: 1
+# 			orcs_templeofthedamned: 1
+#
+# --- Additional faction: Warcraft 2 Orcs (orcs) — BuildingFractions (18 entries) ---
+# 			orcs_peon: 20
+# 			orcs_greathall: 1
+# 			orcs_stronghold: 1
+# 			orcs_fortress: 1
+# 			orcs_trolllumbermill: 15
+# 			orcs_barracks: 20
+# 			orcs_golbinalchemist: 5
+# 			orcs_dragonroost: 10
+# 			orcs_blacksmith: 5
+# 			orcs_ogremound: 1
+# 			orcs_altarofstorms: 1
+# 			orcs_templeofthedamned: 1
+# 			orcs_orcwatchtower: 20
+# 			orcs_guardtower: 10
+# 			orcs_cannontower: 10
+# 			orcs_guardtower_2: 1
+# 			orcs_cannontower_2: 1
+# 			orcs_orcgoldmine_2: 1
+#
+# --- Additional faction: Warcraft 2 Orcs (orcs) — UnitsToBuild (41 entries) ---
+# 			orcs_peon: 10
+# 			orcs_grunt: 5
+# 			orcs_warcraft3grunt: 5
+# 			orcs_trollaxethrower: 3
+# 			orcs_trollberserker: 5
+# 			orcs_trollheadhunter: 5
+# 			orcs_ogre: 3
+# 			orcs_ogremage: 5
+# 			orcs_catapult: 1
+# 			orcs_siegeengine: 1
+# 			orcs_kodobeast: 1
+# 			orcs_goblinsappers: 1
+# 			orcs_deathknight: 1
+# 			orcs_goblinzeppelin: 1
+# 			orcs_dragon: 3
+# 			orcs_stronghold: 1
+# 			orcs_fortress: 1
+# 			orcs_upgrade_betterfarm: 10
+# 			orcs_upgrade_bestfarm: 10
+# 			orcs_upgrade_axestrength: 1
+# 			orcs_upgrade_axestrengthii: 1
+# 			orcs_upgrade_armorstrength: 1
+# 			orcs_upgrade_armorstrengthii: 1
+# 			orcs_upgrade_throwingaxestrength: 1
+# 			orcs_upgrade_throwingaxestrengthii: 1
+# 			orcs_upgrade_warcraft3grunt: 1
+# 			orcs_upgrade_berserker: 1
+# 			orcs_upgrade_trollheadhunter: 1
+# 			orcs_upgrade_berserkerlightaxes: 1
+# 			orcs_upgrade_berserkerscouting: 1
+# 			orcs_upgrade_berserkerregeneration: 1
+# 			orcs_upgrade_catapultstrength: 1
+# 			orcs_upgrade_catapultstrengthii: 1
+# 			orcs_upgrade_cannondamage: 1
+# 			orcs_upgrade_cannondamageii: 1
+# 			orcs_upgrade_ogremage: 1
+# 			orcs_upgrade_bloodlust: 1
+# 			orcs_upgrade_runes: 1
+# 			orcs_upgrade_haste: 1
+# 			orcs_upgrade_deathanddecay: 1
+# 			orcs_upgrade_raisedead: 1

@@ -2298,3 +2298,93 @@ faction_d2k_ordos =
       Special Buildings: Starport, Spice Sifter
       Team Upgrades: WIP
       Support powers: Saboteur, Chaos Lightning
+
+consumer_items_impulse =
+   .description = Impulse Items
+
+consumer_items_wares =
+   .description = Wares
+
+consumer_items_luxury_wares =
+   .description = Luxury Wares
+
+ra_doctrine_conscription =
+   .description = Conscription Doctrine
+
+ra_doctrine_heavyarmor =
+   .description = Heavy Armor Doctrine
+
+ra_doctrine_industrialefficiency =
+   .description = Industrial Efficiency Doctrine
+
+ra_doctrine_inferno =
+   .description = Inferno Doctrine
+
+ra_doctrine_nuclearwar =
+   .description = Nuclear War Doctrine
+
+ra_doctrine_teslatech =
+   .description = Tesla and Experimental Tech Doctrine
+
+ra_promotion_hurricanerocketpod =
+   .description = Hurricane Rocket Pods
+
+ra_promotion_superoptics =
+   .description = Infantry Super Optics
+
+ra_promotion_targetingcomputer =
+   .description = Mammoth Tank Targeting Computer
+
+ra_upgrade_afterburners =
+   .description = Afterburners
+
+ra_upgrade_autoloaders =
+   .description = Autoloaders
+
+ra_upgrade_hazmatsuits =
+   .description = Hazmat Suits
+
+ra_upgrade_highexplosiverockets =
+   .description = High Explosive Rockets
+
+ra_upgrade_incendiarybullets =
+   .description = Incendiary Bullets
+
+ra_upgrade_massproduction =
+   .description = Mass Production
+
+ra_upgrade_menofsteel =
+   .description = Men Of Steel
+
+ra_upgrade_nuclearshells =
+   .description = Nuclear Tank Shells
+
+ra_upgrade_reactoroverload =
+   .description = Reactor Overload
+
+ra_upgrade_scorchedearth =
+   .description = Scorched Earth
+
+ra_upgrade_shtoradefensesystem =
+   .description = Shtora Defense System Upgrade
+
+ra_upgrade_stalinium =
+   .description = Stalinium
+
+ra_upgrade_teslaarcing =
+   .description = Tesla Arcing
+
+ra_upgrade_teslarockets =
+   .description = Tesla Rockets
+
+ra_upgrade_nuclearrockets =
+   .description = Thermonuclear Rockets
+
+ra_upgrade_unstableisotopes =
+   .description = Unstable Isotopes
+
+ra_upgrade_vengeance =
+   .description = Vengeance
+
+ra_upgrade_wareconomy =
+   .description = War Economy
