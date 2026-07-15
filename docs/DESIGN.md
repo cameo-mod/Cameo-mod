@@ -1052,3 +1052,120 @@ needs three things for backup systems:
    removes `SpawnActorOnDeath@backup`, adds
    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
    for auto-reanimation, and `WithColoredOverlay@backup` for the visual.
+
+## 16. Rank decorations, experience systems & elite weapons
+
+Cameo uses **two distinct experience systems** with different rank counts,
+stat curves, and decoration images. Every faction must use exactly one
+system consistently across all its actors.
+
+### 16.1 The two experience systems
+
+**TD/TS system** (`^GainsExperienceTD` in
+`ContentPacks/TiberianDawn/Shared/yaml/templates.yaml`):
+- 4 veteran ranks + elite (5 pips total).
+- XP thresholds: 200, 400, 600, 800. Elite at `rank-veteran >= 4`.
+- `^GainsExperienceTD` does NOT include `WithDecoration` — rank icons
+  come from a separate `^*RankDecoration` template that the actor must
+  also inherit via `Inherits@decoration`.
+- No elite weapons by design — stat multipliers scale progression.
+- Building variant: `^GainsExperienceTDBuilding` (250/500/750/1000 XP).
+
+**RA2 system** (`^GainsExperienceRA2` in `rules/redalert2.yaml`):
+- 5 veteran ranks + elite (6 pips total).
+- XP thresholds: 100, 250, 450, 700, 1000. Elite at `rank-veteran >= 5`.
+- `^GainsExperienceRA2` includes `WithDecoration` with `Image: ra2rank`
+  and a `rank-veteran-4` sequence — rank icons are built-in, no separate
+  decoration template needed.
+- **Elite weapons**: every RA2-styled actor with a primary armament must
+  also have an `Armament@ELITE` block gated on `RequiresCondition:
+  rank-elite` (see §16.3).
+- Stronger multipliers than TD/TS: damage reduction to 50%, firepower to
+  200%, speed to 125%. Reload/Range/Detect multipliers stay at 100 (RA2
+  favors raw damage/speed over utility scaling).
+- Building variant: `^GainsExperienceBuildings` (inherits
+  `^GainsExperience`, adds firepower multipliers).
+
+The default `^GainsExperience` in `defaults.yaml` is a third variant used
+by RA1 and other non-TD/TS/RA2 factions. It has 4 veteran ranks (like
+TD/TS) but includes `WithDecoration` with `Image: rank` (the generic
+rank sprite) and crate-powerup decorations. Factions using this system
+do not need a separate `^*RankDecoration` inherit.
+
+### 16.2 Rank decoration images
+
+Every faction should eventually have its own rank decoration image and
+`^*RankDecoration` template. The sequence images are defined in
+`sequences/misc.yaml` under their respective keys.
+
+| Image key | Template | Used by |
+|---|---|---|
+| `rank` | (built into `^GainsExperience`) | RA1, default factions |
+| `gdirank` | `^GDIRankDecoration` | TD GDI, TS GDI (shared) |
+| `nodrank` | `^NodRankDecoration` | TD Nod, TS Nod (shared) |
+| `cabalrank` | `^CABALRankDecoration` | TS CABAL |
+| `forgotrank` | `^ForgottenRankDecoration` | TS Forgotten |
+| `dunerank` | `^DuneRankDecoration` | D2k factions (Atreides, Harkonnen, Ixian, Ordos) |
+| `alienrank` | `^AlienRankDecoration` | Alien factions (TODO — template not yet created) |
+| `ra2rank` | (built into `^GainsExperienceRA2`) | RA2, RA2Mod factions, TKM |
+
+**Rules:**
+- TD and TS share rank images per side: both TD GDI and TS GDI use
+  `gdirank`, both TD Nod and TS Nod use `nodrank`.
+- RA2 factions all share `ra2rank` (baked into `^GainsExperienceRA2`).
+  RA2Mod factions (AsianAlliance, Consortium, FutureTech, Naxis,
+  SchwarzerMond, Syndicate) also use `ra2rank` via `^GainsExperienceRA2`.
+- `^*RankDecoration` templates use `Palette: greyscale` (not `effect`)
+  for TD/TS/CABAL/Forgotten/Dune factions. The RA2 system uses
+  `Palette: effect`.
+- Actors using `^GainsExperienceTD` MUST also inherit the appropriate
+  `^*RankDecoration` via `Inherits@decoration` — otherwise they show no
+  rank pips at all.
+- Actors using `^GainsExperienceRA2` or `^GainsExperience` do NOT need
+  a separate `^*RankDecoration` — their rank icons are built-in.
+
+**Audit rule** (`audit_rank_decoration.py`, TODO): every actor with
+`Inherits@EXPERIENCE: ^GainsExperienceTD` must also have
+`Inherits@decoration: ^*RankDecoration` matching its faction. Actors
+with `^GainsExperienceRA2` must NOT have a separate `^*RankDecoration`
+(it would conflict with the built-in decorations).
+
+### 16.3 Elite weapons (RA2 system only)
+
+**Every RA2-styled actor with a primary armament must have an elite
+weapon.** When a unit reaches elite rank, its primary weapon is
+replaced by an upgraded version via `Armament@ELITE`.
+
+**Pattern:**
+```yaml
+Armament@PRIMARY:
+    Weapon: <baseWeapon>
+    RequiresCondition: !rank-elite
+Armament@ELITE:
+    Weapon: <baseWeapon>E
+    RequiresCondition: rank-elite
+```
+
+**Naming convention:** the elite weapon name is the base weapon name
+with a capital `E` suffix (e.g. `BorisAKM` → `BorisAKME`). This is the
+dominant pattern (95 of 143 existing elite weapons). The `_elite` suffix
+(e.g. `RA2120mm_elite`) is a secondary pattern used in some RA2Mod
+factions — these should be normalized to the `E` suffix when touched.
+Non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`) are bugs and
+must be renamed to follow the `E` suffix convention.
+
+**Audit rules** (`audit_elite_weapons.py`, TODO):
+1. **E1 — Missing elite weapon**: every actor using
+   `^GainsExperienceRA2` with at least one `Armament@PRIMARY` (or
+   `Armament@PRIMARY`-equivalent without `RequiresCondition: rank-elite`)
+   must also have an `Armament@ELITE` block. 217 actors currently fail
+   this check.
+2. **E2 — Missing rank-elite condition**: every `Armament@ELITE` block
+   must have `RequiresCondition: rank-elite` (or a condition that
+   includes `rank-elite`). 77 of 143 elite armaments currently fail
+   this check — they fire at all ranks, not just elite.
+3. **E3 — Non-standard naming**: elite weapon names must end with a
+   capital `E` suffix. 17 weapons currently use non-standard names.
+4. **E4 — Base weapon must not fire at elite**: the primary armament
+   must have `RequiresCondition: !rank-elite` (or equivalent) so the
+   elite weapon replaces it, not stacks with it.

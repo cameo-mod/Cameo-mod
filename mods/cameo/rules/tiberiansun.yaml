@@ -1035,7 +1035,7 @@ ts_nod_attackcycle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
@@ -1092,7 +1092,7 @@ ts_nod_ticktank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^RenderVoxel
 	Inherits@EMP: ^FrontalEMP

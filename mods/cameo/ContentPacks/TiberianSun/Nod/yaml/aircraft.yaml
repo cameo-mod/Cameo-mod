@@ -3,7 +3,7 @@ ts_nod_bansheefighter:
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@MobilitySpecialization: ^MobilitySpecialization
@@ -71,7 +71,7 @@ ts_nod_harpy:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@MobilitySpecialization: ^MobilitySpecialization

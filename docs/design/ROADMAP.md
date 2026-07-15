@@ -413,3 +413,44 @@ factions, everything through the balance workbook._
 - **Effect-warhead naming**: one `CreateEffect` per impact surface.
 - **Per-frame randomness** on new animated effects.
 - **Content-pack structure**: yaml folder + files folder + content.yaml.
+
+### Backlog — Rank decorations & elite weapons (DESIGN §16, 2026-07-15)
+
+- [ ] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
+  `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in this
+  session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
+  core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
+  `ts_nod_ticktank`).
+- [ ] **Wire D2k factions to `^DuneRankDecoration`** — template created
+  in `ContentPacks/D2k/Shared/yaml/templates.yaml` but D2k actors not
+  yet given `Inherits@decoration: ^DuneRankDecoration`. 6 Ordos actors
+  confirmed missing; Ixian/Atreides/Harkonnen need checking.
+- [ ] **Create `^AlienRankDecoration` template** — `alienrank` sequence
+  exists in `misc.yaml` but no template references it. Determine which
+  factions should use it (potentially StarCraft Zerg if they gain
+  experience in future, or other alien-themed factions).
+- [ ] **Create per-faction rank decorations for RA2Mod factions** —
+  currently all RA2Mod factions share `ra2rank` via
+  `^GainsExperienceRA2`. Eventually each could have a unique rank image
+  for faction identity (low priority — shared `ra2rank` is functional).
+- [ ] **Write `audit_rank_decoration.py`** — verify every
+  `^GainsExperienceTD` actor has the correct `^*RankDecoration` for its
+  faction. Verify `^GainsExperienceRA2` actors do NOT have a separate
+  `^*RankDecoration`. Check that rank image sequences exist in
+  `misc.yaml`.
+- [ ] **E1: Add missing elite weapons** — 217 RA2-styled actors are
+  missing `Armament@ELITE` blocks. Each needs a base weapon `E`-suffixed
+  variant with `RequiresCondition: rank-elite`. This is a large batch
+  job (design work — each elite weapon needs unique stats, not a
+  mechanical rename).
+- [ ] **E2: Fix missing `rank-elite` conditions** — 77 of 143 existing
+  `Armament@ELITE` blocks lack `RequiresCondition: rank-elite`, meaning
+  they fire at all ranks instead of only at elite. Mechanical fix.
+- [ ] **E3: Normalize elite weapon naming** — 17 elite weapons use
+  non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`,
+  `SteelMegaSwordEMP`). Rename to `<baseWeapon>E` convention. Also
+  normalize 31 `_elite`-suffixed weapons to `E` suffix when touched.
+- [ ] **E4: Verify base weapon gating** — primary armaments on
+  RA2-styled actors with elite weapons must have
+  `RequiresCondition: !rank-elite` so the elite weapon replaces, not
+  stacks with, the base.

@@ -60,7 +60,7 @@ ts_nod_subterraneanapc:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@sub: ^SubterraneanVoxelVehicle
 	Inherits@cargo: ^CargoVehicle
@@ -127,7 +127,7 @@ ts_nod_attackbuggy:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -194,7 +194,7 @@ ts_nod_stealthtank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^FrontalEMP
@@ -329,7 +329,7 @@ ts_nod_artillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^TurretEMP
@@ -417,7 +417,7 @@ ts_nod_devilstongue:
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@FireActor: ^FireActor
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^NodRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@sub: ^SubterraneanVoxelVehicle
