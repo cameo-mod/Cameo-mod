@@ -215,12 +215,6 @@ actor_cabal_avatar =
 
 actor_cabal_widow =
    .name = Widow
-   .description = Promoted Avatar with enhanced plasma weapons and armor.
-      Strong vs Vehicles, Buildings
-      Weak vs Aircraft
-
-actor_cabal_legion =
-   .name = Legion
    .description = Heavy assault walker. Requires a CABAL Core.
       Strong vs Vehicles, Buildings
       Weak vs Aircraft

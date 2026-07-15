@@ -908,42 +908,6 @@ cabal_avatar:
 
 cabal_widow:
 	Inherits: ^Vehicle
-	Inherits@Template: ^HighTechTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Valued:
-		Cost: 3000
-	Tooltip:
-		Name: Widow
-	Buildable:
-		BuildPaletteOrder: 31
-		Prerequisites: ~cabal_mechfactory, ~cabal_promotion_widow
-		Queue: Vehicle, RAVehicle
-		Description: actor_cabal_widow.description
-	Mobile:
-		Locomotor: wheeled
-		TurnSpeed: 28
-		Speed: 70
-	Health:
-		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 32
-	Armament@PRIMARY:
-		Weapon: CabalWidowPlasma
-	AttackFrontal:
-		FacingTolerance: 0
-		Voice: Attack
-	RenderSprites:
-		Image: cabal_manticore
-		PlayerPalette: playerra2
-
-cabal_legion:
-	Inherits: ^Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -955,12 +919,12 @@ cabal_legion:
 	Valued:
 		Cost: 3500
 	Tooltip:
-		Name: Legion
+		Name: Widow
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_mechfactory, cabal_core, !cabal_promotion_coredefender
 		Queue: Vehicle, RAVehicle
-		Description: actor_cabal_legion.description
+		Description: actor_cabal_widow.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 24
@@ -989,7 +953,7 @@ cabal_legion:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 	SpawnActorOnDeath@backup:
-		Actor: cabal_legion_backup
+		Actor: cabal_widow_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_coredefender:

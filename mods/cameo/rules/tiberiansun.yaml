@@ -1367,12 +1367,12 @@ cabal_tarantula_backup:
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-cabal_legion_backup:
-	Inherits: cabal_legion
+cabal_widow_backup:
+	Inherits: cabal_widow
 	Valued:
 		Cost: 3500
 	Tooltip:
-		Name: Legion (Backup Mode)
+		Name: Widow (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_mechfactory, ~disabled
@@ -1403,7 +1403,7 @@ cabal_legion_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: cabal_legion
+		IntoActor: cabal_widow
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
