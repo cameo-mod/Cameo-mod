@@ -350,7 +350,9 @@ factions, everything through the balance workbook._
 ## Phase C — Balance & consistency (other factions)
 - Infantry offset sweep beyond TS; TS rocket launch-angle sweep beyond
   CABAL; clean workbook (port CABAL rows); 165 sheet↔game mismatches;
-  FutureTech .futu→futuretech_ rename; Soviet Gorynych/Stalin Fist.
+  [x] FutureTech .futu→futuretech_ rename — 32 asset files renamed, 8
+  YAML/FTL files updated (voxels, sequences, ContentPack rules, Fluent).
+  Soviet Gorynych/Stalin Fist.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.

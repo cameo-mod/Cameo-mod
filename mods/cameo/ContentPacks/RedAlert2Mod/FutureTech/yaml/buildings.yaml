@@ -6,7 +6,7 @@ futuretech_constructionyard:
 	Tooltip:
 		Name: FutureTech Construction Yard
 	Buildable:
-		Description: actor_futu_egcnst.description
+		Description: actor_futuretech_egcnst.description
 	Building:
 		Footprint: =xxx= xxxxx =xxx=
 		Dimensions: 5,3
@@ -82,7 +82,7 @@ futuretech_refinery:
 		Name: FutureTech Refinery
 	Buildable:
 		Prerequisites: ~futuretech_constructionyard, futuretech_thermalpowerplant
-		Description: actor_futu_egrefn.description
+		Description: actor_futuretech_egrefn.description
 	Building:
 		Footprint: xxx= xxx= x+==
 		Dimensions: 4,3
@@ -117,7 +117,7 @@ futuretech_troopgate:
 		Name: Troop Gate
 	Buildable:
 		Prerequisites: ~futuretech_constructionyard, futuretech_thermalpowerplant
-		Description: actor_futu_egpile.description
+		Description: actor_futuretech_egpile.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -152,7 +152,7 @@ futuretech_warpgate:
 		Name: Warp Gate
 	Buildable:
 		Prerequisites: ~futuretech_constructionyard, futuretech_refinery
-		Description: actor_futu_egweap2.description
+		Description: actor_futuretech_egweap2.description
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -213,7 +213,7 @@ futuretech_transmissioncenter:
 		Name: Transmission Center
 	Buildable:
 		Prerequisites: ~futuretech_constructionyard, futuretech_robotcontrolcenter
-		Description: actor_futu_egtf.description
+		Description: actor_futuretech_egtf.description
 	Building:
 		Footprint: === xxx xxx
 		Dimensions: 3,3
@@ -332,7 +332,7 @@ futuretech_battlelab:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		Prerequisites: ~futuretech_constructionyard, futuretech_transmissioncenter
-		Description: actor_futu_egtech.description
+		Description: actor_futuretech_egtech.description
 	Tooltip:
 		Name: FutureTech Battle Lab
 	Building:
@@ -367,7 +367,7 @@ futuretech_hypercore:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Building, RABuilding
-		Description: actor_futu_egshock.description
+		Description: actor_futuretech_egshock.description
 	Selectable:
 		Bounds: 4096, 3072, 0, -256
 	Building:
@@ -409,7 +409,7 @@ futuretech_frostbiteturret:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~futuretech_constructionyard, futuretech_battlelab
-		Description: actor_futu_gggun.description
+		Description: actor_futuretech_gggun.description
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -463,7 +463,7 @@ futuretech_multiturretsystem:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~futuretech_constructionyard, futuretech_troopgate
-		Description: actor_futu_ggmlt.description
+		Description: actor_futuretech_ggmlt.description
 	Valued:
 		Cost: 800
 	Tooltip:

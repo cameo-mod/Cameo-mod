@@ -19,7 +19,7 @@ futuretech_enforcer:
 		BuildPaletteOrder: 105
 		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
-		Description: actor_futu_enforcer.description
+		Description: actor_futuretech_enforcer.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -147,7 +147,7 @@ futuretech_javelinsoldier:
 		BuildPaletteOrder: 110
 		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
-		Description: actor_futu_javelinsoldier.description
+		Description: actor_futuretech_javelinsoldier.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -258,7 +258,7 @@ futuretech_engineer:
 		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Description: actor_futu_fedeng.description
+		Description: actor_futuretech_fedeng.description
 	RenderSprites:
 		Image: futuretech_engineer
 	-TakeCover:
@@ -334,7 +334,7 @@ futuretech_blackwidow:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 335
 		Prerequisites: ~futuretech_troopgate, futuretech_transmissioncenter, ~futuretech_promotion_unlockblackwidow
-		Description: actor_futu_blackwidow.description
+		Description: actor_futuretech_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
 		RequiresCondition: !rank-elite
@@ -389,7 +389,7 @@ futuretech_cryolegionnaire:
 		BuildPaletteOrder: 550
 		Prerequisites: ~futuretech_troopgate, futuretech_hypercore, ~futuretech_promotion_unlockcryolegionnaire
 		BuildLimit: 1
-		Description: actor_futu_cryoleg.description
+		Description: actor_futuretech_cryoleg.description
 	RenderSprites:
 		PlayerPalette: playerra2
 	Valued:
@@ -446,7 +446,7 @@ futuretech_repairdroid:
 		BuildPaletteOrder: 225
 		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter
 		Queue: Infantry, RAInfantry
-		Description: actor_futu_engi.description
+		Description: actor_futuretech_engi.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -525,7 +525,7 @@ futuretech_scoutdroid:
 		BuildPaletteOrder: 215
 		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter
 		Queue: Infantry, RAInfantry
-		Description: actor_futu_wheel.description
+		Description: actor_futuretech_wheel.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 28
