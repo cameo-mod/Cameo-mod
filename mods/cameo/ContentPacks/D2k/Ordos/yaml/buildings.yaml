@@ -105,6 +105,8 @@ ordos_barracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
 		Prerequisite: barracks
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: ordos_barracks
 	GrantConditionOnPrerequisite@UPGRADEABLE:
 		Prerequisites: upgrade_barracks
 	ActorStatValues:

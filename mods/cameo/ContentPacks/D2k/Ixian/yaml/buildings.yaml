@@ -43,6 +43,8 @@ ixian_barracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
 		Prerequisite: barracks
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: ixian_barracks
 	GrantConditionOnPrerequisite@UPGRADEABLE:
 		Prerequisites: upgrade_barracks
 	DamageMultiplier@upgrade_barracks:
