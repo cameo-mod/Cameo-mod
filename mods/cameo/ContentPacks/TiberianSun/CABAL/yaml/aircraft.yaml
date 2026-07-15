@@ -518,6 +518,8 @@ cabal_repair_drone:
 	Armament@PRIMARY:
 		Weapon: CabalEngineerRepairBeam
 		LocalOffset: 0,0,0
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -527,4 +529,4 @@ cabal_repair_drone:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		Image: cabal_repair_drone
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
