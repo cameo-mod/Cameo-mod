@@ -6,6 +6,8 @@ ixian_constructionyard:
 		IntoActor: ixian_mobileconstructionvehicle
 	RenderSprites:
 		Image: conyard.atreides
+	ProvidesPrerequisite@faction:
+		Prerequisite: faction.ixian
 
 ixian_windtrap:
 	Inherits: ^wind_trap
