@@ -8,14 +8,14 @@ schwarzer_mond_constructionyard:
 		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Length: 32
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
 		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 63
 	idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	crane-overlay:
 		Filename: schwarzer_mond_constructionyard_nax2_conyard.shp
 		Start: 32
@@ -43,9 +43,9 @@ schwarzer_mond_warfactory:
 		Length: 16
 		ZOffset: 1024
 	build-ramp:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-build-ramp:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	build-top:
 		Filename: schwarzer_mond_warfactory_nax2_weap.shp
 		Length: 16
@@ -55,18 +55,18 @@ schwarzer_mond_warfactory:
 		Length: 16
 		ZOffset: 1024
 	build-door:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-build-door:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-air-open:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	build-air-inside:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-air-inside:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	bib:
 		Filename: schwarzer_mond_warfactory_nax2_weap_bottom.shp
 		ZOffset: -1024
@@ -74,16 +74,16 @@ schwarzer_mond_warfactory:
 		Filename: schwarzer_mond_warfactory_nax2_weap_bottom.shp
 		ZOffset: -1024
 	idle-flag:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-flag:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	overlay-fan:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: schwarzer_mond_warfactory_nax2_weap_make.shp
 		Length: 56
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: schwarzer_mond_warfactory_icon.png
 		Offset: 0,0
@@ -130,9 +130,9 @@ schwarzer_mond_orerefinery:
 	Defaults:
 		Offset: -1,-6
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Length: 32
@@ -146,7 +146,7 @@ schwarzer_mond_orerefinery:
 		Filename: schwarzer_mond_orerefinery_nax2_refin.shp
 		Start: 64
 	resources:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: schwarzer_mond_orerefinery_icon.png
 		Offset: 0,0
@@ -273,14 +273,14 @@ schwarzer_mond_meteortractionray:
 	critical-idle:
 		Start: 16
 	up:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	active:
 		Start: 52
 		Length: 28
 	make:
 		Length: 16
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: schwarzer_mond_meteortractionray_icon.png
 		Offset: 0,0
@@ -305,9 +305,9 @@ schwarzer_mond_lasertower:
 		Filename: schwarzer_mond_lasertower_nax2_twr.shp
 		Length: 16
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: schwarzer_mond_lasertower_icon.png
 		Offset: 0,0
@@ -318,16 +318,16 @@ schwarzer_mond_sturmcannon:
 		Offset: 0,-8
 		Scale: 0.8
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: schwarzer_mond_sturmcannon_nax2_make.shp
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: schwarzer_mond_sturmcannon_nax2_sturmcann.shp
 		Facings: 64
@@ -440,7 +440,7 @@ schwarzer_mond_lunargrille:
 		Scale: 0.8
 		Offset: 0,24
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Facings: 64
 	icon:
@@ -459,7 +459,7 @@ schwarzer_mond_neojagdpanzer:
 		Filename: schwarzer_mond_neojagdpanzer_nax2_jager.shp
 		Scale: 0.9
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Facings: 64
 	icon:
@@ -477,7 +477,7 @@ schwarzer_mond_crystaltank:
 		Filename: schwarzer_mond_crystaltank_nax2_crystal.shp
 		Scale: 0.9
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Facings: 64
 	muzzle:
@@ -548,7 +548,7 @@ schwarzer_mond_haunebuii:
 		Length: 64
 		Tick: 10
 	muzzle:
-		Filename: diskray.shp
+		Filename: shared_sprites|diskray.shp
 		Scale: 0.9
 		Offset: 0,35
 		Length: 4
@@ -567,7 +567,7 @@ schwarzer_mond_haunebuiii:
 		Length: 32
 		Tick: 20
 	muzzle:
-		Filename: diskray.shp
+		Filename: shared_sprites|diskray.shp
 		Scale: 0.9
 		Offset: 0,35
 		Length: 4
@@ -586,7 +586,7 @@ schwarzer_mond_dieglocke:
 		Length: 64
 		Tick: 10
 	muzzle:
-		Filename: diskray.shp
+		Filename: shared_sprites|diskray.shp
 		Scale: 0.9
 		Offset: 0,35
 		Length: 4
@@ -633,7 +633,7 @@ schwarzer_mond_mars:
 		Filename: schwarzer_mond_mars_nax2_bradley.shp
 		Scale: 1
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Facings: 64
 		Offset: 0,20
@@ -651,7 +651,7 @@ schwarzer_mond_m200bjagerline:
 		Filename: schwarzer_mond_m200bjagerline_nax2_aatank.shp
 		Scale: 0.8
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Facings: 64
 		Offset: 0,20
@@ -756,7 +756,7 @@ schwarzer_mond_noidharvester:
 	dock-loop:
 		Facings: 32
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:

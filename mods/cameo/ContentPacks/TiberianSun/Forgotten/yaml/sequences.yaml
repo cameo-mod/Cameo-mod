@@ -118,35 +118,35 @@ forgotten_chemsprayinfantry:
 	muzzle:
 		Combine:
 			chem_n:
-				Filename: chem_n.shp
+				Filename: shared_sprites|chem_n.shp
 				Length: *
 				Offset: 1,2
 			chem_nw:
-				Filename: chem_nw.shp
+				Filename: shared_sprites|chem_nw.shp
 				Length: *
 				Offset: 8,2
 			chem_w:
-				Filename: chem_w.shp
+				Filename: shared_sprites|chem_w.shp
 				Length: *
 				Offset: 8,-3
 			chem_sw:
-				Filename: chem_sw.shp
+				Filename: shared_sprites|chem_sw.shp
 				Length: *
 				Offset: 7,-6
 			chem_s:
-				Filename: chem_s.shp
+				Filename: shared_sprites|chem_s.shp
 				Length: *
 				Offset: 1,-6
 			chem_se:
-				Filename: chem_se.shp
+				Filename: shared_sprites|chem_se.shp
 				Length: *
 				Offset: -5,-6
 			chem_e:
-				Filename: chem_e.shp
+				Filename: shared_sprites|chem_e.shp
 				Length: *
 				Offset: -7,-3
 			chem_ne:
-				Filename: chem_ne.shp
+				Filename: shared_sprites|chem_ne.shp
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -555,7 +555,7 @@ forgotten_thumperbus:
 	icon:
 		Filename: forgotten_thumperbus_icon.png
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 
 forgotten_nomadbarracks:
 	idle:
@@ -568,7 +568,7 @@ forgotten_nomadbarracks:
 	icon:
 		Filename: forgotten_nomadbarracks_icon.png
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 
 forgotten_tankkiller:
 	idle:
@@ -583,7 +583,7 @@ forgotten_tankkiller:
 
 forgotten_missilevan:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: forgotten_missilevan.png
 		Facings: 64
@@ -683,35 +683,35 @@ forgotten_flametank:
 		IgnoreWorldTint: true
 		Combine:
 			flame_n:
-				Filename: flame_n.shp
+				Filename: shared_sprites|flame_n.shp
 				Length: *
 				Offset: 3,6
 			flame_nw:
-				Filename: flame_nw.shp
+				Filename: shared_sprites|flame_nw.shp
 				Length: *
 				Offset: 8,7
 			flame_w:
-				Filename: flame_w.shp
+				Filename: shared_sprites|flame_w.shp
 				Length: *
 				Offset: 8,2
 			flame_sw:
-				Filename: flame_sw.shp
+				Filename: shared_sprites|flame_sw.shp
 				Length: *
 				Offset: 7,-2
 			flame_s:
-				Filename: flame_s.shp
+				Filename: shared_sprites|flame_s.shp
 				Length: *
 				Offset: 3,-2
 			flame_se:
-				Filename: flame_se.shp
+				Filename: shared_sprites|flame_se.shp
 				Length: *
 				Offset: -5,-2
 			flame_e:
-				Filename: flame_e.shp
+				Filename: shared_sprites|flame_e.shp
 				Length: *
 				Offset: -7,2
 			flame_ne:
-				Filename: flame_ne.shp
+				Filename: shared_sprites|flame_ne.shp
 				Length: *
 				Offset: -7,8
 	icon:
@@ -1003,23 +1003,23 @@ forgotten_cobracopter:
 	icon:
 		Filename: forgotten_promotion_cobracopter_icon.png
 	rotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Length: 4
 	slow-rotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Start: 4
 		Length: 8
 
 forgotten_apache:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_harpy_icon.shp
 	rotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Length: 4
 	slow-rotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Start: 4
 		Length: 8
 
@@ -1082,7 +1082,7 @@ forgotten_veinhole:
 		Filename: forgotten_veinhole.shp
 		Length: 12
 	make:
-		Filename: td_nod_gunturret_make.shp
+		Filename: shared_sprites|td_nod_gunturret_make.shp
 		Length: *
 		Tick: 80
 	muzzle:
@@ -1093,13 +1093,13 @@ forgotten_veinhole:
 
 forgotten_machineguntower:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: forgotten_machineguntower.png
 		Facings: 64
@@ -1109,7 +1109,7 @@ forgotten_machineguntower:
 		Filename: forgotten_machineguntower.png
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Tick: 80
@@ -1139,7 +1139,7 @@ forgotten_brokenwarriortankturret:
 		Filename: forgotten_brokenwarriortankturret.png
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Tick: 80
@@ -1169,7 +1169,7 @@ forgotten_brokenrattytankturret:
 		Filename: forgotten_brokenrattytankturret.png
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Tick: 80
@@ -1199,7 +1199,7 @@ forgotten_brokenscoopertankturret:
 		Filename: forgotten_brokenwarriortankturret.png
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Tick: 80

@@ -8,14 +8,14 @@ naxis_constructionyard:
 		Filename: naxis_constructionyard_conyard.shp
 		Length: 32
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
 		Filename: naxis_constructionyard_conyard.shp
 		Start: 63
 	idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	crane-overlay:
 		Filename: naxis_constructionyard_conyard.shp
 		Start: 32
@@ -44,9 +44,9 @@ naxis_warfactory:
 		Length: 60
 		ZOffset: 1024
 	build-ramp:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-build-ramp:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	build-top:
 		Filename: naxis_warfactory_weap.shp
 		Length: 60
@@ -57,18 +57,18 @@ naxis_warfactory:
 		Length: 60
 		ZOffset: 1024
 	build-door:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-build-door:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-air-open:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	build-air-inside:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-air-inside:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	bib:
 		Filename: naxis_warfactory_weap_bottom.shp
 		ZOffset: -1024
@@ -76,16 +76,16 @@ naxis_warfactory:
 		Filename: naxis_warfactory_weap_bottom.shp
 		ZOffset: -1024
 	idle-flag:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-flag:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	overlay-fan:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: naxis_warfactory_weap_make.shp
 		Length: 56
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: naxis_warfactory_icon.png
 		Offset: 0,0
@@ -170,9 +170,9 @@ naxis_orerefinery:
 	Defaults:
 		Offset: -1,-6
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: naxis_orerefinery.shp
 		Length: 32
@@ -186,7 +186,7 @@ naxis_orerefinery:
 		Filename: naxis_orerefinery.shp
 		Start: 64
 	resources:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: naxis_orerefinery_icon.png
 		Offset: 0,0
@@ -330,14 +330,14 @@ naxis_naxirocketsilo:
 	critical-idle:
 		Start: 16
 	up:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	active:
 		Start: 32
 		Length: 96
 	make:
 		Length: 16
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ra2_soviets_nuclearmissilesilo_icon.shp
 		Offset: 0,0
@@ -355,14 +355,14 @@ naxis_rifletower:
 		Length: 16
 		Start: 32
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: naxis_rifletower_twr.shp
 		Length: 16
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: naxis_rifletower_icon.png
 		Offset: 0,0
@@ -373,16 +373,16 @@ naxis_flak88:
 		Offset: 0,-8
 		Scale: 0.8
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: naxis_flak88_make.shp
 		Length: 64
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: naxis_flak88.shp
 		Facings: 64
@@ -544,7 +544,7 @@ naxis_skymage:
 		Length: 10
 		Facings: 8
 	shadow:
-		Filename: parach_shadow.shp
+		Filename: shared_sprites|parach_shadow.shp
 		Length: 1
 		Facings: 1
 	icon:
@@ -901,7 +901,7 @@ naxis_slave:
 	Defaults:
 		Filename: naxis_slave_yr_slav.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	run:
 		Tick: 120
 	harvest:
@@ -915,11 +915,11 @@ naxis_slave:
 		InterpolatedFacings: 32
 		Tick: 120
 	empty-harvest:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	half-harvest:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	full-harvest:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	shoot:
 		Start: 164
 	dock:
@@ -948,9 +948,9 @@ naxis_engineeringtruck:
 		Facings: 64
 		Scale: 0.9
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: naxis_engineeringtruck_icon.png
 		Offset: 0, 0
@@ -1206,7 +1206,7 @@ naxis_naximercenarysniper:
 		Scale: 0.75
 		Offset: 0,0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1225,7 +1225,7 @@ naxis_naxiriflerecruit:
 		Scale: 0.75
 		Offset: 0,0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1244,7 +1244,7 @@ naxis_panzerfausttrooper:
 		Scale: 0.7
 		Offset: 0,-16
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1263,7 +1263,7 @@ naxis_naxiflamer:
 		Scale: 0.75
 		Offset: 0,-16
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1284,7 +1284,7 @@ naxis_naximachinegunners:
 	stand:
 		ShadowStart: 271
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	run:
 		Start: 8
@@ -1337,7 +1337,7 @@ naxis_naximachinegunners:
 		Length: 15
 		ShadowStart: 527
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1345,7 +1345,7 @@ naxis_naximachinegunners:
 		Tick: 30
 		Offset: 0,0
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1369,7 +1369,7 @@ naxis_portableflak:
 		Stride: 10
 		Facings: 8
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	run:
 		Start: 8
@@ -1413,7 +1413,7 @@ naxis_portableflak:
 		Stride: 10
 		Facings: 8
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1421,7 +1421,7 @@ naxis_portableflak:
 		Tick: 30
 		Offset: 0,0
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1507,7 +1507,7 @@ alien.nax:
 	paradrop:
 		Start: 1
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1559,7 +1559,7 @@ undead.nax:
 
 corpse.nax:
 	make:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 		Tick: 15
 	idle:

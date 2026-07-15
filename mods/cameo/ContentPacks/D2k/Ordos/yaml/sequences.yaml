@@ -570,7 +570,7 @@ hightech.ordos:
 		Start: 4344
 		Offset: -30,-24
 	active:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 
 ordos_palace:
 	Defaults:
@@ -736,12 +736,12 @@ chemtrooper:
 		Start: 440
 		Length: 12
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
@@ -869,12 +869,12 @@ ordos_saboteur:
 		Length: 8
 		Tick: 80
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
@@ -1053,12 +1053,12 @@ ordos_facedancer:
 		Length: 7
 		Scale: 1.4
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
@@ -1224,7 +1224,7 @@ ordos_swarmerdrone:
 		Scale: 1
 		Offset: 0,24
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 		Scale: 0.7
@@ -1243,7 +1243,7 @@ ordos_banshee:
 		Start: 64
 		Scale: 1
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 		Scale: 0.7
@@ -1260,7 +1260,7 @@ ordos_wraith:
 		Length: 64
 		Tick: 64
 	muzzle:
-		Filename: diskray.shp
+		Filename: shared_sprites|diskray.shp
 		Scale: 0.9
 		Offset: 0,35
 		Length: 4
@@ -1275,7 +1275,7 @@ ordos_eyeinthesky:
 		Facings: 64
 		Scale: 1
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 		Scale: 0.7
@@ -1340,7 +1340,7 @@ ordos_cobratank:
 		Start: 128
 		Length: 12
 	deploy-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	icon:
 		Filename: ordos_cobratank_icon.png
@@ -1366,7 +1366,7 @@ ordos_pythontank:
 		Start: 128
 		Length: 12
 	deploy-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	icon:
 		Filename: ordos_promotion_unlockpython_icon.png
