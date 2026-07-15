@@ -1353,7 +1353,7 @@ cabal_tarantula_backup:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		Image: tstnkspid
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
@@ -1390,7 +1390,7 @@ cabal_widow_backup:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		Image: tstnkspid
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:

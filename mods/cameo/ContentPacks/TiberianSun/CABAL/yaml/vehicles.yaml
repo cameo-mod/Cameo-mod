@@ -494,14 +494,14 @@ cabal_tarantula:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -700, 0, 700
+		LocalOffset: 300, 0, 300
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -700, 0, 700
+		LocalOffset: 300, 0, 300
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
@@ -523,7 +523,7 @@ cabal_tarantula:
 	RenderVoxels:
 		Scale: 10
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		Image: tstnkspid
  	SpawnActorOnDeath@backup:
  		Actor: cabal_tarantula_backup
