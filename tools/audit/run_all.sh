@@ -22,7 +22,8 @@ failed=0
 
 for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
-         weapon_uniqueness garrison_weapons asset_files promotion_gating min_range; do
+         weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
+         basebuilder_crates buildable_order; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
