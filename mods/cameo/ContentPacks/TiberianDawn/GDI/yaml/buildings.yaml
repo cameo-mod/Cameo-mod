@@ -209,7 +209,7 @@ td_gdi_repairfacility:
 
 td_gdi_advancedcommunicationscenter:
 	Inherits: ^TDBuilding
-	Inherits@shape: ^2x3Shape
+	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@tech: ^IsTechnoBuilding

@@ -299,6 +299,7 @@ td_gdi_advancedcommunicationscenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: td_gdi_advancedcommunicationscenter.shp
+		Scale: 2
 	idle:
 		Length: 16
 		Tick: 100
@@ -315,6 +316,7 @@ td_gdi_advancedcommunicationscenter:
 		Tick: 80
 	icon:
 		Filename: td_gdi_advancedcommunicationscenter_icon.shp
+		Scale: 1
 
 td_gdi_ioncannonuplink:
 	icon:
