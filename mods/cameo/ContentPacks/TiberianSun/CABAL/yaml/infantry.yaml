@@ -241,8 +241,7 @@ cabal_rocketcyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		DeathPaletteIsPlayerPalette: true
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
 cabal_devout:
@@ -576,8 +575,7 @@ cabal_hackercyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		DeathPaletteIsPlayerPalette: true
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	MindControllerCA:
 		ArmamentNames: primary
