@@ -333,11 +333,43 @@ factions, everything through the balance workbook._
 - [x] Every content pack: `content.yaml` at root + one **`yaml`** folder
   (rules+weapons+sequences merged) + an empty **`files`** folder. Shared
   assets → per-GAME `Shared/files/`. DONE 2026-07-14: all packs
-  restructured, boot-tested, committed. Asset migration into `files/`
-  is the next phase.
+  restructured, boot-tested, committed.
+- [x] **`mod.yaml` package hierarchy** (2026-07-15): per-faction
+  `files/` packages are mounted first, then per-game `Shared/files/`,
+  then top-level `ContentPacks/Shared/files/`, then legacy `bits/`. This
+  lets new content shadow old content without breaking old cameo fallback.
+- [x] **CABAL asset migration** (2026-07-15, `68cdd5ebb`/`472209150`): 128
+  CABAL-unique assets moved into
+  `ContentPacks/TiberianSun/CABAL/files/{icons,sprites,voxels}` and
+  referenced with package prefixes.
+- [x] **Cross-game shared asset migration** (2026-07-15, `e1b153d9c`/`472209150`):
+  38 single-file cross-game shared assets moved into
+  `ContentPacks/Shared/files/sprites/` and referenced with
+  `shared_sprites|<name>` across all affected ContentPacks.
+- [x] **TiberianSun intra-game shared asset migration** (2026-07-15,
+  `6835a04`): 21 TS-only shared assets moved into
+  `ContentPacks/TiberianSun/Shared/files/{icons,sprites,voxels}` and
+  referenced with `ts_shared_*|<name>` prefixes.
+- [ ] **Remaining critical cross-game shared assets**: `gunfire2`
+  (generic/RA/TD variants), `electro` (7 tileset variants), `dragon`
+  (RA sprite vs WC2 sound name collision), and `d2k/DATA.R16` (resource
+  package). These must be resolved before `bits/` can be deprecated.
+  → active work: cross-game sharing is a release blocker for dynamic
+  faction loading, so this jumps the queue within the content-pack section.
+- [ ] **AI module split**: per-faction `ai.yaml` is currently blocked by
+  OpenRA's YAML merge behavior (trait instances with the same `@name`
+  are replaced, not deep-merged). Needs custom trait or engine change.
+  → backlog until architecture is designed.
+- [ ] **Unused-file audit**: once all referenced assets are out of `bits/`,
+  run an audit to identify and delete the ~25,000 unreferenced legacy
+  files left in `bits/`.
 
 ## Cross-faction shared-effect independence (LONG-TERM, L)
 
+- [x] Top-level `ContentPacks/Shared/files/` created as a temporary
+  holding area for cross-game assets (2026-07-15).
+- [ ] Duplicate or replace every cross-game shared asset so each game
+  owns its own copy, then remove the top-level `Shared/files/` entries.
 - [ ] Give each faction its own effects, or share only PER GAME. Prereq
   for true dynamic per-faction loading. DESIGN + MIGRATION.
 
