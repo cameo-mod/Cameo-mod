@@ -1219,7 +1219,7 @@ ra2_allies_pillbox:
 		Types: Infantry
 		MaxWeight: 1
 		InitialUnits: ra2_allies_gi
-	AttackGarrisoned:
+	AttackGarrisonedSP:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -2085,7 +2085,7 @@ ra2_soviets_battlebunker:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed
@@ -3028,7 +3028,7 @@ yuri_tankbunker:
 		EnterSounds: btanupa.wav
 		ExitSounds: btandowa.wav
 	-SpawnActorsOnSell:
-	AttackGarrisoned:
+	AttackGarrisonedSP:
 		Armaments: primary, secondary, garrisoned
 		PortOffsets: 192,0,128, 112,-170,128, -112,-170,128, -192,0,128, -112,170,128, 112,170,128
 		PortYaws: 0, 176, 341, 512, 682, 853
@@ -6350,7 +6350,7 @@ ra2_allies_battlefortress:
 		InitialUnits: ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_guardiangi
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128

@@ -578,7 +578,7 @@ td_gdi_assaultapc:
 		InitialUnits: td_gdi_minigunner,td_gdi_grenadier,td_gdi_rocketsoldier,td_gdi_sonicmissilesoldier,td_gdi_empgrenadier,td_gdi_shotgunner,td_gdi_officer,td_gdi_heavysniper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,341,128, -384,0,128

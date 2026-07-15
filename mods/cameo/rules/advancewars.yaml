@@ -6428,7 +6428,7 @@ awconvoy:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		EjectOnDeath: false #desync
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -9307,7 +9307,7 @@ awradarvan:
 		MaxWeight: 4
 		EjectOnDeath: false #desync
 		InitialUnits: awe3yellowcomet, awe3yellowcomet
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128

@@ -3942,7 +3942,7 @@
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		RequiresCondition: owned
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		PauseOnCondition: disabled
@@ -4067,7 +4067,7 @@
 			engineer: pip-yellow
 			special: pip-blue
 			hero: pip-red
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		RequiresCondition: !chronobeamed && !damaged
@@ -9465,7 +9465,7 @@ CPQDEBUGDUMMY:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 256,0,128, 384,-128,128, 384,128,128

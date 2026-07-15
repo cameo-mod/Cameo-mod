@@ -694,7 +694,7 @@ tkm_bunker:
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
 		PauseOnCondition: chronobeamed
@@ -3243,7 +3243,7 @@ tkm_battlebus:
 		InitialUnits: tkm_juggernaut,tkm_rocketeer,tkm_rocketeer,tkm_rocketeer
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
@@ -3697,7 +3697,7 @@ tkm_bigshiee:
 		InitialUnits: tkm_juggernaut,tkm_juggernaut,tkm_juggernaut,tkm_juggernaut,tkm_juggernaut,tkm_juggernaut,tkm_rocketeer,tkm_rocketeer,tkm_rocketeer,tkm_rocketeer
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128

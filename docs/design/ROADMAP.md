@@ -356,9 +356,14 @@ factions, everything through the balance workbook._
 - TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
 
 ## Phase E — Platform & engine (background, L)
-- **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all
+- [x] **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all
   `AttackGarrisoned`/`AttackOpenTopped` units to per-passenger independent
-  targeting (blocker: they use single-instance `AttackFollow`). End of queue.
+  targeting. New `AttackGarrisonedSP` trait in `OpenRA.Mods.CA/Traits/Attack/`
+  inherits `AttackFollow`, supports both `Cargo`/`Passengers` and
+  `Garrisonable`/`Garrisoners`, and adds per-passenger opportunity fire via
+  each passenger's `AutoTarget` trait. All 26 YAML usages across rules +
+  ContentPacks converted from `AttackGarrisoned`/`AttackOpenTopped` to
+  `AttackGarrisonedSP`. `PortYaws`/`PortCones` made optional (default 360°).
 - SP engine-trait ports; TS Shared pack move; Formula v2; dynamic faction
   loading end-game (per-pack ai.yaml, assets into packs, unused-file audit).
 

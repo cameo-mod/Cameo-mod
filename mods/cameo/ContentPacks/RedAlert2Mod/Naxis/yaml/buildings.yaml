@@ -569,7 +569,7 @@ naxis_naxibunker:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
 		RequiresCondition: loaded && !build-incomplete
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PauseOnCondition: chronobeamed

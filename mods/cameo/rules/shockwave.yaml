@@ -2848,7 +2848,7 @@ susapillbox:
 		Types: Infantry
 		MaxWeight: 1
 	WithSpriteBody:
-	AttackGarrisoned:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PortYaws: 0, 176, 341, 512, 682, 853
@@ -5190,7 +5190,7 @@ susapavelow:
 		Speed: 116
 		Locomotor: fakeaircraft
 		PauseOnCondition: disabled
-	-AttackGarrisoned:
+	-AttackGarrisonedSP:
 	AttackFrontal:
 		FacingTolerance: 0
 	SpawnActorOnDeath:
@@ -10447,7 +10447,7 @@ sglbus:
 		Types: Infantry, Hacker
 		MaxWeight: 6
 		EjectOnDeath: false #desync
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -15038,7 +15038,7 @@ schbattlefortress:
 	RenderSprites:
 	AttackFrontal:
 		FacingTolerance: 0
-	AttackOpenTopped:
+	AttackGarrisonedSP:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		Voice: Attack
