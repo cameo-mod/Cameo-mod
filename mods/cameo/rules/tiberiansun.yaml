@@ -495,7 +495,7 @@ TSE1:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 TSE1PARA:
@@ -543,7 +543,7 @@ TSENGINEER:
 		Image: tsengineer
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 TSE2PARA:
@@ -609,7 +609,7 @@ TSE3:
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	Voiced:
 		VoiceSet: TSRocket
