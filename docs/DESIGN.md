@@ -456,14 +456,22 @@ cheapest provider wins).
   under `explosion:` and have their `Image:` field removed. The audit
   tool `tools/audit_createeffect_image.py` flags all CE `Image:` fields;
   `tools/audit_ce_image_usage.py` determines which are CE-only vs shared.
-  Known CE-only images already moved: `ra2corpse` (death_a–death_f),
-  `wc2_building_collapse`. Known shared images that keep `Image:`:
+  Known CE-only images already moved: `wc2_building_collapse`.
+  Known shared images that keep `Image:`:
   `tsdig`, `tsioncannon`, `ionsfx`, `tspodring`, `tsmcnealmechdrop`,
   `tsdroppod`, `hakurei_giphy`, `hakurei_dream`, `wc2_effect_sparkle`,
   `wc2_effect_sparkle_circle`, `wc2_effect_heal`, `wc2_exorcism`,
   `wc2_catapult_impact`, `wc2_lightng`, `wc2_effect_blizzard`,
   `wc2_catapult_stone_projectile_medium`, `wc2_effect_death_and_decay`,
   `wc2_effect_daemon_attack`, `wc2_cannon_impact`, `wh40kcapsule`.
+- **Corpse-spawner exception (design 2026-07-15).** `ra2corpse` is NOT
+  an explosion — it is a corpse spawner that uses `CreateEffect` with
+  multiple `Explosions:` entries (`death_a`–`death_f`) to pick a RANDOM
+  corpse animation each time. The `Image:` field MUST be kept because
+  the engine needs to resolve the random sequence from the `ra2corpse`
+  image's own sub-sequences, not from the `explosion:` image. Moving
+  these under `explosion:` would break the random-pick behaviour.
+  `ra2corpse` stays as a top-level image in `sequences/redalert2.yaml`.
 
 ## 9. Operating rules for agents
 

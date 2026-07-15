@@ -278,12 +278,13 @@ factions, everything through the balance workbook._
   `sequences/misc.yaml` under the `explosion:` key. Removed the old
   top-level definitions from the CABAL sequences file.
 - [x] **Mod-wide CE-only Image: fixes** (2026-07-15): Moved CE-only
-  images `ra2corpse` (death_a–death_f) and `wc2_building_collapse` under
-  `explosion:` in misc.yaml; removed `Image:` from 9 CE warheads across
-  `weapons/redalert2.yaml` and `weapons/warcraft2.yaml`. Removed
+  image `wc2_building_collapse` under `explosion:` in misc.yaml; removed
+  `Image:` from 7 CE warheads in `weapons/warcraft2.yaml`. Removed
   redundant `Image: explosion` from `weapons/halloween.yaml`. Shared
   images (used by both CE and other traits) keep their `Image:` field
-  per the shared-image exception in DESIGN.md §8.
+  per the shared-image exception in DESIGN.md §8. `ra2corpse` reverted —
+  corpse spawner needs `Image:` for random-pick from its own
+  sub-sequences (corpse-spawner exception, DESIGN.md §8).
 - [x] **DESIGN.md updated** (2026-07-15): Added rules to §8 documenting
   that `CreateEffect` must never carry `Image:` (CE-only), the
   shared-image exception, and that all impact animations must live in

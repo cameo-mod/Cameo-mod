@@ -5750,6 +5750,7 @@ KirovExplode:
 RA2CorpseSpawner:
 	#Projectile: InstantExplode
 	Warhead@Effect: CreateEffect
+		Image: ra2corpse
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
@@ -5795,6 +5796,7 @@ RA2FlyingBody:
 		Speed: 30, 90
 		Sequences: flyingbody
 	Warhead@Effect: CreateEffect
+		Image: ra2corpse
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
