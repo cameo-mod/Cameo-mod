@@ -185,9 +185,11 @@ asian_alliance_plasmatrooper:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: AsianSinglePlasma
+		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: AsianSinglePlasmaE
+		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:

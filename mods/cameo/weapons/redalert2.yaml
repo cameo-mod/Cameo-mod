@@ -5779,6 +5779,7 @@ RA2CorpseSpawner:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplosml2.aud
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
+		Image: ra2corpse
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 15
@@ -5825,6 +5826,7 @@ RA2FlyingBody:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: xplosml2.aud
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
+		Image: ra2corpse
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0

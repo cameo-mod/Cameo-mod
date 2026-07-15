@@ -880,8 +880,10 @@ asian_alliance_heavyrailguntank:
 		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: AsianRailTank2
+		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: AsianRailTank3
+		RequiresCondition: rank-elite
 
 asian_alliance_warturtle:
 	Inherits: ^Tank
