@@ -424,14 +424,14 @@ cabal_artilleryspider:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
-		LocalOffset: -500,0,250, -500,0,250
+		LocalOffset: 300,200,400, 300,200,400
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: CabalArtilleryWalkerShellUpgraded
-		LocalOffset: -500,0,250, -500,0,250
+		LocalOffset: 300,200,400, 300,200,400
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
@@ -489,19 +489,19 @@ cabal_tarantula:
 		Type: Heavy
 	Turreted:
 		TurnSpeed: 14
-		Offset: -500,1,1
+		Offset: 0,0,0
 	Armament@PRIMARY:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 300, 0, 300
+		LocalOffset: 0, 0, 300
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 300, 0, 300
+		LocalOffset: 0, 0, 300
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
