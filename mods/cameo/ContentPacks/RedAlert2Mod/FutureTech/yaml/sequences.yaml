@@ -37,7 +37,7 @@ futuretech_constructionyard:
 		Length: 41
 		ShadowStart: 41
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dead:
 		Filename: futuretech_constructionyard_egcnst.shp
 		ShadowStart: 3
@@ -81,7 +81,7 @@ futuretech_troopgate:
 	Defaults:
 		Offset: 10,-10
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: futuretech_troopgate_egpile.shp
 		ShadowStart: 2
@@ -98,25 +98,25 @@ futuretech_troopgate:
 	idle-tele:
 		Combine:
 			0:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 			1:
 				Filename: futuretech_egpile_a.shp
 				Length: 18
 			2:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 18
 	damaged-idle-tele:
 		Combine:
 			0:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 			1:
 				Filename: futuretech_egpile_a.shp
 				Length: 18
 			2:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 18
 	make:
@@ -203,25 +203,25 @@ futuretech_warpgate:
 	idle-tele:
 		Combine:
 			0:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
 				Length: 32
 			2:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 34
 	damaged-idle-tele:
 		Combine:
 			0:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
 				Length: 32
 			2:
-				Filename: invisibleitem.shp
+				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 34
 	icon:
@@ -292,7 +292,7 @@ futuretech_transmissioncenter:
 	Defaults:
 		Offset: -4,16
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: futuretech_transmissioncenter_egtf.shp
 		ShadowStart: 2
@@ -373,7 +373,7 @@ futuretech_refinery:
 		Length: 8
 		ZOffset: 128
 	docking-overlay:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: futuretech_refinery_icon.png
 		Offset: 0,0
@@ -522,7 +522,7 @@ futuretech_enforcer:
 	Defaults:
 		Filename: futuretech_enforcer.shp
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	run:
 		Tick: 120
@@ -561,7 +561,7 @@ futuretech_javelinsoldier:
 		Scale: 0.7
 		Filename: futuretech_javelinsoldier.shp
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	stand:
 		ShadowStart: 432
@@ -807,10 +807,10 @@ futuretech_cryolegionnaire:
 		Start: 3
 		Length: 2
 	die-crushed:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ShadowStart: -1
 	die3:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ShadowStart: -1
 	die4:
 		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_nukedie.shp
@@ -862,7 +862,7 @@ futuretech_cryolegionnaire:
 		Offset: 0,0
 		ShadowStart: -1
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		ShadowStart: -1
 
 futuretech_gunstrider:
@@ -996,35 +996,35 @@ futuretech_salamanderifv:
 		IgnoreWorldTint: true
 		Combine:
 			flame_n:
-				Filename: flame_n.shp
+				Filename: shared_sprites|flame_n.shp
 				Length: *
 				Offset: 3,6
 			flame_nw:
-				Filename: flame_nw.shp
+				Filename: shared_sprites|flame_nw.shp
 				Length: *
 				Offset: 8,7
 			flame_w:
-				Filename: flame_w.shp
+				Filename: shared_sprites|flame_w.shp
 				Length: *
 				Offset: 8,2
 			flame_sw:
-				Filename: flame_sw.shp
+				Filename: shared_sprites|flame_sw.shp
 				Length: *
 				Offset: 7,-2
 			flame_s:
-				Filename: flame_s.shp
+				Filename: shared_sprites|flame_s.shp
 				Length: *
 				Offset: 3,-2
 			flame_se:
-				Filename: flame_se.shp
+				Filename: shared_sprites|flame_se.shp
 				Length: *
 				Offset: -5,-2
 			flame_e:
-				Filename: flame_e.shp
+				Filename: shared_sprites|flame_e.shp
 				Length: *
 				Offset: -7,2
 			flame_ne:
-				Filename: flame_ne.shp
+				Filename: shared_sprites|flame_ne.shp
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1089,7 +1089,7 @@ futuretech_prospector:
 		Start: 64
 		Facings: 64
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:
@@ -1111,7 +1111,7 @@ futuretech_prospectormk2:
 		Start: 64
 		Facings: 64
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:
@@ -1124,7 +1124,7 @@ futuretech_phalanxwip:
 		Filename: futuretech_phalanxwip.png
 		Scale: 0.95
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Scale: 1
 		Facings: 64

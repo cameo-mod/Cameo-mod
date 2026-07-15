@@ -11,15 +11,15 @@ asian_alliance_asianconstructionyard:
 	dead:
 		Filename: asian_alliance_asianconstructionyard_aa_cgcnst.shp
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
 		Filename: asian_alliance_asianconstructionyard_aa_cgcnst.shp
 		Start: 1
 		ShadowStart: 4
 	idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-fans:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	crane-overlay:
 		Filename: asian_alliance_asianconstructionyard_aa_cgcnst_b.shp
 		Length: 32
@@ -68,7 +68,7 @@ asian_alliance_asianbarracks:
 	Defaults:
 		Offset: 0,-16
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: asian_alliance_asianbarracks_aa_cgbrck.shp
 		ShadowStart: 3
@@ -123,7 +123,7 @@ asian_alliance_asianorerefinery:
 		Filename: asian_alliance_asianorerefinery_aa_cgrefn.shp
 		Start: 1
 	resources:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: asian_alliance_asianorerefinery_icon.shp
 		Offset: 0,0
@@ -734,7 +734,7 @@ asian_alliance_advancedcommunicationcenter:
 		Filename: asian_alliance_advancedcommunicationcenter_aa_cgionc_aa.shp
 		Length: 16
 	make:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dead:
 		Filename: asian_alliance_advancedcommunicationcenter_aa_cgionc.shp
 		Start: 1
@@ -838,7 +838,7 @@ asian_alliance_asianmilitia:
 	paradrop:
 		Start: 292
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -934,7 +934,7 @@ asian_alliance_fanatic:
 	paradrop:
 		Start: 1
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1002,7 +1002,7 @@ asian_alliance_japanesesamurai:
 	paradrop:
 		Start: 1
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1068,7 +1068,7 @@ asian_alliance_veteranarcher:
 	paradrop:
 		Start: 1
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1134,7 +1134,7 @@ asian_alliance_shinobi:
 	paradrop:
 		Start: 1
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1318,7 +1318,7 @@ asian_alliance_lynxtank:
 		Facings: 64
 		Scale: 1
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: asian_alliance_lynxtank_icon.png
 	muzzle-mg:
@@ -1365,7 +1365,7 @@ asian_alliance_howitzer:
 		Facings: 64
 		Scale: 0.75
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: asian_alliance_promotion_unlockhowitzer_icon.shp
 
@@ -1382,7 +1382,7 @@ panth.asian:
 		Facings: 64
 		Scale: 1
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: aa_enforcericon.shp
 
@@ -1422,7 +1422,7 @@ asian_alliance_droneminer:
 	icon:
 		Filename: asian_alliance_droneminer_icon.shp
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 
@@ -1439,7 +1439,7 @@ asian_alliance_pulverizer:
 		Facings: 64
 		Scale: 0.8
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: asian_alliance_pulverizer_icon.shp
 
@@ -1456,7 +1456,7 @@ ptnk.asian:
 		Facings: 64
 		Scale: 1
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: asian_alliance_promotion_unlockplasmatank_icon.shp
 
@@ -1790,7 +1790,7 @@ asian_alliance_type89mlrs:
 		Facings: 64
 		Scale: 0.75
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: asian_alliance_promotion_unlockmlrs_icon.shp

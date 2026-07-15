@@ -4,9 +4,7 @@ Metadata:
 	Website: https://www.moddb.com/mods/cameo
 	WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png
 	WindowTitle: mod_windowtitle
-
 PackageFormats: Mix, AudioBag, D2kSoundResources
-
 FileSystem: DefaultFileSystem
 	Packages:
 		~^SupportDir|Content/cameo/: game
@@ -19,6 +17,22 @@ FileSystem: DefaultFileSystem
 		~^SupportDir|Content/cameo/theme
 		^EngineDir|mods/common: common
 		~^SupportDir|Content/cameo/music
+		~cameo|ContentPacks/TiberianSun/CABAL/files/icons: cabal_icons
+		~cameo|ContentPacks/TiberianSun/CABAL/files/sprites: cabal_sprites
+		~cameo|ContentPacks/TiberianSun/CABAL/files/voxels: cabal_voxels
+		~cameo|ContentPacks/TiberianSun/CABAL/files/sounds: cabal_sounds
+		~cameo|ContentPacks/TiberianSun/Shared/files/icons: ts_shared_icons
+		~cameo|ContentPacks/TiberianSun/Shared/files/sprites: ts_shared_sprites
+		~cameo|ContentPacks/TiberianSun/Shared/files/voxels: ts_shared_voxels
+		~cameo|ContentPacks/TiberianSun/Shared/files/sounds: ts_shared_sounds
+		~cameo|ContentPacks/Shared/files/icons: shared_icons
+		~cameo|ContentPacks/Shared/files/sprites: shared_sprites
+		~cameo|ContentPacks/Shared/files/voxels: shared_voxels
+		~cameo|ContentPacks/Shared/files/sounds: shared_sounds
+		~cameo|ContentPacks/TiberianDawn/Shared/files/icons: td_shared_icons
+		~cameo|ContentPacks/TiberianDawn/Shared/files/sprites: td_shared_sprites
+		~cameo|ContentPacks/TiberianDawn/Shared/files/voxels: td_shared_voxels
+		~cameo|ContentPacks/TiberianDawn/Shared/files/sounds: td_shared_sounds
 		cameo|bits: bits
 		~cameo|bits/temp
 		~cameo|bits/ratemperat
@@ -96,11 +110,9 @@ FileSystem: DefaultFileSystem
 		~common|/mods/cnc/bits/jungle
 		~common|/mods/cnc/bits/desert
 		~SOUND.RS
-
 MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
-
 # Faction content packs — the Include order below defines the lobby faction
 # selector order (the lobby groups factions by Side and lists them in load
 # order). Unmigrated themes are loaded via include-only wrapper packs so every
@@ -108,21 +120,16 @@ MapFolders:
 # Core: cross-theme global factions (Random, RTF). Included first so they sort
 # to the top of the Random group, above the per-theme Random <X> entries.
 Include: ContentPacks/Core/content.yaml
-
 Include: ContentPacks/TiberianDawn/Shared/content.yaml
 Include: ContentPacks/TiberianDawn/GDI/content.yaml
 Include: ContentPacks/TiberianDawn/Nod/content.yaml
-
 Include: ContentPacks/RedAlert/content.yaml
-
 Include: ContentPacks/TiberianSun/content.yaml
 Include: ContentPacks/TiberianSun/CABAL/content.yaml
 Include: ContentPacks/TiberianSun/Nod/content.yaml
 Include: ContentPacks/TiberianSun/GDI/content.yaml
 Include: ContentPacks/TiberianSun/Forgotten/content.yaml
-
 Include: ContentPacks/RedAlert2/content.yaml
-
 Include: ContentPacks/RedAlert2Mod/Shared/content.yaml
 Include: ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml
 Include: ContentPacks/RedAlert2Mod/Consortium/content.yaml
@@ -131,19 +138,14 @@ Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
 Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
 Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
 Include: ContentPacks/TKM/content.yaml
-
 Include: ContentPacks/D2k/Shared/content.yaml
 Include: ContentPacks/D2k/Ordos/content.yaml
 Include: ContentPacks/D2k/Ixian/content.yaml
 Include: ContentPacks/D2k/Atreides/content.yaml
 Include: ContentPacks/D2k/Harkonnen/content.yaml
-
 Include: ContentPacks/StarCraft/content.yaml
-
 Include: ContentPacks/Warcraft2/content.yaml
-
 Include: ContentPacks/Outpost2/content.yaml
-
 Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
@@ -207,7 +209,6 @@ Rules:
 	# outpost2.yaml, tkm.yaml are now loaded via include-only wrapper packs
 	# (ContentPacks/{Outpost2,TKM}/) so their factions can be ordered in the lobby.
 	# cameo|rules/z.yaml
-
 Sequences:
 	cameo|sequences/misc.yaml
 	cameo|sequences/shared_effects.yaml
@@ -254,10 +255,8 @@ Sequences:
 	# cameo|sequences/z.yaml
 	# cameo|sequences/classicdoom.yaml
 	cameo|sequences/tkm.yaml
-
 ModelSequences:
 	cameo|sequences/voxels.yaml
-
 TileSets:
 	cameo|tilesets/cameo.yaml
 	cameo|tilesets/desert.yaml
@@ -278,7 +277,6 @@ TileSets:
 	cameo|tilesets/barren.yaml
 	cameo|tilesets/volcanic.yaml
 	# cameo|tilesets/outpost2.yaml
-
 Weapons:
 	cameo|weapons/weapons.yaml
 	# cameo|weapons/monsters.yaml
@@ -321,15 +319,11 @@ Weapons:
 	# cameo|weapons/z.yaml		##########
 	# cameo|weapons/classicdoom.yaml
 	cameo|weapons/tkm.yaml
-
 Cursors:
 	cameo|cursors.yaml
-
 Chrome:
 	cameo|chrome.yaml
-
 Assemblies: OpenRA.Mods.AS.dll, OpenRA.Mods.CA.dll, OpenRA.Mods.Cameo.dll, OpenRA.Mods.Cnc.dll, OpenRA.Mods.D2k.dll, OpenRA.Mods.Common.dll
-
 ChromeLayout:
 	common|chrome/assetbrowser.yaml
 	common|chrome/color-picker.yaml
@@ -387,7 +381,6 @@ ChromeLayout:
 	common|chrome/settings-input.yaml
 	common|chrome/text-notifications.yaml
 	cameo|chrome/tooltips.yaml
-
 Voices:
 	cameo|audio/advancewars.yaml
 	cameo|audio/315custom.yaml
@@ -418,14 +411,10 @@ Voices:
 	cameo|audio/z.yaml
 	cameo|audio/halloween.yaml
 	cameo|audio/valentines.yaml
-
 Notifications:
 	cameo|audio/notifications.yaml
-
 Music:
 	cameo|music.yaml
-
-
 FluentMessages:
 	common|fluent/common.ftl
 	common|fluent/chrome.ftl
@@ -437,9 +426,7 @@ FluentMessages:
 	cameo|fluent/rules/ftech_en.ftl
 	cameo|fluent/rules/outpost2_en.ftl
 	cameo|fluent/rules/starcraft_en.ftl
-
 AllowUnusedFluentMessagesInExternalPackages: true
-
 Hotkeys:
 	common|hotkeys/game.yaml
 	common|hotkeys/observer.yaml
@@ -450,26 +437,21 @@ Hotkeys:
 	common|hotkeys/editor.yaml
 	common|hotkeys/control-groups.yaml
 	cameo|hotkeys.yaml
-
 LoadScreen: FitImageLoadScreen
 	SplashImage: cameo|uibits/splash_screen.png
 	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png,cameo|uibits/loadscreen23.png,cameo|uibits/loadscreen24.png,cameo|uibits/loadscreen25.png,cameo|uibits/loadscreen26.png,cameo|uibits/loadscreen27.png
-
 WebServices:
 	GameNews: https://api.github.com/repos/cameo-mod/Cameo-mod/releases
 	GameNewsFromGitHubReleases: true
-
 ServerTraits:
 	LobbyCommands
 	SkirmishLogic
 	PlayerPinger:
 		ConnTimeout: 500000
 	MasterServerPinger
-
 ChromeMetrics:
 	common|metrics.yaml
 	cameo|metrics.yaml
-
 Fonts:
 	Tiny:
 		Font: cameo|fonts/JudouSansHans_Regular.ttf
@@ -511,35 +493,25 @@ Fonts:
 		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 32
 		Ascender: 24
-
 Missions:
 	cameo|missions.yaml
 MapGrid:
 	Type: Rectangular
-
 WorldViewportSizes:
 	DefaultScale: 0.5
 	MaxZoomScale: 1000.0
 	MaxZoomWindowHeight: 120
-
 DefaultOrderGenerator: UnitOrderGenerator
-
 SupportsMapsFrom: cnc, ra, cameo
-
 SoundFormats: Aud, Wav, Mp3, Ogg
-
 SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8
-
 TerrainFormat: DefaultTerrain
-
 SpriteSequenceFormat: CameoSpriteSequence
 	IndexedSheetSize: 2048
-
 AssetBrowser:
 	SpriteExtensions: .shp, .tem, .des, .sno, .jun, .png, .r8, .r16, .car, .bar
 	AudioExtensions: .aud, .wav, .mp3
 	VideoExtensions: .vqa, .wsa
-
 GameSpeeds:
 	DefaultSpeed: default
 	Speeds:
@@ -575,10 +547,8 @@ GameSpeeds:
 			Name: Maximum
 			Timestep: 1
 			OrderLatency: 10
-
 ModCredits:
 	ModCreditsFile: cameo|credits.txt
 	ModTabTitle: mod_title
-
 DiscordService:
 	ApplicationId: 1269927383994077296

@@ -47,7 +47,7 @@ latin_syndicate_syndicateconstructionyard:
 		Length: 17
 		Tick: 150
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_syndicateconstructionyard_icon.png
 		Offset: 0,0
@@ -96,7 +96,7 @@ latin_syndicate_combatbarracks:
 	Defaults:
 		Offset: -16,0
 	build:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: latin_syndicate_combatbarracks_cgpile.shp
 		ShadowStart: 4
@@ -134,7 +134,7 @@ latin_syndicate_combatbarracks:
 		Length: 23
 		ShadowStart: 23
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_combatbarracks_icon.shp
 		Offset: 0,0
@@ -257,7 +257,7 @@ latin_syndicate_recyclingrefinery:
 		Start: 1
 		ShadowStart: 3
 	resources:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_recyclingrefinery_icon.shp
 		Offset: 0,0
@@ -525,7 +525,7 @@ latin_syndicate_topolsilo:
 	critical-idle:
 		Filename: latin_syndicate_topolsilo_cg12hit_f.shp
 	up:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	# TODO: ngmisl_f is actually the open sequence
 	# active: ra2ngmisl_f
 	# 	Length: 16
@@ -579,7 +579,7 @@ latin_syndicate_topolsilo:
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
 		Filename: latin_syndicate_topolsilo_cg12hit_f.shp
 	icon:
@@ -643,16 +643,16 @@ latin_syndicate_smlturret:
 	Defaults:
 		Offset: 0,-4
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: latin_syndicate_smlturret_make.shp
 		Length: 17
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: latin_syndicate_smlturret.shp
 		Facings: 32
@@ -674,17 +674,17 @@ latin_syndicate_latinsentrygun:
 	Defaults:
 		Offset: 0,-8
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: latin_syndicate_latinsentrygun_make.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: latin_syndicate_latinsentrygun_ngdshktur.shp
 		Facings: 32
@@ -698,17 +698,17 @@ latin_syndicate_latinaadefender:
 	Defaults:
 		Offset: 0,8
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	make:
 		Filename: latin_syndicate_latinaadefender_make.shp
 		Length: 29
 		ShadowStart: 29
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	turret:
 		Filename: latin_syndicate_latinaadefender_aatur.shp
 		Facings: 32
@@ -873,9 +873,9 @@ latin_syndicate_raiderbuggy:
 		Facings: 64
 		Scale: 0.8
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
@@ -888,9 +888,9 @@ scrapcar.latin:
 		Facings: 64
 		Scale: 0.8
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
@@ -903,9 +903,9 @@ scrapcar2.latin:
 		Facings: 64
 		Scale: 0.8
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
@@ -926,7 +926,7 @@ latin_syndicate_latinapc:
 		Facings: 64
 		Offset: 0,-9
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_promotion_unlocklatinapc_icon.shp
 
@@ -938,9 +938,9 @@ latin_syndicate_narcohummer:
 	idle:
 		Facings: 64
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_narcohummer_icon.shp
 
@@ -952,9 +952,9 @@ latin_syndicate_carteltruck:
 	idle:
 		Facings: 64
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: latin_syndicate_promotion_unlockcarteltrucks_icon.shp
 
@@ -1063,7 +1063,7 @@ latin_syndicate_collectiontruck:
 	icon:
 		Filename: latin_syndicate_collectiontruck_icon.shp
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 
@@ -1147,7 +1147,7 @@ latin_syndicate_freedomfighter:
 	stand:
 		ShadowStart: 341
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle1:
 		ShadowStart: 397
 	idle2:

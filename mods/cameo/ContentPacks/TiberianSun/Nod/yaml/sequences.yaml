@@ -4,7 +4,7 @@ ts_nod_lightinfantry:
 	Defaults:
 		Filename: ts_nod_lightinfantry_altnode1.shp
 	icon:
-		Filename: ts_gdi_lightinfantry_icon.png
+		Filename: ts_shared_icons|ts_gdi_lightinfantry_icon.png
 
 ts_nod_chameleonspy:
 	Inherits: ^TSBasicInfantry
@@ -75,7 +75,7 @@ ts_nod_shadowteam:
 		Filename: ts_nod_shadowteam_air.shp
 		Facings: 16
 	shadow:
-		Filename: parach_shadow.shp
+		Filename: shared_sprites|parach_shadow.shp
 		Length: 1
 		Facings: 1
 	icon:
@@ -99,13 +99,13 @@ ts_nod_shotguncommando:
 
 ts_nod_mobilestealthgenerator:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_mobilestealthgenerator_icon.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_attackbuggy:
@@ -119,7 +119,7 @@ ts_nod_attackbuggy:
 	icon:
 		Filename: ts_nod_attackbuggy_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_laserfence:
@@ -205,29 +205,29 @@ ts_nod_stealthtank:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_stealthtank_icon.png
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_mobilerepairvehicle:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_mobilerepairvehicle_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_artillery:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_artillery_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	deploy:
 		Filename: ts_nod_artillery.shp
@@ -238,22 +238,22 @@ ts_nod_devilstongue:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_devilstongue_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_subterraneanapc:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_subterraneanapc_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_powerplant:
@@ -361,7 +361,7 @@ ts_nod_handof:
 	make:
 		Filename: ts_nod_handof_make.shp
 	icon:
-		Filename: ts_nod_handof_icon.png
+		Filename: ts_shared_icons|ts_nod_handof_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 	iconcabal:
@@ -464,7 +464,7 @@ ts_nod_radar:
 		Length: 24
 		Tick: 120
 	active:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle-dish:
 		Filename: ts_nod_radar_a.shp
 		Start: 24
@@ -567,7 +567,7 @@ ts_nod_stealthgenerator:
 		Length: 4
 		Tick: 480
 	make:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_stealthgenerator_icon.shp
 		Offset: 0, 0
@@ -633,7 +633,7 @@ ts_nod_helipad:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_make.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_make.shp
 	icon:
 		Filename: ts_nod_helipad_icon.shp
 		Offset: 0, 0
@@ -696,7 +696,7 @@ ts_nod_tiberiumwastefacility:
 		ZOffset: -1024
 		# Offset: 0, -36, 3
 	unload-overlay:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_tiberiumwastefacility_icon.shp
 		Offset: 0, 0
@@ -738,18 +738,18 @@ ts_nod_missilesilo:
 		Length: 10
 		Tick: 80
 	smoke:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	up:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	down:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_missilesilo_icon.shp
 		Offset: 0, 0
 
 ts_nod_bansheefighter:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_bansheefighter_icon.shp
 
@@ -766,9 +766,9 @@ ts_nod_laserturret:
 		Filename: ts_nod_laserturret.shp
 		Start: 2
 	make:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_laserturret_icon.shp
 		Offset: 0,0
@@ -786,16 +786,16 @@ ts_nod_samsite:
 		Filename: ts_nod_samsite.shp
 		Start: 2
 	turret:
-		Filename: ts_gdi_samtower_tsgtctwr_d.shp
+		Filename: ts_shared_sprites|ts_gdi_samtower_tsgtctwr_d.shp
 		Facings: 32
 		UseClassicFacings: True
 		Offset: 0,16
 	make:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Tick: 80
 		Length: *
 	icon:

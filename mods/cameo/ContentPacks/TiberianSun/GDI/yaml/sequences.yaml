@@ -4,7 +4,7 @@ ts_gdi_lightinfantry:
 	Defaults:
 		Filename: ts_gdi_lightinfantry_tse1.shp
 	icon:
-		Filename: ts_gdi_lightinfantry_icon.png
+		Filename: ts_shared_icons|ts_gdi_lightinfantry_icon.png
 
 ts_gdi_medic:
 	Defaults:
@@ -50,7 +50,7 @@ ts_gdi_medic:
 		Length: 15
 		ShadowStart: 455
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Start: 159
@@ -68,7 +68,7 @@ ts_gdi_medic:
 		Facings: 8
 		ShadowStart: 567
 	die7:
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die5: e1
 		Start: 418
@@ -148,7 +148,7 @@ ts_gdi_falconenforcer:
 		Length: 15
 		ShadowStart: 449
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Start: 159
@@ -225,7 +225,7 @@ ts_gdi_zonetrooper:
 		Start: 236
 		Length: 24
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Offset: 0,-14
@@ -286,7 +286,7 @@ ts_gdi_titan:
 	icon:
 		Filename: ts_gdi_upgrade_mechengineering_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	stand:
 		Filename: ts_gdi_titan.shp
@@ -315,7 +315,7 @@ ts_gdi_titanmkii:
 	icon:
 		Filename: ts_gdi_promotion_unlocktitanmkii_icon.png
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	stand:
 		Filename: ts_gdi_promotion_unlocktitanmkii.png
@@ -340,7 +340,7 @@ ts_gdi_juggernautmkii:
 	icon:
 		Filename: ts_gdi_promotion_unlockjuggernautmkii_icon.png
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	stand:
 		Filename: ts_gdi_promotion_unlockjuggernautmkii.shp
@@ -361,15 +361,15 @@ ts_gdi_tiberiumharvester:
 	Defaults:
 		Scale: 1.25
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dock:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	dock-loop:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	warpout:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:
@@ -388,14 +388,14 @@ ts_gdi_kodiakcommandship:
 
 ts_gdi_amphibiousapc:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_amphibiousapc_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	turret:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 
 ts_gdi_pitbull:
 	Defaults:
@@ -411,37 +411,37 @@ ts_gdi_pitbull:
 	icon:
 		Filename: ts_gdi_pitbull_icon.png
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_gdi_mobilesensorarray:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_mobilesensorarray_icon.shp
 
 ts_gdi_mobileemp:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_mobileemp_icon.png
 
 ts_gdi_hovermlrs:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_hovermlrs_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_gdi_wolverine:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	Defaults:
 		Filename: ts_gdi_wolverine.shp
 		Offset: 0,0,8
@@ -468,7 +468,7 @@ ts_gdi_wolverine:
 
 ts_gdi_wolverinemkii:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	Defaults:
 		Filename: ts_gdi_promotion_unlockwolverinemkii.png
 	stand:
@@ -486,19 +486,19 @@ ts_gdi_wolverinemkii:
 
 ts_gdi_mammothprototype:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_mammothprototype_icon.shp
 	muzzle2:
 		Filename: ts_gdi_promotion_unlockmammothmkii_lightbluelasermuzzle.shp
 		Length: 3
 	muzzle1:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_gdi_mammothmkii:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: ts_gdi_promotion_unlockmammothmkii_idle.png
 		Facings: -32
@@ -516,7 +516,7 @@ ts_gdi_mammothmkii:
 		Filename: ts_gdi_promotion_unlockmammothmkii_lightbluelasermuzzle.shp
 		Length: 3
 	muzzle1:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_gdi_juggernaut:
@@ -564,20 +564,20 @@ ts_gdi_juggernaut:
 		ShadowStart: 18
 		Offset: 0, -12, 12
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 2
 	icon:
 		Filename: ts_gdi_juggernaut_icon.png
 
 ts_gdi_disruptor:
 	Defaults:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_disruptor_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_gdi_powerplant:
@@ -817,7 +817,7 @@ ts_gdi_radar:
 		Length: 20
 		ShadowStart: 20
 	icon:
-		Filename: ts_gdi_radar_icon.shp
+		Filename: ts_shared_icons|ts_gdi_radar_icon.shp
 		Offset: 0, 0
 
 ts_gdi_techcenter:
@@ -850,7 +850,7 @@ ts_gdi_techcenter:
 	make:
 		Filename: ts_gdi_techcenter_make.shp
 	icon:
-		Filename:  ts_gdi_techcenter_icon.png
+		Filename:  ts_shared_icons|ts_gdi_techcenter_icon.png
 		Offset: 0, 0
 
 ts_gdi_helipad:
@@ -969,7 +969,7 @@ ts_gdi_tiberiumrefinery:
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 	icon:
-		Filename: ts_gdi_tiberiumrefinery_icon.shp
+		Filename: ts_shared_icons|ts_gdi_tiberiumrefinery_icon.shp
 		Offset: 0, 0
 
 ts_gdi_upgradecenter:
@@ -1047,7 +1047,7 @@ ts_gdi_upgradecenter:
 
 ts_gdi_orcafighter:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_orcafighter_icon.png
 
@@ -1063,10 +1063,10 @@ ts_gdi_hammerhead:
 		Filename: ts_gdi_promotion_unlockhammerhead.png
 		Facings: 64
 	lrotor: lrotor
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Length: 4
 	slow-lrotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Start: 4
 		Length: 8
 	rrotor: rrotor
@@ -1081,13 +1081,13 @@ ts_gdi_hammerhead:
 
 ts_gdi_orcabomber:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_gdi_orcabomber_icon.shp
 
 ts_gdi_carryall:
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: forgotten_carryall_icon.png
 
@@ -1113,9 +1113,9 @@ ts_gdi_vulcantower:
 		Length: 11
 		ShadowStart: 11
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Tick: 80
 		Length: *
 	icon:
@@ -1144,9 +1144,9 @@ ts_gdi_rpgtower:
 		Length: 11
 		ShadowStart: 11
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Tick: 80
 		Length: *
 	icon:
@@ -1166,7 +1166,7 @@ ts_gdi_samtower:
 		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 2
 	turret:
-		Filename: ts_gdi_samtower_tsgtctwr_d.shp
+		Filename: ts_shared_sprites|ts_gdi_samtower_tsgtctwr_d.shp
 		Facings: 32
 		UseClassicFacings: True
 		Offset: 0,0
@@ -1175,9 +1175,9 @@ ts_gdi_samtower:
 		Length: 11
 		ShadowStart: 11
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Tick: 80
 		Length: *
 	icon:

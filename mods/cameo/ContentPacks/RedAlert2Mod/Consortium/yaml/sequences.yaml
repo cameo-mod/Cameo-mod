@@ -99,7 +99,7 @@ steel_consortium_consortiumrefinery:
 		Filename: steel_consortium_consortiumrefinery_qref.shp
 		Start: 1
 	resources:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: steel_consortium_consortiumrefinery_qref_icon.shp
 		Offset: 0,0
@@ -212,7 +212,7 @@ steel_consortium_consortiumconstructionyard:
 		Length: 28
 		Tick: 150
 	dead:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: steel_consortium_consortiumconstructionyard_yardicon.png
 		Offset: 0,0
@@ -433,7 +433,7 @@ steel_consortium_antiairquantummissileturret:
 		Facings: 32
 		ShadowStart: 64
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 		Offset: 0,0
 	icon:
@@ -465,7 +465,7 @@ steel_consortium_quantumcannon:
 		Facings: 32
 		ShadowStart: 64
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 		Offset: 0,0
 	icon:
@@ -487,7 +487,7 @@ steel_consortium_bfg10000:
 		Filename: steel_consortium_bfg10000_bfgudspritesheetcfix.png
 		Length: 17
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	dead:
 		Filename: steel_consortium_bfg10000_bfgdspritesheetcfix.png
@@ -555,9 +555,9 @@ steel_consortium_geothermalreactor:
 		Offset: 0,-48
 		Scale: 1.0
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	damaged-idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	idle-ground:
 		Start: 21
 		Length: 40
@@ -632,7 +632,7 @@ steel_consortium_consortiumminer:
 		Tick: 80
 		ShadowStart: 96
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:
@@ -692,7 +692,7 @@ steel_consortium_clonetrooper:
 	paradrop:
 		Start: 280
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -700,7 +700,7 @@ steel_consortium_clonetrooper:
 		Tick: 30
 		Offset: 0,0
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -721,7 +721,7 @@ steel_consortium_quantummissiletrooper:
 	stand:
 		ShadowStart: 332
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	run:
 		Start: 8
@@ -783,7 +783,7 @@ steel_consortium_quantummissiletrooper:
 		Length: 15
 		ShadowStart: 524
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -791,7 +791,7 @@ steel_consortium_quantummissiletrooper:
 		Tick: 30
 		Offset: 0,0
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -890,7 +890,7 @@ steel_consortium_hoverboardgrenadier:
 		Tick: 80
 		ShadowStart: 311
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -898,7 +898,7 @@ steel_consortium_hoverboardgrenadier:
 		Tick: 30
 		Offset: 0,0
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -979,7 +979,7 @@ steel_consortium_mako:
 		Filename: steel_consortium_mako_icon.shp
 		Offset: 0,0
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 
 steel_consortium_manta:
@@ -1017,7 +1017,7 @@ steel_consortium_barracuda:
 		Facings: 64
 		Scale: 0.6
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: steel_consortium_promotion_unlockbarracuda_icon.shp
 		Offset: 0,0
@@ -1064,7 +1064,7 @@ steel_consortium_hammerheadartillerytank:
 		Filename: steel_consortium_hammerheadartillerytank_qtank.shp
 		Offset: 0,32
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Facings: -8
 		InterpolatedFacings: 32
@@ -1134,9 +1134,9 @@ steel_consortium_quantumtank:
 		Facings: -32
 		ShadowStart: 208
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 		Offset: 0,0
 	icon:
@@ -1157,7 +1157,7 @@ steel_consortium_katytank:
 		Facings: 64
 		Scale: 0.9
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: steel_consortium_promotion_katytank_icon.shp
 		Offset: 0,0
@@ -1167,7 +1167,7 @@ steel_consortium_megalodon:
 		Filename: steel_consortium_megalodon.shp
 		Offset: 0,16
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Facings: -8
 		ShadowStart: 368
@@ -1192,7 +1192,7 @@ steel_consortium_stalker:
 		Filename: steel_consortium_promotion_unlockstalker.png
 		Offset: 0,4
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Facings: 8
 	run:
@@ -1214,7 +1214,7 @@ steel_consortium_whiterabbit:
 		Filename: steel_consortium_whiterabbit.shp
 		Offset: 0,36
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Facings: 16
 	run:
@@ -1263,7 +1263,7 @@ steel_consortium_poseidontank:
 		Filename: steel_consortium_poseidontank_potnk.shp
 		Offset: 0,16
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Facings: -8
 		ShadowStart: 168
@@ -1321,7 +1321,7 @@ oldqtnk.steel:
 		Facings: 64
 		Scale: 0.75
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ra2_allies_upgrade_paratroopers_steel_oldqtnk_icon.shp
 
@@ -1337,7 +1337,7 @@ cougar.steel:
 		Facings: 64
 		Scale: 0.6
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ra2_allies_upgrade_paratroopers_steel_cougar_icon.shp
 
@@ -1391,14 +1391,14 @@ steel_consortium_skyhammer:
 		Start: 48
 		Facings: -32
 	barrel:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: steel_consortium_skyhammer_icon.shp
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	muzzle-2:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 
 steel_consortium_supportshieldgenerator:
@@ -1420,10 +1420,10 @@ steel_consortium_supportshieldgenerator:
 		Filename: steel_consortium_supportshieldgenerator_icon.shp
 		Offset: 0,0
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	muzzle-2:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 
 steel_consortium_cargoship:
@@ -1434,7 +1434,7 @@ steel_consortium_cargoship:
 		Facings: 64
 		Scale: 0.75
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	icon:
 		Filename: steel_consortium_cargoship_icon.shp
@@ -1447,7 +1447,7 @@ steel_consortium_cloudbreaker:
 		Facings: 64
 		Scale: 0.90
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	icon:
 		Filename: steel_consortium_promotion_unlockcloudbreaker_icon.shp
@@ -1459,7 +1459,7 @@ cruiser_f.steel:
 		Facings: 64
 		Scale: 0.75
 	muzzle:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	icon:
 		Filename: steel_consortium_cargoship_icon.shp
@@ -1469,7 +1469,7 @@ steel_consortium_defenderbot:
 		Filename: steel_consortium_promotion_unlockdefenderbot.shp
 		Offset: 4,20
 	idle:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 	stand:
 		Length: 8
 		Facings: 8

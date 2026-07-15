@@ -9,10 +9,10 @@ td_gdi_battletank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	muzzle2:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -29,7 +29,7 @@ td_gdi_mammothtank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_mammothtank_icon.shp
@@ -45,7 +45,7 @@ td_gdi_humvee:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -70,7 +70,7 @@ msam:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_mlrs_icon.shp
@@ -89,7 +89,7 @@ td_gdi_boxer:
 		Facings: 64
 		Offset: 0,9
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_boxer_icon.png
@@ -104,7 +104,7 @@ td_gdi_archerartillery:
 		Filename: td_gdi_archerartillery_gdiarchercannon.png
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_archerartillery_icon.png
@@ -128,7 +128,7 @@ td_gdi_mlrs:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_ssmlauncher_icon.shp
@@ -169,7 +169,7 @@ td_gdi_orca:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_orca_icon.shp
@@ -181,7 +181,7 @@ a10:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -195,7 +195,7 @@ a10carrier:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -340,7 +340,7 @@ td_gdi_guardtower:
 		Length: 15
 		Tick: 80
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	bib:
@@ -361,7 +361,7 @@ td_gdi_skyshield:
 	damaged-idle:
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	dead:
 	bib:
@@ -386,13 +386,13 @@ td_gdi_advancedguardtower:
 		Length: *
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Offset: 0,0
 	bib:
 		Offset: -3,0
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_advancedguardtower_icon.shp
@@ -401,7 +401,7 @@ td_gdi_advancedguardtower:
 e1:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -485,7 +485,7 @@ e1:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: e1rot.shp
@@ -494,7 +494,7 @@ e1:
 		Tick: 1600
 		ZOffset: -511
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -582,7 +582,7 @@ td_gdi_grenadier:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_gdi_grenadier_e2rot.shp
@@ -680,7 +680,7 @@ e3:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_nod_rocketsoldier_e3rot.shp
@@ -724,7 +724,7 @@ cncca:
 		Filename: GdiBattleshipTurretSpritesheet.png
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: RailgunBattleshipIcon.png
@@ -764,7 +764,7 @@ newhumvee:
 		Start: 64
 		Facings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -862,7 +862,7 @@ td_gdi_officer:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: e1rot.shp
@@ -871,7 +871,7 @@ td_gdi_officer:
 		Tick: 1600
 		ZOffset: -511
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -889,11 +889,11 @@ td_gdi_predatortank:
 		Start: 64
 		Scale: 0.25
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Scale: 1.333
 	muzzle2:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -910,7 +910,7 @@ td_gdi_mammothtankmkiii:
 		Start: 64
 		Scale: 0.25
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Scale: 1.333
 	icon:
@@ -1018,7 +1018,7 @@ td_gdi_empgrenadier:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -1029,7 +1029,7 @@ td_gdi_empgrenadier:
 		ZOffset: -511
 		Scale: 1.0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1134,7 +1134,7 @@ td_gdi_shotgunner:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: e1rot.shp
@@ -1143,7 +1143,7 @@ td_gdi_shotgunner:
 		Tick: 1600
 		ZOffset: -511
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1246,7 +1246,7 @@ td_gdi_heavysniper:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -1257,7 +1257,7 @@ td_gdi_heavysniper:
 		ZOffset: -511
 		Scale: 1.0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1278,7 +1278,7 @@ td_gdi_assaultapc:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Scale: 2
 		Length: 6
 		Facings: 8
@@ -1296,7 +1296,7 @@ td_gdi_firehawk:
 	idle:
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_promotion_unlockfirehawk_icon.shp
@@ -1402,7 +1402,7 @@ td_gdi_havoc:
 	#	Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Scale: 1
 		Length: *
 	die-crushed:
@@ -1461,16 +1461,16 @@ td_gdi_defenserig:
 		Start: 70
 		Tick: 800
 	dot:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	pointdefense:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	targeting:
-		Filename: invisibleitem.shp
+		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_promotion_unlockgdidefenserig_icon.png
@@ -1494,7 +1494,7 @@ gdirigdrone:
 	icon:
 		Filename: steel_consortium_upgrade_scalpeldefenders_icon.shp
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -1502,7 +1502,7 @@ gdirigdrone:
 		Tick: 30
 		Offset: 0,0
 	muzzle2:
-		Filename: steel_energymuzzle.shp
+		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 		Offset: 0,0
 

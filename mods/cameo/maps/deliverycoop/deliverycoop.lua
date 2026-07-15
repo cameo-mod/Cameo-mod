@@ -24,6 +24,8 @@ WorldLoaded = function()
 	Zerg1 = Player.GetPlayer("Enemy2Idle")
 	Zerg2 = Player.GetPlayer("Enemy2Active")
 	Creeps = Player.GetPlayer("Creeps")
+	
+	Zergalicious = false
 
 ActivateNod = function ()
 	local NodActors = Nod1.GetActors()
@@ -69,18 +71,13 @@ end
 --proximity trigger for commando team
 		Trigger.OnEnteredProximityTrigger(TeamTrigger.CenterPosition, WDist.New(3*1024), function(a, id)
 		if a.Owner == GDI then
-			Reinforcements.ReinforceWithTransport(GDI, "tran.gdi",{"rmbo.gdi", "rmbo.gdi","rmbo.gdi","rmbo.gdi","rmbo.gdi","rmbo.gdi","rmbo.gdi"}, {TeamEnter.Location, TeamTrigger.Location}, {TeamExit.Location})
+			Reinforcements.ReinforceWithTransport(GDI, "td_gdi_chinooktransport",{"td_gdi_commando", "td_gdi_commando","td_gdi_commando","td_gdi_commando","td_gdi_commando","td_gdi_commando","td_gdi_commando"}, {TeamEnter.Location, TeamTrigger.Location}, {TeamExit.Location})
 			Trigger.RemoveProximityTrigger(id)
 		end
 	end)
 --OnDeath Trigger for Tech building
 	Trigger.OnKilled(TechCenter, function(self, killer)
 		GDI.MarkCompletedObjective(KillBuildingObjective)
-	end)
-
---OnDeath Trigger for Zerg
-	Trigger.OnKilled(ZergFinal, function(self, killer)
-		GDI.MarkCompletedObjective(KillZergObjective)
 	end)
 	
 --multiple prox triggers for zerg invasion
@@ -124,6 +121,7 @@ end
 				CamZerg.Owner = Creeps
 				ActivateZerg()
 			end)
+			Zergalicious = true
 			Trigger.RemoveProximityTrigger(id)
 		end
 	end)
@@ -134,7 +132,11 @@ end
 
 Tick = function()
 --if player runs out of units they lose
-	if GDI.HasNoRequiredUnits() and GDI2,HasNoRequiredUnits() then
+	if GDI.HasNoRequiredUnits() and GDI2.HasNoRequiredUnits() then
 		GDI.MarkFailedObjective(KillBuildingObjective)
+	end
+	
+	if Zerg2.HasNoRequiredUnits() and Zergalicious == true then
+		GDI.MarkCompletedObjective(KillZergObjective)
 	end
 end

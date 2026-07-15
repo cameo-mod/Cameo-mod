@@ -9,7 +9,7 @@ td_nod_buggy:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -26,7 +26,7 @@ td_nod_lighttank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_lighttank_icon.shp
@@ -38,7 +38,7 @@ td_nod_reconbike:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_reconbike_icon.shp
@@ -53,35 +53,35 @@ td_nod_flametank:
 		IgnoreWorldTint: true
 		Combine:
 			flame_n:
-				Filename: flame_n.shp
+				Filename: shared_sprites|flame_n.shp
 				Length: *
 				Offset: 3,6
 			flame_nw:
-				Filename: flame_nw.shp
+				Filename: shared_sprites|flame_nw.shp
 				Length: *
 				Offset: 8,7
 			flame_w:
-				Filename: flame_w.shp
+				Filename: shared_sprites|flame_w.shp
 				Length: *
 				Offset: 8,2
 			flame_sw:
-				Filename: flame_sw.shp
+				Filename: shared_sprites|flame_sw.shp
 				Length: *
 				Offset: 7,-2
 			flame_s:
-				Filename: flame_s.shp
+				Filename: shared_sprites|flame_s.shp
 				Length: *
 				Offset: 3,-2
 			flame_se:
-				Filename: flame_se.shp
+				Filename: shared_sprites|flame_se.shp
 				Length: *
 				Offset: -5,-2
 			flame_e:
-				Filename: flame_e.shp
+				Filename: shared_sprites|flame_e.shp
 				Length: *
 				Offset: -7,2
 			flame_ne:
-				Filename: flame_ne.shp
+				Filename: shared_sprites|flame_ne.shp
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -96,7 +96,7 @@ td_nod_stealthtank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_stealthtank_icon.shp
@@ -108,7 +108,7 @@ td_nod_artillery:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_artillery_icon.shp
@@ -120,16 +120,16 @@ td_nod_apacheattackhelicopter:
 		Facings: 32
 		InterpolatedFacings: 64
 	rotor: lrotor
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Scale: 1.25
 		Length: 4
 	slow-rotor:
-		Filename: lrotor.shp
+		Filename: shared_sprites|lrotor.shp
 		Scale: 1.25
 		Start: 4
 		Length: 8
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -332,11 +332,11 @@ td_nod_gunturret:
 		Start: 96
 		Facings: 32
 	make:
-		Filename: td_nod_gunturret_make.shp
+		Filename: shared_sprites|td_nod_gunturret_make.shp
 		Length: *
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	bib:
 		Offset: -1,-1
@@ -357,7 +357,7 @@ td_nod_laserturret:
 		Length: 7
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	bib:
 		Offset: -1,-1
@@ -497,7 +497,7 @@ td_nod_flamethrower:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_nod_chemicalwarrior_e4rot.shp
@@ -509,35 +509,35 @@ td_nod_flamethrower:
 		IgnoreWorldTint: true
 		Combine:
 			flame_n:
-				Filename: flame_n.shp
+				Filename: shared_sprites|flame_n.shp
 				Length: *
 				Offset: 1,6
 			flame_nw:
-				Filename: flame_nw.shp
+				Filename: shared_sprites|flame_nw.shp
 				Length: *
 				Offset: 8,7
 			flame_w:
-				Filename: flame_w.shp
+				Filename: shared_sprites|flame_w.shp
 				Length: *
 				Offset: 8,2
 			flame_sw:
-				Filename: flame_sw.shp
+				Filename: shared_sprites|flame_sw.shp
 				Length: *
 				Offset: 7,-2
 			flame_s:
-				Filename: flame_s.shp
+				Filename: shared_sprites|flame_s.shp
 				Length: *
 				Offset: 1,-2
 			flame_se:
-				Filename: flame_se.shp
+				Filename: shared_sprites|flame_se.shp
 				Length: *
 				Offset: -5,-2
 			flame_e:
-				Filename: flame_e.shp
+				Filename: shared_sprites|flame_e.shp
 				Length: *
 				Offset: -7,2
 			flame_ne:
-				Filename: flame_ne.shp
+				Filename: shared_sprites|flame_ne.shp
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -638,7 +638,7 @@ td_nod_chemicalwarrior:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: td_nod_chemicalwarrior_e4rot.shp
@@ -649,35 +649,35 @@ td_nod_chemicalwarrior:
 	muzzle:
 		Combine:
 			chem_n:
-				Filename: chem_n.shp
+				Filename: shared_sprites|chem_n.shp
 				Length: *
 				Offset: 1,2
 			chem_nw:
-				Filename: chem_nw.shp
+				Filename: shared_sprites|chem_nw.shp
 				Length: *
 				Offset: 8,2
 			chem_w:
-				Filename: chem_w.shp
+				Filename: shared_sprites|chem_w.shp
 				Length: *
 				Offset: 8,-3
 			chem_sw:
-				Filename: chem_sw.shp
+				Filename: shared_sprites|chem_sw.shp
 				Length: *
 				Offset: 7,-6
 			chem_s:
-				Filename: chem_s.shp
+				Filename: shared_sprites|chem_s.shp
 				Length: *
 				Offset: 1,-6
 			chem_se:
-				Filename: chem_se.shp
+				Filename: shared_sprites|chem_se.shp
 				Length: *
 				Offset: -5,-6
 			chem_e:
-				Filename: chem_e.shp
+				Filename: shared_sprites|chem_e.shp
 				Length: *
 				Offset: -7,-3
 			chem_ne:
-				Filename: chem_ne.shp
+				Filename: shared_sprites|chem_ne.shp
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -796,7 +796,7 @@ td_nod_stealthsoldier:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -807,7 +807,7 @@ td_nod_stealthsoldier:
 		ZOffset: -511
 		Scale: 1.0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -911,7 +911,7 @@ td_nod_lasertrooper:
 		Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 		Scale: 1.0
 	die-crushed:
@@ -922,7 +922,7 @@ td_nod_lasertrooper:
 		ZOffset: -511
 		Scale: 1.0
 	garrison-muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
@@ -951,7 +951,7 @@ ssmsub:
 		Facings: 64
 		Start: 128
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: ssmsubIcon.png
@@ -987,7 +987,7 @@ td_nod_specterartillery:
 		Facings: -32
 		Scale: 0.55
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_promotion_unlockspecter_icon.shp
@@ -1049,7 +1049,7 @@ td_nod_buggymkii:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
@@ -1067,7 +1067,7 @@ td_nod_lighttankmkii:
 		Start: 64
 		Scale: 0.5
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_promotion_unlocklighttankmkii_icon.shp
@@ -1086,35 +1086,35 @@ td_nod_flametankmkii:
 		IgnoreWorldTint: true
 		Combine:
 			flame_n:
-				Filename: flame_n.shp
+				Filename: shared_sprites|flame_n.shp
 				Length: *
 				Offset: 3,6
 			flame_nw:
-				Filename: flame_nw.shp
+				Filename: shared_sprites|flame_nw.shp
 				Length: *
 				Offset: 8,7
 			flame_w:
-				Filename: flame_w.shp
+				Filename: shared_sprites|flame_w.shp
 				Length: *
 				Offset: 8,2
 			flame_sw:
-				Filename: flame_sw.shp
+				Filename: shared_sprites|flame_sw.shp
 				Length: *
 				Offset: 7,-2
 			flame_s:
-				Filename: flame_s.shp
+				Filename: shared_sprites|flame_s.shp
 				Length: *
 				Offset: 3,-2
 			flame_se:
-				Filename: flame_se.shp
+				Filename: shared_sprites|flame_se.shp
 				Length: *
 				Offset: -5,-2
 			flame_e:
-				Filename: flame_e.shp
+				Filename: shared_sprites|flame_e.shp
 				Length: *
 				Offset: -7,2
 			flame_ne:
-				Filename: flame_ne.shp
+				Filename: shared_sprites|flame_ne.shp
 				Length: *
 				Offset: -7,8
 		Facings: 8
@@ -1135,7 +1135,7 @@ td_nod_stealthharvester:
 	dock-loop:
 		Facings: -64
 	harvesting:
-		Filename: ra2_oregath.shp
+		Filename: shared_sprites|ra2_oregath.shp
 		Scale: 1.25
 		Length: 15
 		Facings: 8
@@ -1243,7 +1243,7 @@ td_nod_lasercommando:
 	#	Tick: 80
 	# Electro
 	die7: ##########
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Scale: 1
 		Length: *
 	die-crushed:
@@ -1276,7 +1276,7 @@ nodlasercorvette:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: NodLaserCorvetteIcon.png

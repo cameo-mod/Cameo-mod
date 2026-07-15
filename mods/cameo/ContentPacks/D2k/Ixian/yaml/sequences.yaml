@@ -30,7 +30,7 @@ ixian_machinegunturret:
 		Length: 7
 		Offset: -16,16
 	muzzle:
-		Filename: minigun.shp
+		Filename: shared_sprites|minigun.shp
 		Length: 6
 		Facings: 8
 		BlendMode: Additive
@@ -729,17 +729,17 @@ ixian_twinrockettrooper:
 		Length: 8
 		Tick: 80
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
 	die7:
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: DATA.R16
@@ -836,17 +836,17 @@ heavy_inf.ixian:
 		Length: 7
 		Tick: 49
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
 	die7:
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: DATA.R16
@@ -937,17 +937,17 @@ shockgunner:
 		Length: 12
 		Tick: 80
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
 	die7:
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: DATA.R16
@@ -1039,17 +1039,17 @@ ixian_storminfantry:
 		Length: 12
 		Tick: 80
 	die5:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 324
 		Length: 18
 		Tick: 80
 	die6:
-		Filename: e1.shp
+		Filename: shared_sprites|e1.shp
 		Start: 366
 		Length: 11
 		Tick: 80
 	die7:
-		Filename: electro.shp
+		Filename: shared_sprites|electro.shp
 		Length: *
 	die-crushed:
 		Filename: DATA.R16
@@ -1094,7 +1094,7 @@ ixian_neocymek:
 		Tick: 280
 	muzzle:
 		Scale: 1.25
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: *
 		Offset: 0,20
 	icon:

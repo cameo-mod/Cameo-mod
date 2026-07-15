@@ -1,18 +1,15 @@
 D2K_Personal_Shield_Impact:
 	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ixian_personal_shield
 		ValidTargets: PersonalShielded
         Inaccuracy: 0c128
         ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
 	Warhead@ShieldHitEffect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ixian_personal_shield_sard
 		ValidTargets: PersonalShieldedSard
         Inaccuracy: 0c128
         ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
 	Warhead@ShieldHitEffect3: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ixian_personal_shield_heavy
 		ValidTargets: PersonalShieldedHeavy
         Inaccuracy: 0c128
@@ -42,7 +39,7 @@ camea_sniper:
     Inherits: ra1_allies_alliedsniper
     ReloadDelay: 60
     Range: 11264
-    
+
 ^HeavyMG:
     Inherits@personalshield: D2K_Personal_Shield_Impact
 	ReloadDelay: 25
@@ -142,7 +139,6 @@ Pistol:
 			Heavy: 10
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 M16:
@@ -157,7 +153,6 @@ MachineGun:
 			Wood: 10
 			Light: 70
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 
 MachineGunH:
