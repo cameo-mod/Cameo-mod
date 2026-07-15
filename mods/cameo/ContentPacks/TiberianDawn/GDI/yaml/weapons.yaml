@@ -1,3 +1,7 @@
+td_gdi_commando_sniper:
+	Inherits: ra1_allies_alliedsniper
+	Report: ramgun2.aud
+
 M16AP:
 	Inherits: ^Chaingun
 	ValidTargets: Ground, Water, Air
@@ -24,7 +28,7 @@ RocketsAMT:
 
 SniperAP:
 	Inherits: ^RailgunWeapon
-	Inherits: ra1_allies_alliedsniper
+	Inherits: td_gdi_commando_sniper
 	Projectile: Bullet
 		ContrailStartWidth: 40
 		ContrailEndWidth: 80
