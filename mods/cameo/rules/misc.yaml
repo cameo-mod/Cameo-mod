@@ -182,6 +182,21 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: tkm_mobileconstructionvehicletkm
 		ValidFactions: tkm
+	GiveBaseBuilderCrateAction@edenl:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: EDEN_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: edenl
+	GiveBaseBuilderCrateAction@plymouthl:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: plymouthl
+	GiveBaseBuilderCrateAction@ordos:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: ordos_mobileconstructionvehicle
+		ValidFactions: ordos
 
 WWCRATE:
 	Inherits: CRATE
