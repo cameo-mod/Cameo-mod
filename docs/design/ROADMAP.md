@@ -461,8 +461,8 @@ factions, everything through the balance workbook._
 
 ### Backlog — Rank decorations & elite weapons (DESIGN §16, 2026-07-15)
 
-- [x] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
-  `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in prior
+- [ ] **Fix TS Nod rank decoration** — 13 TS Nod actors were using
+  `^GDIRankDecoration` instead of `^NodRankDecoration`. FIXED in this
   session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
   core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
   `ts_nod_ticktank`).
