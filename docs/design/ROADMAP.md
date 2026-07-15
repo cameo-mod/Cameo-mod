@@ -366,6 +366,11 @@ factions, everything through the balance workbook._
   each passenger's `AutoTarget` trait. All 26 YAML usages across rules +
   ContentPacks converted from `AttackGarrisoned`/`AttackOpenTopped` to
   `AttackGarrisonedSP`. `PortYaws`/`PortCones` made optional (default 360°).
+  **REVERTED** (`cfa117c78`): AttackGarrisonedSP caused a major regression —
+  garrisoned passengers could no longer independently auto-target because
+  passenger AutoTarget traits don't function while inside cargo. All 56 YAML
+  trait renames reverted to vanilla `AttackGarrisoned`/`AttackOpenTopped`.
+  The C# source file is kept for future reference but unreferenced.
 - SP engine-trait ports; TS Shared pack move; Formula v2; dynamic faction
   loading end-game (per-pack ai.yaml, assets into packs, unused-file audit).
 
