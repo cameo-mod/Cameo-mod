@@ -130,6 +130,7 @@ td_nod_chemicalwarrior:
 	Mobile:
 		Speed: 48
 		Locomotor: chem
+	-DamagedByTerrain:
 	Health:
 		HP: 48000
 	ChangesHealth@SelfHealing:
@@ -148,7 +149,6 @@ td_nod_chemicalwarrior:
 	TakeCover:
 		ProneOffset: 190,0,-190
 	WithMuzzleOverlay:
-	-DamagedByTerrain:
 	Targetable@Immune:
 		TargetTypes: ToxinImmune
 	WithInfantryBody:
@@ -211,6 +211,7 @@ td_nod_chemicalrocketsoldier:
 	Mobile:
 		Speed: 60
 		Locomotor: chem
+	-DamagedByTerrain:
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~td_nod_handofnod, ~td_nod_promotion_unlockchemicalrocketsoldier
@@ -227,7 +228,6 @@ td_nod_chemicalrocketsoldier:
 		Weapon: ChemRocketsExplosion
 	Targetable@Immune:
 		TargetTypes: ToxinImmune
-	-DamagedByTerrain:
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithInfantryBody:

@@ -179,6 +179,7 @@ cabal_rocketcyborg:
 	Mobile:
 		TurnSpeed: 16
 		Speed: 40
+		Locomotor: chem
 		PauseOnCondition: disabled
 	Health:
 		HP: 45000
@@ -216,6 +217,14 @@ cabal_rocketcyborg:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -284,6 +293,7 @@ cabal_devout:
 	Mobile:
 		TurnSpeed: 16
 		Speed: 40
+		Locomotor: chem
 		PauseOnCondition: disabled
 	Health:
 		HP: 80000
@@ -324,6 +334,14 @@ cabal_devout:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -390,6 +408,7 @@ cabal_ascended:
 	Mobile:
 		TurnSpeed: 16
 		Speed: 40
+		Locomotor: chem
 		PauseOnCondition: disabled
 	Health:
 		HP: 70000
@@ -430,6 +449,14 @@ cabal_ascended:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -498,6 +525,7 @@ cabal_hackercyborg:
 	Mobile:
 		TurnSpeed: 32
 		Speed: 80
+		Locomotor: chem
 		PauseOnCondition: disabled
 	Health:
 		HP: 30000
@@ -548,6 +576,14 @@ cabal_hackercyborg:
 		Modifier: 50
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	-SpawnActorOnDeath:
 	ExternalCondition@EMP:
 		TotalCap: 1
@@ -797,6 +833,11 @@ cabal_eliminator800:
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_eliminator800.description
+	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	Health:
 		HP: 85000
 	ChangesHealth@SelfHealing:
@@ -813,6 +854,7 @@ cabal_eliminator800:
 	Mobile:
 		TurnSpeed: 16
 		Speed: 40
+		Locomotor: chem
 		Voice: Move
 	Guard:
 		Voice: Move

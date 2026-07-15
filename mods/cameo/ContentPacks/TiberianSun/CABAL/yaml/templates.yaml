@@ -98,6 +98,12 @@
 	Inherits@HackableRobot: ^HackableRobot
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Mobile:
+		Locomotor: chem
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack

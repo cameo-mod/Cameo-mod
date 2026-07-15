@@ -619,6 +619,7 @@ forgotten_chemsprayinfantry:
 	Mobile:
 		Speed: 55
 		Locomotor: chem
+	-DamagedByTerrain:
 	Health:
 		HP: 64000
 	ChangesHealth@SelfHealing:
@@ -637,7 +638,6 @@ forgotten_chemsprayinfantry:
 		IdleSequences: idle1,idle2
 	Voiced:
 		VoiceSet: TSWeed
-	-DamagedByTerrain:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSChemspray
