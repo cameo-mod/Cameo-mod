@@ -296,7 +296,8 @@
 		IsPlayerPalette: True
 	-ActorPreviewPlaceBuildingPreview:
 	D2kActorPreviewPlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	Cloak@TScloak:
 	WithSpriteBody:
 	WithMakeAnimation:
@@ -507,7 +508,8 @@
 		AreaTypes: building
 		Adjacent: 8
 	ActorPreviewPlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	RevealsShroud:
 		Range: 1c0
 	Sellable:
@@ -601,7 +603,8 @@
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,ClearDune
 	D2kActorPreviewPlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 3

@@ -85,7 +85,8 @@ td_gdi_weaponsfactory:
 		ExitDelay: 3
 	-ActorPreviewPlaceBuildingPreview:
 	SequencePlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 		Sequence: place
 
 td_gdi_helipad:

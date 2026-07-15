@@ -101,7 +101,8 @@ ixian_munitionssilo:
 		Description: actor_d2k_munitions.description
 		IconPalette: player
 	D2kActorPreviewPlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	Valued:
 		Cost: 500
 	Tooltip:

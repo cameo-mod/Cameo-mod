@@ -1019,7 +1019,8 @@ terran_missileturret:
 		PauseOnCondition: disabled
 	-ActorPreviewPlaceBuildingPreview:
 	SequencePlaceBuildingPreview:
-		Palette: ra_temperat
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 		Sequence: place
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
@@ -8053,7 +8054,6 @@ protoss_arbiter:
 	WithRangeCircle:
 		Range: 5000
 	RecallPower:
-		TargetOverlayPalette: ra_temperat
 		StartFullyCharged: true
 		OrderName: Recall
 		Prerequisites:
