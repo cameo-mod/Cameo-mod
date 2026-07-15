@@ -470,10 +470,11 @@ factions, everything through the balance workbook._
   `Inherits@decoration: ^DuneRankDecoration` to 64 D2k actors across Ixian,
   Ordos, Harkonnen, and Shared yaml files. Audit tool:
   `tools/audit/audit_dune_rank_decoration.py` (0 remaining).
-- [ ] **Create `^AlienRankDecoration` template** — `alienrank` sequence
-  exists in `misc.yaml` but no template references it. Determine which
-  factions should use it (potentially StarCraft Zerg if they gain
-  experience in future, or other alien-themed factions).
+- [x] **Create `^AlienRankDecoration` template** (`b95f5e7f3`) — Created
+  template in `rules/starcraft.yaml` using existing `alienrank` sequence
+  from `misc.yaml`. Wired to 79 StarCraft actors (Terran, Protoss, Zerg)
+  that use `^GainsExperienceTD`. Warcraft2 actors still need a custom
+  `wc2rank` image (no sequence exists yet — out of scope).
 - [ ] **Create per-faction rank decorations for RA2Mod factions** —
   currently all RA2Mod factions share `ra2rank` via
   `^GainsExperienceRA2`. Eventually each could have a unique rank image
