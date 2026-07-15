@@ -466,10 +466,10 @@ factions, everything through the balance workbook._
   session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
   core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
   `ts_nod_ticktank`).
-- [ ] **Wire D2k factions to `^DuneRankDecoration`** — template created
-  in `ContentPacks/D2k/Shared/yaml/templates.yaml` but D2k actors not
-  yet given `Inherits@decoration: ^DuneRankDecoration`. 6 Ordos actors
-  confirmed missing; Ixian/Atreides/Harkonnen need checking.
+- [x] **Wire D2k factions to `^DuneRankDecoration`** (`5ff288c5c`) — Added
+  `Inherits@decoration: ^DuneRankDecoration` to 64 D2k actors across Ixian,
+  Ordos, Harkonnen, and Shared yaml files. Audit tool:
+  `tools/audit/audit_dune_rank_decoration.py` (0 remaining).
 - [ ] **Create `^AlienRankDecoration` template** — `alienrank` sequence
   exists in `misc.yaml` but no template references it. Determine which
   factions should use it (potentially StarCraft Zerg if they gain
