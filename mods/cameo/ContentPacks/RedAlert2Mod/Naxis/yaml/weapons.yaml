@@ -176,7 +176,7 @@ NaxiWW2Machinegunner:
 	BurstDelays: 5
 	Report: nax_mgun3.wav
 
-NaxiWW2MachinegunnerElite:
+NaxiWW2MachinegunnerE:
 	Inherits: NaxiWW2Machinegunner
 	Range: 9970
 	Report: nax_mgun3.wav
@@ -907,7 +907,7 @@ NaxFlakAA:
 		Width: 44
 		Inaccuracy: 888
 
-NaxPlanegun:
+NaxPlanegunE:
 	Inherits: ^Grenade
 	Inherits: ^HeavyCannon
 	Inherits: ^RA2Chaingun
@@ -949,7 +949,7 @@ NaxPlanegun:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-NaxPlaneRockets:
+NaxPlaneRocketsE:
 	Inherits: ^MediumMissile
 	Inherits: ^D2KRocket
 	ReloadDelay: 100

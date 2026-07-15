@@ -625,7 +625,7 @@ naxis_naximachinegunners:
 		RequiresCondition: (deployed || undeployed) && !rank-elite
 	Armament@DEPLOYEDELITE:
 		Name: deployed
-		Weapon: NaxiWW2MachinegunnerElite
+		Weapon: NaxiWW2MachinegunnerE
 		Turret: deploy
 		LocalOffset: 384,64,384
 		PauseOnCondition: !deployed || deploying
@@ -636,7 +636,7 @@ naxis_naximachinegunners:
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiWW2MachinegunnerElite
+		Weapon: NaxiWW2MachinegunnerE
 		RequiresCondition: rank-elite
 	AttackTurreted:
 		Voice: Attack

@@ -31,7 +31,7 @@ interceptor.nax:
 		PauseOnCondition: !ammo
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -249,13 +249,13 @@ naxis_bf109:
 		FacingTolerance: 100
 	Armament:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -337,14 +337,14 @@ naxis_me262:
 		FacingTolerance: 100
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@RocketsELITE:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,350,-225, 425,-350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
@@ -352,13 +352,13 @@ naxis_me262:
 		RequiresCondition: rank-elite
 	Armament@MG:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5

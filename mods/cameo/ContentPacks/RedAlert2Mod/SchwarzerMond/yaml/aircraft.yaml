@@ -35,28 +35,28 @@ schwarzer_mond_spacezeppelin:
 		Step: 21
 	Armament:
 		Name: primary
-		Weapon: NaxiBeetleLaser
+		Weapon: NaxiBeetleLaserE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@elite:
 		Name: primary
-		Weapon: NaxiBeetleLaser
+		Weapon: NaxiBeetleLaserE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAA
+		Weapon: NaxiBeetleLaserAAE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
 		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@eliteAA:
 		Name: primary
-		Weapon: NaxiBeetleLaserAA
+		Weapon: NaxiBeetleLaserAAE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
