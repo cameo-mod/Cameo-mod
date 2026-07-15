@@ -69,11 +69,9 @@
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: water_piff
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -178,19 +176,15 @@
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
 	Warhead@Effect1: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 		ValidTargets: Ground, Ship, Air
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: flak_explosion_ground
 		ValidTargets: Ground, Ship, Air
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -269,11 +263,9 @@
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -356,7 +348,6 @@
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -443,7 +434,6 @@
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_splash
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -3086,7 +3076,6 @@
 		Types: ivanbomb
 		ValidRelationships: Ally
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: green_small_fire
 		ImpactActors: true
 
@@ -3352,7 +3341,6 @@ DefuseKit:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 ^MissileWeapon:
@@ -3474,7 +3462,6 @@ DefuseKit:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 
 
@@ -3535,7 +3522,6 @@ DefuseKit:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 
 RockExplode:
 	Inherits: ^DamagingExplosionHE
@@ -3543,7 +3529,6 @@ RockExplode:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@GrenadePercentage:
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -3570,7 +3555,6 @@ RockDebris:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -3584,7 +3568,6 @@ RockDebris2:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
 
@@ -3689,7 +3672,6 @@ CosmeticExplodeSmall:
 BuildingExplode:
 	Inherits: ^DamagingExplosionHE
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: building, building_napalm, med_frag, poof, small_building
 		Delay: 1
 		ImpactActors: false
@@ -3743,10 +3725,8 @@ BoatMissile:
 		Damage: 3333
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 	Warhead@4EffAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 Patriot:
@@ -3769,7 +3749,6 @@ Patriot:
 		Versus:
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: poof
 
 ###############################################
@@ -3950,11 +3929,9 @@ Demolish:
 			Concrete: 25
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@4Eff_2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Ship
 	Warhead@4Eff_2Water: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -3988,7 +3965,6 @@ Pistol:
 		InvalidTargets: ixian_concretewall, BulletImmune
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 ###############################################
@@ -5359,7 +5335,6 @@ GLASCUD:
 		Spread: 0c768
 		Damage: 5000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 
 GLASCUDPOWER:
@@ -5403,10 +5378,8 @@ GLASCUDPOWER2:
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust2
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c768
@@ -5417,10 +5390,8 @@ GLASCUDPOWER3:
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust3
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_purple
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_purple
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c768
@@ -5483,7 +5454,6 @@ GLToxinExplodeClust1:
 		Weapon: GLToxinClusterSmall
 		Amount: 3
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: green_building
 
 GLToxinExplodeClust2:
@@ -5494,7 +5464,6 @@ GLToxinExplodeClust2:
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallBlue
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 
 GLToxinExplodeClust3:
@@ -5505,7 +5474,6 @@ GLToxinExplodeClust3:
 		InvalidTargets: ToxinImmune
 		Weapon: GLToxinClusterSmallPurple
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: purple_building
 
 GLToxinCluster:
@@ -5587,10 +5555,8 @@ GLToxinBomb:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_green
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_green
 	Warhead@Cluster: FireShrapnel
 		InvalidTargets: ToxinImmune
@@ -5600,10 +5566,8 @@ GLToxinBomb:
 GLToxinBombBlue:
 	Inherits: GLToxinBomb
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 	Warhead@Cluster: FireShrapnel
 		InvalidTargets: ToxinImmune
@@ -5612,10 +5576,8 @@ GLToxinBombBlue:
 GLToxinBombPurple:
 	Inherits: GLToxinBombBlue
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_purple
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_purple
 	Warhead@Cluster: FireShrapnel
 		InvalidTargets: ToxinImmune
@@ -5838,7 +5800,6 @@ wc_tower_fire:
 DRPlasmaTankWeapon:
 	Inherits: ^DRPlasmaWeapon
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drplasmaex
 
 
@@ -5849,7 +5810,6 @@ SWLaser:
 		Image: swredlaser
 		Speed: 900
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drlaserexp
 
 SWLaserG:
@@ -5943,7 +5903,6 @@ GLRebelToxin:
 			Concrete: 0
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: purplesplash
 	Warhead@Clear: SpreadDamage
 		Spread: 0c512
@@ -5992,7 +5951,6 @@ GLTrooperRPGMissileG:
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -6040,7 +5998,6 @@ Fremen_L:
 			Heavy: 20
 			Concrete: 100
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_explosion
 
 
@@ -6115,7 +6072,6 @@ SpiceExplosion:
 		AddsResourceType: Spice
 		Size: 1
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_med_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha

@@ -53,7 +53,6 @@ Debris:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -82,7 +81,6 @@ Debris2:
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
 	Warhead@4Concrete: DamagesConcrete
@@ -132,7 +130,6 @@ Debris4:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_napalm
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -183,7 +180,7 @@ D2K70mmH:
 	Warhead@1Dam: SpreadDamage
 		Damage: 2250
 
-Emperor_Sardaukar_Elite:
+Emperor_Sardaukar_E:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 60
 	Report: d2k_gauss.wav
@@ -306,7 +303,6 @@ D2K_SiegeQuad:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -354,7 +350,6 @@ D2K_Rocket:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 625
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha
 
@@ -802,10 +797,8 @@ LeechSpit:
 		ValidTargets: Vehicle
 		Damage: 1
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 
 WormJaw:
@@ -1162,7 +1155,6 @@ D2KUnitExplodeLarge:
 D2kBuildingExplode:
 	Inherits: ^DamagingExplosionHE
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -1331,7 +1323,6 @@ Fremen_S:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1600
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_explosion
 
 M_LMG:
@@ -1423,7 +1414,6 @@ Fremen_Upg:
 			Heavy: 50
 			Concrete: 80
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_explosion
 
 Arrakis_Tanya_Guns:
@@ -1460,7 +1450,6 @@ Fremen_RPG:
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 625
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha
 
@@ -1558,7 +1547,6 @@ OrniGun:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -1688,7 +1676,6 @@ D2KSniperRifle:
 		InvalidTargets: Structure, ixian_concretewall, Husk, Water
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -1735,7 +1722,6 @@ d2kFlamegun:
 		DamageTypes: FireDeath
 		InvalidTargets: FireActor, WaterActor
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: flame
 		ExplosionPalette: effect75alpha
 	Warhead@3Concrete: DamagesConcrete
@@ -1779,7 +1765,6 @@ d2k_flame_tank:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -2186,7 +2171,6 @@ d2k_sard_crossbow:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_napalm
 		ExplosionPalette: effect75alpha
 		ImpactActors: false
@@ -2310,7 +2294,6 @@ o155mm:
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -2377,7 +2360,6 @@ oRocket:
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 625
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha
 
@@ -2612,7 +2594,6 @@ oUnitExplodeLarge:
 
 oBuildingExplode:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -2722,7 +2703,6 @@ oPlasmaExplosion:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: devastator
 		ExplosionPalette: effect75alpha
 	Warhead@4Concrete: DamagesConcrete
@@ -2747,7 +2727,6 @@ oPlasmaExplosion:
 			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_piffs
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -2762,7 +2741,6 @@ oFremen_S:
 	ReloadDelay: 40
 	Report: FREMODD1.WAV
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_explosion
 		ExplosionPalette: effect75alpha
 
@@ -2804,7 +2782,6 @@ oFremen_L:
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion
 
 oHMG:
@@ -2866,7 +2843,6 @@ oDebris:
 		SmudgeType: SandCrater
 		InvalidTargets: Vehicle, Structure
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -2894,7 +2870,6 @@ oDebris2:
 			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_small_napalm
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 2250

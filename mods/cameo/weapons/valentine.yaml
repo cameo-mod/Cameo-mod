@@ -1,16 +1,13 @@
 LoveColt45:
 	Inherits: Colt45
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 	Warhead@3EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 
 LoveDoublePistols:
 	Inherits: RA2DoublePistols
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 
 lovebowFire:
@@ -504,7 +501,7 @@ CuteKirovBomb:
 		Size: 5
 		Delay: 40
 
-CuteKirovBombElite:
+CuteKirovBombE:
 	Inherits: CuteKirovBomb
 	Warhead@3Eff: CreateEffect
 		Delay: 0
@@ -518,4 +515,4 @@ CuteKirovBombElite:
 		Falloff: 100, 66, 33, 0
 		Level: 300
 		LayerName: ra2radiation
-	
+

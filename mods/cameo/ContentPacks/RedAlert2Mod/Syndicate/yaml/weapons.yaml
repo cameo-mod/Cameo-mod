@@ -229,10 +229,8 @@ RA2FreedomAK47:
 		Damage: 3
 		Spread: 30
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 	Warhead@Effect1: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piff
 
 RA2FreedomAK47E:
@@ -813,7 +811,6 @@ DiabloCannonAA:
 	ValidTargets: Air
 	Range: 9450
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -1148,7 +1145,6 @@ LatinAADefenderCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -1312,7 +1308,6 @@ RA2APCFlakCannonAA:
 	ValidTargets: Air
 	Range: 8610
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air

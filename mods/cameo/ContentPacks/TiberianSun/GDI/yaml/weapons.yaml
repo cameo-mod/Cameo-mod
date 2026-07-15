@@ -625,7 +625,6 @@ TSMammothTusk2:
 		Damage: 21
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 TSMammothTusk2II:
@@ -655,7 +654,6 @@ TSMammothTusk2II:
 		Damage: 30
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 TSHellfireSonic:
@@ -1162,6 +1160,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		AirThreshold: 8c0
 	Warhead@Effect: CreateEffect
 		Delay: 110
+		Image: tsioncannon
 		Explosions: ionring
 		ExplosionPalette: tseffect
 		ImpactSounds: ion1.aud
@@ -1225,7 +1224,6 @@ TSIonBeamMini:
 		Speed: 52
 		RotSpeed: 12
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_poof
 
 TSIonBeamMiniEnd:

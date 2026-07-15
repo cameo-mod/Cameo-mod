@@ -34,7 +34,6 @@ HookNullWeapon:
 
 CHRadiationYellow:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: yellow_toxins
 	Warhead@2Radiation: CreateTintedCells
 		Spread: 1c0
@@ -75,7 +74,6 @@ GLScorpionShellToxin:
 			None: 20
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 GLScorpionShellToxinBeta:
@@ -87,7 +85,6 @@ GLScorpionShellToxinBeta:
 			None: 75
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_small_napalm
 
 GLScorpionShellToxinGamma:
@@ -99,7 +96,6 @@ GLScorpionShellToxinGamma:
 			None: 100
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: purplesplash
 
 GlScorpionMissile:
@@ -154,7 +150,6 @@ GLMarauderShellToxin:
 		Versus:
 			None: 50
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 GLMarauderShellToxinBeta:
@@ -165,7 +160,6 @@ GLMarauderShellToxinBeta:
 		Versus:
 			None: 75
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_small_napalm
 
 GLMarauderShellToxinGamma:
@@ -176,7 +170,6 @@ GLMarauderShellToxinGamma:
 		Versus:
 			None: 100
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: purplesplash
 
 GLTwinMarauderShell:
@@ -251,7 +244,6 @@ GLAngryMobMolotov:
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 
 GLWorkerHealBuilding:
@@ -299,7 +291,6 @@ GLTractorToxin:
 			Concrete: 0
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 	Warhead@Clear: SpreadDamage
 		Spread: 0c512
@@ -323,7 +314,6 @@ GLTractorToxinBeta:
 	Warhead@Clear: SpreadDamage
 		Damage: 7500
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_small_napalm
 
 GLTractorToxinGamma:
@@ -340,7 +330,6 @@ GLTractorToxinGamma:
 	Warhead@Clear: SpreadDamage
 		Damage: 10000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: purplesplash
 
 GLTractorContaminate:
@@ -395,7 +384,6 @@ GLBombTruckSuperExplosive:
 		Spread: 5000
 		Damage: 50000
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 	Warhead@3Smu: LeaveSmudge
 		Size: 3
@@ -693,7 +681,6 @@ GLQuadCannonGround:
 			Concrete: 20
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath, MakeScrapbox
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 
@@ -733,7 +720,6 @@ GLASCUDTOXIN:
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_green
 
 
@@ -920,7 +906,6 @@ CHNukeCannon:
 			Heavy: 100
 			Concrete: 50
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: schnukeexplosion
 CHNukeCannonNeutron:
 	Inherits: CHNukeCannon
@@ -1059,7 +1044,6 @@ CHDragonFlamerBlue:
 		Amount: 4
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: citywatersplash
 
 CHDragonFirestorm:
@@ -1159,7 +1143,6 @@ CHMIGWeaponBlue:
 		Versus:
 			None: 120
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: citywatersplash
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
@@ -1188,7 +1171,6 @@ CHMIGNuke:
 		AffectsParent: True
 		ValidTargets: Ground, Air, Water
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Air, Water
 	Warhead@1Radiation: CreateTintedCells
 		Spread: 1c512
@@ -1392,7 +1374,6 @@ CHInfernoCannonBlue:
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 	Warhead@Shr: FireShrapnel
 		InvalidTargets: FireImmune
@@ -1408,7 +1389,6 @@ CHInfernoCannonCBlue:
 		Inaccuracy: 512
 	Warhead@1Dam: TargetDamage
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: citywatersplash
 
 CHBarrageSpawner:
@@ -2106,10 +2086,8 @@ USAMissileAurora:
 			Concrete: 110
 		ValidTargets: Ground, Water
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 
 USAMissileAurora2:
@@ -2329,6 +2307,7 @@ GLSneakAttack:
 	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
@@ -2628,7 +2607,6 @@ USATomahawk:
 			Heavy: 150
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_terr_flash
 
 SCHDesertFlyBomb:

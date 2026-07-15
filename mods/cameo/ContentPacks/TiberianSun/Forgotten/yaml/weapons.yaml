@@ -774,7 +774,6 @@ TSMammothTusk:
 		Damage: 30
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 TSRuinerMissile:
@@ -1303,7 +1302,6 @@ TSFiendShard:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -1352,7 +1350,6 @@ TSFiendShardUP:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -1398,7 +1395,6 @@ TSFiendShardBlue:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -1466,7 +1462,6 @@ TSFiendShardBlueUP:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air

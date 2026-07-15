@@ -48,7 +48,6 @@ RCTigerMG:
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 
 315MolotovG:
@@ -179,7 +178,6 @@ BigDaddyMissile:
 		ImpactActors: false
 		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
@@ -355,7 +353,6 @@ FurryToxins:
 			None: 20
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 GalagaSting:
@@ -404,7 +401,6 @@ FlameChompFireball:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	-Warhead@2Smu:
 
@@ -496,7 +492,6 @@ CabaggePult:
 		Explosions: poof
 		ImpactSounds: pvzsplat1.wav, pvzsplat2.wav, pvzsplat3.wav
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 	Warhead@EffectAir: CreateEffect
 		ImpactSounds: pvzshieldhit1.wav, pvzshieldhit2.wav

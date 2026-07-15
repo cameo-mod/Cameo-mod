@@ -28,7 +28,6 @@
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drlaserexp
 
 DRPhaseTankWeapon:
@@ -41,7 +40,6 @@ DRPhaseTankWeapon:
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drlasersmoke
 
 DRScoutTankWeapon:
@@ -100,7 +98,6 @@ DRShokPistol:
 			Heavy: 30
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drminielectro
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
@@ -188,10 +185,8 @@ DRBioConntrolEnergy:
 	Projectile: Bullet
 		Image: drenergybullet
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 		
 DRBioConntrolEnergyAA:
@@ -208,10 +203,8 @@ DRTickTankLaser:
 	Projectile: Bullet
 		Image: drticktanklaser
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -230,10 +223,8 @@ DRSpinnerLaser:
 	Projectile: Bullet
 		Image: drticktanklaser
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drbluerailex
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -288,7 +279,6 @@ DRAACannon:
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drneutronexp
 
 DRReaperWeapon:
@@ -321,7 +311,6 @@ DRCycloneNeutron:
 		Damage: 6000
 		ValidTargets: Ground, Air
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drneutronexp
 
 DRTankHunterRay:
@@ -352,7 +341,6 @@ DRTankHunterRay:
 			Heavy: 40
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drelectroexp
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
@@ -393,7 +381,6 @@ DRBionWeapon:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1250
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drplasmaex2
 	Warhead@1DamBuildings: SpreadDamage
 		Damage: 1250
@@ -401,7 +388,6 @@ DRBionWeapon:
 DRPlasmaTurret:
 	Inherits: ^DRPlasmaWeapon
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drplasmaex
 	ValidTargets: Ground, Air
 	Range: 5120
@@ -428,7 +414,6 @@ DRPlasmaReaperWeapon:
 	Report: gxfaawc0.wav
 	ValidTargets: Ground, Air
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drplasmaex
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
@@ -448,7 +433,6 @@ DRSkyFortressWeapon:
 		Spread: 288
 		Damage: 80000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drplasmaex
 	Warhead@1DamBuildings: SpreadDamage
 		Damage: 80000
@@ -474,7 +458,6 @@ DRTachyonTankWeapon:
 			Heavy: 100
 			Concrete: 100
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drtachexp
 		InvalidTargets: Building
 	Warhead@1DamBuildings: SpreadDamage
@@ -504,7 +487,6 @@ DRTachionSuicideExplosion:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drtachexp
 		
 DRFuryWeapon:
@@ -561,7 +543,6 @@ DRPolyGrenade:
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: dracidexp
 
 DRScarabShell:
@@ -662,7 +643,6 @@ DRTwinArtilleryShell:
 			Concrete: 25
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drrailexp
 		ValidTargets: Air, Ground, Water
 
@@ -706,7 +686,6 @@ DRSpiderBikeRailgun:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drrailexp
 	Warhead@1DamBuildings: SpreadDamage
 		Damage: 3000
@@ -762,7 +741,6 @@ DRMetalFragments:
 			Light: 100
 			Heavy: 80
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: poof
 		ValidTargets: Air, Ground, Water
 
@@ -916,7 +894,6 @@ DRShokWaveQuake:
 			Concrete: 40
 		DamageTypes: DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: nuke
 
 DRShokWaveQuakeSound:
@@ -1196,7 +1173,6 @@ DRTNissileTurretAG:
 		Explosions: poof
 		ImpactSounds: drgxex1oc0.wav
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 
 DRTNissileTurretAA:
@@ -1310,7 +1286,6 @@ DRShokWaveSonic:
 			Heavy: 80
 		DamageTypes: DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: poof
 		
 DRVortexTankBlackHoleMaker:
@@ -1412,7 +1387,6 @@ DRAssimilatorAcid:
 		ValidTargets: Building
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: dracidexp
 
 DRMoleGun:
@@ -1438,5 +1412,4 @@ DRMoleGun.AA:
 			Medium: 100
 			Heavy: 90
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air

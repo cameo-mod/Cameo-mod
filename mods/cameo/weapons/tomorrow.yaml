@@ -122,7 +122,6 @@ DTMissileCrawler:
 		ImpactActors: false
 		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
@@ -211,7 +210,6 @@ DTAtomic:
 	Inherits: Atomic
 	Report: nukemisl.aud
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: dt_nuke_explosion
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1
