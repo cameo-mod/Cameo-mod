@@ -148,7 +148,7 @@ cabal_promotion_mothership:
 	Buildable:
 		BuildPaletteOrder: 12
 		Queue: Promotions
-		Prerequisites: ~cabal_constructionyard, !cabal_promotion_mothership, cabal_promotion_overkillgunship, rank1
+		Prerequisites: ~cabal_constructionyard, rank1, cabal_promotion_overkillgunship, !cabal_promotion_mothership
 		Description: actor_cabal_promotion_mothership.description
 	RenderSprites:
 		Image: cabal_mothership

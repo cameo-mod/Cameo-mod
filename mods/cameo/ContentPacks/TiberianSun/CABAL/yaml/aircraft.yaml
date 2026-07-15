@@ -385,7 +385,7 @@ cabal_mothership:
 		Name: Mothership
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_helipad, cabal_core, ~cabal_promotion_mothership
+		Prerequisites: ~cabal_helipad, cabal_core, cabal_promotion_mothership
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_mothership.description
 	Health:
