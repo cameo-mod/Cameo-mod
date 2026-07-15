@@ -16,34 +16,35 @@ faction_ra2_lnaxis =
       Countered by: Early Game Rush, Aircraft
       Special Units: Parzival (Anti-Ground, Hero), Dalek (Anti-Infantry, Support Walker), Die Glocke (Flying Support, Anti-Unit)
       Special Buildings: Moon Dairy Farm (Passive Income)
-      Team Upgrades: Crystal Lens, Lunar Alloys, Helium-3 Enrichment, Vril Powered Weapons, Amplified Lens, Moon Propaganda, Cryptofascism
+      Team Upgrades: Crystal Lens, Lunar Alloys, Helium-3 Enrichment, Vril Powered Weapons, Amplified Lens, Moon Propaganda, Cryptofascism, Vril Infusion
       Support powers: Gravity Core, Meteor Traction Beam
 
 actor_schwarzer_mond_bermensch =
    .description = Heavy assault infantry armed with a yellow laser rifle.
-      Benefits from Crystal Lens and Amplified Lens burst upgrades.
+      Benefits from Crystal Lens, Amplified Lens and Vril Infusion upgrades.
 
 actor_schwarzer_mond_parzival =
    .description = Elite hero unit. Creates black holes that damage nearby enemies.
-      Can only be built once.
+      Can only be built once. Benefits from Vril Infusion.
 
 actor_schwarzer_mond_noidmgarmor =
    .description = Heavy walker with a rapid-fire laser weapon.
-      Benefits from Crystal Lens and Amplified Lens burst upgrades.
+      Benefits from Crystal Lens, Amplified Lens and Vril Infusion upgrades.
 
 actor_schwarzer_mond_noidharvester =
    .description = Armored harvester walker. Collects ore and defends itself with a laser.
 
 actor_schwarzer_mond_engineeringarmor =
    .description = Engineer walker. Captures enemy buildings and repairs friendly vehicles.
-      Unarmed.
+      Unarmed. Benefits from Vril Infusion speed boost.
 
 actor_schwarzer_mond_lunarsoldier =
    .description = Basic rifle infantry. Cheap and fast to train.
-      Benefits from Crystal Lens and Amplified Lens burst upgrades.
+      Benefits from Crystal Lens, Amplified Lens and Vril Infusion upgrades.
 
 actor_schwarzer_mond_lunarrocket =
    .description = Rocket infantry. Effective against vehicles and aircraft.
+      Benefits from Vril Infusion.
 
 actor_schwarzer_mond_naxismobileconstructionvehicle =
    .description = Deploys into a Schwarzer Mond Construction Yard.

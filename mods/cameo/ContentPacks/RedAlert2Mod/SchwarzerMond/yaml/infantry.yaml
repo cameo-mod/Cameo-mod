@@ -12,6 +12,7 @@ schwarzer_mond_bermensch:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@LUpgrade: ^NaxiCrystalLens
 	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -94,6 +95,7 @@ schwarzer_mond_parzival:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@announce: ^AnnounceGlobal
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -152,6 +154,7 @@ schwarzer_mond_noidmgarmor:
 	Inherits@HackableRobot: ^HackableRobot
 	Inherits@LUpgrade: ^NaxiCrystalLens
 	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Valued:
@@ -307,6 +310,7 @@ schwarzer_mond_engineeringarmor:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Valued:
@@ -385,6 +389,7 @@ schwarzer_mond_lunarsoldier:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Valued:
 		Cost: 120
 	Tooltip:
@@ -464,6 +469,7 @@ schwarzer_mond_lunarrocket:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VrilInfusion: ^NaxiVrilInfusion
 	Valued:
 		Cost: 350
 	Tooltip:

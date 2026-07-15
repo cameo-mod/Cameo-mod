@@ -1352,14 +1352,20 @@ following templates are the canonical set:
 - `^NaxiMoonPropaganda` — tech-tier +10% firepower for all Schwarzer Mond
   infantry. The morale campaign is funded by **MoonCoin**, the official
   cryptocurrency of the Reichsmark 2.0 blockchain.
-- `^NaxiHelium3` — radar-tier +50% power output for Hydrogen Plants. The Moon's
-  regolith is rich in Helium-3, the isotope that fuels the Fourth Reich's
-  fusion reactors and the Götterdämmerung-class warships.
+- `^NaxiHelium3` — radar-tier +50% power output for Hydrogen Plants and +25%
+  speed/turn rate for all vehicles and aircraft. The Moon's regolith is rich in
+  Helium-3, the isotope that fuels the Fourth Reich's fusion reactors and the
+  Götterdämmerung-class warships; enriched Helium-3 is also used as a high-
+  specific-impulse propellant for lunar vehicles and saucers.
+- `^NaxiVrilInfusion` — tech-tier +25% firepower, +25% speed/turn rate and +15%
+  damage reduction (Modifier 85) for all Schwarzer Mond infantry. Vril energy
+  from the Black Sun program is spliced into the troopers, creating true
+  Übermenschen on the battlefield.
 
 Upgrade queue layout:
 - **Radar tier (`Upgrades`)**: Crystal Lens, Lunar Alloys, Helium-3 Enrichment.
-- **Tech tier (`Research`)**: Amplified Lens, Vril Powered Weapons, Cryptofascism,
-  Moon Propaganda.
+- **Tech tier (`Research`)**: Amplified Lens, Vril Powered Weapons, Vril Infusion,
+  Cryptofascism, Moon Propaganda.
 
 ### 18.7 Promotion grid proposal
 
@@ -1437,9 +1443,9 @@ the first to receive the full template because it is the focus faction.
 
 ### 18.10 Implementation order
 
-1. [DONE] Add the four new templates to `ContentPacks/RedAlert2Mod/Shared/yaml/
-   templates.yaml` (or a Schwarzer Mond local templates file if the Shared
-   pack is too broad).
+1. [DONE] Add the new templates to `ContentPacks/RedAlert2Mod/Shared/yaml/
+   templates.yaml` (Crystal Lens, Amplified Lens, Vril Powered Weapons, Lunar
+   Alloys, Moon Propaganda, Cryptofascism, Helium-3, Vril Infusion).
 2. [DONE] Add the four new upgrade actors to `ContentPacks/RedAlert2Mod/SchwarzerMond/
    yaml/upgrades.yaml`.
 3. [DONE] Move Green Plasma Shells to tech center; split Crystal Lens; add

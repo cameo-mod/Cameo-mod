@@ -737,8 +737,33 @@
 	PowerMultiplier@schwarzer_mond_upgrade_helium3:
 		RequiresCondition: schwarzer_mond_upgrade_helium3
 		Modifier: 150
+	SpeedMultiplier@schwarzer_mond_upgrade_helium3:
+		RequiresCondition: schwarzer_mond_upgrade_helium3
+		Modifier: 125
+	TurnSpeedMultiplier@schwarzer_mond_upgrade_helium3:
+		RequiresCondition: schwarzer_mond_upgrade_helium3
+		Modifier: 125
 	ActorStatValues:
 		Upgrades: schwarzer_mond_upgrade_helium3
+
+^NaxiVrilInfusion:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_vrilinfusion:
+		Condition: schwarzer_mond_upgrade_vrilinfusion
+		Prerequisites: schwarzer_mond_upgrade_vrilinfusion
+	FirepowerMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	SpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	TurnSpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	DamageMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_vrilinfusion
 
 ^FutureTechSpawnActorsOnSell:
 	SpawnActorsOnSell:

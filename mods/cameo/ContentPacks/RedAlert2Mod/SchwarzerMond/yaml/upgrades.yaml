@@ -65,11 +65,27 @@ schwarzer_mond_upgrade_helium3:
 	Buildable:
 		BuildPaletteOrder: 65
 		Queue: Upgrades
-		Description: Increases Hydrogen Plant power output by 50%.
-			Mines Helium-3 from the lunar regolith to fuel Fourth Reich fusion reactors.
+		Description: Increases Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%.
+			Mines Helium-3 from the lunar regolith to fuel Fourth Reich fusion reactors and propulsion systems.
 		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_helium3
 	RenderSprites:
 		Image: schwarzer_mond_upgrade_helium3
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_vrilinfusion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vril Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 67
+		Queue: Research
+		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and 15% damage reduction.
+			Vril energy from the Black Sun program rewrites soldiers at the cellular level, creating true Übermenschen.
+		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_vrilinfusion
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_vrilinfusion
 	ProvidesPrerequisite:
 
 schwarzer_mond_upgrade_lunaralloys:

@@ -5,6 +5,7 @@ schwarzer_mond_naxismobileconstructionvehicle:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@mcv: ^MCV
+	Inherits@Helium3: ^NaxiHelium3
 	Tooltip:
 		Name: Naxis Mobile Construction Vehicle
 	Buildable:
@@ -32,6 +33,7 @@ schwarzer_mond_dalek:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@announce: ^AnnounceGlobal
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 9000
 	Tooltip:
@@ -91,6 +93,7 @@ schwarzer_mond_laserbeetle:
 	Inherits@EMP: ^TurretEMP
 	Inherits@LUpgrade: ^NaxiCrystalLens
 	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -190,6 +193,7 @@ schwarzer_mond_lunarpanzer:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -276,6 +280,7 @@ schwarzer_mond_lunartiger:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -362,6 +367,7 @@ schwarzer_mond_neojagdpanzer:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 4500
 	Tooltip:
@@ -435,6 +441,7 @@ schwarzer_mond_lunargrille:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -510,6 +517,7 @@ schwarzer_mond_korruptesbiest:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
+	Inherits@Helium3: ^NaxiHelium3
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Valued:
@@ -568,6 +576,7 @@ schwarzer_mond_crystaltank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 1700
 	Tooltip:
@@ -650,6 +659,7 @@ schwarzer_mond_mars:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
+	Inherits@Helium3: ^NaxiHelium3
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
@@ -728,6 +738,7 @@ schwarzer_mond_m200bjagerline:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
+	Inherits@Helium3: ^NaxiHelium3
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
@@ -813,6 +824,7 @@ schwarzer_mond_lasertank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@LUpgrade: ^NaxiCrystalLens
 	Inherits@LUpgrade2: ^NaxiAmplifiedLens
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -920,6 +932,7 @@ schwarzer_mond_gravitycoretank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
+	Inherits@Helium3: ^NaxiHelium3
 	Valued:
 		Cost: 1500
 	Tooltip:

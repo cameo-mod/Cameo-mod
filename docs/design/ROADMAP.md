@@ -508,7 +508,13 @@ factions, everything through the balance workbook._
   and descriptions to match.
 - [x] **SM-HELIUM3: Add Helium-3 Enrichment upgrade** — create
   `schwarzer_mond_upgrade_helium3` (radar tier, Upgrades queue) that increases
-  Hydrogen Plant power output by 50%. Add template, icon, and sequence.
+  Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%. Add
+  template, icon, and sequence; wire to all vehicles and aircraft.
+- [x] **SM-VRILINFUSION: Add Vril Infusion upgrade** — create
+  `schwarzer_mond_upgrade_vrilinfusion` (tech tier, Research queue) that gives
+  all Schwarzer Mond infantry +25% firepower, +25% speed/turn rate, and 15%
+  damage reduction. Add template, icon, sequence, and wire to every infantry
+  actor. Update descriptions and intent.
 - [x] **SM-1BURST: Re-enable laser upgrades on 1-burst weapons** — add Lunar
   Soldier and Laser Tower to the Crystal Lens / Amplified Lens switch and
   recreate the 1-burst yellow/amplified weapon variants.

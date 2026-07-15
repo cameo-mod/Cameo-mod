@@ -237,7 +237,7 @@ schwarzer_mond_upgrade_lunaralloys:
 	phase: mid
 schwarzer_mond_upgrade_helium3:
 	faction: lnaxis
-	effect: hydrogen plants produce 50% more power
+	effect: hydrogen plants produce 50% more power; all vehicles and aircraft gain 25% speed and turn rate
 	coverage: narrow
 	phase: mid
 ######################## Schwarzer Mond — Tech tier ###################
@@ -250,6 +250,11 @@ schwarzer_mond_upgrade_vrilpoweredweapons:
 	faction: lnaxis
 	effect: cannon vehicles deal +25% firepower and Tesla-type damage
 	coverage: listed
+	phase: late
+schwarzer_mond_upgrade_vrilinfusion:
+	faction: lnaxis
+	effect: all infantry gain 25% firepower, 25% speed/turn rate and 15% damage reduction
+	coverage: infantry
 	phase: late
 schwarzer_mond_upgrade_moonpropaganda:
 	faction: lnaxis
