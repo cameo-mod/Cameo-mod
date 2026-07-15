@@ -653,6 +653,14 @@ cabal_cyborgcommando:
 		Weapon: CabalCommandoPlasmaNeutron
 		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasma
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONEDUpgraded:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaNeutron
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -731,6 +739,14 @@ cabal_cyborgcommandov2:
 	Armament@Upgraded:
 		Weapon: CabalCommandoPlasmaMk2Neutron
 		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaMk2
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONEDUpgraded:
+		Name: garrisoned
+		Weapon: CabalCommandoPlasmaMk2Neutron
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
