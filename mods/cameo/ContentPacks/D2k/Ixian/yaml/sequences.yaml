@@ -1350,12 +1350,16 @@ duelist_tank_husk.ixian:
 
 ixian_koda_tank:
 	Defaults:
-		Facings: -32
+		Scale: 1.5
 	idle:
 		Filename: ixian_koda_tank.png
+		Facings: -32
+		Offset: 0, 4
 		Start: 0
 	turret:
 		Filename: ixian_koda_tank_turret.png
+		Facings: -32
+		Offset: 0, -2
 		Start: 0
 	muzzle:
 		Filename: DATA.R16
