@@ -1,13 +1,16 @@
 LoveColt45:
 	Inherits: Colt45
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 	Warhead@3EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 
 LoveDoublePistols:
 	Inherits: RA2DoublePistols
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: lovepiff
 
 lovebowFire:

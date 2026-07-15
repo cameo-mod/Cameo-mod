@@ -64,6 +64,7 @@ Dragon:
 			Wood: 140
 			Heavy: 104
 	Warhead@4EffAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 Rockets:
@@ -191,6 +192,7 @@ MammothMissiles:
             Medium: 74
 			Heavy: 48
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_frag
 
 227mm.stnk:
@@ -240,8 +242,10 @@ BoatMissile:
 			Heavy: 25
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 	Warhead@4EffAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 TowerMissile:
@@ -291,6 +295,7 @@ TowerAAMissile:
 			Heavy: 104
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 Patriot:
@@ -317,6 +322,7 @@ Patriot:
 			Heavy: 74
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: poof
 
 HonestJohn:
@@ -353,6 +359,7 @@ HonestJohn:
 		ImpactActors: false
 		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 		ValidTargets: Water
 		InvalidTargets: Ship, Structure, Bridge
@@ -413,6 +420,7 @@ HonestJohnCamea:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 
 HellfireAG:
@@ -451,6 +459,7 @@ HellfireAA:
 			Wood: 75
 			Light: 75
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag			#med_explosion_air
 
 MammothTusk:
@@ -550,6 +559,7 @@ SCUD:
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 	Warhead@4EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 
 Maverick:

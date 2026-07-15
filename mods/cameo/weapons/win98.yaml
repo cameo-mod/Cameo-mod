@@ -37,6 +37,7 @@ redringofdeathweapon:
 	Projectile: InstantHit
 		Inaccuracy: 5c0
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: win98_redringofdeath
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage

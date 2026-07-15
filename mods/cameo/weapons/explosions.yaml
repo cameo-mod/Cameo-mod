@@ -55,6 +55,7 @@ HeliExplode:
 LargeHeliExplode:
 	Inherits: HeliExplode
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: tsexplolrg
 
 UnitExplode:
@@ -123,6 +124,7 @@ GrenadierExplode:
 
 BuildingExplode:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: building, building_napalm, med_frag, poof, small_building
 		Delay: 1
 		ImpactActors: false

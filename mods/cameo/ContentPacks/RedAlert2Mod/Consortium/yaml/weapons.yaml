@@ -94,6 +94,7 @@ SteelVulcan:
 		Damage: 1
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 
 SteelVulcanResonance:
@@ -543,6 +544,7 @@ SteelMantaAA:
 	Range: 9999
 	ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -1829,6 +1831,7 @@ HammerheadArtillery:
 		Spread: 1111
 		Damage: 11
 	Warhead@Effect1: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_blueexp
 		ExplosionPalette: ra2effect
 	Warhead@Effect2: CreateEffect

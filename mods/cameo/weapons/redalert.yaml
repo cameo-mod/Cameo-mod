@@ -9,10 +9,13 @@
 		ContrailEndWidth: 25
 		ContrailLength: 15
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 	Warhead@EffectWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		PhysicalStateName: Temperature
@@ -767,6 +770,7 @@ FireballLauncher:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 9000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -805,6 +809,7 @@ FireballLauncherThermobaric:
 	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 5000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -832,6 +837,7 @@ FireballGun:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 4000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -883,6 +889,7 @@ FireballGunThermobaric:
 	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 2000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -972,6 +979,7 @@ PlasmaFlamer:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 2000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_small_napalm
 
 HeavyFlamer:
@@ -998,6 +1006,7 @@ HeavyFlamer:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 1000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -1040,6 +1049,7 @@ HeavyPlasmaFlamer:
 	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 2000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building_napalm
 
 SiegeMortar:
@@ -1532,6 +1542,7 @@ HeatRayBeam1:
 	# Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
 	# 	Amount: 2000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Volume: 0.25
 
 HeatRayBeam2:
@@ -2196,7 +2207,6 @@ Hakureiring2:
 		Damage: 240000
 	Warhead@Effect: CreateEffect
 		ImpactActors: false
-		Image: hakurei_giphy
 		Explosions: fades
 		ExplosionPalette: player
 		UsePlayerPalette: true
@@ -2379,8 +2389,8 @@ ReimuYinYangDrone:
 		AimTargetStances: Enemy
 		ValidTargets: Air, Ground, Water
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ImpactActors: false
-		Image: hakurei_giphy
 		Explosions: fades
 		ExplosionPalette: player
 		UsePlayerPalette: true
@@ -2404,7 +2414,6 @@ Hakureiring3:
 
 THMiss:
 	Warhead@Effect: CreateEffect
-		Image: hakurei_dream #TODO: make exorcist drop point pickups
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: thmiss.wav
@@ -3146,9 +3155,11 @@ BTRTeslaMachineGun:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -3222,6 +3233,7 @@ RATurretGun:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 zsu_23:
@@ -3236,6 +3248,7 @@ zsu_23:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 Hellfire:
@@ -3600,9 +3613,11 @@ KamovMissilesTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -3639,9 +3654,11 @@ KamovTesla:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 16000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -3786,9 +3803,11 @@ YakTeslaGun:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -3881,6 +3900,7 @@ YakNapalm:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -4358,9 +4378,11 @@ TeslaMaverick:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -4661,6 +4683,7 @@ RapierBombsCryo:
 	Inherits: ^CryoMissileProjectile
 	Projectile: GravityBomb
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_artillery
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -10000
@@ -4989,6 +5012,7 @@ TigerCannon:
 		ContrailEndWidth: 5
 		ContrailEndColor: 12345678
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_artillery
 	Warhead@PhysicalStateCryo: ApplyPhysicalState
 		Amount: -30000
@@ -5086,6 +5110,7 @@ TigerCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 HovercraftCannon:
@@ -5249,6 +5274,7 @@ HovercraftPlasmaCannon:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 
 JapaneseHovercraftFlak:
@@ -5306,6 +5332,7 @@ Type89Cannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 Type89PlasmaCannon:
@@ -5344,6 +5371,7 @@ Type89PlasmaCannon:
 		Damage: 2
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 
 Type97Cannon:
@@ -5695,6 +5723,7 @@ OISmallCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 OISmallPlasmaCannon:
@@ -5743,6 +5772,7 @@ OISmallPlasmaCannon:
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 
 OIBigCannon:
@@ -5852,6 +5882,7 @@ OIPlasmaFlamer:
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building_napalm
 
 OIHakureiring:
@@ -5876,6 +5907,7 @@ OIHakureiring2:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 105mmThermobaric:
@@ -6361,9 +6393,11 @@ MammothTuskTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -6775,6 +6809,7 @@ VolkovMagneticWeaponTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -6980,6 +7015,7 @@ VolkovMagneticWeaponIncendiaryTesla:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -7324,6 +7360,7 @@ DTAtomic:
 	Inherits: Atomic
 	Report: nukemisl.aud
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: dt_nuke_explosion
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1
@@ -7621,6 +7658,7 @@ JapanesePlasmaBomb:
 		ImpactSounds: psahit00.aud
 		Explosions: blueartexp
 	Warhead@Effect2: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building_napalm
 
 Nike:
@@ -7715,6 +7753,7 @@ RocketsG:
 			Concrete: 20
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: flak_explosion_ground
 		ValidTargets: Air, Ground, Water
 
@@ -7736,9 +7775,11 @@ RocketsG:
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
 	Warhead@3EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -7776,9 +7817,11 @@ SilencedPPK:
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Ship, Air
 	Warhead@3EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: water_piffs
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
@@ -8464,6 +8507,7 @@ WaveTurretShell:
 		Speed: 500
 		Inaccuracy: 0
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building
 
 WaveTurretImpact:
@@ -8588,9 +8632,11 @@ TeslaRAGatlingTankCannon:
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -8749,6 +8795,7 @@ ArmoredCarMG:
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 
 ArmoredCarMGAA:
@@ -8881,6 +8928,7 @@ TorpTube:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -9035,6 +9083,7 @@ Stinger:
 		InvalidTargets: Underwater
 		Damage: 5
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 StingerCryo:
@@ -9110,6 +9159,7 @@ YamatoFlak:
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 RadarJammer:

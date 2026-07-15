@@ -27,6 +27,7 @@ DoomShotgun:
 			Heavy: 40
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 
@@ -51,6 +52,7 @@ DoomSuperShotgun:
 			Heavy: 25
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 WolfenPistol:
@@ -128,6 +130,7 @@ DoomGarrisonPistol:
 			Heavy: 30
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
@@ -224,9 +227,11 @@ WolfenFlak88:
 		Explosions: flak_explosion_ground
 		ImpactSounds: xplosml2.aud
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: flak_explosion_ground
 		ValidTargets: Air, Ground, Water
 	Warhead@4EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 	
 WolfenFlak88AA:

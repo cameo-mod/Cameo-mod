@@ -566,6 +566,7 @@ smashgun:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		ValidTargets: Ground, Water, Air
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 smashgun2:
@@ -606,6 +607,7 @@ RA2DoublePistolsLaser:
 		Image: tanyalaser
 		Speed: 0c890
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: tanyalasersplash
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground
@@ -636,6 +638,7 @@ RA2VolkovGun:
 			Heavy: 10
 			Concrete: 60
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 		ValidTargets: Ground, Ship, Air
 
@@ -808,12 +811,12 @@ McNealMechDrop1:
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect: CreateEffect
-		Image: tspodring
+		ImpactSounds: xplosml2.aud
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect2: CreateEffect
-		Image: tsmcnealmechdrop
+		ImpactSounds: xplosml2.aud
 		Explosions: idle
 		ValidTargets: Ground, Air, Water
 	Warhead@3Smu: LeaveSmudge
@@ -950,6 +953,7 @@ SeverusFlachetteSMG:
 		ValidTargets: Ground, Air
 		DamageTypes: TiberiumDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		
 SeverusCircleDamage:
@@ -1094,6 +1098,7 @@ KurtMachinegun:
 		InvalidTargets: Structure, Bridge, ixian_concretewall
 		ValidTargets: Ground, Air
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piff
 KurtMachinegunUpgraded:
 	Inherits: KurtMachinegun
@@ -1118,6 +1123,7 @@ KurtSniper:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		InvalidTargets: Structure, Bridge, ixian_concretewall
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 KurtGrenade:
@@ -1179,6 +1185,7 @@ KurtMortar:
 		Explosions: artillery_explosion
 		ImpactSounds: mdkgrenade.wav
 	Warhead@4EffWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 KurtMissile:

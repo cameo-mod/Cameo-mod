@@ -88,6 +88,7 @@ CMindustry_Flamer:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	-Warhead@2Smu:
 
@@ -134,4 +135,5 @@ CMindustry_Railgun_AA:
 			Heavy: 104
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building

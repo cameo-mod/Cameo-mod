@@ -168,6 +168,7 @@ AntFireball:
 			Concrete: 50
 		ValidTargets: Ground, Water
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: large_napalm
 		Delay: 5
 
@@ -255,6 +256,7 @@ AntNeedles:
 		ValidTargets: Ground, Air, Water
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
@@ -364,6 +366,7 @@ Punch:
 			Light: 75
 			Concrete: 50
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 
@@ -392,6 +395,7 @@ CannonBall:
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: smallfire
 
 Fireball:
@@ -568,6 +572,7 @@ Flamethrower2:
 		ImpactSounds:
 		Delay: 15
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 
 Flamethrower3:
@@ -613,6 +618,7 @@ MiniGun:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 
 ShockShell:
@@ -680,6 +686,7 @@ EliminatorAA:
 			Concrete: 20
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: plasma_puff
 
 Lazer:
@@ -879,6 +886,7 @@ NikoTeslaRed:
 			None: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 		
 Empty:
