@@ -2,6 +2,7 @@ light_inf:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^D2KPaletteRenderInfantry
@@ -63,6 +64,7 @@ trooper:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
@@ -108,6 +110,7 @@ fremen_creep:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@bot: ^BotMicromanageable
 	Tooltip:
 		Name: Fremen Warrior

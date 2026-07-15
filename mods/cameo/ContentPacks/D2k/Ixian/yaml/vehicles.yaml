@@ -89,6 +89,7 @@ ixian_ixsiegetank:
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
@@ -174,6 +175,7 @@ ixian_ixmissiletank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
@@ -435,6 +437,7 @@ rocket_raider.ixian:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -529,6 +532,7 @@ ixian_shockraider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
@@ -595,6 +599,7 @@ ixian_mongoose:
 	Inherits: ^Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -647,6 +652,7 @@ ixian_koda_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
@@ -914,6 +920,7 @@ ixian_stormraider:
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
@@ -988,6 +995,7 @@ heavy_rocket_raider.ixian:
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1100,6 +1108,7 @@ ixian_ixcombatsiege:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
@@ -1168,6 +1177,7 @@ ixian_neocymek:
 	Inherits: ^Vehicle
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -1262,6 +1272,7 @@ ixian_ixprojector:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@bot: ^BotAutoDeploySwitchMode50
@@ -1372,6 +1383,7 @@ apparition.ixian:
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@bot: ^BotMicromanageable
@@ -1524,6 +1536,7 @@ duelist_tank.ixian:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP

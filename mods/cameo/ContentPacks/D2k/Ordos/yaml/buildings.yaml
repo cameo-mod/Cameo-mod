@@ -459,6 +459,7 @@ ordos_starport:
 ordos_artilleryplatform:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericGroundDetector
@@ -530,6 +531,7 @@ ordos_artilleryplatform:
 ordos_autogunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericAllDetector

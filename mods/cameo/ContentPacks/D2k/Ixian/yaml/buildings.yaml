@@ -528,6 +528,7 @@ ixian_supercomputer:
 ixian_machinegunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -600,6 +601,7 @@ ixian_machinegunturret:
 ixian_gunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -666,6 +668,7 @@ ixian_gunturret:
 ixian_rocketturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -1072,6 +1075,7 @@ ixian_rocketturret:
 ixian_stormlasher:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@selection: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@EMP: ^TurretEMP
