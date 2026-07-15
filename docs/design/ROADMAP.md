@@ -96,6 +96,20 @@ factions, everything through the balance workbook._
   cause as the infantry palette bug. Fixed by adding
   `DeathSequencePalette: ra2player` to `^BaseBuilding` and to the
   `WithDeathAnimation@BIB` overrides on GDI and CABAL service depots.
+- [x] **TD building death palette fix** (`d72194748`): `^BaseBuilding`
+  template sets `DeathSequencePalette: ra2player` globally, but TD
+  buildings use `PlayerPalette: player_rgba` — mismatch causes wrong
+  colors on death. Fixed by overriding `DeathSequencePalette: player_rgba`
+  in `^TDBuilding` and `^TDDefense` templates. Also fixed 3 CABAL infantry
+  (rocketcyborg, hackercyborg, eliminator800) that had `ra2player` instead
+  of `playerra2` as their death palette (mismatch with their
+  `PlayerPalette: playerra2`).
+- [ ] **TS-only death palette audit** (Effort: M): The broken commit
+  `9579827e9` was reverted, but the original fixes in `a2b4de333` and
+  `b417c6f96` may have set wrong palette values for some TS actors. Need
+  a smarter audit script that only checks TS content packs and reports
+  mismatches between `DeathSequencePalette` and `PlayerPalette`. Do NOT
+  touch TD, D2k, RA1, RA2, TKM files.
 
 ---
 
