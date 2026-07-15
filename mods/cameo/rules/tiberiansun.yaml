@@ -1273,7 +1273,7 @@ cabal_manticore_backup:
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1200
+		CooldownDuration: 40
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1314,7 +1314,7 @@ cabal_artilleryspider_backup:
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1600
+		CooldownDuration: 20
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1358,7 +1358,7 @@ cabal_tarantula_backup:
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1500
+		CooldownDuration: 100
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1399,7 +1399,7 @@ cabal_legion_backup:
 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1500
+		CooldownDuration: 60
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1440,7 +1440,7 @@ cabal_avatar_backup:
 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1200
+		CooldownDuration: 500
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth

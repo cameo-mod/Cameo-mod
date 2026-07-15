@@ -661,7 +661,7 @@ cabal_berserker:
 		VolumeMultiplier: 2
 	RenderSprites:
 		Image: cabal_berserker
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 
 cabal_beholder:
 	Inherits: ^Tank
@@ -847,9 +847,9 @@ cabal_heavyreaper:
 		DamageCooldown: 1
 	RenderSprites:
 		Image: cabal_cyborgreaper
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithDeathAnimation:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
@@ -940,7 +940,7 @@ cabal_widow:
 		Voice: Attack
 	RenderSprites:
 		Image: cabal_manticore
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 
 cabal_legion:
 	Inherits: ^Vehicle
@@ -982,7 +982,7 @@ cabal_legion:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		Image: tstnkspid
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:
