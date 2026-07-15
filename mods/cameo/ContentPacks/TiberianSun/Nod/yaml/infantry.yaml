@@ -142,7 +142,7 @@ ts_nod_elitecadre:
 	RenderSprites:
 		PlayerPalette: ra2player
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -417,7 +417,7 @@ ts_nod_chameleonspy:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	Cloak:
 		UncloakOn: Attack, Damage, Infiltrate

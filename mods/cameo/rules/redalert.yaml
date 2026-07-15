@@ -1894,7 +1894,7 @@ ra1_allies_alliedsniper:
 		Image: e1sniper
 		PlayerPalette: playerra
 	WithDeathAnimation:
-		DeathSequencePalette: playerra
+		DeathSequencePalette: raplayer
 	-MustBeDestroyed:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
@@ -9049,7 +9049,7 @@ RA1JSYRD:
 		Image: ra1jsyrd
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
-		DeathSequencePalette: player_rgba
+		DeathSequencePalette: raplayer
 
 RASPEN:
 	Inherits: ^BaseBuilding

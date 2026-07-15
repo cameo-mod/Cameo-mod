@@ -308,7 +308,7 @@ Player:
 			ExplosionDeath: 2
 			RippedApartDeath: 2
 	WithDeathAnimation@effect:
-		DeathSequencePalette: ra2infantry
+		DeathSequencePalette: ra2effect
 		DeathPaletteIsPlayerPalette: False
 		DeathTypes:
 			RadiationDeath: 4
@@ -3297,7 +3297,7 @@ ra2_allies_attackdog:
 	Crushable:
 		CrushSound: igensqua.wav
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: ra2infantry
 		DeathTypes:
 			DefaultDeath: 1
 			BruteMutate: 1
@@ -4060,7 +4060,7 @@ ra2_soviets_attackdog:
 	Crushable:
 		CrushSound: igensqua.wav
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: ra2infantry
 		DeathTypes:
 			DefaultDeath: 1
 			BruteMutate: 1
