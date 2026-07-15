@@ -65,6 +65,9 @@ ts_gdi_constructionyard:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@fact.tsgdi:
 		Prerequisite: fact.tsgdi
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
@@ -126,6 +129,9 @@ ts_gdi_tiberiumrefinery:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: ts_gdi_tiberiumrefinery
 		PlayerPalette: playerra2
@@ -192,6 +198,9 @@ ts_gdi_powerplant:
 		Requirements:
 			ts_gdi_powerplant: !build-incomplete && !powerupgrade
 	ProvidesPrerequisite@buildingname:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -259,6 +268,9 @@ ts_gdi_barracks:
 	WithIdleOverlay@FLAG:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-flag
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -318,6 +330,9 @@ ts_gdi_warfactory:
 	WithIdleOverlay@BIB:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: ts_gdi_warfactory
 		PlayerPalette: playerra2
@@ -384,6 +399,9 @@ ts_gdi_servicedepot:
 		UseDeathTypeSuffix: false
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -430,6 +448,9 @@ ts_gdi_helipad:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -495,6 +516,9 @@ ts_gdi_radar:
 	# 	CameraActor: camera.small
 	# 	CameraRemoveDelay: 60
 	# SupportPowerChargeBar:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 	Production@Upgrades:
@@ -534,5 +558,8 @@ ts_gdi_techcenter:
 		Sequence: idle-lights
 	ProvidesPrerequisite:
 		Prerequisite: tstek
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
