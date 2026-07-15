@@ -5,7 +5,7 @@ cabal_promotion_devout:
 	Buildable:
 		BuildPaletteOrder: 1
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_devout, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_devout, rank1
 		Description: actor_cabal_promotion_devout.description
 	RenderSprites:
 		Image: cabal_devout
@@ -18,7 +18,7 @@ cabal_promotion_ascended:
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_ascended, cabal_promotion_devout, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_ascended, cabal_promotion_devout, rank1
 		Description: actor_cabal_promotion_ascended.description
 	RenderSprites:
 		Image: cabal_ascended
@@ -31,7 +31,7 @@ cabal_promotion_beholder:
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_beholder, cabal_promotion_ascended, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_beholder, cabal_promotion_ascended, rank1
 		Description: actor_cabal_promotion_beholder.description
 	RenderSprites:
 		Image: cabal_beholder
@@ -44,7 +44,7 @@ cabal_promotion_cyborgcommandov2:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_cyborgcommandov2, cabal_promotion_beholder, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_cyborgcommandov2, cabal_promotion_beholder, rank1
 		Description: actor_cabal_promotion_cyborgcommandov2.description
 	RenderSprites:
 		Image: cabal_cyborgcommandov2
@@ -57,7 +57,7 @@ cabal_promotion_spidercnc4:
 	Buildable:
 		BuildPaletteOrder: 2
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_spidercnc4, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_spidercnc4, rank1
 		Description: actor_cabal_promotion_spidercnc4.description
 	RenderSprites:
 		Image: cabal_laserspider
@@ -70,7 +70,7 @@ cabal_promotion_manticore:
 	Buildable:
 		BuildPaletteOrder: 5
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_manticore, cabal_promotion_spidercnc4, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_manticore, cabal_promotion_spidercnc4, rank1
 		Description: actor_cabal_promotion_heavyreaper.description
 	RenderSprites:
 		Image: cabal_cyborgreaper
@@ -83,7 +83,7 @@ cabal_promotion_widow:
 	Buildable:
 		BuildPaletteOrder: 8
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_widow, cabal_promotion_manticore, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_widow, cabal_promotion_manticore, rank1
 		Description: actor_cabal_promotion_widow.description
 	RenderSprites:
 		Image: cabal_manticore
@@ -96,7 +96,7 @@ cabal_promotion_coredefender:
 	Buildable:
 		BuildPaletteOrder: 11
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_coredefender, cabal_promotion_widow, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_coredefender, cabal_promotion_widow, rank1
 		Description: actor_cabal_promotion_coredefender.description
 	RenderSprites:
 		Image: cabal_coredefender
@@ -109,7 +109,7 @@ cabal_promotion_cyborgassassin:
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_cyborgassassin, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_cyborgassassin, rank1
 		Description: actor_cabal_promotion_cyborgassassin.description
 	RenderSprites:
 		Image: cabal_cyborg_assassin
@@ -122,7 +122,7 @@ cabal_promotion_hunterkillermk1elite:
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_hunterkillermk1elite, cabal_promotion_cyborgassassin, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_hunterkillermk1elite, cabal_promotion_cyborgassassin, rank1
 		Description: actor_cabal_promotion_hunterkillermk1elite.description
 	RenderSprites:
 		Image: cabal_hunterkillermk1
@@ -135,7 +135,7 @@ cabal_promotion_overkillgunship:
 	Buildable:
 		BuildPaletteOrder: 9
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_overkillgunship, cabal_promotion_hunterkillermk1elite, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_overkillgunship, cabal_promotion_hunterkillermk1elite, rank1
 		Description: actor_cabal_promotion_overkillgunship.description
 	RenderSprites:
 		Image: cabal_overkill_gunship
@@ -148,7 +148,7 @@ cabal_promotion_mothership:
 	Buildable:
 		BuildPaletteOrder: 12
 		Queue: Promotions
-		Prerequisites: !cabal_promotion_mothership, cabal_promotion_overkillgunship, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_mothership, cabal_promotion_overkillgunship, rank1
 		Description: actor_cabal_promotion_mothership.description
 	RenderSprites:
 		Image: cabal_mothership
