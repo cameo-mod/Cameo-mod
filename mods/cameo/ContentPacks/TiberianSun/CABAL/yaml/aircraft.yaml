@@ -159,7 +159,7 @@ cabal_hunter_drone_carrier:
 		Step: 120
 	CarrierMaster:
 		ArmamentNames: primary
-		Actors: cabal_hunter_drone, cabal_hunter_drone, cabal_hunter_drone
+		Actors: cabal_orb_drone, cabal_orb_drone, cabal_orb_drone
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
@@ -302,6 +302,9 @@ cabal_orb_drone:
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
+	CarrierSlave:
+		LandingDistance: 6400
+	HasParent:
 	Voiced:
 		VoiceSet: TSCobra
 	WithInfantryBody:

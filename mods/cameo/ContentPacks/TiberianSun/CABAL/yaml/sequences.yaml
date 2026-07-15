@@ -1936,6 +1936,8 @@ cabal_obeliskofdarkness:
 # 		Offset: 0, -10, 10
 
 cabal_dissolver:
+	Defaults:
+		Scale: 2
 	stand:
 		Filename: cabal_dissolver.shp
 		Facings: -8
@@ -1974,6 +1976,7 @@ cabal_dissolver:
 		Facings: -32
 	icon:
 		Filename: cabal_dissolver_icon.shp
+		Scale: 1
 
 cabal_berserker:
 	Defaults:

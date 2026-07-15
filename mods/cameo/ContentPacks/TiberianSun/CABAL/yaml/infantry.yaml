@@ -923,7 +923,9 @@ cabal_dissolver:
 		Condition: attack
 	WithSpriteTurret:
 	RenderSprites:
-		PlayerPalette: playerra2
+		PlayerPalette: player_rgba
+	Buildable:
+		IconPalette: player_rgba
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	Voiced:
