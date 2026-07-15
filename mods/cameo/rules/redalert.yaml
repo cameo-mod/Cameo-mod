@@ -9412,7 +9412,7 @@ ra1_allies_pillbox:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 1
 		InitialUnits: ra1_allies_machinegunner
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -11030,7 +11030,7 @@ ra1_allies_camopillbox:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 2
 		InitialUnits: ra1_allies_machinegunner, rae3
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -11197,7 +11197,7 @@ ra1_allies_bastionartillerybunker:
 		Turrets: primary, cannon
 		Armaments: primary, cannon
 		RequiresCondition: !build-incomplete
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,256, 448,-682,256, -448,-682,256, -768,0,256, -448,682,256, 448,682,256
 		PortYaws: 0, 176, 341, 512, 682, 853

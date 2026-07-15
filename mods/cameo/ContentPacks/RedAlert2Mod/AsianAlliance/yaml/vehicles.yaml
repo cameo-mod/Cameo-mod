@@ -151,7 +151,7 @@ asian_alliance_dragonfly:
 		InitialUnits: asian_alliance_asianmilitia, asian_alliance_asianmilitia, asian_alliance_asiantankkiller, asian_alliance_asiantankkiller
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 224,-341,128, 224,341,128, -224,-341,128, -224,341,128
@@ -940,7 +940,7 @@ asian_alliance_warturtle:
 		InitialUnits: asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_plasmatrooper,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_veteranarcher,asian_alliance_asdf
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128, 0,0,128

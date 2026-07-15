@@ -2356,7 +2356,7 @@ glpalace:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
 		EjectOnDeath: false
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
 		PauseOnCondition: chronobeamed
@@ -3460,7 +3460,7 @@ glbiker:
 		PassengerConditions:
 			glterror: bomb
 			ra2terror: bomb
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		Armaments: primary
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PortYaws: 0, 176, 341, 512, 682, 853
@@ -3707,7 +3707,7 @@ glbbus:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		EjectOnDeath: false #desync
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
@@ -6088,7 +6088,7 @@ chbunker:
 		MaxWeight: 5
 		InitialUnits: che1
 	WithSpriteBody:
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PortYaws: 0, 176, 341, 512, 682, 853
@@ -8030,7 +8030,7 @@ choutpost:
 		MaxWeight: 2
 		EjectOnDeath: false #desync
 		InitialUnits: che3, che3
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		Armaments: primary
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PortYaws: 0, 176, 341, 512, 682, 853
@@ -8250,7 +8250,7 @@ chcrawl2:
 		InitialUnits: che2, che2, che2, che2, che2, che2
 	Explodes@healer:
 		Weapon: FakeHealtAPC
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		Voice: Attack
@@ -11510,7 +11510,7 @@ usahook:
 		Speed: 120
 		Locomotor: fakeaircraft
 		PauseOnCondition: disabled
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		PortOffsets: 256,128,1000, 256,-128,1000, -256,128,1000, -256,-128,1000
 		PortYaws: 0, 0, 512, 512
 		PortCones: 512, 512, 512, 512

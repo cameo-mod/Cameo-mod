@@ -862,7 +862,7 @@ forgotten_thumperbus:
 		InitialUnits: forgotten_mutantsoldier,forgotten_mutantsoldier,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_runnershotgal,forgotten_runnershotgal,forgotten_runnershotgal,forgotten_mutantsoldier,forgotten_runnershotgal,forgotten_mutantsoldier
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
@@ -936,7 +936,7 @@ forgotten_nomadbarracks:
 		InitialUnits: forgotten_mutant,forgotten_rocketinfantry,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_runnershotgal,forgotten_chemsprayinfantry,forgotten_tiberianfiend,forgotten_viniferafiend,forgotten_mutantsniper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
 		PortOffsets: 384,-224,128, -384,-224,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128, 384,224,128, -384,224,128, 0,0,128

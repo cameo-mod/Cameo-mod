@@ -335,7 +335,7 @@ WOLFPBOX:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 1
 		InitialUnits: wolfe1
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128

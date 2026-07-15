@@ -181,7 +181,7 @@ Player:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
 		EjectOnDeath: false
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 768,0,612, 448,-682,612, -448,-682,612, -768,0,612, -448,682,612, 448,682,612
 		PauseOnCondition: chronobeamed
@@ -3753,7 +3753,7 @@ swpalace:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		EjectOnDeath: false
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 768,0,1024, 448,-682,1024, -448,-682,1024, -768,0,1024, -448,682,1024, 448,682,1024
 		PauseOnCondition: chronobeamed
@@ -8619,7 +8619,7 @@ swjabbaparty:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		EjectOnDeath: false #desync
-	AttackGarrisonedSP:
+	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 		PauseOnCondition: chronobeamed

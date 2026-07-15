@@ -2042,7 +2042,7 @@ SC2KPOLICECAR:
 	WithFacingSpriteBody@lightbaron:
 		Sequence: lightbar-on
 		RequiresCondition: attacking
-	AttackGarrisonedSP:
+	AttackGarrisoned:
 		Armaments: garrisoned
 		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
 		PortYaws: 0, 176, 341, 512, 682, 853
