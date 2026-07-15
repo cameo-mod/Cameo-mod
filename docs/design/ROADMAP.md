@@ -478,11 +478,12 @@ factions, everything through the balance workbook._
   currently all RA2Mod factions share `ra2rank` via
   `^GainsExperienceRA2`. Eventually each could have a unique rank image
   for faction identity (low priority — shared `ra2rank` is functional).
-- [ ] **Write `audit_rank_decoration.py`** — verify every
+- [x] **Write `audit_rank_decoration.py`** (`10220c0ee`) — verifies every
   `^GainsExperienceTD` actor has the correct `^*RankDecoration` for its
-  faction. Verify `^GainsExperienceRA2` actors do NOT have a separate
-  `^*RankDecoration`. Check that rank image sequences exist in
-  `misc.yaml`.
+  faction, verifies `^GainsExperienceRA2` actors do NOT have a separate
+  decoration, and checks that rank image sequences exist in `misc.yaml`.
+  Current state: 135 issues (mostly SC/WC2/RA2Mod factions that share
+  `ra2rank` or lack faction-specific decorations — low priority).
 - [ ] **E1: Add missing elite weapons** — 217 RA2-styled actors are
   missing `Armament@ELITE` blocks. Each needs a base weapon `E`-suffixed
   variant with `RequiresCondition: rank-elite`. This is a large batch
@@ -494,10 +495,16 @@ factions, everything through the balance workbook._
   `asian_alliance_plasmatrooper` GARRISONEDELITE and
   `asian_alliance_heavyrailguntank` ELITE. Added audit tool
   `tools/audit/audit_elite_gating.py`.
-- [ ] **E3: Normalize elite weapon naming** — 17 elite weapons use
-  non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`,
-  `SteelMegaSwordEMP`). Rename to `<baseWeapon>E` convention. Also
-  normalize 31 `_elite`-suffixed weapons to `E` suffix when touched.
+- [x] **E3: Normalize elite weapon naming** (`ab870ddb3`) — Renamed 10
+  non-standard elite weapons to `<base>E` convention (38 references across
+  12 files): `NaxPlanegun`→`NaxPlanegunE`, `NaxPlaneRockets`→`NaxPlaneRocketsE`,
+  `NaxiWW2MachinegunnerElite`→`NaxiWW2MachinegunnerE`, `NaxiBeetleLaser`→`NaxiBeetleLaserE`,
+  `NaxiBeetleLaserAA`→`NaxiBeetleLaserAAE`, `NaxCorrosionRocketTrooper`→`NaxCorrosionRocketTrooperE`,
+  `TSBikeMissileNashwaElite`→`TSBikeMissileNashwaE`, `V3LaunchElite`→`V3LaunchE`,
+  `RA2KirovBomb_nuclear_Elite`→`RA2KirovBomb_nuclear_E`, `CuteKirovBombElite`→`CuteKirovBombE`.
+  Remaining 44 are doctrine variants (`_rad`/`_fire`/`_tesla`), upgrade combos,
+  or gatling spin-ups — intentionally non-standard. Audit tool:
+  `tools/audit/audit_elite_naming.py`.
 - [x] **E4: Verify base weapon gating** (`ac3ba04b7`) — Fixed the 2 actors
   from E2: added `RequiresCondition: !rank-elite` to
   `asian_alliance_heavyrailguntank` PRIMARY and
