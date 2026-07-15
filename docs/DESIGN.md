@@ -1169,3 +1169,59 @@ must be renamed to follow the `E` suffix convention.
 4. **E4 — Base weapon must not fire at elite**: the primary armament
    must have `RequiresCondition: !rank-elite` (or equivalent) so the
    elite weapon replaces it, not stacks with it.
+
+## §17 — Dune 2000 to OpenRA Sprite Conversion
+
+When converting individual Dune 2000 BMP frames to OpenRA PNG spritesheets,
+use the `tools/d2k_to_openra.py` script. This is the standard pipeline for
+all D2K asset conversions (e.g. Koda Tank).
+
+### Conversion Steps
+
+1. **Source frames**: Individual BMP files extracted from Dune 2000 `.R16`
+   archives, numbered `Prefix_0.bmp` through `Prefix_N.bmp` (e.g.
+   `KodaBody_0.bmp` ... `KodaBody_31.bmp`).
+
+2. **Run the script**:
+   ```
+   python tools/d2k_to_openra.py <input_dir> <output.png> [--prefix Prefix] [--hue HUE] [--no-hue-shift]
+   ```
+   - `--prefix`: filter frames by filename prefix (e.g. `KodaBody`)
+   - `--hue`: target hue for player-color remap (default 300 = magenta)
+   - `--no-hue-shift`: skip hue shifting (for chassis frames with no player color)
+   - `--remap-hue-min` / `--remap-hue-max`: customize the source hue range
+     (default 140–190°, covering the D2K green ramp)
+
+3. **What the script does**:
+   - Combines all BMP frames into a single horizontal PNG strip
+   - Normalizes frame sizes to the largest frame (smaller frames centered)
+   - Converts pink background (RGB 255,0,255) to transparent alpha
+   - Hue-shifts the green player-color ramp (~163°) to the target hue
+   - Embeds PNG metadata (`FrameAmount`, `FrameSize`) so OpenRA can split
+     the strip into individual frames at load time
+
+4. **Output placement**: PNG spritesheets go in `mods/cameo/bits/d2k/`
+   (not in ContentPack `files/` directories — the engine's file system
+   resolves sequence assets from the global `bits/` folder).
+
+5. **Sequence wiring**: Use `Facings: -32` (for 32-frame D2K sprites) with
+   `Filename: <name>.png` and `Start: 0`. No `Remap` or `Scale` fields
+   needed — the PNG already has transparency and player color baked in.
+   Muzzle flashes can still reference `DATA.R16` with `Remap: 54F94B`.
+
+### PNG Metadata Format
+
+OpenRA recognizes PNG spritesheets by two text chunks:
+- `FrameAmount`: number of frames in the strip (e.g. `32`)
+- `FrameSize`: frame dimensions in pixels as `W,H` (e.g. `39,30`)
+
+The strip width must equal `FrameAmount * FrameSize_W`.
+The strip height must equal `FrameSize_H`.
+
+### Hue Shifting Rules
+
+- **Chassis/body frames**: Use `--no-hue-shift` (no player color in body)
+- **Turret frames**: Use `--hue 300` (shift green ramp to magenta for Ixian)
+- Other factions may use different target hues (e.g. Atreides blue, Harkonnen red)
+- The script preserves saturation and value; only hue changes
+- Pixels outside the remap hue range are left untouched

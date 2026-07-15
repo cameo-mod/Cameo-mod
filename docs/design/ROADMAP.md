@@ -454,3 +454,18 @@ factions, everything through the balance workbook._
   RA2-styled actors with elite weapons must have
   `RequiresCondition: !rank-elite` so the elite weapon replaces, not
   stacks with, the base.
+
+## D2K Sprite Conversion Pipeline
+
+- [x] **D2K-CONV: Conversion script** — `tools/d2k_to_openra.py` written
+  and documented in DESIGN.md §17. Combines BMP frames → PNG spritesheet,
+  pink→transparent, hue-shift green player color to target hue, embeds
+  FrameAmount/FrameSize PNG metadata for OpenRA.
+- [x] **D2K-KODA: Koda Tank** — replaced `combat_tank.ixian` with
+  `ixian_koda_tank` using new PNG spritesheets (chassis + turret).
+  Updated all references in Ixian/Ordos faction.yaml, upgrades.yaml,
+  ai.yaml. Muzzle flash still uses DATA.R16. Pending in-game visual
+  confirmation.
+- [ ] **D2K-CONV-FUTURE: Convert more D2K units** — other D2K units that
+  could benefit from custom PNG sprites instead of DATA.R16 remapping.
+  Use the same script with appropriate `--hue` per faction.
