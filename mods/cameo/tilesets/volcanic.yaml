@@ -14,49 +14,49 @@ Terrain:
 	TerrainType@BlueTiberium:
 		Type: BlueTiberium
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 54FCFC
 	TerrainType@Clear:
 		Type: Clear
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 393236
 		RestrictPlayerColor: true
 	TerrainType@ClearTemperat:
 		Type: ClearTemperat
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 284428
 		RestrictPlayerColor: true
 	TerrainType@RA2Copper:
 		Type: RA2Copper
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 804020
 	TerrainType@RA2Silver:
 		Type: RA2Silver
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: C0C0C0
 	TerrainType@RA2Ore:
 		Type: RA2Ore
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 808000
 	TerrainType@RA2Gems:
 		Type: RA2Gems
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 8040C0
 	TerrainType@Gems:
 		Type: Gems
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 8470FF
 	TerrainType@Ore:
 		Type: Ore
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 948060
 	TerrainType@River:
 		Type: River
@@ -65,7 +65,7 @@ Terrain:
 	TerrainType@Road:
 		Type: Road
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 4A3A34
 	TerrainType@Rock:
 		Type: Rock
@@ -74,12 +74,12 @@ Terrain:
 	TerrainType@Rough:
 		Type: Rough
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 4B3837
 	TerrainType@Tiberium:
 		Type: Tiberium
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: A1E21C
 	TerrainType@Tree:
 		Type: Tree
@@ -88,7 +88,7 @@ Terrain:
 	TerrainType@ixian_concretewall:
 		Type: ixian_concretewall
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 7D6D60
 	TerrainType@Water:
 		Type: Water
@@ -97,7 +97,7 @@ Terrain:
 	TerrainType@Bridge:
 		Type: Bridge
 		TargetTypes: Ground, Bridge
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 606060
 	TerrainType@Ford:
 		Type: Ford
@@ -110,22 +110,22 @@ Terrain:
 	TerrainType@RedTiberium:
 		Type: RedTiberium
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: FF4343
 	TerrainType@GoldTiberium:
 		Type: GoldTiberium
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: FFE810
 	TerrainType@SCMinerals:
 		Type: SCMinerals
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 6495ED
 	TerrainType@Veins:
 		Type: Veins
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: FF8300
 	TerrainType@Subterranean:
 		Type: Subterranean
@@ -136,7 +136,7 @@ Terrain:
 	TerrainType@ZergSoil:
 		Type: ZergSoil
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 685062
 	TerrainType@Spice:
 		Type: Spice
@@ -145,7 +145,7 @@ Terrain:
 	TerrainType@Concrete:
 		Type: Concrete
 		TargetTypes: Ground
-		AcceptsSmudgeType: Crater, Scorch
+		AcceptsSmudgeType: RockCrater
 		Color: 514849
 
 Templates:

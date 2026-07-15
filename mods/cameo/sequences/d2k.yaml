@@ -2584,15 +2584,16 @@ d2k_shroud:
 
 rockcraters:
 	Defaults:
-	rockcrater1:
 		Filename: DATA.R16
+		TilesetFilenames:
+			VOLCANIC: volcanic_rockcraters.png
+	rockcrater1:
 		Scale: 1.5
 		Remap: 54F94B
 		Start: 114
 		Length: 16
 		Offset: -16,-16
 	rockcrater2:
-		Filename: DATA.R16
 		Scale: 1.5
 		Remap: 54F94B
 		Start: 130
