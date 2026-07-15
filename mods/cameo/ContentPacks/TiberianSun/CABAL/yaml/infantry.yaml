@@ -67,7 +67,11 @@ cabal_engineer:
 	Captures:
 		CaptureTypes: building, tech
 		PlayerExperience: 500
+		CaptureDelay: 375
 		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
 
 cabal_cyborginfantry:
 	Inherits: ^Soldier

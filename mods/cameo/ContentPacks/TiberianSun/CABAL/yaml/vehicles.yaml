@@ -144,8 +144,10 @@ cabal_cyborgreaper:
 		LocalOffset: 128,-200,350, 128,200,350
 	Armament@SECONDARY:
 		Weapon: CabalReaperMissilesAA
-	Armament@TRAP:
-		Weapon: CabalReaperTrap
+	Armament@TRAPGROUND:
+		Weapon: CabalReaperTrapGround
+	Armament@TRAPAIR:
+		Weapon: CabalReaperTrapAir
 	Voiced:
 		VoiceSet: TSReaper
 	Tooltip:
@@ -1109,8 +1111,8 @@ cabal_ravager:
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_ravager.description
 	Mobile:
-		TurnSpeed: 16
-		Speed: 40
+		TurnSpeed: 52
+		Speed: 130
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:
