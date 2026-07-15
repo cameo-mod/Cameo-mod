@@ -140,12 +140,12 @@ td_gdi_commando:
 	Buildable:
 		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockhavocandexosuit
 	Armament:
-		Weapon: ra1_allies_alliedsniper
+		Weapon: td_gdi_commando_sniper
 		LocalOffset: 128,0,256
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_allies_alliedsniper
+		Weapon: td_gdi_commando_sniper
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade: ##########
 		Weapon: SniperAP
