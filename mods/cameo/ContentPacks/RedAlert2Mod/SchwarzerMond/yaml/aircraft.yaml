@@ -1,10 +1,14 @@
 schwarzer_mond_spacezeppelin:
 	Inherits: ^Helicopter
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
 	Valued:
 		Cost: 6000
 	Tooltip:
@@ -34,28 +38,84 @@ schwarzer_mond_spacezeppelin:
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@elite:
 		Name: primary
 		Weapon: NaxiBeetleLaser
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@eliteAA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@eliteUP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@AA_UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@eliteAA_UP:
+		Name: primary
+		Weapon: Lunar_YellowBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+	Armament@eliteAMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+	Armament@AA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+	Armament@eliteAA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
 	WithMuzzleOverlay:
 	Cargo:
 		InitialUnits: schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarrocket, schwarzer_mond_lunarrocket, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer
@@ -106,9 +166,11 @@ zep_husk.nax2:
 	WithShadow:
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_blackbomb:
 	Inherits: ^RANeutralPlane
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -210,9 +272,11 @@ bbomb3_husk.nax2:
 ####################################################################################################
 #		Red Alert 2 Future Structures
 ####################################################################################################
-
 schwarzer_mond_haunebuii:
 	Inherits: ^Helicopter
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -295,9 +359,11 @@ haunebu_husk.nax2:
 	RenderSprites:
 		Image: schwarzer_mond_haunebuii
 		PlayerPalette: playerra2
-
 schwarzer_mond_haunebuiii:
 	Inherits: ^Helicopter
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -385,9 +451,11 @@ haunebu2_husk.nax2:
 	RenderSprites:
 		Image: schwarzer_mond_haunebuiii
 		PlayerPalette: playerra2
-
 schwarzer_mond_corruptorpiercer:
 	Inherits: ^RANeutralPlane
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -469,9 +537,11 @@ piercer_husk.nax2:
 		Image: schwarzer_mond_corruptorpiercer
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_dieglocke:
 	Inherits: ^Helicopter
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

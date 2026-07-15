@@ -223,3 +223,41 @@ ra_upgrade_shtoradefensesystem:
 	effect: Hammer Tanks gain periodic blinding countermeasure laser
 	coverage: narrow
 	phase: late
+
+######################## Schwarzer Mond — Radar tier ##################
+schwarzer_mond_upgrade_crystallens:
+	faction: lnaxis
+	effect: multi-shot yellow laser weapons gain +1 burst
+	coverage: listed
+	phase: mid
+schwarzer_mond_upgrade_lunaralloys:
+	faction: lnaxis
+	effect: all units take 10% less damage
+	coverage: roster_wide
+	phase: mid
+schwarzer_mond_upgrade_helium3:
+	faction: lnaxis
+	effect: hydrogen plants produce 50% more power
+	coverage: narrow
+	phase: mid
+######################## Schwarzer Mond — Tech tier ###################
+schwarzer_mond_upgrade_amplifiedlens:
+	faction: lnaxis
+	effect: multi-shot yellow laser weapons gain another +1 burst
+	coverage: listed
+	phase: late
+schwarzer_mond_upgrade_vrilpoweredweapons:
+	faction: lnaxis
+	effect: cannon vehicles deal +25% firepower and Tesla-type damage
+	coverage: listed
+	phase: late
+schwarzer_mond_upgrade_moonpropaganda:
+	faction: lnaxis
+	effect: all infantry deal +10% firepower
+	coverage: infantry
+	phase: late
+schwarzer_mond_upgrade_cryptofascism:
+	faction: lnaxis
+	effect: every living unit generates 1 credit per second
+	coverage: roster_wide
+	phase: late

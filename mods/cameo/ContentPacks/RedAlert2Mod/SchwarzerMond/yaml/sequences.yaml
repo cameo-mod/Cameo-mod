@@ -498,7 +498,7 @@ schwarzer_mond_gravitycoretank:
 	idle:
 		Facings: 64
 	icon:
-		Filename: naxis_jagdpanzer_icon.png
+		Filename: schwarzer_mond_gravitycoretank_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -643,7 +643,7 @@ schwarzer_mond_mars:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_icon.png
+		Filename: schwarzer_mond_mars_icon.png
 
 schwarzer_mond_m200bjagerline:
 	Inherits: ^RA2GatlingMuzzle
@@ -660,7 +660,7 @@ schwarzer_mond_m200bjagerline:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_icon.png
+		Filename: schwarzer_mond_m200bjagerline_icon.png
 
 schwarzer_mond_noidmgarmor:
 	Defaults:
@@ -923,15 +923,35 @@ schwarzer_mond_blackbomb:
 		Filename: schwarzer_mond_blackbomb_nax2_bbomb.shp
 		Facings: 64
 	icon:
-		Filename: schwarzer_mond_corruptorpiercer_icon.png
+		Filename: schwarzer_mond_blackbomb_icon.png
 
 schwarzer_mond_upgrade_crystallens:
 	icon:
 		Filename: schwarzer_mond_upgrade_crystallens_icon.png
 
-schwarzer_mond_upgrade_greenplasmashells:
+schwarzer_mond_upgrade_amplifiedlens:
 	icon:
-		Filename: schwarzer_mond_upgrade_greenplasmashells_icon.png
+		Filename: schwarzer_mond_upgrade_amplifiedlens_icon.png
+
+schwarzer_mond_upgrade_vrilpoweredweapons:
+	icon:
+		Filename: schwarzer_mond_upgrade_vrilpoweredweapons_icon.png
+
+schwarzer_mond_upgrade_lunaralloys:
+	icon:
+		Filename: schwarzer_mond_upgrade_lunaralloys_icon.png
+
+schwarzer_mond_upgrade_moonpropaganda:
+	icon:
+		Filename: schwarzer_mond_upgrade_moonpropaganda_icon.png
+
+schwarzer_mond_upgrade_helium3:
+	icon:
+		Filename: schwarzer_mond_upgrade_helium3_icon.png
+
+schwarzer_mond_upgrade_cryptofascism:
+	icon:
+		Filename: schwarzer_mond_upgrade_cryptofascism_icon.png
 
 ##############################################
 #   Red Alert 2 Future Tech

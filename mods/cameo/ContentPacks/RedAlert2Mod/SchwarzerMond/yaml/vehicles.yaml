@@ -1,5 +1,7 @@
 schwarzer_mond_naxismobileconstructionvehicle:
 	Inherits: ^Vehicle
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@mcv: ^MCV
@@ -20,9 +22,11 @@ schwarzer_mond_naxismobileconstructionvehicle:
 		Prerequisite: mmlnaxis
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_dalek:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -74,9 +78,10 @@ schwarzer_mond_dalek:
 		DecorationBounds: 1280, 1536, 0, 0
 	RenderSprites:
 		PlayerPalette: player_rgba
-
 schwarzer_mond_laserbeetle:
 	Inherits: ^Tank
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
@@ -84,7 +89,8 @@ schwarzer_mond_laserbeetle:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -116,7 +122,7 @@ schwarzer_mond_laserbeetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAA
@@ -125,7 +131,7 @@ schwarzer_mond_laserbeetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser
@@ -134,7 +140,7 @@ schwarzer_mond_laserbeetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens
+		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaserAA
@@ -143,7 +149,25 @@ schwarzer_mond_laserbeetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens
+		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,1,80, 512,-1,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
+	Armament@AA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,1,80, 512,-1,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -154,16 +178,18 @@ schwarzer_mond_laserbeetle:
 		VoiceSet: NaxiLunarTankVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_lunarpanzer:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -199,7 +225,7 @@ schwarzer_mond_lunarpanzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Name: primary
 		Weapon: LunarPanzerCannonE
@@ -208,7 +234,7 @@ schwarzer_mond_lunarpanzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@upgraded:
 		Name: primary
 		Weapon: Lunar_Green105mm
@@ -217,7 +243,7 @@ schwarzer_mond_lunarpanzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@upgraded-elite:
 		Name: primary
 		Weapon: Lunar_Green105mm_elite
@@ -226,7 +252,7 @@ schwarzer_mond_lunarpanzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -238,16 +264,18 @@ schwarzer_mond_lunarpanzer:
 		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_lunartiger:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -283,7 +311,7 @@ schwarzer_mond_lunartiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Name: primary
 		Weapon: LunarTigerCannonE
@@ -292,7 +320,7 @@ schwarzer_mond_lunartiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannon
@@ -301,7 +329,7 @@ schwarzer_mond_lunartiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannonE
@@ -310,7 +338,7 @@ schwarzer_mond_lunartiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -322,16 +350,18 @@ schwarzer_mond_lunartiger:
 		Payload: 350
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_neojagdpanzer:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	Valued:
 		Cost: 4500
 	Tooltip:
@@ -362,25 +392,25 @@ schwarzer_mond_neojagdpanzer:
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Weapon: LunarNaxiJadgDestroyerE
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@AG-upgraded:
 		Weapon: Lunar_GreenJadgDestroyer
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
 		Weapon: Lunar_GreenJadgDestroyerE
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	WithMuzzleOverlay:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -393,16 +423,18 @@ schwarzer_mond_neojagdpanzer:
 		RealignDelay: 75
 	AttackTurreted:
 	WithSpriteTurret:
-
 schwarzer_mond_lunargrille:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -433,25 +465,25 @@ schwarzer_mond_lunargrille:
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite:
 		Weapon: NaxGrilleArtyE
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@upgraded:
 		Weapon: Lunar_GreenGrilleArty
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@elite-upgrade:
 		Weapon: Lunar_GreenGrilleArtyE
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: rank-elite && schwarzer_mond_upgrade_vrilpoweredweapons
 	WithMuzzleOverlay:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -464,9 +496,11 @@ schwarzer_mond_lunargrille:
 		RealignDelay: 75
 	AttackTurreted:
 	WithSpriteTurret:
-
 schwarzer_mond_korruptesbiest:
 	Inherits: ^Walker
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -523,9 +557,11 @@ schwarzer_mond_korruptesbiest:
 		VoiceSet: NaxiUFOVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzer_mond_crystaltank:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -603,9 +639,10 @@ schwarzer_mond_crystaltank:
 		RealignDelay: 75
 	AttackTurreted:
 	WithSpriteTurret:
-
 schwarzer_mond_mars:
 	Inherits: ^Vehicle
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Template: ^ArtilleryTemplate
@@ -680,9 +717,10 @@ schwarzer_mond_mars:
 		RequiresCondition: firing
 		Sequence: empty-turret
 		Name: reloading
-
 schwarzer_mond_m200bjagerline:
 	Inherits: ^Vehicle
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -762,9 +800,10 @@ schwarzer_mond_m200bjagerline:
 		RequiresCondition: firing
 		Sequence: empty-turret
 		Name: reloading
-
 schwarzer_mond_lasertank:
 	Inherits: ^Tank
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
@@ -772,7 +811,8 @@ schwarzer_mond_lasertank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -809,7 +849,7 @@ schwarzer_mond_lasertank:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiTank2LaserAA
@@ -818,7 +858,7 @@ schwarzer_mond_lasertank:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2Laser
@@ -827,7 +867,7 @@ schwarzer_mond_lasertank:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens
+		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2LaserAA
@@ -836,7 +876,25 @@ schwarzer_mond_lasertank:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens
+		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedTank2Laser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 850,150,-60, 850,-150,-60
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
+	Armament@AA_AMP:
+		Name: primary
+		Weapon: Lunar_AmplifiedTank2LaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 850,150,-60, 850,-150,-60
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -851,9 +909,11 @@ schwarzer_mond_lasertank:
 ##############################################
 #   Red Alert 2 Naxis Upgrades
 ##############################################
-
 schwarzer_mond_gravitycoretank:
 	Inherits: ^Tank
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
