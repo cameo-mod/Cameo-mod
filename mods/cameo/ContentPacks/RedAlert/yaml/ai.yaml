@@ -1,0 +1,325 @@
+# ai.yaml — RA faction AI configuration
+#
+# ARCHITECTURE NOTE
+# =================
+# All AI bot modules (BaseBuilderBotModuleCA, UnitBuilderBotModuleCA,
+# SquadManagerBotModuleCA, SupportPowerBotASModule, etc.) are defined
+# as single trait instances on the Player: actor in the global
+# mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
+# BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
+# data in single dictionaries that CANNOT be split across files —
+# OpenRA's YAML merge replaces trait instances with the same @name,
+# it does not deep-merge their sub-sections.
+#
+# This file is loaded as a Rules: entry but contains no traits —
+# it is a placeholder ready for future per-faction bot module
+# splitting (see ROADMAP Phase E backlog).
+#
+# REFERENCE DATA (from global ai.yaml)
+# ====================================
+#
+# --- BuildingLimits (8 entries for ra1_allies) ---
+# 			ra1_allies_alliedorerefinery: 10
+# 			ra1_allies_alliedbarracks: 10
+# 			ra1_allies_alliedwarfactory: 10
+# 			ra1_allies_alliedhelipad: 10
+# 			ra1_allies_alliedradardome: 1
+# 			ra1_allies_alliedtechcenter: 2
+# 			ra1_allies_alliedservicedepot: 1
+# 			ra1_allies_chronosphere: 1
+#
+# --- BuildingFractions (15 entries for ra1_allies) ---
+# 			ra1_allies_alliedconstructionyard: 5
+# 			ra1_allies_alliedorerefinery: 15
+# 			ra1_allies_alliedbarracks: 15
+# 			ra1_allies_alliedwarfactory: 15
+# 			ra1_allies_alliedhelipad: 15
+# 			ra1_allies_alliedradardome: 1
+# 			ra1_allies_alliedtechcenter: 5
+# 			ra1_allies_alliedservicedepot: 1
+# 			ra1_allies_chronosphere: 1
+# 			ra1_allies_pillbox: 10
+# 			ra1_allies_camopillbox: 10
+# 			ra1_allies_alliedgunturret: 10
+# 			ra1_allies_alliedaagun: 10
+# 			ra1_allies_bastionartillerybunker: 10
+# 			ra1_allies_gapgenerator: 1
+#
+# --- UnitsToBuild (45 entries for ra1_allies) ---
+# 			ra1_allies_alliedoretruck: 10
+# 			ra1_allies_tanya: 1
+# 			ra1_allies_raspy: 1
+# 			ra1_allies_medic: 1
+# 			ra1_allies_mechanic: 1
+# 			ra1_allies_alliedsniper: 1
+# 			ra1_allies_ranger: 1
+# 			ra1_allies_alliedlighttank: 5
+# 			ra1_allies_alliedmediumtank: 5
+# 			ra1_allies_minelayer: 1
+# 			ra1_allies_alliedheavyaatank: 5
+# 			ra1_allies_alliedartillery: 3
+# 			ra1_allies_longbow: 5
+# 			ra1_allies_blackhawk: 5
+# 			ra1_allies_alliedchinooktransport: 1
+# 			ra1_allies_upgrade_advancedradarsystems: 1
+# 			ra1_allies_upgrade_infantryarmorplating: 1
+# 			ra1_allies_upgrade_reinforcedstructures: 1
+# 			ra1_allies_upgrade_cryomissiles: 1
+# 			ra1_allies_upgrade_lasertargetingsystems: 1
+# 			ra1_allies_upgrade_airsuperioritydoctrine: 1
+# 			ra1_allies_upgrade_chronoarmor: 1
+# 			ra1_allies_upgrade_gpssatellitesupport: 1
+# 			ra1_allies_promotion_unlockmachinegunner: 1
+# 			ra1_allies_promotion_unlocksheridan: 1
+# 			ra1_allies_promotion_unlockrapierjumpjet: 1
+# 			ra1_allies_promotion_unlockreinforcementpad: 1
+# 			ra1_allies_promotion_unlockreconranger: 1
+# 			ra1_allies_promotion_unlocktigerheavytank: 1
+# 			ra1_allies_promotion_unlocktankdestroyer: 1
+# 			ra1_allies_promotion_unlockchronotank: 1
+# 			ra1_allies_promotion_unlockcamopillbox: 1
+# 			ra1_allies_promotion_unlockphasetransport: 1
+# 			ra1_allies_promotion_unlockbastion: 1
+# 			ra1_allies_promotion_unlockgapgeneratorandradarjammer: 1
+# 			ra1_allies_machinegunner: 5
+# 			ra1_allies_sheridanassaulttank: 5
+# 			ra1_allies_rapierjumpjet: 1
+# 			ra1_allies_reconranger: 3
+# 			ra1_allies_phasetransport: 3
+# 			ra1_allies_alliedtigerheavytank: 5
+# 			ra1_allies_alliedtankdestroyer: 5
+# 			ra1_allies_chronotank: 1
+# 			ra1_allies_mobilegapgenerator: 1
+# 			ra1_allies_mobileradarjammer: 1
+#
+# --- UnitLimits (6 entries for ra1_allies) ---
+# 			ra1_allies_alliedoretruck: 20
+# 			ra1_allies_medic: 5
+# 			ra1_allies_mechanic: 5
+# 			ra1_allies_raspy: 1
+# 			ra1_allies_minelayer: 1
+# 			ra1_allies_alliedchinooktransport: 5
+
+# Player: actor — no traits defined yet.
+# When the engine supports per-faction bot conditions, move the
+# faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
+# entries here as a BaseBuilderBotModuleCA@<faction> /
+# UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
+Player:
+#
+# --- Additional faction: RA (ra1_soviet) — BuildingLimits (11 entries) ---
+# 			ra1_soviet_orerefinery: 10
+# 			ra1_soviet_barracks: 10
+# 			ra1_soviet_warfactory: 10
+# 			ra1_soviet_largefactory: 10
+# 			ra1_soviet_airfield: 10
+# 			ra1_soviet_largesovietairfield: 10
+# 			ra1_soviet_radardome: 1
+# 			ra1_soviet_techcenter: 2
+# 			ra1_soviet_servicedepot: 1
+# 			ra1_soviet_ironcurtain: 1
+# 			ra1_soviet_missilesilo: 1
+#
+# --- Additional faction: RA (ra1_soviet) — BuildingFractions (15 entries) ---
+# 			ra1_soviet_constructionyard: 5
+# 			ra1_soviet_orerefinery: 15
+# 			ra1_soviet_barracks: 15
+# 			ra1_soviet_warfactory: 15
+# 			ra1_soviet_largefactory: 15
+# 			ra1_soviet_airfield: 15
+# 			ra1_soviet_largesovietairfield: 15
+# 			ra1_soviet_radardome: 1
+# 			ra1_soviet_techcenter: 5
+# 			ra1_soviet_servicedepot: 1
+# 			ra1_soviet_missilesilo: 1
+# 			ra1_soviet_ironcurtain: 1
+# 			ra1_soviet_flametower: 15
+# 			ra1_soviet_teslacoil: 15
+# 			ra1_soviet_samsite: 10
+#
+# --- Additional faction: RA (ra1_soviet) — UnitsToBuild (88 entries) ---
+# 			ra1_soviet_oretruck: 10
+# 			ra1_soviet_attackdog: 1
+# 			ra1_soviet_cyberdog: 1
+# 			ra1_soviet_rifleinfantry: 5
+# 			ra1_soviet_grenadier: 5
+# 			ra1_soviet_rocketsoldier: 5
+# 			ra1_soviet_flamethrower: 5
+# 			ra1_soviet_heavytank: 5
+# 			ra1_soviet_mammothtank: 5
+# 			ra1_soviet_teslatank: 5
+# 			ra1_soviet_flaktruck: 3
+# 			ra1_soviet_v1rockettruck: 1
+# 			ra1_soviet_v2rocketlauncher: 1
+# 			ra1_soviet_migattackbomber: 1
+# 			ra1_soviet_yakscoutplane: 1
+# 			ra1_soviet_teslayak: 1
+# 			ra1_soviet_armoredyak: 1
+# 			ra1_soviet_nuclearyak: 1
+# 			ra1_soviet_su57attackbomber: 1
+# 			ra1_soviet_hindattackhelicopter: 5
+# 			ra1_soviet_hiptransport: 1
+# 			ra1_soviet_nukedemotruck: 1
+# 			ra1_soviet_madtank: 1
+# 			ra1_soviet_doctrine_conscription: 1
+# 			ra1_soviet_doctrine_industrialefficiency: 1
+# 			ra1_soviet_doctrine_inferno: 1
+# 			ra1_soviet_doctrine_teslaandexperimentaltech: 1
+# 			ra1_soviet_doctrine_heavyarmor: 1
+# 			ra1_soviet_doctrine_nuclearwar: 1
+# 			ra1_soviet_upgrade_vengeance: 1
+# 			ra1_soviet_upgrade_menofsteel: 1
+# 			ra1_soviet_upgrade_massproduction: 1
+# 			ra1_soviet_upgrade_wareconomy: 1
+# 			ra1_soviet_upgrade_incendiarybullets: 1
+# 			ra1_soviet_upgrade_scorchedearth: 1
+# 			ra1_soviet_upgrade_teslaarcing: 1
+# 			ra1_soviet_upgrade_teslarockets: 1
+# 			ra1_soviet_upgrade_reactoroverload: 1
+# 			ra1_soviet_upgrade_autoloaders: 1
+# 			ra1_soviet_upgrade_highexplosiverockets: 1
+# 			ra1_soviet_upgrade_stalinium: 1
+# 			ra1_soviet_upgrade_unstableisotopes: 1
+# 			ra1_soviet_upgrade_thermonuclearrockets: 1
+# 			ra1_soviet_upgrade_nucleartankshells: 1
+# 			ra1_soviet_upgrade_hammertank: 1
+# 			ra1_soviet_upgrade_heavyteslatank: 1
+# 			ra1_soviet_upgrade_shtoradefensesystem: 1
+# 			ra1_soviet_upgrade_kotinnucleartank: 1
+# 			ra1_soviet_upgrade_unlockcommissar: 1
+# 			ra1_soviet_upgrade_unlockheatraytank: 1
+# 			ra1_soviet_upgrade_hazmatsuits: 1
+# 			ra1_soviet_upgrade_unlockteslayak: 1
+# 			ra1_soviet_upgrade_unlockarmoredyak: 1
+# 			ra1_soviet_upgrade_unlocknuclearyak: 1
+# 			ra1_soviet_upgrade_afterburners: 1
+# 			ra1_soviet_promotion_infantrysuperoptics: 1
+# 			ra1_soviet_promotion_unlockmortarsoldier: 1
+# 			ra1_soviet_promotion_unlockcyberdog: 1
+# 			ra1_soviet_promotion_unlockvolkov: 1
+# 			ra1_soviet_promotion_unlockgatlingtank: 1
+# 			ra1_soviet_promotion_superspyplane: 1
+# 			ra1_soviet_promotion_mammothtanktargetingcomputer: 1
+# 			ra1_soviet_promotion_unlockmonstertank: 1
+# 			ra1_soviet_promotion_parabombslevel2: 1
+# 			ra1_soviet_promotion_hurricanerocketpods: 1
+# 			ra1_soviet_promotion_parabombslevel3: 1
+# 			ra1_soviet_promotion_unlocksupersonicnuclearbomber: 1
+# 			ra1_soviet_ak47conscript: 1
+# 			ra1_soviet_dragunovantimaterialsniper: 1
+# 			ra1_soviet_commissar: 1
+# 			ra1_soviet_zapper: 1
+# 			ra1_soviet_grad: 1
+# 			ra1_soviet_hammertank: 1
+# 			ra1_soviet_heavyindustrialminer: 1
+# 			ra1_soviet_heatraytank: 1
+# 			ra1_soviet_kamovattackhelicopter: 1
+# 			ra1_soviet_firerocketsoldier: 5
+# 			ra1_soviet_mortarsoldier: 5
+# 			ra1_soviet_shocktrooper: 5
+# 			ra1_soviet_volkov: 1
+# 			ra1_soviet_gatlingtank: 5
+# 			ra1_soviet_heavyteslatank: 5
+# 			ra1_soviet_siegemammothtank: 5
+# 			ra1_soviet_monstertank: 1
+# 			ra1_soviet_btr80: 3
+# 			ra1_soviet_kotinnucleartank: 5
+# 			ra1_soviet_nuclearv2launcher: 1
+# 			ra1_soviet_supersonicnuclearbomber: 1
+#
+# --- Additional faction: RA (ra1_soviet) — UnitLimits (4 entries) ---
+# 			ra1_soviet_oretruck: 20
+# 			ra1_soviet_nukedemotruck: 1
+# 			ra1_soviet_madtank: 1
+# 			ra1_soviet_hiptransport: 5
+#
+# --- Additional faction: RA (japan) — BuildingLimits (8 entries) ---
+# 			japan_japaneseorerefinery: 10
+# 			japan_japanesebarracks: 10
+# 			japan_japanesewarfactory: 10
+# 			japan_japaneseairfield: 10
+# 			japan_japaneseradararray: 1
+# 			japan_japanesetechcenter: 2
+# 			japan_japaneseservicedepot: 1
+# 			japan_japaneseshrine: 1
+#
+# --- Additional faction: RA (japan) — BuildingFractions (12 entries) ---
+# 			japan_japaneseconstructionyard: 5
+# 			japan_japaneseorerefinery: 15
+# 			japan_japanesebarracks: 15
+# 			japan_japanesewarfactory: 15
+# 			japan_japaneseairfield: 15
+# 			japan_japaneseradararray: 1
+# 			japan_japanesetechcenter: 5
+# 			japan_japaneseservicedepot: 1
+# 			japan_japaneseshrine: 1
+# 			japan_japanesemgnest: 15
+# 			japan_ballistatower: 15
+# 			japan_waveforceturret: 10
+#
+# --- Additional faction: RA (japan) — UnitsToBuild (54 entries) ---
+# 			japan_japaneseoretruck: 10
+# 			japan_imperialscoutsman: 5
+# 			japan_tankbuster: 5
+# 			japan_japaneseflamethrower: 3
+# 			japan_skyhawk: 5
+# 			japan_scoutcar: 1
+# 			japan_igomediumtank: 5
+# 			japan_hovercrafttransport: 3
+# 			japan_zerofighter: 1
+# 			japan_japanesebomber: 1
+# 			japan_nanodronebuggy: 1
+# 			japan_ballista: 5
+# 			japan_corewarfactory: 1
+# 			japan_corerefinery: 1
+# 			japan_corepowerplant: 1
+# 			japan_corebarracks: 1
+# 			japan_coreradar: 1
+# 			japan_coreairfield: 1
+# 			japan_coreservicedepot: 1
+# 			japan_coretechcenter: 1
+# 			japan_upgrade_bushidodiscipline: 1
+# 			japan_upgrade_energizedarrows: 1
+# 			japan_upgrade_waveforcebullets: 1
+# 			japan_upgrade_stealthsuitintegration: 1
+# 			japan_upgrade_superiorwarengines: 1
+# 			japan_upgrade_divinewindprotocol: 1
+# 			japan_upgrade_advancedplasmaweapons: 1
+# 			japan_upgrade_nanotechrepairs: 1
+# 			japan_promotion_unlocksamurai: 1
+# 			japan_promotion_unlockarchermaiden: 1
+# 			japan_promotion_unlockrocketangel: 1
+# 			japan_promotion_unlockexorcist: 1
+# 			japan_promotion_unlockarmoredcar: 1
+# 			japan_promotion_unlockheavychihaheavytank: 1
+# 			japan_promotion_unlockhovercraftflametank: 1
+# 			japan_promotion_unlockshogunexecutioner: 1
+# 			japan_promotion_unlockgrenadebuggy: 1
+# 			japan_promotion_unlockshrinetank: 1
+# 			japan_promotion_unlockwaveforcetank: 1
+# 			japan_promotion_unlockwaveforceartillery: 1
+# 			japan_samurai: 3
+# 			japan_archermaiden: 5
+# 			japan_rocketangel: 5
+# 			japan_exorcist: 1
+# 			japan_armoredcar: 3
+# 			japan_chihaheavytank: 5
+# 			japan_hovercraftflametank: 3
+# 			japan_oitank: 5
+# 			japan_grenadebuggy: 1
+# 			japan_shrine_minitank: 3
+# 			japan_waveforcetank: 5
+# 			japan_waveforceartillery: 5
+# 			japan_exorcistoitank: 1
+# 			japan_shogunexecutioner: 1
+#
+# --- Additional faction: RA (japan) — UnitLimits (9 entries) ---
+# 			japan_japaneseoretruck: 20
+# 			japan_corewarfactory: 1
+# 			japan_corerefinery: 1
+# 			japan_corepowerplant: 1
+# 			japan_corebarracks: 1
+# 			japan_coreradar: 1
+# 			japan_coreairfield: 1
+# 			japan_coreservicedepot: 1
+# 			japan_coretechcenter: 1
