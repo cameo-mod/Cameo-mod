@@ -1,3 +1,110 @@
+schwarzer_mond_drone:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Drone
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 150
+		InitialFacing: 768
+		TurnSpeed: 15
+		Speed: 150
+		Repulsable: false
+		MaximumPitch: 50
+		TakeUpCellWhenLand: false
+		VTOL: true
+	Health:
+		HP: 7500
+	ChangesHealth@SelfHealing:
+		Step: 3
+	RevealsShroud:
+		Range: 7500
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: LunarNaxiDroneLaser
+		LocalOffset: 400,-200,-200, 400,200,-200
+		PauseOnCondition: !ammo
+	Armament@Rockets:
+		Name: primary
+		Weapon: LunarNaxiDroneMissile
+		LocalOffset: 425,-350,-225, 425,350,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: schwarzer_mond_drone_husk
+	WithMoveAnimation:
+		MoveSequence: move
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
+	WithMoveAnimation:
+		MoveSequence: move
+		Condition: !Aircraft-Turning
+	Contrail:
+		Offset: -500,0,250
+		TrailLength: 15
+	-Voiced:
+
+schwarzer_mond_drone_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Drone
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: schwarzer_mond_drone
+	RenderSprites:
+		PlayerPalette: playerra2
+
 schwarzer_mond_spacezeppelin:
 	Inherits: ^Helicopter
 	Inherits@Crypto: ^NaxiCryptofascism

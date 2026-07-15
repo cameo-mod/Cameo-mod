@@ -222,7 +222,7 @@ naxis_airfield:
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
 	CarrierMaster:
-		Actors: interceptor.nax, interceptor.nax, interceptor.nax
+		Actors: naxis_interceptor, naxis_interceptor, naxis_interceptor
 		RearmTicks: 90
 		RespawnTicks: 180
 		InstaRepair: true
