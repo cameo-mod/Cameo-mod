@@ -485,11 +485,14 @@ factions, everything through the balance workbook._
   decoration, and checks that rank image sequences exist in `misc.yaml`.
   Current state: 135 issues (mostly SC/WC2/RA2Mod factions that share
   `ra2rank` or lack faction-specific decorations — low priority).
-- [ ] **E1: Add missing elite weapons** — 217 RA2-styled actors are
-  missing `Armament@ELITE` blocks. Each needs a base weapon `E`-suffixed
-  variant with `RequiresCondition: rank-elite`. This is a large batch
-  job (design work — each elite weapon needs unique stats, not a
-  mechanical rename).
+- [ ] **E1: Add missing elite weapons** — Audit (`tools/audit/audit_missing_elite.py`,
+  `4d0e8ec85`) found **1256** buildable actors with `GainsExperience` but no
+  `Armament@*ELITE*` block. Top factions: rules/redalert (100), rules/starcraft
+  (79), rules/wh40k (75), rules/darkreign (68), rules/shockwave (67),
+  rules/generals (55), rules/advancewars (52), rules/starwars (45),
+  rules/redalert2 (41), TS/Forgotten (37), rules/tkm (36), TS/CABAL (34).
+  This is a large multi-session design effort — each elite weapon needs unique
+  stats, not a mechanical rename. Needs user direction on scope/priority.
 - [x] **E2: Fix missing `rank-elite` conditions** (`ac3ba04b7`) — Only 2
   genuine bugs found (out of 18 flagged; rest use Generals `scrap_create_bonus`
   rank system or upgrade-switch naming). Fixed:
