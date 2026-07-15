@@ -4,7 +4,7 @@ ts_nod_lightinfantry:
 	Defaults:
 		Filename: ts_nod_lightinfantry_altnode1.shp
 	icon:
-		Filename: ts_gdi_lightinfantry_icon.png
+		Filename: ts_shared_icons|ts_gdi_lightinfantry_icon.png
 
 ts_nod_chameleonspy:
 	Inherits: ^TSBasicInfantry
@@ -361,7 +361,7 @@ ts_nod_handof:
 	make:
 		Filename: ts_nod_handof_make.shp
 	icon:
-		Filename: ts_nod_handof_icon.png
+		Filename: ts_shared_icons|ts_nod_handof_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 	iconcabal:
@@ -633,7 +633,7 @@ ts_nod_helipad:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_make.shp
+		Filename: ts_shared_sprites|ts_nod_helipad_make.shp
 	icon:
 		Filename: ts_nod_helipad_icon.shp
 		Offset: 0, 0
@@ -786,7 +786,7 @@ ts_nod_samsite:
 		Filename: ts_nod_samsite.shp
 		Start: 2
 	turret:
-		Filename: ts_gdi_samtower_tsgtctwr_d.shp
+		Filename: ts_shared_sprites|ts_gdi_samtower_tsgtctwr_d.shp
 		Facings: 32
 		UseClassicFacings: True
 		Offset: 0,16

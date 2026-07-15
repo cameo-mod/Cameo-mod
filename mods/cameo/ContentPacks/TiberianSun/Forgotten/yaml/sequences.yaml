@@ -205,7 +205,7 @@ forgotten_tiberianfiend:
 		Length: 10
 		ShadowStart: 218
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Start: 105
@@ -279,7 +279,7 @@ forgotten_viniferafiend:
 		Length: 10
 		ShadowStart: 218
 	die4:
-		Filename: frag3.shp
+		Filename: ts_shared_sprites|frag3.shp
 		Length: *
 	die-crushed:
 		Start: 105
@@ -877,7 +877,7 @@ forgotten_barracks:
 	make:
 		Filename: tambarmake.shp
 	icon:
-		Filename: ts_nod_handof_icon.png
+		Filename: ts_shared_icons|ts_nod_handof_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -910,7 +910,7 @@ forgotten_radar:
 		Filename: tamradrmake.shp
 		Length: 17
 	icon:
-		Filename: ts_gdi_radar_icon.shp
+		Filename: ts_shared_icons|ts_gdi_radar_icon.shp
 		Offset: 0, 0
 
 forgotten_church:
@@ -940,7 +940,7 @@ forgotten_church:
 	make:
 		Filename: tamtechmake.shp
 	icon:
-		Filename:  ts_gdi_techcenter_icon.png
+		Filename:  ts_shared_icons|ts_gdi_techcenter_icon.png
 		Offset: 0, 0
 
 forgotten_refinery:
@@ -992,7 +992,7 @@ forgotten_refinery:
 		ZOffset: -1024
 		Offset: -12, -21, 5
 	icon:
-		Filename: ts_gdi_tiberiumrefinery_icon.shp
+		Filename: ts_shared_icons|ts_gdi_tiberiumrefinery_icon.shp
 		Offset: 0, 0
 
 forgotten_cobracopter:
