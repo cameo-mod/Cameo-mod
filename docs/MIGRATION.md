@@ -75,6 +75,49 @@ pulling another faction's assets. The top-level `ContentPacks/Shared/files/`
 folder is a temporary holding area for cross-game assets that must be
 duplicated per-game and then removed.
 
+## AI module split — why it is blocked and how to unblock it
+
+The global `mods/cameo/ai/ai.yaml` defines a single `Player:` actor with
+one `BaseBuilderBotModuleCA@generic`, one `UnitBuilderBotModuleCA@generic`,
+and one `SquadManagerBotModuleCA@generic`. Their sub-sections
+(`BuildingLimits`, `BuildingFractions`, `UnitsToBuild`, `UnitLimits`) are
+single dictionaries containing ALL faction data. OpenRA's YAML loader
+replaces trait instances with the same `@name`; it does **not** deep-merge
+their sub-sections. This means per-faction bot data cannot be split across
+multiple files by simply adding more `BaseBuilderBotModuleCA@<faction>`
+traits — the last one loaded wins.
+
+### Candidate solutions (ranked by preference)
+
+1. **Custom `GrantConditionOnFaction` trait (C#)** — add a trait that sets
+   a player condition based on the chosen faction (e.g., `cabalbot`). Each
+   ContentPack can then define `BaseBuilderBotModuleCA@cabal` with
+   `RequiresCondition: cabalbot`. This keeps the YAML split clean and does
+   not require changing the engine or the lobby UI. The condition provider
+   can be added to the `Player:` actor in the core rules or injected by each
+   faction's content pack. **Recommended path.**
+
+2. **Per-faction bot names** — create `ModularBot@CabalEasiestAI` with
+   `Name: bot_ai.cabal.easiest` etc. The lobby would offer a bot per
+   faction, but the player must manually pick the matching bot. This is
+   fragile and breaks the current "pick a difficulty, play any faction"
+   flow. **Not recommended.**
+
+3. **Engine YAML merge change** — modify OpenRA to deep-merge
+   `BaseBuilderBotModuleCA@*` sub-sections. This is the most invasive and
+   makes the fork harder to maintain. **Last resort.**
+
+4. **Single-file per-faction AI with a custom loader** — keep one AI file
+   per faction but load it into a shared dictionary at runtime via a custom
+   C# bot module. This gives per-faction files but still requires code.
+
+### Next step
+
+Design and implement the `GrantConditionOnFaction` trait (or equivalent),
+add the corresponding `Player:` conditions, then split the faction-specific
+`BuildingLimits`/`BuildingFractions`/`UnitsToBuild` entries out of the
+global `ai.yaml` into each ContentPack's `ai.yaml`.
+
 ## The per-faction pipeline (proven, verified, repeatable)
 
 ```
