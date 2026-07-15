@@ -17,7 +17,7 @@ cabal_overkill_gunship:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~cabal_helipad, cabal_promotion_overkillgunship
+		Prerequisites: ~cabal_helipad, ~cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
 		TurnSpeed: 30
@@ -327,7 +327,7 @@ cabal_cyborg_assassin:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 6
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_cyborgassassin
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, ~cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_cyborg_assassin.description
 	Aircraft:
@@ -382,7 +382,7 @@ cabal_mothership:
 		Name: Mothership
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_helipad, cabal_core, cabal_promotion_mothership
+		Prerequisites: ~cabal_helipad, cabal_core, ~cabal_promotion_mothership
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_mothership.description
 	Health:
@@ -425,7 +425,7 @@ cabal_hunterkillermk1_elite:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 21
-		Prerequisites: ~cabal_helipad, cabal_promotion_hunterkillermk1elite
+		Prerequisites: ~cabal_helipad, ~cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:
