@@ -281,7 +281,7 @@ GLTractorToxin:
 	Warhead@1Dam: SpreadDamage
 		Spread: 384
 		Damage: 1000
-		InvalidTargets: Structure, Wall, Husk, ToxinImmune
+		InvalidTargets: Structure, ixian_concretewall, Husk, ToxinImmune
 		Versus:
 			None: 100
 			Light: 55
@@ -308,7 +308,7 @@ GLTractorToxinBeta:
 	Warhead@1Dam: SpreadDamage
 		Spread: 800
 		Damage: 1750
-		InvalidTargets: Water, Structure, Wall, Husk
+		InvalidTargets: Water, Structure, ixian_concretewall, Husk
 		Versus:
 			None: 160
 	Warhead@Clear: SpreadDamage
@@ -324,7 +324,7 @@ GLTractorToxinGamma:
 	Warhead@1Dam: SpreadDamage
 		Spread: 900
 		Damage: 2500
-		InvalidTargets: Water, Structure, Wall, Husk
+		InvalidTargets: Water, Structure, ixian_concretewall, Husk
 		Versus:
 			None: 190
 	Warhead@Clear: SpreadDamage
@@ -503,7 +503,7 @@ GLKellSniperVehicle:
 		Damage: 7500
 	Warhead@3Driver: ChangeOwnerToNeutral
 		ValidTargets: DriverKill
-		InvalidTargets: Infantry, Ship, Structure, Wall, Husk, Air, DriverKillImmune, LoadedVehicle, MCImmune
+		InvalidTargets: Infantry, Ship, Structure, ixian_concretewall, Husk, Air, DriverKillImmune, LoadedVehicle, MCImmune
 		ValidRelationships: Enemy
 		Range: 256
 
@@ -657,9 +657,9 @@ GLGunboatMG:
 
 GLGunboatShell:
 	Inherits: GLTechnicalShell
-	ValidTargets: Vehicle, Underwater, Structure, Wall, Ship
+	ValidTargets: Vehicle, Underwater, Structure, ixian_concretewall, Ship
 	Warhead@1Dam: SpreadDamage
-		ValidTargets: Vehicle, Underwater, Structure, Wall, Ship
+		ValidTargets: Vehicle, Underwater, Structure, ixian_concretewall, Ship
 
 #####################################################
 # Quad Cannon Weapons
@@ -1120,7 +1120,7 @@ CHMIGWeapon:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@3Eff: CreateEffect
 		Explosions: china_fball
 		ImpactSounds: flamer2.aud
@@ -1479,7 +1479,7 @@ USARangerFlashbang:
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c256
 		Damage: 1000
-		InvalidTargets: Vehicle, Tank, Structure, Wall
+		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
 	Warhead@2Dam: SpreadDamage
 		Spread: 0c512
 		Damage: 2000
@@ -1695,7 +1695,7 @@ CHTankHunterBomb:
 		Damage: 50000
 
 #####################################################
-# Jeep Weapons
+# td_gdi_humvee Weapons
 #####################################################
 
 USAHumveeMissile:
@@ -1769,7 +1769,7 @@ USAAvengerBlueLaser:
 	ReloadDelay: 8
 	Range: 7680
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Projectile: LaserZap
 		Duration: 20
 		Width: 0c64
@@ -1778,7 +1778,7 @@ USAAvengerBlueLaser:
 		Condition: CommandoDebuff
 		Duration: 20
 		Range: 172
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 
 USAAvengerPDLaser:
 	Inherits: PDLaser
@@ -1810,7 +1810,7 @@ USAPaladinLaser:
 	ReloadDelay: 25
 	Range: 3072
 	Report: vpalwe2d.aud
-	InvalidTargets: Vehicle, Tank, Structure, Wall
+	InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
 	Projectile: LaserZap
 		Width: 60
 		HitAnim: laserfire
@@ -1819,7 +1819,7 @@ USAPaladinLaser:
 		Spread: 42
 		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-		InvalidTargets: Vehicle, Tank, Structure, Wall
+		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
 
 USAFirebaseObus:
 	ReloadDelay: 50
@@ -1841,7 +1841,7 @@ USAFirebaseObus:
 		DamageTypes: TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -2151,7 +2151,7 @@ GECarpetBomb:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -2266,7 +2266,7 @@ USAFuelBomb:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: kaboom15.aud
@@ -2631,7 +2631,7 @@ SCHDesertFlyBomb:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -2673,7 +2673,7 @@ USAParticleCannonDamage:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 2
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 
 USAParticleCannonDamage2:
 	Inherits: USAParticleCannonDamage

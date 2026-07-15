@@ -20,7 +20,7 @@ World:
 		Description: faction_ts_forgotten.description
 	FactionCA@cabal:
 		Selectable: true
-		Name: CABAL TS (WIP)
+		Name: CABAL TS
 		InternalName: cabal
 		Game: Tiberian Sun
 		Side: Tiberian Sun
@@ -63,13 +63,13 @@ World:
 		ClassName: Light Support
 		Factions: tsnod
 		BaseActor: ts_nod_mobileconstructionvehicle
-		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank
 	StartingUnits@heavytsnod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsnod
 		BaseActor: ts_nod_mobileconstructionvehicle
-		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank
 	StartingUnits@mcvonlyraforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -131,6 +131,7 @@ World:
 
 ^TSInfantry:
 	WithDeathAnimation:
+		DeathSequencePalette: ra2player
 		PlayerPalette: playerra2
 		DeathTypes:
 			DefaultDeath: 1
@@ -745,7 +746,7 @@ RAPT:
 	Inherits@EXT: ^ExternalConditions ##########
 
 ts_nod_laserfence_segment:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Tooltip:
 		Name: Laser Fence
 	LineBuild:
@@ -1020,7 +1021,7 @@ tsaegis:
 	Voiced:
 		VoiceSet: TSVehicle
 	RenderSprites:
-		Image: ra2aegis
+		Image: ra2_allies_aegiscruiser
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -1030,7 +1031,7 @@ tsaegis:
 # TS Nod Vehicles
 #######################################
 
-TSBIKE:
+ts_nod_attackcycle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1087,7 +1088,7 @@ TSBIKE:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSTTNK:
+ts_nod_ticktank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1329,6 +1330,8 @@ cabal_artilleryspider_backup:
 		TurnSpeed: 0
 	Health:
 		HP: 100000
+	Repairable:
+		HpPerStep: 5000
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
@@ -1391,6 +1394,88 @@ cabal_tarantula_backup:
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
 		IntoActor: cabal_tarantula
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_legion_backup:
+	Inherits: cabal_legion
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Legion (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: tstnkspid
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1500
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_legion
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_avatar_backup:
+	Inherits: cabal_avatar
+	Valued:
+		Cost: 2250
+	Tooltip:
+		Name: Avatar (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_manticore
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1200
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_avatar
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4

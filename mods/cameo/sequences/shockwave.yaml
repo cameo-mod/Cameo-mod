@@ -1136,7 +1136,7 @@ susabradleyparadrop:
 	icon: usabradleyifv_icon
 
 susaparadrop:
-	icon: pinficon.shp
+	icon: ra2_allies_upgrade_paratroopers_pinficon.shp
 		AddExtension: false
 
 susaveteranair:
@@ -1496,7 +1496,7 @@ sglworker:
 		Tick: 1600
 		ZOffset: -511
 		Scale: 0.82
-	icon: workericon.png
+	icon: naxis_slave_icon.png
 		AddExtension: false
 
 sglrebel:
@@ -2646,7 +2646,7 @@ glahumvee:
 	idle: usajeep
 		Facings: 32
 		UseClassicFacings: True
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -3498,7 +3498,7 @@ schdevastator:
 	muzzle: gunfire2
 		Length: 5
 		Scale 1.1
-	active: DATA.R8
+	active: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 3839
 		Length: 14
 		Tick: 130
@@ -3506,7 +3506,7 @@ schdevastator:
 		ZOffset: 100
 		AddExtension: false
 		Scale 1.1
-	active-2: DATA.R8
+	active-2: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 4152
 		Length: 12
 		Tick: 100
@@ -3857,7 +3857,7 @@ icon:
 	usarodfromgod: nukeicnh.tem
 	usahypersonicmissile_icon: usahypersonicmissile_icon.shp
 	usabradleyparadrop_icon: usabradleyifvparadrop_icon.shp
-	usaparadrop_icon: pinficon.shp
+	usaparadrop_icon: ra2_allies_upgrade_paratroopers_pinficon.shp
 	susacarrierairstrike: usacarrierairstrike_icon.shp
 	usaucavairstrike: usaucavairstrike.shp
 	usahalodropicon: usahalodropicon.shp

@@ -1,0 +1,467 @@
+asian_alliance_phoenix:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Phoenix
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~asian_alliance_asianairforcecommand, asian_alliance_asianbattlelab
+		Queue: Aircraft, RAAircraft
+		Description: actor_aaphoenix.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 12
+		Speed: 180
+		IdleTurnSpeed: 10
+		IdleSpeed: 125
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		Voice: Move
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianPhoenixRocket
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: AsianPhoenixRocket_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 4
+		ReloadDelay: 50
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 2
+	SpawnActorOnDeath:
+		Actor: phoenix_husk.asian
+	#GrantConditionOnMovement@Turn:
+	#	Condition: Aircraft-Turning
+	#	ValidMovementTypes: Turn
+	#GrantConditionOnMovement@H:
+	#	ValidMovementTypes: Horizontal
+	#	Condition: Aircraft-Horizontal
+	#GrantConditionOnMovement@V:
+	#	ValidMovementTypes: Vertical
+	#	Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		ValidMovementTypes: Horizontal, Turn
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		ValidMovementTypes: Vertical, Turn
+	WithMoveAnimation:
+		MoveSequence: move
+	Contrail@1:
+		Offset: -512,0,256
+		TrailLength: 15
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: CHMiGVoice
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	AttackMove:
+		Voice: AttackMove
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+
+asian_alliance_pelican:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 20
+		Prerequisites: ~asian_alliance_asianairforcecommand
+		Description: actor_aapelican.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Pelican
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY:
+		Weapon: AsianPelicanMissile
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+		PauseOnCondition: ammo < 2
+		AmmoUsage: 2
+	Armament@PRIMARYELITE:
+		Weapon: AsianPelicanMissileE
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+		PauseOnCondition: ammo < 2
+		AmmoUsage: 2
+	Armament@MG:
+		Weapon: AsianPelicanMG
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle-mg
+		MuzzlePalette: ra2effect
+		PauseOnCondition: ammo < 2
+		RequiresCondition: asian_alliance_doctrine_asianphalanx && !rank-elite
+	Armament@MGelite:
+		Weapon: AsianPelicanMG_elite
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle-mg
+		MuzzlePalette: ra2effect
+		PauseOnCondition: ammo < 2
+		RequiresCondition: asian_alliance_doctrine_asianphalanx && rank-elite
+	ReloadAmmoDelayMultiplier@asian_alliance_doctrine_asianphalanx:
+		RequiresCondition: asian_alliance_doctrine_asianphalanx
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		AttackType: Hover
+	Aircraft:
+		Speed: 125
+		TurnSpeed: 25
+	WithIdleOverlay@ROTORAIR:
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: pelican_husk.asian
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: CHHelixVoice
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: asian_alliance_doctrine_asianphalanx
+
+kami.asian:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Kamikaze
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 160
+		InitialFacing: 768
+		TurnSpeed: 16
+		Speed: 160
+		Repulsable: false
+		MaximumPitch: 48
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 7500
+	ChangesHealth@SelfHealing:
+		Step: 3
+	RevealsShroud:
+		Range: 7500
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Weapon: AsianKamikazeChaingun
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 18
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: kami_husk.asian
+	WithMoveAnimation:
+		MoveSequence: move
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 9
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
+	WithMoveAnimation:
+		MoveSequence: move
+		Condition: !Aircraft-Turning
+	Contrail:
+		Offset: -500,0,250
+		TrailLength: 15
+	-Voiced:
+
+kami_chemical.asian:
+	Inherits: kami.asian
+	Valued:
+		Cost: 1600
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 6
+	Tooltip:
+		Name: Chemical Kamikaze
+	Armament@Secondary:
+		Weapon: AsianChemicalBombs
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	RenderSprites:
+		Image: kami.asian
+	SpawnActorOnDeath:
+		Actor: kami_chemical_husk.asian
+
+kami_asdf.asian:
+	Inherits: kami.asian
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Airstrike Kamikaze
+	Buildable:
+		Description: template_airstrike_slave.description
+	-CarrierSlave:
+	-AutoTarget:
+	-AmmoPool:
+	-WithAmmoPipsDecoration:
+	AttackAircraft:
+		-RequiresCondition:
+	Armament@PRIMARY:
+		Weapon: ASDFKamikazeTargeting
+		-PauseOnCondition:
+	DiveOnAttack:
+		Speed: 300
+		DiveCondition: diving
+	SpawnedExplodes:
+		Weapon: ASDFKamikazeExplosion
+		EmptyWeapon: ASDFKamikazeExplosion
+		RequiresCondition: diving
+	AirstrikeSlaveCA:
+	GivesExperienceToMaster:
+	RenderSprites:
+		Image: kami.asian
+	SpawnActorOnDeath:
+		Actor: kami_husk.asian
+		RequiresCondition: airborne && !diving
+
+#######################################
+# RA2 Asian Husks
+#######################################
+
+kami_husk.asian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Kamikaze
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 160
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: kami.asian
+	RenderSprites:
+		PlayerPalette: playerra2
+	FireWarheadsOnDeathCA@Chemical:
+		Weapon: AsianSmallOilBomb
+		EmptyWeapon: AsianSmallOilBomb
+	FirepowerMultiplier@Explodes:
+		Modifier: 50
+
+kami_chemical_husk.asian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Chemical Kamikaze
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 160
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: kami.asian
+	RenderSprites:
+		PlayerPalette: playerra2
+	FireWarheadsOnDeathCA@Chemical:
+		Weapon: ReactorNukeWeak
+		EmptyWeapon: ReactorNukeWeak
+	FirepowerMultiplier@Explodes:
+		Modifier: 25
+
+phoenix_husk.asian:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Phoenix
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 185
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: asian_alliance_phoenix
+	RenderSprites:
+		PlayerPalette: playerra2
+
+pelican_husk.asian:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Pelican
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	RenderSprites:
+		Image: asian_alliance_pelican
+		PlayerPalette: playerra2
+
+bomber_minebomb.asian:
+	Inherits: BADR
+	Health:
+		HP: 100000
+	Valued:
+		Cost: 5000
+	Aircraft:
+		CruiseAltitude: 2500
+		TurnSpeed: 25
+		Speed: 250
+		Repulsable: False
+		MaximumPitch: 50
+	AttackBomber:
+		PauseOnCondition: !ammo
+		FacingTolerance: 64
+	Armament:
+		Weapon: AsianMineBomb
+	AmmoPool:
+		Ammo: 1
+	Tooltip:
+		Name: Asian Stealth Bomber
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	SpawnActorOnDeath:
+		Actor: bomber_husk.asian
+	Cloak:
+		CloakDelay: 25
+		CloakSound: trans1.aud
+		UncloakSound: appear1.aud
+		UncloakOn: Attack, Unload
+	RenderSprites:
+		Image: aa_bomber
+		PlayerPalette: playerra2
+
+bomber_minebomb2.asian:
+	Inherits: bomber_minebomb.asian
+	Armament:
+		Weapon: AsianMineBomb2
+
+bomber_husk.asian:
+	Inherits: BADR.Husk
+	RenderSprites:
+		Image: aa_bomber
+		PlayerPalette: playerra2
+
+#######################################
+# RA2 Asian Commander Tree
+#######################################
+
+### Infantry tree

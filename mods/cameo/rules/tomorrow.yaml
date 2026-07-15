@@ -521,7 +521,7 @@ FACT.TOMORROW:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -629,7 +629,7 @@ FACT.ANSWER:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -737,7 +737,7 @@ FACT.DTUSA:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -845,7 +845,7 @@ FACT.DTJAPAN:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -910,7 +910,7 @@ AFLD.ANSWER:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Selectable:
 		Bounds: 4096, 2048
 	HitShape:
@@ -983,14 +983,14 @@ AFLD.ANSWER:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: AFLD
+		Image: td_nod_airstrip
 WEAP.TOMORROW:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1057,14 +1057,14 @@ WEAP.TOMORROW:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTUSA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1131,14 +1131,14 @@ WEAP.DTUSA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTRUSSIA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1205,14 +1205,14 @@ WEAP.DTRUSSIA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTJAPAN:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1279,7 +1279,7 @@ WEAP.DTJAPAN:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 DTNUKE:
 	Inherits: NUKE
 	RenderSprites:
@@ -1297,7 +1297,7 @@ DTHAND:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
@@ -1688,7 +1688,7 @@ DTPYLE:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -2126,20 +2126,20 @@ HPAD.DTJAPAN:
 	RenderSprites:
 		Image: hpad
 SAM.TOMORROW:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: SAM
+		Image: td_nod_samsite
 GTWR.ANSWER:
-	Inherits: GTWR
+	Inherits: td_gdi_guardtower
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: GTWR
+		Image: td_gdi_guardtower
 	Armament:
 		Weapon: DTHighV
 	RangeMultiplier@LongRangeGun:
@@ -2147,17 +2147,17 @@ GTWR.ANSWER:
 	Health:
 		HP: 60000
 PBOX.TOMORROW:
-	Inherits: PBOX
+	Inherits: ra1_allies_pillbox
 	RenderSprites:
-		Image: PBOX
+		Image: ra1_allies_pillbox
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks, ~disabled
 	-MapEditorData:
 GUN.TOMORROW:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	RenderSprites:
-		Image: GUN
+		Image: td_nod_gunturret
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks
@@ -2279,9 +2279,9 @@ ATEK.ANSWER:
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 	RenderSprites:
-		Image: ATEK
+		Image: ra1_allies_alliedtechcenter
 DTWOOD:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -2303,7 +2303,7 @@ DTWOOD:
 	WithWallSpriteBody:
 		Type: wood
 DTBARB:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -2609,13 +2609,13 @@ DTRKPOD:
 	Power:
 		Amount: -20
 DTLWALL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 200
 	CustomSellValue:
 		Value: 5
 	Tooltip:
-		Name: Living Wall
+		Name: Living ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: dtbio
@@ -2815,7 +2815,7 @@ DTRMBO:
 		BuildPaletteOrder: 50
 		Prerequisites: anyhq, ~techlevel.high, dtpropaganda
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildDuration: 375
 		BuildDurationModifier: 100
 		BuildLimit: 1
@@ -2834,10 +2834,10 @@ DTRMBO:
 	AutoTarget:
 		ScanRadius: 8
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -2866,10 +2866,10 @@ dtapc:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Rocket APC
+		Name: Rocket td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -2915,25 +2915,25 @@ dtapc:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 ftnk.tomorrow:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	RenderSprites:
-		Image: FTNK
+		Image: td_nod_flametank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: dtpropaganda
 	-MapEditorData:
 
 mtnk.tomorrow:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	RenderSprites:
-		Image: MTNK
+		Image: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	-MapEditorData:
@@ -3001,9 +3001,9 @@ v2rl.tomorrow:
 		Image: dtv2rl
 
 heli.tomorrow:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3117,17 +3117,17 @@ DTE2:
 		ValidTypes: infantry ##########
 		
 rajeep.answer:
-	Inherits: RAJEEP
+	Inherits: ra1_allies_ranger
 	RenderSprites:
-		Image: RAJEEP
+		Image: ra1_allies_ranger
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 heli.answer:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3203,22 +3203,22 @@ dtorca.husk:
 apc.answer:
 	Inherits: RAAPC
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks
 	-MapEditorData:
 
 mrj.answer:
-	Inherits: MRJ
+	Inherits: ra1_allies_mobileradarjammer
 	RenderSprites:
-		Image: MRJ
+		Image: ra1_allies_mobileradarjammer
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: atek.answer, anyhq
 	-MapEditorData:
 arty.answer:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3272,7 +3272,7 @@ dtltnk2.answer:
 #                   UNITS USA
 ###############################################
 dtltnk2:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
 		Cost: 650
@@ -3297,7 +3297,7 @@ dtltnk2:
 		Prerequisites: dtshop
 		InitialLevels: 1
 jeep.dtusa:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	RenderSprites:
 		Image: JEEP.dtusa
 	Buildable:
@@ -3318,7 +3318,7 @@ jeep.dtusa:
 apc.dtusa:
 	Inherits: RAAPC
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks, dtshop
@@ -3340,7 +3340,7 @@ apc.dtusa.e2:
 		DeployTicks: 0
 
 arty.dtusa:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3351,9 +3351,9 @@ arty.dtusa:
 		Prerequisites: dtshop
 		InitialLevels: 1
 heli.dtusa:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: dtpropaganda
@@ -3369,11 +3369,11 @@ heli.dtusa:
 #                   UNITS Russia
 ###############################################
 hind.dtrussia:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HIND
+		Image: ra1_soviet_hindattackhelicopter
 	Tooltip:
-		Name: Hind
+		Name: ra1_soviet_hindattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3443,7 +3443,7 @@ dtstnk:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtstnk
 	WithCargoPipsDecoration:
@@ -3451,7 +3451,7 @@ dtstnk:
 		RequiresSelection: true
 
 mssm.dtrussia:
-	Inherits: MSSM
+	Inherits: td_nod_ssmlauncher
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: anyhq, atek.answer
@@ -3459,7 +3459,7 @@ mssm.dtrussia:
 		Description: Long-range rocket artillery.\n  Strong vs Buildings\n  Weak vs Aircraft
 		Icon: icon
 dthtnk:
-	Inherits: HTNK
+	Inherits: td_gdi_mammothtank
 	Tooltip:
 		Name: Russian Tank
 	UpdatesPlayerStatistics:
@@ -3496,7 +3496,7 @@ dtstnk.dtrussia.e2:
 	Buildable:
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, e3
+		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, e3
 	ProductionCostMultiplier:
 		Multiplier: 150
 	AutoDeployer:
@@ -3523,7 +3523,7 @@ tran.dtrussia.e2:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e2, e2, e2, e2, e3, e3, e2, e2, e1, e1
+		InitialUnits: td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, e3, e3, td_gdi_grenadier, td_gdi_grenadier, e1, e1
 	ProductionCostMultiplier:
 		Multiplier: 300
 
@@ -3592,10 +3592,10 @@ dtapc2:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Tear Gas APC
+		Name: Tear Gas td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -3633,14 +3633,14 @@ dtapc2:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc2
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 dtltnk:
-	Inherits: 1TNK
+	Inherits: ra1_allies_alliedlighttank
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -3735,7 +3735,7 @@ dtfbik:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Flame Bike
+		Name: Flame td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

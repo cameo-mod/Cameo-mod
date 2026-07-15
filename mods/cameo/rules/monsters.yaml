@@ -239,7 +239,7 @@ RA2ZOMBIE:
 	ProducibleWithLevel:
 		Prerequisites: barracks.upgraded
 RA2MUTALISK:
-	Inherits: SCMUTALISK
+	Inherits: zerg_mutalisk
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -262,7 +262,7 @@ RA2MUTALISK:
 		Weapon: RA2MUTA
 		LocalOffset: 0,0,0
 	RenderSprites:
-		Image: SCMUTALISK
+		Image: zerg_mutalisk
 	Power:
 		Amount: 0
 
@@ -478,7 +478,7 @@ RA2CYBORG:
 		Cost: 1800 #1000
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~techlevel.medium, ~RA2DOOM, yrngindp
+		Prerequisites: ~techlevel.medium, ~RA2DOOM, ra2_soviets_industrialplant
 		BuildDurationModifier: 100
 		BuildDuration: 720
 		Description: Cybernetic infantry\nMain anti-air unit of DOOM Russia\n  Strong vs Aircraft
@@ -546,7 +546,7 @@ RA2TRIPOD:
 		BuildPaletteOrder: 250
 		BuildDurationModifier: 100
 		BuildDuration: 1500
-		Prerequisites: ~techlevel.high, ~RA2DOOM, yrngindp
+		Prerequisites: ~techlevel.high, ~RA2DOOM, ra2_soviets_industrialplant
 		BuildLimit: 3
 		Description: Alien War Hybrid but from hell.\nLimit: 3\n Strong vs Everything.
 	Valued:
@@ -614,7 +614,7 @@ RA2CREEPCOLONY:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
 		Bounds: 1877, 1877
-		Class: sccreepcolony
+		Class: zerg_creepcolony
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -657,12 +657,12 @@ RA2CREEPCOLONY:
 		Range: 6c0
 		RequiresCondition: !disabled
 	RenderSprites:
-		Image: SCCREEPCOLONY
+		Image: zerg_creepcolony
 
 RA2ZEPDOOM:
-	Inherits: RA2ZEP
+	Inherits: ra2_soviets_kirovairship
 	RenderSprites:
-		Image: RA2ZEP
+		Image: ra2_soviets_kirovairship
 	Buildable:
 		BuildPaletteOrder: 99
 		Prerequisites: ~RA2DOOM, tek

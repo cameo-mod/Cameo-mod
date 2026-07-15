@@ -56,3 +56,9 @@ mods/cameo/mod.yaml
 # Python bytecode cache
 __pycache__/
 *.pyc
+
+# Session helper scripts (root-level)
+/check_*.py
+/gen_*.py
+/inventory_*.py
+/rename_old_*.py

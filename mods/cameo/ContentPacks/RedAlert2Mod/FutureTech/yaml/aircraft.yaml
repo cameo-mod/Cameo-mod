@@ -1,0 +1,324 @@
+futuretech_twister:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Twister
+	Valued:
+		Cost: 1000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~futuretech_launchpad
+		Queue: Aircraft, RAAircraft
+		Description: actor_future_twister.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 10
+		IdleSpeed: 100
+		TakeoffSounds: twisSounda.wav, twisSoundb.wav
+		LandingSounds: twisSounda.wav, twisSoundb.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: SteelTwisterMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: SteelTwisterMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 42
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: twister_husk.steel
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: SteelAircraftVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		PlayerPalette: playerra2cons
+
+futuretech_cryocopter:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Buildable:
+		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
+		BuildPaletteOrder: 405
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab, ~futuretech_promotion_unlockcryocopter
+		Description: actor_futu_cryo.description
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Cryocopter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armament@Rocket:
+		Name: secondary
+		Weapon: Future_Cryocopter_Rocket
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+	Armament@PRIMARY:
+		Weapon: Future_Cryocopter_Cryo
+		LocalOffset: 350,0,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 4
+	FirepowerMultiplier@Cryo:
+		Modifier: 12
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		AttackType: Hover
+	Aircraft:
+		Speed: 125
+		TurnSpeed: 25
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: cryo_husk.futu
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: CHHelixVoice
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		#Armaments: secondary
+		Ammo: 32
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	ReloadAmmoDelayMultiplier@ammo:
+		Modifier: 50
+		RequiresCondition: ammo < 4
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+cryo_husk.futu:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Cryocopter
+	Aircraft:
+		TurnSpeed: 15
+		Speed: 75
+	RenderSprites:
+		Image: futuretech_cryocopter
+		PlayerPalette: player_rgba
+
+futuretech_harbingergunship:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@announce: ^AnnounceOnBuild
+	Tooltip:
+		Name: Harbinger Gunship
+	Valued:
+		Cost: 10000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildAtProductionType: futuretech_harbingergunship
+		BuildPaletteOrder: 510
+		Prerequisites: ~futuretech_launchpad, futuretech_hypercore, ~futuretech_promotion_unlockharbingergunship
+		Queue: Aircraft, RAAircraft
+		Description: actor_future_harbinger.description
+	Aircraft:
+		CruiseAltitude: 3840
+		TurnSpeed: 8
+		Speed: 125
+		IdleTurnSpeed: 6
+		IdleSpeed: 90
+		TakeoffSounds: twisSounda.wav, twisSoundb.wav
+		LandingSounds: twisSounda.wav, twisSoundb.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 400000
+	Repairable:
+		HpPerStep: 20000
+	ChangesHealth@SelfHealing:
+		Step: 160
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: FutureHarbingerCannon
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: FutureHarbingerCannonE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: HarbingerChainguns
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		RequiresCondition: !rank-elite
+	Armament@AAELITE:
+		Name: primary
+		Weapon: HarbingerChaingunsE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	Turreted:
+	SpawnActorOnDeath:
+		Actor: harbinger_husk.futu
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: 50,500,200
+		TrailLength: 15
+	Contrail@2:
+		Offset: 50,-500,200
+		TrailLength: 15
+	Contrail@3:
+		Offset: -50,1000,200
+		TrailLength: 15
+	Contrail@4:
+		Offset: -50,-1000,200
+		TrailLength: 15
+	Voiced:
+		VoiceSet: FutureHarbVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	AmbientSoundCA:
+		SoundFiles: AUGunsh_movLoopa.wav
+		InitialSound: AUGunsh_movStarta.wav
+		InitialSoundLength: 60
+		VolumeMultiplier: 0.20
+		AudibleThroughFog: false
+	GrantTimedCondition@SpawnCloak:
+		Condition: spawn-cloaked
+		Duration: 1
+	Cloak:
+		InitialDelay: 0
+		CloakDelay: 0
+		UncloakOn: None
+		CloakStyle: Alpha
+		MinCloakedAlpha: 0
+		MaxCloakedAlpha: 0
+		EffectImage: chronoshift
+		UncloakEffectSequence: warpin
+		EffectPalette: ra2effect
+		RequiresCondition: spawn-cloaked
+
+harbinger_husk.futu:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Harbinger Gunship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+	LeavesTrails:
+		Offsets: -800,0,200
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: futuretech_harbingergunship
+		PlayerPalette: player_rgba
+
+landcarr_drone.futu:
+	Inherits: ra2hornet
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Aircraft:
+		VTOL: true
+	-AutoTarget:
+	AutoTarget:
+		InitialStanceAI: Defend
+		InitialStance: Defend
+		ScanRadius: 12
+	CarrierSlave:
+		LandingDistance: 0

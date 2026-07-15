@@ -1,0 +1,646 @@
+interceptor.nax:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Interceptor
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 3000
+		InitialFacing: 768
+		TurnSpeed: 25
+		IdleTurnSpeed: 25
+		Speed: 160
+		Repulsable: false
+		MaximumPitch: 48
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	RevealsShroud:
+		Range: 7500
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: NaxiInterceptorGun
+		LocalOffset: 400,-200,-200, 400,200,-200
+		PauseOnCondition: !ammo
+	Armament@Rockets:
+		Name: primary
+		Weapon: NaxPlaneRockets
+		LocalOffset: 425,-350,-225, 425,350,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	SpawnActorOnDeath:
+		Actor: interceptor_husk.nax
+	WithMoveAnimation:
+		MoveSequence: move
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+	RejectsOrders:
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
+	WithMoveAnimation:
+		MoveSequence: move
+		Condition: !Aircraft-Turning
+	Contrail:
+		Offset: -500,0,250
+		TrailLength: 15
+	-Voiced:
+
+interceptor_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Interceptor
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 160
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: interceptor.nax
+	RenderSprites:
+		PlayerPalette: playerra2
+
+drone.nax:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Drone
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 150
+		InitialFacing: 768
+		TurnSpeed: 15
+		Speed: 150
+		Repulsable: false
+		MaximumPitch: 50
+		TakeUpCellWhenLand: false
+		VTOL: true
+	Health:
+		HP: 7500
+	ChangesHealth@SelfHealing:
+		Step: 3
+	RevealsShroud:
+		Range: 7500
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: LunarNaxiDroneLaser
+		LocalOffset: 400,-200,-200, 400,200,-200
+		PauseOnCondition: !ammo
+	Armament@Rockets:
+		Name: primary
+		Weapon: LunarNaxiDroneMissile
+		LocalOffset: 425,-350,-225, 425,350,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: drone_husk.nax
+	WithMoveAnimation:
+		MoveSequence: move
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	WithMoveAnimation@Turn-R:
+		MoveSequence: move-r
+		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
+	WithMoveAnimation:
+		MoveSequence: move
+		Condition: !Aircraft-Turning
+	Contrail:
+		Offset: -500,0,250
+		TrailLength: 15
+	-Voiced:
+
+drone_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Drone
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: drone.nax
+	RenderSprites:
+		PlayerPalette: playerra2
+
+naxis_bf109:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Selectable:
+	Tooltip:
+		Name: BF 109
+	Valued:
+		Cost: 1100
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~naxis_airfield, naxis_radar, ~!naxis_upgrade_unlockme262
+		Queue: Aircraft, RAAircraft
+		Description: actor_bpln.description
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	HitShape:
+	Voiced:
+		VoiceSet: NaxiAircraftVoice
+	Aircraft:
+		TurnSpeed: 8
+		Speed: 115
+		RepulsionSpeed: 8
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: NaxPlanegun
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+	Armament@ELITE:
+		Name: primary
+		Weapon: NaxPlanegun
+		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 20
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -960,0,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: me262_husk.nax
+	RenderSprites:
+		Image: naxis_bf109
+		PlayerPalette: playerra2
+
+bf109_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: BF 109
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 55
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: naxis_bf109
+	RenderSprites:
+		PlayerPalette: playerra2
+
+naxis_me262:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Selectable:
+	Tooltip:
+		Name: Me 262
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~naxis_airfield, ~naxis_upgrade_unlockme262
+		Queue: Aircraft, RAAircraft
+		Description: actor_bpln.description
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 75
+	HitShape:
+	Voiced:
+		VoiceSet: NaxiAircraftVoice
+	Aircraft:
+		TurnSpeed: 10
+		Speed: 155
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament@Rockets:
+		Name: primary
+		Weapon: NaxPlaneRockets
+		LocalOffset: 425,-350,-225, 425,350,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+	Armament@RocketsELITE:
+		Name: primary
+		Weapon: NaxPlaneRockets
+		LocalOffset: 425,350,-225, 425,-350,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+		RequiresCondition: rank-elite
+	Armament@MG:
+		Name: primary
+		Weapon: NaxPlanegun
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: ammo < 5
+	Armament@ELITE:
+		Name: primary
+		Weapon: NaxPlanegun
+		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: ammo < 5
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 40
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 11
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: me262_husk.nax
+	RenderSprites:
+		Image: naxis_me262
+		PlayerPalette: playerra2
+
+me262_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Me 262
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 55
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 1
+		Image: smokey
+		StationaryInterval: 1
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: naxis_me262
+	RenderSprites:
+		PlayerPalette: playerra2
+
+naxis_transportzeppelin:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Transport Zeppelin
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: naxis_transportzeppelin
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~naxis_warfactory, naxis_radar
+		Queue: Aircraft, RAAircraft, Vehicle
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 35
+		AltitudeVelocity: 0c50
+		RepulsionSpeed: 15
+	Health:
+		HP: 1250000
+	Repairable:
+		HpPerStep: 2625
+	ChangesHealth@SelfHealing:
+		Step: 21
+	Armament:
+		Name: primary
+		Weapon: NaxQuadCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxQuadCannonE
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: NaxQuadCannonAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite
+	Armament@eliteAA:
+		Name: primary
+		Weapon: NaxQuadCannonAAE
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, naxis_naxiriflesoldier, panzer.nax, panzer.nax, panzer.nax, panzer.nax
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: zep_husk.nax
+	SelectionDecorations:
+	Selectable:
+		Class: ra2_allies_nighthawk
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: naxis_transportzeppelin
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiAircraftVoice
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+
+zep_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Transport Zeppelin
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: naxis_transportzeppelin
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+horten_bomber.nax:
+	Inherits: BADR.Soviet
+	Tooltip:
+		Name: Horten Bomber Plane
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: JapanSuperBomb
+	RenderSprites:
+		Image: nax_horten
+		PlayerPalette: playerra2
+	SpawnActorOnDeath:
+		Actor: horten_husk.nax
+	LeavesTrails@0:
+		Offsets: -250,1500,500
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -250,-1500,500
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+
+horten_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Horten Bomber Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	RenderSprites:
+		Image: nax_horten
+		PlayerPalette: playerra2
+
+cplane.nax:
+	Inherits: ^AirstrikePlane
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: sparadra.wav
+	Health:
+		HP: 175000
+	Armor:
+		Type: Bomber
+	Valued:
+		Cost: 4000
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 25
+		Speed: 150
+		Repulsable: False
+		MaximumPitch: 50
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+	Tooltip:
+		Name: Cargo Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: cplane_husk.nax
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: cplane.nax
+		PlayerPalette: playerra2
+
+cplane_husk.nax:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: cplane.nax
+		PlayerPalette: playerra2
+
+####################################################################################################
+#		Red Alert 2 Moon Naxis Planes
+####################################################################################################

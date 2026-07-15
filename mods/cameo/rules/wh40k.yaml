@@ -3968,12 +3968,12 @@ wh40ksentinel:
 		PassengerConditions:
 			e1: ifv-mg
 			rae1: ifv-mg
-			rare1: ifv-mg
-			ra2e1: ifv-mg
-			ra2e2: ifv-mg
+			ra1_soviet_rifleinfantry: ifv-mg
+			ra2_allies_gi: ifv-mg
+			ra2_soviets_conscript: ifv-mg
 			2100scav: ifv-mg
 			2100scav2: ifv-mg
-			scmarine: ifv-mg
+			terran_marine: ifv-mg
 			tse1: ifv-mg
 			ts_nod_lightinfantry: ifv-mg
 			tse1para: ifv-mg
@@ -3981,15 +3981,15 @@ wh40ksentinel:
 			tscyborgc: ifv-mg
 			forgotten_mutant: ifv-mg
 			forgotten_mutantsoldier: ifv-mg
-			sczergling: ifv-mg
+			zerg_zergling: ifv-mg
 			gle1: ifv-mg
 			che1: ifv-mg
 			usae1: ifv-mg
 			leange1: ifv-mg
 			wh40kguard: ifv-mg
 			wh40kkars: ifv-mg
-			e2: ifv-cannon
-			rae2: ifv-cannon
+			td_gdi_grenadier: ifv-cannon
+			ra1_soviet_grenadier: ifv-cannon
 			ts_gdi_discthrower: ifv-cannon
 			tse2para: ifv-cannon
 			forgotten_mutantsergeant: ifv-cannon
@@ -3999,11 +3999,11 @@ wh40ksentinel:
 			wh40kkarsgrenade: ifv-cannon
 			e6: ifv-repair
 			rae6: ifv-repair
-			mech: ifv-repair
-			scscv: ifv-repair
-			ra2engineer: ifv-repair
-			ra2engineer.soviet: ifv-repair
-			ra2engineer.yuri: ifv-repair
+			ra1_allies_mechanic: ifv-repair
+			terran_scv: ifv-repair
+			ra2_allies_engineer: ifv-repair
+			ra2_soviets_engineer: ifv-repair
+			yuri_engineer: ifv-repair
 			yrslav: ifv-repair
 			tsengineer: ifv-repair
 			ts_nod_engineer: ifv-repair
@@ -4018,56 +4018,56 @@ wh40ksentinel:
 			wh40ktechpriest: ifv-repair
 			e3: ifv-miss
 			rae3: ifv-miss
-			rare3: ifv-miss
-			yrggi: ifv-miss
+			ra1_soviet_rocketsoldier: ifv-miss
+			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 			gle3: ifv-miss
 			che3: ifv-miss
 			usae3: ifv-miss
 			leange3: ifv-miss
-			ra2flakt: ifv-flak
-			shok: ifv-tesla
-			ra2shk: ifv-tesla
+			ra2_soviets_flaktrooper: ifv-flak
+			ra1_soviet_shocktrooper: ifv-tesla
+			ra2_soviets_teslatrooper: ifv-tesla
 			wh40kguardplasma: ifv-tesla
 			wh40kkarsplasma: ifv-tesla
 			wh40kpsyker: ifv-tesla
-			e4: ifv-fire
-			rae4: ifv-fire
-			yrinit: ifv-fire
-			scfirebat: ifv-fire
-			e5: ifv-chem
-			ra2deso: ifv-chem
+			td_nod_flamethrower: ifv-fire
+			ra1_soviet_flamethrower: ifv-fire
+			yuri_initiate: ifv-fire
+			terran_firebat: ifv-fire
+			td_nod_chemicalwarrior: ifv-chem
+			ra2_soviets_desolator: ifv-chem
 			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
 			rmbo: ifv-hero
-			e7: ifv-hero
-			ra2tany: ifv-hero
+			ra1_allies_tanya: ifv-hero
+			ra2_allies_tanyaii: ifv-hero
 			cityswat: ifv-hero
-			yrboris: ifv-hero
-			ra2seal: ifv-hero
+			ra2_soviets_boris: ifv-hero
+			ra2_allies_seal: ifv-hero
 			cabal_cyborgcommando: ifv-hero
 			tscyc2.cabal: ifv-hero
 			forgotten_ghoststalker: ifv-hero
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			scghost: ifv-sniper
-			ra2snipe: ifv-sniper
-			yrvirus: ifv-sniper
-			raspy: ifv-sniper
-			ra2spy: ifv-sniper
-			ts_nod_chameleonspy: ifv-sniper
-			forgotten_mutantsniper: ifv-sniper
-			glkell: ifv-sniper
-			leangkell: ifv-sniper
-			glsabo: ifv-sniper
-			usapath: ifv-sniper
-			leangpath: ifv-sniper
-			wh40kcommisair: ifv-sniper
-			ra2cleg: ifv-chrono
-			ra2ivan: ifv-demo
+			terran_ghost: ifv-ra1_allies_alliedsniper
+			ra2_allies_sniper: ifv-ra1_allies_alliedsniper
+			yuri_virus: ifv-ra1_allies_alliedsniper
+			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
+			ra2_allies_ra2spy: ifv-ra1_allies_alliedsniper
+			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			glkell: ifv-ra1_allies_alliedsniper
+			leangkell: ifv-ra1_allies_alliedsniper
+			glsabo: ifv-ra1_allies_alliedsniper
+			usapath: ifv-ra1_allies_alliedsniper
+			leangpath: ifv-ra1_allies_alliedsniper
+			wh40kcommisair: ifv-ra1_allies_alliedsniper
+			ra2_allies_chronolegionnaire: ifv-chrono
+			ra2_soviets_crazyivan: ifv-demo
 			ra2terror: ifv-demo
-			scinfestedterran: ifv-demo
+			zerg_infestedterranbomber: ifv-demo
 			glterror: ifv-demo
 	###################
 	#	Armament
@@ -4078,7 +4078,7 @@ wh40ksentinel:
 		RecoilRecovery: 38
 		LocalOffset: 768,12,20, 768,-12,20
 		MuzzleSequence: muzzle
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@MG1:
 		Weapon: WH40KHeavyBolterMG
 		Recoil: 128
@@ -4099,11 +4099,11 @@ wh40ksentinel:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: WH40KSentinelCannon
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: WH40KOgrynGun
 		LocalOffset: 171,0,255
@@ -5797,21 +5797,21 @@ wh40kscoutsniper:
 	Power:
 		Amount: -15
 	Tooltip:
-		Name: Sniper Scout
+		Name: ra1_allies_alliedsniper Scout
 	Buildable:
 		BuildPaletteOrder: 63
 		Prerequisites: barracks, wh40karmorym
 		Queue: Defence, RADefence
 		Description: Armed Long Ranged Weapon.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 		MuzzleSequence: garrison-muzzle
 	WithDecoration@addon:
 		Image: wh40kitems
-		Sequence: sniper
+		Sequence: ra1_allies_alliedsniper
 		Position: TopRight
 		BlinkInterval: 32
 		BlinkPattern: Off, On, Off, Off
@@ -6081,7 +6081,7 @@ wh40kterminator3:
 	Power:
 		Amount: -30
 	Tooltip:
-		Name: Assault Gun Terminator Marine
+		Name: Assault td_nod_gunturret Terminator Marine
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -6525,7 +6525,7 @@ wh40krhino:
 	Power:
 		Amount: -25
 	Tooltip:
-		Name: Rhino APC
+		Name: Rhino td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -9493,7 +9493,7 @@ wh40kmeganobz:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim	
+		RequiresCondition: terran_upgrade_stimpack && !nostim	
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -9801,7 +9801,7 @@ wh40ksluggamobslave:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim
+		RequiresCondition: terran_upgrade_stimpack && !nostim
 wh40kuptankbusta:
 	Inherits: ^upgrade.template
 	Tooltip:
@@ -10913,7 +10913,7 @@ wh40kchaosrhino:
 	Power:
 		Amount: -25
 	Tooltip:
-		Name: Rhino APC
+		Name: Rhino td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -11436,7 +11436,7 @@ wh40kcultistplasma:
 	Power:
 		Amount: -15
 	Tooltip:
-		Name: Plasma Gun Cultist
+		Name: Plasma td_nod_gunturret Cultist
 	Buildable:
 		BuildPaletteOrder: 64
 		Prerequisites: barracks, wh40karmoryc
@@ -11673,7 +11673,7 @@ wh40kheretic:
 		DeployChance: 50
 		DeployTicks: 1000
 		UndeployTicks: 1000
-		RequiresCondition: upstimpack && !nostim
+		RequiresCondition: terran_upgrade_stimpack && !nostim
 
 wh40kraptor:
 	Inherits: ^Soldier

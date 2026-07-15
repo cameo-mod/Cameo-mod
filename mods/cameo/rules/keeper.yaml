@@ -1,11 +1,11 @@
 keeperdirt:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 1
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: Carvable Dirt Wall
+		Name: Carvable Dirt ixian_concretewall
 	Health:
 		HP: 12000
 	Armor:
@@ -24,13 +24,13 @@ keeperdirt:
 		TargetTypes: Drillable
 
 keeperwall:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: Dungeon Wall
+		Name: Dungeon ixian_concretewall
 	Health:
 		HP: 44000
 	Armor:
@@ -46,16 +46,16 @@ keeperwall:
 	WithWallSpriteBody:
 		Type: concrete
 	Targetable:
-		TargetTypes: Drillable, Wall
+		TargetTypes: Drillable, ixian_concretewall
 
 keeperbedrock:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 1
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: Rock Wall
+		Name: Rock ixian_concretewall
 	Health:
 		HP: 9999999
 	Armor:
@@ -74,7 +74,7 @@ keeperbedrock:
 		TargetTypes: NoKillable
 
 keepergold:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 15
 	CustomSellValue:
@@ -102,7 +102,7 @@ keepergold:
 		Weapon: OreExplosion
 
 keepergems:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 15
 	CustomSellValue:

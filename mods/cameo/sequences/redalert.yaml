@@ -5,7 +5,7 @@
 redguard:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: redguard.shp
+		Filename: japan_imperialscoutsman_redguard.shp
 		Scale: 1.38
 	stand:
 		Facings: 8
@@ -102,7 +102,7 @@ redguard:
 japanesesoldier:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: redguard.shp
+		Filename: japan_imperialscoutsman_redguard.shp
 		Scale: 1.38
 	stand:
 		Facings: 8
@@ -194,12 +194,12 @@ japanesesoldier:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: japanesesoldier.png
+		Filename: japan_imperialscoutsman_icon.png
 
 e1sniper:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e1sniper.shp
+		Filename: ra1_allies_alliedsniper_e1sniper.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -295,11 +295,11 @@ e1sniper:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: e1snipericon.png
+		Filename: ra1_allies_alliedsniper_icon.png
 
-mortarsoldier:
+ra1_soviet_mortarsoldier:
 	Defaults:
-		Filename: MortarSoldier.shp
+		Filename: ra1_soviet_promotion_unlockmortarsoldier_mortarsoldier.shp
 		Scale: 1.6
 	stand:
 		Facings: 8
@@ -394,12 +394,12 @@ mortarsoldier:
 		Start: 8
 		Facings: 8
 	icon:
-		Filename: MortarSoldierIcon.png
+		Filename: ra1_soviet_promotion_unlockmortarsoldier_icon.png
 
-alliedmachinegunner:
+ra1_allies_machinegunner:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e1lmg.shp
+		Filename: ra1_allies_promotion_unlockmachinegunner_e1lmg.shp
 		Scale: 2
 	stand:
 		Facings: 8
@@ -495,27 +495,27 @@ alliedmachinegunner:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: machinegunner.png
+		Filename: ra1_allies_promotion_unlockmachinegunner_icon.png
 
 rae1:
 	Inherits: e1
 	icon:
-		Filename: e1icon.png
+		Filename: ra1_soviet_rifleinfantry_icon.png
 
-rae2:
-	Inherits: e2
+ra1_soviet_grenadier:
+	Inherits: td_gdi_grenadier
 	icon:
-		Filename: e2icon.png
+		Filename: ra1_soviet_grenadier_icon.png
 
 rae3:
 	Inherits: e3
 	icon:
-		Filename: e3icon.png
+		Filename: ra1_soviet_rocketsoldier_icon.png
 
-raje3:
+japan_tankbuster:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: scybgm.shp
+		Filename: japan_tankbuster_scybgm.shp
 		Scale: 0.69
 	stand:
 		Start: 160
@@ -587,27 +587,27 @@ raje3:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: tankbustericon.png
+		Filename: japan_tankbuster_icon.png
 
-e3flamer:
+ra1_soviet_firerocketsoldier:
 	Inherits: e3
 	Defaults:
-		Filename: e3flamer.shp
+		Filename: ra1_soviet_firerocketsoldier.shp
 	icon:
-		Filename: e3flameicon.shp
+		Filename: ra1_soviet_firerocketsoldier_icon.shp
 
-rae4:
-	Inherits: e4
+ra1_soviet_flamethrower:
+	Inherits: td_nod_flamethrower
 	icon:
-		Filename: e4icon.png
+		Filename: ra1_soviet_flamethrower_icon.png
 
 rae6:
 	Inherits: e6
 	icon:
 		Filename: e6icon.png
-medi:
+ra1_allies_medic:
 	Defaults:
-		Filename: medi.shp
+		Filename: ra1_allies_medic.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -664,11 +664,11 @@ medi:
 		Facings: 8
 		Tick: 100
 	icon:
-		Filename: mediicon.shp
+		Filename: ra1_allies_medic_icon.shp
 
-mech:
+ra1_allies_mechanic:
 	Defaults:
-		Filename: mech.shp
+		Filename: ra1_allies_mechanic.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -725,11 +725,11 @@ mech:
 		Facings: 8
 		Tick: 100
 	icon:
-		Filename: mechicon.shp
+		Filename: ra1_allies_mechanic_icon.shp
 
-dog:
+ra1_soviet_attackdog:
 	Defaults:
-		Filename: dog.shp
+		Filename: ra1_soviet_attackdog.shp
 	stand:
 		Facings: 8
 	walk:
@@ -771,11 +771,11 @@ dog:
 		Start: 251
 		Length: 14
 	die6:
-		Filename: electdog.shp
+		Filename: ra1_soviet_attackdog_electdog.shp
 		Scale: 2
 		Length: *
 	die7:
-		Filename: electdog.shp
+		Filename: ra1_soviet_attackdog_electdog.shp
 		Scale: 2
 		Length: *
 	die-crushed:
@@ -784,23 +784,23 @@ dog:
 		Tick: 1600
 		ZOffset: -511
 	shoot:
-		Filename: dogbullt.shp
+		Filename: ra1_soviet_attackdog_dogbullt.shp
 		Length: 4
 		Facings: 8
 	icon:
-		Filename: dogicon.shp
+		Filename: ra1_soviet_attackdog_icon.shp
 
-cyberdog:
-	Inherits: dog
+ra1_soviet_cyberdog:
+	Inherits: ra1_soviet_attackdog
 	Defaults:
-		Filename: cyberdog.shp
+		Filename: ra1_soviet_promotion_unlockcyberdog.shp
 		Scale: 1.25
 	icon:
-		Filename: cyberdogicon.png
+		Filename: ra1_soviet_promotion_unlockcyberdog_icon.png
 
-e7:
+ra1_allies_tanya:
 	Defaults:
-		Filename: e7.shp
+		Filename: ra1_allies_tanya.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -866,7 +866,7 @@ e7:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: e7icon.shp
+		Filename: ra1_allies_tanya_icon.shp
 
 gnrl:
 	Defaults:
@@ -934,16 +934,16 @@ gnrl:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-volkov:
+ra1_soviet_volkov:
 	Inherits: gnrl
 	Defaults:
 		Scale: 1.2
 	icon:
-		Filename: volkovicon.png
+		Filename: ra1_soviet_volkov_icon.png
 
-shok:
+ra1_soviet_shocktrooper:
 	Defaults:
-		Filename: shok.shp
+		Filename: ra1_soviet_shocktrooper.shp
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -1021,16 +1021,16 @@ shok:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: shokicon.shp
+		Filename: ra1_soviet_shocktrooper_icon.shp
 
-ra_conscript_ak:
+ra1_soviet_ak47conscript:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.59
-		Filename: ra_cons_ak.png
+		Filename: ra1_soviet_ak47conscript.png
 		#Scale: 0.75
 	run:
 		Scale: 1
@@ -1075,7 +1075,7 @@ ra_conscript_ak:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ra_conscript_ak_icon.png
+		Filename: ra1_soviet_ak47conscript_icon.png
 
 ra_cons_molo:
 	Inherits: ^RA2ArmedInfantry
@@ -1131,14 +1131,14 @@ ra_cons_molo:
 	icon:
 		Filename: ra_conscript_molotov_icon.png
 
-ra_dragunov:
+ra1_soviet_dragunovantimaterialsniper:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.51
-		Filename: ra_dragunov.png
+		Filename: ra1_soviet_dragunovantimaterialsniper.png
 		#Scale: 0.75
 	run:
 		Scale: 1
@@ -1183,16 +1183,16 @@ ra_dragunov:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ra_dragunovicon.png
+		Filename: ra1_soviet_dragunovantimaterialsniper_icon.png
 
-ra_commissar:
+ra1_soviet_commissar:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.61
-		Filename: ra_commissar.png
+		Filename: ra1_soviet_upgrade_unlockcommissar.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -1236,16 +1236,16 @@ ra_commissar:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: commissaricon.png
+		Filename: ra1_soviet_upgrade_unlockcommissar_icon.png
 
-ra_zapper:
+ra1_soviet_zapper:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.59
-		Filename: ra_zapper.png
+		Filename: ra1_soviet_zapper.png
 	run:
 		Scale: 1
 		Tick: 96
@@ -1289,11 +1289,11 @@ ra_zapper:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ra_zappericon.png
+		Filename: ra1_soviet_zapper_icon.png
 
-raspy:
+ra1_allies_raspy:
 	Defaults:
-		Filename: raspy.shp
+		Filename: ra1_allies_raspy.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -1361,7 +1361,7 @@ raspy:
 		Length: 8
 		Facings: 8
 	icon:
-		Filename: raspyicon.png
+		Filename: ra1_allies_raspy_icon.png
 
 einstein:
 	Defaults:
@@ -1496,9 +1496,9 @@ rachan:
 		Tick: 1600
 		ZOffset: -511
 
-rasamurai:
+japan_samurai:
 	Defaults:
-		Filename: rasamurai.shp
+		Filename: japan_promotion_unlocksamurai_rasamurai.shp
 		Scale: 0.5
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1605,11 +1605,11 @@ rasamurai:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: rasamuraiicon.shp
+		Filename: japan_promotion_unlocksamurai_icon.shp
 
-ramaid:
+japan_archermaiden:
 	Defaults:
-		Filename: ramaid.shp
+		Filename: japan_promotion_unlockarchermaiden_ramaid.shp
 		Scale: 0.58
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1716,16 +1716,16 @@ ramaid:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: modmaidicon.shp
+		Filename: japan_promotion_unlockarchermaiden_icon.shp
 
 ####################################################################################################
 #		VEHICLES
 ####################################################################################################
 
-shogunexecutioner:
+japan_shogunexecutioner:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: executioner.shp
+		Filename: japan_promotion_unlockshogunexecutioner.shp
 		Scale: 2
 		Offset: 0, 18
 	idle:
@@ -1748,17 +1748,17 @@ shogunexecutioner:
 		Length: 9
 		Tick: 60
 	icon:
-		Filename: executioner.png
+		Filename: japan_promotion_unlockshogunexecutioner_icon.png
 		Offset: 0,0
 
 ramcv:
 	Defaults:
-		Filename: ramcv.shp
+		Filename: ra1_allies_alliedmobileconstructionvehicle_ramcv.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: ramcvicon.shp
+		Filename: ra1_allies_alliedmobileconstructionvehicle_icon.shp
 
 ramcvhusk:
 	Defaults:
@@ -1770,7 +1770,7 @@ ramcvhusk:
 
 raharv:
 	Defaults:
-		Filename: raharv.shp
+		Filename: ra1_allies_alliedoretruck_raharv.shp
 	idle:
 		Facings: 32
 		UseClassicFacings: True
@@ -1786,9 +1786,9 @@ raharv:
 		Length: 7
 	icon:
 		Start: 0
-		Filename: raharvicon.shp
+		Filename: ra1_allies_alliedoretruck_icon.shp
 	cityicon:
-		Filename: cityharvestericon.shp
+		Filename: ra1_allies_alliedoretruck_cityharvestericon.shp
 
 raharvempty:
 	Defaults:
@@ -1800,9 +1800,9 @@ raharvhalf:
 		Filename: raharvhalf.shp
 	Inherits: raharv
 
-ra_industrialminer:
+ra1_soviet_heavyindustrialminer:
 	Defaults:
-		Filename: SovietHeavyOreTruckSpritesheet.png
+		Filename: ra1_soviet_heavyindustrialminer_sovietheavyoretruckspritesheet.png
 		Scale: 1.25
 	idle:
 		Facings: 32
@@ -1820,7 +1820,7 @@ ra_industrialminer:
 		Tick: 105
 	icon:
 		Start: 0
-		Filename: ra_industrialminericon.png
+		Filename: ra1_soviet_heavyindustrialminer_icon.png
 
 hhusk:
 	Defaults:
@@ -1838,9 +1838,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -1023
 
-1tnk:
+ra1_allies_alliedlighttank:
 	Defaults:
-		Filename: 1tnk.shp
+		Filename: ra1_allies_alliedlighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1852,11 +1852,11 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 2
 	icon:
-		Filename: 1tnkicon.shp
+		Filename: ra1_allies_alliedlighttank_icon.shp
 
 1tnk.destroyed:
 	Defaults:
-		Filename: 1tnk.shp
+		Filename: ra1_allies_alliedlighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1867,9 +1867,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-2tnk:
+ra1_allies_alliedmediumtank:
 	Defaults:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1881,11 +1881,11 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 2tnkicon.shp
+		Filename: ra1_allies_alliedmediumtank_icon.shp
 
 2tnk.destroyed:
 	Defaults:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1896,9 +1896,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-3tnk:
+ra1_soviet_heavytank:
 	Defaults:
-		Filename: 3tnk.shp
+		Filename: ra1_soviet_heavytank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1910,11 +1910,11 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 3tnkicon.shp
+		Filename: ra1_soviet_heavytank_icon.shp
 
 3tnk.destroyed:
 	Defaults:
-		Filename: 3tnk.shp
+		Filename: ra1_soviet_heavytank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1925,7 +1925,7 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-4tnk:
+ra1_soviet_mammothtank:
 	Defaults:
 		Filename: 4tnk.shp
 	idle:
@@ -1939,7 +1939,7 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 4tnkicon.shp
+		Filename: ra1_soviet_mammothtank_icon.shp
 
 4tnk.destroyed:
 	Defaults:
@@ -1954,9 +1954,9 @@ hhusk2:
 		InterpolatedFacings: 64
 		ZOffset: -512
 
-5tnk:
+ra1_soviet_siegemammothtank:
 	Defaults:
-		Filename: 5tnk.shp
+		Filename: ra1_soviet_siegemammothtank.shp
 	idle:
 		Facings: 64
 	turret:
@@ -1966,31 +1966,31 @@ hhusk2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 5tnkicon.png
+		Filename: ra1_soviet_siegemammothtank_icon.png
 
-ra_grad:
+ra1_soviet_grad:
 	idle:
 		Facings: 64
 		Combine:
-			ra_grad-l:
+			ra1_soviet_grad-l:
 				Filename: ra_gradchassis.png
 				Length: 33
-			ra_grad-r:
+			ra1_soviet_grad-r:
 				Filename: ra_gradchassis.png
 				FlipX: True
 				Frames: 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	turret:
-		Filename: ra_gradturret.png
+		Filename: ra1_soviet_grad_gradturret.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ra_gradicon.png
+		Filename: ra1_soviet_grad_icon.png
 
-v2rl:
+ra1_soviet_v2rocketlauncher:
 	Defaults:
-		Filename: v2rl.shp
+		Filename: ra1_soviet_v2rocketlauncher.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2002,11 +2002,11 @@ v2rl:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: v2rlicon.shp
+		Filename: ra1_soviet_v2rocketlauncher_icon.shp
 
-v2rlnuke:
+ra1_soviet_nuclearv2launcher:
 	Defaults:
-		Filename: v2rlnuke.shp
+		Filename: ra1_soviet_nuclearv2launcher.shp
 		Scale: 1.5
 	empty-idle:
 		Facings: 64
@@ -2017,11 +2017,11 @@ v2rlnuke:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: nukelaunchericon.png
+		Filename: ra1_soviet_nuclearv2launcher_icon.png
 
-raarty:
+ra1_allies_alliedartillery:
 	Defaults:
-		Filename: raarty.shp
+		Filename: ra1_allies_alliedartillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2029,11 +2029,11 @@ raarty:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: raartyicon.shp
+		Filename: ra1_allies_alliedartillery_icon.shp
 
-rajeep:
+ra1_allies_ranger:
 	Defaults:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2046,13 +2046,13 @@ rajeep:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: rajeepicon.shp
+		Filename: ra1_allies_ranger_icon.shp
 
 rajeep2:
 	Defaults:
 		Filename: RocketRanger.png
 	idle:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
@@ -2064,20 +2064,20 @@ rajeep2:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: rajeepicon.shp
+		Filename: ra1_allies_ranger_icon.shp
 
-mnly:
+ra1_allies_minelayer:
 	Defaults:
-		Filename: mnly.shp
+		Filename: ra1_allies_minelayer.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: mnlyicon.shp
+		Filename: ra1_allies_minelayer_icon.shp
 
 raapc:
 	Defaults:
-		Filename: apc.shp
+		Filename: td_gdi_apc.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2087,7 +2087,7 @@ raapc:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: apcmuz.shp
+		Filename: ra1_soviet_btr80_apcmuz.shp
 		Scale: 2.0
 		Length: 3
 		Stride: 6
@@ -2100,9 +2100,9 @@ raapc:
 	icon:
 		Filename: raapcicon.png
 
-mrj:
+ra1_allies_mobileradarjammer:
 	Defaults:
-		Filename: mrj.shp
+		Filename: ra1_allies_mobileradarjammer.shp
 		Offset: 0,-10
 	idle:
 		Facings: 32
@@ -2111,14 +2111,14 @@ mrj:
 		Start: 32
 		Length: 32
 	jamsignal:
-		Filename: jamsignal.shp
+		Filename: ra1_allies_mobileradarjammer_jamsignal.shp
 		Scale: 2
 		Length: *
 		BlendMode: Alpha
 		Alpha: 0.3
 		Offset: 0,-5
 	icon:
-		Filename: mrjicon.shp
+		Filename: ra1_allies_mobileradarjammer_icon.shp
 		Offset: 0,0
 
 jamfield:
@@ -2130,28 +2130,28 @@ jamfield:
 		Alpha: 0.15
 		Scale: 2
 
-ramgg:
+ra1_allies_mobilegapgenerator:
 	idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	spinner:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Start: 32
 		Length: 8
 	spinner-idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Start: 32
 		Length: 1
 	gapfield:
-		Filename: gapgeneratoranimation.shp
+		Filename: ra1_allies_mobilegapgenerator_gapgeneratoranimation.shp
 		Length: *
 		BlendMode: Alpha
 		ZOffset: 1023
 		Alpha: 0.15
 		Scale: 1.75
 	icon:
-		Filename: ramggicon.shp
+		Filename: ra1_allies_mobilegapgenerator_icon.shp
 
 vortexanim:
 	Defaults:
@@ -2178,11 +2178,11 @@ vortexanim:
 	dead:
 		Alpha: 0
 	icon:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 
-ttnk:
+ra1_soviet_teslatank:
 	Defaults:
-		Filename: ttnk.shp
+		Filename: ra1_soviet_teslatank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2190,36 +2190,36 @@ ttnk:
 		Start: 32
 		Length: 32
 	icon:
-		Filename: ttnkicon.shp
+		Filename: ra1_soviet_teslatank_icon.shp
 
-ttnk2:
+ra1_soviet_heavyteslatank:
 	Defaults:
-		Filename: HeavyTeslaChass.png
+		Filename: ra1_soviet_heavyteslatank_heavyteslachass.png
 	idle:
 		Facings: 64
 		#Offset: -2,8
 	spinner:
-		Filename: TeslaBallWeap.png
+		Filename: ra1_soviet_heavyteslatank_teslaballweap.png
 		Length: 32
 	small_spinner:
-		Filename: TeslaBallWeap.png
+		Filename: ra1_soviet_heavyteslatank_teslaballweap.png
 		Length: 32
 		Scale: 0.5
 	icon:
-		Filename: heavyteslaicon.png
+		Filename: ra1_soviet_heavyteslatank_icon.png
 
-ra_heatraytank:
+ra1_soviet_heatraytank:
 	Defaults:
-		Filename: SovietLaserTankSpritesheet.png
+		Filename: ra1_soviet_upgrade_unlockheatraytank_sovietlasertankspritesheet.png
 	idle:
 		Facings: 32
 		#Offset: -2,8
 	icon:
-		Filename: ra_heatraytankicon.png
+		Filename: ra1_soviet_upgrade_unlockheatraytank_icon.png
 
-ftrk:
+ra1_soviet_flaktruck:
 	Defaults:
-		Filename: ftrk.shp
+		Filename: ra1_soviet_flaktruck.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2231,20 +2231,20 @@ ftrk:
 		Filename: gunfire2.shp
 		Length: 2
 	icon:
-		Filename: ftrkicon.shp
+		Filename: ra1_soviet_flaktruck_icon.shp
 
-dtrk:
+ra1_soviet_nukedemotruck:
 	Defaults:
-		Filename: dtrk.shp
+		Filename: ra1_soviet_nukedemotruck.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: dtrkicon.shp
+		Filename: ra1_soviet_nukedemotruck_icon.shp
 
-ctnk:
+ra1_allies_chronotank:
 	Defaults:
-		Filename: ctnk.shp
+		Filename: ra1_allies_promotion_unlockchronotank_ctnk.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2253,11 +2253,11 @@ ctnk:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ctnkicon.shp
+		Filename: ra1_allies_promotion_unlockchronotank_icon.shp
 
-qtnk:
+ra1_soviet_madtank:
 	Defaults:
-		Filename: qtnk.shp
+		Filename: ra1_soviet_madtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2266,7 +2266,7 @@ qtnk:
 		Facings: 8
 		Length: 8
 	icon:
-		Filename: qtnkicon.shp
+		Filename: ra1_soviet_madtank_icon.shp
 
 fb1:
 	Defaults:
@@ -2275,9 +2275,9 @@ fb1:
 		Length: *
 		ZOffset: 1023
 
-modgtnk:
+ra1_soviet_gatlingtank:
 	Defaults:
-		Filename: ragattlingtank.shp
+		Filename: ra1_soviet_promotion_unlockgatlingtank_ragattlingtank.shp
 	idle:
 		Facings: 64
 	turret:
@@ -2288,11 +2288,11 @@ modgtnk:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modgtnkicon.shp
+		Filename: ra1_soviet_promotion_unlockgatlingtank_icon.shp
 
 modtnkd2:
 	Defaults:
-		Filename: AlliedTankDestroyerTSpritesheet.png
+		Filename: ra1_allies_promotion_unlocktankdestroyer_alliedtankdestroyertspritesheet.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2300,15 +2300,15 @@ modtnkd2:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: Ra1TankDestroyerIcon.shp
+		Filename: ra1_allies_promotion_unlocktankdestroyer_icon.shp
 
 modflak88:
 	idle:
-		Filename: ramgg.shp
+		Filename: ra1_allies_mobilegapgenerator.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
-		Filename: ftrk.shp
+		Filename: ra1_soviet_flaktruck.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2318,9 +2318,9 @@ modflak88:
 	icon:
 		Filename: modflak88icon.shp
 
-modbtr:
+ra1_soviet_btr80:
 	Defaults:
-		Filename: new_btr.shp
+		Filename: ra1_soviet_btr80_new_btr.shp
 	idle:
 		Scale: 1.555
 		Facings: 64
@@ -2329,37 +2329,37 @@ modbtr:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: apcmuz.shp
+		Filename: ra1_soviet_btr80_apcmuz.shp
 		Length: 3
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: modbtricon.shp
+		Filename: ra1_soviet_btr80_icon.shp
 
-sheridan:
+ra1_allies_sheridanassaulttank:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: SheridanChassisSpriteSheet.png
+		Filename: ra1_allies_promotion_unlocksheridan_sheridanchassisspritesheet.png
 		Facings: 64
 	turret:
 		Scale: 1
-		Filename: SheridanTurret2Spritesheet.png
+		Filename: ra1_allies_promotion_unlocksheridan_sheridanturret2spritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: SheridanIcon.shp
+		Filename: ra1_allies_promotion_unlocksheridan_icon.shp
 
-modkubel:
+japan_scoutcar:
 	Defaults:
-		Filename: jkubelwagen.shp
+		Filename: japan_scoutcar_jkubelwagen.shp
 	idle:
 		Facings: 64
 	turret:
-		Filename: rajeep.shp
+		Filename: ra1_allies_ranger.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -2368,11 +2368,11 @@ modkubel:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jkubelicon.shp
+		Filename: japan_scoutcar_icon.shp
 
-modbggy:
+japan_grenadebuggy:
 	Defaults:
-		Filename: jbuggy.shp
+		Filename: japan_promotion_unlockgrenadebuggy_jbuggy.shp
 	idle:
 		Facings: 64
 	turret:
@@ -2383,11 +2383,11 @@ modbggy:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jbuggyicon.shp
+		Filename: japan_promotion_unlockgrenadebuggy_icon.shp
 
-modhover:
+japan_hovercrafttransport:
 	Defaults:
-		Filename: modhover_new.shp
+		Filename: japan_hovercrafttransport_modhover_new.shp
 		Scale: 0.4
 	idle:
 		Facings: 64
@@ -2400,11 +2400,11 @@ modhover:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modhovericon.shp
+		Filename: japan_hovercrafttransport_icon.shp
 
-modhovert:
+japan_hovercraftflametank:
 	Defaults:
-		Filename: modhovert.shp
+		Filename: japan_promotion_unlockhovercraftflametank_modhovert.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2417,11 +2417,11 @@ modhovert:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modhoverticon.shp
+		Filename: japan_promotion_unlockhovercraftflametank_icon.shp
 
-modoitank:
+japan_oitank:
 	Defaults:
-		Filename: oitank.shp
+		Filename: japan_oitank.shp
 		Offset: 0,12
 	idle:
 		Facings: 64
@@ -2435,15 +2435,15 @@ modoitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modoitankicon.shp
+		Filename: japan_oitank_icon.shp
 		Offset: 0,0
 
-exorcistoitank:
+japan_exorcistoitank:
 	Defaults:
-		Filename: oitank.shp
+		Filename: japan_oitank.shp
 		Offset: 0,12
 	idle:
-		Filename: exorcistoitank.shp
+		Filename: japan_exorcistoitank.shp
 		Facings: 64
 	turret:
 		Facings: 64
@@ -2455,35 +2455,35 @@ exorcistoitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: exorcistoitankicon.shp
+		Filename: japan_exorcistoitank_icon.shp
 		Offset: 0,0
 
-modcore:
+japan_corewarfactory:
 	Defaults:
-		Filename: modcore.shp
+		Filename: japan_coretechcenter_modcore.shp
 		Scale: 2
 	idle:
 		Facings: -32
 	icon:
-		Filename: raweapicon.png
+		Filename: ra1_allies_alliedwarfactory_icon.png
 	icon1:
-		Filename: raprocicon.png
+		Filename: ra1_allies_alliedorerefinery_icon.png
 	icon2:
-		Filename: JapPowerplanIcon.shp
+		Filename: japan_coretechcenter_jappowerplanicon.shp
 	icon3:
-		Filename: modjbarricon.shp
+		Filename: japan_japanesebarracks_icon.shp
 	icon4:
-		Filename: jradardomeicon.png
+		Filename: japan_coretechcenter_jradardomeicon.png
 	icon5:
-		Filename: JapFlagAirfieldIcon.shp
+		Filename: japan_japaneseairfield_icon.shp
 	icon6:
-		Filename: rafixicon.png
+		Filename: japan_coretechcenter_rafixicon.png
 	icon7:
-		Filename: modjtekicon.shp
+		Filename: japan_japanesetechcenter_icon.shp
 
-modwave:
+japan_waveforceartillery:
 	Defaults:
-		Filename: modwave.shp
+		Filename: japan_promotion_unlockwaveforceartillery_modwave.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2493,10 +2493,10 @@ modwave:
 		Facings: 64
 		Offset: 0,8
 	muzzle:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
 		Length: *
 	icon:
-		Filename: modwaveicon.shp
+		Filename: japan_promotion_unlockwaveforceartillery_icon.shp
 
 mod4tnkgirl:
 	Defaults:
@@ -2513,10 +2513,10 @@ mod4tnkgirl:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: 4tnkicon.shp
+		Filename: ra1_soviet_mammothtank_icon.shp
 jharv:
 	Defaults:
-		Filename: jharv.shp
+		Filename: japan_japaneseoretruck_jharv.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2530,13 +2530,13 @@ jharv:
 		Facings: 64
 	icon:
 		Start: 0
-		Filename: jharvicon.shp
+		Filename: japan_japaneseoretruck_jharvicon.shp
 	cityicon:
-		Filename: jharvicon.shp
+		Filename: japan_japaneseoretruck_jharvicon.shp
 
-jballista:
+japan_ballista:
 	Defaults:
-		Filename: jballista.shp
+		Filename: japan_ballista.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2544,7 +2544,7 @@ jballista:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: jballistaicon.shp
+		Filename: japan_ballista_icon.shp
 
 ####################################################################################################
 #		BUILDINGS
@@ -2553,10 +2553,10 @@ jballista:
 rafact:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: rafact.shp
+		Filename: ra1_allies_alliedconstructionyard_rafact.shp
 	idle:
 	make:
-		Filename: rafactmake.shp
+		Filename: ra1_allies_alliedconstructionyard_rafactmake.shp
 		Length: *
 	build:
 		Start: 1
@@ -2567,21 +2567,21 @@ rafact:
 		Start: 27
 		Length: 25
 	dead:
-		Filename: rafactdead.shp
+		Filename: ra1_allies_alliedconstructionyard_rafactdead.shp
 		Tick: 800
 	bib:
 	icon:
-		Filename: rafacticon.png
+		Filename: ra1_allies_alliedconstructionyard_icon.png
 
 rafactj:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: rafactj.shp
+		Filename: japan_japaneseconstructionyard_rafactj.shp
 	idle:
 		Start: 32
 		Length: 15
 	make:
-		Filename: rafactj.shp
+		Filename: japan_japaneseconstructionyard_rafactj.shp
 		Length: 32
 	build:
 		Start: 64
@@ -2597,39 +2597,39 @@ rafactj:
 		Tick: 800
 	bib:
 	icon:
-		Filename: rafactjicon.shp
+		Filename: japan_japaneseconstructionyard_icon.shp
 
 rafactcolor:
 	Defaults:
 		Filename: rafactcolor.shp
 	idle:
 	icon:
-		Filename: rafacticon.png
+		Filename: ra1_allies_alliedconstructionyard_icon.png
 
 raproc:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: raproc.shp
+		Filename: ra1_allies_alliedorerefinery_raproc.shp
 	idle:
 		ZOffset: -1c511
 	damaged-idle:
 		ZOffset: -1c511
 	idle-top:
-		Filename: raproctop.shp
+		Filename: ra1_allies_alliedorerefinery_raproctop.shp
 		ZOffset: 0
 	damaged-idle-top:
-		Filename: raproctop.shp
+		Filename: ra1_allies_alliedorerefinery_raproctop.shp
 		Start: 1
 		ZOffset: 0
 	make:
-		Filename: raprocmake.shp
+		Filename: ra1_allies_alliedorerefinery_raprocmake.shp
 		Length: *
 	dead:
-		Filename: raprocdead.shp
+		Filename: ra1_allies_alliedorerefinery_raprocdead.shp
 		Tick: 800
 	bib:
 	icon:
-		Filename: raprocicon.png
+		Filename: ra1_allies_alliedorerefinery_icon.png
 
 rasilo:
 	Inherits: ^WithBuildingBibSilo
@@ -2695,10 +2695,10 @@ apwr:
 	icon:
 		Filename: apwricon.png
 
-barr:
+ra1_soviet_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: barr.shp
+		Filename: ra1_soviet_barracks.shp
 	idle:
 		Length: 10
 		Offset: 0,-12
@@ -2707,18 +2707,18 @@ barr:
 		Length: 10
 		Offset: 0,-12
 	make:
-		Filename: barrmake.shp
+		Filename: ra1_soviet_barracks_make.shp
 		Length: *
 		Offset: 0,-12
 	dead:
 	bib:
 	icon:
-		Filename: barricon.png
+		Filename: ra1_soviet_barracks_icon.png
 
-tent:
+ra1_allies_alliedbarracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: tent.shp
+		Filename: ra1_allies_alliedbarracks.shp
 		TilesetFilenames:
 			DESERT: tent.des
 			SNOW: tent.sno
@@ -2734,7 +2734,7 @@ tent:
 		Start: 10
 		Length: 10
 	make:
-		Filename: tentmake.shp
+		Filename: ra1_allies_alliedbarracks_tentmake.shp
 		TilesetFilenames:
 			DESERT: tentmake.des
 			SNOW: tentmake.sno
@@ -2748,7 +2748,7 @@ tent:
 	dead:
 	bib:
 	icon:
-		Filename: tenticon.png
+		Filename: ra1_allies_alliedbarracks_icon.png
 		TilesetFilenames:
 
 kenn:
@@ -2769,111 +2769,111 @@ kenn:
 dome:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: dome.shp
+		Filename: ra1_allies_alliedradardome.shp
 	idle:
 		Offset: 0,-8
 	damaged-idle:
 		Start: 1
 		Offset: 0,-8
 	make:
-		Filename: domemake.shp
+		Filename: ra1_allies_alliedradardome_make.shp
 		Length: *
 		Offset: 0,-8
 	dead:
 	bib:
 	icon:
-		Filename: domeicon.png
+		Filename: ra1_allies_alliedradardome_icon.png
 
-atek:
+ra1_allies_alliedtechcenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: atek.shp
+		Filename: ra1_allies_alliedtechcenter.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: atekmake.shp
+		Filename: ra1_allies_alliedtechcenter_atekmake.shp
 		Length: *
 	active:
-		Filename: sputdoor.shp
+		Filename: ra1_allies_alliedtechcenter_sputdoor.shp
 		Length: *
 		Offset: -8,0
 	dead:
 	bib:
 	icon:
-		Filename: atekicon.png
+		Filename: ra1_allies_alliedtechcenter_icon.png
 
-stek:
+ra1_soviet_techcenter:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: stek.shp
+		Filename: ra1_soviet_techcenter.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: stekmake.shp
+		Filename: ra1_soviet_techcenter_stekmake.shp
 		Length: *
 	dead:
 	bib:
 	icon:
-		Filename: stekicon.png
+		Filename: ra1_soviet_techcenter_icon.png
 
-raweap:
+ra1_soviet_warfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: raweap.shp
+		Filename: ra1_allies_alliedwarfactory_raweap.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: raweapmake.shp
+		Filename: ra1_allies_alliedwarfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	dead:
 	bib:
 	icon:
-		Filename: raweapicon.png
+		Filename: ra1_allies_alliedwarfactory_icon.png
 
-ra_gigafactory:
+ra1_soviet_largefactory:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: raweap.shp
+		Filename: ra1_allies_alliedwarfactory_raweap.shp
 		Scale: 1.333
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: raweapmake.shp
+		Filename: ra1_allies_alliedwarfactory_raweapmake.shp
 		Length: *
 	build-top:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 10
 	damaged-build-top:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 4
 	customhack:
-		Filename: raweap3.shp
+		Filename: ra1_allies_alliedwarfactory_raweap3.shp
 		Length: 1
 	damaged-customhack:
-		Filename: raweap2.shp
+		Filename: ra1_allies_alliedwarfactory_raweap2.shp
 		Start: 4
 		Length: 1
 	smoke:
-		Filename: raweapsmoke.png
+		Filename: ra1_soviet_largefactory_raweapsmoke.png
 		Length: *
 		Tick: 100
 		ZOffset: 100
@@ -2881,12 +2881,12 @@ ra_gigafactory:
 	bib:
 		Scale: 1
 	icon:
-		Filename: ra_gigafactoryicon.png
+		Filename: ra1_soviet_largefactory_icon.png
 
-rahpad:
+ra1_allies_alliedhelipad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: rahpad.shp
+		Filename: ra1_allies_alliedhelipad.shp
 	idle:
 		ZOffset: -1023
 	damaged-idle:
@@ -2901,24 +2901,24 @@ rahpad:
 		Length: 6
 		ZOffset: -1023
 	make:
-		Filename: rahpadmake.shp
+		Filename: ra1_allies_alliedhelipad_make.shp
 		Length: *
 	dead:
 	bib:
 	icon:
-		Filename: rahpadicon.png
+		Filename: ra1_allies_alliedhelipad_icon.png
 
-raafld:
+ra1_soviet_airfield:
 	Defaults:
-		Filename: raafld.shp
+		Filename: ra1_soviet_airfield.shp
 	idle:
-		Filename: raafldidle.shp
+		Filename: ra1_soviet_airfield_raafldidle.shp
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-idle:
-		Filename: raafldidle.shp
+		Filename: ra1_soviet_airfield_raafldidle.shp
 		Start: 8
 		Length: 8
 		Tick: 160
@@ -2936,57 +2936,57 @@ raafld:
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: raafldmake.shp
+		Filename: ra1_soviet_airfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
 	icon:
-		Filename: raafldicon.png
+		Filename: ra1_soviet_airfield_icon.png
 
-ra_largeairfield:
+ra1_soviet_largesovietairfield:
 	Defaults:
 		Scale: 2
 	idle:
-		Filename: ra_largeairfield.shp
+		Filename: ra1_soviet_largesovietairfield.shp
 		Length: 1
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-idle:
-		Filename: ra_largeairfield.shp
+		Filename: ra1_soviet_largesovietairfield.shp
 		Start: 1
 		Length: 1
 		ZOffset: -1023
 		Offset: 0,-6
 	active:
-		Filename: ra_largeairfield_light.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_light.shp
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-active:
-		Filename: ra_largeairfield_light.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_light.shp
 		Start: 8
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	flag:
-		Filename: ra_largeairfield_flag.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_flag.shp
 		Length: 8
 		ShadowStart: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: ra_largeairfield_make.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
-		Filename: ra_largeairfield.shp
+		Filename: ra1_soviet_largesovietairfield.shp
 		Start: 1
 		Length: 1
 	icon:
-		Filename: ra_largeairfieldicon.png
+		Filename: ra1_soviet_largesovietairfield_icon.png
 
 rafix:
 	Inherits: ^WithBuildingBibFix
@@ -3017,34 +3017,34 @@ rafix:
 	bib:
 		Offset: 0,-2
 	icon:
-		Filename: rafixicon.png
+		Filename: japan_coretechcenter_rafixicon.png
 
 rafixa:
 	Inherits: rafix
 	Defaults:
-		Filename: rafixa.shp
+		Filename: ra1_allies_alliedservicedepot_rafixa.shp
 
 rafixs:
 	Inherits: rafix
 	Defaults:
-		Filename: rafixs.shp
+		Filename: ra1_soviet_servicedepot_rafixs.shp
 
 rafixj:
 	Inherits: rafix
 	Defaults:
-		Filename: rafixj.shp
+		Filename: japan_japaneseservicedepot_rafixj.shp
 
-ragun:
+ra1_allies_alliedgunturret:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: ragun.shp
+		Filename: ra1_allies_alliedgunturret.shp
 	idle:
 		Facings: 32
 	recoil:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ragunmake.shp
+		Filename: ra1_allies_alliedgunturret_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3059,12 +3059,12 @@ ragun:
 	bib:
 		Offset: -1,-1
 	icon:
-		Filename: ragunicon.png
+		Filename: ra1_allies_alliedgunturret_icon.png
 
-agun:
+ra1_allies_alliedaagun:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: agun.shp
+		Filename: ra1_allies_alliedaagun.shp
 		Offset: 0,-26
 	idle:
 		Facings: 32
@@ -3072,7 +3072,7 @@ agun:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: agunmake.shp
+		Filename: ra1_allies_alliedaagun_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3089,13 +3089,13 @@ agun:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: agunicon.png
+		Filename: ra1_allies_alliedaagun_icon.png
 		Offset: 0,0
 
-rasam:
+ra1_soviet_samsite:
 	Inherits: ^WithBuildingBibSam
 	Defaults:
-		Filename: rasam.shp
+		Filename: ra1_soviet_samsite.shp
 		Offset: -2,-4
 	idle:
 		Facings: 32
@@ -3103,10 +3103,10 @@ rasam:
 		Start: 34
 		Facings: 32
 	make:
-		Filename: rasammake.shp
+		Filename: ra1_soviet_samsite_make.shp
 		Length: *
 	muzzle:
-		Filename: rasamfire.shp
+		Filename: ra1_soviet_samsite_fire.shp
 		Length: 18
 		Facings: 8
 		Offset: -2,12
@@ -3114,38 +3114,38 @@ rasam:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: samicon.png
+		Filename: ra1_soviet_samsite_icon.png
 		Offset: 0,0
 
-ftur:
+ra1_soviet_flametower:
 	Inherits: ^WithBuildingBibFtur
 	Defaults:
-		Filename: ftur.shp
+		Filename: ra1_soviet_flametower.shp
 	idle:
 		Offset: 0,-2
 	damaged-idle:
 		Start: 1
 		Offset: 0,-2
 	make:
-		Filename: fturmake.shp
+		Filename: ra1_soviet_flametower_fturmake.shp
 		Length: *
 		Offset: 0,-2
 	dead:
 	bib:
 		Length: *
 	icon:
-		Filename: fturicon.png
+		Filename: ra1_soviet_flametower_icon.png
 
-tsla:
+ra1_soviet_teslacoil:
 	Inherits: ^WithBuildingBibTsla
 	Defaults:
-		Filename: tsla.shp
+		Filename: ra1_soviet_teslacoil.shp
 		Offset: 0,-26
 	idle:
 	damaged-idle:
 		Start: 10
 	make:
-		Filename: tslamake.shp
+		Filename: ra1_soviet_teslacoil_make.shp
 		Length: *
 	active:
 		Start: 1
@@ -3159,18 +3159,18 @@ tsla:
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: tslaicon.png
+		Filename: ra1_soviet_teslacoil_icon.png
 		Offset: 0,0
 
-pbox:
+ra1_allies_pillbox:
 	Inherits: ^WithBuildingBibPbox
 	Defaults:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: pboxmake.shp
+		Filename: ra1_allies_pillbox_make.shp
 		Length: *
 	dead:
 	muzzle:
@@ -3180,13 +3180,13 @@ pbox:
 	bib:
 		Offset: 0,-1
 	icon:
-		Filename: pboxicon.png
+		Filename: ra1_allies_pillbox_icon.png
 
-hbox:
+ra1_allies_camopillbox:
 	Defaults:
-		Filename: hbox.shp
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.shp
 	idle:
-		Filename: hbox.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.tem
 		TilesetFilenames:
 			DESERT: hbox.des
 			WINTER: hbox.win
@@ -3198,7 +3198,7 @@ hbox:
 			ARRAKIS: hbox.des
 			ARRAKIS2: hbox.des
 	damaged-idle:
-		Filename: hbox.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hbox.tem
 		TilesetFilenames:
 			DESERT: hbox.des
 			WINTER: hbox.win
@@ -3211,7 +3211,7 @@ hbox:
 			ARRAKIS2: hbox.des
 		Start: 2
 	make:
-		Filename: hboxmake.tem
+		Filename: ra1_allies_promotion_unlockcamopillbox_hboxmake.tem
 		TilesetFilenames:
 			DESERT: hboxmake.des
 			WINTER: hboxmake.win
@@ -3229,12 +3229,12 @@ hbox:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: hboxicon.png
+		Filename: ra1_allies_promotion_unlockcamopillbox_icon.png
 
-gap:
+ra1_allies_gapgenerator:
 	Inherits: ^WithBuildingBibGap
 	Defaults:
-		Filename: gap.shp
+		Filename: ra1_allies_gapgenerator.shp
 	idle:
 		Length: 32
 		Offset: 0,-28
@@ -3244,11 +3244,11 @@ gap:
 		Offset: 0,-28
 	dead:
 	make:
-		Filename: gapmake.shp
+		Filename: ra1_allies_gapgenerator_make.shp
 		Length: *
 		Offset: 0,-28
 	gapfield:
-		Filename: gapgeneratoranimation.shp
+		Filename: ra1_allies_mobilegapgenerator_gapgeneratoranimation.shp
 		Length: *
 		BlendMode: Alpha
 		ZOffset: 1023
@@ -3257,12 +3257,12 @@ gap:
 		Tick: 32
 	bib:
 	icon:
-		Filename: gapicon.png
+		Filename: ra1_allies_gapgenerator_icon.png
 
-iron:
+ra1_soviet_ironcurtain:
 	Inherits: ^WithBuildingBibIron
 	Defaults:
-		Filename: iron.shp
+		Filename: ra1_soviet_ironcurtain.shp
 	idle:
 		Offset: 0,-0
 	active:
@@ -3277,17 +3277,17 @@ iron:
 		Offset: 0,-0
 	dead:
 	make:
-		Filename: ironmake.shp
+		Filename: ra1_soviet_ironcurtain_make.shp
 		Length: *
 		Offset: 0,-0
 	bib:
 	icon:
-		Filename: ironicon.png
+		Filename: ra1_soviet_ironcurtain_icon.png
 
-pdox:
+ra1_allies_chronosphere:
 	Inherits: ^WithBuildingBibPdox
 	Defaults:
-		Filename: pdox.shp
+		Filename: ra1_allies_chronosphere.shp
 	idle:
 	damaged-idle:
 		Start: 29
@@ -3298,17 +3298,17 @@ pdox:
 		Length: 29
 	dead:
 	make:
-		Filename: pdoxmake.shp
+		Filename: ra1_allies_chronosphere_pdoxmake.shp
 		Length: *
 	bib:
 	icon:
-		Filename: pdoxicon.png
+		Filename: ra1_allies_chronosphere_icon.png
 	chronovortex:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 
-mslo:
+ra1_soviet_missilesilo:
 	Defaults:
-		Filename: mslo.tem
+		Filename: ra1_soviet_missilesilo.tem
 		Scale: 1
 		TilesetFilenames:
 			WINTER: mslo.win
@@ -3325,7 +3325,7 @@ mslo:
 	damaged-idle:
 		Start: 8
 	make:
-		Filename: mslomake.tem
+		Filename: ra1_soviet_missilesilo_make.tem
 		TilesetFilenames:
 			WINTER: mslomake.win
 			SNOW: mslomake.sno
@@ -3347,7 +3347,7 @@ mslo:
 		Length: 7
 	dead:
 	icon:
-		Filename: msloicon2.png
+		Filename: ra1_soviet_missilesilo_icon.png
 		TilesetFilenames:
 
 fenc:
@@ -3359,17 +3359,17 @@ fenc:
 	icon:
 		Filename: fencicon.shp
 
-modspaceport:
+ra1_allies_reinforcementpad:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: alliedreinforcementpadwhole.png
+		Filename: ra1_allies_promotion_unlockreinforcementpad_alliedreinforcementpadwhole.png
 		Offset: 5,10
 		#Scale: 1.25
 	idle:
 		Start: 10
 		Length: 11
 	damaged-idle:
-		Filename: alliedreinforcementpaddamaged.png
+		Filename: ra1_allies_promotion_unlockreinforcementpad_alliedreinforcementpaddamaged.png
 		Length: *
 	make:
 		Start: 0
@@ -3379,37 +3379,37 @@ modspaceport:
 		Offset: 0,5
 		Frames: 0,1,1,2,3,4,5,5,6,7
 	icon:
-		Filename: modspaceporticon.shp
+		Filename: ra1_allies_promotion_unlockreinforcementpad_icon.shp
 		Offset: 0,0
 
-jpwr:
+japan_waveforcereactor:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: JapReactorUndamagedIdle.png
+		Filename: japan_waveforcereactor_japreactorundamagedidle.png
 		Length: *
 		Scale: 1
 	damaged-idle:
-		Filename: JapReactorDamagedIdle.png
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
 		Length: *
 		Scale: 1
 	make:
-		Filename: JapReactorBuildup.png
+		Filename: japan_waveforcereactor_japreactorbuildup.png
 		Length: *
 		Scale: 1
 	dead:
-		Filename: JapReactorDamagedIdle.png
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
 		Length: *
 		Tick: 13
 		Scale: 1
 	bib:
 	icon:
-		Filename: JapPowerplanIcon.shp
+		Filename: japan_coretechcenter_jappowerplanicon.shp
 
-jproc:
+japan_japaneseorerefinery:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: jproc.shp
+		Filename: japan_japaneseorerefinery.shp
 	idle:
 		ZOffset: -1c512
 		Offset: 0, 14
@@ -3418,21 +3418,21 @@ jproc:
 		Offset: 0, 14
 		Start: 1
 	make:
-		Filename: jprocmake.shp
+		Filename: japan_japaneseorerefinery_jprocmake.shp
 		Length: *
 	dead:
-		Filename: jproc.shp
+		Filename: japan_japaneseorerefinery.shp
 		Start: 1
 	bib:
 		ZOffset: -1c512
 	icon:
-		Filename: japan_refinery_icon.png
+		Filename: japan_japaneseorerefinery_icon.png
 
 
 modjbarr:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: modjdojo2.shp
+		Filename: japan_japanesebarracks_modjdojo2.shp
 	idle:
 		Start: 32
 		Length: 15
@@ -3442,38 +3442,38 @@ modjbarr:
 		Length: 15
 		#Offset: 0,-6
 	make:
-		Filename: modjdojo2.shp
+		Filename: japan_japanesebarracks_modjdojo2.shp
 		Length: 32
 		#Offset: 0,-6
 	dead:
 		Start: 48
 	bib:
 	icon:
-		Filename: modjbarricon.shp
+		Filename: japan_japanesebarracks_icon.shp
 
 jweap:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: jweap_bottom.shp
+		Filename: japan_japanesewarfactory_jweap_bottom.shp
 		Offset: 0,8
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: jweap_make.shp
+		Filename: japan_japanesewarfactory_jweap_make.shp
 		Length: *
 	build-top:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Length: 5
 	damaged-build-top:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Start: 5
 		Length: 5
 	customhack:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Length: 1
 	damaged-customhack:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Start: 5
 		Length: 1
 	dead:
@@ -3481,12 +3481,12 @@ jweap:
 		Scale: 1
 		Offset: 0,0
 	icon:
-		Filename: jweapicon.shp
+		Filename: japan_japanesewarfactory_icon.shp
 		Offset: 0,0
 
 jraafld:
 	Defaults:
-		Filename: JapFlagAirfield.shp
+		Filename: japan_japaneseairfield_japflagairfield.shp
 	idle:
 		Start: 32
 		Length: 15
@@ -3498,27 +3498,27 @@ jraafld:
 		ZOffset: -1023
 		Offset: 0,2
 	make:
-		Filename: JapFlagAirfield.shp
+		Filename: japan_japaneseairfield_japflagairfield.shp
 		Length: 32
 		Offset: 0,2
 	dead:
 		Start: 48
 	icon:
-		Filename: JapFlagAirfieldIcon.shp
+		Filename: japan_japaneseairfield_icon.shp
 
 jdome:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: jradardome.png
+		Filename: japan_japaneseradararray_jradardome.png
 	idle:
 		Length: *
 		Offset: 0,10
 	damaged-idle:
-		Filename: jradardomedamaged.png
+		Filename: japan_japaneseradararray_jradardomedamaged.png
 		Length: *
 		Offset: 0,10
 	make:
-		Filename: jradardomebuildup.png
+		Filename: japan_japaneseradararray_jradardomebuildup.png
 		Length: *
 		Offset: 0,10
 		Tick: 150
@@ -3526,12 +3526,12 @@ jdome:
 		Scale: 2
 	bib:
 	icon:
-		Filename: jradardomeicon.png
+		Filename: japan_coretechcenter_jradardomeicon.png
 
-modjtek:
+japan_japanesetechcenter:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: modjtek2.shp
+		Filename: japan_japanesetechcenter_modjtek2.shp
 		Scale: 1
 	idle:
 		Start: 32
@@ -3542,7 +3542,7 @@ modjtek:
 		Length: 15
 		#Offset: 0,-6
 	make:
-		Filename: modjtek2.shp
+		Filename: japan_japanesetechcenter_modjtek2.shp
 		Length: 32
 		#Offset: 0,-6
 	dead:
@@ -3550,12 +3550,12 @@ modjtek:
 	bib:
 		Scale: 1
 	icon:
-		Filename: modjtekicon.shp
+		Filename: japan_japanesetechcenter_icon.shp
 
-jshrine:
+japan_japaneseshrine:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: modjtek.shp
+		Filename: japan_japaneseshrine_modjtek.shp
 		Scale: 3
 	idle:
 		Start: 0
@@ -3566,7 +3566,7 @@ jshrine:
 		Length: 1
 		#Offset: 0,-6
 	make:
-		Filename: modjtekmake.shp
+		Filename: japan_japaneseshrine_modjtekmake.shp
 		Length: *
 		#Offset: 0,-6
 	dead:
@@ -3574,9 +3574,9 @@ jshrine:
 	bib:
 		Scale: 1
 	icon:
-		Filename: jshrineicon.png
+		Filename: japan_japaneseshrine_icon.png
 	japanspellcard:
-		Filename: japanspellcardicon.png
+		Filename: japan_japaneseshrine_japanspellcardicon.png
 
 ####################################################################################################
 #		RA TECH
@@ -3685,9 +3685,9 @@ oilb.husk:
 #		RA
 ####################################################################################################
 
-mig:
+ra1_soviet_migattackbomber:
 	Defaults:
-		Filename: mig.shp
+		Filename: ra1_soviet_migattackbomber.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
@@ -3695,21 +3695,21 @@ mig:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: migicon.png
+		Filename: ra1_soviet_migattackbomber_icon.png
 
-mignuke:
+ra1_soviet_supersonicnuclearbomber:
 	Defaults:
-		Filename: u2.shp
+		Filename: ra1_soviet_promotion_unlocksupersonicnuclearbomber_u2.shp
 		Scale: 1.25
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
 	icon:
-		Filename: nuclearmig.png
+		Filename: ra1_soviet_promotion_unlocksupersonicnuclearbomber_icon.png
 
-yak:
+ra1_soviet_yakscoutplane:
 	Defaults:
-		Filename: yak.shp
+		Filename: ra1_soviet_nuclearyak.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
@@ -3718,11 +3718,11 @@ yak:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: yakicon.png
+		Filename: ra1_soviet_yakscoutplane_icon.png
 
-yaktesla:
+ra1_soviet_teslayak:
 	Defaults:
-		Filename: ra1_soviets_yaktesla.png
+		Filename: ra1_soviet_teslayak_soviets_yaktesla.png
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -3731,11 +3731,11 @@ yaktesla:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: ra_teslayakicon.png
+		Filename: ra1_soviet_teslayak_icon.png
 
-yakarmored:
+ra1_soviet_armoredyak:
 	Defaults:
-		Filename: ra1_soviets_yakarmored.png
+		Filename: ra1_soviet_armoredyak_soviets_yakarmored.png
 	idle:
 		Facings: 16
 		Length: 3
@@ -3745,11 +3745,11 @@ yakarmored:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: ra_armoredyakicon.png
+		Filename: ra1_soviet_armoredyak_icon.png
 
-yaknuclear:
+ra1_soviet_nuclearyak:
 	Defaults:
-		Filename: yak.shp
+		Filename: ra1_soviet_nuclearyak.shp
 		Scale: 1.25
 	idle:
 		Facings: 16
@@ -3759,11 +3759,11 @@ yaknuclear:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: ra_nuclearyakicon.png
+		Filename: ra1_soviet_nuclearyak_icon.png
 
-raheli:
+ra1_allies_longbow:
 	Defaults:
-		Filename: raheli.shp
+		Filename: ra1_allies_longbow.shp
 		Scale: 1.25
 	idle:
 		Facings: 32
@@ -3781,20 +3781,20 @@ raheli:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: raheliicon.png
+		Filename: ra1_allies_longbow_icon.png
 
-hind:
+ra1_soviet_hindattackhelicopter:
 	Defaults:
-		Filename: hind.shp
+		Filename: ra1_soviet_hindattackhelicopter.shp
 		Scale: 1.25
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	rotor:
-		Filename: hindrotor.shp
+		Filename: ra1_soviet_hiptransport_hindrotor.shp
 		Length: 4
 	slow-rotor:
-		Filename: hindrotor.shp
+		Filename: ra1_soviet_hiptransport_hindrotor.shp
 		Start: 4
 		Length: 8
 	muzzle:
@@ -3802,35 +3802,35 @@ hind:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: hindicon.png
+		Filename: ra1_soviet_hindattackhelicopter_icon.png
 
-ra_kamov:
+ra1_soviet_kamovattackhelicopter:
 	Defaults:
-		Filename: ra_kamov.png
+		Filename: ra1_soviet_kamovattackhelicopter.png
 		#Scale: 1.25
 	idle:
 		Facings: 64
 		# InterpolatedFacings: 64
 	rotor:
-		Filename: kamovrotor.shp
+		Filename: ra1_soviet_kamovattackhelicopter_kamovrotor.shp
 		Frames: 0,1,2,3
 		Scale: 1.5
 		Length: 4
 	rotor2:
-		Filename: kamovrotor.shp
+		Filename: ra1_soviet_kamovattackhelicopter_kamovrotor.shp
 		Frames: 3,2,1,0
 		Scale: 1.5
 		Length: 4
 		FlipX: True
 		FlipY: True
 	slow-rotor:
-		Filename: kamovrotor.shp
+		Filename: ra1_soviet_kamovattackhelicopter_kamovrotor.shp
 		Frames: 4,5,6,7,8,9,10
 		Scale: 1.5
 		# Start: 4
 		Length: 7
 	slow-rotor2:
-		Filename: kamovrotor.shp
+		Filename: ra1_soviet_kamovattackhelicopter_kamovrotor.shp
 		Frames: 10,9,8,7,6,5,4
 		Scale: 1.5
 		# Start: 4
@@ -3843,19 +3843,19 @@ ra_kamov:
 		Facings: 8
 		Scale: 1.5
 	icon:
-		Filename: kamovicon.png
+		Filename: ra1_soviet_kamovattackhelicopter_icon.png
 
-modhip:
+ra1_soviet_hiptransport:
 	Defaults:
-		Filename: ra_hip.png
+		Filename: ra1_soviet_hiptransport.png
 	idle:
 		Facings: 64
 	rotor:
-		Filename: hindrotor.shp
+		Filename: ra1_soviet_hiptransport_hindrotor.shp
 		Length: 4
 		Scale: 1.75
 	slow-rotor:
-		Filename: hindrotor.shp
+		Filename: ra1_soviet_hiptransport_hindrotor.shp
 		Start: 4
 		Length: 8
 		Scale: 1.75
@@ -3864,17 +3864,17 @@ modhip:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: hipicon.png
+		Filename: ra1_soviet_hiptransport_icon.png
 	pscchhip1:
-		Filename: glhipmissx2.shp
+		Filename: ra1_soviet_hiptransport_glhipmissx2.shp
 	pscchhip2:
-		Filename: glhipmissx4.shp
+		Filename: ra1_soviet_hiptransport_glhipmissx4.shp
 	pscchhip3:
-		Filename: glhipmissx8.shp
+		Filename: ra1_soviet_hiptransport_glhipmissx8.shp
 
-jhind:
+japan_skyhawk:
 	Defaults:
-		Filename: wuzhia.shp
+		Filename: japan_skyhawk_wuzhia.shp
 	idle:
 		Facings: -32
 		Length: 21
@@ -3883,11 +3883,11 @@ jhind:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: skyhawkicon.png
+		Filename: japan_skyhawk_icon.png
 
-ratran:
+ra1_allies_alliedchinooktransport:
 	Defaults:
-		Filename: ratran2.shp
+		Filename: ra1_allies_alliedchinooktransport_ratran2.shp
 		Scale: 2
 	idle:
 		Facings: 32
@@ -3916,38 +3916,38 @@ ratran:
 	unload:
 		Start: 35
 	icon:
-		Filename: ratranicon.png
+		Filename: ra1_allies_alliedchinooktransport_icon.png
 
 u2:
 	Defaults:
-		Filename: u2.shp
+		Filename: ra1_soviet_promotion_unlocksupersonicnuclearbomber_u2.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
 	icon:
-		Filename: u2icon.png
+		Filename: ra1_soviet_promotion_superspyplane_icon.png
 
 badr:
 	Defaults:
-		Filename: badr.shp
+		Filename: ra1_soviet_promotion_parabombslevel3_badr.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
 	icon:
-		Filename: badricon.png
+		Filename: ra1_soviet_promotion_parabombslevel3_icon.png
 
-mh60:
+ra1_allies_blackhawk:
 	Defaults:
-		Filename: mh60.shp
+		Filename: ra1_allies_blackhawk.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 		Scale: 2
 	rotor:
-		Filename: yrotorlg.shp
+		Filename: ra1_allies_blackhawk_yrotorlg.shp
 		Length: 4
 	slow-rotor:
-		Filename: yrotorlg.shp
+		Filename: ra1_allies_blackhawk_yrotorlg.shp
 		Start: 4
 		Length: 8
 	muzzle:
@@ -3955,11 +3955,11 @@ mh60:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: mh60icon.shp
+		Filename: ra1_allies_blackhawk_icon.shp
 
-su57:
+ra1_soviet_su57attackbomber:
 	Defaults:
-		Filename: su57.shp
+		Filename: ra1_soviet_su57attackbomber.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -3971,7 +3971,7 @@ su57:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: s57fighter.png
+		Filename: ra1_soviet_su57attackbomber_icon.png
 ####################################################################################################
 #		Ants
 ####################################################################################################
@@ -4294,7 +4294,7 @@ mant:
 		Tick: 400
 		ZOffset: -511
 	turret:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Start: 38
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4370,7 +4370,7 @@ tant:
 		Tick: 400
 		ZOffset: -511
 	turret:
-		Filename: 2tnk.shp
+		Filename: ra1_allies_alliedmediumtank.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4407,7 +4407,7 @@ tant:
 		Tick: 400
 		ZOffset: -511
 	turret:
-		Filename: 3tnk.shp
+		Filename: ra1_soviet_heavytank.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4493,7 +4493,7 @@ testant:
 		Tick: 400
 		ZOffset: -511
 	spinner:
-		Filename: ttnk.shp
+		Filename: ra1_soviet_teslatank.shp
 		Start: 32
 		Length: 32
 	icon:
@@ -4753,9 +4753,9 @@ yamatobattleship:
 	icon:
 		Filename: YamatoBattleshipIcon.png
 
-v1truck:
+ra1_soviet_v1rockettruck:
 	Defaults:
-		Filename: v1truck.shp
+		Filename: ra1_soviet_v1rockettruck.shp
 		Scale: 1.33
 	idle:
 		Facings: 64
@@ -4778,18 +4778,18 @@ v1truck:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: v1truckicon.shp
+		Filename: ra1_soviet_v1rockettruck_icon.shp
 
 alliedtiger:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: TigerTankChassis.png
+		Filename: ra1_allies_promotion_unlocktigerheavytank_tigertankchassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 		Scale: 1.1
 	turret:
-		Filename: TigerTurret2Spritesheet.png
+		Filename: ra1_allies_promotion_unlocktigerheavytank_tigerturret2spritesheet.png
 		Facings: 64
 		#Offset: 0,0,-4098
 	muzzle:
@@ -4797,7 +4797,7 @@ alliedtiger:
 		Length: *
 		#Offset: 0,0,-4098
 	icon:
-		Filename: TigerCameo.shp
+		Filename: ra1_allies_promotion_unlocktigerheavytank_icon.shp
 
 alliedcybertank:
 	Defaults:
@@ -4820,16 +4820,16 @@ alliedcybertank:
 	icon:
 		Filename: CyberTankIcon.png
 
-heavyaatank:
+ra1_allies_alliedheavyaatank:
 	Defaults:
 		Scale: 1
 	idle:
-		Filename: HeavyAntiAirTankChassis.png
+		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankchassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 		Scale: 1
 	turret:
-		Filename: HeavyAntiAirTankTurret.png
+		Filename: ra1_allies_alliedheavyaatank_heavyantiairtankturret.png
 		Facings: 64
 		#Offset: 0,0,-4098
 		Scale: 1
@@ -4838,34 +4838,34 @@ heavyaatank:
 		Length: *
 		#Offset: 0,0,-4098
 	icon:
-		Filename: heavyaatankicon.png
+		Filename: ra1_allies_alliedheavyaatank_icon.png
 
-reconranger:
+ra1_allies_reconranger:
 	Defaults:
 		Scale: 0.666
 	idle:
-		Filename: ReconRangerChassisSpritesheet.png
+		Filename: ra1_allies_promotion_unlockreconranger_reconrangerchassisspritesheet.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ReconRangerWeaponSpritesheet.png
+		Filename: ra1_allies_promotion_unlockreconranger_reconrangerweaponspritesheet.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ReconRangerIcon.png
+		Filename: ra1_allies_promotion_unlockreconranger_icon.png
 
-sapc:
+ra1_allies_phasetransport:
 	Defaults:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 	idle:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Facings: 32
 		InterpolatedFacings: 64
 	turret:
-		Filename: sapc.shp
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
 		Start: 38
 		Facings: 32
 		InterpolatedFacings: 64
@@ -4879,11 +4879,11 @@ sapc:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: sapcicon.png
+		Filename: ra1_allies_promotion_unlockphasetransport_icon.png
 
 gapgeneratorradarjammer:
 	icon:
-		Filename: gapgeneratorradarjammer.png
+		Filename: ra1_allies_promotion_unlockgapgeneratorandradarjammer_icon.png
 
 ralst:
 	idle:
@@ -4907,55 +4907,55 @@ ralst:
 		Filename: ralsticon.png
 
 je4:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	icon:
-		Filename: je4icon.shp
+		Filename: japan_japaneseflamethrower_icon.shp
 
-hammertank:
+ra1_soviet_hammertank:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: SovietHammerTankChassis.png
+		Filename: ra1_soviet_upgrade_hammertank_soviethammertankchassis.png
 		Facings: 32
 	turret:
 		Scale: 1
-		Filename: SovietHammerTankTurret.png
+		Filename: ra1_soviet_upgrade_hammertank_soviethammertankturret.png
 		Facings: 32
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 		Scale: 1.25
 	icon:
-		Filename: SovietHammerTankIcon.png
+		Filename: ra1_soviet_upgrade_hammertank_icon.png
 
-kotin:
+ra1_soviet_kotinnucleartank:
 	Defaults:
 		Scale: 0.9
 	idle:
 		Scale: 1
-		Filename: KotinChassisSpritesheet.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_kotinchassisspritesheet.png
 		Facings: 64
 	turret:
 		Scale: 1
-		Filename: KotinTurret2Spritesheet.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_kotinturret2spritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 		Scale: 1.25
 	icon:
-		Filename: KotinIcon.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_icon.png
 
-jmgnest:
+japan_japanesemgnest:
 	Inherits: ^WithBuildingBibFtur
 	Defaults:
-		Filename: jmgnest_idle.shp
+		Filename: japan_japanesemgnest_jmgnest_idle.shp
 	idle:
 		Offset: 0,-2
 		Facings: 64
 	make:
-		Filename: jmgnest_make.shp
+		Filename: japan_japanesemgnest_jmgnest_make.shp
 		Length: *
 		Offset: 0,-2
 	muzzle:
@@ -4966,18 +4966,18 @@ jmgnest:
 	bib:
 		Offset: 0,-5
 	icon:
-		Filename: jmgnesticon.shp
+		Filename: japan_japanesemgnest_icon.shp
 
-jballistat:
+japan_ballistatower:
 	Inherits: ^WithBuildingBibFtur
 	Defaults:
-		Filename: jballistat.shp
+		Filename: japan_ballistatower.shp
 		Scale: 0.8
 	idle:
 		Offset: 0,-2
 		Facings: 64
 	make:
-		Filename: jballistat.shp
+		Filename: japan_ballistatower.shp
 		Start: 64
 		Length: 12
 		Offset: 0,-2
@@ -4989,12 +4989,12 @@ jballistat:
 	bib:
 		Offset: 0,-5
 	icon:
-		Filename: jballistaticon.shp
+		Filename: japan_ballistatower_icon.shp
 
-modartyturret:
+ra1_allies_bastionartillerybunker:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: AlliedBastionIdle.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionidle.png
 	idle:
 		Offset: 0,-6
 		Scale: 0.7
@@ -5003,11 +5003,11 @@ modartyturret:
 		Offset: 0,-6
 		Scale: 0.7
 	turret:
-		Filename: AlliedBastionTurret.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionturret.png
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: AlliedBastionBuildup.png
+		Filename: ra1_allies_promotion_unlockbastion_alliedbastionbuildup.png
 		Length: *
 		Offset: 0,-4
 		Tick: 150
@@ -5020,12 +5020,12 @@ modartyturret:
 	bib:
 		Offset: 0, 1
 	icon:
-		Filename: AlliedBastionIcon.shp
+		Filename: ra1_allies_promotion_unlockbastion_icon.shp
 
-modpillboxfort:
+japan_waveforceturret:
 	Inherits: ^WithBuildingBibIron
 	Defaults:
-		Filename: waveturret.shp
+		Filename: japan_waveforceturret_waveturret.shp
 		Offset: 0, 30
 	idle:
 		Facings: 64
@@ -5033,22 +5033,22 @@ modpillboxfort:
 		Facings: 64
 		Start: 64
 	make:
-		Filename: waveturretmake.shp
+		Filename: japan_waveforceturret_make.shp
 		Length: *
 	dead:
 	muzzle:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
 		Length: *
 		Offset: 0, 0
 	bib:
 		Offset: 0, 25
 	icon:
-		Filename: modwaveforticon.shp
+		Filename: japan_waveforceturret_icon.shp
 		Offset: 0, 0
 
-modcarr:
+japan_armoredcar:
 	Defaults:
-		Filename: jarmoredcar.shp
+		Filename: japan_promotion_unlockarmoredcar_jarmoredcar.shp
 	idle:
 		Facings: 64
 	turret:
@@ -5060,11 +5060,11 @@ modcarr:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jarmoredcaricon.shp
+		Filename: japan_promotion_unlockarmoredcar_icon.shp
 
-modkami:
+japan_zerofighter:
 	Defaults:
-		Filename: zerofighter.shp
+		Filename: japan_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5072,11 +5072,11 @@ modkami:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modkamiicon.shp
+		Filename: japan_zerofighter_icon.shp
 
-modbomber:
+japan_japanesebomber:
 	Defaults:
-		Filename: japanesebomber.shp
+		Filename: japan_japanesebomber.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5084,7 +5084,7 @@ modbomber:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modbombericon.shp
+		Filename: japan_japanesebomber_icon.shp
 
 jsuperbomber:
 	idle:
@@ -5092,12 +5092,12 @@ jsuperbomber:
 		Scale: 2
 		Facings: 64
 	icon:
-		Filename: modbombericon.shp
+		Filename: japan_japanesebomber_icon.shp
 
 modkamimini:
 	Defaults:
 		Scale: 0.5
-		Filename: zerofighter.shp
+		Filename: japan_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5105,11 +5105,11 @@ modkamimini:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modkamiicon.shp
+		Filename: japan_zerofighter_icon.shp
 
-modnano:
+japan_nanodronebuggy:
 	Defaults:
-		Filename: jnanoarty.shp
+		Filename: japan_nanodronebuggy_jnanoarty.shp
 	idle:
 		Facings: 64
 	turret:
@@ -5119,11 +5119,11 @@ modnano:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modnanoicon.shp
+		Filename: japan_nanodronebuggy_icon.shp
 
-rapierjumpjet:
+ra1_allies_rapierjumpjet:
 	Defaults:
-		Filename: AlliedRapierSpritesheet.png
+		Filename: ra1_allies_promotion_unlockrapierjumpjet_alliedrapierspritesheet.png
 		Scale: .9
 	idle:
 		Scale: 1
@@ -5132,11 +5132,11 @@ rapierjumpjet:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: RapierJumpJetIcon.shp
+		Filename: ra1_allies_promotion_unlockrapierjumpjet_icon.shp
 
-hakurei:
+japan_exorcist:
 	Defaults:
-		Filename: hakurei.shp
+		Filename: japan_promotion_unlockexorcist_hakurei.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -5247,11 +5247,11 @@ hakurei:
 		Facings: 8
 		Scale: 1
 	icon:
-		Filename: hakureiicon.shp
+		Filename: japan_promotion_unlockexorcist_icon.shp
 
-modtypej:
+japan_igomediumtank:
 	Defaults:
-		Filename: type89igo.shp
+		Filename: japan_igomediumtank_type89igo.shp
 	idle:
 		Facings: 64
 		Offset: 0, 5
@@ -5263,26 +5263,26 @@ modtypej:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modtypejicon.shp
+		Filename: japan_igomediumtank_icon.shp
 
-typechiha:
+japan_chihaheavytank:
 	Defaults:
 		Scale: 1.2
 	idle:
-		Filename: ChiHaChass.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_chihachass.shp
 		Facings: 64
 	turret:
-		Filename: ChiHaTurret.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_chihaturret.shp
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ChiHaIcon.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_icon.shp
 
 japan_shrine_minitank:
 	Defaults:
-		Filename: japan_shrine_minitank.png
+		Filename: japan_promotion_unlockshrinetank_minitank.png
 		Offset: 0, -8
 	idle:
 		Facings: 64
@@ -5293,12 +5293,12 @@ japan_shrine_minitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: japan_shrine_minitank_icon.png
+		Filename: japan_promotion_unlockshrinetank_icon.png
 		Offset: 0, 0
 
-waveforcetank:
+japan_waveforcetank:
 	Defaults:
-		Filename: waveforcetank.shp
+		Filename: japan_waveforcetank.shp
 		Offset: 0,8
 	idle:
 		Facings: 64
@@ -5309,18 +5309,18 @@ waveforcetank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: waveforcetankicon.png
+		Filename: japan_waveforcetank_icon.png
 		Offset: 0,0
 
-monstertank:
+ra1_soviet_monstertank:
 	Defaults:
 	idle:
-		Filename: BlackMamChassisSpriteSheet.png
+		Filename: ra1_soviet_promotion_unlockmonstertank_blackmamchassisspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.6
 	turret:
-		Filename: BlackMamTurretSpriteSheet.png
+		Filename: ra1_soviet_promotion_unlockmonstertank_blackmamturretspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.8
@@ -5329,36 +5329,36 @@ monstertank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: monstertankicon.png
+		Filename: ra1_soviet_promotion_unlockmonstertank_icon.png
 
-sovstalinfist:
+ra1_soviet_stalinfist:
 	Defaults:
 	idle:
-		Filename: sovstalinfist.png
+		Filename: ra1_soviet_stalinfist.png
 		Facings: 64
 		Scale: 0.8
 	icon:
-		Filename: sovstalinfisticon.png
+		Filename: ra1_soviet_stalinfist_icon.png
 
-sovgorynych:
+ra1_soviet_gorynychtank:
 	idle:
-		Filename: sovgorynych.png
+		Filename: ra1_soviet_gorynychtank.png
 		Facings: 64
 		Start: 0
 		Length: 1
 		Scale: 0.5		
 	turret:
-		Filename: sovgorynych.png
+		Filename: ra1_soviet_gorynychtank.png
 		Facings: 64
 		Start: 64
 		Length: 1
 		Scale: 0.5		
 	icon:
-		Filename: sovgorynychicon.png
+		Filename: ra1_soviet_gorynychtank_icon.png
 		
-rocketangel:
+japan_rocketangel:
 	Defaults:
-		Filename: rocketangel.shp
+		Filename: japan_promotion_unlockrocketangel.shp
 		Scale: 0.8
 		Tick: 200
 		Offset: 0, 0, 16
@@ -5459,7 +5459,7 @@ rocketangel:
 		Facings: 8
 	# Fly through air squish on ground
 	icon:
-		Filename: rocketangel.png
+		Filename: japan_promotion_unlockrocketangel_icon.png
 
 bushido_icon:
 	Defaults:
@@ -5470,35 +5470,35 @@ bushido_icon:
 
 advancedradarsystemicon:
 	icon:
-		Filename: advancedradarsystemicon.png
+		Filename: ra1_allies_upgrade_advancedradarsystems_icon.png
 
 infantryarmorplatingicon:
 	icon:
-		Filename: infantryarmorplatingicon.png
+		Filename: ra1_allies_upgrade_infantryarmorplating_icon.png
 
 reinforcedstructuresicon:
 	icon:
-		Filename: reinforcedstructuresicon.png
+		Filename: ra1_allies_upgrade_reinforcedstructures_icon.png
 
 lasertargetingsystemicon:
 	icon:
-		Filename: lasertargetingsystemicon.png
+		Filename: ra1_allies_upgrade_lasertargetingsystems_icon.png
 
 airsuperiorityicon:
 	icon:
-		Filename: airsuperiorityicon.png
+		Filename: ra1_allies_upgrade_airsuperioritydoctrine_icon.png
 
 cryomissilesicon:
 	icon:
-		Filename: cryomissilesicon.png
+		Filename: ra1_allies_upgrade_cryomissiles_icon.png
 
 chronoarmoricon:
 	icon:
-		Filename: chronoarmoricon.png
+		Filename: ra1_allies_upgrade_chronoarmor_icon.png
 
 gpssatellitesupporticon:
 	icon:
-		Filename: gpssicon.shp
+		Filename: ra1_allies_upgrade_gpssatellitesupport_icon.shp
 
 conscriptionicon:
 	icon:
@@ -5530,146 +5530,146 @@ staliniumsteelicon:
 
 bushidodisciplineicon:
 	icon:
-		Filename: bushidodisciplineicon.png
+		Filename: japan_upgrade_bushidodiscipline_icon.png
 
 waveforcebulletsicon:
 	icon:
-		Filename: waveforcebulletsicon.png
+		Filename: japan_upgrade_waveforcebullets_icon.png
 
 divinewindprotocol:
 	icon:
-		Filename: divinewindprotocol.png
+		Filename: japan_upgrade_divinewindprotocol_icon.png
 
 stealthsuitintegrationicon:
 	icon:
-		Filename: stealthsuitintegrationicon.png
+		Filename: japan_upgrade_stealthsuitintegration_icon.png
 
 energizedarrowsicon:
 	icon:
-		Filename: energizedarrowsicon.png
+		Filename: japan_upgrade_energizedarrows_icon.png
 
 advancedplasmaweaponsicon:
 	icon:
-		Filename: advancedplasmaweaponsicon.png
+		Filename: japan_upgrade_advancedplasmaweapons_icon.png
 
 superiorwarenginesicon:
 	icon:
-		Filename: superiorwarenginesicon.png
+		Filename: japan_upgrade_superiorwarengines_icon.png
 
 nanotechrepairsicon:
 	icon:
-		Filename: nanotechrepairsicon.png
+		Filename: japan_upgrade_nanotechrepairs_icon.png
 
 #############################
 #	Doctrines and Upgrades	#
 #############################
 
-ra_doctrine_conscription:
+ra1_soviet_doctrine_conscription:
 	icon:
-		Filename: conscriptiondoctrineicon.png
+		Filename: ra1_soviet_doctrine_conscription_icon.png
 
-ra_doctrine_industrialefficiency:
+ra1_soviet_doctrine_industrialefficiency:
 	icon:
-		Filename: industrialefficiencydoctrineicon.png
+		Filename: ra1_soviet_doctrine_industrialefficiency_icon.png
 
-ra_doctrine_inferno:
+ra1_soviet_doctrine_inferno:
 	icon:
-		Filename: infernodoctrineicon.png
+		Filename: ra1_soviet_doctrine_inferno_icon.png
 
-ra_doctrine_teslatech:
+ra1_soviet_doctrine_teslaandexperimentaltech:
 	icon:
-		Filename: teslatechdoctrineicon.png
+		Filename: ra1_soviet_doctrine_teslaandexperimentaltech_icon.png
 
-ra_doctrine_heavyarmor:
+ra1_soviet_doctrine_heavyarmor:
 	icon:
-		Filename: heavyarmordoctrineicon.png
+		Filename: ra1_soviet_doctrine_heavyarmor_icon.png
 
-ra_doctrine_nuclearwar:
+ra1_soviet_doctrine_nuclearwar:
 	icon:
-		Filename: nuclearwaricon.png
+		Filename: ra1_soviet_doctrine_nuclearwar_icon.png
 
 #############################
 
-ra_upgrade_vengeance:
+ra1_soviet_upgrade_vengeance:
 	icon:
-		Filename: vengeanceicon.png
+		Filename: ra1_soviet_upgrade_vengeance_icon.png
 
-ra_upgrade_menofsteel:
+ra1_soviet_upgrade_menofsteel:
 	icon:
-		Filename: menofsteelicon.png
+		Filename: ra1_soviet_upgrade_menofsteel_icon.png
 
-ra_upgrade_massproduction:
+ra1_soviet_upgrade_massproduction:
 	icon:
-		Filename: massproductionicon.png
+		Filename: ra1_soviet_upgrade_massproduction_icon.png
 
-ra_upgrade_wareconomy:
+ra1_soviet_upgrade_wareconomy:
 	icon:
-		Filename: wareconomyicon.png
+		Filename: ra1_soviet_upgrade_wareconomy_icon.png
 
-ra_upgrade_incendiarybullets:
+ra1_soviet_upgrade_incendiarybullets:
 	icon:
-		Filename: incendiarybulletsicon.png
+		Filename: ra1_soviet_upgrade_incendiarybullets_icon.png
 
-ra_upgrade_scorchedearth:
+ra1_soviet_upgrade_scorchedearth:
 	icon:
-		Filename: scorchedearthicon.png
+		Filename: ra1_soviet_upgrade_scorchedearth_icon.png
 
-ra_upgrade_teslaarcing:
+ra1_soviet_upgrade_teslaarcing:
 	icon:
-		Filename: teslaarcingicon.png
+		Filename: ra1_soviet_upgrade_teslaarcing_icon.png
 
-ra_upgrade_teslarockets:
+ra1_soviet_upgrade_teslarockets:
 	icon:
-		Filename: teslarocketsicon.png
+		Filename: ra1_soviet_upgrade_teslarockets_icon.png
 
-ra_upgrade_reactoroverload:
+ra1_soviet_upgrade_reactoroverload:
 	icon:
-		Filename: reactoroverloadicon.png
+		Filename: ra1_soviet_upgrade_reactoroverload_icon.png
 
-ra_upgrade_autoloaders:
+ra1_soviet_upgrade_autoloaders:
 	icon:
-		Filename: autoloadersicon.png
+		Filename: ra1_soviet_upgrade_autoloaders_icon.png
 
-ra_upgrade_highexplosiverockets:
+ra1_soviet_upgrade_highexplosiverockets:
 	icon:
-		Filename: highexplosiverocketsicon.png
+		Filename: ra1_soviet_upgrade_highexplosiverockets_icon.png
 
-ra_upgrade_stalinium:
+ra1_soviet_upgrade_stalinium:
 	icon:
-		Filename: staliniumicon.png
+		Filename: ra1_soviet_upgrade_stalinium_icon.png
 
-ra_upgrade_unstableisotopes:
+ra1_soviet_upgrade_unstableisotopes:
 	icon:
-		Filename: unstableisotopesicon.png
+		Filename: ra1_soviet_upgrade_unstableisotopes_icon.png
 
-ra_upgrade_nuclearrockets:
+ra1_soviet_upgrade_thermonuclearrockets:
 	icon:
-		Filename: nuclearrocketsicon.png
+		Filename: ra1_soviet_upgrade_thermonuclearrockets_icon.png
 
-ra_upgrade_nuclearshells:
+ra1_soviet_upgrade_nucleartankshells:
 	icon:
-		Filename: nuclearshellsicon.png
+		Filename: ra1_soviet_upgrade_nucleartankshells_icon.png
 
-ra_upgrade_shtoradefensesystem:
+ra1_soviet_upgrade_shtoradefensesystem:
 	icon:
-		Filename: shtoradefensesystemicon.png
+		Filename: ra1_soviet_upgrade_shtoradefensesystem_icon.png
 
-ra_upgrade_hazmatsuits:
+ra1_soviet_upgrade_hazmatsuits:
 	icon:
-		Filename: hazmatsuitsicon.png
+		Filename: ra1_soviet_upgrade_hazmatsuits_icon.png
 
-ra_upgrade_afterburners:
+ra1_soviet_upgrade_afterburners:
 	icon:
-		Filename: afterburnersicon.png
+		Filename: ra1_soviet_upgrade_afterburners_icon.png
 
-ra_promotion_superoptics:
+ra1_soviet_promotion_infantrysuperoptics:
 	icon:
-		Filename: superopticsicon.png
+		Filename: ra1_soviet_promotion_infantrysuperoptics_icon.png
 
-ra_promotion_targetingcomputer:
+ra1_soviet_promotion_mammothtanktargetingcomputer:
 	icon:
-		Filename: targetingcomputericon.png
+		Filename: ra1_soviet_promotion_mammothtanktargetingcomputer_icon.png
 
-ra_promotion_hurricanerocketpod:
+ra1_soviet_promotion_hurricanerocketpods:
 	icon:
-		Filename: hurricanerocketpodicon.png
+		Filename: ra1_soviet_promotion_hurricanerocketpods_icon.png

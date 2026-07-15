@@ -24,6 +24,65 @@ factions, everything through the balance workbook._
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
   boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
   launch-game.cmd to menu before EVERY commit (CLAUDE.md gate).
+- [x] **ts_nod_ticktank voxel sequence crash** (`4bfd1bcaf`): `ts_nod_ticktank`
+  and `ts_nod_attackcycle` had no `idle:` sequence filename — the voxel files
+  are `tsttnk.vxl` and `tsbike.vxl` (old TS names), but the sequence entries
+  only had `idle:` with no filename. Fixed by adding `idle: tsttnk` and
+  `idle: tsbike` respectively in `voxels.yaml`.
+- [x] **magicnuke sequence crash** (`4bfd1bcaf`): CABAL neutron weapons
+  (`CabalCommandoPlasmaNeutron`, `CabalCommandoPlasmaMk2Neutron`,
+  `CabalRavagerPlasmaNeutron`) had `Image: magicnuke` in their
+  `CreateEffect` warheads. The `magicnuke` image has sequences `magicnuke`,
+  `magicnuke_med`, `magicnuke_small`, `magicnuke_micro` — but `Image:
+  magicnuke` makes the engine look for a sequence named `magicnuke_med`
+  inside image `magicnuke`, which doesn't exist (the sequences are defined
+  under the `magicnuke` image key with those names). Removing `Image:
+  magicnuke` lets the engine use the `Explosions:` field directly against
+  the sequence set. The `CabalMagicNuke` weapon (line ~1847) already
+  worked correctly because it only had `Explosions: magicnuke` without
+  `Image:`.
+- [x] **ra2_cgtbnkbb.shp not found crash** (`4bfd1bcaf`): Asset was renamed
+  to `ra2_cgtbnkbib.shp` (bb→bib convention) but YAML references in
+  `redalert2.yaml` were not updated. Fixed all 3 references.
+- [x] **ra2_ctoutpbb.shp not found** (`4bfd1bcaf`): Renamed to
+  `ra2_ctoutp_bib.shp`, updated 4 YAML references in `redalert2.yaml`.
+- [x] **tamrefbb.shp reference** (`4bfd1bcaf`): Renamed to `tamref_bib.shp`,
+  updated reference in Forgotten `sequences.yaml`.
+- [x] **mk→make asset renames** (`4bfd1bcaf`): 8 construction animation
+  files renamed from `_mk.shp` to `_make.shp` (ra2_cgoildmk, ra2_ntyardmk,
+  tambarmk, tampowrmk, tamradrmk, tamrefmk, tamtechmk, tsnttmplmk) with
+  all YAML references updated.
+- [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
+  tooling documented in `docs/backlog_weapon_rename.md` for future
+  continuation.
+
+### P0 — Completed (2026-07-14 session)
+
+- [x] **CABAL Backup Systems upgrade coverage (legion, avatar)**
+  (`d4be72f8f`): Added `SpawnActorOnDeath@backup` to `cabal_legion` and
+  `cabal_avatar`; added `Inherits@BACKUP` to `cabal_avatar`; created
+  `cabal_legion_backup` and `cabal_avatar_backup` actors in
+  `rules/tiberiansun.yaml`; added `Repairable` trait to
+  `cabal_artilleryspider_backup`.
+- [x] **Backup husk repair/reanimate** (`d4be72f8f`): `Repairable` trait
+  added to `cabal_artilleryspider_backup` (was missing — present on
+  manticore and tarantula backups already).
+- [x] **CABAL infantry death palette break** (`a2b4de333`): All 8 CABAL
+  infantry actors and the `^TSInfantry` template had `WithDeathAnimation`
+  with `PlayerPalette: playerra2` but no `DeathSequencePalette`. The
+  `DeathSequencePalette` field controls which palette the death sequence
+  frames render with; without it, the engine defaults to a non-player
+  palette, causing visible color breakage on death. Fixed by adding
+  `DeathSequencePalette: ra2player` to `^TSInfantry` template and all 8
+  CABAL infantry overrides (cyborginfantry, rocketcyborg, devout,
+  ascended, hackercyborg, cyborgcommando, cyborgcommandov2,
+  eliminator800).
+- [x] **TS GDI building death palette break** (`b417c6f96`): The
+  `^BaseBuilding` template in `defaults.yaml` had `WithDeathAnimation`
+  with `DeathSequence: dead` but no `DeathSequencePalette` — same root
+  cause as the infantry palette bug. Fixed by adding
+  `DeathSequencePalette: ra2player` to `^BaseBuilding` and to the
+  `WithDeathAnimation@BIB` overrides on GDI and CABAL service depots.
 
 ---
 
@@ -186,8 +245,18 @@ factions, everything through the balance workbook._
 
 ### N11. Descriptions + AI
 - [x] All CABAL units have Fluent descriptions (converted 8 inline \n
-  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`).
+  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`; plus 2 more
+  fixed: cabal_refinery + cabal_mobileconstructionvehicle).
 - [x] AI wiring: all CABAL units in UnitsToBuild list with weights.
+  cabal_engineer added to CapturingActorTypes; stale tscyc2.cabal removed.
+- [x] CABAL added to global Random + RandomTournament faction pools;
+  "(WIP)" suffix removed from faction name.
+- [x] Fluent key naming fixed: actor-cabal_core/actor-cabal_techcenter
+  → underscores (actor_cabal_core/actor_cabal_techcenter).
+- [x] Building name capitalization fixed: "Cabal Tech Center" → "CABAL
+  Tech Center", "Heavy Cabal Obelisk" → "Heavy CABAL Obelisk".
+- [x] Manticore description updated: removed trap net references (trap
+  weapon removed from unit).
 
 ### CE (carried). Effect-warhead naming sweep, mod-wide
 - [x] CABAL: 1 violation fixed (CabalBerserkerBlades @3Eff -> @Effect,
@@ -209,17 +278,22 @@ factions, everything through the balance workbook._
 - [x] **Rename Ordos "Armor-Piercing Rounds" → "Rapid Fire Armor-Piercing
   Belts"** (actor id, template, condition, sequence, icon — full rename)
   (`b180aef36`).
-- [ ] No-hyphen naming scheme across all dune factions.
+- [x] No-hyphen naming scheme across all dune factions.
+  Verified 2026-07-14: no hyphenated actor IDs, weapon IDs, or asset
+  references in any D2k ContentPack yaml. All hyphens found are
+  engine-defined conditions/sequence names (build-incomplete, damaged-idle,
+  etc.) which are engine-owned and stay as-is per DESIGN.md §1.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---
 
 ## Content-pack folder restructure (P2/P3, L)
 
-- [ ] Every content pack: `content.yaml` at root + one **`yaml`** folder
+- [x] Every content pack: `content.yaml` at root + one **`yaml`** folder
   (rules+weapons+sequences merged) + an empty **`files`** folder. Shared
-  assets → per-GAME `Shared/files/`. NOW: only make the yaml folder + move
-  yaml in + empty files/; asset migration later. Runbook: docs/MIGRATION.md.
+  assets → per-GAME `Shared/files/`. DONE 2026-07-14: all packs
+  restructured, boot-tested, committed. Asset migration into `files/`
+  is the next phase.
 
 ## Cross-faction shared-effect independence (LONG-TERM, L)
 

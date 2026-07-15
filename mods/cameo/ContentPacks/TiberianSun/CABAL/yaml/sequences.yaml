@@ -1,0 +1,2210 @@
+cabal_cyborginfantry:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_cyborginfantry_altcyborg.shp
+	stand:
+		Facings: 8
+		ShadowStart: 370
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 378
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 426
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 441
+	crippled-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 456
+	crippled-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 456
+	attack:
+		Start: 164
+		Length: 6
+		Facings: 8
+		ShadowStart: 534
+	crippled-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+		ShadowStart: 582
+	icon:
+		Filename: cabal_cyborginfantry_icon.png
+
+cabal_devout:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_promotion_devout.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 268
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 268
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 276
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 356
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 376
+	crippled-run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 276
+	crippled-stand:
+		Facings: 8
+		ShadowStart: 268
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 396
+	crippled-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 396
+	die1:
+		Start: 200
+		Length: 20
+		ShadowStart: 468
+	die2:
+		Start: 220
+		Length: 20
+		ShadowStart: 488
+	die6:
+		Start: 200
+		Length: 20
+		ShadowStart: 468
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 200
+		Length: 20
+		ShadowStart: 468
+		ZOffset: -511
+	icon:
+		Filename: cabal_promotion_devout_icon.png
+
+cabal_ascended:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_ascended.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 257
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 257
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 265
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 345
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 365
+	crippled-run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 276
+	crippled-stand:
+		Start: 248
+		Facings: 8
+		ShadowStart: 505
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 385
+	crippled-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 385
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 465
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 485
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 465
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 485
+		ZOffset: -511
+	icon:
+		Filename: cabal_ascended_icon.png
+
+cabal_rocketcyborg:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_rocketcyborg.shp
+	stand:
+		Facings: 8
+		ShadowStart: 370
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 378
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 426
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 441
+	crippled-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 456
+	crippled-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 456
+	attack:
+		Start: 164
+		Length: 6
+		Facings: 8
+		ShadowStart: 534
+	crippled-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+		ShadowStart: 582
+	icon:
+		Filename: cabal_rocketcyborg_icon.png
+
+cabal_hackercyborg:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_hackercyborg.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 276
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 276
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 284
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 364
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 384
+	crippled-run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 284
+	crippled-stand:
+		Start: 248
+		Facings: 8
+		ShadowStart: 276
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	crippled-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 484
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 504
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 484
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 504
+		ZOffset: -511
+	icon:
+		Filename: cabal_hackercyborg_icon.png
+
+tscabalengi:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_engineer.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 264
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 344
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 364
+	crippled-run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 264
+	crippled-stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	crippled-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 464
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 484
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 464
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 484
+		ZOffset: -511
+	icon:
+		Filename: cabal_hackercyborg_icon.png
+
+cabal_cyborgcommando:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: cabal_cyborgcommando.shp
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 308
+		Offset: 0, 0, 16
+	run:
+		Start: 8
+		Length: 9
+		Facings: 8
+		ShadowStart: 316
+	idle1:
+		Start: 80
+		Length: 15
+		ShadowStart: 388
+	idle2:
+		Start: 95
+		Length: 15
+		ShadowStart: 403
+	crippled-run:
+		Start: 110
+		Length: 9
+		Facings: 8
+		ShadowStart: 418
+	crippled-stand:
+		Start: 110
+		Facings: 8
+		Stride: 9
+		ShadowStart: 418
+	attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+		ShadowStart: 520
+	crippled-attack:
+		Start: 260
+		Length: 6
+		Facings: 8
+		ShadowStart: 568
+	icon:
+		Filename: cabal_cyborgcommando_icon.shp
+
+cabal_cyborgcommandov2:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: cabal_cyborgcommandov2.shp
+		Offset: 0, 0, 16
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 424
+		Offset: 0, 0, 16
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 424
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 432
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 512
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 532
+	crippled-run:
+		Start: 264
+		Length: 10
+		Facings: 8
+		ShadowStart: 688
+	crippled-stand:
+		Start: 256
+		Facings: 8
+		ShadowStart: 680
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 552
+	crippled-attack:
+		Start: 344
+		Length: 10
+		Facings: 8
+		ShadowStart: 768
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 632
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 652
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 632
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 652
+		ZOffset: -511
+	icon:
+		Filename: cabal_cyborgcommandov2_icon.png
+
+cabal_coredefender:
+	Defaults:
+		Filename: cabal_coredefender_tsdefender.shp
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		ShadowStart: 168
+	stand2:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		ShadowStart: 168
+	run:
+		Filename: cabal_coredefender_tsdefender.shp
+		Start: 8
+		Length: 8
+		Facings: -8
+		ShadowStart: 176
+		Tick: 100
+	attack:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		Length: 12
+		Start: 72
+		ShadowStart: 168
+	die:
+		Filename:  cabal_coredefender_defd_exp.shp
+		Length: *
+		Tick: 100
+	icon:
+		Filename: cabal_coredefender_icon.png
+
+cabal_cyborgreaper:
+	Defaults:
+		Filename: cabal_cyborgreaper.shp
+		Scale: 1.25
+	idle:
+		Filename: cabal_cyborgreaper.shp
+		Facings: -8
+		ShadowStart: 117
+	stand:
+		Filename: cabal_cyborgreaper.shp
+		Facings: -8
+		ShadowStart: 168
+	run:
+		Filename: cabal_cyborgreaper.shp
+		Start: 8
+		Length: 12
+		Facings: -8
+		ShadowStart: 125
+	shoot:
+		Filename: cabal_cyborgreaper.shp
+		Facings: -8
+		ShadowStart: 117
+	die:
+		Filename: cabal_cyborgreaper.shp
+		Start: 104
+		Length: 12
+		ShadowStart: 221
+	icon:
+		Filename: cabal_cyborgreaper_icon.shp
+
+cabal_tiberiumharvester:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	dock:
+		Filename: invisibleitem.shp
+	dock-loop:
+		Filename: invisibleitem.shp
+	warpout:
+		Filename: invisibleitem.shp
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: cabal_tiberiumharvester_icon.png
+
+cabal_laserspider:
+	idle:
+		Filename: cabal_promotion_spidercnc4_laserspider.png
+		Facings: 64
+		Start: 64
+		Scale: 1
+	icon:
+		Filename: cabal_promotion_spidercnc4_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: cabal_promotion_spidercnc4_laserspider.png
+		Facings: 64
+		Start: 64
+		Scale: 1
+	walk:
+		Filename: cabal_promotion_spidercnc4_laserspider.png
+		Length: 8
+		Facings: 8
+		Tick: 60
+		Scale: 1
+
+cabal_mantis:
+	idle:
+		Filename: cabal_mantis.shp
+		Facings: -8
+		Start: 120
+		ShadowStart: 408
+		Scale: 1
+	icon:
+		Filename: cabal_mantis_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: cabal_mantis.shp
+		Facings: -8
+		Start: 120
+		Scale: 1
+		ShadowStart: 408
+	walk:
+		Filename: cabal_mantis.shp
+		Length: 15
+		Facings: -8
+		Tick: 60
+		Scale: 1
+		ShadowStart: 288
+	shoot:
+		Filename: cabal_mantis.shp
+		Facings: -8
+		Start: 128
+		Length: 20
+		ShadowStart: 416
+		Scale: 1
+
+cabal_ravager:
+	Defaults:
+		Filename: cabal_ravager.shp
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 258
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 266
+	idle1:
+		Facings: 8
+	idle2:
+		Facings: 8
+	attack:
+		Start: 168
+		Length: 10
+		Facings: 8
+		ShadowStart: 426
+	die1:
+		Start: 8
+		Length: 10
+	die2:
+		Start: 8
+		Length: 10
+	die3:
+		Start: 8
+		Length: 10
+	die4:
+		Start: 8
+		Length: 10
+	die5:
+		Start: 8
+		Length: 10
+	die6:
+		Start: 8
+		Length: 10
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	icon:
+		Filename: cabal_ravager_icon.png
+
+cabal_manticore:
+	idle:
+		Filename: cabal_avatar_manticore.shp
+		Start: 336
+		Facings: -8
+		Scale: 1
+		ShadowStart: 680
+	icon:
+		Filename: cabal_avatar_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: cabal_avatar_manticore.shp
+		Start: 336
+		Facings: -8
+		Scale: 1
+		ShadowStart: 680
+	walk:
+		Filename: cabal_avatar_manticore.shp
+		Length: 21
+		Facings: -8
+		Tick: 60
+		Scale: 1
+		ShadowStart: 344
+	shoot:
+		Filename: cabal_avatar_manticore.shp
+		Facings: -8
+		Start: 168
+		Length: 21
+		Scale: 1
+		ShadowStart: 512
+
+cabal_scarabapc:
+	idle:
+		Filename: cabal_scarabapc.png
+		Facings: 64
+	icon:
+		Filename: cabal_scarabapc_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+cabal_cyborgfactory:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Offset: -12, -15, 30
+		Scale: 1.25
+	idle:
+		Filename: cabal_cyborgfactory_ybbar.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_cyborgfactory_ybbar.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_cyborgfactory_ybbar.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-produce:
+		Filename: cabal_cyborgfactory_ybbar_c.shp
+		Length: 71
+		Tick: 100
+	damaged-idle-produce:
+		Filename: cabal_cyborgfactory_ybbar_c.shp
+		Length: 71
+		Tick: 100
+	idle-light:
+		Filename: cabal_cyborgfactory_ybbar_a.shp
+		Length: 36
+		Tick: 100
+		ZOffset: 1023
+	damaged-idle-light:
+		Filename: cabal_cyborgfactory_ybbar_ad.shp
+		Length: 36
+		Tick: 100
+		ZOffset: 1023
+	idle-lights:
+		Filename: cabal_cyborgfactory_ybbar_b.shp
+		Length: 51
+		Tick: 100
+	damaged-idle-lights:
+		Filename: cabal_cyborgfactory_ybbar_b.shp
+		Length: 51
+		Tick: 100
+	make:
+		Filename: cabal_cyborgfactory_make.shp
+		Length: 25
+	icon:
+		Filename: cabal_cyborgfactory_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+	iconcabal:
+		Filename: cabal_cyborgfactory_icon.png
+		Offset: 0, 0
+
+cabal_mechfactory:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Offset: -12, -21, 30
+		Scale: 1.25
+	idle:
+		Filename: cabal_mechfactory_1.shp
+		ShadowStart: 2
+		ZOffset: -1024
+		Offset: -12, -21, 1
+	damaged-idle:
+		Filename: cabal_mechfactory_1.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1024
+		Offset: -12, -21, 1
+	idle-roof:
+		Filename: cabal_mechfactory_2.shp
+		ShadowStart: 2
+		ZOffset: 512
+	damaged-idle-roof:
+		Filename: cabal_mechfactory_2.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: 512
+	dead:
+		Filename: cabal_mechfactory.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: cabal_mechfactory_b.shp
+		Length: 20
+		Tick: 100
+		ZOffset: 2048
+	damaged-idle-lights:
+		Filename: cabal_mechfactory_b.shp
+		Length: 20
+		Tick: 100
+		ZOffset: 2048
+	idle-fan:
+		Filename: cabal_mechfactory_a.shp
+		Length: 9
+		Tick: 100
+		ZOffset: 2048
+	damaged-idle-fan:
+		Filename: cabal_mechfactory_a.shp
+		Length: 9
+		Tick: 100
+		ZOffset: 2048
+	build-door:
+		Filename: cabal_mechfactory_d.shp
+		Length: 17
+		ZOffset: 512
+	damaged-build-door:
+		Filename: cabal_mechfactory_d.shp
+		Start: 17
+		Length: 17
+		ZOffset: 512
+	make:
+		Filename: cabal_mechfactory_make.shp
+		Length: 25
+	bib2:
+		Filename: cabal_mechfactory_bib.shp
+		ZOffset: -1024
+		Offset: -12, -21, 1
+	damaged-bib2:
+		Filename: cabal_mechfactory_bib.shp
+		Start: 1
+		ZOffset: -1024
+		Offset: -12, -21, 1
+	dead-bib2:
+		Filename: cabal_mechfactory_bib.shp
+		Start: 2
+		ZOffset: -1024
+		Offset: -12, -21, 1
+	icon:
+		Filename: cabal_mechfactory_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+cabal_radar:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: cabal_radar.shp
+		Scale: 1.25
+		Offset: 0, -12, 12
+	idle:
+		Filename: cabal_radar.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: cabal_radar.shp
+		Start: 1
+		ShadowStart: 3
+	dead:
+		Filename: cabal_radar.shp
+		Start: 1
+		Length: 1
+		ShadowStart: 3
+		Tick: 400
+	idle-dish:
+		Filename: cabal_radar_a.shp
+		Length: 54
+		Tick: 120
+	active:
+		Filename: invisibleitem.shp
+	damaged-idle-dish:
+		Filename: cabal_radar_ad.shp
+		Length: 54
+		Tick: 120
+	make:
+		Filename: cabal_radar_make.shp
+		Length: 20
+	icon:
+		Filename: cabal_radar_icon.png
+		Offset: 0, 0
+
+cabal_techcenter:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Filename: cabal_techcenter.shp
+		Offset: 0, -24, 24
+	idle:
+		Filename: cabal_techcenter.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_techcenter.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_techcenter.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: cabal_techcenter_a.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-lights:
+		Filename: cabal_techcenter_a.shp
+		Length: 20
+		Tick: 120
+	make:
+		Filename: cabal_techcenter_make.shp
+	icon:
+		Filename: cabal_techcenter_icon.png
+		Offset: 0, 0
+
+cabal_core:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: cabal_core.shp
+		Offset: -1,-21, 42
+	idle:
+		Filename: cabal_core.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_core.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_core.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: cabal_core_a.shp
+		Length: 60
+		Tick: 120
+	damaged-idle-lights:
+		Filename: cabal_core_a.shp
+		Start: 60
+		Length: 60
+		Tick: 120
+	idle-lights2:
+		Filename: cabal_core_b.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-lights2:
+		Filename: cabal_core_b.shp
+		Start: 20
+		Length: 20
+		Tick: 120
+	idle-lights3:
+		Filename: cabal_core_c.shp
+		Length: 30
+		Tick: 120
+		ZOffset: -2
+	damaged-idle-lights3:
+		Filename: cabal_core_c.shp
+		Start: 30
+		Length: 30
+		Tick: 120
+		ZOffset: -2
+	make:
+		Filename: cabal_core_make.shp
+		Length: 18
+		ShadowStart: 18
+	active:
+		Filename: invisibleitem.shp
+	smoke:
+		Filename: invisibleitem.shp
+	damaged-active:
+		Filename: invisibleitem.shp
+	up:
+		Filename: invisibleitem.shp
+	down:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: cabal_core_icon.shp
+		Offset: 0, 0
+
+tscrys:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: 0, -12, 24
+	idle:
+		Filename: cabal_powerplant.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_powerplant.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_powerplant.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: cabal_powerplant_a.shp
+		Length: 16
+		Tick: 100
+	damaged-idle-lights:
+		Filename: cabal_powerplant_ad.shp
+		Length: 16
+		Tick: 100
+	idle-electro:
+		Filename: cabal_powerplant_b.shp
+		Length: 40
+		Tick: 100
+	damaged-idle-electro:
+		Filename: cabal_powerplant_bd.shp
+		Length: 40
+		Tick: 100
+	make:
+		Filename: cabal_powerplant_make.shp
+		Length: 25
+	icon:
+		Filename: cabal_powerplant_icon.png
+		Offset: 0, 0, 25
+		UseTilesetCode: false
+
+cabal_pillbox:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: cabal_pillbox.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: cabal_pillbox.shp
+		Start: 1
+		ShadowStart: 2
+	critical-idle:
+		Filename: cabal_pillbox.shp
+		Start: 1
+	make:
+		Filename: cabal_pillbox_make.shp
+		Length: 32
+		ShadowStart: 32
+	dead:
+		Filename: cabal_pillbox.shp
+		Start: 1
+	icon:
+		Filename: cabal_pillbox_icon.png
+		Offset: 0,0
+# gtsand:
+# 	Defaults:
+# 		Offset: 0, -12, 12
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 16
+# 		ShadowStart: 32
+# 	damaged-idle:
+# 		Start: 16
+# 		Length: 16
+# 		ShadowStart: 48
+# 	icon: sbagicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# gtwall:
+# 	Defaults:
+# 		Offset: 0, -12, 12
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 16
+# 		ShadowStart: 48
+# 	damaged-idle:
+# 		Start: 16
+# 		Length: 16
+# 		ShadowStart: 64
+# 	critical-idle:
+# 		Start: 32
+# 		Length: 16
+# 		ShadowStart: 80
+# 	icon: wallicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# gtgtte_a:
+# 	Defaults:
+# 		Offset: -24, -24, 24
+# 		DepthSpriteOffset: -24, 0
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 10
+# 		ShadowStart: 21
+# 	open:
+# 		Start: 9
+# 		ShadowStart: 30
+# 		Offset: -24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	damaged-idle:
+# 		Start: 10
+# 		Length: 10
+# 		ShadowStart: 31
+# 	damaged-open:
+# 		Start: 19
+# 		ShadowStart: 40
+# 		Offset: -24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	dead:
+# 		Start: 20
+# 		Tick: 400
+# 		ShadowStart: 41
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: gtteicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# gtgtte_b:
+# 	Defaults:
+# 		Offset: 24, -24, 24
+# 		DepthSpriteOffset: 24, 0
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 10
+# 		ShadowStart: 21
+# 	open:
+# 		Start: 9
+# 		ShadowStart: 30
+# 		Offset: 24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	damaged-idle:
+# 		Start: 10
+# 		Length: 10
+# 		ShadowStart: 31
+# 	damaged-open:
+# 		Start: 19
+# 		ShadowStart: 40
+# 		Offset: 24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	dead:
+# 		Start: 20
+# 		Tick: 400
+# 		ShadowStart: 41
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: gtt2icon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntgtte_a:
+# 	Defaults:
+# 		Offset: -24, -24, 24
+# 		DepthSpriteOffset: -24, 0
+# 		UseTilesetCode: true
+# 		Tick: 80
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 7
+# 		ShadowStart: 15
+# 	damaged-idle:
+# 		Start: 7
+# 		Length: 7
+# 		ShadowStart: 22
+# 	open:
+# 		Start: 6
+# 		ShadowStart: 21
+# 		Offset: -24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	damaged-idle:
+# 		Start: 7
+# 		Length: 7
+# 		ShadowStart: 22
+# 	damaged-open:
+# 		Start: 13
+# 		ShadowStart: 28
+# 		Offset: -24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	dead:
+# 		Start: 14
+# 		Tick: 400
+# 		ShadowStart: 29
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: ngtticon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntgtte_b:
+# 	Defaults:
+# 		Offset: 24, -24, 24
+# 		DepthSpriteOffset: 24, 0
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 		Tick: 80
+# 	idle:
+# 		Length: 7
+# 		ShadowStart: 15
+# 	open:
+# 		Start: 6
+# 		ShadowStart: 21
+# 		Offset: 24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	damaged-idle:
+# 		Start: 7
+# 		Length: 7
+# 		ShadowStart: 22
+# 	damaged-open:
+# 		Start: 13
+# 		ShadowStart: 28
+# 		Offset: 24, -24, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	dead:
+# 		Start: 14
+# 		Tick: 400
+# 		ShadowStart: 29
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: ngt2icon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntpost:
+# 	Defaults:
+# 		Offset: 0, -12, 13
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Start: 0
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 	lights: ntpost_b
+# 		Start: 0
+# 		Length: 7
+# 		ShadowStart: 14
+# 		Tick: 80
+# 	damaged-lights: ntpost_b
+# 		Start: 7
+# 		Length: 7
+# 		ShadowStart: 21
+# 		Tick: 80
+# 	chainoflights: ntpost_a
+# 		Start: 0
+# 		Length: 12
+# 		Tick: 80
+# 	damaged-chainoflights: ntpost_a
+# 		Start: 12
+# 		Length: 12
+# 		Tick: 80
+# 	dead:
+# 		Start: 2
+# 		Tick: 400
+# 		ShadowStart: 5
+# 	make: ntpostmk
+# 		Start: 0
+# 		Length: 12
+# 		ShadowStart: 12
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: lasricon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntfnce:
+# 	Defaults:
+# 		Offset: 0, -12, 13
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 1
+# 	disabled-x:
+# 		Start: 8
+# 		Length: 1
+# 		Offset: 0, -12, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	disabled-y:
+# 		Start: 12
+# 		Length: 1
+# 		Offset: 0, -12, 1
+# 		ZRamp: 1
+# 		-DepthSprite:
+# 	entbled-x:
+# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
+# 		Length: 16
+# 	entbled-y:
+# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
+# 		Length: 16
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+
+# ntwall:
+# 	Defaults:
+# 		Offset: 0, -12, 12
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		Length: 16
+# 		ShadowStart: 48
+# 	damaged-idle:
+# 		Start: 16
+# 		Length: 16
+# 		ShadowStart: 64
+# 	critical-idle:
+# 		Start: 32
+# 		Length: 16
+# 		ShadowStart: 80
+# 	icon: nwalicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# gticbm:
+# 	Defaults:
+# 		Offset: 0, -12, 12
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 		DepthSpriteOffset: -12, 6
+# 	idle:
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 13
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	make: gticbmmk
+# 		Length: 30
+# 		ShadowStart: 30
+
+cabal_heavycabalobelisk:
+	Defaults:
+		Filename: cabal_heavycabalobelisk_ctobel.shp
+		Scale: 1.25
+		Offset: 0, -24, 24
+	idle:
+		Filename: cabal_heavycabalobelisk_ctobel.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_heavycabalobelisk_ctobel.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_heavycabalobelisk_ctobel.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	active:
+		Filename: cabal_heavycabalobelisk_obl1_b.shp
+		Length: 24
+		Tick: 200
+		ZOffset: 2
+	damaged-active:
+		Filename: cabal_heavycabalobelisk_obl1_b.shp
+		Start: 24
+		Length: 24
+		Tick: 200
+		ZOffset: 2
+	idle-lights:
+		Filename: cabal_heavycabalobelisk_obl1_a.shp
+		Length: 24
+		Tick: 80
+	damaged-idle-lights:
+		Filename: cabal_heavycabalobelisk_obl1_a.shp
+		Length: 24
+		Start: 24
+		Tick: 80
+	make:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: cabal_heavycabalobelisk_icon.png
+		Offset: 0,0
+
+# ntlasr:
+# 	Defaults:
+# 		Offset: 0, -12, 12
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 	dead:
+# 		Start: 2
+# 		ShadowStart: 5
+# 		Tick: 400
+# 	make: ntlasrmk
+# 		Length: 21
+# 		ShadowStart: 21
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 13
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: plticon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntsam:
+# 	Defaults:
+# 		Offset: 0, -12, 1
+# 		UseTilesetCode: true
+# 	idle:
+# 		ShadowStart: 3
+# 		ZRamp: 1
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 		ZRamp: 1
+# 	dead:
+# 		Start: 2
+# 		ShadowStart: 5
+# 		Tick: 400
+# 		DepthSprite: isodepth.shp
+# 	turret: gtctwr_d
+# 		Facings: 32
+# 		DepthSprite: isodepth.shp
+# 		Offset: 0, 0, -12
+# 	make: ntsammk
+# 		Length: 8
+# 		ShadowStart: 8
+# 		DepthSprite: isodepth.shp
+# 		Offset: 0, -12, 12
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 2
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 	icon: tssam2icon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+
+# ntpuls.gdi:
+# 	Defaults: ntpuls
+# 		Offset: 0, -24, 24
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 	dead:
+# 		Start: 2
+# 		ShadowStart: 5
+# 		Tick: 400
+# 	turret: ntpuls_a
+# 		Facings: 32
+# 	make: ntpulsmk
+# 		Length: 20
+# 		ShadowStart: 20
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: sidebar-gdi|empicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+# ntpuls.nod:
+# 	Defaults: ntpuls
+# 		Offset: 0, -24, 24
+# 		UseTilesetCode: true
+# 		DepthSprite: isodepth.shp
+# 	idle:
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 4
+# 	dead:
+# 		Start: 2
+# 		ShadowStart: 5
+# 		Tick: 400
+# 	turret: ntpuls_a
+# 		Facings: 32
+# 	make: ntpulsmk
+# 		Length: 20
+# 		ShadowStart: 20
+# 	emp-overlay: emp_fx01
+# 		Length: *
+# 		Offset: 0, 0, 25
+# 		UseTilesetCode: false
+# 		ZOffset: 512
+# 		BlendMode: Additive
+# 		-DepthSprite:
+# 	icon: sidebar-nod|empicon
+# 		Offset: 0, 0
+# 		UseTilesetCode: false
+# 		-DepthSprite:
+
+cabal_stealthgenerator:
+	Defaults:
+		Filename: cabal_stealthgenerator.shp
+		Scale: 1.25
+		Offset: -16, -16, 1
+	idle:
+		Filename: cabal_stealthgenerator.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_stealthgenerator.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_stealthgenerator.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	pulse:
+		Filename: cabal_stealthgenerator_a.shp
+		Length: 10
+		Tick: 240
+	damaged-pulse:
+		Filename: cabal_stealthgenerator_ad.shp
+		Length: 10
+		Tick: 240
+	make:
+		Filename: cabal_stealthgenerator_make.shp
+	icon:
+		Filename: cabal_stealthgenerator_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+tsnthpadcabal:
+	Defaults:
+		Filename: cabal_helipad.shp
+		Scale: 1.25
+		Offset: 0, -24, 0
+	idle:
+		Filename: cabal_helipad.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	damaged-idle:
+		Filename: cabal_helipad.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	dead:
+		Filename: cabal_helipad.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+		# Offset: 0, -24, 3
+	idle-platform:
+		Filename: cabal_helipad_bib.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+	damaged-idle-platform:
+		Filename: cabal_helipad_bib.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+	dead-platform:
+		Filename: cabal_helipad_bib.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+	idle-lights:
+		Filename: invisibleitem.shp
+	active:
+		Filename: cabal_helipad_act.shp
+		Length: 6
+		ZOffset: -1c511
+		Tick: 200
+	damaged-active:
+		Filename: cabal_helipad_act.shp
+		Length: 6
+		ZOffset: -1c511
+		Tick: 200
+	damaged-idle-lights:
+		Filename: invisibleitem.shp
+	make:
+		Filename: ts_nod_helipad_make.shp
+	icon:
+		Filename: cabal_helipad_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+cabal_refinery:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Offset: 0,48
+	idle:
+		Filename: cabal_refinery.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: cabal_refinery.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: cabal_refinery.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: cabal_refinery.png
+		Length: 16
+	icon:
+		Filename: cabal_refinery_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+tsgtsilo.cabal:
+	Inherits: tsgtsilo.gdi
+	icon:
+		Filename: cabal_missilesilo_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+cabal_hunterkillermk1:
+	idle:
+		Filename: cabal_hunterkillermk1.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: cabal_hunterkillermk1_icon.png
+
+cabal_hunter_drone_carrier:
+	idle:
+		Filename: cabal_hunter_drone_carrier.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
+
+cabal_hunter_drone:
+	idle:
+		Filename: cabal_hunterkillermk2_drone.png
+		Facings: 32
+		Scale: 0.5
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
+
+cabal_repair_drone:
+	Defaults:
+		Filename: cabal_repair_drone.png
+		Scale: 1
+		Tick: 80
+	idle:
+		Facings: 64
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
+
+cabal_overkill_gunship:
+	idle:
+		Filename: cabal_overkill_gunship.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: cabal_overkill_gunship_icon.png
+
+cabal_mothership:
+	idle:
+		Filename: cabal_mothership.png
+		FrameSize: 96, 96
+		Length: 3
+		Facings: 64
+		Tick: 200
+		Scale: 1
+	icon:
+		Filename: cabal_mothership_icon.png
+
+cabal_orb_drone:
+	Defaults:
+		Filename: cabal_orb_drone.png
+		FrameSize: 64, 64
+		Scale: 1
+		Tick: 200
+	stand:
+		Facings: 64
+		Length: 1
+	run:
+		Facings: 64
+		Length: 1
+	flying:
+		Facings: 64
+		Length: 1
+	idle:
+		Facings: 64
+		Length: 1
+	idle1:
+		Facings: 64
+		Length: 1
+	idle2:
+		Facings: 64
+		Length: 1
+	attack:
+		Facings: 64
+		Length: 1
+	icon:
+		Filename: cabal_wasp_striker_icon.png
+
+cabal_cyborg_assassin:
+	Defaults:
+		Filename: cabal_cyborg_assassin.shp
+		Scale: 1
+		Tick: 200
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+	run:
+		Start: 70
+		Length: 10
+		Facings: 8
+		Tick: 200
+	idle:
+		Start: 8
+		Length: 31
+	idle1:
+		Start: 8
+		Length: 31
+	idle2:
+		Start: 39
+		Length: 31
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Facings: 8
+	flying:
+		Start: 150
+		Length: 10
+		Facings: 8
+	die1:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die-falling:
+		Start: 470
+		Length: 20
+		Tick: 40
+	die2:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die3:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die4:
+		Start: 470
+		Length: 20
+		Tick: 50
+	attack:
+		Start: 230
+		Length: 6
+		Facings: 8
+	flying-attack:
+		Start: 350
+		Facings: 8
+		Length: 15
+		Tick: 100
+	prone-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+	standup:
+		Start: 260
+		Length: 2
+		Facings: 8
+	cheer:
+		Facings: 8
+	die5:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	die7:
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: cabal_assassin_icon.png
+
+cabal_obeliskofdarkness:
+	Defaults:
+		Filename: cabal_obeliskofdarkness.shp
+		Offset: 15, 0, 0
+	idle:
+		Filename: cabal_obeliskofdarkness.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cabal_obeliskofdarkness.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cabal_obeliskofdarkness.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-overlay:
+		Filename: cabal_obeliskofdarkness_b.shp
+		Length: 24
+		Tick: 200
+	damaged-idle-overlay:
+		Filename: cabal_obeliskofdarkness_b.shp
+		Start: 24
+		Length: 24
+		Tick: 200
+	active:
+		Filename: cabal_obeliskofdarkness_c.shp
+		Length: 24
+		Tick: 200
+		ZOffset: 3
+	damaged-active:
+		Filename: cabal_obeliskofdarkness_c.shp
+		Start: 24
+		Length: 24
+		Tick: 200
+		ZOffset: 3
+	idle-lights:
+		Filename: cabal_obeliskofdarkness_a.shp
+		Length: 12
+		Tick: 80
+	make:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: cabal_obeliskofdarkness_icon.png
+		Offset: 0,0
+
+# tscrate:
+# 	idle:
+# 		ShadowStart: 1
+# 		Offset: 0, -10, 10
+
+cabal_dissolver:
+	stand:
+		Filename: cabal_dissolver.shp
+		Facings: -8
+	run:
+		Filename: cabal_dissolver.shp
+		Start: 8
+		Facings: -8
+		Length: 4
+		Tick: 110
+	idle1:
+		Filename: cabal_dissolver.shp
+		Facings: -8
+	idle2:
+		Filename: cabal_dissolver.shp
+		Facings: -8
+	crippled-run:
+		Filename: cabal_dissolver.shp
+		Start: 8
+		Facings: -8
+		Length: 4
+		Tick: 110
+	crippled-stand:
+		Filename: cabal_dissolver.shp
+		Facings: -8
+	crippled-attack:
+		Filename: cabal_dissolver.shp
+		Start: 72
+		Facings: -32
+	turret:
+		Filename: cabal_dissolver.shp
+		Start: 40
+		Facings: -32
+	shoot:
+		Filename: cabal_dissolver.shp
+		Start: 72
+		Facings: -32
+	icon:
+		Filename: cabal_dissolver_icon.shp
+
+cabal_berserker:
+	Defaults:
+		Filename: cabal_berserker_eliminator1000.shp
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: -8
+		Scale: 1.25
+	liedown:
+		Facings: -8
+		Scale: 1.25
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 1.25
+	idle1:
+		Start: 8
+		Length: 9
+		Facings: 8
+		Scale: 1.25
+	idle2:
+		Start: 8
+		Length: 9
+		Facings: 8
+		Scale: 1.25
+	prone-run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 1.25
+	prone-stand:
+		Facings: -8
+		Scale: 1.25
+	prone-stand2:
+		Facings: -8
+		Scale: 1.25
+	die1:
+		Filename: blue_frag3.shp
+		Length: *
+		Scale: 1.25
+	die2:
+		Filename: blue_frag3.shp
+		Length: *
+		Scale: 1.25
+	die4:
+		Filename: blue_frag3.shp
+		Length: *
+		Scale: 1.25
+	die-crushed:
+		Filename: blue_frag3.shp
+		Length: *
+		Scale: 1.25
+	standup:
+		Facings: -8
+		Scale: 1.25
+	cheer:
+		Facings: -8
+		Scale: 1.25
+	die7:
+		Filename: electro.shp
+		Length: *
+		Scale: 1.25
+	die5:
+		Filename: blue_frag3.shp
+		Length: *
+		Scale: 1.25
+	crippled-run:
+		Start: 208
+		Length: 8
+		Facings: 8
+		Tick: 333
+		Scale: 1.25
+	crippled-stand:
+		Start: 144
+		Facings: 8
+		Length: 7
+		Tick: 9999
+		Scale: 1.25
+	attack:
+		Start: 72
+		Length: 9
+		Facings: 8
+		Scale: 1.25
+	crippled-attack:
+		Start: 144
+		Length: 7
+		Facings: 8
+		Scale: 1.25
+	icon:
+		Filename: cabal_berserker_icon.shp
+
+cabal_eliminator800:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: yuri_gatlingtrooper_arnd.shp
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3671
+		Length: 2
+		BlendMode: Additive
+	run:
+		Tick: 120
+	paradrop:
+		Start: 363
+	cheer:
+		Start: 364
+	die3:
+		Filename: blue_frag3.shp
+		Length: *
+	die:
+		Filename: blue_frag3.shp
+		Length: *
+	icon:
+		Filename: cabal_eliminator800_icon.shp
+
+
+# tsreinca:
+# 	Defaults: reinca
+# 	run:
+# 		Facings: 8
+# 		Length: 15
+# 		Tick: 120
+# 		ShadowStart: 250
+# 	stand:
+# 		Start: 120
+# 		Facings: 8
+# 		ShadowStart: 370
+# 	shoot:
+# 		Start: 130
+# 		Facings: 8
+# 		Length: 15
+# 		Tick: 115
+# 		ShadowStart: 380
+# 	muzzle: minigun
+# 		Length: 6
+# 		Facings: 8
+# 	circle: c12_circle.png
+# 		Frames: 0,0,0,0,0,0,0,0,0,1
+# 		Tick: 12
+# 		Length: 10
+# 	circle_buffed: c12_circle.png
+# 		Frames: 0,0,0,0,0,0,0,1,2,3,4,5,4,3,2,1
+# 		Length: 16
+# 		Tick: 10
+# 	icon: c12_icon
+# icon:
+# 	Defaults:
+
+cabal_upgrade_backupsystems:
+	icon:
+		Filename: cabal_upgrade_reclamationprotocols_icon.png
+
+cabal_upgrade_neutronnuclearcatalyst:
+	icon:
+		Filename: cabal_upgrade_neutronnuclearcatalyst_icon.png
+
+cabal_upgrade_darkarmament:
+	icon:
+		Filename: cabal_upgrade_overchargedservos_icon.png
+
+cabal_upgrade_cyberneticplating:
+	icon:
+		Filename: cabal_upgrade_overchargedservos_icon.png
+
+cabal_upgrade_mobilitymatrix:
+	icon:
+		Filename: cabal_upgrade_reinforcedchassis_icon.png
+
+cabal_upgrade_handof:
+	icon:
+		Filename: cabal_upgrade_neuraluplink_icon.png
+
+cabal_upgrade_radarhack:
+	icon:
+		Filename: cabal_upgrade_networkedcombatprotocols_icon.png
+
+cabal_upgrade_dataworm:
+	icon:
+		Filename: cabal_upgrade_fullassimilation_icon.png
+cabal_rockettrail:
+	idle:
+		Filename: cabal_rockettrail.png
+		Length: 10
+		Tick: 40
+
+# Civilian Cars
+
+cabal_plasmabullet:
+	idle:
+		Filename: cabal_plasmabullet.png
+		Length: 10
+		Tick: 30
+
+cabal_dissolveimpact:
+	idle:
+		Filename: cabal_dissolveimpact.png
+		Length: 10
+		Tick: 40
+
+cabal_laserimpact_s:
+	idle:
+		Filename: cabal_laserimpact_s.png
+		Length: 8
+		Tick: 30
+
+cabal_laserimpact_m:
+	idle:
+		Filename: cabal_laserimpact_m.png
+		Length: 10
+		Tick: 30
+
+cabal_laserimpact_l:
+	idle:
+		Filename: cabal_laserimpact_l.png
+		Length: 12
+		Tick: 30
+
+cabal_missileexplosion:
+	idle:
+		Filename: cabal_missileexplosion.png
+		Length: 12
+		Tick: 30
+
+cabal_greenplasma:
+	idle:
+		Filename: cabal_greenplasma.png
+		Length: 10
+		Tick: 30
+
+cabal_greenplasmaimpact:
+	idle:
+		Filename: cabal_greenplasmaimpact.png
+		Length: 10
+		Tick: 30
+
+cabal_beholder:
+	Defaults:
+		Filename: cabal_beholder.shp
+		Offset: 0,48
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 408
+	run:
+		Start: 136
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 544
+	shoot:
+		Start: 272
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 32
+		ShadowStart: 680
+	icon:
+		Filename: cabal_beholder_icon.shp
+		Offset: 0,0

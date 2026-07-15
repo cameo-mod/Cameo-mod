@@ -19,11 +19,11 @@ D2K_Personal_Shield_Impact:
 		Condition: SmallCaliberShieldHits
 		Duration: 300
 		ValidTargets: PersonalShielded, PersonalShieldedSard, PersonalShieldedHeavy
-Sniper:
+ra1_allies_alliedsniper:
     Inherits@personalshield: D2K_Personal_Shield_Impact
 	Report: ramgun2.aud
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk
 	ReloadDelay: 40
 	Range: 8192
 	Projectile: Bullet
@@ -36,7 +36,7 @@ Sniper:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 
 camea_sniper:
-    Inherits: Sniper
+    Inherits: ra1_allies_alliedsniper
     ReloadDelay: 60
     Range: 11264
     
@@ -125,12 +125,12 @@ Pistol:
 	Inherits: ^HeavyMG
 	ReloadDelay: 20
 	Range: 4096
-	InvalidTargets: Wall
+	InvalidTargets: ixian_concretewall
 	Report: mgun2.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
 		Damage: 1000
-		InvalidTargets: Wall, BulletImmune
+		InvalidTargets: ixian_concretewall, BulletImmune
 		Versus:
 			None: 150
 			Wood: 30

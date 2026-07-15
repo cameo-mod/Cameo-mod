@@ -54,7 +54,7 @@ TENF:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: TENT
+		Image: ra1_allies_alliedbarracks
 	Valued:
 		Cost: 50
 	Health:
@@ -177,7 +177,7 @@ WEAF:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: RAWEAP
+		Image: ra1_soviet_warfactory
 	WithBuildingBib:
 	WithProductionDoorOverlay:
 		RequiresCondition: !build-incomplete
@@ -317,7 +317,7 @@ ATEF:
 		LocalCenterOffset: 0,-512,0
 	WithBuildingBib:
 	RenderSprites:
-		Image: ATEK
+		Image: ra1_allies_alliedtechcenter
 	Valued:
 		Cost: 150
 	Health:
@@ -347,7 +347,7 @@ PDOF:
 		Footprint: xx xx
 		Dimensions: 2,2
 	RenderSprites:
-		Image: PDOX
+		Image: ra1_allies_chronosphere
 	WithBuildingBib:
 		HasMinibib: true
 	Valued:
@@ -381,7 +381,7 @@ MSLF:
 		Footprint: xx
 		Dimensions: 2,1
 	RenderSprites:
-		Image: MSLO
+		Image: ra1_soviet_missilesilo
 	Valued:
 		Cost: 250
 	Health:

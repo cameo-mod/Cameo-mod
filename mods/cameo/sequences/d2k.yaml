@@ -18,7 +18,7 @@ concreteb:
 		Start: 4317
 		Offset: -30,-24
 
-wall:
+ixian_concretewall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -309,7 +309,7 @@ power.atreides:
 		Start: 2772
 		Offset: -32,64
 	idle-zaps:
-		Filename: power_atreides_zaps.png
+		Filename: ixian_windtrap_power_atreides_zaps.png
 		Length: 10
 		Scale: 1
 		Offset: 7,-2
@@ -1834,7 +1834,7 @@ d2k_sandworm_tower:
 		Start: 0
 		Facings: -32
 	icon:
-		Filename: d2k_sandworm_tower_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sandworm_tower_icon.shp
 
 heavy.ordos:
 	Defaults:
@@ -2161,25 +2161,25 @@ plates: # TODO: unused
 d2k_munitions.harkonnen:
 	Inherits: d2k_munitions.atreides
 	idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 0
 	damaged-idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 1
 	icon:
-		Filename: d2k_munitions_icon.shp
+		Filename: ixian_munitionssilo_icon.shp
 		Start: 0
 
 d2k_munitions.ordos:
 	Inherits: d2k_munitions.atreides
 	idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 4
 	damaged-idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 5
 	icon:
-		Filename: d2k_munitions_icon.shp
+		Filename: ixian_munitionssilo_icon.shp
 		Start: 1
 
 ####################################################
@@ -2487,7 +2487,7 @@ spicebloom:
 #moveflsh:
 #	Defaults:
 #	idle:
-#		Filename: DATA.R8
+#		Filename: ra2_allies_upgrade_paratroopers_data.r8
 #		Start: 3874
 #		Length: 5
 #		Tick: 80
@@ -3051,7 +3051,7 @@ light_inf:
 		Start: 4272
 		Offset: -30,-24
 	icon_merc:
-		Filename: d2k_mercenary_inf_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_mercenary_inf_icon.shp
 	garrison-muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -3423,7 +3423,7 @@ fremen:
 		Start: 4293
 		Offset: -30,-24
 	phantomicon:
-		Filename: fremenwarrioricon.shp
+		Filename: ra2_allies_upgrade_paratroopers_fremenwarrioricon.shp
 
 sardaukar:
 	Defaults:
@@ -3590,7 +3590,7 @@ d2k_sardaukar_elite:
 		Tick: 175
 		Scale: 1.2
 	icon:
-		Filename: d2k_sardaukar_elite_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sardaukar_elite_icon.shp
 	die-crushed:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -3949,7 +3949,7 @@ d2k_drone:
 
 d2k_ixdroneprojectile:
 	idle:
-		Filename: IxRailgun.png
+		Filename: ixian_promotion_unlockixrailgundrone_ixrailgun.png
 		Start: 64
 		Facings: 8
 		InterpolatedFacings: 64
@@ -3978,7 +3978,7 @@ d2k_leech_s:
 		Facings: -32
 		Scale: 0.64
 	icon:
-		Filename: leechicon.shp
+		Filename: ordos_promotion_unlockleecher_icon.shp
 		Offset: 0,-1
 
 rocketeer:
@@ -4177,7 +4177,7 @@ flamethrower:
 
 d2k_hijacker:
 	Defaults:
-		Filename: hijacker.shp
+		Filename: tkm_engineer_hijacker.shp
 	stand:
 		Facings: 8
 		Scale: 1.875
@@ -4240,7 +4240,7 @@ d2k_hijacker:
 		Offset: 0,-1
 
 facedancer_harv:
-	Inherits: face_dancer.ordos
+	Inherits: ordos_facedancer
 	icon:
 		Filename: facedancerworkericon.shp
 
@@ -4835,7 +4835,7 @@ d2k_heavy_air_drone:
 		Scale: 2
 		Facings: -32
 	icon:
-		Filename: d2k_air_drone_icon.shp
+		Filename: ixian_airdrone_icon.shp
 
 sandworm:
 	Defaults:
@@ -5242,7 +5242,7 @@ sonic_tank:
 combat_tank_corrino:
 	Defaults:
 	idle:
-		Filename: d2k_ct_striped.shp
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
 		Facings: -32
 	turret:
 		Filename: d2k_lion_king.shp
@@ -5266,7 +5266,7 @@ combat_tank_corrino:
 combat_tank_fremen:
 	Defaults:
 	idle:
-		Filename: d2k_ct_striped.shp
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
 		Facings: -32
 	turret:
 		Filename: DATA.R16
@@ -5352,10 +5352,10 @@ d2k_tyrant.husk:
 
 d2k_autogun_tank.husk:
 	idle:
-		Filename: d2k_autogun_tank.shp
+		Filename: ordos_upgrade_heavyautoguntank_d2k_autogun_tank.shp
 		Facings: -32
 
-carryall:
+ixian_autonomouscarryall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -5371,7 +5371,7 @@ carryall:
 		Offset: -30,-24
 
 carryall.reinforce:
-	Inherits: carryall
+	Inherits: ixian_autonomouscarryall
 
 oornithopter:
 	Inherits: ornithopter

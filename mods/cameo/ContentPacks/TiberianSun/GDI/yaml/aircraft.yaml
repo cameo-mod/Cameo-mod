@@ -1,0 +1,476 @@
+ts_gdi_orcafighter:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Tooltip:
+		Name: td_gdi_orca Fighter
+	Valued:
+		Cost: 2200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~ts_gdi_helipad, ~!ts_gdi_promotion_unlockzoneorca
+		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
+	Aircraft:
+		Speed: 145
+		TurnSpeed: 29
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 62500
+	Repairable:
+		HpPerStep: 3125
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSHellfire
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSHellfireSonic
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 64
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: ts_gdi_orcafighter_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_zoneorcafighter:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Zone td_gdi_orca Fighter
+	Valued:
+		Cost: 3000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_promotion_unlockzoneorca
+		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
+	Aircraft:
+		Speed: 165
+		TurnSpeed: 33
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 70000
+	Repairable:
+		HpPerStep: 3500
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armament@PRIMARY:
+		Weapon: TSZoneHellfire
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSZoneHellfireSonic
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 64
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: ts_gdi_orcafighter_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_hammerhead:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@cargo: ^CargoAircraft
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Hammerhead
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_promotion_unlockhammerhead
+		Queue: Aircraft, RAAircraft
+		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
+	Aircraft:
+		Speed: 140
+		TurnSpeed: 28
+		RepulsionSpeed: 28
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Cargo:
+		ExclusiveDeploy: true
+		DeployType: opentopped
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 2
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 156,-213,-85, 156,213,-85
+		PauseOnCondition: chronobeamed
+	Armament@PRIMARY:
+		Weapon: TSHammerheadGun
+		LocalOffset: 156,-400,-85, 156,400,-85
+		# MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 192
+		AttackType: Hover
+	WithIdleOverlay@RROTORAIR:
+		Offset: 0,130,45
+		Sequence: rrotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@LROTORAIR:
+		Offset: 0,-130,45
+		Sequence: lrotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@RROTORGROUND:
+		Offset: 0,130,45
+		Sequence: slow-rrotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@LROTORGROUND:
+		Offset: 0,-130,45
+		Sequence: slow-lrotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Selectable:
+		DecorationBounds: 1280, 1280
+	AmmoPool:
+		Ammo: 20
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 2
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithCargoPipsDecoration:
+		Position: BottomRight
+		RequiresSelection: true
+	SpawnActorOnDeath:
+		Actor: ts_gdi_orcafighter_husk
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_orcabomber:
+	Inherits: ^Helicopter
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 1900
+	Tooltip:
+		Name: td_gdi_orca Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_techcenter
+		Queue: Aircraft, RAAircraft
+		Description: Heavy bomber.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 11
+		Speed: 160
+		CruisingCondition: cruising
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 152500
+	Repairable:
+		HpPerStep: 7625
+	ChangesHealth@SelfHealing:
+		Step: 61
+	Armament@PRIMARY:
+		Weapon: TSBomb
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSBombSonic
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	FirepowerMultiplier@AmmoCompensation:
+		Modifier: 25
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 20
+		ReloadDelay: 10
+		AmmoCondition: ammo
+	# ReloadAmmoPool:
+	# 	Delay: 25
+	# 	Count: 1
+	SpawnActorOnDeath:
+		Actor: ts_gdi_orcabomber_husk
+	RenderVoxels:
+		Scale: 15
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_carryall:
+	Inherits: ^Helicopter
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: ixian_autonomouscarryall
+	Selectable:
+		Bounds: 1280, 1024
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_gdi_helipad
+		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 149
+		InitialFacing: 0
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+	Carryall:
+		Voice: Move
+		LocalOffset: 0,0,-317
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 10
+	-WithShadow:
+	Health:
+		HP: 47500
+	Armor:
+		Type: Light
+	RenderSprites:
+	SpawnActorOnDeath:
+		Actor: ts_gdi_carryall_husk
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSHeli
+	RenderVoxels:
+		Scale: 15
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_kodiakcommandship:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Tooltip:
+		Name: Kodiak Command Ship
+	Valued:
+		Cost: 10000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_upgradecenter, ts_gdi_promotion_unlockkodiak
+		Queue: Aircraft, RAAircraft
+		Description: GDI command ship. Strong vs Everything
+		BuildLimit: 1
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 6
+		Speed: 30
+		RepulsionSpeed: 24
+		IdealSeparation: 2500
+	Health:
+		HP: 900000
+	Repairable:
+		HpPerStep: 45000
+	ChangesHealth@SelfHealing:
+		Step: 360
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: KodiakCannon
+		LocalOffset: 800,0,-200
+		MuzzleSequence: muzzle
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Name: primary
+		Weapon: KodiakCannonSonic
+		LocalOffset: 800,0,-200
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: KodiakAAGuns
+		LocalOffset: 400,0,200
+		MuzzleSequence: muzzle
+	#AttackAircraft:
+	#	FacingTolerance: 20
+	#	AttackType: Hover
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	#EjectOnDeath:
+	#	PilotActor: terran_ghost
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: SCBattleCruiserVoice
+	SpawnActorOnDeath:
+		Actor: ts_gdi_kodiakcommandship_husk
+	DeathSounds:
+	# -ReloadAmmoDelayMultiplier@RANK-1:
+	# -ReloadAmmoDelayMultiplier@RANK-2:
+	# -ReloadAmmoDelayMultiplier@RANK-3:
+	# -ReloadAmmoDelayMultiplier@RANK-ELITE:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+	#IonCannonPower:
+	#	AllowMultiple: True
+	#	OrderName: GDIDropDod
+	#	Prerequisites:
+	#		1: ~techlevel.superweapons
+	#	Icons:
+	#		1:droppod
+	#	Cursor: ioncannon
+	#	ChargeInterval: 7500
+	#	WeaponDelay: 0
+	#	Weapon: TSDroppodSpawner
+	#	Effect: tsioncannon
+	#	EffectSequence: targeting
+	#	EffectPalette: ra2effect
+	#	Names:
+	#		1: Drop Pods
+	#	Descriptions:
+	#		1: Deploys elite infantry from orbit.
+	#	InsufficientPowerSpeechNotification: InsufficientPower
+	#	SelectTargetSpeechNotification: SelectTarget
+	#	LaunchSpeechNotification: ReinforcementsArrived
+	#	SelectTargetTextNotification: Select target.
+	#	DisplayTimerRelationships: Ally, Neutral, Enemy
+	#	DisplayRadarPing: True
+	#	CameraRange: 5000
+	#	CameraRemoveDelay: 125
+	#	CameraActor: CAMERA.small
+	#	SupportPowerPaletteOrder: 20
+	#	TargetCircleRanges:
+	#		1: 5000
+	#	TargetCircleColor: ff000080

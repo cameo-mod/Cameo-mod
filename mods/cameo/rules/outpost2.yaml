@@ -364,7 +364,7 @@ op2_commonore_beacon_3bar:
 ^op2base_factory_vehicle:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x3Shape
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
 	# Selectable:
 	# 	Bounds: 4096,3072
@@ -1341,7 +1341,7 @@ EDEN_GP_RAILGUN:
 # #		WARES EDEN
 # ####################################################################################################
 
-CONSUMER_ITEMS_IMPULSE:
+eden_impulseitems:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1365,7 +1365,7 @@ CONSUMER_ITEMS_IMPULSE:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_WARES:
+eden_impulseitems_3:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1389,7 +1389,7 @@ CONSUMER_ITEMS_WARES:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_LUXURY_WARES:
+eden_impulseitems_2:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -2239,7 +2239,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Selectable:
 		Bounds: 2048,2048
 	HitShape:

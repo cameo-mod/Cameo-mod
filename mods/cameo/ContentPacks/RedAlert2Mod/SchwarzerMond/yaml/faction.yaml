@@ -1,0 +1,24 @@
+World:
+	FactionCA@lnaxis:
+		Name: Schwarzer Mond
+		InternalName: lnaxis
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction_ra2_lnaxis.description
+	StartingUnits@mcvlnaxis:
+		Class: none
+		ClassName: MCV Only
+		Factions: lnaxis
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
+	StartingUnits@defaultlnaxis:
+		Class: light
+		ClassName: Light Support
+		Factions: lnaxis
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
+		SupportActors: schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_laserbeetle,schwarzer_mond_lunartiger
+	StartingUnits@heavylnaxis:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: lnaxis
+		BaseActor: schwarzer_mond_naxismobileconstructionvehicle
+		SupportActors: schwarzer_mond_lunarsoldier,schwarzer_mond_lunarsoldier,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_lunarrocket,schwarzer_mond_laserbeetle,schwarzer_mond_lunartiger,schwarzer_mond_lunarpanzer,schwarzer_mond_lunarpanzer,schwarzer_mond_laserbeetle,schwarzer_mond_laserbeetle

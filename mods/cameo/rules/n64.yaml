@@ -21,19 +21,19 @@ World:
 		ClassName: Light Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,jeep
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,td_gdi_humvee
 	StartingUnits@heavyn64gdia:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e3,e3,jeep,mtnk,mtnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_gdi_humvee,td_gdi_battletank,td_gdi_battletank
 	StartingUnits@heavyn64gdib:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e2,e2,e2,e3,e3,apc,mtnk
+		SupportActors: e1,e1,e1,e1,e1,td_gdi_grenadier,td_gdi_grenadier,td_gdi_grenadier,e3,e3,td_gdi_apc,td_gdi_battletank
 	StartingUnits@mcvonlyn64nod:
 		Class: none
 		ClassName: MCV Only
@@ -44,19 +44,19 @@ World:
 		ClassName: Light Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,bggy
+		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,td_nod_buggy
 	StartingUnits@heavyn64noda:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e3,e3,ltnk,ltnk,ftnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_nod_lighttank,td_nod_lighttank,td_nod_flametank
 	StartingUnits@heavyn64nodb:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,ftnk,ftnk
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,td_nod_flametank,td_nod_flametank
 
 ####################################################################################################
 #		N64 - STRUCTURES
@@ -106,7 +106,7 @@ FACTN64GDI:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -209,7 +209,7 @@ FACTN64NOD:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -539,7 +539,7 @@ N64HAND:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Hand of Nod
+		Name: td_nod_handofnod of Nod
 	ProvidesPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -1405,7 +1405,7 @@ N64SAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: SAM site
+		Name: td_nod_samsite site
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Defence, RADefence
@@ -1569,7 +1569,7 @@ N64ATWR:
 		Amount: -50
 
 N64SBAG:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -1591,7 +1591,7 @@ N64SBAG:
 		Type: sandbag
 
 N64CYCL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -1613,7 +1613,7 @@ N64CYCL:
 		Type: chain
 
 N64BRIK:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 150
 	CustomSellValue:
@@ -2122,7 +2122,7 @@ N64BIKE:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Recon Bike
+		Name: Recon td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -2311,10 +2311,10 @@ N64APC:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: APC
+		Name: td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: n64pyle
@@ -2365,7 +2365,7 @@ N64APC:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -2727,7 +2727,7 @@ N64ORCA:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Orca
+		Name: td_gdi_orca
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

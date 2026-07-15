@@ -69,10 +69,10 @@ Actors:
 	Actor4: apwr
 		Owner: NitroIdle
 		Location: 63,68
-	Actor5: barr
+	Actor5: ra1_soviet_barracks
 		Owner: NitroIdle
 		Location: 56,70
-	Actor6: barr
+	Actor6: ra1_soviet_barracks
 		Owner: NitroIdle
 		Location: 15,70
 	Actor7: powr
@@ -81,19 +81,19 @@ Actors:
 	Actor8: powr
 		Owner: NitroIdle
 		Location: 59,70
-	Actor9: ftur
+	Actor9: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 62,73
-	Actor10: ftur
+	Actor10: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 53,76
-	Actor11: ftur
+	Actor11: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 18,78
-	Actor12: ftur
+	Actor12: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 11,70
-	Actor13: rafact.soviet
+	Actor13: ra1_soviet_constructionyard
 		Owner: NitroIdle
 		Location: 58,9
 	Actor33: ca
@@ -120,13 +120,13 @@ Actors:
 		Owner: Shade
 		Location: 64,93
 		Facing: 0
-	Actor39: tsla
+	Actor39: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 29,79
-	Actor40: tsla
+	Actor40: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 40,80
-	Actor42: rafact.soviet
+	Actor42: ra1_soviet_constructionyard
 		Owner: NitroIdle
 		Location: 11,33
 	Actor45: apwr
@@ -135,40 +135,40 @@ Actors:
 	Actor46: apwr
 		Owner: NitroIdle
 		Location: 11,29
-	Actor43: barr
+	Actor43: ra1_soviet_barracks
 		Owner: NitroIdle
 		Location: 8,33
 	Actor47: powr
 		Owner: NitroIdle
 		Location: 8,29
-	Actor49: dome.allies
+	Actor49: ra1_allies_alliedradardome
 		Owner: NitroIdle
 		Location: 5,29
 	Actor50: powr
 		Owner: NitroIdle
 		Location: 3,29
-	Actor53: raproc.soviet
+	Actor53: ra1_soviet_orerefinery
 		Owner: NitroIdle
 		Location: 7,23
-	Actor56: ftur
+	Actor56: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 9,39
-	Actor57: ftur
+	Actor57: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 15,39
-	Actor58: ftur
+	Actor58: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 12,43
-	Actor59: ftur
+	Actor59: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 15,31
-	Actor61: rasam
+	Actor61: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 5,28
-	Actor62: rasam
+	Actor62: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 16,28
-	Actor63: rasam
+	Actor63: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 8,36
 	Actor64: mine
@@ -264,7 +264,7 @@ Actors:
 	Actor105: moneycrate.large
 		Owner: NitroIdle
 		Location: 27,51
-	Actor111: rafix.soviet
+	Actor111: ra1_soviet_servicedepot
 		Owner: NitroIdle
 		Location: 31,38
 	Actor112: splitgold
@@ -273,7 +273,7 @@ Actors:
 	Actor113: splitgold
 		Owner: Neutral
 		Location: 36,4
-	Actor114: raproc.soviet
+	Actor114: ra1_soviet_orerefinery
 		Owner: NitroIdle
 		Location: 46,5
 	Actor115: apwr
@@ -297,7 +297,7 @@ Actors:
 	Actor125: powr
 		Owner: NitroIdle
 		Location: 55,5
-	Actor127: dome.allies
+	Actor127: ra1_allies_alliedradardome
 		Owner: NitroIdle
 		Location: 59,5
 	Actor128: tc04
@@ -339,13 +339,13 @@ Actors:
 	Actor140: t16
 		Owner: Neutral
 		Location: 63,48
-	Actor141: ftur
+	Actor141: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 42,48
-	Actor142: ftur
+	Actor142: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 45,46
-	Actor143: ftur
+	Actor143: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 44,38
 	Actor144: apwr
@@ -357,57 +357,57 @@ Actors:
 	Actor146: powr
 		Owner: NitroIdle
 		Location: 36,40
-	Actor159: ftur
+	Actor159: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 56,14
-	Actor160: ftur
+	Actor160: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 62,14
-	Actor161: tsla
+	Actor161: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 54,14
-	Actor162: tsla
+	Actor162: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 64,14
-	Actor163: pbox
+	Actor163: ra1_allies_pillbox
 		Owner: NitroIdle
 		Location: 58,14
-	Actor164: pbox
+	Actor164: ra1_allies_pillbox
 		Owner: NitroIdle
 		Location: 60,14
-	Actor165: rasam
+	Actor165: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 67,10
-	Actor166: rasam
+	Actor166: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 50,10
-	Actor167: rasam
+	Actor167: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 53,6
-	Actor168: rasam
+	Actor168: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 64,6
-	Actor169: 3tnk
+	Actor169: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Facing: 384
 		Location: 17,74
-	Actor170: 3tnk
+	Actor170: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Location: 10,70
 		Facing: 499
-	Actor171: 3tnk
+	Actor171: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Location: 4,67
 		Facing: 570
-	Actor172: 3tnk
+	Actor172: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Location: 54,73
 		Facing: 594
-	Actor173: 3tnk
+	Actor173: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Location: 62,72
 		Facing: 507
-	Actor174: 3tnk
+	Actor174: ra1_soviet_heavytank
 		Owner: NitroIdle
 		Location: 69,70
 		Facing: 444
@@ -471,11 +471,11 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 67,70
-	Actor193: v1truck
+	Actor193: ra1_soviet_v1rockettruck
 		Owner: NitroIdle
 		Location: 28,78
 		Facing: 507
-	Actor194: v1truck
+	Actor194: ra1_soviet_v1rockettruck
 		Owner: NitroIdle
 		Location: 41,79
 		Facing: 507
@@ -643,10 +643,10 @@ Actors:
 	Actor231: powr
 		Owner: NitroIdle
 		Location: 62,9
-	Actor232: barr
+	Actor232: ra1_soviet_barracks
 		Owner: NitroIdle
 		Location: 64,9
-	Actor233: raweap
+	Actor233: ra1_soviet_warfactory
 		Owner: NitroIdle
 		Location: 52,9
 	Actor234: powr
@@ -676,25 +676,25 @@ Actors:
 	Actor242: rasilo
 		Owner: NitroIdle
 		Location: 32,44
-	Actor243: rasam
+	Actor243: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 31,50
-	Actor244: rasam
+	Actor244: ra1_soviet_samsite
 		Owner: NitroIdle
 		Location: 26,40
-	Actor245: ftur
+	Actor245: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 26,33
 	Actor246: splitgold
 		Owner: Neutral
 		Location: 65,61
-	Actor247: rafix.soviet
+	Actor247: ra1_soviet_servicedepot
 		Owner: NitroIdle
 		Location: 69,5
-	Actor229: raweap
+	Actor229: ra1_soviet_warfactory
 		Owner: NitroIdle
 		Location: 4,33
-	Actor248: raproc.soviet
+	Actor248: ra1_soviet_orerefinery
 		Owner: NitroIdle
 		Location: 15,33
 	Actor249: rasilo
@@ -709,10 +709,10 @@ Actors:
 	Actor252: rasilo
 		Owner: NitroIdle
 		Location: 11,25
-	Actor253: rafact.soviet
+	Actor253: ra1_soviet_constructionyard
 		Owner: NitroIdle
 		Location: 13,4
-	Actor254: barr
+	Actor254: ra1_soviet_barracks
 		Owner: NitroIdle
 		Location: 17,5
 	Actor255: apwr
@@ -721,34 +721,34 @@ Actors:
 	Actor256: apwr
 		Owner: NitroIdle
 		Location: 6,4
-	Actor257: raproc.soviet
+	Actor257: ra1_soviet_orerefinery
 		Owner: NitroIdle
 		Location: 8,7
-	Actor258: raweap
+	Actor258: ra1_soviet_warfactory
 		Owner: NitroIdle
 		Location: 15,9
-	Actor259: dome.allies
+	Actor259: ra1_allies_alliedradardome
 		Owner: NitroIdle
 		Location: 17,1
-	Actor260: tsla
+	Actor260: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 14,14
-	Actor261: tsla
+	Actor261: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 23,13
-	Actor262: ftur
+	Actor262: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 13,15
-	Actor263: ftur
+	Actor263: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 15,15
-	Actor264: ftur
+	Actor264: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 22,14
-	Actor265: ftur
+	Actor265: ra1_soviet_flametower
 		Owner: NitroIdle
 		Location: 24,12
-	Actor266: tsla
+	Actor266: ra1_soviet_teslacoil
 		Owner: NitroIdle
 		Location: 43,47
 	Actor267: raspen

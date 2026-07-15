@@ -22,6 +22,19 @@ actor_steel_mega =
 actor_steel_savi =
    .description = Protects nearby units with shields.
 
+actor_steel_stalker =
+   .description = Heroic hover tank with a powerful frontal cannon and shield generator.
+
+actor_steel_white_rabbit =
+   .description = Heroic hover tank armed with rapid gatling guns.
+      Strong vs Infantry, Aircraft
+      Weak vs Vehicles
+
+actor_steel_arty =
+   .description = Mobile artillery that deploys to fire long-range shells.
+      Strong vs Buildings, Ground units
+      Weak vs Aircraft, close-range units
+
 faction_ra2_consortium =
    .name = Steel Consortium
    .description = Steel Consortium from Reign of Steel Mod

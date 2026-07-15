@@ -1,0 +1,688 @@
+inspect_husk.steel:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Empress Station
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_consortium_empressstation
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+steel_consortium_twister:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Tooltip:
+		Name: Twister
+	Valued:
+		Cost: 1000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~steel_consortium_consortiumairpad
+		Queue: Aircraft, RAAircraft
+		Description: actor_falc.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 10
+		IdleSpeed: 100
+		TakeoffSounds: twisSounda.wav, twisSoundb.wav
+		LandingSounds: twisSounda.wav, twisSoundb.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: SteelTwisterMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: SteelTwisterMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 42
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: twister_husk.steel
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: SteelAircraftVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+
+twister_husk.steel:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Twister
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_consortium_twister
+	RenderSprites:
+		PlayerPalette: playerra2cons
+
+grun_husk.steel:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Flying Turret
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	RenderSprites:
+		Image: steel_consortium_skyhammer
+		PlayerPalette: playerra2rot
+	Turreted:
+
+steel_consortium_cargoship:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Cargo Ship
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~steel_consortium_consortiumairpad
+		Queue: Aircraft, RAAircraft
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+		AltitudeVelocity: 100
+		RepulsionSpeed: 50
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Weapon: SteelCargoshipCannons
+		LocalOffset: -150,-400,-25, -150,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: steel_consortium_clonetrooper, steel_consortium_hoverboardgrenadier, steel_consortium_quantummissiletrooper, steel_consortium_clonetrooper, steel_consortium_hoverboardgrenadier, steel_consortium_quantummissiletrooper
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 6
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: cargoship_husk.steel
+	SelectionDecorations:
+	Selectable:
+		Class: steel_consortium_cargoship
+		Bounds: 1536, 1536
+	RenderSprites:
+		Image: steel_consortium_cargoship
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: SteelConsortiumTankVoice
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+
+cargoship_husk.steel:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Ship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_consortium_cargoship
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+cruiser_husk.steel:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cruiser
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_consortium_cloudbreaker
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+cruiser_f_husk.steel:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hornet
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 186
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: cruiser_f.steel
+	RenderSprites:
+		PlayerPalette: playerra2
+
+#######################################
+# Steel Consortium Promotion Tree
+#######################################
+
+### Federation tree
+
+steel_consortium_empressstation:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Empress Station
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_consortiumbattlelab
+		BuildLimit: 1
+		Queue: Aircraft, RAAircraft
+		Description: actor_steel_inspect.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 25
+		Speed: 25
+		RepulsionSpeed: 25
+		CanSlide: False
+	Health:
+		HP: 1500000
+	ChangesHealth@SelfHealing:
+		Step: 600
+	Shielded:
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenAmount: 1200
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled
+		SelectionBarColor: 8888FFFF
+	Armament@PRIMARY:
+		Weapon: SteelInspectorIonCannon
+		LocalOffset: 0,0,-512
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@IonCannon:
+		Modifier: 10
+	WithMuzzleOverlay:
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Strafe #Hover
+		PersistentTargeting: false
+		#StrafeRunLength: 3333
+		#FacingTolerance: 20
+	WithShadow:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2048, 2048, 0, -128
+	SpawnActorOnDeath:
+		Actor: inspect_husk.steel
+	Voiced:
+		VoiceSet: SteelEmpressVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@shield1:
+		Sequence: shield-complete-big
+		StartSequence: shield-starts-big
+	WithIdleOverlay@shield_damage:
+		Sequence: shield-complete-big
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+
+steel_consortium_skyhammer:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 110
+		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_consortiumbattlelab
+		Description: actor_steel_grun.description
+	Valued:
+		Cost: 4500
+	Tooltip:
+		Name: Sky Hammer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Shielded:
+		MaxPercentageStrength: 200
+		DamageRegenDelay: 125
+		RegenAmount: 96
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled
+		SelectionBarColor: 8888FFFF
+	Armament@PRIMARY:
+		Weapon: SteelAirTurret
+		LocalOffset: 250,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@Upgrade:
+		Weapon: SteelAirTurretEMP
+		LocalOffset: 250,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+	Armament@elite:
+		Weapon: SteelAirTurretE
+		LocalOffset: 250,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@steel_consortium_upgrade_quantumweaponpower:
+		Modifier: 125
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+	AttackAircraft:
+		FacingTolerance: 10
+	Aircraft:
+		Speed: 120
+		TurnSpeed: 24
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: grun_husk.steel
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: SteelInspectorVoice
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: playerra2rot
+	Turreted:
+		TurnSpeed: 24
+	WithSpriteTurret:
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+
+steel_consortium_cloudbreaker:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Cloud Breaker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_geothermalreactor, steel_consortium_promotion_unlockcloudbreaker
+		Queue: Aircraft, RAAircraft
+		Description: actor_shad.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 50
+		RepulsionSpeed: 40
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Shielded:
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenAmount: 160
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled
+		SelectionBarColor: 8888FFFF
+	Armament@PRIMARY:
+		Weapon: SteelCruiserCannons
+		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Weapon: SteelCruiserCannonsE
+		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@CANNON:
+		Weapon: SteelCruiserArtillery
+		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower && !rank-elite
+	Armament@CANNONELITE:
+		Weapon: SteelCruiserArtilleryE
+		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower && rank-elite
+	FirepowerMultiplier@Carrier:
+		Modifier: 50
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: cruiser_husk.steel
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2560, 2560
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: SteelEmpressVoice
+	WithIdleOverlay@shield1:
+		Sequence: shield-complete-big
+		StartSequence: shield-starts-big
+	WithIdleOverlay@shield_damage:
+		Sequence: shield-complete-big
+	CarrierMaster:
+		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
+		RearmTicks: 25
+		RespawnTicks: 75
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+
+cruiser_f.steel:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@quantum: ^QuantumWeaponsEMP
+	-Selectable:
+	Interactable:
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Cruiser Fighter
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 225
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 37500
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Shielded:
+		MaxPercentageStrength: 200
+		DamageRegenDelay: 125
+		RegenAmount: 20
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled
+		SelectionBarColor: 8888FFFF
+	RevealsShroud:
+		Range: 10000
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Weapon: SteelFighterRailgun
+		LocalOffset: 0,-256,0, 0,256,0
+		LocalYaw: 64, -64
+		PauseOnCondition: !ammo
+	Armament@Secondary:
+		Weapon: SteelMakoGunEMP
+		LocalOffset: 0,-256,0, 0,256,0
+		LocalYaw: 64, -64
+		PauseOnCondition: !ammo
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+	FirepowerMultiplier@CruiserFighter:
+		Modifier: 10
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: cruiser_f_husk.steel
+	Voiced:
+		VoiceSet: SteelEmpressVoice
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+
+scalpelMG.steel:
+	Inherits: ^SteelDefensiveDrones
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Scalpel
+	Armament@PRIMARY:
+		Weapon: SteelMantaAG
+		LocalOffset: 200,0,0
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackAircraft:
+		Armaments: primary, pointdefense
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_shieldresistance
+
+scalpelQuantumCannon.steel:
+	Inherits: ^SteelDefensiveDrones
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Quantum Scalpel
+	Armament@PRIMARY:
+		Weapon: SteelQuantumTurretRail
+		LocalOffset: 200,0,0
+		MuzzleSequence: muzzle2
+		MuzzlePalette: ra2effect
+		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
+	Armament@Upgrade:
+		Weapon: SteelQuantumTurretRailEMP
+		LocalOffset: 200,0,0
+		MuzzleSequence: muzzle2
+		MuzzlePalette: ra2effect
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+	WithMuzzleOverlay:
+	AttackAircraft:
+		Armaments: primary, pointdefense
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+
+scalpelAA.steel:
+	Inherits: ^SteelDefensiveDrones
+	Inherits@quantum: ^QuantumWeaponsEMP
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Anti Air Scalpel
+	Armament@PRIMARY:
+		Weapon: SteelScalpelRailgunAA
+		LocalOffset: 200,-100,0, 200,100,0, 200,-200,0, 200,200,0
+		LocalYaw: 50, -50, 25, -25
+		MuzzleSequence: muzzle2
+		MuzzlePalette: ra2effect
+		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
+	Armament@Upgrade:
+		Weapon: SteelScalpelRailgunEMPAA
+		LocalOffset: 200,-100,0, 200,100,0, 200,-200,0, 200,200,0
+		LocalYaw: 50, -50, 25, -25
+		MuzzleSequence: muzzle2
+		MuzzlePalette: ra2effect
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+	WithMuzzleOverlay:
+	ActorStatValues:
+		Upgrades: steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance

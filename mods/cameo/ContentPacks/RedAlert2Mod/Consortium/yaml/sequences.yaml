@@ -1,0 +1,1516 @@
+steel_consortium_steelbarracks:
+	Defaults:
+		Offset: 16,-10
+		Tick: 50
+		Scale: 1.0
+	idle:
+		Filename: steel_consortium_steelbarracks_qabarr.shp
+	damaged-idle:
+		Filename: steel_consortium_steelbarracks_qabarr.shp
+		Start: 1
+	idle-training:
+		Filename: steel_consortium_steelbarracks_qabarr_a.shp
+		Length: 12
+	damaged-idle-training:
+		Filename: steel_consortium_steelbarracks_qabarr_a.shp
+		Start: 12
+		Length: 12
+	dead:
+		Filename: steel_consortium_steelbarracks_qabarr.shp
+		Start: 1
+	make:
+		Filename: steel_consortium_steelbarracks_qabarr_make.shp
+		Length: 25
+	icon:
+		Filename: steel_consortium_steelbarracks_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumpowerplant:
+	Defaults:
+		Offset: 0,-4
+		Tick: 50
+	idle:
+		Filename: steel_consortium_consortiumpowerplant_qapowr.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_consortiumpowerplant_qapowr.shp
+		Start: 1
+		ShadowStart: 3
+	idle-glow:
+		Filename: steel_consortium_consortiumpowerplant_qapowr_a.shp
+		Length: 10
+		Tick: 150
+	damaged-idle-glow:
+		Filename: steel_consortium_consortiumpowerplant_qapowr_a.shp
+		Start: 10
+		Length: 10
+		Tick: 150
+	make:
+		Filename: steel_consortium_consortiumpowerplant_qapowr_make.shp
+		Length: 31
+		ShadowStart: 31
+	dead:
+		Filename: steel_consortium_consortiumpowerplant_qapowr.shp
+		Start: 1
+	icon:
+		Filename: steel_consortium_consortiumpowerplant_qapowr_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_consortiumpowerplant_qapowr_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumrefinery:
+	Defaults:
+		Offset: 1,-12
+		Tick: 50
+	idle:
+		Filename: steel_consortium_consortiumrefinery_qref.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_consortiumrefinery_qref.shp
+		Start: 1
+		ShadowStart: 3
+	make:
+		Filename: steel_consortium_consortiumrefinery_qref_make.shp
+		Length: 31
+		ShadowStart: 31
+	idle-top:
+		Filename: steel_consortium_consortiumrefinery_qref_a.shp
+		Length: 10
+		Tick: 150
+	damaged-idle-top:
+		Filename: steel_consortium_consortiumrefinery_qref_a.shp
+		Length: 10
+		Start: 10
+		Tick: 150
+	idle-bib:
+		Filename: steel_consortium_consortiumrefinery_qref_bib.shp
+		ZOffset: -512
+		ShadowStart: 2
+	damaged-idle-bib:
+		Filename: steel_consortium_consortiumrefinery_qref_bib.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -512
+	docking-overlay:
+		Filename: ra2_soviets_orerefinery_ngrefnor.shp
+		Length: 20
+	dead:
+		Filename: steel_consortium_consortiumrefinery_qref.shp
+		Start: 1
+	resources:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: steel_consortium_consortiumrefinery_qref_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_consortiumrefinery_qref_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumradar:
+	Defaults:
+		Offset: 0,-8
+		Tick: 50
+	idle:
+		Filename: steel_consortium_consortiumradar_qtradr.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_consortiumradar_qtradr.shp
+		Start: 1
+		ShadowStart: 3
+	critical-idle:
+		Filename: steel_consortium_consortiumradar_qtradr.shp
+		Start: 1
+	idle-dish:
+		Filename: steel_consortium_consortiumradar_qtradr_a.shp
+		ShadowStart: 20
+		Length: 10
+		Tick: 100
+	damaged-idle-dish:
+		Filename: steel_consortium_consortiumradar_qtradr_a.shp
+		Start: 10
+		ShadowStart: 30
+		Length: 10
+		Tick: 100
+	make:
+		Filename: steel_consortium_consortiumradar_qtradr_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: steel_consortium_consortiumradar_qtradr.shp
+		Start: 1
+	icon:
+		Filename: steel_consortium_consortiumradar_qtradr_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_consortiumradar_qtradr_icon.shp
+		Offset: 0,0
+
+steel_consortium_cloningvats:
+	Defaults:
+		Offset: -16,-20
+		Tick: 50
+	idle:
+		Filename: steel_consortium_cloningvats_qaclone.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_cloningvats_qaclone.shp
+		Start: 1
+	idle-top:
+		Filename: steel_consortium_cloningvats_qaclone_a.shp
+		Length: 11
+	damaged-idle-top:
+		Filename: steel_consortium_cloningvats_qaclone_a.shp
+		Start: 11
+		Length: 11
+	make:
+		Filename: steel_consortium_cloningvats_qaclone_make.shp
+		Length: 25
+	dead:
+		Filename: steel_consortium_cloningvats_qaclone.shp
+		Start: 1
+	icon:
+		Filename: steel_consortium_cloningvats_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumconstructionyard:
+	Defaults:
+		Offset: 2,-26
+	idle:
+		Filename: steel_consortium_consortiumconstructionyard_qacst.shp
+		ZOffset: -1024
+	damaged-idle:
+		Filename: steel_consortium_consortiumconstructionyard_qacst.shp
+		Start: 1
+		ZOffset: -1024
+	make:
+		Filename: steel_consortium_consortiumconstructionyard_qacst_make.shp
+		Length: 31
+		ShadowStart: 31
+	idle-fans:
+		Filename: steel_consortium_consortiumconstructionyard_qacst_a.shp
+		Length: 10
+		Tick: 150
+	damaged-idle-fans:
+		Filename: steel_consortium_consortiumconstructionyard_qacst_a.shp
+		Start: 10
+		Length: 10
+		Tick: 150
+	idle-normal:
+		Filename: steel_consortium_consortiumconstructionyard_qacst.shp
+		ZOffset: -1024
+	damaged-idle-normal:
+		Filename: steel_consortium_consortiumconstructionyard_qacst.shp
+		Start: 1
+		ZOffset: -1024
+	crane-overlay:
+		Filename: steel_consortium_consortiumconstructionyard_qacst_b.shp
+		Length: 28
+		Tick: 150
+	damaged-crane-overlay:
+		Filename: steel_consortium_consortiumconstructionyard_qacst_bd.shp
+		Length: 28
+		Tick: 150
+	dead:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: steel_consortium_consortiumconstructionyard_yardicon.png
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_consortiumconstructionyard_yardicon.png
+		Offset: 0,0
+
+steel_consortium_consortiumwarfactory:
+	Defaults:
+		Offset: -20,-26
+		Tick: 50
+	idle:
+		Filename: steel_consortium_consortiumwarfactory_qaweap.shp
+		ZOffset: -1536
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_consortiumwarfactory_qaweap.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1536
+	dead:
+		Filename: steel_consortium_consortiumwarfactory_qaweap.shp
+		Start: 1
+		ZOffset: -1536
+	build-door:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_1.shp
+		ShadowStart: 2
+		ZOffset: -1024
+	damaged-build-door:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_1.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1024
+	build-top:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_2.shp
+		ZOffset: 1024
+		ShadowStart: 2
+	damaged-build-top:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_2.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: 1024
+	# TODO: ngweap_3 and ngweap_4 are used for producing flying actors
+	build-air-open:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_3.shp
+		ShadowStart: 2
+	damaged-air-open:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_3.shp
+		Start: 1
+		ShadowStart: 3
+	build-air-inside:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_4.shp
+		ShadowStart: 2
+	damaged-air-inside:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_4.shp
+		Start: 1
+		ShadowStart: 3
+	bib:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_bib.shp
+		ShadowStart: 3
+		ZOffset: -1024
+	damaged-bib:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_bib.shp
+		Start: 1
+		ZOffset: -1024
+	build-ramp:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_bib.shp
+		ShadowStart: 3
+		ZOffset: -1024
+	damaged-build-ramp:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_bib.shp
+		Start: 1
+		ZOffset: -1024
+	idle-lights:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_a.shp
+		Length: 10
+		ShadowStart: 20
+		Tick: 150
+	damaged-idle-lights:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_a.shp
+		Length: 10
+		ShadowStart: 30
+		Tick: 150
+	make:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_make.shp
+		Length: 31
+		ShadowStart: 31
+	icon:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_consortiumwarfactory_qaweap_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumbattlelab:
+	Defaults:
+		Offset: -8,-8
+		Tick: 50
+	idle:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech.shp
+		Start: 1
+		ShadowStart: 3
+	idle-lights:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech_a.shp
+		Length: 11
+		ShadowStart: 22
+		Tick: 100
+	damaged-idle-lights:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech_a.shp
+		Length: 11
+		ShadowStart: 33
+		Tick: 100
+	make:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech_make.shp
+		Length: 31
+		ShadowStart: 31
+	dead:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech.shp
+		Start: 1
+	icon:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_upgrade_unlockempcannon_qatech_icon.shp
+		Offset: 0,0
+	icon2:
+		Filename: steel_consortium_upgrade_unlockempcannon_icon.shp
+		Offset: 0,0
+
+steel_consortium_orbitalcannonactivator:
+	Defaults:
+		Offset: -8,-20
+		Scale: 1
+		Tick: 50
+	idle:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit.shp
+		Start: 1
+		ShadowStart: 3
+	idle-lights:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit_a.shp
+		Length: 10
+		ShadowStart: 20
+		Tick: 100
+	damaged-idle-lights:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit_a.shp
+		Start: 10
+		Length: 10
+		ShadowStart: 30
+		Tick: 100
+	make:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit_make.shp
+		Length: 18
+		ShadowStart: 18
+	dead:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit.shp
+		Start: 1
+	icon:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit_icon.shp
+		Offset: 0,0
+	icon2:
+		Filename: steel_consortium_orbitalcannonactivator_ionweapon_icon.shp
+		Offset: 0,0
+	iconw:
+		Filename: steel_consortium_orbitalcannonactivator_qaorbit_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumsentryturret:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,-4
+	idle:
+		Filename: steel_consortium_consortiumsentryturret_fedturret.shp
+	damaged-idle:
+		Filename: steel_consortium_consortiumsentryturret_fedturret.shp
+		Start: 1
+	critical-idle:
+		Filename: steel_consortium_consortiumsentryturret_fedturret.shp
+		Start: 1
+	make:
+		Filename: steel_consortium_consortiumsentryturret_fedturret_make.shp
+		Length: 31
+	dead:
+		Filename: steel_consortium_consortiumsentryturret_fedturret.shp
+		Start: 1
+	turret:
+		Filename: steel_consortium_consortiumsentryturret_fedturret_top.shp
+		Facings: 32
+		ShadowStart: 64
+	icon:
+		Filename: steel_consortium_consortiumsentryturret_icon.shp
+		Offset: 0,0
+
+steel_consortium_antiairquantummissileturret:
+	Defaults:
+		Offset: 0,-6
+	idle:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa.shp
+	damaged-idle:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa.shp
+		Start: 1
+	critical-idle:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa.shp
+		Start: 1
+	make:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa_make.shp
+		Length: 31
+	dead:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa.shp
+		Start: 1
+	turret:
+		Filename: steel_consortium_antiairquantummissileturret_fedaa_top.shp
+		Facings: 32
+		ShadowStart: 64
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_antiairquantummissileturret_icon.shp
+		Offset: 0,0
+
+steel_consortium_quantumcannon:
+	Defaults:
+		Offset: -4,-20
+		Scale: 1.25
+	idle:
+		Filename: steel_consortium_quantumcannon_qcannon.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: steel_consortium_quantumcannon_qcannon.shp
+		Start: 1
+		ShadowStart: 3
+	critical-idle:
+		Filename: steel_consortium_quantumcannon_qcannon.shp
+		Start: 2
+	make:
+		Filename: steel_consortium_quantumcannon_qcannon_make.shp
+		Length: 23
+	dead:
+		Filename: steel_consortium_quantumcannon_qcannon.shp
+		Start: 1
+	turret:
+		Filename: steel_consortium_quantumcannon_qcannon_top.shp
+		Facings: 32
+		ShadowStart: 64
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_quantumcannon_icon.shp
+		Offset: 0,0
+
+steel_consortium_bfg10000:
+	Defaults:
+		Offset: 55,15
+		#Scale: 1.25
+	idle:
+		Filename: steel_consortium_bfg10000_bfgudspritesheetcfix.png
+		Facings: 64
+		Start: 17
+	damaged-idle:
+		Filename: steel_consortium_bfg10000_bfgdspritesheetcfix.png
+		Facings: 64
+	make:
+		Filename: steel_consortium_bfg10000_bfgudspritesheetcfix.png
+		Length: 17
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	dead:
+		Filename: steel_consortium_bfg10000_bfgdspritesheetcfix.png
+		Facings: 64
+		Tick: 100
+	icon:
+		Filename: steel_consortium_bfg10000_icon.png
+		Offset: 0,0
+
+steel_consortium_consortiumairpad:
+	Defaults:
+		Offset: 2,-10 #12
+		Scale: 1.5
+	idle:
+		Filename: steel_consortium_consortiumairpad_conpad.shp
+		Length: 1
+	damaged-idle:
+		Filename: steel_consortium_consortiumairpad_conpad.shp
+		Start: 1
+		Length: 1
+	idlebottom:
+		Filename: steel_consortium_consortiumairpad_conpad_bib.shp
+		Length: 1
+		ZOffset: -1c512
+	damage-idle-bottom:
+		Filename: steel_consortium_consortiumairpad_conpad_bib.shp
+		Start: 1
+		Length: 1
+		ZOffset: -1c512
+	idle-dish:
+		Filename: steel_consortium_consortiumairpad_conpad_a.shp
+		Length: 20
+		Tick: 120
+		ZOffset: -512
+	damaged-idle-dish:
+		Filename: steel_consortium_consortiumairpad_conpad_ad.shp
+		Length: 20
+		Tick: 120
+		ZOffset: -512
+	idle-mid:
+		Filename: steel_consortium_consortiumairpad_conpad_b.shp
+		Length: 20
+		Tick: 120
+		ZOffset: -1c512
+	damage-idle-mid:
+		Filename: steel_consortium_consortiumairpad_conpad_bd.shp
+		Length: 20
+		Tick: 120
+		ZOffset: -1c512
+	make:
+		Filename: steel_consortium_consortiumairpad_conpad_make.shp
+		Length: 36
+	dead:
+		Filename: steel_consortium_consortiumairpad_conpad.shp
+		Start: 1
+		Length: 1
+	icon:
+		Filename: steel_consortium_consortiumairpad_icon.shp
+		Offset: 0,0
+
+steel_consortium_geothermalreactor:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: steel_consortium_geothermalreactor_thermo_ground.png
+		Offset: 0,-48
+		Scale: 1.0
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	idle-ground:
+		Start: 21
+		Length: 40
+	damaged-idle-ground:
+		Start: 61
+		Length: 40
+	idle-water:
+		Start: 21
+		Length: 40
+		Filename: steel_consortium_geothermalreactor_thermo_water.png
+	damaged-idle-water:
+		Start: 61
+		Length: 40
+		Filename: steel_consortium_geothermalreactor_thermo_water.png
+	make:
+		Filename: steel_consortium_geothermalreactor_thermo_ground.png
+		Length: 21
+	bib:
+		Offset: 0,20
+	dead:
+		Start: 61
+		Length: 1
+	icon:
+		Filename: steel_consortium_geothermalreactor_icon.shp
+		Offset: 0, 0
+
+##############################################
+#   Red Alert 2 Consortium Infantry
+##############################################
+
+steel_consortium_consortiummobileconstructionvehicle:
+	Defaults:
+		Filename: steel_consortium_consortiummobileconstructionvehicle_qmcv.shp
+		Offset: 0,16
+	idle:
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 9999
+		ShadowStart: 80
+	move:
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 80
+	icon:
+		Filename: steel_consortium_consortiummobileconstructionvehicle_icon.shp
+		Offset: 0,0
+
+steel_consortium_consortiumminer:
+	Defaults:
+		Filename: steel_consortium_consortiumminer_qmin.shp
+		Offset: 0,32
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	dock:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	dock-loop:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	move:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 96
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: steel_consortium_consortiumminer_icon.shp
+		Offset: 0,0
+
+steel_consortium_clonetrooper:
+	Inherits: ^RA2ArmedInfantryNoProneAnimation
+	Defaults:
+		Filename: steel_consortium_clonetrooper_fedinf.shp
+		Scale: 0.8
+		Offset: 0,-4
+	stand:
+		ShadowStart: 281
+	run:
+		Start: 8
+		Length: 13
+		Facings: 8
+		Tick: 80
+		ShadowStart: 289
+	prone-run:
+		Start: 8
+		Length: 13
+		Facings: 8
+		Tick: 106
+		ShadowStart: 289
+	idle1:
+		Start: 200
+		Length: 30
+		Tick: 120
+		ShadowStart: 481
+	idle2:
+		Start: 200
+		Length: 30
+		Tick: 120
+		ShadowStart: 481
+	shoot:
+		Start: 112
+		Length: 11
+		Facings: 8
+		Tick: 120
+		ShadowStart: 393
+	prone-shoot:
+		Start: 112
+		Length: 11
+		Facings: 8
+		Tick: 160
+		ShadowStart: 393
+	die1:
+		Start: 260
+		Length: 20
+		ShadowStart: 540
+	die2:
+		Start: 260
+		Length: 20
+		ShadowStart: 540
+	paradrop:
+		Start: 280
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_clonetrooper_icon.shp
+		Scale: 1
+		Offset: 0,0
+
+steel_consortium_quantummissiletrooper:
+	Inherits: ^RA2ArmedInfantryNoProneAnimation
+	Defaults:
+		Filename: steel_consortium_quantummissiletrooper_qinf.shp
+		Scale: 0.8
+		Offset: 0,-4
+	stand:
+		ShadowStart: 332
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Start: 8
+		Length: 15
+		Facings: 8
+		Tick: 80
+		ShadowStart: 340
+	prone-run:
+		Start: 8
+		Length: 15
+		Facings: 8
+		Tick: 106
+		ShadowStart: 340
+	idle1:
+		Start: 279
+		Length: 14
+		Tick: 120
+		ShadowStart: 611
+	idle2:
+		Start: 315
+		Length: 15
+		Tick: 120
+		ShadowStart: 647
+	shoot:
+		Start: 128
+		Length: 8
+		Facings: 8
+		Tick: 120
+		ShadowStart: 460
+	prone-shoot:
+		Start: 128
+		Length: 8
+		Facings: 8
+		Tick: 160
+		ShadowStart: 460
+	die1:
+		Start: 297
+		Length: 18
+		ShadowStart: 629
+	die2:
+		Start: 297
+		Length: 18
+		ShadowStart: 629
+	paradrop:
+		Start: 323
+	deployed:
+		Start: 207
+		Facings: 8
+	deploy:
+		Start: 192
+		Length: 15
+		ShadowStart: 524
+	shoot-deployed:
+		Start: 215
+		Length: 8
+		Facings: 8
+	undeploy:
+		Start: 192
+		Length: 15
+		ShadowStart: 524
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_quantummissiletrooper_icon.shp
+		Scale: 1
+		Offset: 0,0
+
+steel_consortium_engineer:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: steel_consortium_engineer_fedeng.shp
+		Scale: 1.0
+		Offset: 0,-4
+	stand:
+		ShadowStart: 338
+	run:
+		Start: 8
+		Length: 13
+		Facings: 8
+		Tick: 80
+		ShadowStart: 346
+	idle1:
+		Start: 272
+		Length: 22
+		Tick: 120
+		ShadowStart: 610
+	idle2:
+		Start: 272
+		Length: 22
+		Tick: 120
+		ShadowStart: 610
+	die1:
+		Start: 294
+		Length: 20
+		ShadowStart: 632
+	die2:
+		Start: 294
+		Length: 20
+		ShadowStart: 632
+	paradrop:
+		Start: 337
+	icon:
+		Filename: steel_consortium_engineer_icon.shp
+		Scale: 1
+		Offset: 0,0
+
+steel_consortium_hoverboardgrenadier:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: steel_consortium_hoverboardgrenadier_inf.shp
+		Scale: 0.7
+		Offset: 0,-4
+	stand:
+		ShadowStart: 303
+	run:
+		Start: 8
+		Length: 15
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 311
+	idle1:
+		Start: 265
+		Length: 12
+		Tick: 120
+		ShadowStart: 568
+	idle2:
+		Start: 265
+		Length: 12
+		Tick: 120
+		ShadowStart: 568
+	shoot:
+		Start: 128
+		Length: 15
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 431
+	die1:
+		Start: 248
+		Length: 18
+		ShadowStart: 551
+	die2:
+		Start: 248
+		Length: 18
+		ShadowStart: 551
+	paradrop:
+		Start: 8
+		Length: 15
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 311
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_hoverboardgrenadier_icon.shp
+		Scale: 1
+		Offset: 0,0
+
+steel_consortium_steelrunner:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: steel_consortium_steelrunner.png
+	run:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: steel_consortium_steelrunner_icon.png
+
+steel_consortium_mako:
+	Defaults:
+		Filename: steel_consortium_mako.shp
+		Offset: 0,30
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	move:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 96
+	icon:
+		Filename: steel_consortium_mako_icon.shp
+		Offset: 0,0
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+
+steel_consortium_manta:
+	Defaults:
+		Filename: steel_consortium_manta.shp
+		Offset: 0,32
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	move:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 96
+	muzzle:
+		Filename: steel_consortium_manta_bluegunfire.shp
+		Length: 4
+		Offset: 0,20
+	icon:
+		Filename: steel_consortium_manta_icon.shp
+		Offset: 0,0
+
+steel_consortium_barracuda:
+	Defaults:
+		Filename: steel_consortium_promotion_unlockbarracuda_manta_hunt.shp
+		Offset: 0,32
+	idle:
+		Facings: 64
+		Scale: 0.6
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 0.6
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: steel_consortium_promotion_unlockbarracuda_icon.shp
+		Offset: 0,0
+	muzzle:
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+				Offset: 0,-8
+			1:
+				Filename: ra2_mgun_nw.shp
+				Offset: 0,-8
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+				Offset: 0,-12
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 6
+				Offset: 4,-12
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+				Offset: 0,-16
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+				Offset: 4,-8
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+				Offset: -4,-8
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+				Offset: -4,-8
+		Facings: 8
+		InterpolatedFacings: 32
+		Length: 3
+
+steel_consortium_hammerheadartillerytank:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_hammerheadartillerytank_qtank.shp
+		Offset: 0,32
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 168
+	run:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 176
+	attack:
+		Start: 88
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 256
+	stand-td_nod_artillery:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 168
+		Filename: steel_consortium_hammerheadartillerytank_qtankart.shp
+	run-td_nod_artillery:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 176
+		Filename: steel_consortium_hammerheadartillerytank_qtankart.shp
+	attack-td_nod_artillery:
+		Start: 88
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 256
+		Filename: steel_consortium_hammerheadartillerytank_qtankart.shp
+	deploy:
+		ShadowStart: 23
+		Length: 23
+		Filename: steel_consortium_hammerheadartillerytank_qtank_make.shp
+	icon:
+		Filename: steel_consortium_hammerheadartillerytank_icon.shp
+		Offset: 0,0
+
+steel_consortium_quantumtank:
+	Defaults:
+		Filename: steel_consortium_promotion_quantumtank_qutnk.shp
+		Scale: 1
+		Offset: 0,12
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		Length: 11
+		Tick: 9999
+		ShadowStart: 120
+	move:
+		Facings: -8
+		InterpolatedFacings: 32
+		Length: 11
+		Tick: 100
+		ShadowStart: 120
+	turret:
+		Start: 88
+		Facings: -32
+		ShadowStart: 208
+	barrel:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+		Offset: 0,0
+	icon:
+		Filename: steel_consortium_promotion_quantumtank_icon.shp
+		Offset: 0,0
+
+steel_consortium_katytank:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_katytank.shp
+		Scale: 1
+		Offset: 5,0
+	idle:
+		Facings: 64
+		Scale: 0.9
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 0.9
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: steel_consortium_promotion_katytank_icon.shp
+		Offset: 0,0
+
+steel_consortium_megalodon:
+	Defaults:
+		Filename: steel_consortium_megalodon.shp
+		Offset: 0,16
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: -8
+		ShadowStart: 368
+	run:
+		Start: 8
+		Length: 20
+		Facings: -8
+		Tick: 80
+		ShadowStart: 376
+	shoot:
+		Start: 168
+		Length: 25
+		Facings: -8
+		Tick: 32
+		ShadowStart: 536
+	icon:
+		Filename: steel_consortium_megalodon_icon.shp
+		Offset: 0,0
+
+steel_consortium_stalker:
+	Defaults:
+		Filename: steel_consortium_promotion_unlockstalker.png
+		Offset: 0,4
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 7
+		Facings: 8
+		Tick: 70
+	shoot:
+		Start: 64
+		Length: 7
+		Facings: 8
+		Tick: 70
+	icon:
+		Filename: steel_consortium_promotion_unlockstalker_icon.png
+		Offset: 0,0
+
+steel_consortium_whiterabbit:
+	Defaults:
+		Filename: steel_consortium_whiterabbit.shp
+		Offset: 0,36
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: 16
+	run:
+		Start: 16
+		Length: 10
+		Facings: 8
+		Tick: 80
+	shoot:
+		Start: 256
+		Length: 10
+		Facings: 16
+		Tick: 32
+	idle1:
+		Start: 96
+		Length: 20
+		Tick: 120
+	idle2:
+		Start: 116
+		Length: 20
+		Tick: 120
+	idle3:
+		Start: 136
+		Length: 20
+		Tick: 120
+	die1:
+		Start: 156
+		Length: 20
+	die2:
+		Start: 176
+		Length: 20
+	die3:
+		Start: 196
+		Length: 20
+	die4:
+		Start: 216
+		Length: 20
+	die5:
+		Start: 236
+		Length: 20
+	icon:
+		Filename: steel_consortium_whiterabbit_icon.png
+		Offset: 0,0
+
+steel_consortium_poseidontank:
+	Defaults:
+		Filename: steel_consortium_poseidontank_potnk.shp
+		Offset: 0,16
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: -8
+		ShadowStart: 168
+	run:
+		Start: 8
+		Length: 10
+		Facings: -8
+		Tick: 80
+		ShadowStart: 176
+	shoot:
+		Start: 88
+		Length: 10
+		Facings: -8
+		Tick: 60
+		ShadowStart: 256
+	icon:
+		Filename: steel_consortium_poseidontank_icon.shp
+		Offset: 0,0
+
+steel_consortium_empressstation:
+	Defaults:
+		Filename: steel_consortium_empressstation_inspect.shp
+		Offset: 0,16
+	idle:
+		Length: 32
+	move:
+		Length: 32
+	muzzle:
+		Filename: steel_consortium_empressstation_empressstationmuzzle.png
+		Length: *
+	icon:
+		Filename: steel_consortium_empressstation_icon.shp
+		Offset: 0,0
+
+hummer.steel:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_unlocksupportlvl2_hummer.shp
+	idle:
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_steel_hummer_icon.shp
+
+oldqtnk.steel:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_unlocksupportlvl3_oldqtnk.shp
+		Scale: 1
+	idle:
+		Facings: 64
+		Scale: 0.75
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 0.75
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_steel_oldqtnk_icon.shp
+
+cougar.steel:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_unlocksupportlvl1_cougar.shp
+	idle:
+		Facings: 64
+		Scale: 0.6
+	turret:
+		Start: 64
+		Facings: 64
+		Scale: 0.6
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_steel_cougar_icon.shp
+
+cobra.steel:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_unlocksupportlvl4_cobra.shp
+	idle:
+		Facings: 64
+		Scale: 0.8
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_steel_cobra_icon.shp
+
+steel_consortium_twister:
+	idle:
+		Filename: steel_consortium_twister.shp
+		Facings: -8
+		#InterpolatedFacings: 16
+		Length: 12
+	move:
+		Filename: steel_consortium_twister.shp
+		Facings: -8
+		#InterpolatedFacings: 16
+		Length: 12
+	icon:
+		Filename: steel_consortium_twister_icon.shp
+
+steel_consortium_dagger:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: steel_consortium_promotion_daggerartillery.shp
+	idle:
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: steel_consortium_promotion_daggerartillery_icon.shp
+
+steel_consortium_skyhammer:
+	Defaults:
+		Filename: steel_consortium_skyhammer_grun.shp
+		Scale: 1
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		Length: 6
+	move:
+		Facings: -8
+		InterpolatedFacings: 32
+		Length: 6
+	turret:
+		Start: 48
+		Facings: -32
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: steel_consortium_skyhammer_icon.shp
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	muzzle-2:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+
+steel_consortium_supportshieldgenerator:
+	Defaults:
+		Filename: steel_consortium_supportshieldgenerator_savi.shp
+		Offset: 0,16
+	idle:
+		Facings: -8
+		InterpolatedFacings: 32
+		ShadowStart: 88
+	move:
+		Start: 8
+		Length: 10
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 96
+	icon:
+		Filename: steel_consortium_supportshieldgenerator_icon.shp
+		Offset: 0,0
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	muzzle-2:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+
+steel_consortium_cargoship:
+	Defaults:
+		Filename: steel_consortium_cargoship.shp
+		Offset: 0,8
+	idle:
+		Facings: 64
+		Scale: 0.75
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	icon:
+		Filename: steel_consortium_cargoship_icon.shp
+		Offset: 0,0
+
+steel_consortium_cloudbreaker:
+	Defaults:
+		Filename: steel_consortium_promotion_unlockcloudbreaker_cruiser.shp
+	idle:
+		Facings: 64
+		Scale: 0.90
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	icon:
+		Filename: steel_consortium_promotion_unlockcloudbreaker_icon.shp
+
+cruiser_f.steel:
+	Defaults:
+		Filename: steel_cruiser_f.shp
+	idle:
+		Facings: 64
+		Scale: 0.75
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	icon:
+		Filename: steel_consortium_cargoship_icon.shp
+
+steel_consortium_defenderbot:
+	Defaults:
+		Filename: steel_consortium_promotion_unlockdefenderbot.shp
+		Offset: 4,20
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Length: 8
+		Facings: 8
+		Tick: 9999
+	run:
+		Length: 8
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 5
+		Facings: 8
+		Tick: 64
+	icon:
+		Filename: steel_consortium_promotion_unlockdefenderbot_icon.shp
+		Offset: 0,0
+
+steel_consortium_upgrade_pulseweapons:
+	icon:
+		Filename: steel_consortium_upgrade_pulseweapons_icon.png
+
+steel_consortium_upgrade_naniteinfusion:
+	icon:
+		Filename: steel_consortium_upgrade_naniteinfusion_icon.png
+
+steel_consortium_upgrade_ferrocretecurtain:
+	icon:
+		Filename: steel_consortium_upgrade_ferrocretecurtain_icon.png
+
+steel_consortium_upgrade_resonanceammo:
+	icon:
+		Filename: steel_consortium_upgrade_resonanceammo_icon.png
+
+steel_consortium_upgrade_quantumweaponpower:
+	icon:
+		Filename: steel_consortium_upgrade_quantumweaponpower_icon.png
+
+steel_consortium_upgrade_shieldresistance:
+	icon:
+		Filename: steel_consortium_upgrade_shieldresistance_icon.png
+
+##############################################
+#   Red Alert 2 Naxis
+##############################################

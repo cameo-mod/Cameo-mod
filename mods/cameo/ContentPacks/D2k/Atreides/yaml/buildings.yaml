@@ -1,0 +1,34 @@
+wind_trap.atreides:
+	Inherits: ^wind_trap
+	Buildable:
+		Prerequisites: ~construction_yard.atreides
+	RenderSprites:
+		Image: power.atreides
+
+refinery.atreides:
+	Inherits: ^refinery
+	Buildable:
+		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
+	FreeActor:
+		Actor: ixian_spiceharvester
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: ixian_spiceharvester
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: ixian_spiceharvester
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall.reinforce
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.atreides
+
+d2k_silo.atreides:
+	Inherits: ^d2k_silo
+	Buildable:
+		Prerequisites: ~construction_yard.atreides, refinery.atreides
+	RenderSprites:
+		Image: silo.atreides

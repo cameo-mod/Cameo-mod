@@ -74,9 +74,9 @@ UnitHunt = function (a)
 	end)
 end
 
-SankalpaHeli = { "modhip" }
-SankalpaAirForce = { "heli", "heli", "heli" }
-SankalpaDefenseForce = { "nodftnk2", "nodftnk2", "chemssm", "chemssm" }
+SankalpaHeli = { "ra1_soviet_hiptransport" }
+SankalpaAirForce = { "td_nod_apacheattackhelicopter", "td_nod_apacheattackhelicopter", "td_nod_apacheattackhelicopter" }
+SankalpaDefenseForce = { "td_nod_flametankmkii", "td_nod_flametankmkii", "td_nod_chemicalssmlauncher", "td_nod_chemicalssmlauncher" }
 
 WorldLoaded = function ()
 	NewHopeOne = Player.GetPlayer("NewHopeOne")
@@ -113,8 +113,8 @@ WorldLoaded = function ()
 	Trigger.OnTimerExpired(function ()
 		Notification("The Sankalpa have arrived!")
 		SankalpaArrival = true
-		Reinforcements.Reinforce(Sankalpa, SankalpaHeli, {SpawnOne.Location}, 0, function(heli)
-			Trigger.OnIdle(heli, function (heli)
+		Reinforcements.Reinforce(Sankalpa, SankalpaHeli, {SpawnOne.Location}, 0, function(td_nod_apacheattackhelicopter)
+			Trigger.OnIdle(td_nod_apacheattackhelicopter, function (td_nod_apacheattackhelicopter)
 				heli.Move(HeliEntranceOne.Location)
 				heli.Wait(DateTime.Seconds(3))
 				heli.UnloadPassengers()
@@ -146,8 +146,8 @@ WorldLoaded = function ()
 			la.Destroy()
 		end)
 		Reinforcements.Reinforce(Sankalpa, SankalpaAirForce, {SpawnSix.Location, HeliEntranceTwo.Location}, 0, UnitHunt)
-		Reinforcements.Reinforce(Sankalpa, SankalpaHeli, {SpawnSeven.Location, HeliEntranceTwo.Location}, 0, function(heli)
-			Trigger.OnIdle(heli, function (heli)
+		Reinforcements.Reinforce(Sankalpa, SankalpaHeli, {SpawnSeven.Location, HeliEntranceTwo.Location}, 0, function(td_nod_apacheattackhelicopter)
+			Trigger.OnIdle(td_nod_apacheattackhelicopter, function (td_nod_apacheattackhelicopter)
 				heli.Move(HeliEntranceTwo.Location)
 				heli.Wait(DateTime.Seconds(3))
 				heli.UnloadPassengers()

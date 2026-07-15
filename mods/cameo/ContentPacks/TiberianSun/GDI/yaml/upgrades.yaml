@@ -1,0 +1,121 @@
+ts_gdi_upgrade_seretraining:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: SERE Training
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_seretraining.description
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_seretraining
+	RenderSprites:
+		Image: seretrainingicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_projectileimprovements:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Projectile Improvements
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: upgrade_tsprojectileimprovements.description
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_projectileimprovements
+	RenderSprites:
+		Image: tsprojectileimprovementsicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_mechanicalreliability:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mechanical Reliability
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: upgrade_mechanicalreliability.description
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_mechanicalreliability
+	RenderSprites:
+		Image: mechanicalreliabilityicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_ceramicarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ceramic Armor
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Research
+		Description: upgrade_ceramicarmor.description
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_ceramicarmor
+	RenderSprites:
+		Image: ceramicarmoricon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_mechengineering:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: ra1_allies_mechanic Engineering
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_mechengineering.description
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_mechengineering
+	RenderSprites:
+		Image: mechengineeringicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_sonicweaponry:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Sonic Weaponry
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: upgrade_sonicweaponry.description
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_sonicweaponry
+	RenderSprites:
+		Image: sonicweaponryicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_railgunweaponry:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Railgun Weaponry
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: upgrade_railgunweaponry.description
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_railgunweaponry
+	RenderSprites:
+		Image: railgunweaponryicon
+	ProvidesPrerequisite:
+
+ts_gdi_upgrade_modernfirecontrolsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Modern Fire Control Systems
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: upgrade_modernfirecontrolsystems.description
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_modernfirecontrolsystems
+	RenderSprites:
+		Image: modernfirecontrolsystemsicon
+	# ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor

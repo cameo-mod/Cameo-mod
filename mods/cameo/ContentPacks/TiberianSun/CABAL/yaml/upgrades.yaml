@@ -1,0 +1,237 @@
+cabal_upgrade_mobilitymatrix:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Matrix
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Prerequisites: ~cabal_radar, !cabal_upgrade_mobilitymatrix
+		Description: actor_cabal_upgrade_mobilitymatrix.description
+	RenderSprites:
+		Image: cabal_upgrade_mobilitymatrix
+	ProvidesPrerequisite:
+
+cabal_upgrade_darkarmament:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Dark Armament
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Prerequisites: ~cabal_radar, !cabal_upgrade_darkarmament
+		Description: actor_cabal_upgrade_darkarmament.description
+	RenderSprites:
+		Image: cabal_upgrade_darkarmament
+	ProvidesPrerequisite:
+
+cabal_upgrade_neutronnuclearcatalyst:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neutron Nuclear Catalyst
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Prerequisites: ~cabal_radar, !cabal_upgrade_neutronnuclearcatalyst
+		Description: actor_cabal_upgrade_neutronnuclearcatalyst.description
+	RenderSprites:
+		Image: cabal_upgrade_neutronnuclearcatalyst
+	ProvidesPrerequisite:
+
+cabal_upgrade_radarhack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Radar Hack
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Prerequisites: ~cabal_radar, !cabal_upgrade_radarhack
+		Description: actor_cabal_upgrade_radarhack.description
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+
+cabal_upgrade_networkedcombatprotocols:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Networked Combat Protocols
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Prerequisites: ~cabal_radar, !cabal_upgrade_networkedcombatprotocols
+		Description: actor_cabal_upgrade_networkedcombatprotocols.description
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+############### Lab
+
+cabal_upgrade_backupsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Backup Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_backupsystems
+		Description: actor_cabal_upgrade_backupsystems.description
+	RenderSprites:
+		Image: cabal_upgrade_backupsystems
+	ProvidesPrerequisite:
+
+cabal_upgrade_handof:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: td_nod_handofnod of CABAL
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_handof
+		Description: actor_cabal_upgrade_handof.description
+	RenderSprites:
+		Image: cabal_upgrade_handof
+	ProvidesPrerequisite:
+
+cabal_upgrade_dataworm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Data Worm
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_dataworm
+		Description: actor_cabal_upgrade_dataworm.description
+	RenderSprites:
+		Image: cabal_upgrade_dataworm
+	ProvidesPrerequisite:
+
+cabal_upgrade_firewallprotocol:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Firewall Protocol
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_firewallprotocol
+		Description: actor_cabal_upgrade_firewallprotocol.description
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+
+##########################
+# Promotions #############
+##########################
+
+# GDI ####################
+
+cabal_upgrade_reinforcedchassis:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reinforced Chassis
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reinforcedchassis
+		Description: actor_cabal_upgrade_reinforcedchassis.description
+	RenderSprites:
+		Image: cabal_upgrade_mobilitymatrix
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_reinforcedchassis
+
+cabal_upgrade_overchargedservos:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Overcharged Servos
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_overchargedservos
+		Description: actor_cabal_upgrade_overchargedservos.description
+	RenderSprites:
+		Image: cabal_upgrade_darkarmament
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_overchargedservos
+
+cabal_upgrade_neuraluplink:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neural Uplink
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_neuraluplink
+		Description: actor_cabal_upgrade_neuraluplink.description
+	RenderSprites:
+		Image: cabal_upgrade_handof
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_neuraluplink
+
+cabal_upgrade_reclamationprotocols:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reclamation Protocols
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reclamationprotocols
+		Description: actor_cabal_upgrade_reclamationprotocols.description
+	RenderSprites:
+		Image: cabal_upgrade_backupsystems
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_reclamationprotocols
+
+cabal_upgrade_fullassimilation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Full Assimilation
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_fullassimilation
+		Description: actor_cabal_upgrade_fullassimilation.description
+	RenderSprites:
+		Image: cabal_upgrade_dataworm
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_fullassimilation
+
+cabal_upgrade_cyberneticplating:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cybernetic Plating
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_cyberneticplating
+		Description: actor_cabal_upgrade_cyberneticplating.description
+	RenderSprites:
+		Image: cabal_upgrade_cyberneticplating
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_cyberneticplating

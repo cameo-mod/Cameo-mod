@@ -1,0 +1,1152 @@
+naxis_naxiriflesoldier:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Naxi Rifle Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armament@PRIMARY:
+		Weapon: NaxiRifle
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiRifleE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifle
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiSoldatVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+
+naxis_naxiriflerecruit:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 75
+	Tooltip:
+		Name: Naxi Rifle Recruit
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: NaxiRifleCons
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiRifleConsE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifleCons
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleConsE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+
+naxis_sssoldier:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadReviveBig
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 375
+	Tooltip:
+		Name: SS Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_mp40.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: NaxiMP40
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiMP40E
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiMP40
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiMP40E
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiSSVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_naxiflamer:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadReviveBig
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 225
+	Tooltip:
+		Name: Naxi Flamer
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_radar
+		Queue: Infantry, RAInfantry
+		Description: actor_e4.description
+	Mobile:
+		Speed: 48
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armament@PRIMARY:
+		Weapon: NaxiFlamerTroop
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiFlamerTroopE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiFlamerTroop
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiFlamerTroopE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FireWarheadsOnDeath:
+		Weapon: NaxiFlamerTroopExplode
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_naximercenarysniper:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Naxi Mercenary ra1_allies_alliedsniper
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_merc.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 8000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armament@PRIMARY:
+		Weapon: NaxiSniper
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiSniperE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiSniper
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiSniperE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiSoldatVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+
+naxis_panzerschreck:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadReviveBig
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Panzerschreck
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		Description: template_antitank_infantry.description
+	Mobile:
+		Speed: 42
+	Health:
+		HP: 96000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armament@PRIMARY:
+		Weapon: NaxiShrek
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiShrekE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiShrek
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED_E:
+		Name: garrisoned
+		Weapon: NaxiShrekE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiTroopVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_panzerfausttrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Panzerfaust Trooper
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_antitank_infantry.description
+	Mobile:
+		Speed: 46
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armament@PRIMARY:
+		Weapon: NaxiShrekCons
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiShrekConsE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiShrekCons
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiShrekConsE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_skymage:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Sky Mage
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_litt.description
+	Aircraft:
+		TurnSpeed: 32
+		Speed: 160
+		Voice: Move
+	Health:
+		HP: 48000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armament@PRIMARY:
+		Weapon: SkyMageCannon
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: SkyMageCannonE
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Weapon: SkyMageCannonAA
+		RequiresCondition: !rank-elite
+	Armament@ELITEAA:
+		Weapon: SkyMageCannonAAE
+		RequiresCondition: rank-elite
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: litt_husk.nax
+	Voiced:
+		VoiceSet: NaxiMageVoice
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_slaveoverseer:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@undead: ^NaxiUndeadReviveBig
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Slave Overseer
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_orerefinery
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_slavemaster.description
+	Mobile:
+		Speed: 90
+		Locomotor: chem
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@SlaveWhip:
+		Weapon: NaxiSlaveWhip
+		LocalOffset: 500,0,400
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@PRIMARY:
+		Weapon: NaxiRifle
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+		TargetRelationships: Enemy
+		ForceTargetRelationships: None
+	Armament@ELITE:
+		Weapon: NaxiRifleE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+		TargetRelationships: Enemy
+		ForceTargetRelationships: None
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifle
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		InitialStance: AttackAnything
+	Voiced:
+		VoiceSet: NaxiFemVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_slave:
+	Inherits: YRSLAV
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, naxis_orerefinery
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_slavemaster.description
+	Targetable@SlaveFaster:
+		TargetTypes: SlaveFaster
+		RequiresCondition: SlaveFaster <= 3 && !untargetable
+	ExternalCondition@SlaveFaster:
+		Condition: SlaveFaster
+		TotalCap: 3
+	SpeedMultiplier@SlaveFaster1:
+		Modifier: 150
+		RequiresCondition: SlaveFaster == 1
+	SpeedMultiplier@SlaveFaster2:
+		Modifier: 200
+		RequiresCondition: SlaveFaster == 2
+	SpeedMultiplier@SlaveFaster3:
+		Modifier: 250
+		RequiresCondition: SlaveFaster >= 3
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+frank.nax:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Übermutant
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: actor_brute.description
+	Mobile:
+		Speed: 61
+	Health:
+		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 85
+	Armament@PRIMARY:
+		Weapon: RA2BrutePunch
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2BrutePunchE
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2BrutePunch
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiZombie
+	Passenger:
+		Weight: 2
+	-TakeCover:
+	Targetable@ra1_soviet_attackdog:
+		TargetTypes: DogImmune
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_naximachinegunners:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@deploy: ^LurkerMode
+	Inherits@AntiVeh: ^PrioritizeInfantry
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Naxi Machinegunners
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_hmg.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	RevealsShroudMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	DamageMultiplier@deployed:
+		Modifier: 75
+		RequiresCondition: deployed
+	RenderRangeCircle:
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armament@Dummy:
+		Weapon: NaxiWW2MachinegunnerTargeting
+		Name: dummy
+	Armament@Deployed:
+		Name: deployed
+		Weapon: NaxiWW2Machinegunner
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: (deployed || undeployed) && !rank-elite
+	Armament@DEPLOYEDELITE:
+		Name: deployed
+		Weapon: NaxiWW2MachinegunnerElite
+		Turret: deploy
+		LocalOffset: 384,64,384
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiWW2Machinegunner
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiWW2MachinegunnerElite
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	-TakeCover:
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	Voiced:
+		VoiceSet: NaxiSSVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience
+
+naxis_portableflak:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@deploy: ^LurkerMode
+	Inherits@AntiVeh: ^PrioritizeInfantry
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Portable Flak
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~naxis_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_quadflak.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	RevealsShroudMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	DamageMultiplier@deployed:
+		Modifier: 75
+		RequiresCondition: deployed
+	RenderRangeCircle:
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armament@Dummy:
+		Weapon: NaxQuadCannonTargeting
+		Name: dummy
+	Armament@Deployed:
+		Name: deployed
+		Weapon: PortableFlak
+		Turret: deploy
+		LocalOffset: 384,64,384
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && !rank-elite
+	Armament@DEPLOYEDELITE:
+		Name: deployed
+		Weapon: PortableFlakE
+		Turret: deploy
+		LocalOffset: 384,64,384
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: PortableFlak
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: PortableFlakE
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	Voiced:
+		VoiceSet: NaxiSSVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+
+undead.nax:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Undead Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armament@PRIMARY:
+		Weapon: NaxiRifle
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiRifleE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifle
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiZombie
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+
+naxis_coneheadsknights:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Coneheads Knights
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~naxis_barracks, naxis_academy
+		Queue: Infantry, RAInfantry
+		AdditionalActors: naxis_coneheadsknights, naxis_coneheadsknights, naxis_coneheadsknights, naxis_coneheadsknights, conehead2.nax
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament:
+		Weapon: wc2gruntslice
+		FireDelay: 5
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifleCons
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleConsE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+conehead2.nax:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@undead: ^NaxiUndeadRevive
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Conehead Leader
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, ~disabled
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: RA2PortaTesla
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2PortaTesla
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2PortaTesla
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2PortaTesla
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiEngVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+	RenderSprites:
+		PlayerPalette: player_rgba
+####################################################################################################
+#		Red Alert 2 Moon Naxis Infantry
+####################################################################################################
+
+naxis_antitankcannon:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Anti Tank Cannon
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_atankcann.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 30
+		TurnSpeed: 12
+	Health:
+		HP: 17500
+	Repairable:
+		HpPerStep: 875
+	ChangesHealth@SelfHealing:
+		Step: 7
+	Armor:
+		Type: Light
+	Armament@PRIMARY:
+		Weapon: NaxiAntiTankCannon
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiAntiTankCannonE
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_tankarsenalrenovation, naxis_upgrade_massopticsintegration
+
+naxis_bmwbike:
+	Inherits: ^Tank
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: BMW td_nod_reconbike
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~naxis_barracks, naxis_warfactory
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_bmwbike.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 125
+		TurnSpeed: 16
+	Health:
+		HP: 22000
+	Repairable:
+		HpPerStep: 4125
+	ChangesHealth@SelfHealing:
+		Step: 33
+	Armor:
+		Type: Light
+	Armament@AG:
+		Weapon: NaxiWW2MachinegunSmall
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@AA:
+		Weapon: NaxiWW2MachinegunSmallAA
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	Turreted:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_massopticsintegration
+
+litt_husk.nax:
+	Inherits: ^HelicopterHusk
+	RenderSprites:
+		Image: naxis_skymage
+		PlayerPalette: playerra2
+	Tooltip:
+		Name: Sky Mage
+	Aircraft:
+		TurnSpeed: 160
+		Speed: 140
+	FallsToEarth:
+		Explosion: UnitExplode
+	RevealsShroud:
+		Range: 4c0
+		Type: GroundPosition
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: die-air
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+	-WithShadow:
+
+alien.nax:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@OstfrontExperience: ^OstfrontExperience
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Naxi Alien
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~naxis_barracks, ~disabled
+		Queue: Infantry, RAInfantry
+		Description: actor_nax_alien.description
+	Mobile:
+		Speed: 40
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armament@PRIMARY:
+		Weapon: NaxiAlienPistol
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiAlienPistolE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiAlienPistol
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiAlienPistolE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiUFOVoice
+	ActorStatValues:
+		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
+	-TakeCover:

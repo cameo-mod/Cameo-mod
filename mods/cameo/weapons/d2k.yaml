@@ -582,7 +582,7 @@ D2KATMine:
 			Heavy: 125
 			Concrete: 25
 		AffectsParent: true
-		InvalidTargets: Structure, Wall, Mine
+		InvalidTargets: Structure, ixian_concretewall, Mine
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressDrone
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_large_explosion
@@ -590,7 +590,7 @@ D2KATMine:
 		ExplosionPalette: effect75alpha
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall
+		InvalidTargets: Structure, ixian_concretewall
 
 D2KAPMine:
 	Warhead@1Dam: SpreadDamage
@@ -605,7 +605,7 @@ D2KAPMine:
 			Heavy: 5
 			Concrete: 10
 		AffectsParent: true
-		InvalidTargets: Structure, Wall, Mine
+		InvalidTargets: Structure, ixian_concretewall, Mine
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SuppressDrone
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_self_destruct
@@ -613,7 +613,7 @@ D2KAPMine:
 		ExplosionPalette: effect75alpha
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall
+		InvalidTargets: Structure, ixian_concretewall
 
 d2k_quake_thump:
 	InvalidTargets: MADTank, Infantry
@@ -1110,7 +1110,7 @@ CrateExplosion:
 		Falloff: 100, 0
 		Versus:
 			None: 90
-			wall: 5
+			ixian_concretewall: 5
 			Wood: 65
 			Light: 40
 			Heavy: 30
@@ -1503,7 +1503,7 @@ HMGh:
 		InvalidTargets: Infantry
 
 d2k_sardaukar_elite:
-	Inherits: autogun_turret.ordos
+	Inherits: ordos_autogunturret
 	Burst: 5
 	BurstDelays: 1
 	ReloadDelay: 11
@@ -1658,7 +1658,7 @@ D2KSniperRifle:
 	ReloadDelay: 120
 	Range: 12288
 	ValidTargets: Ground, Air
-	InvalidTargets: Water, Structure, Wall, Husk
+	InvalidTargets: Water, Structure, ixian_concretewall, Husk
 	Projectile: Bullet
 		Speed: 1c768
 		Inaccuracy: 0c384
@@ -1673,7 +1673,7 @@ D2KSniperRifle:
 			Heavy: 5
 			Concrete: 5
 		ValidTargets: Infantry, Vehicle, Tank, Air
-		InvalidTargets: Structure, Wall, Husk, Water
+		InvalidTargets: Structure, ixian_concretewall, Husk, Water
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_piffs
@@ -1739,7 +1739,7 @@ d2kFlameTurret:
 d2k_flame_tank:
 	Inherits: Flamer
 	ValidTargets: Ground, Water
-	InvalidTargets: Wall
+	InvalidTargets: ixian_concretewall
 	ReloadDelay: 5
 	Range: 4096
 	Report: d2k_flame_tank.wav
@@ -1759,11 +1759,11 @@ d2k_flame_tank:
 			Heavy: 6
 			Concrete: 10
 	ValidTargets: Ground, Water
-		InvalidTargets: Wall
+		InvalidTargets: ixian_concretewall
 		DamageTypes: FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		GlowScale: 1.5
@@ -1833,7 +1833,7 @@ PhoenixRocketShrapnel:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-air_drone.ixian:
+ixian_airdrone:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^FlakWeapon
@@ -1923,7 +1923,7 @@ air_drone.ixian:
 		AimTargetStances: Enemy, Neutral
 
 d2k_heavy_air_drone:
-	Inherits: air_drone.ixian
+	Inherits: ixian_airdrone
 	Range: 7100
 	ReloadDelay: 140
 	Burst: 8
@@ -2022,10 +2022,10 @@ d2k_chaos_lightning:
 			Concrete: 20
 	Warhead@2Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	Warhead@3Smu_area: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 		Size: 1
 		Delay: 3
 	Warhead@3: GrantExternalCondition
@@ -2215,7 +2215,7 @@ oDevBullet:
 		Damage: 6500
 		Versus:
 			None: 50
-			wall: 100
+			ixian_concretewall: 100
 			Wood: 75
 			Heavy: 100
 			invulnerable: 0
@@ -2248,7 +2248,7 @@ o155mm:
 		Damage: 4500
 		Versus:
 			None: 125
-			wall: 100
+			ixian_concretewall: 100
 			Wood: 100
 			Light: 30
 			Heavy: 20
@@ -2282,7 +2282,7 @@ o155mm:
 		Damage: 3000
 		Versus:
 			None: 8
-			wall: 75
+			ixian_concretewall: 75
 			Wood: 45
 			Light: 70
 			Heavy: 100
@@ -2322,7 +2322,7 @@ o155mm:
 		Damage: 4800
 		Versus:
 			None: 15
-			wall: 75
+			ixian_concretewall: 75
 			Wood: 65
 			Light: 90
 			Heavy: 100
@@ -2350,7 +2350,7 @@ oRocket:
 		Damage: 2500
 		Versus:
 			None: 25
-			wall: 100
+			ixian_concretewall: 100
 			Wood: 65
 			Light: 100
 			Heavy: 50
@@ -2406,7 +2406,7 @@ oDeviatorMissile:
 		Damage: 1000
 		Versus:
 			None: 100
-			wall: 100
+			ixian_concretewall: 100
 			Wood: 100
 			Light: 100
 			Heavy: 100
@@ -2487,7 +2487,7 @@ oOrniBomb:
 		Damage: 2500 #400 in original, reduce when bombers can do multiple passes
 		Versus:
 			None: 90
-			wall: 50
+			ixian_concretewall: 50
 			Wood: 75
 			Light: 60
 			Heavy: 60
@@ -2553,7 +2553,7 @@ oDeathHandCluster:
 		Damage: 4500
 		Versus:
 			None: 90
-			wall: 50
+			ixian_concretewall: 50
 			Wood: 100
 			Light: 60
 			Heavy: 60
@@ -2671,7 +2671,7 @@ oSardDeath:
 		Damage: 3000
 		Versus:
 			None: 15
-			wall: 75
+			ixian_concretewall: 75
 			Wood: 65
 			Light: 90
 			invulnerable: 0
@@ -2718,7 +2718,7 @@ oPlasmaExplosion:
 		Falloff: 100, 50, 25, 0
 		Damage: 1250
 		Versus:
-			wall: 10
+			ixian_concretewall: 10
 			Wood: 25
 			Light: 40
 			Heavy: 20
@@ -2762,7 +2762,7 @@ oM_HMG:
 		Damage: 2500
 		Versus:
 			None: 25
-			wall: 100
+			ixian_concretewall: 100
 			Wood: 65
 			Light: 100
 			Heavy: 50
@@ -2830,7 +2830,7 @@ oDebris:
 		Falloff: 100, 0
 		Versus:
 			None: 20
-			wall: 50
+			ixian_concretewall: 50
 			Wood: 50
 			Light: 100
 			Heavy: 75
@@ -2861,7 +2861,7 @@ oDebris2:
 		Spread: 1c0
 		Versus:
 			None: 90
-			wall: 5
+			ixian_concretewall: 5
 			Wood: 50
 			Light: 40
 			Heavy: 30
@@ -3018,7 +3018,7 @@ PulseMissile:
 		ResourceAmount: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 5
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -3057,7 +3057,7 @@ PulseMissile:
 		ResourceAmount: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 7
 		Delay: 6
 	Warhead@8Dam_areanuke2: SpreadDamage
@@ -3092,7 +3092,7 @@ PulseMissile:
 		ResourceAmount: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 9
 		Delay: 9
 	Warhead@10Dam_areanuke3: SpreadDamage

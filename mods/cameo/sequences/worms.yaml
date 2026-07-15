@@ -392,7 +392,7 @@ worms_candle:
 	damaged-idle:
 		Length: *
 		Tick: 100
-	dead: gtwr
+	dead: td_gdi_guardtower
 		Start: 0
 	make:
 	muzzle: minigun
@@ -767,7 +767,7 @@ worms_mole:
 wormbuggy:
 	idle: worms_taxi
 		Facings: -8
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -796,7 +796,7 @@ wormbuggy:
 worms_moai:
 	idle: worms_moai
 		Facings: 8
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -824,20 +824,20 @@ worms_moai:
 	#	AddExtension: False
 
 wormbuggy.destroyed:
-	idle: bggy
+	idle: td_nod_buggy
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
 wmtnk:
-	idle: mtnk
+	idle: td_gdi_battletank
 		Facings: 32
 		UseClassicFacings: True
-	turret: mtnk
+	turret: td_gdi_battletank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -863,11 +863,11 @@ wtank:
 		Start: 25
 
 wmtnk.destroyed:
-	idle: mtnk
+	idle: td_gdi_battletank
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
-	turret: mtnk
+	turret: td_gdi_battletank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True

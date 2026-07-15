@@ -20,7 +20,7 @@
 			WC2SUMMER: bib1.tem
 			OUTPOST2: bib1.tem
 			VOLCANIC: bib1.vol
-			INTERIOR: bib3.tem
+			INTERIOR: ra2_soviets_barracks_bib3.tem
 		Length: *
 
 ^WithBuildingBib2:
@@ -45,32 +45,32 @@
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 			VOLCANIC: bib2.vol
-			INTERIOR: bib3.tem
+			INTERIOR: ra2_soviets_barracks_bib3.tem
 		Length: *
 
 ^WithBuildingBib3:
 	bib:
-		Filename: bib3.tem
+		Filename: ra2_soviets_barracks_bib3.tem
 		TilesetFilenames:
 			DESERT: bib3.des
 			WINTER: bib3.win
 			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
+			TEMPERAT: ra2_soviets_barracks_bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
 			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA2_TEMPERAT: bib3.tem
+			RA_TEMPERAT: ra2_soviets_barracks_bib3.tem
+			RA2_TEMPERAT: ra2_soviets_barracks_bib3.tem
 			RA_DESERT: bib3.des
 			RA_INTERIOR: bib3.int
 			ARRAKIS: bib3.des
 			ARRAKIS2: bib3.des
 			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
+			WC2SUNSET: ra2_soviets_barracks_bib3.tem
+			WC2SUMMER: ra2_soviets_barracks_bib3.tem
+			OUTPOST2: ra2_soviets_barracks_bib3.tem
 			VOLCANIC: bib3.vol
-			INTERIOR: bib3.tem
+			INTERIOR: ra2_soviets_barracks_bib3.tem
 		Length: *
 
 ^WithBuildingBibGun:
@@ -2093,91 +2093,91 @@ explosion:
 	ra2_piffs:
 		Filename: ra2_piffpiff.shp
 	d2k_piff:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3879
 		Length: 5
 		BlendMode: Additive
 		Tick: 80
 	d2k_piffs:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3682
 		Length: 4
 		BlendMode: Additive
 		Tick: 80
 	d2k_small_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3656
 		Length: 15
 		BlendMode: Additive
 		Tick: 80
 	d2k_med_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3643
 		Length: 12
 		BlendMode: Additive
 		Tick: 80
 	d2k_tiny_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3639
 		Length: 4
 		BlendMode: Additive
 		Tick: 80
 	d2k_nuke:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4218
 		Length: 14
 		BlendMode: Additive
 		Tick: 80
 	d2k_self_destruct:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3686
 		Length: 15
 		BlendMode: Additive
 		Tick: 80
 	d2k_building:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3701
 		Length: 22
 		BlendMode: Additive
 		Tick: 80
 	d2k_large_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4241
 		Length: 22
 		BlendMode: Additive
 		Tick: 80
 	d2k_small_napalm:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3674
 		Length: 8
 		BlendMode: Additive
 		Tick: 80
 	d2k_rocket_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3634
 		Length: 5
 		BlendMode: Additive
 		Tick: 80
 	d2k_shockwave:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3940
 		Length: 6
 		BlendMode: Additive
 		Tick: 80
 	deviator:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3765
 		Length: 23
@@ -2185,7 +2185,7 @@ explosion:
 		BlendMode: Additive
 		Tick: 80
 	d2k_wall_explosion:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4130
 		Length: 8
@@ -2199,7 +2199,7 @@ explosion:
 		Filename: d2k_munitions_explosion.shp
 		Length: 18
 	devastator:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3947
 		Length: 17
@@ -2218,7 +2218,7 @@ explosion:
 	big_napalm:
 		Filename: napalm3.shp
 	med_tibnapalm:
-		Filename: chemball2.shp
+		Filename: td_nod_promotion_unlockchemicalattackbike_chemball2.shp
 	big_tibnapalm:
 		Filename: chemball3.shp
 	small_frag: #light cannon
@@ -2275,7 +2275,7 @@ explosion:
 	large_explosion:
 		Filename: frag1.shp
 		Offset: -2,0
-	offset_napalm: # Used for E4 Explosion
+	offset_napalm: # Used for td_nod_flamethrower Explosion
 		Filename: napalm1.shp
 		Offset: 0, -6
 	large_napalm:
@@ -2321,7 +2321,7 @@ explosion:
 	purple_plasma:
 		Filename: purple_plasma.shp
 	blueartexp:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
 	blue_small_napalm:
 		Filename: blue_napalm1.shp
 	blue_small_fire:
@@ -2483,7 +2483,7 @@ explosion:
 		Offset: -0, 80
 		Tick: 80
 	wclbolt1:
-		Filename: ra2_wclbolt1.shp
+		Filename: ixian_promotion_unlockstormraider_ra2_wclbolt1.shp
 		Offset: 0, 20
 		Tick: 40
 	wclbolt2:
@@ -2509,11 +2509,11 @@ explosion:
 	mutate:
 		Filename: gendeath.shp
 	virus:
-		Filename: yr_virusd.shp
+		Filename: futuretech_promotion_unlockcryolegionnaire_yr_virusd.shp
 		Length: *
 		Tick: 80
 	virusreversed:
-		Filename: yr_virusd.shp
+		Filename: futuretech_promotion_unlockcryolegionnaire_yr_virusd.shp
 		Frames: 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 		Tick: 105
 	chaosgas:
@@ -2663,7 +2663,7 @@ explosion:
 		Filename: modflakex.shp
 		Scale: 2
 	flame:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 3965
 		Length: 10
@@ -2990,7 +2990,7 @@ rallypoint:
 		Offset: 10,-5
 		ZOffset: 2535
 	circles:
-		Filename: fpls.shp
+		Filename: ra2_allies_upgrade_paratroopers_fpls.shp
 		Length: *
 		ZOffset: 2047
 
@@ -3003,7 +3003,7 @@ beacon:
 		Start: 5
 		Offset: 1,-12
 	circles:
-		Filename: fpls.shp
+		Filename: ra2_allies_upgrade_paratroopers_fpls.shp
 		Length: *
 		ZOffset: 2047
 	airstrike:
@@ -3014,7 +3014,7 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	clock:
-		Filename: beaconclock.shp
+		Filename: ra2_allies_upgrade_paratroopers_beaconclock.shp
 		Length: *
 		Offset: 0,-42
 	clocklarge:
@@ -3022,15 +3022,15 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	chronovortexicon:
-		Filename: chronovortexicon.png
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
 		Length: *
 		Offset: 0,-42
 	japanspellcardicon:
-		Filename: japanspellcardicon.png
+		Filename: japan_japaneseshrine_japanspellcardicon.png
 		Length: *
 		Offset: 0,-42
 	pbmbicon:
-		Filename: pbmbicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pbmbicon.shp
 		Length: *
 		Offset: 0,-42
 	camicon:
@@ -3038,7 +3038,7 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	pinficon:
-		Filename: pinficon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pinficon.shp
 		Length: *
 		Offset: 0,-42
 	rapinficon:
@@ -3058,13 +3058,13 @@ beacon:
 		Length: *
 		Offset: 0,-42
 	hunterseeker:
-		Filename: tshunterseekersicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 		Offset: 0,-42
 	chemicalmiss:
-		Filename: tschemicalmissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tschemicalmissicon.shp
 		Offset: 0,-42
 	multimiss:
-		Filename: tsmultimissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsmultimissicon.shp
 		Offset: 0,-42
 
 select:
@@ -3081,7 +3081,7 @@ allyrepair:
 
 crate:
 	idle:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 102
 		ZOffset: -511
@@ -3372,191 +3372,191 @@ poweroff:
 icon:
 	Defaults:
 	hunterseeker:
-		Filename: tshunterseekersicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 	chemicalmiss:
-		Filename: tschemicalmissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tschemicalmissicon.shp
 	multimiss:
-		Filename: tsmultimissicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsmultimissicon.shp
 	droppod:
-		Filename: tspodsicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tspodsicon.shp
 	mutcommando:
-		Filename: tsghosticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsghosticon.shp
 	mutwildlife:
-		Filename: tsdoggieicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tsdoggieicon.shp
 	emp:
-		Filename: tspulsicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tspulsicon.shp
 	airstrike:
-		Filename: bombicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_bombicnh.tem
 	ioncannon:
-		Filename: ionicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_ionicnh.tem
 	abomb:
-		Filename: atomicnh.tem
+		Filename: ra2_allies_upgrade_paratroopers_atomicnh.tem
 	invuln:
-		Filename: infxicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_infxicon.shp
 	chrono:
-		Filename: warpicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_warpicon.shp
 	chronoreinforcements:
-		Filename: ctnkicon.shp
+		Filename: ra1_allies_promotion_unlockchronotank_icon.shp
 	spyplane:
-		Filename: smigicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_smigicon.shp
 	paratroopers:
-		Filename: pinficon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pinficon.shp
 	gps:
-		Filename: gpssicon.shp
+		Filename: ra1_allies_upgrade_gpssatellitesupport_icon.shp
 	parabombs:
-		Filename: pbmbicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_pbmbicon.shp
 	sonar:
-		Filename: sonricon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sonricon.shp
 	#abomb: atomicon.shp
 	bolticon:
-		Filename: bolticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_bolticon.shp
 	mercenary_1_icon:
-		Filename: d2k_mercenary_inf_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_mercenary_inf_icon.shp
 	sardaukar_icon:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4276
 		Offset: -30,-24
 	sardaukar_elite_icon:
-		Filename: d2k_sardaukar_elite_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sardaukar_elite_icon.shp
 	ornistrike:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4292
 		Offset: -30,-24
 	fremen:
-		Filename: fremenwarrioricon.shp
+		Filename: ra2_allies_upgrade_paratroopers_fremenwarrioricon.shp
 	fremeng:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4293
 		Offset: -30,-24
 	saboteur:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4295
 		Offset: -30,-24
 	deathhand:
-		Filename: DATA.R8
+		Filename: ra2_allies_upgrade_paratroopers_data.r8
 		Scale: 2
 		Start: 4296
 		Offset: -30,-24
 	d2k_chaos_lightning_icon:
-		Filename: d2k_chaos_lightning_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_chaos_lightning_icon.shp
 	wormicon:
-		Filename: d2k_sandworm_tower_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_d2k_sandworm_tower_icon.shp
 	rainoffire_icon:
-		Filename: rainoffire_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_rainoffire_icon.shp
 	poisoncloud_icon:
-		Filename: poisoncloud_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_poisoncloud_icon.shp
 	wc_far_seeing:
-		Filename: wc_support_power_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_wc_support_power_icon.shp
 		Start: 0
 	wc_dark_vision:
-		Filename: wc_support_power_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_wc_support_power_icon.shp
 		Start: 1
 	ra2psirev:
-		Filename: ra2revealicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2revealicon.shp
 	ra2domin:
-		Filename: ra2dominateicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2dominateicon.shp
 	ra2mutate:
-		Filename: ra2mutateicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2mutateicon.shp
 	forceshield:
-		Filename: ra2forcicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_ra2forcicon.shp
 	scstimpack:
-		Filename: scstimpack.shp
+		Filename: ra2_allies_upgrade_paratroopers_scstimpack.shp
 	glambush1:
-		Filename: uprebelambush1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush1icon.shp
 	glambush2:
-		Filename: uprebelambush2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush2icon.shp
 	glambush3:
-		Filename: uprebelambush3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_uprebelambush3icon.shp
 	glsneakatk:
-		Filename: glsneakattackicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glsneakattackicon.shp
 	glanthraxbomb:
-		Filename: glanthraxbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glanthraxbombicon.shp
 	glscudstorm:
-		Filename: glscudstormicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_glscudstormicon.shp
 	gerepair1:
-		Filename: upemergencyrepair1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair1icon.shp
 	gerepair2:
-		Filename: upemergencyrepair2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair2icon.shp
 	gerepair3:
-		Filename: upemergencyrepair3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upemergencyrepair3icon.shp
 	glgpscram:
-		Filename: glgpscram.shp
+		Filename: ra2_allies_upgrade_paratroopers_glgpscram.shp
 	chartybarr1:
-		Filename: upartybarrage1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage1icon.shp
 	chartybarr2:
-		Filename: upartybarrage2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage2icon.shp
 	chartybarr3:
-		Filename: upartybarrage3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upartybarrage3icon.shp
 	chfrenzy1:
-		Filename: upfrenzy1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy1icon.shp
 	chfrenzy2:
-		Filename: upfrenzy2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy2icon.shp
 	chfrenzy3:
-		Filename: upfrenzy3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upfrenzy3icon.shp
 	chnuclear:
-		Filename: chnuclear.shp
+		Filename: ra2_allies_upgrade_paratroopers_chnuclear.shp
 	chcarpet:
-		Filename: chcarpetbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_chcarpetbombicon.shp
 	chemp:
-		Filename: empicon.png
+		Filename: ra2_allies_upgrade_paratroopers_empicon.png
 	chclustermines:
-		Filename: chclustermines.shp
+		Filename: ra2_allies_upgrade_paratroopers_chclustermines.shp
 	usagunshipicon:
-		Filename: usagunshipicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usagunshipicon.shp
 	usaparadrop1:
-		Filename: usaparadrop1.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop1.shp
 	usaparadrop2:
-		Filename: usaparadrop2.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop2.shp
 	usaparadrop3:
-		Filename: usaparadrop3.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaparadrop3.shp
 	usaa101:
-		Filename: usaa101.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa101.shp
 	usaa102:
-		Filename: usaa102.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa102.shp
 	usaa103:
-		Filename: usaa103.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaa103.shp
 	usaleaflet:
-		Filename: usaleafleticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usaleafleticon.shp
 	usafuelbomb:
-		Filename: usafuelbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usafuelbombicon.shp
 	usamotherbomb:
-		Filename: usamotherbombicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usamotherbombicon.shp
 	usaspydrone:
-		Filename: usascoutdroneicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usascoutdroneicon.shp
 	usacarpet:
-		Filename: usacarpeticon.shp
+		Filename: ra2_allies_upgrade_paratroopers_usacarpeticon.shp
 	radarvan:
-		Filename: glradarscan.shp
+		Filename: ra2_allies_upgrade_paratroopers_glradarscan.shp
 	glabounty1:
-		Filename: upglabounty1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty1icon.shp
 	glabounty2:
-		Filename: upglabounty2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty2icon.shp
 	glabounty3:
-		Filename: upglabounty3icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_upglabounty3icon.shp
 	cashhack:
-		Filename: cashhackicon.png
+		Filename: ra2_allies_upgrade_paratroopers_cashhackicon.png
 	sathack1:
-		Filename: sathack1icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sathack1icon.shp
 	sathack2:
-		Filename: sathack2icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_sathack2icon.shp
 	conssupp1:
-		Filename: steel_cougar_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_cougar_icon.shp
 	conssupp2:
-		Filename: steel_hummer_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_hummer_icon.shp
 	conssupp3:
-		Filename: steel_oldqtnk_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_oldqtnk_icon.shp
 	conssupp4:
-		Filename: steel_cobra_icon.shp
+		Filename: ra2_allies_upgrade_paratroopers_steel_cobra_icon.shp
 	emptyicon:
 		Filename: invisibleitem.shp
 	xxicon:
 		Filename: invisibleitem.shp
 	supernova_missile_super_icon:
-		Filename: cameo_plymouth_supernova_missile.shp
+		Filename: ra2_allies_upgrade_paratroopers_cameo_plymouth_supernova_missile.shp
 
 moveflsh:
 	idle:
@@ -3663,11 +3663,11 @@ scorches:
 rockcraters:
 	Defaults:
 		Scale: 1.4
-	rockcrater1: DATA.R8
+	rockcrater1: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 114
 		Length: 16
 		Offset: -16,-16
-	rockcrater2: DATA.R8
+	rockcrater2: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 130
 		Length: 16
 		Offset: -16,-16
@@ -3675,11 +3675,11 @@ rockcraters:
 sandcraters:
 	Defaults:
 		Scale: 1.4
-	sandcrater1: DATA.R8
+	sandcrater1: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 146
 		Length: 16
 		Offset: -16,-16
-	sandcrater2: DATA.R8
+	sandcrater2: ra2_allies_upgrade_paratroopers_data.r8
 		Start: 162
 		Length: 16
 		Offset: -16,-16

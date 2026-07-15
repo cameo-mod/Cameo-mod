@@ -1,7 +1,7 @@
 #
 # Red Alert 2
 #
-ra2aegis:
+ra2_allies_aegiscruiser:
 	idle:
 
 ra2asw:
@@ -22,41 +22,41 @@ ra2dred:
 	idle:
 	empty: ra2dredwo
 
-ra2naflak:
+ra2_soviets_flakcannon:
 	idle: ra2flaktur
 	turret: ra2flaktur
 
-ra2gtgcan:
+ra2_allies_grandcannon:
 	turret: ra2gtgcantur
 	barrel: ra2gtgcanbarl
 
 ra2hornet:
 	idle:
 
-ra2hyd: #Sea Scorpion
+ra2_soviets_seascorpion: #Sea Scorpion
 	idle:
 
-ra2nalasr:
+ra2_soviets_sentrygun:
 	turret: ra2laser
 	idle: ra2laser
 
 ra2lcrf: #Allies transport
 	idle:
 
-ra2caoutp: #Tech outpost sam
+ra2caoutp: #Tech outpost td_nod_samsite
 	turret: ra2outp
 
 ra2pdplane: #Paradrop plane
 	idle:
 
-ra2nasam:
-	idle: sam
-	turret: sam
+ra2_allies_patriotmissilesystem:
+	idle: td_nod_samsite
+	turret: td_nod_samsite
 
 ra2sapc:
 	idle:
 
-ra2shad: #Nighthawk
+ra2_allies_nighthawk: #Nighthawk
 	idle:
 
 ra2sub: #Typhoon Attack Sub
@@ -65,27 +65,27 @@ ra2sub: #Typhoon Attack Sub
 ra2subt: #Sub Torpedo needs voxel projectiles
 	idle:
 
-ra2nasam:
-	turret: sam
+ra2_allies_patriotmissilesystem:
+	turret: td_nod_samsite
 
 #
 # Yuri's Revenge
 #
 
-yrbsub:
+yuri_boomersubmarine:
 	idle:
 
 yrbsubmisl:
 	idle:
 
-yrcaos:
+yuri_chaosdrone:
 	idle:
 
 yrschd:
 	idle:
 	turret: yrschdtur
 
-yrschp:
+ra2_soviets_siegechopper:
 	idle:
 	deployed: yrschd
 	turret: yrschdtur
@@ -93,7 +93,7 @@ yrschp:
 yrspyp:
 	idle:
 
-yrygggun:
+yuri_gatlingcannon:
 	idle: yryaggun
 	turret: yryaggun
 
@@ -146,14 +146,14 @@ ts_nod_laserturret:
 ts_nod_subterraneanapc:
 	idle:
 
-tsbike:
-	idle:
+ts_nod_attackcycle:
+	idle: tsbike
 
 dtruck:
 	idle:
 
-tsttnk:
-	idle:
+ts_nod_ticktank:
+	idle: tsttnk
 	turret: tsttnktur
 	barrel: tsttnkbarl
 
@@ -209,7 +209,7 @@ forgotten_experimentalmammothtank:
 	turret: ts4tnktur
 	barrel: ts4tnkbarl
 
-htnk:
+td_gdi_mammothtank:
 	idle:
 	turret: htnktur
 
@@ -278,7 +278,7 @@ ts_gdi_disruptor:
 #utnk: # TODO: unused alternative version of Devil's Tongue
 #	idle:
 
-#mrj: # TODO: unused
+#ra1_allies_mobileradarjammer: # TODO: unused
 #	idle:
 #	turret: mrjtur
 

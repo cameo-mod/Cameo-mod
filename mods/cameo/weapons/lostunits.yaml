@@ -189,7 +189,7 @@ DalekTeleport:
 	Warhead@1Actor: SpawnActor
 		Actors: dalek, dalek, dalek, dalek
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -203,7 +203,7 @@ DalekTeleport2:
 	Warhead@1Actor: SpawnActor
 		Actors: dalek, dalek, dalek2, dalek2
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -217,7 +217,7 @@ DalekTeleport3:
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek3, dalek3
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -231,7 +231,7 @@ DalekTeleport4:
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek4, dalek4
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -245,14 +245,14 @@ DalekTeleportU:
 	Warhead@1Actor: SpawnActor
 		Actors: dalek3, dalek3, dalek4, dalek4, dalek3, dalek3, dalek, dalek, dalek2
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
 	Warhead@2Flash: ChronoFlashEffect
 	
 ####################################################################################################
-#		Black Hand
+#		Black td_nod_handofnod
 ####################################################################################################
 
 InfantryExplode:

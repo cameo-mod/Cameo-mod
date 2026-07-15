@@ -62,7 +62,7 @@
 	paradrop:
 		Start: 1
 	icon:
-		Filename: nax_recruit_icon.png
+		Filename: naxis_naxiriflerecruit_icon.png
 		Scale: 1
 		Offset: 0,0
 
@@ -80,7 +80,7 @@
 
 caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
 	Defaults:
-		Filename: aa_drmn.shp
+		Filename: asian_alliance_droneminer_aa_drmn.shp
 	idle:
 		Filename: invisibleitem.shp
 	dock:
@@ -88,7 +88,7 @@ caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash o
 	dock-loop:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: aa_drmnicon.shp
+		Filename: asian_alliance_droneminer_icon.shp
 
 aa_plasred:
 	idle:
@@ -199,17 +199,17 @@ steel_blasterball:
 
 steel_scalpel:
 	idle:
-		Filename: steel_scalpel.shp
+		Filename: steel_consortium_upgrade_scalpeldefenders.shp
 		Facings: -8
 		InterpolatedFacings: 32
 		Length: 8
 	move:
-		Filename: steel_scalpel.shp
+		Filename: steel_consortium_upgrade_scalpeldefenders.shp
 		Facings: -8
 		InterpolatedFacings: 32
 		Length: 8
 	icon:
-		Filename: steel_scalpel_icon.shp
+		Filename: steel_consortium_upgrade_scalpeldefenders_icon.shp
 	muzzle:
 		Filename: minigun.shp
 		Length: 3
@@ -287,7 +287,7 @@ nax_cowprojectile:
 
 futu_manticore:
 	Defaults:
-		Filename: future_mech_plasma.shp
+		Filename: futuretech_plasmastrider_mech_plasma.shp
 		Scale: 0.8
 	idle1:
 		Facings: 32
@@ -306,13 +306,13 @@ futu_manticore:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: asian_alliance_promotion_unlockpulverizermecha_icon.shp
 		Offset: 0,0
 
 yrrobo:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: yr_robo.shp
+		Filename: futuretech_robottank_yr_robo.shp
 	idle:
 		Facings: 64
 		Offset: 0,20
@@ -325,7 +325,7 @@ yrrobo:
 	muzzle-2:
 		Offset: 0,20
 	icon:
-		Filename: yrroboicon.png
+		Filename: futuretech_robottank_icon.png
 
 aa_banzai:
 	Defaults:

@@ -39,7 +39,7 @@ factiok:
 			JUNGLE: bib2.jun
 			BARREN: bib2.bar
 	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 	box-overlay:
@@ -71,12 +71,12 @@ ioknuke:
 	bib: bib3
 		UseTilesetExtension: true
 		Length: *
-		Filename: bib3.tem
+		Filename: ra2_soviets_barracks_bib3.tem
 		TilesetFilenames:
 			DESERT: bib3.des
 			WINTER: bib3.win
 			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
+			TEMPERAT: ra2_soviets_barracks_bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
 	icon:
@@ -117,19 +117,19 @@ iokbarracks:
 		Length: 42
 		Offset: -20, -3
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	damaged-idle-anim2:
 		Start: 49
 		Length: 42
 		Offset: -20, -3
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	icon:
 		Filename: glbarracksicon.shp
 
 iokproc:
 	Defaults:
-		Filename: proc.shp
+		Filename: td_nod_tiberiumrefinery_proc.shp
 	idle:
 		Length: 6
 		Tick: 120
@@ -147,7 +147,7 @@ iokproc:
 		Length: *
 		Tick: 80
 		Offset: 2,4
-		Filename: procmake.shp
+		Filename: td_nod_tiberiumrefinery_procmake.shp
 	resources:
 		Length: 6
 		Offset: -30,-17
@@ -182,7 +182,7 @@ iokproc:
 
 iokafld:
 	Defaults:
-		Filename: afld.shp
+		Filename: td_nod_airstrip.shp
 	idle:
 		Tick: 120
 		ZOffset: -1023
@@ -202,12 +202,12 @@ iokafld:
 	idle-dish:
 		Length: 16
 		Tick: 160
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 	damaged-idle-dish:
 		Start: 16
 		Length: 16
 		Tick: 160
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 	dead:
 		Start: 32
 		ZOffset: -1023
@@ -215,7 +215,7 @@ iokafld:
 	make:
 		Length: *
 		Tick: 80
-		Filename: afldmake.shp
+		Filename: td_nod_airstrip_afldmake.shp
 	bib:
 		UseTilesetExtension: true
 		Length: *
@@ -259,12 +259,12 @@ ioknuk2:
 	bib:
 		UseTilesetExtension: true
 		Length: *
-		Filename: bib3.tem
+		Filename: ra2_soviets_barracks_bib3.tem
 		TilesetFilenames:
 			DESERT: bib3.des
 			WINTER: bib3.win
 			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
+			TEMPERAT: ra2_soviets_barracks_bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
 	icon:
@@ -294,12 +294,12 @@ iokblackmarket:
 		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
-		Filename: bib3.tem
+		Filename: ra2_soviets_barracks_bib3.tem
 		TilesetFilenames:
 			DESERT: bib3.des
 			WINTER: bib3.win
 			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
+			TEMPERAT: ra2_soviets_barracks_bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
 	icon:
@@ -309,13 +309,13 @@ iokblackmarket:
 		Length: 42
 		Offset: 17, -12
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	damaged-idle-anim2:
 		Start: 49
 		Length: 42
 		Offset: 17, -12
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	box-overlay:
 		Offset: 16,20
 		AddExtension: False
@@ -356,13 +356,13 @@ iokpalace:
 		Length: 42
 		Offset: -17, -9
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	damaged-idle-anim2:
 		Start: 49
 		Length: 42
 		Offset: -17, -9
 		Tick: 175
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	box-overlay:
 		Offset: 16,20
 		AddExtension: False
@@ -411,33 +411,33 @@ iokscudtemple:
 		Offset: -17, -9
 		Tick: 175
 		Scale: 0.92
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	damaged-idle-anim2:
 		Start: 49
 		Length: 42
 		Offset: -17, -9
 		Tick: 175
 		Scale: 0.92
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	idle-anim3:
 		Start: 49
 		Length: 42
 		Offset: 17, -9
 		Tick: 175
 		Scale: 0.92
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	damaged-idle-anim3:
 		Start: 49
 		Length: 42
 		Offset: 17, -9
 		Tick: 175
 		Scale: 0.92
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 	temple-overlay:
 		Offset: 0,0
 		AddExtension: False
 		Scale: 0.92
-		Filename: tmpl.shp
+		Filename: td_nod_templeofnod.shp
 
 ####################################################################################################
 #		IOK - VEHICLES

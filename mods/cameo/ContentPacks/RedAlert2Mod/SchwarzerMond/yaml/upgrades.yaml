@@ -1,0 +1,41 @@
+conyard_infiltrated.nax2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Schwarzer Mond Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: schwarzer_mond_constructionyard
+	RenderSprites:
+		Image: schwarzer_mond_constructionyard
+
+schwarzer_mond_upgrade_crystallens:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Crystal Lens
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Yellow lasers upgrades shooting range and burst
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_crystallens
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_crystallens
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_greenplasmashells:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Green Plasma Shells
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Tanks deals more damage and Tesla type damage
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_greenplasmashells
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_greenplasmashells
+	ProvidesPrerequisite:

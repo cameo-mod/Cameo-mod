@@ -1,0 +1,160 @@
+asian_alliance_promotion_unlocksamurai:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Samurai
+	Buildable:
+		BuildPaletteOrder: 97
+		Queue: Promotions
+		Description: Allows training of Samurai and upgrades paratroopers to use Samurais.
+		Prerequisites: ~asian_alliance_asianconstructionyard, !asian_alliance_promotion_unlocksamurai, rank1
+	RenderSprites:
+		Image: asian_alliance_japanesesamurai
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockveteranarchers:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Veteran Archers
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Promotions
+		Description: Allows training of Veteran Archers and upgrades paratroopers to use Archers.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlocksamurai, !asian_alliance_promotion_unlockveteranarchers, rank1
+	RenderSprites:
+		Image: asian_alliance_veteranarcher
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockasdf:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock ASDF
+	Buildable:
+		BuildPaletteOrder: 103
+		Queue: Promotions
+		Description: Enables training ASDF and upgrades paratroopers to use ASDFs.
+		IconPalette: ra2cameo
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockveteranarchers, !asian_alliance_promotion_unlockasdf, rank1
+	RenderSprites:
+		Image: asian_alliance_asdf
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockwarturtle:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock War Turtle
+	Buildable:
+		BuildPaletteOrder: 106
+		Queue: Promotions
+		Description: Enables construction of War Turtles.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockasdf, !asian_alliance_promotion_unlockwarturtle, rank1
+	RenderSprites:
+		Image: asian_alliance_warturtle
+	ProvidesPrerequisite:
+
+### Military tree
+
+asian_alliance_promotion_unlockfanatic:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Fanatic
+	Buildable:
+		BuildPaletteOrder: 98
+		Queue: Promotions
+		Description: Allows training of Fanatics and upgrades paratroopers to use Fanatics.
+		Prerequisites: ~asian_alliance_asianconstructionyard, !asian_alliance_promotion_unlockfanatic, rank1
+	RenderSprites:
+		Image: asian_alliance_fanatic
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockmlrs:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock td_gdi_mlrs
+	Buildable:
+		BuildPaletteOrder: 101
+		Queue: Promotions
+		Description: Enables construction of MLRS.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockfanatic, !asian_alliance_promotion_unlockmlrs, rank1
+	RenderSprites:
+		Image: asian_alliance_type89mlrs
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockpulverizermecha:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Pulverizer Mecha
+	Buildable:
+		BuildPaletteOrder: 104
+		Queue: Promotions
+		Description: Enables construction of Pulverizer Mechas.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockmlrs, !asian_alliance_promotion_unlockpulverizermecha, rank1
+	RenderSprites:
+		Image: asian_alliance_pulverizermecha
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockheavyrailguntank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Heavy Railgun Tank
+	Buildable:
+		BuildPaletteOrder: 107
+		Queue: Promotions
+		Description: Enables construction of Heavy Railgun Tanks.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockpulverizermecha, !asian_alliance_promotion_unlockheavyrailguntank, rank1
+	RenderSprites:
+		Image: asian_alliance_heavyrailguntank
+	ProvidesPrerequisite:
+
+### Fire tree
+
+asian_alliance_promotion_unlockflametank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Flame Tank
+	Buildable:
+		BuildPaletteOrder: 99
+		Queue: Promotions
+		Description: Enables construction of Flame Tanks.
+		Prerequisites: ~asian_alliance_asianconstructionyard, !asian_alliance_promotion_unlockflametank, rank1
+	RenderSprites:
+		Image: asian_alliance_asianflametank
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockplasmatrooper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Plasma Trooper
+	Buildable:
+		BuildPaletteOrder: 102
+		Queue: Promotions
+		Description: Enables training of Plasma Troopers.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockflametank, !asian_alliance_promotion_unlockplasmatrooper, rank1
+	RenderSprites:
+		Image: asian_alliance_plasmatrooper
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockplasmatank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Plasma Tank
+	Buildable:
+		BuildPaletteOrder: 105
+		Queue: Promotions
+		Description: Enables construction of Plasma Tanks.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockplasmatrooper, !asian_alliance_promotion_unlockplasmatank, rank1
+	RenderSprites:
+		Image: ptnk.asian
+	ProvidesPrerequisite:
+
+asian_alliance_promotion_unlockhowitzer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Howitzer
+	Buildable:
+		BuildPaletteOrder: 108
+		Queue: Promotions
+		Description: Enables construction of Howitzers.
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_promotion_unlockplasmatank, !asian_alliance_promotion_unlockhowitzer, rank1
+	RenderSprites:
+		Image: asian_alliance_howitzer
+	ProvidesPrerequisite:

@@ -1,0 +1,171 @@
+ordos_promotion_unlockchemicaltrooper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chemical Trooper
+	Buildable:
+		BuildPaletteOrder: 109
+		Queue: Promotions
+		IconPalette: player
+		Description: Allows training of Chemical Infantry.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockchemicaltrooper, rank1
+	RenderSprites:
+		Image: chemtrooper
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockcontaminator:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Contaminator
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		IconPalette: player
+		Description: Allows training of Contaminators.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockcontaminator, ordos_promotion_unlockchemicaltrooper, rank1
+	RenderSprites:
+		Image: ordos_contaminator
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockleecher:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Leecher
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		IconPalette: player
+		Description: Enables construction of Leechers.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockleecher, ordos_promotion_unlockcontaminator, rank1
+	RenderSprites:
+		Image: ordos_leech
+	ProvidesPrerequisite:
+
+ordos_promotion_unlocklaboratorycrawler:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Laboratory Crawler
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		IconPalette: player
+		Description: Enables construction of Laboratory Crawlers.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlocklaboratorycrawler, ordos_promotion_unlockleecher, rank1
+	RenderSprites:
+		Image: ordos_laboratorycrawler
+	ProvidesPrerequisite:
+#
+
+ordos_promotion_unlockdustdrone:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Dust Drone
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		#IconPalette: d2kunit
+		Description: Enables construction of Dust Drones.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockdustdrone, rank1
+	RenderSprites:
+		Image: ordos_dustdrone
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockstealthraider:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Stealth Raider
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		IconPalette: d2kunit
+		Description: Enables construction of Stealth Raider.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdustdrone, !ordos_promotion_unlockstealthraider, rank1
+	RenderSprites:
+		Image: ordos_stealthraider
+	ProvidesPrerequisite:
+
+ordos_promotion_unlocklasertank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Laser Tank
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		IconPalette: d2kunit
+		Description: Enables construction of Laser Tanks.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockstealthraider, !ordos_promotion_unlocklasertank, rank1
+	RenderSprites:
+		Image: ordos_lasertank
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockpython:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Python
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the Python.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklasertank, !ordos_promotion_unlockpython, rank1
+	RenderSprites:
+		Image: ordos_pythontank
+	ProvidesPrerequisite:
+
+#
+
+ordos_promotion_unlockmortartroopers:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mortar Troopers
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		IconPalette: windows256
+		Description: Enables training of Mortar Troopers.
+		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockmortartroopers, rank1
+	RenderSprites:
+		Image: ordos_mortartrooper
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockdeviatortank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Deviator Tank
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		IconPalette: d2kunit
+		Description: Enables construction of Deviator Tanks.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockmortartroopers, !ordos_promotion_unlockdeviatortank, rank1
+	RenderSprites:
+		Image: ordos_deviatortank
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockbanshees:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Banshees
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		IconPalette: ra2
+		Description: Enables construction of Banshees.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdeviatortank, !ordos_promotion_unlockbanshees, rank1
+	RenderSprites:
+		Image: ordos_banshee
+	ProvidesPrerequisite:
+
+ordos_promotion_unlockwraith:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Wraith
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		IconPalette: windows256
+		Description: Enables construction of the Wraith.
+		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockbanshees, !ordos_promotion_unlockwraith, rank1
+	RenderSprites:
+		Image: ordos_wraith
+	ProvidesPrerequisite:
+
+#

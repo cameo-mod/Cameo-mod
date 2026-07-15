@@ -1,0 +1,1460 @@
+M16Laser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 25
+	Range: 4983
+	Report: vpalwe2d.aud
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+FlamethrowerExplode:
+	Inherits: Flamethrower
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
+		Amount: 10000
+	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 5000
+
+NodTurretLaser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^HeavyCannon
+	Inherits: ^LightFlameWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^LaserWeapon
+	Burst: 2
+	BurstDelays: 4
+	ReloadDelay: 20
+	Range: 6800
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	# Warhead@Effect: CreateEffect
+	# 	-ImpactSounds:
+	# Warhead@EffectAir: CreateEffect
+	# 	-ImpactSounds:
+
+SmallTiberiumExplosion:
+	Inherits: Chemspray
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@Resource: CreateResource
+		AddsResourceType: Tiberium
+		Size: 0,0
+
+BigTiberiumExplosion:
+	Inherits: ^HeavyChemicalWeapon
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Resource: CreateResource
+		AddsResourceType: Tiberium
+		Size: 1,0
+
+ArtilleryShellUpgrade:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumCannon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 96
+	Range: 12345
+	MinRange: 2468
+	Report: tnkfire2.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 246
+		Inaccuracy: 492
+		LaunchAngle: 75
+		ContrailLength: 35
+		ContrailStartWidth: 125
+		ContrailEndWidth: 25
+		ContrailStartColor: FFFF88FF
+		ContrailEndColor: FF884422
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 3
+	-Warhead@Effect:
+
+MachineGun:
+	Inherits: ^SmallArms
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 10
+	Burst: 3
+	BurstDelays: 5
+	Range: 4540
+	Report: mgun11.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+FireballLauncherBuggy:
+	Inherits: ^LightFlameWeapon
+	ReloadDelay: 10
+	Burst: 3
+	BurstDelays: 5
+	Range: 4540
+	StartBurstReport: flamtnk1.aud
+	Projectile: Bullet
+		Speed: 111
+		Image: tsflameall
+		Inaccuracy: 555
+		Palette: tseffect
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+BikeRockets:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^LightMissile
+	Burst: 2
+	BurstDelays: 10
+	ReloadDelay: 55
+	Range: 6000
+	Report: bazook1.aud
+	Projectile: Missile
+		LaunchAngle: 75
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 2
+
+PDLaserBike:
+	Inherits: PDLaser
+	Range: 6000
+
+70mm:
+	Inherits: ^MediumCannon
+	ReloadDelay: 45
+	Range: 4993
+	Report: tnkfire3.aud
+	Projectile: Bullet
+		Speed: 499
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+
+LTNKMissiles:
+	Inherits: ^MediumMissile
+	ReloadDelay: 45
+	Range: 4993
+	Report: bazook1.aud
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+
+HonestJohn:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^HeavyMissile
+	ReloadDelay: 225
+	Burst: 2
+	BurstDelays: 25
+	Range: 8940
+	MinRange: 1788
+	Report: rocket2.aud
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Blockable: false
+		Shadow: true
+		Inaccuracy: 750
+		Image: MISSILE
+		TrailImage: smokey
+		TrailDelay: 1
+		TrailInterval: 1
+		Speed: 250
+		LaunchAngle: 100
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@Effect: CreateEffect
+		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactSounds: firebl3.aud
+		ImpactActors: false
+
+StealthTankMissiles:
+	Inherits: ^MediumMissile
+	ReloadDelay: 58
+	Burst: 2
+	BurstDelays: 8
+	Range: 7432
+	Report: rocket1.aud
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 12000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplobig4.aud
+
+StealthTankMissilesBlackMarket:
+	Inherits: StealthTankMissiles
+	Projectile: Missile
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+	Warhead@Shrapnel: FireShrapnel
+		ValidTargets: Ground, Water, Air
+		Weapon: StealthTankMissilesShrapnel
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+
+StealthTankMissilesShrapnel:
+	Inherits: ^LightFlameWeapon
+	Burst: 3
+	Range: 3333
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Shadow: true
+		HorizontalRateOfTurn: 33
+		CruiseAltitude: 3333
+		MinimumLaunchAngle: 33
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 333
+		Acceleration: 3
+		RangeLimit: 33333
+		Inaccuracy: 333
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
+		Amount: 2000
+	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 1000
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 2
+		Duration: 12
+		Speed: 8, 24
+		TurnRate: 4
+		Image: burn_l
+		Sequences: idle
+		Palette: ra_temperat
+		Weapon: CHFlame
+		InvalidTargets: Water
+
+HeliGun:
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 16
+	Burst: 4
+	BurstDelays: 2
+	Range: 4501
+	Report: gun5.aud
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+
+HeliMissiles:
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 16
+	Burst: 4
+	BurstDelays: 2
+	Range: 4501
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+TurretGun:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^MediumCannon
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 61
+	Range: 7711
+	Report: tnkfire6.aud
+	Projectile: Bullet
+		Speed: 771
+		-LaunchAngle:
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 6000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 3
+
+TurretGunBlackMarket:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyCannon
+	Inherits: TurretGun
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	-Warhead@Effect:
+
+Dragon:
+	Inherits: ^HeavyAAWeapon
+	Inherits@glow: ^ImpactGlow
+	Inherits: ^HeavyMissile
+	ReloadDelay: 40
+	Range: 12193
+	Report: rocket2.aud
+	ValidTargets: Air
+	Burst: 2
+	BurstDelays: 10
+	Projectile: Missile
+		Speed: 500
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 25
+		MinimumLaunchAngle: 75
+		Acceleration: 5
+		AllowSnapping: true
+		CloseEnough: 500
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 6000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 3
+	Warhead@HeavyMissile: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 6000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 3
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_building
+
+LaserObelisk:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 96
+	Range: 9600
+	Projectile: LaserZap
+		Width: 100
+		HitAnim: laserfire
+		ZOffset: 3000
+		Blockable: false
+		Duration: 38
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 3000
+		SecondaryBeamColor: FFFFFF88
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 96000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 48
+	# Warhead@Effect: CreateEffect
+	# 	-ImpactSounds:
+	# Warhead@EffectAir: CreateEffect
+	# 	-ImpactSounds:
+
+ChemRockets:
+	Inherits: ^Grenade
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^LightMissile
+	ReloadDelay: 54
+	Range: 6006
+	Report: bazook1.aud
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 12000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplos.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplos.aud
+
+ChemRocketsExplosion:
+	Inherits: ChemRockets
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Resource: CreateResource
+		AddsResourceType: Tiberium
+		Size: 0,0
+
+ChemicalBikeRockets:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Air
+	Burst: 2
+	BurstDelays: 10
+	ReloadDelay: 70
+	Range: 6000
+	Report: missile6.aud
+	Projectile: Missile
+		TrailImage: spittrail
+		LaunchAngle: 75
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: firebl3.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+ChemicalBikeRocketsExplosion:
+	Inherits: ChemicalBikeRockets
+	Warhead@Resource: CreateResource
+		AddsResourceType: Tiberium
+		Size: 0,0
+
+ChemicalStealthTankMissiles:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 60
+	Range: 6962
+	Report: rocket2.aud
+	Projectile: Missile
+		Image: MISSILE
+		TrailImage: spittrail
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
+	Warhead@Effect: CreateEffect
+		Explosions: med_tibnapalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
+		ImpactSounds: xplobig6.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Air
+
+ChemicalStealthTankExplosion:
+	Inherits: ChemicalStealthTankMissiles
+	Warhead@Resource: CreateResource
+		AddsResourceType: Tiberium
+		Size: 1,1
+
+ChemicalHonestJohn:
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 142
+	Range: 12345
+	MinRange: 2468
+	Report: rocket2.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Blockable: false
+		Shadow: true
+		Inaccuracy: 500
+		Image: V2
+		TrailImage: spittrail
+		TrailDelay: 3
+		TrailInterval: 1
+		Speed: 225
+		LaunchAngle: 75
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 30000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 15
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 30000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 15
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 30000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 15000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 15
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 30000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 15000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 15
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
+		Explosions: big_tibnapalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactSounds: xplobig6.aud
+
+MachineGunBuggy2:
+	Inherits: ^HeavyCannon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 4
+	Range: 5274
+	Report: mgun11.aud
+	ValidTargets: Ground, Water
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+MachineGunBuggy2AA:
+	Inherits: MachineGunBuggy2
+	Range: 7911
+	ValidTargets: Air
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Air
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+LaserBuggy2:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^LaserWeapon
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 4
+	Range: 5274
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 64
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 32
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+LaserBuggy2AA:
+	Inherits: LaserBuggy2
+	Range: 7911
+	ValidTargets: Air
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+FireballLauncherBuggy2:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 4
+	Range: 5274
+	StartBurstReport: flamtnk1.aud
+	Projectile: Bullet
+		Speed: 111
+		Image: tsflameall
+		Inaccuracy: 555
+		Palette: tseffect
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+LightTank2Cannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumCannon
+	ReloadDelay: 35
+	Range: 4903
+	Report: tnkfire3.aud
+	Projectile: Bullet
+		Speed: 490
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplos.aud
+
+LightTank2Missiles:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumMissile
+	ReloadDelay: 35
+	Range: 4903
+	Report: bazook1.aud
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: small_frag
+
+PDLaserLTNK2:
+	Inherits: PDLaser
+	Range: 4903
+
+BigFlamer2:
+	Inherits: ^HeavyFlameWeapon
+	Burst: 2
+	BurstDelays: 10
+	ReloadDelay: 54
+	Range: 2534
+	Report: flamer2.aud
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
+		Amount: 20000
+	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 10000
+	Warhead@Glow: GlowImpact
+		Color: FF6600
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 12
+
+FlametankExplode2:
+	Inherits: ^HeavyFlameWeapon
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 40000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 20
+	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
+		Amount: 40000
+	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 20000
+	Warhead@Effect: CreateEffect
+		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactSounds: xplobig6.aud
+
+BlackHandLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 60
+	Range: 5300
+	Report: vfloatta.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 30000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 15
+
+BlackHandFlamer:
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 46
+	Burst: 6
+	BurstDelays: 4
+	Range: 4988
+	StartBurstReport: flamtnk1.aud
+	Projectile: Bullet
+		Speed: 111
+		Image: tsflameall
+		Inaccuracy: 555
+		Palette: tseffect
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 4000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 2000
+
+BlackHandFlamerExplode:
+	Inherits: ^MediumFlameWeapon
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 12000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 6000
+
+BHRedDarts:
+	Inherits: ^TeslaChargedWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^Chaingun
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumMissile
+	ReloadDelay: 90
+	Burst: 4
+	BurstDelays: 5
+	Range: 5000
+	ValidTargets: Ground, Water, Air
+	Report: misl1.aud
+	Projectile: Missile
+		TrailImage: red_smokey
+		Image: bhreddragon
+		ContrailLength: 8
+		ContrailDelay: 2
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		ContrailStartColor: ff0000
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 5000
+	Warhead@Effect: CreateEffect
+		Explosions: steel_blueexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: makoexplose.wav
+	Warhead@EffectAir: CreateEffect
+		Explosions: steel_blueexp
+		ExplosionPalette: ra2effect
+		ImpactSounds: makoexplose.wav
+
+SpecterArtilleryShell:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits@glow: ^ImpactGlow
+	ReloadDelay: 78
+	Range: 12640
+	MinRange: 2528
+	Report: tnkfire2.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 252
+		Inaccuracy: 504
+		LaunchAngle: 99
+		ContrailLength: 33
+		ContrailStartWidth: 99
+		ContrailEndWidth: 33
+		ContrailDelay: 0
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		Image: bhreddragon
+	Warhead@Grenade: SpreadDamage
+		Damage: 16000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@Effect: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: kaboom15.aud
+
+SpecterArtilleryShellUpgrade:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
+	Inherits: SpecterArtilleryShell
+	Projectile: Bullet
+		ContrailStartWidth: 111
+		ContrailEndWidth: 11
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	-Warhead@Effect:
+
+VenomLaser:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	ReloadDelay: 18
+	Range: 4000
+	Report: vpalwe2d.aud
+	Projectile: LaserZap
+		Width: 128
+		Duration: 12
+		ZOffset: 2047
+		Color: FF000055
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+NodCommandoLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 8
+	Report: vpalwe2d.aud
+	ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
+	InvalidTargets: Structure, ixian_concretewall
+	Range: 6030
+	Projectile: LaserZap
+		Width: 128
+		Duration: 3
+		ZOffset: 2047
+		Color: FF000044
+		SecondaryBeam: true
+		SecondaryBeamWidth: 64
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FF8844
+		Blockable: true
+		-HitAnim:
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
+		Damage: 12000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
+		Damage: 6
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Air, Ship
+		Explosions: small_napalm
+		ImpactSounds: flamer2.aud
+		ImpactActors: false
+
+NodTorpTube:
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	ReloadDelay: 64
+	Range: 8000
+	Burst: 2
+	BurstDelays: 8
+	Report: torpedo1.aud
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile: Missile
+	Projectile: Missile
+		Image: MISSILE
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 1
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 80
+		MinimumLaunchSpeed: 80
+		Speed: 160
+		Acceleration: 1
+		HorizontalRateOfTurn: 8
+		RangeLimit: 16000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@Grenade: SpreadDamage
+		Damage: 8000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 4
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge: LeaveSmudge
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@EffectAir: CreateEffect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+NodTorpTubeBlackMarket:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyMissile
+	ReloadDelay: 64
+	Range: 8000
+	Burst: 2
+	BurstDelays: 8
+	Report: torpedo1.aud
+	ValidTargets: Water, Underwater, Bridge
+	-Projectile: Missile
+	Projectile: Missile
+		Image: MISSILE
+		Arm: 5
+		TrailImage: bubbles
+		TrailDelay: 1
+		#EffectPalette: ra_temperat
+		MaximumLaunchSpeed: 80
+		MinimumLaunchSpeed: 80
+		Speed: 160
+		Acceleration: 1
+		HorizontalRateOfTurn: 8
+		RangeLimit: 16000
+		BoundToTerrainType: Water
+		Palette: cloak
+		MaximumLaunchAngle: 0
+		CruiseAltitude: 0
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Water, Underwater, Bridge, Structure
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 4
+		ValidTargets: Water, Underwater, Bridge, Structure
+	-Warhead@Smudge: LeaveSmudge
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ship, Structure, Bridge, Ground
+		ImpactActors: true
+	-Warhead@EffectAir: CreateEffect
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: splash9.aud
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+CorvetteLaserObelisk:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 90
+	Range: 9550
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 120000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 60
+
+CorvetteDragon:
+	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
+	ReloadDelay: 35
+	Range: 9550
+	Report: rocket2.aud
+	Burst: 2
+	BurstDelays: 7
+	Projectile: Missile
+		Speed: 500
+		HorizontalRateOfTurn: 50
+		MinimumLaunchAngle: 50
+		VerticalRateOfTurn: 50
+		Acceleration: 5
+		AllowSnapping: true
+		CloseEnough: 500
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 10000
+		Spread: 500
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 5
+		Spread: 500
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_building

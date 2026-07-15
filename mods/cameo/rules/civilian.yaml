@@ -428,7 +428,7 @@ ARCO.Husk:
 		IntoActor: ARCO
 
 BARB:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Armor:
 		Type: Light
 	Tooltip:
@@ -441,7 +441,7 @@ BARB:
 		Type: barbwire
 
 WOOD:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Armor:
 		Type: Wood
 	Tooltip:

@@ -1,0 +1,872 @@
+latin_syndicate_powerstation:
+	Inherits: ^RA2Building
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits@FS: ^AIForceShield
+	Inherits@shape: ^3x2Shape
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Power Station
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard
+		Queue: Building, RABuilding
+		Description: actor_nanrct.description
+	Building:
+		Footprint: xxx xxx ___
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 200000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 500
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	SoundOnDamageTransition:
+		DestroyedSounds: bpowdiea.wav, bpowdieb.wav
+	FireWarheadsOnDeathCA:
+		Weapon: ReactorNukeWeak
+		RequiresCondition: !chronobeamed
+	FirepowerMultiplier@ReactorNukeWeak:
+		Modifier: 25
+	ProvidesPrerequisite@buildingname:
+
+latin_syndicate_combatbarracks:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@lightposts: ^LightPosts
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Combat Barracks
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_powerstation
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		ExitCell: 0,1
+	Exit@2:
+		ExitCell: 1,1
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@antenna:
+		Sequence: idle-antenna
+		RequiresCondition: !build-incomplete
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+	WithSpriteBody:
+	WithIdleOverlay@Bunkered:
+		Sequence: idle-bunkered
+		RequiresCondition: loaded && !build-incomplete
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
+		PauseOnCondition: chronobeamed
+	RevealsShroud:
+		Range: 6666
+	ActorStatValues:
+		Stats: Armor, Sight, Cargo, Kills, Experience
+	GivesBuildableArea:
+
+latin_syndicate_recyclingrefinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Recycling Refinery
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_powerstation
+	Building:
+		Footprint: xxx= xxx= xxx=
+		Dimensions: 4,3
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	DrawLineToTarget:
+	FreeActor:
+		Actor: latin_syndicate_collectiontruck
+		SpawnOffset: 2,2
+		Facing: 256
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: idle-bib
+
+latin_syndicate_latinempradar:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		BuildLimit: 1
+		Description: actor_latin_radar.description
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_recyclingrefinery
+	Tooltip:
+		Name: Latin EMP Radar
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 3,2
+	ProvidesPrerequisite:
+	WithIdleOverlay@radar:
+		Sequence: idle-radar
+		RequiresCondition: !build-incomplete
+	DetonateWeaponPower@Emp:
+		AllowMultiple: false
+		OrderName: SteelEmpCannon
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: latin_syndicate_upgrade_unlockempcannon
+		IconImage: steel_consortium_consortiumbattlelab
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 6000
+		ActivationDelay: 50
+		ActivationSequence:
+		Names:
+			1: Emp Disable
+		Weapons:
+			1: SteelEmpBomb
+		Descriptions:
+			1: power_ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound:
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraActor: camera.small
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+		LaunchSound:
+		IncomingSound:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+latin_syndicate_airstation:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+		Description: actor_gaairc.description
+	Tooltip:
+		Name: Air Station
+	Building:
+		Footprint: x== ===
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 0,1, 2,1, 1,0
+		KillOnRemove: false
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bottom:
+		Sequence: idle-bottom
+		PauseOnCondition: disabled
+	WithIdleOverlay@mid:
+		Sequence: idle-mid
+		PauseOnCondition: disabled
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+	AirstrikePower@spyplane:
+		PauseOnCondition: disabled
+		OrderName: SovietRA2SpyPlane
+		Prerequisites:
+			1: latin_syndicate_airstation
+		IconImage: yrspyp
+		Icons:
+			1: icon
+		ChargeInterval: 4500
+		Names:
+			1: power_ra2spyplane.name
+		Descriptions:
+			1: power_ra2spyplane.description
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		InsufficientPowerSpeechNotification: InsufficientPower
+		UnitTypes:
+			1: yrspyp
+		SquadSizes:
+			1: 1
+		QuantizedFacings: 8
+		DisplayBeacon: true
+		BeaconPosters:
+			1: racamicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 10
+
+latin_syndicate_spycenter:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+	Tooltip:
+		Name: Spy Center
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 3,2
+	SupportPowerChargeBar:
+	ProvidesPrerequisite:
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	SupportPowerChargeBar:
+	DetonateWeaponPowerCA:
+		AllowMultiple: false
+		OrderName: TraitorsPower
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: latin_syndicate_spycenter
+		IconImage: latin_syndicate_spycenter
+		Icons:
+			1: icon2
+		Cursor: ability
+		ChargeInterval: 7500
+		ActivationDelay: 0
+		ActivationSequence:
+		Names:
+			1: Traitors
+		Descriptions:
+			1: Convert a group of enemies to your own army.
+		Weapons:
+			1: RA2TraitorPower
+		EndChargeSound: beepy3.aud
+		EndChargeSpeechNotification: Reinforce
+		EndChargeTextNotification: Traitors Ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: UnitReady
+		LaunchTextNotification: Warning: Traitors activated
+		IncomingSpeechNotification: ReinforcementsArrived
+		IncomingTextNotification: Warning: A group of traitors was detected.
+		LaunchSound: spysreve.wav
+		IncomingSound: beepy2.aud
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 125
+		Duration: 25
+		ActiveCondition: active
+		TargetCircleRanges:
+			1: 1500
+		TargetCircleColors: ff000080
+		BeaconActor: CAMERA.sw
+		CameraRange: 6000
+
+latin_syndicate_defensebureau:
+	Inherits: ^RA2Building
+	Inherits: ^BasicDefense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x3Shape
+	Inherits@Bot: ^BotMicromanageable
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@bot2: ^BotAutoDeployEvacuateCargo
+	Inherits@lightposts: ^LightPosts
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Defense Bureau
+	Buildable:
+		BuildLimit: 1
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_spycenter, derricklimit
+		Description: actor_oilb.description
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,0,0
+	WithIdleOverlay@idle-pump:
+		Sequence: idle-pump
+		PauseOnCondition: lowpower
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@idle-pump2:
+		Sequence: idle-pump2
+		PauseOnCondition: lowpower
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		Image: latin_syndicate_defensebureau
+		PlayerPalette: playerra2
+	-WithDeathAnimation:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+	WithSpriteBody:
+	WithIdleOverlay@Bunkered:
+		Sequence: idle-bunkered
+		RequiresCondition: loaded && !build-incomplete
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
+		PauseOnCondition: chronobeamed
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 10000
+	GivesBuildableArea:
+
+latin_syndicate_recyclingcenter:
+	Inherits: ^RA2Building
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		BuildLimit: 1
+		Description: actor_latin_cgte.description
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_defensebureau, derricklimit
+	Tooltip:
+		Name: Recycling Center
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 3,2
+	ProvidesPrerequisite:
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights2:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	SupportPowerChargeBar:
+	ProduceActorPower@car:
+		Names:
+			1: Give Scrap cars
+		Descriptions:
+			1: Produces scrap cars
+		Icons:
+			1: icon
+		IconImage: latin_syndicate_raiderbuggy
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1:
+		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
+		Type: Car
+		ChargeInterval: 750
+		AutoFire: true
+		OrderName: callcars
+		SupportPowerPaletteOrder: 20
+		LaunchSound: gcraspee.wav
+		RequiresCondition: !disabled
+	Production@Car:
+		Produces: Car
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	AcceptsDeliveredCash:
+		ValidTypes: GrinderCash
+
+latin_syndicate_topolsilo:
+	Inherits: ^RA2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Topol Silo
+	Buildable:
+		BuildPaletteOrder: 100
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_spycenter, !ra2topolstrike, ~techlevel.superweapons
+		Queue: Defence, RADefence
+		Description: actor_latin_ca12hit.description
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	SelectionDecorations:
+	DetonateWeaponPowerCA:
+		AllowMultiple: true
+		OrderName: 12Rockets
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: ra2_soviets_nuclearmissilesilo
+		Icons:
+			1: icon2
+		Cursor: ability
+		ChargeInterval: 10500
+		ActivationDelay: 100
+		ActivationSequence:
+		Names:
+			1: Topol Strike
+		Descriptions:
+			1: power_lightningstorm.description
+		Weapons:
+			1: 12MissilesActivate
+		EndChargeSound: snukread.wav
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Topol Strike ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Topol Strike launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Topol Strike launched.
+		LaunchSound: snuksire.wav
+		IncomingSound: snuksire.wav
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 500
+		Duration: 250
+		ActiveCondition: active
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		DisplayBeacon: true
+		BeaconPosters:
+			1: atomic
+		TargetCircleRanges:
+			1: 10000
+		TargetCircleColors: ff000080
+		BeaconActor: BLASTRADIUS.atomic
+		CameraRange: 10000
+	SupportPowerChargeBar:
+	WithSupportPowerActivationAnimation:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ra2topolstrike
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+latin_syndicate_syndicateservicedepot:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Tooltip:
+		Name: Syndicate Service Depot
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_syndicatefactory
+	Building:
+		Footprint: Xx_ === _=_
+		Dimensions: 3,3
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+	WithIdleOverlay@bib:
+		Sequence: bib
+	WithResupplyAnimation:
+		Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+latin_syndicate_latinsentrygun:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks
+		Description: template_anti_infantry_defense.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Latin Sentry td_nod_gunturret
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 113500
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+		RealignDelay: -1
+	AttackTurreted:
+		Voice: Attack
+	Armament@PRIMARY:
+		Weapon: LatinSentryMG
+		LocalOffset: 500,128,100, 500,-128,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: LatinSentryMGE
+		LocalOffset: 500,128,100, 500,-128,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns
+	Power:
+		Amount: -30
+	RevealsShroud:
+		Range: 6666
+	ProvidesPrerequisite@buildingname:
+
+latin_syndicate_bunkertower:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^1x1Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@detect: ^GenericAllDetector
+	Inherits@lightposts: ^LightPosts
+	Tooltip:
+		Name: Bunker Tower
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks
+		Description: actor_nabnkr.description
+	Valued:
+		Cost: 600
+	Health:
+		HP: 60000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Selectable:
+		Bounds: 1600, 2200, 0, 0
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 3
+		#InitialUnits: ra2_soviets_conscript
+	WithSpriteBody:
+	WithIdleOverlay@Bunkered:
+		Sequence: idle-bunkered
+		RequiresCondition: loaded && !build-incomplete
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 768,0,128, 448,-682,128, -448,-682,128, -768,0,128, -448,682,128, 448,682,128
+		PauseOnCondition: chronobeamed
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 5000
+		RequiresCondition: latin_syndicate_doctrine_lightposts
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete && latin_syndicate_doctrine_lightposts
+
+latin_syndicate_smlturret:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_defensebureau
+		Description: actor_latin_sml.description
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: SML Turret
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 300000
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 896
+		Offset: 0,0,333
+		RealignDelay: -1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: SMLLauncher
+		LocalOffset: 1000,333,1000, 1000,-333,1000, 1000,333,1000, 1000,-333,1000
+		MuzzleSequence: muzzle
+	MissileSpawnerMasterCA:
+		#ArmamentNames: primary
+		Actors: yrbsubmisl, yrbsubmisl, yrbsubmisl, yrbsubmisl
+		RespawnTicks: 125
+		SpawnAllAtOnce: true
+		SpawnOffset: 333,333,777, 333,-333,777, -333,333,777, -333,-333,777
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithRangeCircle:
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -250
+	RevealsShroud:
+		Range: 15000
+	DetectCloaked:
+		Range: 7000
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+latin_syndicate_latinaadefender:
+	Inherits: ^RA2Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+		Description: template_anti_aircraft_defense.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Latin AA Defender
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 132500
+	Selectable:
+		Bounds: 2048, 2048
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 896
+		Offset: -1,1,1
+		RealignDelay: -1
+	AttackTurreted:
+		Voice: Attack
+	Armament@1:
+		Weapon: LatinAADefenderCannon
+		LocalOffset: 700,350,750, 700,-350,750
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: LatinAADefenderCannon
+		LocalOffset: 700,-350,750, 700,350,750
+		MuzzleSequence: muzzle
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 4,8,12,16,20,24,28,32,36,40
+		RevokeDelay: 40
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 2,4,6,8,10,12,14,16,18,20
+		RevokeDelay: 20
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithRangeCircle:
+	AutoTarget:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 15000
+	DetectCloaked:
+		Range: 7500
+
+cgyard.latin:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Syndicate Naval Yard
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@crane:
+		Sequence: idle-crane
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+
+#   Scrapcar
+
+latin_syndicate_syndicateconstructionyard:
+	Inherits: ra2_allies_alliedconstructionyard
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Construction Yard
+	Transforms:
+		IntoActor: latin_syndicate_syndicatemobileconstructionvehicle
+	WithIdleOverlay@fans:
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedOverlay:
+		Sequence: build
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: cgcnst_infiltrated.latin
+		Types: TechStealerInfiltrate
+
+latin_syndicate_syndicatefactory:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Factory
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_recyclingrefinery
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights2:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib

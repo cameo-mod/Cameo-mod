@@ -238,7 +238,7 @@ PINKY:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 215
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
 		Description: A Demon that shoots devastation fireballs\nclearing waves of infantry and buildings in its path.\nStrong vs Everything
 	-WithDamageOverlay:
 	Valued:
@@ -291,7 +291,7 @@ MANC:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 220
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
 		Description: Spat out from hell. Shoots a deadly steams of flames.\nStrong vs Everything
 	Valued:
 		Cost: 100
@@ -353,7 +353,7 @@ MECHWARRIOR:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 230
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
 		Description: Demon that self destructs sending\n a fiery shockwave nearest its victims.
 	Valued:
 		Cost: 100
@@ -411,8 +411,8 @@ EXCITER:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 240
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
-		Description: A Bio Mech unit that\n electrifies its victims with a Shock Shell\nStrong vs Infantry, Buildings\nWeak vs Vehicles
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
+		Description: A Bio ra1_allies_mechanic unit that\n electrifies its victims with a Shock Shell\nStrong vs Infantry, Buildings\nWeak vs Vehicles
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -485,7 +485,7 @@ TRIPOD:
 	Buildable:
 		Queue: Vehicle
 		BuildPaletteOrder: 250
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
 		BuildLimit: 1
 		Description: Alien War Hybrid.\n Strong vs Everything.
 	Valued:
@@ -638,14 +638,14 @@ MNLYR:
 	MustBeDestroyed:
 		RequiredForShortGame: true
 	Transforms:
-		IntoActor: ftur
+		IntoActor: ra1_soviet_flametower
 		Offset: 0,0
 		Facing: 384
 	CashTrickler:
 		Interval: 150
 		Amount: 20
 	RenderSprites:
-		Image: MNLY
+		Image: ra1_allies_minelayer
 	Chronoshiftable:
 		ReturnToOrigin: false
 	HitShape:
@@ -691,7 +691,7 @@ MOBILETENT:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Mobile Tent
+		Name: Mobile ra1_allies_alliedbarracks
 	Selectable:
 		Priority: 4
 		DecorationBounds: 896, 896
@@ -719,7 +719,7 @@ MOBILETENT:
 	-MapEditorData:
 
 FLTENT:
-	Inherits: TENT
+	Inherits: ra1_allies_alliedbarracks
 	-Buildable:
 	Health:
 		HP: 100000
@@ -734,10 +734,10 @@ FLTENT:
 		Amount: 0
 	BaseBuilding:
 	RenderSprites:
-		Image: TENT
+		Image: ra1_allies_alliedbarracks
 
 SNIPER.soviets:
-	Inherits: SNIPER
+	Inherits: ra1_allies_alliedsniper
 	Buildable:
 		Prerequisites: ~wip-content
 	MustBeDestroyed:
@@ -746,7 +746,7 @@ SNIPER.soviets:
 	AutoTarget:
 		InitialStanceAI: AttackAnything
 	RenderSprites:
-		Image: SNIPER
+		Image: ra1_allies_alliedsniper
 	-MapEditorData:
 
 unit174c:

@@ -1,0 +1,1404 @@
+latin_syndicate_mortarbike:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MortarInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
+		BuildPaletteOrder: 30
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlockmortarbikes
+		Description: actor_latin_mortarbike.description
+	Tooltip:
+		Name: Mortar td_nod_reconbike
+	Valued:
+		Cost: 500
+	Health:
+		HP: 28000
+	Repairable:
+		HpPerStep: 1400
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Mobile:
+		Speed: 140
+		TurnSpeed: 56
+	Armament:
+		Weapon: RA2MortarBike
+		LocalOffset: 222,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2MortarBikeE
+		LocalOffset: 222,0,400
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@Mortar:
+		Modifier: 50
+	FireWarheadsOnDeathCA@Mortar:
+		Weapon: RA2MortarBike
+		RequiresCondition: !disabled
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 200
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	RangeMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 110
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	SpeedMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 120
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+scrapcar.latin:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: scrapcar.latin
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: scrapcar_demo.latin
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: scrapcar_driveby.latin
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+scrapcar_demo.latin:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: scrapcar.latin
+		PlayerPalette: playerra2
+
+scrapcar_driveby.latin:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Cargo:
+		InitialUnits: latin_syndicate_latinmilitia, latin_syndicate_narco, latin_syndicate_latinflametrooper
+	RenderSprites:
+		Image: scrapcar.latin
+		PlayerPalette: playerra2
+
+scrapcar2.latin:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: scrapcar2_demo.latin
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: scrapcar2_driveby.latin
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+scrapcar2_demo.latin:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: scrapcar2.latin
+		PlayerPalette: playerra2
+
+scrapcar2_driveby.latin:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Cargo:
+		InitialUnits: latin_syndicate_latinmilitia, latin_syndicate_grenademonkey, latin_syndicate_latintankkiller
+	RenderSprites:
+		Image: scrapcar2.latin
+		PlayerPalette: playerra2
+
+##############################################
+#   Red Alert 2 Syndicate Units
+##############################################
+
+latin_syndicate_syndicatemobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@uprecover: ^LatinCashrecover
+	Tooltip:
+		Name: Syndicate Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_syndicateservicedepot
+	Transforms:
+		IntoActor: latin_syndicate_syndicateconstructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: LatinMCVVoice
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmsyndicate
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ra2_soviets_mobileconstructionvehicle #placeholder
+
+latin_syndicate_raiderbuggy:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Tooltip:
+		Name: Raider Buggy
+	Valued:
+		Cost: 700
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlockraiderbuggy
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_buggy.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 37500
+	Repairable:
+		HpPerStep: 1875
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 23
+	Armament:
+		Weapon: LatinBuggyMG
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@Elite:
+		Weapon: LatinBuggyMGE
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@Gatling:
+		Weapon: LatinBuggyChaingun
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@GatlingElite:
+		Weapon: LatinBuggyChaingunE
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@Rocket:
+		Weapon: LatinBuggyRocket
+		LocalOffset: 500,-100,300, 500,100,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@RocketElite:
+		Weapon: LatinBuggyRocketE
+		LocalOffset: 500,100,300, 500,-100,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_tortugatank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Tooltip:
+		Name: Tortuga Tank
+	Valued:
+		Cost: 3000
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_recyclingcenter
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_buggy.description
+	Mobile:
+		Speed: 45
+		TurnSpeed: 9
+	Health:
+		HP: 875000
+	Repairable:
+		HpPerStep: 43750
+	ChangesHealth@SelfHealing:
+		Step: 350
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 9
+	Armament:
+		Weapon: LatinBuggyMG
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@Elite:
+		Weapon: LatinBuggyMGE
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@Gatling:
+		Weapon: LatinBuggyChaingun
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@GatlingElite:
+		Weapon: LatinBuggyChaingunE
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+	WithSpriteTurret:
+
+latin_syndicate_rushertank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@uprecover: ^LatinCashrecover
+	Tooltip:
+		Name: Rusher Tank
+	Valued:
+		Cost: 650
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~latin_syndicate_syndicatefactory, ~!latin_syndicate_promotion_unlocksmokertanks
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 23 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2Gren60mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2Gren60mmE
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Weapon: LatinRusherRocket
+		LocalOffset: 600,200,300, 600,-200,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && !rank-elite
+	Armament@AAE:
+		Weapon: LatinRusherRocketE
+		LocalOffset: 600,200,300, 600,-200,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && rank-elite
+	GrantConditionOnPrerequisite@Missile:
+		Condition: latin_syndicate_doctrine_cartelrockets
+		Prerequisites: latin_syndicate_doctrine_cartelrockets
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_smokertank:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@uprecover: ^LatinCashrecover
+	Tooltip:
+		Name: Smoker Tank
+	Valued:
+		Cost: 1800
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~latin_syndicate_syndicatefactory, ~latin_syndicate_promotion_unlocksmokertanks
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 95
+		TurnSpeed: 19
+	Health:
+		HP: 260000
+	Repairable:
+		HpPerStep: 13000
+	ChangesHealth@SelfHealing:
+		Step: 104
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 21 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: LatinSmokerCannon
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: LatinSmokerCannonE
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@GrenadePack:
+		Weapon: RA2GrenadePack
+		LocalOffset: 600,100,300, 600,200,300, 600,-100,300, 600,-200,300
+		Recoil: 128
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GrenadePackE:
+		Weapon: RA2GrenadePackE
+		LocalOffset: 600,100,300, 600,200,300, 600,-100,300, 600,-200,300
+		Recoil: 128
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Weapon: LatinSmokerRocket
+		LocalOffset: 600,200,300, 600,-200,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && !rank-elite
+	Armament@AAE:
+		Weapon: LatinSmokerRocketE
+		LocalOffset: 600,200,300, 600,-200,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && rank-elite
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+	GrantConditionOnPrerequisite@Missile:
+		Condition: latin_syndicate_doctrine_cartelrockets
+		Prerequisites: latin_syndicate_doctrine_cartelrockets
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinHeavyTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_diablo:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Tooltip:
+		Name: Diablo
+	Valued:
+		Cost: 1200
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~latin_syndicate_syndicatefactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_diablo.description
+	Mobile:
+		Speed: 125
+		TurnSpeed: 25
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 36
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: DiabloCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@Elite:
+		Name: primary
+		Weapon: DiabloCannonE
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: secondary
+		Weapon: DiabloCannonAA
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AAE:
+		Name: secondary
+		Weapon: DiabloCannonAAE
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	RangeMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
+		Modifier: 125
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+	ReloadDelayMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
+		Modifier: 75
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+	FirepowerMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
+		Modifier: 150
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+	AttackTurreted:
+	# RenderRangeCircleCA:
+	# 	Armaments: primary
+	# RenderRangeCircleCA@SECONDARY:
+	# 	Armaments: secondary
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Condition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	Mirage:
+		RequiresCondition: !disabled && latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree && latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	WithSpriteTurret:
+		RequiresCondition: !tree
+	WithFacingSpriteBody:
+		RequiresCondition: !tree
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_latinapc:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@uprecover: ^LatinCashrecover
+	Tooltip:
+		Name: Latin td_gdi_apc
+	Valued:
+		Cost: 2400
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlocklatinapc, latin_syndicate_spycenter
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_apc.description
+	Mobile:
+		Locomotor: amphibius
+		Speed: 90
+		TurnSpeed: 18
+	Health:
+		HP: 180000
+	Repairable:
+		HpPerStep: 9000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 36
+		Offset: -1,0,4
+	Armament@Flak:
+		Weapon: RA2APCFlakCannon
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@FlakELITE:
+		Weapon: RA2APCFlakCannonE
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@FlakAA:
+		Weapon: RA2APCFlakCannonAA
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@FlakAAELITE:
+		Weapon: RA2APCFlakCannonAAE
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@Machinegun:
+		Weapon: RA2APCMachineGun
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns && !rank-elite
+	Armament@MachinegunELITE:
+		Weapon: RA2APCMachineGunE
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns && rank-elite
+	Armament@MachinegunAA:
+		Weapon: RA2APCMachineGunAA
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns && !rank-elite
+	Armament@MachinegunAAELITE:
+		Weapon: RA2APCMachineGunAAE
+		LocalOffset: 600,15,300, 600,-15,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns && rank-elite
+	Armament@Rockets:
+		Weapon: RA2APCRocket
+		LocalOffset: 600,-150,300, 600,150,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && !rank-elite
+	Armament@RocketsELITE:
+		Weapon: RA2APCRocketE
+		LocalOffset: 600,-150,300, 600,150,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && rank-elite
+	Armament@RocketsAA:
+		Weapon: RA2APCRocketAA
+		LocalOffset: 600,-150,300, 600,150,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && !rank-elite
+	Armament@RocketsAAELITE:
+		Weapon: RA2APCRocketAAE
+		LocalOffset: 600,-150,300, 600,150,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets && rank-elite
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		DecorationBounds: 1024, 1024
+	RenderSprites:
+		Image: latin_syndicate_latinapc
+		PlayerPalette: playerra2
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: latin_syndicate_latinmilitia, latin_syndicate_latintankkiller, latin_syndicate_grenademonkey, latin_syndicate_latinflametrooper, latin_syndicate_narco
+	GrantConditionOnPrerequisite@Missile:
+		Condition: latin_syndicate_doctrine_cartelrockets
+		Prerequisites: latin_syndicate_doctrine_cartelrockets
+	WithSpriteTurret:
+		Sequence: turret
+		RequiresCondition: !latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	WithSpriteTurret@up:
+		Sequence: turret-up
+		RequiresCondition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_narcohummer:
+	Inherits: ^Tank
+	Inherits@GAINSEXPERIENCE: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@uprecover: ^LatinCashrecover
+	Tooltip:
+		Name: Narco Hummer
+	Valued:
+		Cost: 3000
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_spycenter, ~!latin_syndicate_promotion_unlockcarteltrucks
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_humvee.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 110
+		TurnSpeed: 22
+	Health:
+		HP: 97500
+	Repairable:
+		HpPerStep: 4875
+	ChangesHealth@SelfHealing:
+		Step: 39
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 22
+		Offset: -1,0,4
+	Armament@AG:
+		Weapon: RA2NarcoAKM
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AGE:
+		Weapon: RA2NarcoAKME
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: latin_syndicate_narcohummer
+		PlayerPalette: playerra2
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinNarcoVVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: latin_syndicate_latinmilitia, latin_syndicate_latintankkiller, latin_syndicate_grenademonkey, latin_syndicate_latinflametrooper, latin_syndicate_narco
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 0,0,128, 224,-341,128, -224,-341,128, -224,341,128, 224,341,128
+		PauseOnCondition: chronobeamed
+	WithSpriteTurret:
+		Sequence: turret
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_carteltruck:
+	Inherits: ^Tank
+	Inherits@GAINSEXPERIENCE: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@gat: ^GatlingSpeedUpSpecialUnitBehavior
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@uprecover: ^LatinCashrecover
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Cartel Truck
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_spycenter, ~latin_syndicate_promotion_unlockcarteltrucks
+		Queue: Vehicle, RAVehicle
+		Description: actor_latin_humvee.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 70
+		TurnSpeed: 14
+	Health:
+		HP: 167500
+	Repairable:
+		HpPerStep: 8375
+	ChangesHealth@SelfHealing:
+		Step: 67
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 14
+		Offset: -1,0,4
+	Armament@AG:
+		Weapon: RA2Narco60mm
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AGE:
+		Weapon: RA2Narco60mmE
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LatinNarcoVVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		InitialUnits: latin_syndicate_latinmilitia, latin_syndicate_latintankkiller, latin_syndicate_grenademonkey, latin_syndicate_latinflametrooper, latin_syndicate_narco, latin_syndicate_latinmilitia, latin_syndicate_latintankkiller, latin_syndicate_grenademonkey, latin_syndicate_latinflametrooper, latin_syndicate_narco
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, 224,0,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,0,128, -224,341,128, -384,0,128
+		PauseOnCondition: chronobeamed
+	WithSpriteTurret:
+		Sequence: turret
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+latin_syndicate_missiletruck:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^CartelRocketsUpgrade
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_latinempradar, ~!latin_syndicate_promotion_unlockburritos
+		Description: actor_mssm.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Missile Truck
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Armament:
+		Weapon: RA2RTruckRocket
+		LocalOffset: -500,250,0, -500,0,125, -500,-250,250, -500,250,0, -500,0,125, -500,-250,250
+	Armament@PRIMARYELITE:
+		Weapon: RA2RTruckRocket
+		LocalOffset: -500,-250,250, -500,0,125, -500,250,0, -500,-250,250, -500,0,125, -500,250,0
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinArtyVoice
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 5
+	WithFacingSpriteBody:
+		RequiresCondition: !firing
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: firing
+		Sequence: empty-idle
+		Name: reloading
+	WithRangeCircle:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+latin_syndicate_burrito:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^CartelRocketsUpgrade
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_defensebureau, ~latin_syndicate_promotion_unlockburritos
+		Description: actor_latin_burrito.description
+	Tooltip:
+		Name: Burrito
+	Valued:
+		Cost: 1800
+	Health:
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 80
+		TurnSpeed: 16
+	Armament:
+		Weapon: RA2RBurritoRocket
+		LocalOffset: -250,300,125, -250,150,250, -250,-150,375, -250,-300,500, -250,300,125, -250,150,250, -250,-150,375, -250,-300,500
+	Armament@PRIMARYELITE:
+		Weapon: RA2RBurritoRocket
+		LocalOffset: -250,-300,500, -250,-150,375, -250,150,250, -250,300,125, -250,-300,500, -250,-150,375, -250,150,250, -250,300,125
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinArtyVoice
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 5
+	WithFacingSpriteBody:
+		RequiresCondition: !firing
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: firing
+		Sequence: empty-idle
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+latin_syndicate_lars:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^CartelRocketsUpgrade
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlocklars, latin_syndicate_defensebureau
+		Description: actor_latin_lars.description
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: LARS
+	Health:
+		HP: 47500
+	Repairable:
+		HpPerStep: 2375
+	ChangesHealth@SelfHealing:
+		Step: 19
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Armament:
+		Weapon: RA2LarsRocket
+		LocalOffset: -500,250,250, -500,0,250, -500,-250,250, -500,250,500, -500,0,500, -500,-250,500
+	Armament@PRIMARYELITE:
+		Weapon: RA2LarsRocket
+		LocalOffset: -500,-250,250, -500,0,250, -500,250,250, -500,-250,500, -500,0,500, -500,250,500
+		RequiresCondition: rank-elite
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	RenderRangeCircle:
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinArtyVoice
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 5
+	WithFacingSpriteBody:
+		RequiresCondition: !firing
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: firing
+		Sequence: empty-idle
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+latin_syndicate_collectiontruck:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@uprecover: ^LatinCashrecover
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Collection Truck
+	Buildable:
+		Prerequisites: ~latin_syndicate_recyclingrefinery
+		Queue: Vehicle, RAVehicle
+		Description: template_harvester.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 85000
+	Repairable:
+		HpPerStep: 4250
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 3
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Voiced:
+		VoiceSet: LatinHarvVoice
+	WithHarvestAnimation:
+	RenderSprites:
+		PlayerPalette: playerra2
+	StoresResources:
+	DockClientManager:
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+
+latin_syndicate_demolitiontruck:
+	Inherits: ra1_soviet_nukedemotruck
+	Inherits@anim: ^RA2Vehicle
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Demolition Truck
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 30000
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 180
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlockdemolitiontrucks, latin_syndicate_latinempradar
+	Voiced:
+		VoiceSet: RA2DemolitionTruckVoice
+	GrantConditionOnDeploy:
+		Voice: Attack
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2DemoBomb
+		EmptyWeapon: RA2DemoBomb
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		Modifier: 200
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	DeathSounds:
+		RequiresCondition: !chronobeamed
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ra2dtruck #placeholder
+#   Pass those units to Syndicate
+
+latin_syndicate_nuketruck:
+	Inherits: ra1_soviet_nukedemotruck
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Nuke Truck
+	Valued:
+		Cost: 3000
+	Health:
+		HP: 60000
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlocknuketrucks, latin_syndicate_spycenter
+		BuildLimit: 1
+		BuildDurationModifier: 50
+	Voiced:
+		VoiceSet: RA2DemolitionTruckVoice
+	GrantConditionOnDeploy:
+		Voice: Attack
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Atomic
+		EmptyWeapon: RA2Atomic
+	-RenderRangeCircle:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	DeathSounds:
+		RequiresCondition: !chronobeamed
+	Selectable:
+		Bounds: 1536, 1536
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: latin_syndicate_nuketruck
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+latin_syndicate_topolm:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Topol-M
+	Valued:
+		Cost: 6000
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlocktopolm, latin_syndicate_defensebureau
+		Description: actor_latin_topol.description
+		BuildLimit: 1
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Armament:
+		Weapon: RA2TOPOLCubaTarget
+		LocalOffset: -1500,250,1000
+		FireDelay: 5
+	Armament@Launch:
+		Name: secondary
+		Weapon: RA2TOPOLCuba
+		LocalOffset: -1500,250,2500
+		PauseOnCondition: scudup != 5
+		FireDelay: 5
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2TOPOLCuba
+		EmptyWeapon: RA2TOPOLCuba
+	SpeedMultiplier@scudup:
+		RequiresCondition: scudup
+		Modifier: 50
+	ActorStatValues:
+		ReloadDelay: 500
+	RevealsShroud@SWReveal:
+		Range: 2500
+		ValidRelationships: Neutral, Enemy
+		RequiresCondition: swreveal
+	RevealsShroud@scudup:
+		Range: 10000
+		ValidRelationships: Neutral, Enemy
+		RequiresCondition: scudup
+	ReloadArmamentsBar:
+		Armaments: secondary
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinSCUDVoice
+	GrantConditionOnAttack:
+		Condition: scudup
+		RevokeDelay: 50
+		MaximumInstances: 5
+	WithFacingSpriteBody:
+		RequiresCondition: !scudup
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@Scud1:
+		RequiresCondition: scudup == 1
+		Sequence: idle-up1
+		Name: reloading
+	WithFacingSpriteBody@Scud2:
+		RequiresCondition: scudup == 2
+		Sequence: idle-up2
+		Name: reloading
+	WithFacingSpriteBody@Scud3:
+		RequiresCondition: scudup == 3
+		Sequence: idle-up3
+		Name: reloading
+	WithFacingSpriteBody@Scud4:
+		RequiresCondition: scudup == 4
+		Sequence: idle-up4
+		Name: reloading
+	WithFacingSpriteBody@Scud5:
+		RequiresCondition: scudup == 5
+		Sequence: idle-up5
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+#######################################
+# Red Alert 2 Syndicate Promotion Tree
+#######################################
+
+### Narco tree

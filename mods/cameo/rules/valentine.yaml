@@ -1213,7 +1213,7 @@ valentine_tower_double:
 
 
 valentine_e7:
-	Inherits: E7
+	Inherits: ra1_allies_tanya
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
@@ -1248,7 +1248,7 @@ valentine_e7:
 		EmptyWeapon: GLTerroristExplosive2
 
 valentine_ra2tany:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
@@ -1878,7 +1878,7 @@ giantcupido.Husk:
 		EmptyWeapon: GLAnthraxLarge
 
 cute_kirov:
-	Inherits: RA2ZEP
+	Inherits: ra2_soviets_kirovairship
 	Tooltip:
 		Name: Cute Kirov
 	Health:

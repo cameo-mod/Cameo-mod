@@ -128,13 +128,13 @@ eden_gp_railgun =
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-consumer_items_impulse =
+eden_impulseitems =
   .description = Cheap Items - Returns $600
 
-consumer_items_wares =
+eden_impulseitems_3 =
   .description = Basic Items - Returns $1100
 
-consumer_items_luxury_wares =
+eden_impulseitems_2 =
   .description = Luxury Items - Returns $2300
 
 # PLYMOUTH localizations (mirror of Eden)
@@ -228,7 +228,7 @@ plymouth_convec_structure_factory =
    Unarmed
 
 plymouth_scout =
-  .description = Fast scout armed with a machine gun
+  .description = Fast scout armed with a machine td_nod_gunturret
 
 plymouth_lynx_microwave =
   .description = Fast microwave vehicle
@@ -277,7 +277,7 @@ eden_convec_structure_factory =
    Unarmed
 
 eden_scout =
-  .description = Fast scout armed with a machine gun
+  .description = Fast scout armed with a machine td_nod_gunturret
 
 eden_lynx_laser =
   .description = Fast laser vehicle

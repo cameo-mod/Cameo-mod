@@ -2484,7 +2484,7 @@ sc2kglsite.defense:
 	-MapEditorData:
 	-ActorLostNotification:
 sc2ktank.defense:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	Inherits@MC: ^MCImmune
 	-ExternalCondition@TSCLOAK:
 	-Cloak@TScloak:
@@ -2501,7 +2501,7 @@ sc2ktank.defense:
 	Selectable:
 		Class: sc2kbeaconarmy
 	RenderSprites:
-		Image: mtnk
+		Image: td_gdi_battletank
 ####################################################################################################
 #		SC2K - ALTERNATIVE
 ####################################################################################################
@@ -3530,7 +3530,7 @@ sc2kae3:
 		Image: e3
 
 sc2kajeep:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -3541,10 +3541,10 @@ sc2kajeep:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: sc2k_armyvehicle, ~selectsimcity2000a
 	RenderSprites:
-		Image: jeep
+		Image: td_gdi_humvee
 
 sc2kamtnk:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -3556,7 +3556,7 @@ sc2kamtnk:
 		Description: General-Purpose Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
 		Prerequisites: sc2k_armyvehicle, ~selectsimcity2000a
 	RenderSprites:
-		Image: mtnk
+		Image: td_gdi_battletank
 
 SC2KFIREA:
 	Inherits: SC2KFIRE

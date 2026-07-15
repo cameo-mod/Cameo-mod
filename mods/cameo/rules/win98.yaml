@@ -662,13 +662,13 @@ WIN98_AERIAL_UPLINK:
 #       WIN98 DEFENSE
 ####################################################################################################
 WIN98_CRT_WALL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 100
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: CRT Wall
+		Name: CRT ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: WIN98_BARRACKS
@@ -1544,7 +1544,7 @@ WIN98_MINE:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 
 WIN98_KEYBOARD:
-	Inherits: SCREAVER
+	Inherits: protoss_reaver
 	Tooltip:
 		Name: Mechanical Keyboard
 	Buildable:
@@ -1695,7 +1695,7 @@ WIN98_EXPLORER:
 		Name: Explorer
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ratran
+		OverrideActor: ra1_allies_alliedchinooktransport
 	Health:
 		HP: 18000
 	RevealsShroud:
@@ -1735,7 +1735,7 @@ WIN98_EXPLORER:
 		Actor: TRAN.Husk
 	SelectionDecorations:
 	Selectable:
-		Class: ratran
+		Class: ra1_allies_alliedchinooktransport
 		DecorationBounds: 1706, 1536
 	Voiced:
 		VoiceSet: win98explorervoice

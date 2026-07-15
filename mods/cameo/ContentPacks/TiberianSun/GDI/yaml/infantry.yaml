@@ -1,0 +1,447 @@
+ts_gdi_lightinfantry:
+	Inherits: TSE1
+	Inherits@SERETraining: ^SERETraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~ts_gdi_barracks
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+ts_gdi_medic:
+	Inherits: ra1_allies_medic
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Buildable:
+		Prerequisites: ~ts_gdi_barracks
+		Queue: Infantry, RAInfantry
+		Description: Heals nearby infantry.\n  Unarmed
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Medic
+	WithInfantryBody:
+		IdleSequences: idle
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+	Voiced:
+		VoiceSet: TSMedic
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+ts_gdi_engineer:
+	Inherits: TSENGINEER
+	Inherits@SERETraining: ^SERETraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~ts_gdi_barracks
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+ts_gdi_discthrower:
+	Inherits: ^Soldier
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Disc Thrower
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 29
+		Prerequisites: ~ts_gdi_barracks
+		Queue: Infantry, RAInfantry
+		Description: Fast infantry armed with grenades.\nCan attack air \n  Strong vs Buildings, slow-moving targets
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSGrenade
+		LocalOffset: 0,0,427
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSGrenadeSonic
+		LocalOffset: 0,0,427
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	#Armament@aa:
+	#	Weapon: TSGrenadeAA
+	#	LocalOffset: 0,0,427
+	#	FireDelay: 15
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSGrenadeG
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSGrenadeSonic
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	# Explodes:
+	# 	Weapon: GrenadierExplode
+	# 	EmptyWeapon: GrenadierExplode
+	# 	Chance: 50
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_falconenforcer:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Falcon Enforcer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ts_gdi_barracks
+		Queue: Infantry, RAInfantry
+		Description: Heavy infantry. Effective vs Vehicles, Aircraft.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@PRIMARY:
+		Weapon: TS30mm
+		LocalOffset: 0,0,427
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TS30mm
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS30mmRail
+		LocalOffset: 0,0,427
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TS30mmRail
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_riottrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Riot Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_radar
+		Queue: Infantry, RAInfantry
+		Description: Heavy infantry. Effective vs Infantry.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 54000
+	ChangesHealth@SelfHealing:
+		Step: 54
+	Armament@PRIMARY:
+		Weapon: TSShotgun
+		LocalOffset: 0,0,427
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSShotgun
+	Minelayer:
+		Mine: TSRiotTrooperMine
+		TileUnknownName: build-invalid
+	AmmoPool:
+		Ammo: 6
+		RearmSound: minelay1.aud
+	ReloadAmmoPool:
+		Delay: 400
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	# GrantTimedConditionOnDeploy:
+	# 	StartsFullyCharged: true
+	# 	DeployedTicks: 5
+	# 	CooldownTicks: 500
+	# 	DeployedCondition: summon
+	# 	ShowSelectionBar: true
+	# 	ExclusiveDeploy: true
+	# 	DeployType: Summon
+	# 	PauseOnCondition: disabled
+	# PeriodicExplosion@projections:
+	# 	Weapon: TSRIOTSUMMON
+	# 	RequiresCondition: summon
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+TSRiotTrooperMine:
+	Inherits: ^Mine
+	RenderSprites:
+		Image: minv
+	FireWarheadsOnDeath:
+		Weapon: TSEMPMine
+
+ts_gdi_zonetrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Zone Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter, ts_gdi_promotion_unlockzonetrooper
+		Queue: Infantry, RAInfantry
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 80000
+	ChangesHealth@PowerPacks:
+		PercentageStep: 2
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+	ChangesHealth@PowerPacks2:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: TSZoneRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSZoneRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgun
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgunRail
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	-DamagedByTerrain:
+	-TakeCover:
+	WithInfantryBody:
+		-StandSequences:
+	Selectable:
+		Class: forgotten_ghoststalker
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_jumpjetinfantry:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@SERETraining: ^SERETraining
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Jumpjet Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_radar
+		Queue: Infantry, RAInfantry
+		Description: Airborne soldier.\nCan attack aircraft.\n  Strong vs Infantry, Light armor\n  Weak vs AA
+	Aircraft:
+		TurnSpeed: 22
+		Speed: 110
+		Voice: Move
+	Health:
+		HP: 34000
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Armament@PRIMARY:
+		Weapon: TSJumpCannon
+		LocalOffset: 128,0,256
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ts_gdi_jumpjetinfantry_husk
+	Voiced:
+		VoiceSet: TSJumpJet
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: flying
+		MoveSequence: flying
+		DefaultAttackSequence: flying-attack
+		IdleSequences: flying
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: attack
+		RequiresCondition: !airborne
+	WithShadow@airborne:
+		Offset: 0, 128, 0
+		ZOffset: -128
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsjumpjet
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining
+
+ts_gdi_railguncommando:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Railgun Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSCommandoRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSCommandoRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgun
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgunRail
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	-DamagedByTerrain:
+	Selectable:
+		Class: forgotten_ghoststalker
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_railgunweaponry
+
+
+#The following are used for the mutant wildlife spawner superweapon

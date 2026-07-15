@@ -1,0 +1,24 @@
+World:
+	FactionCA@asianalliance:
+		Name: Asian Alliance
+		InternalName: asianalliance
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction_ra2_asianalliance.description
+	StartingUnits@mcvasianalliance:
+		Class: none
+		ClassName: MCV Only
+		Factions: asianalliance
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
+	StartingUnits@defaultasianalliance:
+		Class: light
+		ClassName: Light Support
+		Factions: asianalliance
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
+		SupportActors: asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asiantankkiller,asian_alliance_quasar,asian_alliance_lynxtank
+	StartingUnits@heavyasianalliance:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: asianalliance
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
+		SupportActors: asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asiantankkiller,asian_alliance_quasar,asian_alliance_lynxtank,asian_alliance_lynxtank,asian_alliance_lynxtank,ptnk.asian,asian_alliance_quasar

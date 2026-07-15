@@ -4,25 +4,25 @@
 
 mcv:
 	Defaults:
-		Filename: mcv.shp
+		Filename: td_nod_mobileconstructionvehicle_mcv.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
 	icon:
-		Filename: mcvicnh.shp
+		Filename: td_nod_mobileconstructionvehicle_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
 mcv.destroyed:
 	idle:
-		Filename: mcv.shp
+		Filename: td_nod_mobileconstructionvehicle_mcv.shp
 		Facings: 32
 		InterpolatedFacings: 64
 		ZOffset: -512
 
 harv:
 	Defaults:
-		Filename: harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 	idle:
 		Facings: 32
 		UseClassicFacings: True
@@ -32,24 +32,24 @@ harv:
 		Facings: 8
 		Tick: 60
 	dock:
-		Filename: harvdump.shp
+		Filename: td_nod_tiberiumharvester_harvdump.shp
 		Length: 7
 	dock-loop:
-		Filename: harvdump.shp
+		Filename: td_nod_tiberiumharvester_harvdump.shp
 		Start: 7
 	icon:
-		Filename: harvicnh.shp
+		Filename: td_nod_tiberiumharvester_icon.shp
 
 harv.destroyed:
 	idle:
-		Filename: harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
 
 bggy.destroyed:
 	Defaults:
-		Filename: bggy.shp
+		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -62,7 +62,7 @@ bggy.destroyed:
 
 mtnk.destroyed:
 	Defaults:
-		Filename: mtnk.shp
+		Filename: td_gdi_battletank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -75,7 +75,7 @@ mtnk.destroyed:
 
 ltnk.destroyed:
 	Defaults:
-		Filename: ltnk.shp
+		Filename: td_nod_lighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -88,7 +88,7 @@ ltnk.destroyed:
 
 htnk.destroyed:
 	Defaults:
-		Filename: htnk.shp
+		Filename: td_gdi_mammothtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -101,7 +101,7 @@ htnk.destroyed:
 
 jeep.destroyed:
 	Defaults:
-		Filename: jeep.shp
+		Filename: td_gdi_promotion_unlockassaultapc_jeep.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -114,7 +114,7 @@ jeep.destroyed:
 
 bike.destroyed:
 	Defaults:
-		Filename: bike.shp
+		Filename: td_nod_reconbike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -122,7 +122,7 @@ bike.destroyed:
 
 ftnk.destroyed:
 	Defaults:
-		Filename: ftnk.shp
+		Filename: td_nod_flametank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -130,7 +130,7 @@ ftnk.destroyed:
 
 mlrs.destroyed:
 	Defaults:
-		Filename: mlrs.shp
+		Filename: td_nod_ssmlauncher_mlrs.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -143,7 +143,7 @@ mlrs.destroyed:
 
 stnk.destroyed:
 	Defaults:
-		Filename: stnk.shp
+		Filename: td_nod_stealthtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -151,7 +151,7 @@ stnk.destroyed:
 
 arty.destroyed:
 	Defaults:
-		Filename: arty.shp
+		Filename: td_nod_artillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -159,7 +159,7 @@ arty.destroyed:
 
 apc.destroyed:
 	Defaults:
-		Filename: apc.shp
+		Filename: td_gdi_apc.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -199,7 +199,7 @@ c17:
 
 tran:
 	Defaults:
-		Filename: tran.shp
+		Filename: td_nod_chinooktransport.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -227,7 +227,7 @@ tran:
 	unload:
 		Start: 35
 	icon:
-		Filename: tranicnh.shp
+		Filename: td_nod_chinooktransport_icon.shp
 
 fact:
 	Inherits: ^WithBuildingBib2
@@ -257,7 +257,7 @@ fact:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
@@ -285,7 +285,7 @@ nuke:
 proc:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: proc.shp
+		Filename: td_nod_tiberiumrefinery_proc.shp
 	idle:
 		Length: 6
 		Tick: 120
@@ -300,7 +300,7 @@ proc:
 		Tick: 800
 		Offset: 4,8
 	make:
-		Filename: procmake.shp
+		Filename: td_nod_tiberiumrefinery_procmake.shp
 		Length: *
 		Tick: 80
 		Offset: 4,8
@@ -314,7 +314,7 @@ proc:
 		Length: 6
 		Offset: -60,-34
 	icon:
-		Filename: procicnh.shp
+		Filename: td_nod_tiberiumrefinery_icon.shp
 
 silo:
 	Inherits: ^WithBuildingBibIron
@@ -349,7 +349,7 @@ silo:
 hq:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hq.shp
+		Filename: td_nod_communicationscenter_hq.shp
 	idle:
 		Length: 16
 		Tick: 100
@@ -361,11 +361,11 @@ hq:
 		Start: 32
 		Tick: 800
 	make:
-		Filename: hqmake.shp
+		Filename: td_nod_communicationscenter_hqmake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: hqicnh.shp
+		Filename: td_nod_communicationscenter_icon.shp
 
 nuk2:
 	Inherits: ^WithBuildingBib3
@@ -392,7 +392,7 @@ nuk2:
 hpad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hpad.shp
+		Filename: td_nod_helipad_hpad.shp
 	idle:
 		ZOffset: -1023
 	damaged-idle:
@@ -413,17 +413,17 @@ hpad:
 		ZOffset: -1023
 		Tick: 800
 	make:
-		Filename: hpadmake.shp
+		Filename: td_nod_helipad_make.shp
 		Length: *
 		Tick: 80
 	bib:
 	icon:
-		Filename: hpadicnh.shp
+		Filename: td_nod_helipad_icon.shp
 
 fix:
 	Inherits: ^WithBuildingBibFix
 	Defaults:
-		Filename: fix.shp
+		Filename: td_nod_repairfacility_fix.shp
 	idle:
 		ZOffset: -1c511
 	damaged-idle:
@@ -441,17 +441,17 @@ fix:
 		ZOffset: -1c511
 		Tick: 800
 	make:
-		Filename: fixmake.shp
+		Filename: td_nod_repairfacility_fixmake.shp
 		Length: 14
 		Tick: 60
 	bib:
 		Offset: 0,-10
 	icon:
-		Filename: fixicnh.shp
+		Filename: td_nod_repairfacility_icon.shp
 
 brik:
 	Defaults:
-		Filename: brik.shp
+		Filename: futuretech_concretebarrier_brik.shp
 	idle:
 		Length: 16
 	scratched-idle:
@@ -471,9 +471,9 @@ sbag:
 	icon:
 		Filename: sbagicon.png
 
-cycl:
+japan_chainlinkfence:
 	Defaults:
-		Filename: cycl.shp
+		Filename: japan_chainlinkfence.shp
 	idle:
 		Length: 16
 	damaged-idle:
@@ -788,7 +788,7 @@ rmbo:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: rmboicnh.shp
+		Filename: td_nod_commando_icon.shp
 
 ^BasicInfantryTibsun:
 	Defaults:
@@ -917,7 +917,7 @@ tsblackhandlaser2:
 		Scale: 1.16
 		Filename: tsblackhandlaser.shp
 	icon:
-		Filename: tsblackhandlasericon.shp
+		Filename: td_nod_promotion_unlocklasertrooper_icon.shp
 
 tsstealthsoldier2:
 	Inherits: ^BasicInfantryTibsun
@@ -926,13 +926,13 @@ tsstealthsoldier2:
 		Scale: 1.05
 		Filename: tsstealthsoldier.shp
 	icon:
-		Filename: tsstealthsoldiericon.shp
+		Filename: td_nod_stealthsoldier_icon.shp
 
 mammothbunker:
 	Defaults:
 		Filename: mammothbunker.shp
 	idle:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
 	turret:
 		Filename: 4tnk.shp
@@ -950,7 +950,7 @@ mammothbunker.husk:
 	Defaults:
 		Filename: mammothbunker.shp
 	idle:
-		Filename: pbox.shp
+		Filename: ra1_allies_pillbox.shp
 		Scale: 1.5
 		Start: 1
 	turret:
@@ -1158,7 +1158,7 @@ spitter:
 
 brik:
 	Defaults:
-		Filename: brik.shp
+		Filename: futuretech_concretebarrier_brik.shp
 	idle:
 		Length: 16
 	scratched-idle:
@@ -1168,7 +1168,7 @@ brik:
 		Start: 32
 		Length: 16
 	icon:
-		Filename: brikicnh.tem
+		Filename: futuretech_concretebarrier_icon.tem
 
 sbag:
 	Defaults:
@@ -1178,16 +1178,16 @@ sbag:
 	icon:
 		Filename: sbagicnh.tem
 
-cycl:
+japan_chainlinkfence:
 	Defaults:
-		Filename: cycl.shp
+		Filename: japan_chainlinkfence.shp
 	idle:
 		Length: 16
 	damaged-idle:
 		Start: 16
 		Length: 16
 	icon:
-		Filename: cyclicnh.tem
+		Filename: japan_chainlinkfence_icon.tem
 
 barb:
 	Defaults:
@@ -1446,7 +1446,7 @@ explosion:
 
 gdirigtower:
 	Defaults:
-		Filename: GDIRigTower.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigtower.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
@@ -1458,16 +1458,16 @@ gdirigtower:
 		# Start: 71
 		# Length: 4
 	dead:
-		Filename: GDIRigMobile.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	make:
-		Filename: GDIRigMobile.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
 	# turret:
-	# 	Filename: GDIRigPhalanx.png
+	# 	Filename: td_gdi_promotion_unlockgdidefenserig_gdirigphalanx.png
 	# 	Facings: 64
 	# 	Scale: 1.25
 	# 	Offset: 0,32
@@ -1488,5 +1488,5 @@ gdirigtower:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: atwricnh.shp
+		Filename: td_gdi_advancedguardtower_icon.shp
 		Offset: 0,0

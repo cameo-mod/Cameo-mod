@@ -1,7 +1,7 @@
 NODWEAP:
-	Inherits: WEAP
+	Inherits: td_gdi_weaponsfactory
 	Tooltip:
-		Name: Black Hand Factory
+		Name: Black td_nod_handofnod Factory
 	-Buildable:
 	Production@NORMAL:
 		Produces: Vehicle
@@ -43,27 +43,27 @@ NODWEAP:
 		String: Biohazard
 
 RNBGGY:
-	Inherits: BGGY
+	Inherits: td_nod_buggy
 	RenderSprites:
-		Image: BGGY
+		Image: td_nod_buggy
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 
 RNBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	RenderSprites:
-		Image: BIKE
+		Image: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 
 RNV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviet_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviet_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
@@ -72,14 +72,14 @@ RNV2RL:
 RNAPC.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: Nod APC (Destroyed)
+		Name: Nod td_gdi_apc (Destroyed)
 	TransformOnCapture:
 		IntoActor: rnapc
 	RenderSprites:
 		Image: rnapc
 
 RNLTNK:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Valued:
 		Cost: 670
 	Tooltip:
@@ -107,7 +107,7 @@ RNLTNK.Husk:
 		Image: rnltnk
 
 RNFTNK:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -140,7 +140,7 @@ RNFTNK.Husk:
 NODBIO:
 	Inherits: bio
 	Tooltip:
-		Name: Black Hand Biological Lab
+		Name: Black td_nod_handofnod Biological Lab
 	TooltipDescription@ally:
 		Description: Produces special infantry units.
 	TooltipDescription@other:
@@ -160,27 +160,27 @@ NODBIO:
 NODBIO.Husk:
 	Inherits: bio.Husk
 	Tooltip:
-		Name: Black Hand Biological Lab (Destroyed)
+		Name: Black td_nod_handofnod Biological Lab (Destroyed)
 
 RNE4:
-	Inherits: E4
+	Inherits: td_nod_flamethrower
 	RenderSprites:
-		Image: E4
+		Image: td_nod_flamethrower
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
 RNE5:
-	Inherits: E5
+	Inherits: td_nod_chemicalwarrior
 	RenderSprites:
-		Image: E5
+		Image: td_nod_chemicalwarrior
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
-E3FLAMER:
+ra1_soviet_firerocketsoldier:
 	Inherits: E3
 	Valued:
 		Cost: 400
@@ -344,7 +344,7 @@ techgdrone:
 	Valued:
 		Cost: 100
 	Tooltip:
-		Name: GDI Pistol Orca
+		Name: GDI Pistol td_gdi_orca
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -577,7 +577,7 @@ aoecobra:
 		ValidTypes: vehicle ##########
 	RenderSprites:
 ###########################################################################################
-## Black Hand Custom
+## Black td_nod_handofnod Custom
 ###########################################################################################
 
 BHFACT:
@@ -609,7 +609,7 @@ BHFACT:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: mcv.nod
+		IntoActor: td_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -622,7 +622,7 @@ BHFACT:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
 		Condition: factundeploy
@@ -727,7 +727,7 @@ BHSILO:
 	RenderSprites:
 		Image: silo
 BHHAND:
-	Inherits: HAND
+	Inherits: td_nod_handofnod
 	Tooltip:
 		Name: Biolab
 	Buildable:
@@ -751,7 +751,7 @@ BHHAND:
 		RequiresCondition: classicproductionqueues
 
 BHWEAP:
-	Inherits: WEAP
+	Inherits: td_gdi_weaponsfactory
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: bhproc
@@ -855,7 +855,7 @@ BHMIG:
 	Tooltip:
 		Name: Black Plane
 	Armament@GUNS:
-		Name: gun
+		Name: td_nod_gunturret
 		Weapon: TSTurretLaserFire
 		LocalOffset: 1024,0,-85
 	Armament@BOMBS:
@@ -874,7 +874,7 @@ BHFIX:
 		Image: fix
 
 BHEYE:
-	Inherits: EYE
+	Inherits: td_gdi_advancedcommunicationscenter
 	Valued:
 		Cost: 1800
 	Tooltip:
@@ -887,10 +887,10 @@ BHEYE:
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nUnlocks Mammoth Tank and Commando.\nRequires power to operate.
 	RenderSprites:
-		Image: eye
+		Image: td_gdi_advancedcommunicationscenter
 
 BHTMPL:
-	Inherits: TMPL
+	Inherits: td_nod_templeofnod
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^3x2Shape
 	HitShape:
@@ -909,10 +909,10 @@ BHTMPL:
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: tmpl
+		Image: td_nod_templeofnod
 
 BHGUN:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -928,43 +928,43 @@ BHGUN:
 	Power:
 		Amount: -30
 	RenderSprites:
-		Image: gun
+		Image: td_nod_gunturret
 
 BHSAM:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: hand
+		Prerequisites: td_nod_handofnod
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: sam
+		Image: td_nod_samsite
 
 BHOBLI:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: bhtmpl, ~techlevel.high
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: obli
+		Image: td_nod_obeliskoflight
 
 BHGTWR:
-	Inherits: GTWR
+	Inherits: td_gdi_guardtower
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: gtwr
+		Image: td_gdi_guardtower
 
 BHCYCL:
-	Inherits: CYCL
+	Inherits: japan_chainlinkfence
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: fact
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: cycl
+		Image: japan_chainlinkfence
 
 BHBRIK:
 	Inherits: BRIK
@@ -984,9 +984,9 @@ BHBRIK:
 		Type: Heavy
 
 BHBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	Tooltip:
-		Name: Black Bike
+		Name: Black td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1004,7 +1004,7 @@ BHAPC:
 	Valued:
 		Cost: 550
 	Tooltip:
-		Name: Nod APC
+		Name: Nod td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
@@ -1030,9 +1030,9 @@ BHLTNK:
 		Image: rnltnk
 
 BHV2RL:
-	Inherits: V2RL
+	Inherits: ra1_soviet_v2rocketlauncher
 	RenderSprites:
-		Image: V2RL
+		Image: ra1_soviet_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 70

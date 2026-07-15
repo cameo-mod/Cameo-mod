@@ -1,0 +1,189 @@
+##############################################
+#   Red Alert 2 Syndicate Upgrade
+##############################################
+
+cgcnst_infiltrated.latin:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Syndicate Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: latin_syndicate_syndicateconstructionyard
+	RenderSprites:
+		Image: latin_syndicate_syndicateconstructionyard
+
+latin_syndicate_doctrine_eliteguerillas:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Elite Guerillas
+	Buildable:
+		Description: upgrade_uplatin_mili.description
+		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_eliteguerillas
+	RenderSprites:
+		Image: latin_syndicate_latinmilitia
+	ProvidesPrerequisite:
+
+latin_syndicate_doctrine_cartelrockets:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Cartel Rockets
+	Buildable:
+		Description: upgrade_uplatin_cartelrockets.description
+		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_cartelrockets
+	RenderSprites:
+		Image: latin_syndicate_doctrine_cartelrockets
+	ProvidesPrerequisite:
+
+latin_syndicate_doctrine_lightposts:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Lightposts
+	Buildable:
+		Description: upgrade_uplatin_ngbunk2.description
+		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_lightposts
+	RenderSprites:
+		Image: latin_syndicate_bunkertower
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: up_team_ngbunk2.latin
+
+up_team_ngbunk2.latin:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: latin_syndicate_doctrine_lightposts
+	RenderSprites:
+		Image: latin_syndicate_bunkertower
+	Tooltip:
+		Name: Lightposts
+	Buildable:
+		Description: upgrade_uplatin_ngbunk2.description
+	PlayerDisplayUpgrade:
+
+latin_syndicate_upgrade_unlockempcannon:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Emp Cannon
+	Buildable:
+		Icon: icon2
+		Description: Allows the use of the EMP cannon support power from the Latin EMP Radar.
+		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_upgrade_unlockempcannon
+	RenderSprites:
+		Image: steel_consortium_consortiumbattlelab
+	ProvidesPrerequisite:
+
+latin_syndicate_upgrade_yuristolentechchainguns:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Yuri Stolen Tech: Chainguns
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade_latin_up_chaingun.description
+		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_yuristolentechchainguns
+	RenderSprites:
+		Image: latin_syndicate_upgrade_yuristolentechchainguns
+	ProvidesPrerequisite:
+
+latin_syndicate_upgrade_sovietstolentechindustrialmethods:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Soviet Stolen Tech: Industrial Methods
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade_latin_up_industrial.description
+		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_sovietstolentechindustrialmethods
+	RenderSprites:
+		Image: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+	ProvidesPrerequisite:
+
+latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Allied Stolen Tech: Extra Missiles and Miraging
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade_uplatin_alliedstolentech.description
+		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	RenderSprites:
+		Image: latin_up_miraging
+	ProvidesPrerequisite:
+
+latin_syndicate_upgrade_asianalliancestolentechhotfire:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Asian Alliance Stolen Tech: Hot Fire
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade_latin_up_hotfire.description
+		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_asianalliancestolentechhotfire
+	RenderSprites:
+		Image: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	ProvidesPrerequisite:
+
+latin_syndicate_upgrade_cashrecovery:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: Cash Recovery
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade_uplatin_cashrecover.description
+		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_cashrecovery
+	RenderSprites:
+		Image: latin_up_tech2
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: up_team_cashrecover.latin
+
+up_team_cashrecover.latin:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: latin_syndicate_upgrade_cashrecovery
+	RenderSprites:
+		Image: latin_up_tech2
+	Tooltip:
+		Name: Cash Recovery
+	Buildable:
+		Description: upgrade_uplatin_cashrecover.description
+	PlayerDisplayUpgrade:
+
+deathcash.latin:
+	Inherits: RACAMERA
+	EditorOnlyTooltip:
+		Name: (Deathcash)
+	RevealsShroud:
+		Range: 2500
+	CashTrickler:
+		Interval: 25
+		Amount: 50
+	KillsSelf:
+		RemoveInstead: true
+		Delay: 125
+
+deathcash_small.latin:
+	Inherits: RACAMERA
+	EditorOnlyTooltip:
+		Name: (Deathcash)
+	RevealsShroud:
+		Range: 2500
+	CashTrickler:
+		Interval: 25
+		Amount: 25
+	KillsSelf:
+		RemoveInstead: true
+		Delay: 125

@@ -1,0 +1,299 @@
+latin_syndicate_hindtransport:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@uprecover: ^LatinCashrecover
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: ra1_soviet_hindattackhelicopter Transport
+	Buildable:
+		BuildPaletteOrder: 97
+		Prerequisites: ~latin_syndicate_airstation
+		Queue: Aircraft, RAAircraft
+		IconPalette: ra2cameo
+		Description: actor_ra2hind.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Aircraft:
+		TurnSpeed: 18
+		Speed: 90
+		RepulsionSpeed: 18
+	Health:
+		HP: 95000
+	Repairable:
+		HpPerStep: 4750
+	ChangesHealth@SelfHealing:
+		Step: 38
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 128,-213,-85, 128,213,-85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	WithMuzzleOverlay:
+	AttackAircraft:
+		FacingTolerance: 80
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,20
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,20
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SpawnActorOnDeath:
+		Actor: ra2hind_husk.latin
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Carryall:
+		LocalOffset: 0,0,-256
+	Voiced:
+		VoiceSet: SiegeChopperVoice
+	DeathSounds:
+	RenderSprites:
+		Image: ra2hind
+		PlayerPalette: playerra2
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+
+ra2hind_husk.latin:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: ra1_soviet_hindattackhelicopter Transport
+	Aircraft:
+		TurnSpeed: 17
+		Speed: 85
+	RenderSprites:
+		Image: ra2hind
+		PlayerPalette: playerra2
+
+latin_syndicate_yakovlev:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	# Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Selectable:
+	Tooltip:
+		Name: Yakovlev
+	Valued:
+		Cost: 900
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~latin_syndicate_airstation
+		Queue: Aircraft, RAAircraft
+		Description: actor_latin_yakovlev.description
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+	Voiced:
+		VoiceSet: LatinMigVoice
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 165
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 33
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: YakovlevCannon
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+	Armament@ELITE:
+		Name: primary
+		Weapon: YakovlevCannonE
+		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@latin_syndicate_upgrade_yuristolentechchainguns:
+		Name: primary
+		Weapon: YakovlevCannonE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 40
+		Count: 1
+	ReloadAmmoDelayMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+		Modifier: 50
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,0,280
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yakolev_husk.latin
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+	RenderSprites:
+		Image: latin_syndicate_yakovlev
+		PlayerPalette: playerra2
+
+yakolev_husk.latin:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Yakovlev
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: latin_syndicate_yakovlev
+		PlayerPalette: playerra2
+
+latin_syndicate_mig21:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^CartelRocketsUpgrade
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Selectable:
+	Tooltip:
+		Name: ra1_soviet_migattackbomber-21
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~latin_syndicate_airstation, latin_syndicate_spycenter
+		Queue: Aircraft, RAAircraft
+		Description: actor_bpln.description
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	HitShape:
+	Voiced:
+		VoiceSet: LatinMigVoice
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 190
+		IdleTurnSpeed: 10
+		IdleSpeed: 150
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: MigMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: secondary
+		Weapon: MigMissiles_AA
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@AAELITE:
+		Name: secondary
+		Weapon: MigMissiles_AA_ELITE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 4
+		ReloadDelay: 50
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -960,0,240
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: mig_husk.latin
+	RenderSprites:
+		Image: latin_syndicate_mig21
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
+
+mig_husk.latin:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: ra1_soviet_migattackbomber-21
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 185
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: latin_syndicate_mig21
+		PlayerPalette: playerra2

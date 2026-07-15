@@ -1,0 +1,125 @@
+ts_nod_upgrade_infiltrationkit:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infiltration Kit
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Procure personal stealth suit to Light Infantry and Shotgun Commando. Allows Chameleon Spies to infiltrate buildings.
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_infiltrationkit
+	RenderSprites:
+		Image: infiltrationkiticon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_mobilityspecialization:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Specialization
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: Increases armor, accuracy, speed, vision, detection and attack range for the Brotherhood's light vehicles and aircraft.
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_mobilityspecialization
+	RenderSprites:
+		Image: mobilityspecializationicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_auxiliaryweapon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Auxiliary Weapon
+	Valued:
+		Cost: 4000
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Upgrades
+		Description: Adds secondary weapons or improves existing ones in most of Brotherhood's arsenal.
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_auxiliaryweapon
+	RenderSprites:
+		Image: tsauxiliaryweaponicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_stealthfieldsimprovements:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stealth Fields Improvements
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Increases effectiveness of Stealth Generators and Stealth Tanks, and upgrades Harvesters with portable stealth generator.
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_stealthfieldsimprovements
+	RenderSprites:
+		Image: stealthfieldsimprovementsicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_tiberiumlenses:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Lenses
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Procure laser weaponries for the Brotherhood's combatants. Improve effectiveness of existing laser-based weapons.
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_tiberiumlenses
+	RenderSprites:
+		Image: tstiberiumlensesicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_tiberiumcoremissiles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Core Missiles
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Procure tiberium core missile technology to Rocket Soldier, td_nod_samsite Site, Attack Cycle and Stealth Tank, increasing their firepower.
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_tiberiumcoremissiles
+	RenderSprites:
+		Image: tstiberiumcoremissilesicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_advancedtiberiumrefinement:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Tiberium Refinement
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Research
+		Description: Allows construction of the Waste Facility. Increases all vehicles speed by 25%, and twice the improvement for Harvesters.
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_advancedtiberiumrefinement
+	RenderSprites:
+		Image: advancedtiberiumrefinementicon
+	ProvidesPrerequisite:
+
+ts_nod_upgrade_willofkane:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Will of Kane
+	Valued:
+		Cost: 8000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: One vision. One purpose. Peace through power. All infantry get firepower bonus based on missing health.
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_willofkane
+	RenderSprites:
+		Image: willofkaneicon
+	ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: ts_nod_upgrade_willofkane_proxy_actor
+
+################ FORGOTTEN #######################
+
+############ Radar

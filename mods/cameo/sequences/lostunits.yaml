@@ -67,7 +67,7 @@ rnltnk:
 rnapc:
 	idle:
 		Facings: 16
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -156,7 +156,7 @@ nodbio.husk:
 	idle: bio
 		Start: 2
 
-e3flamer:
+ra1_soviet_firerocketsoldier:
 	Inherits: e3
 	-icon:
 	icon: te3ficon
@@ -338,7 +338,7 @@ techrctiger:
 315carru:
 	idle:
 		Facings: 16
-	turret: 1tnk
+	turret: ra1_allies_alliedlighttank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -350,11 +350,11 @@ techrctiger:
 315cargotruck:
 	idle:
 		Facings: 16
-	turret1: 1tnk
+	turret1: ra1_allies_alliedlighttank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
-	turret2: ftrk
+	turret2: ra1_soviet_flaktruck
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -370,12 +370,12 @@ techrctiger:
 		Facings: 16
 
 315shinobi:
-	Inherits: e2
+	Inherits: td_gdi_grenadier
 	icon: 315shinobiicon.shp
 		AddExtension: False
 
 315weichafe:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	icon: e2icnh.tem
 		AddExtension: False
 
@@ -723,7 +723,7 @@ bhnuk2:
 
 bhbrik:
 	Inherits: brik
-	icon: brikicnh.tem
+	icon: futuretech_concretebarrier_icon.tem
 		AddExtension: False
 
 bhreddragon:
@@ -737,7 +737,7 @@ bhreddragonemp:
 		ZOffset: 1023
 		
 bhbike:
-	Inherits: bike
+	Inherits: td_nod_reconbike
 
 bhweap:
 	Defaults: nodweap
@@ -866,28 +866,28 @@ siloworker:
 	icon: swharvicnh.tem
 		AddExtension: False
 furry1:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furry2:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furry3:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 furryi:
-	Inherits: dog
+	Inherits: ra1_soviet_attackdog
 	icon: dogicon
 
 furryinf:
 	idle: furryinf
 	move: furryinf
-	icon: ra2kirovicon.shp
+	icon: ra2_soviets_kirovairship_icon.shp
 		AddExtension: False
 
 furryinf2:
 	idle: furryinf2
 	move: furryinf2
-	icon: ra2kirovicon.shp
+	icon: ra2_soviets_kirovairship_icon.shp
 		AddExtension: False
 furrysonic:
 	Inherits: ^InfantryOverlays

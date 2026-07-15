@@ -753,7 +753,7 @@
 
 ^LeechEggLayable:
 	SpawnActorOnDeath@Leech2:
-		Actor: leech.ordos
+		Actor: ordos_leech
 		Probability: 100
 		OwnerType: Killer
 		DeathType: LeechTankInfect
@@ -773,7 +773,7 @@
 #		TargetTypes: LeechEggKill
 #		RequiresCondition: LeechEggLaid && LeechEggKill
 #	SpawnActorOnDeath@Leech:
-#		Actor: leech.ordos
+#		Actor: ordos_leech
 #		Probability: 100
 #		InternalOwner: Creeps
 #		RequiresCondition: LeechEggLaid && !LeechEggKill
@@ -1224,7 +1224,7 @@
 	-InaccuracyMultiplier@RANK-2:
 	-InaccuracyMultiplier@RANK-3:
 	-InaccuracyMultiplier@RANK-ELITE:
-	-InaccuracyMultiplier@up_gpssatellitesupport:
+	-InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
 	-InaccuracyMultiplier@COMMANDOCALL:
 
 ^SniperInfantryTemplate:
@@ -1249,10 +1249,10 @@
 		IconPalette: cameo
 	KeepsDistance:
 		Distance: 10
-	TooltipExtras@Sniper:
-		Description: Sniper
+	TooltipExtras@ra1_allies_alliedsniper:
+		Description: ra1_allies_alliedsniper
 	GrantExternalConditionToTransport:
-		Condition: ifv-sniper
+		Condition: ifv-ra1_allies_alliedsniper
 
 ^HackableRobot:
 	Targetable@HackableRobot:
@@ -2055,8 +2055,8 @@
 		Probability: 100
 		OwnerType: Killer
 		DeathType: QueenBroodlingSpawn
-	SpawnActorOnDeath@SCSWARMLING:
-		Actor: SCSWARMLING
+	SpawnActorOnDeath@zerg_swarmling:
+		Actor: zerg_swarmling
 		Probability: 100
 		OwnerType: Killer
 		DeathType: SwarmlingSpawn
@@ -2076,8 +2076,8 @@
 ^Vehicle:
 	Inherits: ^BasicUnit
 	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
-	# gun/MG units flash (harvesters, MCVs, transports without a muzzle stay dark). Ships opt out
-	# via ^BoatUnit; non-gun creatures reusing a vehicle template opt out with -WithMuzzleGlow.
+	# td_nod_gunturret/MG units flash (harvesters, MCVs, transports without a muzzle stay dark). Ships opt out
+	# via ^BoatUnit; non-td_nod_gunturret creatures reusing a vehicle template opt out with -WithMuzzleGlow.
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@2: ^IronCurtainable
 	Inherits@mindcontrol: ^MindControllable
@@ -2125,7 +2125,7 @@
 		CargoType: Vehicle
 		Weight: 3
 		CargoConditions:
-			yrngtbnk: tankbunkered
+			yuri_tankbunker: tankbunkered
 	RangeMultiplier@tankbunker:
 		Modifier: 125
 		RequiresCondition: tankbunkered
@@ -2190,13 +2190,13 @@
 		Modifier: 85
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra_upgrade_massproduction
+		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@IndustrialPlant:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: up_industrial.latin
+		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@ShockwaveIndustrial:
 		Multiplier: 90
 		Prerequisites: schindustrialplant
@@ -2220,7 +2220,7 @@
 		RequiresCondition: cashrecover
 	GrantConditionOnPrerequisite@CashRecover:
 		Condition: cashrecover
-		Prerequisites: up_cashrecover.latin
+		Prerequisites: latin_syndicate_upgrade_cashrecovery
 	EdibleByLeap:
 	Crushable:
 		WarnProbability: 0
@@ -2258,7 +2258,7 @@
 		Type: GrinderCash
 		Sounds: bgrinda.wav
 
-# Shared muzzle-glow tuning for cannon/gun units — inherited by ^Tank and by cannon defence
+# Shared muzzle-glow tuning for cannon/td_nod_gunturret units — inherited by ^Tank and by cannon defence
 # turrets so both use identical values. Geometry/fades fall back to the trait defaults;
 # tune the muzzle-flash brightness here in one place.
 ^MuzzleGlowCannon:
@@ -2302,7 +2302,7 @@
 		RequiresCondition: (empdisable || superfreeze || chronodisabled || diskdrain || leaflet || magnetfreeze || squid) && !invulnerability
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	RevealOnFire:
 		Duration: 50
 	FireWarheadsOnDeath:
@@ -2482,10 +2482,10 @@
 		RequiresCondition: disabled
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra_upgrade_massproduction
+		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: up_industrial.latin
+		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@DuneFactoryUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_hightech
@@ -2513,7 +2513,7 @@
 		VoiceSet: VehicleVoice
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	MapEditorData:
 		Categories: Aircraft
 	SpawnActorOnDeath:
@@ -2559,7 +2559,7 @@
 
 ^AircraftEjectOnDeath:
 	EjectOnDeath:
-		PilotActor: RARE1
+		PilotActor: ra1_soviet_rifleinfantry
 		SuccessRate: 100
 		EjectOnGround: false
 		EjectInAir: true
@@ -2861,31 +2861,31 @@
 			fcom: garrisoned
 			miss: garrisoned
 			ramiss: garrisoned
-			pbox: garrisoned
-			hbox: garrisoned
-			modartyturret: garrisoned
-			ra2gapill: garrisoned
-			yrngbnkr: garrisoned
-			bunk.nax: garrisoned
-			scbunker: garrisoned
-			cgpile.latin: biggarrisoned
-			cgup.latin: biggarrisoned
-			ngbunk2.latin: biggarrisoned
-			gdiassaultapc: battlefortresspassenger
-			yrbfrt: battlefortresspassenger
-			dragonfly.asian: battlefortresspassenger
-			wtrt.asian: battlefortresspassenger
-			humvee.latin: battlefortresspassenger
-			cartel.latin: battlefortresspassenger
+			ra1_allies_pillbox: garrisoned
+			ra1_allies_camopillbox: garrisoned
+			ra1_allies_bastionartillerybunker: garrisoned
+			ra2_allies_pillbox: garrisoned
+			ra2_soviets_battlebunker: garrisoned
+			naxis_naxibunker: garrisoned
+			terran_bunker: garrisoned
+			latin_syndicate_combatbarracks: biggarrisoned
+			latin_syndicate_defensebureau: biggarrisoned
+			latin_syndicate_bunkertower: biggarrisoned
+			td_gdi_assaultapc: battlefortresspassenger
+			ra2_allies_battlefortress: battlefortresspassenger
+			asian_alliance_dragonfly: battlefortresspassenger
+			asian_alliance_warturtle: battlefortresspassenger
+			latin_syndicate_narcohummer: battlefortresspassenger
+			latin_syndicate_carteltruck: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
 			scrapcar2_driveby.latin: battlefortresspassenger
-			zombietank.nax: battlefortresspassenger
-			shoe.nax: battlefortresspassenger
-			potnk.steel: battlefortresspassenger
-			scpythean: battlefortresspassenger
-			scbehemoth: battlefortresspassenger
+			naxis_oldtank: battlefortresspassenger
+			naxis_shoekarn: battlefortresspassenger
+			steel_consortium_poseidontank: battlefortresspassenger
+			terran_pythean: battlefortresspassenger
+			zerg_behemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
-			tkmbattlebus: battlefortresspassenger
+			tkm_battlebus: battlefortresspassenger
 			forgotten_nomadbarracks: battlefortresspassenger
 			forgotten_thumperbus: battlefortresspassenger
 	MassEntersCargo:
@@ -2908,22 +2908,22 @@
 		RequiresCondition: garrisoned
 	RangeMultiplier@BigGarrison:
 		Modifier: 130
-		RequiresCondition: biggarrisoned && up_ngbunk2.latin
+		RequiresCondition: biggarrisoned && latin_syndicate_doctrine_lightposts
 	GrantConditionOnPrerequisite@ngbunk2:
-		Condition: up_ngbunk2.latin
-		Prerequisites: up_ngbunk2.latin
+		Condition: latin_syndicate_doctrine_lightposts
+		Prerequisites: latin_syndicate_doctrine_lightposts
 	ProductionCostMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
 	ProductionTimeMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
-	ProductionCostMultiplier@ra2_yuri_upgrade_bioengineering:
+	ProductionCostMultiplier@yuri_upgrade_bioengineering:
 		Multiplier: 80
-		Prerequisites: ra2_yuri_upgrade_bioengineering
-	ProductionTimeMultiplier@ra2_yuri_upgrade_bioengineering:
+		Prerequisites: yuri_upgrade_bioengineering
+	ProductionTimeMultiplier@yuri_upgrade_bioengineering:
 		Multiplier: 80
-		Prerequisites: ra2_yuri_upgrade_bioengineering
+		Prerequisites: yuri_upgrade_bioengineering
 	Crushable:
 		WarnProbability: 75
 		CrushSound: squish2.aud
@@ -2960,7 +2960,7 @@
 		Prerequisites: upra2deso
 	GrantConditionOnPrerequisite@hazmatsuits:
 		Condition: hazmatsuits
-		Prerequisites: ra_upgrade_hazmatsuits
+		Prerequisites: ra1_soviet_upgrade_hazmatsuits
 	DamagedByTintedCells@rad:
 		Damage: 120
 		DamageInterval: 1
@@ -3095,7 +3095,7 @@
 		EmptyWeapon: MutateEffect
 		DeathTypes: QuestionMutate
 	SpawnActorOnDeath@Contaminator:
-		Actor: contaminator.ordos
+		Actor: ordos_contaminator
 		OwnerType: Killer
 		DeathType: ContaminatorMutate
 	SpawnActorOnDeath@Assimilator:
@@ -3684,6 +3684,7 @@
 		RepairingNotification: Repairing
 	WithDeathAnimation:
 		DeathSequence: dead
+		DeathSequencePalette: ra2player
 		UseDeathTypeSuffix: false
 		RequiresCondition: !chronobeamed
 	GivesBuildableArea:
@@ -4097,7 +4098,7 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo
 
-^Wall:
+^ixian_concretewall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@cloak: ^StealthGenCloakable
@@ -4119,15 +4120,15 @@
 		AreaTypes: building
 		Adjacent: 5
 	Targetable:
-		TargetTypes: Ground, Wall
+		TargetTypes: Ground, ixian_concretewall
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 		CrushSound: sandbag2.aud
 	LineBuild:
 		Range: 10
-		NodeTypes: wall
+		NodeTypes: ixian_concretewall
 	LineBuildNode:
-		Types: wall
+		Types: ixian_concretewall
 	WithWallSpriteBody:
 	GivesExperience:
 		PlayerExperienceModifier: 100
@@ -4139,11 +4140,11 @@
 	Health:
 		HP: 10000
 	AppearsOnMapPreview:
-		Terrain: Wall
+		Terrain: ixian_concretewall
 	RadarColorFromTerrain:
-		Terrain: Wall
+		Terrain: ixian_concretewall
 	MapEditorData:
-		Categories: Wall
+		Categories: ixian_concretewall
 	Cloak@TScloak:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 	RenderSprites:
@@ -4761,15 +4762,15 @@
 
 ^Shroudable:
 	ExternalCondition@shrouded:
-		Condition: gap-shroud
+		Condition: ra1_allies_gapgenerator-shroud
 	GrantConditionOnAttack@unshroud:
 		Condition: firing
 		RevokeDelay: 50
 		ArmamentNames: primary, secondary, deployed, garrisoned
-		RequiresCondition: gap-shroud
+		RequiresCondition: ra1_allies_gapgenerator-shroud
 	GrantCondition@shrouded:
 		Condition: shrouded
-		RequiresCondition: gap-shroud && !firing
+		RequiresCondition: ra1_allies_gapgenerator-shroud && !firing
 	WithColoredOverlay@shrouded:
 		RequiresCondition: shrouded
 		Color: 11223344
@@ -5555,16 +5556,16 @@
 		Prerequisites: global_conscription_buff
 	# ProvidesPrerequisite@global_conscription_buff:
 	# 	Prerequisite: global_conscription_buff
-	# 	RequiresCondition: ra_doctrine_conscription || ra2_soviets_upgrade_conscription || ra2_yuri_upgrade_psioniclegion
-	# GrantConditionOnPrerequisite@ra_doctrine_conscription:
-	# 	Condition: ra_doctrine_conscription
-	# 	Prerequisites: ra_doctrine_conscription
-	# GrantConditionOnPrerequisite@ra2_soviets_upgrade_conscription:
-	# 	Condition: ra2_soviets_upgrade_conscription
-	# 	Prerequisites: ra2_soviets_upgrade_conscription
-	# GrantConditionOnPrerequisite@ra2_yuri_upgrade_psioniclegion:
-	# 	Condition: ra2_yuri_upgrade_psioniclegion
-	# 	Prerequisites: ra2_yuri_upgrade_psioniclegion
+	# 	RequiresCondition: ra1_soviet_doctrine_conscription || ra2_soviets_doctrine_conscription || yuri_doctrine_psioniclegion
+	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscription:
+	# 	Condition: ra1_soviet_doctrine_conscription
+	# 	Prerequisites: ra1_soviet_doctrine_conscription
+	# GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
+	# 	Condition: ra2_soviets_doctrine_conscription
+	# 	Prerequisites: ra2_soviets_doctrine_conscription
+	# GrantConditionOnPrerequisite@yuri_doctrine_psioniclegion:
+	# 	Condition: yuri_doctrine_psioniclegion
+	# 	Prerequisites: yuri_doctrine_psioniclegion
 
 ^Mine:
 	Inherits: ^SpriteActor
@@ -6500,7 +6501,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 		CloakedCondition: cloaked
-		RequiresCondition: !disabled && (stealthed || up_advanced_ixian_technology.ixian)
+		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology)
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
 	WithColoredSelectionBox:
@@ -6542,7 +6543,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,latin_syndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6562,11 +6563,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -6608,11 +6609,11 @@ CPQDEBUGDUMMY:
 		Condition: prevent-mindcontrol
 	MindControllableCA:
 		ControlledConditions:
-			yryuri: controlled
-			yryurix: controlled
-			yrmind: controlled
-			yrygpsyt: controlled
-			yrygppet: controlled
+			yuri_clone: controlled
+			yuri_yurix: controlled
+			yuri_mastermind: controlled
+			yuri_psychictower: controlled
+			yuri_psychicdominator: controlled
 		RevokeControlSounds: gmindcle.wav
 		PauseOnCondition: untargetable
 	WithMindControlArcCA:
@@ -6634,7 +6635,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^MindControllable
 	MindControllableCA:
 		ControlledConditions:
-			yryurix: controlled
+			yuri_yurix: controlled
 		PauseOnCondition: prevent-mindcontrol || untargetable
 	Targetable@MC:
 		TargetTypes: MindControlStructure
@@ -7089,12 +7090,12 @@ CPQDEBUGDUMMY:
 	DamageMultiplier@shielded:
 		RequiresCondition: shielded && !shieldpermanent
 		Modifier: 150
-	DamageMultiplier@up_shielresistance.steel:
-		RequiresCondition: up_shielresistance.steel && shielded
+	DamageMultiplier@steel_consortium_upgrade_shieldresistance:
+		RequiresCondition: steel_consortium_upgrade_shieldresistance && shielded
 		Modifier: 75
-	GrantConditionOnPrerequisite@up_shielresistance.steel:
-		Condition: up_shielresistance.steel
-		Prerequisites: up_shielresistance.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_shieldresistance:
+		Condition: steel_consortium_upgrade_shieldresistance
+		Prerequisites: steel_consortium_upgrade_shieldresistance
 	ExternalCondition@shieldhit:
 		Condition: shieldhit
 	WithIdleOverlay@shield1:
@@ -7196,7 +7197,7 @@ CPQDEBUGDUMMY:
 ^RASovietSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,rare1,rare1,rare1
+		ActorTypes: rae6,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry
 
 ^AIForceShield:
 	GrantConditionOnDamageState@AIFS:
@@ -7672,17 +7673,17 @@ CPQDEBUGDUMMY:
 	Power:
 		Amount: -10
 	RallyPoint:
-		ForceSetType: Dog
+		ForceSetType: ra1_soviet_attackdog
 	Production@NORMAL:
-		Produces: Infantry, Dog
+		Produces: Infantry, ra1_soviet_attackdog
 		RequiresCondition: !classicproductionqueues
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry, Dog
+		Produces: RAInfantry, ra1_soviet_attackdog
 		RequiresCondition: classicproductionqueues
 	Production:
-		Produces: Dog
+		Produces: ra1_soviet_attackdog
 	ProductionQueue@INFANTRY:
-		Type: Dog
+		Type: ra1_soviet_attackdog
 		DisplayOrder: 2
 		Group: Infantry
 		LowPowerModifier: 300
@@ -7697,27 +7698,27 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,1
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 3
 	Exit@1:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: 0,1
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 2
 	Exit@2:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,0
-		ProductionTypes: Dog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
 		Priority: 2
 	CommandBarBlacklist:
 		DisableStop: false
 	ProductionBar@INFANTRY:
-		ProductionType: Dog
+		ProductionType: ra1_soviet_attackdog
 		RequiresCondition: !classicproductionqueues
 	ProductionBar@RAINFANTRY:
-		ProductionType: Dog
+		ProductionType: ra1_soviet_attackdog
 		RequiresCondition: classicproductionqueues
 
 ^IsWeaponFactory:
@@ -7801,7 +7802,7 @@ CPQDEBUGDUMMY:
 		Prerequisites: 4weap
 
 ^IsVehicleDropzone:
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	-Production@NORMAL:
 	-Production@CLASSICPRODUCTIONQUEUES:
 	# ProductionAirdropCA@NORMAL:
@@ -8086,8 +8087,8 @@ CPQDEBUGDUMMY:
 	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
 	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
 	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
-	# -Production@Upgrades: / -ProductionBar@Upgrades: — see EYE, TMPL,
-	# td_nod_templeprime, SCCOMMANDCENTER, SCNEXUS, ra2gaspysat.
+	# -Production@Upgrades: / -ProductionBar@Upgrades: — see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
+	# td_nod_templeprime, terran_commandcenter, protoss_nexus, ra2gaspysat.
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -8401,7 +8402,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: owned
 	GrantConditionOnPrerequisite@purifier:
 		Condition: orepurifier
-		Prerequisites: ra2gaorep
+		Prerequisites: ra2_allies_orepurifier
 	CashTricklerMultiplier@purifier:
 		Modifier: 125
 		RequiresCondition: orepurifier
@@ -8763,7 +8764,7 @@ CPQDEBUGDUMMY:
 
 ^Chronoshiftable:
 	RA2Chronoshiftable:
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		WarpInSequence: warpout
 		WarpOutSequence: warpout
 		RequiresCondition: !untargetable
@@ -8772,7 +8773,7 @@ CPQDEBUGDUMMY:
 ^Recallable:
 	RA2Chronoshiftable@Recall:
 		TeleportType: SCRecall
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		WarpInSequence: warpout
 		WarpOutSequence: warpout
 		RequiresCondition: !untargetable
@@ -8805,8 +8806,8 @@ CPQDEBUGDUMMY:
 		Condition: ifv-chem
 	ExternalCondition@hero:
 		Condition: ifv-hero
-	ExternalCondition@sniper:
-		Condition: ifv-sniper
+	ExternalCondition@ra1_allies_alliedsniper:
+		Condition: ifv-ra1_allies_alliedsniper
 	ExternalCondition@spy:
 		Condition: ifv-spy
 	ExternalCondition@chrono:
@@ -8823,13 +8824,13 @@ CPQDEBUGDUMMY:
 		# PassengerConditions:
 			# e1: ifv-mg
 			# rae1: ifv-mg
-			# rare1: ifv-mg
-			# ra2e1: ifv-mg
-			# ra2e2: ifv-mg
-			# gren.asian: ifv-mg
+			# ra1_soviet_rifleinfantry: ifv-mg
+			# ra2_allies_gi: ifv-mg
+			# ra2_soviets_conscript: ifv-mg
+			# asian_alliance_asianmilitia: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
-			# scmarine: ifv-mg
+			# terran_marine: ifv-mg
 			# tse1: ifv-mg
 			# ts_nod_lightinfantry: ifv-mg
 			# tse1para: ifv-mg
@@ -8837,7 +8838,7 @@ CPQDEBUGDUMMY:
 			# tscyborgc: fv-hvmg
 			# forgotten_mutant: ifv-mg
 			# forgotten_mutantsoldier: ifv-mg
-			# sczergling: ifv-mg
+			# zerg_zergling: ifv-mg
 			# gle1: ifv-mg
 			# che1: ifv-mg
 			# usae1: ifv-mg
@@ -8847,23 +8848,23 @@ CPQDEBUGDUMMY:
 			# sglrebel: ifv-mg
 			# sglcamorebel: ifv-mg
 			# sgldemorebel: ifv-mg
-			# japrif.asian: ifv-mg
-			# e2: ifv-cannon
-			# rae2: ifv-cannon
+			# asian_alliance_fanatic: ifv-mg
+			# td_gdi_grenadier: ifv-cannon
+			# ra1_soviet_grenadier: ifv-cannon
 			# ts_gdi_discthrower: ifv-cannon
 			# tse2para: ifv-cannon
 			# forgotten_mutantsergeant: ifv-cannon
 			# che2: ifv-cannon
 			# leange2: ifv-cannon
-			# plast.asian: ifv-cannon
+			# asian_alliance_plasmatrooper: ifv-cannon
 			# e6: ifv-repair
 			# rae6: ifv-repair
-			# medi: ifv-healer
-			# mech: ifv-repair
-			# scscv: ifv-repair
-			# ra2engineer: ifv-repair
-			# ra2engineer.soviet: ifv-repair
-			# ra2engineer.yuri: ifv-repair
+			# ra1_allies_medic: ifv-healer
+			# ra1_allies_mechanic: ifv-repair
+			# terran_scv: ifv-repair
+			# ra2_allies_engineer: ifv-repair
+			# ra2_soviets_engineer: ifv-repair
+			# yuri_engineer: ifv-repair
 			# yrslav: ifv-repair
 			# tsengineer: ifv-repair
 			# ts_nod_engineer: ifv-repair
@@ -8877,9 +8878,9 @@ CPQDEBUGDUMMY:
 			# leanglotus: ifv-repair
 			# e3: ifv-miss
 			# rae3: ifv-miss
-			# rare3: ifv-miss
-			# yrggi: ifv-miss
-			# tkiller.asian: ifv-miss
+			# ra1_soviet_rocketsoldier: ifv-miss
+			# ra2_allies_guardiangi: ifv-miss
+			# asian_alliance_asiantankkiller: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
 			# che3: ifv-miss
@@ -8889,25 +8890,25 @@ CPQDEBUGDUMMY:
 			# sglrpgtrooper: ifv-miss
 			# sglrpgtrooper_toxin: ifv-miss
 			# leange3: ifv-miss
-			# ra2flakt: ifv-flak
-			# shok: ifv-tesla
-			# ra2shk: ifv-tesla
-			# e4: ifv-fire
-			# rae4: ifv-fire
-			# raje4: ifv-fire
-			# yrinit: ifv-fire
-			# flam.asian: ifv-fire
-			# scfirebat: ifv-fire
-			# e5: ifv-chem
-			# ra2deso: ifv-chem
+			# ra2_soviets_flaktrooper: ifv-flak
+			# ra1_soviet_shocktrooper: ifv-tesla
+			# ra2_soviets_teslatrooper: ifv-tesla
+			# td_nod_flamethrower: ifv-fire
+			# ra1_soviet_flamethrower: ifv-fire
+			# japan_japaneseflamethrower: ifv-fire
+			# yuri_initiate: ifv-fire
+			# asian_alliance_asianflametrooper: ifv-fire
+			# terran_firebat: ifv-fire
+			# td_nod_chemicalwarrior: ifv-chem
+			# ra2_soviets_desolator: ifv-chem
 			# forgotten_chemsprayinfantry: ifv-chem
 			# gle1toxin: ifv-thrax
 			# rmbo: ifv-hero
-			# e7: ifv-hero
-			# ra2tany: ifv-hero
+			# ra1_allies_tanya: ifv-hero
+			# ra2_allies_tanyaii: ifv-hero
 			# cityswat: ifv-hero
-			# yrboris: ifv-hero
-			# ra2seal: ifv-hero
+			# ra2_soviets_boris: ifv-hero
+			# ra2_allies_seal: ifv-hero
 			# cabal_cyborgcommando: ifv-hero
 			# tscyc2.cabal: ifv-hero
 			# forgotten_ghoststalker: ifv-hero
@@ -8915,24 +8916,24 @@ CPQDEBUGDUMMY:
 			# usaburton: ifv-hero
 			# susaburton: ifv-hero
 			# leangburton: ifv-hero
-			# scghost: ifv-sniper
-			# ra2snipe: ifv-sniper
-			# yrvirus: ifv-sniper
-			# raspy: ifv-spy
-			# ra2spy: ifv-spy
-			# shinobi.asian: ifv-spy
-			# ts_nod_chameleonspy: ifv-sniper
-			# forgotten_mutantsniper: ifv-sniper
-			# glkell: ifv-sniper
-			# leangkell: ifv-sniper
-			# glsabo: ifv-sniper
-			# usapath: ifv-sniper
-			# susapath: ifv-sniper
-			# leangpath: ifv-sniper
-			# ra2cleg: ifv-chrono
-			# ra2ivan: ifv-demo
+			# terran_ghost: ifv-ra1_allies_alliedsniper
+			# ra2_allies_sniper: ifv-ra1_allies_alliedsniper
+			# yuri_virus: ifv-ra1_allies_alliedsniper
+			# ra1_allies_raspy: ifv-spy
+			# ra2_allies_ra2spy: ifv-spy
+			# asian_alliance_shinobi: ifv-spy
+			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
+			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
+			# glkell: ifv-ra1_allies_alliedsniper
+			# leangkell: ifv-ra1_allies_alliedsniper
+			# glsabo: ifv-ra1_allies_alliedsniper
+			# usapath: ifv-ra1_allies_alliedsniper
+			# susapath: ifv-ra1_allies_alliedsniper
+			# leangpath: ifv-ra1_allies_alliedsniper
+			# ra2_allies_chronolegionnaire: ifv-chrono
+			# ra2_soviets_crazyivan: ifv-demo
 			# ra2terror: ifv-demo
-			# scinfestedterran: ifv-demo
+			# zerg_infestedterranbomber: ifv-demo
 			# glterror: ifv-demo
 			# swe1: ifv-litlaser
 			# swe1troop: ifv-litlaser
@@ -8954,12 +8955,12 @@ CPQDEBUGDUMMY:
 			# swgreedo: ifv-hero
 			# swrmbo.hutt: ifv-medlaser
 			# light_inf: ifv-mg
-			# chem_troop.ordos: ifv-chem
+			# ordos_chemicaltrooper: ifv-chem
 			# engineer: ifv-repair
 			# trooper: ifv-miss
 			# fremen: ifv-fremen
-			# face_dancer.ordos: ifv-cannon
-			# contaminator.ordos: ifv-chem
+			# ordos_facedancer: ifv-cannon
+			# ordos_contaminator: ifv-chem
 			# grenadier: ifv-cannon
 			# sardaukar: ifv-mg
 			# mpsardaukar: ifv-mg
@@ -8967,8 +8968,8 @@ CPQDEBUGDUMMY:
 			# nsfremen: ifv-fremen
 			# plasma_infantry: ifv-plasma
 			# fedaykin: ifv-sonic
-			# d2k_sniper: ifv-sniper
-			# d2k_marksman: ifv-sniper
+			# d2k_sniper: ifv-ra1_allies_alliedsniper
+			# d2k_marksman: ifv-ra1_allies_alliedsniper
 			# flamethrower: ifv-fire
 			# d2k_mechanic: ifv-repair
 			# drguardian: ifv-litlaser
@@ -8978,7 +8979,7 @@ CPQDEBUGDUMMY:
 			# drraid: ifv-litlaser
 			# drscout: ifv-fremen
 			# drmercenary: ifv-cannon
-			# drsnipe: ifv-sniper
+			# drsnipe: ifv-ra1_allies_alliedsniper
 			# drmartyr: ifv-demo
 			# drsabot: ifv-demo
 			# drmech: ifv-repair
@@ -9046,7 +9047,7 @@ CPQDEBUGDUMMY:
 			# wh40kmarineflamer: ifv-fire
 			# wh40kscoutflamer: ifv-fire
 			# wh40kmarinerocket: ifv-miss
-			# wh40kscoutsniper: ifv-sniper
+			# wh40kscoutsniper: ifv-ra1_allies_alliedsniper
 			# wh40kforcecmd: ifv-hero
 			# wh40kterminator1: ifv-hvmg
 			# wh40kterminator2: ifv-hvmg
@@ -9069,11 +9070,11 @@ CPQDEBUGDUMMY:
 			# wh40kchaoslord: ifv-hero
 			# wh40kberserk: ifv-hvmg
 			# wh40kchaosmarinechamp: ifv-hero
-			# raje1: ifv-mg
-			# raje3: ifv-miss
-			# ramaid: ifv-archermaiden
-			# archer.asian: ifv-archermaiden
-			# sniper: ifv-sniper
+			# japan_imperialscoutsman: ifv-mg
+			# japan_tankbuster: ifv-miss
+			# japan_archermaiden: ifv-archermaiden
+			# asian_alliance_veteranarcher: ifv-archermaiden
+			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer
 			# wc_o_grunt: ifv-archer
@@ -9111,9 +9112,9 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: LightSniper
-		RequiresCondition: ifv-sniper
+		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Armament@hero:
 		Weapon: BorisAKM
 		RequiresCondition: ifv-hero
@@ -9234,14 +9235,14 @@ CPQDEBUGDUMMY:
 		DisguisedCondition: disguise
 		DisguisedAsConditions:
 			rmbo: hero
-			gdihavoc: hero
-			nodlasercommando: hero
-			e7: hero
-			volkov: hero
-			hakurei: hero
-			ra2tany: hero
-			yrboris: hero
-			yryurix: hero
+			td_gdi_havoc: hero
+			td_nod_lasercommando: hero
+			ra1_allies_tanya: hero
+			ra1_soviet_volkov: hero
+			japan_exorcist: hero
+			ra2_allies_tanyaii: hero
+			ra2_soviets_boris: hero
+			yuri_yurix: hero
 	WithDisguisingInfantryBody:
 	WithDisguiseTargetPalette:
 	WithDecoration@disguise:
@@ -9366,7 +9367,7 @@ CPQDEBUGDUMMY:
 	-ChangesHealth@DRIVER_DEAD:
 	-Capturable@DRIVER_DEAD:
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	Voiced:
 		VoiceSet: RA2CarVoice
 	MapEditorData:
@@ -9417,7 +9418,7 @@ CPQDEBUGDUMMY:
 	KillsSelf:
 		RequiresCondition: !disabled && triggered
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:
@@ -9484,7 +9485,7 @@ CPQDEBUGDUMMY:
 	Voiced:
 		VoiceSet: RA2CarVoice
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:

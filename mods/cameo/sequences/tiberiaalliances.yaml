@@ -87,8 +87,8 @@ tae3.nod:
 	icon: tarocketmilitanticon.shp
 		AddExtension: False
 tae3mutant:
-	Inherits: ra2deso
-	Defaults: ra2deso
+	Inherits: ra2_soviets_desolator
+	Defaults: ra2_soviets_desolator
 	icon: tamutante3icon.shp
 		AddExtension: False
 	die4: frag3
@@ -191,9 +191,9 @@ taconfessor:
 		AddExtension: False
 
 tanodcommando:
-	Inherits: ra2tany
-	Defaults: ra2tany
-	icon: tanodcommandoicon.shp
+	Inherits: ra2_allies_tanyaii
+	Defaults: ra2_allies_tanyaii
+	icon: td_nod_lasercommando_icon.shp
 		AddExtension: False
 
 taforgotten:
@@ -208,8 +208,8 @@ tatrooper:
 		AddExtension: False
 
 tasnipe:
-	Inherits: ra2snipe
-	Defaults: ra2snipe
+	Inherits: ra2_allies_sniper
+	Defaults: ra2_allies_sniper
 	icon: tasnipericon
 tamutsnipe:
 	Inherits: forgotten_mutantsniper

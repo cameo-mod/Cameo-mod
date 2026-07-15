@@ -361,7 +361,7 @@ SteelIonCannonDamage:
 	AirThreshold: 8c0
 	Warhead@3Smu_area: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Building, Wall
+		InvalidTargets: Vehicle, Building, ixian_concretewall
 		Size: 3
 		Delay: 3
 
@@ -526,7 +526,7 @@ SteelSupportSpawner1:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -538,7 +538,7 @@ SteelSupportSpawner2:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -550,7 +550,7 @@ SteelSupportSpawner3:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -562,7 +562,7 @@ SteelSupportSpawner4:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel, cobra.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -849,7 +849,7 @@ NaxZombieSupportWeaponTanks:
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor2: SpawnActorOrWeapon
-		Actors: zombietank.nax
+		Actors: naxis_oldtank
 		Delay: 10
 		Weapon: AsianTankMine
 		Range: 12

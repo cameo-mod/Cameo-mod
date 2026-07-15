@@ -217,17 +217,17 @@ Casino_Regular_Crate_1:
 	GiveUnitCrateAction@E1:
 		Units: e1
 		SelectionShares: 5
-	GiveUnitCrateAction@E2:
-		Units: e2
+	GiveUnitCrateAction@td_gdi_grenadier:
+		Units: td_gdi_grenadier
 		SelectionShares: 5
 	GiveUnitCrateAction@e3:
 		Units: e3
 		SelectionShares: 5
-	GiveUnitCrateAction@e4:
-		Units: e4
+	GiveUnitCrateAction@td_nod_flamethrower:
+		Units: td_nod_flamethrower
 		SelectionShares: 5
-	GiveUnitCrateAction@e5:
-		Units: e5
+	GiveUnitCrateAction@td_nod_chemicalwarrior:
+		Units: td_nod_chemicalwarrior
 		SelectionShares: 5
 	GiveUnitCrateAction@e6:
 		Units: e6
@@ -241,8 +241,8 @@ Casino_Regular_Crate_1:
 	GiveUnitCrateAction@shotgunner:
 		Units: shotgunner
 		SelectionShares: 5
-	GiveUnitCrateAction@shock_infantry.ixian:
-		Units: shock_infantry.ixian
+	GiveUnitCrateAction@ixian_shockinfantry:
+		Units: ixian_shockinfantry
 		SelectionShares: 4
 	GiveUnitCrateAction@trooper:
 		Units: trooper
@@ -298,35 +298,35 @@ Casino_Regular_Crate_1:
 	GiveUnitCrateAction@gle3:
 		Units: gle3
 		SelectionShares: 5
-	GiveUnitCrateAction@dog:
-		Units: dog
+	GiveUnitCrateAction@ra1_soviet_attackdog:
+		Units: ra1_soviet_attackdog
 		SelectionShares: 5
 	GiveUnitCrateAction@rae1:
 		Units: rae1
 		SelectionShares: 5
-	GiveUnitCrateAction@rae2:
-		Units: rae2
+	GiveUnitCrateAction@ra1_soviet_grenadier:
+		Units: ra1_soviet_grenadier
 		SelectionShares: 5
 	GiveUnitCrateAction@rae3:
 		Units: rae3
 		SelectionShares: 5
-	GiveUnitCrateAction@rae4:
-		Units: rae4
+	GiveUnitCrateAction@ra1_soviet_flamethrower:
+		Units: ra1_soviet_flamethrower
 		SelectionShares: 5
-	GiveUnitCrateAction@rare1:
-		Units: rare1
+	GiveUnitCrateAction@ra1_soviet_rifleinfantry:
+		Units: ra1_soviet_rifleinfantry
 		SelectionShares: 5
-	GiveUnitCrateAction@rare3:
-		Units: rare3
+	GiveUnitCrateAction@ra1_soviet_rocketsoldier:
+		Units: ra1_soviet_rocketsoldier
 		SelectionShares: 5
-	GiveUnitCrateAction@sczergling:
-		Units: sczergling
+	GiveUnitCrateAction@zerg_zergling:
+		Units: zerg_zergling
 		SelectionShares: 6
-	GiveUnitCrateAction@scmarine:
-		Units: scmarine
+	GiveUnitCrateAction@terran_marine:
+		Units: terran_marine
 		SelectionShares: 3
-	GiveUnitCrateAction@sczealot:
-		Units: sczealot
+	GiveUnitCrateAction@protoss_zealot:
+		Units: protoss_zealot
 		SelectionShares: 1
 	GiveUnitCrateAction@wc_h_footman:
 		Units: wc_h_footman
@@ -409,26 +409,26 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@tran:
 		Units: tran
 		SelectionShares: 5
-	GiveUnitCrateAction@heli:
-		Units: heli
+	GiveUnitCrateAction@td_nod_apacheattackhelicopter:
+		Units: td_nod_apacheattackhelicopter
 		SelectionShares: 5
-	GiveUnitCrateAction@orca:
-		Units: orca
+	GiveUnitCrateAction@td_gdi_orca:
+		Units: td_gdi_orca
 		SelectionShares: 5
 	GiveUnitCrateAction@a10:
 		Units: a10
 		SelectionShares: 5
-	GiveUnitCrateAction@mig:
-		Units: mig
+	GiveUnitCrateAction@ra1_soviet_migattackbomber:
+		Units: ra1_soviet_migattackbomber
 		SelectionShares: 5
-	GiveUnitCrateAction@yak:
-		Units: yak
+	GiveUnitCrateAction@ra1_soviet_yakscoutplane:
+		Units: ra1_soviet_yakscoutplane
 		SelectionShares: 5
-	GiveUnitCrateAction@mh60:
-		Units: mh60
+	GiveUnitCrateAction@ra1_allies_blackhawk:
+		Units: ra1_allies_blackhawk
 		SelectionShares: 5
-	GiveUnitCrateAction@contaminator.ordos:
-		Units: contaminator.ordos
+	GiveUnitCrateAction@ordos_contaminator:
+		Units: ordos_contaminator
 		SelectionShares: 7
 	GiveUnitCrateAction@d2k_sardaukar_elite:
 		Units: d2k_sardaukar_elite
@@ -436,8 +436,8 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@saboteur:
 		Units: saboteur
 		SelectionShares: 4
-	GiveUnitCrateAction@leech.ordos:
-		Units: leech.ordos
+	GiveUnitCrateAction@ordos_leech:
+		Units: ordos_leech
 		SelectionShares: 4
 	GiveUnitCrateAction@d2k_scourge:
 		Units: d2k_scourge
@@ -454,8 +454,8 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@phoenix:
 		Units: phoenix
 		SelectionShares: 4
-	GiveUnitCrateAction@harvester.ixian:
-		Units: harvester.ixian
+	GiveUnitCrateAction@ixian_spiceharvester:
+		Units: ixian_spiceharvester
 		SelectionShares: 5
 	GiveUnitCrateAction@quad:
 		Units: quad
@@ -508,41 +508,41 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@glbiker:
 		Units: glbiker
 		SelectionShares: 5
-	GiveUnitCrateAction@2tnk:
-		Units: 2tnk
+	GiveUnitCrateAction@ra1_allies_alliedmediumtank:
+		Units: ra1_allies_alliedmediumtank
 		SelectionShares: 5
-	GiveUnitCrateAction@3tnk:
-		Units: 3tnk
+	GiveUnitCrateAction@ra1_soviet_heavytank:
+		Units: ra1_soviet_heavytank
 		SelectionShares: 5
-	GiveUnitCrateAction@4tnk:
-		Units: 4tnk
+	GiveUnitCrateAction@ra1_soviet_mammothtank:
+		Units: ra1_soviet_mammothtank
 		SelectionShares: 4
-	GiveUnitCrateAction@raarty:
-		Units: raarty
+	GiveUnitCrateAction@ra1_allies_alliedartillery:
+		Units: ra1_allies_alliedartillery
 		SelectionShares: 5
 	GiveUnitCrateAction@raharv:
 		Units: raharv
 		SelectionShares: 8
-	GiveUnitCrateAction@ttnk:
-		Units: ttnk
+	GiveUnitCrateAction@ra1_soviet_teslatank:
+		Units: ra1_soviet_teslatank
 		SelectionShares: 4
-	GiveUnitCrateAction@ftrk:
-		Units: ftrk
+	GiveUnitCrateAction@ra1_soviet_flaktruck:
+		Units: ra1_soviet_flaktruck
 		SelectionShares: 5
-	GiveUnitCrateAction@ra2tany:
-		Units: ra2tany
+	GiveUnitCrateAction@ra2_allies_tanyaii:
+		Units: ra2_allies_tanyaii
 		SelectionShares: 5
-	GiveUnitCrateAction@ra2seal:
-		Units: ra2seal
+	GiveUnitCrateAction@ra2_allies_seal:
+		Units: ra2_allies_seal
 		SelectionShares: 5
 	GiveUnitCrateAction@ra2tripod:
 		Units: ra2tripod
 		SelectionShares: 5
-	GiveUnitCrateAction@ra2tnkd:
-		Units: ra2tnkd
+	GiveUnitCrateAction@ra2_allies_tankdestroyer:
+		Units: ra2_allies_tankdestroyer
 		SelectionShares: 5
-	GiveUnitCrateAction@yrbfrt:
-		Units: yrbfrt
+	GiveUnitCrateAction@ra2_allies_battlefortress:
+		Units: ra2_allies_battlefortress
 		SelectionShares: 5
 	GiveUnitCrateAction@sow_mt_cannon:
 		Units: sow_mt_cannon
@@ -556,14 +556,14 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@sow_ht_cannon:
 		Units: sow_ht_cannon
 		SelectionShares: 3
-	GiveUnitCrateAction@scarchon:
-		Units: scarchon
+	GiveUnitCrateAction@protoss_archon:
+		Units: protoss_archon
 		SelectionShares: 5
-	GiveUnitCrateAction@scultralisk:
-		Units: scultralisk
+	GiveUnitCrateAction@zerg_ultralisk:
+		Units: zerg_ultralisk
 		SelectionShares: 5
-	GiveUnitCrateAction@sclurker:
-		Units: sclurker
+	GiveUnitCrateAction@zerg_lurker:
+		Units: zerg_lurker
 		SelectionShares: 5
 	GiveUnitCrateAction@cabal_cyborgreaper:
 		Units: cabal_cyborgreaper
@@ -574,20 +574,20 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@harv:
 		Units: harv
 		SelectionShares: 8
-	GiveUnitCrateAction@apc:
-		Units: apc
+	GiveUnitCrateAction@td_gdi_apc:
+		Units: td_gdi_apc
 		SelectionShares: 5
-	GiveUnitCrateAction@arty:
-		Units: arty
+	GiveUnitCrateAction@td_nod_artillery:
+		Units: td_nod_artillery
 		SelectionShares: 5
-	GiveUnitCrateAction@ftnk:
-		Units: ftnk
+	GiveUnitCrateAction@td_nod_flametank:
+		Units: td_nod_flametank
 		SelectionShares: 5
-	GiveUnitCrateAction@ltnk:
-		Units: ltnk
+	GiveUnitCrateAction@td_nod_lighttank:
+		Units: td_nod_lighttank
 		SelectionShares: 5
-	GiveUnitCrateAction@mtnk:
-		Units: mtnk
+	GiveUnitCrateAction@td_gdi_battletank:
+		Units: td_gdi_battletank
 		SelectionShares: 5
 	GiveUnitCrateAction@msam:
 		Units: msam
@@ -634,11 +634,11 @@ Casino_Regular_Crate_2:
 	GiveUnitCrateAction@wc_n_slime:
 		Units: wc_n_slime
 		SelectionShares: 5
-	GiveUnitCrateAction@yrdisk:
-		Units: yrdisk
+	GiveUnitCrateAction@yuri_floatingdisk:
+		Units: yuri_floatingdisk
 		SelectionShares: 1
-	GiveUnitCrateAction@ra2apoc:
-		Units: ra2apoc
+	GiveUnitCrateAction@ra2_soviets_apocalypsetank:
+		Units: ra2_soviets_apocalypsetank
 		SelectionShares: 1
 	RenderSprites:
 		Image: Casino_Regular_Crate_2
@@ -676,17 +676,17 @@ Casino_Regular_Crate_3:
 	GiveUnitCrateAction@d2k_lion_king:
 		Units: d2k_lion_king
 		SelectionShares: 4
-	GiveUnitCrateAction@farasha.ixian:
-		Units: farasha.ixian
+	GiveUnitCrateAction@ixian_farasha:
+		Units: ixian_farasha
 		SelectionShares: 5
 	GiveUnitCrateAction@d2k_mcv:
 		Units: d2k_mcv
 		SelectionShares: 1
-	GiveUnitCrateAction@mcv.nod:
-		Units: mcv.nod
+	GiveUnitCrateAction@td_nod_mobileconstructionvehicle:
+		Units: td_nod_mobileconstructionvehicle
 		SelectionShares: 1
-	GiveUnitCrateAction@mcv.gdi:
-		Units: mcv.gdi
+	GiveUnitCrateAction@td_gdi_mobileconstructionvehicle:
+		Units: td_gdi_mobileconstructionvehicle
 		SelectionShares: 1
 	GiveUnitCrateAction@mcv.orange:
 		Units: mcv.orange
@@ -859,23 +859,23 @@ Casino_Regular_Crate_3:
 	GiveUnitCrateAction@citymcv:
 		Units: citymcv
 		SelectionShares: 1
-	GiveUnitCrateAction@sczmcv:
-		Units: sczmcv
+	GiveUnitCrateAction@zerg_hatcherydrone:
+		Units: zerg_hatcherydrone
 		SelectionShares: 1
-	GiveUnitCrateAction@sctmcv:
-		Units: sctmcv
+	GiveUnitCrateAction@terran_mobilecommandcenter:
+		Units: terran_mobilecommandcenter
 		SelectionShares: 1
-	GiveUnitCrateAction@scpmcv:
-		Units: scpmcv
+	GiveUnitCrateAction@protoss_mobilenexus:
+		Units: protoss_mobilenexus
 		SelectionShares: 1
-	GiveUnitCrateAction@sckerriganzerg:
-		Units: sckerriganzerg
+	GiveUnitCrateAction@zerg_kerrigan:
+		Units: zerg_kerrigan
 		SelectionShares: 4
 	GiveUnitCrateAction@wh40kmcv:
 		Units: wh40kmcv
 		SelectionShares: 1
-	GiveUnitCrateAction@ra2zep:
-		Units: ra2zep
+	GiveUnitCrateAction@ra2_soviets_kirovairship:
+		Units: ra2_soviets_kirovairship
 		SelectionShares: 1
 	RenderSprites:
 		Image: Casino_Regular_Crate_3

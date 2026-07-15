@@ -63,7 +63,7 @@ actor_cabal_cyborgcommandov2 =
 
 actor_cabal_eliminator800 =
    .name = Eliminator 800
-   .description = Heavy cybernetic infantry armed with a gatling gun and anti-air missiles.
+   .description = Heavy cybernetic infantry armed with a gatling td_nod_gunturret and anti-air missiles.
       Can detect cloaked and hijacker units.
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
@@ -110,10 +110,8 @@ actor_cabal_mantis =
 actor_cabal_manticore =
    .name = Manticore
    .description = Heavy line-breaker walker armed with laser and missile weapons.
-      Can immobilize infantry with trap nets.
       Backup Systems leaves a repairable husk when destroyed.
       Strong vs Vehicles, Aircraft
-      Can immobilize Infantry
 
 actor_cabal_artilleryspider =
    .name = Artillery Spider
@@ -133,7 +131,7 @@ actor_cabal_tarantula =
       Weak vs Infantry, Aircraft
 
 actor_cabal_scarabapc =
-   .name = Scarab APC
+   .name = Scarab td_gdi_apc
    .description = Hover troop transport that comes pre-loaded with infantry.
       Can move over water.
       Unarmed.
@@ -255,7 +253,7 @@ actor_cabal_upgrade_backupsystems =
       The husk reactivates if it is not destroyed.
 
 actor_cabal_upgrade_handof =
-   .name = Hand of CABAL
+   .name = td_nod_handofnod of CABAL
    .description = Tech Upgrade (Only affects units of own faction)
       Periodically spawns free Hacker Cyborgs from the Tech Center.
       Increases Hacker Cyborg speed by 25%.
@@ -364,14 +362,22 @@ actor_cabal_promotion_mothership =
    .description = Promotion
       Unlocks the promoted unit for production.
 
-actor-cabal_core =
+actor_cabal_core =
    .description = CABAL Core.
       Unlocks Tier 4 units and the CABAL superweapon.
       Generates income and counts as a captured tech structure.
 
-actor-cabal_techcenter =
+actor_cabal_techcenter =
    .description = CABAL Tech Center.
       Required for advanced units and upgrades.
+
+actor_cabal_refinery =
+   .description = Processes raw Tiberium into useable resources.
+
+actor_cabal_mobileconstructionvehicle =
+   .description = Deploys into a Construction Yard.
+      Strong vs Nothing
+      Weak vs Everything
 
 actor_cabal_overkill_gunship =
    .name = Overkill Gunship

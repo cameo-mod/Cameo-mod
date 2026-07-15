@@ -10,7 +10,7 @@
 	# 	InternalName: harkonnen
 	# 	Game: Dune Universe
 	# 	Side: Dune
-	# 	Description: House Harkonnen\nThe evil Harkonnen of the planet Giedi Prime\nwill stop at nothing to gain control of the spice.\nThey rely on brute force and atomic weapons to achieve their goals:\nwealth, and the destruction of House Atreides.\nTheir Specialities are Devastators and Annihilators.\nBonus: Explosions are more powerful\nSupport Power: Death Hand Missile
+	# 	Description: House Harkonnen\nThe evil Harkonnen of the planet Giedi Prime\nwill stop at nothing to gain control of the spice.\nThey rely on brute force and atomic weapons to achieve their goals:\nwealth, and the destruction of House Atreides.\nTheir Specialities are Devastators and Annihilators.\nBonus: Explosions are more powerful\nSupport Power: Death td_nod_handofnod Missile
 # 	FactionCA@Ordos:
 # 		Name: Ordos DU
 # 		InternalName: ordos
@@ -44,13 +44,13 @@
 # 	StartingUnits@ixian:
 # 		Class: none
 # 		ClassName: MCV Only
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		Factions: atreides, harkonnen, corrino, ixian
 # 	StartingUnits@ixian_L:
 # 		Class: light
 # 		ClassName: Light Support
 # 		Factions: atreides, harkonnen, corrino, ixian
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, combat_tank.ixian
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
@@ -58,20 +58,20 @@
 # 		Class: heavy
 # 		ClassName: Heavy Support
 # 		Factions: atreides, harkonnen, corrino, ixian
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
 # 	StartingUnits@ordos:
 # 		Class: none
 # 		ClassName: MCV Only
-# 		BaseActor: d2k_mcv.ordos
+# 		BaseActor: ordos_mobileconstructionvehicle
 # 		Factions: ordos
 # 	StartingUnits@ordos_L:
 # 		Class: light
 # 		ClassName: Light Support
 # 		Factions: ordos
-# 		BaseActor: d2k_mcv.ordos
+# 		BaseActor: ordos_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, combat_tank.ixian
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
@@ -79,7 +79,7 @@
 # 		Class: heavy
 # 		ClassName: Heavy Support
 # 		Factions: ordos
-# 		BaseActor: d2k_mcv.ordos
+# 		BaseActor: ordos_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
@@ -142,17 +142,17 @@
 # 		DamageRegenDelay: 125
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
-# 		RequiresCondition: !disabled && (up_personal_shield.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (ixian_upgrade_personalshield || shieldgen || shielded)
 # 		SelectionBarColor: 8888FFFF
 # 	GrantCondition@shieldpermanent:
 # 		Condition: shieldpermanent
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	ChangesShield@personal_shield:
 # 		Step: 40
 # 		Delay: 1
 # 		StartIfBelow: 100
 # 		DamageCooldown: 125
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	Armor:
 # 		RequiresCondition: !shielded
 # 	Armor@shielded:
@@ -161,107 +161,107 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShielded
 # 		RequiresCondition: shielded
-# 	DamageMultiplier@up_advanced_ixian_technology.ixian:
+# 	DamageMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 50
-# 		RequiresCondition: up_personal_shield.ixian && up_advanced_ixian_technology.ixian && shielded
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
-# 	DamageMultiplier@up_personal_shield.ixian:
+# 		RequiresCondition: ixian_upgrade_personalshield && ixian_upgrade_advancedixiantechnology && shielded
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
+# 	DamageMultiplier@ixian_upgrade_personalshield:
 # 		Modifier: 80
-# 		RequiresCondition: up_personal_shield.ixian && !shielded
-# 	SpeedMultiplier@up_personal_shield.ixian:
+# 		RequiresCondition: ixian_upgrade_personalshield && !shielded
+# 	SpeedMultiplier@ixian_upgrade_personalshield:
 # 		Modifier: 125
-# 		RequiresCondition: up_personal_shield.ixian && shielded
-# 	GrantConditionOnPrerequisite@up_personal_shield.ixian:
-# 		Condition: up_personal_shield.ixian
-# 		Prerequisites: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield && shielded
+# 	GrantConditionOnPrerequisite@ixian_upgrade_personalshield:
+# 		Condition: ixian_upgrade_personalshield
+# 		Prerequisites: ixian_upgrade_personalshield
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian
+# 		Upgrades: ixian_upgrade_personalshield
 
 # ^D2K_HeavyMissilesUpgrade:
-# 	RangeMultiplier@up_heavy_missile.ixian:
+# 	RangeMultiplier@ixian_upgrade_heavymissiles:
 # 		Modifier: 120
-# 		RequiresCondition: up_heavy_missile.ixian
-# 	FirepowerMultiplier@up_heavy_missile.ixian:
+# 		RequiresCondition: ixian_upgrade_heavymissiles
+# 	FirepowerMultiplier@ixian_upgrade_heavymissiles:
 # 		Modifier: 120
-# 		RequiresCondition: up_heavy_missile.ixian
-# 	GrantConditionOnPrerequisite@up_heavy_missile.ixian:
-# 		Condition: up_heavy_missile.ixian
-# 		Prerequisites: up_heavy_missile.ixian
+# 		RequiresCondition: ixian_upgrade_heavymissiles
+# 	GrantConditionOnPrerequisite@ixian_upgrade_heavymissiles:
+# 		Condition: ixian_upgrade_heavymissiles
+# 		Prerequisites: ixian_upgrade_heavymissiles
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles
 
 # ^D2K_ReinforcedBarrel:
-# 	RangeMultiplier@up_siege_range.ixian:
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 110
-# 		RequiresCondition: up_siege_range.ixian
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 125
-# 		RequiresCondition: up_siege_range.ixian
-# 	GrantConditionOnPrerequisite@up_siege_range.ixian:
-# 		Condition: up_siege_range.ixian
-# 		Prerequisites: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+# 		Condition: ixian_upgrade_reinforcedbarrel
+# 		Prerequisites: ixian_upgrade_reinforcedbarrel
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 
 # ^D2K_NeedleGuns:
-# 	RangeMultiplier@up_needleguns.ixian:
+# 	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 110
-# 		RequiresCondition: up_needleguns.ixian
-# 	FirepowerMultiplier@up_needleguns.ixian:
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
+# 	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 125
-# 		RequiresCondition: up_needleguns.ixian
-# 	GrantConditionOnPrerequisite@up_needleguns.ixian:
-# 		Condition: up_needleguns.ixian
-# 		Prerequisites: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
+# 	GrantConditionOnPrerequisite@ixian_upgrade_tungstenneedleguns:
+# 		Condition: ixian_upgrade_tungstenneedleguns
+# 		Prerequisites: ixian_upgrade_tungstenneedleguns
 # 	ActorStatValues:
-# 		Upgrades: up_needleguns.ixian
+# 		Upgrades: ixian_upgrade_tungstenneedleguns
 
 # ^D2K_GeneralPurposeArmor:
-# 	DamageMultiplier@up_general_purpose_armor.ixian:
+# 	DamageMultiplier@ixian_upgrade_generalpurposearmor:
 # 		Modifier: 80
-# 		RequiresCondition: up_general_purpose_armor.ixian
-# 	GrantConditionOnPrerequisite@up_general_purpose_armor.ixian:
-# 		Condition: up_general_purpose_armor.ixian
-# 		Prerequisites: up_general_purpose_armor.ixian
+# 		RequiresCondition: ixian_upgrade_generalpurposearmor
+# 	GrantConditionOnPrerequisite@ixian_upgrade_generalpurposearmor:
+# 		Condition: ixian_upgrade_generalpurposearmor
+# 		Prerequisites: ixian_upgrade_generalpurposearmor
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor
 
 # ^D2K_AdvancedIxianTechnology:
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
 # 	GrantCondition@shieldpermanent:
 # 		Condition: shieldpermanent
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	Shielded:
 # 		DamageRegenDelay: 125
 # 		RegenAmount: 10
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && (up_advanced_ixian_technology.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
 # 	ChangesShield@shielddischarge:
 # 		Delay: 10
 # 	ActorStatValues:
-# 		Upgrades: up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_advancedixiantechnology
 # 	Armor@shielded:
 # 		Type: Shield
 # 		RequiresCondition: shielded
 
 # ^D2K_AdvancedIxianTechnologyTeamUpgrade:
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
-# 	RangeMultiplier@up_advanced_ixian_technology.ixian:
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
+# 	RangeMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 110
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 125
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	ActorStatValues:
-# 		Upgrades: up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_advancedixiantechnology
 
 # ^BulletImmune:
 	#Targetable@BulletImmune:
@@ -322,11 +322,11 @@
 # 	Crushable:
 # 		CrushSound: CRUSH1.WAV
 # 		WarnProbability: 75
-# 		RequiresCondition: !up_personal_shield.ixian
+# 		RequiresCondition: !ixian_upgrade_personalshield
 # 	Crushable@shield:
 # 		CrushSound: CRUSH1.WAV
 # 		WarnProbability: 15
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	Guard:
 # 		Voice: Guard
 # 	Guardable:
@@ -345,7 +345,7 @@
 # 		Duration: 100
 # 	AttractsWorms@personalshield:
 # 		Intensity: 1000
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	HitShape:
 # 		Type: Circle
 # 			Radius: 96
@@ -509,12 +509,12 @@
 # 		VoiceSet: D2kVehicleVoice
 # 	AutoCarryable:
 # 		CarriedCondition: notmobile
-# 		ReservedCondition: carryall-reserved
+# 		ReservedCondition: ixian_autonomouscarryall-reserved
 # 		LockedCondition: notmobile
-# 	WithDecoration@CARRYALL:
+# 	WithDecoration@ixian_autonomouscarryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
-# 		RequiresCondition: carryall-reserved
+# 		RequiresCondition: ixian_autonomouscarryall-reserved
 # 	RevealOnFire:
 # 	RevealOnDeath:
 # 		Duration: 125
@@ -875,21 +875,21 @@
 # 	FreeActor@CPQDEBUGDUMMY:
 # 		-RequiresCondition:
 
-# construction_yard.ixian:
+# ixian_constructionyard:
 # 	Inherits: ^construction_yard
 # 	Tooltip:
 # 		Name: Ixian Construction Yard
 # 	Transforms:
-# 		IntoActor: d2k_mcv.ixian
+# 		IntoActor: ixian_mobileconstructionvehicle
 # 	RenderSprites:
 # 		Image: conyard.atreides
 
-# construction_yard.ordos:
+# ordos_constructionyard:
 # 	Inherits: ^construction_yard
 # 	Tooltip:
 # 		Name: Ordos Construction Yard
 # 	Transforms:
-# 		IntoActor: d2k_mcv.ordos
+# 		IntoActor: ordos_mobileconstructionvehicle
 # 	RenderSprites:
 # 		Image: conyard.ordos
 
@@ -957,17 +957,17 @@
 # 	RenderSprites:
 # 		Image: power.atreides
 
-# wind_trap.ixian:
+# ixian_windtrap:
 # 	Inherits: ^wind_trap
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 	RenderSprites:
 # 		Image: power.atreides
 
-# wind_trap.ordos:
+# ordos_windtrap:
 # 	Inherits: ^wind_trap
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos
+# 		Prerequisites: ~ordos_constructionyard
 # 	RenderSprites:
 # 		Image: power.ordos
 
@@ -982,7 +982,7 @@
 # 		BuildDurationModifier: 100
 # 		Description: Provides power for other structures.\nTakes a lot less space than regular Wind Trap
 # 		IconPalette: player
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 	Valued:
 # 		Cost: 150
 # 	Tooltip:
@@ -1030,15 +1030,15 @@
 # 	ProvidesPrerequisite@windtrap:
 # 		Prerequisite: wind_trap
 
-# d2k_barracks.ixian:
+# ixian_barracks:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
-# 	Inherits@barr: ^IsBarrack
+# 	Inherits@ra1_soviet_barracks: ^IsBarrack
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^2x2Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Barracks
@@ -1076,15 +1076,15 @@
 # 		Pieces: 1, 2
 # 		Range: 1c512, 2c768
 
-# d2k_barracks.ordos:
+# ordos_barracks:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
-# 	Inherits@barr: ^IsBarrack
+# 	Inherits@ra1_soviet_barracks: ^IsBarrack
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^2x2Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ordos Barracks
@@ -1188,13 +1188,13 @@
 # 	-WithDeathAnimation:
 # 	-WithMakeAnimation:
 # 	SpawnActorOnDeath@death1:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death2:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death3:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death4:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	ThrowsShrapnel:
 # 		Weapons: Debris2, Debris3
 # 		Pieces: 1, 2
@@ -1247,13 +1247,13 @@
 # 		SupportPowerPaletteOrder: 10
 # 		EffectSequence: idle
 # 	SpawnActorOnDeath@death1:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death2:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death3:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death4:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	ProvidesPrerequisite@swlimit:
 # 		Prerequisite: swpalace
 # 	ProvidesPrerequisite@buildingname:
@@ -1261,7 +1261,7 @@
 # 	-WithDeathAnimation:
 
 # Generic spice refinery template. Common traits here; each faction actor below sets
-# its build prerequisite, its harvester.ixian/delivery actors, and its sprite image.
+# its build prerequisite, its ixian_spiceharvester/delivery actors, and its sprite image.
 # ^refinery:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1322,63 +1322,63 @@
 # 	Buildable:
 # 		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
 # 	FreeActor:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		SpawnOffset: 0,2
 # 		Facing: 160
 # 	FreeActorWithDelivery@1:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		DeliveryOffset: 2,2
 # 		DeliveringActor: carryall.reinforce
 # 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160
 # 	RenderSprites:
 # 		Image: refinery.atreides
 
-# refinery.ixian:
+# ixian_refineryixian:
 # 	Inherits: ^refinery
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 # 	FreeActor:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		SpawnOffset: 0,2
 # 		Facing: 160
 # 	FreeActorWithDelivery@1:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		DeliveryOffset: 2,2
 # 		DeliveringActor: carryall.reinforce
 # 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160
 # 	RenderSprites:
 # 		Image: refinery.atreides
 
-# refinery.ordos:
+# ordos_refineryordos:
 # 	Inherits: ^refinery
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 # 	FreeActor:
-# 		Actor: harv.ordos
+# 		Actor: ordos_spiceharvester
 # 		SpawnOffset: 0,2
 # 		Facing: 160
 # 	FreeActorWithDelivery@1:
-# 		Actor: harv.ordos
+# 		Actor: ordos_spiceharvester
 # 		DeliveryOffset: 2,2
 # 		DeliveringActor: carryall_reinforce.ordos
 # 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harv.ordos
+	# 	Actor: ordos_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall_reinforce.ordos
 	# 	Facing: 160
 # 	RenderSprites:
-# 		Image: refinery.ordos
+# 		Image: ordos_refineryordos
 
 # Generic storage silo template. Common traits here; each faction actor below sets
 # its build prerequisite and sprite image.
@@ -1429,25 +1429,25 @@
 # 	RenderSprites:
 # 		Image: silo.atreides
 
-# d2k_silo.ixian:
+# ixian_storagesilo:
 # 	Inherits: ^d2k_silo
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 	RenderSprites:
 # 		Image: silo.atreides
 
-# d2k_silo.ordos:
+# ordos_storagesilo:
 # 	Inherits: ^d2k_silo
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, refinery.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 	RenderSprites:
 # 		Image: silo.ordos
-# d2k_munitions.ixian:
+# ixian_munitionssilo:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^1x1Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		Queue: Defence, RADefence
 # 		BuildPaletteOrder: 310
 # 		Description: actor_d2k_munitions.description
@@ -1572,14 +1572,14 @@
 # 	ProvidesPrerequisite@trike:
 # 		Prerequisite: light.trike
 # 		Factions: atreides, fremen, harkonnen, corrino, mercenary, ixian
-# 	ProvidesPrerequisite@raider.ordos:
+# 	ProvidesPrerequisite@ordos_raider:
 # 		Prerequisite: light.raider
 # 		Factions: ordos, smugglers
 # 	ProvidesPrerequisite@buildingname:
 # 	Power:
 # 		Amount: -125
 # 	GrantConditionOnPrerequisite@UPGRADEABLE:
-# 		Prerequisites: up_light.ordos
+# 		Prerequisites: ordos_upgrade_lightfactory
 # 	-WithDeathAnimation:
 # 	ThrowsShrapnel:
 # 		Weapons: Debris2, Debris3
@@ -1602,7 +1602,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^3x3Shape
-# 	Inherits@weap: ^IsWeaponFactory
+# 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
 # 		Prerequisites: ~wip
 # 		Description: Produces heavy vehicles.
@@ -1687,7 +1687,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^3x3Shape
-# 	Inherits@weap: ^IsWeaponFactory
+# 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
 # 		Prerequisites: ~wip
 # 		Description: Produces heavy vehicles.
@@ -1726,22 +1726,22 @@
 # 	ProvidesPrerequisite@light_factory:
 # 		Prerequisite: light_factory
 # 	GrantConditionOnPrerequisite@UPGRADEABLE:
-# 		Condition: up_light.ordos
-# 		Prerequisites: up_light.ordos
+# 		Condition: ordos_upgrade_lightfactory
+# 		Prerequisites: ordos_upgrade_lightfactory
 # 	-WithDeathAnimation:
 
-# light_factory.ordos:
+# ordos_lightfactory:
 # 	Inherits: light_factory
 # 	Tooltip:
 # 		Name: Ordos Light Factory
 # 	RenderSprites:
 # 		Image: light.ordos
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, refinery.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 		Description: template_factory.description
 # 		IconPalette: player
 
-# heavy_factory.ixian:
+# ixian_advancedheavyfactory:
 # 	Inherits: heavy_factory
 # 	Tooltip:
 # 		Name: Ixian Advanced Heavy Factory
@@ -1754,7 +1754,7 @@
 # 	RenderSprites:
 # 		Image: heavy.mercenary
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 		Description: template_factory.description
 # 		IconPalette: player
 # 	ProductionQueue@VEHICLE:
@@ -1764,25 +1764,25 @@
 	# ProvidesPrerequisite@upgrade_heavy:
 	# 	Prerequisite: upgrade_heavy
 
-# heavy_factory.ordos:
+# ordos_heavyfactory:
 # 	Inherits: heavy_factory
 # 	Tooltip:
 # 		Name: Ordos Heavy Factory
 # 	RenderSprites:
 # 		Image: heavy.ordos
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, refinery.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 		Description: template_factory.description
 # 		IconPalette: player
 
-# repair_pad.ixian:
+# ixian_repairpad:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@repair: ^RepairsUnits
 # 	Inherits@repair: ^RepairFacility
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, heavy_factory.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Repair Pad
@@ -1814,14 +1814,14 @@
 # 	SpawnActorOnDeath@death2:
 # 		Actor: light_inf
 
-# repair_pad.ordos:
+# ordos_repairpad:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@repair: ^RepairsUnits
 # 	Inherits@repair: ^RepairFacility
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, heavy_factory.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_heavyfactory
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ordos Repair Pad
@@ -1839,7 +1839,7 @@
 # 	Reservable:
 # 	RallyPoint:
 # 	RenderSprites:
-# 		Image: repair_pad.ordos
+# 		Image: ordos_repairpad
 # 	WithRepairOverlay:
 # 		RequiresCondition: !build-incomplete
 # 		Palette: effect75alpha
@@ -1853,15 +1853,15 @@
 # 	SpawnActorOnDeath@death2:
 # 		Actor: light_inf
 # 	ProvidesPrerequisite@repair_pad:
-# 		Prerequisite: repair_pad.ordos
+# 		Prerequisite: ordos_repairpad
 
-# outpost.ixian:
+# ixian_outpost:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@radar: ^RadarBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Outpost
@@ -1894,13 +1894,13 @@
 # 	ProductionBar@Upgrades:
 # 		ProductionType: Upgrades
 
-# outpost.ordos:
+# ordos_outpost:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@radar: ^RadarBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, refinery.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ordos Outpost
@@ -1909,7 +1909,7 @@
 # 		Dimensions: 3,3
 # 		LocalCenterOffset: 0,-512,0
 # 	RenderSprites:
-# 		Image: outpost.ordos
+# 		Image: ordos_outpost
 # 	WithIdleOverlay@DISH:
 # 		RequiresCondition: !build-incomplete && !severe-damaged
 # 		Sequence: idle-dish
@@ -1945,7 +1945,7 @@
 # 		Descriptions:
 # 			1: power_paratroopers.description
 # 		DropItems:
-# 			1: stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos
+# 			1: ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery, ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery, ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery
 # 		SelectTargetSpeechNotification: SelectTarget
 # 		AllowImpassableCells: false
 # 		QuantizedFacings: 16
@@ -1964,7 +1964,7 @@
 # 			1: 3
 # 		SquadOffset: 1792,1792,0
 
-# launchpad.ixian:
+# ixian_launchpad:
 # 	Inherits: ^BaseBuilding
 # 	Inherits@shape: ^2x2Shape
 # 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -1972,7 +1972,7 @@
 # 	Tooltip:
 # 		Name: Ixian Launchpad
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 	Building:
 # 		BuildSounds: BUILD1.WAV
 # 		Footprint: xx xx
@@ -2014,10 +2014,10 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# high_tech_factory.ordos:
+# ordos_hightechfactory:
 # 	Inherits: ^high_tech_factory
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, outpost.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 # 	RenderSprites:
 # 		Image: hightech.ordos
 
@@ -2069,17 +2069,17 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# research_centre.ixian:
+# ixian_ixresearchcenter:
 # 	Inherits: ^research_centre
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 	RenderSprites:
 # 		Image: research.gold
 
-# research_centre.ordos:
+# ordos_ixresearchcenter:
 # 	Inherits: ^research_centre
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, outpost.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 # 	RenderSprites:
 # 		Image: research.ordos
 
@@ -2160,10 +2160,10 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# high_tech_factory.ixian:
+# ixian_hightechfactory:
 # 	Inherits: ^high_tech_factory
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 # 	RenderSprites:
 # 		Image: hightech.atreides
 
@@ -2245,7 +2245,7 @@
 # 		Prerequisite: starport.atreides
 # 		Factions: atreides
 # 	ProvidesPrerequisite@ordos:
-# 		Prerequisite: starport.ordos
+# 		Prerequisite: ordos_starport
 # 		Factions: ordos
 # 	ProvidesPrerequisite@harkonnen:
 # 		Prerequisite: starport.harkonnen
@@ -2269,28 +2269,28 @@
 # 	SpawnActorOnDeath@death2:
 # 		Actor: light_inf
 
-# starport.ixian:
+# ixian_starport:
 # 	Inherits: ^starport
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 # 	RenderSprites:
 # 		Image: starport.smuggler
 
-# starport.ordos:
+# ordos_starport:
 # 	Inherits: ^starport
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ordos, research_centre.ordos, derricklimit
+# 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 # 	RenderSprites:
-# 		Image: starport.ordos
+# 		Image: ordos_starport
 
-# supercomputer.ixian:
+# ixian_supercomputer:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^4x3Shape
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 # 		Description: Provides a nuclear weapon support power.
 # 		IconPalette: player
 # 	Tooltip:
@@ -2346,7 +2346,7 @@
 # 		RequiresCondition: !build-incomplete
 # 	-WithDeathAnimation:
 # 	RenderSprites:
-# 		Image: supercomputer.ixian
+# 		Image: ixian_supercomputer
 # 		Palette: td_temperat
 # 	-WithCrumbleOverlay:
 
@@ -2387,7 +2387,7 @@
 # 	Valued:
 # 		Cost: 2500
 
-# wall:
+# ixian_concretewall:
 # 	Inherits@spriteactor: ^SpriteActor
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Interactable:
@@ -2398,7 +2398,7 @@
 # 		Action: ChangeOwner
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 		BuildPaletteOrder: 410
 # 		BuildDuration: 62
 # 		BuildDurationModifier: 100
@@ -2411,7 +2411,7 @@
 # 	UpdatesPlayerStatistics:
 # 		AddToAssetsValue: false
 # 	Tooltip:
-# 		Name: Concrete Wall
+# 		Name: Concrete ixian_concretewall
 # 		GenericName: Structure
 # 	AppearsOnRadar:
 # 	D2kActorPreviewPlaceBuildingPreview:
@@ -2428,14 +2428,14 @@
 # 	RevealsShroud:
 # 		Range: 1c768
 # 	Crushable:
-# 		CrushClasses: wall
+# 		CrushClasses: ixian_concretewall
 # 	BlocksProjectiles:
 # 		Height: 512
 # 	LineBuild:
 # 		Range: 5
-# 		NodeTypes: wall, turret
+# 		NodeTypes: ixian_concretewall, turret
 # 	LineBuildNode:
-# 		Types: wall
+# 		Types: ixian_concretewall
 # 	Targetable:
 # 		TargetTypes: Ground, Structure
 # 	WithWallSpriteBody:
@@ -2459,7 +2459,7 @@
 # 	Replaceable:
 # 		Types: Tower
 
-# machine_gun_turret.ixian:
+# ixian_machinegunturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^BasicDefenseTemplate
@@ -2472,14 +2472,14 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		BuildPaletteOrder: 550
 # 		Description: template_anti_infantry_defense.description
 # 		IconPalette: d2kunit
 # 	Valued:
 # 		Cost: 600
 # 	Tooltip:
-# 		Name: Machine Gun Turret
+# 		Name: Machine td_nod_gunturret Turret
 # 	Health:
 # 		HP: 75000
 # 	BodyOrientation:
@@ -2500,13 +2500,13 @@
 # 		LocalOffset: 256,0,576
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: HMG_turret_upgrade
 # 		LocalOffset: 256,0,576
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Replacement:
 # 		ReplaceableTypes: Tower
 # 	WithWallSpriteBody:
@@ -2528,9 +2528,9 @@
 # 	RevealsShroud:
 # 		Range: 7394
 # 	ActorStatValues:
-# 		Upgrades: up_needleguns.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor
 
-# medium_gun_turret.ixian:
+# ixian_gunturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^BasicDefenseTemplate
@@ -2542,12 +2542,12 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 # 	Tooltip:
-# 		Name: Gun Turret
+# 		Name: td_nod_gunturret Turret
 # 	Valued:
 # 		Cost: 1000
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		BuildPaletteOrder: 550
 # 		Description: template_anti_vehicle_defense.description
 # 		IconPalette: d2kunit
@@ -2587,15 +2587,15 @@
 # 	SpawnActorOnDeath@death1:
 # 		Actor: light_inf
 # 	RenderSprites:
-# 		Image: medium_gun_turret.ixian
+# 		Image: ixian_gunturret
 # 	Power:
 # 		Amount: -50
 # 	RevealsShroud:
 # 		Range: 7979
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor
 
-# artillery_platform.ordos:
+# ordos_artilleryplatform:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -2613,7 +2613,7 @@
 # 		Cost: 1200
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~d2k_barracks.ordos
+# 		Prerequisites: ~ordos_barracks
 # 		BuildPaletteOrder: 550
 # 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -2655,7 +2655,7 @@
 # 	SpawnActorOnDeath@death1:
 # 		Actor: light_inf
 # 	RenderSprites:
-# 		Image: artillery_platform.ordos
+# 		Image: ordos_artilleryplatform
 # 	Power:
 # 		Amount: -60
 # 	RevealsShroud:
@@ -2663,9 +2663,9 @@
 # 	DetectCloaked:
 # 		Range: 5000
 # 	ActorStatValues:
-# 		Upgrades: up_contraband.ordos
+# 		Upgrades: ordos_upgrade_contraband
 
-# autogun_turret.ordos:
+# ordos_autogunturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -2684,14 +2684,14 @@
 # 		Cost: 1100
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~d2k_barracks.ordos
+# 		Prerequisites: ~ordos_barracks
 # 		BuildPaletteOrder: 510
 # 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 # 		IconPalette: chrome
 # 	Health:
 # 		HP: 75000
 # 	Armament:
-# 		Weapon: autogun_turret.ordos
+# 		Weapon: ordos_autogunturret
 # 		LocalOffset: 500,-150,400, 500,150,400
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
@@ -2720,7 +2720,7 @@
 # 	WithWallSpriteBody:
 # 		RequiresCondition: !build-incomplete
 # 	RenderSprites:
-# 		Image: autogun_turret.ordos
+# 		Image: ordos_autogunturret
 # 	FireProjectilesOnDeath:
 # 		Weapons: Debris2, Debris3
 # 		Pieces: 2, 4
@@ -2734,10 +2734,10 @@
 # 	DetectCloaked:
 # 		Range: 3855
 # 	ActorStatValues:
-# 		Upgrades: up_contraband.ordos
+# 		Upgrades: ordos_upgrade_contraband
 
 # flame_turret:
-# 	Inherits: medium_gun_turret.ixian
+# 	Inherits: ixian_gunturret
 # 	Inherits@AntiInf: ^PrioritizeInfantry
 # 	AutoTargetPriority@INFANTRY:
 # 		Priority: 50
@@ -2757,7 +2757,7 @@
 # 	Armament:
 # 		Weapon: d2kFlameTurret
 
-# large_gun_turret.ixian:
+# ixian_rocketturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -2772,7 +2772,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 		BuildPaletteOrder: 610
 # 		Description: actor_large_gun_turret.description
 # 		IconPalette: d2kunit
@@ -2820,7 +2820,7 @@
 # 	DetectCloaked:
 # 		Range: 5342
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor
 
 # d2k_mine_ap:
 # 	Inherits: ^D2KMine
@@ -2972,7 +2972,7 @@
 # 	RevealsShroud:
 # 		Range: 4c768
 # 	RenderSprites:
-# 		Image: palace.ordos
+# 		Image: ordos_palace
 # 		FactionImages:
 # 			atreides: palace.atreides
 # 			fremen: palace.atreides
@@ -3001,9 +3001,9 @@
 # 		Icons:
 # 			1: deathhand
 # 		Names:
-# 			1: Death Hand
+# 			1: Death td_nod_handofnod
 # 		Descriptions:
-# 			1: Launches a death hand missile at a target location
+# 			1: Launches a death td_nod_handofnod missile at a target location
 # 		MissileWeapons:
 # 			1: deathhand
 # 		BeaconPosters:
@@ -3163,7 +3163,7 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# palace.ordos:
+# ordos_palace:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@CPQ: ^CPQCondition
@@ -3171,7 +3171,7 @@
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Buildable:
 # 		Queue: Building, RABuilding
-# 		Prerequisites: ~construction_yard.ordos, research_centre.ordos
+# 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter
 # 		Description: This structure unlocks support powers.
 # 		IconPalette: d2kunit
 # 	Tooltip:
@@ -3191,7 +3191,7 @@
 # 			TopLeft: -512, -1536
 # 			BottomRight: 512, -512
 # 	RenderSprites:
-# 		Image: palace.ordos
+# 		Image: ordos_palace
 # 	ProvidesPrerequisite@palace:
 # 		Prerequisite: palace
 # 	-WithDeathAnimation:
@@ -3507,13 +3507,13 @@
 # 			2: Strike Team Paradrop II
 # 			3: Strike Team Paradrop III
 # 		Descriptions:
-# 			1: Carryall planes drops a Small Mercenary strike team\nanywhere on the map.
-# 			2: Carryall planes drops a Mercenary strike team\nanywhere on the map.
-# 			3: Carryall planes drops a Mercenary army\nanywhere on the map.
+# 			1: ixian_autonomouscarryall planes drops a Small Mercenary strike team\nanywhere on the map.
+# 			2: ixian_autonomouscarryall planes drops a Mercenary strike team\nanywhere on the map.
+# 			3: ixian_autonomouscarryall planes drops a Mercenary army\nanywhere on the map.
 # 		DropItems:
 # 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
 # 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad
-# 			3: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trooper, trooper, submachinegunner, submachinegunner, trooper, trike, trike, trike, quad, quad, combat_tank.ordos, combat_tank.ordos, siege_tank
+# 			3: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trooper, trooper, submachinegunner, submachinegunner, trooper, trike, trike, trike, quad, quad, ordos_combattank, ordos_combattank, siege_tank
 # 		Prerequisites:
 # 			1:
 # 			2: d2k_striketeam2
@@ -3601,7 +3601,7 @@
 # 	Inherits: palace
 # 	Buildable:
 # 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
-# 		Description: Enables Death Hand Missile
+# 		Description: Enables Death td_nod_handofnod Missile
 # 		BuildLimit: 1
 # 	Valued:
 # 		Cost: 2000
@@ -3632,7 +3632,7 @@
 # 	Tooltip:
 # 		Name: Ordos Palace
 # 	RenderSprites:
-# 		Image: palace.ordos
+# 		Image: ordos_palace
 # 		-FactionImages:
 # 	-WithSupportPowerActivationOverlay:
 # 	Power:
@@ -3720,29 +3720,29 @@
 # 	Armament@PRIMARY: ##########
 # 		Weapon: LMG
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: LMG_upgrade
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Armament@GARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: LMG
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@UpgradeGARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: LMG_upgrade
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	WithInfantryBody:
 # 		IdleSequences: idle1,idle2,idle3,idle4
 # 		DefaultAttackSequence: shoot
 # 	Parachutable:
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # engineer:
 # 	Inherits: E6
@@ -3830,7 +3830,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~d2k_barracks, ~!up_aatrooper.ordos, ~!up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooper, ~!ixian_upgrade_twinbazooka
 # 		Description: template_antitank_antiair_infantry.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -3856,9 +3856,9 @@
 # 	WithInfantryBody:
 # 		DefaultAttackSequence: shoot
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
-# twin_rocket_trooper.ixian:
+# ixian_twinrockettrooper:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -3875,7 +3875,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~ixian_upgrade_twinbazooka
 # 		Description: template_antitank_antiair_infantry.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -3907,9 +3907,9 @@
 # 	WithInfantryBody:
 # 		DefaultAttackSequence: shoot
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
-# aatrooper.ordos:
+# ordos_antiairtrooper:
 # 	Inherits: ^Soldier
 # 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -3926,7 +3926,7 @@
 # 		Name: Anti Air Trooper
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_aatrooper.ordos
+# 		Prerequisites: ~ordos_upgrade_antiairtrooper
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_antitank_antiair_infantry.description
 # 	Health:
@@ -3956,9 +3956,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
-# shock_infantry.ixian:
+# ixian_shockinfantry:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeavyInfantryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -3978,7 +3978,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~research_centre.ixian, ~!up_storm_infantry.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstorminfantry
 # 	Health:
 # 		HP: 36000
 # 	ChangesHealth@SelfHealing:
@@ -3993,9 +3993,9 @@
 # 		Weapon: D2K_ShockGunInf
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	WithInfantryBody:
 # 		-IdleSequences: idle1,idle2
 # 		DefaultAttackSequence: shoot
@@ -4006,9 +4006,9 @@
 # 		Image: shockgunner
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# chem_troop.ordos:
+# ordos_chemicaltrooper:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeavyInfantryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -4028,7 +4028,7 @@
 # 		BuildPaletteOrder: 10
 # 		Queue: Infantry, RAInfantry
 # 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-# 		Prerequisites: ~up_chem_troop.ordos
+# 		Prerequisites: ~ordos_promotion_unlockchemicaltrooper
 # 		IconPalette: player
 # 	Health:
 # 		HP: 30000
@@ -4046,8 +4046,8 @@
 # 	Armament@GARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: d2k_chemgun
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	RenderSprites:
 # 		Image: chemtrooper
@@ -4059,9 +4059,9 @@
 # 		CrushedSequencePalette: raplayer
 # 		CrushedPaletteIsPlayerPalette: True
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare
 
-# mortar.ordos:
+# ordos_mortartrooper:
 # 	Inherits: ^Soldier
 # 	Inherits@Template: ^MortarInfantryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -4078,7 +4078,7 @@
 # 		Cost: 600
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_mortar.ordos
+# 		Prerequisites: ~ordos_promotion_unlockmortartroopers
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_antitank_antiair_infantry.description
 # 	Health:
@@ -4102,7 +4102,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
 # thumper:
 # 	Inherits: ^D2KInfantry
@@ -4227,7 +4227,7 @@
 # 	RenderSprites:
 # 		Image: fremen
 
-# face_dancer.ordos:
+# ordos_facedancer:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeroInfantryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -4244,7 +4244,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 20
 # 		BuildLimit: 1
-# 		Prerequisites: ~palace.ordos
+# 		Prerequisites: ~ordos_palace
 # 		Description: Genetically modified humanoid armed with a powerful rocket launcher. Can cloak. Does not lie down when attacked. Immune to Tiberium
 # 	Health:
 # 		HP: 90000
@@ -4257,8 +4257,8 @@
 # 	Armament:
 # 		Weapon: facedancer_grenade
 # 		LocalOffset: 128,0,256
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	Voiced:
 # 		VoiceSet: D2KInfantryVoice
@@ -4267,12 +4267,12 @@
 # 	-TakeCover:
 # 	-DamagedByTerrain:
 # 	RenderSprites:
-# 		Image: face_dancer.ordos
+# 		Image: ordos_facedancer
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
 # facedancer_ghola:
-# 	Inherits: face_dancer.ordos
+# 	Inherits: ordos_facedancer
 # 	Valued:
 # 		Cost: 150
 # 	Tooltip:
@@ -4281,10 +4281,10 @@
 # 	Health:
 # 		HP: 2500
 # 	RenderSprites:
-# 		Image: face_dancer.ordos
+# 		Image: ordos_facedancer
 # 	-Explodes@ghola:
 
-# contaminator.ordos:
+# ordos_contaminator:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^MeleeInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -4300,7 +4300,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~d2k_barracks.ordos, ~up_contaminator.ordos
+# 		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockcontaminator
 # 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 # 	Health:
 # 		HP: 75000
@@ -4318,21 +4318,21 @@
 # 	Armament@GARRISONED:
 # 		Name: garrisoned
 # 		Weapon: contaminator_attack
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	Voiced:
 # 		VoiceSet: EBFDContaminator
 # 	-DamagedByTerrain:
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 	Targetable@dog:
+# 	Targetable@ra1_soviet_attackdog:
 # 		TargetTypes: DogImmune
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare
 
 # contaminator_s:
-# 	Inherits: contaminator.ordos
+# 	Inherits: ordos_contaminator
 # 	DamageMultiplier:
 # 		Modifier: 150
 # 	Power:
@@ -4341,7 +4341,7 @@
 # 		WarnProbability: 0
 # 		CrushSound: squish2.aud
 # 	RenderSprites:
-# 		Image: contaminator.ordos
+# 		Image: ordos_contaminator
 # 	-Buildable:
 
 # grenadier:
@@ -4429,7 +4429,7 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedSard
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # mpsardaukar:
 # 	Inherits: sardaukar
@@ -4509,7 +4509,7 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedHeavy
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 25
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 25
 
 # d2k_sardaukar_assassin:
 # 	Inherits: sardaukar
@@ -4660,7 +4660,7 @@
 # 	DetectCloaked:
 # 		Range: 4c0
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare
 
 # nsfremen:
 # 	Inherits: fremen
@@ -4823,7 +4823,7 @@
 # 	RenderSprites:
 # 		Image: fedaykin
 
-# leech.ordos:
+# ordos_leech:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^ScoutVehicleTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -4834,7 +4834,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites:  ~up_leech.ordos
+# 		Prerequisites:  ~ordos_promotion_unlockleecher
 # 		Description: Stealth creature that can attack infantry and infect vehicles.
 # 		IconPalette: player
 # 	Selectable:
@@ -4855,8 +4855,8 @@
 # 	Armament@PRIMARY:
 # 		Weapon: LeechJump
 # 		LocalOffset: 0,0,200
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	WithInfantryBody:
 # 		DefaultAttackSequence: jump
@@ -4902,11 +4902,11 @@
 # 		PlayerPalette: player_rgba
 # 	Targetable@vehicleexplodedamage:
 # 		TargetTypes: TerrorDrone
-# 	Targetable@dog:
+# 	Targetable@ra1_soviet_attackdog:
 # 		TargetTypes: DogImmune
 # 	-TemporaryOwnerManager:
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare
 
 # rocketeer:
 # 	Inherits: ^D2KInfantry
@@ -5099,7 +5099,7 @@
 # 	Valued:
 # 		Cost: 800
 # 	Tooltip:
-# 		Name: Heavy Sniper
+# 		Name: Heavy ra1_allies_alliedsniper
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -5157,7 +5157,7 @@
 # 		Modifier: 0
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_marksman:
 # 	Inherits: d2k_sniper
@@ -5191,7 +5191,7 @@
 # 		Modifier: 200
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # flamethrower:
 # 	Inherits: ^D2KInfantry
@@ -5302,7 +5302,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_mechanic:
 # 	Inherits: ^D2KInfantry
@@ -5363,7 +5363,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # bene_gesserit:
 # 	Inherits: ^D2KInfantry
@@ -5434,7 +5434,7 @@
 # 	ProducibleWithLevel:
 # 		Prerequisites: barracks.upgraded
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # d2k_light_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -5449,7 +5449,7 @@
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~d2k_ifv_prereq, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactory, ~techlevel.low
 # 		Description: Light Carrier vehicle with light cannon and missile launcher\nCan carry 3 passengers\n Strong vs Vehicles, Tanks\n Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -5532,7 +5532,7 @@
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.medium
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.medium
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -5562,7 +5562,7 @@
 # d2k_light_tank.bot1:
 # 	Inherits: d2k_light_tank
 # 	Buildable:
-# 		Prerequisites: ~d2k_ifv_prereq, up_light.ordos, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactory, ~techlevel.low, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -5598,7 +5598,7 @@
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
 # 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium
-# 		Description: Stealth Heavy Carrier vehicle with machine gun\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
+# 		Description: Stealth Heavy Carrier vehicle with machine td_nod_gunturret\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
 # 		IconPalette: windows256
 # 	Valued:
 # 		Cost: 1000
@@ -5774,7 +5774,7 @@
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.low, ~light.harkonnen, up_light.ordos, ~faction.corrino
+# 		Prerequisites: ~techlevel.low, ~light.harkonnen, ordos_upgrade_lightfactory, ~faction.corrino
 # 		Description: Suicidal remote vehicle armed with high explosives\nHas very weak armor \n\n Requires a Light Factory in order to move.
 # 		IconPalette: d2kunit
 # 	WithColoredOverlay:
@@ -5950,13 +5950,13 @@
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: up_light.ordos, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
+# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
 # 		Description: Hit and Run Vehicle with small cannon and missile launcher\nCan carry 3 passengers
 # 		IconPalette: d2kunit
 # 	AutoDeployer:
 # 		DeployChance: 100
 # 	Selectable:
-# 		Class: apc
+# 		Class: td_gdi_apc
 # 	Mobile:
 # 		TurnSpeed: 48
 # 		Speed: 110
@@ -6015,7 +6015,7 @@
 # d2k_apc.bot1:
 # 	Inherits: d2k_apc
 # 	Buildable:
-# 		Prerequisites: up_light.ordos, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
+# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -6052,7 +6052,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 
-# apc.ordos:
+# ordos_apc:
 # 	Inherits: ^D2KTank
 # 	Inherits@Template: ^SupportVehicleTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -6065,13 +6065,13 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~outpost.ordos, ~!up_tleilax_labcrawl.ordos
+# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_unlocklaboratorycrawler
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	Valued:
 # 		Cost: 2100
 # 	Tooltip:
-# 		Name: Ordos APC
+# 		Name: Ordos td_gdi_apc
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -6106,15 +6106,15 @@
 # 	Voiced:
 # 		VoiceSet: EBFDOAPC
 # 	Cargo:
-# 		InitialUnits: light_inf, light_inf, light_inf, light_inf, trooper, trooper, aatrooper.ordos, aatrooper.ordos
+# 		InitialUnits: light_inf, light_inf, light_inf, light_inf, trooper, trooper, ordos_antiairtrooper, ordos_antiairtrooper
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 8
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# tleilax_labcrawl.ordos:
+# ordos_laboratorycrawler:
 # 	Inherits: ^D2KTank
 # 	Inherits@Template: ^SupportVehicleTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -6128,7 +6128,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~up_tleilax_labcrawl.ordos, research_centre.ordos
+# 		Prerequisites: ~ordos_promotion_unlocklaboratorycrawler, ordos_ixresearchcenter
 # 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 # 		IconPalette: windows256
 # 	Valued:
@@ -6159,8 +6159,8 @@
 # 	Armament@aa2:
 # 		Weapon: D2K_APC_Rocket_AA
 # 		LocalOffset: 256,-256,256
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	AttackFrontal:
 # 	FireWarheadsOnDeath:
@@ -6171,22 +6171,22 @@
 # 	Voiced:
 # 		VoiceSet: EBFDOAPC
 # 	Cargo:
-# 		InitialUnits: contaminator.ordos, contaminator.ordos, chem_troop.ordos, chem_troop.ordos, mortar.ordos, mortar.ordos, aatrooper.ordos, aatrooper.ordos, trooper, trooper
+# 		InitialUnits: ordos_contaminator, ordos_contaminator, ordos_chemicaltrooper, ordos_chemicaltrooper, ordos_mortartrooper, ordos_mortartrooper, ordos_antiairtrooper, ordos_antiairtrooper, trooper, trooper
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 10
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_toxin.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-# d2k_mcv.ixian:
+# ixian_mobileconstructionvehicle:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^SupportVehicleTemplate
 # 	Inherits@selection: ^SelectableSupportUnit
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@mcv: ^MCV
 # 	Buildable:
-# 		Prerequisites: ~repair_pad.ixian
+# 		Prerequisites: ~ixian_repairpad
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Mobile Construction Vehicle
@@ -6194,7 +6194,7 @@
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
 # 	Transforms:
-# 		IntoActor: construction_yard.ixian
+# 		IntoActor: ixian_constructionyard
 # 		Offset: -1,-1
 # 		TransformSounds: BUILD1.WAV
 # 		Facing: 64
@@ -6205,14 +6205,14 @@
 # 	RenderSprites:
 # 		Image: d2k_mcv
 
-# d2k_mcv.ordos:
+# ordos_mobileconstructionvehicle:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^SupportVehicleTemplate
 # 	Inherits@selection: ^SelectableSupportUnit
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@mcv: ^MCV
 # 	Buildable:
-# 		Prerequisites: ~repair_pad.ordos
+# 		Prerequisites: ~ordos_repairpad
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ordos Mobile Construction Vehicle
@@ -6220,7 +6220,7 @@
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
 # 	Transforms:
-# 		IntoActor: construction_yard.ordos
+# 		IntoActor: ordos_constructionyard
 # 		Offset: -1,-1
 # 		TransformSounds: BUILD1.WAV
 # 		Facing: 64
@@ -6249,13 +6249,13 @@
 # 	Tooltip:
 # 		Name: Destroyed Ix Projector
 # 	TransformOnCapture:
-# 		IntoActor: jammer.ixian
+# 		IntoActor: ixian_ixprojector
 # 	InfiltrateForTransform:
-# 		IntoActor: jammer.ixian
+# 		IntoActor: ixian_ixprojector
 # 	RenderSprites:
 # 		Image: d2k_projector.husk
 
-# swarmer.ordos:
+# ordos_swarmerdrone:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@Template: ^FighterTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -6272,7 +6272,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~high_tech_factory.ordos
+# 		Prerequisites: ~ordos_hightechfactory
 # 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
@@ -6322,9 +6322,9 @@
 # 		RequiresSelection: True
 # 		PipCount: 10
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# aa_mine.ordos:
+# ordos_airmine:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@Template: ^BomberTemplate
 # 	Inherits@AUTOTARGET: ^AutoTargetAir
@@ -6339,7 +6339,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~high_tech_factory.ordos
+# 		Prerequisites: ~ordos_hightechfactory
 # 		Description: Slowly Flying Mine that hurls missiles upon contact with enemy airplane before exploding\nIn higher numbers can take down entire squadron
 # 	Tooltip:
 # 		Name: Air Mine
@@ -6368,7 +6368,7 @@
 # 	AttackAircraft:
 # 		FacingTolerance: 512
 # 	Armament@PRIMARY:
-# 		Weapon: aa_mine.ordos
+# 		Weapon: ordos_airmine
 # 		LocalOffset: -250,-300,300, -250,300,300
 # 		LocalYaw: -100,100
 # 	Aircraft:
@@ -6396,9 +6396,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_contraband.ordos
+# 		Upgrades: ordos_upgrade_contraband
 
-# eye.ordos:
+# ordos_eyeinthesky:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@Template: ^BomberTemplate
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6408,13 +6408,13 @@
 # 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 # 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 # 	Tooltip:
-# 		Name: Eye In The Sky
+# 		Name: td_gdi_advancedcommunicationscenter In The Sky
 # 	Valued:
 # 		Cost: 2500
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~research_centre.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter
 # 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 # 	Health:
 # 		HP: 150000
@@ -6451,9 +6451,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# banshee.ordos:
+# ordos_banshee:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^HelicopterTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -6470,7 +6470,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~up_banshee.ordos, research_centre.ordos
+# 		Prerequisites: ~ordos_promotion_unlockbanshees, ordos_ixresearchcenter
 # 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 # 	Health:
 # 		HP: 37500
@@ -6501,8 +6501,8 @@
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: ra2effect
 # 		PauseOnCondition: !ammo
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	Aircraft:
 # 		Speed: 165
@@ -6535,9 +6535,9 @@
 # 	WithMoveAnimation:
 # 		MoveSequence: move
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_toxin.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-# wraith.ordos:
+# ordos_wraith:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^SpaceshipTemplate
 # 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -6554,7 +6554,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~up_wraith.ordos, palace.ordos
+# 		Prerequisites: ~ordos_promotion_unlockwraith, ordos_palace
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_nax_dieglocke.description
@@ -6575,8 +6575,8 @@
 # 		Name: primary
 # 		Weapon: Wraith_ToxinMissiles
 # 		LocalOffset: 800,0,0, 0,800,0, -800,0,0, 0,-800,0
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	AttackAircraft:
 # 		Voice: Attack
@@ -6599,7 +6599,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_toxin.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
 # wraith_husk.ordos:
 # 	Inherits: ^LargeHelicopterHusk
@@ -6609,7 +6609,7 @@
 # 		TurnSpeed: 16
 # 		Speed: 100
 # 	RenderSprites:
-# 		Image: wraith.ordos
+# 		Image: ordos_wraith
 # 		PlayerPalette: player_rgba
 
 # ^Ornithopter_Missiles:
@@ -6763,7 +6763,7 @@
 # 	Aircraft:
 # 		Speed: 156
 
-# air_drone.ixian:
+# ixian_airdrone:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@reload: ^RearmableAircraft
 # 	Inherits@Template: ^BomberTemplate
@@ -6784,7 +6784,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~launchpad.ixian
+# 		Prerequisites: ~ixian_launchpad
 # 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -6808,7 +6808,7 @@
 # 	AttackAircraft:
 # 		FacingTolerance: 64
 # 	Armament:
-# 		Weapon: air_drone.ixian
+# 		Weapon: ixian_airdrone
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		LocalYaw: 64, -64
 # 		MuzzleSequence: muzzle
@@ -6819,14 +6819,14 @@
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		PauseOnCondition: !ammo
 # 	Armament@Upgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		PauseOnCondition: !ammo
 # 	Aircraft:
 # 		CruiseAltitude: 1800
@@ -6842,11 +6842,11 @@
 # 	SpawnActorOnDeath:
 # 		Actor: air_drone_husk.ixian
 # 	EjectOnDeath:
-# 		PilotActor: shock_infantry.ixian
+# 		PilotActor: ixian_shockinfantry
 # 	Voiced:
 # 		VoiceSet: D2KVehicleVoice
 # 	RenderSprites:
-# 		Image: air_drone.ixian
+# 		Image: ixian_airdrone
 # 	MapEditorData:
 # 		Categories: Aircraft
 # 	FireProjectilesOnDeath:
@@ -6858,7 +6858,7 @@
 # 		UncloakSound: trans1.aud
 # 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 # air_drone_husk.ixian:
 # 	Inherits: ^PlaneHusk
@@ -6868,7 +6868,7 @@
 # 		TurnSpeed: 8
 # 		Speed: 165
 # 	RenderSprites:
-# 		Image: air_drone.ixian
+# 		Image: ixian_airdrone
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeSmall
 
@@ -6953,7 +6953,7 @@
 # 		Explosion: D2KUnitExplodeSmall
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 		Image: swarmer.ordos
+# 		Image: ordos_swarmerdrone
 # banshee_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
@@ -6966,11 +6966,11 @@
 # 		Explosion: D2KUnitExplodeSmall
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 		Image: banshee.ordos
+# 		Image: ordos_banshee
 # eye_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Eye on the Sky
+# 		Name: td_gdi_advancedcommunicationscenter on the Sky
 # 	Aircraft:
 # 		TurnSpeed: 8
 # 		Speed: 65
@@ -6979,7 +6979,7 @@
 # 		Explosion: D2KUnitExplodeMed
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 		Image: eye.ordos
+# 		Image: ordos_eyeinthesky
 
 # phoenix.husk:
 # 	Inherits: ^PlaneHusk
@@ -7188,7 +7188,7 @@
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 
-# harvester.ixian:
+# ixian_spiceharvester:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^HarvesterTemplate
 # 	Inherits@selection: ^SelectableEconomicUnit
@@ -7197,7 +7197,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~spice_refinery, ~heavy_factory.ixian
+# 		Prerequisites: ~spice_refinery, ~ixian_advancedheavyfactory
 # 		BuildPaletteOrder: 10
 # 		Description: template_harvester.description
 # 		IconPalette: d2kunit
@@ -7226,7 +7226,7 @@
 # 	Shielded:
 # 		RegenAmount: 160
 # 	Cloak:
-# 		RequiresCondition: !disabled && (stealthed || up_advanced_ixian_technology.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
 # 	Mobile:
 # 		Speed: 45
 # 		TurnSpeed: 9
@@ -7246,9 +7246,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KHarvester
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# harv.ordos:
+# ordos_spiceharvester:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^HarvesterTemplate
 # 	Inherits@selection: ^SelectableEconomicUnit
@@ -7257,7 +7257,7 @@
 # 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~spice_refinery, ~heavy_factory.ordos
+# 		Prerequisites: ~spice_refinery, ~ordos_heavyfactory
 # 		BuildPaletteOrder: 10
 # 		Description: template_harvester.description
 # 		IconPalette: d2kunit
@@ -7304,7 +7304,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos
+# 		Upgrades: ordos_upgrade_shields
 
 # trike:
 # 	Inherits@D2KV: ^D2KVehicle
@@ -7426,7 +7426,7 @@
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: up_light.ordos, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 210
 # 		BuildDurationModifier: 100
@@ -7525,7 +7525,7 @@
 # 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
@@ -7579,7 +7579,7 @@
 # d2k_transport_buggy.bot1:
 # 	Inherits: d2k_transport_buggy
 # 	Buildable:
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.low, ~botplayer
 # 	Valued:
 # 		Cost: 2500
 # 	Cargo:
@@ -7626,7 +7626,7 @@
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.smugglers, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~faction.smugglers, ordos_upgrade_lightfactory, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 225
 # 		BuildDurationModifier: 100
@@ -7681,7 +7681,7 @@
 # 	Inherits@EMP: ^FrontalEMP
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: up_light.ordos, ~autogun_prereq, research_centre, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~autogun_prereq, research_centre, ~techlevel.low
 # 		BuildPaletteOrder: 50
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
@@ -7774,7 +7774,7 @@
 # 		Multiplier: 125
 # 		Prerequisites: faction.guild
 # 	Buildable:
-# 		Prerequisites: up_light.ordos, ~faction.guild, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~faction.guild, ~techlevel.low
 
 # mg_quad:
 # 	Inherits: quad
@@ -7853,7 +7853,7 @@
 # 	ProductionCostMultiplier:
 # 		Multiplier: 110
 # 	Cargo:
-# 		InitialUnits: face_dancer.ordos, face_dancer.ordos, face_dancer.ordos
+# 		InitialUnits: ordos_facedancer, ordos_facedancer, ordos_facedancer
 
 # siege_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -7908,16 +7908,16 @@
 # 		EffectiveOwnerFromOwner: true
 # 	AttractsWorms:
 # 		Intensity: 600
-# 	GrantConditionOnPrerequisite@up_siege_range.ixian:
-# 		Condition: up_siege_range.ixian
-# 		Prerequisites: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+# 		Condition: ixian_upgrade_reinforcedbarrel
+# 		Prerequisites: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	Voiced:
 # 		VoiceSet: D2KSiegeTank
 
-# cobra.ordos:
+# ordos_cobratank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^ArtilleryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -7934,7 +7934,7 @@
 # 		Cost: 1500
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~outpost.ordos, ~!up_python.ordos
+# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_unlockpython
 # 		BuildPaletteOrder: 50
 # 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -8020,9 +8020,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# python.ordos:
+# ordos_pythontank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^ArtilleryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8041,7 +8041,7 @@
 # 		Cost: 2500
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~up_python.ordos, outpost.ordos
+# 		Prerequisites: ~ordos_promotion_unlockpython, ordos_outpost
 # 		BuildPaletteOrder: 50
 # 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -8119,9 +8119,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# siege_tank.ixian:
+# ixian_ixsiegetank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^ArtilleryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8138,7 +8138,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~up_siegetank.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixsiegetank, ixian_outpost
 # 		Description: actor_siege_tank.description
 # 		IconPalette: ra2
 # 	Health:
@@ -8185,19 +8185,19 @@
 # 		ResetOnFire: true
 # 	AttractsWorms:
 # 		Intensity: 600
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 125
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	Voiced:
 # 		VoiceSet: D2KSiegeTank
 # 	Cloak:
 # 		CloakSound: trans1.aud
 # 		UncloakSound: appear1.aud
 # 		UncloakOn: Attack, Damage
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
 # 		Image: ix_siege_tank
 # 		PlayerPalette: player
@@ -8205,7 +8205,7 @@
 # 		Offset: 128, 128, 0
 # 		ZOffset: -512
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # duelist_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -8223,7 +8223,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 40
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~research_centre.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter
 # 		Description: actor_duelist_tank.description
 # 	Valued:
 # 		Cost: 1800
@@ -8259,17 +8259,17 @@
 # 		LocalOffset: 128,-128,128, 128,128,128
 # 		MuzzleSequence: muzzle2
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: HMG_Duelist_upgrade
 # 		LocalOffset: 128,-128,128, 128,128,128
 # 		MuzzleSequence: muzzle2
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	FirepowerMultiplier@DualWeapon:
 # 		Modifier: 50
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 # 	AttackTurreted:
 # 	WithMuzzleOverlay:
 # 	WithSpriteTurret:
@@ -8281,14 +8281,14 @@
 # 	Cloak@TDcloak:
 # 	Voiced:
 # 		VoiceSet: D2KDuelistTank
-# 	RangeMultiplier@up_needleguns.ixian:
+# 	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 105
-# 	FirepowerMultiplier@up_needleguns.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 110
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# missile_tank.ixian:
+# ixian_ixmissiletank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -8306,7 +8306,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~research_centre.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter
 # 		BuildPaletteOrder: 60
 # 		Description: actor_missile_tank.description
 # 		IconPalette: d2kunit
@@ -8359,7 +8359,7 @@
 # 		UncloakOn: Attack, infiltrate, damage
 # 		IsPlayerPalette: true
 # 		CloakedCondition: cloaked
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	ReloadAmmoDelayMultiplier@RANK-1:
 # 		RequiresCondition: rank-veteran == 1
 # 		Modifier: 95
@@ -8376,7 +8376,7 @@
 # 		Image: ix_missile_tank
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
 # missile_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -8536,11 +8536,11 @@
 # 		Image: sonic_tank
 
 # emperor_deviator:
-# 	Inherits: deviator.ordos
+# 	Inherits: ordos_deviatorartillery
 # 	Buildable:
 # 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
 # 	RenderSprites:
-# 		Image: deviator.ordos
+# 		Image: ordos_deviatorartillery
 
 # emperor_devastator:
 # 	Inherits: devastator
@@ -8549,7 +8549,7 @@
 # 	RenderSprites:
 # 		Image: devastator
 
-# laser_tank.ordos:
+# ordos_lasertank:
 # 	Inherits: ^D2KTank
 # 	Inherits@Template: ^HighTechTankTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8562,7 +8562,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~up_laser_tank.ordos, research_centre.ordos
+# 		Prerequisites: ~ordos_promotion_unlocklasertank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	Valued:
@@ -8590,7 +8590,7 @@
 # 		TurnSpeed: 21
 # 		Offset: -100,20,1
 # 	Armament:
-# 		Weapon: laser_tank.ordos
+# 		Weapon: ordos_lasertank
 # 		LocalOffset: 550,110,125
 # 	AttackTurreted:
 # 	Hovers:
@@ -8608,9 +8608,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# deviatormk2.ordos:
+# ordos_deviatortank:
 # 	Inherits: ^D2KTank
 # 	Inherits@Template: ^HighTechTankTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8627,7 +8627,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~up_deviatormk2.ordos, research_centre.ordos
+# 		Prerequisites: ~ordos_promotion_unlockdeviatortank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -8653,8 +8653,8 @@
 # 	Armament:
 # 		Weapon: DeviatorMissile
 # 		LocalOffset: 275,-125,0
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
 # 	AttackTurreted:
 # 	Hovers:
@@ -8672,7 +8672,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_toxin.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
 # d2k_qafza:
 # 	Inherits: ^D2KTank
@@ -8945,7 +8945,7 @@
 # 	RenderSprites:
 # 		Image: d2k_tyrant
 
-# raider.ordos:
+# ordos_raider:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^ScoutVehicleTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -8964,7 +8964,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~light_factory.ordos, ~!up_stealth_raider.ordos
+# 		Prerequisites: ~ordos_lightfactory, ~!ordos_promotion_unlockstealthraider
 # 		Description: Improved Scout\nCan carry a passenger\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 # 		IconPalette: d2kunit
 # 	UpdatesPlayerStatistics:
@@ -9006,10 +9006,10 @@
 # 		Position: BottomLeft
 # 		RequiresSelection: true
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# stealth_raider.ordos:
-# 	Inherits: raider.ordos
+# ordos_stealthraider:
+# 	Inherits: ordos_raider
 # 	Inherits@CLOAK: ^CloakedVehicle
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -9018,7 +9018,7 @@
 # 	Valued:
 # 		Cost: 1300
 # 	Buildable:
-# 		Prerequisites: ~up_stealth_raider.ordos
+# 		Prerequisites: ~ordos_promotion_unlockstealthraider
 # 		BuildPaletteOrder: 30
 # 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -9037,10 +9037,10 @@
 # 	Cargo:
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 4
-# 		InitialUnits: light_inf, chem_troop.ordos, trooper, aatrooper.ordos
+# 		InitialUnits: light_inf, ordos_chemicaltrooper, trooper, ordos_antiairtrooper
 # 		LoadingCondition: notmobile
 
-# scoutdrone.ordos:
+# ordos_dustdrone:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -9060,7 +9060,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~up_scoutdrone.ordos
+# 		Prerequisites: ~ordos_promotion_unlockdustdrone
 # 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	UpdatesPlayerStatistics:
@@ -9097,10 +9097,10 @@
 # 	WithMoveAnimation:
 # 		MoveSequence: move
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
 # raider.bot:
-# 	Inherits: raider.ordos
+# 	Inherits: ordos_raider
 # 	Buildable:
 # 		Prerequisites: ~faction.ordos, ~botplayer
 # 	ProductionCostMultiplier:
@@ -9108,7 +9108,7 @@
 # 	Cargo:
 # 		InitialUnits: trooper
 # 	RenderSprites:
-# 		Image: raider.ordos
+# 		Image: ordos_raider
 
 # rocket_raider.ixian:
 # 	Inherits@D2KV: ^D2KVehicle
@@ -9129,7 +9129,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy_factory.ixian, ~!up_raider.ixian
+# 		Prerequisites: ~ixian_advancedheavyfactory, ~!ixian_promotion_unlockheavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Ix Raider
@@ -9194,17 +9194,17 @@
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 5
 # 		InitialUnits: light_inf, light_inf, trooper, trooper, trooper
-		#InitialUnits: light_inf, trooper, shock_infantry.ixian
+		#InitialUnits: light_inf, trooper, ixian_shockinfantry
 # 		LoadingCondition: notmobile
 # 	WithCargoPipsDecoration:
 # 		Position: BottomLeft
 # 		RequiresSelection: true
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
-# 		Image: raider.ordos
+# 		Image: ordos_raider
 
-# shock_raider.ixian:
+# ixian_shockraider:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9221,7 +9221,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~research_centre.ixian, ~!up_stormraider.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstormraider
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -9249,9 +9249,9 @@
 # 	Armament@damage:
 # 		Weapon: D2K_ShockGun
 # 		LocalOffset: 170,0,0
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	AttackFrontal:
 # 		FacingTolerance: 0
 # 	FireWarheadsOnDeath:
@@ -9266,11 +9266,11 @@
 # 	Voiced:
 # 		VoiceSet: D2KShockRaider
 # 	RenderSprites:
-# 		Image: stealth_raider.ordos
+# 		Image: ordos_stealthraider
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# deviator.ordos:
+# ordos_deviatorartillery:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^ArtilleryTemplate
 # 	Inherits@GAINSEXPERIENCE: ^GainsExperience
@@ -9289,7 +9289,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~palace.ordos
+# 		Prerequisites: ~ordos_palace
 # 		Description: Fires a warhead which changes\nthe allegiance of enemy vehicles
 # 		IconPalette: d2kunit
 # 	Health:
@@ -9308,12 +9308,12 @@
 # 	Armament:
 # 		Weapon: DeviatorMissile_Artillery
 # 		LocalOffset: -299,0,85
-# 	FirepowerMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 150
-# 	GrantConditionOnPrerequisite@up_toxin.ordos:
-# 		Condition: up_toxin.ordos
-# 		Prerequisites: up_toxin.ordos
+# 	GrantConditionOnPrerequisite@ordos_upgrade_biologicalwarfare:
+# 		Condition: ordos_upgrade_biologicalwarfare
+# 		Prerequisites: ordos_upgrade_biologicalwarfare
 # 	AttackFrontal:
 # 		FacingTolerance: 0
 # 	AutoTarget:
@@ -9328,7 +9328,7 @@
 # 	Voiced:
 # 		VoiceSet: D2KDeviator
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_toxin.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
 # ^combat_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -9385,7 +9385,7 @@
 # 	Armament:
 # 		Weapon: 80mm_A
 
-# mongoose.ixian:
+# ixian_mongoose:
 # 	Inherits: ^Vehicle
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -9400,7 +9400,7 @@
 # 		Bounds: 1280, 1280
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~heavy_factory.ixian
+# 		Prerequisites: ~ixian_advancedheavyfactory
 # 		BuildPaletteOrder: 30
 # 	Mobile:
 # 		Speed: 75
@@ -9486,7 +9486,7 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 
-# combat_tank.ordos:
+# ordos_combattank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9505,7 +9505,7 @@
 # 		BuildPaletteOrder: 40
 # 		Description: template_mbt.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~heavy_factory.ordos, ~!up_heavycombattank.ordos
+# 		Prerequisites: ~ordos_heavyfactory, ~!ordos_upgrade_heavycombattank
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -9541,9 +9541,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# heavycombattank.ordos:
+# ordos_heavycombattank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -9563,7 +9563,7 @@
 # 		BuildPaletteOrder: 40
 # 		Description: template_mbt.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~up_heavycombattank.ordos
+# 		Prerequisites: ~ordos_upgrade_heavycombattank
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -9592,10 +9592,10 @@
 # 		Weapon: HeavyOrdosCombatTankRockets
 # 		LocalOffset: 200,-200,200, 200,200,200
 # 		LocalYaw: 40, -40
-# 		RequiresCondition: up_heavycombattank_rockets.ordos
-# 	GrantConditionOnPrerequisite@up_heavycombattank_rockets.ordos:
-# 		Condition: up_heavycombattank_rockets.ordos
-# 		Prerequisites: up_heavycombattank_rockets.ordos
+# 		RequiresCondition: ordos_upgrade_heavycombattankrockets
+# 	GrantConditionOnPrerequisite@ordos_upgrade_heavycombattankrockets:
+# 		Condition: ordos_upgrade_heavycombattankrockets
+# 		Prerequisites: ordos_upgrade_heavycombattankrockets
 # 	AttackTurreted:
 # 	WithMuzzleOverlay:
 # 	WithSpriteTurret:
@@ -9609,9 +9609,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos, up_heavycombattank_rockets.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_heavycombattankrockets
 
-# autogun_tank_small.ordos:
+# ordos_combatautoguntank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9628,7 +9628,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~outpost.ordos, ~!up_heavy_autogun_tank.ordos
+# 		Prerequisites: ~ordos_outpost, ~!ordos_upgrade_heavyautoguntank
 # 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 # 		IconPalette: ra2
 # 	Armament:
@@ -9664,9 +9664,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KAutoGunTank
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# autogun_tank.ordos:
+# ordos_heavyautoguntank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^LineBreakerTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -9682,7 +9682,7 @@
 # 		Cost: 2800
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~up_heavy_autogun_tank.ordos
+# 		Prerequisites: ~ordos_upgrade_heavyautoguntank
 # 		BuildPaletteOrder: 50
 # 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 # 	UpdatesPlayerStatistics:
@@ -9724,9 +9724,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KAutoGunTank
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# combat_tank_stealth.ordos:
+# ordos_tankdestroyer:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^LineBreakerTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9744,7 +9744,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~research_centre.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter
 # 		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
 # 		IconPalette: windows256
 # 	Armor:
@@ -9781,7 +9781,7 @@
 # 	Cloak@TDcloak:
 # 		Palette: d2kcloak
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos, up_contraband.ordos
+# 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
 # combat_tank.ixian:
 # 	Inherits@D2KT: ^D2KTank
@@ -9799,7 +9799,7 @@
 # 		BuildPaletteOrder: 40
 # 		Description: template_mbt.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~heavy_factory.ixian, ~!d2k_duelist_tank_upgrade
+# 		Prerequisites: ~ixian_advancedheavyfactory, ~!d2k_duelist_tank_upgrade
 # 	Valued:
 # 		Cost: 800
 # 	Tooltip:
@@ -9839,7 +9839,7 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # combat_tank_corrino:
 # 	Inherits: combat_tank.harkonnen
@@ -10035,7 +10035,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@selection: ^SelectableEconomicUnit
 # 	Tooltip:
-# 		Name: Autonomous Carryall
+# 		Name: Autonomous ixian_autonomouscarryall
 # 	Valued:
 # 		Cost: 5000
 # 	Health:
@@ -10060,12 +10060,12 @@
 # 	SpawnActorOnDeath@LANDING:
 # 		Actor: carryall.huskVTOL
 # 		RequiresCondition: !cruising
-# 	Carryall:
+# 	ixian_autonomouscarryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
 # 		LocalOffset: 0, 0, -128
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 	ChangesHealth:
 # 		Step: 50
 # 		Delay: 3
@@ -10096,13 +10096,13 @@
 # 		Pieces: 3, 6
 # 		Range: 1c512, 2c512
 
-# carryall:
+# ixian_autonomouscarryall:
 # 	Inherits: carryall.reinforce
 # 	Health:
 # 		HP: 200000
 # 	Valued:
 # 		Cost: 2000
-# 	-Carryall:
+# 	-ixian_autonomouscarryall:
 # 	AutoCarryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
@@ -10120,7 +10120,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~high_tech_factory.ixian
+# 		Prerequisites: ~ixian_hightechfactory
 
 # carryall.paradrop:
 # 	Inherits: carryall.reinforce
@@ -10135,7 +10135,7 @@
 # 	Inherits: carryall.reinforce
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10143,7 +10143,7 @@
 # 		Actor: carryall_huskvtol.ordos
 # 		RequiresCondition: !cruising
 # 	RenderSprites:
-# 		Image: carryall.ordos
+# 		Image: ordos_advancedcarryall
 # 		PlayerPalette: player_rgba
 # 	AttackAircraft:
 # 		FacingTolerance: 10
@@ -10151,15 +10151,15 @@
 # 		Weapon: d2kCarryallChainGun
 # 		LocalOffset: 128,-213,-85, 128,213,-85
 
-# carryall.ordos:
-# 	Inherits: carryall
+# ordos_advancedcarryall:
+# 	Inherits: ixian_autonomouscarryall
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~high_tech_factory.ordos
+# 		Prerequisites: ~ordos_hightechfactory
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10167,7 +10167,7 @@
 # 		Actor: carryall_huskvtol.ordos
 # 		RequiresCondition: !cruising
 # 	RenderSprites:
-# 		Image: carryall.ordos
+# 		Image: ordos_advancedcarryall
 # 		PlayerPalette: player_rgba
 # 	AttackAircraft:
 # 		FacingTolerance: 10
@@ -10239,21 +10239,21 @@
 # carryall.husk:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Carryall
+# 		Name: ixian_autonomouscarryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall.huskVTOL:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Carryall
+# 		Name: ixian_autonomouscarryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -10262,28 +10262,28 @@
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall.ordos
+# 		Image: ordos_advancedcarryall
 # 		PlayerPalette: player_rgba
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall_huskvtol.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -10292,7 +10292,7 @@
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall.ordos
+# 		Image: ordos_advancedcarryall
 # 		PlayerPalette: player_rgba
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
@@ -10444,7 +10444,7 @@
 # 		OverrideActor: devastator
 
 # deviator.starport:
-# 	Inherits: deviator.ordos
+# 	Inherits: ordos_deviatorartillery
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		Prerequisites: ~starport_smuggler
@@ -10452,9 +10452,9 @@
 # 		Multiplier: 150
 # 	-MapEditorData:
 # 	RenderSprites:
-# 		Image: deviator.ordos
+# 		Image: ordos_deviatorartillery
 # 	UpdatesPlayerStatistics:
-# 		OverrideActor: deviator.ordos
+# 		OverrideActor: ordos_deviatorartillery
 
 # sonic_tank.starport:
 # 	Inherits: sonic_tank
@@ -10523,13 +10523,13 @@
 # 	RenderSprites:
 # 		Image: barracks.ordos
 
-# up_light.ordos:
+# ordos_upgrade_lightfactory:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Light Factory Upgrade
 # 	Buildable:
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~light_factory, research_centre, !up_light.ordos
+# 		Prerequisites: ~light_factory, research_centre, !ordos_upgrade_lightfactory
 # 		Queue: Upgrades
 # 		BuildLimit: 1
 # 		BuildDuration: 1500
@@ -10610,19 +10610,19 @@
 
 #   Ixian Upgrades
 
-# up_twin_rocket_trooper.ixian:
+# ixian_upgrade_twinbazooka:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Twin Bazooka Upgrade
 # 	Buildable:
 # 		Queue: Upgrades
 # 		Description: Upgrades Rocket Troopers with Twin Rocket Troopers
-# 		Prerequisites: ~outpost.ixian, !up_twin_rocket_trooper.ixian
-		# Prerequisites: ~outpost.d2k, !up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_twinbazooka
+		# Prerequisites: ~outpost.d2k, !ixian_upgrade_twinbazooka
 # 	RenderSprites:
-# 		Image: up_twin_rocket_trooper.ixian
+# 		Image: ixian_upgrade_twinbazooka
 
-# up_needleguns.ixian:
+# ixian_upgrade_tungstenneedleguns:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Tungsten Needle Guns
@@ -10630,14 +10630,14 @@
 # 		Cost: 5000
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~outpost.ixian, !up_needleguns.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_tungstenneedleguns
 # 		Queue: Upgrades
 # 		Description: upgrade_d2k_upgrade_needleguns.description
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: up_needleguns.ixian
+# 		Image: ixian_upgrade_tungstenneedleguns
 
-# up_personal_shield.ixian:
+# ixian_upgrade_personalshield:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Personal Shield
@@ -10647,12 +10647,12 @@
 # 		BuildPaletteOrder: 200
 # 		Queue: Upgrades
 # 		Description: upgrade_personal_shield.description
-# 		Prerequisites: ~outpost.ixian, !up_personal_shield.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_personalshield
 # 		IconPalette: ra2
 # 	RenderSprites:
 # 		Image: ixian_personal_shield_icon
 
-# up_general_purpose_armor.ixian:
+# ixian_upgrade_generalpurposearmor:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: General Purpose Armor
@@ -10660,14 +10660,14 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_general_purpose_armor.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_generalpurposearmor
 # 		Queue: Research
 # 		Description: upgrade_d2k_general_purpose_armor.description
 # 		IconPalette: d2kunit
 # 	RenderSprites:
 # 		Image: combat_tank.ixian
 
-# up_siege_range.ixian:
+# ixian_upgrade_reinforcedbarrel:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Reinforced Barrel
@@ -10675,13 +10675,13 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_siege_range.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_reinforcedbarrel
 # 		Queue: Research
 # 		Description: upgrade_d2k_siege_range_upgrade.description
 # 	RenderSprites:
 # 		Image: d2k_siege_tank_higher_range
 
-# up_heavy_missile.ixian:
+# ixian_upgrade_heavymissiles:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Heavy Missiles
@@ -10689,13 +10689,13 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_heavy_missile.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_heavymissiles
 # 		Queue: Research
 # 		Description: upgrade_d2k_heavy_missile_upgrade.description
 # 	RenderSprites:
 # 		Image: ix_missile_tank
 
-# up_advanced_ixian_technology.ixian:
+# ixian_upgrade_advancedixiantechnology:
 # 	Inherits: ^upgrade.template
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
@@ -10705,9 +10705,9 @@
 # 		BuildPaletteOrder: 200
 # 		Queue: Research
 # 		Description: upgrade_d2k_advanced_ixian_technology.description
-# 		Prerequisites: ~research_centre.ixian, up_personal_shield.ixian, !up_advanced_ixian_technology.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ixian_upgrade_personalshield, !ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 	#ProvidesPrerequisite:
 # 	ProvidesTeamProxyActor:
 # 		Actor: team_upgrade.d2k_advanced_ixian_technology
@@ -10715,142 +10715,142 @@
 # team_upgrade.d2k_advanced_ixian_technology:
 # 	Inherits: ^researched_upgrade.template
 # 	ProvidesPrerequisite:
-# 		Prerequisite: up_advanced_ixian_technology.ixian
+# 		Prerequisite: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
 # 	Buildable:
-# 		Description: upgrade_d2k_advanced_ixian_technology.description, ~research_centre.ixian
+# 		Description: upgrade_d2k_advanced_ixian_technology.description, ~ixian_ixresearchcenter
 # 	PlayerDisplayUpgrade:
 
 #   Ordos Upgrades
 
-# up_aatrooper.ordos:
+# ordos_upgrade_antiairtrooper:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Anti Air Trooper Upgrade
 # 	Buildable:
 # 		Queue: Upgrades
 # 		Description: Upgrades the Rocket Trooper to the Anti Air Trooper
-# 		Prerequisites: ~outpost.ordos, !up_aatrooper.ordos
+# 		Prerequisites: ~ordos_outpost, !ordos_upgrade_antiairtrooper
 # 	RenderSprites:
-# 		Image: aatrooper.ordos
+# 		Image: ordos_antiairtrooper
 
-# up_heavycombattank.ordos:
+# ordos_upgrade_heavycombattank:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Combat Tank Upgrade
 # 	Buildable:
 # 		Queue: Upgrades
 # 		Description: Upgrades the Ordos Combat Tank to the Heavy Combat Tank
-# 		Prerequisites: ~outpost.ordos, !up_heavycombattank.ordos
+# 		Prerequisites: ~ordos_outpost, !ordos_upgrade_heavycombattank
 # 		IconPalette: ra2
 # 	RenderSprites:
-# 		Image: heavycombattank.ordos
+# 		Image: ordos_heavycombattank
 
-# up_heavycombattank_rockets.ordos:
+# ordos_upgrade_heavycombattankrockets:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Combat Tank Rockets Upgrade
 # 	Buildable:
 # 		Queue: Upgrades
 # 		Description: Upgrades the Heavy Combat Tank with Rocket Launchers.
-# 		Prerequisites: ~outpost.ordos, research_centre.ordos, up_heavycombattank.ordos, !up_heavycombattank_rockets.ordos
+# 		Prerequisites: ~ordos_outpost, ordos_ixresearchcenter, ordos_upgrade_heavycombattank, !ordos_upgrade_heavycombattankrockets
 # 	RenderSprites:
-# 		Image: up_heavycombattank_rockets.ordos
+# 		Image: ordos_upgrade_heavycombattankrockets
 
-# up_heavy_autogun_tank.ordos:
+# ordos_upgrade_heavyautoguntank:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Autogun Tank Upgrade
 # 	Buildable:
 # 		Queue: Research
 # 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
-# 		Prerequisites: ~research_centre.ordos, ~up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter, ~ordos_upgrade_heavycombattank, !ordos_upgrade_heavyautoguntank
 # 	RenderSprites:
-# 		Image: autogun_tank.ordos
+# 		Image: ordos_heavyautoguntank
 
-# up_shield.ordos:
+# ordos_upgrade_shields:
 # 	Inherits: ^tech_upgrade_template
 # 	Tooltip:
 # 		Name: Ordos Shields
 # 	Buildable:
 # 		Description: ordos_upgrade_shield.description
-# 		Prerequisites: ~research_centre.ordos, !up_shield.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_shields
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: up_shield.ordos
+# 		Image: ordos_upgrade_shields
 
 # ^VehicleShieldsUpgradeOrdos:
-# 	GrantConditionOnPrerequisite@up_shield.ordos:
-# 		Condition: up_shield.ordos
-# 		Prerequisites: up_shield.ordos
+# 	GrantConditionOnPrerequisite@ordos_upgrade_shields:
+# 		Condition: ordos_upgrade_shields
+# 		Prerequisites: ordos_upgrade_shields
 # 	GrantCondition@shieldpermanent:
 # 		Condition: shieldpermanent
-# 		RequiresCondition: up_shield.ordos
+# 		RequiresCondition: ordos_upgrade_shields
 # 	Shielded:
 # 		DamageRegenDelay: 125
 # 		RegenAmount: 10
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && (up_shield.ordos || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (ordos_upgrade_shields || shieldgen || shielded)
 # 	ChangesShield@shielddischarge:
 # 		Delay: 10
 # 	ActorStatValues:
-# 		Upgrades: up_shield.ordos
+# 		Upgrades: ordos_upgrade_shields
 # 	Armor@shielded:
 # 		Type: Shield
 # 		RequiresCondition: shielded
 
-# up_toxin.ordos:
+# ordos_upgrade_biologicalwarfare:
 # 	Inherits: ^tech_upgrade_template
 # 	Tooltip:
 # 		Name: Biological Warfare
 # 	Buildable:
 # 		Description: ordos_upgrade_toxin.description
-# 		Prerequisites: ~research_centre.ordos, !up_toxin.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_biologicalwarfare
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: up_toxin.ordos
+# 		Image: ordos_upgrade_biologicalwarfare
 
 # ^BiologicalWarfareUpgradeOrdos:
-# 	ReloadDelayMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	ReloadDelayMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 90
-# 	SpeedMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	SpeedMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 110
-# 	DamageMultiplier@up_toxin.ordos:
-# 		RequiresCondition: up_toxin.ordos
+# 	DamageMultiplier@ordos_upgrade_biologicalwarfare:
+# 		RequiresCondition: ordos_upgrade_biologicalwarfare
 # 		Modifier: 90
-# 	GrantConditionOnPrerequisite@up_toxin.ordos:
-# 		Condition: up_toxin.ordos
-# 		Prerequisites: up_toxin.ordos
+# 	GrantConditionOnPrerequisite@ordos_upgrade_biologicalwarfare:
+# 		Condition: ordos_upgrade_biologicalwarfare
+# 		Prerequisites: ordos_upgrade_biologicalwarfare
 # 	ActorStatValues:
-# 		Upgrades: up_toxin.ordos
+# 		Upgrades: ordos_upgrade_biologicalwarfare
 
-# up_contraband.ordos:
+# ordos_upgrade_contraband:
 # 	Inherits: ^tech_upgrade_template
 # 	Tooltip:
 # 		Name: Contraband
 # 	Buildable:
 # 		Description: ordos_upgrade_contraband.description
-# 		Prerequisites: ~research_centre.ordos, !up_contraband.ordos
+# 		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_contraband
 # 		IconPalette: d2kunit
 # 	RenderSprites:
 # 		Image: ordos_upgrade_para
 
 # ^ContrabandUpgradeOrdos:
-# 	FirepowerMultiplier@up_contraband.ordos:
-# 		RequiresCondition: up_contraband.ordos
+# 	FirepowerMultiplier@ordos_upgrade_contraband:
+# 		RequiresCondition: ordos_upgrade_contraband
 # 		Modifier: 125
-# 	GrantConditionOnPrerequisite@up_contraband.ordos:
-# 		Condition: up_contraband.ordos
-# 		Prerequisites: up_contraband.ordos
+# 	GrantConditionOnPrerequisite@ordos_upgrade_contraband:
+# 		Condition: ordos_upgrade_contraband
+# 		Prerequisites: ordos_upgrade_contraband
 # 	ActorStatValues:
-# 		Upgrades: up_contraband.ordos
+# 		Upgrades: ordos_upgrade_contraband
 
 # d2k_ornithopter_upgrade:
 # 	Inherits: ^researched_upgrade.template
@@ -10888,7 +10888,7 @@
 # 	Tooltip:
 # 		Name: Spice Harvester (Destroyed)
 # 	TransformOnCapture:
-# 		IntoActor: harvester.ixian
+# 		IntoActor: ixian_spiceharvester
 
 # siege_tank.husk:
 # 	Inherits: ^D2KVehicleHusk
@@ -10955,7 +10955,7 @@
 # 	Tooltip:
 # 		Name: Deviator (Destroyed)
 # 	TransformOnCapture:
-# 		IntoActor: deviator.ordos
+# 		IntoActor: ordos_deviatorartillery
 
 # ^combat_tank.husk:
 # 	Inherits: ^D2KVehicleHusk
@@ -10979,7 +10979,7 @@
 # combat_tank_husk.ordos:
 # 	Inherits: ^combat_tank.husk
 # 	TransformOnCapture:
-# 		IntoActor: combat_tank.ordos
+# 		IntoActor: ordos_combattank
 
 ##################################
 #       PROMOTIONS
@@ -11621,7 +11621,7 @@
 # 		Prerequisites: quad_vordel_2, ~botplayer
 # 		Queue: Infantry, RAInfantry
 # combat_tank_vordel:
-# 	Inherits: combat_tank.ordos
+# 	Inherits: ordos_combattank
 # 	Inherits@vordelproxy: ^D2KVordelProxyUnit
 # 	Inherits@MC: ^MCImmune
 # 	Inherits@snipe: ^DriverKillImmune
@@ -11632,7 +11632,7 @@
 # 		-Prerequisites:
 # 		Queue: Infantry, RAInfantry
 # 	RenderSprites:
-# 		Image: combat_tank.ordos
+# 		Image: ordos_combattank
 # 		Palette: cloak
 # 	Voiced:
 # 		VoiceSet: D2KVordelVoice
@@ -12474,7 +12474,7 @@
 ##############################################
 #                Upgrade Ix
 ##############################################
-# up_heavy_inf.ixian:
+# ixian_promotion_unlockrashidan:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Rashidan
@@ -12483,12 +12483,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Rashidans.
-# 		Prerequisites: ~construction_yard.ixian, !up_heavy_inf.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockrashidan, rank1
 # 	RenderSprites:
 # 		Image: heavy_inf
 # 	ProvidesPrerequisite:
 
-# up_storm_infantry.ixian:
+# ixian_promotion_unlockstorminfantry:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Infantry
@@ -12497,12 +12497,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Storm Infantry.
-# 		Prerequisites: ~construction_yard.ixian, !up_storm_infantry.ixian, up_heavy_inf.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstorminfantry, ixian_promotion_unlockrashidan, rank1
 # 	RenderSprites:
-# 		Image: storm_infantry.ixian
+# 		Image: ixian_storminfantry
 # 	ProvidesPrerequisite:
 
-# up_stormraider.ixian:
+# ixian_promotion_unlockstormraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Raider
@@ -12511,12 +12511,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Storm Raiders.
-# 		Prerequisites: ~construction_yard.ixian, !up_stormraider.ixian, up_storm_infantry.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormraider, ixian_promotion_unlockstorminfantry, rank1
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 	ProvidesPrerequisite:
 
-# up_stormlasher.ixian:
+# ixian_promotion_unlockstormlasher:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Lasher
@@ -12525,14 +12525,14 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Storm Lashers.
-# 		Prerequisites: ~construction_yard.ixian, !up_stormlasher.ixian, up_stormraider.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, rank1
 # 	RenderSprites:
-# 		Image: storm_lasher.ixian
+# 		Image: ixian_stormlasher
 # 	ProvidesPrerequisite:
 
 	### Military tree
 
-# up_raider.ixian:
+# ixian_promotion_unlockheavyixraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Heavy Ix Raider
@@ -12541,12 +12541,12 @@
 # 		Queue: Promotions
 		#IconPalette: d2kunit
 # 		Description: Enables construction of Ix Raiders.
-# 		Prerequisites: ~construction_yard.ixian, !up_raider.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockheavyixraider, rank1
 # 	RenderSprites:
-# 		Image: shock_raider.ixian
+# 		Image: ixian_shockraider
 # 	ProvidesPrerequisite:
 
-# up_siegetank.ixian:
+# ixian_promotion_unlockixsiegetank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Siege Tank
@@ -12555,12 +12555,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ix Siege Tanks.
-# 		Prerequisites: ~construction_yard.ixian, up_raider.ixian, !up_siegetank.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider, !ixian_promotion_unlockixsiegetank, rank1
 # 	RenderSprites:
 # 		Image: ix_siege_tank
 # 	ProvidesPrerequisite:
 
-# up_neocymek.ixian:
+# ixian_promotion_unlockneocymek:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Neo Cymek
@@ -12569,12 +12569,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Neo Cymeks.
-# 		Prerequisites: ~construction_yard.ixian, up_siegetank.ixian, !up_neocymek.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, !ixian_promotion_unlockneocymek, rank1
 # 	RenderSprites:
-# 		Image: neocymek.ixian
+# 		Image: ixian_neocymek
 # 	ProvidesPrerequisite:
 
-# up_projector.ixian:
+# ixian_promotion_unlockixprojector:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Projector
@@ -12583,14 +12583,14 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables construction of the Ix Projector.
-# 		Prerequisites: ~construction_yard.ixian, up_neocymek.ixian, !up_projector.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, !ixian_promotion_unlockixprojector, rank1
 # 	RenderSprites:
 # 		Image: d2k_projector
 # 	ProvidesPrerequisite:
 
 	### Support tree
 
-# up_drone.ixian:
+# ixian_promotion_unlockixrailgundrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Railgun Drone
@@ -12598,12 +12598,12 @@
 # 		BuildPaletteOrder: 111
 # 		Queue: Promotions
 # 		Description: Enables construction of Ix Railgun Drones.
-# 		Prerequisites: ~construction_yard.ixian, !up_drone.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockixrailgundrone, rank1
 # 	RenderSprites:
-# 		Image: drone.ixian
+# 		Image: ixian_railgundrone
 # 	ProvidesPrerequisite:
 
-# up_bomber.ixian:
+# ixian_promotion_unlockixianempbomber:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ixian EMP Bomber
@@ -12612,12 +12612,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ixian EMP Bombers.
-# 		Prerequisites: ~construction_yard.ixian, up_drone.ixian, !up_bomber.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, !ixian_promotion_unlockixianempbomber, rank1
 # 	RenderSprites:
-# 		Image: bomber.ixian
+# 		Image: ixian_empbomber
 # 	ProvidesPrerequisite:
 
-# up_resonance_drone.ixian:
+# ixian_promotion_unlockixresonancedrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Resonance Drone
@@ -12626,12 +12626,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of  Ix Resonance Drones.
-# 		Prerequisites: ~construction_yard.ixian, up_bomber.ixian, !up_resonance_drone.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, !ixian_promotion_unlockixresonancedrone, rank1
 # 	RenderSprites:
-# 		Image: resonance_drone.ixian
+# 		Image: ixian_resonancedrone
 # 	ProvidesPrerequisite:
 
-# up_farasha.ixian:
+# ixian_promotion_unlockfarasha:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Farasha
@@ -12640,9 +12640,9 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of the Farasha.
-# 		Prerequisites: ~construction_yard.ixian, up_resonance_drone.ixian, !up_farasha.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, !ixian_promotion_unlockfarasha, rank1
 # 	RenderSprites:
-# 		Image: farasha.ixian
+# 		Image: ixian_farasha
 # 	ProvidesPrerequisite:
 
 	####################################################################################################
@@ -12655,7 +12655,7 @@
 ##############################################
 #                Upgrade Ordos
 ##############################################
-# up_chem_troop.ordos:
+# ordos_promotion_unlockchemicaltrooper:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Chemical Trooper
@@ -12664,12 +12664,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Allows training of Chemical Infantry.
-# 		Prerequisites: ~construction_yard.ordos, !up_chem_troop.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockchemicaltrooper, rank1
 # 	RenderSprites:
 # 		Image: chemtrooper
 # 	ProvidesPrerequisite:
 
-# up_contaminator.ordos:
+# ordos_promotion_unlockcontaminator:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Contaminator
@@ -12678,12 +12678,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Allows training of Contaminators.
-# 		Prerequisites: ~construction_yard.ordos, !up_contaminator.ordos, up_chem_troop.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockcontaminator, ordos_promotion_unlockchemicaltrooper, rank1
 # 	RenderSprites:
-# 		Image: contaminator.ordos
+# 		Image: ordos_contaminator
 # 	ProvidesPrerequisite:
 
-# up_leech.ordos:
+# ordos_promotion_unlockleecher:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Leecher
@@ -12692,12 +12692,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Leechers.
-# 		Prerequisites: ~construction_yard.ordos, !up_leech.ordos, up_contaminator.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockleecher, ordos_promotion_unlockcontaminator, rank1
 # 	RenderSprites:
-# 		Image: leech.ordos
+# 		Image: ordos_leech
 # 	ProvidesPrerequisite:
 
-# up_tleilax_labcrawl.ordos:
+# ordos_promotion_unlocklaboratorycrawler:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Laboratory Crawler
@@ -12706,12 +12706,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Laboratory Crawlers.
-# 		Prerequisites: ~construction_yard.ordos, !up_tleilax_labcrawl.ordos, up_leech.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlocklaboratorycrawler, ordos_promotion_unlockleecher, rank1
 # 	RenderSprites:
-# 		Image: tleilax_labcrawl.ordos
+# 		Image: ordos_laboratorycrawler
 # 	ProvidesPrerequisite:
 #
-# up_scoutdrone.ordos:
+# ordos_promotion_unlockdustdrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Dust Drone
@@ -12720,12 +12720,12 @@
 # 		Queue: Promotions
 		#IconPalette: d2kunit
 # 		Description: Enables construction of Dust Drones.
-# 		Prerequisites: ~construction_yard.ordos, !up_scoutdrone.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockdustdrone, rank1
 # 	RenderSprites:
-# 		Image: scoutdrone.ordos
+# 		Image: ordos_dustdrone
 # 	ProvidesPrerequisite:
 
-# up_stealth_raider.ordos:
+# ordos_promotion_unlockstealthraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Stealth Raider
@@ -12734,12 +12734,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Stealth Raider.
-# 		Prerequisites: ~construction_yard.ordos, up_scoutdrone.ordos, !up_stealth_raider.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdustdrone, !ordos_promotion_unlockstealthraider, rank1
 # 	RenderSprites:
-# 		Image: stealth_raider.ordos
+# 		Image: ordos_stealthraider
 # 	ProvidesPrerequisite:
 
-# up_laser_tank.ordos:
+# ordos_promotion_unlocklasertank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Laser Tank
@@ -12748,12 +12748,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Laser Tanks.
-# 		Prerequisites: ~construction_yard.ordos, up_stealth_raider.ordos, !up_laser_tank.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockstealthraider, !ordos_promotion_unlocklasertank, rank1
 # 	RenderSprites:
-# 		Image: laser_tank.ordos
+# 		Image: ordos_lasertank
 # 	ProvidesPrerequisite:
 
-# up_python.ordos:
+# ordos_promotion_unlockpython:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Python
@@ -12761,13 +12761,13 @@
 # 		BuildPaletteOrder: 119
 # 		Queue: Promotions
 # 		Description: Enables construction of the Python.
-# 		Prerequisites: ~construction_yard.ordos, up_laser_tank.ordos, !up_python.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklasertank, !ordos_promotion_unlockpython, rank1
 # 	RenderSprites:
-# 		Image: python.ordos
+# 		Image: ordos_pythontank
 # 	ProvidesPrerequisite:
 
 #
-# up_mortar.ordos:
+# ordos_promotion_unlockmortartroopers:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Mortar Troopers
@@ -12776,12 +12776,12 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables training of Mortar Troopers.
-# 		Prerequisites: ~construction_yard.ordos, !up_mortar.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockmortartroopers, rank1
 # 	RenderSprites:
-# 		Image: mortar.ordos
+# 		Image: ordos_mortartrooper
 # 	ProvidesPrerequisite:
 
-# up_deviatormk2.ordos:
+# ordos_promotion_unlockdeviatortank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Deviator Tank
@@ -12790,12 +12790,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Deviator Tanks.
-# 		Prerequisites: ~construction_yard.ordos, up_mortar.ordos, !up_deviatormk2.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockmortartroopers, !ordos_promotion_unlockdeviatortank, rank1
 # 	RenderSprites:
-# 		Image: deviatormk2.ordos
+# 		Image: ordos_deviatortank
 # 	ProvidesPrerequisite:
 
-# up_banshee.ordos:
+# ordos_promotion_unlockbanshees:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Banshees
@@ -12804,12 +12804,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Banshees.
-# 		Prerequisites: ~construction_yard.ordos, up_deviatormk2.ordos, !up_banshee.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdeviatortank, !ordos_promotion_unlockbanshees, rank1
 # 	RenderSprites:
-# 		Image: banshee.ordos
+# 		Image: ordos_banshee
 # 	ProvidesPrerequisite:
 
-# up_wraith.ordos:
+# ordos_promotion_unlockwraith:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Wraith
@@ -12818,9 +12818,9 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables construction of the Wraith.
-# 		Prerequisites: ~construction_yard.ordos, up_banshee.ordos, !up_wraith.ordos, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockbanshees, !ordos_promotion_unlockwraith, rank1
 # 	RenderSprites:
-# 		Image: wraith.ordos
+# 		Image: ordos_wraith
 # 	ProvidesPrerequisite:
 
 #
@@ -12846,7 +12846,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_scout_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~up_heavy_inf.ixian
+# 		Prerequisites: ~ixian_promotion_unlockrashidan
 # 	Mobile:
 # 		Speed: 50
 # 	Health:
@@ -12856,24 +12856,24 @@
 # 	Armament@PRIMARY: ##########
 # 		Weapon: RashinanGun
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@Upgrade: ##########
 # 		Weapon: RashinanGun_upgrade
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@GARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: RashinanGun
 # 		MuzzleSequence: garrison-muzzle
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@UpgradeGARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: RashinanGun_upgrade
 # 		MuzzleSequence: garrison-muzzle
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	WithInfantryBody:
 # 		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
@@ -12886,9 +12886,9 @@
 # 	WithDeathAnimation:
 # 		DeathSequencePalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_infantry.ixian:
+# ixian_storminfantry:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeavyInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -12909,7 +12909,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~up_storm_infantry.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstorminfantry, ixian_ixresearchcenter
 # 	Mobile:
 # 		Speed: 44
 # 	Health:
@@ -12924,9 +12924,9 @@
 # 		Weapon: D2K_StormGunInf
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	WithInfantryBody:
 # 		-IdleSequences: idle1,idle2
 # 		DefaultAttackSequence: shoot
@@ -12936,9 +12936,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_raider.ixian:
+# ixian_stormraider:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -12956,7 +12956,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~up_stormraider.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstormraider, ixian_ixresearchcenter
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -12991,9 +12991,9 @@
 # 		LocalOffset: -300,0,300
 # 	FirepowerMultiplier@StormEffect:
 # 		Modifier: 50
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
@@ -13007,12 +13007,12 @@
 # 	Voiced:
 # 		VoiceSet: D2KShockRaider
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_lasher.ixian:
+# ixian_stormlasher:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@selection: ^AdvancedDefenseTemplate
@@ -13026,7 +13026,7 @@
 # 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~up_stormlasher.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
 # 		BuildPaletteOrder: 750
 # 		Description: actor_storm_lasher.description
 # 		IconPalette: player
@@ -13041,9 +13041,9 @@
 # 		HP: 200000
 # 	Shielded:
 # 		RegenAmount: 160
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	BodyOrientation:
 # 		QuantizedFacings: 32
 # 	WithMuzzleOverlay:
@@ -13092,7 +13092,7 @@
 # 	DetectCloaked:
 # 		Range: 5692
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 
 	### Armor Tree
@@ -13118,7 +13118,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~up_raider.ixian
+# 		Prerequisites: ~ixian_promotion_unlockheavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Heavy Ix Raider
@@ -13175,13 +13175,13 @@
 # 		LocalOffset: 256,0,256
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: RaiderGuns_upgrade
 # 		LocalOffset: 256,0,256
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	FirepowerMultiplier@DualWeapon:
 # 		Modifier: 50
 # 	ReloadAmmoDelayMultiplier@RANK-1:
@@ -13202,15 +13202,15 @@
 # 	Cargo:
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 5
-# 		InitialUnits: heavy_inf, heavy_inf, heavy_inf, twin_rocket_trooper.ixian, shock_infantry.ixian
+# 		InitialUnits: heavy_inf, heavy_inf, heavy_inf, ixian_twinrockettrooper, ixian_shockinfantry
 # 		LoadingCondition: notmobile
 # 	WithCargoPipsDecoration:
 # 		Position: BottomLeft
 # 		RequiresSelection: true
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# combat_siege_tank.ixian:
+# ixian_ixcombatsiege:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13226,7 +13226,7 @@
 # 		BuildPaletteOrder: 40
 # 		IconPalette: d2kunit
 # 		Description: actor_siege_tank.description
-# 		Prerequisites: ~outpost.ixian
+# 		Prerequisites: ~ixian_outpost
 # 	Valued:
 # 		Cost: 1200
 # 	Tooltip:
@@ -13256,14 +13256,14 @@
 # 		LocalOffset: 256,0,320
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 200
-# 		RequiresCondition: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 # 	AttackTurreted:
 # 	WithMuzzleOverlay:
 # 	WithSpriteTurret:
@@ -13276,9 +13276,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# neocymek.ixian:
+# ixian_neocymek:
 # 	Inherits: ^Vehicle
 # 	Inherits@Template: ^LineBreakerTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13297,7 +13297,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_neocymek.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
 # 		Description: Colossal Ixian Mech.
 # 	Mobile:
 # 		Speed: 45
@@ -13370,9 +13370,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# jammer.ixian:
+# ixian_ixprojector:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^EpicVehicleTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13392,7 +13392,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~up_projector.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
 # 		Description: actor_ixprojector.description
 # 		IconPalette: windows256
 # 	Health:
@@ -13479,7 +13479,7 @@
 # 		FollowAfterAttackDelay: 25
 # 		ShouldSpawnInitialLoad: false
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # ^D2KVordelProxyUnit:
 # 	GrantConditionOnPowerState@LOWPOWER:
@@ -13601,7 +13601,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 90
-# 		Prerequisites: ~upixians_quaketank, research_centre.ixian
+# 		Prerequisites: ~upixians_quaketank, ixian_ixresearchcenter
 # 		Description: actor_quake_tank.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -13622,7 +13622,7 @@
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && up_advanced_ixian_technology.ixian
+# 		RequiresCondition: !disabled && ixian_upgrade_advancedixiantechnology
 # 	Mobile:
 # 		Speed: 50
 # 		TurnSpeed: 10
@@ -13641,7 +13641,7 @@
 # 		ThumpInterval: 25
 # 		ChargeDelay: 125
 # 		DetonationDelay: 25
-# 		DriverActor: shock_infantry.ixian
+# 		DriverActor: ixian_shockinfantry
 # 		DeployedCondition: deployed
 # 		DetonationWeapon: d2k_quake_boom
 # 		ThumpDamageWeapon: d2k_quake_thump
@@ -13672,11 +13672,11 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 	### Artillery and Air Tree
 
-# drone.ixian:
+# ixian_railgundrone:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^HelicopterTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -13700,7 +13700,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_drone.ixian, high_tech_factory.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixrailgundrone, ixian_hightechfactory
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13743,7 +13743,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	WithAttackAnimation:
 # 		Sequence: shoot
 # 	RenderSprites:
@@ -13757,7 +13757,7 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: drone.ixian
+# 		Image: ixian_railgundrone
 # 		PlayerPalette: player_rgba
 
 # d2k_heavy_air_drone:
@@ -13781,7 +13781,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~upixians_airdrone, outpost.ixian
+# 		Prerequisites: ~upixians_airdrone, ixian_outpost
 # 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -13798,7 +13798,7 @@
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && up_advanced_ixian_technology.ixian
+# 		RequiresCondition: !disabled && ixian_upgrade_advancedixiantechnology
 # 	AmmoPool:
 # 		Name: primary
 # 		Ammo: 8
@@ -13827,28 +13827,28 @@
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARY: ##########
 # 		Weapon: d2k_air_drone_guns
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARYUpgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Aircraft:
 # 		CruiseAltitude: 1800
 # 		Speed: 165
@@ -13859,12 +13859,12 @@
 # 		TurnSpeed: 11
 # 	WithFacingSpriteBody:
 # 	Selectable:
-# 		Class: air_drone.ixian
+# 		Class: ixian_airdrone
 # 		Bounds: 1536, 1280, 0, 0
 # 	SpawnActorOnDeath:
 # 		Actor: d2k_heavy_air_drone.husk
 # 	EjectOnDeath:
-# 		PilotActor: storm_infantry.ixian
+# 		PilotActor: ixian_storminfantry
 # 	Voiced:
 # 		VoiceSet: D2KVehicleVoice
 # 	RenderSprites:
@@ -13882,7 +13882,7 @@
 # 		UncloakSound: appear1.aud
 # 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 # d2k_heavy_air_drone.husk:
 # 	Inherits: air_drone_husk.ixian
@@ -13897,7 +13897,7 @@
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeMed
 
-# bomber.ixian:
+# ixian_empbomber:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@reload: ^RearmableAircraft
 # 	Inherits@Template: ^BomberTemplate
@@ -13916,7 +13916,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_bomber.ixian, launchpad.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixianempbomber, ixian_launchpad, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13956,7 +13956,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 
@@ -13968,10 +13968,10 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: bomber.ixian
+# 		Image: ixian_empbomber
 # 		PlayerPalette: player_rgba
 
-# resonance_drone.ixian:
+# ixian_resonancedrone:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^HelicopterTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -13993,7 +13993,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_resonance_drone.ixian, high_tech_factory.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -14018,7 +14018,7 @@
 # 		Type: heal
 # 		Color: 55BBFF
 # 		RequiresCondition: !disabled
-# 	WithDecoration@CARRYALL:
+# 	WithDecoration@ixian_autonomouscarryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
 # 		ValidRelationships: Ally, Enemy, Neutral
@@ -14059,7 +14059,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	WithAttackAnimation:
 # 		Sequence: shoot
 # 	RenderSprites:
@@ -14073,10 +14073,10 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: resonance_drone.ixian
+# 		Image: ixian_resonancedrone
 # 		PlayerPalette: player_rgba
 
-# farasha.ixian:
+# ixian_farasha:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^SpaceshipTemplate
 # 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -14098,7 +14098,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: ~up_farasha.ixian, high_tech_factory.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockfarasha, ixian_hightechfactory, ixian_ixresearchcenter
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_farasha.description
@@ -14137,7 +14137,7 @@
 # 		PauseOnCondition: discharged
 # 	Armament:
 # 		Name: secondary
-# 		Weapon: farasha.ixian
+# 		Weapon: ixian_farasha
 # 		LocalOffset: 1500,0,-250
 # 		PauseOnCondition: !charged
 # 		ReloadingCondition: discharged
@@ -14196,7 +14196,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # farasha_husk.ixian:
 # 	Inherits: ^PlaneHusk
@@ -14206,7 +14206,7 @@
 # 		TurnSpeed: 15
 # 		Speed: 40
 # 	RenderSprites:
-# 		Image: farasha.ixian
+# 		Image: ixian_farasha
 # 		PlayerPalette: player_rgba
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
@@ -14267,7 +14267,7 @@
 # 		Pieces: 1, 2
 # 		Range: 1c0, 3c0
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # d2k_farasha_drone.husk:
 # 	Inherits: ^PlaneHusk

@@ -173,7 +173,7 @@ WOLFBARR:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 490,-470,0, 355,512,0, -355,-512,0, -630,512,0
@@ -541,7 +541,7 @@ WOLFWEAP:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 80
@@ -1042,8 +1042,8 @@ wolfdog:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack Dog
-		GenericName: Dog
+		Name: Attack ra1_soviet_attackdog
+		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	SelectionDecorations:
@@ -1105,7 +1105,7 @@ wolfdog:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA1
 	RenderSprites:
-		Image: dog
+		Image: ra1_soviet_attackdog
 	GrantConditionOnPrerequisite@wolfupdogfood:
 		Condition: wolfupdogfood
 		Prerequisites: wolfupdogfood
@@ -1678,7 +1678,7 @@ wolfflak:
 		Name: Flak-88 Truck
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviet_flaktruck
 	Health:
 		HP: 15000
 	Armor:
@@ -1709,7 +1709,7 @@ wolfflak:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviet_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: GerVehicleVoice
@@ -1734,7 +1734,7 @@ wolfftrk:
 		Name: Halftrack Transport
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviet_flaktruck
 	Health:
 		HP: 15000
 	Armor:
@@ -1764,7 +1764,7 @@ wolfftrk:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviet_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: GerVehicleVoice
@@ -1880,7 +1880,7 @@ wolfrobot:
 wolfupdogfood:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Dog Food
+		Name: ra1_soviet_attackdog Food
 	Buildable:
 		BuildPaletteOrder: 250
 		Queue: Research
@@ -2149,7 +2149,7 @@ IMP:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, atek, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
 		Description: A Demon that shoots salvo of plasma balls.\nStrong vs buildings vs vehicles
 	BodyOrientation:
 	Valued:

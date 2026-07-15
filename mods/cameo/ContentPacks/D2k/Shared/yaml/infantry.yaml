@@ -1,0 +1,213 @@
+light_inf:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
+	# which redefines the shield traits keyed to its own upgrade and overwrites the
+	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.
+	Inherits@personalshield: ^D2KPersonalShield
+	Tooltip:
+		Name: Light Infantry
+	Valued:
+		Cost: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~d2k_barracks, ~!faction.ordos, ~!faction.ixian
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Mobile:
+		Speed: 52
+	Armament@PRIMARY: ##########
+		Weapon: LMG
+		LocalOffset: 128,0,256
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@Upgrade: ##########
+		Weapon: LMG_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: LMG
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: LMG_upgrade
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+		DefaultAttackSequence: shoot
+	Parachutable:
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
+
+trooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooper, ~!ixian_upgrade_twinbazooka, ~!faction.ordos, ~!faction.ixian
+		Description: template_antitank_antiair_infantry.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Rocket Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 48
+	Armament:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+	TakeCover:
+		ProneOffset: 320,0,-128
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
+
+fremen_creep:
+	Inherits: ^D2KInfantry
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@bot: ^BotMicromanageable
+	Tooltip:
+		Name: Fremen Warrior
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 50
+	Valued:
+		Cost: 500
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 10000
+	AutoTarget:
+		ScanRadius: 10
+	Armament@PRIMARY:
+		Weapon: HMG_fremen
+	Armament@SECONDARY:
+		Weapon: Fremen_RPG
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	-MustBeDestroyed:
+	Voiced:
+		VoiceSet: D2KFremenVoice
+	DetectCloaked:
+		Range: 5000
+	Passenger:
+		CargoType: Fremen
+	RenderSprites:
+		Image: fremen
+	RequiresSpecificOwners:
+		ValidOwnerNames: Creeps
+	MobSpawnerSlave:
+	-RevealsShroud@base-reveal:
+	-GrantConditionOnPrerequisite@base-reveal:
+
+engineer:
+	Inherits: E6
+	Inherits@BulletImmune: ^BulletImmune
+	Inherits@personalshield: ^D2KPersonalShield
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Buildable:
+		Prerequisites: ~d2k_barracks
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: engineer
+	Voiced:
+		VoiceSet: D2KEngineerVoice
+
+# submachinegunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 60
+# 	Tooltip:
+# 		Name: Mercenary
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with SMG\nDeals burst damage.\nShort Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.mercenary
+# 		BuildDuration: 80
+# 		BuildDurationModifier: 100
+# 		Icon: icon_merc
+# 	Mobile:
+# 		Speed: 48
+# 	Health:
+# 		HP: 7200
+# 	Armament@PRIMARY: ##########
+# 		Weapon: LMG_burst
+# 	RenderSprites:
+# 		Image: light_inf
+# 	Voiced:
+# 		VoiceSet: D2KTrooper
+
+# shotgunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 80
+# 	Tooltip:
+# 		Name: Shotgunner
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with shotgun\nDeals massive damage up front.\nVery Short Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.smugglers
+# 		BuildDuration: 90
+# 		BuildDurationModifier: 100
+# 	WithInfantryBody:
+# 		-IdleSequences: idle1,idle2
+# 		DefaultAttackSequence: shoot
+# 	Armament@PRIMARY: ##########
+# 		Weapon: d2k_shotgun
+# 		LocalOffset: 0,0,50
+# 	Health:
+# 		HP: 6000
+# 	Mobile:
+# 		Speed: 48
+# 		Voice: Move
+# 	RenderSprites:
+# 		Image: shotgunner
+# 		PlayerPalette: player
+# 	Voiced:
+# 		VoiceSet: D2KShotgunner

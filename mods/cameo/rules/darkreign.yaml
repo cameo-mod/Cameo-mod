@@ -857,7 +857,7 @@ drwall1:
 	Valued:
 		Cost: 50
 	Tooltip:
-		Name: Concrete Wall
+		Name: Concrete ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Defence, RADefence
@@ -882,7 +882,7 @@ drwall2:
 	Valued:
 		Cost: 50
 	Tooltip:
-		Name: Concrete Wall
+		Name: Concrete ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Defence, RADefence
@@ -1056,7 +1056,7 @@ dribarr.imperium:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -2012,7 +2012,7 @@ dramp:
 	RenderSprites:
 	Voiced:
 		VoiceSet: DRAmperVoice
-	InaccuracyMultiplier@Sniper:
+	InaccuracyMultiplier@ra1_allies_alliedsniper:
 		Modifier: 50
 
 drshreder:
@@ -2894,7 +2894,7 @@ drfgbarr.freedomguard:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -3005,7 +3005,7 @@ drfgweap.freedomguard:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -3702,7 +3702,7 @@ drmercenary:
 		BuildPaletteOrder: 25
 		Prerequisites: barracks
 		Queue: Infantry, RAInfantry
-		Description: Recruited from outside the Freedom Guard ranks, these paid guns carry a massive shoulder mounted rail gun.\nHighly trained and ruthless, the Mercenary is tougher and deadlier than the Raider. The Mercenary can phase\nonce the Phasing Facility has been built\n\nType: Walker\nSpeed: SLow\nWeapon: Rail Gun\nRange: Short\nArmor: Medium
+		Description: Recruited from outside the Freedom Guard ranks, these paid guns carry a massive shoulder mounted rail gun.\nHighly trained and ruthless, the Mercenary is tougher and deadlier than the Raider. The Mercenary can phase\nonce the Phasing Facility has been built\n\nType: Walker\nSpeed: SLow\nWeapon: Rail td_nod_gunturret\nRange: Short\nArmor: Medium
 		BuildDuration: 300
 		BuildDurationModifier: 100
 	Mobile:
@@ -3751,14 +3751,14 @@ drsnipe:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Sniper
+		Name: ra1_allies_alliedsniper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: drfgbarr2
 		Queue: Infantry, RAInfantry
-		Description: With a long range electro-magnetic needle gun, the Sniper is lethal against\ninfantry targets. Like the Scout, the Sniper can morph into objects for camouflage.\n\nType: Walker\nSpeed: Medium\nWeapon: Sniper Rail\nRange: Long\nArmor: Light
+		Description: With a long range electro-magnetic needle td_nod_gunturret, the ra1_allies_alliedsniper is lethal against\ninfantry targets. Like the Scout, the ra1_allies_alliedsniper can morph into objects for camouflage.\n\nType: Walker\nSpeed: Medium\nWeapon: ra1_allies_alliedsniper Rail\nRange: Long\nArmor: Light
 	Mobile:
 		Speed: 80
 	Health:
@@ -4021,14 +4021,14 @@ drspid:
 	Valued:
 		Cost: 550
 	Tooltip:
-		Name: Spider Bike
+		Name: Spider td_nod_reconbike
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1020
 		BuildDurationModifier: 40
-		Description: This all terrain vehicle is the cornerstone of\nthe Freedom Guard ground force. Fast and inexpensive, it\nis able to tackle all types of terrain. Armed with a double\nrail gun, it is fairly effective against armour but somewhat\nvulnerable to infantry\n\nType: Special Wheeled\nSpeed: Fast\nWeapon: Rail Gun\nRange: Medium\nArmor: Medium
+		Description: This all terrain vehicle is the cornerstone of\nthe Freedom Guard ground force. Fast and inexpensive, it\nis able to tackle all types of terrain. Armed with a double\nrail td_nod_gunturret, it is fairly effective against armour but somewhat\nvulnerable to infantry\n\nType: Special Wheeled\nSpeed: Fast\nWeapon: Rail td_nod_gunturret\nRange: Medium\nArmor: Medium
 	Mobile:
 		Speed: 174
 		TurnSpeed: 48
@@ -4168,7 +4168,7 @@ drrtnk:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 100
 		BuildDuration: 1500
-		Description: The pinnacle of Freedom Guard\narmour, the Triple Rail uses hover technology stolen from\nthe Imperium to allow movement over a broader range\nof terrain types. Hauling three electro-magnetic projectile\naccelerator cannons, or rail guns, this tank is a savage\nconsumer of Imperium armour.\n\nType: Hover\nSpeed: Medium\nWeapon: Triple Rail Gun\nRange: Long\nArmor: Heavy
+		Description: The pinnacle of Freedom Guard\narmour, the Triple Rail uses hover technology stolen from\nthe Imperium to allow movement over a broader range\nof terrain types. Hauling three electro-magnetic projectile\naccelerator cannons, or rail guns, this tank is a savage\nconsumer of Imperium armour.\n\nType: Hover\nSpeed: Medium\nWeapon: Triple Rail td_nod_gunturret\nRange: Long\nArmor: Heavy
 	Mobile:
 		Locomotor: hover
 		TurnSpeed: 32
@@ -4585,14 +4585,14 @@ drskybike:
 	Valued:
 		Cost: 850
 	Tooltip:
-		Name: Sky Bike
+		Name: Sky td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
 		Queue: Vehicle, RAVehicle
-		Description: Using a modified Spider Bike chassis, the\nFreedom Guard were able to produce cheap, fast aerial\nunits which could attack enemy ground troops and other\nflyers. Although quicker than the Imperium Cyclone, the\nSky Bike is not as heavily armoured and is outgunned in\neven combat. The speed of the Sky Bike, however, allows\nit to dictate the circumstance of conflict. This unit fires\nhigh-velocity mini-missiles and, like the Outrider, must rearm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Mini Missiles\nRange: Short\nArmor: Light
+		Description: Using a modified Spider td_nod_reconbike chassis, the\nFreedom Guard were able to produce cheap, fast aerial\nunits which could attack enemy ground troops and other\nflyers. Although quicker than the Imperium Cyclone, the\nSky td_nod_reconbike is not as heavily armoured and is outgunned in\neven combat. The speed of the Sky td_nod_reconbike, however, allows\nit to dictate the circumstance of conflict. This unit fires\nhigh-velocity mini-missiles and, like the Outrider, must rearm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Mini Missiles\nRange: Short\nArmor: Light
 	Aircraft:
 		TurnSpeed: 36
 		Speed: 210
@@ -4645,7 +4645,7 @@ droutrider:
 		BuildPaletteOrder: 20
 		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
 		Queue: Vehicle, RAVehicle
-		Description: This ground attack aerial unit is slower and less\nmanoeuvrable than the Sky Bike, but considerably tougher\nand fires air to ground missiles. Deadly effective against\nImperium armour, it cannot engage other air units and\nshould be escorted by air defence units. The Outrider has\nlimited ammunition and must re-arm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
+		Description: This ground attack aerial unit is slower and less\nmanoeuvrable than the Sky td_nod_reconbike, but considerably tougher\nand fires air to ground missiles. Deadly effective against\nImperium armour, it cannot engage other air units and\nshould be escorted by air defence units. The Outrider has\nlimited ammunition and must re-arm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
 	Aircraft:
 		TurnSpeed: 36
 		Speed: 210
@@ -4958,7 +4958,7 @@ dribarr.shadowhand:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -5186,7 +5186,7 @@ drreaper:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, drmadrix.shadowhand
 		Queue: Infantry, RAInfantry
-		Description: Shock Sniper Infantry.\n  Strong vs Light Vehicles and Creatures \n  Weak vs Infantry
+		Description: Shock ra1_allies_alliedsniper Infantry.\n  Strong vs Light Vehicles and Creatures \n  Weak vs Infantry
 	Mobile:
 		Speed: 50
 	Health:
@@ -5605,7 +5605,7 @@ drbiocom.xenite:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -6349,8 +6349,8 @@ dribarr.togran:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
-	Inherits@barr: ^IsBarrack
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -6760,7 +6760,7 @@ drshok:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Shok Trooper
+		Name: ra1_soviet_shocktrooper Trooper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -7869,7 +7869,7 @@ drrasta:
 		BuildPaletteOrder: 10
 		Prerequisites: anypower
 		Queue: Infantry, RAInfantry
-		Description: The Low Rank Infantry\nThe Second Veterancy adquire Grenade Launcher\nThe Next Veterancy adquire Better Laser Gun\nThe Ultimate Veterancy transform into Jail Breaker\nThe Jail Breaker with veterancy can sabotage and attach C4 in vehicles.\n\nType: Infantry\nSpeed: Slow\nWeapon: Small Laser, Gremades, C4s\nRange: Medium\nArmor: None
+		Description: The Low Rank Infantry\nThe Second Veterancy adquire Grenade Launcher\nThe Next Veterancy adquire Better Laser td_nod_gunturret\nThe Ultimate Veterancy transform into Jail Breaker\nThe Jail Breaker with veterancy can sabotage and attach C4 in vehicles.\n\nType: Infantry\nSpeed: Slow\nWeapon: Small Laser, Gremades, C4s\nRange: Medium\nArmor: None
 	Mobile:
 		Speed: 80
 	Health:
@@ -8864,8 +8864,8 @@ drabarr.eodalien:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
-	Inherits@barr: ^IsBarrack
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -10486,7 +10486,7 @@ drdcamp.descendants:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@barr: ^IsBarrack
+	Inherits@ra1_soviet_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -10569,7 +10569,7 @@ drdsupport:
 	Valued:
 		Cost: 500 #300
 	Tooltip:
-		Name: Support Tent
+		Name: Support ra1_allies_alliedbarracks
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3

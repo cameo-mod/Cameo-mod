@@ -60,12 +60,12 @@ CRATE:
 	GiveBaseBuilderCrateAction@gdi:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.gdi
+		Units: td_gdi_mobileconstructionvehicle
 		ValidFactions: gdi
 	GiveBaseBuilderCrateAction@nod:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.nod
+		Units: td_nod_mobileconstructionvehicle
 		ValidFactions: nod
 	GiveBaseBuilderCrateAction@tsgdi:
 		SelectionShares: 0
@@ -90,97 +90,97 @@ CRATE:
 	GiveBaseBuilderCrateAction@allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.allies
+		Units: ra1_allies_alliedmobileconstructionvehicle
 		ValidFactions: allies
 	GiveBaseBuilderCrateAction@soviet:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.soviet
+		Units: ra1_soviet_mobileconstructionvehicle
 		ValidFactions: soviet
 	GiveBaseBuilderCrateAction@modjapan:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ramcv.japan
+		Units: japan_japanesemobileconstructionvehicle
 		ValidFactions: modjapan
 	GiveBaseBuilderCrateAction@ra2america:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra2amcv
+		Units: ra2_allies_alliedmobileconstructionvehicle
 		ValidFactions: ra2america
 	GiveBaseBuilderCrateAction@ra2russia:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra2smcv
+		Units: ra2_soviets_mobileconstructionvehicle
 		ValidFactions: ra2russia
 	GiveBaseBuilderCrateAction@yuri:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: yrpcv
+		Units: yuri_mobileconstructionvehicle
 		ValidFactions: yuri
 	GiveBaseBuilderCrateAction@asianalliance:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: acv.asian
+		Units: asian_alliance_asianmobileconstructionvehicle
 		ValidFactions: asianalliance
 	GiveBaseBuilderCrateAction@syndicate:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.latin
+		Units: latin_syndicate_syndicatemobileconstructionvehicle
 		ValidFactions: syndicate
 	GiveBaseBuilderCrateAction@consortium:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: qmcv.steel
+		Units: steel_consortium_consortiummobileconstructionvehicle
 		ValidFactions: consortium
 	GiveBaseBuilderCrateAction@naxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.nax
+		Units: naxis_naximobileconstructionvehicle
 		ValidFactions: naxis
 	GiveBaseBuilderCrateAction@lnaxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.nax2
+		Units: schwarzer_mond_naxismobileconstructionvehicle
 		ValidFactions: lnaxis
 	GiveBaseBuilderCrateAction@futuretech:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: mcv.futu
+		Units: futuretech_mobileconstructionvehicle
 		ValidFactions: futuretech
 	GiveBaseBuilderCrateAction@ix:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: d2k_mcv.ixian
+		Units: ixian_mobileconstructionvehicle
 		ValidFactions: ixian
 	GiveBaseBuilderCrateAction@terran:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: sctmcv
+		Units: terran_mobilecommandcenter
 		ValidFactions: terran
 	GiveBaseBuilderCrateAction@zerg:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: sczmcv
+		Units: zerg_hatcherydrone
 		ValidFactions: zerg
 	GiveBaseBuilderCrateAction@protoss:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: scpmcv
+		Units: protoss_mobilenexus
 		ValidFactions: protoss
 	GiveBaseBuilderCrateAction@human2:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: wc2_human_mcv
+		Units: humans_mobileconstructionvehiclehuman
 		ValidFactions: human2
 	GiveBaseBuilderCrateAction@orc2:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: wc2_orc_mcv
+		Units: orcs_mobileconstructionvehicleorc
 		ValidFactions: orc2
 	GiveBaseBuilderCrateAction@tkm:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: tkmmcv
+		Units: tkm_mobileconstructionvehicletkm
 		ValidFactions: tkm
 
 WWCRATE:
@@ -617,7 +617,7 @@ camera.gpssat:
 		IncludeAllies: true
 	GrantConditionOnPrerequisite@UPLINK:
 		Condition: uplinkavailable
-		Prerequisites: ra2gaspysat
+		Prerequisites: ra2_allies_spysatelliteuplink
 	KillsSelf:
 		RemoveInstead: true
 		Delay: 375

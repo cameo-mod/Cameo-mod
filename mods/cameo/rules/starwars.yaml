@@ -475,7 +475,7 @@ swfact.empire:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -1319,7 +1319,7 @@ swfact.rebels:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -1770,7 +1770,7 @@ swfact.republic:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -2221,7 +2221,7 @@ swfact.separatist:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -2739,7 +2739,7 @@ swfact.hutt:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,protoss_shieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -2884,7 +2884,7 @@ swpyleh:
 	Selectable:
 		Bounds: 2048, 1792, 0, -213
 	RenderSprites:
-		Image: barr
+		Image: ra1_soviet_barracks
 
 swnurseh:
 	Inherits: swnurse
@@ -3868,7 +3868,7 @@ SWSAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: SAM Site
+		Name: td_nod_samsite Site
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
@@ -3903,7 +3903,7 @@ SWSAM:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: sam
+		Image: td_nod_samsite
 SWOBLI:
 	Inherits: ^Defense
 	Inherits@IDISABLE: ^DisabledOverlay
@@ -3949,7 +3949,7 @@ SWOBLI:
 	Power:
 		Amount: -75
 	RenderSprites:
-		Image: obli
+		Image: td_nod_obeliskoflight
 SWGTWR:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -4039,7 +4039,7 @@ SWATWR:
 		Amount: -150
 
 SWSBAG:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4062,7 +4062,7 @@ SWSBAG:
 	RenderSprites:
 		Image: sbag
 SWCYCL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4083,9 +4083,9 @@ SWCYCL:
 	WithWallSpriteBody:
 		Type: chain
 	RenderSprites:
-		Image: cycl
+		Image: japan_chainlinkfence
 SWBRIK:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 150
 	CustomSellValue:
@@ -4340,9 +4340,9 @@ swindustrialplant:
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 	RenderSprites:
-		Image: yrngindp
+		Image: ra2_soviets_industrialplant
 	ProvidesPrerequisite:
-		Prerequisite: yrngindp
+		Prerequisite: ra2_soviets_industrialplant
 swaatower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -4654,7 +4654,7 @@ swe1droid:
 	-SpawnActorOnDeath:
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	GrantConditionOnPrerequisite@upswe1droid:
 		Condition: upswe1droid
 		Prerequisites: upswe1droid
@@ -4720,7 +4720,7 @@ swddroid:
 		Prerequisites: machshop
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	RenderSprites:
 
 swdroidb2:
@@ -4749,7 +4749,7 @@ swdroidb2:
 		VoiceSet: SWBigDroidVoice
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 
 swe1droidmob:
 	Inherits@1: ^ExistsInWorld
@@ -4952,7 +4952,7 @@ swvice:
 		VoiceSet: SWProbotVoice
 
 swe2:
-	Inherits: E2
+	Inherits: td_gdi_grenadier
 	Inherits@infup: ^SWInfantryUpgrades
 	Valued:
 		Cost: 180
@@ -4970,7 +4970,7 @@ swe2:
 		Name: garrisoned
 		Weapon: SWGrenade
 	RenderSprites:
-		Image: e2
+		Image: td_gdi_grenadier
 
 swe3:
 	Inherits: ^Soldier
@@ -5124,7 +5124,7 @@ swe3droid:
 	-SpawnActorOnDeath:
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: yrngindp
+		Prerequisites: ra2_soviets_industrialplant
 	GrantConditionOnPrerequisite@upswe1droid:
 		Condition: upswe1droid
 		Prerequisites: upswe1droid
@@ -5132,7 +5132,7 @@ swe3droid:
 		RequiresCondition: upswe1droid
 		Modifier: 85
 swe4:
-	Inherits: E4
+	Inherits: td_nod_flamethrower
 	Inherits@infup: ^SWInfantryUpgrades
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Valued:
@@ -5144,7 +5144,7 @@ swe4:
 		Queue: Infantry, RAInfantry
 		Description: Advanced Anti-infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 	RenderSprites:
-		Image: e4
+		Image: td_nod_flamethrower
 swe6:
 	Inherits: E6
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -5198,12 +5198,12 @@ swrmbo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4
@@ -5221,12 +5221,12 @@ swgreedo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament@PRIMARY:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Infiltrates:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
@@ -5253,7 +5253,7 @@ swbike:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Speeder Bike
+		Name: Speeder td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -5583,7 +5583,7 @@ swhtnk:
 		RequiresSelection: true
 		PipCount: 5
 swarty:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	Inherits@SHADOWS: ^Shadows
 	Tooltip:
 		Name: Mobile Artillery
@@ -5636,7 +5636,7 @@ swarty2:
 	Valued:
 		Cost: 1000
 swarty3:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	Inherits@SHADOWS: ^Shadows
 	Tooltip:
 		Name: Wheeled Artillery
@@ -5725,7 +5725,7 @@ swltnk:
 		BuildPaletteOrder: 20
 		Prerequisites: hpad, anyhq, ~techlevel.medium
 		Queue: Aircraft, RAAircraft
-		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker Mech\n  Weak vs Infantry
+		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker ra1_allies_mechanic\n  Weak vs Infantry
 		BuildDurationModifier: 50
 	Aircraft:
 		CruiseAltitude: 900
@@ -7423,7 +7423,7 @@ swquad:
 		Name: TB2 Light Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ftrk
+		OverrideActor: ra1_soviet_flaktruck
 	Health:
 		HP: 25000
 	Armor:
@@ -7452,7 +7452,7 @@ swquad:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	Selectable:
-		Class: ftrk
+		Class: ra1_soviet_flaktruck
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: RussianVehicleVoice
@@ -7803,7 +7803,7 @@ sw1tnkre:
 		Condition: scrap_create_bonus
 		TotalCap: 2
 swftnk:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Valued:
 		Cost: 600
@@ -8060,7 +8060,7 @@ swtran.e2:
 		RequiresCondition: !loaded && botmicro
 		Delay: 200
 	EditorOnlyTooltip:
-		Name: Loaded Lambda (E2)
+		Name: Loaded Lambda (td_gdi_grenadier)
 
 swtran.e1:
 	Inherits: swtran
@@ -8438,12 +8438,12 @@ swrmbo.hutt:
 		BuildPaletteOrder: 10
 		Prerequisites: ~techlevel.low
 		Queue: Infantry, RAInfantry
-		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
 		Weapon: SWBikeLaserSalvage
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4
@@ -8499,7 +8499,7 @@ swrandom.generator:
 		Weapon: SWRandomCarbon
 		EmptyWeapon: SWRandomCarbon
 	RenderSprites:
-		Image: ftnk
+		Image: td_nod_flametank
 	Buildable:
 		BuildLimit: 10
 		Queue: false

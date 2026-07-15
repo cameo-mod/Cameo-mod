@@ -50,6 +50,10 @@ def load_map(path: pathlib.Path) -> tuple[dict[str, str], dict[str, str]]:
 
 def build_replacer(actors: dict[str, str]):
     lower = {k.lower(): v.lower() for k, v in actors.items()}
+    if not lower:
+        def sub(text: str) -> tuple[str, int]:
+            return text, 0
+        return sub
     alts = sorted(lower, key=len, reverse=True)
     rx = re.compile(
         r"(?<![A-Za-z0-9_.])(" + "|".join(re.escape(a) for a in alts) +

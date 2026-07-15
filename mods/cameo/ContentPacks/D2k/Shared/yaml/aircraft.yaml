@@ -1,0 +1,182 @@
+carryall.reinforce:
+	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
+	Tooltip:
+		Name: Autonomous ixian_autonomouscarryall
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 500000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		InitialFacing: 0
+		Speed: 156
+		TurnSpeed: 24
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+		IdleTurnSpeed: 4
+		# AltitudeVelocity: 0c60
+	-SpawnActorOnDeath:
+	SpawnActorOnDeath@CRUISING:
+		Actor: carryall.husk
+		RequiresCondition: cruising
+	SpawnActorOnDeath@LANDING:
+		Actor: carryall.huskVTOL
+		RequiresCondition: !cruising
+	Carryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
+	RenderSprites:
+		Image: ixian_autonomouscarryall
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 75
+	Buildable:
+		Description: actor_carryall.description
+		IconPalette: d2kunit
+		BuildLimit: 10
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	GrantConditionOnPrerequisite@ixianharv:
+		Prerequisites: faction.ixian
+		Condition: carryall_cloak
+	Cloak:
+		InitialDelay: 80
+		CloakDelay: 80
+		RequiresCondition: carryall_cloak
+	SpeedMultiplier@ordos-stealth-bonus:
+		Modifier: 130
+		RequiresCondition: faction.guild
+	GrantConditionOnPrerequisite@ordos:
+		Prerequisites: faction.guild
+		Condition: faction.guild
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 6
+		Range: 1c512, 2c512
+
+ixian_autonomouscarryall:
+	Inherits: carryall.reinforce
+	Health:
+		HP: 200000
+	Valued:
+		Cost: 2000
+	-Carryall:
+	AutoCarryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
+	Aircraft:
+		MinAirborneAltitude: 400
+	RevealsShroud@lifting_low:
+		Range: 2c512
+		Type: GroundPosition
+		RequiresCondition: !airborne
+	RevealsShroud@lifting_high:
+		Range: 1c256
+		Type: GroundPosition
+		RequiresCondition: !cruising
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 120
+		Prerequisites: ~ixian_hightechfactory
+
+carryall.paradrop:
+	Inherits: carryall.reinforce
+	Cargo:
+		MaxWeight: 30
+		Types: Infantry, Vehicle, Tank
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: chute1.aud
+
+frigate:
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits: ^AirstrikePlane
+	Inherits@selection: ^SelectableEconomicUnit
+	ParaDrop:
+		DropRange: 1c0
+	Tooltip:
+		Name: Frigate
+	Health:
+		HP: 500000
+	Armor:
+		Type: Spaceship
+	Aircraft:
+		IdleBehavior: LeaveMap
+		Speed: 189
+		TurnSpeed: 4
+		Repulsable: False
+		MaximumPitch: 20
+		CruiseAltitude: 2048
+		VTOL: true
+		CanHover: true
+		CanSlide: true
+	-AppearsOnRadar:
+	-SpawnActorOnDeath:
+	Cargo:
+		MaxWeight: 20
+	RejectsOrders:
+	SpeedMultiplier@ordos-stealth-bonus:
+		Modifier: 140
+		RequiresCondition: faction.guild
+	GrantConditionOnPrerequisite@ordos:
+		Prerequisites: faction.guild
+		Condition: faction.guild
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+
+frigate.paradrop:
+	Inherits: frigate
+	Cargo:
+		MaxWeight: 30
+		Types: Infantry, Vehicle, Tank
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: chute1.aud
+	RenderSprites:
+		Image: frigate
+
+carryall.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: ixian_autonomouscarryall
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 144
+		CanSlide: True
+		VTOL: true
+	RenderSprites:
+		Image: ixian_autonomouscarryall
+		PlayerPalette: playerd2k
+	FallsToEarth:
+		Explosion: D2KUnitExplodeLarge
+
+carryall.huskVTOL:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: ixian_autonomouscarryall
+	FallsToEarth:
+		Moves: False
+		Velocity: 0c128
+	Aircraft:
+		TurnSpeed: 16
+		CanSlide: True
+		VTOL: true
+	RenderSprites:
+		Image: ixian_autonomouscarryall
+		PlayerPalette: playerd2k
+	FallsToEarth:
+		Explosion: D2KUnitExplodeLarge

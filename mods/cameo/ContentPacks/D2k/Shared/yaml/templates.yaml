@@ -1,0 +1,1164 @@
+^D2K_MunitionsSiloBuff:
+	ExternalCondition@d2krearm:
+		Condition: d2k_rearm
+	ReloadDelayMultiplier@d2krearm:
+		Modifier: 90
+		RequiresCondition: d2k_rearm == 1
+	ReloadDelayMultiplier@d2krearm2:
+		Modifier: 80
+		RequiresCondition: d2k_rearm == 2
+	ReloadDelayMultiplier@d2krearm3:
+		Modifier: 70
+		RequiresCondition: d2k_rearm == 3
+	ReloadDelayMultiplier@d2krearm4:
+		Modifier: 60
+		RequiresCondition: d2k_rearm == 4
+	ReloadDelayMultiplier@d2krearm5:
+		Modifier: 50
+		RequiresCondition: d2k_rearm >= 5
+
+^D2KPersonalShield:
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Shielded:
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled && (ixian_upgrade_personalshield || shieldgen || shielded)
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: ixian_upgrade_personalshield
+	ChangesShield@personal_shield:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: ixian_upgrade_personalshield
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	Targetable@PersonalShielded:
+		TargetTypes: PersonalShielded
+		RequiresCondition: shielded
+	DamageMultiplier@ixian_upgrade_advancedixiantechnology:
+		Modifier: 50
+		RequiresCondition: ixian_upgrade_personalshield && ixian_upgrade_advancedixiantechnology && shielded
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	DamageMultiplier@ixian_upgrade_personalshield:
+		Modifier: 80
+		RequiresCondition: ixian_upgrade_personalshield && !shielded
+	SpeedMultiplier@ixian_upgrade_personalshield:
+		Modifier: 125
+		RequiresCondition: ixian_upgrade_personalshield && shielded
+	GrantConditionOnPrerequisite@ixian_upgrade_personalshield:
+		Condition: ixian_upgrade_personalshield
+		Prerequisites: ixian_upgrade_personalshield
+	ActorStatValues:
+		Upgrades: ixian_upgrade_personalshield
+
+^D2K_HeavyMissilesUpgrade:
+	RangeMultiplier@ixian_upgrade_heavymissiles:
+		Modifier: 120
+		RequiresCondition: ixian_upgrade_heavymissiles
+	FirepowerMultiplier@ixian_upgrade_heavymissiles:
+		Modifier: 120
+		RequiresCondition: ixian_upgrade_heavymissiles
+	GrantConditionOnPrerequisite@ixian_upgrade_heavymissiles:
+		Condition: ixian_upgrade_heavymissiles
+		Prerequisites: ixian_upgrade_heavymissiles
+	ActorStatValues:
+		Upgrades: ixian_upgrade_heavymissiles
+
+^D2K_ReinforcedBarrel:
+	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
+		Modifier: 110
+		RequiresCondition: ixian_upgrade_reinforcedbarrel
+	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
+		Modifier: 125
+		RequiresCondition: ixian_upgrade_reinforcedbarrel
+	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+		Condition: ixian_upgrade_reinforcedbarrel
+		Prerequisites: ixian_upgrade_reinforcedbarrel
+	ActorStatValues:
+		Upgrades: ixian_upgrade_reinforcedbarrel
+
+^D2K_NeedleGuns:
+	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
+		Modifier: 110
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
+		Modifier: 125
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	GrantConditionOnPrerequisite@ixian_upgrade_tungstenneedleguns:
+		Condition: ixian_upgrade_tungstenneedleguns
+		Prerequisites: ixian_upgrade_tungstenneedleguns
+	ActorStatValues:
+		Upgrades: ixian_upgrade_tungstenneedleguns
+
+^D2K_GeneralPurposeArmor:
+	DamageMultiplier@ixian_upgrade_generalpurposearmor:
+		Modifier: 80
+		RequiresCondition: ixian_upgrade_generalpurposearmor
+	GrantConditionOnPrerequisite@ixian_upgrade_generalpurposearmor:
+		Condition: ixian_upgrade_generalpurposearmor
+		Prerequisites: ixian_upgrade_generalpurposearmor
+	ActorStatValues:
+		Upgrades: ixian_upgrade_generalpurposearmor
+
+^D2K_AdvancedIxianTechnology:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	Shielded:
+		DamageRegenDelay: 125
+		RegenAmount: 10
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		SelectionBarColor: 8888FFFF
+		RequiresCondition: !disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
+	ChangesShield@shielddischarge:
+		Delay: 10
+	ActorStatValues:
+		Upgrades: ixian_upgrade_advancedixiantechnology
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+
+^D2K_AdvancedIxianTechnologyTeamUpgrade:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	RangeMultiplier@ixian_upgrade_advancedixiantechnology:
+		Modifier: 110
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
+		Modifier: 125
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	ActorStatValues:
+		Upgrades: ixian_upgrade_advancedixiantechnology
+
+^BulletImmune:
+	#Targetable@BulletImmune:
+	#	TargetTypes: BulletImmune
+
+^D2KInfantry:
+	Inherits@inf: ^Infantry
+	Inherits@munisilo: ^D2K_MunitionsSiloBuff
+	Inherits@BulletImmune: ^BulletImmune
+	Inherits@personalshield: ^D2KPersonalShield
+	WithDeathAnimation:
+		DeathTypes:
+			ExplosionDeath: 1
+			SoundDeath: 2
+			SmallExplosionDeath: 3
+			BulletDeath: 4
+		CrushedSequence: die-crushed
+		DeathSequencePalette: playerd2k
+		CrushedSequencePalette: playerd2k
+		CrushedPaletteIsPlayerPalette: True
+	WithDeathAnimation@effect:
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			FireDeath: 5
+			PsychicDeath: 5
+			TiberiumDeath: 6
+			RadiationDeath: 6
+			RA2VirusDeath: 6
+			ElectricityDeath: 7
+	Huntable:
+	SelectionDecorations:
+	WithSpriteControlGroupDecoration:
+	Targetable:
+		TargetTypes: Ground, Infantry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+	TakeCover:
+		DamageModifiers:
+			Prone50Percent: 50
+			Prone60Percent: 60
+			Prone70Percent: 70
+			Prone75Percent: 75
+			Prone80Percent: 80
+			Prone100Percent: 100
+		DamageTriggers: TriggerProne
+		ProneOffset: 300,0,0
+	AttackMove:
+	DrawLineToTarget:
+	Passenger:
+		CargoType: Infantry
+		CustomPipType: green
+		Weight: 1
+	HiddenUnderFog:
+	ActorLostNotification:
+	Crushable:
+		CrushSound: CRUSH1.WAV
+		WarnProbability: 75
+		RequiresCondition: !ixian_upgrade_personalshield
+	Crushable@shield:
+		CrushSound: CRUSH1.WAV
+		WarnProbability: 15
+		RequiresCondition: ixian_upgrade_personalshield
+	Guard:
+		Voice: Guard
+	Guardable:
+	DetectCloaked:
+		Range: 1c768
+	DeathSounds@NORMAL:
+		DeathTypes: ExplosionDeath, SoundDeath, SmallExplosionDeath, BulletDeath
+	MustBeDestroyed:
+	TerrainModifiesDamage:
+		TerrainModifier:
+			Rough: 80
+	Voiced:
+		VoiceSet: D2KInfantryVoice
+	RevealOnFire:
+	RevealOnDeath:
+		Duration: 100
+	AttractsWorms@personalshield:
+		Intensity: 1000
+		RequiresCondition: ixian_upgrade_personalshield
+	HitShape:
+		Type: Circle
+			Radius: 96
+	MapEditorData:
+		Categories: Infantry
+	Passenger:
+	AttackFrontal:
+		FacingTolerance: 0
+	GrantConditionOnPrerequisite@corrinoelite:
+		Prerequisites: faction.corrino, palace_emperor
+		Condition: rank-elite
+	SpeedMultiplier@ordos-stealth-bonus:
+		Modifier: 125
+		RequiresCondition: cloakordos && cloaked
+	GrantConditionOnPrerequisite@ordos:
+		Prerequisites: faction.ordos
+		Condition: cloakordos
+	ProductionCostMultiplier@corrino:
+		Multiplier: 150
+		Prerequisites: faction.corrino
+
+^D2KInfantryDefaultDeath:
+	WithDeathAnimation:
+		DeathSequencePalette: player
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: True
+
+^D2KBuilding:
+	Inherits@1: ^BaseBuilding
+	Inherits@selection: ^SelectableBuilding
+	Inherits@BotMicro: ^BotMicromanageable
+	Tooltip:
+		GenericName: Structure
+	OwnerLostAction:
+		Action: Kill
+	Building:
+		BuildSounds: BUILD1.WAV
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
+	CaptureManager:
+	Capturable:
+		RequiresCondition: !build-incomplete
+		Types: building
+	SoundOnDamageTransition:
+		DamagedSounds: EXPLSML1.WAV
+		DestroyedSounds: EXPLHG1.WAV
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: D2kBuildingExplode
+		EmptyWeapon: D2kBuildingExplode
+		ActorTypes: light_inf
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	ActorLostNotification:
+		Notification: BuildingLost
+	ShakeOnDeath:
+	Demolishable:
+		Condition: being-demolished
+	Sellable:
+		RequiresCondition: !build-incomplete && !being-demolished
+		SellSounds: BUILD1.WAV
+	CommandBarBlacklist:
+	WithBuildingRepairDecoration:
+		Image: allyrepair
+		Sequence: repair
+		Position: Center
+		Palette: player
+		IsPlayerPalette: True
+	-ActorPreviewPlaceBuildingPreview:
+	D2kActorPreviewPlaceBuildingPreview:
+		Palette: ra_temperat
+	Cloak@TScloak:
+	WithSpriteBody:
+	WithMakeAnimation:
+		Condition: build-incomplete
+	WithCrumbleOverlay:
+		RequiresCondition: !build-incomplete
+
+^D2kUpgradeable:
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: stardecoration
+	WithDecoration@upgraded:
+		RequiresCondition: stardecoration
+		Position: TopRight
+		Margin: 6, 8
+		RequiresSelection: true
+		Image: d2k_pips
+		Sequence: tag-upgraded
+
+^D2KPaletteRender:
+	RenderSprites:
+		PlayerPalette: playerd2k
+	WithDeathAnimation:
+		DeathSequencePalette: playerd2k
+
+^D2KPaletteRenderHusk:
+	RenderSprites:
+		PlayerPalette: d2kplayer
+		Palette: d2keffect
+
+^D2KVehicleHusk:
+	Inherits@palette: ^D2KPaletteRenderHusk
+	Inherits: ^Husk
+	Husk:
+		AllowedTerrain: Sand, Rock, Transition, Concrete, Spice, SpiceSand, SpiceBlobs, Dune
+	Targetable:
+		TargetTypes: Ground, Vehicle
+		RequiresForceFire: true
+	WithColoredOverlay@IDISABLE:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	WithIdleOverlay@Burns:
+		Image: fire
+		Sequence: 3
+		IsDecoration: True
+	ChangesHealth:
+		Step: -100
+		StartIfBelow: 101
+		Delay: 6
+
+^D2KPaletteRenderInfantry:
+	Inherits: ^D2KPaletteRender
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: playerd2k
+		CrushedSequencePalette: playerd2k
+		CrushedPaletteIsPlayerPalette: True
+
+^D2KVehicle:
+	Inherits@vehicle: ^Vehicle
+	Inherits@munisilo: ^D2K_MunitionsSiloBuff
+	-Carryable:
+	Tooltip:
+		GenericName: Unit
+	Huntable:
+	OwnerLostAction:
+		Action: Kill
+	Mobile:
+		TurnSpeed: 20
+		Locomotor: wheeled
+		PauseOnCondition: notmobile || disabled
+	SelectionDecorations:
+	WithSpriteControlGroupDecoration:
+	Selectable:
+		Bounds: 1280, 1280
+	Targetable:
+		TargetTypes: Ground, Vehicle, C4
+	Passenger:
+		CargoType: Vehicle
+	AttackMove:
+	DrawLineToTarget:
+	HiddenUnderFog:
+	ActorLostNotification:
+	Guard:
+	Guardable:
+	WithFacingSpriteBody:
+	Demolishable:
+	TemporaryOwnerManager:
+	MustBeDestroyed:
+	Voiced:
+		VoiceSet: D2kVehicleVoice
+	AutoCarryable:
+		CarriedCondition: notmobile
+		ReservedCondition: carryall-reserved
+		LockedCondition: notmobile
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		RequiresCondition: carryall-reserved
+	RevealOnFire:
+	RevealOnDeath:
+		Duration: 125
+		Radius: 2500
+	HitShape:
+	MapEditorData:
+		Categories: Vehicle
+	GrantConditionOnDamageState@DAMAGED:
+		Condition: d2kdamage
+		ValidDamageStates: Heavy
+	SpeedMultiplier@DAMAGED:
+		Modifier: 60
+		RequiresCondition: d2kdamage
+	GrantConditionOnPrerequisite@FREMENFACTION:
+		Condition: faction.fremen
+		Prerequisites: faction.fremen
+	GrantConditionOnPrerequisite@HARKONNENFACTION:
+		Condition: harkonnenexplode
+		Prerequisites: faction.harkonnen
+	ProductionCostMultiplier@IXIANVEHICLES:
+		Prerequisites: faction.ixian
+		Multiplier: 120
+	AttractsWorms:
+		RequiresCondition: !faction.fremen
+	AttractsWorms@fremen:
+		Intensity: 0
+		RequiresCondition: faction.fremen
+	SpeedMultiplier@ordos-stealth-bonus:
+		Modifier: 125
+		RequiresCondition: cloakordos && cloaked
+	GrantConditionOnPrerequisite@ordos:
+		Prerequisites: faction.ordos
+		Condition: cloakordos
+	Cloak@TDcloak:
+
+^D2KPrereqs:
+	ProvidesPrerequisite@atreides:
+		Factions: atreides, ixian, fremen
+	ProvidesPrerequisite@ordos:
+		Factions: ordos, tleilaxu, mercenary, smugglers
+	ProvidesPrerequisite@harkonnen:
+		Factions: harkonnen, corrino, guild, emperor
+
+^D2KTank:
+	Inherits@D2KV: ^D2KVehicle
+	Mobile:
+		Locomotor: tracked
+
+^D2KDefense:
+	Inherits: ^Defense
+	Inherits@1: ^D2KBuilding
+	Inherits@selection: ^SelectableCombatBuilding
+	Inherits@munisilo: ^D2K_MunitionsSiloBuff
+	WithSpriteTurret:
+	AttackTurreted:
+	RenderRangeCircle:
+	DetectCloaked:
+		Range: 1000
+	-GivesBuildableArea:
+	-WithMakeAnimation:
+	Capturable:
+	Sellable:
+		RequiresCondition: !being-demolished
+	WithWallSpriteBody:
+	LineBuildNode:
+		Types: turret
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris3
+		Pieces: 2, 2
+		Range: 2c0, 4c0
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	RevealOnFire:
+	Targetable:
+		TargetTypes: Ground, C4, Structure, Defense
+	MapEditorData:
+		Categories: Defense
+	WithIdleOverlay@shrouded:
+		Image: shrouded_overlay
+	-CommandBarBlacklist:
+	-ActorPreviewPlaceBuildingPreview:
+	ActorStatValues:
+		Stats: Armor, Sight, Power, Damage, ReloadDelay, MaxRange, Kills, Experience
+
+^D2KMine:
+	Inherits: ^SpriteActor
+	Interactable:
+		Bounds: 1024, 1024
+	Buildable:
+		Queue: Defense.d2k
+		BuildDurationModifier: 100
+	WithSpriteBody:
+	HiddenUnderFog:
+	Mine:
+		CrushClasses: mine
+		DetonateClasses: mine
+	Health:
+		HP: 10000
+		NotifyAppliedDamage: false
+	Armor:
+		Type: Concrete
+	Building:
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune
+		BuildSounds: CHUNG.WAV
+		Dimensions: 1,1
+		Footprint: x
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 8
+	ActorPreviewPlaceBuildingPreview:
+		Palette: ra_temperat
+	RevealsShroud:
+		Range: 1c0
+	Sellable:
+		SellSounds: CHUNG.WAV
+	Cloak:
+		CloakSound:
+		UncloakSound:
+		DetectionTypes: Mine
+		InitialDelay: 0
+		PauseOnCondition: cloak-force-disabled || base-reveal
+		CloakStyle: None
+	Tooltip:
+		Name: Mine
+		GenericName: Mine
+	Targetable:
+		TargetTypes: Ground, Mine
+	HitShape:
+	MapEditorData:
+		Categories: System
+	RenderSprites:
+		PlayerPalette: raplayer
+
+^D2K_Ix_technology:
+
+^D2K_Ix_Turret_EMP:
+	Inherits: ^D2K_Ix_technology
+	AttackTurreted:
+		PauseOnCondition: disabled || ixdisable
+
+^D2K_Ix_Frontal_EMP:
+	Inherits: ^D2K_Ix_technology
+	AttackFrontal:
+		FacingTolerance: 8
+		PauseOnCondition: disabled || ixdisable
+
+^D2K_Og_Buff:
+	FirepowerMultiplier@D2K_Og_Buff:
+		Modifier: 200
+	DamageMultiplier@D2K_Og_Buff:
+		Modifier: 50
+
+^DU_OrnithopterSupportPower:
+	AirstrikePower@orni:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~upgrade_hightech
+		Icons:
+			1: ornistrike
+		IconPalette: d2kunit
+		ChargeInterval: 4500
+		UnitTypes:
+			1: ornithopter
+		SquadSizes:
+			1: 3
+		QuantizedFacings: 32
+		Names:
+			1: Ornithopters
+		Descriptions:
+			1: Ornithopters hit the target with bombs and heavy machine guns
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		DisplayBeacon: True
+		AllowMultiple: False
+		BeaconPosters:
+			1: airstrike
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		Strikes: 3
+		CircleDelay: 25
+		OrderName: ornistrike
+		SupportPowerPaletteOrder: 20
+
+###########################################
+#   BUILDINGS SHARED
+###########################################
+
+^concrete:
+	Interactable:
+	D2kBuilding:
+		ConcreteTemplate: 856
+		BuildSounds: CHUNG.WAV
+		AllowInvalidPlacement: true
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,ClearDune
+	D2kActorPreviewPlaceBuildingPreview:
+		Palette: ra_temperat
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 3
+	RenderSprites:
+		Palette: greyscale
+		PlayerPalette: player_rgba
+	Tooltip:
+		Name: Concrete
+		GenericName: Structure
+	KillsSelf:
+		RemoveInstead: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Description: Provides a strong foundation that reduces damage by 33% and automatically repairs buildings on top of it.
+		IconPalette: d2kunit
+
+^construction_yard:
+	Inherits@D2kBLD: ^D2KBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@conyard: ^Conyard
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		IconPalette: d2kunit
+	# Production@Addons:
+	# 	Produces: Addons
+	# ProductionBar@Addons:
+	# 	ProductionType: Addons
+	Transforms:
+		Offset: 1,1
+		Facing: 64
+		RequiresCondition: factundeploy
+	SpawnActorsOnSell:
+		ActorTypes: light_inf, light_inf, engineer
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: d2kunit
+	ProvidesPrerequisite@construction_yard:
+		Prerequisite: construction_yard
+	ProvidesPrerequisite@d2k_construction_yard:
+		Prerequisite: d2k_construction_yard
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Prerequisites: upgrade_conyard
+	DamageMultiplier@upgrade_conyard:
+		RequiresCondition: upgrade_conyard
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: upgrade_conyard
+	GivesBuildableArea:
+		AreaTypes: building
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 4, 6
+		Range: 1500, 3000
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+	SpawnActorOnDeath@death5:
+		Actor: trooper
+	FreeActor@CPQDEBUGDUMMY:
+		-RequiresCondition:
+
+^wind_trap:
+	Inherits: ^D2KBuilding
+	Inherits@power: ^PowerPlant
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Description: template_power.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Wind Trap
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 200000
+	GrantConditionOnPrerequisite@d2k_wind_trap_upgrade:
+		Condition: d2k_wind_trap_upgrade
+		Prerequisites: d2k_wind_trap_upgrade
+	PowerMultiplier@d2k_wind_trap_upgrade:
+		Modifier: 200
+		RequiresCondition: d2k_wind_trap_upgrade
+	ProductionCostMultiplier@d2k_wind_trap_upgrade:
+		Multiplier: 50
+		Prerequisites: d2k_wind_trap_upgrade
+	ProductionTimeMultiplier@d2k_wind_trap_upgrade:
+		Multiplier: 50
+		Prerequisites: d2k_wind_trap_upgrade
+	ActorStatValues:
+		Upgrades: d2k_wind_trap_upgrade
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 4c0
+	WithIdleOverlay@ZAPS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-zaps
+	Power:
+		Amount: 100
+	ScalePowerWithHealth:
+	ProvidesPrerequisite@buildingname:
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1500, 2500
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+
+^refinery:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Spice Refinery
+	Building:
+		Footprint: =xx xx= ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		Type: Rectangle
+			TopLeft: -512, -1024
+			BottomRight: 1536, 0
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -1536, 0
+			BottomRight: 512, 1024
+	Refinery:
+	DockHost:
+		DockAngle: 640
+		DockOffset: 1c5,0c5,0
+	GrantConditionOnPrerequisite@d2k_spice_sifter_upgrade:
+		Condition: d2k_spice_sifter_upgrade
+		Prerequisites: d2k_spice_sifter_upgrade
+	ResourceValueMultiplier@d2k_spice_sifter_upgrade:
+		Modifier: 125
+		RequiresCondition: d2k_spice_sifter_upgrade
+	ActorStatValues:
+		Upgrades: d2k_spice_sifter_upgrade
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithDockedOverlay@SMOKE:
+		RequiresCondition: !build-incomplete
+		Sequence: smoke
+	ProvidesPrerequisite@spice_refinery:
+		Prerequisite: spice_refinery
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3
+		Pieces: 5, 8
+		Range: 1500, 3000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+
+^d2k_silo:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@storage: ^StoresResources
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 310
+		Description: template_silo.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Storage Silo
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	-WithSpriteBody:
+	WithResourceLevelSpriteBody:
+		Sequence: stages
+	Power:
+		Amount: -10
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 5
+		Range: 2c0, 5c0
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
+		FullSequence: pip-yellow
+
+^research_centre:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@CPQ: ^CPQCondition
+	Inherits@shape: ^3x3Shape
+	Inherits@tech: ^IsTechnoBuilding
+	Buildable:
+		Description: Unlocks advanced units and upgrades.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ix Research Center
+	Building:
+		Footprint: _x_ xxx XXX ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		TargetableOffsets: -1574,-158,0, -1050,-1024,0, -1155,960,0
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 1536
+	HitShape@TOP:
+		TargetableOffsets: 1312,0,0
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, -512
+	Production@Upgrade:
+		Produces: Upgrade
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	ProvidesPrerequisite@research_centre:
+		Prerequisite: research_centre
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 8, 12
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+
+^high_tech_factory:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	#Inherits@orni: ^DU_OrnithopterSupportPower
+	Inherits@shape: ^3x3Shape
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Description: actor_high_tech_factory.description
+		IconPalette: d2kunit
+	Building:
+		BuildPaletteOrder: 160
+		Footprint: _X_ xxx XXX ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Tooltip:
+		Name: High Tech Factory
+	ProductionCostMultiplier@dune:
+		Multiplier: 150
+	ProductionTimeMultiplier@dune:
+		Multiplier: 150
+	Armor:
+		Type: Concrete
+	Exit:
+		SpawnOffset: 0,0,728
+		ExitCell: 0,0
+	HitShape:
+		TargetableOffsets: -1312,0,0, -1312,-1024,0, -1312,1024,0
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 1536
+	HitShape@TOP:
+		TargetableOffsets: 1280,0,0
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, -512
+	RallyPoint:
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Aircraft
+		Sequence: production-welding
+	ProvidesPrerequisite@upgrade3:
+		Prerequisite: hightech.harkonnen
+		Factions: harkonnen, corrino, guild
+	ProvidesPrerequisite@upgrade:
+		Prerequisite: hightech.atreides
+		Factions: atreides, ixian, fremen
+	ProvidesPrerequisite@upgrade2:
+		Prerequisite: hightech.ordos
+		Factions: ordos, mercenary, smugglers, tleilaxu
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@high_tech_factory:
+		Prerequisite: high_tech_factory
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: upgrade_hightech
+		Prerequisites: upgrade_hightech
+	DamageMultiplier@upgrade_hightech:
+		RequiresCondition: upgrade_hightech
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: upgrade_hightech
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 7, 10
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+
+^starport:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@Prereqs: ^D2KPrereqs
+	Inherits@shape: ^3x3Shape
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Buildable:
+		Queue: Building, RABuilding
+		BuildLimit: 1
+		BuildPaletteOrder: 150
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Dropzone for quick reinforcements, and passive income.
+		IconPalette: d2kunit
+	Building:
+		Footprint: xxx x=x =x=
+		Dimensions: 3,3
+	Tooltip:
+		Name: Starport
+	ProvidesPrerequisite@buildingname:
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 1536, 512
+	HitShape@BOTTOM:
+		Type: Rectangle
+			TopLeft: -512, 512
+			BottomRight: 512, 1536
+	RevealsShroud:
+		Range: 3c768
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 0,-480,0
+		ExitCell: 2,2
+	Exit@2:
+		SpawnOffset: 0,-480,0
+		ExitCell: 0,2
+	ProductionAirdrop@NORMAL:
+		Produces: Vehicle
+		BaselineSpawn: true
+		ActorType: frigate
+		PauseOnCondition: lowpower
+		RequiresCondition: !classicproductionqueues
+	ProductionAirdrop@CLASSICPRODUCTIONQUEUES:
+		Produces: RAVehicle
+		BaselineSpawn: true
+		ActorType: frigate
+		PauseOnCondition: lowpower
+		RequiresCondition: classicproductionqueues
+	ParallelProductionQueue@VEHICLE:
+		Type: Vehicle
+		DisplayOrder: 3
+		Group: Vehicle
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 50
+		InfiniteBuildLimit: 10
+	ProductionBar@VEHICLE:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLE:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	WithDeliveryOverlay:
+		RequiresCondition: !build-incomplete
+		#Palette: starportlights
+	ProvidesPrerequisite@atreides:
+		Prerequisite: starport.atreides
+		Factions: atreides
+	ProvidesPrerequisite@ordos:
+		Prerequisite: ordos_starport
+		Factions: ordos
+	ProvidesPrerequisite@harkonnen:
+		Prerequisite: starport.harkonnen
+		Factions: harkonnen
+	ProvidesPrerequisite@atreides_combat:
+		Prerequisite: starport.atreides_combat
+		Factions: atreides, fremen
+	ProvidesPrerequisite@ordos_combat:
+		Prerequisite: starport.ordos_combat
+		Factions: ordos, smugglers, mercenary
+	ProvidesPrerequisite@harkonnen_combat:
+		Prerequisite: starport.harkonnen_combat
+		Factions: harkonnen, corrino
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 5, 8
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+
+^combat_tank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 40
+		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
+		IconPalette: d2kunit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Combat Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Turreted:
+		TurnSpeed: 15
+	Armament:
+		Weapon: 80mm_A
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 256,0,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	AttractsWorms:
+		Intensity: 520
+	Cloak@TDcloak:
+		Palette: d2kcloak
+	Voiced:
+		VoiceSet: D2KCombatTank
+
+# d2k_ornithopter_upgrade:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Ornithopter Missiles
+# 	Buildable:
+# 		BuildPaletteOrder: 200
+# 		Prerequisites: ~du_ornithopter, ~!d2k_ornithopter_upgrade
+# 		Queue: Research
+# 		BuildDuration: 1500
+# 		BuildDurationModifier: 100
+# 		Description: Ornithopters will have bombs replaced by guided missiles
+# 	Valued:
+# 		Cost: 2500
+# 	RenderSprites:
+# 		Image: d2k_ornithopter_upgrade
+
+#######################################
+#       HUSKS
+#######################################
+
+^combat_tank.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1000
+	Tooltip:
+		Name: Combat Tank (Destroyed)
+	ThrowsParticle@turret:
+		Anim: turret
+
+^D2KVordelProxyUnit:
+	GrantConditionOnPowerState@LOWPOWER:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ExternalCondition@d2kvordelproxy:
+		Condition: d2kvordelproxy
+	KillsSelf@vordel:
+		RequiresCondition: !d2kvordelproxy || criticalpower
+		Delay: 250
+	ProximityExternalCondition@JAMMER:
+		Range: 10000
+		ValidRelationships: Enemy, Neutral
+		Condition: jammed
+		RequiresCondition: !disabled
+	DamageMultiplier@vordellowpower:
+		Modifier: 200
+		RequiresCondition: !d2kvordelproxy || lowpower
+	SpeedMultiplier@vordellowpower:
+		Modifier: 50
+		RequiresCondition: !d2kvordelproxy || lowpower
+	ReloadDelayMultiplier@vordellowpower:
+		Modifier: 200
+		RequiresCondition: !d2kvordelproxy || lowpower
+	WithIdleOverlay@absorbedeffect:
+		Image: vordel_effect_2
+		Sequence: vordel_effect_2
+	WithDecoration@dissapear:
+		Image: poweroff
+		Sequence: offline
+		Position: TopRight
+		RequiresCondition: !d2kvordelproxy || lowpower
+		BlinkInterval: 25
+		BlinkPattern: On, Off, On, Off
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 20000
+		MovingCallBackCellDistance: 10000
+		GrantConditionWhenMasterIsDisabled: notenabled
+		GrantConditionWhenMasterIsPaused: paused
+	AutoTarget:
+		ScanRadius: 10
+	# RejectsOrders:

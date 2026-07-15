@@ -38,7 +38,7 @@ tkmriflemansemiautorifle:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 3
 
-tkmjug:
+tkm_juggernaut:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 8
 	Range: 4490
@@ -185,7 +185,7 @@ tkmfirerockets:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
@@ -914,7 +914,7 @@ HueyFireMissiles:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud

@@ -377,7 +377,7 @@ dthq:
 		AddExtension: False
 
 dteye:
-	Defaults: eye
+	Defaults: td_gdi_advancedcommunicationscenter
 	idle:
 		Length: 16
 		Tick: 100
@@ -1010,7 +1010,7 @@ dtstnk:
 	icon: dtstnkicnh.tem
 		AddExtension: False
 dte5:
-	Defaults: e5
+	Defaults: td_nod_chemicalwarrior
 	stand:
 		Facings: 8
 	stand2:
@@ -1168,7 +1168,7 @@ dtapc2:
 	icon: dtapc2icnh.shp
 		AddExtension: False
 dtarty:
-	idle: arty
+	idle: td_nod_artillery
 		Facings: 32
 		UseClassicFacings: True
 	muzzle: gunfire2
@@ -1176,11 +1176,11 @@ dtarty:
 	icon: dtartyicnh.tem
 		AddExtension: False
 dtv2rl:
-	idle: v2rl
+	idle: ra1_soviet_v2rocketlauncher
 		Facings: 32
 		UseClassicFacings: True
     Scale: 1.2
-	empty-idle: v2rl
+	empty-idle: ra1_soviet_v2rocketlauncher
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1223,7 +1223,7 @@ dtfbik:
 	icon: ftnkicnh.tem
 		AddExtension: False
 dtdtrk:
-	idle: dtrk
+	idle: ra1_soviet_nukedemotruck
 		Facings: 32
 		UseClassicFacings: True
 	icon: truckicon

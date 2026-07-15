@@ -1,0 +1,175 @@
+####################################################################################################
+#		Promotions GDI
+####################################################################################################
+
+td_gdi_promotion_unlockempgrenadier:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock EMP Grenadier
+	Buildable:
+		BuildPaletteOrder: 13
+		Queue: Promotions
+		Description: Allows training of EMP Grenadiers.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockempgrenadier, rank1
+	RenderSprites:
+		Image: td_gdi_empgrenadier
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockempgrenadier
+
+td_gdi_promotion_unlockmissilesoldier:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Missile Soldier
+	Buildable:
+		BuildPaletteOrder: 16
+		Queue: Promotions
+		Description: Allows training of Missile Soldiers.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockmissilesoldier, td_gdi_promotion_unlockempgrenadier, rank1
+	RenderSprites:
+		Image: td_gdi_sonicmissilesoldier
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockmissilesoldier
+
+td_gdi_promotion_unlocksniper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock ra1_allies_alliedsniper
+	Buildable:
+		BuildPaletteOrder: 19
+		Queue: Promotions
+		Description: Allows training of Snipers.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlocksniper, td_gdi_promotion_unlockmissilesoldier, rank1
+	RenderSprites:
+		Image: td_gdi_heavysniper
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlocksniper
+
+td_gdi_promotion_unlockassaultapc:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Assault td_gdi_apc
+	Buildable:
+		BuildPaletteOrder: 22
+		Queue: Promotions
+		Description: Allows construction of the Assault APC.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockassaultapc, td_gdi_promotion_unlocksniper, rank1
+	RenderSprites:
+		Image: td_gdi_assaultapc
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockassaultapc
+
+td_gdi_promotion_unlockhumveemkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Humvee Mk. II
+	Buildable:
+		BuildPaletteOrder: 14
+		Queue: Promotions
+		Description: Allows construction of the Humvee Mk. II.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockhumveemkii, rank1
+	RenderSprites:
+		Image: newhumvee
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockhumveemkii
+
+td_gdi_promotion_unlockpredatortank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Predator Tank
+	Buildable:
+		BuildPaletteOrder: 17
+		Queue: Promotions
+		Description: Allows construction of the Predator Tank.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockpredatortank, td_gdi_promotion_unlockhumveemkii, rank1
+	RenderSprites:
+		Image: td_gdi_predatortank
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockpredatortank
+
+td_gdi_promotion_unlockmammothtankmk3:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mammoth Tank Mk3
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Promotions
+		Description: Allows construction of the Mammoth Tank Mk3.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockmammothtankmk3, td_gdi_promotion_unlockpredatortank, rank1
+	RenderSprites:
+		Image: td_gdi_mammothtankmkiii
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockmammothtankmk3
+
+td_gdi_promotion_unlockgdidefenserig:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock GDI Defense Rig
+	Buildable:
+		BuildPaletteOrder: 23
+		Queue: Promotions
+		Description: Allows construction of the GDI Defense Rig.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockgdidefenserig, td_gdi_promotion_unlockmammothtankmk3, rank1
+	RenderSprites:
+		Image: td_gdi_defenserig
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockgdidefenserig
+
+td_gdi_promotion_unlockshotgunner:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shotgunner
+	Buildable:
+		BuildPaletteOrder: 15
+		Queue: Promotions
+		Description: Allows training of Shotgunners.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockshotgunner, rank1
+	RenderSprites:
+		Image: td_gdi_shotgunner
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockshotgunner
+
+td_gdi_promotion_unlockgdiofficer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock GDI Officer
+	Buildable:
+		BuildPaletteOrder: 18
+		Queue: Promotions
+		Description: Allows training of GDI Officers.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockgdiofficer, td_gdi_promotion_unlockshotgunner, rank1
+	RenderSprites:
+		Image: td_gdi_officer
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockgdiofficer
+
+td_gdi_promotion_unlockhavocandexosuit:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Havoc and Exosuit
+	Buildable:
+		BuildPaletteOrder: 21
+		Queue: Promotions
+		Description: Allows training of Havoc and construction of the Exosuit.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockhavocandexosuit, td_gdi_promotion_unlockgdiofficer, rank1
+	RenderSprites:
+		Image: havocexosuit
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockhavocandexosuit
+
+td_gdi_promotion_unlockfirehawk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Firehawk
+	Buildable:
+		BuildPaletteOrder: 24
+		Queue: Promotions
+		Description: Allows construction of the Firehawk.
+		Prerequisites: ~td_gdi_constructionyard, !td_gdi_promotion_unlockfirehawk, td_gdi_promotion_unlockhavocandexosuit, rank1
+	RenderSprites:
+		Image: td_gdi_firehawk
+	ProvidesPrerequisite:
+		Prerequisite: td_gdi_promotion_unlockfirehawk
+
+	####################################################################################################
+	#		Promotion Units GDI
+	####################################################################################################

@@ -88,29 +88,29 @@
 tsengineer:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tsengineer.shp
+		Filename: ts_gdi_engineer_tsengineer.shp
 	icon:
-		Filename: tsenggicon.shp
+		Filename: ts_gdi_engineer_icon.shp
 
 altengi:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: altengi.shp
+		Filename: ts_nod_engineer_altengi.shp
 	icon:
-		Filename: tsenggicon.shp
+		Filename: ts_gdi_engineer_icon.shp
 
 tse3:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte3.shp
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
-		Filename: tse3icon.png
+		Filename: ts_nod_rocketinfantry_icon.png
 
 tstratos:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tsmutant.shp
+		Filename: forgotten_mutant_tsmutant.shp
 	icon:
 		Filename: forgot_tratos_icon.png
 
@@ -118,7 +118,7 @@ tse3mut:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte3.shp
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
 		Filename: forgotten_rocketinfantry_icon.png
 
@@ -165,7 +165,7 @@ dtruck:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: tsharvestericon.shp
+		Filename: ts_gdi_tiberiumharvester_icon.shp
 
 tsprobe:
 	Defaults:
@@ -175,7 +175,7 @@ tsprobe:
 		Start: 8
 		ZOffset: -511
 	icon:
-		Filename: tshunterseekersicon.shp
+		Filename: ra2_allies_upgrade_paratroopers_tshunterseekersicon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -199,40 +199,40 @@ tsldrone:
 # 		Start: 41
 # 	icon: jmin
 
-tsbike:
+ts_nod_attackcycle:
 	Defaults:
-		Filename: tsbike.shp
+		Filename: ts_nod_attackcycle.shp
 		Scale: 1.25
 	idle:
-		Filename: tsbike.shp
+		Filename: ts_nod_attackcycle.shp
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: tsbikeicon.shp
+		Filename: ts_nod_attackcycle_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-tsttnk:
+ts_nod_ticktank:
 	Defaults:
 		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	deploy-idle:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 		ShadowStart: 3
 	make:
-		Filename: tsgttickmk.shp
+		Filename: ts_nod_ticktank_make.shp
 		Length: 24
 		ShadowStart: 25
 		Offset: 0, -10, 0
 		Tick: 10
 	dead:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 	icon:
-		Filename: tstickicon.png
+		Filename: ts_nod_ticktank_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: gunfire2.shp
@@ -244,7 +244,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: cabal_mobileconstructionvehicle_icon.shp
+		Filename: ts_gdi_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -319,34 +319,34 @@ tsgtcnst:
 		Scale: 1.25
 		Offset: -8, -20, 20
 	idle:
-		Filename: cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	build:
-		Filename: cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: cabal_constructionyard_mk.shp
+		Filename: ts_gdi_constructionyard_cabal_make.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	damaged-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	critical-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Start: 20
 		Length: 20
 		ZOffset: 1023
@@ -355,20 +355,20 @@ tsgtcnst:
 	damaged-idle-top:
 		Filename: invisibleitem.shp
 	idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Length: 10
 	damaged-idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Start: 10
 		Length: 10
 	idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	damaged-idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	icon:
-		Filename: cabal_constructionyard_icon.png
+		Filename: ts_gdi_constructionyard_icon.png
 		Offset: 0,0
 
 drplasma2:
@@ -418,7 +418,7 @@ tsnttmpl:
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsnttmplmk.shp
+		Filename: tsnttmplmake.shp
 	active:
 		Filename: invisibleitem.shp
 	smoke:
@@ -477,7 +477,7 @@ tsnthpadmut:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: tsnthpadbb.shp
+		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
@@ -505,7 +505,7 @@ tsnthpadmut:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: tsnthpadmk.shp
+		Filename: ts_nod_helipad_make.shp
 	icon:
 		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
@@ -514,7 +514,7 @@ tsnthpadmut:
 tsgtsilo.gdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
 		Offset: 4, -24, 24
 	idle:
@@ -530,16 +530,16 @@ tsgtsilo.gdi:
 		Start: 4
 		Length: 4
 	idle-underlay:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-idle-underlay:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	dead:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -512
@@ -554,7 +554,7 @@ tsgtsilo.gdi:
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 	icon:
 		Filename: tssilo2icon.shp
 		Offset: 0, 0
@@ -565,7 +565,7 @@ tsgtsilo.gdi:
 tsgtsilo.nod:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
 		Offset: 4, -24, 24
 	idle:
@@ -610,7 +610,7 @@ tsgtsilo.nod:
 		Length: 3
 		Tick: 120
 	make:
-		Filename: ts_nod_silo_mk.shp
+		Filename: ts_nod_silo_make.shp
 	icon:
 		Filename: ts_nod_silo_icon.png
 		Offset: 0, 0
@@ -620,99 +620,99 @@ tsgtsilo.nod:
 
 tsgtdept:
 	Defaults:
-		Filename: cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Scale: 1.25
 		Offset: 8, -32, 1
 	idle:
-		Filename: cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		ShadowStart: 3
 		# Offset: 0, -16, 12
 	damaged-idle:
-		Filename: cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 1
 		ShadowStart: 4
 		# Offset: 0, -16, 12
 	dead:
-		Filename: cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 		# Offset: 0, -16, 12
 	ground:
-		Filename: cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
-		Filename: cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
-		Filename: cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c611
 		Tick: 400
 	idle-light:
-		Filename: cabal_servicedepot_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Length: 7
 		Tick: 120
 	damaged-idle-light:
-		Filename: cabal_servicedepot_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Start: 7
 		Length: 7
 		Tick: 120
 	circuits:
-		Filename: cabal_servicedepot_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	damaged-circuits:
-		Filename: cabal_servicedepot_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Start: 5
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	crane-start:
-		Filename: cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-loop:
-		Filename: cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	active:
-		Filename: cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	damaged-active:
-		Filename: cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-end:
-		Filename: cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 10
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
-		Filename: cabal_servicedepot_d.shp
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		ZOffset: -1c511
 	damaged-platform:
-		Filename: cabal_servicedepot_d.shp
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: cabal_servicedepot_mk.shp
+		Filename: ts_gdi_servicedepot_cabal_make.shp
 	icon:
-		Filename: cabal_servicedepot_icon.png
+		Filename: ts_gdi_servicedepot_icon.png
 		Offset: 0, 0
 
 tsnodmmsil:
@@ -734,7 +734,7 @@ tsapache:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsharpyicon.shp
+		Filename: ts_nod_harpy_icon.shp
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -773,7 +773,7 @@ forgotten_chinook:
 
 tsjumpjet:
 	Defaults:
-		Filename: altjumpjet.shp
+		Filename: ts_gdi_jumpjetinfantry_altjumpjet.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	idle:
@@ -902,15 +902,15 @@ forgot_conyard:
 	make:
 		Length: 32
 	crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	damaged-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Length: 20
 		ZOffset: 1023
 	critical-crane-overlay:
-		Filename: tsgtcnst_d.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_d.shp
 		Start: 20
 		Length: 20
 		ZOffset: 1023
@@ -919,17 +919,17 @@ forgot_conyard:
 	damaged-idle-top:
 		Filename: invisibleitem.shp
 	idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Length: 10
 	damaged-idle-side:
-		Filename: tsgtcnst_a.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_a.shp
 		Start: 10
 		Length: 10
 	idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	damaged-idle-front:
-		Filename: tsgtcnst_b.shp
+		Filename: ts_gdi_constructionyard_tsgtcnst_b.shp
 		Length: 10
 	icon:
 		Filename: forgotten_constructionyard_icon.png
@@ -1191,7 +1191,7 @@ tsntpuls:
 		Filename: ts_gdi_empulsecannon_icon.shp
 		Offset: 0,0
 	icon2:
-		Filename: steel_emp_icon.shp
+		Filename: steel_consortium_upgrade_unlockempcannon_icon.shp
 		Offset: 0,0
 
 forgot_juggerflak:
@@ -1351,7 +1351,7 @@ railgunweaponryicon:
 
 mechengineeringicon:
 	icon:
-		Filename: tstitanicon.shp
+		Filename: ts_gdi_upgrade_mechengineering_icon.shp
 
 ceramicarmoricon:
 	icon:
@@ -1515,4 +1515,4 @@ chemicalweaponsicon:
 
 tiberiumadaptabilityicon:
 	icon:
-		Filename: forgotten_upgrade_tiberiumadaptability_proxy_actor_icon.png
+		Filename: forgotten_upgrade_tiberiumadaptability_icon.png

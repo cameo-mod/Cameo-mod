@@ -176,7 +176,7 @@ DoomPlasma:
 		ValidTargets: Ground, Water, Air
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 
 DoomGarrisonPlasma:
 	Inherits: DoomPlasma
@@ -249,7 +249,7 @@ WolfenSchabbsMutate:
 	Inherits: ^BallisticWeapon
 	Report: DSWBO3ATK.wav
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
+	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk
 	ReloadDelay: 30
 	Range: 4096
 	Report: tnkfire3.aud

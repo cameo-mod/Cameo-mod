@@ -48,9 +48,9 @@ MCVMARKET:
 		AreaTypes: building, cityi
 
 MM1MCV:
-	Inherits@MCV: MCV.GDI
+	Inherits@MCV: td_gdi_mobileconstructionvehicle
 	Transforms:
-		IntoActor: fact.gdi
+		IntoActor: td_gdi_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (GDI)
 	Buildable:
@@ -63,9 +63,9 @@ MM1MCV:
 		Image: mm1mcv
 
 MM2MCV:
-	Inherits@MCV: MCV.NOD
+	Inherits@MCV: td_nod_mobileconstructionvehicle
 	Transforms:
-		IntoActor: fact.nod
+		IntoActor: td_nod_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Nod)
 	Buildable:
@@ -78,9 +78,9 @@ MM2MCV:
 		Image: mm2mcv
 
 MM1RAMCV:
-	Inherits@MCV: RAMCV.ALLIES
+	Inherits@MCV: ra1_allies_alliedmobileconstructionvehicle
 	Transforms:
-		IntoActor: rafact.allies
+		IntoActor: ra1_allies_alliedconstructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Allies)
 	Buildable:
@@ -93,9 +93,9 @@ MM1RAMCV:
 		Image: mm1ramcv
 
 MM2RAMCV:
-	Inherits@MCV: RAMCV.SOVIET
+	Inherits@MCV: ra1_soviet_mobileconstructionvehicle
 	Transforms:
-		IntoActor: rafact.soviet
+		IntoActor: ra1_soviet_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Soviet)
 	Buildable:
@@ -108,9 +108,9 @@ MM2RAMCV:
 		Image: mm2ramcv
 
 MMRA2AMCV:
-	Inherits@MCV: RA2AMCV
+	Inherits@MCV: ra2_allies_alliedmobileconstructionvehicle
 	Transforms:
-		IntoActor: ra2gacnst
+		IntoActor: ra2_allies_alliedconstructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (AlliesRA2)
 	Buildable:
@@ -118,14 +118,14 @@ MMRA2AMCV:
 		-Description:
 		Prerequisites: !mmalliesra2
 	RenderSprites:
-		Image: ra2amcv
+		Image: ra2_allies_alliedmobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmalliesra2
 
 MMRA2SMCV:
-	Inherits@MCV: RA2SMCV
+	Inherits@MCV: ra2_soviets_mobileconstructionvehicle
 	Transforms:
-		IntoActor: ra2nacnst
+		IntoActor: ra2_soviets_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (SovietRA2)
 	Buildable:
@@ -133,14 +133,14 @@ MMRA2SMCV:
 		-Description:
 		Prerequisites: !mmsovietra2
 	RenderSprites:
-		Image: ra2smcv
+		Image: ra2_soviets_mobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmsovietra2
 
 MMYRPCV:
-	Inherits@MCV: YRPCV
+	Inherits@MCV: yuri_mobileconstructionvehicle
 	Transforms:
-		IntoActor: yrnacnst
+		IntoActor: yuri_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Yuri)
 	Buildable:
@@ -148,7 +148,7 @@ MMYRPCV:
 		-Description:
 		Prerequisites: !mmyuri
 	RenderSprites:
-		Image: yrpcv
+		Image: yuri_mobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmyuri
 
@@ -181,13 +181,13 @@ MM22100MCV:
 		Image: mm22100mcv
 
 MMSCTMCV:
-	Inherits@MCV: SCTMCV
+	Inherits@MCV: terran_mobilecommandcenter
 	Buildable:
 		Icon: mmicon
 	RenderSprites:
-		Image: SCTMCV
+		Image: terran_mobilecommandcenter
 	Transforms:
-		IntoActor: sccommandcenter
+		IntoActor: terran_commandcenter
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: !mmterran
@@ -195,13 +195,13 @@ MMSCTMCV:
 		Prerequisite: mmterran
 
 MMSCPMCV:
-	Inherits@MCV: SCPMCV
+	Inherits@MCV: protoss_mobilenexus
 	Buildable:
 		Icon: mmicon
 	RenderSprites:
-		Image: SCPMCV
+		Image: protoss_mobilenexus
 	Transforms:
-		IntoActor: scnexus
+		IntoActor: protoss_nexus
 	Buildable:
 		BuildPaletteOrder: 110
 		Prerequisites: !mmprotoss
@@ -209,13 +209,13 @@ MMSCPMCV:
 		Prerequisite: mmprotoss
 
 MMSCZMCV:
-	Inherits@MCV: SCZMCV
+	Inherits@MCV: zerg_hatcherydrone
 	Buildable:
 		Icon: mmicon
 	RenderSprites:
-		Image: SCZMCV
+		Image: zerg_hatcherydrone
 	Transforms:
-		IntoActor: schatchery
+		IntoActor: zerg_hatchery
 	Buildable:
 		BuildPaletteOrder: 120
 		Prerequisites: !mmzerg
@@ -504,7 +504,7 @@ mmmcv.imperium:
 mmmcv.shadowhand:
 	Inherits@MCV: mcv.shadowhand
 	Tooltip:
-		Name: Construction Rig (Shadow Hand)
+		Name: Construction Rig (Shadow td_nod_handofnod)
 	Buildable:
 		BuildPaletteOrder: 310
 		-Description:
@@ -549,7 +549,7 @@ mmmcv.xenite:
 mmmcv.togran:
 	Inherits@MCV: mcv.togran
 	Tooltip:
-		Name: Construction Rig (Shadow Hand)
+		Name: Construction Rig (Shadow td_nod_handofnod)
 	Buildable:
 		BuildPaletteOrder: 310
 		-Description:

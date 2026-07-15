@@ -1,0 +1,750 @@
+asian_alliance_asianmilitia:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Asian Militia
+		RequiresCondition: !asian_alliance_doctrine_modernizedinfantryequipment
+	Tooltip@asian_alliance_doctrine_modernizedinfantryequipment:
+		Name: Asian Grenadier
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	Valued:
+		Cost: 100
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~asian_alliance_asianbarracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: RA2AsianShotgun
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2AsianShotgunE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GRENADE:
+		Weapon: AsianGrenade
+		LocalOffset: 128,0,256
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment && !rank-elite
+	Armament@GRENADEELITE:
+		Weapon: AsianGrenadeE
+		LocalOffset: 128,0,256
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment && rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2AsianShotgun
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2AsianShotgunE
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: rank-elite
+	Armament@GRENADEG:
+		Name: garrisoned
+		Weapon: AsianGrenade
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment && !rank-elite
+	Armament@GRENADEGE:
+		Name: garrisoned
+		Weapon: AsianGrenadeE
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment && rank-elite
+	DamageMultiplier@asian_alliance_doctrine_modernizedinfantryequipment:
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+		Modifier: 50
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: RedGuardVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_asiantankkiller:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Asian Tank Killer
+	Valued:
+		Cost: 300
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~asian_alliance_asianbarracks
+		Queue: Infantry, RAInfantry
+		Description: template_antitank_antiair_infantry.description
+	Mobile:
+		Speed: 51
+	Health:
+		HP: 17000
+	ChangesHealth@SelfHealing:
+		Step: 17
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianTankKillerRocket
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@Upgrade:
+		Name: primary
+		Weapon: AsianTankKillerRocket_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: AsianTankKillerRocket_elite
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@PRIMARYELITEUpgrade:
+		Name: primary
+		Weapon: AsianTankKillerRocket_elite_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianTankKillerRocket
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONEDUpgrade:
+		Name: garrisoned
+		Weapon: AsianTankKillerRocket_upgrade
+		RequiresCondition: !rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: AsianTankKillerRocket_elite
+		RequiresCondition: rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONEDELITEUpgrade:
+		Name: garrisoned
+		Weapon: AsianTankKillerRocket_elite_upgrade
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TankHunterVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_plasmatrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Tooltip:
+		Name: Plasma Trooper
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_asianbattlelab
+		Queue: Infantry, RAInfantry
+		Description: template_antitank_infantry.description
+	Mobile:
+		Speed: 42
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianSinglePlasma
+		LocalOffset: 427,0,341
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: AsianSinglePlasmaE
+		LocalOffset: 427,0,341
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianSinglePlasma
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: AsianSinglePlasmaE
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TankHunterVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode, asian_alliance_upgrade_dragonfire
+
+asian_alliance_asianflametrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
+	Tooltip:
+		Name: Asian Flame Trooper
+	Valued:
+		Cost: 400
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_asianradar
+		Queue: Infantry, RAInfantry
+		Description: actor_e4.description
+	Mobile:
+		Speed: 53
+	Health:
+		HP: 26000
+	ChangesHealth@SelfHealing:
+		Step: 26
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: AsianFlamerTroop
+		LocalOffset: 427,0,341
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@Upgrade:
+		Name: primary
+		Weapon: AsianFlamerTroop2
+		LocalOffset: 427,0,341
+		RequiresCondition: (rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asian_alliance_doctrine_modernizedinfantryequipment)
+	Armament@ELITE:
+		Name: primary
+		Weapon: AsianFlamerTurret
+		LocalOffset: 427,0,341
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianFlamerTroop
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianFlamerTroop2
+		RequiresCondition: (rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asian_alliance_doctrine_modernizedinfantryequipment)
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: AsianFlamerTurret
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+	FireWarheadsOnDeath:
+		Weapon: AsianFlamerTroopExplode
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianFlametroopVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode, asian_alliance_upgrade_dragonfire
+
+asian_alliance_fanatic:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Fanatic
+	Valued:
+		Cost: 250
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockfanatic
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 63
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armament@PRIMARY:
+		Weapon: RA2AsianShotgunFanatic1
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@Upgrade:
+		Weapon: RA2AsianShotgunFanatic2
+		LocalOffset: 128,0,256
+		RequiresCondition: (rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asian_alliance_doctrine_modernizedinfantryequipment)
+	Armament@ELITE:
+		Weapon: RA2AsianShotgunFanatic3
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2AsianShotgunFanatic1
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@GARRISONEDUpgrade:
+		Name: garrisoned
+		Weapon: RA2AsianShotgunFanatic2
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: (rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asian_alliance_doctrine_modernizedinfantryequipment)
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2AsianShotgunFanatic3
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianKamiVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_japanesesamurai:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Japanese Samurai
+	Valued:
+		Cost: 350
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_promotion_unlocksamurai, asian_alliance_asianradar
+		Queue: Infantry, RAInfantry
+		Description: actor_rasamurai.description
+	Mobile:
+		Speed: 72
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@Sword1:
+		Weapon: AsianSamuraiSword1
+		RequiresCondition: !rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@Sword2:
+		Weapon: AsianSamuraiSword2
+		RequiresCondition: (rank-elite && !asian_alliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asian_alliance_doctrine_modernizedinfantryequipment)
+	Armament@Sword3:
+		Weapon: AsianSamuraiSword3
+		RequiresCondition: rank-elite && asian_alliance_doctrine_modernizedinfantryequipment
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianSamuVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_veteranarcher:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Veteran Archer
+	Valued:
+		Cost: 450
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockveteranarchers, asian_alliance_asianradar
+		Queue: Infantry, RAInfantry
+		Description: template_antitank_antiair_infantry.description
+	Mobile:
+		Speed: 68
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament@PRIMARY:
+		Weapon: AsianMaidenBow
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianMaidenBowE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianMaidenBow
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: AsianMaidenBowE
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianMaidVoice
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode, asian_alliance_upgrade_celestialpower
+
+asian_alliance_shinobi:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Shinobi
+	Valued:
+		Cost: 750
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_asianradar
+		Queue: Infantry, RAInfantry
+		Description: actor_aashinobi.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: AsianNinjaStar
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianNinjaStarE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: AsianNinjaStar
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: AsianNinjaStarE
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianShinobiVoice
+	DeliversCash:
+		Payload: 60
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_engineer:
+	Inherits: ra2_allies_engineer
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@kami: ^KamikazeMode
+	Buildable:
+		Prerequisites: ~asian_alliance_asianbarracks
+		Queue: Infantry, RAInfantry
+	Voiced:
+		VoiceSet: CHHackerVoice
+	RenderSprites:
+		Image: ra2_allies_engineer
+	Captures:
+		Voice: Attack
+	Captures@REUSABLE:
+		Voice: Attack
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx
+
+asian_alliance_alligator:
+	Inherits: ^Soldier
+	Inherits@swim: ^WithSwimsuit
+	Inherits@2: ^AffectedByTiberium
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@MC: ^MCImmune
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Alligator
+	Valued:
+		Cost: 300
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~asian_alliance_asianbarracks
+		Queue: Infantry, RAInfantry
+		Description: actor_alligator.description
+	Mobile:
+		Speed: 108
+	Health:
+		HP: 27000
+		InitialStance: AttackAnything
+	ChangesHealth@SelfHealing:
+		Step: 27
+	Armor:
+		Type: None
+	Armament@PRIMARY:
+		Weapon: AsianCrocBite
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: AsianCrocBiteE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: AsianCrocVoice
+	Passenger:
+		Weight: 2
+	Targetable@ra1_soviet_attackdog:
+		TargetTypes: DogImmune
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 25
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		RequiresCondition: !cloak-force-disabled && !underbridge && swimming
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	IgnoresDisguise:
+	-Targetable@disguise:
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_asdf:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: ASDF
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockasdf, asian_alliance_militaryacademy
+		Queue: Infantry, RAInfantry
+		Description: actor_boris.description
+		IconPalette: ra2cameo
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Mobile:
+		Speed: 60
+	Armament@PRIMARY:
+		Weapon: ASDFGun
+		LocalOffset: 128,0,256
+		RequiresCondition: !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@Upgrade:
+		Weapon: ASDFGun2
+		LocalOffset: 128,0,256
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: ASDFKamikazeTargeting
+		LocalOffset: 32,0,256
+		RequiresCondition: canflare
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ASDFGun
+		RequiresCondition: !asian_alliance_doctrine_modernizedinfantryequipment
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: ASDFGun2
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		IdleSequences: idle1, idle2, reload
+		AttackSequences:
+			primary: shoot
+	AirstrikeMasterCA@1:
+		ArmamentNames: secondary
+		Actors: kami_asdf.asian
+		SquadSize: 1
+		InitialActorCount: -1
+		RespawnTicks: 25
+		RearmTicks: 10
+		SpawnDistance: 12345
+		SlaveAvailableCondition: canflare
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	RenderRangeCircleCA@airstrike:
+		Armaments: secondary
+		Color: FF0000
+	KeepsDistance:
+	Voiced:
+		VoiceSet: AsianShinobiVoice
+	DeliversCash:
+		Payload: 600
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+asian_alliance_asiancommando:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@InfantrySpecUpgrade: ^InfantrySpecUpgrade
+	Inherits@kami: ^KamikazeMode
+	Tooltip:
+		Name: Asian Commando
+	Valued:
+		Cost: 3000
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~asian_alliance_asianbarracks, asian_alliance_militaryacademy
+		Queue: Infantry, RAInfantry
+		Description: actor_ra2snipe.description
+		BuildLimit: 1
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@lockdown:
+		Weapon: AsianSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 3
+		PauseOnCondition: ammo < 6
+	Armament@PRIMARY:
+		Weapon: AsianSniper
+		LocalOffset: 500,0,400
+		RequiresCondition: !asian_alliance_doctrine_modernizedinfantryequipment
+		PauseOnCondition: !ammo
+	Armament@PRIMARYUPGRADE:
+		Weapon: AsianSniperAP
+		LocalOffset: 500,0,400
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+		PauseOnCondition: !ammo
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: AsianSniper
+		RequiresCondition: !asian_alliance_doctrine_modernizedinfantryequipment
+		PauseOnCondition: !ammo
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: AsianSniperAP
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+		PauseOnCondition: !ammo
+	GrantConditionOnPrerequisite@asian_alliance_doctrine_modernizedinfantryequipment:
+		Condition: asian_alliance_doctrine_modernizedinfantryequipment
+		Prerequisites: asian_alliance_doctrine_modernizedinfantryequipment
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 100
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	ReloadAmmoDelayMultiplier@RANK-1:
+		RequiresCondition: rank-veteran == 1
+		Modifier: 85
+	ReloadAmmoDelayMultiplier@RANK-2:
+		RequiresCondition: rank-veteran == 2
+		Modifier: 70
+	ReloadAmmoDelayMultiplier@RANK-3:
+		RequiresCondition: rank-veteran == 3
+		Modifier: 55
+	ReloadAmmoDelayMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 40
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TSUmagon
+	RenderSprites:
+		Image: asian_alliance_asiancommando
+	ActorStatValues:
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+
+##############################################
+#   Red Alert 2 Asian Tanks
+##############################################

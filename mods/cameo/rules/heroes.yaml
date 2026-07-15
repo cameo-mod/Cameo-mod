@@ -636,14 +636,14 @@ volkovcc:
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 140
-		Prerequisites: ra2naweap, ra2natech, ~techlevel.high, ~anysovietsallra, !1hero
-		Description: Controls and provides Volkov\nBuilding must be sold and rebuilt for another Volkov to appear
+		Prerequisites: ra2_soviets_warfactory, ra2_soviets_battlelab, ~techlevel.high, ~anysovietsallra, !1hero
+		Description: Controls and provides ra1_soviet_volkov\nBuilding must be sold and rebuilt for another ra1_soviet_volkov to appear
 		IconPalette: ra2
 		BuildLimit: 1
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Volkov Control Center
+		Name: ra1_soviet_volkov Control Center
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -664,30 +664,30 @@ volkovcc:
 	-WithMakeAnimation:
 	-WithDeathAnimation:
 	FreeActor:
-		Actor: VOLKOV
+		Actor: ra1_soviet_volkov
 		RequiresCondition: novolkov
 	CustomSellValue:
 		Value: 100
-	GrantConditionOnPrerequisite@volkov:
-		Prerequisites: !volkov
+	GrantConditionOnPrerequisite@ra1_soviet_volkov:
+		Prerequisites: !ra1_soviet_volkov
 		Condition: novolkov
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 		
-VOLKOV:
+ra1_soviet_volkov:
 	Inherits@HEROES: ^Heroes
 	Inherits: GNRL
 	-Buildable:
 	Tooltip:
-		Name: Volkov
+		Name: ra1_soviet_volkov
 	Armament:
 		Weapon: RA2VolkovGun
 	Health:
 		HP: 500000
 	Armor:
 		Type: Concrete
-	ProvidesPrerequisite@volkov:
-		Prerequisite: volkov
+	ProvidesPrerequisite@ra1_soviet_volkov:
+		Prerequisite: ra1_soviet_volkov
 	Mobile:
 		Speed: 44
 		PauseOnCondition: nocc
@@ -704,7 +704,7 @@ VOLKOV:
 	GrantConditionOnPrerequisite@poweroff:
 		Prerequisites: !volkovcontrol
 		Condition: nocc
-	MobSpawnerMaster@dog:
+	MobSpawnerMaster@ra1_soviet_attackdog:
 		Actors: CHITZKOI
 		Offset: 0,0,0
 		RespawnTicks: 5000
@@ -723,7 +723,7 @@ VOLKOV:
 		Range: 5c0
 		
 CHITZKOI:
-	Inherits: RA2DOG
+	Inherits: ra2_soviets_attackdog
 	-Buildable:
 	-DeliversCash:
 	-Cloneable:
@@ -739,7 +739,7 @@ CHITZKOI:
 	Health:
 		HP: 7200
 	RenderSprites:
-		Image: ra2dog
+		Image: ra2_soviets_attackdog
 	MobSpawnerSlave:
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: nocc
@@ -748,12 +748,12 @@ CHITZKOI:
 		Condition: nocc
 		
 RA2HTANY:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Inherits@HEROES: ^Heroes
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: ra2gatech, ~anyalliesallra, !1hero
+		Prerequisites: ra2_allies_alliedbattlelab, ~anyalliesallra, !1hero
 		BuildLimit: 1
 		Description: Elite amphibious commando infantry with dual laser guns, C4 and Knife.\nCan plant timed bombs on vehicles\nCan demolish buildings with C4\nCan use Chrono teleportation\nMaximum 1 can be trained\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft\n\nTip:\nClick or use F key to switch weaponry\nUse Alt+Click for chrono teleportation
 		Icon: iconchrono
@@ -791,7 +791,7 @@ RA2HTANY:
 		Armaments: primary, c4
 		FacingTolerance: 0
 	RenderSprites:
-		Image: RA2TANY
+		Image: ra2_allies_tanyaii
 	Cloak:
 		InitialDelay: 40
 		CloakDelay: 40
@@ -974,7 +974,7 @@ TSNASHWA:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~anynod
-		Description: Permanently Stealthed until her weapon is fully charged up\nCan call Nod Bike
+		Description: Permanently Stealthed until her weapon is fully charged up\nCan call Nod td_nod_reconbike
 		IconPalette: ra2
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1075,7 +1075,7 @@ TSNASHWABIKE:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: NashwaBike.TSNod
-		Description: Autonomous Bike that helps Nashwa get over long distances\nShoots flame rockets
+		Description: Autonomous td_nod_reconbike that helps Nashwa get over long distances\nShoots flame rockets
 		Prerequisites: ~!TSNASHWABIKE
 		BuildLimit: 1
 		IconPalette: ra2
@@ -1091,7 +1091,7 @@ TSNASHWABIKE:
 	Health:
 		HP: 40000
 	Tooltip:
-		Name: Nod Bike
+		Name: Nod td_nod_reconbike
 	RenderSprites:
 		Image: tsnashwabike
 	WithFacingSpriteBody:
@@ -1138,7 +1138,7 @@ TSNASHWABIKE.cd:
 	ProvidesPrerequisite@nashwabike:
 		Prerequisite: TSNASHWABIKE
 	Tooltip:
-		Name: Nod Bike (Destroyed)
+		Name: Nod td_nod_reconbike (Destroyed)
 	RenderSprites:
 		Image: TSNASHWABIKE
 	KillsSelf:
@@ -1156,7 +1156,7 @@ TSNASHWABIKE.cd:
 		StartIfBelow: 101
 		Delay: 8
 SCDVA:
-	Inherits: SCGOLIATH
+	Inherits: terran_goliath
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -1204,7 +1204,7 @@ SCDVA:
 		RequiresCondition: overload
 		GrantsCondition: meltdown
 	FreeActor@soldier:
-		Actor: scmedic
+		Actor: terran_medic
 		SpawnOffset: 0,0
 		RequiresCondition: overload
 ancientvisceroid:
@@ -1329,7 +1329,7 @@ mutantseverus:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~faction.forgotten
-		Description: Unable to use his left hand and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
+		Description: Unable to use his left td_nod_handofnod and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		IconPalette: ra2
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1416,7 +1416,7 @@ severuscabal:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~faction.cabal
-		Description: Unable to use his left hand and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
+		Description: Unable to use his left td_nod_handofnod and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Valued:
@@ -2854,7 +2854,7 @@ Rockets:
 Spreader:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Multi-direction photon gun
+		Name: Multi-direction photon td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Upgrade.Contestant
@@ -2918,11 +2918,11 @@ Speedboost:
 Orb:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Machine gun firing remote
+		Name: Machine td_nod_gunturret firing remote
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrade.Contestant
-		Description: Machine gun firing remote.\n Increases attack range by 1 tile.
+		Description: Machine td_nod_gunturret firing remote.\n Increases attack range by 1 tile.
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000
@@ -3117,11 +3117,11 @@ mdkchaingun:
 mdkmortar:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Mortar Sniper
+		Name: Mortar ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrade.Kurt
-		Description: Kurt uses Mortar aganist buildings in Sniper Mode
+		Description: Kurt uses Mortar aganist buildings in ra1_allies_alliedsniper Mode
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000
@@ -3132,11 +3132,11 @@ mdkmortar:
 mdkmissile:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Mortar Sniper
+		Name: Mortar ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrade.Kurt
-		Description: Kurt uses Missiles aganist vehicles in Sniper Mode
+		Description: Kurt uses Missiles aganist vehicles in ra1_allies_alliedsniper Mode
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000

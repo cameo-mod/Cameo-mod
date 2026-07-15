@@ -157,7 +157,7 @@ xcomassaultranger:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: gdishotgunner
+		Image: td_gdi_shotgunner
 ShotgunUpgrade:
 	Tooltip:
 		Name: Shotgun Upgrade
@@ -169,7 +169,7 @@ ShotgunUpgrade:
 	Valued:
 		Cost: 700
 	RenderSprites:
-		Image: gdishotgunner
+		Image: td_gdi_shotgunner
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: ShotgunUpgrade
@@ -197,12 +197,12 @@ ShotgunUpgrade:
 		Range: 1c0
 ShardgunUpgrade:
 	Tooltip:
-		Name: Shard Gun Upgrade
+		Name: Shard td_nod_gunturret Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 1
 		Queue: Addons
-		Description: Upgrades the Shotgun to the Shard Gun
+		Description: Upgrades the Shotgun to the Shard td_nod_gunturret
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -219,9 +219,9 @@ ShardgunUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Shard Gun Upgrade
+			1: Shard td_nod_gunturret Upgrade
 		Descriptions:
-			1: Upgrades the Shotgun to the Shard Gun
+			1: Upgrades the Shotgun to the Shard td_nod_gunturret
 		Condition: ShardgunUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -243,7 +243,7 @@ GrenadeUpgrade:
 	Valued:
 		Cost: 1800
 	RenderSprites:
-		Image: e2
+		Image: td_gdi_grenadier
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: GrenadeUpgrade
@@ -280,7 +280,7 @@ CarapaceArmorUpgrade:
 	Valued:
 		Cost: 1000
 	RenderSprites:
-		Image: tsblackhandlaser
+		Image: td_nod_lasertrooper
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: CarapaceArmorUpgrade
@@ -400,7 +400,7 @@ xcomheavygrenadier:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: yrggi
+		Image: ra2_allies_guardiangi
 RocketLauncherUpgrade:
 	Tooltip:
 		Name: Rocket Launcher Upgrade
@@ -412,7 +412,7 @@ RocketLauncherUpgrade:
 	Valued:
 		Cost: 2600
 	RenderSprites:
-		Image: gdimissilesoldier
+		Image: td_gdi_sonicmissilesoldier
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: RocketLauncherUpgrade
@@ -450,7 +450,7 @@ RocketLauncherUpgrade:
 # 	Valued:
 # 		Cost: 2000
 # 	RenderSprites:
-# 		Image: tsblackhandlaser
+# 		Image: td_nod_lasertrooper
 # 	Interactable:
 # 	AlwaysVisible:
 # 	GrantExternalConditionPowerCA@IRONCURTAIN:
@@ -546,19 +546,19 @@ xcomsharpshooter:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: ra2snipe
+		Image: ra2_allies_sniper
 AutoSniperUpgrade:
 	Tooltip:
-		Name: Auto Sniper Upgrade
+		Name: Auto ra1_allies_alliedsniper Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 2
 		Queue: Addons
-		Description: Gives the Sniper an automatic Sniper Rifle
+		Description: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
 	Valued:
 		Cost: 800
 	RenderSprites:
-		Image: ra2snipe
+		Image: ra2_allies_sniper
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: AutoSniperUpgrade
@@ -571,9 +571,9 @@ AutoSniperUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Auto Sniper Upgrade
+			1: Auto ra1_allies_alliedsniper Upgrade
 		Descriptions:
-			1: Gives the Sniper an automatic Sniper Rifle
+			1: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
 		Condition: AutoSniperUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -857,7 +857,7 @@ XCOMHQ:
 		Prerequisite: conyard
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: sccommandcenter
+		Image: terran_commandcenter
 
 medium_gun_turret.xcom:
 	Inherits: ^Tank
@@ -880,7 +880,7 @@ medium_gun_turret.xcom:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Gun Turret
+		Name: td_nod_gunturret Turret
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536
@@ -1068,7 +1068,7 @@ xcom_barracks:
 	Valued:
 		Cost: 500
 	RenderSprites:
-		Image: ra2gapile
+		Image: ra2_allies_alliedbarracks
 
 xcom_officer_training_school:
 	Inherits: ^researched_upgrade.template
@@ -1096,7 +1096,7 @@ xcom_infirmary:
 	Valued:
 		Cost: 1750
 	RenderSprites:
-		Image: medi
+		Image: ra1_allies_medic
 
 xcom_defense_matrix:
 	Inherits: ^researched_upgrade.template
@@ -1140,7 +1140,7 @@ xcom_satellite_uplink:
 	Valued:
 		Cost: 1000
 	RenderSprites:
-		Image: atek
+		Image: ra1_allies_alliedtechcenter
 
 xcom_satellite_nexus:
 	Inherits: ^researched_upgrade.template
@@ -1154,7 +1154,7 @@ xcom_satellite_nexus:
 	Valued:
 		Cost: 2800
 	RenderSprites:
-		Image: ra2gaspysat
+		Image: ra2_allies_spysatelliteuplink
 
 ####################################################################################################
 #		Vehicles
@@ -1321,7 +1321,7 @@ xcom_builder:
 		Condition: moving
 
 xcom_buildable_turret:
-	Inherits: RAGUN
+	Inherits: ra1_allies_alliedgunturret
 	Buildable:
 		Queue: Builder
 		Prerequisites: ~xcomhq
@@ -1333,4 +1333,4 @@ xcom_buildable_turret:
 		Amount: 0
 	InstantlyPlaced:
 	RenderSprites:
-		Image: ragun
+		Image: ra1_allies_alliedgunturret

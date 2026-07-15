@@ -1,0 +1,225 @@
+conyard_infiltrated.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Naxis Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: naxis_constructionyard
+	RenderSprites:
+		Image: naxis_constructionyard
+
+up_resurrection.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resurrection
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
+		Prerequisites: ~naxis_techcenter, ~disabled
+	RenderSprites:
+		Image: undead.nax
+
+naxis_upgrade_unlockme262:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Me 262
+	Buildable:
+		Description: Upgrades the BF 109 to the Me 262
+		Prerequisites: ~naxis_radar, !naxis_upgrade_unlockme262
+	RenderSprites:
+		Image: naxis_me262
+
+miniv2.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	CruiseMissile:
+		MaxAltitude: 2500
+		MinAirborneAltitude: 125
+		LaunchAngle: 125
+		Speed: 250
+		TurnSpeed: 25
+		LaunchSounds: vbooat1a.wav
+		MaxTargetMovement: 10000
+		TrackTarget: true
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	SpawnedExplodes:
+		Weapon: YRBoomerSCUD
+		EmptyWeapon: YRBoomerSCUD
+		#RequiresCondition: !airborne
+	MissileSpawnerSlave:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+sarubia_bomb.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Health:
+		HP: 15000
+	BallisticMissileCA:
+		LaunchAngle: 5
+		Speed: 80
+		LaunchSounds: vdesatta.wav, vdesattb.wav
+	MissileSpawnerSlave:
+	SpawnedExplodes:
+		Weapon: NaxiJadgDestroyer
+		EmptyWeapon: NaxiJadgDestroyer
+	RenderSprites:
+		Image: sarubia_bomb.nax
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	WithShadow:
+	Mine:
+		CrushClasses: mine
+		DetonateClasses: mine
+		BlockFriendly: true
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+####################################################################################################
+#		Upgrades Naxis (moved from FutureTech content pack — implementations already live here)
+####################################################################################################
+
+naxis_upgrade_ostfrontexperience:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ostfront Experience
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Infantry gets 15% to range, damage and armor
+		Prerequisites: ~naxis_radar, !naxis_upgrade_ostfrontexperience
+	RenderSprites:
+		Image: ostfrontexperienceicon
+	ProvidesPrerequisite:
+
+naxis_upgrade_atlantikwall:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Atlantikwall
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Defenses get 20% armor and automatic repair.
+		Prerequisites: ~naxis_radar, !naxis_upgrade_atlantikwall
+	RenderSprites:
+		Image: atlantikwallicon
+	ProvidesPrerequisite:
+
+naxis_upgrade_tankarsenalrenovation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tank Arsenal Renovation
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_tankarsenalrenovation
+	RenderSprites:
+		Image: tankarsenalrenovationicon
+	ProvidesPrerequisite:
+
+naxis_upgrade_massopticsintegration:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mass Optics Integration
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_massopticsintegration
+	RenderSprites:
+		Image: massopticsintegrationicon
+	ProvidesPrerequisite:
+
+naxis_upgrade_wunderwaffe:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Wunderwaffe
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: High Tier vehicles get 20% to attack speed, damage and armor
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_wunderwaffe
+	RenderSprites:
+		Image: wunderwaffeicon
+	ProvidesPrerequisite:
+
+naxis_upgrade_blitzkrieg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Blitzkrieg
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Research
+		Description: Blitzkrieg doctrine: all allied vehicles move 25% faster.
+		Prerequisites: ~naxis_techcenter, !naxis_upgrade_blitzkrieg
+	RenderSprites:
+		Image: blitzkriegicon
+	# ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: up_team_blitzkrieg.nax
+
+up_team_blitzkrieg.nax:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: naxis_upgrade_blitzkrieg
+	RenderSprites:
+		Image: blitzkriegicon
+	Tooltip:
+		Name: Blitzkrieg
+	Buildable:
+		Description: Increase all vehicles movement speed by 25%
+	PlayerDisplayUpgrade:
+
+naxis_promotion_hortenbomberstrike:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 3 to 5 Planes.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_shrek, !naxis_promotion_hortenbomberstrike, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:
+
+naxis_promotion_hortenbomberstrike_2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 121
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 5 to 7 Planes.
+		Prerequisites: ~naxis_constructionyard, naxis_promotion_hortenbomberstrike, !naxis_promotion_hortenbomberstrike_2, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:

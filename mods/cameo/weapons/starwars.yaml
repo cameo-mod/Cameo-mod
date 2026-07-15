@@ -784,7 +784,7 @@ SWBomb:
 		Explosions: blueartexp
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 SWArtilleryShell:
 	Inherits: ArtilleryShell
 	Report: swgrenade.aud
@@ -1100,10 +1100,10 @@ SWPummel:
 	ReloadDelay: 4
 	Range: 1536
 	Report: swpummel.wav
-	ValidTargets: Structure, Wall
+	ValidTargets: Structure, ixian_concretewall
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
-		ValidTargets: Structure, Wall
+		ValidTargets: Structure, ixian_concretewall
 	Projectile: LaserZap
 		Color: 83FF33
 SWPummelVehicle:

@@ -736,7 +736,7 @@ wh40kbolterturret2c:
 	icon: wh40kbolterturicon2
 
 wh40kguard:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40kguardicon.shp
 		AddExtension: False
@@ -2836,7 +2836,7 @@ wh40kbigguns3:
 		Scale: 1.2
 	icon: wh40kautocannon
 wh40kcommisair:
-	Inherits: ra2e2
+	Inherits: ra2_soviets_conscript
 	Defaults: wh40kcommisair
 	icon: wh40kcommisairicon.shp
 		AddExtension: False
@@ -2862,7 +2862,7 @@ wh40kcommisair:
 		Length: 1
 		Facings: 8
 wh40kguardsargent:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40ksargenticon.shp
 		AddExtension: False
@@ -2879,7 +2879,7 @@ wh40kogrynsargent:
 	Defaults: wh40kogryn
 	icon: wh40kogrynsargenticon
 wh40kgrenade:
-	Inherits: ra2flakt
+	Inherits: ra2_soviets_flaktrooper
 	Defaults: wh40kgrenade
 	icon: wh40kgrenadeicon.shp
 		AddExtension: False
@@ -2889,7 +2889,7 @@ wh40kgrenade:
 		Facings: 8
 
 wh40kguardplasma:
-	Inherits: ra2seal
+	Inherits: ra2_allies_seal
 	Defaults: wh40kguard
 	icon: wh40kplasmaicon.shp
 		AddExtension: False
@@ -3662,7 +3662,7 @@ wh40kwartrakk:
 	icon: wh40kwartrakkicon
 lemanruss:
 	idle: invisibleitem
-	icon: ra2mtnkicon.shp
+	icon: ra2_allies_grizzlytank_icon.shp
 		AddExtension: False
 	muzzle: gunfire2
 		Length: 5
@@ -3830,7 +3830,7 @@ wh40kitems:
 		Start: 7
 	powerclaw:
 		Start: 8
-	sniper:
+	ra1_allies_alliedsniper:
 		Start: 9
 	assaultmg:
 		Start: 10

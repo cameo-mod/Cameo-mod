@@ -343,7 +343,7 @@ plymouthMobileMicrowave:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 
 plymouthMobileTigerMicrowave:
 	Inherits: plymouthMobileMicrowave
@@ -375,7 +375,7 @@ plymouthScorpion:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 
 plymouthRPG:
 	ReloadDelay: 80
@@ -406,7 +406,7 @@ plymouthRPG:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
@@ -785,7 +785,7 @@ supernova_missile_super:
 		Delay: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 3
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -810,7 +810,7 @@ supernova_missile_super:
 		Delay: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -831,7 +831,7 @@ supernova_missile_super:
 		Delay: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 5
 		Delay: 9
 	Warhead@13Shake: ShakeScreen
