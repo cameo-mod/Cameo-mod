@@ -9,7 +9,7 @@ td_gdi_battletank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	muzzle2:
 		Filename: shared_sprites|minigun.shp
@@ -29,7 +29,7 @@ td_gdi_mammothtank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_mammothtank_icon.shp
@@ -70,7 +70,7 @@ msam:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_mlrs_icon.shp
@@ -89,7 +89,7 @@ td_gdi_boxer:
 		Facings: 64
 		Offset: 0,9
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_boxer_icon.png
@@ -104,7 +104,7 @@ td_gdi_archerartillery:
 		Filename: td_gdi_archerartillery_gdiarchercannon.png
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_archerartillery_icon.png
@@ -128,7 +128,7 @@ td_gdi_mlrs:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_ssmlauncher_icon.shp
@@ -169,7 +169,7 @@ td_gdi_orca:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_orca_icon.shp
@@ -361,7 +361,7 @@ td_gdi_skyshield:
 	damaged-idle:
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	dead:
 	bib:
@@ -386,13 +386,13 @@ td_gdi_advancedguardtower:
 		Length: *
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Offset: 0,0
 	bib:
 		Offset: -3,0
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_advancedguardtower_icon.shp
@@ -724,7 +724,7 @@ cncca:
 		Filename: GdiBattleshipTurretSpritesheet.png
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: RailgunBattleshipIcon.png
@@ -889,7 +889,7 @@ td_gdi_predatortank:
 		Start: 64
 		Scale: 0.25
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Scale: 1.333
 	muzzle2:
@@ -910,7 +910,7 @@ td_gdi_mammothtankmkiii:
 		Start: 64
 		Scale: 0.25
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 		Scale: 1.333
 	icon:
@@ -1296,7 +1296,7 @@ td_gdi_firehawk:
 	idle:
 		Facings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_promotion_unlockfirehawk_icon.shp
@@ -1470,7 +1470,7 @@ td_gdi_defenserig:
 		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_gdi_promotion_unlockgdidefenserig_icon.png

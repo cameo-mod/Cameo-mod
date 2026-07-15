@@ -105,7 +105,7 @@ ts_nod_mobilestealthgenerator:
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_attackbuggy:
@@ -119,7 +119,7 @@ ts_nod_attackbuggy:
 	icon:
 		Filename: ts_nod_attackbuggy_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_laserfence:
@@ -209,7 +209,7 @@ ts_nod_stealthtank:
 	icon:
 		Filename: ts_nod_stealthtank_icon.png
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_mobilerepairvehicle:
@@ -218,7 +218,7 @@ ts_nod_mobilerepairvehicle:
 	icon:
 		Filename: ts_nod_mobilerepairvehicle_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_artillery:
@@ -227,7 +227,7 @@ ts_nod_artillery:
 	icon:
 		Filename: ts_nod_artillery_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 	deploy:
 		Filename: ts_nod_artillery.shp
@@ -242,7 +242,7 @@ ts_nod_devilstongue:
 	icon:
 		Filename: ts_nod_devilstongue_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_subterraneanapc:
@@ -253,7 +253,7 @@ ts_nod_subterraneanapc:
 	icon:
 		Filename: ts_nod_subterraneanapc_icon.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
 ts_nod_powerplant:
@@ -795,7 +795,7 @@ ts_nod_samsite:
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: shared_sprites|gunfire2.shp
 		Tick: 80
 		Length: *
 	icon:

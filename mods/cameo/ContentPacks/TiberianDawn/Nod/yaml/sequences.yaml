@@ -26,7 +26,7 @@ td_nod_lighttank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_lighttank_icon.shp
@@ -38,7 +38,7 @@ td_nod_reconbike:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_reconbike_icon.shp
@@ -96,7 +96,7 @@ td_nod_stealthtank:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_stealthtank_icon.shp
@@ -108,7 +108,7 @@ td_nod_artillery:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_artillery_icon.shp
@@ -336,7 +336,7 @@ td_nod_gunturret:
 		Length: *
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	bib:
 		Offset: -1,-1
@@ -357,7 +357,7 @@ td_nod_laserturret:
 		Length: 7
 		Tick: 80
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	bib:
 		Offset: -1,-1
@@ -951,7 +951,7 @@ ssmsub:
 		Facings: 64
 		Start: 128
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: ssmsubIcon.png
@@ -987,7 +987,7 @@ td_nod_specterartillery:
 		Facings: -32
 		Scale: 0.55
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_promotion_unlockspecter_icon.shp
@@ -1067,7 +1067,7 @@ td_nod_lighttankmkii:
 		Start: 64
 		Scale: 0.5
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: td_nod_promotion_unlocklighttankmkii_icon.shp
@@ -1276,7 +1276,7 @@ nodlasercorvette:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
-		Filename: gunfire2.shp
+		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
 		Filename: NodLaserCorvetteIcon.png
