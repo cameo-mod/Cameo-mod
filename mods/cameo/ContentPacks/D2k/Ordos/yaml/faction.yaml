@@ -15,7 +15,7 @@ World:
 		ClassName: Light Support
 		Factions: ordos
 		BaseActor: ordos_mobileconstructionvehicle
-		SupportActors: ordos_lightinfantry, ordos_lightinfantry, heavy_inf.ixian, ordos_rockettrooper, ordos_rockettrooper, rocket_raider.ixian, combat_tank.ixian
+		SupportActors: ordos_lightinfantry, ordos_lightinfantry, heavy_inf.ixian, ordos_rockettrooper, ordos_rockettrooper, rocket_raider.ixian, ixian_koda_tank
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
 	StartingUnits@ordos_h:
@@ -23,6 +23,6 @@ World:
 		ClassName: Heavy Support
 		Factions: ordos
 		BaseActor: ordos_mobileconstructionvehicle
-		SupportActors: ordos_lightinfantry, ordos_lightinfantry, heavy_inf.ixian, ordos_rockettrooper, ordos_rockettrooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank.ixian
+		SupportActors: ordos_lightinfantry, ordos_lightinfantry, heavy_inf.ixian, ordos_rockettrooper, ordos_rockettrooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_koda_tank, duelist_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5

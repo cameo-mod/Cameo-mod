@@ -144,6 +144,7 @@ sow_lt_flame:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 		ImpactActors: false
 		
@@ -237,6 +238,7 @@ sow_mt_flame:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		ImpactActors: false
 		
@@ -336,6 +338,7 @@ sow_ht_flame:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		ImpactActors: false
 		
@@ -408,6 +411,7 @@ sow_ht_special:
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 		
 sow_mech_avenger:
@@ -1175,6 +1179,7 @@ sowtripler:
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	
 ###############
@@ -1287,6 +1292,7 @@ sow_plasma_tower:
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 
 sow_minigun_tower:

@@ -47,6 +47,9 @@ cabal_refinery:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: cabal_refinery
 		PlayerPalette: player_rgba
@@ -70,7 +73,7 @@ cabal_powerplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_constructionyard
-		Description: template_power.description
+		Description: actor_cabal_powerplant.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -92,6 +95,9 @@ cabal_powerplant:
 	WithIdleOverlay@RAY:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-electro
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tscrys
@@ -113,7 +119,7 @@ cabal_cyborgfactory:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
-		Description: template_barracks.description
+		Description: actor_cabal_cyborgfactory.description
 		IconPalette: windows256
 	Building:
 		Footprint: xx xx ==
@@ -143,6 +149,9 @@ cabal_cyborgfactory:
 	WithIdleOverlay@LIGHT:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-light
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -159,13 +168,13 @@ cabal_mechfactory:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: CABAL ra1_allies_mechanic Factory
+		Name: CABAL War Factory
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
-		Description: template_factory.description
+		Description: actor_cabal_mechfactory.description
 	Building:
 		Footprint: xx= x== ===
 		Dimensions: 3,3
@@ -194,6 +203,9 @@ cabal_mechfactory:
 	WithIdleOverlay@BIB:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -211,7 +223,7 @@ cabal_servicedepot:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_constructionyard, cabal_mechfactory
 		Queue: Building, RABuilding
-		Description: Repairs vehicles and aircraft.
+		Description: actor_cabal_servicedepot.description
 	Building:
 		Footprint: x++ +++
 		Dimensions: 3,2
@@ -245,6 +257,9 @@ cabal_servicedepot:
 		UseDeathTypeSuffix: false
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -262,7 +277,7 @@ cabal_helipad:
 		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Prerequisites: ~cabal_constructionyard, cabal_radar
-		Description: Produces, rearms and repairs aircraft.
+		Description: actor_cabal_helipad.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -287,6 +302,9 @@ cabal_helipad:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsnthpadcabal
@@ -310,7 +328,7 @@ cabal_radar:
 		BuildPaletteOrder: 70
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
-		Description: Provides radar and advanced technologies.
+		Description: actor_cabal_radar.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -325,6 +343,9 @@ cabal_radar:
 		Range: 5c0
 		RequiresCondition: !lowpower
 	SupportPowerChargeBar:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: cabal_radar
@@ -394,6 +415,9 @@ cabal_techcenter:
 	Exit@3:
 		SpawnOffset: -704,768,0
 		ExitCell: 0,3
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: cabal_techcenter
 		PlayerPalette: playerra2
@@ -456,6 +480,9 @@ cabal_techcenter:
 # 		RequiresCondition: !build-incomplete && !disabled
 # 		Sequence: idle-lights
 # 	SupportPowerChargeBar:
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: playerra2
+# 		DeathPaletteIsPlayerPalette: true
 # 	RenderSprites:
 # 		PlayerPalette: playerra2
 
@@ -555,5 +582,8 @@ cabal_core:
 		SupportPowerPaletteOrder: 70
 		MissileImage: raatomic
 		BeaconActor: BLASTRADIUS.atomic
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2

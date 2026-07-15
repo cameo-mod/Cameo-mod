@@ -1880,8 +1880,10 @@ HydraSpit:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 
 SpithidSpit:
@@ -1920,8 +1922,10 @@ SpithidSpit:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 
 MutaliskSpore:
@@ -2447,6 +2451,7 @@ SporemawShoot:
 HermitExplode:
 	Inherits: ReactorNuke
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2radbang
 	Warhead@shrapnel: FireShrapnel
 		Weapon: HermitShoot
@@ -3393,6 +3398,7 @@ PsionicShockwave:
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: scaae
 		ValidTargets: Ground, Water, Air
 
@@ -3711,6 +3717,7 @@ CorsairFlash:
 		ValidTargets: Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 
 CorsairEMP:
@@ -4153,6 +4160,7 @@ RemovableDebuffDummy:
 
 BuildingExplodeProtoss:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: blue_building, blue_building_napalm, blue_med_frag, blue_poof, blue_small_building
 		Delay: 1
 		ImpactActors: false
@@ -4219,6 +4227,7 @@ ScoutMG:
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 
 EpigraphMG:
@@ -4311,10 +4320,13 @@ EpigraphMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 	Warhead@EffectWater: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: cryo_blast
 
 ManifoldMG:
@@ -4357,6 +4369,7 @@ ManifoldMG:
 		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water
 
@@ -4379,6 +4392,7 @@ ManifoldMGAA:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ValidTargets: Air
 
 AtreusMG:
@@ -4437,6 +4451,7 @@ AtreusMG:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 		ValidTargets: Ground, Water, Air
 

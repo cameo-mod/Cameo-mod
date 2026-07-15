@@ -34,6 +34,7 @@ xmas_grenade:
 			Concrete: 30
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 
 xmas_grenade_reindeer:
@@ -50,6 +51,7 @@ xmas_suicide:
 	Warhead@1Dam: SpreadDamage
 		Delay: 6
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Delay: 6
 	Warhead@Smu: LeaveSmudge
 		Delay: 6
@@ -57,6 +59,7 @@ xmas_suicide:
 xmas_suicide_big:
 	Inherits: xmas_suicide
 	Warhead@2Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: xmas_snowball_big
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
@@ -176,6 +179,7 @@ xmas_snowball_artillery:
 		Damage: 10000
 		Spread: 1c0
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: xmas_snowball_big
 		
 xmas_icespike:
@@ -223,6 +227,7 @@ xmas_icespike_aa:
 		ValidTargets: Air
 		Damage: 4750
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ValidTargets: Air
 		
 xmas_avalanche:

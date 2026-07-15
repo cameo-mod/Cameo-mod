@@ -383,6 +383,7 @@ mtank_pri2:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: d2k_med_explosion
 
 IxRailgunDroneBullet:
@@ -1458,6 +1459,7 @@ d2k_basq:
 		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: sczhsplash
 		ImpactActors: false
 		ValidTargets: Ground, Air
@@ -1581,5 +1583,6 @@ MongooseRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha

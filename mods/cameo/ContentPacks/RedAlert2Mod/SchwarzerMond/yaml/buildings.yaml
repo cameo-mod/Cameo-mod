@@ -1,5 +1,7 @@
 schwarzer_mond_constructionyard:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -27,6 +29,9 @@ schwarzer_mond_constructionyard:
 
 schwarzer_mond_hydrogenplant:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@Helium3: ^NaxiHelium3
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
@@ -55,6 +60,8 @@ schwarzer_mond_hydrogenplant:
 
 schwarzer_mond_barracks:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@ra1_soviet_barracks: ^IsBarrack
@@ -77,6 +84,8 @@ schwarzer_mond_barracks:
 
 schwarzer_mond_orerefinery:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^4x3Shape
@@ -110,6 +119,8 @@ schwarzer_mond_orerefinery:
 
 schwarzer_mond_radar:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -131,6 +142,8 @@ schwarzer_mond_radar:
 
 schwarzer_mond_airfield:
 	Inherits: ^RA2Defense
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -185,13 +198,16 @@ schwarzer_mond_airfield:
 
 schwarzer_mond_lasertower:
 	Inherits: ^RA2Defense
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
+	Inherits@LUpgrade: ^NaxiCrystalLens
+	Inherits@LUpgrade2: ^NaxiAmplifiedLens
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@EMP: ^TurretEMP
-	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -220,13 +236,19 @@ schwarzer_mond_lasertower:
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens
+		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
 	Armament@UP:
 		Weapon: Lunar_YellowLaserT
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens
+		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+	Armament@AMP:
+		Weapon: Lunar_AmplifiedLaserT
+		LocalOffset: 300,1,700, 300,-1,700
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -243,13 +265,15 @@ schwarzer_mond_lasertower:
 
 schwarzer_mond_sturmcannon:
 	Inherits: ^RA2Defense
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@EMP: ^TurretEMP
-	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	-WithTurretSearchlight:
 	Buildable:
 		Queue: Defence, RADefence
@@ -279,13 +303,13 @@ schwarzer_mond_sturmcannon:
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: !schwarzer_mond_upgrade_vrilpoweredweapons
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_GreenSturmArty
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_greenplasmashells
+		RequiresCondition: schwarzer_mond_upgrade_vrilpoweredweapons
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -300,6 +324,8 @@ schwarzer_mond_sturmcannon:
 
 schwarzer_mond_techcenter:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@radar: ^IsTechnoBuilding
 	Inherits@shape: ^4x3Shape
 	Buildable:
@@ -316,6 +342,8 @@ schwarzer_mond_techcenter:
 
 schwarzer_mond_warfactory:
 	Inherits: ^RA2DefaultWeap
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Tooltip:
 		Name: Schwarzer Mond War Factory
@@ -340,6 +368,8 @@ schwarzer_mond_warfactory:
 
 schwarzer_mond_meteortractionray:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -471,6 +501,8 @@ schwarzer_mond_meteortractionray:
 
 schwarzer_mond_gravitycore:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@SW: ^PrimarySuperweapon
@@ -551,6 +583,8 @@ schwarzer_mond_gravitycore:
 
 schwarzer_mond_moondairyfarm:
 	Inherits: ^RA2Building
+	Inherits@Crypto: ^NaxiCryptofascism
+	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@shape: ^3x2Shape
 	Inherits@cashtrickler: ^CashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited

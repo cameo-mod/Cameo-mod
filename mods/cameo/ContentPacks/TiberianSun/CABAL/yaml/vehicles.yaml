@@ -144,8 +144,10 @@ cabal_cyborgreaper:
 		LocalOffset: 128,-200,350, 128,200,350
 	Armament@SECONDARY:
 		Weapon: CabalReaperMissilesAA
-	Armament@TRAP:
-		Weapon: CabalReaperTrap
+	Armament@TRAPGROUND:
+		Weapon: CabalReaperTrapGround
+	Armament@TRAPAIR:
+		Weapon: CabalReaperTrapAir
 	Voiced:
 		VoiceSet: TSReaper
 	Tooltip:
@@ -613,6 +615,7 @@ cabal_berserker:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_berserker.description
+		IconPalette: player_rgba
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -681,7 +684,7 @@ cabal_beholder:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 27
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, cabal_promotion_beholder
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_beholder
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_beholder.description
 	Mobile:
@@ -724,7 +727,7 @@ cabal_beholder:
 		VoiceSet: TSScrin
 	RenderSprites:
 		Image: cabal_beholder
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 
 
 cabal_spidercnc4:
@@ -746,7 +749,7 @@ cabal_spidercnc4:
 		Name: Spider CNC4
 	Buildable:
 		BuildPaletteOrder: 11
-		Prerequisites: ~cabal_mechfactory, cabal_promotion_spidercnc4
+		Prerequisites: ~cabal_mechfactory, ~cabal_promotion_spidercnc4
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_spidercnc4.description
 	Mobile:
@@ -805,7 +808,7 @@ cabal_heavyreaper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 12
-		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_manticore
+		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_manticore
 		Description: actor_cabal_heavyreaper.description
 	Health:
 		HP: 75000
@@ -920,7 +923,7 @@ cabal_widow:
 		Name: Widow
 	Buildable:
 		BuildPaletteOrder: 31
-		Prerequisites: ~cabal_mechfactory, cabal_promotion_widow
+		Prerequisites: ~cabal_mechfactory, ~cabal_promotion_widow
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_widow.description
 	Mobile:
@@ -1013,7 +1016,7 @@ cabal_coredefender:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~cabal_mechfactory, cabal_core, cabal_promotion_coredefender
+		Prerequisites: ~cabal_mechfactory, cabal_core, ~cabal_promotion_coredefender
 		Description: actor_cabal_coredefender.description
 	Mobile:
 		TurnSpeed: 20
@@ -1109,8 +1112,8 @@ cabal_ravager:
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_ravager.description
 	Mobile:
-		TurnSpeed: 16
-		Speed: 40
+		TurnSpeed: 52
+		Speed: 130
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:

@@ -643,7 +643,7 @@ ixian_mongoose:
 		Image: mongoose_d2k_a
 		PlayerPalette: player_rgba
 
-combat_tank.ixian:
+ixian_koda_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -663,7 +663,7 @@ combat_tank.ixian:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Ix Combat Tank
+		Name: Koda Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -698,6 +698,8 @@ combat_tank.ixian:
 		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
+	RenderSprites:
+		Image: ixian_koda_tank
 	ActorStatValues:
 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 

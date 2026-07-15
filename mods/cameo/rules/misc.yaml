@@ -147,11 +147,16 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: futuretech_mobileconstructionvehicle
 		ValidFactions: futuretech
-	GiveBaseBuilderCrateAction@ix:
+	GiveBaseBuilderCrateAction@ixian:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ixian_mobileconstructionvehicle
 		ValidFactions: ixian
+	GiveBaseBuilderCrateAction@ordos:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: ordos_mobileconstructionvehicle
+		ValidFactions: ordos
 	GiveBaseBuilderCrateAction@terran:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -182,6 +187,16 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: tkm_mobileconstructionvehicletkm
 		ValidFactions: tkm
+	GiveBaseBuilderCrateAction@edenl:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: EDEN_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: edenl
+	GiveBaseBuilderCrateAction@plymouthl:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		ValidFactions: plymouthl
 
 WWCRATE:
 	Inherits: CRATE

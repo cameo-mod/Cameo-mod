@@ -8,6 +8,7 @@ RA2AsianShotgun:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
@@ -174,6 +175,7 @@ RA2AsianShotgunFanatic1:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
@@ -311,6 +313,7 @@ AsianNinjaStar:
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
@@ -1261,6 +1264,7 @@ AsianChaosTurret:
 	InvalidTargets: MCImmune
 	Projectile: InstantExplode
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: chaosgas
 		ExplosionPalette: ra2effect
 		ImpactActors: false
@@ -1337,7 +1341,6 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		AirThreshold: 8c0
 	Warhead@Effect: CreateEffect
 		Delay: 14
-		Image: tsioncannon
 		Explosions: ionring
 		ExplosionPalette: shield100
 		ImpactSounds: ion1.aud
@@ -1413,6 +1416,7 @@ AsianIonBeamMini:
 		Speed: 50
 		RotSpeed: 12
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 AsianIonbeam:
@@ -1652,6 +1656,7 @@ AAGunBoatFlak:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air

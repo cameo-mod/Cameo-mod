@@ -17,11 +17,12 @@
 		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Ship, Air
-CabalReaperTrap:
+CabalReaperTrapGround:
 	Report: fireweb1.aud
 	ReloadDelay: 250
-	Range: 2048
+	Range: 5785
 	ValidTargets: snareable
+	InvalidTargets: Air
 	TargetActorCenter: true
 	Projectile: Missile
 		Speed: 800
@@ -31,11 +32,34 @@ CabalReaperTrap:
 		Duration: 100
 		Range: 1024
 		ValidTargets: snareable
+		InvalidTargets: Air
 		ValidRelationships: Enemy
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water
+
+CabalReaperTrapAir:
+	Report: fireweb1.aud
+	ReloadDelay: 250
+	Range: 8680
+	ValidTargets: snareable
+	InvalidTargets: Ground, Water
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 800
+		Image: DRAGON
+	Warhead@Snare: GrantExternalCondition
+		Condition: snared
+		Duration: 100
+		Range: 1024
+		ValidTargets: snareable
+		InvalidTargets: Ground, Water
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: methit1.aud
+		ValidTargets: Air
 
 DarkObeliskLaser:
 	Inherits: ^LaserWeapon
@@ -1278,7 +1302,7 @@ CabalRavagerPlasma:
 	Inherits: ^MediumChemicalWeapon
 	ReloadDelay: 30
 	Range: 3000
-	Report: sow/plasma_robot_shoot.aud
+	Report: plasma_robot_shoot.aud
 	Projectile: Bullet
 		Speed: 341
 		Blockable: false
@@ -1297,7 +1321,7 @@ CabalWidowPlasma:
 	Inherits: ^MediumChemicalWeapon
 	ReloadDelay: 30
 	Range: 5938
-	Report: sow/plasma_robot_shoot.aud
+	Report: plasma_robot_shoot.aud
 	Projectile: Bullet
 		Speed: 341
 		Blockable: false
@@ -1987,7 +2011,7 @@ CabalRavagerPlasmaNeutron:
 	Inherits: ^MediumChemicalWeapon
 	ReloadDelay: 30
 	Range: 3000
-	Report: sow/plasma_robot_shoot.aud
+	Report: plasma_robot_shoot.aud
 	Projectile: Bullet
 		Speed: 341
 		Blockable: false

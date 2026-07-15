@@ -401,37 +401,6 @@ tsctarmr:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-ts_gdi_upgrade_ioncannonuplink:
-	Tooltip:
-		Name: Ion Cannon Uplink
-	Buildable:
-		Queue: UpgradeCenter.TSGDI
-		Description: Enables Ion Cannon strikes.
-	Valued:
-		Cost: 1500
-	RenderSprites:
-	Interactable:
-	KillsSelf:
-		RemoveInstead: true
-	RenderSprites:
-		PlayerPalette: playerra2
-
-ts_gdi_upgrade_seekercontrol:
-	Tooltip:
-		Name: Seeker Control
-	Buildable:
-		Queue: UpgradeCenter.TSGDI
-		Description: Enables deployment of Hunter-Seekers.
-	Valued:
-		Cost: 1000
-	RenderSprites:
-	Interactable:
-	KillsSelf:
-		RemoveInstead: true
-	RenderSprites:
-		PlayerPalette: playerra2
-
-
 #######################################
 # TS Building Forgotten
 #######################################
@@ -1870,53 +1839,5 @@ ts_nod_upgrade_willofkane_proxy_actor:
 		Prerequisites: cabal_upgrade_radarhack
 	ActorStatValues:
 		Upgrades: cabal_upgrade_radarhack
-
-ts_gdi_promotion_dummy1:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: dummy
-	Buildable:
-		BuildPaletteOrder: 3
-		Queue: Promotions
-		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1
-	RenderSprites:
-		Image: tsgdidummyicon
-
-ts_gdi_promotion_dummy2:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: dummy
-	Buildable:
-		BuildPaletteOrder: 6
-		Queue: Promotions
-		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy1
-	RenderSprites:
-		Image: tsgdidummyicon
-
-ts_gdi_promotion_dummy3:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: dummy
-	Buildable:
-		BuildPaletteOrder: 9
-		Queue: Promotions
-		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy2
-	RenderSprites:
-		Image: tsgdidummyicon
-
-ts_gdi_promotion_dummy4:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: dummy
-	Buildable:
-		BuildPaletteOrder: 12
-		Queue: Promotions
-		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy3
-	RenderSprites:
-		Image: tsgdidummyicon
 
 # FPRGOTTEN ##############

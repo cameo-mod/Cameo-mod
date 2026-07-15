@@ -278,6 +278,7 @@ MachineGunAPH:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 120mmHV:
@@ -293,6 +294,7 @@ MachineGunAPH:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 M1A1Missiles:
@@ -305,6 +307,7 @@ M1A1Missiles:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 
 M1A1MissilesAMT:
@@ -477,6 +480,7 @@ Napalm:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -526,6 +530,7 @@ NapalmA10Carrier:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -675,6 +680,7 @@ TowerMissile:
 		Explosions: med_frag
 		ImpactSounds: xplobig4.aud
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 TowerMissileAMT:
@@ -1091,6 +1097,7 @@ GDIPredatorTankCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 GDIPredatorTankCannonHV:
@@ -1106,6 +1113,7 @@ GDIPredatorTankCannonHV:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 
 GDIPredatorTankMissiles:
@@ -1118,6 +1126,7 @@ GDIPredatorTankMissiles:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 
 GDIPredatorTankMissilesAMT:
@@ -1356,6 +1365,7 @@ GDIRigPhalanx:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 
 GDIRigDroneTargetingTower:
@@ -1712,7 +1722,7 @@ TDIonCannon:
 		AirThreshold: 99c0
 		Delay: 9
 	Warhead@Effect: CreateEffect
-		Image: tsioncannon
+		ImpactSounds: xplosml2.aud
 		Explosions: ionring
 		ExplosionPalette: tseffect
 		ImpactActors: false
@@ -1724,7 +1734,6 @@ TDIonCannon:
 		GlowFadeInFrames: 5
 		Delay: 11
 	Warhead@Effect2: CreateEffect
-		Image: ionsfx
 		Explosions: explode
 		ExplosionPalette: tseffect
 		ImpactSounds: ion1.aud

@@ -888,18 +888,6 @@ Lunar_GreenSturmArty:
 	Report: laser_cannon3_4.wav
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 10000
-Lunar_YellowBeetleLaser:
-	Inherits: NaxiBeetleLaser
-	Burst: 4
-	Projectile: LaserZap
-		Color: f3e021AA
-
-Lunar_YellowBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAA
-	Burst: 4
-	Projectile: LaserZap
-		Color: f3e021AA
-
 Lunar_YellowRifleLaser:
 	Inherits: NaxiRifleLaser
 	Burst: 2
@@ -908,6 +896,20 @@ Lunar_YellowRifleLaser:
 		Color: f3e021AA
 
 Lunar_YellowRifleLaserE:
+	Inherits: NaxiRifleLaserE
+	Burst: 3
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedRifleLaser:
+	Inherits: NaxiRifleLaser
+	Burst: 3
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedRifleLaserE:
 	Inherits: NaxiRifleLaserE
 	Burst: 4
 	BurstDelays: 3
@@ -920,9 +922,39 @@ Lunar_YellowLaserT:
 	Projectile: LaserZap
 		Color: f3e021AA
 
+Lunar_AmplifiedLaserT:
+	Inherits: NaxLaserT
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowBeetleLaser:
+	Inherits: NaxiBeetleLaser
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowBeetleLaserAA:
+	Inherits: NaxiBeetleLaserAA
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedBeetleLaser:
+	Inherits: NaxiBeetleLaser
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedBeetleLaserAA:
+	Inherits: NaxiBeetleLaserAA
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
 Lunar_YellowMP40Laser:
 	Inherits: NaxiMP40Laser
-	Burst: 10
+	Burst: 6
 	BurstDelays: 3
 	Projectile: Bullet
 		ContrailStartColor: f3e021AA
@@ -931,18 +963,68 @@ Lunar_YellowMP40Laser:
 
 Lunar_YellowMP40LaserE:
 	Inherits: NaxiMP40LaserE
-	Burst: 20
+	Burst: 11
+	BurstDelays: 3
+
+Lunar_AmplifiedMP40Laser:
+	Inherits: NaxiMP40Laser
+	Burst: 7
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: f3e021AA
+		ContrailEndColor: f3e021AA
+		Width: 25
+
+Lunar_AmplifiedMP40LaserE:
+	Inherits: NaxiMP40LaserE
+	Burst: 12
 	BurstDelays: 3
 
 Lunar_YellowTank2Laser:
 	Inherits: NaxiTank2Laser
-	Burst: 8
+	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_YellowTank2LaserAA:
 	Inherits: NaxiTank2LaserAA
-	Burst: 8
+	Burst: 5
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedTank2Laser:
+	Inherits: NaxiTank2Laser
+	Burst: 6
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedTank2LaserAA:
+	Inherits: NaxiTank2LaserAA
+	Burst: 6
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowUbermenschLaser:
+	Inherits: ÜbermenschLaser
+	Burst: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowUbermenschLaserE:
+	Inherits: ÜbermenschLaserE
+	Burst: 5
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedUbermenschLaser:
+	Inherits: ÜbermenschLaser
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_AmplifiedUbermenschLaserE:
+	Inherits: ÜbermenschLaserE
+	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA
 

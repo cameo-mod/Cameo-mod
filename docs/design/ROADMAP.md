@@ -454,3 +454,78 @@ factions, everything through the balance workbook._
   RA2-styled actors with elite weapons must have
   `RequiresCondition: !rank-elite` so the elite weapon replaces, not
   stacks with, the base.
+
+## D2K Sprite Conversion Pipeline
+
+- [x] **D2K-CONV: Conversion script** — `tools/d2k_to_openra.py` written
+  and documented in DESIGN.md §17. Combines BMP frames → PNG spritesheet,
+  pink→transparent, hue-shift green player color to target hue, embeds
+  FrameAmount/FrameSize PNG metadata for OpenRA.
+- [x] **D2K-KODA: Koda Tank** — replaced `combat_tank.ixian` with
+  `ixian_koda_tank` using new PNG spritesheets (chassis + turret).
+  Updated all references in Ixian/Ordos faction.yaml, upgrades.yaml,
+  ai.yaml. Muzzle flash still uses DATA.R16. Pending in-game visual
+  confirmation.
+- [ ] **D2K-CONV-FUTURE: Convert more D2K units** — other D2K units that
+  could benefit from custom PNG sprites instead of DATA.R16 remapping.
+  Use the same script with appropriate `--hue` per faction.
+
+## Schwarzer Mond Faction Design & Upgrades
+
+- [x] **SM-RESEARCH: Finalize promotion intent** — promotions will upgrade
+  existing units via `^PromotionUnitBuff` rather than unlocking new actor
+  variants. The `Bradley` unit in the promotion image is resolved as the MARS
+  hover artillery (`schwarzer_mond_mars`). Added the buff to all combat
+  infantry, vehicles, and aircraft. Updated DESIGN.md §18.7 / §18.11.
+- [x] **SM-UPGRADE-1: Add upgrade templates** — create `^NaxiCryptofascism`,
+  `^NaxiLunarAlloys`, `^NaxiMoonPropaganda` in the appropriate Shared or
+  Schwarzer Mond templates file. Update DESIGN.md §18.6 if the template set
+  changes.
+- [x] **SM-UPGRADE-2: Split laser upgrade** — turn Crystal Lens into a +1-burst
+  radar-tier upgrade for all yellow laser weapons; add Amplified Lens as the
+  tech-tier +1-burst upgrade for all yellow laser weapons. Update all weapon
+  variants and actor armament conditions per DESIGN.md §18.4.
+- [x] **SM-UPGRADE-3: Move cannon upgrade to tech tier / rename to Vril Powered
+  Weapons** — change `schwarzer_mond_upgrade_vrilpoweredweapons` prerequisite
+  from radar to `~schwarzer_mond_techcenter`, keep it in the `Research` queue,
+  and rename the display name/template/icon from Green Plasma Shells to Vril
+  Powered Weapons.
+- [x] **SM-UPGRADE-4: Add Cryptofascism upgrade** — create
+  `schwarzer_mond_upgrade_cryptofascism` (tech tier, Research queue) with
+  `CashTrickler` 1 credit per 25 ticks per unit. Add icon sequence for
+  `nax2_cryptofascismicon.png` in `mods/cameo/bits/ra2/mod/`. Inherit on
+  every Schwarzer Mond actor.
+- [x] **SM-UPGRADE-5: Wire upgrades to every unit** — ensure every Schwarzer
+  Mond actor has at least two relevant upgrade hooks (Cryptofascism + either
+  Lunar Alloys, Crystal Lens, Vril Powered Weapons, Moon Propaganda, or
+  Helium-3). Do not change unit stats without a spreadsheet pass.
+- [x] **SM-DESC: Normalize faction and unit descriptions** — rewrite the
+  Schwarzer Mond `faction_ra2_lnaxis` description in the point-based format
+  (Difficulty, Early/Mid/Late Game, Playstyle, etc.) and add/update unit
+  descriptions for new upgrades. Normalize other RA2Mod factions when touched.
+- [x] **SM-LORE: Add Iron Sky / Nazi Moon lore** — document Vril, Helium-3,
+  MoonCoin/Reichsmark 2.0 parody in DESIGN.md §18.12 and update upgrade names
+  and descriptions to match.
+- [x] **SM-HELIUM3: Add Helium-3 Enrichment upgrade** — create
+  `schwarzer_mond_upgrade_helium3` (radar tier, Upgrades queue) that increases
+  Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%. Add
+  template, icon, and sequence; wire to all vehicles and aircraft.
+- [x] **SM-VRILINFUSION: Add Vril Infusion upgrade** — create
+  `schwarzer_mond_upgrade_vrilinfusion` (tech tier, Research queue) that gives
+  all Schwarzer Mond infantry +25% firepower, +25% speed/turn rate, and 15%
+  damage reduction. Add template, icon, sequence, and wire to every infantry
+  actor. Update descriptions and intent.
+- [x] **SM-1BURST: Re-enable laser upgrades on 1-burst weapons** — add Lunar
+  Soldier and Laser Tower to the Crystal Lens / Amplified Lens switch and
+  recreate the 1-burst yellow/amplified weapon variants.
+- [ ] **SM-AUDIT: Run audit suite and rebuild** — run
+  `tools/audit/run_all.sh`, fix any new findings, and boot-test the mod.
+- [ ] **SM-BALANCE: Spreadsheet pass** — if any base stats change (e.g.
+  raising base burst of Lunar Soldier or Laser Tower), update
+  `docs/design/cameo_armor_system.xlsx` and the yaml in the same pass.
+  Queue if the Excel lock file is present.
+- [x] **SM-ARTWORK: Replace copy-pasted icons** — create unique placeholder
+  icons for `schwarzer_mond_mars`, `schwarzer_mond_m200bjagerline`,
+  `schwarzer_mond_gravitycoretank`, and `schwarzer_mond_blackbomb`. See
+  `docs/design/schwarzer_mond_artwork_status.md` for the full status. Final
+  production-quality cameo art can replace the placeholders later.

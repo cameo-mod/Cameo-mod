@@ -19,23 +19,117 @@ schwarzer_mond_upgrade_crystallens:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
-		Description: Yellow lasers upgrades shooting range and burst
+		Description: Increases the burst of all yellow laser weapons by 1.
 		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_crystallens
 	RenderSprites:
 		Image: schwarzer_mond_upgrade_crystallens
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_greenplasmashells:
+schwarzer_mond_upgrade_amplifiedlens:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: Green Plasma Shells
+		Name: Amplified Lens
 	Valued:
 		Cost: 5000
 	Buildable:
-		BuildPaletteOrder: 50
-		Queue: Upgrades
-		Description: Tanks deals more damage and Tesla type damage
-		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_greenplasmashells
+		BuildPaletteOrder: 55
+		Queue: Research
+		Description: Further increases the burst of yellow laser weapons by 1.
+		Prerequisites: ~schwarzer_mond_techcenter, schwarzer_mond_upgrade_crystallens, !schwarzer_mond_upgrade_amplifiedlens
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_greenplasmashells
+		Image: schwarzer_mond_upgrade_amplifiedlens
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_vrilpoweredweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vril Powered Weapons
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Research
+		Description: Infuses cannon shells with Vril energy from the Black Sun program.
+			Cannon vehicles deal 25% more damage and Tesla-type damage.
+		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_vrilpoweredweapons
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_vrilpoweredweapons
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_helium3:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Helium-3 Enrichment
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 65
+		Queue: Upgrades
+		Description: Increases Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%.
+			Mines Helium-3 from the lunar regolith to fuel Fourth Reich fusion reactors and propulsion systems.
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_helium3
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_helium3
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_vrilinfusion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vril Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 67
+		Queue: Research
+		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and 15% damage reduction.
+			Vril energy from the Black Sun program rewrites soldiers at the cellular level, creating true Übermenschen.
+		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_vrilinfusion
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_vrilinfusion
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_lunaralloys:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Lunar Alloys
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Upgrades
+		Description: All Schwarzer Mond units take 10% less damage.
+		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_lunaralloys
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_lunaralloys
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_moonpropaganda:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Moon Propaganda
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: All Schwarzer Mond infantry deal 10% more damage.
+			Funded by MoonCoin, the official cryptocurrency of the Reichsmark 2.0 blockchain.
+		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_moonpropaganda
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_moonpropaganda
+	ProvidesPrerequisite:
+
+schwarzer_mond_upgrade_cryptofascism:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cryptofascism
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Every Schwarzer Mond unit generates 1 credit per second.
+		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_cryptofascism
+	RenderSprites:
+		Image: schwarzer_mond_upgrade_cryptofascism
 	ProvidesPrerequisite:

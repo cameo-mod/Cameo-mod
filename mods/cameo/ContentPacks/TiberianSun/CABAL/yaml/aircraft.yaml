@@ -17,7 +17,7 @@ cabal_overkill_gunship:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~cabal_helipad, cabal_promotion_overkillgunship
+		Prerequisites: ~cabal_helipad, ~cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
 		TurnSpeed: 30
@@ -159,7 +159,7 @@ cabal_hunter_drone_carrier:
 		Step: 120
 	CarrierMaster:
 		ArmamentNames: primary
-		Actors: cabal_hunter_drone, cabal_hunter_drone, cabal_hunter_drone
+		Actors: cabal_orb_drone, cabal_orb_drone, cabal_orb_drone
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
@@ -232,7 +232,7 @@ cabal_hunter_drone:
 	Tooltip:
 		Name: Hunter Drone
 	Buildable:
-		Description: template_carrier_slave.description
+		Description: actor_cabal_hunter_drone.description
 	Hovers:
 	Aircraft:
 		TurnSpeed: 32
@@ -302,6 +302,9 @@ cabal_orb_drone:
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
+	CarrierSlave:
+		LandingDistance: 6400
+	HasParent:
 	Voiced:
 		VoiceSet: TSCobra
 	WithInfantryBody:
@@ -327,7 +330,7 @@ cabal_cyborg_assassin:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 6
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_cyborgassassin
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, ~cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_cyborg_assassin.description
 	Aircraft:
@@ -425,7 +428,7 @@ cabal_hunterkillermk1_elite:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 21
-		Prerequisites: ~cabal_helipad, cabal_promotion_hunterkillermk1elite
+		Prerequisites: ~cabal_helipad, ~cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:

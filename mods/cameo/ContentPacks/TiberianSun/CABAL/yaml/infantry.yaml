@@ -67,7 +67,11 @@ cabal_engineer:
 	Captures:
 		CaptureTypes: building, tech
 		PlayerExperience: 500
+		CaptureDelay: 375
 		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
 
 cabal_cyborginfantry:
 	Inherits: ^Soldier
@@ -241,8 +245,7 @@ cabal_rocketcyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		DeathPaletteIsPlayerPalette: true
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
 cabal_devout:
@@ -576,8 +579,7 @@ cabal_hackercyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
-		DeathPaletteIsPlayerPalette: true
+		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	MindControllerCA:
 		ArmamentNames: primary
@@ -921,7 +923,9 @@ cabal_dissolver:
 		Condition: attack
 	WithSpriteTurret:
 	RenderSprites:
-		PlayerPalette: playerra2
+		PlayerPalette: player_rgba
+	Buildable:
+		IconPalette: player_rgba
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	Voiced:

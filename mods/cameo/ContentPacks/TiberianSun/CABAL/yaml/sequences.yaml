@@ -1936,6 +1936,8 @@ cabal_obeliskofdarkness:
 # 		Offset: 0, -10, 10
 
 cabal_dissolver:
+	Defaults:
+		Scale: 2
 	stand:
 		Filename: cabal_dissolver.shp
 		Facings: -8
@@ -1974,96 +1976,78 @@ cabal_dissolver:
 		Facings: -32
 	icon:
 		Filename: cabal_dissolver_icon.shp
+		Scale: 1
 
 cabal_berserker:
 	Defaults:
 		Filename: cabal_berserker_eliminator1000.shp
 		Tick: 80
 		Offset: 0, 0, 16
+		Scale: 2
 	stand:
 		Facings: -8
-		Scale: 1.25
 	liedown:
 		Facings: -8
-		Scale: 1.25
 	run:
 		Start: 8
 		Length: 8
 		Facings: 8
-		Scale: 1.25
 	idle1:
 		Start: 8
 		Length: 9
 		Facings: 8
-		Scale: 1.25
 	idle2:
 		Start: 8
 		Length: 9
 		Facings: 8
-		Scale: 1.25
 	prone-run:
 		Start: 8
 		Length: 8
 		Facings: 8
-		Scale: 1.25
 	prone-stand:
 		Facings: -8
-		Scale: 1.25
 	prone-stand2:
 		Facings: -8
-		Scale: 1.25
 	die1:
 		Filename: blue_frag3.shp
 		Length: *
-		Scale: 1.25
 	die2:
 		Filename: blue_frag3.shp
 		Length: *
-		Scale: 1.25
 	die4:
 		Filename: blue_frag3.shp
 		Length: *
-		Scale: 1.25
 	die-crushed:
 		Filename: blue_frag3.shp
 		Length: *
-		Scale: 1.25
 	standup:
 		Facings: -8
-		Scale: 1.25
 	cheer:
 		Facings: -8
-		Scale: 1.25
 	die7:
 		Filename: electro.shp
 		Length: *
-		Scale: 1.25
 	die5:
 		Filename: blue_frag3.shp
 		Length: *
-		Scale: 1.25
 	crippled-run:
 		Start: 208
 		Length: 8
 		Facings: 8
 		Tick: 333
-		Scale: 1.25
 	crippled-stand:
 		Start: 144
 		Facings: 8
 		Length: 7
 		Tick: 9999
-		Scale: 1.25
 	attack:
 		Start: 72
 		Length: 9
 		Facings: 8
-		Scale: 1.25
 	crippled-attack:
 		Start: 144
 		Length: 7
 		Facings: 8
-		Scale: 1.25
 	icon:
 		Filename: cabal_berserker_icon.shp
 

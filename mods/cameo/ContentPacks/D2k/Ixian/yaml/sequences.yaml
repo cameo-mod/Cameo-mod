@@ -1348,20 +1348,15 @@ duelist_tank_husk.ixian:
 		Facings: -32
 		ZOffset: -512
 
-combat_tank.ixian:
+ixian_koda_tank:
 	Defaults:
+		Facings: -32
 	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2051
-		Facings: -32
+		Filename: ixian_koda_tank.png
+		Start: 0
 	turret:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2485
-		Facings: -32
+		Filename: ixian_koda_tank_turret.png
+		Start: 0
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1370,12 +1365,6 @@ combat_tank.ixian:
 		Tick: 60
 		Facings: -32
 		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4283
-		Offset: -30,-24
 
 ixian_ixcombatsiege:
 	Defaults:

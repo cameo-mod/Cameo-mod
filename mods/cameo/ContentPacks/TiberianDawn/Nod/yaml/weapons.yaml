@@ -259,6 +259,7 @@ LTNKMissiles:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 
 HonestJohn:
@@ -513,6 +514,7 @@ Dragon:
 		ValidRelationships: Neutral, Enemy
 		Damage: 3
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 LaserObelisk:
@@ -976,6 +978,7 @@ LightTank2Missiles:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 
 PDLaserLTNK2:
@@ -1369,6 +1372,7 @@ NodTorpTube:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -1416,6 +1420,7 @@ NodTorpTubeBlackMarket:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
+		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -1457,4 +1462,5 @@ CorvetteDragon:
 		Damage: 5
 		Spread: 500
 	Warhead@EffectAir: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_building

@@ -174,6 +174,7 @@ WaterThrower:
 		Spread: 341
 		Damage: 2
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: citywatersplash #blue_small_napalm
 	Warhead@EMPElectricity: GrantExternalCondition
 		Duration: 10
@@ -248,7 +249,7 @@ CasinoCrateSpawner:
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect: CreateEffect
-		Image: tspodring
+		ImpactSounds: xplosml2.aud
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
@@ -275,6 +276,7 @@ SwatGrenade:
 			Heavy: 100
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 	Warhead@2: GrantExternalCondition
 		Range: 440
@@ -310,6 +312,7 @@ SwatGL:
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
+		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 	Warhead@2: GrantExternalCondition
 		Range: 440

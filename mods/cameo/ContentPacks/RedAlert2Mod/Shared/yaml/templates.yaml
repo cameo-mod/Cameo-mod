@@ -681,18 +681,89 @@
 #   Red Alert 2 Lunar Naxis Upgrades
 ##############################################
 
-^NaxiYellowLaserUpgrade:
+^NaxiCrystalLens:
 	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_crystallens:
 		Condition: schwarzer_mond_upgrade_crystallens
 		Prerequisites: schwarzer_mond_upgrade_crystallens
 
-^NaxiGreenPlasmaUpgrade:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_greenplasmashells:
-		Condition: schwarzer_mond_upgrade_greenplasmashells
-		Prerequisites: schwarzer_mond_upgrade_greenplasmashells
-	FirepowerMultiplier@schwarzer_mond_upgrade_greenplasmashells:
-		RequiresCondition: schwarzer_mond_upgrade_greenplasmashells
+^NaxiAmplifiedLens:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_amplifiedlens:
+		Condition: schwarzer_mond_upgrade_amplifiedlens
+		Prerequisites: schwarzer_mond_upgrade_amplifiedlens
+
+^NaxiVrilPoweredWeapons:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_vrilpoweredweapons:
+		Condition: schwarzer_mond_upgrade_vrilpoweredweapons
+		Prerequisites: schwarzer_mond_upgrade_vrilpoweredweapons
+	FirepowerMultiplier@schwarzer_mond_upgrade_vrilpoweredweapons:
+		RequiresCondition: schwarzer_mond_upgrade_vrilpoweredweapons
 		Modifier: 125
+
+^NaxiCryptofascism:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_cryptofascism:
+		Condition: schwarzer_mond_upgrade_cryptofascism
+		Prerequisites: schwarzer_mond_upgrade_cryptofascism
+	CashTrickler@cryptofascism:
+		Interval: 25
+		Amount: 1
+		RequiresCondition: schwarzer_mond_upgrade_cryptofascism
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_cryptofascism
+
+^NaxiLunarAlloys:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_lunaralloys:
+		Condition: schwarzer_mond_upgrade_lunaralloys
+		Prerequisites: schwarzer_mond_upgrade_lunaralloys
+	DamageMultiplier@schwarzer_mond_upgrade_lunaralloys:
+		RequiresCondition: schwarzer_mond_upgrade_lunaralloys
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_lunaralloys
+
+^NaxiMoonPropaganda:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_moonpropaganda:
+		Condition: schwarzer_mond_upgrade_moonpropaganda
+		Prerequisites: schwarzer_mond_upgrade_moonpropaganda
+	FirepowerMultiplier@schwarzer_mond_upgrade_moonpropaganda:
+		RequiresCondition: schwarzer_mond_upgrade_moonpropaganda
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_moonpropaganda
+
+^NaxiHelium3:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_helium3:
+		Condition: schwarzer_mond_upgrade_helium3
+		Prerequisites: schwarzer_mond_upgrade_helium3
+	PowerMultiplier@schwarzer_mond_upgrade_helium3:
+		RequiresCondition: schwarzer_mond_upgrade_helium3
+		Modifier: 150
+	SpeedMultiplier@schwarzer_mond_upgrade_helium3:
+		RequiresCondition: schwarzer_mond_upgrade_helium3
+		Modifier: 125
+	TurnSpeedMultiplier@schwarzer_mond_upgrade_helium3:
+		RequiresCondition: schwarzer_mond_upgrade_helium3
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_helium3
+
+^NaxiVrilInfusion:
+	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_vrilinfusion:
+		Condition: schwarzer_mond_upgrade_vrilinfusion
+		Prerequisites: schwarzer_mond_upgrade_vrilinfusion
+	FirepowerMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	SpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	TurnSpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 125
+	DamageMultiplier@schwarzer_mond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: schwarzer_mond_upgrade_vrilinfusion
 
 ^FutureTechSpawnActorsOnSell:
 	SpawnActorsOnSell:

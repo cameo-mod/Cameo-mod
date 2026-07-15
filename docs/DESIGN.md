@@ -1169,3 +1169,347 @@ must be renamed to follow the `E` suffix convention.
 4. **E4 — Base weapon must not fire at elite**: the primary armament
    must have `RequiresCondition: !rank-elite` (or equivalent) so the
    elite weapon replaces it, not stacks with it.
+
+## §17 — Dune 2000 to OpenRA Sprite Conversion
+
+When converting individual Dune 2000 BMP frames to OpenRA PNG spritesheets,
+use the `tools/d2k_to_openra.py` script. This is the standard pipeline for
+all D2K asset conversions (e.g. Koda Tank).
+
+### Conversion Steps
+
+1. **Source frames**: Individual BMP files extracted from Dune 2000 `.R16`
+   archives, numbered `Prefix_0.bmp` through `Prefix_N.bmp` (e.g.
+   `KodaBody_0.bmp` ... `KodaBody_31.bmp`).
+
+2. **Run the script**:
+   ```
+   python tools/d2k_to_openra.py <input_dir> <output.png> [--prefix Prefix] [--hue HUE] [--no-hue-shift]
+   ```
+   - `--prefix`: filter frames by filename prefix (e.g. `KodaBody`)
+   - `--hue`: target hue for player-color remap (default 300 = magenta)
+   - `--no-hue-shift`: skip hue shifting (for chassis frames with no player color)
+   - `--remap-hue-min` / `--remap-hue-max`: customize the source hue range
+     (default 140–190°, covering the D2K green ramp)
+
+3. **What the script does**:
+   - Combines all BMP frames into a single horizontal PNG strip
+   - Normalizes frame sizes to the largest frame (smaller frames centered)
+   - Converts pink background (RGB 255,0,255) to transparent alpha
+   - Hue-shifts the green player-color ramp (~163°) to the target hue
+   - Embeds PNG metadata (`FrameAmount`, `FrameSize`) so OpenRA can split
+     the strip into individual frames at load time
+
+4. **Output placement**: PNG spritesheets go in `mods/cameo/bits/d2k/`
+   (not in ContentPack `files/` directories — the engine's file system
+   resolves sequence assets from the global `bits/` folder).
+
+5. **Sequence wiring**: Use `Facings: -32` (for 32-frame D2K sprites) with
+   `Filename: <name>.png` and `Start: 0`. No `Remap` or `Scale` fields
+   needed — the PNG already has transparency and player color baked in.
+   Muzzle flashes can still reference `DATA.R16` with `Remap: 54F94B`.
+
+### PNG Metadata Format
+
+OpenRA recognizes PNG spritesheets by two text chunks:
+- `FrameAmount`: number of frames in the strip (e.g. `32`)
+- `FrameSize`: frame dimensions in pixels as `W,H` (e.g. `39,30`)
+
+The strip width must equal `FrameAmount * FrameSize_W`.
+The strip height must equal `FrameSize_H`.
+
+### Hue Shifting Rules
+
+- **Chassis/body frames**: Use `--no-hue-shift` (no player color in body)
+- **Turret frames**: Use `--hue 300` (shift green ramp to magenta for Ixian)
+- Other factions may use different target hues (e.g. Atreides blue, Harkonnen red)
+- The script preserves saturation and value; only hue changes
+- Pixels outside the remap hue range are left untouched
+
+## §18 — Schwarzer Mond Faction Design
+
+### 18.1 Faction identity
+
+Schwarzer Mond is the **space-faring, occult-science branch** of the Naxis.
+Where the base Naxis faction is a clanking WWII pastiche, Schwarzer Mond is
+its lunarpunk extension: gravity manipulation, crystal leech fields, yellow
+lasers, green plasma shells, and flying saucers. Its intended power curve is
+**early-game fragile, mid-game timing attack, late-game tank/artillery/space
+superiority**, with a known weakness to aircraft and early rushes.
+
+### 18.2 Roster (current)
+
+**Infantry**
+- `schwarzer_mond_lunarsoldier` — basic scout rifle (T1, laser, burst 1)
+- `schwarzer_mond_lunarrocket` — rocket trooper (T1, anti-ground/anti-air)
+- `schwarzer_mond_bermensch` — heavy infantry (T3, laser, burst 2)
+- `schwarzer_mond_parzival` — hero black-hole caster (T3, buildlimit 1)
+- `schwarzer_mond_noidmgarmor` — walker with MP40 laser (T2, burst 5)
+- `schwarzer_mond_noidharvester` — harvester walker (T1, laser)
+- `schwarzer_mond_engineeringarmor` — engineer/capture walker (T1)
+
+**Vehicles**
+- `schwarzer_mond_laserbeetle` — light laser support tank (T1, burst 2)
+- `schwarzer_mond_lunarpanzer` — hover MBT (T1, cannon)
+- `schwarzer_mond_lunartiger` — heavy hover MBT (T2, cannon)
+- `schwarzer_mond_neojagdpanzer` — line-breaker TD (T3, cannon)
+- `schwarzer_mond_lunargrille` — hover artillery (T2, cannon)
+- `schwarzer_mond_korruptesbiest` — fire-support walker (T3, corrosion)
+- `schwarzer_mond_crystaltank` — fire-support leech tank (T3)
+- `schwarzer_mond_mars` — missile artillery (T2)
+- `schwarzer_mond_m200bjagerline` — AA/artillery hybrid (T2)
+- `schwarzer_mond_lasertank` — medium laser tank (T1, burst 4)
+- `schwarzer_mond_gravitycoretank` — gravity debuff tank (T3)
+
+**Aircraft**
+- `schwarzer_mond_spacezeppelin` — heavy transport/gunship (T2, laser)
+- `schwarzer_mond_blackbomb` — kamikaze plane (T3)
+- `schwarzer_mond_haunebuii` — spaceship (T2, cannon/flak)
+- `schwarzer_mond_haunebuiii` — heavy spaceship (T3, cannon/cow drop)
+- `schwarzer_mond_corruptorpiercer` — rocket fighter (T3)
+- `schwarzer_mond_dieglocke` — epic superweapon saucer (T3, buildlimit 1)
+
+**Defenses**
+- `schwarzer_mond_lasertower` — anti-infantry laser tower (T1, burst 1)
+- `schwarzer_mond_sturmcannon` — artillery cannon defense (T2)
+- `schwarzer_mond_gravitycore` — gravity superweapon building (T3)
+- `schwarzer_mond_meteortractionray` — meteor superweapon (T4)
+
+**Economy**
+- `schwarzer_mond_moondairyfarm` — passive income building (T3)
+
+### 18.3 Current upgrade audit
+
+Two upgrades exist today:
+- `schwarzer_mond_upgrade_crystallens` — **radar-tier** (wrong: should stay radar,
+  but it currently doubles laser burst)
+- `schwarzer_mond_upgrade_greenplasmashells` — **radar-tier** (wrong: should be
+  **tech-tier** because it is a +25% firepower cannon upgrade for the whole tank
+  line)
+
+**Coverage gaps** (every unit must eventually be affected by at least two
+upgrades, see §18.6):
+- Crystal Lens only affects laser units; many non-laser units receive nothing.
+- Green Plasma Shells only affects cannon units; the rest of the roster receives
+  nothing.
+- No team-wide economy, survivability, or utility upgrade exists yet.
+
+### 18.4 Laser upgrade split (the +1-burst rule)
+
+The current Crystal Lens upgrade **doubles** the burst of every laser weapon.
+This is a ~2× damage spike and breaks the power-budget rule (§6: worst-case
+stack ≤ 2× fresh-self). The upgrade must be split into two **+1-burst** steps:
+
+- **Tier 1 — Crystal Lens** (`schwarzer_mond_upgrade_crystallens`, radar tier):
+  +1 burst for **all** yellow laser weapons.
+- **Tier 2 — Amplified Lens** (`schwarzer_mond_upgrade_amplifiedlens`, tech tier,
+  requires Crystal Lens): another +1 burst for all yellow laser weapons.
+
+Weapons with base burst 1 (`NaxiRifleLaser` on the Lunar Soldier, `NaxLaserT`
+on the Laser Tower) are intentionally weak and therefore **do** benefit from the
++1-burst steps. The progression for a 1-burst weapon is 1 → 2 → 3, which is still
+bounded by the +2 total cap and keeps the weakest lasers relevant.
+
+Resulting burst progression:
+| weapon | base | +Crystal Lens | +Amplified Lens |
+|---|---|---|---|
+| NaxiRifleLaser / NaxiRifleLaserE | 1 | 2 | 3 |
+| NaxLaserT | 1 | 2 | 3 |
+| NaxiBeetleLaser / AA | 2 | 3 | 4 |
+| ÜbermenschLaser | 2 | 3 | 4 |
+| NaxiTank2Laser / AA | 4 | 5 | 6 |
+| NaxiMP40Laser | 5 | 6 | 7 |
+| NaxiMP40LaserE | 10 | 11 | 12 |
+| ÜbermenschLaserE | 4 | 5 | 6 |
+
+The two upgrades **must not stack to double** any weapon. The total effect is
++2 bursts instead of ×2, which is much closer to the power-budget target.
+
+### 18.5 Cannon upgrade tier move
+
+`schwarzer_mond_upgrade_vrilpoweredweapons` (formerly *Green Plasma Shells*) must
+move from `~schwarzer_mond_radar` to `~schwarzer_mond_techcenter`. The Vril energy
+core gives cannon vehicles +25% firepower and converts their damage to a
+Tesla-type discharge. This is a tech-tier effect (compare Naxis
+`naxis_upgrade_wunderwaffe` at tech tier). The `Queue` stays `Research`.
+
+### 18.6 Proposed upgrade framework
+
+Every Schwarzer Mond unit must inherit at least two upgrade templates. The
+following templates are the canonical set:
+
+- `^NaxiCryptofascism` — economy trickler (1 credit per 25 ticks per unit).
+  Tech tier, `Research` queue. Every Schwarzer Mond unit inherits this.
+- `^NaxiCrystalLens` — radar-tier laser burst +1 (base burst ≥ 2).
+  Laser units inherit this.
+- `^NaxiAmplifiedLens` — tech-tier laser burst +1 (base burst ≥ 3).
+  Laser units inherit this (requires Crystal Lens).
+- `^NaxiVrilPoweredWeapons` — tech-tier +25% firepower and Tesla-type damage
+  for cannon vehicles. Named after the Vril energy core from the Black Sun
+  occult-science program.
+- `^NaxiLunarAlloys` — radar-tier +10% damage reduction for all Schwarzer Mond
+  units. Fills the survivability gap for non-laser, non-cannon units.
+- `^NaxiMoonPropaganda` — tech-tier +10% firepower for all Schwarzer Mond
+  infantry. The morale campaign is funded by **MoonCoin**, the official
+  cryptocurrency of the Reichsmark 2.0 blockchain.
+- `^NaxiHelium3` — radar-tier +50% power output for Hydrogen Plants and +25%
+  speed/turn rate for all vehicles and aircraft. The Moon's regolith is rich in
+  Helium-3, the isotope that fuels the Fourth Reich's fusion reactors and the
+  Götterdämmerung-class warships; enriched Helium-3 is also used as a high-
+  specific-impulse propellant for lunar vehicles and saucers.
+- `^NaxiVrilInfusion` — tech-tier +25% firepower, +25% speed/turn rate and +15%
+  damage reduction (Modifier 85) for all Schwarzer Mond infantry. Vril energy
+  from the Black Sun program is spliced into the troopers, creating true
+  Übermenschen on the battlefield.
+
+Upgrade queue layout:
+- **Radar tier (`Upgrades`)**: Crystal Lens, Lunar Alloys, Helium-3 Enrichment.
+- **Tech tier (`Research`)**: Amplified Lens, Vril Powered Weapons, Vril Infusion,
+  Cryptofascism, Moon Propaganda.
+
+### 18.7 Promotion grid proposal
+
+Schwarzer Mond uses the RA2 experience system (`^GainsExperienceRA2`) and can
+support a 3-column promotion grid. The image proposal groups units into three
+rough columns; this is refined into a **unit-improvement** promotion tree
+because the listed units already exist in the regular tech tree.
+
+| column | rank 1 | rank 2 | rank 3 | rank 4 |
+|---|---|---|---|---|
+| **Lunar Infantry** | Heavy Lunar Soldier | Übermensch Mk2 | Parzival (already hero) | — |
+| **Lunar Armor** | Laser Beetle Mk2 | Lunar Tiger Mk2 | Neo Jagdpanzer Mk2 | Dalek (already epic) |
+| **Lunar Flight** | Haunebu II (rebalanced) | Corruptor Piercer Mk2 | Haunebu III Mk2 | Die Glocke (already epic) |
+
+Notes on the image proposal:
+- The image lists **12 units** but the faction has **~25 buildable units**.
+  The grid must cover the full roster or be supplemented by non-promotion
+  upgrades.
+- `Bradley` does not exist in the Schwarzer Mond roster; the closest unit is
+  `MARS` (missile artillery) or `M-200B Jagerline` (AA/artillery). Either the
+  image uses an old name or it refers to a different faction.
+- `Noid MG`, `Neo Jagdpanzer`, `Korruptes Biest`, `Dalek` are a coherent heavy
+  column.
+- `Übermensch`, `Laser Tank`, `Crystal Tank`, `Parzival` are a coherent elite
+  column.
+- `Piercer`, `Haunebu 3`, `Die Glocke` are a coherent aircraft column, but
+  `Bradley` is out of place.
+
+If promotions are meant to **unlock** units, the base versions must be placed at
+the appropriate tech tiers and the promotion versions must be strictly stronger
+(§15 promotion superiority rule). If promotions are meant to **upgrade**
+existing units, use the `^PromotionUnitBuff` template and add new upgrade
+variants.
+
+### 18.8 Cryptofascism upgrade
+
+- ID: `schwarzer_mond_upgrade_cryptofascism`
+- Name: Cryptofascism
+- Tier: tech center, `Research` queue
+- Cost: placeholder (rebalance with spreadsheet)
+- Effect: grants every Schwarzer Mond unit a `CashTrickler` of 1 credit per
+  25 ticks while the unit is alive.
+- Icon: `nax2_cryptofascismicon.png` (64×48 px, placed in the faction's
+  `files/` folder and wired via a sequence icon entry).
+- Template: `^NaxiCryptofascism` added to every Schwarzer Mond actor's
+  `Inherits` chain.
+
+Because the effect scales with army size, it is a late-game snowball upgrade.
+Cost and placement must be tuned so it pays back only after a large army exists.
+
+### 18.9 Faction description normalization
+
+The Schwarzer Mond description in `ContentPacks/RedAlert2Mod/SchwarzerMond/
+translations/en.ftl` should follow the same point-based format used by Ixians,
+Ordos, and Naxis:
+
+```
+Difficulty: ©©©
+Early Game: ©©
+Mid Game: ©©©©©
+Late Game: ©©©©
+Playstyle: Timing Attack
+Strength: Mid to Lategame Tanks and Artillery
+Weakness: Aircraft
+Countered by: Early Game Rush, Aircraft
+Special Units: Parzival, Dalek, Die Glocke
+Special Buildings: Moon Dairy Farm, Gravity Core
+Team Upgrades: Cryptofascism, Lunar Alloys
+Support powers: Gravity Core, Meteor Traction Beam
+```
+
+Other RA2Mod factions (Consortium, Asian Alliance, Syndicate, FutureTech,
+Naxis) should be normalized to the same format when touched; Schwarzer Mond is
+the first to receive the full template because it is the focus faction.
+
+### 18.10 Implementation order
+
+1. [DONE] Add the new templates to `ContentPacks/RedAlert2Mod/Shared/yaml/
+   templates.yaml` (Crystal Lens, Amplified Lens, Vril Powered Weapons, Lunar
+   Alloys, Moon Propaganda, Cryptofascism, Helium-3, Vril Infusion).
+2. [DONE] Add the four new upgrade actors to `ContentPacks/RedAlert2Mod/SchwarzerMond/
+   yaml/upgrades.yaml`.
+3. [DONE] Move Green Plasma Shells to tech center; split Crystal Lens; add
+   Amplified Lens.
+4. [DONE] Add the icon sequence for Cryptofascism and place the PNG in
+   `mods/cameo/bits/ra2/mod/` (the same location used by the existing upgrade
+   icons).
+5. [DONE] Wire every Schwarzer Mond actor to the appropriate upgrade templates.
+6. [DONE] Update weapon variants for the new +1-burst laser tiers.
+7. [DONE] Update the faction description and individual unit descriptions.
+8. [IN PROGRESS] Run the full audit suite (`tools/audit/run_all.sh`) and rebuild.
+9. [TODO] Update the balance spreadsheet for any stat changes that affect cost or
+   tier placement.
+10. [DONE] Rename Green Plasma Shells to Vril Powered Weapons and add Helium-3
+    Enrichment upgrade.
+11. [DONE] Re-enable Crystal Lens / Amplified Lens on 1-burst laser weapons.
+12. [DONE] Replace copy-pasted unit icons with unique placeholders per
+    `docs/design/schwarzer_mond_artwork_status.md`.
+13. [DONE] Finalize promotion intent: use existing `^PromotionUnitBuff` on all
+    combat units instead of unlocking new actor variants.
+14. [TODO] Boot-test the mod and verify the overhaul in-game.
+
+### 18.11 Open questions for design
+
+- Promotions will **upgrade existing units** via `^PromotionUnitBuff` rather than
+  unlocking new actor variants. The existing RA2 experience system already
+  provides veteran/elite ranks; the promotion grid proposal is flavor-only and
+  does not require new Mk2 actors. All combat units now inherit the buff.
+- The unit formerly referred to as `Bradley` in the promotion image is the
+  hover artillery unit now named **MARS** (`schwarzer_mond_mars`). The name is
+  an acronym (MARS = MRLS / mobile artillery rocket system) and follows the
+  convention: actor id `schwarzer_mond_mars` (lowercase, underscore), display
+  name `MARS` (uppercase acronym). The unit uses the `NaxisBradleyTarget`
+  weapon, which is a legacy internal name that does not need to change unless
+  we want to fully purge the old label.
+- Moon Dairy Farm passive income and Cryptofascism are independent: the dairy
+  farm is a building income source, Cryptofascism only generates cash from living
+  units. They can stack without special capping.
+
+### 18.12 Lore research — Iron Sky, Nazi Moon, and conspiracy-parody sources
+
+Schwarzer Mond is built on the *Moon Nazi* conspiracy/parody trope, most famously
+presented in the 2012 film *Iron Sky* and its 2019 sequel *Iron Sky: The Coming
+Race*. Key motifs that can be mined for upgrades, unit names, and faction flavor:
+
+- **Nazi Moon base**: In 1945 the Third Reich evacuates to the far side of the
+  Moon, builds a swastika-shaped fortress, and waits decades to launch an
+  invasion fleet of flying saucers and zeppelins. This is the core origin of
+  Schwarzer Mond.
+- **Helium-3**: The Moon's regolith is rich in Helium-3, a fusion fuel. In *Iron
+  Sky* the Nazis mine it to power their ships, reactors, and the giant
+  warship *Götterdämmerung*. This justifies a Helium-3 power/economy upgrade.
+- **Vril and the Black Sun**: The sequel ties Nazi UFO technology to the Vril,
+  a reptilian subterranean race that allegedly gave the Nazis advanced energy
+  technology. "Vril Powered Weapons" replaces the generic "Green Plasma Shells"
+  name and grounds the cannon upgrade in occult-science lore.
+- **Die Glocke / Haunebu / Reichsflugscheibe**: Classic Nazi UFO conspiracy
+  craft names (the Bell, the flying disc) that already appear in the roster as
+  units (Haunebu II/III, Die Glocke).
+- **MoonCoin / Reichsmark 2.0**: A crypto-currency parody fits the satirical
+  tone. The Moon Propaganda upgrade is described as funded by MoonCoin on the
+  Reichsmark 2.0 blockchain.
+- **Jobsism and modern cults**: *Iron Sky 2* satirizes tech cults. This is
+  optional flavor for future support powers or upgrades.
+
+These sources are used only as parody/satire references; the faction remains a
+fictional sci-fi faction, not an endorsement of any real-world ideology.
