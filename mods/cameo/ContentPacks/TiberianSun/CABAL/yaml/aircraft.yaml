@@ -520,6 +520,9 @@ cabal_repair_drone:
 		LocalOffset: 0,0,0
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
+	AutoTarget:
+		EnableTargeting: false
+		EnableScanning: true
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
