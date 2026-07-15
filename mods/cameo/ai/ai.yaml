@@ -3720,7 +3720,6 @@ Player:
 			td_nod_templeofnod: 2
 			td_gdi_repairfacility: 1
 			td_nod_repairfacility: 1
-			silo: 1
 			cncsyrd: 1
 			cncspen: 1
 			#################### BuildingLimits RA
@@ -3738,7 +3737,6 @@ Player:
 			ra1_soviet_airfield: 10
 			ra1_soviet_largesovietairfield: 10
 			japan_japaneseairfield: 10
-			kenn: 1
 			ra1_allies_alliedradardome: 1
 			ra1_soviet_radardome: 1
 			japan_japaneseradararray: 1
@@ -3748,10 +3746,6 @@ Player:
 			ra1_allies_alliedservicedepot: 1
 			ra1_soviet_servicedepot: 1
 			japan_japaneseservicedepot: 1
-			rasilo: 1
-			ra1syrd: 1
-			ra1jsyrd: 1
-			raspen: 1
 			ra1_soviet_ironcurtain: 1
 			ra1_allies_chronosphere: 1
 			ra1_soviet_missilesilo: 1
@@ -3776,7 +3770,6 @@ Player:
 			ra2_soviets_industrialplant: 1
 			ra2_soviets_radar: 1
 			ra2_soviets_battlelab: 2
-			ra2naclon: 1
 			ra2_soviets_servicedepot: 1
 			ra2_soviets_nuclearmissilesilo: 1
 			ra2_soviets_ironcurtain: 1
@@ -3801,7 +3794,6 @@ Player:
 			ts_gdi_techcenter: 2
 			ts_gdi_upgradecenter: 1
 			ts_nod_tiberiumwastefacility: 1
-			tsgtdept: 1
 			ts_gdi_silo: 1
 			#################### BuildingLimits TS Nod
 			ts_nod_tiberiumrefinery: 10
@@ -3810,8 +3802,6 @@ Player:
 			ts_nod_helipad: 10
 			ts_nod_radar: 1
 			ts_nod_techcenter: 2
-			tsnttmpl: 1
-			tsntpuls: 1
 			ts_nod_missilesilo: 1
 			ts_nod_stealthgenerator: 1
 			ts_nod_silo: 1
@@ -3878,7 +3868,6 @@ Player:
 			schwarzer_mond_techcenter: 2
 			naxis_naxirocketsilo: 1
 			schwarzer_mond_meteortractionray: 1
-			nax2_chrono: 1
 			schwarzer_mond_gravitycore: 5
 			#################### BuildingLimits Future Tech
 			futuretech_refinery: 10
@@ -3893,9 +3882,7 @@ Player:
 			ixian_refineryixian: 10
 			ixian_barracks: 10
 			ixian_advancedheavyfactory: 10
-			high_tech_factory: 5
 			ixian_launchpad: 10
-			d2k_silo: 1
 			ixian_repairpad: 1
 			ixian_outpost: 1
 			ixian_ixresearchcenter: 2
@@ -3991,66 +3978,27 @@ Player:
 			wc2_orc_oil_refinery: 1
 			wc2_orc_oil_platform: 1
 			#################### BuildingLimits Dawn of the Tomorrow
-			dtproc: 10
-			dtpyle: 5
-			dtpyle.dtrussia: 5
-			dtpyle.dtjapan: 5
-			dthand: 10
-			hq.tomorrow: 1
-			hq.answer: 1
-			dome.dtrussia: 1
-			weap.tomorrow: 7
-			weap.dtusa: 7
-			weap.dtrussia: 7
-			weap.dtjapan: 7
-			afld.answer: 7
-			hpad.tomorrow: 3
-			hpad.answer: 3
-			hpad.dtusa: 3
-			hpad.dtrussia: 3
-			hpad.dtjapan: 3
-			dtstrike: 2
-			dtbio: 2
-			dtsilo: 1
-			atek.answer: 1
-			dtpropaganda: 1
-			dtshop: 1
-			dteye: 2
-			dthq: 2
-			oilb.tomorrow: 20
 			#################### BuildingLimits Brayans
-			315ranchhouse: 2
-			315ruca: 2
-			315radiostation: 1
-			315garage: 2
-			315weedfarm: 2
 			#################### BuildingLimits GLA
-			glamcv.bot: 1
 			glbarracks: 5
 			glpalace: 1
 			glweap: 7
 			glblackmarket: 10
 			glstorm: 3
-			glsyrd: 3
 			#################### BuildingLimits CHINA
-			chnmcv.bot: 1
 			chbarracks: 5
 			chpropaganda: 1
 			chweap: 7
 			chairport: 3
 			chsilo: 3
-			chsyrd: 3
 			chinternetcenter2: 10
 			#################### BuildingLimits USA
-			usamcv.bot: 1
 			usabarracks: 5
 			usastrategy: 1
 			usaweap: 7
 			usaairport: 3
 			usadropzone: 10
 			usacannon: 5
-			usacannon2: 5
-			usasyrd: 3
 			#################### BuildingLimits Imperium
 			dribarr.imperium: 2
 			drihelipad.imperium: 1
@@ -4088,36 +4036,8 @@ Player:
 			drdsupport: 2
 			driscrap: 2
 			##################### BuildingLimits Simcity 2000
-			sc2kfactorystructure: 1
-			sc2kpowercoal: 1
-			sc2kwindmill: 1
-			sc2knaturalgas: 1
-			sc2knuclear: 1
-			sc2kpowersolar: 1
-			sc2kpowermicrowave: 1
-			sc2kpowerfusion: 1
-			sc2kfactorydisaster: 3
-			sc2krecyclingcenter: 3
-			sc2kdomicile: 5
-			sc2kcardealership: 3
-			sc2kmarina: 3
-			sc2kfactoryfarm: 1
-			sc2kobservatory: 1
-			sc2ktradecenter: 1
-			sc2ksupermall: 1
-			sc2kubermall: 1
-			sc2kbeaconpolice: 10
-			sc2kbeaconfire: 10
-			sc2kbeaconarmy: 10
-			sc2kmissilesilo: 1
-			sc2kpolicedept: 3
-			sc2kfiredept: 3
-			sc2khospital: 1
 		BuildingFractions:
 			#################### Shared
-			oilb.building: 10
-			oilb.ra2: 10
-			oilb.ts: 10
 			forgotten_tiberiumspike: 10
 			#################### BuildingFractions CNC
 			td_gdi_constructionyard: 5
@@ -4142,7 +4062,6 @@ Player:
 			td_nod_templeprime: 1
 			td_gdi_repairfacility: 1
 			td_nod_repairfacility: 1
-			silo: 1
 			td_gdi_guardtower: 20
 			td_gdi_skyshield: 10
 			td_gdi_advancedguardtower: 20
@@ -4170,10 +4089,6 @@ Player:
 			ra1_soviet_airfield: 15
 			ra1_soviet_largesovietairfield: 15
 			japan_japaneseairfield: 15
-			kenn: 1
-			ra1syrd: 1
-			ra1jsyrd: 1
-			raspen: 1
 			ra1_allies_alliedradardome: 1
 			ra1_soviet_radardome: 1
 			japan_japaneseradararray: 1
@@ -4183,7 +4098,6 @@ Player:
 			ra1_allies_alliedservicedepot: 1
 			ra1_soviet_servicedepot: 1
 			japan_japaneseservicedepot: 1
-			rasilo: 1
 			ra1_soviet_missilesilo: 1
 			ra1_soviet_ironcurtain: 1
 			ra1_allies_chronosphere: 1
@@ -4232,7 +4146,6 @@ Player:
 			ra2_soviets_industrialplant: 1
 			ra2_soviets_radar: 1
 			ra2_soviets_battlelab: 5
-			ra2naclon: 1
 			ra2_soviets_servicedepot: 1
 			ra2_soviets_nuclearmissilesilo: 1
 			ra2_soviets_ironcurtain: 1
@@ -4281,7 +4194,6 @@ Player:
 			ts_nod_techcenter: 5
 			ts_nod_servicedepot: 1
 			# tsnttmpl: 1
-			tsntpuls: 1
 			ts_nod_laserturret: 15
 			ts_nod_obeliskoflight: 15
 			ts_nod_samsite: 10
@@ -4389,7 +4301,6 @@ Player:
 			schwarzer_mond_techcenter: 5
 			naxis_naxirocketsilo: 1
 			schwarzer_mond_meteortractionray: 1
-			nax2_chrono: 1
 			schwarzer_mond_gravitycore: 1
 			schwarzer_mond_moondairyfarm: 10
 			schwarzer_mond_lasertower: 30
@@ -4423,7 +4334,6 @@ Player:
 			ixian_rocketturret: 15
 			ixian_stormlasher: 5
 			ixian_supercomputer: 1
-			oilb.d2k: 10
 			#concreteb: 1
 			#################### Buildings Ordos
 			ordos_constructionyard: 5
@@ -4484,14 +4394,12 @@ Player:
 			protoss_upgrade_singularitycharge: 1
 			protoss_upgrade_graviticpropulsion: 1
 			protoss_upgrade_reavercapacity: 1
-			upreaverdamage: 1
 			#################### BuildingFractions ZERG
 			zerg_hatcherydrone: 4
 			zerg_hatchery: 40
 			zerg_lair: 15
 			zerg_hive: 10
 			zerg_drone: 50
-			scbotoverlord: 10
 			zerg_extractor: 30
 			zerg_vespenegascollector: 1
 			zerg_spawningpool: 1
@@ -4558,41 +4466,7 @@ Player:
 			orcs_cannontower_2: 1
 			orcs_orcgoldmine_2: 1
 			#################### BuildingFractions Dawn of the Tomorrow
-			dtproc: 20
-			dtpyle: 7
-			dtpyle.dtrussia: 7
-			dtpyle.dtjapan: 7
-			dthand: 10
-			hq.tomorrow: 5
-			hq.answer: 5
-			dome.dtrussia: 5
-			afld.answer: 10
-			weap.tomorrow: 10
-			weap.dtusa: 10
-			weap.dtrussia: 10
-			weap.dtjapan: 10
-			gtwr.answer: 7
-			gun.tomorrow: 10
-			pbox.tomorrow: 5
-			dtobli: 7
-			dtrkpod: 10
-			sam.tomorrow: 5
-			dtstrike: 1
-			dteye: 1
-			dthq: 1
-			dtshop: 1
-			dtbio: 1
-			dtsilo: 1
-			hpad.tomorrow: 1
-			hpad.answer: 1
-			hpad.dtusa: 1
-			hpad.dtrussia: 1
-			hpad.dtjapan: 1
-			atek.answer: 1
-			dtpropaganda: 1
-			oilb.tomorrow: 20
 			#################### BuildingFractions GLA
-			glamcv.bot: 1
 			glsupply: 20
 			glbarracks: 10
 			glpalace: 1
@@ -4601,9 +4475,7 @@ Player:
 			glblackmarket: 20
 			glstorm: 3
 			gltrap: 5
-			glsyrd: 3
 			#################### BuildingFractions CHINA
-			chnmcv.bot: 1
 			chsupply: 20
 			chbarracks: 5
 			chpropaganda: 5
@@ -4616,10 +4488,8 @@ Player:
 			chgattling: 10
 			chairport: 3
 			chsilo: 3
-			chsyrd: 3
 			chinternetcenter2: 15
 			#################### BuildingFractions USA
-			usamcv.bot: 1
 			usasupply: 20
 			usabarracks: 5
 			usastrategy: 5
@@ -4629,11 +4499,9 @@ Player:
 			usalasertur: 10
 			usaairport: 5
 			usacannon: 3
-			usacannon2: 3
 			usadropzone: 20
 			usafirebase.e1: 5
 			usafirebase.e3: 10
-			usasyrd: 3
 			#################### BuildingFractions Generals
 			selectchnormal: 1
 			selectchtanks: 1
@@ -4745,13 +4613,6 @@ Player:
 			drwaterextract.freedomguard: 1
 			drwaterextract.imperium: 1
 			#################### BuildingFractions Brayans
-			315proc: 4
-			315ruca: 2
-			315radiostation: 1
-			315garage: 2
-			315weedfarm: 2
-			315sturret: 1
-			315ranchhousebot: 1
 			#################### BuildingFractions TKM
 			tkm_constructionyard: 5
 			# tkm_powerplant: 15
@@ -4884,14 +4745,9 @@ Player:
 			cncss: 10
 			ssmsub: 10
 			nodlasercorvette: 10
-			pt: 10
-			dd: 10
-			ca: 10
 			japanspeedboat: 10
 			japancarrier: 10
 			yamatobattleship: 10
-			ss: 10
-			msub: 10
 			ra2dlph: 5
 			ra2dest: 10
 			ra2_allies_aegiscruiser: 10
@@ -5005,7 +4861,6 @@ Player:
 			td_nod_venom: 5
 			td_nod_lasercommando: 1
 			#################### UnitsToBuild TS GDI
-			tse1: 7
 			ts_gdi_discthrower: 5
 			ts_gdi_falconenforcer: 5
 			ts_gdi_jumpjetinfantry: 3
@@ -5051,7 +4906,6 @@ Player:
 			ts_nod_subterraneanapc: 1
 			ts_nod_mobileconstructionvehicle: 1
 			ts_nod_lightinfantry: 7
-			tse3: 5
 			cabal_cyborginfantry: 3
 			cabal_cyborgcommando: 1
 			ts_nod_attackbuggy: 3
@@ -5189,11 +5043,9 @@ Player:
 			japan_japaneseoretruck: 10
 			ra1_soviet_attackdog: 1
 			ra1_soviet_cyberdog: 1
-			rae1: 3
 			ra1_soviet_rifleinfantry: 5
 			japan_imperialscoutsman: 5
 			ra1_soviet_grenadier: 5
-			rae3: 5
 			ra1_soviet_rocketsoldier: 5
 			japan_tankbuster: 5
 			ra1_soviet_flamethrower: 5
@@ -5204,7 +5056,6 @@ Player:
 			ra1_allies_mechanic: 1
 			ra1_allies_alliedsniper: 1
 			ra1_allies_ranger: 1
-			raapc: 1
 			ra1_allies_alliedlighttank: 5
 			ra1_allies_alliedmediumtank: 5
 			ra1_soviet_heavytank: 5
@@ -5557,7 +5408,6 @@ Player:
 			asian_alliance_doctrine_heavypulverizerweapons: 1
 			asian_alliance_doctrine_asianphalanx: 1
 			asian_alliance_upgrade_dragonfire: 1
-			asian_upgrade_quasar: 1
 			asian_alliance_upgrade_banzaimode: 1
 			asian_alliance_upgrade_wayofthedragon: 1
 			asian_alliance_upgrade_asiandiplomacy: 1
@@ -5624,7 +5474,6 @@ Player:
 			latin_syndicate_doctrine_eliteguerillas: 1
 			latin_syndicate_doctrine_cartelrockets: 1
 			latin_syndicate_doctrine_lightposts: 1
-			uplatin_up_tech1: 1
 			latin_syndicate_upgrade_yuristolentechchainguns: 1
 			latin_syndicate_upgrade_sovietstolentechindustrialmethods: 1
 			latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging: 1
@@ -5887,121 +5736,13 @@ Player:
 			########### Units Atreides
 			ixian_mongoose: 5
 			#################### UnitsToBuild Dune Universe
-			quake_tank: 1
-			d2k_heavy_air_drone: 1
-			d2k_mcv: 1
-			shotgunner: 5
-			submachinegunner: 5
-			mpsardaukar: 5
-			d2k_sardaukar_elite: 3
-			nsfremen: 3
-			fremen: 3
-			facedancer_harv: 10
-			plasma_infantry: 10
 			ordos_facedancer: 10
-			fedaykin: 3
-			rocketeer: 3
-			rocketeer_o: 3
-			rocketeer_tleilaxu: 3
-			d2k_drone_h: 3
-			d2k_emperor_worm: 1
-			d2k_rider_worm: 3
-			d2k_sniper: 3
-			d2k_marksman: 3
-			d2k_stealth_apc.bot1: 5
-			d2k_stealth_apc.bot2: 3
-			d2k_stealth_apc.bot3: 1
-			phoenix: 3
-			d2k_mechanic: 1
-			d2k_hijacker: 1
-			guild_quad: 3
-			siege_quad: 3
-			d2k_atreides_apc.bot1: 5
-			d2k_atreides_apc.bot2: 3
-			d2k_flame_tank: 3
-			ornithopter.controllable: 3
-			grenadier: 3
-			sonic_tank: 10
-			devastator: 10
-			d2k_qafza: 5
-			d2k_stealth_tank: 7
-			d2k_light_tank.bot1: 7
-			d2k_light_tank.bot2: 3
-			d2k_light_tank.bot3: 5
-			d2k_apc.bot1: 7
-			d2k_apc.bot2: 3
-			d2k_apc.bot3: 5
-			flamethrower: 3
-			bomb_buggy: 1
-			trike: 3
-			d2k_tyrant: 5
-			d2k_annihilator: 1
-			d2k_buzzsaw: 3
-			raider.bot: 3
-			quad: 5
-			mg_quad: 3
-			mg_quad_tleilaxu.bot: 5
-			d2k_scourge: 3
 			siege_tank: 5
-			missile_tank: 10
 			ordos_raider: 7
 			ordos_stealthraider: 7
 			combat_tank.atreides: 10
 			combat_tank.harkonnen: 10
-			d2k_combat_buggy: 7
-			d2k_kwny_fighter: 7
-			rocket_raider_ixian.bot1: 5
-			rocket_raider_ixian.bot2: 5
-			rocket_raider.bot: 10
-			rocket_raider_o: 10
-			devastator.starport: 5
-			sonic_tank.starport: 5
-			deviator.starport: 5
-			d2k_stealth_tank.starport: 5
-			d2k_combat_fleet: 5
 			d2k_basq: 10
-			d2k_zergling: 5
-			d2k_lion_king: 1
-			combat_tank_corrino: 10
-			d2k_sardaukar_assassin: 5
-			d2k_rocket_buggy: 10
-			combat_tank_fremen.bot1: 3
-			combat_tank_fremen.bot2: 3
-			combat_tank_fremen.bot3: 5
-			d2k_sardaukar_buggy: 3
-			d2k_transport_buggy.bot1: 3
-			d2k_transport_buggy.bot2: 3
-			d2k_combat_siege_upgrade: 1
-			d2k_quake_tank_upgrade: 1
-			d2k_duelist_tank_upgrade: 1
-			emperor_fremen: 3
-			emperor_sardaukar: 5
-			emperor_fedaykin: 5
-			emperor_plasmainf: 5
-			emperor_sardaukar_elite: 10
-			emperor_sonic_tank: 10
-			emperor_deviator: 10
-			emperor_devastator: 10
-			emperor_rocket_raider: 10
-			emperor_mg_quad: 10
-			emperor_stealth_tank: 10
-			emperor_sardaukar_hunter: 5
-			combat_tank_emperor: 10
-			emperor_tyrant: 10
-			d2k_airdefenseplatform: 10
-			d2k_striketeam2: 1
-			d2k_striketeam3: 1
-			upgrade.contaminator: 1
-			upgrade.leech: 1
-			upgrade.emperorworm: 1
-			upgrade.rocketeer: 1
-			upgrade.rocket_raider: 1
-			upgrade.mg_quad: 1
-			upgrade.mcv: 1
-			upgrade.basq: 1
-			upgrade.tleilaxueyes: 1
-			upgrade.gholas: 1
-			d2k_ornithopter_upgrade: 1
 			#################### UnitsToBuild TERRAN
 			terran_scv: 10
 			terran_marine: 5
@@ -6111,14 +5852,12 @@ Player:
 			protoss_promotion_unlockamaranth: 1
 			protoss_promotion_unlockpatriarch: 1
 			protoss_promotion_unlockepigraph: 1
-			uplanifect: 1
 			protoss_promotion_unlockgladius: 1
 			protoss_promotion_unlockstarsovereign: 1
 			protoss_promotion_unlockpositron: 1
 			protoss_promotion_unlockanalogue: 1
 			protoss_promotion_unlockmanifold: 1
 			protoss_promotion_unlockidol: 1
-			scpylonexpand: 100
 			#################### UnitsToBuild ZERG
 			zerg_overlord: 10
 			zerg_drone: 100
@@ -6144,7 +5883,6 @@ Player:
 			zerg_upgrade_missileattackslevel2: 1
 			zerg_upgrade_carapacelevel1: 1
 			zerg_upgrade_carapacelevel2: 1
-			upcarapace3: 1
 			zerg_upgrade_flyerattackslevel2: 1
 			zerg_upgrade_flyercarapacelevel1: 1
 			zerg_upgrade_flyercarapacelevel2: 1
@@ -6284,11 +6022,7 @@ Player:
 			mcvdtusa.bot: 1
 			ramcvdtrussia.bot: 1
 			mcvdtjapan.bot: 1
-			dte2: 1
-			dte3: 1
-			dtmutant: 1
 			dtharv: 1
-			dtrmbo: 1
 			dte5: 1
 			dtover: 3
 			rajeep.answer: 1
@@ -6331,12 +6065,7 @@ Player:
 			tran.dtjapan.e3: 1
 			tran.dtjapan.e5: 1
 			#################### UnitsToBuild GLA
-			glamcv.bot: 1
-			gle1: 1
-			gle1toxin: 1
 			glamob: 1
-			gle3: 1
-			glkell: 1
 			glterror: 1
 			glworker: 10000
 			glpickup: 1
@@ -6349,7 +6078,6 @@ Player:
 			glbbus.e1: 1
 			glbbus.e2: 1
 			glmaura: 1
-			glscud: 1
 			glscud.exp: 1
 			glscud.tox: 1
 			glbiker: 1
@@ -6360,13 +6088,7 @@ Player:
 			glscrapcar: 1
 			glgunboat: 1
 			#################### UnitsToBuild CHINA
-			chnmcv.bot: 1
-			che1: 65
-			che2: 65
-			che3: 40
-			che4: 40
 			#chhacker: 1
-			chhacker2: 1
 			chlotus: 1
 			#chcrawl: 1
 			chharv: 100
@@ -6379,17 +6101,12 @@ Player:
 			choverlord: 50
 			choverlord2: 50
 			chhelix: 5
-			chmig: 5
-			chmig2: 5
 			choutpost: 5
 			choutpost2: 5
 			chflameboat: 10
 			chasub: 5
 			checm: 5
 			#################### UnitsToBuild USA
-			usamcv.bot: 1
-			usae1: 65
-			usae3: 40
 			usapath: 15
 			usaburton.bot: 1
 			usaambulan: 1
@@ -6415,7 +6132,6 @@ Player:
 			#################### UnitsToBuild GENERALSUPGRADES
 			upscorpionrocket: 1
 			upchaingun: 1
-			upusgrenade: 1
 			upbluefire: 1
 			upmigarmor: 1
 			upmignuke: 1
@@ -6492,8 +6208,6 @@ Player:
 			tkm_promotion_unlockbattlebus: 1
 			tkm_promotion_unlockthesandmarine: 1
 			tkm_promotion_unlockrepairtruck: 1
-			upserpenttank: 1
-			upbustertank: 1
 			tkm_promotion_unlockthebigshiee: 1
 			tkm_promotion_unlockradartruck: 1
 			tkm_promotion_unlockviper: 1
@@ -6610,16 +6324,6 @@ Player:
 			drmadd: 1
 			drmechd: 2
 			#################### UnitsToBuild CNC
-			315flaite: 65
-			315shinobi: 25
-			315weichafe: 15
-			315dog: 1
-			315chatarrero: 10
-			315charade: 5
-			315racer: 40
-			315tsuru: 25
-			315guanaco: 10
-			315narcojeep: 5
 			#################### UnitsToBuild TKM
 			tkm_templateharvesterraname: 10
 			tkm_rifleman: 7
@@ -6648,9 +6352,6 @@ Player:
 			tkm_medictruck: 1
 			tkm_dronepodtruck: 3
 			tkm_battlebus: 3
-			tkmbattlebuscamo: 3
-			tkmbattlebustitan: 3
-			tkmbattlebusnato: 3
 			tkm_sandmarine: 1
 			tkm_bigshiee: 1
 			tkm_trenchtank: 3
@@ -6676,14 +6377,9 @@ Player:
 			cncss: 10
 			ssmsub: 10
 			nodlasercorvette: 10
-			pt: 10
-			dd: 10
-			ca: 10
 			japanspeedboat: 10
 			japancarrier: 10
 			yamatobattleship: 10
-			ss: 10
-			msub: 10
 			ra2dlph: 5
 			ra2dest: 10
 			ra2_allies_aegiscruiser: 10
@@ -6739,7 +6435,6 @@ Player:
 			ra2_allies_ra2spy: 1
 			#################### UnitLimits SOVIETRA2
 			ra2_soviets_warminer: 20
-			ra2dtruck: 1
 			#################### UnitLimits YURI
 			yuri_slaveminer: 1
 			#################### UnitLimits Asian
@@ -6759,24 +6454,17 @@ Player:
 			#################### UnitLimits Dune Universe
 			ixian_spiceharvester: 20
 			ordos_spiceharvester: 20
-			d2k_hijacker: 5
 			ixian_autonomouscarryall: 5
 			ordos_advancedcarryall: 5
-			d2k_mechanic: 5
 			ordos_airmine: 5
 			#################### UnitLimits GENERALS
 			glamob: 4
-			chhacker2: 2
 			choutpost: 2
 			choutpost2: 2
 			checm: 2
 			usamicro: 2
 			usaambulan: 4
 			#################### UnitLimits ALPHA
-			2100healtruck: 3
-			2100healtruckc: 3
-			2100healtruckp: 3
-			2100healtruckn: 3
 			#################### UnitLimits TERRAN
 			terran_scv: 50
 			terran_medic: 3
@@ -6785,10 +6473,6 @@ Player:
 			protoss_observer: 1
 			protoss_arbiter: 1
 			protoss_corsair: 1
-			scshuttle.reaver: 1
-			scshuttle.reaver2: 1
-			scshuttle.hightemplar: 1
-			scshuttle.darktemplar: 1
 			#################### UnitLimits ZERG
 			zerg_drone: 50
 			zerg_queen: 5
