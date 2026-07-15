@@ -188,7 +188,7 @@ GetAirstrikeTarget = function(player)
 	local target = list[DateTime.GameTime % #list + 1].CenterPosition
 
 	local sams = Map.ActorsInCircle(target, WDist.New(8 * 1024), function(actor)
-		return actor.Type == "sam" end)
+		return actor.Type == "td_nod_samsite" end)
 
 	if #sams == 0 then
 		Searches = 0

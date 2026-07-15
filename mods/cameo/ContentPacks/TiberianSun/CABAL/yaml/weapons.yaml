@@ -14,35 +14,9 @@
 		TrailImage: cabal_rockettrail
 		TrailInterval: 1
 	Warhead@Effect: CreateEffect
-		Image: cabal_missileexplosion
-		Explosions: idle
+		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Ship, Air
-TSReaperTrap:
-	Inherits: ^SmallArms
-	Report: fireweb1.aud
-	ReloadDelay: 250
-	Projectile: Missile
-		Speed: 800
-		Image: DRAGON
-	ValidTargets: Infantry
-	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
-		ValidTargets: Infantry
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-		ValidTargets: Infantry
-	Warhead@Snare: GrantExternalCondition
-		Condition: ReaperTrap
-		Duration: 100
-		Range: 1024
-		ValidTargets: Infantry
-		ValidRelationships: Enemy
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: methit1.aud
-		ValidTargets: Ground, Water
-
 CabalReaperTrap:
 	Report: fireweb1.aud
 	ReloadDelay: 250
@@ -87,8 +61,7 @@ DarkObeliskLaser:
 		Delay: 5
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_m
-		Explosions: idle
+		Explosions: cabal_laserimpact_m
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
@@ -176,51 +149,10 @@ TSCABALObeliskLaserFire:
 		Damage: 35
 	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-
-TSHunterKillerLasers:
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
-	ReloadDelay: 24
-	Burst: 5
-	BurstDelays: 5
-	Range: 4882
-	Report: lastur1.aud
-	SoundVolume: 0.25
-	ValidTargets: Ground, Air
-	Projectile: LaserZap
-		Width: 73
-		ZOffset: 2047
-		Color: 3322AAC0
-		SecondaryBeam: true
-		SecondaryBeamWidth: 33
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 8866EEE8
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 2
-		ValidTargets: Ground, Air
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 2
-		ValidTargets: Ground, Air
-	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
-		ImpactSounds: drtelectro.wav
-		ValidTargets: Ground, Ship
-####################################################################################################
-#		Tiberian Sun Heal Weapons
-####################################################################################################
 
 TSHellfireTwin:
 	Inherits: ^HeavyCannon
@@ -278,8 +210,7 @@ TSHellfireTwin:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
-		Image: cabal_missileexplosion
-		Explosions: idle
+		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
 ####################################################################################################
@@ -357,7 +288,6 @@ CabalBerserkerBlades:
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 37
 	Warhead@Effect: CreateEffect
-		Image: explosion
 		Explosions: poof
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water
@@ -685,8 +615,7 @@ CabalHunterKillerLasers:
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -725,8 +654,7 @@ CabalHunterKillerLasersElite:
 		ValidTargets: Ground, Water, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_m
-		Explosions: idle
+		Explosions: cabal_laserimpact_m
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -748,8 +676,7 @@ CabalHunterKillerHeavyLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_m
-		Explosions: idle
+		Explosions: cabal_laserimpact_m
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalSpiderLaser:
@@ -770,8 +697,7 @@ CabalSpiderLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 22
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
@@ -793,8 +719,7 @@ CabalSpiderCnc4Laser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 22
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
@@ -829,8 +754,7 @@ CabalDissolverSpray:
 		ValidTargets: corrodible
 		ValidRelationships: Enemy
 	Warhead@Effect: CreateEffect
-		Image: cabal_dissolveimpact
-		Explosions: idle
+		Explosions: cabal_dissolveimpact
 		ImpactSounds: drtelectro.wav
 CabalCommandoPlasma:
 	Inherits: ^HeavyCannon
@@ -862,8 +786,7 @@ CabalCommandoPlasma:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@Effect: CreateEffect
-		Image: cabal_greenplasmaimpact
-		Explosions: idle
+		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 
 CabalCommandoPlasmaMk2:
@@ -896,8 +819,7 @@ CabalCommandoPlasmaMk2:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@Effect: CreateEffect
-		Image: cabal_greenplasmaimpact
-		Explosions: idle
+		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 
 CabalCoreDefenderLaser:
@@ -918,10 +840,16 @@ CabalCoreDefenderLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 80
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+CabalAvatarLaser:
+	Inherits: CabalCoreDefenderLaser
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 80000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 40
+
 CabalEngineerRepairBeam:
 	Inherits: ^RepairWeapon
 	ReloadDelay: 31
@@ -952,8 +880,7 @@ CabalMantisGun:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 3
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalLegionGun:
@@ -979,11 +906,10 @@ CabalLegionGun:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
-CabalManticoreMissiles:
+^CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
 	Inherits@3: ^LightMissile
@@ -1017,7 +943,7 @@ CabalManticoreMissiles:
 		Damage: 6
 
 CabalManticoreMissilesAA:
-	Inherits: CabalManticoreMissiles
+	Inherits: ^CabalManticoreMissiles
 	Range: 5358
 	ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
@@ -1148,8 +1074,7 @@ CabalMothershipRockets:
 		Damage: 30000
 		Spread: 600
 	Warhead@Effect: CreateEffect
-		Image: cabal_missileexplosion
-		Explosions: idle
+		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
@@ -1182,8 +1107,7 @@ CabalWaspLaser:
 		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -1262,13 +1186,8 @@ CabalRavagerPlasma:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
-		Image: cabal_greenplasmaimpact
-		Explosions: idle
+		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
-CabalAvatarPlasma:
-	Inherits: CabalRavagerPlasma
-	ReloadDelay: 35
-	Range: 3500
 CabalWidowPlasma:
 	Inherits: CabalRavagerPlasma
 	ReloadDelay: 30
@@ -1293,8 +1212,7 @@ CabalManticoreLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
@@ -1957,8 +1875,7 @@ CabalBeholderLaser:
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 
@@ -1988,8 +1905,7 @@ CabalOverkillCharge:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 12
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -2014,8 +1930,7 @@ CabalOverkillGunshipLaser:
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -2043,8 +1958,7 @@ CabalOverkillLaser:
 		Damage: 1
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_l
-		Explosions: idle
+		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
@@ -2071,7 +1985,6 @@ CabalOverkillDroneLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 	Warhead@Effect: CreateEffect
-		Image: cabal_laserimpact_s
-		Explosions: idle
+		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air

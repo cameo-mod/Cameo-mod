@@ -80,56 +80,56 @@ Players:
 		Enemies: Creeps, Player, EnemyActive, EnemyIdle
 
 Actors:
-	Actor37: e1.nod
+	Actor37: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 104,68
 		SubCell: 3
-	Actor38: e1.nod
+	Actor38: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 102,68
 		SubCell: 3
-	Actor39: e1.nod
+	Actor39: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,67
 		SubCell: 3
-	Actor40: e1.nod
+	Actor40: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 104,64
 		SubCell: 3
-	Actor41: e1.nod
+	Actor41: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 102,64
 		SubCell: 3
-	Actor42: rmbo.gdi
+	Actor42: td_gdi_commando
 		Owner: Player
 		Facing: 384
 		Location: 8,126
 		SubCell: 3
-	Actor70: e1.nod
+	Actor70: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 2,88
 		SubCell: 4
-	Actor75: e1.nod
+	Actor75: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 2,88
-	Actor80: e1.nod
+	Actor80: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 3,89
 		SubCell: 3
-	Actor82: e1.nod
+	Actor82: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 3,89
 		SubCell: 2
-	Actor84: e1.nod
+	Actor84: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 3,89
@@ -137,22 +137,22 @@ Actors:
 	CamStart: waypoint
 		Owner: Neutral
 		Location: 10,124
-	Actor0: e1.nod
+	Actor0: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 4,112
 		SubCell: 3
-	Actor1: e1.nod
+	Actor1: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 4,112
 		SubCell: 1
-	Actor2: e1.nod
+	Actor2: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 4,111
 		SubCell: 3
-	Actor3: e1.nod
+	Actor3: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 4,112
@@ -175,246 +175,246 @@ Actors:
 	Actor63: splitgold
 		Owner: Neutral
 		Location: 125,110
-	Actor68: proc.nod
+	Actor68: td_nod_tiberiumrefinery
 		Owner: EnemyIdle
 		Location: 111,85
-	Actor72: hand
+	Actor72: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 105,86
-	Actor73: cycl
+	Actor73: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,86
-	Actor74: cycl
+	Actor74: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,87
-	Actor76: cycl
+	Actor76: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,88
-	Actor79: cycl
+	Actor79: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,91
-	Actor81: cycl
+	Actor81: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,91
-	Actor83: cycl
+	Actor83: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,92
-	Actor85: cycl
+	Actor85: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,93
-	Actor86: cycl
+	Actor86: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 105,93
-	Actor87: cycl
+	Actor87: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 105,93
-	Actor88: cycl
+	Actor88: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 106,93
-	Actor89: cycl
+	Actor89: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 108,93
-	Actor90: cycl
+	Actor90: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 109,93
-	Actor91: cycl
+	Actor91: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 107,93
-	Actor92: cycl
+	Actor92: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 109,93
-	Actor93: cycl
+	Actor93: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 110,93
-	Actor94: cycl
+	Actor94: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 110,93
-	Actor95: cycl
+	Actor95: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 110,92
-	Actor96: cycl
+	Actor96: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 110,91
-	Actor97: cycl
+	Actor97: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,87
-	Actor98: cycl
+	Actor98: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,86
-	Actor99: cycl
+	Actor99: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,85
-	Actor100: cycl
+	Actor100: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,84
-	Actor101: cycl
+	Actor101: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,83
-	Actor102: cycl
+	Actor102: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,83
-	Actor103: cycl
+	Actor103: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 112,83
-	Actor104: cycl
+	Actor104: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 112,83
-	Actor105: cycl
+	Actor105: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 110,83
-	Actor108: cycl
+	Actor108: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 107,83
-	Actor109: cycl
+	Actor109: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 106,83
-	Actor110: cycl
+	Actor110: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 105,83
-	Actor111: cycl
+	Actor111: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 105,83
-	Actor112: cycl
+	Actor112: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,85
-	Actor113: cycl
+	Actor113: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,84
-	Actor114: cycl
+	Actor114: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,84
-	Actor115: cycl
+	Actor115: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 104,83
-	Actor116: cycl
+	Actor116: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 111,83
-	Actor117: e1.nod
+	Actor117: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,89
 		SubCell: 3
-	Actor118: e1.nod
+	Actor118: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,88
 		SubCell: 3
-	Actor119: e1.nod
+	Actor119: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,88
 		SubCell: 1
-	Actor120: e1.nod
+	Actor120: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,88
 		SubCell: 2
-	Actor121: e1.nod
+	Actor121: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,89
 		SubCell: 1
-	Actor122: e1.nod
+	Actor122: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,89
 		SubCell: 2
-	Actor123: e1.nod
+	Actor123: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,88
 		SubCell: 4
-	Actor124: e1.nod
+	Actor124: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,88
 		SubCell: 5
-	Actor125: e1.nod
+	Actor125: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,89
 		SubCell: 3
-	Actor126: e1.nod
+	Actor126: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,89
 		SubCell: 4
-	Actor127: e1.nod
+	Actor127: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,88
 		SubCell: 3
-	Actor128: e1.nod
+	Actor128: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,88
 		SubCell: 1
-	Actor129: e1.nod
+	Actor129: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,89
 		SubCell: 1
-	Actor130: e1.nod
+	Actor130: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,89
 		SubCell: 2
-	Actor131: e1.nod
+	Actor131: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,89
 		SubCell: 4
-	Actor132: e1.nod
+	Actor132: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,89
 		SubCell: 5
-	Actor133: e4
+	Actor133: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 106,89
 		SubCell: 5
-	Actor134: e4
+	Actor134: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 107,89
 		SubCell: 3
-	Actor135: e4
+	Actor135: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,88
 		SubCell: 2
-	Actor136: e4
+	Actor136: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 105,88
 		SubCell: 4
-	Actor142: e3.nod
+	Actor142: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,88
 		SubCell: 3
-	Actor137: e3.nod
+	Actor137: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,87
 		SubCell: 3
-	Actor138: e3.nod
+	Actor138: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,87
 		SubCell: 1
-	Actor139: e3.nod
+	Actor139: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,87
 		SubCell: 2
-	Actor140: e3.nod
+	Actor140: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,87
 		SubCell: 4
-	Actor141: e3.nod
+	Actor141: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 110,87
@@ -464,52 +464,52 @@ Actors:
 	Actor161: sbag
 		Owner: EnemyIdle
 		Location: 78,104
-	Actor152: e1.nod
+	Actor152: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 81,110
 		SubCell: 3
-	Actor153: e1.nod
+	Actor153: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 81,110
 		SubCell: 1
-	Actor154: e1.nod
+	Actor154: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 81,110
 		SubCell: 2
-	Actor155: e1.nod
+	Actor155: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 81,110
 		SubCell: 4
-	Actor162: e1.nod
+	Actor162: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 81,111
 		SubCell: 1
-	Actor163: e1.nod
+	Actor163: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 78,103
 		SubCell: 3
-	Actor164: e1.nod
+	Actor164: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 78,103
 		SubCell: 1
-	Actor165: e1.nod
+	Actor165: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 78,103
 		SubCell: 2
-	Actor166: e1.nod
+	Actor166: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 78,103
 		SubCell: 4
-	Actor167: e1.nod
+	Actor167: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 78,104
@@ -541,47 +541,47 @@ Actors:
 	Actor171: sbag
 		Owner: EnemyIdle
 		Location: 62,123
-	Actor170: e1.nod
+	Actor170: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,123
 		SubCell: 3
-	Actor172: e1.nod
+	Actor172: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,123
 		SubCell: 1
-	Actor173: e1.nod
+	Actor173: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,123
 		SubCell: 2
-	Actor174: e1.nod
+	Actor174: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,123
 		SubCell: 4
-	Actor175: e1.nod
+	Actor175: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,123
 		SubCell: 5
-	Actor177: e1.nod
+	Actor177: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 109,83
 		SubCell: 3
-	Actor180: e1.nod
+	Actor180: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 103,90
 		SubCell: 3
-	Actor179: e1.nod
+	Actor179: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 107,83
 		SubCell: 2
-	Actor182: e1.nod
+	Actor182: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 103,88
@@ -598,138 +598,138 @@ Actors:
 	Actor183: oilb.building
 		Owner: Neutral
 		Location: 103,120
-	Actor185: cycl
+	Actor185: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,118
-	Actor186: cycl
+	Actor186: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,119
-	Actor187: cycl
+	Actor187: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,120
-	Actor188: cycl
+	Actor188: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,121
-	Actor189: cycl
+	Actor189: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,122
-	Actor190: cycl
+	Actor190: japan_chainlinkfence
 		Owner: Neutral
 		Location: 101,122
-	Actor191: cycl
+	Actor191: japan_chainlinkfence
 		Owner: Neutral
 		Location: 102,122
-	Actor192: cycl
+	Actor192: japan_chainlinkfence
 		Owner: Neutral
 		Location: 103,122
-	Actor193: cycl
+	Actor193: japan_chainlinkfence
 		Owner: Neutral
 		Location: 104,122
-	Actor194: cycl
+	Actor194: japan_chainlinkfence
 		Owner: Neutral
 		Location: 108,122
-	Actor195: cycl
+	Actor195: japan_chainlinkfence
 		Owner: Neutral
 		Location: 109,122
-	Actor196: cycl
+	Actor196: japan_chainlinkfence
 		Owner: Neutral
 		Location: 110,122
-	Actor197: cycl
+	Actor197: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,122
-	Actor198: cycl
+	Actor198: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,121
-	Actor199: cycl
+	Actor199: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,120
-	Actor200: cycl
+	Actor200: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,119
-	Actor201: cycl
+	Actor201: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,118
-	Actor202: cycl
+	Actor202: japan_chainlinkfence
 		Owner: Neutral
 		Location: 111,117
-	Actor203: cycl
+	Actor203: japan_chainlinkfence
 		Owner: Neutral
 		Location: 110,117
-	Actor204: cycl
+	Actor204: japan_chainlinkfence
 		Owner: Neutral
 		Location: 109,117
-	Actor205: cycl
+	Actor205: japan_chainlinkfence
 		Owner: Neutral
 		Location: 100,117
-	Actor206: cycl
+	Actor206: japan_chainlinkfence
 		Owner: Neutral
 		Location: 101,117
-	Actor207: cycl
+	Actor207: japan_chainlinkfence
 		Owner: Neutral
 		Location: 103,117
-	Actor208: cycl
+	Actor208: japan_chainlinkfence
 		Owner: Neutral
 		Location: 102,117
-	Actor209: cycl
+	Actor209: japan_chainlinkfence
 		Owner: Neutral
 		Location: 104,117
-	Actor210: cycl
+	Actor210: japan_chainlinkfence
 		Owner: Neutral
 		Location: 105,117
-	Actor211: cycl
+	Actor211: japan_chainlinkfence
 		Owner: Neutral
 		Location: 106,117
-	Actor212: cycl
+	Actor212: japan_chainlinkfence
 		Owner: Neutral
 		Location: 107,117
-	Actor213: cycl
+	Actor213: japan_chainlinkfence
 		Owner: Neutral
 		Location: 108,117
 	Actor57: fcom
 		Owner: Neutral
 		Location: 109,118
-	Actor107: hq.gdi
+	Actor107: td_gdi_communicationscenter
 		Owner: EnemyIdle
 		Location: 105,90
 	Actor8: nuke
 		Owner: EnemyIdle
 		Location: 105,84
-	Actor10: e1.nod
+	Actor10: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 44,88
 		SubCell: 3
-	Actor11: e1.nod
+	Actor11: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 46,88
 		SubCell: 3
-	Actor9: e1.nod
+	Actor9: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 59,87
 		SubCell: 3
-	Actor16: e1.nod
+	Actor16: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,87
 		SubCell: 3
-	Actor17: e1.nod
+	Actor17: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 19,74
 		SubCell: 3
-	Actor18: e1.nod
+	Actor18: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 20,76
 		SubCell: 3
-	Actor19: e1.nod
+	Actor19: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,75
 		SubCell: 3
-	Actor20: e1.nod
+	Actor20: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,76
@@ -752,10 +752,10 @@ Actors:
 	Actor50: silo
 		Owner: EnemyIdle
 		Location: 62,71
-	Actor26: fact.nod
+	Actor26: td_nod_constructionyard
 		Owner: EnemyIdle
 		Location: 46,73
-	Actor51: proc.nod
+	Actor51: td_nod_tiberiumrefinery
 		Owner: EnemyIdle
 		Location: 43,68
 	Actor52: split2
@@ -767,245 +767,245 @@ Actors:
 	Actor54: split2
 		Owner: Neutral
 		Location: 54,64
-	Actor55: cycl
+	Actor55: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,63
-	Actor56: cycl
+	Actor56: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,64
-	Actor69: cycl
+	Actor69: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,65
-	Actor71: cycl
+	Actor71: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,66
-	Actor106: cycl
+	Actor106: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,67
-	Actor214: cycl
+	Actor214: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,67
-	Actor215: cycl
+	Actor215: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 53,67
-	Actor216: cycl
+	Actor216: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 54,67
-	Actor217: cycl
+	Actor217: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 54,68
-	Actor218: cycl
+	Actor218: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,68
-	Actor219: cycl
+	Actor219: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 56,68
-	Actor220: cycl
+	Actor220: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 60,68
-	Actor221: cycl
+	Actor221: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 61,68
-	Actor222: cycl
+	Actor222: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,68
-	Actor223: cycl
+	Actor223: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 62,68
-	Actor224: cycl
+	Actor224: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 63,68
-	Actor225: cycl
+	Actor225: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 64,68
-	Actor226: cycl
+	Actor226: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 65,68
-	Actor227: cycl
+	Actor227: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 66,68
-	Actor228: cycl
+	Actor228: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 34,70
-	Actor229: cycl
+	Actor229: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 35,70
-	Actor230: cycl
+	Actor230: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 33,70
-	Actor231: cycl
+	Actor231: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 36,70
-	Actor232: cycl
+	Actor232: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 37,70
-	Actor233: cycl
+	Actor233: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,70
-	Actor234: cycl
+	Actor234: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 39,70
-	Actor240: cycl
+	Actor240: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,67
-	Actor236: cycl
+	Actor236: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,66
-	Actor237: cycl
+	Actor237: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,65
-	Actor238: cycl
+	Actor238: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,64
-	Actor239: cycl
+	Actor239: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,63
-	Actor241: cycl
+	Actor241: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,62
-	Actor27: afld
+	Actor27: td_nod_airstrip
 		Owner: EnemyIdle
 		Location: 45,77
-	Actor34: hpad.nod
+	Actor34: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 42,77
-	Actor23: hq.nod
+	Actor23: td_nod_communicationscenter
 		Owner: EnemyIdle
 		Location: 59,79
-	Actor22: hand
+	Actor22: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 59,75
-	Actor21: hand
+	Actor21: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 62,75
-	Actor235: e1.nod
+	Actor235: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 59,77
 		SubCell: 3
-	Actor244: e1.nod
+	Actor244: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,77
 		SubCell: 3
-	Actor245: e1.nod
+	Actor245: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 62,77
 		SubCell: 3
-	Actor246: e1.nod
+	Actor246: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,77
 		SubCell: 3
-	Actor247: e1.nod
+	Actor247: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,72
 		SubCell: 3
-	Actor248: e1.nod
+	Actor248: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 45,71
 		SubCell: 3
-	Actor249: e1.nod
+	Actor249: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 45,71
 		SubCell: 1
-	Actor250: e1.nod
+	Actor250: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 45,71
 		SubCell: 2
-	Actor251: e1.nod
+	Actor251: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 48,75
 		SubCell: 3
-	Actor252: e1.nod
+	Actor252: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 46,75
 		SubCell: 3
-	Actor253: e3.nod
+	Actor253: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,80
 		SubCell: 3
-	Actor254: e3.nod
+	Actor254: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,80
 		SubCell: 1
-	Actor255: e3.nod
+	Actor255: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,80
 		SubCell: 2
-	Actor256: e3.nod
+	Actor256: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,80
 		SubCell: 4
-	Actor257: e3.nod
+	Actor257: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,80
 		SubCell: 5
-	Actor258: e3.nod
+	Actor258: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,77
 		SubCell: 3
-	Actor259: e3.nod
+	Actor259: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,77
 		SubCell: 1
-	Actor260: e3.nod
+	Actor260: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,77
 		SubCell: 2
-	Actor261: e3.nod
+	Actor261: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,77
 		SubCell: 4
-	Actor262: e3.nod
+	Actor262: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,77
 		SubCell: 5
-	Actor274: schatchery
+	Actor274: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 12,13
-	Actor275: schatchery
+	Actor275: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 2,11
-	Actor277: scspawningpool
+	Actor277: zerg_spawningpool
 		Owner: Enemy2Idle
 		Location: 11,3
-	Actor279: schydraliskden
+	Actor279: zerg_hydraliskden
 		Owner: Enemy2Idle
 		Location: 3,15
-	Actor278: scevolutionchamber
+	Actor278: zerg_evolutionchamber
 		Owner: Enemy2Idle
 		Location: 11,9
-	Actor276: scextractor
+	Actor276: zerg_extractor
 		Owner: Enemy2Idle
 		Location: 9,5
-	Actor280: scextractor
+	Actor280: zerg_extractor
 		Owner: Enemy2Idle
 		Location: 3,8
 	Actor281: gmine
 		Owner: Neutral
 		Location: 3,3
-	Actor272: scsporecolony
+	Actor272: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 18,4
-	Actor271: scsporecolony
+	Actor271: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 17,1
 	Actor283: split2
@@ -1026,46 +1026,46 @@ Actors:
 	Actor288: split2
 		Owner: Neutral
 		Location: 119,46
-	Actor4: obli
+	Actor4: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 56,88
-	Actor5: obli
+	Actor5: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 56,87
-	Actor6: obli
+	Actor6: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 56,86
-	Actor12: obli
+	Actor12: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 52,88
-	Actor13: obli
+	Actor13: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 52,87
-	Actor14: obli
+	Actor14: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 52,86
-	Actor15: obli
+	Actor15: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 35,87
-	Actor24: obli
+	Actor24: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 35,85
-	Actor25: obli
+	Actor25: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 35,83
-	Actor45: obli
+	Actor45: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 24,81
-	Actor46: obli
+	Actor46: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 25,83
-	Actor289: obli
+	Actor289: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 25,85
-	Actor290: obli
+	Actor290: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 25,87
-	Actor43: obli
+	Actor43: td_nod_obeliskoflight
 		Owner: EnemyLasers
 		Location: 35,81
 	Actor28: nuk2
@@ -1368,37 +1368,37 @@ Actors:
 	Actor381: sbag
 		Owner: EnemyIdle
 		Location: 56,74
-	Actor382: e1.nod
+	Actor382: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 55,79
 		SubCell: 1
-	Actor383: e1.nod
+	Actor383: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 56,77
 		SubCell: 3
-	Actor384: e1.nod
+	Actor384: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 56,79
 		SubCell: 3
-	Actor385: e1.nod
+	Actor385: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 50,75
 		SubCell: 3
-	Actor386: e1.nod
+	Actor386: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 50,77
 		SubCell: 3
-	Actor387: e1.nod
+	Actor387: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 37,76
 		SubCell: 3
-	Actor388: e1.nod
+	Actor388: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 37,77
@@ -1415,63 +1415,63 @@ Actors:
 	TeamExit: waypoint
 		Owner: Neutral
 		Location: 130,0
-	Actor392: proc.nod
+	Actor392: td_nod_tiberiumrefinery
 		Owner: EnemyIdle
 		Location: 118,35
-	Actor393: hand
+	Actor393: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 115,36
-	Actor394: e1.nod
+	Actor394: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 115,39
 		SubCell: 3
 		Facing: 384
-	Actor395: e1.nod
+	Actor395: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 116,38
 		SubCell: 3
-	Actor396: e1.nod
+	Actor396: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 114,38
 		SubCell: 3
-	Actor397: e1.nod
+	Actor397: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 116,39
 		SubCell: 3
 		Facing: 384
-	Actor398: e1.nod
+	Actor398: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 115,38
 		SubCell: 3
-	Actor399: e1.nod
+	Actor399: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 115,39
 		SubCell: 1
 		Facing: 384
-	Actor400: e1.nod
+	Actor400: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 114,39
 		SubCell: 3
-	Actor401: e1.nod
+	Actor401: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 115,39
 		SubCell: 2
 		Facing: 384
-	Actor402: e1.nod
+	Actor402: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 116,39
 		SubCell: 1
 		Facing: 384
-	Actor403: e1.nod
+	Actor403: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 114,38
 		SubCell: 1
-	Actor404: e1.nod
+	Actor404: td_nod_minigunner
 		Owner: EnemyIdle
 		Location: 114,39
 		SubCell: 1
@@ -1479,67 +1479,67 @@ Actors:
 	Actor405: nuk2
 		Owner: EnemyIdle
 		Location: 116,33
-	Actor408: cycl
+	Actor408: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,36
-	Actor409: cycl
+	Actor409: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,35
-	Actor410: cycl
+	Actor410: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,34
-	Actor411: cycl
+	Actor411: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,33
-	Actor412: cycl
+	Actor412: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,32
-	Actor413: cycl
+	Actor413: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,32
-	Actor414: cycl
+	Actor414: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 116,32
-	Actor415: cycl
+	Actor415: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 115,32
-	Actor416: cycl
+	Actor416: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 117,32
-	Actor417: cycl
+	Actor417: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 119,32
-	Actor418: cycl
+	Actor418: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 120,32
-	Actor419: cycl
+	Actor419: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 118,32
-	Actor420: cycl
+	Actor420: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 121,32
-	Actor282: cycl
+	Actor282: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 122,32
-	Actor421: cycl
+	Actor421: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 123,32
-	Actor422: cycl
+	Actor422: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 124,32
-	Actor423: cycl
+	Actor423: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 126,32
-	Actor424: cycl
+	Actor424: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 125,32
-	Actor425: cycl
+	Actor425: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 127,32
-	Actor426: cycl
+	Actor426: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 128,32
-	Actor427: cycl
+	Actor427: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 129,32
 	Actor431: brik
@@ -1608,58 +1608,58 @@ Actors:
 	Actor451: brik
 		Owner: EnemyIdle
 		Location: 6,41
-	Actor453: hand
+	Actor453: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 56,75
-	Actor454: obli
+	Actor454: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 13,29
-	Actor455: obli
+	Actor455: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 18,29
-	Actor456: obli
+	Actor456: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 14,28
-	Actor457: obli
+	Actor457: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 17,28
-	Actor458: obli
+	Actor458: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 19,28
-	Actor459: obli
+	Actor459: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 12,28
-	Actor406: cycl
+	Actor406: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 117,40
-	Actor407: cycl
+	Actor407: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 116,40
-	Actor460: cycl
+	Actor460: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 115,40
-	Actor461: cycl
+	Actor461: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,40
-	Actor462: cycl
+	Actor462: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 114,40
-	Actor463: cycl
+	Actor463: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 113,39
-	Actor467: cycl
+	Actor467: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 125,40
-	Actor468: cycl
+	Actor468: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 127,40
-	Actor469: cycl
+	Actor469: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 126,40
-	Actor470: cycl
+	Actor470: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 128,40
-	Actor471: cycl
+	Actor471: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 129,40
 	Actor472: nuk2
@@ -1686,149 +1686,149 @@ Actors:
 	Actor479: nuk2
 		Owner: EnemyIdle
 		Location: 52,5
-	Actor480: e1.nod
+	Actor480: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,4
 		SubCell: 3
-	Actor481: e1.nod
+	Actor481: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 59,4
 		SubCell: 3
-	Actor482: e1.nod
+	Actor482: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,4
 		SubCell: 1
-	Actor483: e1.nod
+	Actor483: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,4
 		SubCell: 2
-	Actor484: e1.nod
+	Actor484: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,6
 		SubCell: 3
-	Actor485: e1.nod
+	Actor485: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,6
 		SubCell: 3
-	Actor486: e1.nod
+	Actor486: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,6
 		SubCell: 1
-	Actor487: e1.nod
+	Actor487: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,7
 		SubCell: 3
-	Actor488: e1.nod
+	Actor488: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,7
 		SubCell: 3
-	Actor489: e1.nod
+	Actor489: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,6
 		SubCell: 1
-	Actor490: e1.nod
+	Actor490: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,7
 		SubCell: 1
-	Actor491: e1.nod
+	Actor491: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,6
 		SubCell: 2
-	Actor492: e1.nod
+	Actor492: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,7
 		SubCell: 1
-	Actor493: e1.nod
+	Actor493: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 57,4
 		SubCell: 3
-	Actor494: e1.nod
+	Actor494: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 58,4
 		SubCell: 4
-	Actor495: proc.nod
+	Actor495: td_nod_tiberiumrefinery
 		Owner: EnemyIdle
 		Location: 13,41
-	Actor496: proc.nod
+	Actor496: td_nod_tiberiumrefinery
 		Owner: EnemyIdle
 		Location: 18,45
-	Actor497: fix.nod
+	Actor497: td_nod_repairfacility
 		Owner: EnemyIdle
 		Location: 21,32
-	Actor498: afld
+	Actor498: td_nod_airstrip
 		Owner: EnemyIdle
 		Location: 25,32
-	Actor499: afld
+	Actor499: td_nod_airstrip
 		Owner: EnemyIdle
 		Location: 30,32
-	Actor500: hpad.nod
+	Actor500: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 39,12
-	Actor501: hpad.nod
+	Actor501: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 41,12
-	Actor502: hpad.nod
+	Actor502: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 43,12
-	Actor503: hpad.nod
+	Actor503: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 39,16
-	Actor504: hpad.nod
+	Actor504: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 41,16
-	Actor505: hpad.nod
+	Actor505: td_nod_helipad
 		Owner: EnemyIdle
 		Location: 43,16
-	Actor507: hand
+	Actor507: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 40,23
-	Actor508: hand
+	Actor508: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 42,23
-	Actor509: fact.nod
+	Actor509: td_nod_constructionyard
 		Owner: EnemyIdle
 		Location: 44,31
-	Actor510: gun
+	Actor510: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 59,3
-	Actor511: gun
+	Actor511: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 58,3
-	Actor514: gun
+	Actor514: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 58,8
-	Actor515: gun
+	Actor515: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 57,8
 		TurretFacing: 224
-	Actor541: sam
+	Actor541: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 9,41
-	Actor542: sam
+	Actor542: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 10,42
-	Actor543: sam
+	Actor543: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 16,45
-	Actor544: afld
+	Actor544: td_nod_airstrip
 		Owner: EnemyIdle
 		Location: 25,39
-	Actor545: afld
+	Actor545: td_nod_airstrip
 		Owner: EnemyIdle
 		Location: 30,39
 	Actor564: nuke
@@ -1879,10 +1879,10 @@ Actors:
 	Actor579: nuke
 		Owner: EnemyIdle
 		Location: 57,24
-	Actor580: hq.nod
+	Actor580: td_nod_communicationscenter
 		Owner: EnemyIdle
 		Location: 49,35
-	Actor581: fix.nod
+	Actor581: td_nod_repairfacility
 		Owner: EnemyIdle
 		Location: 21,39
 	Actor582: nuk2
@@ -1903,575 +1903,575 @@ Actors:
 	Actor587: nuk2
 		Owner: EnemyIdle
 		Location: 39,5
-	Actor595: e1.nod
+	Actor595: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,94
 		SubCell: 3
-	Actor596: e1.nod
+	Actor596: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,95
 		SubCell: 3
-	Actor597: e1.nod
+	Actor597: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,96
 		SubCell: 3
-	Actor598: e1.nod
+	Actor598: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,95
 		SubCell: 3
-	Actor599: bggy
+	Actor599: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,110
-	Actor600: bggy
+	Actor600: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,111
-	Actor601: e1.nod
+	Actor601: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 44,19
 		SubCell: 3
-	Actor602: e1.nod
+	Actor602: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,19
 		SubCell: 3
-	Actor603: e1.nod
+	Actor603: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,19
 		SubCell: 3
-	Actor604: e1.nod
+	Actor604: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,19
 		SubCell: 3
-	Actor605: e1.nod
+	Actor605: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,19
 		SubCell: 3
-	Actor606: e1.nod
+	Actor606: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,19
 		SubCell: 3
-	Actor607: e1.nod
+	Actor607: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,15
 		SubCell: 3
-	Actor608: e1.nod
+	Actor608: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,26
 		SubCell: 3
-	Actor609: e1.nod
+	Actor609: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,26
 		SubCell: 3
-	Actor610: e1.nod
+	Actor610: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,26
 		SubCell: 1
-	Actor611: e1.nod
+	Actor611: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,26
 		SubCell: 2
-	Actor612: e1.nod
+	Actor612: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,26
 		SubCell: 4
-	Actor613: e1.nod
+	Actor613: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,26
 		SubCell: 1
-	Actor614: e1.nod
+	Actor614: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,26
 		SubCell: 2
-	Actor615: e1.nod
+	Actor615: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,26
 		SubCell: 4
-	Actor616: e1.nod
+	Actor616: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 43,26
 		SubCell: 5
-	Actor617: e1.nod
+	Actor617: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 42,26
 		SubCell: 5
-	Actor618: e1.nod
+	Actor618: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,26
 		SubCell: 3
-	Actor619: e1.nod
+	Actor619: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,26
 		SubCell: 1
-	Actor620: e1.nod
+	Actor620: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,26
 		SubCell: 2
-	Actor621: e1.nod
+	Actor621: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,26
 		SubCell: 4
-	Actor622: e1.nod
+	Actor622: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,26
 		SubCell: 5
-	Actor623: e1.nod
+	Actor623: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,26
 		SubCell: 3
-	Actor624: e1.nod
+	Actor624: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,26
 		SubCell: 1
-	Actor625: e1.nod
+	Actor625: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,26
 		SubCell: 2
-	Actor626: e1.nod
+	Actor626: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,26
 		SubCell: 4
-	Actor627: e3.nod
+	Actor627: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 38,26
 		SubCell: 3
-	Actor628: e3.nod
+	Actor628: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 38,26
 		SubCell: 1
-	Actor629: e3.nod
+	Actor629: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 38,26
 		SubCell: 2
-	Actor630: e3.nod
+	Actor630: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 38,26
 		SubCell: 4
-	Actor631: e3.nod
+	Actor631: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 38,26
 		SubCell: 5
-	Actor632: e3.nod
+	Actor632: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,26
 		SubCell: 3
-	Actor633: e3.nod
+	Actor633: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,26
 		SubCell: 1
-	Actor634: e3.nod
+	Actor634: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,26
 		SubCell: 2
-	Actor635: e3.nod
+	Actor635: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,26
 		SubCell: 4
-	Actor636: e3.nod
+	Actor636: td_nod_rocketsoldier
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 39,26
 		SubCell: 5
-	Actor637: e4
+	Actor637: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,27
 		SubCell: 3
-	Actor638: e4
+	Actor638: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,27
 		SubCell: 1
-	Actor639: e4
+	Actor639: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,27
 		SubCell: 2
-	Actor640: e4
+	Actor640: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,27
 		SubCell: 4
-	Actor641: e4
+	Actor641: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 41,27
 		SubCell: 5
-	Actor642: e4
+	Actor642: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,27
 		SubCell: 3
-	Actor643: e4
+	Actor643: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,27
 		SubCell: 1
-	Actor644: e4
+	Actor644: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,27
 		SubCell: 2
-	Actor645: e4
+	Actor645: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,27
 		SubCell: 4
-	Actor646: e4
+	Actor646: td_nod_flamethrower
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 40,27
 		SubCell: 5
-	Actor649: e1.nod
+	Actor649: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 27,35
 		SubCell: 3
-	Actor650: e1.nod
+	Actor650: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 28,35
 		SubCell: 3
-	Actor651: e1.nod
+	Actor651: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 8,39
 		SubCell: 3
-	Actor653: bike
+	Actor653: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,36
-	Actor655: bike
+	Actor655: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,36
-	Actor656: bike
+	Actor656: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,37
-	Actor657: bike
+	Actor657: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,37
-	Actor658: bike
+	Actor658: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,37
-	Actor659: bggy
+	Actor659: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 26,36
-	Actor660: bggy
+	Actor660: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 27,36
-	Actor661: bggy
+	Actor661: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 26,37
-	Actor662: bggy
+	Actor662: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 27,37
-	Actor663: bggy
+	Actor663: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 25,36
-	Actor664: bggy
+	Actor664: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 25,37
-	Actor665: bggy
+	Actor665: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 24,36
-	Actor666: bggy
+	Actor666: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 24,37
-	Actor667: ltnk
+	Actor667: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,29
-	Actor668: ltnk
+	Actor668: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,29
-	Actor669: ltnk
+	Actor669: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 30,29
-	Actor670: ltnk
+	Actor670: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 30,28
-	Actor671: ltnk
+	Actor671: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,28
-	Actor672: ltnk
+	Actor672: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,28
-	Actor673: ltnk
+	Actor673: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,27
-	Actor674: ltnk
+	Actor674: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,27
-	Actor675: ltnk
+	Actor675: td_nod_lighttank
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 30,27
-	Actor676: e1.nod
+	Actor676: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,42
 		SubCell: 3
-	Actor677: e1.nod
+	Actor677: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,42
 		SubCell: 3
-	Actor678: e1.nod
+	Actor678: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 30,42
 		SubCell: 3
-	Actor679: e1.nod
+	Actor679: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,42
 		SubCell: 3
-	Actor680: e1.nod
+	Actor680: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 30,43
 		SubCell: 3
-	Actor681: e1.nod
+	Actor681: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 31,43
 		SubCell: 3
-	Actor682: e1.nod
+	Actor682: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,43
 		SubCell: 3
-	Actor683: e1.nod
+	Actor683: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 33,43
 		SubCell: 3
-	Actor685: sam
+	Actor685: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 56,1
-	Actor686: bike
+	Actor686: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,33
-	Actor687: bike
+	Actor687: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,33
-	Actor688: bike
+	Actor688: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 62,33
-	Actor689: bike
+	Actor689: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,34
-	Actor690: bike
+	Actor690: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,34
-	Actor691: bike
+	Actor691: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 62,34
-	Actor692: bike
+	Actor692: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,35
-	Actor693: bike
+	Actor693: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,35
-	Actor694: bike
+	Actor694: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 62,35
-	Actor695: bike
+	Actor695: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 60,36
-	Actor696: bike
+	Actor696: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 61,36
-	Actor697: bike
+	Actor697: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 62,36
-	Actor698: bike
+	Actor698: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,36
-	Actor699: bike
+	Actor699: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,35
-	Actor700: bike
+	Actor700: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,34
-	Actor701: bike
+	Actor701: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 63,33
-	Actor702: bike
+	Actor702: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 64,33
-	Actor703: bike
+	Actor703: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 64,34
-	Actor704: bike
+	Actor704: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 64,35
-	Actor705: bike
+	Actor705: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 64,36
-	Actor706: bike
+	Actor706: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 65,36
-	Actor707: bike
+	Actor707: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 65,35
-	Actor708: bike
+	Actor708: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 65,34
-	Actor709: bike
+	Actor709: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 65,33
-	Actor710: schatchery
+	Actor710: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 14,8
-	Actor711: schatchery
+	Actor711: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 16,5
-	Actor712: schatchery
+	Actor712: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 18,10
-	Actor713: schatchery
+	Actor713: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 8,14
-	Actor714: schatchery
+	Actor714: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 3,17
-	Actor719: schatchery
+	Actor719: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 15,12
 	TeamEnter: waypoint
 		Owner: Neutral
 		Location: 128,1
-	Actor652: e1.nod
+	Actor652: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 8,41
 		SubCell: 3
-	Actor517: cycl
+	Actor517: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 11,40
-	Actor563: cycl
+	Actor563: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 12,40
-	Actor588: cycl
+	Actor588: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 13,40
-	Actor589: cycl
+	Actor589: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 14,40
-	Actor590: cycl
+	Actor590: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 15,40
-	Actor591: cycl
+	Actor591: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 16,40
-	Actor592: cycl
+	Actor592: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 16,41
-	Actor593: cycl
+	Actor593: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 17,41
-	Actor594: cycl
+	Actor594: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 17,42
-	Actor724: cycl
+	Actor724: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,46
-	Actor725: cycl
+	Actor725: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,45
-	Actor726: cycl
+	Actor726: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,44
-	Actor727: cycl
+	Actor727: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,43
-	Actor728: cycl
+	Actor728: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,47
-	Actor729: cycl
+	Actor729: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 21,48
 	ConTruck: mcv.gdi
@@ -2487,21 +2487,21 @@ Actors:
 	Actor452: flare
 		Owner: Neutral
 		Location: 95,6
-	Actor428: gun
+	Actor428: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 57,3
-	Actor429: gun
+	Actor429: td_nod_gunturret
 		Owner: EnemyIdle
 		Location: 56,8
-	Actor654: bike
+	Actor654: td_nod_reconbike
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 32,36
-	Actor7: bggy
+	Actor7: td_nod_buggy
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 5,111
-	Actor184: barr
+	Actor184: ra1_soviet_barracks
 		Owner: Neutral
 		Location: 106,118
 	CamZerg: camera
@@ -2535,91 +2535,91 @@ Actors:
 	ZergPoint: waypoint
 		Owner: Neutral
 		Location: 28,4
-	Actor263: schatchery
+	Actor263: zerg_hatchery
 		Owner: Enemy2Idle
 		Location: 7,7
-	Actor264: scsunkencolony
+	Actor264: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 11,18
-	Actor265: scsunkencolony
+	Actor265: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 12,17
-	Actor266: scsunkencolony
+	Actor266: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 14,16
-	Actor267: scsunkencolony
+	Actor267: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 16,16
-	Actor268: scsunkencolony
+	Actor268: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 18,17
-	Actor269: scsporecolony
+	Actor269: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 19,13
-	Actor270: scsporecolony
+	Actor270: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 19,8
-	Actor273: scsporecolony
+	Actor273: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 6,14
-	Actor513: scsporecolony
+	Actor513: zerg_sporecolony
 		Owner: Enemy2Idle
 		Location: 9,12
-	Actor516: scsunkencolony
+	Actor516: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 13,11
-	Actor556: scsunkencolony
+	Actor556: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 9,10
-	Actor557: scsunkencolony
+	Actor557: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 7,12
-	Actor558: scsunkencolony
+	Actor558: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 13,6
-	Actor559: scsunkencolony
+	Actor559: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 17,8
-	Actor560: scsunkencolony
+	Actor560: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 8,17
-	Actor561: scsunkencolony
+	Actor561: zerg_sunkencolony_2
 		Owner: Enemy2Idle
 		Location: 6,16
 	ZergFinal: scsunkencolony
 		Owner: Enemy2Idle
 		Location: 1,1
-	Actor512: obli
+	Actor512: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 50,47
-	Actor549: obli
+	Actor549: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 43,47
-	Actor553: obli
+	Actor553: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 45,45
-	Actor552: obli
+	Actor552: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 44,46
-	Actor551: obli
+	Actor551: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 45,46
-	Actor548: obli
+	Actor548: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 49,45
-	Actor546: obli
+	Actor546: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 51,47
-	Actor465: cycl
+	Actor465: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 124,40
-	Actor466: cycl
+	Actor466: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 123,40
-	Actor555: obli
+	Actor555: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 49,46
-	Actor547: obli
+	Actor547: td_nod_obeliskoflight
 		Owner: EnemyIdle
 		Location: 50,46
 	Actor464: v01
@@ -5166,22 +5166,22 @@ Actors:
 	Actor1606: t12
 		Owner: Neutral
 		Location: 19,58
-	Actor1686: hand
+	Actor1686: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 44,23
-	Actor1693: hand
+	Actor1693: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 46,23
-	Actor1694: hand
+	Actor1694: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 39,20
-	Actor1695: hand
+	Actor1695: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 41,20
-	Actor1696: hand
+	Actor1696: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 43,20
-	Actor1697: hand
+	Actor1697: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 45,20
 	Actor1698: sbag
@@ -5229,274 +5229,274 @@ Actors:
 	Actor1712: sbag
 		Owner: EnemyIdle
 		Location: 49,86
-	Actor721: cycl
+	Actor721: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 53,1
-	Actor730: cycl
+	Actor730: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,1
-	Actor731: cycl
+	Actor731: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,1
-	Actor732: cycl
+	Actor732: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 50,1
-	Actor733: cycl
+	Actor733: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 49,1
-	Actor734: cycl
+	Actor734: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 48,1
-	Actor735: cycl
+	Actor735: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 47,1
-	Actor736: cycl
+	Actor736: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 46,1
-	Actor737: cycl
+	Actor737: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 45,1
-	Actor738: cycl
+	Actor738: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 44,1
-	Actor739: cycl
+	Actor739: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 43,1
-	Actor740: cycl
+	Actor740: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,1
-	Actor741: cycl
+	Actor741: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 41,1
-	Actor742: cycl
+	Actor742: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 40,1
-	Actor743: cycl
+	Actor743: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 39,1
-	Actor744: cycl
+	Actor744: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,1
-	Actor745: cycl
+	Actor745: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,2
-	Actor746: cycl
+	Actor746: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,3
-	Actor747: cycl
+	Actor747: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,4
-	Actor748: cycl
+	Actor748: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,5
-	Actor749: cycl
+	Actor749: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,6
-	Actor750: cycl
+	Actor750: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,7
-	Actor1713: cycl
+	Actor1713: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,1
-	Actor1714: cycl
+	Actor1714: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,2
-	Actor1715: cycl
+	Actor1715: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,3
-	Actor1716: cycl
+	Actor1716: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,4
-	Actor751: cycl
+	Actor751: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 50,11
-	Actor752: cycl
+	Actor752: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,11
-	Actor754: cycl
+	Actor754: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,11
-	Actor755: cycl
+	Actor755: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 53,11
-	Actor756: cycl
+	Actor756: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 54,11
-	Actor757: cycl
+	Actor757: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,11
-	Actor758: cycl
+	Actor758: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 57,11
-	Actor759: cycl
+	Actor759: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 56,11
-	Actor760: cycl
+	Actor760: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 58,11
-	Actor1655: cycl
+	Actor1655: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,11
-	Actor753: cycl
+	Actor753: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,12
-	Actor1656: cycl
+	Actor1656: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,13
-	Actor1657: cycl
+	Actor1657: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,14
-	Actor1658: cycl
+	Actor1658: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,15
-	Actor1659: cycl
+	Actor1659: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,16
-	Actor1660: cycl
+	Actor1660: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,17
-	Actor1661: cycl
+	Actor1661: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,18
-	Actor1662: cycl
+	Actor1662: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,19
-	Actor1663: cycl
+	Actor1663: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,20
-	Actor1664: cycl
+	Actor1664: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,21
-	Actor1665: cycl
+	Actor1665: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,22
-	Actor1666: cycl
+	Actor1666: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,23
-	Actor1667: cycl
+	Actor1667: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,24
-	Actor1668: cycl
+	Actor1668: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,25
-	Actor1669: cycl
+	Actor1669: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,26
-	Actor1670: cycl
+	Actor1670: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,27
-	Actor1671: cycl
+	Actor1671: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 59,28
-	Actor1672: cycl
+	Actor1672: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 50,28
-	Actor1673: cycl
+	Actor1673: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,28
-	Actor1674: cycl
+	Actor1674: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 53,28
-	Actor1675: cycl
+	Actor1675: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,28
-	Actor1676: cycl
+	Actor1676: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 54,28
-	Actor1677: cycl
+	Actor1677: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 56,28
-	Actor1678: cycl
+	Actor1678: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 57,28
-	Actor1679: cycl
+	Actor1679: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 58,28
-	Actor1680: cycl
+	Actor1680: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 55,28
-	Actor1651: cycl
+	Actor1651: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,20
-	Actor1652: cycl
+	Actor1652: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,21
-	Actor1653: cycl
+	Actor1653: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,22
-	Actor1654: cycl
+	Actor1654: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,23
-	Actor1648: cycl
+	Actor1648: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,18
-	Actor1649: cycl
+	Actor1649: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,17
-	Actor770: cycl
+	Actor770: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,11
-	Actor771: cycl
+	Actor771: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,12
-	Actor772: cycl
+	Actor772: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,13
-	Actor773: cycl
+	Actor773: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,14
-	Actor761: cycl
+	Actor761: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 39,11
-	Actor762: cycl
+	Actor762: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 40,11
-	Actor763: cycl
+	Actor763: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,11
-	Actor764: cycl
+	Actor764: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 41,11
-	Actor765: cycl
+	Actor765: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 43,11
-	Actor766: cycl
+	Actor766: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 45,11
-	Actor767: cycl
+	Actor767: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 44,11
-	Actor768: cycl
+	Actor768: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 46,11
-	Actor506: hand
+	Actor506: td_nod_handofnod
 		Owner: EnemyIdle
 		Location: 38,23
-	Actor1681: cycl
+	Actor1681: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 46,28
-	Actor1682: cycl
+	Actor1682: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 45,28
-	Actor1683: cycl
+	Actor1683: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 44,28
-	Actor1684: cycl
+	Actor1684: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 43,28
-	Actor1685: cycl
+	Actor1685: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,28
-	Actor1687: cycl
+	Actor1687: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 40,28
-	Actor1688: cycl
+	Actor1688: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 41,28
-	Actor1689: cycl
+	Actor1689: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 39,28
-	Actor1690: cycl
+	Actor1690: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 38,28
 	Actor769: brik
@@ -5553,12 +5553,12 @@ Actors:
 	Actor1631: brik
 		Owner: EnemyIdle
 		Location: 19,33
-	Actor648: e1.nod
+	Actor648: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 34,33
 		SubCell: 2
-	Actor647: e1.nod
+	Actor647: td_nod_minigunner
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 34,34
@@ -5611,169 +5611,169 @@ Actors:
 	Actor1646: brik
 		Owner: EnemyIdle
 		Location: 19,37
-	Actor720: cycl
+	Actor720: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 17,43
-	Actor722: cycl
+	Actor722: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 18,43
-	Actor723: cycl
+	Actor723: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 20,43
-	Actor1650: cycl
+	Actor1650: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 46,30
-	Actor1691: cycl
+	Actor1691: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 44,30
-	Actor1692: cycl
+	Actor1692: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 45,30
-	Actor1717: cycl
+	Actor1717: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 43,30
-	Actor1718: cycl
+	Actor1718: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,30
-	Actor1719: cycl
+	Actor1719: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,31
-	Actor1720: cycl
+	Actor1720: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,32
-	Actor1721: cycl
+	Actor1721: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,33
-	Actor1722: cycl
+	Actor1722: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,34
-	Actor1723: cycl
+	Actor1723: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,35
-	Actor1724: cycl
+	Actor1724: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 50,38
-	Actor1725: cycl
+	Actor1725: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,38
-	Actor1726: cycl
+	Actor1726: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,38
-	Actor1727: cycl
+	Actor1727: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,37
-	Actor1728: cycl
+	Actor1728: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,36
-	Actor1729: cycl
+	Actor1729: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,35
-	Actor1730: cycl
+	Actor1730: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,34
-	Actor1731: cycl
+	Actor1731: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,33
-	Actor1732: cycl
+	Actor1732: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,32
-	Actor1733: cycl
+	Actor1733: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,31
-	Actor1734: cycl
+	Actor1734: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 52,30
-	Actor1735: cycl
+	Actor1735: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 51,30
-	Actor1736: cycl
+	Actor1736: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 50,30
-	Actor1647: cycl
+	Actor1647: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,36
-	Actor1737: cycl
+	Actor1737: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,37
-	Actor1738: cycl
+	Actor1738: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 46,38
-	Actor1739: cycl
+	Actor1739: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 45,38
-	Actor1740: cycl
+	Actor1740: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 44,38
-	Actor1741: cycl
+	Actor1741: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 43,38
-	Actor1742: cycl
+	Actor1742: japan_chainlinkfence
 		Owner: EnemyIdle
 		Location: 42,38
-	Actor534: sam
+	Actor534: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 53,44
-	Actor533: sam
+	Actor533: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 56,43
-	Actor531: sam
+	Actor531: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 61,40
-	Actor532: sam
+	Actor532: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 59,41
-	Actor529: sam
+	Actor529: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 63,39
-	Actor530: sam
+	Actor530: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 65,38
-	Actor528: sam
+	Actor528: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 66,36
-	Actor527: sam
+	Actor527: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 66,34
-	Actor525: sam
+	Actor525: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 66,31
-	Actor524: sam
+	Actor524: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 64,28
-	Actor522: sam
+	Actor522: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 61,24
-	Actor523: sam
+	Actor523: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 62,26
-	Actor521: sam
+	Actor521: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 61,21
-	Actor520: sam
+	Actor520: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 60,17
-	Actor519: sam
+	Actor519: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 60,15
-	Actor518: sam
+	Actor518: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 57,10
-	Actor540: sam
+	Actor540: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 19,49
-	Actor538: sam
+	Actor538: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 24,46
-	Actor539: sam
+	Actor539: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 22,47
-	Actor537: sam
+	Actor537: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 27,45
-	Actor536: sam
+	Actor536: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 30,45
-	Actor535: sam
+	Actor535: td_nod_samsite
 		Owner: EnemyIdle
 		Location: 33,45
 	Actor526: boxes05

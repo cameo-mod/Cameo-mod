@@ -716,8 +716,7 @@ wc2demolitionsquadExplode:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 
 # 8-16 WC2 damage. 0 Base, 16 Pierce.
@@ -781,8 +780,7 @@ wc2gryphonFireVisible:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect2: CreateEffect
@@ -899,8 +897,7 @@ wc2mageFireballVisible:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
 
@@ -1990,8 +1987,7 @@ wc2dragonFireVisible:
 	-Warhead@Effect1:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 		ValidTargets: Ground, Water, Air
 
@@ -2274,8 +2270,7 @@ wc2submarineFire:
 			Heavy: 20
 			Concrete: 40
 	Warhead@2Eff: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 
 wc2tornadoTest:
@@ -2357,14 +2352,12 @@ wc2daemonFire:
 
 wc2visualexplode:
 	Warhead@2Eff: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		ImpactSounds: explode.aud
 
 wc2buildingexplode:
 	Warhead@Effect: CreateEffect
-		Image: wc2_building_collapse
-		Explosions: idle
+		Explosions: wc2_building_collapse
 		Delay: 1
 		ImpactActors: false
 	Warhead@2Smu: LeaveSmudge

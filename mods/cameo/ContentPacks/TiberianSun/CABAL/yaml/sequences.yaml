@@ -516,6 +516,40 @@ cabal_coredefender:
 	icon:
 		Filename: cabal_coredefender_icon.png
 
+cabal_avatar:
+	Defaults:
+		Filename: cabal_coredefender_tsdefender.shp
+		Scale: 0.625
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		ShadowStart: 168
+	stand2:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		ShadowStart: 168
+	run:
+		Filename: cabal_coredefender_tsdefender.shp
+		Start: 8
+		Length: 8
+		Facings: -8
+		ShadowStart: 176
+		Tick: 100
+	attack:
+		Filename: cabal_coredefender_tsdefender.shp
+		Facings: -8
+		Length: 12
+		Start: 72
+		ShadowStart: 168
+	die:
+		Filename:  cabal_coredefender_defd_exp.shp
+		Length: *
+		Tick: 100
+	icon:
+		Filename: cabal_avatar_icon.png
+
 cabal_cyborgreaper:
 	Defaults:
 		Filename: cabal_cyborgreaper.shp
@@ -2137,45 +2171,9 @@ cabal_plasmabullet:
 		Length: 10
 		Tick: 30
 
-cabal_dissolveimpact:
-	idle:
-		Filename: cabal_dissolveimpact.png
-		Length: 10
-		Tick: 40
-
-cabal_laserimpact_s:
-	idle:
-		Filename: cabal_laserimpact_s.png
-		Length: 8
-		Tick: 30
-
-cabal_laserimpact_m:
-	idle:
-		Filename: cabal_laserimpact_m.png
-		Length: 10
-		Tick: 30
-
-cabal_laserimpact_l:
-	idle:
-		Filename: cabal_laserimpact_l.png
-		Length: 12
-		Tick: 30
-
-cabal_missileexplosion:
-	idle:
-		Filename: cabal_missileexplosion.png
-		Length: 12
-		Tick: 30
-
 cabal_greenplasma:
 	idle:
 		Filename: cabal_greenplasma.png
-		Length: 10
-		Tick: 30
-
-cabal_greenplasmaimpact:
-	idle:
-		Filename: cabal_greenplasmaimpact.png
 		Length: 10
 		Tick: 30
 

@@ -131,8 +131,8 @@ World:
 
 ^TSInfantry:
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		PlayerPalette: playerra2
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 		DeathTypes:
 			DefaultDeath: 1
 			BulletDeath: 2
@@ -1442,7 +1442,7 @@ cabal_legion_backup:
 cabal_avatar_backup:
 	Inherits: cabal_avatar
 	Valued:
-		Cost: 2250
+		Cost: 7500
 	Tooltip:
 		Name: Avatar (Backup Mode)
 	Buildable:
@@ -1455,18 +1455,18 @@ cabal_avatar_backup:
 		TurnSpeed: 0
 		Speed: 0
 	Health:
-		HP: 200000
+		HP: 2500000
 	Repairable:
 		HpPerStep: 5000
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
-		Image: cabal_manticore
-		PlayerPalette: player_rgba
+		Image: cabal_avatar
+		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:
-		MoveSequence: walk
+		MoveSequence: run
 		ValidMovementTypes: Horizontal, Turn
 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:

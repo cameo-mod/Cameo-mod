@@ -266,6 +266,46 @@ factions, everything through the balance workbook._
   (0 violations). Template override names preserved; suffixed variants
   (@Effect2, @EffectAir2, etc.) recognized as canonical.
 
+### CE2. CreateEffect Image field audit + explosion sequence consolidation
+- [x] **CABAL CreateEffect Image: removal** (2026-07-15): Removed explicit
+  `Image:` fields from all CABAL `CreateEffect` warheads in
+  `CABAL/yaml/weapons.yaml`. All impact animations now use the default
+  `explosion` image (engine default when `Image:` is omitted).
+- [x] **CABAL impact animations moved to misc.yaml** (2026-07-15):
+  `cabal_greenplasmaimpact`, `cabal_missileexplosion`,
+  `cabal_laserimpact_s`, `cabal_laserimpact_m`, `cabal_laserimpact_l`,
+  `cabal_dissolveimpact` moved from `CABAL/yaml/sequences.yaml` to
+  `sequences/misc.yaml` under the `explosion:` key. Removed the old
+  top-level definitions from the CABAL sequences file.
+- [x] **Mod-wide CE-only Image: fixes** (2026-07-15): Moved CE-only
+  images `ra2corpse` (death_a–death_f) and `wc2_building_collapse` under
+  `explosion:` in misc.yaml; removed `Image:` from 9 CE warheads across
+  `weapons/redalert2.yaml` and `weapons/warcraft2.yaml`. Removed
+  redundant `Image: explosion` from `weapons/halloween.yaml`. Shared
+  images (used by both CE and other traits) keep their `Image:` field
+  per the shared-image exception in DESIGN.md §8.
+- [x] **DESIGN.md updated** (2026-07-15): Added rules to §8 documenting
+  that `CreateEffect` must never carry `Image:` (CE-only), the
+  shared-image exception, and that all impact animations must live in
+  `misc.yaml` under `explosion:`.
+- [x] **Audit tooling** (2026-07-15): `tools/audit_createeffect_image.py`
+  flags all CE `Image:` fields; `tools/audit_ce_image_usage.py`
+  classifies CE-only vs shared.
+- [ ] **Future**: If a shared image's non-CE references are ever removed,
+  it becomes CE-only and should be moved under `explosion:` at that time.
+
+### CE3. Map actor renaming (delivery + deliverycoop)
+- [x] **Actor rename in new maps** (2026-07-15): Commit
+  `e6ad4ded5fa08c6b41fde63a256f2f5c15917241` added new maps
+  (`delivery/map.yaml`, `deliverycoop/map.yaml`) with old compressed
+  actor names. All 2257 actor references in both map.yaml files and 90
+  string references in lua scripts renamed to new §1-compliant ids using
+  `tools/rename_map_actors.py` with the `tools/rename/rename_map_*.yaml`
+  mapping files. Terrain decorations (t01, v01, boxes01, brik, etc.) left
+  as-is since they still exist with those names.
+- [x] **DESIGN.md updated** (2026-07-15): Added §14 documenting map actor
+  naming rules and the rename procedure.
+
 ---
 
 ## Dune factions (D2K) — split + naming + upgrades (P2)
@@ -325,6 +365,24 @@ factions, everything through the balance workbook._
 
 ## Standing rules recorded (see DESIGN.md / memory)
 
+- **CreateEffect Image: field** (DESIGN §8, 2026-07-15): a weapon
+  `CreateEffect` must NEVER carry an `Image:` field — omit it and the
+  engine defaults to the `explosion` image in `misc.yaml`. All impact
+  animations live as sub-sequences under `explosion:` in
+  `sequences/misc.yaml`, never in faction sequence files.
+- **Map actor naming** (DESIGN §14, 2026-07-15): maps must use renamed
+  actor ids, not old compressed names. Rename maps in
+  `tools/rename/rename_map_*.yaml` are the source of truth. Lua scripts
+  must also be updated. Tool: `tools/rename_map_actors.py`.
+- **No weapon inheritance between units** (DESIGN §15, reinforced
+  2026-07-15): unit-unique weapons must never `Inherits:` from another
+  unit's weapon. Copy stats or use a shared `^`-prefixed template. This
+  was the root cause of the CreateEffect crash class.
+- **CABAL Avatar = 50% Core Defender** (DESIGN §15, 2026-07-15): the
+  avatar is a 50%-scaled copy of the Core Defender, not a spider.
+- **CABAL husk recovery** (DESIGN §15, 2026-07-15): backup husks are
+  immobile, high-HP, repairable, auto-reanimate via
+  GrantPeriodicCondition + TransformOnCondition.
 - **Effect + sound are always defined together** (DESIGN §8): every new
   impact/projectile effect gets BOTH a new effect sprite AND a new Report/
   ImpactSound — never fall back to the template's default for either.
