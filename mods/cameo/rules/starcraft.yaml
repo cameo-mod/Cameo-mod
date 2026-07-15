@@ -172,6 +172,24 @@ World:
 	ProductionTimeMultiplier@speedup:
 		Multiplier: 75
 
+^AlienRankDecoration:
+	WithDecoration@RANK-1:
+		Image: alienrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: alienrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: alienrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: alienrank
+		Sequence: rank-elite
+		Palette: greyscale
+
 ####################################################################################################
 #		Terran Upgrade Inherits
 ####################################################################################################
@@ -920,6 +938,7 @@ terran_bunker:
 	Inherits: ^Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -982,6 +1001,7 @@ terran_missileturret:
 	Inherits@Template: ^AntiAirDefenseTemplate
 	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x2Shape
 	Inherits@POWERDOWN: ^DisableOnPowerDown
@@ -1039,6 +1059,7 @@ terran_sentinel:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
 	Inherits@EMP: ^TurretEMP
@@ -1099,6 +1120,7 @@ terran_sentinel:
 SCSENTINELM:
 	Inherits: SCCOMMANDCENTERM
 	Inherits@EXPERIENCE: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
 	Tooltip:
 		Name: Sentinel
@@ -1662,6 +1684,7 @@ protoss_photoncannon:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@POWERDOWN: ^DisableOnPowerDown
@@ -2486,6 +2509,7 @@ zerg_creepcolony:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -3390,6 +3414,7 @@ terran_marine:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@announce: ^AnnounceOnBuild
@@ -3443,6 +3468,7 @@ terran_reaper:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiBuil: ^PrioritizeBuilding
@@ -3514,6 +3540,7 @@ terran_madcap:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@announce: ^AnnounceOnBuild
@@ -3569,6 +3596,7 @@ terran_firebat:
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@stim: ^Stimpackable
@@ -3634,6 +3662,7 @@ terran_harakan:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@FireInfantry: ^FireInfantry
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@stim: ^Stimpackable
@@ -3697,6 +3726,7 @@ terran_marauder:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@stim: ^Stimpackable
@@ -3746,6 +3776,7 @@ terran_ghost:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@cloak: ^CloakedVehicle
@@ -3816,6 +3847,7 @@ terran_specter:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@announce: ^AnnounceOnBuild
@@ -3951,6 +3983,7 @@ terran_jimraynor:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@stim: ^Stimpackable
@@ -4012,6 +4045,7 @@ terran_vulture:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -4168,6 +4202,7 @@ terran_siegetank:
 	Inherits@ArtilleryBuffs: ^ArtilleryBuffs
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@Crushes: ^VehicleCrusher
@@ -4291,6 +4326,7 @@ terran_matador:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@FireActor: ^FireActor
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@announce: ^AnnounceOnBuild
@@ -4406,6 +4442,7 @@ terran_cyclone:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP
@@ -4484,6 +4521,7 @@ terran_goliath:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -4557,6 +4595,7 @@ terran_goliathmk2:
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -4629,6 +4668,7 @@ terran_warhound:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -4754,6 +4794,7 @@ terran_wraith:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -4838,6 +4879,7 @@ terran_sundog:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -4925,6 +4967,7 @@ terran_valkyrie:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -4986,6 +5029,7 @@ terran_wyvern:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -5044,6 +5088,7 @@ terran_raven:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Inherits@CLOAK: ^CloakedAircraft
@@ -5192,6 +5237,7 @@ terran_pythean:
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@cargo: ^CargoAircraft
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@eject: ^AircraftEjectOnDeath
@@ -5385,6 +5431,7 @@ terran_battlecruiser:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -5542,6 +5589,7 @@ terran_phobos:
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -5699,6 +5747,7 @@ SCWRAITHDRONE:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@CLOAK: ^CloakedAircraft
 	Inherits@armor: ^TerranShipWeaponUpgrades
@@ -5763,6 +5812,7 @@ terran_sciencevessel:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeLarge
 	Inherits@announce: ^AnnounceGlobal
@@ -6472,6 +6522,7 @@ protoss_zealot:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
@@ -6512,6 +6563,7 @@ protoss_adept:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@bot: ^BotAutoDeployTimedAbility
@@ -6626,6 +6678,7 @@ protoss_dragoon:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -6686,6 +6739,7 @@ protoss_manifold:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
@@ -6760,6 +6814,7 @@ protoss_analogue:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@AutoRepair: ^PrioritizeRepair
@@ -6841,6 +6896,7 @@ protoss_idol:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
@@ -6938,6 +6994,7 @@ protoss_hightemplar:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -7041,6 +7098,7 @@ protoss_darktemplar:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@cloak: ^CloakedVehicle
@@ -7155,6 +7213,7 @@ protoss_reaver:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -7305,6 +7364,7 @@ protoss_archon:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@explode: ^UnitExplodeSmallProtoss
 	Inherits@announce: ^AnnounceOnBuild
@@ -7378,6 +7438,7 @@ protoss_scout:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -7462,6 +7523,7 @@ protoss_epigraph:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -7538,6 +7600,7 @@ protoss_voidray:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -7612,6 +7675,7 @@ protoss_gladius:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -7671,6 +7735,7 @@ protoss_corsair:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
@@ -7737,6 +7802,7 @@ protoss_carrier:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeProtoss
 	Inherits@announce: ^AnnounceGlobal
@@ -7823,6 +7889,7 @@ SCINTERCEPTOR:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeProtoss
@@ -7891,6 +7958,7 @@ protoss_starshipsovereign:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeProtoss
 	Inherits@announce: ^AnnounceGlobal
@@ -8127,6 +8195,7 @@ protoss_zeratul:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
@@ -8174,6 +8243,7 @@ protoss_amaranth:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@cloak: ^CloakedVehicle
@@ -8231,6 +8301,7 @@ protoss_atreus:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -8296,6 +8367,7 @@ protoss_positron:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^FrontalEMP
@@ -8360,6 +8432,7 @@ protoss_legionnaire:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -8403,6 +8476,7 @@ protoss_patriarch:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
@@ -8990,6 +9064,7 @@ zerg_zergling:
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9039,6 +9114,7 @@ zerg_talon:
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9087,6 +9163,7 @@ zerg_sporemaw:
 	Inherits@zerg: ^LargeZerg
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
@@ -9144,6 +9221,7 @@ zerg_hydralisk:
 	Inherits@zerg: ^LargeZerg
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
@@ -9199,6 +9277,7 @@ zerg_spithid:
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
@@ -9257,6 +9336,7 @@ zerg_dreadshroud:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9306,6 +9386,7 @@ zerg_corruptor:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9361,6 +9442,7 @@ zerg_swarmling:
 	Inherits: ^AirZerg
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9609,6 +9691,7 @@ zerg_shriek:
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
@@ -9666,6 +9749,7 @@ zerg_mutalisk:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9728,6 +9812,7 @@ zerg_devourer:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@AntiAir: ^PrioritizeAir
@@ -9776,6 +9861,7 @@ zerg_scourge:
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9833,6 +9919,7 @@ zerg_queen:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9891,6 +9978,7 @@ zerg_guardian:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -9935,6 +10023,7 @@ zerg_ultralisk:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
@@ -9991,6 +10080,7 @@ zerg_gorekraken:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
@@ -10043,6 +10133,7 @@ zerg_hermit:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
@@ -10107,6 +10198,7 @@ zerg_goremaw:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
@@ -10171,6 +10263,7 @@ zerg_lurker:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
@@ -10253,6 +10346,7 @@ zerg_infestedterranbomber:
 	Inherits@zerg: ^BasicZerg
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
@@ -10390,6 +10484,7 @@ SCBROODLING:
 	Inherits@zerg: ^BasicZerg
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
@@ -10439,6 +10534,7 @@ zerg_kerrigan:
 	Inherits: ^LargeZerg
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
@@ -10536,6 +10632,7 @@ zerg_behemoth:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^AlienRankDecoration
 	Inherits@cargo: ^CargoAircraft
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
