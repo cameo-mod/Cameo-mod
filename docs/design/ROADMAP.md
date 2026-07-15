@@ -55,6 +55,14 @@ factions, everything through the balance workbook._
 - [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
   tooling documented in `docs/backlog_weapon_rename.md` for future
   continuation.
+- [x] **CABAL Orb Drone carrier-slave crash** (`ec63784bd`):
+  `cabal_orb_drone` had `CarrierSlave`+`HasParent` traits while also being
+  buildable from the cyborg factory. When built independently, no master is
+  linked, causing `NullReferenceException` in `CarrierSlave.EnterSpawner`.
+  Split into `cabal_orb_drone` (standalone, no slave traits) and
+  `cabal_orb_drone_slave` (non-buildable, inherits base + CarrierSlave).
+  Updated `CarrierMaster` on `cabal_hunter_drone_carrier` to spawn the slave.
+  Pattern follows RA1 Japan `zerofighter`/`japancarrier`.
 
 ### P0 — Completed (2026-07-14 session)
 
@@ -550,8 +558,11 @@ factions, everything through the balance workbook._
 - [x] **SM-1BURST: Re-enable laser upgrades on 1-burst weapons** — add Lunar
   Soldier and Laser Tower to the Crystal Lens / Amplified Lens switch and
   recreate the 1-burst yellow/amplified weapon variants.
-- [ ] **SM-AUDIT: Run audit suite and rebuild** — run
-  `tools/audit/run_all.sh`, fix any new findings, and boot-test the mod.
+- [x] **SM-AUDIT: Run audit suite and rebuild** — audit suite run
+  2026-07-15. Schwarzer Mond upgrades: cryptofascism 26/27, lunaralloys
+  26/27, moonpropaganda 5/5, vrilinfusion 5/5 (only uncovered: tsprobe
+  shared unit). No orphaned SM actors/weapons. No faction leaks. Game
+  boots to menu clean.
 - [ ] **SM-BALANCE: Spreadsheet pass** — if any base stats change (e.g.
   raising base burst of Lunar Soldier or Laser Tower), update
   `docs/design/cameo_armor_system.xlsx` and the yaml in the same pass.
