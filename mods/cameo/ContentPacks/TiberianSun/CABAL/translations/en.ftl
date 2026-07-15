@@ -377,7 +377,41 @@ actor_cabal_refinery =
 actor_cabal_mobileconstructionvehicle =
    .description = Deploys into a Construction Yard.
       Strong vs Nothing
+
+actor_cabal_powerplant =
+   .description = Provides power for CABAL structures.
+      Builds additional power plants as the base expands.
+
+actor_cabal_mechfactory =
+   .description = Produces CABAL vehicles and mechanized walkers.
+
+actor_cabal_radar =
+   .description = Provides radar and unlocks radar-tier units and upgrades.
+      Required for advanced technology.
+
+actor_cabal_helipad =
+   .description = Produces, rearms and repairs CABAL aircraft.
+
+actor_cabal_servicedepot =
+   .description = Repairs CABAL vehicles and aircraft.
       Weak vs Everything
+
+actor_cabal_cyborgfactory =
+   .description = Trains CABAL cyborg infantry.
+
+actor_cabal_pillbox =
+   .description = Garrisonable defensive structure.
+      Strong vs Infantry
+      Weak vs Vehicles, Aircraft
+
+actor_cabal_hunter_drone =
+   .description = Carrier-launched drone fighter.
+      Deployed from the Overkill Carrier.
+
+actor_cabal_promotion_manticore =
+   .name = Unlock Heavy Reaper
+   .description = Promotion
+      Unlocks the Heavy Reaper promoted unit.
 
 actor_cabal_overkill_gunship =
    .name = Overkill Gunship

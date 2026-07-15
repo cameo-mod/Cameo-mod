@@ -266,3 +266,141 @@ schwarzer_mond_upgrade_cryptofascism:
 	effect: every living unit generates 1 credit per second
 	coverage: roster_wide
 	phase: late
+
+######################## CABAL — additional entries ################
+cabal_promotion_ascended:
+	faction: cabal
+	effect: replaces Rocket Cyborg with the Ascended anti-armor walker
+	coverage: narrow
+	phase: mid
+cabal_promotion_beholder:
+	faction: cabal
+	effect: unlocks the Beholder promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_coredefender:
+	faction: cabal
+	effect: unlocks the Core Defender promoted unit
+	coverage: narrow
+	phase: late
+cabal_promotion_cyborgassassin:
+	faction: cabal
+	effect: unlocks the Cyborg Assassin promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_cyborgcommandov2:
+	faction: cabal
+	effect: unlocks the Cyborg Commando V2 promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_devout:
+	faction: cabal
+	effect: replaces Cyborg Infantry with the more powerful Devout
+	coverage: narrow
+	phase: mid
+cabal_promotion_hunterkillermk1elite:
+	faction: cabal
+	effect: unlocks the Super Hunter Killer promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_manticore:
+	faction: cabal
+	effect: unlocks the Heavy Reaper promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_mothership:
+	faction: cabal
+	effect: unlocks the Mothership promoted unit
+	coverage: narrow
+	phase: late
+cabal_promotion_overkillgunship:
+	faction: cabal
+	effect: unlocks the Overkill Gunship promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_spidercnc4:
+	faction: cabal
+	effect: unlocks the Spider CNC4 promoted unit
+	coverage: narrow
+	phase: mid
+cabal_promotion_widow:
+	faction: cabal
+	effect: unlocks the Widow promoted unit
+	coverage: narrow
+	phase: mid
+cabal_upgrade_backupsystems:
+	faction: cabal
+	effect: heavy vehicles revive as husks
+	coverage: listed
+	phase: late
+cabal_upgrade_cyberneticplating:
+	faction: cabal
+	effect: secondary armor takes increased damage (drawback)
+	coverage: listed
+	phase: mid
+	drawbacks: damagemultiplier
+cabal_upgrade_darkarmament:
+	faction: cabal
+	effect: infantry extra weapons, reload -10%
+	coverage: infantry
+	phase: mid
+cabal_upgrade_dataworm:
+	faction: cabal
+	effect: unlocks Data Worm support power
+	coverage: narrow
+	phase: late
+cabal_upgrade_firewallprotocol:
+	faction: cabal
+	effect: mind-control / hijack immunity
+	coverage: roster_wide
+	phase: late
+cabal_upgrade_fullassimilation:
+	faction: cabal
+	effect: all units vision and detection +20%
+	coverage: roster_wide
+	phase: late
+cabal_upgrade_handof:
+	faction: cabal
+	effect: free Hackers from Tech Center; Hacker speed
+	coverage: narrow
+	phase: late
+cabal_upgrade_mobilitymatrix:
+	faction: cabal
+	effect: walkers speed +25%, damage taken -10%
+	coverage: listed
+	phase: mid
+cabal_upgrade_networkedcombatprotocols:
+	faction: cabal
+	effect: all units firepower +8%, reload -5%
+	coverage: roster_wide
+	phase: mid
+cabal_upgrade_neuraluplink:
+	faction: cabal
+	effect: Hacker reload -20%
+	coverage: narrow
+	phase: late
+cabal_upgrade_neutronnuclearcatalyst:
+	faction: cabal
+	effect: unlocks neutron shells
+	coverage: listed
+	phase: mid
+cabal_upgrade_overchargedservos:
+	faction: cabal
+	effect: heavy walkers + aircraft reload -15%
+	coverage: listed
+	phase: late
+cabal_upgrade_radarhack:
+	faction: cabal
+	effect: unlocks Radar Hack support power
+	coverage: narrow
+	phase: mid
+cabal_upgrade_reclamationprotocols:
+	faction: cabal
+	effect: cyborg self-repair
+	coverage: listed
+	phase: late
+cabal_upgrade_reinforcedchassis:
+	faction: cabal
+	effect: light walkers damage taken -15%
+	coverage: listed
+	phase: late

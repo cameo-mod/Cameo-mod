@@ -73,7 +73,7 @@ cabal_powerplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_constructionyard
-		Description: template_power.description
+		Description: actor_cabal_powerplant.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -119,7 +119,7 @@ cabal_cyborgfactory:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
-		Description: template_barracks.description
+		Description: actor_cabal_cyborgfactory.description
 		IconPalette: windows256
 	Building:
 		Footprint: xx xx ==
@@ -168,13 +168,13 @@ cabal_mechfactory:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: CABAL ra1_allies_mechanic Factory
+		Name: CABAL War Factory
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
-		Description: template_factory.description
+		Description: actor_cabal_mechfactory.description
 	Building:
 		Footprint: xx= x== ===
 		Dimensions: 3,3
@@ -223,7 +223,7 @@ cabal_servicedepot:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_constructionyard, cabal_mechfactory
 		Queue: Building, RABuilding
-		Description: Repairs vehicles and aircraft.
+		Description: actor_cabal_servicedepot.description
 	Building:
 		Footprint: x++ +++
 		Dimensions: 3,2
@@ -277,7 +277,7 @@ cabal_helipad:
 		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Prerequisites: ~cabal_constructionyard, cabal_radar
-		Description: Produces, rearms and repairs aircraft.
+		Description: actor_cabal_helipad.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -328,7 +328,7 @@ cabal_radar:
 		BuildPaletteOrder: 70
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
-		Description: Provides radar and advanced technologies.
+		Description: actor_cabal_radar.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
