@@ -65,6 +65,9 @@ ts_nod_constructionyard:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@fact.tsnod:
 		Prerequisite: fact.tsnod
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
@@ -132,6 +135,9 @@ ts_nod_tiberiumwastefacility:
 	SelectionDecorations:
 	ResourcePurifier:
 		Modifier: 25
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -173,6 +179,9 @@ ts_nod_powerplant:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -212,6 +221,9 @@ ts_nod_advancedpowerplant:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -261,6 +273,9 @@ ts_nod_handof:
 	WithIdleOverlay@LIGHT:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-light
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -314,6 +329,9 @@ ts_nod_warfactory:
 	WithIdleOverlay@BIB:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -323,6 +341,9 @@ ts_nod_servicedepot:
 		Name: Service Depot
 	Buildable:
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_warfactory
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -367,6 +388,9 @@ ts_nod_helipad:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -438,6 +462,9 @@ ts_nod_radar:
 	# 	CameraActor: camera.small
 	# 	CameraRemoveDelay: 60
 	# 	AllowMultiple: True
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 	Production@Upgrades:
@@ -477,5 +504,8 @@ ts_nod_techcenter:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2

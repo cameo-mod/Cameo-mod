@@ -47,6 +47,9 @@ cabal_refinery:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: cabal_refinery
 		PlayerPalette: player_rgba
@@ -92,6 +95,9 @@ cabal_powerplant:
 	WithIdleOverlay@RAY:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-electro
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tscrys
@@ -143,6 +149,9 @@ cabal_cyborgfactory:
 	WithIdleOverlay@LIGHT:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-light
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -194,6 +203,9 @@ cabal_mechfactory:
 	WithIdleOverlay@BIB:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -245,6 +257,9 @@ cabal_servicedepot:
 		UseDeathTypeSuffix: false
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -287,6 +302,9 @@ cabal_helipad:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsnthpadcabal
@@ -325,6 +343,9 @@ cabal_radar:
 		Range: 5c0
 		RequiresCondition: !lowpower
 	SupportPowerChargeBar:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: cabal_radar
@@ -394,6 +415,9 @@ cabal_techcenter:
 	Exit@3:
 		SpawnOffset: -704,768,0
 		ExitCell: 0,3
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: cabal_techcenter
 		PlayerPalette: playerra2
@@ -456,6 +480,9 @@ cabal_techcenter:
 # 		RequiresCondition: !build-incomplete && !disabled
 # 		Sequence: idle-lights
 # 	SupportPowerChargeBar:
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: playerra2
+# 		DeathPaletteIsPlayerPalette: true
 # 	RenderSprites:
 # 		PlayerPalette: playerra2
 
@@ -555,5 +582,8 @@ cabal_core:
 		SupportPowerPaletteOrder: 70
 		MissileImage: raatomic
 		BeaconActor: BLASTRADIUS.atomic
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2

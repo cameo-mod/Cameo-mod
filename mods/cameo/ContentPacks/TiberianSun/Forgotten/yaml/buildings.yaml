@@ -88,6 +88,9 @@ forgotten_constructionyard:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgot_conyard
 		PlayerPalette: player_rgba
@@ -141,6 +144,9 @@ forgotten_refinery:
 		Position: BottomLeft
 		RequiresSelection: true
 		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgot_refin
 		PlayerPalette: player_rgba
@@ -180,6 +186,9 @@ forgotten_crystalpowerextractor:
 	AcceptsDeliveredExperience: ##########
 	ProvidesPrerequisite@buildingname:
 		ValidTypes: building ##########
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: forgot_power
@@ -223,6 +232,9 @@ forgotten_barracks:
 	ProvidesPrerequisite@buildingname:
 	Selectable:
 		Bounds: 1280, 1024
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgot_barracks
 		PlayerPalette: player_rgba
@@ -283,6 +295,9 @@ forgotten_servicedepot:
 	Buildable:
 		Description: actor_forgotten_servicedepot.description
 		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -296,6 +311,9 @@ forgotten_helipad:
 		Queue: Building, RABuilding
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 	ProductionQueue@AIRCRAFT:
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: tsnthpadmut
 
@@ -344,6 +362,9 @@ forgotten_radar:
 		Amount: -50
 	ExternalCondition@JAMMED:
 		Condition: jammed
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: forgot_radar
@@ -379,6 +400,9 @@ forgotten_church:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
 		Prerequisite: tstek
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgot_church
 		PlayerPalette: player_rgba
@@ -412,6 +436,9 @@ forgotten_chemicalplant:
 	Power:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgotten_chemicalplant
 		PlayerPalette: player_rgba
@@ -451,6 +478,9 @@ forgotten_chemicalplant:
 # 	ProductionBar@RANAVALYURI:
 # 		ProductionType: RANaval
 # 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
 # 	RenderSprites:
 # 		Image: yrygyard
 # 		PlayerPalette: playerra2
@@ -476,6 +506,9 @@ forgotten_chemicalplant:
 # 	ProductionBar@RANAVALALLIESRA2:
 # 		ProductionType: RANaval
 # 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
 # 	RenderSprites:
 # 		Image: ra2gayard
 # 		PlayerPalette: playerra2
@@ -501,6 +534,9 @@ forgotten_chemicalplant:
 # 	ProductionBar@RANAVALALLIESRA2:
 # 		ProductionType: RANaval
 # 		RequiresCondition: classicproductionqueues
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 		DeathPaletteIsPlayerPalette: true
 # 	RenderSprites:
 # 		Image: ra2gayard
 # 		PlayerPalette: playerra2
