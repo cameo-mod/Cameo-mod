@@ -182,7 +182,7 @@ tsprobe:
 
 tsldrone:
 	Defaults:
-		Filename: tsdlimpmk.shp
+		Filename: tsdlimpmake.shp
 	idle:
 		ShadowStart: 42
 	make:
@@ -194,7 +194,7 @@ tsldrone:
 	icon:
 		Filename: tsldroneicon.shp
 
-# tsdlimpmk:
+# tsdlimpmake:
 # 	idle:
 # 		Start: 41
 # 	icon: jmin
@@ -254,7 +254,7 @@ tsmcv:
 # 		Start: 1
 # 		ShadowStart: 4
 # 		Offset: 0, -12, 12
-# 	make: tsgtartymk
+# 	make: tsgtartymake
 # 		Length: 16
 # 		ShadowStart: 16
 # 		Offset: 0, -12, 12
