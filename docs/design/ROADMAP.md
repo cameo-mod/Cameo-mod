@@ -63,6 +63,11 @@ factions, everything through the balance workbook._
   `cabal_orb_drone_slave` (non-buildable, inherits base + CarrierSlave).
   Updated `CarrierMaster` on `cabal_hunter_drone_carrier` to spawn the slave.
   Pattern follows RA1 Japan `zerofighter`/`japancarrier`.
+- [x] **RA2 corpse death_d crash** (`ac3ba04b7`): `RA2CorpseSpawner` and
+  `RA2FlyingBody` CreateEffect warheads lost `Image: ra2corpse` during CE2
+  cleanup, causing engine to look for `death_a`-`death_f` sequences in the
+  default `explosion` image where they don't exist. Restored `Image: ra2corpse`
+  per corpse-spawner exception in DESIGN.md §8.
 
 ### P0 — Completed (2026-07-14 session)
 
@@ -483,17 +488,20 @@ factions, everything through the balance workbook._
   variant with `RequiresCondition: rank-elite`. This is a large batch
   job (design work — each elite weapon needs unique stats, not a
   mechanical rename).
-- [ ] **E2: Fix missing `rank-elite` conditions** — 77 of 143 existing
-  `Armament@ELITE` blocks lack `RequiresCondition: rank-elite`, meaning
-  they fire at all ranks instead of only at elite. Mechanical fix.
+- [x] **E2: Fix missing `rank-elite` conditions** (`ac3ba04b7`) — Only 2
+  genuine bugs found (out of 18 flagged; rest use Generals `scrap_create_bonus`
+  rank system or upgrade-switch naming). Fixed:
+  `asian_alliance_plasmatrooper` GARRISONEDELITE and
+  `asian_alliance_heavyrailguntank` ELITE. Added audit tool
+  `tools/audit/audit_elite_gating.py`.
 - [ ] **E3: Normalize elite weapon naming** — 17 elite weapons use
   non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`,
   `SteelMegaSwordEMP`). Rename to `<baseWeapon>E` convention. Also
   normalize 31 `_elite`-suffixed weapons to `E` suffix when touched.
-- [ ] **E4: Verify base weapon gating** — primary armaments on
-  RA2-styled actors with elite weapons must have
-  `RequiresCondition: !rank-elite` so the elite weapon replaces, not
-  stacks with, the base.
+- [x] **E4: Verify base weapon gating** (`ac3ba04b7`) — Fixed the 2 actors
+  from E2: added `RequiresCondition: !rank-elite` to
+  `asian_alliance_heavyrailguntank` PRIMARY and
+  `asian_alliance_plasmatrooper` GARRISONED so elite replaces, not stacks.
 
 ## D2K Sprite Conversion Pipeline
 
