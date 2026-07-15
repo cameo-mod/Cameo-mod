@@ -395,28 +395,46 @@ CabalReaperMissiles:
 		Damage: 4
 
 CabalReaperMissilesAA:
-	Inherits: CabalReaperMissiles
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	Inherits@5: ^CabalMissile
+	ReloadDelay: 24
+	Burst: 2
+	BurstDelays: 12
 	Range: 8680
 	ValidTargets: Air
+	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
+		Damage: 8000
 		ValidTargets: Air
 	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 4
 		ValidTargets: Air
 	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
 		ValidTargets: Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
+		Damage: 8000
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 4000
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
 		ValidTargets: Air
 	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
 		ValidTargets: Air
 
 CabalHeavyReaperMissiles:
@@ -453,33 +471,67 @@ CabalHeavyReaperMissiles:
 		Damage: 6
 
 CabalHeavyReaperMissilesAA:
-	Inherits: CabalHeavyReaperMissiles
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^CabalMissile
+	ReloadDelay: 30
+	Burst: 2
+	BurstDelays: 12
 	Range: 9130
 	ValidTargets: Air
+	Report: samshot1.aud
 	Warhead@MediumMissile: SpreadDamage
+		Damage: 12000
 		ValidTargets: Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 6
 		ValidTargets: Air
 	Warhead@HeavyMissile: SpreadDamage
+		Damage: 12000
 		ValidTargets: Air
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 6
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
+		Damage: 12000
 		ValidTargets: Air
 	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
 		ValidTargets: Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
 		ValidTargets: Air
 	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 12000
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 6
 		ValidTargets: Air
 
 CabalHeavyReaperTrap:
-	Inherits: CabalReaperTrap
+	Report: fireweb1.aud
+	ReloadDelay: 250
 	Range: 6085
+	ValidTargets: snareable
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 800
+		Image: DRAGON
+	Warhead@Snare: GrantExternalCondition
+		Condition: snared
+		Duration: 100
+		Range: 1024
+		ValidTargets: snareable
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: methit1.aud
+		ValidTargets: Ground, Water
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
@@ -844,11 +896,26 @@ CabalCoreDefenderLaser:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
 CabalAvatarLaser:
-	Inherits: CabalCoreDefenderLaser
+	Inherits: ^LaserWeapon
+	Report: corefir1.aud
+	ReloadDelay: 70
+	Range: 6332
+	Projectile: LaserZap
+		Width: 58
+		ZOffset: 2047
+		Color: DD22EEFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 25
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 5555AAFF
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 80000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 40
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 
 CabalEngineerRepairBeam:
 	Inherits: ^RepairWeapon
@@ -986,8 +1053,22 @@ CabalRocketCyborgRockets:
 		Damage: 3
 
 CabalRocketCyborgRocketsUpgraded:
-	Inherits: CabalRocketCyborgRockets
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	Inherits@3: ^CabalMissile
 	Burst: 4
+	BurstDelays: 8
+	Report: rketinf1.aud
+	ReloadDelay: 52
+	Range: 8753
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
 
 CabalMothershipRockets:
 	Inherits: ^TeslaWeapon
@@ -1112,11 +1193,35 @@ CabalWaspLaser:
 		ValidTargets: Ground, Water, Air
 
 CabalWaspLaserStriker:
-	Inherits: CabalWaspLaser
+	Inherits: ^LaserWeapon
+	Report: lastur1.aud
 	ReloadDelay: 18
 	Range: 6309
 	Burst: 2
 	BurstDelays: 3
+	Projectile: LaserZap
+		Width: 36
+		Duration: 5
+		ZOffset: 3000
+		Color: CC22DDFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 14
+		SecondaryBeamZOffset: 3000
+		SecondaryBeamColor: 444488FF
+	ValidTargets: Ground, Water, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+	Warhead@LaserExtraDamage: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
 
 CabalAscendedRockets:
 	Inherits: ^LightMissile
@@ -1189,9 +1294,24 @@ CabalRavagerPlasma:
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 CabalWidowPlasma:
-	Inherits: CabalRavagerPlasma
+	Inherits: ^MediumChemicalWeapon
 	ReloadDelay: 30
 	Range: 5938
+	Report: sow/plasma_robot_shoot.aud
+	Projectile: Bullet
+		Speed: 341
+		Blockable: false
+		Shadow: false
+		Image: cabal_greenplasma
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
 CabalManticoreLaser:
 	Inherits: ^LaserWeapon
 	Burst: 2
@@ -1768,15 +1888,37 @@ CabalMagicNuke:
 		ImpactActors: false
 
 CabalCommandoPlasmaNeutron:
-	Inherits: CabalCommandoPlasma
+	Inherits: ^HeavyCannon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
 	Inherits@TESLA: ^TeslaWeapon
 	Inherits@MAGIC: ^MagicWeapon
 	Inherits@RAIL: ^RailgunWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 90
+	Range: 5219
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: cabal_plasmabullet
 		Speed: 320
 		Shadow: false
 		Blockable: false
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -1794,15 +1936,37 @@ CabalCommandoPlasmaNeutron:
 		ImpactSounds: expnew12.aud
 
 CabalCommandoPlasmaMk2Neutron:
-	Inherits: CabalCommandoPlasmaMk2
+	Inherits: ^HeavyCannon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
 	Inherits@TESLA: ^TeslaWeapon
 	Inherits@MAGIC: ^MagicWeapon
 	Inherits@RAIL: ^RailgunWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 90
+	Range: 6264
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: cabal_plasmabullet
 		Speed: 320
 		Shadow: false
 		Blockable: false
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 50000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
@@ -1820,12 +1984,21 @@ CabalCommandoPlasmaMk2Neutron:
 		ImpactSounds: expnew12.aud
 
 CabalRavagerPlasmaNeutron:
-	Inherits: CabalRavagerPlasma
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 30
+	Range: 3000
+	Report: sow/plasma_robot_shoot.aud
 	Projectile: Bullet
 		Speed: 341
 		Blockable: false
 		Shadow: false
 		Image: cabal_plasmabullet
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small
 		ImpactSounds: expnew12.aud
