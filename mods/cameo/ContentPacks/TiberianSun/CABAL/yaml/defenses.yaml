@@ -134,7 +134,10 @@ cabal_heavycabalobelisk:
 	Health:
 		HP: 220000
 	RevealsShroud:
-		Range: 5c0
+		Range: 7c0
+	WithRangeCircle:
+		Range: 12c0
+		RequiresCondition: !build-incomplete
 	-WithSpriteBody:
 	WithChargeSpriteBody:
 		Sequence: idle

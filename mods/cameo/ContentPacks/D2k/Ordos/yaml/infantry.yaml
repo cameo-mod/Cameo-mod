@@ -3,6 +3,7 @@ ordos_antiairtrooper:
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
@@ -51,6 +52,7 @@ ordos_lightinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^D2KPaletteRenderInfantry
@@ -109,6 +111,7 @@ ordos_rockettrooper:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
@@ -149,6 +152,7 @@ ordos_chemicaltrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -202,6 +206,7 @@ ordos_mortartrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -368,6 +373,7 @@ ordos_facedancer:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@deathpal: ^D2KInfantryDefaultDeath
 	Inherits@cloak: ^CloakedVehicle
@@ -430,6 +436,7 @@ ordos_contaminator:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@anim: ^RA2Infantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
@@ -761,6 +768,7 @@ ordos_leech:
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos

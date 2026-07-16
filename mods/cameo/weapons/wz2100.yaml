@@ -37,7 +37,6 @@
 			Concrete: 35
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath, 2100ResearchSteal
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 		ImpactActors: false
 2100MachineGunEffect:
@@ -96,7 +95,6 @@ AssaultGun:
 		Versus:
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath, 2100ResearchSteal
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 
 AssaultGunAA:
@@ -136,7 +134,6 @@ TwinAssaultGunAA:
 			Concrete: 40
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath, 2100ResearchSteal
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
@@ -183,7 +180,6 @@ TwinAssaultGunAA:
 			Concrete: 50
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Air, Ground, Water
 
@@ -537,7 +533,6 @@ lightcanon:
 			Medium: 115
 			Heavy: 100
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 2100FlakAA:
 	Inherits: 2100hypervelcannonAA

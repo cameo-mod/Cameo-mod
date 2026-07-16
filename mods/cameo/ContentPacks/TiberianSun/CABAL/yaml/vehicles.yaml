@@ -424,14 +424,14 @@ cabal_artilleryspider:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
-		LocalOffset: -500,0,250, -500,0,250
+		LocalOffset: 300,0,800
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: CabalArtilleryWalkerShellUpgraded
-		LocalOffset: -500,0,250, -500,0,250
+		LocalOffset: 300,0,800
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
@@ -489,19 +489,19 @@ cabal_tarantula:
 		Type: Heavy
 	Turreted:
 		TurnSpeed: 14
-		Offset: -500,1,1
+		Offset: -500,0,0
 	Armament@PRIMARY:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -700, 0, 700
+		LocalOffset: 500, 0, 250
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -700, 0, 700
+		LocalOffset: 500, 0, 250
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
@@ -523,7 +523,7 @@ cabal_tarantula:
 	RenderVoxels:
 		Scale: 10
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		Image: tstnkspid
  	SpawnActorOnDeath@backup:
  		Actor: cabal_tarantula_backup
@@ -615,7 +615,6 @@ cabal_berserker:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_berserker.description
-		IconPalette: player_rgba
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -662,7 +661,7 @@ cabal_berserker:
 		VolumeMultiplier: 2
 	RenderSprites:
 		Image: cabal_berserker
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 
 cabal_beholder:
 	Inherits: ^Tank
@@ -848,9 +847,9 @@ cabal_heavyreaper:
 		DamageCooldown: 1
 	RenderSprites:
 		Image: cabal_cyborgreaper
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithDeathAnimation:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
@@ -909,42 +908,6 @@ cabal_avatar:
 
 cabal_widow:
 	Inherits: ^Vehicle
-	Inherits@Template: ^HighTechTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Valued:
-		Cost: 3000
-	Tooltip:
-		Name: Widow
-	Buildable:
-		BuildPaletteOrder: 31
-		Prerequisites: ~cabal_mechfactory, ~cabal_promotion_widow
-		Queue: Vehicle, RAVehicle
-		Description: actor_cabal_widow.description
-	Mobile:
-		Locomotor: wheeled
-		TurnSpeed: 28
-		Speed: 70
-	Health:
-		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 32
-	Armament@PRIMARY:
-		Weapon: CabalWidowPlasma
-	AttackFrontal:
-		FacingTolerance: 0
-		Voice: Attack
-	RenderSprites:
-		Image: cabal_manticore
-		PlayerPalette: player_rgba
-
-cabal_legion:
-	Inherits: ^Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -956,12 +919,12 @@ cabal_legion:
 	Valued:
 		Cost: 3500
 	Tooltip:
-		Name: Legion
+		Name: Widow
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_mechfactory, cabal_core, !cabal_promotion_coredefender
 		Queue: Vehicle, RAVehicle
-		Description: actor_cabal_legion.description
+		Description: actor_cabal_widow.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 24
@@ -983,14 +946,14 @@ cabal_legion:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		Image: tstnkspid
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 	SpawnActorOnDeath@backup:
-		Actor: cabal_legion_backup
+		Actor: cabal_widow_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_coredefender:

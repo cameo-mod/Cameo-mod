@@ -95,7 +95,6 @@ ArtilleryShell:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 Grenade:
@@ -120,7 +119,6 @@ Grenade:
 			Heavy: 34
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
         
 ####################################################################################################
@@ -246,7 +244,6 @@ RATurretGun:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 155mm:
@@ -301,5 +298,4 @@ Bomb.Kamikaze:
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash

@@ -125,7 +125,6 @@ Flamingsheep:
 			Wood: 35
 			Heavy: 80
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 
 WormsChronoAI:
@@ -290,7 +289,6 @@ Flamingsheep:
 			Wood: 35
 			Heavy: 80
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 
 Atomicdonkey:
@@ -432,7 +430,6 @@ WormsUZI:
 	Inherits: ^LightMG
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wormspiff
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
@@ -442,7 +439,6 @@ WormsVulcan:
 	Inherits: HighV
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wormspiff
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
@@ -469,7 +465,6 @@ WormsShotGun:
 			Wood: 10
 			Light: 70
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wormspiff
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsshotgunr.wav

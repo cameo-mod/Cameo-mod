@@ -15,7 +15,6 @@ SUSALOSATHumveeMissile:
 		ValidTargets: Ground
 		Damage: 12000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Vehicle, Building
 SUSALittleBirdMG:
 	Inherits: USAComancheMG
@@ -79,7 +78,6 @@ SUSABurtonSniperHE:
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c768
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_terr_flash
 
 SUSABurtonSniper_AI:
@@ -96,7 +94,6 @@ SUSAMortarHMMWV:
 	Range: 11264
 	MinRange: 2048
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 	
 SUSAMinigunHMMWV:
 	Inherits: SUSALittleBirdMG
@@ -272,7 +269,6 @@ SUSAShatterer:
 			Concrete: 60
 		DamageTypes: DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: poof
 		
 SUSAPlasmaTomahawk:
@@ -416,7 +412,6 @@ SUSAEnforcerDroneBeam:
 			Heavy: 90
 			Concrete: 60
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: usaenforcerdrone_splash
 		ExplosionPalette: alpha75
 	
@@ -443,7 +438,6 @@ SUSAEnforcerDroneBall:
 			Heavy: 100
 			Concrete: 90
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: usaenforcerdrone_splash
 		ExplosionPalette: alpha75
 		
@@ -508,7 +502,6 @@ USALaserPaladinCannon:
 			Heavy: 3
 			Concrete: 1
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: susalasersplash
 		ExplosionPalette: effect
 
@@ -517,7 +510,6 @@ USALaserPaladinCannonUp:
 	Projectile: LaserZap
 		Color: 66FFFF
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: susalasersplashup
 		
 SUSARailGunArtillery:
@@ -565,7 +557,6 @@ SUSARailGunArtillery:
 			Heavy: 100
 			Concrete: 50
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: usarailgunartillery_splash
 		ExplosionPalette: alpha75
 
@@ -620,10 +611,8 @@ SUSAFB22:
 		Damage: 25000
 		ValidTargets: Ground, Water
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 
 SUSALaserDesignatorBase:
@@ -787,7 +776,6 @@ SUSALaserDesignatorBase:
 			Concrete: 100
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: usalaserdesignatorbase_effect
 		ExplosionPalette: alpha75
 
@@ -815,7 +803,6 @@ SUSAAMDGrenadeExplode:
 		Damage: 15000
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: big_napalm
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
@@ -843,11 +830,9 @@ SCHGrinderCannon:
 	-Warhead@4EffWater: CreateEffect
 	-Warhead@2Smu: LeaveSmudge
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chflachetteshrapnels
 		Delay: 25
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chgrindercannonimpact
 		Delay: 50
 		
@@ -856,7 +841,6 @@ SCHGrinderCannonMine:
 	ReloadDelay: 250
 	-Warhead@1Dam: SpreadDamage
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		-Explosions:
 	Warhead@mines: FireCluster
 		Delay: 50
@@ -1043,7 +1027,6 @@ SUSAStrykerMedic:
 		Amount: 3
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: usadecontaminationsplash
 		ExplosionPalette: d2keffect
 
@@ -1139,10 +1122,8 @@ SUSAF16XL:
 			Wood: 100
 			Concrete: 80
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 		
 SUSADecoyDrone:
@@ -1340,7 +1321,6 @@ SUSARodsFromGods:
 	ReloadDelay: 0
 	Range: 5120
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: rodsfromgod
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage
@@ -1372,7 +1352,6 @@ SUSARodsFromGods2:
 		Duration: 18
 		Intensity: 3
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: rodsfromgod
 		ImpactActors: false
 		Delay: 3
@@ -1386,7 +1365,6 @@ SUSARodsFromGods3:
 		Duration: 24
 		Intensity: 4
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: rodsfromgod
 		ImpactActors: false
 		Delay: 5
@@ -1395,7 +1373,6 @@ SUSAHyperSonicMissile:
 	ReloadDelay: 0
 	Range: 5120
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage
@@ -1594,7 +1571,6 @@ SGLScarabSmokers:
 		Amount: 3
 		DamageTypes: Prone80Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_terr_flash
 
 SGLRebelAK47:
@@ -1699,7 +1675,6 @@ GLCamelWeapons:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 SGLATOPOL:
@@ -1730,7 +1705,6 @@ SGLATOPOL:
 		Spread: 0c768
 		Damage: 7500
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash
 		
 SGLSparkaCannon:
@@ -1748,7 +1722,6 @@ SGLSparkaCannon:
 			Concrete: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath, MakeScrapbox
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 
@@ -1785,7 +1758,6 @@ SGLPython:
 			Concrete: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath, MakeScrapbox
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 
@@ -1852,7 +1824,6 @@ SGLScourgeMissile:
 		Spread: 1c256
 		Damage: 2000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust2
@@ -1919,7 +1890,6 @@ SGLGadFlyMissile:
 		Damage: 12500
 		ValidTargets: Air
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ex_big_flash_blue
 
 SGLAngryMobMolotov:
@@ -1944,7 +1914,6 @@ SGLAngryMobMolotov:
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	Warhead@2ClustF: FireShrapnel
 		InvalidTargets: FireImmune
@@ -2027,7 +1996,6 @@ SGLKatyushaBarrage:
 			Concrete: 75
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, MakeScrapbox
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: artillery_explosion
 		
 SGLKatyushaBarrage_Max:
@@ -2058,7 +2026,6 @@ SGLKraitToxinGun:
 		ValidTargets: Garrisoned, GarrisonedNBC, LoadedTankBunker, LoadedVehicle
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 SGLKraitPhosphorusRocket:
@@ -2072,7 +2039,6 @@ SGLKraitPhosphorusRocket:
 	Projectile: MissileCA
 		Image: scorpionrocket
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: susaflashbang
 	Warhead@2Dam: SpreadDamage
 		Spread: 0c512
@@ -2268,7 +2234,6 @@ GLBasiliskMachineGun:
 GLBasiliskExplodes:
 	Inherits: ^DamagingExplosionHE
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: big_frag
 #####################################################
 # Hip Weapons
@@ -2515,7 +2480,6 @@ SCHEMPMig:
 			Heavy: 250
 			Concrete: 45
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: pulse_explosion_small
 		ExplosionPalette: tseffect
 		ImpactActors: false
@@ -2572,7 +2536,6 @@ SCHTigerGrenades:
 			Concrete: 40
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 		
 SCHTigerRockets:
@@ -2761,7 +2724,6 @@ SCHRADTank:
 			Concrete: 30
 		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 	Warhead@Clear: SpreadDamage
 		Spread: 0c512
 		Damage: 5000
@@ -2798,10 +2760,8 @@ RADTankDropBarrels:
 		Level: 100
 		LayerName: genradiation
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: radbarreldrop
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: napalm
 		Delay: 40
 		
@@ -2943,18 +2903,15 @@ SCHHammerCannonSeismic:
 		Spread: 1c512
 		Damage: 2500
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 25
 		Explosions: susaseismiceffects
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: schnukeexplosion
 	Warhead@3Dam: SpreadDamage
 		Delay: 50
 		Spread: 1c512
 		Damage: 2500
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 50
 		Explosions: susaseismiceffects
 	Warhead@4Dam: SpreadDamage
@@ -2962,7 +2919,6 @@ SCHHammerCannonSeismic:
 		Spread: 1c512
 		Damage: 2500
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 75
 		Explosions: susaseismiceffects
 	Warhead@5Dam: SpreadDamage
@@ -2970,7 +2926,6 @@ SCHHammerCannonSeismic:
 		Spread: 1c512
 		Damage: 2500
 	Warhead@Effect3: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 100
 		Explosions: susaseismiceffects
 	Warhead@6Dam: SpreadDamage
@@ -2978,7 +2933,6 @@ SCHHammerCannonSeismic:
 		Spread: 3c512
 		Damage: 10000
 	Warhead@Effect4: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 125
 		Explosions: susaseismiceffects
 	Warhead@7Dam: SpreadDamage
@@ -2986,7 +2940,6 @@ SCHHammerCannonSeismic:
 		Spread: 3c512
 		Damage: 10000
 	Warhead@Effect5: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 150
 		Explosions: susaseismiceffects
 	Warhead@8Dam: SpreadDamage
@@ -2994,7 +2947,6 @@ SCHHammerCannonSeismic:
 		Spread: 3c512
 		Damage: 10000
 	Warhead@Effect6: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 175
 		Explosions: susaseismiceffects
 	Warhead@9Dam: SpreadDamage
@@ -3002,7 +2954,6 @@ SCHHammerCannonSeismic:
 		Spread: 3c512
 		Damage: 10000
 	Warhead@Effect7: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Delay: 200
 		Explosions: susaseismiceffects
 	Warhead@Con: GrantExternalCondition
@@ -3114,7 +3065,6 @@ SCHAnvilTank:
 		Spread: 3c0
 		Damage: 5000
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: susaseismiceffects
 	Warhead@1Shake: ShakeScreen
 		Duration: 20
@@ -3143,7 +3093,6 @@ SCHSupportCrawlerMissileAA:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_explosion_air
 
 SCHNeutronBomb:
@@ -3226,7 +3175,6 @@ SCHIronDragon:
 		Explosions: napalm
 		ImpactSounds: firebl3.aud
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: schnukeexplosion
 		
 SCHNeutronMineBomb:

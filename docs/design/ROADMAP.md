@@ -55,6 +55,19 @@ factions, everything through the balance workbook._
 - [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
   tooling documented in `docs/backlog_weapon_rename.md` for future
   continuation.
+- [x] **CABAL Orb Drone carrier-slave crash** (`ec63784bd`):
+  `cabal_orb_drone` had `CarrierSlave`+`HasParent` traits while also being
+  buildable from the cyborg factory. When built independently, no master is
+  linked, causing `NullReferenceException` in `CarrierSlave.EnterSpawner`.
+  Split into `cabal_orb_drone` (standalone, no slave traits) and
+  `cabal_orb_drone_slave` (non-buildable, inherits base + CarrierSlave).
+  Updated `CarrierMaster` on `cabal_hunter_drone_carrier` to spawn the slave.
+  Pattern follows RA1 Japan `zerofighter`/`japancarrier`.
+- [x] **RA2 corpse death_d crash** (`ac3ba04b7`): `RA2CorpseSpawner` and
+  `RA2FlyingBody` CreateEffect warheads lost `Image: ra2corpse` during CE2
+  cleanup, causing engine to look for `death_a`-`death_f` sequences in the
+  default `explosion` image where they don't exist. Restored `Image: ra2corpse`
+  per corpse-spawner exception in DESIGN.md §8.
 
 ### P0 — Completed (2026-07-14 session)
 
@@ -83,6 +96,20 @@ factions, everything through the balance workbook._
   cause as the infantry palette bug. Fixed by adding
   `DeathSequencePalette: ra2player` to `^BaseBuilding` and to the
   `WithDeathAnimation@BIB` overrides on GDI and CABAL service depots.
+- [x] **TD building death palette fix** (`d72194748`): `^BaseBuilding`
+  template sets `DeathSequencePalette: ra2player` globally, but TD
+  buildings use `PlayerPalette: player_rgba` — mismatch causes wrong
+  colors on death. Fixed by overriding `DeathSequencePalette: player_rgba`
+  in `^TDBuilding` and `^TDDefense` templates. Also fixed 3 CABAL infantry
+  (rocketcyborg, hackercyborg, eliminator800) that had `ra2player` instead
+  of `playerra2` as their death palette (mismatch with their
+  `PlayerPalette: playerra2`).
+- [ ] **TS-only death palette audit** (Effort: M): The broken commit
+  `9579827e9` was reverted, but the original fixes in `a2b4de333` and
+  `b417c6f96` may have set wrong palette values for some TS actors. Need
+  a smarter audit script that only checks TS content packs and reports
+  mismatches between `DeathSequencePalette` and `PlayerPalette`. Do NOT
+  touch TD, D2k, RA1, RA2, TKM files.
 
 ---
 
@@ -453,39 +480,53 @@ factions, everything through the balance workbook._
   session. Also fixed 4 TS Forgotten actors in `defenses.yaml` and 2
   core `tiberiansun.yaml` Nod units (`ts_nod_attackcycle`,
   `ts_nod_ticktank`).
-- [ ] **Wire D2k factions to `^DuneRankDecoration`** — template created
-  in `ContentPacks/D2k/Shared/yaml/templates.yaml` but D2k actors not
-  yet given `Inherits@decoration: ^DuneRankDecoration`. 6 Ordos actors
-  confirmed missing; Ixian/Atreides/Harkonnen need checking.
-- [ ] **Create `^AlienRankDecoration` template** — `alienrank` sequence
-  exists in `misc.yaml` but no template references it. Determine which
-  factions should use it (potentially StarCraft Zerg if they gain
-  experience in future, or other alien-themed factions).
+- [x] **Wire D2k factions to `^DuneRankDecoration`** (`5ff288c5c`) — Added
+  `Inherits@decoration: ^DuneRankDecoration` to 64 D2k actors across Ixian,
+  Ordos, Harkonnen, and Shared yaml files. Audit tool:
+  `tools/audit/audit_dune_rank_decoration.py` (0 remaining).
+- [x] **Create `^AlienRankDecoration` template** (`b95f5e7f3`) — Created
+  template in `rules/starcraft.yaml` using existing `alienrank` sequence
+  from `misc.yaml`. Wired to 79 StarCraft actors (Terran, Protoss, Zerg)
+  that use `^GainsExperienceTD`. Warcraft2 actors still need a custom
+  `wc2rank` image (no sequence exists yet — out of scope).
 - [ ] **Create per-faction rank decorations for RA2Mod factions** —
   currently all RA2Mod factions share `ra2rank` via
   `^GainsExperienceRA2`. Eventually each could have a unique rank image
   for faction identity (low priority — shared `ra2rank` is functional).
-- [ ] **Write `audit_rank_decoration.py`** — verify every
+- [x] **Write `audit_rank_decoration.py`** (`10220c0ee`) — verifies every
   `^GainsExperienceTD` actor has the correct `^*RankDecoration` for its
-  faction. Verify `^GainsExperienceRA2` actors do NOT have a separate
-  `^*RankDecoration`. Check that rank image sequences exist in
-  `misc.yaml`.
-- [ ] **E1: Add missing elite weapons** — 217 RA2-styled actors are
-  missing `Armament@ELITE` blocks. Each needs a base weapon `E`-suffixed
-  variant with `RequiresCondition: rank-elite`. This is a large batch
-  job (design work — each elite weapon needs unique stats, not a
-  mechanical rename).
-- [ ] **E2: Fix missing `rank-elite` conditions** — 77 of 143 existing
-  `Armament@ELITE` blocks lack `RequiresCondition: rank-elite`, meaning
-  they fire at all ranks instead of only at elite. Mechanical fix.
-- [ ] **E3: Normalize elite weapon naming** — 17 elite weapons use
-  non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`,
-  `SteelMegaSwordEMP`). Rename to `<baseWeapon>E` convention. Also
-  normalize 31 `_elite`-suffixed weapons to `E` suffix when touched.
-- [ ] **E4: Verify base weapon gating** — primary armaments on
-  RA2-styled actors with elite weapons must have
-  `RequiresCondition: !rank-elite` so the elite weapon replaces, not
-  stacks with, the base.
+  faction, verifies `^GainsExperienceRA2` actors do NOT have a separate
+  decoration, and checks that rank image sequences exist in `misc.yaml`.
+  Current state: 135 issues (mostly SC/WC2/RA2Mod factions that share
+  `ra2rank` or lack faction-specific decorations — low priority).
+- [ ] **E1: Add missing elite weapons** — Audit (`tools/audit/audit_missing_elite.py`,
+  `4d0e8ec85`) found **1256** buildable actors with `GainsExperience` but no
+  `Armament@*ELITE*` block. Top factions: rules/redalert (100), rules/starcraft
+  (79), rules/wh40k (75), rules/darkreign (68), rules/shockwave (67),
+  rules/generals (55), rules/advancewars (52), rules/starwars (45),
+  rules/redalert2 (41), TS/Forgotten (37), rules/tkm (36), TS/CABAL (34).
+  This is a large multi-session design effort — each elite weapon needs unique
+  stats, not a mechanical rename. Needs user direction on scope/priority.
+- [x] **E2: Fix missing `rank-elite` conditions** (`ac3ba04b7`) — Only 2
+  genuine bugs found (out of 18 flagged; rest use Generals `scrap_create_bonus`
+  rank system or upgrade-switch naming). Fixed:
+  `asian_alliance_plasmatrooper` GARRISONEDELITE and
+  `asian_alliance_heavyrailguntank` ELITE. Added audit tool
+  `tools/audit/audit_elite_gating.py`.
+- [x] **E3: Normalize elite weapon naming** (`ab870ddb3`) — Renamed 10
+  non-standard elite weapons to `<base>E` convention (38 references across
+  12 files): `NaxPlanegun`→`NaxPlanegunE`, `NaxPlaneRockets`→`NaxPlaneRocketsE`,
+  `NaxiWW2MachinegunnerElite`→`NaxiWW2MachinegunnerE`, `NaxiBeetleLaser`→`NaxiBeetleLaserE`,
+  `NaxiBeetleLaserAA`→`NaxiBeetleLaserAAE`, `NaxCorrosionRocketTrooper`→`NaxCorrosionRocketTrooperE`,
+  `TSBikeMissileNashwaElite`→`TSBikeMissileNashwaE`, `V3LaunchElite`→`V3LaunchE`,
+  `RA2KirovBomb_nuclear_Elite`→`RA2KirovBomb_nuclear_E`, `CuteKirovBombElite`→`CuteKirovBombE`.
+  Remaining 44 are doctrine variants (`_rad`/`_fire`/`_tesla`), upgrade combos,
+  or gatling spin-ups — intentionally non-standard. Audit tool:
+  `tools/audit/audit_elite_naming.py`.
+- [x] **E4: Verify base weapon gating** (`ac3ba04b7`) — Fixed the 2 actors
+  from E2: added `RequiresCondition: !rank-elite` to
+  `asian_alliance_heavyrailguntank` PRIMARY and
+  `asian_alliance_plasmatrooper` GARRISONED so elite replaces, not stacks.
 
 ## D2K Sprite Conversion Pipeline
 
@@ -550,8 +591,11 @@ factions, everything through the balance workbook._
 - [x] **SM-1BURST: Re-enable laser upgrades on 1-burst weapons** — add Lunar
   Soldier and Laser Tower to the Crystal Lens / Amplified Lens switch and
   recreate the 1-burst yellow/amplified weapon variants.
-- [ ] **SM-AUDIT: Run audit suite and rebuild** — run
-  `tools/audit/run_all.sh`, fix any new findings, and boot-test the mod.
+- [x] **SM-AUDIT: Run audit suite and rebuild** — audit suite run
+  2026-07-15. Schwarzer Mond upgrades: cryptofascism 26/27, lunaralloys
+  26/27, moonpropaganda 5/5, vrilinfusion 5/5 (only uncovered: tsprobe
+  shared unit). No orphaned SM actors/weapons. No faction leaks. Game
+  boots to menu clean.
 - [ ] **SM-BALANCE: Spreadsheet pass** — if any base stats change (e.g.
   raising base burst of Lunar Soldier or Laser Tower), update
   `docs/design/cameo_armor_system.xlsx` and the yaml in the same pass.

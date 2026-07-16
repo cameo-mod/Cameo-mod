@@ -134,7 +134,7 @@ TSCABALEMPDisable.end:
 		ValidTargets: Ground, Ship
 
 TSCABALObeliskLaserFire:
-	Range: 10378
+	Range: 12288
 	ReloadDelay: 90
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
@@ -598,6 +598,9 @@ CabalArtilleryWalkerShell:
 		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 21
+	Warhead@Effect: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: expnew12.aud
 
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
@@ -662,6 +665,9 @@ CabalArtilleryWalkerShellUpgraded:
 		Damage: 42000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 21
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_med
+		ImpactSounds: expnew12.aud
 
 CabalHunterKillerLasers:
 	Inherits: ^LaserWeapon
@@ -695,7 +701,7 @@ CabalHunterKillerLasers:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
-CabalHunterKillerLasersElite:
+CabalHunterKillerLasersE:
 	Inherits: ^LaserWeapon
 	Inherits@2: ^RailgunWeapon
 	Inherits@3: ^HeavyMissile

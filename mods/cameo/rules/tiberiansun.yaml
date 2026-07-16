@@ -1273,7 +1273,7 @@ cabal_manticore_backup:
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1200
+		CooldownDuration: 40
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1314,7 +1314,7 @@ cabal_artilleryspider_backup:
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1600
+		CooldownDuration: 20
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1353,12 +1353,12 @@ cabal_tarantula_backup:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 	RenderSprites:
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 		Image: tstnkspid
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1500
+		CooldownDuration: 100
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
@@ -1367,12 +1367,12 @@ cabal_tarantula_backup:
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-cabal_legion_backup:
-	Inherits: cabal_legion
+cabal_widow_backup:
+	Inherits: cabal_widow
 	Valued:
 		Cost: 3500
 	Tooltip:
-		Name: Legion (Backup Mode)
+		Name: Widow (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_mechfactory, ~disabled
@@ -1390,7 +1390,7 @@ cabal_legion_backup:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		Image: tstnkspid
-		PlayerPalette: player_rgba
+		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:
@@ -1399,11 +1399,11 @@ cabal_legion_backup:
 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1500
+		CooldownDuration: 60
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: cabal_legion
+		IntoActor: cabal_widow
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
@@ -1440,7 +1440,7 @@ cabal_avatar_backup:
 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
-		CooldownDuration: 1200
+		CooldownDuration: 500
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth

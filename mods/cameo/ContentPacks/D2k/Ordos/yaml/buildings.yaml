@@ -105,6 +105,8 @@ ordos_barracks:
 		Prerequisite: d2k_barracks
 	ProvidesPrerequisite@barracks:
 		Prerequisite: barracks
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: ordos_barracks
 	GrantConditionOnPrerequisite@UPGRADEABLE:
 		Prerequisites: upgrade_barracks
 	ActorStatValues:
@@ -459,6 +461,7 @@ ordos_starport:
 ordos_artilleryplatform:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericGroundDetector
@@ -530,6 +533,7 @@ ordos_artilleryplatform:
 ordos_autogunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericAllDetector

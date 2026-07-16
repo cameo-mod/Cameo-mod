@@ -7,22 +7,18 @@
 	Inherits: ^SmallArms
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piff
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piff
 		ExplosionPalette: ra2effect
 
 ^RA2Chaingun:
 	Inherits: ^Chaingun
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_piffs
 		ExplosionPalette: ra2effect
 
@@ -147,7 +143,6 @@
 ^RA2TeslaWeapon:
 	Inherits: ^TeslaWeapon
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -179,7 +174,6 @@
 
 ^RA2RadShell:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: demotruck_explosion
 		ExplosionPalette: ra2effect
 	Warhead@Radiation: CreateTintedCells
@@ -1310,7 +1304,6 @@ RA2TURRETFLAKAA:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -1325,7 +1318,6 @@ SeaScorpionAA:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -1510,7 +1502,7 @@ RA2KirovBomb_nuclear:
 		Level: 800
 		LayerName: ra2radiation
 
-RA2KirovBomb_nuclear_Elite:
+RA2KirovBomb_nuclear_E:
 	Inherits: RA2KirovBomb_nuclear
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 100000
@@ -1976,7 +1968,6 @@ RA160mmE_elite_rad:
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2nukesmall
 
 RA160mmE_elite_fire:
@@ -1999,7 +1990,6 @@ RA160mmE_elite_tesla:
 		Weapon: TeslaFragmentLarge
 		Amount: 2
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_kirovtesla
 
 RA2120xmm:
@@ -2876,11 +2866,9 @@ TeslaArmorDischargeDummy:
 		AimTargetStances: Enemy, Neutral
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
@@ -3116,7 +3104,6 @@ RA2DroneSparks:
 	ReloadDelay: 25
 	Projectile: InstantExplode
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_emp_fx
 		ExplosionPalette: ra2effect
 
@@ -3173,7 +3160,6 @@ IonPulseDischarge:
 	ReloadDelay: 40
 	Projectile: InstantExplode
 	Warhead@Effect1: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_emp_fx
 		ExplosionPalette: ra2effect
 	Warhead@Effect2: CreateEffect
@@ -3290,7 +3276,6 @@ RA2Dronegas:
 	InvalidTargets: Structure, MCImmune
 	Projectile: InstantExplode
 	Warhead@1: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chaosgas
 		ExplosionPalette: ra2effect
 		ImpactActors: false
@@ -3409,7 +3394,6 @@ PsiWave:
 		DamageTypes: PsychicDeath
 		Delay: 5
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 		AffectsParent: true
 		Explosions: controlwave_small
@@ -3427,7 +3411,6 @@ PsiWaveX:
 		DamageTypes: PsychicDeath
 		Delay: 5
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 		AffectsParent: true
 		Explosions: controlwave
@@ -3805,7 +3788,7 @@ V3Launch:
 		Inaccuracy: 1000
 	Warhead@1Dam: TargetDamage
 
-V3LaunchElite:
+V3LaunchE:
 	ReloadDelay: 50
 	Range: 20000
 	MinRange: 4000
@@ -3987,7 +3970,6 @@ V3Explode:
 DredMissile:
 	Inherits: RA2SCUD
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Air
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
@@ -4024,7 +4006,6 @@ YRBoomerSCUD:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ground, Air
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
@@ -4073,7 +4054,6 @@ YRBoomerTorpedo:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -4120,7 +4100,6 @@ RA2TorpTube:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -4427,7 +4406,6 @@ RA2FLAKAA:
 		Damage: 4
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -4506,7 +4484,6 @@ RA2FlakTrackAAGun:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@EffectAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2_flak_puff_AA
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
@@ -5074,7 +5051,6 @@ RA2Mutate:
 
 MutateEffect:
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: mutate
 		ExplosionPalette: playerra2
 		UsePlayerPalette: true
@@ -5103,7 +5079,6 @@ ReactorNuke:
 ReactorNukeWeak:
 	Inherits: ReactorNuke
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ra2radbang
 	Warhead@Radiation: CreateTintedCells
 		Spread: 500
@@ -5326,7 +5301,6 @@ StormCloud:
 		Weapon: LightningBolt
 		Delay: 23
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wccloud1,wccloud2,wccloud3
 		ExplosionPalette: ra2unit
 		ValidTargets: Ground, Air, Water
@@ -5360,7 +5334,6 @@ LightningBolt:
 		ImpactSounds: sweastra.wav,sweastrb.wav,sweastrc.wav,sweastrd.wav
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_explosion
 		ValidTargets: Ground, Air, Water
 	Warhead@6Eff: LeaveSmudge
@@ -5777,7 +5750,7 @@ KirovExplode:
 RA2CorpseSpawner:
 	#Projectile: InstantExplode
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: ra2corpse
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
@@ -5823,7 +5796,7 @@ RA2FlyingBody:
 		Speed: 30, 90
 		Sequences: flyingbody
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: ra2corpse
 		Explosions: death_a, death_b, death_c, death_d, death_e, death_f
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground

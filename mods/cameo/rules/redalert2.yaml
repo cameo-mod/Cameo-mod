@@ -6808,7 +6808,7 @@ ra2_soviets_v3rocketlauncher:
 		LocalOffset: -1024,0,512
 		RequiresCondition: !rank-elite
 	Armament@PRIMARYELITE:
-		Weapon: V3LaunchElite
+		Weapon: V3LaunchE
 		LocalOffset: -1024,0,512
 		RequiresCondition: rank-elite
 	MissileSpawnerMasterCA@1:
@@ -8632,7 +8632,7 @@ ra2_soviets_kirovairship:
 		LocalOffset: 256,0,-512
 		RequiresCondition: (rank-elite && !ra2_soviets_upgrade_kirovatomicbombs) || (!rank-elite && ra2_soviets_upgrade_kirovatomicbombs)
 	Armament@PRIMARYNuclearELITE:
-		Weapon: RA2KirovBomb_nuclear_Elite
+		Weapon: RA2KirovBomb_nuclear_E
 		LocalOffset: 256,0,-512
 		RequiresCondition: rank-elite && ra2_soviets_upgrade_kirovatomicbombs
 	AttackAircraft:

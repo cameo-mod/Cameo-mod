@@ -128,7 +128,6 @@ ZToxinExplodeClust1:
 		Weapon: ZToxinClusterSmall
 		Amount: 10
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: green_building
 
 ZToxinClusterSmall:
@@ -254,7 +253,6 @@ ZJumperZombie:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 	Warhead@2: SpawnActor
 		Actors: jumpzombie.infect

@@ -1,3 +1,23 @@
+schwarzer_mond_drone:
+	Defaults:
+		Scale: 0.5
+	idle:
+		Filename: nax_drone.shp
+		Facings: 64
+	move:
+		Filename: nax_drone.shp
+		Facings: 64
+	move-l:
+		Filename: nax_drone.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: nax_drone.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: nax_drone_icon.png
+
 schwarzer_mond_constructionyard:
 	Defaults:
 		Offset: -8,8

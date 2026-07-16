@@ -150,7 +150,6 @@ halloween_bullethell:
 		Damage: -5000
 		ValidRelationships: Ally
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 
 halloween_bullethell2:
@@ -187,7 +186,6 @@ halloween_bullethell2:
 		Damage: -7500
 		ValidRelationships: Ally
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 
 halloween_bullethell3:
@@ -224,7 +222,6 @@ halloween_bullethell3:
 		Damage: -2500
 		ValidRelationships: Ally
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 
 halloween_bullethell4:
@@ -264,7 +261,6 @@ halloween_bullethell4:
 		Damage: -10000
 		ValidRelationships: Ally
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 
 halloween_SlimeChomp:
@@ -301,7 +297,6 @@ halloween_blob_debris:
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: halloween_blob_splat
 		ImpactActors: false
 	Warhead@4Concrete: DamagesConcrete

@@ -3,6 +3,7 @@ ordos_swarmerdrone:
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^FighterTemplate
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AntiAir: ^PrioritizeAir
@@ -81,6 +82,7 @@ ordos_airmine:
 	Inherits@Template: ^BomberTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@Cloak: ^CloakedAircraft
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
@@ -155,6 +157,7 @@ ordos_eyeinthesky:
 	Inherits@Template: ^BomberTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
@@ -211,6 +214,7 @@ ordos_banshee:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
@@ -295,6 +299,7 @@ ordos_wraith:
 	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
+	Inherits@decoration: ^DuneRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos

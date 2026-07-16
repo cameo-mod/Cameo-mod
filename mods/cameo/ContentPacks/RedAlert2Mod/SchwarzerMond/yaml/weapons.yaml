@@ -27,7 +27,7 @@ NaxiRifleLaserE:
 	Burst: 2
 	BurstDelays: 3
 
-NaxiBeetleLaser:
+NaxiBeetleLaserE:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	Inherits: ^MediumMissile
@@ -65,8 +65,8 @@ NaxiBeetleLaser:
 		Damage: 1
 		ValidTargets: Ground, Water
 
-NaxiBeetleLaserAA:
-	Inherits: NaxiBeetleLaser
+NaxiBeetleLaserAAE:
+	Inherits: NaxiBeetleLaserE
 	Range: 9672
 	ValidTargets: Air
 	Warhead@SmallArms: SpreadDamage
@@ -639,7 +639,7 @@ NaxCorrosionExpand3:
 		ValidTargets: corrodible
 		ValidRelationships: Enemy
 
-NaxCorrosionRocketTrooper:
+NaxCorrosionRocketTrooperE:
 	Inherits: NaxCorrosionRocket
 	ReloadDelay: 50
 	Burst: 1
@@ -929,25 +929,25 @@ Lunar_AmplifiedLaserT:
 		Color: f3e021AA
 
 Lunar_YellowBeetleLaser:
-	Inherits: NaxiBeetleLaser
+	Inherits: NaxiBeetleLaserE
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_YellowBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAA
+	Inherits: NaxiBeetleLaserAAE
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_AmplifiedBeetleLaser:
-	Inherits: NaxiBeetleLaser
+	Inherits: NaxiBeetleLaserE
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_AmplifiedBeetleLaserAA:
-	Inherits: NaxiBeetleLaserAA
+	Inherits: NaxiBeetleLaserAAE
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA

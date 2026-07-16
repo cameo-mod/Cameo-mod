@@ -1,4 +1,4 @@
-interceptor.nax:
+naxis_interceptor:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -31,7 +31,7 @@ interceptor.nax:
 		PauseOnCondition: !ammo
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -45,7 +45,7 @@ interceptor.nax:
 		RequiresSelection: true
 		PipCount: 6
 	SpawnActorOnDeath:
-		Actor: interceptor_husk.nax
+		Actor: naxis_interceptor_husk
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -87,7 +87,7 @@ interceptor.nax:
 		TrailLength: 15
 	-Voiced:
 
-interceptor_husk.nax:
+naxis_interceptor_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Interceptor
@@ -103,114 +103,7 @@ interceptor_husk.nax:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: interceptor.nax
-	RenderSprites:
-		PlayerPalette: playerra2
-
-drone.nax:
-	Inherits: ^RANeutralPlane
-	Inherits@Template: ^FighterTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceRA2
-	Valued:
-		Cost: 750
-	Tooltip:
-		Name: Drone
-	Buildable:
-		Description: template_carrier_slave.description
-	Aircraft:
-		AltitudeVelocity: 150
-		InitialFacing: 768
-		TurnSpeed: 15
-		Speed: 150
-		Repulsable: false
-		MaximumPitch: 50
-		TakeUpCellWhenLand: false
-		VTOL: true
-	Health:
-		HP: 7500
-	ChangesHealth@SelfHealing:
-		Step: 3
-	RevealsShroud:
-		Range: 7500
-		Type: GroundPosition
-	Armament@PRIMARY:
-		Name: primary
-		Weapon: LunarNaxiDroneLaser
-		LocalOffset: 400,-200,-200, 400,200,-200
-		PauseOnCondition: !ammo
-	Armament@Rockets:
-		Name: primary
-		Weapon: LunarNaxiDroneMissile
-		LocalOffset: 425,-350,-225, 425,350,-225
-		LocalYaw: 50, -50, 25, -25
-		PauseOnCondition: !ammo
-	AmmoPool:
-		Ammo: 6
-		AmmoCondition: ammo
-	SpawnActorOnDeath:
-		Actor: drone_husk.nax
-	WithMoveAnimation:
-		MoveSequence: move
-	AttackAircraft:
-		FacingTolerance: 40
-		PersistentTargeting: false
-		RequiresCondition: ammo
-	CarrierSlave:
-		LandingDistance: 8000
-	AutoTarget:
-		InitialStanceAI: AttackAnything
-		InitialStance: AttackAnything
-	HasParent:
-	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
-	-MapEditorData:
-	RejectsOrders:
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
-		PipCount: 6
-	RenderSprites:
-		PlayerPalette: playerra2
-	GrantConditionOnMovement@Turn:
-		Condition: Aircraft-Turning
-		ValidMovementTypes: Turn
-	GrantConditionOnMovement@H:
-		ValidMovementTypes: Horizontal
-		Condition: Aircraft-Horizontal
-	GrantConditionOnMovement@V:
-		ValidMovementTypes: Vertical
-		Condition: Aircraft-Vertical
-	WithMoveAnimation@Turn-L:
-		MoveSequence: move-l
-		RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
-	WithMoveAnimation@Turn-R:
-		MoveSequence: move-r
-		RequiresCondition: Aircraft-Turning && Aircraft-Vertical
-	WithMoveAnimation:
-		MoveSequence: move
-		Condition: !Aircraft-Turning
-	Contrail:
-		Offset: -500,0,250
-		TrailLength: 15
-	-Voiced:
-
-drone_husk.nax:
-	Inherits: ^PlaneHusk
-	Tooltip:
-		Name: Drone
-	Aircraft:
-		TurnSpeed: 20
-		Speed: 150
-	LeavesTrails:
-		Offsets: -853,0,171
-		MovingInterval: 1
-		Image: smokey
-		StationaryInterval: 1
-		SpawnAtLastPosition: False
-		TrailWhileStationary: True
-		Type: CenterPosition
-	RenderSprites:
-		Image: drone.nax
+		Image: naxis_interceptor
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -249,13 +142,13 @@ naxis_bf109:
 		FacingTolerance: 100
 	Armament:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
@@ -337,14 +230,14 @@ naxis_me262:
 		FacingTolerance: 100
 	Armament@Rockets:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,-350,-225, 425,350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
 	Armament@RocketsELITE:
 		Name: primary
-		Weapon: NaxPlaneRockets
+		Weapon: NaxPlaneRocketsE
 		LocalOffset: 425,350,-225, 425,-350,-225
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 5
@@ -352,13 +245,13 @@ naxis_me262:
 		RequiresCondition: rank-elite
 	Armament@MG:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5
 	Armament@ELITE:
 		Name: primary
-		Weapon: NaxPlanegun
+		Weapon: NaxPlanegunE
 		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: ammo < 5

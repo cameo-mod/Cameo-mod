@@ -194,7 +194,6 @@ WH40KPlasmapistol:
 			Light: 100
 			Heavy: 34
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wh40kplasmaexp
 WH40KPlasmapistolG:
 	Inherits: WH40KPlasmapistol
@@ -228,7 +227,6 @@ WH40KGrenadeLauncher:
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_poof
 WH40KHeavyMissileLauncher:
 	Inherits: ^MissileWeapon
@@ -308,7 +306,6 @@ WH40KHellhoundFlamer:
 			Heavy: 20
 			Concrete: 10
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	-Warhead@2Smu:
 
@@ -409,7 +406,6 @@ WH40KSmoke:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 		ValidTargets: Infantry
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_explosion_air
 WH40KMarineMG:
 	Inherits: ^LightMG
@@ -488,7 +484,6 @@ WH40KWhirlWindAG:
 		Explosions: poof
 		ImpactSounds: xplosml2.aud
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 WH40KDreadPunch:
@@ -606,6 +601,7 @@ WH40KSneakAttack:
 	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
@@ -666,7 +662,6 @@ WH40KBommaBomb:
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: large_splash
 Wh40kMarineGrenade:
 	ReloadDelay: 150
@@ -819,7 +814,6 @@ DefilerQuadcannon:
 			Concrete: 20
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
 		ValidTargets: Ground, Water, Air
 WH40KHereticRepair:
@@ -903,7 +897,6 @@ WH40KTauPlasmarifle:
 			Light: 60
 			Heavy: 40
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: scscoutspark
 WH40KXV15rifle:
 	Inherits: WH40KTauPlasmarifle
@@ -931,7 +924,6 @@ WH40KTauDronerifle:
 			Light: 60
 			Heavy: 40
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: scscoutspark
 WH40KDevilfishgun:
 	Inherits: WH40KPlasmapistol
@@ -942,7 +934,6 @@ WH40KDevilfishgun:
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wh40ksmallphotom
 
 WH40KShavreRifle:
@@ -957,7 +948,6 @@ WH40KShavreRifle:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: wh40ksmallphotom
 WH40KSkyraygun:
 	Inherits: WH40KDevilfishgun
@@ -995,7 +985,6 @@ WH40KSkyray227mm:
 			Medium: 74
 			Heavy: 48
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: scphotonexplosion
 
 WH40KHammerheadLasgun:
@@ -1031,7 +1020,6 @@ WH40KEldarGuardianRifle:
 			Light: 75
 			Heavy: 50
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: scscoutspark
 
 ## Deep Strikes
@@ -1074,12 +1062,12 @@ Wh40kDeepStrikeE1Units:
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: tspodring
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: wh40kcapsule
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water

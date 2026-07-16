@@ -566,7 +566,6 @@ smashgun:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		ValidTargets: Ground, Water, Air
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 smashgun2:
@@ -588,14 +587,14 @@ PsiStormGiegue:
 		Range: 600
 		Duration: 75
 		Condition: leaflet
-		
+
 giegue_lightning:
 	Inherits: d2k_chaos_lightning
 	ReloadDelay: 150
 	Range: 10240
 	Projectile: Bullet
 		Image: d2k_chaos_effect
-		
+
 RA2DoublePistolsLaser:
 	Inherits: RA2DoublePistols
 	Report: swlaser.aud
@@ -607,7 +606,6 @@ RA2DoublePistolsLaser:
 		Image: tanyalaser
 		Speed: 0c890
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: tanyalasersplash
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground
@@ -617,7 +615,7 @@ RA2DoublePistolsLaser:
 			Light: 60
 			Medium: 50
 			Heavy: 35
-			
+
 RA2VolkovGun:
 	Inherits: RA2DoublePistols
 	Burst: 2
@@ -638,7 +636,6 @@ RA2VolkovGun:
 			Heavy: 10
 			Concrete: 60
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_frag
 		ValidTargets: Ground, Ship, Air
 
@@ -658,7 +655,7 @@ AncientViceroid:
 			Heavy: 50
 			Concrete: 60
 		DamageTypes: DefaultDeath
-	
+
 AncientViceroidSpawn:
 	ReloadDelay: 150
 	Range: 2048
@@ -680,12 +677,12 @@ AncientViceroidSpawn4:
 	Inherits: AncientViceroidSpawn
 	Warhead@spawn: SpawnActor
 		Actors: spawnedvisceroid, spawnedvisceroid, spawnedvisceroid, spawnedvisceroid, spawnedvisceroid
-		
+
 AncientViceroidSpawn5:
 	Inherits: AncientViceroidSpawn
 	Warhead@spawn: SpawnActor
 		Actors: spawnedvisceroid, spawnedvisceroid, spawnedvisceroid, spawnedvisceroid, spawnedvisceroid, spawnedvisceroid
-		
+
 AncientViceroidBabyClaw:
 	Inherits: ZClaw1
 	ReloadDelay: 15
@@ -698,7 +695,7 @@ AncientViceroidBabyClaw:
 			Medium: 45
 			Heavy: 35 #10
 			Concrete: 15
-			
+
 McNealGL:
 	Inherits: SwatGL
 	Burst: 3
@@ -722,19 +719,19 @@ McNealGL:
 McNealGL1:
 	Inherits: McNealGL
 	Burst: 4
-	
+
 McNealGL2:
 	Inherits: McNealGL
 	Burst: 5
-	
+
 McNealGL3:
 	Inherits: McNealGL
 	Burst: 6
-	
+
 McNealGL4:
 	Inherits: McNealGL
 	Burst: 7
-	
+
 McNealWolveringMG:
 	Inherits: ^TSMG
 	Burst: 2
@@ -751,7 +748,7 @@ McNealWolveringMG:
 			Medium: 30
 			Heavy: 20
 			Concrete: 10
-			
+
 McNealWolveringMissile:
 	Inherits: TSMammothTusk
 	ReloadDelay: 100
@@ -772,7 +769,7 @@ McNealWolveringMissile:
 			Medium: 95
 			Heavy: 75
 			Concrete: 45
-			
+
 McNealMechDropSpawner:
 	Projectile: InstantExplode
 	Range: 4096
@@ -780,7 +777,7 @@ McNealMechDropSpawner:
 		InvalidTargets: FireImmune
 		Weapon: McNealMechDrop
 		Amount: 1
-		
+
 McNealMechDrop:
 	Range: 1024
 	Projectile: AthenaProjectile
@@ -811,12 +808,12 @@ McNealMechDrop1:
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: tspodring
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: tsmcnealmechdrop
 		Explosions: idle
 		ValidTargets: Ground, Air, Water
 	Warhead@3Smu: LeaveSmudge
@@ -830,7 +827,7 @@ McNealMechDrop1:
 		Duration: 10
 		Intensity: 4
 		Multiplier: 1,1
-		
+
 McNealWolverinSuicide:
 	Warhead@1Dam: SpreadDamage
 		Spread: 2c0
@@ -855,7 +852,7 @@ McNealWolverinSuicide:
 		Duration: 12
 		Intensity: 6
 		Multiplier: 1,1
-		
+
 TSNashwaLaser:
 	Inherits: ^TSLaser
 	ReloadDelay: 2
@@ -893,8 +890,8 @@ TSBikeMissileNashwa:
 		InvalidTargets: FireImmune
 		Weapon: TSCyCannonCluster
 		Amount: 1
-		
-TSBikeMissileNashwaElite:
+
+TSBikeMissileNashwaE:
 	Inherits: TSHoverMissile
 	ReloadDelay: 68
 	Burst: 2
@@ -923,7 +920,7 @@ TSBikeMissileNashwaElite:
 		InvalidTargets: FireImmune
 		Weapon: TSCyCannonCluster
 		Amount: 2
-		
+
 SeverusFlachetteSMG:
 	Range: 6144
 	Burst: 4
@@ -953,9 +950,8 @@ SeverusFlachetteSMG:
 		ValidTargets: Ground, Air
 		DamageTypes: TiberiumDeath
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piffs
-		
+
 SeverusCircleDamage:
 	Range: 0
 	ReloadDelay: 3
@@ -968,7 +964,7 @@ SeverusCircleDamage:
 		ValidTargets: Ground
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: TiberiumDeath
-		
+
 SeverusCircleHeal:
 	Range: 0
 	ReloadDelay: 3
@@ -981,17 +977,17 @@ SeverusCircleHeal:
 		AffectsParent: True
 		ValidTargets: Ground
 		ValidRelationships: Ally
-		
+
 SeverusCircleDamageBuff:
 	Inherits: SeverusCircleDamage
 	Warhead@1Dam: SpreadDamage
 		Damage: 200
-		
+
 SeverusCircleHealBuff:
 	Inherits: SeverusCircleHeal
 	Warhead@1Dam: SpreadDamage
 		Damage: -150
-			
+
 SeverusCircleDamageCABAL:
 	Range: 0
 	ReloadDelay: 125
@@ -1004,7 +1000,7 @@ SeverusCircleDamageCABAL:
 		ValidTargets: Ground
 		ValidRelationships: Enemy, Neutral
 		DamageTypes: TiberiumDeath
-		
+
 SeverusCircleHealCABAL:
 	Range: 0
 	ReloadDelay: 125
@@ -1022,7 +1018,7 @@ SeverusCircleDamageCABAL1:
 	Inherits: SeverusCircleDamageCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c953
-		
+
 SeverusCircleHealCABAL1:
 	Inherits: SeverusCircleHealCABAL
 	Warhead@1Dam: SpreadDamage
@@ -1032,7 +1028,7 @@ SeverusCircleDamageCABAL2:
 	Inherits: SeverusCircleDamageCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c998
-		
+
 SeverusCircleHealCABAL2:
 	Inherits: SeverusCircleHealCABAL
 	Warhead@1Dam: SpreadDamage
@@ -1042,7 +1038,7 @@ SeverusCircleDamageCABAL3:
 	Inherits: SeverusCircleDamageCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c43
-		
+
 SeverusCircleHealCABAL3:
 	Inherits: SeverusCircleHealCABAL
 	Warhead@1Dam: SpreadDamage
@@ -1052,7 +1048,7 @@ SeverusCircleDamageCABAL4:
 	Inherits: SeverusCircleDamageCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c88
-		
+
 SeverusCircleHealCABAL4:
 	Inherits: SeverusCircleHealCABAL
 	Warhead@1Dam: SpreadDamage
@@ -1062,18 +1058,18 @@ SeverusCircleDamageCABAL5:
 	Inherits: SeverusCircleDamageCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c133
-		
+
 SeverusCircleHealCABAL5:
 	Inherits: SeverusCircleHealCABAL
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c133
-		
+
 SeverusCircleDamageBuffCABAL:
 	Inherits: SeverusCircleDamageCABAL
 	ReloadDelay: 70
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
-		
+
 SeverusCircleHealBuffCABAL:
 	Inherits: SeverusCircleHealCABAL
 	ReloadDelay: 70
@@ -1098,7 +1094,6 @@ KurtMachinegun:
 		InvalidTargets: Structure, Bridge, ixian_concretewall
 		ValidTargets: Ground, Air
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 KurtMachinegunUpgraded:
 	Inherits: KurtMachinegun
@@ -1123,7 +1118,6 @@ KurtSniper:
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 		InvalidTargets: Structure, Bridge, ixian_concretewall
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 
 KurtGrenade:
@@ -1185,7 +1179,6 @@ KurtMortar:
 		Explosions: artillery_explosion
 		ImpactSounds: mdkgrenade.wav
 	Warhead@4EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_splash
 
 KurtMissile:

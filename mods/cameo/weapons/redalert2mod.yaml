@@ -123,7 +123,6 @@ AsianFlamerTurret:
 AsianChaosSuperweapon:
 	ValidTargets: Ground, Air
 	Warhead@1: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chaosgas
 		ExplosionPalette: ra2effect
 		ImpactActors: false
@@ -192,7 +191,6 @@ AsianSmallTorpedo:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -211,7 +209,6 @@ AsianSmallTorpedo:
 		ContrailStartWidth: 20
 		ContrailEndWidth: 5
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 
 ^SteelChaingun:
@@ -223,7 +220,6 @@ AsianSmallTorpedo:
 		ContrailStartWidth: 40
 		ContrailEndWidth: 10
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: steel_bluepiffs
 
 ^SteelLightMissile:

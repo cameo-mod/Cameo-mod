@@ -486,20 +486,20 @@ schwarzer_mond_lunarrocket:
 	ChangesHealth@SelfHealing:
 		Step: 18
 	Armament@PRIMARY:
-		Weapon: NaxCorrosionRocketTrooper
+		Weapon: NaxCorrosionRocketTrooperE
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxCorrosionRocketTrooper
+		Weapon: NaxCorrosionRocketTrooperE
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxCorrosionRocketTrooper
+		Weapon: NaxCorrosionRocketTrooperE
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxCorrosionRocketTrooper
+		Weapon: NaxCorrosionRocketTrooperE
 		RequiresCondition: rank-elite
 	AttackFrontal:
 		FacingTolerance: 0

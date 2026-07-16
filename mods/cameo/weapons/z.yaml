@@ -115,7 +115,6 @@ ZFlamer:
 			Heavy: 11
 			Concrete: 11
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_napalm
 	-Warhead@2Smu:
 ZFlamerG:
@@ -371,7 +370,6 @@ ZLTNK_DEBRIS:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: d2k_tiny_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha

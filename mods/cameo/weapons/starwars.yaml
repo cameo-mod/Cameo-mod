@@ -10,7 +10,6 @@ SWLaserClone:
 		Image: swbluelaser
 		Speed: 1000
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: drlaserexpbluh
 
 SWLaserCloneG:
@@ -412,7 +411,6 @@ SWTowerMissile:
 			Concrete: 55
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_frag
 
 SWTowerAAMissile:
@@ -439,7 +437,6 @@ SWTowerAAMissile:
 			Concrete: 55
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 		
 SWAclamatorMissile:
@@ -470,7 +467,6 @@ SWAclamatorMissile:
 			Heavy: 60
 			Concrete: 50
 	Warhead@4EffAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 SWAclamatorMissileAA:
@@ -498,7 +494,6 @@ SWStarDestroyerMissile:
 		Spread: 800
 		Damage: 8000
 	Warhead@4EffAir: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: small_building
 
 SWStarDestroyerMissileAA:

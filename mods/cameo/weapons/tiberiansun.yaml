@@ -173,7 +173,6 @@ TS120mm_bluenuke:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: magicnuke_small
 
 TSHighVelocityTurChem:
@@ -221,7 +220,6 @@ TSHighVelocityTurChem:
 			Concrete: 35
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: artillery_explosion
 
 TS155mm:
@@ -270,7 +268,6 @@ TS155mm_bluenuke:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 15
 	Warhead@3Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: magicnuke_med
 
 TSGrenade:
@@ -571,7 +568,6 @@ TSObeliskLaserFire:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 26
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -601,7 +597,6 @@ TSLaserObeliskLaserFire:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 40
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: med_napalm
 		GlowScale: 1.5
 		GlowFadeFrames: 30
@@ -1059,7 +1054,6 @@ TSVeins:
 		Damage: 500
 		DamageTypes: BulletDeath
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 TSVeinholeSmoke:
@@ -1082,7 +1076,6 @@ TSVeinholeSmoke:
 			Light: 20
 			Heavy: 20
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: chemball
 
 TSEMPLimpetBomb:
@@ -1224,10 +1217,8 @@ TSPistola:
 	Warhead@1Dam: SpreadDamage
 		Damage: 200
 	Warhead@2Eff: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: piff
 	Warhead@3EffWater: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: water_piff
 
 TSEngineerPistol:
@@ -1532,6 +1523,7 @@ E1Droppod:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 	Warhead@Effect: CreateEffect
+		Image: tsdroppod
 		Explosions: ring
 		ExplosionPalette: tseffect
 		ImpactSounds: expnew12.aud
@@ -1539,7 +1531,7 @@ E1Droppod:
 		ImpactActors: false
 		AirThreshold: 8c0
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
+		Image: tsdroppod
 		Explosions: fade1, fade2
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
@@ -1568,6 +1560,7 @@ MutSAPC:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
 	Warhead@Effect: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
@@ -1643,6 +1636,7 @@ NODMutant:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
 	Warhead@Effect: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
@@ -1685,6 +1679,7 @@ FloaterSpawner:
 	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
@@ -1706,6 +1701,7 @@ FiendSpawner:
 TunnelDisappear:
 	ReloadDelay: 10
 	Warhead@1: CreateEffect
+		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud

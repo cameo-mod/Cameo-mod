@@ -340,7 +340,6 @@ FutureMicrotorpedos:
 		ValidTargets: Water, Underwater, Bridge, Structure
 	-Warhead@Smudge: LeaveSmudge
 	Warhead@Effect: CreateEffect
-		ImpactSounds: xplosml2.aud
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 	-Warhead@EffectAir: CreateEffect
@@ -424,31 +423,26 @@ AthenaLaser:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect2: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ionbeam2
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect3: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ionbeam3
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect4: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ionbeam4
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect5: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ionbeam5
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect6: CreateEffect
-		ImpactSounds: xplosml2.aud
 		Explosions: ionbeam6
 		ExplosionPalette: ra2unit
 		ImpactActors: false
