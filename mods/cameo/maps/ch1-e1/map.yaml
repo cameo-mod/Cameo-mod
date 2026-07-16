@@ -32,7 +32,7 @@ Players:
 		Playable: True
 		Required: True
 		LockFaction: True
-		Faction: allies
+		Faction: ra1_allies
 		LockColor: True
 		Color: 6D00A9
 		LockTeam: True
@@ -42,7 +42,7 @@ Players:
 		Name: ShadeIdle
 		Bot: campaign
 		LockFaction: True
-		Faction: allies
+		Faction: ra1_allies
 		LockColor: True
 		Color: 00009F
 		LockTeam: True
@@ -52,7 +52,7 @@ Players:
 		Name: ShadeActive
 		Bot: hard
 		LockFaction: True
-		Faction: allies
+		Faction: ra1_allies
 		LockColor: True
 		Color: 00009F
 		LockTeam: True
@@ -61,13 +61,13 @@ Players:
 	PlayerReference@NitroIdle:
 		Name: NitroIdle
 		Bot: campaign
-		Faction: soviet
+		Faction: ra1_soviets
 		Color: D30000
 		Enemies: Penta, ShadeActive
 	PlayerReference@NitroActive:
 		Name: NitroActive
 		Bot: hard
-		Faction: soviet
+		Faction: ra1_soviets
 		Color: D30000
 		Enemies: Penta, ShadeActive
 
@@ -78,10 +78,10 @@ Actors:
 	Actor4: apwr
 		Owner: NitroIdle
 		Location: 63,68
-	Actor5: ra1_soviet_barracks
+	Actor5: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 56,70
-	Actor6: ra1_soviet_barracks
+	Actor6: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 15,70
 	Actor7: powr
@@ -90,19 +90,19 @@ Actors:
 	Actor8: powr
 		Owner: NitroIdle
 		Location: 59,70
-	Actor9: ra1_soviet_flametower
+	Actor9: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 62,73
-	Actor10: ra1_soviet_flametower
+	Actor10: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 53,76
-	Actor11: ra1_soviet_flametower
+	Actor11: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 18,78
-	Actor12: ra1_soviet_flametower
+	Actor12: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 11,70
-	Actor13: ra1_soviet_constructionyard
+	Actor13: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 58,9
 	Actor33: ca
@@ -129,13 +129,13 @@ Actors:
 		Owner: ShadeActive
 		Location: 64,93
 		Facing: 0
-	Actor39: ra1_soviet_teslacoil
+	Actor39: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 29,79
-	Actor40: ra1_soviet_teslacoil
+	Actor40: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 40,80
-	Actor42: ra1_soviet_constructionyard
+	Actor42: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 11,33
 	Actor45: apwr
@@ -144,7 +144,7 @@ Actors:
 	Actor46: apwr
 		Owner: NitroIdle
 		Location: 11,29
-	Actor43: ra1_soviet_barracks
+	Actor43: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 8,33
 	Actor47: powr
@@ -156,28 +156,28 @@ Actors:
 	Actor50: powr
 		Owner: NitroIdle
 		Location: 3,29
-	Actor53: ra1_soviet_orerefinery
+	Actor53: ra1_soviets_orerefinery
 		Owner: NitroIdle
 		Location: 7,23
-	Actor56: ra1_soviet_flametower
+	Actor56: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 9,39
-	Actor57: ra1_soviet_flametower
+	Actor57: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 15,39
-	Actor59: ra1_soviet_flametower
+	Actor59: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 15,31
-	Actor60: ra1_soviet_flametower
+	Actor60: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 4,36
-	Actor61: ra1_soviet_samsite
+	Actor61: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 5,28
-	Actor62: ra1_soviet_samsite
+	Actor62: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 16,28
-	Actor63: ra1_soviet_samsite
+	Actor63: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 8,36
 	Actor64: mine
@@ -273,7 +273,7 @@ Actors:
 	Actor105: moneycrate.large
 		Owner: NitroIdle
 		Location: 27,51
-	Actor111: ra1_soviet_servicedepot
+	Actor111: ra1_soviets_servicedepot
 		Owner: NitroIdle
 		Location: 31,38
 	Actor112: splitgold
@@ -282,7 +282,7 @@ Actors:
 	Actor113: splitgold
 		Owner: Neutral
 		Location: 36,4
-	Actor114: ra1_soviet_orerefinery
+	Actor114: ra1_soviets_orerefinery
 		Owner: NitroIdle
 		Location: 46,5
 	Actor115: apwr
@@ -306,7 +306,7 @@ Actors:
 	Actor125: powr
 		Owner: NitroIdle
 		Location: 55,5
-	Actor127: ra1_soviet_radardome
+	Actor127: ra1_soviets_radardome
 		Owner: NitroIdle
 		Location: 59,5
 	Actor128: tc04
@@ -348,10 +348,10 @@ Actors:
 	Actor140: t16
 		Owner: Neutral
 		Location: 63,48
-	Actor141: ra1_soviet_flametower
+	Actor141: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 42,48
-	Actor143: ra1_soviet_flametower
+	Actor143: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 44,38
 	Actor144: apwr
@@ -363,16 +363,16 @@ Actors:
 	Actor146: powr
 		Owner: NitroIdle
 		Location: 36,40
-	Actor159: ra1_soviet_flametower
+	Actor159: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 56,14
-	Actor160: ra1_soviet_flametower
+	Actor160: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 62,14
-	Actor161: ra1_soviet_teslacoil
+	Actor161: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 54,14
-	Actor162: ra1_soviet_teslacoil
+	Actor162: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 64,14
 	Actor163: ra1_allies_pillbox
@@ -381,39 +381,39 @@ Actors:
 	Actor164: ra1_allies_pillbox
 		Owner: NitroIdle
 		Location: 60,14
-	Actor165: ra1_soviet_samsite
+	Actor165: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 67,10
-	Actor166: ra1_soviet_samsite
+	Actor166: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 50,10
-	Actor167: ra1_soviet_samsite
+	Actor167: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 53,6
-	Actor168: ra1_soviet_samsite
+	Actor168: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 64,6
-	Actor169: ra1_soviet_heavytank
+	Actor169: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Facing: 384
 		Location: 17,74
-	Actor170: ra1_soviet_heavytank
+	Actor170: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 10,70
 		Facing: 499
-	Actor171: ra1_soviet_heavytank
+	Actor171: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 4,67
 		Facing: 570
-	Actor172: ra1_soviet_heavytank
+	Actor172: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 54,73
 		Facing: 594
-	Actor173: ra1_soviet_heavytank
+	Actor173: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 62,72
 		Facing: 507
-	Actor174: ra1_soviet_heavytank
+	Actor174: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 69,70
 		Facing: 444
@@ -477,11 +477,11 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 67,70
-	Actor193: ra1_soviet_v1rockettruck
+	Actor193: ra1_soviets_v1rockettruck
 		Owner: NitroIdle
 		Location: 28,78
 		Facing: 507
-	Actor194: ra1_soviet_v1rockettruck
+	Actor194: ra1_soviets_v1rockettruck
 		Owner: NitroIdle
 		Location: 41,79
 		Facing: 507
@@ -646,22 +646,22 @@ Actors:
 	Actor231: powr
 		Owner: NitroIdle
 		Location: 62,9
-	Actor232: ra1_soviet_barracks
+	Actor232: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 64,9
-	Actor233: ra1_soviet_warfactory
+	Actor233: ra1_soviets_warfactory
 		Owner: NitroIdle
 		Location: 52,9
 	Actor234: powr
 		Owner: NitroIdle
 		Location: 30,46
-	Actor243: ra1_soviet_samsite
+	Actor243: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 31,50
-	Actor244: ra1_soviet_samsite
+	Actor244: ra1_soviets_samsite
 		Owner: NitroIdle
 		Location: 26,40
-	Actor245: ra1_soviet_flametower
+	Actor245: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 26,33
 	Actor246: splitgold
@@ -682,10 +682,10 @@ Actors:
 	Actor251: mine
 		Owner: Neutral
 		Location: 21,47
-	Actor229: ra1_soviet_orerefinery
+	Actor229: ra1_soviets_orerefinery
 		Owner: NitroIdle
 		Location: 15,33
-	Actor253: ra1_soviet_servicedepot
+	Actor253: ra1_soviets_servicedepot
 		Owner: NitroIdle
 		Location: 69,5
 	Actor206: v10
@@ -703,13 +703,13 @@ Actors:
 	Actor257: rasilo
 		Owner: NitroIdle
 		Location: 11,25
-	Actor252: ra1_soviet_warfactory
+	Actor252: ra1_soviets_warfactory
 		Owner: NitroIdle
 		Location: 4,33
-	Actor258: ra1_soviet_barracks
+	Actor258: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 33,34
-	Actor259: ra1_soviet_constructionyard
+	Actor259: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 9,3
 	Actor260: apwr
@@ -724,31 +724,31 @@ Actors:
 	Actor263: powr
 		Owner: NitroIdle
 		Location: 3,3
-	Actor264: ra1_soviet_orerefinery
+	Actor264: ra1_soviets_orerefinery
 		Owner: NitroIdle
 		Location: 8,7
-	Actor265: ra1_soviet_warfactory
+	Actor265: ra1_soviets_warfactory
 		Owner: NitroIdle
 		Location: 16,9
-	Actor266: ra1_soviet_barracks
+	Actor266: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 20,4
-	Actor267: ra1_soviet_flametower
+	Actor267: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 15,15
-	Actor268: ra1_soviet_flametower
+	Actor268: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 13,15
-	Actor269: ra1_soviet_flametower
+	Actor269: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 21,13
-	Actor270: ra1_soviet_flametower
+	Actor270: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 24,11
-	Actor271: ra1_soviet_teslacoil
+	Actor271: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 22,12
-	Actor272: ra1_soviet_teslacoil
+	Actor272: ra1_soviets_teslacoil
 		Owner: NitroIdle
 		Location: 14,13
 	Actor273: tc01
@@ -766,37 +766,37 @@ Actors:
 	Actor277: tc05
 		Owner: Neutral
 		Location: 44,40
-	Actor235: ra1_soviet_warfactory
+	Actor235: ra1_soviets_warfactory
 		Owner: NitroIdle
 		Location: 27,42
-	Actor236: ra1_soviet_airfield
+	Actor236: ra1_soviets_airfield
 		Owner: NitroIdle
 		Location: 31,42
-	Actor237: ra1_soviet_heavytank
+	Actor237: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 9,38
 		Facing: 518
-	Actor238: ra1_soviet_heavytank
+	Actor238: ra1_soviets_heavytank
 		Owner: NitroIdle
 		Location: 15,38
 		Facing: 525
-	Actor239: ra1_soviet_v1rockettruck
+	Actor239: ra1_soviets_v1rockettruck
 		Owner: NitroIdle
 		Location: 7,32
 		Facing: 518
-	Actor240: ra1_soviet_v1rockettruck
+	Actor240: ra1_soviets_v1rockettruck
 		Owner: NitroIdle
 		Location: 14,32
 		Facing: 511
-	Actor241: ra1_soviet_heavyteslatank
+	Actor241: ra1_soviets_heavyteslatank
 		Owner: NitroIdle
 		Location: 70,6
 		Facing: 384
-	Actor242: ra1_soviet_flaktruck
+	Actor242: ra1_soviets_flaktruck
 		Owner: NitroIdle
 		Location: 7,37
 		Facing: 525
-	Actor278: ra1_soviet_flaktruck
+	Actor278: ra1_soviets_flaktruck
 		Owner: NitroIdle
 		Location: 14,37
 		Facing: 518
@@ -809,7 +809,7 @@ Actors:
 	Actor279: powr
 		Owner: NitroIdle
 		Location: 30,34
-	Actor280: ra1_soviet_btr80
+	Actor280: ra1_soviets_btr80
 		Owner: NitroIdle
 		Location: 10,32
 		Facing: 518

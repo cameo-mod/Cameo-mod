@@ -32,7 +32,7 @@ Players:
 		Playable: True
 		Required: True
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
 		LockTeam: True
@@ -44,7 +44,7 @@ Players:
 		Playable: True
 		Required: True
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: 4979F2
 		LockTeam: True
@@ -54,7 +54,7 @@ Players:
 		Name: Truck
 		Bot: campaign
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
 		LockTeam: True
@@ -63,7 +63,7 @@ Players:
 		Name: Truck2
 		Bot: campaign
 		LockFaction: True
-		Faction: gdi
+		Faction: td_gdi
 		LockColor: True
 		Color: 4979F2
 		LockTeam: True
@@ -71,21 +71,21 @@ Players:
 	PlayerReference@EnemyIdle:
 		Name: EnemyIdle
 		Bot: campaign
-		Faction: nod
+		Faction: td_nod
 		Color: D30000
 		Allies: EnemyActive
 		Enemies: Creeps, Player, Enemy2Active, Enemy2Idle
 	PlayerReference@EnemyLasers:
 		Name: EnemyLasers
 		Bot: campaign
-		Faction: nod
+		Faction: td_nod
 		Color: D30000
 		Allies: EnemyActive
 		Enemies: Creeps, Player, Enemy2Active, Enemy2Idle
 	PlayerReference@EnemyActive:
 		Name: EnemyActive
 		Bot: medium
-		Faction: nod
+		Faction: td_nod
 		Color: D30000
 		Enemies: Creeps, Player, Enemy2Active, Enemy2Idle
 	PlayerReference@Enemy2Idle:
@@ -2363,7 +2363,7 @@ Actors:
 		Owner: EnemyIdle
 		Facing: 384
 		Location: 5,111
-	Actor184: ra1_soviet_barracks
+	Actor184: ra1_soviets_barracks
 		Owner: Neutral
 		Location: 106,118
 	CamZerg: camera
