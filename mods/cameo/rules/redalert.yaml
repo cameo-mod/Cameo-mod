@@ -1321,7 +1321,7 @@ ra1_soviet_dragunovantimaterialsniper:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
-		Name: Dragunov Anti Material ra1_allies_alliedsniper
+		Name: Dragunov Anti Material Sniper
 	Valued:
 		Cost: 400
 	UpdatesPlayerStatistics:
@@ -1852,7 +1852,7 @@ ra1_allies_alliedsniper:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Allied ra1_allies_alliedsniper
+		Name: Allied Sniper
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -2943,7 +2943,7 @@ ra1_soviet_kotinnucleartank:
 	Valued:
 		Cost: 1800
 	Tooltip:
-		Name: ra1_soviet_kotinnucleartank Nuclear Tank
+		Name: Kotin Nuclear Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -3698,7 +3698,7 @@ RAAPC:
 	Valued:
 		Cost: 1300
 	Tooltip:
-		Name: Allied td_gdi_apc
+		Name: Allied APC
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
@@ -4520,7 +4520,7 @@ ra1_soviet_yakscoutplane:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: ra1_soviet_yakscoutplane Scout Plane
+		Name: Yak Scout Plane
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -4619,7 +4619,7 @@ ra1_soviet_teslayak:
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@eject: ^AircraftEjectOnDeath
 	Tooltip:
-		Name: Tesla ra1_soviet_yakscoutplane
+		Name: Tesla Yak
 	Valued:
 		Cost: 2000
 	Buildable:
@@ -4746,7 +4746,7 @@ ra1_soviet_armoredyak:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Armored ra1_soviet_yakscoutplane
+		Name: Armored Yak
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -4837,7 +4837,7 @@ ra1_soviet_nuclearyak:
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@eject: ^AircraftEjectOnDeath
 	Tooltip:
-		Name: Nuclear ra1_soviet_yakscoutplane
+		Name: Nuclear Yak
 	Valued:
 		Cost: 2000
 	Buildable:
@@ -5160,7 +5160,7 @@ ra1_soviet_migattackbomber:
 	Valued:
 		Cost: 1400
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Attack Bomber
+		Name: Mig Attack Bomber
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -5400,7 +5400,7 @@ ra1_soviet_hindattackhelicopter:
 	Valued:
 		Cost: 1800
 	Tooltip:
-		Name: ra1_soviet_hindattackhelicopter Attack Helicopter
+		Name: Hind Attack Helicopter
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -8457,15 +8457,15 @@ ra1_soviet_airfield:
 			20: Soviet Paratroopers (Mortar Soldier, Inferno, Tesla Tech)
 			21: Soviet Paratroopers (Mortar Soldier, Inferno, Heavy Armor)
 			22: Soviet Paratroopers (Mortar Soldier, Inferno, Nuclear War)
-			23: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Conscription, Tesla Tech)
-			24: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Conscription, Heavy Armor)
-			25: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Conscription, Nuclear War)
-			26: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Industrial, Tesla Tech)
-			27: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Industrial, Heavy Armor)
-			28: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Industrial, Nuclear War)
-			29: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Inferno, Tesla Tech)
-			30: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Inferno, Heavy Armor)
-			31: Soviet Paratroopers (Mortar Soldier, ra1_soviet_cyberdog, Inferno, Nuclear War)
+			23: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Tesla Tech)
+			24: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Heavy Armor)
+			25: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Nuclear War)
+			26: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Tesla Tech)
+			27: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Heavy Armor)
+			28: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Nuclear War)
+			29: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Tesla Tech)
+			30: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Heavy Armor)
+			31: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Nuclear War)
 		Descriptions:
 			1: power_paratroopers.description
 			2: power_paratroopers.description
@@ -9153,7 +9153,7 @@ ra1_soviet_ironcurtain:
 		Prerequisites: ~ra1_soviet_techcenter, ~techlevel.superweapons
 		Description: actor_iron.description
 	Tooltip:
-		Name: ra1_soviet_ironcurtain Curtain
+		Name: Iron Curtain
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -9456,7 +9456,7 @@ ra1_allies_alliedgunturret:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Allied td_nod_gunturret Turret
+		Name: Allied Gun Turret
 	Building:
 		BuildSounds: placbldg.aud, build5.aud
 	Health:
@@ -9504,7 +9504,7 @@ ra1_allies_alliedaagun:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Allied AA td_nod_gunturret
+		Name: Allied AA Gun
 	Selectable:
 		Bounds: 1024, 1440, 0, -240
 	SelectionDecorations:
@@ -9685,7 +9685,7 @@ ra1_soviet_samsite:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Soviet td_nod_samsite Site
+		Name: Soviet SAM Site
 	Building:
 		Footprint: xx
 		Dimensions: 2,1
@@ -10087,11 +10087,11 @@ ra1_allies_promotion_unlockmachinegunner:
 ra1_allies_promotion_unlocksheridan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock ra1_allies_sheridanassaulttank
+		Name: Unlock Sheridan
 	Buildable:
 		BuildPaletteOrder: 28
 		Queue: Promotions
-		Description: Allows construction of the ra1_allies_sheridanassaulttank Light Tank.
+		Description: Allows construction of the Sheridan Light Tank.
 		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlocksheridan, ra1_allies_promotion_unlockmachinegunner, rank1
 	RenderSprites:
 		Image: ra1_allies_sheridanassaulttank
@@ -10227,11 +10227,11 @@ ra1_allies_promotion_unlockbastion:
 ra1_allies_promotion_unlockgapgeneratorandradarjammer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock ra1_allies_gapgenerator Generator and Radar Jammer
+		Name: Unlock Gap Generator and Radar Jammer
 	Buildable:
 		BuildPaletteOrder: 36
 		Queue: Promotions
-		Description: Allows construction of the ra1_allies_gapgenerator Generator and Mobile Radar Jammer.
+		Description: Allows construction of the Gap Generator and Mobile Radar Jammer.
 		Prerequisites: ~ra1_allies_alliedconstructionyard, !ra1_allies_promotion_unlockgapgeneratorandradarjammer, ra1_allies_promotion_unlockbastion, rank1
 	RenderSprites:
 		Image: gapgeneratorradarjammer
@@ -10314,7 +10314,7 @@ ra1_allies_sheridanassaulttank:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: ra1_allies_sheridanassaulttank Assault Tank
+		Name: Sheridan Assault Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -11244,7 +11244,7 @@ ra1_allies_gapgenerator:
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: ra1_allies_gapgenerator Generator
+		Name: Gap Generator
 	Building:
 		BuildSounds: placbldg.aud, build5.aud
 	Buildable:
@@ -11321,7 +11321,7 @@ ra1_allies_mobilegapgenerator:
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_mgg.description
 	Tooltip:
-		Name: Mobile ra1_allies_gapgenerator Generator
+		Name: Mobile Gap Generator
 	Valued:
 		Cost: 5000
 	UpdatesPlayerStatistics:
@@ -12082,9 +12082,9 @@ ra1_soviet_upgrade_shtoradefensesystem:
 ra1_soviet_upgrade_kotinnucleartank:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
-		Name: ra1_soviet_kotinnucleartank Nuclear Tank Upgrade
+		Name: Kotin Nuclear Tank Upgrade
 	Buildable:
-		Description: Upgrades the Hammer Tank to the ra1_soviet_kotinnucleartank Nuclear Tank
+		Description: Upgrades the Hammer Tank to the Kotin Nuclear Tank
 		Prerequisites: ~ra1_soviet_techcenter, ~ra1_soviet_doctrine_nuclearwar, ra1_soviet_upgrade_hammertank, !ra1_soviet_upgrade_kotinnucleartank
 	RenderSprites:
 		Image: ra1_soviet_kotinnucleartank
@@ -12112,9 +12112,9 @@ ra1_soviet_upgrade_unlockheatraytank:
 ra1_soviet_upgrade_unlockteslayak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
-		Name: Unlock Tesla ra1_soviet_yakscoutplane
+		Name: Unlock Tesla Yak
 	Buildable:
-		Description: Upgrades the ra1_soviet_yakscoutplane into the Tesla Yak.
+		Description: Upgrades the Yak into the Tesla Yak.
 		Prerequisites: ~ra1_soviet_radardome, ~ra1_soviet_doctrine_teslaandexperimentaltech, !ra1_soviet_upgrade_unlockteslayak
 	RenderSprites:
 		Image: ra1_soviet_teslayak
@@ -12122,9 +12122,9 @@ ra1_soviet_upgrade_unlockteslayak:
 ra1_soviet_upgrade_unlockarmoredyak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
-		Name: Unlock Armored ra1_soviet_yakscoutplane
+		Name: Unlock Armored Yak
 	Buildable:
-		Description: Upgrades the ra1_soviet_yakscoutplane into the Armored Yak.
+		Description: Upgrades the Yak into the Armored Yak.
 		Prerequisites: ~ra1_soviet_radardome, ~ra1_soviet_doctrine_heavyarmor, !ra1_soviet_upgrade_unlockarmoredyak
 	RenderSprites:
 		Image: ra1_soviet_armoredyak
@@ -12132,9 +12132,9 @@ ra1_soviet_upgrade_unlockarmoredyak:
 ra1_soviet_upgrade_unlocknuclearyak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
-		Name: Unlock Nuclear ra1_soviet_yakscoutplane
+		Name: Unlock Nuclear Yak
 	Buildable:
-		Description: Upgrades the ra1_soviet_yakscoutplane into the Nuclear Yak.
+		Description: Upgrades the Yak into the Nuclear Yak.
 		Prerequisites: ~ra1_soviet_radardome, ~ra1_soviet_doctrine_nuclearwar, !ra1_soviet_upgrade_unlocknuclearyak
 	RenderSprites:
 		Image: ra1_soviet_nuclearyak
@@ -12311,7 +12311,7 @@ ra1_soviet_promotion_unlockmortarsoldier:
 ra1_soviet_promotion_unlockcyberdog:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock ra1_soviet_cyberdog
+		Name: Unlock Cyberdog
 	Buildable:
 		BuildPaletteOrder: 43
 		Queue: Promotions
@@ -12325,7 +12325,7 @@ ra1_soviet_promotion_unlockcyberdog:
 ra1_soviet_promotion_unlockvolkov:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock ra1_soviet_volkov
+		Name: Unlock Volkov
 	Buildable:
 		BuildPaletteOrder: 46
 		Queue: Promotions
@@ -12468,11 +12468,11 @@ ra1_soviet_cyberdog:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
 		Prerequisites: ~ra1_soviet_promotion_unlockcyberdog, ~ra1_soviet_barracks
-		Description: Cybernetically modified ra1_soviet_attackdog that is far more durable and can attack vehicles.
+		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: ra1_soviet_cyberdog
+		Name: Cyberdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -12586,7 +12586,7 @@ ra1_soviet_volkov:
 		Prerequisites: ~ra1_soviet_barracks, ra1_soviet_techcenter, ra1_soviet_promotion_unlockvolkov
 		Description: actor_volkov.description
 	Tooltip:
-		Name: ra1_soviet_volkov
+		Name: Volkov
 	Valued:
 		Cost: 10000
 	Armament:

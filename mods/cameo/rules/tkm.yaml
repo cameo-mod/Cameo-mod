@@ -1337,7 +1337,7 @@ tkm_sniper:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: ra1_allies_alliedsniper
+		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkm_barracks, ~tkm_upgrade_berezkaarsenalupgrade, tkm_observationvan
@@ -2514,7 +2514,7 @@ tkm_iroquois:
 tkmhuey.husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: ra1_soviet_hindattackhelicopter
+		Name: Hind
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112
@@ -2649,7 +2649,7 @@ tkm_viper:
 tkmviper.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: TKM ra1_soviet_migattackbomber
+		Name: TKM Mig
 	Contrail:
 		Offset: -853,0,0
 	Aircraft:
@@ -3894,7 +3894,7 @@ tkm_promotion_unlockdronepodtruck:
 tkm_promotion_unlockt30:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock tkm_t30
+		Name: Unlock T30
 	Buildable:
 		BuildPaletteOrder: 8054
 		Queue: Promotions

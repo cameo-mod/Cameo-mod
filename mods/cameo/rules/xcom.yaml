@@ -197,12 +197,12 @@ ShotgunUpgrade:
 		Range: 1c0
 ShardgunUpgrade:
 	Tooltip:
-		Name: Shard td_nod_gunturret Upgrade
+		Name: Shard Gun Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 1
 		Queue: Addons
-		Description: Upgrades the Shotgun to the Shard td_nod_gunturret
+		Description: Upgrades the Shotgun to the Shard Gun
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -219,9 +219,9 @@ ShardgunUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Shard td_nod_gunturret Upgrade
+			1: Shard Gun Upgrade
 		Descriptions:
-			1: Upgrades the Shotgun to the Shard td_nod_gunturret
+			1: Upgrades the Shotgun to the Shard Gun
 		Condition: ShardgunUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -549,12 +549,12 @@ xcomsharpshooter:
 		Image: ra2_allies_sniper
 AutoSniperUpgrade:
 	Tooltip:
-		Name: Auto ra1_allies_alliedsniper Upgrade
+		Name: Auto Sniper Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 2
 		Queue: Addons
-		Description: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
+		Description: Gives the Sniper an automatic Sniper Rifle
 	Valued:
 		Cost: 800
 	RenderSprites:
@@ -571,9 +571,9 @@ AutoSniperUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Auto ra1_allies_alliedsniper Upgrade
+			1: Auto Sniper Upgrade
 		Descriptions:
-			1: Gives the ra1_allies_alliedsniper an automatic ra1_allies_alliedsniper Rifle
+			1: Gives the Sniper an automatic Sniper Rifle
 		Condition: AutoSniperUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -880,7 +880,7 @@ medium_gun_turret.xcom:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: td_nod_gunturret Turret
+		Name: Gun Turret
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536

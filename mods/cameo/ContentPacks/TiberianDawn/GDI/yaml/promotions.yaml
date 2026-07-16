@@ -33,7 +33,7 @@ td_gdi_promotion_unlockmissilesoldier:
 td_gdi_promotion_unlocksniper:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock ra1_allies_alliedsniper
+		Name: Unlock Sniper
 	Buildable:
 		BuildPaletteOrder: 19
 		Queue: Promotions
@@ -47,7 +47,7 @@ td_gdi_promotion_unlocksniper:
 td_gdi_promotion_unlockassaultapc:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Assault td_gdi_apc
+		Name: Unlock Assault APC
 	Buildable:
 		BuildPaletteOrder: 22
 		Queue: Promotions

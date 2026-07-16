@@ -539,7 +539,7 @@ N64HAND:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: td_nod_handofnod of Nod
+		Name: Hand of Nod
 	ProvidesPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -1405,7 +1405,7 @@ N64SAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: td_nod_samsite site
+		Name: SAM site
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Defence, RADefence
@@ -2122,7 +2122,7 @@ N64BIKE:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Recon td_nod_reconbike
+		Name: Recon Bike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -2311,7 +2311,7 @@ N64APC:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: td_gdi_apc
+		Name: APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
@@ -2727,7 +2727,7 @@ N64ORCA:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: td_gdi_orca
+		Name: Orca
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

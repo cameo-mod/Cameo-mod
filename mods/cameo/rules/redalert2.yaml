@@ -987,7 +987,7 @@ ra2_allies_gapgenerator:
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: ra1_allies_gapgenerator Generator
+		Name: Gap Generator
 	Buildable:
 		BuildLimit: 1
 		BuildDuration: 1500
@@ -2000,7 +2000,7 @@ ra2_soviets_ironcurtain:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_battlelab, ~techlevel.superweapons
 		Description: actor_iron.description
 	Tooltip:
-		Name: ra1_soviet_ironcurtain Curtain
+		Name: Iron Curtain
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -2118,7 +2118,7 @@ ra2_soviets_sentrygun:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Sentry td_nod_gunturret
+		Name: Sentry Gun
 	Building:
 		Footprint: x
 		Dimensions: 1,1
@@ -3262,7 +3262,7 @@ ra2_allies_attackdog:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack ra1_soviet_attackdog
+		Name: Attack Dog
 		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -3720,7 +3720,7 @@ ra2_allies_sniper:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: ra1_allies_alliedsniper
+		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
@@ -4025,7 +4025,7 @@ ra2_soviets_attackdog:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack ra1_soviet_attackdog
+		Name: Attack Dog
 		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -5876,10 +5876,10 @@ ra2_allies_ifv:
 		RequiresCondition: ifv-demo
 	###############
 	Tooltip@MG:
-		Name: Machine td_nod_gunturret IFV
+		Name: Machine Gun IFV
 		RequiresCondition: ifv-mg || ifv-thief
 	Tooltip@HMG:
-		Name: Heavy Machine td_nod_gunturret IFV
+		Name: Heavy Machine Gun IFV
 		RequiresCondition: ifv-hmg
 	Tooltip@MISS:
 		Name: Missile IFV
@@ -5888,7 +5888,7 @@ ra2_allies_ifv:
 		Name: Repair IFV
 		RequiresCondition: ifv-repair
 	Tooltip@SNIPE:
-		Name: ra1_allies_alliedsniper IFV
+		Name: Sniper IFV
 		RequiresCondition: ifv-ra1_allies_alliedsniper
 	Tooltip@HERO:
 		Name: Hero IFV
@@ -8821,7 +8821,7 @@ yrbpln:
 	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
 	Selectable:
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Bomber
+		Name: MiG Bomber
 	Buildable:
 		Description: template_airstrike_slave.description
 	Valued:
@@ -8925,7 +8925,7 @@ ra2_soviets_migbomber:
 	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
 	Selectable:
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Bomber
+		Name: MiG Bomber
 	Valued:
 		Cost: 2000
 	Buildable:
@@ -11839,7 +11839,7 @@ ra2_ctmsc01:
 		Footprint: x
 		Dimensions: 1,1
 	Tooltip:
-		Name: Hot ra1_soviet_attackdog Cart
+		Name: Hot Dog Cart
 	Crushable:
 		CrushClasses: ixian_concretewall
 ra2_ctmsc02:
@@ -12396,7 +12396,7 @@ ra2shad.Husk:
 yrbpln.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Bomber
+		Name: MiG Bomber
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 176
@@ -14458,7 +14458,7 @@ yuri_upgrade_corrosiveammo:
 		Name: Corrosive Ammo
 	Buildable:
 		Queue: Research
-		Description: Adds a powerful corrosive effect to the Virus ra1_allies_alliedsniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
+		Description: Adds a powerful corrosive effect to the Virus Sniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
 		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_upgrade_meltingvirus, !yuri_upgrade_corrosiveammo
 	RenderSprites:
 		Image: yuri_upgrade_corrosiveammo

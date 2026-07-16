@@ -26,12 +26,12 @@ actor_gtwr =
    .name = Guard Tower
 
 actor_dog =
-   .name = Attack ra1_soviet_attackdog
+   .name = Attack Dog
    .description = Can detect cloaked and disguised units.
       Strong vs Infantry
 
 actor_rasniper =
-   .name = Allied ra1_allies_alliedsniper
+   .name = Allied Sniper
    .description = Camouflaged soldier that can detect cloaked units.
         Strong vs Infantry
 
@@ -126,7 +126,7 @@ actor_mgg =
    .description = Regenerates the shroud nearby,
     obscuring the area.
         Unarmed
-   .name = Mobile ra1_allies_gapgenerator Generator
+   .name = Mobile Gap Generator
 
 actor_mrj =
    .name = Mobile Radar Jammer
@@ -155,7 +155,7 @@ actor_sheridan =
    .description = General-purpose light tank.
       Can attack air with missiles.
         Strong vs Infantry, vehicles
-   .name = ra1_allies_sheridanassaulttank
+   .name = Sheridan
 
 actor_rapierjumpjet =
    .description = Fast multirole fighter-bomber.
@@ -163,9 +163,9 @@ actor_rapierjumpjet =
    .name = Rapier Jumpjet
 
 upgrade_gapgen =
-   .description = Allows construction of the ra1_allies_gapgenerator Generator
-      and the Mobile ra1_allies_gapgenerator Generator and the Phase Transport.
-   .name = Unlock ra1_allies_gapgenerator Generator Technology
+   .description = Allows construction of the Gap Generator
+      and the Mobile Gap Generator and the Phase Transport.
+   .name = Unlock Gap Generator Technology
 
 actor_mortarsoldier =
    .name = Mortar Soldier
@@ -184,7 +184,7 @@ actor_volkov =
    armed with a magnetic pistol and exploding bullets.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
-   .name = ra1_soviet_volkov
+   .name = Volkov
 
 actor_gtnk =
    .description = Mobile unit with mounted gatling cannon.
@@ -215,7 +215,7 @@ actor_kotin =
    .description = Tank armed with nuclear shells.
       Attacks leave radiation.
         Strong vs Vehicles
-   .name = ra1_soviet_kotinnucleartank Nuclear Tank
+   .name = Kotin Nuclear Tank
 
 actor_mignuke =
    .description = Fast nuclear bomber.
@@ -226,14 +226,14 @@ actor_mig =
    .description = Multirole fighter.
       Strong vs Vehicles, Aircraft
       Weak vs air defenses
-   .name = ra1_soviet_migattackbomber
+   .name = MiG
 
 actor_yak =
    .description = Attack plane armed with
     dual machine guns.
       Strong vs infantry, Light armor
       Weak vs air defenses
-   .name = ra1_soviet_yakscoutplane
+   .name = Yak
 
 actor_su57 =
    .description = Multirole fighter-bomber.
@@ -252,7 +252,7 @@ actor_hind =
     with dual chainguns.
       Strong vs infantry, Light armor
       Weak vs air defenses
-   .name = ra1_soviet_hindattackhelicopter
+   .name = Hind
 
 actor_mh60 =
    .description = Helicopter gunship armed
@@ -303,7 +303,7 @@ actor_mslo =
 actor_iron =
    .description = Makes vehicles temporarily invincible.
       Requires power to operate.
-   .name = ra1_soviet_ironcurtain Curtain
+   .name = Iron Curtain
 
 power_ironcurtain =
    .description = Makes a group of units temporarily invulnerable.
@@ -332,10 +332,10 @@ actor_hbox =
 actor_agun =
    .description = Anti-air base defense.
     Requires power to operate.
-   .name = AA td_nod_gunturret
+   .name = AA Gun
 
 actor_gap =
-   .name = ra1_allies_gapgenerator Generator
+   .name = Gap Generator
    .description = Obscures the enemy's view with shroud.
     Requires power to operate.
 
@@ -539,7 +539,7 @@ actor_cleg =
         Weak vs Aircraft
 
 actor_ra2snipe =
-   .name = ra1_allies_alliedsniper
+   .name = Sniper
    .description = Strong vs Infantry
 
 actor_seal =
@@ -695,7 +695,7 @@ actor_zep =
         Weak vs Air
 
 actor_bpln =
-   .name = ra1_soviet_migattackbomber Bomber
+   .name = MiG Bomber
    .description = Fast multirole fighter-bomber.
         Strong vs Ground, Aircraft
         Weak vs Air Defense
@@ -977,7 +977,7 @@ actor_forgotten_zombiemutant =
       Weak vs Aircraft
 
 actor_forgotten_mutantsniper =
-   .name = Mutant ra1_allies_alliedsniper
+   .name = Mutant Sniper
    .description = Long-range marksman.
       Can only target infantry, and picks them out of garrisoned structures.
       Strong vs Infantry
@@ -999,7 +999,7 @@ actor_forgotten_mutantmortarman =
 
 actor_forgotten_mutantsergeant =
    .name = Mutant Sergeant
-   .description = Elite mutant officer whose td_nod_gunturret also reaches aircraft.
+   .description = Elite mutant officer whose gun also reaches aircraft.
       Propaganda aura: nearby friendly units gain 10% firepower and speed, take 10% less damage, reload 10% faster, slowly heal and cannot be mind-controlled.
       Strong vs Infantry
       Weak vs Tanks
@@ -1053,7 +1053,7 @@ actor_forgotten_ghoststalker =
 
 actor_forgotten_raidercar =
    .name = Raider Car
-   .description = Fast scout car whose machine td_nod_gunturret can also strafe aircraft.
+   .description = Fast scout car whose machine gun can also strafe aircraft.
       Replaced by the Bowler after that promotion.
       Strong vs Infantry
       Weak vs Tanks
@@ -1106,7 +1106,7 @@ actor_forgotten_tiberiumharvester =
       Unarmed
 
 actor_forgotten_apctruck =
-   .name = td_gdi_apc Truck
+   .name = APC Truck
    .description = Armored transport truck for six infantry.
       Its cannon reaches ground and air targets.
       Strong vs Infantry
@@ -1116,7 +1116,7 @@ actor_forgotten_missilevan =
    .name = Missile Van
    .description = Fragile van hurling missiles from extreme range.
       Chemical Weapons research loads chemical missiles.
-      Replaced by the td_gdi_mlrs after that promotion.
+      Replaced by the MLRS after that promotion.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
@@ -1145,10 +1145,10 @@ actor_forgotten_scoopertank =
       Weak vs Aircraft
 
 actor_forgotten_mlrs =
-   .name = Forgotten td_gdi_mlrs
+   .name = Forgotten MLRS
    .description = Mutant rocket artillery.
       Chemical Weapons research loads chemical rockets.
-      Requires the td_gdi_mlrs promotion and replaces the Missile Van.
+      Requires the MLRS promotion and replaces the Missile Van.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
@@ -1179,7 +1179,7 @@ actor_forgotten_thumperbus =
 actor_forgotten_nomadbarracks =
    .name = Nomad Barracks
    .description = Rolling barracks that trains infantry anywhere on the map.
-      Nine garrisoned infantry fire from inside; its own td_nod_gunturret covers the approaches.
+      Nine garrisoned infantry fire from inside; its own gun covers the approaches.
       Maximum 1 can be built.
 
 actor_forgotten_mobileconstructionvehicle =
@@ -1188,7 +1188,7 @@ actor_forgotten_mobileconstructionvehicle =
       Unarmed
 
 actor_forgotten_carryall =
-   .name = ixian_autonomouscarryall
+   .name = Carryall
    .description = VTOL crane that lifts and ferries vehicles.
       Unarmed
 
@@ -1297,7 +1297,7 @@ actor_forgotten_veinhole =
 
 actor_forgotten_machineguntower =
    .name = Machinegun Tower
-   .description = Scrap-built machine td_nod_gunturret tower.
+   .description = Scrap-built machine gun tower.
       Detects nearby cloaked enemies.
       Strong vs Infantry, Light vehicles
       Weak vs Tanks, Aircraft
@@ -1312,8 +1312,8 @@ actor_forgotten_brokenrattytankturret =
       Weak vs Infantry, Aircraft
 
 actor_forgotten_juggerflakwall =
-   .name = Juggerflak ixian_concretewall
-   .description = ixian_concretewall-mounted Juggernaut flak battery.
+   .name = Juggerflak Wall
+   .description = Wall-mounted Juggernaut flak battery.
       Cannot engage ground targets.
       Strong vs Aircraft
 
@@ -1434,16 +1434,16 @@ actor_forgotten_promotion_scoopertank =
       Follows the Warrior Tank promotion.
 
 actor_forgotten_promotion_mlrs =
-   .name = Unlock td_gdi_mlrs
+   .name = Unlock MLRS
    .description = Promotion Upgrade (Only affects units of own faction)
-      Allows construction of the Forgotten td_gdi_mlrs rocket artillery, replacing the Missile Van.
+      Allows construction of the Forgotten MLRS rocket artillery, replacing the Missile Van.
       Follows the Scooper Tank promotion.
 
 actor_forgotten_promotion_experimentalmammothtank =
    .name = Unlock Experimental Mammoth Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Experimental Mammoth Tank, a colossal mammoth prototype.
-      Follows the td_gdi_mlrs promotion.
+      Follows the MLRS promotion.
 
 actor_ts_nod_missilesilo =
    .name = Missile Silo
@@ -1460,7 +1460,7 @@ actor_ts_nod_laserturret =
    Cannot attack Aircraft.
 
 actor_ts_nod_samsite =
-   .name = td_nod_samsite Site
+   .name = SAM Site
    .description = Anti-aircraft missile battery.
    Requires power to operate.
    Strong vs Aircraft.
@@ -1631,15 +1631,15 @@ upgrade_rocketenhancements =
    .description = Increases weapon and vision range and damage of all ballistic rockets:
    V1 Truck: 25%
    V2 Launcher: 20%
-   Nuclear V2 Launcher, ra1_soviet_migattackbomber and Su-57: 15%
-   Missile Submarine, td_nod_samsite Site and ra1_soviet_hindattackhelicopter: 10%
-   Mammoth Tank, Monster Tank and ra1_soviet_volkov: 5%
+   Nuclear V2 Launcher, Mig and Su-57: 15%
+   Missile Submarine, SAM Site and Hind: 10%
+   Mammoth Tank, Monster Tank and Volkov: 5%
 
 upgrade_advancedthermobarics =
    .description = Increases damage of all fire and nuclear weapons by 25%.
-   Adds Napalm Warheads to the V1 Truck, ra1_soviet_migattackbomber, Su-57 and all tanks.
+   Adds Napalm Warheads to the V1 Truck, Mig, Su-57 and all tanks.
    V2 Launcher and Nuclear V2 Launcher increase damage by 100%.
-   Adds Incendiary Bullets to the Rifle Infantry, ra1_soviet_yakscoutplane, ra1_soviet_hindattackhelicopter and Gatling Tank.
+   Adds Incendiary Bullets to the Rifle Infantry, Yak, Hind and Gatling Tank.
    Increases Armor of Grenadiers, Flamethrowers, Fire Rocket Soldiers and Mortar Soldiers by 50%
 
 upgrade_experimentalteslaweaponry =
@@ -1648,7 +1648,7 @@ upgrade_experimentalteslaweaponry =
    Unlocks the "Parabombs" Support power from the Soviet Airfield.
 
 upgrade_sovietautoloaders =
-   .description = Reduces the Reload Delay of Tanks, Hinds and ra1_soviet_volkov by 40%.
+   .description = Reduces the Reload Delay of Tanks, Hinds and Volkov by 40%.
 
 upgrade_sovietsteel =
    .description = TEAM UPGRADE
@@ -1739,8 +1739,8 @@ upgrade_personal_shield =
    .description = Gives personal shield generators to all infantry units.
 
 upgrade_d2k_siege_range_upgrade =
-   .description = All Tanks, td_nod_gunturret Turrets and Artillery gain increased range and damage.
-   td_nod_gunturret Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
+   .description = All Tanks, Gun Turrets and Artillery gain increased range and damage.
+   Gun Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
    Ix Siege Tank: 25% higher range and 50% more damage.
    Ix Combat Siege: 50% higher range and 100% more damage.
 
@@ -1842,7 +1842,7 @@ ra1_soviet_doctrine_teslaandexperimentaltech =
       Focuses on Experimental Tesla Technology
       All Tesla Weapons deal additional EMP Damage.
       Replaces Shock Troopers with Zappers
-      Replaces ra1_soviet_hindattackhelicopter with Kamov
+      Replaces Hind with Kamov
       Unlocks Heavy Tesla Tank
       Unlocks Tesla Arcing, Tesla Rockets and Reactor Overload Upgrades
 
@@ -1861,7 +1861,7 @@ ra1_soviet_doctrine_nuclearwar =
       Focuses on High Damage and Speed.
       All Vehicles have 10% higher Firepower and Speed
       Replaces V2 Rocket Launcher with Nuclear V2 Rocket Launcher
-      Unlocks ra1_soviet_kotinnucleartank Nuclear Tank
+      Unlocks Kotin Nuclear Tank
       Unlocks Unstable Isotopes, Thermonuclear Rockets and Nuclear Tank Shells Upgrades
 
 ra1_soviet_upgrade_hazmatsuits =
@@ -1915,11 +1915,11 @@ ra1_soviet_upgrade_teslaarcing =
       Adds arcing effects to all Tesla Weapons.
       Can arc up to 2 extra times for extra damage.
       Reduces recharge delay for the Heavy Tesla Tank by 25%
-      Equips ra1_soviet_volkov with arcing Tesla Bombs.
+      Equips Volkov with arcing Tesla Bombs.
 
 ra1_soviet_upgrade_teslarockets =
    .description = Tech Upgrade (Only affects units of own faction)
-      Heavy Rockets such as of the Mammoth Tank, Kamov, ra1_soviet_migattackbomber and V2 Launcher
+      Heavy Rockets such as of the Mammoth Tank, Kamov, Mig and V2 Launcher
       are replaced with Tesla Rockets that can arc over to other targets on explosion.
 
 ra1_soviet_upgrade_reactoroverload =
@@ -1933,7 +1933,7 @@ ra1_soviet_upgrade_autoloaders =
 
 ra1_soviet_upgrade_highexplosiverockets =
    .description = Tech Upgrade (Only affects units of own faction)
-      Heavy Rockets such as of the Siege Mammoth Tank, ra1_soviet_hindattackhelicopter, Su-57, Grad and V2 Launcher
+      Heavy Rockets such as of the Siege Mammoth Tank, Hind, Su-57, Grad and V2 Launcher
       are replaced with High Explosive Rockets that deal 20% more damage and have higher area of effect.
 
 ra1_soviet_upgrade_stalinium =
@@ -1943,11 +1943,11 @@ ra1_soviet_upgrade_stalinium =
 ra1_soviet_upgrade_unstableisotopes =
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Speed of all Vehicles by 20%.
-      Increases Speed of ra1_soviet_kotinnucleartank Nuclear Tanks by 40%.
+      Increases Speed of Kotin Nuclear Tanks by 40%.
 
 ra1_soviet_upgrade_thermonuclearrockets =
    .description = Tech Upgrade (Only affects units of own faction)
-      Heavy Rockets such as of the Mammoth Tank, ra1_soviet_hindattackhelicopter, ra1_soviet_migattackbomber and Nuclear V2 Launcher
+      Heavy Rockets such as of the Mammoth Tank, Hind, Mig and Nuclear V2 Launcher
       are replaced with Thermonuclear Rockets that deal increased damage to heavier armor types
       and have massively higher area of effect.
 
@@ -1955,8 +1955,8 @@ ra1_soviet_upgrade_nucleartankshells =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Firepower of all Tanks in your team by 20%.
       Equips Soviet Tanks with special shells that explode in a higher radius.
-      Equips ra1_soviet_volkov with a Nuclear Cannon.
-      Increases Spread and Radiation Damage of the ra1_soviet_kotinnucleartank Nuclear Tank.
+      Equips Volkov with a Nuclear Cannon.
+      Increases Spread and Radiation Damage of the Kotin Nuclear Tank.
 
 ra1_soviet_promotion_infantrysuperoptics =
    .description = Promotion Upgrade (Only affects units of own faction)
@@ -1969,7 +1969,7 @@ ra1_soviet_promotion_mammothtanktargetingcomputer =
 
 ra1_soviet_promotion_hurricanerocketpods =
    .description = Promotion Upgrade (Only affects units of own faction)
-      Doubles the amount of Missiles that ra1_soviet_hindattackhelicopter and Kamov can fire.
+      Doubles the amount of Missiles that Hind and Kamov can fire.
 
 ordos_upgrade_shield =
    .description = Tech Upgrade (Only affects units of own faction)
@@ -2001,10 +2001,10 @@ upgrade_sonicweaponry =
 upgrade_tsprojectileimprovements =
    .name = Projectile Improvements
    .description = Tech Upgrade (Only affects units of own faction)
-      Increases Damage and Range of Enforcers, Pitbulls, Hover td_gdi_mlrs and td_nod_samsite Towers by 20%
+      Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and SAM Towers by 20%
 
 upgrade_mechengineering =
-   .name = ra1_allies_mechanic Engineering
+   .name = Mech Engineering
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance of walkers by 20%.
       Increases Speed by 25%.
@@ -2054,7 +2054,7 @@ template_advpower =
 template_barracks =
    .description = Trains infantry.
    .td-gdi = GDI Barracks
-   .td-nod = td_nod_handofnod of Nod
+   .td-nod = Hand of Nod
    .ra-soviet = Soviet Barracks
    .ra-allies = Allied Barracks
    .ra-japan = Japanese Barracks
@@ -2198,7 +2198,7 @@ faction_ra_allies =
 faction_ra_soviets =
    .name = Soviets RA
    .description = Soviets from Red Alert
-      Support powers: Parabombs, ra1_soviet_ironcurtain Curtain, Atomic Bomb
+      Support powers: Parabombs, Iron Curtain, Atomic Bomb
 
 faction_ra_japan =
    .name = Japan RA
@@ -2243,7 +2243,7 @@ faction_ra2_allies =
 faction_ra2_soviets =
    .name = Soviets RA2
    .description = Soviets from Red Alert 2
-      Support powers: ra1_soviet_ironcurtain Curtain, Nuclear Missile
+      Support powers: Iron Curtain, Nuclear Missile
 
 faction_ra2_yuri =
    .name = Yuri

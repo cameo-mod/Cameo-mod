@@ -34,7 +34,7 @@ ra2hornet:
 	idle:
 
 ra2_soviets_seascorpion: #Sea Scorpion
-	idle:
+	idle: ra2hyd
 
 ra2_soviets_sentrygun:
 	turret: ra2laser
@@ -50,14 +50,14 @@ ra2pdplane: #Paradrop plane
 	idle:
 
 ra2_allies_patriotmissilesystem:
-	idle: td_nod_samsite
-	turret: td_nod_samsite
+	idle: sam
+	turret: sam
 
 ra2sapc:
 	idle:
 
 ra2_allies_nighthawk: #Nighthawk
-	idle:
+	idle: ra2shad
 
 ra2sub: #Typhoon Attack Sub
 	idle:
@@ -70,13 +70,13 @@ ra2subt: #Sub Torpedo needs voxel projectiles
 #
 
 yuri_boomersubmarine:
-	idle:
+	idle: yrbsub
 
 yrbsubmisl:
 	idle:
 
 yuri_chaosdrone:
-	idle:
+	idle: yrcaos
 
 yrschd:
 	idle:

@@ -43,7 +43,7 @@ td_nod_handofnod:
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Tooltip:
-		Name: td_nod_handofnod of Nod
+		Name: Hand of Nod
 	ProvidesPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -392,7 +392,7 @@ td_nod_gunturret:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Nod td_nod_gunturret Turret
+		Name: Nod Gun Turret
 	Buildable:
 		BuildPaletteOrder: 45
 		Prerequisites: ~td_nod_constructionyard, td_nod_handofnod
@@ -494,7 +494,7 @@ td_nod_samsite:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Nod td_nod_samsite Site
+		Name: Nod SAM Site
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~td_nod_constructionyard, td_nod_handofnod, td_nod_communicationscenter

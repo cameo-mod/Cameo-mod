@@ -8692,7 +8692,7 @@ upneutronshell:
 upmigarmor:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Armor
+		Name: MiG Armor
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -8744,7 +8744,7 @@ upsubliminal:
 upmignuke:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Tactical Nuke ra1_soviet_migattackbomber
+		Name: Tactical Nuke MiG
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -8804,7 +8804,7 @@ CHMIG:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: ra1_soviet_migattackbomber
+		Name: MiG
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -8913,7 +8913,7 @@ CHMIG2:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Tactical Nuke ra1_soviet_migattackbomber
+		Name: Tactical Nuke MiG
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -8995,7 +8995,7 @@ CHMIG2:
 chmig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ra1_soviet_migattackbomber
+		Name: MiG
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -9824,7 +9824,7 @@ usapath:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Stealthed ra1_allies_alliedsniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: Stealthed sniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 		Prerequisites: barracks, upusapath, ~!anysusa
 	Valued:
 		Cost: 600
@@ -12981,7 +12981,7 @@ usauptowmiss:
 usaupdronegun:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Sentry Drone td_nod_gunturret
+		Name: Sentry Drone Gun
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -13493,7 +13493,7 @@ usauwusupply:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: usasupply
 		BuildPaletteOrder: 120
-		Description: Transports cash other players.\n Armed with self-defense machine td_nod_gunturret
+		Description: Transports cash other players.\n Armed with self-defense machine gun
 	Turreted:
 		Offset: -10,0,150
 	Armament:
