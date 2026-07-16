@@ -237,7 +237,7 @@ class Model:
 
     # Root gate tokens for the monolithic rule files (hand-verified anchors).
     GATE_TOKEN_FACTION: dict[str, str] = {
-        "tsgtcnstgdi": "tsgdi", "tsgtcnstnod": "tsnod",
+        "tsgtcnstgdi": "ts_gdi", "tsgtcnstnod": "ts_nod",
         "tsgtcnstcabal": "cabal", "tsgtcnstmutant": "forgotten",
     }
 

@@ -18,19 +18,19 @@ from miniyaml import load as load_yaml
 from report import table
 
 GAME_OF_SIDE_HINTS = {
-    "gdi": "C&C Tiberian Dawn", "nod": "C&C Tiberian Dawn",
-    "tsgdi": "C&C Tiberian Sun", "tsnod": "C&C Tiberian Sun",
+    "td_gdi": "C&C Tiberian Dawn", "td_nod": "C&C Tiberian Dawn",
+    "ts_gdi": "C&C Tiberian Sun", "ts_nod": "C&C Tiberian Sun",
     "cabal": "C&C Tiberian Sun", "forgotten": "C&C Tiberian Sun",
-    "allies": "Red Alert", "soviet": "Red Alert", "modjapan": "Red Alert (Japan)",
-    "ra2america": "Red Alert 2", "ra2russia": "Red Alert 2", "yuri": "Red Alert 2",
-    "asianalliance": "Cameo original", "consortium": "Cameo original",
-    "syndicate": "Cameo original", "naxis": "Cameo original",
-    "lnaxis": "Cameo original", "futuretech": "Cameo original",
+    "ra1_allies": "Red Alert", "ra1_soviets": "Red Alert", "modjapan": "Red Alert (Japan)",
+    "ra2_allies": "Red Alert 2", "ra2_soviets": "Red Alert 2", "yuri": "Red Alert 2",
+    "asianalliance": "Cameo original", "steelconsortium": "Cameo original",
+    "latinsyndicate": "Cameo original", "naxis": "Cameo original",
+    "schwarzermond": "Cameo original", "futuretech": "Cameo original",
     "tkm": "Cameo original (TKM)",
     "atreides": "Dune 2000", "harkonnen": "Dune 2000",
     "ordos": "Dune 2000", "ixian": "Dune 2000",
     "terran": "StarCraft", "zerg": "StarCraft", "protoss": "StarCraft",
-    "human2": "WarCraft 2", "orc2": "WarCraft 2",
+    "wc2_humans": "WarCraft 2", "wc2_orcs": "WarCraft 2",
     "plymouth": "Outpost 2", "eden": "Outpost 2",
 }
 

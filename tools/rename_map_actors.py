@@ -28,7 +28,7 @@ RENAME_MAP = {
     "rmbo.gdi": "td_gdi_commando",
     "tran.gdi": "td_gdi_chinooktransport",
     # Soviet actors (from rename_map_soviet.yaml)
-    "barr": "ra1_soviet_barracks",
+    "barr": "ra1_soviets_barracks",
     # Japan actors (from rename_map_modjapan.yaml)
     "cycl": "japan_chainlinkfence",
     # Zerg actors (from rename_map_zerg.yaml)
@@ -60,7 +60,7 @@ def process_yaml_file(filepath):
     """Process a map.yaml file, replacing actor names in Actor lines."""
     with open(filepath, 'r', encoding='utf-8') as f:
         lines = f.readlines()
-    
+
     changed = 0
     for i, line in enumerate(lines):
         # Actor definition lines look like: \tActorNN: oldname
@@ -74,7 +74,7 @@ def process_yaml_file(filepath):
                 # Replace just the actor type part
                 lines[i] = line[:m.start(2)] + new_type + line[m.end(2):]
                 changed += 1
-    
+
     with open(filepath, 'w', encoding='utf-8', newline='') as f:
         f.writelines(lines)
     print(f"  {filepath}: {changed} actor replacements")
@@ -83,7 +83,7 @@ def process_lua_file(filepath):
     """Process a lua file, replacing actor name strings."""
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     changed = 0
     for old in SORTED_KEYS:
         # In Lua, actor names appear as quoted strings: "oldname"
@@ -92,7 +92,7 @@ def process_lua_file(filepath):
         if count > 0:
             content = content.replace(pattern, '"' + RENAME_MAP[old] + '"')
             changed += count
-    
+
     with open(filepath, 'w', encoding='utf-8', newline='') as f:
         f.write(content)
     print(f"  {filepath}: {changed} string replacements")
