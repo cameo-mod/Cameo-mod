@@ -227,6 +227,10 @@
 	SoundOnDamageTransition:
 		DamagedSounds: xplobig4.aud
 		DestroyedSounds: crumble.aud, xplobig4.aud
+	# TD buildings render with the default 'player' palette; the death animation
+	# must use the same palette (the ^BaseBuilding ra2player default is for TS).
+	WithDeathAnimation:
+		DeathSequencePalette: player
 	FireWarheadsOnDeath:
 		Type: Footprint
 		Weapon: TDBuildingExplode
@@ -239,6 +243,9 @@
 	SoundOnDamageTransition:
 		DamagedSounds: xplobig4.aud
 		DestroyedSounds: crumble.aud, xplobig4.aud
+	# See ^TDBuilding: death palette must match the default 'player' render palette.
+	WithDeathAnimation:
+		DeathSequencePalette: player
 	FireWarheadsOnDeath:
 		Type: Footprint
 		Weapon: TDBuildingExplode

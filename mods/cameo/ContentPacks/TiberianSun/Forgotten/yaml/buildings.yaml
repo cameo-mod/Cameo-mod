@@ -284,6 +284,9 @@ forgotten_warfactory:
 	WithIdleOverlay@BIB:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: forgot_weap
 		PlayerPalette: player_rgba
