@@ -3,7 +3,9 @@
 _The distilled, binding design contract for this mod. Every AI agent session
 and every contributor reads this FIRST. The long-form analysis and roadmap
 live in [MASTER_REPORT.md](MASTER_REPORT.md); the machine-checkable state
-lives in [audit/](audit/) — this document is the rules themselves._
+lives in [audit/](audit/) — this document is the rules themselves.
+Faction lore, gameplay profiles, and roster details live in
+[FACTIONS.md](FACTIONS.md)._
 
 _When code and this document disagree, the document wins unless an audit
 baseline explicitly defers the fix (e.g. "DEFERRED" findings). When this

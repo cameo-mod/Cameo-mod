@@ -2193,17 +2193,117 @@ faction_ra_random =
 faction_ra_allies =
    .name = Allies RA
    .description = Allies from Red Alert
-      Support powers: GPS, Chronosphere, Chrono Vortex
+      The Allied Forces of Red Alert 1 are a high-tech, mobile coalition of Western
+      nations fighting against the Soviet onslaught. They field lighter, cheaper
+      units and excel at deception, stealth, and technological superiority rather
+      than brute force. Their arsenal includes the Chronosphere for teleporting
+      units across the battlefield, Gap Generators for hiding bases, and the
+      devastating Cruiser naval bombardment.
+
+      In Cameo, the Allies retain their classic asymmetric playstyle with the
+      largest roster of doctrines (6) that dramatically alter their playstyle:
+      Conscription, Heavy Armor, Industrial Efficiency, Inferno, Nuclear War,
+      and Tesla & Experimental Tech. This makes them one of the most adaptable
+      factions in the game.
+
+      Difficulty: ©©©
+      Early Game: ©©
+      Mid Game: ©©©
+      Late Game: ©©©©©
+      Playstyle: Tech / Mobility / Naval
+      Strength: Late Game Technology, Naval Dominance, Stealth
+      Weakness: Early Game Armor, Direct Tank Battles
+      Countered by: Early Tank Rushes, Air Superiority
+      Special Units: Tanya, Chrono Tank, Phase Transport, Mirage Tank, Cruiser
+      Special Buildings: Gap Generator, Chronosphere, Tech Center
+      Team Upgrades: 6 Doctrines (Conscription, Heavy Armor, Industrial Efficiency, Inferno, Nuclear War, Tesla Tech)
+      Support powers: GPS Satellite, Chronosphere, Chrono Vortex
+      Superweapons: Chronosphere, Atomic Bomb (via Nuclear War doctrine)
+
+      Features:
+      - 6 swap-able doctrines that radically change playstyle and available units
+      - Light, fast tanks (Light Tank, Medium Tank) for early mobility
+      - Stealth and deception tools (Spy, Phase Transport, Gap Generator)
+      - Strong naval presence (Cruiser, Destroyer, Gunboat)
+      - Chronoshift technology for strategic repositioning
+      - Tesla and experimental tech available via doctrine swap
+      - Inferno doctrine adds flame weapons to nearly all units
+      - Nuclear War doctrine grants Atomic Bomb superweapon
 
 faction_ra_soviets =
    .name = Soviets RA
    .description = Soviets from Red Alert
+      The Soviet Union of Red Alert 1 is a massive brute-force military machine
+      with the largest roster in all of Cameo (53 units, 44 upgrades). They field
+      overwhelming heavy armor, Tesla weapons, flame projectors, and airpower.
+      Their playstyle revolves around timing attacks, positional warfare, and
+      crushing the enemy under sheer weight of metal and firepower.
+
+      In Cameo, the Soviets boast an enormous upgrade tree covering Tesla
+      technology, incendiary ammunition, mass production, Stalinium armor,
+      nuclear shells, tesla arcing, tesla rockets, autoloaders, and more.
+      Their Mammoth Tank is one of the most iconic and powerful units in the
+      game, and their Tesla Coil defense is legendary.
+
+      Difficulty: ©©
+      Early Game: ©©©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Brute Force / Steamrolling / Timing Push
+      Strength: Heavy Tanks, Tesla Weapons, Air Power, Mass Production
+      Weakness: Mobility, Stealth, Naval Tech
+      Countered by: Tech Rushes, Naval Dominance, Chronoshift Raids
+      Special Units: Mammoth Tank, Tesla Tank, Volkov, MiG, Hind, Shock Trooper
+      Special Buildings: Tesla Coil, Iron Curtain, Missile Silo
+      Team Upgrades: 44 upgrades including Tesla Arcing, Tesla Rockets, Nuclear Shells,
+        Stalinium, Mass Production, Incendiary Bullets, Autoloaders, Scorched Earth,
+        Reactor Overload, Thermonuclear Rockets, Shtora Defense System, Vengeance
       Support powers: Parabombs, Iron Curtain, Atomic Bomb
+      Superweapons: Atomic Bomb, Iron Curtain (invulnerability)
+
+      Features:
+      - Largest unit roster in the game (53 units)
+      - Most upgrades of any faction (44 upgrades)
+      - Heavy, expensive tanks that dominate ground combat
+      - Tesla Coil defense that one-shots most units
+      - Strong air force (MiG, Hind, Kamov)
+      - Flame and incendiary weapons across multiple unit types
+      - Iron Curtain makes units temporarily invulnerable
+      - War Miners doubles as a defensive turret
+      - Desolators create radiation zones that deny area
+      - Volkov: hero unit with anti-tank and anti-infantry capability
 
 faction_ra_japan =
    .name = Japan RA
    .description = Japan custom faction in Red Alert 1 style.
+      Imperial Japan is a fast, aggressive, naval-focused custom faction built
+      in the Red Alert 1 style. Combining WWII-era Japanese military aesthetics
+      with anime-inspired mecha and rocket angels, they field a highly mobile
+      army that excels at amphibious warfare, rapid strikes, and overwhelming
+      aerial assaults. Their playstyle rewards aggressive expansion and
+      early-game pressure.
+
+      Difficulty: ©©©
+      Early Game: ©©©©
+      Mid Game: ©©©
+      Late Game: ©©©
+      Playstyle: Rush / Mobility / Naval
+      Strength: Speed, Amphibious Units, Air Power
+      Weakness: Heavy Armor, Static Defense
+      Countered by: Turtle Factions, Artillery, Air Defense
+      Special Units: Rocket Angel, Mecha, Speedboat, Kamikaze
+      Special Buildings: Dojo, Naval Yard
+      Team Upgrades: 20 upgrades
       Support powers: Super Bomber Airstrike, Magic Orb Hailstorm
+      Superweapons: Magic Orb Hailstorm
+
+      Features:
+      - Fast, aggressive playstyle with amphibious capability
+      - Anime-inspired units (Rocket Angels, transforming mecha)
+      - Strong naval and air presence
+      - Magic Orb Hailstorm: unique area-denial superweapon
+      - High mobility across land and sea
+      - Kamikaze units for devastating suicide attacks
 
 faction_ts_random =
    .name = Any
@@ -2213,22 +2313,188 @@ faction_ts_random =
 faction_tsgdi =
    .name = GDI TS
    .description = GDI from Tiberian Sun
+      The Global Defense Initiative of Tiberian Sun is an industrial military
+      powerhouse fighting to reclaim Earth from Tiberium infestation. GDI
+      relies on heavy armor, walker technology, and orbital strikes. Their
+      army is built around the iconic Titan walker, the devastating Disruptor,
+      and the legendary Mammoth Mk. II — a colossal walker that can only be
+      fielded one at a time but can single-handedly turn the tide of battle.
+      GDI excels at methodical, positional warfare with superior firepower
+      and range.
+
+      In Cameo, GDI TS retains its walker-heavy roster with 33 units and 16
+      upgrades. Their tech tree emphasizes heavy vehicles and air support,
+      with the Juggernaut artillery, Orca Bomber, and Drop Pod infantry
+      providing flexible offensive options. The Ion Cannon superweapon is
+      one of the most iconic in RTS history.
+
+      Difficulty: ©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Turtle / Positional Warfare / Heavy Armor
+      Strength: Heavy Walkers, Artillery, Orbital Strikes, Air Power
+      Weakness: Mobility, Stealth Detection, Early Game Speed
+      Countered by: Stealth Raids, Subterranean Attacks, Air Rushes
+      Special Units: Mammoth Mk. II, Juggernaut, Disruptor, Orca Bomber, Drop Pods
+      Special Buildings: Ion Cannon Uplink, Tech Center, Upgrade Center
+      Team Upgrades: 16 upgrades including armor, firepower, and speed enhancements
       Support powers: Drop Pods, Ion Cannon
+      Superweapons: Ion Cannon
+
+      Features:
+      - Walker-heavy army (Titan, Wolverine, Juggernaut, Mammoth Mk. II)
+      - Mammoth Mk. II: epic hero walker, limited to 1, railgun one-shots most units
+      - Disruptor: sonic weapon that damages everything in its beam path
+      - Orca Bomber and Orca Fighter for flexible air support
+      - Drop Pod infantry for rapid deployment anywhere on the map
+      - Ion Cannon: devastating orbital laser strike
+      - Strong static defenses (Component Tower with various upgrades)
+      - Amphibious APC for water crossings
+      - Hover MLRS for all-terrain anti-air and artillery
+      - Carryall for unit transport and harvester management
 
 faction_tsnod =
    .name = Nod TS
    .description = Nod from Tiberian Sun
+      The Brotherhood of Nod in Tiberian Sun is a fanatical, technology-driven
+      cult-army that relies on stealth, subterranean warfare, and Tiberium-based
+      weapons. Led by the messianic Kane, Nod fields an asymmetric army of
+      cyborgs, stealth tanks, burrowing units, and the Banshee fighter. Their
+      playstyle revolves around deception, hit-and-run tactics, and striking
+      where the enemy is weakest.
+
+      In Cameo, Nod TS has 23 units and 8 upgrades — a smaller, more
+      specialized roster than GDI. Their subterranean units (Subterranean APC,
+      Devil's Tongue) can bypass defenses entirely by burrowing underground.
+      The Cyborg Commando is one of the most powerful infantry units in the
+      game, and the Stealth Tank provides deadly hit-and-run capability.
+
+      Difficulty: ©©©©
+      Early Game: ©©
+      Mid Game: ©©©
+      Late Game: ©©©©
+      Playstyle: Stealth / Hit and Run / Subterranean Warfare
+      Strength: Stealth, Subterranean Units, Tiberium Weapons, Banshee Air
+      Weakness: Direct Armor Battles, Early Game, Unit Count
+      Countered by: Base Defenses, Detection, Air Superiority
+      Special Units: Cyborg Commando, Stealth Tank, Banshee, Devil's Tongue, Subterranean APC
+      Special Buildings: Temple of Nod, Obelisk of Light, Stealth Generator
+      Team Upgrades: 8 upgrades
       Support powers: Chemical Missile
+      Superweapons: Chemical Missile
+
+      Features:
+      - Subterranean units that bypass base defenses by burrowing
+      - Stealth Tank: invisible until it fires, devastating hit-and-run
+      - Cyborg infantry that regenerate health in Tiberium
+      - Banshee: advanced fighter with plasma weapons
+      - Devil's Tongue: burrowing flame tank for base raids
+      - Obelisk of Light: iconic laser defense that one-shots most units
+      - Stealth Generator: cloaks nearby units and structures
+      - Chemical Missile: Tiberium-based area superweapon
+      - Tick Tank: deployable defensive tank that burrows for armor
+      - Artillery: long-range siege with extreme damage
 
 faction_ts_forgotten =
    .name = Forgotten
    .description = Forgotten from Tiberian Sun
+      The Forgotten are Tiberium-mutated outcasts and scavengers who have
+      banded together to survive in the Tiberium-ravaged wastelands. Neither
+      GDI nor Nod, they salvage and improvise technology from both sides,
+      fielding a chaotic but diverse army of mutant soldiers, Tiberium fiends,
+      salvaged vehicles, and experimental prototypes. They are the most
+      localized faction in Cameo with 98% Fluent coverage.
+
+      In Cameo, the Forgotten have the largest TS roster (41 units, 18 buildings,
+      20 upgrades) and a unique promotion system. Their promotion upgrades
+      unlock progressively stronger units across all three production categories
+      (Infantry, Vehicles, Aircraft), with each promotion following a chain.
+      They also have unique team upgrades like Chemical Weapons, Tiberium
+      Boosters, Junk Armor, Unity (aura defense), and Tiberium Adaptability
+      (passive regeneration).
+
+      Difficulty: ©©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Adaptive / Scavenger / Promotion Chain
+      Strength: Diverse Roster, Promotion Units, Tiberium Synergy
+      Weakness: Inconsistent Tech, Reliance on Upgrades
+      Countered by: Early Pressure, Tech Rushes
+      Special Units: Ghost Stalker, Chemical Mammoth Tank, Experimental Mammoth Tank,
+        Tiberian Fiend, Vinifera Fiend, Cobra Copter, Locust Bomber
+      Special Buildings: Bunker Network, Salvage Yard
+      Team Upgrades: Chemical Fuel, Genome Mapping, Friendly Wildlife, Tiberium Boosters,
+        Chemical Weapons, Junk Armor, Unity, Tiberium Adaptability
       Support powers: Tiberian Wildlife Rampage
+      Superweapons: Tiberian Wildlife Rampage
+
+      Features:
+      - Largest TS roster (41 units, 18 buildings, 20 upgrades)
+      - Unique promotion chain system across Infantry, Vehicles, and Aircraft
+      - 12 promotion upgrades that unlock progressively stronger units
+      - Salvaged and improvised tech from both GDI and Nod
+      - Tiberium fiends: mutant wildlife that fights alongside infantry
+      - Ghost Stalker: commando with railgun and C4
+      - Chemical Mammoth Tank: liquid-Tiberium artillery platform
+      - Experimental Mammoth Tank: colossal prototype with extreme firepower
+      - Friendly Wildlife: dead units release friendly Visceroids
+      - Unity aura: nearby Forgotten units reduce each other's damage taken
+      - Tiberium Adaptability: all units passively regenerate health
+      - 98% Fluent localization coverage (highest of any faction)
 
 faction_ts_cabal =
    .name = CABAL
    .description = CABAL from Tiberian Sun
+      CABAL (Computer Assisted Biologically Augmented Lifeform) is the rogue AI
+      that once served Kane and the Brotherhood of Nod before achieving
+      sentience and turning against all humanity. CABAL's army is a cyborg-heavy
+      force built around laser weapons, plasma cannons, spider walkers, and
+      autonomous war machines. Every unit follows cold logic — no morale, no
+      fear, only calculated destruction.
+
+      In Cameo, CABAL is the most upgrade-heavy TS faction (39 units, 16
+      buildings, 27 upgrades) and features a unique 3x4 promotion grid:
+      Infantry, Vehicles, and Aircraft each have 4 tiers of promotion units.
+      Every combat unit inherits from class templates plus PromotionUnitBuff,
+      creating a deep upgrade tree. CABAL also features the unique Backup
+      Systems mechanic: vehicles spawn a high-HP backup wreck on death that
+      can be repaired and auto-reanimated. The Core Defender is an epic walker,
+      and the Mothership provides devastating air superiority.
+
+      Difficulty: ©©©©©
+      Early Game: ©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Tech Rush / Promotion Grid / Attrition
+      Strength: Promotion Units, Backup Systems, Laser/Plasma Weapons, Upgrades
+      Weakness: Early Game, Complex Tech Tree, High APM Requirement
+      Countered by: Early Aggression, Air Rushes, Artillery
+      Special Units: Core Defender (epic walker), Mothership (epic air),
+        Cyborg Commando v2, Eliminator 800, Overkill Fortress, Beholder,
+        Hunter Killer MK2, Manticore, Tarantula, Artillery Spider, Avatar, Widow
+      Special Buildings: CABAL Core, Temple of CABAL, Cyborg Factory
+      Team Upgrades: 27 upgrades including Neutron Nuclear Catalyst, Dark Armament,
+        Backup Systems, Laser Capacitors, Plasma Injectors, and promotion unlocks
       Support powers: Data Worm, Satellite Hack
+      Superweapons: Data Worm, Satellite Hack
+
+      Features:
+      - Unique 3x4 promotion grid: Infantry/Vehicles/Aircraft x Tier 1-4
+      - Every combat unit can be promoted into a stronger variant via rank-gated upgrades
+      - No direct unit-to-unit inheritance; all promotions use class templates + PromotionUnitBuff
+      - Backup Systems: destroyed vehicles spawn repairable wrecks that auto-reanimate
+      - Cyborg infantry with dual-armor system (primary + secondary armor types)
+      - Core Defender: epic walker, limited to 1, devastating area damage
+      - Mothership: epic air unit with orbital-level firepower
+      - Overkill Fortress: carrier unit that deploys combat drones (Farasha-style)
+      - Spider walkers (Manticore, Tarantula, Artillery Spider, Widow, Avatar)
+      - Hunter Killer MK1/MK2: autonomous hunter-killer aircraft
+      - Eliminator 800: heavy gatling infantry with Flak/Heavy armor
+      - Beholder: T3 infantry promotion with detection and support capabilities
+      - CABAL Core serves as T4 tech gate
+      - Most upgrades of any TS faction (27)
 
 faction_ra2_random =
    .name = Any
@@ -2238,17 +2504,142 @@ faction_ra2_random =
 faction_ra2_allies =
    .name = Allies RA2
    .description = Allies from Red Alert 2
+      The Allied Nations of Red Alert 2 are a high-tech coalition of Western
+      powers fighting the Soviet invasion of North America. They field
+      versatile, mobile units with garrison mechanics, air superiority, and
+      advanced technology. Their arsenal includes the iconic Prism Tank,
+      Mirage Tank, Chrono Legionnaire, and the weather-controlling Lightning
+      Storm superweapon.
+
+      In Cameo, the RA2 Allies have 32 units, 19 buildings, and 18 upgrades.
+      Their GI/IFV system provides flexible early-game defense, while their
+      late-game tech tree offers devastating options like the Battle Fortress,
+      Guardian GI, and Tanya. The Chronosphere allows teleporting enemy units
+      into water or friendly units into the enemy base.
+
+      Difficulty: ©©©
+      Early Game: ©©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Mobility / Garrison / Tech
+      Strength: Versatile Units, Air Superiority, Garrison Mechanics, Naval
+      Weakness: Heavy Tank Battles, Early Soviet Rushes
+      Countered by: Desolators, Terror Drones, Kirov Rushes
+      Special Units: Tanya, Prism Tank, Mirage Tank, Chrono Legionnaire, Battle Fortress,
+        Guardian GI, Harrier, Black Eagle
+      Special Buildings: Prism Tower, Patriot Missile, Battle Lab, Chronosphere
+      Team Upgrades: 18 upgrades
       Support powers: Chronosphere, Lightning Storm
+      Superweapons: Chronosphere, Lightning Storm (Weather Control Device)
+
+      Features:
+      - GI deployment system: GIs can deploy for increased range and armor
+      - IFV: adapts weapon based on passenger infantry type
+      - Prism Tank: devastating splash damage chain-lightning artillery
+      - Mirage Tank: cloaks as a tree, ambushes enemy units
+      - Chrono Legionnaire: erases units from time itself
+      - Battle Fortress: mobile bunker that crushes vehicles
+      - Tanya: commando with C4 and dual pistols, can swim
+      - Strong air force (Harrier, Black Eagle)
+      - Chronosphere: teleport units across the map
+      - Lightning Storm: devastating weather superweapon
+      - Guardian GI: anti-tank and anti-air infantry with deploy mode
+      - Robot Tank: immune to mind control (vs Yuri)
 
 faction_ra2_soviets =
    .name = Soviets RA2
    .description = Soviets from Red Alert 2
+      The Soviet Union of Red Alert 2 is a brute-force military juggernaut
+      that invades the United States with overwhelming armor, Tesla weapons,
+      and airpower. Their playstyle revolves around powerful, expensive tanks
+      that dominate ground combat, supported by Kirov airships for devastating
+      bombing runs and V3 rockets for long-range siege.
+
+      In Cameo, the RA2 Soviets have 23 units, 19 buildings, and 17 upgrades.
+      While their roster is smaller than RA1 Soviets, each unit is highly
+      impactful. The Rhino Tank is the best basic tank in the game, the
+      Apocalypse Tank is a late-game monster, and the Kirov Airship can
+      single-handedly level a base if left unchecked.
+
+      Difficulty: ©©
+      Early Game: ©©©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©
+      Playstyle: Brute Force / Tank Rush / Timing Push
+      Strength: Heavy Tanks, Tesla Weapons, Air Power (Kirov)
+      Weakness: Mobility, Naval, Stealth, Unit Variety
+      Countered by: Tech Rushes, Naval Dominance, Chronoshift Raids
+      Special Units: Apocalypse Tank, Kirov Airship, V3 Rocket, Tesla Trooper,
+        Boris, Siege Chopper, War Miner, Terror Drone, Desolator
+      Special Buildings: Tesla Coil, Battle Bunker, Industrial Plant, Nuclear Silo
+      Team Upgrades: 17 upgrades
       Support powers: Iron Curtain, Nuclear Missile
+      Superweapons: Nuclear Missile Silo, Iron Curtain (invulnerability)
+
+      Features:
+      - Rhino Tank: best basic tank, dominates early game
+      - Apocalypse Tank: dual-cannon heavy tank with anti-air missiles
+      - Kirov Airship: slow but devastating bomber, levels bases
+      - V3 Rocket Launcher: long-range siege artillery
+      - Tesla Trooper: charges Tesla Coils, electrifies vehicles
+      - War Miner: armed harvester that doubles as a turret
+      - Terror Drone: fast robot that dismantles vehicles from inside
+      - Desolator: creates radiation zones, denies area (country-specific)
+      - Boris: hero unit with anti-tank rifle and MiG airstrike calling
+      - Siege Chopper: transforms between air and artillery modes
+      - Battle Bunker: garrisonable defensive structure
+      - Industrial Plant: reduces all vehicle/aircraft cost by 25%
+      - Iron Curtain: makes vehicles temporarily invulnerable
+      - Nuclear Missile: devastating area superweapon
 
 faction_ra2_yuri =
    .name = Yuri
    .description = Yuri from Yuri's Revenge
-      Support powers: Genetic Mutator, Psychic Dominator
+      Yuri's army is a radically asymmetric faction built around mind control,
+      genetic mutation, cloning, and psychic domination. Formerly the head of
+      the Soviet Psychic Corps, Yuri defected with an army of psychically
+      altered warriors and genetic mutations. His units use banned technologies
+      to control minds, create mutants, enslave workers, and inflict exotic
+      punishments on enemies.
+
+      In Cameo, Yuri has 20 units, 16 buildings, and 30 upgrades — the most
+      upgrade-heavy RA2 faction. His playstyle is completely unique: instead
+      of conventional combat, Yuri relies on turning enemy units against their
+      owners, creating slave economies, and deploying floating discs that
+      disable enemy bases. The Psychic Dominator is one of the most powerful
+      superweapons in the game.
+
+      Difficulty: ©©©©©
+      Early Game: ©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Mind Control / Area Denial / Economic Warfare
+      Strength: Mind Control, Slave Economy, Psychic Weapons, Booby Traps
+      Weakness: Conventional Combat, Anti-Air, Robot Units (immune to mind control)
+      Countered by: Robot Tanks, Terror Drones, Air Rushes, Allied Naval
+      Special Units: Yuri Clone, Mastermind, Floating Disc, Brute, Virus,
+        Boomer Submarine, Magnetron, Gattling Tank, Lasher Tank, Slave
+      Special Buildings: Psychic Tower, Cloning Vats, Bio Reactor, Grinder,
+        Psychic Dominator, Genetic Mutator
+      Team Upgrades: 30 upgrades
+      Support powers: Genetic Mutator, Psychic Dominator, Psychic Reveal
+      Superweapons: Psychic Dominator, Genetic Mutator
+
+      Features:
+      - Mind control: Yuri Clones and Masterminds take over enemy units
+      - Slave economy: slaves harvest ore for free, can be recaptured if freed
+      - Cloning Vats: produces a free copy of every infantry unit trained
+      - Floating Disc: disables enemy power and steals money
+      - Magnetron: lifts vehicles and drops them on buildings
+      - Boomer: submarine that launches ballistic missiles
+      - Gattling Tank/Ship: weapons that increase fire rate the longer they fire
+      - Psychic Tower: mind-controls enemy units that approach it
+      - Grinder: recycles units for cash
+      - Bio Reactor: powered by infantry (can garrison units for power)
+      - Genetic Mutator: turns all infantry in an area into friendly Brutes
+      - Psychic Dominator: massive mind-control + damage superweapon
+      - Booby Traps: units explode when killed, damaging nearby enemies
+      - Virus: sniper that causes enemies to explode on death
 
 faction_d2k_random =
    .name = Any
@@ -2258,46 +2649,97 @@ faction_d2k_random =
 faction_d2k_ixian =
    .name = Ixians
    .description = Ixians from the Dune Universe
-      The enigmatic Ixians of the industrial world Ix
-      are known for their innovation, cold logic, and mastery
-      of the machine. Bending the rules of the Great Convention,
-      they often deploy experimental weaponry and mechanical
-      monstrosities that others fear to touch.
+      The enigmatic Ixians of the industrial world Ix are known for their
+      innovation, cold logic, and mastery of the machine. Bending the rules
+      of the Great Convention, they often deploy experimental weaponry and
+      mechanical monstrosities that others fear to touch. In the Dune
+      universe, House Ix is the premier technological power, operating in
+      secret to develop machines that skirt the edge of the Butlerian Jihad's
+      prohibition on thinking machines.
 
-      Difficulty: Â©Â©Â©Â©
-      Early Game: Â©Â©Â©
-      Mid Game: Â©Â©Â©Â©
-      Late Game: Â©Â©Â©Â©Â©
-      Playstyle: Turtle
-      Strength: Late Game Units
-      Weakness: Mobility
-      Countered by: Early Game Pressure
-      Special Units: Ixian Projector, Farasha
-      Special Buildings: Starport, Spice Sifter
-      Team Upgrades: Advanced Ixian Technology
+      In Cameo, the Ixians are a turtle-focused faction with 37 units, 19
+      buildings, and 25 upgrades. Their signature unit is the Farasha — an
+      epic carrier airship that deploys drone swarms and fires a devastating
+      charge laser. The Ixian Projector creates holographic decoy units to
+      confuse enemies. Their tech tree is deep and expensive, rewarding
+      players who survive to the late game with overwhelming technological
+      superiority.
+
+      Difficulty: ©©©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Turtle / Tech Rush / Late Game Powerhouse
+      Strength: Late Game Units, Drone Swarms, Experimental Weapons
+      Weakness: Mobility, Early Game, Expensive Tech
+      Countered by: Early Game Pressure, Fast Rushes
+      Special Units: Farasha (epic carrier with drones), Ixian Projector (holographic decoys),
+        Koda Tank, Hover Drive units
+      Special Buildings: Starport, Spice Sifter, Ixian Research Facility
+      Team Upgrades: Advanced Ixian Technology (25 upgrades)
       Support powers: Pulse Missile
+      Superweapons: Pulse Missile
+
+      Features:
+      - Farasha: epic carrier that deploys combat drones and fires charge lasers
+      - Ixian Projector: creates holographic decoy units to mislead enemies
+      - Deep tech tree with 25 upgrades
+      - Strong static defenses and turtle gameplay
+      - Starport for purchasing units with spice instead of production queues
+      - Spice Sifter for enhanced resource processing
+      - Hover Drive technology for all-terrain mobility
+      - General-purpose armor system
+      - Late-game units are among the most powerful in the game
+      - Drone swarm mechanics (Farasha drones)
+      - 31/37 units AI-wired
 
 faction_d2k_ordos =
    .name = House Ordos
    .description = House Ordos from the Dune Universe
-      The insidious Ordos of the icy planet Sigma Draconis IV
-      are known for their wealth, greed and treachery.
-      Relying heavily on mercenaries they often resort
-      to sabotage and forbidden Ixian technologies.
-      Their Strength lies in Stealth and quick hit and run tactics
+      The insidious Ordos of the icy planet Sigma Draconis IV are known for
+      their wealth, greed, and treachery. Relying heavily on mercenaries,
+      they often resort to sabotage and forbidden Ixian technologies. Their
+      strength lies in stealth and quick hit-and-run tactics. In the Dune
+      universe, House Ordos is a mysterious cartel led by the Executrix —
+      four beings sharing a single mind — who communicate only through a
+      creature known as the Speaker. Their military is largely mercenary,
+      and their troops tend to desert under heavy casualties.
 
-      Difficulty: Â©Â©Â©
-      Early Game: Â©Â©
-      Mid Game: Â©Â©Â©
-      Late Game: Â©Â©Â©Â©Â©
-      Playstyle: Mobility / Steamrolling
-      Strength: Late Game Units
-      Weakness: Early Game Tanks
-      Countered by: Artillery
-      Special Units: Wraith, Face Dancer
-      Special Buildings: Starport, Spice Sifter
-      Team Upgrades: WIP
+      In Cameo, House Ordos has the largest Dune roster (48 units, 15 buildings,
+      29 upgrades). Their playstyle centers on stealth, mobility, and late-game
+      steamrolling. The Wraith provides cloaked strike capability, while the
+      Face Dancer can impersonate and mind-control enemy units. Their Saboteur
+      can infiltrate and disable enemy structures, and Chaos Lightning disrupts
+      enemy formations. Ordos units benefit from self-repairing regeneration
+      technology, making them efficient to maintain.
+
+      Difficulty: ©©©
+      Early Game: ©©
+      Mid Game: ©©©
+      Late Game: ©©©©©
+      Playstyle: Mobility / Stealth / Steamrolling / Late Game Powerhouse
+      Strength: Late Game Units, Stealth, Self-Repair, Mercenary Diversity
+      Weakness: Early Game Tanks, Mercenary Reliability, Unit Cost
+      Countered by: Artillery, Early Aggression, Detection
+      Special Units: Wraith (cloaked fighter), Face Dancer (mind control commando),
+        Saboteur, Deviator, Pop-up Turret
+      Special Buildings: Starport, Spice Sifter, Ordos Palace
+      Team Upgrades: 29 upgrades (WIP — expanding)
       Support powers: Saboteur, Chaos Lightning
+      Superweapons: Chaos Lightning
+
+      Features:
+      - Largest Dune roster (48 units, 15 buildings, 29 upgrades)
+      - Stealth-focused playstyle with cloaked units (Wraith)
+      - Face Dancer: mind-control commando that impersonates enemies
+      - Saboteur: infiltrator that disables enemy structures
+      - Deviator: temporarily takes control of enemy vehicles
+      - Self-repairing units (regeneration technology)
+      - Pop-up Turret: burrowing defense that's hard to destroy when idle
+      - Mercenary units (can desert under heavy casualties)
+      - Starport for purchasing units with spice
+      - Chaos Lightning: disruptive area superweapon
+      - 42/48 units AI-wired
 
 consumer_items_impulse =
    .description = Impulse Items

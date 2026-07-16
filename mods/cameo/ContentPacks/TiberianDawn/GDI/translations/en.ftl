@@ -156,4 +156,44 @@ upgrade_lightweightarmorplating =
 faction_td_gdi =
    .name = GDI TD
    .description = GDI from Tiberian Dawn
+      The Global Defense Initiative of Tiberian Dawn (Command & Conquer, 1995)
+      is the UN-backed military taskforce formed to combat the Brotherhood of
+      Nod and contain the spread of Tiberium. Founded in 1995 under the UN
+      Global Defense Act, GDI draws support from the world's most powerful
+      nations. Their military doctrine emphasizes heavy armor, air superiority,
+      and overwhelming firepower. The iconic Mammoth Tank, Orca aircraft, and
+      Ion Cannon orbital strike define GDI's identity as a high-tech,
+      brute-force military power.
+
+      In Cameo, TD GDI is a straightforward, beginner-friendly faction with
+      a classic C&C playstyle. Their roster features the Mammoth Tank (dual
+      cannons + missiles), Medium Tank, Orca, and the devastating Ion Cannon
+      superweapon. GDI excels at positional warfare and heavy armor pushes,
+      supported by Airstrike capabilities and strong static defenses.
+
+      Difficulty: ©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Brute Force / Heavy Armor / Positional
+      Strength: Heavy Tanks, Air Power, Ion Cannon, Strong Defenses
+      Weakness: Mobility, Stealth, Early Game Speed
+      Countered by: Stealth Raids, Artillery, Engineer Rushes
+      Special Units: Mammoth Tank, Orca, Commando, Medium Tank, MLRS, Humvee
+      Special Buildings: Advanced Guard Tower, Airstrike, Ion Cannon Uplink
+      Team Upgrades: Tank upgrades (armor +20%, speed +10%), Orca upgrades
       Support powers: Airstrike, Ion Cannon
+      Superweapons: Ion Cannon
+
+      Features:
+      - Classic C&C faction with straightforward playstyle
+      - Mammoth Tank: iconic dual-cannon heavy tank with anti-air missiles
+      - Orca: versatile VTOL aircraft for ground attack
+      - Ion Cannon: devastating orbital laser superweapon
+      - Airstrike: periodic bombing run support power
+      - Advanced Guard Tower: powerful anti-air and anti-ground defense
+      - Strong heavy armor roster (Mammoth, Medium Tank)
+      - Grenadier: fast infantry with area-denial grenades
+      - APC: amphibious infantry transport with anti-air capability
+      - Humvee: fast scout with multiple weapon variants
+      - Commando: elite infantry that one-shots buildings with C4

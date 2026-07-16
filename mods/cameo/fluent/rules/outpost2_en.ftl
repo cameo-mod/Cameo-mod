@@ -1,20 +1,108 @@
 faction_outpost2_plymouth =
-   .description = Features:
-   - Splinter Colony
-   - High tech faction from NewTerra
-   - Must build a colony in order to operate
-   - Has fast Lynx vehicles and strong Tiger vehicles
+   .description = Plymouth Colony from Outpost 2
+      Plymouth is a splinter colony on the harsh planet of NewTerra, founded
+      by colonists who broke away from Eden over ideological differences.
+      Plymouth favors adaptability and survival through ingenuity, fielding
+      unique weapons like StickyFoam, ESG (Electro-Static Grapple), and
+      Microwave emitters. Their military doctrine emphasizes area denial,
+      crowd control, and attrition warfare. Plymouth also fields Spider
+      vehicles — small, fast, autonomous units that can overwhelm enemies
+      through sheer numbers.
 
-   Support powers: Supernova Missile
+      In Cameo, Plymouth is a colony-building faction that must construct
+      a functioning colony (Residence, Agridome, Lab, Factory) to operate
+      effectively. Their vehicle roster uses modular chassis (Lynx, Panther,
+      Tiger) with swappable weapon turrets. The Supernova Missile is their
+      signature superweapon — a tactical nuclear device that deals heavy
+      damage over a large area. Plymouth's unique weapons include the
+      StickyFoam projectile, ESG, and Microwave, offering distinct tactical
+      options compared to Eden's Laser and Rail Gun arsenal.
+
+      Difficulty: ©©©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©
+      Playstyle: Colony Builder / Area Denial / Attrition
+      Strength: Spider Swarms, Area Denial Weapons, Supernova Missile
+      Weakness: Colony Dependency, Resource Intensive, Slow Start
+      Countered by: Early Rushes, Economic Harassment, Air Power
+      Special Units: Spider, Plymouth Lynx (Supernova), Plymouth Tiger (Supernova),
+        StickyFoam Lynx, ESG Tiger, Microwave Lynx
+      Special Buildings: Tokamak, Residence, Agridome, Vehicle Factory,
+        Garage, Laboratory
+      Team Upgrades: Weapon tech research tree (Microwave, StickyFoam, ESG, EMP)
+      Support powers: Supernova Missile
+      Superweapons: Supernova Missile
+
+      Features:
+      - Splinter Colony from NewTerra
+      - High tech faction with colony-building mechanics
+      - Must build a colony (Residence, Agridome, Lab, Factory) to operate
+      - Has fast Lynx vehicles and strong Tiger vehicles
+      - Spider: unique small autonomous unit that swarms enemies
+      - StickyFoam: slows and traps enemies in expanding foam
+      - ESG (Electro-Static Grapple): disables vehicles with electric discharge
+      - Microwave: directed energy weapon that induces electrical damage
+      - EMP Missile: disables all vehicles in target area
+      - Tokamak: power plant that releases EMP shockwave when destroyed
+      - Supernova Missile: tactical nuclear superweapon
+      - Modular vehicle chassis: Lynx (fast), Panther (balanced), Tiger (heavy)
+      - Colony morale system affects productivity
+      - ConVecs deploy structure kits, Earthworkers build tubes and walls
 
 faction_outpost2_eden =
-   .description = Features:
-   - Primary Colony
-   - High tech faction from NewTerra
-   - Must build a colony in order to operate
-   - Has fast Lynx vehicles and strong Tiger vehicles
+   .description = Eden Colony from Outpost 2
+      Eden is the primary colony on NewTerra, founded by the original colonists
+      who value scientific progress and technological supremacy. Eden's military
+      doctrine emphasizes precision and firepower, with unique weapons including
+      the Laser (pulsed chemical laser), Rail Gun (kinetic projectile), Acid Cloud
+      (corrosive area denial), and Starflare (shaped-charge suicide turret). Eden
+      also fields the GeoCon, Repair Vehicle, and Robo-Surveyor — unique support
+      units that Plymouth lacks. Their Tokamak power plants are more efficient,
+      and their research tree is geared toward offensive technology.
 
-   Support powers: Supernova Missile
+      In Cameo, Eden is a colony-building faction like Plymouth, but with a
+      more aggressive tech tree. Their Laser and Rail Gun weapons offer superior
+      direct-fire firepower, while Acid Cloud provides area denial. The Supernova
+      Missile is their signature superweapon. Eden's unique units include the
+      GeoCon (transforms into Geothermal Plant), Repair Vehicle (field repairs),
+      and the Supernova Lynx and Tiger variants. Their playstyle rewards tech
+      rushing and aggressive expansion.
+
+      Difficulty: ©©©©
+      Early Game: ©©©
+      Mid Game: ©©©©©
+      Late Game: ©©©©
+      Playstyle: Colony Builder / Tech Rush / Precision Strike
+      Strength: Laser Weapons, Rail Gun, Acid Cloud, Repair Vehicles
+      Weakness: Colony Dependency, Resource Intensive, Slow Start
+      Countered by: Early Rushes, Economic Harassment, Spider Swarms
+      Special Units: Eden Lynx (Supernova), Eden Tiger (Supernova),
+        Laser Lynx, Rail Gun Tiger, Acid Cloud Lynx, Starflare Lynx,
+        GeoCon, Repair Vehicle, Robo-Surveyor
+      Special Buildings: Tokamak, Residence, Agridome, Vehicle Factory,
+        Garage, Laboratory, Geothermal Plant
+      Team Upgrades: Weapon tech research tree (Laser, Rail Gun, Acid Cloud, Starflare, EMP)
+      Support powers: Supernova Missile
+      Superweapons: Supernova Missile
+
+      Features:
+      - Primary Colony from NewTerra
+      - High tech faction with colony-building mechanics
+      - Must build a colony (Residence, Agridome, Lab, Factory) to operate
+      - Has fast Lynx vehicles and strong Tiger vehicles
+      - Laser: pulsed chemical laser with rapid cycle time, defeats ablative armor
+      - Rail Gun: kinetic projectile at several km/s, no explosive warhead needed
+      - Acid Cloud: corrosive area-denial weapon
+      - Starflare: shaped-charge suicide turret for close-range destruction
+      - GeoCon: transforms into Geothermal Plant over fumaroles (Eden only)
+      - Repair Vehicle: field-repairs vehicles to 50% HP (Eden only)
+      - Robo-Surveyor: surveys mining beacons for ore type and yield
+      - Supernova Missile: tactical nuclear superweapon
+      - Modular vehicle chassis: Lynx (fast), Panther (balanced), Tiger (heavy)
+      - Colony morale system affects productivity
+      - More aggressive research tree than Plymouth
+      - EMP Missile: disables all vehicles in target area
 
 support_supernova_missile =
   .description = Launch a tactical missile.

@@ -228,4 +228,48 @@ upgrade_advancedguerillatactics =
 faction_td_nod =
    .name = Nod TD
    .description = Nod from Tiberian Dawn
+      The Brotherhood of Nod in Tiberian Dawn (Command & Conquer, 1995) is a
+      centuries-old secret society led by the messianic Kane. Nod seeks to
+      control the world through Tiberium wealth, pseudo-religious ideology,
+      and unconventional warfare. They unite third-world nations under the
+      mantra "Brotherhood, unity, peace" while fielding an asymmetric army
+      of flame weapons, stealth tanks, artillery, and nuclear weapons. Nod
+      excels at hit-and-run tactics, deception, and overwhelming the enemy
+      through speed and unconventional strategies.
+
+      In Cameo, TD Nod is an aggressive, mobile faction that rewards
+      micro-intensive play. Their roster features the Stealth Tank, Flame
+      Tank, Recon Bike, Nod Buggy, and the iconic Obelisk of Light defense.
+      The Nuclear Strike is their superweapon. Nod's playstyle revolves
+      around speed, stealth, and area-denial through flame weapons and
+      artillery. They are the counterpart to GDI's brute-force approach.
+
+      Difficulty: ©©©
+      Early Game: ©©©©
+      Mid Game: ©©©
+      Late Game: ©©©©
+      Playstyle: Rush / Hit and Run / Stealth / Area Denial
+      Strength: Speed, Stealth, Flame Weapons, Artillery, Nuclear Strike
+      Weakness: Heavy Armor, Direct Combat, Air Defense
+      Countered by: Heavy Tank Pushes, Air Superiority, Base Defenses
+      Special Units: Stealth Tank, Flame Tank, Recon Bike, Nod Buggy,
+        Chemical Warrior, Nod Artillery, Light Tank, Apache
+      Special Buildings: Obelisk of Light, Temple of Nod, Hand of Nod
+      Team Upgrades: Guerrilla Tactics (doubled for Stealth Tank), weapon upgrades
       Support powers: Nuclear Strike
+      Superweapons: Nuclear Strike
+
+      Features:
+      - Asymmetric, speed-focused faction
+      - Stealth Tank: invisible until it fires, devastating hit-and-run
+      - Flame Tank: heavy vehicle that incinerates infantry and buildings
+      - Recon Bike: fastest unit in the game, armed with rockets
+      - Nod Buggy: fast, cheap anti-infantry scout
+      - Chemical Warrior: infantry that walks through Tiberium and deals chemical damage
+      - Nod Artillery: long-range siege weapon
+      - Obelisk of Light: iconic laser defense that one-shots most units
+      - Apache: attack helicopter for ground support
+      - Nuclear Strike: devastating superweapon from the Temple of Nod
+      - Guerrilla Tactics team upgrade: increases damage for all units,
+        doubled for Nod, doubled again for Stealth Tank
+      - Light Tank: fast, cheap tank for early aggression

@@ -5,7 +5,8 @@ bugs ALWAYS jump the queue. Ordering within a section: **quickest wins
 first, then by severity**. Effort: S < 1h, M = one session, L = multi-
 session. Every completed item gets its commit hash; every new order
 lands here first. Goal: **finish the CABAL faction**, then the dune
-factions, everything through the balance workbook._
+factions, everything through the balance workbook. Faction reference:
+[FACTIONS.md](../FACTIONS.md)._
 
 > **Multi-agent repo.** Three contributors touch this tree: the
 > maintainer (AedisToru), **333ggg** (i333ggg@yandex.ru — works Starcraft

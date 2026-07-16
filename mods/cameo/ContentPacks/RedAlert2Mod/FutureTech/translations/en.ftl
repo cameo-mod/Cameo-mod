@@ -19,14 +19,41 @@ faction_ra2_futuretech =
       units can be deployed. Their technology is among the most powerful on the battlefield,
       but their base defenses are sparse, offering little protection without a standing army.
 
+      In Cameo, FutureTech is a pure tech-rush faction with the highest difficulty
+      rating. Their robotic units (Robot Tanks, Future Tanks) are immune to mind
+      control and can hover over water. The Harbinger Gunship provides devastating
+      air support, while the Cryocopter can freeze enemy units. Their Hypercore
+      and Robot Control Center are essential buildings for unlocking their full
+      arsenal. Weak early game but nearly unstoppable once fully teched.
+
       Difficulty: ©©©©©
       Early Game: ©©
       Mid Game: ©©©
       Late Game: ©©©©©
-      Playstyle: Tech Rush
-      Strength: Late Game Offense, Robotic Units
-      Weakness: Early Game, Base Defense
-      Countered by: Early Aggression, Air Raids
-      Special Units: Future Tank, Harbinger Gunship, Cryocopter
-      Special Buildings: Hypercore, Robot Control Center
-      Support powers: Paradrop (Planned: Sigma Harmonizer, Robot Energize)
+      Playstyle: Tech Rush / Robotics / Experimental Weapons
+      Strength: Late Game Offense, Robotic Units, Mind Control Immune
+      Weakness: Early Game, Base Defense, High Cost
+      Countered by: Early Aggression, Air Raids, Map Control
+
+      Special Units: Future Tank (autonomous combat vehicle), Harbinger Gunship
+        (heavy air unit), Cryocopter (freezes enemy units), Robot Tank
+        (hover-capable, MC-immune unmanned tank)
+      Special Buildings: Hypercore (advanced tech building), Robot Control Center
+        (enables robot units)
+      Team Upgrades: TBD
+      Support powers: Paradrop
+      Superweapons: Planned: Sigma Harmonizer, Robot Energize
+
+      Features:
+      - Pure tech-rush faction: weak early, dominant late game
+      - Robot Tanks: unmanned, hover-capable, mind-control immune
+      - Future Tank: autonomous combat vehicle with advanced weaponry
+      - Harbinger Gunship: devastating heavy air unit
+      - Cryocopter: support unit that freezes enemy units
+      - Robot Control Center: required building for robot unit production
+      - Hypercore: advanced technology building for high-tier unlocks
+      - Mind control immunity on all robotic units
+      - Hover capability on robot tanks (water traversal)
+      - Sparse base defenses: requires standing army for protection
+      - Highest difficulty rating in the game (©©©©©)
+      - Planned superweapons: Sigma Harmonizer, Robot Energize

@@ -28,14 +28,14 @@ World:
 		InternalName: wc2_humans
 		Game: Warcraft 2
 		Side: Warcraft 2
-		Description: Human\nLeaders of the Alliance\nMighty and intelligent.\nSupport Powers: Holy Vision, Blizzard
+		Description: faction_wc2_humans.description
 		Selectable: True
 	FactionCA@wc2_orcs:
 		Name: Orc WC2
 		InternalName: wc2_orcs
 		Game: Warcraft 2
 		Side: Warcraft 2
-		Description: Orc\nLeaders of the Horde\nBrutish and crafty.\nSupport Powers: Eye of Kilrogg, Death and Decay
+		Description: faction_wc2_orcs.description
 		Selectable: True
 	FactionCA@RandomWC2:
 		Name: Random WC2
@@ -43,7 +43,7 @@ World:
 		RandomFactionMembers: wc2_humans, wc2_orcs
 		Game: Warcraft 2
 		Side: Random
-		Description: Random Faction\nA random faction from Warcraft 2 will be chosen when the game starts.
+		Description: faction_randomwc2.description
 	####################################################################################################
 	#	   Warcraft 2
 	####################################################################################################

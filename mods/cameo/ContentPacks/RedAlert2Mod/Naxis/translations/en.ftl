@@ -100,15 +100,38 @@ faction_ra2_naxis =
       units from across the WWII gaming genre. They trade elegance for raw, clanking
       industrial power and occult experimentation.
 
+      In Cameo, Naxis is a turtle-focused faction with formidable early-game
+      bunkers and heavy tanks. Their playstyle revolves around building an
+      impenetrable defensive line, then breaking out with overwhelming armored
+      force. The Ratte is their signature super-heavy tank — a land cruiser
+      that dominates the ground war. Their occult experiments allow them to
+      raise undead warriors from the dead. The V1 Rocket provides long-range
+      artillery support.
+
       Difficulty: ©©©©
       Early Game: ©©©©©
       Mid Game: ©©
       Late Game: ©©©©
-      Playstyle: Turtle
-      Strength: Bunkers, Heavy Tanks and Artillery
-      Weakness: Aircraft
-      Countered by: Heavy Armor, Map Control
-      Special Units: Ratte, Nokana
-      Special Buildings: Sausage Factory, Beer Factory
+      Playstyle: Turtle / Heavy Armor / Artillery
+      Strength: Bunkers, Heavy Tanks, Artillery, Early Game Defense
+      Weakness: Aircraft, Mid Game Transition, Mobility
+      Countered by: Heavy Armor, Map Control, Air Superiority
+
+      Special Units: Ratte (super-heavy land cruiser), Nokana (heavy tank),
+        V1 Rocket launcher, Undead Warriors
+      Special Buildings: Sausage Factory, Beer Factory, Bunker networks
       Team Upgrades: Blitzkrieg
       Support powers: Revive the Undead Warriors, V1 Rocket
+      Superweapons: Revive the Undead Warriors
+
+      Features:
+      - Turtle playstyle with formidable bunker defense
+      - Ratte: super-heavy multi-turret land cruiser
+      - Nokana: heavy tank with powerful main gun
+      - V1 Rocket: long-range ballistic missile support power
+      - Revive the Undead Warriors: occult support power that raises fallen infantry
+      - Blitzkrieg: team upgrade enhancing speed and combat performance
+      - Sausage Factory and Beer Factory: unique economic buildings
+      - Strong early-game defense, weak mid-game transition
+      - Industrial aesthetic with clanking heavy machinery
+      - Satirical WWII-era parody faction
