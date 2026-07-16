@@ -1,4 +1,4 @@
-steel_consortium_katytank:
+steelconsortium_katytank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^HighTechTankTemplate
@@ -21,7 +21,7 @@ steel_consortium_katytank:
 		Name: Katy Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_promotion_katytank, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_promotion_katytank, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_katy.description
 	Mobile:
@@ -54,7 +54,7 @@ steel_consortium_katytank:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@ELITE:
 		Name: primary
 		Weapon: SteelKatyCannonsE
@@ -63,7 +63,7 @@ steel_consortium_katytank:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelKatyCannonsEMP
@@ -72,7 +72,7 @@ steel_consortium_katytank:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
 		Name: primary
 		Weapon: SteelKatyCannonsEMPE
@@ -81,7 +81,7 @@ steel_consortium_katytank:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -99,9 +99,9 @@ steel_consortium_katytank:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_defenderbot:
+steelconsortium_defenderbot:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -124,7 +124,7 @@ steel_consortium_defenderbot:
 		Name: Defender Bot
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_promotion_unlockdefenderbot, steel_consortium_consortiumradar
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_promotion_unlockdefenderbot, steelconsortium_consortiumradar
 		Queue: Vehicle, RAVehicle
 		Description: Shielded Battle Robot
 	Mobile:
@@ -150,19 +150,19 @@ steel_consortium_defenderbot:
 	Armament@PRIMARY:
 		Weapon: SteelInfRailgun
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@PRIMARYELITE:
 		Weapon: SteelInfRailgunE
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
 		Weapon: SteelInfRailgunEMP
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARYELITE:
 		Weapon: SteelInfRailgunEMPE
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		FacingTolerance: 10
 	RenderRangeCircle:
@@ -197,9 +197,9 @@ steel_consortium_defenderbot:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_stalker:
+steelconsortium_stalker:
 	Inherits: ^Tank
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -220,7 +220,7 @@ steel_consortium_stalker:
 		Name: Stalker
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_promotion_unlockstalker, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_promotion_unlockstalker, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_stalker.description
 	Mobile:
@@ -253,18 +253,18 @@ steel_consortium_stalker:
 	Armament:
 		Weapon: SteelStalkerRailgun
 		LocalOffset: 900,300,500
-		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Weapon: SteelStalkerRailgunEMP
 		LocalOffset: 900,300,500
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
 		Weapon: SteelStalkerRailgunE
 		LocalOffset: 900,300,500
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@steel_consortium_upgrade_quantumweaponpower:
+	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
 		Modifier: 125
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		FacingTolerance: 10
 	WithInfantryBody:
@@ -292,9 +292,9 @@ steel_consortium_stalker:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_whiterabbit:
+steelconsortium_whiterabbit:
 	Inherits: ^Tank
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -315,7 +315,7 @@ steel_consortium_whiterabbit:
 		Name: White Rabbit
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_promotion_unlockwhiterabbit, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_promotion_unlockwhiterabbit, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_white_rabbit.description
 	Mobile:
@@ -377,7 +377,7 @@ steel_consortium_whiterabbit:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 cougar.steel:
 	Inherits: ^Vehicle
@@ -401,7 +401,7 @@ cougar.steel:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~disabled
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Mobile:
@@ -440,7 +440,7 @@ cougar.steel:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 hummer.steel:
 	Inherits: ^Tank
@@ -460,7 +460,7 @@ hummer.steel:
 		Name: Federation Hummer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~disabled
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor_aaquas.description
 	Mobile:
@@ -498,7 +498,7 @@ hummer.steel:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 oldqtnk.steel:
 	Inherits: ^Tank
@@ -521,7 +521,7 @@ oldqtnk.steel:
 		Name: Beta Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumbattlelab, ~disabled
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumbattlelab, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -566,7 +566,7 @@ oldqtnk.steel:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 cobra.steel:
 	Inherits: ^Tank
@@ -586,7 +586,7 @@ cobra.steel:
 		Name: Federation Cobra
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumbattlelab, ~disabled
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumbattlelab, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -628,9 +628,9 @@ cobra.steel:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_supportshieldgenerator:
+steelconsortium_supportshieldgenerator:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -647,7 +647,7 @@ steel_consortium_supportshieldgenerator:
 		Name: Support Shield Generator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_savi.description
 	Mobile:
@@ -691,9 +691,9 @@ steel_consortium_supportshieldgenerator:
 		Color: 8888FF88
 		RequiresCondition: !disabled
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_consortiummobileconstructionvehicle:
+steelconsortium_consortiummobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -704,7 +704,7 @@ steel_consortium_consortiummobileconstructionvehicle:
 	Tooltip:
 		Name: Consortium Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: steel_consortium_consortiumradar, ~steel_consortium_consortiumwarfactory
+		Prerequisites: steelconsortium_consortiumradar, ~steelconsortium_consortiumwarfactory
 	Mobile:
 		Speed: 60
 		Locomotor: amphibius
@@ -717,7 +717,7 @@ steel_consortium_consortiummobileconstructionvehicle:
 	Armor:
 		Type: Light
 	Transforms:
-		IntoActor: steel_consortium_consortiumconstructionyard
+		IntoActor: steelconsortium_consortiumconstructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -731,9 +731,9 @@ steel_consortium_consortiummobileconstructionvehicle:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_consortiumminer:
+steelconsortium_consortiumminer:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -767,7 +767,7 @@ steel_consortium_consortiumminer:
 		TurnSpeed: 20
 		Locomotor: hover
 	Buildable:
-		Prerequisites: ~steel_consortium_consortiumrefinery
+		Prerequisites: ~steelconsortium_consortiumrefinery
 		Queue: Vehicle, RAVehicle
 		Description: actor_cmin.description
 	WithHarvestAnimation:
@@ -777,7 +777,7 @@ steel_consortium_consortiumminer:
 	Voiced:
 		VoiceSet: ChronoMinerVoice
 	RenderSprites:
-		Image: steel_consortium_consortiumminer
+		Image: steelconsortium_consortiumminer
 		PlayerPalette: playerra2cons
 	Hovers:
 		Ticks: 10
@@ -792,9 +792,9 @@ steel_consortium_consortiumminer:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_mako:
+steelconsortium_mako:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -811,7 +811,7 @@ steel_consortium_mako:
 		Name: Mako
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~!steel_consortium_promotion_quantumtank
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~!steelconsortium_promotion_quantumtank
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_mako.description
 	Mobile:
@@ -831,25 +831,25 @@ steel_consortium_mako:
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@ELITE:
 		Weapon: SteelMakoGunE
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
 		Weapon: SteelMakoGunEMP
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
 		Weapon: SteelMakoGunEMPE
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: rank-elite && steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:
@@ -866,9 +866,9 @@ steel_consortium_mako:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_quantumtank:
+steelconsortium_quantumtank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -890,7 +890,7 @@ steel_consortium_quantumtank:
 		Name: Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~steel_consortium_promotion_quantumtank
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_quantumtank
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -915,7 +915,7 @@ steel_consortium_quantumtank:
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelQuantumCannonEMP
@@ -924,7 +924,7 @@ steel_consortium_quantumtank:
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
 		Name: primary
 		Weapon: SteelQuantumCannon_elite
@@ -934,9 +934,9 @@ steel_consortium_quantumtank:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@steel_consortium_upgrade_quantumweaponpower:
+	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
 		Modifier: 125
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -951,9 +951,9 @@ steel_consortium_quantumtank:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_manta:
+steelconsortium_manta:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -973,7 +973,7 @@ steel_consortium_manta:
 		Name: Manta
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~!steel_consortium_promotion_unlockbarracuda
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~!steelconsortium_promotion_unlockbarracuda
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_manta.description
 	Mobile:
@@ -1013,25 +1013,25 @@ steel_consortium_manta:
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAG2:
 		Weapon: SteelMantaAGResonance
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA1:
 		Weapon: SteelMantaAAResonance
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA2:
 		Weapon: SteelMantaAAResonance
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	ReloadDelayMultiplier@ELITE:
@@ -1053,9 +1053,9 @@ steel_consortium_manta:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_resonanceammo, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_barracuda:
+steelconsortium_barracuda:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1076,7 +1076,7 @@ steel_consortium_barracuda:
 		Name: Barracuda
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~steel_consortium_consortiumwarfactory, ~steel_consortium_promotion_unlockbarracuda
+		Prerequisites: ~steelconsortium_consortiumwarfactory, ~steelconsortium_promotion_unlockbarracuda
 		Queue: Vehicle, RAVehicle
 		Description: Kills Infantry better
 	Mobile:
@@ -1133,7 +1133,7 @@ steel_consortium_barracuda:
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAG2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsResonance
@@ -1142,7 +1142,7 @@ steel_consortium_barracuda:
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA1:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance
@@ -1151,7 +1151,7 @@ steel_consortium_barracuda:
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	Armament@UpgradeAA2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance
@@ -1160,7 +1160,7 @@ steel_consortium_barracuda:
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 	RangeMultiplier@Barracuda:
 		Modifier: 83
 	FirepowerMultiplier@DualWeapon:
@@ -1185,9 +1185,9 @@ steel_consortium_barracuda:
 		BobDistance: -64
 		InitialHeight: 384
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_resonanceammo, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_megalodon:
+steelconsortium_megalodon:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1208,7 +1208,7 @@ steel_consortium_megalodon:
 		Name: Megalodon
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_mega.description
 	Mobile:
@@ -1228,13 +1228,13 @@ steel_consortium_megalodon:
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: SteelMegaSwordEMP
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
 		Weapon: SteelMegaSwordE
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@steel_consortium_upgrade_quantumweaponpower:
+	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
 		Modifier: 125
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		FacingTolerance: 10
 	WithInfantryBody:
@@ -1252,9 +1252,9 @@ steel_consortium_megalodon:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_hammerheadartillerytank:
+steelconsortium_hammerheadartillerytank:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1271,7 +1271,7 @@ steel_consortium_hammerheadartillerytank:
 		Name: Hammerhead Artillery Tank
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumradar
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumradar
 		Queue: Vehicle, RAVehicle
 		Description: actor_steel_arty.description
 	Mobile:
@@ -1355,9 +1355,9 @@ steel_consortium_hammerheadartillerytank:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_poseidontank:
+steelconsortium_poseidontank:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -1380,7 +1380,7 @@ steel_consortium_poseidontank:
 		Name: Poseidon Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_consortiumradar
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_consortiumradar
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:
@@ -1421,7 +1421,7 @@ steel_consortium_poseidontank:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		InitialUnits: steel_consortium_clonetrooper,steel_consortium_hoverboardgrenadier,steel_consortium_quantummissiletrooper,steel_consortium_clonetrooper,steel_consortium_hoverboardgrenadier,steel_consortium_quantummissiletrooper
+		InitialUnits: steelconsortium_clonetrooper,steelconsortium_hoverboardgrenadier,steelconsortium_quantummissiletrooper,steelconsortium_clonetrooper,steelconsortium_hoverboardgrenadier,steelconsortium_quantummissiletrooper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	RenderSprites:
@@ -1432,9 +1432,9 @@ steel_consortium_poseidontank:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_dagger:
+steelconsortium_dagger:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1452,7 +1452,7 @@ steel_consortium_dagger:
 		Name: Dagger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_consortium_consortiumwarfactory, steel_consortium_promotion_daggerartillery, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumwarfactory, steelconsortium_promotion_daggerartillery, steelconsortium_consortiumbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_aahowi.description
 	Mobile:
@@ -1490,5 +1490,5 @@ steel_consortium_dagger:
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 

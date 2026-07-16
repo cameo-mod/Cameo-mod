@@ -632,14 +632,14 @@ futuretech_javelinsoldier:
 		Filename: futuretech_javelinsoldier_icon.png
 
 futuretech_engineer:
-	Inherits: steel_consortium_engineer
+	Inherits: steelconsortium_engineer
 	icon:
 		Filename: futuretech_engineer_icon.png
 		Scale: 1
 		Offset: 0,0
 
 futuretech_repairdroid:
-	Inherits: schwarzer_mond_engineeringarmor
+	Inherits: schwarzermond_engineeringarmor
 	icon:
 		Filename: futuretech_repairdroid_icon.png
 
@@ -1247,17 +1247,17 @@ futuretech_blackwidow:
 
 futuretech_twister:
 	idle:
-		Filename: steel_consortium_twister.shp
+		Filename: steelconsortium_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
 	move:
-		Filename: steel_consortium_twister.shp
+		Filename: steelconsortium_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
 	icon:
-		Filename: steel_consortium_twister_icon.shp
+		Filename: steelconsortium_twister_icon.shp
 
 futuretech_harbingergunship:
 	Defaults:

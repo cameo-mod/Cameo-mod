@@ -10,11 +10,11 @@ qacst_infiltrated.steel:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: steel_consortium_consortiumconstructionyard
+		Prerequisite: steelconsortium_consortiumconstructionyard
 	RenderSprites:
-		Image: steel_consortium_consortiumconstructionyard
+		Image: steelconsortium_consortiumconstructionyard
 
-steel_consortium_upgrade_pulseweapons:
+steelconsortium_upgrade_pulseweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Pulse Weapons
@@ -24,12 +24,12 @@ steel_consortium_upgrade_pulseweapons:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases Firepower of all bullet based weapons by 30% and Range by 15%. Clone Troopers gain 60% more Firepower and 30% more Range instead.
-		Prerequisites: ~steel_consortium_consortiumradar, !steel_consortium_upgrade_pulseweapons
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_pulseweapons
 	RenderSprites:
-		Image: steel_consortium_upgrade_pulseweapons
+		Image: steelconsortium_upgrade_pulseweapons
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_naniteinfusion:
+steelconsortium_upgrade_naniteinfusion:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Nanite Infusion
@@ -39,12 +39,12 @@ steel_consortium_upgrade_naniteinfusion:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Infuses all Units and Buildings with nanites that regenerate them faster and take 5% less damage. Double effect for Infantry.
-		Prerequisites: ~steel_consortium_consortiumradar, !steel_consortium_upgrade_naniteinfusion
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_naniteinfusion
 	RenderSprites:
-		Image: steel_consortium_upgrade_naniteinfusion
+		Image: steelconsortium_upgrade_naniteinfusion
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_ferrocretecurtain:
+steelconsortium_upgrade_ferrocretecurtain:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ferrocrete Curtain
@@ -54,12 +54,12 @@ steel_consortium_upgrade_ferrocretecurtain:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases Damage Resistance of all Vehicles and Buildings by 15%.
-		Prerequisites: ~steel_consortium_consortiumradar, !steel_consortium_upgrade_ferrocretecurtain
+		Prerequisites: ~steelconsortium_consortiumradar, !steelconsortium_upgrade_ferrocretecurtain
 	RenderSprites:
-		Image: steel_consortium_upgrade_ferrocretecurtain
+		Image: steelconsortium_upgrade_ferrocretecurtain
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_unlockempcannon:
+steelconsortium_upgrade_unlockempcannon:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Unlock Emp Cannon
@@ -70,12 +70,12 @@ steel_consortium_upgrade_unlockempcannon:
 		Queue: Research
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
-		Prerequisites: ~steel_consortium_consortiumbattlelab, !steel_consortium_upgrade_unlockempcannon
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_unlockempcannon
 	RenderSprites:
-		Image: steel_consortium_consortiumbattlelab
+		Image: steelconsortium_consortiumbattlelab
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_scalpeldefenders:
+steelconsortium_upgrade_scalpeldefenders:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Scalpel Defenders
@@ -85,12 +85,12 @@ steel_consortium_upgrade_scalpeldefenders:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Spawns Scalpel defense drones for your defensive structures.
-		Prerequisites: ~steel_consortium_consortiumbattlelab, !steel_consortium_upgrade_scalpeldefenders
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_scalpeldefenders
 	RenderSprites:
 		Image: steel_scalpel
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_resonanceammo:
+steelconsortium_upgrade_resonanceammo:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Resonance Ammo
@@ -100,12 +100,12 @@ steel_consortium_upgrade_resonanceammo:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: All Bullets ricochet between targets, dealing additional damage! Increases Range by all bullets by 10%.
-		Prerequisites: ~steel_consortium_consortiumbattlelab, !steel_consortium_upgrade_resonanceammo
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_resonanceammo
 	RenderSprites:
-		Image: steel_consortium_upgrade_resonanceammo
+		Image: steelconsortium_upgrade_resonanceammo
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_quantumweaponpower:
+steelconsortium_upgrade_quantumweaponpower:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Quantum Weapon Power
@@ -115,12 +115,12 @@ steel_consortium_upgrade_quantumweaponpower:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
-		Prerequisites: ~steel_consortium_consortiumbattlelab, !steel_consortium_upgrade_quantumweaponpower
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_quantumweaponpower
 	RenderSprites:
-		Image: steel_consortium_upgrade_quantumweaponpower
+		Image: steelconsortium_upgrade_quantumweaponpower
 	ProvidesPrerequisite:
 
-steel_consortium_upgrade_shieldresistance:
+steelconsortium_upgrade_shieldresistance:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: Shield Resistance
@@ -130,18 +130,18 @@ steel_consortium_upgrade_shieldresistance:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Increases the amount of damage shields can take by 25%.
-		Prerequisites: ~steel_consortium_consortiumbattlelab, !steel_consortium_upgrade_shieldresistance
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_shieldresistance
 	RenderSprites:
-		Image: steel_consortium_upgrade_shieldresistance
+		Image: steelconsortium_upgrade_shieldresistance
 	ProvidesTeamProxyActor:
 		Actor: up_team_shielresistance.steel
 
 up_team_shielresistance.steel:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: steel_consortium_upgrade_shieldresistance
+		Prerequisite: steelconsortium_upgrade_shieldresistance
 	RenderSprites:
-		Image: steel_consortium_upgrade_shieldresistance
+		Image: steelconsortium_upgrade_shieldresistance
 	Tooltip:
 		Name: Shield Resistance
 	Buildable:

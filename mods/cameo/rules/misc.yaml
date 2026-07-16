@@ -96,22 +96,22 @@ CRATE:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra1_soviet_mobileconstructionvehicle
-		ValidFactions: soviet
-	GiveBaseBuilderCrateAction@modjapan:
+		ValidFactions: soviets
+	GiveBaseBuilderCrateAction@japan:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: japan_japanesemobileconstructionvehicle
-		ValidFactions: modjapan
-	GiveBaseBuilderCrateAction@ra2america:
+		ValidFactions: japan
+	GiveBaseBuilderCrateAction@ra2allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra2_allies_alliedmobileconstructionvehicle
-		ValidFactions: ra2america
-	GiveBaseBuilderCrateAction@ra2russia:
+		ValidFactions: ra2allies
+	GiveBaseBuilderCrateAction@ra2soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra2_soviets_mobileconstructionvehicle
-		ValidFactions: ra2russia
+		ValidFactions: ra2soviets
 	GiveBaseBuilderCrateAction@yuri:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -125,23 +125,23 @@ CRATE:
 	GiveBaseBuilderCrateAction@syndicate:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: latin_syndicate_syndicatemobileconstructionvehicle
+		Units: latinsyndicate_syndicatemobileconstructionvehicle
 		ValidFactions: syndicate
 	GiveBaseBuilderCrateAction@consortium:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: steel_consortium_consortiummobileconstructionvehicle
+		Units: steelconsortium_consortiummobileconstructionvehicle
 		ValidFactions: consortium
 	GiveBaseBuilderCrateAction@naxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: naxis_naximobileconstructionvehicle
 		ValidFactions: naxis
-	GiveBaseBuilderCrateAction@lnaxis:
+	GiveBaseBuilderCrateAction@schwarzermond:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: schwarzer_mond_naxismobileconstructionvehicle
-		ValidFactions: lnaxis
+		Units: schwarzermond_naxismobileconstructionvehicle
+		ValidFactions: schwarzermond
 	GiveBaseBuilderCrateAction@futuretech:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -172,31 +172,31 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: protoss_mobilenexus
 		ValidFactions: protoss
-	GiveBaseBuilderCrateAction@human2:
+	GiveBaseBuilderCrateAction@warcraft_humans:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: humans_mobileconstructionvehiclehuman
-		ValidFactions: human2
-	GiveBaseBuilderCrateAction@orc2:
+		Units: warcraft_humans_mobileconstructionvehiclehuman
+		ValidFactions: warcraft_humans
+	GiveBaseBuilderCrateAction@warcraft_orcs:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: orcs_mobileconstructionvehicleorc
-		ValidFactions: orc2
+		Units: warcraft_orcs_mobileconstructionvehicleorc
+		ValidFactions: warcraft_orcs
 	GiveBaseBuilderCrateAction@tkm:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: tkm_mobileconstructionvehicletkm
 		ValidFactions: tkm
-	GiveBaseBuilderCrateAction@edenl:
+	GiveBaseBuilderCrateAction@eden:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: EDEN_CONVEC_STRUCTURE_FACTORY
-		ValidFactions: edenl
-	GiveBaseBuilderCrateAction@plymouthl:
+		ValidFactions: eden
+	GiveBaseBuilderCrateAction@plymouth:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
-		ValidFactions: plymouthl
+		ValidFactions: plymouth
 
 WWCRATE:
 	Inherits: CRATE

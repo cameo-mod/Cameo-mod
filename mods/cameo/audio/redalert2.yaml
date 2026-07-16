@@ -34,7 +34,7 @@ RA2AlliesVehicleVoice:
 		Action: vgramoa, vgramob, vgramoc, vgramod, vgramoe, vgramof
 		Attack: vgraata, vgraatb, vgraatc, vgraatd, vgraate
 
-RA2SovietVehicleVoice:
+ra2sovietsVehicleVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: vgrssea, vgrsseb, vgrssec
@@ -120,7 +120,7 @@ RA2TeslaTrooperVoice:
 
 SlaveWorkerVoice:
 	Inherits: ^InfantryDeath
-	Voices: 
+	Voices:
 		Attack: isl1ata ,isl1atb ,isl1atc ,isl1atd ,isl1ate
 		Move: isl1moa ,isl1mob ,isl1moc ,isl1mod ,isl1moe
 		Action: isl1moa ,isl1mob ,isl1moc ,isl1mod ,isl1moe
@@ -144,7 +144,7 @@ FreedSlaveVoice:
 
 VirusVoice:
 	Inherits: ^InfantryDeath
-	Voices: 
+	Voices:
 		Demolish: ivirata ,iviratb ,iviratc ,iviratd ,iviratf ,iviratg
 		Attack: ivirata ,iviratb ,iviratc ,iviratd ,iviratf ,iviratg
 		Move: ivirmoa ,ivirmob ,ivirmoc ,ivirmod ,ivirmoe
@@ -156,7 +156,7 @@ VirusVoice:
 
 InitiateVoice:
 	Inherits: ^InfantryDeath
-	Voices: 
+	Voices:
 		Attack: iiniata ,iiniatb ,iiniatc ,iiniatd ,iiniate ,iiniatf
 		Move: iinimoa ,iinimoc ,iinimod ,iinimoe
 		Action: iinimoa ,iinimoc ,iinimod ,iinimoe
@@ -166,7 +166,7 @@ InitiateVoice:
 
 BruteVoice:
 	Inherits: ^InfantryDeath
-	Voices: 
+	Voices:
 		Attack: ibruata ,ibruatb ,ibruatc ,ibruatd ,ibruate
 		Move: ibrumoa ,ibrumob ,ibrumoc ,ibrumod ,ibrumoe
 		Action: ibrumoa ,ibrumob ,ibrumoc ,ibrumod ,ibrumoe
@@ -216,7 +216,7 @@ LasherTankVoice:
 		Select: vlassed ,vlassef ,vlasseg ,vlasmod
 		Move: vlasmoa ,vlasmoc ,vlasmof ,vlasatd
 		Action: vlasmoa ,vlasmoc ,vlasmof ,vlasatd
-		Attack: vlasata ,vlasatc ,vlasate ,vlasatf ,vlasatg 
+		Attack: vlasata ,vlasatc ,vlasate ,vlasatf ,vlasatg
 
 ChaosDroneVoice:
 	DefaultVariant: .wav
@@ -234,7 +234,7 @@ MasterMindVoice:
 		Action: vmasmoa ,vmasmob ,vmasmoc ,vmasmod ,vmasmoe
 		Attack: vmasata ,vmasatb ,vmasatc ,vmasatd ,vmasate ,vmasatf
 		Overload: vmasdib
-        
+
 DiskVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -251,7 +251,7 @@ RA2EngineerVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: iena
-		ra2soviet: iens
+		ra2soviets: iens
 		ra2yuri: ieny
 	Voices:
 		Select: sea, seb, sec, sed
@@ -289,14 +289,14 @@ YuriEngineer:
 		Action: ienyata, ienyatb, ienyatc
 		Feedback: ienyfea, ienyfeb, ienyfec
 		Die: ienydia, ienydib, ienydic, ienydid
-   
+
 RA2MCVVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: vmca
-		ra2soviet: vmcs
+		ra2soviets: vmcs
 		allies: vmca
-		soviet: vmcs
+		soviets: vmcs
 		gdi: vmca
 		nod: vmcs
 		ra2yuri: vmcy
@@ -419,7 +419,7 @@ Ra2TeslaTankVoice:
 		Move: vtesmoa,vtesmob,vtesmoc,vtesmod,vtesmoe
 		Action: vtesmoa,vtesmob,vtesmoc,vtesmod,vtesmoe
 		Attack: vtesata,vtesatb,vtesatd,vtesate
-		
+
 V3LauncherVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -597,7 +597,7 @@ AlliesNavalVoice:
 		Move: vwaamoa, vwaamob, vwaamoc, vwaamod, vwaamoe
 		Action: vwaamoa, vwaamob, vwaamoc, vwaamod, vwaamoe
 		Attack: vwaaata, vwaaatb, vwaaatc
-       
+
 AegisVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -605,7 +605,7 @@ AegisVoice:
 		Move: vaegmoa,vaegmob,vaegmoc,vaegmod,vaegmoe
 		Action: vaegmoa,vaegmob,vaegmoc,vaegmod,vaegmoe
 		Attack: vaegata,vaegatb,vaegatc,vaegatd,vaegate,vaegatf,vaegatg,vaegath
-       
+
 AircraftCarrierVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -613,7 +613,7 @@ AircraftCarrierVoice:
 		Move: vairmoa, vairmob, vairmoc, vairmod, vairmoe
 		Action: vairmoa, vairmob, vairmoc, vairmod, vairmoe
 		Attack: vairata, vairatb, vairatc, vairatd, vairate
-       
+
 TyphoonSubVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -621,7 +621,7 @@ TyphoonSubVoice:
 		Move: vsubmoa,vsubmob,vsubmoc,vsubmod,vsubmoe
 		Action: vsubmoa,vsubmob,vsubmoc,vsubmod,vsubmoe
 		Attack: vsubata,vsubatb,vsubatc,vsubatd,vsubate
-       
+
 SeaScorpionVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -653,9 +653,9 @@ RA2LanderVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: vhoa
-		ra2soviet: vhos
+		ra2soviets: vhos
 		allies: vhoa
-		soviet: vhos
+		soviets: vhos
 		gdi: vhoa
 		nod: vhos
 		ra2yuri: vhoy

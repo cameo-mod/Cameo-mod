@@ -10,41 +10,41 @@ cgcnst_infiltrated.latin:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: latin_syndicate_syndicateconstructionyard
+		Prerequisite: latinsyndicate_syndicateconstructionyard
 	RenderSprites:
-		Image: latin_syndicate_syndicateconstructionyard
+		Image: latinsyndicate_syndicateconstructionyard
 
-latin_syndicate_doctrine_eliteguerillas:
+latinsyndicate_doctrine_eliteguerillas:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Elite Guerillas
 	Buildable:
 		Description: upgrade_uplatin_mili.description
-		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_eliteguerillas
+		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_doctrine_eliteguerillas
 	RenderSprites:
-		Image: latin_syndicate_latinmilitia
+		Image: latinsyndicate_latinmilitia
 	ProvidesPrerequisite:
 
-latin_syndicate_doctrine_cartelrockets:
+latinsyndicate_doctrine_cartelrockets:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Cartel Rockets
 	Buildable:
 		Description: upgrade_uplatin_cartelrockets.description
-		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_cartelrockets
+		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_doctrine_cartelrockets
 	RenderSprites:
-		Image: latin_syndicate_doctrine_cartelrockets
+		Image: latinsyndicate_doctrine_cartelrockets
 	ProvidesPrerequisite:
 
-latin_syndicate_doctrine_lightposts:
+latinsyndicate_doctrine_lightposts:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Lightposts
 	Buildable:
 		Description: upgrade_uplatin_ngbunk2.description
-		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_doctrine_lightposts
+		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_doctrine_lightposts
 	RenderSprites:
-		Image: latin_syndicate_bunkertower
+		Image: latinsyndicate_bunkertower
 	#ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
 		Actor: up_team_ngbunk2.latin
@@ -52,28 +52,28 @@ latin_syndicate_doctrine_lightposts:
 up_team_ngbunk2.latin:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: latin_syndicate_doctrine_lightposts
+		Prerequisite: latinsyndicate_doctrine_lightposts
 	RenderSprites:
-		Image: latin_syndicate_bunkertower
+		Image: latinsyndicate_bunkertower
 	Tooltip:
 		Name: Lightposts
 	Buildable:
 		Description: upgrade_uplatin_ngbunk2.description
 	PlayerDisplayUpgrade:
 
-latin_syndicate_upgrade_unlockempcannon:
+latinsyndicate_upgrade_unlockempcannon:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Emp Cannon
 	Buildable:
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Latin EMP Radar.
-		Prerequisites: ~latin_syndicate_latinempradar, !latin_syndicate_upgrade_unlockempcannon
+		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_upgrade_unlockempcannon
 	RenderSprites:
-		Image: steel_consortium_consortiumbattlelab
+		Image: steelconsortium_consortiumbattlelab
 	ProvidesPrerequisite:
 
-latin_syndicate_upgrade_yuristolentechchainguns:
+latinsyndicate_upgrade_yuristolentechchainguns:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Yuri Stolen Tech: Chainguns
@@ -83,12 +83,12 @@ latin_syndicate_upgrade_yuristolentechchainguns:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade_latin_up_chaingun.description
-		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: ~latinsyndicate_spycenter, !latinsyndicate_upgrade_yuristolentechchainguns
 	RenderSprites:
-		Image: latin_syndicate_upgrade_yuristolentechchainguns
+		Image: latinsyndicate_upgrade_yuristolentechchainguns
 	ProvidesPrerequisite:
 
-latin_syndicate_upgrade_sovietstolentechindustrialmethods:
+latinsyndicate_upgrade_sovietstolentechindustrialmethods:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Soviet Stolen Tech: Industrial Methods
@@ -98,12 +98,12 @@ latin_syndicate_upgrade_sovietstolentechindustrialmethods:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade_latin_up_industrial.description
-		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: ~latinsyndicate_spycenter, !latinsyndicate_upgrade_sovietstolentechindustrialmethods
 	RenderSprites:
-		Image: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+		Image: latinsyndicate_upgrade_sovietstolentechindustrialmethods
 	ProvidesPrerequisite:
 
-latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Allied Stolen Tech: Extra Missiles and Miraging
@@ -113,12 +113,12 @@ latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade_uplatin_alliedstolentech.description
-		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: ~latinsyndicate_spycenter, !latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
 	RenderSprites:
 		Image: latin_up_miraging
 	ProvidesPrerequisite:
 
-latin_syndicate_upgrade_asianalliancestolentechhotfire:
+latinsyndicate_upgrade_asianalliancestolentechhotfire:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Asian Alliance Stolen Tech: Hot Fire
@@ -128,12 +128,12 @@ latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade_latin_up_hotfire.description
-		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Prerequisites: ~latinsyndicate_spycenter, !latinsyndicate_upgrade_asianalliancestolentechhotfire
 	RenderSprites:
-		Image: latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Image: latinsyndicate_upgrade_asianalliancestolentechhotfire
 	ProvidesPrerequisite:
 
-latin_syndicate_upgrade_cashrecovery:
+latinsyndicate_upgrade_cashrecovery:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: Cash Recovery
@@ -143,7 +143,7 @@ latin_syndicate_upgrade_cashrecovery:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade_uplatin_cashrecover.description
-		Prerequisites: ~latin_syndicate_spycenter, !latin_syndicate_upgrade_cashrecovery
+		Prerequisites: ~latinsyndicate_spycenter, !latinsyndicate_upgrade_cashrecovery
 	RenderSprites:
 		Image: latin_up_tech2
 	#ProvidesPrerequisite:
@@ -153,7 +153,7 @@ latin_syndicate_upgrade_cashrecovery:
 up_team_cashrecover.latin:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: latin_syndicate_upgrade_cashrecovery
+		Prerequisite: latinsyndicate_upgrade_cashrecovery
 	RenderSprites:
 		Image: latin_up_tech2
 	Tooltip:

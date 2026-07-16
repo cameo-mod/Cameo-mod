@@ -1,4 +1,4 @@
-latin_syndicate_hindtransport:
+latinsyndicate_hindtransport:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -12,7 +12,7 @@ latin_syndicate_hindtransport:
 		Name: Hind Transport
 	Buildable:
 		BuildPaletteOrder: 97
-		Prerequisites: ~latin_syndicate_airstation
+		Prerequisites: ~latinsyndicate_airstation
 		Queue: Aircraft, RAAircraft
 		IconPalette: ra2cameo
 		Description: actor_ra2hind.description
@@ -34,12 +34,12 @@ latin_syndicate_hindtransport:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
-		Condition: latin_syndicate_upgrade_yuristolentechchainguns
-		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
 	WithMuzzleOverlay:
 	AttackAircraft:
 		FacingTolerance: 80
@@ -68,7 +68,7 @@ latin_syndicate_hindtransport:
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_upgrade_yuristolentechchainguns
 
 ra2hind_husk.latin:
 	Inherits: ^LargeHelicopterHusk
@@ -81,7 +81,7 @@ ra2hind_husk.latin:
 		Image: ra2hind
 		PlayerPalette: playerra2
 
-latin_syndicate_yakovlev:
+latinsyndicate_yakovlev:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -96,7 +96,7 @@ latin_syndicate_yakovlev:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~latin_syndicate_airstation
+		Prerequisites: ~latinsyndicate_airstation
 		Queue: Aircraft, RAAircraft
 		Description: actor_latin_yakovlev.description
 	Health:
@@ -123,7 +123,7 @@ latin_syndicate_yakovlev:
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns
 	Armament@ELITE:
 		Name: primary
 		Weapon: YakovlevCannonE
@@ -131,28 +131,28 @@ latin_syndicate_yakovlev:
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite
-	Armament@latin_syndicate_upgrade_yuristolentechchainguns:
+	Armament@latinsyndicate_upgrade_yuristolentechchainguns:
 		Name: primary
 		Weapon: YakovlevCannonE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
-		Condition: latin_syndicate_upgrade_yuristolentechchainguns
-		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 40
 		Count: 1
-	ReloadAmmoDelayMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
-		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
+	ReloadAmmoDelayMultiplier@latinsyndicate_upgrade_yuristolentechchainguns:
+		RequiresCondition: latinsyndicate_upgrade_yuristolentechchainguns
 		Modifier: 50
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
@@ -165,9 +165,9 @@ latin_syndicate_yakovlev:
 	SpawnActorOnDeath:
 		Actor: yakolev_husk.latin
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_upgrade_yuristolentechchainguns
 	RenderSprites:
-		Image: latin_syndicate_yakovlev
+		Image: latinsyndicate_yakovlev
 		PlayerPalette: playerra2
 
 yakolev_husk.latin:
@@ -186,10 +186,10 @@ yakolev_husk.latin:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: latin_syndicate_yakovlev
+		Image: latinsyndicate_yakovlev
 		PlayerPalette: playerra2
 
-latin_syndicate_mig21:
+latinsyndicate_mig21:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -206,7 +206,7 @@ latin_syndicate_mig21:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~latin_syndicate_airstation, latin_syndicate_spycenter
+		Prerequisites: ~latinsyndicate_airstation, latinsyndicate_spycenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -274,10 +274,10 @@ latin_syndicate_mig21:
 	SpawnActorOnDeath:
 		Actor: mig_husk.latin
 	RenderSprites:
-		Image: latin_syndicate_mig21
+		Image: latinsyndicate_mig21
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging, latinsyndicate_doctrine_cartelrockets, latinsyndicate_upgrade_asianalliancestolentechhotfire
 
 mig_husk.latin:
 	Inherits: ^PlaneHusk
@@ -295,5 +295,5 @@ mig_husk.latin:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: latin_syndicate_mig21
+		Image: latinsyndicate_mig21
 		PlayerPalette: playerra2

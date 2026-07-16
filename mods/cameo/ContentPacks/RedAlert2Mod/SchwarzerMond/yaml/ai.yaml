@@ -1,4 +1,4 @@
-# ai.yaml — Schwarzer Mond faction AI configuration
+# ai.yaml â€” Schwarzer Mond faction AI configuration
 #
 # ARCHITECTURE NOTE
 # =================
@@ -7,28 +7,28 @@
 # as single trait instances on the Player: actor in the global
 # mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
 # BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
-# data in single dictionaries that CANNOT be split across files —
+# data in single dictionaries that CANNOT be split across files â€”
 # OpenRA's YAML merge replaces trait instances with the same @name,
 # it does not deep-merge their sub-sections.
 #
-# This file is loaded as a Rules: entry but contains no traits —
+# This file is loaded as a Rules: entry but contains no traits â€”
 # it is a placeholder ready for future per-faction bot module
 # splitting (see ROADMAP Phase E backlog).
 #
 # REFERENCE DATA (from global ai.yaml)
 # ====================================
 #
-# --- BuildingLimits (8 entries for schwarzer_mond) ---
-# 			schwarzer_mond_orerefinery: 10
-# 			schwarzer_mond_barracks: 10
-# 			schwarzer_mond_warfactory: 10
-# 			schwarzer_mond_airfield: 10
-# 			schwarzer_mond_radar: 1
-# 			schwarzer_mond_techcenter: 2
-# 			schwarzer_mond_meteortractionray: 1
-# 			schwarzer_mond_gravitycore: 5
+# --- BuildingLimits (8 entries for schwarzermond) ---
+# 			schwarzermond_orerefinery: 10
+# 			schwarzermond_barracks: 10
+# 			schwarzermond_warfactory: 10
+# 			schwarzermond_airfield: 10
+# 			schwarzermond_radar: 1
+# 			schwarzermond_techcenter: 2
+# 			schwarzermond_meteortractionray: 1
+# 			schwarzermond_gravitycore: 5
 
-# Player: actor — no traits defined yet.
+# Player: actor â€” no traits defined yet.
 # When the engine supports per-faction bot conditions, move the
 # faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
 # entries here as a BaseBuilderBotModuleCA@<faction> /

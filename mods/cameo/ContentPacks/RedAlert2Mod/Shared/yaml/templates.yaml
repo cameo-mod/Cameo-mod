@@ -259,91 +259,91 @@
 
 ^SyndicateSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: latin_syndicate_engineer, latin_syndicate_latinmilitia, latin_syndicate_latinmilitia, latin_syndicate_grenademonkey
+		ActorTypes: latinsyndicate_engineer, latinsyndicate_latinmilitia, latinsyndicate_latinmilitia, latinsyndicate_grenademonkey
 
 ^LatinEliteGuerillas:
-	DamageMultiplier@latin_syndicate_doctrine_eliteguerillas:
+	DamageMultiplier@latinsyndicate_doctrine_eliteguerillas:
 		Modifier: 75
-		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
-	FirepowerMultiplier@latin_syndicate_doctrine_eliteguerillas:
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	FirepowerMultiplier@latinsyndicate_doctrine_eliteguerillas:
 		Modifier: 125
-		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
-	ChangesHealth@latin_syndicate_doctrine_eliteguerillas:
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	ChangesHealth@latinsyndicate_doctrine_eliteguerillas:
 		Step: 10
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
-	GrantConditionOnPrerequisite@latin_syndicate_doctrine_eliteguerillas:
-		Condition: latin_syndicate_doctrine_eliteguerillas
-		Prerequisites: latin_syndicate_doctrine_eliteguerillas
+		RequiresCondition: latinsyndicate_doctrine_eliteguerillas
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_eliteguerillas:
+		Condition: latinsyndicate_doctrine_eliteguerillas
+		Prerequisites: latinsyndicate_doctrine_eliteguerillas
 	ActorStatValues:
-		Upgrades: latin_syndicate_doctrine_eliteguerillas
+		Upgrades: latinsyndicate_doctrine_eliteguerillas
 
 ^CartelRocketsUpgrade:
-	RangeMultiplier@latin_syndicate_doctrine_cartelrockets:
+	RangeMultiplier@latinsyndicate_doctrine_cartelrockets:
 		Modifier: 125
-		RequiresCondition: latin_syndicate_doctrine_cartelrockets
-	FirepowerMultiplier@latin_syndicate_doctrine_cartelrockets:
+		RequiresCondition: latinsyndicate_doctrine_cartelrockets
+	FirepowerMultiplier@latinsyndicate_doctrine_cartelrockets:
 		Modifier: 125
-		RequiresCondition: latin_syndicate_doctrine_cartelrockets
-	GrantConditionOnPrerequisite@latin_syndicate_doctrine_cartelrockets:
-		Condition: latin_syndicate_doctrine_cartelrockets
-		Prerequisites: latin_syndicate_doctrine_cartelrockets
+		RequiresCondition: latinsyndicate_doctrine_cartelrockets
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_cartelrockets:
+		Condition: latinsyndicate_doctrine_cartelrockets
+		Prerequisites: latinsyndicate_doctrine_cartelrockets
 	ActorStatValues:
-		Upgrades: latin_syndicate_doctrine_cartelrockets
+		Upgrades: latinsyndicate_doctrine_cartelrockets
 
 ^LightPosts:
-	DamageMultiplier@latin_syndicate_doctrine_lightposts:
+	DamageMultiplier@latinsyndicate_doctrine_lightposts:
 		Modifier: 70
-		RequiresCondition: latin_syndicate_doctrine_lightposts
-	RevealsShroudMultiplier@latin_syndicate_doctrine_lightposts:
+		RequiresCondition: latinsyndicate_doctrine_lightposts
+	RevealsShroudMultiplier@latinsyndicate_doctrine_lightposts:
 		Modifier: 130
-		RequiresCondition: latin_syndicate_doctrine_lightposts
-	GrantConditionOnPrerequisite@latin_syndicate_doctrine_lightposts:
-		Condition: latin_syndicate_doctrine_lightposts
-		Prerequisites: latin_syndicate_doctrine_lightposts
+		RequiresCondition: latinsyndicate_doctrine_lightposts
+	GrantConditionOnPrerequisite@latinsyndicate_doctrine_lightposts:
+		Condition: latinsyndicate_doctrine_lightposts
+		Prerequisites: latinsyndicate_doctrine_lightposts
 	ActorStatValues:
-		Upgrades: latin_syndicate_doctrine_lightposts
+		Upgrades: latinsyndicate_doctrine_lightposts
 
 ^LatinFlameUpgrades:
-	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+	FirepowerMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 125
-		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
-	ReloadDelayMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		RequiresCondition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	ReloadDelayMultiplier@latinsyndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 75
-		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_asianalliancestolentechhotfire:
-		Condition: latin_syndicate_upgrade_asianalliancestolentechhotfire
-		Prerequisites: latin_syndicate_upgrade_asianalliancestolentechhotfire
+		RequiresCondition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_asianalliancestolentechhotfire:
+		Condition: latinsyndicate_upgrade_asianalliancestolentechhotfire
+		Prerequisites: latinsyndicate_upgrade_asianalliancestolentechhotfire
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Upgrades: latinsyndicate_upgrade_asianalliancestolentechhotfire
 
 ^LatinCashrecover:
-	DamageMultiplier@latin_syndicate_upgrade_sovietstolentechindustrialmethods:
+	DamageMultiplier@latinsyndicate_upgrade_sovietstolentechindustrialmethods:
 		Modifier: 80
-		RequiresCondition: latin_syndicate_upgrade_sovietstolentechindustrialmethods
-	SpeedMultiplier@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		RequiresCondition: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+	SpeedMultiplier@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
 		Modifier: 125
-		RequiresCondition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
-	RangeMultiplier@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		RequiresCondition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+	RangeMultiplier@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
 		Modifier: 105
-		RequiresCondition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_sovietstolentechindustrialmethods:
-		Condition: latin_syndicate_upgrade_sovietstolentechindustrialmethods
-		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
-		Condition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
-		Prerequisites: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		RequiresCondition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_sovietstolentechindustrialmethods:
+		Condition: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: latinsyndicate_upgrade_sovietstolentechindustrialmethods
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Condition: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Upgrades: latinsyndicate_upgrade_cashrecovery, latinsyndicate_upgrade_sovietstolentechindustrialmethods, latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging
 
 ##############################################
 #   Red Alert 2 Consortium Structure
 ##############################################
 ^ConsortiumSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: steel_consortium_engineer, steel_consortium_clonetrooper, steel_consortium_clonetrooper, steel_consortium_quantummissiletrooper
+		ActorTypes: steelconsortium_engineer, steelconsortium_clonetrooper, steelconsortium_clonetrooper, steelconsortium_quantummissiletrooper
 		RequiresCondition: !in_water
 
 ^SteelUnderwaterStructure:
@@ -364,7 +364,7 @@
 	Building:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water ##########
 	SpawnActorsOnSell@in_water:
-		ActorTypes: steel_consortium_hoverboardgrenadier, steel_consortium_hoverboardgrenadier, steel_consortium_manta
+		ActorTypes: steelconsortium_hoverboardgrenadier, steelconsortium_hoverboardgrenadier, steelconsortium_manta
 		RequiresCondition: in_water
 	GrantConditionOnTerrain@Water:
 		TerrainTypes: Water
@@ -374,24 +374,24 @@
 	Armament@DroneTargeting:
 		Name: secondary
 		Weapon: GLStingerTargeting
-		RequiresCondition: steel_consortium_upgrade_scalpeldefenders
+		RequiresCondition: steelconsortium_upgrade_scalpeldefenders
 	RenderRangeCircleCA@targeting:
 		Armaments: secondary
 		Color: FF0000
-		#RequiresCondition: steel_consortium_upgrade_scalpeldefenders
+		#RequiresCondition: steelconsortium_upgrade_scalpeldefenders
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: scalpelMG.steel
 		ArmamentNames: secondary
 		RespawnTicks: 500
-		PauseOnCondition: disabled || !steel_consortium_upgrade_scalpeldefenders
-		RequiresCondition: steel_consortium_upgrade_scalpeldefenders
+		PauseOnCondition: disabled || !steelconsortium_upgrade_scalpeldefenders
+		RequiresCondition: steelconsortium_upgrade_scalpeldefenders
 		FollowAfterAttackDelay: 25
 		ShouldSpawnInitialLoad: false
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_scalpeldefenders:
-		Condition: steel_consortium_upgrade_scalpeldefenders
-		Prerequisites: steel_consortium_upgrade_scalpeldefenders
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_scalpeldefenders:
+		Condition: steelconsortium_upgrade_scalpeldefenders
+		Prerequisites: steelconsortium_upgrade_scalpeldefenders
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_scalpeldefenders
+		Upgrades: steelconsortium_upgrade_scalpeldefenders
 
 ^SteelUnderwaterTransit:
 	Cloak@underwater:
@@ -457,81 +457,81 @@
 		PlayerPalette: playerra2rot
 		Image: steel_scalpel
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 ^SteelConsortiumPulseWeapons:
-	FirepowerMultiplier@steel_consortium_upgrade_pulseweapons:
-		RequiresCondition: steel_consortium_upgrade_pulseweapons
+	FirepowerMultiplier@steelconsortium_upgrade_pulseweapons:
+		RequiresCondition: steelconsortium_upgrade_pulseweapons
 		Modifier: 130
-	RangeMultiplier@steel_consortium_upgrade_pulseweapons:
-		RequiresCondition: steel_consortium_upgrade_pulseweapons
+	RangeMultiplier@steelconsortium_upgrade_pulseweapons:
+		RequiresCondition: steelconsortium_upgrade_pulseweapons
 		Modifier: 115
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_pulseweapons:
-		Condition: steel_consortium_upgrade_pulseweapons
-		Prerequisites: steel_consortium_upgrade_pulseweapons
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_pulseweapons:
+		Condition: steelconsortium_upgrade_pulseweapons
+		Prerequisites: steelconsortium_upgrade_pulseweapons
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons
+		Upgrades: steelconsortium_upgrade_pulseweapons
 
 ^SteelConsortiumNaniteInfusion:
-	DamageMultiplier@steel_consortium_upgrade_naniteinfusion:
-		RequiresCondition: steel_consortium_upgrade_naniteinfusion
+	DamageMultiplier@steelconsortium_upgrade_naniteinfusion:
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
 		Modifier: 95
-	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
 		PercentageStep: 1
 		Delay: 80
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: steel_consortium_upgrade_naniteinfusion
-	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
 		Step: 25
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: steel_consortium_upgrade_naniteinfusion
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_naniteinfusion:
-		Condition: steel_consortium_upgrade_naniteinfusion
-		Prerequisites: steel_consortium_upgrade_naniteinfusion
+		RequiresCondition: steelconsortium_upgrade_naniteinfusion
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_naniteinfusion:
+		Condition: steelconsortium_upgrade_naniteinfusion
+		Prerequisites: steelconsortium_upgrade_naniteinfusion
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion
+		Upgrades: steelconsortium_upgrade_naniteinfusion
 
 ^SteelConsortiumNaniteInfusionInfantry:
 	Inherits: ^SteelConsortiumNaniteInfusion
-	DamageMultiplier@steel_consortium_upgrade_naniteinfusion:
+	DamageMultiplier@steelconsortium_upgrade_naniteinfusion:
 		Modifier: 90
-	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
 		Delay: 40
-	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
+	ChangesHealth@steelconsortium_upgrade_naniteinfusion:
 		Step: 50
 
 ^SteelConsortiumFerrocrete:
-	DamageMultiplier@steel_consortium_upgrade_ferrocretecurtain:
-		RequiresCondition: steel_consortium_upgrade_ferrocretecurtain
+	DamageMultiplier@steelconsortium_upgrade_ferrocretecurtain:
+		RequiresCondition: steelconsortium_upgrade_ferrocretecurtain
 		Modifier: 85
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_ferrocretecurtain:
-		Condition: steel_consortium_upgrade_ferrocretecurtain
-		Prerequisites: steel_consortium_upgrade_ferrocretecurtain
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_ferrocretecurtain:
+		Condition: steelconsortium_upgrade_ferrocretecurtain
+		Prerequisites: steelconsortium_upgrade_ferrocretecurtain
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_ferrocretecurtain
+		Upgrades: steelconsortium_upgrade_ferrocretecurtain
 
 ^SteelConsortiumResonanceAmmo:
-	FirepowerMultiplier@steel_consortium_upgrade_resonanceammo:
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+	FirepowerMultiplier@steelconsortium_upgrade_resonanceammo:
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 		Modifier: 50
-	RangeMultiplier@steel_consortium_upgrade_resonanceammo:
-		RequiresCondition: steel_consortium_upgrade_resonanceammo
+	RangeMultiplier@steelconsortium_upgrade_resonanceammo:
+		RequiresCondition: steelconsortium_upgrade_resonanceammo
 		Modifier: 110
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_resonanceammo:
-		Condition: steel_consortium_upgrade_resonanceammo
-		Prerequisites: steel_consortium_upgrade_resonanceammo
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_resonanceammo:
+		Condition: steelconsortium_upgrade_resonanceammo
+		Prerequisites: steelconsortium_upgrade_resonanceammo
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_resonanceammo
+		Upgrades: steelconsortium_upgrade_resonanceammo
 
 ^QuantumWeaponsEMP:
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_quantumweaponpower:
-		Condition: steel_consortium_upgrade_quantumweaponpower
-		Prerequisites: steel_consortium_upgrade_quantumweaponpower
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_quantumweaponpower:
+		Condition: steelconsortium_upgrade_quantumweaponpower
+		Prerequisites: steelconsortium_upgrade_quantumweaponpower
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_quantumweaponpower
+		Upgrades: steelconsortium_upgrade_quantumweaponpower
 
 ^NaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
@@ -539,7 +539,7 @@
 		RequiresCondition: !in_water
 ^SpaceNaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarrocket
+		ActorTypes: schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarrocket
 		RequiresCondition: !in_water
 
 ^NaxiUndeadRevive:
@@ -682,88 +682,88 @@
 ##############################################
 
 ^NaxiCrystalLens:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_crystallens:
-		Condition: schwarzer_mond_upgrade_crystallens
-		Prerequisites: schwarzer_mond_upgrade_crystallens
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_crystallens:
+		Condition: schwarzermond_upgrade_crystallens
+		Prerequisites: schwarzermond_upgrade_crystallens
 
 ^NaxiAmplifiedLens:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_amplifiedlens:
-		Condition: schwarzer_mond_upgrade_amplifiedlens
-		Prerequisites: schwarzer_mond_upgrade_amplifiedlens
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_amplifiedlens:
+		Condition: schwarzermond_upgrade_amplifiedlens
+		Prerequisites: schwarzermond_upgrade_amplifiedlens
 
 ^NaxiVrilPoweredWeapons:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_vrilpoweredweapons:
-		Condition: schwarzer_mond_upgrade_vrilpoweredweapons
-		Prerequisites: schwarzer_mond_upgrade_vrilpoweredweapons
-	FirepowerMultiplier@schwarzer_mond_upgrade_vrilpoweredweapons:
-		RequiresCondition: schwarzer_mond_upgrade_vrilpoweredweapons
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilpoweredweapons:
+		Condition: schwarzermond_upgrade_vrilpoweredweapons
+		Prerequisites: schwarzermond_upgrade_vrilpoweredweapons
+	FirepowerMultiplier@schwarzermond_upgrade_vrilpoweredweapons:
+		RequiresCondition: schwarzermond_upgrade_vrilpoweredweapons
 		Modifier: 125
 
 ^NaxiCryptofascism:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_cryptofascism:
-		Condition: schwarzer_mond_upgrade_cryptofascism
-		Prerequisites: schwarzer_mond_upgrade_cryptofascism
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_cryptofascism:
+		Condition: schwarzermond_upgrade_cryptofascism
+		Prerequisites: schwarzermond_upgrade_cryptofascism
 	CashTrickler@cryptofascism:
 		Interval: 25
 		Amount: 1
-		RequiresCondition: schwarzer_mond_upgrade_cryptofascism
+		RequiresCondition: schwarzermond_upgrade_cryptofascism
 	ActorStatValues:
-		Upgrades: schwarzer_mond_upgrade_cryptofascism
+		Upgrades: schwarzermond_upgrade_cryptofascism
 
 ^NaxiLunarAlloys:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_lunaralloys:
-		Condition: schwarzer_mond_upgrade_lunaralloys
-		Prerequisites: schwarzer_mond_upgrade_lunaralloys
-	DamageMultiplier@schwarzer_mond_upgrade_lunaralloys:
-		RequiresCondition: schwarzer_mond_upgrade_lunaralloys
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_lunaralloys:
+		Condition: schwarzermond_upgrade_lunaralloys
+		Prerequisites: schwarzermond_upgrade_lunaralloys
+	DamageMultiplier@schwarzermond_upgrade_lunaralloys:
+		RequiresCondition: schwarzermond_upgrade_lunaralloys
 		Modifier: 90
 	ActorStatValues:
-		Upgrades: schwarzer_mond_upgrade_lunaralloys
+		Upgrades: schwarzermond_upgrade_lunaralloys
 
 ^NaxiMoonPropaganda:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_moonpropaganda:
-		Condition: schwarzer_mond_upgrade_moonpropaganda
-		Prerequisites: schwarzer_mond_upgrade_moonpropaganda
-	FirepowerMultiplier@schwarzer_mond_upgrade_moonpropaganda:
-		RequiresCondition: schwarzer_mond_upgrade_moonpropaganda
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_moonpropaganda:
+		Condition: schwarzermond_upgrade_moonpropaganda
+		Prerequisites: schwarzermond_upgrade_moonpropaganda
+	FirepowerMultiplier@schwarzermond_upgrade_moonpropaganda:
+		RequiresCondition: schwarzermond_upgrade_moonpropaganda
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: schwarzer_mond_upgrade_moonpropaganda
+		Upgrades: schwarzermond_upgrade_moonpropaganda
 
 ^NaxiHelium3:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_helium3:
-		Condition: schwarzer_mond_upgrade_helium3
-		Prerequisites: schwarzer_mond_upgrade_helium3
-	PowerMultiplier@schwarzer_mond_upgrade_helium3:
-		RequiresCondition: schwarzer_mond_upgrade_helium3
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_helium3:
+		Condition: schwarzermond_upgrade_helium3
+		Prerequisites: schwarzermond_upgrade_helium3
+	PowerMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
 		Modifier: 150
-	SpeedMultiplier@schwarzer_mond_upgrade_helium3:
-		RequiresCondition: schwarzer_mond_upgrade_helium3
+	SpeedMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
 		Modifier: 125
-	TurnSpeedMultiplier@schwarzer_mond_upgrade_helium3:
-		RequiresCondition: schwarzer_mond_upgrade_helium3
+	TurnSpeedMultiplier@schwarzermond_upgrade_helium3:
+		RequiresCondition: schwarzermond_upgrade_helium3
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: schwarzer_mond_upgrade_helium3
+		Upgrades: schwarzermond_upgrade_helium3
 
 ^NaxiVrilInfusion:
-	GrantConditionOnPrerequisite@schwarzer_mond_upgrade_vrilinfusion:
-		Condition: schwarzer_mond_upgrade_vrilinfusion
-		Prerequisites: schwarzer_mond_upgrade_vrilinfusion
-	FirepowerMultiplier@schwarzer_mond_upgrade_vrilinfusion:
-		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+	GrantConditionOnPrerequisite@schwarzermond_upgrade_vrilinfusion:
+		Condition: schwarzermond_upgrade_vrilinfusion
+		Prerequisites: schwarzermond_upgrade_vrilinfusion
+	FirepowerMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 125
-	SpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
-		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+	SpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 125
-	TurnSpeedMultiplier@schwarzer_mond_upgrade_vrilinfusion:
-		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+	TurnSpeedMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 125
-	DamageMultiplier@schwarzer_mond_upgrade_vrilinfusion:
-		RequiresCondition: schwarzer_mond_upgrade_vrilinfusion
+	DamageMultiplier@schwarzermond_upgrade_vrilinfusion:
+		RequiresCondition: schwarzermond_upgrade_vrilinfusion
 		Modifier: 85
 	ActorStatValues:
-		Upgrades: schwarzer_mond_upgrade_vrilinfusion
+		Upgrades: schwarzermond_upgrade_vrilinfusion
 
 ^FutureTechSpawnActorsOnSell:
 	SpawnActorsOnSell:

@@ -1,4 +1,4 @@
-# ai.yaml — RA2 faction AI configuration
+# ai.yaml â€” RA2 faction AI configuration
 #
 # ARCHITECTURE NOTE
 # =================
@@ -7,11 +7,11 @@
 # as single trait instances on the Player: actor in the global
 # mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
 # BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
-# data in single dictionaries that CANNOT be split across files —
+# data in single dictionaries that CANNOT be split across files â€”
 # OpenRA's YAML merge replaces trait instances with the same @name,
 # it does not deep-merge their sub-sections.
 #
-# This file is loaded as a Rules: entry but contains no traits —
+# This file is loaded as a Rules: entry but contains no traits â€”
 # it is a placeholder ready for future per-faction bot module
 # splitting (see ROADMAP Phase E backlog).
 #
@@ -95,14 +95,14 @@
 # 			ra2_allies_upgrade_prismaticbarrier: 1
 # 			ra2_allies_upgrade_chronoengine: 1
 
-# Player: actor — no traits defined yet.
+# Player: actor â€” no traits defined yet.
 # When the engine supports per-faction bot conditions, move the
 # faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
 # entries here as a BaseBuilderBotModuleCA@<faction> /
 # UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
 Player:
 #
-# --- Additional faction: RA2 (ra2_soviets) — BuildingLimits (10 entries) ---
+# --- Additional faction: RA2 (ra2_soviets) â€” BuildingLimits (10 entries) ---
 # 			ra2_soviets_orerefinery: 10
 # 			ra2_soviets_barracks: 10
 # 			ra2_soviets_warfactory: 10
@@ -114,7 +114,7 @@ Player:
 # 			ra2_soviets_nuclearmissilesilo: 1
 # 			ra2_soviets_ironcurtain: 1
 #
-# --- Additional faction: RA2 (ra2_soviets) — BuildingFractions (15 entries) ---
+# --- Additional faction: RA2 (ra2_soviets) â€” BuildingFractions (15 entries) ---
 # 			ra2_soviets_constructionyard: 5
 # 			ra2_soviets_orerefinery: 15
 # 			ra2_soviets_barracks: 15
@@ -131,7 +131,7 @@ Player:
 # 			ra2_soviets_teslacoil: 10
 # 			ra2_soviets_flakcannon: 10
 #
-# --- Additional faction: RA2 (ra2_soviets) — UnitsToBuild (36 entries) ---
+# --- Additional faction: RA2 (ra2_soviets) â€” UnitsToBuild (36 entries) ---
 # 			ra2_soviets_warminer: 10
 # 			ra2_soviets_attackdog: 1
 # 			ra2_soviets_conscript: 3
@@ -169,7 +169,7 @@ Player:
 # 			ra2_soviets_upgrade_gastroburners: 1
 # 			ra2_soviets_upgrade_kirovatomicbombs: 1
 #
-# --- Additional faction: RA2 (yuri) — BuildingLimits (10 entries) ---
+# --- Additional faction: RA2 (yuri) â€” BuildingLimits (10 entries) ---
 # 			yuri_slaveminer_2: 10
 # 			yuri_barracks: 10
 # 			yuri_warfactory: 10
@@ -181,7 +181,7 @@ Player:
 # 			yuri_psychicdominator: 1
 # 			yuri_lunarcommandcenter: 1
 #
-# --- Additional faction: RA2 (yuri) — BuildingFractions (14 entries) ---
+# --- Additional faction: RA2 (yuri) â€” BuildingFractions (14 entries) ---
 # 			yuri_constructionyard: 5
 # 			yuri_slaveminer_2: 15
 # 			yuri_barracks: 15
@@ -197,7 +197,7 @@ Player:
 # 			yuri_gatlingcannon: 15
 # 			yuri_psychictower: 15
 #
-# --- Additional faction: RA2 (yuri) — UnitsToBuild (47 entries) ---
+# --- Additional faction: RA2 (yuri) â€” UnitsToBuild (47 entries) ---
 # 			yuri_slaveminer: 10
 # 			yuri_initiate: 3
 # 			yuri_virus: 3
@@ -244,4 +244,4 @@ Player:
 # 			yuri_upgrade_infantrystealthsuits: 1
 # 			yuri_upgrade_geneticmodificationboost: 1
 # 			yuri_upgrade_psychicvision: 1
-# 			latin_syndicate_upgrade_yuristolentechchainguns: 1
+# 			latinsyndicate_upgrade_yuristolentechchainguns: 1

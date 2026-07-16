@@ -1,4 +1,4 @@
-latin_syndicate_promotion_unlockmortarbikes:
+latinsyndicate_promotion_unlockmortarbikes:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Mortar Bikes
@@ -6,12 +6,12 @@ latin_syndicate_promotion_unlockmortarbikes:
 		BuildPaletteOrder: 121
 		Queue: Promotions
 		Description: Enables construction of Mortar Bikes.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlockmortarbikes, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlockmortarbikes, rank1
 	RenderSprites:
-		Image: latin_syndicate_mortarbike
+		Image: latinsyndicate_mortarbike
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocknarcos:
+latinsyndicate_promotion_unlocknarcos:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Narcos
@@ -19,12 +19,12 @@ latin_syndicate_promotion_unlocknarcos:
 		BuildPaletteOrder: 124
 		Queue: Promotions
 		Description: Enables training of Narco Forces.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlocknarcos, latin_syndicate_promotion_unlockmortarbikes, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlocknarcos, latinsyndicate_promotion_unlockmortarbikes, rank1
 	RenderSprites:
-		Image: latin_syndicate_narco
+		Image: latinsyndicate_narco
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlockcarteltrucks:
+latinsyndicate_promotion_unlockcarteltrucks:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cartel Trucks
@@ -32,12 +32,12 @@ latin_syndicate_promotion_unlockcarteltrucks:
 		BuildPaletteOrder: 127
 		Queue: Promotions
 		Description: Enables construction of Cartel Trucks.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlockcarteltrucks, latin_syndicate_promotion_unlocknarcos, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlockcarteltrucks, latinsyndicate_promotion_unlocknarcos, rank1
 	RenderSprites:
-		Image: latin_syndicate_carteltruck
+		Image: latinsyndicate_carteltruck
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlockburritos:
+latinsyndicate_promotion_unlockburritos:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Burritos
@@ -45,14 +45,14 @@ latin_syndicate_promotion_unlockburritos:
 		BuildPaletteOrder: 130
 		Queue: Promotions
 		Description: Enables construction of Burritos.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlockburritos, latin_syndicate_promotion_unlockcarteltrucks, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlockburritos, latinsyndicate_promotion_unlockcarteltrucks, rank1
 	RenderSprites:
-		Image: latin_syndicate_burrito
+		Image: latinsyndicate_burrito
 	ProvidesPrerequisite:
 
 ### War tree
 
-latin_syndicate_promotion_unlockraiderbuggy:
+latinsyndicate_promotion_unlockraiderbuggy:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Raider Buggy
@@ -60,12 +60,12 @@ latin_syndicate_promotion_unlockraiderbuggy:
 		BuildPaletteOrder: 122
 		Queue: Promotions
 		Description: Enables construction of Raider Buggies.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlockraiderbuggy, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlockraiderbuggy, rank1
 	RenderSprites:
-		Image: latin_syndicate_raiderbuggy
+		Image: latinsyndicate_raiderbuggy
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocksmokertanks:
+latinsyndicate_promotion_unlocksmokertanks:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Smoker Tanks
@@ -73,12 +73,12 @@ latin_syndicate_promotion_unlocksmokertanks:
 		BuildPaletteOrder: 125
 		Queue: Promotions
 		Description: Enables construction of Smoker Tanks.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlocksmokertanks, latin_syndicate_promotion_unlockraiderbuggy, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlocksmokertanks, latinsyndicate_promotion_unlockraiderbuggy, rank1
 	RenderSprites:
-		Image: latin_syndicate_smokertank
+		Image: latinsyndicate_smokertank
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocklatinapc:
+latinsyndicate_promotion_unlocklatinapc:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Latin APC.
@@ -86,12 +86,12 @@ latin_syndicate_promotion_unlocklatinapc:
 		BuildPaletteOrder: 128
 		Queue: Promotions
 		Description: Enables construction of Latin APCs.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlocklatinapc, latin_syndicate_promotion_unlocksmokertanks, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlocklatinapc, latinsyndicate_promotion_unlocksmokertanks, rank1
 	RenderSprites:
-		Image: latin_syndicate_latinapc
+		Image: latinsyndicate_latinapc
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocklars:
+latinsyndicate_promotion_unlocklars:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock LARS
@@ -99,14 +99,14 @@ latin_syndicate_promotion_unlocklars:
 		BuildPaletteOrder: 131
 		Queue: Promotions
 		Description: Enables construction of LARS.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlocklars, latin_syndicate_promotion_unlocklatinapc, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlocklars, latinsyndicate_promotion_unlocklatinapc, rank1
 	RenderSprites:
-		Image: latin_syndicate_lars
+		Image: latinsyndicate_lars
 	ProvidesPrerequisite:
 
 ### Artillery Weapons tree
 
-latin_syndicate_promotion_unlockterrorists:
+latinsyndicate_promotion_unlockterrorists:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Terrorists
@@ -114,12 +114,12 @@ latin_syndicate_promotion_unlockterrorists:
 		BuildPaletteOrder: 123
 		Queue: Promotions
 		Description: Enables training of terrorists.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, !latin_syndicate_promotion_unlockterrorists, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, !latinsyndicate_promotion_unlockterrorists, rank1
 	RenderSprites:
 		Image: ra2terror
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlockdemolitiontrucks:
+latinsyndicate_promotion_unlockdemolitiontrucks:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Demolition Trucks
@@ -127,12 +127,12 @@ latin_syndicate_promotion_unlockdemolitiontrucks:
 		BuildPaletteOrder: 126
 		Queue: Promotions
 		Description: Enables construction of Demo Trucks.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_promotion_unlockterrorists, !latin_syndicate_promotion_unlockdemolitiontrucks, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_promotion_unlockterrorists, !latinsyndicate_promotion_unlockdemolitiontrucks, rank1
 	RenderSprites:
 		Image: ra2dtruck
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocknuketrucks:
+latinsyndicate_promotion_unlocknuketrucks:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Nuke Trucks
@@ -140,12 +140,12 @@ latin_syndicate_promotion_unlocknuketrucks:
 		BuildPaletteOrder: 129
 		Queue: Promotions
 		Description: Enables construction of Nuke Trucks.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_promotion_unlockdemolitiontrucks, !latin_syndicate_promotion_unlocknuketrucks, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_promotion_unlockdemolitiontrucks, !latinsyndicate_promotion_unlocknuketrucks, rank1
 	RenderSprites:
-		Image: latin_syndicate_nuketruck
+		Image: latinsyndicate_nuketruck
 	ProvidesPrerequisite:
 
-latin_syndicate_promotion_unlocktopolm:
+latinsyndicate_promotion_unlocktopolm:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock TOPOL M
@@ -153,7 +153,7 @@ latin_syndicate_promotion_unlocktopolm:
 		BuildPaletteOrder: 132
 		Queue: Promotions
 		Description: Enables construction of TOPOLs.
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_promotion_unlocknuketrucks, !latin_syndicate_promotion_unlocktopolm, rank1
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_promotion_unlocknuketrucks, !latinsyndicate_promotion_unlocktopolm, rank1
 	RenderSprites:
-		Image: latin_syndicate_topolm
+		Image: latinsyndicate_topolm
 	ProvidesPrerequisite:
