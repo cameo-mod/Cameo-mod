@@ -15,7 +15,7 @@ latin_syndicate_mortarbike:
 		Prerequisites: ~latin_syndicate_syndicatefactory, latin_syndicate_promotion_unlockmortarbikes
 		Description: actor_latin_mortarbike.description
 	Tooltip:
-		Name: Mortar td_nod_reconbike
+		Name: Mortar Bike
 	Valued:
 		Cost: 500
 	Health:
@@ -646,7 +646,7 @@ latin_syndicate_latinapc:
 	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@uprecover: ^LatinCashrecover
 	Tooltip:
-		Name: Latin td_gdi_apc
+		Name: Latin APC
 	Valued:
 		Cost: 2400
 	Buildable:

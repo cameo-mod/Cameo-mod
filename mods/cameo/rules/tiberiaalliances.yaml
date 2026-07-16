@@ -250,12 +250,12 @@ TABLACKHAND:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: Black td_nod_handofnod
+		Name: Black Hand
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, Addonshand2
 		Queue: Infantry, RAInfantry
-		Description: The Black td_nod_handofnod is a step up from the Rocket Squad, being a better-armoured anti-tank unit. Equipped with flamethrowers, they will cook a tank until it bursts, allowing the rest of your units to pass.
+		Description: The Black Hand is a step up from the Rocket Squad, being a better-armoured anti-tank unit. Equipped with flamethrowers, they will cook a tank until it bursts, allowing the rest of your units to pass.
 	Health:
 		HP: 14000
 	Armament@PRIMARY:
@@ -278,7 +278,7 @@ TACONFESSOR:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, Addonshand3
 		Queue: Infantry, RAInfantry
-		Description: Similar to the GDI ra1_allies_alliedsniper Team, the Nod Confessors are a lightly-armoured infantry unit capable of eliminating enemy infantry quickly and efficiently while maintaining a safe distance. Unfortunately, they’re pretty much weak against anything else.
+		Description: Similar to the GDI Sniper Team, the Nod Confessors are a lightly-armoured infantry unit capable of eliminating enemy infantry quickly and efficiently while maintaining a safe distance. Unfortunately, they’re pretty much weak against anything else.
 	Health:
 		HP: 14000
 	Armament@PRIMARY:
@@ -344,7 +344,7 @@ TASNIPE:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: ra1_allies_alliedsniper
+		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: Addonsbarr3, ~techlevel.medium
@@ -392,7 +392,7 @@ TAMUTSNIPE:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Mutant ra1_allies_alliedsniper
+		Name: Mutant Sniper
 	Buildable:
 		BuildPaletteOrder: 95
 		Prerequisites: barracks, upgrade.tamutbarr2
@@ -457,7 +457,7 @@ taguardian:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Guardian td_gdi_apc
+		Name: Guardian APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
@@ -1662,7 +1662,7 @@ tauplaserscope:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Increase ra1_allies_alliedsniper Shoot Range
+		Description: Increase Sniper Shoot Range
 		Prerequisites: ~!tauplaserscope, barracks
 	Valued:
 		Cost: 1500
@@ -1821,7 +1821,7 @@ taupshield1:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Upgrade the Armor of Attack td_nod_reconbike
+		Description: Upgrade the Armor of Attack Bike
 		Prerequisites: ~!taupshield1, vehicleproduction
 	Valued:
 		Cost: 1500
@@ -1963,7 +1963,7 @@ taupchemical2:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Adds Chemical Rockets to ra1_soviet_ironcurtain Fist
+		Description: Adds Chemical Rockets to Iron Fist
 		Prerequisites: ~!taupchemical2, taupchemical1
 	Valued:
 		Cost: 1500
@@ -1982,7 +1982,7 @@ taupguidedmiss:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: GDI Flak Bunker, adds a little td_nod_samsite Launcher
+		Description: GDI Flak Bunker, adds a little SAM Launcher
 		Prerequisites: ~!taupguidedmiss, tagdihq2
 	Valued:
 		Cost: 2000
@@ -3097,7 +3097,7 @@ Addonssam1:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: td_nod_samsite lvl 5
+		Name: SAM lvl 5
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tanodhq2, ~!Addonssam1
@@ -3116,7 +3116,7 @@ Addonssam2:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: td_nod_samsite lvl 10
+		Name: SAM lvl 10
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~Addonssam1, ~!Addonssam2
@@ -3135,7 +3135,7 @@ Addonssam3:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: td_nod_samsite lvl 20
+		Name: SAM lvl 20
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~Addonssam2, ~!Addonssam3
@@ -3952,7 +3952,7 @@ tanodhand:
 	Valued:
 		Cost: 500 #500
 	Tooltip:
-		Name: Nod td_nod_handofnod
+		Name: Nod Hand
 	Production@NORMAL:
 		Produces: Infantry
 	Production@CLASSICPRODUCTIONQUEUES:
@@ -4963,7 +4963,7 @@ tanodeyeofkane:
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
-		Name: td_gdi_advancedcommunicationscenter of Kane
+		Name: Eye of Kane
 	Building:
 		Footprint: xxx xxx ___
 		Dimensions: 3,3
@@ -5003,7 +5003,7 @@ tanodeyeofkane:
 		Cursor: attackmove
 		Icon: glscudstorm
 		ChargeInterval: 6000
-		Name: td_gdi_advancedcommunicationscenter of Kane AA Launcher
+		Name: Eye of Kane AA Launcher
 		Description: Fires 9 Scud Missiles at the target.
 		EndChargeSpeechNotification:
 		SelectTargetSpeechNotification:
@@ -5374,7 +5374,7 @@ tamgnest:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	Tooltip:
-		Name: Machine td_nod_gunturret Nest
+		Name: Machine Gun Nest
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: upgrade.tamgnest1
@@ -5564,7 +5564,7 @@ tamgnod:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	Tooltip:
-		Name: Shredder Machine td_nod_gunturret
+		Name: Shredder Machine Gun
 	Armament:
 		Weapon: TSVulcanTower
 		LocalOffset: 300,60,600
@@ -5816,7 +5816,7 @@ tareapercann:
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Reaper Machine td_nod_gunturret
+		Name: Reaper Machine Gun
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks, vehicleproduction

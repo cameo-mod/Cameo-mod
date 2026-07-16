@@ -1042,7 +1042,7 @@ wolfdog:
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Attack ra1_soviet_attackdog
+		Name: Attack Dog
 		GenericName: ra1_soviet_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1880,7 +1880,7 @@ wolfrobot:
 wolfupdogfood:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: ra1_soviet_attackdog Food
+		Name: Dog Food
 	Buildable:
 		BuildPaletteOrder: 250
 		Queue: Research

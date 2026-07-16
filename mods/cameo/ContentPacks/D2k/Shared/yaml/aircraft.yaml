@@ -4,7 +4,7 @@ carryall.reinforce:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@selection: ^SelectableEconomicUnit
 	Tooltip:
-		Name: Autonomous ixian_autonomouscarryall
+		Name: Autonomous Carryall
 	Valued:
 		Cost: 5000
 	Health:
@@ -152,7 +152,7 @@ frigate.paradrop:
 carryall.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ixian_autonomouscarryall
+		Name: Carryall
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 144
@@ -167,7 +167,7 @@ carryall.husk:
 carryall.huskVTOL:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ixian_autonomouscarryall
+		Name: Carryall
 	FallsToEarth:
 		Moves: False
 		Velocity: 0c128

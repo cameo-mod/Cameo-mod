@@ -19,7 +19,7 @@ td_nod_promotion_unlockchemicalrocketsoldier:
 td_nod_promotion_unlockchemicalattackbike:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Chemical Attack td_nod_reconbike
+		Name: Unlock Chemical Attack Bike
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Promotions
@@ -117,11 +117,11 @@ td_nod_promotion_unlocklasertrooper:
 td_nod_promotion_unlockblackhandflamer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Black td_nod_handofnod Flamer
+		Name: Unlock Black Hand Flamer
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Description: Allows training of Black td_nod_handofnod Flamers.
+		Description: Allows training of Black Hand Flamers.
 		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockblackhandflamer, rank1
 	RenderSprites:
 		Image: td_nod_blackhandflamer

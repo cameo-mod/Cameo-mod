@@ -3868,7 +3868,7 @@ SWSAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: td_nod_samsite Site
+		Name: SAM Site
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
@@ -5198,7 +5198,7 @@ swrmbo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
 		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
@@ -5221,7 +5221,7 @@ swgreedo:
 		BuildPaletteOrder: 50
 		Prerequisites: swfort, ~techlevel.high
 		Queue: Infantry, RAInfantry
-		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament@PRIMARY:
 		Weapon: ra1_allies_alliedsniper
 	Armament@GARRISONED:
@@ -5253,7 +5253,7 @@ swbike:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Speeder td_nod_reconbike
+		Name: Speeder Bike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -5725,7 +5725,7 @@ swltnk:
 		BuildPaletteOrder: 20
 		Prerequisites: hpad, anyhq, ~techlevel.medium
 		Queue: Aircraft, RAAircraft
-		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker ra1_allies_mechanic\n  Weak vs Infantry
+		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker Mech\n  Weak vs Infantry
 		BuildDurationModifier: 50
 	Aircraft:
 		CruiseAltitude: 900
@@ -8060,7 +8060,7 @@ swtran.e2:
 		RequiresCondition: !loaded && botmicro
 		Delay: 200
 	EditorOnlyTooltip:
-		Name: Loaded Lambda (td_gdi_grenadier)
+		Name: Loaded Lambda (E2)
 
 swtran.e1:
 	Inherits: swtran
@@ -8438,7 +8438,7 @@ swrmbo.hutt:
 		BuildPaletteOrder: 10
 		Prerequisites: ~techlevel.low
 		Queue: Infantry, RAInfantry
-		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
 		Weapon: SWBikeLaserSalvage
 	Armament@GARRISONED:

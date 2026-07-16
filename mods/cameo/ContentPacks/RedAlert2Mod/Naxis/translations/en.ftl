@@ -42,7 +42,7 @@ actor_nax_hetzer =
    .description = Light tank destroyer.
 
 actor_nax_hmg =
-   .description = Machine td_nod_gunturret crew.
+   .description = Machine gun crew.
       Needs to deploy to attack.
 
 actor_nax_jagdpanzer =
@@ -53,11 +53,11 @@ actor_nax_kubel =
       Can attack air.
 
 actor_nax_litt =
-   .description = Commando armed with a td_nod_gunturret that creates black holes.
+   .description = Commando armed with a gun that creates black holes.
       Black holes damage nearby enemies and can be targeted
 
 actor_nax_merc =
-   .description = ra1_allies_alliedsniper Infantry with long range.
+   .description = Sniper Infantry with long range.
 
 actor_nax_mp40 =
    .description = Elite assault infantry.

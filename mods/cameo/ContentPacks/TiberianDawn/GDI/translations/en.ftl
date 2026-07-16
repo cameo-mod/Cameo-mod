@@ -6,8 +6,8 @@ actor_e2 =
 actor_apc =
    .description = Armed infantry transport.
         Can attack Aircraft.
-   .tdname = GDI td_gdi_apc
-   .raname = Allied td_gdi_apc
+   .tdname = GDI APC
+   .raname = Allied APC
 
 actor_jeep =
    .description = Scout vehicle armed with a machine gun.
@@ -41,7 +41,7 @@ actor_mlrs =
 actor_orca =
    .description = Aircraft armed with missiles.
       Strong vs Buildings, Vehicles
-   .name = td_gdi_orca
+   .name = Orca
 
 actor_hq_gdi =
    .description = Provides radar, advanced technologies,
@@ -67,8 +67,8 @@ actor_empgrenadier =
         Strong vs Ground
 
 actor_gdisniper =
-   .name = GDI ra1_allies_alliedsniper
-   .description = ra1_allies_alliedsniper armed with an anti-materiel rifle.
+   .name = GDI Sniper
+   .description = Sniper armed with an anti-materiel rifle.
       Can attack air.
         Strong vs Infantry, Air
 
@@ -128,8 +128,8 @@ upgrade_armorpiercingbullets =
    .description = Increases damage of all bullet based weapons by 33%.
       while also making them more effective against tank armor.
       Increases Minigunner and Shotgunner damage by 100%.
-      Increases GDI ra1_allies_alliedsniper and A10 damage by 10%.
-      Also adds a machine td_nod_gunturret to the Battle and Predator Tank and increases damage by 5%.
+      Increases GDI Sniper and A10 damage by 10%.
+      Also adds a machine gun to the Battle and Predator Tank and increases damage by 5%.
 
 upgrade_heavyaircraftarmorplating =
    .description = Increases armor of Orcas, Firehawks, Chinooks and A10s by 50%.

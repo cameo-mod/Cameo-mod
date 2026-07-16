@@ -163,7 +163,7 @@ ordos_eyeinthesky:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
-		Name: td_gdi_advancedcommunicationscenter In The Sky
+		Name: Eye In The Sky
 	Valued:
 		Cost: 2500
 	Buildable:
@@ -551,7 +551,7 @@ banshee_husk.ordos:
 eye_husk.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: td_gdi_advancedcommunicationscenter on the Sky
+		Name: Eye on the Sky
 	Aircraft:
 		TurnSpeed: 8
 		Speed: 65
@@ -774,7 +774,7 @@ carryall_reinforce.ordos:
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
-		Name: Advanced ixian_autonomouscarryall
+		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
@@ -805,7 +805,7 @@ ordos_advancedcarryall:
 		BuildPaletteOrder: 120
 		Prerequisites: ~ordos_hightechfactory
 	Tooltip:
-		Name: Advanced ixian_autonomouscarryall
+		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
@@ -830,7 +830,7 @@ ordos_advancedcarryall:
 carryall_husk.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Advanced ixian_autonomouscarryall
+		Name: Advanced Carryall
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 144
@@ -845,7 +845,7 @@ carryall_husk.ordos:
 carryall_huskvtol.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Advanced ixian_autonomouscarryall
+		Name: Advanced Carryall
 	FallsToEarth:
 		Moves: False
 		Velocity: 0c128

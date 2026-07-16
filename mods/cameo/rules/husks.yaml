@@ -19,7 +19,7 @@ HARV.Husk:
 APC.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: td_gdi_apc (Destroyed)
+		Name: APC (Destroyed)
 	TransformOnCapture:
 		IntoActor: td_gdi_apc
 	RenderSprites:
@@ -55,7 +55,7 @@ BGGY.Husk:
 BIKE.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: Recon td_nod_reconbike (Destroyed)
+		Name: Recon Bike (Destroyed)
 	TransformOnCapture:
 		IntoActor: td_nod_reconbike
 	RenderSprites:
@@ -273,7 +273,7 @@ jsuperbomber.Husk:
 MIG.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Attack Plane
+		Name: MiG Attack Plane
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -319,7 +319,7 @@ su57.Husk:
 YAK.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: ra1_soviet_yakscoutplane Attack Plane
+		Name: Yak Attack Plane
 	Contrail:
 		Offset: -853,0,0
 	Aircraft:
@@ -416,7 +416,7 @@ HELI.Husk:
 HIND.Husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: ra1_soviet_hindattackhelicopter
+		Name: Hind
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112
@@ -437,7 +437,7 @@ HIND.Husk:
 ra_kamov.Husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
-		Name: ra1_soviet_hindattackhelicopter
+		Name: Hind
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 112

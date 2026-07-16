@@ -2615,7 +2615,7 @@ DTLWALL:
 	CustomSellValue:
 		Value: 5
 	Tooltip:
-		Name: Living ixian_concretewall
+		Name: Living Wall
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: dtbio
@@ -2815,7 +2815,7 @@ DTRMBO:
 		BuildPaletteOrder: 50
 		Prerequisites: anyhq, ~techlevel.high, dtpropaganda
 		Queue: Infantry, RAInfantry
-		Description: Elite ra1_allies_alliedsniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
+		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildDuration: 375
 		BuildDurationModifier: 100
 		BuildLimit: 1
@@ -2866,7 +2866,7 @@ dtapc:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Rocket td_gdi_apc
+		Name: Rocket APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
@@ -3373,7 +3373,7 @@ hind.dtrussia:
 	RenderSprites:
 		Image: ra1_soviet_hindattackhelicopter
 	Tooltip:
-		Name: ra1_soviet_hindattackhelicopter
+		Name: Hind
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3592,7 +3592,7 @@ dtapc2:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Tear Gas td_gdi_apc
+		Name: Tear Gas APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
@@ -3735,7 +3735,7 @@ dtfbik:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Flame td_nod_reconbike
+		Name: Flame Bike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

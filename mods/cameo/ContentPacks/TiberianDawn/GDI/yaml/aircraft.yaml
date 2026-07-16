@@ -43,7 +43,7 @@ td_gdi_orca:
 	Valued:
 		Cost: 1700
 	Tooltip:
-		Name: td_gdi_orca
+		Name: Orca
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~td_gdi_helipad
@@ -119,7 +119,7 @@ A10:
 		Armaments: td_nod_gunturret, bombs
 		FacingTolerance: 32
 	Armament@GUNS:
-		Name: td_nod_gunturret
+		Name: gun
 		Weapon: Vulcan
 		LocalOffset: 1024,0,-85
 	WithMuzzleOverlay:
@@ -144,7 +144,7 @@ A10:
 ORCA.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: td_gdi_orca
+		Name: Orca
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 186

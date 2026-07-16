@@ -42,13 +42,13 @@ actor_future_robot_cannon =
       Weak vs Infantry, Aircraft
 
 actor_future_mech_machinegun =
-   .description = Large walking ra1_allies_mechanic armed with autoguns.
+   .description = Large walking mech armed with autoguns.
       Can attack air.
       Strong vs Infantry, Aircraft
       Weak vs Vehicles
 
 actor_future_mech_plasma =
-   .description = Large walking ra1_allies_mechanic armed with twin plasma cannons.
+   .description = Large walking mech armed with twin plasma cannons.
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 

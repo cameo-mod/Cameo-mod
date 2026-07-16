@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
-"""apply.py — mechanically apply a rename map (MASTER_REPORT §9.6 step 3).
+"""Disabled legacy rename-map applicator.
+
+This script is intentionally blocked because it rewrites identifiers without
+syntax or namespace context and resolves asset renames by bare filename. It is
+kept only as a record of the failed migration and must not be used.
 
 Usage:  python tools/rename/apply.py tools/rename/rename_map_<faction>.yaml
 
@@ -83,6 +87,13 @@ def audio_voice_keys() -> set[str]:
 
 
 def main() -> int:
+    print(
+        "ERROR: tools/rename/apply.py is disabled. Its context-blind text "
+        "replacement and bare-filename asset lookup caused cross-namespace "
+        "corruption, map incompatibility, and incorrect sprite selection."
+    )
+    return 2
+
     if len(sys.argv) != 2:
         print(__doc__)
         return 2
