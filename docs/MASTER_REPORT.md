@@ -389,11 +389,11 @@ file name        :=  same as the asset's owning actor id, plus suffixes
 icon file        :=  <actor_id>_icon.<ext>
 ```
 
-- **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviet_*` vs `ra2_soviet_*`. Every faction that exists once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asian_alliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
+- **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviets_*` vs `ra2_soviets_*`. Every faction that exists once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asianalliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
 - **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift — use full words, `steel_consortium`; abbreviations are how drift starts).
 - **`upgrade|promotion|doctrine`** — full words, only on tech-tree items: `upgrade` for cash research, `promotion` for rank-gated unlocks, `doctrine` for mutually-exclusive doctrine picks. Team-proxy dummies append `_proxy_actor` (existing RA1 convention).
 - **`name`** — the unit's display-ish name as ONE lowercase group without separators (RA1 baseline: `heatraytank`, `nuclearshells`): `titan`, `slaveminer`, `skyhammer`, `ghoststalker`.
-- **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit).
+- **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit), `_sp`, `_r4`, `_wild`, `_EMP` (EMP weapons), `_AA` (anti-air weapons), `_upgraded` (upgrade variants), plus dotted variants (`.husk`) and paradrop twins (`para`). See DESIGN.md §1 for the full list.
 - **Tooltip consistency** — the id's name group derives from the Tooltip Name and both must stay in sync: when an id is disambiguated, the Tooltip is renamed too, so no two actors of a faction share a display name (audit_metadata M1 enforces). New display names are a design decision — propose options and let design pick (e.g. the blue Tiberian Fiend became "Vinifera Fiend"). Shared cross-actor namespaces (voice sets, shared sprites) are never renamed with a unit; tools/rename/apply.py protects audio files and VoiceSet lines.
 
 **Examples**
@@ -703,7 +703,7 @@ Tech items only: `upgrade | promotion | doctrine` marker between faction and nam
 Game prefixes: only on actual collisions — `td ts ra1 ra2` today (+ future prefixes the day a new collision appears).
 Suffixes: `_icon _cameo _husk _mk2 _elite _ai _water`.
 Collision rule: two factions share a name → both take game prefixes (`td_gdi`, `ts_gdi` — never leave one bare).
-Slug spelling: full words, snake_case, no abbreviations (`steel_consortium`, not `scon`/`consortium`).
+Slug spelling: full words, snake_case, no abbreviations (`steel_consortium`, not `scon`/`steelconsortium`).
 Asset files follow their owning actor id as stem (sequence `Filename:` entries included); icons are `<actor_id>_icon.<ext>`. Shared sprite archives (e.g. `DATA.R16`) referenced by many images are exempt.
 
 ## Appendix C — Faction design one-pager template (`docs/design/factions/<slug>.md`)

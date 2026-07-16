@@ -20,6 +20,18 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
 
 - The **name is ONE lowercase group without separators**: `ra_heatraytank`,
   `forgotten_ghoststalker`, `forgotten_experimentalmammothtank`.
+- **Underscores separate SECTIONS, never within names** (design 2026-07-16):
+  The actor id has exactly three sections — `[game_]faction_actorname[_variant]`.
+  Underscores are ONLY used to separate these sections. Faction names and actor
+  names are each a single unbroken lowercase group with NO internal underscores.
+  - **Correct**: `td_gdi_lighttank`, `ra1_soviets_heavytank`, `wc2_humans_footman`,
+    `asianalliance_quasar`, `steelconsortium_manta`, `latinsyndicate_freedomfighter`,
+    `schwarzermond_lunarsoldier`.
+  - **Wrong**: `asian_alliance_quasar` (underscore inside faction name),
+    `steel_consortium_manta`, `latin_syndicate_freedomfighter`.
+  - Faction InternalName must match the faction section of the actor prefix
+    exactly: actors `td_gdi_*` → faction `td_gdi`; actors `asianalliance_*` →
+    faction `asianalliance`.
 - **The only separator is the underscore — hyphens are banned in ALL
   naming we own** (design 2026-07-10): actor ids, asset file names
   (`cabal_dissolver_weapon.shp`, never `cabal_dissolver-weapon.shp`),
@@ -37,14 +49,15 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   key family. A no-exception global rename was considered and rejected
   (2026-07-11): it would require C# changes, which are out of bounds.
 - **Game prefix only on actual collisions** (`td_gdi` vs `ts_gdi`,
-  `ra1_soviet` vs `ra2_soviet`). Unique factions (cabal, forgotten, yuri,
+  `ra1_soviets` vs `ra2_soviets`). Unique factions (cabal, forgotten, yuri,
   ordos, terran…) take no game prefix. Prefixes are added the day a
   collision appears, never preemptively.
 - **Tech markers are full words**: `upgrade` (cash research), `promotion`
   (rank-gated), `doctrine` (mutually exclusive picks). Team proxies end
   `_proxy_actor`. Promotions never carry "unlock" in the id.
 - **Variants** are structural suffixes: `_husk _sp _r4 _wild _mk2 _elite
-  _ai _water`.
+  _ai _water _EMP _AA _upgraded` plus dotted variants (`.husk`) and
+  paradrop twins (`para`).
 - **Tooltip ↔ id consistency**: the id's name group derives from the
   Tooltip Name and both stay in sync. No two actors of a faction may share
   a Tooltip Name (audit_metadata M1). New display names are a **design
@@ -65,9 +78,100 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   `ra2_soviets_constructionyard_make.shp`. The only exception is `_mk2`/
   `_mk3` as unit variant markers (Mark II/III), which are part of the
   actor name, not a sequence suffix.
+- **Sequence filenames must match their actor and sequence name**
+  (design 2026-07-16):
+  - **Idle/body sprite**: the primary body sprite filename MUST be
+    `<actor_id>.<ext>` and placed in the `Defaults:` section so all
+    sequences that use the same body sprite inherit it automatically.
+    Example: `latinsyndicate_topolsilo.shp` goes into `Defaults:`,
+    not `latinsyndicate_topolsilo_cg12hit_f.shp` in each idle/damaged-idle/
+    critical-idle entry.
+  - **Non-idle sequences**: every sequence that is NOT the idle/body
+    sprite MUST include the sequence name as a suffix in the filename:
+    `<actor_id>_<sequence_name>.<ext>`. Examples:
+    `latinsyndicate_topolsilo_bib.shp` (bib sequence),
+    `latinsyndicate_topolsilo_make.shp` (make sequence),
+    `ra2_soviets_constructionyard_icon.shp` (icon sequence),
+    `cabal_tarantula_turret.shp` (turret sequence).
+  - **Sequence name suffixes use full words**: `_bib`, `_make`, `_turret`,
+    `_muzzle`, `_icon`, `_active`, `_dead`, `_damaged`, `_critical`,
+    `_shadow`, `_deploy`, `_up`, `_down`, `_harvest`, etc. These match
+    the sequence key names exactly (hyphens in sequence keys like
+    `damaged-idle` map to underscores in filenames: `_damaged_idle` or
+    are collapsed to the distinguishing word only: `_damaged`).
+  - **Shared files are NEVER renamed** (critical safety rule):
+    - Files in `shared_sprites|`, `ts_shared_sprites|`, `td_shared_sprites|`
+      and other shared namespaces (`invisibleitem.shp`, `gunfire2.shp`,
+      `electro.shp`, `frag3.shp`, `parach_shadow.shp`, `ra2_oregath.shp`,
+      etc.) are used by many actors and MUST stay with their shared name.
+    - Death sequence files defined in inherited templates like
+      `^RA2InfantryDeaths`, `^RA2BasicInfantry`, `^RA2ProneInfantry`
+      are shared across all inheriting actors and MUST NOT be renamed
+      to match any single actor.
+    - Template default filenames (e.g., `ra2gi.shp` in `^RA2BasicInfantry`)
+      are placeholder defaults that get overridden per-actor; the template
+      file itself stays as-is.
+    - Muzzle flash files (`gunfire2.shp`, `ra2_gunfire.shp`) shared across
+      many actors stay as-is.
+    - DATA.R16-style shared sprite archives stay as-is.
+    - Voice sets, notifications, and shared art are already protected by
+      the cross-actor namespace rule above.
+  - **Combine sequences**: sub-images referenced in `Combine:` blocks
+    that are unique to one actor should be renamed to
+    `<actor_id>_<descriptive_suffix>.<ext>`. Sub-images shared across
+    multiple actors stay as-is.
+  - **Inherited template defaults**: when an actor inherits from a
+    template (e.g., `^RA2ArmedInfantry`) and overrides `Defaults:
+    Filename:`, the override filename MUST be `<actor_id>.<ext>`. The
+    template's own default filename (e.g., `ra2gi.shp`) is a shared
+    baseline and is NOT renamed.
+  - **Migration approach**: per faction, curated via
+    `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`,
+    verified with `tools/audit/dump_resolved.py` before/after diffs
+    (must be empty). A pre-flight audit script must build a complete
+    cross-reference of which filenames are used by which actors to
+    identify shared files that must NOT be renamed.
 - **Cross-actor namespaces are sacred**: voice sets, notifications, shared
   art are NEVER renamed with a unit. `tools/rename/apply.py` protects
   audio files and `VoiceSet:` lines structurally.
+- **Weapon names must include the full actor id as a prefix**
+  (design 2026-07-16): weapon ids follow the pattern
+  `<actor_id>_<weapon_descriptive_name>`. The actor id prefix makes it
+  immediately clear which actor owns the weapon and prevents name
+  collisions across factions. Examples:
+  `td_gdi_commando_sniper`, `cabal_tarantula_cannon`,
+  `ra2_soviets_conscript_ak47`, `latinsyndicate_topolsilo_nuclear`.
+  - **Weapon class templates keep their PascalCase `^` prefix**:
+    `^SmallArms`, `^MediumCannon`, `^HeavyMissile`, `^RA2FlakWeapon`,
+    `^LaserWeapon`, etc. These are shared class templates, not actor
+    weapons, and are NOT prefixed with an actor id.
+  - **Faction-level weapon templates** (shared across multiple actors of
+    one faction) use PascalCase with the faction prefix:
+    `^CabalMissile`, `^RA2RadShell`, `^RA2EliteEffects`. These are also
+    NOT prefixed with a full actor id since they serve multiple actors.
+  - **Elite weapon variants** append `_elite` — this is the ONLY accepted
+    suffix for elite weapons, regardless of naming style. Legacy PascalCase
+    weapons that still use the `E` suffix (e.g. `BorisAKME`) must be
+    migrated to `_elite` when touched. See §16.3 for the full convention.
+    Example: `ra2_soviets_conscript_ak47_elite`, `BorisAKM_elite`.
+  - **EMP weapon variants** append `_EMP`: `steel_consortory_emp_cannon`,
+    `ra1_tesla_tank_zap_EMP`. This suffix identifies weapons whose
+    primary function is to disable vehicles via EMP effect. It is
+    primarily used by Steel Consortium but may appear on other factions.
+  - **AA weapon variants** append `_AA`: `ra2_allies_ifv_missile_AA`,
+    `SWAWingGun_AA`. This suffix identifies anti-air weapons — weapons
+    whose `ValidTargets` include `Air`.
+  - **Upgraded weapon variants** append `_upgraded` or the upgrade name:
+    `cabal_artilleryspider_shell_upgraded`.
+  - **Combined suffixes** follow this order: `<weapon_name>_AA_EMP_elite`
+    (e.g. an elite EMP anti-air weapon). The base descriptive name comes
+    first, then capability tags (`_AA`, `_EMP`), then the rank tier
+    (`_elite`) last.
+  - **Migration**: per faction via `tools/rename/rename_map_<faction>.yaml`
+    + `tools/rename/apply.py`, verified with
+    `tools/audit/dump_resolved.py` before/after diffs (must be empty).
+    Weapons shared across multiple factions (in theme Shared/ packs) stay
+    as-is and are NOT renamed after any single actor.
 
 Migration is per faction via `tools/rename/rename_map_<faction>.yaml`
 (curated, reviewed) + `tools/rename/apply.py`, proven behavior-preserving
@@ -77,14 +181,41 @@ with `tools/audit/dump_resolved.py` before/after diffs (must be empty).
 
 ```
 mods/cameo/ContentPacks/<Theme>/<Faction>/
-  content.yaml            # the pack's include list
-  rules/                  # split per actor type:
+  content.yaml            # the pack's manifest (include list) — root level
+  yaml/                   # ALL MiniYaml, split per concern:
     faction.yaml buildings.yaml defenses.yaml infantry.yaml vehicles.yaml
     aircraft.yaml naval.yaml upgrades.yaml promotions.yaml husks.yaml
     templates.yaml        # faction-local ^templates only
-  weapons/weapons.yaml    # ONE file per faction
-  sequences/sequences.yaml# ONE file per faction
+    weapons.yaml          # ONE weapons file per faction
+    sequences.yaml        # ONE sequences file per faction
+    ai.yaml               # per-faction bot data (once the AI split lands)
+  files/                  # ALL assets in per-type subfolders:
+    icons/ sprites/ voxels/ sounds/
+  translations/en.ftl     # Fluent (not MiniYaml, stays its own folder)
 ```
+
+**Structure decisions (design consultation 2026-07-16):**
+- **The `yaml/` folder name STAYS.** It was decided 2026-07-12 and rolled
+  out across all 27 packs on 2026-07-14; renaming again is churn without
+  behavioral gain. (If it were greenfield, `data/` would be marginally
+  more descriptive — not worth a second migration.)
+- **The per-concern file split STAYS — do NOT merge rules files.** With
+  multiple concurrent contributors (maintainer + 333ggg + two AI agents),
+  small per-type files minimize merge conflicts, keep audits targeted,
+  and make wrong-section placement detectable. One merged rules.yaml
+  would undo all three.
+- **The standard file set above is CLOSED.** A pack may omit a file it
+  doesn't need, but must not invent new names — `audit_packs.py`
+  enforces the set, so tooling can always find everything.
+- **content.yaml becomes machine-generated** (`tools/packs/gen_content.py`):
+  regenerated from the files on disk, deterministic ordering; the audit
+  fails on drift. Nobody hand-edits include lists.
+- **Wrong-section rules** (the "actor in the wrong pack/file" bug class):
+  every actor id in a pack MUST carry the pack's faction prefix (Shared
+  packs excepted); actors live in the file matching their class template
+  (naval.yaml holds ships AND naval yards — existing rule; husk variants
+  in husks.yaml; upgrade/promotion actors in their marker files).
+  `audit_packs.py` checks both.
 
 - **naval.yaml holds ALL naval content: every ship AND the naval yards**,
   even though naval yards normally count as buildings. The lobby option
@@ -1106,7 +1237,7 @@ Every faction should eventually have its own rank decoration image and
 | `cabalrank` | `^CABALRankDecoration` | TS CABAL |
 | `forgotrank` | `^ForgottenRankDecoration` | TS Forgotten |
 | `dunerank` | `^DuneRankDecoration` | D2k factions (Atreides, Harkonnen, Ixian, Ordos) |
-| `alienrank` | `^AlienRankDecoration` | Alien factions (TODO — template not yet created) |
+| `alienrank` | `^AlienRankDecoration` | StarCraft Zerg (TODO — split per-faction: Zerg keep `alienrank`, Protoss and Terran need separate decorations) |
 | `ra2rank` | (built into `^GainsExperienceRA2`) | RA2, RA2Mod factions, TKM |
 
 **Rules:**
@@ -1142,17 +1273,32 @@ Armament@PRIMARY:
     Weapon: <baseWeapon>
     RequiresCondition: !rank-elite
 Armament@ELITE:
-    Weapon: <baseWeapon>E
+    Weapon: <baseWeapon>_elite
     RequiresCondition: rank-elite
 ```
 
-**Naming convention:** the elite weapon name is the base weapon name
-with a capital `E` suffix (e.g. `BorisAKM` → `BorisAKME`). This is the
-dominant pattern (95 of 143 existing elite weapons). The `_elite` suffix
-(e.g. `RA2120mm_elite`) is a secondary pattern used in some RA2Mod
-factions — these should be normalized to the `E` suffix when touched.
-Non-standard names (e.g. `AsianRailTank2`, `NaxPlanegun`) are bugs and
-must be renamed to follow the `E` suffix convention.
+**Naming convention:** ALL elite weapons append `_elite` — this is the
+only accepted suffix, regardless of the weapon's naming style.
+- **Legacy PascalCase weapons** (not yet migrated to actor-prefixed
+  names): the elite weapon name is the base weapon name with `_elite`
+  appended (e.g. `BorisAKM` → `BorisAKM_elite`). The legacy `E` suffix
+  (e.g. `BorisAKME`) is deprecated and must be migrated to `_elite` when
+  the weapon is touched. Non-standard names (e.g. `AsianRailTank2`,
+  `NaxPlanegun`) are bugs and must be renamed to follow the `_elite`
+  suffix convention.
+- **New actor-prefixed weapons** (lowercase, per §1 weapon naming rule):
+  the elite weapon name appends `_elite` (e.g.
+  `ra2_soviets_conscript_ak47` → `ra2_soviets_conscript_ak47_elite`).
+  This is consistent with the lowercase underscore convention.
+
+**Critical distinction — EMP weapons are NOT elite weapons:**
+Weapons whose primary function is EMP disable (e.g. `SteelEmpBomb`,
+`TSEMPZapWeapon`, `CorsairEMP`) must NOT be confused with elite
+variants. EMP weapons use the `_EMP` suffix (see §1), not `_elite`.
+The previous bulk rename (reverted) incorrectly treated EMP weapons as
+elite weapons — this must never happen again. The audit script
+(`audit_elite_naming.py`) only checks weapons gated by
+`RequiresCondition: rank-elite`, so EMP weapons are never flagged.
 
 **Audit rules** (`audit_elite_weapons.py`, TODO):
 1. **E1 — Missing elite weapon**: every actor using
@@ -1164,8 +1310,10 @@ must be renamed to follow the `E` suffix convention.
    must have `RequiresCondition: rank-elite` (or a condition that
    includes `rank-elite`). 77 of 143 elite armaments currently fail
    this check — they fire at all ranks, not just elite.
-3. **E3 — Non-standard naming**: elite weapon names must end with a
-   capital `E` suffix. 17 weapons currently use non-standard names.
+3. **E3 — Non-standard naming**: elite weapon names must end with
+   `_elite`. The legacy `E` suffix is deprecated. Weapons ending with
+   `E` that are NOT elite variants (e.g. EMP weapons, `PrismChargeE`)
+   must not be flagged — only weapons gated by `rank-elite` are checked.
 4. **E4 — Base weapon must not fire at elite**: the primary armament
    must have `RequiresCondition: !rank-elite` (or equivalent) so the
    elite weapon replaces it, not stacks with it.
@@ -1340,10 +1488,11 @@ following templates are the canonical set:
 
 - `^NaxiCryptofascism` — economy trickler (1 credit per 25 ticks per unit).
   Tech tier, `Research` queue. Every Schwarzer Mond unit inherits this.
-- `^NaxiCrystalLens` — radar-tier laser burst +1 (base burst ≥ 2).
-  Laser units inherit this.
-- `^NaxiAmplifiedLens` — tech-tier laser burst +1 (base burst ≥ 3).
-  Laser units inherit this (requires Crystal Lens).
+- `^NaxiCrystalLens` — radar-tier laser burst +1 for ALL yellow laser
+  weapons (including 1-burst weapons). Laser units inherit this.
+- `^NaxiAmplifiedLens` — tech-tier laser burst +1 for ALL yellow laser
+  weapons (including 1-burst weapons). Laser units inherit this
+  (requires Crystal Lens).
 - `^NaxiVrilPoweredWeapons` — tech-tier +25% firepower and Tesla-type damage
   for cannon vehicles. Named after the Vril energy core from the Black Sun
   occult-science program.

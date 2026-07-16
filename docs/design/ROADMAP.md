@@ -71,12 +71,17 @@ factions, everything through the balance workbook._
 
 ### P0 — Completed (2026-07-14 session)
 
-- [x] **CABAL Backup Systems upgrade coverage (legion, avatar)**
-  (`d4be72f8f`): Added `SpawnActorOnDeath@backup` to `cabal_legion` and
-  `cabal_avatar`; added `Inherits@BACKUP` to `cabal_avatar`; created
-  `cabal_legion_backup` and `cabal_avatar_backup` actors in
+- [x] **CABAL Backup Systems upgrade coverage (avatar, widow)**
+  (`d4be72f8f`): Added `SpawnActorOnDeath@backup` to `cabal_avatar` and
+  `cabal_widow`; added `Inherits@BACKUP` to `cabal_avatar`; created
+  `cabal_avatar_backup` and `cabal_widow_backup` actors in
   `rules/tiberiansun.yaml`; added `Repairable` trait to
   `cabal_artilleryspider_backup`.
+  **NOTE (2026-07-16):** The original session plan referenced `cabal_legion`
+  and `cabal_legion_backup`, but no `cabal_legion` actor exists in the
+  current tree (it was likely renamed or removed during the N9 rebalance).
+  `cabal_widow_backup` was created instead. If a `cabal_legion` actor is
+  re-added later, it will need its own backup actor.
 - [x] **Backup husk repair/reanimate** (`d4be72f8f`): `Repairable` trait
   added to `cabal_artilleryspider_backup` (was missing — present on
   manticore and tarantula backups already).
@@ -110,6 +115,86 @@ factions, everything through the balance workbook._
   a smarter audit script that only checks TS content packs and reports
   mismatches between `DeathSequencePalette` and `PlayerPalette`. Do NOT
   touch TD, D2k, RA1, RA2, TKM files.
+
+- [x] **Shellmap boot crash: "No valid shellmaps available"** (`6a74333d5`):
+  the fix-oramap.ps1 rename pass used CASE-INSENSITIVE replaces on map.yaml
+  inside the .oramap zips, corrupting shellmap_v2's PlayerReference
+  `Allies:` field keys into `ra1_allies:` (invalid field → map excluded
+  from the shellmap pool), and renamed display player names without
+  updating the lua inside the zips (`Player.GetPlayer("Allies")` → nil →
+  lua fatal). desert-shellmap-2 also kept nonexistent factions `soviet`
+  (singular, missing from the tool's rename list) and `modjapan`. Fixed
+  both maps + hardened the tool (`-creplace`, added soviet/modjapan
+  entries). LESSON: .oramap rewrites must be case-sensitive and must
+  update embedded lua player/actor strings in the same pass; a mod-wide
+  GetPlayer↔player-name scan now shows 0 mismatches.
+- [x] **12 more maps broken by the renames** (`2df758574`): mod-wide sweep
+  of all 364 maps (invalid Faction values, unknown actor types, orphaned
+  Owners, stale lua ids). Fixed: 5 mission maps (ch1-e1, ch1-e1c,
+  delivery, deliverycoop, iris-ally-hb) with 25 stale `Faction:` values +
+  1 lua id; 5 .oramaps with singular `ra1/ra2_soviet_*` actor types
+  (Border conflict, _ra_ore-gardens, _ra_temperal, thelake6people,
+  chernobyl); survival.oramap lua (21 ids pluralized);
+  desert-shellmap-2-playable orphaned GDI/Nod owners → Neutral.
+- [ ] **Pre-existing broken maps found by the sweep (design decisions
+  needed, NOT rename-caused)**: (a) ~70 imported maps carry
+  `Faction: england`/`ukraine` — factions that never existed in Cameo
+  (decide: bulk-rewrite to `Random` or leave — engine may fall back);
+  (b) `troublerebels.oramap` references `heavy_inf` (only
+  `heavy_inf.ixian` exists — ambiguous); (c) `tiberium-split.oramap`
+  references never-defined `split0a/0b/0c/4/8/9` terrain actors (split2/3
+  exist); (d) `_d2k_Centerbase` + `_d2k_tournament_spice` reference
+  base-D2K generics (`refinery`, `harvester`, `artillery_platform`,
+  `combat_siege_tank`, `medium_gun_turret`, `combat_tank_ixian`) that
+  Cameo never defined; (e) survival.oramap still has 13 ancient
+  `aa_*`/`steel_*` compressed ids — proposed mappings:
+  `aa_phoenix→asianalliance_phoenix`,
+  `steel_quantumtank→steelconsortium_quantumtank`,
+  `steel_katy→steelconsortium_katytank`,
+  `steel_mega→steelconsortium_megalodon`,
+  `steel_defender→steelconsortium_defenderbot`,
+  `aa_samurai→asianalliance_japanesesamurai`,
+  `aa_lynx→asianalliance_lynxtank`, `aa_mecha→asianalliance_pulverizermecha`,
+  `aa_flam→asianalliance_asiansentryflamer`; unresolved: `aa_archer`,
+  `aa_ftnk`, `steel_fedinf`, `steel_qinf`. Effort: S–M once decided.
+
+### P0/P1 — User-reported issues (2026-07-15/16)
+
+- [x] **CRASH: ixian_koda_tank missing icon sequence** — VERIFIED 2026-07-16:
+  the `icon` sequence already exists in `Ixian/yaml/sequences.yaml` (line 1372,
+  `Filename: DATA.R16, Start: 4028`). `audit_sequences.py` reports 0 S2 missing
+  sequences. Crash may have been fixed in a prior session.
+- [x] **BUG: Repair drone not repairing** — root cause: `AutoTarget:
+  EnableTargeting: false` prevented auto-acquisition of repair targets.
+  Fixed by removing the override and restoring `InitialStance: Defend,
+  ScanRadius: 12` from `^HelicopterTemplate`. Also set
+  `PersistentTargeting: true` on `AttackAircraft` to maintain repair
+  targeting. Matches working Ixian repair drone pattern.
+- [ ] **BUG: Tarantula firing offset** — projectile doesn't come out of
+  cannon. South-facing: offset needs to go up. North-facing: offset needs
+  to go down. Current `LocalOffset: 300,0,300` (changed from `-700,0,700`).
+  Turret offset: `-500,1,1`. Turret sequence Offset: `0,0,12`. Effort: S.
+- [ ] **BUG: Artillery spider firing offset** — offset needs to be up and
+  to the right. Current `LocalOffset: -500,0,250`. Effort: S.
+- [ ] **BUG: Artillery spider upgraded weapon missing magicnuke explosion**
+  — `TS120mm_bluenuke` is missing its signature magicnuke explosion.
+  Magicnuke has 4 sizes: biggest = superweapon, 3 smaller for units.
+  Artillery should use the second biggest (highest damage among units).
+  Effort: S.
+- [x] **RENAME: interceptor.nax → naxis_interceptor** — renamed
+  `nax_interceptor.shp` to `naxis_interceptor.shp` in `bits/ra2/mod/`,
+  updated all references in Naxis `sequences.yaml`.
+- [x] **RENAME/MOVE: drone.nax → schwarzermond_drone** — renamed
+  `nax_drone.shp` to `schwarzermond_drone.shp` and `nax_drone_icon.png`
+  to `schwarzermond_drone_icon.png`. Updated SchwarzerMond `sequences.yaml`
+  and Naxis `sequences.yaml` (interceptor icon reference).
+- [x] **BUG: CABAL Obelisk range/detection** — weapon range set to 12288,
+  `WithRangeCircle: Range: 12c0` added, `RevealsShroud: Range: 7c0` matches
+  Nod obelisk. All three items already present in working copy.
+- [ ] **BALANCE: Eliminator 800 overpowered** — 7 Eliminator 800s
+  destroyed AI base with only 1 loss. Needs rebalancing (part of full
+  CABAL rebalance). Effort: M. **Do NOT auto-apply — requires user
+  approval per balance policy.**
 
 ---
 
@@ -355,6 +440,49 @@ factions, everything through the balance workbook._
 
 ---
 
+## Content-pack completion — TOP PRIORITY (ordered 2026-07-16)
+
+_User order (verbatim intent): "Move everything to the new content packs
+and verify that everything has been converted correctly! Try your best
+reasoning to make sure every actor you move is in the right content
+pack. It happened before that some ended up in the wrong section. Also
+start moving all the necessary game files into the content packs as
+well."_
+
+- [ ] **PACK-RA1: Split RA1 (Allies / Soviets / Japan) out of
+  rules/redalert.yaml** into ContentPacks/RedAlert/{Shared,Allies,
+  Soviets,Japan} using tools/packs/split_faction.py. Shared concrete
+  actors (`RAE1`, `RARE1`, shared `^RA*` templates) go to
+  RedAlert/Shared. Verify: registry identity + resolved-closure diff
+  empty + boot. NOTE: `RAE1` IS the Allied basic rifleman (user
+  correction 2026-07-16) — legacy short ids like RAE1/RARE1 get their
+  §1-compliant names during this split's rename step.
+- [ ] **PACK-RA2: Split RA2 (Allies / Soviets / Yuri)** from
+  rules/redalert2.yaml the same way.
+- [ ] **PACK-SC: Split StarCraft (Terran / Zerg / Protoss)** from
+  rules/starcraft.yaml.
+- [ ] **PACK-WC2: Split Warcraft2 (Humans / Orcs)** from
+  rules/warcraft2.yaml.
+- [ ] **PACK-TKM + PACK-OP2**: split TKM and Outpost2 monoliths.
+- [ ] **PACK-AUDIT (wrong-section detector)**: new
+  `tools/audit/audit_packs.py` that verifies per pack: (a) every actor
+  id carries the pack's faction prefix (catches actors landing in the
+  wrong pack); (b) actors sit in the correct per-type file (trait
+  heuristic: Building→buildings/defenses, Aircraft→aircraft, naval
+  Locomotor→naval, husk→husks, upgrade/promotion markers→their files);
+  (c) content.yaml lists exactly the yaml files on disk (no drift, no
+  nonstandard filenames); (d) pack references resolve inside
+  pack+Shared+core only. Run after every split.
+- [ ] **PACK-ASSETS: per-faction asset migration** — repeat the CABAL
+  pilot for every split pack (identify faction-unique files, move to
+  files/{sprites,icons,voxels,sounds}, reference via package prefix,
+  boot). Order: follow the pack splits; the four cross-game blockers
+  (gunfire2, electro, dragon, DATA.R16) stay tracked above.
+- [ ] **PACK-GEN (automatic maintenance)**: `tools/packs/gen_content.py`
+  regenerates every pack's content.yaml deterministically from the
+  files on disk (sorted, grouped Rules/Weapons/Sequences/FluentMessages);
+  audit mode fails on drift. content.yaml becomes machine-maintained.
+
 ## Content-pack folder restructure (P2/P3, L)
 
 - [x] Every content pack: `content.yaml` at root + one **`yaml`** folder
@@ -489,6 +617,9 @@ factions, everything through the balance workbook._
   from `misc.yaml`. Wired to 79 StarCraft actors (Terran, Protoss, Zerg)
   that use `^GainsExperienceTD`. Warcraft2 actors still need a custom
   `wc2rank` image (no sequence exists yet — out of scope).
+  **NOTE (2026-07-16):** This commit incorrectly applied `^AlienRankDecoration`
+  to ALL Starcraft factions. It should only apply to Zerg. Terran and
+  Protoss need separate decorations. See SC-RANKS below for the fix plan.
 - [ ] **Create per-faction rank decorations for RA2Mod factions** —
   currently all RA2Mod factions share `ra2rank` via
   `^GainsExperienceRA2`. Eventually each could have a unique rank image
@@ -507,11 +638,15 @@ factions, everything through the balance workbook._
   rules/redalert2 (41), TS/Forgotten (37), rules/tkm (36), TS/CABAL (34).
   This is a large multi-session design effort — each elite weapon needs unique
   stats, not a mechanical rename. Needs user direction on scope/priority.
+  **NOTE (2026-07-16):** The audit script was updated to only flag
+  `^GainsExperienceRA2` actors (per DESIGN.md §16.3 "RA2 system only").
+  The count of 1256 was from the old scope — re-run the audit for the
+  current RA2-only count. TD/D2k/SC/WC2 actors no longer flagged.
 - [x] **E2: Fix missing `rank-elite` conditions** (`ac3ba04b7`) — Only 2
   genuine bugs found (out of 18 flagged; rest use Generals `scrap_create_bonus`
   rank system or upgrade-switch naming). Fixed:
-  `asian_alliance_plasmatrooper` GARRISONEDELITE and
-  `asian_alliance_heavyrailguntank` ELITE. Added audit tool
+  `asianalliance_plasmatrooper` GARRISONEDELITE and
+  `asianalliance_heavyrailguntank` ELITE. Added audit tool
   `tools/audit/audit_elite_gating.py`.
 - [x] **E3: Normalize elite weapon naming** (`ab870ddb3`) — Renamed 10
   non-standard elite weapons to `<base>E` convention (38 references across
@@ -523,10 +658,13 @@ factions, everything through the balance workbook._
   Remaining 44 are doctrine variants (`_rad`/`_fire`/`_tesla`), upgrade combos,
   or gatling spin-ups — intentionally non-standard. Audit tool:
   `tools/audit/audit_elite_naming.py`.
+  **NOTE (2026-07-16):** The `E` suffix convention has been superseded —
+  ALL elite weapons must now use `_elite` per DESIGN.md §16.3. The renames
+  done here will need to be re-done as `<base>_elite` in WEAPON-SUFFIX-ELITE.
 - [x] **E4: Verify base weapon gating** (`ac3ba04b7`) — Fixed the 2 actors
   from E2: added `RequiresCondition: !rank-elite` to
-  `asian_alliance_heavyrailguntank` PRIMARY and
-  `asian_alliance_plasmatrooper` GARRISONED so elite replaces, not stacks.
+  `asianalliance_heavyrailguntank` PRIMARY and
+  `asianalliance_plasmatrooper` GARRISONED so elite replaces, not stacks.
 
 ## D2K Sprite Conversion Pipeline
 
@@ -605,3 +743,148 @@ factions, everything through the balance workbook._
   `schwarzer_mond_gravitycoretank`, and `schwarzer_mond_blackbomb`. See
   `docs/design/schwarzer_mond_artwork_status.md` for the full status. Final
   production-quality cameo art can replace the placeholders later.
+
+## Sequence Filename Standardization
+
+- [ ] **SEQ-RESEARCH: Cross-reference audit** — build a complete map of
+  which sequence filenames are used by which actors across all sequence
+  YAML files. Identify:
+  (a) files used by only one actor (safe to rename),
+  (b) files shared across multiple actors (MUST NOT be renamed),
+  (c) files in shared namespaces (`shared_sprites|`, `ts_shared_sprites|`,
+      `td_shared_sprites|` — never renamed),
+  (d) template default filenames in inherited `^` templates (never renamed),
+  (e) death/muzzle/parachute files defined in templates (never renamed).
+  Output: `tools/audit/sequence_file_crossref.json`.
+  Effort: M.
+- [ ] **SEQ-MIGRATE: Rename sequence files to match actor + sequence name**
+  — per faction, rename actor-owned files so that:
+  (a) the idle/body sprite is `<actor_id>.<ext>` and moved to `Defaults:`,
+  (b) non-idle sequences use `<actor_id>_<sequence_name>.<ext>` (e.g.,
+      `_bib`, `_make`, `_turret`, `_icon`, `_muzzle`, `_active`, `_dead`,
+      `_damaged`, `_deploy`, etc.),
+  (c) shared files are left untouched,
+  (d) Combine sub-images unique to one actor are renamed to
+      `<actor_id>_<descriptive_suffix>.<ext>`,
+  (e) inherited template defaults are left untouched.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Update `.oramap` files with `tools/fix-oramap.ps1` if needed.
+  Effort: L (multi-session, ~18,500 asset files across all factions).
+  **Risk assessment**: HIGH — missing a reference causes a crash. Must
+  be done one faction at a time with boot tests between each. Shared
+  file detection is the critical safety gate. See DESIGN.md §1
+  "Sequence filenames must match their actor and sequence name".
+
+- [ ] **WPN-MIGRATE: Rename weapons to include full actor id prefix**
+  — per faction, rename actor-specific weapons from PascalCase to
+  `<actor_id>_<weapon_descriptive_name>` (e.g., `CabalTarantulaCannon` →
+  `cabal_tarantula_cannon`, `RA2KirovBomb` → `ra2_soviets_kirov_bomb`).
+  Weapon class templates (`^SmallArms`, `^MediumCannon`, etc.) and
+  faction-level templates (`^CabalMissile`, `^RA2RadShell`) keep their
+  PascalCase `^` names. Elite variants append `_elite`, EMP variants
+  append `_EMP`, AA variants append `_AA`, upgraded variants append
+  `_upgraded`. Weapons shared across factions (in Shared/ packs) stay as-is.
+  Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py`.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Effort: L (multi-session). See DESIGN.md §1 "Weapon names must include
+  the full actor id as a prefix".
+
+## Faction Internal Name & Inherits Consistency
+
+- [x] **FACTION-RENAME: Rename faction internal names for consistency**
+  — DONE 2026-07-16. Renamed 11 faction InternalNames to match actor
+  prefixes, plus WC2 actor prefix rename. All YAML, Python, MD, AI files
+  and asset files updated:
+  - `gdi` → `td_gdi`, `nod` → `td_nod` (TD factions)
+  - `allies` → `ra1_allies`, `soviets` → `ra1_soviets` (RA1 factions)
+  - `ra2allies` → `ra2_allies`, `ra2soviets` → `ra2_soviets` (RA2 factions)
+  - `tsgdi` → `ts_gdi`, `tsnod` → `ts_nod` (TS factions)
+  - `consortium` → `steelconsortium`, `syndicate` → `latinsyndicate` (RA2 mod)
+  - `warcraft_humans` → `wc2_humans`, `warcraft_orcs` → `wc2_orcs` (WC2 factions + actors)
+  - `asian_alliance` → `asianalliance` (fixed underscore-in-faction-name violation)
+  - Already consistent: `schwarzermond`, `naxis`, `futuretech`, `japan`, `yuri`,
+    `forgotten`, `cabal`, `terran`, `zerg`, `protoss`, `tkm`, etc.
+  - Verified by `audit_consistency_report.py` checks C6-C11 (73 checks, 0 failures).
+  - Remaining: `.oramap` map files may need `tools/fix-oramap.ps1` update.
+  - Remaining: WC1 factions (`human` → `wc1human`, `orc` → `wc1orc`) not yet done.
+
+- [ ] **INHERITS-PASCAL: Convert camelCase/snake_case inherits to PascalCase**
+  — rename all inherits templates that are not yet PascalCase:
+  - RA2 Soviet: `^ra2sovietsConscription` → `^RA2SovietsConscription`,
+    `^ra2sovietsInfantryConditioning` → `^RA2SovietsInfantryConditioning`,
+    `^ra2sovietshockTrooperTraining` → `^RA2SovietsShockTrooperTraining`,
+    `^ra2sovietsFireShells` → `^RA2SovietsFireShells`, etc.
+  - CABAL: `^cabal_upgrade_radarhack` → `^CabalUpgradeRadarHack`,
+    `^cabal_upgrade_backupsystems` → `^CabalUpgradeBackupSystems`,
+    `^cabal_upgrade_cyberneticplating` → `^CabalUpgradeCyberneticPlating`,
+    `^cabal_upgrade_neutronnuclearcatalyst` → `^CabalUpgradeNeutronNuclearCatalyst`,
+    etc.
+  - WC2 Humans: `^wc2_humans_upgrade_swordstrength` →
+    `^WC2HumansUpgradeSwordStrength`, `^wc2_h_str_navyshield` →
+    `^WC2HStrNavyshield`, etc.
+  - WC2 Orcs: `^wc2_orcs_upgrade_axestrength` →
+    `^WC2OrcsUpgradeAxeStrength`, `^wc2_o_str_navyshield` →
+    `^WC2OStrNavyshield`, etc.
+  Update all `Inherits:` references across all YAML files.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Effort: M. See DESIGN.md §1 naming convention (PascalCase for inherits).
+
+## Starcraft Rank Decoration Fix
+
+- [ ] **SC-RANKS: Split alien rank decoration per Starcraft faction**
+  — commit `b95f5e7f3` applied `^AlienRankDecoration` to ALL Starcraft
+  factions (Terran, Protoss, Zerg). It should only apply to Zerg. Fix:
+  (a) Zerg actors keep `^AlienRankDecoration` with `alienrank` image.
+  (b) Create `^TerranRankDecoration` with a new `terranrank` spritesheet
+      (placeholder graphics OK) and wire to all Terran actors.
+  (c) Create `^ProtossRankDecoration` with a new `protossrank` spritesheet
+      (placeholder graphics OK) and wire to all Protoss actors.
+  Add new rank image sequences to `sequences/misc.yaml`.
+  Effort: M. See DESIGN.md §16.2 rank decoration table.
+
+## Weapon Suffix Standardization
+
+- [ ] **WEAPON-SUFFIX-ELITE: Migrate legacy E suffix to _elite**
+  — per DESIGN.md §16.3, ALL elite weapons must end with `_elite`.
+  The legacy capital `E` suffix (e.g. `BorisAKME`, `PrismTankChargeE`,
+  `PrismScatterE`, `RA2KirovBomb_nuclear_E`, `RA160mmE`, `MigMissiles_AA_ELITE`)
+  is deprecated. Rename all rank-elite gated weapons from `<base>E` to
+  `<base>_elite`. **Critical:** only rename weapons that are actually
+  gated by `RequiresCondition: rank-elite` — do NOT rename EMP weapons,
+  `PrismChargeE` (which is a prism charge variant, not elite), or other
+  weapons that merely end with E. Run `audit_weapon_suffixes.py` to
+  identify the exact set. Update all `Weapon:` references in armament
+  blocks and all `Inherits:` references to renamed weapons.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Effort: M. See DESIGN.md §1 and §16.3.
+
+- [ ] **WEAPON-SUFFIX-EMP: Standardize EMP weapon names to _EMP suffix**
+  — per DESIGN.md §1, weapons whose primary function is EMP disable
+  must append `_EMP`. Current EMP weapons use inconsistent naming:
+  `SteelEmpBomb`, `TSEMPZapWeapon`, `TSEMPMine`, `TSMobileEMP`,
+  `TSCABALEMPDisable.anim`, `CorsairEMP`, `ScienceVesselEMP`,
+  `PortaTeslaEMP`, `TTankZapEMP`, `TeslaZapemp`, `edenEMP`,
+  `plymouthEMP`, `DREMPDevice`, `IxianEmpBomb`, `CHEMPBomb`,
+  `SUSAMLRSEMP`, `SUSAEMPMissileDefenderAG`, etc. Rename to
+  `<actor_prefix>_<descriptive>_EMP` pattern. **Do NOT confuse EMP
+  weapons with elite weapons** — the previous bulk rename (reverted)
+  made this mistake. EMP weapons are never gated by `rank-elite`.
+  Run `audit_weapon_suffixes.py` X2 section for the full list.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Effort: M. See DESIGN.md §1.
+
+- [ ] **WEAPON-SUFFIX-AA: Standardize anti-air weapon names to _AA suffix**
+  — per DESIGN.md §1, weapons whose `ValidTargets` includes only `Air`
+  must append `_AA`. Current AA weapons use inconsistent naming:
+  `SWLaserJetpackAA` (already correct), `TSGrenadeAA` (already correct),
+  but many others like `SWAWingGunAA`, `SWXWingGunAA`, `DTMissileCrawlerAA`,
+  `SCUDAA`, `ZToughMissileAA`, `FlakbusAA`, `SCTyrAA`, `SCDevourerAA`,
+  `ManifoldMGAA`, `SUSAGladiatorAA`, `SUSAAdvPatriotMissAA`, etc. that
+  already use `AA` but not `_AA` (missing underscore). Rename to use
+  `_AA` with underscore separator. Run `audit_weapon_suffixes.py` X3
+  section for the full list. Exclude dual-purpose weapons (those that
+  also target Ground/Water) and weapons with legacy AA keywords (Flak,
+  SAM, Interceptor, Patriot) from the rename.
+  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
+  Effort: M. See DESIGN.md §1.

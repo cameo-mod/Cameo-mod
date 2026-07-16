@@ -94,7 +94,7 @@ _none found_
 | Mobile.TurnSpeed | hole.nax2 | 255 | 20 | 22.6 |
 | Mobile.TurnSpeed | ra2_soviets_terrordrone | 200 | 20 | 17.3 |
 | Mobile.TurnSpeed | SCSPIDERMINE | 200 | 20 | 17.3 |
-| Power.Amount | asian_alliance_tankreactor | 2700 | -35 | 71.0 |
+| Power.Amount | asianalliance_tankreactor | 2700 | -35 | 71.0 |
 | Power.Amount | humans_sunwell | 2500 | -35 | 65.8 |
 | Power.Amount | ra2_soviets_nuclearreactor | 2000 | -35 | 52.8 |
 | Power.Amount | zerg_overmind | 2000 | -35 | 52.8 |
@@ -141,8 +141,8 @@ _none found_
 | RevealsShroud.Range | latin_syndicate_smlturret | 15000 | 2048 | 11.4 |
 | RevealsShroud.Range | latin_syndicate_latinaadefender | 15000 | 2048 | 11.4 |
 | RevealsShroud.Range | ra2_allies_patriotmissilesystem | 14150 | 2048 | 10.6 |
-| RevealsShroud.Range | asian_alliance_pulsar | 14000 | 2048 | 10.5 |
-| RevealsShroud.Range | asian_alliance_plasmacannon | 14000 | 2048 | 10.5 |
+| RevealsShroud.Range | asianalliance_pulsar | 14000 | 2048 | 10.5 |
+| RevealsShroud.Range | asianalliance_plasmacannon | 14000 | 2048 | 10.5 |
 | RevealsShroud.Range | td_gdi_skyshield | 13800 | 2048 | 10.3 |
 | RevealsShroud.Range | ts_nod_samsite | 13176 | 2048 | 9.8 |
 | RevealsShroud.Range | ra2_soviets_flakcannon | 12936 | 2048 | 9.6 |

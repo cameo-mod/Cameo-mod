@@ -37,7 +37,7 @@ Live crashes and faction bugs (CABAL Backup Systems, husk repair/reanimate, cybo
 2. **Naming grammar** (`DESIGN.md` §1):
    - One lowercase group, no hyphens, underscores only.
    - Game prefixes only on collisions.
-   - Variant markers: `_husk`, `_sp`, `_r4`, `_wild`, `_mk2`, `_elite`, `_ai`, `_water`.
+   - Variant markers: `_husk`, `_sp`, `_r4`, `_wild`, `_mk2`, `_elite`, `_ai`, `_water`, `_EMP`, `_AA`, `_upgraded`.
    - Asset suffixes must be full words (`_make`, `_bib`, not `_mk`/`_bb`).
 3. **Weapon construction rules** (`DESIGN.md` §3):
    - Weapons must inherit from class templates (`^`), never from other unit weapons.

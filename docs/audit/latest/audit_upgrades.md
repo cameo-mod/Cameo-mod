@@ -1,156 +1,310 @@
 EXIT CODE: 1
 
-# audit_upgrades — inverted / dead upgrade effects (B3)
-
-Upgrade items found: **580** — inverted-direction traits: **98**, dead upgrades: **4**, dead wiring tokens: **25**, without intent entries: **580**
-
-
-## Inverted-direction stat traits gated on upgrade conditions
-
-| upgrade | affected actor | trait | value | beneficial means | note |
-|---|---|---|---|---|---|
-| asian_alliance_doctrine_heavypulverizerweapons | asian_alliance_pulverizer | FirepowerMultiplier@asian_alliance_doctrine_heavypulverizerweapons | 75 | >100 = stronger | no intent entry |
-| asian_alliance_doctrine_heavypulverizerweapons | asian_alliance_pulverizermecha | FirepowerMultiplier@asian_alliance_doctrine_heavypulverizerweapons | 75 | >100 = stronger | no intent entry |
-| cabal_upgrade_cyberneticplating | cabal_engineer | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
-| cabal_upgrade_cyberneticplating | cabal_dissolver | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
-| cabal_upgrade_cyberneticplating | cabal_beholder | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
-| japan_upgrade_advancedplasmaweapons | japan_tankbuster | FirepowerMultiplier@DualBeam | 50 | >100 = stronger | no intent entry |
-| japan_upgrade_advancedplasmaweapons | japan_archermaiden | FirepowerMultiplier@DualBeam | 50 | >100 = stronger | no intent entry |
-| japan_upgrade_advancedplasmaweapons | japan_waveforcetank | FirepowerMultiplier@TripleBeam | 66 | >100 = stronger | no intent entry |
-| japan_upgrade_energizedarrows | japan_ballista | FirepowerMultiplier@japan_upgrade_energizedarrows | 75 | >100 = stronger | no intent entry |
-| japan_upgrade_energizedarrows | japan_ballistatower | FirepowerMultiplier@japan_upgrade_energizedarrows | 75 | >100 = stronger | no intent entry |
-| japan_upgrade_energizedarrows | japan_ballistatower | ReloadDelayMultiplier@DualWeapon | 125 | <100 = faster | no intent entry |
-| ra1_allies_upgrade_cryomissiles | rae1 | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | rae3 | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_alliedsniper | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_alliedartillery | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_longbow | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | dd | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_sheridanassaulttank | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_rapierjumpjet | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_reconranger | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_chronotank | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_phasetransport | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_allies_upgrade_cryomissiles | ra1_allies_bastionartillerybunker | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
-| ra1_soviet_doctrine_teslaandexperimentaltech | ra1_soviet_btr80 | ReloadDelayMultiplier@Gatling | 200 | <100 = faster | no intent entry |
-| ra1_soviet_doctrine_teslaandexperimentaltech | ra1_soviet_gatlingtank | ReloadDelayMultiplier@Gatling | 200 | <100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | yrbpln | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | yrspyp | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_heavyarmorplatings | ra2cplanesov | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | yrbpln | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_reactivearmor | ra2cplanesov | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | yrbpln | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| ra2_soviets_doctrine_tesladischargearmor | ra2cplanesov | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
-| steel_consortium_upgrade_resonanceammo | steel_consortium_consortiumsentryturret | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
-| steel_consortium_upgrade_resonanceammo | steel_consortium_clonetrooper | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
-| steel_consortium_upgrade_resonanceammo | steel_consortium_steelrunner | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
-| steel_consortium_upgrade_resonanceammo | steel_consortium_manta | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
-| steel_consortium_upgrade_resonanceammo | steel_consortium_barracuda | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | e6 | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_minigunner | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_rocketsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_flamethrower | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_chemicalwarrior | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_commando | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_chemicalrocketsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_lasertrooper | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_blackhandflamer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_stealthsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | td_nod_lasercommando | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | rae6 | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | tsengineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | ts_nod_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | ts_gdi_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | forgotten_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | ra2_allies_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | ra2_soviets_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | yuri_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | asian_alliance_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | steel_consortium_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | latin_syndicate_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | futuretech_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | tkm_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-| td_nod_upgrade_cyberneticmodifications | engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
-
-
-## Dead upgrades (granted tokens nobody consumes)
-
-| upgrade | extra tokens | file |
-|---|---|---|
-| ra2teslaupgrade | (own name only) | mods/cameo/rules/redalert2.yaml |
-| ts_gdi_promotion_dummy4 | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-| ts_gdi_upgrade_ioncannonuplink | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-| ts_gdi_upgrade_seekercontrol | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-
-
-## Dead wiring (GrantConditionOnPrerequisite tokens granted by nothing)
-
-| token | #consumer traits | sample consumers |
-|---|---|---|
-| base-reveal | 1535 | a10, a10carrier, alien.nax, alliedcybertank |
-| classicproductionqueues | 152 | asian_alliance_asianairforcecommand, asian_alliance_asianbarracks, asian_alliance_asianconstructionyard, asian_alliance_asianwarfactory |
-| derricklimit_is_0 | 1 | player |
-| derricklimit_is_3 | 1 | player |
-| derricklimit_is_infinite | 1 | player |
-| faction.corrino | 16 | fremen_creep, heavy_inf.ixian, ixian_lightinfantry, ixian_rockettrooper |
-| faction.fremen | 33 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
-| faction.guild | 7 | carryall.paradrop, carryall.reinforce, carryall_reinforce.ordos, frigate |
-| faction.harkonnen | 33 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
-| faction.ixian | 5 | carryall.paradrop, carryall.reinforce, carryall_reinforce.ordos, ixian_autonomouscarryall |
-| faction.ordos | 49 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
-| hybridproductionqueues | 152 | asian_alliance_asianairforcecommand, asian_alliance_asianbarracks, asian_alliance_asianconstructionyard, asian_alliance_asianwarfactory |
-| littlebuilderenable | 152 | asian_alliance_asianairforcecommand, asian_alliance_asianbarracks, asian_alliance_asianconstructionyard, asian_alliance_asianwarfactory |
-| palace_emperor | 16 | fremen_creep, heavy_inf.ixian, ixian_lightinfantry, ixian_rockettrooper |
-| scaledprices | 101 | asian_alliance_asianairforcecommand, asian_alliance_asianbarracks, asian_alliance_asianwarfactory, cabal_cyborgfactory |
-| scaledproductionqueues | 101 | asian_alliance_asianairforcecommand, asian_alliance_asianbarracks, asian_alliance_asianwarfactory, cabal_cyborgfactory |
-| upemptesla | 3 | ra2_soviets_teslatrooper, ra2shk.bot, ra2shkhero |
-| upra2deso | 311 | alien.nax, asian_alliance_alligator, asian_alliance_asdf, asian_alliance_asiancommando |
-| upsubliminal | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
-| upsubliminal2 | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
-| usabombardament | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
-| usaholdtheline | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
-| usasearchndestroy | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
-| usaupcounter | 2 | ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport |
-| usaupsupplylines | 32 | asian_alliance_militaryacademy, cabal_core, forgotten_tiberiumspike, futuretech_hypercore |
-
-
-## Upgrades without an upgrades_intent.yaml entry
-
-asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_heavypulverizerweapons, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_promotion_unlockasdf, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlockflametank, asian_alliance_promotion_unlockheavyrailguntank, asian_alliance_promotion_unlockhowitzer, asian_alliance_promotion_unlockmlrs, asian_alliance_promotion_unlockplasmatank, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlockpulverizermecha, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers, asian_alliance_promotion_unlockwarturtle, asian_alliance_upgrade_asiandiplomacy, asian_alliance_upgrade_banzaimode, asian_alliance_upgrade_celestialpower, asian_alliance_upgrade_dragonfire, asian_alliance_upgrade_unlockchaosbombs, asian_alliance_upgrade_unlockclusterbombs, asian_alliance_upgrade_unlockmassparadrop, asian_alliance_upgrade_wayofthedragon, cabal_promotion_ascended, cabal_promotion_beholder, cabal_promotion_coredefender, cabal_promotion_cyborgassassin, cabal_promotion_cyborgcommandov2, cabal_promotion_devout, cabal_promotion_hunterkillermk1elite, cabal_promotion_manticore, cabal_promotion_mothership, cabal_promotion_overkillgunship, cabal_promotion_spidercnc4, cabal_promotion_widow, cabal_upgrade_backupsystems, cabal_upgrade_cyberneticplating, cabal_upgrade_darkarmament, cabal_upgrade_dataworm, cabal_upgrade_firewallprotocol, cabal_upgrade_fullassimilation, cabal_upgrade_handof, cabal_upgrade_mobilitymatrix, cabal_upgrade_networkedcombatprotocols, cabal_upgrade_neuraluplink, cabal_upgrade_neutronnuclearcatalyst, cabal_upgrade_overchargedservos, cabal_upgrade_radarhack, cabal_upgrade_reclamationprotocols, cabal_upgrade_reinforcedchassis, d2k_spice_sifter_upgrade, d2k_wind_trap_upgrade, forgotten_promotion_bowler, forgotten_promotion_chemicalmammothtank, forgotten_promotion_cobracopter, forgotten_promotion_experimentalmammothtank, forgotten_promotion_flametank, forgotten_promotion_ghoststalker, forgotten_promotion_locustbomber, forgotten_promotion_mlrs, forgotten_promotion_runnershotgal, forgotten_promotion_scoopertank, forgotten_promotion_viniferafiend, forgotten_promotion_warriortank, forgotten_upgrade_chemicalfuel, forgotten_upgrade_chemicalweapons, forgotten_upgrade_friendlywildlife, forgotten_upgrade_genomemapping, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumadaptability, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity, futuretech_doctrine_equalizerx1, futuretech_doctrine_equalizerx2, futuretech_doctrine_equalizerx3, futuretech_promotion_unlockblackwidow, futuretech_promotion_unlockcannondroid, futuretech_promotion_unlockcryocopter, futuretech_promotion_unlockcryolegionnaire, futuretech_promotion_unlockfuturetank, futuretech_promotion_unlockharbingergunship, futuretech_promotion_unlockmissiledroid, futuretech_promotion_unlockoriontank, futuretech_promotion_unlockprospectormk2, futuretech_promotion_unlockrobottank, futuretech_promotion_unlocksalamanderifv, futuretech_promotion_unlockshotgundroid, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_arrowstrength, humans_upgrade_arrowstrengthii, humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_bestfarm, humans_upgrade_betterfarm, humans_upgrade_blizzard, humans_upgrade_cannondamage, humans_upgrade_cannondamageii, humans_upgrade_exorcism, humans_upgrade_healing, humans_upgrade_highelvenarcher, humans_upgrade_paladin, humans_upgrade_polymorph, humans_upgrade_ranger, humans_upgrade_rangerlongbow, humans_upgrade_rangermarksman, humans_upgrade_rangerscouting, humans_upgrade_slow, humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_warcraft3footman, humans_upgrade_warcraft3knightwip, ixian_promotion_unlockfarasha, ixian_promotion_unlockheavyixraider, ixian_promotion_unlockixianempbomber, ixian_promotion_unlockixprojector, ixian_promotion_unlockixrailgundrone, ixian_promotion_unlockixresonancedrone, ixian_promotion_unlockixsiegetank, ixian_promotion_unlockneocymek, ixian_promotion_unlockrashidan, ixian_promotion_unlockstorminfantry, ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, ixian_upgrade_advancedixiantechnology, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_personalshield, ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_twinbazooka, japan_promotion_unlockarchermaiden, japan_promotion_unlockarmoredcar, japan_promotion_unlockexorcist, japan_promotion_unlockgrenadebuggy, japan_promotion_unlockheavychihaheavytank, japan_promotion_unlockhovercraftflametank, japan_promotion_unlockrocketangel, japan_promotion_unlocksamurai, japan_promotion_unlockshogunexecutioner, japan_promotion_unlockshrinetank, japan_promotion_unlockwaveforceartillery, japan_promotion_unlockwaveforcetank, japan_upgrade_advancedplasmaweapons, japan_upgrade_bushidodiscipline, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs, japan_upgrade_stealthsuitintegration, japan_upgrade_superiorwarengines, japan_upgrade_waveforcebullets, latin_syndicate_doctrine_cartelrockets, latin_syndicate_doctrine_eliteguerillas, latin_syndicate_doctrine_lightposts, latin_syndicate_promotion_unlockburritos, latin_syndicate_promotion_unlockcarteltrucks, latin_syndicate_promotion_unlockdemolitiontrucks, latin_syndicate_promotion_unlocklars, latin_syndicate_promotion_unlocklatinapc, latin_syndicate_promotion_unlockmortarbikes, latin_syndicate_promotion_unlocknarcos, latin_syndicate_promotion_unlocknuketrucks, latin_syndicate_promotion_unlockraiderbuggy, latin_syndicate_promotion_unlocksmokertanks, latin_syndicate_promotion_unlockterrorists, latin_syndicate_promotion_unlocktopolm, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire, latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_unlockempcannon, latin_syndicate_upgrade_yuristolentechchainguns, naxis_promotion_betterparatanks, naxis_promotion_bossestanks, naxis_promotion_donnerschlagmodelandotheradvancedmissiles, naxis_promotion_generationiitanks, naxis_promotion_heavyvehicles, naxis_promotion_hortenbomberstrike, naxis_promotion_hortenbomberstrike_2, naxis_promotion_partisans, naxis_promotion_sarubiamodel, naxis_promotion_shoekarnandking, naxis_promotion_shrek, naxis_promotion_theratte, naxis_upgrade_atlantikwall, naxis_upgrade_blitzkrieg, naxis_upgrade_massopticsintegration, naxis_upgrade_ostfrontexperience, naxis_upgrade_tankarsenalrenovation, naxis_upgrade_unlockme262, naxis_upgrade_wunderwaffe, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_berserker, orcs_upgrade_berserkerlightaxes, orcs_upgrade_berserkerregeneration, orcs_upgrade_berserkerscouting, orcs_upgrade_bestfarm, orcs_upgrade_betterfarm, orcs_upgrade_bloodlust, orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, orcs_upgrade_catapultstrength, orcs_upgrade_catapultstrengthii, orcs_upgrade_deathanddecay, orcs_upgrade_haste, orcs_upgrade_ogremage, orcs_upgrade_raisedead, orcs_upgrade_runes, orcs_upgrade_throwingaxestrength, orcs_upgrade_throwingaxestrengthii, orcs_upgrade_trollheadhunter, orcs_upgrade_warcraft3grunt, ordos_promotion_unlockbanshees, ordos_promotion_unlockchemicaltrooper, ordos_promotion_unlockcontaminator, ordos_promotion_unlockdeviatortank, ordos_promotion_unlockdustdrone, ordos_promotion_unlocklaboratorycrawler, ordos_promotion_unlocklasertank, ordos_promotion_unlockleecher, ordos_promotion_unlockmortartroopers, ordos_promotion_unlockpython, ordos_promotion_unlockstealthraider, ordos_promotion_unlockwraith, ordos_upgrade_antiairtrooper, ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband, ordos_upgrade_heavyautoguntank, ordos_upgrade_heavycombattank, ordos_upgrade_heavycombattankrockets, ordos_upgrade_hoverdrive, ordos_upgrade_lasercartridges, ordos_upgrade_lightfactory, ordos_upgrade_rapidfirearmorpiercingbelts, ordos_upgrade_shields, protoss_promotion_unlockamaranth, protoss_promotion_unlockanalogue, protoss_promotion_unlockatreus, protoss_promotion_unlockepigraph, protoss_promotion_unlockgladius, protoss_promotion_unlockidol, protoss_promotion_unlocklegionnaire, protoss_promotion_unlockmanifold, protoss_promotion_unlockpatriarch, protoss_promotion_unlockpositron, protoss_promotion_unlockstarsovereign, protoss_promotion_unlockvoidray, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_graviticpropulsion, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_plasmashields, protoss_upgrade_reavercapacity, protoss_upgrade_resonatingglaves, protoss_upgrade_singularitycharge, protoss_upgrade_upgradepylonlevel1, protoss_upgrade_upgradepylonlevel2, ra1_allies_promotion_unlockbastion, ra1_allies_promotion_unlockcamopillbox, ra1_allies_promotion_unlockchronotank, ra1_allies_promotion_unlockgapgeneratorandradarjammer, ra1_allies_promotion_unlockmachinegunner, ra1_allies_promotion_unlockphasetransport, ra1_allies_promotion_unlockrapierjumpjet, ra1_allies_promotion_unlockreconranger, ra1_allies_promotion_unlockreinforcementpad, ra1_allies_promotion_unlocksheridan, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_promotion_unlocktigerheavytank, ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_reinforcedstructures, ra1_soviet_doctrine_conscription, ra1_soviet_doctrine_heavyarmor, ra1_soviet_doctrine_industrialefficiency, ra1_soviet_doctrine_inferno, ra1_soviet_doctrine_nuclearwar, ra1_soviet_doctrine_teslaandexperimentaltech, ra1_soviet_promotion_hurricanerocketpods, ra1_soviet_promotion_infantrysuperoptics, ra1_soviet_promotion_mammothtanktargetingcomputer, ra1_soviet_promotion_parabombslevel2, ra1_soviet_promotion_parabombslevel3, ra1_soviet_promotion_superspyplane, ra1_soviet_promotion_unlockcyberdog, ra1_soviet_promotion_unlockgatlingtank, ra1_soviet_promotion_unlockmonstertank, ra1_soviet_promotion_unlockmortarsoldier, ra1_soviet_promotion_unlocksupersonicnuclearbomber, ra1_soviet_promotion_unlockvolkov, ra1_soviet_upgrade_afterburners, ra1_soviet_upgrade_autoloaders, ra1_soviet_upgrade_hammertank, ra1_soviet_upgrade_hazmatsuits, ra1_soviet_upgrade_heavyteslatank, ra1_soviet_upgrade_highexplosiverockets, ra1_soviet_upgrade_incendiarybullets, ra1_soviet_upgrade_kotinnucleartank, ra1_soviet_upgrade_massproduction, ra1_soviet_upgrade_menofsteel, ra1_soviet_upgrade_nucleartankshells, ra1_soviet_upgrade_reactoroverload, ra1_soviet_upgrade_scorchedearth, ra1_soviet_upgrade_shtoradefensesystem, ra1_soviet_upgrade_stalinium, ra1_soviet_upgrade_teslaarcing, ra1_soviet_upgrade_teslarockets, ra1_soviet_upgrade_thermonuclearrockets, ra1_soviet_upgrade_unlockarmoredyak, ra1_soviet_upgrade_unlockcommissar, ra1_soviet_upgrade_unlockheatraytank, ra1_soviet_upgrade_unlocknuclearyak, ra1_soviet_upgrade_unlockteslayak, ra1_soviet_upgrade_unstableisotopes, ra1_soviet_upgrade_vengeance, ra1_soviet_upgrade_wareconomy, ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_eliterocketeer, ra2_allies_upgrade_forceshield, ra2_allies_upgrade_heavymiragetank, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_intensifiedprismbeams, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_paratroopers, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_prismlinking, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_tanklasertargeting, ra2_allies_upgrade_thunderboltmissiles, ra2_allies_upgrade_vanguardtraining, ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_shocktroopertraining, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_gastroburners, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovatomicbombs, ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_teslacoilchargers, ra2_soviets_upgrade_teslaoverload, ra2teslaupgrade, schwarzer_mond_upgrade_crystallens, schwarzer_mond_upgrade_greenplasmashells, steel_consortium_promotion_daggerartillery, steel_consortium_promotion_katytank, steel_consortium_promotion_quantumtank, steel_consortium_promotion_unlockbarracuda, steel_consortium_promotion_unlockcloudbreaker, steel_consortium_promotion_unlockdefenderbot, steel_consortium_promotion_unlockstalker, steel_consortium_promotion_unlocksupportlvl1, steel_consortium_promotion_unlocksupportlvl2, steel_consortium_promotion_unlocksupportlvl3, steel_consortium_promotion_unlocksupportlvl4, steel_consortium_promotion_unlockwhiterabbit, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_scalpeldefenders, steel_consortium_upgrade_shieldresistance, steel_consortium_upgrade_unlockempcannon, td_gdi_promotion_unlockassaultapc, td_gdi_promotion_unlockempgrenadier, td_gdi_promotion_unlockfirehawk, td_gdi_promotion_unlockgdidefenserig, td_gdi_promotion_unlockgdiofficer, td_gdi_promotion_unlockhavocandexosuit, td_gdi_promotion_unlockhumveemkii, td_gdi_promotion_unlockmammothtankmk3, td_gdi_promotion_unlockmissilesoldier, td_gdi_promotion_unlockpredatortank, td_gdi_promotion_unlockshotgunner, td_gdi_promotion_unlocksniper, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_lightweightarmorplating, td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_nod_promotion_unlockblackhandflamer, td_nod_promotion_unlockbuggymkii, td_nod_promotion_unlockchemicalattackbike, td_nod_promotion_unlockchemicalrocketsoldier, td_nod_promotion_unlockchemicalssmlauncher, td_nod_promotion_unlockchemicalstealthtank, td_nod_promotion_unlockflametankmkii, td_nod_promotion_unlocklasertrooper, td_nod_promotion_unlocklighttankmkii, td_nod_promotion_unlockspecter, td_nod_promotion_upgradeupnodstealthname, td_nod_promotion_upgradeupnodvenomname, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades, td_nod_upgrade_cyberneticmodifications, td_nod_upgrade_elementalwarfare, td_nod_upgrade_elitecapacitors, td_nod_upgrade_guerillatactics, td_nod_upgrade_improvedartilleries, td_nod_upgrade_tiberiuminfusion, terran_promotion_unlockcyclone, terran_promotion_unlockgoliathmk2, terran_promotion_unlockharakan, terran_promotion_unlockmadcap, terran_promotion_unlockmatador, terran_promotion_unlockphobos, terran_promotion_unlockpythean, terran_promotion_unlockraven, terran_promotion_unlockspectreandmedivac, terran_promotion_unlocksundog, terran_promotion_unlockwarhound, terran_promotion_unlockwyvern, terran_upgrade_advancedsiegemode, terran_upgrade_cloakupgrade, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_stimpack, terran_upgrade_u238shells, terran_upgrade_upgradesupplydepotlevel1, terran_upgrade_upgradesupplydepotlevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade, tkm_promotion_unlockbattlebus, tkm_promotion_unlockdronepodtruck, tkm_promotion_unlockflakbus, tkm_promotion_unlockjuggernaut, tkm_promotion_unlockmedictruck, tkm_promotion_unlockradartruck, tkm_promotion_unlockrepairtruck, tkm_promotion_unlockt30, tkm_promotion_unlockthebigshiee, tkm_promotion_unlockthesandmarine, tkm_promotion_unlocktrenchtank, tkm_promotion_unlockviper, tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_cryorocketsupgrade, tkm_upgrade_heavytitanplating, tkm_upgrade_incendiaryrocketsupgrade, tkm_upgrade_infantryupgrade, tkm_upgrade_m203upgrade, tkm_upgrade_natoarsenalupgrade, tkm_upgrade_pointdefensesystem, tkm_upgrade_semiautoriflesupgrade, tkm_upgrade_technicaltankrocketaddon, tkm_upgrade_titanarmorpiercingbulletsupgrade, tkm_upgrade_titanarsenalupgrade, tkm_upgrade_twinrocketsupgrade, ts_gdi_promotion_dummy1, ts_gdi_promotion_dummy2, ts_gdi_promotion_dummy3, ts_gdi_promotion_dummy4, ts_gdi_promotion_unlockhammerhead, ts_gdi_promotion_unlockjuggernautmkii, ts_gdi_promotion_unlockkodiak, ts_gdi_promotion_unlockmammothmkii, ts_gdi_promotion_unlocktitanmkii, ts_gdi_promotion_unlockwolverinemkii, ts_gdi_promotion_unlockzoneorca, ts_gdi_promotion_unlockzonetrooper, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_ioncannonuplink, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_modernfirecontrolsystems, ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_railgunweaponry, ts_gdi_upgrade_seekercontrol, ts_gdi_upgrade_seretraining, ts_gdi_upgrade_sonicweaponry, ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_infiltrationkit, ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_stealthfieldsimprovements, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_willofkane, up_resurrection.nax, up_tsunami.asian, upgrade_barracks, upgrade_conyard, upgrade_heavy, upgrade_hightech, upra2aegismissiles, wc2_h_str_navyshield, wc2_h_str_navyshield2, wc2_o_str_navyshield, wc2_o_str_navyshield2, yuri_doctrine_chaosgasemitters, yuri_doctrine_lasherhecannon, yuri_doctrine_lasherlasercannon, yuri_doctrine_lashertoxicgasshells, yuri_doctrine_psionicelite, yuri_doctrine_psionicfanatics, yuri_doctrine_psioniclegion, yuri_doctrine_psionicvehicleshields, yuri_doctrine_scrapvehiclearmor, yuri_upgrade_bioengineering, yuri_upgrade_bioreactorefficiency, yuri_upgrade_brutestrengthmutations, yuri_upgrade_corrosiveammo, yuri_upgrade_diskhighfrequencylasers, yuri_upgrade_disksiphonattack, yuri_upgrade_domination, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade, yuri_upgrade_geneticmodificationboost, yuri_upgrade_gravitondrive, yuri_upgrade_infantrystealthsuits, yuri_upgrade_initiatepowersurge, yuri_upgrade_lasherarmorimprovements, yuri_upgrade_meltingvirus, yuri_upgrade_psionicarmor, yuri_upgrade_psionicplasmabeams, yuri_upgrade_psychicrange, yuri_upgrade_psychicvision, yuri_upgrade_supermagnets, yuri_upgrade_toxicengines, zerg_promotion_unlockbehemoth, zerg_promotion_unlockbroodweaver, zerg_promotion_unlockcorruptor, zerg_promotion_unlockdreadshroud, zerg_promotion_unlockgorekraken, zerg_promotion_unlockgoremaw, zerg_promotion_unlockhermit, zerg_promotion_unlockshriek, zerg_promotion_unlockspithid, zerg_promotion_unlocksporemaw, zerg_promotion_unlockswarmling, zerg_promotion_unlocktalon, zerg_upgrade_adrenalglands, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_groovedspines, zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_metabolicboost, zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_pneumatizedcarapace
-
+# audit_upgrades — inverted / dead upgrade effects (B3)
+
+
+
+Upgrade items found: **580** — inverted-direction traits: **98**, dead upgrades: **4**, dead wiring tokens: **25**, without intent entries: **580**
+
+
+
+
+
+## Inverted-direction stat traits gated on upgrade conditions
+
+
+
+| upgrade | affected actor | trait | value | beneficial means | note |
+
+|---|---|---|---|---|---|
+
+| asianalliance_doctrine_heavypulverizerweapons | asianalliance_pulverizer | FirepowerMultiplier@asianalliance_doctrine_heavypulverizerweapons | 75 | >100 = stronger | no intent entry |
+
+| asianalliance_doctrine_heavypulverizerweapons | asianalliance_pulverizermecha | FirepowerMultiplier@asianalliance_doctrine_heavypulverizerweapons | 75 | >100 = stronger | no intent entry |
+
+| cabal_upgrade_cyberneticplating | cabal_engineer | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
+
+| cabal_upgrade_cyberneticplating | cabal_dissolver | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
+
+| cabal_upgrade_cyberneticplating | cabal_beholder | DamageMultiplier@Secondary | 200 | <100 = takes less damage | no intent entry |
+
+| japan_upgrade_advancedplasmaweapons | japan_tankbuster | FirepowerMultiplier@DualBeam | 50 | >100 = stronger | no intent entry |
+
+| japan_upgrade_advancedplasmaweapons | japan_archermaiden | FirepowerMultiplier@DualBeam | 50 | >100 = stronger | no intent entry |
+
+| japan_upgrade_advancedplasmaweapons | japan_waveforcetank | FirepowerMultiplier@TripleBeam | 66 | >100 = stronger | no intent entry |
+
+| japan_upgrade_energizedarrows | japan_ballista | FirepowerMultiplier@japan_upgrade_energizedarrows | 75 | >100 = stronger | no intent entry |
+
+| japan_upgrade_energizedarrows | japan_ballistatower | FirepowerMultiplier@japan_upgrade_energizedarrows | 75 | >100 = stronger | no intent entry |
+
+| japan_upgrade_energizedarrows | japan_ballistatower | ReloadDelayMultiplier@DualWeapon | 125 | <100 = faster | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | rae1 | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | rae3 | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_alliedsniper | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_alliedartillery | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_longbow | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | dd | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_sheridanassaulttank | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_rapierjumpjet | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_reconranger | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_chronotank | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_phasetransport | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_allies_upgrade_cryomissiles | ra1_allies_bastionartillerybunker | FirepowerMultiplier@ra1_allies_upgrade_cryomissiles | 75 | >100 = stronger | no intent entry |
+
+| ra1_soviet_doctrine_teslaandexperimentaltech | ra1_soviet_btr80 | ReloadDelayMultiplier@Gatling | 200 | <100 = faster | no intent entry |
+
+| ra1_soviet_doctrine_teslaandexperimentaltech | ra1_soviet_gatlingtank | ReloadDelayMultiplier@Gatling | 200 | <100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | yrbpln | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | yrspyp | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_heavyarmorplatings | ra2cplanesov | SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings | 90 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | yrbpln | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_reactivearmor | ra2cplanesov | SpeedMultiplier@ra2_soviets_doctrine_reactivearmor | 95 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_mobileconstructionvehicle | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_rhinoheavytank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_flaktrack | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_apocalypsetank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_v3rocketlauncher | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_teslatank | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_warminer | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_terrordrone | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_kirovairship | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_siegechopper | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | yrbpln | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_migbomber | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2_soviets_transportkirov | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| ra2_soviets_doctrine_tesladischargearmor | ra2cplanesov | SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1 | 85 | >100 = faster | no intent entry |
+
+| steel_consortium_upgrade_resonanceammo | steel_consortium_consortiumsentryturret | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
+
+| steel_consortium_upgrade_resonanceammo | steel_consortium_clonetrooper | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
+
+| steel_consortium_upgrade_resonanceammo | steel_consortium_steelrunner | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
+
+| steel_consortium_upgrade_resonanceammo | steel_consortium_manta | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
+
+| steel_consortium_upgrade_resonanceammo | steel_consortium_barracuda | FirepowerMultiplier@steel_consortium_upgrade_resonanceammo | 50 | >100 = stronger | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | e6 | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_minigunner | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_rocketsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_flamethrower | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_chemicalwarrior | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_commando | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_chemicalrocketsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_lasertrooper | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_blackhandflamer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_stealthsoldier | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | td_nod_lasercommando | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | rae6 | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | tsengineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | ts_nod_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | ts_gdi_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | forgotten_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | ra2_allies_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | ra2_soviets_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | yuri_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | asianalliance_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | steel_consortium_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | latin_syndicate_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | futuretech_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | tkm_engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+| td_nod_upgrade_cyberneticmodifications | engineer | DamageMultiplier@td_nod_upgrade_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+
+
+
+
+
+## Dead upgrades (granted tokens nobody consumes)
+
+
+
+| upgrade | extra tokens | file |
+
+|---|---|---|
+
+| ra2teslaupgrade | (own name only) | mods/cameo/rules/redalert2.yaml |
+
+| ts_gdi_promotion_dummy4 | (own name only) | mods/cameo/rules/tiberiansun.yaml |
+
+| ts_gdi_upgrade_ioncannonuplink | (own name only) | mods/cameo/rules/tiberiansun.yaml |
+
+| ts_gdi_upgrade_seekercontrol | (own name only) | mods/cameo/rules/tiberiansun.yaml |
+
+
+
+
+
+## Dead wiring (GrantConditionOnPrerequisite tokens granted by nothing)
+
+
+
+| token | #consumer traits | sample consumers |
+
+|---|---|---|
+
+| base-reveal | 1535 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| classicproductionqueues | 152 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+
+| derricklimit_is_0 | 1 | player |
+
+| derricklimit_is_3 | 1 | player |
+
+| derricklimit_is_infinite | 1 | player |
+
+| faction.corrino | 16 | fremen_creep, heavy_inf.ixian, ixian_lightinfantry, ixian_rockettrooper |
+
+| faction.fremen | 33 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
+
+| faction.guild | 7 | carryall.paradrop, carryall.reinforce, carryall_reinforce.ordos, frigate |
+
+| faction.harkonnen | 33 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
+
+| faction.ixian | 5 | carryall.paradrop, carryall.reinforce, carryall_reinforce.ordos, ixian_autonomouscarryall |
+
+| faction.ordos | 49 | apparition.ixian, combat_tank.atreides, combat_tank.harkonnen, combat_tank.ixian |
+
+| hybridproductionqueues | 152 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+
+| littlebuilderenable | 152 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianconstructionyard, asianalliance_asianwarfactory |
+
+| palace_emperor | 16 | fremen_creep, heavy_inf.ixian, ixian_lightinfantry, ixian_rockettrooper |
+
+| scaledprices | 101 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianwarfactory, cabal_cyborgfactory |
+
+| scaledproductionqueues | 101 | asianalliance_asianairforcecommand, asianalliance_asianbarracks, asianalliance_asianwarfactory, cabal_cyborgfactory |
+
+| upemptesla | 3 | ra2_soviets_teslatrooper, ra2shk.bot, ra2shkhero |
+
+| upra2deso | 311 | alien.nax, asianalliance_alligator, asianalliance_asdf, asianalliance_asiancommando |
+
+| upsubliminal | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| upsubliminal2 | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| usabombardament | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| usaholdtheline | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| usasearchndestroy | 1066 | a10, a10carrier, alien.nax, alliedcybertank |
+
+| usaupcounter | 2 | ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport |
+
+| usaupsupplylines | 32 | asianalliance_militaryacademy, cabal_core, forgotten_tiberiumspike, futuretech_hypercore |
+
+
+
+
+
+## Upgrades without an upgrades_intent.yaml entry
+
+
+
+asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_promotion_unlockasdf, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlockflametank, asianalliance_promotion_unlockheavyrailguntank, asianalliance_promotion_unlockhowitzer, asianalliance_promotion_unlockmlrs, asianalliance_promotion_unlockplasmatank, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlockpulverizermecha, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers, asianalliance_promotion_unlockwarturtle, asianalliance_upgrade_asiandiplomacy, asianalliance_upgrade_banzaimode, asianalliance_upgrade_celestialpower, asianalliance_upgrade_dragonfire, asianalliance_upgrade_unlockchaosbombs, asianalliance_upgrade_unlockclusterbombs, asianalliance_upgrade_unlockmassparadrop, asianalliance_upgrade_wayofthedragon, cabal_promotion_ascended, cabal_promotion_beholder, cabal_promotion_coredefender, cabal_promotion_cyborgassassin, cabal_promotion_cyborgcommandov2, cabal_promotion_devout, cabal_promotion_hunterkillermk1elite, cabal_promotion_manticore, cabal_promotion_mothership, cabal_promotion_overkillgunship, cabal_promotion_spidercnc4, cabal_promotion_widow, cabal_upgrade_backupsystems, cabal_upgrade_cyberneticplating, cabal_upgrade_darkarmament, cabal_upgrade_dataworm, cabal_upgrade_firewallprotocol, cabal_upgrade_fullassimilation, cabal_upgrade_handof, cabal_upgrade_mobilitymatrix, cabal_upgrade_networkedcombatprotocols, cabal_upgrade_neuraluplink, cabal_upgrade_neutronnuclearcatalyst, cabal_upgrade_overchargedservos, cabal_upgrade_radarhack, cabal_upgrade_reclamationprotocols, cabal_upgrade_reinforcedchassis, d2k_spice_sifter_upgrade, d2k_wind_trap_upgrade, forgotten_promotion_bowler, forgotten_promotion_chemicalmammothtank, forgotten_promotion_cobracopter, forgotten_promotion_experimentalmammothtank, forgotten_promotion_flametank, forgotten_promotion_ghoststalker, forgotten_promotion_locustbomber, forgotten_promotion_mlrs, forgotten_promotion_runnershotgal, forgotten_promotion_scoopertank, forgotten_promotion_viniferafiend, forgotten_promotion_warriortank, forgotten_upgrade_chemicalfuel, forgotten_upgrade_chemicalweapons, forgotten_upgrade_friendlywildlife, forgotten_upgrade_genomemapping, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumadaptability, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity, futuretech_doctrine_equalizerx1, futuretech_doctrine_equalizerx2, futuretech_doctrine_equalizerx3, futuretech_promotion_unlockblackwidow, futuretech_promotion_unlockcannondroid, futuretech_promotion_unlockcryocopter, futuretech_promotion_unlockcryolegionnaire, futuretech_promotion_unlockfuturetank, futuretech_promotion_unlockharbingergunship, futuretech_promotion_unlockmissiledroid, futuretech_promotion_unlockoriontank, futuretech_promotion_unlockprospectormk2, futuretech_promotion_unlockrobottank, futuretech_promotion_unlocksalamanderifv, futuretech_promotion_unlockshotgundroid, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_arrowstrength, humans_upgrade_arrowstrengthii, humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_bestfarm, humans_upgrade_betterfarm, humans_upgrade_blizzard, humans_upgrade_cannondamage, humans_upgrade_cannondamageii, humans_upgrade_exorcism, humans_upgrade_healing, humans_upgrade_highelvenarcher, humans_upgrade_paladin, humans_upgrade_polymorph, humans_upgrade_ranger, humans_upgrade_rangerlongbow, humans_upgrade_rangermarksman, humans_upgrade_rangerscouting, humans_upgrade_slow, humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_warcraft3footman, humans_upgrade_warcraft3knightwip, ixian_promotion_unlockfarasha, ixian_promotion_unlockheavyixraider, ixian_promotion_unlockixianempbomber, ixian_promotion_unlockixprojector, ixian_promotion_unlockixrailgundrone, ixian_promotion_unlockixresonancedrone, ixian_promotion_unlockixsiegetank, ixian_promotion_unlockneocymek, ixian_promotion_unlockrashidan, ixian_promotion_unlockstorminfantry, ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, ixian_upgrade_advancedixiantechnology, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_personalshield, ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_twinbazooka, japan_promotion_unlockarchermaiden, japan_promotion_unlockarmoredcar, japan_promotion_unlockexorcist, japan_promotion_unlockgrenadebuggy, japan_promotion_unlockheavychihaheavytank, japan_promotion_unlockhovercraftflametank, japan_promotion_unlockrocketangel, japan_promotion_unlocksamurai, japan_promotion_unlockshogunexecutioner, japan_promotion_unlockshrinetank, japan_promotion_unlockwaveforceartillery, japan_promotion_unlockwaveforcetank, japan_upgrade_advancedplasmaweapons, japan_upgrade_bushidodiscipline, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs, japan_upgrade_stealthsuitintegration, japan_upgrade_superiorwarengines, japan_upgrade_waveforcebullets, latin_syndicate_doctrine_cartelrockets, latin_syndicate_doctrine_eliteguerillas, latin_syndicate_doctrine_lightposts, latin_syndicate_promotion_unlockburritos, latin_syndicate_promotion_unlockcarteltrucks, latin_syndicate_promotion_unlockdemolitiontrucks, latin_syndicate_promotion_unlocklars, latin_syndicate_promotion_unlocklatinapc, latin_syndicate_promotion_unlockmortarbikes, latin_syndicate_promotion_unlocknarcos, latin_syndicate_promotion_unlocknuketrucks, latin_syndicate_promotion_unlockraiderbuggy, latin_syndicate_promotion_unlocksmokertanks, latin_syndicate_promotion_unlockterrorists, latin_syndicate_promotion_unlocktopolm, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire, latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_unlockempcannon, latin_syndicate_upgrade_yuristolentechchainguns, naxis_promotion_betterparatanks, naxis_promotion_bossestanks, naxis_promotion_donnerschlagmodelandotheradvancedmissiles, naxis_promotion_generationiitanks, naxis_promotion_heavyvehicles, naxis_promotion_hortenbomberstrike, naxis_promotion_hortenbomberstrike_2, naxis_promotion_partisans, naxis_promotion_sarubiamodel, naxis_promotion_shoekarnandking, naxis_promotion_shrek, naxis_promotion_theratte, naxis_upgrade_atlantikwall, naxis_upgrade_blitzkrieg, naxis_upgrade_massopticsintegration, naxis_upgrade_ostfrontexperience, naxis_upgrade_tankarsenalrenovation, naxis_upgrade_unlockme262, naxis_upgrade_wunderwaffe, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_berserker, orcs_upgrade_berserkerlightaxes, orcs_upgrade_berserkerregeneration, orcs_upgrade_berserkerscouting, orcs_upgrade_bestfarm, orcs_upgrade_betterfarm, orcs_upgrade_bloodlust, orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, orcs_upgrade_catapultstrength, orcs_upgrade_catapultstrengthii, orcs_upgrade_deathanddecay, orcs_upgrade_haste, orcs_upgrade_ogremage, orcs_upgrade_raisedead, orcs_upgrade_runes, orcs_upgrade_throwingaxestrength, orcs_upgrade_throwingaxestrengthii, orcs_upgrade_trollheadhunter, orcs_upgrade_warcraft3grunt, ordos_promotion_unlockbanshees, ordos_promotion_unlockchemicaltrooper, ordos_promotion_unlockcontaminator, ordos_promotion_unlockdeviatortank, ordos_promotion_unlockdustdrone, ordos_promotion_unlocklaboratorycrawler, ordos_promotion_unlocklasertank, ordos_promotion_unlockleecher, ordos_promotion_unlockmortartroopers, ordos_promotion_unlockpython, ordos_promotion_unlockstealthraider, ordos_promotion_unlockwraith, ordos_upgrade_antiairtrooper, ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband, ordos_upgrade_heavyautoguntank, ordos_upgrade_heavycombattank, ordos_upgrade_heavycombattankrockets, ordos_upgrade_hoverdrive, ordos_upgrade_lasercartridges, ordos_upgrade_lightfactory, ordos_upgrade_rapidfirearmorpiercingbelts, ordos_upgrade_shields, protoss_promotion_unlockamaranth, protoss_promotion_unlockanalogue, protoss_promotion_unlockatreus, protoss_promotion_unlockepigraph, protoss_promotion_unlockgladius, protoss_promotion_unlockidol, protoss_promotion_unlocklegionnaire, protoss_promotion_unlockmanifold, protoss_promotion_unlockpatriarch, protoss_promotion_unlockpositron, protoss_promotion_unlockstarsovereign, protoss_promotion_unlockvoidray, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_graviticpropulsion, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_plasmashields, protoss_upgrade_reavercapacity, protoss_upgrade_resonatingglaves, protoss_upgrade_singularitycharge, protoss_upgrade_upgradepylonlevel1, protoss_upgrade_upgradepylonlevel2, ra1_allies_promotion_unlockbastion, ra1_allies_promotion_unlockcamopillbox, ra1_allies_promotion_unlockchronotank, ra1_allies_promotion_unlockgapgeneratorandradarjammer, ra1_allies_promotion_unlockmachinegunner, ra1_allies_promotion_unlockphasetransport, ra1_allies_promotion_unlockrapierjumpjet, ra1_allies_promotion_unlockreconranger, ra1_allies_promotion_unlockreinforcementpad, ra1_allies_promotion_unlocksheridan, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_promotion_unlocktigerheavytank, ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_reinforcedstructures, ra1_soviet_doctrine_conscription, ra1_soviet_doctrine_heavyarmor, ra1_soviet_doctrine_industrialefficiency, ra1_soviet_doctrine_inferno, ra1_soviet_doctrine_nuclearwar, ra1_soviet_doctrine_teslaandexperimentaltech, ra1_soviet_promotion_hurricanerocketpods, ra1_soviet_promotion_infantrysuperoptics, ra1_soviet_promotion_mammothtanktargetingcomputer, ra1_soviet_promotion_parabombslevel2, ra1_soviet_promotion_parabombslevel3, ra1_soviet_promotion_superspyplane, ra1_soviet_promotion_unlockcyberdog, ra1_soviet_promotion_unlockgatlingtank, ra1_soviet_promotion_unlockmonstertank, ra1_soviet_promotion_unlockmortarsoldier, ra1_soviet_promotion_unlocksupersonicnuclearbomber, ra1_soviet_promotion_unlockvolkov, ra1_soviet_upgrade_afterburners, ra1_soviet_upgrade_autoloaders, ra1_soviet_upgrade_hammertank, ra1_soviet_upgrade_hazmatsuits, ra1_soviet_upgrade_heavyteslatank, ra1_soviet_upgrade_highexplosiverockets, ra1_soviet_upgrade_incendiarybullets, ra1_soviet_upgrade_kotinnucleartank, ra1_soviet_upgrade_massproduction, ra1_soviet_upgrade_menofsteel, ra1_soviet_upgrade_nucleartankshells, ra1_soviet_upgrade_reactoroverload, ra1_soviet_upgrade_scorchedearth, ra1_soviet_upgrade_shtoradefensesystem, ra1_soviet_upgrade_stalinium, ra1_soviet_upgrade_teslaarcing, ra1_soviet_upgrade_teslarockets, ra1_soviet_upgrade_thermonuclearrockets, ra1_soviet_upgrade_unlockarmoredyak, ra1_soviet_upgrade_unlockcommissar, ra1_soviet_upgrade_unlockheatraytank, ra1_soviet_upgrade_unlocknuclearyak, ra1_soviet_upgrade_unlockteslayak, ra1_soviet_upgrade_unstableisotopes, ra1_soviet_upgrade_vengeance, ra1_soviet_upgrade_wareconomy, ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_eliterocketeer, ra2_allies_upgrade_forceshield, ra2_allies_upgrade_heavymiragetank, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_intensifiedprismbeams, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_paratroopers, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_prismlinking, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_tanklasertargeting, ra2_allies_upgrade_thunderboltmissiles, ra2_allies_upgrade_vanguardtraining, ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_shocktroopertraining, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_teslamunitions, ra2_soviets_upgrade_gastroburners, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovatomicbombs, ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_teslacoilchargers, ra2_soviets_upgrade_teslaoverload, ra2teslaupgrade, schwarzer_mond_upgrade_crystallens, schwarzer_mond_upgrade_greenplasmashells, steel_consortium_promotion_daggerartillery, steel_consortium_promotion_katytank, steel_consortium_promotion_quantumtank, steel_consortium_promotion_unlockbarracuda, steel_consortium_promotion_unlockcloudbreaker, steel_consortium_promotion_unlockdefenderbot, steel_consortium_promotion_unlockstalker, steel_consortium_promotion_unlocksupportlvl1, steel_consortium_promotion_unlocksupportlvl2, steel_consortium_promotion_unlocksupportlvl3, steel_consortium_promotion_unlocksupportlvl4, steel_consortium_promotion_unlockwhiterabbit, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_scalpeldefenders, steel_consortium_upgrade_shieldresistance, steel_consortium_upgrade_unlockempcannon, td_gdi_promotion_unlockassaultapc, td_gdi_promotion_unlockempgrenadier, td_gdi_promotion_unlockfirehawk, td_gdi_promotion_unlockgdidefenserig, td_gdi_promotion_unlockgdiofficer, td_gdi_promotion_unlockhavocandexosuit, td_gdi_promotion_unlockhumveemkii, td_gdi_promotion_unlockmammothtankmk3, td_gdi_promotion_unlockmissilesoldier, td_gdi_promotion_unlockpredatortank, td_gdi_promotion_unlockshotgunner, td_gdi_promotion_unlocksniper, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_lightweightarmorplating, td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_nod_promotion_unlockblackhandflamer, td_nod_promotion_unlockbuggymkii, td_nod_promotion_unlockchemicalattackbike, td_nod_promotion_unlockchemicalrocketsoldier, td_nod_promotion_unlockchemicalssmlauncher, td_nod_promotion_unlockchemicalstealthtank, td_nod_promotion_unlockflametankmkii, td_nod_promotion_unlocklasertrooper, td_nod_promotion_unlocklighttankmkii, td_nod_promotion_unlockspecter, td_nod_promotion_upgradeupnodstealthname, td_nod_promotion_upgradeupnodvenomname, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades, td_nod_upgrade_cyberneticmodifications, td_nod_upgrade_elementalwarfare, td_nod_upgrade_elitecapacitors, td_nod_upgrade_guerillatactics, td_nod_upgrade_improvedartilleries, td_nod_upgrade_tiberiuminfusion, terran_promotion_unlockcyclone, terran_promotion_unlockgoliathmk2, terran_promotion_unlockharakan, terran_promotion_unlockmadcap, terran_promotion_unlockmatador, terran_promotion_unlockphobos, terran_promotion_unlockpythean, terran_promotion_unlockraven, terran_promotion_unlockspectreandmedivac, terran_promotion_unlocksundog, terran_promotion_unlockwarhound, terran_promotion_unlockwyvern, terran_upgrade_advancedsiegemode, terran_upgrade_cloakupgrade, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_stimpack, terran_upgrade_u238shells, terran_upgrade_upgradesupplydepotlevel1, terran_upgrade_upgradesupplydepotlevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade, tkm_promotion_unlockbattlebus, tkm_promotion_unlockdronepodtruck, tkm_promotion_unlockflakbus, tkm_promotion_unlockjuggernaut, tkm_promotion_unlockmedictruck, tkm_promotion_unlockradartruck, tkm_promotion_unlockrepairtruck, tkm_promotion_unlockt30, tkm_promotion_unlockthebigshiee, tkm_promotion_unlockthesandmarine, tkm_promotion_unlocktrenchtank, tkm_promotion_unlockviper, tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_cryorocketsupgrade, tkm_upgrade_heavytitanplating, tkm_upgrade_incendiaryrocketsupgrade, tkm_upgrade_infantryupgrade, tkm_upgrade_m203upgrade, tkm_upgrade_natoarsenalupgrade, tkm_upgrade_pointdefensesystem, tkm_upgrade_semiautoriflesupgrade, tkm_upgrade_technicaltankrocketaddon, tkm_upgrade_titanarmorpiercingbulletsupgrade, tkm_upgrade_titanarsenalupgrade, tkm_upgrade_twinrocketsupgrade, ts_gdi_promotion_dummy1, ts_gdi_promotion_dummy2, ts_gdi_promotion_dummy3, ts_gdi_promotion_dummy4, ts_gdi_promotion_unlockhammerhead, ts_gdi_promotion_unlockjuggernautmkii, ts_gdi_promotion_unlockkodiak, ts_gdi_promotion_unlockmammothmkii, ts_gdi_promotion_unlocktitanmkii, ts_gdi_promotion_unlockwolverinemkii, ts_gdi_promotion_unlockzoneorca, ts_gdi_promotion_unlockzonetrooper, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_ioncannonuplink, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_modernfirecontrolsystems, ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_railgunweaponry, ts_gdi_upgrade_seekercontrol, ts_gdi_upgrade_seretraining, ts_gdi_upgrade_sonicweaponry, ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_infiltrationkit, ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_stealthfieldsimprovements, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_willofkane, up_resurrection.nax, up_tsunami.asian, upgrade_barracks, upgrade_conyard, upgrade_heavy, upgrade_hightech, upra2aegismissiles, wc2_h_str_navyshield, wc2_h_str_navyshield2, wc2_o_str_navyshield, wc2_o_str_navyshield2, yuri_doctrine_chaosgasemitters, yuri_doctrine_lasherhecannon, yuri_doctrine_lasherlasercannon, yuri_doctrine_lashertoxicgasshells, yuri_doctrine_psionicelite, yuri_doctrine_psionicfanatics, yuri_doctrine_psioniclegion, yuri_doctrine_psionicvehicleshields, yuri_doctrine_scrapvehiclearmor, yuri_upgrade_bioengineering, yuri_upgrade_bioreactorefficiency, yuri_upgrade_brutestrengthmutations, yuri_upgrade_corrosiveammo, yuri_upgrade_diskhighfrequencylasers, yuri_upgrade_disksiphonattack, yuri_upgrade_domination, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade, yuri_upgrade_geneticmodificationboost, yuri_upgrade_gravitondrive, yuri_upgrade_infantrystealthsuits, yuri_upgrade_initiatepowersurge, yuri_upgrade_lasherarmorimprovements, yuri_upgrade_meltingvirus, yuri_upgrade_psionicarmor, yuri_upgrade_psionicplasmabeams, yuri_upgrade_psychicrange, yuri_upgrade_psychicvision, yuri_upgrade_supermagnets, yuri_upgrade_toxicengines, zerg_promotion_unlockbehemoth, zerg_promotion_unlockbroodweaver, zerg_promotion_unlockcorruptor, zerg_promotion_unlockdreadshroud, zerg_promotion_unlockgorekraken, zerg_promotion_unlockgoremaw, zerg_promotion_unlockhermit, zerg_promotion_unlockshriek, zerg_promotion_unlockspithid, zerg_promotion_unlocksporemaw, zerg_promotion_unlockswarmling, zerg_promotion_unlocktalon, zerg_upgrade_adrenalglands, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_groovedspines, zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_metabolicboost, zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_pneumatizedcarapace
+
+
+
