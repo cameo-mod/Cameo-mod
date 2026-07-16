@@ -1,0 +1,463 @@
+^GainsExperienceRABuilding:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			250: rank-veteran
+			500: rank-veteran
+			750: rank-veteran
+			1000: rank-veteran
+
+####################################################################################################
+#		Red Alert
+####################################################################################################
+
+####################################################################################################
+#		Soviet Upgrade Inherits
+####################################################################################################
+
+^JapanSpawnActorsOnSell:
+	Inherits: ^RASpawnActorsOnSell
+	SpawnActorsOnSell:
+		ActorTypes: rae6,japan_imperialscoutsman,japan_imperialscoutsman,japan_imperialscoutsman
+
+^BushidoDiscipline:
+	DamageMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 90
+	FirepowerMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 110
+	ReloadDelayMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 90
+	SpeedMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 110
+	RangeMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 110
+	RevealsShroudMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 110
+	DetectCloakedMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 110
+	InaccuracyMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+		Modifier: 90
+	ChangesHealth@japan_upgrade_bushidodiscipline:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_bushidodiscipline
+	ChangesShield@japan_upgrade_bushidodiscipline:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_bushidodiscipline
+	GrantConditionOnDamageState@wounded:
+		Condition: wounded
+	DamageMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 80
+	FirepowerMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 120
+	ReloadDelayMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 80
+	SpeedMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 120
+	RangeMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 120
+	RevealsShroudMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 120
+	DetectCloakedMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 120
+	InaccuracyMultiplier@wounded:
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+		Modifier: 80
+	ChangesHealth@wounded:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+	ChangesShield@wounded:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+	WithDecoration@wounded:
+		Image: bushido_icon
+		Sequence: idle
+		Palette: greyscale
+		Position: TopRight
+		BlinkInterval: 1
+		BlinkPattern: On, Off, On, Off
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+	GrantConditionOnPrerequisite@japan_upgrade_bushidodiscipline:
+		Condition: japan_upgrade_bushidodiscipline
+		Prerequisites: japan_upgrade_bushidodiscipline
+	ActorStatValues:
+		Upgrades: japan_upgrade_bushidodiscipline
+
+^StealthSuitIntegration:
+	Cloak@japan_upgrade_stealthsuitintegration:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: appear1.aud
+		UncloakSound: trans1.aud
+		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+	SpeedMultiplier@japan_upgrade_stealthsuitintegration:
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+		Modifier: 110
+	DamageMultiplier@japan_upgrade_stealthsuitintegration:
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+		Modifier: 90
+	Shielded:
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+	ChangesShield@personal_shield:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	DamageMultiplier@shielded:
+		RequiresCondition: shielded
+		Modifier: 90
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantConditionOnPrerequisite@japan_upgrade_stealthsuitintegration:
+		Condition: japan_upgrade_stealthsuitintegration
+		Prerequisites: japan_upgrade_stealthsuitintegration
+	ActorStatValues:
+		Upgrades: japan_upgrade_stealthsuitintegration:
+
+^EnergizedArrows:
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
+		RequiresCondition: japan_upgrade_energizedarrows
+		Modifier: 125
+	GrantConditionOnPrerequisite@japan_upgrade_energizedarrows:
+		Condition: japan_upgrade_energizedarrows
+		Prerequisites: japan_upgrade_energizedarrows
+	ActorStatValues:
+		Upgrades: japan_upgrade_energizedarrows
+
+^AdvancedPlasmaWeapons:
+	FirepowerMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 110
+	ReloadDelayMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 90
+	RangeMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 110
+	RevealsShroudMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 110
+	DetectCloakedMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 110
+	InaccuracyMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+		Modifier: 90
+	GrantConditionOnPrerequisite@japan_upgrade_advancedplasmaweapons:
+		Condition: japan_upgrade_advancedplasmaweapons
+		Prerequisites: japan_upgrade_advancedplasmaweapons
+	ActorStatValues:
+		Upgrades: japan_upgrade_advancedplasmaweapons
+
+^NanoTechExtraRepairs:
+	WithColoredOverlay@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		Color: 11223344
+	WithIdleOverlay@nanotechrepairsdamage:
+		Image: nanodrone_overlay
+		Sequence: idle
+		Palette: shield30
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		IsDecoration: True
+	ChangesHealth@nanotechrepairsdamage1:
+		PercentageStep: 1
+		Delay: 50
+		StartIfBelow: 100
+		DamageCooldown: 10
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+	ChangesHealth@nanotechrepairsdamage2:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 10
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+	DamageMultiplier@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		Modifier: 90
+	GrantTimedCondition@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage
+		PauseOnCondition: !nanotechrepairsdamage
+		Condition: nanotechrepairsdamagecooldown
+		Duration: 5
+	GrantConditionOnDamage@nanotechrepairsdamage:
+		RequiresCondition: japan_upgrade_nanotechrepairs
+		Condition: nanotechrepairsdamage
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	WithColoredOverlay@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		Color: 11223344
+	WithIdleOverlay@extrananotechrepairsdamage:
+		Image: nanodrone_overlay
+		Sequence: idle
+		Palette: shield30
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		IsDecoration: True
+	ChangesHealth@extrananotechrepairsdamage1:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 20
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+	ChangesHealth@extrananotechrepairsdamage2:
+		Step: 80
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 20
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+	DamageMultiplier@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		Modifier: 90
+	GrantTimedCondition@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage
+		PauseOnCondition: !extrananotechrepairsdamage
+		Condition: extrananotechrepairsdamagecooldown
+		Duration: 10
+	GrantConditionOnDamage@extrananotechrepairsdamage:
+		RequiresCondition: japan_upgrade_nanotechrepairs
+		Condition: extrananotechrepairsdamage
+		Duration: 20
+		PlayerRelationship: Ally, Neutral, Enemy
+
+####################################################################################################
+#		INFANTRY
+####################################################################################################
+
+^RAHARV:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~raprocharv
+		Description: template_harvester.description
+	Valued:
+		Cost: 1000 #1100
+	Tooltip:
+		Name: template_harvester.raname
+	SelectionDecorations:
+	Harvester:
+		BaleLoadDelay: 3
+		BaleUnloadDelay: 1
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 30
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	GpsDot:
+		String: Harvester
+	FireWarheadsOnDeath:
+		RequiresCondition: !no-tiberium
+		Weapon: OreExplosion
+	FireWarheadsOnDeath@empty:
+		RequiresCondition: no-tiberium
+		Weapon: UnitExplodeHarvEmpty
+	WithHarvesterSpriteBody:
+		ImageByFullness: raharvempty, raharvhalf, raharv
+	-WithFacingSpriteBody:
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: raharv
+		PlayerPalette: raplayer
+
+^RAMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Transforms:
+		IntoActor: ra1_allies_alliedconstructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: placbldg.aud, build5.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	RenderSprites:
+		Image: ramcv
+		PlayerPalette: raplayer
+
+^RAFACT:
+	Inherits: ^BaseBuilding
+	Inherits@conyard: ^Conyard
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Selectable:
+		Bounds: 3072, 3072, 0, -128
+	Tooltip:
+		Name: Allied Construction Yard
+	Building:
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Transforms:
+		IntoActor: ra1_allies_alliedmobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+		RequiresCondition: factundeploy
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@rafact:
+		Prerequisite: rafact
+	ProvidesPrerequisite@concretebarrier:
+		Prerequisite: concretebarrier
+	ProvidesPrerequisite@oilderrick:
+		Prerequisite: oilderrick
+	RenderSprites:
+		Image: rafact
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^RAPROC:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Prerequisites: ~rafact, powr
+	Tooltip:
+		Name: Ore Refinery
+	Building:
+		Footprint: _X_ xxx X== ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, 0
+	SelectionDecorations:
+	Refinery:
+	DockHost:
+		DockAngle: 256
+		DockOffset: 0, 1c0, 0
+	DrawLineToTarget:
+	WithBuildingBib:
+	WithIdleOverlay@TOP:
+		Sequence: idle-top
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@raproc:
+		Prerequisite: raproc
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^Dome:
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-384,0, 630,384,0, -700,-512,0, -700,512,0
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	ProvidesPrerequisite:
+		Prerequisite: anyrahq
+	RenderSprites:
+		Image: dome
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^RAFIX:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
+	Tooltip:
+		Name: Service Depot
+	Building:
+		Footprint: _+_ +++ _+_
+		Dimensions: 3,3
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Reservable:
+	RallyPoint:
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -683
+			BottomRight: 1536, 853
+	HitShape@TOPANDBOTTOM:
+		TargetableOffsets: 840,0,0, -1060,0,0
+		Type: Rectangle
+			TopLeft: -640, -768
+			BottomRight: 640, 1024
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: rafix
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer

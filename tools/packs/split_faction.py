@@ -9,8 +9,8 @@ Usage:
 Moves, byte-preserving, every top-level block whose key starts with the
 faction prefix (post-rename ids make ownership trivial):
 - rules blocks   -> ContentPacks/<Theme>/<Faction>/rules/<category>.yaml
-- weapons used exclusively by the faction -> .../weapons/weapons.yaml
-- sequence images owned by the faction    -> .../sequences/sequences.yaml
+- weapons used exclusively by the faction -> .../yaml/weapons.yaml
+- sequence images owned by the faction    -> .../yaml/sequences.yaml
 plus faction-exclusive ^Templates referenced only from moved blocks.
 
 Writes/extends the pack's content.yaml and adds the Include to mod.yaml
@@ -85,7 +85,9 @@ def main() -> int:
 
     if args.from_pack:
         owned_keys: set[str] = set()
-        for rp in (pack / "rules").glob("*.yaml"):
+        for rp in (pack / "yaml").glob("*.yaml"):
+            if rp.name in ("weapons.yaml", "sequences.yaml", "ai.yaml"):
+                continue
             for k, _ in blocks_of(rp):
                 if k and not k.startswith("^"):
                     owned_keys.add(k)
@@ -129,8 +131,8 @@ def main() -> int:
             else:
                 remaining.append(b)
         for fname, bl in sorted(cats.items()):
-            write_blocks(pack / "rules" / fname, bl)
-            promoted.append(f"rules/{fname} ({len(bl)})")
+            write_blocks(pack / "yaml" / fname, bl)
+            promoted.append(f"yaml/{fname} ({len(bl)})")
         write_blocks(rules_path, remaining)
 
     # ---- weapons: used exclusively by owned actors -------------------------- #
@@ -184,9 +186,9 @@ def main() -> int:
         else:
             wremain.append(b)
     if wmoved:
-        write_blocks(pack / "weapons" / "weapons.yaml", wmoved)
+        write_blocks(pack / "yaml" / "weapons.yaml", wmoved)
         write_blocks(weap_path, wremain)
-        promoted.append(f"weapons/weapons.yaml ({len(wmoved)})")
+        promoted.append(f"yaml/weapons.yaml ({len(wmoved)})")
 
     # ---- sequences: images owned by the faction ------------------------------ #
     # an image moves when its key is an owned actor id, is prefix-named, or is
@@ -215,9 +217,9 @@ def main() -> int:
         else:
             sremain.append(b)
     if smoved:
-        write_blocks(pack / "sequences" / "sequences.yaml", smoved)
+        write_blocks(pack / "yaml" / "sequences.yaml", smoved)
         write_blocks(seq_path, sremain)
-        promoted.append(f"sequences/sequences.yaml ({len(smoved)})")
+        promoted.append(f"yaml/sequences.yaml ({len(smoved)})")
 
     # ---- content.yaml (merge, never clobber) + mod.yaml ---------------------- #
     content = pack / "content.yaml"
@@ -226,10 +228,10 @@ def main() -> int:
         text = "Rules:\n" + "".join(
             f"\tContentPacks|{args.theme}/{args.faction}/rules/{f}\n"
             for f in sorted(cats))
-    if wmoved and "weapons/weapons.yaml" not in text:
+    if wmoved and "yaml/weapons.yaml" not in text:
         text = text.rstrip("\n") + ("\n\nWeapons:\n"
             f"\tContentPacks|{args.theme}/{args.faction}/weapons/weapons.yaml\n")
-    if smoved and "sequences/sequences.yaml" not in text:
+    if smoved and "yaml/sequences.yaml" not in text:
         text = text.rstrip("\n") + ("\n\nSequences:\n"
             f"\tContentPacks|{args.theme}/{args.faction}/sequences/sequences.yaml\n")
     content.write_text(text, encoding="utf-8", newline="\n")

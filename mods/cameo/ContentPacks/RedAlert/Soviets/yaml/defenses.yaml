@@ -1,0 +1,306 @@
+ra1_soviets_missilesilo:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x1Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	RenderSprites:
+		PlayerPalette: playerra
+	Tooltip:
+		Name: Soviet Missile Silo
+	Buildable:
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons, !abomb
+		Description: actor_mslo.description
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		BuildSounds: placbldg.aud, build5.aud
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power_nuke.raname
+		Descriptions:
+			1: power_nuke.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: raatomic
+		MissileDelay: 5
+		SpawnOffset: 1c0,427,0
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 70
+		MissileImage: raatomic
+		BeaconActor: BLASTRADIUS.atomic
+	WithSupportPowerActivationAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: abomb
+
+ra1_soviets_ironcurtain:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^Superweapon
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~ra1_soviets_techcenter, ~techlevel.superweapons
+		Description: actor_iron.description
+	Tooltip:
+		Name: Iron Curtain
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: placbldg.aud, build5.aud
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	GrantExternalConditionPower@IRONCURTAIN:
+		OrderName: IronCurtain
+		PauseOnCondition: disabled
+		Prerequisites:
+			1:
+		Icons:
+			1: invuln
+		ChargeInterval: 4500
+		Names:
+			1: power_ironcurtain.name
+		Descriptions:
+			1: power_ironcurtain.description
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: invulnerability
+		OnFireSound: ironcur9.aud
+		IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 10
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		BlockedCursor: move-blocked
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_soviets_flametower:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_barracks
+		Description: actor_ftur.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Flame Tower
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Health:
+		HP: 64000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 1023
+		Offset: 0,0,112
+	Armament:
+		Weapon: FireballLauncher
+		LocalOffset: 512,0,0
+		RequiresCondition: !ra1_soviets_doctrine_inferno
+	Armament@Upgrade:
+		Weapon: FireballLauncherThermobaric
+		LocalOffset: 512,0,0
+		RequiresCondition: ra1_soviets_doctrine_inferno
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	ProvidesPrerequisite@buildingname:
+	FireWarheadsOnDeath:
+		Weapon: FireballLauncher
+		RequiresCondition: !ra1_soviets_doctrine_inferno
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: FireballLauncherThermobaric
+		RequiresCondition: ra1_soviets_doctrine_inferno
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -30
+	RevealsShroud:
+		Range: 6742
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_stalinium
+
+ra1_soviets_teslacoil:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@ExperimentalTeslaWeaponry: ^ExperimentalTeslaWeaponry
+	Inherits@TeslaArcingUpgradeRA1: ^TeslaArcingUpgradeRA1
+	Inherits@ReactorOverloadTeamUpgradeRA1: ^ReactorOverloadTeamUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_techcenter
+		Description: actor_tsla.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tesla Coil
+	Selectable:
+		Bounds: 1024, 1792, 0, -384
+	SelectionDecorations:
+	Health:
+		HP: 90000
+	WithBuildingBib:
+		HasMinibib: true
+	WithTeslaChargeAnimation:
+	Armament:
+		Weapon: TeslaZap
+		LocalOffset: 0,0,896
+		RequiresCondition: !ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
+	Armament@Upgrade1:
+		Weapon: TeslaZapEMP
+		LocalOffset: 0,0,896
+		RequiresCondition: ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing
+	Armament@Upgrade2:
+		Weapon: TeslaZapEMPArc
+		LocalOffset: 0,0,896
+		RequiresCondition: ra1_soviets_upgrade_teslaarcing
+	FirepowerMultiplier@ra1_soviets_upgrade_reactoroverload:
+		RequiresCondition: ra1_soviets_upgrade_reactoroverload
+		Modifier: 200
+	AttackTesla:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeAudio: tslachg2.aud
+		InitialChargeDelay: 25
+		MaxCharges: 3
+		ReloadDelay: 100
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 9318
+	DetectCloaked:
+		Range: 4659
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_reactoroverload, ra1_soviets_upgrade_stalinium
+
+ra1_soviets_samsite:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	HitShape:
+		Type: Rectangle
+			TopLeft: -768,-512
+			BottomRight: 768,512
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome
+		Description: actor_sam.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Soviet SAM Site
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		BuildSounds: placbldg.aud, build5.aud
+	Health:
+		HP: 75000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 60
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: Nike
+		LocalOffset: 0,0,320
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	DamageMultiplier@2x1Shape:
+		Modifier: 75
+	Power:
+		Amount: -35
+	RevealsShroud:
+		Range: 12790
+	DetectCloaked:
+		Range: 6395
+	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 110
+	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 110
+	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_upgrade_stalinium

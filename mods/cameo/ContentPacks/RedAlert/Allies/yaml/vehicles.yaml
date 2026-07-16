@@ -1,0 +1,1054 @@
+ra1_allies_alliedlighttank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocksheridan
+		Description: actor_ltnk.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Allied Light Tank
+		GenericName: Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+	Armament:
+		Weapon: 25mm
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@HighExplosionShell:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 1TNK.Husk
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedmediumtank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocktigerheavytank
+		BuildPaletteOrder: 110
+		Description: template_mbt.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Allied Medium Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Turreted:
+		TurnSpeed: 20
+	Armament:
+		Weapon: 90mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,80
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedheavyaatank:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
+		Description: actor_heavyaatank.description
+	Valued:
+		Cost: 1250
+	Tooltip:
+		Name: Allied Heavy AA Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Turreted:
+		TurnSpeed: 30
+		Offset: -128,0,0
+	Armament@AG:
+		Weapon: HeavyAATankCannonAG
+		Recoil: 85
+		LocalOffset: 800,80,360, 800,-80,360
+		MuzzleSequence: muzzle
+	Armament@AA:
+		Weapon: HeavyAATankCannonAA
+		Recoil: 85
+		LocalOffset: 800,80,360, 800,-80,360
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@ra1_allies_alliedheavyaatank:
+		Modifier: 25
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: ra1_allies_alliedheavyaatank
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 1
+		ResetOnFire: True
+	FirepowerMultiplier@GattlingSpeed1:
+		RequiresCondition: ammo == 3
+		Modifier: 125
+	FirepowerMultiplier@GattlingSpeed2:
+		RequiresCondition: ammo == 2
+		Modifier: 133
+	FirepowerMultiplier@GattlingSpeed3:
+		RequiresCondition: ammo <= 1
+		Modifier: 150
+	ReloadDelayMultiplier@GattlingSpeed1:
+		RequiresCondition: ammo == 3
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed2:
+		RequiresCondition: ammo == 2
+		Modifier: 70
+	ReloadDelayMultiplier@GattlingSpeed3:
+		RequiresCondition: ammo <= 1
+		Modifier: 50
+	RangeMultiplier@GattlingSpeed1:
+		RequiresCondition: ammo == 3
+		Modifier: 105
+	RangeMultiplier@GattlingSpeed2:
+		RequiresCondition: ammo == 2
+		Modifier: 110
+	RangeMultiplier@GattlingSpeed3:
+		RequiresCondition: ammo <= 1
+		Modifier: 115
+	KeepsDistance:
+	RenderRangeCircle:
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedartillery:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedradardome
+		BuildPaletteOrder: 70
+		Description: actor_arty.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Allied Artillery
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 1000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		Locomotor: lighttracked
+	Armament:
+		Weapon: 155mm
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: 155mmCryo
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	WithMuzzleOverlay:
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryExplode
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedoretruck:
+	Inherits: ^RAHARV
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Tooltip:
+		Name: Allied Ore Truck
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedorerefinery
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedmobileconstructionvehicle:
+	Inherits: ^RAMCV
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Tooltip:
+		Name: Allied Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
+	Transforms:
+		IntoActor: ra1_allies_alliedconstructionyard
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_ranger:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlockreconranger
+		Description: actor_jeep.description
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Ranger
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 22500
+	Repairable:
+		HpPerStep: 1125
+	ChangesHealth@SelfHealing:
+		Step: 9
+	Mobile:
+		Speed: 175
+		TurnSpeed: 35
+	Turreted:
+		TurnSpeed: 35
+		Offset: 0,0,128
+	Armament:
+		Weapon: M60mg
+		MuzzleSequence: muzzle
+		LocalOffset: 128,0,43
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_minelayer:
+	Inherits: ^Tank
+	Inherits@mines: ^DeployToClearMines
+	Inherits@rearm: ^RearmAtServiceDepot
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 310
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
+		Description: actor_mnly.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Minelayer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Priority: 5
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 128
+	RevealsShroud:
+		Range: 5c0
+	Minelayer:
+		Mine: MINV
+		TileUnknownName: build-invalid
+	MineImmune:
+	AmmoPool:
+		Ammo: 10
+		RearmSound: minelay1.aud
+	DetectCloaked:
+		Range: 5c0
+		DetectionTypes: Mine
+	RenderDetectionCircle:
+	FireWarheadsOnDeath:
+		Weapon: ATMine
+	RenderSprites:
+		Image: ra1_allies_minelayer
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_sheridanassaulttank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@ChronoArmor: ^ChronoArmor
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Sheridan Assault Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocksheridan
+		Queue: Vehicle, RAVehicle
+		Description: actor_sheridan.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 85000
+	Repairable:
+		HpPerStep: 4250
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 17
+	Armament:
+		Weapon: SheridanCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 640,0,128
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+	Armament@Missile:
+		Weapon: SheridanMissiles
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 128,64,192
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade:
+		Weapon: SheridanMissilesCryo
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 128,64,192
+		MuzzleSequence: muzzle
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 4
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@MG:
+		Weapon: SheridanVulcan
+		LocalOffset: 384,-64,128
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 4
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 25
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: MTNK.Husk
+	#	OwnerType: InternalName
+	#	EffectiveOwnerFromOwner: true
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 2
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_reconranger:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlockreconranger
+		Description: actor_jeep.description2
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Recon Ranger
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Mobile:
+		Speed: 160
+		TurnSpeed: 32
+	Turreted:
+		TurnSpeed: 32
+		Offset: -366,0,166
+	Armament:
+		Weapon: ReconRangerRecoillessGun
+		MuzzleSequence: muzzle
+		LocalOffset: 730,0,166
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: CryoReconRangerRecoillessGun
+		MuzzleSequence: muzzle
+		LocalOffset: 730,0,166
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderRangeCircle:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	GrantConditionOnAttack@1:
+		Condition: firing1
+		RevokeDelay: 8
+	GrantConditionOnAttack@2:
+		Condition: firing2
+		RevokeDelay: 16
+	GrantConditionOnAttack@3:
+		Condition: firing3
+		RevokeDelay: 32
+	SpeedMultiplier@firing1:
+		RequiresCondition: firing1
+		Modifier: 75
+	TurnSpeedMultiplier@firing1:
+		RequiresCondition: firing1
+		Modifier: 75
+	TurretTurnSpeedMultiplier@firing1:
+		RequiresCondition: firing1
+		Modifier: 75
+	SpeedMultiplier@firing2:
+		RequiresCondition: firing2
+		Modifier: 75
+	TurnSpeedMultiplier@firing2:
+		RequiresCondition: firing2
+		Modifier: 75
+	TurretTurnSpeedMultiplier@firing2:
+		RequiresCondition: firing2
+		Modifier: 75
+	SpeedMultiplier@firing3:
+		RequiresCondition: firing3
+		Modifier: 75
+	TurnSpeedMultiplier@firing3:
+		RequiresCondition: firing3
+		Modifier: 75
+	TurretTurnSpeedMultiplier@firing3:
+		RequiresCondition: firing3
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedtigerheavytank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocktigerheavytank
+		BuildPaletteOrder: 110
+		Description: actor_tiger.description
+	Tooltip:
+		Name: Allied Tiger Heavy Tank
+	Valued:
+		Cost: 1300
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+		Offset: 0,0,0
+	Armament:
+		Weapon: TigerCannon
+		Recoil: 150
+		RecoilRecovery: 50
+		LocalOffset: 1200,0,200
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: alliedtiger
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedtankdestroyer:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 110
+		Description: actor_tnkd.description
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Allied Tank Destroyer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Armament:
+		Weapon: AlliedTankDestroyerCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1150,0,250
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: TankDestroyerVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	RenderSprites:
+		Image: modtnkd2
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_chronotank:
+	Inherits: ^Vehicle
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		BuildLimit: 1
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 200
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockchronotank
+		Description: actor_ctnk.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Chrono Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	SelectionDecorations:
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 40
+		Locomotor: heavywheeled
+	Armament@PRIMARY:
+		Weapon: ChronoTusk
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@SECONDARY:
+		Weapon: ChronoTusk
+		LocalOffset: -160,276,232
+		LocalYaw: -100
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade:
+		Weapon: ChronoTuskCryo
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeSECONDARY:
+		Weapon: ChronoTuskCryo
+		LocalOffset: -160,276,232
+		LocalYaw: -100
+		MuzzleSequence: muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	AttackFrontal:
+		FacingTolerance: 10
+	WithMuzzleOverlay:
+	PortableChronoCA:
+		ChargeDelay: 750
+		HasDistanceLimit: false
+		FlashScreen: true
+		ChronoshiftSound: chrono2.aud
+	Selectable:
+		Bounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_phasetransport:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@cargo: ^CargoVehicle
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 130
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockphasetransport
+		Description: actor_sapc.description
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Phase Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 125
+		TurnSpeed: 25
+	AutoTarget:
+		InitialStance: HoldFire
+		InitialStanceAI: AttackAnything
+	Armament:
+		Weapon: APTusk
+		LocalOffset: 192,0,176
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: APTuskCryo
+		LocalOffset: 192,0,176
+		MuzzleSequence: muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Turreted:
+		TurnSpeed: 25
+	AttackTurreted:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+	Cloak:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: appear1.aud
+		UncloakSound: appear1.aud
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	WithMuzzleOverlay:
+	Selectable:
+		Class: ra1_allies_phasetransport
+	RenderSprites:
+		Image: ra1_allies_phasetransport
+		PlayerPalette: raplayer
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_mobilegapgenerator:
+	Inherits: ^Tank
+	Inherits@EXT: ^ExternalConditions
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@ChronoArmor: ^ChronoArmor
+	-ExternalCondition@shrouded:
+	-ExternalCondition@lockon:
+	Buildable:
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 150
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Description: actor_mgg.description
+	Tooltip:
+		Name: Mobile Gap Generator
+	Valued:
+		Cost: 5000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Targetable@Epic:
+		TargetTypes: Epic
+	TooltipExtras@Epic:
+		Description: Epic
+	WithIdleOverlay@SPINNER:
+		Offset: -299,0,171
+		Sequence: spinner
+	WithIdleOverlay@gapfield:
+		Sequence: gapfield
+		RequiresCondition: !disabled
+		IsDecoration: True
+	Armament:
+		Weapon: dummytargeting
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 8000
+		RequiresCondition: !disabled
+	CreatesShroud:
+		Range: 8000
+		RequiresCondition: !disabled
+	ProximityExternalCondition@shrouded:
+		Range: 8000
+		ValidRelationships: Ally
+		Condition: ra1_allies_gapgenerator-shroud
+		RequiresCondition: !disabled
+	RenderShroudCircle:
+	RevealsShroud@SWReveal:
+		Range: 2000
+		ValidRelationships: Neutral, Enemy
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: RAMGG.Husk
+	#	OwnerType: InternalName
+	#	EffectiveOwnerFromOwner: true
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 0
+	GuardsSelection:
+	KeepsDistance:
+		Distance: 10000
+	TooltipExtras@Support:
+		Description: Support Vehicle
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_chronoarmor
+
+ra1_allies_mobileradarjammer:
+	Inherits: ^Tank
+	Inherits@EXT: ^ExternalConditions
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@ChronoArmor: ^ChronoArmor
+	-ExternalCondition@lockon:
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Mobile Radar Jammer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 140
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Description: actor_mrj.description
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Targetable@Epic:
+		TargetTypes: Epic
+	TooltipExtras@Epic:
+		Description: Epic
+	WithIdleOverlay@SPINNER:
+		Sequence: spinner
+		Offset: -256,0,256
+	Armament:
+		Weapon: RadarJammer
+		LocalOffset: 0,0,0
+	AttackFrontalCharged:
+		ForceFireIgnoresActors: True
+		PauseOnCondition: disabled
+		FacingTolerance: 32
+		ChargeLevel: 75
+		DischargeRate: 5
+		ShotsPerCharge: 1
+		ShowSelectionBar: true
+		SelectionBarColor: ffffff
+		ChargingCondition: charging
+	AmbientSoundCA:
+		RequiresCondition: charging
+		SoundFiles: jammer.aud
+		VolumeMultiplier: 10
+	WithIdleOverlay@JAMSIGNAL:
+		Sequence: jamsignal
+		Palette: ra_temperat
+		RequiresCondition: charging
+		Offset: -256,0,256
+		IsDecoration: True
+	JamsMissiles:
+		Range: 5000
+		DeflectionRelationships: Neutral, Enemy
+		RequiresCondition: !disabled
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 10000
+		RequiresCondition: !disabled
+	WithRangeCircle@JAMMER:
+		Type: jammer
+		Range: 15000
+		Color: 0000FF80
+	RenderJammerCircle:
+	RenderDetectionCircle:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	ProximityExternalCondition@AdvancedTargeting:
+		Range: 15000
+		ValidRelationships: Enemy
+		Condition: lockon
+		RequiresCondition: !disabled
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+	GuardsSelection:
+	KeepsDistance:
+		Distance: 10000
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+		Position: BottomLeft
+	TooltipExtras@Support:
+		Description: Support Vehicle
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_chronoarmor
+
+	####################################################################################################
+	#		Doctrines Soviets
+	####################################################################################################

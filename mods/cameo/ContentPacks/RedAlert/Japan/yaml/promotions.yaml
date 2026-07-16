@@ -1,0 +1,171 @@
+japan_promotion_unlocksamurai:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Samurai
+	Buildable:
+		BuildPaletteOrder: 49
+		Queue: Promotions
+		Description: Allows training of Samurai.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlocksamurai, rank1
+	RenderSprites:
+		Image: japan_samurai
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlocksamurai
+
+japan_promotion_unlockarchermaiden:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Archer Maiden
+	Buildable:
+		BuildPaletteOrder: 52
+		Queue: Promotions
+		Description: Allows training of Archer Maidens.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockarchermaiden, japan_promotion_unlocksamurai, rank1
+	RenderSprites:
+		Image: japan_archermaiden
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockarchermaiden
+
+japan_promotion_unlockrocketangel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Rocket Angel
+	Buildable:
+		BuildPaletteOrder: 55
+		Queue: Promotions
+		Description: Allows training of Rocket Angels.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockrocketangel, japan_promotion_unlockarchermaiden, rank1
+	RenderSprites:
+		Image: japan_rocketangel
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockrocketangel
+
+japan_promotion_unlockexorcist:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Exorcist
+	Buildable:
+		BuildPaletteOrder: 58
+		Queue: Promotions
+		Description: Allows training of the Exorcist.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockexorcist, japan_promotion_unlockrocketangel, rank1
+	RenderSprites:
+		Image: japan_exorcist
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockexorcist
+
+japan_promotion_unlockarmoredcar:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Armored Car
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Promotions
+		Description: Allows construction of the Armored Car.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockarmoredcar, rank1
+	RenderSprites:
+		Image: japan_armoredcar
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockarmoredcar
+
+japan_promotion_unlockheavychihaheavytank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Heavy Chi-Ha Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 53
+		Queue: Promotions
+		Description: Allows construction of the Chi-Ha Heavy Tank.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockheavychihaheavytank, japan_promotion_unlockarmoredcar, rank1
+	RenderSprites:
+		Image: japan_chihaheavytank
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockheavychihaheavytank
+
+japan_promotion_unlockhovercraftflametank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Hovercraft Flametank
+	Buildable:
+		BuildPaletteOrder: 56
+		Queue: Promotions
+		Description: Allows construction of the Hovercraft Flametank.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockhovercraftflametank, japan_promotion_unlockheavychihaheavytank, rank1
+	RenderSprites:
+		Image: japan_hovercraftflametank
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockhovercraftflametank
+
+japan_promotion_unlockshogunexecutioner:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shogun Executioner
+	Buildable:
+		BuildPaletteOrder: 59
+		Queue: Promotions
+		Description: Allows construction of the Shogun Executioner.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockshogunexecutioner, japan_promotion_unlockhovercraftflametank, rank1
+	RenderSprites:
+		Image: japan_shogunexecutioner
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockshogunexecutioner
+
+japan_promotion_unlockgrenadebuggy:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Grenade Buggy
+	Buildable:
+		BuildPaletteOrder: 51
+		Queue: Promotions
+		Description: Allows construction of the Grenade Buggy.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockgrenadebuggy, rank1
+	RenderSprites:
+		Image: japan_grenadebuggy
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockgrenadebuggy
+
+japan_promotion_unlockshrinetank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shrine Tank
+	Buildable:
+		BuildPaletteOrder: 54
+		Queue: Promotions
+		Description: Allows construction of the Shrine Tank.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockshrinetank, japan_promotion_unlockgrenadebuggy, rank1
+	RenderSprites:
+		Image: japan_shrine_minitank
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockshrinetank
+
+japan_promotion_unlockwaveforcetank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Waveforce Tank
+	Buildable:
+		BuildPaletteOrder: 57
+		Queue: Promotions
+		Description: Allows construction of the Waveforce Tank.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockwaveforcetank, japan_promotion_unlockshrinetank, rank1
+	RenderSprites:
+		Image: japan_waveforcetank
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockwaveforcetank
+
+japan_promotion_unlockwaveforceartillery:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Waveforce Artillery
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Promotions
+		Description: Allows construction of the Waveforce Artillery.
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockwaveforceartillery, japan_promotion_unlockwaveforcetank, rank1
+	RenderSprites:
+		Image: japan_waveforceartillery
+	ProvidesPrerequisite:
+		Prerequisite: japan_promotion_unlockwaveforceartillery
+
+	####################################################################################################
+	#		Promotion Units Japan
+	####################################################################################################
