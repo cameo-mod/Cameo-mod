@@ -1,0 +1,38 @@
+ChronoVortex:
+	Inherits: ^RiftBase
+	EditorOnlyTooltip:
+		Name: (ChronoVortex)
+	RenderSprites:
+		Image: vortexanim
+		Palette: ra_temperat
+	PeriodicExplosion:
+		Weapon: ChronoVortex
+	KillsSelf:
+		Delay: 425
+	# required for spawning actor on death
+	Health:
+		HP: 1
+	WithSpriteBody:
+		StartSequence: spawn
+	AmbientSound:
+		SoundFiles: rift1.aud, rift2.aud, rift3.aud
+		Interval: 50
+	SpawnActorOnDeath:
+		Actor: ChronoVortexFade
+		SkipMakeAnimations: false
+	RevealsShroud:
+		Range: 10000
+		Type: CenterPosition
+
+ChronoVortexFade:
+	Inherits: ChronoVortex
+	WithSpriteBody:
+		Sequence: dead
+	WithMakeAnimation:
+		Sequence: fade
+	KillsSelf:
+		Delay: 25
+	-SpawnActorOnDeath:
+	-PeriodicExplosion:
+	-AmbientSound:
+

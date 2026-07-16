@@ -1,0 +1,275 @@
+^AirSuperiorityDoctrine:
+	DamageMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 85
+	FirepowerMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 115
+	ReloadDelayMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 85
+	ReloadAmmoDelayMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 85
+	SpeedMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 115
+	RangeMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 115
+	RevealsShroudMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 115
+	DetectCloakedMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 115
+	InaccuracyMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
+		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
+		Modifier: 85
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_airsuperioritydoctrine:
+		Condition: ra1_allies_upgrade_airsuperioritydoctrine
+		Prerequisites: ra1_allies_upgrade_airsuperioritydoctrine
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_airsuperioritydoctrine
+
+team_upgrade.up_gpssatellitesupport:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: ra1_allies_upgrade_gpssatellitesupport
+	RenderSprites:
+		Image: gpssatellitesupporticon
+	Tooltip:
+		Name: GPS Satellite Support
+	Buildable:
+		Description: upgrade_gpssatellitesupport.description
+	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Allies
+	####################################################################################################
+
+^IndustrialEfficiencyDoctrineRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_industrialefficiency:
+		Condition: ra1_soviets_doctrine_industrialefficiency
+		Prerequisites: ra1_soviets_doctrine_industrialefficiency
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_industrialefficiency
+
+^InfernoDoctrineRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_inferno:
+		Condition: ra1_soviets_doctrine_inferno
+		Prerequisites: ra1_soviets_doctrine_inferno
+	FirepowerMultiplier@ra1_soviets_doctrine_inferno:
+		RequiresCondition: ra1_soviets_doctrine_inferno
+		Modifier: 125
+	DamageMultiplier@ra1_soviets_doctrine_inferno:
+		RequiresCondition: ra1_soviets_doctrine_inferno
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_inferno
+
+^HeavyArmorDoctrineRA1:
+	DamageMultiplier@ra1_soviets_doctrine_heavyarmor:
+		RequiresCondition: ra1_soviets_doctrine_heavyarmor
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_heavyarmor:
+		Condition: ra1_soviets_doctrine_heavyarmor
+		Prerequisites: ra1_soviets_doctrine_heavyarmor
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_heavyarmor
+
+^VengeanceUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_vengeance:
+		Condition: ra1_soviets_upgrade_vengeance
+		Prerequisites: ra1_soviets_upgrade_vengeance
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_vengeance
+
+ra_upgrade_menofsteel_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Men Of Steel
+	Buildable:
+		Description: ra_upgrade_menofsteel.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_menofsteel
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_menofsteel
+
+^MenOfSteelTeamUpgradeRA1:
+	FirepowerMultiplier@ra1_soviets_upgrade_menofsteel:
+		RequiresCondition: ra1_soviets_upgrade_menofsteel
+		Modifier: 110
+	DamageMultiplier@ra1_soviets_upgrade_menofsteel:
+		RequiresCondition: ra1_soviets_upgrade_menofsteel
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_menofsteel:
+		Condition: ra1_soviets_upgrade_menofsteel
+		Prerequisites: ra1_soviets_upgrade_menofsteel
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_menofsteel
+
+#############################
+
+ra_upgrade_wareconomy_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: War Economy
+	Buildable:
+		Description: ra_upgrade_wareconomy.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_wareconomy
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_wareconomy
+
+^WarEconomyTeamUpgradeRA1:
+	ProductionCostMultiplier@ra1_soviets_upgrade_wareconomy:
+		Prerequisites: ra1_soviets_upgrade_wareconomy
+		Multiplier: 90
+	ProductionTimeMultiplier@ra1_soviets_upgrade_wareconomy:
+		Prerequisites: ra1_soviets_upgrade_wareconomy
+		Multiplier: 90
+	SpeedMultiplier@ra1_soviets_upgrade_wareconomy:
+		RequiresCondition: ra1_soviets_upgrade_wareconomy
+		Modifier: 110
+	ResourceValueMultiplier@ra1_soviets_upgrade_wareconomy:
+		Modifier: 110
+		RequiresCondition: ra1_soviets_upgrade_wareconomy
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_wareconomy:
+		Condition: ra1_soviets_upgrade_wareconomy
+		Prerequisites: ra1_soviets_upgrade_wareconomy
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_wareconomy
+
+#############################
+
+ra_upgrade_scorchedearth_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Scorched Earth
+	Buildable:
+		Description: ra_upgrade_scorchedearth.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_scorchedearth
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_scorchedearth
+
+ra_upgrade_reactoroverload_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Reactor Overload
+	Buildable:
+		Description: ra_upgrade_reactoroverload.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_reactoroverload
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_reactoroverload
+
+^HighExplosiveRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_highexplosiverockets:
+		Condition: ra1_soviets_upgrade_highexplosiverockets
+		Prerequisites: ra1_soviets_upgrade_highexplosiverockets
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_highexplosiverockets
+
+ra_upgrade_stalinium_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Stalinium
+	Buildable:
+		Description: ra_upgrade_stalinium.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_stalinium
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_stalinium
+
+^StaliniumTeamUpgradeRA1:
+	DamageMultiplier@ra1_soviets_upgrade_stalinium:
+		RequiresCondition: ra1_soviets_upgrade_stalinium
+		Modifier: 80
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_stalinium:
+		Condition: ra1_soviets_upgrade_stalinium
+		Prerequisites: ra1_soviets_upgrade_stalinium
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_stalinium
+
+#############################
+
+^UnstableIsotopesUpgradeRA1:
+	SpeedMultiplier@ra1_soviets_upgrade_unstableisotopes:
+		RequiresCondition: ra1_soviets_upgrade_unstableisotopes
+		Modifier: 120
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_unstableisotopes:
+		Condition: ra1_soviets_upgrade_unstableisotopes
+		Prerequisites: ra1_soviets_upgrade_unstableisotopes
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_unstableisotopes
+
+ra_upgrade_nuclearshells_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Nuclear Tank Shells
+	Buildable:
+		Description: ra_upgrade_nuclearshells.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra1_soviets_upgrade_nucleartankshells
+	ProvidesPrerequisite:
+		Prerequisite: ra1_soviets_upgrade_nucleartankshells
+
+^AfterburnersUpgradeRA1:
+	SpeedMultiplier@ra1_soviets_upgrade_afterburners:
+		RequiresCondition: ra1_soviets_upgrade_afterburners
+		Modifier: 115
+	RangeMultiplier@ra1_soviets_upgrade_afterburners:
+		RequiresCondition: ra1_soviets_upgrade_afterburners
+		Modifier: 115
+	FirepowerMultiplier@ra1_soviets_upgrade_afterburners:
+		RequiresCondition: ra1_soviets_upgrade_afterburners
+		Modifier: 115
+	DamageMultiplier@ra1_soviets_upgrade_afterburners:
+		RequiresCondition: ra1_soviets_upgrade_afterburners
+		Modifier: 85
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_afterburners:
+		Condition: ra1_soviets_upgrade_afterburners
+		Prerequisites: ra1_soviets_upgrade_afterburners
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_afterburners
+
+^SuperOpticsPromotionRA1:
+	RevealsShroudMultiplier@ra1_soviets_promotion_infantrysuperoptics:
+		RequiresCondition: ra1_soviets_promotion_infantrysuperoptics
+		Modifier: 120
+	DetectCloakedMultiplier@ra1_soviets_promotion_infantrysuperoptics:
+		RequiresCondition: ra1_soviets_promotion_infantrysuperoptics
+		Modifier: 120
+	RangeMultiplier@ra1_soviets_promotion_infantrysuperoptics:
+		RequiresCondition: ra1_soviets_promotion_infantrysuperoptics
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra1_soviets_promotion_infantrysuperoptics:
+		Condition: ra1_soviets_promotion_infantrysuperoptics
+		Prerequisites: ra1_soviets_promotion_infantrysuperoptics
+	ActorStatValues:
+		Upgrades: ra1_soviets_promotion_infantrysuperoptics
+
+team_upgrade.up_nanotechrepairs:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: japan_upgrade_nanotechrepairs
+	RenderSprites:
+		Image: nanotechrepairsicon
+	Tooltip:
+		Name: Nanotech Repairs
+	Buildable:
+		Description: upgrade_nanotechrepairs.description
+	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Japan
+	####################################################################################################
+

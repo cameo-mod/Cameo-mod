@@ -1,0 +1,695 @@
+PT:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra1syrd
+		Queue: Naval, RANaval
+		Description: actor_pt.description
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Gunboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: 2Inch
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: DepthCharge
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: pt
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+DD:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@ChronoArmor: ^ChronoArmor
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Destroyer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra1syrd, ra1_allies_alliedradardome
+		Queue: Naval, RANaval
+		Description: actor_dd.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 17
+		Offset: 469,0,128
+	Armament:
+		Weapon: Stinger
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: StingerCryo
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@DC1:
+		Weapon: DepthCharge
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 80, -80
+		MuzzleSequence: muzzle
+	Armament@DC2:
+		Weapon: DepthCharge
+		LocalOffset: 100,100,0, 100,-100,0
+		LocalYaw: 80, -80
+		FireDelay: 5
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	DeliversCash:
+		Payload: 500
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	DetectCloaked:
+		Range: 5000
+		DetectionTypes: Underwater
+	RenderDetectionCircle:
+	RenderSprites:
+		Image: radd
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+
+CA:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra1syrd, ra1_allies_alliedtechcenter
+		Queue: Naval, RANaval
+		Description: actor_ca.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 8
+	Health:
+		HP: 225000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armor:
+		Type: Superheavy
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: -896,0,128
+		TurnSpeed: 8
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 768,0,128
+		TurnSpeed: 8
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Turret: secondary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		Turrets: primary, secondary
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+	DeliversCash:
+		Payload: 500
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: raca
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
+
+japanspeedboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra1jsyrd
+		Queue: Naval, RANaval
+		Description: actor_jpspeedboat.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Japanese Speedboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 140
+		TurnSpeed: 28
+	Turreted:
+		TurnSpeed: 56
+		Offset: 200,0,200
+	Armament@AG:
+		Weapon: JapanSpeedBoatGun
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgrade:
+		Weapon: JapanSpeedBoatGunWaveforce
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	Armament@DC1:
+		Weapon: DepthCharge
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 80, -80
+		MuzzleSequence: muzzle
+	Armament@DC2:
+		Weapon: DepthCharge
+		LocalOffset: 100,100,0, 100,-100,0
+		LocalYaw: 80, -80
+		FireDelay: 5
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: japanspeedboat
+		PlayerPalette: player_rgba
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		ArmamentNames: primary
+		RequiredShotsPerInstance: 5, 10
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: true
+		IsCyclic: false
+		RevokeOnNewTarget: false
+	ReloadDelayMultiplier@GattlingSpeed:
+		RequiresCondition: gatling >= 2
+		Modifier: 50
+	RangeMultiplier@GattlingSpeed:
+		RequiresCondition: gatling
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+yamatobattleship:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Yamato Battleship
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra1jsyrd, japan_japaneseradararray
+		Queue: Naval, RANaval
+		Description: actor_yamatobattleship.description
+	Mobile:
+		Speed: 35
+		TurnSpeed: 7
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: -896,0,128
+		TurnSpeed: 7
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 768,0,128
+		TurnSpeed: 7
+	Turreted@AA:
+		Turret: flak
+		Offset: 256,0,128
+		TurnSpeed: 14
+		FacingTolerance: 90
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: YamatoCannon
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 200
+		RecoilRecovery: 25
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Turret: secondary
+		Weapon: YamatoCannon
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 200
+		RecoilRecovery: 25
+		MuzzleSequence: muzzle
+	Armament@AA:
+		Turret: flak
+		Weapon: YamatoFlak
+		LocalOffset: 240,-100,40, 240,100,40
+		Recoil: 50
+		RecoilRecovery: 10
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		Turrets: primary, secondary, flak
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+	WithSpriteTurret@AA:
+		Turret: flak
+		Sequence: turret2
+	DeliversCash:
+		Payload: 500
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: yamatobattleship
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+japancarrier:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: actor_japancarrier.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra1jsyrd, japan_japanesetechcenter
+		Queue: Naval, RANaval
+		Description: Japanese Aircraft Carrier
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 45
+		TurnSpeed: 9
+	Health:
+		HP: 225000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armor:
+		Type: Superheavy
+	AttackFollow:
+		Voice: Attack
+		PauseOnCondition: disabled
+	DeliversCash:
+		Payload: 450
+	CarrierMaster:
+		Actors: zerofighter, zerofighter, zerofighter, zerofighter
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@PRIMARY:
+		Weapon: JapanCarrierTarget
+		Damage: 1500
+		ReloadDelay: 125
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+zerofighter:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Zero Fighter
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 175
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 7500
+	Armament@PRIMARY:
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@SECONDARY:
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgrade: ##########
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: japan_upgrade_waveforcebullets
+	Armament@UpgradeSECONDARY:
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: japan_upgrade_waveforcebullets
+	FirepowerMultiplier@doublecannons:
+		Modifier: 50
+	Armament:
+		Weapon: JapanCarrierFighterBomb
+	AmmoPool:
+		Ammo: 30
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	SpawnActorOnDeath:
+		Actor: modkamimini.Husk
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	AttackAircraft:
+		FacingTolerance: 40
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -500,0,125
+	LeavesTrails:
+		Offsets: -500,0,125
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player
+		Image: modkamimini
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol
+
+SS:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Soviet Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~raspen
+		Queue: Naval, RANaval
+		Description: actor_ss.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: TorpTube
+		LocalOffset: 256,0,0
+		RequiresCondition: !ra1_soviets_doctrine_inferno
+	Armament@Upgrade:
+		Weapon: TorpTubeThermobaric
+		LocalOffset: 256,0,0
+		RequiresCondition: ra1_soviets_doctrine_inferno
+	RenderRangeCircle:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 475
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	Cloak@underwater:
+	RenderSprites:
+		Image: rass
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
+
+MSUB:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Missile Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~raspen, ra1_soviets_techcenter
+		Queue: Naval, RANaval
+		Description: actor_msub.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Armament@PRIMARY:
+		Weapon: 227mm
+		LocalOffset: 208,128,48, 208,-128,48
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 1000
+	Cloak@underwater:
+		CloakDelay: 100
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	FirepowerMultiplier@MissileSubBuff:
+		Modifier: 200
+	RangeMultiplier@MissileSubBuff:
+		Modifier: 200
+	RenderSprites:
+		Image: ramsub
+		#PlayerPalette: raplayer
+	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 110
+	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 110
+	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
+
+RALST:
+	Inherits: ^BoatUnit
+	Inherits@2: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Naval Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ranavaltransport
+		Queue: Naval, RANaval
+	Mobile:
+		Speed: 100
+		Locomotor: lcraft
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Rough, Road, Ore, Gems, Beach
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 10
+		PassengerFacing: 0
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+
+####################################################################################################
+#		BUILDINGS
+####################################################################################################
+

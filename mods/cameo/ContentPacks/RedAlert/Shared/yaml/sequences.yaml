@@ -1,0 +1,1724 @@
+redguard:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: japan_imperialscoutsman_redguard.shp
+		Scale: 1.38
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 16
+		Facings: 8
+	prone-stand:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 208
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 208
+		Length: 4
+		Facings: 8
+		Tick: 100
+	liedown:
+		Start: 192
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 240
+		Length: 2
+		Facings: 8
+	prone-shoot:
+		Start: 256
+		Length: 16
+		Facings: 8
+	idle1:
+		Start: 384
+		Length: 14
+		Tick: 120
+	idle2:
+		Start: 399
+		Length: 16
+		Tick: 120
+	idle3:
+		Start: 384
+		Length: 14
+		Tick: 120
+	idle4:
+		Start: 399
+		Length: 16
+		Tick: 120
+	die1:
+		Start: 416
+		Length: 8
+	die2:
+		Start: 424
+		Length: 8
+	die3:
+		Start: 432
+		Length: 8
+	die4:
+		Start: 440
+		Length: 12
+	die5:
+		Start: 452
+		Length: 18
+	die6:
+		Start: 452
+		Length: 18
+	die7:
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: che1icon.shp
+
+rae1:
+	Inherits: e1
+	icon:
+		Filename: ra1_soviets_rifleinfantry_icon.png
+
+rae3:
+	Inherits: e3
+	icon:
+		Filename: ra1_soviets_rocketsoldier_icon.png
+
+rae6:
+	Inherits: e6
+	icon:
+		Filename: e6icon.png
+
+gnrl:
+	Defaults:
+		Scale: 0.96
+		Filename: gnrl.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 56
+		Length: 4
+		Facings: 8
+	prone-stand:
+		Start: 104
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 104
+		Length: 4
+		Facings: 8
+		Tick: 100
+	standup:
+		Start: 136
+		Length: 2
+		Facings: 8
+	prone-shoot:
+		Start: 152
+		Length: 4
+		Facings: 8
+	idle1:
+		Start: 184
+		Length: 26
+		Tick: 120
+	die:
+		Start: 210
+		Length: 8
+	die1:
+		Start: 210
+		Length: 8
+	die2:
+		Start: 218
+		Length: 8
+	die3:
+		Start: 226
+		Length: 8
+	die4:
+		Start: 234
+		Length: 12
+	die5:
+		Start: 246
+		Length: 18
+	die6:
+		Filename: electro.shp
+		Length: *
+	die7:
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+
+ra_cons_molo:
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Scale: 0.59
+		Filename: ra_cons_molo.png
+		#Scale: 0.75
+	run:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: ra_conscript_molotov_icon.png
+
+einstein:
+	Defaults:
+		Scale: 0.65
+		Filename: einstein.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	panic-stand:
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	run:
+		Start: 56
+		Length: 6
+		Facings: 8
+		Tick: 80
+	die1:
+		Start: 120
+		Length: 8
+	die2:
+		Start: 128
+		Length: 8
+	die3:
+		Start: 136
+		Length: 12
+	die4:
+		Start: 136
+		Length: 12
+	die5:
+		Start: 148
+		Length: 17
+	die6:
+		Filename: electro.shp
+		Length: *
+	die7:
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+
+delphi:
+	Defaults:
+		Filename: delphi.shp
+	stand:
+		Facings: 8
+	panic-stand:
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	run:
+		Start: 56
+		Length: 6
+		Facings: 8
+		Tick: 80
+	die1:
+		Start: 329
+		Length: 8
+	die2:
+		Start: 337
+		Length: 8
+	die3:
+		Start: 345
+		Length: 12
+	die4:
+		Start: 345
+		Length: 12
+	die5:
+		Start: 357
+		Length: 17
+	die6:
+		Start: 357
+		Length: 17
+	die7:
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+
+rachan:
+	Defaults:
+		Filename: rachan.shp
+		Scale: 2
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	panic-stand:
+		Facings: 8
+	panic-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	run:
+		Start: 56
+		Length: 6
+		Facings: 8
+		Tick: 80
+	die1:
+		Start: 120
+		Length: 8
+	die2:
+		Start: 128
+		Length: 8
+	die3:
+		Start: 136
+		Length: 12
+	die4:
+		Start: 136
+		Length: 12
+	die5:
+		Start: 148
+		Length: 17
+	die6:
+		Filename: electro.shp
+		Length: *
+	die7:
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+
+ramcvhusk:
+	Defaults:
+		Filename: ramcvhusk.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -1023
+
+raharvempty:
+	Defaults:
+		Filename: raharvempty.shp
+	Inherits: raharv
+
+raharvhalf:
+	Defaults:
+		Filename: raharvhalf.shp
+	Inherits: raharv
+
+hhusk:
+	Defaults:
+		Filename: hhusk.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -1023
+
+hhusk2:
+	Defaults:
+		Filename: hhusk2.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -1023
+
+1tnk.destroyed:
+	Defaults:
+		Filename: ra1_allies_alliedlighttank.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+
+2tnk.destroyed:
+	Defaults:
+		Filename: ra1_allies_alliedmediumtank.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+
+3tnk.destroyed:
+	Defaults:
+		Filename: ra1_soviets_heavytank.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+
+4tnk.destroyed:
+	Defaults:
+		Filename: 4tnk.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+		ZOffset: -512
+
+rajeep2:
+	Defaults:
+		Filename: RocketRanger.png
+	idle:
+		Filename: ra1_allies_ranger.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Filename: RangerLauncherFx.png
+		Scale: 1
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ra1_allies_ranger_icon.shp
+
+raapc:
+	Defaults:
+		Filename: td_gdi_apc.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Filename: apctur.shp
+		Scale: 2.0
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: ra1_soviets_btr80_apcmuz.shp
+		Scale: 2.0
+		Length: 3
+		Stride: 6
+		Facings: 8
+	close:
+		Start: 32
+		Length: 3
+	unload:
+		Start: 32
+	icon:
+		Filename: raapcicon.png
+
+jamfield:
+	idle:
+		Filename: jamfield.shp
+		Length: *
+		BlendMode: Alpha
+		ZOffset: 1023
+		Alpha: 0.15
+		Scale: 2
+
+vortexanim:
+	Defaults:
+		Filename: chronovortex.shp
+		Length: *
+		Tick: 40
+		BlendMode: Subtractive
+		IgnoreWorldTint: true
+		#BlendMode: Alpha
+		ZOffset: 2048
+		Alpha: 0.40
+	idle:
+		Scale: 2.25
+	spawn:
+		Tick: 80
+		Alpha: 0.20
+	die:
+		Tick: 80
+		Alpha: 0.20
+	fade:
+		Tick: 60
+		Alpha: 0.30
+		Scale: 1.50
+	dead:
+		Alpha: 0
+	icon:
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
+
+fb1:
+	Defaults:
+		Filename: fb1.shp
+	idle:
+		Length: *
+		ZOffset: 1023
+
+modflak88:
+	idle:
+		Filename: ra1_allies_mobilegapgenerator.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Filename: ra1_soviets_flaktruck.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: modflak88icon.shp
+
+mod4tnkgirl:
+	Defaults:
+		Filename: mod4tnkgirl.shp
+		Scale: 2
+	idle:
+		Facings: -32
+	turret:
+		Filename: 4tnk.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	icon:
+		Filename: ra1_soviets_mammothtank_icon.shp
+
+rafact:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: ra1_allies_alliedconstructionyard_rafact.shp
+	idle:
+	make:
+		Filename: ra1_allies_alliedconstructionyard_rafactmake.shp
+		Length: *
+	build:
+		Start: 1
+		Length: 25
+	damaged-idle:
+		Start: 26
+	damaged-build:
+		Start: 27
+		Length: 25
+	dead:
+		Filename: ra1_allies_alliedconstructionyard_rafactdead.shp
+		Tick: 800
+	bib:
+	icon:
+		Filename: ra1_allies_alliedconstructionyard_icon.png
+
+rafactj:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: japan_japaneseconstructionyard_rafactj.shp
+	idle:
+		Start: 32
+		Length: 15
+	make:
+		Filename: japan_japaneseconstructionyard_rafactj.shp
+		Length: 32
+	build:
+		Start: 64
+		Length: 15
+	damaged-idle:
+		Start: 48
+		Length: 15
+	damaged-build:
+		Start: 80
+		Length: 15
+	dead:
+		Start: 48
+		Tick: 800
+	bib:
+	icon:
+		Filename: japan_japaneseconstructionyard_icon.shp
+
+rafactcolor:
+	Defaults:
+		Filename: rafactcolor.shp
+	idle:
+	icon:
+		Filename: ra1_allies_alliedconstructionyard_icon.png
+
+rasilo:
+	Inherits: ^WithBuildingBibSilo
+	Defaults:
+		Filename: rasilo.shp
+	idle:
+		Offset: 0,-2
+	damaged-idle:
+		Start: 9
+		Offset: 0,-2
+	stages:
+		Length: 9
+		Offset: 0,-2
+	damaged-stages:
+		Start: 9
+		Length: 9
+		Offset: 0,-2
+	make:
+		Filename: rasilomake.shp
+		Length: *
+		Offset: 0,-2
+	dead:
+	bib:
+	icon:
+		Filename: rasiloicon.shp
+
+powr:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: powr.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: powrmake.shp
+		Length: *
+	dead:
+		Filename: powrdead.shp
+		Tick: 800
+	bib:
+	icon:
+		Filename: powricon.png
+
+apwr:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: apwr.shp
+	idle:
+		Offset: 0,-20
+	damaged-idle:
+		Start: 1
+		Offset: 0,-20
+	make:
+		Filename: apwrmake.shp
+		Length: *
+		Offset: 0,-20
+	dead:
+		Filename: apwrdead.shp
+		Tick: 800
+		Offset: 0,-20
+	bib:
+		Offset: 0,-10
+	icon:
+		Filename: apwricon.png
+
+kenn:
+	Inherits: ^WithBuildingBibSilo
+	Defaults:
+		Filename: kenn.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: kennmake.shp
+		Length: *
+	dead:
+	bib:
+	icon:
+		Filename: kennicon.png
+
+fenc:
+	Defaults:
+		Filename: fenc.shp
+		Scale: 2
+	idle:
+		Length: 16
+	icon:
+		Filename: fencicon.shp
+
+fcom:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: fcom.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Length: *
+	bib:
+
+fcom.husk:
+	Inherits: fcom
+	Defaults:
+		Filename: fcom.shp
+	idle:
+		Start: 1
+
+barl:
+	idle:
+		Filename: barl.shp
+
+brl3:
+	idle:
+		Filename: brl3.shp
+
+ramiss:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: ramiss.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 2
+		Tick: 800
+	make:
+		Filename: missmake.shp
+		Length: *
+	bib:
+
+rabio:
+	Defaults:
+		Filename: rabio.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 2
+		Tick: 800
+	make:
+		Filename: biomake.shp
+		Length: *
+
+oilb:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: oilb.shp
+		Offset: 0,-6
+	idle:
+	dead:
+	damaged-idle:
+		Start: 1
+		Length: *
+	make:
+	bib:
+		Offset: 0,0
+	icon:
+		Filename: oilbicon.shp
+
+oilb2:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: oilb2.png
+		Offset: 0,0
+	idle:
+		Length: *
+		Tick: 100
+	dead:
+		Filename: oilb2_broken.png
+		Length: 1
+		Tick: 100
+	damaged-idle:
+		Filename: oilb2_broken.png
+		Length: *
+		Tick: 100
+	make:
+	bib:
+		Offset: 0,0
+	icon:
+		Filename: oilb2_icon.png
+
+oilb.husk:
+	Inherits: oilb
+	Defaults:
+		Filename: oilb.shp
+	idle:
+		Start: 1
+
+####################################################################################################
+#		RA
+####################################################################################################
+
+u2:
+	Defaults:
+		Filename: ra1_soviets_promotion_unlocksupersonicnuclearbomber_u2.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	icon:
+		Filename: ra1_soviets_promotion_superspyplane_icon.png
+
+badr:
+	Defaults:
+		Filename: ra1_soviets_promotion_parabombslevel3_badr.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	icon:
+		Filename: ra1_soviets_promotion_parabombslevel3_icon.png
+
+qnest:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: qnest.shp
+	idle:
+	make:
+		Filename: qnestbld.shp
+		Length: *
+	build:
+	damaged-idle:
+	damaged-build:
+	dead:
+	bib:
+		Offset: 0,24
+	icon:
+		Filename: qanticon.shp
+
+breednest:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: breednest.shp
+	idle:
+	make:
+		Filename: tinynestmake.shp
+		Length: *
+	build:
+	damaged-idle:
+	damaged-build:
+	dead:
+	bib:
+		Offset: 0,24
+	icon:
+		Filename: breednesticon.shp
+
+tinynest:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: tinynest.shp
+	idle:
+	make:
+		Filename: tinynestmake.shp
+		Length: *
+	build:
+	damaged-idle:
+	damaged-build:
+	dead:
+	bib:
+		Offset: 0,24
+	icon:
+		Filename: tinynesticon.shp
+
+tinynest2:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: tinynest2.shp
+	idle:
+	make:
+		Filename: tinynestmake.shp
+		Length: *
+	build:
+	damaged-idle:
+	damaged-build:
+	dead:
+	bib:
+		Offset: 0,24
+	icon:
+		Filename: tinynest2icon.shp
+
+tinyant:
+	Defaults:
+		Filename: tinyant.shp
+	idle:
+		Filename: invisibleitem.shp
+		Facings: 1
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	dock:
+		Filename: invisibleitem.shp
+		Start: 0
+		Length: 1
+	dock-loop:
+		Filename: invisibleitem.shp
+		Start: 0
+		Length: 1
+	icon:
+		Filename: tinyanticon.shp
+
+modant2:
+	Defaults:
+		Filename: ant1.shp
+	idle:
+		Facings: 8
+		Scale: 0.80
+	stand:
+		Facings: 8
+		Scale: 0.80
+	stand2:
+		Start: 8
+		Length: 8
+		Scale: 0.80
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 0.80
+	die:
+		Start: 72
+		Length: 8
+		Tick: 300
+		Scale: 0.80
+	die-crushed:
+		Start: 72
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+		Scale: 0.80
+	icon:
+		Filename: modant2icon.shp
+
+modant3:
+	Defaults:
+		Filename: ant1.shp
+	idle:
+		Facings: 8
+		Scale: 1.18
+	stand:
+		Facings: 8
+		Scale: 1.18
+	stand2:
+		Start: 8
+		Length: 8
+		Scale: 1.18
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 1.18
+	die:
+		Start: 72
+		Length: 8
+		Tick: 300
+		Scale: 1.18
+	die-crushed:
+		Start: 72
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+		Scale: 1.18
+	icon:
+		Filename: modant3icon.shp
+
+qant:
+	Defaults:
+		Filename: qant.shp
+	idle:
+		Facings: 8
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	die:
+		Filename: ant1.shp
+		Start: 72
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Filename: ant1.shp
+		Start: 72
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	icon:
+		Filename: qanticon.shp
+
+fant:
+	Defaults:
+		Filename: fant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	icon:
+		Filename: fanticon.shp
+
+hant:
+	Defaults:
+		Filename: hant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	icon:
+		Filename: hanticon.shp
+
+sant:
+	Defaults:
+		Filename: sant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	icon:
+		Filename: santicon.shp
+
+mant:
+	Defaults:
+		Filename: ant1.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	turret:
+		Filename: ra1_allies_promotion_unlockphasetransport_sapc.shp
+		Start: 38
+		Facings: 32
+		InterpolatedFacings: 64
+	icon:
+		Filename: manticon.shp
+
+chant:
+	Defaults:
+		Filename: fant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+		Scale: 1.15
+	stand2:
+		Start: 8
+		Length: 8
+		Scale: 1.15
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 1.15
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+		Scale: 1.15
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+		Scale: 1.15
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+		Scale: 1.15
+	turret:
+		Filename: chemtnk.shp
+		Facings: 32
+		InterpolatedFacings: 64
+		Scale: 1.15
+	icon:
+		Filename: anticon.shp
+
+tant:
+	Defaults:
+		Filename: ant1.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	turret:
+		Filename: ra1_allies_alliedmediumtank.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	icon:
+		Filename: tanticon.shp
+	muzzle:
+		Length: 5
+		Filename: gunfire2.shp
+
+2tant:
+	Defaults:
+		Filename: ant1.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	turret:
+		Filename: ra1_soviets_heavytank.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	icon:
+		Filename: 2tanticon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+htant:
+	Defaults:
+		Filename: sant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+		Scale: 1.15
+	stand2:
+		Start: 8
+		Length: 8
+		Scale: 1.15
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Scale: 1.15
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+		Scale: 1.15
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+		Scale: 1.15
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+		Scale: 1.15
+	turret:
+		Filename: 4tnk.shp
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+		Scale: 1.15
+	icon:
+		Filename: htanticon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+		Scale: 1.15
+
+testant:
+	Defaults:
+		Filename: hant.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Length: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+	bite:
+		Start: 72
+		Length: 4
+		Facings: 8
+	die:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 300
+	die-crushed:
+		Filename: ant1.shp
+		Start: 104
+		Length: 8
+		Tick: 400
+		ZOffset: -511
+	spinner:
+		Filename: ra1_soviets_teslatank.shp
+		Start: 32
+		Length: 32
+	icon:
+		Filename: anticon.shp
+	muzzle:
+		Length: 5
+		Filename: gunfire2.shp
+
+crab:
+	Defaults:
+		Filename: crab.shp
+	Inherits: ^InfantryOverlays
+	stand:
+		Facings: -8
+		ShadowStart: 156
+		Scale: 0.70
+	die:
+		Start: 150
+		Length: 6
+		ShadowStart: 306
+		Scale: 0.70
+	run:
+		Start: 8
+		Length: 8
+		Facings: -8
+		ShadowStart: 164
+		Scale: 0.70
+	idle1:
+		Start: 73
+		Length: 12
+		ShadowStart: 229
+		Scale: 0.70
+	idle2:
+		Start: 85
+		Length: 18
+		ShadowStart: 241
+		Scale: 0.70
+	bite:
+		Start: 103
+		Length: 5
+		Facings: -8
+		ShadowStart: 259
+		Scale: 0.70
+	die-crushed:
+		Start: 143
+		Length: 7
+		ZOffset: -511
+		Scale: 0.70
+	icon:
+		Filename: crabicon.shp
+
+flyant:
+	Defaults:
+		Filename: flyant.shp
+	idle:
+		Facings: 8
+		Length: 2
+		Scale: 0.80
+	move:
+		Facings: 8
+		Length: 2
+		Scale: 0.80
+	icon:
+		Filename: flyanticon.shp
+
+evo:
+	Defaults:
+		Filename: evo.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 1
+	make:
+		Filename: tinynestmake.shp
+		Length: *
+	active:
+		Filename: evoglow.shp
+		Length: 20
+	damaged-active:
+		Filename: evoglow.shp
+		Start: 20
+		Length: 20
+	icon:
+		Filename: evoicon.shp
+
+tevo:
+	Defaults:
+		Filename: tevo.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 1
+	make:
+		Filename: tinynestmake.shp
+		Length: *
+	active:
+	damaged-active:
+		Filename: evoglow.shp
+		Start: 20
+		Length: 20
+	icon:
+		Filename: evoicon.shp
+
+ra1syrd:
+	Defaults:
+		Filename: syrd.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: syrdmake.shp
+		Length: *
+	dead:
+		Start: 1
+	icon:
+		Filename: syrdicon.png
+
+ra1jsyrd:
+	Defaults:
+		Filename: JapNavYardSpritesheet.png
+		Scale: 1.25
+	idle:
+		Start: 10
+	damaged-idle:
+		Start: 11
+	make:
+		Length: 10
+	dead:
+		Start: 11
+	icon:
+		Filename: JapNavYardIcon.png
+
+raspen:
+	Defaults:
+		Filename: raspen.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: raspenmake.shp
+		Length: *
+	dead:
+		Start: 1
+	icon:
+		Filename: raspenicon.png
+
+rass:
+	Defaults:
+		Filename: rass.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+		Offset: 0,-10
+	icon:
+		Filename: rassicon.png
+
+ramsub:
+	Defaults:
+		Filename: ramsub.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: ramsubicon.shp
+
+pt:
+	Defaults:
+		Filename: pt.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	turret:
+		Filename: mgun.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	icon:
+		Filename: pticon.png
+
+radd:
+	Defaults:
+		Filename: dd.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	turret:
+		Filename: rassam.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: ddicon.png
+
+raca:
+	Defaults:
+		Filename: ca.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	turret:
+		Filename: raturr.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: caicon.png
+
+japanspeedboat:
+	Defaults:
+		Filename: JapSpeedboatSpritesheet.png
+	idle:
+		Facings: 64
+	turret:
+		Filename: JapSpeedboatGunSpritesheet.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: JapSpeedboatIcon.png
+
+japancarrier:
+	Defaults:
+		Filename: japancarrier.shp
+	idle:
+		Facings: 64
+		Offset: 0,16
+	icon:
+		Filename: japancarriericon.png
+
+yamatobattleship:
+	Defaults:
+		Filename: YamatoSpritesheet.png
+	idle:
+		Facings: 64
+		Scale: 1.5
+	turret:
+		Filename: YamatoNavalGunSpritesheet.png
+		Facings: 64
+	turret2:
+		Filename: YamatoAAGunSpritesheet.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: YamatoBattleshipIcon.png
+
+alliedcybertank:
+	Defaults:
+		Scale: 0.60
+	idle:
+		Scale: 1
+		Filename: CyberTankChassis.png
+		Facings: 64
+		#Offset: 0,0,-2048
+	turret:
+		Scale: 1
+		Filename: CyberTankTurret.png
+		Facings: 64
+		#Offset: 0,0,-4098
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		#Offset: 0,0,-4098
+		Scale: 1
+	icon:
+		Filename: CyberTankIcon.png
+
+ralst:
+	idle:
+		Filename: ralst.shp
+		#Scale: 1.75
+	open:
+		Filename: ralst.shp
+		Start: 1
+		Length: 4
+		Tick: 150
+	close:
+		Filename: ralst.shp
+		Frames: 4, 3, 2, 1
+		Length: 4
+		Tick: 150
+	unload:
+		Filename: ralst.shp
+		Start: 4
+		ZOffset: -511
+	icon:
+		Filename: ralsticon.png
+
+jsuperbomber:
+	idle:
+		Filename: jsuperbomber.shp
+		Scale: 2
+		Facings: 64
+	icon:
+		Filename: japan_japanesebomber_icon.shp
+
+modkamimini:
+	Defaults:
+		Scale: 0.5
+		Filename: japan_zerofighter.shp
+	idle:
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: japan_zerofighter_icon.shp
+
+bushido_icon:
+	Defaults:
+		Filename: bushido_icon.png
+		#Offset: 0, 4
+	idle:
+		Length: 1
+
+gpssatellitesupporticon:
+	icon:
+		Filename: ra1_allies_upgrade_gpssatellitesupport_icon.shp
+
+conscriptionicon:
+	icon:
+		Filename: conscriptionicon.png
+
+nuclearenginesicon:
+	icon:
+		Filename: nuclearenginesicon.png
+
+rocketenhancementsicon:
+	icon:
+		Filename: rocketenhancementsicon.png
+
+advancedthermobaricsicon:
+	icon:
+		Filename: advancedthermobaricsicon.png
+
+experimentalteslaweaponsicon:
+	icon:
+		Filename: experimentalteslaweaponsicon.png
+
+sovietautoloadersicon:
+	icon:
+		Filename: sovietautoloadersicon.png
+
+staliniumsteelicon:
+	icon:
+		Filename: staliniumsteelicon.png
+
+nanotechrepairsicon:
+	icon:
+		Filename: japan_upgrade_nanotechrepairs_icon.png
+
+#############################
+#	Doctrines and Upgrades	#
+#############################
+

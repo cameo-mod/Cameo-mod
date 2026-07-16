@@ -1,0 +1,77 @@
+yuri_boomersubmarine:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 3350
+	Tooltip:
+		Name: actor_bsub.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~yuri_psychicsensor
+		Queue: Naval, RANaval
+		Description: actor_bsub.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 10
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Name: secondary
+		Weapon: YRBoomerTorpedo
+		LocalOffset: 200,-100,0, 200,100,0
+		FireDelay: 2
+	Armament@LAUNCH:
+		Weapon: BoomerLaunch
+		LocalOffset: 208,-24,48, 208,24,48
+		Voice: AttackLand
+		Damage: 800
+		ReloadDelay: 125
+	MissileSpawnerMasterCA:
+		#ArmamentNames: primary
+		Actors: yrbsubmisl, yrbsubmisl
+		RespawnTicks: 125
+		SpawnAllAtOnce: true
+		SpawnOffset: 100,-100,100, 100,100,100
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	DeliversCash:
+		Payload: 475
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	DetectCloaked:
+		DetectionTypes: Underwater
+		Range: 5000
+	Voiced:
+		VoiceSet: BoomerVoice
+	RenderSprites:
+		PlayerPalette: playerra2

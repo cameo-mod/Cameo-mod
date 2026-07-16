@@ -226,14 +226,14 @@ def main() -> int:
     text = content.read_text(encoding="utf-8-sig") if content.exists() else ""
     if not content.exists():
         text = "Rules:\n" + "".join(
-            f"\tContentPacks|{args.theme}/{args.faction}/rules/{f}\n"
+            f"\tContentPacks|{args.theme}/{args.faction}/yaml/{f}\n"
             for f in sorted(cats))
     if wmoved and "yaml/weapons.yaml" not in text:
         text = text.rstrip("\n") + ("\n\nWeapons:\n"
-            f"\tContentPacks|{args.theme}/{args.faction}/weapons/weapons.yaml\n")
+            f"\tContentPacks|{args.theme}/{args.faction}/yaml/weapons.yaml\n")
     if smoved and "yaml/sequences.yaml" not in text:
         text = text.rstrip("\n") + ("\n\nSequences:\n"
-            f"\tContentPacks|{args.theme}/{args.faction}/sequences/sequences.yaml\n")
+            f"\tContentPacks|{args.theme}/{args.faction}/yaml/sequences.yaml\n")
     content.write_text(text, encoding="utf-8", newline="\n")
 
     mod_yaml = MOD / "mod.yaml"

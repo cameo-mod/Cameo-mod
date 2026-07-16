@@ -1,0 +1,51 @@
+ra2_allies_aegiscruiser:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor_aegis.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2_allies_airforcecommandhq
+		Queue: Naval, RANaval
+		Description: actor_aegis.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 90
+		TurnSpeed: 32
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Medium
+	Armament@AA:
+		Weapon: RA2Medusa
+		LocalOffset: 0,384,384, 0,0,384, 0,-384,384
+		LocalYaw: -75, 0, 75
+		MuzzleSequence: muzzle
+	Armament@AG:
+		Weapon: RA2MedusaAG
+		LocalOffset: 0,384,384, 0,0,384, 0,-384,384
+		LocalYaw: -75, 0, 75
+		MuzzleSequence: muzzle
+		RequiresCondition: upra2aegismissiles
+	GrantConditionOnPrerequisite@Upgrade:
+		Condition: upra2aegismissiles
+		Prerequisites: upra2aegismissiles
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: AegisVoice

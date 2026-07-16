@@ -1,4 +1,4 @@
-Metadata:
+﻿Metadata:
 	Title: mod_title
 	Version: {DEV_VERSION}
 	Website: https://www.moddb.com/mods/cameo
@@ -112,7 +112,7 @@ FileSystem: DefaultFileSystem
 MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
-# Faction content packs — the Include order below defines the lobby faction
+# Faction content packs Ã¢â‚¬â€ the Include order below defines the lobby faction
 # selector order (the lobby groups factions by Side and lists them in load
 # order). Unmigrated themes are loaded via include-only wrapper packs so every
 # faction is ordered from this one place; see ContentPacks/<Theme>/content.yaml.
@@ -122,7 +122,7 @@ Include: ContentPacks/Core/content.yaml
 Include: ContentPacks/TiberianDawn/Shared/content.yaml
 Include: ContentPacks/TiberianDawn/GDI/content.yaml
 Include: ContentPacks/TiberianDawn/Nod/content.yaml
-Include: ContentPacks/RedAlert/content.yaml
+Include: ContentPacks/RedAlert/Shared/content.yaml
 Include: ContentPacks/RedAlert/Japan/content.yaml
 Include: ContentPacks/RedAlert/Soviets/content.yaml
 Include: ContentPacks/RedAlert/Allies/content.yaml
@@ -131,7 +131,10 @@ Include: ContentPacks/TiberianSun/CABAL/content.yaml
 Include: ContentPacks/TiberianSun/Nod/content.yaml
 Include: ContentPacks/TiberianSun/GDI/content.yaml
 Include: ContentPacks/TiberianSun/Forgotten/content.yaml
-Include: ContentPacks/RedAlert2/content.yaml
+Include: ContentPacks/RedAlert2/Shared/content.yaml
+Include: ContentPacks/RedAlert2/Allies/content.yaml
+Include: ContentPacks/RedAlert2/Soviets/content.yaml
+Include: ContentPacks/RedAlert2/Yuri/content.yaml
 Include: ContentPacks/RedAlert2Mod/Shared/content.yaml
 Include: ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml
 Include: ContentPacks/RedAlert2Mod/Consortium/content.yaml
@@ -220,8 +223,8 @@ Sequences:
 	cameo|sequences/campaign.yaml
 	# cameo|sequences/test.yaml
 	cameo|sequences/tiberiandawn.yaml
-	cameo|sequences/redalert.yaml
-	cameo|sequences/redalert2.yaml
+	# cameo|sequences/redalert.yaml  # migrated to ContentPacks/RedAlert/Shared
+	# cameo|sequences/redalert2.yaml  # migrated to ContentPacks/RedAlert2/Shared
 	cameo|sequences/redalert2mod.yaml
 	cameo|sequences/d2k.yaml
 	cameo|sequences/starcraft.yaml
@@ -282,8 +285,8 @@ Weapons:
 	cameo|weapons/weapons.yaml
 	# cameo|weapons/monsters.yaml
 	cameo|weapons/tiberiandawn.yaml
-	cameo|weapons/redalert.yaml
-	cameo|weapons/redalert2.yaml
+	# cameo|weapons/redalert.yaml  # migrated to ContentPacks/RedAlert/Shared
+	# cameo|weapons/redalert2.yaml  # migrated to ContentPacks/RedAlert2/Shared
 	cameo|weapons/redalert2mod.yaml
 	cameo|weapons/d2k.yaml
 	cameo|weapons/starcraft.yaml

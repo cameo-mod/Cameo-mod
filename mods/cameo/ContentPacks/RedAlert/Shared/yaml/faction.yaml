@@ -1,0 +1,92 @@
+World:
+	FactionCA@ra1_allies:
+		Name: Allies RA1 #faction_ra_allies.name
+		InternalName: ra1_allies
+		Game: Red Alert
+		Side: Red Alert
+		Description: faction_ra_allies.description
+	FactionCA@ra1_soviets:
+		Name: Soviets RA1 #faction_ra_soviets.name
+		InternalName: ra1_soviets
+		Game: Red Alert
+		Side: Red Alert
+		Description: faction_ra_soviets.description
+	FactionCA@japan:
+		Name: Japan RA1 #faction_ra_japan.name
+		InternalName: japan
+		Side: Red Alert
+		Game: Red Alert
+		Description: faction_ra_japan.description
+	FactionCA@Randomra:
+		Name: Random RA1 #faction_ra_random.name
+		InternalName: Randomra
+		RandomFactionMembers: ra1_allies, ra1_soviets, japan
+		Game: Red Alert
+		Side: Random
+		Description: faction_ra_random.description
+
+	####################################################################################################
+	#		RA
+	####################################################################################################
+
+	StartingUnits@mcvonlyraallies:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra1_allies
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
+	StartingUnits@defaultallies:
+		Class: light
+		ClassName: Light Support
+		Factions: ra1_allies
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank
+	StartingUnits@heavyallies:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra1_allies
+		BaseActor: ra1_allies_alliedmobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank
+	StartingUnits@mcvonlyrasoviet:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra1_soviets
+		BaseActor: ra1_soviets_mobileconstructionvehicle
+	StartingUnits@defaultsoviet:
+		Class: light
+		ClassName: Light Support
+		Factions: ra1_soviets
+		BaseActor: ra1_soviets_mobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ra1_soviets_flaktruck
+	StartingUnits@heavysoviet:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra1_soviets
+		BaseActor: ra1_soviets_mobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ra1_soviets_flaktruck,ra1_soviets_heavytank,ra1_soviets_heavytank
+
+	####################################################################################################
+	#		Modded RA
+	####################################################################################################
+
+	StartingUnits@mcvonlyrajapan:
+		Class: none
+		ClassName: MCV Only
+		Factions: japan
+		BaseActor: japan_japanesemobileconstructionvehicle
+	StartingUnits@defaultjapan:
+		Class: light
+		ClassName: Light Support
+		Factions: japan
+		BaseActor: japan_japanesemobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank
+	StartingUnits@heavyjapan:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: japan
+		BaseActor: japan_japanesemobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank,japan_grenadebuggy,japan_grenadebuggy,japan_igomediumtank,japan_hovercrafttransport
+
+####################################################################################################
+#		Experience
+####################################################################################################
+
