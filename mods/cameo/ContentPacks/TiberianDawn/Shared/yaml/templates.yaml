@@ -231,8 +231,6 @@
 		Type: Footprint
 		Weapon: TDBuildingExplode
 		EmptyWeapon: TDBuildingExplode
-	WithDeathAnimation:
-		DeathSequencePalette: player_rgba
 
 ^TDDefense:
 	Inherits: ^Defense
@@ -245,8 +243,6 @@
 		Type: Footprint
 		Weapon: TDBuildingExplode
 		EmptyWeapon: TDBuildingExplode
-	WithDeathAnimation:
-		DeathSequencePalette: player_rgba
 
 ^FACT:
 	Inherits: ^TDBuilding
