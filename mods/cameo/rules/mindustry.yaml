@@ -194,7 +194,7 @@ mindclass_turret_2:
 		Prerequisites: mindclass_drill1
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin td_nod_gunturret defense.\n  Uses stone munition
+		Description: Twin gun defense.\n  Uses stone munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -261,7 +261,7 @@ mindclass_turret_3:
 		Prerequisites: mindclass_drill2
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Basic cheap defense.\n  Uses ra1_soviet_ironcurtain munition
+		Description: Basic cheap defense.\n  Uses iron munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -328,7 +328,7 @@ mindclass_turret_4:
 		Prerequisites: mindclass_drill2
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin td_nod_gunturret defense.\n  Uses ra1_soviet_ironcurtain munition
+		Description: Twin gun defense.\n  Uses iron munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -395,7 +395,7 @@ mindclass_turret_5:
 		Prerequisites: mindclass_drill3, mindclass_furnace
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin td_nod_gunturret defense.\n  Uses coal munition
+		Description: Twin gun defense.\n  Uses coal munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -459,7 +459,7 @@ mindclass_turret_6:
 		Prerequisites: mindclass_furnace
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin td_nod_gunturret defense.\n  Uses steel munition
+		Description: Twin gun defense.\n  Uses steel munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -705,12 +705,12 @@ mindclass_drill2:
 	Valued:
 		Cost: 400
 	Tooltip:
-		Name: ra1_soviet_ironcurtain Drill
+		Name: Iron Drill
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: mindclass_drill1
 		Queue: Building.MindustryClassic, RABuilding.MindustryClassic
-		Description: Produces Resources and ra1_soviet_ironcurtain
+		Description: Produces Resources and Iron
 	Building:
 		Footprint: x
 		Dimensions: 1,1
@@ -879,7 +879,7 @@ mindclass_furnace:
 		BuildPaletteOrder: 10
 		Prerequisites: mindclass_drill2
 		Queue: Building.MindustryClassic, RABuilding.MindustryClassic
-		Description: Produces Resources and Steel .\n Requires Coal and ra1_soviet_ironcurtain connection to work
+		Description: Produces Resources and Steel .\n Requires Coal and Iron connection to work
 	Building:
 		Footprint: x
 		Dimensions: 1,1

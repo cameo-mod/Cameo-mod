@@ -412,7 +412,7 @@ EXCITER:
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 240
 		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
-		Description: A Bio ra1_allies_mechanic unit that\n electrifies its victims with a Shock Shell\nStrong vs Infantry, Buildings\nWeak vs Vehicles
+		Description: A Bio Mech unit that\n electrifies its victims with a Shock Shell\nStrong vs Infantry, Buildings\nWeak vs Vehicles
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -691,7 +691,7 @@ MOBILETENT:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Mobile ra1_allies_alliedbarracks
+		Name: Mobile Tent
 	Selectable:
 		Priority: 4
 		DecorationBounds: 896, 896

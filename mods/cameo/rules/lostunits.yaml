@@ -1,7 +1,7 @@
 NODWEAP:
 	Inherits: td_gdi_weaponsfactory
 	Tooltip:
-		Name: Black td_nod_handofnod Factory
+		Name: Black Hand Factory
 	-Buildable:
 	Production@NORMAL:
 		Produces: Vehicle
@@ -72,7 +72,7 @@ RNV2RL:
 RNAPC.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: Nod td_gdi_apc (Destroyed)
+		Name: Nod APC (Destroyed)
 	TransformOnCapture:
 		IntoActor: rnapc
 	RenderSprites:
@@ -140,7 +140,7 @@ RNFTNK.Husk:
 NODBIO:
 	Inherits: bio
 	Tooltip:
-		Name: Black td_nod_handofnod Biological Lab
+		Name: Black Hand Biological Lab
 	TooltipDescription@ally:
 		Description: Produces special infantry units.
 	TooltipDescription@other:
@@ -160,7 +160,7 @@ NODBIO:
 NODBIO.Husk:
 	Inherits: bio.Husk
 	Tooltip:
-		Name: Black td_nod_handofnod Biological Lab (Destroyed)
+		Name: Black Hand Biological Lab (Destroyed)
 
 RNE4:
 	Inherits: td_nod_flamethrower
@@ -344,7 +344,7 @@ techgdrone:
 	Valued:
 		Cost: 100
 	Tooltip:
-		Name: GDI Pistol td_gdi_orca
+		Name: GDI Pistol Orca
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -855,7 +855,7 @@ BHMIG:
 	Tooltip:
 		Name: Black Plane
 	Armament@GUNS:
-		Name: td_nod_gunturret
+		Name: gun
 		Weapon: TSTurretLaserFire
 		LocalOffset: 1024,0,-85
 	Armament@BOMBS:
@@ -986,7 +986,7 @@ BHBRIK:
 BHBIKE:
 	Inherits: td_nod_reconbike
 	Tooltip:
-		Name: Black td_nod_reconbike
+		Name: Black Bike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1004,7 +1004,7 @@ BHAPC:
 	Valued:
 		Cost: 550
 	Tooltip:
-		Name: Nod td_gdi_apc
+		Name: Nod APC
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40

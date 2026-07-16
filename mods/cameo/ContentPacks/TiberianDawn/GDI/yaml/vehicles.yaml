@@ -42,7 +42,7 @@ td_gdi_apc:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
 	Tooltip:
-		Name: GDI td_gdi_apc
+		Name: GDI APC
 		OverrideActor: td_gdi_apc
 	Valued:
 		Cost: 1200
@@ -412,7 +412,7 @@ td_gdi_mlrs:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Tooltip:
-		Name: GDI td_gdi_mlrs
+		Name: GDI MLRS
 	Valued:
 		Cost: 1000
 	Buildable:
@@ -546,7 +546,7 @@ td_gdi_assaultapc:
 	Valued:
 		Cost: 4500
 	Tooltip:
-		Name: Assault td_gdi_apc
+		Name: Assault APC
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40

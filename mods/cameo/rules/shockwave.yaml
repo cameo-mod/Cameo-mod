@@ -1385,7 +1385,7 @@ Player:
 		IconPalette: ra2
 		ChargeInterval: 6000
 		Name: Napalm Strike
-		Description: Calls ra1_soviet_ironcurtain Dragon Squadron to bombard an area with Napalm rockets
+		Description: Calls Iron Dragon Squadron to bombard an area with Napalm rockets
 		SelectTargetSpeechNotification: SelectTarget
 		CameraActor: camera
 		CameraRemoveDelay: 150
@@ -2398,7 +2398,7 @@ susaburtonequipment:
 susaarmorburtonequipment:
 	Inherits: susaburtonequipment
 	Buildable:
-		Description: Burton gets HE Ammunition for ra1_allies_alliedsniper Rifle\nBurton's rifle will be able to hit multiple targets
+		Description: Burton gets HE Ammunition for Sniper Rifle\nBurton's rifle will be able to hit multiple targets
 		Prerequisites: ~!susaburtonequipment, susastrategy, ~susa_armor
 
 susawptargetting:
@@ -2662,7 +2662,7 @@ susapath:
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
-		Description: Stealthed ra1_allies_alliedsniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: Stealthed sniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 		Prerequisites: barracks, upusapath, ~anysusa, ~!susa_armor
 	RenderSprites:
 		Image: susapathfinder
@@ -2754,7 +2754,7 @@ susaarmorburton:
 		Name: Armor Burton
 	Buildable:
 		Prerequisites: susastrategy, ~techlevel.high, ~susa_armor, ~!botplayer
-		Description: Elite commando equipped with ra1_allies_alliedsniper Rifle.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
+		Description: Elite commando equipped with Sniper Rifle.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
 	Armament@PRIMARY:
 		Weapon: SUSABurtonSniper
 		Name: primary
@@ -3888,7 +3888,7 @@ susalockdownmlrs:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Lockdown td_gdi_mlrs
+		Name: Lockdown MLRS
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -4909,7 +4909,7 @@ susasheridan:
 	Valued:
 		Cost: 850
 	Tooltip:
-		Name: ra1_allies_sheridanassaulttank
+		Name: Sheridan
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -4996,7 +4996,7 @@ susashilleighat:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Vehicle, RAVehicle
-		Description: Equips ra1_allies_sheridanassaulttank Tanks with Anti-Tank Rockets
+		Description: Equips Sheridan Tanks with Anti-Tank Rockets
 		Prerequisites: ~!susashilleighat, ~susa_air
 		IconPalette: ra2
 	Valued:
@@ -8069,7 +8069,7 @@ sglaquadbike:
 	Valued:
 		Cost: 400 #1100
 	Tooltip:
-		Name: Quad td_nod_reconbike
+		Name: Quad Bike
 	Health:
 		HP: 20000
 	Armor:
@@ -8521,7 +8521,7 @@ sglsa2samsite:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: SA2 td_nod_samsite Site
+		Name: SA2 SAM Site
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: sglbarracks, ~techlevel.low, ~sgla_scrap
@@ -8912,7 +8912,7 @@ sglkrait:
 		BuildPaletteOrder: 30
 		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
-		Description: td_gdi_apc armed with toxin td_nod_gunturret and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: APC armed with toxin gun and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Mobile:
 		Speed: 125
@@ -10982,14 +10982,14 @@ sgltarantula:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Tarantula td_gdi_apc
+		Name: Tarantula APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin
 		Queue: Vehicle, RAVehicle
-		Description: td_gdi_apc armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: APC armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Mobile:
 		Speed: 140
@@ -11326,7 +11326,7 @@ sglassassin:
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
-		Description: ra1_allies_alliedsniper infantry.\nStealthed when not attacking\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: Sniper infantry.\nStealthed when not attacking\n  Strong vs Infantry\n  Weak vs Vehicles
 		Prerequisites: sglpalace, ~sgla_camo
 		IconPalette: ra2
 	RenderSprites:
@@ -11673,7 +11673,7 @@ sglsniperquadcannon:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: ra1_allies_alliedsniper Quad Cannon
+		Name: Sniper Quad Cannon
 	Turreted:
 		TurnSpeed: 36
 		Offset: -370,0,225
@@ -12297,7 +12297,7 @@ eglrajeep:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
 		Prerequisites: sglweap, ~techlevel.low, ~eglatechnic
-		Description: td_gdi_humvee GLA Variant.\nDelete carry because has a grenadier in the back.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Description: Jeep GLA Variant.\nDelete carry because has a grenadier in the back.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -12747,7 +12747,7 @@ upschnapalmstrike:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
-		Description: Calls squadron of ra1_soviet_ironcurtain Dragons to bombard an area with napalm rockets
+		Description: Calls squadron of Iron Dragons to bombard an area with napalm rockets
 		Prerequisites: !upschnapalmstrike, ~techlevel.high, ~schina_regular, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
@@ -13212,7 +13212,7 @@ schempmig:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: EMP ra1_soviet_migattackbomber
+		Name: EMP MiG
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -13288,7 +13288,7 @@ schempmig:
 schempmig.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: EMP ra1_soviet_migattackbomber
+		Name: EMP MiG
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -13415,11 +13415,11 @@ schtiger.husk:
 upschmigspeed:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: ra1_soviet_migattackbomber Afterburner
+		Name: MiG Afterburner
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Aircraft, RAAircraft
-		Description: ra1_soviet_migattackbomber fighters gain more fuel efficient engines gaining up to 25% movement speed
+		Description: MiG fighters gain more fuel efficient engines gaining up to 25% movement speed
 		Prerequisites: ~!upschmigspeed, ~schina_regular
 		IconPalette: ra2
 	Valued:
@@ -14751,7 +14751,7 @@ schberzerkermlrs:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Berzerker td_gdi_mlrs
+		Name: Berzerker MLRS
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -14833,11 +14833,11 @@ schberzerkermlrs:
 upschberzerkermlrs:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Berzerker td_gdi_mlrs
+		Name: Berzerker MLRS
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
-		Description: Allows production of the Berzerker td_gdi_mlrs
+		Description: Allows production of the Berzerker MLRS
 		Prerequisites: !upschberzerkermlrs, ~techlevel.high, ~schina_inf, rank1
 		IconPalette: ra2
 	RenderSprites:
@@ -14857,14 +14857,14 @@ schgattlingapc:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Gattling td_gdi_apc
+		Name: Gattling APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~techlevel.low, ~schina_inf
 		Queue: Vehicle, RAVehicle
-		Description: td_gdi_apc armed with Gattling gun.\nCan be mounted with infantry\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks
+		Description: APC armed with Gattling gun.\nCan be mounted with infantry\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks
 		IconPalette: ra2
 	Mobile:
 		Speed: 124
@@ -15914,7 +15914,7 @@ schnuclearmig:
 	Valued:
 		Cost: 1400
 	Tooltip:
-		Name: Nuclear ra1_soviet_migattackbomber
+		Name: Nuclear MiG
 	RenderSprites:
 		Image: chmig
 	Armament@1:

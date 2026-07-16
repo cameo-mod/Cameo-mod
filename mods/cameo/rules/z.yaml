@@ -213,7 +213,7 @@ zsniper:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: ra1_allies_alliedsniper
+		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 25
 		Prerequisites: barracks
@@ -314,7 +314,7 @@ zjeep:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: td_gdi_humvee
+		Name: Jeep
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -548,7 +548,7 @@ zapc:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: td_gdi_apc
+		Name: APC
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -757,7 +757,7 @@ zguncan:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: td_nod_gunturret Cannon
+		Name: Gun Cannon
 	Buildable:
 		BuildPaletteOrder: 45
 		Prerequisites: barracks
@@ -855,7 +855,7 @@ zmissilecan:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Missile td_nod_gunturret
+		Name: Missile Gun
 	Buildable:
 		BuildPaletteOrder: 45
 		Prerequisites: barracks, zhq
@@ -1244,12 +1244,12 @@ zfort.zgattlingcan:
 		RemoveInstead: true
 zfort.zguncan:
 	Tooltip:
-		Name: td_nod_gunturret Lascannon
+		Name: Gun Lascannon
 	Buildable:
 		Prerequisites: barracks
 		BuildPaletteOrder: 10
 		Queue: Addon.Zfort
-		Description: Adds Gattling td_nod_gunturret to Fort
+		Description: Adds Gattling Gun to Fort
 		BuildDurationModifier: 100
 		BuildDuration: 1000
 	Valued:
@@ -1278,7 +1278,7 @@ zfort.zhotwizer:
 		RemoveInstead: true
 zfort.zmissilecan:
 	Tooltip:
-		Name: Missiles td_nod_gunturret
+		Name: Missiles Gun
 	Buildable:
 		Prerequisites: barracks
 		BuildPaletteOrder: 10
