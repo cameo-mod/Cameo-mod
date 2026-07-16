@@ -1,7 +1,7 @@
 World:
-	FactionCA@gdi:
+	FactionCA@td_gdi:
 		Name: GDI TD #faction_td_gdi.name
-		InternalName: gdi
+		InternalName: td_gdi
 		Game: Tiberian Dawn
 		Side: Tiberian Dawn
 		Description: faction_td_gdi.description
@@ -9,26 +9,26 @@ World:
 	StartingUnits@mcvonlygdi:
 		Class: none
 		ClassName: MCV Only
-		Factions: gdi
+		Factions: td_gdi
 		BaseActor: td_gdi_mobileconstructionvehicle
 
 	StartingUnits@defaultgdia:
 		Class: light
 		ClassName: Light Support
-		Factions: gdi
+		Factions: td_gdi
 		BaseActor: td_gdi_mobileconstructionvehicle
 		SupportActors: td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,e1,e3,e3,td_gdi_humvee
 
 	StartingUnits@heavygdia:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: gdi
+		Factions: td_gdi
 		BaseActor: td_gdi_mobileconstructionvehicle
 		SupportActors: td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,e3,e3,td_gdi_humvee,td_gdi_battletank,td_gdi_battletank
 
 	StartingUnits@heavygdib:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: gdi
+		Factions: td_gdi
 		BaseActor: td_gdi_mobileconstructionvehicle
 		SupportActors: td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,td_gdi_minigunner,td_gdi_grenadier,td_gdi_grenadier,td_gdi_grenadier,e3,e3,td_gdi_apc,td_gdi_battletank

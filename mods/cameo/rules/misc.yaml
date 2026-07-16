@@ -57,26 +57,26 @@ CRATE:
 		Sound: gcraspee.wav
 		Condition: crate-speed
 		MaxExtraCollectors: 10
-	GiveBaseBuilderCrateAction@gdi:
+	GiveBaseBuilderCrateAction@td_gdi:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: td_gdi_mobileconstructionvehicle
-		ValidFactions: gdi
-	GiveBaseBuilderCrateAction@nod:
+		ValidFactions: td_gdi
+	GiveBaseBuilderCrateAction@td_nod:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: td_nod_mobileconstructionvehicle
-		ValidFactions: nod
-	GiveBaseBuilderCrateAction@tsgdi:
+		ValidFactions: td_nod
+	GiveBaseBuilderCrateAction@ts_gdi:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ts_gdi_mobileconstructionvehicle
-		ValidFactions: tsgdi
-	GiveBaseBuilderCrateAction@tsnod:
+		ValidFactions: ts_gdi
+	GiveBaseBuilderCrateAction@ts_nod:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ts_nod_mobileconstructionvehicle
-		ValidFactions: tsnod
+		ValidFactions: ts_nod
 	GiveBaseBuilderCrateAction@forgotten:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -87,31 +87,31 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: cabal_mobileconstructionvehicle
 		ValidFactions: cabal
-	GiveBaseBuilderCrateAction@allies:
+	GiveBaseBuilderCrateAction@ra1_allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra1_allies_alliedmobileconstructionvehicle
-		ValidFactions: allies
-	GiveBaseBuilderCrateAction@soviet:
+		ValidFactions: ra1_allies
+	GiveBaseBuilderCrateAction@ra1_soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra1_soviet_mobileconstructionvehicle
-		ValidFactions: soviets
+		Units: ra1_soviets_mobileconstructionvehicle
+		ValidFactions: ra1_soviets
 	GiveBaseBuilderCrateAction@japan:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: japan_japanesemobileconstructionvehicle
 		ValidFactions: japan
-	GiveBaseBuilderCrateAction@ra2allies:
+	GiveBaseBuilderCrateAction@ra2_allies:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra2_allies_alliedmobileconstructionvehicle
-		ValidFactions: ra2allies
-	GiveBaseBuilderCrateAction@ra2soviets:
+		ValidFactions: ra2_allies
+	GiveBaseBuilderCrateAction@ra2_soviets:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: ra2_soviets_mobileconstructionvehicle
-		ValidFactions: ra2soviets
+		ValidFactions: ra2_soviets
 	GiveBaseBuilderCrateAction@yuri:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -120,18 +120,18 @@ CRATE:
 	GiveBaseBuilderCrateAction@asianalliance:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: asian_alliance_asianmobileconstructionvehicle
+		Units: asianalliance_asianmobileconstructionvehicle
 		ValidFactions: asianalliance
-	GiveBaseBuilderCrateAction@syndicate:
+	GiveBaseBuilderCrateAction@latinsyndicate:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: latinsyndicate_syndicatemobileconstructionvehicle
-		ValidFactions: syndicate
-	GiveBaseBuilderCrateAction@consortium:
+		ValidFactions: latinsyndicate
+	GiveBaseBuilderCrateAction@steelconsortium:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: steelconsortium_consortiummobileconstructionvehicle
-		ValidFactions: consortium
+		ValidFactions: steelconsortium
 	GiveBaseBuilderCrateAction@naxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -172,16 +172,16 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: protoss_mobilenexus
 		ValidFactions: protoss
-	GiveBaseBuilderCrateAction@warcraft_humans:
+	GiveBaseBuilderCrateAction@wc2_humans:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: warcraft_humans_mobileconstructionvehiclehuman
-		ValidFactions: warcraft_humans
-	GiveBaseBuilderCrateAction@warcraft_orcs:
+		Units: wc2_humans_mobileconstructionvehiclehuman
+		ValidFactions: wc2_humans
+	GiveBaseBuilderCrateAction@wc2_orcs:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: warcraft_orcs_mobileconstructionvehicleorc
-		ValidFactions: warcraft_orcs
+		Units: wc2_orcs_mobileconstructionvehicleorc
+		ValidFactions: wc2_orcs
 	GiveBaseBuilderCrateAction@tkm:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000

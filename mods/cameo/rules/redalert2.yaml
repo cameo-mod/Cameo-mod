@@ -1,13 +1,13 @@
 World:
-	FactionCA@ra2allies:
+	FactionCA@ra2_allies:
 		Name: Allies RA2 #faction_ra2_allies.name
-		InternalName: ra2allies
+		InternalName: ra2_allies
 		Game: Red Alert 2
 		Side: Red Alert 2
 		Description: faction_ra2_allies.description
-	FactionCA@ra2soviets:
+	FactionCA@ra2_soviets:
 		Name: Soviets RA2 #faction_ra2_soviets.name
-		InternalName: ra2soviets
+		InternalName: ra2_soviets
 		Game: Red Alert 2
 		Side: Red Alert 2
 		Description: faction_ra2_soviets.description
@@ -20,7 +20,7 @@ World:
 	FactionCA@Randomra2:
 		Name: Random RA2 #faction_ra2_random.name
 		InternalName: Randomra2
-		RandomFactionMembers: ra2allies, ra2soviets, yuri
+		RandomFactionMembers: ra2_allies, ra2_soviets, yuri
 		Game: Red Alert 2
 		Side: Random
 		Description: faction_ra2_random.description
@@ -30,12 +30,12 @@ World:
 	StartingUnits@mcvra2allies:
 		Class: none
 		ClassName: MCV Only
-		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
 	StartingUnits@mcvra2soviets:
 		Class: none
 		ClassName: MCV Only
-		Factions: ra2soviets, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2_soviets, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 	StartingUnits@mcvyuri:
 		Class: none
@@ -45,25 +45,25 @@ World:
 	StartingUnits@defaultra2allies:
 		Class: light
 		ClassName: Light Support
-		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank
 	StartingUnits@heavyra2allies:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_tankdestroyer,ra2_allies_ifv
 	StartingUnits@defaultra2soviets:
 		Class: light
 		ClassName: Light Support
-		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack
 	StartingUnits@heavyra2soviets:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack,ra2_soviets_rhinoheavytank,ra2_soviets_apocalypsetank
 	StartingUnits@defaultyuri:
@@ -82,19 +82,19 @@ World:
 Player:
 	ProvidesPrerequisite@anyallies:
 		Prerequisite: anyallies
-		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 	ProvidesPrerequisite@forcefactionAllies:
 		Prerequisite: CountryChoosedAlliesRA2
-		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 	ProvidesPrerequisite@anysoviets:
 		Prerequisite: anysoviets
-		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 	ProvidesPrerequisite@forcefactionSoviet:
 		Prerequisite: CountryChoosedSovietRA2
-		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 	ProvidesPrerequisite@ra2allies:
 		Prerequisite: ra2allies
-		Factions: ra2allies
+		Factions: ra2_allies
 	ProvidesPrerequisite@RA2French:
 		Prerequisite: RA2French
 		Factions: ra2french
@@ -115,7 +115,7 @@ Player:
 		Factions: ra2doom
 	ProvidesPrerequisite@ra2soviets:
 		Prerequisite: ra2soviets
-		Factions: ra2soviets
+		Factions: ra2_soviets
 	ProvidesPrerequisite@RA2Cuba:
 		Prerequisite: RA2Cuba
 		Factions: ra2cuba, ra2cubaaddon
@@ -661,7 +661,7 @@ ra2_allies_alliedbarracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Tooltip:
 		Name: Allied Barracks
 	ProvidesPrerequisite:
@@ -1666,7 +1666,7 @@ ra2_soviets_barracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Selectable:
 		Bounds: 2048, 2560, 0, -256
 	SelectionDecorations:
@@ -2509,7 +2509,7 @@ yuri_barracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	SelectionDecorations:
 	Tooltip:
 		Name: Yuri Barracks
@@ -3263,7 +3263,7 @@ ra2_allies_attackdog:
 		Cost: 200
 	Tooltip:
 		Name: Attack Dog
-		GenericName: ra1_soviet_attackdog
+		GenericName: ra1_soviets_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -4026,7 +4026,7 @@ ra2_soviets_attackdog:
 		Cost: 200
 	Tooltip:
 		Name: Attack Dog
-		GenericName: ra1_soviet_attackdog
+		GenericName: ra1_soviets_attackdog
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
@@ -4750,7 +4750,7 @@ yuri_brute:
 	Passenger:
 		Weight: 2
 	-TakeCover:
-	Targetable@ra1_soviet_attackdog:
+	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	FirepowerMultiplier@yuri_upgrade_brutestrengthmutations:
 		Modifier: 140
@@ -7132,7 +7132,7 @@ ra2_soviets_terrordrone:
 		EmptyWeapon: RA2UnitExplodeSmall
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@ra1_soviet_attackdog:
+	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	-TemporaryOwnerManager:
 	ActorStatValues:
@@ -12672,11 +12672,11 @@ ra2shkhero:
 # upra2mig:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
-# 		Name: Unlock ra1_soviet_migattackbomber Bomber
+# 		Name: Unlock ra1_soviets_migattackbomber Bomber
 # 	Buildable:
 # 		BuildPaletteOrder: 63
 # 		Queue: Promotions
-# 		Description: Allows construction of the ra1_soviet_migattackbomber Bomber.
+# 		Description: Allows construction of the ra1_soviets_migattackbomber Bomber.
 # 		Prerequisites: ~ra2_soviets_constructionyard, !upra2mig, rank1
 # 	RenderSprites:
 # 		Image: yrbpln
@@ -12768,8 +12768,8 @@ ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1
 	RenderSprites:
 		Image: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
-	ProvidesPrerequisite@ra1_soviet_upgrade_hazmatsuits:
-		Prerequisite: ra1_soviet_upgrade_hazmatsuits
+	ProvidesPrerequisite@ra1_soviets_upgrade_hazmatsuits:
+		Prerequisite: ra1_soviets_upgrade_hazmatsuits
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
 		Prerequisite: ra2_soviets_doctrine_1
 
@@ -15810,7 +15810,7 @@ ra2_tractor_driveby:
 # 	Valued:
 # 		Cost: 3200
 # 	Tooltip:
-# 		Name: ra1_soviet_migattackbomber
+# 		Name: ra1_soviets_migattackbomber
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -15878,7 +15878,7 @@ ra2_tractor_driveby:
 # ra2mig.husk:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: ra1_soviet_migattackbomber
+# 		Name: ra1_soviets_migattackbomber
 # 	Contrail:
 # 		Offset: -853,0,0
 # 	Aircraft:

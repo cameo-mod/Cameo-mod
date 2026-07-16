@@ -202,15 +202,15 @@ xgun:
 xftur:
 	Defaults:
 		ZOffset: 3072
-	idle: ra1_soviet_flametower
+	idle: ra1_soviets_flametower
 		Offset: 0,-2
-	damaged-idle: ra1_soviet_flametower
+	damaged-idle: ra1_soviets_flametower
 		Start: 1
 		Offset: 0,-2
 	make: fturmake
 		Length: *
 		Offset: 0,-2
-	dead: ra1_soviet_flametower
+	dead: ra1_soviets_flametower
 	bib: mbFTUR
 		Length: *
 		UseTilesetExtension: false
@@ -313,25 +313,25 @@ xobli:
 xtsla:
 	Defaults:
 		ZOffset: 3072
-	idle: ra1_soviet_teslacoil
+	idle: ra1_soviets_teslacoil
 		Offset: 0,-13
-	damaged-idle: ra1_soviet_teslacoil
+	damaged-idle: ra1_soviets_teslacoil
 		Start: 10
 		Offset: 0,-13
 	make: tslamake
 		Length: *
 		Offset: 0,-13
-	active: ra1_soviet_teslacoil
+	active: ra1_soviets_teslacoil
 		Start: 1
 		Length: 9
 		Tick: 100
 		Offset: 0,-13
-	damaged-active: ra1_soviet_teslacoil
+	damaged-active: ra1_soviets_teslacoil
 		Start: 11
 		Length: 9
 		Tick: 100
 		Offset: 0,-13
-	dead: ra1_soviet_teslacoil
+	dead: ra1_soviets_teslacoil
 	bib: mbTSLA
 		Length: *
 		UseTilesetExtension: false

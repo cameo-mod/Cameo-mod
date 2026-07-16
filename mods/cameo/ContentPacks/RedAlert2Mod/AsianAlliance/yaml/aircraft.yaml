@@ -1,4 +1,4 @@
-asian_alliance_phoenix:
+asianalliance_phoenix:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -14,7 +14,7 @@ asian_alliance_phoenix:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~asian_alliance_asianairforcecommand, asian_alliance_asianbattlelab
+		Prerequisites: ~asianalliance_asianairforcecommand, asianalliance_asianbattlelab
 		Queue: Aircraft, RAAircraft
 		Description: actor_aaphoenix.description
 	Aircraft:
@@ -92,9 +92,9 @@ asian_alliance_phoenix:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_pelican:
+asianalliance_pelican:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -104,7 +104,7 @@ asian_alliance_pelican:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~asian_alliance_asianairforcecommand
+		Prerequisites: ~asianalliance_asianairforcecommand
 		Description: actor_aapelican.description
 	Valued:
 		Cost: 2000
@@ -138,16 +138,16 @@ asian_alliance_pelican:
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: asian_alliance_doctrine_asianphalanx && !rank-elite
+		RequiresCondition: asianalliance_doctrine_asianphalanx && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianPelicanMG_elite
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: asian_alliance_doctrine_asianphalanx && rank-elite
-	ReloadAmmoDelayMultiplier@asian_alliance_doctrine_asianphalanx:
-		RequiresCondition: asian_alliance_doctrine_asianphalanx
+		RequiresCondition: asianalliance_doctrine_asianphalanx && rank-elite
+	ReloadAmmoDelayMultiplier@asianalliance_doctrine_asianphalanx:
+		RequiresCondition: asianalliance_doctrine_asianphalanx
 		Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 80
@@ -198,7 +198,7 @@ asian_alliance_pelican:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
 kami.asian:
 	Inherits: ^RANeutralPlane
@@ -399,7 +399,7 @@ phoenix_husk.asian:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: asian_alliance_phoenix
+		Image: asianalliance_phoenix
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -411,7 +411,7 @@ pelican_husk.asian:
 		TurnSpeed: 24
 		Speed: 120
 	RenderSprites:
-		Image: asian_alliance_pelican
+		Image: asianalliance_pelican
 		PlayerPalette: playerra2
 
 bomber_minebomb.asian:

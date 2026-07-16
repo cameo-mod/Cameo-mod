@@ -943,7 +943,7 @@ actor_ts_nod_artillery =
       Strong vs Buildings, Ground units
       Weak vs Aircraft, close-range units
 
-ra1_soviet_upgrade_shtoradefensesystem =
+ra1_soviets_upgrade_shtoradefensesystem =
    .name = Shtora Defense System
    .description = Tech Upgrade (Only affects units of own faction)
       Hammer Tanks mount the Shtora countermeasure suite: a defensive laser that periodically blinds a nearby enemy, cutting its weapon range, vision and cloak detection to 20% for a short time.
@@ -1809,7 +1809,7 @@ upgrade_shipweapon =
 upgrade_shiparmor =
    .description = Increases armor of all Terran aircraft by 20%
 
-ra1_soviet_doctrine_conscription =
+ra1_soviets_doctrine_conscription =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on Mass Produced Infantry:
       All Infantry are 25% cheaper and faster to train
@@ -1820,7 +1820,7 @@ ra1_soviet_doctrine_conscription =
       Unlocks Commissar
       Unlocks Vengeance and Men of Steel Upgrades
 
-ra1_soviet_doctrine_industrialefficiency =
+ra1_soviets_doctrine_industrialefficiency =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on strong Economy and Mass Produced Vehicles and Aircraft
       Replaces Ore Trucks with Industrial Miners
@@ -1828,7 +1828,7 @@ ra1_soviet_doctrine_industrialefficiency =
       Replaces Airfields with Large Airfields (100% faster production)
       Unlocks Mass Production and War Economy Upgrades
 
-ra1_soviet_doctrine_inferno =
+ra1_soviets_doctrine_inferno =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on Flame and Artillery Weapons
       All Grenadiers, Mortars, Flame Weapons and Artilleries have 25% more firepower
@@ -1837,7 +1837,7 @@ ra1_soviet_doctrine_inferno =
       Unlocks Heatray Tank
       Unlocks Incendiary Bullets and Scorched Earth Upgrades
 
-ra1_soviet_doctrine_teslaandexperimentaltech =
+ra1_soviets_doctrine_teslaandexperimentaltech =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on Experimental Tesla Technology
       All Tesla Weapons deal additional EMP Damage.
@@ -1846,7 +1846,7 @@ ra1_soviet_doctrine_teslaandexperimentaltech =
       Unlocks Heavy Tesla Tank
       Unlocks Tesla Arcing, Tesla Rockets and Reactor Overload Upgrades
 
-ra1_soviet_doctrine_heavyarmor =
+ra1_soviets_doctrine_heavyarmor =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on Heavy Armor and Powerful Tanks
       All Vehicles and Aircraft have 10% additional Damage Resistance
@@ -1856,7 +1856,7 @@ ra1_soviet_doctrine_heavyarmor =
       Unlocks Shtora Defense System Upgrade
       Unlocks Auto Loaders, High Explosive Rockets and Stalinium Upgrades
 
-ra1_soviet_doctrine_nuclearwar =
+ra1_soviets_doctrine_nuclearwar =
    .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
       Focuses on High Damage and Speed.
       All Vehicles have 10% higher Firepower and Speed
@@ -1864,110 +1864,110 @@ ra1_soviet_doctrine_nuclearwar =
       Unlocks Kotin Nuclear Tank
       Unlocks Unstable Isotopes, Thermonuclear Rockets and Nuclear Tank Shells Upgrades
 
-ra1_soviet_upgrade_hazmatsuits =
+ra1_soviets_upgrade_hazmatsuits =
    .description = Infantry Armor Upgrade
       Increases Infantry Damage Resistance by Tiberium, Radiation,
       High Explosives, Fire, Chemicals and Nuclear Weapons by 100%.
 
-ra1_soviet_upgrade_afterburners =
+ra1_soviets_upgrade_afterburners =
    .description = Increases damage, range and speed of Migs, Su-57s and Nuclear Bombers by 15%.
       Unlocks the "Paratroopers" Support Power from the Soviet Airfield.
       Upgrades the "Parabombs" Support Power from the Soviet Airfield.
       Jets also take 15% less damage.
 
-ra1_soviet_upgrade_afterburners =
+ra1_soviets_upgrade_afterburners =
    .description = Increases damage, range and speed of Migs, Su-57s and Nuclear Bombers by 15%.
       Unlocks the "Paratroopers" Support Power from the Soviet Airfield.
       Upgrades the "Parabombs" Support Power from the Soviet Airfield.
       Jets also take 15% less damage.
 
-ra1_soviet_upgrade_vengeance =
+ra1_soviets_upgrade_vengeance =
    .description = Tech Upgrade (Only affects units of own faction)
       Doubles moral boost effect to nearby units by fallen Conscripts and Commissars.
       Commissars gives this double effect now permanently to nearby units.
 
-ra1_soviet_upgrade_menofsteel =
+ra1_soviets_upgrade_menofsteel =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Infantry Firepower and Damage Resistance by 10%
 
-ra1_soviet_upgrade_massproduction =
+ra1_soviets_upgrade_massproduction =
    .description = Tech Upgrade (Only affects units of own faction)
       Reduces Cost of all Vehicles and Aircraft by 20%
 
-ra1_soviet_upgrade_wareconomy =
+ra1_soviets_upgrade_wareconomy =
    .description = Team Upgrade (Also affects units of your teammates)
       Reduces Production Cost and Time of Refineries and Harvesters by 10%.
       Increases Income from Refineries by 10%.
       Increases Speed of Harvesters by 10%.
 
-ra1_soviet_upgrade_incendiarybullets =
+ra1_soviets_upgrade_incendiarybullets =
    .description = Tech Upgrade (Only affects units of own faction)
       Adds an additional fire warhead to all bullet based weapons.
       Increases Firepower by 100% and gives higher area of effect.
 
-ra1_soviet_upgrade_scorchedearth =
+ra1_soviets_upgrade_scorchedearth =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Firepower of all Grenadiers, Mortars, Flame Weapons and Artilleries by 25%.
       Equips the V1 Rocket Truck and the Grad with Fire Rockets.
 
-ra1_soviet_upgrade_teslaarcing =
+ra1_soviets_upgrade_teslaarcing =
    .description = Tech Upgrade (Only affects units of own faction)
       Adds arcing effects to all Tesla Weapons.
       Can arc up to 2 extra times for extra damage.
       Reduces recharge delay for the Heavy Tesla Tank by 25%
       Equips Volkov with arcing Tesla Bombs.
 
-ra1_soviet_upgrade_teslarockets =
+ra1_soviets_upgrade_teslarockets =
    .description = Tech Upgrade (Only affects units of own faction)
       Heavy Rockets such as of the Mammoth Tank, Kamov, Mig and V2 Launcher
       are replaced with Tesla Rockets that can arc over to other targets on explosion.
 
-ra1_soviet_upgrade_reactoroverload =
+ra1_soviets_upgrade_reactoroverload =
    .description = Team Upgrade (Also affects units of your teammates)
       Doubles the Power Output of all Power Plants in your team.
       Also doubles Power Consumption and Firepower of Soviet Tesla Coils.
 
-ra1_soviet_upgrade_autoloaders =
+ra1_soviets_upgrade_autoloaders =
    .description = Tech Upgrade (Only affects units of own faction)
       Reduces Reload Delay of all Tanks by 40%.
 
-ra1_soviet_upgrade_highexplosiverockets =
+ra1_soviets_upgrade_highexplosiverockets =
    .description = Tech Upgrade (Only affects units of own faction)
       Heavy Rockets such as of the Siege Mammoth Tank, Hind, Su-57, Grad and V2 Launcher
       are replaced with High Explosive Rockets that deal 20% more damage and have higher area of effect.
 
-ra1_soviet_upgrade_stalinium =
+ra1_soviets_upgrade_stalinium =
    .description = Team Upgrade (Also affects units of your teammates)
       Reduces Incoming Damage of all Tanks in your team by 20%.
 
-ra1_soviet_upgrade_unstableisotopes =
+ra1_soviets_upgrade_unstableisotopes =
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Speed of all Vehicles by 20%.
       Increases Speed of Kotin Nuclear Tanks by 40%.
 
-ra1_soviet_upgrade_thermonuclearrockets =
+ra1_soviets_upgrade_thermonuclearrockets =
    .description = Tech Upgrade (Only affects units of own faction)
       Heavy Rockets such as of the Mammoth Tank, Hind, Mig and Nuclear V2 Launcher
       are replaced with Thermonuclear Rockets that deal increased damage to heavier armor types
       and have massively higher area of effect.
 
-ra1_soviet_upgrade_nucleartankshells =
+ra1_soviets_upgrade_nucleartankshells =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Firepower of all Tanks in your team by 20%.
       Equips Soviet Tanks with special shells that explode in a higher radius.
       Equips Volkov with a Nuclear Cannon.
       Increases Spread and Radiation Damage of the Kotin Nuclear Tank.
 
-ra1_soviet_promotion_infantrysuperoptics =
+ra1_soviets_promotion_infantrysuperoptics =
    .description = Promotion Upgrade (Only affects units of own faction)
       Increases Infantry Vision and Stealth Detection by 20%.
       Increases Infantry Weapon Range by 10%.
 
-ra1_soviet_promotion_mammothtanktargetingcomputer =
+ra1_soviets_promotion_mammothtanktargetingcomputer =
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows Mammoth Tanks to use both Cannons and Missiles for all Ground and Water Targets.
 
-ra1_soviet_promotion_hurricanerocketpods =
+ra1_soviets_promotion_hurricanerocketpods =
    .description = Promotion Upgrade (Only affects units of own faction)
       Doubles the amount of Missiles that Hind and Kamov can fire.
 

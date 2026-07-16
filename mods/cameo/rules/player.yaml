@@ -4,7 +4,7 @@
 
 # Inherits@AlwaysShow: ^AlwaysShowForFactionsList
 ^AlwaysShowForFactionsList:
-	AlwaysShowForFactions: gdi, nod, allies, soviet, japan, tsgdi, tsnod, forgotten, cabal, ra2allies, ra2soviets, yuri, asianalliance, consortium, syndicate, naxis, schwarzermond, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, warcraft_humans, warcraft_orcs, tkm
+	AlwaysShowForFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, wc2_humans, wc2_orcs, tkm
 
 # Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 ^StandardBuildTimeSpeedReduction:
@@ -440,7 +440,7 @@ Player:
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ExternalCondition@ra1_soviet_barracks:
+	ExternalCondition@ra1_soviets_barracks:
 		Condition: ownsbarr
 	ExternalCondition@td_gdi_weaponsfactory:
 		Condition: ownsweap

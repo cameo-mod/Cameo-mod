@@ -1056,7 +1056,7 @@ dribarr.imperium:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -2894,7 +2894,7 @@ drfgbarr.freedomguard:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -4958,7 +4958,7 @@ dribarr.shadowhand:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -5605,7 +5605,7 @@ drbiocom.xenite:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -6350,7 +6350,7 @@ dribarr.togran:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -8865,7 +8865,7 @@ drabarr.eodalien:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -10486,7 +10486,7 @@ drdcamp.descendants:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle

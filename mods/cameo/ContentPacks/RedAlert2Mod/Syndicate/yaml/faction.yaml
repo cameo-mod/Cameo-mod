@@ -1,24 +1,24 @@
 World:
-	FactionCA@syndicate:
+	FactionCA@latinsyndicate:
 		Name: Latin Syndicate
-		InternalName: syndicate
+		InternalName: latinsyndicate
 		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction_ra2_syndicate.description
 	StartingUnits@mcvsyndicate:
 		Class: none
 		ClassName: MCV Only
-		Factions: syndicate
+		Factions: latinsyndicate
 		BaseActor: latinsyndicate_syndicatemobileconstructionvehicle
 	StartingUnits@defaultsyndicate:
 		Class: light
 		ClassName: Light Support
-		Factions: syndicate
+		Factions: latinsyndicate
 		BaseActor: latinsyndicate_syndicatemobileconstructionvehicle
 		SupportActors: latinsyndicate_latinmilitia,latinsyndicate_latinmilitia,latinsyndicate_latinmilitia,latinsyndicate_freedomfighter,latinsyndicate_freedomfighter,wirbelwind.nax,tiger.nax
 	StartingUnits@heavysyndicate:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: syndicate
+		Factions: latinsyndicate
 		BaseActor: latinsyndicate_syndicatemobileconstructionvehicle
 		SupportActors: latinsyndicate_latinmilitia,latinsyndicate_latinmilitia,latinsyndicate_latinmilitia,latinsyndicate_freedomfighter,latinsyndicate_freedomfighter,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,ptnk.asian,wirbelwind.nax

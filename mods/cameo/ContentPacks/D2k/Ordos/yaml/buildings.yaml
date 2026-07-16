@@ -80,7 +80,7 @@ ordos_barracks:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^2x2Shape
 	Buildable:
@@ -676,7 +676,7 @@ ordos_palace:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: asian_alliance_chaosstorminductor
+		IconImage: asianalliance_chaosstorminductor
 		Icons:
 			1: icon2
 		Cursor: ioncannon

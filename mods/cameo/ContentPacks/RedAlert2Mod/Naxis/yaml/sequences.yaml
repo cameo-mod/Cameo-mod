@@ -1036,22 +1036,22 @@ naxis_interceptor:
 	Defaults:
 		Scale: 0.9
 	idle:
-		Filename: nax_interceptor.shp
+		Filename: naxis_interceptor.shp
 		Facings: 64
 	move:
-		Filename: nax_interceptor.shp
+		Filename: naxis_interceptor.shp
 		Facings: 64
 		Start: 64
 	move-l:
-		Filename: nax_interceptor.shp
+		Filename: naxis_interceptor.shp
 		Facings: 64
 		Start: 128
 	move-r:
-		Filename: nax_interceptor.shp
+		Filename: naxis_interceptor.shp
 		Facings: 64
 		Start: 128
 	icon:
-		Filename: nax_drone_icon.png
+		Filename: schwarzermond_drone_icon.png
 
 naxis_donnerschlag:
 	Inherits: ^RA2GatlingMuzzle

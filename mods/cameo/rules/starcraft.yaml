@@ -837,7 +837,7 @@ terran_barracks:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Tooltip:
 		Name: Barracks
 	Power:
@@ -1634,7 +1634,7 @@ protoss_gateway:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@ra1_soviet_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Tooltip:
@@ -2283,7 +2283,7 @@ zerg_hatchery:
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@breedfaster: ^SCBREEDFASTER
-	#Inherits@ra1_soviet_barracks: ^IsBarrack
+	#Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Hatchery
@@ -4222,7 +4222,7 @@ SCSPIDERMINE:
 		VoiceSet: TerrorDroneVoice
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@ra1_soviet_attackdog:
+	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	GrantConditionOnMovement:
 		Condition: unborrow
@@ -8796,7 +8796,7 @@ protoss_promotion_unlockidol:
 
 ^LargeZerg:
 	Inherits: ^BasicZerg
-	Targetable@ra1_soviet_attackdog:
+	Targetable@ra1_soviets_attackdog:
 		TargetTypes: DogImmune
 	Mobile:
 		Locomotor: wheeled

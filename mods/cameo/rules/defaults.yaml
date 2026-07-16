@@ -2190,7 +2190,7 @@
 		Modifier: 85
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra1_soviet_upgrade_massproduction
+		Prerequisites: ra1_soviets_upgrade_massproduction
 	ProductionCostMultiplier@IndustrialPlant:
 		Multiplier: 75
 		Prerequisites: ra2_soviets_industrialplant
@@ -2482,7 +2482,7 @@
 		RequiresCondition: disabled
 	ProductionCostMultiplier@MassProductionUpgradeRA1:
 		Multiplier: 80
-		Prerequisites: ra1_soviet_upgrade_massproduction
+		Prerequisites: ra1_soviets_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
 		Prerequisites: latinsyndicate_upgrade_sovietstolentechindustrialmethods
@@ -2559,7 +2559,7 @@
 
 ^AircraftEjectOnDeath:
 	EjectOnDeath:
-		PilotActor: ra1_soviet_rifleinfantry
+		PilotActor: ra1_soviets_rifleinfantry
 		SuccessRate: 100
 		EjectOnGround: false
 		EjectInAir: true
@@ -2873,8 +2873,8 @@
 			latinsyndicate_bunkertower: biggarrisoned
 			td_gdi_assaultapc: battlefortresspassenger
 			ra2_allies_battlefortress: battlefortresspassenger
-			asian_alliance_dragonfly: battlefortresspassenger
-			asian_alliance_warturtle: battlefortresspassenger
+			asianalliance_dragonfly: battlefortresspassenger
+			asianalliance_warturtle: battlefortresspassenger
 			latinsyndicate_narcohummer: battlefortresspassenger
 			latinsyndicate_carteltruck: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
@@ -2960,7 +2960,7 @@
 		Prerequisites: upra2deso
 	GrantConditionOnPrerequisite@hazmatsuits:
 		Condition: hazmatsuits
-		Prerequisites: ra1_soviet_upgrade_hazmatsuits
+		Prerequisites: ra1_soviets_upgrade_hazmatsuits
 	DamagedByTintedCells@rad:
 		Damage: 120
 		DamageInterval: 1
@@ -5552,10 +5552,10 @@
 		Prerequisites: global_conscription_buff
 	# ProvidesPrerequisite@global_conscription_buff:
 	# 	Prerequisite: global_conscription_buff
-	# 	RequiresCondition: ra1_soviet_doctrine_conscription || ra2_soviets_doctrine_conscription || yuri_doctrine_psioniclegion
-	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscription:
-	# 	Condition: ra1_soviet_doctrine_conscription
-	# 	Prerequisites: ra1_soviet_doctrine_conscription
+	# 	RequiresCondition: ra1_soviets_doctrine_conscription || ra2_soviets_doctrine_conscription || yuri_doctrine_psioniclegion
+	# GrantConditionOnPrerequisite@ra1_soviets_doctrine_conscription:
+	# 	Condition: ra1_soviets_doctrine_conscription
+	# 	Prerequisites: ra1_soviets_doctrine_conscription
 	# GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
 	# 	Condition: ra2_soviets_doctrine_conscription
 	# 	Prerequisites: ra2_soviets_doctrine_conscription
@@ -6539,7 +6539,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviets_airfield,ra1_soviets_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asianalliance_asianairforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6559,11 +6559,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7193,7 +7193,7 @@ CPQDEBUGDUMMY:
 ^RASovietSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry,ra1_soviet_rifleinfantry
+		ActorTypes: rae6,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry
 
 ^AIForceShield:
 	GrantConditionOnDamageState@AIFS:
@@ -7669,17 +7669,17 @@ CPQDEBUGDUMMY:
 	Power:
 		Amount: -10
 	RallyPoint:
-		ForceSetType: ra1_soviet_attackdog
+		ForceSetType: ra1_soviets_attackdog
 	Production@NORMAL:
-		Produces: Infantry, ra1_soviet_attackdog
+		Produces: Infantry, ra1_soviets_attackdog
 		RequiresCondition: !classicproductionqueues
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry, ra1_soviet_attackdog
+		Produces: RAInfantry, ra1_soviets_attackdog
 		RequiresCondition: classicproductionqueues
 	Production:
-		Produces: ra1_soviet_attackdog
+		Produces: ra1_soviets_attackdog
 	ProductionQueue@INFANTRY:
-		Type: ra1_soviet_attackdog
+		Type: ra1_soviets_attackdog
 		DisplayOrder: 2
 		Group: Infantry
 		LowPowerModifier: 300
@@ -7694,27 +7694,27 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,1
-		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 3
 	Exit@1:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: 0,1
-		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 2
 	Exit@2:
 		RequiresCondition: !being-captured
 		SpawnOffset: -280,400,0
 		ExitCell: -1,0
-		ProductionTypes: ra1_soviet_attackdog, Infantry, RAInfantry
+		ProductionTypes: ra1_soviets_attackdog, Infantry, RAInfantry
 		Priority: 2
 	CommandBarBlacklist:
 		DisableStop: false
 	ProductionBar@INFANTRY:
-		ProductionType: ra1_soviet_attackdog
+		ProductionType: ra1_soviets_attackdog
 		RequiresCondition: !classicproductionqueues
 	ProductionBar@RAINFANTRY:
-		ProductionType: ra1_soviet_attackdog
+		ProductionType: ra1_soviets_attackdog
 		RequiresCondition: classicproductionqueues
 
 ^IsWeaponFactory:
@@ -8820,10 +8820,10 @@ CPQDEBUGDUMMY:
 		# PassengerConditions:
 			# e1: ifv-mg
 			# rae1: ifv-mg
-			# ra1_soviet_rifleinfantry: ifv-mg
+			# ra1_soviets_rifleinfantry: ifv-mg
 			# ra2_allies_gi: ifv-mg
 			# ra2_soviets_conscript: ifv-mg
-			# asian_alliance_asianmilitia: ifv-mg
+			# asianalliance_asianmilitia: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
 			# terran_marine: ifv-mg
@@ -8844,15 +8844,15 @@ CPQDEBUGDUMMY:
 			# sglrebel: ifv-mg
 			# sglcamorebel: ifv-mg
 			# sgldemorebel: ifv-mg
-			# asian_alliance_fanatic: ifv-mg
+			# asianalliance_fanatic: ifv-mg
 			# td_gdi_grenadier: ifv-cannon
-			# ra1_soviet_grenadier: ifv-cannon
+			# ra1_soviets_grenadier: ifv-cannon
 			# ts_gdi_discthrower: ifv-cannon
 			# tse2para: ifv-cannon
 			# forgotten_mutantsergeant: ifv-cannon
 			# che2: ifv-cannon
 			# leange2: ifv-cannon
-			# asian_alliance_plasmatrooper: ifv-cannon
+			# asianalliance_plasmatrooper: ifv-cannon
 			# e6: ifv-repair
 			# rae6: ifv-repair
 			# ra1_allies_medic: ifv-healer
@@ -8874,9 +8874,9 @@ CPQDEBUGDUMMY:
 			# leanglotus: ifv-repair
 			# e3: ifv-miss
 			# rae3: ifv-miss
-			# ra1_soviet_rocketsoldier: ifv-miss
+			# ra1_soviets_rocketsoldier: ifv-miss
 			# ra2_allies_guardiangi: ifv-miss
-			# asian_alliance_asiantankkiller: ifv-miss
+			# asianalliance_asiantankkiller: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
 			# che3: ifv-miss
@@ -8887,13 +8887,13 @@ CPQDEBUGDUMMY:
 			# sglrpgtrooper_toxin: ifv-miss
 			# leange3: ifv-miss
 			# ra2_soviets_flaktrooper: ifv-flak
-			# ra1_soviet_shocktrooper: ifv-tesla
+			# ra1_soviets_shocktrooper: ifv-tesla
 			# ra2_soviets_teslatrooper: ifv-tesla
 			# td_nod_flamethrower: ifv-fire
-			# ra1_soviet_flamethrower: ifv-fire
+			# ra1_soviets_flamethrower: ifv-fire
 			# japan_japaneseflamethrower: ifv-fire
 			# yuri_initiate: ifv-fire
-			# asian_alliance_asianflametrooper: ifv-fire
+			# asianalliance_asianflametrooper: ifv-fire
 			# terran_firebat: ifv-fire
 			# td_nod_chemicalwarrior: ifv-chem
 			# ra2_soviets_desolator: ifv-chem
@@ -8917,7 +8917,7 @@ CPQDEBUGDUMMY:
 			# yuri_virus: ifv-ra1_allies_alliedsniper
 			# ra1_allies_raspy: ifv-spy
 			# ra2_allies_ra2spy: ifv-spy
-			# asian_alliance_shinobi: ifv-spy
+			# asianalliance_shinobi: ifv-spy
 			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
 			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
 			# glkell: ifv-ra1_allies_alliedsniper
@@ -9069,7 +9069,7 @@ CPQDEBUGDUMMY:
 			# japan_imperialscoutsman: ifv-mg
 			# japan_tankbuster: ifv-miss
 			# japan_archermaiden: ifv-archermaiden
-			# asian_alliance_veteranarcher: ifv-archermaiden
+			# asianalliance_veteranarcher: ifv-archermaiden
 			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer
@@ -9234,7 +9234,7 @@ CPQDEBUGDUMMY:
 			td_gdi_havoc: hero
 			td_nod_lasercommando: hero
 			ra1_allies_tanya: hero
-			ra1_soviet_volkov: hero
+			ra1_soviets_volkov: hero
 			japan_exorcist: hero
 			ra2_allies_tanyaii: hero
 			ra2_soviets_boris: hero

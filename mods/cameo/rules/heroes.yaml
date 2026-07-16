@@ -664,17 +664,17 @@ volkovcc:
 	-WithMakeAnimation:
 	-WithDeathAnimation:
 	FreeActor:
-		Actor: ra1_soviet_volkov
+		Actor: ra1_soviets_volkov
 		RequiresCondition: novolkov
 	CustomSellValue:
 		Value: 100
-	GrantConditionOnPrerequisite@ra1_soviet_volkov:
-		Prerequisites: !ra1_soviet_volkov
+	GrantConditionOnPrerequisite@ra1_soviets_volkov:
+		Prerequisites: !ra1_soviets_volkov
 		Condition: novolkov
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 		
-ra1_soviet_volkov:
+ra1_soviets_volkov:
 	Inherits@HEROES: ^Heroes
 	Inherits: GNRL
 	-Buildable:
@@ -686,8 +686,8 @@ ra1_soviet_volkov:
 		HP: 500000
 	Armor:
 		Type: Concrete
-	ProvidesPrerequisite@ra1_soviet_volkov:
-		Prerequisite: ra1_soviet_volkov
+	ProvidesPrerequisite@ra1_soviets_volkov:
+		Prerequisite: ra1_soviets_volkov
 	Mobile:
 		Speed: 44
 		PauseOnCondition: nocc
@@ -704,7 +704,7 @@ ra1_soviet_volkov:
 	GrantConditionOnPrerequisite@poweroff:
 		Prerequisites: !volkovcontrol
 		Condition: nocc
-	MobSpawnerMaster@ra1_soviet_attackdog:
+	MobSpawnerMaster@ra1_soviets_attackdog:
 		Actors: CHITZKOI
 		Offset: 0,0,0
 		RespawnTicks: 5000
