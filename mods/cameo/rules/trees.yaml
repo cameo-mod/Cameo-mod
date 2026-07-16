@@ -478,30 +478,45 @@ VTC01:
 	Inherits@VOLCANIC: ^VolcanicBasaltFormation
 	RenderSprites:
 		Image: tc01
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
 
 VTC02:
 	Inherits: TC02
 	Inherits@VOLCANIC: ^VolcanicBasaltFormation
 	RenderSprites:
 		Image: tc02
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
 
 VTC03:
 	Inherits: TC03
 	Inherits@VOLCANIC: ^VolcanicBasaltFormation
 	RenderSprites:
 		Image: tc03
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
 
 VTC04:
 	Inherits: TC04
 	Inherits@VOLCANIC: ^VolcanicBasaltFormation
 	RenderSprites:
 		Image: tc04
+	Building:
+		Footprint: ____ xxx_ x___
+		Dimensions: 4,3
 
 VTC05:
 	Inherits: TC05
 	Inherits@VOLCANIC: ^VolcanicBasaltFormation
 	RenderSprites:
 		Image: tc05
+	Building:
+		Footprint: __x_ xxx_ _xx_
+		Dimensions: 4,3
 
 ####################################################################################################
 #	RA
