@@ -29272,15 +29272,15 @@ The `mods/cameo/` directory is the primary divergence layer. As of the 2026-07-1
 
 | Directory | Contents |
 | :---- | :---- |
-| `rules/` | 54 YAML files defining actors, buildings, factions, upgrades, and conditions. |
+| `rules/` | 64 YAML files defining actors, buildings, factions, upgrades, and conditions. |
 | `weapons/` | 51 YAML files defining weapons, projectiles, and warheads. |
-| `sequences/` | 51 YAML files defining sprite sequences, cameos, and animations. |
+| `sequences/` | 59 YAML files defining sprite sequences, cameos, and animations. |
 | `audio/` | 32 YAML files defining voices, notifications, music playlists, and per-game audio packs. |
 | `bits/` | 180+ sprite files in 58+ sub-folders (per-game asset collections). |
 | `tilesets/` | 20 tileset definition files. |
 | `chrome/` | 16 UI/chrome layout files. |
 | `ai/` | 1 AI definition file. |
-| `maps/` | 5 maps. |
+| `maps/` | 365 maps. |
 | `ContentPacks/` | Per-theme and per-faction content packs organized as `<Theme>/<Faction>/`, each with a `content.yaml` manifest and a `yaml/` subdirectory for rules, weapons, sequences, and translations. Current themes include Core, Shared, TiberianDawn, RedAlert, TiberianSun, RedAlert2, RedAlert2Mod, TKM, D2k, StarCraft, Warcraft2, and Outpost2. |
 
 Cameo uses the same MiniYaml syntax and inheritance rules as upstream OpenRA, but the actor and weapon definitions are entirely mod-specific. The `ContentPacks/` directory is a notable structural addition: it lets the mod layer per-game or per-faction content packs on top of the base `mods/cameo/` rules.
