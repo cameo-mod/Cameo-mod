@@ -6,11 +6,11 @@ conyard_infiltrated.nax2:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: schwarzer_mond_constructionyard
+		Prerequisite: schwarzermond_constructionyard
 	RenderSprites:
-		Image: schwarzer_mond_constructionyard
+		Image: schwarzermond_constructionyard
 
-schwarzer_mond_upgrade_crystallens:
+schwarzermond_upgrade_crystallens:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Crystal Lens
@@ -20,12 +20,12 @@ schwarzer_mond_upgrade_crystallens:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases the burst of all yellow laser weapons by 1.
-		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_crystallens
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_crystallens
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_crystallens
+		Image: schwarzermond_upgrade_crystallens
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_amplifiedlens:
+schwarzermond_upgrade_amplifiedlens:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Amplified Lens
@@ -35,12 +35,12 @@ schwarzer_mond_upgrade_amplifiedlens:
 		BuildPaletteOrder: 55
 		Queue: Research
 		Description: Further increases the burst of yellow laser weapons by 1.
-		Prerequisites: ~schwarzer_mond_techcenter, schwarzer_mond_upgrade_crystallens, !schwarzer_mond_upgrade_amplifiedlens
+		Prerequisites: ~schwarzermond_techcenter, schwarzermond_upgrade_crystallens, !schwarzermond_upgrade_amplifiedlens
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_amplifiedlens
+		Image: schwarzermond_upgrade_amplifiedlens
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_vrilpoweredweapons:
+schwarzermond_upgrade_vrilpoweredweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vril Powered Weapons
@@ -51,12 +51,12 @@ schwarzer_mond_upgrade_vrilpoweredweapons:
 		Queue: Research
 		Description: Infuses cannon shells with Vril energy from the Black Sun program.
 			Cannon vehicles deal 25% more damage and Tesla-type damage.
-		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_vrilpoweredweapons
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_vrilpoweredweapons
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_vrilpoweredweapons
+		Image: schwarzermond_upgrade_vrilpoweredweapons
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_helium3:
+schwarzermond_upgrade_helium3:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Helium-3 Enrichment
@@ -67,12 +67,12 @@ schwarzer_mond_upgrade_helium3:
 		Queue: Upgrades
 		Description: Increases Hydrogen Plant power output by 50% and vehicle/aircraft speed by 25%.
 			Mines Helium-3 from the lunar regolith to fuel Fourth Reich fusion reactors and propulsion systems.
-		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_helium3
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_helium3
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_helium3
+		Image: schwarzermond_upgrade_helium3
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_vrilinfusion:
+schwarzermond_upgrade_vrilinfusion:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vril Infusion
@@ -83,12 +83,12 @@ schwarzer_mond_upgrade_vrilinfusion:
 		Queue: Research
 		Description: All Schwarzer Mond infantry gain 25% firepower, 25% speed and 15% damage reduction.
 			Vril energy from the Black Sun program rewrites soldiers at the cellular level, creating true Übermenschen.
-		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_vrilinfusion
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_vrilinfusion
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_vrilinfusion
+		Image: schwarzermond_upgrade_vrilinfusion
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_lunaralloys:
+schwarzermond_upgrade_lunaralloys:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Lunar Alloys
@@ -98,12 +98,12 @@ schwarzer_mond_upgrade_lunaralloys:
 		BuildPaletteOrder: 70
 		Queue: Upgrades
 		Description: All Schwarzer Mond units take 10% less damage.
-		Prerequisites: ~schwarzer_mond_radar, !schwarzer_mond_upgrade_lunaralloys
+		Prerequisites: ~schwarzermond_radar, !schwarzermond_upgrade_lunaralloys
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_lunaralloys
+		Image: schwarzermond_upgrade_lunaralloys
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_moonpropaganda:
+schwarzermond_upgrade_moonpropaganda:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Moon Propaganda
@@ -114,12 +114,12 @@ schwarzer_mond_upgrade_moonpropaganda:
 		Queue: Research
 		Description: All Schwarzer Mond infantry deal 10% more damage.
 			Funded by MoonCoin, the official cryptocurrency of the Reichsmark 2.0 blockchain.
-		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_moonpropaganda
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_moonpropaganda
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_moonpropaganda
+		Image: schwarzermond_upgrade_moonpropaganda
 	ProvidesPrerequisite:
 
-schwarzer_mond_upgrade_cryptofascism:
+schwarzermond_upgrade_cryptofascism:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cryptofascism
@@ -129,7 +129,7 @@ schwarzer_mond_upgrade_cryptofascism:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Every Schwarzer Mond unit generates 1 credit per second.
-		Prerequisites: ~schwarzer_mond_techcenter, !schwarzer_mond_upgrade_cryptofascism
+		Prerequisites: ~schwarzermond_techcenter, !schwarzermond_upgrade_cryptofascism
 	RenderSprites:
-		Image: schwarzer_mond_upgrade_cryptofascism
+		Image: schwarzermond_upgrade_cryptofascism
 	ProvidesPrerequisite:

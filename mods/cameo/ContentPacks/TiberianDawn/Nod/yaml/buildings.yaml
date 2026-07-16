@@ -377,6 +377,8 @@ td_nod_templeprime:
 		Sequence: idle
 	RenderSprites:
 		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
 
 td_nod_gunturret:
 	Inherits: ^TDDefense
@@ -603,3 +605,5 @@ CNCSPEN:
 	RenderSprites:
 		Image: cncspen
 		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba

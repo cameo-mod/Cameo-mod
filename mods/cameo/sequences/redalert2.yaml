@@ -5665,7 +5665,7 @@ ra2e2.black:
 ra2terror:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: latin_syndicate_promotion_unlockterrorists_ra2_trst.shp
+		Filename: latinsyndicate_promotion_unlockterrorists_ra2_trst.shp
 	run:
 		Tick: 120
 	shoot:
@@ -5699,7 +5699,7 @@ ra2terror:
 	idle3:
 	idle4:
 	icon:
-		Filename: latin_syndicate_promotion_unlockterrorists_icon.shp
+		Filename: latinsyndicate_promotion_unlockterrorists_icon.shp
 
 ra2_soviets_flaktrooper:
 	Inherits: ^RA2ArmedInfantry
@@ -6950,12 +6950,12 @@ ra2_soviets_seascorpion:
 
 ra2dtruck:
 	Defaults:
-		Filename: latin_syndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
 	icon:
-		Filename: latin_syndicate_promotion_unlockdemolitiontrucks_icon.shp
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_icon.shp
 
 ra2leopard:
 	Inherits: ^RA2CannonMuzzle
@@ -7274,21 +7274,21 @@ ra2_allies_nighthawk:
 ra2hind:
 	Inherits: ^RA2MachineGunMuzzle
 	idle:
-		Filename: latin_syndicate_hindtransport_ra2_hind.shp
+		Filename: latinsyndicate_hindtransport_ra2_hind.shp
 		Facings: 64
 		Scale: 0.75
 	rotor:
-		Filename: latin_syndicate_hindtransport_ra2_hind_rotor.shp
+		Filename: latinsyndicate_hindtransport_ra2_hind_rotor.shp
 		Length: *
 		Tick: 4
 		Scale: 0.75
 	slow-rotor:
-		Filename: latin_syndicate_hindtransport_ra2_hind_rotor.shp
+		Filename: latinsyndicate_hindtransport_ra2_hind_rotor.shp
 		Length: *
 		Tick: 64
 		Scale: 0.75
 	icon:
-		Filename: latin_syndicate_hindtransport_icon.png
+		Filename: latinsyndicate_hindtransport_icon.png
 
 ra2_allies_blackeagle:
 	Defaults:
@@ -7713,7 +7713,7 @@ ra2taxi:
 ra2trucka:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_syndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
 		Facings: 64

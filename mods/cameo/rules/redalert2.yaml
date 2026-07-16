@@ -1,13 +1,13 @@
 World:
-	FactionCA@RA2America:
+	FactionCA@ra2allies:
 		Name: Allies RA2 #faction_ra2_allies.name
-		InternalName: ra2america
+		InternalName: ra2allies
 		Game: Red Alert 2
 		Side: Red Alert 2
 		Description: faction_ra2_allies.description
-	FactionCA@ra2russia:
+	FactionCA@ra2soviets:
 		Name: Soviets RA2 #faction_ra2_soviets.name
-		InternalName: ra2russia
+		InternalName: ra2soviets
 		Game: Red Alert 2
 		Side: Red Alert 2
 		Description: faction_ra2_soviets.description
@@ -20,7 +20,7 @@ World:
 	FactionCA@Randomra2:
 		Name: Random RA2 #faction_ra2_random.name
 		InternalName: Randomra2
-		RandomFactionMembers: ra2america, ra2russia, yuri
+		RandomFactionMembers: ra2allies, ra2soviets, yuri
 		Game: Red Alert 2
 		Side: Random
 		Description: faction_ra2_random.description
@@ -30,12 +30,12 @@ World:
 	StartingUnits@mcvra2allies:
 		Class: none
 		ClassName: MCV Only
-		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
-	StartingUnits@mcvra2soviet:
+	StartingUnits@mcvra2soviets:
 		Class: none
 		ClassName: MCV Only
-		Factions: ra2russia, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2soviets, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 	StartingUnits@mcvyuri:
 		Class: none
@@ -45,25 +45,25 @@ World:
 	StartingUnits@defaultra2allies:
 		Class: light
 		ClassName: Light Support
-		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank
 	StartingUnits@heavyra2allies:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 		BaseActor: ra2_allies_alliedmobileconstructionvehicle
 		SupportActors: ra2_allies_gi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_guardiangi,ra2_allies_ifv,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_grizzlytank,ra2_allies_tankdestroyer,ra2_allies_ifv
-	StartingUnits@defaultra2soviet:
+	StartingUnits@defaultra2soviets:
 		Class: light
 		ClassName: Light Support
-		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack
-	StartingUnits@heavyra2soviet:
+	StartingUnits@heavyra2soviets:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 		BaseActor: ra2_soviets_mobileconstructionvehicle
 		SupportActors: ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_conscript,ra2_soviets_flaktrooper,ra2_soviets_flaktrooper,ra2_soviets_rhinoheavytank,ra2_soviets_flaktrack,ra2_soviets_rhinoheavytank,ra2_soviets_apocalypsetank
 	StartingUnits@defaultyuri:
@@ -82,19 +82,19 @@ World:
 Player:
 	ProvidesPrerequisite@anyallies:
 		Prerequisite: anyallies
-		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 	ProvidesPrerequisite@forcefactionAllies:
 		Prerequisite: CountryChoosedAlliesRA2
-		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		Factions: ra2allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
 	ProvidesPrerequisite@anysoviets:
 		Prerequisite: anysoviets
-		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
 	ProvidesPrerequisite@forcefactionSoviet:
 		Prerequisite: CountryChoosedSovietRA2
-		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
-	ProvidesPrerequisite@RA2America:
-		Prerequisite: RA2America
-		Factions: ra2america
+		Factions: ra2soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+	ProvidesPrerequisite@ra2allies:
+		Prerequisite: ra2allies
+		Factions: ra2allies
 	ProvidesPrerequisite@RA2French:
 		Prerequisite: RA2French
 		Factions: ra2french
@@ -113,9 +113,9 @@ Player:
 	ProvidesPrerequisite@RA2DOOM:
 		Prerequisite: RA2DOOM
 		Factions: ra2doom
-	ProvidesPrerequisite@RA2Russia:
-		Prerequisite: RA2Russia
-		Factions: ra2russia
+	ProvidesPrerequisite@ra2soviets:
+		Prerequisite: ra2soviets
+		Factions: ra2soviets
 	ProvidesPrerequisite@RA2Cuba:
 		Prerequisite: RA2Cuba
 		Factions: ra2cuba, ra2cubaaddon
@@ -2053,9 +2053,9 @@ ra2_soviets_battlebunker:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@gar: ^ClearableGarrisonNeutronOnly
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Tooltip:
 		Name: Battle Bunker
 	Building:
@@ -2107,9 +2107,9 @@ ra2_soviets_sentrygun:
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -4014,9 +4014,9 @@ ra2_soviets_attackdog:
 	Inherits@MC: ^MCImmune
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
@@ -4124,9 +4124,9 @@ ra2_soviets_conscript:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -4195,9 +4195,9 @@ ra2_soviets_flaktrooper:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Valued:
 		Cost: 300
@@ -4284,9 +4284,9 @@ ra2_soviets_crazyivan:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -4338,9 +4338,9 @@ ra2_soviets_teslatrooper:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@TeslaTargeting: ^PrioritizeTesla
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
 	AutoTargetPriority@DEFAULT:
 		InvalidTargets: NoAutoTarget, TeslaCoil
@@ -4478,9 +4478,9 @@ ra2_soviets_desolator:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@bot: ^BotAutoDeployOnLowHealth
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -4560,9 +4560,9 @@ ra2_soviets_boris:
 	Inherits@COMMANDOSKULL: ^CommandoSkull
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@RA2SovietConscription: ^RA2SovietConscription
-	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
-	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
@@ -6386,9 +6386,9 @@ ra2_soviets_mobileconstructionvehicle:
 	Inherits@anim: ^RA2Vehicle
 	Inherits@mcv: ^MCV
 	Inherits@SHADOWS: ^Shadows
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Tooltip:
@@ -6419,12 +6419,12 @@ ra2_soviets_rhinoheavytank:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -6530,7 +6530,7 @@ ra2_soviets_rhinoheavytank:
 		DecorationBounds: 1280, 1280
 	WithSpriteTurret:
 	Voiced:
-		VoiceSet: RA2SovietVehicleVoice
+		VoiceSet: ra2sovietsVehicleVoice
 	DeliversCash:
 		Payload: 450
 	RenderSprites:
@@ -6548,9 +6548,9 @@ ra2_soviets_flaktrack:
 	Inherits@EMP: ^TurretEMP
 	Inherits@cargo: ^CargoVehicle
 	Inherits@bot: ^BotAutoDeployTransport
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -6631,12 +6631,12 @@ ra2_soviets_apocalypsetank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -6776,12 +6776,12 @@ ra2_soviets_v3rocketlauncher:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -6860,12 +6860,12 @@ ra2_soviets_v3rocketlauncher:
 ra2v3rocket:
 	Inherits: ^ShootableMissile
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Health:
 		HP: 25000
 	RevealsShroud:
@@ -6937,9 +6937,9 @@ ra2_soviets_teslatank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@TeslaTargeting: ^PrioritizeTesla
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -7006,9 +7006,9 @@ ra2_soviets_warminer:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Valued:
@@ -7064,9 +7064,9 @@ ra2_soviets_terrordrone:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -8581,12 +8581,12 @@ ra2_soviets_kirovairship:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@priority: ^PrioritizeBuilding
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
 	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
 	Inherits@RA2KirovAtomicBombs: ^RA2KirovAtomicBombs
@@ -8665,12 +8665,12 @@ ra2_soviets_siegechopper:
 	Inherits@Voxel: ^RenderVoxel
 	Inherits@detect: ^GenericAirDetector
 	Inherits@bot: ^BotAutoDeploySwitchMode50
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -8813,12 +8813,12 @@ yrbpln:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Selectable:
 	Tooltip:
 		Name: MiG Bomber
@@ -8917,12 +8917,12 @@ ra2_soviets_migbomber:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
-	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
-	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Selectable:
 	Tooltip:
 		Name: MiG Bomber
@@ -9065,9 +9065,9 @@ ra2_soviets_transportkirov:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotAutoDeployTransport
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
 	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
 	Valued:
@@ -9731,7 +9731,7 @@ yrlunr.husk:
 
 yrspyp:
 	Inherits: ^AirstrikePlane
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
 	Tooltip:
 		Name: Spy Plane
 	Valued:
@@ -9836,9 +9836,9 @@ ra2cplane:
 
 ra2cplanesov:
 	Inherits: ^AirstrikePlane
-	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
-	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
-	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
 	ParaDrop:
 		DropRange: 4c0
 		ChuteSound: sparadra.wav
@@ -10817,7 +10817,7 @@ ra2ctbunk02:
 ra2ctbarn02:
 	Inherits: ra2ctbunk01
 	Tooltip:
-		Name: Farmer´s House
+		Name: FarmerÃ‚Â´s House
 
 ra2ctfarm01:
 	Inherits: ra2ctbunk01
@@ -10858,7 +10858,7 @@ ra2ctfarm06:
 ra2ctfrma:
 	Inherits: ra2ctbunk01
 	Tooltip:
-		Name: Farmer´s House
+		Name: FarmerÃ‚Â´s House
 
 ra2ctgas01:
 	Inherits: ra2ctchig01
@@ -12657,7 +12657,7 @@ ra2shkhero:
 # 	RenderSprites:
 # 	ProvidesPrerequisite:
 
-# ^RA2SovietRadShells:
+# ^ra2sovietsRadShells:
 # 	GrantConditionOnPrerequisite@RadShells:
 # 		Condition: ra2_soviets_doctrine_nuclearmunitions
 # 		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
@@ -12752,7 +12752,7 @@ ra2_soviets_doctrine_conscription:
 	ProvidesPrerequisite@global_conscription_buff:
 		Prerequisite: global_conscription_buff
 
-^RA2SovietConscription:
+^ra2sovietsConscription:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
 		Condition: ra2_soviets_doctrine_conscription
 		Prerequisites: ra2_soviets_doctrine_conscription
@@ -12773,7 +12773,7 @@ ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
 		Prerequisite: ra2_soviets_doctrine_1
 
-^RA2SovietInfantryConditioning:
+^ra2sovietsInfantryConditioning:
 	ChangesHealth@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 		Step: 15
 		Delay: 1
@@ -12806,7 +12806,7 @@ ra2_soviets_doctrine_shocktroopertraining:
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
 		Prerequisite: ra2_soviets_doctrine_1
 
-^RA2SovietShockTrooperTraining:
+^ra2sovietshockTrooperTraining:
 	RangeMultiplier@ra2_soviets_doctrine_shocktroopertraining:
 		Modifier: 115
 		RequiresCondition: ra2_soviets_doctrine_shocktroopertraining
@@ -12834,7 +12834,7 @@ ra2_soviets_doctrine_heavyarmorplatings:
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
-^RA2SovietArmorPlatings:
+^ra2sovietsArmorPlatings:
 	SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings:
 		Modifier: 90
 		RequiresCondition: ra2_soviets_doctrine_heavyarmorplatings
@@ -12859,7 +12859,7 @@ ra2_soviets_doctrine_reactivearmor:
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
-^RA2SovietReactiveArmor:
+^ra2sovietsReactiveArmor:
 	Armor@HAZMAT:
 		Type: HAZMAT
 		RequiresCondition: ra2_soviets_doctrine_reactivearmor
@@ -12898,7 +12898,7 @@ ra2_soviets_doctrine_tesladischargearmor:
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
-^RA2SovietTeslaDischargeArmor:
+^ra2sovietsTeslaDischargeArmor:
 	Inherits@EnemyInProximity: ^EnemyInProximity
 	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
 		Modifier: 85
@@ -12950,7 +12950,7 @@ ra2_soviets_doctrine_firemunitions:
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
-^RA2SovietFireShells:
+^ra2sovietsFireShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_firemunitions:
 		Condition: ra2_soviets_doctrine_firemunitions
 		Prerequisites: ra2_soviets_doctrine_firemunitions
@@ -12969,7 +12969,7 @@ ra2_soviets_doctrine_nuclearmunitions:
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
-^RA2SovietRadShells:
+^ra2sovietsRadShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_nuclearmunitions:
 		Condition: ra2_soviets_doctrine_nuclearmunitions
 		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
@@ -12991,7 +12991,7 @@ ra2_soviets_doctrine_teslamunitions:
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
-^RA2SovietTeslaShells:
+^ra2sovietsTeslaShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_teslamunitions:
 		Condition: ra2_soviets_doctrine_teslamunitions
 		Prerequisites: ra2_soviets_doctrine_teslamunitions
@@ -15384,8 +15384,8 @@ ra2_tractor_driveby:
 # 	Inherits@vo: ^AttackTurretedVoice
 # 	Inherits@EMP: ^TurretEMP
 # 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
-# 	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-# 	Inherits@armor: ^RA2SovietArmorPlatings
+# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+# 	Inherits@armor: ^ra2sovietsArmorPlatings
 # 	Valued:
 # 		Cost: 1750
 # 	Tooltip:
@@ -15490,8 +15490,8 @@ ra2_tractor_driveby:
 # 	Inherits@vo: ^AttackTurretedVoice
 # 	Inherits@EMP: ^TurretEMP
 # 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
-# 	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
-# 	Inherits@armor: ^RA2SovietArmorPlatings
+# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+# 	Inherits@armor: ^ra2sovietsArmorPlatings
 # 	Valued:
 # 		Cost: 1750
 # 	Tooltip:
@@ -15714,7 +15714,7 @@ ra2_tractor_driveby:
 # 	FireWarheadsOnDeath:
 # 		Weapon: UnitExplodeSmall
 # 	Voiced:
-# 		VoiceSet: RA2SovietVehicleVoice
+# 		VoiceSet: ra2sovietsVehicleVoice
 # 	ActorStatValues:
 # 		Upgrades:
 # 	WithSpriteTurret:

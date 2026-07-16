@@ -5,22 +5,22 @@ World:
 		Game: Red Alert
 		Side: Red Alert
 		Description: faction_ra_allies.description
-	FactionCA@soviet:
+	FactionCA@soviets:
 		Name: Soviets RA1 #faction_ra_soviets.name
-		InternalName: soviet
+		InternalName: soviets
 		Game: Red Alert
 		Side: Red Alert
 		Description: faction_ra_soviets.description
-	FactionCA@modjapan:
+	FactionCA@japan:
 		Name: Japan RA1 #faction_ra_japan.name
-		InternalName: modjapan
+		InternalName: japan
 		Side: Red Alert
 		Game: Red Alert
 		Description: faction_ra_japan.description
 	FactionCA@Randomra:
 		Name: Random RA1 #faction_ra_random.name
 		InternalName: Randomra
-		RandomFactionMembers: allies, soviet, modjapan
+		RandomFactionMembers: allies, soviets, japan
 		Game: Red Alert
 		Side: Random
 		Description: faction_ra_random.description
@@ -49,18 +49,18 @@ World:
 	StartingUnits@mcvonlyrasoviet:
 		Class: none
 		ClassName: MCV Only
-		Factions: soviet
+		Factions: soviets
 		BaseActor: ra1_soviet_mobileconstructionvehicle
 	StartingUnits@defaultsoviet:
 		Class: light
 		ClassName: Light Support
-		Factions: soviet
+		Factions: soviets
 		BaseActor: ra1_soviet_mobileconstructionvehicle
 		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ra1_soviet_flaktruck
 	StartingUnits@heavysoviet:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: soviet
+		Factions: soviets
 		BaseActor: ra1_soviet_mobileconstructionvehicle
 		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ra1_soviet_flaktruck,ra1_soviet_heavytank,ra1_soviet_heavytank
 
@@ -68,21 +68,21 @@ World:
 	#		Modded RA
 	####################################################################################################
 
-	StartingUnits@mcvonlyramodjapan:
+	StartingUnits@mcvonlyrajapan:
 		Class: none
 		ClassName: MCV Only
-		Factions: modjapan
+		Factions: japan
 		BaseActor: japan_japanesemobileconstructionvehicle
-	StartingUnits@defaultmodjapan:
+	StartingUnits@defaultjapan:
 		Class: light
 		ClassName: Light Support
-		Factions: modjapan
+		Factions: japan
 		BaseActor: japan_japanesemobileconstructionvehicle
 		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank
-	StartingUnits@heavymodjapan:
+	StartingUnits@heavyjapan:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: modjapan
+		Factions: japan
 		BaseActor: japan_japanesemobileconstructionvehicle
 		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank,japan_grenadebuggy,japan_grenadebuggy,japan_igomediumtank,japan_hovercrafttransport
 
@@ -2784,7 +2784,7 @@ ra1_soviet_hammertank:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: ra1_soviet_upgrade_shtoradefensesystem, ra1_soviet_upgrade_autoloaders, ra1_soviet_upgrade_unstableisotopes, ra1_soviet_upgrade_nucleartankshells, ra1_soviet_upgrade_stalinium
-		
+
 ra1_soviet_gorynychtank:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -4276,7 +4276,7 @@ ra1_soviet_stalinfist:
 	Valued:
 		Cost: 7000
 	Tooltip:
-		Name: Stalin Fist 
+		Name: Stalin Fist
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:

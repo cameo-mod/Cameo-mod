@@ -1,4 +1,4 @@
-schwarzer_mond_drone:
+schwarzermond_drone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -39,7 +39,7 @@ schwarzer_mond_drone:
 		Ammo: 6
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: schwarzer_mond_drone_husk
+		Actor: schwarzermond_drone_husk
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -85,7 +85,7 @@ schwarzer_mond_drone:
 		TrailLength: 15
 	-Voiced:
 
-schwarzer_mond_drone_husk:
+schwarzermond_drone_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Drone
@@ -101,11 +101,11 @@ schwarzer_mond_drone_husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schwarzer_mond_drone
+		Image: schwarzermond_drone
 	RenderSprites:
 		PlayerPalette: playerra2
 
-schwarzer_mond_spacezeppelin:
+schwarzermond_spacezeppelin:
 	Inherits: ^Helicopter
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -126,7 +126,7 @@ schwarzer_mond_spacezeppelin:
 		OverrideActor: naxis_transportzeppelin
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~schwarzer_mond_warfactory, schwarzer_mond_airfield, schwarzer_mond_radar
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_airfield, schwarzermond_radar
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor_shad.description
 	Aircraft:
@@ -146,87 +146,87 @@ schwarzer_mond_spacezeppelin:
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@elite:
 		Name: primary
 		Weapon: NaxiBeetleLaserE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAAE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@eliteAA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAAE
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@eliteUP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@eliteAA_UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaser
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@eliteAMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaser
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@AA_AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@eliteAA_AMP:
 		Name: primary
 		Weapon: Lunar_AmplifiedBeetleLaserAA
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarsoldier, schwarzer_mond_lunarrocket, schwarzer_mond_lunarrocket, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer, schwarzer_mond_lunarpanzer
+		InitialUnits: schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarsoldier, schwarzermond_lunarrocket, schwarzermond_lunarrocket, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer, schwarzermond_lunarpanzer
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 12
 		AfterLoadDelay: 0
@@ -242,7 +242,7 @@ schwarzer_mond_spacezeppelin:
 		Class: ra2_allies_nighthawk
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: schwarzer_mond_spacezeppelin
+		Image: schwarzermond_spacezeppelin
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiTankVoice
@@ -265,7 +265,7 @@ zep_husk.nax2:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schwarzer_mond_spacezeppelin
+		Image: schwarzermond_spacezeppelin
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -274,7 +274,7 @@ zep_husk.nax2:
 	WithShadow:
 	RenderSprites:
 		PlayerPalette: playerra2
-schwarzer_mond_blackbomb:
+schwarzermond_blackbomb:
 	Inherits: ^RANeutralPlane
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -292,7 +292,7 @@ schwarzer_mond_blackbomb:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_piercer.description
 	Health:
@@ -336,7 +336,7 @@ schwarzer_mond_blackbomb:
 		Actor: bbomb3_husk.nax2
 		Offset: -48,-48
 	RenderSprites:
-		Image: schwarzer_mond_blackbomb
+		Image: schwarzermond_blackbomb
 		PlayerPalette: playerra2
 	EjectOnDeath:
 		PilotActor: alien.nax
@@ -381,7 +381,7 @@ bbomb3_husk.nax2:
 ####################################################################################################
 #		Red Alert 2 Future Structures
 ####################################################################################################
-schwarzer_mond_haunebuii:
+schwarzermond_haunebuii:
 	Inherits: ^Helicopter
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -401,7 +401,7 @@ schwarzer_mond_haunebuii:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzer_mond_airfield
+		Prerequisites: ~schwarzermond_airfield
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu.description
 	Aircraft:
@@ -467,9 +467,9 @@ haunebu_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: schwarzer_mond_haunebuii
+		Image: schwarzermond_haunebuii
 		PlayerPalette: playerra2
-schwarzer_mond_haunebuiii:
+schwarzermond_haunebuiii:
 	Inherits: ^Helicopter
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -489,7 +489,7 @@ schwarzer_mond_haunebuiii:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu2.description
 	Aircraft:
@@ -560,9 +560,9 @@ haunebu2_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: schwarzer_mond_haunebuiii
+		Image: schwarzermond_haunebuiii
 		PlayerPalette: playerra2
-schwarzer_mond_corruptorpiercer:
+schwarzermond_corruptorpiercer:
 	Inherits: ^RANeutralPlane
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -580,7 +580,7 @@ schwarzer_mond_corruptorpiercer:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_piercer.description
 	Health:
@@ -625,7 +625,7 @@ schwarzer_mond_corruptorpiercer:
 	SpawnActorOnDeath:
 		Actor: piercer_husk.nax2
 	RenderSprites:
-		Image: schwarzer_mond_corruptorpiercer
+		Image: schwarzermond_corruptorpiercer
 		PlayerPalette: playerra2
 	EjectOnDeath:
 		PilotActor: alien.nax
@@ -646,10 +646,10 @@ piercer_husk.nax2:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: schwarzer_mond_corruptorpiercer
+		Image: schwarzermond_corruptorpiercer
 	RenderSprites:
 		PlayerPalette: playerra2
-schwarzer_mond_dieglocke:
+schwarzermond_dieglocke:
 	Inherits: ^Helicopter
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -668,7 +668,7 @@ schwarzer_mond_dieglocke:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzer_mond_airfield, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_dieglocke.description
@@ -746,5 +746,5 @@ dieglocke_husk.nax2:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: schwarzer_mond_dieglocke
+		Image: schwarzermond_dieglocke
 		PlayerPalette: playerra2

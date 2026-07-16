@@ -2196,7 +2196,7 @@
 		Prerequisites: ra2_soviets_industrialplant
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: latinsyndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@ShockwaveIndustrial:
 		Multiplier: 90
 		Prerequisites: schindustrialplant
@@ -2220,7 +2220,7 @@
 		RequiresCondition: cashrecover
 	GrantConditionOnPrerequisite@CashRecover:
 		Condition: cashrecover
-		Prerequisites: latin_syndicate_upgrade_cashrecovery
+		Prerequisites: latinsyndicate_upgrade_cashrecovery
 	EdibleByLeap:
 	Crushable:
 		WarnProbability: 0
@@ -2258,7 +2258,7 @@
 		Type: GrinderCash
 		Sounds: bgrinda.wav
 
-# Shared muzzle-glow tuning for cannon/td_nod_gunturret units — inherited by ^Tank and by cannon defence
+# Shared muzzle-glow tuning for cannon/td_nod_gunturret units â€” inherited by ^Tank and by cannon defence
 # turrets so both use identical values. Geometry/fades fall back to the trait defaults;
 # tune the muzzle-flash brightness here in one place.
 ^MuzzleGlowCannon:
@@ -2485,7 +2485,7 @@
 		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: latinsyndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@DuneFactoryUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_hightech
@@ -2868,20 +2868,20 @@
 			ra2_soviets_battlebunker: garrisoned
 			naxis_naxibunker: garrisoned
 			terran_bunker: garrisoned
-			latin_syndicate_combatbarracks: biggarrisoned
-			latin_syndicate_defensebureau: biggarrisoned
-			latin_syndicate_bunkertower: biggarrisoned
+			latinsyndicate_combatbarracks: biggarrisoned
+			latinsyndicate_defensebureau: biggarrisoned
+			latinsyndicate_bunkertower: biggarrisoned
 			td_gdi_assaultapc: battlefortresspassenger
 			ra2_allies_battlefortress: battlefortresspassenger
 			asian_alliance_dragonfly: battlefortresspassenger
 			asian_alliance_warturtle: battlefortresspassenger
-			latin_syndicate_narcohummer: battlefortresspassenger
-			latin_syndicate_carteltruck: battlefortresspassenger
+			latinsyndicate_narcohummer: battlefortresspassenger
+			latinsyndicate_carteltruck: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
 			scrapcar2_driveby.latin: battlefortresspassenger
 			naxis_oldtank: battlefortresspassenger
 			naxis_shoekarn: battlefortresspassenger
-			steel_consortium_poseidontank: battlefortresspassenger
+			steelconsortium_poseidontank: battlefortresspassenger
 			terran_pythean: battlefortresspassenger
 			zerg_behemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
@@ -2908,10 +2908,10 @@
 		RequiresCondition: garrisoned
 	RangeMultiplier@BigGarrison:
 		Modifier: 130
-		RequiresCondition: biggarrisoned && latin_syndicate_doctrine_lightposts
+		RequiresCondition: biggarrisoned && latinsyndicate_doctrine_lightposts
 	GrantConditionOnPrerequisite@ngbunk2:
-		Condition: latin_syndicate_doctrine_lightposts
-		Prerequisites: latin_syndicate_doctrine_lightposts
+		Condition: latinsyndicate_doctrine_lightposts
+		Prerequisites: latinsyndicate_doctrine_lightposts
 	ProductionCostMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
@@ -6543,7 +6543,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,latin_syndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steelconsortium_consortiumairpad,latinsyndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6563,11 +6563,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7090,12 +7090,12 @@ CPQDEBUGDUMMY:
 	DamageMultiplier@shielded:
 		RequiresCondition: shielded && !shieldpermanent
 		Modifier: 150
-	DamageMultiplier@steel_consortium_upgrade_shieldresistance:
-		RequiresCondition: steel_consortium_upgrade_shieldresistance && shielded
+	DamageMultiplier@steelconsortium_upgrade_shieldresistance:
+		RequiresCondition: steelconsortium_upgrade_shieldresistance && shielded
 		Modifier: 75
-	GrantConditionOnPrerequisite@steel_consortium_upgrade_shieldresistance:
-		Condition: steel_consortium_upgrade_shieldresistance
-		Prerequisites: steel_consortium_upgrade_shieldresistance
+	GrantConditionOnPrerequisite@steelconsortium_upgrade_shieldresistance:
+		Condition: steelconsortium_upgrade_shieldresistance
+		Prerequisites: steelconsortium_upgrade_shieldresistance
 	ExternalCondition@shieldhit:
 		Condition: shieldhit
 	WithIdleOverlay@shield1:
@@ -8087,7 +8087,7 @@ CPQDEBUGDUMMY:
 	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
 	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
 	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
-	# -Production@Upgrades: / -ProductionBar@Upgrades: — see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
+	# -Production@Upgrades: / -ProductionBar@Upgrades: â€” see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
 	# td_nod_templeprime, terran_commandcenter, protoss_nexus, ra2gaspysat.
 	Production@Upgrades:
 		Produces: Upgrades

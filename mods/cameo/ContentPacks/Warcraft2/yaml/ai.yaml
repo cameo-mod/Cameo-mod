@@ -1,4 +1,4 @@
-# ai.yaml — Warcraft 2 Humans faction AI configuration
+# ai.yaml â€” Warcraft 2 Humans faction AI configuration
 #
 # ARCHITECTURE NOTE
 # =================
@@ -7,11 +7,11 @@
 # as single trait instances on the Player: actor in the global
 # mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
 # BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
-# data in single dictionaries that CANNOT be split across files —
+# data in single dictionaries that CANNOT be split across files â€”
 # OpenRA's YAML merge replaces trait instances with the same @name,
 # it does not deep-merge their sub-sections.
 #
-# This file is loaded as a Rules: entry but contains no traits —
+# This file is loaded as a Rules: entry but contains no traits â€”
 # it is a placeholder ready for future per-faction bot module
 # splitting (see ROADMAP Phase E backlog).
 #
@@ -19,170 +19,170 @@
 # ====================================
 #
 # --- BuildingLimits (12 entries for humans) ---
-# 			humans_peasant: 50
-# 			humans_elvenlumbermill: 10
-# 			humans_barracks: 15
-# 			humans_gnomishinventor: 5
-# 			humans_gryphonaviary: 10
-# 			humans_townhall: 1
-# 			humans_keep: 1
-# 			humans_castle: 1
-# 			humans_blacksmith: 2
-# 			humans_stables: 1
-# 			humans_church: 1
-# 			humans_magetower: 1
+# 			warcraft_humans_peasant: 50
+# 			warcraft_humans_elvenlumbermill: 10
+# 			warcraft_humans_barracks: 15
+# 			warcraft_humans_gnomishinventor: 5
+# 			warcraft_humans_gryphonaviary: 10
+# 			warcraft_humans_townhall: 1
+# 			warcraft_humans_keep: 1
+# 			warcraft_humans_castle: 1
+# 			warcraft_humans_blacksmith: 2
+# 			warcraft_humans_stables: 1
+# 			warcraft_humans_church: 1
+# 			warcraft_humans_magetower: 1
 #
 # --- BuildingFractions (19 entries for humans) ---
-# 			humans_peasant: 20
-# 			humans_townhall: 1
-# 			humans_keep: 1
-# 			humans_castle: 1
-# 			humans_elvenlumbermill: 15
-# 			humans_barracks: 20
-# 			humans_gnomishinventor: 5
-# 			humans_gryphonaviary: 10
-# 			humans_blacksmith: 5
-# 			humans_stables: 1
-# 			humans_church: 1
-# 			humans_sunwell: 1
-# 			humans_magetower: 1
-# 			humans_humanscouttower: 20
-# 			humans_guardtower: 10
-# 			humans_cannontower: 10
-# 			humans_guardtower_2: 1
-# 			humans_cannontower_2: 1
-# 			humans_humangoldmine_2: 1
+# 			warcraft_humans_peasant: 20
+# 			warcraft_humans_townhall: 1
+# 			warcraft_humans_keep: 1
+# 			warcraft_humans_castle: 1
+# 			warcraft_humans_elvenlumbermill: 15
+# 			warcraft_humans_barracks: 20
+# 			warcraft_humans_gnomishinventor: 5
+# 			warcraft_humans_gryphonaviary: 10
+# 			warcraft_humans_blacksmith: 5
+# 			warcraft_humans_stables: 1
+# 			warcraft_humans_church: 1
+# 			warcraft_humans_sunwell: 1
+# 			warcraft_humans_magetower: 1
+# 			warcraft_humans_humanscouttower: 20
+# 			warcraft_humans_guardtower: 10
+# 			warcraft_humans_cannontower: 10
+# 			warcraft_humans_guardtower_2: 1
+# 			warcraft_humans_cannontower_2: 1
+# 			warcraft_humans_humangoldmine_2: 1
 #
 # --- UnitsToBuild (48 entries for humans) ---
-# 			humans_peasant: 10
-# 			humans_militiapeasant: 10
-# 			humans_footman: 5
-# 			humans_warcraft3footman: 5
-# 			humans_elvenarcher: 3
-# 			humans_elvenranger: 5
-# 			humans_highelvenarcher: 5
-# 			humans_dwarvenrifleman: 5
-# 			humans_knight: 3
-# 			humans_warcraft3knight: 3
-# 			humans_paladin: 5
-# 			humans_ballista: 1
-# 			humans_siegeengine: 1
-# 			humans_demolitionsquad: 1
-# 			humans_mortarteam: 1
-# 			humans_mage: 1
-# 			humans_archmage: 1
-# 			humans_highelfpriest: 1
-# 			humans_highelfsorceress: 1
-# 			humans_flyingmachine: 1
-# 			humans_gryphonrider: 3
-# 			humans_keep: 1
-# 			humans_castle: 1
-# 			humans_upgrade_betterfarm: 1
-# 			humans_upgrade_bestfarm: 1
-# 			humans_upgrade_swordstrength: 1
-# 			humans_upgrade_swordstrengthii: 1
-# 			humans_upgrade_armorstrength: 1
-# 			humans_upgrade_armorstrengthii: 1
-# 			humans_upgrade_arrowstrength: 1
-# 			humans_upgrade_arrowstrengthii: 1
-# 			humans_upgrade_warcraft3footman: 1
-# 			humans_upgrade_ranger: 1
-# 			humans_upgrade_highelvenarcher: 1
-# 			humans_upgrade_rangerlongbow: 1
-# 			humans_upgrade_rangerscouting: 1
-# 			humans_upgrade_rangermarksman: 1
-# 			humans_upgrade_ballistastrength: 1
-# 			humans_upgrade_ballistastrengthii: 1
-# 			humans_upgrade_cannondamage: 1
-# 			humans_upgrade_cannondamageii: 1
-# 			humans_upgrade_paladin: 1
-# 			humans_upgrade_warcraft3knightwip: 1
-# 			humans_upgrade_healing: 1
-# 			humans_upgrade_exorcism: 1
-# 			humans_upgrade_slow: 1
-# 			humans_upgrade_polymorph: 1
-# 			humans_upgrade_blizzard: 1
+# 			warcraft_humans_peasant: 10
+# 			warcraft_humans_militiapeasant: 10
+# 			warcraft_humans_footman: 5
+# 			warcraft_humans_warcraft3footman: 5
+# 			warcraft_humans_elvenarcher: 3
+# 			warcraft_humans_elvenranger: 5
+# 			warcraft_humans_highelvenarcher: 5
+# 			warcraft_humans_dwarvenrifleman: 5
+# 			warcraft_humans_knight: 3
+# 			warcraft_humans_warcraft3knight: 3
+# 			warcraft_humans_paladin: 5
+# 			warcraft_humans_ballista: 1
+# 			warcraft_humans_siegeengine: 1
+# 			warcraft_humans_demolitionsquad: 1
+# 			warcraft_humans_mortarteam: 1
+# 			warcraft_humans_mage: 1
+# 			warcraft_humans_archmage: 1
+# 			warcraft_humans_highelfpriest: 1
+# 			warcraft_humans_highelfsorceress: 1
+# 			warcraft_humans_flyingmachine: 1
+# 			warcraft_humans_gryphonrider: 3
+# 			warcraft_humans_keep: 1
+# 			warcraft_humans_castle: 1
+# 			warcraft_humans_upgrade_betterfarm: 1
+# 			warcraft_humans_upgrade_bestfarm: 1
+# 			warcraft_humans_upgrade_swordstrength: 1
+# 			warcraft_humans_upgrade_swordstrengthii: 1
+# 			warcraft_humans_upgrade_armorstrength: 1
+# 			warcraft_humans_upgrade_armorstrengthii: 1
+# 			warcraft_humans_upgrade_arrowstrength: 1
+# 			warcraft_humans_upgrade_arrowstrengthii: 1
+# 			warcraft_humans_upgrade_warcraft3footman: 1
+# 			warcraft_humans_upgrade_ranger: 1
+# 			warcraft_humans_upgrade_highelvenarcher: 1
+# 			warcraft_humans_upgrade_rangerlongbow: 1
+# 			warcraft_humans_upgrade_rangerscouting: 1
+# 			warcraft_humans_upgrade_rangermarksman: 1
+# 			warcraft_humans_upgrade_ballistastrength: 1
+# 			warcraft_humans_upgrade_ballistastrengthii: 1
+# 			warcraft_humans_upgrade_cannondamage: 1
+# 			warcraft_humans_upgrade_cannondamageii: 1
+# 			warcraft_humans_upgrade_paladin: 1
+# 			warcraft_humans_upgrade_warcraft3knightwip: 1
+# 			warcraft_humans_upgrade_healing: 1
+# 			warcraft_humans_upgrade_exorcism: 1
+# 			warcraft_humans_upgrade_slow: 1
+# 			warcraft_humans_upgrade_polymorph: 1
+# 			warcraft_humans_upgrade_blizzard: 1
 
-# Player: actor — no traits defined yet.
+# Player: actor â€” no traits defined yet.
 # When the engine supports per-faction bot conditions, move the
 # faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
 # entries here as a BaseBuilderBotModuleCA@<faction> /
 # UnitBuilderBotModuleCA@<faction> trait with RequiresCondition.
 Player:
 #
-# --- Additional faction: Warcraft 2 Orcs (orcs) — BuildingLimits (12 entries) ---
-# 			orcs_peon: 50
-# 			orcs_trolllumbermill: 10
-# 			orcs_barracks: 15
-# 			orcs_golbinalchemist: 5
-# 			orcs_dragonroost: 10
-# 			orcs_greathall: 1
-# 			orcs_stronghold: 1
-# 			orcs_fortress: 1
-# 			orcs_blacksmith: 2
-# 			orcs_ogremound: 1
-# 			orcs_altarofstorms: 1
-# 			orcs_templeofthedamned: 1
+# --- Additional faction: Warcraft 2 Orcs (orcs) â€” BuildingLimits (12 entries) ---
+# 			warcraft_orcs_peon: 50
+# 			warcraft_orcs_trolllumbermill: 10
+# 			warcraft_orcs_barracks: 15
+# 			warcraft_orcs_golbinalchemist: 5
+# 			warcraft_orcs_dragonroost: 10
+# 			warcraft_orcs_greathall: 1
+# 			warcraft_orcs_stronghold: 1
+# 			warcraft_orcs_fortress: 1
+# 			warcraft_orcs_blacksmith: 2
+# 			warcraft_orcs_ogremound: 1
+# 			warcraft_orcs_altarofstorms: 1
+# 			warcraft_orcs_templeofthedamned: 1
 #
-# --- Additional faction: Warcraft 2 Orcs (orcs) — BuildingFractions (18 entries) ---
-# 			orcs_peon: 20
-# 			orcs_greathall: 1
-# 			orcs_stronghold: 1
-# 			orcs_fortress: 1
-# 			orcs_trolllumbermill: 15
-# 			orcs_barracks: 20
-# 			orcs_golbinalchemist: 5
-# 			orcs_dragonroost: 10
-# 			orcs_blacksmith: 5
-# 			orcs_ogremound: 1
-# 			orcs_altarofstorms: 1
-# 			orcs_templeofthedamned: 1
-# 			orcs_orcwatchtower: 20
-# 			orcs_guardtower: 10
-# 			orcs_cannontower: 10
-# 			orcs_guardtower_2: 1
-# 			orcs_cannontower_2: 1
-# 			orcs_orcgoldmine_2: 1
+# --- Additional faction: Warcraft 2 Orcs (orcs) â€” BuildingFractions (18 entries) ---
+# 			warcraft_orcs_peon: 20
+# 			warcraft_orcs_greathall: 1
+# 			warcraft_orcs_stronghold: 1
+# 			warcraft_orcs_fortress: 1
+# 			warcraft_orcs_trolllumbermill: 15
+# 			warcraft_orcs_barracks: 20
+# 			warcraft_orcs_golbinalchemist: 5
+# 			warcraft_orcs_dragonroost: 10
+# 			warcraft_orcs_blacksmith: 5
+# 			warcraft_orcs_ogremound: 1
+# 			warcraft_orcs_altarofstorms: 1
+# 			warcraft_orcs_templeofthedamned: 1
+# 			warcraft_orcs_orcwatchtower: 20
+# 			warcraft_orcs_guardtower: 10
+# 			warcraft_orcs_cannontower: 10
+# 			warcraft_orcs_guardtower_2: 1
+# 			warcraft_orcs_cannontower_2: 1
+# 			warcraft_orcs_orcgoldmine_2: 1
 #
-# --- Additional faction: Warcraft 2 Orcs (orcs) — UnitsToBuild (41 entries) ---
-# 			orcs_peon: 10
-# 			orcs_grunt: 5
-# 			orcs_warcraft3grunt: 5
-# 			orcs_trollaxethrower: 3
-# 			orcs_trollberserker: 5
-# 			orcs_trollheadhunter: 5
-# 			orcs_ogre: 3
-# 			orcs_ogremage: 5
-# 			orcs_catapult: 1
-# 			orcs_siegeengine: 1
-# 			orcs_kodobeast: 1
-# 			orcs_goblinsappers: 1
-# 			orcs_deathknight: 1
-# 			orcs_goblinzeppelin: 1
-# 			orcs_dragon: 3
-# 			orcs_stronghold: 1
-# 			orcs_fortress: 1
-# 			orcs_upgrade_betterfarm: 10
-# 			orcs_upgrade_bestfarm: 10
-# 			orcs_upgrade_axestrength: 1
-# 			orcs_upgrade_axestrengthii: 1
-# 			orcs_upgrade_armorstrength: 1
-# 			orcs_upgrade_armorstrengthii: 1
-# 			orcs_upgrade_throwingaxestrength: 1
-# 			orcs_upgrade_throwingaxestrengthii: 1
-# 			orcs_upgrade_warcraft3grunt: 1
-# 			orcs_upgrade_berserker: 1
-# 			orcs_upgrade_trollheadhunter: 1
-# 			orcs_upgrade_berserkerlightaxes: 1
-# 			orcs_upgrade_berserkerscouting: 1
-# 			orcs_upgrade_berserkerregeneration: 1
-# 			orcs_upgrade_catapultstrength: 1
-# 			orcs_upgrade_catapultstrengthii: 1
-# 			orcs_upgrade_cannondamage: 1
-# 			orcs_upgrade_cannondamageii: 1
-# 			orcs_upgrade_ogremage: 1
-# 			orcs_upgrade_bloodlust: 1
-# 			orcs_upgrade_runes: 1
-# 			orcs_upgrade_haste: 1
-# 			orcs_upgrade_deathanddecay: 1
-# 			orcs_upgrade_raisedead: 1
+# --- Additional faction: Warcraft 2 Orcs (orcs) â€” UnitsToBuild (41 entries) ---
+# 			warcraft_orcs_peon: 10
+# 			warcraft_orcs_grunt: 5
+# 			warcraft_orcs_warcraft3grunt: 5
+# 			warcraft_orcs_trollaxethrower: 3
+# 			warcraft_orcs_trollberserker: 5
+# 			warcraft_orcs_trollheadhunter: 5
+# 			warcraft_orcs_ogre: 3
+# 			warcraft_orcs_ogremage: 5
+# 			warcraft_orcs_catapult: 1
+# 			warcraft_orcs_siegeengine: 1
+# 			warcraft_orcs_kodobeast: 1
+# 			warcraft_orcs_goblinsappers: 1
+# 			warcraft_orcs_deathknight: 1
+# 			warcraft_orcs_goblinzeppelin: 1
+# 			warcraft_orcs_dragon: 3
+# 			warcraft_orcs_stronghold: 1
+# 			warcraft_orcs_fortress: 1
+# 			warcraft_orcs_upgrade_betterfarm: 10
+# 			warcraft_orcs_upgrade_bestfarm: 10
+# 			warcraft_orcs_upgrade_axestrength: 1
+# 			warcraft_orcs_upgrade_axestrengthii: 1
+# 			warcraft_orcs_upgrade_armorstrength: 1
+# 			warcraft_orcs_upgrade_armorstrengthii: 1
+# 			warcraft_orcs_upgrade_throwingaxestrength: 1
+# 			warcraft_orcs_upgrade_throwingaxestrengthii: 1
+# 			warcraft_orcs_upgrade_warcraft3grunt: 1
+# 			warcraft_orcs_upgrade_berserker: 1
+# 			warcraft_orcs_upgrade_trollheadhunter: 1
+# 			warcraft_orcs_upgrade_berserkerlightaxes: 1
+# 			warcraft_orcs_upgrade_berserkerscouting: 1
+# 			warcraft_orcs_upgrade_berserkerregeneration: 1
+# 			warcraft_orcs_upgrade_catapultstrength: 1
+# 			warcraft_orcs_upgrade_catapultstrengthii: 1
+# 			warcraft_orcs_upgrade_cannondamage: 1
+# 			warcraft_orcs_upgrade_cannondamageii: 1
+# 			warcraft_orcs_upgrade_ogremage: 1
+# 			warcraft_orcs_upgrade_bloodlust: 1
+# 			warcraft_orcs_upgrade_runes: 1
+# 			warcraft_orcs_upgrade_haste: 1
+# 			warcraft_orcs_upgrade_deathanddecay: 1
+# 			warcraft_orcs_upgrade_raisedead: 1

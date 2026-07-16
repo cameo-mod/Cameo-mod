@@ -1,57 +1,57 @@
 World:
-	FactionCA@plymouthl:
+	FactionCA@plymouth:
 		Name: Plymouth (WIP)
-		InternalName: plymouthl
+		InternalName: plymouth
 		Game: Outpost 2
 		Side: Outpost 2
 		Description: faction_outpost2_plymouth.description
 
 	#Starting units
-	StartingUnits@mcvonlyplymouthl:
+	StartingUnits@mcvonlyplymouth:
 		Class: none
 		ClassName: MCV Only
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 
-	StartingUnits@defaultplymouthl:
+	StartingUnits@defaultplymouth:
 		Class: light
 		ClassName: Light Support
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
-	StartingUnits@heavyplymouthl:
+	StartingUnits@heavyplymouth:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: plymouthl
+		Factions: plymouth
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
-	FactionCA@edenl:
+	FactionCA@eden:
 		Name: Eden (WIP)
-		InternalName: edenl
+		InternalName: eden
 		Game: Outpost 2
 		Side: Outpost 2
 		Description: faction_outpost2_eden.description
 
 	#Starting units
-	StartingUnits@mcvonlyedenl:
+	StartingUnits@mcvonlyeden:
 		Class: none
 		ClassName: MCV Only
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 
-	StartingUnits@defaultedenl:
+	StartingUnits@defaulteden:
 		Class: light
 		ClassName: Light Support
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
 
-	StartingUnits@heavyedenl:
+	StartingUnits@heavyeden:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: edenl
+		Factions: eden
 		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
 		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
 
@@ -1085,10 +1085,10 @@ EDEN_FACTORY_CONSUMER:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@INFANTRYEDENL:
+	ProductionBar@INFANTRYeden:
 		ProductionType: Infantry
 		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAINFANTRYEDENL:
+	ProductionBar@RAINFANTRYeden:
 		ProductionType: RAInfantry
 		RequiresCondition: classicproductionqueues
 	WithIdleOverlay@SMOKE1:
@@ -3339,16 +3339,16 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 	BaseBuilding:
 # 	Production:
 # 		Produces: Building, Defence, Vehicle
-# 	ProductionBar@BuildingEdenl:
+# 	ProductionBar@Buildingeden:
 # 		ProductionType: Building
-# 	ProductionBar@DefenceEdenl:
+# 	ProductionBar@Defenceeden:
 # 		ProductionType: Defence
-# 	ProductionBar@VehicleEdenl:
+# 	ProductionBar@Vehicleeden:
 # 		ProductionType: Vehicle
-# 	ProductionQueue@BuildingEdenl:
+# 	ProductionQueue@Buildingeden:
 # 		Type: Building
 # 		DisplayOrder: 0
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Building
 # 		LowPowerModifier: 200
 # 		ReadyAudio: ConstructionComplete
@@ -3357,10 +3357,10 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 		QueuedAudio: Building
 # 		OnHoldAudio: OnHold
 # 		CancelledAudio: Cancelled
-# 	ProductionQueue@EdenlDefenceEdenl:
+# 	ProductionQueue@edenDefenceeden:
 # 		Type: Defence
 # 		DisplayOrder: 1
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Defence
 # 		LowPowerModifier: 200
 # 		ReadyAudio: UnitReady
@@ -3370,10 +3370,10 @@ PLYMOUTH_TIGER_SUPERNOVA:
 # 		OnHoldAudio: OnHold
 # 		CancelledAudio: Cancelled
 # 	#Temporary vehicle production capability
-# 	ProductionQueue@EdenlVehicleEdenl:
+# 	ProductionQueue@edenVehicleeden:
 # 		Type: Vehicle
 # 		DisplayOrder: 1
-# 		Factions: edenl
+# 		Factions: eden
 # 		Group: Vehicle
 # 		LowPowerModifier: 200
 # 		ReadyAudio: UnitReady

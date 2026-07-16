@@ -1,4 +1,4 @@
-latin_syndicate_powerstation:
+latinsyndicate_powerstation:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
@@ -10,7 +10,7 @@ latin_syndicate_powerstation:
 		Name: Power Station
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard
 		Queue: Building, RABuilding
 		Description: actor_nanrct.description
 	Building:
@@ -40,7 +40,7 @@ latin_syndicate_powerstation:
 		Modifier: 25
 	ProvidesPrerequisite@buildingname:
 
-latin_syndicate_combatbarracks:
+latinsyndicate_combatbarracks:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -55,7 +55,7 @@ latin_syndicate_combatbarracks:
 	Tooltip:
 		Name: Combat Barracks
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_powerstation
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_powerstation
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -97,7 +97,7 @@ latin_syndicate_combatbarracks:
 		Stats: Armor, Sight, Cargo, Kills, Experience
 	GivesBuildableArea:
 
-latin_syndicate_recyclingrefinery:
+latinsyndicate_recyclingrefinery:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -105,7 +105,7 @@ latin_syndicate_recyclingrefinery:
 	Tooltip:
 		Name: Recycling Refinery
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_powerstation
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_powerstation
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -116,7 +116,7 @@ latin_syndicate_recyclingrefinery:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: latin_syndicate_collectiontruck
+		Actor: latinsyndicate_collectiontruck
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -130,7 +130,7 @@ latin_syndicate_recyclingrefinery:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-latin_syndicate_latinempradar:
+latinsyndicate_latinempradar:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -140,7 +140,7 @@ latin_syndicate_latinempradar:
 	Buildable:
 		BuildLimit: 1
 		Description: actor_latin_radar.description
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_recyclingrefinery
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_recyclingrefinery
 	Tooltip:
 		Name: Latin EMP Radar
 	Building:
@@ -155,8 +155,8 @@ latin_syndicate_latinempradar:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: latin_syndicate_upgrade_unlockempcannon
-		IconImage: steel_consortium_consortiumbattlelab
+			1: latinsyndicate_upgrade_unlockempcannon
+		IconImage: steelconsortium_consortiumbattlelab
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -189,14 +189,14 @@ latin_syndicate_latinempradar:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-latin_syndicate_airstation:
+latinsyndicate_airstation:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_latinempradar
 		Description: actor_gaairc.description
 	Tooltip:
 		Name: Air Station
@@ -230,7 +230,7 @@ latin_syndicate_airstation:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
 		Prerequisites:
-			1: latin_syndicate_airstation
+			1: latinsyndicate_airstation
 		IconImage: yrspyp
 		Icons:
 			1: icon
@@ -257,7 +257,7 @@ latin_syndicate_airstation:
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 
-latin_syndicate_spycenter:
+latinsyndicate_spycenter:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -265,7 +265,7 @@ latin_syndicate_spycenter:
 	Selectable:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_latinempradar
 	Tooltip:
 		Name: Spy Center
 	Building:
@@ -285,8 +285,8 @@ latin_syndicate_spycenter:
 		OrderName: TraitorsPower
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: latin_syndicate_spycenter
-		IconImage: latin_syndicate_spycenter
+			1: latinsyndicate_spycenter
+		IconImage: latinsyndicate_spycenter
 		Icons:
 			1: icon2
 		Cursor: ability
@@ -322,7 +322,7 @@ latin_syndicate_spycenter:
 		BeaconActor: CAMERA.sw
 		CameraRange: 6000
 
-latin_syndicate_defensebureau:
+latinsyndicate_defensebureau:
 	Inherits: ^RA2Building
 	Inherits: ^BasicDefense
 	Inherits@Template: ^BasicDefenseTemplate
@@ -339,7 +339,7 @@ latin_syndicate_defensebureau:
 		Name: Defense Bureau
 	Buildable:
 		BuildLimit: 1
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_spycenter, derricklimit
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_spycenter, derricklimit
 		Description: actor_oilb.description
 	Building:
 		Footprint: xxx xxx xxx
@@ -354,7 +354,7 @@ latin_syndicate_defensebureau:
 		PauseOnCondition: lowpower
 		RequiresCondition: !build-incomplete
 	RenderSprites:
-		Image: latin_syndicate_defensebureau
+		Image: latinsyndicate_defensebureau
 		PlayerPalette: playerra2
 	-WithDeathAnimation:
 	GivesBuildableArea:
@@ -381,7 +381,7 @@ latin_syndicate_defensebureau:
 		Range: 10000
 	GivesBuildableArea:
 
-latin_syndicate_recyclingcenter:
+latinsyndicate_recyclingcenter:
 	Inherits: ^RA2Building
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
@@ -392,7 +392,7 @@ latin_syndicate_recyclingcenter:
 	Buildable:
 		BuildLimit: 1
 		Description: actor_latin_cgte.description
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_defensebureau, derricklimit
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_defensebureau, derricklimit
 	Tooltip:
 		Name: Recycling Center
 	Building:
@@ -413,7 +413,7 @@ latin_syndicate_recyclingcenter:
 			1: Produces scrap cars
 		Icons:
 			1: icon
-		IconImage: latin_syndicate_raiderbuggy
+		IconImage: latinsyndicate_raiderbuggy
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		Prerequisites:
@@ -441,7 +441,7 @@ latin_syndicate_recyclingcenter:
 	AcceptsDeliveredCash:
 		ValidTypes: GrinderCash
 
-latin_syndicate_topolsilo:
+latinsyndicate_topolsilo:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -452,7 +452,7 @@ latin_syndicate_topolsilo:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_spycenter, !ra2topolstrike, ~techlevel.superweapons
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_spycenter, !ra2topolstrike, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor_latin_ca12hit.description
 	Building:
@@ -513,7 +513,7 @@ latin_syndicate_topolsilo:
 	WithIdleOverlay@bib:
 		Sequence: bib
 
-latin_syndicate_syndicateservicedepot:
+latinsyndicate_syndicateservicedepot:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -526,7 +526,7 @@ latin_syndicate_syndicateservicedepot:
 	Tooltip:
 		Name: Syndicate Service Depot
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_syndicatefactory
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -542,7 +542,7 @@ latin_syndicate_syndicateservicedepot:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-latin_syndicate_latinsentrygun:
+latinsyndicate_latinsentrygun:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -553,7 +553,7 @@ latin_syndicate_latinsentrygun:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_combatbarracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 700
@@ -592,21 +592,21 @@ latin_syndicate_latinsentrygun:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
-		Condition: latin_syndicate_upgrade_yuristolentechchainguns
-		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns
+		Upgrades: latinsyndicate_upgrade_yuristolentechchainguns
 	Power:
 		Amount: -30
 	RevealsShroud:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 
-latin_syndicate_bunkertower:
+latinsyndicate_bunkertower:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -624,7 +624,7 @@ latin_syndicate_bunkertower:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_combatbarracks
 		Description: actor_nabnkr.description
 	Valued:
 		Cost: 600
@@ -655,15 +655,15 @@ latin_syndicate_bunkertower:
 		Range: 10000
 	DetectCloaked:
 		Range: 5000
-		RequiresCondition: latin_syndicate_doctrine_lightposts
+		RequiresCondition: latinsyndicate_doctrine_lightposts
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
 	WithIdleOverlay@top:
 		Sequence: idle-top
 		PauseOnCondition: disabled
-		RequiresCondition: !build-incomplete && latin_syndicate_doctrine_lightposts
+		RequiresCondition: !build-incomplete && latinsyndicate_doctrine_lightposts
 
-latin_syndicate_smlturret:
+latinsyndicate_smlturret:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -676,7 +676,7 @@ latin_syndicate_smlturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_defensebureau
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_defensebureau
 		Description: actor_latin_sml.description
 	Valued:
 		Cost: 5000
@@ -722,16 +722,16 @@ latin_syndicate_smlturret:
 	DetectCloaked:
 		Range: 7000
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
-		Condition: latin_syndicate_upgrade_yuristolentechchainguns
-		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns, latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Upgrades: latinsyndicate_upgrade_yuristolentechchainguns, latinsyndicate_upgrade_asianalliancestolentechhotfire
 
-latin_syndicate_latinaadefender:
+latinsyndicate_latinaadefender:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -743,7 +743,7 @@ latin_syndicate_latinaadefender:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_latinempradar
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_latinempradar
 		Description: template_anti_aircraft_defense.description
 	Valued:
 		Cost: 1500
@@ -775,17 +775,17 @@ latin_syndicate_latinaadefender:
 		Condition: gatling
 		RequiredShotsPerInstance: 4,8,12,16,20,24,28,32,36,40
 		RevokeDelay: 40
-		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: !rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 2,4,6,8,10,12,14,16,18,20
 		RevokeDelay: 20
-		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
-	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
-		Condition: latin_syndicate_upgrade_yuristolentechchainguns
-		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
+		RequiresCondition: rank-elite && latinsyndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latinsyndicate_upgrade_yuristolentechchainguns:
+		Condition: latinsyndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latinsyndicate_upgrade_yuristolentechchainguns
 	ActorStatValues:
-		Upgrades: latin_syndicate_upgrade_yuristolentechchainguns
+		Upgrades: latinsyndicate_upgrade_yuristolentechchainguns
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithMuzzleOverlay:
@@ -812,7 +812,7 @@ cgyard.latin:
 	Tooltip:
 		Name: Syndicate Naval Yard
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_combatbarracks, ~globalnaval
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_combatbarracks, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -833,13 +833,13 @@ cgyard.latin:
 
 #   Scrapcar
 
-latin_syndicate_syndicateconstructionyard:
+latinsyndicate_syndicateconstructionyard:
 	Inherits: ra2_allies_alliedconstructionyard
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Tooltip:
 		Name: Syndicate Construction Yard
 	Transforms:
-		IntoActor: latin_syndicate_syndicatemobileconstructionvehicle
+		IntoActor: latinsyndicate_syndicatemobileconstructionvehicle
 	WithIdleOverlay@fans:
 	WithIdleOverlay@top:
 		Sequence: idle-top
@@ -855,13 +855,13 @@ latin_syndicate_syndicateconstructionyard:
 		Proxy: cgcnst_infiltrated.latin
 		Types: TechStealerInfiltrate
 
-latin_syndicate_syndicatefactory:
+latinsyndicate_syndicatefactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Tooltip:
 		Name: Syndicate Factory
 	Buildable:
-		Prerequisites: ~latin_syndicate_syndicateconstructionyard, latin_syndicate_recyclingrefinery
+		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_recyclingrefinery
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete

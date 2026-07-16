@@ -1,4 +1,4 @@
-# ai.yaml — Syndicate faction AI configuration
+# ai.yaml â€” Syndicate faction AI configuration
 #
 # ARCHITECTURE NOTE
 # =================
@@ -7,29 +7,29 @@
 # as single trait instances on the Player: actor in the global
 # mods/cameo/ai/ai.yaml. Their sub-sections (BuildingLimits,
 # BuildingFractions, UnitsToBuild, UnitLimits) contain ALL faction
-# data in single dictionaries that CANNOT be split across files —
+# data in single dictionaries that CANNOT be split across files â€”
 # OpenRA's YAML merge replaces trait instances with the same @name,
 # it does not deep-merge their sub-sections.
 #
-# This file is loaded as a Rules: entry but contains no traits —
+# This file is loaded as a Rules: entry but contains no traits â€”
 # it is a placeholder ready for future per-faction bot module
 # splitting (see ROADMAP Phase E backlog).
 #
 # REFERENCE DATA (from global ai.yaml)
 # ====================================
 #
-# --- BuildingLimits (9 entries for latin_syndicate) ---
-# 			latin_syndicate_recyclingrefinery: 10
-# 			latin_syndicate_combatbarracks: 10
-# 			latin_syndicate_syndicatefactory: 10
-# 			latin_syndicate_airstation: 10
-# 			latin_syndicate_latinempradar: 1
-# 			latin_syndicate_recyclingcenter: 1
-# 			latin_syndicate_spycenter: 2
-# 			latin_syndicate_syndicateservicedepot: 1
-# 			latin_syndicate_topolsilo: 1
+# --- BuildingLimits (9 entries for latinsyndicate) ---
+# 			latinsyndicate_recyclingrefinery: 10
+# 			latinsyndicate_combatbarracks: 10
+# 			latinsyndicate_syndicatefactory: 10
+# 			latinsyndicate_airstation: 10
+# 			latinsyndicate_latinempradar: 1
+# 			latinsyndicate_recyclingcenter: 1
+# 			latinsyndicate_spycenter: 2
+# 			latinsyndicate_syndicateservicedepot: 1
+# 			latinsyndicate_topolsilo: 1
 
-# Player: actor — no traits defined yet.
+# Player: actor â€” no traits defined yet.
 # When the engine supports per-faction bot conditions, move the
 # faction-specific BuildingLimits/BuildingFractions/UnitsToBuild
 # entries here as a BaseBuilderBotModuleCA@<faction> /

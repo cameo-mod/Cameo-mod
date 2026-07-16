@@ -1,4 +1,4 @@
-schwarzer_mond_bermensch:
+schwarzermond_bermensch:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -19,7 +19,7 @@ schwarzer_mond_bermensch:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -31,58 +31,58 @@ schwarzer_mond_bermensch:
 	Armament@PRIMARY:
 		Weapon: ÜbermenschLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
 		Weapon: ÜbermenschLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: ÜbermenschLaser
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: ÜbermenschLaserE
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowUbermenschLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowUbermenschLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowUbermenschLaser
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowUbermenschLaserE
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
 		Weapon: Lunar_AmplifiedUbermenschLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
 		Weapon: Lunar_AmplifiedUbermenschLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_AMP:
 		Name: garrisoned
 		Weapon: Lunar_AmplifiedUbermenschLaser
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_AMP:
 		Name: garrisoned
 		Weapon: Lunar_AmplifiedUbermenschLaserE
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 0
 	Crushable:
 		CrushClasses: vehicle
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
-schwarzer_mond_parzival:
+schwarzermond_parzival:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -103,7 +103,7 @@ schwarzer_mond_parzival:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -137,7 +137,7 @@ schwarzer_mond_parzival:
 	AnnounceOnKill:
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
-schwarzer_mond_noidmgarmor:
+schwarzermond_noidmgarmor:
 	Inherits: ^Walker
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -163,7 +163,7 @@ schwarzer_mond_noidmgarmor:
 		Name: Noid MG Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~schwarzer_mond_barracks, schwarzer_mond_radar
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_radar
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -181,27 +181,27 @@ schwarzer_mond_noidmgarmor:
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
 		Weapon: NaxiMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
 		Weapon: Lunar_AmplifiedMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
 		Weapon: Lunar_AmplifiedMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:
@@ -218,7 +218,7 @@ schwarzer_mond_noidmgarmor:
 		VoiceSet: NaxiRobotVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-schwarzer_mond_noidharvester:
+schwarzermond_noidharvester:
 	Inherits: ^Walker
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -242,7 +242,7 @@ schwarzer_mond_noidharvester:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 75
-		Prerequisites: ~schwarzer_mond_orerefinery
+		Prerequisites: ~schwarzermond_orerefinery
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -297,7 +297,7 @@ schwarzer_mond_noidharvester:
 		PipCount: 9
 	Mobile:
 		Locomotor: chem
-schwarzer_mond_engineeringarmor:
+schwarzermond_engineeringarmor:
 	Inherits: ^Walker
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -319,7 +319,7 @@ schwarzer_mond_engineeringarmor:
 		Name: Engineering Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~schwarzer_mond_barracks
+		Prerequisites: ~schwarzermond_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -375,7 +375,7 @@ schwarzer_mond_engineeringarmor:
 		EnterCursor: ability
 		EnterBlockedCursor: move-blocked
 		Voice: Move
-schwarzer_mond_lunarsoldier:
+schwarzermond_lunarsoldier:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -396,7 +396,7 @@ schwarzer_mond_lunarsoldier:
 		Name: Lunar Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~schwarzer_mond_barracks
+		Prerequisites: ~schwarzermond_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -408,56 +408,56 @@ schwarzer_mond_lunarsoldier:
 	Armament@PRIMARY:
 		Weapon: NaxiRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
 		Weapon: NaxiRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
 		Weapon: Lunar_AmplifiedRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
 		Weapon: Lunar_AmplifiedRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: NaxiRifleLaser
-		RequiresCondition: !rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: NaxiRifleLaserE
-		RequiresCondition: rank-elite && !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaser
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaserE
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_AMP:
 		Name: garrisoned
 		Weapon: Lunar_AmplifiedRifleLaser
-		RequiresCondition: !rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_AMP:
 		Name: garrisoned
 		Weapon: Lunar_AmplifiedRifleLaserE
-		RequiresCondition: rank-elite && schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: NaxiLunarTroopVoice
-schwarzer_mond_lunarrocket:
+schwarzermond_lunarrocket:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -476,7 +476,7 @@ schwarzer_mond_lunarrocket:
 		Name: Lunar Rocket
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~schwarzer_mond_barracks
+		Prerequisites: ~schwarzermond_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:

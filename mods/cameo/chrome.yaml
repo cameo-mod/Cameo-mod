@@ -306,7 +306,7 @@ flags:
 		nodscavenger: 32, 384, 32, 16
 		modblackhandr: 32, 336, 32, 16
 		allies: 0, 32, 32, 16
-		soviet: 0, 48, 32, 16
+		soviets: 0, 48, 32, 16
 		modengland: 32, 192, 32, 16
 		modgermany: 32, 208, 32, 16
 		modusa: 32, 272, 32, 16
@@ -317,14 +317,14 @@ flags:
 		modirak: 64, 224, 32, 16
 		modchina: 64, 208, 32, 16
 		modants: 32, 320, 32, 16
-		modjapan: 32, 288, 32, 16
-		ra2america: 0, 64, 32, 16
+		japan: 32, 288, 32, 16
+		ra2allies: 0, 64, 32, 16
 		ra2french: 352, 48, 32, 16
 		ra2german: 352, 16, 32, 16
 		ra2british: 352, 32, 32, 16
 		ra2korea: 352, 64, 32, 16
 		ra2koreaaddon: 352, 64, 32, 16
-		ra2russia: 0, 80, 32, 16
+		ra2soviets: 0, 80, 32, 16
 		asianalliance: 352, 176, 32, 16
 		ra2cuba: 352, 80, 32, 16
 		ra2libyan: 352, 96, 32, 16
@@ -336,7 +336,7 @@ flags:
 		consortium: 352, 208, 32, 16
 		naxis: 352, 240, 32, 16
 		syndicate: 352, 256, 32, 16
-		lnaxis: 352, 272, 32, 16
+		schwarzermond: 352, 272, 32, 16
 		tkm: 352, 288, 32, 16
 		xcom: 352, 224, 32, 16
 		alpha: 0, 256, 32, 16
@@ -432,8 +432,8 @@ flags:
 		win98: 96, 192, 32, 16
 		human: 160, 112, 32, 16
 		orc: 160, 96, 32, 16
-		human2: 160, 336, 32, 16
-		orc2: 160, 320, 32, 16
+		warcraft_humans: 160, 336, 32, 16
+		warcraft_orcs: 160, 320, 32, 16
 		human3: 64, 96, 32, 16
 		orc3: 64, 96, 32, 16
 		undead3: 64, 96, 32, 16
@@ -517,7 +517,7 @@ flags:
 		allgdi: 32, 128, 32, 16
 		allnod: 32, 144, 32, 16
 		allallies: 32, 160, 32, 16
-		allsoviet: 32, 176, 32, 16
+		allsoviets: 32, 176, 32, 16
 		imperialguard: 288, 0, 32, 16
 		spacemarines: 288, 16, 32, 16
 		orkz: 288, 32, 32, 16
@@ -551,8 +551,8 @@ flags:
 		d2harkonnen: 192, 290, 32, 16
 		d2ordos: 192, 272, 32, 16
 		d2corrino: 192, 144, 32, 16
-		plymouthl: 160, 304, 32, 16
-		edenl: 160, 400, 32, 16
+		plymouth: 160, 304, 32, 16
+		eden: 160, 400, 32, 16
 		halloween: 64, 176, 32, 16
 		eglatechnic: 224, 176, 32, 16
 		zrobots: 96, 160, 32, 16
@@ -1260,7 +1260,7 @@ sidebar-button-allies-disabled:
 sidebar-button-allies-highlighted-disabled:
 	Inherits: sidebar-button-allies-disabled
 
-sidebar-soviet:
+sidebar-soviets:
 	Inherits: ^SidebarRA
 	Regions:
 		radar: 290, 290, 222, 222
@@ -1274,55 +1274,55 @@ sidebar-soviet:
 		background-bottom: 0, 480, 238, 31
 		background-supportoverlay: 77, 324, 64, 48
 
-sidebar-button-soviet:
+sidebar-button-soviets:
 	Inherits: ^SidebarRA
 	PanelRegion: 260, 165, 5, 5, 18, 18, 5, 5
-sidebar-button-soviet-hover:
+sidebar-button-soviets-hover:
 	Inherits: ^SidebarRA
 	PanelRegion: 260, 136, 5, 5, 18, 18, 5, 5
-sidebar-button-soviet-pressed:
-	Inherits: sidebar-button-soviet
-sidebar-button-soviet-highlighted:
+sidebar-button-soviets-pressed:
+	Inherits: sidebar-button-soviets
+sidebar-button-soviets-highlighted:
 	Inherits: ^SidebarRA
 	PanelRegion: 260, 223, 5, 5, 18, 18, 5, 5
-sidebar-button-soviet-highlighted-hover:
+sidebar-button-soviets-highlighted-hover:
 	Inherits: ^SidebarRA
 	PanelRegion: 260, 194, 5, 5, 18, 18, 5, 5
-sidebar-button-soviet-highlighted-pressed:
-	Inherits: sidebar-button-soviet-highlighted
-sidebar-button-soviet-disabled:
+sidebar-button-soviets-highlighted-pressed:
+	Inherits: sidebar-button-soviets-highlighted
+sidebar-button-soviets-disabled:
 	Inherits: sidebar-button-allies-disabled
-sidebar-button-soviet-highlighted-disabled:
+sidebar-button-soviets-highlighted-disabled:
 	Inherits: sidebar-button-allies-disabled
 
 # RA1 Japan
 
-^Sidebarmodjapan:
-	Image: sidebar_modjapan.png
-sidebar-modjapan:
+^Sidebarjapan:
+	Image: sidebar_japan.png
+sidebar-japan:
 	Inherits: sidebar
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan:
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan:
 	Inherits: sidebar-button
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan-hover:
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan-pressed:
-	Inherits: sidebar-button-modjapan
-sidebar-button-modjapan-highlighted:
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan-pressed:
+	Inherits: sidebar-button-japan
+sidebar-button-japan-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan-highlighted-hover:
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan-highlighted-pressed:
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan-highlighted-pressed:
 	Inherits: sidebar-button-ra2yuri-highlighted
-sidebar-button-modjapan-disabled:
+sidebar-button-japan-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^Sidebarmodjapan
-sidebar-button-modjapan-highlighted-disabled:
-	Inherits: sidebar-button-modjapan-disabled
+	Inherits@2: ^Sidebarjapan
+sidebar-button-japan-highlighted-disabled:
+	Inherits: sidebar-button-japan-disabled
 
 # TD
 ^SidebarTD:
@@ -1485,32 +1485,32 @@ sidebar-button-ra2allies-highlighted-disabled:
 
 # RA2 Soviet
 
-^SidebarRA2S:
-	Image: sidebar_ra2soviet.png
-sidebar-ra2soviet:
+^Sidebarra2soviets:
+	Image: sidebar_ra2soviets.png
+sidebar-ra2soviets:
 	Inherits: sidebar
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet:
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets:
 	Inherits: sidebar-button
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet-hover:
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet-pressed:
-	Inherits: sidebar-button-ra2soviet
-sidebar-button-ra2soviet-highlighted:
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets-pressed:
+	Inherits: sidebar-button-ra2soviets
+sidebar-button-ra2soviets-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet-highlighted-hover:
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet-highlighted-pressed:
-	Inherits: sidebar-button-ra2soviet-highlighted
-sidebar-button-ra2soviet-disabled:
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets-highlighted-pressed:
+	Inherits: sidebar-button-ra2soviets-highlighted
+sidebar-button-ra2soviets-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^SidebarRA2S
-sidebar-button-ra2soviet-highlighted-disabled:
-	Inherits: sidebar-button-ra2soviet-disabled
+	Inherits@2: ^Sidebarra2soviets
+sidebar-button-ra2soviets-highlighted-disabled:
+	Inherits: sidebar-button-ra2soviets-disabled
 
 # RA2 Yuri
 
@@ -1659,32 +1659,32 @@ sidebar-button-2100-highlighted-disabled:
 
 # USA
 
-^SidebarUSA:
+^Sidebarusa:
 	Image: sidebar_usa.png
-sidebar-USA:
+sidebar-usa:
 	Inherits: sidebar
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA:
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa:
 	Inherits: sidebar-button
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA-hover:
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA-pressed:
-	Inherits: sidebar-button-USA
-sidebar-button-USA-highlighted:
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa-pressed:
+	Inherits: sidebar-button-usa
+sidebar-button-usa-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA-highlighted-hover:
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA-highlighted-pressed:
-	Inherits: sidebar-button-USA-highlighted
-sidebar-button-USA-disabled:
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa-highlighted-pressed:
+	Inherits: sidebar-button-usa-highlighted
+sidebar-button-usa-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^SidebarUSA
-sidebar-button-USA-highlighted-disabled:
-	Inherits: sidebar-button-USA-disabled
+	Inherits@2: ^Sidebarusa
+sidebar-button-usa-highlighted-disabled:
+	Inherits: sidebar-button-usa-disabled
 
 # GLA
 
@@ -2671,7 +2671,7 @@ sidebar-button-swempire-highlighted-disabled:
 	Inherits: sidebar-button-swempire-disabled
 
 sidebar-swrebels:
-	Inherits: sidebar-soviet
+	Inherits: sidebar-soviets
 	Inherits: ^SidebarStarWars
 sidebar-button-swrebels:
 	Inherits: ^SidebarStarWars
@@ -2723,7 +2723,7 @@ sidebar-button-swseparatist-highlighted-disabled:
 	Inherits: sidebar-button-swseparatist-disabled
 
 sidebar-swhutt:
-	Inherits: sidebar-soviet
+	Inherits: sidebar-soviets
 	Inherits: ^SidebarStarWars2
 sidebar-button-swhutt:
 	Inherits: ^SidebarStarWars2

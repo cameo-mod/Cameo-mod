@@ -19,7 +19,7 @@ VehicleVoice:
 		syndicate: v00.aud,v02.aud
 		consortium: v00.aud,v02.aud
 		naxis: v00.aud,v02.aud
-		lnaxis: v00.aud,v02.aud
+		schwarzermond: v00.aud,v02.aud
 		futuretech: v00.aud,v02.aud
 	Voices:
 		Select: vehic1,yessir1,report1,await1,unit1
@@ -155,7 +155,7 @@ DinoVoice:
 RAGenericVoice:
 	Variants:
 		allies: a01.aud,a03.aud
-		modjapan: a01.aud,a03.aud
+		japan: a01.aud,a03.aud
 	Voices:
 		Select: await1,ready,report1,yessir1
 		Action: ackno,affirm1,noprob,overout,ritaway,roger,ugotit
@@ -168,7 +168,7 @@ RAGenericVoice:
 RAVehicleVoice:
 	Variants:
 		allies: a00.aud,a02.aud
-		modjapan: a00.aud,a02.aud
+		japan: a00.aud,a02.aud
 		tkm: a00.aud,a02.aud
 	Voices:
 		Select: vehic1,yessir1,report1,await1
@@ -185,7 +185,7 @@ RussianVoice:
 
 RussianVehicleVoice:
 	Variants:
-		soviet: r00.aud,r02.aud
+		soviets: r00.aud,r02.aud
 	Voices:
 		Select: vehic1,yessir1,report1,await1
 		Action: ackno,affirm1

@@ -688,7 +688,7 @@
 	# FactionCA@Randomcnc&ra:
 	# 	Name: TD & RA
 	# 	InternalName: Randomcnc&ra
-	# 	RandomFactionMembers: gdi, nod, modsteel, modblackhand, chemnod, stealthnod, nodscavenger, gdispecialf, iok, gdiallies, allies, soviet, modengland, modgermany, modfrance, modusa, modgreek, modrussia, modukraine, modirak, modchina, modjapan, camea
+	# 	RandomFactionMembers: gdi, nod, modsteel, modblackhand, chemnod, stealthnod, nodscavenger, gdispecialf, iok, gdiallies, allies, soviets, modengland, modgermany, modfrance, modusa, modgreek, modrussia, modukraine, modirak, modchina, japan, camea
 	# 	Game: Generic
 	# 	Side: Random
 	# 	Description: Random Faction\nA random faction from TD or RA will be chosen when the game starts.
@@ -701,7 +701,7 @@
 	# FactionCA@RandomSpecial:
 	# 	Name: Any
 	# 	InternalName: RandomSpecial
-	# 	RandomFactionMembers: wolfenstein3d, win98, infection, xmas, valentine, halloween, sow, worms, plymouthl, zrobots, modants, vordel
+	# 	RandomFactionMembers: wolfenstein3d, win98, infection, xmas, valentine, halloween, sow, worms, plymouth, zrobots, modants, vordel
 	# 	Game: Special
 	# 	Side: Random
 	# 	Description: Random Faction\nA random special faction from will be chosen when the game starts.
@@ -1339,7 +1339,7 @@ World:
 		FactionPreviewActors:
 			soviet: rafact.colorpicker
 			allies: rafact.colorpicker
-			modjapan: rafactj.colorpicker
+			japan: rafactj.colorpicker
 		PresetColors: 391D1D, 98331F, F57606, F50606, DDB8FF, ACF218, 06F739, F2BC18, 200738, 280DF6, 79F2AA, 34BA93, F861A4, C718F2, 79CEF2, 2F86F2
 		HsvSaturationRange: 0.0, 1.0
 		HsvValueRange: 0.0, 1.0

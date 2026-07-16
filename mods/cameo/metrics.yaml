@@ -107,11 +107,11 @@ Metrics:
 	FactionSuffix-oatreides: atreides
 	FactionSuffix-oharkonnen: harkonen
 	FactionSuffix-oordos: ordos
-	FactionSuffix-susa: USA
-	FactionSuffix-susasuper: USA
-	FactionSuffix-susalsr: USA
-	FactionSuffix-susaair: USA
-	FactionSuffix-susaarmor: USA
+	FactionSuffix-susa: usa
+	FactionSuffix-susasuper: usa
+	FactionSuffix-susalsr: usa
+	FactionSuffix-susaair: usa
+	FactionSuffix-susaarmor: usa
 	FactionSuffix-schina: china
 	FactionSuffix-schinainf: china
 	FactionSuffix-schinatnk: china
@@ -129,48 +129,46 @@ Metrics:
 	FactionSuffix-d2corrino: corrino
 	#RED ALERT
 	FactionSuffix-allies: allies
-	FactionSuffix-soviet: soviet
+	FactionSuffix-soviets: soviets
 	#RED ALERT EXPANSION
 	FactionSuffix-modengland: allies
 	FactionSuffix-modfrance: allies
 	FactionSuffix-modgermany: allies
 	FactionSuffix-modusa: allies
 	FactionSuffix-modgreek: allies
-	FactionSuffix-modrussia: soviet
-	FactionSuffix-modukraine: soviet
-	FactionSuffix-modirak: soviet
-	FactionSuffix-modchina: soviet
-	FactionSuffix-modjapan: modjapan
+	FactionSuffix-modrussia: soviets
+	FactionSuffix-modukraine: soviets
+	FactionSuffix-modirak: soviets
+	FactionSuffix-modchina: soviets
+	FactionSuffix-japan: japan
 	FactionSuffix-modants: generic
 	#RED ALERT 2
 	FactionSuffix-ra2allies: ra2allies
-	FactionSuffix-ra2america: ra2allies
 	FactionSuffix-ra2french: ra2allies
 	FactionSuffix-ra2german: ra2allies
 	FactionSuffix-ra2british: ra2allies
 	FactionSuffix-ra2korea: ra2allies
 	FactionSuffix-ra2koreaaddon: ra2allies
-	FactionSuffix-ra2soviet: ra2soviet
-	FactionSuffix-ra2russia: ra2soviet
-	FactionSuffix-ra2doom: ra2soviet
-	FactionSuffix-ra2cuba: ra2soviet
-	FactionSuffix-ra2libyan: ra2soviet
-	FactionSuffix-ra2iraq: ra2soviet
-	FactionSuffix-ra2psicorps: ra2soviet
-	FactionSuffix-ra2iraqaddon: ra2soviet
+	FactionSuffix-ra2soviets: ra2soviets
+	FactionSuffix-ra2doom: ra2soviets
+	FactionSuffix-ra2cuba: ra2soviets
+	FactionSuffix-ra2libyan: ra2soviets
+	FactionSuffix-ra2iraq: ra2soviets
+	FactionSuffix-ra2psicorps: ra2soviets
+	FactionSuffix-ra2iraqaddon: ra2soviets
 	FactionSuffix-futuretech: futuretech
 	FactionSuffix-yuri: ra2yuri
 	FactionSuffix-asianalliance: asianalliance
 	FactionSuffix-consortium: consortium
 	FactionSuffix-naxis: naxis
-	FactionSuffix-lnaxis: naxis
+	FactionSuffix-schwarzermond: naxis
 	FactionSuffix-syndicate: syndicate
 	FactionSuffix-tkm: tkm
 	#GENERALS
-	FactionSuffix-usa: USA
-	FactionSuffix-usasuper: USA
-	FactionSuffix-usalsr: USA
-	FactionSuffix-usaair: USA
+	FactionSuffix-usa: usa
+	FactionSuffix-usasuper: usa
+	FactionSuffix-usalsr: usa
+	FactionSuffix-usaair: usa
 	FactionSuffix-china: china
 	FactionSuffix-chinainf: china
 	FactionSuffix-chinatnk: china
@@ -228,8 +226,8 @@ Metrics:
 	FactionSuffix-human: human
 	FactionSuffix-orc: orc
 	#WARCRAFT 2
-	FactionSuffix-human2: human
-	FactionSuffix-orc2: orc
+	FactionSuffix-warcraft_humans: human
+	FactionSuffix-warcraft_orcs: orc
 	#WARZONE 2100
 	FactionSuffix-alpha: 2100
 	FactionSuffix-scavenger: 2100
@@ -243,8 +241,8 @@ Metrics:
 	FactionSuffix-x_all: generic
 	FactionSuffix-x_monsters: generic
 	#OUTPOST2
-	FactionSuffix-plymouthl: generic
-	FactionSuffix-edenl: generic
+	FactionSuffix-plymouth: generic
+	FactionSuffix-eden: generic
 	#Warhammer 40k
 	FactionSuffix-imperialguard: wh40kimperial
 	FactionSuffix-spacemarines: wh40kmarines
@@ -260,7 +258,7 @@ Metrics:
 	FactionSuffix-allgdi: tsgdi
 	FactionSuffix-allnod: tsnod
 	FactionSuffix-allallies: ra2allies
-	FactionSuffix-allsoviet: ra2soviet
+	FactionSuffix-allsoviets: ra2soviets
 	FactionSuffix-camea: generic
 	FactionSuffix-custom: generic
 	FactionSuffix-flaites: generic

@@ -1,4 +1,4 @@
-schwarzer_mond_constructionyard:
+schwarzermond_constructionyard:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -11,7 +11,7 @@ schwarzer_mond_constructionyard:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: schwarzer_mond_naxismobileconstructionvehicle
+		IntoActor: schwarzermond_naxismobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -27,7 +27,7 @@ schwarzer_mond_constructionyard:
 		Proxy: conyard_infiltrated.nax2
 		Types: TechStealerInfiltrate
 
-schwarzer_mond_hydrogenplant:
+schwarzermond_hydrogenplant:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -43,7 +43,7 @@ schwarzer_mond_hydrogenplant:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template_power.description
-		Prerequisites: ~schwarzer_mond_constructionyard
+		Prerequisites: ~schwarzermond_constructionyard
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -58,7 +58,7 @@ schwarzer_mond_hydrogenplant:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-schwarzer_mond_barracks:
+schwarzermond_barracks:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -69,7 +69,7 @@ schwarzer_mond_barracks:
 	Tooltip:
 		Name: Schwarzer Mond Barracks
 	Buildable:
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_hydrogenplant
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_hydrogenplant
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -82,7 +82,7 @@ schwarzer_mond_barracks:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-schwarzer_mond_orerefinery:
+schwarzermond_orerefinery:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -92,7 +92,7 @@ schwarzer_mond_orerefinery:
 	Tooltip:
 		Name: Schwarzer Mond Ore Refinery
 	Buildable:
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_hydrogenplant
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_hydrogenplant
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -104,11 +104,11 @@ schwarzer_mond_orerefinery:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
-		Actor: schwarzer_mond_noidharvester
+		Actor: schwarzermond_noidharvester
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@2:
-		Actor: schwarzer_mond_noidharvester
+		Actor: schwarzermond_noidharvester
 		SpawnOffset: 2,1
 		Facing: 256
 	SelectionDecorations:
@@ -117,7 +117,7 @@ schwarzer_mond_orerefinery:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-schwarzer_mond_radar:
+schwarzermond_radar:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -126,7 +126,7 @@ schwarzer_mond_radar:
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_orerefinery
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_orerefinery
 		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Radar
@@ -140,7 +140,7 @@ schwarzer_mond_radar:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-schwarzer_mond_airfield:
+schwarzermond_airfield:
 	Inherits: ^RA2Defense
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -160,7 +160,7 @@ schwarzer_mond_airfield:
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_radar
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_radar
 		Queue: Building, RABuilding
 		Description: Produces aircraft.
 	Building:
@@ -184,7 +184,7 @@ schwarzer_mond_airfield:
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
 	CarrierMaster:
-		Actors: schwarzer_mond_drone, schwarzer_mond_drone, schwarzer_mond_drone, schwarzer_mond_drone, schwarzer_mond_drone
+		Actors: schwarzermond_drone, schwarzermond_drone, schwarzermond_drone, schwarzermond_drone, schwarzermond_drone
 		RearmTicks: 75
 		RespawnTicks: 150
 		InstaRepair: true
@@ -196,7 +196,7 @@ schwarzer_mond_airfield:
 		Weapon: NaxDefensivePlaneTarget
 	AutoTarget:
 
-schwarzer_mond_lasertower:
+schwarzermond_lasertower:
 	Inherits: ^RA2Defense
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -211,7 +211,7 @@ schwarzer_mond_lasertower:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_barracks
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_barracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
@@ -236,19 +236,19 @@ schwarzer_mond_lasertower:
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@UP:
 		Weapon: Lunar_YellowLaserT
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_crystallens && !schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@AMP:
 		Weapon: Lunar_AmplifiedLaserT
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_amplifiedlens
+		RequiresCondition: schwarzermond_upgrade_amplifiedlens
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -263,7 +263,7 @@ schwarzer_mond_lasertower:
 		Range: 4090
 	ProvidesPrerequisite@buildingname:
 
-schwarzer_mond_sturmcannon:
+schwarzermond_sturmcannon:
 	Inherits: ^RA2Defense
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -278,7 +278,7 @@ schwarzer_mond_sturmcannon:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_warfactory
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_warfactory
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 1200
@@ -303,13 +303,13 @@ schwarzer_mond_sturmcannon:
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !schwarzer_mond_upgrade_vrilpoweredweapons
+		RequiresCondition: !schwarzermond_upgrade_vrilpoweredweapons
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_GreenSturmArty
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: schwarzer_mond_upgrade_vrilpoweredweapons
+		RequiresCondition: schwarzermond_upgrade_vrilpoweredweapons
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -322,7 +322,7 @@ schwarzer_mond_sturmcannon:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 
-schwarzer_mond_techcenter:
+schwarzermond_techcenter:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -330,7 +330,7 @@ schwarzer_mond_techcenter:
 	Inherits@shape: ^4x3Shape
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_radar
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_radar
 		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Tech Center
@@ -340,7 +340,7 @@ schwarzer_mond_techcenter:
 	Production@Research:
 		Produces: Research
 
-schwarzer_mond_warfactory:
+schwarzermond_warfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -353,7 +353,7 @@ schwarzer_mond_warfactory:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Description: template_factory.description
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_orerefinery
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_orerefinery
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -366,7 +366,7 @@ schwarzer_mond_warfactory:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-schwarzer_mond_meteortractionray:
+schwarzermond_meteortractionray:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -377,7 +377,7 @@ schwarzer_mond_meteortractionray:
 		Name: Meteor Traction Ray
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter, !schwarzer_mond_meteortractionray, ~techlevel.superweapons
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter, !schwarzermond_meteortractionray, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor_namisl.description
 	Building:
@@ -434,7 +434,7 @@ schwarzer_mond_meteortractionray:
 	SupportPowerChargeBar:
 	WithSupportPowerActivationAnimation:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: schwarzer_mond_meteortractionray
+		Prerequisite: schwarzermond_meteortractionray
 
 # nax2_chrono:
 # 	Inherits: ^RA2Building
@@ -444,7 +444,7 @@ schwarzer_mond_meteortractionray:
 # 	HitShape:
 # 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 # 	Buildable:
-# 		Prerequisites: ~schwarzer_mond_techcenter
+# 		Prerequisites: ~schwarzermond_techcenter
 # 	Tooltip:
 # 		Name: Dark Chronosphere
 # 	Building:
@@ -499,7 +499,7 @@ schwarzer_mond_meteortractionray:
 # 	Power:
 # 		Amount: -200
 
-schwarzer_mond_gravitycore:
+schwarzermond_gravitycore:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -518,7 +518,7 @@ schwarzer_mond_gravitycore:
 		Amount: -125
 	Buildable:
 		Description: Reduces movement speed and range of nearby vehicles.
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter
 		Queue: Defence, RADefence
 	ProximityExternalCondition@gravity_1:
 		Range: 15000
@@ -581,7 +581,7 @@ schwarzer_mond_gravitycore:
 		Color: 20027788
 		RequiresCondition: !disabled
 
-schwarzer_mond_moondairyfarm:
+schwarzermond_moondairyfarm:
 	Inherits: ^RA2Building
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
@@ -595,7 +595,7 @@ schwarzer_mond_moondairyfarm:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Produces Passive income and adds hp bonus with Infantry
-		Prerequisites: ~schwarzer_mond_constructionyard, schwarzer_mond_techcenter, ~techlevel.medium, derricklimit
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter, ~techlevel.medium, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2

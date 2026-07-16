@@ -74,7 +74,7 @@ UnitHunt = function (a)
 	end)
 end
 
-SankalpaHeli = { "ra1_soviet_hiptransport" }
+SankalpaHeli = { "ra1_soviets_hiptransport" }
 SankalpaAirForce = { "td_nod_apacheattackhelicopter", "td_nod_apacheattackhelicopter", "td_nod_apacheattackhelicopter" }
 SankalpaDefenseForce = { "td_nod_flametankmkii", "td_nod_flametankmkii", "td_nod_chemicalssmlauncher", "td_nod_chemicalssmlauncher" }
 

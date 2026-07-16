@@ -14,7 +14,7 @@ inspect_husk.steel:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_consortium_empressstation
+		Image: steelconsortium_empressstation
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -24,7 +24,7 @@ inspect_husk.steel:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-steel_consortium_twister:
+steelconsortium_twister:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -39,7 +39,7 @@ steel_consortium_twister:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~steel_consortium_consortiumairpad
+		Prerequisites: ~steelconsortium_consortiumairpad
 		Queue: Aircraft, RAAircraft
 		Description: actor_falc.description
 	Aircraft:
@@ -104,7 +104,7 @@ steel_consortium_twister:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 twister_husk.steel:
 	Inherits: ^PlaneHusk
@@ -122,7 +122,7 @@ twister_husk.steel:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_consortium_twister
+		Image: steelconsortium_twister
 	RenderSprites:
 		PlayerPalette: playerra2cons
 
@@ -134,11 +134,11 @@ grun_husk.steel:
 		TurnSpeed: 24
 		Speed: 120
 	RenderSprites:
-		Image: steel_consortium_skyhammer
+		Image: steelconsortium_skyhammer
 		PlayerPalette: playerra2rot
 	Turreted:
 
-steel_consortium_cargoship:
+steelconsortium_cargoship:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -156,7 +156,7 @@ steel_consortium_cargoship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_consortium_consortiumairpad
+		Prerequisites: ~steelconsortium_consortiumairpad
 		Queue: Aircraft, RAAircraft
 		Description: actor_shad.description
 	Aircraft:
@@ -177,7 +177,7 @@ steel_consortium_cargoship:
 		MuzzlePalette: ra2effect
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: steel_consortium_clonetrooper, steel_consortium_hoverboardgrenadier, steel_consortium_quantummissiletrooper, steel_consortium_clonetrooper, steel_consortium_hoverboardgrenadier, steel_consortium_quantummissiletrooper
+		InitialUnits: steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper, steelconsortium_clonetrooper, steelconsortium_hoverboardgrenadier, steelconsortium_quantummissiletrooper
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 6
 		AfterLoadDelay: 0
@@ -190,15 +190,15 @@ steel_consortium_cargoship:
 		Actor: cargoship_husk.steel
 	SelectionDecorations:
 	Selectable:
-		Class: steel_consortium_cargoship
+		Class: steelconsortium_cargoship
 		Bounds: 1536, 1536
 	RenderSprites:
-		Image: steel_consortium_cargoship
+		Image: steelconsortium_cargoship
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 cargoship_husk.steel:
 	Inherits: ^PlaneHusk
@@ -216,7 +216,7 @@ cargoship_husk.steel:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_consortium_cargoship
+		Image: steelconsortium_cargoship
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -242,7 +242,7 @@ cruiser_husk.steel:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_consortium_cloudbreaker
+		Image: steelconsortium_cloudbreaker
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -278,7 +278,7 @@ cruiser_f_husk.steel:
 
 ### Federation tree
 
-steel_consortium_empressstation:
+steelconsortium_empressstation:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -298,7 +298,7 @@ steel_consortium_empressstation:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumairpad, steelconsortium_consortiumbattlelab
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_steel_inspect.description
@@ -350,9 +350,9 @@ steel_consortium_empressstation:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_skyhammer:
+steelconsortium_skyhammer:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -365,7 +365,7 @@ steel_consortium_skyhammer:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 110
-		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_consortiumbattlelab
+		Prerequisites: ~steelconsortium_consortiumairpad, steelconsortium_consortiumbattlelab
 		Description: actor_steel_grun.description
 	Valued:
 		Cost: 4500
@@ -398,16 +398,16 @@ steel_consortium_skyhammer:
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !rank-elite && steelconsortium_upgrade_quantumweaponpower
 	Armament@elite:
 		Weapon: SteelAirTurretE
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@steel_consortium_upgrade_quantumweaponpower:
+	FirepowerMultiplier@steelconsortium_upgrade_quantumweaponpower:
 		Modifier: 125
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	AttackAircraft:
 		FacingTolerance: 10
 	Aircraft:
@@ -440,9 +440,9 @@ steel_consortium_skyhammer:
 		TurnSpeed: 24
 	WithSpriteTurret:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
-steel_consortium_cloudbreaker:
+steelconsortium_cloudbreaker:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -461,7 +461,7 @@ steel_consortium_cloudbreaker:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_consortium_consortiumairpad, steel_consortium_geothermalreactor, steel_consortium_promotion_unlockcloudbreaker
+		Prerequisites: ~steelconsortium_consortiumairpad, steelconsortium_geothermalreactor, steelconsortium_promotion_unlockcloudbreaker
 		Queue: Aircraft, RAAircraft
 		Description: actor_shad.description
 	Aircraft:
@@ -499,13 +499,13 @@ steel_consortium_cloudbreaker:
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower && !rank-elite
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower && !rank-elite
 	Armament@CANNONELITE:
 		Weapon: SteelCruiserArtilleryE
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower && rank-elite
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower && rank-elite
 	FirepowerMultiplier@Carrier:
 		Modifier: 50
 	RenderRangeCircle:
@@ -535,7 +535,7 @@ steel_consortium_cloudbreaker:
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
 cruiser_f.steel:
 	Inherits: ^RANeutralPlane
@@ -587,7 +587,7 @@ cruiser_f.steel:
 		LocalOffset: 0,-256,0, 0,256,0
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	FirepowerMultiplier@CruiserFighter:
 		Modifier: 10
 	AmmoPool:
@@ -619,7 +619,7 @@ cruiser_f.steel:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
 scalpelMG.steel:
 	Inherits: ^SteelDefensiveDrones
@@ -635,7 +635,7 @@ scalpelMG.steel:
 	AttackAircraft:
 		Armaments: primary, pointdefense
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_shieldresistance
 
 scalpelQuantumCannon.steel:
 	Inherits: ^SteelDefensiveDrones
@@ -649,18 +649,18 @@ scalpelQuantumCannon.steel:
 		LocalOffset: 200,0,0
 		MuzzleSequence: muzzle2
 		MuzzlePalette: ra2effect
-		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Weapon: SteelQuantumTurretRailEMP
 		LocalOffset: 200,0,0
 		MuzzleSequence: muzzle2
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	WithMuzzleOverlay:
 	AttackAircraft:
 		Armaments: primary, pointdefense
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance
 
 scalpelAA.steel:
 	Inherits: ^SteelDefensiveDrones
@@ -675,14 +675,14 @@ scalpelAA.steel:
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle2
 		MuzzlePalette: ra2effect
-		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: !steelconsortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Weapon: SteelScalpelRailgunEMPAA
 		LocalOffset: 200,-100,0, 200,100,0, 200,-200,0, 200,200,0
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle2
 		MuzzlePalette: ra2effect
-		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
+		RequiresCondition: steelconsortium_upgrade_quantumweaponpower
 	WithMuzzleOverlay:
 	ActorStatValues:
-		Upgrades: steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
+		Upgrades: steelconsortium_upgrade_quantumweaponpower, steelconsortium_upgrade_shieldresistance

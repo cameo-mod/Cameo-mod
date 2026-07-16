@@ -2210,12 +2210,12 @@ faction_ts_random =
    .description = Random faction
       A random faction from Tiberian Sun will be chosen when the game starts.
 
-faction_ts_gdi =
+faction_tsgdi =
    .name = GDI TS
    .description = GDI from Tiberian Sun
       Support powers: Drop Pods, Ion Cannon
 
-faction_ts_nod =
+faction_tsnod =
    .name = Nod TS
    .description = Nod from Tiberian Sun
       Support powers: Chemical Missile
@@ -2264,10 +2264,10 @@ faction_d2k_ixian =
       they often deploy experimental weaponry and mechanical
       monstrosities that others fear to touch.
 
-      Difficulty: ©©©©
-      Early Game: ©©©
-      Mid Game: ©©©©
-      Late Game: ©©©©©
+      Difficulty: Â©Â©Â©Â©
+      Early Game: Â©Â©Â©
+      Mid Game: Â©Â©Â©Â©
+      Late Game: Â©Â©Â©Â©Â©
       Playstyle: Turtle
       Strength: Late Game Units
       Weakness: Mobility
@@ -2286,10 +2286,10 @@ faction_d2k_ordos =
       to sabotage and forbidden Ixian technologies.
       Their Strength lies in Stealth and quick hit and run tactics
 
-      Difficulty: ©©©
-      Early Game: ©©
-      Mid Game: ©©©
-      Late Game: ©©©©©
+      Difficulty: Â©Â©Â©
+      Early Game: Â©Â©
+      Mid Game: Â©Â©Â©
+      Late Game: Â©Â©Â©Â©Â©
       Playstyle: Mobility / Steamrolling
       Strength: Late Game Units
       Weakness: Early Game Tanks
