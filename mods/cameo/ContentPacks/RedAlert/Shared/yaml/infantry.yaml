@@ -6,6 +6,7 @@ RAE1:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
@@ -100,6 +101,7 @@ RAE3:
 		Name: Allied Rocket Soldier
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY: ##########
 		Weapon: RocketsRA
 		LocalOffset: 256,43,341
@@ -131,6 +133,7 @@ RAE6:
 		BuildPaletteOrder: 30
 		Prerequisites: ~rabarracks
 		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
 	RenderSprites:
 		Image: rae6
 

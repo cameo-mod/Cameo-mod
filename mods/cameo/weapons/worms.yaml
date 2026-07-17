@@ -103,7 +103,7 @@ SheepExplode:
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 15
 		
@@ -267,7 +267,7 @@ SheepExplode:
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 15
 		
@@ -328,7 +328,7 @@ Atomicdonkey:
 		Delay: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 3
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -353,7 +353,7 @@ Atomicdonkey:
 		Delay: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -374,7 +374,7 @@ Atomicdonkey:
 		Delay: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 9
 	Warhead@13Shake: ShakeScreen

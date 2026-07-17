@@ -1,0 +1,175 @@
+^ZergSwarmerUpgrades:
+	ReloadDelayMultiplier@zerg_upgrade_adrenalglands:
+		Modifier: 75
+		RequiresCondition: zerg_upgrade_adrenalglands
+	GrantConditionOnPrerequisite@zerg_upgrade_adrenalglands:
+		Condition: zerg_upgrade_adrenalglands
+		Prerequisites: zerg_upgrade_adrenalglands
+	SpeedMultiplier@zerg_upgrade_metabolicboost:
+		Modifier: 133
+		RequiresCondition: zerg_upgrade_metabolicboost
+	GrantConditionOnPrerequisite@zerg_upgrade_metabolicboost:
+		Condition: zerg_upgrade_metabolicboost
+		Prerequisites: zerg_upgrade_metabolicboost
+
+^ZergMissileWeaponUpgrades:
+	FirepowerMultiplier@zerg_upgrade_missileattackslevel1:
+		Modifier: 115
+		RequiresCondition: zerg_upgrade_missileattackslevel1 && !zerg_upgrade_missileattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_missileattackslevel1:
+		Condition: zerg_upgrade_missileattackslevel1
+		Prerequisites: zerg_upgrade_missileattackslevel1
+	FirepowerMultiplier@zerg_upgrade_missileattackslevel2:
+		Modifier: 135
+		RequiresCondition: zerg_upgrade_missileattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_missileattackslevel2:
+		Condition: zerg_upgrade_missileattackslevel2
+		Prerequisites: zerg_upgrade_missileattackslevel2
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1
+
+^ZergFlyerWeaponUpgrades:
+	FirepowerMultiplier@zerg_upgrade_flyerattackslevel1:
+		Modifier: 115
+		RequiresCondition: zerg_upgrade_flyerattackslevel1 && !zerg_upgrade_flyerattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyerattackslevel1:
+		Condition: zerg_upgrade_flyerattackslevel1
+		Prerequisites: zerg_upgrade_flyerattackslevel1
+	FirepowerMultiplier@zerg_upgrade_flyerattackslevel2:
+		Modifier: 135
+		RequiresCondition: zerg_upgrade_flyerattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyerattackslevel2:
+		Condition: zerg_upgrade_flyerattackslevel2
+		Prerequisites: zerg_upgrade_flyerattackslevel2
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1
+
+^ZergFlyerArmorUpgrades:
+	DamageMultiplier@zerg_upgrade_flyercarapacelevel1:
+		Modifier: 90
+		RequiresCondition: zerg_upgrade_flyercarapacelevel1 && !zerg_upgrade_flyercarapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyercarapacelevel1:
+		Condition: zerg_upgrade_flyercarapacelevel1
+		Prerequisites: zerg_upgrade_flyercarapacelevel1
+	DamageMultiplier@zerg_upgrade_flyercarapacelevel2:
+		Modifier: 80
+		RequiresCondition: zerg_upgrade_flyercarapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyercarapacelevel2:
+		Condition: zerg_upgrade_flyercarapacelevel2
+		Prerequisites: zerg_upgrade_flyercarapacelevel2
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyercarapacelevel1
+
+^GroovedSpinesUpgrade:
+	RangeMultiplier@zerg_upgrade_groovedspines:
+		RequiresCondition: zerg_upgrade_groovedspines
+		Modifier: 120
+	GrantConditionOnPrerequisite@zerg_upgrade_groovedspines:
+		Condition: zerg_upgrade_groovedspines
+		Prerequisites: zerg_upgrade_groovedspines
+	ActorStatValues:
+		Upgrades: zerg_upgrade_groovedspines
+
+####################################################################################################
+#		BUILDING TERRAN
+####################################################################################################
+
+^BaseBuildingZerg:
+	Inherits: ^BaseBuilding
+	#Inherits@zergai: ^ZergAIProductionBoost
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 4
+		IsCircular: true
+	Building:
+		# TerrainTypes: ZergSoil ##########
+
+^SCBREEDFASTER:
+	ExternalCondition@Fasterbreed:
+		Condition: SCFASTERBREED
+	ProvidesPrerequisite@fasterbreed:
+		Prerequisite: SCFASTERBREED
+		RequiresCondition: SCFASTERBREED
+	ProductionTimeMultiplier@fasterbreed:
+		Prerequisites: SCFASTERBREED
+		Multiplier: 75
+		Queue: SCZergInfantry
+
+^ZergBurrow:
+	Inherits@cloak: ^CloakedVehicleWithUpgrade
+	Inherits@bot: ^SiegeMode
+	AttackFrontal:
+		FacingTolerance: 0
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		Name: deployed
+		RequiresCondition: !undeployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		BodyNames: deployed
+		Sequence: deploy
+		Name: deployed
+		RequiresCondition: undeployed
+	GrantConditionOnDeploy:
+		DeploySounds: zburrowup.wav
+		UndeploySounds: zburrowdown.wav
+		RequiresCondition: !parachute
+	Cloak:
+		InitialDelay: 50
+		CloakDelay: 50
+		RequiresCondition: deployed
+		CloakStyle: Alpha
+		IsPlayerPalette: true
+	IssueOrderToBot@AI:
+		OrderTrigger: BecomingIdle
+		OrderChance: 50
+		OrderInterval: 1000
+		RequiresCondition: botmicro
+
+^ZergDoubleSpawner:
+	ProductionCostMultiplier@ZergDoubleSpawner:
+		Multiplier: 200
+	Buildable:
+		Description: Zerg spawner that produces two units at once.
+		BuildAmount: 2
+
+^VeryLargeZerg:
+	Inherits: ^LargeZerg
+	Inherits@2: ^IronCurtainable
+	Inherits@cloak: ^AcceptsCloakCrate
+	Inherits@chrono: ^Chronoshiftable
+	Inherits@Crushes: ^VehicleCrusher
+	-ExternalCondition@REAPERTRAP:
+	-Cloneable:
+	-Captures@DRIVER_KILL:
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Targetable@Zerg:
+		TargetTypes: Ground, Vehicle, Tank, Monster
+	Passenger:
+		CargoType: Vehicle
+
+^AirZerg:
+	Inherits: ^Helicopter
+	-SpawnActorOnDeath:
+	-Integrity:
+	-GrantCondition@electronics:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	DeathSounds:
+	Targetable@Zerg:
+		TargetTypes: Monster
+	Targetable@HEAL:
+		RequiresCondition: !untargetable && damaged && !Healed
+		TargetTypes: Heal, Healing
+	ProductionTimeMultiplier@supplylimit:
+		Multiplier: 1000
+		Prerequisites: supplylimit
+		Queue: SCZergInfantry
+	ProductionTimeMultiplier@zerg_overmind:
+		Multiplier: 50
+		Prerequisites: zerg_overmind
+		Queue: SCZergInfantry

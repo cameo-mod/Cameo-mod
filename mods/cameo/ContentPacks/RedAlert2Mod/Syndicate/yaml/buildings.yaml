@@ -56,6 +56,7 @@ latinsyndicate_combatbarracks:
 		Name: Combat Barracks
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_powerstation
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -106,6 +107,7 @@ latinsyndicate_recyclingrefinery:
 		Name: Recycling Refinery
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_powerstation
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -266,6 +268,7 @@ latinsyndicate_spycenter:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_latinempradar
+		Description: Provides intelligence capabilities.
 	Tooltip:
 		Name: Spy Center
 	Building:
@@ -527,6 +530,7 @@ latinsyndicate_syndicateservicedepot:
 		Name: Syndicate Service Depot
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_syndicatefactory
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -862,6 +866,7 @@ latinsyndicate_syndicatefactory:
 		Name: Syndicate Factory
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_recyclingrefinery
+		Description: Produces vehicles.
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete

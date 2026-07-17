@@ -1,0 +1,760 @@
+terran_scv:
+	Inherits: ^Vehicle
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^SCWorker
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	#AutoTargetPriority@Repair:
+	#	ValidTargets: Repair, Repairing
+	#	ValidStances: Ally
+	#	Priority: 2
+	#AutoTargetPriority@DEFAULT:
+	#	ValidStances: Enemy, Neutral
+	#AutoTargetPriority@ATTACKANYTHING:
+	#	ValidStances: Enemy, Neutral
+	Tooltip:
+		Name: SCV
+	Buildable:
+		Prerequisites: ~terran_refinery
+		Description: actor_scscv.description
+	Armament:
+		Weapon: SCVAttack
+		ForceTargetRelationships: Enemy, Neutral
+	Armament@repair:
+		Name: repair
+		Weapon: SCVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 240,160,240
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AttackFrontal:
+		FacingTolerance: 64
+		Armaments: primary,repair
+	WithAttackAnimation:
+		Sequence: shoot
+	WithAttackAnimation@fix:
+		Armament: repair
+		Sequence: shoot
+	WithMoveAnimation:
+		MoveSequence: move
+	Voiced:
+		VoiceSet: SCSCVVoice
+	DeathSounds:
+	Targetable@aihack:
+		TargetTypes: SCV
+	WithHarvesterSpriteBody:
+		ImageByFullness: terran_scv, scscvfull
+	-WithFacingSpriteBody:
+	WithShadow:
+		Offset: 64, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_vulture:
+	Inherits: ^Vehicle
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Vulture
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Buildable:
+		Prerequisites: ~terran_weaponsfactory
+		Description: actor_scvulture.description
+	Mobile:
+		Speed: 125
+		TurnSpeed: 50
+		Locomotor: hover
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: VultureGrenade
+		LocalOffset: 600,0,0
+		# AmmoUsage: 0
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	# AmmoPool@ammo:
+	# 	Ammo: 3
+	# 	AmmoCondition: ammo
+	# WithAmmoPipsDecoration:
+	# 	Position: BottomLeft
+	# 	RequiresSelection: True
+	# 	PipCount: 3
+	Hovers:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 5
+		CooldownTicks: 500
+		DeployedCondition: summon
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled #|| !ammo
+	PeriodicExplosion@projections:
+		Weapon: SCVULTURESUMMON
+		RequiresCondition: summon
+		# AmmoPoolName: ammo
+	Voiced:
+		VoiceSet: SCVultureVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_siegetank:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@ArtilleryBuffs: ^ArtilleryBuffs
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@Crushes: ^VehicleCrusher
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^SiegeModeVehicle
+	Tooltip:
+		Name: Siege Tank
+	Valued:
+		Cost: 2800
+	Power:
+		Amount: -140
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~terran_engineeringbay
+		Description: actor_scsiegetank.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armor:
+		Type: Heavy
+		RequiresCondition: !shielded && undeployed
+	Armor@deployed:
+		Type: Steel
+		RequiresCondition: !shielded && !undeployed
+	Turreted:
+		TurnSpeed: 15
+		Offset: -256,0,256
+		RequiresCondition: undeployed
+	Turreted@deployed:
+		Turret: deployed
+		RealignDelay: -1
+		TurnSpeed: 30
+		RequiresCondition: deployed
+	Armament:
+		Weapon: SiegeTankCannon
+		MuzzleSequence: muzzle
+		LocalOffset: 512,256,0
+		RequiresCondition: undeployed
+	Armament@DEPLOYED:
+		Name: deployed
+		Turret: deployed
+		MuzzleSequence: muzzle
+		Weapon: SiegeTankSiegeCannon
+		LocalOffset: 750,0,250
+		RequiresCondition: deployed
+	# FirepowerMultiplier@deployed:
+	# 	Modifier: 50
+	# 	RequiresCondition: deployed
+	RevealsShroudMultiplier@deployed:
+		Modifier: 150
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@terran_upgrade_advancedsiegemode:
+		Modifier: 120
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	RangeMultiplier@terran_upgrade_advancedsiegemode:
+		Modifier: 110
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	GrantConditionOnPrerequisite@terran_upgrade_advancedsiegemode:
+		Condition: terran_upgrade_advancedsiegemode
+		Prerequisites: terran_upgrade_advancedsiegemode
+	AttackTurretedCharged:
+		Turrets: primary,deployed
+		Armaments: primary,deployed
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: undeployed
+	WithSpriteTurret@deployed:
+		Sequence: deployed
+		Turret: deployed
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	WithMakeAnimation:
+	WithMoveAnimation:
+		MoveSequence: run
+	RenderRangeCircle:
+	WithRangeCircle:
+		Range: 3980
+		Type: pillbox
+		RequiresCondition: deployed
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	GrantConditionOnDeploy:
+		DeploySounds: TankSiege.aud
+		UndeploySounds: TankSiege.aud
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
+	Voiced:
+		VoiceSet: SCSiegeTankVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_advancedsiegemode
+
+terran_matador:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@FireActor: ^FireActor
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@Crushes: ^VehicleCrusher
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^SiegeModeVehicle
+	Tooltip:
+		Name: Matador
+	Valued:
+		Cost: 1700
+	Power:
+		Amount: -85
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~terran_weaponsfactory, terran_promotion_unlockmatador
+		Description: actor_scmatador.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armor:
+		Type: Medium
+		RequiresCondition: !shielded && undeployed
+	Armor@deployed:
+		Type: Steel
+		RequiresCondition: !shielded && !undeployed
+	Turreted:
+		TurnSpeed: 15
+		Offset: 0,0,0
+		RequiresCondition: undeployed
+	Turreted@deployed:
+		Turret: deployed
+		RealignDelay: -1
+		TurnSpeed: 30
+		RequiresCondition: deployed
+	Armament:
+		Weapon: MatadorFlamer
+		MuzzleSequence: muzzleflame
+		LocalOffset: 512,0,128
+		RequiresCondition: undeployed
+	Armament@DEPLOYED:
+		Name: deployed
+		Turret: deployed
+		Weapon: MatadorLaser
+		MuzzleSequence: muzzle
+		LocalOffset: 512,0,128
+		RequiresCondition: deployed
+	FirepowerMultiplier@undeployed:
+		Modifier: 33
+		RequiresCondition: undeployed
+	RevealsShroudMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@terran_upgrade_advancedsiegemode:
+		Modifier: 120
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	RangeMultiplier@terran_upgrade_advancedsiegemode:
+		Modifier: 110
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	GrantConditionOnPrerequisite@terran_upgrade_advancedsiegemode:
+		Condition: terran_upgrade_advancedsiegemode
+		Prerequisites: terran_upgrade_advancedsiegemode
+	AttackTurreted:
+		Turrets: primary,deployed
+		Armaments: primary,deployed
+	WithSpriteTurret:
+		RequiresCondition: undeployed
+	WithSpriteTurret@deployed:
+		Sequence: deployed
+		Turret: deployed
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	GrantConditionOnDeploy:
+		DeploySounds: TankSiege.aud
+		UndeploySounds: TankSiege.aud
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
+	Voiced:
+		VoiceSet: SCSiegeTankVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_advancedsiegemode
+
+terran_cyclone:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Cyclone
+	Valued:
+		Cost: 2300
+	Power:
+		Amount: -115
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~terran_engineeringbay, terran_promotion_unlockcyclone
+		Description: actor_sccyclone.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 46
+		Offset: -16,0,64
+	Armament:
+		Weapon: CycloneRockets
+		MuzzleSequence: muzzle
+		RequiresCondition: !lockedon
+		LocalOffset: 512,192,64, 512,-192,64, 448,192,96, 448,-192,96, 384,192,128, 384,-192,128
+	Armament@lockedon:
+		Weapon: CycloneRocketsLockOn
+		MuzzleSequence: muzzle
+		RequiresCondition: lockedon
+		LocalOffset: 512,192,64, 512,-192,64, 448,192,96, 448,-192,96, 384,192,128, 384,-192,128
+	FirepowerMultiplier@lockedon:
+		Modifier: 200
+		RequiresCondition: lockedon
+	SpeedMultiplier@lockedon:
+		Modifier: 125
+		RequiresCondition: lockedon
+	ExternalCondition@lockedon:
+		Condition: lockedon
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderRangeCircle:
+	WithMoveAnimation:
+		MoveSequence: move
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	Passenger:
+		Weight: 2
+	Carryable:
+		RequiresCondition: !deployed
+	Voiced:
+		VoiceSet: SCCycloneVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_goliath:
+	Inherits: ^Walker
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Goliath
+	Valued:
+		Cost: 1600
+	Power:
+		Amount: -80
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_armory, ~!terran_promotion_unlockgoliathmk2
+		Description: actor_scgoliath.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+		Locomotor: tracked
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 36
+		Offset: 0,0,0
+	Armament@G1:
+		Weapon: GoliathMG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,400,300
+	Armament@G2:
+		Weapon: GoliathMG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,-400,300
+	Armament@A1:
+		Weapon: GoliathRockets
+		LocalOffset: 400,400,300
+	Armament@A2:
+		Weapon: GoliathRockets
+		LocalOffset: 400,-400,300
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 33
+	WithInfantryBody:
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCGoliathVoice
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_goliathmk2:
+	Inherits: ^Walker
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Goliath Mk2
+	Valued:
+		Cost: 2400
+	Power:
+		Amount: -120
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_armory, ~terran_promotion_unlockgoliathmk2
+		Description: actor_scgoliath2.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+		Locomotor: tracked
+	Health:
+		HP: 175000
+	Repairable:
+		HpPerStep: 8750
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,0
+	Armament@G1:
+		Weapon: GoliathMk2MG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,400,300
+	Armament@G2:
+		Weapon: GoliathMk2MG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,-400,300
+	Armament@A1:
+		Weapon: GoliathMk2Rockets
+		LocalOffset: 400,400,300
+	Armament@A2:
+		Weapon: GoliathMk2Rockets
+		LocalOffset: 400,-400,300
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 25
+	WithInfantryBody:
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCGoliathVoice
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_warhound:
+	Inherits: ^Vehicle
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Warhound
+	Valued:
+		Cost: 4500
+	Power:
+		Amount: -225
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockwarhound
+		Description: actor_scwarhound.description
+	Mobile:
+		Speed: 45
+		TurnSpeed: 18
+		Locomotor: tracked
+		RequiresCondition: !hunker
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 15000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armor:
+		Type: Heavy
+	Armament@Cannon:
+		Name: primary
+		Weapon: SCTyr
+		LocalOffset: 800,650,350, 800,-650,350
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@Rockets:
+		Name: secondary
+		Weapon: SCTyrAA
+		LocalOffset: 200,300,900, 250,150,950, 250,-150,950, 200,-300,900
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 2
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	DamageMultiplier@hunker:
+		Modifier: 50
+		RequiresCondition: hunker
+	ChangesHealth@hunker:
+		Step: 120
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: hunker
+	GrantConditionOnDamageState@hunker:
+		Condition: hunker
+		ValidDamageStates: Critical
+	WithFacingSpriteBody@hunker:
+		Sequence: hunker
+		Name: hunker
+		RequiresCondition: hunker
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove, Attack, Move
+		RequiresCondition: hunker
+	WithIdleOverlay@warhoundsparks:
+		Image: warhoundsparks
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: hunker
+	WithIdleOverlay@warhoundsparks2:
+		ImpactSounds: vifvrepa.wav
+		Image: explosion
+		Sequence: repair_weld
+		Palette: ra2effect
+		RequiresCondition: hunker
+	AmbientSound:
+		SoundFiles: vifvrepa.wav
+		Volume: 3
+		RequiresCondition: hunker
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+		RequiresCondition: !hunker
+	WithMoveAnimation:
+		MoveSequence: run
+		ValidMovementTypes: Horizontal, Turn
+	WithAttackAnimation@Cannon:
+		Sequence: shoot
+		Armament: primary
+		Delay: 3
+	WithAttackAnimation@Rockets:
+		Sequence: altshoot
+		Armament: secondary
+		Delay: 3
+	AttackFrontal:
+		FacingTolerance: 20
+		RequiresCondition: !hunker
+	# AutoTarget:
+	# 	InitialStanceAI: Defend
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCTyrVoice
+	Selectable:
+		DecorationBounds: 1600, 1600
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+terran_mobilecommandcenter:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~terran_engineeringbay
+		Description: actor_sctmcv.description
+	Tooltip:
+		Name: Terran Mobile Command Center
+	Transforms:
+		IntoActor: terran_commandcenter
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: tscupd00.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SCSCVVoice
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
+
+## Terran Promotions
+### Infantry Tree

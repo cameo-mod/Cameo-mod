@@ -159,8 +159,68 @@ factions, everything through the balance workbook. Faction reference:
   `aa_flam→asianalliance_asiansentryflamer`; unresolved: `aa_archer`,
   `aa_ftnk`, `steel_fedinf`, `steel_qinf`. Effort: S–M once decided.
 
-### P0/P1 — User-reported issues (2026-07-15/16)
+### P0/P1 — User-reported issues (2026-07-15/17)
 
+> Golden reference (pre-rename, everything working):
+> `C:\Users\AedisToru\AppData\Local\Cameo-IFV\instances\cameo\main` —
+> diff against it when a rename regression is suspected. Tester reports
+> (NFWRambo) need verification before fixing.
+
+- [x] **SHARED-ASSET RENAME CLASS sweep** (2026-07-17) — audit_asset_files
+  re-run on the full tree: A1 rename-broken refs = 0, A2 missing voxels
+  = 0 (the brik/chainlink fixes cleared the class in the loaded tree).
+  56 A3 informational refs remain in UNLOADED legacy rules (actiblizz,
+  darkreign, iok, starwars) + a few possibly-in-mix refs — no action
+  while unloaded. Rule added to DESIGN §1: rename only after crossref
+  proves ONE user; shared assets keep their names.
+- [x] **RA1 Allies reinforcement pad** (2026-07-17) — chain VERIFIED
+  intact: pad needs conyard + techcenter + the promotion + derricklimit;
+  the promotion itself needs the Rapier Jumpjet promotion + rank1.
+  Tester most likely hadn't completed the two-step promotion chain or
+  hit the lobby derrick limit. Not a code bug; maintainer to confirm
+  in-game.
+- [x] **RA1 Allies description listed SOVIET doctrines** (2026-07-17)
+  — CONFIRMED + FIXED: `faction_ra_allies.description` in
+  fluent/rules/en.ftl carried the 6 Soviet doctrines and doctrine
+  feature bullets; replaced with the real Allied research tree
+  (Advanced Radar Systems ... GPS Satellite Support).
+- [x] **TD GDI APC described as amphibious** (2026-07-17) — CONFIRMED
+  + FIXED in FACTIONS.md: locomotor is `tracked` (not amphibious); the
+  AA capability is real (APCGunAA).
+- [ ] **Schwarzer Mond promotions missing** (tester, second report) —
+  ROOT CAUSE FOUND 2026-07-17: `SchwarzerMond/yaml/promotions.yaml` is
+  EMPTY. This matches DESIGN §18.7/§18.11 (SM promotions resolved as
+  `^PromotionUnitBuff` on existing units, no unlock actors) — so the
+  empty Promotions tab is technically by design, but both testers and
+  the maintainer expect a grid. NEEDS DESIGN PICK: keep buff-only (and
+  hide/explain the empty tab) or build a 3-column SM promotion grid
+  like every other faction.
+- [x] **Warhead wall-capitalization** (2026-07-17) — evidence reversed
+  the call: lowercase `wall` IS the standard (all 3 TargetTypes
+  definitions + 345 weapon refs lowercase; only 2 refs used `Wall`).
+  Normalized the 2 outliers (starcraft, starwars) to lowercase instead
+  of churning 348 lines. Convention documented in DESIGN §1.
+- [x] **P0 CRASH: missing `futuretech_concretebarrier_brik.shp` during menu load**
+  (2026-07-17) — FIXED: corrected `brik:` sequence in `sequences/tiberiandawn.yaml`
+  to use `brik.shp` / `brikicon.png` matching release. Boot verified.
+- [x] **P0 CRASH: `japan_chainlinkfence_icon.tem` not found in `cycl` sequence**
+  (2026-07-17) — FIXED: replaced with `cyclicon.png` matching release in
+  `sequences/tiberiandawn.yaml`. Boot verified.
+- [x] **P0 BUG: TD GDI vehicle palette issues** — RESOLVED by user confirmation
+  (2026-07-17): palettes are correct in current build; tester was likely on an
+  older commit without fixes.
+- [x] **P0 BUG: TD GDI/Nod unit voices missing** (2026-07-17) — ROOT CAUSE:
+  faction rename migration changed `InternalName` from `gdi`/`nod` to `td_gdi`/
+  `td_nod`, but `VehicleVoice` and `GenericVoice` in `audio/voices.yaml` only
+  had variant keys for `gdi`/`nod`. Without a matching variant key, the engine
+  falls back to `DefaultVariant` (`.aud`) with no suffix, producing filenames
+  like `vehic1.aud` instead of `vehic1v00.aud` — which don't exist, so voices
+  are silently skipped. FIX: added `td_gdi` and `td_nod` variant entries to
+  both `GenericVoice` and `VehicleVoice` in `audio/voices.yaml`. Units with
+  explicit `Voiced` traits (e.g. `TSVehicle`, `CommandoVoice`,
+  `BattleFortressVoice`, `SCSiegeTankVoice`) were unaffected because those
+  voice sets don't use faction variants. Boot verified, no exceptions.
+  Note: `td_nod` variant was also missing and fixed in the same pass.
 - [x] **CRASH: ixian_koda_tank missing icon sequence** — VERIFIED 2026-07-16:
   the `icon` sequence already exists in `Ixian/yaml/sequences.yaml` (line 1372,
   `Filename: DATA.R16, Start: 4028`). `audit_sequences.py` reports 0 S2 missing
@@ -460,11 +520,10 @@ well."_
   §1-compliant names during this split's rename step.
 - [ ] **PACK-RA2: Split RA2 (Allies / Soviets / Yuri)** from
   rules/redalert2.yaml the same way.
-- [ ] **PACK-SC: Split StarCraft (Terran / Zerg / Protoss)** from
-  rules/starcraft.yaml.
-- [ ] **PACK-WC2: Split Warcraft2 (Humans / Orcs)** from
-  rules/warcraft2.yaml.
-- [ ] **PACK-TKM + PACK-OP2**: split TKM and Outpost2 monoliths.
+- [x] **PACK-SC** (`4fe295183`): Terran/Zerg/Protoss split, registry-identical, boot-verified.
+- [x] **PACK-WC2** (2026-07-17): Humans/Orcs split, registry-identical, boot-verified.
+- [x] **PACK-TKM** (2026-07-17): split (ContentPacks/TKM/TKM), registry-identical, boot-verified.
+- [ ] **PACK-OP2**: split the Outpost2 monolith (eden/plymouth, WIP factions) — last loaded monolith.
 - [ ] **PACK-AUDIT (wrong-section detector)**: new
   `tools/audit/audit_packs.py` that verifies per pack: (a) every actor
   id carries the pack's faction prefix (catches actors landing in the

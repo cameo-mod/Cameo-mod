@@ -1569,7 +1569,7 @@ N64ATWR:
 		Amount: -50
 
 N64SBAG:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -1591,7 +1591,7 @@ N64SBAG:
 		Type: sandbag
 
 N64CYCL:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -1613,7 +1613,7 @@ N64CYCL:
 		Type: chain
 
 N64BRIK:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 150
 	CustomSellValue:

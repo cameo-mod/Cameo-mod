@@ -579,7 +579,7 @@ RA2OPCoilBolt3:
 TeslaFragmentWeak:
 	Inherits: ^TeslaWeapon
 	Range: 1555
-	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -626,7 +626,7 @@ RA2TankBolt3:
 TeslaTankFragment:
 	Inherits: ^TeslaWeapon
 	Range: 2500
-	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -639,7 +639,7 @@ TeslaTankFragment:
 TeslaTankFragment2:
 	Inherits: ^TeslaWeapon
 	Range: 3750
-	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, wall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -866,12 +866,12 @@ BorisAKME:
 
 BorisAKM2:
 	Inherits: BorisAKM
-	ValidTargets: Structure, Bridge, ixian_concretewall
+	ValidTargets: Structure, Bridge, wall
 	-InvalidTargets:
 	Range: 9167
 
 MigTarget:
-	ValidTargets: Structure, Bridge, ixian_concretewall
+	ValidTargets: Structure, Bridge, wall
 	Range: 9167
 	Burst: 3
 	BurstDelays: 15

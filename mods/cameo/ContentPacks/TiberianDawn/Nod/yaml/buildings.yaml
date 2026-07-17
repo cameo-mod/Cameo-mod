@@ -20,6 +20,7 @@ td_nod_tiberiumrefinery:
 		Name: Nod Tiberium Refinery
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, nuke
+		Description: Processes ore into credits.
 	GrantConditionOnPrerequisite@Normal:
 		Condition: normalharvester
 		Prerequisites: !td_nod_promotion_upgradeupnodstealthname
@@ -48,6 +49,7 @@ td_nod_handofnod:
 		Prerequisite: barracks
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, nuke
+		Description: Trains infantry units.
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -139,6 +141,7 @@ td_nod_helipad:
 		Name: Nod Helipad
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, td_nod_communicationscenter
+		Description: Produces and repairs aircraft.
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -183,6 +186,7 @@ td_nod_communicationscenter:
 		Name: Nod Communications Center
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, td_nod_tiberiumrefinery
+		Description: Provides radar coverage of the battlefield.
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -200,6 +204,7 @@ td_nod_repairfacility:
 			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, td_nod_airstrip
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
@@ -599,6 +604,7 @@ CNCSPEN:
 		Name: Nod Sub Pen
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, td_nod_tiberiumrefinery, ~globalnaval
+		Description: Naval production structure.
 	ProvidesPrerequisite@buildingname:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi

@@ -1,0 +1,352 @@
+wc2_orcs_upgrade_betterfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Better Farm
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~!wc2_orcs_upgrade_betterfarm, ~wc2_orcs_pigfarm, wc2_orcs_stronghold
+		Queue: Research
+		Description: Gives Farms +50% Supply and HP (150% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_bestfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Best Farm
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_orcs_upgrade_betterfarm, ~wc2_orcs_pigfarm, wc2_orcs_fortress
+		Queue: Research
+		Description: Gives Farms +100% Supply and HP (200% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_axestrength:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Axe Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 15%. Double Effect for Grunts.
+		Prerequisites: ~!wc2_orcs_upgrade_axestrength, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_axestrength
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_axestrengthii:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Axe Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 35%. Double Effect for Grunts.
+		Prerequisites: !wc2_orcs_upgrade_axestrengthii, ~wc2_orcs_upgrade_axestrength, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_orcs_upgrade_axestrengthii
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_armorstrength:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 10%. Grunts have 15% damage resistance instead.
+		Prerequisites: ~!wc2_orcs_upgrade_armorstrength, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_armorstrength
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_armorstrengthii:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength II
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 20%. Grunts have 30% damage resistance instead.
+		Prerequisites: !wc2_orcs_upgrade_armorstrengthii, ~wc2_orcs_upgrade_armorstrength, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_orcs_upgrade_armorstrengthii
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_throwingaxestrength:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Throwing Axe Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases ranged damage dealt by Axethrowers and Guard Towers by 15%.
+		Prerequisites: ~!wc2_orcs_upgrade_throwingaxestrength, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_throwingaxestrength
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_throwingaxestrengthii:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Throwing Axe Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases ranged damage by Axethrowers and Guard Towers by 35%
+		Prerequisites: !wc2_orcs_upgrade_throwingaxestrengthii, ~wc2_orcs_upgrade_throwingaxestrength, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_orcs_upgrade_throwingaxestrengthii
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_warcraft3grunt:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name:  Warcraft 3 Grunt
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Grunt into the Warcraft 3 Grunt
+		Prerequisites: ~!wc2_orcs_upgrade_warcraft3grunt, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	RenderSprites:
+		Image: wc2_orcs_warcraft3grunt
+
+wc2_orcs_upgrade_berserker:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Troll Axethrowers are driven into a mad frenzy.\nIncreases damage resistance by 20% and unlocks upgrades for the Berserker.
+		Prerequisites: ~!wc2_orcs_upgrade_berserker, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_berserker
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_trollheadhunter:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Troll Headhunter
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Troll Berserker into the Troll Headhunter
+		Prerequisites: ~!wc2_orcs_upgrade_trollheadhunter, ~wc2_orcs_blacksmith, wc2_orcs_upgrade_berserker, wc2_orcs_fortress
+	RenderSprites:
+		Image: wc2_orcs_trollheadhunter
+
+wc2_orcs_upgrade_berserkerlightaxes:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Light Axes
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases throwing range of Berserker axes by 20%.
+		Prerequisites: ~!wc2_orcs_upgrade_berserkerlightaxes, ~wc2_orcs_upgrade_berserker, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_berserkerlightaxes
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_berserkerscouting:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Scouting
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases vision range of Berserkers by 20%.
+		Prerequisites: ~!wc2_orcs_upgrade_berserkerscouting, ~wc2_orcs_upgrade_berserker, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_berserkerscouting
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_berserkerregeneration:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Regeneration
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Berserkers heal over time (5% HP each second) and take 20% less damage.
+		Prerequisites: ~!wc2_orcs_upgrade_berserkerregeneration, ~wc2_orcs_upgrade_berserker, ~wc2_orcs_blacksmith, wc2_orcs_stronghold
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_berserkerregeneration
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_catapultstrength:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Catapult Strength
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases Catapult damage by 15%
+		Prerequisites: ~!wc2_orcs_upgrade_catapultstrength, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_catapultstrength
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_catapultstrengthii:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Catapult Strength II
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases Catapult damage by 35%
+		Prerequisites: !wc2_orcs_upgrade_catapultstrengthii, ~wc2_orcs_upgrade_catapultstrength, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_orcs_upgrade_catapultstrengthii
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_cannondamage:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage
+	Buildable:
+		BuildPaletteOrder: 4
+		BuildLimit: 1
+		Queue: Research
+		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 15%
+		Prerequisites: ~!wc2_orcs_upgrade_cannondamage, ~wc2_orcs_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_cannondamage
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_cannondamageii:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage II
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 35%
+		Prerequisites: !wc2_orcs_upgrade_cannondamageii, ~wc2_orcs_upgrade_cannondamage, ~wc2_orcs_blacksmith, wc2_orcs_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_orcs_upgrade_cannondamageii
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_ogremage:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ogre-Mage
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Perform mysterious rituals to transform your Ogres into Ogre-Magi!\nOgre-Magi are more powerful and can cast Bloodlust.\nBloodlust makes your units hit harder for a short time.\nIncreases damage resistance by 20%.\nIncreases melee damage by 25%.
+		Prerequisites: ~!wc2_orcs_upgrade_ogremage, ~wc2_orcs_blacksmith, wc2_orcs_altarofstorms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_ogremage
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_bloodlust:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Bloodlust
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Allows Ogre-Magi to cast bloodlust.\nToggle Oger-Mage's modes by deploying them.\nTriples damage output of affected unit.\nUses 50 mana.
+		Prerequisites: ~wc2_orcs_upgrade_ogremage, ~!wc2_orcs_upgrade_bloodlust, ~wc2_orcs_blacksmith, wc2_orcs_altarofstorms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_bloodlust
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_runes:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Runes
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Allows Ogre-Magi to cast runes.\nToggle Oger-Mage's modes by deploying them.\nDeploys five land mines in a + shape.\nUses 200 mana.
+		Prerequisites: ~wc2_orcs_upgrade_ogremage, ~!wc2_orcs_upgrade_runes, ~wc2_orcs_blacksmith, wc2_orcs_altarofstorms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_runes
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_haste:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Haste
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Research
+		Description: Allows Death Knights to cast haste.\nToggle Death Knight's modes by deploying them.\nSpeeds up affected target.\nAffects movement and attack speed.\nUses 50 mana.
+		Prerequisites: ~!wc2_orcs_upgrade_haste, ~wc2_orcs_blacksmith, wc2_orcs_templeofthedamned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_haste
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_deathanddecay:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Death and Decay
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Research
+		Description: Allows Death Knights to cast death and decay.\nToggle Death Knight's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
+		Prerequisites: ~!wc2_orcs_upgrade_deathanddecay, ~wc2_orcs_blacksmith, wc2_orcs_templeofthedamned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_deathanddecay
+	ProvidesPrerequisite:
+
+wc2_orcs_upgrade_raisedead:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Raise Dead
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Research
+		Description: Allows Death Knights to cast raise dead.\nToggle Death Knight's modes by deploying them.\nSummons a skeleton.\nUses 50 mana.
+		Prerequisites: ~!wc2_orcs_upgrade_raisedead, ~wc2_orcs_blacksmith, wc2_orcs_templeofthedamned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_orcs_upgrade_raisedead
+	ProvidesPrerequisite:

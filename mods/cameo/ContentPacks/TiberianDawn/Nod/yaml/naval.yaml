@@ -209,6 +209,7 @@ CNCRSS:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncspen
 		Queue: Naval, RANaval
+		Description: Transport Submarine
 	Mobile:
 		Speed: 150
 		RequiresCondition: !notmobile && !disabled

@@ -164,6 +164,7 @@ RA1SYRD:
 		Name: Allied Naval Yard
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery, ~globalnaval
+		Description: Naval production structure.
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -190,6 +191,7 @@ RA1JSYRD:
 		Name: Japanese Naval Yard
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery, ~globalnaval
+		Description: Naval production structure.
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3

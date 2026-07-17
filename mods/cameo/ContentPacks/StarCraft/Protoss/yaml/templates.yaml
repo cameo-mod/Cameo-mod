@@ -1,0 +1,205 @@
+^SCSmallShadow:
+	# WithIdleOverlay@Shadow:
+	# 	Sequence: shadow
+	# 	Offset: 0,0,-280
+
+^SCWorker:
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Mobile:
+		Locomotor: swimsuit
+		TurnSpeed: 100
+		Speed: 100
+	Hovers:
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	FirepowerMultiplier@repair:
+		Modifier: 25
+	Armor:
+		Type: Light
+	StoresResources:
+		Capacity: 5
+	Buildable:
+		BuildPaletteOrder: 10
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Queue: Infantry, RAInfantry
+		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
+	Harvester:
+		BaleLoadDelay: 5
+		BaleUnloadDelay: 1
+		BaleUnloadAmount: 5
+		FullyLoadedSpeed: 100
+	StoresResources:
+		Capacity: 5
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+	Capturable:
+		Types: thiefproof
+	WithHarvestAnimation:
+	WithDockingAnimation:
+
+^SCRefineryCommon:
+	Inherits: ^Refinery
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+
+^SCUnitProduction:
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	Production@NORMAL:
+		PauseOnCondition: lowpower || disabled
+	Production@CLASSICPRODUCTIONQUEUES:
+		PauseOnCondition: lowpower || disabled
+
+^SCUnitProductionSpeedBoost:
+	ProductionTimeMultiplier@speedup:
+		Multiplier: 75
+
+^ProtossRankDecoration:
+	WithDecoration@RANK-1:
+		Image: protossrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: protossrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: protossrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: protossrank
+		Sequence: rank-elite
+		Palette: greyscale
+
+^SingularityChargeUpgrade:
+	RangeMultiplier@protoss_upgrade_singularitycharge:
+		RequiresCondition: protoss_upgrade_singularitycharge
+		Modifier: 120
+	GrantConditionOnPrerequisite@protoss_upgrade_singularitycharge:
+		Condition: protoss_upgrade_singularitycharge
+		Prerequisites: protoss_upgrade_singularitycharge
+	ActorStatValues:
+		Upgrades: protoss_upgrade_singularitycharge
+
+^ResonatingGlaves:
+	ReloadDelayMultiplier@protoss_upgrade_resonatingglaves:
+		RequiresCondition: protoss_upgrade_resonatingglaves
+		Modifier: 60
+	GrantConditionOnPrerequisite@protoss_upgrade_resonatingglaves:
+		Condition: protoss_upgrade_resonatingglaves
+		Prerequisites: protoss_upgrade_resonatingglaves
+	ActorStatValues:
+		Upgrades: protoss_upgrade_resonatingglaves
+
+^ProtossGroundWeaponUpgrades:
+	FirepowerMultiplier@protoss_upgrade_groundweaponslevel1:
+		Modifier: 115
+		RequiresCondition: protoss_upgrade_groundweaponslevel1 && !protoss_upgrade_groundweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundweaponslevel1:
+		Condition: protoss_upgrade_groundweaponslevel1
+		Prerequisites: protoss_upgrade_groundweaponslevel1
+	FirepowerMultiplier@protoss_upgrade_groundweaponslevel2:
+		Modifier: 135
+		RequiresCondition: protoss_upgrade_groundweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundweaponslevel2:
+		Condition: protoss_upgrade_groundweaponslevel2
+		Prerequisites: protoss_upgrade_groundweaponslevel2
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1
+
+^ProtossGroundArmorUpgrades:
+	DamageMultiplier@protoss_upgrade_groundarmorlevel1:
+		Modifier: 90
+		RequiresCondition: protoss_upgrade_groundarmorlevel1 && !protoss_upgrade_groundarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundarmorlevel1:
+		Condition: protoss_upgrade_groundarmorlevel1
+		Prerequisites: protoss_upgrade_groundarmorlevel1
+	DamageMultiplier@protoss_upgrade_groundarmorlevel2:
+		Modifier: 80
+		RequiresCondition: protoss_upgrade_groundarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundarmorlevel2:
+		Condition: protoss_upgrade_groundarmorlevel2
+		Prerequisites: protoss_upgrade_groundarmorlevel2
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundarmorlevel1
+
+^BaseBuildingProtoss:
+	Inherits: ^BaseBuilding
+	-ChangesShield@shielddischarge:
+
+^ProtossVehicle:
+	Inherits: ^Vehicle
+	-ChangesShield@shielddischarge:
+
+^LargeProtoss:
+	Inherits: ^BasicProtoss
+	Inherits@2: ^IronCurtainable
+	Inherits@EMP: ^UnitDisable
+	Inherits@cloak: ^AcceptsCloakCrate
+	Inherits@heal: ^MachineShopRepairable
+	Inherits@chrono: ^Chronoshiftable
+	Mobile:
+		Locomotor: hover
+		PauseOnCondition: disabled
+	-ExternalCondition@REAPERTRAP:
+	-Cloneable:
+	-GrantConditionOnPrerequisite@HOSPITAL:
+	-Captures@DRIVER_KILL:
+	Targetable:
+		TargetTypes: Ground, Vehicle
+		RequiresCondition: !parachute && !chronobeamed && !invulnerability
+	Targetable@ivan:
+		RequiresCondition: !ivanbomb && !chronobeamed && !invulnerability
+	Passenger:
+		CargoType: Vehicle
+	HitShape:
+		Type: Circle
+			Radius: 1024
+
+^AirProtoss:
+	Inherits: ^Helicopter
+	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	-ChangesShield@shielddischarge:
+
+^BuildingExplodeProtoss:
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: BuildingExplodeProtoss
+		EmptyWeapon: BuildingExplodeProtoss
+
+^UnitExplodeSmallProtoss:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmallProtoss
+		EmptyWeapon: UnitExplodeSmallProtoss

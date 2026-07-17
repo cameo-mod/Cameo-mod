@@ -1,0 +1,728 @@
+wc2footmanslice2:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 15
+	Range: 1533
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Projectile: InstantHit
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 18000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 9000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 9
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
+# 1-5 WC2 damage. 3 Base, 2 Pierce.
+
+wc2_dwarf_Rifle:
+	Inherits: ^RailgunWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 60
+	Range: 6936
+	Report: aacanon3.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF00
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 250
+		ContrailLength: 25
+		Speed: 10000
+		Width: 100
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+
+# 2-12 WC2 damage. 8 Base, 4 Pierce.
+
+wc2knightslice:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 12
+	Range: 1420
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Projectile: InstantHit
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
+wc2paladinholyvision:
+	ReloadDelay: 60
+	Range: 512000
+	Report: wc2_holyvisn.aud
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 1
+		Damage: 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@Projectiles: FireCluster
+		Weapon: wc2paladinholyvision_hit
+		Dimensions: 13,17
+		Footprint: ______X______ _____________ _____________ _____________ X___________X _____________ _____________ _____________ ______X______ _____________ _____________ _____________ X___________X _____________ _____________ _____________ ______X______
+
+wc2paladinholyvision_hit:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_holyvisn.aud
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 1
+		Damage: 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+	Warhead@3Reveal: RevealShroud
+		RevealStances: Ally
+		Duration: 60
+		Radius: 9c0
+		RevealGeneratedShroud: True
+
+# Support power holy vision.
+
+wc2holyvisionSuper:
+	ValidTargets: Ground, Water, Air
+	Warhead@Projectiles: FireCluster
+		Weapon: wc2holyvisionSuper_hit
+		Dimensions: 1,1
+		Footprint: X
+
+# Spell sound effect goes in a CreateEffectWarhead here because if you put it in the weapon fired by IonCannonPower,
+# the sound will play at the location of the building that fired the power, and not at the impact location.
+
+wc2holyvisionSuper_hit:
+	Inherits: wc2paladinholyvision_hit
+	-Report:
+	Warhead@2Eff:
+		Delay: 10
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-n
+		ImpactSounds: wc2_holyvisn.aud
+	Warhead@Effect: CreateEffect
+		Delay: 13
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-ne
+	Warhead@Effect2: CreateEffect
+		Delay: 16
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-e
+	Warhead@Effect3: CreateEffect
+		Delay: 19
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-se
+	Warhead@Effect4: CreateEffect
+		Delay: 22
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-s
+	Warhead@Effect5: CreateEffect
+		Delay: 25
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-sw
+	Warhead@Effect6: CreateEffect
+		Delay: 28
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-w
+	Warhead@Effect7: CreateEffect
+		Delay: 31
+		Image: wc2_effect_sparkle_circle
+		Explosions: idle-nw
+	Warhead@3Reveal:
+		Duration: 250
+
+# Undecided on whether or not this should be able to target ballistas/catapults, or vehicles in general.
+# Just gonna leave it as able to target vehicles in general for now. If we make a "vanilla" wc2 human faction, we can re-implement this.
+
+wc2paladinhealing:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_heal.aud
+	ValidTargets: Heal, Healing
+	# InvalidTargets: wc2_ballista
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: -4025
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 0
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Heal, Healing
+		# InvalidTargets: wc2_ballista
+		ValidRelationships: Ally
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_heal
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+
+wc2priesthealing:
+	ReloadDelay: 40
+	Range: 5120
+	Report: wc2_heal.aud
+	ValidTargets: Heal, Healing
+	# InvalidTargets: wc2_ballista
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: -5000
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 0
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: Heal, Healing
+		# InvalidTargets: wc2_ballista
+		ValidRelationships: Ally
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_heal
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+
+# Support power healing.
+
+wc2healingSuper:
+	ValidTargets: Ground, Water, Air
+	Warhead@Projectiles: FireCluster
+		Weapon: wc2healingSuper_hit
+		Dimensions: 5,5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+
+wc2healingSuper_hit:
+	Inherits: wc2paladinhealing
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam:
+		Spread: 256
+		Damage: -25000
+		ValidTargets: Ground, Water, Air
+	Warhead@2Eff: CreateEffect
+		ValidTargets: Ground, Water, Air
+
+wc2paladinexorcism:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_exorcism.aud
+	ValidTargets: undeadtarget
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+		Damage: 4025
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 0
+			Heavy: 0
+			Concrete: 0
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+		ValidTargets: undeadtarget
+	Warhead@2Eff: CreateEffect
+		Image: wc2_exorcism
+		Explosions: idle
+
+# 25-80 WC2 damage. 80 Base, 0 Pierce.
+
+wc2ballistaFire:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 180
+	Range: 14450
+	MinRange: 2890
+	Report: wc2_catapult.aud
+	Projectile: Bullet
+		Speed: 384
+		Inaccuracy: 384
+		Image: wc2_human_ballistabolt
+		Blockable: false
+	Warhead@Grenade: SpreadDamage
+		Damage: 30000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 30000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@Effect: CreateEffect
+		Image: wc2_catapult_impact
+		Explosions: idle
+		ImpactSounds: explode.aud
+
+MortarTeamArtilleryShell:
+	Inherits: ^MediumCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^ShrapnelWeapon
+	ReloadDelay: 200
+	Range: 12000
+	MinRange: 2400
+	Report: tnkfire2.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 240
+		Inaccuracy: 600
+		LaunchAngle: 120
+		ContrailLength: 24
+		ContrailStartWidth: 120
+		ContrailEndWidth: 24
+		#ContrailDelay: 0
+		ContrailStartColor: FFBB88FF
+		ContrailEndColor: FF884422
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 20000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		Image: wc2_catapult_impact
+		Explosions: idle
+		ImpactSounds: explode.aud
+
+wc2gryphonFireVisible:
+	Inherits: ^LightMissile
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^TeslaChargedWeapon
+	ReloadDelay: 100
+	Range: 4444
+	Report: wc2_axe.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 444
+		Image: wc2_gryphon_hammer_projectile
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+		Falloff: 100, 75, 50, 25
+		Damage: 10000
+		Spread: 1000
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+	Warhead@Effect2: CreateEffect
+		Explosions: mobileemp_small
+		ExplosionPalette: ra2unit
+		ImpactSounds: mobemp1.aud
+		ImpactActors: false
+		AffectsParent: true
+		ValidTargets: Ground, Water, Air
+
+# 5-9 WC2 damage. 0 Base, 9 Pierce.
+
+wc2mageFireballVisible:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^MediumMissile
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	ReloadDelay: 80
+	Range: 8000
+	FirstBurstTargetOffset: 3072,0,0
+	ValidTargets: Ground
+	Projectile: Bullet
+		Speed: 384
+		Image: wc2_fireball
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+
+wc2mageFireballExplosion:
+	Inherits: wc2mageFireballVisible
+	ReloadDelay: 80
+	Burst: 5
+	BurstDelays: 0
+	FirstBurstTargetOffset: 0,0,0
+	FollowingBurstTargetOffset: 1024,0,0
+
+wc2mageSlow:
+	ReloadDelay: 60
+	Range: 8000
+	Report: wc2_slow.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 10c0
+		RangeLimit: 21c0
+		HorizontalRateOfTurn: 256
+		VerticalRateOfTurn: 256
+		AllowSnapping: True
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c1
+		Damage: 1
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 0
+		DamageTypes: DefaultDeathwc2
+		ValidTargets: Ground, Water, Air
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+	Warhead@Condition: GrantExternalCondition
+		Condition: wc2_cond_slow
+		Duration: 600
+		Range: 341
+		ValidTargets: Ground, Water, Air
+
+wc2magePolymorph:
+	ReloadDelay: 60
+	Range: 8000
+	Report: wc2_morph.aud
+	ValidTargets: Ground, Water, Air
+	InvalidTargets: Structure
+	Projectile: Missile
+		Speed: 10c0
+		RangeLimit: 21c0
+		HorizontalRateOfTurn: 256
+		VerticalRateOfTurn: 256
+		AllowSnapping: True
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ValidTargets: Ground, Water, Air
+	Warhead@Polymorph: GrantExternalCondition
+		Condition: wc2_cond_polymorph
+		Duration: 1
+		Range: 341
+		ValidTargets: Ground, Water, Air
+
+# Mage version of Blizzard.
+
+wc2blizzardSuper:
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 1234
+		Damage: 12345
+		ValidTargets: Ground, Water, Air
+		AffectsParent: True
+		DamageTypes: Prone50Percent, TriggerProne
+	Warhead@InitialSpreader1: FireCluster
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 2
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader2: FireCluster
+		Delay: 20
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 4
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader3: FireCluster
+		Delay: 40
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 6
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader4: FireCluster
+		Delay: 60
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 8
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader5: FireCluster
+		Delay: 80
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 10
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader6: FireCluster
+		Delay: 100
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 12
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader7: FireCluster
+		Delay: 120
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 14
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader8: FireCluster
+		Delay: 150
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 12
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader9: FireCluster
+		Delay: 180
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 10
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader10: FireCluster
+		Delay: 210
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 8
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader11: FireCluster
+		Delay: 240
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 6
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader10: FireCluster
+		Delay: 270
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 4
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader11: FireCluster
+		Delay: 300
+		Weapon: wc2blizzardSuper_Spread
+		RandomClusterCount: 2
+		Dimensions: 9,9
+		Footprint: _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _xxxx_x__ _________ _xxxx_x__ _________ _________
+		#Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+
+# This spreads a bunch of projectiles out, which then become...
+
+wc2blizzardSuper_Spread:
+	Range: 5120
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Speed: 0c512
+		Blockable: false
+		LaunchAngle: 100
+		AirburstAltitude: 5c0
+		Inaccuracy: 10c0
+		InaccuracyType: Absolute
+	#	Image: wc2_lightng
+	Warhead@Projectiles1: FireCluster
+		Weapon: wc2mageBlizzard_Projectile
+		Dimensions: 5, 5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@Projectiles2: FireCluster
+		Delay: 30
+		Weapon: wc2mageBlizzard_Projectile
+		Dimensions: 5, 5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@Projectiles3: FireCluster
+		Delay: 60
+		Weapon: wc2mageBlizzard_Projectile
+		Dimensions: 5, 5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@Projectiles4: FireCluster
+		Delay: 90
+		Weapon: wc2mageBlizzard_Projectile
+		Dimensions: 5, 5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@Projectiles5: FireCluster
+		Delay: 120
+		Weapon: wc2mageBlizzard_Projectile
+		Dimensions: 5, 5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+
+# 6-16 WC2 damage. 4 Base, 12 Pierce.

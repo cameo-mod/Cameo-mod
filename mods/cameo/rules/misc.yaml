@@ -626,6 +626,7 @@ camera.gpssat:
 		QuantizedFacings: 1
 	Buildable:
 		Queue: SpySatellite
+		Description: GPS satellite camera. Reveals map area.
 	RevealsMap:
 		RevealGeneratedShroud: false
 		RequiresCondition: uplinkavailable

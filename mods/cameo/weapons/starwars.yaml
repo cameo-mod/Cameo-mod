@@ -59,7 +59,7 @@ SWLaserV:
 			Medium: 80
 			Heavy: 70
 			Concrete: 50
-			
+
 SWLaserR:
 	Inherits: SWLaserV
 	ReloadDelay: 16
@@ -126,7 +126,7 @@ SWJediStarFighterGunAA:
 	Inherits: SWXWingGunAA
 	Burst: 8
 	Range: 7173
-		
+
 SWMonCalamariGun:
 	Inherits: SWTB2BlaserAA
 	ReloadDelay: 60
@@ -155,7 +155,7 @@ SWMonCalamariGunAA:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-	
+
 SWAclamatorGun:
 	Inherits: SWMonCalamariGun
 	ReloadDelay: 80
@@ -174,7 +174,7 @@ SWAclamatorGunAA:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-			
+
 SWStarDestroyerGun:
 	Inherits: SWMonCalamariGun
 	ReloadDelay: 100
@@ -207,7 +207,7 @@ SWTieCrawlLaser:
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 90
-			
+
 SWBikeLaserSalvage:
 	Inherits: SWLaser
 	Burst: 5
@@ -289,7 +289,7 @@ SWTB2BlaserAA:
 	Warhead@1Dam: SpreadDamage
 		Damage: 500
 		ValidTargets: Air
-		
+
 SWCloneBazooka:
 	Inherits: ^MissileWeapon
 	Projectile: MissileCA
@@ -309,7 +309,7 @@ SWCloneBazookaG:
 	Inherits: SWCloneBazooka
 	ReloadDelay: 75
 	Range: 7168
-	
+
 SWPatriot:
 	Inherits: SWDroidRocketsAA
 	ReloadDelay: 50
@@ -334,7 +334,7 @@ SWPatriot:
 		ContrailColor: FFAA44
 		ContrailWidth: 0c128
 		HorizontalRateOfTurn: 60
-	
+
 SWOrcaAGMissiles:
 	Inherits: SWGreenLaser
 	Report: swtielaser.wav
@@ -438,7 +438,7 @@ SWTowerAAMissile:
 	-Warhead@2Smu:
 	Warhead@4EffAir: CreateEffect
 		Explosions: small_building
-		
+
 SWAclamatorMissile:
 	Inherits: SWTowerAAMissile
 	ValidTargets: Ground, Water
@@ -474,7 +474,7 @@ SWAclamatorMissileAA:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-		
+
 SWStarDestroyerMissile:
 	Inherits: SWAclamatorMissile
 	ReloadDelay: 160
@@ -719,7 +719,7 @@ SWStarDestroyerLaserAA:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
-		
+
 SWATTELaser:
 	Inherits: SWATATLaser
 	Burst: 1
@@ -784,7 +784,7 @@ SWBomb:
 		Explosions: blueartexp
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 SWArtilleryShell:
 	Inherits: ArtilleryShell
 	Report: swgrenade.aud
@@ -928,7 +928,7 @@ SWLAATMissile:
 		ValidTargets: Vehicle, Cyborg
 		Duration: 25
 		Range: 341
-		
+
 SWDroidRockets:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 48
@@ -972,7 +972,7 @@ SWDroidRockets:
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: swlaser.aud
 		Explosions: drlaserexp
-		
+
 SWDroidRocketsAA:
 	Inherits: SWDroidRockets
 	ValidTargets: Air
@@ -1100,10 +1100,10 @@ SWPummel:
 	ReloadDelay: 4
 	Range: 1536
 	Report: swpummel.wav
-	ValidTargets: Structure, ixian_concretewall
+	ValidTargets: Structure, wall
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
-		ValidTargets: Structure, ixian_concretewall
+		ValidTargets: Structure, wall
 	Projectile: LaserZap
 		Color: 83FF33
 SWPummelVehicle:

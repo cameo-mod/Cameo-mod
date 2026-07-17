@@ -123,3 +123,15 @@ ts_nod_upgrade_willofkane:
 ################ FORGOTTEN #######################
 
 ############ Radar
+
+ts_nod_upgrade_willofkane_proxy_actor:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: ts_nod_upgrade_willofkane
+	RenderSprites:
+		Image: willofkaneicon
+	Tooltip:
+		Name: Will of Kane (Team Upgrade)
+	Buildable:
+		Description: One vision. One purpose. Peace through power. The Brotherhood's allies get infantry firepower bonus based on missing health.
+	PlayerDisplayUpgrade:

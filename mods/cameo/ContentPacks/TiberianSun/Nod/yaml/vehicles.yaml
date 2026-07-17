@@ -3,6 +3,7 @@ ts_nod_mobileconstructionvehicle:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Tooltip:
 		Name: Nod Mobile Construction Vehicle
 	Transforms:
@@ -521,3 +522,195 @@ ts_nod_mobilestealthgenerator:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
+
+ts_nod_attackcycle:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 550
+	Tooltip:
+		Name: Attack Cycle
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ts_nod_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout vehicle, armed with\nrockets.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 68
+		Speed: 170
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 100
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armament@PRIMARY:
+		Weapon: TSBikeMissile
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	Armament@UPGRADE:
+		Weapon: TSBikeTibMissile
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	AttackFollow:
+		FacingTolerance: 512
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 300
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_ticktank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@bot: ^SiegeModeVehicle
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Tick Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		# BuildDurationModifier: 100
+		# BuildDuration: 300
+		Prerequisites: ~ts_nod_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: Nod's main battle tank.\nCan deploy to gain extra protection.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		TurnSpeed: 32
+		Speed: 90
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: deployed
+	Turreted:
+		TurnSpeed: 32
+		Turret: deployed
+		Offset: 220,-20,296
+	Armament@PRIMARY:
+		Weapon: TS90mm
+		LocalOffset: 407,0,362
+		RequiresCondition: undeployed && !ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADE:
+		Weapon: TSLaser90mm
+		LocalOffset: 407,0,362
+		RequiresCondition: undeployed && ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	# Armament@ELITE:
+	# 	Weapon: TS120mmx
+	# 	LocalOffset: 407,0,362
+	# 	# RequiresCondition: rank-elite && undeployed
+	# 	MuzzleSequence: muzzle
+	Armament@deployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: TS90mmDep
+		LocalOffset: 543,75,362
+		RequiresCondition: deployed && !ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADEdeployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: TSLaser90mmDep
+		LocalOffset: 543,75,362
+		RequiresCondition: deployed && ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	# Armament@elitedeployed:
+	# 	Name: deployed
+	# 	Turret: deployed
+	# 	Weapon: TS120mmx
+	# 	LocalOffset: 543,0,362
+	# 	RequiresCondition: rank-elite && deployed
+	# 	MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: deployed
+		Turret: deployed
+		Weapon: TS25mmDep
+		LocalOffset: 543,-75,362
+		RequiresCondition: deployed && ts_nod_upgrade_auxiliaryweapon && !ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADESECONDARY:
+		Name: deployed
+		Turret: deployed
+		Weapon: TSLaser25mmDep
+		LocalOffset: 543,-75,362
+		RequiresCondition: deployed && ts_nod_upgrade_auxiliaryweapon && ts_nod_upgrade_tiberiumlenses
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	AttackTurreted@deployed:
+		RequiresCondition: deployed
+		Armaments: deployed
+		Turrets: deployed
+		PauseOnCondition: disabled
+		Voice: Attack
+	WithVoxelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		RequiresCondition: deployed
+		Sequence: deploy-idle
+	WithVoxelTurret:
+		Turret: deployed
+		RequiresCondition: deployed
+	WithVoxelBarrel:
+		Armament: deployed
+		LocalOffset: 90,0,180
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	WithMakeAnimation:
+	GrantConditionOnDeploy:
+		Facing: 640
+		DeploySounds: place2.aud
+		UndeploySounds: place2.aud
+		Voice: Move
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement

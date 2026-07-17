@@ -12,7 +12,7 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
@@ -26,7 +26,7 @@
 		
 ^sow_flame:
 	ValidTargets: Ground, Water
-	InvalidTargets: ixian_concretewall
+	InvalidTargets: wall
 	Projectile: Bullet
 		Speed: 300
 		TrailImage: fb4
@@ -34,16 +34,16 @@
 		LaunchAngle: 45
 		Inaccuracy: 0c32
 	ValidTargets: Ground, Water
-		InvalidTargets: ixian_concretewall
+		InvalidTargets: wall
 		DamageTypes: FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 
 ^sow_antiair:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -99,7 +99,7 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
@@ -402,7 +402,7 @@ sow_ht_special:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
@@ -442,7 +442,7 @@ sow_mech_avenger:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -492,7 +492,7 @@ sow_mech_kodiak:
 		DamageTypes: TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		
 sow_mech_kodiak_mk2:
 	Inherits: sow_mech_kodiak
@@ -526,7 +526,7 @@ sow_mech_kodiak_mk2:
 		ValidTargets: Ground
 	Warhead@1Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		
 sow_mech_gatling:
 	ReloadDelay: 5
@@ -555,7 +555,7 @@ sow_mech_gatling:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: cannon_impact.aud
@@ -605,7 +605,7 @@ sow_mech_jaguar:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
@@ -681,7 +681,7 @@ sow_advancer:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Structure, wall, Husk, Creep
 	
 sow_advancer_mk2:
 	Inherits: sow_advancer
@@ -903,7 +903,7 @@ sow_abc_nuke:
 	#	Delay: 60
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 6
 		Delay: 60
 		
@@ -945,7 +945,7 @@ sow_aircraft_husk:
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 30
 		
@@ -973,7 +973,7 @@ sow_fighter_husk:
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 30
 		
@@ -1068,7 +1068,7 @@ satelliteprotection:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Structure, wall, Husk, Creep
 		
 satelliteprotection_mk2:
 	Inherits: satelliteprotection
@@ -1109,7 +1109,7 @@ sowfighter:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: fighter_payload.aud
@@ -1138,7 +1138,7 @@ sowbomber:
 		ValidTargets: Ground, Water
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: sowhercules_payload.aud
@@ -1169,7 +1169,7 @@ sowtripler:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
@@ -1208,7 +1208,7 @@ sow_gun_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
@@ -1253,7 +1253,7 @@ sow_antiair_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -1281,7 +1281,7 @@ sow_plasma_tower:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
@@ -1324,7 +1324,7 @@ sow_minigun_tower:
 			Concrete: 1
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
@@ -1409,7 +1409,7 @@ sow_vulcano_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud

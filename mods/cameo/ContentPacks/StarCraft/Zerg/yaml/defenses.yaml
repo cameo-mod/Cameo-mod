@@ -1,0 +1,175 @@
+zerg_creepcolony:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EXPERIENCE: ^GainsExperienceBuildings
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits: ^BuildingPlugProducer
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Creep Colony
+		RequiresCondition: !sunken && !spore
+	Tooltip@2:
+		Name: Sunken Colony
+		RequiresCondition: sunken
+	Tooltip@3:
+		Name: Spore Colony
+		RequiresCondition: spore
+	Valued:
+		Cost: 1000
+	ProductionCostMultiplier@guardtower:
+		Multiplier: 50
+	ProductionTimeMultiplier@guardtower:
+		Multiplier: 50
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea:
+		AreaTypes: building, creep
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 4
+		IsCircular: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~zerg_hatchery
+		Queue: Building, RABuilding
+		Description: actor_sccreepcolony.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	Health:
+		HP: 80000
+	Armor:
+		Type: Wood
+		RequiresCondition: !(sunken || spore)
+	Armor@Upgrade:
+		Type: Concrete
+		RequiresCondition: sunken || spore
+	DamageMultiplier@evo:
+		Modifier: 50
+		RequiresCondition: sunken || spore
+	ProvidesPrerequisite@sunken:
+		Prerequisite: sunken
+		RequiresCondition: sunken
+	ProvidesPrerequisite@spore:
+		Prerequisite: spore
+		RequiresCondition: spore
+	ProvidesPrerequisite@creepcolonyupgradeavailable:
+		Prerequisite: creepcolonyupgradeavailable
+		RequiresCondition: !sunken && !spore
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			zerg_creepcolony: sunken
+		Requirements:
+			zerg_creepcolony: !sunken && !spore
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			sccreepcolony2: spore
+		Requirements:
+			sccreepcolony2: !sunken && !spore
+	Sellable:
+	-WithDeathAnimation:
+	##########
+	WithSpriteBody:
+		RequiresCondition: !sunken && !spore
+	WithSpriteBody@sunken:
+		Sequence: sunken
+		Name: sunken
+		RequiresCondition: sunken && !spore
+	WithSpriteBody@spore:
+		Sequence: spore
+		Name: spore
+		RequiresCondition: spore && !sunken
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+		BodyNames: body, sunken, spore
+	AttackOmni:
+		Armaments: primary, spore
+		PauseOnCondition: disabled
+	WithAttackAnimation:
+		Body: sunken
+		Sequence: shoot
+		RequiresCondition: sunken
+	Armament@sunken:
+		Weapon: Tentacle
+		RequiresCondition: sunken
+	Armament@spore:
+		Name: spore
+		Weapon: Spore
+		RequiresCondition: spore
+	RevealOnFire:
+		ArmamentNames: primary, spore
+	RevealsShroud:
+		Range: 5000
+		RequiresCondition: !(sunken || spore)
+	RevealsShroud@upgraded:
+		Range: 10000
+		RequiresCondition: sunken || spore
+	DetectCloaked@spore:
+		Range: 5000
+		RequiresCondition: (sunken || spore) && !disabled
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	WithCreepOverlay:
+		Adjacent: 5
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
+
+zerg_creepcolony_2:
+	Inherits: zerg_creepcolony
+	Buildable:
+		Queue: Defence, RADefence
+		Description: Morphs into defensive structures.
+	RenderSprites:
+		Image: zerg_creepcolony
+		PlayerPalette: player_rgba
+
+zerg_sunkencolony_2:
+	Inherits: zerg_creepcolony
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Sunken Colony
+	Valued:
+		Cost: 1250
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~zerg_hatchery
+		Description: actor_scsunkencolony.description
+	GrantCondition:
+		Condition: sunken
+	Selectable:
+		Class: zerg_creepcolony
+	RenderSprites:
+		Image: zerg_sunkencolony_2
+
+zerg_sporecolony:
+	Inherits: zerg_creepcolony
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Spore Colony
+	Valued:
+		Cost: 1250
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~zerg_hatchery
+		Description: actor_scsporecolony.description
+	GrantCondition:
+		Condition: spore
+	Selectable:
+		Class: zerg_creepcolony
+	RenderSprites:
+		Image: zerg_sporecolony

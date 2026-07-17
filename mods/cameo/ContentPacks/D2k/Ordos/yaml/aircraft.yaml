@@ -797,13 +797,14 @@ carryall_reinforce.ordos:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_lasercartridges
 ordos_advancedcarryall:
-	Inherits: ixian_autonomouscarryall
+	Inherits: carryall
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
 		Prerequisites: ~ordos_hightechfactory
+		Description: Aircraft that picks up and carries vehicles.\n  Unarmed
 	Tooltip:
 		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:

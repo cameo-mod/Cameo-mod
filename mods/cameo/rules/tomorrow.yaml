@@ -2281,7 +2281,7 @@ ATEK.ANSWER:
 	RenderSprites:
 		Image: ra1_allies_alliedtechcenter
 DTWOOD:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -2303,7 +2303,7 @@ DTWOOD:
 	WithWallSpriteBody:
 		Type: wood
 DTBARB:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -2609,7 +2609,7 @@ DTRKPOD:
 	Power:
 		Amount: -20
 DTLWALL:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 200
 	CustomSellValue:

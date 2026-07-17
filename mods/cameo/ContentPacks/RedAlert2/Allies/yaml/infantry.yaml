@@ -526,6 +526,7 @@ ra2_allies_engineer:
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedbarracks
 		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
 	Voiced:
 		VoiceSet: AlliesEngineer
 	DeliversCash:

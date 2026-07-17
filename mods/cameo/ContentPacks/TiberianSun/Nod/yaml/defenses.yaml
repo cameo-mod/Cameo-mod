@@ -4,6 +4,7 @@ ts_nod_silo:
 		Name: Silo
 	Buildable:
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+		Description: Stores excess resources.
 	RenderSprites:
 		Image: tsgtsilo.nod
 
@@ -423,5 +424,68 @@ ts_nod_laserfence:
 	LineBuildSegmentExternalCondition:
 		RequiresCondition: !build-incomplete && !disabled
 		Condition: active-posts
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_laserfence_segment:
+	Inherits: ^wall
+	Tooltip:
+		Name: Laser Fence
+	LineBuild:
+		NodeTypes: laserfence
+	LineBuildNode:
+		Types: laserfence
+	-Crushable:
+	-Sellable:
+	-Targetable:
+	-Building:
+	EnergyWall:
+		ActiveCondition: active-posts == 2
+		Weapon: TSLaserFence
+	GrantConditionOnLineBuildDirection@X:
+		Direction: X
+		Condition: laserfence-direction-x
+	GrantConditionOnLineBuildDirection@Y:
+		Direction: Y
+		Condition: laserfence-direction-y
+	-WithWallSpriteBody:
+	ExternalCondition@ACTIVE:
+		Condition: active-posts
+	WithWallSpriteBody@XENABLED:
+		RequiresCondition: laserfence-direction-x && active-posts == 2
+		Type: laserfence
+		Sequence: enabled-x
+		Name: x-enabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithWallSpriteBody@YENABLED:
+		RequiresCondition: laserfence-direction-y && active-posts == 2
+		Type: laserfence
+		Sequence: enabled-y
+		Name: y-enabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithSpriteBody@XDISABLED:
+		RequiresCondition: laserfence-direction-x && active-posts < 2
+		Sequence: disabled-x
+		Name: x-disabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithSpriteBody@YDISABLED:
+		RequiresCondition: laserfence-direction-y && active-posts < 2
+		Sequence: disabled-y
+		Name: y-disabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	BlocksProjectiles:
+		RequiresCondition: active-posts == 2
+	DamageMultiplier: # Prevent all normal damage, but still allows direct kills from the post
+		Modifier: 0
+	# ThrowsShrapnel@SMALL:
+	# 	Weapons: Debris
+	# 	Pieces: 0, 1
+	# 	Range: 2c0, 5c0
+	Interactable:
+		Bounds: 1024, 1024
 	RenderSprites:
 		PlayerPalette: playerra2

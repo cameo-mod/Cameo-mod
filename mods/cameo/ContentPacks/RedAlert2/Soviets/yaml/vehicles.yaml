@@ -13,6 +13,7 @@ ra2_soviets_mobileconstructionvehicle:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~ra2_soviets_warfactory, ra2_soviets_servicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: ra2_soviets_constructionyard
 		Offset: -1,-1

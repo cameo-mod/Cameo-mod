@@ -70,6 +70,7 @@ schwarzermond_barracks:
 		Name: Schwarzer Mond Barracks
 	Buildable:
 		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_hydrogenplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -93,6 +94,7 @@ schwarzermond_orerefinery:
 		Name: Schwarzer Mond Ore Refinery
 	Buildable:
 		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_hydrogenplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3

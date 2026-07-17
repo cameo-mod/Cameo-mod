@@ -18,7 +18,7 @@ concreteb:
 		Start: 4317
 		Offset: -30,-24
 
-ixian_concretewall:
+wall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -5356,7 +5356,7 @@ d2k_autogun_tank.husk:
 		Filename: ordos_upgrade_heavyautoguntank_d2k_autogun_tank.shp
 		Facings: -32
 
-ixian_autonomouscarryall:
+carryall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -5372,7 +5372,7 @@ ixian_autonomouscarryall:
 		Offset: -30,-24
 
 carryall.reinforce:
-	Inherits: ixian_autonomouscarryall
+	Inherits: carryall
 
 oornithopter:
 	Inherits: ornithopter

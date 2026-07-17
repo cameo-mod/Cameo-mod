@@ -86,6 +86,7 @@ td_nod_mobileconstructionvehicle:
 		Name: Nod Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~td_nod_airstrip, td_nod_repairfacility
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: td_nod_constructionyard
 	RenderSprites:
@@ -736,6 +737,7 @@ td_nod_buggymkii:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
 		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlockbuggymkii
+		Description: Fast raider vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 	Valued:
 		Cost: 500
 	Mobile:
@@ -952,6 +954,7 @@ td_nod_stealthharvester:
 	Buildable:
 		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_upgradeupnodstealthname
 		Queue: Vehicle, RAVehicle
+		Description: Harvests ore for processing.\n  Unarmed
 	RenderSprites:
 		Image: td_nod_stealthharvester
 	ActorStatValues:

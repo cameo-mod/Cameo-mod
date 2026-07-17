@@ -1,0 +1,965 @@
+terran_wraith:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Wraith
+	Valued:
+		Cost: 1400
+	Power:
+		Amount: -70
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~terran_starport, ~!terran_promotion_unlocksundog
+		Queue: Aircraft, RAAircraft
+		Description: actor_scwraith.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 24
+		Speed: 120
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: WraithLaser
+		LocalOffset: 400,0,0
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@SECONDARY1:
+		Weapon: WraithRockets
+		LocalOffset: 400,400,0
+		PauseOnCondition: ammo < 2
+	Armament@SECONDARY2:
+		Weapon: WraithRockets
+		LocalOffset: 400,-400,0
+		PauseOnCondition: ammo < 2
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_ghost
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	Voiced:
+		VoiceSet: SCWraithVoice
+	DeathSounds:
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 28
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 5
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
+
+terran_sundog:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Sundog
+	Valued:
+		Cost: 2700
+	Power:
+		Amount: -135
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~terran_starport, ~terran_promotion_unlocksundog
+		Queue: Aircraft, RAAircraft
+		Description: actor_scsundog.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 24
+		Speed: 120
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Weapon: SunDogLaser
+		LocalOffset: 400,0,0
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@SECONDARY1:
+		Weapon: SunDogRockets
+		LocalOffset: 400,400,0
+		PauseOnCondition: ammo < 2
+	Armament@SECONDARY2:
+		Weapon: SunDogRockets
+		LocalOffset: 400,-400,0
+		PauseOnCondition: ammo < 2
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 13
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 19
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_specter
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	Voiced:
+		VoiceSet: SCWraithVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
+
+terran_valkyrie:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Valkyrie
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~terran_starport, terran_armory, ~!terran_promotion_unlockwyvern
+		Queue: Aircraft, RAAircraft
+		Description: actor_scvalkyrie.description
+	Aircraft:
+		InitialFacing: 896
+		Speed: 140
+		TurnSpeed: 28
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armament@SECONDARY1:
+		Weapon: ValkyrieRockets
+		LocalOffset: 400,400,0
+	Armament@SECONDARY2:
+		Weapon: ValkyrieRockets
+		LocalOffset: 400,-400,0
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_marauder
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: SCValkyrieVoice
+	DeathSounds:
+	KeepsDistance:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
+
+terran_wyvern:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Wyvern
+	Valued:
+		Cost: 3600
+	Power:
+		Amount: -180
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~terran_starport, terran_armory, ~terran_promotion_unlockwyvern
+		Queue: Aircraft, RAAircraft
+		Description: actor_scwyvern.description
+	Aircraft:
+		InitialFacing: 896
+		Speed: 70
+		TurnSpeed: 14
+	Health:
+		HP: 180000
+	Repairable:
+		HpPerStep: 9000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armament@SECONDARY1:
+		Weapon: WyvernRockets
+		LocalOffset: 400,400,0
+	Armament@SECONDARY2:
+		Weapon: WyvernRockets
+		LocalOffset: 400,-400,0
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_madcap
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Voiced:
+		VoiceSet: SCValkyrieVoice
+	DeathSounds:
+	KeepsDistance:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
+
+terran_raven:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Raven
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Prerequisites: ~terran_starport, terran_promotion_unlockraven
+		Queue: Aircraft, RAAircraft
+		Description: actor_scraven.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@repair:
+		Weapon: RavenRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 640,0,-160
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	# Armament@TurretSpawner:
+	# 	Weapon: RavenTurretSpawner
+	# 	ForceTargetRelationships: Enemy, Neutral
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_ghost
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	Voiced:
+		VoiceSet: SCWraithVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
+
+terran_dropship:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Dropship
+	Valued:
+		Cost: 3600
+	Power:
+		Amount: -180
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: terran_dropship
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_starport, ~!terran_promotion_unlockspectreandmedivac
+		Queue: Aircraft, RAAircraft
+		Description: actor_scdropship.description
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 125
+		InitialFacing: 896
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 8
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+		InitialUnits: terran_marine, terran_marine, terran_marine, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_medic
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_marine
+	Selectable:
+		Class: terran_dropship
+		DecorationBounds: 1280, 1280, 0, 0
+	Voiced:
+		VoiceSet: SCDropshipVoice
+	DeathSounds:
+	RenderSprites:
+		Image: terran_dropship
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
+	WithCargoSounds:
+		EnterSounds: tdrtra00.wav
+		ExitSounds: tdrtra00.wav
+
+terran_pythean:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@cargo: ^CargoAircraft
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Pythean
+	Valued:
+		Cost: 5500
+	Power:
+		Amount: -275
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: terran_dropship
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_starport, terran_promotion_unlockpythean
+		Queue: Aircraft, RAAircraft
+		BuildLimit: 1
+		Description: actor_scpythean.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 16
+		Speed: 40
+		RepulsionSpeed: 32
+	Health:
+		HP: 400000
+	Repairable:
+		HpPerStep: 20000
+	ChangesHealth@SelfHealing:
+		Step: 160
+	Cargo:
+		ExclusiveDeploy: true
+		DeployType: opentopped
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 9
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+		InitialUnits: terran_marine, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_reaper, terran_medic
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, 224,341,128, 0,-341,128, 0,341,128, -224,-341,128, -224,341,128, -384,0,128, 0,0,128
+		PauseOnCondition: chronobeamed
+	Armament:
+		Weapon: JimRaynorMachineGun
+		LocalOffset: 400,0,0, 200,200,0, 200,-200,0, 300,300,0, 300,-300,0
+		MuzzleSequence: muzzle
+	RangeMultiplier@Pythean:
+		Modifier: 85
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_harakan
+	-SpawnActorOnDeath:
+		Actor: SCPYTHEAN.Husk
+	Selectable:
+		Class: terran_dropship
+		DecorationBounds: 1280, 1280, 0, 0
+	Voiced:
+		VoiceSet: SCDropshipVoice
+	DeathSounds:
+	RenderSprites:
+		Image: terran_pythean
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
+	WithCargoSounds:
+		EnterSounds: tdrtra00.wav
+		ExitSounds: tdrtra00.wav
+
+terran_medivac:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Medivac
+	Valued:
+		Cost: 5000
+	Power:
+		Amount: -250
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: terran_dropship
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~terran_starport, ~terran_promotion_unlockspectreandmedivac
+		Queue: Aircraft, RAAircraft
+		Description: actor_scmedivac.description
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 125
+		InitialFacing: 896
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament:
+		Weapon: MedicHeal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		LocalOffset: 600,-100,256
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry, plagued, ivanattached, lockdowned
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 8
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+		InitialUnits: terran_marine, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_medic
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_medic
+	Selectable:
+		Class: terran_dropship
+		DecorationBounds: 1280, 1280, 0, 0
+	Voiced:
+		VoiceSet: SCDropshipVoice
+	DeathSounds:
+	RenderSprites:
+		Image: terran_medivac
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
+	WithCargoSounds:
+		EnterSounds: tdrtra00.wav
+		ExitSounds: tdrtra00.wav
+
+terran_battlecruiser:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Battlecruiser
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~terran_starport, terran_sciencefacility
+		Queue: Aircraft, RAAircraft
+		Description: actor_scbattlecruiser.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 12
+		Speed: 30
+		RepulsionSpeed: 24
+		IdealSeparation: 2500
+	Health:
+		HP: 500000
+	Repairable:
+		HpPerStep: 25000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament:
+		Name: primary
+		Weapon: BCLaser
+		LocalOffset: 800,0,200
+		PauseOnCondition: tacticaljump
+		AmmoUsage: 0
+		MuzzleSequence: muzzle
+	Armament@Yamato:
+		Name: secondary
+		Weapon: BCYamatoCannon
+		LocalOffset: 800,0,200
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		PauseOnCondition: ammo < 100 || tacticaljump
+		AmmoUsage: 100
+	RangeMultiplier@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		Modifier: 115
+	GrantConditionOnPrerequisite@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		Condition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		Prerequisites: terran_upgrade_yamatocannonandtacticaljumpupgrade
+	RA2PortableChrono:
+		TeleportType: PortableChrono
+		ChargeDelay: 1500
+		MaxTeleportDistance: -1
+		ChronoshiftSound: chrono2.aud
+		PauseOnCondition: disabled
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+	GrantTimedConditionOnTeleport@Portable:
+		TeleportTypes: PortableChrono
+		Condition: tacticaljump
+		Duration: 100
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_ghost
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: SCBattleCruiserVoice
+	WithAttackAnimation@1:
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@2:
+		Armament: secondary
+		Sequence: shoot
+	WithMoveAnimation:
+		MoveSequence: move
+	WithIdleOverlay@tacticaljump:
+		Image: scbattlecruiserteleport
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: tacticaljump
+	WithIdleOverlay@tacticaljump2:
+		Image: scbattlecruiserteleport2
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: tacticaljump
+	SpeedMultiplier@tacticaljump:
+		RequiresCondition: tacticaljump
+		Modifier: 0
+	DamageMultiplier@tacticaljump:
+		RequiresCondition: tacticaljump
+		Modifier: 200
+	DeathSounds:
+	AmbientSound:
+		RequiresCondition: tacticaljump
+		SoundFiles: yamatocharge.wav
+		Volume: 5
+	AmmoPool:
+		InitialAmmo: 0
+		Ammo: 100
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 1
+		Count: 1
+		RequiresCondition: tacticaljump
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	SpawnActorOnDeath:
+		Actor: SCBATTLECRUISER.Husk
+	-ReloadAmmoDelayMultiplier@RANK-1:
+	-ReloadAmmoDelayMultiplier@RANK-2:
+	-ReloadAmmoDelayMultiplier@RANK-3:
+	-ReloadAmmoDelayMultiplier@RANK-ELITE:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade
+
+terran_phobos:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Phobos
+	Valued:
+		Cost: 10000
+	Power:
+		Amount: -500
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 40
+		Prerequisites: ~terran_starport, terran_sciencefacility, terran_promotion_unlockphobos
+		Queue: Aircraft, RAAircraft
+		Description: actor_scphobos.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 10
+		Speed: 25
+		RepulsionSpeed: 20
+	Health:
+		HP: 1000000
+	Repairable:
+		HpPerStep: 50000
+	ChangesHealth@SelfHealing:
+		Step: 400
+	CarrierMaster:
+		Actors: scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone, scwraithdrone
+		RearmTicks: 100
+		RespawnTicks: 200
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Turreted:
+	AttackTurreted:
+		PauseOnCondition: disabled
+	-AttackAircraft:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_specter
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: SCBattleCruiserVoice
+	DeathSounds:
+	Armament:
+		Name: primary
+		Weapon: PhobosLaser
+		LocalOffset: 400,-400,100, 400,400,100, -400,-400,100, -400,400,100
+		PauseOnCondition: tacticaljump
+		AmmoUsage: 0
+		MuzzleSequence: muzzle
+	Armament@Yamato:
+		Name: secondary
+		Weapon: BCYamatoCannon
+		LocalOffset: 800,0,200
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		PauseOnCondition: ammo < 100 || tacticaljump
+		AmmoUsage: 100
+	GrantConditionOnPrerequisite@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		Condition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		Prerequisites: terran_upgrade_yamatocannonandtacticaljumpupgrade
+	RA2PortableChrono:
+		TeleportType: PortableChrono
+		ChargeDelay: 1500
+		MaxTeleportDistance: -1
+		ChronoshiftSound: chrono2.aud
+		PauseOnCondition: disabled
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+	GrantTimedConditionOnTeleport@Portable:
+		TeleportTypes: PortableChrono
+		Condition: tacticaljump
+		Duration: 100
+	WithMoveAnimation:
+		MoveSequence: move
+	WithIdleOverlay@tacticaljump:
+		Image: scbattlecruiserteleport
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: tacticaljump
+	WithIdleOverlay@tacticaljump2:
+		Image: scbattlecruiserteleport2
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: tacticaljump
+	SpeedMultiplier@tacticaljump:
+		RequiresCondition: tacticaljump
+		Modifier: 0
+	DamageMultiplier@tacticaljump:
+		RequiresCondition: tacticaljump
+		Modifier: 200
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+		RequiresCondition: !tacticaljump
+	DeathSounds:
+	AmbientSound:
+		RequiresCondition: tacticaljump
+		SoundFiles: yamatocharge.wav
+		Volume: 5
+	AmmoPool:
+		InitialAmmo: 0
+		Ammo: 100
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 1
+		Count: 1
+		RequiresCondition: tacticaljump
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	SpawnActorOnDeath:
+		Actor: SCPHOBOS.Husk
+	-ReloadAmmoDelayMultiplier@RANK-1:
+	-ReloadAmmoDelayMultiplier@RANK-2:
+	-ReloadAmmoDelayMultiplier@RANK-3:
+	-ReloadAmmoDelayMultiplier@RANK-ELITE:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade
+
+terran_sciencevessel:
+	Inherits: ^Helicopter
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@explode: ^HeliExplodeLarge
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@detect: ^GenericAirDetector
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Science Vessel
+	Valued:
+		Cost: 2200
+	Power:
+		Amount: -110
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~terran_sciencefacility
+		Queue: Aircraft, RAAircraft
+		Description: actor_scsciencevessel.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 28
+		Speed: 66
+		IdealSeparation: 1c0
+		RepulsionSpeed: 10
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armament@IronCourtain:
+		Weapon: ScienceVesselDefenseMatrix
+		LocalOffset: 1,0,11
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: deployed
+	Armament@Irradiate:
+		Weapon: ScienceVesselIrradiate
+		LocalOffset: 1,0,11
+		TargetRelationships: Enemy
+		PauseOnCondition: !deployed
+	Armament@EMP:
+		Weapon: ScienceVesselEMP
+		LocalOffset: 1,0,11
+		TargetRelationships: Enemy
+		PauseOnCondition: !deployed
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployOnMove: false
+		UndeployOnPickup: false
+		RequiresCondition: !botmicro
+	WithDecoration@deployed:
+		Image: crate-effects
+		Sequence: armor
+		RequiresCondition: !deployed
+	WithDecoration@ndeployed:
+		Image: crate-effects
+		Sequence: nuke
+		RequiresCondition: deployed
+	Turreted:
+	AttackTurreted:
+		PauseOnCondition: disabled
+	-AttackAircraft:
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	EjectOnDeath:
+		PilotActor: terran_firebat
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: SCScienceVesselVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2

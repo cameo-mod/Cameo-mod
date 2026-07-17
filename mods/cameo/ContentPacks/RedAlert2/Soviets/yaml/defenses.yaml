@@ -6,6 +6,7 @@ ra2_soviets_concretebarrier:
 		PlayerPalette: playerra2
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard
+		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

@@ -1,0 +1,230 @@
+zerg_upgrade_pneumatizedcarapace:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Pneumatized Carapace
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upoverlordspeed.description
+		Prerequisites: ~zerg_hatchery, ~!zerg_upgrade_pneumatizedcarapace
+	RenderSprites:
+		Image: zerg_upgrade_pneumatizedcarapace
+	ProvidesPrerequisite:
+
+zerg_upgrade_metabolicboost:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Metabolic Boost
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_uplingspeed.description
+		Prerequisites: ~zerg_spawningpool, zerg_evolutionchamber, ~!zerg_upgrade_metabolicboost
+	RenderSprites:
+		Image: zerg_upgrade_metabolicboost
+	ProvidesPrerequisite:
+
+zerg_upgrade_adrenalglands:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Adrenal Glands
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_uplingattack.description
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_adrenalglands
+	RenderSprites:
+		Image: zerg_upgrade_adrenalglands
+	ProvidesPrerequisite:
+
+zerg_upgrade_groovedspines:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Grooved Spines
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upzergrange.description
+		Prerequisites: ~zerg_hydraliskden, ~!zerg_upgrade_groovedspines
+	RenderSprites:
+		Image: zerg_upgrade_groovedspines
+	ProvidesPrerequisite:
+
+zerg_upgrade_meleeattackslevel1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Melee Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upzergmelee.description
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_meleeattackslevel1
+	RenderSprites:
+		Image: zerg_upgrade_meleeattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_meleeattackslevel2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Melee Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upzergmelee2.description
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_meleeattackslevel1, ~!zerg_upgrade_meleeattackslevel2
+	RenderSprites:
+		Image: zerg_upgrade_meleeattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_missileattackslevel1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Missile Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upzergmissile.description
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_missileattackslevel1
+	RenderSprites:
+		Image: zerg_upgrade_missileattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_missileattackslevel2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Missile Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upzergmissile2.description
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_missileattackslevel1, ~!zerg_upgrade_missileattackslevel2
+	RenderSprites:
+		Image: zerg_upgrade_missileattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_carapacelevel1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Carapace Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upcarapace.description
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_carapacelevel1
+	RenderSprites:
+		Image: zerg_upgrade_carapacelevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_carapacelevel2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Carapace Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upcarapace2.description
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_carapacelevel1, ~!zerg_upgrade_carapacelevel2
+	RenderSprites:
+		Image: zerg_upgrade_carapacelevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_flyerattackslevel1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upflyerattack.description
+		Prerequisites: ~zerg_spire, ~!zerg_upgrade_flyerattackslevel1
+	RenderSprites:
+		Image: zerg_upgrade_flyerattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_flyerattackslevel2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upflyerattack2.description
+		Prerequisites: zerg_spire, ~zerg_hive, zerg_upgrade_flyerattackslevel1, ~!zerg_upgrade_flyerattackslevel2
+	RenderSprites:
+		Image: zerg_upgrade_flyerattackslevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_flyercarapacelevel1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Carapace Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor_upflyerarmor.description
+		Prerequisites: ~zerg_spire, ~!zerg_upgrade_flyercarapacelevel1
+	RenderSprites:
+		Image: zerg_upgrade_flyercarapacelevel1
+	ProvidesPrerequisite:
+
+zerg_upgrade_flyercarapacelevel2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Carapace Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor_upflyerarmor2.description
+		Prerequisites: zerg_spire, ~zerg_hive, zerg_upgrade_flyercarapacelevel1, ~!zerg_upgrade_flyercarapacelevel2
+	RenderSprites:
+		Image: zerg_upgrade_flyercarapacelevel1
+	ProvidesPrerequisite:
+####################################################################################################
+#		XELNAGA BOSS
+####################################################################################################
+####################################################################################################
+#		Confederation
+####################################################################################################
+####################################################################################################
+#		Sons of Korhal
+####################################################################################################
+####################################################################################################
+#		Rebels of Raynor
+####################################################################################################
+####################################################################################################
+#		Dark Templars
+####################################################################################################
+####################################################################################################
+#		Templars
+####################################################################################################
+####################################################################################################
+#		Infested Colony
+####################################################################################################

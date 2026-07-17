@@ -101,7 +101,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Straightforward, beginner-friendly faction
 - Classic C&C playstyle with no complex tech trees
 - Advanced Guard Tower provides strong anti-air and anti-ground defense
-- APC is amphibious with anti-air capability
+- APC with anti-air capability (tracked, not amphibious)
 
 ---
 
@@ -418,18 +418,17 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Cruiser (devastating naval bombardment)
 
 **Team Upgrades:**
-- **6 Doctrines** (largest doctrine system in the game):
-  - Conscription, Heavy Armor, Industrial Efficiency, Inferno, Nuclear War, Tesla & Experimental Tech
-- Each doctrine radically changes playstyle and available units
+- **Base Upgrades:** Advanced Radar Systems, Infantry Armor Plating, Reinforced Structures
+- **Research Upgrades:** Air Superiority Doctrine, Laser Targeting Systems, Chrono Armor, Cryo Missiles
+- **Superweapon Upgrade:** GPS Satellite Support (requires Advanced Radar Systems)
+- Each upgrade enhances unit capabilities or unlocks new abilities
 
 **Unique Mechanics:**
-- 6 swap-able doctrines that change available units and playstyle
-- Inferno doctrine adds flame weapons to nearly all units
-- Nuclear War doctrine grants Atomic Bomb superweapon
-- Tesla and experimental tech available via doctrine swap
+- Research upgrades enhance air power, targeting, armor, and missiles
 - Gap Generator hides base from enemy vision
 - Strong naval presence (Cruiser, Destroyer, Gunboat)
 - Chronoshift technology for strategic repositioning
+- GPS Satellite reveals entire map
 
 ---
 

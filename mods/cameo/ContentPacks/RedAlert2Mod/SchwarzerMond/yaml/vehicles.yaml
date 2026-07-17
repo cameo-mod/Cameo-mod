@@ -10,6 +10,7 @@ schwarzermond_naxismobileconstructionvehicle:
 		Name: Naxis Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~schwarzermond_warfactory, schwarzermond_hydrogenplant, schwarzermond_radar
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: schwarzermond_constructionyard
 		Offset: -1,-1

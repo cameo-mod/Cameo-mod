@@ -63,6 +63,7 @@ naxis_barracks:
 		Name: Naxis Barracks
 	Buildable:
 		Prerequisites: ~naxis_constructionyard, naxis_naxpetrolplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -84,6 +85,7 @@ naxis_orerefinery:
 		Name: Naxis Ore Refinery
 	Buildable:
 		Prerequisites: ~naxis_constructionyard, naxis_naxpetrolplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -325,6 +327,7 @@ naxis_academy:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
 		Prerequisites: ~naxis_constructionyard, naxis_radar
+		Description: Trains elite infantry and unlocks upgrades.
 	Tooltip:
 		Name: Naxis Academy
 	Building:
@@ -344,6 +347,7 @@ naxis_techcenter:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~naxis_constructionyard, naxis_radar
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Naxis Tech Center
 	Building:
@@ -636,6 +640,7 @@ naxis_machinegunbunkeraddon:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~naxis_constructionyard, naxis_naxibunker, naxis_barracks
+		Description: Defensive bunker addon.
 	Plug:
 		Type: naxis_machinegunbunkeraddon
 	RenderSprites:
@@ -653,6 +658,7 @@ naxis_mortarbunkeraddon:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~naxis_constructionyard, naxis_naxibunker, naxis_radar
+		Description: Defensive bunker addon.
 	Plug:
 		Type: naxis_mortarbunkeraddon
 	RenderSprites:
@@ -670,6 +676,7 @@ naxis_miniflakbunkeraddon:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~naxis_constructionyard, naxis_naxibunker, naxis_radar
+		Description: Defensive bunker addon.
 	Plug:
 		Type: naxis_miniflakbunkeraddon
 	RenderSprites:

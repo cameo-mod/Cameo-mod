@@ -1,4 +1,4 @@
-﻿Metadata:
+Metadata:
 	Title: mod_title
 	Version: {DEV_VERSION}
 	Website: https://www.moddb.com/mods/cameo
@@ -144,13 +144,19 @@ Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
 Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
 Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
 Include: ContentPacks/TKM/content.yaml
+Include: ContentPacks/TKM/TKM/content.yaml
 Include: ContentPacks/D2k/Shared/content.yaml
 Include: ContentPacks/D2k/Ordos/content.yaml
 Include: ContentPacks/D2k/Ixian/content.yaml
 Include: ContentPacks/D2k/Atreides/content.yaml
 Include: ContentPacks/D2k/Harkonnen/content.yaml
 Include: ContentPacks/StarCraft/content.yaml
+Include: ContentPacks/StarCraft/Protoss/content.yaml
+Include: ContentPacks/StarCraft/Zerg/content.yaml
+Include: ContentPacks/StarCraft/Terran/content.yaml
 Include: ContentPacks/Warcraft2/content.yaml
+Include: ContentPacks/Warcraft2/Orcs/content.yaml
+Include: ContentPacks/Warcraft2/Humans/content.yaml
 Include: ContentPacks/Outpost2/content.yaml
 Rules:
 	cameo|rules/misc.yaml

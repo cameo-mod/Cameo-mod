@@ -74,3 +74,23 @@ ts_gdi_kodiakcommandship_husk:
 ###############################################
 
 ########## Radar ##########
+
+ts_gdi_jumpjetinfantry_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Jumpjet Infantry
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 149
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: tsjumpjet
+	RenderSprites:
+		PlayerPalette: playerra2

@@ -390,7 +390,7 @@ CannonBall:
 			Concrete: 10
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Tank, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: smallfire
 
@@ -792,14 +792,14 @@ MothershipExplosion:
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
 		Delay: 1
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@12Res_areanuke3: DestroyResource
@@ -807,12 +807,12 @@ MothershipExplosion:
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 	Warhead@14Smu_areanuke3: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 

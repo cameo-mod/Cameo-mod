@@ -1,0 +1,549 @@
+terran_commandcenter:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@conyard: ^Conyard
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Tooltip:
+		Name: Command Center
+	Power:
+		Amount: 100
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Transforms:
+		IntoActor: sccommandcenterm
+		Offset: 1,1
+		Facing: 432
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Refinery:
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	Voiced:
+		VoiceSet: SCCommandCenterVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_supplydepot:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Supply Depot
+	Valued:
+		Cost: 800
+	Power:
+		Amount: 200
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Prerequisites: ~terran_commandcenter
+		Queue: Building, RABuilding
+		Description: actor_scsupplydepot.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 200000
+	StoresResources:
+		Capacity: 4000
+	RevealsShroud:
+		Range: 5c0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithIdleOverlay@fans:
+		RequiresCondition: supplydepotupg
+		Sequence: fans
+		Palette: greyscale
+	DamageMultiplier@supplydepotupg:
+		RequiresCondition: supplydepotupg
+		Modifier: 50
+	StoresPlayerResources@supplydepotupg:
+		Capacity: 4000
+		RequiresCondition: supplydepotupg
+	GrantConditionOnPrerequisite@terran_upgrade_upgradesupplydepotlevel1:
+		Condition: terran_upgrade_upgradesupplydepotlevel1
+		Prerequisites: terran_upgrade_upgradesupplydepotlevel1
+	PowerMultiplier@terran_upgrade_upgradesupplydepotlevel1:
+		Modifier: 150
+		RequiresCondition: terran_upgrade_upgradesupplydepotlevel1 && !terran_upgrade_upgradesupplydepotlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_upgradesupplydepotlevel2:
+		Condition: terran_upgrade_upgradesupplydepotlevel2
+		Prerequisites: terran_upgrade_upgradesupplydepotlevel2
+	PowerMultiplier@terran_upgrade_upgradesupplydepotlevel2:
+		Modifier: 200
+		RequiresCondition: terran_upgrade_upgradesupplydepotlevel2
+	ProvidesPrerequisite:
+		Prerequisite: supplydepotupgradeavailable
+		RequiresCondition: !supplydepotupg
+	PowerMultiplier@supplydepotupg:
+		Modifier: 200
+		RequiresCondition: supplydepotupg
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			terran_supplydepot: supplydepotupg
+		Requirements:
+			terran_supplydepot: !build-incomplete && !supplydepotupg
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCSupplyCenterVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_upgradesupplydepotlevel1, terran_upgrade_upgradesupplydepotlevel2
+
+terran_expandedstorage:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Expanded Storage
+	Valued:
+		Cost: 800
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~terran_commandcenter, supplydepotupgradeavailable
+		Description: actor_supplydepotexpand.description
+	Plug:
+		Type: terran_supplydepot
+	RenderSprites:
+		Image: terran_supplydepot
+
+terran_refinery:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Refinery
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~terran_commandcenter
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Description: actor_screfinery.description
+	Building:
+		Footprint: _x_ xxx ===
+		BuildSounds: tscupd00.aud
+		Dimensions: 3,3
+	WithBuildingBib:
+	FreeActor@1:
+		Actor: terran_scv
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: terran_scv
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	DamageMultiplier@refineryupg:
+		RequiresCondition: refineryupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: refineryupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas
+		Interval: 125
+		RequiresCondition: refineryupg
+	CashTrickler@refineryupg:
+		RequiresCondition: refineryupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: sctrefineryupgradeavailable
+		RequiresCondition: !refineryupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			terran_refinery: refineryupg
+		Requirements:
+			terran_refinery: !build-incomplete && !refineryupg
+	Voiced:
+		VoiceSet: SCRefineryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_vespenegascollector
+
+terran_vespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~terran_commandcenter, sctrefineryupgradeavailable
+		Description: actor_sctvespenegascollector.description
+	Plug:
+		Type: terran_refinery
+	RenderSprites:
+		Image: upscrefinery1
+
+terran_barracks:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Tooltip:
+		Name: Barracks
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~terran_commandcenter
+		Queue: Building, RABuilding
+		Description: actor_scbarracks.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@terran:
+		Multiplier: 125
+	ProductionTimeMultiplier@terran:
+		Multiplier: 125
+	DamageMultiplier@terran:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scbarracksm
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_academy:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Academy
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~terran_commandcenter, terran_barracks
+		Queue: Building, RABuilding
+		Description: actor_scacademy.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCAcademyVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_engineeringbay:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: Engineering Bay
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~terran_commandcenter, terran_barracks
+		Queue: Building, RABuilding
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: actor_scengineeringbay.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scengineeringbaym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCEngineeringBayVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_weaponsfactory:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Tooltip:
+		Name: Weapons Factory
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~terran_commandcenter, terran_barracks
+		Queue: Building, RABuilding
+		Description: actor_scfactory.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@terran:
+		Multiplier: 125
+	ProductionTimeMultiplier@terran:
+		Multiplier: 125
+	DamageMultiplier@terran:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3472, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scfactorym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_armory:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Armory
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory
+		Queue: Building, RABuilding
+		Description: actor_scarmory.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCArmoryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_starport:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@hpad: ^IsAircraftFactory
+	Tooltip:
+		Name: Starport
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory
+		Queue: Building, RABuilding
+		Description: actor_scstarport.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@AIRCRAFT:
+		LowPowerModifier: 10000
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scstarportm
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCArmoryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+terran_sciencefacility:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@tech: ^IsTechnoBuilding
+	Tooltip:
+		Name: Science Facility
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory, terran_starport
+		Queue: Building, RABuilding
+		Description: actor_scsciencefacility.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+		Sequence: smoke
+	SupportPowerChargeBar:
+	Transforms:
+		IntoActor: scsciencefacilitym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCScienceFacilityVoice
+	RenderSprites:
+		PlayerPalette: player_rgba

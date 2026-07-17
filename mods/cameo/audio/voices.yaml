@@ -1,7 +1,9 @@
 GenericVoice:
 	Variants:
 		gdi: v01.aud,v03.aud
+		td_gdi: v01.aud,v03.aud
 		nod: v01.aud,v03.aud
+		td_nod: v01.aud,v03.aud
 	Voices:
 		Select: await1,ready,report1,yessir1
 		Action: ackno,affirm1,noprob,ritaway,roger,ugotit
@@ -14,7 +16,9 @@ GenericVoice:
 VehicleVoice:
 	Variants:
 		gdi: v00.aud,v02.aud
+		td_gdi: v00.aud,v02.aud
 		nod: v00.aud,v02.aud
+		td_nod: v00.aud,v02.aud
 		asianalliance: v00.aud,v02.aud
 		syndicate: v00.aud,v02.aud
 		consortium: v00.aud,v02.aud
@@ -155,6 +159,8 @@ DinoVoice:
 RAGenericVoice:
 	Variants:
 		allies: a01.aud,a03.aud
+		ra1_allies: a01.aud,a03.aud
+		ra2_allies: a01.aud,a03.aud
 		japan: a01.aud,a03.aud
 	Voices:
 		Select: await1,ready,report1,yessir1
@@ -168,6 +174,8 @@ RAGenericVoice:
 RAVehicleVoice:
 	Variants:
 		allies: a00.aud,a02.aud
+		ra1_allies: a00.aud,a02.aud
+		ra2_allies: a00.aud,a02.aud
 		japan: a00.aud,a02.aud
 		tkm: a00.aud,a02.aud
 	Voices:
@@ -186,6 +194,8 @@ RussianVoice:
 RussianVehicleVoice:
 	Variants:
 		soviets: r00.aud,r02.aud
+		ra1_soviets: r00.aud,r02.aud
+		ra2_soviets: r00.aud,r02.aud
 	Voices:
 		Select: vehic1,yessir1,report1,await1
 		Action: ackno,affirm1

@@ -99,7 +99,7 @@ SILO:
 		PipCount: 10
 
 SBAG:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 50
 	CustomSellValue:
@@ -122,8 +122,8 @@ SBAG:
 	WithWallSpriteBody:
 		Type: sandbag
 
-japan_chainlinkfence:
-	Inherits: ^ixian_concretewall
+cycl:
+	Inherits: ^wall
 	Valued:
 		Cost: 75
 	CustomSellValue:
@@ -147,7 +147,7 @@ japan_chainlinkfence:
 		Type: chain
 
 FENC:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -173,7 +173,7 @@ FENC:
 		Palette: td_temperat
 
 BRIK:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 200
 	CustomSellValue:

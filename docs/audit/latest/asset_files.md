@@ -1,6 +1,6 @@
 # Asset file references (rename crash class)
 
-A1 rename-broken sprite refs: 0, A2 missing voxels: 6, A3 missing without rename mapping (informational): 57
+A1 rename-broken sprite refs: 0, A2 missing voxels: 0, A3 missing without rename mapping (informational): 56
 
 
 ## A1 — reference renamed, file not moved (0) — CRASH
@@ -8,19 +8,12 @@ A1 rename-broken sprite refs: 0, A2 missing voxels: 6, A3 missing without rename
 _none found_
 
 
-## A2 — voxel file missing (6) — CRASH
+## A2 — voxel file missing (0) — CRASH
 
-| location | image | expected file |
-|---|---|---|
-| sequences/voxels.yaml:37 | ra2_soviets_seascorpion | ra2_soviets_seascorpion.vxl |
-| sequences/voxels.yaml:53 | ra2_allies_patriotmissilesystem | td_nod_samsite.vxl |
-| sequences/voxels.yaml:54 | ra2_allies_patriotmissilesystem | td_nod_samsite.vxl |
-| sequences/voxels.yaml:60 | ra2_allies_nighthawk | ra2_allies_nighthawk.vxl |
-| sequences/voxels.yaml:73 | yuri_boomersubmarine | yuri_boomersubmarine.vxl |
-| sequences/voxels.yaml:79 | yuri_chaosdrone | yuri_chaosdrone.vxl |
+_none found_
 
 
-## A3 — missing loose, no rename mapping (57)
+## A3 — missing loose, no rename mapping (56)
 
 | location | referenced |
 |---|---|
@@ -53,11 +46,10 @@ _none found_
 | mods/cameo/sequences/darkreign.yaml:4782 | .shp |
 | mods/cameo/sequences/darkreign.yaml:4872 | drshrederfake.shp |
 | mods/cameo/sequences/iok.yaml:521 | iokscud.shp |
-| mods/cameo/sequences/redalert2.yaml:6398 | cra2cmin.shp |
-| mods/cameo/sequences/redalert2.yaml:6433 | ra2ltnk.shp |
-| mods/cameo/sequences/redalert2.yaml:6455 | ra2howi.shp |
-| mods/cameo/sequences/redalert2.yaml:6468 | ra2arty.shp |
-| mods/cameo/sequences/redalert2.yaml:6706 | yuri_chaosdrone.shp |
+| mods/cameo/sequences/redalert2.yaml:3834 | cra2cmin.shp |
+| mods/cameo/sequences/redalert2.yaml:3854 | ra2ltnk.shp |
+| mods/cameo/sequences/redalert2.yaml:3864 | ra2howi.shp |
+| mods/cameo/sequences/redalert2.yaml:3877 | ra2arty.shp |
 | mods/cameo/sequences/starcraft.yaml:685 | zergsoilmaker.shp |
 | mods/cameo/sequences/starcraft.yaml:711 | zergsoilmaker2.shp |
 | mods/cameo/sequences/starcraft.yaml:3639 | scztruck.shp |

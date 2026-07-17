@@ -103,7 +103,7 @@ axe:
 	ReloadDelay: 40
 	Range: 1536
 	ValidTargets: Structure
-	InvalidTargets: Air, Infantry, Vehicle, ixian_concretewall
+	InvalidTargets: Air, Infantry, Vehicle, wall
 	Report: jackaxe.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -113,7 +113,7 @@ axe:
 		Spread: 128 #468
 		Falloff: 100, 100, 100, 100, 100
 		ValidTargets: Structure
-		InvalidTargets: Air, Infantry, Vehicle, ixian_concretewall
+		InvalidTargets: Air, Infantry, Vehicle, wall
 		Versus:
 			None: 100
 			Wood: 125
@@ -149,7 +149,7 @@ axe2:
 	ReloadDelay: 40
 	Range: 1536
 	ValidTargets: Structure
-	InvalidTargets: Air, Infantry, Vehicle, ixian_concretewall
+	InvalidTargets: Air, Infantry, Vehicle, wall
 	Report: jackaxe.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -159,7 +159,7 @@ axe2:
 		Spread: 128 #468
 		Falloff: 100, 100, 100, 100, 100
 		ValidTargets: Structure
-		InvalidTargets: Air, Infantry, Vehicle, ixian_concretewall
+		InvalidTargets: Air, Infantry, Vehicle, wall
 		Versus:
 			None: 100
 			Wood: 125
@@ -538,12 +538,12 @@ angellightning:
 	Warhead@2Smu: LeaveSmudge
 		Delay: 20
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@3Smu: LeaveSmudge
 		Size: 1,0
 		Delay: 92
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@Effect: CreateEffect
 		Explosions: angellightning
 		ImpactSounds: angellightning.aud
@@ -819,7 +819,7 @@ McNealMechDrop1:
 	Warhead@3Smu: LeaveSmudge
 		Size: 2,2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@6: SpawnActor
 		Actors: TSMCNEALMECH
 		Range: 2
@@ -1079,7 +1079,7 @@ SeverusCircleHealBuffCABAL:
 KurtMachinegun:
 	Inherits: ^LightMG
 	Report: mdkmg.wav, mdkmg.wav, mdkrico.wav, mdkrico2.wav, mdkrico3.wav, mdkmg.wav
-	InvalidTargets: Structure, Bridge, ixian_concretewall
+	InvalidTargets: Structure, Bridge, wall
 	ValidTargets: Ground, Air
 	Range: 7936
 	ReloadDelay: 4
@@ -1091,7 +1091,7 @@ KurtMachinegun:
 			Medium: 35
 			Heavy: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-		InvalidTargets: Structure, Bridge, ixian_concretewall
+		InvalidTargets: Structure, Bridge, wall
 		ValidTargets: Ground, Air
 	Warhead@2Eff: CreateEffect
 		Explosions: piff
@@ -1105,7 +1105,7 @@ KurtMachinegunUpgraded:
 KurtSniper:
 	Inherits: ^LightMG
 	Report: mdksniper.wav
-	InvalidTargets: Structure, Bridge, ixian_concretewall
+	InvalidTargets: Structure, Bridge, wall
 	Range: 15104
 	ReloadDelay: 60
 	Warhead@1Dam: SpreadDamage
@@ -1116,13 +1116,13 @@ KurtSniper:
 			Medium: 35
 			Heavy: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-		InvalidTargets: Structure, Bridge, ixian_concretewall
+		InvalidTargets: Structure, Bridge, wall
 	Warhead@2Eff: CreateEffect
 		Explosions: piff
 
 KurtGrenade:
 	Inherits: Grenade
-	ValidTargets: Structure, Bridge, ixian_concretewall
+	ValidTargets: Structure, Bridge, wall
 	ReloadDelay: 70 #50
 	MinRange: 1024
 	Range: 7c0 #4c0
@@ -1155,7 +1155,7 @@ KurtGrenade2:
 
 KurtMortar:
 	Inherits: ^Cannon
-	ValidTargets: Structure, Bridge, ixian_concretewall
+	ValidTargets: Structure, Bridge, wall
 	Report: mdksniper.wav
 	ReloadDelay: 75
 	Range: 15104

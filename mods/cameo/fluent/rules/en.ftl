@@ -2200,11 +2200,12 @@ faction_ra_allies =
       units across the battlefield, Gap Generators for hiding bases, and the
       devastating Cruiser naval bombardment.
 
-      In Cameo, the Allies retain their classic asymmetric playstyle with the
-      largest roster of doctrines (6) that dramatically alter their playstyle:
-      Conscription, Heavy Armor, Industrial Efficiency, Inferno, Nuclear War,
-      and Tesla & Experimental Tech. This makes them one of the most adaptable
-      factions in the game.
+      In Cameo, the Allies retain their classic asymmetric playstyle with a
+      deep research tree: Advanced Radar Systems, Infantry Armor Plating and
+      Reinforced Structures on the base tier, plus Air Superiority Doctrine,
+      Laser Targeting Systems, Chrono Armor, Cryo Missiles and GPS Satellite
+      Support at the tech tier. Their power comes from upgrades and utility,
+      not raw numbers.
 
       Difficulty: ©©©
       Early Game: ©©
@@ -2216,19 +2217,17 @@ faction_ra_allies =
       Countered by: Early Tank Rushes, Air Superiority
       Special Units: Tanya, Chrono Tank, Phase Transport, Mirage Tank, Cruiser
       Special Buildings: Gap Generator, Chronosphere, Tech Center
-      Team Upgrades: 6 Doctrines (Conscription, Heavy Armor, Industrial Efficiency, Inferno, Nuclear War, Tesla Tech)
+      Team Upgrades: Advanced Radar Systems, Infantry Armor Plating, Reinforced Structures
       Support powers: GPS Satellite, Chronosphere, Chrono Vortex
-      Superweapons: Chronosphere, Atomic Bomb (via Nuclear War doctrine)
+      Superweapons: Chronosphere
 
       Features:
-      - 6 swap-able doctrines that radically change playstyle and available units
+      - Deep research tree (7 upgrades) enhancing air power, targeting, armor and missiles
       - Light, fast tanks (Light Tank, Medium Tank) for early mobility
       - Stealth and deception tools (Spy, Phase Transport, Gap Generator)
       - Strong naval presence (Cruiser, Destroyer, Gunboat)
       - Chronoshift technology for strategic repositioning
-      - Tesla and experimental tech available via doctrine swap
-      - Inferno doctrine adds flame weapons to nearly all units
-      - Nuclear War doctrine grants Atomic Bomb superweapon
+      - GPS Satellite Support reveals the entire map
 
 faction_ra_soviets =
    .name = Soviets RA

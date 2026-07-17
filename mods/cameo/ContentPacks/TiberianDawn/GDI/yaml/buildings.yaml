@@ -19,6 +19,7 @@ td_gdi_tiberiumrefinery:
 		Name: GDI Tiberium Refinery
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, nuke
+		Description: Processes ore into credits.
 	FreeActor@Normal:
 		Actor: td_gdi_tiberiumharvester
 		SpawnOffset: 1,2
@@ -35,6 +36,7 @@ td_gdi_barracks:
 		Prerequisite: barracks
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, nuke
+		Description: Trains infantry units.
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -69,6 +71,7 @@ td_gdi_weaponsfactory:
 		Prerequisite: vehicleproduction
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery
+		Description: Produces vehicles.
 	Building:
 		Footprint: xxx === ===
 		Dimensions: 3,3
@@ -98,6 +101,7 @@ td_gdi_helipad:
 		Name: GDI Helipad
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_communicationscenter
+		Description: Produces and repairs aircraft.
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -190,6 +194,7 @@ td_gdi_repairfacility:
 			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_weaponsfactory
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
@@ -484,6 +489,7 @@ CNCSYRD:
 		Name: GDI Naval Yard
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery, ~globalnaval
+		Description: Naval production structure.
 	ProvidesPrerequisite@buildingname:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi

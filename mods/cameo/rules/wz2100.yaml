@@ -1097,7 +1097,7 @@ Player:
 ####################################################################################################
 2100WALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 200
@@ -2242,7 +2242,7 @@ psc2100factory2:
 		RequiresCondition: !chronobeamed
 2100SCAVWALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 150
@@ -3529,7 +3529,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	AutoTargetPriority@DEFAULT:
-		ValidTargets: Defence, Defense, ixian_concretewall
+		ValidTargets: Defence, Defense, wall
 ^2100LightFlamer:
 	Inherits: ^2100VEHICLE
 	Inherits@@EXPERIENCE: ^GainsExperienceVehicle

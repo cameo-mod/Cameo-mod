@@ -4039,7 +4039,7 @@ SWATWR:
 		Amount: -150
 
 SWSBAG:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4062,7 +4062,7 @@ SWSBAG:
 	RenderSprites:
 		Image: sbag
 SWCYCL:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4083,9 +4083,9 @@ SWCYCL:
 	WithWallSpriteBody:
 		Type: chain
 	RenderSprites:
-		Image: japan_chainlinkfence
+		Image: cycl
 SWBRIK:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 150
 	CustomSellValue:

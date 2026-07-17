@@ -563,3 +563,51 @@ ts_gdi_techcenter:
 		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		PlayerPalette: playerra2
+
+ts_gdi_silo:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Silo
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
+		Description: template_silo.description
+		Prerequisites: ~ts_gdi_constructionyard, tsproc
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	StoresResources:
+		Capacity: 8000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
+	RenderSprites:
+		PlayerPalette: playerra2
+	RenderSprites:
+		Image: tsgtsilo.gdi

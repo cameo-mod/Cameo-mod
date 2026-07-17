@@ -293,6 +293,7 @@ asianalliance_asianmobileconstructionvehicle:
 		Name: Asian Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: asianalliance_asianconstructionyard
 		Offset: -1,-1
@@ -866,6 +867,7 @@ asianalliance_heavyrailguntank:
 		BuildPaletteOrder: 60
 		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~asianalliance_promotion_unlockheavyrailguntank
 		Queue: Vehicle, RAVehicle
+		Description: Heavy tank with railgun weapon.\n  Strong vs Vehicles, Tanks
 	Mobile:
 		Locomotor: tracked
 		Speed: 50

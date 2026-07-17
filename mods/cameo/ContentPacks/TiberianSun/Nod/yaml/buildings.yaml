@@ -78,6 +78,7 @@ ts_nod_tiberiumrefinery:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
 		Queue: Building, RABuilding
+		Description: Processes ore into credits.
 	FreeActor:
 		Actor: ts_nod_tiberiumharvester
 		SpawnOffset: 2,2
@@ -341,6 +342,7 @@ ts_nod_servicedepot:
 		Name: Service Depot
 	Buildable:
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_warfactory
+		Description: Repairs nearby vehicles.
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		DeathPaletteIsPlayerPalette: true

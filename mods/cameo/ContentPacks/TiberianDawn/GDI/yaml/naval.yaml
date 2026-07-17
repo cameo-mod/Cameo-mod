@@ -217,6 +217,7 @@ LST:
 		Prerequisites: ~cncsyrd
 		BuildPaletteOrder: 10
 		Queue: Naval, RANaval
+		Description: Landing Craft
 	Mobile:
 		Speed: 125
 		RequiresCondition: !notmobile && !disabled

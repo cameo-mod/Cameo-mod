@@ -3,6 +3,7 @@ forgotten_tiberianfiend_wild:
 	Inherits@2: ^MutSWCreature
 	Buildable:
 		Prerequisites: ~forgotten_tiberianfiend_wild
+		Description: Wild Tiberian creature.\n  Strong vs Vehicles\n  Weak vs Infantry
 	RenderSprites:
 		Image: forgotten_tiberianfiend
 	AttackWander:
@@ -926,3 +927,12 @@ forgotten_viniferafiend:
 #######################################
 # TS Infantry End
 #######################################
+
+forgotten_mutant_wild:
+	Inherits: forgotten_mutant
+	Buildable:
+		Prerequisites: ~forgotten_mutant_wild
+		Description: Wild mutant creature. Attacks nearby enemies.
+	RenderSprites:
+		Image: forgotten_mutant
+	AttackWander:

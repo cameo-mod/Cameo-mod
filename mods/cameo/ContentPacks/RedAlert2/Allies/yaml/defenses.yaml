@@ -494,6 +494,7 @@ ra2_allies_concretebarrier:
 		PlayerPalette: playerra2
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard
+		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

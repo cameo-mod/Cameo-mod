@@ -276,6 +276,7 @@ ra1_allies_alliedoretruck:
 		Name: Allied Ore Truck
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedorerefinery
+		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
@@ -289,6 +290,7 @@ ra1_allies_alliedmobileconstructionvehicle:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: ra1_allies_alliedconstructionyard
 	Voiced:

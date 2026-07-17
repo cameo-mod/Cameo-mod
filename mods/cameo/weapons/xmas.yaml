@@ -84,7 +84,7 @@ xmas_satan_bomb:
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
@@ -234,7 +234,7 @@ xmas_avalanche:
 	Report: santal1.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 3500
-		InvalidTargets: ixian_concretewall
+		InvalidTargets: wall
 		Versus:
 			Light: 75
 			Heavy: 25
@@ -260,7 +260,7 @@ DRSatanClawzMinionMG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1000
 		ValidTargets: Ground, Air
-		InvalidTargets: ixian_concretewall
+		InvalidTargets: wall
 		Versus:
 			Light: 40
 			Heavy: 20

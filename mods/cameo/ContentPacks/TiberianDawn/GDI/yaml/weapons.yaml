@@ -1151,7 +1151,7 @@ GDIPredatorBlueLaser:
 	Range: 5880
 	Report: 2100rotlsr.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, ixian_concretewall
+	ValidTargets: Ground, Water, Structure, wall
 	Projectile: LaserZap
 		Duration: 10
 		Width: 50
@@ -1165,7 +1165,7 @@ GDIPredatorBlueLaser:
 		Condition: CommandoDebuff
 		Duration: 22
 		Range: 222
-		ValidTargets: Ground, Water, Structure, ixian_concretewall
+		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Validation: TargetDamage
 
 MammothTank3Cannons:

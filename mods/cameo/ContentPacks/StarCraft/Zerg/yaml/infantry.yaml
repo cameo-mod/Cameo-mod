@@ -1,0 +1,752 @@
+zerg_zergling:
+	Inherits@zerg: ^BasicZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Zergling
+	Valued:
+		Cost: 200
+	ProductionCostMultiplier@dualproduction:
+		Multiplier: 200
+	Power:
+		Amount: -10
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~zerg_spawningpool, ~!zerg_promotion_unlocktalon
+		Queue: SCZergInfantry
+		AdditionalActors: zerg_zergling
+		Description: actor_sczergling.description
+	Mobile:
+		Speed: 110
+	Health:
+		HP: 11000
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Armament:
+		Weapon: ZerglingClaw
+		FireDelay: 3
+	FirepowerMultiplier@zergling:
+		Modifier: 150
+	AttackFrontal:
+		FacingTolerance: 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-250
+	Voiced:
+		VoiceSet: SCZerglingVoice
+	-SpawnActorOnDeath@zerg_swarmling:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
+
+zerg_talon:
+	Inherits@zerg: ^BasicZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Talon
+	Valued:
+		Cost: 300
+	ProductionCostMultiplier@dualproduction:
+		Multiplier: 200
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~zerg_spawningpool, ~zerg_promotion_unlocktalon
+		Queue: SCZergInfantry
+		AdditionalActors: zerg_zergling, zerg_zergling
+		Description: actor_sctalon.description
+	Mobile:
+		Speed: 160
+		Locomotor: fakeaircraft
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament:
+		Weapon: TalonClaw
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-250
+	Voiced:
+		VoiceSet: SCZerglingVoice
+	-SpawnActorOnDeath@zerg_swarmling:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
+
+zerg_hydralisk:
+	Inherits@zerg: ^LargeZerg
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Hydralisk
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~zerg_hydraliskden
+		Queue: SCZergInfantry
+		Description: actor_schydralisk.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	HitShape:
+		-Type:
+	Armament@PRIMARY:
+		Weapon: HydraSpit
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: HydraSpit
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
+
+zerg_spithid:
+	Inherits@zerg: ^BasicZerg
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Spithid
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~zerg_hydraliskden, ~zerg_promotion_unlockspithid
+		Queue: SCZergInfantry
+		Description: actor_scspithid.description
+	Mobile:
+		Speed: 110
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+		-Type:
+	Armament@PRIMARY:
+		Weapon: SpithidSpit
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SpithidSpit
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# 	DecorationBounds: 2448, 2448, 0, 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-320
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
+
+zerg_swarmling:
+	Inherits: ^AirZerg
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergFlyerWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Swarmling
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: zerg_greaterspire, ~zerg_hive, zerg_promotion_unlockswarmling
+		Queue: SCZergInfantry
+		Description: actor_scswarmling.description
+	Aircraft:
+		Speed: 80
+		TurnSpeed: 16
+		RepulsionSpeed: 16
+		IdealSeparation: 640
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament:
+		Weapon: SwarmlingShoot
+		LocalOffset: 0,0,0
+	# Armament@2:
+	# 	Weapon: MutaliskAA
+	# 	LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 16
+		AttackType: Hover
+	# -RenderRangeCircle:
+	#-RenderDetectionCircle:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	ProximityExternalCondition@Swarmling1:
+		Range: 3333
+		ValidRelationships: Ally
+		Condition: Swarmling
+	ProximityExternalCondition@Swarmling2:
+		Range: 6666
+		ValidRelationships: Ally
+		Condition: Swarmling
+	ProximityExternalCondition@Swarmling3:
+		Range: 9999
+		ValidRelationships: Ally
+		Condition: Swarmling
+	ExternalCondition@Swarmling:
+		Condition: Swarmling
+	DamageMultiplier@Swarmling1:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 6
+	DamageMultiplier@Swarmling2:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 9
+	DamageMultiplier@Swarmling3:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 12
+	DamageMultiplier@Swarmling4:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 15
+	DamageMultiplier@Swarmling5:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 18
+	DamageMultiplier@Swarmling6:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 21
+	DamageMultiplier@Swarmling7:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 24
+	DamageMultiplier@Swarmling8:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 27
+	DamageMultiplier@Swarmling9:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 30
+	DamageMultiplier@Swarmling10:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 33
+	SpeedMultiplier@Swarmling1:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 6
+	SpeedMultiplier@Swarmling2:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 9
+	SpeedMultiplier@Swarmling3:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 12
+	SpeedMultiplier@Swarmling4:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 15
+	SpeedMultiplier@Swarmling5:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 18
+	SpeedMultiplier@Swarmling6:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 21
+	SpeedMultiplier@Swarmling7:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 24
+	SpeedMultiplier@Swarmling8:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 27
+	SpeedMultiplier@Swarmling9:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 30
+	SpeedMultiplier@Swarmling10:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 33
+	FirepowerMultiplier@Swarmling1:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 6
+	FirepowerMultiplier@Swarmling2:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 9
+	FirepowerMultiplier@Swarmling3:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 12
+	FirepowerMultiplier@Swarmling4:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 15
+	FirepowerMultiplier@Swarmling5:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 18
+	FirepowerMultiplier@Swarmling6:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 21
+	FirepowerMultiplier@Swarmling7:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 24
+	FirepowerMultiplier@Swarmling8:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 27
+	FirepowerMultiplier@Swarmling9:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 30
+	FirepowerMultiplier@Swarmling10:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 33
+	ReloadDelayMultiplier@Swarmling1:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 6
+	ReloadDelayMultiplier@Swarmling2:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 9
+	ReloadDelayMultiplier@Swarmling3:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 12
+	ReloadDelayMultiplier@Swarmling4:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 15
+	ReloadDelayMultiplier@Swarmling5:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 18
+	ReloadDelayMultiplier@Swarmling6:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 21
+	ReloadDelayMultiplier@Swarmling7:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 24
+	ReloadDelayMultiplier@Swarmling8:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 27
+	ReloadDelayMultiplier@Swarmling9:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 30
+	ReloadDelayMultiplier@Swarmling10:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 33
+	RangeMultiplier@Swarmling1:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 6
+	RangeMultiplier@Swarmling2:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 9
+	RangeMultiplier@Swarmling3:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 12
+	RangeMultiplier@Swarmling4:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 15
+	RangeMultiplier@Swarmling5:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 18
+	RangeMultiplier@Swarmling6:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 21
+	RangeMultiplier@Swarmling7:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 24
+	RangeMultiplier@Swarmling8:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 27
+	RangeMultiplier@Swarmling9:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 30
+	RangeMultiplier@Swarmling10:
+		Modifier: 105
+		RequiresCondition: Swarmling >= 33
+	WithColoredOverlay@Swarmling1:
+		Color: 6688FF11
+		RequiresCondition: Swarmling >= 6 && Swarmling <= 8
+	WithColoredOverlay@Swarmling2:
+		Color: 7788EE22
+		RequiresCondition: Swarmling >= 9 && Swarmling <= 11
+	WithColoredOverlay@Swarmling3:
+		Color: 8888DD33
+		RequiresCondition: Swarmling >= 12 && Swarmling <= 14
+	WithColoredOverlay@Swarmling4:
+		Color: 9988CC44
+		RequiresCondition: Swarmling >= 15 && Swarmling <= 17
+	WithColoredOverlay@Swarmling5:
+		Color: AA88BB55
+		RequiresCondition: Swarmling >= 18 && Swarmling <= 20
+	WithColoredOverlay@Swarmling6:
+		Color: BB88AA66
+		RequiresCondition: Swarmling >= 21 && Swarmling <= 23
+	WithColoredOverlay@Swarmling7:
+		Color: CC889977
+		RequiresCondition: Swarmling >= 24 && Swarmling <= 26
+	WithColoredOverlay@Swarmling8:
+		Color: DD888888
+		RequiresCondition: Swarmling >= 27 && Swarmling <= 29
+	WithColoredOverlay@Swarmling9:
+		Color: EE887799
+		RequiresCondition: Swarmling >= 30 && Swarmling <= 32
+	WithColoredOverlay@Swarmling10:
+		Color: FF8866AA
+		RequiresCondition: Swarmling >= 33
+	Voiced:
+		VoiceSet: SCMutaliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
+
+zerg_shriek:
+	Inherits: ^AirZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Shriek
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~zerg_spire, ~zerg_promotion_unlockshriek
+		Queue: SCZergInfantry
+		Description: actor_scshriek.description
+	Aircraft:
+		Speed: 195
+		TurnSpeed: 39
+		RepulsionSpeed: 39
+		IdealSeparation: 640
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament:
+		Weapon: ShriekStinger
+		LocalOffset: 0,0,0
+	# Armament@2:
+	# 	Weapon: MutaliskAA
+	# 	LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	WithAttackAnimation:
+		Sequence: shoot
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	Voiced:
+		VoiceSet: SCZerglingVoice
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
+
+zerg_ultralisk:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Ultralisk
+	Valued:
+		Cost: 4400
+	Power:
+		Amount: -220
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~zerg_ultraliskcavern
+		Queue: SCZergInfantry
+		Description: actor_scultralisk.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 32
+		Locomotor: tracked
+	Health:
+		HP: 400000
+	ChangesHealth@SelfHealing:
+		Step: 160
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: UltraliskHusk
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
+
+zerg_infestedterranbomber:
+	Inherits@zerg: ^BasicZerg
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Infested Terran Bomber
+	Valued:
+		Cost: 400
+	Power:
+		Amount: -20
+	Buildable:
+		BuildPaletteOrder: 8010
+		Prerequisites: ~zerg_infestedcommandcenter
+		Queue: Vehicle, RAVehicle
+		Description: actor_scinfestedterran.description
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: !disabled
+	KillsSelf:
+		RequiresCondition: triggered && !disabled
+	FireWarheadsOnDeath:
+		Weapon: InfestedExplosion
+		EmptyWeapon: InfestedExplosion
+		RequiresCondition: triggered && !disabled && !chronobeamed
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1448, 1448, 0, 0
+	Voiced:
+		VoiceSet: SCInfestedTerranVoice
+	WithInfantryBody:
+		IdleSequences: idle
+	Inherits@EXT: ^ExternalConditions
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
+
+zerg_defiler:
+	Inherits: ^LargeZerg
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EXT: ^ExternalConditions
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Defiler
+	Valued:
+		Cost: 1400
+	Power:
+		Amount: -70
+	Buildable:
+		BuildPaletteOrder: 8020
+		Prerequisites: ~zerg_defilermound
+		Queue: SCZergInfantry
+		Description: actor_scdefiler.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armament:
+		Weapon: DefilerPlague
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedCondition: darkswarm
+		CooldownTicks: 1000
+		DeployedTicks: 1
+		PauseOnCondition: disabled
+	PeriodicExplosion:
+		Weapon: DarkSwarmSpawn
+		RequiresCondition: darkswarm
+	-ExternalCondition@DarkSwarm:
+	Voiced:
+		VoiceSet: SCDefilerVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
+
+zerg_kerrigan:
+	Inherits: ^LargeZerg
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Kerrigan
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 8040
+		Prerequisites: ~zerg_queensnest
+		Queue: SCZergInfantry
+		Description: actor_sckerriganzerg.description
+		BuildLimit: 1
+		IconPalette: windows256
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 300000
+	ChangesHealth@SelfHealing:
+		Step: 300
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: zerg_kerrigan
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	RenderSprites:
+	Voiced:
+		VoiceSet: SCKerriganZergVoice
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 50
+		CooldownTicks: 600
+		DeployedCondition: summon
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled
+	PeriodicExplosion@projections:
+		Weapon: SCKERRIGANSUMMON
+		RequiresCondition: summon
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost

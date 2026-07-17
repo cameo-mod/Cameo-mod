@@ -1,0 +1,252 @@
+tkm_iroquois:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 20
+		Prerequisites: ~tkm_airpad
+		Description: actor_hind.description
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Iroquois
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: HueyGun
+		LocalOffset: 85,-200,-85, 85,200,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 2
+	# Armament@SECONDARY:
+	# 	Name: secondary
+	# 	Weapon: ChainGun
+	# 	LocalOffset: 85,200,-85, 85,-200,-85
+	# 	MuzzleSequence: muzzle
+	# 	AmmoUsage: 1
+	# 	PauseOnCondition: ammo < 2
+	Armament@Missiles:
+		Weapon: HueyMissiles
+		LocalOffset: 85,250,-85, 85,-250,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+		RequiresCondition: !tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade
+	Armament@PRIMARYNATO:
+		Weapon: HueyCryoMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_cryorocketsupgrade
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@PRIMARYBEREZKA:
+		Weapon: HueyTwinMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_twinrocketsupgrade
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 2
+	Armament@PRIMARYTITAN:
+		Weapon: HueyTwinMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_incendiaryrocketsupgrade
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	GrantConditionOnPrerequisite@tkm_upgrade_cryorocketsupgrade:
+		Condition: tkm_upgrade_cryorocketsupgrade
+		Prerequisites: tkm_upgrade_cryorocketsupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_twinrocketsupgrade:
+		Condition: tkm_upgrade_twinrocketsupgrade
+		Prerequisites: tkm_upgrade_twinrocketsupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_incendiaryrocketsupgrade:
+		Condition: tkm_upgrade_incendiaryrocketsupgrade
+		Prerequisites: tkm_upgrade_incendiaryrocketsupgrade
+	ActorStatValues:
+		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_cryorocketsupgrade, tkm_upgrade_incendiaryrocketsupgrade
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,150
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,150
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: tkmhuey.husk
+	EjectOnDeath:
+		PilotActor: tkm_rifleman
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: TSVehicle
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 18
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 3
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: raplayer
+	Selectable:
+		Class: tkm_iroquois
+	RenderSprites:
+		Image: tkm_iroquois
+		PlayerPalette: player_rgba
+
+tkm_viper:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~tkm_airpad, tkm_techcenter, tkm_promotion_unlockviper
+		Description: actor_yak.description
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: Viper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@BOMBS:
+		Weapon: ViperMissiles
+		LocalOffset: 0,-256,-32, 0,256,-32
+		RequiresCondition: !tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade
+		PauseOnCondition: !ammo
+	Armament@PRIMARYNATO:
+		Weapon: ViperMissilesCryo
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_cryorocketsupgrade
+		PauseOnCondition: !ammo
+	Armament@PRIMARYBEREZKA:
+		Weapon: ViperMissilesTwin
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_twinrocketsupgrade
+		PauseOnCondition: !ammo
+	Armament@PRIMARYTITAN:
+		Weapon: ViperMissilesFire
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: tkm_upgrade_incendiaryrocketsupgrade
+		PauseOnCondition: !ammo
+	# Armament@PRIMARY:
+	# 	Weapon: YakChainGun
+	# 	LocalOffset: 256,-213,0
+	# 	MuzzleSequence: muzzle
+	# 	PauseOnCondition: !ammo
+	# Armament@SECONDARY:
+	# 	Name: secondary
+	# 	Weapon: YakChainGun
+	# 	LocalOffset: 256,213,0
+	# 	MuzzleSequence: muzzle
+	# 	PauseOnCondition: !ammo
+	GrantConditionOnPrerequisite@tkm_upgrade_cryorocketsupgrade:
+		Condition: tkm_upgrade_cryorocketsupgrade
+		Prerequisites: tkm_upgrade_cryorocketsupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_twinrocketsupgrade:
+		Condition: tkm_upgrade_twinrocketsupgrade
+		Prerequisites: tkm_upgrade_twinrocketsupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_incendiaryrocketsupgrade:
+		Condition: tkm_upgrade_incendiaryrocketsupgrade
+		Prerequisites: tkm_upgrade_incendiaryrocketsupgrade
+	AttackAircraft:
+		FacingTolerance: 75
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 150
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -853,0,0
+	SpawnActorOnDeath:
+		Actor: tkmviper.husk
+	EjectOnDeath:
+		PilotActor: tkm_rifleman
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 128
+	Voiced:
+		VoiceSet: TSVehicle
+	ActorStatValues:
+		Upgrades: tkm_upgrade_twinrocketsupgrade, tkm_upgrade_cryorocketsupgrade, tkm_upgrade_incendiaryrocketsupgrade
+	AmmoPool:
+		Ammo: 4
+		ReloadDelay: 16
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: tkm_viper
+		PlayerPalette: player_rgba

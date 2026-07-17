@@ -1,0 +1,827 @@
+^SCSmallShadow:
+	shadow: parach_shadow
+		Length: *
+		ZOffset: -511
+
+####################################################################################################
+#		BUILDING TERRAN
+####################################################################################################
+
+protoss_nexus:
+	Defaults:
+		Filename: protoss_nexus.png
+	build:
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_mobilenexus_icon.png
+
+protoss_pylon:
+	Defaults:
+		Filename: protoss_upgrade_upgradepylonlevel2_scpylon.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_upgrade_upgradepylonlevel2_icon.png
+
+protoss_assimilator:
+	Defaults:
+		Filename: protoss_assimilator.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	smoke:
+		Filename: terran_refinery_geysersmoke.png
+		Scale: 3
+		Length: *
+		Tick: 160
+		Offset: 3,-24
+		ZOffset: 2048
+	icon:
+		Filename: protoss_assimilator_icon.png
+
+protoss_gateway:
+	Defaults:
+		Filename: protoss_gateway.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_gateway_icon.png
+
+protoss_forge:
+	Defaults:
+		Filename: protoss_forge.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_forge_icon.png
+
+protoss_photoncannon:
+	Defaults:
+		Filename: protoss_photoncannon.png
+	closed-idle:
+		Start: 0
+	opening:
+		Start: 1
+		Length: 3
+		Tick: 60
+	idle:
+		Start: 3
+		Facings: 1
+	closing:
+		Frames: 3, 2, 1, 0
+		Tick: 100
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_photoncannon_icon.png
+
+protoss_cyberneticscore:
+	Defaults:
+		Filename: protoss_cyberneticscore_scgencore.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_cyberneticscore_icon.png
+
+protoss_shieldbattery:
+	Defaults:
+		Filename: protoss_shieldbattery_scbattery.png
+		Offset: 0,-12
+	idle:
+		ZOffset: -1c511
+	dead:
+		ZOffset: -1c511
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_shieldbattery_icon.png
+		Offset: 0,0
+
+protoss_roboticsfacility:
+	Defaults:
+		Filename: protoss_roboticsfacility_scrobotic.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_roboticsfacility_icon.png
+
+protoss_stargate:
+	Defaults:
+		Filename: protoss_stargate.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_stargate_icon.png
+
+protoss_citadelofadun:
+	Defaults:
+		Filename: protoss_citadelofadun_sccitadel.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_citadelofadun_icon.png
+
+protoss_roboticssupportbay:
+	Defaults:
+		Filename: protoss_roboticssupportbay_scstasis.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_roboticssupportbay_icon.png
+
+protoss_fleetbeacon:
+	Defaults:
+		Filename: protoss_fleetbeacon_scwarp.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_fleetbeacon_icon.png
+
+protoss_templararchives:
+	Defaults:
+		Filename: protoss_templararchives_scarchives.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_templararchives_icon.png
+
+protoss_observatory:
+	Defaults:
+		Filename: protoss_observatory_scbeacon.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_observatory_icon.png
+
+protoss_arbitertribunal:
+	Defaults:
+		Filename: protoss_arbitertribunal_scprism.png
+	idle:
+	dead:
+	make:
+		Filename: protossbuild.png
+		Length: *
+		Tick: 80
+	icon:
+		Filename: protoss_arbitertribunal_icon.png
+
+protoss_probe:
+	Defaults:
+		Filename: protoss_probe_scprobeidle.png
+		Offset: 0,0
+	idle:
+		Facings: -8
+	harvest:
+		Facings: -8
+	dock:
+		Facings: -8
+	dock-loop:
+		Facings: -8
+	icon:
+		Filename: protoss_probe_icon.png
+		Offset: 0,0
+
+protoss_zealot:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: protoss_zealot_sczealotidle.png
+		Offset: 0,-8
+	idle:
+		Facings: -8
+		Filename: protoss_zealot_sczealotidle.png
+	stand:
+		Facings: -8
+		Filename: protoss_zealot_sczealotidle.png
+	run:
+		Facings: -8
+		Filename: protoss_zealot_sczealotwalk.png
+		Length: 8
+	shoot:
+		Facings: -8
+		Filename: protoss_zealot_sczealotshoot.png
+		Length: 4
+		Tick: 80
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_zealot_icon.png
+		Offset: 0,0
+
+protoss_adept:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: protoss_adept_adeptspritesheet.png
+		Offset: 0,-8
+	idle:
+		Start: 0
+		Facings: 8
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Facings: 8
+		Length: 8
+	shoot:
+		Start: 112
+		Facings: 8
+		Length: 9
+		Tick: 20
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_adept_icon.png
+		Offset: 0,0
+
+protoss_dragoon:
+	Defaults:
+		Filename: protoss_dragoon_scdragoonidle.png
+	idle:
+		Filename: protoss_dragoon_scdragoonidle.png
+		Length: 8
+		Tick: 80
+		Facings: 1
+	stand:
+		Filename: protoss_dragoon_scdragoonidle.png
+		Length: 8
+		Tick: 80
+		Facings: 1
+	run:
+		Filename: protoss_dragoon_scdragoonwalk.png
+		Length: 7
+		Facings: -8
+		Tick: 80
+	shoot:
+		Filename: protoss_dragoon_scdragoonshoot.png
+		Length: 15
+		Tick: 60
+		Frames: 0, 1, 2, 3, 4, 5, 6, 7, 6, 5, 4, 3, 2, 1, 0
+	die:
+		Filename: protoss_dragoon_scdragoondeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_dragoon_icon.png
+		Offset: 0,0
+
+protoss_hightemplar:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: protoss_hightemplar_schightemplaridle.png
+	idle:
+		Filename: protoss_hightemplar_schightemplaridle.png
+		Length: 7
+		Facings: -8
+		Tick: 140
+	stand:
+		Filename: protoss_hightemplar_schightemplaridle.png
+		Length: 7
+		Facings: -8
+		Tick: 140
+	run:
+		Filename: protoss_hightemplar_schightemplaridle.png
+		Length: 7
+		Facings: -8
+		Tick: 140
+	shoot:
+		Filename: protoss_hightemplar_schightemplarshoot.png
+		Length: 5
+		Facings: -8
+		Tick: 100
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_hightemplar_icon.png
+		Offset: 0,0
+
+protoss_darktemplar:
+	Defaults:
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	idle:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	stand:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	run:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplarwalk.png
+		Length: 10
+	shoot:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplarshoot.png
+		Length: 7
+		Tick: 80
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_darktemplar_icon.png
+		Offset: 0,0
+
+protoss_shuttle:
+	idle:
+		Filename: protoss_shuttle.png
+		Facings: -32
+		Combine:
+			protoss_shuttle-l:
+				Filename: protoss_shuttle.png
+				Length: *
+			protoss_shuttle-r:
+				Filename: protoss_shuttle.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: protoss_shuttle_icon.png
+
+protoss_reaver:
+	Defaults:
+		Filename: protoss_reaver_screaveridle.png
+	idle:
+		Filename: protoss_reaver_screaveridle.png
+		Facings: -8
+	stand:
+		Filename: protoss_reaver_screaveridle.png
+		Facings: -8
+	move:
+		Filename: protoss_reaver_screaverwalk.png
+		Length: 8
+		Facings: -8
+		Tick: 80
+	die:
+		Filename: protoss_reaver_screaveridle.png
+		Facings: -8
+	icon:
+		Filename: protoss_reaver_icon.png
+
+protoss_observer:
+	idle:
+		Filename: protoss_observer_scobserveridle.png
+		Facings: -8
+	icon:
+		Filename: protoss_observer_icon.png
+
+protoss_archon:
+	idle:
+		Filename: protoss_archon_scarchonidle.png
+		Facings: -8
+		Length: 1
+		Tick: 80
+	stand:
+		Filename: protoss_archon_scarchonidle.png
+		Facings: -8
+		Length: 1
+		Tick: 80
+	shoot:
+		Filename: protoss_archon_scarchonshoot.png
+		Facings: -8
+		Tick: 240
+	shroud:
+		Filename: protoss_archon_scarchonshroud.png
+		Length: *
+		Tick: 80
+		ZOffset: -1
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_archon_icon.png
+
+protoss_scout:
+	Defaults:
+		Filename: protoss_scout.png
+	idle:
+		Facings: -32
+		Combine:
+			protoss_scout-l:
+				Filename: protoss_scout.png
+				Length: *
+			protoss_scout-r:
+				Filename: protoss_scout.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: protoss_scout_icon.png
+
+protoss_corsair:
+	Defaults:
+		Filename: protoss_corsair_saccorsair.png
+	idle:
+		Facings: -32
+		Combine:
+			saccorsair-l:
+				Filename: protoss_corsair_saccorsair.png
+				Length: *
+			saccorsair-r:
+				Filename: protoss_corsair_saccorsair.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: protoss_corsair_icon.png
+
+protoss_carrier:
+	Defaults:
+		Filename: protoss_carrier.png
+	idle:
+		Facings: -32
+		Combine:
+			protoss_scout-l:
+				Filename: protoss_carrier.png
+				Length: *
+			protoss_scout-r:
+				Filename: protoss_carrier.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: protoss_carrier_icon.png
+
+protoss_arbiter:
+	idle:
+		Filename: protoss_arbiter.png
+	idle:
+		Facings: -32
+		Combine:
+			protoss_arbiter-l:
+				Filename: protoss_arbiter.png
+				Length: *
+			protoss_arbiter-r:
+				Filename: protoss_arbiter.png
+				FlipX: True
+				Frames: 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	icon:
+		Filename: protoss_arbiter_icon.png
+
+protoss_mobilenexus:
+	Defaults:
+		Filename: protoss_probe_scprobeidle.png
+		Offset: 0,0
+		Scale: 2
+	idle:
+		Facings: -8
+	harvest:
+		Facings: -8
+	dock:
+		Facings: -8
+	dock-loop:
+		Facings: -8
+	icon:
+		Filename: protoss_mobilenexus_icon.png
+	mmicon:
+		Filename: terran_mobilecommandcenter_customicon.shp
+		Start: 10
+
+protoss_zeratul:
+	Defaults:
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	idle:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	stand:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplaridle.png
+	run:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplarwalk.png
+		Length: 10
+	shoot:
+		Facings: -8
+		Filename: protoss_zeratul_scdarktemplarshoot.png
+		Length: 7
+		Tick: 80
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_zeratul_icon.shp
+
+protoss_atreus:
+	Defaults:
+		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+	idle:
+		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+		Length: 1
+		Tick: 80
+		Facings: -8
+	stand:
+		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+		Length: 1
+		Tick: 80
+		Facings: -8
+	run:
+		Filename: protoss_promotion_unlockatreus_scatreuswalk.png
+		Length: 16
+		Facings: -8
+		Tick: 64
+	shoot:
+		Filename: protoss_promotion_unlockatreus_scatreusshoot.png
+		Length: 1
+		Facings: -8
+		Tick: 60
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_promotion_unlockatreus_icon.png
+		Offset: 0,0
+
+protoss_amaranth:
+	Defaults:
+		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+	idle:
+		Facings: -8
+		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+	stand:
+		Facings: -8
+		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+	run:
+		Facings: -8
+		Filename: protoss_promotion_unlockamaranth_scamaranthwalk.png
+		Length: 9
+	shoot:
+		Facings: -8
+		Filename: protoss_promotion_unlockamaranth_scamaranthshoot.png
+		Length: 8
+		Tick: 80
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_promotion_unlockamaranth_icon.png
+
+protoss_positron:
+	Defaults:
+		Filename: protoss_promotion_unlockpositron_scpositronidle.png
+	idle:
+		Length: 1
+		Facings: -8
+	stand:
+		Length: 1
+		Facings: -8
+	die:
+		Length: 1
+		Facings: -8
+	icon:
+		Filename: protoss_promotion_unlockpositron_icon.png
+
+protoss_legionnaire:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+	idle:
+		Facings: -8
+		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+	stand:
+		Facings: -8
+		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+	run:
+		Facings: -8
+		Filename: protoss_promotion_unlocklegionnaire_sclegionnairewalk.png
+		Length: 7
+	shoot:
+		Facings: -8
+		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireshoot.png
+		Length: 4
+		Tick: 80
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_promotion_unlocklegionnaire_icon.png
+		Offset: 0,0
+
+protoss_patriarch:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+	idle:
+		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+		Facings: -8
+		Tick: 140
+	stand:
+		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+		Facings: -8
+		Tick: 140
+	run:
+		Filename: protoss_promotion_unlockpatriarch_scpatriarchwalk.png
+		Length: 13
+		Facings: -8
+		Tick: 140
+	shoot:
+		Filename: protoss_promotion_unlockpatriarch_scpatriarchshoot.png
+		Length: 8
+		Facings: -8
+		Tick: 100
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: protoss_promotion_unlockpatriarch_icon.png
+		Offset: 0,0
+
+protoss_epigraph:
+	Defaults:
+		Filename: protoss_promotion_unlockepigraph_epigraphidle.png
+		Scale: 0.8
+	idle:
+		Scale: 1
+		Facings: -32
+	icon:
+		Filename: protoss_promotion_unlockepigraph_icon.png
+
+protoss_voidray:
+	Defaults:
+		Filename: protoss_promotion_unlockvoidray_scvoidray.png
+		Scale: 1.25
+	idle:
+		Facings: -32
+	icon:
+		Filename: protoss_promotion_unlockvoidray_icon.png
+
+protoss_gladius:
+	Defaults:
+		Filename: protoss_promotion_unlockgladius_scgladius.png
+	idle:
+		Facings: -32
+	icon:
+		Filename: protoss_promotion_unlockgladius_icon.png
+
+protoss_manifold:
+	Defaults:
+		Filename: protoss_promotion_unlockmanifold_scmanifoldidle.png
+	idle:
+		Facings: -32
+		Length: 1
+	stand:
+		Facings: -32
+		Length: 1
+	run:
+		Facings: -32
+		Length: 1
+	shoot:
+		Facings: -32
+		Length: 1
+	icon:
+		Filename: protoss_promotion_unlockmanifold_icon.png
+
+protoss_idol:
+	Defaults:
+		Filename: protoss_promotion_unlockidol_scarchitectidle.png
+	idle:
+		Facings: -32
+		Length: 1
+	stand:
+		Facings: -32
+		Length: 1
+	run:
+		Facings: -32
+		Length: 1
+	shoot:
+		Facings: -32
+		Length: 1
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: protoss_promotion_unlockidol_icon.png
+
+protoss_analogue:
+	Defaults:
+		Filename: protoss_promotion_unlockanalogue_scanalogueidle.png
+	idle:
+		Facings: -32
+		Length: 1
+	stand:
+		Facings: -32
+		Length: 1
+	run:
+		Facings: -32
+		Length: 1
+	shoot:
+		Facings: -32
+		Length: 1
+	icon:
+		Filename: protoss_promotion_unlockanalogue_icon.png
+
+protoss_starshipsovereign:
+	Defaults:
+		Filename: protoss_promotion_unlockstarsovereign_scstarsovereignidle.png
+	idle:
+		Facings: -32
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+	icon:
+		Filename: protoss_promotion_unlockstarsovereign_icon.png
+
+####################################################################################################
+#		UNIT ZERG
+####################################################################################################
+
+protoss_upgrade_singularitycharge:
+	icon:
+		Filename: protoss_upgrade_singularitycharge_icon.png
+
+protoss_upgrade_resonatingglaves:
+	icon:
+		Filename: protoss_upgrade_resonatingglaves_icon.png
+
+protoss_upgrade_groundweaponslevel1:
+	icon:
+		Filename: protoss_upgrade_groundweaponslevel2_icon.png
+
+protoss_upgrade_groundarmorlevel1:
+	icon:
+		Filename: protoss_upgrade_groundarmorlevel2_icon.png
+
+protoss_upgrade_airweaponslevel1:
+	icon:
+		Filename: protoss_upgrade_airweaponslevel2_icon.png
+
+protoss_upgrade_airarmorlevel1:
+	icon:
+		Filename: protoss_upgrade_airarmorlevel2_icon.png
+
+protoss_upgrade_plasmashields:
+	icon:
+		Filename: protoss_upgrade_plasmashields_icon.png
+
+protoss_upgrade_reavercapacity:
+	icon:
+		Filename: protoss_upgrade_reavercapacity_icon.png
+
+protoss_upgrade_graviticpropulsion:
+	icon:
+		Filename: protoss_upgrade_graviticpropulsion_icon.png
+
+upscrefinery2:
+	icon:
+		Filename: protoss_vespenegascollector_icon.shp

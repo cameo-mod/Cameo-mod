@@ -75,6 +75,7 @@ steelconsortium_consortiumrefinery:
 		Name: Consortium Refinery
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumpowerplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxxx =xx=
 		Dimensions: 4,3
@@ -113,6 +114,7 @@ steelconsortium_steelbarracks:
 		Name: Steel Barracks
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumpowerplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xx ==
 		Dimensions: 2,2
@@ -147,6 +149,7 @@ steelconsortium_consortiumradar:
 		Name: Consortium Radar
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumrefinery
+		Description: Provides radar coverage of the battlefield.
 	Building:
 		Footprint: === xxx xxx
 		Dimensions: 3,3
@@ -257,6 +260,7 @@ steelconsortium_consortiumwarfactory:
 		Name: Consortium War Factory
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumrefinery
+		Description: Produces vehicles.
 	Building:
 		Footprint: =x== xxx= =x==
 		Dimensions: 4,3
@@ -289,6 +293,7 @@ steelconsortium_consortiumbattlelab:
 		Bounds: 3072, 2048, 0, 0
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumradar
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Consortium Battle Lab
 	Building:
@@ -743,6 +748,7 @@ steelconsortium_consortiumairpad:
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumradar
+		Description: Produces and repairs aircraft.
 	Tooltip:
 		Name: Consortium Airpad
 	Building:

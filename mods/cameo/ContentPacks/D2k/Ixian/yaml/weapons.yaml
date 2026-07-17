@@ -894,7 +894,7 @@ d2kStormLasher:
 		Delay: 13
 	Warhead@Smudge2: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 16
 	Warhead@Effect: CreateEffect
@@ -1006,7 +1006,7 @@ D2K_StormGun:
 		Delay: 8
 	Warhead@Smudge2: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 11
 	Warhead@Effect: CreateEffect

@@ -1,0 +1,665 @@
+wc2gruntslice2:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 18
+	Range: 1600
+	Report: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+	Projectile: InstantHit
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
+
+wc2axeFire:
+	Inherits: wc2arrowFire
+	ReloadDelay: 38
+	Range: 6445
+	Report: wc2_axe.aud
+	Projectile:
+		Image: wc2_orc_trollaxethrower_axe
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_axe.aud
+
+wc2axeFirespear:
+	Inherits: wc2highArrowFire
+	ReloadDelay: 40
+	Range: 7711
+	Report: wc2_axe.aud
+	Projectile:
+		Image: wc2_orc_trollaxethrower_axe
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_axe.aud
+
+wc2ogrepunch:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 20
+	Range: 1660
+	Report: wc2_punch.aud
+	Projectile: InstantHit
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@Effect: CreateEffect
+		ImpactSounds: wc2_punch.aud
+
+wc2ogremageEyeOfKilrogg:
+	ReloadDelay: 60
+	Range: 5120
+	Report: eye_of_killrog.aud
+	ValidTargets: Ground
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 1
+		Damage: 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+		DamageTypes: DefaultDeath
+		ValidTargets: Ground
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+	Warhead@spawn: SpawnActor
+		Actors: wc2_orc_eye_of_kilrogg
+
+wc2ogremageBloodlust:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_blodlust.aud
+	ValidTargets: bloodlust_target
+	Projectile: Missile
+		Speed: 10c0
+		RangeLimit: 21c0
+		HorizontalRateOfTurn: 256
+		VerticalRateOfTurn: 256
+		AllowSnapping: True
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c1
+		Damage: 1
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 0
+		DamageTypes: DefaultDeathwc2
+		ValidTargets: bloodlust_target
+	#Warhead@2Eff: CreateEffect
+	#	Image: wc2_effect_sparkle
+	#	Explosions: idle
+	Warhead@Condition: GrantExternalCondition
+		Condition: wc2_cond_bloodlust
+		Duration: 600
+		Range: 341
+		ValidTargets: bloodlust_target
+
+wc2ogremageRunes:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_runes.aud
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 1
+		Damage: 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+	Warhead@Projectiles: FireCluster
+		Weapon: wc2ogremageRunes_Spread
+		Dimensions: 3,3
+		Footprint: _X_ XXX _X_
+
+wc2ogremageRunes_Spread:
+	Range: 5120
+	InvalidTargets: wc2_runes
+	Projectile: InstantHit
+	Warhead@Mines: SpawnActor
+		Actors: wc2_runes
+		Range: 0
+		ValidTargets: Ground, Water
+		InvalidTargets: wc2_runes
+
+# WC2 50 piercing damage.
+
+wc2runesSuper:
+	ValidTargets: Ground, Water, Air
+	Warhead@Projectiles: FireCluster
+		Weapon: wc2ogremageRunes_Spread
+		Dimensions: 5,5
+		Footprint: _____ _____ _____ _____ ____x
+		#Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@2Eff: CreateEffect
+		Delay: 2
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ImpactSounds: wc2_runes.aud
+
+wc2catapultFire:
+	Inherits: ^Grenade
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 240
+	Range: 13400
+	MinRange: 2680
+	Report: wc2_catapult.aud
+	Projectile: Bullet
+		Speed: 384
+		Inaccuracy: 384
+		Image: wc2_fireball
+		Blockable: false
+	Warhead@Grenade: SpreadDamage
+		Damage: 30000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 30000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@Effect: CreateEffect
+		Image: wc2_catapult_stone_projectile_medium
+		Explosions: idle
+		ImpactSounds: explode.aud
+
+# Death Knight basic attack
+
+wc2deathknightFire:
+	Inherits: ^HeavyFlameWeapon
+	Inherits: wc2mageFire
+	Report: wc2_touchdrk.aud
+	Projectile:
+		Image: wc2_effect_death_knight_attack
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@Effect:
+		Image: wc2_effect_death_knight_attack
+
+# Primary deathcoil projectile
+# 50 WC2 Damage = 11250 ORA damage. Divide by 3 since there's 3 projectiles.
+
+wc2deathknightDeathCoil:
+	Inherits: wc2deathknightFire
+	Report: wc2_dethcoil.aud
+	ReloadDelay: 80
+	Range: 8000
+	Projectile: Missile
+		RangeLimit: 20c0
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
+		AllowSnapping: True
+
+# Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
+
+wc2deathknightDeathCoilScatter_Left:
+	Inherits: wc2deathknightDeathCoil
+	-Report:
+	FirstBurstTargetOffset: 0,-2048,512
+	Projectile: Missile
+		# Inaccuracy: 2c256
+		# InaccuracyType: Absolute
+		RangeLimit: 30c0
+		HomingActivationDelay: 15
+
+# Secondary inaccurate projectile (that still home in) to (sorta) simulate the weird scatter behavior in wc2
+
+wc2deathknightDeathCoilScatter_Right:
+	Inherits: wc2deathknightDeathCoilScatter_Left
+	FirstBurstTargetOffset: 0,2048,512
+
+wc2deathknightHaste:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_haste.aud
+	ValidTargets: haste_target
+	Projectile: Missile
+		Speed: 10c0
+		RangeLimit: 21c0
+		HorizontalRateOfTurn: 256
+		VerticalRateOfTurn: 256
+		AllowSnapping: True
+	Warhead@1Dam: SpreadDamage
+		Spread: 0c1
+		Damage: 1
+		Versus:
+			None: 100
+			Wood: 0
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 0
+		DamageTypes: DefaultDeathwc2
+		ValidTargets: haste_target
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+		ValidTargets: haste_target
+	Warhead@Condition: GrantExternalCondition
+		Condition: wc2_cond_haste
+		Duration: 600
+		Range: 341
+		ValidTargets: haste_target
+
+wc2deathknightDeathAndDecay:
+	Inherits: wc2mageBlizzard
+	Report: wc2_decay.aud
+	Warhead@InitialSpreader:
+		Weapon: wc2deathknightDeathAndDecay_Spread
+		RandomClusterCount: 5
+		Dimensions: 5, 5
+		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+
+wc2deathknightDeathAndDecay_Spread:
+	Inherits: wc2mageBlizzard_Spread
+	Projectile: InstantHit
+		Blockable: false
+	Warhead@Projectiles1: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+	Warhead@Projectiles2: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@Projectiles3: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+	Warhead@Projectiles4: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@Projectiles5: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+	Warhead@Projectiles6: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@Projectiles7: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+	Warhead@Projectiles8: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@Projectiles9: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+	Warhead@Projectiles10: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@Projectiles11: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1, 1
+		Footprint: x
+
+wc2deathknightDeathAndDecay_Hit:
+	Inherits: ^HeavyCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^LightFlameWeapon
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+		Speed: 0c512
+		Image: wc2_effect_blizzard
+		Sequences: idle1, idle2
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Image: wc2_effect_death_and_decay
+		Explosions: idle
+
+wc2deathknightRaiseDead:
+	ReloadDelay: 60
+	Range: 5120
+	Report: wc2_raise_dead.aud
+	ValidTargets: Ground
+	Projectile: InstantHit
+	Warhead@1Dam: SpreadDamage
+		Spread: 1
+		Damage: 0
+		Versus:
+			None: 100
+			Wood: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Concrete: 100
+		DamageTypes: DefaultDeathwc2
+		ValidTargets: Ground
+	Warhead@2Eff: CreateEffect
+		Image: wc2_effect_sparkle
+		Explosions: idle
+	Warhead@spawn: SpawnActor
+		Actors: WC2_ORC_SKELETON
+
+# Super weapon death and decay,
+
+wc2deathanddecaySuper:
+	ValidTargets: Ground, Water, Air
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 1c0
+		Damage: 10000
+		ValidTargets: Ground, Water, Air
+		AffectsParent: True
+		DamageTypes: Prone50Percent, TriggerProne
+	Warhead@InitialSpreader1: FireCluster
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 2
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+	Warhead@InitialSpreader2: FireCluster
+		Delay: 20
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 4
+		Dimensions: 5,5
+		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@InitialSpreader3: FireCluster
+		Delay: 40
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 6
+		Dimensions: 7,7
+		Footprint: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
+	Warhead@InitialSpreader4: FireCluster
+		Delay: 60
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 8
+		Dimensions: 9,9
+		Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader5: FireCluster
+		Delay: 80
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 10
+		Dimensions: 9,9
+		Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader6: FireCluster
+		Delay: 100
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 12
+		Dimensions: 9,9
+		Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader7: FireCluster
+		Delay: 120
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 10
+		Dimensions: 9,9
+		Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader8: FireCluster
+		Delay: 150
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 8
+		Dimensions: 9,9
+		Footprint: ____x____ ___xxx___ __xxxxx__ _xxxxxxx_ xxxxxxxxx _xxxxxxx_ __xxxxx__ ___xxx___ ____x____
+	Warhead@InitialSpreader9: FireCluster
+		Delay: 180
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 6
+		Dimensions: 7,7
+		Footprint: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
+	Warhead@InitialSpreader10: FireCluster
+		Delay: 210
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 4
+		Dimensions: 5,5
+		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
+	Warhead@InitialSpreader11: FireCluster
+		Delay: 240
+		Weapon: wc2deathanddecaySuper_Spread
+		RandomClusterCount: 2
+		Dimensions: 3,3
+		Footprint: _x_ xxx _x_
+
+# This spreads a bunch of projectiles out, which then become...
+
+wc2deathanddecaySuper_Spread:
+	Range: 5120
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+		Blockable: false
+		Inaccuracy: 10c0
+		InaccuracyType: Absolute
+	Warhead@Projectiles1: FireCluster
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1,1
+		Footprint: x
+	Warhead@Projectiles2: FireCluster
+		Delay: 30
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1,1
+		Footprint: x
+	Warhead@Projectiles3: FireCluster
+		Delay: 60
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1,1
+		Footprint: x
+	Warhead@Projectiles4: FireCluster
+		Delay: 90
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1,1
+		Footprint: x
+	Warhead@Projectiles5: FireCluster
+		Delay: 120
+		Weapon: wc2deathknightDeathAndDecay_Hit
+		Dimensions: 1,1
+		Footprint: x
+
+wc2dragonFireVisible:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^HeavyChemicalWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^MediumMissile
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	Range: 5010
+	ReloadDelay: 120
+	Burst: 2
+	BurstDelays: 0
+	Report: wc2_axe.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 384
+		Image: wc2_fireball
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@LightChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
+		Explosions: wc2_building_collapse
+		ImpactSounds: explode.aud
+		ValidTargets: Ground, Water, Air
+
+wc2dragonFireExplosion:
+	Inherits: wc2dragonFireVisible
+	Projectile: Bullet
+	Burst: 3
+	BurstDelays: 0
+	FirstBurstTargetOffset: 0,0,0
+	FollowingBurstTargetOffset: 1024,0,0
+	Projectile:
+		Image: wc2_fireball

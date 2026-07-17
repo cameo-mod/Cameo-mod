@@ -1,0 +1,650 @@
+wc2_humans_townhall:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Town Hall
+		RequiresCondition: !wc2_humans_keep && !wc2_humans_castle
+	Tooltip@2:
+		Name: Keep
+		RequiresCondition: wc2_humans_keep && !wc2_humans_castle
+	Tooltip@3:
+		Name: Castle
+		RequiresCondition: wc2_humans_castle
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	Selectable:
+		Bounds: 3072, 2048
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@wc2_humans_keep:
+		Prerequisite: wc2_humans_keep
+		RequiresCondition: wc2_humans_keep
+	ProvidesPrerequisite@wc2_humans_castle:
+		Prerequisite: wc2_humans_castle
+		RequiresCondition: wc2_humans_castle
+	ProvidesPrerequisite@keepupgradeavailable:
+		Prerequisite: keepupgradeavailable
+		RequiresCondition: !wc2_humans_keep
+	ProvidesPrerequisite@castleupgradeavailable:
+		Prerequisite: castleupgradeavailable
+		RequiresCondition: wc2_humans_keep && !wc2_humans_castle
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wc2_humans_townhall: wc2_humans_keep
+		Requirements:
+			wc2_humans_townhall: !wc2_humans_keep
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wc2_humans_keep: wc2_humans_castle
+		Requirements:
+			wc2_humans_keep: wc2_humans_keep && !wc2_humans_castle
+	WithSpriteBody@keep:
+		RequiresCondition: !wc2_humans_keep && !wc2_humans_castle
+	WithSpriteBody@keep:
+		Sequence: wc2_humans_keep
+		Name: keep
+		RequiresCondition: wc2_humans_keep && !wc2_humans_castle
+	WithSpriteBody@castle:
+		Sequence: wc2_humans_castle
+		Name: castle
+		RequiresCondition: wc2_humans_castle
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@keep:
+		Modifier: 75
+		RequiresCondition: wc2_humans_townhall && !wc2_humans_castle
+	DamageMultiplier@castle:
+		Modifier: 50
+		RequiresCondition: wc2_humans_castle
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery
+	WithMakeAnimation:
+	-WithDeathAnimation:
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
+	Sellable:
+	Refinery:
+		DockOffset: 0,2
+	StoresResources:
+		Capacity: 1000
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: wc2_humans_mobileconstructionvehiclehuman
+
+wc2_humans_keep:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Keep
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites:  ~wc2_humans_townhall, keepupgradeavailable, wc2_humans_blacksmith
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_humans_townhall
+
+wc2_humans_castle:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Castle
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_keep, castleupgradeavailable, wc2_humans_gnomishinventor, wc2_humans_stables
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_humans_keep
+
+# wc2_humans_keep:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Keep
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 20
+# 		Prerequisites: ~!wc2_humans_keep, ~wc2_humans_barracks
+# 		Queue: Addons
+# 		Description: Unlocks more advanced buildings.
+# 		Icon: icon
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+# wc2_humans_castle:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Castle
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 21
+# 		Prerequisites: ~wc2_humans_keep, wc2_humans_elvenlumbermill, wc2_humans_blacksmith, wc2_humans_stables
+# 		Queue: Addons
+# 		Description: Unlocks even more advanced buildings.
+# 		Icon: icon
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+wc2_humans_farm:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_farm: ^wc2_farm
+	Tooltip:
+		Name: Farm
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: 300
+	StoresResources:
+		Capacity: 6000
+	Health:
+		HP: 300000
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall
+		Queue: Building, RABuilding
+		Description: Provides food and supply for units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: wc2humanfarmvoice
+	### Upgrade stuff ###
+	# Un upgraded sprite
+	WithSpriteBody:
+		RequiresCondition: !wc2_humans_upgrade_betterfarm && !wc2_humans_upgrade_bestfarm
+
+	# Better Farm Upgrade
+	GrantConditionOnPrerequisite@betterfarm:
+		Condition: wc2_humans_upgrade_betterfarm
+		Prerequisites: wc2_humans_upgrade_betterfarm
+	WithSpriteBody@betterfarm:
+		Sequence: wc2_humans_upgrade_betterfarm
+		RequiresCondition: wc2_humans_upgrade_betterfarm && !wc2_humans_upgrade_bestfarm
+	PowerMultiplier@betterfarm:
+		Modifier: 150
+		RequiresCondition: wc2_humans_upgrade_betterfarm && !wc2_humans_upgrade_bestfarm
+	DamageMultiplier@betterfarm:
+		Modifier: 66
+		RequiresCondition: wc2_humans_upgrade_betterfarm && !wc2_humans_upgrade_bestfarm
+
+	# Best Farm Upgrade
+	GrantConditionOnPrerequisite@bestfarm:
+		Condition: wc2_humans_upgrade_bestfarm
+		Prerequisites: wc2_humans_upgrade_bestfarm
+	WithSpriteBody@bestfarm:
+		Sequence: wc2_humans_upgrade_bestfarm
+		RequiresCondition: wc2_humans_upgrade_bestfarm
+	PowerMultiplier@bestfarm:
+		Modifier: 200
+		RequiresCondition: wc2_humans_upgrade_bestfarm
+	DamageMultiplier@bestfarm:
+		Modifier: 50
+		RequiresCondition: wc2_humans_upgrade_bestfarm
+	SpawnActorsOnSell@bestfarm:
+		ActorTypes: wc2_critter_sheep
+		ValuePercent: 4
+		RequiresCondition: wc2_humans_upgrade_bestfarm
+
+wc2_humans_barracks:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_barracks: ^wc2_barracks
+	Tooltip:
+		Name: Barracks
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Warriors of the Alliance live and train here.\nProduces many Human units.
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_farm
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: humanbarracksvoice
+
+wc2_humans_elvenlumbermill:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Tooltip:
+		Name: Elven Lumber Mill
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_farm
+		Queue: Building, RABuilding
+		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resources.\nProduces bows enabling Archers.\nProvides arrow upgrades for archers and guard towers.
+	FreeActor@1:
+		Actor: wc2_humans_peasant
+	FreeActor@2:
+		Actor: wc2_humans_peasant
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_elvenarcher
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+	Voiced:
+		VoiceSet: wc2humanlumbermillvoice
+
+wc2_humans_blacksmith:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
+	Tooltip:
+		Name: Blacksmith
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_barracks
+		Queue: Building, RABuilding
+		Description: Enables Ballista and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: humanblacksmithvoice
+
+wc2_humans_gnomishinventor:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_inventor: ^wc2_inventor
+	Tooltip:
+		Name: Gnomish Inventor
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_keep
+		Queue: Building, RABuilding
+		Description: Here Dwarves and Gnomes invent marvels.\nProvides Radar.\nTrains Demo Squads and Gnomish Flying Machines.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: wc2gnomishinventorvoice
+
+wc2_humans_stables:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_stables: ^wc2_stables
+	Tooltip:
+		Name: Stables
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_keep
+		Queue: Building, RABuilding
+		Description: Stables the horses for Knights, allowing their production in the Barracks.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: humanstablevoice
+
+wc2_humans_church:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_church: ^wc2_church
+	Tooltip:
+		Name: Church
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle
+		Queue: Building, RABuilding
+		Description: Allows Knights to upgrade to Paladins and trains them in holy magicks.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: humanchurchvoice
+	# Support powers
+	# Holy vision comsat
+	IonCannonPower@HOLYVISION:
+		OrderName: wc2_holyvision
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1:
+		Icons:
+			1: holyvision
+		Names:
+			1: Holy Vision
+		Descriptions:
+			1: Reveals an area of the map\nand cloaked enemy units.
+		Cursor: ability
+		ChargeInterval: 3750
+		EndChargeSpeechNotification: SpyPlaneReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: wc2_camera_scanner
+		CameraRemoveDelay: 250
+		SupportPowerPaletteOrder: 10
+		Weapon: wc2holyvisionSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+	# Healing support power.
+	IonCannonPower@HEALING:
+		OrderName: wc2_healing
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1:
+		Icons:
+			1: healing
+		Names:
+			1: Healing
+		Descriptions:
+			1: Heals a group of units.
+		Cursor: ability
+		ChargeInterval: 3750
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 20
+		Weapon: wc2healingSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+
+wc2_humans_sunwell:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	# Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Tooltip:
+		Name: Sunwell
+	Valued:
+		Cost: 2500
+	Power:
+		Amount: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Buildable:
+		BuildPaletteOrder: 999
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_church
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		Description: Increases Speed, Damage Resistance, Firepower and Rate of Fire by 10% and gives addtional Regeneration.
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 12345
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 12345
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	RevealsShroud:
+		Range: 12345
+	Building:
+		Footprint: XX XX
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 2048, 2048, 0, -512
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: humanchurchvoice
+	SoundOnDamageTransition:
+		DestroyedSounds: wc2_bldexpl1.aud, wc2_bldexpl2.aud, wc2_bldexpl3.aud
+	FireWarheadsOnDeath:
+		Type: CenterPosition
+		Weapon: wc2buildingexplode
+		EmptyWeapon: wc2buildingexplode
+	Building:
+		BuildSounds: wc2_constrct.aud
+	GrantTimedCondition:
+		Condition: wc2cond_playsound
+		Duration: 50
+		RequiresCondition: !build-incomplete
+	AmbientSound:
+		SoundFiles:
+		Interval: 100
+		RequiresCondition: wc2cond_playsound
+	WithIdleOverlay@water:
+		Sequence: water
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+
+# Used for holyvision support power.
+
+wc2_humans_magetower:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_temple: ^wc2_temple
+	Tooltip:
+		Name: Mage Tower
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle
+		Queue: Building, RABuilding
+		Description: Teaches men in arcane magicks.\nTrains Mages.\nUnlocks Blizzard superweapon.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: wc2magetowervoice
+	# Support powers
+	# Slow
+	GrantExternalConditionPower@SLOW:
+		OrderName: wc2_slow
+		#PauseOnCondition: lowpower
+		Icon: slow
+		ChargeInterval: 3000
+		Name: Slow
+		Description: Decreases movement speed and attack rate.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_slow
+		OnFireSound: wc2_slow.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 20
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Invisibility
+	GrantExternalConditionPower@INVISIBILITY:
+		OrderName: wc2_invisibility
+		#PauseOnCondition: lowpower
+		Icon: invisibility
+		ChargeInterval: 3000
+		Name: Invisibility
+		Description: Cloaks units.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_invisibility
+		OnFireSound: wc2_invisibl.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 30
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Blizzard super weapon
+	IonCannonPower@BLIZZARD:
+		OrderName: wc2_blizzard
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: blizzard
+		Names:
+			1: Blizzard
+		Descriptions:
+			1: Rain down icy death in a large area.
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_icestorm.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 90
+		Weapon: wc2blizzardSuper
+		WeaponDelay: 0
+		TargetCircleRanges:
+			1: 7000
+		Effect: wc2_effect_blizzard
+		EffectSequence: hit
+
+wc2_humans_gryphonaviary:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_nest: ^wc2_nest
+	Tooltip:
+		Name: Gryphon Aviary
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle
+		Queue: Building, RABuilding
+		Description: A great Gryphon Matriarch lives here.\nTrains formidable Gryphon Riders.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_humans_footman
+	Voiced:
+		VoiceSet: wc2gryphonaviaryvoice
+
+wc2_humans_guardtower_2:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Upgraded Cannon Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_blacksmith, scouttowerupgradeavailable
+		Description: Cannon tower, attacks land. Has huge splash damage.
+	Plug:
+		Type: wcscouttower2
+	RenderSprites:
+		Image: wc2_humans_cannontower
+
+wc2_humans_cannontower_2:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Upgraded Guard Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_elvenlumbermill, scouttowerupgradeavailable
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	Plug:
+		Type: wcscouttower
+	RenderSprites:
+		Image: wc2_humans_guardtower
+
+wc2_humans_humangoldmine:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_goldmine: ^wc2_goldmine
+	Tooltip:
+		Name: Human Gold Mine
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_blacksmith, derricklimit
+	Voiced:
+		VoiceSet: neutralgoldminevoice
+	RenderSprites:
+		Image: wc2_humans_humangoldmine
+
+wc2_humans_humangoldmine_2:
+	Inherits@WC2BUILDING: wc2_humans_humangoldmine
+	Valued:
+		Cost: 15000
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_blacksmith, derricklimit, ~botplayer
+		Description: Send workers inside to provide passive income.
+	Cargo:
+		InitialUnits: wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant
+	RenderSprites:
+		Image: wc2_humans_humangoldmine
+
+###################################################################################################
+# WC2 HUMAN UNITS
+###################################################################################################

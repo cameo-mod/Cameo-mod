@@ -2,7 +2,7 @@
 	Inherits: ^HeavyMG
 	ReloadDelay: 15
 	Range: 4096
-	InvalidTargets: ixian_concretewall
+	InvalidTargets: wall
 	Report: drgxlgnwc0.wav
 	Projectile: Bullet
 		Image: drsmalllaser
@@ -776,7 +776,7 @@ DRSatanClawzMG:
 	Report: santal1.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 4000
-		InvalidTargets: ixian_concretewall
+		InvalidTargets: wall
 		Versus:
 			Light: 50
 			Heavy: 25
@@ -784,7 +784,7 @@ DRSatanClawzMG:
 DRAMPInjection:
 	Report: gxampwc0.wav
 	ValidTargets: Heal, plagued
-	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk, poisoned
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk, poisoned
 	ValidStances: Ally
 	ReloadDelay: 40
 	Range: 4096
@@ -998,7 +998,7 @@ DRDissecator:
 		Delay: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 3
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -1023,7 +1023,7 @@ DRDissecator:
 		Delay: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 6
 	Warhead@10Dam_areanukec: SpreadDamage
@@ -1044,7 +1044,7 @@ DRDissecator:
 		Delay: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 9
 
@@ -1211,7 +1211,7 @@ DRMissileTankAA:
 	Burst: 1
 DRHostageTake:
 	ValidTargets: Infantry
-	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	ValidStances: Neutral, Enemy
 	ReloadDelay: 150
 	Range: 1024
@@ -1358,7 +1358,7 @@ DRAssimilatorEat:
 	Range: 1536
 	Projectile: InstantHit
 	ValidTargets: Ground, Infantry
-	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 		Versus:

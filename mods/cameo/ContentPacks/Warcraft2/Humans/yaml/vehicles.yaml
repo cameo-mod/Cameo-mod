@@ -1,0 +1,263 @@
+wc2_humans_mobileconstructionvehiclehuman:
+	Inherits@WC2INFANTRY: ^WC2Vehicle
+	Inherits@WC2Template: ^wc2_mcv
+	Buildable:
+		Prerequisites: ~wc2_humans_blacksmith
+		Description: Transforms into a Town Hall.
+	Tooltip:
+		Name: Mobile Construction Vehicle (Human)
+	Transforms:
+		IntoActor: wc2_humans_townhall
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds:
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: wc2voicehumanpeasant
+	# Animation stuff
+	-WithFacingSpriteBody:
+	-WithMoveAnimation:
+	-WithAttackAnimation:
+	WithInfantryBody:
+		IdleSequences: idle-n, idle-ne, idle-e, idle-se, idle-s, idle-sw, idle-w, idle-nw
+		StandSequences: idle
+		MoveSequence: run
+
+wc2_humans_peasant:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^wc2_peasant
+	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Tooltip:
+		Name: Peasant
+	Buildable:
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_elvenlumbermill
+		Description: Harvester.
+	Armament:
+		Weapon: wc2peasantsmack
+		FireDelay: 7
+	-WithInfantryBody:
+	WithHarvesterSpriteBody:
+		ImageByFullness: wc2_humans_peasant, wc2_human_peasantgold
+	WithMoveAnimation:
+		MoveSequence: run
+	Voiced:
+		VoiceSet: wc2voicehumanpeasant
+	-DamagedByTerrain:
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+wc2_humans_paladin:
+	Inherits@wc2_humans_knight: wc2_humans_knight
+	Tooltip:
+		Name: Paladin
+	Buildable:
+		Prerequisites: ~wc2_humans_upgrade_paladin, wc2_humans_church, wc2_humans_stables, ~!wc2_humans_upgrade_warcraft3knightwip
+		Description: Mounted holy infantry. Very fast and quite durable.\nCan cast healing magicks.
+	Voiced:
+		VoiceSet: wc2voicehumanpaladin
+	Selectable:
+		Class: wc2_humans_knight
+	-WithInfantryBody@Paladin:
+	WithInfantryBody:
+		-RequiresCondition:
+	# Paladin should always be considered to have the paladin upgrade researched.
+	GrantCondition@Paladin:
+		Condition: paladin_upg
+	#Weapons
+	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+
+wc2_humans_warcraft3knight:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
+	Inherits@PalUpg: ^wc2_humans_upgrade_paladin
+	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
+	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Tooltip:
+		Name: Warcraft 3 Knight
+	Valued:
+		Cost: 2200
+	Power:
+		Amount: -110
+	Health:
+		HP: 180000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 96
+		Locomotor: tracked
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_humans_upgrade_warcraft3knightwip
+		Queue: Infantry, RAInfantry
+		Description: Mounted infantry. Fast and durable.
+	Voiced:
+		VoiceSet: wc2voicehumanknight
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Targetable:
+		TargetTypes: Ground, Vehicle, Monster
+	#Weapons
+	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_swordstrength, wc2_humans_upgrade_swordstrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii, wc2_humans_upgrade_paladin, wc2_humans_upgrade_healing, wc2_humans_upgrade_exorcism
+
+wc2_humans_ballista:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Tooltip:
+		Name: Ballista
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Mobile:
+		Speed: 45
+		TurnSpeed: 18
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_humans_blacksmith
+		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	AttackFrontal:
+		PauseOnCondition: disabled
+		FacingTolerance: 0
+	Armament:
+		Weapon: wc2ballistaFire
+		FireDelay: 20
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	GrantConditionOnAttack@CatapultCooldown:
+		Condition: cond_catapult_cooldown
+		RevokeDelay: 34
+	Mobile:
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_ballistastrength, wc2_humans_upgrade_ballistastrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+wc2_humans_siegeengine:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Tooltip:
+		Name: Siege Engine
+	Valued:
+		Cost: 1800
+	Power:
+		Amount: -90
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_humans_townhall, wc2_humans_castle, wc2_humans_blacksmith
+		Queue: Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	-AttackFrontal:
+	AttackFrontalCharged:
+		PauseOnCondition: disabled
+		FacingTolerance: 20
+		ChargeLevel: 20, 40
+		ChargingCondition: cond_catapult_cooldown
+		ShowSelectionBar: true
+		LosesChargeWhileTurning: true
+	GrantTimedCondition@cond_catapult_cooldown:
+		RequiresCondition: cond_catapult_cooldown
+		PauseOnCondition: !cond_catapult_cooldown
+		Condition: catapult_cooldown
+		Duration: 40
+	DamageMultiplier@catapult_cooldown:
+		Modifier: 50
+		RequiresCondition: catapult_cooldown
+	SpeedMultiplier@catapult_cooldown:
+		Modifier: 25
+		RequiresCondition: catapult_cooldown
+	Armament:
+		Weapon: SiegeEngineCannon
+		FireDelay: 3
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_ballistastrength, wc2_humans_upgrade_ballistastrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii
+
+wc2_humans_demolitionsquad:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^wc2_demolitioner
+	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Tooltip:
+		Name: Demolition Squad
+	Buildable:
+		Prerequisites: ~wc2_humans_gnomishinventor
+		Queue: Vehicle, RAVehicle
+		Description: Explosive suicide infantry. Can attack normally.
+	#Weapons and demolition
+	AttackFrontal:
+		Armaments: detonate, primary
+		FacingTolerance: 0
+	Armament:
+		Name: detonate
+		Weapon: wc2demolitionsquadTargeting
+		RequiresCondition: !cond_deployed
+	Armament@Melee:
+		Weapon: wc2demolitionsquadMelee
+		RequiresCondition: cond_deployed
+	GrantConditionOnAttack:
+		Condition: cond_detonate
+		ArmamentNames: detonate
+		RequiresCondition: !cond_deployed
+	FireWarheadsOnDeath:
+		Weapon: wc2demolitionsquadTrigger
+		EmptyWeapon: wc2demolitionsquadTrigger
+		RequiresCondition: !chronobeamed
+	GrantConditionOnDeploy:
+		DeployedCondition: cond_deployed
+	KillsSelf:
+		RequiresCondition: cond_detonate
+	Voiced:
+		VoiceSet: wc2voicehumandemolitionsquad
+	ActorStatValues:
+		Upgrades: wc2_humans_upgrade_ballistastrength, wc2_humans_upgrade_ballistastrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii

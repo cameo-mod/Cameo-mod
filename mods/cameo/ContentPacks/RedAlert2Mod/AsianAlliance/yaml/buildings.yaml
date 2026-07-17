@@ -70,6 +70,7 @@ asianalliance_asianbarracks:
 		Name: Asian Barracks
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianpetrolplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -97,6 +98,7 @@ asianalliance_asianorerefinery:
 		Name: Asian Ore Refinery
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianpetrolplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -138,6 +140,7 @@ asianalliance_asianwarfactory:
 		Name: Asian War Factory
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianorerefinery
+		Description: Produces vehicles.
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -164,6 +167,7 @@ asianalliance_asianservicedepot:
 		Name: Asian Service Depot
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianwarfactory
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -195,6 +199,7 @@ asianalliance_asianradar:
 		Prerequisite: anyhq
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianorerefinery
+		Description: Provides radar coverage of the battlefield.
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -317,6 +322,7 @@ asianalliance_asianairforcecommand:
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard, asianalliance_asianradar
+		Description: Produces and repairs aircraft.
 	Tooltip:
 		Name: Asian Airforce Command
 	Building:
@@ -1099,6 +1105,7 @@ asianalliance_concretebarrier:
 		PlayerPalette: playerra2
 	Buildable:
 		Prerequisites: ~asianalliance_asianconstructionyard
+		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

@@ -5,6 +5,7 @@ japan_japaneseoretruck:
 		Name: Japanese Ore Truck
 	Buildable:
 		Prerequisites: ~japan_japaneseorerefinery
+		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	Harvester:
@@ -37,6 +38,7 @@ japan_japanesemobileconstructionvehicle:
 		Name: Japanese Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: japan_japaneseconstructionyard
 	Voiced:
