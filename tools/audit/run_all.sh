@@ -26,7 +26,7 @@ for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          basebuilder_crates buildable_order display_text rename_safety \
          elite_naming missing_elite elite_gating rank_decoration \
          dune_rank_decoration effect_warhead_names weapon_suffixes \
-         balance_sheet consistency_report; do
+         balance_sheet consistency_report packs; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

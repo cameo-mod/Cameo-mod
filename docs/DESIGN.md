@@ -133,6 +133,20 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
     (must be empty). A pre-flight audit script must build a complete
     cross-reference of which filenames are used by which actors to
     identify shared files that must NOT be renamed.
+- **Shared asset files are NEVER renamed after one user (LAW,
+  2026-07-17).** The naming migration renamed `brik.shp` (a TD concrete
+  barrier used by several factions) into a nonexistent
+  `futuretech_concretebarrier_*` name and broke the menu; the TD GDI
+  voice variant keys broke the same way. An asset file may be renamed
+  ONLY after a full cross-reference proves exactly one actor uses it.
+  Shared assets keep their original names and move to the owning
+  Shared pack instead. After every rename batch run
+  `audit_asset_files.py` (A1 must be 0). Golden reference for
+  pre-rename values: `C:/Users/AedisToru/AppData/Local/Cameo-IFV/
+  instances/cameo/main` (the last release before the renames).
+- **The wall target type is lowercase `wall`** (evidence 2026-07-17:
+  all TargetTypes definitions + 345 weapon refs are lowercase; treat
+  it as engine-adjacent vocabulary, never capitalize).
 - **Cross-actor namespaces are sacred**: voice sets, notifications, shared
   art are NEVER renamed with a unit. `tools/rename/apply.py` protects
   audio files and `VoiceSet:` lines structurally.
