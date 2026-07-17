@@ -119,3 +119,15 @@ ts_gdi_upgrade_modernfirecontrolsystems:
 	# ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
 		Actor: ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor
+
+ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: ts_gdi_upgrade_modernfirecontrolsystems
+	RenderSprites:
+		Image: modernfirecontrolsystemsicon
+	Tooltip:
+		Name: Modern Fire Control Systems
+	Buildable:
+		Description: upgrade_modernfirecontrolsystems.description
+	PlayerDisplayUpgrade:

@@ -74,3 +74,20 @@ forgotten_locustbomber_husk:
 	RenderSprites:
 		Image: forgotten_locustbomber
 		PlayerPalette: player_rgba
+
+forgotten_chinook_husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Chinook
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 223
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: forgotten_chinook
+	RenderVoxels:
+		Image: forgotten_chinook
+		Scale: 15

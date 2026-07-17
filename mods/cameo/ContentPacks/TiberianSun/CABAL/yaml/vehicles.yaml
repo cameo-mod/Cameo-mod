@@ -1102,3 +1102,48 @@ cabal_ravager:
 		VoiceSet: TSCobra
 	RenderSprites:
 		PlayerPalette: playerra2
+
+cabal_mobilestealthgenerator:
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mobile Stealth Generator
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~cabal_mechfactory, cabal_stealthgenerator, ~disabled
+		Queue: Vehicle, RAVehicle
+		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	ProximityExternalCondition@StealGen:
+		Range: 5c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled
+	-ExternalCondition@CLOAK:
+	-ExternalCondition@TSCLOAK:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	WithRangeCircle@GenRange:
+		Range: 5c0
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ts_nod_mobilestealthgenerator
+	-ActorStatValues:

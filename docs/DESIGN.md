@@ -1194,7 +1194,8 @@ needs three things for backup systems:
 2. `SpawnActorOnDeath@backup` trait with
    `RequiresCondition: cabal_upgrade_backupsystems` and
    `Actor: <unit>_backup`.
-3. A `<unit>_backup` actor definition in `rules/tiberiansun.yaml` that
+3. A `<unit>_backup` actor definition in the faction pack's
+   `yaml/husks.yaml` (moved from rules/tiberiansun.yaml 2026-07-17) that
    inherits the base unit, sets Speed/TurnSpeed=0, high HP, Repairable,
    removes `SpawnActorOnDeath@backup`, adds
    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`

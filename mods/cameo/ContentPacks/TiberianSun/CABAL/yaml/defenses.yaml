@@ -281,3 +281,50 @@ cabal_pillbox:
 #######################################
 # TS Infantry Reporting!
 #######################################
+
+cabal_plasmaturret:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RenderVoxel: ^TSRenderVoxel
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory, ~disabled
+		Description: Advanced base defense.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Tooltip:
+		Name: Plasma Turret
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 60000
+	RevealsShroud:
+		Range: 7c0
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: 160,20,3
+	AttackTurreted:
+	Armament@PRIMARY:
+		Weapon: TSCABALPlasmaFire
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+	AutoTarget:
+	DetectCloaked:
+		Range: 3c0
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ts_nod_laserturret
+	-ActorStatValues:

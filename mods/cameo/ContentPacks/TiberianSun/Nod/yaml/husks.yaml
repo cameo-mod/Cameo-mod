@@ -16,3 +16,23 @@ ts_nod_bansheefighter_husk:
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
+
+ts_nod_harpy_husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Harpy
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: tsapache
+	RenderVoxels:
+		Image: tsapache
+		Scale: 15
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:

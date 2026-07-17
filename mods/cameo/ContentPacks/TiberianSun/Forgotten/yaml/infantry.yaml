@@ -927,3 +927,12 @@ forgotten_viniferafiend:
 #######################################
 # TS Infantry End
 #######################################
+
+forgotten_mutant_wild:
+	Inherits: forgotten_mutant
+	Buildable:
+		Prerequisites: ~forgotten_mutant_wild
+		Description: Wild mutant creature. Attacks nearby enemies.
+	RenderSprites:
+		Image: forgotten_mutant
+	AttackWander:

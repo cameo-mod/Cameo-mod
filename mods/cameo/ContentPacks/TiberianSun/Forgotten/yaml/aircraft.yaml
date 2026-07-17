@@ -446,3 +446,59 @@ forgotten_locustbomber:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
+
+forgotten_chinook:
+	Inherits: ^Helicopter
+	Inherits@Voxel: ^TSRenderVoxel
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Chinook
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Aircraft, RAAircraft
+		Description: Fast infantry transport helicopter.\n Unarmed
+		Prerequisites: ~forgotten_helipad, ~disabled
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 120
+	Health:
+		HP: 18000
+	Armor:
+		Type: Light
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	WithVoxelBody:
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,171
+		Sequence: rotor2
+		RequiresCondition: airborne
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,171
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+	Cargo:
+		Types: Infantry
+		MaxWeight: 10
+		AfterUnloadDelay: 40
+	Voiced:
+		VoiceSet: TSHeli
+	SpawnActorOnDeath:
+		Actor: forgotten_chinook_husk
+	RenderVoxels:
+		Scale: 15
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
