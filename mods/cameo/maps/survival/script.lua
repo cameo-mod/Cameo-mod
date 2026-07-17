@@ -19,6 +19,7 @@ Spielerzahl = 0
 LiveFoes = {}
 FinalWaveSent = false
 GameWon = false
+SurviveObjectives = {}
 RemainingTime = 0
 timerStarted = false
 Text = ""
@@ -58,6 +59,9 @@ GetherData = function()
 		end
 	end
 	Spielerzahl = math.max(#ActivePlayer, 1)
+	for _, Spieler in ipairs(ActivePlayer) do
+		SurviveObjectives[Spieler.InternalName] = Spieler.AddPrimaryObjective("Survive all " .. #Waves .. " waves.")
+	end
 	table.insert(Foes, Player.GetPlayer("True Nemesis"))
 	table.insert(Foes, Player.GetPlayer("True Enemy"))
 	table.insert(Foes, Player.GetPlayer("True Opponent"))
@@ -153,6 +157,11 @@ CheckVictory = function()
 	GameWon = true
 	UserInterface.SetMissionText("YOU SURVIVED ALL " .. #Waves .. " WAVES!", Player.GetPlayer("Neutral").Color)
 	Media.DisplayMessage("The last attacker has fallen. You survived!", "")
+	for _, Spieler in ipairs(ActivePlayer) do
+		if SurviveObjectives[Spieler.InternalName] ~= nil then
+			Spieler.MarkCompletedObjective(SurviveObjectives[Spieler.InternalName])
+		end
+	end
 end
 
 WorldLoaded = function()
