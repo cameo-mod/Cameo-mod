@@ -1,0 +1,25 @@
+^TKMSpawnActorsOnSell:
+	SoundOnDamageTransition:
+		DamagedSounds: expnew01.aud, expnew02.aud, expnew04.aud, expnew05.aud
+		DestroyedSounds: expnew03.aud, expnew07.aud, expnew08.aud, expnew11.aud
+	SpawnActorsOnSell:
+		ActorTypes: tkm_engineer, tkm_rifleman, tkm_rifleman, tkm_rifleman
+	Building:
+		BuildSounds: tsplace2.aud
+
+####################################################################################################
+#		TKM Upgrade and Inherits
+####################################################################################################
+
+^upberezkacloakupgrade:
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
+
+^tkm_upgrade_pointdefensesystem:
+	GrantConditionOnPrerequisite@tkm_upgrade_pointdefensesystem:
+		Condition: tkm_upgrade_pointdefensesystem
+		Prerequisites: tkm_upgrade_pointdefensesystem

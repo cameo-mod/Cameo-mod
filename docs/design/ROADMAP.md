@@ -520,11 +520,10 @@ well."_
   §1-compliant names during this split's rename step.
 - [ ] **PACK-RA2: Split RA2 (Allies / Soviets / Yuri)** from
   rules/redalert2.yaml the same way.
-- [ ] **PACK-SC: Split StarCraft (Terran / Zerg / Protoss)** from
-  rules/starcraft.yaml.
-- [ ] **PACK-WC2: Split Warcraft2 (Humans / Orcs)** from
-  rules/warcraft2.yaml.
-- [ ] **PACK-TKM + PACK-OP2**: split TKM and Outpost2 monoliths.
+- [x] **PACK-SC** (`4fe295183`): Terran/Zerg/Protoss split, registry-identical, boot-verified.
+- [x] **PACK-WC2** (2026-07-17): Humans/Orcs split, registry-identical, boot-verified.
+- [x] **PACK-TKM** (2026-07-17): split (ContentPacks/TKM/TKM), registry-identical, boot-verified.
+- [ ] **PACK-OP2**: split the Outpost2 monolith (eden/plymouth, WIP factions) — last loaded monolith.
 - [ ] **PACK-AUDIT (wrong-section detector)**: new
   `tools/audit/audit_packs.py` that verifies per pack: (a) every actor
   id carries the pack's faction prefix (catches actors landing in the

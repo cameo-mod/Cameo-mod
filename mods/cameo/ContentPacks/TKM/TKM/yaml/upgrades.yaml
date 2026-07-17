@@ -1,0 +1,195 @@
+tkm_upgrade_berezkaarsenalupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berezka Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the Berezka Upgrade Tree, which focuses on cloak and hit and run units. Enables cloak for Basic Infantry Units and increase their movespeed.
+		Prerequisites: ~tkm_constructionyard, ~!tkm_upgrade_berezkaarsenalupgrade, ~!tkm_upgrade_titanarsenalupgrade, ~!tkm_upgrade_natoarsenalupgrade
+	RenderSprites:
+		Image: berezkaupgradeicon
+	ProvidesPrerequisite:
+
+tkm_upgrade_titanarsenalupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Titan Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the Titan Arsenal Upgrade Tree, which utilizes heavy duty arsenal. Enables Basic Infantry Units to have Lightweight ballistic plating.
+		Prerequisites: ~tkm_constructionyard, ~!tkm_upgrade_titanarsenalupgrade, ~!tkm_upgrade_berezkaarsenalupgrade, ~!tkm_upgrade_natoarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: titanplatingupgradeicon
+
+tkm_upgrade_natoarsenalupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: NATO Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the NATO Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
+		Prerequisites: ~tkm_constructionyard, ~!tkm_upgrade_titanarsenalupgrade, ~!tkm_upgrade_berezkaarsenalupgrade, ~!tkm_upgrade_natoarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: natoupgradeicon
+
+tkm_upgrade_m203upgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: M203 Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Gives the troopers grenade launchers.
+		Prerequisites: ~tkm_observationvan, tkm_upgrade_natoarsenalupgrade, ~!tkm_upgrade_m203upgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkm_upgrade_m203upgrade
+
+tkm_upgrade_semiautoriflesupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Semi Auto Rifles Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Riflemen Arsenal to SKS Rifles.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_semiautoriflesupgrade, tkm_upgrade_berezkaarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmsemiicon
+
+tkm_upgrade_twinrocketsupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Twin Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: ChangesRocket Arsenals to modified dual RPGs.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_twinrocketsupgrade, tkm_upgrade_berezkaarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmtwinrocketlauncher
+
+tkm_upgrade_titanarmorpiercingbulletsupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Titan Armor Piercing Bullets Upgrade
+	Valued:
+		Cost: 2400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Bullets to APFSDS Armor Piercing Rounds which deals extra damage to armored units.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_titanarmorpiercingbulletsupgrade, tkm_upgrade_titanarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmapbullets
+
+tkm_upgrade_incendiaryrocketsupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Incendiary Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Rocket Arsenals to incendiary rockets.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_incendiaryrocketsupgrade, tkm_upgrade_titanarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmincendiaryrockets
+
+tkm_upgrade_cryorocketsupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cryo Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Rocket Arsenals to Cryo Rockets.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_cryorocketsupgrade, tkm_upgrade_natoarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: cryorocketicon
+
+tkm_upgrade_technicaltankrocketaddon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Technical Tank Rocket Addon
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Upgrades Technical Tank to shoot twin rockets.
+		Prerequisites: ~tkm_techcenter, ~!tkm_upgrade_technicaltankrocketaddon, tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_twinrocketsupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkm_upgrade_technicaltankrocketaddon
+
+tkm_upgrade_pointdefensesystem:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Point Defense System
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Commits to the Titan Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
+		Prerequisites: ~tkm_observationvan, ~!tkm_upgrade_pointdefensesystem, tkm_upgrade_titanarsenalupgrade, tkm_techcenter
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmpointdefensesystem
+
+tkm_upgrade_heavytitanplating:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Heavy Titan Plating
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Gives Vehicles heavier armors.
+		Prerequisites: ~tkm_techcenter, ~!tkm_upgrade_heavytitanplating, tkm_upgrade_titanarsenalupgrade
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkm_upgrade_heavytitanplating
+
+tkm_upgrade_infantryupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: TKM Infantry Upgrade
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Upgrades TKM Infantry Damage and Armor.
+		Prerequisites: ~tkm_constructionyard, tkm_techcenter, ~!tkm_upgrade_infantryupgrade
+	RenderSprites:
+		Image: tkminfantryupgradeicon
+	ProvidesPrerequisite:
+		Prerequisite: tkm_upgrade_infantryupgrade

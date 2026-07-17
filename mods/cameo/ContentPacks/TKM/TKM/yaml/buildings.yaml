@@ -1,0 +1,343 @@
+tkm_constructionyard:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@conyard: ^Conyard
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Tooltip:
+		Name: TKM Construction Yard
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 2048
+	SelectionDecorations:
+	Transforms:
+		IntoActor: tkm_mobileconstructionvehicletkm
+	ProvidesPrerequisite@buildingname:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	ActorStatValues:
+		Upgrades: tkm_upgrade_berezkaarsenalupgrade,  tkm_upgrade_titanarsenalupgrade, tkm_upgrade_natoarsenalupgrade
+	WithBuildingPlacedOverlay@Front:
+		Sequence: idle-front
+	RenderSprites:
+		PlayerPalette: playerra2
+
+#######################################
+# TKM Buildings
+#######################################
+
+tkm_powerplant:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Tooltip:
+		Name: Power Plant
+	Valued:
+		Cost: 400
+	Power:
+		Amount: 200
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tkm_constructionyard
+		Queue: Building, RABuilding
+		Description: Provides supply and stores resources
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 250,-512,0
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tkm_orerefinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^2x2Shape
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: TKM Ore Refinery
+	Buildable:
+		BuildPaletteOrder: 11
+		Prerequisites: ~tkm_constructionyard, tkm_powerplant
+		Description: Processes ore into credits.
+	Building:
+		Footprint: xxx= xxx= xxx=
+		Dimensions: 4,3
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	DrawLineToTarget:
+	FreeActor:
+		Actor: tkm_templateharvesterraname
+		SpawnOffset: 2,2
+		Facing: 256
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	CashTrickler@refineryupg:
+		RequiresCondition: refineryupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: tkmrefineryupgradeavailable
+		RequiresCondition: !refineryupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			tkm_orerefinery: refineryupg
+		Requirements:
+			tkm_orerefinery: !build-incomplete && !refineryupg
+	SlaveMinerSpawnerMaster:
+		PauseOnCondition: !refineryupg
+		Actors: tkmworker, tkmworker, tkmworker, tkmworker, tkmworker
+		SlavesHaveFreeWill: true
+		SlaveDisposalOnKill: GiveSlavesToAttacker
+		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
+		SpawnOffset: 511,511,0, 511,511,0, 511,511,0, 511,511,0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+tkm_supportlabor:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: TKM Support Labor
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~tkm_constructionyard, tkmrefineryupgradeavailable
+		Description: The Refinery spawns workers and passive income.
+	Plug:
+		Type: tkm_orerefinery
+	RenderSprites:
+		Image: tkm_orerefinery
+
+tkm_barracks:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Tooltip:
+		Name: TKM Barracks
+	ProvidesPrerequisite:
+		Prerequisite: RA2Barracks
+	Buildable:
+		BuildPaletteOrder: 13
+		Prerequisites: ~tkm_constructionyard, tkm_powerplant
+		Description: Trains infantry units.
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -700,800,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 100,1200,0
+		ExitCell: 1,3
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+
+tkm_warfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 14
+		Prerequisites: ~tkm_constructionyard, tkm_orerefinery
+		Queue: Building, RABuilding
+		Description: Produces vehicles
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 250,-600,0
+	Selectable:
+		Bounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: 0,1200,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithExitOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+		Sequence: build-door
+	RenderSprites:
+		Image: tkm_warfactory
+		PlayerPalette: playerra2
+
+tkm_airpad:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Air Pad
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 16
+		Prerequisites: ~tkm_constructionyard, tkm_observationvan
+		Queue: Building, RABuilding
+		Description: Produces vehicles
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+		LocalCenterOffset: 0,512,0
+	Selectable:
+		Bounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	WithMakeAnimation:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: 0,0,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: tkm_airpad
+		PlayerPalette: player_rgba
+
+tkm_observationvan:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@shape: ^1x1Shape
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 15
+		Prerequisites: ~tkm_constructionyard, tkm_warfactory
+		Description: Provides TKM technologies.
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Tooltip:
+		Name: TKM Observation Van
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		LocalCenterOffset: 0,0,0
+	ProvidesPrerequisite:
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -150
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Scale: 1.5
+
+tkm_techcenter:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TKMSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^4x4Shape
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 17
+		Prerequisites: ~tkm_constructionyard, tkm_observationvan
+		Description: Provides advanced TKM technologies.
+	Tooltip:
+		Name: TKM Tech Center
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,4
+		LocalCenterOffset: 250,-512,0
+	ProvidesPrerequisite:
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -150
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tkm_trenchtruckdeployed:
+	Inherits: ^BaseBuilding
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@shape: ^1x1Shape
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: TKM Trench Truck (Deployed)
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~unbuildable
+		Queue: Building, RABuilding
+		Description: Provides supply and stores resources
+	Armor:
+		Type: Heavy
+	Building:
+	Health:
+		HP: 100000
+	WithBuildingBib:
+		HasMinibib: true
+	BodyOrientation:
+		QuantizedFacings: 8
+	RevealsShroud:
+		Range: 6720
+	GivesBuildableArea:
+		AreaTypes: building
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tkmtrenchtankdeployed
