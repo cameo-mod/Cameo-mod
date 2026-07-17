@@ -200,7 +200,7 @@ FireRockets:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
@@ -327,7 +327,7 @@ FireRocketsThermobaric:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5

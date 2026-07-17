@@ -29,6 +29,7 @@ ra2_soviets_warfactory:
 		Name: Soviet War Factory
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery
+		Description: Produces vehicles.
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
@@ -123,6 +124,7 @@ ra2_soviets_barracks:
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_teslareactor
 		Queue: Building, RABuilding
+		Description: Trains infantry units.
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -146,6 +148,7 @@ ra2_soviets_orerefinery:
 		Name: Soviet Ore Refinery
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_teslareactor
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -181,6 +184,7 @@ ra2_soviets_radar:
 		Name: Soviet Radar
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery
+		Description: Provides radar coverage of the battlefield.
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -236,6 +240,7 @@ ra2_soviets_servicedepot:
 		Name: Soviet Service Depot
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_warfactory
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -258,6 +263,7 @@ ra2_soviets_battlelab:
 	Inherits@tech: ^IsTechnoBuilding
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_radar
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Soviet Battle Lab
 	ProvidesPrerequisite:

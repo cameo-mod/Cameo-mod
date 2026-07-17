@@ -4,6 +4,7 @@ ts_gdi_lightinfantry:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_gdi_barracks
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
 
@@ -40,6 +41,7 @@ ts_gdi_engineer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_gdi_barracks
+		Description: Captures and repairs structures.\n  Unarmed
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
 

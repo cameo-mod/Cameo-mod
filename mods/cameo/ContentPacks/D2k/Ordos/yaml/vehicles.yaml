@@ -136,6 +136,7 @@ ordos_mobileconstructionvehicle:
 	Inherits@mcv: ^MCV
 	Buildable:
 		Prerequisites: ~ordos_heavyfactory, ordos_repairpad
+		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Mobile Construction Vehicle

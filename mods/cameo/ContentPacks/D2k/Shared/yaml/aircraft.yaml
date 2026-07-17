@@ -34,7 +34,7 @@ carryall.reinforce:
 		BeforeUnloadDelay: 15
 		LocalOffset: 0, 0, -128
 	RenderSprites:
-		Image: ixian_autonomouscarryall
+		Image: carryall
 	ChangesHealth:
 		Step: 50
 		Delay: 3
@@ -65,7 +65,7 @@ carryall.reinforce:
 		Pieces: 3, 6
 		Range: 1c512, 2c512
 
-ixian_autonomouscarryall:
+carryall:
 	Inherits: carryall.reinforce
 	Health:
 		HP: 200000
@@ -90,6 +90,7 @@ ixian_autonomouscarryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
 		Prerequisites: ~ixian_hightechfactory
+		Description: Aircraft that picks up and carries vehicles.\n  Unarmed
 
 carryall.paradrop:
 	Inherits: carryall.reinforce
@@ -159,7 +160,7 @@ carryall.husk:
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: ixian_autonomouscarryall
+		Image: carryall
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
@@ -176,7 +177,7 @@ carryall.huskVTOL:
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: ixian_autonomouscarryall
+		Image: carryall
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge

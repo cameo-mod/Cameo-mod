@@ -443,6 +443,7 @@ RAE1:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
@@ -584,6 +585,7 @@ RAE3:
 		Name: Allied Rocket Soldier
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY: ##########
 		Weapon: RocketsRA
 		LocalOffset: 256,43,341
@@ -615,6 +617,7 @@ RAE6:
 		BuildPaletteOrder: 30
 		Prerequisites: ~rabarracks
 		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
 	RenderSprites:
 		Image: rae6
 
@@ -1638,6 +1641,7 @@ RALST:
 		BuildPaletteOrder: 10
 		Prerequisites: ~ranavaltransport
 		Queue: Naval, RANaval
+		Description: Naval transport. Carries infantry to shore.
 	Mobile:
 		Speed: 100
 		Locomotor: lcraft
@@ -1835,6 +1839,7 @@ RA1SYRD:
 		Name: Allied Naval Yard
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery, ~globalnaval
+		Description: Naval production structure.
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -1861,6 +1866,7 @@ RA1JSYRD:
 		Name: Japanese Naval Yard
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery, ~globalnaval
+		Description: Naval production structure.
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3

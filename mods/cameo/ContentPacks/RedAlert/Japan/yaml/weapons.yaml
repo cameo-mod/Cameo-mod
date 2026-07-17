@@ -2280,7 +2280,7 @@ WaveArtilleryImpact:
 		Duration: 222
 		Range: 666
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, ixian_concretewall
+		ValidTargets: Ground, Water, Structure, wall
 	Warhead@Effect: CreateEffect
 		ImpactSounds: psahit00.aud
 		Explosions: blue_building
@@ -2343,7 +2343,7 @@ WaveTurretImpact:
 		Duration: 150
 		Range: 1500
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, ixian_concretewall
+		ValidTargets: Ground, Water, Structure, wall
 
 ArmoredCarMG:
 	Inherits: ^ArrowWeapon

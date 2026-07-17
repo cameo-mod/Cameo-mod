@@ -454,6 +454,7 @@ ra1_soviets_gorynychtank:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
 		Prerequisites: ~ra1_soviets_warfactory
+		Description: Heavy assault tank with multiple weapons.\n  Strong vs Vehicles, Infantry
 	Valued:
 		Cost: 1300
 	Tooltip:
@@ -954,6 +955,7 @@ ra1_soviets_oretruck:
 		Name: Soviet Ore Truck
 	Buildable:
 		Prerequisites: ~ra1_soviets_orerefinery, ~!ra1_soviets_doctrine_industrialefficiency
+		Description: Harvests ore for processing.\n  Unarmed
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
@@ -965,6 +967,7 @@ ra1_soviets_heavyindustrialminer:
 		Name: Soviet Heavy Industrial Miner
 	Buildable:
 		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_orerefinery, ~ra1_soviets_doctrine_industrialefficiency
+		Description: Soviet Heavy Industrial Miner
 	Valued:
 		Cost: 1200
 	StoresResources:
@@ -998,6 +1001,7 @@ ra1_soviets_mobileconstructionvehicle:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_servicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: ra1_soviets_constructionyard
 	Voiced:
@@ -1477,6 +1481,7 @@ ra1_soviets_stalinfist:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
 		Prerequisites: ~ra1_soviets_techcenter
+		Description: Mobile command vehicle.\n  Strong vs Vehicles, Infantry
 		BuildLimit: 1
 	Valued:
 		Cost: 7000

@@ -102,6 +102,7 @@ ra1_soviets_rifleinfantry:
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscription
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
@@ -334,6 +335,7 @@ ra1_soviets_rocketsoldier:
 		Name: Soviet Rocket Soldier
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_inferno, ~!ra1_soviets_doctrine_conscription
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Voiced:
 		VoiceSet: RussianVoice
 	ActorStatValues:
@@ -404,6 +406,7 @@ ra1_soviets_firerocketsoldier:
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_doctrine_inferno
 		Queue: Infantry, RAInfantry
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Valued:
 		Cost: 400
 	Health:

@@ -58,7 +58,7 @@
 		ValidTargets: Ground, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -466,7 +466,7 @@ MammothTankCannon:
 		InvalidTargets: Vehicle
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: small_frag
-		InvalidTargets: Vehicle, Building, ixian_concretewall
+		InvalidTargets: Vehicle, Building, wall
 
 TSTurretLaser:
 	Inherits: ^Chaingun
@@ -1001,10 +1001,10 @@ TSSlimeAttack:
 	Range: 1408
 	Report: vicer1.aud
 	Projectile: InstantHit
-	InvalidTargets: ixian_concretewall, Bridge
+	InvalidTargets: wall, Bridge
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
-		InvalidTargets: ixian_concretewall, Bridge
+		InvalidTargets: wall, Bridge
 		Versus:
 			Light: 60
 			Medium: 50
@@ -1017,10 +1017,10 @@ TSTentacle:
 	Range: 1408
 	Report: floatk1.aud
 	Projectile: InstantHit
-	InvalidTargets: ixian_concretewall, Bridge
+	InvalidTargets: wall, Bridge
 	Warhead@1Dam: SpreadDamage
 		Damage: 16000
-		InvalidTargets: ixian_concretewall, Bridge
+		InvalidTargets: wall, Bridge
 		Versus:
 			None: 60
 			Wood: 45
@@ -1035,10 +1035,10 @@ ZClaw3:
 	Range: 1408
 	Report: floatk1.aud
 	Projectile: InstantHit
-	InvalidTargets: ixian_concretewall, Bridge
+	InvalidTargets: wall, Bridge
 	Warhead@1Dam: SpreadDamage
 		Damage: 16000
-		InvalidTargets: ixian_concretewall, Bridge
+		InvalidTargets: wall, Bridge
 		Versus:
 			None: 60
 			Wood: 45
@@ -1374,7 +1374,7 @@ TSTacticalChemMissileDamage:
 		Weapon: TSChemBomblet
 		ImpactActors: false
 		Amount: 8
-		ValidTargets: Infantry, Vehicle, Building, ixian_concretewall, Ground, Water, Air
+		ValidTargets: Infantry, Vehicle, Building, wall, Ground, Water, Air
 		AirThreshold: 8c0
 
 TSChemBomblet:
@@ -1426,7 +1426,7 @@ TSHSeekerBomb:
 		ValidTargets: Ground, Air, Water
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Building, ixian_concretewall
+		InvalidTargets: Vehicle, Building, wall
 		Size: 2
 	Warhead@Cam: RevealShroud
 		Radius: 4c0

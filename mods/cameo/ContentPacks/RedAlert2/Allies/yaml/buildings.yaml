@@ -37,6 +37,7 @@ ra2_allies_alliedwarfactory:
 		Name: Allied War Factory
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery
+		Description: Produces vehicles.
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 	WithIdleOverlay@fan:
@@ -87,6 +88,7 @@ ra2_allies_alliedbarracks:
 		Prerequisite: RA2Barracks
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedpowerplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -118,6 +120,7 @@ ra2_allies_alliedorerefinery:
 		Name: Allied Ore Refinery
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedpowerplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= x+==
 		Dimensions: 4,3
@@ -258,6 +261,7 @@ ra2_allies_alliedservicedepot:
 		Name: Allied Service Depot
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedwarfactory
+		Description: Repairs nearby vehicles.
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -282,6 +286,7 @@ ra2_allies_alliedbattlelab:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_airforcecommandhq
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Allied Battle Lab
 	Building:

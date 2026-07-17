@@ -326,6 +326,7 @@ steelconsortium_engineer:
 	Buildable:
 		Prerequisites: ~steelconsortium_steelbarracks
 		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
 	RenderSprites:
 		Image: steelconsortium_engineer
 	-TakeCover:

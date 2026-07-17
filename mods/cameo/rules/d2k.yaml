@@ -509,12 +509,12 @@
 # 		VoiceSet: D2kVehicleVoice
 # 	AutoCarryable:
 # 		CarriedCondition: notmobile
-# 		ReservedCondition: ixian_autonomouscarryall-reserved
+# 		ReservedCondition: carryall-reserved
 # 		LockedCondition: notmobile
-# 	WithDecoration@ixian_autonomouscarryall:
+# 	WithDecoration@carryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
-# 		RequiresCondition: ixian_autonomouscarryall-reserved
+# 		RequiresCondition: carryall-reserved
 # 	RevealOnFire:
 # 	RevealOnDeath:
 # 		Duration: 125
@@ -2387,7 +2387,7 @@
 # 	Valued:
 # 		Cost: 2500
 
-# ixian_concretewall:
+# wall:
 # 	Inherits@spriteactor: ^SpriteActor
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Interactable:
@@ -2411,7 +2411,7 @@
 # 	UpdatesPlayerStatistics:
 # 		AddToAssetsValue: false
 # 	Tooltip:
-# 		Name: Concrete ixian_concretewall
+# 		Name: Concrete wall
 # 		GenericName: Structure
 # 	AppearsOnRadar:
 # 	D2kActorPreviewPlaceBuildingPreview:
@@ -2428,14 +2428,14 @@
 # 	RevealsShroud:
 # 		Range: 1c768
 # 	Crushable:
-# 		CrushClasses: ixian_concretewall
+# 		CrushClasses: wall
 # 	BlocksProjectiles:
 # 		Height: 512
 # 	LineBuild:
 # 		Range: 5
-# 		NodeTypes: ixian_concretewall, turret
+# 		NodeTypes: wall, turret
 # 	LineBuildNode:
-# 		Types: ixian_concretewall
+# 		Types: wall
 # 	Targetable:
 # 		TargetTypes: Ground, Structure
 # 	WithWallSpriteBody:
@@ -3507,9 +3507,9 @@
 # 			2: Strike Team Paradrop II
 # 			3: Strike Team Paradrop III
 # 		Descriptions:
-# 			1: ixian_autonomouscarryall planes drops a Small Mercenary strike team\nanywhere on the map.
-# 			2: ixian_autonomouscarryall planes drops a Mercenary strike team\nanywhere on the map.
-# 			3: ixian_autonomouscarryall planes drops a Mercenary army\nanywhere on the map.
+# 			1: carryall planes drops a Small Mercenary strike team\nanywhere on the map.
+# 			2: carryall planes drops a Mercenary strike team\nanywhere on the map.
+# 			3: carryall planes drops a Mercenary army\nanywhere on the map.
 # 		DropItems:
 # 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
 # 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad
@@ -10035,7 +10035,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@selection: ^SelectableEconomicUnit
 # 	Tooltip:
-# 		Name: Autonomous ixian_autonomouscarryall
+# 		Name: Autonomous carryall
 # 	Valued:
 # 		Cost: 5000
 # 	Health:
@@ -10060,12 +10060,12 @@
 # 	SpawnActorOnDeath@LANDING:
 # 		Actor: carryall.huskVTOL
 # 		RequiresCondition: !cruising
-# 	ixian_autonomouscarryall:
+# 	carryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
 # 		LocalOffset: 0, 0, -128
 # 	RenderSprites:
-# 		Image: ixian_autonomouscarryall
+# 		Image: carryall
 # 	ChangesHealth:
 # 		Step: 50
 # 		Delay: 3
@@ -10096,13 +10096,13 @@
 # 		Pieces: 3, 6
 # 		Range: 1c512, 2c512
 
-# ixian_autonomouscarryall:
+# carryall:
 # 	Inherits: carryall.reinforce
 # 	Health:
 # 		HP: 200000
 # 	Valued:
 # 		Cost: 2000
-# 	-ixian_autonomouscarryall:
+# 	-carryall:
 # 	AutoCarryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
@@ -10135,7 +10135,7 @@
 # 	Inherits: carryall.reinforce
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Tooltip:
-# 		Name: Advanced ixian_autonomouscarryall
+# 		Name: Advanced carryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10152,14 +10152,14 @@
 # 		LocalOffset: 128,-213,-85, 128,213,-85
 
 # ordos_advancedcarryall:
-# 	Inherits: ixian_autonomouscarryall
+# 	Inherits: carryall
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 120
 # 		Prerequisites: ~ordos_hightechfactory
 # 	Tooltip:
-# 		Name: Advanced ixian_autonomouscarryall
+# 		Name: Advanced carryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10239,21 +10239,21 @@
 # carryall.husk:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: ixian_autonomouscarryall
+# 		Name: carryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: ixian_autonomouscarryall
+# 		Image: carryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall.huskVTOL:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: ixian_autonomouscarryall
+# 		Name: carryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -10262,14 +10262,14 @@
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: ixian_autonomouscarryall
+# 		Image: carryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced ixian_autonomouscarryall
+# 		Name: Advanced carryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
@@ -10283,7 +10283,7 @@
 # carryall_huskvtol.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced ixian_autonomouscarryall
+# 		Name: Advanced carryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -14018,7 +14018,7 @@
 # 		Type: heal
 # 		Color: 55BBFF
 # 		RequiresCondition: !disabled
-# 	WithDecoration@ixian_autonomouscarryall:
+# 	WithDecoration@carryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
 # 		ValidRelationships: Ally, Enemy, Neutral

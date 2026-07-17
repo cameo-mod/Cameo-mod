@@ -141,6 +141,7 @@ ra2gayard:
 		Name: Allied Naval Yard
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery, ~globalnaval
+		Description: Allied Naval Yard
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -159,12 +160,13 @@ ra2gayard:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-futuretech_concretebarrier:
+ra2brik:
 	Inherits: BRIK
 	RenderSprites:
 		Image: BRIK
 	Buildable:
 		Prerequisites: ~ra2fact
+		Description: Defensive wall that blocks movement.
 	-MapEditorData:
 
 ra2nacnst.infiltrated:
@@ -190,6 +192,7 @@ ra2nayard:
 		Name: Soviet Shipyard
 	Buildable:
 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery, ~globalnaval
+		Description: Soviet Shipyard
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -248,6 +251,7 @@ yrygyard:
 		Name: Yuri Sub Pen
 	Buildable:
 		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2, ~globalnaval
+		Description: Yuri Sub Pen
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -273,6 +277,7 @@ yrygyard:
 ra2shk.bot:
 	Inherits: ra2_soviets_teslatrooper
 	Buildable:
+		Description: Bot-only unit.
 		-Queue:
 	-MapEditorData:
 	-UpdatesPlayerStatistics:
@@ -3064,7 +3069,7 @@ ra2_trff01:
 		GreenTint: 0
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_trff02:
 	Inherits: ^RA2CivProp
@@ -3083,7 +3088,7 @@ ra2_trff02:
 		GreenTint: 1
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_trff03:
 	Inherits: ^RA2CivProp
@@ -3102,7 +3107,7 @@ ra2_trff03:
 		GreenTint: 0
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_trff04:
 	Inherits: ^RA2CivProp
@@ -3121,7 +3126,7 @@ ra2_trff04:
 		GreenTint: 1
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmisc01:
 	Inherits: ^RA2CivProp
@@ -3158,7 +3163,7 @@ ra2_ctmisc03:
 	Tooltip:
 		Name: Trash Container
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmisc04:
 	Inherits: ^RA2CivProp
@@ -3169,7 +3174,7 @@ ra2_ctmisc04:
 	Tooltip:
 		Name: Mail Box
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmisc05:
 	Inherits: ^RA2CivProp
@@ -3236,7 +3241,7 @@ ra2_lt_eur01:
 		GreenTint: 0.4
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_eur02:
 	Inherits: ^RA2CivProp
@@ -3255,7 +3260,7 @@ ra2_lt_eur02:
 		GreenTint: 0.4
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_gen01:
 	Inherits: ^RA2CivProp
@@ -3274,7 +3279,7 @@ ra2_lt_gen01:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_gen02:
 	Inherits: ^RA2CivProp
@@ -3293,7 +3298,7 @@ ra2_lt_gen02:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_gen03:
 	Inherits: ^RA2CivProp
@@ -3312,7 +3317,7 @@ ra2_lt_gen03:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_gen04:
 	Inherits: ^RA2CivProp
@@ -3331,7 +3336,7 @@ ra2_lt_gen04:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_sgn01:
 	Inherits: ^RA2CivProp
@@ -3350,7 +3355,7 @@ ra2_lt_sgn01:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_sgn02:
 	Inherits: ^RA2CivProp
@@ -3369,7 +3374,7 @@ ra2_lt_sgn02:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_sgn03:
 	Inherits: ^RA2CivProp
@@ -3388,7 +3393,7 @@ ra2_lt_sgn03:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_lt_sgn04:
 	Inherits: ^RA2CivProp
@@ -3407,7 +3412,7 @@ ra2_lt_sgn04:
 		GreenTint: 0.4
 		BlueTint: 0.3
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc01:
 	Inherits: ^RA2CivProp
@@ -3418,7 +3423,7 @@ ra2_ctmsc01:
 	Tooltip:
 		Name: Hot Dog Cart
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc02:
 	Inherits: ^RA2CivProp
@@ -3429,7 +3434,7 @@ ra2_ctmsc02:
 	Tooltip:
 		Name: Umbrellas
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc03:
 	Inherits: ^RA2CivProp
@@ -3440,7 +3445,7 @@ ra2_ctmsc03:
 	Tooltip:
 		Name: Umbrellas
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc04:
 	Inherits: ^RA2CivProp
@@ -3469,7 +3474,7 @@ ra2_ctmsc06:
 	Tooltip:
 		Name: Campfire
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc06a:
 	Inherits: ^RA2CivProp
@@ -3486,7 +3491,7 @@ ra2_ctmsc06a:
 		GreenTint: 0.3
 		BlueTint: 0
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc11:
 	Inherits: ^RA2CivProp
@@ -3497,7 +3502,7 @@ ra2_ctmsc11:
 	Tooltip:
 		Name: Tires
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc12:
 	Inherits: ^RA2CivProp
@@ -3508,7 +3513,7 @@ ra2_ctmsc12:
 	Tooltip:
 		Name: Practice Target
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 
 ra2_ctmsc13:
 	Inherits: ^RA2CivProp

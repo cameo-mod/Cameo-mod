@@ -5,6 +5,7 @@ ts_nod_lightinfantry:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_nod_handof
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY:
 		Weapon: TSMinigun
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
@@ -33,6 +34,7 @@ ts_nod_engineer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_nod_handof
+		Description: Captures and repairs structures.\n  Unarmed
 	Voiced:
 		VoiceSet: TSInfantry
 	-TemporaryOwnerManager:

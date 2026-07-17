@@ -13,6 +13,7 @@ concreteabuilding:
 		BuildDuration: 125
 		BuildDurationModifier: 100
 		Prerequisites: ~construction_yard, ~!upgrade_conyard
+		Description: Provides flat building foundation.
 	RenderSprites:
 		Image: concretea
 
@@ -20,6 +21,7 @@ concreteadefense:
 	Inherits: concreteabuilding
 	Buildable:
 		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
 
 concretebbuilding:
 	Inherits: concreteabuilding
@@ -30,6 +32,7 @@ concretebbuilding:
 		Name: Large Concrete Slab
 	Buildable:
 		Prerequisites: ~upgrade_conyard
+		Description: Provides flat building foundation.
 	RenderSprites:
 		Image: concreteb
 
@@ -37,6 +40,7 @@ concretebdefense:
 	Inherits: concretebbuilding
 	Buildable:
 		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
 
 OILB.d2k:
 	Inherits@D2kBLD: ^D2KBuilding
@@ -218,7 +222,7 @@ light_factory:
 		Prerequisites: ordos_upgrade_lightfactory
 	-WithDeathAnimation:
 
-ixian_concretewall:
+wall:
 	Inherits@spriteactor: ^SpriteActor
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Interactable:
@@ -259,14 +263,14 @@ ixian_concretewall:
 	RevealsShroud:
 		Range: 1c768
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 	BlocksProjectiles:
 		Height: 512
 	LineBuild:
 		Range: 5
-		NodeTypes: ixian_concretewall, turret
+		NodeTypes: wall, turret
 	LineBuildNode:
-		Types: ixian_concretewall
+		Types: wall
 	Targetable:
 		TargetTypes: Ground, Structure
 	WithWallSpriteBody:

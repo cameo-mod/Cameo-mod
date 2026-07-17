@@ -6,6 +6,7 @@ ixian_mobileconstructionvehicle:
 	Inherits@mcv: ^MCV
 	Buildable:
 		Prerequisites: ~ixian_advancedheavyfactory, ixian_repairpad
+		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Mobile Construction Vehicle
@@ -612,6 +613,7 @@ ixian_mongoose:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~ixian_advancedheavyfactory
+		Description: Fast scout vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 		BuildPaletteOrder: 30
 	Mobile:
 		Speed: 75

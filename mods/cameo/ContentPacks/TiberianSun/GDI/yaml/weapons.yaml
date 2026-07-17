@@ -441,7 +441,7 @@ TSEMPMine:
 		ImpactSounds: mineblo1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, ixian_concretewall
+		InvalidTargets: Structure, wall
 
 TSMechRailgun:
 	Inherits: ^RailgunWeapon

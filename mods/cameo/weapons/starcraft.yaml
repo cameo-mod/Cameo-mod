@@ -3440,7 +3440,7 @@ Scarab:
 		Explosions: blueartexp
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 
 ScarabLaunch:
 	Inherits: ^HeavyBomb

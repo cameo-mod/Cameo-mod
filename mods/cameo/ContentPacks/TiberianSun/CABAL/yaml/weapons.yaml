@@ -1486,7 +1486,7 @@ CabalMagicNuke:
 		ResourceAmount: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 5
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -1525,7 +1525,7 @@ CabalMagicNuke:
 		ResourceAmount: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 7
 		Delay: 6
 	Warhead@8Dam_areanuke2: SpreadDamage
@@ -1560,7 +1560,7 @@ CabalMagicNuke:
 		ResourceAmount: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 9
 		Delay: 9
 	Warhead@10Dam_areanuke3: SpreadDamage

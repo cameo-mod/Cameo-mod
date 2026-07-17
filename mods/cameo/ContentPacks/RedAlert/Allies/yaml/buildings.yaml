@@ -16,6 +16,7 @@ ra1_allies_alliedbarracks:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
+		Description: Trains infantry units.
 	Tooltip:
 		Name: Allied Barracks
 	Building:
@@ -50,6 +51,7 @@ ra1_allies_alliedorerefinery:
 		Image: raproc
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
+		Description: Processes ore into credits.
 	ProvidesPrerequisite@buildingname:
 
 ra1_allies_alliedwarfactory:
@@ -96,6 +98,7 @@ ra1_allies_alliedradardome:
 	Inherits@dome: ^Dome
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery
+		Description: Provides radar coverage of the battlefield.
 	Tooltip:
 		Name: Allied Radar Dome
 	RevealsShroudMultiplier@ra1_allies_upgrade_advancedradarsystems:
@@ -131,6 +134,7 @@ ra1_allies_alliedhelipad:
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedradardome
+		Description: Produces and repairs aircraft.
 	Tooltip:
 		Name: Allied Helipad
 	Building:
@@ -204,6 +208,7 @@ ra1_allies_alliedservicedepot:
 		Name: Allied Service Depot
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
+		Description: Repairs nearby vehicles.
 	RenderSprites:
 		Image: rafixa
 

@@ -16,7 +16,7 @@
 		ImpactActors: false
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ^DamagingExplosionHE:
 	Inherits: ^DamagingExplosion
@@ -180,7 +180,7 @@ TiberiumExplosion:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, ixian_concretewall
+		InvalidTargets: Structure, wall
 	Warhead@2Eff: CreateEffect
 		Explosions: self_destruct
 		ImpactSounds: kaboom22.aud

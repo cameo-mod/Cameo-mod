@@ -4,6 +4,7 @@ ts_nod_silo:
 		Name: Silo
 	Buildable:
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+		Description: Stores excess resources.
 	RenderSprites:
 		Image: tsgtsilo.nod
 

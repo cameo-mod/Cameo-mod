@@ -369,6 +369,7 @@
 	Inherits@shape: ^3x3Shape
 	Buildable:
 		Prerequisites: ~rafact, powr
+		Description: Processes ore into credits.
 	Tooltip:
 		Name: Ore Refinery
 	Building:
@@ -433,6 +434,7 @@
 	Inherits@repair: ^RepairFacility
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedwarfactory
+		Description: Provides power to the base.
 	Tooltip:
 		Name: Service Depot
 	Building:

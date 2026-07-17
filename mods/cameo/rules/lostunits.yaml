@@ -958,13 +958,13 @@ BHGTWR:
 		Image: td_gdi_guardtower
 
 BHCYCL:
-	Inherits: japan_chainlinkfence
+	Inherits: cycl
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: fact
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: japan_chainlinkfence
+		Image: cycl
 
 BHBRIK:
 	Inherits: BRIK

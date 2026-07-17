@@ -34,6 +34,7 @@ td_gdi_minigunner:
 E1: #map import compatibility
 	Inherits: td_gdi_minigunner
 	Buildable:
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 		-Queue:
 	Selectable:
 		Class: td_gdi_minigunner
@@ -101,6 +102,7 @@ td_gdi_rocketsoldier:
 	Inherits@decoration: ^GDIRankDecoration
 	Buildable:
 		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_unlockmissilesoldier
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY: ##########
 		Weapon: Rockets
 		LocalOffset: 256,43,341
@@ -125,6 +127,7 @@ td_gdi_rocketsoldier:
 E3: #map import compatibility
 	Inherits: td_gdi_rocketsoldier
 	Buildable:
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 		-Queue:
 	Selectable:
 		Class: td_gdi_minigunner
@@ -139,6 +142,7 @@ td_gdi_commando:
 		Name: GDI Commando
 	Buildable:
 		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockhavocandexosuit
+		Description: Elite commando unit.\n  Strong vs Infantry, Buildings\n  Can detect cloaked units
 	Armament:
 		Weapon: td_gdi_commando_sniper
 		LocalOffset: 128,0,256

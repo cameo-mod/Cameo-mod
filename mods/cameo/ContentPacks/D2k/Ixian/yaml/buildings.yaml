@@ -11,6 +11,7 @@ ixian_windtrap:
 	Inherits: ^wind_trap
 	Buildable:
 		Prerequisites: ~ixian_constructionyard
+		Description: Provides power to the base.
 	RenderSprites:
 		Image: power.atreides
 
@@ -23,6 +24,7 @@ ixian_barracks:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
+		Description: Trains infantry units.
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Barracks
@@ -68,6 +70,7 @@ ixian_refineryixian:
 		Name: Refinery
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
+		Description: Processes ore into credits.
 	FreeActor:
 		Actor: ixian_spiceharvester
 		SpawnOffset: 0,2
@@ -89,6 +92,7 @@ ixian_storagesilo:
 	Inherits: ^d2k_silo
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
+		Description: Stores excess resources.
 	RenderSprites:
 		Image: silo.atreides
 
@@ -277,6 +281,7 @@ ixian_repairpad:
 	Inherits@repair: ^RepairFacility
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
+		Description: Repairs nearby vehicles.
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Repair Pad
@@ -315,6 +320,7 @@ ixian_outpost:
 	Inherits@shape: ^3x3Shape
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
+		Description: Expands buildable area and provides radar.
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Outpost
@@ -356,6 +362,7 @@ ixian_launchpad:
 		Name: Ixian Launchpad
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_outpost
+		Description: Launches units to and from orbit.
 	Building:
 		BuildSounds: BUILD1.WAV
 		Footprint: xx xx
@@ -401,6 +408,7 @@ ixian_ixresearchcenter:
 	Inherits: ^research_centre
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_outpost
+		Description: Unlocks advanced technology.
 	RenderSprites:
 		Image: research.gold
 
@@ -408,6 +416,7 @@ ixian_hightechfactory:
 	Inherits: ^high_tech_factory
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
+		Description: Produces advanced vehicles.
 	RenderSprites:
 		Image: hightech.atreides
 
@@ -418,6 +427,7 @@ ixian_starport:
 	Inherits: ^starport
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
+		Description: Purchase units from off-world suppliers.
 	RenderSprites:
 		Image: starport.smuggler
 

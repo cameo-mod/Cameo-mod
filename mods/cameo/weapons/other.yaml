@@ -3,7 +3,7 @@
 PDLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Air, Missile, BulletCA, BallisticMissile
-	InvalidTargets: Infantry, Vehicle, Tank, Structure, ixian_concretewall
+	InvalidTargets: Infantry, Vehicle, Tank, Structure, wall
 	Range: 2560
 	Projectile: LaserZap
 		Width: 30
@@ -49,7 +49,7 @@ C4:
 	ValidTargets: Ground, Water
 	ReloadDelay: 55
 	Range: 2560
-	InvalidTargets: ixian_concretewall
+	InvalidTargets: wall
 	Report: flamer2.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -57,7 +57,7 @@ C4:
 		Spread: 468
 		Damage: 4000
 		ValidTargets: Ground, Water
-		InvalidTargets: ixian_concretewall
+		InvalidTargets: wall
 		Versus:
 			None: 110
 			Wood: 100
@@ -67,7 +67,7 @@ C4:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 	Warhead@3Eff: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: flamer2.aud
@@ -152,7 +152,7 @@ Laser:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 
 ^DinoWeapon:
 	ReloadDelay: 30
@@ -220,7 +220,7 @@ Demolish:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, ixian_concretewall
+		InvalidTargets: Structure, wall
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		ImpactSounds: firebl3.aud
@@ -750,7 +750,7 @@ CannonBall:
 			Concrete: 10
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Tank, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: smallfire
 
@@ -1180,14 +1180,14 @@ MothershipExplosion:
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
 		Delay: 1
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@12Res_areanuke3: DestroyResource
@@ -1195,12 +1195,12 @@ MothershipExplosion:
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 	Warhead@14Smu_areanuke3: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 		Size: 20
 		Delay: 15
 

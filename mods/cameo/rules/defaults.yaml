@@ -1011,6 +1011,7 @@
 	RevealsShroud:
 		Range: 4000
 	Buildable:
+		Description: Heals nearby infantry.\n  Unarmed
 		BuildPaletteOrder: 100
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1039,6 +1040,7 @@
 	RevealsShroud:
 		Range: 4000
 	Buildable:
+		Description: Repairs nearby vehicles.\n  Unarmed
 		BuildPaletteOrder: 100
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1074,6 +1076,7 @@
 	DetectCloaked:
 		Range: 4000
 	Buildable:
+		Description: Light scout infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1095,6 +1098,7 @@
 	RevealsShroud:
 		Range: 5500
 	Buildable:
+		Description: Grenadier infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1113,6 +1117,7 @@
 	RevealsShroud:
 		Range: 7000
 	Buildable:
+		Description: Mortar infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildPaletteOrder: 40
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1137,6 +1142,7 @@
 	RevealsShroud:
 		Range: 6500
 	Buildable:
+		Description: Anti-vehicle and anti-air infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 		BuildPaletteOrder: 30
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1158,6 +1164,7 @@
 	Crushable:
 		CrushClasses: vehicle
 	Buildable:
+		Description: Heavy infantry unit.\n  Strong vs Vehicles, Infantry
 		BuildPaletteOrder: 60
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1192,6 +1199,7 @@
 	Crushable:
 		CrushClasses: vehicle
 	Buildable:
+		Description: Melee infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 		BuildPaletteOrder: 50
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1244,6 +1252,7 @@
 		Range: 3750
 	RenderDetectionCircle:
 	Buildable:
+		Description: Sniper infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 		BuildPaletteOrder: 70
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1284,6 +1293,7 @@
 	Crushable:
 		CrushClasses: vehicle
 	Buildable:
+		Description: Hero unit. Powerful and versatile.
 		BuildPaletteOrder: 90
 		BuildLimit: 1
 		BuildDurationModifier: 25
@@ -1314,6 +1324,7 @@
 		Range: 5000
 	RenderDetectionCircle:
 	Buildable:
+		Description: Fast scout vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1339,6 +1350,7 @@
 		Range: 4000
 	RenderDetectionCircle:
 	Buildable:
+		Description: Support vehicle.\n  Unarmed
 		BuildPaletteOrder: 40
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1357,6 +1369,7 @@
 	RevealsShroud:
 		Range: 5000
 	Buildable:
+		Description: Harvests ore for processing.\n  Unarmed
 		BuildPaletteOrder: 10
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1381,6 +1394,7 @@
 	RevealsShroud:
 		Range: 6000
 	Buildable:
+		Description: Main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 		BuildPaletteOrder: 30
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1399,6 +1413,7 @@
 	RevealsShroud:
 		Range: 7000
 	Buildable:
+		Description: Advanced vehicle with specialized weaponry.
 		BuildPaletteOrder: 80
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1423,6 +1438,7 @@
 	AutoTarget:
 		ScanRadius: 10
 	Buildable:
+		Description: Heavy siege unit.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry
 		BuildPaletteOrder: 70
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1444,6 +1460,7 @@
 	RevealsShroud:
 		Range: 8000
 	Buildable:
+		Description: Mobile fire support unit.\n  Strong vs Vehicles\n  Weak vs Infantry
 		BuildPaletteOrder: 50
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1473,6 +1490,7 @@
 	RevealsShroud:
 		Range: 9000
 	Buildable:
+		Description: Long-range artillery.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles
 		BuildPaletteOrder: 60
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1508,6 +1526,7 @@
 	RenderRangeCircle:
 		RangeCircleType: vehicle
 	Buildable:
+		Description: Epic vehicle. Extremely powerful and expensive.
 		BuildPaletteOrder: 100
 		BuildLimit: 1
 		BuildDurationModifier: 25
@@ -1570,6 +1589,7 @@
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
 	Buildable:
+		Description: Fighter aircraft.\n  Strong vs Aircraft\n  Weak vs Anti-Air
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1599,6 +1619,7 @@
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
 	Buildable:
+		Description: Bomber aircraft.\n  Strong vs Buildings, Vehicles\n  Weak vs Fighters
 		BuildPaletteOrder: 30
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1633,6 +1654,7 @@
 		ScanRadius: 12
 	RenderRangeCircle:
 	Buildable:
+		Description: Helicopter gunship.\n  Strong vs Vehicles, Infantry\n  Weak vs Anti-Air
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1663,6 +1685,7 @@
 		ScanRadius: 12
 	RenderRangeCircle:
 	Buildable:
+		Description: Spaceship\n  Strong vs Vehicles, Aircraft
 		BuildPaletteOrder: 40
 		BuildDurationModifier: 50
 		IconPalette: cameo
@@ -1685,6 +1708,7 @@
 	Integrity:
 		MaxPercentageStrength: 200
 	Buildable:
+		Description: Epic aircraft. Extremely powerful and expensive.
 		BuildPaletteOrder: 100
 		BuildLimit: 1
 		BuildDurationModifier: 25
@@ -1750,6 +1774,7 @@
 	#RenderRangeCircle:
 	-RenderDetectionCircle:
 	Buildable:
+		Description: Flying infantry unit.\n  Strong vs Infantry\n  Weak vs Anti-Air
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1761,6 +1786,7 @@
 	DamageMultiplier@TransportHelicopterBuff:
 		Modifier: 75
 	Buildable:
+		Description: Transport vehicle.\n  Unarmed
 		BuildDurationModifier: 25
 		IconPalette: cameo
 	Selectable:
@@ -1783,6 +1809,7 @@
 		Range: 5000
 	RenderDetectionCircle:
 	Buildable:
+		Description: Fast scout ship.\n  Strong vs Ships\n  Weak vs Aircraft
 		BuildDurationModifier: 25
 		IconPalette: cameo
 	TooltipExtras@ScoutShip:
@@ -1801,6 +1828,7 @@
 	RevealsShroud:
 		Range: 9000
 	Buildable:
+		Description: Heavy battleship.\n  Strong vs Ships, Buildings\n  Weak vs Aircraft
 		BuildDurationModifier: 50
 		IconPalette: cameo
 	TooltipExtras@BattleShip:
@@ -1819,6 +1847,7 @@
 	RangeMultiplier@ArtilleryShipBuff:
 		Modifier: 150
 	Buildable:
+		Description: Artillery ship.\n  Strong vs Buildings, Ships\n  Weak vs Aircraft
 		BuildDurationModifier: 75
 		IconPalette: cameo
 	TooltipExtras@ArtilleryShip:
@@ -1832,6 +1861,7 @@
 	DamageMultiplier@BunkerBuff:
 		Modifier: 90
 	Buildable:
+		Description: Basic defensive structure.
 		BuildDurationModifier: 100
 		IconPalette: cameo
 	WithTurretSearchlight:
@@ -1844,6 +1874,7 @@
 	DamageMultiplier@BunkerBuff:
 		Modifier: 95
 	Buildable:
+		Description: Garrisonable defensive bunker
 		BuildDurationModifier: 75
 		IconPalette: cameo
 
@@ -1856,6 +1887,7 @@
 	DamageMultiplier@AntiAirDefenseBuff:
 		Modifier: 80
 	Buildable:
+		Description: Anti-air defensive structure.
 		BuildDurationModifier: 50
 		IconPalette: cameo
 	WithTurretSearchlight:
@@ -1868,6 +1900,7 @@
 	Armor:
 		Type: Steel
 	Buildable:
+		Description: Advanced defensive structure.
 		BuildDurationModifier: 75
 		IconPalette: cameo
 	DamageMultiplier@BunkerBuff:
@@ -1881,6 +1914,7 @@
 	Armor:
 		Type: Steel
 	Buildable:
+		Description: Super defensive structure.
 		BuildDurationModifier: 50
 		IconPalette: cameo
 	IgnoresDisguise:
@@ -3249,6 +3283,7 @@
 		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 10
 		Prerequisites: ~wip-content
+		Description: Monster - wild creature that attacks nearby enemies
 	Tooltip:
 		Name: Monster
 		GenericName: Monster
@@ -3361,6 +3396,7 @@
 		Queue: Biolab
 		BuildPaletteOrder: 50
 		Prerequisites: ~wip-content
+		Description: Dinosaur - wild creature that attacks nearby enemies
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -4095,7 +4131,7 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo
 
-^ixian_concretewall:
+^wall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@cloak: ^StealthGenCloakable
@@ -4116,15 +4152,15 @@
 		AreaTypes: building
 		Adjacent: 5
 	Targetable:
-		TargetTypes: Ground, ixian_concretewall
+		TargetTypes: Ground, wall
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 		CrushSound: sandbag2.aud
 	LineBuild:
 		Range: 10
-		NodeTypes: ixian_concretewall
+		NodeTypes: wall
 	LineBuildNode:
-		Types: ixian_concretewall
+		Types: wall
 	WithWallSpriteBody:
 	GivesExperience:
 		PlayerExperienceModifier: 100
@@ -4136,11 +4172,11 @@
 	Health:
 		HP: 10000
 	AppearsOnMapPreview:
-		Terrain: ixian_concretewall
+		Terrain: wall
 	RadarColorFromTerrain:
-		Terrain: ixian_concretewall
+		Terrain: wall
 	MapEditorData:
-		Categories: ixian_concretewall
+		Categories: wall
 	Cloak@TScloak:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 	RenderSprites:
@@ -7216,6 +7252,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^PowerMultiplier
 	Inherits@ReactorOverloadTeamUpgradeRA1: ^ReactorOverloadTeamUpgradeRA1
 	Buildable:
+		Description: Provides power to the base.
 		BuildDurationModifier: 25
 		IconPalette: cameo
 	Targetable@BotArchitect:
@@ -7224,6 +7261,7 @@ CPQDEBUGDUMMY:
 ^PowerPlant:
 	Inherits: ^Power
 	Buildable:
+		Description: Provides power to the base.
 		BuildPaletteOrder: 10
 	WithColoredOverlay@OUTAGE:
 		Color: 000000b4
@@ -7295,6 +7333,7 @@ CPQDEBUGDUMMY:
 
 ^ProducesUnits:
 	Buildable:
+		Description: Production structure
 		BuildDurationModifier: 25
 		IconPalette: cameo
 
@@ -8146,6 +8185,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: swreveal
 	Buildable:
 		Queue: Defence, RADefence
+		Description: Superweapon structure.
 		BuildPaletteOrder: 200
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -8612,6 +8652,7 @@ CPQDEBUGDUMMY:
 
 ^upgrade.template:
 	Buildable:
+		Description: Generic upgrade
 		BuildLimit: 1
 		IconPalette: cameo
 	Interactable:
@@ -8631,6 +8672,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^upgrade.template
 	Buildable:
 		Queue: Promotions
+		Description: Promotion unlock upgrade
 	Selectable:
 		DecorationBounds: 1024, 1024
 	PromotionUpgrade:
@@ -9362,7 +9404,7 @@ CPQDEBUGDUMMY:
 	-ChangesHealth@DRIVER_DEAD:
 	-Capturable@DRIVER_DEAD:
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 	Voiced:
 		VoiceSet: RA2CarVoice
 	MapEditorData:
@@ -9413,7 +9455,7 @@ CPQDEBUGDUMMY:
 	KillsSelf:
 		RequiresCondition: !disabled && triggered
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:
@@ -9480,7 +9522,7 @@ CPQDEBUGDUMMY:
 	Voiced:
 		VoiceSet: RA2CarVoice
 	Crushable:
-		CrushClasses: ixian_concretewall
+		CrushClasses: wall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:

@@ -118,6 +118,7 @@ World:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		Queue: Infantry, RAInfantry
+		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
 	Harvester:
 		BaleLoadDelay: 5
 		BaleUnloadDelay: 1
@@ -2676,6 +2677,7 @@ zerg_creepcolony_2:
 	Inherits: zerg_creepcolony
 	Buildable:
 		Queue: Defence, RADefence
+		Description: Morphs into defensive structures.
 	RenderSprites:
 		Image: zerg_creepcolony
 		PlayerPalette: player_rgba
@@ -4071,6 +4073,7 @@ terran_jimraynor:
 		ValidTypes: vehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
+		Description: Terran vehicle template.
 	Power:
 		Amount: -20
 
@@ -8764,6 +8767,7 @@ protoss_promotion_unlockidol:
 	ProductionCostMultiplier@ZergDoubleSpawner:
 		Multiplier: 200
 	Buildable:
+		Description: Zerg spawner that produces two units at once.
 		BuildAmount: 2
 
 ^BasicZerg:

@@ -6,6 +6,7 @@ td_gdi_mobileconstructionvehicle:
 		Name: GDI Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_repairfacility
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: td_gdi_constructionyard
 	RenderSprites:

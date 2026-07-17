@@ -13,6 +13,7 @@ ra2_allies_alliedmobileconstructionvehicle:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~ra2_allies_alliedwarfactory, ra2_allies_alliedservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: ra2_allies_alliedconstructionyard
 		Offset: -1,-1
@@ -568,6 +569,7 @@ ra2_allies_ifv_mg:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~botplayer, ra2_allies_alliedbarracks
+		Description: IFV with machine gun.\n  Strong vs Infantry\n  Weak vs Vehicles
 	UpdatesPlayerStatistics:
 		OverrideActor: ra2_allies_ifv
 	RenderSprites:
@@ -582,6 +584,7 @@ ra2_allies_ifv_missile:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~botplayer, ra2_allies_alliedbarracks
+		Description: IFV with missile launcher.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	UpdatesPlayerStatistics:
 		OverrideActor: ra2_allies_ifv
 	RenderSprites:
@@ -596,6 +599,7 @@ ra2_allies_ifv_hmg:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_airforcecommandhq
+		Description: IFV with heavy machine gun.\n  Strong vs Infantry, Aircraft\n  Weak vs Vehicles
 	UpdatesPlayerStatistics:
 		OverrideActor: ra2_allies_ifv
 	RenderSprites:
@@ -610,6 +614,7 @@ ra2_allies_ifv_repair:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_alliedservicedepot
+		Description: IFV repair variant. Repairs nearby vehicles.\n  Unarmed
 	Cargo:
 		InitialUnits: ra2_allies_engineer
 	ProductionCostMultiplier:
@@ -619,6 +624,7 @@ ra2_allies_ifv_chrono:
 	Inherits: ra2_allies_ifv_mg
 	Buildable:
 		Prerequisites: ~botplayer, ra2_allies_alliedbarracks, ra2_allies_alliedbattlelab
+		Description: IFV with chrono weapon.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Cargo:
 		InitialUnits: ra2_allies_chronolegionnaire
 	ProductionCostMultiplier:
@@ -978,6 +984,7 @@ ra2_allies_battlefortress_2:
 		Name: Battle Fortress (Empty)
 	Buildable:
 		Prerequisites: ra2_allies_alliedbattlelab, ~botplayer
+		Description: Heavy assault vehicle with garrisonable infantry compartment.
 	Cargo:
 		-InitialUnits:
 	ProductionCostMultiplier:
@@ -989,6 +996,7 @@ ra2_allies_battlefortress_3:
 		Name: Chrono Battle Fortress
 	Buildable:
 		Prerequisites: ra2_allies_alliedbattlelab, ~botplayer
+		Description: Heavy assault vehicle with garrisonable infantry compartment.
 	Cargo:
 		InitialUnits: ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire,ra2_allies_chronolegionnaire
 	ProductionCostMultiplier:

@@ -251,7 +251,9 @@ RA2EngineerVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: iena
+		ra2_allies: iena
 		ra2soviets: iens
+		ra2_soviets: iens
 		ra2yuri: ieny
 	Voices:
 		Select: sea, seb, sec, sed
@@ -294,11 +296,17 @@ RA2MCVVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: vmca
+		ra2_allies: vmca
 		ra2soviets: vmcs
+		ra2_soviets: vmcs
 		allies: vmca
+		ra1_allies: vmca
 		soviets: vmcs
+		ra1_soviets: vmcs
 		gdi: vmca
+		td_gdi: vmca
 		nod: vmcs
+		td_nod: vmcs
 		ra2yuri: vmcy
 	Voices:
 		Select: sea, seb, sec, sed, see
@@ -653,11 +661,17 @@ RA2LanderVoice:
 	DefaultVariant: .wav
 	Prefixes:
 		ra2allies: vhoa
+		ra2_allies: vhoa
 		ra2soviets: vhos
+		ra2_soviets: vhos
 		allies: vhoa
+		ra1_allies: vhoa
 		soviets: vhos
+		ra1_soviets: vhos
 		gdi: vhoa
+		td_gdi: vhoa
 		nod: vhos
+		td_nod: vhos
 		ra2yuri: vhoy
 	Voices:
 		Select: sea, seb, sec, sed, see

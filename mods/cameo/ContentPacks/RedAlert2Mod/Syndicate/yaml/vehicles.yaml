@@ -142,6 +142,7 @@ latinsyndicate_syndicatemobileconstructionvehicle:
 		Name: Syndicate Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_syndicateservicedepot
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: latinsyndicate_syndicateconstructionyard
 		Offset: -1,-1
@@ -1237,6 +1238,7 @@ latinsyndicate_demolitiontruck:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlockdemolitiontrucks, latinsyndicate_latinempradar
+		Description: Suicide vehicle that detonates on contact.
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
 	GrantConditionOnDeploy:
@@ -1275,6 +1277,7 @@ latinsyndicate_nuketruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlocknuketrucks, latinsyndicate_spycenter
+		Description: Suicide vehicle that detonates on contact.
 		BuildLimit: 1
 		BuildDurationModifier: 50
 	Voiced:

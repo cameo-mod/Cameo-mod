@@ -29,6 +29,7 @@ yuri_warfactory:
 		Name: Yuri War Factory
 	Buildable:
 		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2
+		Description: Produces vehicles.
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
@@ -143,6 +144,7 @@ yuri_barracks:
 		Name: Yuri Barracks
 	Buildable:
 		Prerequisites: ~yuri_constructionyard, yuri_bioreactor
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -272,6 +274,7 @@ yuri_battlelab:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		Prerequisites: ~yuri_constructionyard, yuri_psychicsensor
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Yuri Battle Lab
 	Building:

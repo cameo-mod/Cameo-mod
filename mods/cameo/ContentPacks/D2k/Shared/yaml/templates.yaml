@@ -504,6 +504,7 @@
 		Bounds: 1024, 1024
 	Buildable:
 		Queue: Defense.d2k
+		Description: Explosive mine that damages nearby enemies.
 		BuildDurationModifier: 100
 	WithSpriteBody:
 	HiddenUnderFog:
@@ -749,6 +750,7 @@
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x3Shape
 	Buildable:
+		Description: Processes ore into credits.
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Spice Refinery

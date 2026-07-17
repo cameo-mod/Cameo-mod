@@ -15,6 +15,7 @@ ra1_soviets_barracks:
 	Inherits@ra1_soviets_barracks: ^Conscription
 	Buildable:
 		Prerequisites: ~ra1_soviets_constructionyard, powr
+		Description: Trains infantry units.
 	Tooltip:
 		Name: Soviet Barracks
 	Building:
@@ -63,6 +64,7 @@ ra1_soviets_orerefinery:
 		Image: raproc
 	Buildable:
 		Prerequisites: ~ra1_soviets_constructionyard, powr
+		Description: Processes ore into credits.
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_upgrade_wareconomy
@@ -149,6 +151,7 @@ ra1_soviets_radardome:
 		Name: Soviet Radar Dome
 	Buildable:
 		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery
+		Description: Provides radar coverage of the battlefield.
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -601,6 +604,7 @@ ra1_soviets_techcenter:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
 		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Soviet Tech Center
 	Building:
@@ -626,5 +630,6 @@ ra1_soviets_servicedepot:
 		Name: Soviet Service Depot
 	Buildable:
 		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_warfactory
+		Description: Repairs nearby vehicles.
 	RenderSprites:
 		Image: rafixs

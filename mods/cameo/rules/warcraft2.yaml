@@ -349,6 +349,7 @@ Player:
 		Type: Light
 	Buildable:
 		Queue: Defence, RADefence, Infantry, RAInfantry
+		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
 		BuildPaletteOrder: 10
 		BuildDuration: 250
 		BuildDurationModifier: 100
@@ -999,6 +1000,7 @@ Player:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Buildable:
+		Description: Trains infantry units.
 		BuildPaletteOrder: 12
 	Building:
 		Footprint: xxx xxx xxx
@@ -1026,6 +1028,7 @@ Player:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Buildable:
+		Description: Enables ranged unit upgrades and production.
 		BuildPaletteOrder: 13
 	Building:
 		Footprint: xxx xxx ===
@@ -1073,6 +1076,7 @@ Player:
 	Power:
 		Amount: 0
 	Buildable:
+		Description: Enables weapon and armor upgrades.
 		BuildPaletteOrder: 14
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -1098,6 +1102,7 @@ Player:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
+		Description: Provides radar and trains sapper units.
 		BuildPaletteOrder: 16
 	Building:
 		Footprint: xxx xxx xxx
@@ -1131,6 +1136,7 @@ Player:
 	Power:
 		Amount: 0
 	Buildable:
+		Description: Trains mounted cavalry units.
 		BuildPaletteOrder: 15
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -1164,6 +1170,7 @@ Player:
 	Power:
 		Amount: 0
 	Buildable:
+		Description: Enables spell caster upgrades and training.
 		BuildPaletteOrder: 17
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -1188,6 +1195,7 @@ Player:
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
 	Buildable:
+		Description: Enables spell caster upgrades and training.
 		BuildPaletteOrder: 18
 	Building:
 		Footprint: xxx xxx xxx
@@ -1216,6 +1224,7 @@ Player:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
+		Description: Produces flying units.
 		BuildPaletteOrder: 19
 	Building:
 		Footprint: xxx xxx xxx
@@ -1242,6 +1251,7 @@ Player:
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
 	Buildable:
+		Description: Naval production structure.
 		BuildPaletteOrder: 50
 	Building:
 		Footprint: =+= +++ =+=
@@ -1272,6 +1282,7 @@ Player:
 	Valued:
 		Cost: 2500
 	Buildable:
+		Description: Unlocks advanced naval vessels and upgrades.
 		BuildPaletteOrder: 50
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -1297,6 +1308,7 @@ Player:
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x3Shape
 	Buildable:
+		Description: Processes ore into credits.
 		BuildPaletteOrder: 50
 	Building:
 		Footprint: =+= +++ =+=
@@ -1316,6 +1328,7 @@ Player:
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@shape: ^3x3Shape
 	Buildable:
+		Description: Provides passive income from offshore oil.
 		BuildPaletteOrder: 50
 	Building:
 		BuildLimit: 1
@@ -1352,6 +1365,7 @@ Player:
 	Valued:
 		Cost: 800
 	Buildable:
+		Description: Observation tower. Can be upgraded to guard or cannon tower.
 		BuildPaletteOrder: 20
 	Building:
 		Footprint: xx xx
@@ -1546,6 +1560,7 @@ Player:
 	Inherits@mcv: ^MCV
 	Buildable:
 		Queue: Vehicle, RAVehicle
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Armor:
 		Type: Plate
 	#Food
@@ -1562,6 +1577,7 @@ Player:
 	Inherits@AutoRepair: ^PrioritizeRepair
 	Buildable:
 		Queue: Infantry, RAInfantry
+		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
 	#Food
 
 ^wc2_demolitioner:
@@ -1573,6 +1589,7 @@ Player:
 	Power:
 		Amount: -40
 	Buildable:
+		Description: Demolition expert. Destroys buildings and obstacles.
 		BuildPaletteOrder: 20
 	Health:
 		HP: 40000
@@ -1593,6 +1610,7 @@ Player:
 	Power:
 		Amount: -50
 	Buildable:
+		Description: Spell caster with multiple magical abilities.
 		BuildPaletteOrder: 10
 	Health:
 		HP: 50000
@@ -1609,6 +1627,7 @@ Player:
 	Valued:
 		Cost: 500
 	Buildable:
+		Description: Provides additional supply for units.
 		BuildPaletteOrder: 30
 	Mobile:
 		Speed: 90
@@ -1630,6 +1649,7 @@ Player:
 	Valued:
 		Cost: 500
 	Buildable:
+		Description: Captures and repairs structures.\n  Unarmed
 		BuildPaletteOrder: 40
 	Mobile:
 		Speed: 50
@@ -1679,6 +1699,7 @@ Player:
 ^wc2_oil_tanker:
 	Inherits@EXP: ^GainsExperienceTD
 	Buildable:
+		Description: Transports oil from platforms to refineries.\n  Unarmed
 		BuildPaletteOrder: 10
 	Valued:
 		Cost: 400
@@ -1749,6 +1770,7 @@ Player:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Buildable:
+		Description: Light warship.\n  Strong vs Ships, Aircraft\n  Weak vs Battleships
 		BuildPaletteOrder: 20
 	Valued:
 		Cost: 1400
@@ -1773,6 +1795,7 @@ Player:
 ^wc2_transport:
 	Inherits@EXP: ^GainsExperienceTD
 	Buildable:
+		Description: Transport vehicle.\n  Unarmed
 		BuildPaletteOrder: 30
 	Valued:
 		Cost: 1000
@@ -1808,6 +1831,7 @@ Player:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Buildable:
+		Description: Heavy warship with long range cannons.\n  Strong vs Ships, Buildings\n  Weak vs Aircraft
 		BuildPaletteOrder: 40
 	Valued:
 		Cost: 2000
@@ -1836,6 +1860,7 @@ Player:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@Submarine: ^Submarine
 	Buildable:
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 		BuildPaletteOrder: 50
 	Valued:
 		Cost: 1450
@@ -1876,6 +1901,7 @@ Player:
 	Valued:
 		Cost: 350
 	Buildable:
+		Description: Flying scout unit.\n  Detector
 		BuildPaletteOrder: 10
 	Aircraft:
 		InitialFacing: 896
@@ -2131,6 +2157,7 @@ wc2_humans_farm:
 	Buildable:
 		Prerequisites: ~wc2_humans_townhall
 		Queue: Building, RABuilding
+		Description: Provides food and supply for units.
 	SpawnActorsOnSell:
 		ActorTypes: wc2_humans_footman
 	Voiced:
@@ -2894,7 +2921,7 @@ wc2_humans_cannontower:
 # 	RenderSprites:
 
 wc2_humans_wall:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 300
 	CustomSellValue:
@@ -2955,6 +2982,7 @@ wc2_humans_humangoldmine_2:
 		Cost: 15000
 	Buildable:
 		Prerequisites: ~wc2_humans_townhall, wc2_humans_blacksmith, derricklimit, ~botplayer
+		Description: Send workers inside to provide passive income.
 	Cargo:
 		InitialUnits: wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant, wc2_humans_peasant
 	RenderSprites:
@@ -4699,6 +4727,7 @@ wc2_orcs_pigfarm:
 	Buildable:
 		Prerequisites: ~wc2_orcs_greathall
 		Queue: Building, RABuilding
+		Description: Provides food and supply for units.
 	SpawnActorsOnSell:
 		ActorTypes: wc2_orcs_grunt
 	Voiced:
@@ -5413,6 +5442,7 @@ wc2_orcs_wall:
 		BuildPaletteOrder: 30
 		Prerequisites: ~wc2_orcs_greathall
 		Queue: Defence, RADefence
+		Description: Defensive wall that blocks movement.
 	LineBuild:
 		NodeTypes: wc2_orcs_wall
 	LineBuildNode:
@@ -5442,6 +5472,7 @@ wc2_orcs_orcgoldmine_2:
 		Cost: 15000
 	Buildable:
 		Prerequisites: ~wc2_orcs_greathall, wc2_orcs_blacksmith, derricklimit, ~botplayer
+		Description: Send workers inside to provide passive income.
 	Cargo:
 		InitialUnits: wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon, wc2_orcs_peon
 	RenderSprites:

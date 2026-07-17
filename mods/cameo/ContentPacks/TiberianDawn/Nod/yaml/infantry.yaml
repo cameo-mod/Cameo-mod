@@ -45,6 +45,7 @@ td_nod_rocketsoldier:
 	Inherits@decoration: ^NodRankDecoration
 	Buildable:
 		Prerequisites: ~td_nod_handofnod, ~!td_nod_promotion_unlockchemicalrocketsoldier
+		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
@@ -174,6 +175,7 @@ td_nod_commando:
 		Name: Nod Commando
 	Buildable:
 		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~!td_nod_promotion_upgradeupnodvenomname
+		Description: Elite commando unit.\n  Strong vs Infantry, Buildings\n  Can detect cloaked units
 	Armament:
 		Weapon: td_gdi_commando_sniper
 		LocalOffset: 128,0,256

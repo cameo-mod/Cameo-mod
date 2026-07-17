@@ -62,8 +62,8 @@ Terrain:
 		Type: Tree
 		TargetTypes: Ground
 		Color: 1C2024
-	TerrainType@ixian_concretewall:
-		Type: ixian_concretewall
+	TerrainType@wall:
+		Type: wall
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: D0C0A0
@@ -751,28 +751,28 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: ixian_concretewall
+			0: wall
 	Template@68:
 		Id: 68
 		Images: p02.des
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: ixian_concretewall
+			0: wall
 	Template@69:
 		Id: 69
 		Images: p03.des
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: ixian_concretewall
+			0: wall
 	Template@70:
 		Id: 70
 		Images: p04.des
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: ixian_concretewall
+			0: wall
 	Template@71:
 		Id: 71
 		Images: p05.des
@@ -1029,7 +1029,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			10: ixian_concretewall
+			10: wall
 			11: Road
 	Template@106:
 		Id: 106
@@ -1040,7 +1040,7 @@ Templates:
 			1: Clear
 			2: Road
 			3: Clear
-			4: ixian_concretewall
+			4: wall
 			5: Road
 			6: Road
 			7: Road
@@ -1073,7 +1073,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			8: ixian_concretewall
+			8: wall
 	Template@109:
 		Id: 109
 		Images: d17.des
@@ -1100,7 +1100,7 @@ Templates:
 			5: Clear
 			6: Clear
 			7: Road
-			8: ixian_concretewall
+			8: wall
 	Template@111:
 		Id: 111
 		Images: d19.des
@@ -1339,7 +1339,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: ixian_concretewall
+			0: wall
 			2: Road
 			3: Clear
 	Template@134:
@@ -1719,14 +1719,14 @@ Templates:
 			4: Road
 			6: Clear
 			7: Rock
-			8: ixian_concretewall
+			8: wall
 			9: Bridge
-			10: ixian_concretewall
+			10: wall
 			11: Clear
 			12: River
 			13: River
 			14: Bridge
-			15: ixian_concretewall
+			15: wall
 			16: Rock
 			17: Rock
 			18: Rock
@@ -1749,8 +1749,8 @@ Templates:
 			6: Clear
 			7: Rock
 			8: Rock
-			9: ixian_concretewall
-			10: ixian_concretewall
+			9: wall
+			10: wall
 			11: Clear
 			12: River
 			13: River
@@ -1779,16 +1779,16 @@ Templates:
 			4: Rock
 			5: Clear
 			6: Clear
-			7: ixian_concretewall
+			7: wall
 			8: Bridge
-			9: ixian_concretewall
+			9: wall
 			10: River
 			11: River
 			12: Rock
 			13: River
-			14: ixian_concretewall
+			14: wall
 			15: Bridge
-			16: ixian_concretewall
+			16: wall
 			17: Rock
 			18: River
 			19: River
@@ -1808,8 +1808,8 @@ Templates:
 			4: Rock
 			5: Clear
 			6: Clear
-			7: ixian_concretewall
-			8: ixian_concretewall
+			7: wall
+			8: wall
 			9: River
 			10: River
 			11: River
@@ -1817,7 +1817,7 @@ Templates:
 			13: River
 			14: River
 			15: River
-			16: ixian_concretewall
+			16: wall
 			17: Rock
 			18: River
 			19: River

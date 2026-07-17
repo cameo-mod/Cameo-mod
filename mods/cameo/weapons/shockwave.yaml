@@ -1055,7 +1055,7 @@ SUSAHowitzer:
 		DamageTypes: TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Tank, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -1427,7 +1427,7 @@ SUSAUnstableEffectExplosion:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 2
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 		
 SUSABradleyMissile:
 	Inherits: USAHumveeMissile
@@ -1563,7 +1563,7 @@ SGLScarabSmokers:
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c256
 		Damage: 1000
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Tank, Structure, wall
 	Warhead@2Dam: SpreadDamage
 		Spread: 0c512
 		Damage: 500
@@ -1935,7 +1935,7 @@ SGLKellSniperHelicopter:
 		Damage: 105
 		Spread: 0c341
 		ValidTargets: Air, Helicopter
-		InvalidTargets: Infantry, Ship, Structure, ixian_concretewall, Husk, DriverKillImmune, LoadedVehicle, MCImmune
+		InvalidTargets: Infantry, Ship, Structure, wall, Husk, DriverKillImmune, LoadedVehicle, MCImmune
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Incendiary
 		Versus:
 			Wood: 110
@@ -2176,7 +2176,7 @@ SGLLatrun:
 		DamageTypes: TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Tank, Structure, wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -2466,7 +2466,7 @@ SCHEMPMig:
 		ValidTargets: Ground, Water
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
+		InvalidTargets: Vehicle, Structure, wall, Husk
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
@@ -2714,7 +2714,7 @@ SCHRADTank:
 	Warhead@1Dam: SpreadDamage
 		Spread: 384
 		Damage: 333
-		InvalidTargets: ixian_concretewall, Husk, RadiationImmune
+		InvalidTargets: wall, Husk, RadiationImmune
 		Versus:
 			None: 200
 			Light: 60
@@ -2745,7 +2745,7 @@ RADTankDropBarrels:
 		Delay: 40
 		Damage: 8000
 		ValidTargets: Ground
-		InvalidTargets: Structure, ixian_concretewall, Husk, RadiationImmune
+		InvalidTargets: Structure, wall, Husk, RadiationImmune
 		Versus:
 			None: 100
 			Light: 30

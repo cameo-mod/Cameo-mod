@@ -1,5 +1,5 @@
 keeperdirt:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 1
 	CustomSellValue:
@@ -24,7 +24,7 @@ keeperdirt:
 		TargetTypes: Drillable
 
 keeperwall:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -46,10 +46,10 @@ keeperwall:
 	WithWallSpriteBody:
 		Type: concrete
 	Targetable:
-		TargetTypes: Drillable, ixian_concretewall
+		TargetTypes: Drillable, wall
 
 keeperbedrock:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 1
 	CustomSellValue:
@@ -74,7 +74,7 @@ keeperbedrock:
 		TargetTypes: NoKillable
 
 keepergold:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 15
 	CustomSellValue:
@@ -102,7 +102,7 @@ keepergold:
 		Weapon: OreExplosion
 
 keepergems:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Valued:
 		Cost: 15
 	CustomSellValue:

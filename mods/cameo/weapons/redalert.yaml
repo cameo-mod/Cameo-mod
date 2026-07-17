@@ -1134,7 +1134,7 @@ DTMutate:
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, TerrorDrone
+		InvalidTargets: Vehicle, Structure, wall, Husk, TerrorDrone
 		AffectsParent: True
 		DamageTypes: QuestionMutate
 	Warhead@Effect: CreateEffect
@@ -1347,7 +1347,7 @@ RocketsG:
 	Range: 2560
 	Report: gun5.aud
 	ValidTargets: Ground, Infantry, Ant
-	InvalidTargets: Vehicle, Water, Structure, ixian_concretewall, Husk, Mine
+	InvalidTargets: Vehicle, Water, Structure, wall, Husk, Mine
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -1419,7 +1419,7 @@ ATMine:
 		ImpactSounds: mineblo1.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, ixian_concretewall
+		InvalidTargets: Structure, wall
 
 UnitExplodePlane:
 	Inherits: UnitExplode
@@ -1465,7 +1465,7 @@ CrateNuke:
 		ImpactActors: false
 	Warhead@6Smu_areanuke1: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 5
 	Warhead@TREEKILL: SpreadDamage
@@ -1562,7 +1562,7 @@ MiniNuke:
 		ResourceAmount: 3
 	Warhead@5Smu_areanukea: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 1
 		Delay: 3
 	Warhead@Effect2: CreateEffect
@@ -1600,7 +1600,7 @@ MiniNuke:
 		ResourceAmount: 6
 	Warhead@9Smu_areanukeb: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 2
 		Delay: 6
 	Warhead@8Dam_areanuke2: SpreadDamage
@@ -1633,7 +1633,7 @@ MiniNuke:
 		ResourceAmount: 9
 	Warhead@12Smu_areanukec: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 3
 		Delay: 9
 	Warhead@10Dam_areanuke3: SpreadDamage
@@ -1687,7 +1687,7 @@ MiniNuke:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, ixian_concretewall
+		InvalidTargets: Vehicle, Structure, wall
 		Size: 4
 		Delay: 12
 	Warhead@13Shake: ShakeScreen

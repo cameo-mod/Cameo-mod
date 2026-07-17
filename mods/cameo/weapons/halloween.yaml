@@ -19,7 +19,7 @@ Halloween_ClownBalloon:
 			None: 55
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: halloween_clown_ballonexplode.wav
 	Warhead@4EffAir: CreateEffect

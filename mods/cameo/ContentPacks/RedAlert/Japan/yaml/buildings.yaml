@@ -64,6 +64,7 @@ japan_japanesebarracks:
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
+		Description: Trains infantry units.
 	Tooltip:
 		Name: Japanese Barracks
 	Building:
@@ -98,6 +99,7 @@ japan_japaneseorerefinery:
 		Name: Japanese Ore Refinery
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
+		Description: Processes ore into credits.
 	-WithIdleOverlay@TOP:
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
@@ -111,6 +113,7 @@ japan_japanesewarfactory:
 		Name: Japanese War Factory
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
+		Description: Produces vehicles.
 	RenderSprites:
 		Image: jweap
 		PlayerPalette: player
@@ -128,6 +131,7 @@ japan_japaneseradararray:
 		Name: Japanese Radar Array
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
+		Description: Provides radar coverage of the battlefield.
 	RenderSprites:
 		Image: jdome
 		PlayerPalette: player_rgba
@@ -146,6 +150,7 @@ japan_japaneseairfield:
 		Name: Japanese Airfield
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
+		Description: Produces and repairs aircraft.
 	-AirstrikePower@spyplane:
 	-AirstrikePower@parabombs:
 	AirstrikePower@JapanSuperBomber:
@@ -222,6 +227,7 @@ japan_japanesetechcenter:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
+		Description: Unlocks advanced technology.
 	Tooltip:
 		Name: Japanese Tech Center
 	Building:
@@ -242,5 +248,6 @@ japan_japaneseservicedepot:
 		Name: Japanese Service Depot
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesewarfactory
+		Description: Repairs nearby vehicles.
 	RenderSprites:
 		Image: rafixj

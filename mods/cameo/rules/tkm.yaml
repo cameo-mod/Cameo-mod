@@ -406,6 +406,7 @@ tkm_orerefinery:
 	Buildable:
 		BuildPaletteOrder: 11
 		Prerequisites: ~tkm_constructionyard, tkm_powerplant
+		Description: Processes ore into credits.
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -492,6 +493,7 @@ tkm_barracks:
 	Buildable:
 		BuildPaletteOrder: 13
 		Prerequisites: ~tkm_constructionyard, tkm_powerplant
+		Description: Trains infantry units.
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -897,6 +899,7 @@ tkm_marine:
 		BuildPaletteOrder: 1
 		Prerequisites: ~tkm_barracks, ~tkm_upgrade_natoarsenalupgrade
 		Queue: Infantry, RAInfantry
+		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Tooltip:
 		Name: Marine
@@ -1105,6 +1108,7 @@ tkm_trooper:
 		BuildPaletteOrder: 1
 		Prerequisites: ~tkm_barracks, ~tkm_upgrade_titanarsenalupgrade
 		Queue: Infantry, RAInfantry
+		Description: Anti-armor infantry.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Tooltip:
 		Name: Trooper
@@ -1266,6 +1270,7 @@ tkm_engineer:
 	Buildable:
 		Prerequisites: ~tkm_barracks
 		Queue: Infantry, RAInfantry
+		Description: Captures and repairs structures.\n  Unarmed
 	Tooltip:
 		Name: Engineer
 	Voiced:

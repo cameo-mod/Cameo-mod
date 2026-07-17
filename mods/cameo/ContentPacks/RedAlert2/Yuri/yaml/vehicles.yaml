@@ -12,6 +12,7 @@ yuri_mobileconstructionvehicle:
 		Name: Yuri Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~yuri_warfactory, yuri_grinder
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: yuri_constructionyard
 		Offset: -1,-1

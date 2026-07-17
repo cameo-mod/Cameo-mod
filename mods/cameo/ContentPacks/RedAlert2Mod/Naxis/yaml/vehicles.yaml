@@ -262,6 +262,7 @@ naxis_naximobileconstructionvehicle:
 		Name: Naxi Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~naxis_warfactory, naxis_naxpetrolplant, naxis_academy
+		Description: Deploys into a Construction Yard.\n  Unarmed
 	Transforms:
 		IntoActor: naxis_constructionyard
 		Offset: -1,-1

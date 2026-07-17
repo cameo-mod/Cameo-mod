@@ -197,7 +197,7 @@ DTMutate:
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
-		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, TerrorDrone
+		InvalidTargets: Vehicle, Structure, wall, Husk, TerrorDrone
 		AffectsParent: True
 		DamageTypes: QuestionMutate
 	Warhead@Effect: CreateEffect

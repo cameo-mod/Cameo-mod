@@ -521,6 +521,7 @@ TSENGINEER:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Prerequisites: ~tsengineer
+		Description: Captures and repairs structures.\n  Unarmed
 	Valued:
 		Cost: 600
 	Mobile:
@@ -636,6 +637,7 @@ forgotten_mutant_wild:
 	Inherits: forgotten_mutant
 	Buildable:
 		Prerequisites: ~forgotten_mutant_wild
+		Description: Wild mutant creature. Attacks nearby enemies.
 	RenderSprites:
 		Image: forgotten_mutant
 	AttackWander:
@@ -715,7 +717,7 @@ RAPT:
 	Inherits@EXT: ^ExternalConditions ##########
 
 ts_nod_laserfence_segment:
-	Inherits: ^ixian_concretewall
+	Inherits: ^wall
 	Tooltip:
 		Name: Laser Fence
 	LineBuild:
