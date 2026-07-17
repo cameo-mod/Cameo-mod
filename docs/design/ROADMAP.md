@@ -457,6 +457,94 @@ willing to restructure the grid from the original image.
 
 **Awaiting maintainer decision before implementation.**
 
+### P2b — CABAL promotion grid tier-mismatch (DESIGN DECISION NEEDED)
+
+**Same problem as SM.** CABAL's 3×4 grid also has tier mismatches:
+
+| Row | Col 1 (Infantry) | Col 2 (Vehicles) | Col 3 (Aircraft) |
+|---|---|---|---|
+| 1 | Devout **T2** | Spider CNC4 **T1** | Cyborg Assassin **T2** |
+| 2 | Ascended **T2** | Heavy Reaper **T2** | Super Hunter Killer **T1** |
+| 3 | Beholder **T3** | Widow **T2** | Overkill Gunship **T1** |
+| 4 | Cyborg Commando V2 **T3** | Core Defender **T2** | Mothership **T1** |
+
+Col 3 (Aircraft) is inverted: Row 1 is T2, but Rows 2-4 are all T1 (helipad
+only). Capstones (Row 4) include T1 and T2 units alongside T3.
+
+**How FutureTech solved it:** All 12 FutureTech promotion-units are T3.
+Every unit requires high-tier buildings (`battlelab`, `hypercore`,
+`robotcontrolcenter`, `transmissioncenter`). The promotion grid only
+determines *which* T3 units you can see — the tech buildings gate the
+actual power. No tier mismatch because all units are the same tier.
+
+This works for FutureTech because it's a high-tech faction where everything
+is advanced. CABAL is more diverse — it has T1 helipad units, T2 cyborg
+factory units, and T3 techcenter units.
+
+**Solution options for CABAL:**
+
+**Option FT — Make all promotion-units T3 (FutureTech pattern)**
+- Add `cabal_techcenter` (or `cabal_core`) as a prerequisite to every
+  promotion-unit that doesn't already have it.
+- The promotion grid then just gates visibility — all units are T3 power.
+- **Pro:** Cleanest, proven pattern (FutureTech works). Zero grid
+  restructuring. Matches the CABAL pattern already in use.
+- **Con:** T1/T2 units (Overkill Gunship, Hunter Killer, Devout, etc.)
+  become T3 — delayed availability, possible balance shift. Mothership
+  and Overkill Gunship are currently early-game options; making them T3
+  changes CABAL's early game feel.
+- **Effort:** S (add prereq to ~6 units, boot test).
+
+**Option SR — Sort grid rows by tier (restructure)**
+- Row 1 → T1 units: Spider CNC4, (new T1 vehicle), Hunter Killer
+- Row 2 → T2 units: Devout, Heavy Reaper, Cyborg Assassin
+- Row 3 → T3 units: Beholder, Widow, Overkill Gunship (rebalance to T3)
+- Row 4 → Capstones: Cyborg Commando V2, Core Defender, Mothership
+- **Pro:** Clean tier ladder.
+- **Con:** Requires rebalancing several units (Overkill Gunship T1→T3,
+  Mothership T1→T3). Need a T1 vehicle for Col 2 Row 1 (or move an
+  existing unit down). Significant balance pass.
+- **Effort:** L (rebalance + grid restructure + test).
+
+**Option HY — Hybrid: tier-sort columns + CABAL gating**
+- Sort each column so tiers go T1→T2→T3→capstone within the column.
+- Keep the CABAL pattern: promotion gates visibility, tech gates power.
+- Col 1: Devout (T2) → Ascended (T2) → Beholder (T3) → Cyborg Commando V2 (T3)
+- Col 2: Spider CNC4 (T1) → Heavy Reaper (T2) → Widow (T2) → Core Defender (T2)
+- Col 3: Hunter Killer (T1) → Overkill Gunship (T1) → Cyborg Assassin (T2) → Mothership (T1)
+- **Pro:** Best tier progression within columns. Minimal unit changes.
+- **Con:** Col 3 is still mostly T1 — aircraft are inherently low-tier
+  for CABAL. Would need to rebalance aircraft to higher tiers for a
+  clean ladder, or accept that CABAL aircraft are early-game.
+- **Effort:** M (rearrange grid + minor rebalance + test).
+
+**Option KP — Keep as-is, promotion gates option (accept the mismatch)**
+- CABAL already uses the "promotion gates visibility, tech gates power"
+  pattern. The tier mismatch is acceptable because:
+  - Row 1 unlocks options you can build once you have the right building.
+  - Row 4 capstones are powerful regardless of tier (Mothership is T1
+    but requires `cabal_core` which is a late-game building).
+- **Pro:** Zero changes needed. Already works.
+- **Con:** Tier progression doesn't feel intuitive. A new player might
+  expect Row 4 to be "bigger" than Row 1 but it's not always.
+- **Effort:** S (zero).
+
+**Recommendation:** Option FT (FutureTech pattern) is the cleanest if
+we're willing to make all CABAL promotion-units require `cabal_techcenter`
+or `cabal_core`. This is the proven solution. However, it changes CABAL's
+early game by delaying T1/T2 promotion-units to T3. Option KP (keep
+as-is) is the lowest-risk if the maintainer is comfortable with the
+existing CABAL pattern where `cabal_core` already gates the capstones.
+
+**Note:** `cabal_core` (CABAL Core building) is already a high-tier
+prerequisite for Core Defender, Widow, and Mothership. It's effectively
+CABAL's T3.5 gate. If we standardize all promotion-units to require
+either `cabal_techcenter` or `cabal_core`, we get the FutureTech pattern
+without changing the feel of individual units — just their availability
+window.
+
+**Awaiting maintainer decision before implementation.**
+
 ---
 
 ## CABAL — recently completed (this push)

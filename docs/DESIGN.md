@@ -1682,7 +1682,10 @@ the first to receive the full template because it is the focus faction.
   `docs/design/ROADMAP.md` under "P2 — SM promotion grid tier-mismatch".
   Recommended: Option C (CABAL pattern — promotion gates visibility, tech
   gates power) or Option D (hybrid — soft tier sorting + CABAL gating).
-  Awaiting maintainer decision.
+  **CABAL has the same problem** — see "P2b — CABAL promotion grid
+  tier-mismatch" in ROADMAP. FutureTech solved it by making all
+  promotion-units T3 (every unit requires high-tier buildings). Awaiting
+  maintainer decision on which pattern to apply to both SM and CABAL.
 
 ### 18.12 Lore research — Iron Sky, Nazi Moon, and conspiracy-parody sources
 
