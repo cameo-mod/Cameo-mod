@@ -1,6 +1,6 @@
-﻿# audit_basebuilder_crates ΓÇö faction MCV crate coverage
+# audit_basebuilder_crates — faction MCV crate coverage
 
-Real factions: **28** ΓÇö covered by crate: **28** ΓÇö missing: **0**
+Real factions: **28** — covered by crate: **28** — missing: **0**
 
 
 ## Covered factions

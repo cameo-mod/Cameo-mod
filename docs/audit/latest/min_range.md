@@ -1,4 +1,4 @@
-﻿# Minimum range audit
+# Minimum range audit
 
 
 ## Weapons with MinRange != round(Range/5) to nearest step of 5

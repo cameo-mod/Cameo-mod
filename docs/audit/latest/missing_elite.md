@@ -1,4 +1,4 @@
-﻿# E1: Missing elite weapons audit (RA2 system only)
+# E1: Missing elite weapons audit (RA2 system only)
 
 Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **189**
 

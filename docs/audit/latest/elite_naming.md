@@ -1,4 +1,4 @@
-﻿# Elite weapon naming audit (E3 ù rank-elite only)
+# Elite weapon naming audit (E3 — rank-elite only)
 
 Non-standard rank-elite weapon names: **234**
 
@@ -128,12 +128,12 @@ Non-standard rank-elite weapon names: **234**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 220 | schwarzermond_spacezeppelin | Armament@eliteAA_AMP | Lunar_AmplifiedBeetleLaserAA |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 423 | schwarzermond_haunebuii | Armament@ELITE | NaxHaenebuQuadCannonE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 511 | schwarzermond_haunebuiii | Armament@ELITE | NaxHaenebuQuadCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 35 | schwarzermond_bermensch | Armament@ELITE | ▄bermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 43 | schwarzermond_bermensch | Armament@GARRISONEDELITE | ▄bermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 51 | schwarzermond_bermensch | Armament@ELITE_UP | Lunar_YellowUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 59 | schwarzermond_bermensch | Armament@GARRISONEDELITE_UP | Lunar_YellowUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 67 | schwarzermond_bermensch | Armament@ELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 75 | schwarzermond_bermensch | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 35 | schwarzermond_ubermensch | Armament@ELITE | UbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 43 | schwarzermond_ubermensch | Armament@GARRISONEDELITE | UbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 51 | schwarzermond_ubermensch | Armament@ELITE_UP | Lunar_YellowUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 59 | schwarzermond_ubermensch | Armament@GARRISONEDELITE_UP | Lunar_YellowUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 67 | schwarzermond_ubermensch | Armament@ELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 75 | schwarzermond_ubermensch | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 119 | schwarzermond_parzival | Armament@ELITE | BlackHoleMakerE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 129 | schwarzermond_parzival | Armament@GARRISONEDELITE | BlackHoleMakerE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 185 | schwarzermond_noidmgarmor | Armament@ELITE | NaxiMP40LaserE |

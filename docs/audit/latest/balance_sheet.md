@@ -1,4 +1,4 @@
-﻿# Balance sheet cross-reference (DESIGN.md ┬º12)
+# Balance sheet cross-reference (DESIGN.md §12)
 
 
 ## Infantry: 99 matched, 42 mismatched, 61 unmatched, 3 ambiguous
@@ -24,7 +24,7 @@
 | Tank Buster | japan_tankbuster | Damage 24000 vs game 25100 |
 | Shock Trooper | ra1_soviets_shocktrooper | Damage 20000 vs game 31000 |
 | Zapper | ra1_soviets_zapper | Damage 30000 vs game 64000; Reload 30 vs game 32 |
-| ├£bermensch | schwarzermond_bermensch | Damage 16000 vs game 100350 |
+| Übermensch | schwarzermond_ubermensch | Damage 16000 vs game 100350 |
 | Noid MG Armor | schwarzermond_noidmgarmor | Damage 50000 vs game 191250 |
 | Dwarven Rifleman | wc2_humans_dwarvenrifleman | Damage 24000 vs game 25100; Reload 64 vs game 60 |
 | Bio Trooper | yuri_biotrooper | Damage 24000 vs game 73800 |
@@ -50,7 +50,7 @@
 
 unmatched: Minigunner, Minigunner (AP Bullets), Minigunner (Laser), Dune Light  Infantry, Naxi Alien, Reaper (Pistols), Reaper (Grenade), G.I. (deployed), Asian Militia (Grenade), Syndicate Militia (AK47), Syndicate Militia (Molotov), Molotov Conscript, Rocket Soldier TD, Rocket Soldier RA, Dragunov, Dune Rocket Trooper, AA Trooper (AG), AA Trooper (AA), Terran Marine, Guardian G.I. (MG), Guardian G.I. (Rocket), Flak Trooper (Ground), Flak Trooper (AA), Javelin Soldier (Rocket), Javelin Soldier (Deployed), Steel Clone Trooper, XCOM Heavy (Chaingun), XCOM Heavy (Rocket), Dune Shock Infantry, Dune Storm Infantry ...
 
-ambiguous: Rifle Infantry -> ra1_soviets_rifleinfantry, rae1 | High Elven Archer -> wc2_humans_highelvenarcher, wc2_humans_upgrade_highelvenarcher | Troll Headhunter -> wc2_orcs_trollheadhunter, wc2_orcs_upgrade_trollheadhunter
+ambiguous: Rifle Infantry -> ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry | High Elven Archer -> wc2_humans_highelvenarcher, wc2_humans_upgrade_highelvenarcher | Troll Headhunter -> wc2_orcs_trollheadhunter, wc2_orcs_upgrade_trollheadhunter
 
 
 ## Tanks: 56 matched, 33 mismatched, 48 unmatched, 4 ambiguous

@@ -1,11 +1,11 @@
-﻿# Weapon suffix audit (DESIGN.md º1)
+# Weapon suffix audit (DESIGN.md §1)
 
 X1 elite weapons not ending _elite: **234**
-X2 EMP weapons not ending _EMP: **157**
-X3 AA weapons not ending _AA: **52**
+X2 EMP weapons not ending _EMP: **156**
+X3 AA weapons not ending _AA: **50**
 X4 deprecated E suffix (informational): **123**
 
-## X1 ù Elite weapons not following _elite convention
+## X1 — Elite weapons not following _elite convention
 | File | Line | Actor | Trait | Weapon |
 |---|---|---|---|---|
 | ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 274 | ra2_allies_guardiangi | Armament@ELITE | GuardianGIMGE |
@@ -170,12 +170,12 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 220 | schwarzermond_spacezeppelin | Armament@eliteAA_AMP | Lunar_AmplifiedBeetleLaserAA |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 423 | schwarzermond_haunebuii | Armament@ELITE | NaxHaenebuQuadCannonE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 511 | schwarzermond_haunebuiii | Armament@ELITE | NaxHaenebuQuadCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 35 | schwarzermond_bermensch | Armament@ELITE | ▄bermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 43 | schwarzermond_bermensch | Armament@GARRISONEDELITE | ▄bermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 51 | schwarzermond_bermensch | Armament@ELITE_UP | Lunar_YellowUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 59 | schwarzermond_bermensch | Armament@GARRISONEDELITE_UP | Lunar_YellowUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 67 | schwarzermond_bermensch | Armament@ELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 75 | schwarzermond_bermensch | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 35 | schwarzermond_ubermensch | Armament@ELITE | UbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 43 | schwarzermond_ubermensch | Armament@GARRISONEDELITE | UbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 51 | schwarzermond_ubermensch | Armament@ELITE_UP | Lunar_YellowUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 59 | schwarzermond_ubermensch | Armament@GARRISONEDELITE_UP | Lunar_YellowUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 67 | schwarzermond_ubermensch | Armament@ELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 75 | schwarzermond_ubermensch | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedUbermenschLaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 119 | schwarzermond_parzival | Armament@ELITE | BlackHoleMakerE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 129 | schwarzermond_parzival | Armament@GARRISONEDELITE | BlackHoleMakerE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 185 | schwarzermond_noidmgarmor | Armament@ELITE | NaxiMP40LaserE |
@@ -243,7 +243,7 @@ X4 deprecated E suffix (informational): **123**
 | rules/redalert2.yaml | 2656 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
 | rules/valentine.yaml | 1917 | cute_kirov | Armament@PRIMARYELITE | CuteKirovBombE |
 
-## X2 ù EMP weapons not following _EMP convention
+## X2 — EMP weapons not following _EMP convention
 | File | Line | Weapon |
 |---|---|---|
 | ContentPacks/D2k/Ixian/yaml/aircraft.yaml | 401 | ixian_empbomber |
@@ -353,7 +353,6 @@ X4 deprecated E suffix (informational): **123**
 | sequences/lostunits.yaml | 734 | bhreddragonemp |
 | sequences/outpost2.yaml | 712 | eden_cargotruck_empty |
 | sequences/outpost2.yaml | 1643 | plymouth_cargotruck_empty |
-| sequences/redalert.yaml | 379 | raharvempty |
 | sequences/shockwave.yaml | 3656 | schempmig |
 | sequences/starcraft.yaml | 8 | scxelnagatemple |
 | sequences/structures.yaml | 322 | td_nod_templeofnod |
@@ -404,7 +403,7 @@ X4 deprecated E suffix (informational): **123**
 | weapons/weapons.yaml | 3661 | UnitExplodeHarvEmpty |
 | weapons/weapons.yaml | 4736 | TSEMPulseCannon |
 
-## X3 ù AA-only weapons not following _AA convention
+## X3 — AA-only weapons not following _AA convention
 | File | Line | Weapon | ValidTargets |
 |---|---|---|---|
 | ContentPacks/RedAlert/Allies/yaml/weapons.yaml | 49 | zsu_23 | Air |
@@ -446,8 +445,6 @@ X4 deprecated E suffix (informational): **123**
 | weapons/heroes.yaml | 404 | angelarrow | Air |
 | weapons/missiles.yaml | 48 | Dragon | Air |
 | weapons/monsters.yaml | 72 | ZBruteRock | Air |
-| weapons/redalert.yaml | 369 | ReimuOrbLauncher | Air |
-| weapons/redalert.yaml | 441 | MagicOrbHailstormSpawner | Air |
 | weapons/redalert2.yaml | 645 | RA2TRIPODLAZER | Air |
 | weapons/redalert2.yaml | 2614 | AccurateCloudSpawner | Air |
 | weapons/redalert2mod.yaml | 963 | NaxiMeteorSpawner | Air |
@@ -460,7 +457,7 @@ X4 deprecated E suffix (informational): **123**
 | weapons/valentine.yaml | 247 | planBFire | Air |
 | weapons/win98.yaml | 59 | paintbrushfire | Air |
 
-## X4 ù Weapons with deprecated E suffix (informational)
+## X4 — Weapons with deprecated E suffix (informational)
 | File | Line | Weapon |
 |---|---|---|
 | ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 1277 | SCUDNUKE |

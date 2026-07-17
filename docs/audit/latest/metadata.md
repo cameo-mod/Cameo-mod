@@ -1,9 +1,9 @@
-﻿# audit_metadata ΓÇö tooltip/metadata rot (B7)
+# audit_metadata — tooltip/metadata rot (B7)
 
 Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
 
 
-## M1 ΓÇö same tooltip name on multiple buildables of one faction
+## M1 — same tooltip name on multiple buildables of one faction
 
 | faction | tooltip name | actors |
 |---|---|---|
@@ -13,7 +13,7 @@ Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
 | naxis | horten bomber strike | naxis_promotion_hortenbomberstrike, naxis_promotion_hortenbomberstrike_2 |
 | ordos | concrete slab | concreteabuilding, concreteadefense |
 | ordos | large concrete slab | concretebbuilding, concretebdefense |
-| ra1_soviets | rifle infantry | ra1_soviets_rifleinfantry, rae1 |
+| ra1_soviets | rifle infantry | ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry |
 | ra2_allies | actor_fv.name | ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2_allies | battle fortress | ra2_allies_battlefortress, ra2_allies_battlefortress_2, ra2_allies_battlefortress_3 |
 | schwarzermond | haunebu iii | schwarzermond_haunebuiii, schwarzermond_promotion_haunebuiii |
@@ -36,10 +36,10 @@ Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
 | zerg | sunken colony | zerg_sunkencolony, zerg_sunkencolony_2 |
 
 
-## M2 ΓÇö buildable actors without a Tooltip name
+## M2 — buildable actors without a Tooltip name
 
 _none found_
 
 
-_Note: unit-class taxonomy checks (docs/design/unit_classes.yaml) activate once that registry exists ΓÇö see MASTER_REPORT ┬º9.4._
+_Note: unit-class taxonomy checks (docs/design/unit_classes.yaml) activate once that registry exists — see MASTER_REPORT §9.4._
 

@@ -1,9 +1,9 @@
-﻿# audit_outliers ΓÇö systemic numeric drift (B9)
+# audit_outliers — systemic numeric drift (B9)
 
-(trait,field) distributions sampled: **18** ΓÇö robust outliers (top 25 per field): **174**, selection bounds > 5120: **0**
+(trait,field) distributions sampled: **18** — robust outliers (top 25 per field): **174**, selection bounds > 5120: **0**
 
 
-## Hard screen ΓÇö Selectable bounds above the 5x5-cell maximum
+## Hard screen — Selectable bounds above the 5x5-cell maximum
 
 _none found_
 
@@ -13,7 +13,7 @@ _none found_
 | trait.field | actor | value | median | robust z |
 |---|---|---|---|---|
 | Aircraft.CruiseAltitude | INVISIBLEPLANE | 9000 | 2160 | 11.5 |
-| Aircraft.TurnSpeed | ROCKETANGEL.husk | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | japan_rocketangel_husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | ra2rock.husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | yrlunr.husk | 160 | 20 | 18.9 |
 | Aircraft.TurnSpeed | litt_husk.nax | 160 | 20 | 18.9 |
@@ -108,7 +108,7 @@ _none found_
 | Power.Amount | terran_phobos | -500 | -35 | 12.1 |
 | Power.Amount | yuri_bioreactor | 400 | -35 | 11.3 |
 | Power.Amount | ts_nod_advancedpowerplant | 360 | -35 | 10.2 |
-| Power.Amount | APWR | 300 | -35 | 8.7 |
+| Power.Amount | ra1_advancedpowerplant | 300 | -35 | 8.7 |
 | Power.Amount | ra2cpower | 300 | -35 | 8.7 |
 | Power.Amount | steelconsortium_consortiumpowerplant | 300 | -35 | 8.7 |
 | Power.Amount | naxis_naxpetrolplant | 300 | -35 | 8.7 |
@@ -188,5 +188,5 @@ _none found_
 | Valued.Cost | wc2_humans_humangoldmine_2 | 15000 | 1600 | 9.0 |
 
 
-_Outliers are leads, not verdicts: epic units are legitimately extreme. Scan for CLUSTERS of similar z-scores ΓÇö those are unit systems using a stale scale convention._
+_Outliers are leads, not verdicts: epic units are legitimately extreme. Scan for CLUSTERS of similar z-scores — those are unit systems using a stale scale convention._
 

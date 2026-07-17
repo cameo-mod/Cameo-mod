@@ -1,14 +1,14 @@
-﻿# audit_orphans ΓÇö dead content (B10)
+# audit_orphans — dead content (B10)
 
-Live weapons: **2365** ΓÇö orphans: **350**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
+Live weapons: **2365** — orphans: **350**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
 
 
-## O2 ΓÇö dangling weapon references (crash-on-use class)
+## O2 — dangling weapon references (crash-on-use class)
 
 _none found_
 
 
-## O1 ΓÇö orphan weapons (no live actor/weapon/map/lua reference)
+## O1 — orphan weapons (no live actor/weapon/map/lua reference)
 
 | weapon | file |
 |---|---|
@@ -364,7 +364,7 @@ _none found_
 | wc2tornadoTest | mods/cameo/weapons/warcraft2.yaml |
 
 
-## O3a ΓÇö conditions granted but never consumed (sample)
+## O3a — conditions granted but never consumed (sample)
 
 !aircraft-turning, armory-rank, chaosgas && !untargetable, defensebot, disable_movement, emptesla, harkonnenexplode, hnavyshield_upg, littlebuilderenable, ordos_upgrade_lightfactory, propaganda, ra2_soviets_doctrine_conscription, shade-ready, up_tsunami.asian, yuri_doctrine_psioniclegion
 

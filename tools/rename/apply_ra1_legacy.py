@@ -43,26 +43,45 @@ ID = r"[A-Za-z0-9_.]"
 
 PATH_MARKERS = ("|", "bits/", "SupportDir", "Content/", "EngineDir")
 
+# yaml also carries EXPLICIT fluent references (Tooltip.Name: actor_x.name,
+# Buildable.Description: actor_x.description) whose `actor_` prefix joins the
+# id with an ID char, so the whole-identifier pass never matches them.
+# Lesson from the 2026-07 RA1 rename: 13 refs broke when the ftl keys were
+# renamed but these yaml refs were not. Rename the stems the same way sub_ftl
+# renames the keys.
+# All passes use ONE combined alternation regex (52 sequential re.subs per
+# line was too slow over the whole mod). Alternatives stay longest-first so
+# the longest id wins, matching the old per-pair behaviour.
+
+ID_MAP = {old.lower(): new for old, new in PAIRS}
+STEM_MAP = {old.lower().replace(".", "_"): new for old, new in PAIRS}
+
+RX_IDS = re.compile(
+    rf"(?<!{ID})(?:{'|'.join(re.escape(o) for o, _ in PAIRS)})(?!{ID})", re.I)
+# stems contain no dots (dots -> underscores), so a FOLLOWING dot is the
+# `.description`/`.name` attribute access and must be allowed to follow the
+# match — `(?!ID)` would reject exactly the refs this pass exists to fix.
+RX_STEMS = re.compile(
+    rf"(?<!{ID})actor_(?:{'|'.join(sorted((re.escape(s) for s in STEM_MAP), key=len, reverse=True))})(?![A-Za-z0-9_])",
+    re.I)
+RX_LUA = re.compile(
+    rf"\"(?:{'|'.join(re.escape(o) for o, _ in PAIRS)})\"", re.I)
+
 def sub_yaml(text: str) -> str:
     # line-scoped: never touch package/installer path lines (bits/ss lesson)
     out = []
     for line in text.split("\n"):
         if not any(m in line for m in PATH_MARKERS):
-            for old, new in PAIRS:
-                line = re.sub(rf"(?<!{ID}){re.escape(old)}(?!{ID})", new, line, flags=re.I)
+            line = RX_IDS.sub(lambda m: ID_MAP[m.group(0).lower()], line)
+            line = RX_STEMS.sub(lambda m: "actor_" + STEM_MAP[m.group(0)[6:].lower()], line)
         out.append(line)
     return "\n".join(out)
 
 def sub_ftl(text: str) -> str:
-    for old, new in PAIRS:
-        stem = re.escape(old.lower().replace(".", "_"))
-        text = re.sub(rf"(?<!{ID})actor_{stem}(?!{ID})", f"actor_{new}", text)
-    return text
+    return RX_STEMS.sub(lambda m: "actor_" + STEM_MAP[m.group(0)[6:].lower()], text)
 
 def sub_lua(text: str) -> str:
-    for old, new in PAIRS:
-        text = re.sub(rf'"{re.escape(old)}"', f'"{new}"', text, flags=re.I)
-    return text
+    return RX_LUA.sub(lambda m: f"\"{ID_MAP[m.group(0)[1:-1].lower()]}\"", text)
 
 def main() -> int:
     counts = {"yaml": 0, "ftl": 0, "lua": 0, "map.yaml": 0, "oramap": 0}

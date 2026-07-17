@@ -1,4 +1,4 @@
-﻿# Elite weapon gating audit (E2)
+# Elite weapon gating audit (E2)
 
 Armament@*ELITE* blocks without RequiresCondition: rank-elite: **16**
 

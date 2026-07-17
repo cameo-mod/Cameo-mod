@@ -1,4 +1,4 @@
-﻿# gen_damage_matrix ΓÇö armor classes & Versus aggregates (┬º8.1)
+# gen_damage_matrix — armor classes & Versus aggregates (§8.1)
 
 Armor types in live actors: **19**, warheads with Versus tables: **12535**
 
@@ -36,5 +36,5 @@ Bomber, Concrete, Fighter, Flak, HAZMAT, Heavy, Helicopter, Heroic, Light, Mediu
 | wall | 27 | 51% | 5 | 100 |
 
 
-_Armor types with 0 warhead references are either default-100% targets everywhere or orphaned armor classes ΓÇö cross-check with audit_orphans. Full per-warhead dump: run with --full._
+_Armor types with 0 warhead references are either default-100% targets everywhere or orphaned armor classes — cross-check with audit_orphans. Full per-warhead dump: run with --full._
 

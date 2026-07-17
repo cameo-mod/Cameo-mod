@@ -347,6 +347,116 @@ factions, everything through the balance workbook. Faction reference:
   (warhead values, weapon targeting, or unit stats). Effort: M. **Do NOT
   auto-apply — requires user approval per balance policy.**
 
+### P2 — SM promotion grid tier-mismatch (DESIGN DECISION NEEDED)
+
+**Problem:** The SM 3×4 promotion grid ranks don't ladder by tech tier.
+Current mapping (promotion row → unit tier):
+
+| Row | Col 1 (Inf/Tech) | Col 2 (Vehicles) | Col 3 (Air/Support) |
+|---|---|---|---|
+| 1 (rank1) | Übermensch **T3** | Noid MG **T2** | Piercer **T3** |
+| 2 (rank1+prev) | Laser Tank **T1** | Lunar Tiger **T2** | Haunebu III **T3** |
+| 3 (rank1+prev) | Crystal Tank **T3** | Korruptes Biest **T3** | MARS **T2** |
+| 4 (rank1+prev) | Parzival **T3** (capstone) | Dalek **T3** (capstone) | Die Glocke **T3** (capstone) |
+
+Row 1 unlocks T3 units (Übermensch, Piercer) while Row 2 unlocks a T1 unit
+(Laser Tank). This is inverted — early promotions should unlock early-tier
+units, not late-tier ones.
+
+**MARS clarification (from maintainer):** MARS is already AA-capable (ground
++ air, long range). Laser Beetle and Laser Tank are also AA. SM does NOT lose
+all mobile AA when MARS replaces Jagerline. The "no mobile AA" concern is
+invalid — MARS replaces Jagerline as a direct upgrade.
+
+**Base roster after promotion extraction (12 units move to promotions):**
+- T1 base: Lunar Soldier, Lunar Rocket, Engineering Armor, Laser Beetle,
+  Lunar Panzer, Sturm Cannon, Laser Tower
+- T2 base: Jagerline, Lunar Grille, Noid MG (promotion-gated), Lunar Tiger
+  (promotion-gated), MARS (promotion-gated), Space Zeppelin, Noid Harvester
+- T3 base: Neo Jagdpanzer, Gravity Core Tank, Korruptes Biest (promotion-gated),
+  Crystal Tank (promotion-gated), Übermensch (promotion-gated), Piercer
+  (promotion-gated), Haunebu III (promotion-gated), Dalek (promotion-gated),
+  Parzival (promotion-gated), Die Glocke (promotion-gated), Black Bomb
+
+**Solution options (maintainer to pick one):**
+
+**Option A — Restructure grid rows to match tiers (cleanest, most work)**
+- Row 1 → T1 units: Laser Tank, Lunar Panzer→Lunar Tiger, Haunebu II→Haunebu III
+  (move the "Replaces" cells to row 1 since they're T1→T1/T2 upgrades)
+- Row 2 → T2 units: Noid MG, MARS (replaces Jagerline), Crystal Tank
+  (move Crystal Tank down from T3 to T2 by removing techcenter prereq)
+- Row 3 → T3 units: Übermensch, Korruptes Biest, Piercer
+- Row 4 → Capstones: Parzival, Dalek, Die Glocke (all T3, buildlimit-1)
+- **Pro:** Clean tier ladder, intuitive for players.
+- **Con:** Requires rebalancing Crystal Tank from T3→T2; moves the "Replaces"
+  cells to row 1 which changes the visual grid shape from the maintainer's
+  original image. Some units may need stat adjustments.
+- **Effort:** M (one session — rearrange prerequisites + test).
+
+**Option B — Move Übermensch to base T3, fill row 1 with T1/T2 units**
+- Übermensch becomes a regular T3 buildable (no promotion needed)
+- Row 1 Col 1 gets a new T1-T2 unit (e.g. move Lunar Grille or create a new
+  scout/infantry unit like "Lunar Sturmtruppen" — a T2 shock infantry)
+- Row 2 Col 1 gets Laser Tank (T1, fits as a row-2 unlock)
+- Other columns shift down one row
+- **Pro:** Übermensch is a flagship unit that deserves to be always visible;
+  fills the T1/T2 gap.
+- **Con:** Need a new unit for Row 1 Col 1 (art + stats + sequences); or
+  repurpose an existing T2 unit. Übermensch loses its "promotion unlock"
+  prestige feel.
+- **Effort:** L (new unit art + balance pass).
+
+**Option C — CABAL pattern: promotion gates option, tech gates power (no grid
+restructure needed)**
+- Keep the grid as-is. Promotions only gate VISIBILITY (can you see/buy the
+  unit in the promotions tab). The unit's own Buildable.Prerequisites still
+  require the tech building.
+- So rank 1 unlocking Übermensch is fine: you buy the promotion early, but
+  can't actually BUILD Übermensch until you have the tech center.
+- Early ranks = buying long-term options. Late ranks = unlocking capstones.
+- **Pro:** Zero unit changes needed. Works with the existing grid. Matches
+  how CABAL promotions already work. Player buys options early, power stays
+  tech-gated.
+- **Con:** Player may buy a promotion and be confused they can't build the
+  unit yet (needs clear UI feedback). Rank progression doesn't feel
+  power-progressive — rank 1 and rank 3 both unlock T3 units.
+- **Effort:** S (just verify prerequisites are correct, add tooltip hints).
+
+**Option D — Hybrid: soft tier matching + CABAL gating**
+- Keep CABAL pattern (Option C) as the base mechanic.
+- Additionally, sort rows so that lower-tier unlocks are in earlier rows
+  where possible:
+  - Row 1: Laser Tank (T1), Noid MG (T2), MARS (T2)
+  - Row 2: Crystal Tank (T3→T2 rebalance), Lunar Tiger (T2), Haunebu III (T3)
+  - Row 3: Übermensch (T3), Korruptes Biest (T3), Piercer (T3)
+  - Row 4: Parzival, Dalek, Die Glocke (capstones)
+- **Pro:** Best of both worlds — tier progression AND option-gating. Player
+  feels progression but power stays tech-gated.
+- **Con:** Requires moving Crystal Tank to T2 (minor rebalance) and
+  rearranging the grid from the maintainer's original image.
+- **Effort:** M (rearrange + minor rebalance + test).
+
+**Option E — Add new early-game units (expand roster)**
+- Create 2-3 new T1/T2 SM units to fill row 1-2 slots:
+  - "Lunar Sturmtruppen" (T2 shock infantry, promotion-gated)
+  - "Schwarzer Pionier" (T1 combat engineer, promotion-gated)
+  - "Mondjäger" (T2 light AA walker, promotion-gated)
+- Move Übermensch and Piercer to row 3.
+- **Pro:** Expands SM roster, fills the T1/T2 gap, preserves the original
+  grid shape.
+- **Con:** Requires new art (sprites/icons), new weapon definitions, balance
+  pass. Most work.
+- **Effort:** L (multi-session: art + code + balance).
+
+**Recommendation:** Option C (CABAL pattern) is the lowest-risk, fastest
+implementable solution. It's already how CABAL works and requires zero unit
+changes. If the maintainer wants tier progression AND the CABAL pattern,
+Option D is the best compromise — it just requires rearranging grid rows and
+a minor Crystal Tank rebalance. Option A is cleanest if the maintainer is
+willing to restructure the grid from the original image.
+
+**Awaiting maintainer decision before implementation.**
+
 ---
 
 ## CABAL — recently completed (this push)

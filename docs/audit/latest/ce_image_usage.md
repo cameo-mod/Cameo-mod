@@ -1,4 +1,4 @@
-﻿tsdig: ALSO-USED (3)
+tsdig: ALSO-USED (3)
   mods\cameo\ContentPacks\TiberianSun\Nod\yaml\templates.yaml:14: 		SubterraneanTransitionImage: tsdig
   mods\cameo\sequences\tiberiansun.yaml:1226: 		Filename: tsdig.shp
   mods\cameo\sequences\tkm.yaml:112: 		Filename: tsdig.shp

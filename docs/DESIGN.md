@@ -1669,9 +1669,20 @@ the first to receive the full template because it is the focus faction.
   name `MARS` (uppercase acronym). The unit uses the `NaxisBradleyTarget`
   weapon, which is a legacy internal name that does not need to change unless
   we want to fully purge the old label.
+- **MARS is AA-capable** (ground + air, long range). Laser Beetle and Laser
+  Tank are also AA. SM does NOT lose all mobile AA when MARS replaces Jagerline
+  — MARS is a direct upgrade with AA capability. The "no mobile AA" concern is
+  invalid.
 - Moon Dairy Farm passive income and Cryptofascism are independent: the dairy
   farm is a building income source, Cryptofascism only generates cash from living
   units. They can stack without special capping.
+- **Promotion grid tier-mismatch (DESIGN DECISION NEEDED):** The current 3×4
+  grid has row 1 unlocking T3 units (Übermensch, Piercer) while row 2 unlocks
+  a T1 unit (Laser Tank). Five solution options are documented in
+  `docs/design/ROADMAP.md` under "P2 — SM promotion grid tier-mismatch".
+  Recommended: Option C (CABAL pattern — promotion gates visibility, tech
+  gates power) or Option D (hybrid — soft tier sorting + CABAL gating).
+  Awaiting maintainer decision.
 
 ### 18.12 Lore research — Iron Sky, Nazi Moon, and conspiracy-parody sources
 

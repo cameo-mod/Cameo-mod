@@ -1,4 +1,4 @@
-﻿=== 51 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
+=== 51 VIOLATIONS + 0 REDUNDANT (Image: explosion) ===
 
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:811  Hakureiring2  Image: hakurei_giphy
 [VIOLATION] mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:912  ReimuYinYangDrone  Image: hakurei_giphy

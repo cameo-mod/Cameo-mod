@@ -1,9 +1,9 @@
-﻿# Weapon uniqueness (DESIGN.md ┬º10 ΓÇö faction identity)
+# Weapon uniqueness (DESIGN.md §10 — faction identity)
 
 damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36, W3 carrier-only 101
 
 
-## W1 ΓÇö same faction, distinct actors, identical weapon (39)
+## W1 — same faction, distinct actors, identical weapon (39)
 
 | weapon | faction(s) | actors |
 |---|---|---|
@@ -21,7 +21,7 @@ damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36
 | laboratory_bioball | ordos | ordos_banshee, ordos_laboratorycrawler |
 | lmg | ixian, ordos | ixian_lightinfantry, light_inf, ordos_lightinfantry |
 | lmg_upgrade | ixian | ixian_lightinfantry, light_inf |
-| m1carbine | ra1_soviets | ra1_soviets_rifleinfantry, rae1 |
+| m1carbine | ra1_soviets | ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry |
 | medicheal | terran | terran_medic, terran_medivac |
 | naxgrillearty | naxis | naxis_grille, naxis_naxibunker, naxis_shoekarn |
 | naxiantitankcannon | naxis | naxis_antitankcannon, naxis_oldtank |
@@ -34,7 +34,7 @@ damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36
 | naxplanegune | naxis | naxis_bf109, naxis_me262 |
 | naxquadcannonaae | naxis | naxis_naxibunker, naxis_ratte |
 | pdlaserbike | td_nod | td_nod_chemicalattackbike, td_nod_reconbike |
-| rocketsra | ra1_soviets | ra1_soviets_rocketsoldier, rae3 |
+| rocketsra | ra1_soviets | ra1_allies_alliedrocketsoldier, ra1_soviets_rocketsoldier |
 | spore | zerg | zerg_creepcolony, zerg_creepcolony_2, zerg_sporecolony, zerg_sunkencolony_2 |
 | tentacle | zerg | zerg_creepcolony, zerg_creepcolony_2, zerg_sporecolony, zerg_sunkencolony_2 |
 | tkmmedicheal | tkm | tkm_battlebus, tkm_medictruck |
@@ -48,7 +48,7 @@ damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36
 | yakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
 
 
-## W2 ΓÇö identical weapon across factions (36)
+## W2 — identical weapon across factions (36)
 
 | weapon | families | factions | actors |
 |---|---|---|---|
@@ -67,14 +67,14 @@ damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36
 | highvap | 2 | td_gdi, tkm | td_gdi_guardtower, tkm_bunker |
 | lmg_upgrade | 2 | ixian, ordos | ixian_lightinfantry, light_inf |
 | m16 | 2 | td_gdi, td_nod | td_gdi_minigunner, td_nod_minigunner |
-| m1carbine | 2 | japan, ra1_allies, ra1_soviets | ra1_soviets_rifleinfantry, rae1 |
+| m1carbine | 2 | japan, ra1_allies, ra1_soviets | ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry |
 | naxlasert | 2 | schwarzermond, terran | schwarzermond_lasertower, terran_sentinel |
 | naxsturmarty | 2 | naxis, schwarzermond | naxis_sturmtiger, schwarzermond_sturmcannon |
 | plymouthrpgmines | 2 | eden, plymouth | eden_lynx_acidcloud, plymouth_lynx_esg |
 | plymouthtigerrpgmines | 2 | eden, plymouth | eden_tiger_acidcloud, plymouth_tiger_esg |
 | ra2rtruckrocket | 2 | futuretech, latinsyndicate | futuretech_phalanxwip, latinsyndicate_missiletruck |
 | rockets | 2 | td_gdi, td_nod | td_gdi_rocketsoldier, td_nod_rocketsoldier |
-| rocketsra | 2 | japan, ra1_allies, ra1_soviets | ra1_soviets_rocketsoldier, rae3 |
+| rocketsra | 2 | japan, ra1_allies, ra1_soviets | ra1_allies_alliedrocketsoldier, ra1_soviets_rocketsoldier |
 | scvattack | 2 | protoss, terran | protoss_analogue, terran_scv |
 | scvrepair | 2 | protoss, terran | protoss_analogue, terran_scv |
 | siegeenginecannon | 2 | wc2_humans, wc2_orcs | wc2_humans_siegeengine, wc2_orcs_siegeengine |
@@ -90,7 +90,7 @@ damaging armament weapons checked: 1384; W1 same-faction 39, W2 cross-faction 36
 | wc2peasantsmack | 2 | wc2_humans, wc2_orcs | wc2_humans_peasant, wc2_orcs_peon |
 
 
-## W3 ΓÇö shared only with weapon-borrowing carriers (101)
+## W3 — shared only with weapon-borrowing carriers (101)
 
 | weapon | actors |
 |---|---|

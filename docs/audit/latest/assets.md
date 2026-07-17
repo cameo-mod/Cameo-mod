@@ -1,9 +1,9 @@
-﻿# audit_assets ΓÇö asset format norms (B11, RAMpage)
+# audit_assets — asset format norms (B11, RAMpage)
 
 PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-conforming: **3632**)
 
 
-## P1 ΓÇö PNGs over budget (> 8 MiB or > 8192px)
+## P1 — PNGs over budget (> 8 MiB or > 8192px)
 
 | file | size | dimensions |
 |---|---|---|
@@ -149,7 +149,7 @@ PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/ra2/mod/nax_conehead2.png | 443 KiB | 30636x60 |
 
 
-## W1 ΓÇö WAV norm compliance by directory (mono/16-bit/22050 Hz)
+## W1 — WAV norm compliance by directory (mono/16-bit/22050 Hz)
 
 | directory | non-conforming WAVs |
 |---|---|
@@ -177,7 +177,7 @@ PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/warcraft3 | 2 |
 
 
-## W1 ΓÇö sample violations with conversion commands
+## W1 — sample violations with conversion commands
 
 | file | format | conversion |
 |---|---|---|

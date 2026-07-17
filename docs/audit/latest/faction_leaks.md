@@ -1,9 +1,9 @@
-﻿# audit_faction_leaks ΓÇö cross-faction leaks (B1)
+# audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **28** ΓÇö L1 leaks: **429**, L3 concrete-inherit leaks: **45**, shared/unattributed buildables: **91**
+Factions checked: **28** — L1 leaks: **429**, L3 concrete-inherit leaks: **45**, shared/unattributed buildables: **91**
 
 
-## L1 ΓÇö buildable in faction X but owned by faction Y
+## L1 — buildable in faction X but owned by faction Y
 
 | faction | actor | attributed owner | file |
 |---|---|---|---|
@@ -438,7 +438,7 @@ Factions checked: **28** ΓÇö L1 leaks: **429**, L3 concrete-inherit leaks: **
 | wc2_orcs | wc2_orcs_warcraft3grunt | warcraft2/orcs | mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml |
 
 
-## L3 ΓÇö buildable inherits concrete actor owned by another faction
+## L3 — buildable inherits concrete actor owned by another faction
 
 | faction | actor | inherit target | target owner | file |
 |---|---|---|---|---|
@@ -491,7 +491,7 @@ Factions checked: **28** ΓÇö L1 leaks: **429**, L3 concrete-inherit leaks: **
 
 ## Shared / unattributed buildables (needs human decision)
 
-(showing only actors reachable by Γëñ 6 factions; 2 broadly-shared actors suppressed)
+(showing only actors reachable by ≤ 6 factions; 2 broadly-shared actors suppressed)
 
 | actor | #factions | factions |
 |---|---|---|

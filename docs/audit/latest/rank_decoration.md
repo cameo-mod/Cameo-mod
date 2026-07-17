@@ -1,4 +1,4 @@
-﻿# Rank decoration audit
+# Rank decoration audit
 
 ## Actor decoration issues: **56**
 

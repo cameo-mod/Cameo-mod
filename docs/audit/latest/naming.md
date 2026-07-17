@@ -1,4 +1,4 @@
-﻿# gen_rename_maps ΓÇö ┬º9.1 naming compliance (RA1-Soviet baseline)
+# gen_rename_maps — §9.1 naming compliance (RA1-Soviet baseline)
 
 
 ## Actor-id compliance per faction (faction-exclusive buildables)

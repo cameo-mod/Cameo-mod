@@ -1,6 +1,6 @@
-﻿# audit_upgrades ΓÇö inverted / dead upgrade effects (B3)
+# audit_upgrades — inverted / dead upgrade effects (B3)
 
-Upgrade items found: **591** ΓÇö inverted-direction traits: **95**, dead upgrades: **0**, dead wiring tokens: **25**, without intent entries: **564**
+Upgrade items found: **591** — inverted-direction traits: **95**, dead upgrades: **0**, dead wiring tokens: **25**, without intent entries: **564**
 
 
 ## Inverted-direction stat traits gated on upgrade conditions

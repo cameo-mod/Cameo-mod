@@ -1,4 +1,4 @@
-﻿# audit_inherits ΓÇö ┬º10.3 invariant violations (B2)
+# audit_inherits — §10.3 invariant violations (B2)
 
 Actors+templates scanned: **3910**
 
@@ -11,22 +11,21 @@ Actors+templates scanned: **3910**
 | V5 | > 2 -Trait removals (warning) | 95 |
 
 
-## V3 ΓÇö dangling inherit targets (blocking)
+## V3 — dangling inherit targets (blocking)
 
 _none found_
 
 
-## V2 ΓÇö cross-faction inherits (concrete targets)
+## V2 — cross-faction inherits (concrete targets)
 
 | actor | actor faction | target | target faction | file |
 |---|---|---|---|---|
-| CNCSPEN | tiberiandawn/nod | RASPEN | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
-| CNCSYRD | tiberiandawn/gdi | RA1SYRD | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml |
-| RAE6 | redalert/shared | E6 | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
+| CNCSPEN | tiberiandawn/nod | ra1_soviets_subpen | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
+| CNCSYRD | tiberiandawn/gdi | ra1_allies_alliednavalyard | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml |
 | asianalliance_concretebarrier | redalert2mod/asianalliance | BRIK | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_engineer | redalert2mod/asianalliance | ra2_allies_engineer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
 | asianalliance_oiltruck | redalert2mod/asianalliance | ra1_soviets_nukedemotruck | redalert/soviets | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
-| bomber_minebomb.asian | redalert2mod/asianalliance | BADR | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| bomber_minebomb.asian | redalert2mod/asianalliance | ra1_badger | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | carryall_reinforce.ordos | d2k/ordos | carryall.reinforce | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml |
 | engineer | d2k/shared | E6 | tiberiandawn/shared | mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml |
 | forgotten_helipad | tiberiansun/forgotten | ts_gdi_helipad | tiberiansun/gdi | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml |
@@ -35,7 +34,7 @@ _none found_
 | forgotten_servicedepot | tiberiansun/forgotten | ts_gdi_servicedepot | tiberiansun/gdi | mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml |
 | futuretech_engineer | redalert2mod/futuretech | ra2_allies_engineer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml |
 | futuretech_salamanderifv | redalert2mod/futuretech | ra2_allies_ifv | redalert2/allies | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml |
-| horten_bomber.nax | redalert2mod/naxis | BADR.Soviet | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml |
+| horten_bomber.nax | redalert2mod/naxis | ra1_soviets_badger | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml |
 | ixian_advancedheavyfactory | d2k/ixian | heavy_factory | d2k/shared | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml |
 | japan_japaneseairfield | redalert/japan | ra1_soviets_airfield | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_japanesewarfactory | redalert/japan | ra1_soviets_warfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
@@ -48,6 +47,7 @@ _none found_
 | ordos_advancedcarryall | d2k/ordos | carryall | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml |
 | ordos_heavyfactory | d2k/ordos | heavy_factory | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml |
 | ordos_lightfactory | d2k/ordos | light_factory | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml |
+| ra1_engineer | redalert/shared | E6 | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra2_allies_concretebarrier | redalert2/allies | BRIK | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
 | ra2_allies_engineer | redalert2/allies | E6 | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml |
 | ra2_soviets_concretebarrier | redalert2/soviets | BRIK | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml |
@@ -72,30 +72,23 @@ _none found_
 | yuri_concretebarrier | redalert2/yuri | BRIK | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml |
 | yuri_constructionyard | redalert2/yuri | ra2_allies_alliedconstructionyard | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml |
 | yuri_engineer | redalert2/yuri | ra2_allies_engineer | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml |
-| yuriinvisibleplane | redalert2/yuri | U2 | redalert/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml |
+| yuriinvisibleplane | redalert2/yuri | ra1_soviets_spyplane | redalert/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml |
 
 
-## V1 ΓÇö concrete ΓåÆ concrete inherits
+## V1 — concrete → concrete inherits
 
 | actor | target | actor faction | target faction | file |
 |---|---|---|---|---|
 | A10.Husk | MIG.Husk | ? | ? | mods/cameo/rules/husks.yaml |
 | A10Carrier.Husk | A10.Husk | ? | ? | mods/cameo/rules/husks.yaml |
-| BADR.Allies | BADR | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Bomber | BADR.Soviet | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Japan | BADR | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Soviet | BADR | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| C17.Bomber | BADR.Bomber | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| C17.Paradrop | BADR | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | CAMERA.sw | CAMERA.small | ? | ? | mods/cameo/rules/misc.yaml |
-| CNCSPEN | RASPEN | tiberiandawn/nod | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
-| CNCSYRD | RA1SYRD | tiberiandawn/gdi | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml |
-| ChronoVortexFade | ChronoVortex | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml |
+| CNCSPEN | ra1_soviets_subpen | tiberiandawn/nod | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
+| CNCSYRD | ra1_allies_alliednavalyard | tiberiandawn/gdi | redalert/shared | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml |
 | E1 | td_gdi_minigunner | tiberiandawn/gdi | tiberiandawn/gdi | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml |
 | E3 | td_gdi_rocketsoldier | tiberiandawn/gdi | tiberiandawn/gdi | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml |
 | EDEN_TIGER_ACIDCLOUD | EDEN_LYNX_ACIDCLOUD | ? | ? | mods/cameo/rules/outpost2.yaml |
 | ForceShieldDrainer | CAMERA.small | ? | ? | mods/cameo/rules/shared.yaml |
-| INVISIBLEPLANE | BADR | ? | redalert/shared | mods/cameo/rules/tiberiansun.yaml |
+| INVISIBLEPLANE | ra1_badger | ? | redalert/shared | mods/cameo/rules/tiberiansun.yaml |
 | MONEYCRATE.LARGE | MONEYCRATE | ? | ? | mods/cameo/rules/misc.yaml |
 | OILB.TS | OILB.Building | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | OILB.d2k | OILB.Building | d2k/shared | ? | mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml |
@@ -107,7 +100,6 @@ _none found_
 | PLYMOUTH_TIGER_STICKYFOAM | PLYMOUTH_LYNX_STICKYFOAM | ? | ? | mods/cameo/rules/outpost2.yaml |
 | PLYMOUTH_TIGER_SUPERNOVA | PLYMOUTH_LYNX_SUPERNOVA | ? | ? | mods/cameo/rules/outpost2.yaml |
 | RABIO | bio | ? | ? | mods/cameo/rules/tech.yaml |
-| RAE6 | E6 | redalert/shared | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | RAMISS | MISS | ? | ? | mods/cameo/rules/tech.yaml |
 | SCBARRACKSM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
 | SCENGINEERINGBAYM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
@@ -120,7 +112,6 @@ _none found_
 | TSE1PARA | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE2PARA | ts_gdi_discthrower | ? | tiberiansun/gdi | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | E6 | ? | tiberiandawn/shared | mods/cameo/rules/tiberiansun.yaml |
-| U3 | U2 | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | WWCRATE | CRATE | ? | ? | mods/cameo/rules/misc.yaml |
 | ambiance_battle | ambiance_wind | ? | ? | mods/cameo/rules/misc.yaml |
 | ambiance_bird | ambiance_wind | ? | ? | mods/cameo/rules/misc.yaml |
@@ -135,7 +126,7 @@ _none found_
 | bbomb2_husk.nax2 | bbomb_husk.nax2 | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | bbomb3_husk.nax2 | bbomb_husk.nax2 | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | bomber_husk.asian | BADR.Husk | redalert2mod/asianalliance | ? | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
-| bomber_minebomb.asian | BADR | redalert2mod/asianalliance | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
+| bomber_minebomb.asian | ra1_badger | redalert2mod/asianalliance | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | bomber_minebomb2.asian | bomber_minebomb.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | cabal_artilleryspider_backup | cabal_artilleryspider | tiberiansun/cabal | tiberiansun/cabal | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
 | cabal_avatar_backup | cabal_avatar | tiberiansun/cabal | tiberiansun/cabal | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml |
@@ -181,9 +172,10 @@ _none found_
 | futuretech_engineer | ra2_allies_engineer | redalert2mod/futuretech | redalert2/allies | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/infantry.yaml |
 | futuretech_salamanderifv | ra2_allies_ifv | redalert2mod/futuretech | redalert2/allies | mods/cameo/ContentPacks/RedAlert2Mod/FutureTech/yaml/vehicles.yaml |
 | hole_small.nax2 | hole.nax2 | redalert2mod/schwarzermond | redalert2mod/schwarzermond | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
-| horten_bomber.nax | BADR.Soviet | redalert2mod/naxis | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml |
+| horten_bomber.nax | ra1_soviets_badger | redalert2mod/naxis | redalert/shared | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml |
 | ixian_advancedheavyfactory | heavy_factory | d2k/ixian | d2k/shared | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml |
 | japan_archermaiden | japan_tankbuster | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
+| japan_badger | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | japan_coreairfield | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_corebarracks | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_corepowerplant | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
@@ -192,8 +184,8 @@ _none found_
 | japan_coreservicedepot | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_coretechcenter | japan_corewarfactory | redalert/japan | redalert/japan | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_japaneseairfield | ra1_soviets_airfield | redalert/japan | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
+| japan_japanesesuperbomber | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | japan_japanesewarfactory | ra1_soviets_warfactory | redalert/japan | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
-| jsuperbomber | BADR | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | jsuperbomber.Husk | BADR.Husk | ? | ? | mods/cameo/rules/husks.yaml |
 | kami_asdf.asian | kami.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | kami_chemical.asian | kami.asian | redalert2mod/asianalliance | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
@@ -210,9 +202,17 @@ _none found_
 | ordos_heavyfactory | heavy_factory | d2k/ordos | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml |
 | ordos_lightfactory | light_factory | d2k/ordos | d2k/shared | mods/cameo/ContentPacks/D2k/Ordos/yaml/buildings.yaml |
 | ordos_stealthraider | ordos_raider | d2k/ordos | d2k/ordos | mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml |
+| ra1_allies_badger | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_allies_cargoplane_bomber | ra1_badger_bomber | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_allies_cargoplane_paradrop | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_allies_chronovortexfade | ra1_allies_chronovortex | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml |
+| ra1_badger_bomber | ra1_soviets_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_engineer | E6 | redalert/shared | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
+| ra1_soviets_badger | ra1_badger | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_soviets_heavyindustrialminer | ra1_soviets_oretruck | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_largefactory | ra1_soviets_warfactory | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_largesovietairfield | ra1_soviets_airfield | redalert/soviets | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
+| ra1_soviets_superspyplane | ra1_soviets_spyplane | redalert/shared | redalert/shared | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra2_allies_battlefortress_2 | ra2_allies_battlefortress | redalert2/allies | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies_battlefortress_3 | ra2_allies_battlefortress | redalert2/allies | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml |
 | ra2_allies_concretebarrier | BRIK | redalert2/allies | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml |
@@ -393,13 +393,13 @@ _none found_
 | yuri_concretebarrier | BRIK | redalert2/yuri | tiberiandawn/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml |
 | yuri_constructionyard | ra2_allies_alliedconstructionyard | redalert2/yuri | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml |
 | yuri_engineer | ra2_allies_engineer | redalert2/yuri | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml |
-| yuriinvisibleplane | U2 | redalert2/yuri | redalert/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml |
+| yuriinvisibleplane | ra1_soviets_spyplane | redalert2/yuri | redalert/shared | mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml |
 | zerg_creepcolony_2 | zerg_creepcolony | starcraft/zerg | starcraft/zerg | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml |
 | zerg_sporecolony | zerg_creepcolony | starcraft/zerg | starcraft/zerg | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml |
 | zerg_sunkencolony_2 | zerg_creepcolony | starcraft/zerg | starcraft/zerg | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/defenses.yaml |
 
 
-## V4 ΓÇö inherit chains deeper than 3
+## V4 — inherit chains deeper than 3
 
 | actor | depth | file |
 |---|---|---|
@@ -411,17 +411,10 @@ _none found_
 | AMMOBOX2 | 4 | mods/cameo/rules/civilian.yaml |
 | AMMOBOX3 | 4 | mods/cameo/rules/civilian.yaml |
 | APC.Husk | 4 | mods/cameo/rules/husks.yaml |
-| APWR | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
-| BADR.Allies | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Bomber | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Japan | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| BADR.Soviet | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | BGGY.Husk | 4 | mods/cameo/rules/husks.yaml |
 | BIKE.Husk | 4 | mods/cameo/rules/husks.yaml |
 | C1 | 5 | mods/cameo/rules/civilian.yaml |
 | C10 | 5 | mods/cameo/rules/civilian.yaml |
-| C17.Bomber | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
-| C17.Paradrop | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | C2 | 5 | mods/cameo/rules/civilian.yaml |
 | C3 | 5 | mods/cameo/rules/civilian.yaml |
 | C4 | 5 | mods/cameo/rules/civilian.yaml |
@@ -430,7 +423,6 @@ _none found_
 | C7 | 5 | mods/cameo/rules/civilian.yaml |
 | C8 | 5 | mods/cameo/rules/civilian.yaml |
 | C9 | 5 | mods/cameo/rules/civilian.yaml |
-| CA | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | CHAN | 5 | mods/cameo/rules/civilian.yaml |
 | CNCCA | 4 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml |
 | CNCPT | 4 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml |
@@ -438,8 +430,6 @@ _none found_
 | CNCSPEN | 4 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml |
 | CNCSS | 4 | mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml |
 | CNCSYRD | 4 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml |
-| DD | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| DELPHI | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | E1 | 7 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml |
 | E3 | 7 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml |
 | E6 | 5 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml |
@@ -482,21 +472,17 @@ _none found_
 | EDEN_TIGER_THORSHAMMER | 5 | mods/cameo/rules/outpost2.yaml |
 | EDEN_TOKAMAK | 5 | mods/cameo/rules/outpost2.yaml |
 | EDEN_UNIVERSITY | 4 | mods/cameo/rules/outpost2.yaml |
-| EINSTEIN | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | FCOM | 4 | mods/cameo/rules/tech.yaml |
 | FCOM.Husk | 4 | mods/cameo/rules/tech.yaml |
-| GNRL | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | HIND.Husk | 4 | mods/cameo/rules/husks.yaml |
 | HOSP.Husk | 4 | mods/cameo/rules/tech.yaml |
 | INVISIBLEPLANE | 4 | mods/cameo/rules/tiberiansun.yaml |
 | JEEP.Husk | 4 | mods/cameo/rules/husks.yaml |
 | JHIND.Husk | 4 | mods/cameo/rules/husks.yaml |
-| KENN | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | LST | 4 | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/naval.yaml |
 | MISS | 4 | mods/cameo/rules/tech.yaml |
 | MISS.Husk | 4 | mods/cameo/rules/tech.yaml |
 | MOEBIUS | 5 | mods/cameo/rules/civilian.yaml |
-| MSUB | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | NUK2 | 4 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml |
 | NUKE | 4 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml |
 | OILB.Building | 4 | mods/cameo/rules/shared.yaml |
@@ -546,19 +532,9 @@ _none found_
 | PLYMOUTH_TIGER_SUPERNOVA | 6 | mods/cameo/rules/outpost2.yaml |
 | PLYMOUTH_TOKAMAK | 5 | mods/cameo/rules/outpost2.yaml |
 | PLYMOUTH_UNIVERSITY | 4 | mods/cameo/rules/outpost2.yaml |
-| POWR | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
-| PT | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| RAAPC | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | RABIO | 4 | mods/cameo/rules/tech.yaml |
-| RACHAN | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
-| RAE1 | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
-| RAE3 | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
-| RAE6 | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
-| RALST | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | RAMISS | 5 | mods/cameo/rules/tech.yaml |
 | RAPT | 4 | mods/cameo/rules/tiberiansun.yaml |
-| RATRAN.Husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
-| ROCKETANGEL.husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | SCBARRACKSM | 5 | mods/cameo/rules/starcraft.yaml |
 | SCBROODLING | 5 | mods/cameo/rules/starcraft.yaml |
 | SCCOMMANDCENTERM | 4 | mods/cameo/rules/starcraft.yaml |
@@ -572,8 +548,6 @@ _none found_
 | SCSTARPORTM | 5 | mods/cameo/rules/starcraft.yaml |
 | SCWRAITHDRONE | 4 | mods/cameo/rules/starcraft.yaml |
 | SILO | 4 | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml |
-| SS | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| TECH1 | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | TECHBCANNON | 4 | mods/cameo/rules/tech.yaml |
 | TECHBCANNON2 | 5 | mods/cameo/rules/tech.yaml |
 | TECN | 5 | mods/cameo/rules/civilian.yaml |
@@ -584,13 +558,11 @@ _none found_
 | TSE2PARA | 6 | mods/cameo/rules/tiberiansun.yaml |
 | TSE3 | 5 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | 6 | mods/cameo/rules/tiberiansun.yaml |
-| U3 | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | V19.Husk | 4 | mods/cameo/rules/tech.yaml |
 | VICE | 4 | mods/cameo/rules/civilian.yaml |
 | YRDISK.Husk | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | YRSLAV | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | alien.nax | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml |
-| alliedcybertank | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | apparition.ixian | 5 | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | asianalliance_advancedcommunicationcenter | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
 | asianalliance_alligator | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml |
@@ -882,6 +854,7 @@ _none found_
 | ixian_windtrap | 5 | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml |
 | japan_archermaiden | 6 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
 | japan_armoredcar | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
+| japan_badger | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | japan_ballista | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_ballistatower | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml |
 | japan_chihaheavytank | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
@@ -901,6 +874,7 @@ _none found_
 | japan_imperialscoutsman | 6 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
 | japan_japaneseairfield | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_japanesebomber | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml |
+| japan_japanesecarrier | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | japan_japaneseconstructionyard | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_japaneseflamethrower | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
 | japan_japanesemgnest | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml |
@@ -910,10 +884,13 @@ _none found_
 | japan_japaneseradararray | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_japaneseservicedepot | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_japaneseshrine | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml |
+| japan_japanesespeedboat | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
+| japan_japanesesuperbomber | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | japan_japanesewarfactory | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_nanodronebuggy | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_oitank | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_rocketangel | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
+| japan_rocketangel_husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | japan_samurai | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml |
 | japan_scoutcar | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_shogunexecutioner | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
@@ -924,10 +901,9 @@ _none found_
 | japan_waveforcereactor | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/buildings.yaml |
 | japan_waveforcetank | 5 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml |
 | japan_waveforceturret | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml |
+| japan_yamatobattleship | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | japan_zerofighter | 4 | mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml |
-| japancarrier | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| japanspeedboat | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
-| jsuperbomber | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| japan_zerofighter_slave | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | jsuperbomber.Husk | 4 | mods/cameo/rules/husks.yaml |
 | kami.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | kami_asdf.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
@@ -985,7 +961,6 @@ _none found_
 | mammothbunker.husk | 4 | mods/cameo/rules/tech.yaml |
 | missile_tank_husk.ixian | 4 | mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml |
 | modbomber.Husk | 4 | mods/cameo/rules/husks.yaml |
-| modhip.husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | modkami.Husk | 4 | mods/cameo/rules/husks.yaml |
 | modkamimini.Husk | 4 | mods/cameo/rules/husks.yaml |
 | muboat.nax | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml |
@@ -1140,10 +1115,15 @@ _none found_
 | protoss_zeratul | 5 | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/infantry.yaml |
 | ptnk.asian | 5 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml |
 | quasfrig.asian | 4 | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/naval.yaml |
+| ra1_advancedpowerplant | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
+| ra1_agentdelphi | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_allies_alliedaagun | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies_alliedapc | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | ra1_allies_alliedartillery | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_alliedchinooktransport | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
+| ra1_allies_alliedchinooktransport_husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | ra1_allies_alliedconstructionyard | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies_alliedcybertank | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | ra1_allies_alliedgunturret | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies_alliedheavyaatank | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_alliedlighttank | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
@@ -1152,16 +1132,23 @@ _none found_
 | ra1_allies_alliedorerefinery | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies_alliedoretruck | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_alliedradardome | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies_alliedrocketsoldier | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_allies_alliedservicedepot | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
 | ra1_allies_alliedsniper | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies_alliedtankdestroyer | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_alliedtigerheavytank | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies_badger | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_allies_bastionartillerybunker | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies_blackhawk | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies_camopillbox | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies_cargoplane_bomber | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_allies_cargoplane_paradrop | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_allies_chronosphere | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_allies_chronotank | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
+| ra1_allies_cruiser | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
+| ra1_allies_destroyer | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | ra1_allies_gapgenerator | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies_gunboat | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | ra1_allies_longbow | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml |
 | ra1_allies_machinegunner | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies_mechanic | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
@@ -1176,11 +1163,20 @@ _none found_
 | ra1_allies_raspy | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
 | ra1_allies_reconranger | 4 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_reinforcementpad | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/buildings.yaml |
+| ra1_allies_rifleinfantry | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_allies_sheridanassaulttank | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml |
 | ra1_allies_tanya | 5 | mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml |
+| ra1_badger_bomber | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
+| ra1_einstein | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
+| ra1_engineer | 6 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
+| ra1_general | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
+| ra1_navaltransport | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
+| ra1_powerplant | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
+| ra1_scientist | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_soviets_ak47conscript | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_armoredyak | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_attackdog | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_soviets_badger | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_soviets_btr80 | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_commissar | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_constructionyard | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
@@ -1201,8 +1197,10 @@ _none found_
 | ra1_soviets_heavyteslatank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_hindattackhelicopter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_hiptransport | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
+| ra1_soviets_hiptransport_husk | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml |
 | ra1_soviets_ironcurtain | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets_kamovattackhelicopter | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
+| ra1_soviets_kennel | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml |
 | ra1_soviets_kotinnucleartank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_largefactory | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets_largesovietairfield | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
@@ -1210,7 +1208,9 @@ _none found_
 | ra1_soviets_mammothtank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_migattackbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_missilesilo | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
+| ra1_soviets_missilesubmarine | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | ra1_soviets_mobileconstructionvehicle | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
+| ra1_soviets_molotovconscript | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra1_soviets_monstertank | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_mortarsoldier | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_nuclearv2launcher | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
@@ -1226,7 +1226,9 @@ _none found_
 | ra1_soviets_siegemammothtank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_stalinfist | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_su57attackbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
+| ra1_soviets_submarine | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | ra1_soviets_supersonicnuclearbomber | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
+| ra1_soviets_superspyplane | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml |
 | ra1_soviets_teslacoil | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/defenses.yaml |
 | ra1_soviets_teslatank | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
 | ra1_soviets_teslayak | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
@@ -1235,6 +1237,7 @@ _none found_
 | ra1_soviets_volkov | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_yakscoutplane | 4 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets_zapper | 5 | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ra1_technician | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra2_allies_aegiscruiser | 4 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/naval.yaml |
 | ra2_allies_airforcecommandhq | 4 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies_alliedbarracks | 4 | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
@@ -1524,7 +1527,6 @@ _none found_
 | ra2sidewind | 5 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2sqd | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | ra2sub | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
-| ra_cons_molo | 5 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml |
 | ra_kamov.Husk | 4 | mods/cameo/rules/husks.yaml |
 | rammax.latin | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/naval.yaml |
 | refinery.atreides | 5 | mods/cameo/ContentPacks/D2k/Atreides/yaml/buildings.yaml |
@@ -1537,7 +1539,6 @@ _none found_
 | scalpelQuantumCannon.steel | 5 | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/aircraft.yaml |
 | schwarzermond_airfield | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | schwarzermond_barracks | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
-| schwarzermond_bermensch | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | schwarzermond_blackbomb | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_constructionyard | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | schwarzermond_corruptorpiercer | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
@@ -1574,6 +1575,7 @@ _none found_
 | schwarzermond_spacezeppelin | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml |
 | schwarzermond_sturmcannon | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | schwarzermond_techcenter | 4 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
+| schwarzermond_ubermensch | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | schwarzermond_warfactory | 5 | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/buildings.yaml |
 | scrapcar.latin | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml |
 | scrapcar2.latin | 4 | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml |
@@ -1975,7 +1977,6 @@ _none found_
 | wraith_husk.ordos | 4 | mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml |
 | yakarmored.Husk | 4 | mods/cameo/rules/husks.yaml |
 | yaktesla.Husk | 4 | mods/cameo/rules/husks.yaml |
-| yamatobattleship | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | yrbpln | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | yrhovr | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
 | yrlunr.husk | 4 | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml |
@@ -2059,17 +2060,15 @@ _none found_
 | zerg_ultralisk | 7 | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml |
 | zerg_ultraliskcavern | 4 | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml |
 | zerg_zergling | 5 | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml |
-| zerofighter | 4 | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 
 
-## V5 ΓÇö actors with > 2 trait removals
+## V5 — actors with > 2 trait removals
 
 | actor | removals | keys | file |
 |---|---|---|---|
 | A10Carrier | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml |
 | BARL | 11 | -Selectable, -ShakeOnDeath, -SoundOnDamageTransition, -Demolishable, -CaptureManager, -Capturable | mods/cameo/rules/tech.yaml |
 | BRL3 | 11 | -Selectable, -ShakeOnDeath, -SoundOnDamageTransition, -Demolishable, -CaptureManager, -Capturable | mods/cameo/rules/tech.yaml |
-| ChronoVortexFade | 3 | -SpawnActorOnDeath, -PeriodicExplosion, -AmbientSound | mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml |
 | SCCOMMANDCENTERM | 4 | -AttackAircraft, -SpawnActorOnDeath, -Hovers@CRUISING, -Voiced | mods/cameo/rules/starcraft.yaml |
 | SILO | 3 | -GivesBuildableArea, -WithSpriteBody, -AcceptsDeliveredCash | mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml |
 | cabal_ascended | 3 | -DamagedByTerrain, -SpawnActorOnDeath, -TakeCover | mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml |
@@ -2096,6 +2095,7 @@ _none found_
 | gdirigdrone | 5 | -Targetable@SpecialRepai, -SpawnActorOnDeath, -ActorLostNotification, -UpdatesPlayerStatistics, -MapEditorData | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml |
 | hole.nax2 | 3 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData | mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml |
 | ixian_stormlasher | 3 | -WithDeathAnimation, -WithWallSpriteBody, -WithSpriteTurret | mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml |
+| japan_zerofighter_slave | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 | kami.asian | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -MapEditorData, -Voiced | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | kami_asdf.asian | 4 | -CarrierSlave, -AutoTarget, -AmmoPool, -WithAmmoPipsDecoration | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/aircraft.yaml |
 | latinsyndicate_defensebureau | 3 | -WithTurretSearchlight, -WithDeathAnimation, -QuantizeFacingsFromSequ | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml |
@@ -2109,6 +2109,7 @@ _none found_
 | protoss_photoncannon | 3 | -WithTurretSearchlight, -WithSpriteBody, -WithDeathAnimation | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/defenses.yaml |
 | protoss_shieldbattery | 3 | -WithSpriteBody, -GivesBuildableArea, -WithDeathAnimation | mods/cameo/ContentPacks/StarCraft/Protoss/yaml/buildings.yaml |
 | ra1_allies_camopillbox | 3 | -WithTurretSearchlight, -QuantizeFacingsFromSequ, -MustBeDestroyed | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
+| ra1_allies_chronovortexfade | 3 | -SpawnActorOnDeath, -PeriodicExplosion, -AmbientSound | mods/cameo/ContentPacks/RedAlert/Shared/yaml/misc.yaml |
 | ra1_allies_gapgenerator | 10 | -AutoTarget, -RenderRangeCircle, -ExternalCondition@shrou, -ExternalCondition@locko, -RangeMultiplier@ra1_all, -RevealsShroudMultiplier | mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml |
 | ra1_soviets_cyberdog | 3 | -Targetable@disguise, -InaccuracyMultiplier@ar, -InaccuracyMultiplier@Pr | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
 | ra1_soviets_kotinnucleartank | 3 | -DamagedByTintedCells@ra, -DamagedByTintedCells@ge, -DamagedByTintedCells@ti | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/vehicles.yaml |
@@ -2160,5 +2161,4 @@ _none found_
 | zerg_lurker | 3 | -HitShape, -WithMakeAnimation, -AttackFrontal | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml |
 | zerg_overlord | 4 | -Targetable@infiltrate, -AttackAircraft, -AutoTarget, -RenderRangeCircle | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml |
 | zerg_overmind | 3 | -WithMakeAnimation, -WithDeathAnimation, -ToggleConditionOnOrder | mods/cameo/ContentPacks/StarCraft/Zerg/yaml/buildings.yaml |
-| zerofighter | 4 | -UpdatesPlayerStatistics, -ActorLostNotification, -WithShadow, -MapEditorData | mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml |
 

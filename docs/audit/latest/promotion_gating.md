@@ -1,4 +1,4 @@
-﻿# Promotion gating audit
+# Promotion gating audit
 
 
 ## P3 promotions gated by buildings/tech (should only use rank1 + previous promotions)

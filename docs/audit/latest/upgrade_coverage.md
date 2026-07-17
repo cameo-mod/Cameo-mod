@@ -1,6 +1,6 @@
-﻿# audit_upgrade_coverage ΓÇö roster-wide upgrade gaps (B4)
+# audit_upgrade_coverage — roster-wide upgrade gaps (B4)
 
-Coverage-tagged upgrades checked: **23** ΓÇö uncovered unit slots: **21**
+Coverage-tagged upgrades checked: **23** — uncovered unit slots: **21**
 
 
 ## Coverage by upgrade

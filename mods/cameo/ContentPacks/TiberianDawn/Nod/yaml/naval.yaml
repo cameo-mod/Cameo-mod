@@ -16,7 +16,7 @@ CNCSS:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncspen
 		Queue: Naval, RANaval
-		Description: actor_ss.description
+		Description: actor_ra1_soviets_submarine.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -75,7 +75,7 @@ ssmsub:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cncspen, td_nod_communicationscenter
 		Queue: Naval, RANaval
-		Description: actor_msub.description
+		Description: actor_ra1_soviets_missilesubmarine.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
