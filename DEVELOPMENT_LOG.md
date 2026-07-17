@@ -36,6 +36,14 @@
 - NOTE for all agents: SCUD/SCUDNUKE (RedAlert/Soviets weapons.yaml) are
   legacy-uppercase WEAPON ids shared with generals/darkreign — WPN-MIGRATE
   scope, intentionally untouched by the actor rename.
+- SM PROMOTION GRID FINALIZED (maintainer decision): columns
+  infantry | vehicles | air/artillery/support, tier-laddered rows —
+  see ROADMAP P2 (RESOLVED) for the binding table. promotions.yaml
+  re-chained, `..._promotion_bermensch` → `..._promotion_ubermensch`,
+  ^PromotionUnitBuff stripped from 10 non-promotion SM units
+  (FutureTech convention: grid units only). Boot green.
+- NEW ORDER: FULL SM REBALANCE (sheet-first; post-buff-strip stats;
+  38 stat_formulas findings as the seed) — queued as ROADMAP P1.
 
 ## 2026-07-16
 

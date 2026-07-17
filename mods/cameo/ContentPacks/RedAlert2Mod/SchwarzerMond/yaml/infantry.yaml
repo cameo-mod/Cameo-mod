@@ -19,7 +19,7 @@ schwarzermond_ubermensch:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_bermensch
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_ubermensch
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -377,7 +377,6 @@ schwarzermond_engineeringarmor:
 		Voice: Move
 schwarzermond_lunarsoldier:
 	Inherits: ^Soldier
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Propaganda: ^NaxiMoonPropaganda
@@ -459,7 +458,6 @@ schwarzermond_lunarsoldier:
 		VoiceSet: NaxiLunarTroopVoice
 schwarzermond_lunarrocket:
 	Inherits: ^Soldier
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Propaganda: ^NaxiMoonPropaganda

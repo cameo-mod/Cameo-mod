@@ -1,49 +1,52 @@
 ##############################################
 # Schwarzer Mond 3x4 Promotion Grid
-# Column 1: Infantry/Advanced tech
-# Column 2: Vehicles/Tanks
-# Column 3: Aircraft/Support
+# (maintainer's final layout 2026-07-17 — ROADMAP P2 RESOLVED)
+# Column 1 (left):   Infantry
+# Column 2 (middle): Vehicles/Tanks
+# Column 3 (right):  Aircraft/Artillery/Support
+# Tier ladder: rank1 = T1/T2, rank2 = T2/T3, rank3 = T3, rank4 = capstones.
+# The promotion gates the OPTION; each unit keeps its tech prerequisites.
 ##############################################
 
-# Column 1 — Infantry/Advanced tech
+# Column 1 — Infantry
 
-schwarzermond_promotion_bermensch:
+schwarzermond_promotion_noidmg:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Noid MG
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Promotions
+		Description: Unlocks the Noid MG Armor walker.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_noidmg, rank1
+	RenderSprites:
+		Image: schwarzermond_noidmgarmor
+	ProvidesPrerequisite:
+
+schwarzermond_promotion_ubermensch:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Übermensch
 	Buildable:
-		BuildPaletteOrder: 1
+		BuildPaletteOrder: 4
 		Queue: Promotions
 		Description: Unlocks the Übermensch infantry unit.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_bermensch, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_ubermensch, schwarzermond_promotion_noidmg, rank1
 	RenderSprites:
 		Image: schwarzermond_ubermensch
 	ProvidesPrerequisite:
 
-schwarzermond_promotion_lasertank:
+schwarzermond_promotion_korruptesbiest:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Laser Tank
-	Buildable:
-		BuildPaletteOrder: 4
-		Queue: Promotions
-		Description: Replaces the Laser Beetle with the Laser Tank.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_lasertank, schwarzermond_promotion_bermensch, rank1
-	RenderSprites:
-		Image: schwarzermond_lasertank
-	ProvidesPrerequisite:
-
-schwarzermond_promotion_crystaltank:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: Unlock Crystal Tank
+		Name: Unlock Korruptes Biest
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Description: Unlocks the Crystal Tank.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_crystaltank, schwarzermond_promotion_lasertank, rank1
+		Description: Unlocks the Korruptes Biest walker.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_korruptesbiest, schwarzermond_promotion_ubermensch, rank1
 	RenderSprites:
-		Image: schwarzermond_crystaltank
+		Image: schwarzermond_korruptesbiest
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_parzival:
@@ -54,50 +57,50 @@ schwarzermond_promotion_parzival:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Unlocks the Parzival hero infantry.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_parzival, schwarzermond_promotion_crystaltank, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_parzival, schwarzermond_promotion_korruptesbiest, rank1
 	RenderSprites:
 		Image: schwarzermond_parzival
 	ProvidesPrerequisite:
 
 # Column 2 — Vehicles/Tanks
 
-schwarzermond_promotion_noidmg:
-	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: Unlock Noid MG
-	Buildable:
-		BuildPaletteOrder: 2
-		Queue: Promotions
-		Description: Unlocks the Noid MG Armor walker.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_noidmg, rank1
-	RenderSprites:
-		Image: schwarzermond_noidmgarmor
-	ProvidesPrerequisite:
-
 schwarzermond_promotion_lunartiger:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Lunar Tiger
 	Buildable:
-		BuildPaletteOrder: 5
+		BuildPaletteOrder: 2
 		Queue: Promotions
 		Description: Replaces the Lunar Panzer with the Lunar Tiger.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_lunartiger, schwarzermond_promotion_noidmg, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_lunartiger, rank1
 	RenderSprites:
 		Image: schwarzermond_lunartiger
 	ProvidesPrerequisite:
 
-schwarzermond_promotion_korruptesbiest:
+schwarzermond_promotion_mars:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Korruptes Biest
+		Name: MARS
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Promotions
+		Description: Replaces the M200B Jagerline with the MARS.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_mars, schwarzermond_promotion_lunartiger, rank1
+	RenderSprites:
+		Image: schwarzermond_mars
+	ProvidesPrerequisite:
+
+schwarzermond_promotion_crystaltank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Crystal Tank
 	Buildable:
 		BuildPaletteOrder: 8
 		Queue: Promotions
-		Description: Unlocks the Korruptes Biest walker.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_korruptesbiest, schwarzermond_promotion_lunartiger, rank1
+		Description: Unlocks the Crystal Tank.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_crystaltank, schwarzermond_promotion_mars, rank1
 	RenderSprites:
-		Image: schwarzermond_korruptesbiest
+		Image: schwarzermond_crystaltank
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_dalek:
@@ -108,24 +111,24 @@ schwarzermond_promotion_dalek:
 		BuildPaletteOrder: 11
 		Queue: Promotions
 		Description: Unlocks the Dalek heavy tank.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_dalek, schwarzermond_promotion_korruptesbiest, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_dalek, schwarzermond_promotion_crystaltank, rank1
 	RenderSprites:
 		Image: schwarzermond_dalek
 	ProvidesPrerequisite:
 
-# Column 3 — Aircraft/Support
+# Column 3 — Aircraft/Artillery/Support
 
-schwarzermond_promotion_piercer:
+schwarzermond_promotion_lasertank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Piercer
+		Name: Laser Tank
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Description: Unlocks the Corruptor Piercer aircraft.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_piercer, rank1
+		Description: Replaces the Laser Beetle with the Laser Tank.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_lasertank, rank1
 	RenderSprites:
-		Image: schwarzermond_corruptorpiercer
+		Image: schwarzermond_lasertank
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_haunebuiii:
@@ -136,22 +139,22 @@ schwarzermond_promotion_haunebuiii:
 		BuildPaletteOrder: 6
 		Queue: Promotions
 		Description: Replaces the Haunebu II with the Haunebu III.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_haunebuiii, schwarzermond_promotion_piercer, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_haunebuiii, schwarzermond_promotion_lasertank, rank1
 	RenderSprites:
 		Image: schwarzermond_haunebuiii
 	ProvidesPrerequisite:
 
-schwarzermond_promotion_mars:
+schwarzermond_promotion_piercer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: MARS
+		Name: Unlock Piercer
 	Buildable:
 		BuildPaletteOrder: 9
 		Queue: Promotions
-		Description: Replaces the M200B Jagerline with the MARS.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_mars, schwarzermond_promotion_haunebuiii, rank1
+		Description: Unlocks the Corruptor Piercer aircraft.
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_piercer, schwarzermond_promotion_haunebuiii, rank1
 	RenderSprites:
-		Image: schwarzermond_mars
+		Image: schwarzermond_corruptorpiercer
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_dieglocke:
@@ -162,7 +165,7 @@ schwarzermond_promotion_dieglocke:
 		BuildPaletteOrder: 12
 		Queue: Promotions
 		Description: Unlocks the Die Glocke support aircraft.
-		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_dieglocke, schwarzermond_promotion_mars, rank1
+		Prerequisites: ~schwarzermond_constructionyard, !schwarzermond_promotion_dieglocke, schwarzermond_promotion_piercer, rank1
 	RenderSprites:
 		Image: schwarzermond_dieglocke
 	ProvidesPrerequisite:

@@ -178,9 +178,9 @@ factions, everything through the balance workbook. Faction reference:
   prerequisites wired to require the matching promotion; replaced units
   disabled when the replacement promotion is bought. Promotion-unit
   `^PromotionUnitBuff` inheritance verified on all grid units. Boot
-  test passed (2026-07-17). **CAUTION: the implemented chains deviate
-  from the maintainer's image AND the row order is under redesign — see
-  P2 below before touching this file.**
+  test passed (2026-07-17). FINAL layout re-chained 2026-07-17 after
+  the maintainer's decision — see P2 (RESOLVED) for the binding grid;
+  do not rearrange promotions.yaml except through a new design order.
 - [x] **cabal_plasmaturret not buildable** — root cause: no sequence/
   icon defined for `cabal_plasmaturret`. Added sequence in `ContentPacks/
   TiberianSun/CABAL/yaml/sequences.yaml` and voxel turret mapping in
@@ -350,7 +350,31 @@ factions, everything through the balance workbook. Faction reference:
   (warhead values, weapon targeting, or unit stats). Effort: M. **Do NOT
   auto-apply — requires user approval per balance policy.**
 
-### P2 — SM promotion grid tier ladder (DESIGN DECISION NEEDED — sharpened 2026-07-17)
+### P2 — SM promotion grid tier ladder (RESOLVED 2026-07-17 — maintainer picked the reshuffle)
+
+**FINAL LAYOUT (implemented; column convention: left = infantry, middle =
+vehicles/tanks, right = aircraft/artillery/support):**
+
+| Rank | Infantry | Vehicles | Air/Artillery/Support |
+|---|---|---|---|
+| 1 | Noid MG (T2) | Lunar Tiger (rpl Panzer, T2) | Laser Tank (rpl Beetle, T1) |
+| 2 | Übermensch (T3) | MARS (rpl Jagerline, T2) | Haunebu III (rpl H2, T3) |
+| 3 | Korruptes Biest (T3) | Crystal Tank (T3) | Piercer (T3) |
+| 4 | Parzival | Dalek | Die Glocke |
+
+Implemented 2026-07-17: promotions.yaml re-chained + BuildPaletteOrder
+row-major; promotion actor `..._bermensch` renamed `..._ubermensch`
+(umlaut law); `^PromotionUnitBuff` corrected to the FutureTech
+convention — EXACTLY the 12 grid units inherit it (was also on 10 base
+units incl. all 4 replaced ones: Lunar Soldier/Rocket, Laser Beetle,
+Lunar Panzer, Jagerline, Haunebu II, Neo Jagdpanzer, Lunar Grille,
+Gravity Core Tank, Black Bomb — an unintended faction-wide buff).
+Follow-up: fluent-ify the 12 promotion tooltips (raw strings), part of
+the SM rebalance pass below.
+
+<details><summary>Decision record (superseded analysis)</summary>
+
+#### Original analysis — kept for the record
 
 **Maintainer input (2026-07-17):** MARS is an AA artillery unit (ground +
 air, long range); Laser Beetle and Laser Tank are AA too, so MARS replacing
@@ -411,9 +435,31 @@ earlier. Combines freely with Option 1; does NOT block it.
 unlocking T3 options) — contradicts the maintainer's tier principle. New
 early-game units (old Option E) stays a separate long-term roster item.
 
-**Next step:** maintainer picks Option 1 / 1+3 / 2; then one pass:
-re-chain promotions.yaml, set BuildPaletteOrder, fluent-ify the 12
-promotion tooltips/descriptions (currently raw strings), boot + audits.
+(Maintainer picked Option 1 with two switches: infantry column left,
+vehicles middle; Laser Tank ↔ Lunar Tiger swapped — Lunar Tiger is a
+line tank, Laser Tank plays as support. See the FINAL LAYOUT above.)
+
+</details>
+
+### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn)
+
+Maintainer order: "we also need a full rebalance on the schwarzer mond
+faction." Rules of engagement:
+- **Sheet first** (absolute law): every price/tier lands in
+  `docs/design/cameo_armor_system.xlsx` (M in its cell, O/P/Q
+  recompute) BEFORE yaml; both edits in the same pass. If the `~$` lock
+  file exists the workbook is open — queue the sheet edit and say so.
+- **Sequencing**: the rebalance prices the POST-buff-strip stats (the
+  10 base units just lost the unintended ^PromotionUnitBuff — their
+  effective firepower/durability changed ~10%, so old prices are stale).
+- **Workplan**: extract all schwarzermond_* rows from
+  `docs/audit/latest/stat_formulas.md` (formula deviations) +
+  `power_budget.md`; propose per-unit price/tier corrections; maintainer
+  approves the numbers; then sheet + yaml dual-write, §15 superiority
+  check on the 4 replacement pairs (Beetle→Laser Tank, Panzer→Lunar
+  Tiger, Jagerline→MARS, H2→H3), boot + audits.
+- Include: fluent-ification of the 12 promotion tooltips/descriptions
+  (raw strings today) and the SM upgrades/defenses columns.
 
 ### P2b — CABAL promotion grid tier-mismatch (DESIGN DECISION NEEDED)
 
