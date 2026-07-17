@@ -1,0 +1,355 @@
+zerg_drone:
+	Inherits: ^Vehicle
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^SCWorker
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Zerg Drone
+	Buildable:
+		Queue: SCZergInfantry
+		Prerequisites: ~zerg_extractor
+		Description: actor_scdrone.description
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	Armament:
+		Weapon: DroneAttack
+	Voiced:
+		VoiceSet: SCDroneVoice
+	-WithMakeAnimation:
+	WithMakeAnimation:
+		Sequence: deploy
+		Name: deployed
+		RequiresCondition: undeployed
+	WithIdleOverlay@deployed:
+		RequiresCondition: deployed
+		Image: zerg_drone
+		Sequence: deployed
+		Palette: greyscale
+	WithHarvesterSpriteBody:
+		ImageByFullness: zerg_drone, scdronefull
+	-WithFacingSpriteBody:
+	-WithInfantryBody:
+	-Targetable@disguise:
+	-WithSpriteBody@deployed:
+	Cloak:
+		InitialDelay: 25
+		CloakDelay: 25
+		MinCloakedAlpha: 0.25
+		MaxCloakedAlpha: 0.25
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
+
+zerg_sporemaw:
+	Inherits@zerg: ^LargeZerg
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Tooltip:
+		Name: Sporemaw
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~zerg_lair, zerg_promotion_unlocksporemaw
+		Queue: SCZergInfantry
+		Description: actor_scsporemaw.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 32
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: SporemawShoot
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SporemawShoot
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# 	DecorationBounds: 2448, 2448, 0, 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-320
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
+
+zerg_hermit:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Hermit
+	Valued:
+		Cost: 6000
+	Power:
+		Amount: -300
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 80
+		Prerequisites: ~zerg_ultraliskcavern, ~zerg_promotion_unlockhermit
+		Queue: SCZergInfantry
+		Description: actor_schermit.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 375000
+	ChangesHealth@SelfHealing:
+		Step: 150
+	Armor:
+		Type: Superheavy
+	Armament:
+		Weapon: HermitShoot
+		FireDelay: 3
+		LocalOffset: 384,0,256
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 40
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	FireWarheadsOnDeath:
+		Weapon: HermitExplode
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
+
+zerg_goremaw:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Goremaw
+	Valued:
+		Cost: 1500
+	Power:
+		Amount: -75
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: zerg_ultraliskcavern, ~zerg_hive, zerg_promotion_unlockgoremaw
+		Queue: SCZergInfantry
+		Description: actor_scgoremaw.description
+	Mobile:
+		Speed: 150
+		TurnSpeed: 60
+	Health:
+		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: GoremawClaw
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 60
+	GrantConditionOnAttack@elitegatling:
+		RevokeDelay: 30
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
+
+zerg_lurker:
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@deploy: ^LurkerMode
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Lurker
+	Valued:
+		Cost: 1300
+	Power:
+		Amount: -65
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: zerg_hydraliskden, zerg_evolutionchamber, ~zerg_lair
+		Queue: SCZergInfantry
+		Description: actor_sclurker.description
+	Mobile:
+		Speed: 90
+		Locomotor: wheeled
+		TurnSpeed: 18
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	-HitShape:
+	HitShape:
+	GrantConditionOnDeploy:
+		DeploySounds: zluburrw.aud
+		UndeploySounds: zluburrw.aud
+	WithSpriteBody@deployed:
+		Sequence: deploy-idle
+		Name: deployed
+		RequiresCondition: !undeployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	-WithMakeAnimation:
+	WithMakeAnimation:
+		BodyNames: deployed
+		Sequence: deploy
+	WithInfantryBody@Editor:
+		DefaultAttackSequence: stand
+		RequiresCondition: undeployed
+	AutoTarget:
+		# ScanRadius: 12
+		InitialStance: AttackAnything
+		# AllowMovement: false
+	Armament@Deployed:
+		Weapon: LurkerSpines
+	Armament@Dummy:
+		Weapon: LurkerTargeting
+	-AttackFrontal:
+	Turreted:
+	AttackTurreted:
+	RenderRangeCircle:
+	Crushable:
+		RequiresCondition: undeployed
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCLurkerVoice
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1280, 1280
+	WithShadow:
+		Offset: 128, 12, 0
+		ZOffset: -512
+		RequiresCondition: undeployed
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
+
+zerg_hatcherydrone:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Buildable:
+		Queue: SCZergInfantry
+		Description: actor_sczmcv.description
+		Prerequisites: ~zerg_evolutionchamber
+	Tooltip:
+		Name: Zerg Hatchery Drone
+	Selectable:
+		Priority: 4
+		DecorationBounds: 1536, 1536
+	Transforms:
+		IntoActor: zerg_hatchery
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: zchrdy00.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SCDroneVoice
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2

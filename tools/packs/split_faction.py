@@ -39,7 +39,9 @@ def blocks_of(path: pathlib.Path) -> list[tuple[str, str]]:
     lines = text.split("\n")
     out, cur_key, start = [], None, 0
     for i, line in enumerate(lines + ["<EOF>"]):
-        is_top = line and not line[0] in "\t #" and ":" in line
+        # top-level = first char is a key char; space-prefixed junk lines
+        # (e.g. " 	-Trait:") belong to the CURRENT block (2026-07-17 lesson)
+        is_top = line and (line[0].isalnum() or line[0] in "^_") and ":" in line
         if is_top or line == "<EOF>":
             if cur_key is not None:
                 out.append((cur_key, "\n".join(lines[start:i])))

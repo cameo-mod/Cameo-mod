@@ -1,0 +1,617 @@
+terran_marine:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Marine
+	Valued:
+		Cost: 200
+	Power:
+		Amount: -10
+	Buildable:
+		Prerequisites: ~terran_barracks, ~!terran_promotion_unlockmadcap
+		Queue: Infantry, RAInfantry
+		Description: actor_scmarine.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: MarineMG
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: MarineMG
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@TripleShot:
+		Modifier: 33
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: terran_academy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
+
+terran_reaper:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Reaper
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Buildable:
+		Prerequisites: ~terran_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_screaper.description
+	Mobile:
+		Speed: 120
+		Locomotor: fakeaircraft
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armament@PRIMARY:
+		Weapon: ReaperPistols
+		LocalOffset: 128,-128,256
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Weapon: ReaperPistols
+		LocalOffset: 128,128,256
+		MuzzleSequence: muzzle
+	Armament@Grenade:
+		Weapon: ReaperGrenade
+		LocalOffset: 128,0,256
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: ReaperPistols
+		LocalOffset: 128,-128,256
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: ReaperPistols
+		LocalOffset: 128,128,256
+		MuzzleSequence: muzzle
+	Armament@GARRISONEDGrenade:
+		Name: garrisoned
+		Weapon: ReaperGrenade
+		LocalOffset: 128,0,256
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: terran_academy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2
+
+terran_madcap:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Madcap
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		Prerequisites: ~terran_barracks, ~terran_promotion_unlockmadcap
+		Queue: Infantry, RAInfantry
+		Description: actor_scmadcap.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armament@PRIMARY:
+		Weapon: MadcapGun
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: MadcapGun
+		MuzzleSequence: muzzle
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 60
+	GrantConditionOnAttack@elitegatling:
+		RevokeDelay: 30
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: terran_academy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
+
+terran_firebat:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Firebat
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Buildable:
+		Prerequisites: ~terran_academy, ~!terran_promotion_unlockharakan
+		Queue: Infantry, RAInfantry
+		Description: actor_scfirebat.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 52000
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armament@1:
+		Weapon: FirebatF
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: FirebatF
+		LocalOffset: 341,120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: FirebatF
+		LocalOffset: 341,-120,128
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: FirebatF
+		LocalOffset: 341,120,128
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCFirebatVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
+
+terran_harakan:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Tooltip:
+		Name: Harakan
+	Buildable:
+		Prerequisites: ~terran_academy, ~terran_promotion_unlockharakan
+		Queue: Infantry, RAInfantry
+		Description: actor_scharakan.description
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 78000
+	ChangesHealth@SelfHealing:
+		Step: 78
+	Armament@1:
+		Weapon: HarakanF
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: HarakanF
+		LocalOffset: 341,120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: HarakanF
+		LocalOffset: 341,-120,128
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: HarakanF
+		LocalOffset: 341,120,128
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 25
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCFirebatVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
+
+terran_marauder:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Marauder
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Buildable:
+		Prerequisites: ~terran_academy
+		Queue: Infantry, RAInfantry
+		Description: actor_scmarauder.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armament@1:
+		Weapon: MarauderMissiles
+		LocalOffset: 341,125,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: MarauderMissiles
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCMarauderVoice
+	RenderSprites:
+		Image: terran_marauder
+	# Selectable:
+	# 	DecorationBounds: 1280, 1280
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
+
+terran_ghost:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Ghost
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~terran_sciencefacility, ~!terran_promotion_unlockspectreandmedivac
+		Description: actor_scghost.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@lockdown:
+		Weapon: GhostSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 12
+	Armament@PRIMARY:
+		Weapon: GhostSniper
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GhostSniper
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 44
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	WithMuzzleOverlay:
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: SCGhostVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
+
+terran_specter:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Specter
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockspectreandmedivac
+		Description: actor_scsilvertongue.description
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@lockdown:
+		Weapon: SpecterSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 12
+	Armament@PRIMARY:
+		Weapon: SpecterSniper
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SpecterSniper
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 66
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	WithMuzzleOverlay:
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: SCSilvertongueVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
+
+terran_medic:
+	Inherits: ^SCTINFANTRY
+	Inherits@Template: ^MedicTemplate
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Inherits@Heal: ^PrioritizeHeal
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~terran_academy
+		Description: actor_scmedic.description
+	Tooltip:
+		Name: Medic
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Passenger:
+		CustomPipType: yellow
+	-Armament@Dummy:
+	Armament@Flare:
+		Weapon: MedicFlare
+		LocalOffset: 128,0,256
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+	Armament@Heal:
+		Weapon: MedicHeal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@FlareGARRISONED:
+		Name: garrisoned
+		Weapon: MedicFlare
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 30
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	Voiced:
+		VoiceSet: SCMedicVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2
+
+terran_jimraynor:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Jim Raynor
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Infantry, RAInfantry
+		Description: actor_scjimraynor.description
+		IconPalette: ra2
+		BuildLimit: 1
+		Prerequisites: ~terran_sciencefacility
+	Mobile:
+		Speed: 65
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: JimRaynorMachineGun
+		LocalOffset: 225,0,350
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: JimRaynorMachineGun
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+		DecorationBounds: -24,0
+	Voiced:
+		VoiceSet: SCJimRaynorVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack

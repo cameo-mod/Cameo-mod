@@ -1,0 +1,1406 @@
+zerg_hatchery:
+	Defaults:
+		Filename: zerg_hatchery_schatcheryidle.png
+	build:
+	idle:
+		Filename: zerg_hatchery_schatcheryidle.png
+		Length: 6
+		Tick: 160
+	lair:
+		Filename: zerg_lair.png
+		Length: *
+		Tick: 160
+	hive:
+		Filename: zerg_hatchery_schive.png
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakelarge.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	make2:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	make3:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	lairhatch:
+		Filename: zerg_hatchery_sczbm2.shp
+		Length: 10
+		Tick: 40
+	hivehatch:
+		Filename: zerg_hatchery_sczbm23.shp
+		Start: 7
+		Length: 6
+		Tick: 48
+		ZOffset: 5
+	icon:
+		Filename: zerg_hatcherydrone_icon.png
+
+zerg_lair:
+	Defaults:
+		Filename: zerg_lair.png
+	build:
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	bib:
+		Filename: zerg_lair_sczergsoilbib.shp
+		Length: *
+	icon:
+		Filename: zerg_lair_icon.png
+
+zerg_hive:
+	Defaults:
+		Filename: zerg_hive.shp
+	build:
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	bib:
+		Filename: zerg_lair_sczergsoilbib.shp
+		Length: *
+	icon:
+		Filename: zerg_hive_icon.png
+
+zerg_extractor:
+	Defaults:
+		Filename: zerg_extractor.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	smoke:
+		Filename: terran_refinery_geysersmoke.png
+		Scale: 3
+		Length: *
+		Tick: 160
+		Offset: 3,-24
+		ZOffset: 2048
+	icon:
+		Filename: zerg_extractor_icon.png
+
+zerg_creepcolony:
+	Defaults:
+		Filename: zerg_creepcolony_2_sccreepcolony.png
+	idle:
+		Length: *
+		Tick: 160
+	sunken:
+		Filename: scsunkencolonyidle.png
+		Length: *
+		Tick: 160
+	spore:
+		Filename: scsporecolony.png
+		Length: *
+		Tick: 160
+	shoot:
+		Filename: zerg_sunkencolony_2_scsunkencolonyshoot.png
+		Length: *
+	dead:
+	make:
+		Filename: zergbuildingmakesmall.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_creepcolony_2_icon.png
+
+zerg_sunkencolony_2:
+	Defaults:
+		Filename: scsunkencolonyidle.png
+	idle:
+		Length: *
+		Tick: 160
+	shoot:
+		Length: *
+		Filename: zerg_sunkencolony_2_scsunkencolonyshoot.png
+	sunken:
+		Filename: scsunkencolonyidle.png
+		Length: *
+		Tick: 160
+	spore:
+		Filename: scsporecolony.png
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakesmall.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_sunkencolony_2_icon.png
+
+zerg_sporecolony:
+	Defaults:
+		Filename: scsporecolony.png
+	idle:
+		Length: *
+		Tick: 160
+	sunken:
+		Filename: scsunkencolonyidle.png
+		Length: *
+		Tick: 160
+	spore:
+		Filename: scsporecolony.png
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakesmall.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_sporecolony_2_icon.png
+
+zerg_evolutionchamber:
+	Defaults:
+		Filename: zerg_evolutionchamber.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakesmall.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_evolutionchamber_icon.png
+
+zerg_hydraliskden:
+	Defaults:
+		Filename: zerg_hydraliskden.png
+	idle:
+		Length: *
+		Tick: 160
+	place:
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_hydraliskden_icon.png
+
+zerg_spawningpool:
+	Defaults:
+		Filename: zerg_spawningpool.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_spawningpool_icon.png
+
+zerg_spire:
+	Defaults:
+		Filename: zerg_spire.png
+		Offset: 0,4
+	idle:
+		Filename: zerg_spire.png
+		Length: *
+		Tick: 160
+	greaterspire:
+		Filename: zerg_spire_scgreaterspire.png
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_spire_icon.png
+		Offset: 0,0
+
+zerg_greaterspire:
+	Defaults:
+		Filename: zerg_spire_scgreaterspire.png
+		Offset: 0,4
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	icon:
+		Filename: zerg_greaterspire_icon.png
+		Offset: 0,0
+
+zerg_queensnest:
+	Defaults:
+		Filename: zerg_queensnest.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_queensnest_icon.png
+
+zerg_defilermound:
+	Defaults:
+		Filename: zerg_defilermound.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_defilermound_icon.png
+
+zerg_ultraliskcavern:
+	Defaults:
+		Filename: zerg_ultraliskcavern.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakemedium.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_ultraliskcavern_icon.png
+
+zerg_nyduscanal:
+	Defaults:
+		Filename: zerg_nyduscanal.shp
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zerg_nyduscanal_sczbm12.shp
+		Length: *
+	icon:
+		Filename: zerg_nyduscanal_icon.shp
+
+zerg_overmind:
+	Defaults:
+		Filename: zerg_overmind.png
+	idle:
+		Length: *
+		Tick: 160
+	dead:
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	make-loop:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakelarge.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
+	icon:
+		Filename: zerg_overmind_icon.png
+
+zerg_drone:
+	Defaults:
+		Filename: zerg_hatcherydrone_scdroneidle.png
+		Offset: 0,-6
+	idle:
+		Facings: -8
+	run:
+		Facings: -8
+	harvest:
+		Length: 9
+		Facings: -8
+		Filename: zerg_drone_scdroneharvest.png
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_drone_scdroneburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_drone_scdroneburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_drone_scdroneburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dock:
+		Length: 1
+		Facings: -8
+		Filename: zerg_drone_scdronefull.png
+	dock-loop:
+		Length: 1
+		Facings: -8
+		Filename: zerg_drone_scdronefull.png
+	icon:
+		Filename: zerg_drone_icon.png
+		Offset: 0,0
+
+zerg_zergling:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_zergling_sczerglingidle.png
+		Offset: 0,-6
+	idle:
+		Filename: zerg_zergling_sczerglingidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_zergling_sczerglingidle.png
+		Facings: -8
+	run:
+		Filename: zerg_zergling_sczerglingwalk.png
+		Length: 8
+		Facings: -8
+	shoot:
+		Filename: zerg_zergling_sczerglingshoot.png
+		Start: 0
+		Length: 3
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_zergling_sczerglingburrowed.png
+		Start: 41
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_zergling_sczerglingburrowed.png
+		Start: 41
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_zergling_sczerglingburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	icon:
+		Filename: zerg_zergling_icon.png
+		Offset: 0,0
+
+zerg_dreadshroud:
+	Defaults:
+		Filename: zerg_promotion_unlockdreadshroud_scdreadshroudidle.png
+	idle:
+		Length: 6
+		Facings: -16
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockdreadshroud_icon.png
+
+zerg_corruptor:
+	Defaults:
+		Filename: zerg_promotion_unlockcorruptor_sccorruptoridle.png
+	idle:
+		Filename: zerg_promotion_unlockcorruptor_sccorruptoridle.png
+		Length: 6
+		Facings: -32
+		Tick: 80
+	move:
+		Filename: zerg_promotion_unlockcorruptor_sccorruptorwalk.png
+		Length: 6
+		Facings: -32
+	shoot:
+		Filename: zerg_promotion_unlockcorruptor_sccorruptorshoot.png
+		Length: 7
+		Facings: -32
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockcorruptor_icon.png
+
+zerg_swarmling:
+	Defaults:
+		Filename: zerg_promotion_unlockswarmling_scsovrelethidle.png
+	idle:
+		Length: 6
+		Facings: -16
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockswarmling_icon.png
+
+zerg_shriek:
+	Defaults:
+		Filename: zerg_promotion_unlockshriek_scshriekidle.png
+		Scale: 0.8
+	idle:
+		Length: 8
+		Facings: -32
+		Tick: 80
+		Combine:
+			zerg_shriek-l:
+				Filename: zerg_promotion_unlockshriek_scshriekidle.png
+				Frames: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127
+			zerg_shriek-r:
+				Filename: zerg_promotion_unlockshriek_scshriekidle.png
+				FlipX: True
+				Frames: 127, 126, 125, 124, 123, 122, 121, 120, 119, 118, 117, 116, 115, 114, 113, 112, 111, 110, 109, 108, 107, 106, 105, 104, 103, 102, 101, 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	shoot:
+		Filename: zerg_promotion_unlockshriek_scshriekshoot.png
+		Start: 0
+		Length: 3
+		Facings: -32
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockshriek_icon.png
+
+zerg_talon:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Offset: 0,-6
+	idle:
+		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Facings: -8
+	run:
+		Filename: zerg_promotion_unlocktalon_sctalonwalk.png
+		Length: 4
+		Facings: -8
+	shoot:
+		Filename: zerg_promotion_unlocktalon_sctalonshoot.png
+		Length: 5
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	icon:
+		Filename: zerg_promotion_unlocktalon_icon.png
+		Offset: 0,0
+
+zerg_hermit:
+	Defaults:
+		Filename: zerg_promotion_unlockhermit_schermitidle.png
+	idle:
+		Facings: -8
+		Filename: zerg_promotion_unlockhermit_schermitidle.png
+	stand:
+		Facings: -8
+		Filename: zerg_promotion_unlockhermit_schermitidle.png
+	run:
+		Facings: -8
+		Filename: zerg_promotion_unlockhermit_schermitwalk.png
+		Tick: 100
+		Length: 10
+	shoot:
+		Facings: -8
+		Filename: zerg_promotion_unlockhermit_schermitshoot.png
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockhermit_icon.png
+
+zerg_goremaw:
+	Defaults:
+		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+	idle:
+		Facings: -8
+		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+	stand:
+		Facings: -8
+		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+	run:
+		Facings: -8
+		Filename: zerg_promotion_unlockgoremaw_scgoremawwalk.png
+		Tick: 110
+		Length: 11
+	shoot:
+		Facings: -8
+		Filename: zerg_promotion_unlockgoremaw_scgoremawshoot.png
+		Tick: 100
+		Length: 10
+	deployed:
+		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Start: 12
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Start: 12
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockgoremaw_icon.png
+
+zerg_gorekraken:
+	Defaults:
+		Filename: zerg_promotion_unlockgorekraken_scgorekrakenidle.png
+	idle:
+		Filename: zerg_promotion_unlockgorekraken_scgorekrakenidle.png
+		Length: 9
+		Facings: -16
+		Tick: 120
+	shoot:
+		Filename: zerg_promotion_unlockgorekraken_scgorekrakenshoot.png
+		Length: 6
+		Facings: -16
+		Tick: 120
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockgorekraken_icon.png
+
+zerg_upgrade_pneumatizedcarapace:
+	icon:
+		Filename: zerg_upgrade_pneumatizedcarapace_icon.png
+
+zerg_overlord:
+	Defaults:
+		Filename: zerg_overlord_scoverlordidle.png
+	idle:
+		Facings: -8
+		Tick: 210
+	move:
+		Length: 3
+		Facings: -8
+		Tick: 210
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_overlord_icon.png
+
+zerg_hydralisk:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_hydralisk_schydraliskidle.png
+		Offset: 0,-6
+	idle:
+		Filename: zerg_hydralisk_schydraliskidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_hydralisk_schydraliskidle.png
+		Facings: -8
+	run:
+		Filename: zerg_hydralisk_schydraliskwalk.png
+		Length: 7
+		Facings: -8
+	shoot:
+		Filename: zerg_hydralisk_schydraliskshoot.png
+		Start: 0
+		Length: 4
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_hydralisk_schydraliskburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_hydralisk_schydraliskburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_hydralisk_schydraliskburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	make:
+		Filename: zerg_hydralisk_schydraliskburrowed.png
+	muzzle:
+		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Length: 7
+		Facings: 16
+		Tick: 80
+	icon:
+		Filename: zerg_hydralisk_icon.png
+		Offset: 0,0
+
+zerg_spithid:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Offset: 0,-6
+	idle:
+		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Facings: -8
+	stand:
+		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Facings: -8
+	run:
+		Filename: zerg_promotion_unlockspithid_scspithidwalk.png
+		Length: 7
+		Facings: -8
+	shoot:
+		Filename: zerg_promotion_unlockspithid_scspithidshoot.png
+		Start: 0
+		Length: 3
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Start: 3
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Start: 3
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	make:
+		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+	muzzle:
+		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Length: 7
+		Facings: 16
+		Tick: 80
+	icon:
+		Filename: zerg_promotion_unlockspithid_icon.png
+		Offset: 0,0
+
+zerg_sporemaw:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Offset: 0,-6
+	idle:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Facings: -8
+	run:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawwalk.png
+		Length: 7
+		Facings: -8
+		Tick: 70
+	shoot:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawshoot.png
+		Start: 0
+		Length: 4
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Start: 5
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Start: 5
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	make:
+		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+	muzzle:
+		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Length: 7
+		Facings: 16
+		Tick: 80
+	icon:
+		Filename: zerg_promotion_unlocksporemaw_icon.png
+		Offset: 0,0
+
+zerg_mutalisk:
+	Defaults:
+		Filename: zerg_mutalisk.png
+	idle:
+		Length: 5
+		Facings: -16
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_mutalisk_icon.png
+
+zerg_devourer:
+	Defaults:
+		Filename: zerg_devourer_scdevoureridle.png
+	idle:
+		Length: 7
+		Facings: -16
+		Tick: 80
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_devourer_icon.png
+
+zerg_scourge:
+	Defaults:
+		Filename: zerg_scourge.png
+	idle:
+		Length: 5
+		Facings: 16
+		Tick: 120
+	die:
+		Filename: zerg_scourge_scscourgedeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_scourge_icon.png
+
+zerg_queen:
+	Defaults:
+		Filename: zerg_queen.png
+	idle:
+		Length: 5
+		Facings: -16
+		Tick: 120
+	shoot:
+		Length: 5
+		Facings: -16
+		Tick: 120
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_queen_icon.png
+
+zerg_ultralisk:
+	Defaults:
+		Filename: zerg_ultralisk_scultraliskidle.png
+	idle:
+		Facings: -8
+		Filename: zerg_ultralisk_scultraliskidle.png
+	stand:
+		Facings: -8
+		Filename: zerg_ultralisk_scultraliskidle.png
+	run:
+		Facings: -8
+		Filename: zerg_ultralisk_scultraliskwalk.png
+		Tick: 80
+		Length: 8
+	shoot:
+		Facings: -8
+		Filename: zerg_ultralisk_scultraliskshoot.png
+		Tick: 96
+		Length: 6
+	deployed:
+		Filename: zerg_ultralisk_scultraliskburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_ultralisk_scultraliskburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_ultralisk_scultraliskburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	die:
+		Facings: 1
+		Filename: zerg_ultralisk_scultraliskdeath.png
+	icon:
+		Filename: zerg_ultralisk_icon.png
+
+zerg_defiler:
+	Defaults:
+		Filename: zerg_defiler_scdefileridle.png
+	idle:
+		Filename: zerg_defiler_scdefileridle.png
+		Length: 8
+		Facings: -8
+		Tick: 160
+	stand:
+		Filename: zerg_defiler_scdefileridle.png
+		Length: 8
+		Facings: -8
+		Tick: 160
+	run:
+		Filename: zerg_defiler_scdefileridle.png
+		Length: 8
+		Facings: -8
+		Tick: 160
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_defiler_scdefilerburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_defiler_scdefilerburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_defiler_scdefilerburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	make:
+		Filename: zerg_hydralisk_schydraliskburrowed.png
+	icon:
+		Filename: zerg_defiler_icon.png
+
+zerg_lurker:
+	Defaults:
+		Filename: zerg_lurker_sclurkeridle.png
+	dot:
+		Filename: invisibleitem.shp
+	stand:
+		Filename: zerg_lurker_sclurkeridle.png
+		Facings: -8
+	run:
+		Filename: zerg_lurker_sclurkerwalk.png
+		Length: 6
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_lurker_sclurkerburrowed.png
+		Start: 13
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_lurker_sclurkerburrowed.png
+		Start: 13
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_lurker_sclurkerburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	icon:
+		Filename: zerg_lurker_icon.png
+
+zerg_guardian:
+	Defaults:
+		Filename: zerg_guardian_scguardianidle.png
+	idle:
+		Filename: zerg_guardian_scguardianidle.png
+		Length: 7
+		Facings: -16
+		Tick: 120
+	die:
+		Filename: zerg_guardian_guardiandie.png
+		Length: *
+	icon:
+		Filename: zerg_guardian_icon.png
+
+zerg_infestedterranbomber:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: zerg_infestedterranbomber_scinfestedterranidle.png
+	idle:
+		Filename: zerg_infestedterranbomber_scinfestedterranidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_infestedterranbomber_scinfestedterranidle.png
+		Facings: -8
+	run:
+		Filename: zerg_infestedterranbomber_scinfestedterranwalk.png
+		Facings: -8
+		Length: 7
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	deployed:
+		Filename: zerg_infestedterranbomber_scinfestedterranburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy-idle:
+		Filename: zerg_infestedterranbomber_scinfestedterranburrowed.png
+		Start: 4
+		Facings: 1
+		Tick: 100
+	deploy:
+		Filename: zerg_infestedterranbomber_scinfestedterranburrowed.png
+		Start: 0
+		Facings: 1
+		Tick: 100
+	icon:
+		Filename: zerg_infestedterranbomber_icon.png
+		Offset: 0,0
+
+zerg_broodweaver:
+	Defaults:
+		Filename: zerg_promotion_unlockbroodweaver_scbroodweaveridle.png
+	idle:
+		Facings: -16
+		Tick: 210
+		Length: 9
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockbroodweaver_icon.png
+
+zerg_kerrigan:
+	Defaults:
+		Filename: zerg_kerrigan_sckerriganidle.png
+	idle:
+		Filename: zerg_kerrigan_sckerriganidle.png
+		Facings: -8
+	stand:
+		Filename: zerg_kerrigan_sckerriganidle.png
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	run:
+		Filename: zerg_kerrigan_sckerriganwalk.png
+		Facings: -8
+		Length: 8
+	shoot:
+		Filename: zerg_kerrigan_sckerriganshoot.png
+		Length: 7
+		Facings: -8
+	icon:
+		Filename: zerg_kerrigan_icon.shp
+
+zerg_hatcherydrone:
+	Defaults:
+		Filename: zerg_hatcherydrone_scdroneidle.png
+		Offset: 0,0
+		Scale: 1.5
+	idle:
+		Facings: -8
+	run:
+		Facings: -8
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_hatcherydrone_icon.png
+		Offset: 0,0
+
+zerg_behemoth:
+	Defaults:
+		Filename: zerg_promotion_unlockbehemoth_scbehemothidle.png
+	idle:
+		Filename: zerg_promotion_unlockbehemoth_scbehemothidle.png
+		Length: 7
+		Facings: -32
+	die:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_promotion_unlockbehemoth_icon.png
+
+zerg_upgrade_groovedspines:
+	icon:
+		Filename: zerg_upgrade_groovedspines_icon.png
+
+zerg_infestedcommandcenter:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: zerg_infestedcommandcenter.png
+		Scale: 1.25
+	idle:
+		Length: *
+		Tick: 120
+	make:
+		Filename: zergbuildingmakelarge.png
+		Length: *
+	dead:
+		Filename: scdeath.png
+		Start: 0
+		Tick: 70
+		Length: 7
+	icon:
+		Filename: zerg_infestedcommandcenter_icon.png
+		Offset: 0,0
+
+####################################################################################################
+#		BULLETS
+####################################################################################################
+
+zerg_upgrade_metabolicboost:
+	icon:
+		Filename: zerg_upgrade_metabolicboost_icon.png
+
+zerg_upgrade_adrenalglands:
+	icon:
+		Filename: zerg_upgrade_adrenalglands_icon.png
+
+zerg_upgrade_carapacelevel1:
+	icon:
+		Filename: zerg_upgrade_carapacelevel2_icon.png
+
+zerg_upgrade_meleeattackslevel1:
+	icon:
+		Filename: zerg_upgrade_meleeattackslevel2_icon.png
+
+zerg_upgrade_missileattackslevel1:
+	icon:
+		Filename: zerg_upgrade_missileattackslevel2_icon.png
+
+zerg_upgrade_flyerattackslevel1:
+	icon:
+		Filename: zerg_upgrade_flyerattackslevel2_icon.png
+
+zerg_upgrade_flyercarapacelevel1:
+	icon:
+		Filename: zerg_upgrade_flyercarapacelevel2_icon.png
+
+upscrefinery3:
+	icon:
+		Filename: zerg_vespenegascollector_icon.shp

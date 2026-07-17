@@ -1,0 +1,57 @@
+protoss_photoncannon:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@decoration: ^ProtossRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@shape: ^2x2Shape
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Photon Cannon
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~protoss_nexus, protoss_forge
+		Queue: Defence, RADefence
+		Description: actor_scphotoncannon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: pshbld03.aud
+	Health:
+		HP: 200000
+	Turreted:
+		InitialFacing: 0
+		RealignDelay: -1
+	WithEmbeddedTurretSpriteBody:
+		QuantizedFacings: 16
+	Armament:
+		Weapon: PhotonCannon
+		LocalOffset: 0,0,500
+	AttackPopupTurreted:
+		CloseDelay: 40
+		ClosedDamageMultiplier: 100
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	BodyOrientation:
+		QuantizedFacings: 16
+	-WithSpriteBody:
+	-WithDeathAnimation:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 8228
+	DetectCloaked:
+		Range: 4224
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
