@@ -36,34 +36,18 @@ World:
 #######################################
 # TKM Defaults
 #######################################
-
-^uptitanarsenalupgrade:
-	GrantConditionOnPrerequisite@titanplating:
-		Condition: upspeed
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
-	DamageMultiplier@titanplatinghealth:
-		Modifier: 75
-		RequiresCondition: upspeed
-	SpeedMultiplier@titanplatingspeed:
-		Modifier: 70
-		RequiresCondition: upspeed
-
 ^tkm_upgrade_semiautoriflesupgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_semiautoriflesupgrade
-
 ^tkm_upgrade_twinrocketsupgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_twinrocketsupgrade
-
 ^tkm_upgrade_titanarmorpiercingbulletsupgrade:
 	ActorStatValues:
-		Upgrades: tkm_upgrade_titanarsenalupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
-
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
 ^tkm_upgrade_incendiaryrocketsupgrade:
 	ActorStatValues:
-		Upgrades: tkm_upgrade_titanarsenalupgrade, tkm_upgrade_incendiaryrocketsupgrade
-
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_incendiaryrocketsupgrade
 ^tkm_upgrade_infantryupgrade:
 	DamageMultiplier@terran_upgrade_infantryweaponslevel1:
 		Modifier: 70
@@ -78,7 +62,6 @@ World:
 #######################################
 # TKM MCV and Construction Yard
 #######################################
-
 tkmworker:
 	Inherits: YRSLAV
 	Tooltip:
@@ -97,7 +80,6 @@ tkmworker:
 		RequiresCondition: freed
 	RenderSprites:
 		Image: tkmworker
-
 tkmvan:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
@@ -138,26 +120,6 @@ tkmvan:
 		VoiceSet: TSInfantry
 	RenderSprites:
 		Image: tkm_von
-
-tkmabramspoint:
-	Inherits: tkm_abrams
-	Tooltip:
-		Name: Abrams (Point Defense System)
-	Buildable:
-		Prerequisites: ~tkm_warfactory, ~tkm_upgrade_pointdefensesystem, tkm_observationvan, ~disabled
-		Queue: Vehicle, RAVehicle
-		Description: TKM NATO heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
-	RenderRangeCircle:
-		RangeCircleType: pointdefense
-		Color: FF000088
-	Armament@pointdefense:
-		Weapon: TKMPDLaser
-	ActorStatValues:
-		Upgrades: tkm_upgrade_natoarsenalupgrade
-	RenderSprites:
-		Image: tkm_abrams
-		PlayerPalette: player_rgba
-
 tkmhuey.husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
@@ -178,7 +140,6 @@ tkmhuey.husk:
 	RenderSprites:
 		Image: tkm_iroquois
 		PlayerPalette: player_rgba
-
 tkmviper.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -199,7 +160,6 @@ tkmviper.husk:
 	RenderSprites:
 		Image: tkm_viper
 		PlayerPalette: raplayer
-
 tkmdrone:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
@@ -247,7 +207,6 @@ tkmdrone:
 ####################################################################################################
 #		TKM Promotions
 ####################################################################################################
-
 tkmsuicidedrone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
@@ -313,7 +272,6 @@ tkmsuicidedrone:
 	RenderSprites:
 		Image: tkmdrone
 		PlayerPalette: player_rgba
-
 tkmtrenchtankdeployed:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
@@ -356,7 +314,6 @@ tkmtrenchtankdeployed:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tkmtrenchtankdeployed
-
 tkmratflakdeployed:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
@@ -418,3 +375,22 @@ tkmratflakdeployed:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tkmratflakdeployed
+
+^tkm_upgrade_natoarsenalupgrade:
+	GrantConditionOnPrerequisite@steelalloyplating:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
+	DamageMultiplier@steelalloyplatinghealth:
+		Modifier: 75
+		RequiresCondition: upspeed
+	SpeedMultiplier@steelalloyplatingspeed:
+		Modifier: 70
+		RequiresCondition: upspeed
+
+^tkm_upgrade_heavytitanplating:
+	DamageMultiplier@tkm_upgrade_heavytitanplating:
+		Modifier: 75
+		RequiresCondition: tkm_upgrade_heavytitanplating
+	GrantConditionOnPrerequisite@tkm_upgrade_heavytitanplating:
+		Condition: tkm_upgrade_heavytitanplating
+		Prerequisites: tkm_upgrade_heavytitanplating

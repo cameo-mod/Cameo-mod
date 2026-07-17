@@ -441,7 +441,43 @@ line tank, Laser Tank plays as support. See the FINAL LAYOUT above.)
 
 </details>
 
-### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn)
+### P0 — TKM CONTRIBUTOR PORT (ordered 2026-07-18, jumps the queue)
+
+A community contributor updated TKM (new upgrades and/or rebalance) but
+can't merge anymore after our renames. He sent his ENTIRE repo as a zip,
+extracted at `C:\Users\AedisToru\Downloads\TKuM`; his base version is
+UNKNOWN. Plan: (1) inventory his tree; (2) find his base by matching his
+files against our git history / the golden reference release; (3) his
+real changes = diff(his tree, base); (4) port onto master through the
+rename maps (old ids → tkm_*) into ContentPacks/TKM/TKM/yaml; (5)
+audits + boot + commit. Balance numbers he changed are the
+contributor's design — port faithfully, flag anything that contradicts
+DESIGN formulas instead of silently "fixing".
+
+### New orders 2026-07-18 (mid-turn batch)
+
+- [ ] **Theme-folder rename + TKM move (DECISION PENDING — maintainer
+  picks the name first).** TKM belongs inside the RA2-mod theme folder
+  (it presents in-game as an RA2 modded faction), but
+  `ContentPacks/RedAlert2Mod/` shall be renamed first: the folder holds
+  RA2-mod factions AND Cameo originals AND other-mod imports; maintainer
+  floated "CnCExpandedUniverse", wants alternatives + effort estimate.
+  No split into two folders. Move TKM only AFTER the rename so paths
+  churn once.
+- [ ] **BUG (tester, maintainer-confirmed "add to the list"): Tesla
+  Rockets upgrade has no visible effect on the monster tank.** Also
+  tester: doctrine upgrades "don't have very descriptive descriptions".
+  Verify wiring (condition granted? armament switch?) before fixing.
+- [ ] **Survival map (unpacked at maps/survival/ by maintainer/tester —
+  do NOT clobber; NFWRambo makes his own `survival 2` copy):
+  (a) BUG: game does not end when all waves are cleared;
+  (b) difficulty dip waves 12–15 (tier-3/4 wave budgets buy too few
+  units when unit costs are high — consider count floor or budget
+  scaling); (c) maintainer idea: waves spawn with all upgrades ("elite
+  force"); (d) pacing already retuned in Discord: initial 180→60,
+  between-waves 90→30 (tester applied).**
+
+### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn — NEXT after the TKM port)
 
 Maintainer order: "we also need a full rebalance on the schwarzer mond
 faction." Rules of engagement:

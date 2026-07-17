@@ -24,7 +24,6 @@ tkm_mobileconstructionvehicletkm:
 	RenderSprites:
 		Image: tkm_mobileconstructionvehicletkm
 		PlayerPalette: playerra2
-
 tkm_templateharvesterraname:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
@@ -35,7 +34,7 @@ tkm_templateharvesterraname:
 		Prerequisites: ~tkm_warfactory, ~tkm_orerefinery
 		Description: template_harvester.description
 	Valued:
-		Cost: 1000 #1100
+		Cost: 1000
 	Tooltip:
 		Name: template_harvester.raname
 	SelectionDecorations:
@@ -81,7 +80,6 @@ tkm_templateharvesterraname:
 	RenderSprites:
 		Image:  tkm_templateharvesterraname
 		PlayerPalette: player_rgba
-
 tkm_as42:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -161,7 +159,6 @@ tkm_as42:
 	RenderSprites:
 		Image: tkm_as42
 		PlayerPalette: player_rgba
-
 tkm_technical:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -224,7 +221,6 @@ tkm_technical:
 	RenderSprites:
 		Image: tkm_technical
 		PlayerPalette: player_rgba
-
 tkm_technicaltank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
@@ -296,7 +292,6 @@ tkm_technicaltank:
 	RenderSprites:
 		Image: technicaltank
 		PlayerPalette: player_rgba
-
 tkm_quadtruck:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -347,7 +342,6 @@ tkm_quadtruck:
 	RenderSprites:
 		Image: tkmtechnicaltruck
 		PlayerPalette: player_rgba
-
 tkm_zaza:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -433,7 +427,6 @@ tkm_zaza:
 	RenderSprites:
 		Image: tkm_zaza
 		PlayerPalette: player_rgba
-
 tkm_stryker:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -474,28 +467,33 @@ tkm_stryker:
 		Weapon: tkmstrykerrockets
 		LocalOffset: 171,0,85
 		MuzzleSequence: muzzle
-		RequiresCondition: !tkm_upgrade_cryorocketsupgrade
-	Armament@missilecryo:
-		Weapon: tkmstrykercryorockets
+		RequiresCondition: !tkm_upgrade_incendiaryrocketsupgrade
+	Armament@missilefire:
+		Weapon: tkmstrykerfirerockets
 		LocalOffset: 171,0,85
 		MuzzleSequence: muzzle
-		RequiresCondition: tkm_upgrade_cryorocketsupgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_cryorocketsupgrade:
-		Condition: tkm_upgrade_cryorocketsupgrade
-		Prerequisites: tkm_upgrade_cryorocketsupgrade
+		RequiresCondition: tkm_upgrade_incendiaryrocketsupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_incendiaryrocketsupgrade:
+		Condition: tkm_upgrade_incendiaryrocketsupgrade
+		Prerequisites: tkm_upgrade_incendiaryrocketsupgrade
 	WithMuzzleOverlay:
 	AttackTurreted:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_cryorocketsupgrade
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating, tkm_upgrade_incendiaryrocketsupgrade
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: tkm_upgrade_heavytitanplating
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_heavytitanplating
+		Prerequisites: tkm_upgrade_heavytitanplating
 	Selectable:
 		Class: tkm_stryker
 	WithSpriteTurret:
 	RenderSprites:
 		Image: tkm_stryker
 		PlayerPalette: player_rgba
-
 tkm_abrams:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
@@ -551,13 +549,37 @@ tkm_abrams:
 	DeliversCash:
 		Payload: 400
 	ActorStatValues:
-		Upgrades: tkm_upgrade_natoarsenalupgrade
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: tkm_upgrade_heavytitanplating
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_heavytitanplating
+		Prerequisites: tkm_upgrade_heavytitanplating
 	Selectable:
 		Class: tkm_abrams
 	RenderSprites:
 		Image: tkm_abrams
 		PlayerPalette: player_rgba
 
+# tkmabramspoint:
+# 	Inherits: tkm_abrams
+# 	Tooltip:
+# 		Name: Abrams (Point Defense System)
+# 	Buildable:
+# 		Prerequisites: ~tkm_warfactory, ~tkm_upgrade_pointdefensesystem, tkm_observationvan, ~disabled
+# 		Queue: Vehicle, RAVehicle
+# 		Description: TKM NATO heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+# 	RenderRangeCircle:
+# 		RangeCircleType: pointdefense
+# 		Color: FF000088
+# 	Armament@pointdefense:
+# 		Weapon: TKMPDLaser
+# 	ActorStatValues:
+# 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_heavytitanplating
+# 	RenderSprites:
+# 		Image: tkm_abrams
+# 		PlayerPalette: player_rgba
 tkm_t72m:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
@@ -620,20 +642,13 @@ tkm_t72m:
 	DeliversCash:
 		Payload: 400
 	ActorStatValues:
-		Upgrades: tkm_upgrade_heavytitanplating, tkm_upgrade_pointdefensesystem
-	DamageMultiplier:
-		Modifier: 75
-		RequiresCondition: tkm_upgrade_heavytitanplating
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_heavytitanplating
-		Prerequisites: tkm_upgrade_heavytitanplating
+		Upgrades: tkm_upgrade_pointdefensesystem
 	Selectable:
 		Class: tkmt72
 	WithSpriteTurret:
 	RenderSprites:
 		Image: tkmt72
 		PlayerPalette: player_rgba
-
 tkm_trenchtruck:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
@@ -687,7 +702,6 @@ tkm_trenchtruck:
 	RenderSprites:
 		Image: tkm_trenchtank
 		PlayerPalette: player_rgba
-
 tkm_tornadoglauncher:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
@@ -769,7 +783,6 @@ tkm_tornadoglauncher:
 #######################################
 # TKM Aircrafts
 #######################################
-
 tkm_radartruck:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -816,7 +829,6 @@ tkm_radartruck:
 	RenderSprites:
 		Image: tkm_radartruck
 		PlayerPalette: player_rgba
-
 tkm_repairtruck:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -880,7 +892,6 @@ tkm_repairtruck:
 	RenderSprites:
 		Image: tkm_repairtruck
 		PlayerPalette: player_rgba
-
 tkm_medictruck:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -937,7 +948,6 @@ tkm_medictruck:
 	RenderSprites:
 		Image: tkm_medictruck
 		PlayerPalette: player_rgba
-
 tkm_dronepodtruck:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ArtilleryTemplate
@@ -995,7 +1005,6 @@ tkm_dronepodtruck:
 	RenderSprites:
 		Image: tkm_dronepodtruck
 		PlayerPalette: player_rgba
-
 tkm_trenchtank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
@@ -1066,7 +1075,6 @@ tkm_trenchtank:
 	RenderSprites:
 		Image: tkm_trenchtank
 		PlayerPalette: player_rgba
-
 tkm_t30:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
@@ -1129,7 +1137,6 @@ tkm_t30:
 	RenderSprites:
 		Image: tkmt30
 		PlayerPalette: player_rgba
-
 tkm_battlebus:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
@@ -1268,7 +1275,6 @@ tkm_battlebus:
 # 		Upgrades: tkm_upgrade_natoarsenalupgrade
 # 	RenderSprites:
 # 		Image: tkm_battlebus
-
 tkm_sandmarine:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
@@ -1424,7 +1430,6 @@ tkm_sandmarine:
 	RenderSprites:
 		Image: tkm_sandmarine
 		PlayerPalette: player_rgba
-
 tkm_flakbus:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -1475,7 +1480,6 @@ tkm_flakbus:
 	RenderSprites:
 		Image: tkm_flakbus
 		PlayerPalette: player_rgba
-
 tkm_bigshiee:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate

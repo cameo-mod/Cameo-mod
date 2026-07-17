@@ -111,8 +111,6 @@ tkm_iroquois:
 		TrailWhileStationary: True
 		Type: CenterPosition
 		RequiresCondition: enable-smoke
-	Selectable:
-		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: TSVehicle
 	GrantConditionOnDamageState@SmokeTrail:
@@ -129,14 +127,11 @@ tkm_iroquois:
 		PipCount: 6
 	FireWarheadsOnDeath:
 		Weapon: LargeHeliExplode
-	RenderSprites:
-		PlayerPalette: raplayer
 	Selectable:
 		Class: tkm_iroquois
 	RenderSprites:
 		Image: tkm_iroquois
 		PlayerPalette: player_rgba
-
 tkm_viper:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
