@@ -1,5 +1,42 @@
 # Development Log
 
+## 2026-07-17 — Claude session SID-20260717-cl4b7e (RA1 legacy rename + two-session repair pass)
+
+**Landed (commits `fdd466494`, `4cf7e6909` + this session's repair commit):**
+- RA1 LEGACY-ID RENAME complete: all 52 old-style ids (RAE1, PT/DD/CA,
+  SS/MSUB, POWR/APWR/RASILO, BADR family, naval yards, civilians, husks,
+  8 upgrade proxies) → grammar-compliant ids; only `japan` unprefixed.
+  Applied by tools/rename/apply_ra1_legacy.py (context-scoped successor
+  to apply.py). zerofighter collision → japan_zerofighter_slave.
+- Umlaut transliteration (schwarzermond_ubermensch), CABAL plasmaturret
+  buildable + mobilestealthgenerator removed, stale RA1 monoliths deleted.
+- REPAIR PASS after two-session collision (this entry's second half):
+  1. 13 explicit `actor_<oldid>.description/.name` yaml refs broke when
+     ftl keys renamed (whole-identifier pass can't see through the
+     `actor_` prefix) — added a fluent-stem pass to the applicator
+     (combined-alternation regexes; 52 sequential re.subs was too slow)
+     and fixed all 13. audit_fluent: 17 → 0 unresolved.
+  2. warcraft2_en.ftl + tkm_en.ftl were NEVER registered in mod.yaml
+     FluentMessages — WC2/TKM faction descriptions showed raw keys.
+     Registered both.
+  3. 19 audit reports in docs/audit/latest/ were UTF-16-corrupted by a
+     concurrent session's PowerShell `>` redirect (10 committed
+     corrupted). Regenerated the whole suite via bash run_all.sh (UTF-8).
+     Lesson saved to agent memory.
+- Verification: full audit suite green (fluent 0 unresolved, consistency
+  73/0, packs P2 = known D2k suffix-style backlog only), resolver spot
+  checks green (3913 actors / 2365 weapons, zero old ids), FACTIONS.md
+  clean of old ids, boot gate to main menu.
+- SM promotion grid: implemented by the concurrent session in
+  SchwarzerMond/yaml/promotions.yaml with CABAL-pattern gating BUT the
+  chains deviate from the maintainer's image; row order under redesign —
+  see ROADMAP P2 (sharpened 2026-07-17 with maintainer's MARS/tier
+  clarifications + reshuffle proposal). DO NOT touch the grid before the
+  maintainer picks an option.
+- NOTE for all agents: SCUD/SCUDNUKE (RedAlert/Soviets weapons.yaml) are
+  legacy-uppercase WEAPON ids shared with generals/darkreign — WPN-MIGRATE
+  scope, intentionally untouched by the actor rename.
+
 ## 2026-07-16
 
 **Task:** Diagnose ACP connection issue with Claude.
