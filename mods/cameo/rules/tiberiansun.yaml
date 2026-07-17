@@ -1,13 +1,13 @@
 World:
-	FactionCA@tsgdi:
+	FactionCA@ts_gdi:
 		Name: GDI TS
-		InternalName: tsgdi
+		InternalName: ts_gdi
 		Game: Tiberian Sun
 		Side: Tiberian Sun
 		Description: faction_tsgdi.description
-	FactionCA@tsnod:
+	FactionCA@ts_nod:
 		Name: Nod TS
-		InternalName: tsnod
+		InternalName: ts_nod
 		Game: Tiberian Sun
 		Side: Tiberian Sun
 		Description: faction_tsnod.description
@@ -28,7 +28,7 @@ World:
 	FactionCA@RandomTS:
 		Name: Random TS
 		InternalName: RandomTS
-		RandomFactionMembers: tsnod, tsgdi, forgotten, cabal
+		RandomFactionMembers: ts_nod, ts_gdi, forgotten, cabal
 		Game: Tiberian Sun
 		Side: Random
 		Description: faction_ts_random.description
@@ -39,35 +39,35 @@ World:
 	StartingUnits@mcvonlyratsgdi:
 		Class: none
 		ClassName: MCV Only
-		Factions: tsgdi
+		Factions: ts_gdi
 		BaseActor: ts_gdi_mobileconstructionvehicle
 	StartingUnits@defaulttsgdi:
 		Class: light
 		ClassName: Light Support
-		Factions: tsgdi
+		Factions: ts_gdi
 		BaseActor: ts_gdi_mobileconstructionvehicle
 		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan
 	StartingUnits@heavytsgdi:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: tsgdi
+		Factions: ts_gdi
 		BaseActor: ts_gdi_mobileconstructionvehicle
 		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan
 	StartingUnits@mcvonlyratsnod:
 		Class: none
 		ClassName: MCV Only
-		Factions: tsnod
+		Factions: ts_nod
 		BaseActor: ts_nod_mobileconstructionvehicle
 	StartingUnits@defaulttsnod:
 		Class: light
 		ClassName: Light Support
-		Factions: tsnod
+		Factions: ts_nod
 		BaseActor: ts_nod_mobileconstructionvehicle
 		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank
 	StartingUnits@heavytsnod:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: tsnod
+		Factions: ts_nod
 		BaseActor: ts_nod_mobileconstructionvehicle
 		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank
 	StartingUnits@mcvonlyraforgotten:

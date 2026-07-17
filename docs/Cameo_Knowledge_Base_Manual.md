@@ -1,6 +1,6 @@
-# Cameo Knowledge Base Manual v.0.1
+# Cameo Knowledge Base Manual v.0.2
 
-> **Version note:** Manual v.0.1 — this edition reflects the Cameo mod source at tag `Cameo playtest-20260614` and is current as of 2026-07-04. File paths and class names may change in newer mod versions.
+> **Version note:** Manual v.0.2 — this edition reflects the Cameo mod source as of 2026-07-16, including the ContentPack migration, faction naming convention enforcement, and CABAL faction completion. File paths and class names may change in newer mod versions.
 
 This single-file edition combines the Cameo Knowledge Base Manual chapters into one document. It is the canonical version for reading, printing, or feeding to an AI for review.
 
@@ -214,7 +214,7 @@ Like OpenRA itself, Cameo is **data-driven**:
 
 This manual is a **companion** to the [OpenRA Knowledge Base Manual v.5](https://github.com/Renegade1993/OpenRA-Knowledge-Base-Manual). It does not duplicate the OpenRA engine documentation. Instead, it documents the layers that Cameo adds on top of OpenRA, and flags the places where Cameo diverges from the upstream engine or bundled mods.
 
-> **Version note:** This manual is current as of 2026-07-04 and reflects the Cameo source at `Cameo-mod-playtest-20260614`. The OpenRA engine pinned by this mod is identified in `mod.config` as `ENGINE_VERSION="da94a51"`, with the engine source fetched from a Cameo-maintained fork (`https://github.com/cameo-mod/OpenRA`). File paths and class names may change in newer Cameo or OpenRA versions, so always cross-check with the provided source tree.
+> **Version note:** This manual is current as of 2026-07-16 and reflects the Cameo source at the `main` branch. The OpenRA engine pinned by this mod is identified in `mod.config` as `ENGINE_VERSION="7ba39d9"`, with the engine source fetched from a Cameo-maintained fork (`https://github.com/cameo-mod/OpenRA`). File paths and class names may change in newer Cameo or OpenRA versions, so always cross-check with the provided source tree.
 
 ## How this manual relates to the OpenRA manual
 
@@ -841,7 +841,7 @@ This is another single-instance guard: only one enabled trait may provide the ac
 ### Actor Definition
 
 ```yaml
-# mods/cameo/rules/infantry.yaml
+# mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml
 LightInfantry:
     Inherits: ^Infantry
     Buildable:
@@ -3016,7 +3016,7 @@ After studying this chapter, you should be able to:
 
 Suppose you want to add a new commando infantry unit named `td_ghost` to the Tiberian Dawn faction in Cameo. You can do this entirely with MiniYaml inheritance and overrides:
 
-1. **Open the template.** In `mods/cameo/rules/tiberiandawn.yaml`, most infantry inherit from `^Infantry` (defined in `mods/cameo/rules/defaults.yaml`). The template already provides `Health`, `Mobile`, `RevealsShroud`, and other common traits.
+1. **Open the template.** In `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml`, most infantry inherit from `^Infantry` (defined in `mods/cameo/rules/defaults.yaml`). The template already provides `Health`, `Mobile`, `RevealsShroud`, and other common traits.
 2. **Create the concrete actor.** Add a new top-level node:
    ```yaml
    TD_GHOST:
@@ -3042,7 +3042,7 @@ Suppose you want to add a new commando infantry unit named `td_ghost` to the Tib
 4. **Override fields.** `Health.HP: 20000` and `Mobile.Speed: 71` replace the inherited values. The parser merges these keys during `MergeSelfPartial`.
 5. **Add a new trait.** `Armament:` adds a weapon slot that the template did not have.
 6. **Remove an inherited trait.** `-TakeCover:` removes the prone/cover behavior that `^Infantry` included, so the commando never takes cover.
-7. **Load and validate.** `Ruleset.LoadDefaults` calls `MiniYaml.Load`, which merges `defaults.yaml`, `tiberiandawn.yaml`, and any map overrides, resolves `Inherits`, then filters out `^` prefixed templates. The result is an [`ActorInfo`](#file-appendices-Appendix_A_Glossary) named `td_ghost` containing the merged [`TraitInfo`](#file-appendices-Appendix_A_Glossary) collection.
+7. **Load and validate.** `Ruleset.LoadDefaults` calls `MiniYaml.Load`, which merges `defaults.yaml`, the ContentPack YAML files (e.g., `ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml`), and any map overrides, resolves `Inherits`, then filters out `^` prefixed templates. The result is an [`ActorInfo`](#file-appendices-Appendix_A_Glossary) named `td_ghost` containing the merged [`TraitInfo`](#file-appendices-Appendix_A_Glossary) collection.
 
 This example shows how MiniYaml inheritance lets mod authors compose new units from shared templates without duplicating YAML or editing C#.
 
@@ -3050,7 +3050,7 @@ This example shows how MiniYaml inheritance lets mod authors compose new units f
 
 The infantry example above showed inheritance and overrides in a single file. A complete, copy-pasteable vehicle also needs a sequence file and a `mod.yaml` manifest entry. This example adds a new Tiberian Dawn scout vehicle in Cameo's already-loaded faction files.
 
-1. **Actor definition.** In `mods/cameo/rules/tiberiandawn.yaml`:
+1. **Actor definition.** In `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml`:
    ```yaml
    TD_RANGER:
        Inherits: ^Vehicle
@@ -3060,7 +3060,7 @@ The infantry example above showed inheritance and overrides in a single file. A 
        Buildable:
            Queue: Vehicle
            BuildPaletteOrder: 330
-           Prerequisites: ~vehicles.gdi, ~techlevel.low
+           Prerequisites: ~vehicles.td_gdi, ~techlevel.low
        Valued:
            Cost: 600
        Tooltip:
@@ -3098,7 +3098,7 @@ The infantry example above showed inheritance and overrides in a single file. A 
            Filename: td_rangericon.shp
    ```
 
-3. **Manifest entries.** Because `mods/cameo/mod.yaml` already has `cameo|rules/tiberiandawn.yaml` and `cameo|sequences/tiberiandawn.yaml` in its `Rules:` and `Sequences:` lists, the new actor and sequence are picked up automatically once the file is saved. No new manifest entry is needed unless you add a brand-new file.
+3. **Manifest entries.** Because the Tiberian Dawn ContentPack's `content.yaml` already lists the faction's `Rules:` and `Sequences:` files (e.g., `ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml` and `ContentPacks|TiberianDawn/GDI/yaml/sequences.yaml`), the new actor and sequence are picked up automatically once the file is saved. No new manifest entry is needed unless you add a brand-new file.
 
 4. **Key points.**
    - `Inherits` plus `Inherits@GAIN`, `Inherits@AUTOTARGET`, and `Inherits@TEMPLATE` show multiple inheritance without key collisions.
@@ -3127,7 +3127,7 @@ For a full recipe covering weapons, buildings, and support powers, see [Appendix
 | `OpenRA.Mods.Cameo/Graphics/CameoSpriteSequence.cs` | Cameo-specific `CameoSpriteSequence` and `CameoSpriteSequenceLoader` for tileset-specific sprite filenames and remapping flags. |
 | `OpenRA.Mods.Cameo/FileSystem/BagFile.cs` | `AudioBagLoader` / `BagFile` package loader for Westwood `.bag`/`.idx` audio archives. |
 | `mods/cameo/mod.yaml` | Cameo mod manifest; registers the `ContentPacks` package and lists all rule, sequence, weapon, and audio files. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Partial content-pack manifest with `Rules:` and `FluentMessages:` entries for the Tiberian Dawn GDI pack. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Content-pack manifest for the Tiberian Dawn GDI faction. Lists `Rules`, `Weapons`, `Sequences`, and `FluentMessages` entries using `ContentPacks\|...` paths. |
 | `mods/cameo/rules/defaults.yaml` | Shared abstract templates such as `^Infantry`, `^Vehicle`, `^Building`, `^ScoutVehicleTemplate`, and `^AutoTargetGroundAssaultMove`. |
 | `mods/cameo/sequences/tiberiandawn.yaml` | Per-faction sequence file that uses `CameoSpriteSequence` tileset features. |
 
@@ -3408,7 +3408,6 @@ The Cameo mod pushes the OpenRA MiniYaml stack in three directions at once: it s
 Rules:
     cameo|rules/defaults.yaml
     cameo|rules/shared.yaml
-    cameo|rules/tiberiandawn.yaml
     cameo|rules/redalert.yaml
     cameo|rules/tiberiansun.yaml
     cameo|rules/redalert2.yaml
@@ -3418,6 +3417,10 @@ Rules:
     cameo|rules/warcraft2.yaml
     cameo|rules/outpost2.yaml
     cameo|rules/tkm.yaml
+    # Tiberian Dawn rules are loaded via ContentPack includes:
+    # ContentPacks|TiberianDawn/Shared/yaml/*.yaml
+    # ContentPacks|TiberianDawn/GDI/yaml/*.yaml
+    # ContentPacks|TiberianDawn/Nod/yaml/*.yaml
 ```
 
 Because `MergePartial` processes files left-to-right, a later faction file can override a value defined in `defaults.yaml` or in an earlier faction file. This is why `^Vehicle`, `^Infantry`, and the role templates (`^ScoutVehicleTemplate`, `^FireSupportTemplate`, `^HelicopterTemplate`, etc.) are defined once in `defaults.yaml` and then inherited by dozens of faction units. The same pattern applies to `Sequences:`, `Weapons:`, and `Voices:`.
@@ -3437,7 +3440,7 @@ World:
 
 `FactionCA` is the custom Cameo trait defined in `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs` (the divergence inventory notes it replaces/extends the upstream `Faction` trait). Because `MiniYaml.Merge` resolves multiple `FactionCA@...` entries as distinct trait instances, the same `World:` actor ends up carrying every faction definition in the mod, even though the definitions are spread across many files.
 
-Content-pack files use the same inheritance model. The Tiberian Dawn GDI pack defines its own `^CoreActor` template in `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml` and adds `FactionCA@TiberianDawn_GDI` in `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml`. When the pack is loaded, these nodes are merged into the same global tree as the base mod, so content-pack units can inherit base templates and base units can be overridden by the pack.
+Content-pack files use the same inheritance model. The Tiberian Dawn GDI pack defines its own `^CoreActor` template in `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` and adds `FactionCA@td_gdi` in `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml`. When the pack is loaded, these nodes are merged into the same global tree as the base mod, so content-pack units can inherit base templates and base units can be overridden by the pack.
 
 ### 2. `CameoSpriteSequence` and `CameoSpriteSequenceLoader` for Tileset Variants
 
@@ -3482,31 +3485,29 @@ FileSystem: DefaultFileSystem
         ...
 ```
 
-The line `cameo|ContentPacks: ContentPacks` mounts `mods/cameo/ContentPacks` as the package `ContentPacks`. Files inside it can then be referenced with the `ContentPacks|...` prefix. The Tiberian Dawn GDI pack provides its own partial manifest:
+The line `cameo|ContentPacks: ContentPacks` mounts `mods/cameo/ContentPacks` as the package `ContentPacks`. Files inside it can then be referenced with the `ContentPacks|...` prefix. Each content pack provides its own partial manifest (`content.yaml`) that lists `Rules`, `Weapons`, `Sequences`, and `FluentMessages` entries. For example, the Tiberian Sun CABAL pack's `content.yaml`:
 
 ```yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-    ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-    ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-    ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-    ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
+    ContentPacks|TiberianSun/CABAL/yaml/aircraft.yaml
+    ContentPacks|TiberianSun/CABAL/yaml/buildings.yaml
+    ContentPacks|TiberianSun/CABAL/yaml/defenses.yaml
+    ContentPacks|TiberianSun/CABAL/yaml/vehicles.yaml
+    ...
+
+Weapons:
+    ContentPacks|TiberianSun/CABAL/yaml/weapons.yaml
 
 FluentMessages:
-    ContentPacks|TiberianDawn/GDI/translations/en.ftl
+    ContentPacks|TiberianSun/CABAL/translations/en.ftl
+
+Sequences:
+    ContentPacks|TiberianSun/CABAL/yaml/sequences.yaml
 ```
 
-To load this partial manifest into the main mod, `mod.yaml` contains the `Include:` hook at the bottom of the file:
+To load a content pack's partial manifest into the main mod, `mod.yaml` uses `Include:` directives. Theme-level packs (e.g. `ContentPacks|TiberianSun/content.yaml`) act as wrappers that load faction-level packs in lobby order. `OpenRA.Game/Manifest.cs` processes `Include:` entries before merging the rest of `mod.yaml`: it reads the referenced file, replaces the `Include:` node with the file's parsed nodes, and then continues with the normal manifest load. This merges the content pack's `Rules:`, `Weapons:`, `Sequences:`, and `FluentMessages:` lists into the main manifest.
 
-```yaml
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
-```
-
-In the current playtest this line is commented out, so the content pack is present in source but is not loaded at runtime. `OpenRA.Game/Manifest.cs` processes `Include:` entries before merging the rest of `mod.yaml`: it reads the referenced file, replaces the `Include:` node with the file's parsed nodes, and then continues with the normal manifest load. Uncommenting the line would merge the content pack's `Rules:` and `FluentMessages:` lists into the main manifest.
-
-The content pack also ships its own assets; for example, `mods/cameo/ContentPacks/TiberianDawn/GDI/sprites/mtnk.shp` is the GDI medium tank sprite. Because the `ContentPacks` directory is registered as a file-system package, the standard `cameo|...` or `ContentPacks|...` prefixes can resolve these files.
+Content packs also ship their own assets; for example, `mods/cameo/ContentPacks/TiberianDawn/GDI/sprites/mtnk.shp` is the GDI medium tank sprite. Because the `ContentPacks` directory is registered as a file-system package, the standard `cameo|...` or `ContentPacks|...` prefixes can resolve these files.
 
 ### 4. Custom Audio File System (`BagFile`)
 
@@ -3520,16 +3521,16 @@ This is why the `FileSystem` section can include entries such as `~cameo|bits/ra
 
 ### Practical Example: A Content-Pack Building with Tileset Art
 
-Suppose you are extending the Tiberian Dawn GDI content pack with a custom GDI power plant. The building's rules go in `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/buildings.yaml` (currently empty in the playtest), and its sequence goes in `mods/cameo/sequences/tiberiandawn.yaml` (or in a content-pack sequence file if the pack gains its own sequence list). Because the content pack is not currently loaded, this example is written against the same patterns the existing Tiberian Dawn sequences use.
+Suppose you are extending the Tiberian Dawn GDI content pack with a custom GDI power plant. The building's rules go in `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml`, and its sequence goes in `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/sequences.yaml` (or in `mods/cameo/sequences/tiberiandawn.yaml` for shared sequences). This example follows the same patterns the existing Tiberian Dawn sequences use.
 
-1. **Building definition.** In the content-pack `rules/buildings.yaml`:
+1. **Building definition.** In the content-pack `yaml/buildings.yaml`:
    ```yaml
    TD_GDI_POWER:
        Inherits: ^Building
        Buildable:
            Queue: Building
            BuildPaletteOrder: 40
-           Prerequisites: ~fact.gdi, ~techlevel.low
+           Prerequisites: ~fact.td_gdi, ~techlevel.low
        Valued:
            Cost: 500
        Tooltip:
@@ -3559,7 +3560,7 @@ Suppose you are extending the Tiberian Dawn GDI content pack with a custom GDI p
            Filename: nppwicon.shp
    ```
 
-3. **Manifest wiring.** If the content pack were enabled via `Include: ContentPacks|TiberianDawn/GDI/content.yaml`, `content.yaml` would list the new `buildings.yaml` under `Rules:` and, if a separate sequence file existed, under `Sequences:`. The `ContentPacks` package registered in `mod.yaml` makes the `ContentPacks|...` references resolve correctly.
+3. **Manifest wiring.** The content pack is loaded via `Include: ContentPacks|TiberianDawn/GDI/content.yaml` in `mod.yaml`. Its `content.yaml` lists the new `buildings.yaml` under `Rules:` and, if a separate sequence file existed, under `Sequences:`. The `ContentPacks` package registered in `mod.yaml` makes the `ContentPacks|...` references resolve correctly.
 
 4. **Key points.**
    - The building inherits common building behavior from `^Building`.
@@ -3614,7 +3615,7 @@ MiniYaml does not treat `^` specially. `^Soldier` is just another key. If you fo
 ### Cameo-Specific Pitfalls
 
 - **Manifest order matters.** Because faction files are merged left-to-right, a value set in `tiberiandawn.yaml` can be overridden by `redalert.yaml` if the two files define the same top-level actor key. Place shared defaults in `defaults.yaml` (loaded early) and faction overrides in the later files.
-- **The ContentPacks `Include:` is commented out.** In `mods/cameo/mod.yaml` the line `#Include: ContentPacks|TiberianDawn/GDI/content.yaml` is inactive. If you add new content-pack files, remember to uncomment this line or the engine will ignore them.
+- **ContentPacks `Include:` order matters.** `mod.yaml` loads content packs via `Include:` directives. The order of these lines controls the lobby faction selector order. Theme-level wrapper packs (e.g. `ContentPacks/TiberianSun/content.yaml`) load unmigrated rulesets from `mods/cameo/rules/`. Faction-level packs (e.g. `ContentPacks/TiberianSun/CABAL/content.yaml`) are included individually and contain the faction's own rules, weapons, sequences, and translations. If you add a new content pack, add an `Include:` line in the appropriate position or the engine will ignore its assets.
 - **Tileset keys must match the loaded tileset names.** `TilesetFilenames` keys such as `DESERT`, `WINTER`, and `SNOW` must match the `Name` of the tilesets listed in `mods/cameo/mod.yaml` under `TileSets:` and defined in `mods/cameo/tilesets/*.yaml`. A mismatched key silently falls back to the default `Filename`.
 - **Package names are case-sensitive.** The `ContentPacks` package is registered as `cameo|ContentPacks: ContentPacks`. References such as `ContentPacks|TiberianDawn/GDI/...` must use exactly that package name.
 
@@ -3651,7 +3652,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `mods/cameo/mod.yaml` — Cameo mod manifest with `FileSystem`, `Rules:`, `Sequences:`, and `Include:` entries.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` — Partial content-pack manifest.
 - `mods/cameo/rules/defaults.yaml` — Shared abstract templates and role templates.
-- `mods/cameo/rules/tiberiandawn.yaml` — Tiberian Dawn faction rules.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml` — Tiberian Dawn GDI faction rules (ContentPack).
 - `mods/cameo/sequences/tiberiandawn.yaml` — Tiberian Dawn sequences using `CameoSpriteSequence` features.
 - Online MiniYaml documentation: `https://github.com/OpenRA/OpenRA/wiki/MiniYAML` (engine wiki, verify for current edition).
 
@@ -3716,7 +3717,7 @@ After studying this chapter, you should be able to:
 | `OpenRA.Game/GameRules/ActorInfo.cs` | Parses a single actor node into a collection of [`TraitInfo`](#file-appendices-Appendix_A_Glossary) objects and resolves trait construction order. |
 | `OpenRA.Game/Primitives/ActorInfoDictionary.cs` | Wraps the actor dictionary and guarantees that every `SystemActors` enum entry exists. |
 | `mods/cameo/mod.yaml` | Cameo's manifest. Declares custom assemblies, the `AudioBag` package format, the `ContentPacks` VFS mount, `SpriteSequenceFormat: CameoSpriteSequence`, `LoadScreen: FitImageLoadScreen`, `SupportsMapsFrom`, and all standard asset lists. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | The first Cameo content pack. Uses `Include:`-style paths inside the `ContentPacks` mount to add rules and Fluent translations. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Content-pack manifest for the Tiberian Dawn GDI faction. Uses `ContentPacks\|...` paths inside the `ContentPacks` mount to add rules, weapons, sequences, and Fluent translations. |
 | `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs` | Defines `FactionCAInfo`, a subclass of `FactionInfo` that adds a `Game` field to every faction. |
 | `OpenRA.Mods.Cameo/Traits/Player/PlayerPromotions.cs` | Defines `PlayerPromotions`/`PlayerPromotionsInfo`, a player trait that tracks experience, grants promotion points, and exposes lobby options. |
 | `OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs` | Defines `CustomFormationsModOptions`/`CustomFormationsModOptionsInfo`, a player trait that stores marker sprite/sequence configuration for the custom formation order generators. |
@@ -3725,7 +3726,7 @@ After studying this chapter, you should be able to:
 | `OpenRA.Mods.Cameo/FileSystem/BagFile.cs` | Defines `AudioBagLoader` and `BagFile`, the package loader for `.bag`/`.idx` audio archives referenced by `PackageFormats: AudioBag`. |
 | `OpenRA.Mods.Cameo/LoadScreens/FitImageLoadScreen.cs` | Defines `FitImageLoadScreen`, the load-screen class referenced by `LoadScreen: FitImageLoadScreen`. |
 
-> **Note:** The `OpenRA.Game/*` files are upstream engine files. They are not shipped inside the `Cameo-mod-playtest-20260614` mod source tree, but the mod runs on an OpenRA engine that contains them.
+> **Note:** The `OpenRA.Game/*` files are upstream engine files. They are not shipped inside the `Cameo-mod` source tree, but the mod runs on an OpenRA engine that contains them.
 
 ## Architecture
 
@@ -3733,7 +3734,7 @@ After studying this chapter, you should be able to:
 
 `Manifest` is constructed from a mod's `mod.yaml` file via the `Manifest(string modId, IReadOnlyPackage package)` constructor. The constructor performs three phases:
 
-1. **Load and inline includes.** It reads `mod.yaml` with `[MiniYaml](#file-appendices-Appendix_A_Glossary).FromStream`, then expands every `Include:` node in-place by loading the referenced file and splicing its nodes into the tree. This allows mods to split configuration into reusable files. Cameo uses this at the end of its manifest (line 532): `#Include: ContentPacks|TiberianDawn/GDI/content.yaml` (currently commented out in the playtest).
+1. **Load and inline includes.** It reads `mod.yaml` with `[MiniYaml](#file-appendices-Appendix_A_Glossary).FromStream`, then expands every `Include:` node in-place by loading the referenced file and splicing its nodes into the tree. This allows mods to split configuration into reusable files. Cameo uses this at the end of its manifest to load theme-level and faction-level content packs (e.g. `Include: ContentPacks|TiberianSun/content.yaml`, which in turn includes faction packs like `ContentPacks|TiberianSun/CABAL/content.yaml`).
 2. **Merge inherited overrides.** The entire node tree is merged with `MiniYaml.Merge([nodes])`, then flattened into a `Dictionary<string, MiniYaml>` via `ToDictionary()`.
 3. **Populate strongly-typed fields.** Each top-level key (e.g. `Rules`, `Sequences`, `Weapons`, `Voices`, `Music`, `Chrome`, `TileSets`, `Assemblies`, etc.) is read into an immutable array or a custom object.
 
@@ -3827,18 +3828,18 @@ Cameo's `FileSystem` block (lines 10–95) mounts the support directory, the eng
 cameo|ContentPacks: ContentPacks
 ```
 
-This mounts the `mods/cameo/ContentPacks/` directory as a virtual package named `ContentPacks`. Once mounted, files inside a content pack can be referenced with the `ContentPacks|...` prefix. The playtest ships one content pack at `mods/cameo/ContentPacks/TiberianDawn/GDI/`. Its `content.yaml` lists additional rules and Fluent translations:
+This mounts the `mods/cameo/ContentPacks/` directory as a virtual package named `ContentPacks`. Once mounted, files inside a content pack can be referenced with the `ContentPacks|...` prefix. The current source tree includes content packs organized by theme and faction, such as `TiberianDawn/GDI/`, `TiberianSun/CABAL/`, `TiberianSun/Nod/`, `RedAlert2Mod/AsianAlliance/`, and others. Each pack's `content.yaml` lists additional rules, weapons, sequences, and Fluent translations:
 
 ```yaml
 Rules:
-	ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-	ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
+	ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+	ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
 	...
 FluentMessages:
 	ContentPacks|TiberianDawn/GDI/translations/en.ftl
 ```
 
-In the playtest manifest, this content pack is not currently loaded by default; the `Include:` line at the end of `mod.yaml` is commented out (line 532): `#Include: ContentPacks|TiberianDawn/GDI/content.yaml`. To activate a content pack, uncomment or add an `Include:` line that points to its `content.yaml`.
+Content packs are loaded via `Include:` directives in `mod.yaml`. Theme-level content packs (e.g. `ContentPacks|TiberianSun/content.yaml`) are wrapper packs that load shared or legacy rules from `mods/cameo/rules/`. Faction-level packs (e.g. `ContentPacks|TiberianSun/CABAL/content.yaml`) are included individually in `mod.yaml` and contain the faction's own rules, weapons, sequences, and translations. The order of `Include:` directives in `mod.yaml` determines the lobby faction order. To activate a new content pack, add an `Include:` line that points to its `content.yaml`.
 
 #### Sprite sequence format
 
@@ -4040,7 +4041,9 @@ ModCredits:
 DiscordService:
     ApplicationId: 1269927383994077296
 
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml   # Cameo: optional content pack
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/Nod/content.yaml
+# ... all content packs are actively included in the current source tree ...
 ```
 
 Key observations:
@@ -4094,8 +4097,8 @@ A content pack is just a directory tree under `mods/cameo/ContentPacks/` that is
 ```yaml
 # ContentPacks|TiberianDawn/GDI/content.yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
     ...
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -4135,7 +4138,7 @@ ModData  ----> FileSystem (ModFiles)
             +----> Ruleset.Load(..., mapRules, ...)
             +----> on failure: Ruleset.LoadDefaultsForTileSet(...)
    |
-   +----> ContentPacks (if included via #Include)
+   +----> ContentPacks (if included via Include)
             |
             +----> MiniYaml inline expansion before Manifest merge
 ```
@@ -4143,7 +4146,7 @@ ModData  ----> FileSystem (ModFiles)
 Key contracts:
 
 - `Manifest` never touches the file system after parsing `mod.yaml`. It only stores *paths*.
-- `ModData` owns the file system and is the only thing that knows how to resolve `cnc|rules/foo.yaml` or `ContentPacks|TiberianDawn/GDI/rules/faction.yaml`.
+- `ModData` owns the file system and is the only thing that knows how to resolve `cnc|rules/foo.yaml` or `ContentPacks|TiberianDawn/GDI/yaml/faction.yaml`.
 - `Ruleset` is a pure data object. It knows nothing about the file system; it only consumes already-loaded `MiniYaml` nodes.
 - `Map` is both an `IReadOnlyFileSystem` and a consumer of rules. It provides the map-specific YAML to `Ruleset.Load`.
 - `ContentPacks` are resolved through the same VFS pipeline as any other asset; their only special property is that they are mounted as a separate package and typically loaded via `Include:`.
@@ -4302,7 +4305,7 @@ Because `Map` implements `IReadOnlyFileSystem`, `Ruleset.Load` can resolve paths
 
 ### 11. Cameo-specific: `ContentPacks` is mounted but not automatically loaded
 
-The `cameo|ContentPacks: ContentPacks` mount makes the directory resolvable, but a content pack is only loaded if an `Include:` line is added to `mod.yaml` (or to a file that `mod.yaml` includes). In the playtest, the Tiberian Dawn GDI content pack is mounted but commented out at line 532. If you add assets to `ContentPacks/` but forget to include them, they will be present in the VFS but invisible to the ruleset.
+The `cameo|ContentPacks: ContentPacks` mount makes the directory resolvable, but a content pack is only loaded if an `Include:` line is added to `mod.yaml` (or to a file that `mod.yaml` includes). The current mod loads multiple content packs across several themes (TiberianDawn, TiberianSun, RedAlert2Mod, etc.) via theme-level wrapper packs. If you add assets to `ContentPacks/` but forget to include them, they will be present in the VFS but invisible to the ruleset.
 
 ### 12. Cameo-specific: custom traits must be reachable through `Assemblies`
 
@@ -4321,7 +4324,7 @@ After reading this chapter, you should be able to:
 - **Load and inline includes.** `mod.yaml` is read with `MiniYaml.FromStream`, then every `Include:` node is expanded in-place before the tree is merged.
 - **Merge inherited overrides.** The entire node tree is merged with `MiniYaml.Merge([nodes])`, then flattened into a `Dictionary<string, MiniYaml>` via `ToDictionary()`.
 - **Populate strongly-typed fields.** Each top-level key (e.g. `Rules`, `Sequences`, `Weapons`, `Voices`, `Music`, `Chrome`, `TileSets`, `Assemblies`, `FileSystem`, `SpriteSequenceFormat`) is read into an immutable array or a custom object.
-- **Identify Cameo-specific manifest extensions:** the custom `Assemblies` list, `AudioBag` package format, `ContentPacks` VFS mount, `SpriteSequenceFormat: CameoSpriteSequence`, `LoadScreen: FitImageLoadScreen`, `SupportsMapsFrom: cnc, ra, cameo`, and the `ContentPacks|TiberianDawn/GDI/content.yaml` include pattern.
+- **Identify Cameo-specific manifest extensions:** the custom `Assemblies` list, `AudioBag` package format, `ContentPacks` VFS mount, `SpriteSequenceFormat: CameoSpriteSequence`, `LoadScreen: FitImageLoadScreen`, `SupportsMapsFrom: cnc, ra, cameo`, and the `ContentPacks|<Theme>/<Faction>/content.yaml` include pattern.
 - **Map key Cameo traits to their source:** `FactionCA`, `PlayerPromotions`, `CustomFormationsModOptions`, and `TintedCellsLayer` are declared in the rules YAML and supplied by `OpenRA.Mods.Cameo`/`OpenRA.Mods.CA`.
 
 If any of the concepts above feel unclear, review the relevant section before continuing. For source files and further reading, see the References section.
@@ -4338,7 +4341,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `OpenRA.Game/Traits/TraitsInterfaces.cs` — `ILobbyCustomRulesIgnore`, `IRulesetLoaded`, `IGlobalModData`.
 - `OpenRA.Game/ObjectCreator.cs` — assembly loading, type resolution, `CreateObject`.
 - `OpenRA.Game/MiniYaml.cs` — `MiniYaml.Merge`, `MiniYaml.Load`, `MergePartial`, `ToDictionaryWithConflictLog`.
-- `mods/cameo/mod.yaml` — Cameo's manifest (custom sections: `PackageFormats`, `FileSystem`, `Assemblies`, `LoadScreen`, `DefaultOrderGenerator`, `SupportsMapsFrom`, `SpriteSequenceFormat`, `ContentPacks` mount, optional `#Include` for content packs).
+- `mods/cameo/mod.yaml` — Cameo's manifest (custom sections: `PackageFormats`, `FileSystem`, `Assemblies`, `LoadScreen`, `DefaultOrderGenerator`, `SupportsMapsFrom`, `SpriteSequenceFormat`, `ContentPacks` mount, optional `Include` for content packs).
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` — content pack entry point.
 - `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs` — custom faction info with `Game` field.
 - `OpenRA.Mods.Cameo/Traits/Player/PlayerPromotions.cs` — player promotion and lobby-options trait.
@@ -4617,13 +4620,13 @@ public class FactionCAInfo : FactionInfo
 }
 ```
 
-`ObjectCreator` resolves the YAML trait `FactionCA` to `FactionCAInfo`. Because `FactionCAInfo` inherits from `FactionInfo`, all upstream faction fields remain loadable, and `Game` becomes an additional field. Example from `mods/cameo/rules/tiberiandawn.yaml`:
+`ObjectCreator` resolves the YAML trait `FactionCA` to `FactionCAInfo`. Because `FactionCAInfo` inherits from `FactionInfo`, all upstream faction fields remain loadable, and `Game` becomes an additional field. Example from `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml`:
 
 ```yaml
 World:
-    FactionCA@gdi:
+    FactionCA@td_gdi:
         Name: GDI TD
-        InternalName: gdi
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
 ```
@@ -4984,7 +4987,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `OpenRA.Mods.Common/UtilityCommands/CheckYaml.cs` — example of swapping error actions for linting.
 - `OpenRA.Mods.Common/ActorInitializer.cs` — example of a custom `TypeConverter` for `ActorInitActorReference`.
 - `OpenRA.Test/OpenRA.Game/FieldLoaderTest.cs` — exhaustive test cases covering every parser, `[Require]`, `[LoadUsing]`, `[Ignore]`, `LoadFieldOrProperty`, nested collections, and `TypeConverter` fallback.
-- Cameo source tree — verified against `Cameo-mod-playtest-20260614`:
+- Cameo source tree — verified against `main` branch (2026-07-16):
   - `OpenRA.Mods.Cameo/Graphics/CameoSpriteSequence.cs` — custom `CameoSpriteSequence` and `CameoSpriteSequenceLoader`.
   - `OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs` — `[FieldLoader.Require]` usage on palette/sequence fields.
   - `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs` — `FactionCAInfo` extending `FactionInfo`.
@@ -4994,7 +4997,7 @@ If any of the concepts above feel unclear, review the relevant section before co
   - `mods/cameo/rules/world.yaml` — `TintedCellsLayer` instance definitions.
   - `mods/cameo/rules/player.yaml` — `CustomFormationsModOptions` definition.
   - `mods/cameo/rules/promotions.yaml` — `PlayerPromotions` definition.
-  - `mods/cameo/rules/tiberiandawn.yaml` — `FactionCA` definitions.
+  - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` — `FactionCA` definitions (ContentPack).
   - `mods/cameo/sequences/iok.yaml` — `TilesetFilenames` example.
   - `mods/cameo/sequences/xcom.yaml` — `Remap` example.
 - Online: .NET `TypeDescriptor` and `TypeConverter` documentation for implementing custom converters.
@@ -5054,7 +5057,7 @@ Suppose you want to give the Tiberian Dawn GDI battle tank a secondary laser wea
 
 1. **Define the weapon.** Add a new top-level weapon block in `mods/cameo/weapons/tiberiandawn.yaml`:
    ```yaml
-   TiberianDawn_GDI_LaserPod:
+   td_gdi_laserpod:
        Range: 4c0
        ReloadDelay: 60
        Burst: 2
@@ -5073,9 +5076,9 @@ Suppose you want to give the Tiberian Dawn GDI battle tank a secondary laser wea
                Light: 100
                Heavy: 100
    ```
-2. **Add the armament to the actor.** In `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml`, locate the `TiberianDawn_GDI_MTNK` actor and add a second armament instance:
+2. **Add the armament to the actor.** In `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml`, locate the `td_gdi_battletank` actor and add a second armament instance:
    ```yaml
-   TiberianDawn_GDI_MTNK:
+   td_gdi_battletank:
        Inherits@Template: ^MainBattleTankTemplate
        Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
        Mobile:
@@ -5085,13 +5088,13 @@ Suppose you want to give the Tiberian Dawn GDI battle tank a secondary laser wea
                120mm:
                120mmHV: td_gdi_HVC
        Armament@SECONDARY:
-           Weapon: TiberianDawn_GDI_LaserPod
+           Weapon: td_gdi_laserpod
            LocalOffset: 0,0,0
        AttackTurreted:
        ...
    ```
-3. **Load into `Ruleset`.** When the game starts, `Ruleset.LoadDefaults` calls `MergeOrDefault` for the `Weapons` manifest list. It creates a `WeaponInfo` named `TiberianDawn_GDI_LaserPod` from the YAML block, with `FieldLoader` populating `Range`, `ReloadDelay`, `Burst`, `Projectile`, and `Warheads`. The `Projectile` node value names the `LaserZapCAInfo` class in `OpenRA.Mods.CA`.
-4. **Bind to `Armament`.** `ActorInfo` parses the `TiberianDawn_GDI_MTNK` block and creates two `Armament` trait instances: `Armament@PRIMARY` and `Armament@SECONDARY` (weapon `TiberianDawn_GDI_LaserPod`). The `@SECONDARY` suffix is stored in `TraitInfo.InstanceName`.
+3. **Load into `Ruleset`.** When the game starts, `Ruleset.LoadDefaults` calls `MergeOrDefault` for the `Weapons` manifest list. It creates a `WeaponInfo` named `td_gdi_laserpod` from the YAML block, with `FieldLoader` populating `Range`, `ReloadDelay`, `Burst`, `Projectile`, and `Warheads`. The `Projectile` node value names the `LaserZapCAInfo` class in `OpenRA.Mods.CA`.
+4. **Bind to `Armament`.** `ActorInfo` parses the `td_gdi_battletank` block and creates two `Armament` trait instances: `Armament@PRIMARY` and `Armament@SECONDARY` (weapon `td_gdi_laserpod`). The `@SECONDARY` suffix is stored in `TraitInfo.InstanceName`.
 5. **Fire during combat.** When the tank's `AttackTurreted` trait decides to attack, it asks the relevant `Armament` to fire. `Armament` checks the weapon's range, reload timer, and target validity, then creates the `LaserZapCA` projectile from `IProjectileInfo.Create` and dispatches the `SpreadDamage` warhead on impact.
 6. **Validate.** Run `./utility.sh cameo --check-yaml` to verify that the weapon and actor references are valid and that `Requires`/`NotBefore` dependencies are satisfied.
 
@@ -5134,8 +5137,8 @@ This example shows how a single YAML change flows through the ruleset system int
 | `mods/cameo/weapons/redalert2.yaml` | Red Alert 2 weapons, including `LaserZapCA` and `PlasmaBeam` projectiles. |
 | `mods/cameo/weapons/starcraft.yaml` | Starcraft weapons, including `WarheadTrailProjectileCA` usage. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Content pack manifest that adds the GDI faction files to the mod load. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml` | Content pack faction definition for `TiberianDawn_GDI`. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml` | Content pack vehicle rules, including `TiberianDawn_GDI_MTNK`. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` | Content pack faction definition for `td_gdi`. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` | Content pack vehicle rules, including `td_gdi_battletank`. |
 
 ## Architecture
 
@@ -5322,20 +5325,20 @@ Rules:
     cameo|rules/player.yaml
     cameo|rules/world.yaml
     cameo|rules/promotions.yaml
-    cameo|rules/tiberiandawn.yaml
     cameo|rules/redalert.yaml
     cameo|rules/redalert2.yaml
     cameo|rules/starcraft.yaml
     cameo|rules/d2k.yaml
+    # Tiberian Dawn rules loaded via ContentPack includes
     ...
 
 Weapons:
     cameo|weapons/weapons.yaml
-    cameo|weapons/tiberiandawn.yaml
     cameo|weapons/redalert.yaml
     cameo|weapons/redalert2.yaml
     cameo|weapons/starcraft.yaml
     cameo|weapons/d2k.yaml
+    # Tiberian Dawn weapons loaded via ContentPack includes
     ...
 ```
 
@@ -5353,16 +5356,22 @@ The pack's own `content.yaml` then lists the individual rule files it contribute
 
 A concrete actor block inherits from one or more abstract actors and then adds, overrides, or removes traits.
 
-From `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml`, the `TiberianDawn_GDI_MTNK` (GDI Battle Tank) actor:
+From `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml`, the `td_gdi_battletank` (GDI Battle Tank) actor:
 
 ```yaml
-TiberianDawn_GDI_MTNK:
+td_gdi_battletank:
+    Inherits: ^Tank
     Inherits@Template: ^MainBattleTankTemplate
     Inherits@EXP: ^GainsExperienceTD
     Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
     Inherits@EMP: ^TurretEMP
     Inherits@AntiVeh: ^PrioritizeVehicle
     Inherits@AntiTank: ^PrioritizeTank
+    Inherits@LongRangeSensors: ^LongRangeSensors
+    Inherits@MissileTargeting: ^AdvancedMissileTargeting
+    Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+    Inherits@HighVelocityCannons: ^HighVelocityCannons
+    Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
     Inherits@decoration: ^GDIRankDecoration
     Valued:
         Cost: 900
@@ -5370,9 +5379,9 @@ TiberianDawn_GDI_MTNK:
         Name: GDI Battle Tank
     Buildable:
         BuildPaletteOrder: 40
-        Prerequisites: ~weap, ~!upgdipredator
+        Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_unlockpredatortank
         Queue: Vehicle, RAVehicle
-        Description: actor-mtnk.description
+        Description: actor_mtnk.description
     Mobile:
         Speed: 80
         TurnSpeed: 16
@@ -5380,19 +5389,20 @@ TiberianDawn_GDI_MTNK:
         HP: 125000
     Turreted:
         TurnSpeed: 16
-    Armament@PRIMARY:
-        Weapons:
-            120mm:
-            120mmHV: td_gdi_HVC
+    Armament:
+        Weapon: 120mm
+        Recoil: 128
+        RecoilRecovery: 26
+        LocalOffset: 768,0,90
+        MuzzleSequence: muzzle
+        RequiresCondition: !td_gdi_upgrade_highvelocitycannons
     Armament@HV:
         Weapon: 120mmHV
-        RequiresCondition: up_highvelocitycannons
-    Armament@Missile:
-        Weapon: M1A1Missiles
-        RequiresCondition: !up_advancedmissiletargeting
-    Armament@AdvancedMissileTargeting:
-        Weapon: M1A1MissilesAMT
-        RequiresCondition: up_advancedmissiletargeting
+        Recoil: 128
+        RecoilRecovery: 26
+        LocalOffset: 768,0,90
+        MuzzleSequence: muzzle
+        RequiresCondition: td_gdi_upgrade_highvelocitycannons
     AttackTurreted:
     WithMuzzleOverlay:
     WithSpriteTurret:
@@ -5402,8 +5412,8 @@ Key points:
 
 * `Inherits@Template: ^MainBattleTankTemplate` pulls in the shared abstract tank block.
 * Multiple `Inherits@...` lines are allowed; the `@` suffix is just a YAML key disambiguator.
-* `Armament@PRIMARY`, `Armament@HV`, `Armament@Missile`, and `Armament@AdvancedMissileTargeting` are distinct instances of `ArmamentInfo`. Their instance names are stored in `TraitInfo.InstanceName` and are used by conditions to enable or disable each armament.
-* `RequiresCondition: up_highvelocitycannons` is a Cameo upgrade pattern; the condition is granted by a prerequisite or promotion upgrade.
+* `Armament` (the base 120mm cannon) and `Armament@HV` (the high-velocity upgrade) are distinct instances of `ArmamentInfo`. Their instance names are stored in `TraitInfo.InstanceName` and are used by conditions to enable or disable each armament.
+* `RequiresCondition: !td_gdi_upgrade_highvelocitycannons` and `RequiresCondition: td_gdi_upgrade_highvelocitycannons` are Cameo upgrade patterns; the conditions are granted by prerequisite or promotion upgrades, creating mutually exclusive armament gating.
 
 Removing inherited traits is done with a leading `-`. In `mods/cameo/rules/d2k.yaml` and `mods/cameo/rules/redalert2.yaml`, terror-drone-style units remove the default `InfectableCA` trait with `-InfectableCA:` before adding `AttackInfectCA`.
 
@@ -5502,13 +5512,13 @@ A content pack is loaded through three pieces:
 2. **Content pack manifest.** `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` lists the files the pack contributes:
    ```yaml
    Rules:
-       ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-       ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-       ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-       ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-       ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-       ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-       ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/aircraft.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/naval.yaml
+       ContentPacks|TiberianDawn/GDI/yaml/upgrades.yaml
 
    FluentMessages:
        ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -5525,16 +5535,16 @@ Cameo adds many custom traits and warheads that extend the base engine. The most
 
 The standard OpenRA `Faction` trait is replaced in Cameo by `FactionCA`, implemented in `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs`. Factions are declared on the `World` actor, usually grouped by source game in `mods/cameo/rules/*.yaml` or in a content pack.
 
-From `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml`:
+From `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml`:
 
 ```yaml
 World:
-    FactionCA@TiberianDawn_GDI:
-        Name: TiberianDawn_GDI.name
-        InternalName: TiberianDawn_GDI
+    FactionCA@td_gdi:
+        Name: GDI TD #faction_td_gdi.name
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
-        Description: TiberianDawn_GDI.description
+        Description: faction_td_gdi.description
 ```
 
 From `mods/cameo/rules/d2k.yaml`:
@@ -5808,7 +5818,7 @@ my-mod:
 In the Cameo source tree, the mod is split between the YAML package and two C# assembly projects.
 
 ```
-Cameo-mod-playtest-20260614 (source)/
+Cameo-mod (source)/
     mod.config
     Makefile
     make.ps1
@@ -5830,16 +5840,9 @@ Cameo-mod-playtest-20260614 (source)/
             bits/
             chrome/
             chrome.yaml
-            ContentPacks/
-                TiberianDawn/
-                    GDI/
-                        content.yaml
-                        faction.yaml
-                        rules/
-                        sprites/
-                        translations/
             cursors.yaml
             fluent/
+            fonts/
             hotkeys.yaml
             installer/
             maps/
@@ -5851,6 +5854,151 @@ Cameo-mod-playtest-20260614 (source)/
             tilesets/
             uibits/
             weapons/
+            ContentPacks/
+                Core/
+                    content.yaml
+                    files/
+                    yaml/
+                Shared/
+                    files/
+                TiberianDawn/
+                    Shared/
+                        content.yaml
+                        files/
+                        yaml/
+                        translations/
+                    GDI/
+                        content.yaml
+                        yaml/
+                        files/
+                        sprites/
+                        translations/
+                    Nod/
+                        content.yaml
+                        yaml/
+                        files/
+                        translations/
+                TiberianSun/
+                    content.yaml
+                    files/
+                    yaml/
+                    Shared/
+                        files/
+                    GDI/
+                        content.yaml
+                        files/
+                        yaml/
+                    Nod/
+                        content.yaml
+                        files/
+                        yaml/
+                    CABAL/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Forgotten/
+                        content.yaml
+                        files/
+                        yaml/
+                RedAlert/
+                    content.yaml
+                    files/
+                    yaml/
+                    Allies/
+                        content.yaml
+                        files/
+                        yaml/
+                    Japan/
+                        content.yaml
+                        files/
+                        yaml/
+                    Soviets/
+                        content.yaml
+                        files/
+                        yaml/
+                RedAlert2/
+                    content.yaml
+                    files/
+                    yaml/
+                RedAlert2Mod/
+                    Shared/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    AsianAlliance/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Consortium/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Syndicate/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Naxis/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    SchwarzerMond/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    FutureTech/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                TKM/
+                    content.yaml
+                    files/
+                    yaml/
+                D2k/
+                    Shared/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Atreides/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Harkonnen/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Ordos/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                    Ixian/
+                        content.yaml
+                        files/
+                        translations/
+                        yaml/
+                StarCraft/
+                    content.yaml
+                    files/
+                    yaml/
+                Warcraft2/
+                    content.yaml
+                    files/
+                    yaml/
+                Outpost2/
+                    content.yaml
+                    files/
+                    yaml/
 ```
 
 The `mods/cameo/` directory is the mod package. The `OpenRA.Mods.Cameo` project contains Cameo-specific traits, warheads, effects, and the `CameoSpriteSequence` loader. The `OpenRA.Mods.CA` project is a shared utility assembly used by Cameo and other dependent mods.
@@ -5861,7 +6009,7 @@ Cameo does not use a `RequiresVersion` field in `mod.yaml`. Instead, the engine 
 
 ```
 mod.config
-    ENGINE_VERSION="da94a51"
+    ENGINE_VERSION="7ba39d9"
     AUTOMATIC_ENGINE_SOURCE="https://github.com/cameo-mod/OpenRA/archive/${ENGINE_VERSION}.zip"
     ENGINE_DIRECTORY="./engine"
     AUTOMATIC_ENGINE_MANAGEMENT="True"
@@ -5938,7 +6086,7 @@ ModelSequences:
 
 ### Relationship to the upstream OpenRA SDK
 
-Cameo uses the standard OpenRA Mod SDK structure: `mod.config` drives the build, `Makefile`/`make.ps1` compile the mod, `fetch-engine.sh` manages the engine dependency, and `launch-game.*`/`utility.*` wrap the engine binary. The main difference is that the engine is fetched from the `cameo-mod/OpenRA` fork rather than the upstream `OpenRA/OpenRA` repository, and the pinned commit is `da94a51`. The mod does not declare `RequiresMods` because it mounts the engine’s common mod (`^EngineDir|mods/common`) and official mod packages (`cnc`, `ra`, etc.) through the `FileSystem` section and the `SupportsMapsFrom` list.
+Cameo uses the standard OpenRA Mod SDK structure: `mod.config` drives the build, `Makefile`/`make.ps1` compile the mod, `fetch-engine.sh` manages the engine dependency, and `launch-game.*`/`utility.*` wrap the engine binary. The main difference is that the engine is fetched from the `cameo-mod/OpenRA` fork rather than the upstream `OpenRA/OpenRA` repository, and the pinned commit is `7ba39d9`. The mod does not declare `RequiresMods` because it mounts the engine’s common mod (`^EngineDir|mods/common`) and official mod packages (`cnc`, `ra`, etc.) through the `FileSystem` section and the `SupportsMapsFrom` list.
 
 ## Interconnectivity
 ![Algorithms diagram](images/Part_03_Chapter_01_Mod_SDK-algorithm-diagram-or-pseudocode-flowchart-for-the-non-trivia-5983ed.svg)
@@ -6186,7 +6334,7 @@ Edit the root `mod.config` (or create a `user.config` override) so the SDK downl
 
 ```
 MOD_ID="mymod"
-ENGINE_VERSION="da94a51"
+ENGINE_VERSION="7ba39d9"
 AUTOMATIC_ENGINE_MANAGEMENT="True"
 AUTOMATIC_ENGINE_SOURCE="https://github.com/cameo-mod/OpenRA/archive/${ENGINE_VERSION}.zip"
 ENGINE_DIRECTORY="./engine"
@@ -6349,15 +6497,15 @@ FileSystem: DefaultFileSystem
 An individual content pack is then included with a single line:
 
 ```yaml
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
 That file (`mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml`) lists the rules and fluent files that belong to the pack:
 
 ```yaml
 Rules:
-	ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-	ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
+	ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+	ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
 	...
 FluentMessages:
 	ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -6371,7 +6519,7 @@ These three Cameo-specific traits are normally configured in the `World` and `Pl
 
 #### `FactionCA`
 
-`FactionCA` is defined on the `World` actor. Each faction is declared with a unique override key. The entry point in Cameo is `mods/cameo/rules/world.yaml`, and individual content packs add their own factions from `mods/cameo/ContentPacks/<pack>/rules/faction.yaml`. A minimal new faction looks like:
+`FactionCA` is defined on the `World` actor. Each faction is declared with a unique override key. The entry point in Cameo is `mods/cameo/rules/world.yaml`, and individual content packs add their own factions from `mods/cameo/ContentPacks/<pack>/yaml/faction.yaml`. A minimal new faction looks like:
 
 ```yaml
 World:
@@ -6447,7 +6595,7 @@ For a new mod, copy the relevant blocks into your own `rules/player.yaml` and `r
 
 - **Missing assemblies in `mod.yaml`**: `Assemblies` must include `OpenRA.Mods.Cameo.dll`, `OpenRA.Mods.CA.dll`, `OpenRA.Mods.AS.dll`, `OpenRA.Mods.Cnc.dll`, and `OpenRA.Mods.D2k.dll` in addition to `OpenRA.Mods.Common.dll`. Forgetting any of them will cause missing trait types and a crash on load.
 - **Wrong `SpriteSequenceFormat`**: if you use Cameo assets or sequences, set `SpriteSequenceFormat: CameoSpriteSequence` in `mod.yaml`. Using the upstream default will fail to load Cameo-specific sequence data.
-- **Missing `ContentPacks` mount**: if you include lines like `#Include: ContentPacks|TiberianDawn/GDI/content.yaml`, you must also declare the package mount `cameo|ContentPacks: ContentPacks` (or `mymod|ContentPacks: ContentPacks` for your own packs). Without the mount, the `ContentPacks|` prefix cannot be resolved.
+- **Missing `ContentPacks` mount**: if you include lines like `Include: ContentPacks|TiberianDawn/GDI/content.yaml`, you must also declare the package mount `cameo|ContentPacks: ContentPacks` (or `mymod|ContentPacks: ContentPacks` for your own packs). Without the mount, the `ContentPacks|` prefix cannot be resolved.
 - **Forgetting `cameo` in `SupportsMapsFrom`**: if your mod loads Cameo maps or shares the same tile conventions, add `cameo` to `SupportsMapsFrom`. Otherwise the map chooser will reject Cameo-compatible maps.
 - **Missing project references**: a custom C# project that consumes Cameo traits must reference both `OpenRA.Mods.Cameo` and `OpenRA.Mods.CA` with `Private=False`. Without these, the compiler will not see Cameo types.
 - **Mismatched engine fork**: do not point `AUTOMATIC_ENGINE_SOURCE` at the upstream `OpenRA/OpenRA` repository. Cameo requires the `cameo-mod/OpenRA` fork because it contains the `OpenRA.Mods.AS` project and other Cameo-specific engine changes.
@@ -6463,7 +6611,7 @@ For a new mod, copy the relevant blocks into your own `rules/player.yaml` and `r
 | Variable | Default example | Meaning |
 | :---- | :---- | :---- |
 | `MOD_ID` | `"cameo"` | The directory name under `mods/` that contains the mod's `mod.yaml`. The engine will load `mods/$MOD_ID/mod.yaml`. Must not contain spaces. |
-| `ENGINE_VERSION` | `"da94a51"` | The exact Cameo engine commit required by this mod. This is the version string written into the engine's `VERSION` file and used as the Git ref / archive tag for downloads. |
+| `ENGINE_VERSION` | `"7ba39d9"` | The exact Cameo engine commit required by this mod. This is the version string written into the engine's `VERSION` file and used as the Git ref / archive tag for downloads. |
 | `ENGINE_DIRECTORY` | `"./engine"` | The local path (relative to the SDK root) where the engine source/binaries are stored. |
 
 ### Engine management variables
@@ -6684,7 +6832,7 @@ if command is check-scripts:
 - **Runtime mismatch:** on Unix, if both `mono` and `dotnet` are installed, the launcher chooses based on whether the built engine assembly contains `.NETCoreApp,Version=`. If the engine is rebuilt for a different framework without updating the launcher, the wrong runtime may be selected. Keep the engine and SDK versions in sync.
 - **Windows batch parser limitations:** `launch-game.cmd` splits each config line at the first `=` only. Values that themselves contain `=` will be truncated. Avoid `=` in config values.
 - **PowerShell execution policy:** `make.cmd` passes `-ExecutionPolicy Bypass` to PowerShell, so the script can run even if the default policy is restricted. Do not remove this flag unless the environment is already configured to allow unsigned scripts.
-- **Engine archive top-level directory:** `fetch-engine.sh` assumes the downloaded zip has exactly one top-level directory (e.g., `OpenRA-da94a51`). The Windows script uses `Get-ChildItem -Recurse | Select-Object -First 1` for the same assumption. Custom archives must follow this layout.
+- **Engine archive top-level directory:** `fetch-engine.sh` assumes the downloaded zip has exactly one top-level directory (e.g., `OpenRA-7ba39d9`). The Windows script uses `Get-ChildItem -Recurse | Select-Object -First 1` for the same assumption. Custom archives must follow this layout.
 - **Do not commit the engine directory:** `ENGINE_DIRECTORY` and `AUTOMATIC_ENGINE_EXTRACT_DIRECTORY` are intended to be temporary. Add them to `.gitignore` so the pinned engine is not committed.
 - **Mod search paths:** the launcher passes `Engine.ModSearchPaths="./mods,<engine>/mods"` (Windows) or `${TEMPLATE_ROOT}/mods,./mods` (Unix). The engine then scans those directories for a subdirectory matching `MOD_ID`. If the mod is not found, the engine will fail to start; the path must be correct relative to the engine directory.
 - **Cameo-specific missing-assembly crashes:** if the mod loads but crashes immediately with a trait-not-found error, verify that `mods/<MOD_ID>/mod.yaml` lists all six required DLLs: `OpenRA.Mods.Common.dll`, `OpenRA.Mods.Cnc.dll`, `OpenRA.Mods.D2k.dll`, `OpenRA.Mods.AS.dll`, `OpenRA.Mods.CA.dll`, and `OpenRA.Mods.Cameo.dll`.
@@ -6726,7 +6874,7 @@ If any of the concepts above feel unclear, review the relevant section before co
   - `mods/cameo/rules/promotions.yaml`
   - `mods/cameo/rules/world.yaml`
   - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml`
-  - `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml`
+  - `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml`
   - `OpenRA.Mods.Cameo/Traits/Player/FactionCA.cs`
   - `OpenRA.Mods.Cameo/Traits/Player/PlayerPromotions.cs`
   - `OpenRA.Mods.Cameo/Traits/Player/CustomFormationsModOptions.cs`
@@ -6880,7 +7028,7 @@ fi
 The engine version is pinned in `mod.config`:
 
 ```bash
-ENGINE_VERSION="da94a51"
+ENGINE_VERSION="7ba39d9"
 AUTOMATIC_ENGINE_SOURCE="https://github.com/cameo-mod/OpenRA/archive/${ENGINE_VERSION}.zip"
 ENGINE_DIRECTORY="./engine"
 AUTOMATIC_ENGINE_EXTRACT_DIRECTORY="./engine_temp"
@@ -7071,7 +7219,7 @@ The primary build commands are the `Makefile` targets. On Windows, use the equiv
 
 Cameo does not store the OpenRA engine source in the repository. Instead, `fetch-engine.sh` downloads the version pinned in `mod.config`:
 
-- `ENGINE_VERSION` — the Git commit/branch/tag to fetch (e.g. `da94a51`).
+- `ENGINE_VERSION` — the Git commit/branch/tag to fetch (e.g. `7ba39d9`).
 - `AUTOMATIC_ENGINE_SOURCE` — the URL to download (e.g. `https://github.com/cameo-mod/OpenRA/archive/${ENGINE_VERSION}.zip`).
 - `ENGINE_DIRECTORY` — local path to extract the engine (default `./engine`).
 - `AUTOMATIC_ENGINE_EXTRACT_DIRECTORY` — temporary extraction directory.
@@ -7138,7 +7286,7 @@ FileSystem: DefaultFileSystem
 and includes it via:
 
 ```yaml
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
 The content packs are not standalone installers; they are shipped as part of the `mods/cameo/` directory and loaded through the mod's package system.
@@ -7168,7 +7316,7 @@ No `appveyor.yml` or `.travis.yml` files are present in the Cameo source.
 
 - **Engine version mismatch:** `fetch-engine.sh` only compares the `VERSION` file. If the engine is partially extracted or a build is interrupted, delete `engine/` and run `make engine` again.
 - **Missing assets:** Cameo has many optional asset packages under `mods/cameo/bits/` and `mods/cameo/ContentPacks/`. The build will succeed without them, but the game will crash at runtime if required SHPs or MIX files are missing. Run `make test` after adding new file references.
-- **Content pack handling:** The `#Include` syntax for content packs is case-sensitive and depends on the `ContentPacks` package registration. Mismatched paths cause silent omissions rather than errors.
+- **Content pack handling:** The `Include` syntax for content packs is case-sensitive and depends on the `ContentPacks` package registration. Mismatched paths cause silent omissions rather than errors.
 - **Windows path limits:** The portable zip and installer contain deeply nested mod asset directories. Long-path support must be enabled on the build host and on players' systems when extracting to deep paths.
 - **Windows packaging requires Linux:** The SDK builds Windows installers on Ubuntu with Wine, NSIS, and ImageMagick. Attempting to run `buildpackage.sh` on Windows natively will fail.
 - **macOS build host:** macOS packaging must run on a macOS host with `clang`, `iconutil`, and `create-dmg`. The GitHub Actions workflow uses `macos-14`.
@@ -7314,7 +7462,7 @@ This example shows how a single sprite asset travels through asset loading, sequ
 
 ### Wiring the sprite to an actor
 
-To actually see the sprite in-game, you need a sequence entry (already shown above) and an actor rule that references it. The actor rule below is the same pattern used by infantry in the default mods and can be copy-pasted into `mods/cameo/rules/infantry.yaml`:
+To actually see the sprite in-game, you need a sequence entry (already shown above) and an actor rule that references it. The actor rule below is the same pattern used by infantry in the default mods and can be copy-pasted into a faction's YAML file under `mods/cameo/ContentPacks/` (e.g., `ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml`):
 
 ```yaml
 COMMANDO:
@@ -11041,8 +11189,8 @@ This makes every file under `mods/cameo/ContentPacks/` reachable via the `Conten
 
 ```
 mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml
-mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml
-mods/cameo/ContentPacks/TiberianDawn/GDI/rules/buildings.yaml
+mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml
+mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/buildings.yaml
 ...
 mods/cameo/ContentPacks/TiberianDawn/GDI/sprites/mtnk.shp
 mods/cameo/ContentPacks/TiberianDawn/GDI/translations/en.ftl
@@ -11052,15 +11200,15 @@ The `content.yaml` inside the pack references those assets under the same mount:
 
 ```yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
     ...
 
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
 ```
 
-Cameo's `mod.yaml` includes the pack with an `#Include: ContentPacks|TiberianDawn/GDI/content.yaml` directive. Because the pack is mounted as a separate package and its files are referenced explicitly, it layers cleanly over the base mod files: base rules remain untouched, while the pack's rules, sprites, and translations are loaded on top.
+Cameo's `mod.yaml` includes the pack with an `Include: ContentPacks|TiberianDawn/GDI/content.yaml` directive. Because the pack is mounted as a separate package and its files are referenced explicitly, it layers cleanly over the base mod files: base rules remain untouched, while the pack's rules, sprites, and translations are loaded on top.
 
 ### PackageFormats manifest entry
 
@@ -11086,9 +11234,9 @@ cameo|ContentPacks: ContentPacks
 
 ```yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
     ...
 
 FluentMessages:
@@ -11098,10 +11246,10 @@ FluentMessages:
 3. The base mod's `mod.yaml` can include the pack with a line such as:
 
 ```yaml
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
-When the `#Include` is enabled, the engine loads the pack's rules as if they were declared directly in the base manifest. Because the files are referenced through the explicit `ContentPacks|` mount, the base mod files in `mods/cameo/rules/` remain untouched. Later mounts or pack-specific rules can override base assets by name, while optional pack files can be omitted entirely by commenting out the `#Include` line.
+When the `Include` is active, the engine loads the pack's rules as if they were declared directly in the base manifest. Because the files are referenced through the explicit `ContentPacks|` mount, the base mod files in `mods/cameo/rules/` remain untouched. Later mounts or pack-specific rules can override base assets by name, while optional pack files can be omitted entirely by commenting out the `Include` line.
 
 ## Interconnectivity
 ![Algorithms diagram](images/Part_06_Chapter_03_VFS-algorithm-diagram-or-pseudocode-flowchart-for-the-non-trivia-5983ed.svg)
@@ -11469,13 +11617,13 @@ The example `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` references a
 
 ```yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-    ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-    ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-    ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-    ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/aircraft.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/naval.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/upgrades.yaml
 
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -14026,8 +14174,8 @@ Player:
     ...
     BaseBuilderBotModuleCA@generic:
         RequiresCondition: genericbot
-        ConstructionYardTypes: fact.gdi, rafact.allies, ...
-        RefineryTypes: proc.gdi, raproc.allies, ...
+        ConstructionYardTypes: fact.td_gdi, rafact.ra1_allies, ...
+        RefineryTypes: proc.td_gdi, raproc.ra1_allies, ...
         PowerTypes: powr, apwr, ...
         BuildingFractions:
             powr: 20
@@ -14526,7 +14674,7 @@ BaseBuilderBotModuleCA@generic:
     BaseCrawlRadius: 50
     BuildingQueues: Building, RABuilding, BuildingAddons
     DefenseQueues: Defence, RADefence, BuildingAddons
-    RefineryTypes: proc.gdi, proc.nod, raproc.allies, ...
+    RefineryTypes: proc.td_gdi, proc.td_nod, raproc.ra1_allies, ...
     PowerTypes: nuke, powr, apwr, ...
 ```
 
@@ -14986,13 +15134,13 @@ SquadManagerBotModuleCA@generic:
     IgnoredEnemyTargetTypes: TechHusk, DisguisedSpy
     SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
     SuggestedNavyLeaderLocomotor: naval
-    ExcludeFromSquadsTypes: e6, harv.gdi, mcv.gdi, ...
-    ConstructionYardTypes: fact.gdi, fact.nod, ...
+    ExcludeFromSquadsTypes: e6, harv.td_gdi, mcv.td_gdi, ...
+    ConstructionYardTypes: fact.td_gdi, fact.td_nod, ...
     NavalUnitsTypes: ss, msub, dd, ca, pt, ...
     NavalProductionTypes: raspen, ra1syrd, cncsyrd, ...
     AirUnitsTypes: gdifirehawk, mig, su57, mignuke, ...
     StaticAntiAirTypes: sam, td_gdi_skyshield, atwr, ...
-    HighValueTargetTypes: fact.gdi, proc.gdi, weap, ...
+    HighValueTargetTypes: fact.td_gdi, proc.td_gdi, weap, ...
     HighValueTargetPriority: 50
     AirToAirPriority: 25
     BigAirThreats: gdifirehawk, mignuke, modbomber, ...
@@ -15003,7 +15151,7 @@ SquadManagerBotModuleCA@generic:
         mig: Aircraft, Vehicle, Epic, Naval, Defense
         mignuke: Building, Epic
         ...
-    GuerrillaTypes: gdirig, rmbo.gdi, apc, bggy, bike, ...
+    GuerrillaTypes: gdirig, rmbo.td_gdi, apc, bggy, bike, ...
 ```
 
 Key fields:
@@ -16808,7 +16956,7 @@ After studying this chapter, you should be able to:
 | File | Responsibility |
 | :---- | :---- |
 | `mods/cameo/mod.yaml` | Cameo manifest. Defines `PackageFormats`, `SupportsMapsFrom`, `FileSystem`, and all mod sections. |
-| `mods/cameo/rules/tiberiandawn.yaml` | Tiberian Dawn faction rules. |
+- `mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/faction.yaml` — Tiberian Dawn faction rules (ContentPack).
 | `mods/cameo/rules/redalert.yaml` | Red Alert faction rules. |
 | `mods/cameo/rules/tiberiansun.yaml` | Tiberian Sun faction rules. |
 | `mods/cameo/rules/d2k.yaml` | Dune 2000 faction rules. |
@@ -16829,8 +16977,8 @@ After studying this chapter, you should be able to:
 | `mods/cameo/audio/tiberiansun.yaml` | Tiberian Sun audio definitions. |
 | `mods/cameo/audio/redalert2.yaml` | Red Alert 2 audio definitions. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | GDI ContentPack manifest. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml` | GDI faction definition. |
-| `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml` | GDI vehicle overrides. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` | GDI faction definition. |
+| `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` | GDI vehicle overrides. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/translations/en.ftl` | GDI ContentPack fluent messages. |
 | `mods/cameo/installer/downloads.yaml` | Freeware download definitions for C&C, RA, TS, and D2K assets. |
 | `mods/cameo/installer/cnc95.yaml` | C&C Gold disc installer. |
@@ -16858,7 +17006,7 @@ Key differences from the upstream official-mod layout:
 
 - Only one mod directory exists: `mods/cameo/`.
 - No `mods/ra/`, `mods/cnc/`, `mods/d2k/`, or `mods/ts/` directories are present in the Cameo source.
-- Faction-specific rules are grouped by *source game* (e.g., `rules/tiberiandawn.yaml`, `rules/redalert.yaml`, `rules/tiberiansun.yaml`, `rules/d2k.yaml`, `rules/redalert2.yaml`) rather than by separate mod folders.
+- Faction-specific rules are grouped by *source game* (e.g., `rules/redalert.yaml`, `rules/tiberiansun.yaml`, `rules/d2k.yaml`, `rules/redalert2.yaml`) or by ContentPack (e.g., `ContentPacks/TiberianDawn/`) rather than by separate mod folders.
 - Cameo loads the C# assemblies for C&C, D2K, and Common (`OpenRA.Mods.Cnc.dll`, `OpenRA.Mods.D2k.dll`, `OpenRA.Mods.Common.dll`) plus its own `OpenRA.Mods.Cameo.dll` and additional support assemblies.
 
 ### Referencing upstream official mod assets
@@ -16894,36 +17042,59 @@ The `~` prefix marks a package as optional, so the mod can still launch if a par
 
 ### ContentPacks for original-game factions
 
-Cameo uses the `mods/cameo/ContentPacks/` tree to supply faction-specific assets and rules for original-game factions. The current playtest build includes the Tiberian Dawn GDI ContentPack:
+Cameo uses the `mods/cameo/ContentPacks/` tree to supply faction-specific assets and rules. The current source tree includes the following content packs:
+
+- **Core** — a single pack with shared base rules and sequences.
+- **Shared** — a top-level pack containing shared `files/` assets used across multiple themes.
+- **TiberianDawn** — per-faction subdirectories: Shared, GDI, Nod.
+- **TiberianSun** — a wrapper pack plus per-faction subdirectories: Shared, GDI, Nod, CABAL, Forgotten.
+- **RedAlert** — a wrapper pack plus per-faction subdirectories: Allies, Japan, Soviets.
+- **RedAlert2** — a wrapper pack with `files/` and `yaml/` subdirectories (provides ra2_allies, ra2_soviets, and yuri factions).
+- **RedAlert2Mod** — per-faction subdirectories: Shared, AsianAlliance, Consortium, Syndicate, Naxis, SchwarzerMond, FutureTech.
+- **D2k** — per-faction subdirectories: Shared, Atreides, Harkonnen, Ordos, Ixian (the corrino faction is defined in `mods/cameo/rules/`).
+- **StarCraft** — a wrapper pack with `files/` and `yaml/` subdirectories (provides terran, protoss, zerg factions).
+- **Warcraft2** — a wrapper pack with `files/` and `yaml/` subdirectories (provides wc2_humans, wc2_orcs factions).
+- **TKM** — a wrapper pack with `files/` and `yaml/` subdirectories.
+- **Outpost2** — a wrapper pack with `files/` and `yaml/` subdirectories.
+
+Each per-faction pack follows the same `ContentPacks/<Theme>/<Faction>/` convention, with a `content.yaml` manifest, a `yaml/` subdirectory for rules/weapons/sequences, a `sprites/` subdirectory for sprite assets, a `files/` subdirectory for miscellaneous assets, and a `translations/` subdirectory for fluent messages. Not every pack has all subdirectories. The Tiberian Dawn GDI ContentPack is shown below as a representative example:
 
 ```yaml
 # mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-    ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-    ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-    ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-    ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/aircraft.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/naval.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/upgrades.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/promotions.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/ai.yaml
 
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
+
+Weapons:
+    ContentPacks|TiberianDawn/GDI/yaml/weapons.yaml
+
+Sequences:
+    ContentPacks|TiberianDawn/GDI/yaml/sequences.yaml
 ```
 
-`mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml` defines the `TiberianDawn_GDI` faction:
+`mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` defines the `td_gdi` faction:
 
 ```yaml
 World:
-    FactionCA@TiberianDawn_GDI:
-        Name: TiberianDawn_GDI.name
-        InternalName: TiberianDawn_GDI
+    FactionCA@td_gdi:
+        Name: GDI TD #faction_td_gdi.name
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
-        Description: TiberianDawn_GDI.description
+        Description: faction_td_gdi.description
 ```
 
-`mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml` then adds units such as `TiberianDawn_GDI_MTNK`. The `mods/cameo/mod.yaml` FileSystem mounts `cameo|ContentPacks` as a package, and the bottom of the manifest contains a commented `#Include: ContentPacks|TiberianDawn/GDI/content.yaml` that shows how a ContentPack can be conditionally included. In the current build the ContentPack structure is present and the GDI pack is the only populated example; additional original-game factions (Nod, Allies, Soviets, Atreides, Harkonnen, Ordos, GDI/TS, Nod/TS, etc.) would follow the same `ContentPacks/<Game>/<Faction>/` convention.
+`mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` then adds units such as `td_gdi_battletank`. The `mods/cameo/mod.yaml` FileSystem mounts `cameo|ContentPacks` as a package, and the manifest contains active `Include:` directives for every content pack. The full include list defines lobby faction load order — theme-level wrapper packs (e.g. `ContentPacks|TiberianSun/content.yaml`) load unmigrated rulesets while faction-level packs (e.g. `ContentPacks|TiberianSun/CABAL/content.yaml`) load migrated per-faction YAML. Additional original-game factions follow the same `ContentPacks/<Theme>/<Faction>/` convention.
 
 ### Cameo-specific installer manifests
 
@@ -16976,7 +17147,7 @@ The same pattern is used for the Red Alert, Tiberian Sun, and Red Alert 2 instal
 
 | Upstream mod | Cameo files | Cameo installer manifests |
 | :---- | :---- | :---- |
-| Tiberian Dawn (`cnc`) | `rules/tiberiandawn.yaml`, `sequences/tiberiandawn.yaml`, `weapons/tiberiandawn.yaml`, `bits/td`, `audio/voices.yaml` | `cnc95.yaml`, `gdi95.yaml`, `nod95.yaml`, `firstdecade.yaml`, `origin.yaml`, `downloads.yaml` |
+| Tiberian Dawn (`cnc`) | `ContentPacks/TiberianDawn/` (rules, sequences, weapons via content.yaml), `bits/td`, `audio/voices.yaml` | `cnc95.yaml`, `gdi95.yaml`, `nod95.yaml`, `firstdecade.yaml`, `origin.yaml`, `downloads.yaml` |
 | Red Alert (`ra`) | `rules/redalert.yaml`, `sequences/redalert.yaml`, `weapons/redalert.yaml`, `bits/ra`, `bits/ra/ra_audio.mix`, `audio/voices.yaml` | `allies95.yaml`, `soviet95.yaml`, `counterstrike.yaml`, `covertops.yaml`, `aftermath.yaml`, `downloads.yaml` |
 | Tiberian Sun (`ts`) | `rules/tiberiansun.yaml`, `sequences/tiberiansun.yaml`, `weapons/tiberiansun.yaml`, `bits/ts`, `audio/tiberiansun.yaml` | `firestorm.yaml`, `downloads.yaml` |
 | Dune 2000 (`d2k`) | `rules/d2k.yaml`, `sequences/d2k.yaml`, `weapons/d2k.yaml`, `bits/d2k`, `tilesets/arrakis.yaml`, `audio/d2k.yaml` | `downloads.yaml` |
@@ -17116,7 +17287,7 @@ Copy the `mods/cameo/` directory, rename it, update `mod.yaml`, and replace asse
 
 ### Add a new faction
 
-Add a faction entry in the `FactionCA` world trait YAML (for example, in a ContentPack such as `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml`) and add faction-specific actors, palettes, and translations.
+Add a faction entry in the `FactionCA` world trait YAML (for example, in a ContentPack such as `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml`) and add faction-specific actors, palettes, and translations.
 
 ### Add custom missions
 
@@ -17134,7 +17305,7 @@ Create a new file under `mods/cameo/installer/` with the required `IDFiles` and 
 
 ### Add a new ContentPack
 
-Create a new directory under `mods/cameo/ContentPacks/<Game>/<Faction>/`, add a `content.yaml` that lists `Rules`, `Sequences`, `Weapons`, `Voices`, `Notifications`, and `FluentMessages` as needed, and add faction-specific YAML files. Add an `#Include` line at the bottom of `mods/cameo/mod.yaml` to load the pack.
+Create a new directory under `mods/cameo/ContentPacks/<Theme>/<Faction>/`, add a `content.yaml` that lists `Rules`, `Sequences`, `Weapons`, `Voices`, `Notifications`, and `FluentMessages` as needed, and add faction-specific YAML files under a `yaml/` subdirectory. Add an `Include:` line in `mods/cameo/mod.yaml` to load the pack. Position it among the other `Include:` directives to control lobby faction ordering.
 
 ## Common Pitfalls / Guardrails
 
@@ -17145,7 +17316,7 @@ Create a new directory under `mods/cameo/ContentPacks/<Game>/<Faction>/`, add a 
 - **Mission scripts:** Lua scripts are not validated by `make test` unless the map is included in the test list. Test missions manually.
 - **TS isometric rendering:** Tiberian Sun uses a different coordinate system and depth buffer. Units and buildings ported from TS should understand the isometric pipeline.
 - **D2K tile rules:** Dune 2000 has unique terrain rules (buildable sand, rock, spice). Modifying these can break the building and harvester logic.
-- **ContentPack inclusion:** the GDI ContentPack is structured but not currently active in the playtest build because the `#Include` line in `mods/cameo/mod.yaml` is commented out. Activating it requires uncommenting or duplicating that line.
+- **ContentPack inclusion:** all content packs are actively included in `mods/cameo/mod.yaml` via `Include:` directives. The include order defines lobby faction selector order. To add a new pack, create its directory and `content.yaml`, then add an `Include:` line in `mod.yaml` at the appropriate position.
 
 ## What to read next
 
@@ -17162,7 +17333,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 ## References
 
 - `mods/cameo/mod.yaml` — Cameo manifest.
-- `mods/cameo/rules/tiberiandawn.yaml` — Tiberian Dawn rules.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` — Tiberian Dawn rules (ContentPack).
 - `mods/cameo/rules/redalert.yaml` — Red Alert rules.
 - `mods/cameo/rules/tiberiansun.yaml` — Tiberian Sun rules.
 - `mods/cameo/rules/d2k.yaml` — Dune 2000 rules.
@@ -17180,8 +17351,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `mods/cameo/tilesets/arrakis.yaml` — Dune 2000 tile set.
 - `mods/cameo/audio/voices.yaml` — Shared voices for original-game factions.
 - `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` — GDI ContentPack manifest.
-- `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/faction.yaml` — GDI faction definition.
-- `mods/cameo/ContentPacks/TiberianDawn/GDI/rules/vehicles.yaml` — GDI vehicle rules.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` — GDI faction definition.
+- `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/vehicles.yaml` — GDI vehicle rules.
 - `mods/cameo/installer/downloads.yaml` — Freeware asset download definitions.
 - `mods/cameo/installer/gdi95.yaml` — C&C Gold GDI disc installer.
 - `mods/cameo/installer/allies95.yaml` — Red Alert Allied disc installer.
@@ -17218,7 +17389,7 @@ After studying this chapter, you should be able to:
 ![Architecture diagram](images/Part_10_Chapter_02_Online_References-architecture-diagram-showing-the-main-classes-interfaces-and-9161e6.svg)
 
 
-The core online service implementation lives in the OpenRA engine. The files below are referenced relative to the engine source tree (the `cameo-mod/OpenRA` fork pinned by `ENGINE_VERSION="da94a51"`).
+The core online service implementation lives in the OpenRA engine. The files below are referenced relative to the engine source tree (the `cameo-mod/OpenRA` fork pinned by `ENGINE_VERSION="7ba39d9"`).
 
 | File | Responsibility |
 | :---- | :---- |
@@ -17292,7 +17463,7 @@ The `PlayerDatabase` global mod data stores the player profile/badge URL.
 
 ### Engine baseline and default URLs
 
-Cameo does not override the `WebServices` global mod data in its `mods/cameo/mod.yaml`. The mod inherits the upstream OpenRA defaults defined in the pinned engine fork (`cameo-mod/OpenRA` at `ENGINE_VERSION="da94a51"`). The default endpoints are:
+Cameo does not override the `WebServices` global mod data in its `mods/cameo/mod.yaml`. The mod inherits the upstream OpenRA defaults defined in the pinned engine fork (`cameo-mod/OpenRA` at `ENGINE_VERSION="7ba39d9"`). The default endpoints are:
 
 | Endpoint | Default URL |
 | :---- | :---- |
@@ -17708,7 +17879,7 @@ Suppose you want to add one custom unit to the existing Cameo mod.
        Buildable:
            Queue: Vehicle
            BuildPaletteOrder: 330
-           Prerequisites: ~vehicles.allies, ~techlevel.low
+           Prerequisites: ~vehicles.ra1_allies, ~techlevel.low
        Valued:
            Cost: 600
        Tooltip:
@@ -17762,7 +17933,7 @@ Suppose you want to add one custom unit to the existing Cameo mod.
        Production:
            Queue: Vehicle
        ProvidesPrerequisite:
-           Prerequisite: vehicles.allies
+           Prerequisite: vehicles.ra1_allies
    ```
 
 8. **Validate YAML.** Run the utility checks in order:
@@ -17852,7 +18023,7 @@ Each entry also has a `Plays...Animation` boolean to choose between playing the 
 
 On each tick, it decays cell levels using either linear or logarithmic half-life math. On `TickRender`, it updates the visible overlay, skipping cells hidden by fog of war. Other traits can call `IncreaseLevel` to add intensity to a cell.
 
-**`ContentPacks`** integration. Cameo layers optional content over the common mod using the `ContentPacks` package and the `#Include` directive in `mods/cameo/mod.yaml`. For example:
+**`ContentPacks`** integration. Cameo layers optional content over the common mod using the `ContentPacks` package and the `Include` directive in `mods/cameo/mod.yaml`. For example:
 
 ```yaml
 # In mods/cameo/mod.yaml
@@ -17860,20 +18031,20 @@ FileSystem: DefaultFileSystem
     Packages:
         cameo|ContentPacks: ContentPacks
         ...
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
 The included `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` then adds extra rules and fluent messages:
 
 ```yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-    ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-    ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-    ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-    ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/aircraft.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/naval.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/upgrades.yaml
 
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -17924,7 +18095,7 @@ If you are starting a new mod based on the Cameo model, the recommended path is 
 
 3. **Pin the engine.** In `mod.config`, set:
    ```bash
-   ENGINE_VERSION=playtest-20240628
+   ENGINE_VERSION=7ba39d9
    ```
    The SDK download scripts fetch this exact engine tag and place it in a sibling directory. Pinning the version keeps your mod reproducible and makes it easy to bump the engine later by changing one value and running `make all` again.
 
@@ -17972,7 +18143,7 @@ A modder using the Mod SDK or extending Cameo:
 | **Official mod** (`mods/ra`, `mods/cnc`, etc.) | Lives inside the engine repository and is built with the engine. | Engine contributors who change both gameplay and engine code. | `mod.yaml`, `rules/`, `sequences/`, `audio/`, `chrome/`, `maps/` under `mods/<mod>/`. |
 | **SDK mod** | Separate repository that references a pinned engine and the common mod. | Modders who want stable engine upgrades and a clean project. | `mod.yaml`, `mod.config`, `makefile`, packaging scripts, plus `rules/`, `sequences/`, etc. |
 | **Common mod** (`mods/common`) | Shared traits, chrome, assets, and utilities used by official mods and many SDK mods. | Reusing existing UI, effects, or gameplay logic without copying it. | `mods/common/mod.yaml`, `mods/common/rules/`, `mods/common/sequences/`, `mods/common/chrome/`, `mods/common/audio/`. |
-| **Cameo content pack** (`mods/cameo/ContentPacks/<game>/<faction>/`) | Self-contained overlay that adds a game or faction to Cameo. | Adding new factions or games without touching the main mod files. | `content.yaml`, `rules/`, `sprites/`, `translations/` under `ContentPacks/<game>/<faction>/`. |
+| **Cameo content pack** (`mods/cameo/ContentPacks/<theme>/<faction>/`) | Self-contained overlay that adds a game or faction to Cameo. | Adding new factions or games without touching the main mod files. | `content.yaml`, `yaml/`, `sprites/`, `files/`, `translations/` under `ContentPacks/<theme>/<faction>/`. |
 
 Most new mods should start as an SDK mod that depends on `common`. This gives you the smallest project footprint and the smoothest upgrade path when the engine releases new playtests. Cameo itself adds content packs on top of that model for optional, game-specific content.
 
@@ -17991,7 +18162,7 @@ This walkthrough assumes a project called `my-mod` that depends on the common mo
        Buildable:
            Queue: Vehicle
            BuildPaletteOrder: 330
-           Prerequisites: ~vehicles.allies, ~techlevel.low
+           Prerequisites: ~vehicles.ra1_allies, ~techlevel.low
        Valued:
            Cost: 600
        Tooltip:
@@ -18072,7 +18243,7 @@ RECON:
     Buildable:
         Queue: Vehicle
         BuildPaletteOrder: 330
-        Prerequisites: ~vehicles.allies, ~techlevel.low
+        Prerequisites: ~vehicles.ra1_allies, ~techlevel.low
     Valued:
         Cost: 600
     Tooltip:
@@ -18780,10 +18951,33 @@ FileSystem: DefaultFileSystem
         cameo|ContentPacks: ContentPacks
         ...
 
+Include: ContentPacks/Core/content.yaml
 Include: ContentPacks/TiberianDawn/Shared/content.yaml
 Include: ContentPacks/TiberianDawn/GDI/content.yaml
 Include: ContentPacks/TiberianDawn/Nod/content.yaml
 Include: ContentPacks/RedAlert/content.yaml
+Include: ContentPacks/TiberianSun/content.yaml
+Include: ContentPacks/TiberianSun/CABAL/content.yaml
+Include: ContentPacks/TiberianSun/Nod/content.yaml
+Include: ContentPacks/TiberianSun/GDI/content.yaml
+Include: ContentPacks/TiberianSun/Forgotten/content.yaml
+Include: ContentPacks/RedAlert2/content.yaml
+Include: ContentPacks/RedAlert2Mod/Shared/content.yaml
+Include: ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml
+Include: ContentPacks/RedAlert2Mod/Consortium/content.yaml
+Include: ContentPacks/RedAlert2Mod/Syndicate/content.yaml
+Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
+Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
+Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
+Include: ContentPacks/TKM/content.yaml
+Include: ContentPacks/D2k/Shared/content.yaml
+Include: ContentPacks/D2k/Ordos/content.yaml
+Include: ContentPacks/D2k/Ixian/content.yaml
+Include: ContentPacks/D2k/Atreides/content.yaml
+Include: ContentPacks/D2k/Harkonnen/content.yaml
+Include: ContentPacks/StarCraft/content.yaml
+Include: ContentPacks/Warcraft2/content.yaml
+Include: ContentPacks/Outpost2/content.yaml
 ...
 ```
 
@@ -18792,14 +18986,14 @@ A pack's `content.yaml` then loads its files using the `ContentPacks|` prefix:
 ```yaml
 # ContentPacks/TiberianDawn/GDI/content.yaml
 Rules:
-    ContentPacks|TiberianDawn/GDI/rules/faction.yaml
-    ContentPacks|TiberianDawn/GDI/rules/buildings.yaml
-    ContentPacks|TiberianDawn/GDI/rules/infantry.yaml
-    ContentPacks|TiberianDawn/GDI/rules/vehicles.yaml
-    ContentPacks|TiberianDawn/GDI/rules/aircraft.yaml
-    ContentPacks|TiberianDawn/GDI/rules/naval.yaml
-    ContentPacks|TiberianDawn/GDI/rules/upgrades.yaml
-    ContentPacks|TiberianDawn/GDI/rules/promotions.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/faction.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/buildings.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/infantry.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/vehicles.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/aircraft.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/naval.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/upgrades.yaml
+    ContentPacks|TiberianDawn/GDI/yaml/promotions.yaml
 
 FluentMessages:
     ContentPacks|TiberianDawn/GDI/translations/en.ftl
@@ -18815,12 +19009,12 @@ Cameo uses a custom `FactionCA` trait on the `World` actor to register selectabl
 
 ```yaml
 World:
-    FactionCA@gdi:
+    FactionCA@td_gdi:
         Name: GDI TD
-        InternalName: gdi
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
-        Description: faction-td-gdi.description
+        Description: faction-td-td_gdi.description
 
     FactionCA@asianalliance:
         Name: Asian Alliance
@@ -18832,7 +19026,7 @@ World:
     FactionCA@Random:
         Name: Random
         InternalName: Random
-        RandomFactionMembers: gdi, nod, allies, soviet, ...
+        RandomFactionMembers: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, wc2_humans, wc2_orcs, tkm
         Game: Generic
         Side: Random
         Description: Randomly selects one from all available factions
@@ -18840,7 +19034,7 @@ World:
 
 **Why this works:** `FactionCA` is a Cameo-specific trait that feeds the lobby faction list. The `@suffix` instance notation allows many factions to be defined on the single `World` actor without overwriting each other. `InternalName` is the value used elsewhere (`Factions`, `AlwaysShowForFactions`, `StartingUnits`, production queues, and prerequisites). `RandomFactionMembers` is only used by random-faction entries.
 
-**See:** `mods/cameo/ContentPacks/<Theme>/<Faction>/rules/faction.yaml` and `mods/cameo/rules/world.yaml`.
+**See:** `mods/cameo/ContentPacks/<Theme>/<Faction>/yaml/faction.yaml` and `mods/cameo/rules/world.yaml`.
 
 ### `PlayerPromotions` and promotion points
 
@@ -18888,7 +19082,7 @@ Player:
         ItemLimit: 1
         SpeedUp: false
         DisallowPaused: true
-        AlwaysShowForFactions: gdi, nod, allies, soviet, ...
+        AlwaysShowForFactions: td_gdi, td_nod, ra1_allies, ra1_soviets, ...
     Production:
         Produces: Promotions
     UsePointsOnProduction:
@@ -18896,7 +19090,7 @@ Player:
 
 **Why this works:** `PlayerPromotions` grants the `haspoints` condition once the player has reached any threshold, which makes the `rank1` prerequisite available. `PointsPerRank` maps each rank tier to a number of points awarded; the `default` row is the normal distribution. `ClassicProductionQueue@PROMOTIONS` creates the in-game promotion queue, and `UsePointsOnProduction` consumes the points when a promotion power is purchased. The `rank1`, `rank3`, `rank5`, etc. actors are lightweight prerequisite helpers used by other rules.
 
-**See:** `mods/cameo/rules/promotions.yaml` and `mods/cameo/ContentPacks/<Theme>/Shared|Faction/rules/promotions.yaml`.
+**See:** `mods/cameo/rules/promotions.yaml` and `mods/cameo/ContentPacks/<Theme>/Shared|Faction/yaml/promotions.yaml`.
 
 ### `CustomFormationsModOptions` configuration
 
@@ -19808,7 +20002,7 @@ This makes the contents of `mods/cameo/ContentPacks/` available under the `Conte
 Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
-In the current playtest this line is commented out at the end of `mod.yaml` (`#Include: ContentPacks|TiberianDawn/GDI/content.yaml`).
+In the current source tree, all content packs are actively included (not commented out). The full include list in `mod.yaml` covers Core, TiberianDawn (Shared, GDI, Nod), RedAlert, TiberianSun (wrapper, CABAL, Nod, GDI, Forgotten), RedAlert2 (wrapper), RedAlert2Mod (Shared, AsianAlliance, Consortium, Syndicate, Naxis, SchwarzerMond, FutureTech), TKM, D2k (Shared, Ordos, Ixian, Atreides, Harkonnen), StarCraft, Warcraft2, and Outpost2.
 
 To debug content-pack issues:
 
@@ -20121,7 +20315,7 @@ Cameo traits follow the engine’s sync-safety rules. Verified examples:
 
 Cameo extends the standard OpenRA YAML conventions with the following patterns:
 
-- **Content packs** — `mods/cameo/mod.yaml` registers `ContentPacks` as a package source, and per-game content is loaded from `ContentPacks/<game>/<faction>/content.yaml`. This keeps cross-franchise content isolated.
+- **Content packs** — `mods/cameo/mod.yaml` registers `ContentPacks` as a package source, and per-theme content is loaded from `ContentPacks/<theme>/<faction>/content.yaml`. This keeps cross-franchise content isolated.
 - **Faction traits** — `FactionCA` is declared with keyed instances such as `FactionCA@terran`, `FactionCA@zerg`, `FactionCA@RandomSC`, and `FactionCA@Random`. The `@` suffix distinguishes multiple faction definitions in the same file.
 - **Player option traits** — `PlayerPromotions` and `CustomFormationsModOptions` are declared as player-scoped traits, usually in `mods/cameo/rules/world.yaml` or `player.yaml` under the `Player` actor.
 - **Abstract actors** — `mods/cameo/rules/defaults.yaml` uses `^` abstract actors such as `^ExistsInWorld`, `^SpriteActor`, and `^1x1Shape` through `^4x2Shape`. Abstract world templates such as `^BaseWorld` in `world.yaml` collect shared world traits including `BackstabGameMode`.
@@ -20275,7 +20469,7 @@ RAIDR:
     Buildable:
         Queue: Vehicle
         BuildPaletteOrder: 330
-        Prerequisites: ~vehicles.allies, ~techlevel.low
+        Prerequisites: ~vehicles.ra1_allies, ~techlevel.low
         Description: actor-raidr.description
     Valued:
         Cost: 600
@@ -20372,7 +20566,7 @@ AFA:
     Buildable:
         Queue: Building
         BuildPaletteOrder: 200
-        Prerequisites: fix, anypower, ~vehicles.allies, ~techlevel.medium
+        Prerequisites: fix, anypower, ~vehicles.ra1_allies, ~techlevel.medium
         Description: actor-afa.description
     Valued:
         Cost: 1200
@@ -20462,7 +20656,7 @@ SHIELD:
     Buildable:
         Queue: Defense
         BuildPaletteOrder: 150
-        Prerequisites: atek, ~structures.allies, ~techlevel.high
+        Prerequisites: atek, ~structures.ra1_allies, ~techlevel.high
         BuildLimit: 1
         Description: actor-shield.description
     Valued:
@@ -20761,19 +20955,19 @@ The recipes below cover the systems unique to the Cameo mod: faction definitions
 
 **Files to edit:**
 - `mods/cameo/rules/world.yaml`
-- `mods/cameo/ContentPacks/<Theme>/<Faction>/rules/faction.yaml` (for the faction's content pack)
-- `mods/cameo/mod.yaml` (to `#Include` the content pack)
+- `mods/cameo/ContentPacks/<Theme>/<Faction>/yaml/faction.yaml` (for the faction's content pack)
+- `mods/cameo/mod.yaml` (to `Include` the content pack)
 
 **Before:**
 
 ```yaml
 World:
-    FactionCA@gdi:
+    FactionCA@td_gdi:
         Name: GDI TD
-        InternalName: gdi
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
-        Description: faction-td-gdi.description
+        Description: faction-td-td_gdi.description
 ```
 
 **After:**
@@ -20782,12 +20976,12 @@ Add a new keyed `FactionCA` instance to the `World` actor:
 
 ```yaml
 World:
-    FactionCA@gdi:
+    FactionCA@td_gdi:
         Name: GDI TD
-        InternalName: gdi
+        InternalName: td_gdi
         Game: Tiberian Dawn
         Side: Tiberian Dawn
-        Description: faction-td-gdi.description
+        Description: faction-td-td_gdi.description
 
     FactionCA@myfaction:
         Name: My Faction
@@ -20803,7 +20997,7 @@ If the faction is part of a random pool, add it to `RandomFactionMembers`:
     FactionCA@Random:
         Name: Random
         InternalName: Random
-        RandomFactionMembers: gdi, nod, allies, soviet, ..., myfaction
+        RandomFactionMembers: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, wc2_humans, wc2_orcs, tkm, myfaction
         Game: Generic
         Side: Random
         Description: Randomly selects one from all available factions
@@ -20812,7 +21006,7 @@ If the faction is part of a random pool, add it to `RandomFactionMembers`:
 Then include the faction's content pack in `mods/cameo/mod.yaml`:
 
 ```yaml
-#Include: ContentPacks|<Theme>/myfaction/content.yaml
+Include: ContentPacks|<Theme>/myfaction/content.yaml
 ```
 
 **How to verify it works:**
@@ -20824,7 +21018,7 @@ Then include the faction's content pack in `mods/cameo/mod.yaml`:
 - `InternalName` must be unique across all factions; it is used in `Factions`, `AlwaysShowForFactions`, `StartingUnits`, and prerequisites.
 - `RandomFactionMembers` is only used by random-faction entries; omit it for fixed factions.
 - The `Game` field is what Cameo's custom lobby logic uses to group factions, so it must match an existing game group.
-- Forgetting to `#Include` the content pack leaves the faction with no rules, sequences, or voices.
+- Forgetting to `Include` the content pack leaves the faction with no rules, sequences, or voices.
 
 ---
 
@@ -20836,7 +21030,7 @@ Then include the faction's content pack in `mods/cameo/mod.yaml`:
 
 **Files to edit:**
 - `mods/cameo/rules/promotions.yaml`
-- Optional: `mods/cameo/ContentPacks/<Theme>/Shared|Faction/rules/promotions.yaml` for pack-specific ranks
+- Optional: `mods/cameo/ContentPacks/<Theme>/Shared|Faction/yaml/promotions.yaml` for pack-specific ranks
 
 **Before:**
 
@@ -21362,7 +21556,7 @@ Chrome:
 **Files to edit:**
 - `mods/cameo/mod.yaml`
 - Create `mods/cameo/ContentPacks/<Theme>/<Pack>/content.yaml`
-- Create `mods/cameo/ContentPacks/<Theme>/<Pack>/rules/*.yaml`
+- Create `mods/cameo/ContentPacks/<Theme>/<Pack>/yaml/*.yaml`
 - Create `mods/cameo/ContentPacks/<Theme>/<Pack>/translations/*.ftl` (optional)
 
 **Before:**
@@ -21372,7 +21566,7 @@ FileSystem: DefaultFileSystem
     Packages:
         ...
 
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
+Include: ContentPacks|TiberianDawn/GDI/content.yaml
 ```
 
 **After:**
@@ -21393,10 +21587,10 @@ Create `mods/cameo/ContentPacks/MyTheme/MyPack/content.yaml`:
 
 ```yaml
 Rules:
-    ContentPacks|MyTheme/MyPack/rules/faction.yaml
-    ContentPacks|MyTheme/MyPack/rules/buildings.yaml
-    ContentPacks|MyTheme/MyPack/rules/infantry.yaml
-    ContentPacks|MyTheme/MyPack/rules/vehicles.yaml
+    ContentPacks|MyTheme/MyPack/yaml/faction.yaml
+    ContentPacks|MyTheme/MyPack/yaml/buildings.yaml
+    ContentPacks|MyTheme/MyPack/yaml/infantry.yaml
+    ContentPacks|MyTheme/MyPack/yaml/vehicles.yaml
 
 FluentMessages:
     ContentPacks|MyTheme/MyPack/translations/en.ftl
@@ -21405,7 +21599,7 @@ FluentMessages:
 Reference the pack from `mods/cameo/mod.yaml`:
 
 ```yaml
-#Include: ContentPacks|MyTheme/MyPack/content.yaml
+Include: ContentPacks|MyTheme/MyPack/content.yaml
 ```
 
 **How to verify it works:**
@@ -21415,8 +21609,8 @@ Reference the pack from `mods/cameo/mod.yaml`:
 
 **Common pitfalls:**
 - The `ContentPacks|` prefix resolves inside the `cameo|ContentPacks: ContentPacks` explicit mount. If the mount name is misspelled, the path will fail.
-- Use `#Include:` (commented include) so the content pack is optional; if the file is missing, the mod still loads.
-- Later mounts and later `#Include` lines override earlier ones; put optional packs after the base mod.
+- Use `Include:` to load the content pack; each pack's `content.yaml` lists its own rules, sequences, and fluent messages.
+- Later mounts and later `Include` lines override earlier ones; put optional packs after the base mod.
 - `Rules` and `FluentMessages` inside the pack's `content.yaml` are relative to the `ContentPacks` mount, not the mod root.
 
 ---
@@ -22105,7 +22299,7 @@ Players:
         Enemies: Germany
     PlayerReference@Germany:
         Name: Germany
-        Faction: allies
+        Faction: ra1_allies
         Color: 5050F0
         Enemies: USSR
         Bot: campaign
@@ -22304,12 +22498,12 @@ CRATE:
     GiveUnitCrateAction@RANDOMLIGHT:
         SelectionShares: 15
         Units: jeep, 1tnk, apc, ftrk
-        ValidFactions: allies, england, france, germany, soviet, russia, ukraine
+        ValidFactions: ra1_allies, england, france, germany, soviet, russia, ukraine
         Prerequisites: techlevel.low
     GiveUnitCrateAction@RANDOMHEAVY:
         SelectionShares: 8
         Units: 2tnk, 3tnk, v2rl, arty
-        ValidFactions: allies, england, france, germany, soviet, russia, ukraine
+        ValidFactions: ra1_allies, england, france, germany, soviet, russia, ukraine
         Prerequisites: techlevel.medium, fix
 ```
 
@@ -23054,7 +23248,7 @@ Rules:
 
 # Cameo-specific walkthroughs
 
-This section covers end-to-end walkthroughs for systems that are unique to the Cameo mod (or that rely heavily on its custom `OpenRA.Mods.Cameo` / `OpenRA.Mods.CA` assemblies). Before working through these, read [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence) for the high-level divergence summary and the full `build files/CAMEO_DIVERGENCE.md` for the per-trait inventory. The examples are written against `mods/cameo/` paths and the `playtest-20260614` source snapshot.
+This section covers end-to-end walkthroughs for systems that are unique to the Cameo mod (or that rely heavily on its custom `OpenRA.Mods.Cameo` / `OpenRA.Mods.CA` assemblies). Before working through these, read [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence) for the high-level divergence summary and the full `build files/CAMEO_DIVERGENCE.md` for the per-trait inventory. The examples are written against `mods/cameo/` paths and the `main` branch source (2026-07-16).
 
 > **Note:** The snippets below are based on the class names and file layout found in the Cameo divergence inventory. Exact field names and default values should be cross-checked against the authoritative Cameo source before shipping a mod.
 
@@ -23094,7 +23288,7 @@ In `mods/cameo/rules/player.yaml` (or a shared file), add the faction to the pla
 ```yaml
 Player:
     FactionCA:
-        Factions: myfaction, allied, soviet, gdi, nod, ...
+        Factions: myfaction, allied, soviet, td_gdi, td_nod, ...
     # ... other player traits
 ```
 
@@ -23128,7 +23322,7 @@ FluentMessages:
     myfaction|fluent/en.ftl
 ```
 
-`mods/cameo/ContentPacks/MyFaction/rules/faction.yaml` — faction-specific overrides:
+`mods/cameo/ContentPacks/MyFaction/yaml/faction.yaml` — faction-specific overrides:
 
 ```yaml
 # Example: give the faction a unique MCV.
@@ -23521,7 +23715,7 @@ Player:
 - `mods/cameo/mod.yaml` — mount the `.bag` package and load the custom assembly
 - `mods/cameo/audio/voices.yaml` (or a new file) — map sound names to voice events
 - `mods/cameo/audio/notifications.yaml` — map notification names to sound events
-- `mods/cameo/rules/infantry.yaml` (or actors) — assign the voice set
+- `mods/cameo/ContentPacks/` (faction YAML files) — assign the voice set
 
 **Complete example:**
 
@@ -23585,7 +23779,7 @@ Speech:
         # ...
 ```
 
-`mods/cameo/rules/infantry.yaml`:
+`mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml` (or equivalent faction YAML):
 
 ```yaml
 E1:
@@ -24039,11 +24233,11 @@ Cameo extends the upstream OpenRA asset pipeline with new sequence loaders, pack
 
 ### Content packs
 
-Cameo organizes some external factions as content packs: a small manifest under `mods/cameo/ContentPacks/` that is mounted by the main `mod.yaml` and then referenced as an additional rules/Fluent source.
+Cameo organizes some external factions as content packs: a small manifest under `mods/cameo/ContentPacks/` that is mounted by the main `mod.yaml` and then referenced as an additional yaml/Fluent source.
 
 | Asset | File Format(s) | Definition YAML | Engine Loader / Class | Visual Preview | Notes |
 | :---- | :---- | :---- | :---- | :---- | :---- |
-| Content pack manifest | `.yaml` | `mods/cameo/ContentPacks/<Game>/<Faction>/content.yaml` | `MiniYaml` / `FileSystem` mount, loaded via `mod.yaml` `ContentPacks` | A folder labeled `ContentPacks/<Game>/<Faction>` containing rules, sprites, and translations. | `content.yaml` declares a `Rules:` list and a `FluentMessages:` list, all referenced through the `ContentPacks\|` VFS prefix. The main `mod.yaml` mounts `cameo\|ContentPacks: ContentPacks` and then loads `ContentPacks\|<Game>/<Faction>/content.yaml` so the pack's rules and translations merge into the ruleset. |
+| Content pack manifest | `.yaml` | `mods/cameo/ContentPacks/<Game>/<Faction>/content.yaml` | `MiniYaml` / `FileSystem` mount, loaded via `mod.yaml` `ContentPacks` | A folder labeled `ContentPacks/<Game>/<Faction>` containing yaml/, sprites/, and translations/. | `content.yaml` declares a `Rules:` list and a `FluentMessages:` list, all referenced through the `ContentPacks\|` VFS prefix. The main `mod.yaml` mounts `cameo\|ContentPacks: ContentPacks` and then loads `ContentPacks\|<Game>/<Faction>/content.yaml` so the pack's rules and translations merge into the ruleset. |
 | Content pack sprite | `.shp` | Inside the pack's `sprites/` directory | `SpriteCache` / `ISpriteLoader` | A unit or icon image bundled with the pack. | Packs are mounted as VFS folders, so their `sprites/` contents are addressable by the same sequence definitions as the main mod. |
 | Content pack translation | `.ftl` | `content.yaml` → `FluentMessages` | `FluentProvider` | Strings for the pack's faction-specific names or descriptions. | Loaded through the same `FluentProvider` pipeline as mod-level translations. |
 
@@ -24118,7 +24312,7 @@ This appendix catalogs the **Cameo-specific actors** that modders are most likel
 * The `Camea` boss faction, an original Cameo faction that combines GDI, Nod, Allied, and Soviet technology.
 * Shared utility, resource, and tech actors that are unique to the Cameo rules layer.
 
-All values are read from the `Cameo-mod-playtest-20260614` source tree. Where an actor inherits from another definition, the source file noted is the one that contains the concrete actor key; parent templates are listed in the **Primary traits** column.
+All values are read from the `Cameo-mod` source tree (2026-07-16). Where an actor inherits from another definition, the source file noted is the one that contains the concrete actor key; parent templates are listed in the **Primary traits** column.
 
 > **Generated reference, not balance commentary.** This appendix is hand-maintained for readability, so always verify the current YAML before relying on a value for implementation work.
 
@@ -24272,7 +24466,7 @@ These actors are defined in `shared.yaml`, `tech.yaml`, and `misc.yaml` and are 
 * This appendix covers the **Camea** boss faction and the Cameo-wide templates/utility actors. It does not enumerate the dozens of imported factions (Red Alert, Tiberian Dawn, Tiberian Sun, Red Alert 2, Dune 2000, Generals, StarCraft, Warcraft, etc.) that also appear in `mods/cameo/rules/`.
 * **Naval units:** The `Camea` faction has no dedicated naval buildable units. Naval production is gated globally by the `Naval` lobby prerequisite (`globalnaval`) in `player.yaml` and the naval units are defined in `ships.yaml` for other factions.
 * **Art references:** All concrete actors use existing art from their parent definitions (e.g., `Image: fact`, `Image: MCV`). No image previews are included in this reference.
-* **Verified source:** All entries were checked against the `Cameo-mod-playtest-20260614` rules YAML. If you are working against a newer Cameo tree, re-verify keys and prerequisites before using them in maps or scripts.
+* **Verified source:** All entries were checked against the `Cameo-mod` rules YAML (2026-07-16). If you are working against a newer Cameo tree, re-verify keys and prerequisites before using them in maps or scripts.
 
 
 ---
@@ -29073,7 +29267,7 @@ After studying this appendix, you should be able to:
 
 This appendix summarizes the ways the Cameo mod diverges from upstream OpenRA. It is a high-level companion to the full inventory in `build files/CAMEO_DIVERGENCE.md`, which contains per-file and per-trait details.
 
-> **Scope:** This summary reflects the `Cameo-mod-playtest-20260614` source tree. The manual is pinned to that source; newer Cameo or OpenRA versions may differ.
+> **Scope:** This summary reflects the `Cameo-mod` source tree as of 2026-07-16. The manual is pinned to that source; newer Cameo or OpenRA versions may differ.
 
 ## 1. Engine baseline
 
@@ -29083,7 +29277,7 @@ Cameo is a third-party OpenRA total-conversion mod. It does not modify the OpenR
 - `OpenRA.Mods.CA` — 370+ class declarations covering additional traits, projectiles, warheads, activities, bot modules, squad AI state machines, and Lua globals.
 - `mods/cameo/` — custom rules, weapons, sequences, audio, chrome, tilesets, translations, maps, AI definitions, and a `ContentPacks/` layer for per-game asset packs.
 
-The engine version pinned by the Cameo SDK is `ENGINE_VERSION="da94a51"`, sourced from a Cameo-maintained OpenRA fork (`https://github.com/cameo-mod/OpenRA`). The mod is therefore intentionally anchored to a specific OpenRA commit rather than tracking `bleed` continuously.
+The engine version pinned by the Cameo SDK is `ENGINE_VERSION="7ba39d9"`, sourced from a Cameo-maintained OpenRA fork (`https://github.com/cameo-mod/OpenRA`). The mod is therefore intentionally anchored to a specific OpenRA commit rather than tracking `bleed` continuously.
 
 ## 2. Custom C# code
 
@@ -29131,20 +29325,20 @@ Major additions and overrides in this assembly include:
 
 ## 3. Custom YAML / rules / content packs
 
-The `mods/cameo/` directory is the primary divergence layer. At the time of the `playtest-20260614` source snapshot it contains:
+The `mods/cameo/` directory is the primary divergence layer. As of the 2026-07-16 source snapshot it contains:
 
 | Directory | Contents |
 | :---- | :---- |
-| `rules/` | 68 YAML files defining actors, buildings, factions, upgrades, and conditions. |
-| `weapons/` | 53 YAML files defining weapons, projectiles, and warheads. |
-| `sequences/` | 60 YAML files defining sprite sequences, cameos, and animations. |
+| `rules/` | 64 YAML files defining actors, buildings, factions, upgrades, and conditions. |
+| `weapons/` | 51 YAML files defining weapons, projectiles, and warheads. |
+| `sequences/` | 59 YAML files defining sprite sequences, cameos, and animations. |
 | `audio/` | 32 YAML files defining voices, notifications, music playlists, and per-game audio packs. |
-| `bits/` | 180+ sprite files in 58+ sub-folders (per-game asset collections). |
+| `bits/` | 28,116 asset files in 58 sub-directories (per-game sprite, voxel, audio, and icon collections). |
 | `tilesets/` | 20 tileset definition files. |
-| `chrome/` | 15 UI/chrome layout files. |
-| `ai/` | 2 AI definition files. |
-| `maps/` | 354 maps. |
-| `ContentPacks/` | One pack: `TiberianDawn/GDI`, containing rules, sprites, and translations for that sub-faction. |
+| `chrome/` | 16 UI/chrome layout files. |
+| `ai/` | 1 AI definition file. |
+| `maps/` | 359 maps. |
+| `ContentPacks/` | Per-theme and per-faction content packs organized as `<Theme>/<Faction>/`, each with a `content.yaml` manifest and a `yaml/` subdirectory for rules, weapons, sequences, and translations. Current themes include Core, Shared, TiberianDawn, RedAlert, TiberianSun, RedAlert2, RedAlert2Mod, TKM, D2k, StarCraft, Warcraft2, and Outpost2. |
 
 Cameo uses the same MiniYaml syntax and inheritance rules as upstream OpenRA, but the actor and weapon definitions are entirely mod-specific. The `ContentPacks/` directory is a notable structural addition: it lets the mod layer per-game or per-faction content packs on top of the base `mods/cameo/` rules.
 
@@ -29181,7 +29375,7 @@ When the OpenRA manual and the Cameo manual conflict on a specific trait, the Ca
 
 - `build files/CAMEO_DIVERGENCE.md` — complete divergence inventory.
 - [OpenRA Knowledge Base Manual v.5](https://github.com/Renegade1993/OpenRA-Knowledge-Base-Manual) — upstream OpenRA engine and official mod documentation.
-- Cameo source: `Cameo-mod-playtest-20260614 (source)` — the authoritative source for all Cameo-specific behavior.
+- Cameo source: `Cameo-mod` (main branch, 2026-07-16) — the authoritative source for all Cameo-specific behavior.
 
 
 ---
@@ -39561,11 +39755,11 @@ After reading this appendix you should be able to:
 | ![upnodvenom icon](images/cameo_actors/nod/upnodvenom_icon.png) | `upnodvenom` | upgrade-upnodvenom.name | Other | sprite |
 | ![upstealthsoldier icon](images/cameo_actors/nod/upstealthsoldier_icon.png) | `upstealthsoldier` | upgrade-upnodstealth.name | Other | sprite |
 
-## CABAL TS (WIP) (Tiberian Sun)
+## CABAL TS (Tiberian Sun)
 
 *199 buildable actors.*
 
-### CABAL TS (WIP) — Infantry
+### CABAL TS — Infantry
 
 | Preview | Code | Name | Category | Render |
 | :---: | :--- | :--- | :--- | :--- |
@@ -39605,7 +39799,7 @@ After reading this appendix you should be able to:
 | ![tsdoggieblue icon](images/cameo_actors/cabal/tsdoggieblue_icon.png) ![tsdoggieblue unit](images/cameo_actors/cabal/tsdoggieblue_sprite.png) | `tsdoggieblue` | Blue Tiberian Fiend | Infantry | sprite |
 | ![tshacker icon](images/cameo_actors/cabal/tshacker_icon.png) ![tshacker unit](images/cameo_actors/cabal/tshacker_sprite.png) | `tshacker` | Hacker Cyborg | Infantry | sprite |
 
-### CABAL TS (WIP) — Vehicle
+### CABAL TS — Vehicle
 
 | Preview | Code | Name | Category | Render |
 | :---: | :--- | :--- | :--- | :--- |
@@ -39665,7 +39859,7 @@ After reading this appendix you should be able to:
 | ![tssgencabal icon](images/cameo_actors/cabal/tssgencabal_icon.png) ![tssgencabal unit](images/cameo_actors/cabal/tssgencabal_voxel.png) | `tssgencabal` | Mobile Stealth Generator | Vehicle | voxel |
 | ![tsspddrone icon](images/cameo_actors/cabal/tsspddrone_icon.png) ![tsspddrone unit](images/cameo_actors/cabal/tsspddrone_sprite.png) | `tsspddrone` | Spider Tank Drone | Vehicle | sprite |
 
-### CABAL TS (WIP) — Aircraft
+### CABAL TS — Aircraft
 
 | Preview | Code | Name | Category | Render |
 | :---: | :--- | :--- | :--- | :--- |
@@ -39686,7 +39880,7 @@ After reading this appendix you should be able to:
 | ![tsflocust icon](images/cameo_actors/cabal/tsflocust_icon.png) ![tsflocust unit](images/cameo_actors/cabal/tsflocust_sprite.png) | `tsflocust` | Locust Bomber | Aircraft | sprite |
 | ![tsjumpjet2 icon](images/cameo_actors/cabal/tsjumpjet2_icon.png) ![tsjumpjet2 unit](images/cameo_actors/cabal/tsjumpjet2_sprite.png) | `tsjumpjet2` | Jumpjet Infantry | Aircraft | sprite |
 
-### CABAL TS (WIP) — Building
+### CABAL TS — Building
 
 | Preview | Code | Name | Category | Render |
 | :---: | :--- | :--- | :--- | :--- |
@@ -39745,7 +39939,7 @@ After reading this appendix you should be able to:
 | ![tsproccabal icon](images/cameo_actors/cabal/tsproccabal_icon.png) ![tsproccabal unit](images/cameo_actors/cabal/tsproccabal_sprite.png) | `tsproccabal` | CABAL Refinery | Building | sprite |
 | ![tsveinhole icon](images/cameo_actors/cabal/tsveinhole_icon.png) ![tsveinhole unit](images/cameo_actors/cabal/tsveinhole_sprite.png) | `tsveinhole` | Veinhole | Building | sprite |
 
-### CABAL TS (WIP) — Other
+### CABAL TS — Other
 
 | Preview | Code | Name | Category | Render |
 | :---: | :--- | :--- | :--- | :--- |

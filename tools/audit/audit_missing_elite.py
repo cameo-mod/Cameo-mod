@@ -1,5 +1,10 @@
 #!/usr/bin/env python
-"""E1: Find buildable actors with GainsExperience that lack Armament@*ELITE* blocks."""
+"""E1: Find buildable actors with ^GainsExperienceRA2 that lack Armament@*ELITE* blocks.
+
+Per DESIGN.md §16.3: elite weapons are an RA2-system-only feature. Actors
+using ^GainsExperienceTD or ^GainsExperienceRA do NOT need elite weapons.
+Only actors inheriting ^GainsExperienceRA2 are flagged.
+"""
 import os, re, sys
 
 root = "mods/cameo"
@@ -38,7 +43,7 @@ for dirpath, _, filenames in os.walk(root):
                         break
                     stripped = bl.strip()
                     if not stripped.startswith('#'):
-                        if 'GainsExperience' in stripped:
+                        if 'GainsExperienceRA2' in stripped:
                             has_gains_exp = True
                         if re.match(r'^Armament@\w*[Ee][Ll][Ii][Tt][Ee]\w*\s*:', stripped):
                             has_elite_armament = True
@@ -62,8 +67,8 @@ for dirpath, _, filenames in os.walk(root):
 
 results.sort(key=lambda x: (x[3], x[2]))
 
-print(f"# E1: Missing elite weapons audit\n")
-print(f"Buildable actors with GainsExperience but NO Armament@*ELITE*: **{len(results)}**\n")
+print(f"# E1: Missing elite weapons audit (RA2 system only)\n")
+print(f"Buildable actors with ^GainsExperienceRA2 but NO Armament@*ELITE*: **{len(results)}**\n")
 
 faction_counts = {}
 for _, _, _, faction in results:

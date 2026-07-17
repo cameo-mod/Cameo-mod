@@ -1,0 +1,203 @@
+RAE1:
+	Inherits: ^RAE1
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedbarracks
+	Armament@PRIMARY: ##########
+		Weapon: M1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: M1Carbine
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: CryoM1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: CryoM1Carbine
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+ra_cons_molo:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Molotov Conscript
+	Valued:
+		Cost: 200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: actor_e2.description
+	Mobile:
+		Speed: 67
+	Health:
+		HP: 11000
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Armament:
+		Weapon: ConscriptMolotov
+		LocalOffset: 0,0,427
+		FireDelay: 7
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ConscriptMolotov
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	FireWarheadsOnDeath:
+		Weapon: ConscriptMolotovExplode
+	FireWarheadsOnDeath@Vengeance1:
+		Weapon: VengeanceActivator1
+		RequiresCondition: !ra1_soviets_upgrade_vengeance
+	FireWarheadsOnDeath@Vengeance2:
+		Weapon: VengeanceActivator2
+		RequiresCondition: ra1_soviets_upgrade_vengeance && !upsubliminal2
+	FireWarheadsOnDeath@Vengeance3:
+		Weapon: VengeanceActivator3
+		RequiresCondition: ra1_soviets_upgrade_vengeance && upsubliminal2
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Voiced:
+		VoiceSet: RussianConscriptVoice
+	AttackFrontal:
+		Voice: Attack
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
+
+RAE3:
+	Inherits: ^RAE3
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Tooltip:
+		Name: Allied Rocket Soldier
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedbarracks
+	Armament@PRIMARY: ##########
+		Weapon: RocketsRA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRA
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: RocketsRACryo
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRACryo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
+
+RAE6:
+	Inherits: E6
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Engineer
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~rabarracks
+		Queue: Infantry, RAInfantry
+	RenderSprites:
+		Image: rae6
+
+EINSTEIN:
+	Inherits: ^CivInfantry
+	RenderSprites:
+		Palette: ra_temperat
+	Tooltip:
+		Name: Prof. Einstein
+	Mobile:
+		Speed: 71
+	Voiced:
+		VoiceSet: EinsteinVoice
+
+DELPHI:
+	Inherits: ^CivInfantry
+	RenderSprites:
+		Palette: ra_temperat
+	Tooltip:
+		Name: Agent Delphi
+	Mobile:
+		Speed: 71
+
+RACHAN:
+	Inherits: ^CivInfantry
+	Valued:
+		Cost: 500
+	Selectable:
+		Class: CHAN
+	Tooltip:
+		Name: Scientist
+
+GNRL:
+	Inherits@1: ^CivInfantry
+	Inherits@2: ^ArmedCivilian
+	Tooltip:
+		Name: General
+	Selectable:
+		Class: GNRL
+	Mobile:
+		Voice: Move
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	Guard:
+		Voice: Move
+	Voiced:
+		VoiceSet: StavrosVoice
+	-ScaredyCat:
+	TakeCover:
+		DamageModifiers:
+			Prone50Percent: 50
+		DamageTriggers: TriggerProne
+	WithInfantryBody:
+		IdleSequences: idle1
+
+TECH1:
+	Inherits: ^CivInfantry
+	Inherits@armed: ^ArmedCivilian
+	Tooltip:
+		Name: Technician
+
+####################################################################################################
+#		VEHICLES
+####################################################################################################
+

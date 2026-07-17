@@ -1,0 +1,350 @@
+yuri_doctrine_psioniclegion:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Psionic Legion
+	Buildable:
+		Description: All Yuri Infantry costs 25% less und train 25% faster.
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1, !global_conscription_buff
+	RenderSprites:
+		Image: yuri_doctrine_psioniclegion
+	ProvidesPrerequisite@ra2_yuri_doctrine_1:
+		Prerequisite: ra2_yuri_doctrine_1
+	ProvidesPrerequisite@global_conscription_buff:
+		Prerequisite: global_conscription_buff
+
+yuri_doctrine_psionicfanatics:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Psionic Fanatics
+	Buildable:
+		Description: All Yuri Infantry gain 20% more Damage Resistance, Rate of Fire, Speed and extra regeneration.
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
+	RenderSprites:
+		Image: yuri_doctrine_psionicfanatics
+	ProvidesPrerequisite@ra2_yuri_doctrine_1:
+		Prerequisite: ra2_yuri_doctrine_1
+
+yuri_doctrine_psionicelite:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Psionic Elite
+	Buildable:
+		Description: All Yuri Infantry start at veteran rank and gain 10% more Range, Speed, Firepower, Rate of Fire and Damage Resistance.
+		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
+	RenderSprites:
+		Image: yuri_doctrine_psionicelite
+	ProvidesPrerequisite@yuri_doctrine_psionicelite:
+		Prerequisite: infantry.upgraded
+	ProvidesPrerequisite@ra2_yuri_doctrine_1:
+		Prerequisite: ra2_yuri_doctrine_1
+
+yuri_doctrine_lasherhecannon:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Lasher HE Cannon
+	Buildable:
+		Description: Increases Lasher Cannon Firepower by 100%.
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+	RenderSprites:
+		Image: yuri_doctrine_lasherhecannon
+	ProvidesPrerequisite@ra2_yuri_doctrine_2:
+		Prerequisite: ra2_yuri_doctrine_2
+
+yuri_doctrine_lashertoxicgasshells:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Lasher Toxic Gas Shells
+	Buildable:
+		Description: Replaces the Lasher Cannon with a Toxic Gas Mortar.
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+	RenderSprites:
+		Image: yuri_doctrine_lashertoxicgasshells
+	ProvidesPrerequisite@ra2_yuri_doctrine_2:
+		Prerequisite: ra2_yuri_doctrine_2
+
+yuri_doctrine_lasherlasercannon:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Lasher Laser Cannon
+	Buildable:
+		Description: Replaces the Lasher Cannon with a powerful Laser Cannon.
+		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+	RenderSprites:
+		Image: yuri_doctrine_lasherlasercannon
+	ProvidesPrerequisite@ra2_yuri_doctrine_2:
+		Prerequisite: ra2_yuri_doctrine_2
+
+yuri_doctrine_scrapvehiclearmor:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Scrap Vehicle Armor
+	Buildable:
+		Description: Yuri Vehicles gain 15% more Damage Resistance and Speed.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+	RenderSprites:
+		Image: yuri_doctrine_scrapvehiclearmor
+	ProvidesPrerequisite@ra2_yuri_doctrine_3:
+		Prerequisite: ra2_yuri_doctrine_3
+
+yuri_doctrine_chaosgasemitters:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Chaos Gas Emitters
+	Buildable:
+		Description: Yuri Vehicles periodically emit Chaos Gas in a small radius after taking damage. Increases Damage Resistance and Speed by 5% and doubles if enemies are nearby.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+	RenderSprites:
+		Image: yuri_doctrine_chaosgasemitters
+	ProvidesPrerequisite@ra2_yuri_doctrine_3:
+		Prerequisite: ra2_yuri_doctrine_3
+
+yuri_doctrine_psionicvehicleshields:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Psionic Vehicle Shields
+	Buildable:
+		Description: Yuri vehicles charge with psionic shields when enemies are nearby. Psionic shields are also provided to allied units in a small radius. After taking damage the shield quickly charges up.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+	RenderSprites:
+		Image: yuri_doctrine_psionicvehicleshields
+	ProvidesPrerequisite@ra2_yuri_doctrine_3:
+		Prerequisite: ra2_yuri_doctrine_3
+
+yuri_upgrade_initiatepowersurge:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Initiate Power Surge
+	Buildable:
+		Description: Yuri Initiates gain 50% more Firepower and 15% more Rate of Fire and Range.
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_initiatepowersurge
+	RenderSprites:
+		Image: yuri_upgrade_initiatepowersurge
+
+yuri_upgrade_brutestrengthmutations:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Brute Strength Mutations
+	Buildable:
+		Description: Yuri Brutes gain 40% more Firepower and 20% more Damage Resistance and Speed.
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_brutestrengthmutations
+	RenderSprites:
+		Image: yuri_upgrade_brutestrengthmutations
+	ProvidesPrerequisite:
+
+yuri_upgrade_lasherarmorimprovements:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Lasher Armor Improvements
+	Buildable:
+		Description: Improves Lasher Tank Damage Resistance by 35%.
+		Prerequisites: ~yuri_psychicsensor, !yuri_upgrade_lasherarmorimprovements
+	RenderSprites:
+		Image: yuri_upgrade_lasherarmorimprovements
+	ProvidesPrerequisite:
+
+yuri_upgrade_gatlingfirepowerupgrade:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Gatling Firepower Upgrade
+	Buildable:
+		Queue: Research
+		Description: All Gatling weapons have 20% more Firepower and 10% more Range.
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_gatlingfirepowerupgrade
+	RenderSprites:
+		Image: yuri_upgrade_gatlingfirepowerupgrade
+
+yuri_upgrade_meltingvirus:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Melting Virus
+	Buildable:
+		Queue: Research
+		Description: Allows Viruses to attack vehicles and structures. Increases Firepower by 50%.
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_meltingvirus
+	RenderSprites:
+		Image: yuri_upgrade_meltingvirus
+	ProvidesPrerequisite:
+
+yuri_upgrade_domination:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Domination
+	Buildable:
+		Description: Doubles mind control capacity and mind control speed.
+		Prerequisites: ~yuri_psychicsensor, yuri_battlelab, !yuri_upgrade_domination
+	RenderSprites:
+		Image: yuri_upgrade_domination
+	ProvidesPrerequisite:
+
+yuri_upgrade_gatlingspeedupgrade:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Gatling Speed Upgrade
+	Buildable:
+		Queue: Research
+		Description: All Gatling weapons have 30% more Rate of Fire.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_upgrade_gatlingfirepowerupgrade, !yuri_upgrade_gatlingspeedupgrade
+	RenderSprites:
+		Image: yuri_upgrade_gatlingspeedupgrade
+	ProvidesPrerequisite:
+
+yuri_upgrade_corrosiveammo:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Corrosive Ammo
+	Buildable:
+		Queue: Research
+		Description: Adds a powerful corrosive effect to the Virus Sniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_upgrade_meltingvirus, !yuri_upgrade_corrosiveammo
+	RenderSprites:
+		Image: yuri_upgrade_corrosiveammo
+	ProvidesPrerequisite:
+
+yuri_upgrade_supermagnets:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Super Magnets
+	Buildable:
+		Queue: Research
+		Description: Allows Magnetrons to attack air and gain 25% more Range.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_supermagnets
+	RenderSprites:
+		Image: yuri_upgrade_supermagnets
+	ProvidesPrerequisite:
+
+yuri_upgrade_bioreactorefficiency:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Bio Reactor Efficiency
+	Buildable:
+		Queue: Research
+		Description: Doubles the power output of Bio Reactors.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_bioreactorefficiency
+	RenderSprites:
+		Image: yuri_upgrade_bioreactorefficiency
+	ProvidesPrerequisite:
+
+yuri_upgrade_bioengineering:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Bio Engineering
+	Buildable:
+		Queue: Research
+		Description: All Infantry Cost and Build Time is reduced by 40%.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_bioengineering
+	RenderSprites:
+		Image: yuri_upgrade_bioengineering
+	ProvidesPrerequisite:
+
+yuri_upgrade_psychicrange:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Psychic Range
+	Buildable:
+		Queue: Research
+		Description: Increases Mind Control Range of all Psychic Units by 15%. Pyshic Towers gain 30% more Range.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_psychicrange
+	RenderSprites:
+		Image: yuri_upgrade_psychicrange
+
+yuri_upgrade_psionicarmor:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Psionic Armor
+	Buildable:
+		Description: Psychic Units and Towers gain 30% more Damage Resistance.
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_psionicarmor
+	RenderSprites:
+		Image: yuri_upgrade_psionicarmor
+
+yuri_upgrade_toxicengines:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Toxic Engines
+	Buildable:
+		Description: Yuri Vehicle gain 20% more Speed and Damage Resistance nd periodically release toxic gas clouds.
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_toxicengines
+	RenderSprites:
+		Image: yuri_upgrade_toxicengines
+
+yuri_upgrade_psionicplasmabeams:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Psionic Plasma Beams
+	Buildable:
+		Description: All Yuri energy weapons gain 40% more Firepower, 20% more Rate of Fire and 10% more Range.
+		Prerequisites: ~yuri_battlelab, !yuri_upgrade_psionicplasmabeams
+	RenderSprites:
+		Image: yuri_upgrade_psionicplasmabeams
+
+yuri_upgrade_gravitondrive:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Graviton Drive
+	Valued:
+		Cost: 5000
+	Buildable:
+		Description: Floating Disks and Cosmonauts gain 20% more Speed and Damage Resistance.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_gravitondrive
+	RenderSprites:
+		Image: yuri_upgrade_gravitondrive
+
+yuri_upgrade_disksiphonattack:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Disk Siphon Attack
+	Valued:
+		Cost: 5000
+	Buildable:
+		Description: Allows Floating Disks to directly attack units below with its siphon.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_disksiphonattack
+	RenderSprites:
+		Image: yuri_upgrade_disksiphonattack
+
+yuri_upgrade_diskhighfrequencylasers:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Disk High Frequency Lasers
+	Valued:
+		Cost: 5000
+	Buildable:
+		Description: Increases the Rate of Fire of Floating Disks by 100% and reduces the Ammo Reload Delay by 25%.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, !yuri_upgrade_diskhighfrequencylasers
+	RenderSprites:
+		Image: yuri_upgrade_diskhighfrequencylasers
+
+yuri_upgrade_infantrystealthsuits:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Infantry Stealth Suits
+	Buildable:
+		Description: TEAM Upgrade: All Scout and Anti Tank Anti Air Infantry in your team receive stealth suits with personal shield generators.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_infantrystealthsuits
+	RenderSprites:
+		Image: yuri_upgrade_infantrystealthsuits
+	ProvidesTeamProxyActor:
+		Actor: ra2_yuri_upgrade_stealthsuits_proxy_actor
+
+yuri_upgrade_geneticmodificationboost:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Genetic Modification Boost
+	Buildable:
+		Description: TEAM Upgrade: All Infantry in your team gain 20% more Damage Resistance, Speed and Regeneration.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_geneticmodificationboost
+	RenderSprites:
+		Image: yuri_upgrade_geneticmodificationboost
+	ProvidesTeamProxyActor:
+		Actor: ra2_yuri_upgrade_geneticboost_proxy_actor
+
+yuri_upgrade_psychicvision:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Psychic Vision
+	Buildable:
+		Description: TEAM Upgrade: Increases Infantry Vision and Detection Range by 20%. For Yuri: Increases Psychic Sensor Vision and Detection Range by 50%.
+		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, yuri_cloningvats, !yuri_upgrade_psychicvision
+	RenderSprites:
+		Image: yuri_upgrade_psychicvision
+	ProvidesTeamProxyActor:
+		Actor: ra2_yuri_upgrade_psychicvision_proxy_actor

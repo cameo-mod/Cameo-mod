@@ -8,7 +8,7 @@ Real factions: **28** — covered by crate: **28** — missing: **0**
 | faction | crate suffix | granted unit | NoBaseSelectionShares |
 |---|---|---|---|
 | allies | allies | ra1_allies_alliedmobileconstructionvehicle | 10000 |
-| asianalliance | asianalliance | asian_alliance_asianmobileconstructionvehicle | 10000 |
+| asianalliance | asianalliance | asianalliance_asianmobileconstructionvehicle | 10000 |
 | cabal | cabal | cabal_mobileconstructionvehicle | 10000 |
 | consortium | consortium | steel_consortium_consortiummobileconstructionvehicle | 10000 |
 | edenl | edenl | EDEN_CONVEC_STRUCTURE_FACTORY | 10000 |

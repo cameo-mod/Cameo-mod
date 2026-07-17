@@ -9,13 +9,13 @@ Build palette order violations: **959**
 
 | actor | queue | prerequisites | problem |
 |---|---|---|---|
-| asian_alliance_asdf | Infantry, RAInfantry | ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockasdf, asian_alliance_militaryacademy | tech token 'asian_alliance_militaryacademy' appears after promotion token |
-| asian_alliance_howitzer | Vehicle, RAVehicle | ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockhowitzer, asian_alliance_militaryacademy | tech token 'asian_alliance_militaryacademy' appears after promotion token |
-| asian_alliance_japanesesamurai | Infantry, RAInfantry | ~asian_alliance_asianbarracks, asian_alliance_promotion_unlocksamurai, asian_alliance_asianradar | tech token 'asian_alliance_asianradar' appears after promotion token |
-| asian_alliance_plasmatrooper | Infantry, RAInfantry | ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_asianbattlelab | tech token 'asian_alliance_asianbattlelab' appears after promotion token |
-| asian_alliance_type89mlrs | Vehicle, RAVehicle | ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockmlrs, asian_alliance_asianbattlelab | tech token 'asian_alliance_asianbattlelab' appears after promotion token |
-| asian_alliance_veteranarcher | Infantry, RAInfantry | ~asian_alliance_asianbarracks, asian_alliance_promotion_unlockveteranarchers, asian_alliance_asianradar | tech token 'asian_alliance_asianradar' appears after promotion token |
-| asian_alliance_warturtle | Vehicle, RAVehicle | ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockwarturtle, asian_alliance_militaryacademy | tech token 'asian_alliance_militaryacademy' appears after promotion token |
+| asianalliance_asdf | Infantry, RAInfantry | ~asianalliance_asianbarracks, asianalliance_promotion_unlockasdf, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
+| asianalliance_howitzer | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, asianalliance_promotion_unlockhowitzer, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
+| asianalliance_japanesesamurai | Infantry, RAInfantry | ~asianalliance_asianbarracks, asianalliance_promotion_unlocksamurai, asianalliance_asianradar | tech token 'asianalliance_asianradar' appears after promotion token |
+| asianalliance_plasmatrooper | Infantry, RAInfantry | ~asianalliance_asianbarracks, asianalliance_promotion_unlockplasmatrooper, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
+| asianalliance_type89mlrs | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, asianalliance_promotion_unlockmlrs, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
+| asianalliance_veteranarcher | Infantry, RAInfantry | ~asianalliance_asianbarracks, asianalliance_promotion_unlockveteranarchers, asianalliance_asianradar | tech token 'asianalliance_asianradar' appears after promotion token |
+| asianalliance_warturtle | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, asianalliance_promotion_unlockwarturtle, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
 | ixian_empbomber | Aircraft, RAAircraft | ixian_promotion_unlockixianempbomber, ~ixian_launchpad, ixian_ixresearchcenter | tech token '~ixian_launchpad' appears after promotion token; tech token 'ixian_ixresearchcenter' appears after promotion token |
 | ixian_farasha | Aircraft, RAAircraft | ixian_promotion_unlockfarasha, ~ixian_hightechfactory, ixian_ixresearchcenter | tech token '~ixian_hightechfactory' appears after promotion token; tech token 'ixian_ixresearchcenter' appears after promotion token |
 | ixian_ixprojector | Vehicle, RAVehicle | ~ixian_advancedheavyfactory, ixian_promotion_unlockixprojector, ixian_ixresearchcenter | tech token 'ixian_ixresearchcenter' appears after promotion token |
@@ -34,7 +34,7 @@ Build palette order violations: **959**
 | ordos_deviatortank | Vehicle, RAVehicle | ~ordos_heavyfactory, ordos_promotion_unlockdeviatortank, ordos_palace | tech token 'ordos_palace' appears after promotion token |
 | ordos_lasertank | Vehicle, RAVehicle | ~ordos_heavyfactory, ordos_promotion_unlocklasertank, ordos_ixresearchcenter | tech token 'ordos_ixresearchcenter' appears after promotion token |
 | ordos_wraith | Aircraft, RAAircraft | ~ordos_hightechfactory, ordos_promotion_unlockwraith, ordos_palace | tech token 'ordos_palace' appears after promotion token |
-| ptnk.asian | Vehicle, RAVehicle | ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockplasmatank, asian_alliance_asianbattlelab | tech token 'asian_alliance_asianbattlelab' appears after promotion token |
+| ptnk.asian | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, asianalliance_promotion_unlockplasmatank, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
 | ra1_allies_alliedtankdestroyer | Vehicle, RAVehicle | ~ra1_allies_alliedwarfactory, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome | tech token 'ra1_allies_alliedradardome' appears after promotion token |
 | ra1_soviet_cyberdog | Infantry, RAInfantry | ~ra1_soviet_promotion_unlockcyberdog, ~ra1_soviet_barracks | tech token '~ra1_soviet_barracks' appears after promotion token |
 | ra2_allies_heavymiragetank | Vehicle, RAVehicle | ~ra2_allies_alliedwarfactory, ~ra2_allies_upgrade_heavymiragetank, ra2_allies_alliedbattlelab | tech token 'ra2_allies_alliedbattlelab' appears after promotion token |
@@ -103,38 +103,38 @@ Build palette order violations: **959**
 | allies | Vehicle | ra1_allies_phasetransport | 3 | 1800 | 130 | should be before ra1_allies_minelayer (tier/cost order) |
 | allies | Vehicle | ra1_allies_mobileradarjammer | 3 | 5000 | 140 | should be before ra1_allies_mobilegapgenerator (tier/cost order) |
 | allies | Vehicle | ra1_allies_alliedheavyaatank | 2 | 1250 | 60 | should be before ra1_allies_alliedartillery (tier/cost order) |
-| asianalliance | Aircraft | asian_alliance_pelican | 2 | 2000 | 20 | should be before asian_alliance_phoenix (tier/cost order) |
-| asianalliance | Infantry | asian_alliance_japanesesamurai | 3 | 350 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | Infantry | asian_alliance_fanatic | 3 | 250 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | Infantry | asian_alliance_veteranarcher | 3 | 450 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | Infantry | asian_alliance_engineer | 2 | 500 | 30 | should be before asian_alliance_asianflametrooper (tier/cost order) |
-| asianalliance | RAAircraft | asian_alliance_pelican | 2 | 2000 | 20 | should be before asian_alliance_phoenix (tier/cost order) |
-| asianalliance | RAInfantry | asian_alliance_japanesesamurai | 3 | 350 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | RAInfantry | asian_alliance_fanatic | 3 | 250 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | RAInfantry | asian_alliance_veteranarcher | 3 | 450 | 10 | should be before asian_alliance_shinobi (tier/cost order) |
-| asianalliance | RAInfantry | asian_alliance_engineer | 2 | 500 | 30 | should be before asian_alliance_asianflametrooper (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_warturtle | 3 | 5000 | 80 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_dragonfly | 2 | 1200 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_pulverizer | 3 | 1400 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_asianmobileconstructionvehicle | 2 | 5000 | 100 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_asianflametank | 3 | 1300 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_railguntank | 3 | 1500 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_type89mlrs | 3 | 1200 | 80 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | ptnk.asian | 3 | 2400 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_howitzer | 3 | 1600 | 90 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_pulverizermecha | 3 | 3000 | 75 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | RAVehicle | asian_alliance_heavyrailguntank | 3 | 2200 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_warturtle | 3 | 5000 | 80 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_dragonfly | 2 | 1200 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_pulverizer | 3 | 1400 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_asianmobileconstructionvehicle | 2 | 5000 | 100 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_asianflametank | 3 | 1300 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_railguntank | 3 | 1500 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_type89mlrs | 3 | 1200 | 80 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | ptnk.asian | 3 | 2400 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_howitzer | 3 | 1600 | 90 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_pulverizermecha | 3 | 3000 | 75 | should be before asian_alliance_oiltruck (tier/cost order) |
-| asianalliance | Vehicle | asian_alliance_heavyrailguntank | 3 | 2200 | 60 | should be before asian_alliance_oiltruck (tier/cost order) |
+| asianalliance | Aircraft | asianalliance_pelican | 2 | 2000 | 20 | should be before asianalliance_phoenix (tier/cost order) |
+| asianalliance | Infantry | asianalliance_japanesesamurai | 3 | 350 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | Infantry | asianalliance_fanatic | 3 | 250 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | Infantry | asianalliance_veteranarcher | 3 | 450 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | Infantry | asianalliance_engineer | 2 | 500 | 30 | should be before asianalliance_asianflametrooper (tier/cost order) |
+| asianalliance | RAAircraft | asianalliance_pelican | 2 | 2000 | 20 | should be before asianalliance_phoenix (tier/cost order) |
+| asianalliance | RAInfantry | asianalliance_japanesesamurai | 3 | 350 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | RAInfantry | asianalliance_fanatic | 3 | 250 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | RAInfantry | asianalliance_veteranarcher | 3 | 450 | 10 | should be before asianalliance_shinobi (tier/cost order) |
+| asianalliance | RAInfantry | asianalliance_engineer | 2 | 500 | 30 | should be before asianalliance_asianflametrooper (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_warturtle | 3 | 5000 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_dragonfly | 2 | 1200 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_pulverizer | 3 | 1400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_asianmobileconstructionvehicle | 2 | 5000 | 100 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_asianflametank | 3 | 1300 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_railguntank | 3 | 1500 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_type89mlrs | 3 | 1200 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | ptnk.asian | 3 | 2400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_howitzer | 3 | 1600 | 90 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_pulverizermecha | 3 | 3000 | 75 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | RAVehicle | asianalliance_heavyrailguntank | 3 | 2200 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_warturtle | 3 | 5000 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_dragonfly | 2 | 1200 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_pulverizer | 3 | 1400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_asianmobileconstructionvehicle | 2 | 5000 | 100 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_asianflametank | 3 | 1300 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_railguntank | 3 | 1500 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_type89mlrs | 3 | 1200 | 80 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | ptnk.asian | 3 | 2400 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_howitzer | 3 | 1600 | 90 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_pulverizermecha | 3 | 3000 | 75 | should be before asianalliance_oiltruck (tier/cost order) |
+| asianalliance | Vehicle | asianalliance_heavyrailguntank | 3 | 2200 | 60 | should be before asianalliance_oiltruck (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1_elite | 3 | 3000 | 21 | should be before cabal_overkill_gunship (tier/cost order) |
 | cabal | Aircraft | cabal_mothership | 3 | 10000 | 30 | should be before cabal_overkill_gunship (tier/cost order) |
 | cabal | Aircraft | cabal_hunterkillermk1 | 3 | 1500 | 20 | should be before cabal_overkill_gunship (tier/cost order) |

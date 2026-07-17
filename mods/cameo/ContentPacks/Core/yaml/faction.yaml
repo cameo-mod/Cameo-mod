@@ -2,14 +2,14 @@ World:
 	FactionCA@Random:
 		Name: Random #faction_random.name
 		InternalName: Random
-		RandomFactionMembers: gdi, nod, allies, soviets, japan, tsgdi, tsnod, forgotten, cabal, ra2allies, ra2soviets, yuri, asianalliance, consortium, syndicate, naxis, schwarzermond, futuretech, ixian, ordos, terran, zerg, protoss, warcraft_humans, warcraft_orcs, tkm #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
+		RandomFactionMembers: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, ixian, ordos, terran, zerg, protoss, wc2_humans, wc2_orcs, tkm #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
 		Game: Generic
 		Side: Random
 		Description: Randomly selects one from all available factions #faction_random.description
 	FactionCA@RandomTournament:
 		Name: RTF #faction_random.name
 		InternalName: RandomTournament
-		RandomFactionMembers: gdi, nod, allies, soviets, japan, tsgdi, tsnod, forgotten, cabal, ra2allies, ra2soviets, yuri, asianalliance, consortium, syndicate, naxis, schwarzermond, futuretech, ixian, ordos, terran, zerg, protoss, warcraft_humans, warcraft_orcs #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
+		RandomFactionMembers: td_gdi, td_nod, ra1_allies, ra1_soviets, japan, ts_gdi, ts_nod, forgotten, cabal, ra2_allies, ra2_soviets, yuri, asianalliance, steelconsortium, latinsyndicate, naxis, schwarzermond, futuretech, ixian, ordos, terran, zerg, protoss, wc2_humans, wc2_orcs #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
 		Game: Generic
 		Side: Random
 		Description: Random Tournament Faction ("Ready To Fight")

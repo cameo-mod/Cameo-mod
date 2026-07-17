@@ -1,0 +1,1545 @@
+japan_japaneseoretruck:
+	Inherits: ^RAHARV
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Ore Truck
+	Buildable:
+		Prerequisites: ~japan_japaneseorerefinery
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	Harvester:
+		BaleLoadDelay: 2
+		BaleUnloadDelay: 1
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 20
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	WithHarvesterSpriteBody:
+		ImageByFullness: jharv, jharv, jharv
+	RenderSprites:
+		Image: jharv
+		PlayerPalette: player
+
+japan_japanesemobileconstructionvehicle:
+	Inherits: ^RAMCV
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot
+	Transforms:
+		IntoActor: japan_japaneseconstructionyard
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+
+japan_scoutcar:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 30
+		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockarmoredcar, ~!japan_promotion_unlockgrenadebuggy
+		Description: actor_jeep.description
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Scout Car
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Mobile:
+		Speed: 160
+		TurnSpeed: 32
+	Turreted:
+		TurnSpeed: 32
+		Offset: -256,0,256
+	Armament:
+		Weapon: M60mgJapan
+		MuzzleSequence: muzzle
+		LocalOffset: 128,0,43
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgrade: ##########
+		Weapon: M60mgWaveforce
+		MuzzleSequence: muzzle
+		LocalOffset: 128,0,43
+		RequiresCondition: japan_upgrade_waveforcebullets
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+japan_igomediumtank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockheavychihaheavytank
+		Description: template_mbt.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: I-Go Medium Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 110000
+	Repairable:
+		HpPerStep: 5500
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+	Turreted:
+		Offset: 64,0,0
+		TurnSpeed: 18
+	Armament:
+		Weapon: Type89Cannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,240
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: Type89PlasmaCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,320
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_nanodronebuggy:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 70
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray
+		Description: actor_nanobggy.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Nanodrone Buggy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 37500
+	Repairable:
+		HpPerStep: 1875
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 77
+		TurnSpeed: 17
+	Turreted:
+		TurnSpeed: 17
+		Offset: -250,0,0
+	Armament:
+		Weapon: NanoArtilleryAG
+		Recoil: 77
+		LocalOffset: 500,0,500
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@Nanodrones:
+		Modifier: 33
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: NanoArtilleryAG
+	RenderSprites:
+		Image: japan_nanodronebuggy
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_ballista:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter
+		BuildPaletteOrder: 70
+		Description: actor_arty.description
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Ballista
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 65000
+	Repairable:
+		HpPerStep: 3250
+	ChangesHealth@SelfHealing:
+		Step: 26
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 65
+		TurnSpeed: 13
+		Locomotor: lighttracked
+	Armament@PRIMARY: ##########
+		Weapon: BallistaMultiShot
+		LocalOffset: 624,0,208
+	Armament@Upgrade: ##########
+		Weapon: BallistaMultiShotEnergized
+		LocalOffset: 624,0,208
+		FireDelay: 3
+		RequiresCondition: japan_upgrade_energizedarrows
+	WithMuzzleOverlay:
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryExplode
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: japan_upgrade_energizedarrows, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+japan_oitank:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 180
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter
+		Description: actor_oitank.description
+	Valued:
+		Cost: 7000
+	Tooltip:
+		Name: O-I Tank
+		GenericName: Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 650000
+	Repairable:
+		HpPerStep: 32500
+	ChangesHealth@SelfHealing:
+		Step: 260
+	Armor:
+		Type: Superheavy
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+		Locomotor: heavytracked
+	Passenger:
+		Weight: 4
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: 650,250,24
+		TurnSpeed: 24
+		FacingTolerance: 90
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 650,-250,24
+		TurnSpeed: 24
+		FacingTolerance: 90
+	Turreted@MAIN:
+		Turret: main
+		Offset: 0,0,32
+		TurnSpeed: 12
+	Turreted@Back:
+		Turret: back
+		Offset: -1000,0,12
+		TurnSpeed: 24
+	Armament@MAIN:
+		Turret: main
+		Weapon: OIBigCannon
+		LocalOffset: 1200,0,600
+		Recoil: 350
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Turret: main
+		Weapon: OIBigPlasmaCannon
+		LocalOffset: 1200,0,600
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@SECONDARY:
+		Turret: secondary
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Back:
+		Turret: back
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@UpgradePRIMARY:
+		Turret: primary
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeSECONDARY:
+		Turret: secondary
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeBack:
+		Turret: back
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@PRIMARYFlame:
+		Turret: primary
+		Weapon: OIFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 12
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@SECONDARYFlame:
+		Name: secondary
+		Turret: secondary
+		Weapon: OIFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 8
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@UpgradePRIMARYFlame:
+		Turret: primary
+		Weapon: OIPlasmaFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 12
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeSECONDARYFlame:
+		Name: secondary
+		Turret: secondary
+		Weapon: OIPlasmaFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 8
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	AttackTurreted:
+		Turrets: primary, secondary, main, back
+	WithMuzzleOverlay:
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+		Sequence: turret2
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+		Sequence: turret2
+	WithSpriteTurret@MAIN:
+		Turret: main
+		Sequence: turret
+	WithSpriteTurret@Back:
+		Turret: back
+		Sequence: turret2
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2048, 2048, 0, 0
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	WithIdleOverlay@nanotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	WithIdleOverlay@extrananotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_corewarfactory:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		BuildDurationModifier: 25
+		Description: actor_jpcore.description-factory
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Core (War Factory)
+	Selectable:
+		Priority: 4
+	SelectionDecorations:
+	Health:
+		HP: 50000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		Locomotor: amphibius
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water, River
+	Hovers:
+		RequiresCondition: inwater
+	RevealsShroud:
+		Range: 7c0 #4c0
+	Transforms:
+		IntoActor: japan_japanesewarfactory
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: placbldg.aud, build5.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+		PauseOnCondition: disabled || terrordroned
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	RenderSprites:
+		Image: japan_corewarfactory
+	WithTextDecoration:
+		Text: Factory
+	Passenger:
+		Weight: 4
+
+japan_corerefinery:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-refinery
+		Icon: icon1
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Core (Refinery)
+	Transforms:
+		IntoActor: japan_japaneseorerefinery
+	WithTextDecoration:
+		Text: Refinery
+	Passenger:
+		Weight: 4
+
+japan_corepowerplant:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-power
+		Icon: icon2
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Core (Power Plant)
+	Transforms:
+		IntoActor: japan_waveforcereactor
+	WithTextDecoration:
+		Text: Power Plant
+	Passenger:
+		Weight: 3
+
+japan_corebarracks:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-barracks
+		Icon: icon3
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Core (Barracks)
+	Transforms:
+		IntoActor: japan_japanesebarracks
+	WithTextDecoration:
+		Text: Barracks
+	Passenger:
+		Weight: 3
+
+japan_coreradar:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-radar
+		Icon: icon4
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Core (Radar)
+	Transforms:
+		IntoActor: japan_japaneseradararray
+	WithTextDecoration:
+		Text: Radar
+	Passenger:
+		Weight: 4
+
+japan_coreairfield:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-airfield
+		Icon: icon5
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Core (Airfield)
+	Transforms:
+		IntoActor: japan_japaneseairfield
+	WithTextDecoration:
+		Text: Airfield
+	Passenger:
+		Weight: 4
+
+japan_coreservicedepot:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-service-depot
+		Icon: icon6
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Core (Service Depot)
+	Transforms:
+		IntoActor: japan_japaneseservicedepot
+	WithTextDecoration:
+		Text: Service Depot
+	Passenger:
+		Weight: 4
+
+japan_coretechcenter:
+	Inherits: japan_corewarfactory
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 210
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
+		Description: actor_jpcore.description-tech-center
+		Icon: icon7
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Core (Tech Center)
+	Transforms:
+		IntoActor: japan_japanesetechcenter
+	WithTextDecoration:
+		Text: Tech Center
+	Passenger:
+		Weight: 4
+
+###################################################
+#		Ships
+####################################################################################################
+
+japan_hovercrafttransport:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 120
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockarchermaiden
+		Description: actor_jphover.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Hovercraft Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 65000
+	Repairable:
+		HpPerStep: 3250
+	ChangesHealth@SelfHealing:
+		Step: 26
+	Armor:
+		Type: Medium
+	Mobile:
+		Locomotor: hover
+		Speed: 130
+		TurnSpeed: 26
+	Hovers:
+	Armament@cannon:
+		Weapon: HovercraftCannon
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: HovercraftPlasmaCannon
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@flak:
+		Weapon: JapaneseHovercraftFlak
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@Upgradeflak:
+		Weapon: JapaneseHovercraftFlakWaveforce
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	Armament@AA:
+		Weapon: JapaneseHovercraftFlakAA
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@UpgradeAA:
+		Weapon: JapaneseHovercraftFlakAAkWaveforce
+		LocalOffset: 500,0,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	FirepowerMultiplier@doublecannonsandbombs:
+		Modifier: 50
+	Turreted:
+		TurnSpeed: 26
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai
+	RenderSprites:
+		Image: japan_hovercrafttransport
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	Selectable:
+		Class: japan_hovercrafttransport
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_armoredcar:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 60
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockarmoredcar
+		Description: actor_gtnk.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Armored Car
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 42500
+	Repairable:
+		HpPerStep: 2125
+	ChangesHealth@SelfHealing:
+		Step: 17
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 130
+		TurnSpeed: 26
+	Turreted:
+		TurnSpeed: 52
+		Offset: -200,0,100
+	Armament@AG:
+		Weapon: ArmoredCarMG
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@AA:
+		Weapon: ArmoredCarMGAA
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_waveforcebullets
+	Armament@UpgradeAG:
+		Weapon: ArmoredCarMGWaveforce
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	Armament@UpgradeAA:
+		Weapon: ArmoredCarMGAAWaveforce
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_waveforcebullets
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 3
+		InitialUnits: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	RenderSprites:
+		Image: japan_armoredcar
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 12
+		Count: 1
+		ResetOnFire: True
+	FirepowerMultiplier@japan_upgrade_waveforcebullets:
+		Modifier: 125
+	RangeMultiplier@japan_upgrade_waveforcebullets:
+		Modifier: 105
+	FirepowerMultiplier@GattlingSpeed:
+		Modifier: 10
+	ReloadDelayMultiplier@GattlingSpeed1:
+		RequiresCondition: ammo < 9
+		Modifier: 80
+	ReloadDelayMultiplier@GattlingSpeed2:
+		RequiresCondition: ammo < 5
+		Modifier: 80
+	ReloadDelayMultiplier@GattlingSpeed3:
+		RequiresCondition: ammo <= 1
+		Modifier: 80
+	RangeMultiplier@GattlingSpeed1:
+		RequiresCondition: ammo < 9
+		Modifier: 105
+	RangeMultiplier@GattlingSpeed2:
+		RequiresCondition: ammo < 5
+		Modifier: 105
+	RangeMultiplier@GattlingSpeed3:
+		RequiresCondition: ammo <= 1
+		Modifier: 105
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
+
+japan_chihaheavytank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	-ExternalCondition@PropagandaEffect:
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockheavychihaheavytank
+		Description: template_mbt.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Chi-Ha Heavy Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 130000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 104
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Turreted:
+		Offset: 64,0,0
+		TurnSpeed: 17
+	Armament:
+		Weapon: Type97Cannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,320
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: Type97PlasmaCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,320
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 5000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_hovercraftflametank:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockhovercraftflametank
+		BuildPaletteOrder: 120
+		Description: actor_jphovert.description
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: Hovercraft Flametank
+		GenericName: Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Medium
+	Mobile:
+		Locomotor: hover
+		Speed: 90
+		TurnSpeed: 18
+	Hovers:
+	Turreted:
+		TurnSpeed: 18
+		Offset: 0,0,0
+	Armament:
+		Weapon: HeavyFlamer
+		Recoil: 160
+		RecoilRecovery: 36
+		LocalOffset: 800,-120,160, 800,120,160
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: HeavyPlasmaFlamer
+		Recoil: 160
+		RecoilRecovery: 36
+		LocalOffset: 800,-120,160, 800,120,160
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	FireWarheadsOnDeath:
+		Weapon: FlametankExplode
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_shogunexecutioner:
+	Inherits: ^Walker
+	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Selectable:
+		Bounds: 2000, 3000
+	Valued:
+		Cost: 10000
+	Tooltip:
+		Name: Shogun Executioner
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 75
+		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshogunexecutioner, japan_japanesetechcenter
+		Queue: Vehicle, RAVehicle
+		Description: actor_aamecha.description
+	Mobile:
+		Speed: 65
+		TurnSpeed: 26
+	Health:
+		HP: 3000000
+	Repairable:
+		HpPerStep: 150000
+	ChangesHealth@SelfHealing:
+		Step: 1200
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: ExecutionerSword
+	AttackFrontal:
+		FacingTolerance: 10
+	WithInfantryBody:
+		IdleSequences: idle
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: playerra2
+	Passenger:
+		Weight: 4
+	Voiced:
+		VoiceSet: JapanShogunExecutioner
+		Volume: 10
+	DeathSounds:
+		Voice: Die
+		VolumeMultiplier: 10
+	AttackMove:
+		Voice: Action
+		Volume: 10
+	AnnounceOnKill:
+		Volume: 10
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: ExecutionerDeath
+		DamageSource: Killer
+		RequiresCondition: !disabled
+	WithIdleOverlay@nanotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	WithIdleOverlay@extrananotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+	RenderSprites:
+		PlayerPalette: playerra2
+
+japan_grenadebuggy:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Grenade Buggy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockgrenadebuggy
+		Description: actor_jpbggy.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: -40,0,0
+	Armament:
+		Weapon: BuggyGrenade
+		LocalOffset: 333,0,333
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: BuggyPlasmaGrenade
+		LocalOffset: 333,0,333
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	FireWarheadsOnDeath:
+		Weapon: BuggyGrenade
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: BuggyPlasmaGrenade
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Image: japan_grenadebuggy
+		PlayerPalette: raplayer
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_shrine_minitank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshrinetank
+		Description: template_mbt.description
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Shrine Minitank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		Offset: 64,0,0
+		TurnSpeed: 24
+	Armament:
+		Weapon: ShrineTankCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 240,0,32
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_waveforcetank:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforcetank
+		Description: actor_waveforcetank.description
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Waveforce Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Turreted:
+		Offset: 64,0,0
+		TurnSpeed: 12
+	Armament:
+		Weapon: WaveforceCannon
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,360
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade1: ##########
+		Weapon: WaveforceCannonChargedLaser
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,360
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade2: ##########
+		Weapon: WaveforceCannonDistortedBeam1
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,360
+		FireDelay: 1
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@Upgrade3: ##########
+		Weapon: WaveforceCannonDistortedBeam2
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 1024,0,360
+		FireDelay: 2
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	FirepowerMultiplier@TripleBeam:
+		Modifier: 66
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderRangeCircle:
+		RangeCircleType: vehicle
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: WaveTurretImpact
+	GrantConditionOnAttack:
+		Condition: firing
+		RevokeDelay: 30
+	SpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
+	TurnSpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_waveforceartillery:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 75
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforceartillery
+		Description: actor_waveforcearty.description
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Waveforce Artillery
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Light
+	Mobile:
+		TurnSpeed: 11
+		Speed: 55
+	Turreted:
+		TurnSpeed: 11
+		Offset: -12,0,33
+	Armament@AG:
+		Weapon: WaveArtilleryShell
+		Recoil: 85
+		LocalOffset: 512,0,192
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@SplashCompensation:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: WaveTurretImpact
+	RenderSprites:
+		Image: japan_waveforceartillery
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
+
+japan_exorcistoitank:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
+	-WithColoredOverlay@PropagandaEffect:
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 180
+		BuildLimit: 1
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockexorcist, !hasexorcist
+		Description: actor_oitank.description-exorcist
+	Valued:
+		Cost: 10000
+	Tooltip:
+		Name: Exorcist O-I Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 750000
+	Repairable:
+		HpPerStep: 37500
+	ChangesHealth@SelfHealing:
+		Step: 300
+	Armor:
+		Type: Superheavy
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+		Locomotor: heavytracked
+	Passenger:
+		Weight: 4
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: 650,250,24
+		TurnSpeed: 24
+		FacingTolerance: 90
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 650,-250,24
+		TurnSpeed: 24
+		FacingTolerance: 90
+	Turreted@MAIN:
+		Turret: main
+		Offset: 0,0,32
+		TurnSpeed: 12
+	Turreted@Back:
+		Turret: back
+		Offset: -1000,0,12
+		TurnSpeed: 24
+	Armament@MAIN:
+		Turret: main
+		Weapon: OIHakureiring
+		LocalOffset: 600,0,600
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+	Armament@AntiEpic:
+		Turret: main
+		Weapon: OIHakureiring2
+		LocalOffset: 600,0,600
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@SECONDARY:
+		Turret: secondary
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@Back:
+		Turret: back
+		Weapon: OISmallCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@UpgradePRIMARY:
+		Turret: primary
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeSECONDARY:
+		Turret: secondary
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeBack:
+		Turret: back
+		Weapon: OISmallPlasmaCannon
+		LocalOffset: 600,0,400
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@PRIMARYFlame:
+		Turret: primary
+		Weapon: OIFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 12
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@SECONDARYFlame:
+		Name: secondary
+		Turret: secondary
+		Weapon: OIFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 8
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
+	Armament@UpgradePRIMARYFlame:
+		Turret: primary
+		Weapon: OIPlasmaFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 12
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	Armament@UpgradeSECONDARYFlame:
+		Name: secondary
+		Turret: secondary
+		Weapon: OIPlasmaFlamer
+		LocalOffset: 500,0,500
+		FireDelay: 8
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
+	AttackTurreted:
+		Turrets: primary, secondary, main, back
+	WithMuzzleOverlay:
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+		Sequence: turret2
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+		Sequence: turret2
+	# WithSpriteTurret@MAIN:
+	# 	Turret: main
+	# 	Sequence: turret
+	WithSpriteTurret@Back:
+		Turret: back
+		Sequence: turret2
+	ProximityExternalCondition@Leadership:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	WithDecoration@Carryall:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	SelectionDecorations:
+	Selectable:
+		Bounds: 2048, 2048, 0, 0
+	Voiced:
+		VoiceSet: ReimuVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	ProvidesPrerequisite@exorcist:
+		Prerequisite: hasexorcist
+	WithIdleOverlay@nanotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	WithIdleOverlay@extrananotechrepairsdamage:
+		Image: nanodrone_overlay_big
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs

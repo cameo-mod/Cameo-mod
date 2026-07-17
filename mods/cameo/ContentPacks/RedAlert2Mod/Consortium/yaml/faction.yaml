@@ -1,24 +1,24 @@
 World:
-	FactionCA@consortium:
+	FactionCA@steelconsortium:
 		Name: Steel Consortium
-		InternalName: consortium
+		InternalName: steelconsortium
 		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction_ra2_consortium.description
 	StartingUnits@mcvconsortium:
 		Class: none
 		ClassName: MCV Only
-		Factions: consortium
+		Factions: steelconsortium
 		BaseActor: steelconsortium_consortiummobileconstructionvehicle
 	StartingUnits@defaultconsortium:
 		Class: light
 		ClassName: Light Support
-		Factions: consortium
+		Factions: steelconsortium
 		BaseActor: steelconsortium_consortiummobileconstructionvehicle
 		SupportActors: steelconsortium_clonetrooper,steelconsortium_clonetrooper,steelconsortium_clonetrooper,steelconsortium_quantummissiletrooper,steelconsortium_quantummissiletrooper,steelconsortium_manta,steelconsortium_hammerheadartillerytank
 	StartingUnits@heavyconsortium:
 		Class: heavy
 		ClassName: Heavy Support
-		Factions: consortium
+		Factions: steelconsortium
 		BaseActor: steelconsortium_consortiummobileconstructionvehicle
 		SupportActors: steelconsortium_clonetrooper,steelconsortium_clonetrooper,steelconsortium_clonetrooper,steelconsortium_quantummissiletrooper,steelconsortium_quantummissiletrooper,steelconsortium_manta,steelconsortium_quantumtank,steelconsortium_quantumtank,steelconsortium_quantumtank,steelconsortium_quantumtank,steelconsortium_manta

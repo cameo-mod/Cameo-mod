@@ -79,7 +79,45 @@ faction_ra2_syndicate =
       they combine "black market" Soviet surplus with ingenious scrap-based engineering to overwhelm
       opponents through constant pressure and tactical disruption.
 
+      In Cameo, the Latin Syndicate is an attrition-focused faction with a unique
+      stolen tech system. They can steal technology from three other factions:
+      Yuri (Chaingun), Asian Alliance (Hot Fire), and Soviets (Industrial). Their
+      bunker networks provide strong defensive positions, while their scrap-based
+      engineering produces cheap but effective units. The Topol Strike is their
+      signature superweapon — a tactical ballistic missile.
+
+      Difficulty: ©©©
+      Early Game: ©©©©
+      Mid Game: ©©©
+      Late Game: ©©©©
+      Playstyle: Attrition / Area Denial / Stolen Tech / Bunker Networks
+      Strength: Bunker Defense, Stolen Tech, Cheap Units, Flame Weapons
+      Weakness: Conventional Combat, Air Defense, Tech Scaling
+      Countered by: Tech Rushes, Air Superiority, Artillery
+
+      Special Units: Diablo (chaingun vehicle), Terrorists, Demo Trucks,
+        Flame Troopers, Mortar Bikes
+      Special Buildings: Bunker networks, Topol Strike Silo
+      Team Upgrades: Stolen Tech from Yuri (Chaingun), Stolen Tech from Asian
+        Alliance (Hot Fire), Stolen Tech from Soviets (Industrial)
       Support powers: Topol Strike
+      Superweapons: Topol Strike
+
+      Features:
+      - Stolen Tech system: steal technology from Yuri, Asian Alliance, and Soviets
+      - Stolen Tech from Yuri: Chaingun (equips units with chainguns, increasing
+        rate of fire; Diablos gain +25% range, +25% reload speed, +50% firepower)
+      - Stolen Tech from Asian Alliance: Hot Fire (+25% firepower and rate of fire
+        for all fire weapons; Terrorists/Demo Trucks/Flame Troopers/Mortar Bikes
+        get +100% firepower, +10% range, +20% speed)
+      - Stolen Tech from Soviets: Industrial (reduces vehicle cost by 20%,
+        increases vehicle damage resistance by 20%)
+      - Bunker network defensive playstyle
+      - Scrap-based engineering: cheap but effective units
+      - Black market Soviet surplus equipment
+      - Topol Strike: tactical ballistic missile superweapon
+      - Flame and explosive weapons for area denial
+      - Mortar Bikes: fast mobile artillery for harassment
 
 template_anti_aircraft_defense =
    .description = Anti-aircraft defense.

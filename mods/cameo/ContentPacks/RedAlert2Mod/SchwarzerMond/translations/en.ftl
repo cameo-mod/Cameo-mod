@@ -6,18 +6,48 @@ faction_ra2_schwarzermond =
       traditional warfare of Earth for "crazy science" and the manipulation of
       planetary forces, making them one of the most unpredictable factions in the field.
 
-      Difficulty: Â©Â©Â©
-      Early Game: Â©Â©
-      Mid Game: Â©Â©Â©Â©Â©
-      Late Game: Â©Â©Â©Â©
-      Playstyle: Timing Attack
-      Strength: Mid to Lategame Tanks and Artillery
-      Weakness: Aircraft
-      Countered by: Early Game Rush, Aircraft
-      Special Units: Parzival (Anti-Ground, Hero), Dalek (Anti-Infantry, Support Walker), Die Glocke (Flying Support, Anti-Unit)
-      Special Buildings: Moon Dairy Farm (Passive Income)
-      Team Upgrades: Crystal Lens, Lunar Alloys, Helium-3 Enrichment, Vril Powered Weapons, Amplified Lens, Moon Propaganda, Cryptofascism, Vril Infusion
+      In Cameo, Schwarzer Mond is a timing-attack faction that peaks in the mid
+      to late game. Their unique lunar technology includes gravity manipulation,
+      meteor traction beams, and Vril-powered weapons. The Parzival is their
+      signature hero unit — a powerful anti-ground walker. Daleks provide
+      anti-infantry support, while Die Glocke is a flying support platform.
+      Their Moon Dairy Farm provides passive income, enabling economic
+      sustainability while teching up.
+
+      Difficulty: ©©©
+      Early Game: ©©
+      Mid Game: ©©©©©
+      Late Game: ©©©©
+      Playstyle: Timing Attack / Tech Rush / Lunar Science
+      Strength: Mid to Late Game Tanks and Artillery, Unique Weaponry
+      Weakness: Aircraft, Early Game, Vulnerable Tech Phase
+      Countered by: Early Game Rush, Aircraft, Aggressive Pushes
+
+      Special Units: Parzival (anti-ground hero walker), Dalek (anti-infantry
+        support walker), Die Glocke (flying support platform, anti-unit),
+        Übermensch (heavy assault infantry with laser rifle)
+      Special Buildings: Moon Dairy Farm (passive income)
+      Team Upgrades: Crystal Lens, Lunar Alloys, Helium-3 Enrichment,
+        Vril Powered Weapons, Amplified Lens, Moon Propaganda,
+        Cryptofascism, Vril Infusion
       Support powers: Gravity Core, Meteor Traction Beam
+      Superweapons: Gravity Core, Meteor Traction Beam
+
+      Features:
+      - Lunar science faction with gravity manipulation technology
+      - Parzival: anti-ground hero walker with powerful weaponry
+      - Dalek: anti-infantry support walker
+      - Die Glocke: flying support platform with anti-unit capabilities
+      - Übermensch: heavy assault infantry with laser rifle
+      - Moon Dairy Farm: unique passive income building
+      - 8 team upgrades: Crystal Lens, Lunar Alloys, Helium-3 Enrichment,
+        Vril Powered Weapons, Amplified Lens, Moon Propaganda,
+        Cryptofascism, Vril Infusion
+      - Gravity Core: support power that manipulates gravity in target area
+      - Meteor Traction Beam: support power that pulls meteors to target area
+      - Vril-powered weapons: unique energy weapon technology
+      - Crystal Lens and Amplified Lens: upgrade path for laser weapons
+      - Timing attack playstyle: weak early, dominant mid game
 
 actor_schwarzermond_bermensch =
    .description = Heavy assault infantry armed with a yellow laser rifle.

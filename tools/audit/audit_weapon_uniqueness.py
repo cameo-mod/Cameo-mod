@@ -39,7 +39,7 @@ UTILITY_WEAPONS = {
 # structural variant suffixes from DESIGN.md §1 + legacy paradrop twins
 VARIANT_SUFFIXES = (
     "_husk", "_sp", "_r4", "_wild", "_mk2", "_elite", "_ai", "_water",
-    "para", ".husk",
+    "_EMP", "_AA", "_upgraded", "para", ".husk",
 )
 
 ARMED_TYPES = {"inf", "veh", "air", "nav", "def"}

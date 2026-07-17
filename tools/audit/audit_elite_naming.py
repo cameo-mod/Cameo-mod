@@ -1,5 +1,11 @@
 #!/usr/bin/env python
-"""Find elite weapons that don't follow <baseWeapon>E naming, only for rank-elite gated armaments."""
+"""Find elite weapons that don't follow _elite naming, only for rank-elite gated armaments.
+
+Per DESIGN.md §16.3: ALL elite weapons must end with _elite.
+The legacy E suffix is deprecated and must be migrated.
+EMP weapons (which may contain 'EMP' in the name) are NOT elite weapons
+and are never flagged because this audit only checks rank-elite gated armaments.
+"""
 import os, re, sys
 
 root = "mods/cameo"
@@ -36,7 +42,7 @@ for dirpath, _, filenames in os.walk(root):
                         has_rank_elite = True
                     j += 1
                 if weapon_name and has_rank_elite:
-                    is_valid = weapon_name.endswith('E') or weapon_name.endswith('_elite')
+                    is_valid = weapon_name.endswith('_elite')
                     if not is_valid:
                         actor_name = "?"
                         for k in range(i - 1, -1, -1):

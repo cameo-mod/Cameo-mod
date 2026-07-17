@@ -53,7 +53,7 @@ Violations: **759** across 1869 roster actors (reference-clean units: gdiarcher,
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_pulverizermecha | Step 114 | expected 285 (HP 285000/1000) |
+| asianalliance_pulverizermecha | Step 114 | expected 285 (HP 285000/1000) |
 | cabal_beholder | Step 50 | expected 125 (HP 125000/1000) |
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
@@ -151,7 +151,7 @@ Violations: **759** across 1869 roster actors (reference-clean units: gdiarcher,
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_pulverizermecha | infantry declares Repairable locally |  |
+| asianalliance_pulverizermecha | infantry declares Repairable locally |  |
 | cabal_beholder | infantry declares Repairable locally |  |
 | futuretech_plasmastrider | infantry declares Repairable locally |  |
 | futuretech_shotgundroid | infantry declares Repairable locally |  |
@@ -170,7 +170,7 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_droneminer | RegenAmount 10 | expected 20 (2 x SelfHealing 10) |
+| asianalliance_droneminer | RegenAmount 10 | expected 20 (2 x SelfHealing 10) |
 | duelist_tank.ixian | RegenAmount 158 | expected 192 (2 x SelfHealing 96) |
 | eden_cargotruck_empty | RegenAmount 10 | expected 88 (2 x SelfHealing 44) |
 | forgotten_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
@@ -303,10 +303,10 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_advancedcommunicationcenter | Power -200 | expected -500 (-Cost/20) |
-| asian_alliance_asiansentryflamer | Power -25 | expected -40 (-Cost/20) |
-| asian_alliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
-| asian_alliance_concretebarrier | Power missing | expected -10 |
+| asianalliance_advancedcommunicationcenter | Power -200 | expected -500 (-Cost/20) |
+| asianalliance_asiansentryflamer | Power -25 | expected -40 (-Cost/20) |
+| asianalliance_chaosstorminductor | Power -200 | expected -250 (-Cost/20) |
+| asianalliance_concretebarrier | Power missing | expected -10 |
 | brik | Power missing | expected -10 |
 | eden_gp_emp | Power -10 | expected -30 (-Cost/20) |
 | eden_gp_laser | Power -10 | expected -30 (-Cost/20) |
@@ -438,7 +438,7 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_pulverizer | Turreted 26 vs Mobile 13 | must match |
+| asianalliance_pulverizer | Turreted 26 vs Mobile 13 | must match |
 | eden_tiger_thorshammer | Turreted 18 vs Mobile 16 | must match |
 | futuretech_phalanxwip | Turreted 12 vs Mobile 19 | must match |
 | japan_armoredcar | Turreted 52 vs Mobile 26 | must match |
@@ -494,9 +494,9 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_heavyrailguntank | TurnSpeed 10 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
-| asian_alliance_viper | TurnSpeed 25 (Speed 125) | expected 50 = 2 x Speed/5 (turretless) |
-| asian_alliance_warturtle | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| asianalliance_heavyrailguntank | TurnSpeed 10 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
+| asianalliance_viper | TurnSpeed 25 (Speed 125) | expected 50 = 2 x Speed/5 (turretless) |
+| asianalliance_warturtle | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | forgotten_thumperbus | TurnSpeed 18 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
 | futuretech_athenacannon | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | humans_mobileconstructionvehiclehuman | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
@@ -545,8 +545,8 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 
 | actor | actual | expected |
 |---|---|---|
-| asian_alliance_pulverizer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| asian_alliance_type89mlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| asianalliance_pulverizer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| asianalliance_type89mlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_lynx_railgun | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_lynx_thorshammer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_tiger_railgun | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
@@ -737,7 +737,7 @@ _none found_
 | yuri: heavyyuri | all units are Tier 1 | heavy support should mix all tiers |
 | asianalliance: heavyasianalliance | total cost 7650 | target ~10000 (±15%) |
 | asianalliance: heavyasianalliance | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
-| asianalliance: heavyasianalliance | asian_alliance_lynxtank (cost 850) x3 vs asian_alliance_asiantankkiller (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| asianalliance: heavyasianalliance | asianalliance_lynxtank (cost 850) x3 vs asianalliance_asiantankkiller (cost 300) x2 | pricier units must not outnumber cheaper ones |
 | consortium: heavyconsortium | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | consortium: heavyconsortium | steel_consortium_quantumtank (cost 1600) x4 vs steel_consortium_clonetrooper (cost 200) x3 | pricier units must not outnumber cheaper ones |
 | consortium: heavyconsortium | steel_consortium_quantumtank (cost 1600) x4 vs steel_consortium_quantummissiletrooper (cost 1150) x2 | pricier units must not outnumber cheaper ones |

@@ -68,7 +68,7 @@ panth.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
 ksub.asian:
 	Inherits: ^BoatUnit
@@ -133,7 +133,7 @@ ksub.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
 gunb.asian:
 	Inherits: ^BoatUnit
@@ -212,7 +212,7 @@ gunb.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
 lsub.asian:
 	Inherits: ^BoatUnit
@@ -231,7 +231,7 @@ lsub.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgyard.asian, asian_alliance_asianradar
+		Prerequisites: ~cgyard.asian, asianalliance_asianradar
 		Queue: Naval, RANaval
 		Description: actor_ra2sub.description
 	Mobile:
@@ -266,7 +266,7 @@ lsub.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
 quasfrig.asian:
 	Inherits: ^BoatUnit
@@ -285,7 +285,7 @@ quasfrig.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgyard.asian, asian_alliance_asianradar
+		Prerequisites: ~cgyard.asian, asianalliance_asianradar
 		Queue: Naval, RANaval
 		Description: actor_aaquasfrig.description
 	Mobile:
@@ -302,25 +302,25 @@ quasfrig.asian:
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_alliance_upgrade_celestialpower
+		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@UpgradeAG:
 		Weapon: AsianQuasarBoatAGEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_upgrade_celestialpower
+		RequiresCondition: asianalliance_upgrade_celestialpower
 	Armament@AA:
 		Weapon: AsianQuasarBoatAA
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_alliance_upgrade_celestialpower
+		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@UpgradeAA:
 		Weapon: AsianQuasarBoatAAEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_upgrade_celestialpower
+		RequiresCondition: asianalliance_upgrade_celestialpower
 	WithMuzzleOverlay:
 	AttackFrontal:
 		Voice: Attack
@@ -330,7 +330,7 @@ quasfrig.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_celestialpower
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_celestialpower
 
 karrier.asian:
 	Inherits: ^BoatUnit
@@ -349,7 +349,7 @@ karrier.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgyard.asian, asian_alliance_asianbattlelab, ~!up_tsunami.asian
+		Prerequisites: ~cgyard.asian, asianalliance_asianbattlelab, ~!up_tsunami.asian
 		Queue: Naval, RANaval
 		Description: actor_aacarrier.description
 	Selectable:
@@ -380,7 +380,7 @@ karrier.asian:
 	Voiced:
 		VoiceSet: AsianShipVoice
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
 tsun.asian:
 	Inherits: ^BoatUnit
@@ -398,7 +398,7 @@ tsun.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgyard.asian, asian_alliance_militaryacademy, ~up_tsunami.asian
+		Prerequisites: ~cgyard.asian, asianalliance_militaryacademy, ~up_tsunami.asian
 		Queue: Naval, RANaval
 		Description: actor_aatsun.description
 	Selectable:
@@ -434,4 +434,4 @@ tsun.asian:
 	ActorStatValues:
 		Upgrades: up_tsunami.asian
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx

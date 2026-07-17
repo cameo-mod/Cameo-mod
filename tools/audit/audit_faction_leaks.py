@@ -72,21 +72,37 @@ def _same_faction(owner: str, fac: str) -> bool:
     f = fac.lower()
     if o == f or o == "shared" or o == "core":
         return True
-    # ContentPack folder names vs internal names (gdi vs gdi, ordos vs ordos …)
+    # Use full path for disambiguation (tiberiandawn/gdi vs tiberiansun/gdi)
+    full = owner.lower().rstrip("/")
+    # ContentPack folder names vs internal names
+    # Key = full path or last segment, value = set of faction InternalNames
     aliases = {
-        "gdi": {"gdi"}, "nod": {"nod"},
-        "redalert": {"allies", "soviet", "modjapan"},
-        "redalert2": {"ra2america", "ra2russia", "yuri"},
-        "tiberiansun": {"tsgdi", "tsnod", "cabal", "forgotten"},
+        "tiberiandawn/gdi": {"td_gdi"}, "tiberiandawn/nod": {"td_nod"},
+        "tiberiansun/gdi": {"ts_gdi"}, "tiberiansun/nod": {"ts_nod"},
+        "tiberiansun/cabal": {"cabal"}, "tiberiansun/forgotten": {"forgotten"},
+        "redalert": {"ra1_allies", "ra1_soviets", "modjapan"},
+        "redalert2": {"ra2_allies", "ra2_soviets", "yuri"},
+        "redalert2mod/asianalliance": {"asianalliance"},
+        "redalert2mod/consortium": {"steelconsortium"},
+        "redalert2mod/syndicate": {"latinsyndicate"},
+        "redalert2mod/naxis": {"naxis"},
+        "redalert2mod/schwarzermond": {"schwarzermond"},
+        "redalert2mod/futuretech": {"futuretech"},
         "starcraft": {"terran", "zerg", "protoss"},
-        "warcraft2": {"human2", "orc2"},
-        "asianalliance": {"asianalliance"}, "consortium": {"consortium"},
-        "syndicate": {"syndicate"}, "naxis": {"naxis", "lnaxis"},
-        "schwarzermond": {"lnaxis"}, "futuretech": {"futuretech"},
+        "warcraft2": {"wc2_humans", "wc2_orcs"},
+        "asianalliance": {"asianalliance"},
+        "steelconsortium": {"steelconsortium"},
+        "latinsyndicate": {"latinsyndicate"},
+        "naxis": {"naxis"},
+        "schwarzermond": {"schwarzermond"}, "futuretech": {"futuretech"},
         "ordos": {"ordos"}, "ixian": {"ixian"},
         "atreides": {"atreides"}, "harkonnen": {"harkonnen"},
         "tkm": {"tkm"}, "outpost2": {"plymouth", "eden"},
+        "warcraft1": {"wc1human", "wc1orc", "human", "orc"},
     }
+    # Try full path first, then last segment
+    if f in aliases.get(full, set()):
+        return True
     return f in aliases.get(o, set())
 
 

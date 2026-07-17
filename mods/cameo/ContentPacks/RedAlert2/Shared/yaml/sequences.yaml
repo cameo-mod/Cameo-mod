@@ -1,0 +1,4987 @@
+ra2psiatomic:
+	Defaults:
+		Length: *
+		ZOffset: 1023
+	up:
+		Filename: atomicup.shp
+	down:
+		Filename: atomicdn.shp
+
+yrgarobo:
+	Defaults:
+		Offset: -6,-10
+	idle:
+		Filename: futuretech_robotcontrolcenter_yr_ggrobo_a.shp
+		Length: 20
+		ShadowStart: 40
+	damaged-idle:
+		Filename: futuretech_robotcontrolcenter_yr_ggrobo_a.shp
+		Length: 20
+		Start: 20
+		ShadowStart: 60
+	make:
+		Filename: futuretech_robotcontrolcenter_yr_make.shp
+		Length: 20
+		ShadowStart: 20
+	dead:
+		Filename: futuretech_robotcontrolcenter_yr_ggrobo_a.shp
+		Length: 20
+		Start: 20
+	icon:
+		Filename: futuretech_robotcontrolcenter_icon.png
+		Offset: 0,0
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+		#Offset: 0,0
+
+ra2tesla.bot:
+	Inherits: ra2_soviets_teslacoil
+
+ra2nayard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: ra2_ngyard.shp
+		ShadowStart: 4
+	damaged-idle:
+		Filename: ra2_ngyard.shp
+		Start: 2
+		ShadowStart: 5
+	idle-crane:
+		Filename: ra2_ngyard_a.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-crane:
+		Filename: ra2_ngyard_a.shp
+		Start: 15
+		Length: 15
+		ShadowStart: 45
+		Tick: 200
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	production-lights:
+		Filename: ra2_ngyard_b.shp
+		Length: 15
+		ZOffset: 256
+	damaged-production-lights:
+		Filename: ra2_ngyard_b.shp
+		Start: 15
+		Length: 15
+		ZOffset: 256
+	repair:
+		Filename: ra2_ngyard_s.shp
+		Length: 18
+		ShadowStart: 36
+	damaged-repair:
+		Filename: ra2_ngyard_s.shp
+		Start: 18
+		Length: 18
+		ShadowStart: 54
+	make:
+		Filename: ra2_ntyardmake.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_ngyard.shp
+		Start: 2
+	icon:
+		Filename: ra2nayardicon.shp
+		Offset: 0,0
+
+ra2gayard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: ra2_ggyard.shp
+		ShadowStart: 4
+	damaged-idle:
+		Filename: ra2_ggyard.shp
+		Start: 2
+		ShadowStart: 5
+	idle-crane:
+		Filename: ra2_ggyard_a.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-crane:
+		Filename: ra2_ggyard_a.shp
+		Start: 15
+		Length: 15
+		ShadowStart: 45
+		Tick: 200
+	idle-waves:
+		Filename: ra2_ggyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ggyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: ra2_ggyard_s.shp
+		Length: 18
+		ShadowStart: 36
+	damaged-repair:
+		Filename: ra2_ggyard_s.shp
+		Start: 18
+		Length: 18
+		ShadowStart: 54
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: ra2_ggyard.shp
+		Start: 2
+	icon:
+		Filename: ra2gayardicon.shp
+		Offset: 0,0
+
+yrygyard:
+	Defaults:
+		Offset: 0,-18
+	idle:
+		Filename: yr_ygyard.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: yr_ygyard.shp
+		Start: 2
+		ShadowStart: 4
+	idle-crane:
+		Filename: yr_ygyard_a.shp
+		Length: 15
+		ShadowStart: 32
+		Tick: 200
+	damaged-idle-crane:
+		Filename: yr_ygyard_a.shp
+		Start: 16
+		Length: 15
+		ShadowStart: 48
+		Tick: 200
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: yr_ygyard_c.shp
+		Start: 16
+		Length: 15
+		ShadowStart: 32
+		Tick: 200
+	production-lights:
+		Filename: yr_ygyard_d.shp
+		Length: 16
+		ShadowStart: 32
+		ZOffset: 256
+	damaged-production-lights:
+		Filename: yr_ygyard_d.shp
+		Start: 16
+		Length: 16
+		ShadowStart: 48
+		ZOffset: 256
+	repair:
+		Filename: yr_ygyard_s.shp
+		Length: 15
+		ShadowStart: 32
+	damaged-repair:
+		Filename: yr_ygyard_s.shp
+		Start: 16
+		Length: 15
+		ShadowStart: 48
+	make:
+		Filename: yr_ygyardmake.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: yr_ygyard.shp
+		Start: 2
+	icon:
+		Filename: ra2spenicon.shp
+		Offset: 0,0
+
+ra2mine:
+	Defaults:
+		Filename: ra2_tibtre01.tem
+		TilesetFilenames:
+			SNOW: ra2_tibtre01.tem
+			RA_SNOW: ra2_tibtre01.tem
+		ZOffset: -2c512
+		ShadowStart: 11
+	idle:
+	active:
+		Length: 11
+
+ra2gmine:
+	Defaults:
+		Filename: ra2_giantgem.shp
+		TilesetFilenames:
+			SNOW: ra2_giantgem.shp
+			RA_SNOW: ra2_giantgem.shp
+		ZOffset: -2c512
+		ShadowStart: 10
+	idle:
+		Length: 10
+	active:
+		Length: 10
+
+ra2rmine:
+	Defaults:
+		Filename: ra2_remapdrill.shp
+		TilesetFilenames:
+			SNOW: ra2_remapdrill.shp
+			RA_SNOW: ra2_remapdrill.shp
+		ZOffset: -2c512
+		ShadowStart: 11
+	idle:
+	active:
+		Length: 11
+
+ra2caoild.husk:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ra2_ctoild.shp
+		Offset: 0, 0
+	idle:
+		Start: 1
+		ShadowStart: 5
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 64
+	damaged-idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 96
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	make:
+		Filename: ra2_cgoildmake.shp
+		Length: 14
+		ShadowStart: 14
+	bib:
+		Offset: 0,20
+	dead:
+		Start: 1
+	icon:
+		Filename: ra2caoildicon.shp
+		Offset: 0, 0
+
+ra2cpower:
+	Defaults:
+		Filename: ra2_cgpowr.shp
+	idle:
+		Offset: 0, -10
+		ShadowStart: 4
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	icon:
+		Filename: ra2cpowericon.shp
+	tsicon:
+		Filename: tsoilderrickicon.shp
+
+ra2cpower.husk:
+	Defaults:
+		Filename: ra2_cgpowr.shp
+	idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	icon:
+		Filename: ra2cpowericon.shp
+	tsicon:
+		Filename: tsoilderrickicon.shp
+
+ra2hospt:
+	Defaults:
+		Filename: ra2_cthosp.shp
+	idle:
+		Offset: 0, -10
+		ShadowStart: 4
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_cthosp_a.shp
+		Length: 2
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_cthosp_a.shp
+		Start: 2
+		Length: 2
+		Tick: 400
+	idle-flag:
+		Filename: ra2_cthosp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cthosp_f.shp
+		Length: 16
+
+ra2hospt.husk:
+	Defaults:
+		Filename: ra2_cthosp.shp
+	idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_cthosp_a.shp
+		Start: 2
+		Length: 2
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_cthosp_a.shp
+		Start: 2
+		Length: 2
+		Tick: 400
+	idle-flag:
+		Filename: ra2_cthosp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cthosp_f.shp
+		Length: 16
+
+ra2machshop:
+	Defaults:
+		Filename: ra2_cgmach.shp
+	idle:
+		Offset: 0, -10
+		ShadowStart: 4
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-flag:
+		Filename: ra2_cgmach_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cgmach_f.shp
+		Length: 16
+
+ra2machshop.husk:
+	Defaults:
+		Filename: ra2_cgmach.shp
+	idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 5
+	idle-flag:
+		Filename: ra2_cgmach_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cgmach_f.shp
+		Length: 16
+
+ra2caairp.husk:
+	Defaults:
+		Filename: ra2_ctairp.shp
+	idle:
+		Start: 1
+		ShadowStart: 5
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Start: 10
+		Length: 10
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Start: 10
+		Length: 10
+		Tick: 400
+	idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	dead:
+		Start: 1
+
+ra2_cgcloa:
+	Defaults:
+		Filename: ra2_cgcloa.shp
+	idle:
+		Offset: 0, -10
+		ShadowStart: 3
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 4
+	idle-flag:
+		Filename: ra2_cgcloa_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cgcloa_f.shp
+		Length: 16
+	icon:
+		Filename: ra2cpowericon.shp
+
+ra2_cgcloa.husk:
+	Defaults:
+		Filename: ra2_cgcloa.shp
+	idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 4
+	damaged-idle:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Offset: 0, -10
+		Start: 1
+		ShadowStart: 4
+	idle-flag:
+		Filename: ra2_cgcloa_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_cgcloa_f.shp
+		Length: 16
+	icon:
+		Filename: ra2cpowericon.shp
+
+ra2_cgtbnk:
+	Defaults:
+		Offset: 0,-28
+	idle:
+		Filename: ra2_cgtbnkbib.shp
+		Length: 1
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_cgtbnkbib.shp
+		Start: 1
+		Length: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Filename: ra2_cgtbnk_b.shp
+		Start: 6
+		Length: 1
+		ShadowStart: 14
+	damaged-idle-bunkered:
+		Filename: ra2_cgtbnk_b.shp
+		Start: 13
+		Length: 1
+		ShadowStart: 14
+	idle-bunkered-front:
+		Filename: yuri_tankbunker_yr_ngtbnk_a.shp
+		Start: 6
+		Length: 1
+		ZOffset: 128
+	damaged-idle-bunkered-front:
+		Filename: yuri_tankbunker_yr_ngtbnk_a.shp
+		Start: 13
+		Length: 1
+		ZOffset: 128
+	build:
+		Filename: ra2_cgtbnk_b.shp
+		Length: 7
+		ShadowStart: 14
+	damaged-build:
+		Filename: ra2_cgtbnk_b.shp
+		Start: 7
+		Length: 7
+		ShadowStart: 14
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: ra2_cgtbnkbib.shp
+		Start: 1
+		Length: 1
+	icon:
+		Filename: yuri_tankbunker_icon.shp
+		Offset: 0,0
+
+ra2_ctoutp:
+	Defaults:
+		Offset: 0,-24
+		Filename: ra2_ctoutp.shp
+	idle:
+		Filename: ra2_ctoutp_d.shp
+		ShadowStart: 2
+	damaged-idle:
+		Filename: ra2_ctoutp_d.shp
+		Start: 1
+		ShadowStart: 3
+	idle-side:
+		Filename: ra2_ctoutp.shp
+		ShadowStart: 2
+	damaged-idle-side:
+		Filename: ra2_ctoutp.shp
+		Start: 1
+		ShadowStart: 3
+	bib:
+		Filename: ra2_ctoutp_bib.shp
+		ZOffset: -512
+	damaged-bib:
+		Filename: ra2_ctoutp_bib.shp
+		ZOffset: -512
+	make:
+		Filename: ra2_allies_alliedservicedepot_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_ctoutp.shp
+		Start: 1
+	repair:
+		Filename: ra2_ctoutp_a.shp
+		Length: 10
+		ShadowStart: 10
+		Tick: 180
+	damaged-repair:
+		Filename: ra2_ctoutp_a.shp
+		Length: 10
+		ShadowStart: 10
+		Tick: 180
+	idle-flag:
+		Filename: ra2_ctoutp_f.shp
+		Length: 16
+	icon:
+		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Offset: 0,0
+
+ra2_ctoutp.husk:
+	Defaults:
+		Offset: 0,-24
+		Filename: ra2_ctoutp.shp
+	idle:
+		Filename: ra2_ctoutp.shp
+		Start: 1
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ra2_ctoutp.shp
+		Start: 1
+		ShadowStart: 3
+	idle-side:
+		Filename: ra2_ctoutp_d.shp
+		Start: 1
+		ShadowStart: 3
+	damaged-idle-side:
+		Filename: ra2_ctoutp_d.shp
+		Start: 1
+		ShadowStart: 3
+	bib:
+		Filename: ra2_ctoutp_bib.shp
+		ZOffset: -512
+	damaged-bib:
+		Filename: ra2_ctoutp_bib.shp
+		ZOffset: -512
+	make:
+		Filename: ra2_allies_alliedservicedepot_make.shp
+		Length: 25
+		ShadowStart: 25
+	dead:
+		Filename: ra2_ctoutp.shp
+		Start: 1
+	repair:
+		Filename: ra2_ctoutp_a.shp
+		Length: 10
+		ShadowStart: 10
+		Tick: 180
+	damaged-repair:
+		Filename: ra2_ctoutp_a.shp
+		Length: 10
+		ShadowStart: 10
+		Tick: 180
+	idle-flag:
+		Filename: ra2_ctoutp_f.shp
+		Length: 16
+	icon:
+		Filename: ra2_allies_alliedservicedepot_icon.shp
+		Offset: 0,0
+
+ra2ctfarm01: #farm barn (2x2)
+	Defaults:
+		Filename: ra2_ctfarm01.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	make:
+	dead:
+		Start: 1
+
+ra2ctfarm02: #farm silo (2x2)
+	Defaults:
+		Filename: ra2_ctfarm02.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	make:
+	dead:
+		Start: 1
+
+ra2ctbunk01: #civil bunker (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctbunk01.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 7
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 7
+	make:
+	dead:
+
+ra2ctbunk02: #civil bunker (2x2)
+	Inherits@1: ra2ctbunk01
+	Defaults:
+		Filename: ra2_ctbunk02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 7
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 7
+
+ra2ctbarn02: #farm house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctbarn02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctchig01: #chicago departament (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctchig01.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctchig02: #chicago departament (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctchig02.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctchig03: #chicago big building (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctchig03.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cteur01: #small european house(1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cteur1.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cteur02: #small european house(1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cteur2.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cteur04: #european house(2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cteur04.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctfarm06: #lightpost (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctfarm06.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctfrma: #france house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctfrma.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctgas01: #gas station (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctgas01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2cthse01: #texan house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse01.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse02: #texan house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse02.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse03: #texan house (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse03.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse04: #texan house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse04.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse05: #small texan house (2x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse05.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse06: #small texan house (2x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse06.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2cthse07: #texan house (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cthse07.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctind01: #civilian industrial(4x4)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctind01.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctlab: #civilian laboratory(3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctlab.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam01: #miami big building (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam01.shp
+		Offset: -16,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam02: #miami big building (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam02.shp
+		Offset: -16,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam03: #miami big building (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam03.shp
+		Offset: 16,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam04: #miami beach tower (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam04.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	make:
+	dead:
+
+ra2ctmiam05: #miami hotel (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam05.shp
+		Offset: 8,-16
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam06: #miami hotel (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam06.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam07: #miami hotel (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam07.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctmiam08: #miami water (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmiam08.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		ShadowStart: 4
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 5
+	make:
+	dead:
+
+ra2ctarmy01: #army tents (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctarmy01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctarmy02: #small army tents (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctarmy02.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctarmy03: #small army tents (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctarmy03.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctarmy04: #small army tents (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctarmy04.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctmsc07: #island hut (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmsc07.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctmsc08: #small island hut (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmsc08.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctmsc09: #small island hut (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmsc08.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+
+ra2ctmsc10: #burger kong (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctmsc10.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy01: # new york box building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy01.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy06: # new york skycrapter (medium) (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy06.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy07: # new york skycrapter (small) (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy07.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy08: # new york skycrapter (small)+2 (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy08.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy10: # new york departament (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy10.shp
+		Offset: -12,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy11: # new york departament (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy11.shp
+		Offset: -12,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy12: # new york skycrapter (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy12.shp
+		Offset: 12,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy13: # new york skycrapter (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy13.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy14: # new york skycrapter (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy14.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy15: # new york small skycrapter (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy15.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy16: # new york stretch skycrapter (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy16.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy17: # new york short skycrapter (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy17.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy18: # new york short skycrapter (2x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy18.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy20: # new york storage (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy20.shp
+		Offset: 32,-32
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctnewy21: # new york storage (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnewy21.shp
+		Offset: -32,-32
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy09: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy09.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy22: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy22.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy23: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy23.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy24: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy24.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy25: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy25.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctnwy26: # new york skycrapter HUGE
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctnwy26.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2ctwt01: #water tower (2x2)
+	Defaults:
+		Filename: ra2_ctwt01.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	make:
+	dead:
+		Start: 1
+
+ra2ctwsh18a: #water pond (2x2)
+	Defaults:
+		Filename: ra2_ctwsh18a.shp
+	idle:
+		Length: 10
+		ShadowStart: 10
+	damaged-idle:
+		Length: 10
+		ShadowStart: 10
+	make:
+	dead:
+		Start: 1
+
+ra2_city01: #city 1 (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_city01.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	idle-bunkered:
+		ShadowStart: 2
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+
+ra2_city02: #city 1 (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_city02.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	idle-bunkered:
+		ShadowStart: 2
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+
+ra2_city03: #city 1 (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_city03.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	idle-bunkered:
+		ShadowStart: 2
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+
+ra2_city04: #city 1 (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_city04.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	idle-bunkered:
+		ShadowStart: 2
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+
+ra2_city06: #city 1 (3x2)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_city06.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	idle-bunkered:
+		ShadowStart: 2
+	damaged-idle-bunkered:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+
+ra2_ctfrmb: #latrine (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctfrmb.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	make:
+	dead:
+
+ra2_ctgard01: #soviet guard post (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctgard01.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	make:
+	dead:
+
+ra2_ctgard03: #guard tower (1x1)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctgard03.shp
+		Offset: -32,-16
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 5
+	make:
+	dead:
+
+ra2_ctwash03: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash03.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash04: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash04.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash05: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash05.shp
+		Offset: -32,-16
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash06: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash06.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash07: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash07.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash08: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash08.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash09: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash09.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash10: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash10.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash11: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash11.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash13: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash13.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash16: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash16.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctwash17: # washington office building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctwash17.shp
+		Offset: -32,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs01: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs01.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs02: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs02.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs03: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs03.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs04: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs04.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs05: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs05.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs06: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs06.shp
+		Offset: -8,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs07: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs07.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_cttexs08: # texas building (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_cttexs08.shp
+		Offset: 8,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars02: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars02.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars04: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars04.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars05: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars05.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars06: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars06.shp
+		Offset: 0,-8
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars07: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars07.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 4
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 4
+	make:
+	dead:
+
+ra2_ctpars08: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars08.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars09: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars09.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars10: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars10.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars12: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars12.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars13: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars13.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctpars14: # catedral (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctpars14.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus03: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus03.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus04: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus04.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus05: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus05.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus06: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus06.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus07: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus07.shp
+		Offset: 0,-4
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus08: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus08.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus09: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus09.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus10: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus10.shp
+		Offset: 8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctrus11: # russian (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctrus11.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf01: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf01.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf02: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf02.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf03: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf03.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf05: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf05.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf06: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf06.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf07: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf07.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf08: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf08.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf16: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf16.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf17: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf17.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+ra2_ctsanf18: # san francisco (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf18.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+##############################################
+#   Red Alert 2 Decoration Props
+##############################################
+
+ra2_trff01: #trafic light (1x1)
+	Defaults:
+		Filename: ra2_trff01.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_trff02: #trafic light (1x1)
+	Defaults:
+		Filename: ra2_trff02.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_trff03: #trafic light (1x1)
+	Defaults:
+		Filename: ra2_trff03.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_trff04: #trafic light (1x1)
+	Defaults:
+		Filename: ra2_trff04.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_ctmisc01: #explosive barrels (1x1)
+	Defaults:
+		Filename: ra2_ctmisc01.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmisc02: #explosive barrels (1x1)
+	Defaults:
+		Filename: ra2_ctmisc02.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmisc03: #trash box (1x1)
+	Defaults:
+		Filename: ra2_ctmisc03.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmisc04: # mail box (1x1)
+	Defaults:
+		Filename: ra2_ctmisc04.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmisc05: # pipes (1x1)
+	Defaults:
+		Filename: ra2_ctmisc05.shp
+	idle:
+		ShadowStart: 2
+	damaged-idle:
+		Start: 1
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmisc06: # v3 rockets (1x1)
+	Defaults:
+		Filename: ra2_ctmisc06.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctwash16: # statue (1x1)
+	Defaults:
+		Filename: ra2_ctwash16.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_lt_eur01: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_eur01.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_eur02: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_eur02.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_gen01: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_gen01.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_gen02: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_gen02.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_gen03: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_gen03.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_gen04: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_gen04.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_sgn01: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_sgn01.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_sgn02: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_sgn02.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_sgn03: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_sgn03.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_lt_sgn04: #street lamp (1x1)
+	Defaults:
+		Filename: ra2_lt_sgn04.tem
+	idle:
+		ShadowStart: 1
+	damaged-idle:
+		ShadowStart: 1
+	make:
+	dead:
+		ShadowStart: 1
+
+ra2_ctmsc01: #hot ra1_soviets_attackdog cart (1x1)
+	Defaults:
+		Filename: ra2_ctmsc01.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc02: #ubrellas (1x1)
+	Defaults:
+		Filename: ra2_ctmsc02.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc03: #ubrellas (1x1)
+	Defaults:
+		Filename: ra2_ctmsc03.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc04: #towels (1x1)
+	Defaults:
+		Filename: ra2_ctmsc04.shp
+		ZOffset: -1024
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc05: #towels (1x1)
+	Defaults:
+		Filename: ra2_ctmsc05.shp
+		ZOffset: -1024
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc06: #campfire (1x1)
+	Defaults:
+		Filename: ra2_ctmsc06.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc06a: #campfire on (1x1)
+	Defaults:
+		Filename: ra2_ctmsc06a.shp
+	idle:
+		ShadowStart: 4
+		Length: 4
+	damaged-idle:
+		ShadowStart: 4
+	make:
+	dead:
+		ShadowStart: 4
+
+ra2_ctmsc11: #tires (1x1)
+	Defaults:
+		Filename: ra2_ctmsc11.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc12: #target (1x1)
+	Defaults:
+		Filename: ra2_ctmsc12.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctmsc13: #wrecked grizzly (1x1)
+	Defaults:
+		Filename: ra2_ctmsc13.shp
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		ShadowStart: 3
+	make:
+	dead:
+		ShadowStart: 3
+
+ra2_ctsanf15: # san francisco water tower (3x3)
+	Inherits@1: ra2ctfarm01
+	Defaults:
+		Filename: ra2_ctsanf15.shp
+		Offset: -8,0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	make:
+	dead:
+
+##############################################
+#   Red Alert 2 Decoration Trees
+##############################################
+
+ra2_tree01:
+	Defaults:
+		Filename: ra2_tree01.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree02:
+	Defaults:
+		Filename: ra2_tree02.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree03:
+	Defaults:
+		Filename: ra2_tree03.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree04:
+	Defaults:
+		Filename: ra2_tree04.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree05:
+	Defaults:
+		Filename: ra2_tree05.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree01:
+	Defaults:
+		Filename: ra2_tree01.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree02:
+	Defaults:
+		Filename: ra2_tree02.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree03:
+	Defaults:
+		Filename: ra2_tree03.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree04:
+	Defaults:
+		Filename: ra2_tree04.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree05:
+	Defaults:
+		Filename: ra2_tree05.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree01:
+	Defaults:
+		Filename: ra2_tree01.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree02:
+	Defaults:
+		Filename: ra2_tree02.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree03:
+	Defaults:
+		Filename: ra2_tree03.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree04:
+	Defaults:
+		Filename: ra2_tree04.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree05:
+	Defaults:
+		Filename: ra2_tree05.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree01:
+	Defaults:
+		Filename: ra2_tree01.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree02:
+	Defaults:
+		Filename: ra2_tree02.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree03:
+	Defaults:
+		Filename: ra2_tree03.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree04:
+	Defaults:
+		Filename: ra2_tree04.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree05:
+	Defaults:
+		Filename: ra2_tree05.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree06:
+	Defaults:
+		Filename: ra2_tree06.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree07:
+	Defaults:
+		Filename: ra2_tree07.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree08:
+	Defaults:
+		Filename: ra2_tree08.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree09:
+	Defaults:
+		Filename: ra2_tree09.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree10:
+	Defaults:
+		Filename: ra2_tree10.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree11:
+	Defaults:
+		Filename: ra2_tree11.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree12:
+	Defaults:
+		Filename: ra2_tree12.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree13:
+	Defaults:
+		Filename: ra2_tree13.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree14:
+	Defaults:
+		Filename: ra2_tree14.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree15:
+	Defaults:
+		Filename: ra2_tree15.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree16:
+	Defaults:
+		Filename: ra2_tree16.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree17:
+	Defaults:
+		Filename: ra2_tree17.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree18:
+	Defaults:
+		Filename: ra2_tree18.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree19:
+	Defaults:
+		Filename: ra2_tree19.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree20:
+	Defaults:
+		Filename: ra2_tree20.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree21:
+	Defaults:
+		Filename: ra2_tree21.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree22:
+	Defaults:
+		Filename: ra2_tree22.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree23:
+	Defaults:
+		Filename: ra2_tree23.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree24:
+	Defaults:
+		Filename: ra2_tree24.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree25:
+	Defaults:
+		Filename: ra2_tree25.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree26:
+	Defaults:
+		Filename: ra2_tree26.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree27:
+	Defaults:
+		Filename: ra2_tree27.tem
+	idle:
+		ShadowStart: 1
+
+ra2_tree28:
+	Defaults:
+		Filename: ra2_tree28.tem
+	idle:
+		ShadowStart: 1
+
+####################################################################################################
+#		Red Alert 2 Default
+####################################################################################################
+
+ra2flameguy:
+	Defaults:
+		Filename: ra2_flameguy.shp
+		Facings: 8
+		Tick: 80
+		IgnoreWorldTint: true
+	idle:
+	stand:
+	run:
+		Length: 6
+	die:
+		Start: 44
+		Facings: 1
+		Length: 104
+
+^RA2InfantryDeaths:
+	die4:
+		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_nukedie.shp
+		Length: *
+		Tick: 50
+	die5:
+		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_yuridie.shp
+		Length: *
+		Tick: 80
+	die6:
+		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_electro.shp
+		Length: *
+		Tick: 80
+	die7:
+		Filename: futuretech_promotion_unlockcryolegionnaire_yr_virusd.shp
+		Length: *
+		Tick: 80
+	die8:
+		Filename: futuretech_promotion_unlockcryolegionnaire_yr_brutdie.shp
+		Length: *
+		Tick: 80
+
+^RA2BasicInfantry:
+	Inherits: ^RA2InfantryDeaths
+	Defaults:
+		Filename: ra2gi.shp
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	walk:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 100
+	idle1:
+		Start: 56
+		Length: 15
+		Tick: 120
+	idle2:
+		Start: 71
+		Length: 15
+		Tick: 120
+	cheer:
+		Start: 245
+		Length: 8
+		Tick: 120
+	die1:
+		Start: 134
+		Length: 15
+	die2:
+		Start: 149
+		Length: 15
+	die-crushed:
+		Filename: invisibleitem.shp
+	paradrop:
+
+^RA2ProneInfantry:
+	Defaults:
+		Filename: ra2gi.shp
+	liedown:
+		Start: 212
+		Length: 2
+		Facings: 8
+	standup:
+		Start: 228
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Frames: 86, 92, 98, 104, 110, 116, 122, 128
+		Facings: 8
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		Tick: 100
+
+^RA2Infantry:
+	Inherits: ^InfantryOverlays
+	Inherits@1: ^RA2BasicInfantry
+	Inherits@2: ^RA2ProneInfantry
+
+^RA2ArmedInfantryNoProneAnimation:
+	Inherits: ^RA2Infantry
+	liedown:
+		Start: 0
+		Length: 1
+		Facings: 8
+	standup:
+		Start: 0
+		Length: 1
+		Facings: 8
+	prone-stand:
+		-Frames:
+		Start: 0
+		Length: 1
+		Facings: 8
+	prone-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 133
+	shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		Tick: 80
+
+^RA2ArmedInfantry:
+	Inherits: ^RA2Infantry
+	shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-shoot:
+		Start: 212
+		Length: 6
+		Facings: 8
+		Tick: 80
+	liedown:
+		Start: 260
+	standup:
+		Start: 276
+	cheer:
+		Start: 293
+
+^RA2ArmedCivilian:
+	Inherits: ^RA2Infantry
+	idle2:
+		Start: 56
+		Length: 15
+		Tick: 120
+	shoot:
+		Start: 86
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-shoot:
+		Start: 134
+		Length: 6
+		Facings: 8
+		Tick: 80
+	prone-stand:
+		Frames: 182, 188, 194, 200, 208, 216, 222, 228
+		Facings: 8
+	prone-run:
+		Start: 182
+		Length: 6
+		Facings: 8
+		Tick: 100
+####################################################################################################
+#		Red Alert 2 Infantry
+####################################################################################################
+
+ra2e1dep:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_allies_gi.shp
+	idle:
+		Start: 292
+		Facings: 8
+	recoil:
+		Start: 315
+		Length: 6
+		Facings: 8
+	damaged-idle:
+		Start: 292
+		Facings: 8
+	damaged-recoil:
+		Start: 315
+		Length: 6
+		Facings: 8
+	make:
+		Start: 300
+		Length: 15
+	icon:
+		Filename: ra2_allies_gi_icon.shp
+
+yrggidep:
+	Defaults:
+		Filename: ra2_allies_guardiangi_yr_ggi.shp
+	idle:
+		Start: 315
+		Facings: 8
+	recoil:
+		Start: 323
+		Length: 6
+		Facings: 8
+	damaged-idle:
+		Start: 315
+		Facings: 8
+	damaged-recoil:
+		Start: 323
+		Length: 6
+		Facings: 8
+	make:
+		Start: 300
+		Length: 15
+	muzzle:
+		Filename: invisibleitem.shp
+		Length: *
+	icon:
+		Filename: ra2_allies_guardiangi_icon.shp
+
+ra2e2.black:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_bcons.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	icon:
+		Filename: ra2e2icon.shp
+
+ra2terror:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: latinsyndicate_promotion_unlockterrorists_ra2_trst.shp
+	run:
+		Tick: 120
+	shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+		Tick: 80
+	deploy:
+		Start: 164
+		Length: 15
+		Tick: 80
+	paradrop:
+		Start: 179
+	cheer:
+		Start: 180
+	die1:
+	# Explode
+	die2:
+	# Fly and explode in air
+	die3:
+	# Fly through air squish on ground
+	die4:
+	# Burn
+	die5:
+	# Tib
+	die6:
+	# Electro
+	die7:
+	idle1:
+	idle2:
+	idle3:
+	idle4:
+	icon:
+		Filename: latinsyndicate_promotion_unlockterrorists_icon.shp
+
+ra2sidewind:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_sidewinder.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	shoot:
+		Start: 204
+	prone-shoot:
+		Start: 252
+	icon:
+		Filename: ra2_sidewinder_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+
+ra2shk.bot:
+	Inherits: ra2_soviets_teslatrooper
+
+yrslav:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: naxis_slave_yr_slav.shp
+	idle:
+		Filename: invisibleitem.shp
+	run:
+		Tick: 120
+	harvest:
+		Start: 116
+		Length: 6
+		Tick: 120
+	full-run:
+		Start: 228
+		Length: 6
+		Facings: 8
+		Tick: 120
+	empty-harvest:
+		Filename: invisibleitem.shp
+	half-harvest:
+		Filename: invisibleitem.shp
+	full-harvest:
+		Filename: invisibleitem.shp
+	shoot:
+		Start: 164
+	dock:
+		Start: 117
+		Length: 5
+	dock-loop:
+		Start: 56
+	cheer:
+		Start: 276
+	die1:
+		Start: 86
+	die2:
+		Start: 101
+	cheer:
+		Start: 276
+	icon:
+		Filename: naxis_slave_icon.png
+
+^RA2CannonMuzzle:
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+^RA2MachineGunMuzzle:
+	muzzle:
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 6
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 6
+		Offset: 0, 0
+
+^RA2GatlingMuzzle:
+	muzzle:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+	muzzle-1:
+		Filename: ra2_gunfire.shp
+		Length: *
+		Offset: 0,0
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+		Offset: 0,0
+
+ra2v3rocket:
+	idle:
+		Filename: ra2v3rocket.shp
+		Facings: 64
+		ZOffset: 1023
+		Scale: 0.5
+		Offset: 0,10
+
+cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
+	Defaults:
+		Filename: cra2cmin.shp
+	idle:
+		Filename: invisibleitem.shp
+	dock:
+		Filename: invisibleitem.shp
+	dock-loop:
+		Filename: invisibleitem.shp
+	warpout:
+		Filename: ra2_allies_chronominer_warpout.shp
+		Length: *
+	icon:
+		Filename: ra2_allies_chronominer_icon.shp
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+
+ra2ltnk:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2ltnk.shp
+	idle:
+		Filename: invisibleitem.shp
+	turret:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_grizzlytank_icon.shp
+
+ra2howi:
+	Defaults:
+		Filename: ra2howi.shp
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_tankdestroyer_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2arty:
+	Defaults:
+		Filename: ra2arty.shp
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_tankdestroyer_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2amcv.Bot:
+	Inherits: ra2_allies_alliedmobileconstructionvehicle
+
+ra2smcv.Bot:
+	Inherits: ra2_soviets_mobileconstructionvehicle
+
+yrpcv.Bot:
+	Inherits: yuri_mobileconstructionvehicle
+
+ra2sqd:
+	Defaults:
+		Filename: ra2_sqd.shp
+	stand:
+		Start: 160
+		Facings: -8
+	idle:
+		Start: 0
+		Length: 20
+		Facings: -8
+		Tick: 160
+	run:
+		Start: 0
+		Length: 20
+		Facings: -8
+		Tick: 80
+	shoot:
+		Start: 168
+		Length: 14
+		Facings: -8
+		Tick: 120
+	grabing:
+		Filename: ra2_sqdg.shp
+		Frames: 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49
+		Length: 10
+		Facings: 8
+		Ticks: 160
+		ZOffset: 1c0
+	grab:
+		Filename: ra2_sqdg.shp
+		Frames: 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 140, 141, 142, 143, 144, 145, 146, 147, 148, 149, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129
+		Length: 10
+		Facings: 8
+		Ticks: 320
+		ZOffset: 1c0
+	icon:
+		Filename: ra2squidicon.shp
+
+ra2lcrf:
+	idle:
+		Filename: ra2_ahvrtransport.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2lcrafticon.shp
+
+ra2sapc:
+	idle:
+		Filename: ra2_shvrtransport.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2sapcicon.shp
+
+yrhovr:
+	idle:
+		Filename: ra2_yhvrtransport.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2horvicon.shp
+
+ra2dest:
+	idle:
+		Filename: ra2_dest.shp
+		Facings: 64
+		Scale: 0.75
+	idle-empty:
+		Filename: ra2_dest.shp
+		Start: 64
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2desticon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2dred:
+	idle:
+		Filename: ra2_dread.shp
+		Facings: 64
+		Scale: 0.75
+	idle-empty:
+		Filename: ra2_dread.shp
+		Start: 64
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2dredicon.shp
+
+ra2dmisl:
+	idle:
+		Filename: ra2_dreadmissile.shp
+		Facings: 64
+		ZOffset: 1023
+		Scale: 0.75
+
+ra2vlad:
+	idle:
+		Filename: ra2_dread.shp
+		Facings: 64
+	icon:
+		Filename: ra2dredicon.shp
+
+ra2carrier:
+	idle:
+		Filename: ra2_carrier.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2carriericon.shp
+
+ra2sub:
+	idle:
+		Filename: ra2_sub.shp
+		Facings: 64
+	icon:
+		Filename: ra2subicon.shp
+
+yrbsubmisl:
+	idle:
+		Filename: ra2_boomer_rocket.shp
+		Facings: 64
+		ZOffset: 1023
+
+ra2dlph:
+	Defaults:
+		Filename: ra2_dlph.shp
+	stand:
+		Start: 48
+		Facings: -8
+	idle:
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 160
+	run:
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 80
+	cheer:
+		Start: 103
+		Length: 12
+		Tick: 120
+	die: # TODO
+		Start: 116
+		Length: 14
+	shoot:
+		Frames: 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102
+		Length: 6
+		Facings: -8
+	icon:
+		Filename: ra2dolphinicon.shp
+
+ra2dtruck:
+	Defaults:
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Scale: 0.5
+	idle:
+		Facings: 64
+	icon:
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_icon.shp
+
+ra2leopard:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_leopard.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+	muzzle-3:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+
+ra2_c_ifv:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_c_ifv.shp
+		Scale: 0.6
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: invisibleitem.shp
+	muzzle:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2_c_hum:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_c_hum.shp
+	idle:
+		Facings: 64
+		Offset: 0,5
+		Scale: 0.8
+	turret:
+		Filename: ra2_c_ifv.shp
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+		Scale: 0.5
+	icon:
+		Filename: invisibleitem.shp
+	muzzle:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2_c_hum2:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_c_hum2.shp
+	idle:
+		Facings: 64
+		Offset: 0,5
+		Scale: 0.8
+	turret:
+		Filename: ra2_c_ifv.shp
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+		Scale: 0.5
+	icon:
+		Filename: invisibleitem.shp
+	muzzle:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2_c_abram:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: ra2_c_abram.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+	muzzle-3:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun_n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun_nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun_w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun_sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun_s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun_se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun_e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun_ne.shp
+				Length: 6
+		Facings: 8
+		Length: 3
+
+####################################################################################################
+#		Red Alert 2 Aircraft
+####################################################################################################
+
+yrschd:
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	critical-idle:
+		Filename: invisibleitem.shp
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_soviets_siegechopper_icon.shp
+
+ra2hind:
+	Inherits: ^RA2MachineGunMuzzle
+	idle:
+		Filename: latinsyndicate_hindtransport_ra2_hind.shp
+		Facings: 64
+		Scale: 0.75
+	rotor:
+		Filename: latinsyndicate_hindtransport_ra2_hind_rotor.shp
+		Length: *
+		Tick: 4
+		Scale: 0.75
+	slow-rotor:
+		Filename: latinsyndicate_hindtransport_ra2_hind_rotor.shp
+		Length: *
+		Tick: 64
+		Scale: 0.75
+	icon:
+		Filename: latinsyndicate_hindtransport_icon.png
+
+ra2asw:
+	idle:
+		Filename: ra2_osprey.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2ospreyicon.shp
+
+ra2hornet:
+	Defaults:
+		Filename: ra2_hornet.shp
+	idle:
+		Facings: 64
+	move:
+		Start: 64
+		Facings: 64
+	move-l:
+		Start: 128
+		Facings: 64
+	move-r:
+		Start: 192
+		Facings: 64
+	icon:
+		Filename: ra2horneticon.shp
+
+yrspyp:
+	idle:
+		Filename: ra2_spyplane.shp
+		Facings: 64
+		Scale: 0.75
+	icon:
+		Filename: ra2_p_spyplaneicon.shp
+
+ra2cplane:
+	idle:
+		Filename: ra2_cplane.shp
+		Facings: 64
+		Scale: 0.75
+
+ra2cplanesov:
+	idle:
+		Filename: ra2_cplanesov.shp
+		Facings: 64
+		Scale: 0.75
+
+yrbpln:
+	idle:
+		Filename: ra2_soviets_migbomber_mig.shp
+		Facings: 64
+	move:
+		Filename: ra2_soviets_migbomber_mig.shp
+		Facings: 64
+	move-l:
+		Filename: ra2_soviets_migbomber_mig.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: ra2_soviets_migbomber_mig.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: ra2_soviets_migbomber_icon.shp
+
+britishicon:
+	Defaults:
+		Filename: britishicon.shp
+	icon:
+	idle:
+
+cubaicon:
+	Defaults:
+		Filename: cubaicon.shp
+	icon:
+	idle:
+
+franceicon:
+	Defaults:
+		Filename: franceicon.shp
+	icon:
+	idle:
+
+gemanyicon:
+	Defaults:
+		Filename: gemanyicon.shp
+	icon:
+	idle:
+
+iraqicon:
+	Defaults:
+		Filename: iraqicon.shp
+	icon:
+	idle:
+
+koreaicon:
+	Defaults:
+		Filename: koreaicon.shp
+	icon:
+	idle:
+
+libyaicon:
+	Defaults:
+		Filename: libyaicon.shp
+	icon:
+	idle:
+
+russiaicon:
+	Defaults:
+		Filename: russiaicon.shp
+	icon:
+	idle:
+
+ukraniaicon:
+	Defaults:
+		Filename: ukraniaicon.shp
+	icon:
+	idle:
+
+usaicon:
+	Defaults:
+		Filename: usaicon.shp
+	icon:
+	idle:
+
+yrstln:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: yrstln.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 363
+	cheer:
+		Start: 364
+	icon:
+		Filename: ra2_allies_gi_icon.shp
+
+ra2car:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_car.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2bus:
+	Defaults:
+		Filename: ra2_bus.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2cop:
+	Defaults:
+		Filename: ra2_cop.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2euroc:
+	Defaults:
+		Filename: ra2_euroc.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2limo:
+	Defaults:
+		Filename: ra2_limo.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2cona:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_cona.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2ptruck:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_ptruck.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2propa:
+	idle:
+		Filename: invisibleitem.shp
+
+ra2stang:
+	Defaults:
+		Filename: ra2_stang.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2suvb:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_suvb.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2suvw:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_suvw.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2taxi:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_taxi.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2trucka:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Scale: 0.5
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2truckb:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_truckb.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2tug:
+	idle:
+		Filename: invisibleitem.shp #Civilian Boat
+
+yrdoly:
+	idle:
+		Filename: invisibleitem.shp
+
+yrjeep:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_jeep.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2tractor:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_tractor.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2flata:
+	idle:
+		Filename: invisibleitem.shp
+
+ra2ambu:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_ambu.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2bcab:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_bcab.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2ycab:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_ycab.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2ddbx:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra2_ddbx.shp
+	idle:
+		Facings: 64
+	icon:
+		Filename: invisibleitem.shp
+
+ra2modfv:
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ra2_allies_ifv_repair_icon.shp
+
+ra2modhtk:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_soviets_flaktrack_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 2
+
+ra2modhtnk:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_soviets_rhinoheavytank_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2modsltnk:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: yuri_lashertank_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2modysref:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_allies_prismtank_icon.shp
+
+ra2modoapoc:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2apocicon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2modmammo:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2apocicon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2modyhtk:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_soviets_flaktrack_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 2
+
+ra2modyhtnk:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2_soviets_rhinoheavytank_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2modvulk:
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: yuri_gatlingtank_icon.shp
+
+ra2modrobo:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2roboticon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ra2atomic:
+	up:
+		Filename: ra2_nkmslup.shp
+	down:
+		Filename: ra2_nkmsldn.shp
+
+ra2doomicon:
+	Defaults:
+		Filename: ra2doomicon.shp
+	idle:
+	icon:
+
+ra2doomskeleton:
+	Inherits: wc_o_skeleton
+	icon:
+		Filename: ra2doomskeletonicon.shp
+		Start: 0
+
+upradshells:
+	icon:
+		Filename: churaniumshellicon.shp
+
+ra2uniontank:
+	Defaults:
+		Filename: UnionTankBody.png
+	idle:
+		Facings: 32
+		Scale: 1
+	turret:
+		Filename: UnionTankTurret.png
+		Facings: 32
+		Scale: 1
+	icon:
+		Filename: ra2apocicon.shp
+	muzzle:
+		Filename: ra2_soviets_apocalypsetank_apmuzzle.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2superapocalypse:
+	Defaults:
+		Filename: superapocalypsebody.png
+	idle:
+		Facings: 32
+		Scale: 1
+	turret:
+		Filename: superapocalypsetur.png
+		Facings: 32
+		Scale: 1
+	icon:
+		Filename: ra2apocicon.shp
+	muzzle:
+		Filename: ra2_soviets_apocalypsetank_apmuzzle.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2katyusha:
+	Inherits: ^RA2GatlingMuzzle
+		Scale: 1
+	Defaults:
+		Filename: ra2katyusha.png
+		Scale: 0.2
+	idle:
+		Scale: 1
+		Facings: 32
+		Offset: 0,4
+	icon:
+		Filename: tkmkatyushaicon.png
+
+ra2shilka:
+	idle:
+		Filename: ra2shilkabody.png
+		Facings: 32
+		Scale: 1
+	turret:
+		Filename: ra2shilkaturret.png
+		Facings: 32
+		Scale: 1
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: tkm_zaza_icon.png
+
+ra2advanceteslatank:
+	Defaults:
+		Filename: ra2advanceteslatankbody.png
+	idle:
+		Filename: ra2advanceteslatankbody.png
+		Facings: 32
+		Scale: 1
+	turret:
+		Filename: ra2advanceteslatanktur.png
+		Facings: -32
+		Scale: 1
+	icon:
+		Filename: ra2_soviets_teslatank_icon.shp
+
+ra2mig:
+	Defaults:
+		Filename: ra2mig.png
+		Scale: 0.15
+	idle:
+		Scale: 1
+		Facings: -32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: tkm_promotion_unlockviper_icon.png
+
+### Soviets Upgrades
+
+ra2caoild:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ra2_ctoild.shp
+		Offset: 0, 0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 64
+	damaged-idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 96
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	make:
+		Filename: ra2_cgoildmake.shp
+		Length: 14
+		ShadowStart: 14
+	bib:
+		Offset: 0,20
+	dead:
+		Start: 1
+	icon:
+		Filename: ra2caoildicon.shp
+		Offset: 0, 0
+
+ra2caairp:
+	Defaults:
+		Filename: ra2_ctairp.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Length: 10
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Start: 10
+		Length: 10
+		Tick: 400
+	idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	dead:
+		Start: 1
+
+ra2corpse:
+	death_a:
+		Filename: ra2_death_a.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_b:
+		Filename: ra2_death_b.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_c:
+		Filename: ra2_death_c.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_d:
+		Filename: ra2_death_d.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_e:
+		Filename: ra2_death_e.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_f:
+		Filename: ra2_death_f.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+
+ra2ctnewy26:
+	Inherits@1: ra2ctchig01
+	Defaults:
+		Filename: ra2_ctchig01.shp
+	idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+	damaged-idle-bunkered:
+		Start: 2
+		ShadowStart: 6
+
+ra2zbomb:
+	idle:
+		Filename: ra2zbomb.shp
+		Facings: 32
+		ZOffset: 1023
+

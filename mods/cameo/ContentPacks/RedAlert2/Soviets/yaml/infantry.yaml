@@ -1,0 +1,594 @@
+ra2_soviets_engineer:
+	Inherits: ra2_allies_engineer
+	Buildable:
+		Prerequisites: ~ra2_soviets_barracks
+		Queue: Infantry, RAInfantry
+	RenderSprites:
+		Image: ra2_allies_engineer
+	Voiced:
+		VoiceSet: SovietEngineer
+
+ra2_soviets_attackdog:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@MC: ^MCImmune
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~ra2_soviets_barracks
+		Description: actor_dog.description
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Attack Dog
+		GenericName: ra1_soviets_attackdog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	DeliversCash:
+		Payload: 100
+	SelectionDecorations:
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armor:
+		Type: None
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	DetectCloaked:
+		Range: 6000
+		RequiresCondition: !disabled
+		DetectionTypes: Cloak, Hijacker
+	Armament:
+		Weapon: DogJaw
+		ReloadingCondition: attack-cooldown
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	Voiced:
+		VoiceSet: RA2DogVoice
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_conscript:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Conscript
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2_soviets_barracks
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Mobile:
+		Speed: 57
+	Health:
+		HP: 13000
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Weapon: RA2M1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2M1CarbineE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2vulcan3
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		FacingTolerance: 0
+	ProductionCostMultiplier@global_conscription_buff:
+		Multiplier: 50
+	ProductionTimeMultiplier@global_conscription_buff:
+		Multiplier: 50
+	FirepowerMultiplier@global_conscription_buff:
+		Modifier: 120
+	SpeedMultiplier@global_conscription_buff:
+		Modifier: 120
+	DamageMultiplier@global_conscription_buff:
+		Modifier: 80
+	ReloadDelayMultiplier@global_conscription_buff:
+		Modifier: 80
+	ChangesHealth@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Step: 20
+	DamageMultiplier@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Modifier: 50
+	SpeedMultiplier@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+		Modifier: 110
+	RangeMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 130
+	FirepowerMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 130
+	SpeedMultiplier@ra2_soviets_doctrine_shocktroopertraining:
+		Modifier: 130
+	Voiced:
+		VoiceSet: ConscriptVoice
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_flaktrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Flak Trooper
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2_soviets_barracks
+		Queue: Infantry, RAInfantry
+		Description: actor_flakt.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2CRFlakGuyGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYAA:
+		Name: primary
+		Weapon: RA2FLAKAA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2CRFlakGuyGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDAA:
+		Name: garrisoned
+		Weapon: RA2FLAKAA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYE:
+		Name: primary
+		Weapon: RA2CRFlakGuyGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@PRIMARYAAE:
+		Name: primary
+		Weapon: RA2FLAKAA_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: RA2CRFlakGuyGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDAAE:
+		Name: garrisoned
+		Weapon: RA2FLAKAA_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: FlakTrooperVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-flak
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining, ra2_soviets_upgrade_heavycannons
+
+ra2_soviets_crazyivan:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Crazy Ivan
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Infantry, RAInfantry
+		Description: actor_ivan.description
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	AutoTarget:
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: CrazyIvanVoice
+	Armament:
+		Weapon: IvanAttach
+		Cursor: c4
+	Armament@aa:
+		Weapon: IvanAttachAir
+		Cursor: c4
+	FireWarheadsOnDeath:
+		Weapon: IvanBomb
+		EmptyWeapon: IvanBomb
+		RequiresCondition: !disabled
+	DeliversCash:
+		Payload: 300
+	Captures:
+		CaptureTypes: bombcar
+		PlayerExperience: 50
+		ConsumedByCapture: True
+		EnterCursor: c4
+	GrantExternalConditionToTransport:
+		Condition: ifv-demo
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_teslatrooper:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+	AutoTargetPriority@DEFAULT:
+		InvalidTargets: NoAutoTarget, TeslaCoil
+	AutoTargetPriority@ATTACKANYTHING:
+		InvalidTargets: NoAutoTarget, TeslaCoil
+	AutoTargetPriority@TESLANORMAL:
+		RequiresCondition: !assault-move && !attack-move
+		ValidTargets: TeslaCoil
+		Priority: 90
+	AutoTargetPriority@TESLAAMOVE:
+		RequiresCondition: assault-move || attack-move
+		ValidTargets: TeslaCoil
+		ValidRelationships: Enemy
+		Priority: 90
+	Buildable:
+		Prerequisites: ~ra2_soviets_radar
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Description: actor_shk.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Tesla Trooper
+	Health:
+		HP: 48000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Mobile:
+		Voice: Move
+		Speed: 38
+	Armament@PRIMARY:
+		Weapon: RA2PortaTesla
+		LocalOffset: 427,0,341
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@PRIMARY2:
+		Weapon: RA2PortaTesla2
+		LocalOffset: 427,0,341
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@PRIMARY3:
+		Weapon: RA2PortaTesla3
+		LocalOffset: 427,0,341
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@TeslaCoilCharge:
+		Weapon: RA2TeslaCoilCharge
+		Cursor: ability
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 427,0,341
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2PortaTesla
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: RA2PortaTesla2
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@GARRISONED3:
+		Name: garrisoned
+		Weapon: RA2PortaTesla3
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	TakeCover:
+		ProneOffset: 227,0,-245
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Voiced:
+		VoiceSet: RA2TeslaTrooperVoice
+	DeliversCash:
+		Payload: 250
+	Selectable:
+		Class: ra2_soviets_teslatrooper
+	GrantConditionOnPrerequisite@EMPTesla:
+		Condition: emptesla
+		Prerequisites: upemptesla
+	ActorStatValues:
+		Upgrades: upemptesla, uparctesla
+	GrantExternalConditionToTransport:
+		Condition: ifv-tesla
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining, ra2_soviets_upgrade_teslaoverload
+
+ra2_soviets_desolator:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Desolator
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2_soviets_barracks, ra2_soviets_battlelab
+		Queue: Infantry, RAInfantry
+		Description: actor_deso.description
+	Mobile:
+		Speed: 59
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: RA2RadBeamWeapon
+		LocalOffset: 256,43,341
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2RadBeamWeaponE
+		LocalOffset: 256,43,341
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2RadBeamWeapon
+		LocalOffset: 256,43,341
+	PeriodicExplosion:
+		Weapon: RA2RadEruptionWeapon
+		RequiresCondition: deployed
+		InitialDelay: 10
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		PauseOnCondition: disabled
+		RequiresCondition: !parachute
+		DeployType: Desolate
+		ExclusiveDeploy: true
+		SmartDeploy: true
+		Voice: Deploy
+	AttackFrontal:
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithInfantryBody@deployed:
+		StandSequences: deployed
+		DefaultAttackSequence: deployed-fire
+		RequiresCondition: deployed
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	Voiced:
+		VoiceSet: RA2DesolatorVoice
+	DeliversCash:
+		Payload: 300
+	-DamagedByTintedCells@rad:
+	GrantExternalConditionToTransport:
+		Condition: ifv-chem
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+ra2_soviets_boris:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2_soviets_barracks, ra2_soviets_battlelab
+		BuildLimit: 1
+		Description: actor_boris.description
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Boris
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Mobile:
+		Speed: 60
+	Passenger:
+	Armament@PRIMARY:
+		Weapon: BorisAKM
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: BorisAKME
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@AntiBuilding:
+		Weapon: BorisAKM2
+		LocalOffset: 128,0,256
+		RequiresCondition: !canflare
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: MigTarget
+		LocalOffset: 32,0,256
+		RequiresCondition: canflare
+		Voice: AirStrike
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BorisAKM
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BorisAKME
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		StandSequences: stand
+	WithInfantryBody:
+		AttackSequences:
+			secondary: secondary-fire
+	Voiced:
+		VoiceSet: BorisVoice
+	AirstrikeMasterCA@1:
+		ArmamentNames: secondary
+		Actors: yrbpln, yrbpln, yrbpln
+		SquadSize: 3
+		InitialActorCount: -1
+		SpawnDistance: 60c0
+		RespawnTicks: 10
+		RearmTicks: 10
+		SlaveAvailableCondition: canflare
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+		MarkSound: Action
+	KeepsDistance:
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining
+
+##############################################
+#   Red Alert 2 Yuri Infantry
+##############################################

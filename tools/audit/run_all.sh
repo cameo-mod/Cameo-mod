@@ -23,11 +23,25 @@ failed=0
 for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
          metadata outliers orphans assets fluent power_budget stat_formulas \
          weapon_uniqueness garrison_weapons asset_files promotion_gating min_range \
-         basebuilder_crates buildable_order display_text rename_safety; do
+         basebuilder_crates buildable_order display_text rename_safety \
+         elite_naming missing_elite elite_gating rank_decoration \
+         dune_rank_decoration effect_warhead_names weapon_suffixes \
+         balance_sheet consistency_report; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1
   [ -s "$OUT/$a.err" ] || rm -f "$OUT/$a.err"
+done
+
+# Audits that live in tools/ rather than tools/audit/
+for a in createeffect_image:tools/audit_createeffect_image.py \
+         ce_image_usage:tools/audit_ce_image_usage.py; do
+  name="${a%%:*}"
+  script="${a##*:}"
+  echo "== $name"
+  "$PYTHON" "$script" "$@" > "$OUT/$name.md" 2> "$OUT/$name.err" \
+    || failed=1
+  [ -s "$OUT/$name.err" ] || rm -f "$OUT/$name.err"
 done
 
 echo "== gen_damage_matrix"

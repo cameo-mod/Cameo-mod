@@ -1,0 +1,239 @@
+POWR:
+	Inherits: ^BaseBuilding
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~rafact
+		Description: actor_nuke.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Power Plant
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 125000 #40000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	Power:
+		Amount: 150
+	ScalePowerWithHealth:
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+APWR:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	HitShape:
+		TargetableOffsets: -355,-1024,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 110
+		Prerequisites: ~rafact, anyrahq
+		Description: actor_nuk2.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Advanced Power Plant
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	SelectionDecorations:
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: 300
+	ScalePowerWithHealth:
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: powr
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+KENN:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@shape: ^1x1Shape
+	Inherits@ra1_soviets_barracks: ^IsDogKennel
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 175
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_barracks, ~disabled
+		Description: Trains Attack Dogs.
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Kennel
+	-GivesBuildableArea:
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: kenn
+	WithBuildingBib:
+		HasMinibib: true
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RASILO:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^1x1Shape
+	Inherits@storage: ^StoresResources
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 10
+		Prerequisites: ~rafact, raproc
+		Description: template_silo.description
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Ore Silo
+	-GivesBuildableArea:
+	-MustBeDestroyed:
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+		HasMinibib: true
+	Power:
+		Amount: -10
+	FireWarheadsOnDeath:
+		Weapon: BuildingExplode
+		EmptyWeapon: BuildingExplode
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
+		FullSequence: pip-yellow
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RA1SYRD:
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Inherits@ReinforcedStructures: ^ReinforcedStructures
+	Tooltip:
+		Name: Allied Naval Yard
+	Buildable:
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedorerefinery, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RA1JSYRD:
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Naval Yard
+	Buildable:
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		Image: ra1jsyrd
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RASPEN:
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Soviet Sub Pen
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery, ~globalnaval
+		Queue: Building, RABuilding
+		Description: template_shipyard.description
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+

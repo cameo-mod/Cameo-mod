@@ -30,21 +30,21 @@ from report import h1, h2, table
 # internal faction id -> (game prefix or "", faction slug)  per §9.1/§9.2.
 # Game prefix ONLY where the faction name actually collides across games.
 FACTION_SLUG = {
-    "gdi": ("td", "gdi"), "nod": ("td", "nod"),
-    "tsgdi": ("ts", "gdi"), "tsnod": ("ts", "nod"),
+    "td_gdi": ("td", "td_gdi"), "td_nod": ("td", "td_nod"),
+    "ts_gdi": ("ts", "ts_gdi"), "ts_nod": ("ts", "ts_nod"),
     "cabal": ("", "cabal"), "forgotten": ("", "forgotten"),
-    "allies": ("ra1", "allies"), "soviet": ("ra1", "soviet"),
+    "ra1_allies": ("ra1", "ra1_allies"), "ra1_soviets": ("ra1", "ra1_soviets"),
     "modjapan": ("", "japan"),
-    "ra2america": ("ra2", "allies"), "ra2russia": ("ra2", "soviet"),
+    "ra2_allies": ("ra2", "ra2_allies"), "ra2_soviets": ("ra2", "ra2_soviets"),
     "yuri": ("", "yuri"),
-    "asianalliance": ("", "asian_alliance"), "consortium": ("", "steel_consortium"),
-    "syndicate": ("", "latin_syndicate"), "naxis": ("", "naxis"),
-    "lnaxis": ("", "schwarzer_mond"), "futuretech": ("", "futuretech"),
+    "asianalliance": ("", "asianalliance"), "steelconsortium": ("", "steelconsortium"),
+    "latinsyndicate": ("", "latinsyndicate"), "naxis": ("", "naxis"),
+    "schwarzermond": ("", "schwarzermond"), "futuretech": ("", "futuretech"),
     "tkm": ("", "tkm"),
     "atreides": ("", "atreides"), "harkonnen": ("", "harkonnen"),
     "ordos": ("", "ordos"), "ixian": ("", "ixian"),
     "terran": ("", "terran"), "zerg": ("", "zerg"), "protoss": ("", "protoss"),
-    "human2": ("", "humans"), "orc2": ("", "orcs"),
+    "human2": ("", "wc2_humans"), "orc2": ("", "wc2_orcs"),
     "plymouthl": ("", "plymouth"), "edenl": ("", "eden"),
 }
 VALID_ID = re.compile(r"^[a-z0-9_]+$")

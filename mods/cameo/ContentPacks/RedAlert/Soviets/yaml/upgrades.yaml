@@ -1,0 +1,470 @@
+ra1_soviets_doctrine_conscription:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Conscription Doctrine
+	Buildable:
+		Description: ra_doctrine_conscription.description
+		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1, !global_conscription_buff
+	RenderSprites:
+		Image: ra1_soviets_doctrine_conscription
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+	ProvidesPrerequisite@global_conscription_buff:
+		Prerequisite: global_conscription_buff
+
+ra1_soviets_doctrine_industrialefficiency:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Industrial Efficiency Doctrine
+	Buildable:
+		Description: ra_doctrine_industrialefficiency.description
+		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1
+	RenderSprites:
+		Image: ra1_soviets_doctrine_industrialefficiency
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+
+ra1_soviets_doctrine_inferno:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Inferno Doctrine
+	Buildable:
+		Description: ra_doctrine_inferno.description
+		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1
+	RenderSprites:
+		Image: ra1_soviets_doctrine_inferno
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+
+ra1_soviets_doctrine_teslaandexperimentaltech:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Tesla and Experimental Tech Doctrine
+	Buildable:
+		Description: ra_doctrine_teslatech.description
+		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra1_soviets_doctrine_teslaandexperimentaltech
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra1_soviets_doctrine_heavyarmor:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Heavy Armor Doctrine
+	Buildable:
+		Description: ra_doctrine_heavyarmor.description
+		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra1_soviets_doctrine_heavyarmor
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra1_soviets_doctrine_nuclearwar:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Nuclear War Doctrine
+	Buildable:
+		Description: ra_doctrine_nuclearwar.description
+		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra1_soviets_doctrine_nuclearwar
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra1_soviets_upgrade_hazmatsuits:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Hazmat Suits
+	Buildable:
+		Description: ra_upgrade_hazmatsuits.description
+		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_upgrade_hazmatsuits
+	RenderSprites:
+		Image: ra1_soviets_upgrade_hazmatsuits
+
+ra1_soviets_upgrade_vengeance:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Vengeance
+	Buildable:
+		Description: ra_upgrade_vengeance.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_vengeance
+	RenderSprites:
+		Image: ra1_soviets_upgrade_vengeance
+
+ra1_soviets_upgrade_menofsteel:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Men Of Steel
+	Buildable:
+		Description: ra_upgrade_menofsteel.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_menofsteel
+	RenderSprites:
+		Image: ra1_soviets_upgrade_menofsteel
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_menofsteel_proxy_actor
+
+ra1_soviets_upgrade_massproduction:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Mass Production
+	Buildable:
+		Description: ra_upgrade_massproduction.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_industrialefficiency, !ra1_soviets_upgrade_massproduction
+	RenderSprites:
+		Image: ra1_soviets_upgrade_massproduction
+
+ra1_soviets_upgrade_wareconomy:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: War Economy
+	Buildable:
+		Description: ra_upgrade_wareconomy.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_industrialefficiency, !ra1_soviets_upgrade_wareconomy
+	RenderSprites:
+		Image: ra1_soviets_upgrade_wareconomy
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_wareconomy_proxy_actor
+
+ra1_soviets_upgrade_incendiarybullets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Incendiary Bullets
+	Buildable:
+		Description: ra_upgrade_incendiarybullets.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_incendiarybullets
+	RenderSprites:
+		Image: ra1_soviets_upgrade_incendiarybullets
+
+ra1_soviets_upgrade_scorchedearth:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Scorched Earth
+	Buildable:
+		Description: ra_upgrade_scorchedearth.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_scorchedearth
+	RenderSprites:
+		Image: ra1_soviets_upgrade_scorchedearth
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_scorchedearth_proxy_actor
+
+ra1_soviets_upgrade_teslaarcing:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Tesla Arcing
+	Buildable:
+		Description: ra_upgrade_teslaarcing.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_teslaarcing
+	RenderSprites:
+		Image: ra1_soviets_upgrade_teslaarcing
+
+ra1_soviets_upgrade_teslarockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Tesla Rockets
+	Buildable:
+		Description: ra_upgrade_teslarockets.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_teslarockets
+	RenderSprites:
+		Image: ra1_soviets_upgrade_teslarockets
+
+ra1_soviets_upgrade_reactoroverload:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Reactor Overload
+	Buildable:
+		Description: ra_upgrade_reactoroverload.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_reactoroverload
+	RenderSprites:
+		Image: ra1_soviets_upgrade_reactoroverload
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_reactoroverload_proxy_actor
+
+ra1_soviets_upgrade_autoloaders:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Autoloaders
+	Buildable:
+		Description: ra_upgrade_autoloaders.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_autoloaders
+	RenderSprites:
+		Image: ra1_soviets_upgrade_autoloaders
+
+ra1_soviets_upgrade_highexplosiverockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: High Explosive Rockets
+	Buildable:
+		Description: ra_upgrade_highexplosiverockets.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_highexplosiverockets
+	RenderSprites:
+		Image: ra1_soviets_upgrade_highexplosiverockets
+
+ra1_soviets_upgrade_stalinium:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Stalinium
+	Buildable:
+		Description: ra_upgrade_stalinium.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_stalinium
+	RenderSprites:
+		Image: ra1_soviets_upgrade_stalinium
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_stalinium_proxy_actor
+
+ra1_soviets_upgrade_unstableisotopes:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Unstable Isotopes
+	Buildable:
+		Description: ra_upgrade_unstableisotopes.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_unstableisotopes
+	RenderSprites:
+		Image: ra1_soviets_upgrade_unstableisotopes
+
+ra1_soviets_upgrade_thermonuclearrockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Thermonuclear Rockets
+	Buildable:
+		Description: ra_upgrade_nuclearrockets.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_thermonuclearrockets
+	RenderSprites:
+		Image: ra1_soviets_upgrade_thermonuclearrockets
+
+ra1_soviets_upgrade_nucleartankshells:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Nuclear Tank Shells
+	Buildable:
+		Description: ra_upgrade_nuclearshells.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_nucleartankshells
+	RenderSprites:
+		Image: ra1_soviets_upgrade_nucleartankshells
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_nuclearshells_proxy_actor
+
+ra1_soviets_upgrade_afterburners:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Afterburners
+	Buildable:
+		Description: ra_upgrade_afterburners.description
+		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_upgrade_afterburners
+	RenderSprites:
+		Image: ra1_soviets_upgrade_afterburners
+
+ra1_soviets_upgrade_hammertank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Hammer Tank Upgrade
+	Buildable:
+		Description: Upgrades the Heavy Tank to the Hammer Tank
+		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_upgrade_hammertank
+	RenderSprites:
+		Image: ra1_soviets_hammertank
+
+ra1_soviets_upgrade_heavyteslatank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Heavy Tesla Tank Upgrade
+	Buildable:
+		Description: Upgrades the Hammer Tank to the Heavy Tesla Tank
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_hammertank, !ra1_soviets_upgrade_heavyteslatank
+	RenderSprites:
+		Image: ra1_soviets_heavyteslatank
+
+ra1_soviets_upgrade_shtoradefensesystem:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Shtora Defense System Upgrade
+	Buildable:
+		Description: ra_upgrade_shtoradefensesystem.description
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_hammertank, !ra1_soviets_upgrade_shtoradefensesystem
+	RenderSprites:
+		Image: ra1_soviets_upgrade_shtoradefensesystem
+
+ra1_soviets_upgrade_kotinnucleartank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Kotin Nuclear Tank Upgrade
+	Buildable:
+		Description: Upgrades the Hammer Tank to the Kotin Nuclear Tank
+		Prerequisites: ~ra1_soviets_techcenter, ~ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_hammertank, !ra1_soviets_upgrade_kotinnucleartank
+	RenderSprites:
+		Image: ra1_soviets_kotinnucleartank
+
+ra1_soviets_upgrade_unlockcommissar:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Commissar
+	Buildable:
+		Description: Unlocks the Soviet Commissar
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_unlockcommissar
+	RenderSprites:
+		Image: ra1_soviets_commissar
+
+ra1_soviets_upgrade_unlockheatraytank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Heatray Tank
+	Buildable:
+		Description: Unlocks the Heatray Tank
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_unlockheatraytank
+	RenderSprites:
+		Image: ra1_soviets_heatraytank
+
+ra1_soviets_upgrade_unlockteslayak:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Tesla Yak
+	Buildable:
+		Description: Upgrades the Yak into the Tesla Yak.
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_unlockteslayak
+	RenderSprites:
+		Image: ra1_soviets_teslayak
+
+ra1_soviets_upgrade_unlockarmoredyak:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Armored Yak
+	Buildable:
+		Description: Upgrades the Yak into the Armored Yak.
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_unlockarmoredyak
+	RenderSprites:
+		Image: ra1_soviets_armoredyak
+
+ra1_soviets_upgrade_unlocknuclearyak:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Nuclear Yak
+	Buildable:
+		Description: Upgrades the Yak into the Nuclear Yak.
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_unlocknuclearyak
+	RenderSprites:
+		Image: ra1_soviets_nuclearyak
+
+#############################
+
+# ra1_soviets_doctrine_conscription:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Conscription
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade_conscription.description
+# 		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_doctrine_conscription
+# 	RenderSprites:
+# 		Image: conscriptionicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_upgrade_unstableisotopes:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Nuclear Engines
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade_nuclearengines.description
+# 		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_upgrade_unstableisotopes
+# 	RenderSprites:
+# 		Image: nuclearenginesicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_upgrade_highexplosiverockets:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Rocket Enhancements
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade_rocketenhancements.description
+# 		Prerequisites: ~ra1_soviets_radardome, !ra1_soviets_upgrade_highexplosiverockets
+# 	RenderSprites:
+# 		Image: rocketenhancementsicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_upgrade_autoloaders:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Soviet Auto Loaders
+# 	Valued:
+# 		Cost: 7500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade_sovietautoloaders.description
+# 		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_upgrade_autoloaders
+# 	RenderSprites:
+# 		Image: sovietautoloadersicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_doctrine_teslaandexperimentaltech:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Experimental Tesla Weaponry
+# 	Valued:
+# 		Cost: 7500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade_experimentalteslaweaponry.description
+# 		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_doctrine_teslaandexperimentaltech
+# 	RenderSprites:
+# 		Image: experimentalteslaweaponsicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_doctrine_inferno:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Advanced Thermobarics
+# 	Valued:
+# 		Cost: 10000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade_advancedthermobarics.description
+# 		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_doctrine_inferno
+# 	RenderSprites:
+# 		Image: advancedthermobaricsicon
+# 	ProvidesPrerequisite:
+
+# ra1_soviets_upgrade_stalinium:
+# 	Inherits: ^upgrade.template
+# 	Tooltip:
+# 		Name: Soviet Steel "Stalinium"
+# 	Valued:
+# 		Cost: 12500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade_sovietsteel.description
+# 		Prerequisites: ~ra1_soviets_techcenter, !ra1_soviets_upgrade_stalinium
+# 	RenderSprites:
+# 		Image: staliniumsteelicon
+# 	#ProvidesPrerequisite:
+# 	ProvidesTeamProxyActor:
+# 		Actor: team_upgrade.ra_upgrade_stalinium
+
+# team_upgrade.ra_upgrade_stalinium:
+# 	Inherits: ^researched_upgrade.template
+# 	ProvidesPrerequisite:
+# 		Prerequisite: ra1_soviets_upgrade_stalinium
+# 	RenderSprites:
+# 		Image: staliniumsteelicon
+# 	Tooltip:
+# 		Name: Soviet Steel
+# 	Buildable:
+# 		Description: upgrade_sovietsteel.description
+# 	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Soviets
+	####################################################################################################

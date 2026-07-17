@@ -1,0 +1,720 @@
+CryoLightSniper:
+	Inherits: LightSniper
+	Inherits: ^CryoMissileProjectile
+	Projectile: Bullet
+		TrailImage: blue_smokey
+		TrailInterval: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColor: 33221100
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		ContrailLength: 10
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -30000
+
+M60mg:
+	Inherits: ^SmallArms
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 10
+	Burst: 4
+	BurstDelays: 5
+	Range: 4359
+	Report: pillbox1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+RATurretGun:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	ReloadDelay: 40
+	Range: 7685
+	Report: turret1.aud
+	Projectile: Bullet
+		Speed: 768
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+
+zsu_23:
+	Inherits: ^FlakWeapon
+	ReloadDelay: 14
+	Burst: 2
+	BurstDelays: 2
+	Range: 11412
+	ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+
+Hellfire:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyMissile
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 16
+	Range: 6540
+	MinRange: 1308
+	Report: missile6.aud
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+
+HellfireCryo:
+	Inherits: Hellfire
+	Inherits: ^CryoMissileProjectile
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -16000
+		Range: 400
+
+ChainGunMH60:
+	Inherits: ^SmallArms
+	Inherits: ^Grenade
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 6
+	Range: 3375
+	Report: gun13.aud
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+AlliedTankDestroyerCannon:
+	Inherits: ^MediumCannon
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 60
+	Range: 6819
+	Report: tank5.aud
+	Projectile: Bullet
+		Speed: 1362
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 12000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 6
+
+SheridanCannon:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	ReloadDelay: 64
+	Range: 5023
+	Report: cannon2.aud
+	Projectile: Bullet
+		Speed: 502
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 8000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+
+SheridanMissiles:
+	Inherits: ^MediumMissile
+	Inherits: ^LightMissile
+	ReloadDelay: 64
+	Range: 5023
+	ValidTargets: Ground, Water, Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+
+SheridanMissilesCryo:
+	Inherits: SheridanMissiles
+	Inherits: ^CryoMissileProjectile
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -48000
+		Range: 300
+
+SheridanVulcan:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 58
+	Range: 5023
+	Burst: 4
+	BurstDelays: 2
+	Report: gun13.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+RapierBombs:
+	Inherits: ^HeavyBomb
+	ReloadDelay: 60
+	Range: 2000
+	Burst: 4
+	BurstDelays: 2
+	Report: flamer2.aud
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 125, 0, -50
+		Acceleration: 0, 0, -10
+		Image: BOMBLET
+		Shadow: True
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship
+		Damage: 10000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship
+		Damage: 5
+
+RapierBombsCryo:
+	Inherits: RapierBombs
+	Inherits: ^CryoMissileProjectile
+	Projectile: GravityBomb
+	Warhead@Effect: CreateEffect
+		Explosions: cryo_artillery
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -10000
+		Range: 2500
+		ValidRelationships: Neutral, Enemy
+
+Aphid:
+	Inherits: ^ShrapnelWeapon
+	Inherits@glow: ^ImpactGlow
+	Inherits: ^HeavyMissile
+	ReloadDelay: 62
+	Range: 7000
+	Burst: 2
+	BurstDelays: 4
+	Report: missile7.aud
+	Projectile: Missile
+		Speed: 600
+		Acceleration: 10
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		ContrailLength: 6
+		ContrailStartColor: 996633
+		TrailInterval: 1
+		TrailDelay: 1
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_building
+		ImpactSounds: xplobig4.aud
+
+AphidCryo:
+	Inherits: Aphid
+	Inherits: ^CryoMissileProjectile
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -16000
+		Range: 400
+
+ReconRangerRecoillessGun:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^RailgunWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^D2KRocket
+	ReloadDelay: 64
+	Range: 4925
+	Report: missile6.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Acceleration: 6
+		Speed: 666
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+	# Projectile: Bullet
+	# 	Image: d2k_RPG
+	# 	Palette: d2keffect
+	# 	TrailImage: bazooka_trail2
+	# 	TrailPalette: effect75alpha
+	# 	TrailDelay: 0
+	# 	TrailInterval: 1
+	# 	Blockable: false
+	# 	Inaccuracy: 0
+	# 	InaccuracyType: PerCellIncrement
+	# 	ContrailStartColor: FF9933
+	# 	ContrailEndColor: FFFFFF
+	# 	ContrailEndColorUsePlayerColor: true
+	# 	ContrailWidth: 320
+	# 	ContrailLength: 32
+	# 	Speed: 1350
+	# 	Width: 135
+	# 	-LaunchAngle:
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: xplos.aud
+
+CryoReconRangerRecoillessGun:
+	Inherits: ReconRangerRecoillessGun
+	Inherits: ^CryoMissileProjectile
+	Projectile: Bullet
+		TrailImage: blue_smokey
+		TrailInterval: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColor: 33221100
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		ContrailLength: 10
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -32000
+
+APTusk:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^Grenade
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	ReloadDelay: 51
+	Burst: 4
+	Burstdelays: 3
+	Range: 5038
+	Report: missile6.aud
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+
+APTuskCryo:
+	Inherits: APTusk
+	Inherits: ^CryoMissileProjectile
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -16000
+		Range: 300
+
+ChronoTusk:
+	Inherits: ^Grenade
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ReloadDelay: 54
+	Burst: 4
+	Burstdelays: 3
+	Range: 6102
+	Report: missile6.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+
+ChronoTuskCryo:
+	Inherits: ChronoTusk
+	Inherits: ^CryoMissileProjectile
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -20000
+		Range: 400
+
+155mmCryo:
+	Inherits: 155mm
+	Inherits: ^CryoMissileProjectile
+	Projectile: Bullet
+		ContrailStartWidth: 125
+		ContrailLength: 50
+		ContrailEndWidth: 5
+		ContrailEndColor: 12345678
+	Warhead@Effect: CreateEffect
+		Explosions: cryo_artillery
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -30000
+		Range: 600
+
+155mmBastion:
+	Inherits: 155mm
+	Range: 10185
+	MinRange: 2037
+
+155mmBastionCryo:
+	Inherits: 155mmCryo
+	Range: 10185
+	MinRange: 2037
+
+25mm:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	ReloadDelay: 37
+	Range: 4720
+	Report: cannon2.aud
+	Projectile: Bullet
+		Speed: 472
+		Image: 50CAL
+		-LaunchAngle:
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@Effect: CreateEffect
+		ImpactSounds: xplos.aud
+
+90mm:
+	Inherits: ^MediumCannon
+	ReloadDelay: 47
+	Range: 5159
+	Report: cannon1.aud
+	Projectile: Bullet
+		Speed: 515
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+
+Repair:
+	Inherits: ^RepairWeapon
+	ReloadDelay: 75
+	Range: 5000
+	Report: fixit1.aud
+	Projectile: InstantExplode
+	Warhead@RepairWeapon: SpreadDamage
+		Spread: 1000
+		Damage: -2000
+	Warhead@ExtraRepair: SpreadDamage
+		Spread: 500
+		Damage: -1000
+	Warhead@RepairWeaponPercentage: HealthPercentageDamage
+		Spread: 5000
+		Damage: -1
+	Warhead@Defuse1: DetachDelayedWeapon
+		Range: 5000
+	Warhead@Defuse2: DetachDelayedWeapon
+		Range: 5000
+	Warhead@Defuse3: DetachDelayedWeapon
+		Range: 5000
+
+SilencedPPK:
+	Inherits: ^SnipeWeapon
+	Report: ramgun2.aud
+	Warhead@1Dam: SpreadDamage
+		Spread: 128
+	Warhead@2Eff: CreateEffect
+		Explosions: piffs
+		ValidTargets: Ground, Ship, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: water_piffs
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+
+Colt45:
+	Inherits: ^SniperWeapon
+	Report: ragun5.aud
+	ReloadDelay: 7
+	Range: 7777
+	Burst: 2
+	BurstDelays: 0
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 7777
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 7777
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+
+HeavyAATankCannonAG:
+	Inherits: ^LightMissile
+	Inherits: ^FlakWeapon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 10
+	Range: 4746
+	Report: gun13.aud
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+HeavyAATankCannonAA:
+	Inherits: HeavyAATankCannonAG
+	Range: 7119
+	ValidTargets: Air
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+RadarJammer:
+	ReloadDelay: 150
+	Report: jammed.aud
+	Range: 10000
+	Projectile: InstantHit
+	Warhead@1Dum: Dummy
+	Warhead@2Spawn: SpawnActor
+		Actors: jamming.field
+		Range: 1
+		ForceGround: false
+		ValidTargets: Ground, Water
+		ImpactActors: false

@@ -90,6 +90,11 @@ def validate_prereq_order(prereqs: str, producers: set[str]) -> list[str]:
 def tech_tier(actor_resolved, producers: set[str]) -> int:
     """Infer tech tier from prerequisites.
 
+    NOTE: This is a simplified 3-level model for build-palette ordering only.
+    audit_stat_formulas.py uses a 5+ level data-driven tier model
+    (TierContext) for defense/promotion gating checks. Do not assume
+    the tier numbers are interchangeable between the two audits.
+
     Tier 1: only production building(s) required.
     Tier 2: at least one tech building required.
     Tier 3: at least one promotion/doctrine/upgrade required.

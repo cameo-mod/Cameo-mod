@@ -1,0 +1,5506 @@
+Player:
+	ProvidesPrerequisite@anyallies:
+		Prerequisite: anyallies
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+	ProvidesPrerequisite@forcefactionAllies:
+		Prerequisite: CountryChoosedAlliesRA2
+		Factions: ra2_allies #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+	ProvidesPrerequisite@anysoviets:
+		Prerequisite: anysoviets
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+	ProvidesPrerequisite@forcefactionSoviet:
+		Prerequisite: CountryChoosedSovietRA2
+		Factions: ra2_soviets #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+	ProvidesPrerequisite@ra2allies:
+		Prerequisite: ra2allies
+		Factions: ra2_allies
+	ProvidesPrerequisite@RA2French:
+		Prerequisite: RA2French
+		Factions: ra2french
+	ProvidesPrerequisite@RA2German:
+		Prerequisite: RA2German
+		Factions: ra2german
+	ProvidesPrerequisite@RA2British:
+		Prerequisite: RA2British
+		Factions: ra2british
+	ProvidesPrerequisite@RA2Korea:
+		Prerequisite: RA2Korea
+		Factions: ra2korea, ra2koreaaddon
+	ProvidesPrerequisite@RA2KoreaAddon:
+		Prerequisite: RA2KoreaAddon
+		Factions: ra2koreaaddon
+	ProvidesPrerequisite@RA2DOOM:
+		Prerequisite: RA2DOOM
+		Factions: ra2doom
+	ProvidesPrerequisite@ra2soviets:
+		Prerequisite: ra2soviets
+		Factions: ra2_soviets
+	ProvidesPrerequisite@RA2Cuba:
+		Prerequisite: RA2Cuba
+		Factions: ra2cuba, ra2cubaaddon
+	ProvidesPrerequisite@RA2CubaAddon:
+		Prerequisite: RA2CubaAddon
+		Factions: ra2cubaaddon
+	ProvidesPrerequisite@RA2Libyan:
+		Prerequisite: RA2Libyan
+		Factions: ra2libyan
+	ProvidesPrerequisite@RA2Iraq:
+		Prerequisite: RA2Iraq
+		Factions: ra2iraq, ra2iraqaddon
+	ProvidesPrerequisite@RA2Psicorps:
+		Prerequisite: RA2Psicorps
+		Factions: ra2psicorps
+	ProvidesPrerequisite@RA2IraqAddon:
+		Prerequisite: RA2IraqAddon
+		Factions: ra2iraqaddon
+
+#######################################
+# RA2 Defaults
+#######################################
+
+RA2Flameguy:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Mobile:
+		Speed: 71
+		Locomotor: foot
+	HiddenUnderFog:
+	RenderSprites:
+		Palette: ra2effect
+	WithInfantryBody:
+		IdleSequences: run
+	Health:
+		HP: 160
+	ChangesHealth:
+		Step: -10
+		StartIfBelow: 101
+	ScaredyCat:
+		PanicSequencePrefix:
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: false
+	HitShape:
+
+OILB.RA2:
+	Inherits: ^RA2Building
+	Inherits@cashtrickler: ^CashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^2x2Shape
+	Inherits@Bot: ^BotMicromanageable
+	Tooltip:
+		Name: RA2 Oil Derrick
+	Buildable:
+		Prerequisites: ~ra2oilderrick, ra2tek, derricklimit
+		Description: actor_oilb.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	WithIdleOverlay@idle-pump:
+		Sequence: idle-pump
+		PauseOnCondition: lowpower
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		Image: ra2caoild
+		PlayerPalette: playerra2
+	-WithDeathAnimation:
+
+ra2gacnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Allied Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: ra2_allies_alliedconstructionyard
+	RenderSprites:
+		Image: ra2_allies_alliedconstructionyard
+
+dummy_dock:
+	Interactable:
+	Reservable:
+	GrantCondition:
+		Condition: dontmove
+	Mobile:
+		Speed: 1
+		Locomotor: wheeled
+		PauseOnCondition: dontmove
+	Exit@1:
+	RejectsOrders:
+
+ra2gayard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Allied Naval Yard
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@crane:
+		Sequence: idle-crane
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+
+futuretech_concretebarrier:
+	Inherits: BRIK
+	RenderSprites:
+		Image: BRIK
+	Buildable:
+		Prerequisites: ~ra2fact
+	-MapEditorData:
+
+ra2nacnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Soviet Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: ra2_soviets_constructionyard
+	RenderSprites:
+		Image: ra2_soviets_constructionyard
+
+ra2nayard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Soviet Shipyard
+	Buildable:
+		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_orerefinery, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@crane:
+		Sequence: idle-crane
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+
+##############################################
+#   Red Alert 2 Yuri Structures
+##############################################
+
+yrnacnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Yuri Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: yuri_constructionyard
+	RenderSprites:
+		Image: yuri_constructionyard
+
+blastradius.dominate:
+	Inherits: ^BlastRadiusIndicator
+	WithRangeCircle:
+		Type: blast-radius
+		Range: 10000
+		Color: FF000080
+		Visible: Always
+	WithRangeCircle@2:
+		Type: dominate
+		Range: 5000
+		Color: 66339988
+		Visible: Always
+
+yrygyard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Yuri Sub Pen
+	Buildable:
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@crane:
+		Sequence: idle-crane
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@waves:
+		Sequence: idle-waves
+		RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+
+##############################################
+#   Red Alert 2 Allies Infantry
+##############################################
+
+ra2shk.bot:
+	Inherits: ra2_soviets_teslatrooper
+	Buildable:
+		-Queue:
+	-MapEditorData:
+	-UpdatesPlayerStatistics:
+	Tooltip:
+		Name: Tesla Coil Charger
+	AutoTargetPriority@DEFAULT:
+		InvalidTargets: NoAutoTarget
+		ValidTargets: TeslaCoil
+	AutoTargetPriority@ATTACKANYTHING:
+		InvalidTargets: NoAutoTarget
+		ValidTargets: TeslaCoil
+	-Armament@PRIMARY:
+	-Armament@PRIMARY2:
+	-Armament@PRIMARY3:
+	Armament@TeslaCoilCharge:
+		Weapon: RA2TeslaCoilCharge_cosmetic
+	Mobile:
+		CanTurnWhileDisabled: true
+		ImmovableCondition: disable_movement
+		RequireForceMoveCondition: disable_movement
+	RejectsMoveToAttack:
+	GrantConditionAfterDelay:
+		Condition: disable_movement
+		ShowSelectionBar: false
+		Delay: 10
+	AutoTarget:
+		AllowMovement: false
+		RequiresCondition: nocoil
+	Turreted:
+	-AttackFrontal:
+	AttackFollowFrontal: #TODO
+		MustFaceTarget: true
+	Selectable:
+		Priority: 4
+	DroneSpawnerSlave:
+		MasterDeadCondition: nocoil
+		DamageTypes: DefaultDeath
+	TransformOnCondition:
+		IntoActor: ra2_soviets_teslatrooper
+		RequiresCondition: nocoil
+	RejectsOrders:
+	WithInfantryBody:
+
+YRSLAV:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Slave
+		RequiresCondition: !freed
+	Tooltip@Freed:
+		Name: Freed Slave
+		RequiresCondition: freed
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~yuri_barracks
+		#Queue: Infantry, RAInfantry
+		Description: Yuri resource collector.
+	Mobile:
+		Speed: 60
+		Locomotor: chem
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: RA2Shovel
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Shovel
+	AttackFrontal:
+		FacingTolerance: 2
+	AutoTarget:
+		ScanRadius: 10
+		RequiresCondition: freed
+	Voiced:
+		VoiceSet: SlaveWorkerVoice
+		RequiresCondition: !freed
+	Voiced@2:
+		VoiceSet: FreedSlaveVoice
+		RequiresCondition: freed
+	SlaveMinerSpawnerSlave:
+		FreedCondition: freed
+		FreeingRelationships: Neutral, Enemy
+		FreedSound: isl1lia.wav
+		AllowOwnerChange: true
+	DamageMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	FirepowerMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	ReloadDelayMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	SpeedMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 8
+		BaleUnloadDelay: 4
+		BaleUnloadAmount: 1
+		FullyLoadedSpeed: 80
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 8
+	DockClientManager:
+		OccupancyCostModifier: 0
+	GrantConditionOnHarvest:
+		Condition: harvesting
+	WithFacingSpriteBody:
+		Sequence: harvest
+		RequiresCondition: harvesting
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+		RequiresCondition: no-tiberium && !harvesting
+	WithInfantryBody@full:
+		IdleSequences: idle1,idle2
+		StandSequences: stand
+		MoveSequence: full-run
+		DefaultAttackSequence: shoot
+		RequiresCondition: !no-tiberium && !harvesting
+	WithEnabledAnimation:
+		Sequence: cheer
+		RequiresCondition: freed
+	WithDockingAnimation:
+		DockSequence: idle
+		DockLoopSequence: idle
+	-DamagedByTerrain:
+	-TakeCover:
+	Selectable:
+		DecorationBounds: 480, 240, 0, -32
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 1
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision
+
+ra2v3rocket:
+	Inherits: ^ShootableMissile
+	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 5000
+		Type: CenterPosition
+	BallisticMissileCA:
+		LaunchAngle: 125
+		Speed: 175
+		AirborneCondition: airborne
+		LaunchSounds: vv3latta.wav, vv3lattb.wav
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	MissileSpawnerSlave:
+	-FireWarheadsOnDeath:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	-SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings:
+	-SpeedMultiplier@ra2_soviets_doctrine_reactivearmor:
+	-SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
+	-SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
+	SpawnedExplodes:
+		Weapon: RA2SCUD
+		EmptyWeapon: RA2SCUD
+		RequiresCondition: !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && !airborne
+	SpawnedExplodes@rad:
+		Weapon: RA2SCUD_rad
+		EmptyWeapon: RA2SCUD_rad
+		RequiresCondition: ra2_soviets_doctrine_nuclearmunitions && !airborne
+	SpawnedExplodes@fire:
+		Weapon: RA2SCUD_fire
+		EmptyWeapon: RA2SCUD_fire
+		RequiresCondition: ra2_soviets_doctrine_firemunitions && !airborne
+	SpawnedExplodes@tesla:
+		Weapon: RA2SCUD_tesla
+		EmptyWeapon: RA2SCUD_tesla
+		RequiresCondition: ra2_soviets_doctrine_teslamunitions && !airborne
+	RenderSprites:
+		Image: ra2v3rocket
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_gastroburners, ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions
+
+ra2v3rocketelite:
+	Inherits: ra2v3rocket
+	Health:
+		HP: 50000
+	RevealsShroud:
+		Range: 10000
+	SpawnedExplodes:
+		Weapon: RA2SCUDELITE
+		EmptyWeapon: RA2SCUDELITE
+		-RequiresCondition:
+	-SpawnedExplodes@rad:
+
+yrsmin.empy:
+	Inherits: yuri_slaveminer
+	-Buildable:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: yuri_slaveminer
+	-MapEditorData:
+
+ra2lcrf:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Amphibious Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2gayard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: AlliedLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2sapc:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Amphibious Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2nayard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: SovietLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+yrhovr:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Hover Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yrygyard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: YuriLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2sqd:
+	Inherits: ^SeaCreature
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@sub: ^Submarine
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: actor_sqd.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~yrygyard
+		Queue: Naval, RANaval
+		Description: actor_sqd.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 48
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: SquidPunch
+		LocalOffset: 208,0,48
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: SquidGrab
+		LocalOffset: 208,0,48
+	AttackFrontal:
+		FacingTolerance: 2
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AutoTargetPriority@SQUIDGRAB:
+		ValidTargets: SquidGrab
+		Priority: 10
+	DeliversCash:
+		Payload: 250
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Squid, Infantry
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		DefaultAttackSequence: shoot
+		IdleSequences: idle
+		StandSequences: stand
+	AttackFrontal:
+	InfectorOld:
+		ArmamentNames: secondary
+		Damage: 1000
+		DamageInterval: 1
+		DamageTypes: DefaultDeath
+		DamageSounds: gexpwama.wav, gexpwamb.wav
+		KillState: Critical
+		Voice: Attack
+		StartSequence: grabing
+		Sequence: grab
+		Palette: playerra2
+		IsPlayerPalette: true
+	Voiced:
+		VoiceSet: GiantSquidVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2dlph:
+	Inherits: ^SeaCreature
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@sub: ^Submarine
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor_dlph.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Queue: Naval, RANaval
+		Description: actor_dlph.description
+	Mobile:
+		TurnSpeed: 48
+		Speed: 120
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armor:
+		Type: Light
+	Armament@PRIMARY:
+		Weapon: SonicZap
+		LocalOffset: 208,0,48
+	Armament@SECONDARY:
+		Weapon: SonicZapFriendly
+		LocalOffset: 208,0,48
+		TargetRelationships: Ally
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		IdleSequences: idle
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Infantry
+	Voiced:
+		VoiceSet: DolphinVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	# FirepowerMultiplier@Dolphin:
+	# 	Modifier: 125
+
+ra2dest:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: actor_dest.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2gayard
+		Queue: Naval, RANaval
+		Description: actor_dest.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Health:
+		HP: 160000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Name: secondary
+		Weapon: RA2155mm
+		LocalOffset: 1100,0,100
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: secondary
+		Weapon: RA2155mm_elite
+		LocalOffset: 1100,0,100
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	Armament@GenerateOsprey:
+		Name: primary
+		Weapon: RA2OspreyTarget
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+		Color: FF0000
+	RenderRangeCircleCA@SECONDARY:
+		Armaments: secondary
+	DetectCloaked:
+		Range: 10000
+		DetectionTypes: Underwater
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+	Voiced:
+		VoiceSet: AlliesNavalVoice
+	CarrierMaster:
+		Actors: ra2asw
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: true
+		LoadedCondition: osprey-loaded
+		ArmamentNames: primary
+	WithFacingSpriteBody:
+		RequiresCondition: osprey-loaded
+	WithFacingSpriteBody@empty:
+		Sequence: idle-empty
+		RequiresCondition: !osprey-loaded
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2asw:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Osprey
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 240
+		InitialFacing: 768
+		TurnSpeed: 21
+		Speed: 210
+		MaximumPitch: 42
+		TakeoffSounds: vospstaa.wav
+		LandingSounds: vosplana.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: RA2DepthCharge
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	DetectCloaked:
+		Range: 10000
+		DetectionTypes: Underwater
+	RenderDetectionCircle:
+	FirepowerMultiplier@ScoutShip:
+		Modifier: 50
+	SpawnActorOnDeath:
+		Actor: ra2asw.Husk
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	Voiced:
+		VoiceSet: NighthawkVoice
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2carrier:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2VehicleBig
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: actor_ra2carrier.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2gayard, ra2_allies_alliedbattlelab
+		Queue: Naval, RANaval
+		Description: actor_ra2carrier.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	CarrierMaster:
+		Actors: ra2hornet, ra2hornet, ra2hornet
+		RearmTicks: 150
+		RespawnTicks: 300
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@PRIMARY:
+		Weapon: RA2CarrierTarget
+		Damage: 3000
+		ReloadDelay: 150
+	Voiced:
+		VoiceSet: AircraftCarrierVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2hornet:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Valued:
+		Cost: 1250
+	Tooltip:
+		Name: Hornet
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 225
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armament@PRIMARY:
+		Weapon: RA2HornetMissile
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@ra2hornet:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: ra2hornet.Husk
+	Voiced:
+		VoiceSet: NighthawkVoice
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2sub:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor_ra2sub.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2nayard
+		Queue: Naval, RANaval
+		Description: actor_ra2sub.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 36
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 18
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: RA2TorpTube
+		LocalOffset: 256,0,0
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2TorpTube_elite
+		LocalOffset: 256,0,0
+		RequiresCondition: rank-elite
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	DeliversCash:
+		Payload: 475
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Voiced:
+		VoiceSet: TyphoonSubVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2dred:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2VehicleBig
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: actor_dred.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2nayard, ra2_soviets_battlelab
+		Queue: Naval, RANaval
+		Description: actor_dred.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	Armament@AG:
+		Weapon: DreadnoughtLaunch
+		Recoil: 85
+		Damage: 2500
+		ReloadDelay: 125
+	MissileSpawnerMasterCA:
+		Actors: ra2dmisl, ra2dmisl
+		SpawnOffset: 172,120,128, -172,-120,128
+		SpawnAllAtOnce: true
+		RespawnTicks: 125
+		LoadedCondition: ammo
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	DeliversCash:
+		Payload: 450
+	Voiced:
+		VoiceSet: SovietNavalVoice
+	WithFacingSpriteBody:
+		RequiresCondition: ammo
+	WithFacingSpriteBody@empty:
+		Sequence: idle-empty
+		RequiresCondition: !ammo
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2dmisl:
+	Inherits: ^ShootableMissile
+	Health:
+		HP: 20000
+	BallisticMissileCA:
+		LaunchAngle: 96
+		Speed: 150
+		LaunchSounds: vdreatta.wav, vdreattb.wav
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	MissileSpawnerSlave:
+	SpawnedExplodes:
+		Weapon: DredMissile
+		EmptyWeapon: DredMissile
+	RenderSprites:
+		Image: ra2dmisl
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+
+yrbsubmisl:
+	Inherits: ^ShootableMissile
+	CruiseMissile:
+		MaxAltitude: 2500
+		MinAirborneAltitude: 128
+		LaunchAngle: 128
+		Speed: 200
+		TurnSpeed: 25
+		LaunchSounds: vbooat1a.wav
+		MaxTargetMovement: 12500
+		TrackTarget: true
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	SpawnedExplodes:
+		Weapon: YRBoomerSCUD
+		EmptyWeapon: YRBoomerSCUD
+		#RequiresCondition: !airborne
+	MissileSpawnerSlave:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+
+####################################################################################################
+#		Red Alert 2 Aircraft
+####################################################################################################
+
+yrbpln:
+	Inherits: ^AirstrikePlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Selectable:
+	Tooltip:
+		Name: MiG Bomber
+	Buildable:
+		Description: template_airstrike_slave.description
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+	Voiced:
+		VoiceSet: MiGVoice
+	DeathSounds:
+	Aircraft:
+		TurnSpeed: 17
+		Speed: 250
+		IdleTurnSpeed: 17
+		IdleSpeed: 180
+		RepulsionSpeed: 3
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions
+	Armament@rad:
+		Name: primary
+		Weapon: MigMissiles_rad
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_doctrine_nuclearmunitions
+	Armament@fire:
+		Name: primary
+		Weapon: MigMissiles_fire
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_doctrine_firemunitions
+	Armament@tesla:
+		Name: primary
+		Weapon: MigMissiles_tesla
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_doctrine_teslamunitions
+	FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions:
+		Modifier: 125
+	Rearmable:
+		RearmActors: ra2_soviets_boris
+	AmmoPool:
+		Ammo: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
+	HasParent:
+	AirstrikeSlaveCA:
+		LandingDistance: 1c0
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	RejectsOrders:
+	GivesExperienceToMaster:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_firemunitions, ra2_soviets_doctrine_teslamunitions
+
+ra2_tzep.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Transport Kirov
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2_soviets_transportkirov
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2rock.husk:
+	Inherits: ^HelicopterHusk
+	RenderSprites:
+		Image: ra2_allies_rocketeer
+		PlayerPalette: playerra2
+	Tooltip:
+		Name: Rocketeer
+	Aircraft:
+		TurnSpeed: 160
+		Speed: 140
+	FallsToEarth:
+		Explosion: UnitExplode
+	RevealsShroud:
+		Range: 4c0
+		Type: GroundPosition
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: die-air
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+	-WithShadow:
+
+yrlunr.husk:
+	Inherits: ra2rock.husk
+	RenderSprites:
+		Image: yuri_cosmonaut
+	Tooltip:
+		Name: Cosmonaut
+
+yrspyp:
+	Inherits: ^AirstrikePlane
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Tooltip:
+		Name: Spy Plane
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 150000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 28
+		Speed: 250
+		Repulsable: False
+		MaximumPitch: 56
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: RA2SpyCamera
+	SelectionDecorations:
+	Contrail@1:
+		Offset: -725,683,0
+	Contrail@2:
+		Offset: -725,-683,0
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	RenderSprites:
+		Image: yrspyp
+		PlayerPalette: playerra2
+	SpawnActorOnDeath:
+		Actor: yrspyp.husk
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings
+
+ra2cplane:
+	Inherits: ^AirstrikePlane
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: sparadra.wav
+	Health:
+		HP: 175000
+	Armor:
+		Type: Bomber
+	Valued:
+		Cost: 4000
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 25
+		Speed: 150
+		Repulsable: False
+		MaximumPitch: 50
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+	Tooltip:
+		Name: Cargo Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: ra2cplane.Husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: ra2cplane
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics
+
+ra2cplanesov:
+	Inherits: ^AirstrikePlane
+	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: sparadra.wav
+	Health:
+		HP: 175000
+	Armor:
+		Type: Bomber
+	Valued:
+		Cost: 4000
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 25
+		Speed: 150
+		Repulsable: False
+		MaximumPitch: 50
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+	Tooltip:
+		Name: Cargo Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: ra2cplanesov.Husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: ra2cplanesov
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_doctrine_heavyarmorplatings, ra2_soviets_doctrine_reactivearmor, ra2_soviets_doctrine_tesladischargearmor
+
+####################################################################################################
+#		Red Alert 2 TechBuilding
+####################################################################################################
+
+ra2caoild:
+	Inherits: ^TechBuilding
+	Inherits@2: ^CashTricklerMultipliers
+	Inherits@shape: ^2x2Shape
+	CashTrickler:
+		Amount: 20
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 220000
+	Tooltip:
+		Name: Oil Derrick
+	TooltipDescription@ally:
+		Description: Provides additional funds.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to receive additional funds.
+		ValidRelationships: Neutral, Enemy
+	WithIdleOverlay@pump:
+		Sequence: idle-pump
+	GivesCashOnCapture:
+		Amount: 1000
+	UpdatesDerrickCount:
+	GpsDot:
+		String: Oil
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2caoild.husk
+		OwnerType: InternalName
+
+ra2caoild.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Oil Derrick (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2caoild
+	GpsDot:
+		String: Oil
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	WithIdleOverlay@pump:
+		Sequence: idle-pump
+
+ra2cpower:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 220000
+	Tooltip:
+		Name: Civilian Power Plant
+	TooltipDescription@ally:
+		Description: Provides additional power.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to receive additional power.
+		ValidRelationships: Neutral, Enemy
+	Power:
+		Amount: 300
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2cpower.husk
+		OwnerType: InternalName
+
+ra2cpower.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name:  Civilian Power Plant (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2cpower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2hospt:
+	Inherits: ^TechBuilding
+	Inherits@shape: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Health:
+		HP: 420000
+	Tooltip:
+		Name: Civilian Hospital
+	TooltipDescription@ally:
+		Description: Provides infantry with self-healing.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to enable self-healing for infantry.
+	ProvidesPrerequisite:
+		Prerequisite: hosp
+	Cargo:
+		Types: Infantry
+		MaxWeight: 8
+	GpsDot:
+		String: Hospital
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	WithIdleOverlay@overlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2hospt.husk
+		OwnerType: InternalName
+
+ra2hospt.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Tooltip:
+		Name: Civilian Hospital (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2hospt
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@overlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2machshop:
+	Inherits: ^TechBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 220000
+	Tooltip:
+		Name: Machine Shop
+	TooltipDescription@ally:
+		Description: Provides vehicles with self-repair.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to enable self-repair for vehicles.
+	ProvidesPrerequisite:
+		Prerequisite: machshop
+
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2machshop.husk
+		OwnerType: InternalName
+
+ra2machshop.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Tooltip:
+		Name: Machine Shop (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2machshop
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2caairp:
+	Inherits: ^TechBuilding
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 340000
+	Tooltip:
+		Name: Airport (Infantry Support)
+	TooltipDescription@ally:
+		Description: Provides Paratroopers, Gives extra units if you capture more Airports until 3.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Provides Paratroopers, Gives extra units if you more capture Airports until 3.
+		ValidRelationships: Neutral, Enemy
+	ParatroopersPower@ra2paratroopers:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ra2caairp
+			2: ra2caairp, infantryairports2
+			3: ra2caairp, infantryairports3
+		OrderName: Support Paratroopers
+		IconImage: ra2_allies_airforcecommandhq
+		Icons:
+			1: icon2
+			2: icon2
+			3: icon2
+		ChargeInterval: 6000
+		Names:
+			1: Airborne
+			2: Airborne
+			3: Airborne
+		Descriptions:
+			1: power_paratroopers.description
+			2: power_paratroopers.description
+			3: power_paratroopers.description
+		DropItems:
+			1: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind
+			2: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
+			3: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+			2: pinficon
+			3: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		UnitTypes:
+			1: ra2cplane
+			2: ra2cplane
+			3: ra2cplane
+		SquadSizes:
+			1: 3
+			2: 4
+			3: 5
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+	SupportPowerChargeBar:
+	WithIdleOverlay@decoration:
+	ProvidesPrerequisite@buildingname:
+	GpsDot:
+		String: Communications
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToOwner@Airports:
+		Condition: InfantryAirports
+	WithIdleOverlay@overlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2caairp.husk
+		OwnerType: InternalName
+
+ra2caairp.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Tooltip:
+		Name: Airport (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2caairp
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@overlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2caairpv:
+	Inherits: ra2caairp
+	Tooltip:
+		Name: Airport (Tank Support)
+	ParatroopersPower@ra2paratroopers:
+		OrderName: Support Tank Paratroopers
+		Prerequisites:
+			1: ra2caairpv
+			2: ra2caairpv, tankairports2
+			3: ra2caairpv, tankairports3
+		Names:
+			1: Tank Paratroopers
+			2: Tank Paratroopers
+			3: Tank Paratroopers
+		DropItems:
+			1: ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_ifv,ra2_c_ifv,ra2leopard,ra2leopard,ra2leopard
+			2: ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2leopard,ra2leopard,ra2leopard,ra2leopard,ra2leopard
+			3: ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_hum,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2_c_ifv,ra2leopard,ra2leopard,ra2leopard,ra2leopard,ra2leopard,ra2leopard,ra2leopard
+	RenderSprites:
+		Image: ra2caairp
+	GrantExternalConditionToOwner@Airports:
+		Condition: TankAirports
+	SpawnActorOnDeath:
+		Actor: ra2caairpv.husk
+		OwnerType: InternalName
+
+ra2caairpv.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Tooltip:
+		Name: Airport (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2caairpv
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ra2caairp.husk
+	WithIdleOverlay@overlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2_cgcloa:
+	Inherits: ^TechBuilding
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 220000
+	Tooltip:
+		Name: Cloacking Device
+	TooltipDescription@ally:
+		Description: Hides your Units/Buildings.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Capture to hide your Units.
+		ValidRelationships: Neutral, Enemy
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	ProximityExternalCondition@StealGen:
+		Range: 12c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !lowpower
+	SpawnActorOnDeath:
+		Actor: ra2_cgcloa.husk
+		OwnerType: InternalName
+
+ra2_cgcloa.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Tooltip:
+		Name: Cloacking Device (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2_cgcloa
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+
+ra2_ctoutp:
+	Inherits: ^TechBuilding
+	Inherits@shape: ^4x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Building:
+		Footprint: Xxx_ x=== xx=_
+		Dimensions: 4,3
+	Reservable:
+	RallyPoint:
+	WithIdleOverlay@side:
+		Sequence: idle-side
+	WithIdleOverlay@bib:
+		Sequence: bib
+	WithResupplyAnimation:
+		Sequence: repair
+	Health:
+		HP: 340000
+	Tooltip:
+		Name: Outpost
+	TooltipDescription@ally:
+		Description: Repairs units, also can defend himself using Missiles.
+		ValidRelationships: Ally
+	TooltipDescription@other:
+		Description: Repairs units, also can defend himself using Missiles.
+		ValidRelationships: Neutral, Enemy
+	ProvidesPrerequisite@buildingname:
+	GpsDot:
+		String: Communications
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	SpawnActorOnDeath:
+		Actor: ra2_ctoutp.husk
+		OwnerType: InternalName
+	DetectCloaked:
+		Range: 3c0
+	Turreted:
+		TurnSpeed: 16
+		Offset: -150,0,400
+	AutoTarget:
+		InitialStance: AttackAnything
+	Armament@PRIMARY:
+		Weapon: RA2HoverMissile
+		LocalOffset: 900,180,340, 900,-180,340
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	RangeMultiplier:
+		Modifier: 150
+	WithRangeCircle:
+
+ra2_ctoutp.husk:
+	Inherits: ^TechBuildingHusk
+	Inherits@shape: ^3x3Shape
+	Building:
+		Footprint: Xx_ === _=_
+		Dimensions: 3,3
+	Tooltip:
+		Name: Outpost (Destroyed)
+	TransformOnCapture:
+		IntoActor: ra2_ctoutp
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	WithIdleOverlay@side:
+		Sequence: idle-side
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+# Black Operation Soldiers
+
+ra2e2.black:
+	Inherits: ra2_soviets_conscript
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Black Operation Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~disable
+		Queue: Infantry, RAInfantry
+		Description: template_scout_infantry.description
+	Health:
+		HP: 25000
+	ReloadDelayMultiplier@b:
+		Modifier: 50
+	Voiced:
+		VoiceSet: TechConscriptVoice
+
+ra2sidewind:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Sidewinder
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~disable
+		Queue: Infantry, RAInfantry
+		Description: actor_e3.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 15000
+	AutoTarget:
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2GIRocketsG
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYE:
+		Name: primary
+		Weapon: RA2GIRocketsG_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: GGIVoice
+	DeliversCash:
+		Payload: 125
+	Voiced:
+		VoiceSet: TechConscriptVoice
+
+# Black Operation Vehicles
+
+ra2leopard:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Leopard
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 70
+		TurnSpeed: 16
+	Health:
+		HP: 230000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 16 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@machinegun:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,8,80
+		MuzzleSequence: muzzle-3
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_heavyarmorplatings
+
+ra2_c_ifv:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Machinegunner IFV
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2GattlingMG2
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: RA2GattlingMG1AA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@eliteAA:
+		Name: primary
+		Weapon: RA2GattlingMG2AA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2_c_hum:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Humvee
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2GattlingMG2
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+
+# Civilian Army Vehicles
+
+ra2_c_hum2:
+	Inherits: ra2_c_hum
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Civilian Humvee
+
+ra2_c_abram:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Civilian MBT
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template_mbt.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 16
+	Health:
+		HP: 190000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 16 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@machinegun:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,8,80
+		MuzzleSequence: muzzle-3
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+
+##############################################
+#   Red Alert 2 Civilian Structures (Garrisonable)
+##############################################
+
+ra2ctbunk01:
+	Inherits: ^RA2CivBuilding
+	Inherits@2x2: ^RA22x2Garrison
+	Tooltip:
+		Name: Civilian Bunker
+	WithIdleOverlay@Bunkered:
+		Sequence: idle-bunkered
+		IsPlayerPalette: true
+		RequiresCondition: loaded
+
+ra2ctbunk02:
+	Inherits: ra2ctbunk01
+
+ra2ctbarn02:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: FarmerÃ‚Â´s House
+
+ra2ctfarm01:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: Barn
+
+ra2ctchig01:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Department
+
+ra2ctchig02:
+	Inherits: ra2ctchig01
+
+ra2ctchig03:
+	Inherits: ra2ctchig01
+
+ra2cteur01:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: Cottage
+
+ra2cteur02:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: Cottage
+
+ra2cteur04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+		Name: European House
+
+ra2ctfarm06:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA22x2Garrison
+		Name: Light House
+
+ra2ctfrma:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: FarmerÃ‚Â´s House
+
+ra2ctgas01:
+	Inherits: ra2ctchig01
+	Tooltip:
+		Name: Gas Station
+	FireWarheadsOnDeath:
+		Weapon: FlametankExplode
+		EmptyWeapon: FlametankExplode
+
+ra2cthse01:
+	Inherits: ra2ctbunk01
+	Health:
+		HP: 50000
+	Tooltip:
+		Name: Civilian House
+
+ra2cthse02:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: House
+
+ra2cthse03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: House
+
+ra2cthse04:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: House
+
+ra2cthse05:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA22x1Garrison
+	Tooltip:
+		Name: Mobile Home
+
+ra2cthse06:
+	Inherits: ra2cthse05
+
+ra2cthse07:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: House
+
+ra2ctind01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Civilian Factory
+
+ra2ctlab:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Civilian Laboratory
+
+ra2ctmiam01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Hotel
+
+ra2ctmiam02:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Hotel
+
+ra2ctmiam03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Hotel
+
+ra2ctmiam04:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Lifeguard Tower
+
+ra2ctmiam05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Seaside Hotel
+
+ra2ctmiam06:
+	Inherits: ra2ctmiam05
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Beachside Hotel
+
+ra2ctmiam07:
+	Inherits: ra2ctmiam05
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Oceanside Hotel
+
+ra2ctmiam08:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Arizona Memorial
+
+ra2ctarmy01:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: Army Tents
+
+ra2ctarmy02:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Small Army Tents
+
+ra2ctarmy03:
+	Inherits: ra2ctarmy02
+
+ra2ctarmy04:
+	Inherits: ra2ctarmy02
+
+ra2ctmsc07:
+	Inherits: ra2ctbunk01
+	Tooltip:
+		Name: Big Island Hut
+
+ra2ctmsc08:
+	Inherits: ra2ctarmy02
+	Tooltip:
+		Name: Small Island Hut
+
+ra2ctmsc09:
+	Inherits: ra2ctmsc08
+
+ra2ctmsc10:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: McBurger Kong
+
+ra2ctnewy01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2ctnewy06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2ctnewy07:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2ctnewy08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2ctnewy10:
+	Inherits: ra2ctchig01
+
+ra2ctnewy11:
+	Inherits: ra2ctchig01
+
+ra2ctnewy12:
+	Inherits: ra2ctnewy08
+
+ra2ctnewy13:
+	Inherits: ra2ctnewy08
+
+ra2ctnewy14:
+	Inherits: ra2ctnewy08
+
+ra2ctnewy15:
+	Inherits: ra2ctnewy07
+
+ra2ctnewy16:
+	Inherits: ra2ctnewy08
+	Inherits@shape: ^RA22x2Garrison
+
+ra2ctnewy17:
+	Inherits: ra2ctnewy16
+
+ra2ctnewy18:
+	Inherits: ra2ctnewy17
+
+ra2ctnewy20:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Industrial Storage
+	Building:
+		Footprint: _xxxx xxxxx xxxx_
+		Dimensions: 5,3
+
+ra2ctnewy21:
+	Inherits: ra2ctnewy20
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Industrial Storage
+	Building:
+		Footprint: xxxx_ xxxxx _xxxx
+		Dimensions: 5,3
+
+ra2_ctnwy09:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_ctnwy22:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_ctnwy23:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_ctnwy24:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_ctnwy25:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2ctnewy26:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_city01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: City Building
+	RenderSprites:
+		PlayerPalette: ra2cityp
+	-WithIdleOverlay@Bunkered:
+
+ra2_city02:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: City Building
+	RenderSprites:
+		PlayerPalette: ra2cityp
+	-WithIdleOverlay@Bunkered:
+
+ra2_city03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: City Building
+	RenderSprites:
+		PlayerPalette: ra2cityp
+	-WithIdleOverlay@Bunkered:
+
+ra2_city04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: City Building
+	RenderSprites:
+		PlayerPalette: ra2cityp
+	-WithIdleOverlay@Bunkered:
+
+ra2_city06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: City Building
+	RenderSprites:
+		PlayerPalette: ra2cityp
+	-WithIdleOverlay@Bunkered:
+
+ra2_ctfrmb:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Latrine
+
+ra2_ctgard01:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Soviet Guard Post
+
+ra2_ctgard03:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Guard Tower
+
+ra2_ctwash03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctwash04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctwash05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctwash07:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctwash08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctwash09:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash10:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash11:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash13:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash16:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 12
+		EjectOnDeath: false
+	Tooltip:
+		Name: Public Building
+
+ra2_ctwash17:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Natural History Museum
+
+ra2_cttexs01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Skycrapter
+
+ra2_cttexs02:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Alamo
+
+ra2_cttexs03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_cttexs04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_cttexs05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_cttexs06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_cttexs07:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_cttexs08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x2Garrison
+	Tooltip:
+		Name: Office Building
+
+ra2_ctpars02:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Cathedral
+
+ra2_ctpars04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Departments
+
+ra2_ctpars05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Departments
+
+ra2_ctpars06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Departments
+
+ra2_ctpars08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Cathedral
+
+ra2_ctpars07:
+	Inherits: ra2ctbunk01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Phone Cabin
+
+ra2_ctpars09:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Cathedral
+
+ra2_ctpars10:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Restaurant
+
+ra2_ctpars12:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Cathedral
+
+ra2_ctpars13:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Restaurant
+
+ra2_ctpars14:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Restaurant
+
+ra2_ctrus03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x3Garrison
+	Tooltip:
+		Name: Kremlin
+
+ra2_ctrus04:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus07:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus09:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus10:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctrus11:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA22x2Garrison
+	Tooltip:
+		Name: Building
+
+ra2_ctsanf01:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf02:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf03:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf05:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA25x4Garrison
+	Tooltip:
+		Name: Prison
+
+ra2_ctsanf06:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf07:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf08:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: House
+
+ra2_ctsanf16:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA21x1Garrison
+	Tooltip:
+		Name: Light House
+
+ra2_ctsanf17:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA23x3Garrison
+	Tooltip:
+		Name: Public Building
+
+ra2_ctsanf18:
+	Inherits: ra2ctchig01
+	Inherits@shape: ^RA24x3Garrison
+	Tooltip:
+		Name: Public Building
+##############################################
+#   Red Alert 2 Civilian Props
+##############################################
+
+ra2ctfarm02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Farm Silo
+
+ra2ctwt01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Water Tower
+
+ra2ctwsh18a:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Water Pond
+
+ra2_trff01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Traffic Light
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 1
+		GreenTint: 0
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_trff02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Traffic Light
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0
+		GreenTint: 1
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_trff03:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Traffic Light
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 1
+		GreenTint: 0
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_trff04:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Traffic Light
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0
+		GreenTint: 1
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmisc01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Explosive Barrels
+	Health:
+		HP: 1000
+	FireWarheadsOnDeath:
+		Weapon: RA2Scud
+
+ra2_ctmisc02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Explosive Barrel
+	Health:
+		HP: 1000
+	FireWarheadsOnDeath:
+		Weapon: RA2Scud
+
+ra2_ctmisc03:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Trash Container
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmisc04:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Mail Box
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmisc05:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Pipes
+
+ra2_ctmisc06:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: V3 Rockets
+	Health:
+		HP: 2000
+	FireWarheadsOnDeath:
+		Weapon: RA2Scud
+
+ra2_ctmisc06_rad:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: V3 Rockets (Nuclear Warheads)
+	Health:
+		HP: 2000
+	FireWarheadsOnDeath:
+		Weapon: RA2Scud_rad
+	RenderSprites:
+		Image: ra2_ctmisc06
+
+ra2_ctwash16:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Tooltip:
+		Name: Statue
+	Health:
+		HP: 25000
+
+ra2_lt_eur01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_eur02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_gen01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_gen02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_gen03:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_gen04:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_sgn01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_sgn02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_sgn03:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_lt_sgn04:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Street Lamp
+	RenderSprites:
+		Palette: ra2isotem
+	TerrainLightSource:
+		Range: 3333
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.4
+		BlueTint: 0.3
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc01:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Hot Dog Cart
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc02:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Umbrellas
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc03:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Umbrellas
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc04:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: =
+		Dimensions: 1,1
+	Tooltip:
+		Name: Towels
+
+ra2_ctmsc05:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: =
+		Dimensions: 1,1
+	Tooltip:
+		Name: Towels
+
+ra2_ctmsc06:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Campfire
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc06a:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Campfire
+	TerrainLightSource:
+		Range: 2800
+		Intensity: 0.1
+		RedTint: 0.4
+		GreenTint: 0.3
+		BlueTint: 0
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc11:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Tires
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc12:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Practice Target
+	Crushable:
+		CrushClasses: ixian_concretewall
+
+ra2_ctmsc13:
+	Inherits: ^RA2CivProp
+	Inherits@shape: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Tooltip:
+		Name: Wrecked Grizzly Tank
+##############################################
+#   Red Alert 2 Decoration Trees
+##############################################
+
+ra2_tree01:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree01.Husk
+
+ra2_tree01.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree01
+
+ra2_tree02:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree02.Husk
+
+ra2_tree02.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree02
+
+ra2_tree03:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree03.Husk
+
+ra2_tree03.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree03
+
+ra2_tree04:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree04.Husk
+
+ra2_tree04.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree04
+
+ra2_tree05:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree05.Husk
+
+ra2_tree05.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree05
+
+ra2_tree06:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree06.Husk
+
+ra2_tree06.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree06
+
+ra2_tree07:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree07.Husk
+
+ra2_tree07.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree07
+
+ra2_tree08:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree08.Husk
+
+ra2_tree08.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree08
+
+ra2_tree09:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree09.Husk
+
+ra2_tree09.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree09
+
+ra2_tree10:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree10.Husk
+
+ra2_tree10.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree10
+
+ra2_tree11:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree11.Husk
+
+ra2_tree11.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree11
+
+ra2_tree12:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree12.Husk
+
+ra2_tree12.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree12
+
+ra2_tree13:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree13.Husk
+
+ra2_tree13.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree13
+
+ra2_tree14:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree14.Husk
+
+ra2_tree14.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree14
+
+ra2_tree15:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree15.Husk
+
+ra2_tree15.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree15
+
+ra2_tree16:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree16.Husk
+
+ra2_tree16.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree16
+
+ra2_tree17:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree17.Husk
+
+ra2_tree17.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree17
+
+ra2_tree18:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree18.Husk
+
+ra2_tree18.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree18
+
+ra2_tree19:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree19.Husk
+
+ra2_tree19.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree19
+
+ra2_tree20:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree20.Husk
+
+ra2_tree20.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree20
+
+ra2_tree21:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree21.Husk
+
+ra2_tree21.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree21
+
+ra2_tree22:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree22.Husk
+
+ra2_tree22.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree22
+
+ra2_tree23:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree23.Husk
+
+ra2_tree23.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree23
+
+ra2_tree24:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree24.Husk
+
+ra2_tree24.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree24
+
+ra2_tree25:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree25.Husk
+
+ra2_tree25.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree25
+
+ra2_tree26:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree26.Husk
+
+ra2_tree26.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree26
+
+ra2_tree27:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree27.Husk
+
+ra2_tree27.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree27
+
+ra2_tree28:
+	Inherits: ^RA2Tree
+	SpawnActorOnDeath:
+		Actor: ra2_tree28.Husk
+
+ra2_tree28.Husk:
+	Inherits: ^RA2TreeHusk
+	RenderSprites:
+		Image: ra2_tree28
+####################################################################################################
+#		Red Alert 2 Upgrades
+####################################################################################################
+
+upra2aegismissiles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Aegis Cruiser Ground Missiles
+	Valued:
+		Cost: 4000
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Research
+		Description: Allows Aegis Cruisers to target ground targets.
+		Prerequisites: ~ra2_allies_alliedbattlelab, ~ra2gayard, !upra2aegismissiles
+	RenderSprites:
+		Image: ra2_allies_aegiscruiser
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Red Alert 2 Plane Husk
+####################################################################################################
+
+RA2ZEP.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Kirov Airship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 40
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		Image: ra2_soviets_kirovairship
+		PlayerPalette: playerra2
+
+ra2hornet.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hornet
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 186
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2hornet
+	RenderSprites:
+		PlayerPalette: playerra2
+
+RA2FALC.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Harrier
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2_allies_harrier
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2beag.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Black Eagle
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2_allies_blackeagle
+	RenderSprites:
+		PlayerPalette: playerra2
+
+YRDISK.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Floating Disc
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: yuri_floatingdisk
+		PlayerPalette: playerra2
+
+ra2asw.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Osprey
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 200
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2asw
+	RenderSprites:
+		PlayerPalette: playerra2
+
+yrschp.Husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^RenderVoxel
+	Tooltip:
+		Name: Siege Chopper
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 200
+	RenderSprites:
+		Image: ra2_soviets_siegechopper
+	RenderVoxels:
+		Image: ra2_soviets_siegechopper
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2shad.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Night Hawk
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 223
+	RenderSprites:
+		Image: ra2_allies_nighthawk
+		PlayerPalette: playerra2
+
+yrbpln.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: MiG Bomber
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+
+ra2cplane.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2cplane
+		PlayerPalette: playerra2
+
+ra2cplanesov.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2cplanesov
+		PlayerPalette: playerra2
+
+yrspyp.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Spy Plane
+	Aircraft:
+		TurnSpeed: 28
+		Speed: 250
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: yrspyp
+		PlayerPalette: playerra2
+
+RA2TXGASG:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	-UpdatesPlayerStatistics:
+	RenderSprites:
+		Palette: ra2effect
+	Interactable:
+	HiddenUnderFog:
+		AlwaysVisibleRelationships: None
+		Type: GroundPosition
+	Health:
+		HP: 20
+	HitShape:
+	Aircraft:
+		Repulsable: false
+		CruiseAltitude: 1
+		Speed: 12
+	WithSpriteBody:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Wanders:
+		MinMoveDelay: 20
+		MaxMoveDelay: 40
+	ChangesHealth:
+		Step: -1
+		Delay: 30
+		StartIfBelow: 200
+	PeriodicExplosion:
+		Weapon: RA2Cloud
+		InitialDelay: 4
+
+ra2shkhero:
+	Inherits: ra2_soviets_teslatrooper
+	RenderSprites:
+		Image: ra2_soviets_teslatrooper
+	-Buildable:
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Tesla Commando
+	Health:
+		HP: 45000
+	ReloadDelayMultiplier@HERO:
+		Modifier: 25
+	Armament@c4building:
+		Weapon: GenericC4
+		Cursor: c4
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	ChangesHealth@HERO:
+		PercentageStep: 5
+		Delay: 50
+		StartIfBelow: 100
+		DamageCooldown: 125
+
+####################################################################################################
+#		Promotions Soviets
+####################################################################################################
+
+# ### Tesla tree
+
+# upemptesla:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: EMP Tesla Weapons
+# 	Buildable:
+# 		BuildPaletteOrder: 61
+# 		Queue: Promotions
+# 		Description: Tesla weapons will shut down vehicles.
+# 		Prerequisites: ~ra2_soviets_constructionyard, !upemptesla, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_teslatrooper
+# 	ProvidesPrerequisite:
+
+# upra2ttnk:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Tesla Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 64
+# 		Queue: Promotions
+# 		Description: Allows construction of the Tesla Tank.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upemptesla, !upra2ttnk, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_teslatank
+# 	ProvidesPrerequisite:
+
+# uparctesla:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Tesla Arcing
+# 	Buildable:
+# 		BuildPaletteOrder: 67
+# 		Queue: Promotions
+# 		Description: Allows tesla bolts to jump to nearby targets.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upra2ttnk, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_teslatank
+# 	ProvidesPrerequisite:
+
+# ^RA2TeslaOverload:
+# 	GrantConditionOnPrerequisite@TeslaArc:
+# 		Condition: arctesla
+# 		Prerequisites: uparctesla
+
+# ra2_soviets_upgrade_teslacoilchargers:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Tesla Coil Chargers
+# 	Buildable:
+# 		BuildPaletteOrder: 70
+# 		Queue: Promotions
+# 		Description: Provide all Tesla Coils with chargers.
+# 		Prerequisites: ~ra2_soviets_constructionyard, uparctesla, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_teslacoil
+# 	ProvidesPrerequisite:
+
+# ### Radiation tree
+
+# upra2terror:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Terrorist
+# 	Buildable:
+# 		BuildPaletteOrder: 62
+# 		Queue: Promotions
+# 		Description: Allows training of the Terrorist.
+# 		Prerequisites: ~ra2_soviets_constructionyard, !upra2terror, rank1
+# 	RenderSprites:
+# 		Image: ra2terror
+# 	ProvidesPrerequisite:
+
+# upra2deso:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Desolator
+# 	Buildable:
+# 		BuildPaletteOrder: 65
+# 		Queue: Promotions
+# 		Description: Allows training of the Desolator. Infantry becomes immune to radiation.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upra2terror, !upra2deso, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_desolator
+# 	ProvidesPrerequisite:
+
+# upra2dtruck:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Demo Truck
+# 	Buildable:
+# 		BuildPaletteOrder: 68
+# 		Queue: Promotions
+# 		Description: Allows construction of the Demo Truck.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upra2deso, !upra2dtruck, rank1
+# 	RenderSprites:
+# 		Image: ra2dtruck
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_doctrine_nuclearmunitions:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Nuclear Munitions
+# 	Buildable:
+# 		BuildPaletteOrder: 71
+# 		Queue: Promotions
+# 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upra2dtruck, rank1
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+# ^ra2sovietsRadShells:
+# 	GrantConditionOnPrerequisite@RadShells:
+# 		Condition: ra2_soviets_doctrine_nuclearmunitions
+# 		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
+# 	FirepowerMultiplier@RadShells:
+# 		Modifier: 120
+# 		RequiresCondition: ra2_soviets_doctrine_nuclearmunitions
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_doctrine_nuclearmunitions
+
+# ### Industry tree
+
+# upra2mig:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock ra1_soviets_migattackbomber Bomber
+# 	Buildable:
+# 		BuildPaletteOrder: 63
+# 		Queue: Promotions
+# 		Description: Allows construction of the ra1_soviets_migattackbomber Bomber.
+# 		Prerequisites: ~ra2_soviets_constructionyard, !upra2mig, rank1
+# 	RenderSprites:
+# 		Image: yrbpln
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_upgrade_terrordronesurprise:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Terror Drone Surprise
+# 	Buildable:
+# 		BuildPaletteOrder: 66
+# 		Queue: Promotions
+# 		Description: Vehicles have a chance of releasing a Terror Drone on destruction.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upra2mig, !ra2_soviets_upgrade_terrordronesurprise, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_terrordrone
+# 	ProvidesPrerequisite:
+
+# ^TerrorDroneSurprise:
+# 	GrantConditionOnPrerequisite@DroneSurprise:
+# 		Condition: dronesurprise
+# 		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
+# 	SpawnActorOnDeath@DroneSurprise:
+# 		Probability: 75
+# 		Actor: ra2_soviets_terrordrone
+# 		RequiresCondition: dronesurprise && !chronobeamed
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+
+# upyrngindp:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Industrial Plant
+# 	Buildable:
+# 		BuildPaletteOrder: 69
+# 		Queue: Promotions
+# 		Description: Enables construction of the Industrial Plant.
+# 		Prerequisites: ~ra2_soviets_constructionyard, ra2_soviets_upgrade_terrordronesurprise, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_industrialplant
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_doctrine_heavyarmorplatings:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Heavy Soviet Armor
+# 	Buildable:
+# 		BuildPaletteOrder: 72
+# 		Queue: Promotions
+# 		Description: All Soviet vehicles and aircraft take 20% less damage.
+# 		Prerequisites: ~ra2_soviets_constructionyard, upyrngindp, rank1
+# 	RenderSprites:
+# 		Image: ra2_soviets_apocalypsetank
+# 	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Soviets
+####################################################################################################
+
+### Radar ###
+
+ra2_car:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_car_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_car_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_car_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+
+ra2_car_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+
+ra2_taxi:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_taxi_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_taxi_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_taxi_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+
+ra2_taxi_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+
+ra2_euroc:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_euroc_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_euroc_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_euroc_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+
+ra2_euroc_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+
+ra2_limo:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_limo_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_limo_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_limo_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+
+ra2_limo_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+
+ra2_cop:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_cop_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_cop_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_cop_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+
+ra2_cop_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+
+ra2_bus:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_bus_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_bus_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_bus_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+
+ra2_bus_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+
+ra2_cona:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_cona_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_cona_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_cona_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+
+ra2_cona_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+
+ra2_suvb:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_suvb_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_suvb_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_suvb_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+
+ra2_suvb_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+
+ra2_suvw:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_suvw_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_suvw_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_suvw_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+
+ra2_suvw_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+
+ra2_stang:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_stang_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_stang_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_stang_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+
+ra2_stang_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+
+ra2_trucka:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_trucka_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_trucka_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_trucka_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+
+ra2_trucka_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+
+ra2_truckb:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_truckb_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_truckb_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_truckb_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+
+ra2_truckb_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+
+ra2_ptruck:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ptruck_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ptruck_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ptruck_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+
+ra2_ptruck_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+
+ra2_ambu:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ambu_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ambu_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ambu_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+
+ra2_ambu_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+
+ra2_bcab:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_bcab_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_bcab_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_bcab_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+
+ra2_bcab_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+
+ra2_ycab:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ycab_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ycab_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ycab_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+
+ra2_ycab_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+
+ra2_ddbx:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ddbx_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ddbx_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ddbx_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+
+ra2_ddbx_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+
+ra2_jeep:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_jeep_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_jeep_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_jeep_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+
+ra2_jeep_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+
+ra2_tractor:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_tractor_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_tractor_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_tractor_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+
+ra2_tractor_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+
+# RA2 New Promotions
+
+# RA2UNIONTANK:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^HighTechTankTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+# 	Inherits@armor: ^ra2sovietsArmorPlatings
+# 	Valued:
+# 		Cost: 1750
+# 	Tooltip:
+# 		Name: Union Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2_soviets_battlelab
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor_htnk.description
+# 	Mobile:
+# 		Speed: 55
+# 		TurnSpeed: 11
+# 	Passenger:
+# 		Weight: 4
+# 	Health:
+# 		HP: 350000
+# 	Repairable:
+# 		HpPerStep: 17500
+# 	ChangesHealth@SelfHealing:
+# 		Step: 140
+# 	Armor:
+# 		Type: Superheavy
+# 	Turreted:
+# 		TurnSpeed: 11
+# 		Offset: 50,0,150
+# 	Armament@PRIMARY:
+# 		Name: primary
+# 		Weapon: RA2120xmm
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@PRIMARYRAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: !rank-elite
+# 	Armament@PRIMARYELITE:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && !ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@PRIMARYELITERAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@SECONDARYELITE:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk_elite
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	WithMuzzleOverlay:
+# 	WithSpriteTurret:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: ApocalypseTankVoice
+# 	DeliversCash:
+# 		Payload: 900
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+# 	FirepowerMultiplier@RadShells:
+# 		Types: primary
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_heavyarmorplatings
+# 	RenderSprites:
+# 		Image: ra2uniontank
+# 		PlayerPalette: player_rgba
+
+# RA2SUPERAPOC:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^HighTechTankTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
+# 	Inherits@armor: ^ra2sovietsArmorPlatings
+# 	Valued:
+# 		Cost: 1750
+# 	Tooltip:
+# 		Name: Apocalypse Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2_soviets_battlelab
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor_htnk.description
+# 	Mobile:
+# 		Speed: 55
+# 		TurnSpeed: 11
+# 	Passenger:
+# 		Weight: 4
+# 	Health:
+# 		HP: 350000
+# 	Repairable:
+# 		HpPerStep: 17500
+# 	ChangesHealth@SelfHealing:
+# 		Step: 140
+# 	Armor:
+# 		Type: Superheavy
+# 	Turreted:
+# 		TurnSpeed: 11
+# 		Offset: 50,0,150
+# 	Armament@PRIMARY:
+# 		Name: primary
+# 		Weapon: RA2120xmm
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && !ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@PRIMARYRAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: !rank-elite
+# 	Armament@PRIMARYELITE:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && !ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@PRIMARYELITERAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && ra2_soviets_doctrine_nuclearmunitions
+# 	Armament@SECONDARYELITE:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk_elite
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	WithMuzzleOverlay:
+# 	WithSpriteTurret:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: ApocalypseTankVoice
+# 	DeliversCash:
+# 		Payload: 900
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_doctrine_nuclearmunitions, ra2_soviets_doctrine_heavyarmorplatings
+# 	RenderSprites:
+# 		Image: ra2superapocalypse
+# 		PlayerPalette: player_rgba
+
+# ra2katyusha:
+# 	Inherits: ^Vehicle
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@Template: ^ArtilleryTemplate
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@vo: ^AttackFrontalVoice
+# 	Inherits@EMP: ^FrontalEMP
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		BuildPaletteOrder: 80
+# 		Prerequisites: ~ra2_soviets_battlelab
+# 		Description: actor_latin_burrito.description
+# 	Valued:
+# 		Cost: 1200
+# 	Tooltip:
+# 		Name: Katyusha Launcher
+# 	Health:
+# 		HP: 35000
+# 	Repairable:
+# 		HpPerStep: 1750
+# 	ChangesHealth@SelfHealing:
+# 		Step: 14
+# 	Armor:
+# 		Type: Medium
+# 	Mobile:
+# 		Speed: 80
+# 		TurnSpeed: 16
+# 	Armament:
+# 		Weapon: RA2RBurritoRocket
+# 		LocalOffset: -250,300,125, -250,150,250, -250,-150,375, -250,-300,500, -250,300,125, -250,150,250, -250,-150,375, -250,-300,500
+# 	Armament@PRIMARYELITE:
+# 		Weapon: RA2RBurritoRocket
+# 		LocalOffset: -250,-300,500, -250,-150,375, -250,150,250, -250,300,125, -250,-300,500, -250,-150,375, -250,150,250, -250,300,125
+# 		RequiresCondition: rank-elite
+# 	FirepowerMultiplier@RANK-1:
+# 		Modifier: 125
+# 	FirepowerMultiplier@RANK-2:
+# 		Modifier: 150
+# 	FirepowerMultiplier@RANK-3:
+# 		Modifier: 175
+# 	FirepowerMultiplier@RANK-ELITE:
+# 		Modifier: 200
+# 	AttackFrontal:
+# 		FacingTolerance: 0
+# 	SelectionDecorations:
+# 	FireWarheadsOnDeath:
+# 		Weapon: V3Explode
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: TSVehicle
+# 	WithFacingSpriteBody:
+# 	DeliversCash:
+# 		Payload: 500
+# 	ActorStatValues:
+# 		Upgrades:
+# 	RenderSprites:
+# 		PlayerPalette: player_rgba
+# 		Image: ra2katyusha
+
+# ra2shilka:
+# 	Inherits: ^Vehicle
+# 	Inherits@Template: ^SupportVehicleTemplate
+# 	Inherits@EXP: ^GainsExperienceTD
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	Valued:
+# 		Cost: 1600
+# 	Tooltip:
+# 		Name: Shilka
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Buildable:
+# 		BuildPaletteOrder: 20
+# 		Prerequisites: ~ra2_soviets_battlelab
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor_jeep.description
+# 	Mobile:
+# 		Speed: 75
+# 		TurnSpeed: 15
+# 	Health:
+# 		HP: 125000
+# 	Repairable:
+# 		HpPerStep: 6250
+# 	ChangesHealth@SelfHealing:
+# 	ChangesHealth@SelfHealing:
+# 		Step: 11
+# 	Turreted:
+# 		TurnSpeed: 30
+# 		Offset: -100,0,300
+# 	Armament:
+# 		Weapon: HeavyAATankCannontkm
+# 		Recoil: 85
+# 		LocalOffset: 800,80,360, 800,-80,360
+# 		MuzzleSequence: muzzle
+# 	FirepowerMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 125
+# 	FirepowerMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 133
+# 	FirepowerMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 150
+# 	ReloadDelayMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 90
+# 	ReloadDelayMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 70
+# 	ReloadDelayMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 50
+# 	RangeMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 105
+# 	RangeMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 110
+# 	RangeMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 115
+# 	WithMuzzleOverlay:
+# 	AttackTurreted:
+# 	FireWarheadsOnDeath:
+# 		Weapon: UnitExplodeSmall
+# 	Voiced:
+# 		VoiceSet: ra2sovietsVehicleVoice
+# 	ActorStatValues:
+# 		Upgrades:
+# 	WithSpriteTurret:
+# 	RenderSprites:
+# 		Image: ra2shilka
+# 		PlayerPalette: player_rgba
+
+# ra2advanceteslatank:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^FireSupportTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@SHADOWS: ^Shadows
+# 	Inherits@TeslaTargeting: ^PrioritizeTesla
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+# 	Valued:
+# 		Cost: 1800
+# 	Tooltip:
+# 		Name: Advance Tesla Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2_soviets_radar
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor_ttnk.description
+# 	Mobile:
+# 		Speed: 75
+# 		TurnSpeed: 15
+# 	Health:
+# 		HP: 75000
+# 	Repairable:
+# 		HpPerStep: 3750
+# 	ChangesHealth@SelfHealing:
+# 		Step: 30
+# 	Armor:
+# 		Type: Medium
+# 	Turreted:
+# 		TurnSpeed: 15
+# 		Offset: 0,0,300
+# 	Armament@PRIMARY:
+# 		Weapon: RA2TankBolt
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && !arctesla
+# 	Armament@PRIMARY2:
+# 		Weapon: RA2TankBolt2
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && arctesla
+# 	Armament@PRIMARY3:
+# 		Weapon: RA2TankBolt3
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && arctesla
+# 	Armament@ELITE:
+# 		Weapon: RA2TankBoltE
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	WithSpriteTurret:
+# 	Voiced:
+# 		VoiceSet: Ra2TeslaTankVoice
+# 	RenderSprites:
+# 		Image: ra2advanceteslatank
+# 		PlayerPalette: player_rgba
+# 	ActorStatValues:
+# 		Upgrades: uparctesla, ra2_soviets_upgrade_terrordronesurprise
+
+# ra2mig:
+# 	Inherits: ^RANeutralPlane
+# 	Inherits@Template: ^FighterTemplate
+# 	Inherits@exp: ^GainsExperienceRA
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	Inherits@AntiAir: ^PrioritizeAir
+# 	Inherits@eject: ^AircraftEjectOnDeath
+# 	Buildable:
+# 		Queue: Aircraft, RAAircraft
+# 		BuildPaletteOrder: 30
+# 		Prerequisites: ~ra2_soviets_airfield
+# 		Description: actor_yak.description
+# 	Valued:
+# 		Cost: 3200
+# 	Tooltip:
+# 		Name: ra1_soviets_migattackbomber
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Health:
+# 		HP: 85000
+# 	ChangesHealth@SelfHealing:
+# 		Step: 34
+# 	Armament@BOMBS:
+# 		Weapon: BlackEagleMissiles
+# 		LocalOffset: 0,-256,-32, 0,256,-32
+# 	Armament@PRIMARY:
+# 		Weapon: YakChainGun
+# 		LocalOffset: 256,-213,0
+# 		MuzzleSequence: muzzle
+# 		PauseOnCondition: !ammo
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: YakChainGun
+# 		LocalOffset: 256,213,0
+# 		MuzzleSequence: muzzle
+# 		PauseOnCondition: !ammo
+# 	FirepowerMultiplier@doublecannonsandbombs:
+# 		Modifier: 25
+# 	AttackAircraft:
+# 		FacingTolerance: 100
+# 	Aircraft:
+# 		TurnSpeed: 11
+# 		Speed: 170
+# 	SelectionDecorations:
+# 	WithMuzzleOverlay:
+# 	Contrail:
+# 		Offset: -853,0,0
+# 	SpawnActorOnDeath:
+# 		Actor: ra2mig.husk
+# 	EjectOnDeath:
+# 		PilotActor: tkm_rifleman
+# 	LeavesTrails:
+# 		Offsets: -853,0,0
+# 		MovingInterval: 2
+# 		Image: smokey
+# 		StationaryInterval: 2
+# 		SpawnAtLastPosition: False
+# 		TrailWhileStationary: True
+# 		Type: CenterPosition
+# 		RequiresCondition: enable-smoke
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280, 0, 128
+# 	Voiced:
+# 		VoiceSet: TSVehicle
+# 	AmmoPool:
+# 		Ammo: 8
+# 		AmmoCondition: ammo
+# 	ReloadAmmoPool:
+# 		Delay: 8
+# 		Count: 1
+# 	WithAmmoPipsDecoration:
+# 		Position: BottomLeft
+# 		RequiresSelection: True
+# 		PipCount: 6
+# 	GrantConditionOnDamageState@SmokeTrail:
+# 		Condition: enable-smoke
+# 	RenderSprites:
+# 		Image: ra2mig
+# 		PlayerPalette: player_rgba
+
+# ra2mig.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: ra1_soviets_migattackbomber
+# 	Contrail:
+# 		Offset: -853,0,0
+# 	Aircraft:
+# 		TurnSpeed: 20
+# 		Speed: 150
+# 	LeavesTrails:
+# 		Offsets: -853,0,0
+# 		MovingInterval: 2
+# 		Image: smokey
+# 		StationaryInterval: 2
+# 		SpawnAtLastPosition: False
+# 		TrailWhileStationary: True
+# 		Type: CenterPosition
+# 	RenderSprites:
+# 		Image: ra2mig
+# 		PlayerPalette: raplayer
+
+# Robot Tank copy for the redalert2 theme (spawned by a SpawnActorWarhead in weapons/redalert2.yaml).
+# Not Buildable: the FutureTech content pack has the real buildable copy (futuretech_robottank); this one
+# previously carried a stray Buildable block that duplicated it in FutureTech's build palette.
+
+yrrobo:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Robot Tank
+	Mobile:
+		Locomotor: hover
+		Speed: 130
+		TurnSpeed: 26
+		PauseOnCondition: !robotcontrol || disabled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 26 #3
+	Armament:
+		Name: primary
+		Weapon: RA2Robotmm
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2Robotmm_elite
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		PauseOnCondition: !robotcontrol || disabled
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: RobotTankVoice
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+		RequiresCondition: !disabled && robotcontrol
+	DeliversCash:
+		Payload: 300
+	-TemporaryOwnerManager:
+	Capturable:
+		Types: thiefproof
+	GrantConditionOnPrerequisite:
+		Condition: robotcontrol
+		Prerequisites: robotcontrol
+	WithColoredOverlay@disabled:
+		Color: 000000b4
+		RequiresCondition: disabled && !chronodisabled || !robotcontrol
+	RenderSprites:
+		PlayerPalette: playerra2
+

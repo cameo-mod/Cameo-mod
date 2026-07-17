@@ -1,0 +1,121 @@
+japan_upgrade_bushidodiscipline:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Bushido Discipline
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_bushidodiscipline.description
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_bushidodiscipline
+	RenderSprites:
+		Image: bushidodisciplineicon
+	ProvidesPrerequisite:
+
+japan_upgrade_waveforcebullets:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Waveforce Bullets
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_waveforcebullets.description
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_waveforcebullets
+	RenderSprites:
+		Image: waveforcebulletsicon
+	ProvidesPrerequisite:
+
+japan_upgrade_divinewindprotocol:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Divine Wind Protocol
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade_divinewindprotocol.description
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_divinewindprotocol
+	RenderSprites:
+		Image: divinewindprotocol
+	ProvidesPrerequisite:
+
+japan_upgrade_stealthsuitintegration:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stealth Suit Integration
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_stealthsuitintegration.description
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_stealthsuitintegration
+	RenderSprites:
+		Image: stealthsuitintegrationicon
+	ProvidesPrerequisite:
+
+japan_upgrade_energizedarrows:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Energized Arrows
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_energizedarrows.description
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_energizedarrows
+	RenderSprites:
+		Image: energizedarrowsicon
+	ProvidesPrerequisite:
+
+japan_upgrade_superiorwarengines:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Superior War Engines
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_superiorwarengines.description
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_superiorwarengines
+	RenderSprites:
+		Image: superiorwarenginesicon
+	ProvidesPrerequisite:
+
+japan_upgrade_advancedplasmaweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Plasma Weapons
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_advancedplasmaweapons.description
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_advancedplasmaweapons
+	RenderSprites:
+		Image: advancedplasmaweaponsicon
+	ProvidesPrerequisite:
+
+japan_upgrade_nanotechrepairs:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: Nanotech Repairs
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade_nanotechrepairs.description
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_nanotechrepairs
+	RenderSprites:
+		Image: nanotechrepairsicon
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_nanotechrepairs

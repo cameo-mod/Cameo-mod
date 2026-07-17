@@ -1,0 +1,372 @@
+^GainsExperienceRA:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			200: rank-veteran
+			400: rank-veteran
+			600: rank-veteran
+			800: rank-veteran
+
+^NuclearEngines:
+	SpeedMultiplier@ra1_soviets_upgrade_unstableisotopes:
+		RequiresCondition: ra1_soviets_upgrade_unstableisotopes
+		Modifier: 120
+	FirepowerMultiplier@ra1_soviets_upgrade_unstableisotopes:
+		RequiresCondition: ra1_soviets_upgrade_unstableisotopes
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_unstableisotopes:
+		Condition: ra1_soviets_upgrade_unstableisotopes
+		Prerequisites: ra1_soviets_upgrade_unstableisotopes
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_unstableisotopes
+
+^RocketEnhancements:
+	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+		Modifier: 125
+	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+		Modifier: 125
+	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
+		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+		Modifier: 150
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_highexplosiverockets:
+		Condition: ra1_soviets_upgrade_highexplosiverockets
+		Prerequisites: ra1_soviets_upgrade_highexplosiverockets
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_highexplosiverockets
+
+^SovietAutoLoaders:
+	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:
+		RequiresCondition: ra1_soviets_upgrade_autoloaders
+		Modifier: 60
+	ReloadAmmoDelayMultiplier@ra1_soviets_upgrade_autoloaders:
+		RequiresCondition: ra1_soviets_upgrade_autoloaders
+		Modifier: 80
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_autoloaders:
+		Condition: ra1_soviets_upgrade_autoloaders
+		Prerequisites: ra1_soviets_upgrade_autoloaders
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_autoloaders
+
+^AdvancedThermobarics:
+	FirepowerMultiplier@ra1_soviets_doctrine_inferno:
+		RequiresCondition: ra1_soviets_doctrine_inferno
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra1_soviets_doctrine_inferno:
+		Condition: ra1_soviets_doctrine_inferno
+		Prerequisites: ra1_soviets_doctrine_inferno
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_inferno
+
+^SovietSteel:
+	DamageMultiplier@ra1_soviets_upgrade_stalinium:
+		RequiresCondition: ra1_soviets_upgrade_stalinium
+		Modifier: 60
+	SpeedMultiplier@ra1_soviets_upgrade_stalinium:
+		RequiresCondition: ra1_soviets_upgrade_stalinium
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_stalinium:
+		Condition: ra1_soviets_upgrade_stalinium
+		Prerequisites: ra1_soviets_upgrade_stalinium
+	ActorStatValues:
+		Upgrades: ra1_soviets_upgrade_stalinium
+
+####################################################################################################
+#		Allied Upgrade Inherits
+####################################################################################################
+
+^AdvancedRadarSystems:
+	RevealsShroudMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 110
+	DetectCloakedMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 110
+	InaccuracyMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 90
+	RangeMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 110
+	FirepowerMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 110
+	ReloadDelayMultiplier@ra1_allies_upgrade_advancedradarsystems:
+		RequiresCondition: ra1_allies_upgrade_advancedradarsystems
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_advancedradarsystems:
+		Condition: ra1_allies_upgrade_advancedradarsystems
+		Prerequisites: ra1_allies_upgrade_advancedradarsystems
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems
+
+^InfantryArmorPlating:
+	DamageMultiplier@ra1_allies_upgrade_infantryarmorplating:
+		RequiresCondition: ra1_allies_upgrade_infantryarmorplating
+		Modifier: 70
+	ReloadDelayMultiplier@ra1_allies_upgrade_infantryarmorplating:
+		RequiresCondition: ra1_allies_upgrade_infantryarmorplating
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_infantryarmorplating:
+		Condition: ra1_allies_upgrade_infantryarmorplating
+		Prerequisites: ra1_allies_upgrade_infantryarmorplating
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_infantryarmorplating
+
+^ReinforcedStructures:
+	DamageMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		RequiresCondition: ra1_allies_upgrade_reinforcedstructures
+		Modifier: 75
+	ProductionCostMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
+		Multiplier: 75
+	ProductionTimeMultiplier@ra1_allies_upgrade_reinforcedstructures:
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
+		Multiplier: 75
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_reinforcedstructures:
+		Condition: ra1_allies_upgrade_reinforcedstructures
+		Prerequisites: ra1_allies_upgrade_reinforcedstructures
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_reinforcedstructures
+
+^LaserTargetingSystems:
+	FirepowerMultiplier@ra1_allies_upgrade_lasertargetingsystems:
+		RequiresCondition: ra1_allies_upgrade_lasertargetingsystems
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_lasertargetingsystems:
+		Condition: ra1_allies_upgrade_lasertargetingsystems
+		Prerequisites: ra1_allies_upgrade_lasertargetingsystems
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_lasertargetingsystems
+
+^ChronoArmor:
+	WithColoredOverlay@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Color: 0000FF44
+	DamageMultiplier@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 65
+	SpeedMultiplier@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 150
+	ReloadDelayMultiplier@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 65
+	GrantTimedCondition@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: chronoarmordamage
+		PauseOnCondition: !chronoarmordamage
+		Condition: chronoarmordamagecooldown
+		Duration: 12
+	GrantConditionOnDamage@ra1_allies_upgrade_chronoarmor:
+		RequiresCondition: ra1_allies_upgrade_chronoarmor
+		Condition: chronoarmordamage
+		Duration: 24
+		PlayerRelationship: Ally, Neutral, Enemy
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_chronoarmor:
+		Condition: ra1_allies_upgrade_chronoarmor
+		Prerequisites: ra1_allies_upgrade_chronoarmor
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_chronoarmor
+
+^CryoMissiles:
+	FirepowerMultiplier@ra1_allies_upgrade_cryomissiles:
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+		Modifier: 75
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_cryomissiles:
+		Condition: ra1_allies_upgrade_cryomissiles
+		Prerequisites: ra1_allies_upgrade_cryomissiles
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_cryomissiles
+
+^WaveforceBullets:
+	FirepowerMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 110
+	ReloadDelayMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 90
+	RangeMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 110
+	RevealsShroudMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 110
+	DetectCloakedMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 110
+	InaccuracyMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
+		Modifier: 90
+	GrantConditionOnPrerequisite@japan_upgrade_waveforcebullets:
+		Condition: japan_upgrade_waveforcebullets
+		Prerequisites: japan_upgrade_waveforcebullets
+	ActorStatValues:
+		Upgrades: japan_upgrade_waveforcebullets
+
+^DivineWindProtocol:
+	DamageMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
+		Modifier: 90
+	FirepowerMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
+		Modifier: 110
+	ReloadDelayMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
+		Modifier: 90
+	ReloadAmmoDelayMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
+		Modifier: 90
+	SpeedMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
+		Modifier: 110
+	GrantConditionOnPrerequisite@japan_upgrade_divinewindprotocol:
+		Condition: japan_upgrade_divinewindprotocol
+		Prerequisites: japan_upgrade_divinewindprotocol
+	ActorStatValues:
+		Upgrades: japan_upgrade_divinewindprotocol
+
+^SuperiorWarEngines:
+	SpeedMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
+		Modifier: 120
+	ReloadDelayMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
+		Modifier: 80
+	DamageMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
+		Modifier: 80
+	GrantConditionOnPrerequisite@japan_upgrade_superiorwarengines:
+		Condition: japan_upgrade_superiorwarengines
+		Prerequisites: japan_upgrade_superiorwarengines
+	ActorStatValues:
+		Upgrades: japan_upgrade_superiorwarengines
+
+^NanoTechRepairs:
+	ChangesHealth@up_nanotechrepairs1:
+		PercentageStep: 1
+		Delay: 100
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_nanotechrepairs
+	ChangesHealth@up_nanotechrepairs2:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: japan_upgrade_nanotechrepairs
+	DamageMultiplier@japan_upgrade_nanotechrepairs:
+		RequiresCondition: japan_upgrade_nanotechrepairs
+		Modifier: 90
+	GrantConditionOnPrerequisite@japan_upgrade_nanotechrepairs:
+		Condition: japan_upgrade_nanotechrepairs
+		Prerequisites: japan_upgrade_nanotechrepairs
+	ActorStatValues:
+		Upgrades: japan_upgrade_nanotechrepairs
+
+^RAE1:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Rifle Infantry
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_e1.description
+	Mobile:
+		Speed: 58
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament@PRIMARY: ##########
+		Weapon: M1Carbine
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: M1Carbine
+		MuzzleSequence: garrison-muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: rae1
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RAGenericVoice
+
+^RAE3:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: RA Rocket Soldier
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: actor_e3.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY: ##########
+		Weapon: RocketsRA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRA
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: rae3
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RAGenericVoice
+
+^RiftBase:
+	Interactable:
+		Bounds: 64, 64
+	ScriptTriggers:
+	RenderSprites:
+	WithSpriteBody:
+	ClassicFacingBodyOrientation:
+		QuantizedFacings: 1
+	HiddenUnderFog:
+		Type: GroundPosition
+	HitShape:
+	Immobile:
+		OccupiesSpace: false
+

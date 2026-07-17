@@ -1,0 +1,23 @@
+^GPSSatelliteSupport:
+	RangeMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
+		Modifier: 110
+	RevealsShroudMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
+		Modifier: 110
+	DetectCloakedMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
+		Modifier: 110
+	InaccuracyMultiplier@ra1_allies_upgrade_gpssatellitesupport:
+		RequiresCondition: ra1_allies_upgrade_gpssatellitesupport
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra1_allies_upgrade_gpssatellitesupport:
+		Condition: ra1_allies_upgrade_gpssatellitesupport
+		Prerequisites: ra1_allies_upgrade_gpssatellitesupport
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_gpssatellitesupport
+
+
+####################################################################################################
+#		Japanese Upgrade Inherits
+####################################################################################################

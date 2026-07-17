@@ -1,0 +1,630 @@
+ra1_soviets_constructionyard:
+	Inherits: ^RAFACT
+	Tooltip:
+		Name: Soviet Construction Yard
+	Transforms:
+		IntoActor: ra1_soviets_mobileconstructionvehicle
+	ProvidesPrerequisite@wirefence:
+		Prerequisite: wirefence
+
+ra1_soviets_barracks:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Inherits@ra1_soviets_barracks: ^Conscription
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, powr
+	Tooltip:
+		Name: Soviet Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -170,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	ProvidesPrerequisite:
+		Prerequisite: rabarracks
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_soviets_orerefinery:
+	Inherits: ^RAPROC
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	GrantConditionOnPrerequisite@Normal:
+		Condition: normalharvester
+		Prerequisites: !ra1_soviets_doctrine_industrialefficiency
+	GrantConditionOnPrerequisite@Industrial:
+		Condition: industrialminer
+		Prerequisites: ra1_soviets_doctrine_industrialefficiency
+	FreeActor@Normal:
+		Actor: ra1_soviets_oretruck
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: normalharvester
+	FreeActor@Industrial:
+		Actor: ra1_soviets_heavyindustrialminer
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: industrialminer
+	Tooltip:
+		Name: Soviet Ore Refinery
+	RenderSprites:
+		Image: raproc
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, powr
+	ProvidesPrerequisite@buildingname:
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_upgrade_wareconomy
+
+ra1_soviets_warfactory:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery, ~!ra1_soviets_doctrine_industrialefficiency
+		Description: template_factory.description
+	Tooltip:
+		Name: Soviet War Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_soviets_largefactory:
+	Inherits: ra1_soviets_warfactory
+	Inherits@shape: ^4x3Shape
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery, ~ra1_soviets_doctrine_industrialefficiency
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Description: template_factory.description
+	Tooltip:
+		Name: Soviet Large Factory
+	Valued:
+		Cost: 3000
+	Health:
+		HP: 600000
+	Power:
+		Amount: -60
+	RevealsShroud:
+		Range: 10000
+	Building:
+		Footprint: xxxx xxxx xxxx ====
+		Dimensions: 4,4
+		LocalCenterOffset: 0,0,0
+	ProductionQueue@VEHICLE:
+		BuildDurationModifier: 50
+	Exit@1:
+		SpawnOffset: 256,512,0
+		ExitCell: 2,3
+	WithIdleOverlay@smoke1:
+		Offset: 250,-750,1250
+		Sequence: smoke
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@smoke2:
+		Offset: 0,-500,1500
+		Sequence: smoke
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@inherits:
+		Prerequisite: ra1_soviets_warfactory
+
+ra1_soviets_radardome:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@dome: ^Dome
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet Radar Dome
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_orerefinery
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+ra1_soviets_airfield:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome, ~!ra1_soviets_doctrine_industrialefficiency
+		Description: actor_raafld.description
+	Tooltip:
+		Name: Soviet Airfield
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	AirstrikePower@spyplane:
+		OrderName: SovietSpyPlane
+		Prerequisites:
+			1:
+			2: ra1_soviets_promotion_superspyplane
+		Icons:
+			1: spyplane
+			2: spyplane
+		ChargeInterval: 4500
+		Names:
+			1: Spy Plane
+			2: Super Spy Plane Squad
+		Descriptions:
+			1: Sends in a Spy Plane to reveal a large area on the map and lock on to enemy units and defenses for 20 seconds.
+			2: Sends in a squad of 3 Spy Planes to reveal a large area on the map and lock on to enemy units and defenses for 30 seconds.
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		CameraActor: camera.spyplane
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: u2
+			2: u3
+		SquadSizes:
+			1: 1
+			2: 3
+		SquadOffset: 4096,4096,0
+		QuantizedFacings: 32
+		DisplayBeacon: true
+		BeaconPosters:
+			1: racamicon
+			2: racamicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 60
+	GrantConditionOnPrerequisite@ra1_soviets_upgrade_afterburners:
+		Condition: ra1_soviets_upgrade_afterburners
+		Prerequisites: ra1_soviets_upgrade_afterburners
+	GrantConditionOnPrerequisite@ra1_soviets_promotion_parabombslevel2:
+		Condition: ra1_soviets_promotion_parabombslevel2
+		Prerequisites: ra1_soviets_promotion_parabombslevel2
+	GrantConditionOnPrerequisite@ra1_soviets_promotion_parabombslevel3:
+		Condition: ra1_soviets_promotion_parabombslevel3
+		Prerequisites: ra1_soviets_promotion_parabombslevel3
+	ProvidesPrerequisite@parabombs1:
+		Prerequisite: parabombs1
+		RequiresCondition: ra1_soviets_upgrade_afterburners || ra1_soviets_promotion_parabombslevel2
+	ProvidesPrerequisite@parabombs2:
+		Prerequisite: parabombs2
+		RequiresCondition: (ra1_soviets_upgrade_afterburners && ra1_soviets_promotion_parabombslevel2) || (!ra1_soviets_upgrade_afterburners && ra1_soviets_promotion_parabombslevel3)
+	ProvidesPrerequisite@parabombs3:
+		Prerequisite: parabombs3
+		RequiresCondition: ra1_soviets_upgrade_afterburners && ra1_soviets_promotion_parabombslevel3
+	AirstrikePower@parabombs:
+		OrderName: Parabombs
+		ChargeInterval: 7500
+		Prerequisites:
+			1: parabombs1
+			2: parabombs2
+			3: parabombs3
+		Icons:
+			1: airstrike
+			2: airstrike
+			3: airstrike
+		Names:
+			1: Parabombs Level 1
+			2: Parabombs Level 2
+			3: Parabombs Level 3
+		Descriptions:
+			1: power_parabombs.description
+			2: power_parabombs.description
+			3: power_parabombs.description
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: badr.bomber
+			2: badr.bomber
+			3: badr.bomber
+		QuantizedFacings: 32
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+			2: airstrike
+			3: airstrike
+		SquadSizes:
+			1: 3
+			2: 5
+			3: 7
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@paratroopers:
+		OrderName: SovietParatroopers
+		ChargeInterval: 9000
+		Prerequisites:
+			1: ra1_soviets_upgrade_afterburners
+			2: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_conscription
+			3: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_industrialefficiency
+			4: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_inferno
+			5: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech
+			6: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_heavyarmor
+			7: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_nuclearwar
+			8: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech
+			9: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor
+			10: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_nuclearwar
+			11: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech
+			12: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor
+			13: ra1_soviets_upgrade_afterburners, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_nuclearwar
+			14: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech
+			15: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_heavyarmor
+			16: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_nuclearwar
+			17: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech
+			18: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor
+			19: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_nuclearwar
+			20: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech
+			21: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor
+			22: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockmortarsoldier, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_nuclearwar
+			23: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech
+			24: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_heavyarmor
+			25: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_nuclearwar
+			26: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech
+			27: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_heavyarmor
+			28: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_nuclearwar
+			29: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech
+			30: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_heavyarmor
+			31: ra1_soviets_upgrade_afterburners, ra1_soviets_promotion_unlockcyberdog, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_nuclearwar
+		Icons:
+			1: paratroopers
+			2: paratroopers
+			3: paratroopers
+			4: paratroopers
+			5: paratroopers
+			6: paratroopers
+			7: paratroopers
+			8: paratroopers
+			9: paratroopers
+			10: paratroopers
+			11: paratroopers
+			12: paratroopers
+			13: paratroopers
+			14: paratroopers
+			15: paratroopers
+			16: paratroopers
+			17: paratroopers
+			18: paratroopers
+			19: paratroopers
+			20: paratroopers
+			21: paratroopers
+			22: paratroopers
+			23: paratroopers
+			24: paratroopers
+			25: paratroopers
+			26: paratroopers
+			27: paratroopers
+			28: paratroopers
+			29: paratroopers
+			30: paratroopers
+			31: paratroopers
+		Names:
+			1: Soviet Paratroopers
+			2: Soviet Paratroopers (Conscription)
+			3: Soviet Paratroopers (Industrial)
+			4: Soviet Paratroopers (Inferno)
+			5: Soviet Paratroopers (Conscription, Tesla Tech)
+			6: Soviet Paratroopers (Conscription, Heavy Armor)
+			7: Soviet Paratroopers (Conscription, Nuclear War)
+			8: Soviet Paratroopers (Industrial, Tesla Tech)
+			9: Soviet Paratroopers (Industrial, Heavy Armor)
+			10: Soviet Paratroopers (Industrial, Nuclear War)
+			11: Soviet Paratroopers (Inferno, Tesla Tech)
+			12: Soviet Paratroopers (Inferno, Heavy Armor)
+			13: Soviet Paratroopers (Inferno, Nuclear War)
+			14: Soviet Paratroopers (Mortar Soldier, Conscription, Tesla Tech)
+			15: Soviet Paratroopers (Mortar Soldier, Conscription, Heavy Armor)
+			16: Soviet Paratroopers (Mortar Soldier, Conscription, Nuclear War)
+			17: Soviet Paratroopers (Mortar Soldier, Industrial, Tesla Tech)
+			18: Soviet Paratroopers (Mortar Soldier, Industrial, Heavy Armor)
+			19: Soviet Paratroopers (Mortar Soldier, Industrial, Nuclear War)
+			20: Soviet Paratroopers (Mortar Soldier, Inferno, Tesla Tech)
+			21: Soviet Paratroopers (Mortar Soldier, Inferno, Heavy Armor)
+			22: Soviet Paratroopers (Mortar Soldier, Inferno, Nuclear War)
+			23: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Tesla Tech)
+			24: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Heavy Armor)
+			25: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Nuclear War)
+			26: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Tesla Tech)
+			27: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Heavy Armor)
+			28: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Nuclear War)
+			29: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Tesla Tech)
+			30: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Heavy Armor)
+			31: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Nuclear War)
+		Descriptions:
+			1: power_paratroopers.description
+			2: power_paratroopers.description
+			3: power_paratroopers.description
+			4: power_paratroopers.description
+			5: power_paratroopers.description
+			6: power_paratroopers.description
+			7: power_paratroopers.description
+			8: power_paratroopers.description
+			9: power_paratroopers.description
+			10: power_paratroopers.description
+			11: power_paratroopers.description
+			12: power_paratroopers.description
+			13: power_paratroopers.description
+			14: power_paratroopers.description
+			15: power_paratroopers.description
+			16: power_paratroopers.description
+			17: power_paratroopers.description
+			18: power_paratroopers.description
+			19: power_paratroopers.description
+			20: power_paratroopers.description
+			21: power_paratroopers.description
+			22: power_paratroopers.description
+			23: power_paratroopers.description
+			24: power_paratroopers.description
+			25: power_paratroopers.description
+			26: power_paratroopers.description
+			27: power_paratroopers.description
+			28: power_paratroopers.description
+			29: power_paratroopers.description
+			30: power_paratroopers.description
+			31: power_paratroopers.description
+		DropItems:
+			1: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			2: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			3: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			4: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			5: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			6: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			7: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			8: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			9: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			10: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			11: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			12: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			13: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			14: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			15: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			16: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			17: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			18: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			19: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			20: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			21: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			22: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			23: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			24: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			25: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			26: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			27: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			28: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			29: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
+			30: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+			31: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 32
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+			2: pinficon
+			3: pinficon
+			4: pinficon
+			5: pinficon
+			6: pinficon
+			7: pinficon
+			8: pinficon
+			9: pinficon
+			10: pinficon
+			11: pinficon
+			12: pinficon
+			13: pinficon
+			14: pinficon
+			15: pinficon
+			16: pinficon
+			17: pinficon
+			18: pinficon
+			19: pinficon
+			20: pinficon
+			21: pinficon
+			22: pinficon
+			23: pinficon
+			24: pinficon
+			25: pinficon
+			26: pinficon
+			27: pinficon
+			28: pinficon
+			29: pinficon
+			30: pinficon
+			31: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		UnitTypes:
+			1: badr.soviet
+			2: badr.soviet
+			3: badr.soviet
+			4: badr.soviet
+			5: badr.soviet
+			6: badr.soviet
+			7: badr.soviet
+			8: badr.soviet
+			9: badr.soviet
+			10: badr.soviet
+			11: badr.soviet
+			12: badr.soviet
+			13: badr.soviet
+			14: badr.soviet
+			15: badr.soviet
+			16: badr.soviet
+			17: badr.soviet
+			18: badr.soviet
+			19: badr.soviet
+			20: badr.soviet
+			21: badr.soviet
+			22: badr.soviet
+			23: badr.soviet
+			24: badr.soviet
+			25: badr.soviet
+			26: badr.soviet
+			27: badr.soviet
+			28: badr.soviet
+			29: badr.soviet
+			30: badr.soviet
+			31: badr.soviet
+		SquadSizes:
+			1: 3
+			2: 4
+			3: 4
+			4: 4
+			5: 5
+			6: 5
+			7: 5
+			8: 5
+			9: 5
+			10: 5
+			11: 5
+			12: 5
+			13: 5
+			14: 6
+			15: 6
+			16: 6
+			17: 6
+			18: 6
+			19: 6
+			20: 6
+			21: 6
+			22: 6
+			23: 7
+			24: 7
+			25: 7
+			26: 7
+			27: 7
+			28: 7
+			29: 7
+			30: 7
+			31: 7
+		SquadOffset: 1792,1792,0
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_soviets_largesovietairfield:
+	Inherits: ra1_soviets_airfield
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Large Soviet Airfield
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 500000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 10000
+		# Footprint is all-passable (==== for the aircraft landing pads), so the default
+		# footprint-based reveal has no occupied cells to project from and gives no vision.
+		# Reveal from the building center instead, like the Soviet War Factory.
+		Type: CenterPosition
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome, ~ra1_soviets_doctrine_industrialefficiency
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: actor_raafld.description
+	WithIdleOverlay@flag:
+		Sequence: flag
+	Building:
+		Footprint: ==== ==== ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	ProductionQueue@AIRCRAFT:
+		BuildDurationModifier: 50
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 0,0, 1,0, 2,0, 3,0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@inherits:
+		Prerequisite: ra1_soviets_airfield
+	RenderSprites:
+		PlayerPalette: raplayer
+
+ra1_soviets_techcenter:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_radardome
+	Tooltip:
+		Name: Soviet Tech Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	ProvidesPrerequisite:
+		Prerequisite: tek
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+	Production@Research:
+		Produces: Research
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra1_soviets_servicedepot:
+	Inherits: ^RAFIX
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet Service Depot
+	Buildable:
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_soviets_warfactory
+	RenderSprites:
+		Image: rafixs

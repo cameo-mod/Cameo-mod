@@ -506,8 +506,7 @@ def main() -> int:
     rows = {k: [] for k in
             ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
              "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18",
-             "F19", "F20", "F21", "F22")}
-    seen_f21 = set()
+             "F19", "F20", "F22")}
 
     names: set[str] = set()
     for f in m.real_factions():
@@ -707,7 +706,6 @@ def main() -> int:
         "F18": "F18 — weapons targeting Air whose damage warheads can't hit Air",
         "F19": "F19 — helicopter/spaceship TurnSpeed ≠ Speed/5",
         "F20": "F20 — AA support vehicle: air range ≠ 1.5 × ground range",
-        "F21": "F21 — RA2 XP elite weapon range ≠ regular + 1000",
         "F22": "F22 — promotion tech gate ≠ unlocked unit's tech gate",
     }
     for k in rows:

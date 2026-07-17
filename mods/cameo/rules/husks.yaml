@@ -176,7 +176,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: ra1_soviet_heavytank
+		IntoActor: ra1_soviets_heavytank
 	RenderSprites:
 		Image: 3tnk.destroyed
 
@@ -187,7 +187,7 @@ TRUCK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: ra1_soviet_mammothtank
+		IntoActor: ra1_soviets_mammothtank
 	RenderSprites:
 		Image: 4tnk.destroyed
 
@@ -290,7 +290,7 @@ MIG.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra1_soviet_migattackbomber
+		Image: ra1_soviets_migattackbomber
 		PlayerPalette: raplayer
 
 su57.Husk:
@@ -313,7 +313,7 @@ su57.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra1_soviet_su57attackbomber
+		Image: ra1_soviets_su57attackbomber
 		PlayerPalette: raplayer
 
 YAK.Husk:
@@ -334,19 +334,19 @@ YAK.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra1_soviet_yakscoutplane
+		Image: ra1_soviets_yakscoutplane
 		PlayerPalette: raplayer
 
 yaktesla.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: ra1_soviet_teslayak
+		Image: ra1_soviets_teslayak
 		PlayerPalette: player_rgba
 
 yakarmored.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
-		Image: ra1_soviet_armoredyak
+		Image: ra1_soviets_armoredyak
 		PlayerPalette: player_rgba
 
 modkami.Husk:
@@ -431,7 +431,7 @@ HIND.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra1_soviet_hindattackhelicopter
+		Image: ra1_soviets_hindattackhelicopter
 		PlayerPalette: raplayer
 
 ra_kamov.Husk:
@@ -452,7 +452,7 @@ ra_kamov.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra1_soviet_kamovattackhelicopter
+		Image: ra1_soviets_kamovattackhelicopter
 		PlayerPalette: player_rgba
 
 JHIND.Husk:

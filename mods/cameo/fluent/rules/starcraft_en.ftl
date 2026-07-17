@@ -4,39 +4,154 @@ faction_terran =
    .description = The Terrans from the StarCraft universe
 
    The Terrans are humans living in the Koprulu Sector of the Milky Way.
+   Descendants of exiled prisoners from Earth, they are a rugged, adaptable
+   civilization characterized by political intrigue, advanced technology,
+   and a survivalist mentality. In the Koprulu Sector, the Terran Confederacy
+   and its successor factions fight for dominance against the alien Zerg
+   and Protoss using versatile mechanical armies and tactical ingenuity.
+
+   In Cameo, the Terrans are a versatile, control-intensive faction that
+   excels at defensive play, positioning, and combined-arms tactics. Their
+   units are generally fragile individually but devastating when used in
+   strategic combinations. The Supply Depot system replaces traditional
+   power plants — units consume supply, and production pauses when supply
+   runs low, but buildings and defenses continue operating without power.
+
+   Difficulty: ©©©©
+   Early Game: ©©©
+   Mid Game: ©©©©
+   Late Game: ©©©©©
+   Playstyle: Turtle / Positional / Combined Arms
+   Strength: Defensive Positioning, Siege Tanks, Air Power, Nuclear Strike
+   Weakness: Fragile Units, High Micro Requirement, Mobility
+   Countered by: Fast Rushes, Swarm Tactics, Psionic Storms
+   Special Units: Siege Tank, Battlecruiser, Ghost, Marine, Firebat, Goliath,
+     Vulture, Wraith, Valkyrie, Jim Raynor (hero)
+   Special Buildings: Bunker, Missile Turret, Supply Depot, Engineering Bay,
+     Starport, Armory, Nuclear Silo
+   Team Upgrades: Infantry upgrades, Vehicle upgrades, Ship upgrades
+   Support powers: Nuclear Strike, Scanner Sweep
+   Superweapons: Nuclear Strike
 
    Features:
    - Units consume power (supply game mechanics)
    - Unit production pauses on low power
    - Buildings and defenses do not require power to operate
-   - Wield powerful mechanical units both on ground and air.
-   - Buildings are modular and can be lifted
-   - Can deploy the Nuclear Strike.
+   - Wield powerful mechanical units both on ground and air
+   - Buildings are modular and can be lifted off and relocated
+   - Can deploy the Nuclear Strike via Ghost laser designator
+   - Siege Tank: transforms between mobile and devastating siege artillery mode
+   - Bunker: garrisonable defensive structure for up to 4 infantry
+   - Supply Depot system: supply cap limits army size, expandable via depots
+   - Marine + Medic + Stimpack: classic bio-ball composition
+   - Wraith: cloaked fighter for air superiority
+   - Battlecruiser: capital ship with Yamato Cannon
+   - Vulture: fast raider with spider mines
+   - Goliath: versatile anti-air and anti-ground walker
+   - Scanner Sweep: reveals area and detects cloaked units
 
 faction_protoss =
    .description = The Protoss from the StarCraft universe
 
-   The Protoss are sapient humanoid species native to the Koprulu Sector of the Milky Way.
+   The Protoss are a sapient humanoid species native to the Koprulu Sector
+   of the Milky Way. They are an ancient, technologically advanced race with
+   powerful psionic abilities, built on honor, tradition, and the pursuit of
+   knowledge. The Protoss were once the greatest civilization in the galaxy,
+   but their homeworld of Aiur was invaded by the Zerg, forcing them to
+   reconcile a thousand-year division between the Khalai and the Dark Templar.
+
+   In Cameo, the Protoss are a high-tech, high-cost faction with powerful
+   but expensive units. Every Protoss unit and structure has plasma shields
+   that absorb damage and regenerate over time. Their units are individually
+   the strongest in the game, but their high cost means they cannot afford
+   to lose many. The Purifier Beam is a devastating orbital superweapon.
+
+   Difficulty: ©©©
+   Early Game: ©©
+   Mid Game: ©©©©
+   Late Game: ©©©©©
+   Playstyle: Tech / Power Units / Positional
+   Strength: Powerful Units, Shields, Psionic Abilities, Air Power
+   Weakness: Expensive Units, Slow Production, Low Unit Count
+   Countered by: Swarm Tactics, Economic Harassment, Early Rushes
+   Special Units: Zealot, Dragoon, High Templar, Reaver, Carrier,
+     Arbiter, Corsair, Scout, Fenix (hero)
+   Special Buildings: Pylon, Gateway, Robotics Facility, Stargate,
+     Templar Archives, Citadel, Observatory
+   Team Upgrades: Ground weapons, ground armor, shields, air weapons, air armor
+   Support powers: Purifier Beam, Psionic Storm
+   Superweapons: Purifier Beam
 
    Features:
    - Units consume power (supply game mechanics)
    - Unit production pauses on low power
    - Buildings and defenses do not require power to operate
-   - Units and structures are shielded
-   - Can build area shield generators
-   - Can deploy the Purifier Beam.
+   - Units and structures are shielded (shields regenerate over time)
+   - Can build area shield generators (Shield Battery)
+   - Can deploy the Purifier Beam orbital superweapon
+   - Zealot: powerful melee warrior with charge ability
+   - Dragoon: ranged cybernetic walker, anti-air capable
+   - High Templar: casts Psionic Storm and Hallucination
+   - Reaver: slow but devastating siege unit with scarab projectiles
+   - Carrier: air capital ship that launches interceptor drones
+   - Arbiter: cloaks all nearby friendly units, can recall and stasis
+   - Corsair: anti-air fighter with disruption web
+   - Pylon power system: buildings must be placed near a pylon
+   - Warp-in technology for rapid unit production
 
 faction_zerg =
    .description = The Zerg from the StarCraft universe
 
-   The Zerg are sapient, biologically advanced, arthropodal aliens native to the Koprulu Sector of the Milky Way.
+   The Zerg are a sapient, biologically advanced, arthropodal alien species
+   native to the Koprulu Sector. Driven by a hive mind, their sole purpose
+   is to consume and assimilate other species, constantly evolving to become
+   the perfect lifeforms. The Zerg Overmind and later the Queen of Blades
+   command vast broods that swarm across planets, overwhelming all opposition
+   through sheer numbers and biological ferocity.
+
+   In Cameo, the Zerg are a swarm faction that excels at rapid production,
+   map control, and overwhelming numbers. Their unique larva-based system
+   allows parallel unit production from a single structure. All Zerg units
+   and buildings are biological and slowly regenerate health over time.
+   Buildings must be placed on Creep, which also provides vision and
+   movement speed bonuses to Zerg units.
+
+   Difficulty: ©©©
+   Early Game: ©©©©©
+   Mid Game: ©©©©
+   Late Game: ©©©©
+   Playstyle: Swarm / Map Control / Economic Overwhelm
+   Strength: Rapid Production, Unit Numbers, Mobility, Burrow Ambushes
+   Weakness: Fragile Individual Units, Area-of-Effect Damage
+   Countered by: Splash Damage, Siege Lines, Psionic Storm
+   Special Units: Zergling, Hydralisk, Mutalisk, Ultralisk, Defiler,
+     Lurker, Queen, Overlord, Scourge, Infested Terran
+   Special Buildings: Hatchery, Spawning Pool, Hydralisk Den, Spire,
+     Ultralisk Cavern, Defiler Mound
+   Team Upgrades: Melee attacks, missile attacks, carapace, flying attacks,
+     flying carapace, metabolic boost, adrenal glands
+   Support powers: Nydus Canal (instant transport), Infestation
+   Superweapons: N/A (relies on swarm overwhelming instead)
 
    Features:
    - Units consume power (supply game mechanics)
-   - Parallel unit production based on larvae
+   - Parallel unit production based on larvae (multiple units from one Hatchery)
    - Requires special area (Zerg creep) in order to build structures
    - Buildings and defenses do not require power to operate
    - Relatively powerful units, with various support units
+   - All units and buildings are biological and regenerate health over time
+   - Burrow: units can hide underground for ambushes
+   - Creep spread provides vision and movement speed bonuses
+   - Overlord: flying supply provider, can transport units and detect cloaked
+   - Zergling: cheapest combat unit, 2 per larva, fast and deadly in swarms
+   - Hydralisk: versatile ranged anti-air and anti-ground
+   - Mutalisk: flying unit that bounces attacks between targets
+   - Ultralisk: massive melee unit that tanks enormous damage
+   - Defiler: support unit with Dark Swarm and Plague abilities
+   - Lurker: burrowed siege unit that attacks in a line
+   - Scourge: cheap flying suicide unit for anti-air
+   - Queen: can infest enemy Command Centers and parasite units
+   - Nydus Canal: creates instant transport network across the map
 
 faction_randomsc =
    .description = Random Faction (StarCraft)

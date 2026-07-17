@@ -1,0 +1,401 @@
+ra1_allies_blackhawk:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra1_allies_alliedhelipad
+		Queue: Aircraft, RAAircraft
+		Description: actor_mh60.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Black Hawk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: ChainGunMH60
+		LocalOffset: 85,-213,-85, 85,213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: ChainGunMH60
+		LocalOffset: 85,213,-85, 85,-213,-85
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 25
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	Aircraft:
+		TurnSpeed: 26
+		Speed: 130
+	WithIdleOverlay@ROTORAIR:
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: MH60.Husk
+	EjectOnDeath:
+		PilotActor: ra1_allies_machinegunner
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1440, 1440
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	Parachutable: ##########
+		FallRate: 20
+		KilledOnImpassableTerrain: true
+		GroundCorpseSequence:
+		GroundCorpsePalette:
+		WaterImpactSound: splash9.aud
+		WaterCorpseSequence: small_splash
+		ParachutingCondition: parachute
+	WithParachute: ##########
+		ShadowImage: parach_shadow
+		ShadowSequence: idle
+		Image: parach
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,427
+		RequiresCondition: parachute
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 6
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_longbow:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter
+		Queue: Aircraft, RAAircraft
+		Description: actor_raheli.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Longbow
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament:
+		Weapon: Hellfire
+		LocalOffset: 50,250,-100, 50,-250,-100
+		LocalYaw: -75, 75
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade: ##########
+		Weapon: HellfireCryo
+		LocalOffset: 50,250,-100, 50,-250,-100
+		LocalYaw: -75, 75
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	Aircraft:
+		Speed: 150
+		TurnSpeed: 30
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: HELI.Husk
+	EjectOnDeath:
+		PilotActor: RAE3
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	Parachutable: ##########
+		FallRate: 20
+		KilledOnImpassableTerrain: true
+		GroundCorpseSequence:
+		GroundCorpsePalette:
+		WaterImpactSound: splash9.aud
+		WaterCorpseSequence: small_splash
+		ParachutingCondition: parachute
+	WithParachute: ##########
+		ShadowImage: parach_shadow
+		ShadowSequence: idle
+		Image: parach
+		Sequence: idle
+		OpeningSequence: open
+		Offset: 0,0,427
+		RequiresCondition: parachute
+	AmmoPool:
+		Ammo: 3
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 32
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 3
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_alliedchinooktransport:
+	Inherits: ^Helicopter
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@CM: ^CountermeasuresUpgrade
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	Tooltip:
+		Name: Allied Chinook Transport
+	Valued:
+		Cost: 3600
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~ra1_allies_alliedhelipad
+		BuildPaletteOrder: 10
+		Description: actor_tran.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra1_allies_alliedchinooktransport
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 125
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,213
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,213
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,341
+		Sequence: rotor2
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,341
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 10
+	SpawnActorOnDeath:
+		Actor: RATRAN.Husk
+	EjectOnDeath:
+		PilotActor: RAE1
+	SelectionDecorations:
+	Selectable:
+		Class: ra1_allies_alliedchinooktransport
+		DecorationBounds: 1920, 1920
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: ra1_allies_alliedchinooktransport
+		PlayerPalette: raplayer
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
+
+ra1_allies_rapierjumpjet:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@CryoMissiles: ^CryoMissiles
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockrapierjumpjet
+		Description: actor_rapierjumpjet.description
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Rapier Jumpjet
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 77500
+	Repairable:
+		HpPerStep: 3875
+	ChangesHealth@SelfHealing:
+		Step: 31
+	Armament@PRIMARY:
+		Weapon: RapierBombs
+		LocalOffset: 256,213,0, 256,-213,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@Upgrade:
+		Weapon: RapierBombsCryo
+		LocalOffset: 256,213,0, 256,-213,0
+		PauseOnCondition: !ammo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: Aphid
+		LocalOffset: 0,-512,0, 0,512,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !ra1_allies_upgrade_cryomissiles
+	Armament@SECONDARYUpgrade:
+		Name: secondary
+		Weapon: AphidCryo
+		LocalOffset: 0,-512,0, 0,512,0
+		LocalYaw: 64, -64
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: ra1_allies_upgrade_cryomissiles
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 40
+		StrafeRunLength: 2500
+	Aircraft:
+		CruiseAltitude: 2560
+		InitialFacing: 768
+		TurnSpeed: 14
+		Speed: 210
+		RepulsionSpeed: 40
+		MaximumPitch: 50
+		IdealSeparation: 2000
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -1000,0,200
+	SpawnActorOnDeath:
+		Actor: rapierjumpjet.Husk
+	EjectOnDeath:
+		PilotActor: ra1_allies_alliedsniper
+	LeavesTrails:
+		Offsets: -1000,0,200
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: ra1_allies_rapierjumpjet
+		PlayerPalette: player_rgba
+	AmmoPool:
+		Ammo: 12
+		ReloadDelay: 16
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport

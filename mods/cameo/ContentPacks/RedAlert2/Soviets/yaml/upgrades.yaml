@@ -1,0 +1,197 @@
+ra2_soviets_doctrine_conscription:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Conscription
+	Buildable:
+		Description: All Soviet Infantry costs 25% less und train 25% faster.
+		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1, !global_conscription_buff
+	RenderSprites:
+		Image: ra2_soviets_doctrine_conscription
+	ProvidesPrerequisite@ra2_soviets_doctrine_1:
+		Prerequisite: ra2_soviets_doctrine_1
+	ProvidesPrerequisite@global_conscription_buff:
+		Prerequisite: global_conscription_buff
+
+ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Harsh Environment Infantry Conditioning
+	Buildable:
+		Description: All Soviet Infantry can survive harsh environmental conditions and take 50% less damage from fire, nuclear or chemical weapons and gain extra regeneration.
+		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1
+	RenderSprites:
+		Image: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	ProvidesPrerequisite@ra1_soviets_upgrade_hazmatsuits:
+		Prerequisite: ra1_soviets_upgrade_hazmatsuits
+	ProvidesPrerequisite@ra2_soviets_doctrine_1:
+		Prerequisite: ra2_soviets_doctrine_1
+
+ra2_soviets_doctrine_shocktroopertraining:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Shock Trooper Training
+	Buildable:
+		Description: All Soviet Infantry start at veteran rank and gain 15% more Range, Speed and Firepower.
+		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1
+	RenderSprites:
+		Image: ra2_soviets_doctrine_shocktroopertraining
+	ProvidesPrerequisite@ra2_soviets_doctrine_shocktroopertraining:
+		Prerequisite: infantry.upgraded
+	ProvidesPrerequisite@ra2_soviets_doctrine_1:
+		Prerequisite: ra2_soviets_doctrine_1
+
+ra2_soviets_doctrine_heavyarmorplatings:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Heavy Armor Platings
+	Buildable:
+		Description: All Soviet Vehicles and Aircraft have 25% more Damage Resistance but move 10% slower.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
+	RenderSprites:
+		Image: ra2_soviets_doctrine_heavyarmorplatings
+	ProvidesPrerequisite@ra2_soviets_doctrine_2:
+		Prerequisite: ra2_soviets_doctrine_2
+
+ra2_soviets_doctrine_reactivearmor:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Reactive Armor
+	Buildable:
+		Description: Tanks gain gain 50% Damage Resistance to Area of Effect weapons and 10% Damage Resistance against everything else but move 5% slower.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
+	RenderSprites:
+		Image: ra2_soviets_doctrine_reactivearmor
+	ProvidesPrerequisite@ra2_soviets_doctrine_2:
+		Prerequisite: ra2_soviets_doctrine_2
+
+ra2_soviets_doctrine_tesladischargearmor:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Tesla Discharge Armor
+	Buildable:
+		Description: Causes Armor to slowly charge up once enemies are nearby. When fully charged Tesla Arcs discharge upon taking damage. Gives 15% more Damage Resistance. While Tesla Armor is charging up Speed is reduced by 15% but increased by 15% if out of combat.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
+	RenderSprites:
+		Image: ra2_soviets_doctrine_tesladischargearmor
+	ProvidesPrerequisite@ra2_soviets_doctrine_2:
+		Prerequisite: ra2_soviets_doctrine_2
+
+ra2_soviets_doctrine_firemunitions:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Fire Munitions
+	Buildable:
+		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons spread fire and deal 25% more damage.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
+	RenderSprites:
+		Image: ra2_soviets_doctrine_firemunitions
+	ProvidesPrerequisite@ra2_soviets_doctrine_3:
+		Prerequisite: ra2_soviets_doctrine_3
+
+ra2_soviets_doctrine_nuclearmunitions:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Nuclear Munitions
+	Buildable:
+		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation and deal 25% more damage.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
+	RenderSprites:
+		Image: ra2_soviets_doctrine_nuclearmunitions
+	ProvidesPrerequisite@ra2_soviets_doctrine_3:
+		Prerequisite: ra2_soviets_doctrine_3
+
+ra2_soviets_doctrine_teslamunitions:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Tesla Munitions
+	Buildable:
+		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons zap nearby targets on impact and deal 25% more damage.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
+	RenderSprites:
+		Image: ra2_soviets_doctrine_teslamunitions
+	ProvidesPrerequisite@ra2_soviets_doctrine_3:
+		Prerequisite: ra2_soviets_doctrine_3
+
+ra2_soviets_upgrade_terrordronesurprise:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Terror Drone Surprise
+	Buildable:
+		Description: Vehicles have a 75% chance of releasing a Terror Drone on destruction.
+		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_upgrade_terrordronesurprise
+	RenderSprites:
+		Image: ra2_soviets_terrordrone
+
+ra2_soviets_upgrade_teslacoilchargers:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Tesla Coil Chargers
+	Buildable:
+		Queue: Research
+		Description: Provide all Tesla Coils with chargers.
+		Prerequisites: ~ra2_soviets_battlelab, !ra2_soviets_upgrade_teslacoilchargers
+	RenderSprites:
+		Image: ra2_soviets_teslacoil
+	ProvidesPrerequisite:
+
+### Battle Lab ###
+
+ra2_soviets_upgrade_teslaoverload:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Tesla Overload
+	Buildable:
+		Description: Allows tesla bolts to jump to nearby targets and cause EMP damage. Increases Firepower by 25%.
+		Prerequisites: ~ra2_soviets_battlelab, !ra2_soviets_upgrade_teslaoverload
+	RenderSprites:
+		Image: ra2_soviets_upgrade_teslaoverload
+
+ra2_soviets_upgrade_heavycannons:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Heavy Cannons
+	Buildable:
+		Description: Increases Tank Cannon and Flak Firepower by 30% and Range by 15%.
+		Prerequisites: ~ra2_soviets_battlelab, !ra2_soviets_upgrade_heavycannons
+	RenderSprites:
+		Image: ra2_soviets_upgrade_heavycannons
+
+ra2_soviets_upgrade_grindertanktreads:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Grinder Tank Treads
+	Buildable:
+		Description: All Soviet Tanks and tracked Vehicles gain 15% more Speed and Damage Resistance and faster Regeneration.
+		Prerequisites: ~ra2_soviets_battlelab, !ra2_soviets_upgrade_grindertanktreads
+	RenderSprites:
+		Image: ra2_soviets_upgrade_grindertanktreads
+
+ra2_soviets_upgrade_kirovarmorplatings:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Kirov Armor Platings
+	Buildable:
+		Description: Increases Damage Resistance of Kirovs and V3 Rockets by 25%.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, !ra2_soviets_upgrade_kirovarmorplatings
+	RenderSprites:
+		Image: ra2_soviets_upgrade_kirovarmorplatings
+
+ra2_soviets_upgrade_gastroburners:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Gastroburners
+	Buildable:
+		Description: Increases Speed of Kirovs by 25% and V3 Range by 15%.
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, !ra2_soviets_upgrade_gastroburners
+	RenderSprites:
+		Image: ra2_soviets_upgrade_gastroburners
+
+ra2_soviets_upgrade_kirovatomicbombs:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Kirov Atomic Bombs
+	Buildable:
+		Description: Replaces the Kirov Bombs with Atomic Bombs
+		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_nuclearmissilesilo, !ra2_soviets_upgrade_kirovatomicbombs
+	RenderSprites:
+		Image: ra2_soviets_upgrade_kirovatomicbombs

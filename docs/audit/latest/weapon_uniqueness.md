@@ -7,8 +7,8 @@ damaging armament weapons checked: 1385; W1 same-faction 39, W2 cross-faction 35
 
 | weapon | faction(s) | actors |
 |---|---|---|
-| asianflamerturret | asianalliance | asian_alliance_asianflametrooper, asian_alliance_asiansentryflamer |
-| asianrailtank2 | asianalliance | asian_alliance_heavyrailguntank, asian_alliance_railguntank |
+| asianflamerturret | asianalliance | asianalliance_asianflametrooper, asianalliance_asiansentryflamer |
+| asianrailtank2 | asianalliance | asianalliance_heavyrailguntank, asianalliance_railguntank |
 | bcyamatocannon | terran | terran_battlecruiser, terran_phobos |
 | cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repair_drone |
 | d2k_apc_rocket | ordos | ordos_apc, ordos_dustdrone |
@@ -93,7 +93,7 @@ damaging armament weapons checked: 1385; W1 same-faction 39, W2 cross-faction 35
 
 | weapon | actors |
 |---|---|
-| asiangrenade | asian_alliance_asianmilitia, asian_alliance_warturtle |
+| asiangrenade | asianalliance_asianmilitia, asianalliance_warturtle |
 | chaingun | ra1_soviet_hindattackhelicopter, ra1_soviet_kamovattackhelicopter |
 | dragunovsniper | futuretech_salamanderifv, ra1_soviet_dragunovantimaterialsniper, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | drplasmatankweapon | futuretech_salamanderifv, ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |

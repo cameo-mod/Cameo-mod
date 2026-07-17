@@ -1218,7 +1218,7 @@ latinsyndicate_collectiontruck:
 		Palette: ra2effect
 
 latinsyndicate_demolitiontruck:
-	Inherits: ra1_soviet_nukedemotruck
+	Inherits: ra1_soviets_nukedemotruck
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@vo: ^AttackFrontalVoice
@@ -1256,7 +1256,7 @@ latinsyndicate_demolitiontruck:
 #   Pass those units to Syndicate
 
 latinsyndicate_nuketruck:
-	Inherits: ra1_soviet_nukedemotruck
+	Inherits: ra1_soviets_nukedemotruck
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

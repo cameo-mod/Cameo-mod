@@ -33,6 +33,26 @@ suite can gate CI.
 | `audit_fluent.py` | B12 | unresolved fluent refs; orphaned actor-* keys; coverage |
 | `audit_power_budget.py` | R2 | worst-case stacked multipliers > 2.0× |
 | `audit_stat_formulas.py` | house rules | HpPerStep=HP/20, SelfHeal=HP/2500 (inf /1000), shield regen=2×heal, defense vision=weapon range + DetectCloaked=range/2 + power=-cost/20, vehicle TurnSpeed=Speed/5 (turretless 2×, artillery Archer firing-slow), fighter/bomber TurnSpeed=Speed/15, AA defense gated by radar tier + advanced defense by tech tier, StartingUnits existence + light(~2000)/heavy(~10000) composition at 5:1 inf:veh, AA weapons must have Air-capable damage warheads |
+| `audit_weapon_uniqueness.py` | §10 | actors sharing the same weapon (violates per-actor weapon ownership) |
+| `audit_garrison_weapons.py` | §15 | garrisonable actors missing garrison weapon overrides |
+| `audit_asset_files.py` | §9.1 | asset filenames not matching actor id convention |
+| `audit_promotion_gating.py` | §15 | promotion units not strictly stronger than base |
+| `audit_min_range.py` | §3 | weapons with range below minimum threshold |
+| `audit_basebuilder_crates.py` | B5 | crate action references to nonexistent actors |
+| `audit_buildable_order.py` | §5 | build palette ordering and tech tier inference |
+| `audit_display_text.py` | B7 | display names containing raw actor IDs or stale references |
+| `audit_rename_safety.py` | §9.1 | pre-rename safety checks (shared assets, voice sets) |
+| `audit_elite_naming.py` | §16.3 | elite weapons not following `_elite` suffix convention |
+| `audit_missing_elite.py` | §16.3 | RA2-styled actors (`^GainsExperienceRA2`) missing elite armaments |
+| `audit_elite_gating.py` | §16.3 | elite armaments missing `RequiresCondition: rank-elite` |
+| `audit_rank_decoration.py` | §16.2 | `^GainsExperienceTD` actors missing/wrong `^*RankDecoration` |
+| `audit_dune_rank_decoration.py` | §16.2 | D2k actors specifically missing `^DuneRankDecoration` |
+| `audit_effect_warhead_names.py` | §8 | CreateEffect warhead naming violations |
+| `audit_weapon_suffixes.py` | §1 | weapon suffix conventions: `_elite`, `_EMP`, `_AA` |
+| `audit_balance_sheet.py` | §12 | cross-reference cameo_armor_system.xlsx vs in-game stats |
+| `audit_createeffect_image.py` *(in tools/)* | §8 | CreateEffect warheads carrying explicit `Image:` field |
+| `audit_ce_image_usage.py` *(in tools/)* | §8 | classifies CE-only vs shared images |
+| `audit_consistency_report.py` | meta | verifies fixes from `docs/audit/CONSISTENCY_REPORT.md` are not regressed |
 | `gen_faction_matrix.py` | §5.1 | regenerates `docs/factions/MATRIX.md` |
 | `gen_damage_matrix.py` | §8.1 | armor classes + Versus aggregates |
 | `gen_rename_maps.py` | §9.1 | naming compliance; writes `tools/rename/rename_map_<faction>.yaml` |

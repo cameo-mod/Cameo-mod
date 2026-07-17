@@ -40,7 +40,7 @@ chaomine.asian:
 	Health:
 		HP: 20000
 
-asian_alliance_quasar:
+asianalliance_quasar:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -57,7 +57,7 @@ asian_alliance_quasar:
 	UpdatesPlayerStatistics:
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory
+		Prerequisites: ~asianalliance_asianwarfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_aaquas.description
 	Mobile:
@@ -75,38 +75,38 @@ asian_alliance_quasar:
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_alliance_upgrade_celestialpower
+		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@UpgradeAG:
 		Weapon: AsianQuasarAGEMP
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_upgrade_celestialpower
+		RequiresCondition: asianalliance_upgrade_celestialpower
 	Armament@AA:
 		Weapon: AsianQuasarAA
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_alliance_upgrade_celestialpower
+		RequiresCondition: !asianalliance_upgrade_celestialpower
 	Armament@UpgradeAA:
 		Weapon: AsianQuasarAAEMP
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_upgrade_celestialpower
+		RequiresCondition: asianalliance_upgrade_celestialpower
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: asian_alliance_quasar
+		Image: asianalliance_quasar
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: AsianQuasarVoice
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_celestialpower
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_celestialpower
 
-asian_alliance_dragonfly:
+asianalliance_dragonfly:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -122,7 +122,7 @@ asian_alliance_dragonfly:
 	UpdatesPlayerStatistics:
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory
+		Prerequisites: ~asianalliance_asianwarfactory
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:
@@ -139,16 +139,16 @@ asian_alliance_dragonfly:
 		Type: Light
 	Selectable:
 		DecorationBounds: 1280, 1280
-		Class: asian_alliance_dragonfly
+		Class: asianalliance_dragonfly
 	RenderSprites:
-		Image: asian_alliance_dragonfly
+		Image: asianalliance_dragonfly
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: TroopCrawlerVoice
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: asian_alliance_asianmilitia, asian_alliance_asianmilitia, asian_alliance_asiantankkiller, asian_alliance_asiantankkiller
+		InitialUnits: asianalliance_asianmilitia, asianalliance_asianmilitia, asianalliance_asiantankkiller, asianalliance_asiantankkiller
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -161,9 +161,9 @@ asian_alliance_dragonfly:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
-asian_alliance_lynxtank:
+asianalliance_lynxtank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -180,7 +180,7 @@ asian_alliance_lynxtank:
 		Cost: 850
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory
+		Prerequisites: ~asianalliance_asianwarfactory
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -221,22 +221,22 @@ asian_alliance_lynxtank:
 		Weapon: AsianLynxMG
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_doctrine_asianphalanx && !rank-elite
+		RequiresCondition: asianalliance_doctrine_asianphalanx && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianLynxMG_elite
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_doctrine_asianphalanx && rank-elite
+		RequiresCondition: asianalliance_doctrine_asianphalanx && rank-elite
 	ProximityExternalCondition@AsianPhalanx:
 		Range: 7500
 		ValidRelationships: Ally
 		Condition: AsianPhalanx
-		RequiresCondition: asian_alliance_doctrine_asianphalanx
+		RequiresCondition: asianalliance_doctrine_asianphalanx
 	WithRangeCircle@AsianPhalanx:
 		Range: 7500
 		Type: AsianPhalanx
 		Color: 88888888
-		RequiresCondition: asian_alliance_doctrine_asianphalanx
+		RequiresCondition: asianalliance_doctrine_asianphalanx
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -245,10 +245,10 @@ asian_alliance_lynxtank:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
-asian_alliance_oiltruck:
-	Inherits: ra1_soviet_nukedemotruck
+asianalliance_oiltruck:
+	Inherits: ra1_soviets_nukedemotruck
 	Inherits@anim: ^RA2Vehicle
 	Inherits@vo: ^AttackFrontalVoice
 	#Inherits@announce: ^AnnounceGlobal
@@ -260,7 +260,7 @@ asian_alliance_oiltruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianradar, asian_alliance_tankreactor
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar, asianalliance_tankreactor
 		Description: actor_aaoilt.description
 	Valued:
 		Cost: 1000
@@ -281,9 +281,9 @@ asian_alliance_oiltruck:
 		CargoType: OilTruck
 		CustomPipType: red
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_asianmobileconstructionvehicle:
+asianalliance_asianmobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -292,9 +292,9 @@ asian_alliance_asianmobileconstructionvehicle:
 	Tooltip:
 		Name: Asian Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianservicedepot
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianservicedepot
 	Transforms:
-		IntoActor: asian_alliance_asianconstructionyard
+		IntoActor: asianalliance_asianconstructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -307,9 +307,9 @@ asian_alliance_asianmobileconstructionvehicle:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
-asian_alliance_droneminer:
+asianalliance_droneminer:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -327,7 +327,7 @@ asian_alliance_droneminer:
 	Buildable:
 		BuildDuration: 125
 		BuildDurationModifier: 100
-		Prerequisites: ~asian_alliance_asianorerefinery
+		Prerequisites: ~asianalliance_asianorerefinery
 		Queue: Vehicle, RAVehicle
 		Description: template_harvester.description
 	Health:
@@ -364,9 +364,9 @@ asian_alliance_droneminer:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
-asian_alliance_pulverizer:
+asianalliance_pulverizer:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -383,7 +383,7 @@ asian_alliance_pulverizer:
 		Name: Pulverizer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianradar, ~!asian_alliance_promotion_unlockpulverizermecha
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar, ~!asianalliance_promotion_unlockpulverizermecha
 		Queue: Vehicle, RAVehicle
 		Description: actor_aapulv.description
 	Mobile:
@@ -410,7 +410,7 @@ asian_alliance_pulverizer:
 		LocalOffset: 800,0,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_doctrine_heavypulverizerweapons
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -421,7 +421,7 @@ asian_alliance_pulverizer:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_heavypulverizerweapons
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons
 
 ptnk.asian:
 	Inherits: ^Tank
@@ -440,7 +440,7 @@ ptnk.asian:
 		Name: Plasma Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockplasmatank, asian_alliance_asianbattlelab
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockplasmatank, asianalliance_asianbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -481,9 +481,9 @@ ptnk.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_viper:
+asianalliance_viper:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -498,7 +498,7 @@ asian_alliance_viper:
 		Name: Viper
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianradar
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianradar
 		Queue: Vehicle, RAVehicle
 		Description: actor_aaviper.description
 	Mobile:
@@ -529,7 +529,7 @@ asian_alliance_viper:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: asian_alliance_viper
+		Image: asianalliance_viper
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: AsianAllianceViperVoice
@@ -537,9 +537,9 @@ asian_alliance_viper:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	ActorStatValues:
-		Upgrades: asian_alliance_doctrine_asianphalanx
+		Upgrades: asianalliance_doctrine_asianphalanx
 
-asian_alliance_type89mlrs:
+asianalliance_type89mlrs:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -559,7 +559,7 @@ asian_alliance_type89mlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockmlrs, asian_alliance_asianbattlelab
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockmlrs, asianalliance_asianbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_mlrs.description
 	Mobile:
@@ -585,16 +585,16 @@ asian_alliance_type89mlrs:
 	WithMuzzleOverlay:
 	RenderRangeCircle:
 	RenderSprites:
-		Image: asian_alliance_type89mlrs
+		Image: asianalliance_type89mlrs
 		PlayerPalette: playerra2
 	WithTurretAimAnimation:
 		Sequence: aim
 	Voiced:
 		VoiceSet: AsianAllianceVehicleVoice
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_howitzer:
+asianalliance_howitzer:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
@@ -611,7 +611,7 @@ asian_alliance_howitzer:
 		Name: Howitzer
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockhowitzer, asian_alliance_militaryacademy
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockhowitzer, asianalliance_militaryacademy
 		Queue: Vehicle, RAVehicle
 		Description: actor_aahowi.description
 	Mobile:
@@ -667,9 +667,9 @@ asian_alliance_howitzer:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_asianflametank:
+asianalliance_asianflametank:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@FireActor: ^FireActor
@@ -687,7 +687,7 @@ asian_alliance_asianflametank:
 		Name: Asian Flame Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockflametank
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockflametank
 		Queue: Vehicle, RAVehicle
 		Description: actor_ftnk.description
 	Mobile:
@@ -726,9 +726,9 @@ asian_alliance_asianflametank:
 	FireWarheadsOnDeath@flame:
 		Weapon: AsianOilBombFragments
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_dragonfire
 
-asian_alliance_pulverizermecha:
+asianalliance_pulverizermecha:
 	Inherits: ^Walker
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -751,7 +751,7 @@ asian_alliance_pulverizermecha:
 		Name: Pulverizer Mecha
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianbattlelab, ~asian_alliance_promotion_unlockpulverizermecha
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~asianalliance_promotion_unlockpulverizermecha
 		Queue: Vehicle, RAVehicle
 		Description: actor_aamecha.description
 	Mobile:
@@ -776,7 +776,7 @@ asian_alliance_pulverizermecha:
 		LocalOffset: 800,-300,600, 800,300,600
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_alliance_doctrine_heavypulverizerweapons
+		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:
@@ -797,9 +797,9 @@ asian_alliance_pulverizermecha:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_heavypulverizerweapons
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_heavypulverizerweapons
 
-asian_alliance_railguntank:
+asianalliance_railguntank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -815,7 +815,7 @@ asian_alliance_railguntank:
 		Name: Railgun Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianbattlelab, ~!asian_alliance_promotion_unlockheavyrailguntank
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~!asianalliance_promotion_unlockheavyrailguntank
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -853,10 +853,10 @@ asian_alliance_railguntank:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_celestialpower
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_upgrade_celestialpower
 
-asian_alliance_heavyrailguntank:
-	Inherits: asian_alliance_railguntank
+asianalliance_heavyrailguntank:
+	Inherits: asianalliance_railguntank
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 2200
@@ -864,7 +864,7 @@ asian_alliance_heavyrailguntank:
 		Name: Heavy Railgun Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_asianbattlelab, ~asian_alliance_promotion_unlockheavyrailguntank
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_asianbattlelab, ~asianalliance_promotion_unlockheavyrailguntank
 		Queue: Vehicle, RAVehicle
 	Mobile:
 		Locomotor: tracked
@@ -885,7 +885,7 @@ asian_alliance_heavyrailguntank:
 		Weapon: AsianRailTank3
 		RequiresCondition: rank-elite
 
-asian_alliance_warturtle:
+asianalliance_warturtle:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -905,7 +905,7 @@ asian_alliance_warturtle:
 		Name: War Turtle
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~asian_alliance_asianwarfactory, asian_alliance_promotion_unlockwarturtle, asian_alliance_militaryacademy
+		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockwarturtle, asianalliance_militaryacademy
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:
@@ -939,7 +939,7 @@ asian_alliance_warturtle:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
-		InitialUnits: asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_plasmatrooper,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_veteranarcher,asian_alliance_asdf
+		InitialUnits: asianalliance_asianmilitia,asianalliance_asiantankkiller,asianalliance_plasmatrooper,asianalliance_asianflametrooper,asianalliance_fanatic,asianalliance_veteranarcher,asianalliance_asdf
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -953,13 +953,13 @@ asian_alliance_warturtle:
 		AllowMovement: true
 	Selectable:
 		DecorationBounds: 1440, 1440, 0, -128
-		Class: asian_alliance_warturtle
+		Class: asianalliance_warturtle
 	Voiced:
 		VoiceSet: AsianAllianceVehicleVoice
 	DeliversCash:
 		Payload: 1000
 	RenderSprites:
-		Image: asian_alliance_warturtle
+		Image: asianalliance_warturtle
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_doctrine_modernizedinfantryequipment, asian_alliance_upgrade_banzaimode
+		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode

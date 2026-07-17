@@ -521,12 +521,13 @@ cabal_repair_drone:
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
 	AutoTarget:
-		EnableTargeting: false
-		EnableScanning: true
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 12
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
-		PersistentTargeting: false
+		PersistentTargeting: true
 	-SpawnActorOnDeath:
 	Voiced:
 		VoiceSet: TSCABALVehicles

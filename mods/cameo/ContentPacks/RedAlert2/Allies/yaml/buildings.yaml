@@ -1,0 +1,377 @@
+ra2_allies_alliedconstructionyard:
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Tooltip:
+		Name: Allied Construction Yard
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Transforms:
+		IntoActor: ra2_allies_alliedmobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+		RequiresCondition: factundeploy
+	WithBuildingPlacedOverlay:
+	WithIdleOverlay@fans:
+		Sequence: idle-fans
+		RequiresCondition: !build-incomplete
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	ProvidesPrerequisite@ra2oilderrick:
+		Prerequisite: ra2oilderrick
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: ra2gacnst.infiltrated
+		Types: TechStealerInfiltrate
+
+ra2_allies_alliedwarfactory:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Tooltip:
+		Name: Allied War Factory
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+	WithIdleOverlay@fan:
+		Sequence: overlay-fan
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+ra2_allies_alliedpowerplant:
+	Inherits: ^RA2Building
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Allied Power Plant
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Description: template_power.description
+		Prerequisites: ~ra2_allies_alliedconstructionyard
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 250
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience:
+		ValidTypes: building
+	WithIdleOverlay@glow:
+		Sequence: idle-glow
+	ProvidesPrerequisite@buildingname:
+
+ra2_allies_alliedbarracks:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@ra1_soviets_barracks: ^IsBarrack
+	Tooltip:
+		Name: Allied Barracks
+	ProvidesPrerequisite:
+		Prerequisite: RA2Barracks
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedpowerplant
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -700,800,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 100,1200,0
+		ExitCell: 1,3
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@flag:
+		Sequence: idle-flag
+		RequiresCondition: !build-incomplete
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+
+ra2_allies_alliedorerefinery:
+	Inherits: ^RA2Building
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Allied Ore Refinery
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedpowerplant
+	Building:
+		Footprint: xxx= xxx= x+==
+		Dimensions: 4,3
+	DockHost:
+		Type: Unload
+		DockAngle: 640
+		DockOffset: 1086,1086,0
+	DrawLineToTarget:
+	FreeActor:
+		Actor: ra2_allies_chronominer
+		SpawnOffset: 3,2
+		Facing: 128
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@bib:
+		Sequence: idle-bib
+	WithIdleOverlay@drill:
+		Sequence: idle-drill
+
+ra2_allies_airforcecommandhq:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@radar: ^RadarBuilding
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Queue: Building, RABuilding
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedorerefinery
+		Description: actor_gaairc.description
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -50
+	Tooltip:
+		Name: Airforce Command HQ
+	Building:
+		Footprint: x== ===
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 0,1, 2,1, 1,0
+		KillOnRemove: false
+	ParatroopersPower@ra2paratroopers:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ra2_allies_upgrade_paratroopers
+		OrderName: USA Paratroopers
+		IconImage: ra2_allies_airforcecommandhq
+		Icons:
+			1: icon2
+		ChargeInterval: 6000
+		Names:
+			1: Airborne
+		Descriptions:
+			1: power_paratroopers.description
+		DropItems:
+			1: ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi,ra2_allies_guardiangi,ra2_allies_gi
+		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+		SelectTargetSpeechNotification: SelectTarget
+		IncomingSpeechNotification: EnemyUnitsApproaching
+		AllowImpassableCells: false
+		QuantizedFacings: 8
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		UnitTypes:
+			1: ra2cplane
+		SquadSizes:
+			1: 3
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+	SupportPowerChargeBar:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bottom:
+		Sequence: idle-bottom
+		PauseOnCondition: disabled
+	WithIdleOverlay@mid:
+		Sequence: idle-mid
+		PauseOnCondition: disabled
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+
+ra2_allies_orepurifier:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@2: ^LargeCashTricklerWithExperience
+	Inherits@3: ^CashTricklerLimited
+	Tooltip:
+		Name: Ore Purifier
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab
+		Queue: Building, RABuilding
+		Description: actor_gaorep.description
+		BuildLimit: 1
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	WithIdleOverlay@glow:
+		Sequence: idle-glow
+	ProvidesPrerequisite@buildingname:
+	ResourcePurifier:
+		Modifier: 25
+
+ra2_allies_alliedservicedepot:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Tooltip:
+		Name: Allied Service Depot
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedwarfactory
+	Building:
+		Footprint: Xx_ === _=_
+		Dimensions: 3,3
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	WithIdleOverlay@side:
+		Sequence: idle-side
+	WithIdleOverlay@bib:
+		Sequence: bib
+	WithResupplyAnimation:
+		Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+
+ra2_allies_alliedbattlelab:
+	Inherits: ^RA2Building
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Selectable:
+		Bounds: 3072, 2048, 0, -256
+	Buildable:
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_airforcecommandhq
+	Tooltip:
+		Name: Allied Battle Lab
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 3,2
+	SupportPowerChargeBar:
+	ProvidesPrerequisite:
+		Prerequisite: ra2tek
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+	GrantExternalConditionPower@forceshield:
+		OrderName: ForceShield
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ra2_allies_upgrade_forceshield
+		Icons:
+			1: forceshield
+		ChargeInterval: 4500
+		Names:
+			1: power_forceshield.name
+		Descriptions:
+			1: power_forceshield.description
+		Durations:
+			1: 375
+		Conditions:
+			1: forceshield
+		Dimensions:
+			1: 7,7
+		Footprints:
+			1: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
+		OnFireSound: sforceon.wav
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		EndChargeSpeechNotification:
+		EndChargeTextNotification: Force shield ready.
+		LaunchSpeechNotification:
+		LaunchTextNotification: Warning: Force shield activated.
+		IncomingSpeechNotification:
+		IncomingTextNotification: Warning: Force shield activated.
+		BlockedCursor: move-blocked
+
+ra2_allies_spysatelliteuplink:
+	Inherits: ^RA2Building
+	Inherits@radar: ^RadarBuilding
+	Inherits@shape: ^2x2Shape
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@sell: ^RA2ASpawnActorsOnSell
+	Tooltip:
+		Name: Spy Satellite Uplink
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~ra2_allies_alliedconstructionyard, ra2_allies_alliedbattlelab
+		Description: actor_gaspysat.description
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: -200
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Production:
+		Produces: SpySatellite
+	Exit:
+	ProduceActorPower@spysat:
+		Prerequisites:
+			1:
+		Icons:
+			1: gps
+		Names:
+			1: power_ra2spysat.name
+		Descriptions:
+			1: power_ra2spysat.description
+		Actors: camera.gpssat
+		Type: SpySatellite
+		ChargeInterval: 4500
+		OrderName: RA2SpySatellite
+		AutoFire: True
+		PauseOnCondition: disabled
+		IncomingSound: bspyon.wav
+		LaunchSound: bspyon.wav
+	SupportPowerChargeBar:
+	WithIdleOverlay@dish:
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		RequiresCondition: !build-incomplete

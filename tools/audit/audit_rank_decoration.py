@@ -27,6 +27,9 @@ FACTION_DECORATION = {
     'ContentPacks/TiberianSun/GDI/': 'GDIRankDecoration',
     'ContentPacks/TiberianSun/Nod/': 'NodRankDecoration',
     'ContentPacks/D2k/': 'DuneRankDecoration',
+    'ContentPacks/Starcraft/Zerg/': 'AlienRankDecoration',
+    'ContentPacks/Starcraft/Terran/': 'TerranRankDecoration',
+    'ContentPacks/Starcraft/Protoss/': 'ProtossRankDecoration',
 }
 
 # Check rank image sequences exist
@@ -91,14 +94,14 @@ for dirpath, _, filenames in os.walk(root):
                             rank_decoration = dec
                             break
                     j += 1
-                
+
                 # Determine expected decoration from path
                 expected = None
                 for prefix, dec in FACTION_DECORATION.items():
                     if prefix in rel:
                         expected = dec
                         break
-                
+
                 if has_gains_ra2 and rank_decoration:
                     results.append((rel, i+1, actor_name, "RA2 actor has RankDecoration (should not)", rank_decoration))
                 elif has_gains_td and not rank_decoration:
