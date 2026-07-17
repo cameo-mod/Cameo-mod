@@ -233,7 +233,7 @@ zerg_swarmling:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: zerg_greaterspire, ~zerg_hive, zerg_promotion_unlockswarmling
+		Prerequisites: zerg_greaterspire, ~zerg_hive, ~zerg_promotion_unlockswarmling
 		Queue: SCZergInfantry
 		Description: actor_scswarmling.description
 	Aircraft:

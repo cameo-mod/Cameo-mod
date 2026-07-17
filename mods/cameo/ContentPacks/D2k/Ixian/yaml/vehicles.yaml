@@ -103,7 +103,7 @@ ixian_ixsiegetank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_promotion_unlockixsiegetank, ixian_outpost
+		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockixsiegetank, ixian_outpost
 		Description: actor_siege_tank.description
 		IconPalette: ra2
 	Health:
@@ -1195,7 +1195,7 @@ ixian_neocymek:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_promotion_unlockneocymek, ixian_ixresearchcenter
+		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
 		Description: Colossal Ixian Mech.
 	Mobile:
 		Speed: 45
@@ -1291,7 +1291,7 @@ ixian_ixprojector:
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_promotion_unlockixprojector, ixian_ixresearchcenter
+		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
 		Description: actor_ixprojector.description
 		IconPalette: windows256
 	Health:

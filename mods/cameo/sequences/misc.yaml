@@ -2982,7 +2982,7 @@ alienrank:
 
 protossrank:
 	Defaults:
-		Filename: alienranks.png
+		Filename: protossranks.png
 		Offset: 0, 3
 	rank-veteran-1:
 	rank-veteran-2:
@@ -2995,7 +2995,7 @@ protossrank:
 
 terranrank:
 	Defaults:
-		Filename: alienranks.png
+		Filename: terranranks.png
 		Offset: 0, 3
 	rank-veteran-1:
 	rank-veteran-2:
@@ -3020,6 +3020,21 @@ dunerank:
 		Offset: 1, 3
 
 ra2rank:
+	Defaults:
+		Filename: ra2rank.shp
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-veteran-4:
+		Start: 3
+	rank-elite:
+		Start: 4
+		Offset: 1, 3
+
+schwarzermondrank:
 	Defaults:
 		Filename: ra2rank.shp
 		Offset: 0, 3

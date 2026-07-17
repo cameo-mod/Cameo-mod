@@ -1426,7 +1426,7 @@ upemergencyrepair3:
 		Prerequisite: upemergencyrepair3
 
 usabomber:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Tooltip:
 		Name: Cargo Plane
 	SpawnActorOnDeath:
@@ -1486,7 +1486,7 @@ usabomber.carpet:
 		RequiresSelection: True
 
 usabomber.carpet2:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 223
 	AttackBomber:
@@ -1611,7 +1611,7 @@ usabomber.leaflet:
 		RequiresSelection: True
 
 a10generals:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: USAA10MG
 		LocalOffset: 1024,0,-85
@@ -1661,7 +1661,7 @@ a10generals.Husk:
 		Image: a10
 
 usabomber.motherbomb:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 223
 	Armament:
@@ -1833,7 +1833,7 @@ GLAMCV.bot:
 
 
 GLA.Paradrop:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Tooltip:
 		Name: GLA Cargo Plane
 	RenderSprites:
@@ -5424,7 +5424,7 @@ upgpscram:
 		Prerequisite: upgpscram
 
 GLSYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: glsupply, ~glaselected
@@ -5448,7 +5448,7 @@ GLSYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -9304,7 +9304,7 @@ chhelix.husk:
 		Image: chhelix
 
 CHSYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: chsupply, ~chselected
@@ -9328,7 +9328,7 @@ CHSYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -12860,7 +12860,7 @@ usafirebase:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 	Armament@Passenger1:
@@ -13190,7 +13190,7 @@ upstealthcomanche:
 		Prerequisite: upstealthcomanche
 
 USASYRD:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: usasupply, ~usaselected
@@ -13214,7 +13214,7 @@ USASYRD:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:
@@ -14350,7 +14350,7 @@ leangcarpetbomb:
 		Queue: Promotions
 
 leangsyrd:
-	Inherits: RA1SYRD
+	Inherits: ra1_allies_alliednavalyard
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: leangsupply
@@ -14374,7 +14374,7 @@ leangsyrd:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
 	RenderSprites:
-		Image: ra1syrd
+		Image: ra1_allies_alliednavalyard
 	-ProductionBar@NAVALALLIES:
 	-ProductionBar@RANAVALALLIES:
 	Power:

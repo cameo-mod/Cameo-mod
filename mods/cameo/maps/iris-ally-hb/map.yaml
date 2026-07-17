@@ -115,7 +115,7 @@ Actors:
 	Actor174: ra1_soviets_teslacoil
 		Owner: Nitro
 		Location: 90,42
-	Actor176: apwr
+	Actor176: ra1_advancedpowerplant
 		Owner: Nitro
 		Location: 100,41
 	Actor177: ra1_soviets_radardome
@@ -155,19 +155,19 @@ Actors:
 	Actor195: ra1_soviets_flametower
 		Owner: Nitro
 		Location: 90,43
-	Actor196: powr
+	Actor196: ra1_powerplant
 		Owner: Nitro
 		Location: 95,44
 	Actor197: ra1_soviets_constructionyard
 		Owner: Nitro
 		Location: 100,44
-	Actor199: powr
+	Actor199: ra1_powerplant
 		Owner: Nitro
 		Location: 97,44
-	Actor200: powr
+	Actor200: ra1_powerplant
 		Owner: Nitro
 		Location: 104,44
-	Actor201: powr
+	Actor201: ra1_powerplant
 		Owner: Nitro
 		Location: 106,44
 	Actor213: splitgold
@@ -366,7 +366,7 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 15,72
-	Actor340: rae1
+	Actor340: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -399,12 +399,12 @@ Actors:
 		Owner: Nitro
 		Facing: 499
 		Location: 23,70
-	Actor348: rae1
+	Actor348: ra1_allies_rifleinfantry
 		Owner: Nitro
 		SubCell: 3
 		Facing: 384
 		Location: 19,69
-	Actor349: rae1
+	Actor349: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -423,7 +423,7 @@ Actors:
 		Owner: Nitro
 		Facing: 504
 		Location: 20,67
-	Actor365: rae1
+	Actor365: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -464,7 +464,7 @@ Actors:
 	Actor396: tc03
 		Owner: Neutral
 		Location: 96,68
-	Actor397: powr
+	Actor397: ra1_powerplant
 		Owner: Neutral
 		Health: 9
 		Location: 11,78
@@ -517,7 +517,7 @@ Actors:
 	Actor428: gmine
 		Owner: Neutral
 		Location: 42,73
-	Actor429: rae1
+	Actor429: ra1_allies_rifleinfantry
 		Owner: Nitro
 		SubCell: 3
 		Facing: 384
@@ -648,7 +648,7 @@ Actors:
 		SubCell: 3
 		Facing: 384
 		Location: 43,79
-	Actor475: rae1
+	Actor475: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -677,12 +677,12 @@ Actors:
 		Facing: 384
 		SubCell: 3
 		Location: 51,84
-	Actor482: rae1
+	Actor482: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
 		Location: 51,82
-	Actor483: rae1
+	Actor483: ra1_allies_rifleinfantry
 		Owner: Nitro
 		Facing: 384
 		SubCell: 3
@@ -1084,7 +1084,7 @@ Actors:
 	Actor603: splitgold
 		Owner: Neutral
 		Location: 82,95
-	Actor604: ra1jsyrd
+	Actor604: japan_japanesenavalyard
 		Owner: NitroJP
 		Location: 97,96
 	Actor605: moneycrate.large
@@ -1393,10 +1393,10 @@ Actors:
 	Actor451: japan_japaneseradararray
 		Owner: NitroJP
 		Location: 99,81
-	Actor581: apwr
+	Actor581: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 94,78
-	Actor596: apwr
+	Actor596: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 98,78
 	Actor616: japan_waveforcereactor
@@ -1483,13 +1483,13 @@ Actors:
 	Actor724: brik
 		Owner: Neutral
 		Location: 108,38
-	Actor726: powr
+	Actor726: ra1_powerplant
 		Owner: Nitro
 		Location: 85,6
-	Actor727: powr
+	Actor727: ra1_powerplant
 		Owner: Nitro
 		Location: 87,6
-	Actor728: apwr
+	Actor728: ra1_advancedpowerplant
 		Owner: Nitro
 		Location: 83,12
 	Actor729: ra1_soviets_barracks
@@ -1504,7 +1504,7 @@ Actors:
 	Actor733: ra1_soviets_techcenter
 		Owner: Nitro
 		Location: 81,6
-	Actor735: apwr
+	Actor735: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 95,12
 	Actor738: japan_japanesetechcenter
@@ -1522,13 +1522,13 @@ Actors:
 	Actor742: japan_japaneseorerefinery
 		Owner: NitroJP
 		Location: 74,13
-	Actor743: apwr
+	Actor743: ra1_advancedpowerplant
 		Owner: NitroJP
 		Location: 79,12
 	Actor745: ra1_soviets_servicedepot
 		Owner: Nitro
 		Location: 102,16
-	Actor746: kenn
+	Actor746: ra1_soviets_kennel
 		Owner: Nitro
 		Location: 82,19
 	Actor748: ra1_soviets_teslacoil
@@ -1568,10 +1568,10 @@ Actors:
 	Actor737: japan_waveforcereactor
 		Owner: NitroJP
 		Location: 91,6
-	Actor765: powr
+	Actor765: ra1_powerplant
 		Owner: Nitro
 		Location: 78,6
-	Actor766: powr
+	Actor766: ra1_powerplant
 		Owner: Nitro
 		Location: 98,6
 	Actor767: brik
@@ -2294,19 +2294,19 @@ Actors:
 	Actor730: ra1_soviets_warfactory
 		Owner: Nitro
 		Location: 91,18
-	Actor942: yamatobattleship
+	Actor942: japan_yamatobattleship
 		Owner: NitroJP
 		Facing: 384
 		Location: 101,98
-	Actor943: japanspeedboat
+	Actor943: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 96,100
-	Actor944: japanspeedboat
+	Actor944: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 100,101
-	Actor945: japanspeedboat
+	Actor945: japan_japanesespeedboat
 		Owner: NitroJP
 		Facing: 384
 		Location: 104,99

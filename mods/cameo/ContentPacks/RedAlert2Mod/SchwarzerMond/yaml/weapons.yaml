@@ -730,7 +730,7 @@ NaxDieGlocke:
 		Weapon: RA2Cloud
 		InvalidTargets: Water
 
-ÜbermenschLaser:
+UbermenschLaser:
 	Inherits: NaxiAlienPistol
 	Range: 5801
 	ReloadDelay: 30
@@ -748,8 +748,8 @@ NaxDieGlocke:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 
-ÜbermenschLaserE:
-	Inherits: ÜbermenschLaser
+UbermenschLaserE:
+	Inherits: UbermenschLaser
 	Range: 6801
 	Burst: 4
 	BurstDelays: 3
@@ -1005,25 +1005,25 @@ Lunar_AmplifiedTank2LaserAA:
 		Color: f3e021AA
 
 Lunar_YellowUbermenschLaser:
-	Inherits: ÜbermenschLaser
+	Inherits: UbermenschLaser
 	Burst: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_YellowUbermenschLaserE:
-	Inherits: ÜbermenschLaserE
+	Inherits: UbermenschLaserE
 	Burst: 5
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_AmplifiedUbermenschLaser:
-	Inherits: ÜbermenschLaser
+	Inherits: UbermenschLaser
 	Burst: 4
 	Projectile: LaserZap
 		Color: f3e021AA
 
 Lunar_AmplifiedUbermenschLaserE:
-	Inherits: ÜbermenschLaserE
+	Inherits: UbermenschLaserE
 	Burst: 6
 	Projectile: LaserZap
 		Color: f3e021AA

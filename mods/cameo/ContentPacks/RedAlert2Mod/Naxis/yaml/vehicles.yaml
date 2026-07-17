@@ -421,7 +421,7 @@ naxis_maus:
 		Name: Maus
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_heavyvehicles
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_heavyvehicles
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -487,7 +487,7 @@ naxis_ratte:
 	Buildable:
 		BuildPaletteOrder: 150
 		BuildLimit: 1
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_theratte
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_theratte
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -670,7 +670,7 @@ naxis_sturmtiger:
 		Name: Sturm Tiger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_heavyvehicles
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_heavyvehicles
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_sturmtiger.description
 	Mobile:
@@ -891,7 +891,7 @@ naxis_donnerschlag:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_donnerschlagmodelandotheradvancedmissiles
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_donnerschlagmodelandotheradvancedmissiles
 		Description: actor_nax_brad.description
 	Valued:
 		Cost: 2300
@@ -990,7 +990,7 @@ naxis_nop03sarubia:
 		Name: Nop-03 Sarubia
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_sarubiamodel
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_sarubiamodel
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_sarubia.description
 	Mobile:
@@ -1042,7 +1042,7 @@ naxis_shoekarn:
 		Name: Shoe Karn
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_shoekarnandking
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_shoekarnandking
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_shoe.description
 	Mobile:
@@ -1130,7 +1130,7 @@ naxis_nokana:
 	Buildable:
 		BuildPaletteOrder: 80
 		BuildLimit: 1
-		Prerequisites: ~naxis_warfactory, naxis_techcenter, naxis_promotion_bossestanks
+		Prerequisites: ~naxis_warfactory, naxis_techcenter, ~naxis_promotion_bossestanks
 		Queue: Vehicle, RAVehicle
 		Description: actor_nax_nokana.description
 	Mobile:

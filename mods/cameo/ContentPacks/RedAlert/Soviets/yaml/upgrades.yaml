@@ -102,7 +102,7 @@ ra1_soviets_upgrade_menofsteel:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_menofsteel
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_menofsteel_proxy_actor
+		Actor: ra1_soviets_upgrade_menofsteel_proxy_actor
 
 ra1_soviets_upgrade_massproduction:
 	Inherits: ^tech_upgrade_template
@@ -124,7 +124,7 @@ ra1_soviets_upgrade_wareconomy:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_wareconomy
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_wareconomy_proxy_actor
+		Actor: ra1_soviets_upgrade_wareconomy_proxy_actor
 
 ra1_soviets_upgrade_incendiarybullets:
 	Inherits: ^tech_upgrade_template
@@ -146,7 +146,7 @@ ra1_soviets_upgrade_scorchedearth:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_scorchedearth
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_scorchedearth_proxy_actor
+		Actor: ra1_soviets_upgrade_scorchedearth_proxy_actor
 
 ra1_soviets_upgrade_teslaarcing:
 	Inherits: ^tech_upgrade_template
@@ -178,7 +178,7 @@ ra1_soviets_upgrade_reactoroverload:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_reactoroverload
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_reactoroverload_proxy_actor
+		Actor: ra1_soviets_upgrade_reactoroverload_proxy_actor
 
 ra1_soviets_upgrade_autoloaders:
 	Inherits: ^tech_upgrade_template
@@ -210,7 +210,7 @@ ra1_soviets_upgrade_stalinium:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_stalinium
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_stalinium_proxy_actor
+		Actor: ra1_soviets_upgrade_stalinium_proxy_actor
 
 ra1_soviets_upgrade_unstableisotopes:
 	Inherits: ^tech_upgrade_template
@@ -242,7 +242,7 @@ ra1_soviets_upgrade_nucleartankshells:
 	RenderSprites:
 		Image: ra1_soviets_upgrade_nucleartankshells
 	ProvidesTeamProxyActor:
-		Actor: ra_upgrade_nuclearshells_proxy_actor
+		Actor: ra1_soviets_upgrade_nuclearshells_proxy_actor
 
 ra1_soviets_upgrade_afterburners:
 	Inherits: ^unit_upgrade_template

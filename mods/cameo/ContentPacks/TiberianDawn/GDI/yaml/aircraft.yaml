@@ -262,7 +262,7 @@ td_gdi_firehawk:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_gdi_helipad, td_gdi_advancedcommunicationscenter, td_gdi_promotion_unlockfirehawk
+		Prerequisites: ~td_gdi_helipad, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockfirehawk
 		Description: actor_firehawk.description
 	Health:
 		HP: 180000

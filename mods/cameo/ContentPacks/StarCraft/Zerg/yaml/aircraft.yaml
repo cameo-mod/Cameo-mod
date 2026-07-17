@@ -110,7 +110,7 @@ zerg_broodweaver:
 		OverrideActor: zerg_overlord
 	Buildable:
 		BuildPaletteOrder: 0
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockbroodweaver
+		Prerequisites: ~zerg_hatchery, ~zerg_promotion_unlockbroodweaver
 		Queue: SCZergInfantry
 		Description: actor_scbroodweaver.description
 	Aircraft:
@@ -532,6 +532,7 @@ zerg_guardian:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
@@ -576,6 +577,7 @@ zerg_gorekraken:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^ZergRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
@@ -649,7 +651,7 @@ zerg_behemoth:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: ~zerg_lair, zerg_promotion_unlockbehemoth
+		Prerequisites: ~zerg_lair, ~zerg_promotion_unlockbehemoth
 		Queue: SCZergInfantry
 		Description: actor_scbehemoth.description
 	Aircraft:

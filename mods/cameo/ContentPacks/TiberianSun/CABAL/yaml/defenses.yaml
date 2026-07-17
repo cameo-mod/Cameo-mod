@@ -292,7 +292,7 @@ cabal_plasmaturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory, ~disabled
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory
 		Description: Advanced base defense.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Valued:
 		Cost: 800

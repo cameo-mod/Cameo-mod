@@ -28,7 +28,7 @@ FPWR:
 		Type: Wood
 	WithBuildingBib:
 	RenderSprites:
-		Image: POWR
+		Image: ra1_powerplant
 	Valued:
 		Cost: 30
 
@@ -91,7 +91,7 @@ SYRF:
 	RequiresBuildableArea:
 		Adjacent: 8
 	RenderSprites:
-		Image: RA1SYRD
+		Image: ra1_allies_alliednavalyard
 	Valued:
 		Cost: 100
 	Health:
@@ -136,7 +136,7 @@ SPEF:
 	RequiresBuildableArea:
 		Adjacent: 8
 	RenderSprites:
-		Image: RASPEN
+		Image: ra1_soviets_subpen
 	Valued:
 		Cost: 80
 	Health:
@@ -287,7 +287,7 @@ FAPW:
 		Type: Wood
 	WithBuildingBib:
 	RenderSprites:
-		Image: APWR
+		Image: ra1_advancedpowerplant
 	Selectable:
 		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:

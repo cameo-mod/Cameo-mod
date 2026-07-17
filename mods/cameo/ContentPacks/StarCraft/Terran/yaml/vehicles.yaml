@@ -282,7 +282,7 @@ terran_matador:
 		Amount: -85
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~terran_weaponsfactory, terran_promotion_unlockmatador
+		Prerequisites: ~terran_weaponsfactory, ~terran_promotion_unlockmatador
 		Description: actor_scmatador.description
 	Mobile:
 		Speed: 100
@@ -395,7 +395,7 @@ terran_cyclone:
 		Amount: -115
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~terran_engineeringbay, terran_promotion_unlockcyclone
+		Prerequisites: ~terran_engineeringbay, ~terran_promotion_unlockcyclone
 		Description: actor_sccyclone.description
 	Mobile:
 		Speed: 115
@@ -533,6 +533,7 @@ terran_goliathmk2:
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir

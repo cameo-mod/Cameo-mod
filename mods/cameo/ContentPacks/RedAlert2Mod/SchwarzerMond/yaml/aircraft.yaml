@@ -401,7 +401,7 @@ schwarzermond_haunebuii:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzermond_airfield
+		Prerequisites: ~schwarzermond_airfield, !schwarzermond_promotion_haunebuiii
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu.description
 	Aircraft:
@@ -489,7 +489,7 @@ schwarzermond_haunebuiii:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_haunebuiii
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu2.description
 	Aircraft:
@@ -580,7 +580,7 @@ schwarzermond_corruptorpiercer:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_piercer
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_piercer.description
 	Health:
@@ -668,7 +668,7 @@ schwarzermond_dieglocke:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_airfield, schwarzermond_techcenter, ~schwarzermond_promotion_dieglocke
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_dieglocke.description

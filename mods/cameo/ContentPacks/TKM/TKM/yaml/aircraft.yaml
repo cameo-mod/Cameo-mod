@@ -149,7 +149,7 @@ tkm_viper:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~tkm_airpad, tkm_techcenter, tkm_promotion_unlockviper
+		Prerequisites: ~tkm_airpad, tkm_techcenter, ~tkm_promotion_unlockviper
 		Description: actor_yak.description
 	Valued:
 		Cost: 1750

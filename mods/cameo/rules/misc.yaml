@@ -1057,7 +1057,7 @@ powerproxy.parabombs:
 		OneShot: true
 		AllowMultiple: true
 		UnitTypes:
-			1: badr.bomber
+			1: ra1_badger_bomber
 		SquadSizes:
 			1: 1
 		SelectTargetSpeechNotification: SelectTarget
@@ -1107,7 +1107,7 @@ powerproxy.paratroopers:
 		SquadSizes:
 			1: 1
 		UnitTypes:
-			1: badr
+			1: ra1_badger
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 8

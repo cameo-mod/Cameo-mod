@@ -17,14 +17,14 @@ World:
 		ClassName: Light Support
 		Factions: mindustryc
 		BaseActor: mindclass_core
-		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank
+		SupportActors: ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_alliedrocketsoldier,ra1_allies_alliedrocketsoldier,ra1_allies_ranger,ra1_allies_alliedlighttank
 
 	MPStartUnits@heavymindustryc:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: mindustryc
 		BaseActor: mindclass_core
-		SupportActors: rae1,rae1,rae1,rae3,rae3,ra1_allies_ranger,ra1_allies_alliedlighttank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank
+		SupportActors: ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_alliedrocketsoldier,ra1_allies_alliedrocketsoldier,ra1_allies_ranger,ra1_allies_alliedlighttank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank,ra1_allies_alliedmediumtank
 
 mindclass_core:
 	Inherits: ^BaseBuilding

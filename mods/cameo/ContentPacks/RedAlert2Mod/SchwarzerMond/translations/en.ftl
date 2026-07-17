@@ -49,7 +49,7 @@ faction_ra2_schwarzermond =
       - Crystal Lens and Amplified Lens: upgrade path for laser weapons
       - Timing attack playstyle: weak early, dominant mid game
 
-actor_schwarzermond_bermensch =
+actor_schwarzermond_ubermensch =
    .description = Heavy assault infantry armed with a yellow laser rifle.
       Benefits from Crystal Lens, Amplified Lens and Vril Infusion upgrades.
 

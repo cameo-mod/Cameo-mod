@@ -1007,7 +1007,7 @@ ordos_lasertank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ordos_promotion_unlocklasertank, ordos_ixresearchcenter
+		Prerequisites: ~ordos_heavyfactory, ~ordos_promotion_unlocklasertank, ordos_ixresearchcenter
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -1074,7 +1074,7 @@ ordos_deviatortank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ordos_promotion_unlockdeviatortank, ordos_palace
+		Prerequisites: ~ordos_heavyfactory, ~ordos_promotion_unlockdeviatortank, ordos_palace
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -1513,7 +1513,7 @@ ordos_dustdrone:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~ordos_lightfactory, ordos_promotion_unlockdustdrone
+		Prerequisites: ~ordos_lightfactory, ~ordos_promotion_unlockdustdrone
 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:

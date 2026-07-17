@@ -159,6 +159,44 @@ factions, everything through the balance workbook. Faction reference:
   `aa_flam→asianalliance_asiansentryflamer`; unresolved: `aa_archer`,
   `aa_ftnk`, `steel_fedinf`, `steel_qinf`. Effort: S–M once decided.
 
+### New orders 2026-07-17 (second batch)
+
+- [x] **Umlaut transliteration** (2026-07-17): `schwarzermond_bermensch`
+  → `schwarzermond_ubermensch` (Ü was dropped instead of transliterated),
+  `ÜbermenschLaser(E)` → `UbermenschLaser(E)`, assets git-mv'd. RULE in
+  DESIGN §1: Ü→u, Ö→o, Ä→a, ß→ss in ids; display names keep umlauts.
+
+- [ ] **BUG: cameo tileset palettes** — wrong palettes for ALL smudges,
+  craters and building bibs on the cameo tileset. Effort: M (tileset
+  palette wiring investigation). Reported by maintainer; got lost from
+  an earlier queue — do not lose again.
+- [x] **SM promotion grid (maintainer's design, image 2026-07-17)** —
+  3 columns x 4 ranks implemented in `SchwarzerMond/yaml/promotions.yaml`.
+  [Übermensch/Laser Tank(rpl Beetle)/Crystal Tank/Parzival] |
+  [Noid MG/Lunar Tiger(rpl Panzer)/Korruptes Biest/Dalek] |
+  [Piercer/Haunebu 3(rpl H2)/MARS(rpl Jagerline)/Die Glocke]. Unit
+  prerequisites wired to require the matching promotion; replaced units
+  disabled when the replacement promotion is bought. Promotion-unit
+  `^PromotionUnitBuff` inheritance verified on all grid units. Boot
+  test passed (2026-07-17).
+- [x] **cabal_plasmaturret not buildable** — root cause: no sequence/
+  icon defined for `cabal_plasmaturret`. Added sequence in `ContentPacks/
+  TiberianSun/CABAL/yaml/sequences.yaml` and voxel turret mapping in
+  `sequences/voxels.yaml`, using TS Nod laser turret assets as placeholder
+  (2026-07-17). Boot test passed.
+- [x] **cabal_mobilestealthgenerator removed** — CABAL should not have
+  it (design 2026-07-17); actor + AI references deleted.
+- [ ] **RA1 LEGACY-ID RENAME (ordered 2026-07-17)** — every remaining
+  old-style RA1 actor (RAE1, RAE3, RAAPC, PT/DD/CA/SS/MSUB, POWR/APWR/
+  KENN/RASILO, naval yards, BADR family, civilians, husk variants,
+  proxy actors — 53 ids in RedAlert/Shared) gets its grammar-compliant
+  id (ra1_allies_/ra1_soviets_/japan_/shared ra1_). Only `japan` keeps
+  no game prefix (exists once). Full pipeline with verification.
+- [ ] **Stale copy cleanup**: rules/redalert.yaml + the dead
+  ContentPacks/RedAlert/content.yaml wrapper are UNLOADED duplicates
+  since PACK-RA2 (mod.yaml now loads RedAlert/Shared) — delete after
+  the rename lands (they also pollute audit_packs P1).
+
 ### P0/P1 — User-reported issues (2026-07-15/17)
 
 > Golden reference (pre-rename, everything working):
@@ -187,14 +225,11 @@ factions, everything through the balance workbook. Faction reference:
 - [x] **TD GDI APC described as amphibious** (2026-07-17) — CONFIRMED
   + FIXED in FACTIONS.md: locomotor is `tracked` (not amphibious); the
   AA capability is real (APCGunAA).
-- [ ] **Schwarzer Mond promotions missing** (tester, second report) —
-  ROOT CAUSE FOUND 2026-07-17: `SchwarzerMond/yaml/promotions.yaml` is
-  EMPTY. This matches DESIGN §18.7/§18.11 (SM promotions resolved as
-  `^PromotionUnitBuff` on existing units, no unlock actors) — so the
-  empty Promotions tab is technically by design, but both testers and
-  the maintainer expect a grid. NEEDS DESIGN PICK: keep buff-only (and
-  hide/explain the empty tab) or build a 3-column SM promotion grid
-  like every other faction.
+- [x] **Schwarzer Mond promotions missing** (tester, second report) —
+  FIXED 2026-07-17: implemented the 3-column SM promotion grid from the
+  maintainer's image in `SchwarzerMond/yaml/promotions.yaml`, wired all
+  unit prerequisites, and verified `^PromotionUnitBuff` on promotion units.
+  Boot test passed.
 - [x] **Warhead wall-capitalization** (2026-07-17) — evidence reversed
   the call: lowercase `wall` IS the standard (all 3 TargetTypes
   definitions + 345 weapon refs lowercase; only 2 refs used `Wall`).
@@ -209,18 +244,26 @@ factions, everything through the balance workbook. Faction reference:
 - [x] **P0 BUG: TD GDI vehicle palette issues** — RESOLVED by user confirmation
   (2026-07-17): palettes are correct in current build; tester was likely on an
   older commit without fixes.
-- [x] **P0 BUG: TD GDI/Nod unit voices missing** (2026-07-17) — ROOT CAUSE:
-  faction rename migration changed `InternalName` from `gdi`/`nod` to `td_gdi`/
-  `td_nod`, but `VehicleVoice` and `GenericVoice` in `audio/voices.yaml` only
-  had variant keys for `gdi`/`nod`. Without a matching variant key, the engine
-  falls back to `DefaultVariant` (`.aud`) with no suffix, producing filenames
-  like `vehic1.aud` instead of `vehic1v00.aud` — which don't exist, so voices
-  are silently skipped. FIX: added `td_gdi` and `td_nod` variant entries to
-  both `GenericVoice` and `VehicleVoice` in `audio/voices.yaml`. Units with
-  explicit `Voiced` traits (e.g. `TSVehicle`, `CommandoVoice`,
-  `BattleFortressVoice`, `SCSiegeTankVoice`) were unaffected because those
-  voice sets don't use faction variants. Boot verified, no exceptions.
-  Note: `td_nod` variant was also missing and fixed in the same pass.
+- [x] **P0 BUG: All renamed factions missing voice/notification variants** (2026-07-17)
+  — ROOT CAUSE: faction rename migration changed `InternalName` values (e.g.
+  `gdi`→`td_gdi`, `nod`→`td_nod`, `allies`→`ra1_allies`/`ra2_allies`,
+  `soviets`→`ra1_soviets`/`ra2_soviets`, `tsgdi`→`ts_gdi`, `tsnod`→`ts_nod`),
+  but audio variant/prefix keys in `voices.yaml`, `notifications.yaml`, and
+  `redalert2.yaml` still used the old names. Without a matching key, the engine
+  falls back to `DefaultVariant`/`DefaultPrefix` with no faction suffix,
+  producing filenames like `vehic1.aud` instead of `vehic1v00.aud` — which
+  don't exist, so voices/notifications are silently skipped.
+  FIX: added variant entries for all renamed factions to:
+  - `voices.yaml`: `GenericVoice`, `VehicleVoice` (td_gdi, td_nod);
+    `RAGenericVoice`, `RAVehicleVoice` (ra1_allies, ra2_allies);
+    `RussianVehicleVoice` (ra1_soviets, ra2_soviets)
+  - `notifications.yaml`: Prefixes section (td_gdi, td_nod, ra1_allies,
+    ra1_soviets, ra2_allies, ra2_soviets, ts_gdi, ts_nod)
+  - `redalert2.yaml`: `RA2EngineerVoice`, `RA2MCVVoice`, `RA2LanderVoice`
+    Prefixes (ra2_allies, ra2_soviets, ra1_allies, ra1_soviets, td_gdi, td_nod)
+  Units with explicit `Voiced` traits using non-variant voice sets (e.g.
+  `TSVehicle`, `CommandoVoice`, `BattleFortressVoice`) were unaffected.
+  Boot verified, no new exceptions.
 - [x] **CRASH: ixian_koda_tank missing icon sequence** — VERIFIED 2026-07-16:
   the `icon` sequence already exists in `Ixian/yaml/sequences.yaml` (line 1372,
   `Filename: DATA.R16, Start: 4028`). `audit_sequences.py` reports 0 S2 missing
@@ -231,17 +274,23 @@ factions, everything through the balance workbook. Faction reference:
   ScanRadius: 12` from `^HelicopterTemplate`. Also set
   `PersistentTargeting: true` on `AttackAircraft` to maintain repair
   targeting. Matches working Ixian repair drone pattern.
-- [ ] **BUG: Tarantula firing offset** — projectile doesn't come out of
-  cannon. South-facing: offset needs to go up. North-facing: offset needs
-  to go down. Current `LocalOffset: 300,0,300` (changed from `-700,0,700`).
-  Turret offset: `-500,1,1`. Turret sequence Offset: `0,0,12`. Effort: S.
-- [ ] **BUG: Artillery spider firing offset** — offset needs to be up and
-  to the right. Current `LocalOffset: -500,0,250`. Effort: S.
-- [ ] **BUG: Artillery spider upgraded weapon missing magicnuke explosion**
-  — `TS120mm_bluenuke` is missing its signature magicnuke explosion.
-  Magicnuke has 4 sizes: biggest = superweapon, 3 smaller for units.
-  Artillery should use the second biggest (highest damage among units).
-  Effort: S.
+- [x] **BUG: Tarantula firing offset** (2026-07-17) — FIXED: restored
+  release values. `Turreted: Offset` from `-500,0,0` to `-500,1,1`;
+  `LocalOffset` from `500,0,250` to `800,300,700` on both armaments.
+  The offset had been changed during the CABAL rebalance and broke
+  projectile origin alignment.
+- [x] **BUG: Artillery spider firing offset** (2026-07-17) — FIXED:
+  restored release values. `LocalOffset` from `300,0,800` to
+  `-125,1,250,-125,1,250` (dual barrels) on both armaments.
+- [x] **BUG: Tarantula upgraded weapon missing correct magicnuke explosion**
+  (2026-07-17) — FIXED: `TS120mm_bluenuke` was using `magicnuke_small`
+  (Scale 0.25) instead of `magicnuke_med` (Scale 0.5). Per the scaling
+  system: `magicnuke` (1.0) = superweapon, `magicnuke_med` (0.5) =
+  second biggest (artillery/heavy units), `magicnuke_small` (0.25) =
+  third, `magicnuke_micro` (0.2) = fourth. The Tarantula deals the
+  most damage among units, so it gets `magicnuke_med`. The Artillery
+  Spider's `CabalArtilleryWalkerShellUpgraded` already correctly used
+  `magicnuke_med`.
 - [x] **RENAME: interceptor.nax → naxis_interceptor** — renamed
   `nax_interceptor.shp` to `naxis_interceptor.shp` in `bits/ra2/mod/`,
   updated all references in Naxis `sequences.yaml`.
@@ -252,10 +301,51 @@ factions, everything through the balance workbook. Faction reference:
 - [x] **BUG: CABAL Obelisk range/detection** — weapon range set to 12288,
   `WithRangeCircle: Range: 12c0` added, `RevealsShroud: Range: 7c0` matches
   Nod obelisk. All three items already present in working copy.
+- [x] **BUG: Starcraft alien ranks applied to all SC factions** (2026-07-17)
+  — FIXED: verified that separate decorations already exist in code:
+  `^ZergRankDecoration` (alienrank), `^TerranRankDecoration` (terranrank),
+  `^ProtossRankDecoration` (protossrank). All three sequence definitions
+  exist in `sequences/misc.yaml` using `alienranks.png` as placeholder.
+  Found and fixed 7 actors missing their faction's decoration:
+  `protoss_corsair`, `protoss_positron`, `terran_madcap`,
+  `terran_jimraynor`, `terran_goliathmk2`, `zerg_guardian`,
+  `zerg_gorekraken`, and `SCINTERCEPTOR`. Updated
+  `audit_rank_decoration.py` to recognize the new decoration names and
+  correct `StarCraft` path casing. Audit now reports 0 StarCraft issues.
+- [x] **RULE: ActorStatValues upgrade list limit** — documented in DESIGN.md §6
+  (design 2026-07-17): `ActorStatValues.Upgrades` maximum expanded from 5 to 10.
+  Every unit must list all faction upgrades that affect it; team upgrades from
+  other factions must never appear. Applied to `ra1_soviets_monstertank`.
+- [x] **RULE: Promotion-unit prerequisite formula** — documented in DESIGN.md §18:
+  `Buildable.Prerequisites: ~productionbuilding, techbuilding, ~promotion`.
+  The `~promotion` token hides the unit until the promotion is bought; tech
+  buildings disable but do not hide. Applied the `~promotion` change to ~144
+  promotion units across all factions; reverted accidental `~promotion` changes
+  in promotion-actor prerequisite chains.
+- [x] **RA1 Soviet Monster Tank upgrade coverage** — added all tank/vehicle doctrine
+  and upgrade inherits: `^InfernoDoctrineRA1`, `^TeslaExperimentalTechDoctrineRA1`,
+  `^TeslaRocketsUpgradeRA1`, `^NuclearRocketsUpgradeRA1`, `^NuclearShellsTeamUpgradeRA1`,
+  plus modest `FirepowerMultiplier` traits for the rocket conditions. Added the
+  full `ActorStatValues` upgrade list (10 entries). Note: combined firepower
+  stack may exceed the 2.0× power-budget rule for an epic unit; monitor in
+  playtesting.
+- [x] **All-faction promotion construction-yard gates restored** — corrected an
+  earlier mistake: promotion actors MUST keep their `~constructionyard`
+  prerequisite. Re-added `~constructionyard` to all promotion actors across all
+  factions and updated `tools/audit/audit_promotion_gating.py` and DESIGN.md §18
+  to enforce this rule. Promotion-units themselves still use
+  `~productionbuilding, techbuilding, ~promotion`.
+- [x] **Yuri Mastermind turret attack** — added missing `AttackTurreted:` trait to
+  `yuri_mastermind`. The actor already had `Turreted:` and `Armament@PRIMARY`,
+  but no turret attack activity, so it defaulted to frontal behavior.
 - [ ] **BALANCE: Eliminator 800 overpowered** — 7 Eliminator 800s
   destroyed AI base with only 1 loss. Needs rebalancing (part of full
   CABAL rebalance). Effort: M. **Do NOT auto-apply — requires user
   approval per balance policy.**
+- [ ] **BALANCE: Warcraft anti-air damage** — Warcraft anti-air damage is
+  reportedly too low/unsatisfying. Needs investigation and balance pass
+  (warhead values, weapon targeting, or unit stats). Effort: M. **Do NOT
+  auto-apply — requires user approval per balance policy.**
 
 ---
 

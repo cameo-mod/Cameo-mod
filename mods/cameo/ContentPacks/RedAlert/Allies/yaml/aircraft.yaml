@@ -169,7 +169,7 @@ ra1_allies_longbow:
 	SpawnActorOnDeath:
 		Actor: HELI.Husk
 	EjectOnDeath:
-		PilotActor: RAE3
+		PilotActor: ra1_allies_alliedrocketsoldier
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -269,16 +269,16 @@ ra1_allies_alliedchinooktransport:
 		RequiresCondition: !airborne
 		PauseOnCondition: disabled
 	Cargo:
-		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner, ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 		AfterLoadDelay: 0
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 10
 	SpawnActorOnDeath:
-		Actor: RATRAN.Husk
+		Actor: ra1_allies_alliedchinooktransport_husk
 	EjectOnDeath:
-		PilotActor: RAE1
+		PilotActor: ra1_allies_rifleinfantry
 	SelectionDecorations:
 	Selectable:
 		Class: ra1_allies_alliedchinooktransport
@@ -310,7 +310,7 @@ ra1_allies_rapierjumpjet:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockrapierjumpjet
+		Prerequisites: ~ra1_allies_alliedhelipad, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockrapierjumpjet
 		Description: actor_rapierjumpjet.description
 	Valued:
 		Cost: 1300
@@ -368,7 +368,7 @@ ra1_allies_rapierjumpjet:
 	Contrail:
 		Offset: -1000,0,200
 	SpawnActorOnDeath:
-		Actor: rapierjumpjet.Husk
+		Actor: ra1_allies_rapierjumpjet_husk
 	EjectOnDeath:
 		PilotActor: ra1_allies_alliedsniper
 	LeavesTrails:

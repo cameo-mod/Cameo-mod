@@ -313,7 +313,7 @@ terran_raven:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, terran_promotion_unlockraven
+		Prerequisites: ~terran_starport, ~terran_promotion_unlockraven
 		Queue: Aircraft, RAAircraft
 		Description: actor_scraven.description
 	Aircraft:
@@ -466,7 +466,7 @@ terran_pythean:
 		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_starport, terran_promotion_unlockpythean
+		Prerequisites: ~terran_starport, ~terran_promotion_unlockpythean
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		Description: actor_scpythean.description
@@ -764,7 +764,7 @@ terran_phobos:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 40
-		Prerequisites: ~terran_starport, terran_sciencefacility, terran_promotion_unlockphobos
+		Prerequisites: ~terran_starport, terran_sciencefacility, ~terran_promotion_unlockphobos
 		Queue: Aircraft, RAAircraft
 		Description: actor_scphobos.description
 	Aircraft:

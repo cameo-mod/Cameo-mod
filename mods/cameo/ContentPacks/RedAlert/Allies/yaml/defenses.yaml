@@ -78,14 +78,14 @@ ra1_allies_chronosphere:
 		LaunchSound: chrono2.aud
 		IncomingSound: chrono2.aud
 		DisplayTimerRelationships: Ally, Neutral, Enemy
-	DetonateWeaponPowerCA@ChronoVortex:
+	DetonateWeaponPowerCA@ra1_allies_chronovortex:
 		AllowMultiple: true
-		OrderName: ChronoVortex
+		OrderName: ra1_allies_chronovortex
 		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: ra1_allies_chronosphere
 		Icons:
-			1: chronovortex
+			1: ra1_allies_chronovortex
 		Cursor: ability
 		ChargeInterval: 10500
 		Names:
@@ -324,7 +324,7 @@ ra1_allies_camopillbox:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 2
-		InitialUnits: ra1_allies_machinegunner, rae3
+		InitialUnits: ra1_allies_machinegunner, ra1_allies_alliedrocketsoldier
 	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
@@ -370,7 +370,7 @@ ra1_allies_bastionartillerybunker:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_promotion_unlockbastion
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_unlockbastion
 		Description: actor_bastion.description
 	-WithTurretSearchlight:
 	Valued:
@@ -470,7 +470,7 @@ ra1_allies_gapgenerator:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512

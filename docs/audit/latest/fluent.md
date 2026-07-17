@@ -1,14 +1,19 @@
-# audit_fluent — localization drift (B12)
+﻿# audit_fluent ΓÇö localization drift (B12)
 
-Fluent messages loaded: **4729** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **529**
-
-
-## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
-
-_none found_
+Fluent messages loaded: **4726** ΓÇö unresolved fluent refs in rules: **4**, orphaned actor-* messages: **527**
 
 
-## F2 — fluent actor-* messages for actors that no longer exist
+## F1 ΓÇö rules reference fluent keys that don't exist (shows raw key in-game)
+
+| actor | field | missing key |
+|---|---|---|
+| World | FactionCA@tkm.Description | faction_tkm.description |
+| World | FactionCA@wc2_humans.Description | faction_wc2_humans.description |
+| World | FactionCA@wc2_orcs.Description | faction_wc2_orcs.description |
+| World | FactionCA@RandomWC2.Description | faction_randomwc2.description |
+
+
+## F2 ΓÇö fluent actor-* messages for actors that no longer exist
 
 | orphaned message id |
 |---|
@@ -54,7 +59,6 @@ _none found_
 | actor_btr |
 | actor_cabal_promotion_heavyreaper |
 | actor_caos |
-| actor_carryall |
 | actor_cgchao |
 | actor_cgchtw |
 | actor_cghype |
@@ -66,7 +70,6 @@ _none found_
 | actor_cleg |
 | actor_cmin |
 | actor_ctnk |
-| actor_cycl |
 | actor_d2k_munitions |
 | actor_deso |
 | actor_dest |
@@ -543,36 +546,36 @@ _none found_
 | actor_zep |
 
 
-## F3 — buildable-roster fluent Name coverage per faction
+## F3 ΓÇö buildable-roster fluent Name coverage per faction
 
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
-| allies | 1/73 | 1% |
 | asianalliance | 0/75 | 0% |
 | cabal | 0/81 | 0% |
-| consortium | 0/61 | 0% |
-| edenl | 0/44 | 0% |
+| eden | 0/44 | 0% |
 | forgotten | 77/78 | 98% |
 | futuretech | 0/58 | 0% |
-| gdi | 1/68 | 1% |
-| human2 | 0/70 | 0% |
 | ixian | 0/80 | 0% |
-| lnaxis | 0/48 | 0% |
-| modjapan | 1/75 | 1% |
+| japan | 1/75 | 1% |
+| latinsyndicate | 0/69 | 0% |
 | naxis | 0/76 | 0% |
-| nod | 3/72 | 4% |
-| orc2 | 0/61 | 0% |
 | ordos | 0/91 | 0% |
-| plymouthl | 0/45 | 0% |
+| plymouth | 0/45 | 0% |
 | protoss | 0/73 | 0% |
-| ra2america | 7/68 | 10% |
-| ra2russia | 1/58 | 1% |
-| soviet | 2/117 | 1% |
-| syndicate | 0/69 | 0% |
+| ra1_allies | 1/73 | 1% |
+| ra1_soviets | 2/117 | 1% |
+| ra2_allies | 7/68 | 10% |
+| ra2_soviets | 1/58 | 1% |
+| schwarzermond | 0/60 | 0% |
+| steelconsortium | 0/61 | 0% |
+| td_gdi | 1/68 | 1% |
+| td_nod | 3/72 | 4% |
 | terran | 0/78 | 0% |
 | tkm | 1/73 | 1% |
-| tsgdi | 0/64 | 0% |
-| tsnod | 1/49 | 2% |
+| ts_gdi | 0/64 | 0% |
+| ts_nod | 1/49 | 2% |
+| wc2_humans | 0/70 | 0% |
+| wc2_orcs | 0/61 | 0% |
 | yuri | 2/65 | 3% |
 | zerg | 0/76 | 0% |
 

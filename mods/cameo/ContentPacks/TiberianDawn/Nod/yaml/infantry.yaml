@@ -265,7 +265,7 @@ td_nod_lasertrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, td_nod_promotion_unlocklasertrooper
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_unlocklasertrooper
 		Description: actor_blackhandlaser.description
 	Valued:
 		Cost: 700

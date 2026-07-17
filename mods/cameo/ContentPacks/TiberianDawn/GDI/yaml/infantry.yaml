@@ -281,7 +281,7 @@ td_gdi_heavysniper:
 		Name: GDI Heavy Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, td_gdi_promotion_unlocksniper
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_unlocksniper
 		Queue: Infantry, RAInfantry
 		Description: actor_gdisniper.description
 	Mobile:
@@ -323,7 +323,7 @@ td_gdi_shotgunner:
 		Name: Shotgunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~td_gdi_barracks, td_gdi_promotion_unlockshotgunner
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockshotgunner
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -374,7 +374,7 @@ td_gdi_officer:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Buildable:
-		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, td_gdi_promotion_unlockgdiofficer
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_unlockgdiofficer
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:

@@ -1086,7 +1086,7 @@ ra1_soviets_hiptransport:
 		AfterUnloadDelay: 10
 	SelectionDecorations:
 	SpawnActorOnDeath:
-		Actor: modhip.husk
+		Actor: ra1_soviets_hiptransport_husk
 	EjectOnDeath:
 		PilotActor: ra1_soviets_rifleinfantry
 	LeavesTrails:
@@ -1133,7 +1133,7 @@ ra1_soviets_supersonicnuclearbomber:
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ra1_soviets_promotion_unlocksupersonicnuclearbomber
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlocksupersonicnuclearbomber
 		Description: actor_mignuke.description
 	Valued:
 		Cost: 7000

@@ -1,0 +1,62 @@
+# rename_map_ra1_legacy.yaml — the last 52 old-style RA1 actor ids
+# (design order 2026-07-17: everything carries the game/faction prefix;
+# only `japan` stays unprefixed as a faction. Names derive from tooltips,
+# redundant faction words dropped. NO asset file renames — shared-asset
+# law, DESIGN §1.) Applied by tools/rename/apply_ra1_legacy.py.
+actors:
+	# --- Allies ---
+	RAE1: ra1_allies_rifleinfantry
+	RAE3: ra1_allies_alliedrocketsoldier
+	RAAPC: ra1_allies_alliedapc
+	PT: ra1_allies_gunboat
+	DD: ra1_allies_destroyer
+	CA: ra1_allies_cruiser
+	RA1SYRD: ra1_allies_alliednavalyard
+	C17.Bomber: ra1_allies_cargoplane_bomber
+	C17.Paradrop: ra1_allies_cargoplane_paradrop
+	RATRAN.Husk: ra1_allies_alliedchinooktransport_husk
+	rapierjumpjet.Husk: ra1_allies_rapierjumpjet_husk
+	alliedcybertank: ra1_allies_alliedcybertank
+	ChronoVortexFade: ra1_allies_chronovortexfade
+	ChronoVortex: ra1_allies_chronovortex
+	team_upgrade.up_gpssatellitesupport: ra1_allies_upgrade_gpssatellitesupport_proxy_actor
+	BADR.Allies: ra1_allies_badger
+	# --- Soviets ---
+	SS: ra1_soviets_submarine
+	MSUB: ra1_soviets_missilesubmarine
+	RASPEN: ra1_soviets_subpen
+	KENN: ra1_soviets_kennel
+	U2: ra1_soviets_spyplane
+	U3: ra1_soviets_superspyplane
+	BADR.Soviet: ra1_soviets_badger
+	ra_cons_molo: ra1_soviets_molotovconscript
+	modhip.husk: ra1_soviets_hiptransport_husk
+	ra_upgrade_menofsteel_proxy_actor: ra1_soviets_upgrade_menofsteel_proxy_actor
+	ra_upgrade_wareconomy_proxy_actor: ra1_soviets_upgrade_wareconomy_proxy_actor
+	ra_upgrade_scorchedearth_proxy_actor: ra1_soviets_upgrade_scorchedearth_proxy_actor
+	ra_upgrade_reactoroverload_proxy_actor: ra1_soviets_upgrade_reactoroverload_proxy_actor
+	ra_upgrade_stalinium_proxy_actor: ra1_soviets_upgrade_stalinium_proxy_actor
+	ra_upgrade_nuclearshells_proxy_actor: ra1_soviets_upgrade_nuclearshells_proxy_actor
+	# --- Japan ---
+	RA1JSYRD: japan_japanesenavalyard
+	japanspeedboat: japan_japanesespeedboat
+	yamatobattleship: japan_yamatobattleship
+	japancarrier: japan_japanesecarrier
+	zerofighter: japan_zerofighter
+	jsuperbomber: japan_japanesesuperbomber
+	ROCKETANGEL.husk: japan_rocketangel_husk
+	team_upgrade.up_nanotechrepairs: japan_upgrade_nanotechrepairs_proxy_actor
+	BADR.Japan: japan_badger
+	# --- RA1-shared (used by 2+ RA1 factions or neutral/campaign) ---
+	RAE6: ra1_engineer
+	RALST: ra1_navaltransport
+	POWR: ra1_powerplant
+	APWR: ra1_advancedpowerplant
+	RASILO: ra1_oresilo
+	BADR.Bomber: ra1_badger_bomber
+	BADR: ra1_badger
+	EINSTEIN: ra1_einstein
+	DELPHI: ra1_agentdelphi
+	RACHAN: ra1_scientist
+	GNRL: ra1_general
+	TECH1: ra1_technician

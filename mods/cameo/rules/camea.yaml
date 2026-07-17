@@ -149,7 +149,7 @@ camea_conyard:
 		EndChargeSpeechNotification: SpyPlaneReady
 		CameraActor: camera.spyplane
 		CameraRemoveDelay: 150
-		UnitType: u2
+		UnitType: ra1_soviets_spyplane
 		QuantizedFacings: 8
 		DisplayBeacon: true
 		BeaconPoster: racamicon
@@ -161,7 +161,7 @@ camea_conyard:
 		SupportPowerPaletteOrder: 60
 
 POWR.camea:
-	Inherits: POWR
+	Inherits: ra1_powerplant
 	Tooltip:
 		Name: Power Plant
 	Buildable:
@@ -170,7 +170,7 @@ POWR.camea:
 		Prerequisites: camea_conyard
 		Description: Provides power for other structures.
 	RenderSprites:
-		Image: POWR
+		Image: ra1_powerplant
 
 HAND.camea:
 	Inherits: ^BaseBuilding
@@ -370,7 +370,7 @@ HQ.camea:
 		BeaconPoster: pinficon
 		ArrowSequence: arrow
 		ClockSequence: clock
-		UnitType: C17.Paradrop
+		UnitType: ra1_allies_cargoplane_paradrop
 		SquadSize: 3
 		CircleSequence: circles
 		#UseDirectionalTarget: True
@@ -953,7 +953,7 @@ CTNK.camea:
 		Image: ra1_allies_chronotank
 
 raapc.camea:
-	Inherits: RAAPC
+	Inherits: ra1_allies_alliedapc
 	Valued:
 		Cost: 2000
 	Buildable:

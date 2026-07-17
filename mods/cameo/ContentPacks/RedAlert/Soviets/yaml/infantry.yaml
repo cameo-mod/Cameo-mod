@@ -97,7 +97,7 @@ ra1_soviets_attackdog:
 			QuestionMutate: 1
 
 ra1_soviets_rifleinfantry:
-	Inherits: ^RAE1
+	Inherits: ^ra1_allies_rifleinfantry
 	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Buildable:
@@ -148,7 +148,7 @@ ra1_soviets_ak47conscript:
 		BuildPaletteOrder: 10
 		Prerequisites: ~ra1_soviets_barracks, ~ra1_soviets_doctrine_conscription
 		Queue: Infantry, RAInfantry
-		AdditionalActors: ra_cons_molo
+		AdditionalActors: ra1_soviets_molotovconscript
 		Description: actor_e2.description
 	Mobile:
 		Speed: 71
@@ -273,7 +273,7 @@ ra1_soviets_mortarsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome, ra1_soviets_promotion_unlockmortarsoldier
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome, ~ra1_soviets_promotion_unlockmortarsoldier
 		Description: actor_mortarsoldier.description
 	Valued:
 		Cost: 500
@@ -329,7 +329,7 @@ ra1_soviets_mortarsoldier:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
 
 ra1_soviets_rocketsoldier:
-	Inherits: ^RAE3
+	Inherits: ^ra1_allies_alliedrocketsoldier
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
 		Name: Soviet Rocket Soldier
@@ -393,7 +393,7 @@ ra1_soviets_dragunovantimaterialsniper:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
 ra1_soviets_firerocketsoldier:
-	Inherits: ^RAE3
+	Inherits: ^ra1_allies_alliedrocketsoldier
 	Inherits@FireInfantry: ^FireInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle
@@ -860,7 +860,7 @@ ra1_soviets_volkov:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ra1_soviets_promotion_unlockvolkov
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlockvolkov
 		Description: actor_volkov.description
 	Tooltip:
 		Name: Volkov

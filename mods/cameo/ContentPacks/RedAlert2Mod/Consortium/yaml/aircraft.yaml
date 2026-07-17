@@ -461,7 +461,7 @@ steelconsortium_cloudbreaker:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~steelconsortium_consortiumairpad, steelconsortium_geothermalreactor, steelconsortium_promotion_unlockcloudbreaker
+		Prerequisites: ~steelconsortium_consortiumairpad, steelconsortium_geothermalreactor, ~steelconsortium_promotion_unlockcloudbreaker
 		Queue: Aircraft, RAAircraft
 		Description: actor_shad.description
 	Aircraft:

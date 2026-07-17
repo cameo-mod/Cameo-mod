@@ -3201,7 +3201,7 @@ dtorca.husk:
 		Image: dtorca
 
 apc.answer:
-	Inherits: RAAPC
+	Inherits: ra1_allies_alliedapc
 	RenderSprites:
 		Image: td_gdi_apc
 	Buildable:
@@ -3316,7 +3316,7 @@ jeep.dtusa:
 		MuzzleSequence: muzzle
 
 apc.dtusa:
-	Inherits: RAAPC
+	Inherits: ra1_allies_alliedapc
 	RenderSprites:
 		Image: td_gdi_apc
 	Buildable:

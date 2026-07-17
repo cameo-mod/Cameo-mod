@@ -1,12 +1,12 @@
-ChronoVortex:
+ra1_allies_chronovortex:
 	Inherits: ^RiftBase
 	EditorOnlyTooltip:
-		Name: (ChronoVortex)
+		Name: (ra1_allies_chronovortex)
 	RenderSprites:
 		Image: vortexanim
 		Palette: ra_temperat
 	PeriodicExplosion:
-		Weapon: ChronoVortex
+		Weapon: ra1_allies_chronovortex
 	KillsSelf:
 		Delay: 425
 	# required for spawning actor on death
@@ -18,14 +18,14 @@ ChronoVortex:
 		SoundFiles: rift1.aud, rift2.aud, rift3.aud
 		Interval: 50
 	SpawnActorOnDeath:
-		Actor: ChronoVortexFade
+		Actor: ra1_allies_chronovortexfade
 		SkipMakeAnimations: false
 	RevealsShroud:
 		Range: 10000
 		Type: CenterPosition
 
-ChronoVortexFade:
-	Inherits: ChronoVortex
+ra1_allies_chronovortexfade:
+	Inherits: ra1_allies_chronovortex
 	WithSpriteBody:
 		Sequence: dead
 	WithMakeAnimation:

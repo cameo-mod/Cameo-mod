@@ -889,11 +889,11 @@ schwarzermond_lunarrocket:
 	icon:
 		Filename: schwarzermond_lunarrocket_icon.png
 
-schwarzermond_bermensch:
+schwarzermond_ubermensch:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: schwarzermond_bermensch_nax2_uber.shp
+		Filename: schwarzermond_ubermensch_nax2_uber.shp
 	run:
 		Tick: 100
 		Start: 8
@@ -925,7 +925,7 @@ schwarzermond_bermensch:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: schwarzermond_bermensch_icon.png
+		Filename: schwarzermond_ubermensch_icon.png
 
 schwarzermond_blackbomb:
 	Defaults:

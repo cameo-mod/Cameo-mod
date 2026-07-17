@@ -4028,7 +4028,7 @@
 # 		BuildPaletteOrder: 10
 # 		Queue: Infantry, RAInfantry
 # 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-# 		Prerequisites: ~ordos_promotion_unlockchemicaltrooper
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockchemicaltrooper
 # 		IconPalette: player
 # 	Health:
 # 		HP: 30000
@@ -4078,7 +4078,7 @@
 # 		Cost: 600
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ordos_promotion_unlockmortartroopers
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockmortartroopers
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_antitank_antiair_infantry.description
 # 	Health:
@@ -4300,7 +4300,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockcontaminator
+# 		Prerequisites: ~ordos_constructionyard, ~ordos_barracks, ordos_promotion_unlockcontaminator
 # 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 # 	Health:
 # 		HP: 75000
@@ -4834,7 +4834,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites:  ~ordos_promotion_unlockleecher
+# 		Prerequisites:  ~ordos_constructionyard, ordos_promotion_unlockleecher
 # 		Description: Stealth creature that can attack infantry and infect vehicles.
 # 		IconPalette: player
 # 	Selectable:
@@ -6128,7 +6128,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_promotion_unlocklaboratorycrawler, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklaboratorycrawler, ordos_ixresearchcenter
 # 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 # 		IconPalette: windows256
 # 	Valued:
@@ -6470,7 +6470,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~ordos_promotion_unlockbanshees, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockbanshees, ordos_ixresearchcenter
 # 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 # 	Health:
 # 		HP: 37500
@@ -6554,7 +6554,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~ordos_promotion_unlockwraith, ordos_palace
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockwraith, ordos_palace
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_nax_dieglocke.description
@@ -8041,7 +8041,7 @@
 # 		Cost: 2500
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~ordos_promotion_unlockpython, ordos_outpost
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockpython, ordos_outpost
 # 		BuildPaletteOrder: 50
 # 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -8138,7 +8138,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~ixian_promotion_unlockixsiegetank, ixian_outpost
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, ixian_outpost
 # 		Description: actor_siege_tank.description
 # 		IconPalette: ra2
 # 	Health:
@@ -8562,7 +8562,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_promotion_unlocklasertank, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklasertank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	Valued:
@@ -8627,7 +8627,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_promotion_unlockdeviatortank, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdeviatortank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -9018,7 +9018,7 @@
 # 	Valued:
 # 		Cost: 1300
 # 	Buildable:
-# 		Prerequisites: ~ordos_promotion_unlockstealthraider
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockstealthraider
 # 		BuildPaletteOrder: 30
 # 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -9060,7 +9060,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ordos_promotion_unlockdustdrone
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdustdrone
 # 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	UpdatesPlayerStatistics:
@@ -12846,7 +12846,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_scout_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~ixian_promotion_unlockrashidan
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockrashidan
 # 	Mobile:
 # 		Speed: 50
 # 	Health:
@@ -12909,7 +12909,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~ixian_promotion_unlockstorminfantry, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstorminfantry, ixian_ixresearchcenter
 # 	Mobile:
 # 		Speed: 44
 # 	Health:
@@ -12956,7 +12956,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_promotion_unlockstormraider, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstormraider, ixian_ixresearchcenter
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -13026,7 +13026,7 @@
 # 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
 # 		BuildPaletteOrder: 750
 # 		Description: actor_storm_lasher.description
 # 		IconPalette: player
@@ -13118,7 +13118,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_promotion_unlockheavyixraider
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Heavy Ix Raider
@@ -13297,7 +13297,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, ixian_ixresearchcenter
 # 		Description: Colossal Ixian Mech.
 # 	Mobile:
 # 		Speed: 45
@@ -13392,7 +13392,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixprojector, ixian_ixresearchcenter
 # 		Description: actor_ixprojector.description
 # 		IconPalette: windows256
 # 	Health:
@@ -13700,7 +13700,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_promotion_unlockixrailgundrone, ixian_hightechfactory
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, ixian_hightechfactory
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13916,7 +13916,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_promotion_unlockixianempbomber, ixian_launchpad, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, ixian_launchpad, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13993,7 +13993,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_promotion_unlockixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -14098,7 +14098,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: ~ixian_promotion_unlockfarasha, ixian_hightechfactory, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockfarasha, ixian_hightechfactory, ixian_ixresearchcenter
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_farasha.description

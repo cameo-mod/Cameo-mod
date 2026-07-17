@@ -12,7 +12,7 @@ latinsyndicate_mortarbike:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
 		BuildPaletteOrder: 30
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlockmortarbikes
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlockmortarbikes
 		Description: actor_latin_mortarbike.description
 	Tooltip:
 		Name: Mortar Bike
@@ -175,7 +175,7 @@ latinsyndicate_raiderbuggy:
 		Cost: 700
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlockraiderbuggy
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlockraiderbuggy
 		Queue: Vehicle, RAVehicle
 		Description: actor_latin_buggy.description
 	Mobile:
@@ -652,7 +652,7 @@ latinsyndicate_latinapc:
 		Cost: 2400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlocklatinapc, latinsyndicate_spycenter
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlocklatinapc, latinsyndicate_spycenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_latin_apc.description
 	Mobile:
@@ -1111,7 +1111,7 @@ latinsyndicate_lars:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlocklars, latinsyndicate_defensebureau
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlocklars, latinsyndicate_defensebureau
 		Description: actor_latin_lars.description
 	Valued:
 		Cost: 1300
@@ -1237,7 +1237,7 @@ latinsyndicate_demolitiontruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlockdemolitiontrucks, latinsyndicate_latinempradar
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlockdemolitiontrucks, latinsyndicate_latinempradar
 		Description: Suicide vehicle that detonates on contact.
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
@@ -1276,7 +1276,7 @@ latinsyndicate_nuketruck:
 		HP: 60000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlocknuketrucks, latinsyndicate_spycenter
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlocknuketrucks, latinsyndicate_spycenter
 		Description: Suicide vehicle that detonates on contact.
 		BuildLimit: 1
 		BuildDurationModifier: 50
@@ -1318,7 +1318,7 @@ latinsyndicate_topolm:
 		Cost: 6000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~latinsyndicate_syndicatefactory, latinsyndicate_promotion_unlocktopolm, latinsyndicate_defensebureau
+		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_unlocktopolm, latinsyndicate_defensebureau
 		Description: actor_latin_topol.description
 		BuildLimit: 1
 	Health:

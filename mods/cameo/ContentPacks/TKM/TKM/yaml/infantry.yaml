@@ -156,7 +156,7 @@ tkm_juggernaut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkm_barracks, tkm_promotion_unlockjuggernaut, tkm_observationvan
+		Prerequisites: ~tkm_barracks, ~tkm_promotion_unlockjuggernaut, tkm_observationvan
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles

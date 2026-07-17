@@ -1120,7 +1120,7 @@ ChronoAI:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, raapc
+		Actors: ra1_allies_ranger, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_allies_sheridanassaulttank, ra1_allies_alliedtigerheavytank, ra1_allies_alliedtankdestroyer, ra1_allies_alliedartillery, ra1_allies_alliedapc
 		Range: 5
 		Image: ra2_allies_chronominer
 		Sequence: warpout
@@ -2031,13 +2031,13 @@ ChronoVortexInit:
 	Projectile: InstantExplode
 	ReloadDelay: 1
 	Warhead@Spawn: SpawnActor
-		Actors: ChronoVortex
+		Actors: ra1_allies_chronovortex
 		Range: 1
 		ForceGround: false
 		ValidTargets: Ground, Water
 		ImpactActors: false
 
-ChronoVortex:
+ra1_allies_chronovortex:
 	Inherits: ^HeavyBomb
 	Inherits: ^MagicWeapon
 	ReloadDelay: 5

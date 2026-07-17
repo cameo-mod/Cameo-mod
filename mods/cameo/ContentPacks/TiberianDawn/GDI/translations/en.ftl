@@ -101,14 +101,14 @@ actor_firehawk =
    .description = Advanced fighter-bomber aircraft.
       Strong vs Everything
 
-actor_pt =
+actor_ra1_allies_gunboat =
    .description = Light scout & support ship.
     Can detect submarines.
       Strong vs Naval units
       Weak vs Ground units, Aircraft
    .name = Gunboat
 
-actor_japancarrier =
+actor_japan_japanesecarrier =
    .description = Very slow long-range ship.
       Can attack air.
         Strong vs Buildings, Ground units

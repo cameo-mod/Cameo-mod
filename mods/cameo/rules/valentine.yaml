@@ -2496,7 +2496,7 @@ valentines_giga_chad:
 
 
 valentines_dd:
-	Inherits: DD
+	Inherits: ra1_allies_destroyer
 	Tooltip:
 		Name: Heart Destroyer
 	Valued:
@@ -2560,7 +2560,7 @@ valentines_dd:
 		RequiresSelection: true
 
 valentines_ca:
-	Inherits: CA
+	Inherits: ra1_allies_cruiser
 	Tooltip:
 		Name: Breakup Cruiser
 	Valued:
@@ -2637,7 +2637,7 @@ valentines_ca:
 		Amount: -50
 
 valentines_pt:
-	Inherits: PT
+	Inherits: ra1_allies_gunboat
 	Tooltip:
 		Name: Lovelaser Corvette
 	Valued:
@@ -2676,7 +2676,7 @@ valentines_pt:
 		Amount: -25
 
 valentines_lst:
-	Inherits: RALST
+	Inherits: ra1_navaltransport
 	Tooltip:
 		Name: Valentines Transport
 	Buildable:

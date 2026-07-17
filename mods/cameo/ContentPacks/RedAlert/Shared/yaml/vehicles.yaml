@@ -1,4 +1,4 @@
-RAAPC:
+ra1_allies_alliedapc:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -52,19 +52,19 @@ RAAPC:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: rae1, rae1, ra1_allies_medic, rae3, rae3
+		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_rifleinfantry, ra1_allies_medic, ra1_allies_alliedrocketsoldier, ra1_allies_alliedrocketsoldier
 	RenderSprites:
-		Image: raapc
+		Image: ra1_allies_alliedapc
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	Selectable:
-		Class: raapc
+		Class: ra1_allies_alliedapc
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-RATRAN.Husk:
+ra1_allies_alliedchinooktransport_husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Allied Chinook Transport
@@ -75,7 +75,7 @@ RATRAN.Husk:
 		Image: ra1_allies_alliedchinooktransport
 		PlayerPalette: raplayer
 
-modhip.husk:
+ra1_soviets_hiptransport_husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Hip
@@ -90,7 +90,7 @@ modhip.husk:
 #		Modded RA Japan
 ####################################################################################################
 
-alliedcybertank:
+ra1_allies_alliedcybertank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -147,7 +147,7 @@ alliedcybertank:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-ROCKETANGEL.husk:
+japan_rocketangel_husk:
 	Inherits: ^SmallHelicopterHusk
 	Tooltip:
 		Name: Rocket Angel

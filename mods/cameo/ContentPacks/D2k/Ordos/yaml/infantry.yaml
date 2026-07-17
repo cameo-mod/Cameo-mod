@@ -169,7 +169,7 @@ ordos_chemicaltrooper:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-		Prerequisites: ~ordos_barracks, ordos_promotion_unlockchemicaltrooper
+		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockchemicaltrooper
 		IconPalette: player
 	Health:
 		HP: 30000
@@ -220,7 +220,7 @@ ordos_mortartrooper:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ordos_barracks, ordos_promotion_unlockmortartroopers
+		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockmortartroopers
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_antiair_infantry.description
 	Health:
@@ -447,7 +447,7 @@ ordos_contaminator:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 10
-		Prerequisites: ~ordos_barracks, ordos_promotion_unlockcontaminator
+		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockcontaminator
 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 	Health:
 		HP: 75000
@@ -775,7 +775,7 @@ ordos_leech:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ordos_barracks, ordos_promotion_unlockleecher
+		Prerequisites: ~ordos_barracks, ~ordos_promotion_unlockleecher
 		Description: Stealth creature that can attack infantry and infect vehicles.
 		IconPalette: player
 	Selectable:

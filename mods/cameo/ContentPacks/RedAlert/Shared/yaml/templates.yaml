@@ -264,7 +264,7 @@
 	ActorStatValues:
 		Upgrades: japan_upgrade_nanotechrepairs
 
-^RAE1:
+^ra1_allies_rifleinfantry:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^ScoutInfantryTemplate
@@ -302,14 +302,14 @@
 		StandSequences: parachute
 		RequiresCondition: parachute
 	RenderSprites:
-		Image: rae1
+		Image: ra1_allies_rifleinfantry
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	Voiced:
 		VoiceSet: RAGenericVoice
 
-^RAE3:
+^ra1_allies_alliedrocketsoldier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -349,7 +349,7 @@
 		StandSequences: parachute
 		RequiresCondition: parachute
 	RenderSprites:
-		Image: rae3
+		Image: ra1_allies_alliedrocketsoldier
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer

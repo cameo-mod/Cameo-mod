@@ -482,14 +482,14 @@ actor_oitank =
    an onboard exorcist.
         Strong vs Everything
 
-actor_dd =
+actor_ra1_allies_destroyer =
    .description = Fast multi-role ship.
     Can detect submarines.
       Strong vs Naval units, Vehicles, Aircraft
       Weak vs Infantry
    .name = Destroyer
 
-actor_ca =
+actor_ra1_allies_cruiser =
    .description = Very slow long-range ship.
       Strong vs Buildings, Ground units
       Weak vs Naval units, Aircraft
@@ -509,7 +509,7 @@ actor_jpspeedboat =
         Weak vs Ships
    .name = Japanese Speedboat
 
-actor_yamatobattleship =
+actor_japan_yamatobattleship =
    .description = Very slow long-range ship.
       Can attack air.
         Strong vs Buildings, Ground units
