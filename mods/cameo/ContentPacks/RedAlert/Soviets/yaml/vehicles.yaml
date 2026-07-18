@@ -1295,7 +1295,7 @@ ra1_soviets_btr80:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 7
-		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_flamethrower
+		InitialUnits: ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_dragunovantimaterialsniper, ra1_soviets_flamethrower
 	RenderSprites:
 		Image: ra1_soviets_btr80
 	Voiced:
@@ -1544,7 +1544,7 @@ ra1_soviets_gatlingtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_promotion_unlockgatlingtank, ~!ra1_soviets_doctrine_conscription
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_promotion_unlockgatlingtank, ~!ra1_soviets_doctrine_conscription
 		Description: actor_gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1683,15 +1683,29 @@ ra1_soviets_monstertank:
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@NuclearWarDoctrineRA1: ^NuclearWarDoctrineRA1
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@TeslaExperimentalTechDoctrineRA1: ^TeslaExperimentalTechDoctrineRA1
 	Inherits@AutoloadersUpgradeRA1: ^AutoloadersUpgradeRA1
 	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@TeslaRocketsUpgradeRA1: ^TeslaRocketsUpgradeRA1
+	Inherits@NuclearRocketsUpgradeRA1: ^NuclearRocketsUpgradeRA1
+	Inherits@NuclearShellsTeamUpgradeRA1: ^NuclearShellsTeamUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	FirepowerMultiplier@TeslaRockets:
+		RequiresCondition: ra1_soviets_upgrade_teslarockets
+		Modifier: 110
+	FirepowerMultiplier@NuclearRockets:
+		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
+		Modifier: 110
+	FirepowerMultiplier@HighExplosiveRockets:
+		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
+		Modifier: 110
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ra1_soviets_promotion_unlockmonstertank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlockmonstertank
 		BuildPaletteOrder: 120
 		Description: actor_monstertank.description
 	Valued:
@@ -1770,11 +1784,11 @@ ra1_soviets_monstertank:
 		PipCount: 12
 	RenderSprites:
 		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_doctrine_inferno, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_stalinium, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_nucleartankshells, ra1_soviets_upgrade_teslarockets, ra1_soviets_upgrade_thermonuclearrockets
 	FirepowerMultiplier@ra1_soviets_upgrade_highexplosiverockets:
 		Modifier: 105
 	RangeMultiplier@ra1_soviets_upgrade_highexplosiverockets:
 		Modifier: 105
 	RevealsShroudMultiplier@ra1_soviets_upgrade_highexplosiverockets:
 		Modifier: 110
-	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium

@@ -1,6 +1,6 @@
 # audit_assets — asset format norms (B11, RAMpage)
 
-PNGs scanned: **1943** (over budget: **140**), WAVs scanned: **8776** (non-conforming: **3632**)
+PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-conforming: **3632**)
 
 
 ## P1 — PNGs over budget (> 8 MiB or > 8192px)
@@ -31,24 +31,24 @@ PNGs scanned: **1943** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/protoss/protoss_adept_adeptspritesheet.png | 466 KiB | 8880x48 |
 | mods/cameo/bits/protoss/protoss_promotion_unlockatreus_scatreuswalk.png | 266 KiB | 9216x68 |
 | mods/cameo/bits/ra/AlliedTankDestroyerH.png | 1326 KiB | 16512x258 |
-| mods/cameo/bits/ra/ra1_soviet_ak47conscript.png | 251 KiB | 25641x52 |
-| mods/cameo/bits/ra/ra1_soviet_dragunovantimaterialsniper.png | 229 KiB | 22311x45 |
-| mods/cameo/bits/ra/ra1_soviet_gorynychtank.png | 1008 KiB | 32897x258 |
-| mods/cameo/bits/ra/ra1_soviet_heavyindustrialminer_sovietheavyoretruckspritesheet.png | 369 KiB | 23670x80 |
-| mods/cameo/bits/ra/ra1_soviet_hiptransport.png | 242 KiB | 13952x200 |
-| mods/cameo/bits/ra/ra1_soviet_kamovattackhelicopter.png | 290 KiB | 13952x200 |
-| mods/cameo/bits/ra/ra1_soviet_stalinfist.png | 2116 KiB | 16449x258 |
-| mods/cameo/bits/ra/ra1_soviet_upgrade_unlockcommissar.png | 236 KiB | 23976x52 |
-| mods/cameo/bits/ra/ra1_soviet_zapper.png | 265 KiB | 25641x52 |
+| mods/cameo/bits/ra/ra1_soviets_ak47conscript.png | 251 KiB | 25641x52 |
+| mods/cameo/bits/ra/ra1_soviets_dragunovantimaterialsniper.png | 229 KiB | 22311x45 |
+| mods/cameo/bits/ra/ra1_soviets_gorynychtank.png | 1008 KiB | 32897x258 |
+| mods/cameo/bits/ra/ra1_soviets_heavyindustrialminer_sovietheavyoretruckspritesheet.png | 369 KiB | 23670x80 |
+| mods/cameo/bits/ra/ra1_soviets_hiptransport.png | 242 KiB | 13952x200 |
+| mods/cameo/bits/ra/ra1_soviets_kamovattackhelicopter.png | 290 KiB | 13952x200 |
+| mods/cameo/bits/ra/ra1_soviets_stalinfist.png | 2116 KiB | 16449x258 |
+| mods/cameo/bits/ra/ra1_soviets_upgrade_unlockcommissar.png | 236 KiB | 23976x52 |
+| mods/cameo/bits/ra/ra1_soviets_zapper.png | 265 KiB | 25641x52 |
 | mods/cameo/bits/ra/ra_cons_molo.png | 263 KiB | 24975x51 |
 | mods/cameo/bits/ra2/futuretech_promotion_unlockharbingergunship.png | 721 KiB | 13888x216 |
 | mods/cameo/bits/ra2/ra2twinblade.png | 2336 KiB | 20544x482 |
-| mods/cameo/bits/ra2/steel_consortium_bfg10000_bfgdspritesheetcfix.png | 4524 KiB | 32500x360 |
-| mods/cameo/bits/ra2/steel_consortium_bfg10000_bfgudspritesheetcfix.png | 4678 KiB | 41472x412 |
-| mods/cameo/bits/ra2/steel_consortium_geothermalreactor_thermo_ground.png | 892 KiB | 13130x212 |
-| mods/cameo/bits/ra2/steel_consortium_geothermalreactor_thermo_water.png | 672 KiB | 13130x212 |
-| mods/cameo/bits/ra2/steel_consortium_promotion_unlockstalker.png | 410 KiB | 15360x120 |
-| mods/cameo/bits/ra2/steel_consortium_steelrunner.png | 254 KiB | 43623x86 |
+| mods/cameo/bits/ra2/steelconsortium_bfg10000_bfgdspritesheetcfix.png | 4524 KiB | 32500x360 |
+| mods/cameo/bits/ra2/steelconsortium_bfg10000_bfgudspritesheetcfix.png | 4678 KiB | 41472x412 |
+| mods/cameo/bits/ra2/steelconsortium_geothermalreactor_thermo_ground.png | 892 KiB | 13130x212 |
+| mods/cameo/bits/ra2/steelconsortium_geothermalreactor_thermo_water.png | 672 KiB | 13130x212 |
+| mods/cameo/bits/ra2/steelconsortium_promotion_unlockstalker.png | 410 KiB | 15360x120 |
+| mods/cameo/bits/ra2/steelconsortium_steelrunner.png | 254 KiB | 43623x86 |
 | mods/cameo/bits/shared/magicnuke.png | 15611 KiB | 32370x800 |
 | mods/cameo/bits/td/GDIRigMissilePod.png | 59 KiB | 8320x130 |
 | mods/cameo/bits/td/GDIRigRailgun.png | 84 KiB | 8320x130 |
@@ -120,17 +120,17 @@ PNGs scanned: **1943** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/ts/ts_gdi_promotion_unlockwolverinemkii_run.png | 1076 KiB | 22528x48 |
 | mods/cameo/bits/ts/ts_gdi_promotion_unlockzonetrooper.png | 589 KiB | 15080x58 |
 | mods/cameo/bits/warcraft2/AllianceSiegeEngine2.png | 841 KiB | 12480x96 |
-| mods/cameo/bits/warcraft2/humans_archmage_archwizard2.png | 364 KiB | 10430x86 |
-| mods/cameo/bits/warcraft2/humans_gyrocoptermachine_alliancegyrocopter2.png | 783 KiB | 11424x96 |
-| mods/cameo/bits/warcraft2/humans_highelfpriest_alliancepriest2.png | 324 KiB | 9246x67 |
-| mods/cameo/bits/warcraft2/humans_militiapeasant_alliancemilitiafinal2.png | 336 KiB | 9453x71 |
-| mods/cameo/bits/warcraft2/humans_siegeengine_wc2_siege_engine.png | 836 KiB | 12480x96 |
-| mods/cameo/bits/warcraft2/humans_upgrade_highelvenarcher_alliancehighelfarcher2.png | 376 KiB | 9315x75 |
-| mods/cameo/bits/warcraft2/humans_upgrade_warcraft3knightwip_allianceknight2.png | 532 KiB | 10626x77 |
-| mods/cameo/bits/warcraft2/orcs_kodobeast_hordekodobeast.png | 1464 KiB | 17408x128 |
-| mods/cameo/bits/warcraft2/orcs_upgrade_trollheadhunter_hordeheadhunter_136.png | 334 KiB | 13056x96 |
-| mods/cameo/bits/warcraft2/orcs_upgrade_warcraft3grunt_hordepromogrunt_135.png | 479 KiB | 10395x77 |
 | mods/cameo/bits/warcraft2/WaterElemental2.png | 722 KiB | 14208x96 |
+| mods/cameo/bits/warcraft2/wc2_humans_archmage_archwizard2.png | 364 KiB | 10430x86 |
+| mods/cameo/bits/warcraft2/wc2_humans_gyrocoptermachine_alliancegyrocopter2.png | 783 KiB | 11424x96 |
+| mods/cameo/bits/warcraft2/wc2_humans_highelfpriest_alliancepriest2.png | 324 KiB | 9246x67 |
+| mods/cameo/bits/warcraft2/wc2_humans_militiapeasant_alliancemilitiafinal2.png | 336 KiB | 9453x71 |
+| mods/cameo/bits/warcraft2/wc2_humans_siegeengine_wc2_siege_engine.png | 836 KiB | 12480x96 |
+| mods/cameo/bits/warcraft2/wc2_humans_upgrade_highelvenarcher_alliancehighelfarcher2.png | 376 KiB | 9315x75 |
+| mods/cameo/bits/warcraft2/wc2_humans_upgrade_warcraft3knightwip_allianceknight2.png | 532 KiB | 10626x77 |
+| mods/cameo/bits/warcraft2/wc2_orcs_kodobeast_hordekodobeast.png | 1464 KiB | 17408x128 |
+| mods/cameo/bits/warcraft2/wc2_orcs_upgrade_trollheadhunter_hordeheadhunter_136.png | 334 KiB | 13056x96 |
+| mods/cameo/bits/warcraft2/wc2_orcs_upgrade_warcraft3grunt_hordepromogrunt_135.png | 479 KiB | 10395x77 |
 | mods/cameo/bits/zerg/zerg_guardian_scguardianidle.png | 301 KiB | 9856x72 |
 | mods/cameo/bits/zerg/zerg_promotion_unlockbehemoth_scbehemothidle.png | 1671 KiB | 36288x130 |
 | mods/cameo/bits/zerg/zerg_promotion_unlockcorruptor_sccorruptoridle.png | 448 KiB | 19200x74 |
@@ -144,7 +144,7 @@ PNGs scanned: **1943** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/ra2/mod/futuretech_promotion_unlockprospectormk2_harv2.png | 921 KiB | 12672x84 |
 | mods/cameo/bits/ra2/mod/futuretech_prospector_harv.png | 859 KiB | 11648x78 |
 | mods/cameo/bits/ra2/mod/futuretech_riptideacv.png | 413 KiB | 10240x63 |
-| mods/cameo/bits/ra2/mod/latin_syndicate_tortugatank.png | 307 KiB | 10752x69 |
+| mods/cameo/bits/ra2/mod/latinsyndicate_tortugatank.png | 307 KiB | 10752x69 |
 | mods/cameo/bits/ra2/mod/naxis_coneheadsknights.png | 439 KiB | 30636x60 |
 | mods/cameo/bits/ra2/mod/nax_conehead2.png | 443 KiB | 30636x60 |
 

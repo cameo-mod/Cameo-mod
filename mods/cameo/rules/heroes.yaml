@@ -676,7 +676,7 @@ volkovcc:
 		
 ra1_soviets_volkov:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	-Buildable:
 	Tooltip:
 		Name: Volkov
@@ -698,7 +698,7 @@ ra1_soviets_volkov:
 		PauseOnCondition: nocc
 		FacingTolerance: 0
 	RenderSprites:
-		Image: gnrl
+		Image: ra1_general
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: nocc
 	GrantConditionOnPrerequisite@poweroff:
@@ -813,7 +813,7 @@ RA2HTANY:
 
 TSMCNEAL:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
@@ -968,7 +968,7 @@ TSMCNEALMECH:
 		RequiresSelection: true
 TSNASHWA:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
@@ -1323,7 +1323,7 @@ spawnedvisceroid:
 
 mutantseverus:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes
@@ -1410,7 +1410,7 @@ mutantseverus:
 	
 severuscabal:
 	Inherits@HEROES: ^Heroes
-	Inherits: GNRL
+	Inherits: ra1_general
 	Inherits@EXPERIENCE: ^GainsExperience
 	Buildable:
 		Queue: Heroes

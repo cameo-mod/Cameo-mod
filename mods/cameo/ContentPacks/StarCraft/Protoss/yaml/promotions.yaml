@@ -127,7 +127,7 @@ protoss_promotion_unlockanalogue:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
 		Description: actor_upanalogue.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockpositron , !protoss_promotion_unlockanalogue, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockpositron, !protoss_promotion_unlockanalogue, rank1
 	RenderSprites:
 		Image: protoss_analogue
 	ProvidesPrerequisite:

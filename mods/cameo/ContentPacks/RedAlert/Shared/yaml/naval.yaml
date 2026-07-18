@@ -1,4 +1,4 @@
-PT:
+ra1_allies_gunboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -9,9 +9,9 @@ PT:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1syrd
+		Prerequisites: ~ra1_allies_alliednavalyard
 		Queue: Naval, RANaval
-		Description: actor_pt.description
+		Description: actor_ra1_allies_gunboat.description
 	Valued:
 		Cost: 1300
 	Tooltip:
@@ -49,12 +49,12 @@ PT:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
-		Image: pt
+		Image: ra1_allies_gunboat
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-DD:
+ra1_allies_destroyer:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -73,9 +73,9 @@ DD:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1syrd, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_alliednavalyard, ra1_allies_alliedradardome
 		Queue: Naval, RANaval
-		Description: actor_dd.description
+		Description: actor_ra1_allies_destroyer.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -130,7 +130,7 @@ DD:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 
-CA:
+ra1_allies_cruiser:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -147,9 +147,9 @@ CA:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1syrd, ra1_allies_alliedtechcenter
+		Prerequisites: ~ra1_allies_alliednavalyard, ra1_allies_alliedtechcenter
 		Queue: Naval, RANaval
-		Description: actor_ca.description
+		Description: actor_ra1_allies_cruiser.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 8
@@ -202,7 +202,7 @@ CA:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 
-japanspeedboat:
+japan_japanesespeedboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -214,7 +214,7 @@ japanspeedboat:
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra1jsyrd
+		Prerequisites: ~japan_japanesenavalyard
 		Queue: Naval, RANaval
 		Description: actor_jpspeedboat.description
 	Valued:
@@ -269,7 +269,7 @@ japanspeedboat:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
-		Image: japanspeedboat
+		Image: japan_japanesespeedboat
 		PlayerPalette: player_rgba
 	GrantConditionOnAttack@gatling:
 		Condition: gatling
@@ -289,7 +289,7 @@ japanspeedboat:
 	ActorStatValues:
 		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-yamatobattleship:
+japan_yamatobattleship:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -305,9 +305,9 @@ yamatobattleship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1jsyrd, japan_japaneseradararray
+		Prerequisites: ~japan_japanesenavalyard, japan_japaneseradararray
 		Queue: Naval, RANaval
-		Description: actor_yamatobattleship.description
+		Description: actor_japan_yamatobattleship.description
 	Mobile:
 		Speed: 35
 		TurnSpeed: 7
@@ -370,12 +370,12 @@ yamatobattleship:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
-		Image: yamatobattleship
+		Image: japan_yamatobattleship
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-japancarrier:
+japan_japanesecarrier:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -386,12 +386,12 @@ japancarrier:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: actor_japancarrier.name
+		Name: actor_japan_japanesecarrier.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1jsyrd, japan_japanesetechcenter
+		Prerequisites: ~japan_japanesenavalyard, japan_japanesetechcenter
 		Queue: Naval, RANaval
 		Description: Japanese Aircraft Carrier
 	Selectable:
@@ -411,7 +411,7 @@ japancarrier:
 	DeliversCash:
 		Payload: 450
 	CarrierMaster:
-		Actors: zerofighter, zerofighter, zerofighter, zerofighter
+		Actors: japan_zerofighter_slave, japan_zerofighter_slave, japan_zerofighter_slave, japan_zerofighter_slave
 		RearmTicks: 125
 		RespawnTicks: 250
 		InstaRepair: true
@@ -428,7 +428,7 @@ japancarrier:
 	ActorStatValues:
 		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-zerofighter:
+japan_zerofighter_slave:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -524,7 +524,7 @@ zerofighter:
 	ActorStatValues:
 		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol
 
-SS:
+ra1_soviets_submarine:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -542,9 +542,9 @@ SS:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~raspen
+		Prerequisites: ~ra1_soviets_subpen
 		Queue: Naval, RANaval
-		Description: actor_ss.description
+		Description: actor_ra1_soviets_submarine.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -583,7 +583,7 @@ SS:
 	ActorStatValues:
 		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
 
-MSUB:
+ra1_soviets_missilesubmarine:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ArtilleryShipTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -604,9 +604,9 @@ MSUB:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~raspen, ra1_soviets_techcenter
+		Prerequisites: ~ra1_soviets_subpen, ra1_soviets_techcenter
 		Queue: Naval, RANaval
-		Description: actor_msub.description
+		Description: actor_ra1_soviets_missilesubmarine.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -649,7 +649,7 @@ MSUB:
 	ActorStatValues:
 		Upgrades: ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_highexplosiverockets, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_stalinium
 
-RALST:
+ra1_navaltransport:
 	Inherits: ^BoatUnit
 	Inherits@2: ^UnarmedCargoVehicle
 	Valued:

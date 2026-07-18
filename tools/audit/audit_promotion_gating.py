@@ -5,9 +5,9 @@ Checks every *_promotion_* actor that inherits ^promotion_upgrade.template:
   P1 the promotion provides a prerequisite token.
   P2 at least one buildable unit requires that token (i.e. the promotion
      actually gates a unit).
-  P3 promotions are globally visible: their own Prerequisites must not
-     contain buildings/tech structures; only rank1 + previous promotions
-     + the !self exclusion are allowed.
+  P3 promotions are gated by the faction construction yard plus rank1 and
+     previous promotions; the !self exclusion is allowed. No other
+     production buildings or tech structures may gate a promotion.
 """
 
 from __future__ import annotations
@@ -62,20 +62,32 @@ def main() -> int:
         buildable = promo_resolved.child("Buildable") if promo_resolved else None
         prereq_value = buildable.get("Prerequisites") if buildable else None
 
-        # P3: promotion must only be gated by rank1, previous promotions, and !self.
+        # P3: promotion must be gated by the faction construction yard, rank1,
+        # previous promotions, and !self. No other buildings/tech allowed.
+        CONSTRUCTION_YARD_PATTERNS = (
+            "constructionyard", "fact.", "_nexus", "_hatchery", "_commandcenter"
+        )
+        has_cy = False
         if prereq_value:
             for tok in tokens(prereq_value):
                 tlow = tok.lstrip("~").lower()
                 if tok.startswith("!"):
                     if not is_self_exclude(tok, promo_name):
-                        # !previous_promotion is technically allowed? No, only !self.
-                        building_gated.append([promo_name, tok, str(buildable.line)])
+                        # !previous_promotion is allowed for mutually-exclusive
+                        # promotion trees; any other ! token is suspicious.
+                        if tlow not in promotion_tokens:
+                            building_gated.append([promo_name, tok, str(buildable.line)])
                     continue
                 if tlow in ("rank1", "rank2", "rank3", "rank4", "rank5"):
                     continue
                 if tlow in promotion_tokens:
                     continue
+                if tok.startswith("~") and any(p in tlow for p in CONSTRUCTION_YARD_PATTERNS):
+                    has_cy = True
+                    continue
                 building_gated.append([promo_name, tok, str(buildable.line)])
+        if not has_cy:
+            building_gated.append([promo_name, "missing ~constructionyard", str(buildable.line)])
 
         # P2: find units that require this promotion token.
         consumers: list[str] = []

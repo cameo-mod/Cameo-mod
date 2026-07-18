@@ -1,3 +1,20 @@
+cabal_plasmaturret:
+	Defaults:
+		Filename: ts_nod_laserturret.shp
+		Scale: 1.25
+	idle:
+	damaged-idle:
+		Start: 1
+	critical-idle:
+		Start: 2
+	make:
+		Filename: shared_sprites|invisibleitem.shp
+	dead:
+		Filename: shared_sprites|invisibleitem.shp
+	icon:
+		Filename: ts_nod_laserturret_icon.shp
+		Offset: 0,0
+
 cabal_cyborginfantry:
 	Inherits: ^TSBasicInfantry
 	Defaults:

@@ -78,7 +78,7 @@ ra1_soviets_promotion_superspyplane:
 		Description: Enables the Super Spy Plane Support Power.
 		Prerequisites: ~ra1_soviets_constructionyard, !ra1_soviets_promotion_superspyplane, ra1_soviets_promotion_unlockgatlingtank, rank1
 	RenderSprites:
-		Image: u2
+		Image: ra1_soviets_spyplane
 	ProvidesPrerequisite:
 		Prerequisite: ra1_soviets_promotion_superspyplane
 
@@ -120,7 +120,7 @@ ra1_soviets_promotion_parabombslevel2:
 		Description: Upgrades the Parabombs Support Power.
 		Prerequisites: ~ra1_soviets_constructionyard, !ra1_soviets_promotion_parabombslevel2, rank1
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 	ProvidesPrerequisite:
 		Prerequisite: ra1_soviets_promotion_parabombslevel2
 
@@ -148,7 +148,7 @@ ra1_soviets_promotion_parabombslevel3:
 		Description: Upgrades the Parabombs Support Power.
 		Prerequisites: ~ra1_soviets_constructionyard, !ra1_soviets_promotion_parabombslevel3, ra1_soviets_promotion_hurricanerocketpods, rank1
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 	ProvidesPrerequisite:
 		Prerequisite: ra1_soviets_promotion_parabombslevel3
 

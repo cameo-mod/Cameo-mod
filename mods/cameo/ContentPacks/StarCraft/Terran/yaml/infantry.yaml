@@ -129,6 +129,7 @@ terran_madcap:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@announce: ^AnnounceOnBuild
@@ -571,6 +572,7 @@ terran_jimraynor:
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^TerranRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@stim: ^Stimpackable

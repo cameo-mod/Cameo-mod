@@ -441,7 +441,7 @@ ptnk.asian:
 		Name: Plasma Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockplasmatank, asianalliance_asianbattlelab
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockplasmatank, asianalliance_asianbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -560,7 +560,7 @@ asianalliance_type89mlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockmlrs, asianalliance_asianbattlelab
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockmlrs, asianalliance_asianbattlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_mlrs.description
 	Mobile:
@@ -612,7 +612,7 @@ asianalliance_howitzer:
 		Name: Howitzer
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockhowitzer, asianalliance_militaryacademy
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockhowitzer, asianalliance_militaryacademy
 		Queue: Vehicle, RAVehicle
 		Description: actor_aahowi.description
 	Mobile:
@@ -688,7 +688,7 @@ asianalliance_asianflametank:
 		Name: Asian Flame Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockflametank
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockflametank
 		Queue: Vehicle, RAVehicle
 		Description: actor_ftnk.description
 	Mobile:
@@ -907,7 +907,7 @@ asianalliance_warturtle:
 		Name: War Turtle
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~asianalliance_asianwarfactory, asianalliance_promotion_unlockwarturtle, asianalliance_militaryacademy
+		Prerequisites: ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockwarturtle, asianalliance_militaryacademy
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:

@@ -16,6 +16,9 @@ RANK_DECORATIONS = {
     'ForgottenRankDecoration': 'forgotrank',
     'DuneRankDecoration': 'dunerank',
     'AlienRankDecoration': 'alienrank',
+    'ZergRankDecoration': 'alienrank',
+    'TerranRankDecoration': 'terranrank',
+    'ProtossRankDecoration': 'protossrank',
 }
 
 # Faction → expected rank decoration (by ContentPack path prefix)
@@ -27,9 +30,9 @@ FACTION_DECORATION = {
     'ContentPacks/TiberianSun/GDI/': 'GDIRankDecoration',
     'ContentPacks/TiberianSun/Nod/': 'NodRankDecoration',
     'ContentPacks/D2k/': 'DuneRankDecoration',
-    'ContentPacks/Starcraft/Zerg/': 'AlienRankDecoration',
-    'ContentPacks/Starcraft/Terran/': 'TerranRankDecoration',
-    'ContentPacks/Starcraft/Protoss/': 'ProtossRankDecoration',
+    'ContentPacks/StarCraft/Zerg/': 'ZergRankDecoration',
+    'ContentPacks/StarCraft/Terran/': 'TerranRankDecoration',
+    'ContentPacks/StarCraft/Protoss/': 'ProtossRankDecoration',
 }
 
 # Check rank image sequences exist

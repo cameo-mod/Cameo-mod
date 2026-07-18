@@ -1,4 +1,4 @@
-U2:
+ra1_soviets_spyplane:
 	Inherits: ^AirstrikePlane
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@Afterburners: ^AfterburnersUpgradeRA1
@@ -51,17 +51,17 @@ U2:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	RenderSprites:
-		Image: U2
+		Image: ra1_soviets_spyplane
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
 
-U3:
-	Inherits: U2
+ra1_soviets_superspyplane:
+	Inherits: ra1_soviets_spyplane
 	Armament:
 		Weapon: SpyPlaneTargeting2
 
-BADR:
+ra1_badger:
 	Inherits: ^AirstrikePlane
 	ParaDrop:
 		DropRange: 5c0
@@ -116,33 +116,33 @@ BADR:
 	RenderSprites:
 		PlayerPalette: raplayer
 
-BADR.Soviet:
-	Inherits: BADR
+ra1_soviets_badger:
+	Inherits: ra1_badger
 	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
 	Inherits@Afterburners: ^AfterburnersUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 	ActorStatValues:
 		Upgrades: ra1_soviets_doctrine_heavyarmor, ra1_soviets_upgrade_afterburners, ra1_soviets_upgrade_stalinium
 
-BADR.Bomber:
-	Inherits: BADR.Soviet
+ra1_badger_bomber:
+	Inherits: ra1_soviets_badger
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
 		Weapon: ParaBomb
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 
-BADR.Allies:
-	Inherits: BADR
+ra1_allies_badger:
+	Inherits: ra1_badger
 	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 
-BADR.Japan:
-	Inherits: BADR
+japan_badger:
+	Inherits: ra1_badger
 	Inherits@DivineWindProtocol: ^DivineWindProtocol
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	RenderSprites:
@@ -152,8 +152,8 @@ BADR.Japan:
 	ActorStatValues:
 		Upgrades: japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
 
-C17.Bomber:
-	Inherits: BADR.Bomber
+ra1_allies_cargoplane_bomber:
+	Inherits: ra1_badger_bomber
 	Tooltip:
 		Name: Cargo Plane
 	RenderSprites:
@@ -161,8 +161,8 @@ C17.Bomber:
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 
-C17.Paradrop:
-	Inherits: BADR
+ra1_allies_cargoplane_paradrop:
+	Inherits: ra1_badger
 	Tooltip:
 		Name: Cargo Plane
 	RenderSprites:
@@ -170,8 +170,8 @@ C17.Paradrop:
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 
-jsuperbomber:
-	Inherits: BADR
+japan_japanesesuperbomber:
+	Inherits: ra1_badger
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Super Bomber
@@ -190,12 +190,12 @@ jsuperbomber:
 	Armament:
 		Weapon: JapanSuperBomb
 	RenderSprites:
-		Image: jsuperbomber
+		Image: japan_japanesesuperbomber
 		PlayerPalette: player
 	SpawnActorOnDeath:
 		Actor: jsuperbomber.Husk
 
-rapierjumpjet.Husk:
+ra1_allies_rapierjumpjet_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Rapier Jumpjet

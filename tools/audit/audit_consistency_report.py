@@ -147,7 +147,7 @@ check_file_contains("docs/design/ROADMAP.md",
 
 # 12. ROADMAP has user-reported issues section
 check_file_contains("docs/design/ROADMAP.md",
-    "User-reported issues (2026-07-15/16)",
+    "User-reported issues (2026-07-15",
     "12: ROADMAP user-reported issues section present")
 check_file_contains("docs/design/ROADMAP.md",
     "ixian_koda_tank", "12: ROADMAP koda_tank crash present")
@@ -226,12 +226,12 @@ check_file_contains("docs/DESIGN.md", "ra1_soviets",
 check_file_not_contains("mods/cameo/rules/tiberiansun.yaml",
     "cabal_legion_backup", "C3: no cabal_legion_backup actor")
 
-# cabal_widow_backup exists in tiberiansun.yaml
-check_file_contains("mods/cameo/rules/tiberiansun.yaml",
+# cabal_widow_backup exists (migrated to CABAL content pack)
+check_file_contains("mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml",
     "cabal_widow_backup", "C4: cabal_widow_backup actor exists")
 
 # cabal_artilleryspider_backup has Repairable trait
-check_file_contains("mods/cameo/rules/tiberiansun.yaml",
+check_file_contains("mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/husks.yaml",
     "cabal_artilleryspider_backup", "C5: cabal_artilleryspider_backup exists")
 
 # ── Category C6-C8: Faction InternalName ↔ actor prefix consistency ──
@@ -244,10 +244,10 @@ check_file_not_contains("mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.y
 check_file_contains("mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/faction.yaml",
     "InternalName: td_nod", "C6: TD Nod InternalName is td_nod")
 
-# C7: RA1/RA2 faction InternalNames match actor prefixes
-check_file_contains("mods/cameo/rules/redalert.yaml",
+# C7: RA1/RA2 faction InternalNames match actor prefixes (migrated to ContentPacks)
+check_file_contains("mods/cameo/ContentPacks/RedAlert/Shared/yaml/faction.yaml",
     "InternalName: ra1_allies", "C7: RA1 allies InternalName is ra1_allies")
-check_file_contains("mods/cameo/rules/redalert.yaml",
+check_file_contains("mods/cameo/ContentPacks/RedAlert/Shared/yaml/faction.yaml",
     "InternalName: ra1_soviets", "C7: RA1 soviets InternalName is ra1_soviets")
 check_file_contains("mods/cameo/rules/redalert2.yaml",
     "InternalName: ra2_allies", "C7: RA2 allies InternalName is ra2_allies")

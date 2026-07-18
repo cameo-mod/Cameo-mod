@@ -1,4 +1,4 @@
-POWR:
+ra1_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	Inherits@sell: ^RASpawnActorsOnSell
@@ -39,7 +39,7 @@ POWR:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-APWR:
+ra1_advancedpowerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@power: ^PowerPlant
@@ -77,13 +77,13 @@ APWR:
 		DeathSequence: dead
 		UseDeathTypeSuffix: false
 	ProvidesPrerequisite@powerplant:
-		Prerequisite: powr
+		Prerequisite: ra1_powerplant
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-KENN:
+ra1_soviets_kennel:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	Inherits@shape: ^1x1Shape
@@ -108,7 +108,7 @@ KENN:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
-		Prerequisite: kenn
+		Prerequisite: ra1_soviets_kennel
 	WithBuildingBib:
 		HasMinibib: true
 	RenderSprites:
@@ -116,7 +116,7 @@ KENN:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RASILO:
+ra1_oresilo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
 	Inherits@storage: ^StoresResources
@@ -155,7 +155,7 @@ RASILO:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RA1SYRD:
+ra1_allies_alliednavalyard:
 	Inherits: ^BaseBuilding
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -182,7 +182,7 @@ RA1SYRD:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RA1JSYRD:
+japan_japanesenavalyard:
 	Inherits: ^BaseBuilding
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -205,12 +205,12 @@ RA1JSYRD:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
-		Image: ra1jsyrd
+		Image: japan_japanesenavalyard
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-RASPEN:
+ra1_soviets_subpen:
 	Inherits: ^BaseBuilding
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape

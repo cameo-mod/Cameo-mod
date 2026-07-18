@@ -42,7 +42,7 @@ schwarzermond_dalek:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_techcenter, ~schwarzermond_promotion_dalek
 		Queue: Vehicle, RAVehicle
 		Description: Dalek
 	Mobile:
@@ -86,7 +86,6 @@ schwarzermond_laserbeetle:
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -101,7 +100,7 @@ schwarzermond_laserbeetle:
 		Name: Laser Beetle
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~schwarzermond_warfactory
+		Prerequisites: ~schwarzermond_warfactory, !schwarzermond_promotion_lasertank
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -184,7 +183,6 @@ schwarzermond_laserbeetle:
 		PlayerPalette: playerra2
 schwarzermond_lunarpanzer:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
@@ -201,7 +199,7 @@ schwarzermond_lunarpanzer:
 		Name: Lunar Panzer
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schwarzermond_warfactory
+		Prerequisites: ~schwarzermond_warfactory, !schwarzermond_promotion_lunartiger
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -288,7 +286,7 @@ schwarzermond_lunartiger:
 		Name: Lunar Tiger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, ~schwarzermond_promotion_lunartiger
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -358,7 +356,6 @@ schwarzermond_lunartiger:
 		PlayerPalette: playerra2
 schwarzermond_neojagdpanzer:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^LineBreakerTemplate
@@ -432,7 +429,6 @@ schwarzermond_neojagdpanzer:
 	WithSpriteTurret:
 schwarzermond_lunargrille:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^ArtilleryTemplate
@@ -527,7 +523,7 @@ schwarzermond_korruptesbiest:
 		Name: Korruptes Biest
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, schwarzermond_techcenter, ~schwarzermond_promotion_korruptesbiest
 		Queue: Vehicle, RAVehicle
 		Description: actor_aamecha.description
 	Mobile:
@@ -584,7 +580,7 @@ schwarzermond_crystaltank:
 		Name: Crystal Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_techcenter, ~schwarzermond_promotion_crystaltank
 		Queue: Vehicle, RAVehicle
 		Description: actor_aaquas.description
 	Mobile:
@@ -664,7 +660,7 @@ schwarzermond_mars:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, ~schwarzermond_promotion_mars
 		Description: actor_v3.description
 	Valued:
 		Cost: 2000
@@ -734,7 +730,6 @@ schwarzermond_m200bjagerline:
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
@@ -743,7 +738,7 @@ schwarzermond_m200bjagerline:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, !schwarzermond_promotion_mars
 		Description: actor_v3.description
 	Valued:
 		Cost: 2500
@@ -832,7 +827,7 @@ schwarzermond_lasertank:
 		Name: Laser Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~schwarzermond_warfactory
+		Prerequisites: ~schwarzermond_warfactory, ~schwarzermond_promotion_lasertank
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -924,7 +919,6 @@ schwarzermond_lasertank:
 ##############################################
 schwarzermond_gravitycoretank:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate

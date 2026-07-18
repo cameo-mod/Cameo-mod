@@ -1,4 +1,4 @@
-schwarzermond_bermensch:
+schwarzermond_ubermensch:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -19,7 +19,7 @@ schwarzermond_bermensch:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_ubermensch
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -29,20 +29,20 @@ schwarzermond_bermensch:
 	ChangesHealth@SelfHealing:
 		Step: 64
 	Armament@PRIMARY:
-		Weapon: ÜbermenschLaser
+		Weapon: UbermenschLaser
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
-		Weapon: ÜbermenschLaserE
+		Weapon: UbermenschLaserE
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ÜbermenschLaser
+		Weapon: UbermenschLaser
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: ÜbermenschLaserE
+		Weapon: UbermenschLaserE
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowUbermenschLaser
@@ -103,7 +103,7 @@ schwarzermond_parzival:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_techcenter, ~schwarzermond_promotion_parzival
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -163,7 +163,7 @@ schwarzermond_noidmgarmor:
 		Name: Noid MG Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~schwarzermond_barracks, schwarzermond_radar
+		Prerequisites: ~schwarzermond_barracks, schwarzermond_radar, ~schwarzermond_promotion_noidmg
 		Queue: Infantry, RAInfantry
 		Description: actor_aamecha.description
 	Mobile:
@@ -377,7 +377,6 @@ schwarzermond_engineeringarmor:
 		Voice: Move
 schwarzermond_lunarsoldier:
 	Inherits: ^Soldier
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Propaganda: ^NaxiMoonPropaganda
@@ -459,7 +458,6 @@ schwarzermond_lunarsoldier:
 		VoiceSet: NaxiLunarTroopVoice
 schwarzermond_lunarrocket:
 	Inherits: ^Soldier
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Propaganda: ^NaxiMoonPropaganda

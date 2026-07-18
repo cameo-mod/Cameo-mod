@@ -50,9 +50,9 @@ _none found_
 | mods/cameo/sequences/redalert2.yaml:3854 | ra2ltnk.shp |
 | mods/cameo/sequences/redalert2.yaml:3864 | ra2howi.shp |
 | mods/cameo/sequences/redalert2.yaml:3877 | ra2arty.shp |
-| mods/cameo/sequences/starcraft.yaml:685 | zergsoilmaker.shp |
-| mods/cameo/sequences/starcraft.yaml:711 | zergsoilmaker2.shp |
-| mods/cameo/sequences/starcraft.yaml:3639 | scztruck.shp |
+| mods/cameo/sequences/starcraft.yaml:34 | zergsoilmaker.shp |
+| mods/cameo/sequences/starcraft.yaml:60 | zergsoilmaker2.shp |
+| mods/cameo/sequences/starcraft.yaml:285 | scztruck.shp |
 | mods/cameo/sequences/starwars.yaml:305 | bib1.shp |
 | mods/cameo/sequences/starwars.yaml:392 | invisibleitem.tem |
 | mods/cameo/sequences/starwars.yaml:620 | mbSILO.tem |

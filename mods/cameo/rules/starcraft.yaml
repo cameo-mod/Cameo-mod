@@ -835,6 +835,7 @@ SCINTERCEPTOR:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^ProtossRankDecoration
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeProtoss

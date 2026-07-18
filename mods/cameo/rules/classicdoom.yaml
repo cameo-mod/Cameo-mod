@@ -256,7 +256,7 @@ WOLFKENN:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
-		Prerequisite: kenn
+		Prerequisite: ra1_soviets_kennel
 	WithBuildingBib:
 		HasMinibib: true
 
@@ -862,7 +862,7 @@ wolfe2:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: SS
+		Name: ra1_soviets_submarine
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1037,7 +1037,7 @@ wolfdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: kenn
+		Prerequisites: ra1_soviets_kennel
 		Description: Anti-infantry unit.\nCan detect cloaked units and spies.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 200

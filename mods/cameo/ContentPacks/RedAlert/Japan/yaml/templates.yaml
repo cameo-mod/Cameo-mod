@@ -18,7 +18,7 @@
 ^JapanSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,japan_imperialscoutsman,japan_imperialscoutsman,japan_imperialscoutsman
+		ActorTypes: ra1_engineer,japan_imperialscoutsman,japan_imperialscoutsman,japan_imperialscoutsman
 
 ^BushidoDiscipline:
 	DamageMultiplier@japan_upgrade_bushidodiscipline:
@@ -368,7 +368,7 @@
 	Inherits@sell: ^RASpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Buildable:
-		Prerequisites: ~rafact, powr
+		Prerequisites: ~rafact, ra1_powerplant
 		Description: Processes ore into credits.
 	Tooltip:
 		Name: Ore Refinery

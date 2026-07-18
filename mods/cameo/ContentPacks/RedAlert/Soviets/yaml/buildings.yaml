@@ -14,7 +14,7 @@ ra1_soviets_barracks:
 	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@ra1_soviets_barracks: ^Conscription
 	Buildable:
-		Prerequisites: ~ra1_soviets_constructionyard, powr
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_powerplant
 		Description: Trains infantry units.
 	Tooltip:
 		Name: Soviet Barracks
@@ -63,7 +63,7 @@ ra1_soviets_orerefinery:
 	RenderSprites:
 		Image: raproc
 	Buildable:
-		Prerequisites: ~ra1_soviets_constructionyard, powr
+		Prerequisites: ~ra1_soviets_constructionyard, ra1_powerplant
 		Description: Processes ore into credits.
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
@@ -195,8 +195,8 @@ ra1_soviets_airfield:
 		CameraActor: camera.spyplane
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: u2
-			2: u3
+			1: ra1_soviets_spyplane
+			2: ra1_soviets_superspyplane
 		SquadSizes:
 			1: 1
 			2: 3
@@ -253,9 +253,9 @@ ra1_soviets_airfield:
 		CameraActor: camera
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: badr.bomber
-			2: badr.bomber
-			3: badr.bomber
+			1: ra1_badger_bomber
+			2: ra1_badger_bomber
+			3: ra1_badger_bomber
 		QuantizedFacings: 32
 		DisplayBeacon: true
 		BeaconPosters:
@@ -407,30 +407,30 @@ ra1_soviets_airfield:
 			31: power_paratroopers.description
 		DropItems:
 			1: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
-			2: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			2: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
 			3: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			4: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
-			5: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
-			6: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
-			7: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			5: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			6: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			7: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
 			8: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
 			9: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			10: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			11: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
 			12: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			13: ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
-			14: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
-			15: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
-			16: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			14: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			15: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			16: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
 			17: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
 			18: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			19: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			20: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
 			21: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			22: ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heatraytank, ra1_soviets_v2rocketlauncher, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_attackdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_firerocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
-			23: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
-			24: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
-			25: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra_cons_molo, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			23: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_commissar
+			24: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
+			25: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar, ra1_soviets_btr80, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_ak47conscript, ra1_soviets_grenadier, ra1_soviets_molotovconscript, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_commissar
 			26: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_teslatank, ra1_soviets_heavyteslatank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_zapper
 			27: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_hammertank, ra1_soviets_grad, ra1_soviets_siegemammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
 			28: ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper, ra1_soviets_heavytank, ra1_soviets_flaktruck, ra1_soviets_v1rockettruck, ra1_soviets_gatlingtank, ra1_soviets_kotinnucleartank, ra1_soviets_nuclearv2launcher, ra1_soviets_mammothtank, ra1_soviets_mortarsoldier, ra1_soviets_cyberdog, ra1_soviets_rifleinfantry, ra1_soviets_grenadier, ra1_soviets_rocketsoldier, ra1_soviets_flamethrower, ra1_soviets_shocktrooper
@@ -480,37 +480,37 @@ ra1_soviets_airfield:
 		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		UnitTypes:
-			1: badr.soviet
-			2: badr.soviet
-			3: badr.soviet
-			4: badr.soviet
-			5: badr.soviet
-			6: badr.soviet
-			7: badr.soviet
-			8: badr.soviet
-			9: badr.soviet
-			10: badr.soviet
-			11: badr.soviet
-			12: badr.soviet
-			13: badr.soviet
-			14: badr.soviet
-			15: badr.soviet
-			16: badr.soviet
-			17: badr.soviet
-			18: badr.soviet
-			19: badr.soviet
-			20: badr.soviet
-			21: badr.soviet
-			22: badr.soviet
-			23: badr.soviet
-			24: badr.soviet
-			25: badr.soviet
-			26: badr.soviet
-			27: badr.soviet
-			28: badr.soviet
-			29: badr.soviet
-			30: badr.soviet
-			31: badr.soviet
+			1: ra1_soviets_badger
+			2: ra1_soviets_badger
+			3: ra1_soviets_badger
+			4: ra1_soviets_badger
+			5: ra1_soviets_badger
+			6: ra1_soviets_badger
+			7: ra1_soviets_badger
+			8: ra1_soviets_badger
+			9: ra1_soviets_badger
+			10: ra1_soviets_badger
+			11: ra1_soviets_badger
+			12: ra1_soviets_badger
+			13: ra1_soviets_badger
+			14: ra1_soviets_badger
+			15: ra1_soviets_badger
+			16: ra1_soviets_badger
+			17: ra1_soviets_badger
+			18: ra1_soviets_badger
+			19: ra1_soviets_badger
+			20: ra1_soviets_badger
+			21: ra1_soviets_badger
+			22: ra1_soviets_badger
+			23: ra1_soviets_badger
+			24: ra1_soviets_badger
+			25: ra1_soviets_badger
+			26: ra1_soviets_badger
+			27: ra1_soviets_badger
+			28: ra1_soviets_badger
+			29: ra1_soviets_badger
+			30: ra1_soviets_badger
+			31: ra1_soviets_badger
 		SquadSizes:
 			1: 3
 			2: 4

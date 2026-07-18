@@ -168,7 +168,7 @@ japan_japaneseairfield:
 		CameraActor: camera
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: jsuperbomber
+			1: japan_japanesesuperbomber
 		QuantizedFacings: 64
 		DisplayBeacon: true
 		BeaconPosters:
@@ -208,9 +208,9 @@ japan_japaneseairfield:
 			2: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai
 			3: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai
 		UnitTypes:
-			1: badr.japan
-			2: badr.japan
-			3: badr.japan
+			1: japan_badger
+			2: japan_badger
+			3: japan_badger
 		SquadOffset: 1792,1792,0
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:

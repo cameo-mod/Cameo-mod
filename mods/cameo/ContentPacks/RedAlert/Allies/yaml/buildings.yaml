@@ -15,7 +15,7 @@ ra1_allies_alliedbarracks:
 	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_powerplant
 		Description: Trains infantry units.
 	Tooltip:
 		Name: Allied Barracks
@@ -50,7 +50,7 @@ ra1_allies_alliedorerefinery:
 	RenderSprites:
 		Image: raproc
 	Buildable:
-		Prerequisites: ~ra1_allies_alliedconstructionyard, powr
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_powerplant
 		Description: Processes ore into credits.
 	ProvidesPrerequisite@buildingname:
 
@@ -226,7 +226,7 @@ ra1_allies_reinforcementpad:
 		BuildPaletteOrder: 150
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockreinforcementpad, derricklimit
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockreinforcementpad, derricklimit
 		Description: Dropzone for quick reinforcements, and passive income.
 	Building:
 		Footprint: XXXXX xxxx+ =====
@@ -315,7 +315,7 @@ ra1_allies_reinforcementpad:
 		Descriptions:
 			1: power_reinforcements.description
 		DropItems:
-			1: ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,rae3
+			1: ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier,ra1_allies_machinegunner,ra1_allies_sheridanassaulttank,ra1_allies_alliedrocketsoldier
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 32
@@ -327,7 +327,7 @@ ra1_allies_reinforcementpad:
 		ClockSequence: clocklarge
 		CircleSequence: circles
 		UnitTypes:
-			1: badr.allies
+			1: ra1_allies_badger
 		SquadSizes:
 			1: 5
 		SquadOffset: 1792,1792,0

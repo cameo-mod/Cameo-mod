@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **4729** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **529**
+Fluent messages loaded: **4734** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **527**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -54,7 +54,6 @@ _none found_
 | actor_btr |
 | actor_cabal_promotion_heavyreaper |
 | actor_caos |
-| actor_carryall |
 | actor_cgchao |
 | actor_cgchtw |
 | actor_cghype |
@@ -66,7 +65,6 @@ _none found_
 | actor_cleg |
 | actor_cmin |
 | actor_ctnk |
-| actor_cycl |
 | actor_d2k_munitions |
 | actor_deso |
 | actor_dest |
@@ -547,32 +545,32 @@ _none found_
 
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
-| allies | 1/73 | 1% |
 | asianalliance | 0/75 | 0% |
-| cabal | 0/81 | 0% |
-| consortium | 0/61 | 0% |
-| edenl | 0/44 | 0% |
-| forgotten | 77/78 | 98% |
+| cabal | 0/82 | 0% |
+| eden | 0/44 | 0% |
+| forgotten | 77/79 | 97% |
 | futuretech | 0/58 | 0% |
-| gdi | 1/68 | 1% |
-| human2 | 0/70 | 0% |
 | ixian | 0/80 | 0% |
-| lnaxis | 0/48 | 0% |
-| modjapan | 1/75 | 1% |
-| naxis | 0/76 | 0% |
-| nod | 3/72 | 4% |
-| orc2 | 0/61 | 0% |
-| ordos | 0/91 | 0% |
-| plymouthl | 0/45 | 0% |
+| japan | 1/75 | 1% |
+| latinsyndicate | 0/70 | 0% |
+| naxis | 0/77 | 0% |
+| ordos | 0/92 | 0% |
+| plymouth | 0/45 | 0% |
 | protoss | 0/73 | 0% |
-| ra2america | 7/68 | 10% |
-| ra2russia | 1/58 | 1% |
-| soviet | 2/117 | 1% |
-| syndicate | 0/69 | 0% |
+| ra1_allies | 1/73 | 1% |
+| ra1_soviets | 2/117 | 1% |
+| ra2_allies | 7/69 | 10% |
+| ra2_soviets | 1/60 | 1% |
+| schwarzermond | 0/61 | 0% |
+| steelconsortium | 0/62 | 0% |
+| td_gdi | 1/68 | 1% |
+| td_nod | 3/72 | 4% |
 | terran | 0/78 | 0% |
-| tkm | 1/73 | 1% |
-| tsgdi | 0/64 | 0% |
-| tsnod | 1/49 | 2% |
-| yuri | 2/65 | 3% |
+| tkm | 1/74 | 1% |
+| ts_gdi | 0/65 | 0% |
+| ts_nod | 1/49 | 2% |
+| wc2_humans | 0/70 | 0% |
+| wc2_orcs | 0/61 | 0% |
+| yuri | 2/67 | 2% |
 | zerg | 0/76 | 0% |
 

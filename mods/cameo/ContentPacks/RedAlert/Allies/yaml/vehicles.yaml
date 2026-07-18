@@ -309,7 +309,7 @@ ra1_allies_ranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlockreconranger
+		Prerequisites: ~ra1_allies_alliedwarfactory
 		Description: actor_jeep.description
 	Valued:
 		Cost: 300
@@ -662,7 +662,7 @@ ra1_allies_alliedtankdestroyer:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor_tnkd.description
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -720,7 +720,7 @@ ra1_allies_chronotank:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockchronotank
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockchronotank
 		Description: actor_ctnk.description
 	Valued:
 		Cost: 2000
@@ -840,7 +840,7 @@ ra1_allies_phasetransport:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: rae1, rae3, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
+		InitialUnits: ra1_allies_rifleinfantry, ra1_allies_alliedrocketsoldier, ra1_allies_alliedsniper, ra1_allies_medic, ra1_allies_machinegunner
 	Cloak:
 		InitialDelay: 125
 		CloakDelay: 75
@@ -874,7 +874,7 @@ ra1_allies_mobilegapgenerator:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_mgg.description
 	Tooltip:
 		Name: Mobile Gap Generator
@@ -966,7 +966,7 @@ ra1_allies_mobileradarjammer:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
 		HP: 25000

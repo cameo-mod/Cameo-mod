@@ -7494,7 +7494,7 @@ awifv:
 		LoadingCondition: notmobile
 		PassengerConditions:
 			e1: ifv-mg
-			rae1: ifv-mg
+			ra1_allies_rifleinfantry: ifv-mg
 			ra1_soviets_rifleinfantry: ifv-mg
 			ra2_allies_gi: ifv-mg
 			ra2_soviets_conscript: ifv-mg
@@ -7527,7 +7527,7 @@ awifv:
 			che2: ifv-cannon
 			leange2: ifv-cannon
 			e6: ifv-repair
-			rae6: ifv-repair
+			ra1_engineer: ifv-repair
 			ra1_allies_mechanic: ifv-repair
 			terran_scv: ifv-repair
 			ra2_allies_engineer: ifv-repair
@@ -7545,7 +7545,7 @@ awifv:
 			leanghacker: ifv-repair
 			leanglotus: ifv-repair
 			e3: ifv-miss
-			rae3: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
 			ra1_soviets_rocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
@@ -12326,7 +12326,7 @@ awifv.e3:
 #	AW Support Lab Powers
 ########################################################
 awhydrosupport:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: AWDusterMG
 		LocalOffset: 1024,0,-85
@@ -12350,7 +12350,7 @@ awhydrosupport:
 		Position: BottomLeft
 		RequiresSelection: True
 awdustersupport:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: AWDusterMG
 		LocalOffset: 1024,0,-85
@@ -12374,7 +12374,7 @@ awdustersupport:
 		Position: BottomLeft
 		RequiresSelection: True
 awtheowlsupport:
-	Inherits: BADR
+	Inherits: ra1_badger
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:

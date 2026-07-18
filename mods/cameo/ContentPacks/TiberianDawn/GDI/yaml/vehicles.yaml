@@ -993,7 +993,7 @@ td_gdi_defenserig:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, td_gdi_promotion_unlockgdidefenserig
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockgdidefenserig
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:

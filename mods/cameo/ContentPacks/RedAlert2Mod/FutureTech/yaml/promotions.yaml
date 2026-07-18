@@ -8,7 +8,7 @@ futuretech_promotion_unlockshotgundroid:
 		BuildPaletteOrder: 100
 		Queue: Promotions
 		Description: Enables construction of the Shotgun Droid.
-		Prerequisites: ~futuretech_constructionyard, futuretech_robotcontrolcenter, !futuretech_promotion_unlockshotgundroid, rank1
+		Prerequisites: ~futuretech_constructionyard, !futuretech_promotion_unlockshotgundroid, rank1
 	RenderSprites:
 		Image: futuretech_shotgundroid
 	ProvidesPrerequisite:
@@ -21,7 +21,7 @@ futuretech_promotion_unlockcannondroid:
 		BuildPaletteOrder: 103
 		Queue: Promotions
 		Description: Enables construction of the Cannon Droid.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockshotgundroid, futuretech_transmissioncenter, !futuretech_promotion_unlockcannondroid, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockshotgundroid, !futuretech_promotion_unlockcannondroid, rank1
 	RenderSprites:
 		Image: futuretech_cannondroid
 	ProvidesPrerequisite:
@@ -34,7 +34,7 @@ futuretech_promotion_unlockmissiledroid:
 		BuildPaletteOrder: 106
 		Queue: Promotions
 		Description: Enables construction of the Missile Droid.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcannondroid, futuretech_battlelab, !futuretech_promotion_unlockmissiledroid, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcannondroid, !futuretech_promotion_unlockmissiledroid, rank1
 	RenderSprites:
 		Image: futuretech_missiledroid
 	ProvidesPrerequisite:
@@ -47,7 +47,7 @@ futuretech_promotion_unlockcryolegionnaire:
 		BuildPaletteOrder: 109
 		Queue: Promotions
 		Description: Enables construction of the Cryo Legionnaire.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockmissiledroid, futuretech_hypercore, !futuretech_promotion_unlockcryolegionnaire, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockmissiledroid, !futuretech_promotion_unlockcryolegionnaire, rank1
 	RenderSprites:
 		Image: futuretech_cryolegionnaire
 	ProvidesPrerequisite:
@@ -75,7 +75,7 @@ futuretech_promotion_unlockrobottank:
 		BuildPaletteOrder: 104
 		Queue: Promotions
 		Description: Enables construction of the Robot Tank.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlocksalamanderifv, futuretech_robotcontrolcenter, !futuretech_promotion_unlockrobottank, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlocksalamanderifv, !futuretech_promotion_unlockrobottank, rank1
 	RenderSprites:
 		Image: yrrobo
 	ProvidesPrerequisite:
@@ -88,7 +88,7 @@ futuretech_promotion_unlockoriontank:
 		BuildPaletteOrder: 107
 		Queue: Promotions
 		Description: Enables construction of the Orion Tank.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockrobottank, futuretech_battlelab, !futuretech_promotion_unlockoriontank, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockrobottank, !futuretech_promotion_unlockoriontank, rank1
 	RenderSprites:
 		Image: futuretech_oriontank
 	ProvidesPrerequisite:
@@ -101,7 +101,7 @@ futuretech_promotion_unlockfuturetank:
 		BuildPaletteOrder: 110
 		Queue: Promotions
 		Description: Enables construction of the Future Tank.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockoriontank, futuretech_hypercore, !futuretech_promotion_unlockfuturetank, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockoriontank, !futuretech_promotion_unlockfuturetank, rank1
 	RenderSprites:
 		Image: futuretech_futuretank
 	ProvidesPrerequisite:
@@ -129,7 +129,7 @@ futuretech_promotion_unlockblackwidow:
 		BuildPaletteOrder: 105
 		Queue: Promotions
 		Description: Enables construction of the Black Widow.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockprospectormk2, futuretech_transmissioncenter, !futuretech_promotion_unlockblackwidow, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockprospectormk2, !futuretech_promotion_unlockblackwidow, rank1
 	RenderSprites:
 		Image: futuretech_blackwidow
 	ProvidesPrerequisite:
@@ -142,7 +142,7 @@ futuretech_promotion_unlockcryocopter:
 		BuildPaletteOrder: 108
 		Queue: Promotions
 		Description: Enables construction of the Cryocopter.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockblackwidow, futuretech_battlelab, !futuretech_promotion_unlockcryocopter, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockblackwidow, !futuretech_promotion_unlockcryocopter, rank1
 	RenderSprites:
 		Image: futuretech_cryocopter
 	ProvidesPrerequisite:
@@ -155,7 +155,7 @@ futuretech_promotion_unlockharbingergunship:
 		BuildPaletteOrder: 111
 		Queue: Promotions
 		Description: Enables construction of the Harbinger Gunship.
-		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcryocopter, futuretech_hypercore, !futuretech_promotion_unlockharbingergunship, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcryocopter, !futuretech_promotion_unlockharbingergunship, rank1
 	RenderSprites:
 		Image: futuretech_harbingergunship
 	ProvidesPrerequisite:

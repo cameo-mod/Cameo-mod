@@ -166,7 +166,7 @@ actor_nodlasercorvette =
         Strong vs Everything
    .name = Nod Laser Corvette
 
-actor_ss =
+actor_ra1_soviets_submarine =
    .description = Submerged anti-ship unit
     armed with torpedoes.
     Can detect other submarines.
@@ -174,7 +174,7 @@ actor_ss =
       Weak vs Ground units, Aircraft
    .name = Soviet Submarine
 
-actor_msub =
+actor_ra1_soviets_missilesubmarine =
    .description = Submerged anti-ground siege unit
     with anti-air capabilities.
     Can detect other submarines.

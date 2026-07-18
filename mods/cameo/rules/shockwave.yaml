@@ -2790,7 +2790,7 @@ susaarmorburton.bot:
 	-WithDecoration@close:
 
 susahaloplane:
-	Inherits: BADR
+	Inherits: ra1_badger
 	Aircraft:
 		CruiseAltitude: 20c0
 	-AppearsOnRadar:
@@ -2960,7 +2960,7 @@ susalittlebird:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 	Armament@MG:
@@ -4854,7 +4854,7 @@ susacrusader2:
 		Image: usacrusader2
 
 susabomber.laser:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Aircraft:
 		Speed: 290
 	Armament:
@@ -6776,7 +6776,7 @@ susaf16xl.husk:
 		Image: susablackwidow
 
 susaf16:
-	Inherits: BADR.Bomber
+	Inherits: ra1_badger_bomber
 	Armament:
 		Weapon: USAA10MG
 		LocalOffset: 1024,0,-85
@@ -8170,7 +8170,7 @@ sglballoon:
 			gle3: ifv-miss
 			che3: ifv-miss
 			e3: ifv-miss
-			rae3: ifv-miss
+			ra1_allies_alliedrocketsoldier: ifv-miss
 			ra2_allies_guardiangi: ifv-miss
 			tse3: ifv-miss
 		InitialUnits: gle3,gle3
@@ -13682,7 +13682,7 @@ upschneutronbomb:
 		Prerequisite: upschneutronbomb
 
 schirondragon:
-	Inherits: BADR
+	Inherits: ra1_badger
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:

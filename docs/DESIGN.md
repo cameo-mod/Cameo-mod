@@ -34,6 +34,13 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   - Faction InternalName must match the faction section of the actor prefix
     exactly: actors `td_gdi_*` → faction `td_gdi`; actors `asianalliance_*` →
     faction `asianalliance`.
+- **Umlauts and other non-ASCII letters TRANSLITERATE, never drop**
+  (design 2026-07-17): ids derive from display names by mapping
+  Ü→u, ü→u, Ö→o, ö→o, Ä→a, ä→a, ß→ss — e.g. `Übermensch` →
+  `schwarzermond_ubermensch` (the earlier `_bermensch`, with the Ü
+  silently dropped, was a bug). Weapon and sequence ids follow the
+  same rule (`ÜbermenschLaser` → `UbermenschLaser`). DISPLAY names
+  (Tooltip `Name:`, fluent text) keep their proper umlauts.
 - **The only separator is the underscore — hyphens are banned in ALL
   naming we own** (design 2026-07-10): actor ids, asset file names
   (`cabal_dissolver_weapon.shp`, never `cabal_dissolver-weapon.shp`),
@@ -471,6 +478,12 @@ cheapest provider wins).
   stack, but the COMBINED product must never drop below **50%** — below
   that units feel undamageable. Hard floor; audit extension TODO
   (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
+- **ActorStatValues upgrade list** (design 2026-07-17): the `Upgrades:`
+  field on `ActorStatValues` was expanded from a maximum of 5 entries to
+  **10**. Every unit must list all faction upgrades (and only faction
+  upgrades, never team upgrades) that affect it so the actor-stat widget
+  can display the full set of upgrade icons. Gaps are bugs; additions or
+  removals of upgrade inherits must be mirrored in the ActorStatValues list.
 - AA gating, defense tiers, and tech trees per §4.
 
 ## 7. Descriptions & localization (rollout in progress)
@@ -1072,16 +1085,25 @@ sit at Tier 4.
 CABAL lasers are purple/dark-blue outer beams with a near-white cyan core,
 scaled by damage. Weapon sounds follow the obelisk/laser sound map in §3.
 
-**Promotion visibility rule.** CABAL promotions must be globally visible
-as soon as the player has `rank1`. A promotion's `Buildable.Prerequisites`
-contains only `rank1`, the prerequisite that unlocks the promotion
-(`!self`), and the previous promotion in its column. Production buildings
-(`~cabal_cyborgfactory`, `~cabal_mechfactory`, `~cabal_helipad`) and tech
-structures (`cabal_radar`, `cabal_techcenter`, `cabal_core`) must NEVER
-gate whether a promotion appears in the Promotions tab. Those buildings
-belong on the *unit* that the promotion unlocks. This keeps the 3x4 grid
-always populated and lets players plan their promotion path regardless of
-which production structures they have built.
+**Promotion visibility rule.** Promotions must be globally visible in the
+Promotions tab as soon as the player has the faction's construction yard
+and `rank1`. A promotion's `Buildable.Prerequisites` must always start with
+`~constructionyard` so the promotion grid is only available while the
+player still has a base; it also contains `rank1`, the prerequisite that
+unlocks the promotion (`!self`), and the previous promotion in its column.
+Production buildings and tech structures (other than the construction
+yard) must NEVER gate whether a promotion appears in the Promotions tab —
+those buildings belong on the *unit* that the promotion unlocks.
+
+**Promotion-unit prerequisite formula.** A unit unlocked by a promotion uses
+`Buildable.Prerequisites: ~productionbuilding, techbuilding, ~promotion`.
+`~productionbuilding` hides the unit when the producer is missing; the
+`~promotion` token hides the unit entirely when the promotion has not been
+bought; tech buildings are positive prerequisites that disable the unit but
+still show it in the build list. Replaced base units additionally carry
+`!promotion` so they are disabled once the promotion is bought. Every
+promotion-gated unit must include its `~promotion` token, otherwise it will
+appear before the promotion is unlocked.
 
 **Weapon minimum-range rule.** Any weapon with a `MinRange` must keep
 `MinRange = round(Range / 5)` rounded to the nearest multiple of 5
@@ -1647,9 +1669,23 @@ the first to receive the full template because it is the focus faction.
   name `MARS` (uppercase acronym). The unit uses the `NaxisBradleyTarget`
   weapon, which is a legacy internal name that does not need to change unless
   we want to fully purge the old label.
+- **MARS is AA-capable** (ground + air, long range). Laser Beetle and Laser
+  Tank are also AA. SM does NOT lose all mobile AA when MARS replaces Jagerline
+  — MARS is a direct upgrade with AA capability. The "no mobile AA" concern is
+  invalid.
 - Moon Dairy Farm passive income and Cryptofascism are independent: the dairy
   farm is a building income source, Cryptofascism only generates cash from living
   units. They can stack without special capping.
+- **Promotion grid tier-mismatch (DESIGN DECISION NEEDED):** The current 3×4
+  grid has row 1 unlocking T3 units (Übermensch, Piercer) while row 2 unlocks
+  a T1 unit (Laser Tank). Five solution options are documented in
+  `docs/design/ROADMAP.md` under "P2 — SM promotion grid tier-mismatch".
+  Recommended: Option C (CABAL pattern — promotion gates visibility, tech
+  gates power) or Option D (hybrid — soft tier sorting + CABAL gating).
+  **CABAL has the same problem** — see "P2b — CABAL promotion grid
+  tier-mismatch" in ROADMAP. FutureTech solved it by making all
+  promotion-units T3 (every unit requires high-tier buildings). Awaiting
+  maintainer decision on which pattern to apply to both SM and CABAL.
 
 ### 18.12 Lore research — Iron Sky, Nazi Moon, and conspiracy-parody sources
 

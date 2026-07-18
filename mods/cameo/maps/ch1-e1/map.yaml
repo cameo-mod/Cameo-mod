@@ -72,10 +72,10 @@ Players:
 		Enemies: Penta, ShadeActive
 
 Actors:
-	Actor1: apwr
+	Actor1: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 7,67
-	Actor4: apwr
+	Actor4: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 63,68
 	Actor5: ra1_soviets_barracks
@@ -84,10 +84,10 @@ Actors:
 	Actor6: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 15,70
-	Actor7: powr
+	Actor7: ra1_powerplant
 		Owner: NitroIdle
 		Location: 13,68
-	Actor8: powr
+	Actor8: ra1_powerplant
 		Owner: NitroIdle
 		Location: 59,70
 	Actor9: ra1_soviets_flametower
@@ -105,27 +105,27 @@ Actors:
 	Actor13: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 58,9
-	Actor33: ca
+	Actor33: ra1_allies_cruiser
 		Owner: Penta
 		Location: 6,92
 		Facing: 0
-	Actor34: ca
+	Actor34: ra1_allies_cruiser
 		Owner: Penta
 		Location: 12,92
 		Facing: 0
-	Actor35: dd
+	Actor35: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 59,85
 		Facing: 0
-	Actor36: dd
+	Actor36: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 64,85
 		Facing: 0
-	Actor37: ca
+	Actor37: ra1_allies_cruiser
 		Owner: ShadeActive
 		Location: 58,93
 		Facing: 0
-	Actor38: ca
+	Actor38: ra1_allies_cruiser
 		Owner: ShadeActive
 		Location: 64,93
 		Facing: 0
@@ -138,22 +138,22 @@ Actors:
 	Actor42: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 11,33
-	Actor45: apwr
+	Actor45: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 11,38
-	Actor46: apwr
+	Actor46: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 11,29
 	Actor43: ra1_soviets_barracks
 		Owner: NitroIdle
 		Location: 8,33
-	Actor47: powr
+	Actor47: ra1_powerplant
 		Owner: NitroIdle
 		Location: 8,29
 	Actor49: ra1_allies_alliedradardome
 		Owner: NitroIdle
 		Location: 5,29
-	Actor50: powr
+	Actor50: ra1_powerplant
 		Owner: NitroIdle
 		Location: 3,29
 	Actor53: ra1_soviets_orerefinery
@@ -195,16 +195,16 @@ Actors:
 	Actor68: oilb.building
 		Owner: NitroIdle
 		Location: 32,68
-	Actor79: apwr
+	Actor79: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 20,76
-	Actor80: apwr
+	Actor80: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 50,73
-	Actor81: powr
+	Actor81: ra1_powerplant
 		Owner: NitroIdle
 		Location: 32,73
-	Actor82: powr
+	Actor82: ra1_powerplant
 		Owner: NitroIdle
 		Location: 36,74
 	PentaSpawnOne: waypoint
@@ -264,10 +264,10 @@ Actors:
 	Actor101: splitgold
 		Owner: Neutral
 		Location: 8,14
-	Actor103: powr
+	Actor103: ra1_powerplant
 		Owner: NitroIdle
 		Location: 27,46
-	Actor104: kenn
+	Actor104: ra1_soviets_kennel
 		Owner: NitroIdle
 		Location: 29,50
 	Actor105: moneycrate.large
@@ -285,25 +285,25 @@ Actors:
 	Actor114: ra1_soviets_orerefinery
 		Owner: NitroIdle
 		Location: 46,5
-	Actor115: apwr
+	Actor115: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 51,2
-	Actor116: apwr
+	Actor116: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 54,2
-	Actor117: apwr
+	Actor117: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 63,2
-	Actor118: apwr
+	Actor118: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 66,2
-	Actor119: apwr
+	Actor119: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 69,2
-	Actor124: powr
+	Actor124: ra1_powerplant
 		Owner: NitroIdle
 		Location: 62,5
-	Actor125: powr
+	Actor125: ra1_powerplant
 		Owner: NitroIdle
 		Location: 55,5
 	Actor127: ra1_soviets_radardome
@@ -354,13 +354,13 @@ Actors:
 	Actor143: ra1_soviets_flametower
 		Owner: NitroIdle
 		Location: 44,38
-	Actor144: apwr
+	Actor144: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 39,41
-	Actor145: powr
+	Actor145: ra1_powerplant
 		Owner: NitroIdle
 		Location: 34,46
-	Actor146: powr
+	Actor146: ra1_powerplant
 		Owner: NitroIdle
 		Location: 36,40
 	Actor159: ra1_soviets_flametower
@@ -417,62 +417,62 @@ Actors:
 		Owner: NitroIdle
 		Location: 69,70
 		Facing: 444
-	Actor175: rae1
+	Actor175: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		SubCell: 3
 		Facing: 384
 		Location: 6,70
-	Actor176: rae1
+	Actor176: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 9,70
-	Actor177: rae1
+	Actor177: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 14,72
-	Actor178: rae1
+	Actor178: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 17,75
-	Actor179: rae1
+	Actor179: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 19,78
-	Actor180: rae1
+	Actor180: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 3,67
-	Actor184: rae1
+	Actor184: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		SubCell: 3
 		Facing: 384
 		Location: 47,78
-	Actor185: rae1
+	Actor185: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 51,76
-	Actor186: rae1
+	Actor186: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 55,74
-	Actor187: rae1
+	Actor187: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 59,73
-	Actor188: rae1
+	Actor188: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
 		Location: 63,71
-	Actor189: rae1
+	Actor189: ra1_allies_rifleinfantry
 		Owner: NitroIdle
 		Facing: 384
 		SubCell: 3
@@ -512,35 +512,35 @@ Actors:
 	Actor199: railmine
 		Owner: Neutral
 		Location: 18,57
-	Actor196: dd
+	Actor196: ra1_allies_destroyer
 		Owner: Penta
 		Location: 9,78
 		Facing: 872
-	Actor181: dd
+	Actor181: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 56,83
 		Facing: 0
-	Actor182: dd
+	Actor182: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 61,82
 		Facing: 0
-	Actor183: dd
+	Actor183: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 67,82
 		Facing: 0
-	Actor190: ss
+	Actor190: ra1_soviets_submarine
 		Owner: NitroIdle
 		Facing: 384
 		Location: 20,83
-	Actor191: ss
+	Actor191: ra1_soviets_submarine
 		Owner: NitroIdle
 		Facing: 384
 		Location: 27,84
-	Actor192: ss
+	Actor192: ra1_soviets_submarine
 		Owner: NitroIdle
 		Location: 43,84
 		Facing: 618
-	Actor198: ss
+	Actor198: ra1_soviets_submarine
 		Owner: NitroIdle
 		Location: 49,82
 		Facing: 658
@@ -592,58 +592,58 @@ Actors:
 	Actor218: v04.husk
 		Owner: Neutral
 		Location: 54,29
-	Actor197: dd
+	Actor197: ra1_allies_destroyer
 		Owner: Penta
 		Facing: 904
 		Location: 6,80
-	Actor219: dd
+	Actor219: ra1_allies_destroyer
 		Owner: Penta
 		Facing: 872
 		Location: 9,82
-	Actor220: dd
+	Actor220: ra1_allies_destroyer
 		Owner: Penta
 		Facing: 911
 		Location: 5,83
-	Actor221: dd
+	Actor221: ra1_allies_destroyer
 		Owner: Penta
 		Facing: 872
 		Location: 12,84
-	Actor222: dd
+	Actor222: ra1_allies_destroyer
 		Owner: Penta
 		Facing: 888
 		Location: 8,85
-	Actor195: dd
+	Actor195: ra1_allies_destroyer
 		Owner: ShadeActive
 		Location: 69,85
 		Facing: 0
-	Actor223: ca
+	Actor223: ra1_allies_cruiser
 		Owner: Penta
 		Facing: 0
 		Location: 9,92
-	Actor224: ca
+	Actor224: ra1_allies_cruiser
 		Owner: Penta
 		Facing: 0
 		Location: 3,92
-	Actor225: ca
+	Actor225: ra1_allies_cruiser
 		Owner: Penta
 		Facing: 0
 		Location: 15,92
-	Actor226: ca
+	Actor226: ra1_allies_cruiser
 		Owner: ShadeActive
 		Facing: 0
 		Location: 61,93
-	Actor227: ca
+	Actor227: ra1_allies_cruiser
 		Owner: ShadeActive
 		Facing: 0
 		Location: 55,93
-	Actor228: ca
+	Actor228: ra1_allies_cruiser
 		Owner: ShadeActive
 		Facing: 0
 		Location: 67,93
-	Actor230: powr
+	Actor230: ra1_powerplant
 		Owner: NitroIdle
 		Location: 55,9
-	Actor231: powr
+	Actor231: ra1_powerplant
 		Owner: NitroIdle
 		Location: 62,9
 	Actor232: ra1_soviets_barracks
@@ -652,7 +652,7 @@ Actors:
 	Actor233: ra1_soviets_warfactory
 		Owner: NitroIdle
 		Location: 52,9
-	Actor234: powr
+	Actor234: ra1_powerplant
 		Owner: NitroIdle
 		Location: 30,46
 	Actor243: ra1_soviets_samsite
@@ -691,16 +691,16 @@ Actors:
 	Actor206: v10
 		Owner: Neutral
 		Location: 42,24
-	Actor254: rasilo
+	Actor254: ra1_oresilo
 		Owner: NitroIdle
 		Location: 11,26
-	Actor255: rasilo
+	Actor255: ra1_oresilo
 		Owner: NitroIdle
 		Location: 12,26
-	Actor256: rasilo
+	Actor256: ra1_oresilo
 		Owner: NitroIdle
 		Location: 12,25
-	Actor257: rasilo
+	Actor257: ra1_oresilo
 		Owner: NitroIdle
 		Location: 11,25
 	Actor252: ra1_soviets_warfactory
@@ -712,16 +712,16 @@ Actors:
 	Actor259: ra1_soviets_constructionyard
 		Owner: NitroIdle
 		Location: 9,3
-	Actor260: apwr
+	Actor260: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 16,5
-	Actor261: apwr
+	Actor261: ra1_advancedpowerplant
 		Owner: NitroIdle
 		Location: 16,2
-	Actor262: powr
+	Actor262: ra1_powerplant
 		Owner: NitroIdle
 		Location: 6,4
-	Actor263: powr
+	Actor263: ra1_powerplant
 		Owner: NitroIdle
 		Location: 3,3
 	Actor264: ra1_soviets_orerefinery
@@ -806,7 +806,7 @@ Actors:
 	EnemyEntranceTwo: waypoint
 		Owner: NitroIdle
 		Location: 61,1
-	Actor279: powr
+	Actor279: ra1_powerplant
 		Owner: NitroIdle
 		Location: 30,34
 	Actor280: ra1_soviets_btr80

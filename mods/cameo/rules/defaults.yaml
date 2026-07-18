@@ -2345,7 +2345,7 @@
 		RequiresCondition: !chronobeamed
 	-Repairable:
 	RepairableNear:
-		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1syrd, cncsyrd, raspen, cncspen, tsntyard, tsntyard2, tsgtyard, tsgtyard2, cra2gayard, cra2nayard, craspen, ccncspen, cra1syrd, ccncsyrd
+		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_alliednavalyard, cncsyrd, ra1_soviets_subpen, cncspen, tsntyard, tsntyard2, tsgtyard, tsgtyard2, cra2gayard, cra2nayard, craspen, ccncspen, cra1syrd, ccncsyrd
 	GpsDot:
 		String: Ship
 	RangedGpsDot:
@@ -7228,12 +7228,12 @@ CPQDEBUGDUMMY:
 	Building:
 		BuildSounds: placbldg.aud, build5.aud
 	SpawnActorsOnSell:
-		ActorTypes: rae6,rae1,rae1,rae1
+		ActorTypes: ra1_engineer,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry,ra1_allies_rifleinfantry
 
 ^RASovietSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry
+		ActorTypes: ra1_engineer,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry,ra1_soviets_rifleinfantry
 
 ^AIForceShield:
 	GrantConditionOnDamageState@AIFS:
@@ -8865,7 +8865,7 @@ CPQDEBUGDUMMY:
 		EjectOnDeathDamage: 0
 		# PassengerConditions:
 			# e1: ifv-mg
-			# rae1: ifv-mg
+			# ra1_allies_rifleinfantry: ifv-mg
 			# ra1_soviets_rifleinfantry: ifv-mg
 			# ra2_allies_gi: ifv-mg
 			# ra2_soviets_conscript: ifv-mg
@@ -8900,7 +8900,7 @@ CPQDEBUGDUMMY:
 			# leange2: ifv-cannon
 			# asianalliance_plasmatrooper: ifv-cannon
 			# e6: ifv-repair
-			# rae6: ifv-repair
+			# ra1_engineer: ifv-repair
 			# ra1_allies_medic: ifv-healer
 			# ra1_allies_mechanic: ifv-repair
 			# terran_scv: ifv-repair
@@ -8919,7 +8919,7 @@ CPQDEBUGDUMMY:
 			# leanghacker: ifv-repair
 			# leanglotus: ifv-repair
 			# e3: ifv-miss
-			# rae3: ifv-miss
+			# ra1_allies_alliedrocketsoldier: ifv-miss
 			# ra1_soviets_rocketsoldier: ifv-miss
 			# ra2_allies_guardiangi: ifv-miss
 			# asianalliance_asiantankkiller: ifv-miss

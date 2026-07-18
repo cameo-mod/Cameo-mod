@@ -95,22 +95,22 @@ redguard:
 	icon:
 		Filename: che1icon.shp
 
-rae1:
+ra1_allies_rifleinfantry:
 	Inherits: e1
 	icon:
 		Filename: ra1_soviets_rifleinfantry_icon.png
 
-rae3:
+ra1_allies_alliedrocketsoldier:
 	Inherits: e3
 	icon:
 		Filename: ra1_soviets_rocketsoldier_icon.png
 
-rae6:
+ra1_engineer:
 	Inherits: e6
 	icon:
 		Filename: e6icon.png
 
-gnrl:
+ra1_general:
 	Defaults:
 		Scale: 0.96
 		Filename: gnrl.shp
@@ -177,7 +177,7 @@ gnrl:
 		Tick: 1600
 		ZOffset: -511
 
-ra_cons_molo:
+ra1_soviets_molotovconscript:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
@@ -231,7 +231,7 @@ ra_cons_molo:
 	icon:
 		Filename: ra_conscript_molotov_icon.png
 
-einstein:
+ra1_einstein:
 	Defaults:
 		Scale: 0.65
 		Filename: einstein.shp
@@ -276,7 +276,7 @@ einstein:
 		Tick: 1600
 		ZOffset: -511
 
-delphi:
+ra1_agentdelphi:
 	Defaults:
 		Filename: delphi.shp
 	stand:
@@ -319,7 +319,7 @@ delphi:
 		Tick: 1600
 		ZOffset: -511
 
-rachan:
+ra1_scientist:
 	Defaults:
 		Filename: rachan.shp
 		Scale: 2
@@ -468,7 +468,7 @@ rajeep2:
 	icon:
 		Filename: ra1_allies_ranger_icon.shp
 
-raapc:
+ra1_allies_alliedapc:
 	Defaults:
 		Filename: td_gdi_apc.shp
 	idle:
@@ -625,7 +625,7 @@ rafactcolor:
 	icon:
 		Filename: ra1_allies_alliedconstructionyard_icon.png
 
-rasilo:
+ra1_oresilo:
 	Inherits: ^WithBuildingBibSilo
 	Defaults:
 		Filename: rasilo.shp
@@ -650,7 +650,7 @@ rasilo:
 	icon:
 		Filename: rasiloicon.shp
 
-powr:
+ra1_powerplant:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: powr.shp
@@ -667,7 +667,7 @@ powr:
 	icon:
 		Filename: powricon.png
 
-apwr:
+ra1_advancedpowerplant:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: apwr.shp
@@ -689,7 +689,7 @@ apwr:
 	icon:
 		Filename: apwricon.png
 
-kenn:
+ra1_soviets_kennel:
 	Inherits: ^WithBuildingBibSilo
 	Defaults:
 		Filename: kenn.shp
@@ -816,7 +816,7 @@ oilb.husk:
 #		RA
 ####################################################################################################
 
-u2:
+ra1_soviets_spyplane:
 	Defaults:
 		Filename: ra1_soviets_promotion_unlocksupersonicnuclearbomber_u2.shp
 	idle:
@@ -825,7 +825,7 @@ u2:
 	icon:
 		Filename: ra1_soviets_promotion_superspyplane_icon.png
 
-badr:
+ra1_badger:
 	Defaults:
 		Filename: ra1_soviets_promotion_parabombslevel3_badr.shp
 	idle:
@@ -1458,7 +1458,7 @@ tevo:
 	icon:
 		Filename: evoicon.shp
 
-ra1syrd:
+ra1_allies_alliednavalyard:
 	Defaults:
 		Filename: syrd.shp
 	idle:
@@ -1472,7 +1472,7 @@ ra1syrd:
 	icon:
 		Filename: syrdicon.png
 
-ra1jsyrd:
+japan_japanesenavalyard:
 	Defaults:
 		Filename: JapNavYardSpritesheet.png
 		Scale: 1.25
@@ -1487,7 +1487,7 @@ ra1jsyrd:
 	icon:
 		Filename: JapNavYardIcon.png
 
-raspen:
+ra1_soviets_subpen:
 	Defaults:
 		Filename: raspen.shp
 	idle:
@@ -1523,7 +1523,7 @@ ramsub:
 	icon:
 		Filename: ramsubicon.shp
 
-pt:
+ra1_allies_gunboat:
 	Defaults:
 		Filename: pt.shp
 	idle:
@@ -1571,7 +1571,7 @@ raca:
 	icon:
 		Filename: caicon.png
 
-japanspeedboat:
+japan_japanesespeedboat:
 	Defaults:
 		Filename: JapSpeedboatSpritesheet.png
 	idle:
@@ -1585,7 +1585,7 @@ japanspeedboat:
 	icon:
 		Filename: JapSpeedboatIcon.png
 
-japancarrier:
+japan_japanesecarrier:
 	Defaults:
 		Filename: japancarrier.shp
 	idle:
@@ -1594,7 +1594,7 @@ japancarrier:
 	icon:
 		Filename: japancarriericon.png
 
-yamatobattleship:
+japan_yamatobattleship:
 	Defaults:
 		Filename: YamatoSpritesheet.png
 	idle:
@@ -1612,7 +1612,7 @@ yamatobattleship:
 	icon:
 		Filename: YamatoBattleshipIcon.png
 
-alliedcybertank:
+ra1_allies_alliedcybertank:
 	Defaults:
 		Scale: 0.60
 	idle:
@@ -1633,7 +1633,7 @@ alliedcybertank:
 	icon:
 		Filename: CyberTankIcon.png
 
-ralst:
+ra1_navaltransport:
 	idle:
 		Filename: ralst.shp
 		#Scale: 1.75
@@ -1654,7 +1654,7 @@ ralst:
 	icon:
 		Filename: ralsticon.png
 
-jsuperbomber:
+japan_japanesesuperbomber:
 	idle:
 		Filename: jsuperbomber.shp
 		Scale: 2

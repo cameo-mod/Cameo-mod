@@ -748,7 +748,7 @@ cabal_cyborgcommandov2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, cabal_promotion_cyborgcommandov2
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_cyborgcommandov2
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommandov2.description

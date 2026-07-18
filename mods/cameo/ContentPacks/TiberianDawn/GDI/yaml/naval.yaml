@@ -16,7 +16,7 @@ gdicarrier:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cncsyrd, td_gdi_advancedcommunicationscenter
 		Queue: Naval, RANaval
-		Description: actor_japancarrier.description
+		Description: actor_japan_japanesecarrier.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -70,7 +70,7 @@ CNCPT:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncsyrd
 		Queue: Naval, RANaval
-		Description: actor_pt.description
+		Description: actor_ra1_allies_gunboat.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -131,7 +131,7 @@ CNCCA:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cncsyrd, td_gdi_communicationscenter
 		Queue: Naval, RANaval
-		Description: actor_ca.description
+		Description: actor_ra1_allies_cruiser.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10

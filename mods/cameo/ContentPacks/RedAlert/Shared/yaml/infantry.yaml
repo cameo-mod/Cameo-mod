@@ -1,5 +1,5 @@
-RAE1:
-	Inherits: ^RAE1
+ra1_allies_rifleinfantry:
+	Inherits: ^ra1_allies_rifleinfantry
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
@@ -28,7 +28,7 @@ RAE1:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-ra_cons_molo:
+ra1_soviets_molotovconscript:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2Infantry
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -91,8 +91,8 @@ ra_cons_molo:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
-RAE3:
-	Inherits: ^RAE3
+ra1_allies_alliedrocketsoldier:
+	Inherits: ^ra1_allies_alliedrocketsoldier
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
@@ -123,7 +123,7 @@ RAE3:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_gpssatellitesupport
 
-RAE6:
+ra1_engineer:
 	Inherits: E6
 	Valued:
 		Cost: 500
@@ -135,9 +135,9 @@ RAE6:
 		Queue: Infantry, RAInfantry
 		Description: Captures and repairs structures.\n  Unarmed
 	RenderSprites:
-		Image: rae6
+		Image: ra1_engineer
 
-EINSTEIN:
+ra1_einstein:
 	Inherits: ^CivInfantry
 	RenderSprites:
 		Palette: ra_temperat
@@ -148,7 +148,7 @@ EINSTEIN:
 	Voiced:
 		VoiceSet: EinsteinVoice
 
-DELPHI:
+ra1_agentdelphi:
 	Inherits: ^CivInfantry
 	RenderSprites:
 		Palette: ra_temperat
@@ -157,7 +157,7 @@ DELPHI:
 	Mobile:
 		Speed: 71
 
-RACHAN:
+ra1_scientist:
 	Inherits: ^CivInfantry
 	Valued:
 		Cost: 500
@@ -166,13 +166,13 @@ RACHAN:
 	Tooltip:
 		Name: Scientist
 
-GNRL:
+ra1_general:
 	Inherits@1: ^CivInfantry
 	Inherits@2: ^ArmedCivilian
 	Tooltip:
 		Name: General
 	Selectable:
-		Class: GNRL
+		Class: ra1_general
 	Mobile:
 		Voice: Move
 	AttackFrontal:
@@ -194,7 +194,7 @@ GNRL:
 	WithInfantryBody:
 		IdleSequences: idle1
 
-TECH1:
+ra1_technician:
 	Inherits: ^CivInfantry
 	Inherits@armed: ^ArmedCivilian
 	Tooltip:

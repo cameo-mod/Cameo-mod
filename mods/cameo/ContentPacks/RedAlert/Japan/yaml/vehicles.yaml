@@ -57,7 +57,7 @@ japan_scoutcar:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockarmoredcar, ~!japan_promotion_unlockgrenadebuggy
+		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockarmoredcar
 		Description: actor_jeep.description
 	Valued:
 		Cost: 300
@@ -654,7 +654,7 @@ japan_hovercrafttransport:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockarchermaiden
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, ~japan_promotion_unlockarchermaiden
 		Description: actor_jphover.description
 	Valued:
 		Cost: 1500
@@ -934,7 +934,7 @@ japan_hovercraftflametank:
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockhovercraftflametank
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, ~japan_promotion_unlockhovercraftflametank
 		BuildPaletteOrder: 120
 		Description: actor_jphovert.description
 	Valued:
@@ -1014,7 +1014,7 @@ japan_shogunexecutioner:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 75
-		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshogunexecutioner, japan_japanesetechcenter
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockshogunexecutioner, japan_japanesetechcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_aamecha.description
 	Mobile:
@@ -1149,7 +1149,7 @@ japan_shrine_minitank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshrinetank
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockshrinetank
 		Description: template_mbt.description
 	Valued:
 		Cost: 1600
@@ -1206,7 +1206,7 @@ japan_waveforcetank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforcetank
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, ~japan_promotion_unlockwaveforcetank
 		Description: actor_waveforcetank.description
 	Valued:
 		Cost: 1800
@@ -1304,7 +1304,7 @@ japan_waveforceartillery:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 75
-		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforceartillery
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, ~japan_promotion_unlockwaveforceartillery
 		Description: actor_waveforcearty.description
 	Valued:
 		Cost: 2500
@@ -1374,7 +1374,7 @@ japan_exorcistoitank:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		BuildLimit: 1
-		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockexorcist, !hasexorcist
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, ~japan_promotion_unlockexorcist, !hasexorcist
 		Description: actor_oitank.description-exorcist
 	Valued:
 		Cost: 10000

@@ -260,14 +260,14 @@ BADR.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: badr
+		Image: ra1_badger
 		PlayerPalette: raplayer
 	-RevealOnDeath:
 
 jsuperbomber.Husk:
 	Inherits: BADR.Husk
 	RenderSprites:
-		Image: jsuperbomber
+		Image: japan_japanesesuperbomber
 		PlayerPalette: player
 
 MIG.Husk:
@@ -494,7 +494,7 @@ U2.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: u2
+		Image: ra1_soviets_spyplane
 		PlayerPalette: raplayer
 
 MH60.Husk:

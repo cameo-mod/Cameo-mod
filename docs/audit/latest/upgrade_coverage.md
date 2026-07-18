@@ -1,6 +1,6 @@
 # audit_upgrade_coverage — roster-wide upgrade gaps (B4)
 
-Coverage-tagged upgrades checked: **23** — uncovered unit slots: **23**
+Coverage-tagged upgrades checked: **23** — uncovered unit slots: **21**
 
 
 ## Coverage by upgrade
@@ -8,16 +8,16 @@ Coverage-tagged upgrades checked: **23** — uncovered unit slots: **23**
 | upgrade | faction | declared coverage | covered | uncovered actors |
 |---|---|---|---|---|
 | cabal_upgrade_darkarmament | cabal | infantry | 9/15 | cabal_beholder, cabal_cyborg_assassin, cabal_dissolver, cabal_engineer, cabal_hackercyborg, cabal_orb_drone |
-| cabal_upgrade_firewallprotocol | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
-| cabal_upgrade_fullassimilation | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
-| cabal_upgrade_networkedcombatprotocols | cabal | roster_wide | 33/38 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
+| cabal_upgrade_firewallprotocol | cabal | roster_wide | 32/37 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
+| cabal_upgrade_fullassimilation | cabal | roster_wide | 32/37 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
+| cabal_upgrade_networkedcombatprotocols | cabal | roster_wide | 32/37 | cabal_constructionyard, cabal_dissolver, cabal_mobileconstructionvehicle, cabal_tiberiumharvester, tsprobe |
 | cabaldarkarmament | cabal | infantry | UPGRADE ACTOR MISSING |  |
 | cabalfirewallprotocol | cabal | roster_wide | UPGRADE ACTOR MISSING |  |
 | cabalnetworkprotocols | cabal | roster_wide | UPGRADE ACTOR MISSING |  |
-| schwarzer_mond_upgrade_cryptofascism | lnaxis | roster_wide | 26/27 | tsprobe |
-| schwarzer_mond_upgrade_lunaralloys | lnaxis | roster_wide | 26/27 | tsprobe |
-| schwarzer_mond_upgrade_moonpropaganda | lnaxis | infantry | 5/5 | — |
-| schwarzer_mond_upgrade_vrilinfusion | lnaxis | infantry | 5/5 | — |
+| schwarzer_mond_upgrade_cryptofascism | lnaxis | roster_wide | UPGRADE ACTOR MISSING |  |
+| schwarzer_mond_upgrade_lunaralloys | lnaxis | roster_wide | UPGRADE ACTOR MISSING |  |
+| schwarzer_mond_upgrade_moonpropaganda | lnaxis | infantry | UPGRADE ACTOR MISSING |  |
+| schwarzer_mond_upgrade_vrilinfusion | lnaxis | infantry | UPGRADE ACTOR MISSING |  |
 | up_advancedtiberiumrefinement | tsnod | vehicles | UPGRADE ACTOR MISSING |  |
 | up_chemicalfuel | forgotten | vehicles | UPGRADE ACTOR MISSING |  |
 | up_genomemapping | forgotten | infantry | UPGRADE ACTOR MISSING |  |
