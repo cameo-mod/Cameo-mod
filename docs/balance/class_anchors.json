@@ -1,0 +1,12 @@
+{
+ "_doc": "Formula v2 class anchors (BALANCE_PIPELINE.md §5, DESIGN §12 second iteration). Each class prices by normalized deviation from its anchor: Cost = cost0 * (O/O0 + P/P0 + Q/Q0) / 3 — exact at the anchor. Anchors are MAINTAINER picks, validated by tools/balance/fit_class.py before sign-off. Classes without an entry keep the global Tiger formula.",
+ "mbt": {
+  "anchor_actor": null,
+  "comment": "The Naxis Tiger Tank baseline (design 2026-07-11) — the global formula IS this anchor, kept for reference. O0=P0=Q0=cost0=800 by construction.",
+  "cost0": 800,
+  "o0": 800,
+  "p0": 800,
+  "q0": 800,
+  "signed_off": true
+ }
+}

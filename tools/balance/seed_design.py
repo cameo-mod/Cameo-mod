@@ -53,8 +53,12 @@ def load_name_map() -> dict[str, str]:
 
 
 def ledger_docs() -> dict[str, dict]:
-    return {p.stem: json.loads(p.read_text(encoding="utf-8"))
-            for p in sorted(LEDGER.glob("*.json"))}
+    out = {}
+    for p in sorted(LEDGER.glob("*.json")):
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if "sections" in doc:  # skip registry files (class_anchors.json …)
+            out[p.stem] = doc
+    return out
 
 
 def all_units(docs) -> dict[str, tuple[str, str, dict]]:

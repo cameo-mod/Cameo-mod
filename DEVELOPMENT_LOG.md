@@ -1,5 +1,22 @@
 # Development Log
 
+## 2026-07-18 — BALANCE PIPELINE LIVE (all agents read this)
+
+**NEW LAW: never hand-edit balance numbers in yaml.** The pipeline is
+implemented and enforced (`docs/design/BALANCE_PIPELINE.md`, CLAUDE.md
+"Balance changes" section, DESIGN §12):
+extract_stats.py → docs/balance/*.json (raw-stat ledger, committed) →
+build_workbook.py → cameo_balance_v2.xlsx (gitignored workbench) →
+import_workbook.py → apply_balance.py --confirm (maintainer order) →
+re-extract, audits, boot, commit yaml+ledger together.
+`audit_balance_drift` in run_all fails RED whenever yaml and ledger
+disagree — hand edits cannot land silently anymore.
+Loop PROVEN: exact fixed point + live 1000→1050→1000 round trip.
+Phase 5 (per-class anchors via fit_class.py + class_anchors.json)
+awaits maintainer anchor picks; the fixed-point test also exposed and
+fixed an order-dependent resolver-cache-poisoning bug in
+tools/audit/miniyaml.py that affected ALL resolved-value audits.
+
 ## 2026-07-18 — Claude session (TKM port + Blackrobe batch)
 
 - TKM CONTRIBUTOR PORT (`3bb6a34b3`): full-repo zip from a community

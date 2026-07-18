@@ -49,14 +49,31 @@ were pulled, rebuild first (`dotnet build -c Release --nologo
 `Cannot locate type: …Info`. Commit with scoped `git add <files>`,
 never `git add -A` — the maintainer usually has live uncommitted edits.
 
-## Balance changes: sheet first, yaml second
+## Balance changes: the pipeline, never by hand
 
-`docs/design/cameo_armor_system.xlsx` is the single source of truth.
-Set the price/tier multiplier in the unit's row FIRST, let O/P/Q
-recompute, compare every stat column, and only then make the yaml
-match (both edits land in the same pass — never adjust a cost directly
-in yaml). If `~$cameo_armor_system.xlsx` exists, the workbook is open
-in Excel: don't write it; queue the sheet edit and say so.
+**Never hand-edit a balance number in yaml.** The sanctioned loop
+(full spec: `docs/design/BALANCE_PIPELINE.md`):
+
+1. `python tools/balance/extract_stats.py` — refresh the ledger
+   (`docs/balance/*.json`, raw stats + provenance).
+2. Edit the LEDGER, or generate the workbench
+   (`tools/balance/build_workbook.py` →
+   `docs/design/cameo_balance_v2.xlsx`, gitignored), edit the unlocked
+   input cells there, and read it back with
+   `tools/balance/import_workbook.py`.
+3. `python tools/balance/apply_balance.py --faction X --confirm` —
+   ledger → yaml (dry run without --confirm). **Maintainer order
+   required for --confirm.**
+4. Re-run `extract_stats.py`, run audits + BOOT GATE, commit yaml and
+   ledger TOGETHER.
+
+`audit_balance_drift` (in run_all.sh) fails red whenever yaml and the
+committed ledger disagree — hand edits cannot land silently.
+
+The LEGACY workbook `docs/design/cameo_armor_system.xlsx` remains the
+reference for design judgments until the Phase-3 discrepancy triage
+completes (docs/balance/discrepancies.md). If `~$cameo_armor_system.xlsx`
+exists, the workbook is open in Excel: don't write it; queue and say so.
 
 ## Memory
 

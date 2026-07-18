@@ -138,8 +138,17 @@ def unit_rows(ws, theme, aid, u, section, row):
                 value=f"=(({H_}*{S_}/25000)+({RNG}*{K_}*{DPS_}/2.5))*{U_}*{T_}")
         ws.cell(row=r, column=COL["Q"],
                 value=f"=({H_}*{S_}*{RNG}*{K_}*{DPS_}*{U_}*{T_})/12500000")
-        ws.cell(row=r, column=COL["Price"],
-                value=f"=({L('O')}{r}+{L('P')}{r}+{L('Q')}{r})/3")
+        anchors = getattr(build, "_anchors", None) or {}
+        cls = (u.get("design") or {}).get("class_anchor")
+        a = anchors.get(cls) if cls else None
+        if a and a.get("signed_off") and a.get("cost0"):
+            # Formula v2: normalized deviation from the class anchor
+            ws.cell(row=r, column=COL["Price"],
+                    value=f"={a['cost0']}*({L('O')}{r}/{a['o0']}"
+                          f"+{L('P')}{r}/{a['p0']}+{L('Q')}{r}/{a['q0']})/3")
+        else:
+            ws.cell(row=r, column=COL["Price"],
+                    value=f"=({L('O')}{r}+{L('P')}{r}+{L('Q')}{r})/3")
         ws.cell(row=r, column=COL["Delta"],
                 value=f"=IFERROR({L('Price')}{r}-{L('Cost')}{r},\"\")")
         ws.cell(row=r, column=COL["Delta%"],
@@ -183,8 +192,15 @@ def build():
         if b:
             const.cell(row=i, column=2, value=b)
 
+    anchors_file = LEDGER / "class_anchors.json"
+    build._anchors = {k: v for k, v in (json.loads(
+        anchors_file.read_text(encoding="utf-8")) if anchors_file.exists()
+        else {}).items() if isinstance(v, dict)}
+
     for jf in sorted(LEDGER.glob("*.json")):
         doc = json.loads(jf.read_text(encoding="utf-8"))
+        if "sections" not in doc:
+            continue  # registry files (class_anchors.json etc.), not ledgers
         name = doc["ledger"][:31]
         ws = wb.create_sheet(title=name)
         for c, h in enumerate(HDR, start=1):
