@@ -23,3 +23,53 @@
 	GrantConditionOnPrerequisite@tkm_upgrade_pointdefensesystem:
 		Condition: tkm_upgrade_pointdefensesystem
 		Prerequisites: tkm_upgrade_pointdefensesystem
+
+^tkm_upgrade_semiautoriflesupgrade:
+	ActorStatValues:
+		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_semiautoriflesupgrade
+
+^tkm_upgrade_twinrocketsupgrade:
+	ActorStatValues:
+		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_twinrocketsupgrade
+
+^tkm_upgrade_titanarmorpiercingbulletsupgrade:
+	ActorStatValues:
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
+
+^tkm_upgrade_incendiaryrocketsupgrade:
+	ActorStatValues:
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_incendiaryrocketsupgrade
+
+^tkm_upgrade_infantryupgrade:
+	DamageMultiplier@terran_upgrade_infantryweaponslevel1:
+		Modifier: 70
+		RequiresCondition: tkm_upgrade_infantryupgrade
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel1:
+		Modifier: 125
+		RequiresCondition: tkm_upgrade_infantryupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_infantryupgrade:
+		Condition: tkm_upgrade_infantryupgrade
+		Prerequisites: tkm_upgrade_infantryupgrade
+
+#######################################
+# TKM MCV and Construction Yard
+#######################################
+
+^tkm_upgrade_natoarsenalupgrade:
+	GrantConditionOnPrerequisite@steelalloyplating:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
+	DamageMultiplier@steelalloyplatinghealth:
+		Modifier: 75
+		RequiresCondition: upspeed
+	SpeedMultiplier@steelalloyplatingspeed:
+		Modifier: 70
+		RequiresCondition: upspeed
+
+^tkm_upgrade_heavytitanplating:
+	DamageMultiplier@tkm_upgrade_heavytitanplating:
+		Modifier: 75
+		RequiresCondition: tkm_upgrade_heavytitanplating
+	GrantConditionOnPrerequisite@tkm_upgrade_heavytitanplating:
+		Condition: tkm_upgrade_heavytitanplating
+		Prerequisites: tkm_upgrade_heavytitanplating

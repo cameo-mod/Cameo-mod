@@ -1,0 +1,35 @@
+# TKM faction entry + starting units (migrated from rules/tkm.yaml
+# 2026-07-18 — the pack is now fully self-contained).
+World:
+	FactionCA@tkm:
+		Name: TKM (WIP)
+		InternalName: tkm
+		Game: Red Alert 2
+		Side: RA2 Mod
+		Description: faction_tkm.description
+
+####################################################################################################
+#		MPSTARTUNITS
+####################################################################################################
+
+	StartingUnits@mcvonlyratstkm:
+		Class: none
+		ClassName: MCV Only
+		Factions: tkm
+		BaseActor: tkm_mobileconstructionvehicletkm
+	StartingUnits@defaulttstkm:
+		Class: light
+		ClassName: Light Support
+		Factions: tkm
+		BaseActor: tkm_mobileconstructionvehicletkm
+		SupportActors: tkm_rifleman,tkm_rifleman,tkm_rifleman,tkm_rocketeer,tkm_rocketeer,tkm_technicaltank,tkm_technical
+	StartingUnits@heavytstkm:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: tkm
+		BaseActor: tkm_mobileconstructionvehicletkm
+		SupportActors: tkm_rifleman,tkm_rifleman,tkm_rifleman,tkm_rocketeer,tkm_rocketeer,tkm_technicaltank,tkm_technical,tkm_technical,tkm_technical,tkm_technical
+
+#######################################
+# TKM Defaults
+#######################################

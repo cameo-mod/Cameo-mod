@@ -1194,3 +1194,183 @@ tkm_iroquois:
 		Facings: 8
 	icon:
 		Filename: tkm_iroquois_icon.png
+
+#######################################
+# TKM Buildings
+#######################################
+
+tkmworker:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: modwor.shp
+		Scale: 0.51
+	idle:
+		Filename: invisibleitem.shp
+	run:
+		Start: 8
+		Length: 10
+		Tick: 120
+	harvest:
+		Start: 188
+		Length: 10
+		Tick: 120
+		Facings: 1
+	full-run:
+		Start: 8
+		Length: 10
+		Tick: 120
+	empty-harvest:
+		Filename: invisibleitem.shp
+	half-harvest:
+		Filename: invisibleitem.shp
+	full-harvest:
+		Filename: invisibleitem.shp
+	shoot:
+		Start: 164
+	dock:
+		Start: 0
+		Facings: 8
+	dock-loop:
+		Start: 0
+		Facings: 8
+	die1:
+		Start: 268
+		Length: 15
+		Tick: 120
+	die2:
+		Start: 268
+		Length: 15
+		Tick: 120
+	cheer:
+		Start: 0
+		Facings: 8
+	icon:
+		Filename: naxis_slave_icon.png
+
+tkmharvfull:
+	Defaults:
+		Scale: 0.3
+		Filename: tkmsupplytruckfull.png
+	idle:
+		Scale: 1
+		Facings: -32
+	icon:
+		Filename: chinasupplytruck.png
+
+tkmratflakdeployed:
+	Defaults:
+		Filename: tkmflakbusdeployed.png
+		Scale: 0.2
+	idle:
+		Scale: 1
+		Start: 71
+		Length: 1
+	damaged-idle:
+		Scale: 1
+		Start: 71
+		Length: 1
+	dead:
+		Scale: 1
+		Start: 71
+		Length: 1
+	make:
+		Scale: 1
+		Length: 71
+		Tick: 15
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	bib:
+		Filename: mbGUN.tem
+		TilesetFilenames:
+			DESERT: mbGUN.des
+			WINTER: mbGUN.win
+			SNOW: mbGUN.sno
+			BARREN: mbGUN.bar
+			JUNGLE: mbGUN.jun
+			RA_SNOW: mbGUN.sno
+			RA_DESERT: mbGUN.des
+			RA_INTERIOR: mbGUN.int
+			ARRAKIS: mbGUN.des
+			ARRAKIS2: mbGUN.des
+		Length: *
+		Offset: -1,-2
+	turret:
+		Filename: tkmflakbusturret.png
+		Facings: 32
+		Scale: 1
+	icon:
+		Filename: tkm_promotion_unlockflakbus_icon.png
+
+tkmdiglarge:
+	idle:
+		Scale: 4.0
+		Filename: tsdig.shp
+		Length: *
+		Tick: 74
+		ZOffset: -1200
+		Offset: 0, 0, 256
+
+tkmtrenchtankdeployed:
+	Defaults:
+		Filename: tkm_trenchtruckdeployed_deployed.png
+		Scale: 0.2
+	idle:
+		Scale: 1
+		Start: 10
+		Length: 1
+	damaged-idle:
+		Scale: 1
+		Start: 10
+		Length: 1
+	dead:
+		Scale: 1
+		Start: 10
+		Length: 1
+	make:
+		Scale: 1
+		Length: 11
+		Tick: 80
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	bib:
+		Filename: mbGUN.tem
+		TilesetFilenames:
+			DESERT: mbGUN.des
+			WINTER: mbGUN.win
+			SNOW: mbGUN.sno
+			BARREN: mbGUN.bar
+			JUNGLE: mbGUN.jun
+			RA_SNOW: mbGUN.sno
+			RA_DESERT: mbGUN.des
+			RA_INTERIOR: mbGUN.int
+			ARRAKIS: mbGUN.des
+			ARRAKIS2: mbGUN.des
+		Length: *
+		Offset: -1,-2
+	turret:
+		Filename: technicaltankturret.png
+		Facings: -32
+		Scale: 0.75
+	icon:
+		Filename: tkm_promotion_unlocktrenchtank_icon.png
+
+####################################################################################################
+#		TKM Upgrade Icons
+####################################################################################################
+
+tkmdrone:
+	Defaults:
+		Filename: tkmdrone.png
+	idle:
+		Facings: -32
+		Scale: 1
+	die:
+		Filename: invisibleitem.shp
+		Facings: 1
+		Length: 1
+	icon:
+		Filename: tkmdroneicon.png

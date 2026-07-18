@@ -245,3 +245,117 @@ tkm_viper:
 	RenderSprites:
 		Image: tkm_viper
 		PlayerPalette: player_rgba
+
+tkmdrone:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Valued:
+		Cost: 25
+	Tooltip:
+		Name: Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~unbuildable
+		Queue: Aircraft, RAAircraft
+		Description: Scout Unit.
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	Cloak:
+	DetectCloaked:
+		Range: 4224
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 500, 500
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	Voiced:
+		VoiceSet: RobotTankVoice
+	BodyOrientation:
+		QuantizedFacings: 32
+	-SpawnActorOnDeath:
+	RenderSprites:
+		Image: tkmdrone
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		TKM Promotions
+####################################################################################################
+
+tkmsuicidedrone:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Wraith Drone
+	Valued:
+		Cost: 100
+	Hovers:
+	Aircraft:
+		AltitudeVelocity: 120
+		InitialFacing: 768
+		TurnSpeed: 12
+		Speed: 200
+		VTOL: false
+		Repulsable: false
+		CruiseAltitude: 1c256
+		TakeUpCellWhenLand: false
+	Targetable:
+		TargetTypes: Air
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	RejectsOrders:
+	AttackAircraft:
+		FacingTolerance: 40
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
+	Cloak:
+		RequiresCondition: terran_upgrade_cloakupgrade
+		CloakStyle: Alpha
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	GrantConditionOnAttack:
+		Condition: triggered
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	KillsSelf:
+		RequiresCondition: triggered
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	Voiced:
+		VoiceSet: RobotTankVoice
+	DeathSounds:
+	Armament@PRIMARY:
+		Weapon: TKMDroneExplosion
+	RenderSprites:
+		Image: tkmdrone
+		PlayerPalette: player_rgba
