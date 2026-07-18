@@ -75,6 +75,12 @@ DarkObeliskLaser:
 		SecondaryBeamWidth: 40
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 333366EE
+		SourceFlare: true
+		SourceFlareColor: BB22DDE0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 36000
 		Spread: 250
@@ -153,6 +159,12 @@ TSCABALObeliskLaserFire:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 45
 		SecondaryBeamColor: FFFFFFFF
+		SourceFlare: true
+		SourceFlareColor: CC22DDE0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage

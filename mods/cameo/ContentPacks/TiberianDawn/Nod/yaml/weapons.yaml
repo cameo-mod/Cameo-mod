@@ -530,6 +530,12 @@ LaserObelisk:
 		SecondaryBeamWidth: 64
 		SecondaryBeamZOffset: 3000
 		SecondaryBeamColor: FFFFFF
+		SourceFlare: true
+		SourceFlareColor: FF3B00D0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 96000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage

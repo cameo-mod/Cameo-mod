@@ -559,6 +559,12 @@ TSObeliskLaserFire:
 	Projectile:
 		Duration: 38
 		-HitAnim:
+		SourceFlare: true
+		SourceFlareColor: FF3B00D0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 52000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -585,6 +591,12 @@ TSLaserObeliskLaserFire:
 		Duration: 38
 		SecondaryBeamWidth: 48
 		-HitAnim:
+		SourceFlare: true
+		SourceFlareColor: FF3B00D0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
