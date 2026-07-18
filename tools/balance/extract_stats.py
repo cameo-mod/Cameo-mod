@@ -188,14 +188,15 @@ def pack_rosters() -> dict[str, dict]:
     return rosters
 
 
-def load_existing_design(name: str) -> dict[str, dict]:
-    """{actor: design-dict} from the committed ledger — design.* fields
-    are judgment data (seeded from the legacy sheet / maintainer), NOT
-    yaml facts, so re-extraction must never wipe them."""
+def load_existing_design(name: str) -> tuple[dict[str, dict], dict[str, dict]]:
+    """(unit design, per-armament weapon-class judgments) from the
+    committed ledger — design.* fields are judgment data (seeded from
+    the legacy sheet / maintainer), NOT yaml facts, so re-extraction
+    must never wipe them."""
     p = OUT / f"{name}.json"
     if not p.exists():
-        return {}
-    out = {}
+        return {}, {}
+    out, wc = {}, {}
     try:
         doc = json.loads(p.read_text(encoding="utf-8"))
         for sec in doc.get("sections", {}).values():
@@ -203,9 +204,14 @@ def load_existing_design(name: str) -> dict[str, dict]:
                 d = u.get("design")
                 if d and any(v is not None for v in d.values()):
                     out[actor] = d
+                slots = {a["slot"]: a["design_weapon_class"]
+                         for a in u.get("armaments", [])
+                         if a.get("design_weapon_class") is not None}
+                if slots:
+                    wc[actor] = slots
     except (json.JSONDecodeError, OSError):
         pass
-    return out
+    return out, wc
 
 
 def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
@@ -214,7 +220,7 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
     for ledger, info in sorted(pack_rosters().items()):
         if only and only not in ledger:
             continue
-        keep_design = load_existing_design(ledger)
+        keep_design, keep_wc = load_existing_design(ledger)
         sections: dict = {}
         for section, actors in sorted(info["sections"].items()):
             sec: dict = {}
@@ -223,6 +229,10 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
                 if u is not None:
                     if a in keep_design:
                         u["design"] = keep_design[a]
+                    for arm in u.get("armaments", []):
+                        v = keep_wc.get(a, {}).get(arm["slot"])
+                        if v is not None:
+                            arm["design_weapon_class"] = v
                     sec[a] = u
             if sec:
                 sections[section] = sec

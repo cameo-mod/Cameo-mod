@@ -454,6 +454,17 @@ audits + boot + commit. Balance numbers he changed are the
 contributor's design — port faithfully, flag anything that contradicts
 DESIGN formulas instead of silently "fixing".
 
+### P0 — ENGINE PIN vs LOCAL ENGINE MISMATCH (found 2026-07-18 late)
+
+Commit a4b2eb8a7 (#210) bumped mod.config ENGINE_VERSION to `b89ae60`
+but the local engine/ is still `7ba39d9` and NO engine fetch/build ran
+— `launch-game.cmd` refuses to start ("Required engine files not
+found") for EVERYONE on a fresh pull until the engine is updated
+(make all / fetch b89ae60 + dotnet rebuild) or the pin is reverted.
+Owner: whoever landed #210 (their session likely has the context).
+My boot gates ran against the proven 7ba39d9 via a temporary LOCAL
+pin revert (never committed).
+
 ### New orders 2026-07-18 (third batch — crash + SM polish)
 
 - [ ] **P0 CRASH (TheCommando315): `KeyNotFoundException 'badr'` in
