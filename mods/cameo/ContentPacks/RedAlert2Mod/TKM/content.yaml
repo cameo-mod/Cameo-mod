@@ -1,15 +1,20 @@
+# TKM pack (moved into RedAlert2Mod 2026-07-18; presents in-game as an RA2
+# modded faction). rules/tkm.yaml is the unmigrated monolith remainder
+# (World faction entry, stat templates, stragglers) and must load FIRST.
 Rules:
-	ContentPacks|TKM/TKM/yaml/aircraft.yaml
-	ContentPacks|TKM/TKM/yaml/buildings.yaml
-	ContentPacks|TKM/TKM/yaml/defenses.yaml
-	ContentPacks|TKM/TKM/yaml/infantry.yaml
-	ContentPacks|TKM/TKM/yaml/promotions.yaml
-	ContentPacks|TKM/TKM/yaml/templates.yaml
-	ContentPacks|TKM/TKM/yaml/upgrades.yaml
-	ContentPacks|TKM/TKM/yaml/vehicles.yaml
+	cameo|rules/tkm.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/ai.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/aircraft.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/buildings.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/defenses.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/infantry.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/promotions.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/templates.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/upgrades.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/vehicles.yaml
 
 Weapons:
-	ContentPacks|TKM/TKM/yaml/weapons.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/weapons.yaml
 
 Sequences:
-	ContentPacks|TKM/TKM/yaml/sequences.yaml
+	ContentPacks|RedAlert2Mod/TKM/yaml/sequences.yaml
