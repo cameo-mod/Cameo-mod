@@ -1,0 +1,5153 @@
+{
+ "ledger": "tiberiansun_gdi",
+ "pack": "mods/cameo/ContentPacks/TiberianSun/GDI",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "ts_gdi_carryall": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "750"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "47500"
+    },
+    "name": "Carryall",
+    "prerequisites": [
+     "~ts_gdi_helipad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "149"
+    }
+   },
+   "ts_gdi_hammerhead": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5451",
+      "reloaddelay": "6",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSHammerheadGun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Hammerhead",
+    "prerequisites": [
+     "~ts_gdi_helipad",
+     "~ts_gdi_promotion_unlockhammerhead"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "140"
+    }
+   },
+   "ts_gdi_kodiakcommandship": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "9165",
+      "reloaddelay": "92",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^RailgunWeapon",
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "KodiakCannon"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "9165",
+      "reloaddelay": "86",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^RailgunWeapon",
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "^HeavyBomb",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "KodiakCannonSonic"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8450",
+      "reloaddelay": "4",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "KodiakAAGuns"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "900000"
+    },
+    "name": "Kodiak Command Ship",
+    "prerequisites": [
+     "~ts_gdi_helipad",
+     "ts_gdi_upgradecenter",
+     "~ts_gdi_promotion_unlockkodiak"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "30"
+    }
+   },
+   "ts_gdi_orcabomber": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "1500",
+      "reloaddelay": "38",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSBomb"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "1500",
+      "reloaddelay": "38",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSBombSonic"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "152500"
+    },
+    "name": "Orca Bomber",
+    "prerequisites": [
+     "~ts_gdi_helipad",
+     "ts_gdi_techcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "160"
+    }
+   },
+   "ts_gdi_orcafighter": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "5740",
+      "reloaddelay": "32",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSHellfire"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSHellfire",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSHellfireSonic"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "62500"
+    },
+    "name": "Orca Fighter",
+    "prerequisites": [
+     "~ts_gdi_helipad",
+     "~!ts_gdi_promotion_unlockzoneorca"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "145"
+    }
+   },
+   "ts_gdi_zoneorcafighter": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6138",
+      "reloaddelay": "28",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "TSHellfire"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSZoneHellfire"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6138",
+      "reloaddelay": "28",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSHellfireSonic"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSZoneHellfireSonic"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Zone Orca Fighter",
+    "prerequisites": [
+     "~ts_gdi_helipad",
+     "~ts_gdi_promotion_unlockzoneorca"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "165"
+    }
+   }
+  },
+  "buildings": {
+   "ts_gdi_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Barracks",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ts_gdi_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "name": "Construction Yard (GDI)",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_gdi_helipad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Helipad (GDI)",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ts_gdi_powerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "GDI Power Plant",
+    "prerequisites": [
+     "~ts_gdi_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ts_gdi_powerturbine": {
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Power Turbine",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "gdipowerupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "ts_gdi_radar": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Radar",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_gdi_servicedepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Service Depot",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ts_gdi_silo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Silo",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "tsproc"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ts_gdi_techcenter": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "GDI Tech Center",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ts_gdi_tiberiumrefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Tiberium Refinery",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "ts_gdi_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "GDI War Factory",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   }
+  },
+  "defenses": {
+   "ts_gdi_empulsecannon": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "10205",
+      "reloaddelay": "60",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "TSSonicWeaponEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSEMPZapWeapon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "E.M. Pulse Cannon",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "ts_gdi_rpgtower": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8544",
+      "reloaddelay": "46",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSRPGTower"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8544",
+      "reloaddelay": "46",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HRailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSRPGTowerRail"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "RPG Tower",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "ts_gdi_samtower": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "12440",
+      "reloaddelay": "30",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSGDIRedEye"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "SAM Tower",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "12440"
+    }
+   },
+   "ts_gdi_upgradecenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Upgrade Center",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter",
+     "!tsionc",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "ts_gdi_vulcantower": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6809",
+      "reloaddelay": "48",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSVulcanGun"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6809",
+      "reloaddelay": "66",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSVulcanGunSonic"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Vulcan Tower",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   }
+  },
+  "infantry": {
+   "ts_gdi_discthrower": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6151",
+      "reloaddelay": "50",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSGrenade"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6151",
+      "reloaddelay": "50",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSGrenadeSonic"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6656",
+      "reloaddelay": "45",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "TSGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSGrenadeG"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6151",
+      "reloaddelay": "50",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannonFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSGrenadeSonic"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "12000"
+    },
+    "name": "Disc Thrower",
+    "prerequisites": [
+     "~ts_gdi_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ts_gdi_engineer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "4303",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSEngineerPistol"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "4303",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSEngineerPistol"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~ts_gdi_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "55"
+    }
+   },
+   "ts_gdi_falconenforcer": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5873",
+      "reloaddelay": "26",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TS30mm"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5873",
+      "reloaddelay": "26",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TS30mm"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5873",
+      "reloaddelay": "26",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TS30mmRail"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5873",
+      "reloaddelay": "26",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TS30mmRail"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Falcon Enforcer",
+    "prerequisites": [
+     "~ts_gdi_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ts_gdi_jumpjetinfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "5090",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2FlakWeapon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSJumpCannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "34000"
+    },
+    "name": "Jumpjet Infantry",
+    "prerequisites": [
+     "~ts_gdi_barracks",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Aircraft.Speed",
+     "v": "110"
+    }
+   },
+   "ts_gdi_lightinfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "4062",
+      "reloaddelay": "12",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMinigun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "4062",
+      "reloaddelay": "12",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMinigun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "120"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "16000"
+    },
+    "name": "Light Infantry",
+    "prerequisites": [
+     "~ts_gdi_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    }
+   },
+   "ts_gdi_medic": {
+    "armaments": [
+     {
+      "armament_name": "dummy",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "10000",
+      "slot": "Armament@Dummy",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "dummytargeting"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Heal"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Heal"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "name": "Medic",
+    "prerequisites": [
+     "~ts_gdi_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "ts_gdi_railguncommando": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "7563",
+      "reloaddelay": "52",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCommandoRailgun"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "7563",
+      "reloaddelay": "52",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSCommandoRailgun"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCommandoRailgunRail"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "7563",
+      "reloaddelay": "52",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCommandoRailgun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "7563",
+      "reloaddelay": "52",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "TSCommandoRailgun"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCommandoRailgunRail"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Railgun Commando",
+    "prerequisites": [
+     "~ts_gdi_barracks",
+     "ts_gdi_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ts_gdi_riottrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "4002",
+      "reloaddelay": "46",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSShotgun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "4002",
+      "reloaddelay": "46",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSShotgun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "54000"
+    },
+    "name": "Riot Trooper",
+    "prerequisites": [
+     "~ts_gdi_barracks",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ts_gdi_zonetrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSZoneRailgun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "TSZoneRailgun"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSZoneRailgunRail"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSZoneRailgun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6230",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "TSZoneRailgun"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSZoneRailgunRail"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Zone Trooper",
+    "prerequisites": [
+     "~ts_gdi_barracks",
+     "ts_gdi_techcenter",
+     "~ts_gdi_promotion_unlockzonetrooper"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   }
+  },
+  "promotions": {
+   "ts_gdi_promotion_unlockhammerhead": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Hammerhead",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockhammerhead",
+     "ts_gdi_promotion_unlockzoneorca",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockjuggernautmkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Juggernaut MKII",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockjuggernautmkii",
+     "ts_gdi_promotion_unlockhammerhead",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockkodiak": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Kodiak",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockkodiak",
+     "ts_gdi_promotion_unlockjuggernautmkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockmammothmkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Mammoth MKII",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockmammothmkii",
+     "ts_gdi_promotion_unlockzonetrooper",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlocktitanmkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Titan MKII",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlocktitanmkii",
+     "ts_gdi_promotion_unlockwolverinemkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockwolverinemkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Wolverine MKII",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockwolverinemkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockzoneorca": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Zone Orca",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockzoneorca",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ts_gdi_promotion_unlockzonetrooper": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Zone Trooper",
+    "prerequisites": [
+     "~fact.tsgdi",
+     "!ts_gdi_promotion_unlockzonetrooper",
+     "ts_gdi_promotion_unlocktitanmkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "ts_gdi_upgrade_ceramicarmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ceramic Armor",
+    "prerequisites": [
+     "~ts_gdi_techcenter",
+     "!ts_gdi_upgrade_ceramicarmor"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_gdi_upgrade_mechanicalreliability": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Mechanical Reliability",
+    "prerequisites": [
+     "~ts_gdi_radar",
+     "!ts_gdi_upgrade_mechanicalreliability"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_gdi_upgrade_mechengineering": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Mech Engineering",
+    "prerequisites": [
+     "~ts_gdi_techcenter",
+     "!ts_gdi_upgrade_mechengineering"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_gdi_upgrade_modernfirecontrolsystems": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "12500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Modern Fire Control Systems",
+    "prerequisites": [
+     "~ts_gdi_techcenter",
+     "!ts_gdi_upgrade_modernfirecontrolsystems"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Modern Fire Control Systems"
+   },
+   "ts_gdi_upgrade_projectileimprovements": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Projectile Improvements",
+    "prerequisites": [
+     "~ts_gdi_radar",
+     "!ts_gdi_upgrade_projectileimprovements"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_gdi_upgrade_railgunweaponry": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Railgun Weaponry",
+    "prerequisites": [
+     "~ts_gdi_techcenter",
+     "!ts_gdi_upgrade_railgunweaponry"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ts_gdi_upgrade_seretraining": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "SERE Training",
+    "prerequisites": [
+     "~ts_gdi_radar",
+     "!ts_gdi_upgrade_seretraining"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ts_gdi_upgrade_sonicweaponry": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Sonic Weaponry",
+    "prerequisites": [
+     "~ts_gdi_techcenter",
+     "!ts_gdi_upgrade_sonicweaponry"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "ts_gdi_amphibiousapc": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6263",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSAAPCCannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1640"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Amphibious APC",
+    "prerequisites": [
+     "~ts_gdi_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "ts_gdi_disruptor": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "4050",
+      "reloaddelay": "60",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "TSSonicWeaponEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSSonicZapWeapon"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "4050",
+      "reloaddelay": "60",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "TSSonicWeaponEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSSonicZapWeaponSonic"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Disruptor",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "10"
+    }
+   },
+   "ts_gdi_hovermlrs": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8159",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSHoverMissile"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Hover MLRS",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "ts_gdi_juggernaut": {
+    "armaments": [
+     {
+      "armament_name": "dummy",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "12834",
+      "reloaddelay": "33",
+      "requires": "!deployed",
+      "slot": "Armament@Dummy",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TSJuggTargeting"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "3",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "minrange": "2565",
+      "range": "12834",
+      "reloaddelay": "69",
+      "requires": "deployed || undeployed",
+      "slot": "Armament@Deployed",
+      "versus_templates": [
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSJugg90mm"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "35000"
+    },
+    "name": "Juggernaut",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_techcenter",
+     "~!ts_gdi_promotion_unlockjuggernautmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "9c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "71"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "ts_gdi_juggernautmkii": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "3",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "minrange": "2570",
+      "range": "12860",
+      "reloaddelay": "64",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSJugg120mm"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Juggernaut MK II",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_techcenter",
+     "~ts_gdi_promotion_unlockjuggernautmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "14"
+    }
+   },
+   "ts_gdi_mammothmkii": {
+    "armaments": [
+     {
+      "armament_name": "railgun",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8434",
+      "reloaddelay": "112",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@RAILGUN",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMechRailgunII"
+     },
+     {
+      "armament_name": "missiles",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "9388",
+      "reloaddelay": "92",
+      "slot": "Armament@MISSILES",
+      "versus_templates": [
+       "^ImpactGlow",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMammothTusk2II"
+     },
+     {
+      "armament_name": "railgun2",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8434",
+      "reloaddelay": "72",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeRAILGUN",
+      "versus_templates": [
+       "TSMechRailgunII"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMechRailgunRailII"
+     },
+     {
+      "armament_name": "mg",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "7002",
+      "reloaddelay": "8",
+      "slot": "Armament@MG",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMechMGII"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "8000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "1200000"
+    },
+    "name": "Mammoth MK. II",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_techcenter",
+     "!existingmkii",
+     "~ts_gdi_promotion_unlockmammothmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "ts_gdi_mammothprototype": {
+    "armaments": [
+     {
+      "armament_name": "railgun",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8409",
+      "reloaddelay": "92",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@RAILGUN",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMechRailgun"
+     },
+     {
+      "armament_name": "missiles",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "9332",
+      "reloaddelay": "92",
+      "slot": "Armament@MISSILES",
+      "versus_templates": [
+       "^ImpactGlow",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "42000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMammothTusk2"
+     },
+     {
+      "armament_name": "railgun",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "8409",
+      "reloaddelay": "58",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@UpgradeRAILGUN",
+      "versus_templates": [
+       "TSMechRailgun"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "RailgunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMechRailgunRail"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "800000"
+    },
+    "name": "Mammoth Prototype",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_techcenter",
+     "!existingmkii",
+     "~!ts_gdi_promotion_unlockmammothmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "ts_gdi_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Mobile Construction Vehicle",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "ts_gdi_mobileemp": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "1512",
+      "reloaddelay": "200",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSMobileEMP"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Mobile EMP",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "40"
+    }
+   },
+   "ts_gdi_mobilesensorarray": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Mobile Sensor Array",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "ts_gdi_pitbull": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6379",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "PitbullRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "27500"
+    },
+    "name": "Pitbull",
+    "prerequisites": [
+     "~ts_gdi_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "150"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "30"
+    }
+   },
+   "ts_gdi_tiberiumharvester": {
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Tiberium Harvester",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "ts_gdi_tiberiumrefinery"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "12"
+    }
+   },
+   "ts_gdi_titan": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6201",
+      "reloaddelay": "44",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TSCannonEffect",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TS120mm"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6201",
+      "reloaddelay": "44",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^MediumCannon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TS120mmRail"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "950"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Titan",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "~!ts_gdi_promotion_unlocktitanmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "ts_gdi_titanmkii": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6201",
+      "reloaddelay": "50",
+      "requires": "!ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TSCannonEffect",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TS120mmTal"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6201",
+      "reloaddelay": "50",
+      "requires": "ts_gdi_upgrade_railgunweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^MediumCannon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TS120mmTalRail"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Titan MK II",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "~ts_gdi_promotion_unlocktitanmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "ts_gdi_wolverine": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6305",
+      "reloaddelay": "33",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSAssaultCannon"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6305",
+      "reloaddelay": "45",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSAssaultCannonSonic"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "550"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Wolverine",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "~!ts_gdi_promotion_unlockwolverinemkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "ts_gdi_wolverinemkii": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6520",
+      "reloaddelay": "40",
+      "requires": "!ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSAssaultCannonTal"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "range": "6520",
+      "reloaddelay": "45",
+      "requires": "ts_gdi_upgrade_sonicweaponry",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Chaingun",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^TSSonicGrenade"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSAssaultCannonTalSonic"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Valued.Cost",
+     "v": "950"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Wolverine MK II",
+    "prerequisites": [
+     "~ts_gdi_warfactory",
+     "~ts_gdi_promotion_unlockwolverinemkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   }
+  }
+ }
+}

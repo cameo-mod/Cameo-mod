@@ -1,0 +1,5164 @@
+{
+ "ledger": "tiberiandawn_nod",
+ "pack": "mods/cameo/ContentPacks/TiberianDawn/Nod",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "td_nod_apacheattackhelicopter": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4501",
+      "reloaddelay": "16",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HeliGun"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4501",
+      "reloaddelay": "16",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HeliMissiles"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Apache Attack Helicopter",
+    "prerequisites": [
+     "~td_nod_helipad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "160"
+    }
+   },
+   "td_nod_chinooktransport": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Nod Chinook Transport",
+    "prerequisites": [
+     "~td_nod_helipad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "150"
+    }
+   },
+   "td_nod_venom": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4000",
+      "reloaddelay": "18",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "VenomLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Health.HP",
+     "v": "27500"
+    },
+    "name": "Venom",
+    "prerequisites": [
+     "~td_nod_helipad",
+     "td_nod_templeprime",
+     "~td_nod_promotion_upgradeupnodvenomname"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "200"
+    }
+   }
+  },
+  "buildings": {
+   "CNCSPEN": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
+    },
+    "name": "Nod Sub Pen",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_tiberiumrefinery",
+     "~globalnaval"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
+    }
+   },
+   "td_nod_airstrip": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "375"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Nod Airstrip",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "td_nod_communicationscenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Nod Communications Center",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_tiberiumrefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "td_nod_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Nod Construction Yard",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "td_nod_gunturret": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7711",
+      "reloaddelay": "61",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TurretGun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7711",
+      "reloaddelay": "61",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "TurretGun"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TurretGunBlackMarket"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Nod Gun Turret",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_handofnod"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7711"
+    }
+   },
+   "td_nod_handofnod": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Hand of Nod",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "nuke"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "td_nod_helipad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Nod Helipad",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_communicationscenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "td_nod_laserturret": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6800",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "NodTurretLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "72500"
+    },
+    "name": "Nod Laser Turret",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_handofnod"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "6800"
+    }
+   },
+   "td_nod_nuclearmissilesilo": {
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nuclear Missile Silo",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_templeofnod",
+     "!nodnuke",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "td_nod_obeliskoflight": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "9600",
+      "reloaddelay": "96",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "96000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "48",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "LaserObelisk"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "242500"
+    },
+    "name": "Obelisk of Light",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_templeofnod"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "9600"
+    }
+   },
+   "td_nod_repairfacility": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Nod Repair Facility",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_airstrip"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "td_nod_samsite": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "12193",
+      "reloaddelay": "40",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyAAWeapon",
+       "^ImpactGlow",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Dragon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Nod SAM Site",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_handofnod",
+     "td_nod_communicationscenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "12588"
+    }
+   },
+   "td_nod_templeofnod": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Temple of Nod",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_communicationscenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "td_nod_templeprime": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Temple Prime",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "td_nod_templeofnod"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "td_nod_tiberiumrefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Nod Tiberium Refinery",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "nuke"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   }
+  },
+  "infantry": {
+   "td_nod_blackhandflamer": {
+    "armaments": [
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4988",
+      "reloaddelay": "46",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BlackHandFlamer"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4988",
+      "reloaddelay": "46",
+      "slot": "Armament@Garrison",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BlackHandFlamer"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "36000"
+    },
+    "name": "Black Hand Flamer",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_communicationscenter",
+     "~td_nod_promotion_unlockblackhandflamer"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "66"
+    }
+   },
+   "td_nod_chemicalrocketsoldier": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6006",
+      "reloaddelay": "54",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^LightChemicalWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ChemRockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6006",
+      "reloaddelay": "54",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Grenade",
+       "^LightChemicalWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ChemRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "18000"
+    },
+    "name": "Chemical Rocket Soldier",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "~td_nod_promotion_unlockchemicalrocketsoldier"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "td_nod_chemicalwarrior": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "3414",
+      "reloaddelay": "48",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "48000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Chemspray"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "3414",
+      "reloaddelay": "48",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "48000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Chemspray"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "48000"
+    },
+    "name": "Chemical Warrior",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_templeofnod"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "48"
+    }
+   },
+   "td_nod_commando": {
+    "armaments": [
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@c4",
+      "versus_templates": [
+       "IvanAttach"
+      ],
+      "warheads": [],
+      "weapon": "TanyaAttach"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@c4building",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "GenericC4"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "range": "8086",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "td_gdi_commando_sniper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "range": "8086",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "td_gdi_commando_sniper"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "80000"
+    },
+    "name": "Nod Commando",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_templeofnod",
+     "~!td_nod_promotion_upgradeupnodvenomname"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "65"
+    }
+   },
+   "td_nod_flamethrower": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "2085",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Flamethrower"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "2085",
+      "reloaddelay": "60",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Flamethrower"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Nod Flamethrower",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_communicationscenter",
+     "~!td_nod_promotion_unlockblackhandflamer"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "td_nod_lasercommando": {
+    "armaments": [
+     {
+      "armament_name": "pointdefense",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6030",
+      "reloaddelay": "8",
+      "slot": "Armament@pointdefense",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "NodCommandoLaser"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6030",
+      "reloaddelay": "8",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "NodCommandoLaser"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6030",
+      "reloaddelay": "8",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "NodCommandoLaser"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@c4",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "GenericC4"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "57000"
+    },
+    "name": "Laser Commando",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_templeprime",
+     "~td_nod_promotion_upgradeupnodvenomname"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "79"
+    }
+   },
+   "td_nod_lasertrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5300",
+      "reloaddelay": "60",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "BlackHandLaser"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5300",
+      "reloaddelay": "60",
+      "slot": "Armament@Garrison",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "BlackHandLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Laser Trooper",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_templeprime",
+     "~td_nod_promotion_unlocklasertrooper"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "td_nod_minigunner": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "3916",
+      "reloaddelay": "17",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "M16"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "3916",
+      "reloaddelay": "17",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "M16"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4983",
+      "reloaddelay": "25",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "M16Laser"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4983",
+      "reloaddelay": "25",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "M16Laser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "16000"
+    },
+    "name": "Nod Minigunner",
+    "prerequisites": [
+     "~td_nod_handofnod"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    }
+   },
+   "td_nod_rocketsoldier": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "6368",
+      "reloaddelay": "63",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Rockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "6368",
+      "reloaddelay": "63",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Rockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "name": "Nod Rocket Soldier",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "~!td_nod_promotion_unlockchemicalrocketsoldier"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "td_nod_stealthsoldier": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "90",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BHRedDarts"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "90",
+      "slot": "Armament@Garrison",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BHRedDarts"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Stealth Soldier",
+    "prerequisites": [
+     "~td_nod_handofnod",
+     "td_nod_templeofnod",
+     "~td_nod_promotion_upgradeupnodstealthname"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "72"
+    }
+   }
+  },
+  "naval": {
+   "CNCRSS": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Transport Submarine",
+    "prerequisites": [
+     "~cncspen"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "150"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "CNCSS": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "64",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "NodTorpTube"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "64",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "NodTorpTubeBlackMarket"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
+     "v": "160000"
+    },
+    "name": "Nod Attack Submarine",
+    "prerequisites": [
+     "~cncspen"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "nodlasercorvette": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "9550",
+      "reloaddelay": "90",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "120000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "60",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CorvetteLaserObelisk"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "burstdelays": "7",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "9550",
+      "reloaddelay": "35",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CorvetteDragon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "2300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Nod Laser Corvette",
+    "prerequisites": [
+     "~cncspen",
+     "td_nod_templeofnod"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "ssmsub": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "25",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "1790",
+      "range": "8940",
+      "reloaddelay": "225",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HonestJohn"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Valued.Cost",
+     "v": "2800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Ballistic Missile Submarine",
+    "prerequisites": [
+     "~cncspen",
+     "td_nod_communicationscenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   }
+  },
+  "promotions": {
+   "td_nod_promotion_unlockblackhandflamer": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Black Hand Flamer",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockblackhandflamer",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockbuggymkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Buggy Mk. II",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockbuggymkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockchemicalattackbike": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Chemical Attack Bike",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockchemicalattackbike",
+     "td_nod_promotion_unlockchemicalrocketsoldier",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockchemicalrocketsoldier": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Chemical Rocket Soldier",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockchemicalrocketsoldier",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockchemicalssmlauncher": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Chemical SSM Launcher",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockchemicalssmlauncher",
+     "td_nod_promotion_unlockchemicalstealthtank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockchemicalstealthtank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Chemical Stealth Tank",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockchemicalstealthtank",
+     "td_nod_promotion_unlockchemicalattackbike",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockflametankmkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Flame Tank Mk. II",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockflametankmkii",
+     "td_nod_promotion_unlocklighttankmkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlocklasertrooper": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Laser Trooper",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlocklasertrooper",
+     "td_nod_promotion_unlockflametankmkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlocklighttankmkii": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Light Tank Mk. II",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlocklighttankmkii",
+     "td_nod_promotion_unlockbuggymkii",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_unlockspecter": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Specter",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_unlockspecter",
+     "td_nod_promotion_upgradeupnodstealthname",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_upgradeupnodstealthname": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "upgrade_upnodstealth.name",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_upgradeupnodstealthname",
+     "td_nod_promotion_unlockblackhandflamer",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "td_nod_promotion_upgradeupnodvenomname": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "upgrade_upnodvenom.name",
+    "prerequisites": [
+     "~td_nod_constructionyard",
+     "!td_nod_promotion_upgradeupnodvenomname",
+     "td_nod_promotion_unlockspecter",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "td_nod_upgrade_advancedguerillatactics": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "12500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Guerilla Tactics",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "td_nod_templeprime",
+     "td_nod_upgrade_guerillatactics",
+     "!td_nod_upgrade_advancedguerillatactics"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_blackmarketupgrades": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Black Market Upgrades",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "!td_nod_upgrade_blackmarketupgrades"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_cyberneticmodifications": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cybernetic Modifications",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "td_nod_templeprime",
+     "!td_nod_upgrade_cyberneticmodifications"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_elementalwarfare": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Elemental Warfare",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "!td_nod_upgrade_elementalwarfare"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_elitecapacitors": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Elite Capacitors",
+    "prerequisites": [
+     "~td_nod_templeofnod",
+     "td_nod_templeprime",
+     "!td_nod_upgrade_elitecapacitors"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "td_nod_upgrade_guerillatactics": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Guerilla Tactics",
+    "prerequisites": [
+     "~td_nod_communicationscenter",
+     "!td_nod_upgrade_guerillatactics"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "td_nod_upgrade_improvedartilleries": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Improved Artilleries",
+    "prerequisites": [
+     "~td_nod_communicationscenter",
+     "!td_nod_upgrade_improvedartilleries"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "td_nod_upgrade_tiberiuminfusion": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tiberium Infusion",
+    "prerequisites": [
+     "~td_nod_communicationscenter",
+     "!td_nod_upgrade_tiberiuminfusion"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "team_upgrade.up_advancedguerillatactics": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Guerrilla Tactics"
+   }
+  },
+  "vehicles": {
+   "td_nod_artillery": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "minrange": "2468",
+      "range": "12345",
+      "reloaddelay": "112",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ArtilleryShell"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "2470",
+      "range": "12345",
+      "reloaddelay": "96",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumCannon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ArtilleryShellUpgrade"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "17500"
+    },
+    "name": "Nod Artillery",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_communicationscenter",
+     "~!td_nod_promotion_unlockspecter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "55"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "11"
+    }
+   },
+   "td_nod_buggy": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4540",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MachineGun"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4540",
+      "reloaddelay": "10",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FireballLauncherBuggy"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Nod Buggy",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~!td_nod_promotion_unlockbuggymkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "200"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "40"
+    }
+   },
+   "td_nod_buggymkii": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5274",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MachineGunBuggy2"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FireballLauncherBuggy2"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7911",
+      "reloaddelay": "60",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "MachineGunBuggy2"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MachineGunBuggy2AA"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "5274",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Laser",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "LaserBuggy2"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7911",
+      "reloaddelay": "60",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@LaserAA",
+      "versus_templates": [
+       "LaserBuggy2"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "LaserBuggy2AA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Nod Buggy Mk. II",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~td_nod_promotion_unlockbuggymkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "td_nod_chemicalattackbike": {
+    "armaments": [
+     {
+      "armament_name": "pointdefense",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "25",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@pointdefense",
+      "versus_templates": [
+       "PDLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "PDLaserBike"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "70",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ChemicalBikeRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "750"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "22500"
+    },
+    "name": "Chemical Attack Bike",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~td_nod_promotion_unlockchemicalattackbike"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "175"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "70"
+    }
+   },
+   "td_nod_chemicalssmlauncher": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "2470",
+      "range": "12345",
+      "reloaddelay": "142",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ChemicalHonestJohn"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "32500"
+    },
+    "name": "Chemical SSM Launcher",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_templeprime",
+     "~td_nod_promotion_unlockchemicalssmlauncher"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "td_nod_chemicalstealthtank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6962",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ChemicalStealthTankMissiles"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "90000"
+    },
+    "name": "Chemical Stealth Tank",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_templeofnod",
+     "~td_nod_promotion_unlockchemicalstealthtank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "td_nod_flametank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "2390",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "14000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BigFlamer"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Nod Flame Tank",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_communicationscenter",
+     "~!td_nod_promotion_unlockflametankmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "td_nod_flametankmkii": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "2534",
+      "reloaddelay": "54",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BigFlamer2"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Flame Tank Mk. II",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_communicationscenter",
+     "~td_nod_promotion_unlockflametankmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "td_nod_lighttank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4993",
+      "reloaddelay": "45",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "70mm"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4993",
+      "reloaddelay": "45",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Missile",
+      "versus_templates": [
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LTNKMissiles"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Nod Light Tank",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~!td_nod_promotion_unlocklighttankmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "110"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "22"
+    }
+   },
+   "td_nod_lighttankmkii": {
+    "armaments": [
+     {
+      "armament_name": "pointdefense",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4903",
+      "reloaddelay": "25",
+      "slot": "Armament@pointdefense",
+      "versus_templates": [
+       "PDLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "PDLaserLTNK2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4903",
+      "reloaddelay": "35",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LightTank2Cannon"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "4903",
+      "reloaddelay": "35",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Missile",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LightTank2Missiles"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Light Tank Mk. II",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~td_nod_promotion_unlocklighttankmkii"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "td_nod_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Nod Mobile Construction Vehicle",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_repairfacility"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "td_nod_reconbike": {
+    "armaments": [
+     {
+      "armament_name": "pointdefense",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "25",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@pointdefense",
+      "versus_templates": [
+       "PDLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "PDLaserBike"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "10",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BikeRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "17500"
+    },
+    "name": "Recon Bike",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~!td_nod_promotion_unlockchemicalattackbike"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "200"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "80"
+    }
+   },
+   "td_nod_specterartillery": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "2530",
+      "range": "12640",
+      "reloaddelay": "78",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SpecterArtilleryShell"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "2530",
+      "range": "12640",
+      "reloaddelay": "78",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "SpecterArtilleryShell"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SpecterArtilleryShellUpgrade"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "22500"
+    },
+    "name": "Specter Artillery",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_communicationscenter",
+     "~td_nod_promotion_unlockspecter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "td_nod_ssmlauncher": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "25",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "minrange": "1790",
+      "range": "8940",
+      "reloaddelay": "225",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HonestJohn"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "SSM Launcher",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_templeofnod",
+     "~!td_nod_promotion_unlockchemicalssmlauncher"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "td_nod_stealthharvester": {
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Stealth Harvester",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "~td_nod_promotion_upgradeupnodstealthname"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "td_nod_stealthtank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7432",
+      "reloaddelay": "58",
+      "requires": "!td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "StealthTankMissiles"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "range": "7432",
+      "reloaddelay": "58",
+      "requires": "td_nod_upgrade_blackmarketupgrades",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "StealthTankMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "StealthTankMissilesBlackMarket"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Stealth Tank",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_templeofnod",
+     "~!td_nod_promotion_unlockchemicalstealthtank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "150"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "60"
+    }
+   },
+   "td_nod_tiberiumharvester": {
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Nod Tiberium Harvester",
+    "prerequisites": [
+     "~td_nod_airstrip",
+     "td_nod_tiberiumrefinery",
+     "~!td_nod_promotion_upgradeupnodstealthname"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "12"
+    }
+   }
+  }
+ }
+}

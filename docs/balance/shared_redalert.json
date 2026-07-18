@@ -1,0 +1,2954 @@
+{
+ "ledger": "shared_redalert",
+ "pack": "mods/cameo/ContentPacks/RedAlert/Shared",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "japan_badger": {
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "japan_japanesesuperbomber": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "3000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JapanSuperBomb"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Japanese Super Bomber",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "200"
+    }
+   },
+   "ra1_allies_badger": {
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "ra1_allies_cargoplane_bomber": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "8",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ParaBomb"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Cargo Plane",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "ra1_allies_cargoplane_paradrop": {
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Cargo Plane",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "ra1_badger": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "175"
+    }
+   },
+   "ra1_badger_bomber": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "8",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ParaBomb"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "ra1_soviets_badger": {
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "150000"
+    },
+    "name": "Badger",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "175"
+    }
+   },
+   "ra1_soviets_spyplane": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "SpyPlaneTargeting"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Armor.Type",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Spy Plane",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "300"
+    }
+   },
+   "ra1_soviets_superspyplane": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "SpyPlaneTargeting"
+      ],
+      "warheads": [],
+      "weapon": "SpyPlaneTargeting2"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Spy Plane",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "300"
+    }
+   }
+  },
+  "buildings": {
+   "japan_japanesenavalyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
+    },
+    "name": "Japanese Naval Yard",
+    "prerequisites": [
+     "~japan_japaneseconstructionyard",
+     "japan_japaneseorerefinery",
+     "~globalnaval"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
+    }
+   },
+   "ra1_advancedpowerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Advanced Power Plant",
+    "prerequisites": [
+     "~rafact",
+     "anyrahq"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "ra1_allies_alliednavalyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
+    },
+    "name": "Allied Naval Yard",
+    "prerequisites": [
+     "~ra1_allies_alliedconstructionyard",
+     "ra1_allies_alliedorerefinery",
+     "~globalnaval"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
+    }
+   },
+   "ra1_oresilo": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Ore Silo",
+    "prerequisites": [
+     "~rafact",
+     "raproc"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra1_powerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Power Plant",
+    "prerequisites": [
+     "~rafact"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra1_soviets_kennel": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Kennel",
+    "prerequisites": [
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_barracks",
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra1_soviets_subpen": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "600000"
+    },
+    "name": "Soviet Sub Pen",
+    "prerequisites": [
+     "~ra1_soviets_constructionyard",
+     "ra1_soviets_orerefinery",
+     "~globalnaval"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12000"
+    }
+   }
+  },
+  "infantry": {
+   "ra1_agentdelphi": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMG"
+      ],
+      "warheads": [
+       {
+        "damage": "100",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "Pistol"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Agent Delphi",
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "71"
+    }
+   },
+   "ra1_allies_alliedrocketsoldier": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumMissile",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RocketsRA"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RocketsRA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "RocketsRA",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RocketsRACryo"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6643",
+      "reloaddelay": "50",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "RocketsRA",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RocketsRACryo"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "name": "Allied Rocket Soldier",
+    "prerequisites": [
+     "~ra1_allies_alliedbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "55"
+    }
+   },
+   "ra1_allies_rifleinfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "4655",
+      "reloaddelay": "20",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "M1Carbine"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "4655",
+      "reloaddelay": "20",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "M1Carbine"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "4655",
+      "reloaddelay": "20",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "M1Carbine",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CryoM1Carbine"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "4655",
+      "reloaddelay": "20",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "M1Carbine",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CryoM1Carbine"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "14000"
+    },
+    "name": "Rifle Infantry",
+    "prerequisites": [
+     "~ra1_allies_alliedbarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "58"
+    }
+   },
+   "ra1_einstein": {
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Prof. Einstein",
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "71"
+    }
+   },
+   "ra1_engineer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~rabarracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "ra1_general": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMG"
+      ],
+      "warheads": [
+       {
+        "damage": "100",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "Pistol"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "General",
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
+    }
+   },
+   "ra1_scientist": {
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Scientist",
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
+    }
+   },
+   "ra1_soviets_molotovconscript": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5725",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ConscriptMolotov"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5725",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ConscriptMolotov"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "11000"
+    },
+    "name": "Molotov Conscript",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "67"
+    }
+   },
+   "ra1_technician": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "3072",
+      "reloaddelay": "7",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMG"
+      ],
+      "warheads": [
+       {
+        "damage": "100",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "Pistol"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "name": "Technician",
+    "sight": {
+     "src": "inherited",
+     "v": "2c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "56"
+    }
+   }
+  },
+  "naval": {
+   "japan_japanesecarrier": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "20000",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "JapanCarrierTarget"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "225000"
+    },
+    "name": "actor_japan_japanesecarrier.name",
+    "prerequisites": [
+     "~japan_japanesenavalyard",
+     "japan_japanesetechcenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "9"
+    }
+   },
+   "japan_japanesespeedboat": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5750",
+      "reloaddelay": "4",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@AG",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JapanSpeedBoatGun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5750",
+      "reloaddelay": "4",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^WaveforceBulletWarhead",
+       "JapanSpeedBoatGun",
+       "^WaveforceBulletProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JapanSpeedBoatGunWaveforce"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@DC1",
+      "versus_templates": [
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DepthCharge"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@DC2",
+      "versus_templates": [
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DepthCharge"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Japanese Speedboat",
+    "prerequisites": [
+     "~japan_japanesenavalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "140"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "japan_yamatobattleship": {
+    "armaments": [
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "2500",
+      "range": "12500",
+      "reloaddelay": "125",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "YamatoCannon"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "2500",
+      "range": "12500",
+      "reloaddelay": "125",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "YamatoCannon"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "12500",
+      "reloaddelay": "4",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "YamatoFlak"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Yamato Battleship",
+    "prerequisites": [
+     "~japan_japanesenavalyard",
+     "japan_japaneseradararray"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "35"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "7"
+    }
+   },
+   "japan_zerofighter_slave": {
+    "armaments": [
+     {
+      "burst": "12",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "1323",
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ZeroFighterChainGun"
+     },
+     {
+      "burst": "12",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "1323",
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "!japan_upgrade_waveforcebullets",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ZeroFighterChainGun"
+     },
+     {
+      "burst": "12",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "1323",
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^WaveforceBulletWarhead",
+       "^Grenade",
+       "ZeroFighterChainGun",
+       "^WaveforceBulletProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ZeroFighterChainGunWaveforce"
+     },
+     {
+      "burst": "12",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "1323",
+      "range": "6615",
+      "reloaddelay": "92",
+      "requires": "japan_upgrade_waveforcebullets",
+      "slot": "Armament@UpgradeSECONDARY",
+      "versus_templates": [
+       "^WaveforceBulletWarhead",
+       "^Grenade",
+       "ZeroFighterChainGun",
+       "^WaveforceBulletProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ZeroFighterChainGunWaveforce"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "3000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JapanCarrierFighterBomb"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "7500"
+    },
+    "name": "Zero Fighter",
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Aircraft.Speed",
+     "v": "175"
+    }
+   },
+   "ra1_allies_cruiser": {
+    "armaments": [
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "3000",
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "8Inch"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "minrange": "3000",
+      "range": "15000",
+      "reloaddelay": "250",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "8Inch"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "225000"
+    },
+    "name": "Cruiser",
+    "prerequisites": [
+     "~ra1_allies_alliednavalyard",
+     "ra1_allies_alliedtechcenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "8"
+    }
+   },
+   "ra1_allies_destroyer": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "7",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "27",
+      "requires": "!ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Stinger"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "7",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "27",
+      "requires": "ra1_allies_upgrade_cryomissiles",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "Stinger",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "StingerCryo"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@DC1",
+      "versus_templates": [
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DepthCharge"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@DC2",
+      "versus_templates": [
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DepthCharge"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Destroyer",
+    "prerequisites": [
+     "~ra1_allies_alliednavalyard",
+     "ra1_allies_alliedradardome"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "17"
+    }
+   },
+   "ra1_allies_gunboat": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "2Inch"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DepthCharge"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Gunboat",
+    "prerequisites": [
+     "~ra1_allies_alliednavalyard"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "ra1_navaltransport": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Naval Transport",
+    "prerequisites": [
+     "~ranavaltransport"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#RevealsShroud.Range",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "40"
+    }
+   },
+   "ra1_soviets_missilesubmarine": {
+    "armaments": [
+     {
+      "burst": "6",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "minrange": "1985",
+      "range": "9920",
+      "reloaddelay": "111",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "227mm"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Missile Submarine",
+    "prerequisites": [
+     "~ra1_soviets_subpen",
+     "ra1_soviets_techcenter"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "ra1_soviets_submarine": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "100",
+      "requires": "!ra1_soviets_doctrine_inferno",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TorpTube"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "100",
+      "requires": "ra1_soviets_doctrine_inferno",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TorpTubeThermobaric"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Soviet Submarine",
+    "prerequisites": [
+     "~ra1_soviets_subpen"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "30"
+    }
+   }
+  },
+  "upgrades": {
+   "japan_upgrade_nanotechrepairs_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nanotech Repairs"
+   },
+   "ra1_allies_upgrade_gpssatellitesupport_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "GPS Satellite Support"
+   },
+   "ra1_soviets_upgrade_menofsteel_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Men Of Steel"
+   },
+   "ra1_soviets_upgrade_nuclearshells_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nuclear Tank Shells"
+   },
+   "ra1_soviets_upgrade_reactoroverload_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reactor Overload"
+   },
+   "ra1_soviets_upgrade_scorchedearth_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Scorched Earth"
+   },
+   "ra1_soviets_upgrade_stalinium_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stalinium"
+   },
+   "ra1_soviets_upgrade_wareconomy_proxy_actor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "War Economy"
+   }
+  },
+  "vehicles": {
+   "ra1_allies_alliedapc": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5978",
+      "reloaddelay": "10",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "APCGunAllies"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "8967",
+      "reloaddelay": "10",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "APCGunAllies"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "APCGunAlliesAA"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Allied APC",
+    "prerequisites": [
+     "~ra1_allies_alliedbarracks",
+     "~!ra1_allies_promotion_unlockphasetransport"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "105"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "21"
+    }
+   },
+   "ra1_allies_alliedcybertank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5915",
+      "reloaddelay": "60",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TigerCannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Health.HP",
+     "v": "160000"
+    },
+    "name": "Allied Cyber Tank",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   }
+  }
+ }
+}

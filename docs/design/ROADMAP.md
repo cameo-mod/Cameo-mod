@@ -524,7 +524,10 @@ DESIGN formulas instead of silently "fixing".
 
 ### P1 — BALANCE PIPELINE (ordered 2026-07-18 — "very important long term goal")
 
-Full plan: **docs/design/BALANCE_PIPELINE.md**. yaml → per-faction JSON
+Full plan: **docs/design/BALANCE_PIPELINE.md**. PHASE 1 DONE
+2026-07-18: `tools/balance/extract_stats.py` + committed baseline
+ledger (32 faction files, 2025 actors, raw stats + provenance,
+deterministic, `--check` drift mode). Next: Phase 2 workbook builder. yaml → per-faction JSON
 ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
 formulas live in the sheet, locked cells) → legacy-sheet comparator +
 discrepancy triage → gated write-back (apply_balance.py, maintainer
