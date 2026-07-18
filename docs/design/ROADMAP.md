@@ -454,6 +454,27 @@ audits + boot + commit. Balance numbers he changed are the
 contributor's design — port faithfully, flag anything that contradicts
 DESIGN formulas instead of silently "fixing".
 
+### New orders 2026-07-18 (second batch — Blackrobe report + maintainer)
+
+- [ ] **BUG (Blackrobe): SM passive income building missing** — being fixed in the maintainer's OTHER session (uncommitted WIP adds ra2oilderrick/ra2ywall provisions to the SM conyard); moondairyfarm itself verified wired (techcenter+derricklimit). Do not double-fix. on latest
+  dev commit — find what removed/hid it and restore.
+- [x] VERIFIED 2026-07-18 **"laser car" + M200B report**: wiring is
+  correct both ways (before purchase Beetle/Jagerline buildable; after,
+  retired and Laser Tank/MARS appear). If Blackrobe means the
+  REPLACEMENTS never appear even after buying the promotions, the rank1
+  prerequisite may not be granted by the lobby points option — needs an
+  in-game check by the team.
+- [x] DONE 2026-07-18 **TKM moved into ContentPacks/RedAlert2Mod** (Blackrobe: do
+  the move, postpone the theme-folder rename decision — CnCUniverse /
+  CnCExtended / RA2Expanded still open, "not wise to rush").
+- [x] DONE 2026-07-18 (superlinear ramp RampFactor 0.08, min-count dip fix, wave veterancy floor(idx/4)) **Survival difficulty (maintainer order):** steepen the ramp so
+  late waves outscale early ones, fix the tier-3/4 dip (min unit
+  count), and make waves elite over time (veterancy/upgrades — "apply
+  upgrades over time or all available from the start").
+- [x] DONE 2026-07-18 (MonsterTankTuskTesla/Thermobaric weapons, armament swaps, flat multipliers removed) **Monster tank rockets (maintainer order): apply the MAMMOTH TANK
+  logic** — real weapon swaps for Tesla Rockets, (Thermo)Nuclear
+  Rockets etc., not the current flat +10% firepower multiplier.
+
 ### New orders 2026-07-18 (mid-turn batch)
 
 - [ ] **Theme-folder rename + TKM move (DECISION PENDING — maintainer
