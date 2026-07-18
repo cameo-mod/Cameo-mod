@@ -467,10 +467,16 @@ DESIGN formulas instead of silently "fixing".
   Panzer/Jagerline/Haunebu II use `!promotion_x` without `~`, which
   greys instead of hides. Fix to `~!promotion_x`.
 - [ ] **RENAME ORDER (maintainer): "Jagerline" is fake German** — the
-  SM unit needs a real German name; design picks from proposals
-  (candidates: real Flakpanzer names Wirbelwind / Kugelblitz / Ostwind
-  if it plays as mobile AA; Donnerkeil / Sturmvogel if missile
-  artillery). Id + display + ftl + sheet row follow the pick.
+  unit is a ROCKET anti-air vehicle (maintainer 2026-07-18), so the
+  gun-flakpanzer names (Kugelblitz/Wirbelwind/Ostwind) do NOT fit.
+  Historically correct German AA-ROCKET names to pick from:
+  **Wasserfall** (guided AA missile — recommended), **Taifun**
+  (salvo-fired unguided AA rocket — fits a line vehicle), 
+  **Rheintochter** (AA missile, most distinctive sound). Awaiting the
+  maintainer's pick; then one pass: id
+  (schwarzermond_m200bjagerline -> schwarzermond_<name>), display name
+  (drop the American-sounding "M200B" or Germanize it), ftl, MARS
+  replacement description, sheet row.
 
 ### New orders 2026-07-18 (second batch — Blackrobe report + maintainer)
 
