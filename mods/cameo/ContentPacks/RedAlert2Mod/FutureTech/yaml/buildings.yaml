@@ -16,8 +16,8 @@ futuretech_constructionyard:
 		Facing: 432
 		RequiresCondition: factundeploy
 	WithBuildingPlacedOverlay:
-	ProvidesPrerequisite@walls:
-		Prerequisite: ra2fact
+	ProvidesPrerequisite@ra2awall:
+		Prerequisite: ra2awall
 	WithIdleOverlay@fans:
 		Sequence: idle-fans
 		RequiresCondition: !build-incomplete && !damaged

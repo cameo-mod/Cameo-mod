@@ -22,6 +22,8 @@ steelconsortium_consortiumconstructionyard:
 		Proxy: qacst_infiltrated.steel
 		Types: TechStealerInfiltrate
 	-ProvidesPrerequisite@ra2oilderrick:
+	ProvidesPrerequisite@ra2awall:
+		Prerequisite: ra2awall
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
