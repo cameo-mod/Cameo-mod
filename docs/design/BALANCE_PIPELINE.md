@@ -170,6 +170,47 @@ implemented through the pipeline:
   `formula.py`. One class at a time, sheet stays usable throughout
   (unfitted classes keep the Tiger formula until replaced).
 
+## 5b. Class tuning knobs & the modifier normalization program (2026-07-18)
+
+Survey result: 83 templates in defaults.yaml carry multiplier traits.
+They split into three kinds with three different fates:
+
+1. **Cross-cutting systems — KEEP, out of pipeline scope.** Veterancy
+   ranks (^GainsExperience*), crate buffs, debuff mechanics
+   (^TerrorDronable, ^SquidGrabbable), melee cooldowns, fire-actor
+   rules. These are gameplay mechanics, not balance knobs.
+2. **The sanctioned knob hierarchy — KEEP, becomes PIPELINE-OWNED.**
+   `^GlobalBuffs` → per-class (`^InfantryBuffs`, `^VehicleBuffs`,
+   `^TankBuffs`, `^AircraftBuffs`, `^DefenseBuffs`) → per-subclass
+   (Scout/Grenadier/AntiTankAntiAir/Heavy/Melee/Sniper…Buff). This
+   already-existing structure IS the maintainer's one-value correction
+   system and it SURVIVES normalization:
+   - knob values live in the ledger + Constants tab (`class_tuning`);
+     `balance push` writes them into the defaults.yaml traits via
+     provenance anchors like any other stat;
+   - **pricing formulas become knob-aware**: the sheet computes
+     EffDamage = Damage × ∏Firepower-knobs and EffHP = HP ÷
+     ∏Damage-knobs along the Global→class→subclass chain, and O/P/Q
+     consume the EFFECTIVE values — so while a knob ≠ 100 the prices
+     stay honest and the Δ column shows the price consequence of the
+     knob turn immediately (better than today, where a knob turn
+     silently invalidates the sheet);
+   - the one-value workflow is unchanged in feel: edit ONE Constants
+     cell → push → the whole class shifts in game.
+3. **Ad-hoc formula-gap patches — BAKE & DELETE via Formula v2.**
+   Knobs that exist only to paper over the Tiger formula's low-end
+   failure (the ScoutInfantry damage-reduction stopgap is DESIGN §12's
+   own example) become redundant once per-class anchors price small
+   units correctly — they are folded into raw stats and removed.
+
+**The bake operation** (maintainer-ordered, per knob): fold an
+accepted long-term knob into raw stats and reset it to 100 —
+Firepower×0.9 becomes every class member's Damage ×0.9 (rounded per
+conventions; clean), Damage-taken knobs become HP adjustments (CAVEAT:
+subtly shifts self-heal/repair proportions — when equivalence is
+imperfect the knob simply stays live; nothing forces a bake). Baking
+keeps effective power constant, so costs do not move.
+
 ## 6. Phases (revised, in execution order)
 
 | phase | deliverable | effort |
