@@ -121,7 +121,7 @@ cabal_heavycabalobelisk:
 	Valued:
 		Cost: 2400
 	Tooltip:
-		Name: Heavy CABAL Obelisk
+		Name: Fortified Obelisk
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter
@@ -132,7 +132,7 @@ cabal_heavycabalobelisk:
 		Dimensions: 2,2
 	SelectionDecorations:
 	Health:
-		HP: 220000
+		HP: 300000
 	RevealsShroud:
 		Range: 7c0
 	WithRangeCircle:
@@ -143,16 +143,17 @@ cabal_heavycabalobelisk:
 		Sequence: idle
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
-		LocalOffset: 0,0,1956
+		LocalOffset: 0,112,1733
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 50
 		ChargingCondition: charging
-	AmbientSound:
+	AmbientSoundCA:
 		RequiresCondition: charging
-		SoundFiles: obelpowr.aud
-		Interval: 30, 40
+		SoundFiles: cabal_obelisk_charge.wav
+		VolumeMultiplier: 2.0
+		Interval: 100
 	-SpawnActorsOnSell:
 	DetectCloaked:
 		Range: 2c512
@@ -201,7 +202,7 @@ cabal_obeliskofdarkness:
 	WithSpriteBody:
 	Armament:
 		Weapon: DarkObeliskLaser
-		LocalOffset: 0,0,2000
+		LocalOffset: -85,-43,1600
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -312,13 +313,15 @@ cabal_plasmaturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		Offset: 160,20,3
+		Offset: 64,-215,3
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSCABALPlasmaFire
+		LocalOffset: 512,0,180
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
+		ShowShadow: false
 	AutoTarget:
 	DetectCloaked:
 		Range: 3c0

@@ -68,13 +68,20 @@ DarkObeliskLaser:
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
-		Width: 95
-		ZOffset: 2047
-		Color: BB22DDEE
+		Width: 110
+		Duration: 38
+		-HitAnim:
+		Color: CC22DDFF
+		GlowIntensity: 1.5
 		SecondaryBeam: true
-		SecondaryBeamWidth: 40
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 333366EE
+		SecondaryBeamWidth: 45
+		SecondaryBeamColor: 08000CFF
+		SourceFlare: true
+		SourceFlareColor: CC22DDE0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 36000
 		Spread: 250
@@ -134,23 +141,31 @@ TSCABALEMPDisable.end:
 		ValidTargets: Ground, Ship
 
 TSCABALObeliskLaserFire:
-	Range: 12288
-	ReloadDelay: 90
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Inherits@EFFECT: ^TSLaserEffect
+	ReloadDelay: 90
+	Range: 12288
 	ValidTargets: Ground, Water
-	Report: obelmod1.aud
+	Report: cabal_obelisk_fire.wav
+	SoundVolume: 2.0
 	Projectile:
 		Width: 110
 		Duration: 38
 		-HitAnim:
 		Color: CC22DDFF
+		GlowIntensity: 1.5
 		SecondaryBeam: true
 		SecondaryBeamWidth: 45
-		SecondaryBeamColor: 444488FF
+		SecondaryBeamColor: FFFFFFFF
+		SourceFlare: true
+		SourceFlareColor: CC22DDE0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage

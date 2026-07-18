@@ -186,17 +186,20 @@ ts_nod_laserturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		Offset: 160,20,3
+		Offset: 64,-215,3
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSTurretLaser
+		LocalOffset: 512,0,180
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserTurretLaser
+		LocalOffset: 512,0,180
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
+		ShowShadow: false
 	AutoTarget:
 	DetectCloaked:
 		Range: 3c0
@@ -239,11 +242,11 @@ ts_nod_samsite:
 	WithSpriteBody:
 	Armament@PRIMARY:
 		Weapon: TSNODRedEye
-		LocalOffset: 250,0,750
+		LocalOffset: 250,0,150
 		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE:
 		Weapon: TSNODTibRedEye
-		LocalOffset: 250,0,750
+		LocalOffset: 250,0,150
 		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackTurreted:
 	WithSpriteTurret:

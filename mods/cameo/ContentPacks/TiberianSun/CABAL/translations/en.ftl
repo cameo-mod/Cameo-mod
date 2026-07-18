@@ -450,7 +450,7 @@ actor_cabal_stealthgenerator =
       Weak vs Everything
 
 actor_cabal_heavycabalobelisk =
-   .name = Heavy Cabal Obelisk
+   .name = Fortified Obelisk
    .description = Advanced base defense with a powerful plasma-laser.
       Requires power to operate.
       Strong vs Ground units
