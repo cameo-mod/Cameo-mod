@@ -17,7 +17,7 @@ cabal_overkill_gunship:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~cabal_helipad, ~cabal_promotion_overkillgunship
+		Prerequisites: ~cabal_helipad, cabal_techcenter, ~cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
 		TurnSpeed: 30
@@ -79,7 +79,7 @@ cabal_hunterkillermk1:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite
+		Prerequisites: ~cabal_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunterkillermk1.description
 	Aircraft:
@@ -145,7 +145,7 @@ cabal_hunter_drone_carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad, cabal_techcenter
+		Prerequisites: ~cabal_helipad, cabal_radar, ~cabal_promotion_hunterdronecarrier
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunter_drone_carrier.description
 	Aircraft:
@@ -237,7 +237,9 @@ cabal_hunter_drone:
 	Aircraft:
 		TurnSpeed: 32
 		Speed: 180
-		Repulsable: false
+		Repulsable: true
+		RepulsionSpeed: 40
+		IdealSeparation: 1500
 		VTOL: false
 		CruiseAltitude: 1c256
 		TakeUpCellWhenLand: false
@@ -316,6 +318,10 @@ cabal_orb_drone_slave:
 	-Buildable:
 	-UpdatesPlayerStatistics:
 	-MapEditorData:
+	Aircraft:
+		Repulsable: true
+		RepulsionSpeed: 40
+		IdealSeparation: 1500
 	CarrierSlave:
 		LandingDistance: 6400
 	HasParent:
@@ -437,7 +443,7 @@ cabal_hunterkillermk1_elite:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 21
-		Prerequisites: ~cabal_helipad, ~cabal_promotion_hunterkillermk1elite
+		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:

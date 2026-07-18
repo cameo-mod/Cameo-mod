@@ -341,8 +341,8 @@ actor_cabal_promotion_cyborgassassin =
    .description = Promotion
       Unlocks the promoted unit for production.
 
-actor_cabal_promotion_hunterkillermk1elite =
-   .name = Unlock Super Hunter Killer
+actor_cabal_promotion_hunterdronecarrier =
+   .name = Unlock Hunter Drone Carrier
    .description = Promotion
       Unlocks the promoted unit for production.
 

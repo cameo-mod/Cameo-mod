@@ -115,17 +115,17 @@ cabal_promotion_cyborgassassin:
 		Image: cabal_cyborg_assassin
 	ProvidesPrerequisite:
 
-cabal_promotion_hunterkillermk1elite:
+cabal_promotion_hunterdronecarrier:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Super Hunter Killer
+		Name: Unlock Hunter Drone Carrier
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Prerequisites: ~cabal_constructionyard, !cabal_promotion_hunterkillermk1elite, cabal_promotion_cyborgassassin, rank1
-		Description: actor_cabal_promotion_hunterkillermk1elite.description
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_hunterdronecarrier, cabal_promotion_cyborgassassin, rank1
+		Description: actor_cabal_promotion_hunterdronecarrier.description
 	RenderSprites:
-		Image: cabal_hunterkillermk1
+		Image: cabal_hunter_drone_carrier
 	ProvidesPrerequisite:
 
 cabal_promotion_overkillgunship:
@@ -135,7 +135,7 @@ cabal_promotion_overkillgunship:
 	Buildable:
 		BuildPaletteOrder: 9
 		Queue: Promotions
-		Prerequisites: ~cabal_constructionyard, !cabal_promotion_overkillgunship, cabal_promotion_hunterkillermk1elite, rank1
+		Prerequisites: ~cabal_constructionyard, !cabal_promotion_overkillgunship, cabal_promotion_hunterdronecarrier, rank1
 		Description: actor_cabal_promotion_overkillgunship.description
 	RenderSprites:
 		Image: cabal_overkill_gunship
