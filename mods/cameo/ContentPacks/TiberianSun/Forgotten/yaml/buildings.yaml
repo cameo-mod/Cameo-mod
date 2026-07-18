@@ -87,8 +87,6 @@ forgotten_constructionyard:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-	Power:
-		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
