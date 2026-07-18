@@ -135,6 +135,8 @@ tkm_marine:
 		RequiresCondition: !parachute
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
+		DeathTypes:
+			SmallExplosionDeath: 2
 	RenderSprites:
 		Image: ra2_allies_seal
 		PlayerPalette: playerra2
