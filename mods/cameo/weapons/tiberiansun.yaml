@@ -477,9 +477,11 @@ TSTurretLaser:
 	Report: lastur1.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 36
+		Width: 96
 		Duration: 8
-		SecondaryBeamWidth: 18
+		Color: FF0000
+		GlowIntensity: 0.5
+		SecondaryBeamWidth: 48
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 10000
@@ -493,7 +495,7 @@ TSTurretLaser:
 TSCABALPlasmaFire:
 	Inherits: TSTurretLaser
 	Projectile: LaserZap
-		Color: 0040FF80
+		Color: 0040FF
 		SecondaryBeamColor: 80C0FF
 
 TSLaserTurretLaser:
@@ -505,10 +507,12 @@ TSLaserTurretLaser:
 	Report: lastur1.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 36
+		Width: 96
 		Duration: 8
+		Color: FF0000
+		GlowIntensity: 0.5
 		SecondaryBeam: true
-		SecondaryBeamWidth: 18
+		SecondaryBeamWidth: 48
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 16000
