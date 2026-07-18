@@ -149,6 +149,14 @@ cabal_heavycabalobelisk:
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 50
 		ChargingCondition: charging
+	WithChargeLensFlare:
+		RequiresCondition: !build-incomplete
+		RayColor: CC22DDE0
+		CoreColor: FFFFFFFF
+		Size: 64, 72
+		Width: 2.5
+		CoreSize: 5
+		ZOffset: 1
 	AmbientSoundCA:
 		RequiresCondition: charging
 		SoundFiles: cabal_obelisk_charge.wav
@@ -202,12 +210,20 @@ cabal_obeliskofdarkness:
 	WithSpriteBody:
 	Armament:
 		Weapon: DarkObeliskLaser
-		LocalOffset: -85,-43,1600
+		LocalOffset: -128,-43,1600
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 30
 		ChargingCondition: charging
+	WithChargeLensFlare:
+		RequiresCondition: !build-incomplete
+		RayColor: CC22DDE0
+		CoreColor: FFFFFFFF
+		Size: 64, 72
+		Width: 2.5
+		CoreSize: 5
+		ZOffset: 1
 	AmbientSound:
 		RequiresCondition: charging
 		SoundFiles: obelpowr.aud
