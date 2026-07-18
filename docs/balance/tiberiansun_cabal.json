@@ -46,9 +46,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -124,9 +124,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -223,9 +223,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -390,9 +390,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -571,9 +571,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -741,9 +741,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.3
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -808,9 +808,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -960,9 +960,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -1029,9 +1029,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
@@ -1294,7 +1294,11 @@
    "cabal_refinery": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
@@ -1308,7 +1312,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "CABAL Refinery",
     "prerequisites": [
@@ -1321,7 +1325,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "cabal_servicedepot": {
@@ -1949,9 +1953,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -2314,9 +2318,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -2680,9 +2684,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.5,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -2791,9 +2795,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -2905,9 +2909,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -2986,9 +2990,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -3074,9 +3078,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -3453,9 +3457,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -3606,9 +3610,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
@@ -4474,9 +4478,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -4571,9 +4575,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -4687,9 +4691,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -4764,9 +4768,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.5,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -4897,9 +4901,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.3
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5095,9 +5099,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5287,9 +5291,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.5,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5361,9 +5365,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5497,9 +5501,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5578,9 +5582,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5721,9 +5725,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5761,9 +5765,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5831,9 +5835,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5921,9 +5925,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -5966,9 +5970,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
@@ -6047,9 +6051,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",

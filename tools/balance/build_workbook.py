@@ -112,7 +112,8 @@ def unit_rows(ws, theme, aid, u, section, row):
         ws.cell(row=row, column=COL["Burst"], value=fnum(arm.get("burst")) or 1)
         ws.cell(row=row, column=COL["BurstDel"], value=fnum(arm.get("burstdelays")))
         ws.cell(row=row, column=COL["Range(wd)"], value=fnum(arm.get("range")))
-        ws.cell(row=row, column=COL["WeapClass"], value=1)
+        ws.cell(row=row, column=COL["WeapClass"],
+                value=fnum(arm.get("design_weapon_class")) or 1)
         r = row
         ws.cell(row=r, column=COL["EffReload"],
                 value=f"={L('Reload')}{r}+IF({L('Burst')}{r}>1,"

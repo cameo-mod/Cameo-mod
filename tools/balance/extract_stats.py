@@ -188,18 +188,41 @@ def pack_rosters() -> dict[str, dict]:
     return rosters
 
 
+def load_existing_design(name: str) -> dict[str, dict]:
+    """{actor: design-dict} from the committed ledger — design.* fields
+    are judgment data (seeded from the legacy sheet / maintainer), NOT
+    yaml facts, so re-extraction must never wipe them."""
+    p = OUT / f"{name}.json"
+    if not p.exists():
+        return {}
+    out = {}
+    try:
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        for sec in doc.get("sections", {}).values():
+            for actor, u in sec.items():
+                d = u.get("design")
+                if d and any(v is not None for v in d.values()):
+                    out[actor] = d
+    except (json.JSONDecodeError, OSError):
+        pass
+    return out
+
+
 def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
     rs = model.rs
     ledgers: dict[str, dict] = {}
     for ledger, info in sorted(pack_rosters().items()):
         if only and only not in ledger:
             continue
+        keep_design = load_existing_design(ledger)
         sections: dict = {}
         for section, actors in sorted(info["sections"].items()):
             sec: dict = {}
             for a in sorted(set(actors)):
                 u = extract_actor(rs, a)
                 if u is not None:
+                    if a in keep_design:
+                        u["design"] = keep_design[a]
                     sec[a] = u
             if sec:
                 sections[section] = sec

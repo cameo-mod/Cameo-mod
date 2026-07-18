@@ -174,9 +174,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
@@ -292,9 +292,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
@@ -467,9 +467,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
@@ -605,7 +605,15 @@
    "ra1_allies_alliedorerefinery": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
     "design": {
      "class_anchor": null,
@@ -615,16 +623,20 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Allied Ore Refinery",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
      "ra1_powerplant"
     ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "ra1_allies_alliedradardome": {
@@ -930,9 +942,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.35
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
@@ -1108,9 +1120,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.35
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/defenses.yaml#Health.HP",
@@ -1359,9 +1371,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
@@ -1469,9 +1481,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
@@ -1848,9 +1860,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
@@ -2458,9 +2470,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2608,9 +2620,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2748,9 +2760,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2813,9 +2825,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2978,9 +2990,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -3055,9 +3067,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -3388,9 +3400,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 2.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.4
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -3716,9 +3728,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -4050,9 +4062,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",

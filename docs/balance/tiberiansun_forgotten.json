@@ -1072,7 +1072,11 @@
    "forgotten_refinery": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
@@ -1086,7 +1090,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "actor_forgotten_refinery.name",
     "prerequisites": [
@@ -1099,7 +1103,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "forgotten_servicedepot": {

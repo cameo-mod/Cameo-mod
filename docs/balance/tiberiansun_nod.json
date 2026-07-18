@@ -612,7 +612,15 @@
    "ts_nod_tiberiumrefinery": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
     },
     "design": {
      "class_anchor": null,
@@ -622,7 +630,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Tiberium Refinery",
     "prerequisites": [
@@ -635,7 +643,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "ts_nod_tiberiumwastefacility": {
@@ -2885,9 +2893,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.333
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",
@@ -3031,9 +3039,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Nod/yaml/vehicles.yaml#Health.HP",

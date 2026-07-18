@@ -777,9 +777,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.35
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
@@ -998,6 +998,10 @@
     "prerequisites": [
      "~yuri_constructionyard",
      "yuri_bioreactor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
     ],
     "sight": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
@@ -1247,9 +1251,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 0.5,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -1344,9 +1348,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -1520,9 +1524,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -1684,9 +1688,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 0.8
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -1969,9 +1973,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -2421,9 +2425,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
@@ -3671,9 +3675,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
@@ -4254,9 +4258,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
@@ -4420,9 +4424,9 @@
     },
     "design": {
      "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",

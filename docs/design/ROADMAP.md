@@ -532,7 +532,18 @@ deterministic, `--check` drift mode). PHASE 2 DONE 2026-07-18:
 legacy cell formulas exact, closed-form Range solver) +
 `build_workbook.py` -> cameo_balance_v2.xlsx workbench (gitignored;
 32 faction tabs, weapon sub-rows, live formulas, locked non-input
-cells, delta traffic lights). Next: Phase 3 legacy comparator. yaml → per-faction JSON
+cells, delta traffic lights). PHASES 3+4 DONE 2026-07-18 — WORKING
+PROTOTYPE: seed_design.py (437 units seeded from the legacy sheet,
+discrepancies.md: 22 cost mismatches, 581 never-priced combat units,
+180 unmatched legacy rows for name_map.yaml), import_workbook.py
+(xlsx -> ledger, input cells only, proportional warhead scaling),
+apply_balance.py (ledger -> yaml via provenance, resolved-value
+diffing, SHADOWED-definition detection, --confirm gate). Loop PROVEN:
+fixed point exact (0 changes on untouched ledger), live demo
+1000->1050->1000 through ledger+push with yaml byte-identical after.
+Bonus: the fixed-point test exposed and fixed a resolver cache
+poisoning bug affecting ALL audits. Next: Phase 5 Formula v2 +
+Phase 6 enforcement (balance check into run_all). yaml → per-faction JSON
 ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
 formulas live in the sheet, locked cells) → legacy-sheet comparator +
 discrepancy triage → gated write-back (apply_balance.py, maintainer
