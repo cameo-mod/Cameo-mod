@@ -186,3 +186,45 @@ Lesson 8: inserting stat overrides at the top of a block is not enough
 — if the block already defines the trait later, the later value wins.
 Edit the existing lines (the verifier's Speed-75 trio initially
 shadowed the verification values; caught by the identity check).
+## CLASS REBALANCE PROPOSAL v2 (2026-07-19 — supersedes v1; REVIEW PENDING)
+
+All current laws applied: anchor 20000/60/5000/eff-DPS-60 @ 100;
+range clamped 4500–5500 in 10-steps; speed shown vs the ±20% band
+(48–72), infantry speeds free-valued; price envelope 50–250;
+damage 2000-steps + FP-mult compensation (burst = flavor); bands
+<=150 SA-only .75 else SA+CG .875; EVERY converted unit also loses
+air targeting + gets ground-only autotarget.
+
+| unit | HP→2x | spd (band 48–72) | rng→prop | cost | band | dmg | burst | rl | FP-mult | note |
+|---|---|---|---|---|---|---|---|---|---|---|
+| `alien.nax` | 15000 | 40 | | 150 | | | | | | **civilian variant — manual** |
+| `asianalliance_asianmilitia` | 12000→24000 | 52 | 4567→4570 | 100 | SA/.75 | 6000 | 1 | 50 | 70% | |
+| `conehead2.nax` | 40000 | 90 | | 500 | | | | | | **civilian/special — manual** |
+| `forgotten_mutant` | 18000→36000 | 65 | 3132→4500 | 120 | SA/.75 | 2000 | 2 | 18 | 27% | |
+| `forgotten_mutantsoldier` | — | — | — | — | — | — | — | — | — | ✅ VERIFIER 2x/2x (250.0000 exact) |
+| `futuretech_spyfutu` | 5000 | 60 | | 1000 | | | | | | **SPY — utility pricing** |
+| `ixian_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
+| `latinsyndicate_latinmilitia` | 13000→26000 | 52 | 4375→4500 | 130 | SA/.75 | 2000 | 3 | 22 | 60% | |
+| `light_inf` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
+| `naxis_coneheadsknights` | 20000 | 90 | | 1000 | | | | | | **melee elite (1000) — melee/heavy class** |
+| `naxis_naxiriflerecruit` | 10000→20000 | 45 ⚠band | 5501→5500 | 75 | SA/.75 | 8000 | 1 | 100 | 81% | |
+| `naxis_naxiriflesoldier` | 15000→30000 | 50 | 5621→5500 | 100 | SA/.75 | 6000 | 1 | 75 | 70% | |
+| `naxis_slaveoverseer` | 20000 | 90 | | 500 | | | | | | **economy/support — not a rifle scout** |
+| `ordos_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
+| `ra1_allies_raspy` | 5000 | 60 | | 500 | | | | | | **SPY — utility pricing** |
+| `ra1_soviets_ak47conscript` | 22000→44000 | 71 | 4420→4500 | 200 | SA+CG/.875 | 2000 | 3 | 11 | 20% | |
+| `ra2_allies_gi` | 25000→50000 | 50 | 3854→4500 | 200 | SA+CG/.875 | 2000 | 3 | 15 | 33% | |
+| `ra2_allies_ra2spy` | 5000 | 60 | | 500 | | | | | | **SPY — utility pricing** |
+| `ra2_soviets_conscript` | 13000→26000 | 57 | 4434→4500 | 100 | SA/.75 | 2000 | 1 | 18 | 63% | |
+| `schwarzermond_lunarsoldier` | 12000→24000 | 60 | 4097→4500 | 120 | SA/.75 | 6000 | 1 | 50 | 83% | |
+| `tkm_marine` | 20000 | 60 | | 300 | | | | | | **cost 300 > envelope 250 — heavy-infantry class?** |
+| `tkm_rifleman` | 16000→32000 | 60 | 5753→5500 | 120 | SA/.75 | 6000 | 1 | 75 | 73% | |
+| `tkm_trooper` | 16000→32000 | 60 | 5594→5500 | 200 | SA+CG/.875 | 2000 | 5 | 31 | 40% | |
+| `undead.nax` | 15000 | 50 | | 100 | | | | | | **civilian variant — manual** |
+| `yuri_clone` | 5000 | 50 | | 500 | | | | | | **clone/utility — manual** |
+| `zerg_defiler` | 80000 | 50 | | 1400 | | | | | | **caster-tank (1400) — not a scout** |
+| `zerg_spithid` | 40000 | 110 | | 300 | | | | | | **cost 300 > envelope 250 AND speed 110 > band 72 — reclassify** |
+
+_Reclassify/manual rows need maintainer calls; every solved row also_
+_gets: dedicated weapon family (pair law), no-air, ground autotarget,_
+_knob neutralization, self-heal = HP/1000._

@@ -472,7 +472,7 @@ DESIGN formulas instead of silently "fixing".
   slightly different HP/range/damage/reload per variant, close to
   current, each unique.
 
-### P0 — ENGINE PIN vs LOCAL ENGINE MISMATCH (found 2026-07-18 late)
+### ~~P0 — ENGINE PIN vs LOCAL ENGINE MISMATCH~~ RESOLVED 2026-07-19
 
 Commit a4b2eb8a7 (#210) bumped mod.config ENGINE_VERSION to `b89ae60`
 but the local engine/ is still `7ba39d9` and NO engine fetch/build ran
@@ -481,7 +481,7 @@ found") for EVERYONE on a fresh pull until the engine is updated
 (make all / fetch b89ae60 + dotnet rebuild) or the pin is reverted.
 Owner: whoever landed #210 (their session likely has the context).
 My boot gates ran against the proven 7ba39d9 via a temporary LOCAL
-pin revert (never committed).
+pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and rebuilt engine + all mod assemblies (0 errors); boot to menu verified on the new engine. TEAMMATES: run `make.cmd all` once after pulling if your local engine is still 7ba39d9.**
 
 ### New orders 2026-07-18 (third batch — crash + SM polish)
 
