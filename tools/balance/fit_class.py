@@ -86,22 +86,35 @@ def collect_units(cls, actors_filter):
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--class", dest="cls", required=True)
-    ap.add_argument("--anchor", required=True, help="anchor actor id")
+    ap.add_argument("--anchor", help="anchor actor id (real-unit anchor)")
+    ap.add_argument("--spec", help="virtual anchor `hp,speed,range_wdist,"
+                    "damage,reload,cost0` — a round-number model unit that "
+                    "need not exist in game (Tiger-style baseline)")
     ap.add_argument("--actors", nargs="*", help="explicit member list "
                     "(otherwise: design.class_anchor == --class)")
     args = ap.parse_args()
+    if not args.anchor and not args.spec:
+        ap.error("need --anchor or --spec")
 
-    units = collect_units(args.cls, set(args.actors or []) | {args.anchor})
-    if args.anchor not in units:
-        print(f"anchor `{args.anchor}` not found in the ledger")
-        return 2
-    ai = unit_inputs(units[args.anchor])
-    if ai is None:
-        print(f"anchor `{args.anchor}` lacks hp/speed/weapon stats")
-        return 2
-    cost0 = fnum((units[args.anchor].get("cost") or {}).get("v"))
-    o0, p0, q0 = formula.estimators(*ai)
-    print(f"anchor {args.anchor}: cost0={cost0:.0f} O0={o0:.2f} P0={p0:.2f} Q0={q0:.2f}")
+    units = collect_units(args.cls, set(args.actors or []) |
+                          ({args.anchor} if args.anchor else set()))
+    if args.spec:
+        hp, speed, rng, dmg, reload_, cost0 = (float(x) for x in args.spec.split(","))
+        d0 = formula.dps(dmg, reload_)
+        o0, p0, q0 = formula.estimators(hp, speed, rng, d0)
+        anchor_id = f"SPEC({args.spec})"
+    else:
+        if args.anchor not in units:
+            print(f"anchor `{args.anchor}` not found in the ledger")
+            return 2
+        ai = unit_inputs(units[args.anchor])
+        if ai is None:
+            print(f"anchor `{args.anchor}` lacks hp/speed/weapon stats")
+            return 2
+        cost0 = fnum((units[args.anchor].get("cost") or {}).get("v"))
+        o0, p0, q0 = formula.estimators(*ai)
+        anchor_id = args.anchor
+    print(f"anchor {anchor_id}: cost0={cost0:.0f} O0={o0:.2f} P0={p0:.2f} Q0={q0:.2f}")
 
     rows = []
     for actor, u in sorted(units.items()):
@@ -129,7 +142,7 @@ def main() -> int:
     rep.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
 
     anchors = json.loads(ANCHORS.read_text(encoding="utf-8"))
-    anchors[args.cls] = {"anchor_actor": args.anchor, "cost0": cost0,
+    anchors[args.cls] = {"anchor_actor": args.anchor or anchor_id, "cost0": cost0,
                          "o0": round(o0, 4), "p0": round(p0, 4),
                          "q0": round(q0, 4), "signed_off": False,
                          "comment": "candidate — maintainer sign-off pending"}

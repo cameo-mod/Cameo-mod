@@ -522,6 +522,17 @@ DESIGN formulas instead of silently "fixing".
   force"); (d) pacing already retuned in Discord: initial 180→60,
   between-waves 90→30 (tester applied).**
 
+### P1a — FORMULA V2 CLASS 1: SCOUT INFANTRY (maintainer 2026-07-18)
+
+Maintainer picked the scout class first; proposed anchor 20000 HP /
+50 Speed / 5.0 Range / 4000 Damage / 50 Reload / Cost 100 with the
+2x-health bake replacing the ScoutInfantryBuff damage reduction.
+Assessment + simulation: docs/balance/formula_v2_scout.md — anchor
+structure confirmed, speed 60 recommended over 50, bake endorsed;
+BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,
+(2) WeaponClass seeding for the class weapons, then bake -> anchor ->
+sign-off. Awaiting maintainer GO on the refined spec.
+
 ### P1 — BALANCE PIPELINE (ordered 2026-07-18 — "very important long term goal")
 
 Full plan: **docs/design/BALANCE_PIPELINE.md**. PHASE 1 DONE
