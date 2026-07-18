@@ -1801,7 +1801,7 @@ TDIonCannonDamage:
 td_gdi_minigunner_minigun:
 	Inherits: ^SmallArms
 	ReloadDelay: 45
-	Range: 4750
+	Range: 4600
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
@@ -1814,7 +1814,7 @@ td_gdi_minigunner_minigun_ap:
 	Inherits: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 45
-	Range: 4750
+	Range: 4600
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud

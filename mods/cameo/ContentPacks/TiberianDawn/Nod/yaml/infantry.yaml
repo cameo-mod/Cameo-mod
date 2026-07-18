@@ -11,7 +11,7 @@ td_nod_minigunner:
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 65
+		Speed: 66
 	Health:
 		HP: 30000
 	ChangesHealth@SelfHealing:
@@ -21,7 +21,7 @@ td_nod_minigunner:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@td_nod_minigunner:
-		Modifier: 28
+		Modifier: 27
 	Tooltip:
 		Name: Nod Minigunner
 	Buildable:

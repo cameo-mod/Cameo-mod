@@ -363,6 +363,19 @@ forgotten_mutantsoldier:
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetSmall
 	Inherits@Unity: ^Unity
+	# SCOUT-CLASS VERIFICATION UNIT (law 2026-07-19): exactly 2x the
+	# baseline scoutsman (40000 HP / 60 Spd / 5000 rng / 2x damage) at
+	# 250% cost — O=1.5x, P=2x, Q=4x, price=2.5x must hold EXACTLY.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
 	Valued:
 		Cost: 250
 	Tooltip:
@@ -374,27 +387,21 @@ forgotten_mutantsoldier:
 		Prerequisites: ~forgotten_barracks, ~forgotten_chemicalplant
 		Queue: Infantry, RAInfantry
 		Description: actor_forgotten_mutantsoldier.description
-	Mobile:
-		Speed: 75
-	Health:
-		HP: 30000
-	ChangesHealth@SelfHealing:
-		Step: 30
 	Armament@PRIMARY:
-		Weapon: MutAPRifle
+		Weapon: forgotten_mutantsoldier_rifle
 		LocalOffset: 128,0,256
 	# 	RequiresCondition: !rank-elite
 	# Armament@aa:
 	# 	Weapon: TSGrenadeAA
 	# 	LocalOffset: 341,0,256
 	# Armament@ELITE:
-	# 	Weapon: MutAPRifleE
+	# 	Weapon: forgotten_mutantsoldier_rifleE
 	# 	RequiresCondition: rank-elite
 	Voiced:
 		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: MutAPRifle
+		Weapon: forgotten_mutantsoldier_rifle
 	-DamagedByTerrain:
 	RenderSprites:
 		PlayerPalette: playerra2

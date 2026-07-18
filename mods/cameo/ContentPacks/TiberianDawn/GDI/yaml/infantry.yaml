@@ -9,7 +9,7 @@ td_gdi_minigunner:
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 60
+		Speed: 63
 	Health:
 		HP: 32000
 	ChangesHealth@SelfHealing:
@@ -19,7 +19,7 @@ td_gdi_minigunner:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@td_gdi_minigunner:
-		Modifier: 32
+		Modifier: 30
 	Tooltip:
 		Name: GDI Minigunner
 	Buildable:

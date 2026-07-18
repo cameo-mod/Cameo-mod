@@ -11,7 +11,7 @@
  },
  "scout": {
   "anchor_actor": "japan_imperialscoutsman",
-  "comment": "LIVING BASELINE (maintainer 2026-07-18, speed 60 final): Imperial Scoutsman 20000/60/5.0/4000dmg/50rl SmallArms-only (WC 0.75 -> DPS 60), cost 100. O=P=Q=100 by construction. Scout band law: cost<=150 SmallArms only (0.75); 150<cost<=200 SmallArms+Chaingun (0.875); 200 = class cost ceiling (RA2 GI).",
+  "comment": "LIVING BASELINE: japan_imperialscoutsman 20000/60/5000/4000@50 SA (WC .75, DPS 60) = 100; VERIFIER: forgotten_mutantsoldier 2x/2x @ 250 (identity exact). Bands: range 4500-5500 hard, speed +/-20% prov.; price envelope 50-250; cost<=150 SA only (.75), else SA+CG (.875).",
   "signed_off": false,
   "spec": {
    "cost0": 100,
@@ -19,6 +19,7 @@
    "hp0": 20000,
    "range0_wdist": 5000,
    "speed0": 60
-  }
+  },
+  "verifier_actor": "forgotten_mutantsoldier"
  }
 }

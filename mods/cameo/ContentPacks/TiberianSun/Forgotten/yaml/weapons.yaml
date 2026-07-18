@@ -1945,3 +1945,18 @@ TSSergGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 		ValidTargets: Ground, Water
+
+# SCOUT-CLASS VERIFICATION WEAPON (law 2026-07-19): exactly 2x the
+# baseline rifle (8000 dmg / 50 rl / 5000 rng, SmallArms, % = 4). The
+# verification unit proves the class formula: 2x HP + 2x damage at
+# same range/speed must price at exactly 250% (O 1.5x, P 2x, Q 4x).
+# MutAPRifle stays for its other users.
+forgotten_mutantsoldier_rifle:
+	Inherits: ^SmallArms
+	ReloadDelay: 50
+	Range: 5000
+	Report: mgun2.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 8000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 4

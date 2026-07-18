@@ -3565,48 +3565,50 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "range": "5146",
-      "reloaddelay": "8",
+      "design_weapon_class": 0.75,
+      "range": "5000",
+      "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MutAPRifle"
+      "weapon": "forgotten_mutantsoldier_rifle"
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "range": "5146",
-      "reloaddelay": "8",
+      "design_weapon_class": 0.75,
+      "range": "5000",
+      "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MutAPRifle"
+      "weapon": "forgotten_mutantsoldier_rifle"
      }
     ],
     "armor": {
@@ -3618,14 +3620,14 @@
      "v": "250"
     },
     "design": {
-     "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "class_anchor": "scout",
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Health.HP",
-     "v": "30000"
+     "v": "40000"
     },
     "name": "actor_forgotten_mutantsoldier.name",
     "prerequisites": [
@@ -3642,55 +3644,55 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/infantry.yaml#Mobile.Speed",
-     "v": "75"
+     "v": "60"
     }
    },
    "forgotten_mutantsoldier_sp": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "range": "5146",
-      "reloaddelay": "8",
+      "range": "5000",
+      "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MutAPRifle"
+      "weapon": "forgotten_mutantsoldier_rifle"
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/weapons.yaml",
-      "range": "5146",
-      "reloaddelay": "8",
+      "range": "5000",
+      "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "4",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MutAPRifle"
+      "weapon": "forgotten_mutantsoldier_rifle"
      }
     ],
     "armor": {
@@ -3709,7 +3711,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "30000"
+     "v": "40000"
     },
     "name": "actor_forgotten_mutantsoldier.name",
     "sight": {
@@ -3718,7 +3720,7 @@
     },
     "speed": {
      "src": "inherited",
-     "v": "75"
+     "v": "60"
     }
    },
    "forgotten_rocketinfantry": {

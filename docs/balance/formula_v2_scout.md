@@ -160,3 +160,29 @@ Lessons added:
 7. Old shared weapons (M16, M1Carbine) STAY for their other users;
    only this unit's armaments repoint — the upgrade weapons of OTHER
    users (M16AP/M16Laser/Cryo/Incendiary) also stay untouched.
+
+### Corrections + the VERIFICATION UNIT (2026-07-19, second pass)
+
+Maintainer rulings applied:
+- **Rifles out-range minigunners; minigunners out-run rifles**:
+  GDI 4600/spd 63, Nod 4500/spd 66 (miniguns) vs Allies 5400/spd 57,
+  Soviets 5100/spd 54 (rifles). FP-mults recomputed: 30/27/51/50.
+- **Infantry speeds are FREE values** (the 5-step law is vehicles-only,
+  from turn rate = speed/5); infantry turn instantly.
+- **Stat variance bands (provisional)**: Range ±10% (hard), Speed ±20%,
+  HP/damage/reload free (formula-constrained). Maintainer will tune.
+- **Price envelope: 50%–250% of the class baseline** for every
+  template (supersedes the earlier scout ceiling 200; RA2 GI stays the
+  priciest STANDARD scout, the verifier sits at the envelope top).
+- **THE VERIFICATION-UNIT LAW**: every class carries one unit at
+  exactly 2x HP + 2x damage, same range/speed, 250% cost — proving
+  O=1.5x, P=2.0x, Q=4.0x, price=2.5x. Scout verifier:
+  `forgotten_mutantsoldier` (40000 HP / 60 spd / 5000 rng /
+  8000 dmg @ 50 rl SmallArms / cost 250) — verified EXACT: price
+  250.0000. (Un-flagged from the reclassify list; its speed 75->60 and
+  weapon rework are the verification duty.)
+
+Lesson 8: inserting stat overrides at the top of a block is not enough
+— if the block already defines the trait later, the later value wins.
+Edit the existing lines (the verifier's Speed-75 trio initially
+shadowed the verification values; caught by the identity check).
