@@ -242,11 +242,11 @@ ts_nod_samsite:
 	WithSpriteBody:
 	Armament@PRIMARY:
 		Weapon: TSNODRedEye
-		LocalOffset: 250,0,750
+		LocalOffset: 250,0,150
 		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE:
 		Weapon: TSNODTibRedEye
-		LocalOffset: 250,0,750
+		LocalOffset: 250,0,150
 		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackTurreted:
 	WithSpriteTurret:
