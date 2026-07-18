@@ -3217,6 +3217,187 @@ MonsterTankTusk:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 
+MonsterTankTuskTesla:
+	Inherits: ^Grenade
+	Inherits: ^LightFlameWeapon
+	Inherits: ^TeslaWeapon
+	Inherits: ^HeavyMissile
+	ValidTargets: Ground, Water, Infantry, Monster, Air
+	ReloadDelay: 125
+	Burst: 4
+	BurstDelays: 3
+	Range: 7833
+	Report: missile6.aud
+	Projectile: Missile
+		Image: MISSILE
+		TrailImage: litning
+		TrailDelay: 1
+		TrailInterval: 1
+		Speed: 641
+		LaunchAngle: 60
+		ContrailLength: 10
+		ContrailStartColor: 88BBFF44
+		ContrailEndColor: 11223300
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 26750
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 26750
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 26750
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 26750
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 53250
+	Warhead@TeslaArc: FireShrapnel
+		Weapon: MammothTuskTeslaFragment1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_tesla_impact
+		ExplosionPalette: ra2effect
+
+MonsterTankTuskThermobaric:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^Grenade
+	Inherits: ^FlakWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^HeavyMissile
+	ValidTargets: Ground, Water, Infantry, Monster, Air
+	ReloadDelay: 125
+	Burst: 4
+	BurstDelays: 3
+	Range: 7833
+	Report: missile6.aud
+	Projectile: Missile
+		Image: MISSILE
+		TrailImage: smokey
+		TrailDelay: 1
+		TrailInterval: 1
+		Speed: 641
+		LaunchAngle: 60
+		ContrailLength: 10
+		ContrailStartColor: FFBB8844
+		ContrailEndColor: 33221100
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6750
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 13250
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 7
+	Warhead@Effect: CreateEffect
+		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactSounds: firebl3.aud
+	Warhead@EffectAir: CreateEffect
+		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
+		ImpactSounds: firebl3.aud
+
 VolkovMagneticWeapon:
 	Inherits: ^HeavyCannon
 	Inherits: ^MediumChemicalWeapon

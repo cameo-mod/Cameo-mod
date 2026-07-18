@@ -53,6 +53,8 @@ cabal_constructionyard:
 		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
+	ProvidesPrerequisite@tslaserfence:
+		Prerequisite: tslaserfence
 	WithIdleOverlay@TOP:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-top

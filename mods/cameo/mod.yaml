@@ -142,8 +142,7 @@ Include: ContentPacks/RedAlert2Mod/Syndicate/content.yaml
 Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
 Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
 Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
-Include: ContentPacks/TKM/content.yaml
-Include: ContentPacks/TKM/TKM/content.yaml
+Include: ContentPacks/RedAlert2Mod/TKM/content.yaml
 Include: ContentPacks/D2k/Shared/content.yaml
 Include: ContentPacks/D2k/Ordos/content.yaml
 Include: ContentPacks/D2k/Ixian/content.yaml
@@ -217,8 +216,9 @@ Rules:
 	# cameo|rules/xmas.yaml
 	# cameo|rules/valentine.yaml
 	# cameo|rules/halloween.yaml
-	# outpost2.yaml, tkm.yaml are now loaded via include-only wrapper packs
-	# (ContentPacks/{Outpost2,TKM}/) so their factions can be ordered in the lobby.
+	# outpost2.yaml is loaded via an include-only wrapper pack (ContentPacks/Outpost2/)
+	# so its factions can be ordered in the lobby. tkm.yaml loads via
+	# ContentPacks/RedAlert2Mod/TKM/content.yaml (pack moved 2026-07-18).
 	# cameo|rules/z.yaml
 Sequences:
 	cameo|sequences/misc.yaml
@@ -265,7 +265,6 @@ Sequences:
 	cameo|sequences/outpost2.yaml		    ##########
 	# cameo|sequences/z.yaml
 	# cameo|sequences/classicdoom.yaml
-	cameo|sequences/tkm.yaml
 ModelSequences:
 	cameo|sequences/voxels.yaml
 TileSets:
@@ -328,7 +327,6 @@ Weapons:
 	cameo|weapons/outpost2.yaml		##########
 	# cameo|weapons/z.yaml		##########
 	# cameo|weapons/classicdoom.yaml
-	cameo|weapons/tkm.yaml
 Cursors:
 	cameo|cursors.yaml
 Chrome:

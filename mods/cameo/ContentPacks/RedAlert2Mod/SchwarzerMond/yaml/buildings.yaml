@@ -16,6 +16,10 @@ schwarzermond_constructionyard:
 		Facing: 432
 		RequiresCondition: factundeploy
 	WithBuildingPlacedOverlay:
+	ProvidesPrerequisite@ra2ywall:
+		Prerequisite: ra2ywall
+	ProvidesPrerequisite@ra2oilderrick:
+		Prerequisite: ra2oilderrick
 	Exit@1:
 		SpawnOffset: 213,-128,0
 		ExitCell: 1,2

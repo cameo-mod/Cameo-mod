@@ -1,6 +1,0 @@
-# Include-only content pack: loads the unmigrated TKM ruleset as-is so its
-# faction is ordered alongside the migrated packs via mod.yaml's Include order.
-# No rules are split here; this only controls faction load order in the lobby.
-Rules:
-	cameo|rules/tkm.yaml
-	ContentPacks|TKM/yaml/ai.yaml

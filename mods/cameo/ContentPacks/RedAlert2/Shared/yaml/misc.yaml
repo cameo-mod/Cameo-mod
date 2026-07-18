@@ -169,6 +169,51 @@ ra2brik:
 		Description: Defensive wall that blocks movement.
 	-MapEditorData:
 
+ra2_awall:
+	Inherits: BRIK
+	RenderSprites:
+		Image: ra2_awall
+		Palette: ra2
+		PlayerPalette: playerra2
+	Buildable:
+		Prerequisites: ~ra2awall
+		Description: Defensive wall that blocks movement.
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: ra2_awall
+
+ra2_swall:
+	Inherits: BRIK
+	RenderSprites:
+		Image: ra2_swall
+		Palette: ra2
+		PlayerPalette: playerra2
+	Buildable:
+		Prerequisites: ~ra2swall
+		Description: Defensive wall that blocks movement.
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: ra2_swall
+
+ra2_ywall:
+	Inherits: BRIK
+	RenderSprites:
+		Image: ra2_ywall
+		Palette: ra2
+		PlayerPalette: playerra2
+	Buildable:
+		Prerequisites: ~ra2ywall
+		Description: Defensive wall that blocks movement.
+	WithWallSpriteBody:
+		IsPlayerPalette: True
+		Palette: playerra2
+		PlayerPalette: playerra2
+		Type: ra2_ywall
+
 ra2nacnst.infiltrated:
 	Inherits: ^researched_upgrade.template
 	Tooltip:

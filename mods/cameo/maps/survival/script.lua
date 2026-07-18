@@ -28,6 +28,8 @@ PrepSeconds = 60      -- build-up time before wave 1
 WaveGapSeconds = 30    -- time between waves
 BaseBudget = 1500      -- wave-1 budget at 1 player
 BudgetGrowth = 650     -- extra budget per wave index
+RampFactor = 0.08      -- superlinear ramp: late waves outscale early ones
+                       -- (wave 16 gets ~2.2x the old linear budget)
 CenterPos = CPos.New(50, 50)
 
 -- { name, tier, units = { {type, cost}, ... }, epic = {type, cost} or nil }
@@ -87,7 +89,7 @@ CheapestOf = function(units)
 	return best
 end
 
-ComposeWave = function(wave, budget, maxUnits)
+ComposeWave = function(wave, budget, maxUnits, minUnits)
 	local list = {}
 	if wave.epic ~= nil then
 		table.insert(list, wave.epic[1])
@@ -103,14 +105,21 @@ ComposeWave = function(wave, budget, maxUnits)
 			budget = budget - pick[2]
 		end
 	end
+	-- dip fix: expensive-unit themes (tier 3/4) exhausted the budget after a
+	-- handful of units; pad with the theme's cheapest unit so every wave has
+	-- real numbers behind it
+	while #list < math.min(minUnits, maxUnits) do
+		table.insert(list, cheapest[1])
+	end
 	return list
 end
 
 SendWave = function(idx)
 	local wave = Waves[idx]
-	local budget = math.floor((BaseBudget + BudgetGrowth * (idx - 1)) * PlayerScale())
+	local budget = math.floor((BaseBudget + BudgetGrowth * (idx - 1)) * (1 + RampFactor * (idx - 1)) * PlayerScale())
 	local maxUnits = 10 + idx + 6 * (Spielerzahl - 1)
-	local list = ComposeWave(wave, budget, maxUnits)
+	local minUnits = 6 + idx
+	local list = ComposeWave(wave, budget, maxUnits, minUnits)
 
 	local groups = { {}, {}, {}, {} }
 	for i, t in ipairs(list) do
@@ -126,6 +135,12 @@ SendWave = function(idx)
 			Reinforcements.Reinforce(Foes[p], groups[p], { entry.Location, entry.Location + offsets[p] }, 8,
 				function(unit)
 					table.insert(LiveFoes, unit)
+					-- elite ramp: waves arrive increasingly veteran (rank
+					-- chevrons make the danger readable), fully elite by 16
+					local levels = math.floor(idx / 4)
+					if levels > 0 and unit.HasProperty("GiveLevels") then
+						unit.GiveLevels(levels)
+					end
 					unit.AttackMove(CenterPos)
 					IdleHunt(unit)
 				end)

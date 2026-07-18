@@ -169,6 +169,7 @@ ra1_allies_alliedtechcenter:
 	RenderDetectionCircle:
 	WithBuildingBib:
 	GpsPower:
+		DoorImage: ra1_allies_alliedtechcenter
 		Prerequisites:
 			1: ra1_allies_upgrade_gpssatellitesupport
 		Icons:
@@ -274,11 +275,13 @@ ra1_allies_reinforcementpad:
 		Facing: 128
 		ExitCell: 0,1
 	ProductionParadropCA@NORMAL:
+		ActorType: ra1_badger
 		Produces: Vehicle
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true
 		RequiresCondition: !classicproductionqueues
 	ProductionParadropCA@CLASSICPRODUCTIONQUEUES:
+		ActorType: ra1_badger
 		Produces: RAVehicle
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true

@@ -47,6 +47,8 @@ ts_gdi_constructionyard:
 		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
+	ProvidesPrerequisite@asianalliancebarrier:
+		Prerequisite: asianalliancebarrier
 	WithIdleOverlay@TOP:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-top

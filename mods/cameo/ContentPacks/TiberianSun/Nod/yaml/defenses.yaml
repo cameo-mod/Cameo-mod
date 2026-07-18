@@ -387,7 +387,7 @@ ts_nod_laserfence:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~ts_nod_constructionyard
+		Prerequisites: ~tslaserfence
 		Description: Stops infantry and blocks enemy fire.\nCan NOT be crushed by tanks.
 	Valued:
 		Cost: 200

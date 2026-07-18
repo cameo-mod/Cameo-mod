@@ -13,7 +13,10 @@ yuri_constructionyard:
 		Sequence: idle-normal
 		RequiresCondition: !build-incomplete
 	-WithBuildingPlacedOverlay:
+	-ProvidesPrerequisite@ra2awall:
 	-ProvidesPrerequisite@ra2oilderrick:
+	ProvidesPrerequisite@ra2ywall:
+		Prerequisite: ra2ywall
 	WithBuildingPlacedAnimation:
 		RequiresCondition: !build-incomplete
 	Targetable@TechStealerInfiltrate:

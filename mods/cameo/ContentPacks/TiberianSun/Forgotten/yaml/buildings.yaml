@@ -81,6 +81,8 @@ forgotten_constructionyard:
 		Prerequisite: tsoilderricksuper
 	ProvidesPrerequisite@fact.forgotten:
 		Prerequisite: fact.forgotten
+	ProvidesPrerequisite@wirefence:
+		Prerequisite: wirefence
 	WithBuildingPlacedOverlay:
 		RequiresCondition: !build-incomplete
 	Selectable:

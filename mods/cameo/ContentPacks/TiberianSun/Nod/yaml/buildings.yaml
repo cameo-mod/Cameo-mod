@@ -43,6 +43,8 @@ ts_nod_constructionyard:
 		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
+	ProvidesPrerequisite@tslaserfence:
+		Prerequisite: tslaserfence
 	WithProductionOverlay@WELDING:
 		RequiresCondition: !build-incomplete
 		Queues: Building, Defence, RABuilding, RADefence

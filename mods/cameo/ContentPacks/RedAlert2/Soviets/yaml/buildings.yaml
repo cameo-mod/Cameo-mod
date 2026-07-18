@@ -14,8 +14,11 @@ ra2_soviets_constructionyard:
 		RequiresCondition: !build-incomplete
 	WithBuildingPlacedOverlay:
 		Sequence: build
+	-ProvidesPrerequisite@ra2awall:
 	ProvidesPrerequisite@ra2oilderrick:
 		Prerequisite: ra2oilderrick
+	ProvidesPrerequisite@ra2swall:
+		Prerequisite: ra2swall
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
