@@ -4101,6 +4101,7 @@ ra1_soviets_rifleinfantry_carbine:
 	Inherits: ^SmallArms
 	ReloadDelay: 55
 	Range: 5100
+	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 5
 	Report: gun11.aud
@@ -4113,19 +4114,19 @@ ra1_soviets_rifleinfantry_carbine_incendiary:
 	Inherits: ^LightFlameWeapon
 	Inherits: ra1_soviets_rifleinfantry_carbine
 	Inherits: ^IncendiaryBulletProjectile
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1

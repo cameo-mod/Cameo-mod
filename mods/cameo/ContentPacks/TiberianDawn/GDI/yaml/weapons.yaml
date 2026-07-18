@@ -1802,6 +1802,7 @@ td_gdi_minigunner_minigun:
 	Inherits: ^SmallArms
 	ReloadDelay: 45
 	Range: 4600
+	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 3
 	Report: mgun2.aud
@@ -1812,7 +1813,7 @@ td_gdi_minigunner_minigun:
 
 td_gdi_minigunner_minigun_ap:
 	Inherits: ^Chaingun
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	ReloadDelay: 45
 	Range: 4600
 	Burst: 4

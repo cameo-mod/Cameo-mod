@@ -2152,6 +2152,7 @@ ra1_allies_rifleinfantry_carbine:
 	Inherits: ^SmallArms
 	ReloadDelay: 50
 	Range: 5400
+	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4
 	Report: gun11.aud

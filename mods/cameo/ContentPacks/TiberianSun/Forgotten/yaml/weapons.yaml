@@ -1955,6 +1955,7 @@ forgotten_mutantsoldier_rifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 50
 	Range: 5000
+	ValidTargets: Ground, Water
 	Report: mgun2.aud
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000

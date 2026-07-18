@@ -1472,6 +1472,7 @@ td_nod_minigunner_minigun:
 	Inherits: ^SmallArms
 	ReloadDelay: 40
 	Range: 4500
+	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 2
 	Report: mgun2.aud
@@ -1484,7 +1485,7 @@ td_nod_minigunner_minigun_laser:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	ReloadDelay: 40
 	Range: 4500
 	Burst: 4
