@@ -6,6 +6,7 @@ tuboat.nax:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@sub: ^Submarine
+	Inherits@Wunderwaffe: ^Wunderwaffe
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -94,7 +95,7 @@ muboat.nax:
 	Cloak@underwater:
 		CloakDelay: 100
 	Voiced:
-		VoiceSet: VehicleVoice
+		VoiceSet: NaxiTankVoice
 	FirepowerMultiplier@BallisticMissileSubBuff:
 		Modifier: 200
 	FireWarheadsOnDeath:
@@ -119,6 +120,106 @@ muboat.nax:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: naxis_upgrade_wunderwaffe
+
+nax_bitsmark:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Bitsmark Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~naval.nax, naxis_techcenter
+		Queue: Naval, RANaval
+		Description: actor_ra1_allies_cruiser.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 8
+	Health:
+		HP: 335000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armor:
+		Type: Superheavy
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: -1400,0,356
+		TurnSpeed: 8
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 3400,0,226
+		TurnSpeed: 8
+	Turreted@TERCERA:
+		Turret: tercera
+		Offset: -2500,0,226
+		TurnSpeed: 8
+	Turreted@CUARTA:
+		Turret: cuarta
+		Offset: 1900,0,356
+		TurnSpeed: 8
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@SECONDARY:
+		Name: secondary
+		Turret: secondary
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@TERCERA:
+		Turret: tercera
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@CUARTA:
+		Turret: cuarta
+		Weapon: 8Inch
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 175
+		RecoilRecovery: 35
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+		Turrets: primary, secondary, tercera, cuarta
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+	WithSpriteTurret@TERCERA:
+		Turret: tercera
+	WithSpriteTurret@CUARTA:
+		Turret: cuarta
+	DeliversCash:
+		Payload: 500
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		Image: nax_bitsmark
+		PlayerPalette: player_rgba
 
 ####################################################################################################
 #		Red Alert 2 Naxis Tree

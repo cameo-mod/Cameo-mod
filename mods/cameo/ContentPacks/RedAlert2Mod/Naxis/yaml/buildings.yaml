@@ -152,9 +152,9 @@ naval.nax:
 	#	Sequence: repair
 	GivesBuildableArea:
 		AreaTypes: building, cityi
-	WithIdleOverlay@waves:
-		Sequence: idle-waves
-		RequiresCondition: !build-incomplete
+	#WithIdleOverlay@waves:
+	#	Sequence: idle-waves
+	#	RequiresCondition: !build-incomplete
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 

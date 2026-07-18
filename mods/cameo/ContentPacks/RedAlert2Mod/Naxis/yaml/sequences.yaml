@@ -125,7 +125,7 @@ naval.nax:
 		Filename: nax_naval.shp
 		Start: 33
 	icon:
-		Filename: ra2nayardicon.shp
+		Filename: naxis_navy_yard_icon.png
 		Offset: 0,0
 
 naxis_naxpetrolplant:
@@ -339,7 +339,7 @@ naxis_naxirocketsilo:
 	dead:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: ra2_soviets_nuclearmissilesilo_icon.shp
+		Filename: naxis_nuke_silo_icon.png
 		Offset: 0,0
 
 naxis_rifletower:
@@ -894,7 +894,7 @@ naxis_slaveoverseer:
 	paradrop:
 		Start: 292
 	icon:
-		Filename: ra2e2icon.shp
+		Filename: naxis_slavemaster_icon.png
 
 naxis_slave:
 	Inherits: ^RA2BasicInfantry
@@ -1144,6 +1144,23 @@ tuboat.nax:
 		Start: 128
 	icon:
 		Filename: naxis_torpedo_uboat_icon.png
+
+nax_bitsmark:
+	Defaults:
+		Filename: nax_bitsmark.png
+	idle:
+		Facings: 64
+		Scale: 0.9
+	turret:
+		Filename: nax_bitsmark_tur.png
+		Facings: 64
+		Scale: 0.65
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: nax_bitsmark_icon.png
+
 
 frank.nax:
 	Inherits: ^RA2BasicInfantry
