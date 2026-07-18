@@ -4094,3 +4094,38 @@ MADTankDetonate:
 		Explosions: med_explosion
 		ImpactSounds: madexplo.aud
 		ImpactActors: false
+
+# CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Soviet
+# rifle infantry — burst 3, heavier thump, close range. Incendiary pair.
+ra1_soviets_rifleinfantry_carbine:
+	Inherits: ^SmallArms
+	ReloadDelay: 55
+	Range: 4600
+	Burst: 3
+	BurstDelays: 5
+	Report: gun11.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+ra1_soviets_rifleinfantry_carbine_incendiary:
+	Inherits: ^LightFlameWeapon
+	Inherits: ra1_soviets_rifleinfantry_carbine
+	Inherits: ^IncendiaryBulletProjectile
+	ValidTargets: Ground, Water, Air
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1

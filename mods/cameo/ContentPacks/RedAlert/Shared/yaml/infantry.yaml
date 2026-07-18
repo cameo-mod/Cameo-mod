@@ -4,25 +4,41 @@ ra1_allies_rifleinfantry:
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Inherits@CryoMissiles: ^CryoMissiles
+	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
+	# character at the original cost 100; O/P/Q priced via the scout
+	# anchor; class knobs neutralized (2x-health bake); burst flavor
+	# trimmed to formula DPS by the unit-named multiplier.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra1_allies_rifleinfantry:
+		Modifier: 50
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: M1Carbine
+		Weapon: ra1_allies_rifleinfantry_carbine
 		LocalOffset: 128,0,256
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: M1Carbine
+		Weapon: ra1_allies_rifleinfantry_carbine
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !ra1_allies_upgrade_cryomissiles
 	Armament@Upgrade: ##########
-		Weapon: CryoM1Carbine
+		Weapon: ra1_allies_rifleinfantry_carbine_cryo
 		LocalOffset: 128,0,256
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
-		Weapon: CryoM1Carbine
+		Weapon: ra1_allies_rifleinfantry_carbine_cryo
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: ra1_allies_upgrade_cryomissiles
 	ActorStatValues:

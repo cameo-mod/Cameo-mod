@@ -1465,3 +1465,42 @@ CorvetteDragon:
 		Spread: 500
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
+
+# CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Nod
+# minigunner — burst 4, snappier rattle, shorter reach. Laser pair.
+td_nod_minigunner_minigun:
+	Inherits: ^SmallArms
+	ReloadDelay: 40
+	Range: 4500
+	Burst: 4
+	BurstDelays: 2
+	Report: mgun2.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+td_nod_minigunner_minigun_laser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 40
+	Range: 4500
+	Burst: 4
+	BurstDelays: 2
+	Report: vpalwe2d.aud
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1

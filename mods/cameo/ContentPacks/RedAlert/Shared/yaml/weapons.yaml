@@ -2146,3 +2146,30 @@ ra1_allies_chronovortex:
 	-Warhead@Smudge:
 	-Warhead@Smudge2:
 
+# CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
+# rifle infantry — burst 3, accurate, longest scout reach. Cryo pair.
+ra1_allies_rifleinfantry_carbine:
+	Inherits: ^SmallArms
+	ReloadDelay: 50
+	Range: 5250
+	Burst: 3
+	BurstDelays: 4
+	Report: gun11.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+ra1_allies_rifleinfantry_carbine_cryo:
+	Inherits: ra1_allies_rifleinfantry_carbine
+	Inherits: ^CryoMissileProjectile
+	Projectile: Bullet
+		TrailImage: blue_smokey
+		TrailInterval: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColor: 33221100
+		ContrailStartWidth: 75
+		ContrailEndWidth: 25
+		ContrailLength: 10
+	Warhead@PhysicalStateCryo: ApplyPhysicalState
+		Amount: -2000
