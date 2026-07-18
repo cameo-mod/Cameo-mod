@@ -48,12 +48,13 @@ NodTurretLaser:
 	Report: vpalwe2d.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 128
+		Width: 50
 		Duration: 12
 		ZOffset: 2047
-		Color: FF000055
+		Color: FF0000
+		GlowIntensity: 0.5
 		SecondaryBeam: true
-		SecondaryBeamWidth: 64
+		SecondaryBeamWidth: 20
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@SmallArms: SpreadDamage
@@ -520,15 +521,15 @@ LaserObelisk:
 	ReloadDelay: 96
 	Range: 9600
 	Projectile: LaserZap
-		Width: 100
+		Width: 128
 		HitAnim: laserfire
 		ZOffset: 3000
 		Blockable: false
 		Duration: 38
 		SecondaryBeam: true
-		SecondaryBeamWidth: 40
+		SecondaryBeamWidth: 64
 		SecondaryBeamZOffset: 3000
-		SecondaryBeamColor: FFFFFF88
+		SecondaryBeamColor: FFFFFF
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 96000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
