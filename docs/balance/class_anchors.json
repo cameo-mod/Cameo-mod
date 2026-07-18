@@ -8,5 +8,17 @@
   "p0": 800,
   "q0": 800,
   "signed_off": true
+ },
+ "scout": {
+  "anchor_actor": "japan_imperialscoutsman",
+  "comment": "LIVING BASELINE (maintainer pick 2026-07-18): Imperial Scoutsman converted to the spec in-game. O=P=Q=100 by the per-stat-normalized construction (class_baseline_price).",
+  "signed_off": false,
+  "spec": {
+   "cost0": 100,
+   "dps0": 80,
+   "hp0": 20000,
+   "range0_wdist": 5000,
+   "speed0": 50
+  }
  }
 }

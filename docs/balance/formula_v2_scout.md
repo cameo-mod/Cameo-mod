@@ -51,3 +51,39 @@ proportions shift slightly).
 
 Anchor registry: `scout` will be written by fit_class on step 3;
 until sign-off the class keeps the global Tiger formula.
+
+---
+
+## CONVERSION LOG (the learning record — one entry per converted unit)
+
+### 1. japan_imperialscoutsman — THE LIVING BASELINE (2026-07-18, boot-verified)
+
+- Chosen by the maintainer as closest to spec: was 11000 HP / 55 spd /
+  cost 100 / CHGuardRifle (2000 dmg, 55 rl, 5547 rng).
+- Set to the exact baseline: **20000 HP / 50 Speed / 5.0 Range /
+  4000 Damage / 50 Reload / Cost 100** → O = P = Q = 100.000000 by the
+  per-stat-normalized construction (`formula.class_baseline_price`).
+- **Rule confirmed general**: the maintainer's O=P=Q=cost law holds for
+  ANY class baseline under this construction — the Tiger's constants
+  are exactly this construction with (100000, 100, 5000, 200, 800).
+
+Lessons captured for the next conversions:
+1. **Shared-weapon hazard**: CHGuardRifle serves civilians/generals
+   rules — the baseline got a DEDICATED weapon
+   (`japan_imperialscoutsman_rifle`). Check weapon sharing FIRST, every
+   time (grep `Weapon: <name>` repo-wide).
+2. **Knob neutralization is per-unit during the one-by-one phase**: the
+   template keeps ScoutInfantryBuff (50% dmg reduction + 110%
+   firepower) for unconverted units; converted units override BOTH to
+   100 in their own block. When all 27 are converted, delete the
+   template knobs + all overrides in one sweep.
+3. **Scale self-heal with HP**: ChangesHealth Step went 11 → 20
+   (keeps heal-rate proportional under the 2x-health bake).
+4. **Upgrade-weapon variants stay untouched** (waveforce armament keeps
+   CHGuardRifleWaveforce) — their rebalance rides the upgrade pricing
+   pass, not the baseline conversion.
+5. Sight 8000 is inherited and NOT part of the anchor spec — left
+   alone; decide later whether sight joins the formula.
+
+Next unit: maintainer picks (suggest ra2_soviets_conscript — closest
+remaining to baseline ratios), each conversion appends a log entry here.

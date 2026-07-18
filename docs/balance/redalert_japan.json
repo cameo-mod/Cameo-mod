@@ -2172,8 +2172,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "range": "5547",
-      "reloaddelay": "55",
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2182,7 +2182,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2192,7 +2192,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2202,13 +2202,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CHGuardRifle"
+      "weapon": "japan_imperialscoutsman_rifle"
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "range": "5547",
-      "reloaddelay": "55",
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2217,7 +2217,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2227,7 +2227,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2237,7 +2237,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CHGuardRifle"
+      "weapon": "japan_imperialscoutsman_rifle"
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -2350,14 +2350,14 @@
      "v": "100"
     },
     "design": {
-     "class_anchor": null,
+     "class_anchor": "scout",
      "special": 1.0,
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
-     "v": "11000"
+     "v": "20000"
     },
     "name": "Imperial Scoutsman",
     "prerequisites": [
@@ -2373,7 +2373,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
-     "v": "55"
+     "v": "50"
     }
    },
    "japan_japaneseflamethrower": {

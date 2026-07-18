@@ -71,6 +71,33 @@ def solve_range(cost: float, hp: float, speed: float, dps_value: float,
 
 
 def class_anchor_price(o, p, q, o0, p0, q0, cost0) -> float:
-    """Formula v2 (DESIGN §12 second iteration): normalized deviation
-    from the class anchor. Exact at the anchor."""
+    """Formula v2 draft form (superseded by class_baseline_price):
+    normalized deviation from the class anchor. Exact at the anchor."""
     return cost0 * (o / o0 + p / p0 + q / q0) / 3
+
+
+def class_baseline_estimators(hp, speed, range_wdist, dps_value,
+                              hp0, speed0, range0_wdist, dps0, cost0,
+                              special=1.0, tech_tier=1.0) -> tuple[float, float, float]:
+    """Formula v2 FINAL form (maintainer rule 2026-07-18): per-stat
+    normalization against the class baseline unit, so that at the
+    baseline O = P = Q = cost0 EXACTLY — the rule that must always hold
+    for any baseline unit. The global Tiger formula is precisely this
+    construction with (100000, 100, 5000, 200, 800) plugged in."""
+    h = hp / hp0
+    s = speed / speed0
+    r = (range_wdist / range0_wdist) * special
+    d = dps_value / dps0
+    o = (h + s + r + d) * cost0 / 4 * tech_tier
+    p = ((h * s) + (r * d)) * cost0 / 2 * tech_tier
+    q = (h * s * r * d) * cost0 * tech_tier
+    return o, p, q
+
+
+def class_baseline_price(hp, speed, range_wdist, dps_value,
+                         hp0, speed0, range0_wdist, dps0, cost0,
+                         special=1.0, tech_tier=1.0) -> float:
+    o, p, q = class_baseline_estimators(hp, speed, range_wdist, dps_value,
+                                        hp0, speed0, range0_wdist, dps0,
+                                        cost0, special, tech_tier)
+    return (o + p + q) / 3
