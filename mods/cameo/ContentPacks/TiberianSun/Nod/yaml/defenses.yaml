@@ -186,17 +186,20 @@ ts_nod_laserturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		Offset: 160,20,3
+		Offset: 64,-215,3
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSTurretLaser
+		LocalOffset: 528,0,192
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserTurretLaser
+		LocalOffset: 528,0,192
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
+		ShowShadow: false
 	AutoTarget:
 	DetectCloaked:
 		Range: 3c0

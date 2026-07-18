@@ -143,7 +143,7 @@ cabal_heavycabalobelisk:
 		Sequence: idle
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
-		LocalOffset: 64,0,1733
+		LocalOffset: 0,112,1733
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -202,7 +202,7 @@ cabal_obeliskofdarkness:
 	WithSpriteBody:
 	Armament:
 		Weapon: DarkObeliskLaser
-		LocalOffset: -85,0,1621
+		LocalOffset: -85,-43,1600
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -313,13 +313,15 @@ cabal_plasmaturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		Offset: 160,20,3
+		Offset: 64,-215,3
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSCABALPlasmaFire
+		LocalOffset: 528,0,192
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
+		ShowShadow: false
 	AutoTarget:
 	DetectCloaked:
 		Range: 3c0

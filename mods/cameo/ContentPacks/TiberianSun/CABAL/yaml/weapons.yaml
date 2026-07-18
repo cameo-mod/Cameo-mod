@@ -68,15 +68,16 @@ DarkObeliskLaser:
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
-		Width: 95
-		ZOffset: 2047
-		Color: BB22DDEE
+		Width: 110
+		Duration: 38
+		-HitAnim:
+		Color: CC22DDFF
+		GlowIntensity: 1.5
 		SecondaryBeam: true
-		SecondaryBeamWidth: 40
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 333366EE
+		SecondaryBeamWidth: 45
+		SecondaryBeamColor: 08000CFF
 		SourceFlare: true
-		SourceFlareColor: BB22DDE0
+		SourceFlareColor: CC22DDE0
 		SourceFlareCoreColor: FFFFFFFF
 		SourceFlareSize: 64, 72
 		SourceFlareWidth: 2.5
