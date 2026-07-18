@@ -477,9 +477,11 @@ TSTurretLaser:
 	Report: lastur1.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 36
+		Width: 96
 		Duration: 8
-		SecondaryBeamWidth: 18
+		Color: FF0000
+		GlowIntensity: 0.5
+		SecondaryBeamWidth: 48
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 10000
@@ -493,7 +495,7 @@ TSTurretLaser:
 TSCABALPlasmaFire:
 	Inherits: TSTurretLaser
 	Projectile: LaserZap
-		Color: 0040FF80
+		Color: 0040FF
 		SecondaryBeamColor: 80C0FF
 
 TSLaserTurretLaser:
@@ -505,10 +507,12 @@ TSLaserTurretLaser:
 	Report: lastur1.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 36
+		Width: 96
 		Duration: 8
+		Color: FF0000
+		GlowIntensity: 0.5
 		SecondaryBeam: true
-		SecondaryBeamWidth: 18
+		SecondaryBeamWidth: 48
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 16000
@@ -557,8 +561,17 @@ TSObeliskLaserFire:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	Projectile:
+		Width: 128
 		Duration: 38
+		Color: FF0000
+		SecondaryBeamWidth: 64
 		-HitAnim:
+		SourceFlare: true
+		SourceFlareColor: FF3B00D0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 52000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -582,9 +595,17 @@ TSLaserObeliskLaserFire:
 	-Warhead@Effect:
 	-Warhead@EffectAir:
 	Projectile: LaserZap
+		Width: 128
 		Duration: 38
-		SecondaryBeamWidth: 48
+		Color: FF0000
+		SecondaryBeamWidth: 64
 		-HitAnim:
+		SourceFlare: true
+		SourceFlareColor: FF3B00D0
+		SourceFlareCoreColor: FFFFFFFF
+		SourceFlareSize: 64, 72
+		SourceFlareWidth: 2.5
+		SourceFlareCoreSize: 5
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water

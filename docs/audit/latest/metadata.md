@@ -1,6 +1,6 @@
 # audit_metadata — tooltip/metadata rot (B7)
 
-Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
+Duplicate-tooltip groups: **30**, buildables missing Tooltip name: **0**
 
 
 ## M1 — same tooltip name on multiple buildables of one faction
@@ -16,6 +16,8 @@ Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
 | ra1_soviets | rifle infantry | ra1_allies_rifleinfantry, ra1_soviets_rifleinfantry |
 | ra2_allies | actor_fv.name | ra2_allies_ifv, ra2_allies_ifv_chrono, ra2_allies_ifv_hmg, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_repair |
 | ra2_allies | battle fortress | ra2_allies_battlefortress, ra2_allies_battlefortress_2, ra2_allies_battlefortress_3 |
+| ra2_allies | concrete barrier | ra2_allies_concretebarrier, ra2_awall |
+| ra2_soviets | concrete barrier | ra2_soviets_concretebarrier, ra2_swall |
 | schwarzermond | haunebu iii | schwarzermond_haunebuiii, schwarzermond_promotion_haunebuiii |
 | schwarzermond | laser tank | schwarzermond_lasertank, schwarzermond_promotion_lasertank |
 | schwarzermond | lunar tiger | schwarzermond_lunartiger, schwarzermond_promotion_lunartiger |
@@ -30,6 +32,7 @@ Duplicate-tooltip groups: **27**, buildables missing Tooltip name: **0**
 | wc2_orcs | orc gold mine | wc2_orcs_orcgoldmine, wc2_orcs_orcgoldmine_2 |
 | wc2_orcs | troll headhunter | wc2_orcs_trollheadhunter, wc2_orcs_upgrade_trollheadhunter |
 | wc2_orcs | warcraft 3 grunt | wc2_orcs_upgrade_warcraft3grunt, wc2_orcs_warcraft3grunt |
+| yuri | concrete barrier | ra2_ywall, yuri_concretebarrier |
 | yuri | slave miner | yuri_slaveminer, yuri_slaveminer_2 |
 | zerg | creep colony | zerg_creepcolony, zerg_creepcolony_2 |
 | zerg | spore colony | zerg_sporecolony, zerg_sporecolony_2 |

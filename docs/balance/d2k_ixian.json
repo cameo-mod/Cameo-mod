@@ -1,0 +1,5030 @@
+{
+ "ledger": "d2k_ixian",
+ "pack": "mods/cameo/ContentPacks/D2k/Ixian",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "farasha_drone.ixian": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "d2k_laser"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "farasha_drone.ixian"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Alfayrus",
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "215"
+    }
+   },
+   "ixian_airdrone": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "minrange": "1100",
+      "range": "6500",
+      "reloaddelay": "132",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyBomb",
+       "^D2KMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ixian_airdrone"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "6500",
+      "reloaddelay": "28",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^D2KMissile",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "d2k_air_drone_guns"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "6500",
+      "reloaddelay": "28",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyCannon",
+       "d2k_air_drone_guns",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "d2k_air_drone_guns_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "62500"
+    },
+    "name": "Ixian Air Drone",
+    "prerequisites": [
+     "~ixian_launchpad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "165"
+    }
+   },
+   "ixian_empbomber": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "1250",
+      "reloaddelay": "250",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "IxianEmpBomb"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 2.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "111000"
+    },
+    "name": "Ixian EMP Bomber",
+    "prerequisites": [
+     "~ixian_promotion_unlockixianempbomber",
+     "~ixian_launchpad",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "145"
+    }
+   },
+   "ixian_farasha": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "25",
+      "slot": "Armament@drones",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "d2k_dronelauncher"
+     },
+     {
+      "armament_name": "charge",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "125",
+      "slot": "Armament@charge",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "d2k_farasha_charge"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "50",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^HeavyFlameWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "ixian_farasha"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "50",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "50",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "ixian_farasha"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "d2k_farasha_aa"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "6000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Farasha",
+    "prerequisites": [
+     "~ixian_promotion_unlockfarasha",
+     "~ixian_hightechfactory",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "40"
+    }
+   },
+   "ixian_railgundrone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6034",
+      "reloaddelay": "24",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^TankDestroyerCannon",
+       "^RailgunWeapon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "IxRailgunDroneBullet"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Ixian Railgun Drone",
+    "prerequisites": [
+     "~ixian_promotion_unlockixrailgundrone",
+     "~ixian_hightechfactory"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "170"
+    }
+   },
+   "ixian_resonancedrone": {
+    "armaments": [
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "4500",
+      "reloaddelay": "5",
+      "slot": "Armament@repair",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ResonanceDroneRepair"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Ixian Resonance Drone",
+    "prerequisites": [
+     "~ixian_promotion_unlockixresonancedrone",
+     "~ixian_hightechfactory",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "125"
+    }
+   }
+  },
+  "buildings": {
+   "ixian_advancedheavyfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Ixian Advanced Heavy Factory",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_refineryixian"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "ixian_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Ixian Barracks",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_windtrap"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ixian_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Ixian Construction Yard",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ixian_gunturret": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7979",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "110mm_Gun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Gun Turret",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7979"
+    }
+   },
+   "ixian_hightechfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "High Tech Factory",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ixian_ixresearchcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Ix Research Center",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_outpost"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ixian_launchpad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Ixian Launchpad",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_outpost"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ixian_machinegunturret": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7394",
+      "reloaddelay": "22",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HMG_turret"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7394",
+      "reloaddelay": "33",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyCannon",
+       "HMG_turret",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HMG_turret_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Machine Gun Turret",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7394"
+    }
+   },
+   "ixian_munitionssilo": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Ixian Munitions Silo",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ixian_outpost": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Ixian Outpost",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_refineryixian"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ixian_refineryixian": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Refinery",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_windtrap"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "ixian_repairpad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Ixian Repair Pad",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_advancedheavyfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ixian_rocketturret": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "10684",
+      "reloaddelay": "42",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^FlakWeapon",
+       "^D2KMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_TowerMissile"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Rocket Turret",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_outpost"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "10684"
+    }
+   },
+   "ixian_starport": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Starport",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_ixresearchcenter",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "3c768"
+    }
+   },
+   "ixian_storagesilo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "Storage Silo",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_refineryixian"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   },
+   "ixian_stormlasher": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "11384",
+      "reloaddelay": "250",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^MagicWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "150000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "75000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "75",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "150000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "75",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "d2kStormLasher"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.325
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Storm Lasher",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "~ixian_promotion_unlockstormlasher",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "11384"
+    }
+   },
+   "ixian_supercomputer": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Ixian Supercomputer",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_ixresearchcenter",
+     "!ixian_supercomputer",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ixian_windtrap": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Wind Trap",
+    "prerequisites": [
+     "~ixian_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   }
+  },
+  "infantry": {
+   "heavy_inf.ixian": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "3800",
+      "reloaddelay": "69",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RashinanGun"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "3800",
+      "reloaddelay": "69",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "RashinanGun",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RashinanGun_upgrade"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "3800",
+      "reloaddelay": "69",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RashinanGun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "3800",
+      "reloaddelay": "69",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "RashinanGun",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RashinanGun_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "32000"
+    },
+    "name": "Rashidan",
+    "prerequisites": [
+     "~ixian_barracks",
+     "~ixian_promotion_unlockrashidan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
+    }
+   },
+   "ixian_lightinfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "4448",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LMG"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "4448",
+      "reloaddelay": "20",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SmallArms",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LMG_upgrade"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "4448",
+      "reloaddelay": "20",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LMG"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "4448",
+      "reloaddelay": "20",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@UpgradeGARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SmallArms",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "LMG_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "18000"
+    },
+    "name": "Ixian Light Infantry",
+    "prerequisites": [
+     "~ixian_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "52"
+    }
+   },
+   "ixian_rockettrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "6185",
+      "reloaddelay": "64",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "6185",
+      "reloaddelay": "64",
+      "slot": "Armament@garrisoned",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "12000"
+    },
+    "name": "Ixian Rocket Trooper",
+    "prerequisites": [
+     "~ixian_barracks",
+     "~!ixian_upgrade_twinbazooka"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "48"
+    }
+   },
+   "ixian_shockinfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "5818",
+      "reloaddelay": "45",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_ShockGunInf"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "5818",
+      "reloaddelay": "45",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_ShockGunInf"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "36000"
+    },
+    "name": "Shock Infantry",
+    "prerequisites": [
+     "~ixian_barracks",
+     "ixian_ixresearchcenter",
+     "~!ixian_promotion_unlockstorminfantry"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
+    }
+   },
+   "ixian_storminfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6275",
+      "reloaddelay": "66",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_StormGunInf"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6275",
+      "reloaddelay": "66",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_StormGunInf"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "44000"
+    },
+    "name": "Storm Infantry",
+    "prerequisites": [
+     "~ixian_barracks",
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_unlockstorminfantry"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "44"
+    }
+   },
+   "ixian_twinrockettrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightMissile",
+       "^FlakWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper1"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Grenade",
+       "^RailgunWeapon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper2"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament@garrisoned",
+      "versus_templates": [
+       "^LightMissile",
+       "^FlakWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper1"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6502",
+      "reloaddelay": "64",
+      "slot": "Armament@SECONDARYgarrisoned",
+      "versus_templates": [
+       "^Grenade",
+       "^RailgunWeapon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Rocket_Trooper2"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Health.HP",
+     "v": "24000"
+    },
+    "name": "Twin Rocket Trooper",
+    "prerequisites": [
+     "~ixian_barracks",
+     "~ixian_upgrade_twinbazooka"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/infantry.yaml#Mobile.Speed",
+     "v": "48"
+    }
+   }
+  },
+  "promotions": {
+   "ixian_promotion_unlockfarasha": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Farasha",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockixresonancedrone",
+     "!ixian_promotion_unlockfarasha",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockheavyixraider": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Heavy Ix Raider",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockheavyixraider",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockixianempbomber": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ixian EMP Bomber",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockixrailgundrone",
+     "!ixian_promotion_unlockixianempbomber",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockixprojector": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ix Projector",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockneocymek",
+     "!ixian_promotion_unlockixprojector",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockixrailgundrone": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ix Railgun Drone",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockixrailgundrone",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockixresonancedrone": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ix Resonance Drone",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockixianempbomber",
+     "!ixian_promotion_unlockixresonancedrone",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockixsiegetank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ix Siege Tank",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockheavyixraider",
+     "!ixian_promotion_unlockixsiegetank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockneocymek": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Neo Cymek",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "ixian_promotion_unlockixsiegetank",
+     "!ixian_promotion_unlockneocymek",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockrashidan": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Rashidan",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockrashidan",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockstorminfantry": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Storm Infantry",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockstorminfantry",
+     "ixian_promotion_unlockrashidan",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockstormlasher": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Storm Lasher",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockstormlasher",
+     "ixian_promotion_unlockstormraider",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "ixian_promotion_unlockstormraider": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Storm Raider",
+    "prerequisites": [
+     "~ixian_constructionyard",
+     "!ixian_promotion_unlockstormraider",
+     "ixian_promotion_unlockstorminfantry",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "ixian_upgrade_advancedixiantechnology": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "12500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Ixian Technology",
+    "prerequisites": [
+     "~ixian_ixresearchcenter",
+     "ixian_upgrade_personalshield",
+     "!ixian_upgrade_advancedixiantechnology"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ixian_upgrade_generalpurposearmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "General Purpose Armor",
+    "prerequisites": [
+     "~ixian_ixresearchcenter",
+     "!ixian_upgrade_generalpurposearmor"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ixian_upgrade_heavymissiles": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Heavy Missiles",
+    "prerequisites": [
+     "~ixian_ixresearchcenter",
+     "!ixian_upgrade_heavymissiles"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ixian_upgrade_personalshield": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Personal Shield",
+    "prerequisites": [
+     "~ixian_outpost",
+     "!ixian_upgrade_personalshield"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ixian_upgrade_reinforcedbarrel": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reinforced Barrel",
+    "prerequisites": [
+     "~ixian_ixresearchcenter",
+     "!ixian_upgrade_reinforcedbarrel"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ixian_upgrade_tungstenneedleguns": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tungsten Needle Guns",
+    "prerequisites": [
+     "~ixian_outpost",
+     "!ixian_upgrade_tungstenneedleguns"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ixian_upgrade_twinbazooka": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Twin Bazooka Upgrade",
+    "prerequisites": [
+     "~ixian_outpost",
+     "!ixian_upgrade_twinbazooka"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "team_upgrade.d2k_advanced_ixian_technology": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Ixian Technology"
+   }
+  },
+  "vehicles": {
+   "apparition.ixian": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "3333",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^FlakWeapon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "d2k_basq"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6666",
+      "reloaddelay": "25",
+      "slot": "Armament@aa",
+      "versus_templates": [
+       "d2k_basq"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "d2k_basq_AA"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "37500"
+    },
+    "name": "Apparition",
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "160"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "64"
+    }
+   },
+   "duelist_tank.ixian": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1400",
+      "range": "7000",
+      "reloaddelay": "140",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumFlameWeapon",
+       "^Grenade",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "14000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "14000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "7",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "DuelistTankCannon"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1400",
+      "range": "7000",
+      "reloaddelay": "64",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Guns",
+      "versus_templates": [
+       "^LightMissile",
+       "^Grenade",
+       "^SmallArms",
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HMG_Duelist"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1400",
+      "range": "7000",
+      "reloaddelay": "64",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "HMG_Duelist",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HMG_Duelist_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "240000"
+    },
+    "name": "Ix Duelist Tank",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "9"
+    }
+   },
+   "heavy_rocket_raider.ixian": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "6400",
+      "reloaddelay": "5",
+      "slot": "Armament@damage",
+      "versus_templates": [
+       "^D2KMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Bazooka2"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "40",
+      "requires": "!ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Guns",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RaiderGuns"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "40",
+      "requires": "ixian_upgrade_tungstenneedleguns",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyCannon",
+       "RaiderGuns",
+       "^HeavyMachineGunProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RaiderGuns_upgrade"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "85000"
+    },
+    "name": "Heavy Ix Raider",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~ixian_promotion_unlockheavyixraider"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "140"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "ixian_ixcombatsiege": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "8686",
+      "reloaddelay": "80",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_155mm3"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Ix Combat Siege",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_outpost"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "ixian_ixmissiletank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "10052",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^D2KMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "mtank_pri2"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Ix Missile Tank",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "ixian_ixprojector": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "20000",
+      "reloaddelay": "3",
+      "requires": "end_disable == 0",
+      "slot": "Armament@Anim",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "Damage",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "empdisable.anim"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "20000",
+      "reloaddelay": "4",
+      "requires": "end_disable >= 1",
+      "slot": "Armament@End",
+      "versus_templates": [
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedWeapon",
+        "type": "TargetDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "empdisable.end"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Ix Projector",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~ixian_promotion_unlockixprojector",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "20000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "40"
+    }
+   },
+   "ixian_ixsiegetank": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "12",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "12000",
+      "reloaddelay": "120",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_155mm2"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2050"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Ix Siege Tank",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~ixian_promotion_unlockixsiegetank",
+     "ixian_outpost"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "ixian_koda_tank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "5555",
+      "reloaddelay": "35",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "IxianCombatTankCannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "65000"
+    },
+    "name": "Koda Tank",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~!d2k_duelist_tank_upgrade"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
+    }
+   },
+   "ixian_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Ixian Mobile Construction Vehicle",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_repairpad"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "ixian_mongoose": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6183",
+      "reloaddelay": "64",
+      "slot": "Armament@primary",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^Chaingun",
+       "^FlakWeapon",
+       "^TankDestroyerCannon",
+       "^RailgunWeapon",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MongooseRocket"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Mongoose",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "ixian_neocymek": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6787",
+      "reloaddelay": "66",
+      "slot": "Armament@Cannon",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_StormGunCymek"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "6787",
+      "reloaddelay": "60",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
+       "^Grenade",
+       "^FlakWeapon",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_RocketsCymek"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "4500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "300000"
+    },
+    "name": "Neo Cymek",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~ixian_promotion_unlockneocymek",
+     "ixian_ixresearchcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "ixian_shockraider": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7756",
+      "reloaddelay": "100",
+      "slot": "Armament@damage",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_ShockGun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Shock Raider",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_ixresearchcenter",
+     "~!ixian_promotion_unlockstormraider"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "48"
+    }
+   },
+   "ixian_spiceharvester": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Ixian Spice Harvester",
+    "prerequisites": [
+     "~spice_refinery",
+     "~ixian_advancedheavyfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "9"
+    }
+   },
+   "ixian_stormraider": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7343",
+      "reloaddelay": "100",
+      "slot": "Armament@damage",
+      "versus_templates": [
+       "D2K_ShockGun"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_ShockGun2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "range": "7343",
+      "reloaddelay": "100",
+      "slot": "Armament@StormEffect",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^MagicWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "D2K_StormGun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.5,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Storm Raider",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "ixian_ixresearchcenter",
+     "~ixian_promotion_unlockstormraider"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "95"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "19"
+    }
+   },
+   "rocket_raider.ixian": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "minrange": "1100",
+      "range": "6400",
+      "reloaddelay": "5",
+      "slot": "Armament@damage",
+      "versus_templates": [
+       "^D2KMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "D2K_Bazooka2"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Ix Raider",
+    "prerequisites": [
+     "~ixian_advancedheavyfactory",
+     "~!ixian_promotion_unlockheavyixraider"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "160"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "64"
+    }
+   }
+  }
+ }
+}

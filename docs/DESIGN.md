@@ -712,6 +712,15 @@ cheapest provider wins).
 
 ## 12. Balance formula — the Cameo Armor System workbook
 
+**LAW (2026-07-18): balance numbers move ONLY through the balance
+pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
+`docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated
+`apply_balance.py`, `audit_balance_drift` enforcement in run_all).
+Hand-editing a stat in yaml is a red audit finding. The subsections
+below remain the FORMULA reference; the legacy workbook stays the
+design-judgment reference until the Phase-3 triage
+(`docs/balance/discrepancies.md`) completes.
+
 _Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
 working copy; design's private master is synced into it; sheets:
 Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,

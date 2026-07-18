@@ -1,0 +1,6087 @@
+{
+ "ledger": "tiberiansun_cabal",
+ "pack": "mods/cameo/ContentPacks/TiberianSun/CABAL",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "cabal_cyborg_assassin": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6309",
+      "reloaddelay": "18",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalWaspLaserStriker"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Cyborg Assassin",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_radar",
+     "~cabal_promotion_cyborgassassin"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "180"
+    }
+   },
+   "cabal_hunter_drone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "4096",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalOverkillDroneLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "15000"
+    },
+    "name": "Hunter Drone",
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "180"
+    }
+   },
+   "cabal_hunter_drone_carrier": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "25",
+      "slot": "Armament@drones",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "CabalOverkillDroneLauncher"
+     },
+     {
+      "armament_name": "charge",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "125",
+      "slot": "Armament@charge",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalOverkillCharge"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "50",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6400",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalOverkillLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "300000"
+    },
+    "name": "Hunter Drone Carrier",
+    "prerequisites": [
+     "~cabal_helipad",
+     "cabal_radar",
+     "~cabal_promotion_hunterdronecarrier"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "50"
+    }
+   },
+   "cabal_hunterkillermk1": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5318",
+      "reloaddelay": "24",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalHunterKillerLasers"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5740",
+      "reloaddelay": "32",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSHellfireTwin"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "35000"
+    },
+    "name": "Hunter Killer",
+    "prerequisites": [
+     "~cabal_helipad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "160"
+    }
+   },
+   "cabal_hunterkillermk1_elite": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalHunterKillerLasersE"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5740",
+      "reloaddelay": "32",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSHellfireTwin"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Super Hunter Killer",
+    "prerequisites": [
+     "~cabal_helipad",
+     "cabal_techcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "170"
+    }
+   },
+   "cabal_mothership": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6170",
+      "reloaddelay": "26",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalHunterKillerHeavyLaser"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "minrange": "1170",
+      "range": "5846",
+      "reloaddelay": "34",
+      "slot": "Armament@ROCKETS",
+      "versus_templates": [
+       "^TeslaWeapon",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^ArrowWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalMothershipRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Mothership",
+    "prerequisites": [
+     "~cabal_helipad",
+     "cabal_core",
+     "~cabal_promotion_mothership"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "50"
+    }
+   },
+   "cabal_orb_drone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6420",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalWaspLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Orb Drone",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_radar",
+     "!cabal_promotion_cyborgassassin"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "140"
+    }
+   },
+   "cabal_orb_drone_slave": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6420",
+      "reloaddelay": "20",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalWaspLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "25000"
+    },
+    "name": "Orb Drone",
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "140"
+    }
+   },
+   "cabal_overkill_gunship": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "40",
+      "slot": "Armament@LEFT",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12500",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalOverkillGunshipLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "40",
+      "slot": "Armament@RIGHT",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12500",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalOverkillGunshipLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Overkill Gunship",
+    "prerequisites": [
+     "~cabal_helipad",
+     "cabal_techcenter",
+     "~cabal_promotion_overkillgunship"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "150"
+    }
+   },
+   "cabal_repair_drone": {
+    "armaments": [
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6128",
+      "reloaddelay": "31",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-1600",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalEngineerRepairBeam"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Repair Drone",
+    "prerequisites": [
+     "~cabal_helipad",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "140"
+    }
+   }
+  },
+  "buildings": {
+   "cabal_core": {
+    "armaments": [
+     {
+      "armament_name": "superweapon",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "minrange": "1024",
+      "range": "10238976",
+      "reloaddelay": "50",
+      "slot": "Armament@HunterSeeker",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TSHSeekerLaunch"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "CABAL Core",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_techcenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "cabal_cyborgfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Cyborg Factory",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "cabal_helipad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "CABAL Helipad",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "cabal_mechfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "CABAL War Factory",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_refinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
+   "cabal_powerplant": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Health.HP",
+     "v": "160000"
+    },
+    "name": "CABAL Power Plant",
+    "prerequisites": [
+     "~cabal_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "cabal_radar": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Radar",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_refinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "cabal_refinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "CABAL Refinery",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "cabal_servicedepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Service Depot",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_mechfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "cabal_techcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "CABAL Tech Center",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   }
+  },
+  "defenses": {
+   "cabal_heavycabalobelisk": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^LaserWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "70000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCABALObeliskLaserFire"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "220000"
+    },
+    "name": "Heavy CABAL Obelisk",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "cabal_missilesilo": {
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "CABAL Missile Silo",
+    "prerequisites": [
+     "~cabal_core",
+     "cabal_core",
+     "!cabalnuke",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "cabal_obeliskofdarkness": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "12288",
+      "reloaddelay": "50",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "36000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "DarkObeliskLaser"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Obelisk of Darkness",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "12c0"
+    }
+   },
+   "cabal_pillbox": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "85000"
+    },
+    "name": "Pillbox",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6583"
+    }
+   },
+   "cabal_plasmaturret": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6487",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "TSTurretLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TSCABALPlasmaFire"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Plasma Turret",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "cabal_silo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Silo",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_refinery"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "cabal_stealthgenerator": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Stealth Generator",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "cabal_techcenter"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    }
+   }
+  },
+  "infantry": {
+   "cabal_ascended": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "60",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalAscendedRockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "60",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalAscendedRockets"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Ascended",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "~cabal_promotion_ascended"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_cyborgcommando": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasma"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaNeutron"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasma"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5219",
+      "reloaddelay": "90",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONEDUpgraded",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaNeutron"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Cyborg Commando",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_techcenter",
+     "!cabal_promotion_cyborgcommandov2"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_cyborgcommandov2": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaMk2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaMk2Neutron"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaMk2"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6264",
+      "reloaddelay": "90",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@GARRISONEDUpgraded",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TeslaWeapon",
+       "^MagicWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "50000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "25",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCommandoPlasmaMk2Neutron"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.5,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "400000"
+    },
+    "name": "Cyborg Commando V2",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_techcenter",
+     "~cabal_promotion_cyborgcommandov2"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_cyborginfantry": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5800",
+      "reloaddelay": "60",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCyborgChaingun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5800",
+      "reloaddelay": "60",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalCyborgChaingun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Cyborg Infantry",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "!cabal_promotion_devout"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_devout": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6200",
+      "reloaddelay": "45",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSDevoutChainguns"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6200",
+      "reloaddelay": "45",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSDevoutChainguns"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Devout",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "~cabal_promotion_devout"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_dissolver": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5142",
+      "reloaddelay": "4",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalDissolverSpray"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "725"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Dissolver",
+    "prerequisites": [
+     "~cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_eliminator800": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6167",
+      "reloaddelay": "32",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalEliminatorGatling"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6167",
+      "reloaddelay": "32",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalEliminatorGatling"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "85000"
+    },
+    "name": "Eliminator 800",
+    "prerequisites": [
+     "~cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_engineer": {
+    "armaments": [
+     {
+      "armament_name": "dummy",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "10000",
+      "slot": "Armament@Dummy",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "dummytargeting"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6128",
+      "reloaddelay": "31",
+      "slot": "Armament@REPAIRBEAM",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-1600",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalEngineerRepairBeam"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "CABAL Engineer",
+    "prerequisites": [
+     "~cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "cabal_enlighted": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^LaserWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "70000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCABALEnlightedLaser"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "slot": "Armament@Suicide",
+      "versus_templates": [
+       "DemoTruckTargeting"
+      ],
+      "warheads": [],
+      "weapon": "SuicideBomberTargeting"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^LaserWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TSLaserEffect"
+      ],
+      "warheads": [
+       {
+        "damage": "70000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "70000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "35",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCABALEnlightedLaser"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Enlighted",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "~cabal_promotion_devout"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "cabal_hackercyborg": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "6",
+      "requires": "end_disable == 0",
+      "slot": "Armament@Anim",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "Damage",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "TSCABALempdisable.anim"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "8",
+      "requires": "end_disable >= 1",
+      "slot": "Armament@End",
+      "versus_templates": [
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedWeapon",
+        "type": "TargetDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TSCABALempdisable.end"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "TSRobotHackingControl"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Hacker Cyborg",
+    "prerequisites": [
+     "~cabal_cyborgfactory"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "32"
+    }
+   },
+   "cabal_rocketcyborg": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8753",
+      "reloaddelay": "52",
+      "requires": "!cabal_upgrade_darkarmament",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalRocketCyborgRockets"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8753",
+      "reloaddelay": "52",
+      "requires": "cabal_upgrade_darkarmament",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalRocketCyborgRocketsUpgraded"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8753",
+      "reloaddelay": "52",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalRocketCyborgRockets"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Armor.Type",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Valued.Cost",
+     "v": "650"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Rocket Cyborg",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "!cabal_promotion_ascended"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.Speed",
+     "v": "40"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   }
+  },
+  "promotions": {
+   "cabal_promotion_ascended": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Ascended",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_ascended",
+     "cabal_promotion_devout",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_beholder": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Beholder",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_beholder",
+     "cabal_promotion_ascended",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_coredefender": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Core Defender",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_coredefender",
+     "cabal_promotion_widow",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_cyborgassassin": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Cyborg Assassin",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_cyborgassassin",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_cyborgcommandov2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Cyborg Commando V2",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_cyborgcommandov2",
+     "cabal_promotion_beholder",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_devout": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Devout",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_devout",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_hunterdronecarrier": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Hunter Drone Carrier",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_hunterdronecarrier",
+     "cabal_promotion_cyborgassassin",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_manticore": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Heavy Reaper",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_manticore",
+     "cabal_promotion_spidercnc4",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_mothership": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Mothership",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "rank1",
+     "cabal_promotion_overkillgunship",
+     "!cabal_promotion_mothership"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_overkillgunship": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Overkill Gunship",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_overkillgunship",
+     "cabal_promotion_hunterdronecarrier",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_spidercnc4": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Spider CNC4",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_spidercnc4",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "cabal_promotion_widow": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Widow",
+    "prerequisites": [
+     "~cabal_constructionyard",
+     "!cabal_promotion_widow",
+     "cabal_promotion_manticore",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "cabal_upgrade_backupsystems": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Backup Systems",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_backupsystems"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_cyberneticplating": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cybernetic Plating",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_cyberneticplating"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_darkarmament": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Dark Armament",
+    "prerequisites": [
+     "~cabal_radar",
+     "!cabal_upgrade_darkarmament"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "cabal_upgrade_dataworm": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Data Worm",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_dataworm"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_firewallprotocol": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Firewall Protocol",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_firewallprotocol"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_fullassimilation": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Full Assimilation",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_fullassimilation"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_handof": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "12500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Hand of CABAL",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_handof"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_mobilitymatrix": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Mobility Matrix",
+    "prerequisites": [
+     "~cabal_radar",
+     "!cabal_upgrade_mobilitymatrix"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "cabal_upgrade_networkedcombatprotocols": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "3500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Networked Combat Protocols",
+    "prerequisites": [
+     "~cabal_radar",
+     "!cabal_upgrade_networkedcombatprotocols"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "cabal_upgrade_neuraluplink": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Neural Uplink",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_neuraluplink"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_neutronnuclearcatalyst": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Neutron Nuclear Catalyst",
+    "prerequisites": [
+     "~cabal_radar",
+     "!cabal_upgrade_neutronnuclearcatalyst"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "cabal_upgrade_overchargedservos": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Overcharged Servos",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_overchargedservos"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_radarhack": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Radar Hack",
+    "prerequisites": [
+     "~cabal_radar",
+     "!cabal_upgrade_radarhack"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "cabal_upgrade_reclamationprotocols": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reclamation Protocols",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_reclamationprotocols"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "cabal_upgrade_reinforcedchassis": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reinforced Chassis",
+    "prerequisites": [
+     "~cabal_techcenter",
+     "!cabal_upgrade_reinforcedchassis"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "cabal_artilleryspider": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "minrange": "2315",
+      "range": "11580",
+      "reloaddelay": "64",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "42000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalArtilleryWalkerShell"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "minrange": "2315",
+      "range": "11580",
+      "reloaddelay": "64",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^TeslaChargedWeapon",
+       "^MagicWeapon",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "42000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "42000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "21",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalArtilleryWalkerShellUpgraded"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Artillery Spider",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "cabal_avatar": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6332",
+      "reloaddelay": "70",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalAvatarLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6332",
+      "reloaddelay": "70",
+      "slot": "Armament@RIGHT",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalAvatarLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "name": "Avatar",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_techcenter",
+     "!cabal_promotion_widow"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "25"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "10"
+    }
+   },
+   "cabal_beholder": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^TeslaWeapon",
+       "^RailgunWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalBeholderLaser"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Beholder",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_techcenter",
+     "~cabal_promotion_beholder"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "125"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "50"
+    }
+   },
+   "cabal_berserker": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "2048",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "74000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "37000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "37",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalBerserkerBlades"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.5,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "800000"
+    },
+    "name": "Berserker",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_core"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "cabal_constructionyard": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "name": "Construction Yard (CABAL)",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "cabal_coredefender": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6332",
+      "reloaddelay": "70",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "160000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "80",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCoreDefenderLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6332",
+      "reloaddelay": "70",
+      "slot": "Armament@RIGHT",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "160000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "80",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalCoreDefenderLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "15000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.3
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "2000000"
+    },
+    "name": "Core Defender",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_core",
+     "~cabal_promotion_coredefender"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "cabal_cyborgreaper": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5785",
+      "reloaddelay": "24",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalReaperMissiles"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8680",
+      "reloaddelay": "24",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalReaperMissilesAA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5785",
+      "reloaddelay": "250",
+      "slot": "Armament@TRAPGROUND",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "CabalReaperTrapGround"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "8680",
+      "reloaddelay": "250",
+      "slot": "Armament@TRAPAIR",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "CabalReaperTrapAir"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Cyborg Reaper",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "!cabal_promotion_manticore"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#ChangesHealth.Step",
+     "v": "30"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "26"
+    }
+   },
+   "cabal_heavyreaper": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6085",
+      "reloaddelay": "30",
+      "slot": "Armament",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalHeavyReaperMissiles"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "12",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "9130",
+      "reloaddelay": "30",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^CabalMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalHeavyReaperMissilesAA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6085",
+      "reloaddelay": "250",
+      "slot": "Armament@TRAP",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "CabalHeavyReaperTrap"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1650"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.5,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Heavy Reaper",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "~cabal_promotion_manticore"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "self_heal_step": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#ChangesHealth.Step",
+     "v": "30"
+    },
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "26"
+    }
+   },
+   "cabal_laserspider": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6147",
+      "reloaddelay": "90",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "44000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "22",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalSpiderLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Laser Spider",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "!cabal_promotion_spidercnc4"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "cabal_manticore": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5358",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalManticoreLaser"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5358",
+      "reloaddelay": "30",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^CabalManticoreMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalManticoreMissilesAA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Manticore",
+    "prerequisites": [
+     "~cabal_cyborgfactory",
+     "cabal_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "26"
+    }
+   },
+   "cabal_mantis": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "7082",
+      "reloaddelay": "40",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalMantisGun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "35000"
+    },
+    "name": "Mantis",
+    "prerequisites": [
+     "~cabal_mechfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "48"
+    }
+   },
+   "cabal_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "CABAL Mobile Construction Vehicle",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "cabal_ravager": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "3000",
+      "reloaddelay": "30",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalRavagerPlasma"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "3000",
+      "reloaddelay": "30",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalRavagerPlasmaNeutron"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Ravager",
+    "prerequisites": [
+     "~cabal_mechfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "130"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "52"
+    }
+   },
+   "cabal_scarabapc": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "4775"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Scarab APC",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "cabal_spidercnc4": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "7000",
+      "reloaddelay": "80",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "44000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "22",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalSpiderCnc4Laser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Spider CNC4",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "~cabal_promotion_spidercnc4"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "cabal_tarantula": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "5278",
+      "reloaddelay": "48",
+      "requires": "!cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CabalTarantulaCannon"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/tiberiansun.yaml",
+      "range": "6201",
+      "reloaddelay": "44",
+      "requires": "cabal_upgrade_neutronnuclearcatalyst",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "^TSCannonEffect",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TS120mm_bluenuke"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "110000"
+    },
+    "name": "Tarantula",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "70"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "14"
+    }
+   },
+   "cabal_tiberiumharvester": {
+    "armor": {
+     "src": "inherited",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Tiberium Harvester",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_refinery"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "12"
+    }
+   },
+   "cabal_widow": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
+      "range": "6813",
+      "reloaddelay": "40",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "CabalLegionGun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Valued.Cost",
+     "v": "3500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Widow",
+    "prerequisites": [
+     "~cabal_mechfactory",
+     "cabal_core",
+     "!cabal_promotion_coredefender"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   }
+  }
+ }
+}

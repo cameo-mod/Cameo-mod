@@ -13,11 +13,20 @@ japan_imperialscoutsman:
 	Valued:
 		Cost: 100
 	Mobile:
-		Speed: 55
+		Speed: 50
 	Health:
-		HP: 11000
+		HP: 20000
 	ChangesHealth@SelfHealing:
-		Step: 11
+		Step: 20
+	# SCOUT-CLASS BASELINE UNIT (Formula v2, design 2026-07-18): the living
+	# in-game reference — 20000 HP / 50 Speed / 5.0 Range / 4000 Damage /
+	# 50 Reload at Cost 100, O = P = Q = 100 by construction. The class
+	# knob pair is neutralized here: the 2x-health bake replaces the 50%
+	# damage reduction, and DPS comes entirely from the weapon.
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
 	RenderSprites:
 		Image: japanesesoldier
 		PlayerPalette: player
@@ -26,11 +35,11 @@ japan_imperialscoutsman:
 	Voiced:
 		VoiceSet: JapaneseVoice
 	Armament@PRIMARY: ##########
-		Weapon: CHGuardRifle
+		Weapon: japan_imperialscoutsman_rifle
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: CHGuardRifle
+		Weapon: japan_imperialscoutsman_rifle
 		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Weapon: CHGuardRifleWaveforce

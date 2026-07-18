@@ -1,0 +1,5493 @@
+{
+ "ledger": "redalert2_soviets",
+ "pack": "mods/cameo/ContentPacks/RedAlert2/Soviets",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "ra2_soviets_kirovairship": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARYRad",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "RA2KirovBomb",
+       "^RA2RadShell"
+      ],
+      "warheads": [
+       {
+        "damage": "48000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "48000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "24000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb_rad"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions && !ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARYFire",
+      "versus_templates": [
+       "RA2KirovBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb_fire"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && !ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARYTesla",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "RA2KirovBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "80000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb_tesla"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "(rank-elite && !ra2_soviets_upgrade_kirovatomicbombs) || (!rank-elite && ra2_soviets_upgrade_kirovatomicbombs)",
+      "slot": "Armament@PRIMARYNuclear",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "RA2KirovBomb"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "80000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb_nuclear"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2500",
+      "reloaddelay": "50",
+      "requires": "rank-elite && ra2_soviets_upgrade_kirovatomicbombs",
+      "slot": "Armament@PRIMARYNuclearELITE",
+      "versus_templates": [
+       "RA2KirovBomb_nuclear"
+      ],
+      "warheads": [
+       {
+        "damage": "100000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "100000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "HeavyBombFriendlyFire",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2KirovBomb_nuclear_E"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
+     "v": "800000"
+    },
+    "name": "Kirov Airship",
+    "prerequisites": [
+     "~ra2_soviets_warfactory",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Vehicle",
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "30"
+    }
+   },
+   "ra2_soviets_migbomber": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@rad",
+      "versus_templates": [
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "MigMissiles",
+       "^RA2RadShell"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles_rad"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@fire",
+      "versus_templates": [
+       "MigMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles_fire"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@tesla",
+      "versus_templates": [
+       "MigMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles_tesla"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "8600",
+      "reloaddelay": "50",
+      "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [
+       "MigMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissilesE"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8600",
+      "reloaddelay": "50",
+      "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITERad",
+      "versus_templates": [
+       "MigMissiles_tesla"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissilesE_tesla"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7600",
+      "reloaddelay": "50",
+      "requires": "!rank-elite",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "MigMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles_AA"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "8600",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@AAELITE",
+      "versus_templates": [
+       "MigMissilesE"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MigMissiles_AA_ELITE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
+     "v": "57500"
+    },
+    "name": "MiG Bomber",
+    "prerequisites": [
+     "~ra2_soviets_airfield",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "215"
+    }
+   },
+   "ra2_soviets_siegechopper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "4750",
+      "reloaddelay": "3",
+      "requires": "undeployed",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BlackHawkCannon"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "50",
+      "requires": "botmicro",
+      "slot": "Armament@DeployTargeter",
+      "versus_templates": [
+       "^deploytargeting"
+      ],
+      "warheads": [],
+      "weapon": "deploytargeting.5c0"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "11111",
+      "reloaddelay": "88",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
+      "slot": "Armament@Deployed",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mm"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "11111",
+      "reloaddelay": "88",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
+      "slot": "Armament@DeployedRad",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "RA160mm",
+       "^RA2RadShell"
+      ],
+      "warheads": [
+       {
+        "damage": "36000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mm_rad"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "11111",
+      "reloaddelay": "88",
+      "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions && deployed",
+      "slot": "Armament@DeployedFire",
+      "versus_templates": [
+       "RA160mm"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mm_fire"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "11111",
+      "reloaddelay": "88",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions && deployed",
+      "slot": "Armament@DeployedTesla",
+      "versus_templates": [
+       "RA160mm"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mm_tesla"
+     },
+     {
+      "armament_name": "deployed",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "12345",
+      "reloaddelay": "88",
+      "requires": "rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions && deployed",
+      "slot": "Armament@DeployedElite",
+      "versus_templates": [
+       "RA160mm",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mmE_elite"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "12345",
+      "reloaddelay": "88",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions && deployed",
+      "slot": "Armament@DeployedEliteRad",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "RA160mm_rad",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "36000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "36000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "18",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mmE_elite_rad"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "12345",
+      "reloaddelay": "88",
+      "requires": "rank-elite && ra2_soviets_doctrine_firemunitions && deployed",
+      "slot": "Armament@DeployedEliteFire",
+      "versus_templates": [
+       "RA160mm_fire",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mmE_elite_fire"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "2222",
+      "range": "12345",
+      "reloaddelay": "88",
+      "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions && deployed",
+      "slot": "Armament@DeployedEliteTesla",
+      "versus_templates": [
+       "RA160mm_tesla",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "60000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "30",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA160mmE_elite_tesla"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
+     "v": "55000"
+    },
+    "name": "Siege Chopper",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "150"
+    }
+   },
+   "ra2_soviets_transportkirov": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "4750",
+      "reloaddelay": "3",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BlackHawkCannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
+     "v": "265000"
+    },
+    "name": "Transport Kirov",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft",
+     "Vehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "35"
+    }
+   }
+  },
+  "buildings": {
+   "ra2_soviets_airfield": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Soviet Airfield",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    }
+   },
+   "ra2_soviets_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Soviet Barracks",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_teslareactor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ra2_soviets_battlelab": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Soviet Battle Lab",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_radar"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Soviet Construction Yard",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_industrialplant": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Industrial Plant",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_nuclearreactor": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
+     "v": "400000"
+    },
+    "name": "Nuclear Reactor",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra2_soviets_orerefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Soviet Ore Refinery",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_teslareactor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "ra2_soviets_radar": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Soviet Radar",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_orerefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_servicedepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Soviet Service Depot",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "ra2_soviets_teslareactor": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Tesla Reactor",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "ra2_soviets_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Soviet War Factory",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_orerefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   }
+  },
+  "defenses": {
+   "ra2_soviets_battlebunker": {
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "Battle Bunker",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6666"
+    }
+   },
+   "ra2_soviets_concretebarrier": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Concrete Barrier",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ]
+   },
+   "ra2_soviets_flakcannon": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "12936",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2TURRETFLAKAA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.225
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Flak Cannon",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_radar"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "12936"
+    }
+   },
+   "ra2_soviets_ironcurtain": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Iron Curtain",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_battlelab",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_nuclearmissilesilo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Nuclear Missile Silo",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_battlelab",
+     "!ra2nuke",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "ra2_soviets_sentrygun": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6577",
+      "reloaddelay": "14",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2vulcan"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.35
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
+     "v": "57000"
+    },
+    "name": "Sentry Gun",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6577"
+    }
+   },
+   "ra2_soviets_teslacoil": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CoilBolt"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "RA2CoilBolt"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CoilBolt2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@3",
+      "versus_templates": [
+       "RA2CoilBolt2"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CoilBolt3"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
+      "slot": "Armament@Charged1",
+      "versus_templates": [
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2OPCoilBolt1"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@Charged2",
+      "versus_templates": [
+       "RA2OPCoilBolt1"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2OPCoilBolt2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8842",
+      "reloaddelay": "3",
+      "requires": "((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@Charged3",
+      "versus_templates": [
+       "RA2OPCoilBolt2"
+      ],
+      "warheads": [
+       {
+        "damage": "64000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "32",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2OPCoilBolt3"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Tesla Coil",
+    "prerequisites": [
+     "~ra2_soviets_constructionyard",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "10000"
+    }
+   }
+  },
+  "infantry": {
+   "ra2_soviets_attackdog": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "DogJaw"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Armor.Type",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
+    },
+    "name": "Attack Dog",
+    "prerequisites": [
+     "~ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
+    }
+   },
+   "ra2_soviets_boris": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "8167",
+      "reloaddelay": "18",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BorisAKM"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "9167",
+      "reloaddelay": "18",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "BorisAKM"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BorisAKME"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "9167",
+      "reloaddelay": "18",
+      "requires": "!canflare",
+      "slot": "Armament@AntiBuilding",
+      "versus_templates": [
+       "BorisAKM"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BorisAKM2"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "3",
+      "burstdelays": "15",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "9167",
+      "reloaddelay": "60",
+      "requires": "canflare",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "MigTarget"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "8167",
+      "reloaddelay": "18",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BorisAKM"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "9167",
+      "reloaddelay": "18",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "BorisAKM"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BorisAKME"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "90000"
+    },
+    "name": "Boris",
+    "prerequisites": [
+     "~ra2_soviets_barracks",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "ra2_soviets_conscript": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "4434",
+      "reloaddelay": "18",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2M1Carbine"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5434",
+      "reloaddelay": "18",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2M1Carbine"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2M1CarbineE"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5724",
+      "reloaddelay": "50",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "RA2vulcan2"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2vulcan3"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "13000"
+    },
+    "name": "Conscript",
+    "prerequisites": [
+     "~ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "57"
+    }
+   },
+   "ra2_soviets_crazyivan": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "IvanAttach"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@aa",
+      "versus_templates": [
+       "IvanAttach"
+      ],
+      "warheads": [],
+      "weapon": "IvanAttachAir"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "10000"
+    },
+    "name": "Crazy Ivan",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
+    }
+   },
+   "ra2_soviets_desolator": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6444",
+      "reloaddelay": "45",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2RadBeamWeapon"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7444",
+      "reloaddelay": "45",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2RadBeamWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2RadBeamWeaponE"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6444",
+      "reloaddelay": "45",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "30000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "15",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2RadBeamWeapon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
+    },
+    "name": "Desolator",
+    "prerequisites": [
+     "~ra2_soviets_barracks",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "59"
+    }
+   },
+   "ra2_soviets_engineer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "ra2_soviets_flaktrooper": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "4900",
+      "reloaddelay": "17",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "RA2FLAKAG"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CRFlakGuyGun"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7834",
+      "reloaddelay": "26",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARYAA",
+      "versus_templates": [
+       "^RA2FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FLAKAA"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "4900",
+      "reloaddelay": "17",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "RA2FLAKAG"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CRFlakGuyGun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7834",
+      "reloaddelay": "26",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONEDAA",
+      "versus_templates": [
+       "^RA2FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FLAKAA"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "5900",
+      "reloaddelay": "17",
+      "requires": "rank-elite",
+      "slot": "Armament@PRIMARYE",
+      "versus_templates": [
+       "RA2CRFlakGuyGun"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CRFlakGuyGun_elite"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8834",
+      "reloaddelay": "26",
+      "requires": "rank-elite",
+      "slot": "Armament@PRIMARYAAE",
+      "versus_templates": [
+       "RA2FLAKAA"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FLAKAA_elite"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "5900",
+      "reloaddelay": "17",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDE",
+      "versus_templates": [
+       "RA2CRFlakGuyGun"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CRFlakGuyGun_elite"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8834",
+      "reloaddelay": "26",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDAAE",
+      "versus_templates": [
+       "RA2FLAKAA"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FLAKAA_elite"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "10000"
+    },
+    "name": "Flak Trooper",
+    "prerequisites": [
+     "~ra2_soviets_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
+    }
+   },
+   "ra2_soviets_teslatrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5222",
+      "reloaddelay": "100",
+      "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5777",
+      "reloaddelay": "100",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@PRIMARY2",
+      "versus_templates": [
+       "RA2PortaTesla"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6222",
+      "reloaddelay": "100",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@PRIMARY3",
+      "versus_templates": [
+       "RA2PortaTesla2"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla3"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "3333",
+      "reloaddelay": "25",
+      "slot": "Armament@TeslaCoilCharge",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "-1",
+        "tag": "Percentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2TeslaCoilCharge"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5222",
+      "reloaddelay": "100",
+      "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5777",
+      "reloaddelay": "100",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@GARRISONED2",
+      "versus_templates": [
+       "RA2PortaTesla"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla2"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6222",
+      "reloaddelay": "100",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@GARRISONED3",
+      "versus_templates": [
+       "RA2PortaTesla2"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PortaTesla3"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "48000"
+    },
+    "name": "Tesla Trooper",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "38"
+    }
+   }
+  },
+  "naval": {
+   "ra2_soviets_seascorpion": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "13500",
+      "reloaddelay": "17",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "^RA2FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SeaScorpionAA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5528",
+      "reloaddelay": "18",
+      "slot": "Armament@AG",
+      "versus_templates": [
+       "^SmallArms",
+       "^Grenade",
+       "^Chaingun",
+       "RA2FLAKAG"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FlakTrackGun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "actor_hyd.name",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "48"
+    }
+   }
+  },
+  "upgrades": {
+   "ra2_soviets_doctrine_conscription": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Conscription",
+    "prerequisites": [
+     "~ra2_soviets_radar",
+     "!ra2_soviets_doctrine_1",
+     "!global_conscription_buff"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_firemunitions": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Fire Munitions",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "ra2_soviets_doctrine_2",
+     "!ra2_soviets_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_harshenvironmentinfantryconditioning": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Harsh Environment Infantry Conditioning",
+    "prerequisites": [
+     "~ra2_soviets_radar",
+     "!ra2_soviets_doctrine_1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_heavyarmorplatings": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Heavy Armor Platings",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_doctrine_1",
+     "!ra2_soviets_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_nuclearmunitions": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Nuclear Munitions",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "ra2_soviets_doctrine_2",
+     "!ra2_soviets_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_reactivearmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Reactive Armor",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_doctrine_1",
+     "!ra2_soviets_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_shocktroopertraining": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Shock Trooper Training",
+    "prerequisites": [
+     "~ra2_soviets_radar",
+     "!ra2_soviets_doctrine_1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_tesladischargearmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tesla Discharge Armor",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_doctrine_1",
+     "!ra2_soviets_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_doctrine_teslamunitions": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tesla Munitions",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "ra2_soviets_doctrine_2",
+     "!ra2_soviets_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_upgrade_gastroburners": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Gastroburners",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "!ra2_soviets_upgrade_gastroburners"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_grindertanktreads": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Grinder Tank Treads",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "!ra2_soviets_upgrade_grindertanktreads"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_heavycannons": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Heavy Cannons",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "!ra2_soviets_upgrade_heavycannons"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_kirovarmorplatings": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Kirov Armor Platings",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "!ra2_soviets_upgrade_kirovarmorplatings"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_kirovatomicbombs": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Kirov Atomic Bombs",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "ra2_soviets_industrialplant",
+     "ra2_soviets_nuclearmissilesilo",
+     "!ra2_soviets_upgrade_kirovatomicbombs"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_terrordronesurprise": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Terror Drone Surprise",
+    "prerequisites": [
+     "~ra2_soviets_radar",
+     "!ra2_soviets_upgrade_terrordronesurprise"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "ra2_soviets_upgrade_teslacoilchargers": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tesla Coil Chargers",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "!ra2_soviets_upgrade_teslacoilchargers"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "ra2_soviets_upgrade_teslaoverload": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tesla Overload",
+    "prerequisites": [
+     "~ra2_soviets_battlelab",
+     "!ra2_soviets_upgrade_teslaoverload"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "ra2_soviets_apocalypsetank": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6992",
+      "reloaddelay": "63",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^RA2HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6992",
+      "reloaddelay": "63",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYRad",
+      "versus_templates": [
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "RA2120xmm",
+       "^RA2RadShell"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_rad"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6992",
+      "reloaddelay": "63",
+      "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@PRIMARYFire",
+      "versus_templates": [
+       "RA2120xmm"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_fire"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6992",
+      "reloaddelay": "63",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYTesla",
+      "versus_templates": [
+       "RA2120xmm"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_tesla"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6100",
+      "reloaddelay": "68",
+      "requires": "!rank-elite",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^RA2MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2MammothTusk"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [
+       "RA2120xmm",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_elite"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYELITERad",
+      "versus_templates": [
+       "RA2120xmm_rad",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_elite_rad"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@PRIMARYELITEFire",
+      "versus_templates": [
+       "RA2120xmm_fire",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_elite_fire"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7992",
+      "reloaddelay": "63",
+      "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITETesla",
+      "versus_templates": [
+       "RA2120xmm_tesla",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120xmm_elite_tesla"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7100",
+      "reloaddelay": "68",
+      "requires": "rank-elite",
+      "slot": "Armament@SECONDARYELITE",
+      "versus_templates": [
+       "RA2MammothTusk"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2MammothTusk_elite"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1750"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "350000"
+    },
+    "name": "Apocalypse Tank",
+    "prerequisites": [
+     "~ra2_soviets_warfactory",
+     "ra2_soviets_battlelab"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "55"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "11"
+    }
+   },
+   "ra2_soviets_flaktrack": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8292",
+      "reloaddelay": "25",
+      "requires": "!rank-elite",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "RA2FlakTrackGun",
+       "^RA2FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FlakTrackAAGun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5528",
+      "reloaddelay": "18",
+      "requires": "!rank-elite",
+      "slot": "Armament@AG",
+      "versus_templates": [
+       "^SmallArms",
+       "^Grenade",
+       "^Chaingun",
+       "RA2FLAKAG"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FlakTrackGun"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "9292",
+      "reloaddelay": "25",
+      "requires": "rank-elite",
+      "slot": "Armament@AAE",
+      "versus_templates": [
+       "RA2FlakTrackAAGun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FlakTrackAAGunE"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6528",
+      "reloaddelay": "18",
+      "requires": "rank-elite",
+      "slot": "Armament@AGE",
+      "versus_templates": [
+       "RA2FlakTrackGun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2FlakTrackGunE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Flak Track",
+    "prerequisites": [
+     "~ra2_soviets_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "95"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "19"
+    }
+   },
+   "ra2_soviets_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Soviet Mobile Construction Vehicle",
+    "prerequisites": [
+     "~ra2_soviets_warfactory",
+     "ra2_soviets_servicedepot"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "ra2_soviets_rhinoheavytank": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5374",
+      "reloaddelay": "54",
+      "requires": "!rank-elite && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "5374",
+      "reloaddelay": "54",
+      "requires": "!rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYRad",
+      "versus_templates": [
+       "^MediumChemicalWeapon",
+       "RA2120mm",
+       "^RA2RadShell"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_rad"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "5374",
+      "reloaddelay": "54",
+      "requires": "!rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@PRIMARYFire",
+      "versus_templates": [
+       "RA2120mm"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_fire"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "5374",
+      "reloaddelay": "54",
+      "requires": "!rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYTesla",
+      "versus_templates": [
+       "RA2120mm"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_tesla"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6374",
+      "reloaddelay": "54",
+      "requires": "rank-elite  && !ra2_soviets_doctrine_nuclearmunitions && !ra2_soviets_doctrine_firemunitions && !ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [
+       "RA2120mm",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_elite"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6374",
+      "reloaddelay": "54",
+      "requires": "rank-elite && ra2_soviets_doctrine_nuclearmunitions",
+      "slot": "Armament@PRIMARYELITERad",
+      "versus_templates": [
+       "RA2120mm_rad",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_elite_rad"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6374",
+      "reloaddelay": "54",
+      "requires": "rank-elite && ra2_soviets_doctrine_firemunitions",
+      "slot": "Armament@PRIMARYELITEFire",
+      "versus_templates": [
+       "RA2120mm_fire",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_elite_fire"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "6374",
+      "reloaddelay": "54",
+      "requires": "rank-elite && ra2_soviets_doctrine_teslamunitions",
+      "slot": "Armament@PRIMARYELITETesla",
+      "versus_templates": [
+       "RA2120mm_tesla",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2120mm_elite_tesla"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "850"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "130000"
+    },
+    "name": "Rhino Heavy Tank",
+    "prerequisites": [
+     "~ra2_soviets_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "85"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "17"
+    }
+   },
+   "ra2_soviets_terrordrone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "4000",
+      "reloaddelay": "40",
+      "requires": "!rank-elite",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2DroneJump"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "4000",
+      "reloaddelay": "10",
+      "requires": "rank-elite",
+      "slot": "Armament@Elite",
+      "versus_templates": [
+       "RA2DroneJump"
+      ],
+      "warheads": [
+       {
+        "damage": "100000",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2DroneJumpE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "10000"
+    },
+    "name": "Terror Drone",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "200"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "200"
+    }
+   },
+   "ra2_soviets_teslatank": {
+    "armaments": [
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "55",
+      "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2TankBolt"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "55",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@PRIMARY2",
+      "versus_templates": [
+       "RA2TankBolt"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2TankBolt2"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "range": "8500",
+      "reloaddelay": "55",
+      "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
+      "slot": "Armament@PRIMARY3",
+      "versus_templates": [
+       "RA2TankBolt2"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2TankBolt3"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Tesla Tank",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "ra2_soviets_v3rocketlauncher": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "minrange": "3000",
+      "range": "15000",
+      "reloaddelay": "50",
+      "requires": "!rank-elite",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "V3Launch"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "minrange": "4000",
+      "range": "20000",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "V3LaunchE"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "37500"
+    },
+    "name": "V3 Rocket Launcher",
+    "prerequisites": [
+     "~ra2_soviets_radar"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "ra2_soviets_warminer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA220mmrapid"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "War Miner",
+    "prerequisites": [
+     "~ra2_soviets_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   }
+  }
+ }
+}

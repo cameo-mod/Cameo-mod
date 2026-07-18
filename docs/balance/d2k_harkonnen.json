@@ -1,0 +1,76 @@
+{
+ "ledger": "d2k_harkonnen",
+ "pack": "mods/cameo/ContentPacks/D2k/Harkonnen",
+ "schema": 2,
+ "sections": {
+  "vehicles": {
+   "combat_tank.harkonnen": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "55",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "80mm_H"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Harkonnen Combat Tank",
+    "prerequisites": [
+     "~heavy.harkonnen_combat",
+     "~techlevel.medium",
+     "~!faction.guild",
+     "~!faction.corrino"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
+    }
+   }
+  }
+ }
+}

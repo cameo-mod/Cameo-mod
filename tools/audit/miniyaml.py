@@ -259,8 +259,17 @@ class Ruleset:
         if cache_key in self._resolve_cache:
             return self._resolve_cache[cache_key]
         node = lookup(name)
-        if node is None or name.lower() in {s.lower() for s in _stack}:
+        if node is None:
             return None
+        if name.lower() in {s.lower() for s in _stack}:
+            # cycle guard fired: everything computed above this point is
+            # TAINTED (missing this subtree) and must not be cached —
+            # otherwise the partial result poisons later resolutions of
+            # unrelated actors (order-dependent Wood/Concrete class bug,
+            # found 2026-07-18 by the balance pipeline's fixed-point test).
+            self._cycle_events = getattr(self, "_cycle_events", 0) + 1
+            return None
+        before = getattr(self, "_cycle_events", 0)
         acc: list[Node] = []
         index: dict[str, Node] = {}
         for child in node.children:
@@ -272,7 +281,8 @@ class Ruleset:
                 continue
             _merge_into(acc, index, [child])
         resolved = Node(node.key, node.value, acc, node.file, node.line)
-        self._resolve_cache[cache_key] = resolved
+        if getattr(self, "_cycle_events", 0) == before:
+            self._resolve_cache[cache_key] = resolved
         return resolved
 
     def inherit_depth(self, name: str, _seen: frozenset = frozenset()) -> int:

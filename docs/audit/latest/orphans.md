@@ -1,6 +1,6 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2365** — orphans: **350**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
+Live weapons: **2371** — orphans: **352**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **15**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
@@ -119,13 +119,12 @@ _none found_
 | HMG | mods/cameo/weapons/d2k.yaml |
 | HMG_tleilaxu | mods/cameo/weapons/d2k.yaml |
 | HMGh | mods/cameo/weapons/d2k.yaml |
-| HeavyAATankCannontkm | mods/cameo/weapons/tkm.yaml |
+| HeavyAATankCannontkm | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | HeliCrash | mods/cameo/weapons/weapons.yaml |
 | Horn | mods/cameo/weapons/weapons.yaml |
-| HueyFireMissiles | mods/cameo/weapons/tkm.yaml |
+| HueyFireMissiles | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | IFVAttach | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | IdolCannon | mods/cameo/weapons/starcraft.yaml |
-| IonCannon | mods/cameo/weapons/weapons.yaml |
 | IonPulseDischarge | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
 | JetExplosion | mods/cameo/weapons/weapons.yaml |
 | KirovExplode | mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml |
@@ -237,7 +236,7 @@ _none found_
 | SteelSupportSpawner2 | mods/cameo/weapons/redalert2mod.yaml |
 | SteelSupportSpawner3 | mods/cameo/weapons/redalert2mod.yaml |
 | SteelSupportSpawner4 | mods/cameo/weapons/redalert2mod.yaml |
-| TKMDroneExplode | mods/cameo/weapons/tkm.yaml |
+| TKMDroneExplode | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | TS105mm | mods/cameo/weapons/tiberiansun.yaml |
 | TS152mm | mods/cameo/weapons/tiberiansun.yaml |
 | TS155mm_bluenuke | mods/cameo/weapons/tiberiansun.yaml |
@@ -356,10 +355,13 @@ _none found_
 | ra1_allies_alliedsniper | mods/cameo/weapons/tiberiandawn.yaml |
 | ragal120mm | mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml |
 | supernova_missile_super | mods/cameo/weapons/outpost2.yaml |
-| tkmabramscannon | mods/cameo/weapons/tkm.yaml |
-| tkmheavyaaturret | mods/cameo/weapons/tkm.yaml |
-| tkmquadcannonmg | mods/cameo/weapons/tkm.yaml |
-| tkmt72cannon | mods/cameo/weapons/tkm.yaml |
+| tkmabramscannon | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmakap | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmheavyaaturret | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmm203 | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmquadcannonmg | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmstrykercryorockets | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
+| tkmt72cannon | mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml |
 | wc2_tower_axe | mods/cameo/weapons/warcraft2.yaml |
 | wc2tornadoTest | mods/cameo/weapons/warcraft2.yaml |
 

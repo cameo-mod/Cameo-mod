@@ -1,0 +1,166 @@
+{
+ "ledger": "d2k_atreides",
+ "pack": "mods/cameo/ContentPacks/D2k/Atreides",
+ "schema": 2,
+ "sections": {
+  "buildings": {
+   "d2k_silo.atreides": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "150"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "50000"
+    },
+    "name": "Storage Silo",
+    "prerequisites": [
+     "~construction_yard.atreides",
+     "refinery.atreides"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   },
+   "refinery.atreides": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "40000"
+    },
+    "name": "Spice Refinery",
+    "prerequisites": [
+     "~construction_yard.atreides",
+     "wind_trap.atreides"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "wind_trap.atreides": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Wind Trap",
+    "prerequisites": [
+     "~construction_yard.atreides"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4c0"
+    }
+   }
+  },
+  "vehicles": {
+   "combat_tank.atreides": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "80mm_A"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Combat Tank",
+    "prerequisites": [
+     "~faction.atreides",
+     "~techlevel.medium"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   }
+  }
+ }
+}

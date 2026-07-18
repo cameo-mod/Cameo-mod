@@ -1,0 +1,6563 @@
+{
+ "ledger": "starcraft_terran",
+ "pack": "mods/cameo/ContentPacks/StarCraft/Terran",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "terran_battlecruiser": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6800",
+      "reloaddelay": "38",
+      "slot": "Armament",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "^RailgunWeapon",
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "^HeavyAAWeapon",
+       "^HeavyBomb",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "BCLaser"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6800",
+      "reloaddelay": "38",
+      "requires": "terran_upgrade_yamatocannonandtacticaljumpupgrade",
+      "slot": "Armament@Yamato",
+      "versus_templates": [
+       "BCLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "BCYamatoCannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Battlecruiser",
+    "prerequisites": [
+     "~terran_starport",
+     "terran_sciencefacility"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "30"
+    }
+   },
+   "terran_dropship": {
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Dropship",
+    "prerequisites": [
+     "~terran_starport",
+     "~!terran_promotion_unlockspectreandmedivac"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "125"
+    }
+   },
+   "terran_medivac": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "range": "6000",
+      "reloaddelay": "10",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MedicHeal"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Medivac",
+    "prerequisites": [
+     "~terran_starport",
+     "~terran_promotion_unlockspectreandmedivac"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "125"
+    }
+   },
+   "terran_phobos": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "4",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "80",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^HeavyMissile",
+       "^HeavyCannon",
+       "^HeavyAAWeapon",
+       "^HeavyBomb",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "PhobosLaser"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6800",
+      "reloaddelay": "38",
+      "requires": "terran_upgrade_yamatocannonandtacticaljumpupgrade",
+      "slot": "Armament@Yamato",
+      "versus_templates": [
+       "BCLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "BCYamatoCannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "1000000"
+    },
+    "name": "Phobos",
+    "prerequisites": [
+     "~terran_starport",
+     "terran_sciencefacility",
+     "~terran_promotion_unlockphobos"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "25"
+    }
+   },
+   "terran_pythean": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7446",
+      "reloaddelay": "12",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JimRaynorMachineGun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "5500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.25
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "400000"
+    },
+    "name": "Pythean",
+    "prerequisites": [
+     "~terran_starport",
+     "~terran_promotion_unlockpythean"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "40"
+    }
+   },
+   "terran_raven": {
+    "armaments": [
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "5",
+      "slot": "Armament@repair",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RavenRepair"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Raven",
+    "prerequisites": [
+     "~terran_starport",
+     "~terran_promotion_unlockraven"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "100"
+    }
+   },
+   "terran_sciencevessel": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "260",
+      "slot": "Armament@IronCourtain",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "ScienceVesselDefenseMatrix"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "110",
+      "slot": "Armament@Irradiate",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "ScienceVesselIrradiate"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "360",
+      "slot": "Armament@EMP",
+      "versus_templates": [
+       "^TeslaChargedWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "100000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "50",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ScienceVesselEMP"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Science Vessel",
+    "prerequisites": [
+     "~terran_sciencefacility"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "66"
+    }
+   },
+   "terran_sundog": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6060",
+      "reloaddelay": "39",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "SunDogLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6060",
+      "reloaddelay": "39",
+      "slot": "Armament@SECONDARY1",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SunDogRockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6060",
+      "reloaddelay": "39",
+      "slot": "Armament@SECONDARY2",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SunDogRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "160000"
+    },
+    "name": "Sundog",
+    "prerequisites": [
+     "~terran_starport",
+     "~terran_promotion_unlocksundog"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "120"
+    }
+   },
+   "terran_valkyrie": {
+    "armaments": [
+     {
+      "burst": "8",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7380",
+      "reloaddelay": "67",
+      "slot": "Armament@SECONDARY1",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyAAWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ValkyrieRockets"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7380",
+      "reloaddelay": "67",
+      "slot": "Armament@SECONDARY2",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyAAWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ValkyrieRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Valkyrie",
+    "prerequisites": [
+     "~terran_starport",
+     "terran_armory",
+     "~!terran_promotion_unlockwyvern"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "140"
+    }
+   },
+   "terran_wraith": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "5076",
+      "reloaddelay": "32",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "WraithLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "5076",
+      "reloaddelay": "24",
+      "slot": "Armament@SECONDARY1",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "WraithRockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "5076",
+      "reloaddelay": "24",
+      "slot": "Armament@SECONDARY2",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "WraithRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Wraith",
+    "prerequisites": [
+     "~terran_starport",
+     "~!terran_promotion_unlocksundog"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "120"
+    }
+   },
+   "terran_wyvern": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "15",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "90",
+      "slot": "Armament@SECONDARY1",
+      "versus_templates": [
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon",
+       "^HeavyBomb",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyAAWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "WyvernRockets"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "15",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "90",
+      "slot": "Armament@SECONDARY2",
+      "versus_templates": [
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon",
+       "^HeavyBomb",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyAAWeapon",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyAAWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyAAWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "WyvernRockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Valued.Cost",
+     "v": "3600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
+     "v": "180000"
+    },
+    "name": "Wyvern",
+    "prerequisites": [
+     "~terran_starport",
+     "terran_armory",
+     "~terran_promotion_unlockwyvern"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "70"
+    }
+   }
+  },
+  "buildings": {
+   "terran_academy": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Academy",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_barracks"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "terran_armory": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
+     "v": "250000"
+    },
+    "name": "Armory",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_weaponsfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "terran_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Barracks",
+    "prerequisites": [
+     "~terran_commandcenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "terran_commandcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Command Center",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "terran_engineeringbay": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "625"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Engineering Bay",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_barracks"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    }
+   },
+   "terran_expandedstorage": {
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Expanded Storage",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "supplydepotupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "terran_refinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Refinery",
+    "prerequisites": [
+     "~terran_commandcenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "terran_sciencefacility": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Science Facility",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_weaponsfactory",
+     "terran_starport"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "terran_starport": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Starport",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_weaponsfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "terran_supplydepot": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Supply Depot",
+    "prerequisites": [
+     "~terran_commandcenter"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "terran_vespenegascollector": {
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vespene Gas Collector",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "sctrefineryupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "terran_weaponsfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Weapons Factory",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_barracks"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   }
+  },
+  "defenses": {
+   "terran_bunker": {
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
+     "v": "240000"
+    },
+    "name": "Bunker",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6666"
+    }
+   },
+   "terran_missilesilo": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Terran Missile Silo",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_sciencefacility",
+     "~techlevel.superweapons",
+     "!terran_missilesilo"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "terran_missileturret": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "11626",
+      "reloaddelay": "30",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MissileTurret"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "11626",
+      "reloaddelay": "30",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MissileTurret"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.225
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Missile Turret",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_engineeringbay"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "11626"
+    }
+   },
+   "terran_sentinel": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "range": "8181",
+      "reloaddelay": "20",
+      "requires": "!schwarzermond_upgrade_crystallens",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "NaxLaserT"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#Health.HP",
+     "v": "160000"
+    },
+    "name": "Sentinel",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "8181"
+    }
+   }
+  },
+  "infantry": {
+   "terran_firebat": {
+    "armaments": [
+     {
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "3400",
+      "reloaddelay": "28",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FirebatF"
+     },
+     {
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "3400",
+      "reloaddelay": "28",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FirebatF"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "3400",
+      "reloaddelay": "28",
+      "slot": "Armament@GARRISONED1",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FirebatF"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "3400",
+      "reloaddelay": "28",
+      "slot": "Armament@GARRISONED2",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FirebatF"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "52000"
+    },
+    "name": "Firebat",
+    "prerequisites": [
+     "~terran_academy",
+     "~!terran_promotion_unlockharakan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "52"
+    }
+   },
+   "terran_ghost": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "8428",
+      "reloaddelay": "44",
+      "slot": "Armament@lockdown",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "GhostSniper"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GhostSniperLockdown"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "8428",
+      "reloaddelay": "22",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GhostSniper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "8428",
+      "reloaddelay": "22",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GhostSniper"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Ghost",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~!terran_promotion_unlockspectreandmedivac"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "terran_harakan": {
+    "armaments": [
+     {
+      "burst": "20",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4185",
+      "reloaddelay": "47",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HarakanF"
+     },
+     {
+      "burst": "20",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4185",
+      "reloaddelay": "47",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HarakanF"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "20",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4185",
+      "reloaddelay": "47",
+      "slot": "Armament@GARRISONED1",
+      "versus_templates": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HarakanF"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "20",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4185",
+      "reloaddelay": "47",
+      "slot": "Armament@GARRISONED2",
+      "versus_templates": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HarakanF"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "78000"
+    },
+    "name": "Harakan",
+    "prerequisites": [
+     "~terran_academy",
+     "~terran_promotion_unlockharakan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "56"
+    }
+   },
+   "terran_jimraynor": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7446",
+      "reloaddelay": "12",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JimRaynorMachineGun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7446",
+      "reloaddelay": "12",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "JimRaynorMachineGun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Jim Raynor",
+    "prerequisites": [
+     "~terran_sciencefacility"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "65"
+    }
+   },
+   "terran_madcap": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4587",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MadcapGun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4587",
+      "reloaddelay": "25",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MadcapGun"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Madcap",
+    "prerequisites": [
+     "~terran_barracks",
+     "~terran_promotion_unlockmadcap"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "terran_marauder": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7010",
+      "reloaddelay": "60",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MarauderMissiles"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7010",
+      "reloaddelay": "60",
+      "slot": "Armament@GARRISONED1",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MarauderMissiles"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "90000"
+    },
+    "name": "Marauder",
+    "prerequisites": [
+     "~terran_academy"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
+    }
+   },
+   "terran_marine": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4444",
+      "reloaddelay": "26",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MarineMG"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4444",
+      "reloaddelay": "26",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MarineMG"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Marine",
+    "prerequisites": [
+     "~terran_barracks",
+     "~!terran_promotion_unlockmadcap"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "terran_medic": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@Flare",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MedicFlare"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "range": "6000",
+      "reloaddelay": "10",
+      "slot": "Armament@Heal",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MedicHeal"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "60",
+      "slot": "Armament@FlareGARRISONED",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MedicFlare"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Medic",
+    "prerequisites": [
+     "~terran_academy"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "4000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "terran_reaper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4375",
+      "reloaddelay": "22",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperPistols"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4375",
+      "reloaddelay": "22",
+      "slot": "Armament@SECONDARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperPistols"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "minrange": "875",
+      "range": "4375",
+      "reloaddelay": "45",
+      "slot": "Armament@Grenade",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperGrenade"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4375",
+      "reloaddelay": "22",
+      "slot": "Armament@GARRISONED1",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperPistols"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4375",
+      "reloaddelay": "22",
+      "slot": "Armament@GARRISONED2",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperPistols"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "minrange": "875",
+      "range": "4375",
+      "reloaddelay": "45",
+      "slot": "Armament@GARRISONEDGrenade",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ReaperGrenade"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 2.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Reaper",
+    "prerequisites": [
+     "~terran_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "120"
+    }
+   },
+   "terran_specter": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7922",
+      "reloaddelay": "66",
+      "slot": "Armament@lockdown",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "SpecterSniper"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SpecterSniperLockdown"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7922",
+      "reloaddelay": "33",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SpecterSniper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7922",
+      "reloaddelay": "33",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SpecterSniper"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Specter",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_promotion_unlockspectreandmedivac"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    }
+   }
+  },
+  "promotions": {
+   "terran_promotion_unlockcyclone": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Cyclone",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockmatador",
+     "!terran_promotion_unlockcyclone",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockgoliathmk2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Goliath Mk2",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockcyclone",
+     "!terran_promotion_unlockgoliathmk2",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockharakan": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Harakan",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockmadcap",
+     "!terran_promotion_unlockharakan",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockmadcap": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Madcap",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "!terran_promotion_unlockmadcap",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockmatador": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Matador",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "!terran_promotion_unlockmatador",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockphobos": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Phobos",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockwyvern",
+     "!terran_promotion_unlockphobos",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockpythean": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Pythean",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockspectreandmedivac",
+     "!terran_promotion_unlockpythean",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockraven": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Raven",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlocksundog",
+     "!terran_promotion_unlockraven",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockspectreandmedivac": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Spectre and Medivac",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockharakan",
+     "!terran_promotion_unlockspectreandmedivac",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlocksundog": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Sundog",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "!terran_promotion_unlocksundog",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockwarhound": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Warhound",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockgoliathmk2",
+     "!terran_promotion_unlockwarhound",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "terran_promotion_unlockwyvern": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Wyvern",
+    "prerequisites": [
+     "~terran_commandcenter",
+     "terran_promotion_unlockraven",
+     "!terran_promotion_unlockwyvern",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "terran_upgrade_advancedsiegemode": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Advanced Siege Mode",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~!terran_upgrade_advancedsiegemode"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_cloakupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Cloak Upgrade",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~!terran_upgrade_cloakupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_infantryarmorlevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infantry Armor Level 1",
+    "prerequisites": [
+     "~terran_engineeringbay",
+     "~!terran_upgrade_infantryarmorlevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_infantryarmorlevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infantry Armor Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_infantryarmorlevel1",
+     "~!terran_upgrade_infantryarmorlevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_infantryweaponslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infantry Weapons Level 1",
+    "prerequisites": [
+     "~terran_engineeringbay",
+     "~!terran_upgrade_infantryweaponslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_infantryweaponslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infantry Weapons Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_infantryweaponslevel1",
+     "~!terran_upgrade_infantryweaponslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_shipplatinglevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ship Plating Level 1",
+    "prerequisites": [
+     "~terran_armory",
+     "~!terran_upgrade_shipplatinglevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_shipplatinglevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ship Plating Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_shipplatinglevel1",
+     "~!terran_upgrade_shipplatinglevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_shipweaponslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ship Weapons Level 1",
+    "prerequisites": [
+     "~terran_armory",
+     "~!terran_upgrade_shipweaponslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_shipweaponslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ship Weapons Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_shipweaponslevel1",
+     "~!terran_upgrade_shipweaponslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_stimpack": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Stim Pack",
+    "prerequisites": [
+     "~terran_academy",
+     "~!terran_upgrade_stimpack"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_u238shells": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "U-238 Shells",
+    "prerequisites": [
+     "~terran_academy",
+     "~!terran_upgrade_u238shells"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_upgradesupplydepotlevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgrade Supply Depot Level 1",
+    "prerequisites": [
+     "~terran_engineeringbay",
+     "~!terran_upgrade_upgradesupplydepotlevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_upgradesupplydepotlevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Upgrade Supply Depot Level 2",
+    "prerequisites": [
+     "~terran_armory",
+     "terran_upgrade_upgradesupplydepotlevel1",
+     "~!terran_upgrade_upgradesupplydepotlevel2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_vehicleplatinglevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vehicle Plating Level 1",
+    "prerequisites": [
+     "~terran_armory",
+     "~!terran_upgrade_vehicleplatinglevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_vehicleplatinglevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vehicle Plating Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_vehicleplatinglevel1",
+     "~!terran_upgrade_vehicleplatinglevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_vehicleweaponslevel1": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vehicle Weapons Level 1",
+    "prerequisites": [
+     "~terran_armory",
+     "~!terran_upgrade_vehicleweaponslevel1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "terran_upgrade_vehicleweaponslevel2": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Vehicle Weapons Level 2",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_upgrade_vehicleweaponslevel1",
+     "~!terran_upgrade_vehicleweaponslevel2"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "terran_upgrade_yamatocannonandtacticaljumpupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Yamato Cannon and Tactical Jump Upgrade",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~!terran_upgrade_yamatocannonandtacticaljumpupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "terran_cyclone": {
+    "armaments": [
+     {
+      "burst": "6",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7320",
+      "reloaddelay": "35",
+      "requires": "!lockedon",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumMissile",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CycloneRockets"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "35",
+      "requires": "lockedon",
+      "slot": "Armament@lockedon",
+      "versus_templates": [
+       "CycloneRockets"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "CycloneRocketsLockOn"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "90000"
+    },
+    "name": "Cyclone",
+    "prerequisites": [
+     "~terran_engineeringbay",
+     "~terran_promotion_unlockcyclone"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "115"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "23"
+    }
+   },
+   "terran_goliath": {
+    "armaments": [
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "16",
+      "slot": "Armament@G1",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMG"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "16",
+      "slot": "Armament@G2",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMG"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "33",
+      "slot": "Armament@A1",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathRockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6000",
+      "reloaddelay": "33",
+      "slot": "Armament@A2",
+      "versus_templates": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathRockets"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Goliath",
+    "prerequisites": [
+     "~terran_armory",
+     "~!terran_promotion_unlockgoliathmk2"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "terran_goliathmk2": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6479",
+      "reloaddelay": "34",
+      "slot": "Armament@G1",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMk2MG"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6479",
+      "reloaddelay": "34",
+      "slot": "Armament@G2",
+      "versus_templates": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMk2MG"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6479",
+      "reloaddelay": "40",
+      "slot": "Armament@A1",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMk2Rockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6479",
+      "reloaddelay": "40",
+      "slot": "Armament@A2",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "GoliathMk2Rockets"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "175000"
+    },
+    "name": "Goliath Mk2",
+    "prerequisites": [
+     "~terran_armory",
+     "~terran_promotion_unlockgoliathmk2"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "terran_matador": {
+    "armaments": [
+     {
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "5938",
+      "reloaddelay": "18",
+      "requires": "undeployed",
+      "slot": "Armament",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "MatadorFlamer"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6590",
+      "reloaddelay": "39",
+      "requires": "deployed",
+      "slot": "Armament@DEPLOYED",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "MatadorLaser"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Matador",
+    "prerequisites": [
+     "~terran_weaponsfactory",
+     "~terran_promotion_unlockmatador"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "terran_mobilecommandcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Terran Mobile Command Center",
+    "prerequisites": [
+     "~terran_engineeringbay"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "terran_scv": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "range": "1500",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^WorkerAttack"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SCVAttack"
+     },
+     {
+      "armament_name": "repair",
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "range": "2000",
+      "reloaddelay": "5",
+      "slot": "Armament@repair",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SCVRepair"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "45000"
+    },
+    "name": "SCV",
+    "prerequisites": [
+     "~terran_refinery"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "100"
+    }
+   },
+   "terran_siegetank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "6114",
+      "reloaddelay": "37",
+      "requires": "undeployed",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SiegeTankCannon"
+     },
+     {
+      "armament_name": "deployed",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "minrange": "2355",
+      "range": "11775",
+      "reloaddelay": "148",
+      "requires": "deployed",
+      "slot": "Armament@DEPLOYED",
+      "versus_templates": [
+       "^NuclearWarhead",
+       "^LightMissile",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "NuclearWarhead",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "NuclearWarheadPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "HeavyFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SiegeTankSiegeCannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Siege Tank",
+    "prerequisites": [
+     "~terran_engineeringbay"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "terran_vulture": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "4800",
+      "reloaddelay": "25",
+      "slot": "Armament",
+      "versus_templates": [
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VultureGrenade"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Vulture",
+    "prerequisites": [
+     "~terran_weaponsfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "125"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "50"
+    }
+   },
+   "terran_warhound": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "0",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7156",
+      "reloaddelay": "44",
+      "slot": "Armament@Cannon",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^Chaingun",
+       "^ShrapnelWeapon",
+       "^RA2HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SCTyr"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "range": "7156",
+      "reloaddelay": "84",
+      "slot": "Armament@Rockets",
+      "versus_templates": [
+       "^Grenade",
+       "^FlakWeapon",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SCTyrAA"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Valued.Cost",
+     "v": "4500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
+     "v": "300000"
+    },
+    "name": "Warhound",
+    "prerequisites": [
+     "~terran_sciencefacility",
+     "~terran_promotion_unlockwarhound"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "45"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   }
+  }
+ }
+}

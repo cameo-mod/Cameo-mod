@@ -546,7 +546,7 @@ _none found_
 | faction | fluent/total tooltips | coverage |
 |---|---|---|
 | asianalliance | 0/75 | 0% |
-| cabal | 0/82 | 0% |
+| cabal | 0/83 | 0% |
 | eden | 0/44 | 0% |
 | forgotten | 77/79 | 97% |
 | futuretech | 0/58 | 0% |
@@ -560,7 +560,7 @@ _none found_
 | ra1_allies | 1/73 | 1% |
 | ra1_soviets | 2/117 | 1% |
 | ra2_allies | 7/69 | 10% |
-| ra2_soviets | 1/60 | 1% |
+| ra2_soviets | 1/59 | 1% |
 | schwarzermond | 0/61 | 0% |
 | steelconsortium | 0/62 | 0% |
 | td_gdi | 1/68 | 1% |
@@ -571,6 +571,6 @@ _none found_
 | ts_nod | 1/49 | 2% |
 | wc2_humans | 0/70 | 0% |
 | wc2_orcs | 0/61 | 0% |
-| yuri | 2/67 | 2% |
+| yuri | 2/66 | 3% |
 | zerg | 0/76 | 0% |
 

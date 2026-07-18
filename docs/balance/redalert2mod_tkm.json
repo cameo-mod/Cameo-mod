@@ -1,0 +1,6555 @@
+{
+ "ledger": "redalert2mod_tkm",
+ "pack": "mods/cameo/ContentPacks/RedAlert2Mod/TKM",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "tkm_iroquois": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4783",
+      "reloaddelay": "7",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HueyGun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4783",
+      "reloaddelay": "14",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@Missiles",
+      "versus_templates": [
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4",
+        "tag": "MediumMissile",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HueyMissiles"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "minrange": "553",
+      "range": "5528",
+      "reloaddelay": "16",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HueyCryoMissiles"
+     },
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "minrange": "553",
+      "range": "5528",
+      "reloaddelay": "16",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HueyTwinMissiles"
+     },
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "minrange": "553",
+      "range": "5528",
+      "reloaddelay": "16",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HueyTwinMissiles"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Helicopter"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Iroquois",
+    "prerequisites": [
+     "~tkm_airpad"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "120"
+    }
+   },
+   "tkm_viper": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6271",
+      "reloaddelay": "50",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
+      "slot": "Armament@BOMBS",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ViperMissiles"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6271",
+      "reloaddelay": "50",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "ViperMissiles",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ViperMissilesCryo"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6271",
+      "reloaddelay": "50",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "ViperMissiles"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ViperMissilesTwin"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "ViperMissiles",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ViperMissilesFire"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
+     "v": "1750"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Viper",
+    "prerequisites": [
+     "~tkm_airpad",
+     "tkm_techcenter",
+     "~tkm_promotion_unlockviper"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "150"
+    }
+   },
+   "tkmdrone": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
+     "v": "25"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
+     "v": "10000"
+    },
+    "name": "Drone",
+    "prerequisites": [
+     "~unbuildable"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#RevealsShroud.Range",
+     "v": "7c0"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "150"
+    }
+   },
+   "tkmsuicidedrone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "25",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "TKMDroneExplode"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMDroneExplosion"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
+     "v": "100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Health.HP",
+     "v": "25000"
+    },
+    "name": "Wraith Drone",
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "200"
+    }
+   }
+  },
+  "buildings": {
+   "tkm_airpad": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "375"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Air Pad",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "tkm_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "TKM Barracks",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "tkm_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "TKM Construction Yard",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "tkm_observationvan": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "TKM Observation Van",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "tkm_orerefinery": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "TKM Ore Refinery",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_powerplant"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    }
+   },
+   "tkm_powerplant": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Power Plant",
+    "prerequisites": [
+     "~tkm_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "tkm_supportlabor": {
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "TKM Support Labor",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkmrefineryupgradeavailable"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
+   },
+   "tkm_techcenter": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "TKM Tech Center",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "tkm_trenchtruckdeployed": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "TKM Trench Truck (Deployed)",
+    "prerequisites": [
+     "~unbuildable"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "6720"
+    }
+   },
+   "tkm_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "War Factory",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_orerefinery"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   }
+  },
+  "defenses": {
+   "tkm_bunker": {
+    "armaments": [
+     {
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7496",
+      "reloaddelay": "41",
+      "requires": "!td_gdi_upgrade_armorpiercingbullets",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2Chaingun",
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmbunkmg"
+     },
+     {
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "6720",
+      "reloaddelay": "22",
+      "requires": "td_gdi_upgrade_armorpiercingbullets",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HighVAP"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "TKM Bunker",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "7496"
+    }
+   },
+   "tkm_quadturretbunker": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "11604",
+      "reloaddelay": "5",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMAATurretCannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
+     "v": "85000"
+    },
+    "name": "TKM Quad Turret Bunker",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6720"
+    }
+   },
+   "tkm_tankturretbunker": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "8683",
+      "reloaddelay": "28",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmturretcannon"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
+     "v": "800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "TKM Tank Turret Bunker",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "8683"
+    }
+   },
+   "tkmratflakdeployed": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "10929",
+      "reloaddelay": "32",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "FlakbusAA"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Flak Bus (Deployed)",
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6720"
+    }
+   },
+   "tkmtrenchtankdeployed": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "11071",
+      "reloaddelay": "36",
+      "slot": "Armament",
+      "versus_templates": [
+       "tkmtrenchcannon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtrenchdepcannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "TKM Trench Tank (Deployed)",
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6720"
+    }
+   }
+  },
+  "infantry": {
+   "tkm_engineer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "requires": "tkm_upgrade_titanarsenalupgrade",
+      "slot": "Armament@HEAL",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Heal"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "requires": "tkm_upgrade_titanarsenalupgrade",
+      "slot": "Armament@GARRISONEDHEAL",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Heal"
+     },
+     {
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "requires": "tkm_upgrade_titanarsenalupgrade",
+      "slot": "Armament@REPAIR",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Repair"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "75",
+      "requires": "tkm_upgrade_titanarsenalupgrade",
+      "slot": "Armament@GARRISONEDREPAIR",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Repair"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~tkm_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "tkm_juggernaut": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4490",
+      "reloaddelay": "8",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkm_juggernaut"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "6",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4792",
+      "reloaddelay": "9",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARYUPGRADE",
+      "versus_templates": [
+       "^RA2Grenade",
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmjuggap"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4490",
+      "reloaddelay": "8",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkm_juggernaut"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "6",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4792",
+      "reloaddelay": "9",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "^RA2Grenade",
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmjuggap"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Armor.Type",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "650"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "36000"
+    },
+    "name": "Juggernaut",
+    "prerequisites": [
+     "~tkm_barracks",
+     "tkm_promotion_unlockjuggernaut",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
+    }
+   },
+   "tkm_marine": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5385",
+      "reloaddelay": "16",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmm16"
+     },
+     {
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5385",
+      "reloaddelay": "16",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARYUPGRADE",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmm16ap"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5385",
+      "reloaddelay": "16",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmm16"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5385",
+      "reloaddelay": "16",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmm16ap"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Marine",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_rifleman": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5753",
+      "reloaddelay": "75",
+      "requires": "!tkm_upgrade_semiautoriflesupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmrifle"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6c512",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_semiautoriflesupgrade",
+      "slot": "Armament@PRIMARYUPGRADE",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmriflemansemiautorifle"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5753",
+      "reloaddelay": "75",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmrifle"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "120"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "16000"
+    },
+    "name": "Rifleman",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~!tkm_upgrade_titanarsenalupgrade",
+     "~!tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_rocketeer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmrockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmfirerockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "range": "6368",
+      "reloaddelay": "63",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "Rockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@GARRISONEDTITAN",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@GARRISONEDBEREZKA",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@GARRISONEDNATO",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmfirerockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "9000"
+    },
+    "name": "Rocketeer",
+    "prerequisites": [
+     "~tkm_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_sniper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "10021",
+      "reloaddelay": "55",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "44000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "22",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmawp"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "10021",
+      "reloaddelay": "55",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "44000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "22",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmawp"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "Sniper",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~tkm_upgrade_berezkaarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_spetsnaz": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5750",
+      "reloaddelay": "10",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmsmg"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5750",
+      "reloaddelay": "10",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmsmg"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "2000",
+      "reloaddelay": "20",
+      "slot": "Armament@shipc4",
+      "versus_templates": [
+       "TanyaAttach"
+      ],
+      "warheads": [],
+      "weapon": "SEALAttach"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Spetsnaz",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~tkm_upgrade_titanarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
+    }
+   },
+   "tkm_thermonaut": {
+    "armaments": [
+     {
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "3204",
+      "reloaddelay": "32",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ThermoF"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "13",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "3204",
+      "reloaddelay": "32",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "ThermoF"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Thermonaut",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~tkm_upgrade_natoarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_trooper": {
+    "armaments": [
+     {
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5594",
+      "reloaddelay": "31",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmak"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "5",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5594",
+      "reloaddelay": "31",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SmallArms"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmak"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5621",
+      "reloaddelay": "80",
+      "requires": "tkm_upgrade_gp25upgrade",
+      "slot": "Armament@gp25",
+      "versus_templates": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmgp25"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5621",
+      "reloaddelay": "80",
+      "requires": "tkm_upgrade_gp25upgrade",
+      "slot": "Armament@GARRISONEDM203",
+      "versus_templates": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmgp25"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "16000"
+    },
+    "name": "Trooper",
+    "prerequisites": [
+     "~tkm_barracks",
+     "~tkm_upgrade_titanarsenalupgrade"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "60"
+    }
+   },
+   "tkm_von": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7879",
+      "reloaddelay": "100",
+      "slot": "Armament@lockdown",
+      "versus_templates": [
+       "^TeslaChargedWeapon",
+       "VonSniperAP"
+      ],
+      "warheads": [
+       {
+        "damage": "32000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "TeslaChargedWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "32000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "16",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VonSniperLockdown"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7879",
+      "reloaddelay": "25",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VonSniper"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7879",
+      "reloaddelay": "50",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARYUPGRADE",
+      "versus_templates": [
+       "VonSniper"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VonSniperAP"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7879",
+      "reloaddelay": "25",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VonSniper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7879",
+      "reloaddelay": "50",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@GARRISONEDUPGRADE",
+      "versus_templates": [
+       "VonSniper"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VonSniperAP"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "3000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Von",
+    "prerequisites": [
+     "~tkm_barracks",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "tkmvan": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "12402",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VanSniper"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "12402",
+      "reloaddelay": "30",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "VanSniper"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
+     "v": "3500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
+     "v": "40000"
+    },
+    "name": "Van",
+    "prerequisites": [
+     "~tkm_barracks",
+     "tkm_observationvan",
+     "~!tkm_von",
+     "~disabled"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
+     "v": "75"
+    }
+   },
+   "tkmworker": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "1500",
+      "reloaddelay": "30",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Shovel"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "1500",
+      "reloaddelay": "30",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Shovel"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "name": "Worker",
+    "prerequisites": [
+     "~yuri_barracks"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "60"
+    }
+   }
+  },
+  "promotions": {
+   "tkm_promotion_unlockbattlebus": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Battle Bus",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockjuggernaut",
+     "!tkm_promotion_unlockbattlebus",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockdronepodtruck": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Drone Pod Truck",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockviper",
+     "!tkm_promotion_unlockdronepodtruck",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockflakbus": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Flak Bus",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlocktrenchtank",
+     "!tkm_promotion_unlockflakbus",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockjuggernaut": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Juggernaut",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockmedictruck",
+     "!tkm_promotion_unlockjuggernaut",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockmedictruck": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Medic Truck",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "!tkm_promotion_unlockmedictruck",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockradartruck": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Radar Truck",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "!tkm_promotion_unlockradartruck",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockrepairtruck": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Repair Truck",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "!tkm_promotion_unlockrepairtruck",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockt30": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock T30",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockdronepodtruck",
+     "!tkm_promotion_unlockt30",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockthebigshiee": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock the Big Shiee",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockflakbus",
+     "!tkm_promotion_unlockthebigshiee",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockthesandmarine": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock the Sand Marine",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockbattlebus",
+     "!tkm_promotion_unlockthesandmarine",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlocktrenchtank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Trench Tank",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockrepairtruck",
+     "!tkm_promotion_unlocktrenchtank",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "tkm_promotion_unlockviper": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Viper",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_promotion_unlockradartruck",
+     "!tkm_promotion_unlockviper",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   }
+  },
+  "upgrades": {
+   "tkm_upgrade_berezkaarsenalupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Berezka Arsenal Upgrade",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "~!tkm_upgrade_berezkaarsenalupgrade",
+     "~!tkm_upgrade_titanarsenalupgrade",
+     "~!tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_cryorocketsupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "EMP Rockets Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_cryorocketsupgrade",
+     "tkm_upgrade_titanarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_gp25upgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "GP-25 Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "tkm_upgrade_titanarsenalupgrade",
+     "~!tkm_upgrade_gp25upgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_heavytitanplating": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Depleted Uranium Plating",
+    "prerequisites": [
+     "~tkm_techcenter",
+     "~!tkm_upgrade_heavytitanplating",
+     "tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "tkm_upgrade_incendiaryrocketsupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Incendiary Rockets Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_incendiaryrocketsupgrade",
+     "tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_infantryupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "3500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "TKM Infantry Upgrade",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "tkm_techcenter",
+     "~!tkm_upgrade_infantryupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "tkm_upgrade_natoarsenalupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "NATO Arsenal Upgrade",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "~!tkm_upgrade_titanarsenalupgrade",
+     "~!tkm_upgrade_berezkaarsenalupgrade",
+     "~!tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_pointdefensesystem": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Point Defense System",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_pointdefensesystem",
+     "tkm_upgrade_titanarsenalupgrade",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "tkm_upgrade_semiautoriflesupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Semi Auto Rifles Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_semiautoriflesupgrade",
+     "tkm_upgrade_berezkaarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_technicaltankrocketaddon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Technical Tank Rocket Addon",
+    "prerequisites": [
+     "~tkm_techcenter",
+     "~!tkm_upgrade_technicaltankrocketaddon",
+     "tkm_upgrade_berezkaarsenalupgrade",
+     "tkm_upgrade_twinrocketsupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "tkm_upgrade_titanarmorpiercingbulletsupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Tungsten Core Bullets Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+     "tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_titanarsenalupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Titan Arsenal Upgrade",
+    "prerequisites": [
+     "~tkm_constructionyard",
+     "~!tkm_upgrade_titanarsenalupgrade",
+     "~!tkm_upgrade_berezkaarsenalupgrade",
+     "~!tkm_upgrade_natoarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "tkm_upgrade_twinrocketsupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/upgrades.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Twin Rockets Upgrade",
+    "prerequisites": [
+     "~tkm_observationvan",
+     "~!tkm_upgrade_twinrocketsupgrade",
+     "tkm_upgrade_berezkaarsenalupgrade"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   }
+  },
+  "vehicles": {
+   "tkm_abrams": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5672",
+      "reloaddelay": "46",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmrh120gun"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Abrams",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_upgrade_natoarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "tkm_as42": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6379",
+      "reloaddelay": "30",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@Missiles",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "as42rockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmcryorockets"
+     },
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtwinrockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6214",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmfirerockets"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "27500"
+    },
+    "name": "TKM AS42",
+    "prerequisites": [
+     "~tkm_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "150"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "60"
+    }
+   },
+   "tkm_battlebus": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4831",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMMedicHeal"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1250"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Battle Bus",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~tkm_promotion_unlockbattlebus"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "100"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "tkm_bigshiee": {
+    "armaments": [
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7238",
+      "reloaddelay": "83",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "BigShieeTusk"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "129",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "129",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@SECONDARYNATO",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "burst": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6102",
+      "reloaddelay": "54",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "burst": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6102",
+      "reloaddelay": "54",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@SECONDARYBEREZKA",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@SECONDARYTITAN",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7238",
+      "reloaddelay": "86",
+      "slot": "Armament@Mortar",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "80000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "80000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "40",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "bigshieemortar"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "500000"
+    },
+    "name": "Big Shiee",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~!tkm_bigshiee",
+     "~tkm_promotion_unlockthebigshiee"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "20"
+    }
+   },
+   "tkm_dronepodtruck": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "23589",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "DronePodTruckLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "60000"
+    },
+    "name": "Drone Pod Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_promotion_unlockdronepodtruck",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "tkm_flakbus": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1800"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "120000"
+    },
+    "name": "Flak Bus",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_promotion_unlockflakbus",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "tkm_medictruck": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4831",
+      "reloaddelay": "5",
+      "slot": "Armament@Heal",
+      "versus_templates": [
+       "^HealingWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "HealingWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraHealing",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "HealingWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMMedicHeal"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Medic Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_promotion_unlockmedictruck"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "tkm_mobileconstructionvehicletkm": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Mobile Construction Vehicle (TKM)",
+    "prerequisites": [
+     "~tkm_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "tkm_quadtruck": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5253",
+      "reloaddelay": "10",
+      "slot": "Armament@AG",
+      "versus_templates": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMQuadCannonAG"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7880",
+      "reloaddelay": "10",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "TKMQuadCannonAG"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMQuadCannonAA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "65000"
+    },
+    "name": "TKM Quad Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_upgrade_berezkaarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "tkm_radartruck": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "20",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "TKMLockOn"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "75000"
+    },
+    "name": "Radar Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_promotion_unlockradartruck"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "21500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "tkm_repairtruck": {
+    "armaments": [
+     {
+      "armament_name": "repair",
+      "burst": "10",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "50",
+      "slot": "Armament@repair",
+      "versus_templates": [
+       "^RepairWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "-2000",
+        "tag": "RepairWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1000",
+        "tag": "ExtraRepair",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "-1",
+        "tag": "RepairWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2IFVRepair"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "50000"
+    },
+    "name": "Repair Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_promotion_unlockrepairtruck"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   },
+   "tkm_sandmarine": {
+    "armaments": [
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "129",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTusk"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "129",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "129",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@SECONDARYNATO",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^CryoMissileProjectile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskCryo"
+     },
+     {
+      "burst": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6102",
+      "reloaddelay": "54",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "burst": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6102",
+      "reloaddelay": "54",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@SECONDARYBEREZKA",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskTwin"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "burst": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5120",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@SECONDARYTITAN",
+      "versus_templates": [
+       "SandmarineTusk",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "20",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SandmarineTuskFire"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6464",
+      "reloaddelay": "135",
+      "slot": "Armament@Mortar",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "120000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "60",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "120000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "60000",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "60",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "sandmarinemortar"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "800000"
+    },
+    "name": "Sand Marine",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~!tkm_sandmarine",
+     "~tkm_promotion_unlockthesandmarine"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "30"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "tkm_stryker": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7880",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmstrykermg"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7880",
+      "reloaddelay": "60",
+      "requires": "!tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@missile",
+      "versus_templates": [
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmstrykerrockets"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7880",
+      "reloaddelay": "60",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@missilefire",
+      "versus_templates": [
+       "^MediumFlameWeapon",
+       "^MediumMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "MediumFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "MediumFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "24000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmstrykerfirerockets"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "80000"
+    },
+    "name": "TKM Stryker",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_upgrade_natoarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "105"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "21"
+    }
+   },
+   "tkm_t30": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "22000",
+      "reloaddelay": "80",
+      "slot": "Armament",
+      "versus_templates": [
+       "^HeavyBomb",
+       "^RailgunWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "40000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "40000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "t30shell"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Superheavy"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "400000"
+    },
+    "name": "T-30",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~!tkm_t30",
+     "~tkm_promotion_unlockt30"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "10"
+    }
+   },
+   "tkm_t72m": {
+    "armaments": [
+     {
+      "armament_name": "pointdefense",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "25",
+      "requires": "tkm_upgrade_pointdefensesystem",
+      "slot": "Armament@pointdefense",
+      "versus_templates": [
+       "PDLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "1",
+        "tag": "1Dam",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "TKMPDLaser"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6196",
+      "reloaddelay": "42",
+      "slot": "Armament",
+      "versus_templates": [
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "10000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkm2a46gun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "6195",
+      "reloaddelay": "10",
+      "slot": "Armament@machinegun",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmkord"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "900"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "T-72M",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_upgrade_titanarsenalupgrade",
+     "tkm_observationvan"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "tkm_technical": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4153",
+      "reloaddelay": "6",
+      "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtechmg"
+     },
+     {
+      "burst": "3",
+      "burstdelays": "6",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "4792",
+      "reloaddelay": "9",
+      "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "tkmjuggap"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "500",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtechnicalmgap"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "27500"
+    },
+    "name": "TKM Technical",
+    "prerequisites": [
+     "~tkm_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "175"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "35"
+    }
+   },
+   "tkm_technicaltank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5316",
+      "reloaddelay": "42",
+      "slot": "Armament@cannon",
+      "versus_templates": [
+       "^MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmltgun"
+     },
+     {
+      "burst": "2",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5243",
+      "reloaddelay": "64",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@missiles",
+      "versus_templates": [
+       "tkmtwinrockets"
+      ],
+      "warheads": [
+       {
+        "damage": "18000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "9",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtwinrocketstechnicaltank"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Technical Tank",
+    "prerequisites": [
+     "~tkm_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "110"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "22"
+    }
+   },
+   "tkm_templateharvesterraname": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "template_harvester.raname",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_orerefinery"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "tkm_tornadoglauncher": {
+    "armaments": [
+     {
+      "burst": "8",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "12437",
+      "reloaddelay": "157",
+      "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^ShrapnelWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmkatyushalalauncherrockets"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "14000",
+      "reloaddelay": "157",
+      "requires": "tkm_upgrade_cryorocketsupgrade",
+      "slot": "Armament@PRIMARYNATO",
+      "versus_templates": [
+       "^CryoMissileProjectile",
+       "tkmkatyushalalauncherrockets"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmkatyushalalauncherrocketscryo"
+     },
+     {
+      "burst": "16",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "12437",
+      "reloaddelay": "157",
+      "requires": "tkm_upgrade_twinrocketsupgrade",
+      "slot": "Armament@PRIMARYBEREZKA",
+      "versus_templates": [
+       "tkmkatyushalalauncherrockets"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmkatyushalalauncherrocketstwin"
+     },
+     {
+      "burst": "8",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "14000",
+      "reloaddelay": "157",
+      "requires": "tkm_upgrade_incendiaryrocketsupgrade",
+      "slot": "Armament@PRIMARYTITAN",
+      "versus_templates": [
+       "^LightFlameWeapon",
+       "^LightMissile",
+       "tkmkatyushalalauncherrockets"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmkatyushalalauncherrocketsfire"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "35000"
+    },
+    "name": "Tornado-G Launcher",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "9000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "80"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "16"
+    }
+   },
+   "tkm_trenchtank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "9237",
+      "reloaddelay": "75",
+      "slot": "Armament",
+      "versus_templates": [
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "tkmtrenchcannon"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "3000"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Trench Tank",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~tkm_promotion_unlocktrenchtank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
+    }
+   },
+   "tkm_trenchtruck": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "3000"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Trench Truck",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "tkm_techcenter",
+     "~tkm_upgrade_berezkaarsenalupgrade",
+     "~!tkm_promotion_unlocktrenchtank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6c0"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "60"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "12"
+    }
+   },
+   "tkm_zaza": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "5284",
+      "reloaddelay": "8",
+      "slot": "Armament@AG",
+      "versus_templates": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMZazaCannonAG"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "range": "7926",
+      "reloaddelay": "8",
+      "slot": "Armament@AA",
+      "versus_templates": [
+       "TKMZazaCannonAG"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "TKMZazaCannonAA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "TKM Zaza",
+    "prerequisites": [
+     "~tkm_warfactory",
+     "~tkm_upgrade_titanarsenalupgrade",
+     "tkm_techcenter"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "15"
+    }
+   }
+  }
+ }
+}

@@ -14,6 +14,27 @@ CHGuardRifle:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
+# SCOUT-CLASS BASELINE WEAPON (Formula v2, design 2026-07-18): the round
+# reference stats — 4000 damage / 50 reload / 5000 range — that define
+# the scout anchor together with the Imperial Scoutsman's 20000/50/100.
+# Dedicated (never shared): CHGuardRifle serves civilians/other rules
+# and must not carry baseline duty.
+japan_imperialscoutsman_rifle:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 50
+	Range: 5000
+	ValidTargets: Ground, Water, Air
+	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
 CHGuardRifleWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits: CHGuardRifle

@@ -17,9 +17,9 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 649 | ra2_allies_seal | Armament@ELITE | RA2MP5E |
 | ContentPacks/RedAlert2/Allies/yaml/infantry.yaml | 657 | ra2_allies_seal | Armament@GARRISONEDELITE | RA2MP5E |
 | ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml | 681 | ra2_allies_prismtank | Armament@EliteCharge | PrismTankChargeE |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2160 | ra2_c_ifv | Armament@elite | RA2GattlingMG2 |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2178 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2AA |
-| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2240 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
+| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2205 | ra2_c_ifv | Armament@elite | RA2GattlingMG2 |
+| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2223 | ra2_c_ifv | Armament@eliteAA | RA2GattlingMG2AA |
+| ContentPacks/RedAlert2/Shared/yaml/misc.yaml | 2285 | ra2_c_hum | Armament@elite | RA2GattlingMG2 |
 | ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml | 58 | ra2_soviets_kirovairship | Armament@PRIMARYNuclearELITE | RA2KirovBomb_nuclear_E |
 | ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml | 161 | ra2_soviets_siegechopper | Armament@DeployedEliteRad | RA160mmE_elite_rad |
 | ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml | 167 | ra2_soviets_siegechopper | Armament@DeployedEliteFire | RA160mmE_elite_fire |
@@ -168,8 +168,8 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 192 | schwarzermond_spacezeppelin | Armament@eliteAA_UP | Lunar_YellowBeetleLaserAA |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 206 | schwarzermond_spacezeppelin | Armament@eliteAMP | Lunar_AmplifiedBeetleLaser |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 220 | schwarzermond_spacezeppelin | Armament@eliteAA_AMP | Lunar_AmplifiedBeetleLaserAA |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 423 | schwarzermond_haunebuii | Armament@ELITE | NaxHaenebuQuadCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 511 | schwarzermond_haunebuiii | Armament@ELITE | NaxHaenebuQuadCannonE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 421 | schwarzermond_haunebuii | Armament@ELITE | NaxHaenebuQuadCannonE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/aircraft.yaml | 509 | schwarzermond_haunebuiii | Armament@ELITE | NaxHaenebuQuadCannonE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 35 | schwarzermond_ubermensch | Armament@ELITE | UbermenschLaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 43 | schwarzermond_ubermensch | Armament@GARRISONEDELITE | UbermenschLaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 51 | schwarzermond_ubermensch | Armament@ELITE_UP | Lunar_YellowUbermenschLaserE |
@@ -182,21 +182,21 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 193 | schwarzermond_noidmgarmor | Armament@ELITE_UP | Lunar_YellowMP40LaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 201 | schwarzermond_noidmgarmor | Armament@ELITE_AMP | Lunar_AmplifiedMP40LaserE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 264 | schwarzermond_noidharvester | Armament@ELITE | NaxiMP40LaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 412 | schwarzermond_lunarsoldier | Armament@ELITE | NaxiRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 420 | schwarzermond_lunarsoldier | Armament@ELITE_UP | Lunar_YellowRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 428 | schwarzermond_lunarsoldier | Armament@ELITE_AMP | Lunar_AmplifiedRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 436 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE | NaxiRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 444 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE_UP | Lunar_YellowRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 452 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedRifleLaserE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 492 | schwarzermond_lunarrocket | Armament@ELITE | NaxCorrosionRocketTrooperE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 500 | schwarzermond_lunarrocket | Armament@GARRISONEDELITE | NaxCorrosionRocketTrooperE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 411 | schwarzermond_lunarsoldier | Armament@ELITE | NaxiRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 419 | schwarzermond_lunarsoldier | Armament@ELITE_UP | Lunar_YellowRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 427 | schwarzermond_lunarsoldier | Armament@ELITE_AMP | Lunar_AmplifiedRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 435 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE | NaxiRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 443 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE_UP | Lunar_YellowRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 451 | schwarzermond_lunarsoldier | Armament@GARRISONEDELITE_AMP | Lunar_AmplifiedRifleLaserE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 490 | schwarzermond_lunarrocket | Armament@ELITE | NaxCorrosionRocketTrooperE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml | 498 | schwarzermond_lunarrocket | Armament@GARRISONEDELITE | NaxCorrosionRocketTrooperE |
 | ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 68 | schwarzermond_dalek | Armament@ELITE | DalekCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 234 | schwarzermond_lunarpanzer | Armament@elite | LunarPanzerCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 321 | schwarzermond_lunartiger | Armament@elite | LunarTigerCannonE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 403 | schwarzermond_neojagdpanzer | Armament@elite | LunarNaxiJadgDestroyerE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 477 | schwarzermond_lunargrille | Armament@elite | NaxGrilleArtyE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 549 | schwarzermond_korruptesbiest | Armament@ELITE | NaxCorrosionBeastE |
-| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 612 | schwarzermond_crystaltank | Armament@ELITE | NaxCrystalLeechE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 232 | schwarzermond_lunarpanzer | Armament@elite | LunarPanzerCannonE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 319 | schwarzermond_lunartiger | Armament@elite | LunarTigerCannonE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 400 | schwarzermond_neojagdpanzer | Armament@elite | LunarNaxiJadgDestroyerE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 473 | schwarzermond_lunargrille | Armament@elite | NaxGrilleArtyE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 545 | schwarzermond_korruptesbiest | Armament@ELITE | NaxCorrosionBeastE |
+| ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/vehicles.yaml | 608 | schwarzermond_crystaltank | Armament@ELITE | NaxCrystalLeechE |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml | 127 | latinsyndicate_yakovlev | Armament@ELITE | YakovlevCannonE |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml | 238 | latinsyndicate_mig21 | Armament@PRIMARYELITE | MigMissilesE |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/aircraft.yaml | 254 | latinsyndicate_mig21 | Armament@AAELITE | MigMissiles_AA_ELITE |
@@ -285,6 +285,8 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/buildings.yaml | 135 | latinsyndicate_latinempradar |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/sequences.yaml | 358 | latinsyndicate_latinempradar |
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/upgrades.yaml | 64 | latinsyndicate_upgrade_unlockempcannon |
+| ContentPacks/RedAlert2Mod/TKM/yaml/sequences.yaml | 812 | tkm_templateharvesterraname |
+| ContentPacks/RedAlert2Mod/TKM/yaml/vehicles.yaml | 27 | tkm_templateharvesterraname |
 | ContentPacks/StarCraft/Protoss/yaml/buildings.yaml | 638 | protoss_templararchives |
 | ContentPacks/StarCraft/Protoss/yaml/infantry.yaml | 106 | protoss_hightemplar |
 | ContentPacks/StarCraft/Protoss/yaml/infantry.yaml | 210 | protoss_darktemplar |
@@ -293,8 +295,6 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/StarCraft/Protoss/yaml/sequences.yaml | 359 | protoss_darktemplar |
 | ContentPacks/StarCraft/Protoss/yaml/weapons.yaml | 597 | CorsairEMP |
 | ContentPacks/StarCraft/Terran/yaml/weapons.yaml | 1731 | ScienceVesselEMP |
-| ContentPacks/TKM/TKM/yaml/sequences.yaml | 812 | tkm_templateharvesterraname |
-| ContentPacks/TKM/TKM/yaml/vehicles.yaml | 28 | tkm_templateharvesterraname |
 | ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml | 165 | td_gdi_empgrenadier |
 | ContentPacks/TiberianDawn/GDI/yaml/promotions.yaml | 5 | td_gdi_promotion_unlockempgrenadier |
 | ContentPacks/TiberianDawn/GDI/yaml/sequences.yaml | 926 | td_gdi_empgrenadier |
@@ -314,8 +314,8 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/Warcraft2/Orcs/yaml/sequences.yaml | 114 | wc2_orcs_templeofthedamned |
 | audio/darkreign.yaml | 502 | DREMPDeviceSound |
 | audio/redalert2mod.yaml | 238 | SteelEmpressVoice |
-| audio/voices.yaml | 695 | SCHighTemplarVoice |
-| audio/voices.yaml | 706 | SCDarkTemplarVoice |
+| audio/voices.yaml | 697 | SCHighTemplarVoice |
+| audio/voices.yaml | 708 | SCDarkTemplarVoice |
 | audio/warcraft1.yaml | 128 | orctemplevoice |
 | audio/warcraft2.yaml | 441 | wc2orctempleofthedamnedvoice |
 | bits/d2k/arrakis.yaml | 135 | Templates |
@@ -411,7 +411,7 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert/Japan/yaml/weapons.yaml | 375 | BallistaSingleShotAirEnergized | Air |
 | ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 369 | ReimuOrbLauncher | Air |
 | ContentPacks/RedAlert/Shared/yaml/weapons.yaml | 441 | MagicOrbHailstormSpawner | Air |
-| ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 3720 | Nike | Air |
+| ContentPacks/RedAlert/Soviets/yaml/weapons.yaml | 3901 | Nike | Air |
 | ContentPacks/RedAlert2/Allies/yaml/weapons.yaml | 703 | RA2Medusa | Air |
 | ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 640 | RA2TRIPODLAZER | Air |
 | ContentPacks/RedAlert2/Shared/yaml/weapons.yaml | 2609 | AccurateCloudSpawner | Air |
@@ -480,7 +480,7 @@ X4 deprecated E suffix (informational): **123**
 | ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml | 818 | DiabloCannonAAE |
 | ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml | 37 | td_gdi_commando_sniperE |
 | ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml | 1 | NUKE |
-| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 704 | CabalHunterKillerLasersE |
+| ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml | 749 | CabalHunterKillerLasersE |
 | rules/advancewars.yaml | 1424 | MMAWBLACKHOLE |
 | rules/challenge.yaml | 289 | XPYLE |
 | rules/civilian.yaml | 601 | VICE |

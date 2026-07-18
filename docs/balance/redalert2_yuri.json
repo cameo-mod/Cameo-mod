@@ -1,0 +1,4642 @@
+{
+ "ledger": "redalert2_yuri",
+ "pack": "mods/cameo/ContentPacks/RedAlert2/Yuri",
+ "schema": 2,
+ "sections": {
+  "aircraft": {
+   "yuri_floatingdisk": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "6840",
+      "reloaddelay": "40",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "24000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "12",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2DiskLaser"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7840",
+      "reloaddelay": "40",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2DiskLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "48000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "24",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2DiskLaser_elite"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "minrange": "1",
+      "range": "125",
+      "reloaddelay": "5",
+      "requires": "yuri_upgrade_disksiphonattack",
+      "slot": "Armament@SECOND",
+      "versus_templates": [
+       "^MagicWeapon",
+       "^TeslaWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "MagicWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MagicWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "888",
+        "tag": "MagicExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TeslaWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "TeslaExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2DiskDrain"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "minrange": "1",
+      "range": "125",
+      "reloaddelay": "5",
+      "slot": "Armament@Steal",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "RA2DiskSteal"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Spaceship"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Valued.Cost",
+     "v": "2400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Floating Disk",
+    "prerequisites": [
+     "~yuri_warfactory",
+     "yuri_battlelab"
+    ],
+    "queue": [
+     "Vehicle",
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "12345"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "80"
+    }
+   },
+   "yuriinvisibleplane": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "5",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "SpyPlaneTargeting"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Bomber"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Spy Plane",
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed_air": {
+     "src": "inherited",
+     "v": "300"
+    }
+   }
+  },
+  "buildings": {
+   "yuri_barracks": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "250"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "200000"
+    },
+    "name": "Yuri Barracks",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_bioreactor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    }
+   },
+   "yuri_battlelab": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Yuri Battle Lab",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_psychicsensor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_bioreactor": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Armor.Type",
+     "v": "Wood"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Health.HP",
+     "v": "125000"
+    },
+    "name": "Bio Reactor",
+    "prerequisites": [
+     "~yuri_constructionyard"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "4c0"
+    }
+   },
+   "yuri_cloningvats": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Yuri Cloning Vats",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Yuri Construction Yard",
+    "prerequisites": [
+     "~wip-content"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_grinder": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Armor.Type",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "750"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Grinder",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_warfactory"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
+   "yuri_lunarcommandcenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/buildings.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "500000"
+    },
+    "name": "Lunar Command Center",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_battlelab",
+     "derricklimit"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_psychicsensor": {
+    "armor": {
+     "src": "inherited",
+     "v": "Wood"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "250000"
+    },
+    "name": "Psychic Sensor",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_slaveminer_2"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_warfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Yuri War Factory",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_slaveminer_2"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   }
+  },
+  "defenses": {
+   "yuri_concretebarrier": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "100000"
+    },
+    "name": "Concrete Barrier",
+    "prerequisites": [
+     "~yuri_constructionyard"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ]
+   },
+   "yuri_gatlingcannon": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "6",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG1"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5250",
+      "reloaddelay": "4",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG2"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5500",
+      "reloaddelay": "2",
+      "slot": "Armament@3",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG3"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6750",
+      "reloaddelay": "6",
+      "slot": "Armament@1AA",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG1AA"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "4",
+      "slot": "Armament@2AA",
+      "versus_templates": [
+       "RA2GattlingMG2"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG2AA"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8250",
+      "reloaddelay": "2",
+      "slot": "Armament@3AA",
+      "versus_templates": [
+       "RA2GattlingMG3"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG3AA"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.35
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
+     "v": "140000"
+    },
+    "name": "Gatling Cannon",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_barracks"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "8250"
+    }
+   },
+   "yuri_geneticmutator": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Genetic Mutator",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_battlelab",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_psychicdominator": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Psychic Dominator",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_battlelab",
+     "!psydom",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "yuri_psychictower": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8000",
+      "reloaddelay": "75",
+      "slot": "Armament@CONTROL",
+      "versus_templates": [
+       "RA2MindControl"
+      ],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2TMindControl"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
+     "v": "150000"
+    },
+    "name": "Psychic Tower",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_battlelab"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "10000"
+    }
+   },
+   "yuri_slaveminer_2": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA220mmrapid"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Slave Miner",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_bioreactor"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6666"
+    }
+   },
+   "yuri_tankbunker": {
+    "armor": {
+     "src": "inherited",
+     "v": "Steel"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Tank Bunker",
+    "prerequisites": [
+     "~yuri_constructionyard",
+     "yuri_warfactory"
+    ],
+    "queue": [
+     "Defence",
+     "RADefence"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#RevealsShroud.Range",
+     "v": "6666"
+    }
+   }
+  },
+  "infantry": {
+   "yuri_biotrooper": {
+    "armaments": [
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4840",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && !yuri_upgrade_corrosiveammo",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Chemspray"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4840",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
+      "slot": "Armament@Upgrade",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "RA2Chemspray"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Chemspray2"
+     },
+     {
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5840",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2Chemspray2"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2ChemsprayE"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4840",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && !yuri_upgrade_corrosiveammo",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^MediumChemicalWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Chemspray"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4840",
+      "reloaddelay": "50",
+      "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
+      "slot": "Armament@GARRISONEDUpgrade",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "RA2Chemspray"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Chemspray2"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "6",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5840",
+      "reloaddelay": "50",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "RA2Chemspray2"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2ChemsprayE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.5,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "96000"
+    },
+    "name": "Bio Trooper",
+    "prerequisites": [
+     "~yuri_barracks",
+     "yuri_cloningvats"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "64"
+    }
+   },
+   "yuri_brute": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "1616",
+      "reloaddelay": "37",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^SwordWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2BrutePunch"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "1616",
+      "reloaddelay": "37",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2BrutePunch"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "SwordWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "SwordWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "SwordWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2BrutePunchE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Plate"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "400"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Brute",
+    "prerequisites": [
+     "~yuri_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "80"
+    }
+   },
+   "yuri_clone": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7000",
+      "reloaddelay": "75",
+      "slot": "Armament@CONTROL",
+      "versus_templates": [],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2MindControl"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "5000"
+    },
+    "name": "Yuri Clone",
+    "prerequisites": [
+     "~yuri_psychicsensor"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "50"
+    }
+   },
+   "yuri_cosmonaut": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4750",
+      "reloaddelay": "11",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RailgunWeapon",
+       "^LaserWeapon",
+       "ra2roktgun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2CosmonautLaser"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "28000"
+    },
+    "name": "Cosmonaut",
+    "prerequisites": [
+     "~yuri_lunarcommandcenter"
+    ],
+    "queue": [
+     "Aircraft",
+     "RAAircraft"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Aircraft.Speed",
+     "v": "165"
+    }
+   },
+   "yuri_engineer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "20",
+      "slot": "Armament@defuse",
+      "versus_templates": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ],
+      "warheads": [],
+      "weapon": "DefuseKit"
+     },
+     {
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "range": "1536",
+      "reloaddelay": "100",
+      "slot": "Armament@leechdisinfect",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "LeechDisinfect"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "None"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "name": "Engineer",
+    "prerequisites": [
+     "~yuri_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "5c0"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "50"
+    }
+   },
+   "yuri_gatlingtrooper": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5086",
+      "reloaddelay": "15",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingInf"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5086",
+      "reloaddelay": "15",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingInf"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 0.75,
+     "unit_class": 0.8
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "36000"
+    },
+    "name": "Gatling Trooper",
+    "prerequisites": [
+     "~yuri_barracks",
+     "yuri_battlelab"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "45"
+    }
+   },
+   "yuri_initiate": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4440",
+      "reloaddelay": "15",
+      "requires": "!rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PsychicJab"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "4440",
+      "reloaddelay": "15",
+      "requires": "!rank-elite",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PsychicJab"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5440",
+      "reloaddelay": "15",
+      "requires": "rank-elite",
+      "slot": "Armament@PRIMARYELITE",
+      "versus_templates": [
+       "RA2PsychicJab"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PsychicJab_elite"
+     },
+     {
+      "armament_name": "garrisoned",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5440",
+      "reloaddelay": "15",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "RA2PsychicJab"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2PsychicJab_elite"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "200"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 0.5
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "24000"
+    },
+    "name": "Yuri Initiate",
+    "prerequisites": [
+     "~yuri_barracks"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "66"
+    }
+   },
+   "yuri_virus": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
+      "slot": "Armament@PRIMARY2",
+      "versus_templates": [
+       "^FlakWeapon",
+       "RA2Virusgun"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
+      "slot": "Armament@PRIMARY3",
+      "versus_templates": [
+       "^MediumMissile",
+       "RA2Virusgun2"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun3"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "11111",
+      "reloaddelay": "74",
+      "requires": "rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2Virusgun3"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2VirusgunE"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
+      "slot": "Armament@GARRISONED2",
+      "versus_templates": [
+       "^FlakWeapon",
+       "RA2Virusgun"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun2"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9999",
+      "reloaddelay": "74",
+      "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
+      "slot": "Armament@GARRISONED3",
+      "versus_templates": [
+       "^MediumMissile",
+       "RA2Virusgun2"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2Virusgun3"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "11111",
+      "reloaddelay": "74",
+      "requires": "rank-elite",
+      "slot": "Armament@GARRISONEDELITE",
+      "versus_templates": [
+       "RA2Virusgun3"
+      ],
+      "warheads": [
+       {
+        "damage": "12000",
+        "tag": "MediumMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "MediumMissilePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "12000",
+        "tag": "SniperWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "6",
+        "tag": "SniperWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2VirusgunE"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Flak"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "700"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 0.75
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "12000"
+    },
+    "name": "Virus",
+    "prerequisites": [
+     "~yuri_psychicsensor"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "52"
+    }
+   },
+   "yuri_yurix": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "125",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "RA2MindControl"
+      ],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2XMindControl"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "125",
+      "requires": "!yuri_upgrade_domination",
+      "slot": "Armament@Splash",
+      "versus_templates": [
+       "RA2MindControl"
+      ],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2XMindControlSplash"
+     },
+     {
+      "armament_name": "secondary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "125",
+      "requires": "yuri_upgrade_domination",
+      "slot": "Armament@Splash2",
+      "versus_templates": [
+       "RA2XMindControlSplash"
+      ],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2XMindControlSplash2"
+     }
+    ],
+    "armor": {
+     "src": "inherited",
+     "v": "Heroic"
+    },
+    "build_limit": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Buildable.BuildLimit",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
+     "v": "4000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
+     "v": "20000"
+    },
+    "name": "actor_yurix.name",
+    "prerequisites": [
+     "~yuri_barracks",
+     "yuri_lunarcommandcenter"
+    ],
+    "queue": [
+     "Infantry",
+     "RAInfantry"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
+     "v": "100"
+    }
+   }
+  },
+  "naval": {
+   "yuri_boomersubmarine": {
+    "armaments": [
+     {
+      "armament_name": "secondary",
+      "burst": "4",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "minrange": "3000",
+      "range": "15000",
+      "reloaddelay": "176",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^RA2Grenade",
+       "^RA2HeavyMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "20000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "20000",
+        "tag": "HeavyMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "10",
+        "tag": "HeavyMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "YRBoomerTorpedo"
+     },
+     {
+      "burst": "2",
+      "burstdelays": "8",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "minrange": "3000",
+      "range": "15000",
+      "reloaddelay": "50",
+      "slot": "Armament@LAUNCH",
+      "versus_templates": [
+       "V3Launch"
+      ],
+      "warheads": [],
+      "weapon": "BoomerLaunch"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Valued.Cost",
+     "v": "3350"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "actor_bsub.name",
+    "prerequisites": [
+     "~yuri_psychicsensor"
+    ],
+    "queue": [
+     "Naval",
+     "RANaval"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/naval.yaml#Mobile.TurnSpeed",
+     "v": "10"
+    }
+   }
+  },
+  "upgrades": {
+   "yuri_doctrine_chaosgasemitters": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Chaos Gas Emitters",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "ra2_yuri_doctrine_2",
+     "!ra2_yuri_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_lasherhecannon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lasher HE Cannon",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "ra2_yuri_doctrine_1",
+     "!ra2_yuri_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_lasherlasercannon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lasher Laser Cannon",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "ra2_yuri_doctrine_1",
+     "!ra2_yuri_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_lashertoxicgasshells": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lasher Toxic Gas Shells",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "ra2_yuri_doctrine_1",
+     "!ra2_yuri_doctrine_2"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_psionicelite": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Elite",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!ra2_yuri_doctrine_1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_psionicfanatics": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Fanatics",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!ra2_yuri_doctrine_1"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_psioniclegion": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Legion",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!ra2_yuri_doctrine_1",
+     "!global_conscription_buff"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_psionicvehicleshields": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Vehicle Shields",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "ra2_yuri_doctrine_2",
+     "!ra2_yuri_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_doctrine_scrapvehiclearmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Scrap Vehicle Armor",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "ra2_yuri_doctrine_2",
+     "!ra2_yuri_doctrine_3"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_upgrade_bioengineering": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Bio Engineering",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_cloningvats",
+     "!yuri_upgrade_bioengineering"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_bioreactorefficiency": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Bio Reactor Efficiency",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_cloningvats",
+     "!yuri_upgrade_bioreactorefficiency"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_brutestrengthmutations": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Brute Strength Mutations",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!yuri_upgrade_brutestrengthmutations"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_upgrade_corrosiveammo": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Corrosive Ammo",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_upgrade_meltingvirus",
+     "!yuri_upgrade_corrosiveammo"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_diskhighfrequencylasers": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Disk High Frequency Lasers",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "!yuri_upgrade_diskhighfrequencylasers"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_disksiphonattack": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Disk Siphon Attack",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "!yuri_upgrade_disksiphonattack"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_domination": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Domination",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "yuri_battlelab",
+     "!yuri_upgrade_domination"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_upgrade_gatlingfirepowerupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Gatling Firepower Upgrade",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "!yuri_upgrade_gatlingfirepowerupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_gatlingspeedupgrade": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Gatling Speed Upgrade",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_upgrade_gatlingfirepowerupgrade",
+     "!yuri_upgrade_gatlingspeedupgrade"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_geneticmodificationboost": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Genetic Modification Boost",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_cloningvats",
+     "!yuri_upgrade_geneticmodificationboost"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_gravitondrive": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Graviton Drive",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "!yuri_upgrade_gravitondrive"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_infantrystealthsuits": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Infantry Stealth Suits",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_cloningvats",
+     "!yuri_upgrade_infantrystealthsuits"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_initiatepowersurge": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Initiate Power Surge",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!yuri_upgrade_initiatepowersurge"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_upgrade_lasherarmorimprovements": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Lasher Armor Improvements",
+    "prerequisites": [
+     "~yuri_psychicsensor",
+     "!yuri_upgrade_lasherarmorimprovements"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
+   "yuri_upgrade_meltingvirus": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Melting Virus",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "!yuri_upgrade_meltingvirus"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_psionicarmor": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Armor",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "!yuri_upgrade_psionicarmor"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_psionicplasmabeams": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psionic Plasma Beams",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "!yuri_upgrade_psionicplasmabeams"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_psychicrange": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psychic Range",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "!yuri_upgrade_psychicrange"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_psychicvision": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Psychic Vision",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "yuri_cloningvats",
+     "!yuri_upgrade_psychicvision"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_supermagnets": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Super Magnets",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "yuri_lunarcommandcenter",
+     "!yuri_upgrade_supermagnets"
+    ],
+    "queue": [
+     "Research"
+    ]
+   },
+   "yuri_upgrade_toxicengines": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Toxic Engines",
+    "prerequisites": [
+     "~yuri_battlelab",
+     "!yuri_upgrade_toxicengines"
+    ],
+    "queue": [
+     "Research"
+    ]
+   }
+  },
+  "vehicles": {
+   "yuri_chaosdrone": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "125",
+      "slot": "Armament",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "RA2Dronegas"
+     },
+     {
+      "armament_name": "garrisoned",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "125",
+      "slot": "Armament@GARRISONED",
+      "versus_templates": [],
+      "warheads": [],
+      "weapon": "RA2Dronegas"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Scout"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "12500"
+    },
+    "name": "Chaos Drone",
+    "prerequisites": [
+     "~yuri_psychicsensor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "140"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "28"
+    }
+   },
+   "yuri_gatlingtank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "6",
+      "requires": "!gatling",
+      "slot": "Armament@1",
+      "versus_templates": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG1"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5250",
+      "reloaddelay": "4",
+      "requires": "gatling == 1",
+      "slot": "Armament@2",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG2"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5500",
+      "reloaddelay": "2",
+      "requires": "gatling > 1",
+      "slot": "Armament@3",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG3"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "6750",
+      "reloaddelay": "6",
+      "requires": "!gatling",
+      "slot": "Armament@1AA",
+      "versus_templates": [
+       "RA2GattlingMG1"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG1AA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "7500",
+      "reloaddelay": "4",
+      "requires": "gatling == 1",
+      "slot": "Armament@2AA",
+      "versus_templates": [
+       "RA2GattlingMG2"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG2AA"
+     },
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8250",
+      "reloaddelay": "2",
+      "requires": "gatling > 1",
+      "slot": "Armament@3AA",
+      "versus_templates": [
+       "RA2GattlingMG3"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2GattlingMG3AA"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "45000"
+    },
+    "name": "Yuri Gatling Tank",
+    "prerequisites": [
+     "~yuri_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "90"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "18"
+    }
+   },
+   "yuri_lashertank": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "5201",
+      "reloaddelay": "68",
+      "requires": "!yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && !rank-elite",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2LasherCannon"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "2",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "6201",
+      "reloaddelay": "68",
+      "requires": "!yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && rank-elite",
+      "slot": "Armament@ELITE",
+      "versus_templates": [
+       "RA2LasherCannon",
+       "^RA2EliteEffects"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightFlameWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightFlameWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightFlameWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2LasherCannon_elite"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "9000",
+      "reloaddelay": "105",
+      "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
+      "slot": "Armament@Toxic",
+      "versus_templates": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2LasherToxicMortar"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "10000",
+      "reloaddelay": "105",
+      "requires": "yuri_doctrine_lashertoxicgasshells && rank-elite",
+      "slot": "Armament@ToxicELITE",
+      "versus_templates": [
+       "RA2LasherToxicMortar"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "Grenade",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "GrenadeFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "GrenadePercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "ShrapnelWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "ShrapnelWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ShrapnelWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyBomb",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyBombPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "LightChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "LightChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "MediumChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyChemicalWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "HeavyChemicalWeaponFriendlyFire",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyChemicalWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA2LasherToxicMortar_elite"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7065",
+      "reloaddelay": "81",
+      "requires": "yuri_doctrine_lasherlasercannon && !rank-elite",
+      "slot": "Armament@Laser",
+      "versus_templates": [
+       "^MediumCannon",
+       "^LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2LasherLaser"
+     },
+     {
+      "armament_name": "primary",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8065",
+      "reloaddelay": "81",
+      "requires": "yuri_doctrine_lasherlasercannon && rank-elite",
+      "slot": "Armament@LaserELITE",
+      "versus_templates": [
+       "RA2LasherLaser"
+      ],
+      "warheads": [
+       {
+        "damage": "16000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "16000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "8",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2LasherLaser_elite"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Medium"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "600"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "70000"
+    },
+    "name": "Lasher Tank",
+    "prerequisites": [
+     "~yuri_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "105"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "21"
+    }
+   },
+   "yuri_magnetron": {
+    "armaments": [
+     {
+      "armament_name": "primary",
+      "burst": "100",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7032",
+      "reloaddelay": "200",
+      "requires": "!rank-elite && !yuri_upgrade_supermagnets",
+      "slot": "Armament@Normal",
+      "versus_templates": [
+       "^RA2LaserWeapon"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2Magnet"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "100",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7032",
+      "reloaddelay": "200",
+      "requires": "!rank-elite && yuri_upgrade_supermagnets",
+      "slot": "Armament@Upgraded",
+      "versus_templates": [
+       "RA2Magnet"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2MagnetAA"
+     },
+     {
+      "armament_name": "primary",
+      "burst": "100",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8032",
+      "reloaddelay": "200",
+      "requires": "rank-elite && !yuri_upgrade_supermagnets",
+      "slot": "Armament@elite",
+      "versus_templates": [
+       "RA2Magnet"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2Magnet_elite"
+     },
+     {
+      "armament_name": "secondary",
+      "burst": "100",
+      "burstdelays": "1",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "8032",
+      "reloaddelay": "200",
+      "requires": "rank-elite && yuri_upgrade_supermagnets",
+      "slot": "Armament@elite_aa",
+      "versus_templates": [
+       "RA2Magnet_elite"
+      ],
+      "warheads": [
+       {
+        "damage": "2000",
+        "tag": "LaserWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "LaserWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "600",
+        "tag": "LaserExtraDamage",
+        "type": "SpreadDamage"
+       }
+      ],
+      "weapon": "RA2MagnetAA_elite"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1300"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": 1.25,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "65000"
+    },
+    "name": "Magnetron",
+    "prerequisites": [
+     "~yuri_psychicsensor"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "65"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "13"
+    }
+   },
+   "yuri_mastermind": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "range": "7000",
+      "reloaddelay": "75",
+      "slot": "Armament@PRIMARY",
+      "versus_templates": [
+       "RA2MindControl"
+      ],
+      "warheads": [
+       {
+        "damage": "0",
+        "tag": "1Dam",
+        "type": "TargetDamage"
+       }
+      ],
+      "weapon": "RA2SMindControl"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "100000"
+    },
+    "name": "Master Mind",
+    "prerequisites": [
+     "~yuri_warfactory",
+     "yuri_battlelab"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "7000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "120"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "24"
+    }
+   },
+   "yuri_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Yuri Mobile Construction Vehicle",
+    "prerequisites": [
+     "~yuri_warfactory",
+     "yuri_grinder"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
+   "yuri_slaveminer": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "range": "5000",
+      "reloaddelay": "15",
+      "slot": "Armament@primary",
+      "versus_templates": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ],
+      "warheads": [
+       {
+        "damage": "4000",
+        "tag": "SmallArms",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "SmallArmsPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "RA220mmrapid"
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Buildable.BuildDuration",
+     "v": "500"
+    },
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Valued.Cost",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Health.HP",
+     "v": "200000"
+    },
+    "name": "Slave Miner",
+    "prerequisites": [
+     "~yuri_warfactory"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "6666"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "50"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "10"
+    }
+   }
+  }
+ }
+}

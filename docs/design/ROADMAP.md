@@ -522,7 +522,52 @@ DESIGN formulas instead of silently "fixing".
   force"); (d) pacing already retuned in Discord: initial 180→60,
   between-waves 90→30 (tester applied).**
 
-### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn — NEXT after the TKM port)
+### P1a — FORMULA V2 CLASS 1: SCOUT INFANTRY (maintainer 2026-07-18)
+
+Maintainer picked the scout class first; proposed anchor 20000 HP /
+50 Speed / 5.0 Range / 4000 Damage / 50 Reload / Cost 100 with the
+2x-health bake replacing the ScoutInfantryBuff damage reduction.
+Assessment + simulation: docs/balance/formula_v2_scout.md — anchor
+structure confirmed, speed 60 recommended over 50, bake endorsed;
+BLOCKED ON: (1) garrisoned/pricing armament flag in the extractor,
+(2) WeaponClass seeding for the class weapons, then bake -> anchor ->
+sign-off. Awaiting maintainer GO on the refined spec.
+
+### P1 — BALANCE PIPELINE (ordered 2026-07-18 — "very important long term goal")
+
+Full plan: **docs/design/BALANCE_PIPELINE.md**. PHASE 1 DONE
+2026-07-18: `tools/balance/extract_stats.py` + committed baseline
+ledger (32 faction files, 2025 actors, raw stats + provenance,
+deterministic, `--check` drift mode). PHASE 2 DONE 2026-07-18:
+`formula.py` (Tiger identity exact, symbolic equivalence vs the
+legacy cell formulas exact, closed-form Range solver) +
+`build_workbook.py` -> cameo_balance_v2.xlsx workbench (gitignored;
+32 faction tabs, weapon sub-rows, live formulas, locked non-input
+cells, delta traffic lights). PHASES 3+4 DONE 2026-07-18 — WORKING
+PROTOTYPE: seed_design.py (437 units seeded from the legacy sheet,
+discrepancies.md: 22 cost mismatches, 581 never-priced combat units,
+180 unmatched legacy rows for name_map.yaml), import_workbook.py
+(xlsx -> ledger, input cells only, proportional warhead scaling),
+apply_balance.py (ledger -> yaml via provenance, resolved-value
+diffing, SHADOWED-definition detection, --confirm gate). Loop PROVEN:
+fixed point exact (0 changes on untouched ledger), live demo
+1000->1050->1000 through ledger+push with yaml byte-identical after.
+Bonus: the fixed-point test exposed and fixed a resolver cache
+poisoning bug affecting ALL audits. Next: Phase 5 Formula v2 +
+Phase 6 enforcement (balance check into run_all). yaml → per-faction JSON
+ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
+formulas live in the sheet, locked cells) → legacy-sheet comparator +
+discrepancy triage → gated write-back (apply_balance.py, maintainer
+order only) → drift audit in run_all so hand-edited balance numbers
+become red findings mechanically. Phases 1-3 first (extractor,
+workbook builder, comparator); the SM rebalance below is the
+pipeline's first customer.
+
+- Jagerline rename: new candidate from maintainer "Alter Peter" (the
+  Munich bell tower) — parked with Wasserfall / Taifun / Rheintochter;
+  maintainer explicitly wants to think more before deciding.
+
+### P1b — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17 — now the balance pipeline's first customer)
 
 Maintainer order: "we also need a full rebalance on the schwarzer mond
 faction." Rules of engagement:
