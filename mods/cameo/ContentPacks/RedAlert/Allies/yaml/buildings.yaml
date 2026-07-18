@@ -275,11 +275,13 @@ ra1_allies_reinforcementpad:
 		Facing: 128
 		ExitCell: 0,1
 	ProductionParadropCA@NORMAL:
+		ActorType: ra1_badger
 		Produces: Vehicle
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true
 		RequiresCondition: !classicproductionqueues
 	ProductionParadropCA@CLASSICPRODUCTIONQUEUES:
+		ActorType: ra1_badger
 		Produces: RAVehicle
 		SpawnType: ClosestEdgeToDestination
 		ProportionalSpeed: true

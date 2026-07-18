@@ -490,6 +490,129 @@ cabal_ascended:
 		DeathPaletteIsPlayerPalette: true
 		CrushedSequencePalette: ra2effect
 
+cabal_enlighted:
+	Inherits: ^Soldier
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Flak
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Heavy
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Enlighted
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_devout
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_devout.description
+	Mobile:
+		TurnSpeed: 16
+		Speed: 40
+		Locomotor: chem
+		PauseOnCondition: disabled
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 160
+	Armament@PRIMARY:
+		Weapon: TSCABALEnlightedLaser
+		LocalOffset: 128,-256,256, 128,256,256
+	 	RequiresCondition: !cydamaged
+	Armament@Suicide:
+		Weapon: SuicideBomberTargeting
+	 	RequiresCondition: cydamaged
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
+		RequiresCondition: !disabled && cydamaged
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSCABALEnlightedLaser
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 150
+		RequiresCondition: cydamaged
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: !disabled && cydamaged
+	KillsSelf:
+		RequiresCondition: triggered && !disabled && cydamaged
+	-DamagedByTerrain:
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	DamagedByTerrain@TiberiumHeal:
+		Terrain: Tiberium, BlueTiberium, RedTiberium, GoldTiberium
+		Damage: -20
+		DamageInterval: 1
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSNewCyborgVoice
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
+		CrushedSequencePalette: ra2effect
+
 cabal_hackercyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate

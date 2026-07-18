@@ -25,6 +25,8 @@ asianalliance_asianconstructionyard:
 		VoiceSet: PRCCommandCenterVoice
 	ProvidesPrerequisite@ra2oilderrick:
 		Prerequisite: ra2oilderrick
+	ProvidesPrerequisite@asianalliancebarrier:
+		Prerequisite: asianalliancebarrier
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
@@ -1104,7 +1106,7 @@ asianalliance_concretebarrier:
 		Palette: ra2
 		PlayerPalette: playerra2
 	Buildable:
-		Prerequisites: ~asianalliance_asianconstructionyard
+		Prerequisites: ~asianalliancebarrier
 		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True

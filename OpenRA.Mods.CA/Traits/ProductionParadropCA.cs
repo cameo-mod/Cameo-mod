@@ -25,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		[ActorReference(typeof(AircraftInfo))]
 		[Desc("Cargo aircraft used. Must have Aircraft trait.")]
-		public readonly string ActorType = "badr";
+		public readonly string ActorType = "ra1_badger";
 
 		[Desc("How the spawn location/direction is calculated for the delivering actor.",
 			"Standard: Spawn 1/2 map distance east, in line with the destination.",

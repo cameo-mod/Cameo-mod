@@ -24,6 +24,8 @@ ra2_allies_alliedconstructionyard:
 		DeathSequencePalette: playerra2
 	ProvidesPrerequisite@ra2oilderrick:
 		Prerequisite: ra2oilderrick
+	ProvidesPrerequisite@ra2awall:
+		Prerequisite: ra2awall
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:

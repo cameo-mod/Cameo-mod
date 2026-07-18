@@ -1693,12 +1693,6 @@ ra1_soviets_monstertank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
-	FirepowerMultiplier@TeslaRockets:
-		RequiresCondition: ra1_soviets_upgrade_teslarockets
-		Modifier: 110
-	FirepowerMultiplier@NuclearRockets:
-		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
-		Modifier: 110
 	FirepowerMultiplier@HighExplosiveRockets:
 		RequiresCondition: ra1_soviets_upgrade_highexplosiverockets
 		Modifier: 110
@@ -1753,6 +1747,23 @@ ra1_soviets_monstertank:
 		LocalOffset: -400,-500,300, -400,500,300
 		LocalYaw: 60, -60
 		PauseOnCondition: ammo < 8
+		RequiresCondition: !ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets
+	Armament@TeslaSECONDARY:
+		Weapon: MonsterTankTuskTesla
+		Recoil: 100
+		RecoilRecovery: 25
+		LocalOffset: -400,-500,300, -400,500,300
+		LocalYaw: 60, -60
+		PauseOnCondition: ammo < 8
+		RequiresCondition: ra1_soviets_upgrade_teslarockets
+	Armament@NukeSECONDARY:
+		Weapon: MonsterTankTuskThermobaric
+		Recoil: 100
+		RecoilRecovery: 25
+		LocalOffset: -400,-500,300, -400,500,300
+		LocalYaw: 60, -60
+		PauseOnCondition: ammo < 8
+		RequiresCondition: ra1_soviets_upgrade_thermonuclearrockets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:

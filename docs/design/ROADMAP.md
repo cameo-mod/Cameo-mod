@@ -454,6 +454,45 @@ audits + boot + commit. Balance numbers he changed are the
 contributor's design — port faithfully, flag anything that contradicts
 DESIGN formulas instead of silently "fixing".
 
+### New orders 2026-07-18 (third batch — crash + SM polish)
+
+- [ ] **P0 CRASH (TheCommando315): `KeyNotFoundException 'badr'` in
+  ProductionParadropCA.Produce** — the C# trait's DEFAULT ActorType is
+  the legacy `badr`; any ProductionParadropCA trait without an explicit
+  ActorType crashes at PRODUCE time (runtime, not boot — the boot gate
+  cannot catch it) since the RA1 rename removed `badr`. Fix: explicit
+  ActorType on every ProductionParadropCA use + change the C# default.
+- [ ] **BUG (Blackrobe follow-up): replaced SM units stay VISIBLE
+  (greyed) after their replacement promotion** — Laser Beetle/Lunar
+  Panzer/Jagerline/Haunebu II use `!promotion_x` without `~`, which
+  greys instead of hides. Fix to `~!promotion_x`.
+- [ ] **RENAME ORDER (maintainer): "Jagerline" is fake German** — the
+  SM unit needs a real German name; design picks from proposals
+  (candidates: real Flakpanzer names Wirbelwind / Kugelblitz / Ostwind
+  if it plays as mobile AA; Donnerkeil / Sturmvogel if missile
+  artillery). Id + display + ftl + sheet row follow the pick.
+
+### New orders 2026-07-18 (second batch — Blackrobe report + maintainer)
+
+- [ ] **BUG (Blackrobe): SM passive income building missing** — being fixed in the maintainer's OTHER session (uncommitted WIP adds ra2oilderrick/ra2ywall provisions to the SM conyard); moondairyfarm itself verified wired (techcenter+derricklimit). Do not double-fix. on latest
+  dev commit — find what removed/hid it and restore.
+- [x] VERIFIED 2026-07-18 **"laser car" + M200B report**: wiring is
+  correct both ways (before purchase Beetle/Jagerline buildable; after,
+  retired and Laser Tank/MARS appear). If Blackrobe means the
+  REPLACEMENTS never appear even after buying the promotions, the rank1
+  prerequisite may not be granted by the lobby points option — needs an
+  in-game check by the team.
+- [x] DONE 2026-07-18 **TKM moved into ContentPacks/RedAlert2Mod** (Blackrobe: do
+  the move, postpone the theme-folder rename decision — CnCUniverse /
+  CnCExtended / RA2Expanded still open, "not wise to rush").
+- [x] DONE 2026-07-18 (superlinear ramp RampFactor 0.08, min-count dip fix, wave veterancy floor(idx/4)) **Survival difficulty (maintainer order):** steepen the ramp so
+  late waves outscale early ones, fix the tier-3/4 dip (min unit
+  count), and make waves elite over time (veterancy/upgrades — "apply
+  upgrades over time or all available from the start").
+- [x] DONE 2026-07-18 (MonsterTankTuskTesla/Thermobaric weapons, armament swaps, flat multipliers removed) **Monster tank rockets (maintainer order): apply the MAMMOTH TANK
+  logic** — real weapon swaps for Tesla Rockets, (Thermo)Nuclear
+  Rockets etc., not the current flat +10% firepower multiplier.
+
 ### New orders 2026-07-18 (mid-turn batch)
 
 - [ ] **Theme-folder rename + TKM move (DECISION PENDING — maintainer
@@ -976,6 +1015,55 @@ types, creating a unified wall+turret defense system across the mod.
 - May need new C# traits if the existing `Replaceable`/`Replacement`
   system doesn't support all desired behaviors (e.g. conditional
   replacement based on tech level).
+
+---
+
+## Barrier & Wall Assignment Refactor (2026-07-17, COMPLETED)
+
+**Goal:** Thematic and balanced barrier assignment across all factions.
+Only classic TD and RA1 factions have dual wall types (light + heavy).
+All other factions have a single, thematically appropriate wall type.
+
+### Final Barrier Assignment Map
+
+| Faction | Wall Type | Prerequisite Token |
+|---------|-----------|-------------------|
+| TD GDI | SBAG (sandbag) + BRIK (concrete) | `sandbagbarrier` + `concretebarrier` (^FACT) |
+| TD Nod | CYCL (chainlink) + BRIK (concrete) | `chainlinkfence` + `concretebarrier` (^FACT) |
+| RA1 Allies | SBAG (sandbag) + BRIK (concrete) | `sandbagbarrier` + `concretebarrier` (^RAFACT) |
+| RA1 Soviets | FENC (wire) + BRIK (concrete) | `wirefence` + `concretebarrier` (^RAFACT) |
+| RA1 Japan | CYCL (chainlink) + BRIK (concrete) | `chainlinkfence` + `concretebarrier` (^RAFACT) |
+| RA2 Allies | ra2_awall | `ra2awall` |
+| RA2 Soviets | ra2_swall | `ra2swall` |
+| RA2 Yuri | ra2_ywall | `ra2ywall` |
+| FutureTech | ra2_awall | `ra2awall` |
+| Consortium | ra2_awall | `ra2awall` |
+| Syndicate | ra2_awall (inherited) | `ra2awall` (inherited) |
+| Naxis | ra2_swall | `ra2swall` |
+| Schwarzer Mond | ra2_ywall | `ra2ywall` |
+| Asian Alliance | asianalliance_concretebarrier | `asianalliancebarrier` |
+| TS GDI | asianalliance_concretebarrier | `asianalliancebarrier` |
+| TS Nod | ts_nod_laserfence | `tslaserfence` |
+| CABAL | ts_nod_laserfence | `tslaserfence` |
+| Forgotten | FENC (wire) | `wirefence` |
+| TKM | FENC (wire) | `wirefence` |
+| D2k Ordos | D2k wall | `d2k_construction_yard` |
+| D2k Ixian | D2k wall | `d2k_construction_yard` |
+
+### Changes Made
+- Restored missing RA2 faction wall actors (`ra2_awall`, `ra2_swall`, `ra2_ywall`)
+  with sprites and sequences from golden reference.
+- Changed TD Nod from `wirefence` to `chainlinkfence` per maintainer request.
+- Added shared `tslaserfence` prerequisite token so both TS Nod and CABAL
+  can build the laser fence.
+- Added shared `asianalliancebarrier` prerequisite token so both Asian
+  Alliance and TS GDI can build the Asian Alliance concrete barrier.
+- Removed `ra2fact` prerequisite from FutureTech (was enabling secondary
+  `ra2brik` wall).
+- Negated inherited `ra2awall` on RA2 Soviets and Yuri so they only get
+  their own faction-specific wall.
+- Removed `concretebarrier` and `sandbagbarrier` from all non-classic
+  faction construction yards.
 
 ---
 

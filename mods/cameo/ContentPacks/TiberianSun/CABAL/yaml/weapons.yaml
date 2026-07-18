@@ -237,6 +237,51 @@ TSHellfireTwin:
 		Explosions: cabal_missileexplosion
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
+TSCABALEnlightedLaser:
+	Range: 10088
+	ReloadDelay: 120
+	Inherits: ^TankDestroyerCannon
+	Inherits@LASER: ^LaserWeapon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Inherits@EFFECT: ^TSLaserEffect
+	ValidTargets: Ground, Water
+	Report: obelmod1.aud
+	Projectile:
+		Width: 110
+		Duration: 38
+		-HitAnim:
+		Color: CC22DDFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 45
+		SecondaryBeamColor: 444488FF
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 70000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	-Warhead@EffectAir:
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+
 ####################################################################################################
 #		Tiberian Sun Other
 ####################################################################################################

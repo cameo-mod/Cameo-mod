@@ -1,5 +1,33 @@
 # Development Log
 
+## 2026-07-18 — Claude session (TKM port + Blackrobe batch)
+
+- TKM CONTRIBUTOR PORT (`3bb6a34b3`): full-repo zip from a community
+  contributor analyzed (base = cea431010 with pre-rename-id payload),
+  translated through the applied rename_map_tkm, per-actor 3-way
+  merged into the pack. Arsenal-tree redesign, GP-25 replaces M203,
+  Berezka speed/cloak, engineer field kits, new weapons + warhead .cs
+  (DLLs rebuilt). Deviations flagged in the commit (kept warfactory
+  ProvidesPrerequisite — his removal would orphan every
+  ~tkm_warfactory prereq).
+- TKM MOVED into ContentPacks/RedAlert2Mod (`d981d65fe` renames +
+  `915714fe8` manifest/mod.yaml — the renames rode the earlier commit
+  via the staged index; completion committed immediately). Theme
+  folder rename POSTPONED (Blackrobe) — candidates logged in ROADMAP.
+- Monster tank Tesla/Thermonuclear rockets (`d981d65fe`): real weapon
+  swaps (mammoth logic) replace the imperceptible +10% multipliers;
+  duplicate ActorStatValues fixed earlier in `71765570b`.
+- Survival (`e8af695eb`): superlinear ramp, wave-size floor (dip fix),
+  veteran waves; win-objective fix earlier in `71765570b`. `survival 2`
+  copy was deleted by the team (`32669f345`) — main copy carries all.
+- SM passive income (Blackrobe): moondairyfarm verified correctly
+  wired; the missing piece (ra2oilderrick/ra2ywall conyard provisions)
+  is the MAINTAINER'S OTHER SESSION's uncommitted WIP — do not
+  double-fix. Laser Beetle/M200B report: wiring verified WAD
+  (replacement promotions retire them); if the REPLACEMENTS don't
+  appear despite bought promotions, check rank1 granting in-game.
+- NEXT: FULL SM REBALANCE (ROADMAP P1, sheet-first, workbook free).
+
 ## 2026-07-17 — Claude session SID-20260717-cl4b7e (RA1 legacy rename + two-session repair pass)
 
 **Landed (commits `fdd466494`, `4cf7e6909` + this session's repair commit):**

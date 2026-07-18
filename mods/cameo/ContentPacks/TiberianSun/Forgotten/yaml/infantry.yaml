@@ -824,7 +824,7 @@ forgotten_tiberianfiend:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_viniferafiend
+		Prerequisites: ~forgotten_barracks, forgotten_church, !forgotten_promotion_viniferafiend
 		Queue: Infantry, RAInfantry
 		Description: actor_forgotten_tiberianfiend.description
 	Mobile:

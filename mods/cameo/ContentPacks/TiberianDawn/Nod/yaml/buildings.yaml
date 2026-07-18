@@ -9,8 +9,8 @@ td_nod_constructionyard:
 		Prerequisite: fact
 	ProvidesPrerequisite@td_gdi_constructionyard:
 		Prerequisite: td_nod_constructionyard
-	ProvidesPrerequisite@wirefence:
-		Prerequisite: wirefence
+	ProvidesPrerequisite@chainlinkfence:
+		Prerequisite: chainlinkfence
 	RenderSprites:
 		Image: nodfact
 

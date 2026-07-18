@@ -794,3 +794,63 @@ tkm_spetsnaz:
 #######################################
 # TKM Vehicles
 #######################################
+
+tkmworker:
+	Inherits: YRSLAV
+	Tooltip:
+		Name: Worker
+	Targetable@SlaveFaster:
+		TargetTypes: SlaveFaster
+		RequiresCondition: SlaveFaster <= 3 && !untargetable
+	ExternalCondition@SlaveFaster:
+		Condition: SlaveFaster
+		TotalCap: 3
+	Voiced:
+		VoiceSet: SlaveWorkerVoice
+		RequiresCondition: !freed
+	Voiced@2:
+		VoiceSet: FreedSlaveVoice
+		RequiresCondition: freed
+	RenderSprites:
+		Image: tkmworker
+
+tkmvan:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Tooltip:
+		Name: Van
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkm_barracks, tkm_observationvan, ~!tkm_von, ~disabled
+		Queue: Infantry, RAInfantry
+		Description: actor_ra2snipe.description
+		BuildLimit: 1
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: VanSniper
+		LocalOffset: 500,0,400
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: VanSniper
+	AttackFrontal:
+		FacingTolerance: 0
+	ActorStatValues:
+		Upgrades: tkm_upgrade_titanarmorpiercingbulletsupgrade, tkm_upgrade_infantryupgrade
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		Image: tkm_von
