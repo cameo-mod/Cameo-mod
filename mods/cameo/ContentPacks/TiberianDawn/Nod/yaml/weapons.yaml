@@ -48,13 +48,13 @@ NodTurretLaser:
 	Report: vpalwe2d.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
-		Width: 50
+		Width: 96
 		Duration: 12
 		ZOffset: 2047
 		Color: FF0000
 		GlowIntensity: 0.8
 		SecondaryBeam: true
-		SecondaryBeamWidth: 20
+		SecondaryBeamWidth: 48
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@SmallArms: SpreadDamage
