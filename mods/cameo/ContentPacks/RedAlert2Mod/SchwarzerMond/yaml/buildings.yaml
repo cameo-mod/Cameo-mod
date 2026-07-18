@@ -18,8 +18,6 @@ schwarzermond_constructionyard:
 	WithBuildingPlacedOverlay:
 	ProvidesPrerequisite@ra2ywall:
 		Prerequisite: ra2ywall
-	ProvidesPrerequisite@ra2oilderrick:
-		Prerequisite: ra2oilderrick
 	Exit@1:
 		SpawnOffset: 213,-128,0
 		ExitCell: 1,2
@@ -601,7 +599,7 @@ schwarzermond_moondairyfarm:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Produces Passive income and adds hp bonus with Infantry
-		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter, ~techlevel.medium, derricklimit
+		Prerequisites: ~schwarzermond_constructionyard, schwarzermond_techcenter, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
