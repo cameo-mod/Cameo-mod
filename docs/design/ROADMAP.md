@@ -527,7 +527,12 @@ DESIGN formulas instead of silently "fixing".
 Full plan: **docs/design/BALANCE_PIPELINE.md**. PHASE 1 DONE
 2026-07-18: `tools/balance/extract_stats.py` + committed baseline
 ledger (32 faction files, 2025 actors, raw stats + provenance,
-deterministic, `--check` drift mode). Next: Phase 2 workbook builder. yaml → per-faction JSON
+deterministic, `--check` drift mode). PHASE 2 DONE 2026-07-18:
+`formula.py` (Tiger identity exact, symbolic equivalence vs the
+legacy cell formulas exact, closed-form Range solver) +
+`build_workbook.py` -> cameo_balance_v2.xlsx workbench (gitignored;
+32 faction tabs, weapon sub-rows, live formulas, locked non-input
+cells, delta traffic lights). Next: Phase 3 legacy comparator. yaml → per-faction JSON
 ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
 formulas live in the sheet, locked cells) → legacy-sheet comparator +
 discrepancy triage → gated write-back (apply_balance.py, maintainer
