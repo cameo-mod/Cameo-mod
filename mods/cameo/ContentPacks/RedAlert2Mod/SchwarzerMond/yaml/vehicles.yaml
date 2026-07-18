@@ -100,7 +100,7 @@ schwarzermond_laserbeetle:
 		Name: Laser Beetle
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~schwarzermond_warfactory, !schwarzermond_promotion_lasertank
+		Prerequisites: ~schwarzermond_warfactory, ~!schwarzermond_promotion_lasertank
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -199,7 +199,7 @@ schwarzermond_lunarpanzer:
 		Name: Lunar Panzer
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schwarzermond_warfactory, !schwarzermond_promotion_lunartiger
+		Prerequisites: ~schwarzermond_warfactory, ~!schwarzermond_promotion_lunartiger
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -738,7 +738,7 @@ schwarzermond_m200bjagerline:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, !schwarzermond_promotion_mars
+		Prerequisites: ~schwarzermond_warfactory, schwarzermond_radar, ~!schwarzermond_promotion_mars
 		Description: actor_v3.description
 	Valued:
 		Cost: 2500

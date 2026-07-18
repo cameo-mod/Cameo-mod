@@ -399,7 +399,7 @@ schwarzermond_haunebuii:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~schwarzermond_airfield, !schwarzermond_promotion_haunebuiii
+		Prerequisites: ~schwarzermond_airfield, ~!schwarzermond_promotion_haunebuiii
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_haunebu.description
 	Aircraft:
