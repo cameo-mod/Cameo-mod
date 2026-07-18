@@ -1,195 +1,201 @@
-# BALANCE PIPELINE — the mega plan (v1, 2026-07-18)
+# BALANCE PIPELINE — the mega plan (v2, 2026-07-18)
 
-_The long-term goal: balance changes become MECHANICAL. No agent (or
-human) can silently drift the game's stats, because the pipeline —
-not discipline, not document-reading — enforces consistency._
+_Balance changes become MECHANICAL. No agent (or human) can silently
+drift the game's stats, because the pipeline — not discipline, not
+document-reading — enforces consistency._
 
-## 0. The principle
+v2 incorporates the maintainer's refinements (2026-07-18): the ledger
+holds RAW yaml stats only (no derived values), the workbook consumes
+raw stats directly, Range is solved from Cost in-sheet, and the
+Formula-v2 per-unit-type program (DESIGN §12 second iteration) rides
+the same pipeline.
 
-Today, balance law lives in `docs/design/cameo_armor_system.xlsx` +
-DESIGN.md and is enforced only by agents *choosing* to read them.
-The pipeline inverts this: **yaml ⇄ JSON ledger ⇄ generated workbook**,
-with the JSON ledger committed to git and an audit that fails whenever
-yaml and ledger disagree. Hand-edited balance numbers then show up as
-red audit findings mechanically — no matter who edits what.
+## 0. The core loop (maintainer's target workflow)
 
 ```
-            extract (1)                build (2)
-  yaml  ────────────────►  JSON  ────────────────►  cameo_balance_v2.xlsx
- (packs)  ◄────────────── (ledger,   ◄──────────── (generated, formulas
-           write-back (4)  committed)   read-back    live in the sheet)
-                              │
-                              ▼ compare (3)
-                    legacy cameo_armor_system.xlsx
-                       → discrepancy report
+1. pull    yaml ──► JSON ledger          (extract raw stats)
+2. edit    change values in the ledger (or in the generated sheet)
+3. sheet   JSON ──► cameo_balance_v2.xlsx (raw stats + live formulas)
+4. tune    set Cost, the sheet solves Range (or check O/P/Q deltas)
+5. import  xlsx ──► JSON                 (validated read-back)
+6. push    JSON ──► yaml                 (gated, maintainer order)
+7. verify  drift audit: yaml ≡ ledger    (runs in run_all.sh forever)
 ```
 
-## 1. What the recon established (2026-07-18, read-only)
+## 1. ARCHITECTURE CORRECTION (the honest-opinion part, agreed with maintainer intent)
 
-- Workbook tabs: `Armor Types`, `Weapon Types` (constants), then
-  TYPE-organized legacy tabs (`Infantry`, `Tanks`, `Vehicles`,
-  `Aircraft`, `Defenses`) and ONE modern per-faction tab (`CABAL`).
-- **The CABAL tab is the target format** (the maintainer's own
-  evolution): columns `Mod | Name | Actor(id) | HP | Speed | Range |
-  Damage | WeaponClass | ReloadDelay | DPS | Special | UnitClass |
-  TechTier | O | P | Q | Cost | Target Cost`.
-- **The recovered formula set** (the balance law, verbatim from cells):
-  - `DPS  = Damage / ReloadDelay * WeaponClass`
-  - `O = (HP/100000 + Speed/100 + Range*Special/5 + DPS/200) * 200 * UnitClass * TechTier`
-  - `P = ((HP*Speed/25000) + (Range*Special*DPS/2.5)) * UnitClass * TechTier`
-  - `Q = (HP*Speed*Range*Special*DPS*UnitClass*TechTier) / 12500000`
-  - `Price = (O+P+Q)/3`
-  - Legacy tabs also use the INVERSE: solve Range (or another stat)
-    backward from a target Cost — i.e. the sheet supports both
-    "price the unit" and "fit the stat to the price" workflows.
-- Legacy tabs have NO actor ids (display names only, pre-rename) —
-  the comparator needs a name→id mapping table.
-- Existing code to reuse: `tools/audit/cameo_model.py` (full resolved
-  ruleset), `gen_damage_matrix`, `audit_stat_formulas`,
-  `audit_balance_sheet` (absorbed by the pipeline when done).
+"All 4 documents always mirrored and all writable" is the one part
+that cannot work as stated — four independently-writable copies of the
+same numbers is how drift is CREATED, not prevented. The goal (never
+manually checking mirrors) is kept, but through two rules:
 
-## 2. Layout decision: ONE JSON PER FACTION (internal type sections)
+- **Single writer at any moment.** A tiny state file
+  (`docs/balance/.session`) records which representation is "open"
+  (yaml | ledger | sheet). Pipeline commands move values in ONE
+  direction and flip the state; running a command against a stale
+  state aborts with instructions. Mirrors are verified at rest, not
+  hoped for during writes.
+- **The workbook is a WORKBENCH, not a source.** xlsx is binary —
+  concurrent agents + git = unmergeable conflicts. The committed
+  truths are exactly two: yaml (runtime) and the JSON ledger (balance).
+  The sheet is regenerated on demand from the ledger and read back
+  through a validating import; a lost sheet costs one command.
+- The **drift audit** re-extracts yaml and diffs against the ledger on
+  every run_all: any hand-edited stat = red finding with file + line.
+  THIS is the "always mirrored without me checking" guarantee.
 
-`docs/balance/<theme>_<faction>.json` — e.g. `redalert2mod_tkm.json`,
-plus `shared_<theme>.json` for theme-shared actors and `core.json`
-for cross-theme/neutral. NOT one file per type per faction.
+## 2. Ledger: RAW STATS ONLY (maintainer order — no derived values)
 
-Why per-faction (recommended):
-- Mirrors the ContentPack = one faction = one loading unit = one
-  balance-review unit. A faction rebalance is one file diff.
-- ~30 files instead of ~450; git history stays readable.
-- The type split lives INSIDE the file as sections mirroring the
-  pack's closed yaml set (`infantry`, `vehicles`, `aircraft`,
-  `defenses`, `buildings`, `naval`, `upgrades`…), so nothing is lost
-  versus the per-type alternative.
-
-Why central `docs/balance/` and not inside each ContentPack: the JSON
-is DERIVED tooling data (a ledger), not mod content the engine loads;
-keeping it out of the packs keeps pack folders shippable and makes
-cross-faction tooling trivial. (Revisit only if the ledger ever
-becomes engine-loaded.)
-
-## 3. JSON schema (sketch — Phase 1 freezes it as a JSON Schema file)
+No DPS, no combined Damage, no effective-anything in the JSON. Every
+number appears exactly as the yaml states it, with provenance:
 
 ```json
 {
-  "schema": 1,
+  "schema": 2,
   "faction": "tkm",
   "pack": "ContentPacks/RedAlert2Mod/TKM",
-  "generated_from": "<git rev>",
   "sections": {
-    "infantry": {
-      "tkm_rifleman": {
-        "name": "Rifleman",
-        "cost":       {"v": 100,   "src": "yaml/infantry.yaml#Valued.Cost"},
-        "hp":         {"v": 14000, "src": "yaml/infantry.yaml#Health.HP"},
-        "speed":      {"v": 58,    "src": "..."},
-        "armor":      {"v": "None","src": "..."},
-        "tier":       {"v": 1,     "derived": "prerequisites"},
-        "unit_class": {"v": 0.5,   "sheet_input": true},
-        "special":    {"v": 1,     "sheet_input": true},
-        "weapons": [{
-          "id": "tkmrifle", "damage": 2000, "reload": 20,
-          "weapon_class": 0.75, "range": 5.0,
-          "src": "yaml/weapons.yaml#tkmrifle"
-        }],
-        "build_limit": null, "prerequisites": ["~tkm_barracks"],
-        "gated_by": {"promotion": null, "upgrade": null}
+    "vehicles": {
+      "tkm_abrams": {
+        "name": "Abrams",
+        "cost":  {"v": 1500,  "src": "yaml/vehicles.yaml#Valued.Cost"},
+        "hp":    {"v": 125000,"src": "yaml/vehicles.yaml#Health.HP"},
+        "speed": {"v": 80,    "src": "yaml/vehicles.yaml#Mobile.Speed"},
+        "armor": {"v": "Heavy","src": "yaml/vehicles.yaml#Armor.Type"},
+        "armaments": [
+          {"slot": "Armament@PRIMARY", "weapon": "tkm120mm",
+           "requires": null,
+           "stats": {
+             "damage":      {"v": 16000, "src": "yaml/weapons.yaml#tkm120mm.Warhead@...Damage"},
+             "reload_delay":{"v": 65,    "src": "yaml/weapons.yaml#tkm120mm.ReloadDelay"},
+             "burst":       {"v": 1,     "src": "..."},
+             "burst_delays":{"v": null,  "src": "..."},
+             "range":       {"v": 6500,  "src": "yaml/weapons.yaml#tkm120mm.Range"},
+             "spread":      {"v": 426,   "src": "..."},
+             "versus_template": "^MediumCannon"
+           }}
+        ],
+        "design": {
+          "unit_class": 1.0, "special": 1.0, "weapon_class": 1.0,
+          "tech_tier": 1.0, "class_anchor": "mbt"
+        },
+        "prerequisites": ["~tkm_warfactory"], "build_limit": null
       }
     }
   }
 }
 ```
 
-Key properties:
-- **Every value carries a provenance anchor** (`src`: file + trait
-  path) so write-back is surgical and needs no guessing.
-- **Sheet-input fields** (`unit_class`, `special`, `weapon_class`,
-  `tech_tier`) are design judgments, not yaml facts — they SEED from
-  the legacy sheet during Phase 3 and afterwards live in the ledger
-  as the single source.
-- Deterministic serialization (sorted keys, one value per line) so
-  git diffs are minimal and mergeable across concurrent agents.
+- `design.*` fields are judgment inputs (they never exist in yaml);
+  they seed from the legacy sheet once (Phase 3) and live here after.
+- Range stays in **raw wdist** (5000, not 5.0) — DESIGN §12 note; the
+  sheet divides by 1000 in a helper column, the ledger never does.
+- Multi-armament units keep EVERY armament with its condition
+  (`requires`) — the old single-Damage flattening is retired; which
+  armaments count toward pricing is a design flag per armament
+  (default: unconditional + primary-upgrade ones).
+- All derived quantities (DPS, effective reload, price) exist ONLY as
+  formula cells in the sheet and as `formula.py` functions — computed,
+  never stored.
 
-## 4. The five phases
+## 3. Workbook v2 format (raw stats in, formulas visible)
 
-**Phase 1 — Extractor** (`tools/balance/extract_stats.py`) — effort M
-- cameo_model resolves every faction roster (post-Inherits); emit the
-  per-faction JSONs; JSON-Schema validation; `--check` mode re-extracts
-  and diffs against committed ledger (exit 1 on drift).
-- Verification: extract twice = byte-identical; spot-check 10 units
-  against yaml by hand; commit the baseline ledger.
+Per-faction tabs (CABAL-tab lineage), one UNIT row followed by one
+indented WEAPON row per armament (mirroring yaml structure):
 
-**Phase 2 — Workbook builder** (`tools/balance/build_workbook.py`) — effort M
-- Generates `docs/design/cameo_balance_v2.xlsx` from the ledger:
-  - `Constants` tab: armor/weapon class tables + formula coefficients
-    in NAMED cells (the one place to tune the law);
-  - one tab per faction in the CABAL-tab format, one row per unit,
-    raw stats as values, O/P/Q/DPS/Price as REAL Excel formulas
-    referencing Constants (so the maintainer's set-M-watch-OPQ
-    workflow survives);
-  - Delta columns: `Price(formula) − Cost(actual)` with conditional
-    formatting (green within ±10%, amber ±25%, red beyond);
-  - cell protection: everything locked except the designated input
-    columns — fat-fingering a computed column is impossible.
-- The same formulas implemented ONCE in `tools/balance/formula.py`;
-  equivalence test: python evaluation == Excel evaluation for every
-  row (openpyxl reads the computed values after a LibreOffice/Excel
-  recalc pass, or we evaluate with `formulas` lib).
+| col | content | kind |
+|---|---|---|
+| A–C | Mod, Name, Actor id | identity (locked) |
+| D–H | HP, Speed, Armor, TechTier, UnitClass, Special | raw + design inputs |
+| I–N (weapon rows) | Damage, ReloadDelay, Burst, BurstDelays, Range(wdist), WeaponClass | raw |
+| O | EffReload `= ReloadDelay + BurstDelays*(Burst-1)` | helper formula |
+| P | DPS `= Damage*Burst/EffReload*WeaponClass` (summed to the unit row) | helper formula |
+| Q–S | O, P, Q estimators (burst-aware, from raw cells) | formula |
+| T | Price `=(O+P+Q)/3` — Formula v2 swaps in the class-anchor form | formula |
+| U | Cost (actual, from ledger) | value |
+| V | Δ = Price − Cost, traffic-light conditional formatting | formula |
+| W | **Range-solver**: Range required for Price = Cost (closed form — the estimator mean is linear in Range, so the legacy inverse survives the raw-stat refactor) | formula |
 
-**Phase 3 — Legacy comparator** (`tools/balance/compare_legacy.py`) — effort M–L
-- Reads the OLD workbook (respecting the `~$` lock law), builds the
-  display-name → actor-id mapping (auto-match + a committed manual
-  `name_map.yaml` for the rest — the legacy tabs predate the renames).
-- Report `docs/balance/discrepancies.md`:
-  (a) yaml units absent from the legacy sheet (never priced),
-  (b) legacy rows with no living actor (dead rows),
-  (c) value mismatches yaml-vs-sheet per stat with severity,
-  (d) formula-price vs actual-cost outliers (replaces
-      audit_stat_formulas' price section).
-- Maintainer triages ONCE: for each mismatch, which side is law.
-  The verdicts seed the ledger's sheet-input fields.
+- Helper columns instead of monster formulas: every intermediate is a
+  visible, debuggable cell (maintainer's "all stats included" rule).
+- Constants tab: armor ladder, weapon-class tables, class-anchor
+  baselines (Formula v2), rounding conventions. All formulas reference
+  it by named range — tune the law in ONE place.
+- Locked cells everywhere except raw-stat and design-input columns.
+- `formula.py` implements the identical math; equivalence-tested
+  against the sheet on every build (legacy workbook's own computed
+  values are the ground truth for the overlap set).
 
-**Phase 4 — Write-back** (`tools/balance/apply_balance.py`) — effort M
-- `apply_balance.py --faction tkm [--fields cost,hp] [--from-workbook]`
-  writes ledger values into yaml via the provenance anchors, prints a
-  human diff, refuses to run on a dirty faction file set.
-- **Gated: runs only on explicit maintainer order** (the balance law
-  stays: numbers move sheet-first, then yaml — now automated).
-- Round-trip invariant test: extract → write-back → extract is a
-  fixed point (byte-identical ledger).
-- Boot gate + audit suite are part of the command's checklist output.
+## 4. Sync commands (tools/balance/)
 
-**Phase 5 — Enforcement** — effort S
-- `audit_balance_drift` joins run_all.sh: re-extract and diff vs the
-  committed ledger → any hand-edited yaml stat = red finding with the
-  exact file/line and the ledger value.
-- DESIGN.md gets the new law: agents NEVER hand-edit balance numbers;
-  the only path is ledger/workbook → apply_balance.py. CLAUDE.md
-  balance section updated to point here.
-- audit_stat_formulas + audit_balance_sheet retire into the pipeline.
+| command | direction | gate |
+|---|---|---|
+| `balance pull [--faction X]` | yaml → ledger | refuses if ledger has uncommitted edits |
+| `balance sheet [--faction X]` | ledger → xlsx | always safe (workbench regen) |
+| `balance import` | xlsx → ledger | schema + range validation, prints value diff |
+| `balance push [--faction X]` | ledger → yaml via provenance anchors | **maintainer order only**; prints diff; then boot gate + audits |
+| `balance check` | verify yaml ≡ ledger | run_all.sh member, red findings on drift |
 
-## 5. Risks & mitigations
+Round-trip invariants tested in CI-style: pull∘push = identity,
+sheet∘import = identity.
 
-- **Formula archaeology wrong** → Phase 2's equivalence test uses the
-  LEGACY workbook's own computed values as ground truth for overlap
-  rows before trusting the reimplementation.
-- **Name mapping (renames)** → manual `name_map.yaml` is committed and
-  reviewed; unmatched rows are listed, never guessed silently.
-- **Rounding conventions** (Cost granularity 25/50, HP steps) →
-  captured as Constants-tab values; write-back rounds identically.
-- **Workbook open in Excel** (`~$` lock) → every tool checks the lock
-  and queues, per the standing law.
-- **Concurrent agents** → deterministic serialization + drift audit
-  makes collisions visible immediately; the ledger merges line-wise.
-- **Stat scale anomalies** (e.g. SM's ×10 HP outliers found by
-  audit_stat_formulas) surface in Phase 3 as mismatch class (d) and
-  get fixed through the pipeline, not ad hoc.
+## 5. Formula v2 — per-unit-type baselines (DESIGN §12 second iteration)
 
-## 6. Sequencing & first customer
+Already designed in DESIGN §12 (looked up 2026-07-18): everything is
+anchored on the **Naxis Tiger Tank** (100000 HP / 100 speed / 10000
+damage / range 5000 / reload 50 → O=P=Q=Cost=800 exactly), which
+breaks at the low end (no intercept) and forces conventions like
+defenses-speed-100 and bombers-reload-250. The documented fix — now
+implemented through the pipeline:
 
-Phases land in order 1 → 2 → 3 (each is independently useful); 4–5
-follow once the maintainer signs off the Phase 3 triage. **The SM full
-rebalance (ROADMAP P1) becomes the pipeline's first customer**: its 38
-known findings are re-derived by Phase 3 and fixed via Phase 4 —
-proving the loop end-to-end on exactly the faction that needs it.
+- **One baseline unit per unit class**, each with Tiger-style round
+  numbers; price by normalized deviation from the class anchor:
+  `Cost = Cost₀ × (O/O₀ + P/P₀ + Q/Q₀) / 3` (exact at each anchor).
+- Class list & anchor candidates (maintainer confirms each):
+  - `mbt` (exists): Naxis Tiger Tank, Cost₀ 800 — unchanged.
+  - `fighter` (exists): port the current separate fighter formula
+    into the registry unchanged, then re-express on raw stats.
+  - `bomber` (NEW): replace the reload=250 convention with real
+    ReloadDelay from raw stats; anchor = a maintainer-picked bomber.
+  - `defense` (NEW): replace speed=100 convention with a defense term
+    (footprint + power draw are the natural "mobility" substitutes);
+    keep DESIGN's charge-delay −0.25 rule as a K modifier.
+  - `infantry` classes (NEW): scout / basic / heavy / hero anchors —
+    absorbs the UnitClass column per DESIGN §12.
+  - later: naval, harvester/economy, epic/BuildLimit-1 units.
+- Fitting workflow per class: maintainer names 3–5 units they consider
+  correctly priced → `fit_anchor.py` does least-squares on the class
+  coefficients → validation table across the whole class → maintainer
+  signs → the class formula becomes law in the Constants tab and
+  `formula.py`. One class at a time, sheet stays usable throughout
+  (unfitted classes keep the Tiger formula until replaced).
+
+## 6. Phases (revised, in execution order)
+
+| phase | deliverable | effort |
+|---|---|---|
+| 1 | Extractor: raw-stat ledger, multi-armament, provenance, deterministic; `balance check` mode | M |
+| 2 | Workbook builder: raw columns + helpers + solver + locks + Constants; equivalence test vs formula.py | M |
+| 3 | Legacy comparator: name→id map, seed `design.*` inputs from old sheet, discrepancy report, maintainer triage | M–L |
+| 4 | Sync commands + session state + round-trip invariants + gated push | M |
+| 5 | Formula v2 program: class registry, anchor fitting, per-class sign-off (mbt → fighter → bomber → defense → infantry → rest) | L (per-class S) |
+| 6 | Enforcement: `balance check` in run_all, DESIGN/CLAUDE law update, retire audit_stat_formulas + audit_balance_sheet into the pipeline | S |
+
+First customer: the SM full rebalance (ROADMAP P1b) runs on Phases
+1–4 the moment they land.
+
+## 7. Risks & mitigations (v2 delta)
+
+- Multi-armament pricing is the hardest format problem (the old
+  one-Damage flattening is why sheet and yaml drifted); the
+  weapon-sub-row layout + per-armament pricing flags solve it
+  explicitly rather than implicitly.
+- Solving Range from Cost stays closed-form only while price is
+  linear in Range; Formula-v2 class variants must preserve that (they
+  do — Range appears linearly in O, P and Q alike). The solver cell
+  is regenerated per class formula.
+- Versus tables: mirrored into the ledger read-only (from the ~30
+  weapon-class templates per DESIGN's weapon-construction law); the
+  sheet's WeaponClass stays the design scalar. Formalizing versus
+  into pricing is a Formula-v3 question, deliberately out of scope.
+- xlsx never committed → no binary merge conflicts, ever.
