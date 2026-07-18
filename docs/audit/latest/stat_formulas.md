@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **761** across 1881 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **763** across 1884 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (40)
@@ -163,7 +163,7 @@ Violations: **761** across 1881 roster actors (reference-clean units: gdiarcher,
 | wc2_humans_militiapeasant | infantry declares Repairable locally |  |
 
 
-_242 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_243 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (59)
@@ -301,7 +301,7 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 | yuri_psychictower | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
-## F7 — defense Power.Amount ≠ -Cost/20  (90)
+## F7 — defense Power.Amount ≠ -Cost/20  (92)
 
 | actor | actual | expected |
 |---|---|---|
@@ -351,11 +351,13 @@ _242 further infantry inherit Repairable from the infantry base template (^Defau
 | ra2_allies_concretebarrier | Power missing | expected -10 |
 | ra2_allies_grandcannon | Power -200 | expected -250 (-Cost/20) |
 | ra2_allies_weathercontrolcenter | Power -200 | expected -500 (-Cost/20) |
+| ra2_awall | Power missing | expected -10 |
 | ra2_soviets_battlebunker | Power missing | expected -40 |
 | ra2_soviets_concretebarrier | Power missing | expected -10 |
 | ra2_soviets_ironcurtain | Power -200 | expected -250 (-Cost/20) |
 | ra2_soviets_nuclearmissilesilo | Power -200 | expected -500 (-Cost/20) |
-| ra2brik | Power missing | expected -10 |
+| ra2_swall | Power missing | expected -10 |
+| ra2_ywall | Power missing | expected -10 |
 | sbag | Power missing | expected -2 |
 | schwarzermond_meteortractionray | Power -200 | expected -500 (-Cost/20) |
 | schwarzermond_sturmcannon | Power -50 | expected -60 (-Cost/20) |

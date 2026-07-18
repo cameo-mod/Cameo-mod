@@ -1,6 +1,6 @@
 # audit_sequences — art/sequence references (B6)
 
-S1 missing images: **0**, S2 missing sequences: **0**, S3 unreferenced sequence images: **548** (of 2981 defined)
+S1 missing images: **0**, S2 missing sequences: **0**, S3 unreferenced sequence images: **548** (of 2986 defined)
 
 
 ## S1 — actor render image not defined in sequences

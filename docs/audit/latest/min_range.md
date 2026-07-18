@@ -84,6 +84,9 @@
 | FutureTankCannonsE | 8500 | 1500 | 1700 |
 | HueyCryoMissiles | 5528 | 553 | 1105 |
 | HueyTwinMissiles | 5528 | 553 | 1105 |
+| HeavyAATankCannontkm | 4746 | 474 | 950 |
+| tkmheavyaaturret | 10588 | 474 | 2120 |
+| HueyFireMissiles | 5528 | 553 | 1105 |
 | Dune_SiegeMortar | 9920 | 1984 | 1985 |
 | DeviatorMissile | 7070 | 1100 | 1415 |
 | DeviatorMissile_Artillery | 10025 | 1100 | 2005 |
@@ -140,7 +143,4 @@
 | plymouthRPG | 6144 | 512 | 1230 |
 | plymouthTigerRPG | 6144 | 512 | 1230 |
 | plymouthDefenceRPG | 7168 | 512 | 1435 |
-| HeavyAATankCannontkm | 4746 | 474 | 950 |
-| tkmheavyaaturret | 10588 | 474 | 2120 |
-| HueyFireMissiles | 5528 | 553 | 1105 |
 

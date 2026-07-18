@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **28** — L1 leaks: **429**, L3 concrete-inherit leaks: **45**, shared/unattributed buildables: **91**
+Factions checked: **28** — L1 leaks: **431**, L3 concrete-inherit leaks: **45**, shared/unattributed buildables: **91**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -175,6 +175,8 @@ Factions checked: **28** — L1 leaks: **429**, L3 concrete-inherit leaks: **45*
 | ra1_soviets | ra1_soviets_warfactory | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/buildings.yaml |
 | ra1_soviets | ra1_soviets_yakscoutplane | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/aircraft.yaml |
 | ra1_soviets | ra1_soviets_zapper | redalert/soviets | mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml |
+| ts_gdi | asianalliance_concretebarrier | redalert2mod/asianalliance | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/buildings.yaml |
+| cabal | ts_nod_laserfence | tiberiansun/nod | mods/cameo/ContentPacks/TiberianSun/Nod/yaml/defenses.yaml |
 | ra2_allies | ra2_allies_aegiscruiser | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/naval.yaml |
 | ra2_allies | ra2_allies_airforcecommandhq | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |
 | ra2_allies | ra2_allies_alliedbarracks | redalert2/allies | mods/cameo/ContentPacks/RedAlert2/Allies/yaml/buildings.yaml |

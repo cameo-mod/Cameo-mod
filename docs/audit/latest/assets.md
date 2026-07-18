@@ -1,6 +1,6 @@
 # audit_assets — asset format norms (B11, RAMpage)
 
-PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-conforming: **3632**)
+PNGs scanned: **1959** (over budget: **142**), WAVs scanned: **8776** (non-conforming: **3632**)
 
 
 ## P1 — PNGs over budget (> 8 MiB or > 8192px)
@@ -146,6 +146,8 @@ PNGs scanned: **1945** (over budget: **140**), WAVs scanned: **8776** (non-confo
 | mods/cameo/bits/ra2/mod/futuretech_riptideacv.png | 413 KiB | 10240x63 |
 | mods/cameo/bits/ra2/mod/latinsyndicate_tortugatank.png | 307 KiB | 10752x69 |
 | mods/cameo/bits/ra2/mod/naxis_coneheadsknights.png | 439 KiB | 30636x60 |
+| mods/cameo/bits/ra2/mod/nax_bitsmark.png | 2631 KiB | 32768x512 |
+| mods/cameo/bits/ra2/mod/nax_bitsmark_tur.png | 336 KiB | 16384x256 |
 | mods/cameo/bits/ra2/mod/nax_conehead2.png | 443 KiB | 30636x60 |
 
 

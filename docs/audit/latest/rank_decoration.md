@@ -5,7 +5,7 @@
 | File | Line | Actor | Issue | Found |
 |---|---|---|---|---|
 | ContentPacks/RedAlert/Soviets/yaml/infantry.yaml | 650 | ra1_soviets_commissar | TD actor missing RankDecoration | ? |
-| ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml | 52 | muboat.nax | TD actor missing RankDecoration | ? |
+| ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml | 53 | muboat.nax | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml | 155 | A10Carrier | TD actor missing RankDecoration | GDIRankDecoration |
 | ContentPacks/TiberianDawn/Nod/yaml/naval.yaml | 58 | ssmsub | TD actor missing RankDecoration | NodRankDecoration |
 | ContentPacks/TiberianDawn/Nod/yaml/naval.yaml | 129 | nodlasercorvette | TD actor missing RankDecoration | NodRankDecoration |
@@ -13,7 +13,7 @@
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 67 | ^E3 | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianDawn/Shared/yaml/templates.yaml | 111 | ^RMBO | TD actor missing RankDecoration | ? |
 | ContentPacks/TiberianSun/CABAL/yaml/aircraft.yaml | 225 | cabal_hunter_drone | TD actor missing RankDecoration | CABALRankDecoration |
-| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 809 | cabal_eliminator800 | RA2 actor has RankDecoration (should not) | CABALRankDecoration |
+| ContentPacks/TiberianSun/CABAL/yaml/infantry.yaml | 932 | cabal_eliminator800 | RA2 actor has RankDecoration (should not) | CABALRankDecoration |
 | ContentPacks/Warcraft2/Humans/yaml/aircraft.yaml | 28 | wc2_humans_gryphonrider | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/defenses.yaml | 1 | wc2_humans_humanscouttower | TD actor missing RankDecoration | ? |
 | ContentPacks/Warcraft2/Humans/yaml/infantry.yaml | 55 | wc2_humans_footman | TD actor missing RankDecoration | ? |

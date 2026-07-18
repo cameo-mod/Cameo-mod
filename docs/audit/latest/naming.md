@@ -5,30 +5,30 @@
 
 | faction | compliant | % | proposal collisions | asset files to rename |
 |---|---|---|---|---|
-| asianalliance | 72/72 | 100% | 0 | 112 |
-| cabal | 79/79 | 100% | 0 | 143 |
+| asianalliance | 71/71 | 100% | 0 | 112 |
+| cabal | 80/80 | 100% | 0 | 147 |
 | eden | 43/43 | 100% | 0 | 2 |
 | forgotten | 77/77 | 100% | 0 | 48 |
-| futuretech | 56/57 | 98% | 0 | 38 |
-| ixian | 57/59 | 96% | 0 | 25 |
-| japan | 68/69 | 98% | 0 | 42 |
+| futuretech | 56/56 | 100% | 0 | 36 |
+| ixian | 57/58 | 98% | 0 | 25 |
+| japan | 68/68 | 100% | 0 | 40 |
 | latinsyndicate | 65/65 | 100% | 0 | 44 |
-| naxis | 73/73 | 100% | 0 | 30 |
+| naxis | 73/73 | 100% | 0 | 31 |
 | ordos | 70/70 | 100% | 0 | 31 |
 | plymouth | 44/44 | 100% | 0 | 2 |
 | protoss | 72/72 | 100% | 0 | 46 |
 | ra1_allies | 0/62 | 0% | 0 | 124 |
 | ra1_soviets | 0/106 | 0% | 0 | 181 |
 | ra2_allies | 0/66 | 0% | 0 | 233 |
-| ra2_soviets | 0/56 | 0% | 0 | 141 |
+| ra2_soviets | 0/56 | 0% | 0 | 142 |
 | schwarzermond | 59/59 | 100% | 0 | 24 |
 | steelconsortium | 60/60 | 100% | 0 | 33 |
 | td_gdi | 0/60 | 0% | 0 | 106 |
 | td_nod | 0/64 | 0% | 0 | 116 |
 | terran | 77/77 | 100% | 0 | 58 |
-| tkm | 72/72 | 100% | 0 | 38 |
+| tkm | 72/72 | 100% | 0 | 39 |
 | ts_gdi | 0/62 | 0% | 0 | 142 |
-| ts_nod | 0/47 | 0% | 0 | 132 |
+| ts_nod | 0/46 | 0% | 0 | 127 |
 | wc2_humans | 69/69 | 100% | 0 | 15 |
 | wc2_orcs | 60/60 | 100% | 0 | 12 |
 | yuri | 64/64 | 100% | 0 | 7 |
@@ -39,22 +39,22 @@
 
 | faction | icons compliant | % |
 |---|---|---|
-| asianalliance | 71/71 | 100% |
-| cabal | 79/79 | 100% |
+| asianalliance | 70/70 | 100% |
+| cabal | 80/80 | 100% |
 | eden | 43/43 | 100% |
 | forgotten | 75/77 | 97% |
-| futuretech | 56/57 | 98% |
+| futuretech | 56/56 | 100% |
 | ixian | 41/41 | 100% |
-| japan | 64/68 | 94% |
+| japan | 64/67 | 95% |
 | latinsyndicate | 65/65 | 100% |
-| naxis | 72/72 | 100% |
+| naxis | 73/73 | 100% |
 | ordos | 48/48 | 100% |
 | plymouth | 44/44 | 100% |
 | protoss | 72/72 | 100% |
 | ra1_allies | 61/61 | 100% |
 | ra1_soviets | 105/105 | 100% |
 | ra2_allies | 64/64 | 100% |
-| ra2_soviets | 54/54 | 100% |
+| ra2_soviets | 54/55 | 98% |
 | schwarzermond | 59/59 | 100% |
 | steelconsortium | 59/60 | 98% |
 | td_gdi | 60/60 | 100% |
@@ -62,7 +62,7 @@
 | terran | 77/77 | 100% |
 | tkm | 72/72 | 100% |
 | ts_gdi | 62/62 | 100% |
-| ts_nod | 47/47 | 100% |
+| ts_nod | 46/46 | 100% |
 | wc2_humans | 15/16 | 93% |
 | wc2_orcs | 6/6 | 100% |
 | yuri | 63/64 | 98% |
