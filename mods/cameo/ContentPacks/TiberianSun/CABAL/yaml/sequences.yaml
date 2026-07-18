@@ -314,6 +314,75 @@ cabal_hackercyborg:
 	icon:
 		Filename: cabal_icons|cabal_hackercyborg_icon.png
 
+cabal_enlighted:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: cabal_sprites|cabal_enlighted.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 366
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 366
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 372
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 452
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 472
+	crippled-run:
+		Start: 284
+		Length: 10
+		Facings: 8
+		ShadowStart: 640
+	crippled-stand:
+		Start: 268
+		Facings: 8
+		ShadowStart: 632
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 492
+	crippled-attack:
+		Start: 268
+		Facings: 8
+		ShadowStart: 632
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 572
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 592
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 572
+	die4:
+		Filename: ts_shared_sprites|frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 592
+		ZOffset: -511
+	icon:
+		Filename: cabal_icons|cabal_enlighted_icon.png
+
 tscabalengi:
 	Inherits: ^TSBasicInfantry
 	Defaults:
@@ -382,7 +451,7 @@ tscabalengi:
 		ShadowStart: 484
 		ZOffset: -511
 	icon:
-		Filename: cabal_icons|cabal_hackercyborg_icon.png
+		Filename: cabal_icons|cabal_engineer_icon.png
 
 cabal_cyborgcommando:
 	Inherits: ^TSBasicInfantry
@@ -1738,7 +1807,7 @@ cabal_hunter_drone:
 		Facings: 32
 		Scale: 0.5
 	icon:
-		Filename: cabal_icons|cabal_hunter_drone_carrier_icon.png
+		Filename: cabal_icons|cabal_orb_drone_icon.png
 
 cabal_repair_drone:
 	Defaults:
@@ -1748,7 +1817,7 @@ cabal_repair_drone:
 	idle:
 		Facings: 64
 	icon:
-		Filename: cabal_icons|cabal_hunter_drone_carrier_icon.png
+		Filename: cabal_icons|cabal_rep_drone_icon.png
 
 cabal_overkill_gunship:
 	idle:
