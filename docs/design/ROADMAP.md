@@ -522,7 +522,22 @@ DESIGN formulas instead of silently "fixing".
   force"); (d) pacing already retuned in Discord: initial 180→60,
   between-waves 90→30 (tester applied).**
 
-### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn — NEXT after the TKM port)
+### P1 — BALANCE PIPELINE (ordered 2026-07-18 — "very important long term goal")
+
+Full plan: **docs/design/BALANCE_PIPELINE.md**. yaml → per-faction JSON
+ledger (committed) → generated cameo_balance_v2.xlsx (CABAL-tab format,
+formulas live in the sheet, locked cells) → legacy-sheet comparator +
+discrepancy triage → gated write-back (apply_balance.py, maintainer
+order only) → drift audit in run_all so hand-edited balance numbers
+become red findings mechanically. Phases 1-3 first (extractor,
+workbook builder, comparator); the SM rebalance below is the
+pipeline's first customer.
+
+- Jagerline rename: new candidate from maintainer "Alter Peter" (the
+  Munich bell tower) — parked with Wasserfall / Taifun / Rheintochter;
+  maintainer explicitly wants to think more before deciding.
+
+### P1b — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17 — now the balance pipeline's first customer)
 
 Maintainer order: "we also need a full rebalance on the schwarzer mond
 faction." Rules of engagement:
