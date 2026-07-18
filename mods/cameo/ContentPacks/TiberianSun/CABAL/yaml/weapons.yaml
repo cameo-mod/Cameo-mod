@@ -134,23 +134,25 @@ TSCABALEMPDisable.end:
 		ValidTargets: Ground, Ship
 
 TSCABALObeliskLaserFire:
-	Range: 12288
-	ReloadDelay: 90
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Inherits@EFFECT: ^TSLaserEffect
+	ReloadDelay: 90
+	Range: 12288
 	ValidTargets: Ground, Water
-	Report: obelmod1.aud
+	Report: cabal_obelisk_fire.wav
+	SoundVolume: 2.0
 	Projectile:
 		Width: 110
 		Duration: 38
 		-HitAnim:
 		Color: CC22DDFF
+		GlowIntensity: 1.5
 		SecondaryBeam: true
 		SecondaryBeamWidth: 45
-		SecondaryBeamColor: 444488FF
+		SecondaryBeamColor: FFFFFFFF
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage

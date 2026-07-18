@@ -121,7 +121,7 @@ cabal_heavycabalobelisk:
 	Valued:
 		Cost: 2400
 	Tooltip:
-		Name: Heavy CABAL Obelisk
+		Name: Fortified Obelisk
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter
@@ -143,16 +143,18 @@ cabal_heavycabalobelisk:
 		Sequence: idle
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
-		LocalOffset: 0,0,1956
+		LocalOffset: 0,0,1733
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 50
 		ChargingCondition: charging
-	AmbientSound:
+	AmbientSoundCA:
 		RequiresCondition: charging
-		SoundFiles: obelpowr.aud
-		Interval: 30, 40
+		SoundFiles: cabal_obelisk_charge.wav
+		FinalSound: cabal_obelisk_charge_cancel.wav
+		VolumeMultiplier: 2.0
+		Interval: 100
 	-SpawnActorsOnSell:
 	DetectCloaked:
 		Range: 2c512
