@@ -190,11 +190,11 @@ ts_nod_laserturret:
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSTurretLaser
-		LocalOffset: 528,0,192
+		LocalOffset: 512,0,180
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserTurretLaser
-		LocalOffset: 528,0,192
+		LocalOffset: 512,0,180
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	BodyOrientation:
 		QuantizedFacings: 16
