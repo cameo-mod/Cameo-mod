@@ -1858,9 +1858,12 @@
    "td_nod_minigunner": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4500",
+      "reloaddelay": "40",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -1878,13 +1881,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_nod_minigunner_minigun"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "2",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4500",
+      "reloaddelay": "40",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1902,12 +1908,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_nod_minigunner_minigun"
      },
      {
+      "burst": "4",
+      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "range": "4983",
-      "reloaddelay": "25",
+      "design_weapon_class": 0.75,
+      "range": "4500",
+      "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@Upgrade",
       "versus_templates": [
@@ -1952,13 +1961,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "M16Laser"
+      "weapon": "td_nod_minigunner_minigun_laser"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "range": "4983",
-      "reloaddelay": "25",
+      "design_weapon_class": 0.75,
+      "range": "4500",
+      "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
@@ -2003,7 +2015,7 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "M16Laser"
+      "weapon": "td_nod_minigunner_minigun_laser"
      }
     ],
     "armor": {
@@ -2015,14 +2027,14 @@
      "v": "100"
     },
     "design": {
-     "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "class_anchor": "scout",
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
-     "src": "inherited",
-     "v": "16000"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
+     "v": "30000"
     },
     "name": "Nod Minigunner",
     "prerequisites": [
@@ -2037,8 +2049,8 @@
      "v": "8000"
     },
     "speed": {
-     "src": "inherited",
-     "v": "60"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
+     "v": "65"
     }
    },
    "td_nod_rocketsoldier": {

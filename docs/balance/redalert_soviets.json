@@ -5748,9 +5748,12 @@
    "ra1_soviets_rifleinfantry": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "burst": "3",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "55",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -5768,13 +5771,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1Carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "burst": "3",
+      "burstdelays": "5",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "55",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -5792,17 +5798,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1Carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine"
      },
      {
+      "burst": "3",
+      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "55",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^LightFlameWeapon",
-       "M1Carbine",
+       "ra1_soviets_rifleinfantry_carbine",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
@@ -5832,18 +5841,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryM1Carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "55",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^LightFlameWeapon",
-       "M1Carbine",
+       "ra1_soviets_rifleinfantry_carbine",
        "^IncendiaryBulletProjectile"
       ],
       "warheads": [
@@ -5873,7 +5885,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryM1Carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
      }
     ],
     "armor": {
@@ -5885,14 +5897,14 @@
      "v": "100"
     },
     "design": {
-     "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "class_anchor": "scout",
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
-     "src": "inherited",
-     "v": "14000"
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
+     "v": "34000"
     },
     "name": "Rifle Infantry",
     "prerequisites": [
@@ -5908,8 +5920,8 @@
      "v": "8000"
     },
     "speed": {
-     "src": "inherited",
-     "v": "58"
+     "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Mobile.Speed",
+     "v": "55"
     }
    },
    "ra1_soviets_rocketsoldier": {

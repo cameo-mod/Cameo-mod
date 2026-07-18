@@ -131,3 +131,32 @@ effective DPS hits the formula target (the maintainer's 33% example).
 | `zerg_spithid` | 40000 | 110 | | 300 | | | | | | | **300 > ceiling — heavy class or price cut** |
 
 _15 units fully solved; reclassify/manual rows need a maintainer call first._
+
+### 2–5. The classic rifles (2026-07-19) — four unique characters at the original cost 100
+
+LAW recorded: original C&C factions keep their original prices for
+memorability (custom factions may deviate). LAW recorded: every unit
+stays within ±10% of its class baseline range (scouts 4500–5500);
+lower edge = cheapest, upper edge = most expensive in the class.
+
+| unit | HP | Spd | Rng | weapon family (paired per the rename law) | burst | FP-mult | price |
+|---|---|---|---|---|---|---|---|
+| td_gdi_minigunner | 32000 | 60 | 4750 | td_gdi_minigunner_minigun (+_ap) | 4 | 32% | 100.6 |
+| td_nod_minigunner | 30000 | 65 | 4500 | td_nod_minigunner_minigun (+_laser) | 4 | 28% | 100.0 |
+| ra1_allies_rifleinfantry | 28000 | 60 | 5250 | ra1_allies_rifleinfantry_carbine (+_cryo) | 3 | 50% | 100.5 |
+| ra1_soviets_rifleinfantry | 34000 | 55 | 4600 | ra1_soviets_rifleinfantry_carbine (+_incendiary) | 3 | 54% | 100.0 |
+
+Characters: GDI disciplined standard; Nod fast and light with the
+shortest reach (low band edge); Allies accurate with the longest scout
+rifle (high band edge, most expensive feel); Soviets tankiest and
+slowest. All four had the hidden ScoutInfantryBuff knobs (50% damage
+taken / 110% firepower) — neutralized per-unit, 2x-health bake applied.
+
+Lessons added:
+6. Detect the SELF-HEAL trait by exact tag (`ChangesHealth@SelfHealing`)
+   — resolved actors carry a dozen conditional ChangesHealth traits
+   (propaganda auras, hospital, poison); overriding the first match
+   corrupts an aura (caught in-session before commit).
+7. Old shared weapons (M16, M1Carbine) STAY for their other users;
+   only this unit's armaments repoint — the upgrade weapons of OTHER
+   users (M16AP/M16Laser/Cryo/Incendiary) also stay untouched.

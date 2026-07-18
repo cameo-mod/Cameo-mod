@@ -1412,8 +1412,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/weapons.yaml",
-      "range": "5120",
-      "reloaddelay": "25",
+      "range": "12288",
+      "reloaddelay": "90",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^TankDestroyerCannon",
@@ -1498,9 +1498,9 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianSun/CABAL/yaml/defenses.yaml#Health.HP",
-     "v": "220000"
+     "v": "300000"
     },
-    "name": "Heavy CABAL Obelisk",
+    "name": "Fortified Obelisk",
     "prerequisites": [
      "~cabal_constructionyard",
      "cabal_techcenter"
