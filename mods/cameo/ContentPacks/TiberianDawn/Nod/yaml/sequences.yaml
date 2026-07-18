@@ -289,7 +289,6 @@ td_nod_templeprime:
 		Offset: 0,0
 
 td_nod_obeliskoflight:
-	Inherits: ^WithBuildingBibTsla
 	Defaults:
 		Filename: td_nod_obeliskoflight.shp
 		Offset: 0,-24
@@ -310,8 +309,6 @@ td_nod_obeliskoflight:
 		Filename: td_nod_obeliskoflight_make.shp
 		Length: 13
 		Tick: 80
-	bib:
-		Offset: -5,-10
 	icon:
 		Filename: td_nod_obeliskoflight_icon.shp
 		Offset: 0,0

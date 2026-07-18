@@ -970,7 +970,6 @@ ra1_soviets_flametower:
 		Filename: ra1_soviets_flametower_icon.png
 
 ra1_soviets_teslacoil:
-	Inherits: ^WithBuildingBibTsla
 	Defaults:
 		Filename: ra1_soviets_teslacoil.shp
 		Offset: 0,-26
@@ -989,8 +988,6 @@ ra1_soviets_teslacoil:
 		Length: 9
 		Tick: 100
 	dead:
-	bib:
-		Offset: 0,0
 	icon:
 		Filename: ra1_soviets_teslacoil_icon.png
 		Offset: 0,0
