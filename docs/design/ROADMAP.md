@@ -178,7 +178,9 @@ factions, everything through the balance workbook. Faction reference:
   prerequisites wired to require the matching promotion; replaced units
   disabled when the replacement promotion is bought. Promotion-unit
   `^PromotionUnitBuff` inheritance verified on all grid units. Boot
-  test passed (2026-07-17).
+  test passed (2026-07-17). FINAL layout re-chained 2026-07-17 after
+  the maintainer's decision — see P2 (RESOLVED) for the binding grid;
+  do not rearrange promotions.yaml except through a new design order.
 - [x] **cabal_plasmaturret not buildable** — root cause: no sequence/
   icon defined for `cabal_plasmaturret`. Added sequence in `ContentPacks/
   TiberianSun/CABAL/yaml/sequences.yaml` and voxel turret mapping in
@@ -186,16 +188,17 @@ factions, everything through the balance workbook. Faction reference:
   (2026-07-17). Boot test passed.
 - [x] **cabal_mobilestealthgenerator removed** — CABAL should not have
   it (design 2026-07-17); actor + AI references deleted.
-- [ ] **RA1 LEGACY-ID RENAME (ordered 2026-07-17)** — every remaining
-  old-style RA1 actor (RAE1, RAE3, RAAPC, PT/DD/CA/SS/MSUB, POWR/APWR/
-  KENN/RASILO, naval yards, BADR family, civilians, husk variants,
-  proxy actors — 53 ids in RedAlert/Shared) gets its grammar-compliant
-  id (ra1_allies_/ra1_soviets_/japan_/shared ra1_). Only `japan` keeps
-  no game prefix (exists once). Full pipeline with verification.
-- [ ] **Stale copy cleanup**: rules/redalert.yaml + the dead
-  ContentPacks/RedAlert/content.yaml wrapper are UNLOADED duplicates
-  since PACK-RA2 (mod.yaml now loads RedAlert/Shared) — delete after
-  the rename lands (they also pollute audit_packs P1).
+- [x] **RA1 LEGACY-ID RENAME** — DONE 2026-07-17 (`fdd466494`): all 52
+  legacy ids renamed via tools/rename/apply_ra1_legacy.py +
+  rename_map_ra1_legacy.yaml; zerofighter collision resolved as
+  japan_zerofighter_slave; registry 3910/2365, zero old ids, boot green.
+  Follow-up fix same day: explicit `actor_<oldid>.description/.name`
+  refs in yaml (13) broke when ftl keys renamed — applicator now has a
+  fluent-stem pass; warcraft2_en.ftl + tkm_en.ftl were never registered
+  in mod.yaml FluentMessages (added). audit_fluent: 0 unresolved.
+- [x] **Stale copy cleanup** — DONE 2026-07-17 (`fdd466494`):
+  rules/weapons/sequences redalert.yaml + dead RedAlert wrapper
+  content.yaml/ai.yaml deleted.
 
 ### P0/P1 — User-reported issues (2026-07-15/17)
 
@@ -347,115 +350,152 @@ factions, everything through the balance workbook. Faction reference:
   (warhead values, weapon targeting, or unit stats). Effort: M. **Do NOT
   auto-apply — requires user approval per balance policy.**
 
-### P2 — SM promotion grid tier-mismatch (DESIGN DECISION NEEDED)
+### P2 — SM promotion grid tier ladder (RESOLVED 2026-07-17 — maintainer picked the reshuffle)
 
-**Problem:** The SM 3×4 promotion grid ranks don't ladder by tech tier.
-Current mapping (promotion row → unit tier):
+**FINAL LAYOUT (implemented; column convention: left = infantry, middle =
+vehicles/tanks, right = aircraft/artillery/support):**
 
-| Row | Col 1 (Inf/Tech) | Col 2 (Vehicles) | Col 3 (Air/Support) |
+| Rank | Infantry | Vehicles | Air/Artillery/Support |
 |---|---|---|---|
-| 1 (rank1) | Übermensch **T3** | Noid MG **T2** | Piercer **T3** |
-| 2 (rank1+prev) | Laser Tank **T1** | Lunar Tiger **T2** | Haunebu III **T3** |
-| 3 (rank1+prev) | Crystal Tank **T3** | Korruptes Biest **T3** | MARS **T2** |
-| 4 (rank1+prev) | Parzival **T3** (capstone) | Dalek **T3** (capstone) | Die Glocke **T3** (capstone) |
+| 1 | Noid MG (T2) | Lunar Tiger (rpl Panzer, T2) | Laser Tank (rpl Beetle, T1) |
+| 2 | Übermensch (T3) | MARS (rpl Jagerline, T2) | Haunebu III (rpl H2, T3) |
+| 3 | Korruptes Biest (T3) | Crystal Tank (T3) | Piercer (T3) |
+| 4 | Parzival | Dalek | Die Glocke |
 
-Row 1 unlocks T3 units (Übermensch, Piercer) while Row 2 unlocks a T1 unit
-(Laser Tank). This is inverted — early promotions should unlock early-tier
-units, not late-tier ones.
+Implemented 2026-07-17: promotions.yaml re-chained + BuildPaletteOrder
+row-major; promotion actor `..._bermensch` renamed `..._ubermensch`
+(umlaut law); `^PromotionUnitBuff` corrected to the FutureTech
+convention — EXACTLY the 12 grid units inherit it (was also on 10 base
+units incl. all 4 replaced ones: Lunar Soldier/Rocket, Laser Beetle,
+Lunar Panzer, Jagerline, Haunebu II, Neo Jagdpanzer, Lunar Grille,
+Gravity Core Tank, Black Bomb — an unintended faction-wide buff).
+Follow-up: fluent-ify the 12 promotion tooltips (raw strings), part of
+the SM rebalance pass below.
 
-**MARS clarification (from maintainer):** MARS is already AA-capable (ground
-+ air, long range). Laser Beetle and Laser Tank are also AA. SM does NOT lose
-all mobile AA when MARS replaces Jagerline. The "no mobile AA" concern is
-invalid — MARS replaces Jagerline as a direct upgrade.
+<details><summary>Decision record (superseded analysis)</summary>
 
-**Base roster after promotion extraction (12 units move to promotions):**
-- T1 base: Lunar Soldier, Lunar Rocket, Engineering Armor, Laser Beetle,
-  Lunar Panzer, Sturm Cannon, Laser Tower
-- T2 base: Jagerline, Lunar Grille, Noid MG (promotion-gated), Lunar Tiger
-  (promotion-gated), MARS (promotion-gated), Space Zeppelin, Noid Harvester
-- T3 base: Neo Jagdpanzer, Gravity Core Tank, Korruptes Biest (promotion-gated),
-  Crystal Tank (promotion-gated), Übermensch (promotion-gated), Piercer
-  (promotion-gated), Haunebu III (promotion-gated), Dalek (promotion-gated),
-  Parzival (promotion-gated), Die Glocke (promotion-gated), Black Bomb
+#### Original analysis — kept for the record
 
-**Solution options (maintainer to pick one):**
+**Maintainer input (2026-07-17):** MARS is an AA artillery unit (ground +
+air, long range); Laser Beetle and Laser Tank are AA too, so MARS replacing
+Jagerline is fine — the earlier "loses mobile AA" concern is WITHDRAWN.
+Binding principle: promotion rank should ladder with tech tier. Open
+dilemma: Übermensch is T3 yet sits at rank 1; making it a base unit leaves
+an empty cell; SM also feels thin on early-game units.
 
-**Option A — Restructure grid rows to match tiers (cleanest, most work)**
-- Row 1 → T1 units: Laser Tank, Lunar Panzer→Lunar Tiger, Haunebu II→Haunebu III
-  (move the "Replaces" cells to row 1 since they're T1→T1/T2 upgrades)
-- Row 2 → T2 units: Noid MG, MARS (replaces Jagerline), Crystal Tank
-  (move Crystal Tank down from T3 to T2 by removing techcenter prereq)
-- Row 3 → T3 units: Übermensch, Korruptes Biest, Piercer
-- Row 4 → Capstones: Parzival, Dalek, Die Glocke (all T3, buildlimit-1)
-- **Pro:** Clean tier ladder, intuitive for players.
-- **Con:** Requires rebalancing Crystal Tank from T3→T2; moves the "Replaces"
-  cells to row 1 which changes the visual grid shape from the maintainer's
-  original image. Some units may need stat adjustments.
-- **Effort:** M (one session — rearrange prerequisites + test).
+**Implemented state:** the grid exists in `SchwarzerMond/yaml/promotions.yaml`
+with CABAL-pattern gating already in place (the promotion gates the option;
+units keep their tech prereqs — e.g. Dalek needs warfactory + techcenter +
+promotion; replaced units carry `!promotion_x`). NOTE: the implemented
+chains DEVIATE from the maintainer's image: col1 Übermensch→Crystal
+Tank→Korruptes Biest→Parzival, col2 Laser Tank→Lunar Tiger→Noid MG→Dalek,
+col3 MARS→Haunebu III→Piercer→Die Glocke (the image had Noid MG + Piercer
+at rank 1 and MARS at rank 3). Needs maintainer sign-off either way.
 
-**Option B — Move Übermensch to base T3, fill row 1 with T1/T2 units**
-- Übermensch becomes a regular T3 buildable (no promotion needed)
-- Row 1 Col 1 gets a new T1-T2 unit (e.g. move Lunar Grille or create a new
-  scout/infantry unit like "Lunar Sturmtruppen" — a T2 shock infantry)
-- Row 2 Col 1 gets Laser Tank (T1, fits as a row-2 unlock)
-- Other columns shift down one row
-- **Pro:** Übermensch is a flagship unit that deserves to be always visible;
-  fills the T1/T2 gap.
-- **Con:** Need a new unit for Row 1 Col 1 (art + stats + sequences); or
-  repurpose an existing T2 unit. Übermensch loses its "promotion unlock"
-  prestige feel.
-- **Effort:** L (new unit art + balance pass).
+**The structural fact:** 8 of the 12 grid units are T3 payoffs. Only Laser
+Tank (T1 replace), Noid MG, Lunar Tiger and MARS (T2) are early/mid-game.
+A strict tier-per-rank ladder is impossible with these 12 units — but a
+clean monotone ladder IS possible, because rank 2+ arrives around the T3
+tech era anyway. Only rank 1 must be early-tier.
 
-**Option C — CABAL pattern: promotion gates option, tech gates power (no grid
-restructure needed)**
-- Keep the grid as-is. Promotions only gate VISIBILITY (can you see/buy the
-  unit in the promotions tab). The unit's own Buildable.Prerequisites still
-  require the tech building.
-- So rank 1 unlocking Übermensch is fine: you buy the promotion early, but
-  can't actually BUILD Übermensch until you have the tech center.
-- Early ranks = buying long-term options. Late ranks = unlocking capstones.
-- **Pro:** Zero unit changes needed. Works with the existing grid. Matches
-  how CABAL promotions already work. Player buys options early, power stays
-  tech-gated.
-- **Con:** Player may buy a promotion and be confused they can't build the
-  unit yet (needs clear UI feedback). Rank progression doesn't feel
-  power-progressive — rank 1 and rank 3 both unlock T3 units.
-- **Effort:** S (just verify prerequisites are correct, add tooltip hints).
+**Base roster reference (after promotion extraction):**
+T1 base: Lunar Soldier, Lunar Rocket, Engineering Armor, Laser Beetle,
+Lunar Panzer, Sturm Cannon, Laser Tower. T2 base: Jagerline, Lunar
+Grille, Space Zeppelin, Noid Harvester. T3 base: Neo Jagdpanzer,
+Gravity Core Tank, Black Bomb. (Everything else is promotion-gated.)
 
-**Option D — Hybrid: soft tier matching + CABAL gating**
-- Keep CABAL pattern (Option C) as the base mechanic.
-- Additionally, sort rows so that lower-tier unlocks are in earlier rows
-  where possible:
-  - Row 1: Laser Tank (T1), Noid MG (T2), MARS (T2)
-  - Row 2: Crystal Tank (T3→T2 rebalance), Lunar Tiger (T2), Haunebu III (T3)
-  - Row 3: Übermensch (T3), Korruptes Biest (T3), Piercer (T3)
-  - Row 4: Parzival, Dalek, Die Glocke (capstones)
-- **Pro:** Best of both worlds — tier progression AND option-gating. Player
-  feels progression but power stays tech-gated.
-- **Con:** Requires moving Crystal Tank to T2 (minor rebalance) and
-  rearranging the grid from the maintainer's original image.
-- **Effort:** M (rearrange + minor rebalance + test).
+**Option 1 — RESHUFFLE (recommended; zero balance impact — only
+promotions.yaml chains + BuildPaletteOrder change, unit files untouched):**
 
-**Option E — Add new early-game units (expand roster)**
-- Create 2-3 new T1/T2 SM units to fill row 1-2 slots:
-  - "Lunar Sturmtruppen" (T2 shock infantry, promotion-gated)
-  - "Schwarzer Pionier" (T1 combat engineer, promotion-gated)
-  - "Mondjäger" (T2 light AA walker, promotion-gated)
-- Move Übermensch and Piercer to row 3.
-- **Pro:** Expands SM roster, fills the T1/T2 gap, preserves the original
-  grid shape.
-- **Con:** Requires new art (sprites/icons), new weapon definitions, balance
-  pass. Most work.
-- **Effort:** L (multi-session: art + code + balance).
+| Rank | Vehicles | Infantry & walkers | Armor & air |
+|---|---|---|---|
+| 1 | Laser Tank (rpl Beetle, T1) | Noid MG (T2) | Lunar Tiger (rpl Panzer, T2) |
+| 2 | MARS (rpl Jagerline, T2) | Übermensch (T3) | Haunebu III (rpl H2, T3) |
+| 3 | Crystal Tank (T3) | Korruptes Biest (T3) | Piercer (T3) |
+| 4 | Dalek (capstone) | Parzival (capstone) | Die Glocke (capstone) |
 
-**Recommendation:** Option C (CABAL pattern) is the lowest-risk, fastest
-implementable solution. It's already how CABAL works and requires zero unit
-changes. If the maintainer wants tier progression AND the CABAL pattern,
-Option D is the best compromise — it just requires rearranging grid rows and
-a minor Crystal Tank rebalance. Option A is cleanest if the maintainer is
-willing to restructure the grid from the original image.
+Ladder: rank 1 = T1/T2, rank 2 = T2/T3, rank 3 = T3, rank 4 = buildlimit-1
+capstones. Replacements (straight upgrades) all land in ranks 1–2, pure
+unlocks in ranks 2–4. Übermensch keeps its promotion prestige at rank 2,
+matching its techcenter timing.
 
-**Awaiting maintainer decision before implementation.**
+**Option 2 — Übermensch to base roster, swap in an existing T3 base unit**
+(if the flagship must always be visible): Übermensch becomes a regular T3
+buildable; its cell is filled by promoting an existing base T3 unit into
+the grid instead (candidates: Gravity Core Tank, Neo Jagdpanzer, Black
+Bomb) — no new art needed, roster depth unchanged. Then apply Option 1's
+ladder to the resulting 12.
+
+**Option 3 — early-game retier pass** (independent lever for "not enough
+early units"; sheet-first + maintainer approval since stats/prices move):
+candidates Noid MG T2→T1 (classic MG-infantry tier) and/or Lunar Grille
+earlier. Combines freely with Option 1; does NOT block it.
+
+**Rejected:** keeping the image order with pure visibility-gating (rank 1
+unlocking T3 options) — contradicts the maintainer's tier principle. New
+early-game units (old Option E) stays a separate long-term roster item.
+
+(Maintainer picked Option 1 with two switches: infantry column left,
+vehicles middle; Laser Tank ↔ Lunar Tiger swapped — Lunar Tiger is a
+line tank, Laser Tank plays as support. See the FINAL LAYOUT above.)
+
+</details>
+
+### P0 — TKM CONTRIBUTOR PORT (ordered 2026-07-18, jumps the queue)
+
+A community contributor updated TKM (new upgrades and/or rebalance) but
+can't merge anymore after our renames. He sent his ENTIRE repo as a zip,
+extracted at `C:\Users\AedisToru\Downloads\TKuM`; his base version is
+UNKNOWN. Plan: (1) inventory his tree; (2) find his base by matching his
+files against our git history / the golden reference release; (3) his
+real changes = diff(his tree, base); (4) port onto master through the
+rename maps (old ids → tkm_*) into ContentPacks/TKM/TKM/yaml; (5)
+audits + boot + commit. Balance numbers he changed are the
+contributor's design — port faithfully, flag anything that contradicts
+DESIGN formulas instead of silently "fixing".
+
+### New orders 2026-07-18 (mid-turn batch)
+
+- [ ] **Theme-folder rename + TKM move (DECISION PENDING — maintainer
+  picks the name first).** TKM belongs inside the RA2-mod theme folder
+  (it presents in-game as an RA2 modded faction), but
+  `ContentPacks/RedAlert2Mod/` shall be renamed first: the folder holds
+  RA2-mod factions AND Cameo originals AND other-mod imports; maintainer
+  floated "CnCExpandedUniverse", wants alternatives + effort estimate.
+  No split into two folders. Move TKM only AFTER the rename so paths
+  churn once.
+- [ ] **BUG (tester, maintainer-confirmed "add to the list"): Tesla
+  Rockets upgrade has no visible effect on the monster tank.** Also
+  tester: doctrine upgrades "don't have very descriptive descriptions".
+  Verify wiring (condition granted? armament switch?) before fixing.
+- [ ] **Survival map (unpacked at maps/survival/ by maintainer/tester —
+  do NOT clobber; NFWRambo makes his own `survival 2` copy):
+  (a) BUG: game does not end when all waves are cleared;
+  (b) difficulty dip waves 12–15 (tier-3/4 wave budgets buy too few
+  units when unit costs are high — consider count floor or budget
+  scaling); (c) maintainer idea: waves spawn with all upgrades ("elite
+  force"); (d) pacing already retuned in Discord: initial 180→60,
+  between-waves 90→30 (tester applied).**
+
+### P1 — FULL SCHWARZER MOND REBALANCE (ordered 2026-07-17, mid-turn — NEXT after the TKM port)
+
+Maintainer order: "we also need a full rebalance on the schwarzer mond
+faction." Rules of engagement:
+- **Sheet first** (absolute law): every price/tier lands in
+  `docs/design/cameo_armor_system.xlsx` (M in its cell, O/P/Q
+  recompute) BEFORE yaml; both edits in the same pass. If the `~$` lock
+  file exists the workbook is open — queue the sheet edit and say so.
+- **Sequencing**: the rebalance prices the POST-buff-strip stats (the
+  10 base units just lost the unintended ^PromotionUnitBuff — their
+  effective firepower/durability changed ~10%, so old prices are stale).
+- **Workplan**: extract all schwarzermond_* rows from
+  `docs/audit/latest/stat_formulas.md` (formula deviations) +
+  `power_budget.md`; propose per-unit price/tier corrections; maintainer
+  approves the numbers; then sheet + yaml dual-write, §15 superiority
+  check on the 4 replacement pairs (Beetle→Laser Tank, Panzer→Lunar
+  Tiger, Jagerline→MARS, H2→H3), boot + audits.
+- Include: fluent-ification of the 12 promotion tooltips/descriptions
+  (raw strings today) and the SM upgrades/defenses columns.
 
 ### P2b — CABAL promotion grid tier-mismatch (DESIGN DECISION NEEDED)
 
@@ -875,6 +915,67 @@ well."_
   owns its own copy, then remove the top-level `Shared/files/` entries.
 - [ ] Give each faction its own effects, or share only PER GAME. Prereq
   for true dynamic per-faction loading. DESIGN + MIGRATION.
+
+---
+
+## D2k wall+turret system expansion (LONG-TERM, L)
+
+**Current state:** The D2k wall (`ContentPacks/D2k/Shared/yaml/buildings.yaml`)
+already has `Replaceable: Types: Tower` and all D2k turrets (Ordos + Ixian)
+have `Replacement: ReplaceableTypes: Tower`. This means turrets can be
+built on top of wall segments, replacing them — the core D2k mechanic
+works. The wall's `LineBuild` includes `turret` in `NodeTypes`, so walls
+connect to turrets visually.
+
+**Goal:** Expand this mechanic to all factions and add new turret-on-wall
+types, creating a unified wall+turret defense system across the mod.
+
+### Plan
+
+1. **Audit existing wall+turret pairs** — identify which factions have
+   walls with `Replaceable` and which turrets have `Replacement`. Currently
+   only D2k (Ordos + Ixian) has this. TS Nod has laser fences but no
+   turret replacement. TD/RA factions have plain walls with no replacement.
+
+2. **Design faction-specific wall+turret pairs** — each faction that gets
+   a concrete wall should also get a turret that can mount on wall
+   segments. Examples:
+   - TD GDI: Guard Tower → mountable on BRIK walls
+   - TD Nod: Turret → mountable on BRIK walls
+   - RA1 Allies: Gun Turret → mountable on BRIK walls
+   - RA1 Soviets: Tesla Coil → mountable on BRIK walls (or a smaller turret)
+   - TS GDI/Nod: Component Tower style → mountable on concrete walls
+   - CABAL: unique turret type → mountable on concrete walls
+
+3. **Add `Replaceable` to all wall actors** — add `Replaceable: Types: Tower`
+   (or faction-specific type) to BRIK, SBAG, CYCL, FENC, BARB, and the
+   RA2/D2k walls. Use multiple `Replaceable@` traits if a wall should
+   accept multiple turret types.
+
+4. **Add `Replacement` to turret actors** — add
+   `Replacement: ReplaceableTypes: Tower` (or matching type) to each
+   faction's base defense turret.
+
+5. **Add `turret` to wall `LineBuild.NodeTypes`** — so walls visually
+   connect to turrets. Currently only the D2k wall has this.
+
+6. **Balance pass** — wall-mounted turrets should cost less than
+   free-standing turrets but require the wall to exist first. This
+   matches D2k's design where walls are cheap and turrets are expensive.
+
+7. **Art pass** — ensure turret sprites align visually when placed on
+   wall segments. May need wall+turret composite sprites for some factions.
+
+8. **Future: D2k faction wall variants** — when Atreides and Harkonnen
+   are added, give them faction-specific wall sprites (concrete wall
+   variants per house color/style).
+
+### Dependencies
+- Must be done after barrier type assignment is finalized per faction.
+- Requires balance workbook updates (new turret costs, wall costs).
+- May need new C# traits if the existing `Replaceable`/`Replacement`
+  system doesn't support all desired behaviors (e.g. conditional
+  replacement based on tech level).
 
 ---
 

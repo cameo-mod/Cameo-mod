@@ -41,12 +41,18 @@ tkm_rifleman:
 	GrantConditionOnPrerequisite@tkm_upgrade_semiautoriflesupgrade:
 		Condition: tkm_upgrade_semiautoriflesupgrade
 		Prerequisites: tkm_upgrade_semiautoriflesupgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_titanarsenalupgrade
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: tkm_upgrade_berezkaarsenalupgrade
 		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
@@ -69,7 +75,6 @@ tkm_rifleman:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
 tkm_marine:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
@@ -85,7 +90,6 @@ tkm_marine:
 		BuildPaletteOrder: 1
 		Prerequisites: ~tkm_barracks, ~tkm_upgrade_natoarsenalupgrade
 		Queue: Infantry, RAInfantry
-		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Tooltip:
 		Name: Marine
@@ -102,7 +106,7 @@ tkm_marine:
 		LocalOffset: 128,0,256
 		RequiresCondition: !tkm_upgrade_titanarmorpiercingbulletsupgrade
 	Armament@PRIMARYUPGRADE:
-		Weapon: tkmakap
+		Weapon: tkmm16ap
 		LocalOffset: 500,0,400
 		RequiresCondition: tkm_upgrade_titanarmorpiercingbulletsupgrade
 	Armament@GARRISONED: ##########
@@ -111,19 +115,19 @@ tkm_marine:
 		RequiresCondition: !tkm_upgrade_titanarmorpiercingbulletsupgrade
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
-		Weapon: tkmakap
+		Weapon: tkmm16ap
 		RequiresCondition: tkm_upgrade_titanarmorpiercingbulletsupgrade
 	GrantConditionOnPrerequisite@tkm_upgrade_titanarmorpiercingbulletsupgrade:
 		Condition: tkm_upgrade_titanarmorpiercingbulletsupgrade
 		Prerequisites: tkm_upgrade_titanarmorpiercingbulletsupgrade
 	ActorStatValues:
-		Upgrades: tkm_upgrade_titanarsenalupgrade, tkm_upgrade_infantryupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_infantryupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_titanarsenalupgrade
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
 	Selectable:
 		Class: tkm_marine
 	WithInfantryBody:
@@ -133,7 +137,7 @@ tkm_marine:
 		DeathSequencePalette: raplayer
 	RenderSprites:
 		Image: ra2_allies_seal
-
+		PlayerPalette: playerra2
 tkm_juggernaut:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -156,7 +160,7 @@ tkm_juggernaut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkm_barracks, ~tkm_promotion_unlockjuggernaut, tkm_observationvan
+		Prerequisites: ~tkm_barracks, tkm_promotion_unlockjuggernaut, tkm_observationvan
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -198,12 +202,12 @@ tkm_juggernaut:
 		Class: tkm_juggernaut
 	ActorStatValues:
 		Upgrades: tkm_upgrade_infantryupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_titanarsenalupgrade
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
@@ -211,7 +215,6 @@ tkm_juggernaut:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
 tkm_thermonaut:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -230,7 +233,7 @@ tkm_thermonaut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkm_barracks, ~tkm_upgrade_titanarsenalupgrade, tkm_observationvan
+		Prerequisites: ~tkm_barracks, ~tkm_upgrade_natoarsenalupgrade, tkm_observationvan
 		Queue: Infantry, RAInfantry
 		IconPalette: player
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -260,14 +263,14 @@ tkm_thermonaut:
 	# Inherits@EXT: ^ExternalConditions ##########
 	# AcceptsDeliveredExperience: ##########
 	# 	ValidTypes: infantry ##########
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_titanarsenalupgrade
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
 	ActorStatValues:
-		Upgrades: tkm_upgrade_titanarsenalupgrade, tkm_upgrade_infantryupgrade
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_infantryupgrade
 	Selectable:
 		Class: tkm_thermonaut
 	Voiced:
@@ -278,7 +281,6 @@ tkm_thermonaut:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
 tkm_trooper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
@@ -294,7 +296,6 @@ tkm_trooper:
 		BuildPaletteOrder: 1
 		Prerequisites: ~tkm_barracks, ~tkm_upgrade_titanarsenalupgrade
 		Queue: Infantry, RAInfantry
-		Description: Anti-armor infantry.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Tooltip:
 		Name: Trooper
@@ -312,21 +313,21 @@ tkm_trooper:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: tkmak
-	Armament@m203:
-		Weapon: tkmm203
+	Armament@gp25:
+		Weapon: tkmgp25
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
-		RequiresCondition: tkm_upgrade_m203upgrade
+		RequiresCondition: tkm_upgrade_gp25upgrade
 	Armament@GARRISONEDM203:
 		Name: garrisoned
-		Weapon: tkmm203
-		RequiresCondition: tkm_upgrade_m203upgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_m203upgrade:
-		Condition: tkm_upgrade_m203upgrade
-		Prerequisites: tkm_upgrade_m203upgrade
+		Weapon: tkmgp25
+		RequiresCondition: tkm_upgrade_gp25upgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_gp25upgrade:
+		Condition: tkm_upgrade_gp25upgrade
+		Prerequisites: tkm_upgrade_gp25upgrade
 	ActorStatValues:
-		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_m203upgrade
+		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_gp25upgrade
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 		RequiresCondition: !parachute
@@ -337,7 +338,6 @@ tkm_trooper:
 	RenderSprites:
 		Image: tkm_trooper
 		PlayerPalette: playerra2
-
 tkm_rocketeer:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -360,7 +360,7 @@ tkm_rocketeer:
 		Prerequisites: ~tkm_barracks
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
-		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: Anti-vehicle infantry.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
 		Speed: 60
 	Health:
@@ -393,7 +393,7 @@ tkm_rocketeer:
 		Weapon: tkmrockets
 		Name: garrisoned
 		RequiresCondition: !tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade
-	Armament@GARRISONEDNATO:
+	Armament@GARRISONEDTITAN:
 		Name: garrisoned
 		Weapon: tkmcryorockets
 		MuzzleSequence: muzzle
@@ -403,7 +403,7 @@ tkm_rocketeer:
 		Weapon: tkmtwinrockets
 		MuzzleSequence: muzzle
 		RequiresCondition: tkm_upgrade_twinrocketsupgrade
-	Armament@GARRISONEDTITAN:
+	Armament@GARRISONEDNATO:
 		Name: garrisoned
 		Weapon: tkmfirerockets
 		MuzzleSequence: muzzle
@@ -417,12 +417,18 @@ tkm_rocketeer:
 	GrantConditionOnPrerequisite@tkm_upgrade_incendiaryrocketsupgrade:
 		Condition: tkm_upgrade_incendiaryrocketsupgrade
 		Prerequisites: tkm_upgrade_incendiaryrocketsupgrade
-	GrantConditionOnPrerequisite@tkm_upgrade_titanarsenalupgrade:
-		Condition: tkm_upgrade_titanarsenalupgrade
-		Prerequisites: tkm_upgrade_titanarsenalupgrade
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: Rockets
@@ -448,7 +454,6 @@ tkm_rocketeer:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
 tkm_engineer:
 	Inherits: E6
 	Inherits@speed: ^upberezkacloakupgrade
@@ -456,13 +461,50 @@ tkm_engineer:
 	Buildable:
 		Prerequisites: ~tkm_barracks
 		Queue: Infantry, RAInfantry
-		Description: Captures and repairs structures.\n  Unarmed
 	Tooltip:
 		Name: Engineer
 	Voiced:
 		VoiceSet: TSEngineer
 	DeliversCash:
 		Payload: 250
+	Armament@HEAL:
+		Weapon: Heal
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	Armament@GARRISONEDHEAL:
+		Name: garrisoned
+		Weapon: Heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: heal
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	Armament@REPAIR:
+		Weapon: Repair
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	Armament@GARRISONEDREPAIR:
+		Name: garrisoned
+		Weapon: Repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: repair
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+	AttackFrontal:
+		Voice: Action
+		FacingTolerance: 0
+		RequiresCondition: tkm_upgrade_titanarsenalupgrade
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -481,7 +523,7 @@ tkm_engineer:
 		Prerequisites: tkm_upgrade_natoarsenalupgrade
 	DamageMultiplier:
 		Modifier: 75
-		RequiresCondition: tkm_upgrade_titanarsenalupgrade
+		RequiresCondition: tkm_upgrade_natoarsenalupgrade
 	GrantConditionOnDeploy:
 		StartsFullyCharged: true
 		DeployedTicks: 5
@@ -491,21 +533,27 @@ tkm_engineer:
 		ExclusiveDeploy: true
 		DeployType: Summon
 		PauseOnCondition: disabled
-		RequiresCondition: tkm_upgrade_natoarsenalupgrade
+		RequiresCondition: tkm_upgrade_berezkaarsenalupgrade
 	AmmoPool:
 		Name: summon
 		Ammo: 1
 		Armaments: tkmdronesummon
 	ReloadAmmoPool:
 		AmmoPool: summon
-		Delay: 100
+		Delay: 5000
 		Count: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 1
 		AmmoPool: summon
-		RequiresCondition: tkm_upgrade_natoarsenalupgrade
+		RequiresCondition: tkm_upgrade_berezkaarsenalupgrade
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
 	PeriodicExplosion@projections:
 		Weapon: tkmdronesummon
 		RequiresCondition: summon
@@ -514,7 +562,6 @@ tkm_engineer:
 		Class: tkm_engineer
 	RenderSprites:
 		PlayerPalette: playerra2
-
 tkm_sniper:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
@@ -560,11 +607,21 @@ tkm_sniper:
 		FacingTolerance: 0
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_infantryupgrade
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: tkm_upgrade_berezkaarsenalupgrade
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	Cloak:
+		RequiresCondition: tkm_upgrade_berezkaarsenalupgrade
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
 		Image: ra2_allies_sniper
-
 tkm_von:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
@@ -649,11 +706,20 @@ tkm_von:
 		FacingTolerance: 0
 	ActorStatValues:
 		Upgrades: tkm_upgrade_titanarmorpiercingbulletsupgrade, tkm_upgrade_infantryupgrade
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+	GrantConditionOnPrerequisite@tkm_upgrade_natoarsenalupgrade:
+		Condition: tkm_upgrade_natoarsenalupgrade
+		Prerequisites: tkm_upgrade_natoarsenalupgrade
+	DamageMultiplier:
+		Modifier: 75
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
 		Image: tkm_von
-
 tkm_spetsnaz:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate

@@ -157,7 +157,7 @@ commits and reported.
 | Top-level Shared | — | — | — | DONE `e1b153d9c`/`472209150` | — |
 | TD GDI / TD Nod | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
 | RA2Mod six, D2k four | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
-| RA1 (allies/soviets/japan) | DONE (ids; legacy stragglers like RAE1/RARE1 stay shared) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | — | — |
+| RA1 (allies/soviets/japan) | DONE incl. 52 legacy ids 2026-07-17 (RAE1→ra1_allies_rifleinfantry etc.; only `japan` unprefixed; map: rename_map_ra1_legacy.yaml) | DONE 2026-07-16 (yaml/ layout, registry-identical, boot-verified) | — | — | — |
 | RA2 (america/russia/yuri) | maps drafted | monolith | | | |
 | StarCraft (terran/zerg/protoss) | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |
 | WC2 (humans/orcs) · TKM | DONE (ids) | DONE 2026-07-17 (registry-identical, boot-verified) | — | — | — |

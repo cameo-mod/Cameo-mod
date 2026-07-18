@@ -16,12 +16,11 @@ tkmrifle:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 34
-
+		Damage: 4
 tkmriflemansemiautorifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 25
-	Range: 5621
+	Range: 6c512
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
@@ -34,10 +33,9 @@ tkmriflemansemiautorifle:
 		Speed: 10000
 		Width: 50
 	Warhead@SmallArms: SpreadDamage
-		Damage: 6000
+		Damage: 10000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 3
-
+		Damage: 5
 tkm_juggernaut:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 8
@@ -47,7 +45,6 @@ tkm_juggernaut:
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
-
 tkmjuggap:
 	Inherits: ^RA2Grenade
 	Inherits: ^SmallArms
@@ -65,7 +62,6 @@ tkmjuggap:
 		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 3
-
 tkmbunkmg:
 	Inherits: ^RA2Chaingun
 	Inherits: ^SmallArms
@@ -82,7 +78,6 @@ tkmbunkmg:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-
 HueyGun:
 	Inherits: ^FlakWeapon
 	Inherits: ^RA2Chaingun
@@ -97,7 +92,6 @@ HueyGun:
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-
 HueyMissiles:
 	Inherits: ^MediumMissile
 	ReloadDelay: 14
@@ -107,7 +101,6 @@ HueyMissiles:
 		Damage: 8000
 	Warhead@MediumMissile: HealthPercentageDamage
 		Damage: 4
-
 tkmtechnicalmgap:
 	Inherits: tkmjuggap
 	ValidTargets: Ground, Water
@@ -119,80 +112,42 @@ tkmtechnicalmgap:
 		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 3
-
 tkmtwinrockets:
 	Inherits: ^LightMissile
-	ReloadDelay: 63
-	Range: 6368
+	ReloadDelay: 64
+	Range: 7214
 	Burst: 2
 	Report: bazook1.aud
 	Warhead@LightMissile: SpreadDamage
-		Damage: 12000
+		Damage: 18000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 9
-
 tkmtwinrocketstechnicaltank:
 	Inherits: tkmtwinrockets
 	Range: 5243
-
 tkmfirerockets:
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
 	Inherits: ^LightFlameWeapon
 	Inherits: ^LightMissile
-	ReloadDelay: 58
-	Range: 6692
-	Report: missile6.aud
-	Projectile: Missile
-		TrailImage: fb2
-		TrailInterval: 1
-		TrailDelay: 0
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	ReloadDelay: 64
+	Range: 6214
+	Report: bazook1.aud
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 6000
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		Damage: 18000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
+		Damage: 9
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
-
 tkmdronesummon:
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
@@ -200,7 +155,6 @@ tkmdronesummon:
 		Range: 5
 		Delay: 15
 		ValidTargets: Air, Ground, Water
-
 tkmm16:
 	Inherits: ^SmallArms
 	ReloadDelay: 16
@@ -212,7 +166,6 @@ tkmm16:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-
 tkmak:
 	Inherits: ^SmallArms
 	ReloadDelay: 31
@@ -224,7 +177,6 @@ tkmak:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-
 tkmakap:
 	Inherits: ^RA2Grenade
 	Inherits: ^SmallArms
@@ -239,7 +191,6 @@ tkmakap:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-
 tkmkord:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 10
@@ -249,7 +200,6 @@ tkmkord:
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-
 tkmawp:
 	Inherits: ^SniperWeapon
 	ReloadDelay: 55
@@ -261,7 +211,6 @@ tkmawp:
 		Damage: 44000
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 22
-
 tkmsmg:
 	Inherits: ^SniperWeapon
 	Report: iseaatta.wav, iseaattb.wav
@@ -282,7 +231,6 @@ tkmsmg:
 		Damage: 2000
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-
 tkmtechmg:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 6
@@ -292,7 +240,6 @@ tkmtechmg:
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
-
 ThermoF:
 	Inherits: ^MediumFlameWeapon
 	ReloadDelay: 32
@@ -315,7 +262,6 @@ ThermoF:
 		Amount: 2000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 1000
-
 tkmm203:
 	Inherits: ^Grenade
 	Inherits: ^LightFlameWeapon
@@ -342,7 +288,6 @@ tkmm203:
 		Damage: 2000
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-
 tkmrockets:
 	Inherits: ^LightMissile
 	ReloadDelay: 64
@@ -352,7 +297,6 @@ tkmrockets:
 		Damage: 18000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 9
-
 as42rockets:
 	Inherits: ^LightMissile
 	ReloadDelay: 30
@@ -363,11 +307,10 @@ as42rockets:
 		Damage: 20000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 10
-
 tkmcryorockets:
 	Inherits: ^LightMissile
-	ReloadDelay: 63
-	Range: 6368
+	ReloadDelay: 64
+	Range: 6214
 	Report: bazook1.aud
 	Projectile: Missile
 		TrailImage: blue_smokey
@@ -381,13 +324,15 @@ tkmcryorockets:
 		Damage: 18000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 9
-	Warhead@CryoFreeze: GrantExternalCondition
-		Condition: CryoFreeze
-		Duration: 125
-		Range: 1250
-		ValidRelationships: Enemy, Neutral, Ally
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 12000
+		Spread: 200
 		ValidTargets: Ground, Water, Air
-
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
 TKMQuadCannonAG:
 	Inherits: ^SmallArms
 	Inherits: ^FlakWeapon
@@ -416,11 +361,9 @@ TKMQuadCannonAG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-
 TKMQuadCannonAA:
 	Inherits: TKMQuadCannonAG
 	Range: 7880
-
 tkmturretcannon:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^MediumCannon
@@ -445,7 +388,6 @@ tkmturretcannon:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 tkmltgun:
 	Inherits: ^MediumCannon
 	ReloadDelay: 42
@@ -465,7 +407,6 @@ tkmltgun:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 tkm2a46gun:
 	Inherits: ^MediumCannon
 	ReloadDelay: 42
@@ -485,7 +426,6 @@ tkm2a46gun:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 TKMZazaCannonAG:
 	Inherits: ^SmallArms
 	Inherits: ^FlakWeapon
@@ -514,11 +454,9 @@ TKMZazaCannonAG:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-
 TKMZazaCannonAA:
 	Inherits: TKMZazaCannonAG
 	Range: 7926
-
 TKMAATurretCannon:
 	Inherits: ^MediumMissile
 	Inherits: ^FlakWeapon
@@ -537,7 +475,6 @@ TKMAATurretCannon:
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 		Damage: 1
-
 tkmstrykerrockets:
 	Inherits: ^MediumMissile
 	ReloadDelay: 60
@@ -550,7 +487,6 @@ tkmstrykerrockets:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 12
 		ValidTargets: Ground, Water, Air
-
 tkmstrykercryorockets:
 	Inherits: ^LightMissile
 	ReloadDelay: 63
@@ -578,7 +514,6 @@ tkmstrykercryorockets:
 		Range: 1250
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
-
 tkmstrykermg:
 	Inherits: ^RA2Chaingun
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
@@ -600,7 +535,6 @@ tkmstrykermg:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-
 t30shell:
 	Inherits: ^HeavyBomb
 	Inherits: ^RailgunWeapon
@@ -644,7 +578,6 @@ t30shell:
 	# 	Amount: 4
 	# 	AimChance: 0
 	# 	AimTargetStances: Enemy, Neutral
-
 HueyCryoMissiles:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
@@ -704,7 +637,6 @@ HueyCryoMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
-
 HueyTwinMissiles:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
@@ -751,7 +683,6 @@ HueyTwinMissiles:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Ship
 		ImpactActors: false
-
 sandmarinemortar:
 	Inherits: ^HeavyBomb
 	Inherits: ^MediumFlameWeapon
@@ -789,7 +720,6 @@ sandmarinemortar:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-
 bigshieemortar:
 	Inherits: ^HeavyBomb
 	Inherits: ^MediumFlameWeapon
@@ -827,7 +757,6 @@ bigshieemortar:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
-
 TKMLockOn:
 	ReloadDelay: 20
 	Range: 10000
@@ -838,7 +767,6 @@ TKMLockOn:
 		Condition: lockon
 		ValidTargets: lockable
 		ValidRelationships: Enemy
-
 TKMMedicHeal:
 	Inherits: ^HealingWeapon
 	ReloadDelay: 5
@@ -854,7 +782,6 @@ TKMMedicHeal:
 	Warhead@HealingWeaponPercentage: HealthPercentageDamage
 		Spread: 1024
 		Damage: -1
-
 tkmkatyushalalauncherrockets:
 	Inherits: ^ShrapnelWeapon
 	ReloadDelay: 157
@@ -893,7 +820,6 @@ tkmkatyushalalauncherrockets:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 tkmkatyushalalauncherrocketscryo:
 	Inherits: ^CryoMissileProjectile
 	Inherits: tkmkatyushalalauncherrockets
@@ -907,7 +833,6 @@ tkmkatyushalalauncherrocketscryo:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 tkmkatyushalalauncherrocketsfire:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^LightMissile
@@ -949,11 +874,9 @@ tkmkatyushalalauncherrocketsfire:
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
 tkmkatyushalalauncherrocketstwin:
 	Inherits: tkmkatyushalalauncherrockets
 	Burst: 16
-
 SandmarineTusk:
 	Inherits: ^HeavyMissile
 	Inherits: ^ShrapnelWeapon
@@ -975,7 +898,6 @@ SandmarineTusk:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 20
-
 BigShieeTusk:
 	Inherits: ^HeavyMissile
 	Inherits: ^ShrapnelWeapon
@@ -997,7 +919,6 @@ BigShieeTusk:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 20
-
 SandmarineTuskTwin:
 	Inherits: SandmarineTusk
 	Inherits: ^MediumMissile
@@ -1040,11 +961,9 @@ SandmarineTuskTwin:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 2
-
 SandmarineTuskCryo:
 	Inherits: SandmarineTusk
 	Inherits: ^CryoMissileProjectile
-
 SandmarineTuskFire:
 	Inherits: SandmarineTusk
 	Inherits: ^LightFlameWeapon
@@ -1065,7 +984,6 @@ SandmarineTuskFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-
 ViperMissiles:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^RA2MediumMissile
@@ -1101,15 +1019,12 @@ ViperMissiles:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Air
-
 ViperMissilesTwin:
 	Inherits: ViperMissiles
 	Burst: 8
-
 ViperMissilesCryo:
 	Inherits: ViperMissiles
 	Inherits: ^CryoMissileProjectile
-
 ViperMissilesFire:
 	Inherits: ViperMissiles
 	Inherits: ^LightFlameWeapon
@@ -1130,7 +1045,6 @@ ViperMissilesFire:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-
 DronePodTruckLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Water
@@ -1148,7 +1062,6 @@ DronePodTruckLaser:
 	Warhead@1Dam: SpreadDamage
 		Spread: 3
 		Damage: 1
-
 VonSniper:
 	Inherits: ^MediumMissile
 	Inherits: ^HeavyCannon
@@ -1202,7 +1115,6 @@ VonSniper:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: xplos.aud
-
 VonSniperAP:
 	Inherits: VonSniper
 	ReloadDelay: 50
@@ -1234,7 +1146,6 @@ VonSniperAP:
 	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-
 VonSniperLockdown:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: VonSniperAP
@@ -1316,3 +1227,65 @@ VonSniperLockdown:
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+
+tkmm16ap:
+	Inherits: ^RA2Chaingun
+	ReloadDelay: 16
+	Range: 5385
+	Report: mgun2.aud
+	Burst: 5
+	BurstDelays: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+tkmgp25:
+	Inherits: ^Grenade
+	Inherits: ^LightFlameWeapon
+	ReloadDelay: 80
+	Range: 5621
+	Report: m203.wav
+	Projectile: Bullet
+		Speed: 300
+		LaunchAngle: 66
+		ContrailLength: 11
+		ContrailStartWidth: 66
+		ContrailEndWidth: 22
+		ContrailStartColor: FF8888FF
+		ContrailEndColor: FFFFFF22
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+
+tkmstrykerfirerockets:
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumMissile
+	ReloadDelay: 60
+	Range: 7880
+	Report: bazook1.aud
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		TrailInterval: 1
+		TrailDelay: 0
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 24000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 12
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 6000
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+		ValidTargets: Ground, Water, Air

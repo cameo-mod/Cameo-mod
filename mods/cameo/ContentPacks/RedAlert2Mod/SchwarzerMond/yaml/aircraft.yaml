@@ -276,7 +276,6 @@ zep_husk.nax2:
 		PlayerPalette: playerra2
 schwarzermond_blackbomb:
 	Inherits: ^RANeutralPlane
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^FighterTemplate
@@ -383,7 +382,6 @@ bbomb3_husk.nax2:
 ####################################################################################################
 schwarzermond_haunebuii:
 	Inherits: ^Helicopter
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SpaceshipTemplate

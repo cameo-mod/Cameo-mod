@@ -86,7 +86,6 @@ schwarzermond_laserbeetle:
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -184,7 +183,6 @@ schwarzermond_laserbeetle:
 		PlayerPalette: playerra2
 schwarzermond_lunarpanzer:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
@@ -358,7 +356,6 @@ schwarzermond_lunartiger:
 		PlayerPalette: playerra2
 schwarzermond_neojagdpanzer:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^LineBreakerTemplate
@@ -432,7 +429,6 @@ schwarzermond_neojagdpanzer:
 	WithSpriteTurret:
 schwarzermond_lunargrille:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^ArtilleryTemplate
@@ -734,7 +730,6 @@ schwarzermond_m200bjagerline:
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
@@ -924,7 +919,6 @@ schwarzermond_lasertank:
 ##############################################
 schwarzermond_gravitycoretank:
 	Inherits: ^Tank
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Crypto: ^NaxiCryptofascism
 	Inherits@Alloys: ^NaxiLunarAlloys
 	Inherits@Template: ^SupportVehicleTemplate
