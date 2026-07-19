@@ -8,7 +8,7 @@ regenerate at will. Raw stats appear as editable cells; every derived
 quantity is a live Excel formula (identical math to formula.py — proven
 by test_formula.py's Tiger identity + symbolic equivalence). Layout:
 
-  unit row:    Mod | Name | Actor | HP | Speed | Armor | TechTier |
+  unit row:    Mod | Actor | Name | Class | HP | Speed | Armor | TechTier |
                UnitClass | Special | ... | O | P | Q | Price | Cost |
                Delta | Delta% | RangeSolver
   weapon rows: indented under the unit — Damage | Reload | Burst |
@@ -46,10 +46,12 @@ OUTFILE = ROOT / "docs/design/cameo_balance_v2.xlsx"
 SECTION_ORDER = ("infantry", "vehicles", "aircraft", "naval", "defenses",
                  "buildings", "upgrades", "promotions", "misc", "faction")
 
-HDR = ["Mod", "Name", "Actor", "HP", "Speed", "Armor", "TechTier",
+HDR = ["Mod", "Actor", "Name", "Class", "HP", "Speed", "Armor", "TechTier",
        "UnitClass", "Special", "Damage", "Reload", "Burst", "BurstDel",
        "Range(wd)", "WeapClass", "EffReload", "DPS",
-       "O", "P", "Q", "Price", "Cost", "Delta", "Delta%", "RangeSolve"]
+       "O", "P", "Q", "Price", "Cost", "Delta", "Delta%", "RangeSolve",
+       # display-only, appended last so import column indices never shift:
+       "WeaponTypes"]
 COL = {name: i + 1 for i, name in enumerate(HDR)}
 UNLOCKED_UNIT = ("HP", "Speed", "TechTier", "UnitClass", "Special", "Cost")
 UNLOCKED_WEAPON = ("Damage", "Reload", "Burst", "BurstDel", "Range(wd)", "WeapClass")
@@ -74,8 +76,9 @@ def unit_rows(ws, theme, aid, u, section, row):
     """Write one unit (+ its weapon rows); returns next free row."""
     first = row
     ws.cell(row=row, column=COL["Mod"], value=theme)
-    ws.cell(row=row, column=COL["Name"], value=u.get("name") or aid)
     ws.cell(row=row, column=COL["Actor"], value=aid)
+    ws.cell(row=row, column=COL["Name"], value=u.get("name") or aid)
+    ws.cell(row=row, column=COL["Class"], value=(u.get("design") or {}).get("class_anchor") or "")
     hp = fnum((u.get("hp") or {}).get("v"))
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     if speed is None and section == "defenses":
@@ -92,14 +95,26 @@ def unit_rows(ws, theme, aid, u, section, row):
     ws.cell(row=row, column=COL["Cost"], value=cost)
 
     wrows = []
+    wrows_all = []
     for arm in u.get("armaments", []):
         if arm.get("unresolved"):
             continue
         row += 1
-        wrows.append(row)
-        ws.cell(row=row, column=COL["Name"],
+        wrows_all.append(row)
+        if arm.get("pricing", True):
+            wrows.append(row)
+        ws.cell(row=row, column=COL["Actor"],
                 value=f"  ↳ {arm.get('weapon')}").font = WEAPON_FONT
-        ws.cell(row=row, column=COL["Actor"], value=arm.get("slot")).font = WEAPON_FONT
+        ws.cell(row=row, column=COL["Name"], value=arm.get("slot")).font = WEAPON_FONT
+        # what the weapon DOES: its resolved ^-class templates (armor
+        # profiles + effects) — e.g. "^SmallArms, ^Chaingun, ^LaserWeapon".
+        wtypes = arm.get("weapon_types") or arm.get("versus_templates") or []
+        wt = ws.cell(row=row, column=COL["WeaponTypes"],
+                     value=", ".join(wtypes))
+        wt.font = WEAPON_FONT
+        if arm.get("requires"):
+            wt.comment = Comment("fires when: " + str(arm.get("requires")),
+                                 "balance-pipeline")
         damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
         damages = [x for x in damages if x is not None]
         cdmg = ws.cell(row=row, column=COL["Damage"],
@@ -206,7 +221,7 @@ def build():
         for c, h in enumerate(HDR, start=1):
             cell = ws.cell(row=1, column=c, value=h)
             cell.font = HEAD_FONT
-        ws.freeze_panes = "D2"
+        ws.freeze_panes = "E2"
         theme = doc["ledger"].split("_")[0]
         row = 2
         unit_unlock, weap_unlock = [], []
@@ -224,8 +239,8 @@ def build():
                 for col in UNLOCKED_UNIT:
                     unit_unlock.append(ws.cell(row=first, column=COL[col]))
                 for wr in range(first + 1, row - 0):
-                    if ws.cell(row=wr, column=COL["Actor"]).value and \
-                       str(ws.cell(row=wr, column=COL["Actor"]).value).startswith("Armament"):
+                    if ws.cell(row=wr, column=COL["Name"]).value and \
+                       str(ws.cell(row=wr, column=COL["Name"]).value).startswith("Armament"):
                         for col in UNLOCKED_WEAPON:
                             weap_unlock.append(ws.cell(row=wr, column=COL[col]))
         ws.conditional_formatting.add(
@@ -233,7 +248,7 @@ def build():
             ColorScaleRule(start_type="num", start_value=0, start_color="63BE7B",
                            mid_type="num", mid_value=0.25, mid_color="FFEB84",
                            end_type="num", end_value=0.6, end_color="F8696B"))
-        for col, width in (("Name", 28), ("Actor", 30), ("Mod", 10)):
+        for col, width in (("Actor", 30), ("Name", 28), ("Class", 12), ("Mod", 10)):
             ws.column_dimensions[L(col)].width = width
         protect(ws, unit_unlock, weap_unlock)
 

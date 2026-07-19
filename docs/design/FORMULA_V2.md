@@ -91,6 +91,15 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Templates are law**: conyards always use the ^Conyard template
   Power (100); icons set Offset: 0,0 whenever their image's Defaults
   defines a nonzero offset (`audit_template_conformance` enforces both).
+- **Every unit is UNIQUE within its class** (maintainer 2026-07-19):
+  no two units in a class share identical HP / speed / damage /
+  reload — give each faction's member its own small deviations
+  (per the faction-personality guide §5), pricing each via the
+  formula. EXCEPTION: original C&C units keep their ORIGINAL price
+  (stats still vary; the price is pinned). This kills clone rows
+  like the three identical D2k light infantry (light_inf /
+  ixian_lightinfantry / ordos_lightinfantry): Ordos = cheaper/
+  faster/weaker, Ixian = pricier/slower/harder-hitting.
 - **Descriptions carry NO `
 `**: unit/weapon descriptions live in the
   fluent files (`fluent/**/en.ftl`) with REAL line breaks, never the

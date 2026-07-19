@@ -20,6 +20,10 @@ by hand — both flow through the ledger → workbook → gated apply loop.
 | **FORMULA_V2.md** | the per-class formula law book: O=P=Q=cost construction, King-Tiger 2.5× identity, stat bands, the infantry class ladder, all standing laws. The RULES. |
 | **docs/balance/formula_v2_<class>.md** | per-class conversion logs (binding lessons; scout + closecombat live). The RECORD. |
 
+The generated workbook now carries a **WeaponTypes** column (the
+resolved ^-class templates per weapon — armor profile + effects) so a
+unit's weapon behaviour is visible at a glance.
+
 Supporting: ROADMAP.md (work queue), DESIGN.md (§12 formula origin),
 docs/balance/class_anchors.json (the anchor registry).
 
@@ -129,3 +133,105 @@ Forgotten naval units, Obelisk charging flares (#211), the engine pin
 bump to 2e0783c (stricter weapon validation — surfaced the ZClaw P0),
 survival timing 80/40. No collisions with the class work. Rule stays:
 commit early, scoped adds, verify others' work.
+
+## 6. Dynamic Campaign Mode — "The Singularity Crisis" (design pitch 2026-07-19)
+
+A highly replayable, dynamic, turn-based campaign that blends the strategic
+overworld of *Empire at War*, the pre-battle army building of *Call to Arms:
+Gates of Hell*, and the boss-gauntlet thrill of *C&C Generals: Zero Hour
+Challenges*.
+
+### 6.1 The Narrative Hook: The Convergence
+
+The timelines are collapsing. An event known as the "Convergence" is drawing
+every universe (Tiberian, Red Alert, Dune, StarCraft, Warcraft, Outpost, and
+custom timelines) into a single, unstable singularity. If nothing is done, all
+factions will be annihilated.
+
+The player's chosen faction has theorized a "Chronal-Lock" (or equivalent
+faction-specific device, e.g., an Omega Shield for the Consortium, a massive
+Psychic Anchor for Yuri, a Temporal Core for the Allies). To build it, they
+need pinnacle assets from across the multiverse.
+
+The Commander and a vanguard army must step through a dimensional tear, select
+a target dimension, and execute a 3-mission invasion to steal what they need
+before moving to the next universe.
+
+*Example:* A GDI Commander invades the Schwarzer Mond dimension to steal their
+*Gravity Core* technology, then invades the Zerg dimension to harvest
+*biological regeneration sequences*.
+
+### 6.2 The Strategic Layer: The Multiverse Map
+
+The campaign begins on a strategic UI layer representing the Multiverse.
+
+- **Nodes representing Dimensions:** Instead of planets or territories, the map
+  features dimensional nodes. Each node represents one of Cameo's 25+ factions.
+- **Turn Sequence:**
+  1. **Select Target:** The player chooses which faction dimension to invade.
+  2. **The 3-Mission Arc:** Once a dimension is selected, the player is locked
+     into a 3-mission mini-campaign against that faction.
+  3. **Tension/Difficulty Scaling:** After defeating a faction, the overall
+     "Convergence Threat" rises, making subsequent invasions harder (AI starts
+     with more tech, better units, or more resources).
+
+### 6.3 Pre-Battle Setup & Meta-Progression ("Gates of Hell" Style)
+
+Between missions and dimensional jumps, players return to their Command
+Ship/Temporal Hub to manage their army.
+
+**Starting MCV Loadout:** Instead of starting every game with just an MCV and
+two riflemen, players use "Meta-Credits" (earned by completing missions and
+objectives) to construct their initial drop force. As the campaign progresses,
+your initial landing force becomes a massive, customized vanguard.
+
+**The Research System (Meta vs. Tactical):**
+
+1. **Universal Meta-Tech (Between Battles):** Permanent, passive buffs applied
+   universally. *Example:* Defeat the Steel Consortium → unlock "Nanite
+   Infusion" giving all vehicles a slow passive heal. Defeat the Forgotten →
+   infantry get Tiberium resistance.
+2. **Tactical Tech (In-Battle):** If a technology is a standard in-game
+   research (like Asian Alliance's *Celestial Power*), you unlock the *right*
+   to research it in battle. You still spend credits and time inside the RTS,
+   preserving pacing.
+
+### 6.4 The Tactical Layer: The 3-Mission Arc
+
+When a player invades a dimension, they play a 3-mission gauntlet on
+handcrafted maps tailored to the defending faction's mechanics and lore.
+
+- **Mission 1: Beachhead (Low/Medium Difficulty).** Establish a foothold. AI
+  uses T1/T2 units. Objective: Secure a forward operating base or capture a key
+  local resource.
+- **Mission 2: Asymmetric Objective (Medium/High Difficulty).** A mission
+  tailored to the enemy's playstyle.
+  - *Example vs. Yuri:* Rescue mind-controlled scientists from a heavily
+    defended Grinder facility.
+  - *Example vs. Nod TS:* Survive a subterranean and stealth ambush while
+    waiting for an evac transport.
+- **Mission 3: The Artifact/Commander Assault (Boss Difficulty).** A massive,
+  heavily fortified base assault. Enemy AI fully unlocked (T4/T5, superweapons
+  active). Destroy the enemy HQ, steal the unique artifact, or assassinate the
+  enemy Commander.
+
+### 6.5 Co-Op Integration
+
+The campaign fully supports 2-player Co-Op:
+
+- AI difficulty multiplier is automatically increased.
+- AI receives passive resource income modifiers to compensate for two brains.
+- Both players pool Meta-Credits to build a joint MCV drop force.
+
+### 6.6 Implementation Strategy & AI Assistance
+
+Because of the massive scale (25+ factions = 75+ unique maps and scripts):
+
+1. **Map Generation & Aesthetics:** Handcraft terrain; use AI to generate Lua
+   scripts for AI behavior, attack waves, and objective triggers.
+2. **Procedural Mission Templates:** Standard Lua templates for Mission 1/2/3.
+   Feed the AI the target faction's profile → it populates attack waves with
+   correct, lore-accurate units.
+3. **Phased Rollout:** Launch "Campaign V1" with 6 dimensions (e.g., GDI,
+   Yuri, Consortium, Schwarzer Mond, Ordos, Zerg), add new nodes in updates as
+   maps and scripts are finalized.
