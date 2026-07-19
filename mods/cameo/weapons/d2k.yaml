@@ -197,6 +197,8 @@ Emperor_Sardaukar_E:
 
 DevBullet:
 	Inherits: ^D2K_Cannon
+	-Warhead@MediumCannon:
+	-Warhead@MediumCannonPercentage:
 	ReloadDelay: 100
 	Range: 6666
 	Report: TANKHVY1.WAV
@@ -205,15 +207,20 @@ DevBullet:
 		Image: doubleblastbullet
 		Palette: d2keffect
 	Warhead@1Dam: SpreadDamage
-		Damage: 80000
+		Damage: 101000
 		Spread: 666
 		Versus:
 			None: 70
 			Wood: 60
 			Light: 100
 			Medium: 90
-			Heavy: 80
+			Heavy: 90
+			Superheavy: 80
 			Concrete: 50
+	Warhead@HealthPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Spread: 666
+		Damage: 2
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 3333
 	Warhead@3Eff: CreateEffect
