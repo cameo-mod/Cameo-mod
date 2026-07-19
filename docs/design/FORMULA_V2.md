@@ -108,6 +108,22 @@ fast; Ixians = expensive, slow, high firepower/range/attack speed.
 8. Ledger sync (`extract_stats.py`, design fields, `--check` green),
    boot gate, scoped commit, push, append the conversion-log entry.
 
+## 6b. The infantry class ladder (target state, 2026-07-19)
+
+| class | range anchor (band) | baseline | status |
+|---|---|---|---|
+| melee | ~1500 (1350–1650) | TBD | future anchor |
+| **closecombat** (shotgun/SMG) | **3500 (3150–3850)** | td_gdi_shotgunner @ 200 (proposed) | PROPOSAL: docs/balance/formula_v2_closecombat.md |
+| scout | 5000 (4500–5500) | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
+| sniper | TBD (long) | TBD | zerg_defiler transforms in (maintainer verdict) |
+| heavy | TBD (own survey) | TBD | future anchor (flame/chem units live here) |
+| hero/commando | ~2000 attach/C4 | TBD | future anchor |
+| support/special | n/a (ability-priced) | n/a | NEW class for spies + Yuri mind control + CABAL hackers (maintainer verdict); ability-value table to design |
+
+Maintainer verdicts 2026-07-19: case-by-case for misfits — defiler →
+sniper; spies/mind-control/hackers → support template; civilians
+(alien/undead/conehead2.nax) parked undecided.
+
 ## 7. Open items
 
 - Scout proposal (formula_v2_scout.md) awaits maintainer row verdicts;
