@@ -86,5 +86,6 @@ flatter). So:
 
 - HAZMAT armor overrides (e.g. ^ShrapnelWeapon HAZMAT:50) — per-family
   exceptions, not part of the step ladder.
-- Exact heavy-% Shield value and the step 3/2/1 superheavy bands.
+- The step 3/2/1 superheavy/superweapon bands (heavy-% Shield now
+  confirmed = 35 via the top+floor law).
 - Which profiles need a friendly-fire warhead variant (halved values).
