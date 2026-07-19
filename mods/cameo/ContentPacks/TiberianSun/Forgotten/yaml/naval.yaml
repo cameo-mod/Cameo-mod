@@ -5,7 +5,12 @@ forgotten_lcraft:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
-	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -60,6 +65,8 @@ forgotten_lcraft:
 		TurnSpeed: 12
 	RenderSprites:
 		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 forgotten_juggerboat:
 	Inherits: ^BoatUnit
@@ -68,6 +75,12 @@ forgotten_juggerboat:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_navalyard
@@ -122,7 +135,7 @@ forgotten_juggerboat:
 		Image: forgotten_juggerboat
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 forgotten_cannonboat:
 	Inherits: ^BoatUnit
@@ -130,6 +143,12 @@ forgotten_cannonboat:
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@MyPet: ^MyPetAquatic
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -187,7 +206,7 @@ forgotten_cannonboat:
 		Image: forgotten_cannonboat
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 ####################################################################################################
 #		BUILDINGS
