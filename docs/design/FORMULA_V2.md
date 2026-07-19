@@ -108,13 +108,36 @@ fast; Ixians = expensive, slow, high firepower/range/attack speed.
 8. Ledger sync (`extract_stats.py`, design fields, `--check` green),
    boot gate, scoped commit, push, append the conversion-log entry.
 
-## 6b. The infantry class ladder (target state, 2026-07-19)
+## 6b. The infantry class ladder (target state, rev. 2026-07-19 late)
 
-| class | range anchor (band) | baseline | status |
-|---|---|---|---|
-| melee | ~1500 (1350–1650) | TBD | future anchor |
-| **closecombat** (shotgun/SMG) | **3500 (3150–3850)** | td_gdi_shotgunner @ 200 (proposed) | PROPOSAL: docs/balance/formula_v2_closecombat.md |
-| scout | 5000 (4500–5500) | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
+**CONTIGUOUS half-open range bands** (maintainer design): no unit can
+ever fall between classes again — the band DEFINES membership.
+
+| class | range band | anchor r₀ | baseline | status |
+|---|---|---|---|---|
+| melee | [1250, 2500) | 1750 | TBD | future anchor; range is SIZE-DERIVED (see below) |
+| **closecombat** (shotgun/SMG) | **[2500, 4500)** | **3500** | td_gdi_shotgunner @ 200 (proposed) | PROPOSAL: docs/balance/formula_v2_closecombat.md |
+| scout (rifles) | [4500, 5500] | 5000 | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
+
+- **Band width is a PER-CLASS property.** Scouts keep the tight ±10%
+  (one weapon archetype: rifles). Melee and closecombat get WIDE
+  contiguous bands because their ranges express different things:
+- **Melee range is PHYSICS, not power**: contact reach follows unit
+  size (small: shriek 1150 / zergling 1350 / zealot 1335; medium:
+  footman 1333 / knight 1420 / worker 1500; large: dogs 2000; huge
+  melee VEHICLES like the Consortium Megalodon belong to a melee-
+  vehicle class, not infantry). Size→reach convention: small
+  1250–1400, medium 1400–1700, large 1700–2500. Sub-1250 outliers
+  (zombiemutant 1127) round UP to 1250. In the MELEE formula the
+  range ratio is FIXED at 1 (reach is coupled to hitbox size — bigger
+  reach = bigger target — so it is not priced); melee pricing runs on
+  HP/speed/DPS.
+- **Closecombat range IS a balance lever** (2500 SMG spray → 4500
+  long shotgun): it prices normally, and the wide band follows the
+  price-gradient law — cheapest members at the low edge, priciest at
+  the high edge (a cost axis, not free choice).
+- Boundary rule: a weapon at exactly 2500 is closecombat; exactly
+  4500 is scout (half-open bands).
 | sniper | TBD (long) | TBD | zerg_defiler transforms in (maintainer verdict) |
 | heavy | TBD (own survey) | TBD | future anchor (flame/chem units live here) |
 | hero/commando | ~2000 attach/C4 | TBD | future anchor |

@@ -49,9 +49,12 @@ specialist than heavies.
 | baseline | 40000 | 55 | **3500** | 8000 | 50 | SA 0.75 | 120 | **200** |
 | verifier (2×/2×) | 80000 | 55 | 3500 | 16000 | 50 | SA 0.75 | 240 | 500 |
 
-- Range 3500 = 70% of the scout's 5000 (clean); band 3150–3850 covers
-  the real cluster with only gentle moves (shotgunner 3125→3150 +1%,
-  shotgundroid 4110→3850 −6%, mutant 3132→3150).
+- REV (maintainer 2026-07-19): band widened to the CONTIGUOUS
+  [2500, 4500) — anchor stays 3500 (the exact center). No unit can
+  fall between melee and scout anymore; within the class the price
+  gradient binds (cheap → 2500 end, pricey → 4500 end). Original
+  cluster needs almost no range moves at all now (shotgunner 3125,
+  mutant 3132, shotgundroid 4110 all already inside).
 - Vs the scout baseline: 2× HP and 2× DPS for 2× cost at −30% range
   and −5 speed — the archetype IS the formula trade.
 - **Baseline unit pick: `td_gdi_shotgunner`** — THE archetypal
