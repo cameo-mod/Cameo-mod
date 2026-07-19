@@ -78,6 +78,10 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 
 ## 4. Weapon & template laws
 
+- **Weapon Versus tables**: built by the step law in ARMOR_SYSTEM.md —
+  LEVEL = step 6/5/4 (light/medium/heavy, floor 10/25/40, Shield
+  110/125/140), PROFILE = the armor order. Generate, never hand-type.
+
 - **Dedicated weapons**: a converted unit never shares its weapon —
   check sharing repo-wide FIRST (`Weapon: <name>`); shared originals
   stay for their other users (brik.shp lesson, weapon edition).

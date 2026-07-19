@@ -45,6 +45,10 @@ Contiguous range bands DEFINE class membership (FORMULA_V2 §6b). Order:
 
 ## 3. Weapon-template refactor — the profile/level system (NEW, design 2026-07-19)
 
+**The construction law lives in ARMOR_SYSTEM.md** (step 6/5/4 = light/
+medium/heavy; profile = armor order). Templates are GENERATED from
+(order, step), never hand-typed.
+
 ### 3.1 The problem
 The ~13 damage templates (^SmallArms … ^HeavyBomb, each used by 90-170
 weapons) each bake a Versus armor-profile AND an implied power level
