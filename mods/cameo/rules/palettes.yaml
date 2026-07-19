@@ -561,6 +561,14 @@
 		BaseName: raplayer
 		BasePalette: ra
 		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+	PaletteFromFile@ra-noshadow:
+		Name: ra_noshadow
+		Filename: temperatra.pal
+		TransparentIndex: 0, 4
+	PlayerColorPalette@temperatra-noshadow:
+		BaseName: raplayer_noshadow
+		BasePalette: ra_noshadow
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
 	PaletteFromPlayerPaletteWithAlpha@racloak:
 		BaseName: racloak
 		BasePalette: raplayer

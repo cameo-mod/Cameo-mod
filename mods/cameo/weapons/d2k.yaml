@@ -197,7 +197,7 @@ Emperor_Sardaukar_E:
 
 DevBullet:
 	Inherits: ^D2K_Cannon
-	ReloadDelay: 66
+	ReloadDelay: 100
 	Range: 6666
 	Report: TANKHVY1.WAV
 	Projectile: Bullet
@@ -205,7 +205,7 @@ DevBullet:
 		Image: doubleblastbullet
 		Palette: d2keffect
 	Warhead@1Dam: SpreadDamage
-		Damage: 33333
+		Damage: 80000
 		Spread: 666
 		Versus:
 			None: 70
@@ -223,7 +223,7 @@ DevBullet:
 	Warhead@Glow: GlowImpact
 		Color: A060E8
 		Scale: 1.4
-		FadeFrames: 18
+		FadeFrames: 60
 
 PlasBullet:
 	Inherits: DevBullet

@@ -114,6 +114,9 @@ harkonnen_flameturret:
 		-MuzzlePalette:
 	-WithMuzzleOverlay:
 	-WithMuzzleGlow:
+	WithSpriteTurret:
+		Palette: player_rgba
+		IsPlayerPalette: true
 	RenderSprites:
 		Image: harkonnen_flameturret
 	ActorStatValues:
@@ -125,6 +128,8 @@ harkonnen_rocketturret:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
 	Tooltip:
 		Name: Harkonnen Rocket Turret
+	RenderSprites:
+		Image: ixian_rocketturret
 
 harkonnen_hightechfactory:
 	Inherits: ordos_hightechfactory

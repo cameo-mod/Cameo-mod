@@ -150,7 +150,7 @@ devastator:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: Devastator
+		Name: Harkonnen Devastator Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -162,8 +162,8 @@ devastator:
 	Armor:
 		Type: Superheavy
 	Mobile:
-		TurnSpeed: 48
-		Speed: 33
+		TurnSpeed: 12
+		Speed: 31
 		Locomotor: heavytracked
 		RequiresCondition: !overload
 		PauseOnCondition: notmobile || disabled || being-demolished
@@ -232,8 +232,10 @@ devastator:
 		Weapons: Debris
 		Pieces: 1, 2
 		RequiresCondition: !meltdown
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Experience
 	Voiced:
-		VoiceSet: D2KDevastator
+		VoiceSet: D2KVehicleVoice
 
 devastator_husk.harkonnen:
 	Inherits: ^D2KVehicleHusk

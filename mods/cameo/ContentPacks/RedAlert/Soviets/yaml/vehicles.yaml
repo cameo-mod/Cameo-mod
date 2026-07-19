@@ -846,32 +846,32 @@ ra1_soviets_siegemammothtank:
 		TurnSpeed: 9
 	Armament@PRIMARY:
 		Weapon: ra120mm2
-		LocalOffset: 912,137,258, 912,-137,258
-		Recoil: 133
+		LocalOffset: 960,144,272, 960,-144,272
+		Recoil: 140
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@PRIMARYTargetingComputer:
 		Weapon: ra120mm2TargetingComputer
-		LocalOffset: 912,137,258, 912,-137,258
-		Recoil: 133
+		LocalOffset: 960,144,272, 960,-144,272
+		Recoil: 140
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
 		RequiresCondition: !ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@Upgrade:
 		Weapon: ra120mm2Thermobaric
-		LocalOffset: 912,137,258, 912,-137,258
-		Recoil: 133
+		LocalOffset: 960,144,272, 960,-144,272
+		Recoil: 140
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
 		RequiresCondition: ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer
 	Armament@UpgradeTargetingComputer:
 		Weapon: ra120mm2ThermobaricTargetingComputer
-		LocalOffset: 912,137,258, 912,-137,258
-		Recoil: 133
+		LocalOffset: 960,144,272, 960,-144,272
+		Recoil: 140
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -879,9 +879,9 @@ ra1_soviets_siegemammothtank:
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: MammothTusk2
-		LocalOffset: -65,292,258, -65,-292,258
+		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 38
+		Recoil: 40
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -889,9 +889,9 @@ ra1_soviets_siegemammothtank:
 	Armament@SECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTusk2TargetingComputer
-		LocalOffset: -65,292,258, -65,-292,258
+		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 38
+		Recoil: 40
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -899,9 +899,9 @@ ra1_soviets_siegemammothtank:
 	Armament@UpgradeSECONDARY:
 		Name: secondary
 		Weapon: MammothTusk2Thermobaric
-		LocalOffset: -65,292,258, -65,-292,258
+		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 38
+		Recoil: 40
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -909,9 +909,9 @@ ra1_soviets_siegemammothtank:
 	Armament@UpgradeSECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTusk2ThermobaricTargetingComputer
-		LocalOffset: -65,292,258, -65,-292,258
+		LocalOffset: -68,307,272, -68,-307,272
 		LocalYaw: -50,50
-		Recoil: 38
+		Recoil: 40
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
@@ -922,6 +922,8 @@ ra1_soviets_siegemammothtank:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
+		Palette: raplayer_noshadow
+		IsPlayerPalette: true
 	#SpawnActorOnDeath:
 	#	Actor: 4TNK.Husk
 	SelectionDecorations:

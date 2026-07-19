@@ -16,7 +16,7 @@ HarkonnenFlameTurret:
 		LaunchAngle: 60
 		Inaccuracy: 850
 	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 6000
 		Versus:
 			HAZMAT: 75
 			Shield: 100
@@ -33,10 +33,54 @@ HarkonnenFlameTurret:
 			Heavy: 100
 			Superheavy: 90
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
+		Damage: 3000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
 		Amount: 2000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 1000
+
+DebrisMissile:
+	ReloadDelay: 60
+	Range: 7c0
+	MinRange: 0c512
+	Projectile: Missile
+		Shadow: true
+		InaccuracyType: Maximum
+		Inaccuracy: 250
+		HorizontalRateOfTurn: 20
+		RangeLimit: 10c0
+		MinimumLaunchAngle: 120
+		MaximumLaunchAngle: 250
+		VerticalRateOfTurn: 20
+		CruiseAltitude: 0
+		ExplodeWhenEmpty: false
+		Image: MISSILE2
+		TrailImage: large_trail
+		Speed: 250
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		Damage: 2000
+
+ExplosiveDebris:
+	Inherits: Debris2
+	Range: 7c0
+	Projectile: Bullet
+		Image: 120mm
+		TrailImage: small_trail2
+		Speed: 50, 70
+		LaunchAngle: 150, 220
+		Inaccuracy: 2c512
+		BounceCount: 1
+	Warhead@Grenade: SpreadDamage
+		Damage: 3000
+		Spread: 1c562
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1500
+		Spread: 1c562
+	Warhead@Effect: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@4Concrete: DamagesConcrete
+		Damage: 4500
