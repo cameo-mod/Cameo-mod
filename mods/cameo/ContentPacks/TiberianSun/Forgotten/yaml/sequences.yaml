@@ -1207,6 +1207,75 @@ forgotten_brokenscoopertankturret:
 	icon:
 		Filename: forgotten_brokenscoopertankturret_icon.png
 		Offset: 0,0
+forgotten_juggerboat:
+	idle:
+		Filename: forgot_juggerboat.png
+		Facings: 64
+		Scale: 0.8
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_juggerboat_icon.png
+forgotten_cannonboat:
+	idle:
+		Filename: forgot_cannonboat.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_cannonboat_icon.png
+forgotten_lcraft:
+	idle:
+		Filename: forgot_lcraft.png
+		Facings: 64
+		Scale: 1
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+	icon:
+		Filename: forgot_lcraft_icon.png
+
+
+forgotten_navalyard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: forgot_navyyard.png
+		Start: 33
+	damaged-idle:
+		Filename: forgot_navyyard.png
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: forgot_navyyard.png
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: forgot_navyyard.png
+		Length: 15
+		Start: 33
+	make:
+		Filename: forgot_navyyard.png
+		Length: 32
+	dead:
+		Filename: forgot_navyyard.png
+		Start: 33
+	icon:
+		Filename: forgot_navyyard_icon.png
+		Offset: 0,0
 # tstacticalmissile:
 # 	Defaults:
 # 		ZOffset: 1023
