@@ -1086,6 +1086,33 @@
 	GrantExternalConditionToTransport:
 		Condition: ifv-mg
 
+^CloseCombatInfantryTemplate:
+	# Formula v2 CLOSE-COMBAT class (design 2026-07-19): shotgunners &
+	# SMG troopers — range band [2500,4500), between melee and scout.
+	# Baseline td_gdi_shotgunner (50000/75/3500/SA+CG burst5 = 200);
+	# verifier asianalliance_fanatic (2x HP + 2x bursts = 500). All
+	# members use SmallArms + Chaingun warheads (WC 0.875), ground-only.
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Armor:
+		Type: Plate
+	DamageMultiplier@CloseCombatInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@CloseCombatInfantryBuff:
+		Modifier: 100
+	RevealsShroud:
+		Range: 5000
+	Buildable:
+		Description: Close-combat infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+		BuildPaletteOrder: 10
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	TooltipExtras@CloseCombat:
+		Description: Close-Combat Infantry
+	GrantExternalConditionToTransport:
+		Condition: ifv-mg
+
 ^GrenadierInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceInfantry
 	Inherits@EXT: ^ExternalConditions
@@ -1258,10 +1285,10 @@
 		IconPalette: cameo
 	KeepsDistance:
 		Distance: 10
-	TooltipExtras@ra1_allies_alliedsniper:
+	TooltipExtras@lightsniper:
 		Description: Sniper
 	GrantExternalConditionToTransport:
-		Condition: ifv-ra1_allies_alliedsniper
+		Condition: ifv-lightsniper
 
 ^HackableRobot:
 	Targetable@HackableRobot:
@@ -8844,8 +8871,8 @@ CPQDEBUGDUMMY:
 		Condition: ifv-chem
 	ExternalCondition@hero:
 		Condition: ifv-hero
-	ExternalCondition@ra1_allies_alliedsniper:
-		Condition: ifv-ra1_allies_alliedsniper
+	ExternalCondition@lightsniper:
+		Condition: ifv-lightsniper
 	ExternalCondition@spy:
 		Condition: ifv-spy
 	ExternalCondition@chrono:
@@ -8954,20 +8981,20 @@ CPQDEBUGDUMMY:
 			# usaburton: ifv-hero
 			# susaburton: ifv-hero
 			# leangburton: ifv-hero
-			# terran_ghost: ifv-ra1_allies_alliedsniper
-			# ra2_allies_sniper: ifv-ra1_allies_alliedsniper
-			# yuri_virus: ifv-ra1_allies_alliedsniper
+			# terran_ghost: ifv-lightsniper
+			# ra2_allies_sniper: ifv-lightsniper
+			# yuri_virus: ifv-lightsniper
 			# ra1_allies_raspy: ifv-spy
 			# ra2_allies_ra2spy: ifv-spy
 			# asianalliance_shinobi: ifv-spy
-			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
-			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
-			# glkell: ifv-ra1_allies_alliedsniper
-			# leangkell: ifv-ra1_allies_alliedsniper
-			# glsabo: ifv-ra1_allies_alliedsniper
-			# usapath: ifv-ra1_allies_alliedsniper
-			# susapath: ifv-ra1_allies_alliedsniper
-			# leangpath: ifv-ra1_allies_alliedsniper
+			# ts_nod_chameleonspy: ifv-lightsniper
+			# forgotten_mutantsniper: ifv-lightsniper
+			# glkell: ifv-lightsniper
+			# leangkell: ifv-lightsniper
+			# glsabo: ifv-lightsniper
+			# usapath: ifv-lightsniper
+			# susapath: ifv-lightsniper
+			# leangpath: ifv-lightsniper
 			# ra2_allies_chronolegionnaire: ifv-chrono
 			# ra2_soviets_crazyivan: ifv-demo
 			# ra2terror: ifv-demo
@@ -9006,8 +9033,8 @@ CPQDEBUGDUMMY:
 			# nsfremen: ifv-fremen
 			# plasma_infantry: ifv-plasma
 			# fedaykin: ifv-sonic
-			# d2k_sniper: ifv-ra1_allies_alliedsniper
-			# d2k_marksman: ifv-ra1_allies_alliedsniper
+			# d2k_sniper: ifv-lightsniper
+			# d2k_marksman: ifv-lightsniper
 			# flamethrower: ifv-fire
 			# d2k_mechanic: ifv-repair
 			# drguardian: ifv-litlaser
@@ -9017,7 +9044,7 @@ CPQDEBUGDUMMY:
 			# drraid: ifv-litlaser
 			# drscout: ifv-fremen
 			# drmercenary: ifv-cannon
-			# drsnipe: ifv-ra1_allies_alliedsniper
+			# drsnipe: ifv-lightsniper
 			# drmartyr: ifv-demo
 			# drsabot: ifv-demo
 			# drmech: ifv-repair
@@ -9085,7 +9112,7 @@ CPQDEBUGDUMMY:
 			# wh40kmarineflamer: ifv-fire
 			# wh40kscoutflamer: ifv-fire
 			# wh40kmarinerocket: ifv-miss
-			# wh40kscoutsniper: ifv-ra1_allies_alliedsniper
+			# wh40kscoutsniper: ifv-lightsniper
 			# wh40kforcecmd: ifv-hero
 			# wh40kterminator1: ifv-hvmg
 			# wh40kterminator2: ifv-hvmg
@@ -9112,7 +9139,7 @@ CPQDEBUGDUMMY:
 			# japan_tankbuster: ifv-miss
 			# japan_archermaiden: ifv-archermaiden
 			# asianalliance_veteranarcher: ifv-archermaiden
-			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
+			# lightsniper: ifv-lightsniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer
 			# wc_o_grunt: ifv-archer
@@ -9150,9 +9177,9 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@ra1_allies_alliedsniper:
+	Armament@lightsniper:
 		Weapon: LightSniper
-		RequiresCondition: ifv-ra1_allies_alliedsniper
+		RequiresCondition: ifv-lightsniper
 	Armament@hero:
 		Weapon: BorisAKM
 		RequiresCondition: ifv-hero

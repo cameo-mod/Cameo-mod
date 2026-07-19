@@ -101,3 +101,49 @@ the maintainer before any conversion.
 6. Civilians (alien/undead/conehead2.nax): parked undecided per the
    maintainer — they can slot into scout/closecombat/melee/heavy once
    the ladder is complete.
+
+---
+
+## CONVERSION LOG — closecombat class (LIVE 2026-07-19)
+
+### Anchor established (maintainer spec, boot-pending)
+
+- **BASELINE `td_gdi_shotgunner`**: 50000 HP / 75 Speed / 3500 Range /
+  cost 200. Weapon `td_gdi_shotgunner_shotgun`: SmallArms 2000 +
+  Chaingun 2000 per shot (WC 0.875), **burst 5 / BurstDelays 0** (one
+  shotgun blast), Inaccuracy 800 (= 4× the Chaingun's 200), ReloadDelay
+  75, **SoundVolume 0.2** (= 1/burst so 5 simultaneous shots aren't
+  deafening), no-air. Effective DPS = (2000+2000)·5/75·0.875 = 233.33.
+  → **O = P = Q = price = 200.00 EXACT.**
+- **VERIFIER `asianalliance_fanatic`**: 2× HP (100000) + 2× DPS via
+  **DOUBLE BURSTS (burst 10, not double damage)** @ 250% cost = 500.
+  SoundVolume 0.1. → O=300 P=400 Q=800 **price=500.00 EXACT** (identity
+  holds — doubling bursts doubles DPS just like doubling damage).
+  Upgrade/elite tiers dedicated (burst 13/16) per the pair law.
+- **MEMBER `naxis_sssoldier`**: 60000 HP / 55 Speed / 4000 Range,
+  SMG `naxis_sssoldier_smg` (SA+CG, burst 10, bd 0, no-air) + elite
+  pair. **Tier 3 (academy) → tech_tier 0.75** → priced 243 → **cost
+  240** (the tech discount: a T3 unit is cheaper per stat because the
+  academy is the entry cost). Was 375/30000/MeleeTemplate.
+
+### Class laws (in addition to the universal ones)
+
+- ALL closecombat weapons use **SmallArms + Chaingun** (WC 0.875);
+  per-shot damage = the two warheads SUMMED (both equal), in 2000-steps;
+  each carries its % warhead (1% per 2000).
+- **BurstDelays 0** (rapid blast); **SoundVolume = 1/burst** (LAW — a
+  simultaneous multi-shot burst must be volume-scaled or it deafens).
+- **Tech tier factor**: T1 = 1.0, T3 = 0.75 (multiplies O/P/Q, so a
+  higher-tech unit is cheaper per stat). Determined by the deepest
+  tech-building prerequisite.
+- `^CloseCombatInfantryTemplate` (Plate armor, ground-only autotarget,
+  own neutral Buff knob pair) — the class is born normalized (no bake).
+
+Lessons:
+9. Verifier via 2× BURSTS instead of 2× damage gives the identical
+   2.5× identity AND a cleaner weapon (same per-shot feel, faster
+   cadence) — the maintainer's preferred pattern for burst weapons.
+10. SoundVolume scales inversely with burst count (1/burst) — required
+    whenever BurstDelays 0 fires many shots on one tick.
+11. Tech tier belongs in the price: a T3 unit prices at 0.75× the T1
+    formula, so it can carry stronger stats for the same cost.

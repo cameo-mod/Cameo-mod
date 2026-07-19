@@ -64,6 +64,11 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Weapon-class bands by cost** (scout values; per-class analogues):
   ≤150% of C₀ → SmallArms only (WC 0.75); above → SmallArms+Chaingun
   (WC 0.875). The class's own DPS₀ already includes the baseline WC.
+- **SoundVolume = 1/burst** (LAW): a BurstDelays-0 weapon firing N
+  shots on one tick must set SoundVolume 1/N or it deafens.
+- **Tech tier factor** multiplies O/P/Q: T1 = 1.0, T3 = 0.75
+  (higher tech = cheaper per stat). From the deepest tech-building
+  prerequisite. Closecombat verifier doubles DPS via 2x BURSTS.
 - **Scout infantry never hit aircraft**: ValidTargets Ground, Water on
   every scout weapon INCLUDING upgrade variants; units use
   ^AutoTargetGroundAssaultMove (faction consistency program).
@@ -116,7 +121,7 @@ ever fall between classes again — the band DEFINES membership.
 | class | range band | anchor r₀ | baseline | status |
 |---|---|---|---|---|
 | melee | [1250, 2500) | 1750 | TBD | future anchor; range is SIZE-DERIVED (see below) |
-| **closecombat** (shotgun/SMG) | **[2500, 4500)** | **3500** | td_gdi_shotgunner @ 200 (proposed) | PROPOSAL: docs/balance/formula_v2_closecombat.md |
+| **closecombat** (shotgun/SMG) | **[2500, 4500)** | **3500** | td_gdi_shotgunner @ 200 | **LIVE** (baseline 200.00, verifier fanatic 500.00 exact, +naxis_sssoldier T3) |
 | scout (rifles) | [4500, 5500] | 5000 | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
 
 - **Band width is a PER-CLASS property.** Scouts keep the tight ±10%

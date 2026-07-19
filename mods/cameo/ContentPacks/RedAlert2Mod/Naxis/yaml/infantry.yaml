@@ -106,7 +106,7 @@ naxis_naxiriflerecruit:
 
 naxis_sssoldier:
 	Inherits: ^Soldier
-	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@Template: ^CloseCombatInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -116,7 +116,7 @@ naxis_sssoldier:
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Valued:
-		Cost: 375
+		Cost: 240
 	Tooltip:
 		Name: SS Soldier
 	Buildable:
@@ -125,28 +125,28 @@ naxis_sssoldier:
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_mp40.description
 	Mobile:
-		Speed: 60
+		Speed: 55
 	Health:
-		HP: 30000
+		HP: 60000
 	ChangesHealth@SelfHealing:
-		Step: 30
+		Step: 60
 	Armament@PRIMARY:
-		Weapon: NaxiMP40
+		Weapon: naxis_sssoldier_smg
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiMP40E
+		Weapon: naxis_sssoldier_smg_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxiMP40
+		Weapon: naxis_sssoldier_smg
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiMP40E
+		Weapon: naxis_sssoldier_smg_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -230,7 +230,7 @@ naxis_naximercenarysniper:
 		Name: Naxi Mercenary Sniper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~naxis_barracks, naxis_academy
+		Prerequisites: ~naxis_barracks, naxis_techcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_merc.description
 	Mobile:
