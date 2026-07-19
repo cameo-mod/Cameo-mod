@@ -80,6 +80,16 @@
 		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_friendlywildlife
+^MyPetAquatic:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
+		Probability: 50
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_friendlywildlife
 
 ############## Lab
 

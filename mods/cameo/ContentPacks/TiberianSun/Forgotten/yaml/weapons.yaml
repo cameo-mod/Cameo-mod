@@ -527,6 +527,70 @@ TSJuggerFlakAA:
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
 		ImpactSounds: expnew13.aud
+TSJuggerFlakAA_boat:
+	Inherits: ^FlakWeapon
+	Report: jugger1.aud
+	Range: 12834
+	MinRange: 2565
+	ReloadDelay: 69
+	Burst: 2
+	BurstDelays: 3
+	Range: 11234
+	ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Air
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: expnew13.aud
+
+TSJuggerboat90mm:
+	Inherits: ^ShrapnelWeapon
+	ReloadDelay: 69
+	Range: 12834
+	MinRange: 2565
+	Burst: 2
+	BurstDelays: 3
+	Report: jugger1.aud
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 165
+		Inaccuracy: 1c0
+		ContrailLength: 10
+		ContrailWidth: 0c32
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+	# Warhead@3Eff: CreateEffect
+	# 	Explosions: artillery_explosion
+TSBoatcannon:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 80
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Report: trashcannon.wav
+	InvalidTargets: Underwater, Submarine
+	Projectile: Bullet
+		Blockable: false
+		Speed: 800
+		ContrailLength: 8
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 16000
+		Spread: 400
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 8
+		Spread: 400
 ####################################################################################################
 #		Tiberian Sun Energy Weapons
 ####################################################################################################

@@ -445,6 +445,33 @@ forgotten_chemicalplant:
 	RenderSprites:
 		Image: forgotten_chemicalplant
 		PlayerPalette: player_rgba
+forgotten_navalyard:
+	Inherits: ^RA2Building
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Tooltip:
+		Name: Forgotten Naval Yard
+	Buildable:
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	#WithResupplyAnimation:
+	#	Sequence: repair
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	#WithIdleOverlay@waves:
+	#	Sequence: idle-waves
+	#	RequiresCondition: !build-incomplete
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: player_rgba
 #######################################
 #######################################
 #######################################
