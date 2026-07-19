@@ -25,8 +25,10 @@ Every damage weapon's Versus table is fully determined by two choices:
 
 - 16 non-Shield armor types, so 100 down in 15 steps to the floor:
   light 100,94,88,…,10 · medium 100,95,…,25 · heavy 100,96,…,40.
-- **Shield = 100 + floor** (a weapon over-damages shields): 110 / 125 /
-  140. Shield is the only value ABOVE 100.
+- **Shield = top + floor** — the one unifying rule for BOTH warheads.
+  Main warhead: top 100 + floor (10/25/40) = **110 / 125 / 140**.
+  Shield is the only main value above 100; heavier weapons hit shields
+  hardest.
 - Flatter = tougher target set survives less: a HEAVY weapon never
   drops below 40% vs anything (relatively universal); a LIGHT weapon
   drops to 10% vs its worst target (hard specialist).
@@ -40,14 +42,17 @@ Every damage weapon's Versus table is fully determined by two choices:
 Each weapon pairs its main warhead with a HealthPercentageDamage
 warhead that ALSO ladders down by step 1, in a level-dependent window:
 
-| level | % runs top → floor | Shield % |
+| level | % top → floor | Shield % (= top + floor) |
 |---|---|---|
-| Light | 16 → 1 | 17 |
-| Medium | 20 → 5 | 25 |
-| Heavy | 25 → 10 | (≈30) |
+| Light | 16 → 1 | **17** |
+| Medium | 20 → 5 | **25** |
+| Heavy | 25 → 10 | **35** |
 
-Same armor ORDER as the main warhead; step always 1. This is the "extra
-% of max-HP" chip damage that keeps high-HP targets killable.
+Same armor ORDER as the main warhead; step always 1. Shield obeys the
+SAME `top + floor` law (16+1, 20+5, 25+10). Confirmed against every
+heavy-class weapon in the file (HeavyMissile/HeavyBomb/Laser/Railgun/
+Tesla/Heavy Flame+Chemical all show Shield% 35). This is the "extra %
+of max-HP" chip damage that keeps high-HP targets killable.
 
 ## PROFILE — the standard armor orderings (which type is at 100)
 
