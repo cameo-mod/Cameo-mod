@@ -350,18 +350,27 @@ ts_nod_obeliskoflight:
 	Armament@PRIMARY:
 		Weapon: TSObeliskLaserFire
 		# LocalOffset: 0,180,1600
-		LocalOffset: 0,320,1280
+		LocalOffset: 0,277,1323
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserObeliskLaserFire
 		# LocalOffset: 0,180,1600
-		LocalOffset: 0,320,1280
+		LocalOffset: 0,277,1323
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 50
 		ChargingCondition: charging
+	WithChargeLensFlare:
+		RequiresCondition: !build-incomplete
+		Armaments: primary
+		RayColor: FF3B00D0
+		CoreColor: FFFFFFFF
+		Size: 64, 72
+		Width: 2.5
+		CoreSize: 5
+		ZOffset: 1
 	AmbientSound:
 		RequiresCondition: charging
 		SoundFiles: obelpowr.aud

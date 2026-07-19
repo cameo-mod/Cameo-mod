@@ -2172,13 +2172,13 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "range": "5000",
       "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^SmallArms"
       ],
       "warheads": [
        {
@@ -2187,18 +2187,8 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2207,13 +2197,13 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "range": "5000",
       "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
-       "^SmallArms",
-       "^Chaingun"
+       "^SmallArms"
       ],
       "warheads": [
        {
@@ -2222,18 +2212,8 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "4000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
@@ -2241,13 +2221,14 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "range": "5547",
-      "reloaddelay": "55",
+      "design_weapon_class": 0.75,
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^WaveforceBulletWarhead",
-       "CHGuardRifle",
+       "japan_imperialscoutsman_rifle",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
@@ -2267,38 +2248,29 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CHGuardRifleWaveforce"
+      "weapon": "japan_imperialscoutsman_rifle_waveforce"
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "range": "5547",
-      "reloaddelay": "55",
+      "design_weapon_class": 0.75,
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^WaveforceBulletWarhead",
-       "CHGuardRifle",
+       "japan_imperialscoutsman_rifle",
        "^WaveforceBulletProjectile"
       ],
       "warheads": [
@@ -2318,27 +2290,17 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
-        "type": "HealthPercentageDamage"
-       },
-       {
-        "damage": "2000",
-        "tag": "Chaingun",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "1",
-        "tag": "ChaingunPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CHGuardRifleWaveforce"
+      "weapon": "japan_imperialscoutsman_rifle_waveforce"
      }
     ],
     "armor": {
@@ -2373,7 +2335,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "60"
     }
    },
    "japan_japaneseflamethrower": {

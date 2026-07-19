@@ -1495,9 +1495,11 @@
    "E1": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -1515,13 +1517,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_gdi_minigunner_minigun"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1539,12 +1543,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_gdi_minigunner_minigun"
      },
      {
+      "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "range": "4445",
-      "reloaddelay": "15",
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
@@ -1562,13 +1568,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16AP"
+      "weapon": "td_gdi_minigunner_minigun_ap"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "range": "4445",
-      "reloaddelay": "15",
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
@@ -1586,7 +1594,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16AP"
+      "weapon": "td_gdi_minigunner_minigun_ap"
      }
     ],
     "armor": {
@@ -1605,7 +1613,7 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "16000"
+     "v": "32000"
     },
     "name": "GDI Minigunner",
     "prerequisites": [
@@ -1617,7 +1625,7 @@
     },
     "speed": {
      "src": "inherited",
-     "v": "60"
+     "v": "63"
     }
    },
    "E3": {
@@ -2827,9 +2835,12 @@
    "td_gdi_minigunner": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2847,13 +2858,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_gdi_minigunner_minigun"
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "range": "3916",
-      "reloaddelay": "17",
+      "burst": "4",
+      "burstdelays": "3",
+      "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2871,12 +2885,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16"
+      "weapon": "td_gdi_minigunner_minigun"
      },
      {
+      "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "range": "4445",
-      "reloaddelay": "15",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@Upgrade",
       "versus_templates": [
@@ -2894,13 +2911,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16AP"
+      "weapon": "td_gdi_minigunner_minigun_ap"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
-      "range": "4445",
-      "reloaddelay": "15",
+      "design_weapon_class": 0.75,
+      "range": "4600",
+      "reloaddelay": "45",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
@@ -2918,7 +2938,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M16AP"
+      "weapon": "td_gdi_minigunner_minigun_ap"
      }
     ],
     "armor": {
@@ -2930,14 +2950,14 @@
      "v": "100"
     },
     "design": {
-     "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "class_anchor": "scout",
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
-     "src": "inherited",
-     "v": "16000"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
+     "v": "32000"
     },
     "name": "GDI Minigunner",
     "prerequisites": [
@@ -2952,8 +2972,8 @@
      "v": "8000"
     },
     "speed": {
-     "src": "inherited",
-     "v": "60"
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
+     "v": "63"
     }
    },
    "td_gdi_officer": {

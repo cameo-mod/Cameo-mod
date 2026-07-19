@@ -569,12 +569,20 @@ td_nod_obeliskoflight:
 		Sequence: active
 	Armament:
 		Weapon: LaserObelisk
-		LocalOffset: 0,-85,1280
+		LocalOffset: -43,-85,1259
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
 		ChargeLevel: 50
 		ChargingCondition: charging
+	WithChargeLensFlare:
+		RequiresCondition: !build-incomplete
+		RayColor: FF3B00D0
+		CoreColor: FFFFFFFF
+		Size: 64, 72
+		Width: 2.5
+		CoreSize: 5
+		ZOffset: 3001
 	AmbientSound:
 		RequiresCondition: charging
 		SoundFiles: obelpowr.aud

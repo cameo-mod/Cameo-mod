@@ -4,6 +4,23 @@ td_gdi_minigunner:
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
+	# character at the original cost 100; O/P/Q priced via the scout
+	# anchor; class knobs neutralized (2x-health bake); burst flavor
+	# trimmed to formula DPS by the unit-named multiplier.
+	Mobile:
+		Speed: 63
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@td_gdi_minigunner:
+		Modifier: 30
 	Tooltip:
 		Name: GDI Minigunner
 	Buildable:
@@ -12,20 +29,20 @@ td_gdi_minigunner:
 		Queue: Infantry, RAInfantry
 		Description: actor_e1.description
 	Armament@PRIMARY: ##########
-		Weapon: M16
+		Weapon: td_gdi_minigunner_minigun
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: M16
+		Weapon: td_gdi_minigunner_minigun
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade: ##########
-		Weapon: M16AP
+		Weapon: td_gdi_minigunner_minigun_ap
 		LocalOffset: 128,0,256
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
-		Weapon: M16AP
+		Weapon: td_gdi_minigunner_minigun_ap
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	ActorStatValues:

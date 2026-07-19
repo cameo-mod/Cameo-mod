@@ -969,9 +969,12 @@
    "ra1_allies_rifleinfantry": {
     "armaments": [
      {
+      "burst": "3",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "5400",
+      "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -989,13 +992,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1Carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "5400",
+      "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1013,16 +1019,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1Carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine"
      },
      {
+      "burst": "3",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "5400",
+      "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@Upgrade",
       "versus_templates": [
-       "M1Carbine",
+       "ra1_allies_rifleinfantry_carbine",
        "^CryoMissileProjectile"
       ],
       "warheads": [
@@ -1037,17 +1046,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CryoM1Carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo"
      },
      {
       "armament_name": "garrisoned",
+      "burst": "3",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "range": "4655",
-      "reloaddelay": "20",
+      "design_weapon_class": 0.75,
+      "range": "5400",
+      "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
-       "M1Carbine",
+       "ra1_allies_rifleinfantry_carbine",
        "^CryoMissileProjectile"
       ],
       "warheads": [
@@ -1062,7 +1074,7 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CryoM1Carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo"
      }
     ],
     "armor": {
@@ -1074,14 +1086,14 @@
      "v": "100"
     },
     "design": {
-     "class_anchor": null,
-     "special": null,
-     "tech_tier": null,
-     "unit_class": null
+     "class_anchor": "scout",
+     "special": 1.0,
+     "tech_tier": 1.0,
+     "unit_class": 1.0
     },
     "hp": {
-     "src": "inherited",
-     "v": "14000"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
+     "v": "28000"
     },
     "name": "Rifle Infantry",
     "prerequisites": [
@@ -1096,8 +1108,8 @@
      "v": "8000"
     },
     "speed": {
-     "src": "inherited",
-     "v": "58"
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
+     "v": "57"
     }
    },
    "ra1_einstein": {
