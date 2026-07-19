@@ -24,8 +24,8 @@ RemainingTime = 0
 timerStarted = false
 Text = ""
 
-PrepSeconds = 60      -- build-up time before wave 1
-WaveGapSeconds = 30    -- time between waves
+PrepSeconds = 80      -- build-up time before wave 1
+WaveGapSeconds = 40    -- time between waves
 BaseBudget = 1500      -- wave-1 budget at 1 player
 BudgetGrowth = 650     -- extra budget per wave index
 RampFactor = 0.08      -- superlinear ramp: late waves outscale early ones
