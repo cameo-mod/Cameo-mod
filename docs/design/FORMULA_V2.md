@@ -1,5 +1,8 @@
 # FORMULA V2 — the complete law book (as learned through 2026-07-19)
 
+_Master index: **MEGAPLAN.md** ties this + BALANCE_PIPELINE + the class
+logs + the weapon-template program together._
+
 _The consolidated, binding reference for the per-class balance system.
 Grew out of DESIGN §12 + the balance pipeline (BALANCE_PIPELINE.md) +
 the scout-class conversions (docs/balance/formula_v2_scout.md holds the
@@ -84,6 +87,11 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Templates are law**: conyards always use the ^Conyard template
   Power (100); icons set Offset: 0,0 whenever their image's Defaults
   defines a nonzero offset (`audit_template_conformance` enforces both).
+- **Descriptions carry NO `
+`**: unit/weapon descriptions live in the
+  fluent files (`fluent/**/en.ftl`) with REAL line breaks, never the
+  `
+` escape. New descriptions go straight to fluent.
 - **Knob hierarchy** (^GlobalBuffs → class → subclass) stays as the
   live one-value tuning layer, pipeline-owned, with knob-aware pricing;
   formula-gap patches get baked away per class (BALANCE_PIPELINE §5b).
