@@ -207,7 +207,7 @@ DevBullet:
 		Image: doubleblastbullet
 		Palette: d2keffect
 	Warhead@1Dam: SpreadDamage
-		Damage: 101000
+		Damage: 80000
 		Spread: 666
 		Versus:
 			None: 70
@@ -220,7 +220,7 @@ DevBullet:
 	Warhead@HealthPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Spread: 666
-		Damage: 2
+		Damage: 4
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 3333
 	Warhead@3Eff: CreateEffect
