@@ -90,6 +90,11 @@ Terrain:
 		TargetTypes: Ground
 		AcceptsSmudgeType: RockCrater
 		Color: 7D6D60
+	TerrainType@wall:
+		Type: wall
+		TargetTypes: Ground
+		AcceptsSmudgeType: RockCrater
+		Color: D0C0A0
 	TerrainType@Water:
 		Type: Water
 		TargetTypes: Water
