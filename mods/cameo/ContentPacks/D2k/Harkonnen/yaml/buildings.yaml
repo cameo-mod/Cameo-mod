@@ -1,1 +1,161 @@
-# No buildings units.
+# Harkonnen base structures inherit the active Ordos implementations and replace
+# faction prerequisites, tooltips, and sprites with their Harkonnen equivalents.
+harkonnen_constructionyard:
+	Inherits: ordos_constructionyard
+	Tooltip:
+		Name: Harkonnen Construction Yard
+	-Transforms:
+	RenderSprites:
+		Image: conyard.harkonnen
+
+harkonnen_windtrap:
+	Inherits: ordos_windtrap
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard
+	RenderSprites:
+		Image: power.harkonnen
+
+harkonnen_barracks:
+	Inherits: ordos_barracks
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_windtrap
+	Tooltip:
+		Name: Harkonnen Barracks
+	RenderSprites:
+		Image: barracks.harkonnen
+	ProvidesPrerequisite@factionbarracks:
+		Prerequisite: harkonnen_barracks
+
+harkonnen_refinery:
+	Inherits: ordos_refineryordos
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_windtrap
+		Description: Processes spice into credits.
+	-FreeActor:
+	-FreeActorWithDelivery@1:
+	RenderSprites:
+		Image: refinery.harkonnen
+
+harkonnen_storagesilo:
+	Inherits: ordos_storagesilo
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+		Description: Stores excess spice.
+	RenderSprites:
+		Image: silo.harkonnen
+
+harkonnen_lightfactory:
+	Inherits: ordos_lightfactory
+	Tooltip:
+		Name: Harkonnen Light Factory
+	RenderSprites:
+		Image: light.harkonnen
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+
+harkonnen_heavyfactory:
+	Inherits: ordos_heavyfactory
+	Tooltip:
+		Name: Harkonnen Heavy Factory
+	RenderSprites:
+		Image: heavy.harkonnen
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+
+harkonnen_repairpad:
+	Inherits: ordos_repairpad
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_heavyfactory
+	Tooltip:
+		Name: Harkonnen Repair Pad
+	RenderSprites:
+		Image: repair_pad.harkonnen
+	ProvidesPrerequisite@repair_pad:
+		Prerequisite: harkonnen_repairpad
+
+harkonnen_outpost:
+	Inherits: ordos_outpost
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+	Tooltip:
+		Name: Harkonnen Outpost
+	RenderSprites:
+		Image: outpost.harkonnen
+	-ParatroopersPower@paratroopers:
+
+harkonnen_autogunturret:
+	Inherits: ordos_autogunturret
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
+	Tooltip:
+		Name: Harkonnen Autogun Turret
+
+harkonnen_flameturret:
+	Inherits: ixian_gunturret
+	Inherits@AntiInf: ^PrioritizeInfantry
+	AutoTargetPriority@INFANTRY:
+		Priority: 50
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
+		BuildPaletteOrder: 575
+		Description: Spews a sustained stream of fire.\nStrong against infantry.\nAverage against vehicles.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Harkonnen Flame Turret
+	BodyOrientation:
+		QuantizedFacings: 16
+	Armament:
+		Weapon: HarkonnenFlameTurret
+		LocalOffset: 700,0,512
+		-MuzzleSequence:
+		-MuzzlePalette:
+	-WithMuzzleOverlay:
+	-WithMuzzleGlow:
+	RenderSprites:
+		Image: harkonnen_flameturret
+	ActorStatValues:
+		Upgrades:
+
+harkonnen_rocketturret:
+	Inherits: ixian_rocketturret
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	Tooltip:
+		Name: Harkonnen Rocket Turret
+
+harkonnen_hightechfactory:
+	Inherits: ordos_hightechfactory
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	RenderSprites:
+		Image: hightech.harkonnen
+
+harkonnen_ixresearchcenter:
+	Inherits: ordos_ixresearchcenter
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
+	RenderSprites:
+		Image: research.harkonnen
+
+harkonnen_starport:
+	Inherits: ordos_starport
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, derricklimit
+	RenderSprites:
+		Image: starport.harkonnen
+
+harkonnen_palace:
+	Inherits: ordos_palace
+	Buildable:
+		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, !opalace, ~techlevel.superweapons
+	Tooltip:
+		Name: Harkonnen Palace
+	RenderSprites:
+		Image: palace.harkonnen
+	-DetonateWeaponPower@Chaos:
+	-ProduceActorPower@sabot:
+	-GrantConditionOnPrerequisite@palace_saboteurs:
+	-Production@Saboteurs:

@@ -1,3 +1,42 @@
 80mm_H:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 55
+
+HarkonnenFlameTurret:
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 30
+	Burst: 9
+	BurstDelays: 1
+	Range: 6742
+	StartBurstReport: hk_flame_turret_1.wav
+	Projectile: Bullet
+		Speed: 150
+		TrailImage: fb4
+		Image: fb3
+		LaunchAngle: 60
+		Inaccuracy: 850
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 2000
+		Versus:
+			HAZMAT: 75
+			Shield: 100
+			None: 150
+			Flak: 140
+			Plate: 130
+			Heroic: 110
+			Wood: 80
+			Concrete: 75
+			Steel: 75
+			Scout: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Superheavy: 90
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 2000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 1000

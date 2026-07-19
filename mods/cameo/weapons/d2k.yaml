@@ -220,6 +220,10 @@ DevBullet:
 		Explosions: d2k_shockwave
 		ImpactSounds: EXPLMD4.WAV
 		ExplosionPalette: effect75alpha
+	Warhead@Glow: GlowImpact
+		Color: A060E8
+		Scale: 1.4
+		FadeFrames: 18
 
 PlasBullet:
 	Inherits: DevBullet
