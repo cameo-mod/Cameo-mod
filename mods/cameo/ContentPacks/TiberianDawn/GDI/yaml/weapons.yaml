@@ -1794,3 +1794,32 @@ TDIonCannonDamage:
 		Spread: 4000
 	-Warhead@2Smu_impact:
 	-Warhead@5Smu_area2:
+
+# CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): GDI
+# minigunner — burst 4, disciplined cadence. Paired AP variant per the
+# base+upgrade rename law. M16/M16AP stay for their other users.
+td_gdi_minigunner_minigun:
+	Inherits: ^SmallArms
+	ReloadDelay: 45
+	Range: 4600
+	ValidTargets: Ground, Water
+	Burst: 4
+	BurstDelays: 3
+	Report: mgun2.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+td_gdi_minigunner_minigun_ap:
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 45
+	Range: 4600
+	Burst: 4
+	BurstDelays: 3
+	Report: mgun2.aud
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2

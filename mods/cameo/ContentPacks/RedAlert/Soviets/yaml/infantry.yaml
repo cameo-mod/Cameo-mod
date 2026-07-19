@@ -100,25 +100,42 @@ ra1_soviets_rifleinfantry:
 	Inherits: ^ra1_allies_rifleinfantry
 	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	# Formula v2 scout conversion (2026-07-19): unique classic-rifle
+	# character at the original cost 100; O/P/Q priced via the scout
+	# anchor; class knobs neutralized (2x-health bake); burst flavor
+	# trimmed to formula DPS by the unit-named multiplier.
+	Mobile:
+		Speed: 54
+	Health:
+		HP: 34000
+	ChangesHealth@SelfHealing:
+		Step: 34
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra1_soviets_rifleinfantry:
+		Modifier: 54
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscription
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: M1Carbine
+		Weapon: ra1_soviets_rifleinfantry_carbine
 		LocalOffset: 128,0,256
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: M1Carbine
+		Weapon: ra1_soviets_rifleinfantry_carbine
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !ra1_soviets_upgrade_incendiarybullets
 	Armament@Upgrade: ##########
-		Weapon: IncendiaryM1Carbine
+		Weapon: ra1_soviets_rifleinfantry_carbine_incendiary
 		LocalOffset: 128,0,256
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
-		Weapon: IncendiaryM1Carbine
+		Weapon: ra1_soviets_rifleinfantry_carbine_incendiary
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: ra1_soviets_upgrade_incendiarybullets
 	Voiced:
@@ -815,7 +832,7 @@ ra1_soviets_cyberdog:
 	-Targetable@disguise:
 	-InaccuracyMultiplier@artilleryjammer:
 	-InaccuracyMultiplier@PromotionUnit:
-	Targetable@ra1_soviets_attackdog:
+	Targetable@DogImmune:
 		TargetTypes: DogImmune
 	WithDeathAnimation:
 		DeathTypes:

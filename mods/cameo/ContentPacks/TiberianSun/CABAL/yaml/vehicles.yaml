@@ -68,8 +68,6 @@ cabal_constructionyard:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-	Power:
-		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@fact.cabal:
 		Prerequisite: fact.cabal

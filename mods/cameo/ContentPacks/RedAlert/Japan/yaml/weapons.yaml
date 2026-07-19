@@ -21,23 +21,20 @@ CHGuardRifle:
 # and must not carry baseline duty.
 japan_imperialscoutsman_rifle:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
 	ReloadDelay: 50
 	Range: 5000
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 2
 
-CHGuardRifleWaveforce:
+# paired upgrade variant (LAW: renaming a base weapon ALWAYS renames its
+# upgraded variant with it). Waveforce flavor rides the baseline stats.
+japan_imperialscoutsman_rifle_waveforce:
 	Inherits: ^WaveforceBulletWarhead
-	Inherits: CHGuardRifle
+	Inherits: japan_imperialscoutsman_rifle
 	Inherits: ^WaveforceBulletProjectile
 
 TankBusterBeamCannon:
