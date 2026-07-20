@@ -19,6 +19,10 @@ namespace OpenRA.Mods.Cameo.Widgets
 {
 	public class QuotaProductionPaletteWidget : ProductionPaletteCAWidget
 	{
+		public readonly string MainStructureProductionGroup = "Building";
+		public readonly Color StructureCountColor = Color.Lime;
+		public readonly int2 StructureCountMargin = new(5, 4);
+
 		SpriteFont quotaFont;
 
 		[ObjectCreator.UseCtor]
@@ -82,14 +86,40 @@ namespace OpenRA.Mods.Cameo.Widgets
 		{
 			base.Draw();
 
-			var quotaManager = World.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
-			if (quotaManager == null || !quotaManager.Enabled || CurrentQueue == null)
+			var localPlayer = World.LocalPlayer;
+			if (localPlayer == null || CurrentQueue == null)
+				return;
+
+			if (CurrentQueue.Info.Group == MainStructureProductionGroup)
+			{
+				var structureCounts = World.ActorsHavingTrait<Building>()
+					.Where(a => a.Owner == localPlayer && !a.IsDead)
+					.GroupBy(a => a.Info.Name)
+					.ToDictionary(g => g.Key, g => g.Count());
+
+				foreach (var icon in icons.Values)
+				{
+					if (!structureCounts.TryGetValue(icon.Name, out var count))
+						continue;
+
+					var text = count.ToStringInvariant();
+					var textSize = quotaFont.Measure(text);
+					var pos = icon.Pos + new float2(
+						IconSize.X - textSize.X - StructureCountMargin.X,
+						IconSize.Y - textSize.Y - StructureCountMargin.Y);
+					quotaFont.DrawTextWithContrast(text, pos, StructureCountColor, Color.Black, 1);
+				}
+			}
+
+			var quotaManager = localPlayer.PlayerActor.TraitOrDefault<QuotaProductionManager>();
+			if (quotaManager == null || !quotaManager.Enabled)
 				return;
 
 			foreach (var icon in icons.Values)
 			{
 				var quota = quotaManager.GetQuota(icon.Name);
-				if (quota <= 0) continue;
+				if (quota <= 0)
+					continue;
 
 				var alive = quotaManager.GetAliveCount(icon.Name);
 				var text = $"{alive}/{quota}";
