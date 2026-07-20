@@ -183,3 +183,13 @@ sniper; spies/mind-control/hackers → support template; civilians
 - Next classes: bomber (replace reload-250 convention), defense
   (replace speed-100), infantry sub-anchors, fighter port.
 - MARS-type shrapnel-chain weapons need extractor coverage first.
+
+### D2k light-infantry price ladder (maintainer 2026-07-20)
+Same scout class, per-faction unique stats + price (light_inf_lmg
+base; each differs in HP/speed/firepower):
+- Ordos 120 (cheap/fast/weak: 28000/62/82%)
+- Atreides 130 (FUTURE — between Ordos and the 150 tier)
+- Harkonnen 140 (FUTURE)
+- light_inf 150 (generic tanky: 40000/54/91%) · Ixian 150
+  (elite/high-tech: 32000/56/113% — fragile, high firepower)
+- Corrino Sardaukar — special, MORE expensive than all (FUTURE)

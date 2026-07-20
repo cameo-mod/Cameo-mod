@@ -24,17 +24,17 @@ ixian_lightinfantry:
 		IconPalette: d2kunit
 		Prerequisites: ~ixian_barracks
 	Health:
-		HP: 36000
+		HP: 32000
 	ChangesHealth@SelfHealing:
-		Step: 36
+		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ixian_lightinfantry:
-		Modifier: 54
+		Modifier: 113
 	Mobile:
-		Speed: 52
+		Speed: 56
 	Armament@PRIMARY: ##########
 		Weapon: light_inf_lmg
 		LocalOffset: 128,0,256

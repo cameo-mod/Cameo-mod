@@ -26,17 +26,17 @@ light_inf:
 		IconPalette: d2kunit
 		Prerequisites: ~d2k_barracks, ~!ordos_barracks, ~!ixian_barracks
 	Health:
-		HP: 36000
+		HP: 40000
 	ChangesHealth@SelfHealing:
-		Step: 36
+		Step: 40
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@light_inf:
-		Modifier: 54
+		Modifier: 91
 	Mobile:
-		Speed: 52
+		Speed: 54
 	Armament@PRIMARY: ##########
 		Weapon: light_inf_lmg
 		LocalOffset: 128,0,256
