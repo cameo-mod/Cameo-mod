@@ -201,8 +201,8 @@ NaxiRifleE:
 
 naxis_naxiriflesoldier_rifle:
 	Inherits: ^SmallArms
-	ReloadDelay: 75
-	Range: 5500
+	ReloadDelay: 50
+	Range: 5000
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -215,9 +215,9 @@ naxis_naxiriflesoldier_rifle:
 		Speed: 10000
 		Width: 50
 	Warhead@SmallArms: SpreadDamage
-		Damage: 6000
+		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 2
 
 naxis_naxiriflesoldier_rifle_elite:
 	Inherits: naxis_naxiriflesoldier_rifle

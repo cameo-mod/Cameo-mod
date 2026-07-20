@@ -19,17 +19,17 @@ naxis_naxiriflesoldier:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 50
+		Speed: 60
 	Health:
-		HP: 30000
+		HP: 20000
 	ChangesHealth@SelfHealing:
-		Step: 30
+		Step: 20
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@naxis_naxiriflesoldier:
-		Modifier: 70
+		Modifier: 100
 	Armament@PRIMARY:
 		Weapon: naxis_naxiriflesoldier_rifle
 		LocalOffset: 500,0,400
