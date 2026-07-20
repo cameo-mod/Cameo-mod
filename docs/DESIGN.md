@@ -712,6 +712,10 @@ cheapest provider wins).
 
 ## 12. Balance formula — the Cameo Armor System workbook
 
+**Weapon Versus construction: see `docs/design/ARMOR_SYSTEM.md`** — the
+step 6/5/4 = light/medium/heavy law (floor 10/25/40, Shield = 100+floor,
+percentage warhead its own 1-step window), profile = armor order.
+
 **LAW (2026-07-18): balance numbers move ONLY through the balance
 pipeline** — `docs/design/BALANCE_PIPELINE.md` (raw-stat JSON ledger in
 `docs/balance/`, generated workbench `cameo_balance_v2.xlsx`, gated

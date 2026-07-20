@@ -1823,3 +1823,29 @@ td_gdi_minigunner_minigun_ap:
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
+
+# CLOSE-COMBAT BASELINE WEAPON (Formula v2, 2026-07-19): defines the
+# closecombat anchor with td_gdi_shotgunner. SmallArms+Chaingun (WC .875),
+# burst 5 pellets fire together (BurstDelays 0) = one shotgun blast;
+# SoundVolume 1/burst so the simultaneous shots aren't deafening.
+# TDShotgun stays for its vehicle/map users.
+td_gdi_shotgunner_shotgun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 75
+	Range: 3500
+	Burst: 5
+	BurstDelays: 0
+	ValidTargets: Ground, Water
+	Report: DSDSHTGN.wav
+	SoundVolume: 0.2
+	Projectile: Bullet
+		Inaccuracy: 800
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1

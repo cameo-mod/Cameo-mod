@@ -1,5 +1,8 @@
 # FORMULA V2 — the complete law book (as learned through 2026-07-19)
 
+_Master index: **MEGAPLAN.md** ties this + BALANCE_PIPELINE + the class
+logs + the weapon-template program together._
+
 _The consolidated, binding reference for the per-class balance system.
 Grew out of DESIGN §12 + the balance pipeline (BALANCE_PIPELINE.md) +
 the scout-class conversions (docs/balance/formula_v2_scout.md holds the
@@ -64,11 +67,20 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Weapon-class bands by cost** (scout values; per-class analogues):
   ≤150% of C₀ → SmallArms only (WC 0.75); above → SmallArms+Chaingun
   (WC 0.875). The class's own DPS₀ already includes the baseline WC.
+- **SoundVolume = 1/burst** (LAW): a BurstDelays-0 weapon firing N
+  shots on one tick must set SoundVolume 1/N or it deafens.
+- **Tech tier factor** multiplies O/P/Q: T1 = 1.0, T3 = 0.75
+  (higher tech = cheaper per stat). From the deepest tech-building
+  prerequisite. Closecombat verifier doubles DPS via 2x BURSTS.
 - **Scout infantry never hit aircraft**: ValidTargets Ground, Water on
   every scout weapon INCLUDING upgrade variants; units use
   ^AutoTargetGroundAssaultMove (faction consistency program).
 
 ## 4. Weapon & template laws
+
+- **Weapon Versus tables**: built by the step law in ARMOR_SYSTEM.md —
+  LEVEL = step 6/5/4 (light/medium/heavy, floor 10/25/40, Shield
+  110/125/140), PROFILE = the armor order. Generate, never hand-type.
 
 - **Dedicated weapons**: a converted unit never shares its weapon —
   check sharing repo-wide FIRST (`Weapon: <name>`); shared originals
@@ -79,6 +91,20 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Templates are law**: conyards always use the ^Conyard template
   Power (100); icons set Offset: 0,0 whenever their image's Defaults
   defines a nonzero offset (`audit_template_conformance` enforces both).
+- **Every unit is UNIQUE within its class** (maintainer 2026-07-19):
+  no two units in a class share identical HP / speed / damage /
+  reload — give each faction's member its own small deviations
+  (per the faction-personality guide §5), pricing each via the
+  formula. EXCEPTION: original C&C units keep their ORIGINAL price
+  (stats still vary; the price is pinned). This kills clone rows
+  like the three identical D2k light infantry (light_inf /
+  ixian_lightinfantry / ordos_lightinfantry): Ordos = cheaper/
+  faster/weaker, Ixian = pricier/slower/harder-hitting.
+- **Descriptions carry NO `
+`**: unit/weapon descriptions live in the
+  fluent files (`fluent/**/en.ftl`) with REAL line breaks, never the
+  `
+` escape. New descriptions go straight to fluent.
 - **Knob hierarchy** (^GlobalBuffs → class → subclass) stays as the
   live one-value tuning layer, pipeline-owned, with knob-aware pricing;
   formula-gap patches get baked away per class (BALANCE_PIPELINE §5b).
@@ -107,6 +133,45 @@ fast; Ixians = expensive, slow, high firepower/range/attack speed.
 7. Verify price via resolver + formula BEFORE boot (target ±2%).
 8. Ledger sync (`extract_stats.py`, design fields, `--check` green),
    boot gate, scoped commit, push, append the conversion-log entry.
+
+## 6b. The infantry class ladder (target state, rev. 2026-07-19 late)
+
+**CONTIGUOUS half-open range bands** (maintainer design): no unit can
+ever fall between classes again — the band DEFINES membership.
+
+| class | range band | anchor r₀ | baseline | status |
+|---|---|---|---|---|
+| melee | [1250, 2500) | 1750 | TBD | future anchor; range is SIZE-DERIVED (see below) |
+| **closecombat** (shotgun/SMG) | **[2500, 4500)** | **3500** | td_gdi_shotgunner @ 200 | **LIVE** (baseline 200.00, verifier fanatic 500.00 exact, +naxis_sssoldier T3) |
+| scout (rifles) | [4500, 5500] | 5000 | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
+
+- **Band width is a PER-CLASS property.** Scouts keep the tight ±10%
+  (one weapon archetype: rifles). Melee and closecombat get WIDE
+  contiguous bands because their ranges express different things:
+- **Melee range is PHYSICS, not power**: contact reach follows unit
+  size (small: shriek 1150 / zergling 1350 / zealot 1335; medium:
+  footman 1333 / knight 1420 / worker 1500; large: dogs 2000; huge
+  melee VEHICLES like the Consortium Megalodon belong to a melee-
+  vehicle class, not infantry). Size→reach convention: small
+  1250–1400, medium 1400–1700, large 1700–2500. Sub-1250 outliers
+  (zombiemutant 1127) round UP to 1250. In the MELEE formula the
+  range ratio is FIXED at 1 (reach is coupled to hitbox size — bigger
+  reach = bigger target — so it is not priced); melee pricing runs on
+  HP/speed/DPS.
+- **Closecombat range IS a balance lever** (2500 SMG spray → 4500
+  long shotgun): it prices normally, and the wide band follows the
+  price-gradient law — cheapest members at the low edge, priciest at
+  the high edge (a cost axis, not free choice).
+- Boundary rule: a weapon at exactly 2500 is closecombat; exactly
+  4500 is scout (half-open bands).
+| sniper | TBD (long) | TBD | zerg_defiler transforms in (maintainer verdict) |
+| heavy | TBD (own survey) | TBD | future anchor (flame/chem units live here) |
+| hero/commando | ~2000 attach/C4 | TBD | future anchor |
+| support/special | n/a (ability-priced) | n/a | NEW class for spies + Yuri mind control + CABAL hackers (maintainer verdict); ability-value table to design |
+
+Maintainer verdicts 2026-07-19: case-by-case for misfits — defiler →
+sniper; spies/mind-control/hackers → support template; civilians
+(alien/undead/conehead2.nax) parked undecided.
 
 ## 7. Open items
 

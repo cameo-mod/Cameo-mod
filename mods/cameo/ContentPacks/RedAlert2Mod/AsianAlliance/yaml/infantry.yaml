@@ -265,7 +265,7 @@ asianalliance_asianflametrooper:
 
 asianalliance_fanatic:
 	Inherits: ^Soldier
-	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@Template: ^CloseCombatInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -278,43 +278,43 @@ asianalliance_fanatic:
 	Tooltip:
 		Name: Fanatic
 	Valued:
-		Cost: 250
+		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~asianalliance_asianbarracks, ~asianalliance_promotion_unlockfanatic
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 63
+		Speed: 75
 	Health:
-		HP: 24000
+		HP: 100000
 	ChangesHealth@SelfHealing:
-		Step: 24
+		Step: 100
 	Armament@PRIMARY:
-		Weapon: RA2AsianShotgunFanatic1
+		Weapon: asianalliance_fanatic_shotgun
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite && !asianalliance_doctrine_modernizedinfantryequipment
 	Armament@Upgrade:
-		Weapon: RA2AsianShotgunFanatic2
+		Weapon: asianalliance_fanatic_shotgun_upgrade
 		LocalOffset: 128,0,256
 		RequiresCondition: (rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)
 	Armament@ELITE:
-		Weapon: RA2AsianShotgunFanatic3
+		Weapon: asianalliance_fanatic_shotgun_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite && asianalliance_doctrine_modernizedinfantryequipment
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: RA2AsianShotgunFanatic1
+		Weapon: asianalliance_fanatic_shotgun
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !rank-elite && !asianalliance_doctrine_modernizedinfantryequipment
 	Armament@GARRISONEDUpgrade:
 		Name: garrisoned
-		Weapon: RA2AsianShotgunFanatic2
+		Weapon: asianalliance_fanatic_shotgun_upgrade
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: (rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2AsianShotgunFanatic3
+		Weapon: asianalliance_fanatic_shotgun_elite
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: rank-elite && asianalliance_doctrine_modernizedinfantryequipment
 	AttackFrontal:

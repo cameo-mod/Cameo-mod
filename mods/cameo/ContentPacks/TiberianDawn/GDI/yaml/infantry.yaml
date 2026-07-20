@@ -325,10 +325,10 @@ td_gdi_heavysniper:
 td_gdi_shotgunner:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
-	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@Template: ^CloseCombatInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
@@ -346,15 +346,15 @@ td_gdi_shotgunner:
 	Mobile:
 		Speed: 75
 	Health:
-		HP: 24000
+		HP: 50000
 	ChangesHealth@SelfHealing:
-		Step: 24
+		Step: 50
 	Armament@PRIMARY: ##########
-		Weapon: TDShotgun
+		Weapon: td_gdi_shotgunner_shotgun
 		LocalOffset: 128,0,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: TDShotgun
+		Weapon: td_gdi_shotgunner_shotgun
 		MuzzleSequence: garrison-muzzle
 	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
 		Modifier: 200

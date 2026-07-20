@@ -1618,3 +1618,33 @@ RA2Robotmm_eliteScatter:
 		ImpactSounds: xplos.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
+
+# CLOSE-COMBAT member weapon (Formula v2, 2026-07-19): naxis_sssoldier SMG.
+# SmallArms+Chaingun class convention (was Grenade+HeavyCannon+Chaingun);
+# burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else — renamed
+# with its elite pair per the rename law.
+naxis_sssoldier_smg:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 75
+	Range: 4000
+	Burst: 10
+	BurstDelays: 0
+	ValidTargets: Ground, Water
+	Report: nax_mp40.wav
+	SoundVolume: 0.1
+	Projectile: Bullet
+		Inaccuracy: 600
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+naxis_sssoldier_smg_elite:
+	Inherits: naxis_sssoldier_smg
+	Burst: 13
+	SoundVolume: 0.077

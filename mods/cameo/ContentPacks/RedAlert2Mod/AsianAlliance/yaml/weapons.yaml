@@ -2078,3 +2078,38 @@ AsianMLRS:
 ####################################################################################################
 #		Red Alert 2 Steel Consortium Templates
 ####################################################################################################
+
+# CLOSE-COMBAT VERIFICATION WEAPON (Formula v2, 2026-07-19): asianalliance_
+# fanatic proves the class identity — 2x HP + 2x DPS (via DOUBLE bursts,
+# not double damage) @ 250% cost = 500. base burst 10; upgrade/elite tiers
+# ride the upgrade pass (pair law: all three dedicated).
+asianalliance_fanatic_shotgun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 75
+	Range: 3500
+	Burst: 10
+	BurstDelays: 0
+	ValidTargets: Ground, Water
+	Report: aa_sshtgatt.wav
+	SoundVolume: 0.1
+	Projectile: Bullet
+		Inaccuracy: 800
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+asianalliance_fanatic_shotgun_upgrade:
+	Inherits: asianalliance_fanatic_shotgun
+	Burst: 13
+	SoundVolume: 0.077
+
+asianalliance_fanatic_shotgun_elite:
+	Inherits: asianalliance_fanatic_shotgun
+	Burst: 16
+	SoundVolume: 0.063
