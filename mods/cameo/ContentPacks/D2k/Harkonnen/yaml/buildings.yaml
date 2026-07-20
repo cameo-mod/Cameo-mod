@@ -149,6 +149,12 @@ harkonnen_starport:
 	Inherits: ordos_starport
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, derricklimit
+	ProvidesPrerequisite@starport_harkonnen:
+		Prerequisite: heavy.harkonnen
+	ProvidesPrerequisite@starport_harkonnen_combat:
+		Prerequisite: heavy.harkonnen_combat
+	ProvidesPrerequisite@starport_missile_tank:
+		Prerequisite: heavy.missile_tank
 	RenderSprites:
 		Image: starport.harkonnen
 

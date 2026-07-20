@@ -312,6 +312,9 @@ ordos_lightfactory:
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ordos_light_vehicle_production
+		Factions: ordos
 
 ordos_heavyfactory:
 	Inherits: heavy_factory
@@ -323,6 +326,9 @@ ordos_heavyfactory:
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ordos_heavy_vehicle_production
+		Factions: ordos
 
 ordos_repairpad:
 	Inherits: ^D2KBuilding
@@ -464,6 +470,12 @@ ordos_starport:
 	Buildable:
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.
+	ProvidesPrerequisite@starport_light_factory:
+		Prerequisite: ordos_light_vehicle_production
+		Factions: ordos
+	ProvidesPrerequisite@starport_heavy_factory:
+		Prerequisite: ordos_heavy_vehicle_production
+		Factions: ordos
 	RenderSprites:
 		Image: ordos_starport
 

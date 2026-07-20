@@ -270,6 +270,8 @@ ixian_advancedheavyfactory:
 		IconPalette: player
 	ProductionQueue@VEHICLE:
 		BuildDurationModifier: 75
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ixian_vehicle_production
 	ProvidesPrerequisite@missiletank:
 		Prerequisite: heavy.missile_tank
 	# ProvidesPrerequisite@upgrade_heavy:
@@ -430,6 +432,8 @@ ixian_starport:
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ixian_vehicle_production
 	RenderSprites:
 		Image: starport.smuggler
 

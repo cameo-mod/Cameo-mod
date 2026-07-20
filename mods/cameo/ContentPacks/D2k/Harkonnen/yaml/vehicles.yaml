@@ -8,7 +8,7 @@ combat_tank.harkonnen:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: d2kunit
@@ -62,7 +62,7 @@ missile_tank:
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~faction.harkonnen
 		BuildPaletteOrder: 60
 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
@@ -140,7 +140,7 @@ devastator:
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiTank: ^PrioritizeTank
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~heavy.harkonnen, research_centre, ~techlevel.high, ~faction.harkonnen
 		BuildPaletteOrder: 100
 		BuildDuration: 1000

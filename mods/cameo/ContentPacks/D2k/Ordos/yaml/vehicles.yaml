@@ -11,9 +11,9 @@ ordos_apc:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_promotion_unlocklaboratorycrawler
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_promotion_unlocklaboratorycrawler
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -75,9 +75,9 @@ ordos_laboratorycrawler:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ordos_ixresearchcenter, ~ordos_promotion_unlocklaboratorycrawler
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter, ~ordos_promotion_unlocklaboratorycrawler
 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 		IconPalette: windows256
 	Valued:
@@ -135,7 +135,7 @@ ordos_mobileconstructionvehicle:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~ordos_heavyfactory, ordos_repairpad
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_repairpad
 		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:
@@ -187,8 +187,8 @@ ordos_spiceharvester:
 	Inherits@harv: ^Harvester
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~spice_refinery, ~ordos_heavyfactory
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~spice_refinery, ~ordos_heavy_vehicle_production
 		BuildPaletteOrder: 10
 		Description: template_harvester.description
 		IconPalette: d2kunit
@@ -803,8 +803,8 @@ ordos_cobratank:
 	Valued:
 		Cost: 1500
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_promotion_unlockpython
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_promotion_unlockpython
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -911,8 +911,8 @@ ordos_pythontank:
 	Valued:
 		Cost: 2500
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~ordos_promotion_unlockpython
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~ordos_promotion_unlockpython
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1005,9 +1005,9 @@ ordos_lasertank:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ~ordos_promotion_unlocklasertank, ordos_ixresearchcenter
+		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_promotion_unlocklasertank, ordos_ixresearchcenter
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -1072,9 +1072,9 @@ ordos_deviatortank:
 	Valued:
 		Cost: 1600
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 100
-		Prerequisites: ~ordos_heavyfactory, ~ordos_promotion_unlockdeviatortank, ordos_palace
+		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_promotion_unlockdeviatortank, ordos_palace
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -1409,9 +1409,9 @@ ordos_raider:
 	Valued:
 		Cost: 1200
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ordos_lightfactory, ~!ordos_promotion_unlockstealthraider
+		Prerequisites: ~ordos_light_vehicle_production, ~!ordos_promotion_unlockstealthraider
 		Description: Improved Scout\nCan carry a passenger\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -1465,7 +1465,7 @@ ordos_stealthraider:
 	Valued:
 		Cost: 1300
 	Buildable:
-		Prerequisites: ~ordos_lightfactory, ~ordos_promotion_unlockstealthraider
+		Prerequisites: ~ordos_light_vehicle_production, ~ordos_promotion_unlockstealthraider
 		BuildPaletteOrder: 30
 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1511,9 +1511,9 @@ ordos_dustdrone:
 	Valued:
 		Cost: 1400
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ordos_lightfactory, ~ordos_promotion_unlockdustdrone
+		Prerequisites: ~ordos_light_vehicle_production, ~ordos_promotion_unlockdustdrone
 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -1581,9 +1581,9 @@ ordos_deviatorartillery:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 50
-		Prerequisites: ~ordos_heavyfactory, ordos_palace
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_palace
 		Description: Fires a warhead which changes\nthe allegiance of enemy vehicles
 		IconPalette: d2kunit
 	Health:
@@ -1640,11 +1640,11 @@ ordos_combattank:
 	Valued:
 		Cost: 650
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~ordos_heavyfactory, ~!ordos_upgrade_heavycombattank
+		Prerequisites: ~ordos_heavy_vehicle_production, ~!ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1699,11 +1699,11 @@ ordos_heavycombattank:
 	Valued:
 		Cost: 950
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavycombattank
+		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1768,9 +1768,9 @@ ordos_combatautoguntank:
 	Valued:
 		Cost: 1500
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
-		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_upgrade_heavyautoguntank
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_outpost, ~!ordos_upgrade_heavyautoguntank
 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 		IconPalette: ra2
 	Armament:
@@ -1825,8 +1825,8 @@ ordos_heavyautoguntank:
 	Valued:
 		Cost: 2800
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavyautoguntank
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ordos_heavy_vehicle_production, ~ordos_upgrade_heavyautoguntank
 		BuildPaletteOrder: 50
 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 	UpdatesPlayerStatistics:
@@ -1887,9 +1887,9 @@ ordos_tankdestroyer:
 	Valued:
 		Cost: 2200
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
-		Prerequisites: ~ordos_heavyfactory, ordos_ixresearchcenter
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_ixresearchcenter
 		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: windows256
 	Armor:

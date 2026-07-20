@@ -18,7 +18,7 @@ siege_tank:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		Prerequisites: ~disabled ,upgrade_heavy
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
