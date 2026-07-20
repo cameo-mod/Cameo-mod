@@ -5187,32 +5187,6 @@ missile_tank:
 		Start: 4285
 		Offset: -30,-24
 
-missile_tank.husk:
-	idle:
-		FilenamePattern: missiletankhusk/missiletankhusk-{0:D4}.png
-			Count: 16
-		Facings: -16
-		ZOffset: -512
-		Remap: 54F94B
-	turret:
-		FilenamePattern: missiletankhusk/missiletankhuskturret-{0:D4}.png
-			Count: 16
-		Facings: -16
-		ZOffset: -512
-		Remap: 54F94B
-	tankdebris01:
-		Filename: missiletankhusk/missiletankhuskdebris-0000.png
-		ZOffset: -512
-	tankdebris02:
-		Filename: missiletankhusk/missiletankhuskdebris-0001.png
-		ZOffset: -512
-	tankdebris03:
-		Filename: missiletankhusk/missiletankhuskdebris-0002.png
-		ZOffset: -512
-	tankdebris04:
-		Filename: missiletankhusk/missiletankhuskdebris-0003.png
-		ZOffset: -512
-
 d2k_qafza:
 	idle:
 		Filename: d2k_qafza.shp
