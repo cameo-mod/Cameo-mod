@@ -7327,6 +7327,7 @@
       "pricing": true,
       "range": "6666",
       "reloaddelay": "25",
+      "requires": "!rank-elite",
       "slot": "Armament@AG",
       "versus_templates": [
        "^ArrowWeapon",
@@ -7355,6 +7356,46 @@
        }
       ],
       "weapon": "SteelHoverMissile",
+      "weapon_types": [
+       "^ArrowWeapon",
+       "^SteelLightMissile"
+      ]
+     },
+     {
+      "burst": "4",
+      "burstdelays": "4",
+      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
+      "range": "7000",
+      "reloaddelay": "25",
+      "requires": "rank-elite",
+      "slot": "Armament@AGELITE",
+      "versus_templates": [
+       "SteelHoverMissile"
+      ],
+      "warheads": [
+       {
+        "damage": "8000",
+        "tag": "ArrowWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ArrowWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "LightMissile",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "LightMissilePercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "SteelHoverMissile_elite",
       "weapon_types": [
        "^ArrowWeapon",
        "^SteelLightMissile"
