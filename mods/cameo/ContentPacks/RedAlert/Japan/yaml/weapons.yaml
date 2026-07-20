@@ -20,15 +20,31 @@ CHGuardRifle:
 # Dedicated (never shared): CHGuardRifle serves civilians/other rules
 # and must not carry baseline duty.
 japan_imperialscoutsman_rifle:
-	Inherits: ^SmallArms
+	# Special-Forces baseline weapon (maintainer 2026-07-20): SmallArms +
+	# Chaingun + railgun-AP = 6000 dmg, precise (bullet projectile, no beam
+	# or blue impact — ^SmallArms is inherited LAST so its Bullet + Effect
+	# win). Air-capable. The 500-spread RailgunExtraDamage shield-buster is
+	# stripped so the shot stays pinpoint.
+	Inherits: ^RailgunWeapon
+	Inherits@cg: ^Chaingun
+	Inherits@sa: ^SmallArms
 	ReloadDelay: 50
-	Range: 5000
-	ValidTargets: Ground, Water
+	Range: 6000
+	ValidTargets: Ground, Water, Air
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
+	-Warhead@RailgunExtraDamage:
 	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
+		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 1
 
 # paired upgrade variant (LAW: renaming a base weapon ALWAYS renames its
 # upgraded variant with it). Waveforce flavor rides the baseline stats.

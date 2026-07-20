@@ -2348,27 +2348,51 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "5000",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
       "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms"
       ]
      },
@@ -2377,27 +2401,51 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "5000",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!japan_upgrade_waveforcebullets",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
+        "tag": "RailgunWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "RailgunWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
       "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms"
       ]
      },
@@ -2405,7 +2453,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "5000",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@Upgrade",
@@ -2431,12 +2479,22 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -2444,6 +2502,8 @@
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
       "weapon_types": [
        "^WaveforceBulletWarhead",
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms",
        "^WaveforceBulletProjectile"
       ]
@@ -2453,7 +2513,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "5000",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "japan_upgrade_waveforcebullets",
       "slot": "Armament@UpgradeGARRISONED",
@@ -2479,12 +2539,22 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "1",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2",
+        "damage": "1",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -2492,6 +2562,8 @@
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
       "weapon_types": [
        "^WaveforceBulletWarhead",
+       "^RailgunWeapon",
+       "^Chaingun",
        "^SmallArms",
        "^WaveforceBulletProjectile"
       ]
@@ -2499,11 +2571,11 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Valued.Cost",
-     "v": "100"
+     "v": "200"
     },
     "design": {
      "class_anchor": "scout",
@@ -2513,7 +2585,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
-     "v": "20000"
+     "v": "15000"
     },
     "name": "Imperial Scoutsman",
     "prerequisites": [
@@ -2525,11 +2597,11 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "6500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "50"
     }
    },
    "japan_japaneseflamethrower": {

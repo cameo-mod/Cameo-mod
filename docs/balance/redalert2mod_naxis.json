@@ -3629,8 +3629,8 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
-      "range": "5500",
-      "reloaddelay": "75",
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -3638,12 +3638,12 @@
       ],
       "warheads": [
        {
-        "damage": "6000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "3",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -3659,7 +3659,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
       "range": "6500",
-      "reloaddelay": "75",
+      "reloaddelay": "50",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
@@ -3667,12 +3667,12 @@
       ],
       "warheads": [
        {
-        "damage": "6000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "3",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -3686,8 +3686,8 @@
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
-      "range": "5500",
-      "reloaddelay": "75",
+      "range": "5000",
+      "reloaddelay": "50",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -3695,12 +3695,12 @@
       ],
       "warheads": [
        {
-        "damage": "6000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "3",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -3717,7 +3717,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
       "range": "6500",
-      "reloaddelay": "75",
+      "reloaddelay": "50",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
@@ -3725,12 +3725,12 @@
       ],
       "warheads": [
        {
-        "damage": "6000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
        {
-        "damage": "3",
+        "damage": "2",
         "tag": "SmallArmsPercentage",
         "type": "HealthPercentageDamage"
        }
@@ -3757,7 +3757,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
-     "v": "30000"
+     "v": "20000"
     },
     "name": "Naxi Rifle Soldier",
     "prerequisites": [
@@ -3773,7 +3773,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "60"
     }
    },
    "naxis_panzerfausttrooper": {

@@ -43,14 +43,16 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   | class | baseline | stats | verifier |
   |---|---|---|---|
   | mbt | Naxis Tiger Tank | 100000/100/5000/10000@50 → 800 | King Tiger (2×/2× @ 2000) |
-  | scout | japan_imperialscoutsman | 20000/60/5000/4000@50 SA → 100 | forgotten_mutantsoldier (40000/60/5000/8000@50 → 250.0000 exact) |
-  | special forces | japan_imperialscoutsman (→transfers here) | 15000/50/6000/6000@50 (SA+CG+HeavyCannon, air) → 200 | TBD (2×HP/2×dmg, same rng/spd → 500) |
+  | scout | naxis_naxiriflesoldier | 20000/60/5000/4000@50 SA → 100 | forgotten_mutantsoldier (40000/60/5000/8000@50 → 250.0000 exact) |
+  | special forces | japan_imperialscoutsman | 15000/50/6000/6000@50 (SA+CG+Railgun-AP, air, bullet) → 200 | TBD (2×HP/2×dmg, same rng/spd → 500) |
 
-  **Scout-baseline transfer (pending the SF build):** japan_imperialscoutsman
-  moves scout → special forces (restat above, air restored); the scout
-  baseline transfers to **naxis_naxiriflesoldier** (restat to the exact
-  scout anchor 20000/60/5000/4000@50 SA, ground-only). Update this table
-  + §6b when the build lands.
+  **Scout↔SF baseline transfer — DONE 2026-07-20** (`cb4e926a4` + build
+  commit): japan_imperialscoutsman moved scout → special forces
+  (15000/50/6000/200, air restored, bullet+railgun-AP weapon, precise
+  small spread, `^SpecialForcesInfantryTemplate` via a clean `@Template`
+  inherit swap — resolved Armor Flak confirms); naxis_naxiriflesoldier
+  took over the scout anchor (exact 20000/60/5000/4000@50, ground-only).
+  Both resolver-verified (100.00 / 200.00 exact).
 
 ## 3. Stat laws (all classes unless stated)
 
@@ -235,7 +237,7 @@ ever fall between classes again — the band DEFINES membership.
 |---|---|---|---|---|
 | melee | [1250, 2500) | 1750 | TBD | future anchor; range is SIZE-DERIVED (see below) |
 | **closecombat** (shotgun/SMG) | **[2500, 4500)** | **3500** | td_gdi_shotgunner @ 200 | **LIVE** (baseline 200.00, verifier fanatic 500.00 exact, +naxis_sssoldier T3) |
-| scout (rifles) | [4500, 5500] | 5000 | japan_imperialscoutsman @ 100 | LIVE (6 converted) |
+| scout (rifles) | [4500, 5500] | 5000 | naxis_naxiriflesoldier @ 100 | LIVE (6 converted; baseline moved from japan 2026-07-20) |
 
 - **Band width is a PER-CLASS property.** Scouts keep the tight ±10%
   (one weapon archetype: rifles). Melee and closecombat get WIDE
@@ -256,7 +258,7 @@ ever fall between classes again — the band DEFINES membership.
   the high edge (a cost axis, not free choice).
 - Boundary rule: a weapon at exactly 2500 is closecombat; exactly
   4500 is scout (half-open bands).
-| **special forces** (advanced; CAN hit air) | 5500–6500 (r₀ 6000) | 6000 | japan_imperialscoutsman @ 200 (transfers from scout) | **NEXT to build** |
+| **special forces** (advanced; CAN hit air) | 5500–6500 (r₀ 6000) | 6000 | japan_imperialscoutsman @ 200 | **LIVE** (baseline 200.00; verifier + roster next) |
 | grenadier | TBD | TBD | grenade/demolition infantry (td_gdi_empgrenadier) |
 | heavy infantry | TBD (very high HP to survive heavy fire) | TBD | ixian_shockinfantry, tkm_juggernaut(?), forgotten fiends |
 | sniper (PURE) | TBD (long) | TBD | targets ONLY infantry; big stat boost compensates the restriction; no air, no vehicles |
