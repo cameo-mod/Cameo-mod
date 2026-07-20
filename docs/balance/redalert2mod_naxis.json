@@ -5567,7 +5567,7 @@
     "armaments": [
      {
       "burst": "10",
-      "burstdelays": "0",
+      "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5608,8 +5608,8 @@
       ]
      },
      {
-      "burst": "13",
-      "burstdelays": "0",
+      "burst": "20",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
@@ -5651,7 +5651,7 @@
      {
       "armament_name": "garrisoned",
       "burst": "10",
-      "burstdelays": "0",
+      "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -5693,8 +5693,8 @@
      },
      {
       "armament_name": "garrisoned",
-      "burst": "13",
-      "burstdelays": "0",
+      "burst": "20",
+      "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
@@ -5750,7 +5750,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
-     "v": "60000"
+     "v": "63000"
     },
     "name": "SS Soldier",
     "prerequisites": [

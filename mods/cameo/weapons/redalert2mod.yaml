@@ -1629,10 +1629,9 @@ naxis_sssoldier_smg:
 	ReloadDelay: 75
 	Range: 4000
 	Burst: 10
-	BurstDelays: 0
+	BurstDelays: 5
 	ValidTargets: Ground, Water
 	Report: nax_mp40.wav
-	SoundVolume: 0.1
 	Projectile: Bullet
 		Inaccuracy: 600
 	Warhead@SmallArms: SpreadDamage
@@ -1646,4 +1645,5 @@ naxis_sssoldier_smg:
 
 naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg
-	Burst: 13
+	Burst: 20
+	BurstDelays: 4
