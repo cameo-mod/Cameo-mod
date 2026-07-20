@@ -512,6 +512,18 @@ RA2MultiHoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	# red-missile convention (maintainer 2026-07-20): the red projectile = 2x
+	# DAMAGE (not more burst). All base warheads doubled. AA variant inherits.
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ArrowWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -589,6 +601,26 @@ RA2MultiThunderboltMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	# red-missile convention (maintainer 2026-07-20): red projectile = 2x
+	# DAMAGE. All base warheads doubled. AA variant inherits.
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyAAWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 4000
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ArrowWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
