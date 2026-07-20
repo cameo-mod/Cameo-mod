@@ -46,6 +46,7 @@ harkonnen_storagesilo:
 
 harkonnen_lightfactory:
 	Inherits: ordos_lightfactory
+	-ProvidesPrerequisite@vehicle_production:
 	Tooltip:
 		Name: Harkonnen Light Factory
 	RenderSprites:
@@ -55,6 +56,7 @@ harkonnen_lightfactory:
 
 harkonnen_heavyfactory:
 	Inherits: ordos_heavyfactory
+	-ProvidesPrerequisite@vehicle_production:
 	Tooltip:
 		Name: Harkonnen Heavy Factory
 	RenderSprites:
@@ -64,6 +66,7 @@ harkonnen_heavyfactory:
 
 harkonnen_repairpad:
 	Inherits: ordos_repairpad
+	-ProvidesPrerequisite@mcv_production:
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_heavyfactory
 	Tooltip:
@@ -147,6 +150,9 @@ harkonnen_ixresearchcenter:
 
 harkonnen_starport:
 	Inherits: ordos_starport
+	-ProvidesPrerequisite@starport_light_factory:
+	-ProvidesPrerequisite@starport_heavy_factory:
+	-ProvidesPrerequisite@mcv_production:
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, derricklimit
 	ProvidesPrerequisite@starport_harkonnen:

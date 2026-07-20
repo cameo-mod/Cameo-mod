@@ -135,7 +135,8 @@ ordos_mobileconstructionvehicle:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~ordos_heavy_vehicle_production, ordos_repairpad
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ordos_heavy_vehicle_production, ordos_mcv_production
 		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:

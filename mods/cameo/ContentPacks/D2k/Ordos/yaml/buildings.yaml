@@ -314,7 +314,6 @@ ordos_lightfactory:
 		IconPalette: player
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: ordos_light_vehicle_production
-		Factions: ordos
 
 ordos_heavyfactory:
 	Inherits: heavy_factory
@@ -328,7 +327,6 @@ ordos_heavyfactory:
 		IconPalette: player
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: ordos_heavy_vehicle_production
-		Factions: ordos
 
 ordos_repairpad:
 	Inherits: ^D2KBuilding
@@ -340,6 +338,8 @@ ordos_repairpad:
 		Prerequisites: ~ordos_constructionyard, ordos_heavyfactory
 		Description: Repairs nearby vehicles.
 		IconPalette: d2kunit
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ordos_mcv_production
 	Tooltip:
 		Name: Ordos Repair Pad
 	Building:
@@ -472,10 +472,10 @@ ordos_starport:
 		Description: Purchase units from off-world suppliers.
 	ProvidesPrerequisite@starport_light_factory:
 		Prerequisite: ordos_light_vehicle_production
-		Factions: ordos
 	ProvidesPrerequisite@starport_heavy_factory:
 		Prerequisite: ordos_heavy_vehicle_production
-		Factions: ordos
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ordos_mcv_production
 	RenderSprites:
 		Image: ordos_starport
 

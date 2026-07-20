@@ -5,7 +5,8 @@ ixian_mobileconstructionvehicle:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~ixian_vehicle_production, ixian_repairpad
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ixian_vehicle_production, ixian_mcv_production
 		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:

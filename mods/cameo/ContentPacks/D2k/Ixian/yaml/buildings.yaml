@@ -287,6 +287,8 @@ ixian_repairpad:
 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 		Description: Repairs nearby vehicles.
 		IconPalette: d2kunit
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ixian_mcv_production
 	Tooltip:
 		Name: Ixian Repair Pad
 	Building:
@@ -434,6 +436,8 @@ ixian_starport:
 		Description: Purchase units from off-world suppliers.
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: ixian_vehicle_production
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ixian_mcv_production
 	RenderSprites:
 		Image: starport.smuggler
 
