@@ -5,11 +5,9 @@ conyard_infiltrated.nax:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: naxis_constructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: naxis_constructionyard
-	RenderSprites:
-		Image: naxis_constructionyard
-
 up_resurrection.nax:
 	Inherits: ^researched_upgrade.template
 	Tooltip:

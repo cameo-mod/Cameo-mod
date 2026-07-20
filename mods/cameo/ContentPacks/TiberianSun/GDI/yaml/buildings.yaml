@@ -395,7 +395,7 @@ ts_gdi_servicedepot:
 		Sequence: platform
 	WithDeathAnimation@BIB:
 		DeathSequence: dead-ground
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
@@ -609,5 +609,4 @@ ts_gdi_silo:
 		PipCount: 5
 	RenderSprites:
 		PlayerPalette: playerra2
-	RenderSprites:
 		Image: tsgtsilo.gdi

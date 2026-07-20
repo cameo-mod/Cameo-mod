@@ -15,15 +15,13 @@ inspect_husk.steel:
 		Type: CenterPosition
 	RenderSprites:
 		Image: steelconsortium_empressstation
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 steelconsortium_twister:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
@@ -123,9 +121,7 @@ twister_husk.steel:
 		Type: CenterPosition
 	RenderSprites:
 		Image: steelconsortium_twister
-	RenderSprites:
 		PlayerPalette: playerra2cons
-
 grun_husk.steel:
 	Inherits: ^HelicopterHusk
 	Tooltip:
@@ -217,15 +213,13 @@ cargoship_husk.steel:
 		Type: CenterPosition
 	RenderSprites:
 		Image: steelconsortium_cargoship
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 cruiser_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -243,15 +237,13 @@ cruiser_husk.steel:
 		Type: CenterPosition
 	RenderSprites:
 		Image: steelconsortium_cloudbreaker
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 cruiser_f_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -269,7 +261,6 @@ cruiser_f_husk.steel:
 		Type: CenterPosition
 	RenderSprites:
 		Image: cruiser_f.steel
-	RenderSprites:
 		PlayerPalette: playerra2
 
 #######################################

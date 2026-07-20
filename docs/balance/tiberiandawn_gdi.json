@@ -30,7 +30,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Vulcan"
+      "weapon": "Vulcan",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "bombs",
@@ -70,7 +73,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Napalm"
+      "weapon": "Napalm",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -127,7 +134,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VulcanA10Carrier"
+      "weapon": "VulcanA10Carrier",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -167,7 +177,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NapalmA10Carrier"
+      "weapon": "NapalmA10Carrier",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -195,7 +209,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "A10CarrierMissiles"
+      "weapon": "A10CarrierMissiles",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      }
     ],
     "armor": {
@@ -255,7 +273,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIRigPDLaser"
+      "weapon": "GDIRigPDLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "burst": "1",
@@ -285,7 +306,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneRepair"
+      "weapon": "GDIRigDroneRepair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -379,7 +403,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkMissiles"
+      "weapon": "FirehawkMissiles",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "burst": "2",
@@ -407,7 +435,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkMissiles"
+      "weapon": "FirehawkMissiles",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "burst": "2",
@@ -475,7 +507,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FirehawkBomb"
+      "weapon": "FirehawkBomb",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^NuclearWarhead",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -604,7 +642,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrcaMissiles"
+      "weapon": "OrcaMissiles",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -689,7 +735,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrcaMissilesAMT"
+      "weapon": "OrcaMissilesAMT",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -906,7 +961,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TowerMissile"
+      "weapon": "TowerMissile",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
@@ -1003,7 +1067,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TowerMissileAMT"
+      "weapon": "TowerMissileAMT",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -1181,7 +1255,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HighV"
+      "weapon": "HighV",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
@@ -1207,7 +1285,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HighVAP"
+      "weapon": "HighVAP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1398,7 +1479,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyshieldCannon"
+      "weapon": "SkyshieldCannon",
+      "weapon_types": [
+       "^SmallArms",
+       "^LightMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1535,7 +1622,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun"
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1562,7 +1652,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun"
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -1588,7 +1681,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap"
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1615,7 +1711,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap"
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1673,7 +1772,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1698,7 +1800,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -1723,7 +1828,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT"
+      "weapon": "RocketsAMT",
+      "weapon_types": [
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1749,7 +1858,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT"
+      "weapon": "RocketsAMT",
+      "weapon_types": [
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -1798,7 +1911,8 @@
        "IvanAttach"
       ],
       "warheads": [],
-      "weapon": "TanyaAttach"
+      "weapon": "TanyaAttach",
+      "weapon_types": []
      },
      {
       "armament_name": "secondary",
@@ -1810,7 +1924,8 @@
       "slot": "Armament@c4building",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GenericC4"
+      "weapon": "GenericC4",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -1834,7 +1949,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper"
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1859,7 +1977,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper"
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -1899,7 +2020,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniperE"
+      "weapon": "td_gdi_commando_sniperE",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1940,7 +2065,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniperE"
+      "weapon": "td_gdi_commando_sniperE",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2104,7 +2233,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "EMPGrenade"
+      "weapon": "EMPGrenade",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2225,7 +2364,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "EMPGrenade"
+      "weapon": "EMPGrenade",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -2292,7 +2441,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Grenade"
+      "weapon": "Grenade",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2321,7 +2473,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Grenade"
+      "weapon": "Grenade",
+      "weapon_types": [
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -2394,7 +2549,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoSniper"
+      "weapon": "CommandoSniper",
+      "weapon_types": [
+       "^SniperWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -2428,7 +2587,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoRocketLauncher"
+      "weapon": "CommandoRocketLauncher",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -2473,7 +2636,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoGrenadeLauncher"
+      "weapon": "CommandoGrenadeLauncher",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^EMPDamage"
+      ]
      },
      {
       "burst": "5",
@@ -2509,7 +2677,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoM16"
+      "weapon": "CommandoM16",
+      "weapon_types": [
+       "^SniperWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2544,7 +2716,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoSniper"
+      "weapon": "CommandoSniper",
+      "weapon_types": [
+       "^SniperWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2579,7 +2755,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoRocketLauncher"
+      "weapon": "CommandoRocketLauncher",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2625,7 +2805,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoGrenadeLauncher"
+      "weapon": "CommandoGrenadeLauncher",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^EMPDamage"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2662,7 +2847,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommandoM16"
+      "weapon": "CommandoM16",
+      "weapon_types": [
+       "^SniperWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -2674,7 +2863,8 @@
       "slot": "Armament@c4",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GenericC4"
+      "weapon": "GenericC4",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2779,7 +2969,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDISniperRifle"
+      "weapon": "GDISniperRifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^Grenade",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2841,7 +3037,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDISniperRifle"
+      "weapon": "GDISniperRifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^Grenade",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -2908,7 +3110,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun"
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2936,7 +3141,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun"
+      "weapon": "td_gdi_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -2963,7 +3171,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap"
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2991,7 +3202,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_minigunner_minigun_ap"
+      "weapon": "td_gdi_minigunner_minigun_ap",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3066,7 +3280,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGun"
+      "weapon": "OfficerMachineGun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3104,7 +3322,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGun"
+      "weapon": "OfficerMachineGun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
@@ -3130,7 +3352,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGunAP"
+      "weapon": "OfficerMachineGunAP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3157,7 +3382,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OfficerMachineGunAP"
+      "weapon": "OfficerMachineGunAP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3221,7 +3449,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3246,7 +3477,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -3271,7 +3505,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT"
+      "weapon": "RocketsAMT",
+      "weapon_types": [
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3297,7 +3535,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsAMT"
+      "weapon": "RocketsAMT",
+      "weapon_types": [
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -3373,7 +3615,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_shotgunner_shotgun"
+      "weapon": "td_gdi_shotgunner_shotgun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3411,7 +3657,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_shotgunner_shotgun"
+      "weapon": "td_gdi_shotgunner_shotgun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3533,7 +3783,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MissileSoldierWeapon"
+      "weapon": "MissileSoldierWeapon",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RailgunWeapon",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3617,7 +3874,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MissileSoldierWeapon"
+      "weapon": "MissileSoldierWeapon",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RailgunWeapon",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -3686,7 +3950,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIBattleshipRailgun"
+      "weapon": "GDIBattleshipRailgun",
+      "weapon_types": [
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -3715,7 +3982,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIBattleshipRailgun"
+      "weapon": "GDIBattleshipRailgun",
+      "weapon_types": [
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3784,7 +4054,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GunboatMissile"
+      "weapon": "GunboatMissile",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
@@ -3811,7 +4084,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GunboatMissileAMT"
+      "weapon": "GunboatMissileAMT",
+      "weapon_types": [
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -3839,7 +4116,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -3867,7 +4147,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -3960,7 +4243,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "JapanCarrierTarget"
+      "weapon": "JapanCarrierTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4509,7 +4793,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGun"
+      "weapon": "APCGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -4543,7 +4831,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGunAA"
+      "weapon": "APCGunAA",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4665,7 +4957,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArcherArtilleryShell"
+      "weapon": "ArcherArtilleryShell",
+      "weapon_types": [
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -4734,7 +5033,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2"
+      "weapon": "MachineGunHumvee2",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -4760,7 +5062,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AA"
+      "weapon": "MachineGunHumvee2AA",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -4786,7 +5091,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AP"
+      "weapon": "MachineGunHumvee2AP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
@@ -4812,7 +5120,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2APAA"
+      "weapon": "MachineGunHumvee2APAA",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -4880,7 +5191,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm"
+      "weapon": "120mm",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -4905,7 +5219,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mmHV"
+      "weapon": "120mmHV",
+      "weapon_types": [
+       "^MediumCannon",
+       "^HVProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -4929,7 +5247,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1A1Missiles"
+      "weapon": "M1A1Missiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -4954,7 +5275,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1A1MissilesAMT"
+      "weapon": "M1A1MissilesAMT",
+      "weapon_types": [
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "burst": "4",
@@ -4979,7 +5304,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "M1A1MachineGun"
+      "weapon": "M1A1MachineGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -5105,7 +5433,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BoxerCannonAG"
+      "weapon": "BoxerCannonAG",
+      "weapon_types": [
+       "^SmallArms",
+       "^LightMissile",
+       "^Grenade",
+       "^MediumCannon",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5183,7 +5519,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BoxerCannonAA"
+      "weapon": "BoxerCannonAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^LightMissile",
+       "^Grenade",
+       "^MediumCannon",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5256,7 +5600,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIRigPDLaser"
+      "weapon": "GDIRigPDLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5285,7 +5632,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIRigPDLaserTower"
+      "weapon": "GDIRigPDLaserTower",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "targeting",
@@ -5317,7 +5667,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneTargeting"
+      "weapon": "GDIRigDroneTargeting",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      },
      {
       "armament_name": "targetingdeployed",
@@ -5349,7 +5702,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigDroneTargetingTower"
+      "weapon": "GDIRigDroneTargetingTower",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -5433,7 +5789,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigPhalanx"
+      "weapon": "GDIRigPhalanx",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^SmallArms",
+       "^Grenade",
+       "^MediumCannon",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -5513,7 +5877,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigPhalanxTower"
+      "weapon": "GDIRigPhalanxTower",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^SmallArms",
+       "^Grenade",
+       "^MediumCannon",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -5543,7 +5915,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GDIRigRailgun"
+      "weapon": "GDIRigRailgun",
+      "weapon_types": [
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -5608,7 +5983,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigMissilePod"
+      "weapon": "GDIRigMissilePod",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "4",
@@ -5670,7 +6051,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIRigMissilePodAMT"
+      "weapon": "GDIRigMissilePodAMT",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -5748,7 +6136,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "ExosuitRailgun"
+      "weapon": "ExosuitRailgun",
+      "weapon_types": [
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5818,7 +6209,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunH"
+      "weapon": "MachineGunH",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "3",
@@ -5844,7 +6238,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunAPH"
+      "weapon": "MachineGunAPH",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -5913,7 +6310,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2"
+      "weapon": "MachineGunHumvee2",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -5939,7 +6339,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AP"
+      "weapon": "MachineGunHumvee2AP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
@@ -5965,7 +6368,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2AA"
+      "weapon": "MachineGunHumvee2AA",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
@@ -5991,7 +6397,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunHumvee2APAA"
+      "weapon": "MachineGunHumvee2APAA",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6015,7 +6424,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2"
+      "weapon": "RocketsHumvee2",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6039,7 +6451,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AA"
+      "weapon": "RocketsHumvee2AA",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6075,7 +6490,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AMT"
+      "weapon": "RocketsHumvee2AMT",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6109,7 +6529,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsHumvee2AMTAA"
+      "weapon": "RocketsHumvee2AMTAA",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^LightMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -6178,7 +6603,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mmDual"
+      "weapon": "120mmDual",
+      "weapon_types": [
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
@@ -6205,7 +6633,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mmDualHV"
+      "weapon": "120mmDualHV",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^HVProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6233,7 +6665,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothMissiles"
+      "weapon": "MammothMissiles",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6261,7 +6697,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothMissilesAMT"
+      "weapon": "MammothMissilesAMT",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -6331,7 +6772,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTank3Cannons"
+      "weapon": "MammothTank3Cannons",
+      "weapon_types": [
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
@@ -6358,7 +6802,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTank3CannonsHV"
+      "weapon": "MammothTank3CannonsHV",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^HVProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6386,7 +6834,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTank3Missiles"
+      "weapon": "MammothTank3Missiles",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6414,7 +6866,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTank3MissilesAMT"
+      "weapon": "MammothTank3MissilesAMT",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -6523,7 +6980,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "227mm"
+      "weapon": "227mm",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "6",
@@ -6586,7 +7049,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "227mmAMT"
+      "weapon": "227mmAMT",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      }
     ],
     "armor": {
@@ -6698,7 +7168,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankCannon"
+      "weapon": "GDIPredatorTankCannon",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6723,7 +7196,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankCannonHV"
+      "weapon": "GDIPredatorTankCannonHV",
+      "weapon_types": [
+       "^MediumCannon",
+       "^HVProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6748,7 +7225,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankMissiles"
+      "weapon": "GDIPredatorTankMissiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -6774,7 +7254,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorTankMissilesAMT"
+      "weapon": "GDIPredatorTankMissilesAMT",
+      "weapon_types": [
+       "^MediumMissile",
+       "^AMTProjectile"
+      ]
      },
      {
       "burst": "4",
@@ -6799,7 +7283,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GDIPredatorMachineGun"
+      "weapon": "GDIPredatorMachineGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
@@ -6810,7 +7297,8 @@
       "slot": "Armament@Lights",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GDIPredatorBlueLaser"
+      "weapon": "GDIPredatorBlueLaser",
+      "weapon_types": []
      }
     ],
     "armor": {

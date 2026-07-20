@@ -30,7 +30,7 @@ glabomber:
 		Facings: 32
 
 gle1:
-	Inherits: ra1_allies_alliedsniper
+	Inherits: LightSniper
 	idle1:
 		Start: 384
 		Length: 14
@@ -1090,7 +1090,7 @@ chbunker:
 
 che1:
 	Inherits: gle1
-	Defaults: ra1_allies_alliedsniper
+	Defaults: LightSniper
 		Scale: 0.85
 	icon: che1icon
 	redstar: chhorde

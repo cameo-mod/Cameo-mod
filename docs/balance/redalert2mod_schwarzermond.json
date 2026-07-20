@@ -8,11 +8,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -59,6 +62,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -104,7 +108,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocket"
+      "weapon": "NaxCorrosionRocket",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -150,6 +159,7 @@
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "500",
+      "pricing": true,
       "range": "2500",
       "reloaddelay": "60",
       "slot": "Armament@PRIMARY",
@@ -173,7 +183,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxDieGlocke"
+      "weapon": "NaxDieGlocke",
+      "weapon_types": [
+       "^HeavyChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -224,6 +237,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5760",
       "reloaddelay": "100",
       "slot": "Armament@PRIMARY",
@@ -280,13 +294,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "LunarNaxiDroneLaser"
+      "weapon": "LunarNaxiDroneLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5760",
       "reloaddelay": "100",
       "slot": "Armament@Rockets",
@@ -360,7 +381,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarNaxiDroneMissile"
+      "weapon": "LunarNaxiDroneMissile",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^ArrowWeapon",
+       "^RA2LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -398,6 +427,7 @@
       "burst": "6",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
@@ -444,13 +474,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannon"
+      "weapon": "NaxHaenebuQuadCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "7",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
       "requires": "rank-elite",
@@ -495,7 +531,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannonE"
+      "weapon": "NaxHaenebuQuadCannonE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -541,6 +582,7 @@
       "burst": "6",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
@@ -587,13 +629,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannon"
+      "weapon": "NaxHaenebuQuadCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "7",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
       "requires": "rank-elite",
@@ -638,11 +686,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxHaenebuQuadCannonE"
+      "weapon": "NaxHaenebuQuadCannonE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "50",
       "slot": "Armament@SECOND",
@@ -666,7 +720,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiCowDrop"
+      "weapon": "NaxiCowDrop",
+      "weapon_types": [
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -713,6 +770,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -770,13 +828,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserE"
+      "weapon": "NaxiBeetleLaserE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -834,13 +899,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserE"
+      "weapon": "NaxiBeetleLaserE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -895,13 +967,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserAAE"
+      "weapon": "NaxiBeetleLaserAAE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -956,13 +1035,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserAAE"
+      "weapon": "NaxiBeetleLaserAAE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1017,13 +1103,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser"
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1078,13 +1171,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser"
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1139,13 +1239,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaserAA"
+      "weapon": "Lunar_YellowBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1200,13 +1307,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaserAA"
+      "weapon": "Lunar_YellowBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -1261,13 +1375,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser"
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -1322,13 +1443,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser"
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -1383,13 +1511,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaserAA"
+      "weapon": "Lunar_AmplifiedBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -1444,7 +1579,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaserAA"
+      "weapon": "Lunar_AmplifiedBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1491,12 +1632,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "30000",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxDefensivePlaneTarget"
+      "weapon": "NaxDefensivePlaneTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1681,6 +1825,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1738,11 +1883,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxLaserT"
+      "weapon": "NaxLaserT",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -1797,11 +1949,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowLaserT"
+      "weapon": "Lunar_YellowLaserT",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "schwarzermond_upgrade_amplifiedlens",
@@ -1856,7 +2015,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedLaserT"
+      "weapon": "Lunar_AmplifiedLaserT",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2051,6 +2216,7 @@
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "2800",
+      "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
       "requires": "!schwarzermond_upgrade_vrilpoweredweapons",
@@ -2097,11 +2263,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxSturmArty"
+      "weapon": "NaxSturmArty",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^RA2MediumCannon",
+       "^RA2Grenade"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "2800",
+      "pricing": true,
       "range": "14000",
       "reloaddelay": "140",
       "requires": "schwarzermond_upgrade_vrilpoweredweapons",
@@ -2163,7 +2335,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenSturmArty"
+      "weapon": "Lunar_GreenSturmArty",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyBomb",
+       "^RA2MediumCannon",
+       "^RA2Grenade",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -2281,6 +2460,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -2304,7 +2484,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair"
+      "weapon": "RA2IFVRepair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2353,6 +2536,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "6055",
       "reloaddelay": "50",
       "requires": "!rank-elite",
@@ -2397,13 +2581,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooperE"
+      "weapon": "NaxCorrosionRocketTrooperE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "1",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "6055",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -2448,7 +2638,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooperE"
+      "weapon": "NaxCorrosionRocketTrooperE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2456,6 +2651,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": false,
       "range": "6055",
       "reloaddelay": "50",
       "requires": "!rank-elite",
@@ -2500,7 +2696,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooperE"
+      "weapon": "NaxCorrosionRocketTrooperE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2508,6 +2709,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": false,
       "range": "6055",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -2552,7 +2754,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionRocketTrooperE"
+      "weapon": "NaxCorrosionRocketTrooperE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -2594,8 +2801,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2604,7 +2812,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2614,7 +2822,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2629,22 +2837,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2654,7 +2867,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2669,22 +2882,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY_UP",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2694,7 +2912,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2709,22 +2927,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@ELITE_UP",
       "versus_templates": [
-       "NaxiRifleLaserE"
+       "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2734,7 +2957,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2749,22 +2972,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY_AMP",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2774,7 +3002,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2789,22 +3017,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@ELITE_AMP",
       "versus_templates": [
-       "NaxiRifleLaserE"
+       "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2814,7 +3047,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2829,13 +3062,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2844,7 +3082,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2854,7 +3092,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2869,23 +3107,28 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2895,7 +3138,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2910,23 +3153,28 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED_UP",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2936,7 +3184,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2951,23 +3199,28 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONEDELITE_UP",
       "versus_templates": [
-       "NaxiRifleLaserE"
+       "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2977,7 +3230,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2992,23 +3245,28 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "4097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "4500",
+      "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED_AMP",
       "versus_templates": [
-       "NaxiRifleLaser"
+       "schwarzermond_lunarsoldier_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3018,7 +3276,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3033,23 +3291,28 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedRifleLaser"
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
-      "range": "5097",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "5500",
+      "reloaddelay": "50",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONEDELITE_AMP",
       "versus_templates": [
-       "NaxiRifleLaserE"
+       "schwarzermond_lunarsoldier_rifle_elite"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3059,7 +3322,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "3000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3074,7 +3337,11 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedRifleLaserE"
+      "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3093,7 +3360,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Health.HP",
-     "v": "12000"
+     "v": "24000"
     },
     "name": "Lunar Soldier",
     "prerequisites": [
@@ -3118,6 +3385,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
       "requires": "!rank-elite",
@@ -3189,12 +3457,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiMP40Laser"
+      "weapon": "NaxiMP40Laser",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
       "requires": "rank-elite",
@@ -3264,7 +3540,14 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiMP40LaserE"
+      "weapon": "NaxiMP40LaserE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3316,6 +3599,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -3387,12 +3671,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiMP40Laser"
+      "weapon": "NaxiMP40Laser",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -3462,12 +3754,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiMP40LaserE"
+      "weapon": "NaxiMP40LaserE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -3537,12 +3837,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowMP40Laser"
+      "weapon": "Lunar_YellowMP40Laser",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "11",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -3612,12 +3920,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowMP40LaserE"
+      "weapon": "Lunar_YellowMP40LaserE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "7",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4384",
       "reloaddelay": "100",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -3687,12 +4003,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedMP40Laser"
+      "weapon": "Lunar_AmplifiedMP40Laser",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "burst": "12",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5384",
       "reloaddelay": "100",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -3762,7 +4086,14 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedMP40LaserE"
+      "weapon": "Lunar_AmplifiedMP40LaserE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun",
+       "^SmallArms",
+       "^RA2LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3810,6 +4141,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6414",
       "reloaddelay": "60",
       "requires": "!rank-elite",
@@ -3834,12 +4166,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHoleMaker"
+      "weapon": "BlackHoleMaker",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7414",
       "reloaddelay": "60",
       "requires": "rank-elite",
@@ -3864,11 +4200,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHoleMakerE"
+      "weapon": "BlackHoleMakerE",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6414",
       "reloaddelay": "60",
       "requires": "!rank-elite",
@@ -3893,13 +4233,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHoleMaker"
+      "weapon": "BlackHoleMaker",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7414",
       "reloaddelay": "60",
       "requires": "rank-elite",
@@ -3924,7 +4268,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHoleMakerE"
+      "weapon": "BlackHoleMakerE",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3974,6 +4321,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4008,12 +4356,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser"
+      "weapon": "UbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4048,13 +4402,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaserE"
+      "weapon": "UbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4089,13 +4449,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaser"
+      "weapon": "UbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4130,12 +4496,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UbermenschLaserE"
+      "weapon": "UbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4170,12 +4542,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser"
+      "weapon": "Lunar_YellowUbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4210,13 +4588,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaserE"
+      "weapon": "Lunar_YellowUbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4251,13 +4635,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaser"
+      "weapon": "Lunar_YellowUbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -4292,12 +4682,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_YellowUbermenschLaserE"
+      "weapon": "Lunar_YellowUbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -4332,12 +4728,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaser"
+      "weapon": "Lunar_AmplifiedUbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -4372,13 +4774,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaserE"
+      "weapon": "Lunar_AmplifiedUbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5801",
       "reloaddelay": "30",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -4413,13 +4821,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaser"
+      "weapon": "Lunar_AmplifiedUbermenschLaser",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6801",
       "reloaddelay": "30",
       "requires": "rank-elite && schwarzermond_upgrade_amplifiedlens",
@@ -4454,7 +4868,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedUbermenschLaserE"
+      "weapon": "Lunar_AmplifiedUbermenschLaserE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -4973,6 +5392,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7420",
       "reloaddelay": "90",
       "requires": "!rank-elite",
@@ -4997,12 +5417,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCrystalLeech"
+      "weapon": "NaxCrystalLeech",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8420",
       "reloaddelay": "25",
       "requires": "rank-elite",
@@ -5027,7 +5451,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCrystalLeechE"
+      "weapon": "NaxCrystalLeechE",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5075,6 +5502,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8060",
       "reloaddelay": "76",
       "requires": "!rank-elite",
@@ -5131,10 +5559,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "DalekCannon"
+      "weapon": "DalekCannon",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RA2RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9060",
       "reloaddelay": "76",
       "requires": "rank-elite",
@@ -5189,7 +5623,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "DalekCannonE"
+      "weapon": "DalekCannonE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RA2RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5241,12 +5680,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "25",
       "slot": "Armament@AG",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GLStingerTargeting"
+      "weapon": "GLStingerTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -5297,6 +5739,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "7984",
       "reloaddelay": "34",
       "requires": "!rank-elite",
@@ -5341,13 +5784,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionBeast"
+      "weapon": "NaxCorrosionBeast",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "16",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "8984",
       "reloaddelay": "34",
       "requires": "rank-elite",
@@ -5392,7 +5841,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxCorrosionBeastE"
+      "weapon": "NaxCorrosionBeastE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5444,6 +5898,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5501,13 +5956,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserE"
+      "weapon": "NaxiBeetleLaserE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5562,13 +6024,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiBeetleLaserAAE"
+      "weapon": "NaxiBeetleLaserAAE",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5623,13 +6092,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaser"
+      "weapon": "Lunar_YellowBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5684,13 +6160,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowBeetleLaserAA"
+      "weapon": "Lunar_YellowBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6448",
       "reloaddelay": "60",
       "requires": "schwarzermond_upgrade_amplifiedlens",
@@ -5745,13 +6228,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaser"
+      "weapon": "Lunar_AmplifiedBeetleLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9672",
       "reloaddelay": "60",
       "requires": "schwarzermond_upgrade_amplifiedlens",
@@ -5806,7 +6296,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedBeetleLaserAA"
+      "weapon": "Lunar_AmplifiedBeetleLaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5856,6 +6352,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5913,13 +6410,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiTank2Laser"
+      "weapon": "NaxiTank2Laser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
       "requires": "!schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -5974,13 +6478,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NaxiTank2LaserAA"
+      "weapon": "NaxiTank2LaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "5",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
       "requires": "schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -6035,13 +6546,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowTank2Laser"
+      "weapon": "Lunar_YellowTank2Laser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "5",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
       "requires": "schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
@@ -6096,13 +6614,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_YellowTank2LaserAA"
+      "weapon": "Lunar_YellowTank2LaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "52",
       "requires": "schwarzermond_upgrade_amplifiedlens",
@@ -6157,13 +6682,20 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedTank2Laser"
+      "weapon": "Lunar_AmplifiedTank2Laser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9750",
       "reloaddelay": "52",
       "requires": "schwarzermond_upgrade_amplifiedlens",
@@ -6218,7 +6750,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Lunar_AmplifiedTank2LaserAA"
+      "weapon": "Lunar_AmplifiedTank2LaserAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6266,6 +6804,7 @@
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "2468",
+      "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6317,13 +6856,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty"
+      "weapon": "NaxGrilleArty",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "2468",
+      "pricing": true,
       "range": "13333",
       "reloaddelay": "111",
       "requires": "rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6374,11 +6919,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArtyE"
+      "weapon": "NaxGrilleArtyE",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "2468",
+      "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -6445,13 +6997,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenGrilleArty"
+      "weapon": "Lunar_GreenGrilleArty",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "2468",
+      "pricing": true,
       "range": "13333",
       "reloaddelay": "111",
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -6518,7 +7078,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenGrilleArtyE"
+      "weapon": "Lunar_GreenGrilleArtyE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^RA2EliteEffects",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -6566,6 +7134,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5121",
       "reloaddelay": "60",
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6585,13 +7154,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarPanzerCannon"
+      "weapon": "LunarPanzerCannon",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6121",
       "reloaddelay": "60",
       "requires": "rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6612,11 +7185,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarPanzerCannonE"
+      "weapon": "LunarPanzerCannonE",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -6653,13 +7231,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_Green105mm"
+      "weapon": "Lunar_Green105mm",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -6694,7 +7278,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_Green105mm_elite"
+      "weapon": "Lunar_Green105mm_elite",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -6742,6 +7331,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5105",
       "reloaddelay": "80",
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6804,13 +7394,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarTigerCannon"
+      "weapon": "LunarTigerCannon",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6105",
       "reloaddelay": "80",
       "requires": "rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -6870,11 +7467,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarTigerCannonE"
+      "weapon": "LunarTigerCannonE",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5105",
       "reloaddelay": "80",
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -6951,13 +7555,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenTigerCannon"
+      "weapon": "Lunar_GreenTigerCannon",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6105",
       "reloaddelay": "80",
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -7034,7 +7647,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenTigerCannonE"
+      "weapon": "Lunar_GreenTigerCannonE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -7085,6 +7706,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "1565",
+      "pricing": true,
       "range": "7825",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -7141,13 +7763,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Naxis_Jagerline"
+      "weapon": "Naxis_Jagerline",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyAAWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "minrange": "2348",
+      "pricing": true,
       "range": "11740",
       "reloaddelay": "60",
       "slot": "Armament@AA",
@@ -7201,7 +7830,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Naxis_Jagerline_AA"
+      "weapon": "Naxis_Jagerline_AA",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyAAWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -7251,13 +7886,16 @@
       "burst": "4",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "3470",
+      "pricing": true,
       "range": "17350",
       "reloaddelay": "135",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxisBradleyTarget"
+      "weapon": "NaxisBradleyTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -7351,6 +7989,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
       "requires": "!rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -7397,12 +8036,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarNaxiJadgDestroyer"
+      "weapon": "LunarNaxiJadgDestroyer",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
       "requires": "rank-elite && !schwarzermond_upgrade_vrilpoweredweapons",
@@ -7448,10 +8093,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LunarNaxiJadgDestroyerE"
+      "weapon": "LunarNaxiJadgDestroyerE",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7379",
       "reloaddelay": "90",
       "requires": "!rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -7513,12 +8165,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenJadgDestroyer"
+      "weapon": "Lunar_GreenJadgDestroyer",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8379",
       "reloaddelay": "90",
       "requires": "rank-elite && schwarzermond_upgrade_vrilpoweredweapons",
@@ -7580,7 +8240,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Lunar_GreenJadgDestroyerE"
+      "weapon": "Lunar_GreenJadgDestroyerE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon",
+       "^RA2EliteEffects",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {

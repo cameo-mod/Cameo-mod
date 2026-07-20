@@ -64,7 +64,7 @@ ra2_soviets_attackdog:
 	Crushable:
 		CrushSound: igensqua.wav
 	WithDeathAnimation:
-		DeathSequencePalette: ra2infantry
+		DeathSequencePalette: playerra2
 		DeathTypes:
 			DefaultDeath: 1
 			BruteMutate: 1
@@ -143,15 +143,21 @@ ra2_soviets_conscript:
 	Mobile:
 		Speed: 57
 	Health:
-		HP: 13000
+		HP: 26000
 	ChangesHealth@SelfHealing:
-		Step: 13
+		Step: 26
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra2_soviets_conscript:
+		Modifier: 63
 	Armament@PRIMARY:
-		Weapon: RA2M1Carbine
+		Weapon: ra2_soviets_conscript_carbine
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2M1CarbineE
+		Weapon: ra2_soviets_conscript_carbine_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:

@@ -26,42 +26,48 @@ asianalliance_asianmilitia:
 	Mobile:
 		Speed: 52
 	Health:
-		HP: 12000
+		HP: 24000
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 24
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@asianalliance_asianmilitia:
+		Modifier: 70
 	Armament@PRIMARY:
-		Weapon: RA2AsianShotgun
+		Weapon: asianalliance_asianmilitia_shotgun
 		LocalOffset: 128,0,256
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: RA2AsianShotgunE
+		Weapon: asianalliance_asianmilitia_shotgun_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: rank-elite
 	Armament@GRENADE:
-		Weapon: AsianGrenade
+		Weapon: asianalliance_asianmilitia_grenade
 		LocalOffset: 128,0,256
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment && !rank-elite
 	Armament@GRENADEELITE:
-		Weapon: AsianGrenadeE
+		Weapon: asianalliance_asianmilitia_grenade_elite
 		LocalOffset: 128,0,256
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: RA2AsianShotgun
+		Weapon: asianalliance_asianmilitia_shotgun
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: RA2AsianShotgunE
+		Weapon: asianalliance_asianmilitia_shotgun_elite
 		MuzzleSequence: garrison-muzzle
 		RequiresCondition: rank-elite
 	Armament@GRENADEG:
 		Name: garrisoned
-		Weapon: AsianGrenade
+		Weapon: asianalliance_asianmilitia_grenade
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment && !rank-elite
 	Armament@GRENADEGE:
 		Name: garrisoned
-		Weapon: AsianGrenadeE
+		Weapon: asianalliance_asianmilitia_grenade_elite
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment && rank-elite
 	DamageMultiplier@asianalliance_doctrine_modernizedinfantryequipment:
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment

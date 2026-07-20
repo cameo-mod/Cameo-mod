@@ -120,7 +120,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanSuperBomb"
+      "weapon": "JapanSuperBomb",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -204,7 +211,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE"
+      "weapon": "NaxPlanegunE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
@@ -258,7 +270,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE"
+      "weapon": "NaxPlanegunE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -357,7 +374,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiInterceptorGun"
+      "weapon": "NaxiInterceptorGun",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "primary",
@@ -394,7 +417,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE"
+      "weapon": "NaxPlaneRocketsE",
+      "weapon_types": [
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -462,7 +489,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE"
+      "weapon": "NaxPlaneRocketsE",
+      "weapon_types": [
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "primary",
@@ -500,7 +531,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlaneRocketsE"
+      "weapon": "NaxPlaneRocketsE",
+      "weapon_types": [
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "primary",
@@ -553,7 +588,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE"
+      "weapon": "NaxPlanegunE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
@@ -607,7 +647,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxPlanegunE"
+      "weapon": "NaxPlanegunE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -711,7 +756,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon"
+      "weapon": "NaxQuadCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -773,7 +824,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonE"
+      "weapon": "NaxQuadCannonE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -835,7 +892,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAA"
+      "weapon": "NaxQuadCannonAA",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -897,7 +960,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE"
+      "weapon": "NaxQuadCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1025,7 +1094,8 @@
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxDefensivePlaneTarget"
+      "weapon": "NaxDefensivePlaneTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1235,7 +1305,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxFlakAA"
+      "weapon": "NaxFlakAA",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "8",
@@ -1295,7 +1371,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxFlakAG"
+      "weapon": "NaxFlakAG",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1462,7 +1544,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty"
+      "weapon": "NaxGrilleArty",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "burst": "6",
@@ -1498,7 +1585,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunTop"
+      "weapon": "NaxiWW2MachinegunTop",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "8",
@@ -1559,7 +1650,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE"
+      "weapon": "NaxQuadCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1768,7 +1865,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleT"
+      "weapon": "NaxiRifleT",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -1962,7 +2062,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistol"
+      "weapon": "NaxiAlienPistol",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "burst": "4",
@@ -2003,7 +2108,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistolE"
+      "weapon": "NaxiAlienPistolE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2045,7 +2155,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistol"
+      "weapon": "NaxiAlienPistol",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2087,7 +2202,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAlienPistolE"
+      "weapon": "NaxiAlienPistolE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^RA2MediumCannon",
+       "^LunarNaxisUpgradedCannons"
+      ]
      }
     ],
     "armor": {
@@ -2155,7 +2275,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PortaTesla"
+      "weapon": "RA2PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -2184,7 +2307,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PortaTesla"
+      "weapon": "RA2PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2214,7 +2340,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PortaTesla"
+      "weapon": "RA2PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2244,7 +2373,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PortaTesla"
+      "weapon": "RA2PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2312,7 +2444,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch"
+      "weapon": "RA2BrutePunch",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "burst": "2",
@@ -2343,7 +2478,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunchE"
+      "weapon": "RA2BrutePunchE",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2372,7 +2510,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch"
+      "weapon": "RA2BrutePunch",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2445,7 +2586,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannon"
+      "weapon": "NaxiAntiTankCannon",
+      "weapon_types": [
+       "^MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
@@ -2481,7 +2626,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannonE"
+      "weapon": "NaxiAntiTankCannonE",
+      "weapon_types": [
+       "^MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -2558,7 +2707,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunSmall"
+      "weapon": "NaxiWW2MachinegunSmall",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "3",
@@ -2593,7 +2746,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunSmallAA"
+      "weapon": "NaxiWW2MachinegunSmallAA",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -2664,7 +2821,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2gruntslice"
+      "weapon": "wc2gruntslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2689,7 +2849,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleCons"
+      "weapon": "NaxiRifleCons",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2716,7 +2879,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleConsE"
+      "weapon": "NaxiRifleConsE",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -2786,7 +2952,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroop"
+      "weapon": "NaxiFlamerTroop",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      },
      {
       "burst": "6",
@@ -2817,7 +2986,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroopE"
+      "weapon": "NaxiFlamerTroopE",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2849,7 +3021,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroop"
+      "weapon": "NaxiFlamerTroop",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2881,7 +3056,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiFlamerTroopE"
+      "weapon": "NaxiFlamerTroopE",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2935,7 +3113,10 @@
        "^deploytargeting"
       ],
       "warheads": [],
-      "weapon": "NaxiWW2MachinegunnerTargeting"
+      "weapon": "NaxiWW2MachinegunnerTargeting",
+      "weapon_types": [
+       "^deploytargeting"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -2972,7 +3153,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegunner"
+      "weapon": "NaxiWW2Machinegunner",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -3009,7 +3194,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunnerE"
+      "weapon": "NaxiWW2MachinegunnerE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3046,7 +3235,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegunner"
+      "weapon": "NaxiWW2Machinegunner",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3083,7 +3276,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunnerE"
+      "weapon": "NaxiWW2MachinegunnerE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3146,7 +3343,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniper"
+      "weapon": "NaxiSniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "burst": "2",
@@ -3172,7 +3372,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniperE"
+      "weapon": "NaxiSniperE",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3197,7 +3400,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniper"
+      "weapon": "NaxiSniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3224,7 +3430,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiSniperE"
+      "weapon": "NaxiSniperE",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3268,7 +3477,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
-      "range": "5501",
+      "range": "5500",
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3277,7 +3486,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3287,23 +3496,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleCons"
+      "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
-      "range": "6501",
+      "range": "6500",
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifleCons"
+       "naxis_naxiriflerecruit_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3313,13 +3525,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleConsE"
+      "weapon": "naxis_naxiriflerecruit_rifle_elite",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
-      "range": "5501",
+      "range": "5500",
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -3328,7 +3543,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3338,7 +3553,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleCons"
+      "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3346,16 +3564,16 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
-      "range": "6501",
+      "range": "6500",
       "reloaddelay": "100",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifleCons"
+       "naxis_naxiriflerecruit_rifle"
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3365,7 +3583,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleConsE"
+      "weapon": "naxis_naxiriflerecruit_rifle_elite",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -3384,7 +3605,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
-     "v": "10000"
+     "v": "20000"
     },
     "name": "Naxi Rifle Recruit",
     "prerequisites": [
@@ -3406,9 +3627,9 @@
    "naxis_naxiriflesoldier": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
-      "range": "5621",
+      "range": "5500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3427,19 +3648,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": true,
-      "range": "6621",
+      "range": "6500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "naxis_naxiriflesoldier_rifle"
       ],
       "warheads": [
        {
@@ -3453,13 +3677,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "naxis_naxiriflesoldier_rifle_elite",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
-      "range": "5621",
+      "range": "5500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -3478,7 +3705,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3486,12 +3716,12 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
       "pricing": false,
-      "range": "6621",
+      "range": "6500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "NaxiRifle"
+       "naxis_naxiriflesoldier_rifle"
       ],
       "warheads": [
        {
@@ -3505,7 +3735,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "naxis_naxiriflesoldier_rifle_elite",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -3524,7 +3757,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
-     "v": "15000"
+     "v": "30000"
     },
     "name": "Naxi Rifle Soldier",
     "prerequisites": [
@@ -3637,7 +3870,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekCons"
+      "weapon": "NaxiShrekCons",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "2",
@@ -3728,7 +3969,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekConsE"
+      "weapon": "NaxiShrekConsE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3823,7 +4072,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekCons"
+      "weapon": "NaxiShrekCons",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -3915,7 +4172,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekConsE"
+      "weapon": "NaxiShrekConsE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -4047,7 +4312,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrek"
+      "weapon": "NaxiShrek",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "2",
@@ -4138,7 +4411,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekE"
+      "weapon": "NaxiShrekE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -4233,7 +4514,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrek"
+      "weapon": "NaxiShrek",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -4325,7 +4614,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiShrekE"
+      "weapon": "NaxiShrekE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumChemicalWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -4379,7 +4676,10 @@
        "^aadeploytargeting"
       ],
       "warheads": [],
-      "weapon": "NaxQuadCannonTargeting"
+      "weapon": "NaxQuadCannonTargeting",
+      "weapon_types": [
+       "^aadeploytargeting"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -4441,7 +4741,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlak"
+      "weapon": "PortableFlak",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "deployed",
@@ -4503,7 +4809,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlakE"
+      "weapon": "PortableFlakE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -4565,7 +4877,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlak"
+      "weapon": "PortableFlak",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -4627,7 +4945,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortableFlakE"
+      "weapon": "PortableFlakE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4726,7 +5050,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannon"
+      "weapon": "SkyMageCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "8",
@@ -4787,7 +5117,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonE"
+      "weapon": "SkyMageCannonE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "6",
@@ -4848,7 +5184,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonAA"
+      "weapon": "SkyMageCannonAA",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "8",
@@ -4909,7 +5251,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SkyMageCannonAAE"
+      "weapon": "SkyMageCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4976,7 +5324,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Shovel"
+      "weapon": "RA2Shovel",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5005,7 +5356,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Shovel"
+      "weapon": "RA2Shovel",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5055,7 +5409,8 @@
       "slot": "Armament@SlaveWhip",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxiSlaveWhip"
+      "weapon": "NaxiSlaveWhip",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
@@ -5079,7 +5434,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "NaxiRifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "2",
@@ -5105,7 +5463,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "NaxiRifleE",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5130,7 +5491,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "NaxiRifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5157,7 +5521,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "NaxiRifleE",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -5234,7 +5601,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg"
+      "weapon": "naxis_sssoldier_smg",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "13",
@@ -5271,7 +5642,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg_elite"
+      "weapon": "naxis_sssoldier_smg_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5310,7 +5685,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg"
+      "weapon": "naxis_sssoldier_smg",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5348,7 +5727,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "naxis_sssoldier_smg_elite"
+      "weapon": "naxis_sssoldier_smg_elite",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -5411,7 +5794,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "NaxiRifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "2",
@@ -5437,7 +5823,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "NaxiRifleE",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5462,7 +5851,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifle"
+      "weapon": "NaxiRifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5489,7 +5881,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiRifleE"
+      "weapon": "NaxiRifleE",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -5581,7 +5976,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiMissileUboat"
+      "weapon": "NaxiMissileUboat",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyBomb",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5665,7 +6065,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -5707,7 +6111,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      },
      {
       "burst": "2",
@@ -5748,7 +6156,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      },
      {
       "burst": "2",
@@ -5789,7 +6201,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -5873,7 +6289,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AsianSmallTorpedo"
+      "weapon": "AsianSmallTorpedo",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^RA2HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -6425,7 +6845,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault"
+      "weapon": "Nax120mmAssault",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -6453,7 +6876,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault_elite"
+      "weapon": "Nax120mmAssault_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "burst": "4",
@@ -6515,7 +6942,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher"
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6596,7 +7028,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunTop"
+      "weapon": "NaxiWW2MachinegunTop",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
@@ -6633,7 +7069,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunTopAA"
+      "weapon": "NaxiWW2MachinegunTopAA",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -6740,7 +7180,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxBrummbarArty"
+      "weapon": "NaxBrummbarArty",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "burst": "2",
@@ -6803,7 +7249,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxBrummbarArtyE"
+      "weapon": "NaxBrummbarArtyE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -6861,7 +7314,8 @@
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxisDonnerschlagTarget"
+      "weapon": "NaxisDonnerschlagTarget",
+      "weapon_types": []
      },
      {
       "armament_name": "primary",
@@ -6874,7 +7328,8 @@
       "slot": "Armament@VISUAL",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxisDonnerschlagTargetVisualLaser"
+      "weapon": "NaxisDonnerschlagTargetVisualLaser",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -6949,7 +7404,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair"
+      "weapon": "RA2IFVRepair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -7049,7 +7507,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty"
+      "weapon": "NaxGrilleArty",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "burst": "2",
@@ -7107,7 +7570,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArtyE"
+      "weapon": "NaxGrilleArtyE",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -7187,7 +7656,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2Machinegun"
+      "weapon": "NaxiWW2Machinegun",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "6",
@@ -7222,7 +7695,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2MachinegunAA"
+      "weapon": "NaxiWW2MachinegunAA",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -7299,7 +7776,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiHetzerDestroyer"
+      "weapon": "NaxiHetzerDestroyer",
+      "weapon_types": [
+       "^MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
@@ -7336,7 +7817,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiHetzerDestroyer_elite"
+      "weapon": "NaxiHetzerDestroyer_elite",
+      "weapon_types": [
+       "^MediumCannon",
+       "^RA2TankDestroyerCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -7430,7 +7916,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiJadgDestroyer"
+      "weapon": "NaxiJadgDestroyer",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -7455,7 +7946,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault"
+      "weapon": "Nax120mmAssault",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -7483,7 +7977,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nax120mmAssault_elite"
+      "weapon": "Nax120mmAssault_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -7578,7 +8076,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiJadgDestroyer"
+      "weapon": "NaxiJadgDestroyer",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
@@ -7630,7 +8133,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiJadgDestroyer_elite"
+      "weapon": "NaxiJadgDestroyer_elite",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2TankDestroyerCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -7710,7 +8219,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiWW2KübelwagenMachinegun"
+      "weapon": "NaxiWW2KübelwagenMachinegun",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -7777,7 +8290,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KingNaxTigerCannon"
+      "weapon": "KingNaxTigerCannon",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -7805,7 +8321,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KingNaxTigerCannon_elite"
+      "weapon": "KingNaxTigerCannon_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -7944,7 +8464,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxMausCannon"
+      "weapon": "NaxMausCannon",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8038,7 +8566,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxMausCannon_elite"
+      "weapon": "NaxMausCannon_elite",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -8222,7 +8759,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxMausCannon"
+      "weapon": "NaxMausCannon",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "burst": "2",
@@ -8287,7 +8832,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocketE"
+      "weapon": "LatinBuggyRocketE",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^SteelLightMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "4",
@@ -8349,7 +8900,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher"
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -8409,7 +8965,8 @@
       "slot": "Armament@AG",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "NaxisSarubianTarget"
+      "weapon": "NaxisSarubianTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -8487,7 +9044,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxiAntiTankCannon"
+      "weapon": "NaxiAntiTankCannon",
+      "weapon_types": [
+       "^MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -8585,7 +9146,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxRatteCannon"
+      "weapon": "NaxRatteCannon",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8639,7 +9205,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxRatteCannon_elite"
+      "weapon": "NaxRatteCannon_elite",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^HeavyBomb",
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -8700,7 +9272,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE"
+      "weapon": "NaxQuadCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -8761,7 +9339,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE"
+      "weapon": "NaxQuadCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -8834,7 +9418,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm"
+      "weapon": "RA2120mm",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8862,7 +9449,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2120mm_elite"
+      "weapon": "RA2120mm_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -8919,7 +9510,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxGrilleArty"
+      "weapon": "NaxGrilleArty",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -8970,7 +9566,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxShoeRocket"
+      "weapon": "NaxShoeRocket",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^RA2Grenade",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -9065,7 +9666,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxSturmArty"
+      "weapon": "NaxSturmArty",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^RA2MediumCannon",
+       "^RA2Grenade"
+      ]
      }
     ],
     "armor": {
@@ -9134,7 +9740,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2105mm"
+      "weapon": "RA2105mm",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -9162,7 +9771,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2105mm_elite"
+      "weapon": "RA2105mm_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -9230,7 +9843,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxTigerCannon"
+      "weapon": "NaxTigerCannon",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -9258,7 +9874,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxTigerCannon_elite"
+      "weapon": "NaxTigerCannon_elite",
+      "weapon_types": [
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      }
     ],
     "armor": {
@@ -9366,7 +9986,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannon"
+      "weapon": "NaxQuadCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -9428,7 +10054,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonE"
+      "weapon": "NaxQuadCannonE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -9490,7 +10122,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAA"
+      "weapon": "NaxQuadCannonAA",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -9552,7 +10190,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NaxQuadCannonAAE"
+      "weapon": "NaxQuadCannonAAE",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {

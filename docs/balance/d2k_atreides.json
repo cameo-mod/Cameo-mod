@@ -100,6 +100,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -118,7 +119,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "80mm_A"
+      "weapon": "80mm_A",
+      "weapon_types": [
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {

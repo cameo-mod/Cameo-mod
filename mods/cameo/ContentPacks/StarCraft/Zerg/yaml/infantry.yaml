@@ -732,6 +732,7 @@ zerg_kerrigan:
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
 	RenderSprites:
+		PlayerPalette: player_rgba
 	Voiced:
 		VoiceSet: SCKerriganZergVoice
 	GrantTimedConditionOnDeploy:
@@ -746,7 +747,5 @@ zerg_kerrigan:
 	PeriodicExplosion@projections:
 		Weapon: SCKERRIGANSUMMON
 		RequiresCondition: summon
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost

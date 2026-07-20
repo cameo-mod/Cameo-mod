@@ -387,13 +387,12 @@ ra1_allies_minelayer:
 		Weapon: ATMine
 	RenderSprites:
 		Image: ra1_allies_minelayer
+		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-	RenderSprites:
-		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_chronoarmor, ra1_allies_upgrade_gpssatellitesupport
 

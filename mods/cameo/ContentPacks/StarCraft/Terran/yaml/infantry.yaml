@@ -351,12 +351,11 @@ terran_marauder:
 		VoiceSet: SCMarauderVoice
 	RenderSprites:
 		Image: terran_marauder
+		PlayerPalette: player_rgba
 	# Selectable:
-	# 	DecorationBounds: 1280, 1280
+	#		DecorationBounds: 1280, 1280
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
 

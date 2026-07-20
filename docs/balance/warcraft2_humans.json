@@ -45,6 +45,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
       "slot": "Armament@VISIBLE",
@@ -106,7 +107,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2gryphonFireVisible"
+      "weapon": "wc2gryphonFireVisible",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TeslaChargedWeapon"
+      ]
      }
     ],
     "armor": {
@@ -764,6 +771,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -810,12 +818,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1029,7 +1043,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1068,6 +1099,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -1114,12 +1146,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1333,7 +1371,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1372,6 +1427,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -1418,12 +1474,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1637,7 +1699,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1706,6 +1785,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
@@ -1730,11 +1810,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -1758,11 +1842,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "fireball",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -1880,12 +1968,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFireballVisible"
+      "weapon": "wc2mageFireballVisible",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -1995,11 +2095,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFireballExplosion"
+      "weapon": "wc2mageFireballExplosion",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "slow",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && mageslow_upg",
@@ -2012,22 +2124,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2mageSlow"
+      "weapon": "wc2mageSlow",
+      "weapon_types": []
      },
      {
       "armament_name": "polymorph",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
       "slot": "Armament@POLYMORPH",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "wc2magePolymorph"
+      "weapon": "wc2magePolymorph",
+      "weapon_types": []
      },
      {
       "armament_name": "blizzard",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "FSD_cond_4 && mageblizzard_upg",
@@ -2040,7 +2157,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2mageBlizzard"
+      "weapon": "wc2mageBlizzard",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2082,6 +2200,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6936",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -2127,11 +2246,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_dwarf_Rifle"
+      "weapon": "wc2_dwarf_Rifle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^MediumMissile",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6936",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
@@ -2177,7 +2302,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_dwarf_Rifle"
+      "weapon": "wc2_dwarf_Rifle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^MediumMissile",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -2219,6 +2349,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "6973",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -2297,11 +2428,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2arrowFire"
+      "weapon": "wc2arrowFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": false,
       "range": "6973",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
@@ -2380,7 +2520,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2arrowFire"
+      "weapon": "wc2arrowFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2424,6 +2572,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "6973",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -2502,11 +2651,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2arrowFire"
+      "weapon": "wc2arrowFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": false,
       "range": "6973",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
@@ -2585,7 +2743,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2arrowFire"
+      "weapon": "wc2arrowFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2628,6 +2794,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -2651,7 +2818,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2footmanslice"
+      "weapon": "wc2footmanslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2694,6 +2864,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
@@ -2718,11 +2889,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "healing",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "40",
       "requires": "FSD_cond_3 && paladinhealing_upg",
@@ -2735,11 +2910,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2priesthealing"
+      "weapon": "wc2priesthealing",
+      "weapon_types": []
      },
      {
       "armament_name": "exorcism",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
@@ -2752,7 +2929,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinexorcism"
+      "weapon": "wc2paladinexorcism",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2794,6 +2972,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
@@ -2818,11 +2997,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "healing",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
@@ -2835,11 +3018,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinhealing"
+      "weapon": "wc2paladinhealing",
+      "weapon_types": []
      },
      {
       "armament_name": "exorcism",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
@@ -2852,7 +3037,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinexorcism"
+      "weapon": "wc2paladinexorcism",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2894,6 +3080,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "7487",
       "reloaddelay": "35",
       "slot": "Armament",
@@ -3005,11 +3192,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2highArrowFire"
+      "weapon": "wc2highArrowFire",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": false,
       "range": "7487",
       "reloaddelay": "35",
       "slot": "Armament@GARRISONED",
@@ -3121,7 +3320,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2highArrowFire"
+      "weapon": "wc2highArrowFire",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3163,6 +3373,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
@@ -3187,11 +3398,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2knightslice"
+      "weapon": "wc2knightslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "holyvision",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "512000",
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
@@ -3204,11 +3419,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinholyvision"
+      "weapon": "wc2paladinholyvision",
+      "weapon_types": []
      },
      {
       "armament_name": "healing",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
@@ -3221,11 +3438,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinhealing"
+      "weapon": "wc2paladinhealing",
+      "weapon_types": []
      },
      {
       "armament_name": "exorcism",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
@@ -3238,7 +3457,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinexorcism"
+      "weapon": "wc2paladinexorcism",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3285,6 +3505,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !mageslow_upg) || (FSD_cond_3 && !magepolymorph_upg) || (FSD_cond_4 && !mageblizzard_upg)",
@@ -3309,11 +3530,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -3337,11 +3562,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFire"
+      "weapon": "wc2mageFire",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "fireball",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -3459,12 +3688,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFireballVisible"
+      "weapon": "wc2mageFireballVisible",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -3574,11 +3815,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2mageFireballExplosion"
+      "weapon": "wc2mageFireballExplosion",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "slow",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && mageslow_upg",
@@ -3591,22 +3844,27 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2mageSlow"
+      "weapon": "wc2mageSlow",
+      "weapon_types": []
      },
      {
       "armament_name": "polymorph",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && magepolymorph_upg",
       "slot": "Armament@POLYMORPH",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "wc2magePolymorph"
+      "weapon": "wc2magePolymorph",
+      "weapon_types": []
      },
      {
       "armament_name": "blizzard",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "FSD_cond_4 && mageblizzard_upg",
@@ -3619,7 +3877,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2mageBlizzard"
+      "weapon": "wc2mageBlizzard",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3661,6 +3920,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -3684,7 +3944,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2footmanslice"
+      "weapon": "wc2footmanslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3731,6 +3994,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
       "minrange": "2400",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "200",
       "slot": "Armament",
@@ -3797,12 +4061,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MortarTeamArtilleryShell"
+      "weapon": "MortarTeamArtilleryShell",
+      "weapon_types": [
+       "^MediumCannon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
       "minrange": "2400",
+      "pricing": false,
       "range": "12000",
       "reloaddelay": "200",
       "slot": "Armament@GARRISONED",
@@ -3869,7 +4140,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MortarTeamArtilleryShell"
+      "weapon": "MortarTeamArtilleryShell",
+      "weapon_types": [
+       "^MediumCannon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3912,6 +4189,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1533",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -3935,7 +4213,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2footmanslice2"
+      "weapon": "wc2footmanslice2",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4612,6 +4893,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
       "minrange": "2890",
+      "pricing": true,
       "range": "14450",
       "reloaddelay": "180",
       "slot": "Armament",
@@ -4662,7 +4944,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2ballistaFire"
+      "weapon": "wc2ballistaFire",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -4711,15 +4998,19 @@
      {
       "armament_name": "detonate",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "requires": "!cond_deployed",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "wc2demolitionsquadTargeting"
+      "weapon": "wc2demolitionsquadTargeting",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "requires": "cond_deployed",
@@ -4744,7 +5035,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2demolitionsquadMelee"
+      "weapon": "wc2demolitionsquadMelee",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4830,6 +5124,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
@@ -4854,11 +5149,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2knightslice"
+      "weapon": "wc2knightslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "holyvision",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "512000",
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
@@ -4871,11 +5170,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinholyvision"
+      "weapon": "wc2paladinholyvision",
+      "weapon_types": []
      },
      {
       "armament_name": "healing",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
@@ -4888,11 +5189,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinhealing"
+      "weapon": "wc2paladinhealing",
+      "weapon_types": []
      },
      {
       "armament_name": "exorcism",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
@@ -4905,7 +5208,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinexorcism"
+      "weapon": "wc2paladinexorcism",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4954,6 +5258,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -4977,7 +5282,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2peasantsmack"
+      "weapon": "wc2peasantsmack",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5025,6 +5333,7 @@
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2240",
+      "pricing": true,
       "range": "11200",
       "reloaddelay": "100",
       "slot": "Armament",
@@ -5226,7 +5535,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeEngineCannon"
+      "weapon": "SiegeEngineCannon",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^LightMissile",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -5274,6 +5599,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1420",
       "reloaddelay": "12",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !paladinhealing_upg) || (FSD_cond_4 && !paladinexorcism_upg)",
@@ -5298,11 +5624,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2knightslice"
+      "weapon": "wc2knightslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "holyvision",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "512000",
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
@@ -5315,11 +5645,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinholyvision"
+      "weapon": "wc2paladinholyvision",
+      "weapon_types": []
      },
      {
       "armament_name": "healing",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && paladinhealing_upg",
@@ -5332,11 +5664,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinhealing"
+      "weapon": "wc2paladinhealing",
+      "weapon_types": []
      },
      {
       "armament_name": "exorcism",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Humans/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && paladinexorcism_upg",
@@ -5349,7 +5683,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2paladinexorcism"
+      "weapon": "wc2paladinexorcism",
+      "weapon_types": []
      }
     ],
     "armor": {

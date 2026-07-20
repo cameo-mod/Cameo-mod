@@ -10,6 +10,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "80",
       "slot": "Armament@PRIMARY",
@@ -82,10 +83,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelFighterRailgun"
+      "weapon": "SteelFighterRailgun",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon",
+       "^TankDestroyerCannon",
+       "^SteelLightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -182,7 +191,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMP"
+      "weapon": "SteelMakoGunEMP",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -219,6 +236,7 @@
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
@@ -273,12 +291,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelScalpelRailgunAA"
+      "weapon": "SteelScalpelRailgunAA",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -418,7 +443,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelScalpelRailgunEMPAA"
+      "weapon": "SteelScalpelRailgunEMPAA",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      }
     ],
     "armor": {
@@ -453,6 +490,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
@@ -504,7 +542,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAG"
+      "weapon": "SteelMantaAG",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -539,6 +583,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
@@ -638,10 +683,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRail"
+      "weapon": "SteelQuantumTurretRail",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -736,7 +790,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRailEMP"
+      "weapon": "SteelQuantumTurretRailEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -771,6 +833,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
@@ -800,7 +863,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCargoshipCannons"
+      "weapon": "SteelCargoshipCannons",
+      "weapon_types": [
+       "^SteelSmallArms",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -842,6 +909,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "5",
       "requires": "!rank-elite",
@@ -894,12 +962,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCruiserCannons"
+      "weapon": "SteelCruiserCannons",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "5",
       "requires": "rank-elite",
@@ -949,11 +1024,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCruiserCannonsE"
+      "weapon": "SteelCruiserCannonsE",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_quantumweaponpower && !rank-elite",
@@ -989,13 +1071,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCruiserArtillery"
+      "weapon": "SteelCruiserArtillery",
+      "weapon_types": [
+       "^SteelMediumCannon",
+       "^RA2Grenade"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1600",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_quantumweaponpower && rank-elite",
@@ -1030,7 +1117,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCruiserArtilleryE"
+      "weapon": "SteelCruiserArtilleryE",
+      "weapon_types": [
+       "^SteelMediumCannon",
+       "^RA2Grenade"
+      ]
      }
     ],
     "armor": {
@@ -1074,6 +1165,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2500",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
@@ -1122,7 +1214,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInspectorIonCannon"
+      "weapon": "SteelInspectorIonCannon",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1169,6 +1265,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "!rank-elite",
@@ -1209,10 +1306,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelAirTurret"
+      "weapon": "SteelAirTurret",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "60",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -1268,10 +1370,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelAirTurretEMP"
+      "weapon": "SteelAirTurretEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
       "requires": "rank-elite",
@@ -1326,7 +1434,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelAirTurretE"
+      "weapon": "SteelAirTurretE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1373,6 +1486,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "1000",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "105",
       "requires": "!rank-elite",
@@ -1446,7 +1560,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelTwisterMissiles"
+      "weapon": "SteelTwisterMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^SteelMediumMissile"
+      ]
      },
      {
       "armament_name": "primary",
@@ -1454,6 +1575,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "1000",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "105",
       "requires": "rank-elite",
@@ -1523,7 +1645,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelTwisterMissilesE"
+      "weapon": "SteelTwisterMissilesE",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^FlakWeapon",
+       "^HeavyAAWeapon",
+       "^SteelMediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -1568,19 +1697,23 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
       "slot": "Armament@DroneTargeting",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GLStingerTargeting"
+      "weapon": "GLStingerTargeting",
+      "weapon_types": []
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
@@ -1638,13 +1771,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConsortiumMissileSystem"
+      "weapon": "ConsortiumMissileSystem",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^ArrowWeapon",
+       "^RA2FlakWeapon",
+       "^SteelMediumMissile"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "60",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -1699,7 +1839,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConsortiumMissileSystemEMP"
+      "weapon": "ConsortiumMissileSystemEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^ArrowWeapon",
+       "^RA2FlakWeapon",
+       "^SteelMediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -1738,15 +1884,19 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "25000",
       "reloaddelay": "750",
       "slot": "Armament@Dummy",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "bfg10kCannonDummy"
+      "weapon": "bfg10kCannonDummy",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "25000",
       "reloaddelay": "750",
       "slot": "Armament@Weapon",
@@ -1818,11 +1968,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "bfg10kCannon"
+      "weapon": "bfg10kCannon",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^MagicWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "superweapon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10238976",
       "reloaddelay": "750",
       "slot": "Armament@SuperDummy",
@@ -1830,11 +1988,13 @@
        "bfg10kCannonDummy"
       ],
       "warheads": [],
-      "weapon": "superbfg10kCannonDummy"
+      "weapon": "superbfg10kCannonDummy",
+      "weapon_types": []
      },
      {
       "armament_name": "superweapon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10238976",
       "reloaddelay": "750",
       "slot": "Armament@SuperWeapon",
@@ -1903,7 +2063,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "superbfg10kCannon"
+      "weapon": "superbfg10kCannon",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^MagicWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2197,17 +2363,21 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
       "slot": "Armament@DroneTargeting",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GLStingerTargeting"
+      "weapon": "GLStingerTargeting",
+      "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -2248,11 +2418,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelVulcan"
+      "weapon": "SteelVulcan",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelSmallArms",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -2292,7 +2468,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelVulcanResonance"
+      "weapon": "SteelVulcanResonance",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelSmallArms",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -2454,17 +2635,21 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "25",
       "requires": "steelconsortium_upgrade_scalpeldefenders",
       "slot": "Armament@DroneTargeting",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GLStingerTargeting"
+      "weapon": "GLStingerTargeting",
+      "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
@@ -2564,11 +2749,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRail"
+      "weapon": "SteelQuantumTurretRail",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "!steelconsortium_upgrade_quantumweaponpower",
@@ -2668,11 +2862,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRail"
+      "weapon": "SteelQuantumTurretRail",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -2767,11 +2970,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRailEMP"
+      "weapon": "SteelQuantumTurretRailEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "requires": "steelconsortium_upgrade_quantumweaponpower",
@@ -2866,7 +3078,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRailEMP"
+      "weapon": "SteelQuantumTurretRailEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -2944,6 +3164,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "25",
       "requires": "!rank-elite",
@@ -2985,12 +3206,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGun"
+      "weapon": "SteelCloneGun",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite",
@@ -3030,11 +3257,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunE"
+      "weapon": "SteelCloneGunE",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "25",
       "requires": "!rank-elite",
@@ -3076,13 +3309,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGun"
+      "weapon": "SteelCloneGun",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite",
@@ -3122,10 +3361,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunE"
+      "weapon": "SteelCloneGunE",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -3165,12 +3410,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunResonance"
+      "weapon": "SteelCloneGunResonance",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -3210,11 +3461,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunEResonance"
+      "weapon": "SteelCloneGunEResonance",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -3254,13 +3511,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunResonance"
+      "weapon": "SteelCloneGunResonance",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -3300,7 +3563,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelCloneGunEResonance"
+      "weapon": "SteelCloneGunEResonance",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelMediumMissile",
+       "^SteelSmallArms"
+      ]
      }
     ],
     "armor": {
@@ -3342,6 +3610,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -3350,16 +3620,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3401,6 +3678,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -3468,12 +3746,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGun"
+      "weapon": "SteelMakoGun",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -3538,11 +3823,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunE"
+      "weapon": "SteelMakoGunE",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -3610,13 +3902,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGun"
+      "weapon": "SteelMakoGun",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -3681,10 +3980,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunE"
+      "weapon": "SteelMakoGunE",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -3781,12 +4087,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMP"
+      "weapon": "SteelMakoGunEMP",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -3881,11 +4196,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMPE"
+      "weapon": "SteelMakoGunEMPE",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -3982,13 +4306,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMP"
+      "weapon": "SteelMakoGunEMP",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -4083,7 +4416,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMPE"
+      "weapon": "SteelMakoGunEMPE",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -4128,6 +4469,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -4185,12 +4527,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgun"
+      "weapon": "SteelInfRailgun",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "!deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -4245,12 +4594,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunE"
+      "weapon": "SteelInfRailgunE",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "!deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -4396,12 +4752,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMP"
+      "weapon": "SteelInfRailgunEMP",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "!deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -4541,11 +4910,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMPE"
+      "weapon": "SteelInfRailgunEMPE",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "targeting",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -4554,13 +4937,17 @@
        "^aadeploytargeting"
       ],
       "warheads": [],
-      "weapon": "aadeploytargeting.8c0"
+      "weapon": "aadeploytargeting.8c0",
+      "weapon_types": [
+       "^aadeploytargeting"
+      ]
      },
      {
       "armament_name": "deployed",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "deployed && !rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -4618,13 +5005,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgun"
+      "weapon": "SteelInfRailgun",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "deployed",
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "deployed && rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -4679,13 +5073,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunE"
+      "weapon": "SteelInfRailgunE",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "deployed",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "deployed && !rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -4831,13 +5232,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMP"
+      "weapon": "SteelInfRailgunEMP",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "deployed",
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "deployed && rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -4977,13 +5391,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMPE"
+      "weapon": "SteelInfRailgunEMPE",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -5041,13 +5468,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgun"
+      "weapon": "SteelInfRailgun",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -5102,13 +5536,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunE"
+      "weapon": "SteelInfRailgunE",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -5254,13 +5695,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMP"
+      "weapon": "SteelInfRailgunEMP",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -5400,7 +5854,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMPE"
+      "weapon": "SteelInfRailgunEMPE",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      }
     ],
     "armor": {
@@ -5445,6 +5911,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
       "requires": "!rank-elite",
@@ -5501,12 +5968,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistols"
+      "weapon": "SteelRunnerPistols",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
       "requires": "rank-elite",
@@ -5561,13 +6034,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsE"
+      "weapon": "SteelRunnerPistolsE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
       "requires": "!rank-elite",
@@ -5624,13 +6103,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistols"
+      "weapon": "SteelRunnerPistols",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
       "requires": "rank-elite",
@@ -5685,12 +6170,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsE"
+      "weapon": "SteelRunnerPistolsE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6200",
       "reloaddelay": "8",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -5745,12 +6236,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsResonance"
+      "weapon": "SteelRunnerPistolsResonance",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7200",
       "reloaddelay": "8",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -5805,13 +6302,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsEResonance"
+      "weapon": "SteelRunnerPistolsEResonance",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6200",
       "reloaddelay": "8",
       "requires": "!rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -5866,13 +6369,19 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsResonance"
+      "weapon": "SteelRunnerPistolsResonance",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7200",
       "reloaddelay": "8",
       "requires": "rank-elite && steelconsortium_upgrade_resonanceammo",
@@ -5927,7 +6436,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelRunnerPistolsEResonance"
+      "weapon": "SteelRunnerPistolsEResonance",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6459,6 +6973,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "slot": "Armament@AG1",
@@ -6552,10 +7067,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRailEMP"
+      "weapon": "SteelQuantumTurretRailEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8888",
       "reloaddelay": "38",
       "slot": "Armament@AG2",
@@ -6649,7 +7173,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelQuantumTurretRailEMP"
+      "weapon": "SteelQuantumTurretRailEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon",
+       "^SteelHeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -6697,6 +7229,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -6737,7 +7270,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelVulcan"
+      "weapon": "SteelVulcan",
+      "weapon_types": [
+       "^SteelHeavyCannon",
+       "^SteelSmallArms",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -6786,6 +7324,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "25",
       "slot": "Armament@AG",
@@ -6815,7 +7354,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelHoverMissile"
+      "weapon": "SteelHoverMissile",
+      "weapon_types": [
+       "^ArrowWeapon",
+       "^SteelLightMissile"
+      ]
      }
     ],
     "armor": {
@@ -6863,6 +7406,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
       "slot": "Armament",
@@ -6916,7 +7460,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelQuantumCannon_elite"
+      "weapon": "SteelQuantumCannon_elite",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6965,6 +7514,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
       "slot": "Armament@AG1",
@@ -6994,11 +7544,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannons"
+      "weapon": "SteelMantaHunterCannons",
+      "weapon_types": [
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
       "slot": "Armament@AG2",
@@ -7028,11 +7583,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannons"
+      "weapon": "SteelMantaHunterCannons",
+      "weapon_types": [
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "slot": "Armament@AA1",
@@ -7072,11 +7632,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsAA"
+      "weapon": "SteelMantaHunterCannonsAA",
+      "weapon_types": [
+       "^SteelMediumMissile",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "slot": "Armament@AA2",
@@ -7116,11 +7682,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsAA"
+      "weapon": "SteelMantaHunterCannonsAA",
+      "weapon_types": [
+       "^SteelMediumMissile",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -7150,11 +7722,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsResonance"
+      "weapon": "SteelMantaHunterCannonsResonance",
+      "weapon_types": [
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "8",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -7184,11 +7761,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsResonance"
+      "weapon": "SteelMantaHunterCannonsResonance",
+      "weapon_types": [
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -7228,11 +7810,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsAAResonance"
+      "weapon": "SteelMantaHunterCannonsAAResonance",
+      "weapon_types": [
+       "^SteelMediumMissile",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -7272,7 +7860,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaHunterCannonsAAResonance"
+      "weapon": "SteelMantaHunterCannonsAAResonance",
+      "weapon_types": [
+       "^SteelMediumMissile",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -7411,6 +8004,7 @@
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "4000",
+      "pricing": true,
       "range": "20000",
       "reloaddelay": "50",
       "requires": "!rank-elite",
@@ -7478,13 +8072,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelDaggerCannon"
+      "weapon": "SteelDaggerCannon",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "5000",
+      "pricing": true,
       "range": "25000",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -7549,7 +8150,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelDaggerCannonE"
+      "weapon": "SteelDaggerCannonE",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade",
+       "^SteelHeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -7599,6 +8206,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "48",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -7656,12 +8264,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgun"
+      "weapon": "SteelInfRailgun",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "48",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -7716,12 +8331,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunE"
+      "weapon": "SteelInfRailgunE",
+      "weapon_types": [
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -7867,12 +8489,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMP"
+      "weapon": "SteelInfRailgunEMP",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "50",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -8012,7 +8647,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelInfRailgunEMPE"
+      "weapon": "SteelInfRailgunEMPE",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^MediumCannon",
+       "^TeslaWeapon",
+       "^RA2RailgunWeapon",
+       "^RA2FlakWeapon",
+       "^SteelChaingun",
+       "^SteelLightMissile"
+      ]
      }
     ],
     "armor": {
@@ -8060,6 +8707,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5150",
       "reloaddelay": "55",
       "requires": "undeployed",
@@ -8079,11 +8727,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HammerheadTankCannon"
+      "weapon": "HammerheadTankCannon",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "2220",
+      "pricing": true,
       "range": "11111",
       "reloaddelay": "111",
       "requires": "deployed",
@@ -8130,11 +8782,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HammerheadArtillery"
+      "weapon": "HammerheadArtillery",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^HeavyBomb",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "armament_name": "targeting",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "50",
       "requires": "botmicro",
@@ -8143,7 +8802,10 @@
        "^deploytargeting"
       ],
       "warheads": [],
-      "weapon": "deploytargeting.10c0"
+      "weapon": "deploytargeting.10c0",
+      "weapon_types": [
+       "^deploytargeting"
+      ]
      }
     ],
     "armor": {
@@ -8194,6 +8856,7 @@
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1450",
+      "pricing": true,
       "range": "7250",
       "reloaddelay": "50",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -8245,7 +8908,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelKatyCannons"
+      "weapon": "SteelKatyCannons",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8253,6 +8921,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1650",
+      "pricing": true,
       "range": "8250",
       "reloaddelay": "50",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -8302,7 +8971,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelKatyCannonsE"
+      "weapon": "SteelKatyCannonsE",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8310,6 +8984,7 @@
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1450",
+      "pricing": true,
       "range": "7250",
       "reloaddelay": "50",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -8386,7 +9061,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelKatyCannonsEMP"
+      "weapon": "SteelKatyCannonsEMP",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^TeslaWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^SteelHeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
@@ -8394,6 +9076,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
       "minrange": "1650",
+      "pricing": true,
       "range": "8250",
       "reloaddelay": "50",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -8468,7 +9151,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelKatyCannonsEMPE"
+      "weapon": "SteelKatyCannonsEMPE",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^TeslaWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^SteelHeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -8516,6 +9206,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -8583,12 +9274,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGun"
+      "weapon": "SteelMakoGun",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -8653,10 +9351,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunE"
+      "weapon": "SteelMakoGunE",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6050",
       "reloaddelay": "25",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -8753,12 +9458,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMP"
+      "weapon": "SteelMakoGunEMP",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7050",
       "reloaddelay": "25",
       "requires": "rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -8853,7 +9567,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMakoGunEMPE"
+      "weapon": "SteelMakoGunEMPE",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^TeslaWeapon",
+       "^MediumFlameWeapon",
+       "^RA2Grenade",
+       "^RA2RailgunWeapon",
+       "^SteelMediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -8900,6 +9622,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@AG1",
@@ -8951,10 +9674,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAG"
+      "weapon": "SteelMantaAG",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "slot": "Armament@AG2",
@@ -9006,10 +9736,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAG"
+      "weapon": "SteelMantaAG",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "slot": "Armament@AA1",
@@ -9058,10 +9795,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAA"
+      "weapon": "SteelMantaAA",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "slot": "Armament@AA2",
@@ -9110,10 +9854,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAA"
+      "weapon": "SteelMantaAA",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -9163,10 +9914,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAGResonance"
+      "weapon": "SteelMantaAGResonance",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -9216,10 +9974,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAGResonance"
+      "weapon": "SteelMantaAGResonance",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -9269,10 +10034,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAAResonance"
+      "weapon": "SteelMantaAAResonance",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "20",
       "requires": "steelconsortium_upgrade_resonanceammo",
@@ -9322,7 +10094,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMantaAAResonance"
+      "weapon": "SteelMantaAAResonance",
+      "weapon_types": [
+       "^SteelLightMissile",
+       "^SteelSmallArms",
+       "^RA2FlakWeapon",
+       "^SteelChaingun"
+      ]
      }
     ],
     "armor": {
@@ -9369,6 +10147,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1600",
       "reloaddelay": "24",
       "requires": "!rank-elite",
@@ -9425,10 +10204,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMegaSword"
+      "weapon": "SteelMegaSword",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^LaserWeapon",
+       "^SwordWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2400",
       "reloaddelay": "16",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -9485,10 +10270,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMegaSwordEMP"
+      "weapon": "SteelMegaSwordEMP",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^LaserWeapon",
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2400",
       "reloaddelay": "16",
       "requires": "rank-elite",
@@ -9559,7 +10350,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelMegaSwordE"
+      "weapon": "SteelMegaSwordE",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^HeavyChemicalWeapon",
+       "^LaserWeapon",
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9608,6 +10405,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6333",
       "reloaddelay": "41",
       "slot": "Armament@1",
@@ -9626,7 +10424,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SteelFortressWeapons"
+      "weapon": "SteelFortressWeapons",
+      "weapon_types": [
+       "^SteelMediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -9674,6 +10475,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "65",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -9714,11 +10516,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelQuantumCannon"
+      "weapon": "SteelQuantumCannon",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "65",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -9774,11 +10581,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelQuantumCannonEMP"
+      "weapon": "SteelQuantumCannonEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "65",
       "requires": "rank-elite",
@@ -9833,7 +10646,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelQuantumCannon_elite"
+      "weapon": "SteelQuantumCannon_elite",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9880,6 +10698,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "103",
       "requires": "!rank-elite && !steelconsortium_upgrade_quantumweaponpower",
@@ -9920,10 +10739,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelStalkerRailgun"
+      "weapon": "SteelStalkerRailgun",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "103",
       "requires": "!rank-elite && steelconsortium_upgrade_quantumweaponpower",
@@ -9979,10 +10803,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelStalkerRailgunEMP"
+      "weapon": "SteelStalkerRailgunEMP",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "103",
       "requires": "rank-elite",
@@ -10037,7 +10867,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "SteelStalkerRailgunE"
+      "weapon": "SteelStalkerRailgunE",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^LaserWeapon",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -10089,12 +10924,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "25",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GLStingerTargeting"
+      "weapon": "GLStingerTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -10141,6 +10979,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
       "slot": "Armament@1",
@@ -10203,7 +11042,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WhiteRabbitGatling"
+      "weapon": "WhiteRabbitGatling",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {

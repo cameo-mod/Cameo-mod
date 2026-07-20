@@ -76,6 +76,32 @@ def stat(resolved, local, trait: str, field: str):
     return {"v": v, "src": src}
 
 
+def weapon_types(rs, wname: str, _seen=None) -> list[str]:
+    """Fully-resolved list of ^-prefixed class templates in the weapon's
+    inheritance chain (deduped, document order) — so the workbook shows
+    what a weapon actually DOES (^SmallArms, ^Chaingun, ^LaserWeapon,
+    ^Grenade, ^HeavyMissile…), following parent weapons too."""
+    _seen = _seen if _seen is not None else set()
+    if wname.lower() in _seen:
+        return []
+    _seen.add(wname.lower())
+    node = rs.weapon(wname)
+    if node is None:
+        return []
+    out: list[str] = []
+    for c in node.children:
+        if c.key == "Inherits" or c.key.startswith("Inherits@"):
+            parent = c.value
+            if parent.startswith("^"):
+                if parent not in out:
+                    out.append(parent)
+            else:  # a parent weapon — recurse to pull its ^-templates
+                for t in weapon_types(rs, parent, _seen):
+                    if t not in out:
+                        out.append(t)
+    return out
+
+
 def weapon_entry(rs, wname: str) -> dict | None:
     resolved = rs.resolve_weapon(wname)
     if resolved is None:
@@ -93,9 +119,12 @@ def weapon_entry(rs, wname: str) -> dict | None:
             if d is not None:
                 warheads.append({"tag": c.key.split("@", 1)[1], "type": c.value, "damage": d})
     out["warheads"] = warheads
+    if not warheads:
+        out["extraction_note"] = "no_damage_warheads"
     if local is not None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
+    out["weapon_types"] = weapon_types(rs, wname)
     return out
 
 
@@ -152,6 +181,8 @@ def extract_actor(rs, key: str) -> dict | None:
                 entry["requires"] = req
             if c.get("Name"):
                 entry["armament_name"] = c.get("Name")
+            arm_name = c.get("Name") or ""
+            entry["pricing"] = not ("garrison" in arm_name.lower())
             arms.append(entry)
     if arms:
         u["armaments"] = arms

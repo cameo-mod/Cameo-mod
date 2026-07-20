@@ -401,56 +401,62 @@ schwarzermond_lunarsoldier:
 	Mobile:
 		Speed: 60
 	Health:
-		HP: 12000
+		HP: 24000
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 24
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@schwarzermond_lunarsoldier:
+		Modifier: 83
 	Armament@PRIMARY:
-		Weapon: NaxiRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE:
-		Weapon: NaxiRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_UP:
-		Weapon: Lunar_YellowRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_UP:
-		Weapon: Lunar_YellowRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@PRIMARY_AMP:
-		Weapon: Lunar_AmplifiedRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@ELITE_AMP:
-		Weapon: Lunar_AmplifiedRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxiRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle
 		RequiresCondition: !rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_elite
 		RequiresCondition: rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_UP:
 		Name: garrisoned
-		Weapon: Lunar_YellowRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
-		Weapon: Lunar_YellowRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_yellow_elite
 		RequiresCondition: rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONED_AMP:
 		Name: garrisoned
-		Weapon: Lunar_AmplifiedRifleLaser
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified
 		RequiresCondition: !rank-elite && schwarzermond_upgrade_amplifiedlens
 	Armament@GARRISONEDELITE_AMP:
 		Name: garrisoned
-		Weapon: Lunar_AmplifiedRifleLaserE
+		Weapon: schwarzermond_lunarsoldier_rifle_amplified_elite
 		RequiresCondition: rank-elite && schwarzermond_upgrade_amplifiedlens
 	AttackFrontal:
 		FacingTolerance: 0

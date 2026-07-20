@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4783",
       "reloaddelay": "7",
       "slot": "Armament@PRIMARY",
@@ -37,10 +38,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HueyGun"
+      "weapon": "HueyGun",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4783",
       "reloaddelay": "14",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -60,11 +66,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HueyMissiles"
+      "weapon": "HueyMissiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "minrange": "553",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -127,12 +137,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HueyCryoMissiles"
+      "weapon": "HueyCryoMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "minrange": "553",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -195,12 +212,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HueyTwinMissiles"
+      "weapon": "HueyTwinMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "minrange": "553",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -263,7 +287,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HueyTwinMissiles"
+      "weapon": "HueyTwinMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -307,6 +337,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6271",
       "reloaddelay": "50",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
@@ -342,12 +373,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ViperMissiles"
+      "weapon": "ViperMissiles",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6271",
       "reloaddelay": "50",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -383,12 +419,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ViperMissilesCryo"
+      "weapon": "ViperMissilesCryo",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6271",
       "reloaddelay": "50",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -423,12 +465,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ViperMissilesTwin"
+      "weapon": "ViperMissilesTwin",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -490,7 +537,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ViperMissilesFire"
+      "weapon": "ViperMissilesFire",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -570,6 +623,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
@@ -593,7 +647,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMDroneExplosion"
+      "weapon": "TKMDroneExplosion",
+      "weapon_types": [
+       "^ShrapnelWeapon"
+      ]
      }
     ],
     "armor": {
@@ -972,6 +1029,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7496",
       "reloaddelay": "41",
       "requires": "!td_gdi_upgrade_armorpiercingbullets",
@@ -1002,12 +1060,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmbunkmg"
+      "weapon": "tkmbunkmg",
+      "weapon_types": [
+       "^RA2Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "6720",
       "reloaddelay": "22",
       "requires": "td_gdi_upgrade_armorpiercingbullets",
@@ -1027,7 +1090,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HighVAP"
+      "weapon": "HighVAP",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1066,6 +1132,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "11604",
       "reloaddelay": "5",
       "slot": "Armament@AA",
@@ -1095,7 +1162,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMAATurretCannon"
+      "weapon": "TKMAATurretCannon",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1134,6 +1205,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8683",
       "reloaddelay": "28",
       "slot": "Armament",
@@ -1163,7 +1235,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmturretcannon"
+      "weapon": "tkmturretcannon",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -1202,6 +1278,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10929",
       "reloaddelay": "32",
       "slot": "Armament",
@@ -1231,7 +1308,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FlakbusAA"
+      "weapon": "FlakbusAA",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1262,6 +1343,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "11071",
       "reloaddelay": "36",
       "slot": "Armament",
@@ -1295,7 +1377,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtrenchdepcannon"
+      "weapon": "tkmtrenchdepcannon",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -1328,6 +1414,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1336,19 +1424,27 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "requires": "tkm_upgrade_titanarsenalupgrade",
@@ -1373,11 +1469,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Heal"
+      "weapon": "Heal",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
       "requires": "tkm_upgrade_titanarsenalupgrade",
@@ -1402,12 +1502,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Heal"
+      "weapon": "Heal",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "requires": "tkm_upgrade_titanarsenalupgrade",
@@ -1432,13 +1536,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Repair"
+      "weapon": "Repair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
       "requires": "tkm_upgrade_titanarsenalupgrade",
@@ -1463,7 +1571,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Repair"
+      "weapon": "Repair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1505,6 +1616,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4490",
       "reloaddelay": "8",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1524,12 +1636,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkm_juggernaut"
+      "weapon": "tkm_juggernaut",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4792",
       "reloaddelay": "9",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1565,11 +1681,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmjuggap"
+      "weapon": "tkmjuggap",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4490",
       "reloaddelay": "8",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1589,13 +1710,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkm_juggernaut"
+      "weapon": "tkm_juggernaut",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4792",
       "reloaddelay": "9",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1631,7 +1756,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmjuggap"
+      "weapon": "tkmjuggap",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -1677,6 +1806,7 @@
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5385",
       "reloaddelay": "16",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1696,12 +1826,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmm16"
+      "weapon": "tkmm16",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5385",
       "reloaddelay": "16",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1721,13 +1855,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmm16ap"
+      "weapon": "tkmm16ap",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5385",
       "reloaddelay": "16",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1747,13 +1885,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmm16"
+      "weapon": "tkmm16",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5385",
       "reloaddelay": "16",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -1773,7 +1915,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmm16ap"
+      "weapon": "tkmm16ap",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1816,7 +1961,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5753",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "75",
       "requires": "!tkm_upgrade_semiautoriflesupgrade",
       "slot": "Armament@PRIMARY",
@@ -1825,7 +1971,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "6000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -1835,11 +1981,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmrifle"
+      "weapon": "tkm_rifleman_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "6c512",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_semiautoriflesupgrade",
       "slot": "Armament@PRIMARYUPGRADE",
@@ -1858,12 +2008,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmriflemansemiautorifle"
+      "weapon": "tkm_rifleman_semiautorifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5753",
+      "pricing": false,
+      "range": "5500",
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1871,7 +2025,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "6000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -1881,7 +2035,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmrifle"
+      "weapon": "tkm_rifleman_rifle",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -1900,7 +2057,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
-     "v": "16000"
+     "v": "32000"
     },
     "name": "Rifleman",
     "prerequisites": [
@@ -1925,6 +2082,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -1944,10 +2102,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmrockets"
+      "weapon": "tkmrockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -1967,11 +2129,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmcryorockets"
+      "weapon": "tkmcryorockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -1991,10 +2157,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtwinrockets"
+      "weapon": "tkmtwinrockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -2030,11 +2200,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmfirerockets"
+      "weapon": "tkmfirerockets",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -2054,11 +2229,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -2078,12 +2257,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmcryorockets"
+      "weapon": "tkmcryorockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -2103,11 +2286,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtwinrockets"
+      "weapon": "tkmtwinrockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -2143,7 +2330,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmfirerockets"
+      "weapon": "tkmfirerockets",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -2185,6 +2376,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10021",
       "reloaddelay": "55",
       "slot": "Armament@PRIMARY",
@@ -2203,11 +2395,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmawp"
+      "weapon": "tkmawp",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "10021",
       "reloaddelay": "55",
       "slot": "Armament@GARRISONED",
@@ -2226,7 +2422,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmawp"
+      "weapon": "tkmawp",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2272,6 +2471,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5750",
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
@@ -2290,13 +2490,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmsmg"
+      "weapon": "tkmsmg",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5750",
       "reloaddelay": "10",
       "slot": "Armament@GARRISONED",
@@ -2315,11 +2519,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmsmg"
+      "weapon": "tkmsmg",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@shipc4",
@@ -2327,7 +2536,8 @@
        "TanyaAttach"
       ],
       "warheads": [],
-      "weapon": "SEALAttach"
+      "weapon": "SEALAttach",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2373,6 +2583,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3204",
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY",
@@ -2396,13 +2607,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ThermoF"
+      "weapon": "ThermoF",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "3204",
       "reloaddelay": "32",
       "slot": "Armament@GARRISONED",
@@ -2426,7 +2641,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ThermoF"
+      "weapon": "ThermoF",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2472,7 +2690,8 @@
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5594",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "31",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2490,14 +2709,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmak"
+      "weapon": "tkm_trooper_ak",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5594",
+      "pricing": false,
+      "range": "5500",
       "reloaddelay": "31",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2515,11 +2738,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmak"
+      "weapon": "tkm_trooper_ak",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5621",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "80",
       "requires": "tkm_upgrade_gp25upgrade",
       "slot": "Armament@gp25",
@@ -2559,12 +2786,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmgp25"
+      "weapon": "tkm_trooper_gp25",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
-      "range": "5621",
+      "pricing": false,
+      "range": "5500",
       "reloaddelay": "80",
       "requires": "tkm_upgrade_gp25upgrade",
       "slot": "Armament@GARRISONEDM203",
@@ -2604,7 +2836,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmgp25"
+      "weapon": "tkm_trooper_gp25",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2623,7 +2859,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
-     "v": "16000"
+     "v": "32000"
     },
     "name": "Trooper",
     "prerequisites": [
@@ -2647,6 +2883,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7879",
       "reloaddelay": "100",
       "slot": "Armament@lockdown",
@@ -2721,10 +2958,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VonSniperLockdown"
+      "weapon": "VonSniperLockdown",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7879",
       "reloaddelay": "25",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -2788,10 +3034,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VonSniper"
+      "weapon": "VonSniper",
+      "weapon_types": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7879",
       "reloaddelay": "50",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -2851,11 +3105,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VonSniperAP"
+      "weapon": "VonSniperAP",
+      "weapon_types": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7879",
       "reloaddelay": "25",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -2919,11 +3181,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VonSniper"
+      "weapon": "VonSniper",
+      "weapon_types": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7879",
       "reloaddelay": "50",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -2983,7 +3253,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VonSniperAP"
+      "weapon": "VonSniperAP",
+      "weapon_types": [
+       "^MediumMissile",
+       "^HeavyCannon",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3030,6 +3307,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12402",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
@@ -3048,11 +3326,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VanSniper"
+      "weapon": "VanSniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": false,
       "range": "12402",
       "reloaddelay": "30",
       "slot": "Armament@GARRISONED",
@@ -3071,7 +3353,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VanSniper"
+      "weapon": "VanSniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3120,6 +3405,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
@@ -3143,11 +3429,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Shovel"
+      "weapon": "RA2Shovel",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
       "slot": "Armament@GARRISONED",
@@ -3171,7 +3461,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Shovel"
+      "weapon": "RA2Shovel",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3806,6 +4099,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5672",
       "reloaddelay": "46",
       "slot": "Armament@cannon",
@@ -3824,7 +4118,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmrh120gun"
+      "weapon": "tkmrh120gun",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -3872,6 +4169,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6379",
       "reloaddelay": "30",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -3891,10 +4189,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "as42rockets"
+      "weapon": "as42rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -3914,11 +4216,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmcryorockets"
+      "weapon": "tkmcryorockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -3938,10 +4244,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtwinrockets"
+      "weapon": "tkmtwinrockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6214",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -3977,7 +4287,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmfirerockets"
+      "weapon": "tkmfirerockets",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -4023,6 +4337,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4831",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -4046,7 +4361,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMMedicHeal"
+      "weapon": "TKMMedicHeal",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4095,6 +4413,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7238",
       "reloaddelay": "83",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !uptitanarsenalupgrade",
@@ -4130,11 +4449,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BigShieeTusk"
+      "weapon": "BigShieeTusk",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -4170,11 +4494,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskCryo"
+      "weapon": "SandmarineTuskCryo",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -4210,11 +4540,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskCryo"
+      "weapon": "SandmarineTuskCryo",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "burst": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -4295,11 +4631,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskTwin"
+      "weapon": "SandmarineTuskTwin",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -4380,11 +4722,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskTwin"
+      "weapon": "SandmarineTuskTwin",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -4446,11 +4794,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskFire"
+      "weapon": "SandmarineTuskFire",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -4512,10 +4867,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskFire"
+      "weapon": "SandmarineTuskFire",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7238",
       "reloaddelay": "86",
       "slot": "Armament@Mortar",
@@ -4550,7 +4912,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "bigshieemortar"
+      "weapon": "bigshieemortar",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4603,6 +4969,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "23589",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -4614,7 +4981,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "DronePodTruckLaser"
+      "weapon": "DronePodTruckLaser",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4704,6 +5072,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4831",
       "reloaddelay": "5",
       "slot": "Armament@Heal",
@@ -4727,7 +5096,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMMedicHeal"
+      "weapon": "TKMMedicHeal",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4818,6 +5190,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5253",
       "reloaddelay": "10",
       "slot": "Armament@AG",
@@ -4847,10 +5220,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMQuadCannonAG"
+      "weapon": "TKMQuadCannonAG",
+      "weapon_types": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7880",
       "reloaddelay": "10",
       "slot": "Armament@AA",
@@ -4879,7 +5257,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMQuadCannonAA"
+      "weapon": "TKMQuadCannonAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4927,12 +5309,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "20",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "TKMLockOn"
+      "weapon": "TKMLockOn",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4982,6 +5367,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
       "slot": "Armament@repair",
@@ -5005,7 +5391,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2IFVRepair"
+      "weapon": "RA2IFVRepair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5053,6 +5442,7 @@
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -5088,11 +5478,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTusk"
+      "weapon": "SandmarineTusk",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -5128,11 +5523,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskCryo"
+      "weapon": "SandmarineTuskCryo",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "129",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -5168,11 +5569,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskCryo"
+      "weapon": "SandmarineTuskCryo",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "burst": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -5253,11 +5660,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskTwin"
+      "weapon": "SandmarineTuskTwin",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -5338,11 +5751,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskTwin"
+      "weapon": "SandmarineTuskTwin",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -5404,11 +5823,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskFire"
+      "weapon": "SandmarineTuskFire",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "burst": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -5470,10 +5896,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SandmarineTuskFire"
+      "weapon": "SandmarineTuskFire",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6464",
       "reloaddelay": "135",
       "slot": "Armament@Mortar",
@@ -5508,7 +5941,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "sandmarinemortar"
+      "weapon": "sandmarinemortar",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5561,6 +5998,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7880",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -5579,10 +6017,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmstrykermg"
+      "weapon": "tkmstrykermg",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7880",
       "reloaddelay": "60",
       "requires": "!tkm_upgrade_incendiaryrocketsupgrade",
@@ -5602,10 +6044,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmstrykerrockets"
+      "weapon": "tkmstrykerrockets",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7880",
       "reloaddelay": "60",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -5641,7 +6087,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmstrykerfirerockets"
+      "weapon": "tkmstrykerfirerockets",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5689,6 +6139,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "22000",
       "reloaddelay": "80",
       "slot": "Armament",
@@ -5723,7 +6174,11 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "t30shell"
+      "weapon": "t30shell",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5777,6 +6232,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "25",
       "requires": "tkm_upgrade_pointdefensesystem",
@@ -5791,10 +6247,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "TKMPDLaser"
+      "weapon": "TKMPDLaser",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6196",
       "reloaddelay": "42",
       "slot": "Armament",
@@ -5813,10 +6271,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkm2a46gun"
+      "weapon": "tkm2a46gun",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6195",
       "reloaddelay": "10",
       "slot": "Armament@machinegun",
@@ -5835,7 +6297,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmkord"
+      "weapon": "tkmkord",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -5883,6 +6348,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4153",
       "reloaddelay": "6",
       "requires": "!tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -5902,12 +6368,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtechmg"
+      "weapon": "tkmtechmg",
+      "weapon_types": [
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4792",
       "reloaddelay": "9",
       "requires": "tkm_upgrade_titanarmorpiercingbulletsupgrade",
@@ -5942,7 +6412,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtechnicalmgap"
+      "weapon": "tkmtechnicalmgap",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -5988,6 +6462,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5316",
       "reloaddelay": "42",
       "slot": "Armament@cannon",
@@ -6006,11 +6481,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmltgun"
+      "weapon": "tkmltgun",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5243",
       "reloaddelay": "64",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -6030,7 +6509,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtwinrocketstechnicaltank"
+      "weapon": "tkmtwinrocketstechnicaltank",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -6123,6 +6605,7 @@
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12437",
       "reloaddelay": "157",
       "requires": "!tkm_upgrade_cryorocketsupgrade && !tkm_upgrade_twinrocketsupgrade && !tkm_upgrade_incendiaryrocketsupgrade",
@@ -6147,12 +6630,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmkatyushalalauncherrockets"
+      "weapon": "tkmkatyushalalauncherrockets",
+      "weapon_types": [
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "14000",
       "reloaddelay": "157",
       "requires": "tkm_upgrade_cryorocketsupgrade",
@@ -6178,12 +6665,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmkatyushalalauncherrocketscryo"
+      "weapon": "tkmkatyushalalauncherrocketscryo",
+      "weapon_types": [
+       "^CryoMissileProjectile",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "16",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12437",
       "reloaddelay": "157",
       "requires": "tkm_upgrade_twinrocketsupgrade",
@@ -6208,12 +6700,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmkatyushalalauncherrocketstwin"
+      "weapon": "tkmkatyushalalauncherrocketstwin",
+      "weapon_types": [
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "14000",
       "reloaddelay": "157",
       "requires": "tkm_upgrade_incendiaryrocketsupgrade",
@@ -6265,7 +6761,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmkatyushalalauncherrocketsfire"
+      "weapon": "tkmkatyushalalauncherrocketsfire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightMissile",
+       "^ShrapnelWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6312,6 +6813,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9237",
       "reloaddelay": "75",
       "slot": "Armament",
@@ -6346,7 +6848,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "tkmtrenchcannon"
+      "weapon": "tkmtrenchcannon",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -6445,6 +6951,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5284",
       "reloaddelay": "8",
       "slot": "Armament@AG",
@@ -6474,10 +6981,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMZazaCannonAG"
+      "weapon": "TKMZazaCannonAG",
+      "weapon_types": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7926",
       "reloaddelay": "8",
       "slot": "Armament@AA",
@@ -6506,7 +7018,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TKMZazaCannonAA"
+      "weapon": "TKMZazaCannonAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {

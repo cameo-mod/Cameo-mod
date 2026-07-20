@@ -9,6 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4280",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -57,18 +58,27 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArbiterCannon"
+      "weapon": "ArbiterCannon",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "856",
+      "pricing": true,
       "range": "4280",
       "reloaddelay": "250",
       "slot": "Armament@2",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "ArbiterStasis"
+      "weapon": "ArbiterStasis",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -116,12 +126,15 @@
       "burst": "5",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "InterceptorLauncher"
+      "weapon": "InterceptorLauncher",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -165,6 +178,7 @@
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "5500",
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
@@ -188,11 +202,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorsairEMP"
+      "weapon": "CorsairEMP",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY1",
@@ -249,11 +267,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorsairFlash"
+      "weapon": "CorsairFlash",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
       "slot": "Armament@SECONDARY2",
@@ -310,7 +335,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorsairFlash"
+      "weapon": "CorsairFlash",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -352,6 +383,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
       "slot": "Armament@PRIMARY",
@@ -479,10 +511,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "EpigraphMG"
+      "weapon": "EpigraphMG",
+      "weapon_types": [
+       "^Grenade",
+       "^ArrowWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^MediumChemicalWeapon",
+       "^HeavyAAWeapon",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
       "slot": "Armament@SECONDARY",
@@ -610,7 +655,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "EpigraphMG"
+      "weapon": "EpigraphMG",
+      "weapon_types": [
+       "^Grenade",
+       "^ArrowWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^MediumChemicalWeapon",
+       "^HeavyAAWeapon",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -653,6 +710,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "80",
       "slot": "Armament",
@@ -765,7 +823,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GladiusCannon"
+      "weapon": "GladiusCannon",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -845,6 +913,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY1",
@@ -901,11 +970,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutMG"
+      "weapon": "ScoutMG",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
       "slot": "Armament@PRIMARY2",
@@ -962,11 +1038,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutMG"
+      "weapon": "ScoutMG",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
       "slot": "Armament@SECONDARY1",
@@ -1029,11 +1112,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutRockets"
+      "weapon": "ScoutRockets",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
       "slot": "Armament@SECONDARY2",
@@ -1096,7 +1187,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScoutRockets"
+      "weapon": "ScoutRockets",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -1175,6 +1273,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8475",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -1258,7 +1357,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "StarshipSovereignBeam"
+      "weapon": "StarshipSovereignBeam",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^Chaingun",
+       "^FlakWeapon",
+       "^TeslaWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1309,6 +1416,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
       "slot": "Armament",
@@ -1392,7 +1500,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "VoidRayBeam"
+      "weapon": "VoidRayBeam",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^Chaingun",
+       "^FlakWeapon",
+       "^TeslaWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1878,6 +1994,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament",
@@ -1901,7 +2018,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Heal"
+      "weapon": "Heal",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2037,6 +2157,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8228",
       "reloaddelay": "28",
       "slot": "Armament",
@@ -2088,7 +2209,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PhotonCannon"
+      "weapon": "PhotonCannon",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -2129,6 +2256,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5250",
       "reloaddelay": "40",
       "slot": "Armament",
@@ -2168,11 +2296,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GlaveCanon"
+      "weapon": "GlaveCanon",
+      "weapon_types": [
+       "^Grenade",
+       "^RailgunWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5250",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -2212,7 +2345,11 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "GlaveCanon"
+      "weapon": "GlaveCanon",
+      "weapon_types": [
+       "^Grenade",
+       "^RailgunWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2254,6 +2391,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1840",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -2277,7 +2415,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WarpBladeAmaranth"
+      "weapon": "WarpBladeAmaranth",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2320,6 +2461,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1600",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -2343,7 +2485,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WarpBlade"
+      "weapon": "WarpBlade",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2386,16 +2531,20 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@Effect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "PsiStormCosmetic"
+      "weapon": "PsiStormCosmetic",
+      "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@1",
@@ -2419,11 +2568,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@2",
@@ -2447,11 +2600,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@3",
@@ -2475,11 +2632,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@4",
@@ -2503,11 +2664,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@5",
@@ -2531,11 +2696,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@6",
@@ -2559,11 +2728,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@7",
@@ -2587,11 +2760,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
       "slot": "Armament@8",
@@ -2615,7 +2792,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsiStorm"
+      "weapon": "PsiStorm",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2657,6 +2837,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1337",
       "reloaddelay": "26",
       "slot": "Armament",
@@ -2680,7 +2861,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "psi_spear"
+      "weapon": "psi_spear",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2725,6 +2909,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament",
@@ -2808,13 +2993,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PatriarchShoot"
+      "weapon": "PatriarchShoot",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
       "slot": "Armament@garrisoned",
@@ -2898,7 +3092,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PatriarchShoot"
+      "weapon": "PatriarchShoot",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2947,6 +3149,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1335",
       "reloaddelay": "30",
       "slot": "Armament",
@@ -2970,7 +3173,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "psi_blades"
+      "weapon": "psi_blades",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3013,6 +3219,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1445",
       "reloaddelay": "24",
       "slot": "Armament",
@@ -3036,7 +3243,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeratulSlice"
+      "weapon": "ZeratulSlice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3713,6 +3923,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -3736,13 +3947,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCVAttack"
+      "weapon": "SCVAttack",
+      "weapon_types": [
+       "^WorkerAttack"
+      ]
      },
      {
       "armament_name": "repair",
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
       "slot": "Armament@repair",
@@ -3766,7 +3981,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCVRepair"
+      "weapon": "SCVRepair",
+      "weapon_types": [
+       "^RepairWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3813,6 +4031,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3152",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -3836,7 +4055,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PsionicShockwave"
+      "weapon": "PsionicShockwave",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3884,6 +4106,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "28",
       "slot": "Armament",
@@ -3951,7 +4174,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "AtreusMG"
+      "weapon": "AtreusMG",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3998,6 +4228,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "40",
       "slot": "Armament",
@@ -4046,7 +4277,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DragoonCannon"
+      "weapon": "DragoonCannon",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -4092,6 +4329,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "slot": "Armament@Upgrade1",
@@ -4126,10 +4364,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "WaveforceCannonChargedLaser"
+      "weapon": "WaveforceCannonChargedLaser",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^RailgunWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "slot": "Armament@Upgrade2",
@@ -4164,10 +4407,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WaveforceCannonDistortedBeam1"
+      "weapon": "WaveforceCannonDistortedBeam1",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
       "slot": "Armament@Upgrade3",
@@ -4207,7 +4455,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "WaveforceCannonDistortedBeam2"
+      "weapon": "WaveforceCannonDistortedBeam2",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4258,6 +4510,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4780",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -4303,10 +4556,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ManifoldMG"
+      "weapon": "ManifoldMG",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
       "slot": "Armament@AA",
@@ -4350,7 +4609,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ManifoldMGAA"
+      "weapon": "ManifoldMGAA",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -4441,6 +4705,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
       "slot": "Armament",
@@ -4508,7 +4773,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PositronGrenade"
+      "weapon": "PositronGrenade",
+      "weapon_types": [
+       "^SmallArms",
+       "^FlakWeapon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -4555,6 +4827,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -4578,7 +4851,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ProbeAttack"
+      "weapon": "ProbeAttack",
+      "weapon_types": [
+       "^WorkerAttack"
+      ]
      }
     ],
     "armor": {
@@ -4629,6 +4905,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "90",
       "slot": "Armament@primary",
@@ -4685,11 +4962,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScarabLaunch"
+      "weapon": "ScarabLaunch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "90",
       "requires": "!protoss_upgrade_reavercapacity",
@@ -4702,7 +4986,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "ScarabLaunchDummy"
+      "weapon": "ScarabLaunchDummy",
+      "weapon_types": []
      }
     ],
     "armor": {

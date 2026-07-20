@@ -251,6 +251,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -259,16 +261,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {

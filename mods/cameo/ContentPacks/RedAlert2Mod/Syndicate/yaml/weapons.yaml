@@ -1,6 +1,6 @@
-RA2MiliAK47:
+latinsyndicate_latinmilitia_ak47:
 	Inherits: ^RA2SmallArms
-	Range: 4375
+	Range: 4500
 	ReloadDelay: 22
 	Burst: 3
 	BurstDelays: 4
@@ -10,19 +10,19 @@ RA2MiliAK47:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
-RA2MiliAK47E:
-	Inherits: RA2MiliAK47
-	Range: 5375
+latinsyndicate_latinmilitia_ak47_elite:
+	Inherits: latinsyndicate_latinmilitia_ak47
+	Range: 5500
 	Burst: 6
 	BurstDelays: 3
 
-RA2Molotov:
+latinsyndicate_latinmilitia_molotov:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^RA2Grenade
 	ReloadDelay: 93
-	Range: 4375
+	Range: 4500
 	Report: vlasatta.wav
 	Projectile: Bullet
 		Speed: 400
@@ -57,9 +57,9 @@ RA2Molotov:
 		AimChance: 25
 		AimTargetStances: Enemy, Neutral
 
-RA2MolotovE:
-	Inherits: RA2Molotov
-	Range: 5375
+latinsyndicate_latinmilitia_molotov_elite:
+	Inherits: latinsyndicate_latinmilitia_molotov
+	Range: 5500
 	Burst: 6
 	BurstDelays: 3
 

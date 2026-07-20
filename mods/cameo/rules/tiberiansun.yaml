@@ -395,12 +395,11 @@ TSE1:
 		Weapon: TSMinigun
 	RenderSprites:
 		Image: ts_gdi_lightinfantry
+		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: TSInfantry
-	RenderSprites:
-		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 TSE1PARA:
@@ -408,15 +407,13 @@ TSE1PARA:
 	-Buildable:
 	RenderSprites:
 		Image: ts_gdi_lightinfantry
+		PlayerPalette: playerra2
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
 		FallRate: 999
 	UpdatesPlayerStatistics:
 		OverrideActor: tse1
-	RenderSprites:
-		PlayerPalette: playerra2
-
 TSENGINEER:
 	Inherits: E6
 	Inherits@anim: ^TSInfantry
@@ -449,7 +446,7 @@ TSENGINEER:
 		Image: tsengineer
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 TSE2PARA:
@@ -457,13 +454,11 @@ TSE2PARA:
 	-Buildable:
 	RenderSprites:
 		Image: ts_gdi_discthrower
+		PlayerPalette: playerra2
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
 		FallRate: 999
-	RenderSprites:
-		PlayerPalette: playerra2
-
 TSE3:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -495,7 +490,7 @@ TSE3:
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	Voiced:
 		VoiceSet: TSRocket
@@ -536,26 +531,26 @@ tsfloater:
 		-MuzzleSequence:
 	-WithMuzzleOverlay:
 
-# tsvissml:
-# 	Inherits: ^Viceroid
-# 	Inherits@2: ^MutSWCreature
-# 	Tooltip:
-# 		Name: Baby Visceroid
-# 	Health:
-# 		HP: 15000
-# 	Valued:
-# 		Cost: 500
-# 	Armor:
-# 		Type: None
-# 	AttackWander:
-# 	ScaredyCat:
-# 	Mobile:
-# 		Speed: 120
-# 	Armament:
-# 		Weapon: ZClaw1
-# 		LocalOffset: 384,0,0
-# 		-MuzzleSequence: muzzle
-# 	-WithMuzzleOverlay:
+tsvissml:
+	Inherits: ^Viceroid
+	Inherits@2: ^MutSWCreature
+	Tooltip:
+		Name: Baby Visceroid
+	Health:
+		HP: 15000
+	Valued:
+		Cost: 500
+	Armor:
+		Type: None
+	AttackWander:
+	ScaredyCat:
+	Mobile:
+		Speed: 120
+	Armament:
+		Weapon: ZClaw1
+		LocalOffset: 384,0,0
+		-MuzzleSequence: muzzle
+	-WithMuzzleOverlay:
 
 tsvislrg:
 	Inherits: ^Viceroid
@@ -805,7 +800,6 @@ tsaegis:
 		VoiceSet: TSVehicle
 	RenderSprites:
 		Image: ra2_allies_aegiscruiser
-	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability

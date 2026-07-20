@@ -9,11 +9,9 @@ cgcnst_infiltrated.latin:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: latinsyndicate_syndicateconstructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: latinsyndicate_syndicateconstructionyard
-	RenderSprites:
-		Image: latinsyndicate_syndicateconstructionyard
-
 latinsyndicate_doctrine_eliteguerillas:
 	Inherits: ^doctrine_template
 	Tooltip:

@@ -53,7 +53,7 @@ ra2_allies_attackdog:
 	Crushable:
 		CrushSound: igensqua.wav
 	WithDeathAnimation:
-		DeathSequencePalette: ra2infantry
+		DeathSequencePalette: playerra2
 		DeathTypes:
 			DefaultDeath: 1
 			BruteMutate: 1
@@ -134,9 +134,15 @@ ra2_allies_gi:
 	Mobile:
 		Speed: 50
 	Health:
-		HP: 25000
+		HP: 50000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 50
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ra2_allies_gi:
+		Modifier: 33
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	RenderRangeCircle:
@@ -145,16 +151,16 @@ ra2_allies_gi:
 		Condition: ra2_allies_upgrade_elitegi
 		Prerequisites: ra2_allies_upgrade_elitegi
 	Armament@PRIMARY:
-		Weapon: RA2M60
+		Weapon: ra2_allies_gi_mg
 		RequiresCondition: !deployed && !ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@PRIMARY2:
-		Weapon: RA2para
+		Weapon: ra2_allies_gi_para
 		RequiresCondition: !deployed && ra2_allies_upgrade_elitegi
 		LocalOffset: 128,0,256
 	Armament@DEPLOYED:
 		Name: deployed
-		Weapon: RA2para
+		Weapon: ra2_allies_gi_para
 		LocalOffset: 128,0,128
 	Armament@GARRISONED:
 		Name: garrisoned

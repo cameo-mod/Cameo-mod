@@ -24,10 +24,10 @@ ROOT = pathlib.Path(__file__).resolve().parents[2]
 LEDGER = ROOT / "docs/balance"
 WB = ROOT / "docs/design/cameo_balance_v2.xlsx"
 
-UNIT_COLS = {"hp": 4, "speed": 5, "tech_tier": 7, "unit_class": 8,
-             "special": 9, "cost": 22}
-WEAP_COLS = {"damage": 10, "reloaddelay": 11, "burst": 12,
-             "burstdelays": 13, "range": 14, "weapon_class": 15}
+UNIT_COLS = {"hp": 5, "speed": 6, "tech_tier": 8, "unit_class": 9,
+             "special": 10, "cost": 23}
+WEAP_COLS = {"damage": 11, "reloaddelay": 12, "burst": 13,
+             "burstdelays": 14, "range": 15, "weapon_class": 16}
 
 
 def fnum(v):
@@ -56,8 +56,8 @@ def main() -> int:
         touched = False
         r = 2
         while r <= ws.max_row:
-            actor = ws.cell(row=r, column=3).value
-            if not actor or str(actor).startswith("Armament"):
+            actor = ws.cell(row=r, column=2).value
+            if not actor or str(actor).startswith("↳"):
                 r += 1
                 continue
             u = units.get(str(actor))

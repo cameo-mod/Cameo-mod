@@ -11,6 +11,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
       "slot": "Armament@VISIBLE",
@@ -223,13 +224,31 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2dragonFireVisible"
+      "weapon": "wc2dragonFireVisible",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "3",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
       "slot": "Armament@EXPLOSIONS",
@@ -428,7 +447,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2dragonFireExplosion"
+      "weapon": "wc2dragonFireExplosion",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1049,6 +1085,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -1095,12 +1132,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1314,7 +1357,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1353,6 +1413,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -1399,12 +1460,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1618,7 +1685,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1657,6 +1741,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
       "requires": "guard",
@@ -1703,12 +1788,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2_tower_arrow"
+      "weapon": "wc2_tower_arrow",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2100",
+      "pricing": true,
       "range": "10500",
       "reloaddelay": "90",
       "requires": "cannon",
@@ -1922,7 +2013,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2cannontowerFire"
+      "weapon": "wc2cannontowerFire",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1991,6 +2099,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_2 && !deathknighthaste_upg) || (FSD_cond_3 && !deathknightdeathanddecay_upg) || (FSD_cond_4 && !deathknightraisedead_upg)",
@@ -2031,11 +2140,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2deathknightFire"
+      "weapon": "wc2deathknightFire",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -2075,11 +2189,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2deathknightFire"
+      "weapon": "wc2deathknightFire",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "deathcoil",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -2119,10 +2238,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathCoil"
+      "weapon": "wc2deathknightDeathCoil",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -2162,10 +2286,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathCoilScatter_Left"
+      "weapon": "wc2deathknightDeathCoilScatter_Left",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner)",
@@ -2205,11 +2334,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathCoilScatter_Right"
+      "weapon": "wc2deathknightDeathCoilScatter_Right",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "armament_name": "haste",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_2 && deathknighthaste_upg",
@@ -2222,11 +2356,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightHaste"
+      "weapon": "wc2deathknightHaste",
+      "weapon_types": []
      },
      {
       "armament_name": "deathanddecay",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
       "requires": "FSD_cond_3 && deathknightdeathanddecay_upg",
@@ -2241,11 +2377,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightDeathAndDecay"
+      "weapon": "wc2deathknightDeathAndDecay",
+      "weapon_types": []
      },
      {
       "armament_name": "raisedead",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && deathknightraisedead_upg",
@@ -2258,7 +2396,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2deathknightRaiseDead"
+      "weapon": "wc2deathknightRaiseDead",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2300,6 +2439,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1555",
       "reloaddelay": "18",
       "slot": "Armament",
@@ -2323,7 +2463,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2gruntslice"
+      "weapon": "wc2gruntslice",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2366,6 +2509,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament",
@@ -2439,11 +2583,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
@@ -2517,7 +2670,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2563,6 +2724,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
@@ -2587,11 +2749,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2ogrepunch"
+      "weapon": "wc2ogrepunch",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "eyeofkilrogg",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
@@ -2604,11 +2770,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageEyeOfKilrogg"
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_types": []
      },
      {
       "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && ogremagebloodlust_upg",
@@ -2621,11 +2789,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageBloodlust"
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_types": []
      },
      {
       "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && ogremagerunes_upg",
@@ -2638,7 +2808,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageRunes"
+      "weapon": "wc2ogremageRunes",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2685,6 +2856,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament",
@@ -2758,11 +2930,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
@@ -2836,7 +3017,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2879,6 +3068,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament",
@@ -2952,11 +3142,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
       "slot": "Armament@GARRISONED",
@@ -3030,7 +3229,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFire"
+      "weapon": "wc2axeFire",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3074,6 +3281,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7711",
       "reloaddelay": "40",
       "slot": "Armament",
@@ -3182,11 +3390,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFirespear"
+      "weapon": "wc2axeFirespear",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7711",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -3295,7 +3515,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2axeFirespear"
+      "weapon": "wc2axeFirespear",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^HeavyMissile",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^MediumCannon",
+       "^Grenade",
+       "^TankDestroyerCannon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3337,6 +3568,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1600",
       "reloaddelay": "18",
       "slot": "Armament",
@@ -3360,7 +3592,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2gruntslice2"
+      "weapon": "wc2gruntslice2",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4011,6 +4246,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
       "minrange": "2680",
+      "pricing": true,
       "range": "13400",
       "reloaddelay": "240",
       "slot": "Armament",
@@ -4077,7 +4313,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2catapultFire"
+      "weapon": "wc2catapultFire",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -4126,15 +4368,19 @@
      {
       "armament_name": "detonate",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "requires": "!cond_deployed",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "wc2demolitionsquadTargeting"
+      "weapon": "wc2demolitionsquadTargeting",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "requires": "cond_deployed",
@@ -4159,7 +4405,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2demolitionsquadMelee"
+      "weapon": "wc2demolitionsquadMelee",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4245,6 +4494,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
       "requires": "(FSD_cond_1 && !wc2_cond_bot_owner) || (FSD_cond_1_AI && wc2_cond_bot_owner) || (FSD_cond_3 && !ogremagebloodlust_upg) || (FSD_cond_4 && !ogremagerunes_upg)",
@@ -4269,11 +4519,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2ogrepunch"
+      "weapon": "wc2ogrepunch",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "eyeofkilrogg",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_2",
@@ -4286,11 +4540,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageEyeOfKilrogg"
+      "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_types": []
      },
      {
       "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_3 && ogremagebloodlust_upg",
@@ -4303,11 +4559,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageBloodlust"
+      "weapon": "wc2ogremageBloodlust",
+      "weapon_types": []
      },
      {
       "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
       "requires": "FSD_cond_4 && ogremagerunes_upg",
@@ -4320,7 +4578,8 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "wc2ogremageRunes"
+      "weapon": "wc2ogremageRunes",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4368,6 +4627,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -4391,7 +4651,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "wc2peasantsmack"
+      "weapon": "wc2peasantsmack",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4439,6 +4702,7 @@
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
       "minrange": "2240",
+      "pricing": true,
       "range": "11200",
       "reloaddelay": "100",
       "slot": "Armament",
@@ -4640,7 +4904,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeEngineCannon"
+      "weapon": "SiegeEngineCannon",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^LightMissile",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {

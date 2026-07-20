@@ -24,20 +24,26 @@ tkm_rifleman:
 	Mobile:
 		Speed: 60
 	Health:
-		HP: 16000
+		HP: 32000
 	ChangesHealth@SelfHealing:
-		Step: 16
+		Step: 32
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@tkm_rifleman:
+		Modifier: 73
 	Armament@PRIMARY:
-		Weapon: tkmrifle
+		Weapon: tkm_rifleman_rifle
 		LocalOffset: 500,0,400
 		RequiresCondition: !tkm_upgrade_semiautoriflesupgrade
 	Armament@PRIMARYUPGRADE:
-		Weapon: tkmriflemansemiautorifle
+		Weapon: tkm_rifleman_semiautorifle
 		LocalOffset: 500,0,400
 		RequiresCondition: tkm_upgrade_semiautoriflesupgrade
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: tkmrifle
+		Weapon: tkm_rifleman_rifle
 	GrantConditionOnPrerequisite@tkm_upgrade_semiautoriflesupgrade:
 		Condition: tkm_upgrade_semiautoriflesupgrade
 		Prerequisites: tkm_upgrade_semiautoriflesupgrade
@@ -73,7 +79,7 @@ tkm_rifleman:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 tkm_marine:
 	Inherits: ^Soldier
@@ -134,7 +140,7 @@ tkm_marine:
 		IdleSequences: idle1,idle2
 		RequiresCondition: !parachute
 	WithDeathAnimation:
-		DeathSequencePalette: raplayer
+		DeathSequencePalette: playerra2
 		DeathTypes:
 			SmallExplosionDeath: 2
 	RenderSprites:
@@ -215,7 +221,7 @@ tkm_juggernaut:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 tkm_thermonaut:
 	Inherits: ^Soldier
@@ -281,7 +287,7 @@ tkm_thermonaut:
 		PlayerPalette: playerra2
 		Image: tkm_thermonaut
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 tkm_trooper:
 	Inherits: ^Soldier
@@ -306,24 +312,30 @@ tkm_trooper:
 	Mobile:
 		Speed: 60
 	Health:
-		HP: 16000
+		HP: 32000
 	ChangesHealth@SelfHealing:
-		Step: 16
+		Step: 32
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@tkm_trooper:
+		Modifier: 40
 	Armament@PRIMARY: ##########
-		Weapon: tkmak
+		Weapon: tkm_trooper_ak
 		LocalOffset: 128,0,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: tkmak
+		Weapon: tkm_trooper_ak
 	Armament@gp25:
-		Weapon: tkmgp25
+		Weapon: tkm_trooper_gp25
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
 		RequiresCondition: tkm_upgrade_gp25upgrade
 	Armament@GARRISONEDM203:
 		Name: garrisoned
-		Weapon: tkmgp25
+		Weapon: tkm_trooper_gp25
 		RequiresCondition: tkm_upgrade_gp25upgrade
 	GrantConditionOnPrerequisite@tkm_upgrade_gp25upgrade:
 		Condition: tkm_upgrade_gp25upgrade
@@ -454,7 +466,7 @@ tkm_rocketeer:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 tkm_engineer:
 	Inherits: E6
@@ -510,7 +522,7 @@ tkm_engineer:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_titanarsenalupgrade, tkm_upgrade_natoarsenalupgrade
@@ -562,8 +574,6 @@ tkm_engineer:
 		AmmoPoolName: summon
 	Selectable:
 		Class: tkm_engineer
-	RenderSprites:
-		PlayerPalette: playerra2
 tkm_sniper:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate

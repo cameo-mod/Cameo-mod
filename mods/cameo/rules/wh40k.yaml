@@ -4051,19 +4051,19 @@ wh40ksentinel:
 			tsghost.mutant: ifv-hero
 			usaburton: ifv-hero
 			leangburton: ifv-hero
-			terran_ghost: ifv-ra1_allies_alliedsniper
-			ra2_allies_sniper: ifv-ra1_allies_alliedsniper
-			yuri_virus: ifv-ra1_allies_alliedsniper
-			ra1_allies_raspy: ifv-ra1_allies_alliedsniper
-			ra2_allies_ra2spy: ifv-ra1_allies_alliedsniper
-			ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
-			forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
-			glkell: ifv-ra1_allies_alliedsniper
-			leangkell: ifv-ra1_allies_alliedsniper
-			glsabo: ifv-ra1_allies_alliedsniper
-			usapath: ifv-ra1_allies_alliedsniper
-			leangpath: ifv-ra1_allies_alliedsniper
-			wh40kcommisair: ifv-ra1_allies_alliedsniper
+			terran_ghost: ifv-lightsniper
+			ra2_allies_sniper: ifv-lightsniper
+			yuri_virus: ifv-lightsniper
+			ra1_allies_raspy: ifv-lightsniper
+			ra2_allies_ra2spy: ifv-lightsniper
+			ts_nod_chameleonspy: ifv-lightsniper
+			forgotten_mutantsniper: ifv-lightsniper
+			glkell: ifv-lightsniper
+			leangkell: ifv-lightsniper
+			glsabo: ifv-lightsniper
+			usapath: ifv-lightsniper
+			leangpath: ifv-lightsniper
+			wh40kcommisair: ifv-lightsniper
 			ra2_allies_chronolegionnaire: ifv-chrono
 			ra2_soviets_crazyivan: ifv-demo
 			ra2terror: ifv-demo
@@ -4078,7 +4078,7 @@ wh40ksentinel:
 		RecoilRecovery: 38
 		LocalOffset: 768,12,20, 768,-12,20
 		MuzzleSequence: muzzle
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-lightsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono
 	Armament@MG1:
 		Weapon: WH40KHeavyBolterMG
 		Recoil: 128
@@ -4099,11 +4099,11 @@ wh40ksentinel:
 		RequiresCondition: ifv-repair
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
-	Armament@ra1_allies_alliedsniper:
+	Armament@lightsniper:
 		Weapon: WH40KSentinelCannon
 		LocalOffset: 171,0,255
 		MuzzleSequence: muzzlemg
-		RequiresCondition: ifv-ra1_allies_alliedsniper
+		RequiresCondition: ifv-lightsniper
 	Armament@hero:
 		Weapon: WH40KOgrynGun
 		LocalOffset: 171,0,255
@@ -5804,14 +5804,14 @@ wh40kscoutsniper:
 		Queue: Defence, RADefence
 		Description: Armed Long Ranged Weapon.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Armament@PRIMARY: ##########
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 		MuzzleSequence: garrison-muzzle
 	WithDecoration@addon:
 		Image: wh40kitems
-		Sequence: ra1_allies_alliedsniper
+		Sequence: lightsniper
 		Position: TopRight
 		BlinkInterval: 32
 		BlinkPattern: Off, On, Off, Off

@@ -114,7 +114,7 @@ forgotten_mutanthijacker:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -159,7 +159,7 @@ forgotten_mutantsniper:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -241,7 +241,7 @@ forgotten_ghoststalker:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -310,11 +310,17 @@ forgotten_mutant:
 	Mobile:
 		Speed: 65
 	Health:
-		HP: 18000
+		HP: 36000
 	ChangesHealth@SelfHealing:
-		Step: 18
+		Step: 36
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@forgotten_mutant:
+		Modifier: 27
 	Armament@PRIMARY:
-		Weapon: MutDualWield
+		Weapon: forgotten_mutant_dualwield
 		LocalOffset: 128,0,256
 	#	 RequiresCondition: !rank-elite
 	# Armament@ELITE:
@@ -325,11 +331,11 @@ forgotten_mutant:
 	-DamagedByTerrain:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: MutDualWield
+		Weapon: forgotten_mutant_dualwield
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -406,7 +412,7 @@ forgotten_mutantsoldier:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -490,7 +496,7 @@ forgotten_mutantsergeant:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -541,7 +547,7 @@ forgotten_zombiemutant:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -594,7 +600,7 @@ forgotten_runnershotgal:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -662,7 +668,7 @@ forgotten_chemsprayinfantry:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
@@ -724,7 +730,7 @@ forgotten_mutantmortarman:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
@@ -774,10 +780,8 @@ forgotten_visceroid:
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	RenderSprites:
-		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: player
 		CrushedSequencePalette: ra2effect
 	RevealOnFire:
 	RevealOnDeath:
@@ -843,6 +847,7 @@ forgotten_tiberianfiend:
 		VoiceSet: TSFiend
 	-RenderSprites:
 	RenderSprites:
+		PlayerPalette: playerra2
 	Armament@PRIMARY:
 		Weapon: TSFiendShard
 		LocalOffset: 128,0,256
@@ -861,10 +866,8 @@ forgotten_tiberianfiend:
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Crushable:
 		CrushClasses: vehicle
-	RenderSprites:
-		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
@@ -905,6 +908,7 @@ forgotten_viniferafiend:
 		VoiceSet: TSFiend
 	-RenderSprites:
 	RenderSprites:
+		PlayerPalette: playerra2
 	Armament@PRIMARY:
 		Weapon: TSFiendShardBlue
 		LocalOffset: 128,0,256
@@ -923,10 +927,8 @@ forgotten_viniferafiend:
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Crushable:
 		CrushClasses: vehicle
-	RenderSprites:
-		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity

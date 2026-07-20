@@ -30,7 +30,7 @@ ts_gdi_medic:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
@@ -98,7 +98,7 @@ ts_gdi_discthrower:
 	WithInfantryBody:
 		DefaultAttackSequence: throw
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	# Explodes:
 	# 	Weapon: GrenadierExplode
@@ -160,7 +160,7 @@ ts_gdi_falconenforcer:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	Voiced:
 		VoiceSet: TSInfantry
@@ -219,7 +219,7 @@ ts_gdi_riottrooper:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	Voiced:
 		VoiceSet: TSInfantry
@@ -376,12 +376,10 @@ ts_gdi_jumpjetinfantry:
 		Bounds: 512, 768
 	RenderSprites:
 		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-	RenderSprites:
-		PlayerPalette: playerra2
 		Image: tsjumpjet
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
 
@@ -440,7 +438,7 @@ ts_gdi_railguncommando:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_railgunweaponry

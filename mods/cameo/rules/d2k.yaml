@@ -4326,7 +4326,7 @@
 # 	-DamagedByTerrain:
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
-# 	Targetable@ra1_soviets_attackdog:
+# 	Targetable@DogImmune:
 # 		TargetTypes: DogImmune
 # 	ActorStatValues:
 # 		Upgrades: ordos_upgrade_biologicalwarfare
@@ -4902,7 +4902,7 @@
 # 		PlayerPalette: player_rgba
 # 	Targetable@vehicleexplodedamage:
 # 		TargetTypes: TerrorDrone
-# 	Targetable@ra1_soviets_attackdog:
+# 	Targetable@DogImmune:
 # 		TargetTypes: DogImmune
 # 	-TemporaryOwnerManager:
 # 	ActorStatValues:
@@ -5099,7 +5099,7 @@
 # 	Valued:
 # 		Cost: 800
 # 	Tooltip:
-# 		Name: Heavy ra1_allies_alliedsniper
+# 		Name: Heavy lightsniper
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:

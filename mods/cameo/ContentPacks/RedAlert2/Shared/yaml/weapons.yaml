@@ -1998,19 +1998,19 @@ RA2TorpTube_elite:
 			Wood: 85
 			Concrete: 70
 
-RA2M1Carbine:
+ra2_soviets_conscript_carbine:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 18
-	Range: 4434
+	Range: 4500
 	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
-RA2M1CarbineE:
-	Inherits: RA2M1Carbine
-	Range: 5434
+ra2_soviets_conscript_carbine_elite:
+	Inherits: ra2_soviets_conscript_carbine
+	Range: 5500
 	Burst: 2
 	BurstDelays: 3
 

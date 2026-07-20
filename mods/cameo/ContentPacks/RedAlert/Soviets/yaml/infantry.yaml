@@ -170,17 +170,21 @@ ra1_soviets_ak47conscript:
 	Mobile:
 		Speed: 71
 	Health:
-		HP: 22000
+		HP: 44000
 	ChangesHealth@SelfHealing:
-		Step: 22
+		Step: 44
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
 	Armament:
-		Weapon: ConscriptAK47
+		Weapon: ra1_soviets_ak47conscript_rifle
 		LocalOffset: 0,0,450
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ConscriptAK47
-	FirepowerMultiplier@TripleShot:
-		Modifier: 33
+		Weapon: ra1_soviets_ak47conscript_rifle
+	FirepowerMultiplier@ra1_soviets_ak47conscript:
+		Modifier: 20
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
 		RequiresCondition: !ra1_soviets_upgrade_vengeance

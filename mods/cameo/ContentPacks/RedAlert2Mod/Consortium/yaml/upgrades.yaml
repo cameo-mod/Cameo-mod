@@ -9,11 +9,9 @@ qacst_infiltrated.steel:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: steelconsortium_consortiumconstructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: steelconsortium_consortiumconstructionyard
-	RenderSprites:
-		Image: steelconsortium_consortiumconstructionyard
-
 steelconsortium_upgrade_pulseweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
