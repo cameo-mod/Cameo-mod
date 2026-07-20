@@ -169,11 +169,6 @@ devastator:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
 		RequiresCondition: !overload
-	SpawnActorOnDeath:
-		Actor: devastator_husk.harkonnen
-		OwnerType: InternalName
-		EffectiveOwnerFromOwner: true
-		RequiresCondition: !meltdown
 	FireWarheadsOnDeath@OVERLOAD:
 		Weapon: PlasmaExplosion
 		EmptyWeapon: PlasmaExplosion
