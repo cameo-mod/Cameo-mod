@@ -44,6 +44,13 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   |---|---|---|---|
   | mbt | Naxis Tiger Tank | 100000/100/5000/10000@50 → 800 | King Tiger (2×/2× @ 2000) |
   | scout | japan_imperialscoutsman | 20000/60/5000/4000@50 SA → 100 | forgotten_mutantsoldier (40000/60/5000/8000@50 → 250.0000 exact) |
+  | special forces | japan_imperialscoutsman (→transfers here) | 15000/50/6000/6000@50 (SA+CG+HeavyCannon, air) → 200 | TBD (2×HP/2×dmg, same rng/spd → 500) |
+
+  **Scout-baseline transfer (pending the SF build):** japan_imperialscoutsman
+  moves scout → special forces (restat above, air restored); the scout
+  baseline transfers to **naxis_naxiriflesoldier** (restat to the exact
+  scout anchor 20000/60/5000/4000@50 SA, ground-only). Update this table
+  + §6b when the build lands.
 
 ## 3. Stat laws (all classes unless stated)
 
@@ -80,6 +87,86 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
 - **Scout infantry never hit aircraft**: ValidTargets Ground, Water on
   every scout weapon INCLUDING upgrade variants; units use
   ^AutoTargetGroundAssaultMove (faction consistency program).
+
+## 3b. The special-modifier system (K) — trait-derived, not guessed (maintainer 2026-07-20)
+
+The Special factor **K** on the range ratio (§1) is **1 + Σ(special
+weights)**, computed from the actor's TRAITS so K is never guessed.
+Legacy column K (cameo_armor_system.xlsx) is reproduced EXACTLY by this
+table. A "special" = value the base HP/speed/range/DPS pricing does NOT
+already capture.
+
+**Standard specials — +0.25 each:**
+
+| special | detect by (yaml/engine) | example |
+|---|---|---|
+| Deploy / mode-switch to a 2nd weapon | `GrantConditionOnDeploy` + a deploy-gated Armament | G.I., Guardian G.I., Javelin |
+| Demolition / C4 | a C4/GenericC4 demolition armament | Navy Seal, Tanya, Commando |
+| Stealth / cloak | `Cloak` | Stealth Soldier |
+| Status-effect warhead | EMP / tesla / fire / virus-toxin / radiation warhead (curated set) | EMP Grenadier, Tesla Trooper |
+| Support-power / drone / kamikaze | a `SupportPower` trait or drone/kamikaze armament | ASDF, kamikaze |
+| Caster ability | activated non-damage ability (heal/mind-control/polymorph) — MANUAL if AoE-DoT dominant | High Templar |
+| Gatling spin-up / ramp | `^GatlingSpeedUpUnitBehavior` | Gatling Trooper, Eliminator 800 |
+| Sniper instakill / lockdown | lockdown attach or instakill-vs-infantry weapon | Ghost, Allied Sniper |
+| Point-defense | point-defense trait (intercepts incoming projectiles) | Laser Commando, TD Nod Light Tank Mk2 |
+| Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → hole_small.nax2) → K 1.25 |
+| Friendly aura buff | a proximity buff aura (firepower/speed/armour to nearby allies) — often VERY strong, RE-TIER to Major+ | TD GDI Officer **propaganda** |
+| Debuff warhead / designator | snare (slow), blind (vision/accuracy cut), or target-designator (marks for bonus damage) | zerg corruptor (snare), latin smoker tank (blind), GDI Predator (targeting laser) |
+
+**Heavy special — +1.0** (worth far more than a normal special):
+
+| special | detect by | example |
+|---|---|---|
+| All-terrain movement (aircraft-like) | `Mobile: Locomotor: fakeaircraft` (ignores terrain) | Reaper → K 2.0 |
+
+**MANUAL / algorithmic-pending** — NOT true "abilities" but pricing gaps
+the current DPS math misprices; hand-price + flag, and FIX the math
+(roadmap) rather than leave a permanent K kludge:
+
+| gap | detect by | example |
+|---|---|---|
+| Multi-warhead stacking (DPS undercounted) | one weapon inherits several damage templates (`^Grenade+^Shrapnel+^HeavyBomb+^MediumMissile+^Chaingun+^FlakWeapon…`) so a shot applies many warheads; max-warhead DPS misses the SUM | **Patriarch** (K 2.0 was a kludge; real fix = sum the damage warheads in DPS, then K→1.0) |
+| Probabilistic / bounce / AoE-DoT | <100%-hit split warheads, or damage-over-area-over-time from a caster/spawned actor | high templar psi-storm, spawned black-hole DoT |
+
+**Validation (reproduces legacy K exactly):**
+- Laser Commando = cloak + point-defense + C4 + gatling = 4×0.25 → **K 2.0** ✓
+- Stealth Soldier = cloak + EMP warhead = 2×0.25 → **K 1.5** ✓
+- Reaper = fakeaircraft locomotor = +1.0 → **K 2.0** ✓
+- G.I. / Navy Seal / ASDF / High Templar / Gatling Trooper = 1 special → **K 1.25** ✓
+
+**NOT a special:** hitting air with the PRIMARY weapon (Marine = K 1.0).
+Only a SEPARATE weapon/mode or an ability counts — never the primary
+weapon's target list. So a Special-Forces unit's air capability is
+baseline, never charged.
+
+Extractor auto-detects `Cloak` / `GrantConditionOnDeploy` / the gatling
+trait / the `fakeaircraft` locomotor / `SpawnActor` warheads; the
+status-warhead and caster sets are small curated lists; MANUAL rows are
+flagged for hand-pricing (K stays 1.0 in the auto pass until set).
+
+**COLLECT-ALL (task, do not skip):** the list above is SEEDED, not
+complete — memory misses effects (propaganda aura, snare, blind, target
+designator, point-defense were all missed on the first pass). A repo-wide
+trait scan (aura/proximity-buff traits, condition-granting warheads,
+support-power traits, debuff beams) must ENUMERATE every effect in the
+game so none is missed, then each is slotted into a tier. This runs
+alongside the extractor's K detection.
+
+**Future direction (maintainer 2026-07-20) — per-ability values, shown
+itemized (NOT one opaque number):** the uniform +0.25 above is an INTERIM
+placeholder. The target is a UNIQUE power value PER ability (deploy ≠ C4
+≠ stealth in real worth), each with its own flag/column, so the workbook
+shows the special as an **itemized list** (a checkbox/collection per
+ability) that SUMS to K — never a lone combined value whose origin can't
+be traced, justified, or reviewed. The extractor therefore emits the
+LIST of detected specials + each ability's value; the sheet totals them.
+- **Negative specials exist** (subtract from K): a very long charge delay
+  (Obelisk-of-Light style) = **−0.25**; frontal-facing (non-turreted)
+  vehicle weapons = **−0.25** — a genuine disadvantage vs turreted units
+  that move and fire at once. Both are FUTURE / VEHICLE scope.
+- **Scope order:** finish INFANTRY on the interim uniform weights first;
+  the per-ability value table + negative specials land when we start
+  VEHICLES (the program AFTER infantry).
 
 ## 4. Weapon & template laws
 
@@ -169,14 +256,78 @@ ever fall between classes again — the band DEFINES membership.
   the high edge (a cost axis, not free choice).
 - Boundary rule: a weapon at exactly 2500 is closecombat; exactly
   4500 is scout (half-open bands).
-| sniper | TBD (long) | TBD | zerg_defiler transforms in (maintainer verdict) |
-| heavy | TBD (own survey) | TBD | future anchor (flame/chem units live here) |
-| hero/commando | ~2000 attach/C4 | TBD | future anchor |
-| support/special | n/a (ability-priced) | n/a | NEW class for spies + Yuri mind control + CABAL hackers (maintainer verdict); ability-value table to design |
+| **special forces** (advanced; CAN hit air) | 5500–6500 (r₀ 6000) | 6000 | japan_imperialscoutsman @ 200 (transfers from scout) | **NEXT to build** |
+| grenadier | TBD | TBD | grenade/demolition infantry (td_gdi_empgrenadier) |
+| heavy infantry | TBD (very high HP to survive heavy fire) | TBD | ixian_shockinfantry, tkm_juggernaut(?), forgotten fiends |
+| sniper (PURE) | TBD (long) | TBD | targets ONLY infantry; big stat boost compensates the restriction; no air, no vehicles |
+| heavy sniper | TBD (long) | TBD | all GROUND, NO air; loses to pure snipers as the trade (td_gdi_heavysniper, ra2_allies_sniper, tkm_sniper) |
+| rocket trooper | TBD | TBD | dedicated rocket/AA-launcher infantry (NEW class, built after SF; quantummissiletrooper, all the _rocketsoldier/_tankkiller units) |
+| archer | scales with range | TBD | projectile-arc infantry; uses the MISSILE projectile (tracks targets); **arrow speed = maxRange/10** (tank-bullet scaling; TD cannons use 2×); hits air (wc2 archers, japan/asian maidens) |
+| support / special | n/a (ability-priced) | n/a | medics, mechanics, engineers, casters, spies, mind-control, hackers; price = baseline + Σ special-K (§3b). **HP is PER-UNIT** — weak support share ~5000, but strong casters (wc2 mage/deathknight, high templar) keep their high HP to fight |
+| flying infantry | n/a (movement class) | n/a | over-terrain (cosmonaut, jumpjet, rocketeer, skymage, swarmling) |
+| hero / commando | ~2000 attach/C4 | TBD | unique high-cost; multiple stacked specials (§3b); mostly left as-is |
 
-Maintainer verdicts 2026-07-19: case-by-case for misfits — defiler →
-sniper; spies/mind-control/hackers → support template; civilians
-(alien/undead/conehead2.nax) parked undecided.
+- **A class is a PRICING ARCHETYPE, not a uniqueness key** (maintainer
+  2026-07-20): a faction MAY field several units of the same class
+  (Terran Marine AND Ghost are both special forces). The §4 uniqueness
+  law keeps their stats distinct; the soft goal is roster VARIETY across
+  classes, not one-template-per-unit-per-faction.
+- **Air is the special-forces class trait**, baked into the baseline —
+  hitting air is NEVER a per-unit special (§3b).
+
+### Roster verdicts — air-capable infantry sweep (maintainer 2026-07-20)
+- **→ special forces:** marine, ghost/specter, clone trooper, lunar
+  soldier, tkm marine, elite cadre, scout-droid, madcap, navy seal
+  (from sniper), stealth soldier, gatling trooper, eliminator 800, GDI
+  officer, dragunov (anti-material), narco, mutant sergeant, coneheads
+  knight, tiberian fiends (or heavy infantry), crazy ivan (bomb-attach).
+- **→ scout (lose air):** conscript, asian militia, latin militia, tkm
+  trooper, yuri initiate (gatling trooper is Yuri's SF), naxi
+  slaveoverseer, zerg spithid, cabal devout, cabal cyborginfantry
+  (so eliminator 800 owns CABAL's SF slot).
+- **→ closecombat:** ixian rashinan → **rename ixian_rashidan** (+ its
+  promotion), futuretech shotgundroid, futuretech enforcer (give it a
+  shotgun burst; its AA is bot-only).
+- **→ grenadier:** td_gdi_empgrenadier. **→ heavy infantry:**
+  ixian_shockinfantry, tkm_juggernaut. **→ melee:** wc2 knight, wc2 ogre.
+- **→ vehicle:** naxis_bmwbike (scout vehicle — not infantry), wc2
+  kodobeast (support vehicle: change unit template + armor Medium only,
+  keep other inherits).
+- **→ flying infantry:** cosmonaut, jumpjet, rocketeer, skymage,
+  swarmling. **→ archer class:** all the wc2/japan/asian archers.
+  **→ support class:** casters (mages/deathknight/templar/defiler),
+  medics, mechanics, engineers.
+- **Left as-is:** heroes (≥3000), dedicated-AA specials (skymage,
+  quantum missile trooper → rocket-trooper class), fremen_creep (not
+  player-controlled), civilians delphi/general/technician (ground-only,
+  unused).
+- **Heavy-sniper override:** td_gdi_heavysniper is a HEAVY SNIPER (loses
+  air), NOT special forces — the earlier SF call is superseded.
+
+_Roadmap item (maintainer 2026-07-20):_ no-attack units (medics,
+mechanics, engineers) use a `dummytargeting` weapon as a movement
+stopgap so they don't rush in and die. Proper fix = kiting AI that keeps
+distance and never advances into enemies — belongs on the long-term
+roadmap, not shipped as dummytargeting forever.
+
+## 6c. Vehicle classes (FUTURE — the program AFTER infantry)
+
+Do NOT start until the infantry rebalance is complete; recorded here so
+the scope is fixed. Each gets template → baseline → verifier like the
+infantry classes.
+
+| class | notes |
+|---|---|
+| MBT (main battle tank) | LIVE anchor: Naxis Tiger (§2) — the global reference |
+| light tank | fast, cheap, low-armour raider/scout tank — NEW template |
+| battlefortress | slow "bunker on tracks": high HP, troop-carry/garrison, short range — NEW template |
+| anti-air vehicle | dedicated mobile AA (flak/missile) — NEW template |
+| tank destroyer | AP glass-cannon vs heavy armour; frontal weapon (−0.25 special); range/speed on the 2×-bullet-speed convention — NEW template |
+
+Vehicle-only specials attach here (§3b future scope): frontal-facing
+(non-turreted) weapon = −0.25; long charge delay (Obelisk-style) = −0.25.
+The per-ability special-value table replaces the interim uniform weights
+at the start of this program.
 
 ## 7. Open items
 
