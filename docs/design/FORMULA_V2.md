@@ -69,6 +69,11 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   (WC 0.875). The class's own DPS₀ already includes the baseline WC.
 - **SoundVolume = 1/burst** (LAW): a BurstDelays-0 weapon firing N
   shots on one tick must set SoundVolume 1/N or it deafens.
+  **BASE weapon only** (maintainer 2026-07-20): scale the volume once,
+  on the base weapon; upgrade/elite/veteran variants that raise Burst
+  (e.g. fanatic 10→13→16) do NOT re-scale — they inherit the base's
+  SoundVolume and are simply allowed to get louder with more shots.
+  A `SoundVolume:` override on a `_upgrade`/`_elite` variant is a bug.
 - **Tech tier factor** multiplies O/P/Q: T1 = 1.0, T3 = 0.75
   (higher tech = cheaper per stat). From the deepest tech-building
   prerequisite. Closecombat verifier doubles DPS via 2x BURSTS.
