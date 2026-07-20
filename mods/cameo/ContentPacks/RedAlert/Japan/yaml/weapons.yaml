@@ -23,8 +23,8 @@ japan_imperialscoutsman_rifle:
 	# Special-Forces baseline weapon (maintainer 2026-07-20): SmallArms +
 	# Chaingun + railgun-AP = 6000 dmg, precise (bullet projectile, no beam
 	# or blue impact — ^SmallArms is inherited LAST so its Bullet + Effect
-	# win). Air-capable. The 500-spread RailgunExtraDamage shield-buster is
-	# stripped so the shot stays pinpoint.
+	# win). Air-capable. The RailgunExtraDamage warhead inherits untouched
+	# (shield-only chip damage; ignored for pricing, per maintainer).
 	Inherits: ^RailgunWeapon
 	Inherits@cg: ^Chaingun
 	Inherits@sa: ^SmallArms
@@ -32,7 +32,6 @@ japan_imperialscoutsman_rifle:
 	Range: 6000
 	ValidTargets: Ground, Water, Air
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
-	-Warhead@RailgunExtraDamage:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage

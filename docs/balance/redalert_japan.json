@@ -2369,6 +2369,11 @@
         "type": "HealthPercentageDamage"
        },
        {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
         "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
@@ -2420,6 +2425,11 @@
         "damage": "1",
         "tag": "RailgunWeaponPercentage",
         "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "1000",
+        "tag": "RailgunExtraDamage",
+        "type": "SpreadDamage"
        },
        {
         "damage": "2000",

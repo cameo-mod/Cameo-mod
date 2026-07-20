@@ -44,7 +44,7 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   |---|---|---|---|
   | mbt | Naxis Tiger Tank | 100000/100/5000/10000@50 → 800 | King Tiger (2×/2× @ 2000) |
   | scout | naxis_naxiriflesoldier | 20000/60/5000/4000@50 SA → 100 | forgotten_mutantsoldier (40000/60/5000/8000@50 → 250.0000 exact) |
-  | special forces | japan_imperialscoutsman | 15000/50/6000/6000@50 (SA+CG+Railgun-AP, air, bullet) → 200 | TBD (2×HP/2×dmg, same rng/spd → 500) |
+  | special forces | japan_imperialscoutsman | 15000/50/6000/6000@50 (SA+CG+Railgun-AP, air, bullet) → 200 | schwarzermond_lunarsoldier (T1, 30000/50/6000 SA+CG+Laser 12000@50 → 500.00 exact) |
 
   **Scout↔SF baseline transfer — DONE 2026-07-20** (`cb4e926a4` + build
   commit): japan_imperialscoutsman moved scout → special forces
@@ -175,6 +175,18 @@ LIST of detected specials + each ability's value; the sheet totals them.
 - **Weapon Versus tables**: built by the step law in ARMOR_SYSTEM.md —
   LEVEL = step 6/5/4 (light/medium/heavy, floor 10/25/40, Shield
   110/125/140), PROFILE = the armor order. Generate, never hand-type.
+- **`*ExtraDamage` warheads are KEPT but EXCLUDED from pricing** (maintainer
+  2026-07-20): the `Warhead@…ExtraDamage` a template carries (Railgun/
+  Laser/…, Versus ~1 vs everything except Shield ~100) is intentional
+  shield-only chip damage. Never strip or scale it — just let it inherit —
+  and the DPS sum must skip any warhead whose key ends `ExtraDamage`.
+- **A "weapon class" (WC 1.0) = a light+medium+heavy warhead TRIAD**
+  (maintainer 2026-07-20): one light + one medium + one heavy SpreadDamage
+  warhead summed. Baseline japan = SmallArms + Chaingun + Railgun-AP; a
+  member may re-theme the triad (CannonAP+Flak+Laser, SA+Chaingun+Laser…)
+  and keep the same WC. `^TankDestroyerCannon` = the interim Light CannonAP
+  until the weapon-template refactor renames it; `^HeavyCannon` is
+  deprecated (too much spread — use a small-spread heavy like Railgun/Laser).
 
 - **Dedicated weapons**: a converted unit never shares its weapon —
   check sharing repo-wide FIRST (`Weapon: <name>`); shared originals

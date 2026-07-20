@@ -1880,20 +1880,42 @@
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "pricing": true,
-      "range": "5300",
-      "reloaddelay": "60",
+      "range": "6000",
+      "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "30000",
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "15",
+        "damage": "4",
         "tag": "LaserWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -1905,6 +1927,8 @@
       ],
       "weapon": "BlackHandLaser",
       "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ]
      },
@@ -1912,20 +1936,42 @@
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "pricing": false,
-      "range": "5300",
-      "reloaddelay": "60",
+      "range": "6000",
+      "reloaddelay": "50",
       "slot": "Armament@Garrison",
       "versus_templates": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "30000",
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "15",
+        "damage": "4",
         "tag": "LaserWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -1937,17 +1983,19 @@
       ],
       "weapon": "BlackHandLaser",
       "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ]
      }
     ],
     "armor": {
      "src": "inherited",
-     "v": "Plate"
+     "v": "Flak"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
-     "v": "700"
+     "v": "750"
     },
     "design": {
      "class_anchor": null,
@@ -1971,11 +2019,11 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "6000"
+     "v": "6500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "50"
     }
    },
    "td_nod_minigunner": {

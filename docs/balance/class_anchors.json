@@ -39,7 +39,7 @@
  "special_forces": {
   "anchor_actor": "japan_imperialscoutsman",
   "comment": "LIVING BASELINE japan_imperialscoutsman 15000/50/6000/6000@50 (SmallArms+Chaingun+Railgun-AP, air-capable, bullet projectile, WC 1.0, DPS 120) = 200. Fragile long-range versatile anti-air/anti-armor specialist (contrast the 50000-HP closecombat brawler). Band 5500-6500 (r0 6000). Air is the CLASS trait, never a per-unit special. ^SpecialForcesInfantryTemplate. VERIFIER TBD (2x HP + 2x dmg, same rng/spd -> 500).",
-  "dps_convention": "SmallArms + Chaingun + Railgun warhead damages summed, WC 1.0",
+  "dps_convention": "light+medium+heavy warhead triad summed (SA+Chaingun+Railgun on the baseline; CannonAP+Flak+Laser or SA+Chaingun+Laser on members), WC 1.0. *ExtraDamage warheads are shield-only chip and EXCLUDED from the sum.",
   "signed_off": false,
   "spec": {
    "cost0": 200,
@@ -48,6 +48,7 @@
    "range0_wdist": 6000,
    "speed0": 50
   },
-  "verifier_actor": null
+  "verifier_actor": "schwarzermond_lunarsoldier",
+  "verifier_comment": "T1 (no tech penalty) clean tripwire: schwarzermond_lunarsoldier 30000/50/6000 SA+Chaingun+Laser 12000@50 (2x/2x) = 500.00 exact. Makes SM basic infantry strong on purpose (in-game test flagged). NOTE: td_nod_lasertrooper is NOT the verifier - it is Tier 4 (temple prime, 0.5x factor), re-priced as a 4x/4x=750 heavy SF trooper instead."
  }
 }

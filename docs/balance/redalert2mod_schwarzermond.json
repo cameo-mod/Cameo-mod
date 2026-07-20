@@ -2802,17 +2802,18 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": true,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "NaxiRifle",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2822,7 +2823,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2840,6 +2851,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -2857,7 +2869,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2867,7 +2879,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2885,6 +2907,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -2893,7 +2916,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": true,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY_UP",
@@ -2902,7 +2925,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2912,7 +2935,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2930,6 +2963,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -2947,7 +2981,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2957,7 +2991,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -2975,6 +3019,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -2983,7 +3028,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": true,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@PRIMARY_AMP",
@@ -2992,7 +3037,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3002,7 +3047,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3020,6 +3075,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3037,7 +3093,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3047,7 +3103,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3065,6 +3131,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3072,17 +3139,18 @@
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": false,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && !schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
        "NaxiRifle",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3092,7 +3160,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3110,6 +3188,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3128,7 +3207,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3138,7 +3217,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3156,6 +3245,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3165,7 +3255,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": false,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_crystallens && !schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED_UP",
@@ -3174,7 +3264,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3184,7 +3274,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3202,6 +3302,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3220,7 +3321,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3230,7 +3331,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3248,6 +3359,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3257,7 +3369,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/weapons.yaml",
       "pricing": false,
-      "range": "4500",
+      "range": "6000",
       "reloaddelay": "50",
       "requires": "!rank-elite && schwarzermond_upgrade_amplifiedlens",
       "slot": "Armament@GARRISONED_AMP",
@@ -3266,7 +3378,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3276,7 +3388,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3294,6 +3416,7 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      },
@@ -3312,7 +3435,7 @@
       ],
       "warheads": [
        {
-        "damage": "3000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3322,7 +3445,17 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "3000",
+        "damage": "4000",
+        "tag": "Chaingun",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "2",
+        "tag": "ChaingunPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "4000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3340,17 +3473,18 @@
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
       "weapon_types": [
        "^SmallArms",
+       "^Chaingun",
        "^RA2LaserWeapon"
       ]
      }
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Flak"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Valued.Cost",
-     "v": "120"
+     "v": "500"
     },
     "design": {
      "class_anchor": null,
@@ -3360,7 +3494,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Health.HP",
-     "v": "24000"
+     "v": "30000"
     },
     "name": "Lunar Soldier",
     "prerequisites": [
@@ -3372,11 +3506,11 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "6500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/SchwarzerMond/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "50"
     }
    },
    "schwarzermond_noidharvester": {

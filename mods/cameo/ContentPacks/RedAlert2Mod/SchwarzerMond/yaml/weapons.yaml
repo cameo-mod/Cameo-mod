@@ -1,21 +1,32 @@
 schwarzermond_lunarsoldier_rifle:
+	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
+	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
+	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
 	Inherits: NaxiRifle
-	Inherits: ^RA2LaserWeapon
+	Inherits@cg: ^Chaingun
+	Inherits@laser: ^RA2LaserWeapon
 	ReloadDelay: 50
-	Range: 4500
+	Range: 6000
 	Report: vpriatta.wav
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
-		Damage: 3000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 3000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 2
