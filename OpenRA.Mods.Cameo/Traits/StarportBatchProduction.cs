@@ -543,11 +543,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		public readonly int AfterUnloadDelay = 25;
 
 		[NotificationReference("Speech")]
-		[Desc("Speech notification to play after a batch is delivered.")]
+		[Desc("Speech notification to play when a frigate begins unloading.")]
 		public readonly string ReadyAudio = "Reinforce";
 
 		[FluentReference(optional: true)]
-		[Desc("Text notification to display after a batch is delivered.")]
+		[Desc("Text notification to display when a frigate begins unloading.")]
 		public readonly string ReadyTextNotification = null;
 
 		public override object Create(ActorInitializer init) { return new StarportBatchAirdrop(init, this); }
@@ -796,6 +796,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		bool spawnScheduled;
 		bool deliveryStarted;
 		bool readyToUnload;
+		bool arrivalNotified;
 		bool finishing;
 		int retryDelay;
 
@@ -877,6 +878,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			return TickChild(self);
 		}
 
+		void NotifyArrival(Actor self)
+		{
+			if (arrivalNotified)
+				return;
+
+			arrivalNotified = true;
+			Game.Sound.PlayNotification(self.World.Map.Rules, self.Owner, "Speech",
+				production.Info.ReadyAudio, self.Owner.Faction.InternalName);
+			TextNotificationsManager.AddTransientLine(self.Owner, production.Info.ReadyTextNotification);
+		}
+
 		public override bool Tick(Actor self)
 		{
 			if (finishing)
@@ -889,9 +901,6 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (candidate == null)
 			{
 				queue.DeliveryFinished(batchId);
-				Game.Sound.PlayNotification(self.World.Map.Rules, self.Owner, "Speech",
-					production.Info.ReadyAudio, self.Owner.Faction.InternalName);
-				TextNotificationsManager.AddTransientLine(self.Owner, production.Info.ReadyTextNotification);
 				return FinishAfterChildren(self);
 			}
 
@@ -932,6 +941,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return false;
 			}
 
+			NotifyArrival(self);
 			spawnScheduled = true;
 			production.ScheduleCandidate(
 				producer,
