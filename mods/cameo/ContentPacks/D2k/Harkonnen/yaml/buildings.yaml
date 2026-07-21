@@ -92,6 +92,8 @@ harkonnen_autogunturret:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_barracks
 	Tooltip:
 		Name: Harkonnen Autogun Turret
+	Armament:
+		Weapon: harkonnen_autogunturret
 
 harkonnen_flameturret:
 	Inherits: ixian_gunturret

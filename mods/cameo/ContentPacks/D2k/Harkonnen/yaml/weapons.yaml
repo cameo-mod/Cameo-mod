@@ -40,6 +40,12 @@ HarkonnenFlameTurret:
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 4189
 
+harkonnen_autogunturret:
+	Inherits: ordos_autogunturret
+	ReloadDelay: 132
+	Burst: 26
+	BurstDelays: 2
+
 DebrisMissile:
 	ReloadDelay: 60
 	Range: 7c0
