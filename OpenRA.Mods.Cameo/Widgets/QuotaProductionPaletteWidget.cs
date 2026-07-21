@@ -32,10 +32,14 @@ namespace OpenRA.Mods.Cameo.Widgets
 		SpriteFont quotaFont;
 		SpriteFont hoverHeaderFont;
 		SpriteFont symbolFont;
+		readonly CameoSettings cameoSettings;
 
 		[ObjectCreator.UseCtor]
 		public QuotaProductionPaletteWidget(ModData modData, OrderManager orderManager, World world, WorldRenderer worldRenderer)
-			: base(modData, orderManager, world, worldRenderer) { }
+			: base(modData, orderManager, world, worldRenderer)
+		{
+			cameoSettings = modData.GetSettings<CameoSettings>();
+		}
 
 		public override void Initialize(WidgetArgs args)
 		{
@@ -103,7 +107,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			if (localPlayer == null || CurrentQueue == null)
 				return;
 
-			if (CurrentQueue.Info.Group == MainStructureProductionGroup)
+			if (cameoSettings.ShowBuildingCounts && CurrentQueue.Info.Group == MainStructureProductionGroup)
 			{
 				var structureCounts = World.ActorsHavingTrait<Building>()
 					.Where(a => a.Owner == localPlayer && !a.IsDead)

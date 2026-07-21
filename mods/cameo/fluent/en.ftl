@@ -312,6 +312,8 @@ checkbox_flash_transients_container =
     .tooltip = Flash important game-event notifications (base/unit under attack, superweapons) to draw attention
 
 ## settings_gameplay.yaml
+checkbox-building-counts.label = Show building counts in build menu
+checkbox-building-counts.tooltip = Display the number of owned buildings of each type on their build-menu icons.
 label_game_play_section_header = Gameplay
 auto-save-interval-label = Auto-save interval
 auto_save_nr_label = Auto-save files

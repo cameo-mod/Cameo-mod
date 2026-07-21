@@ -69,6 +69,14 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				quotaManager?.SetEnabled(cameoSettings.QuotaModeEnabled);
 			};
 
+			var buildingCountsCheckbox = panel.Get<CheckboxWidget>("BUILDING_COUNTS_CHECKBOX");
+			buildingCountsCheckbox.IsChecked = () => cameoSettings.ShowBuildingCounts;
+			buildingCountsCheckbox.OnClick = () =>
+			{
+				cameoSettings.ShowBuildingCounts ^= true;
+				cameoSettings.Save();
+			};
+
 			return () => false;
 		}
 
