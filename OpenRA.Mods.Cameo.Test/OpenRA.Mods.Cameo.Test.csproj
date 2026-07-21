@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <EngineRootPath>../engine</EngineRootPath>
+    <IsPublishable>false</IsPublishable>
+  </PropertyGroup>
+  <Import Project="../engine/Directory.Build.props" />
+  <ItemGroup>
+    <ProjectReference Include="../OpenRA.Mods.Cameo/OpenRA.Mods.Cameo.csproj" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
+    <PackageReference Include="NUnit" Version="4.3.2" />
+    <PackageReference Include="NUnit3TestAdapter" Version="4.6.0" />
+  </ItemGroup>
+</Project>

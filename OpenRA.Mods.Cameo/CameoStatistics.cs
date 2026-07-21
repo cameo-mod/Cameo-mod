@@ -11,7 +11,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace OpenRA.Mods.Cameo
@@ -31,84 +30,66 @@ namespace OpenRA.Mods.Cameo
 		public long ResourcesSpent;
 	}
 
-	// Reads and writes the local, cross-session statistics file. The data is keyed by
-	// faction internal name and lives next to the other per-user data under the support
-	// directory, so it survives reinstalls of the mod itself.
+	// Compatibility facade for the Statistics window. Durable data is owned by CameoCareerRepository;
+	// the UI receives an aggregate so it does not depend on the on-disk career schema.
 	public static class CameoStatistics
 	{
-		const string FileName = "cameo-statistics.yaml";
-
-		static string FilePath => Path.Combine(Platform.SupportDir, FileName);
-
-		// Never throws: a missing or malformed file simply yields an empty set, so a corrupt
-		// file can never crash the menu (the next Save overwrites it cleanly).
 		public static Dictionary<string, FactionStatistics> Load()
 		{
-			var result = new Dictionary<string, FactionStatistics>();
-			var path = FilePath;
-			if (!File.Exists(path))
-				return result;
+			var profile = new CameoCareerRepository(Platform.SupportDir).LoadOrImportLegacy().Profile;
+			return Aggregate(profile);
+		}
 
-			try
-			{
-				foreach (var node in MiniYaml.FromFile(path, false))
-				{
-					if (string.IsNullOrEmpty(node.Key))
-						continue;
+		public static Dictionary<string, FactionStatistics> Aggregate(CameoCareerProfile profile)
+		{
+			var result = profile.LegacyTotals.ToDictionary(
+				kv => kv.Key,
+				kv => Clone(kv.Value),
+				StringComparer.Ordinal);
 
-					result[node.Key] = FieldLoader.Load<FactionStatistics>(node.Value);
-				}
-			}
-			catch (Exception)
+			foreach (var match in profile.Matches.Values)
 			{
-				return new Dictionary<string, FactionStatistics>();
+				if (string.IsNullOrEmpty(match.Faction))
+					continue;
+				var won = string.Equals(match.Outcome, "Won", StringComparison.Ordinal);
+				var lost = string.Equals(match.Outcome, "Lost", StringComparison.Ordinal);
+				if (!won && !lost)
+					continue;
+
+				if (!result.TryGetValue(match.Faction, out var stats))
+					result.Add(match.Faction, stats = new FactionStatistics());
+
+				stats.GamesPlayed++;
+				if (won)
+					stats.GamesWon++;
+				else if (lost)
+					stats.GamesLost++;
+
+				stats.UnitsKilled += match.UnitsKilled;
+				stats.BuildingsKilled += match.BuildingsKilled;
+				stats.UnitsLost += match.UnitsLost;
+				stats.BuildingsLost += match.BuildingsLost;
+				stats.ResourcesEarned += match.ResourcesEarned;
+				stats.ResourcesSpent += match.ResourcesSpent;
 			}
 
 			return result;
 		}
 
-		public static void Save(Dictionary<string, FactionStatistics> stats)
+		static FactionStatistics Clone(FactionStatistics source)
 		{
-			try
+			return new FactionStatistics
 			{
-				stats
-					.OrderBy(kv => kv.Key, StringComparer.Ordinal)
-					.Select(kv => new MiniYamlNode(kv.Key, FieldSaver.Save(kv.Value)))
-					.ToList()
-					.WriteToFile(FilePath);
-			}
-			catch (Exception)
-			{
-				// Best-effort: failing to persist statistics must never interrupt the game.
-			}
-		}
-
-		// Folds one completed game's results into the running total for a faction.
-		public static void Record(string faction, bool won,
-			int unitsKilled, int buildingsKilled, int unitsLost, int buildingsLost,
-			long resourcesEarned, long resourcesSpent)
-		{
-			if (string.IsNullOrEmpty(faction))
-				return;
-
-			var stats = Load();
-			if (!stats.TryGetValue(faction, out var s))
-				stats[faction] = s = new FactionStatistics();
-
-			s.GamesPlayed++;
-			if (won)
-				s.GamesWon++;
-			else
-				s.GamesLost++;
-
-			s.UnitsKilled += unitsKilled;
-			s.BuildingsKilled += buildingsKilled;
-			s.UnitsLost += unitsLost;
-			s.BuildingsLost += buildingsLost;
-			s.ResourcesEarned += resourcesEarned;
-			s.ResourcesSpent += resourcesSpent;
-
-			Save(stats);
+				GamesPlayed = source.GamesPlayed,
+				GamesWon = source.GamesWon,
+				GamesLost = source.GamesLost,
+				UnitsKilled = source.UnitsKilled,
+				BuildingsKilled = source.BuildingsKilled,
+				UnitsLost = source.UnitsLost,
+				BuildingsLost = source.BuildingsLost,
+				ResourcesEarned = source.ResourcesEarned,
+				ResourcesSpent = source.ResourcesSpent
+			};
 		}
 	}
 }
