@@ -14,6 +14,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading;
 
 namespace OpenRA.Mods.Cameo
 {
@@ -54,6 +57,46 @@ namespace OpenRA.Mods.Cameo
 		Invalid
 	}
 
+	public enum CameoCareerAppendResult
+	{
+		Appended,
+		AlreadyPresent,
+		RetryableFailure,
+		ReadOnly
+	}
+
+	internal interface ICameoCareerAppender
+	{
+		CameoCareerAppendResult Append(string recordId, CareerMatchRecord match);
+	}
+
+	internal sealed class PendingCameoCareerMatch
+	{
+		readonly ICameoCareerAppender appender;
+		readonly string recordId;
+		readonly CareerMatchRecord match;
+
+		public bool IsTerminal { get; private set; }
+
+		public PendingCameoCareerMatch(ICameoCareerAppender appender, string recordId, CareerMatchRecord match)
+		{
+			this.appender = appender;
+			this.recordId = recordId;
+			this.match = match;
+		}
+
+		public CameoCareerAppendResult TryAppend()
+		{
+			if (IsTerminal)
+				return CameoCareerAppendResult.AlreadyPresent;
+
+			var result = appender.Append(recordId, match);
+			IsTerminal = result is CameoCareerAppendResult.Appended or
+				CameoCareerAppendResult.AlreadyPresent or CameoCareerAppendResult.ReadOnly;
+			return result;
+		}
+	}
+
 	public sealed class CameoCareerLoadResult
 	{
 		public readonly CameoCareerProfile Profile;
@@ -73,7 +116,7 @@ namespace OpenRA.Mods.Cameo
 
 	// Owns the durable, release-independent Cameo career file. The schema gate prevents an older
 	// build from rewriting a career created by a newer build that it cannot understand.
-	public sealed class CameoCareerRepository
+	public sealed class CameoCareerRepository : ICameoCareerAppender
 	{
 		public const int CurrentSchemaVersion = 1;
 		public const string CareerFileName = "cameo-career.yaml";
@@ -82,12 +125,26 @@ namespace OpenRA.Mods.Cameo
 		readonly string filePath;
 		readonly string backupPath;
 		readonly string legacyPath;
+		readonly string mutexName;
+		readonly TimeSpan lockTimeout;
+		readonly Action beforeSave;
 
 		public CameoCareerRepository(string supportDirectory)
+			: this(supportDirectory, TimeSpan.FromMilliseconds(100), null) { }
+
+		internal CameoCareerRepository(string supportDirectory, TimeSpan lockTimeout, Action beforeSave)
 		{
 			filePath = Path.Combine(supportDirectory, CareerFileName);
 			backupPath = filePath + ".bak";
 			legacyPath = Path.Combine(supportDirectory, LegacyFileName);
+			this.lockTimeout = lockTimeout;
+			this.beforeSave = beforeSave;
+
+			var canonicalPath = Path.GetFullPath(filePath);
+			if (OperatingSystem.IsWindows())
+				canonicalPath = canonicalPath.ToUpperInvariant();
+			mutexName = "OpenRA-CameoCareer-" + Convert.ToHexString(
+				SHA256.HashData(Encoding.UTF8.GetBytes(canonicalPath)));
 		}
 
 		public CameoCareerLoadResult Load()
@@ -122,6 +179,24 @@ namespace OpenRA.Mods.Cameo
 
 		public CameoCareerLoadResult LoadOrImportLegacy()
 		{
+			if (!TryEnterLock(out var mutex))
+			{
+				Log.Write("debug", $"Timed out waiting to import Cameo career '{filePath}'.");
+				return Load();
+			}
+
+			try
+			{
+				return LoadOrImportLegacyUnlocked();
+			}
+			finally
+			{
+				ReleaseLock(mutex);
+			}
+		}
+
+		CameoCareerLoadResult LoadOrImportLegacyUnlocked()
+		{
 			var loaded = Load();
 			if (loaded.Status != CameoCareerLoadStatus.Missing || !File.Exists(legacyPath))
 				return loaded;
@@ -137,7 +212,7 @@ namespace OpenRA.Mods.Cameo
 				if (loaded.Profile.LegacyTotals.Count == 0)
 					return loaded;
 
-				Save(loaded.Profile);
+				SaveUnlocked(loaded.Profile);
 				Log.Write("debug", $"Imported legacy Cameo statistics from '{legacyPath}'.");
 				return new CameoCareerLoadResult(loaded.Profile, CameoCareerLoadStatus.Loaded);
 			}
@@ -148,20 +223,39 @@ namespace OpenRA.Mods.Cameo
 			}
 		}
 
-		public bool Append(string recordId, CareerMatchRecord match)
+		public CameoCareerAppendResult Append(string recordId, CareerMatchRecord match)
 		{
 			if (string.IsNullOrEmpty(recordId) || match == null)
-				return false;
+				return CameoCareerAppendResult.ReadOnly;
 
-			var loaded = LoadOrImportLegacy();
+			if (!TryEnterLock(out var mutex))
+			{
+				Log.Write("debug", $"Timed out waiting to append match '{recordId}' to Cameo career '{filePath}'.");
+				return CameoCareerAppendResult.RetryableFailure;
+			}
+
+			try
+			{
+				return AppendUnlocked(recordId, match);
+			}
+			finally
+			{
+				ReleaseLock(mutex);
+			}
+		}
+
+		CameoCareerAppendResult AppendUnlocked(string recordId, CareerMatchRecord match)
+		{
+			// Reload only after taking the cross-process lock: the whole read-modify-write is one transaction.
+			var loaded = LoadOrImportLegacyUnlocked();
 			if (!loaded.CanWrite)
 			{
 				Log.Write("debug", $"Cameo career is read-only ({loaded.Status}); match '{recordId}' was not recorded.");
-				return false;
+				return CameoCareerAppendResult.ReadOnly;
 			}
 
 			if (loaded.Profile.Matches.ContainsKey(recordId))
-				return false;
+				return CameoCareerAppendResult.AlreadyPresent;
 
 			try
 			{
@@ -169,17 +263,32 @@ namespace OpenRA.Mods.Cameo
 					PreserveInvalidPrimary();
 
 				loaded.Profile.Matches.Add(recordId, match);
-				Save(loaded.Profile);
-				return true;
+				SaveUnlocked(loaded.Profile);
+				return CameoCareerAppendResult.Appended;
 			}
 			catch (Exception e)
 			{
 				Log.Write("debug", $"Unable to append match '{recordId}' to Cameo career '{filePath}': {e}");
-				return false;
+				return CameoCareerAppendResult.RetryableFailure;
 			}
 		}
 
 		public void Save(CameoCareerProfile profile)
+		{
+			if (!TryEnterLock(out var mutex))
+				throw new IOException($"Timed out waiting to save Cameo career '{filePath}'.");
+
+			try
+			{
+				SaveUnlocked(profile);
+			}
+			finally
+			{
+				ReleaseLock(mutex);
+			}
+		}
+
+		void SaveUnlocked(CameoCareerProfile profile)
 		{
 			if (profile.SchemaVersion != CurrentSchemaVersion)
 				throw new InvalidOperationException(
@@ -191,6 +300,7 @@ namespace OpenRA.Mods.Cameo
 
 			try
 			{
+				beforeSave?.Invoke();
 				Serialize(profile).WriteToFile(temporaryPath);
 				if (File.Exists(filePath))
 					File.Replace(temporaryPath, filePath, backupPath, true);
@@ -201,6 +311,44 @@ namespace OpenRA.Mods.Cameo
 			{
 				if (File.Exists(temporaryPath))
 					File.Delete(temporaryPath);
+			}
+		}
+
+		bool TryEnterLock(out Mutex mutex)
+		{
+			mutex = null;
+			try
+			{
+				mutex = new Mutex(false, mutexName);
+				if (mutex.WaitOne(lockTimeout))
+					return true;
+			}
+			catch (AbandonedMutexException)
+			{
+				return true;
+			}
+			catch (Exception e)
+			{
+				mutex?.Dispose();
+				mutex = null;
+				Log.Write("debug", $"Unable to acquire Cameo career lock '{mutexName}': {e}");
+				return false;
+			}
+
+			mutex.Dispose();
+			mutex = null;
+			return false;
+		}
+
+		static void ReleaseLock(Mutex mutex)
+		{
+			try
+			{
+				mutex.ReleaseMutex();
+			}
+			finally
+			{
+				mutex.Dispose();
 			}
 		}
 

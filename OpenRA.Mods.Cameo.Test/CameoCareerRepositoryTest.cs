@@ -46,8 +46,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var repository = new CameoCareerRepository(directory);
 			var match = Match("atreides", "Won", 12);
 
-			Assert.That(repository.Append("match-one", match), Is.True);
-			Assert.That(repository.Append("match-one", match), Is.False);
+			Assert.That(repository.Append("match-one", match), Is.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(repository.Append("match-one", match), Is.EqualTo(CameoCareerAppendResult.AlreadyPresent));
 
 			var loaded = repository.Load();
 			Assert.That(loaded.Status, Is.EqualTo(CameoCareerLoadStatus.Loaded));
@@ -67,7 +67,8 @@ namespace OpenRA.Mods.Cameo.Test
 			var loaded = repository.Load();
 			Assert.That(loaded.Status, Is.EqualTo(CameoCareerLoadStatus.UnsupportedFutureVersion));
 			Assert.That(loaded.CanWrite, Is.False);
-			Assert.That(repository.Append("blocked", Match("ordos", "Lost", 0)), Is.False);
+			Assert.That(repository.Append("blocked", Match("ordos", "Lost", 0)),
+				Is.EqualTo(CameoCareerAppendResult.ReadOnly));
 			Assert.That(File.ReadAllText(path), Is.EqualTo(future));
 		}
 
@@ -91,13 +92,16 @@ namespace OpenRA.Mods.Cameo.Test
 		public void BackupRecoveryPreservesInvalidPrimaryBeforeWriting()
 		{
 			var repository = new CameoCareerRepository(directory);
-			Assert.That(repository.Append("first", Match("atreides", "Won", 1)), Is.True);
-			Assert.That(repository.Append("second", Match("ordos", "Lost", 2)), Is.True);
+			Assert.That(repository.Append("first", Match("atreides", "Won", 1)),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(repository.Append("second", Match("ordos", "Lost", 2)),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
 
 			var path = Path.Combine(directory, CameoCareerRepository.CareerFileName);
 			File.WriteAllText(path, "not: [valid career yaml");
 			Assert.That(repository.Load().Status, Is.EqualTo(CameoCareerLoadStatus.RecoveredFromBackup));
-			Assert.That(repository.Append("recovered", Match("harkonnen", "Won", 3)), Is.True);
+			Assert.That(repository.Append("recovered", Match("harkonnen", "Won", 3)),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
 
 			Assert.That(Directory.GetFiles(directory, "cameo-career.yaml.invalid-*"), Has.Length.EqualTo(1));
 			var loaded = repository.Load();
@@ -131,19 +135,98 @@ namespace OpenRA.Mods.Cameo.Test
 			var firstRepository = new CameoCareerRepository(directory);
 			var first = Match("atreides", "Won", 5);
 			first.ModVersion = "playtest-20260721";
-			Assert.That(firstRepository.Append("release-a-match", first), Is.True);
+			Assert.That(firstRepository.Append("release-a-match", first),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
 			var careerId = firstRepository.Load().Profile.CareerId;
 
 			var nextReleaseRepository = new CameoCareerRepository(directory);
 			var second = Match("ordos", "Lost", 2);
 			second.ModVersion = "playtest-20260801";
-			Assert.That(nextReleaseRepository.Append("release-b-match", second), Is.True);
+			Assert.That(nextReleaseRepository.Append("release-b-match", second),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
 
 			var loaded = nextReleaseRepository.Load().Profile;
 			Assert.That(loaded.CareerId, Is.EqualTo(careerId));
 			Assert.That(loaded.Matches, Has.Count.EqualTo(2));
 			Assert.That(loaded.Matches["release-a-match"].ModVersion, Is.EqualTo("playtest-20260721"));
 			Assert.That(loaded.Matches["release-b-match"].ModVersion, Is.EqualTo("playtest-20260801"));
+		}
+
+		[Test]
+		public void ConcurrentRepositoriesPreserveEveryMatch()
+		{
+			const int count = 24;
+			var results = new CameoCareerAppendResult[count];
+			System.Threading.Tasks.Parallel.For(0, count, i =>
+			{
+				var repository = new CameoCareerRepository(directory);
+				for (var attempt = 0; attempt < 100; attempt++)
+				{
+					results[i] = repository.Append("concurrent-" + i, Match("atreides", "Won", i));
+					if (results[i] != CameoCareerAppendResult.RetryableFailure)
+						break;
+
+					System.Threading.Thread.Sleep(5);
+				}
+			});
+
+			Assert.That(results, Is.All.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(new CameoCareerRepository(directory).Load().Profile.Matches, Has.Count.EqualTo(count));
+		}
+
+		[Test]
+		public void TransientWriteFailureCanBeRetriedWithoutDuplicatingMatch()
+		{
+			var failNextSave = true;
+			var repository = new CameoCareerRepository(directory, TimeSpan.FromMilliseconds(100), () =>
+			{
+				if (failNextSave)
+				{
+					failNextSave = false;
+					throw new IOException("Injected transient write failure.");
+				}
+			});
+
+			Assert.That(repository.Append("retry-match", Match("ordos", "Lost", 4)),
+				Is.EqualTo(CameoCareerAppendResult.RetryableFailure));
+			Assert.That(repository.Append("retry-match", Match("ordos", "Lost", 4)),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(repository.Append("retry-match", Match("ordos", "Lost", 4)),
+				Is.EqualTo(CameoCareerAppendResult.AlreadyPresent));
+			Assert.That(repository.Load().Profile.Matches, Has.Count.EqualTo(1));
+		}
+
+		[Test]
+		public void PendingMatchRetriesAtGameOverAndBecomesTerminalExactlyOnce()
+		{
+			var appender = new SequencedAppender(
+				CameoCareerAppendResult.RetryableFailure,
+				CameoCareerAppendResult.Appended);
+			var pending = new PendingCameoCareerMatch(appender, "game-over-match", Match("atreides", "Won", 7));
+
+			Assert.That(pending.TryAppend(), Is.EqualTo(CameoCareerAppendResult.RetryableFailure));
+			Assert.That(pending.IsTerminal, Is.False);
+			Assert.That(pending.TryAppend(), Is.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(pending.IsTerminal, Is.True);
+			Assert.That(pending.TryAppend(), Is.EqualTo(CameoCareerAppendResult.AlreadyPresent));
+			Assert.That(appender.CallCount, Is.EqualTo(2));
+		}
+
+		sealed class SequencedAppender : ICameoCareerAppender
+		{
+			readonly CameoCareerAppendResult[] results;
+
+			public int CallCount { get; private set; }
+
+			public SequencedAppender(params CameoCareerAppendResult[] results)
+			{
+				this.results = results;
+			}
+
+			public CameoCareerAppendResult Append(string recordId, CareerMatchRecord match)
+			{
+				return results[CallCount++];
+			}
 		}
 
 		static CareerMatchRecord Match(string faction, string outcome, int unitsKilled)

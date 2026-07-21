@@ -24,20 +24,58 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new CameoCareerRecorder(); }
 	}
 
-	public class CameoCareerRecorder : ITick
+	public class CameoCareerRecorder : ITick, IGameOver
 	{
 		bool recorded;
+		int retryCount;
+		int nextAttemptTick;
+		PendingCameoCareerMatch pending;
 
 		void ITick.Tick(Actor self)
+		{
+			if (recorded || self.World.WorldTick < nextAttemptTick)
+				return;
+
+			var world = self.World;
+			pending ??= Capture(world);
+			if (pending == null)
+				return;
+
+			TryPersist(world.WorldTick);
+		}
+
+		void IGameOver.GameOver(World world)
 		{
 			if (recorded)
 				return;
 
-			var world = self.World;
+			pending ??= Capture(world);
+			if (pending == null)
+				return;
+
+			// EndGame stops world ticks. Make a few short final attempts so a momentary lock held by
+			// another Cameo instance cannot strand an otherwise complete match.
+			for (var i = 0; i < 5 && !recorded; i++)
+				TryPersist(world.WorldTick);
+		}
+
+		void TryPersist(int worldTick)
+		{
+			var result = pending.TryAppend();
+			recorded = pending.IsTerminal;
+			if (!recorded && result == CameoCareerAppendResult.RetryableFailure)
+			{
+				retryCount++;
+				nextAttemptTick = worldTick + Math.Min(1 << Math.Min(retryCount - 1, 5), 30);
+			}
+		}
+
+		static PendingCameoCareerMatch Capture(World world)
+		{
 			var player = world.LocalPlayer;
 			if (world.Type != WorldType.Regular || world.IsReplay || player == null ||
 				player.Spectating || player.NonCombatant || player.IsBot)
-				return;
+				return null;
 
 			var outcome = player.WinState switch
 			{
@@ -46,19 +84,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				_ => null
 			};
 			if (outcome == null)
-				return;
+				return null;
 
 			var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
 			if (stats == null)
-				return;
+				return null;
 
-			// Guard before persistence so the final outcome can only create one match in this world.
-			recorded = true;
 			var resources = player.PlayerActor.TraitOrDefault<PlayerResources>();
 			var gameUid = world.LobbyInfo.GlobalSettings.GameUid ?? "";
 			var recordId = !string.IsNullOrEmpty(gameUid) ? gameUid : Guid.NewGuid().ToString("D");
 
-			new CameoCareerRepository(Platform.SupportDir).Append(recordId, new CareerMatchRecord
+			var match = new CareerMatchRecord
 			{
 				RecordedUtc = DateTime.UtcNow.ToString("o", CultureInfo.InvariantCulture),
 				Outcome = outcome,
@@ -74,7 +110,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				BuildingsLost = stats.BuildingsDead,
 				ResourcesEarned = resources?.Earned ?? 0,
 				ResourcesSpent = resources?.Spent ?? 0
-			});
+			};
+
+			return new PendingCameoCareerMatch(new CameoCareerRepository(Platform.SupportDir), recordId, match);
 		}
 	}
 }
