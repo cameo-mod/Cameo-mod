@@ -19,6 +19,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Enables Quota Mode: production buildings auto-requeue units to maintain alive count targets.")]
 		public bool QuotaModeEnabled = false;
 
+		[Desc("Show the number of owned buildings of each type on the production palette.")]
+		public bool ShowBuildingCounts = true;
+
 		[Desc("Selected cyberintel UI colour theme. On change, the matching baked chrome sheets are ",
 			"copied over the active ones (applies after restart). Options live in uibits/cyberintel_themes/. ",
 			"\"random\" re-picks a colour on every boot.")]

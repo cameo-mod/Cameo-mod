@@ -70,3 +70,18 @@ Container@GAMEPLAY_PANEL:
 									Text: checkbox_quota_mode.label
 									TooltipText: checkbox_quota_mode.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
+				Container@BUILDING_COUNTS_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Children:
+						Container@BUILDING_COUNTS_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@BUILDING_COUNTS_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-building-counts.label
+									TooltipText: checkbox-building-counts.tooltip
+									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
