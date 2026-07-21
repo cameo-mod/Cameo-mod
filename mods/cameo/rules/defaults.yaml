@@ -3575,6 +3575,8 @@
 		Dimensions: 1,1
 		Footprint: x
 	ActorPreviewPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	SoundOnDamageTransition:
 		DamagedSounds: xplobig4.aud
 		DestroyedSounds: crumble.aud, xplobig4.aud
@@ -4197,6 +4199,8 @@
 		BuildSounds: hvydoor1.aud
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune ##########
 	FootprintPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 5
@@ -9352,6 +9356,8 @@ CPQDEBUGDUMMY:
 	Interactable:
 	Building:
 	FootprintPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:

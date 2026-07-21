@@ -5,7 +5,8 @@ ixian_mobileconstructionvehicle:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_repairpad
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ixian_vehicle_production, ixian_mcv_production
 		Description: Deploys into a Construction Yard.\n  Unarmed
 		IconPalette: d2kunit
 	Tooltip:
@@ -33,8 +34,8 @@ ixian_spiceharvester:
 	Inherits@harv: ^Harvester
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~spice_refinery, ~ixian_advancedheavyfactory
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~spice_refinery, ~ixian_vehicle_production
 		BuildPaletteOrder: 10
 		Description: template_harvester.description
 		IconPalette: d2kunit
@@ -101,9 +102,9 @@ ixian_ixsiegetank:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 50
-		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockixsiegetank, ixian_outpost
+		Prerequisites: ~ixian_vehicle_production, ~ixian_promotion_unlockixsiegetank, ixian_outpost
 		Description: actor_siege_tank.description
 		IconPalette: ra2
 	Health:
@@ -190,8 +191,8 @@ ixian_ixmissiletank:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_ixresearchcenter
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ixian_vehicle_production, ixian_ixresearchcenter
 		BuildPaletteOrder: 60
 		Description: actor_missile_tank.description
 		IconPalette: d2kunit
@@ -452,9 +453,9 @@ rocket_raider.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ixian_advancedheavyfactory, ~!ixian_promotion_unlockheavyixraider
+		Prerequisites: ~ixian_vehicle_production, ~!ixian_promotion_unlockheavyixraider
 		Description: actor_rocket_raider.description
 	Tooltip:
 		Name: Ix Raider
@@ -545,9 +546,9 @@ ixian_shockraider:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_ixresearchcenter, ~!ixian_promotion_unlockstormraider
+		Prerequisites: ~ixian_vehicle_production, ixian_ixresearchcenter, ~!ixian_promotion_unlockstormraider
 		Description: actor_shock_raider.description
 		IconPalette: player
 	Valued:
@@ -611,8 +612,8 @@ ixian_mongoose:
 	Selectable:
 		Bounds: 1280, 1280
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ixian_advancedheavyfactory
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~ixian_vehicle_production
 		Description: Fast scout vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 		BuildPaletteOrder: 30
 	Mobile:
@@ -663,11 +664,11 @@ ixian_koda_tank:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~ixian_advancedheavyfactory, ~!d2k_duelist_tank_upgrade
+		Prerequisites: ~ixian_vehicle_production, ~!d2k_duelist_tank_upgrade
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -934,9 +935,9 @@ ixian_stormraider:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_ixresearchcenter, ~ixian_promotion_unlockstormraider
+		Prerequisites: ~ixian_vehicle_production, ixian_ixresearchcenter, ~ixian_promotion_unlockstormraider
 		Description: actor_shock_raider.description
 		IconPalette: player
 	Valued:
@@ -1012,9 +1013,9 @@ heavy_rocket_raider.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 10
-		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockheavyixraider
+		Prerequisites: ~ixian_vehicle_production, ~ixian_promotion_unlockheavyixraider
 		Description: actor_rocket_raider.description
 	Tooltip:
 		Name: Heavy Ix Raider
@@ -1119,11 +1120,11 @@ ixian_ixcombatsiege:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
 		Description: actor_siege_tank.description
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_outpost
+		Prerequisites: ~ixian_vehicle_production, ixian_outpost
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1193,9 +1194,9 @@ ixian_neocymek:
 	Valued:
 		Cost: 4500
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 20
-		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
+		Prerequisites: ~ixian_vehicle_production, ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
 		Description: Colossal Ixian Mech.
 	Mobile:
 		Speed: 45
@@ -1288,10 +1289,10 @@ ixian_ixprojector:
 	Tooltip:
 		Name: Ix Projector
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~ixian_advancedheavyfactory, ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
+		Prerequisites: ~ixian_vehicle_production, ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
 		Description: actor_ixprojector.description
 		IconPalette: windows256
 	Health:
@@ -1548,10 +1549,10 @@ duelist_tank.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
-		Prerequisites: ~ixian_advancedheavyfactory, ixian_ixresearchcenter
+		Prerequisites: ~ixian_vehicle_production, ixian_ixresearchcenter
 		Description: actor_duelist_tank.description
 	Valued:
 		Cost: 1800

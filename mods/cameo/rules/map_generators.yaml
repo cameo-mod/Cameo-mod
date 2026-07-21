@@ -2,7 +2,7 @@
 	ClassicMapGenerator@classic:
 		Type: classic
 		Name: map-generator-classic
-		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE, BARREN
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE, BARREN, VOLCANIC
 		Settings:
 			MultiChoiceOption@hidden_defaults:
 				Choice@hidden_defaults:
@@ -104,6 +104,11 @@
 						WaterTile: 1
 				Choice@barren:
 					Tileset: BARREN
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@volcanic:
+					Tileset: VOLCANIC
 					Settings:
 						LandTile: 255
 						WaterTile: 1
@@ -813,7 +818,7 @@
 	ClearMapGenerator@clear:
 		Type: clear
 		Name: map-generator-clear
-		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT, VOLCANIC
 		Settings:
 			MultiChoiceOption@Tile:
 				Label: label_clear_map_generator_option_tile
@@ -875,6 +880,16 @@
 				Choice@DesertTDWater:
 					Label: label_clear_map_generator_choice_tile_water
 					Tileset: DESERT
+					Settings:
+						Tile: 1
+				Choice@VolcanicClear:
+					Label: label_clear_map_generator_choice_tile_clear
+					Tileset: VOLCANIC
+					Settings:
+						Tile: 255
+				Choice@VolcanicLava:
+					Label: label_clear_map_generator_choice_tile_water
+					Tileset: VOLCANIC
 					Settings:
 						Tile: 1
 				Choice@ArrakisSand:

@@ -3535,6 +3535,14 @@ RockExplode:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: EXPLHG1.WAV
 
+VolcanicBasaltExplode:
+	ValidTargets: Ground, Water, Air
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+		ImpactSounds: EXPLHG1.WAV
+
 RockDebris:
 	ValidTargets: Ground, Water
 	ReloadDelay: 60

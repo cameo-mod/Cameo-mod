@@ -529,6 +529,8 @@ td_nod_samsite:
 		Amount: -40
 	-ActorPreviewPlaceBuildingPreview:
 	SequencePlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 		Sequence: place
 	DamageMultiplier@2x1Shape:
 		Modifier: 75
