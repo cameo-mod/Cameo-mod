@@ -507,6 +507,28 @@ FLARE:
 	MapEditorData:
 		Categories: System
 	Interactable:
+
+Vortex:
+	Immobile:
+		OccupiesSpace: false
+	RevealsShroud:
+		Range: 3c0
+		Type: CenterPosition
+	RenderSprites:
+		Image: vortexanim2
+		Palette: ra
+	WithSpriteBody:
+		StartSequence: open
+	HiddenUnderFog:
+		Type: CenterPosition
+	Tooltip:
+		Name: Vortex
+		ShowOwnerRow: false
+	BodyOrientation:
+		QuantizedFacings: 1
+	MapEditorData:
+		Categories: System
+	Interactable:
 ####################################################################################################
 #		RA
 ####################################################################################################

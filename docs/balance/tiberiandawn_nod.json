@@ -10,6 +10,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
       "slot": "Armament@PRIMARY",
@@ -28,12 +29,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeliGun"
+      "weapon": "HeliGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -53,7 +58,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeliMissiles"
+      "weapon": "HeliMissiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -131,6 +139,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4000",
       "reloaddelay": "18",
       "slot": "Armament@PRIMARY",
@@ -192,7 +201,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "VenomLaser"
+      "weapon": "VenomLaser",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^Chaingun",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -382,6 +397,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -444,10 +460,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TurretGun"
+      "weapon": "TurretGun",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -529,7 +552,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TurretGunBlackMarket"
+      "weapon": "TurretGunBlackMarket",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyCannon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumCannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -644,6 +675,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6800",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -727,7 +759,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NodTurretLaser"
+      "weapon": "NodTurretLaser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -792,6 +832,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9600",
       "reloaddelay": "96",
       "slot": "Armament",
@@ -815,7 +856,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "LaserObelisk"
+      "weapon": "LaserObelisk",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -893,6 +937,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12193",
       "reloaddelay": "40",
       "slot": "Armament",
@@ -923,7 +968,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Dragon"
+      "weapon": "Dragon",
+      "weapon_types": [
+       "^HeavyAAWeapon",
+       "^ImpactGlow",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -1082,6 +1132,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4988",
       "reloaddelay": "46",
       "slot": "Armament@PRIMARY",
@@ -1105,13 +1156,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHandFlamer"
+      "weapon": "BlackHandFlamer",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4988",
       "reloaddelay": "46",
       "slot": "Armament@Garrison",
@@ -1135,7 +1190,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHandFlamer"
+      "weapon": "BlackHandFlamer",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1179,6 +1237,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6006",
       "reloaddelay": "54",
       "slot": "Armament@PRIMARY",
@@ -1229,11 +1288,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChemRockets"
+      "weapon": "ChemRockets",
+      "weapon_types": [
+       "^Grenade",
+       "^LightChemicalWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6006",
       "reloaddelay": "54",
       "slot": "Armament@GARRISONED",
@@ -1284,7 +1349,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChemRockets"
+      "weapon": "ChemRockets",
+      "weapon_types": [
+       "^Grenade",
+       "^LightChemicalWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -1327,6 +1397,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "3414",
       "reloaddelay": "48",
       "slot": "Armament",
@@ -1350,11 +1421,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Chemspray"
+      "weapon": "Chemspray",
+      "weapon_types": [
+       "^LightChemicalWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": false,
       "range": "3414",
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
@@ -1378,7 +1453,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Chemspray"
+      "weapon": "Chemspray",
+      "weapon_types": [
+       "^LightChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1422,6 +1500,8 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
@@ -1429,20 +1509,25 @@
        "IvanAttach"
       ],
       "warheads": [],
-      "weapon": "TanyaAttach"
+      "weapon": "TanyaAttach",
+      "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4building",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GenericC4"
+      "weapon": "GenericC4",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -1461,11 +1546,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper"
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
@@ -1484,7 +1573,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_gdi_commando_sniper"
+      "weapon": "td_gdi_commando_sniper",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1532,6 +1624,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "2085",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -1555,11 +1648,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Flamethrower"
+      "weapon": "Flamethrower",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": false,
       "range": "2085",
       "reloaddelay": "60",
       "slot": "Armament@GARRISONED",
@@ -1583,7 +1680,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Flamethrower"
+      "weapon": "Flamethrower",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1628,6 +1728,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
       "slot": "Armament@pointdefense",
@@ -1651,11 +1752,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NodCommandoLaser"
+      "weapon": "NodCommandoLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
       "slot": "Armament",
@@ -1679,11 +1784,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NodCommandoLaser"
+      "weapon": "NodCommandoLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6030",
       "reloaddelay": "8",
       "slot": "Armament@GARRISONED",
@@ -1707,16 +1816,22 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "NodCommandoLaser"
+      "weapon": "NodCommandoLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GenericC4"
+      "weapon": "GenericC4",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1764,20 +1879,43 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "range": "5300",
-      "reloaddelay": "60",
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "30000",
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "15",
+        "damage": "4",
         "tag": "LaserWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -1787,25 +1925,53 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHandLaser"
+      "weapon": "BlackHandLaser",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
-      "range": "5300",
-      "reloaddelay": "60",
+      "pricing": false,
+      "range": "6000",
+      "reloaddelay": "50",
       "slot": "Armament@Garrison",
       "versus_templates": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
        "^LaserWeapon"
       ],
       "warheads": [
        {
-        "damage": "30000",
+        "damage": "8000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
+        "tag": "FlakWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "4",
+        "tag": "FlakWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "8000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "15",
+        "damage": "4",
         "tag": "LaserWeaponPercentage",
         "type": "HealthPercentageDamage"
        },
@@ -1815,16 +1981,21 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "BlackHandLaser"
+      "weapon": "BlackHandLaser",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
      "src": "inherited",
-     "v": "Plate"
+     "v": "Flak"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
-     "v": "700"
+     "v": "750"
     },
     "design": {
      "class_anchor": null,
@@ -1848,11 +2019,11 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "6000"
+     "v": "6500"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "50"
     }
    },
    "td_nod_minigunner": {
@@ -1862,6 +2033,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -1881,7 +2053,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_nod_minigunner_minigun"
+      "weapon": "td_nod_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1889,6 +2064,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -1908,13 +2084,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "td_nod_minigunner_minigun"
+      "weapon": "td_nod_minigunner_minigun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -1961,7 +2141,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "td_nod_minigunner_minigun_laser"
+      "weapon": "td_nod_minigunner_minigun_laser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1969,6 +2154,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "4500",
       "reloaddelay": "40",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -2015,7 +2201,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "td_nod_minigunner_minigun_laser"
+      "weapon": "td_nod_minigunner_minigun_laser",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2057,6 +2248,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "6368",
       "reloaddelay": "63",
       "slot": "Armament@PRIMARY",
@@ -2075,11 +2267,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
       "slot": "Armament@GARRISONED",
@@ -2098,7 +2294,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rockets"
+      "weapon": "Rockets",
+      "weapon_types": [
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -2143,6 +2342,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "90",
       "slot": "Armament@PRIMARY",
@@ -2215,13 +2415,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BHRedDarts"
+      "weapon": "BHRedDarts",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "90",
       "slot": "Armament@Garrison",
@@ -2294,7 +2502,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BHRedDarts"
+      "weapon": "BHRedDarts",
+      "weapon_types": [
+       "^TeslaChargedWeapon",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^ShrapnelWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -2382,6 +2597,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -2417,12 +2633,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NodTorpTube"
+      "weapon": "NodTorpTube",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -2453,7 +2674,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NodTorpTubeBlackMarket"
+      "weapon": "NodTorpTubeBlackMarket",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -2500,6 +2725,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9550",
       "reloaddelay": "90",
       "slot": "Armament@PRIMARY",
@@ -2523,13 +2749,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "CorvetteLaserObelisk"
+      "weapon": "CorvetteLaserObelisk",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "7",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9550",
       "reloaddelay": "35",
       "slot": "Armament@SECONDARY",
@@ -2549,7 +2779,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorvetteDragon"
+      "weapon": "CorvetteDragon",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      }
     ],
     "armor": {
@@ -2599,6 +2833,7 @@
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "1790",
+      "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
@@ -2676,7 +2911,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HonestJohn"
+      "weapon": "HonestJohn",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -3200,6 +3442,7 @@
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "minrange": "2468",
+      "pricing": true,
       "range": "12345",
       "reloaddelay": "112",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -3240,11 +3483,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArtilleryShell"
+      "weapon": "ArtilleryShell",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "2470",
+      "pricing": true,
       "range": "12345",
       "reloaddelay": "96",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3339,7 +3587,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArtilleryShellUpgrade"
+      "weapon": "ArtilleryShellUpgrade",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^MediumCannon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -3389,6 +3645,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -3407,12 +3664,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGun"
+      "weapon": "MachineGun",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3437,7 +3698,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballLauncherBuggy"
+      "weapon": "FireballLauncherBuggy",
+      "weapon_types": [
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3486,6 +3750,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -3526,12 +3791,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunBuggy2"
+      "weapon": "MachineGunBuggy2",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3588,12 +3859,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballLauncherBuggy2"
+      "weapon": "FireballLauncherBuggy2",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
       "slot": "Armament@AA",
@@ -3632,12 +3909,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MachineGunBuggy2AA"
+      "weapon": "MachineGunBuggy2AA",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3689,12 +3972,18 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "LaserBuggy2"
+      "weapon": "LaserBuggy2",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3744,7 +4033,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "LaserBuggy2AA"
+      "weapon": "LaserBuggy2AA",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumMissile",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3792,6 +4086,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -3806,12 +4101,14 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "PDLaserBike"
+      "weapon": "PDLaserBike",
+      "weapon_types": []
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "70",
       "slot": "Armament",
@@ -3868,7 +4165,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChemicalBikeRockets"
+      "weapon": "ChemicalBikeRockets",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -3916,6 +4219,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "2470",
+      "pricing": true,
       "range": "12345",
       "reloaddelay": "142",
       "slot": "Armament",
@@ -3977,7 +4281,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChemicalHonestJohn"
+      "weapon": "ChemicalHonestJohn",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^HeavyChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4025,6 +4335,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6962",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -4075,7 +4386,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChemicalStealthTankMissiles"
+      "weapon": "ChemicalStealthTankMissiles",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -4125,6 +4441,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -4148,7 +4465,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BigFlamer"
+      "weapon": "BigFlamer",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4198,6 +4518,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2534",
       "reloaddelay": "54",
       "slot": "Armament",
@@ -4221,7 +4542,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BigFlamer2"
+      "weapon": "BigFlamer2",
+      "weapon_types": [
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4269,6 +4593,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
       "slot": "Armament",
@@ -4287,10 +4612,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "70mm"
+      "weapon": "70mm",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -4310,7 +4639,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LTNKMissiles"
+      "weapon": "LTNKMissiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -4358,6 +4690,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4903",
       "reloaddelay": "25",
       "slot": "Armament@pointdefense",
@@ -4371,10 +4704,12 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "PDLaserLTNK2"
+      "weapon": "PDLaserLTNK2",
+      "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
       "slot": "Armament",
@@ -4409,10 +4744,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LightTank2Cannon"
+      "weapon": "LightTank2Cannon",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -4448,7 +4788,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LightTank2Missiles"
+      "weapon": "LightTank2Missiles",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -4541,6 +4885,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -4555,12 +4900,14 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "PDLaserBike"
+      "weapon": "PDLaserBike",
+      "weapon_types": []
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
       "slot": "Armament",
@@ -4617,7 +4964,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BikeRockets"
+      "weapon": "BikeRockets",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -4665,6 +5018,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "2530",
+      "pricing": true,
       "range": "12640",
       "reloaddelay": "78",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -4706,11 +5060,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SpecterArtilleryShell"
+      "weapon": "SpecterArtilleryShell",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^ImpactGlow"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "2530",
+      "pricing": true,
       "range": "12640",
       "reloaddelay": "78",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -4826,7 +5186,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SpecterArtilleryShellUpgrade"
+      "weapon": "SpecterArtilleryShellUpgrade",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^ImpactGlow"
+      ]
      }
     ],
     "armor": {
@@ -4877,6 +5248,7 @@
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "minrange": "1790",
+      "pricing": true,
       "range": "8940",
       "reloaddelay": "225",
       "slot": "Armament",
@@ -4954,7 +5326,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HonestJohn"
+      "weapon": "HonestJohn",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -5049,6 +5428,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
@@ -5068,12 +5448,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "StealthTankMissiles"
+      "weapon": "StealthTankMissiles",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
       "requires": "td_nod_upgrade_blackmarketupgrades",
@@ -5093,7 +5477,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "StealthTankMissilesBlackMarket"
+      "weapon": "StealthTankMissilesBlackMarket",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {

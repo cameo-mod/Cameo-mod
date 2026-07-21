@@ -1265,20 +1265,20 @@ TSSniperE:
 			Medium: 30
 			Heavy: 20
 
-MutDualWield:
+forgotten_mutant_dualwield:
 	Inherits: ^SmallArms
 	ReloadDelay: 18
 	Burst: 2
 	BurstDelays: 2
-	Range: 3132
+	Range: 4500
 	Report: infgun3.aud, slvkgun1.aud
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
-MutDualWieldE:
-	Inherits: MutDualWield
+forgotten_mutant_dualwield_elite:
+	Inherits: forgotten_mutant_dualwield
 	Burst: 4
 	Range: 5120
 

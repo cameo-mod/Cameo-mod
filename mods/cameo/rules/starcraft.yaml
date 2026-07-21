@@ -428,7 +428,7 @@ SCSPIDERMINE:
 		VoiceSet: TerrorDroneVoice
 	Targetable@vehicleexplodedamage:
 		TargetTypes: TerrorDrone
-	Targetable@ra1_soviets_attackdog:
+	Targetable@DogImmune:
 		TargetTypes: DogImmune
 	GrantConditionOnMovement:
 		Condition: unborrow
@@ -953,7 +953,7 @@ SCSTARSHIPSOVEREIGN.Husk:
 
 ^LargeZerg:
 	Inherits: ^BasicZerg
-	Targetable@ra1_soviets_attackdog:
+	Targetable@DogImmune:
 		TargetTypes: DogImmune
 	Mobile:
 		Locomotor: wheeled

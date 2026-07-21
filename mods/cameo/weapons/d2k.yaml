@@ -1296,6 +1296,21 @@ LMG:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
+light_inf_lmg:
+	Inherits: ^Chaingun
+	Inherits: ^SmallArms
+	ReloadDelay: 20
+	Range: 4500
+	Report: gun11.aud
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
 LMG_upgrade:
 	Inherits: ^HeavyCannon
 	Inherits: ^Chaingun
@@ -1303,6 +1318,34 @@ LMG_upgrade:
 	Inherits: ^HeavyMachineGunProjectile
 	ReloadDelay: 20
 	Range: 4448
+	Report: gun11.aud
+	ValidTargets: Ground, Water, Air
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+light_inf_lmg_upgrade:
+	Inherits: ^HeavyCannon
+	Inherits: ^Chaingun
+	Inherits: ^SmallArms
+	Inherits: ^HeavyMachineGunProjectile
+	ReloadDelay: 20
+	Range: 4500
 	Report: gun11.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage

@@ -132,6 +132,7 @@ ra1_allies_pillbox:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@cargo: ^ClearableGarrisonNeutronOnly
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
@@ -294,6 +295,7 @@ ra1_allies_camopillbox:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@cargo: ^ClearableGarrisonNeutronOnly
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems

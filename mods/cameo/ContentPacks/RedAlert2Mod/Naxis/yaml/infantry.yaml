@@ -19,28 +19,34 @@ naxis_naxiriflesoldier:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 50
+		Speed: 60
 	Health:
-		HP: 15000
+		HP: 20000
 	ChangesHealth@SelfHealing:
-		Step: 15
+		Step: 20
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@naxis_naxiriflesoldier:
+		Modifier: 100
 	Armament@PRIMARY:
-		Weapon: NaxiRifle
+		Weapon: naxis_naxiriflesoldier_rifle
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiRifleE
+		Weapon: naxis_naxiriflesoldier_rifle_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxiRifle
+		Weapon: naxis_naxiriflesoldier_rifle
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleE
+		Weapon: naxis_naxiriflesoldier_rifle_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -74,26 +80,32 @@ naxis_naxiriflerecruit:
 	Mobile:
 		Speed: 45
 	Health:
-		HP: 10000
+		HP: 20000
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 20
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@naxis_naxiriflerecruit:
+		Modifier: 81
 	Armament@PRIMARY:
-		Weapon: NaxiRifleCons
+		Weapon: naxis_naxiriflerecruit_rifle
 		LocalOffset: 500,0,400
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
-		Weapon: NaxiRifleConsE
+		Weapon: naxis_naxiriflerecruit_rifle_elite
 		LocalOffset: 500,0,400
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: NaxiRifleCons
+		Weapon: naxis_naxiriflerecruit_rifle
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
-		Weapon: NaxiRifleConsE
+		Weapon: naxis_naxiriflerecruit_rifle_elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
@@ -127,9 +139,9 @@ naxis_sssoldier:
 	Mobile:
 		Speed: 55
 	Health:
-		HP: 60000
+		HP: 63000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 63
 	Armament@PRIMARY:
 		Weapon: naxis_sssoldier_smg
 		LocalOffset: 500,0,400

@@ -350,7 +350,6 @@ kami_husk.asian:
 		Type: CenterPosition
 	RenderSprites:
 		Image: kami.asian
-	RenderSprites:
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
 		Weapon: AsianSmallOilBomb
@@ -375,7 +374,6 @@ kami_chemical_husk.asian:
 		Type: CenterPosition
 	RenderSprites:
 		Image: kami.asian
-	RenderSprites:
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
 		Weapon: ReactorNukeWeak
@@ -400,9 +398,7 @@ phoenix_husk.asian:
 		Type: CenterPosition
 	RenderSprites:
 		Image: asianalliance_phoenix
-	RenderSprites:
 		PlayerPalette: playerra2
-
 pelican_husk.asian:
 	Inherits: ^HelicopterHusk
 	Tooltip:

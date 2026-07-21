@@ -1,9 +1,9 @@
-tkmrifle:
+tkm_rifleman_rifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 75
-	Range: 5753
+	Range: 5500
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FF9933
@@ -14,15 +14,15 @@ tkmrifle:
 		Speed: 10000
 		Width: 50
 	Warhead@SmallArms: SpreadDamage
-		Damage: 8000
+		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 4
-tkmriflemansemiautorifle:
+tkm_rifleman_semiautorifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 25
-	Range: 6c512
+	Range: 5500
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FF9933
@@ -166,10 +166,10 @@ tkmm16:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-tkmak:
+tkm_trooper_ak:
 	Inherits: ^SmallArms
 	ReloadDelay: 31
-	Range: 5594
+	Range: 5500
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
@@ -1240,11 +1240,11 @@ tkmm16ap:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
-tkmgp25:
+tkm_trooper_gp25:
 	Inherits: ^Grenade
 	Inherits: ^LightFlameWeapon
 	ReloadDelay: 80
-	Range: 5621
+	Range: 5500
 	Report: m203.wav
 	Projectile: Bullet
 		Speed: 300

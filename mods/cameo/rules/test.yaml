@@ -737,7 +737,7 @@ FLTENT:
 		Image: ra1_allies_alliedbarracks
 
 SNIPER.soviets:
-	Inherits: ra1_allies_alliedsniper
+	Inherits: LightSniper
 	Buildable:
 		Prerequisites: ~wip-content
 	MustBeDestroyed:
@@ -746,7 +746,7 @@ SNIPER.soviets:
 	AutoTarget:
 		InitialStanceAI: AttackAnything
 	RenderSprites:
-		Image: ra1_allies_alliedsniper
+		Image: LightSniper
 	-MapEditorData:
 
 unit174c:

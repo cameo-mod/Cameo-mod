@@ -171,11 +171,10 @@ ts_gdi_amphibiousapc:
 		Image: ts_gdi_amphibiousapc
 	RenderSprites:
 		Image: ts_gdi_amphibiousapc
+		PlayerPalette: playerra2
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
@@ -487,6 +486,7 @@ ts_gdi_juggernaut:
 		MaxHeightDelta: 3
 	RenderSprites:
 		Image: ts_gdi_juggernaut
+		PlayerPalette: playerra2
 	WithMakeAnimation:
 		BodyNames: body, deployedbody
 	GrantConditionOnDeploy:
@@ -542,8 +542,6 @@ ts_gdi_juggernaut:
 		RequiresCondition: !deployed
 	Voiced:
 		VoiceSet: TSVehicle
-	RenderSprites:
-		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
 

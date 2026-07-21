@@ -163,6 +163,7 @@ cabal_cyborgreaper:
 		Voice: Attack
 		FacingTolerance: 0
 	RenderSprites:
+		PlayerPalette: playerra2
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
 		Class: cabal_cyborgreaper
@@ -173,8 +174,6 @@ cabal_cyborgreaper:
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-	RenderSprites:
-		PlayerPalette: playerra2
 	WithDeathAnimation:
 		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect

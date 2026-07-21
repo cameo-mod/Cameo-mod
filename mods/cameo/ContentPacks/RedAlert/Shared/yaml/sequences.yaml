@@ -529,6 +529,31 @@ vortexanim:
 	icon:
 		Filename: ra1_allies_chronosphere_chronovortexicon.png
 
+vortexanim2:
+	Defaults:
+		Filename: chronovortex.shp
+		Length: *
+		Tick: 40
+		IgnoreWorldTint: true
+		ZOffset: 2048
+		Alpha: 0.8
+	idle:
+		Scale: 0.7
+	spawn:
+		Tick: 80
+		Alpha: 0.20
+	die:
+		Tick: 80
+		Alpha: 0.20
+	fade:
+		Tick: 60
+		Alpha: 0.30
+		Scale: 1.50
+	dead:
+		Alpha: 0
+	icon:
+		Filename: ra1_allies_chronosphere_chronovortexicon.png
+
 fb1:
 	Defaults:
 		Filename: fb1.shp

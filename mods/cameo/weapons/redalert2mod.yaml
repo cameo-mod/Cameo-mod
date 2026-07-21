@@ -368,12 +368,18 @@ SteelIonCannonDamage:
 SteelHoverMissile_elite:
 	Inherits: SteelHoverMissile
 	Range: 7000
-	Burst: 6
+	Burst: 4
 	Projectile: Missile
 		Image: red_dragon
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
+	# red-missile convention (maintainer 2026-07-20): red projectile = 2x
+	# DAMAGE, not burst 4->6. Burst reverted; base warheads doubled.
+	Warhead@ArrowWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@LightMissile: SpreadDamage
+		Damage: 8000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -1629,10 +1635,9 @@ naxis_sssoldier_smg:
 	ReloadDelay: 75
 	Range: 4000
 	Burst: 10
-	BurstDelays: 0
+	BurstDelays: 5
 	ValidTargets: Ground, Water
 	Report: nax_mp40.wav
-	SoundVolume: 0.1
 	Projectile: Bullet
 		Inaccuracy: 600
 	Warhead@SmallArms: SpreadDamage
@@ -1646,5 +1651,5 @@ naxis_sssoldier_smg:
 
 naxis_sssoldier_smg_elite:
 	Inherits: naxis_sssoldier_smg
-	Burst: 13
-	SoundVolume: 0.077
+	Burst: 20
+	BurstDelays: 4

@@ -428,11 +428,10 @@ terran_dropship:
 	DeathSounds:
 	RenderSprites:
 		Image: terran_dropship
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:
@@ -523,11 +522,10 @@ terran_pythean:
 	DeathSounds:
 	RenderSprites:
 		Image: terran_pythean
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 	WithCargoSounds:
@@ -599,11 +597,10 @@ terran_medivac:
 	DeathSounds:
 	RenderSprites:
 		Image: terran_medivac
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:

@@ -34,6 +34,7 @@ forgotten_carryall:
 	Armor:
 		Type: Light
 	RenderSprites:
+		Image: ts_gdi_carryall
 	SpawnActorOnDeath:
 		Actor: ts_gdi_carryall_husk
 	WithVoxelBody:
@@ -41,8 +42,6 @@ forgotten_carryall:
 		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 15
-		Image: ts_gdi_carryall
-	RenderSprites:
 		Image: ts_gdi_carryall
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity

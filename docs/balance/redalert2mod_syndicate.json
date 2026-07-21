@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
       "slot": "Armament@PRIMARY",
@@ -37,7 +38,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BlackHawkCannon"
+      "weapon": "BlackHawkCannon",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -82,6 +87,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
       "requires": "!rank-elite",
@@ -134,13 +140,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles"
+      "weapon": "MigMissiles",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -190,13 +203,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissilesE"
+      "weapon": "MigMissilesE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
       "requires": "!rank-elite",
@@ -246,13 +266,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA"
+      "weapon": "MigMissiles_AA",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -302,7 +329,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MigMissiles_AA_ELITE"
+      "weapon": "MigMissiles_AA_ELITE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -349,6 +382,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "888",
+      "pricing": true,
       "range": "4444",
       "reloaddelay": "80",
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
@@ -401,12 +435,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannon"
+      "weapon": "YakovlevCannon",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1111",
+      "pricing": true,
       "range": "5555",
       "reloaddelay": "5",
       "requires": "rank-elite",
@@ -459,12 +500,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannonE"
+      "weapon": "YakovlevCannonE",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1111",
+      "pricing": true,
       "range": "5555",
       "reloaddelay": "5",
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns",
@@ -517,7 +565,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakovlevCannonE"
+      "weapon": "YakovlevCannonE",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^HeavyCannon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -750,6 +804,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "20",
       "slot": "Armament@1",
@@ -779,12 +834,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinAADefenderCannon"
+      "weapon": "LatinAADefenderCannon",
+      "weapon_types": [
+       "^MediumMissile",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "20",
       "slot": "Armament@2",
@@ -814,7 +874,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinAADefenderCannon"
+      "weapon": "LatinAADefenderCannon",
+      "weapon_types": [
+       "^MediumMissile",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -896,6 +960,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
       "requires": "!rank-elite",
@@ -937,12 +1002,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMG"
+      "weapon": "LatinSentryMG",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
       "requires": "rank-elite",
@@ -982,7 +1053,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMGE"
+      "weapon": "LatinSentryMGE",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1133,13 +1209,16 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "3000",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "125",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "SMLLauncher"
+      "weapon": "SMLLauncher",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1366,6 +1445,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1374,16 +1455,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1427,6 +1515,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7130",
       "reloaddelay": "42",
       "requires": "!rank-elite",
@@ -1468,12 +1557,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47"
+      "weapon": "RA2FreedomAK47",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SniperWeapon"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
@@ -1513,11 +1608,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47E"
+      "weapon": "RA2FreedomAK47E",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7130",
       "reloaddelay": "100",
       "requires": "!rank-elite",
@@ -1564,11 +1665,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocket"
+      "weapon": "RA2FreedomRocket",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8130",
       "reloaddelay": "100",
       "requires": "rank-elite",
@@ -1613,13 +1720,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocketE"
+      "weapon": "RA2FreedomRocketE",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7130",
       "reloaddelay": "42",
       "requires": "!rank-elite",
@@ -1661,13 +1774,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47"
+      "weapon": "RA2FreedomAK47",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8130",
       "reloaddelay": "42",
       "requires": "rank-elite",
@@ -1707,11 +1826,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomAK47E"
+      "weapon": "RA2FreedomAK47E",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7130",
       "reloaddelay": "100",
       "requires": "!rank-elite",
@@ -1758,11 +1883,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocket"
+      "weapon": "RA2FreedomRocket",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "8130",
       "reloaddelay": "100",
       "requires": "rank-elite",
@@ -1807,7 +1938,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2FreedomRocketE"
+      "weapon": "RA2FreedomRocketE",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -1855,6 +1991,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1300",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "60",
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
@@ -1906,13 +2043,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade1"
+      "weapon": "LatinMonkeyGrenade1",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "60",
       "requires": "(latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite) || (!latinsyndicate_upgrade_asianalliancestolentechhotfire && rank-elite)",
@@ -1962,13 +2105,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade2"
+      "weapon": "LatinMonkeyGrenade2",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1500",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "60",
       "requires": "(latinsyndicate_upgrade_asianalliancestolentechhotfire && rank-elite)",
@@ -2018,12 +2167,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade3"
+      "weapon": "LatinMonkeyGrenade3",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1300",
+      "pricing": false,
       "range": "6500",
       "reloaddelay": "60",
       "requires": "(!latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)",
@@ -2075,7 +2230,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade1"
+      "weapon": "LatinMonkeyGrenade1",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2083,6 +2243,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": false,
       "range": "7000",
       "reloaddelay": "60",
       "requires": "(latinsyndicate_upgrade_asianalliancestolentechhotfire && !rank-elite) || (!latinsyndicate_upgrade_asianalliancestolentechhotfire && rank-elite)",
@@ -2132,7 +2293,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade2"
+      "weapon": "LatinMonkeyGrenade2",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -2140,6 +2306,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1500",
+      "pricing": false,
       "range": "7500",
       "reloaddelay": "60",
       "requires": "(latinsyndicate_upgrade_asianalliancestolentechhotfire && rank-elite)",
@@ -2189,7 +2356,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinMonkeyGrenade3"
+      "weapon": "LatinMonkeyGrenade3",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -2233,6 +2405,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
       "requires": "!rank-elite",
@@ -2289,12 +2462,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher"
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "44",
       "requires": "rank-elite",
@@ -2349,13 +2528,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncherE"
+      "weapon": "SyndicateFireballLauncherE",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": false,
       "range": "5555",
       "reloaddelay": "44",
       "requires": "!rank-elite",
@@ -2412,13 +2597,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncher"
+      "weapon": "SyndicateFireballLauncher",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6666",
       "reloaddelay": "44",
       "requires": "rank-elite",
@@ -2473,7 +2664,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SyndicateFireballLauncherE"
+      "weapon": "SyndicateFireballLauncherE",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2518,7 +2714,8 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "4375",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "22",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -2537,18 +2734,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MiliAK47"
+      "weapon": "latinsyndicate_latinmilitia_ak47",
+      "weapon_types": [
+       "^RA2SmallArms"
+      ]
      },
      {
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "5375",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "22",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
-       "RA2MiliAK47"
+       "latinsyndicate_latinmilitia_ak47"
       ],
       "warheads": [
        {
@@ -2562,11 +2763,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MiliAK47E"
+      "weapon": "latinsyndicate_latinmilitia_ak47_elite",
+      "weapon_types": [
+       "^RA2SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "4375",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "93",
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@Molotov",
@@ -2638,18 +2843,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Molotov"
+      "weapon": "latinsyndicate_latinmilitia_molotov",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
-      "burst": "6",
+      "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "5375",
+      "pricing": true,
+      "range": "5500",
       "reloaddelay": "93",
       "requires": "latinsyndicate_doctrine_eliteguerillas && rank-elite",
       "slot": "Armament@MolotovELITE",
       "versus_templates": [
-       "RA2Molotov"
+       "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
        {
@@ -2713,14 +2925,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MolotovE"
+      "weapon": "latinsyndicate_latinmilitia_molotov_elite",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "4375",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "22",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -2739,19 +2958,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MiliAK47"
+      "weapon": "latinsyndicate_latinmilitia_ak47",
+      "weapon_types": [
+       "^RA2SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "5375",
+      "pricing": false,
+      "range": "5500",
       "reloaddelay": "22",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
-       "RA2MiliAK47"
+       "latinsyndicate_latinmilitia_ak47"
       ],
       "warheads": [
        {
@@ -2765,12 +2988,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MiliAK47E"
+      "weapon": "latinsyndicate_latinmilitia_ak47_elite",
+      "weapon_types": [
+       "^RA2SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "4375",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "93",
       "requires": "latinsyndicate_doctrine_eliteguerillas && !rank-elite",
       "slot": "Armament@MolotovGARRISONED",
@@ -2842,19 +3069,26 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Molotov"
+      "weapon": "latinsyndicate_latinmilitia_molotov",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
-      "burst": "6",
+      "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
-      "range": "5375",
+      "pricing": false,
+      "range": "5500",
       "reloaddelay": "93",
       "requires": "latinsyndicate_doctrine_eliteguerillas && rank-elite",
       "slot": "Armament@MolotovGARRISONEDELITE",
       "versus_templates": [
-       "RA2Molotov"
+       "latinsyndicate_latinmilitia_molotov"
       ],
       "warheads": [
        {
@@ -2918,7 +3152,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MolotovE"
+      "weapon": "latinsyndicate_latinmilitia_molotov_elite",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      }
     ],
     "armor": {
@@ -2937,7 +3177,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
-     "v": "13000"
+     "v": "26000"
     },
     "name": "Latin Militia",
     "prerequisites": [
@@ -2961,6 +3201,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
@@ -2980,11 +3221,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket"
+      "weapon": "LatinTankKillerRocket",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "!rank-elite",
@@ -3004,11 +3249,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket"
+      "weapon": "LatinTankKillerRocket",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "66",
       "requires": "rank-elite",
@@ -3028,11 +3277,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket_elite"
+      "weapon": "LatinTankKillerRocket_elite",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7777",
       "reloaddelay": "66",
       "requires": "rank-elite",
@@ -3052,7 +3305,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinTankKillerRocket_elite"
+      "weapon": "LatinTankKillerRocket_elite",
+      "weapon_types": [
+       "^RA2LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -3094,6 +3350,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6300",
       "reloaddelay": "77",
       "requires": "!rank-elite",
@@ -3118,12 +3375,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenade"
+      "weapon": "NarcoGrenade",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "77",
       "requires": "rank-elite",
@@ -3148,10 +3409,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenadeE"
+      "weapon": "NarcoGrenadeE",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6300",
       "reloaddelay": "22",
       "requires": "!rank-elite",
@@ -3171,12 +3436,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistol"
+      "weapon": "RA2NarcoPistol",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "22",
       "requires": "rank-elite",
@@ -3196,11 +3465,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistolsE"
+      "weapon": "RA2NarcoPistolsE",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6300",
       "reloaddelay": "77",
       "requires": "!rank-elite",
@@ -3225,13 +3498,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenade"
+      "weapon": "NarcoGrenade",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7300",
       "reloaddelay": "77",
       "requires": "rank-elite",
@@ -3256,11 +3533,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NarcoGrenadeE"
+      "weapon": "NarcoGrenadeE",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6300",
       "reloaddelay": "22",
       "requires": "!rank-elite",
@@ -3280,13 +3561,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistol"
+      "weapon": "RA2NarcoPistol",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7300",
       "reloaddelay": "22",
       "requires": "rank-elite",
@@ -3306,7 +3591,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoPistolsE"
+      "weapon": "RA2NarcoPistolsE",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3350,13 +3638,16 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "DemoTruckTargeting"
       ],
       "warheads": [],
-      "weapon": "SuicideBomberTargeting"
+      "weapon": "SuicideBomberTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3401,6 +3692,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "15",
       "requires": "!rank-elite",
@@ -3453,10 +3745,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rammax_Sabot"
+      "weapon": "Rammax_Sabot",
+      "weapon_types": [
+       "^Chaingun",
+       "^LaserWeapon",
+       "^TeslaWeapon",
+       "^TSLaserEffect"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "15",
       "requires": "rank-elite",
@@ -3509,7 +3808,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Rammax_Sabot"
+      "weapon": "Rammax_Sabot",
+      "weapon_types": [
+       "^Chaingun",
+       "^LaserWeapon",
+       "^TeslaWeapon",
+       "^TSLaserEffect"
+      ]
      }
     ],
     "armor": {
@@ -3557,6 +3862,7 @@
       "burst": "8",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "24000",
       "reloaddelay": "500",
       "slot": "Armament@ARTILLERY",
@@ -3603,7 +3909,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2AkulaRockets"
+      "weapon": "RA2AkulaRockets",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^RA2Grenade",
+       "^RA2MediumMissile",
+       "^RA2RadShell"
+      ]
      }
     ],
     "armor": {
@@ -3652,6 +3964,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
       "requires": "!rank-elite",
@@ -3693,12 +4006,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMG"
+      "weapon": "LatinSentryMG",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "30",
       "requires": "rank-elite",
@@ -3738,7 +4057,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSentryMGE"
+      "weapon": "LatinSentryMGE",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -4309,6 +4633,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "2400",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "122",
       "slot": "Armament",
@@ -4386,13 +4711,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RBurritoRocket"
+      "weapon": "RA2RBurritoRocket",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^RA2HeavyMissile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "2400",
+      "pricing": true,
       "range": "12000",
       "reloaddelay": "122",
       "requires": "rank-elite",
@@ -4471,7 +4804,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RBurritoRocket"
+      "weapon": "RA2RBurritoRocket",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^RA2HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -4519,6 +4859,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5800",
       "reloaddelay": "20",
       "requires": "!rank-elite",
@@ -4538,12 +4879,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Narco60mm"
+      "weapon": "RA2Narco60mm",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6800",
       "reloaddelay": "20",
       "requires": "rank-elite",
@@ -4563,7 +4908,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Narco60mmE"
+      "weapon": "RA2Narco60mmE",
+      "weapon_types": [
+       "^RA2MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -4655,11 +5003,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4712,6 +5063,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6300",
       "reloaddelay": "16",
       "requires": "!rank-elite",
@@ -4764,13 +5116,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannon"
+      "weapon": "DiabloCannon",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "16",
       "requires": "rank-elite",
@@ -4820,11 +5179,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonE"
+      "weapon": "DiabloCannonE",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9450",
       "reloaddelay": "16",
       "requires": "!rank-elite",
@@ -4874,13 +5240,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonAA"
+      "weapon": "DiabloCannonAA",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10450",
       "reloaddelay": "16",
       "requires": "rank-elite",
@@ -4930,7 +5303,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DiabloCannonAAE"
+      "weapon": "DiabloCannonAAE",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4979,6 +5358,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "2026",
+      "pricing": true,
       "range": "10130",
       "reloaddelay": "139",
       "slot": "Armament",
@@ -5041,13 +5421,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LarsRocket"
+      "weapon": "RA2LarsRocket",
+      "weapon_types": [
+       "^D2KRocket",
+       "^HeavyAAWeapon",
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "2026",
+      "pricing": true,
       "range": "10130",
       "reloaddelay": "139",
       "requires": "rank-elite",
@@ -5111,7 +5499,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LarsRocket"
+      "weapon": "RA2LarsRocket",
+      "weapon_types": [
+       "^D2KRocket",
+       "^HeavyAAWeapon",
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5159,6 +5554,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5740",
       "reloaddelay": "12",
       "requires": "!rank-elite",
@@ -5211,12 +5607,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannon"
+      "weapon": "RA2APCFlakCannon",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6740",
       "reloaddelay": "12",
       "requires": "rank-elite",
@@ -5266,10 +5669,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonE"
+      "weapon": "RA2APCFlakCannonE",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8610",
       "reloaddelay": "12",
       "requires": "!rank-elite",
@@ -5319,12 +5729,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonAA"
+      "weapon": "RA2APCFlakCannonAA",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9610",
       "reloaddelay": "12",
       "requires": "rank-elite",
@@ -5374,12 +5791,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCFlakCannonAAE"
+      "weapon": "RA2APCFlakCannonAAE",
+      "weapon_types": [
+       "^LightMissile",
+       "^TankDestroyerCannon",
+       "^Chaingun",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5740",
       "reloaddelay": "12",
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite",
@@ -5410,12 +5834,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGun"
+      "weapon": "RA2APCMachineGun",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6740",
       "reloaddelay": "12",
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && rank-elite",
@@ -5445,12 +5874,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunE"
+      "weapon": "RA2APCMachineGunE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8610",
       "reloaddelay": "12",
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && !rank-elite",
@@ -5480,12 +5914,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunAA"
+      "weapon": "RA2APCMachineGunAA",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9610",
       "reloaddelay": "12",
       "requires": "latinsyndicate_upgrade_yuristolentechchainguns && rank-elite",
@@ -5515,12 +5954,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCMachineGunAAE"
+      "weapon": "RA2APCMachineGunAAE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5740",
       "reloaddelay": "53",
       "requires": "latinsyndicate_doctrine_cartelrockets && !rank-elite",
@@ -5573,12 +6017,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocket"
+      "weapon": "RA2APCRocket",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6740",
       "reloaddelay": "53",
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
@@ -5628,12 +6079,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketE"
+      "weapon": "RA2APCRocketE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8610",
       "reloaddelay": "53",
       "requires": "latinsyndicate_doctrine_cartelrockets && !rank-elite",
@@ -5683,12 +6141,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketAA"
+      "weapon": "RA2APCRocketAA",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9610",
       "reloaddelay": "53",
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
@@ -5738,7 +6203,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2APCRocketAAE"
+      "weapon": "RA2APCRocketAAE",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5789,6 +6260,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "777",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "108",
       "slot": "Armament",
@@ -5855,13 +6327,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RTruckRocket"
+      "weapon": "RA2RTruckRocket",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^LightFlameWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "minrange": "777",
+      "pricing": true,
       "range": "7777",
       "reloaddelay": "108",
       "requires": "rank-elite",
@@ -5929,7 +6408,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2RTruckRocket"
+      "weapon": "RA2RTruckRocket",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^LightFlameWeapon",
+       "^ShrapnelWeapon",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -5978,6 +6463,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1500",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "67",
       "requires": "!rank-elite",
@@ -6072,13 +6558,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MortarBike"
+      "weapon": "RA2MortarBike",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "1500",
+      "pricing": true,
       "range": "8500",
       "reloaddelay": "67",
       "requires": "rank-elite",
@@ -6168,7 +6663,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2MortarBikeE"
+      "weapon": "RA2MortarBikeE",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon"
+      ]
      }
     ],
     "armor": {
@@ -6217,6 +6720,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5800",
       "reloaddelay": "10",
       "requires": "!rank-elite",
@@ -6247,12 +6751,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoAKM"
+      "weapon": "RA2NarcoAKM",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6800",
       "reloaddelay": "10",
       "requires": "rank-elite",
@@ -6282,7 +6791,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2NarcoAKME"
+      "weapon": "RA2NarcoAKME",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -6330,11 +6843,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -6392,6 +6908,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "35",
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
@@ -6422,12 +6939,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG"
+      "weapon": "LatinBuggyMG",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "35",
       "requires": "rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
@@ -6457,10 +6979,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMGE"
+      "weapon": "LatinBuggyMGE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "11",
       "requires": "!rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
@@ -6513,10 +7040,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingun"
+      "weapon": "LatinBuggyChaingun",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "11",
       "requires": "rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
@@ -6566,10 +7100,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingunE"
+      "weapon": "LatinBuggyChaingunE",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
       "requires": "!rank-elite",
@@ -6632,12 +7173,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocket"
+      "weapon": "LatinBuggyRocket",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^SteelLightMissile",
+       "^RA2MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
       "requires": "rank-elite",
@@ -6697,7 +7245,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyRocketE"
+      "weapon": "LatinBuggyRocketE",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^SteelLightMissile",
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -6745,6 +7299,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5031",
       "reloaddelay": "38",
       "requires": "!rank-elite",
@@ -6786,13 +7341,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Gren60mm"
+      "weapon": "RA2Gren60mm",
+      "weapon_types": [
+       "^RA2HeavyCannon",
+       "^RA2MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6031",
       "reloaddelay": "38",
       "requires": "rank-elite",
@@ -6832,10 +7393,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Gren60mmE"
+      "weapon": "RA2Gren60mmE",
+      "weapon_types": [
+       "^RA2HeavyCannon",
+       "^RA2MediumCannon",
+       "^RA2TankDestroyerCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5031",
       "reloaddelay": "101",
       "requires": "latinsyndicate_doctrine_cartelrockets && !rank-elite",
@@ -6855,10 +7422,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinRusherRocket"
+      "weapon": "LatinRusherRocket",
+      "weapon_types": [
+       "^RA2MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6031",
       "reloaddelay": "101",
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
@@ -6878,7 +7449,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinRusherRocketE"
+      "weapon": "LatinRusherRocketE",
+      "weapon_types": [
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -6926,6 +7500,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6550",
       "reloaddelay": "65",
       "requires": "!rank-elite",
@@ -7015,13 +7590,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerCannon"
+      "weapon": "LatinSmokerCannon",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^RA2HeavyCannon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7550",
       "reloaddelay": "65",
       "requires": "rank-elite",
@@ -7107,12 +7691,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerCannonE"
+      "weapon": "LatinSmokerCannonE",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^RA2HeavyCannon",
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6550",
       "reloaddelay": "110",
       "requires": "!rank-elite",
@@ -7159,12 +7753,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GrenadePack"
+      "weapon": "RA2GrenadePack",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^Grenade",
+       "^RA2FlakWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7550",
       "reloaddelay": "110",
       "requires": "rank-elite",
@@ -7210,10 +7810,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GrenadePackE"
+      "weapon": "RA2GrenadePackE",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^Grenade",
+       "^RA2FlakWeapon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6550",
       "reloaddelay": "116",
       "requires": "latinsyndicate_doctrine_cartelrockets && !rank-elite",
@@ -7233,10 +7840,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerRocket"
+      "weapon": "LatinSmokerRocket",
+      "weapon_types": [
+       "^RA2MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7550",
       "reloaddelay": "116",
       "requires": "latinsyndicate_doctrine_cartelrockets && rank-elite",
@@ -7256,7 +7867,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinSmokerRocketE"
+      "weapon": "LatinSmokerRocketE",
+      "weapon_types": [
+       "^RA2MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -7348,18 +7962,22 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "6400",
+      "pricing": true,
       "range": "32000",
       "reloaddelay": "50",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2TOPOLCubaTarget"
+      "weapon": "RA2TOPOLCubaTarget",
+      "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
       "minrange": "6400",
+      "pricing": true,
       "range": "32000",
       "reloaddelay": "500",
       "slot": "Armament@Launch",
@@ -7453,7 +8071,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2TOPOLCuba"
+      "weapon": "RA2TOPOLCuba",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^LightChemicalWeapon",
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -7507,6 +8133,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "35",
       "requires": "!rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
@@ -7537,12 +8164,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMG"
+      "weapon": "LatinBuggyMG",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "35",
       "requires": "rank-elite && !latinsyndicate_upgrade_yuristolentechchainguns",
@@ -7572,10 +8204,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyMGE"
+      "weapon": "LatinBuggyMGE",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "11",
       "requires": "!rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
@@ -7628,10 +8265,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingun"
+      "weapon": "LatinBuggyChaingun",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "11",
       "requires": "rank-elite && latinsyndicate_upgrade_yuristolentechchainguns",
@@ -7681,7 +8325,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LatinBuggyChaingunE"
+      "weapon": "LatinBuggyChaingunE",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -7728,11 +8378,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -7771,6 +8424,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -7800,7 +8454,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid"
+      "weapon": "RA220mmrapid",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -7839,11 +8497,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -7882,6 +8543,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -7911,7 +8573,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid"
+      "weapon": "RA220mmrapid",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {

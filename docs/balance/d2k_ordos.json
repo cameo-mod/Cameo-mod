@@ -10,6 +10,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
@@ -29,12 +30,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun"
+      "weapon": "d2kCarryallChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
@@ -70,7 +75,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun_upgrade"
+      "weapon": "d2kCarryallChainGun_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -115,6 +124,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
@@ -134,12 +144,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun"
+      "weapon": "d2kCarryallChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
@@ -175,7 +189,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kCarryallChainGun_upgrade"
+      "weapon": "d2kCarryallChainGun_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -228,6 +246,7 @@
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "2048",
       "reloaddelay": "132",
       "slot": "Armament@PRIMARY",
@@ -306,7 +325,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "ordos_airmine"
+      "weapon": "ordos_airmine",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^LightChemicalWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyBomb",
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -349,6 +376,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1300",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
@@ -429,10 +457,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Laboratory_Bioball"
+      "weapon": "Laboratory_Bioball",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa1",
@@ -471,10 +507,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA"
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa2",
@@ -513,7 +555,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA"
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -557,6 +604,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3905",
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
@@ -639,7 +687,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "eye_bomberguy"
+      "weapon": "eye_bomberguy",
+      "weapon_types": [
+       "^Grenade",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -684,6 +739,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
       "requires": "!ordos_upgrade_lasercartridges",
@@ -703,12 +759,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kChainGun"
+      "weapon": "d2kChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
       "requires": "ordos_upgrade_lasercartridges",
@@ -744,7 +804,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2kChainGun_upgrade"
+      "weapon": "d2kChainGun_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -790,6 +854,7 @@
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "8370",
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
@@ -873,7 +938,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Wraith_ToxinMissiles"
+      "weapon": "Wraith_ToxinMissiles",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon",
+       "^MediumMissile",
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -923,6 +996,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
       "slot": "Armament",
@@ -984,7 +1058,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm_turret"
+      "weapon": "D2K_155mm_turret",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {
@@ -1025,6 +1105,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7700",
       "reloaddelay": "22",
       "slot": "Armament",
@@ -1065,7 +1146,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ordos_autogunturret"
+      "weapon": "ordos_autogunturret",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^SmallArms",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1572,6 +1658,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament",
@@ -1612,10 +1699,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AAPowered"
+      "weapon": "D2K_Rocket_Trooper_AAPowered",
+      "weapon_types": [
+       "^LightMissile",
+       "^FlakWeapon",
+       "^D2KRocket"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6252",
       "reloaddelay": "50",
       "slot": "Armament@SECONDARY",
@@ -1666,11 +1759,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AGOnly"
+      "weapon": "D2K_Rocket_Trooper_AGOnly",
+      "weapon_types": [
+       "^Grenade",
+       "^RailgunWeapon",
+       "^D2K_Cannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9716",
       "reloaddelay": "75",
       "slot": "Armament@garrisoned",
@@ -1711,11 +1810,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AAPowered"
+      "weapon": "D2K_Rocket_Trooper_AAPowered",
+      "weapon_types": [
+       "^LightMissile",
+       "^FlakWeapon",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6252",
       "reloaddelay": "50",
       "slot": "Armament@SECONDARYgarrisoned",
@@ -1766,7 +1871,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper_AGOnly"
+      "weapon": "D2K_Rocket_Trooper_AGOnly",
+      "weapon_types": [
+       "^Grenade",
+       "^RailgunWeapon",
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {
@@ -1809,6 +1919,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5177",
       "reloaddelay": "75",
       "slot": "Armament@PRIMARY",
@@ -1832,11 +1943,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_chemgun"
+      "weapon": "d2k_chemgun",
+      "weapon_types": [
+       "^LightChemicalWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5177",
       "reloaddelay": "75",
       "slot": "Armament@GARRISONED",
@@ -1860,7 +1975,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "d2k_chemgun"
+      "weapon": "d2k_chemgun",
+      "weapon_types": [
+       "^LightChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1903,6 +2021,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -1926,11 +2045,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "contaminator_attack"
+      "weapon": "contaminator_attack",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@GARRISONED",
@@ -1954,7 +2077,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "contaminator_attack"
+      "weapon": "contaminator_attack",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1998,6 +2124,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1450",
+      "pricing": true,
       "range": "7250",
       "reloaddelay": "90",
       "slot": "Armament",
@@ -2124,12 +2251,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "facedancer_grenade"
+      "weapon": "facedancer_grenade",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyBomb",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1450",
+      "pricing": false,
       "range": "7250",
       "reloaddelay": "90",
       "slot": "Armament@GARRISONED",
@@ -2256,7 +2395,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "facedancer_grenade"
+      "weapon": "facedancer_grenade",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyBomb",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -2303,6 +2453,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3000",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
@@ -2314,7 +2465,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "LeechJump"
+      "weapon": "LeechJump",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2361,7 +2513,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARY",
@@ -2391,17 +2544,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG"
+      "weapon": "light_inf_lmg",
+      "weapon_types": [
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "range": "4448",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@Upgrade",
       "versus_templates": [
        "^LaserWeapon",
-       "LMG"
+       "light_inf_lmg"
       ],
       "warheads": [
        {
@@ -2440,12 +2598,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG_ordos_upgrade"
+      "weapon": "light_inf_lmg_ordos_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@GARRISONED",
@@ -2475,18 +2639,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG"
+      "weapon": "light_inf_lmg",
+      "weapon_types": [
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "range": "4448",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@UpgradeGARRISONED",
       "versus_templates": [
        "^LaserWeapon",
-       "LMG"
+       "light_inf_lmg"
       ],
       "warheads": [
        {
@@ -2525,7 +2694,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG_ordos_upgrade"
+      "weapon": "light_inf_lmg_ordos_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun",
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -2534,7 +2708,7 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
-     "v": "150"
+     "v": "120"
     },
     "design": {
      "class_anchor": null,
@@ -2544,7 +2718,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
-     "v": "18000"
+     "v": "28000"
     },
     "name": "Ordos Light Infantry",
     "prerequisites": [
@@ -2560,7 +2734,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Mobile.Speed",
-     "v": "52"
+     "v": "62"
     }
    },
    "ordos_mortartrooper": {
@@ -2568,6 +2742,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1984",
+      "pricing": true,
       "range": "9920",
       "reloaddelay": "80",
       "slot": "Armament",
@@ -2629,12 +2804,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Dune_SiegeMortar"
+      "weapon": "Dune_SiegeMortar",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^D2K_Cannon",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1984",
+      "pricing": false,
       "range": "9920",
       "reloaddelay": "80",
       "slot": "Armament@garrisoned",
@@ -2696,7 +2878,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Dune_SiegeMortar"
+      "weapon": "Dune_SiegeMortar",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^D2K_Cannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {
@@ -2739,6 +2927,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament",
@@ -2779,11 +2968,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper"
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
@@ -2824,7 +3019,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper"
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -2867,12 +3067,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
       "slot": "Armament@c4",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "GenericC4"
+      "weapon": "GenericC4",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3453,6 +3656,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
@@ -3493,7 +3697,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket"
+      "weapon": "D2K_APC_Rocket",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -3541,6 +3750,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
       "requires": "undeployed",
@@ -3603,11 +3813,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_cobra"
+      "weapon": "120mm_cobra",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^D2K_Cannon"
+      ]
      },
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
       "requires": "deployed",
@@ -3667,7 +3884,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_cobra_deploy"
+      "weapon": "120mm_cobra_deploy",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {
@@ -3718,6 +3941,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "6220",
       "reloaddelay": "24",
       "slot": "Armament",
@@ -3786,7 +4010,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "autogun_tank_small"
+      "weapon": "autogun_tank_small",
+      "weapon_types": [
+       "^D2KMissile",
+       "^HeavyCannon",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3834,6 +4066,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5230",
       "reloaddelay": "44",
       "slot": "Armament",
@@ -3852,7 +4085,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "OrdosCombatTankCannon"
+      "weapon": "OrdosCombatTankCannon",
+      "weapon_types": [
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {
@@ -3902,6 +4138,7 @@
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "10025",
       "reloaddelay": "150",
       "slot": "Armament",
@@ -3987,7 +4224,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DeviatorMissile_Artillery"
+      "weapon": "DeviatorMissile_Artillery",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyCannon",
+       "^MediumMissile",
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -4035,6 +4280,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "7070",
       "reloaddelay": "98",
       "slot": "Armament",
@@ -4091,7 +4337,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DeviatorMissile"
+      "weapon": "DeviatorMissile",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^HeavyCannon",
+       "^MediumMissile",
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -4139,6 +4391,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
@@ -4179,7 +4432,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket"
+      "weapon": "D2K_APC_Rocket",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -4229,6 +4487,7 @@
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "7480",
       "reloaddelay": "24",
       "slot": "Armament",
@@ -4302,7 +4561,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "autogun_tank"
+      "weapon": "autogun_tank",
+      "weapon_types": [
+       "^D2KMissile",
+       "^HeavyCannon",
+       "^HeavyAAWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -4349,6 +4616,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
       "slot": "Armament",
@@ -4367,12 +4635,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyOrdosCombatTankCannon"
+      "weapon": "HeavyOrdosCombatTankCannon",
+      "weapon_types": [
+       "^D2K_Cannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "70",
       "requires": "ordos_upgrade_heavycombattankrockets",
@@ -4436,7 +4708,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeavyOrdosCombatTankRockets"
+      "weapon": "HeavyOrdosCombatTankRockets",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon",
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -4484,6 +4763,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
       "minrange": "1300",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament",
@@ -4564,10 +4844,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Laboratory_Bioball"
+      "weapon": "Laboratory_Bioball",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumFlameWeapon",
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa1",
@@ -4606,10 +4894,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA"
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
       "slot": "Armament@aa2",
@@ -4648,7 +4942,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_APC_Rocket_AA"
+      "weapon": "D2K_APC_Rocket_AA",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -4696,6 +4995,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7275",
       "reloaddelay": "55",
       "slot": "Armament",
@@ -4757,7 +5057,13 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "ordos_lasertank"
+      "weapon": "ordos_lasertank",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^RailgunWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4852,6 +5158,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
       "requires": "undeployed",
@@ -4911,13 +5218,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_python"
+      "weapon": "120mm_python",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^D2K_Cannon"
+      ]
      },
      {
       "armament_name": "deployed",
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
       "requires": "deployed",
@@ -4977,7 +5291,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_python_deploy"
+      "weapon": "120mm_python_deploy",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon",
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {
@@ -5027,6 +5347,7 @@
       "burst": "9",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
       "requires": "!ordos_upgrade_lasercartridges",
@@ -5046,12 +5367,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGo"
+      "weapon": "HMGo",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "9",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
       "requires": "ordos_upgrade_lasercartridges",
@@ -5098,7 +5423,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGo_upgrade"
+      "weapon": "HMGo_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^Chaingun",
+       "^SmallArms"
+      ]
      }
     ],
     "armor": {
@@ -5192,6 +5522,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
       "requires": "!ordos_upgrade_lasercartridges",
@@ -5222,12 +5553,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGstealth"
+      "weapon": "HMGstealth",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
       "requires": "ordos_upgrade_lasercartridges",
@@ -5273,7 +5609,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HMGstealth_upgrade"
+      "weapon": "HMGstealth_upgrade",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^SmallArms",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -5320,6 +5661,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8500",
       "reloaddelay": "72",
       "slot": "Armament",
@@ -5381,7 +5723,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "120mm_td"
+      "weapon": "120mm_td",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^LightChemicalWeapon",
+       "^D2K_Cannon",
+       "^TankDestroyerCannon"
+      ]
      }
     ],
     "armor": {

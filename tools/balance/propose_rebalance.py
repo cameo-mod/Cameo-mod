@@ -39,6 +39,8 @@ def unit_row(u):
     d = u.get("design") or {}
     total_dps, best_range = 0.0, 0.0
     for arm in u.get("armaments", []):
+        if not arm.get("pricing", True):
+            continue
         damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
         damages = [x for x in damages if x is not None]
         reload_ = fnum(arm.get("reloaddelay"))

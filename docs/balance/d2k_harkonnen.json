@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5120",
       "reloaddelay": "55",
       "slot": "Armament",
@@ -26,7 +27,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "80mm_H"
+      "weapon": "80mm_H",
+      "weapon_types": [
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {

@@ -1,6 +1,7 @@
 japan_imperialscoutsman:
 	Inherits: ^ra1_allies_rifleinfantry
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@Template: ^SpecialForcesInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BushidoDiscipline: ^BushidoDiscipline
 	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
 	Inherits@WaveforceBullets: ^WaveforceBullets
@@ -11,18 +12,22 @@ japan_imperialscoutsman:
 	Tooltip:
 		Name: Imperial Scoutsman
 	Valued:
-		Cost: 100
+		Cost: 200
 	Mobile:
-		Speed: 60
+		Speed: 50
 	Health:
-		HP: 20000
+		HP: 15000
 	ChangesHealth@SelfHealing:
-		Step: 20
-	# SCOUT-CLASS BASELINE UNIT (Formula v2, design 2026-07-18): the living
-	# in-game reference — 20000 HP / 60 Speed / 5.0 Range / 4000 Damage /
-	# 50 Reload at Cost 100, O = P = Q = 100 by construction. The class
-	# knob pair is neutralized here: the 2x-health bake replaces the 50%
-	# damage reduction, and DPS comes entirely from the weapon.
+		Step: 15
+	# SPECIAL-FORCES BASELINE UNIT (Formula v2, maintainer 2026-07-20): the
+	# living in-game reference — 15000 HP / 50 Speed / 6.0 Range / 6000
+	# Damage (SmallArms + Chaingun + Railgun-AP, air-capable) / 50 Reload at
+	# Cost 200, O = P = Q = 200 by construction. Fragile long-range versatile
+	# anti-air/anti-armor specialist (contrast the 50000-HP closecombat
+	# brawler). ^SpecialForcesInfantryTemplate replaces the scout template
+	# via the @Template inherit swap; DPS comes entirely from the weapon.
+	# @ScoutInfantryBuff neutralizers kept defensively in case any scout
+	# trait lingers through the parent; drop once the swap is verified clean.
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:

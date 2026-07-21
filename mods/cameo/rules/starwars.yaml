@@ -5200,10 +5200,10 @@ swrmbo:
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4
@@ -5223,10 +5223,10 @@ swgreedo:
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament@PRIMARY:
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Infiltrates:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
@@ -8443,7 +8443,7 @@ swrmbo.hutt:
 		Weapon: SWBikeLaserSalvage
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: ra1_allies_alliedsniper
+		Weapon: LightSniper
 	Armament@c4:
 		Weapon: CHTankHunterAttach1
 		Cursor: c4

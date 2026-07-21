@@ -104,9 +104,7 @@ naxis_interceptor_husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: naxis_interceptor
-	RenderSprites:
 		PlayerPalette: playerra2
-
 naxis_bf109:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
@@ -190,9 +188,7 @@ bf109_husk.nax:
 		Type: CenterPosition
 	RenderSprites:
 		Image: naxis_bf109
-	RenderSprites:
 		PlayerPalette: playerra2
-
 naxis_me262:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
@@ -298,9 +294,7 @@ me262_husk.nax:
 		Type: CenterPosition
 	RenderSprites:
 		Image: naxis_me262
-	RenderSprites:
 		PlayerPalette: playerra2
-
 naxis_transportzeppelin:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
@@ -401,15 +395,13 @@ zep_husk.nax:
 		Type: CenterPosition
 	RenderSprites:
 		Image: naxis_transportzeppelin
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 horten_bomber.nax:
 	Inherits: ra1_soviets_badger
 	Tooltip:

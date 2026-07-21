@@ -63,7 +63,7 @@ ordos_lightinfantry:
 	Tooltip:
 		Name: Ordos Light Infantry
 	Valued:
-		Cost: 150
+		Cost: 120
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
@@ -71,28 +71,34 @@ ordos_lightinfantry:
 		IconPalette: d2kunit
 		Prerequisites: ~ordos_barracks
 	Health:
-		HP: 18000
+		HP: 28000
 	ChangesHealth@SelfHealing:
-		Step: 18
+		Step: 28
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ordos_lightinfantry:
+		Modifier: 82
 	Mobile:
-		Speed: 52
+		Speed: 62
 	Armament@PRIMARY: ##########
-		Weapon: LMG
+		Weapon: light_inf_lmg
 		LocalOffset: 128,0,256
 		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@Upgrade: ##########
-		Weapon: LMG_ordos_upgrade
+		Weapon: light_inf_lmg_ordos_upgrade
 		LocalOffset: 128,0,256
 		RequiresCondition: ordos_upgrade_lasercartridges
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: LMG
+		Weapon: light_inf_lmg
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
 		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
-		Weapon: LMG_ordos_upgrade
+		Weapon: light_inf_lmg_ordos_upgrade
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
 		RequiresCondition: ordos_upgrade_lasercartridges

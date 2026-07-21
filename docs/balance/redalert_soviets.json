@@ -11,6 +11,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1292",
+      "pricing": true,
       "range": "6460",
       "reloaddelay": "148",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -30,7 +31,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArmoredYakChainGun"
+      "weapon": "ArmoredYakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -38,6 +42,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1292",
+      "pricing": true,
       "range": "6460",
       "reloaddelay": "148",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -57,13 +62,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ArmoredYakChainGun"
+      "weapon": "ArmoredYakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "10",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1292",
+      "pricing": true,
       "range": "6460",
       "reloaddelay": "148",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -98,7 +107,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryArmoredYakChainGun"
+      "weapon": "IncendiaryArmoredYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -106,6 +120,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1292",
+      "pricing": true,
       "range": "6460",
       "reloaddelay": "148",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -140,7 +155,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryArmoredYakChainGun"
+      "weapon": "IncendiaryArmoredYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -183,6 +203,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
@@ -245,10 +266,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -311,10 +339,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -377,10 +412,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_hurricanerocketpods",
@@ -459,10 +501,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesThermobaric"
+      "weapon": "HindMissilesThermobaric",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -541,10 +591,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesThermobaric"
+      "weapon": "HindMissilesThermobaric",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -623,10 +681,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesThermobaric"
+      "weapon": "HindMissilesThermobaric",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_hurricanerocketpods",
@@ -684,10 +750,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesNuclear"
+      "weapon": "HindMissilesNuclear",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumFlameWeapon",
+       "^NuclearWarhead",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -745,10 +818,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesNuclear"
+      "weapon": "HindMissilesNuclear",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumFlameWeapon",
+       "^NuclearWarhead",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -806,10 +886,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissilesNuclear"
+      "weapon": "HindMissilesNuclear",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumFlameWeapon",
+       "^NuclearWarhead",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -829,11 +916,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChainGun"
+      "weapon": "ChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -853,10 +944,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChainGun"
+      "weapon": "ChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -893,11 +988,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryChainGun"
+      "weapon": "IncendiaryChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -934,7 +1035,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryChainGun"
+      "weapon": "IncendiaryChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -1013,6 +1119,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
@@ -1048,10 +1155,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KamovTesla"
+      "weapon": "KamovTesla",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "32",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -1086,10 +1198,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KamovTeslaArc"
+      "weapon": "KamovTeslaArc",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
@@ -1152,10 +1269,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -1218,10 +1342,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "!ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -1284,10 +1415,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HindMissiles"
+      "weapon": "HindMissiles",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyCannon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_hurricanerocketpods",
@@ -1371,10 +1509,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KamovMissilesTesla"
+      "weapon": "KamovMissilesTesla",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^TeslaWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -1458,10 +1604,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KamovMissilesTesla"
+      "weapon": "KamovMissilesTesla",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^TeslaWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "16",
       "requires": "ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_hurricanerocketpods",
@@ -1545,10 +1699,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KamovMissilesTesla"
+      "weapon": "KamovMissilesTesla",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^TeslaWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -1568,11 +1730,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChainGun"
+      "weapon": "ChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -1592,10 +1758,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ChainGun"
+      "weapon": "ChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -1632,11 +1802,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryChainGun"
+      "weapon": "IncendiaryChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5528",
       "reloaddelay": "8",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -1673,7 +1849,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryChainGun"
+      "weapon": "IncendiaryChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -1719,6 +1900,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
@@ -1738,13 +1920,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Maverick"
+      "weapon": "Maverick",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
@@ -1764,13 +1950,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Maverick"
+      "weapon": "Maverick",
+      "weapon_types": [
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_teslarockets",
@@ -1806,13 +1996,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaMaverick"
+      "weapon": "TeslaMaverick",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_teslarockets",
@@ -1848,13 +2043,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaMaverick"
+      "weapon": "TeslaMaverick",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
@@ -1912,13 +2112,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ThermobaricMaverick"
+      "weapon": "ThermobaricMaverick",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^MediumMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1180",
+      "pricing": true,
       "range": "5900",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
@@ -1976,7 +2183,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ThermobaricMaverick"
+      "weapon": "ThermobaricMaverick",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -2020,6 +2233,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1250",
       "reloaddelay": "125",
       "slot": "Armament@BOMBS",
@@ -2081,13 +2295,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakNuclearBomb"
+      "weapon": "YakNuclearBomb",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^NuclearWarhead"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2107,7 +2328,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -2115,6 +2339,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2134,13 +2359,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2177,7 +2406,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -2185,6 +2419,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2221,7 +2456,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -2267,6 +2507,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1578",
+      "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets",
@@ -2297,13 +2538,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "NuclearMaverick"
+      "weapon": "NuclearMaverick",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1578",
+      "pricing": true,
       "range": "7890",
       "reloaddelay": "50",
       "requires": "ra1_soviets_upgrade_highexplosiverockets",
@@ -2350,13 +2596,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ThermobaricNuclearMaverick"
+      "weapon": "ThermobaricNuclearMaverick",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^NuclearWarhead",
+       "^HeavyMissile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2376,13 +2628,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2402,13 +2658,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2445,13 +2705,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2488,7 +2754,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -2532,6 +2803,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "750",
       "reloaddelay": "50",
       "slot": "Armament@Nuke",
@@ -2593,7 +2865,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ParaBombNuke"
+      "weapon": "ParaBombNuke",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^NuclearWarhead"
+      ]
      }
     ],
     "armor": {
@@ -2641,6 +2919,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1250",
       "reloaddelay": "125",
       "slot": "Armament@BOMBS",
@@ -2707,13 +2986,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakTeslaBomb"
+      "weapon": "YakTeslaBomb",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyBomb",
+       "^HeavyChemicalWeapon",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
@@ -2749,13 +3035,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakTeslaGun"
+      "weapon": "YakTeslaGun",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -2790,13 +3081,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakTeslaGunArc"
+      "weapon": "YakTeslaGunArc",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2816,7 +3112,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -2824,6 +3123,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -2843,13 +3143,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2886,7 +3190,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -2894,6 +3203,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -2930,7 +3240,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -2975,6 +3290,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1840",
       "reloaddelay": "110",
       "slot": "Armament@BOMBS",
@@ -3041,13 +3357,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakNapalm"
+      "weapon": "YakNapalm",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -3067,7 +3390,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -3075,6 +3401,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -3094,13 +3421,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YakChainGun"
+      "weapon": "YakChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -3137,7 +3468,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "secondary",
@@ -3145,6 +3481,7 @@
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1400",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -3181,7 +3518,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryYakChainGun"
+      "weapon": "IncendiaryYakChainGun",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -3599,6 +3941,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
       "requires": "!ra1_soviets_doctrine_inferno",
@@ -3623,10 +3966,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballLauncher"
+      "weapon": "FireballLauncher",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6742",
       "reloaddelay": "30",
       "requires": "ra1_soviets_doctrine_inferno",
@@ -3667,7 +4014,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballLauncherThermobaric"
+      "weapon": "FireballLauncherThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3789,6 +4140,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12790",
       "reloaddelay": "27",
       "slot": "Armament",
@@ -3840,7 +4192,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Nike"
+      "weapon": "Nike",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -3879,6 +4237,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -3903,10 +4262,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaZap"
+      "weapon": "TeslaZap",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -3931,10 +4294,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaZapEMP"
+      "weapon": "TeslaZapEMP",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9320",
       "reloaddelay": "3",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -3959,7 +4326,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaZapEMPArc"
+      "weapon": "TeslaZapEMPArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4002,7 +4372,8 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "range": "4420",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "11",
       "slot": "Armament",
       "versus_templates": [
@@ -4031,14 +4402,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConscriptAK47"
+      "weapon": "ra1_soviets_ak47conscript_rifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
-      "range": "4420",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "11",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -4067,7 +4443,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConscriptAK47"
+      "weapon": "ra1_soviets_ak47conscript_rifle",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -4086,7 +4466,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/infantry.yaml#Health.HP",
-     "v": "22000"
+     "v": "44000"
     },
     "name": "AK-47 Conscript",
     "prerequisites": [
@@ -4110,6 +4490,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -4121,7 +4502,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "DogJaw"
+      "weapon": "DogJaw",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4164,6 +4546,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6770",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
@@ -4182,11 +4565,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommissarPistol"
+      "weapon": "CommissarPistol",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6770",
       "reloaddelay": "20",
       "slot": "Armament@GARRISONED",
@@ -4205,7 +4592,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CommissarPistol"
+      "weapon": "CommissarPistol",
+      "weapon_types": [
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4248,6 +4638,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2500",
       "reloaddelay": "10",
       "slot": "Armament",
@@ -4259,7 +4650,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "CyberneticDogJaw"
+      "weapon": "CyberneticDogJaw",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4302,6 +4694,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6880",
       "reloaddelay": "85",
       "slot": "Armament",
@@ -4369,11 +4762,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DragunovSniper"
+      "weapon": "DragunovSniper",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^RailgunWeapon",
+       "^LightMissile",
+       "^HeavyCannon",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6880",
       "reloaddelay": "85",
       "slot": "Armament@GARRISONED",
@@ -4441,7 +4842,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DragunovSniper"
+      "weapon": "DragunovSniper",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^RailgunWeapon",
+       "^LightMissile",
+       "^HeavyCannon",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4484,6 +4892,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6036",
       "reloaddelay": "53",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -4541,11 +4950,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireRockets"
+      "weapon": "FireRockets",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6036",
       "reloaddelay": "53",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -4603,10 +5019,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireRockets"
+      "weapon": "FireRockets",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6692",
       "reloaddelay": "58",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -4723,11 +5146,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireRocketsThermobaric"
+      "weapon": "FireRocketsThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6692",
       "reloaddelay": "58",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -4844,7 +5278,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireRocketsThermobaric"
+      "weapon": "FireRocketsThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyMissile",
+       "^MediumFlameWeapon",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^LightFlameWeapon",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -4887,6 +5331,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -4911,11 +5356,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballGun"
+      "weapon": "FireballGun",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -4940,10 +5389,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballGun"
+      "weapon": "FireballGun",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -4984,11 +5437,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballGunThermobaric"
+      "weapon": "FireballGunThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5004",
       "reloaddelay": "24",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -5029,7 +5487,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FireballGunThermobaric"
+      "weapon": "FireballGunThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5072,6 +5534,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -5112,11 +5575,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GrenadeRA"
+      "weapon": "GrenadeRA",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -5157,10 +5625,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GrenadeRA"
+      "weapon": "GrenadeRA",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -5232,11 +5705,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GrenadeThermobaric"
+      "weapon": "GrenadeThermobaric",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5791",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -5308,7 +5788,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GrenadeThermobaric"
+      "weapon": "GrenadeThermobaric",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^MediumFlameWeapon",
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5352,6 +5838,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2166",
+      "pricing": true,
       "range": "10830",
       "reloaddelay": "88",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -5424,12 +5911,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeMortar"
+      "weapon": "SiegeMortar",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2166",
+      "pricing": false,
       "range": "10830",
       "reloaddelay": "88",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -5502,11 +5996,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeMortar"
+      "weapon": "SiegeMortar",
+      "weapon_types": [
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2166",
+      "pricing": true,
       "range": "10830",
       "reloaddelay": "88",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -5603,12 +6104,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeMortarThermobaric"
+      "weapon": "SiegeMortarThermobaric",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2166",
+      "pricing": false,
       "range": "10830",
       "reloaddelay": "88",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -5705,7 +6215,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SiegeMortarThermobaric"
+      "weapon": "SiegeMortarThermobaric",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^HeavyFlameWeapon",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -5752,6 +6270,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "5100",
       "reloaddelay": "55",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -5771,7 +6290,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5779,6 +6301,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "5100",
       "reloaddelay": "55",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -5798,13 +6321,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine"
+      "weapon": "ra1_soviets_rifleinfantry_carbine",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "5100",
       "reloaddelay": "55",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -5841,7 +6368,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^SmallArms",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -5849,6 +6381,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "5100",
       "reloaddelay": "55",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -5885,7 +6418,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary"
+      "weapon": "ra1_soviets_rifleinfantry_carbine_incendiary",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^SmallArms",
+       "^IncendiaryBulletProjectile"
+      ]
      }
     ],
     "armor": {
@@ -5928,6 +6466,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
@@ -5957,11 +6496,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRA"
+      "weapon": "RocketsRA",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
@@ -5991,7 +6535,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRA"
+      "weapon": "RocketsRA",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      }
     ],
     "armor": {
@@ -6035,6 +6583,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -6059,10 +6608,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTesla"
+      "weapon": "PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -6087,10 +6640,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTeslaEMP"
+      "weapon": "PortaTeslaEMP",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -6115,11 +6672,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTeslaEMPArc"
+      "weapon": "PortaTeslaEMPArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -6144,11 +6705,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTesla"
+      "weapon": "PortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -6173,11 +6738,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTeslaEMP"
+      "weapon": "PortaTeslaEMP",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4652",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -6202,7 +6771,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PortaTeslaEMPArc"
+      "weapon": "PortaTeslaEMPArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -6247,6 +6819,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
@@ -6298,11 +6871,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeapon"
+      "weapon": "VolkovMagneticWeapon",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
@@ -6368,12 +6947,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponTesla"
+      "weapon": "VolkovMagneticWeaponTesla",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1000",
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
@@ -6434,11 +7020,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponNuclearShells"
+      "weapon": "VolkovMagneticWeaponNuclearShells",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
@@ -6505,11 +7098,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiary"
+      "weapon": "VolkovMagneticWeaponIncendiary",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
@@ -6591,12 +7192,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiaryTesla"
+      "weapon": "VolkovMagneticWeaponIncendiaryTesla",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1000",
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
@@ -6673,12 +7282,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells"
+      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^NuclearWarhead",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
@@ -6730,12 +7347,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeapon"
+      "weapon": "VolkovMagneticWeapon",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
@@ -6801,13 +7424,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponTesla"
+      "weapon": "VolkovMagneticWeaponTesla",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1000",
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "40",
       "requires": "!ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
@@ -6868,12 +7498,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponNuclearShells"
+      "weapon": "VolkovMagneticWeaponNuclearShells",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "15",
       "requires": "ra1_soviets_upgrade_incendiarybullets && !ra1_soviets_upgrade_teslaarcing && !ra1_soviets_upgrade_nucleartankshells",
@@ -6940,12 +7577,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiary"
+      "weapon": "VolkovMagneticWeaponIncendiary",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5660",
       "reloaddelay": "30",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_teslaarcing",
@@ -7027,13 +7672,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiaryTesla"
+      "weapon": "VolkovMagneticWeaponIncendiaryTesla",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade",
+       "^MediumFlameWeapon",
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1000",
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "40",
       "requires": "ra1_soviets_upgrade_incendiarybullets && ra1_soviets_upgrade_nucleartankshells",
@@ -7110,7 +7763,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells"
+      "weapon": "VolkovMagneticWeaponIncendiaryNuclearShells",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^NuclearWarhead",
+       "^HeavyCannon",
+       "^MediumChemicalWeapon",
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -7158,6 +7818,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "32",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
@@ -7182,10 +7843,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZapperPortaTesla"
+      "weapon": "ZapperPortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "32",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -7210,11 +7875,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZapperPortaTeslaArc"
+      "weapon": "ZapperPortaTeslaArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "32",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
@@ -7239,11 +7908,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZapperPortaTesla"
+      "weapon": "ZapperPortaTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "32",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -7268,7 +7941,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZapperPortaTeslaArc"
+      "weapon": "ZapperPortaTeslaArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -8379,6 +9055,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -8408,12 +9085,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRMachineGun"
+      "weapon": "BTRMachineGun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "slot": "Armament@AA",
@@ -8442,12 +9124,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRMachineGunAA"
+      "weapon": "BTRMachineGunAA",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -8483,12 +9170,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRTeslaMachineGun"
+      "weapon": "BTRTeslaMachineGun",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5454",
       "reloaddelay": "20",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -8523,12 +9215,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRTeslaMachineGunArc"
+      "weapon": "BTRTeslaMachineGunArc",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -8563,12 +9260,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRTeslaMachineGunAA"
+      "weapon": "BTRTeslaMachineGunAA",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -8603,7 +9305,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BTRTeslaMachineGunArcAA"
+      "weapon": "BTRTeslaMachineGunArcAA",
+      "weapon_types": [
+       "^LightMissile",
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -8651,6 +9357,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8118",
       "reloaddelay": "5",
       "slot": "Armament@AA",
@@ -8679,11 +9386,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FLAK-23-AA"
+      "weapon": "FLAK-23-AA",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5412",
       "reloaddelay": "5",
       "slot": "Armament@AG",
@@ -8713,7 +9425,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "FLAK-23-AG"
+      "weapon": "FLAK-23-AG",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -8760,6 +9476,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -8779,10 +9496,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RAGatlingTankCannon"
+      "weapon": "RAGatlingTankCannon",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
       "requires": "!ra1_soviets_upgrade_incendiarybullets",
@@ -8802,10 +9523,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RAGatlingTankCannonAA"
+      "weapon": "RAGatlingTankCannonAA",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -8842,10 +9567,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryRAGatlingTankCannon"
+      "weapon": "IncendiaryRAGatlingTankCannon",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_incendiarybullets",
@@ -8880,10 +9611,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "IncendiaryRAGatlingTankCannonAA"
+      "weapon": "IncendiaryRAGatlingTankCannonAA",
+      "weapon_types": [
+       "^Chaingun",
+       "^LightFlameWeapon",
+       "^IncendiaryBulletProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -8908,10 +9645,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaRAGatlingTankCannon"
+      "weapon": "TeslaRAGatlingTankCannon",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -8936,10 +9677,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaRAGatlingTankCannonArc"
+      "weapon": "TeslaRAGatlingTankCannonArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -8964,10 +9709,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaRAGatlingTankCannonAA"
+      "weapon": "TeslaRAGatlingTankCannonAA",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "10",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -8992,7 +9741,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TeslaRAGatlingTankCannonArcAA"
+      "weapon": "TeslaRAGatlingTankCannonArcAA",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9042,6 +9794,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -9065,7 +9818,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BigFlamer"
+      "weapon": "BigFlamer",
+      "weapon_types": [
+       "^MediumFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9114,6 +9870,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2764",
+      "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
       "requires": "!(ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth)",
@@ -9149,13 +9906,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GradRockets"
+      "weapon": "GradRockets",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ]
      },
      {
       "burst": "8",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2764",
+      "pricing": true,
       "range": "13820",
       "reloaddelay": "115",
       "requires": "ra1_soviets_upgrade_highexplosiverockets || ra1_soviets_upgrade_scorchedearth",
@@ -9217,7 +9979,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GradHeavyRockets"
+      "weapon": "GradHeavyRockets",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^HeavyBomb",
+       "^HeavyMissile",
+       "^ShrapnelWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9267,6 +10035,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6825",
       "reloaddelay": "85",
       "requires": "!ra1_soviets_upgrade_nucleartankshells",
@@ -9297,12 +10066,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HammerTankCannon"
+      "weapon": "HammerTankCannon",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6825",
       "reloaddelay": "85",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
@@ -9359,10 +10133,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HammerTankCannonThermobaric"
+      "weapon": "HammerTankCannonThermobaric",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6825",
       "reloaddelay": "100",
       "requires": "ra1_soviets_upgrade_shtoradefensesystem",
@@ -9429,7 +10210,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShtoraLaser"
+      "weapon": "ShtoraLaser",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^FlakWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9478,6 +10264,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
       "slot": "Armament@1",
@@ -9533,10 +10320,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeatRayBeam1"
+      "weapon": "HeatRayBeam1",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^MediumChemicalWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
       "slot": "Armament@2",
@@ -9590,10 +10383,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeatRayBeam2"
+      "weapon": "HeatRayBeam2",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^MediumChemicalWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
       "slot": "Armament@3",
@@ -9647,10 +10446,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeatRayBeam3"
+      "weapon": "HeatRayBeam3",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^MediumChemicalWeapon",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8212",
       "reloaddelay": "8",
       "slot": "Armament@4",
@@ -9704,7 +10509,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HeatRayBeam4"
+      "weapon": "HeatRayBeam4",
+      "weapon_types": [
+       "^LaserWeapon",
+       "^MediumChemicalWeapon",
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -9799,6 +10609,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5469",
       "reloaddelay": "76",
       "requires": "!ra1_soviets_upgrade_nucleartankshells",
@@ -9818,12 +10629,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "105mm"
+      "weapon": "105mm",
+      "weapon_types": [
+       "^MediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5469",
       "reloaddelay": "76",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
@@ -9859,7 +10674,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "105mmThermobaric"
+      "weapon": "105mmThermobaric",
+      "weapon_types": [
+       "^MediumFlameWeapon",
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -9907,6 +10726,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6650",
       "reloaddelay": "10",
       "slot": "Armament@pointdefense",
@@ -9930,10 +10750,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "PointDefenseTesla"
+      "weapon": "PointDefenseTesla",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6650",
       "reloaddelay": "80",
       "requires": "!ra1_soviets_upgrade_teslaarcing",
@@ -9958,10 +10782,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TTankZap2EMP"
+      "weapon": "TTankZap2EMP",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6650",
       "reloaddelay": "80",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -9986,7 +10814,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TTankZap2EMPArc"
+      "weapon": "TTankZap2EMPArc",
+      "weapon_types": [
+       "^TeslaChargedWeapon"
+      ]
      }
     ],
     "armor": {
@@ -10035,6 +10866,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6427",
       "reloaddelay": "96",
       "requires": "!ra1_soviets_upgrade_nucleartankshells",
@@ -10065,12 +10897,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KotinCannon"
+      "weapon": "KotinCannon",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6427",
       "reloaddelay": "96",
       "requires": "ra1_soviets_upgrade_nucleartankshells",
@@ -10127,7 +10964,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "KotinCannonThermobaric"
+      "weapon": "KotinCannonThermobaric",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^MediumFlameWeapon",
+       "^HeavyCannon",
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {
@@ -10174,13 +11017,16 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2500",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "DemoTruckTargeting"
       ],
       "warheads": [],
-      "weapon": "MADTankTargeting"
+      "weapon": "MADTankTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -10233,6 +11079,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10290,12 +11137,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mm"
+      "weapon": "ra120mm",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10350,12 +11204,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mmTargetingComputer"
+      "weapon": "ra120mmTargetingComputer",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumCannon",
+       "^ShrapnelWeapon",
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10402,12 +11263,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mmThermobaric"
+      "weapon": "ra120mmThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "95",
       "requires": "ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10452,13 +11319,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mmThermobaricTargetingComputer"
+      "weapon": "ra120mmThermobaricTargetingComputer",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10517,13 +11390,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTusk"
+      "weapon": "MammothTusk",
+      "weapon_types": [
+       "^Grenade",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10578,13 +11459,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTuskTargetingComputer"
+      "weapon": "MammothTuskTargetingComputer",
+      "weapon_types": [
+       "^Grenade",
+       "^FlakWeapon",
+       "^MediumMissile",
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "ra1_soviets_upgrade_teslarockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10652,13 +11541,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTuskTesla"
+      "weapon": "MammothTuskTesla",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon",
+       "^TeslaWeapon",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "ra1_soviets_upgrade_teslarockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10723,13 +11619,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTuskTeslaTargetingComputer"
+      "weapon": "MammothTuskTeslaTargetingComputer",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon",
+       "^TeslaWeapon",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10851,13 +11754,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTuskThermobaric"
+      "weapon": "MammothTuskThermobaric",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "12",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6412",
       "reloaddelay": "91",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -10972,7 +11886,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTuskThermobaricTargetingComputer"
+      "weapon": "MammothTuskThermobaricTargetingComputer",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -11067,6 +11991,7 @@
       "burst": "2",
       "burstdelays": "32",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7833",
       "reloaddelay": "103",
       "requires": "!ra1_soviets_doctrine_inferno",
@@ -11097,12 +12022,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MonsterTank120mm"
+      "weapon": "MonsterTank120mm",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "32",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7833",
       "reloaddelay": "103",
       "requires": "ra1_soviets_doctrine_inferno",
@@ -11148,11 +12078,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MonsterTank120mmThermobaric"
+      "weapon": "MonsterTank120mmThermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^NuclearWarhead",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
       "requires": "!ra1_soviets_upgrade_teslarockets && !ra1_soviets_upgrade_thermonuclearrockets",
@@ -11183,12 +12119,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MonsterTankTusk"
+      "weapon": "MonsterTankTusk",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_teslarockets",
@@ -11256,12 +12197,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MonsterTankTuskTesla"
+      "weapon": "MonsterTankTuskTesla",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon",
+       "^TeslaWeapon",
+       "^HeavyMissile"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7833",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
@@ -11383,7 +12331,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MonsterTankTuskThermobaric"
+      "weapon": "MonsterTankTuskThermobaric",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyFlameWeapon",
+       "^Grenade",
+       "^FlakWeapon",
+       "^ShrapnelWeapon",
+       "^MediumMissile",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -11436,6 +12394,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2510",
+      "pricing": true,
       "range": "12550",
       "reloaddelay": "158",
       "requires": "!ra1_soviets_upgrade_thermonuclearrockets",
@@ -11649,11 +12608,29 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCUDNUKE"
+      "weapon": "SCUDNUKE",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^LightMissile",
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^LightChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon",
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^NuclearWarhead"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2510",
+      "pricing": true,
       "range": "12550",
       "reloaddelay": "158",
       "requires": "ra1_soviets_upgrade_thermonuclearrockets",
@@ -11853,7 +12830,24 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCUDNUKEThermobaric"
+      "weapon": "SCUDNUKEThermobaric",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^MediumMissile",
+       "^LightMissile",
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^Grenade",
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^LightChemicalWeapon",
+       "^HeavyFlameWeapon",
+       "^MediumFlameWeapon",
+       "^LightFlameWeapon",
+       "^TankDestroyerCannon",
+       "^FlakWeapon",
+       "^NuclearWarhead"
+      ]
      }
     ],
     "armor": {
@@ -11901,11 +12895,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -12003,6 +13000,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12054,12 +13052,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mm2"
+      "weapon": "ra120mm2",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
       "requires": "!ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12109,12 +13113,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mm2TargetingComputer"
+      "weapon": "ra120mm2TargetingComputer",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_nucleartankshells && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12161,12 +13171,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mm2Thermobaric"
+      "weapon": "ra120mm2Thermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
       "requires": "ra1_soviets_upgrade_nucleartankshells && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12211,13 +13227,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra120mm2ThermobaricTargetingComputer"
+      "weapon": "ra120mm2ThermobaricTargetingComputer",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12270,13 +13292,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTusk2"
+      "weapon": "MammothTusk2",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12326,13 +13355,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTusk2TargetingComputer"
+      "weapon": "MammothTusk2TargetingComputer",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "125",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12379,13 +13415,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTusk2Thermobaric"
+      "weapon": "MammothTusk2Thermobaric",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "105",
       "requires": "ra1_soviets_upgrade_highexplosiverockets && ra1_soviets_promotion_mammothtanktargetingcomputer",
@@ -12430,7 +13472,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MammothTusk2ThermobaricTargetingComputer"
+      "weapon": "MammothTusk2ThermobaricTargetingComputer",
+      "weapon_types": [
+       "^HeavyFlameWeapon",
+       "^HeavyBomb",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -12526,6 +13573,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
       "requires": "!ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -12550,10 +13598,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TTankZap"
+      "weapon": "TTankZap",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
       "requires": "ra1_soviets_doctrine_teslaandexperimentaltech && !ra1_soviets_upgrade_teslaarcing",
@@ -12578,10 +13630,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TTankZapEMP"
+      "weapon": "TTankZapEMP",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7300",
       "reloaddelay": "80",
       "requires": "ra1_soviets_upgrade_teslaarcing",
@@ -12606,7 +13662,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TTankZapEMPArc"
+      "weapon": "TTankZapEMPArc",
+      "weapon_types": [
+       "^TeslaWeapon"
+      ]
      }
     ],
     "armor": {
@@ -12656,6 +13715,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1919",
+      "pricing": true,
       "range": "9595",
       "reloaddelay": "115",
       "requires": "!ra1_soviets_upgrade_scorchedearth",
@@ -12691,13 +13751,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "v1rockets"
+      "weapon": "v1rockets",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Grenade"
+      ]
      },
      {
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "1919",
+      "pricing": true,
       "range": "9595",
       "reloaddelay": "115",
       "requires": "ra1_soviets_upgrade_scorchedearth",
@@ -12749,7 +13814,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "v1rocketsThermobaric"
+      "weapon": "v1rocketsThermobaric",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Grenade",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -12798,6 +13868,7 @@
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2822",
+      "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
       "requires": "!ra1_soviets_upgrade_highexplosiverockets && !ra1_soviets_upgrade_teslarockets",
@@ -12833,11 +13904,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCUD"
+      "weapon": "SCUD",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2822",
+      "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
       "requires": "ra1_soviets_upgrade_highexplosiverockets",
@@ -12883,11 +13959,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCUDThermobaric"
+      "weapon": "SCUDThermobaric",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyMissile",
+       "^HeavyFlameWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Soviets/yaml/weapons.yaml",
       "minrange": "2822",
+      "pricing": true,
       "range": "14110",
       "reloaddelay": "120",
       "requires": "ra1_soviets_upgrade_teslarockets",
@@ -12938,7 +14020,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCUDTesla"
+      "weapon": "SCUDTesla",
+      "weapon_types": [
+       "^TeslaWeapon",
+       "^HeavyMissile",
+       "^HeavyFlameWeapon"
+      ]
      }
     ],
     "armor": {

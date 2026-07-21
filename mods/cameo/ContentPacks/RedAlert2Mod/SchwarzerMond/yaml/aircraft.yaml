@@ -102,9 +102,7 @@ schwarzermond_drone_husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: schwarzermond_drone
-	RenderSprites:
 		PlayerPalette: playerra2
-
 schwarzermond_spacezeppelin:
 	Inherits: ^Helicopter
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -266,14 +264,13 @@ zep_husk.nax2:
 		Type: CenterPosition
 	RenderSprites:
 		Image: schwarzermond_spacezeppelin
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
 schwarzermond_blackbomb:
 	Inherits: ^RANeutralPlane
 	Inherits@Crypto: ^NaxiCryptofascism
@@ -349,15 +346,13 @@ bbomb_husk.nax2:
 		Speed: 150
 	RenderSprites:
 		Image: miniv2.nax
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 80
 		Explosion: NaxisBlackBomb
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 bbomb2_husk.nax2:
 	Inherits: bbomb_husk.nax2
 	Tooltip:
@@ -645,7 +640,6 @@ piercer_husk.nax2:
 		Type: CenterPosition
 	RenderSprites:
 		Image: schwarzermond_corruptorpiercer
-	RenderSprites:
 		PlayerPalette: playerra2
 schwarzermond_dieglocke:
 	Inherits: ^Helicopter

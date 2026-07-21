@@ -9,6 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6840",
       "reloaddelay": "40",
       "requires": "!rank-elite",
@@ -33,11 +34,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2DiskLaser"
+      "weapon": "RA2DiskLaser",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7840",
       "reloaddelay": "40",
       "requires": "rank-elite",
@@ -62,12 +67,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2DiskLaser_elite"
+      "weapon": "RA2DiskLaser_elite",
+      "weapon_types": [
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "minrange": "1",
+      "pricing": true,
       "range": "125",
       "reloaddelay": "5",
       "requires": "yuri_upgrade_disksiphonattack",
@@ -108,18 +117,25 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2DiskDrain"
+      "weapon": "RA2DiskDrain",
+      "weapon_types": [
+       "^MagicWeapon",
+       "^TeslaWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "1",
+      "pricing": true,
       "range": "125",
       "reloaddelay": "5",
       "slot": "Armament@Steal",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2DiskSteal"
+      "weapon": "RA2DiskSteal",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -163,12 +179,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "SpyPlaneTargeting"
+      "weapon": "SpyPlaneTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -570,6 +589,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "slot": "Armament@1",
@@ -599,11 +619,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1"
+      "weapon": "RA2GattlingMG1",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
       "slot": "Armament@2",
@@ -632,11 +657,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2"
+      "weapon": "RA2GattlingMG2",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
       "slot": "Armament@3",
@@ -665,11 +695,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3"
+      "weapon": "RA2GattlingMG3",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
       "slot": "Armament@1AA",
@@ -698,11 +733,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1AA"
+      "weapon": "RA2GattlingMG1AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
       "slot": "Armament@2AA",
@@ -731,11 +771,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2AA"
+      "weapon": "RA2GattlingMG2AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
       "slot": "Armament@3AA",
@@ -764,7 +809,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3AA"
+      "weapon": "RA2GattlingMG3AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -888,6 +937,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "75",
       "slot": "Armament@CONTROL",
@@ -901,7 +951,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2TMindControl"
+      "weapon": "RA2TMindControl",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -940,6 +991,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -969,7 +1021,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid"
+      "weapon": "RA220mmrapid",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1049,6 +1105,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
       "requires": "!rank-elite && !yuri_upgrade_corrosiveammo",
@@ -1068,12 +1125,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray"
+      "weapon": "RA2Chemspray",
+      "weapon_types": [
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4840",
       "reloaddelay": "50",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
@@ -1104,12 +1165,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray2"
+      "weapon": "RA2Chemspray2",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5840",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -1139,13 +1205,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ChemsprayE"
+      "weapon": "RA2ChemsprayE",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
       "requires": "!rank-elite && !yuri_upgrade_corrosiveammo",
@@ -1165,13 +1236,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray"
+      "weapon": "RA2Chemspray",
+      "weapon_types": [
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4840",
       "reloaddelay": "50",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
@@ -1202,13 +1277,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Chemspray2"
+      "weapon": "RA2Chemspray2",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5840",
       "reloaddelay": "50",
       "requires": "rank-elite",
@@ -1238,7 +1318,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2ChemsprayE"
+      "weapon": "RA2ChemsprayE",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^MediumChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1281,6 +1365,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
       "requires": "!rank-elite",
@@ -1305,12 +1390,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunch"
+      "weapon": "RA2BrutePunch",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
       "requires": "rank-elite",
@@ -1335,7 +1424,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2BrutePunchE"
+      "weapon": "RA2BrutePunchE",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1378,6 +1470,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "75",
       "slot": "Armament@CONTROL",
@@ -1389,7 +1482,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2MindControl"
+      "weapon": "RA2MindControl",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1431,6 +1525,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4750",
       "reloaddelay": "11",
       "slot": "Armament@PRIMARY",
@@ -1511,7 +1606,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2CosmonautLaser"
+      "weapon": "RA2CosmonautLaser",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^LaserWeapon",
+       "^LightMissile",
+       "^SmallArms",
+       "^FlakWeapon",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1553,6 +1656,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1561,16 +1666,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1612,6 +1724,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5086",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
@@ -1641,11 +1754,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingInf"
+      "weapon": "RA2GattlingInf",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5086",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
@@ -1675,7 +1793,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingInf"
+      "weapon": "RA2GattlingInf",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -1719,6 +1841,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4440",
       "reloaddelay": "15",
       "requires": "!rank-elite",
@@ -1776,11 +1899,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab"
+      "weapon": "RA2PsychicJab",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "4440",
       "reloaddelay": "15",
       "requires": "!rank-elite",
@@ -1838,13 +1968,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab"
+      "weapon": "RA2PsychicJab",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5440",
       "reloaddelay": "15",
       "requires": "rank-elite",
@@ -1899,13 +2036,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab_elite"
+      "weapon": "RA2PsychicJab_elite",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5440",
       "reloaddelay": "15",
       "requires": "rank-elite",
@@ -1960,7 +2104,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2PsychicJab_elite"
+      "weapon": "RA2PsychicJab_elite",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^LightFlameWeapon",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2002,6 +2152,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
@@ -2037,10 +2188,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun"
+      "weapon": "RA2Virusgun",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
@@ -2086,10 +2242,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun2"
+      "weapon": "RA2Virusgun2",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
@@ -2145,10 +2307,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun3"
+      "weapon": "RA2Virusgun3",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "11111",
       "reloaddelay": "74",
       "requires": "rank-elite",
@@ -2203,11 +2372,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2VirusgunE"
+      "weapon": "RA2VirusgunE",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && !yuri_upgrade_meltingvirus",
@@ -2243,11 +2419,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun"
+      "weapon": "RA2Virusgun",
+      "weapon_types": [
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_meltingvirus && !yuri_upgrade_corrosiveammo",
@@ -2293,11 +2474,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun2"
+      "weapon": "RA2Virusgun2",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "9999",
       "reloaddelay": "74",
       "requires": "!rank-elite && yuri_upgrade_corrosiveammo",
@@ -2353,11 +2540,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2Virusgun3"
+      "weapon": "RA2Virusgun3",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": false,
       "range": "11111",
       "reloaddelay": "74",
       "requires": "rank-elite",
@@ -2412,7 +2606,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2VirusgunE"
+      "weapon": "RA2VirusgunE",
+      "weapon_types": [
+       "^MediumMissile",
+       "^FlakWeapon",
+       "^HeavyChemicalWeapon",
+       "^SniperWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2454,6 +2654,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
@@ -2467,11 +2668,13 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2XMindControl"
+      "weapon": "RA2XMindControl",
+      "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "125",
       "requires": "!yuri_upgrade_domination",
@@ -2486,11 +2689,13 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2XMindControlSplash"
+      "weapon": "RA2XMindControlSplash",
+      "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "125",
       "requires": "yuri_upgrade_domination",
@@ -2505,7 +2710,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2XMindControlSplash2"
+      "weapon": "RA2XMindControlSplash2",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2558,6 +2764,7 @@
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
       "minrange": "3000",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "176",
       "slot": "Armament@PRIMARY",
@@ -2592,13 +2799,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YRBoomerTorpedo"
+      "weapon": "YRBoomerTorpedo",
+      "weapon_types": [
+       "^RA2Grenade",
+       "^RA2HeavyMissile"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
       "minrange": "3000",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "50",
       "slot": "Armament@LAUNCH",
@@ -2606,7 +2819,8 @@
        "V3Launch"
       ],
       "warheads": [],
-      "weapon": "BoomerLaunch"
+      "weapon": "BoomerLaunch",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3406,22 +3620,28 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "125",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2Dronegas"
+      "weapon": "RA2Dronegas",
+      "weapon_types": []
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": false,
       "range": "5000",
       "reloaddelay": "125",
       "slot": "Armament@GARRISONED",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "RA2Dronegas"
+      "weapon": "RA2Dronegas",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -3467,6 +3687,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
       "requires": "!gatling",
@@ -3497,10 +3718,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1"
+      "weapon": "RA2GattlingMG1",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
       "requires": "gatling == 1",
@@ -3530,10 +3756,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2"
+      "weapon": "RA2GattlingMG2",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5500",
       "reloaddelay": "2",
       "requires": "gatling > 1",
@@ -3563,10 +3794,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3"
+      "weapon": "RA2GattlingMG3",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
       "requires": "!gatling",
@@ -3596,10 +3832,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG1AA"
+      "weapon": "RA2GattlingMG1AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
       "requires": "gatling == 1",
@@ -3629,10 +3870,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG2AA"
+      "weapon": "RA2GattlingMG2AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8250",
       "reloaddelay": "2",
       "requires": "gatling > 1",
@@ -3662,7 +3908,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2GattlingMG3AA"
+      "weapon": "RA2GattlingMG3AA",
+      "weapon_types": [
+       "^SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {
@@ -3709,6 +3959,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5201",
       "reloaddelay": "68",
       "requires": "!yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && !rank-elite",
@@ -3803,13 +4054,22 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherCannon"
+      "weapon": "RA2LasherCannon",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6201",
       "reloaddelay": "68",
       "requires": "!yuri_doctrine_lashertoxicgasshells && !yuri_doctrine_lasherlasercannon && rank-elite",
@@ -3900,11 +4160,21 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherCannon_elite"
+      "weapon": "RA2LasherCannon_elite",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^RA2MediumCannon",
+       "^RA2EliteEffects"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "105",
       "requires": "yuri_doctrine_lashertoxicgasshells && !rank-elite",
@@ -4037,11 +4307,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherToxicMortar"
+      "weapon": "RA2LasherToxicMortar",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "105",
       "requires": "yuri_doctrine_lashertoxicgasshells && rank-elite",
@@ -4166,11 +4448,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA2LasherToxicMortar_elite"
+      "weapon": "RA2LasherToxicMortar_elite",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^LightChemicalWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyChemicalWeapon",
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7065",
       "reloaddelay": "81",
       "requires": "yuri_doctrine_lasherlasercannon && !rank-elite",
@@ -4206,11 +4500,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2LasherLaser"
+      "weapon": "RA2LasherLaser",
+      "weapon_types": [
+       "^MediumCannon",
+       "^LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8065",
       "reloaddelay": "81",
       "requires": "yuri_doctrine_lasherlasercannon && rank-elite",
@@ -4245,7 +4544,11 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2LasherLaser_elite"
+      "weapon": "RA2LasherLaser_elite",
+      "weapon_types": [
+       "^MediumCannon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4294,6 +4597,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
       "requires": "!rank-elite && !yuri_upgrade_supermagnets",
@@ -4318,13 +4622,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2Magnet"
+      "weapon": "RA2Magnet",
+      "weapon_types": [
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7032",
       "reloaddelay": "200",
       "requires": "!rank-elite && yuri_upgrade_supermagnets",
@@ -4349,13 +4657,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2MagnetAA"
+      "weapon": "RA2MagnetAA",
+      "weapon_types": [
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "primary",
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
       "requires": "rank-elite && !yuri_upgrade_supermagnets",
@@ -4380,13 +4692,17 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2Magnet_elite"
+      "weapon": "RA2Magnet_elite",
+      "weapon_types": [
+       "^RA2LaserWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8032",
       "reloaddelay": "200",
       "requires": "rank-elite && yuri_upgrade_supermagnets",
@@ -4411,7 +4727,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "RA2MagnetAA_elite"
+      "weapon": "RA2MagnetAA_elite",
+      "weapon_types": [
+       "^RA2LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -4457,6 +4776,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7000",
       "reloaddelay": "75",
       "slot": "Armament@PRIMARY",
@@ -4470,7 +4790,8 @@
         "type": "TargetDamage"
        }
       ],
-      "weapon": "RA2SMindControl"
+      "weapon": "RA2SMindControl",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4562,6 +4883,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
       "slot": "Armament@primary",
@@ -4591,7 +4913,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RA220mmrapid"
+      "weapon": "RA220mmrapid",
+      "weapon_types": [
+       "^RA2SmallArms",
+       "^RA2Chaingun"
+      ]
      }
     ],
     "armor": {

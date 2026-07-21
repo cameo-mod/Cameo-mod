@@ -265,7 +265,7 @@ td_nod_chemicalrocketsoldier:
 td_nod_lasertrooper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
-	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@Template: ^SpecialForcesInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -284,8 +284,15 @@ td_nod_lasertrooper:
 		BuildPaletteOrder: 100
 		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_unlocklasertrooper
 		Description: actor_blackhandlaser.description
+	# SPECIAL-FORCES — Tier 4 heavy trooper (Formula v2, maintainer
+	# 2026-07-20): 4x the SF baseline — 60000 HP (4x 15000), 50 speed &
+	# 6000 range (same), CannonAP+Flak+Laser triad 24000 @ reload 50 = 480
+	# DPS (4x 120). Temple-prime T4 gate applies the 0.5x tech factor, so
+	# 4x/4x prices to 750 (1500 x 0.5) — close to its original 700. (Briefly
+	# considered as the verifier, but T4's tier factor breaks the clean 2x
+	# identity, so the T1 SM lunar soldier is the verifier instead.)
 	Valued:
-		Cost: 700
+		Cost: 750
 	Tooltip:
 		Name: Laser Trooper
 	Health:
@@ -293,7 +300,9 @@ td_nod_lasertrooper:
 	ChangesHealth@SelfHealing:
 		Step: 60
 	Mobile:
-		Speed: 60
+		Speed: 50
+	FirepowerMultiplier@PromotionUnit:
+		Modifier: 100
 	Armament@PRIMARY:
 		Weapon: BlackHandLaser
 		LocalOffset: 600,0,450

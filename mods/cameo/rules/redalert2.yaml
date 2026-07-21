@@ -529,11 +529,9 @@ ra2gacnst.infiltrated:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: ra2_allies_alliedconstructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: ra2_allies_alliedconstructionyard
-	RenderSprites:
-		Image: ra2_allies_alliedconstructionyard
-
 dummy_dock:
 	Interactable:
 	Reservable:
@@ -592,11 +590,9 @@ ra2nacnst.infiltrated:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: ra2_soviets_constructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: ra2_soviets_constructionyard
-	RenderSprites:
-		Image: ra2_soviets_constructionyard
-
 ra2nayard:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
@@ -638,11 +634,9 @@ yrnacnst.infiltrated:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: yuri_constructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: yuri_constructionyard
-	RenderSprites:
-		Image: yuri_constructionyard
-
 blastradius.dominate:
 	Inherits: ^BlastRadiusIndicator
 	WithRangeCircle:
@@ -1721,15 +1715,13 @@ ra2_tzep.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: ra2_soviets_transportkirov
+		PlayerPalette: playerra2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
 		Velocity: 43
 		Explosion: KirovExplode
 	WithShadow:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 ra2rock.husk:
 	Inherits: ^HelicopterHusk
 	RenderSprites:
@@ -4426,9 +4418,7 @@ ra2hornet.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: ra2hornet
-	RenderSprites:
 		PlayerPalette: playerra2
-
 RA2FALC.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -4446,9 +4436,7 @@ RA2FALC.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: ra2_allies_harrier
-	RenderSprites:
 		PlayerPalette: playerra2
-
 ra2beag.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -4466,9 +4454,7 @@ ra2beag.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: ra2_allies_blackeagle
-	RenderSprites:
 		PlayerPalette: playerra2
-
 YRDISK.Husk:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
@@ -4497,9 +4483,7 @@ ra2asw.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: ra2asw
-	RenderSprites:
 		PlayerPalette: playerra2
-
 yrschp.Husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^RenderVoxel
@@ -4510,14 +4494,12 @@ yrschp.Husk:
 		Speed: 200
 	RenderSprites:
 		Image: ra2_soviets_siegechopper
+		PlayerPalette: playerra2
 	RenderVoxels:
 		Image: ra2_soviets_siegechopper
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
-	RenderSprites:
-		PlayerPalette: playerra2
-
 ra2shad.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:

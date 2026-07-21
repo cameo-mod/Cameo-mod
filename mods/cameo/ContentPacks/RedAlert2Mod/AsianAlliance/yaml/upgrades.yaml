@@ -9,11 +9,9 @@ cgcnst_infiltrated.asian:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: asianalliance_asianconstructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: asianalliance_asianconstructionyard
-	RenderSprites:
-		Image: asianalliance_asianconstructionyard
-
 asianalliance_doctrine_modernizedinfantryequipment:
 	Inherits: ^doctrine_template
 	Tooltip:

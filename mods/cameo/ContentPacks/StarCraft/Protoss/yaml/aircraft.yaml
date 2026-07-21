@@ -56,11 +56,10 @@ protoss_shuttle:
 	DeathSounds:
 	RenderSprites:
 		Image: protoss_shuttle
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	WithCargoSounds:

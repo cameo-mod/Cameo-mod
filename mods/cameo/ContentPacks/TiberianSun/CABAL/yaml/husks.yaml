@@ -86,15 +86,12 @@ cabal_manticore_backup:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
 		PlayerPalette: playerra2
+		Image: cabal_manticore
 	WithFacingSpriteBody:
 		Sequence: stand
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: cabal_manticore
- 	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
 		CooldownDuration: 40

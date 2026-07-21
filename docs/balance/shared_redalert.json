@@ -37,6 +37,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3000",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -119,7 +120,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanSuperBomb"
+      "weapon": "JapanSuperBomb",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -183,6 +191,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
       "slot": "Armament",
@@ -218,7 +227,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ParaBomb"
+      "weapon": "ParaBomb",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^ImpactGlow"
+      ]
      }
     ],
     "armor": {
@@ -311,6 +325,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5000",
       "reloaddelay": "8",
       "slot": "Armament",
@@ -346,7 +361,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ParaBomb"
+      "weapon": "ParaBomb",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyFlameWeapon",
+       "^ImpactGlow"
+      ]
      }
     ],
     "armor": {
@@ -410,12 +430,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "SpyPlaneTargeting"
+      "weapon": "SpyPlaneTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -450,6 +473,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -457,7 +482,8 @@
        "SpyPlaneTargeting"
       ],
       "warheads": [],
-      "weapon": "SpyPlaneTargeting2"
+      "weapon": "SpyPlaneTargeting2",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -746,6 +772,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "7",
       "slot": "Armament",
@@ -759,7 +786,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Pistol"
+      "weapon": "Pistol",
+      "weapon_types": [
+       "^LightMG"
+      ]
      }
     ],
     "armor": {
@@ -794,6 +824,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
@@ -824,11 +855,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRA"
+      "weapon": "RocketsRA",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
@@ -859,10 +895,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRA"
+      "weapon": "RocketsRA",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
@@ -893,11 +934,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRACryo"
+      "weapon": "RocketsRACryo",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "6643",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
@@ -928,7 +975,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "RocketsRACryo"
+      "weapon": "RocketsRACryo",
+      "weapon_types": [
+       "^MediumMissile",
+       "^LightMissile",
+       "^CryoMissileProjectile"
+      ]
      }
     ],
     "armor": {
@@ -973,6 +1025,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
@@ -992,7 +1045,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_allies_rifleinfantry_carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1000,6 +1056,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "50",
       "requires": "!ra1_allies_upgrade_cryomissiles",
@@ -1019,13 +1076,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_allies_rifleinfantry_carbine"
+      "weapon": "ra1_allies_rifleinfantry_carbine",
+      "weapon_types": [
+       "^SmallArms"
+      ]
      },
      {
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": true,
       "range": "5400",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
@@ -1046,7 +1107,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_allies_rifleinfantry_carbine_cryo"
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_types": [
+       "^SmallArms",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
@@ -1054,6 +1119,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
+      "pricing": false,
       "range": "5400",
       "reloaddelay": "50",
       "requires": "ra1_allies_upgrade_cryomissiles",
@@ -1074,7 +1140,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ra1_allies_rifleinfantry_carbine_cryo"
+      "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
+      "weapon_types": [
+       "^SmallArms",
+       "^CryoMissileProjectile"
+      ]
      }
     ],
     "armor": {
@@ -1145,6 +1215,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -1153,16 +1225,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1204,6 +1283,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "7",
       "slot": "Armament",
@@ -1217,7 +1297,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Pistol"
+      "weapon": "Pistol",
+      "weapon_types": [
+       "^LightMG"
+      ]
      }
     ],
     "armor": {
@@ -1281,6 +1364,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5725",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -1320,11 +1404,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConscriptMolotov"
+      "weapon": "ConscriptMolotov",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5725",
       "reloaddelay": "50",
       "slot": "Armament@GARRISONED",
@@ -1364,7 +1453,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ConscriptMolotov"
+      "weapon": "ConscriptMolotov",
+      "weapon_types": [
+       "^Grenade",
+       "^LightFlameWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1406,6 +1499,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "7",
       "slot": "Armament",
@@ -1419,7 +1513,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Pistol"
+      "weapon": "Pistol",
+      "weapon_types": [
+       "^LightMG"
+      ]
      }
     ],
     "armor": {
@@ -1456,12 +1553,15 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "20000",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "JapanCarrierTarget"
+      "weapon": "JapanCarrierTarget",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1508,6 +1608,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "!japan_upgrade_waveforcebullets",
@@ -1538,10 +1639,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanSpeedBoatGun"
+      "weapon": "JapanSpeedBoatGun",
+      "weapon_types": [
+       "^SmallArms",
+       "^Chaingun"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5750",
       "reloaddelay": "4",
       "requires": "japan_upgrade_waveforcebullets",
@@ -1588,10 +1694,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanSpeedBoatGunWaveforce"
+      "weapon": "JapanSpeedBoatGunWaveforce",
+      "weapon_types": [
+       "^WaveforceBulletWarhead",
+       "^SmallArms",
+       "^Chaingun",
+       "^WaveforceBulletProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC1",
@@ -1615,10 +1728,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC2",
@@ -1642,7 +1759,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -1690,6 +1810,7 @@
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "2500",
+      "pricing": true,
       "range": "12500",
       "reloaddelay": "125",
       "slot": "Armament@PRIMARY",
@@ -1719,13 +1840,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YamatoCannon"
+      "weapon": "YamatoCannon",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "2500",
+      "pricing": true,
       "range": "12500",
       "reloaddelay": "125",
       "slot": "Armament@SECONDARY",
@@ -1755,10 +1881,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YamatoCannon"
+      "weapon": "YamatoCannon",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^HeavyCannon"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "12500",
       "reloaddelay": "4",
       "slot": "Armament@AA",
@@ -1777,7 +1908,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "YamatoFlak"
+      "weapon": "YamatoFlak",
+      "weapon_types": [
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1827,6 +1961,7 @@
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "1323",
+      "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
       "requires": "!japan_upgrade_waveforcebullets",
@@ -1846,13 +1981,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGun"
+      "weapon": "ZeroFighterChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "1323",
+      "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
       "requires": "!japan_upgrade_waveforcebullets",
@@ -1872,13 +2011,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGun"
+      "weapon": "ZeroFighterChainGun",
+      "weapon_types": [
+       "^Chaingun"
+      ]
      },
      {
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "1323",
+      "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
       "requires": "japan_upgrade_waveforcebullets",
@@ -1931,13 +2074,20 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGunWaveforce"
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_types": [
+       "^WaveforceBulletWarhead",
+       "^Grenade",
+       "^Chaingun",
+       "^WaveforceBulletProjectile"
+      ]
      },
      {
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "1323",
+      "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
       "requires": "japan_upgrade_waveforcebullets",
@@ -1990,10 +2140,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZeroFighterChainGunWaveforce"
+      "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_types": [
+       "^WaveforceBulletWarhead",
+       "^Grenade",
+       "^Chaingun",
+       "^WaveforceBulletProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3000",
       "reloaddelay": "5",
       "slot": "Armament",
@@ -2012,7 +2169,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "JapanCarrierFighterBomb"
+      "weapon": "JapanCarrierFighterBomb",
+      "weapon_types": [
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -2049,6 +2209,7 @@
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "3000",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "250",
       "slot": "Armament@PRIMARY",
@@ -2083,13 +2244,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      },
      {
       "armament_name": "secondary",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
       "minrange": "3000",
+      "pricing": true,
       "range": "15000",
       "reloaddelay": "250",
       "slot": "Armament@SECONDARY",
@@ -2124,7 +2290,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "8Inch"
+      "weapon": "8Inch",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -2173,6 +2343,7 @@
       "burst": "2",
       "burstdelays": "7",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "27",
       "requires": "!ra1_allies_upgrade_cryomissiles",
@@ -2193,12 +2364,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Stinger"
+      "weapon": "Stinger",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow"
+      ]
      },
      {
       "burst": "2",
       "burstdelays": "7",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8000",
       "reloaddelay": "27",
       "requires": "ra1_allies_upgrade_cryomissiles",
@@ -2219,10 +2395,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "StingerCryo"
+      "weapon": "StingerCryo",
+      "weapon_types": [
+       "^HeavyMissile",
+       "^ImpactGlow",
+       "^CryoMissileProjectile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC1",
@@ -2246,10 +2428,14 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@DC2",
@@ -2273,7 +2459,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -2320,6 +2509,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "30",
       "slot": "Armament@PRIMARY",
@@ -2338,11 +2528,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "2Inch"
+      "weapon": "2Inch",
+      "weapon_types": [
+       "^TankDestroyerCannon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
       "slot": "Armament@SECONDARY",
@@ -2366,7 +2560,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DepthCharge"
+      "weapon": "DepthCharge",
+      "weapon_types": [
+       "^Grenade"
+      ]
      }
     ],
     "armor": {
@@ -2455,6 +2652,7 @@
       "burstdelays": "5",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
       "minrange": "1985",
+      "pricing": true,
       "range": "9920",
       "reloaddelay": "111",
       "slot": "Armament@PRIMARY",
@@ -2511,7 +2709,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "227mm"
+      "weapon": "227mm",
+      "weapon_types": [
+       "^FlakWeapon",
+       "^Grenade",
+       "^HeavyMissile",
+       "^MediumMissile"
+      ]
      }
     ],
     "armor": {
@@ -2558,6 +2762,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "!ra1_soviets_doctrine_inferno",
@@ -2593,10 +2798,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TorpTube"
+      "weapon": "TorpTube",
+      "weapon_types": [
+       "^Grenade",
+       "^HeavyMissile"
+      ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "100",
       "requires": "ra1_soviets_doctrine_inferno",
@@ -2627,7 +2837,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TorpTubeThermobaric"
+      "weapon": "TorpTubeThermobaric",
+      "weapon_types": [
+       "^NuclearWarhead",
+       "^HeavyMissile"
+      ]
      }
     ],
     "armor": {
@@ -2781,6 +2995,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5978",
       "reloaddelay": "10",
       "slot": "Armament@PRIMARY",
@@ -2810,11 +3025,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGunAllies"
+      "weapon": "APCGunAllies",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8967",
       "reloaddelay": "10",
       "slot": "Armament@SECONDARY",
@@ -2843,7 +3063,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "APCGunAlliesAA"
+      "weapon": "APCGunAlliesAA",
+      "weapon_types": [
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2890,6 +3114,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5915",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -2919,7 +3144,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TigerCannon"
+      "weapon": "TigerCannon",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^MediumCannon"
+      ]
      }
     ],
     "armor": {

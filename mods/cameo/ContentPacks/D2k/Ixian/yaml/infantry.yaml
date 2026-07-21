@@ -24,28 +24,34 @@ ixian_lightinfantry:
 		IconPalette: d2kunit
 		Prerequisites: ~ixian_barracks
 	Health:
-		HP: 18000
+		HP: 32000
 	ChangesHealth@SelfHealing:
-		Step: 18
+		Step: 32
+	DamageMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 100
+	FirepowerMultiplier@ixian_lightinfantry:
+		Modifier: 113
 	Mobile:
-		Speed: 52
+		Speed: 56
 	Armament@PRIMARY: ##########
-		Weapon: LMG
+		Weapon: light_inf_lmg
 		LocalOffset: 128,0,256
 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@Upgrade: ##########
-		Weapon: LMG_upgrade
+		Weapon: light_inf_lmg_upgrade
 		LocalOffset: 128,0,256
 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: LMG
+		Weapon: light_inf_lmg
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
-		Weapon: LMG_upgrade
+		Weapon: light_inf_lmg_upgrade
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
 		RequiresCondition: ixian_upgrade_tungstenneedleguns

@@ -141,10 +141,8 @@ ts_nod_elitecadre:
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
-	RenderSprites:
-		PlayerPalette: ra2player
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -419,7 +417,7 @@ ts_nod_chameleonspy:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
 	Cloak:
 		UncloakOn: Attack, Damage, Infiltrate

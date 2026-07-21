@@ -1178,6 +1178,26 @@
 	GrantExternalConditionToTransport:
 		Condition: ifv-miss
 
+^SpecialForcesInfantryTemplate:
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
+	FirepowerMultiplier@SpecialForcesInfantryBuff:
+		Modifier: 100
+	Armor:
+		Type: Flak
+	RevealsShroud:
+		Range: 6500
+	Buildable:
+		BuildPaletteOrder: 30
+		BuildDurationModifier: 100
+		IconPalette: cameo
+	TooltipExtras@SpecialForces:
+		Description: Special Forces
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss
+
 ^HeavyInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceInfantry
 	Inherits@EXT: ^ExternalConditions
@@ -3991,6 +4011,8 @@
 		RedTint: 0.1
 		GreenTint: 0.05
 		BlueTint: 0.025
+	ActorStatValues:
+		Stats: Armor, Sight
 
 ^TechBuildingGarrisonable:
 	Inherits: ^TechBuilding
@@ -4557,6 +4579,7 @@
 
 ^DisableOnLowPower:
 	Inherits: ^DisabledOverlay
+	Power:
 	GrantConditionOnPowerState@LOWPOWER:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical

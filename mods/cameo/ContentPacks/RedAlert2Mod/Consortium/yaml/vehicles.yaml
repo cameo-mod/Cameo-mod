@@ -489,6 +489,13 @@ hummer.steel:
 		LocalOffset: -400,100,300, -400,-100,300, -400,200,300, -400,-200,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AGELITE:
+		Weapon: SteelHoverMissile_elite
+		LocalOffset: -400,100,300, -400,-100,300, -400,200,300, -400,-200,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:

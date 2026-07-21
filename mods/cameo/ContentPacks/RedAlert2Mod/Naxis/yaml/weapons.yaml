@@ -199,6 +199,52 @@ NaxiRifleE:
 	Projectile: Bullet
 		ContrailStartColor: FFAA55
 
+naxis_naxiriflesoldier_rifle:
+	Inherits: ^SmallArms
+	ReloadDelay: 50
+	Range: 5000
+	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		ContrailLength: 20
+		Speed: 10000
+		Width: 50
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+naxis_naxiriflesoldier_rifle_elite:
+	Inherits: naxis_naxiriflesoldier_rifle
+	Range: 6500
+	Burst: 2
+	BurstDelays: 3
+	Report: nax_rifle4.wav , nax_rifle5.wav
+	Projectile: Bullet
+		ContrailStartColor: FFAA55
+
+naxis_naxiriflerecruit_rifle:
+	Inherits: ^SmallArms
+	ReloadDelay: 100
+	Range: 5500
+	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	ValidTargets: Ground, Water
+	Warhead@SmallArms: SpreadDamage
+		Damage: 8000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+naxis_naxiriflerecruit_rifle_elite:
+	Inherits: naxis_naxiriflerecruit_rifle
+	Range: 6500
+	Burst: 2
+	BurstDelays: 3
+
 NaxiRifleT:
 	Inherits: ^SmallArms
 	ReloadDelay: 50

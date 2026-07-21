@@ -741,11 +741,23 @@ RA2M60:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
-RA2para:
+ra2_allies_gi_mg:
+	Inherits: ^RA2SmallArms
+	ReloadDelay: 15
+	Range: 4500
+	Burst: 3
+	BurstDelays: 2
+	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+ra2_allies_gi_para:
 	Inherits: ^RA2Chaingun
 	ValidTargets: Ground, Water
 	ReloadDelay: 19
-	Range: 4750
+	Range: 5500
 	Burst: 3
 	BurstDelays: 3
 	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
@@ -773,6 +785,19 @@ GuardianGIMG:
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+RA2para:
+	Inherits: ^RA2Chaingun
+	ValidTargets: Ground, Water
+	ReloadDelay: 19
+	Range: 4750
+	Burst: 3
+	BurstDelays: 3
+	Report: igiat2a.wav, igiat2b.wav, igiat2c.wav, igiat2d.wav
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage

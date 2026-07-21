@@ -28,7 +28,7 @@ futuretech_constructionyard:
 		SpawnOffset: 213,-128,0
 		ExitCell: 1,2
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: playerra2future2
 	RenderSprites:
 		PlayerPalette: playerra2future2
 	Targetable@TechStealerInfiltrate:
@@ -137,7 +137,7 @@ futuretech_troopgate:
 		Sequence: idle-light
 		RequiresCondition: !build-incomplete
 	WithDeathAnimation:
-		DeathSequencePalette: playerra2
+		DeathSequencePalette: playerra2future1
 		DeathPaletteIsPlayerPalette: true
 	WithProductionDoorOverlay:
 		RequiresCondition: !build-incomplete

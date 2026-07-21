@@ -19,15 +19,15 @@ IncendiaryM1Carbine:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-ConscriptAK47:
+ra1_soviets_ak47conscript_rifle:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 11
-	Range: 4420
+	Range: 4500
 	Burst: 3
 	BurstDelays: 2
 	SoundVolume: 0.5
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Report: conscriptak.wav
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000

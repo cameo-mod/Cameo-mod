@@ -1032,9 +1032,18 @@ FlametankExplode2:
 		ImpactSounds: xplobig6.aud
 
 BlackHandLaser:
-	Inherits: ^LaserWeapon
-	ReloadDelay: 60
-	Range: 5300
+	# Special-Forces T4 heavy-trooper weapon (maintainer 2026-07-20): the
+	# same light+medium+heavy weapon-class triad as the japan baseline, at 4x
+	# — CannonAP (light, anti-tank) + FlakWeapon (medium, anti-air) + Laser
+	# (heavy), 8000 each = 24000 @ reload 50 = 480 DPS (WC 1.0), 4x the
+	# baseline (6000@50, 120). Laser inherited LAST so LaserZap defines the
+	# beam. ExtraDamage warheads inherit untouched (shield-only chip; ignored
+	# for pricing). (^TankDestroyerCannon = interim Light CannonAP.)
+	Inherits@light: ^TankDestroyerCannon
+	Inherits@medium: ^FlakWeapon
+	Inherits@heavy: ^LaserWeapon
+	ReloadDelay: 50
+	Range: 6000
 	Report: vfloatta.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
@@ -1046,12 +1055,20 @@ BlackHandLaser:
 		SecondaryBeamWidth: 64
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 8000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 4
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 30000
+		Damage: 8000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 15
+		Damage: 4
 
 BlackHandFlamer:
 	Inherits: ^MediumFlameWeapon

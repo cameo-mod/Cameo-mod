@@ -4197,7 +4197,7 @@ susaexosuit:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 		Sequence: turret0
-		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-hero && !ifv-tesla && !ifv-flak && !ifv-cannon && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-fire && !ifv-chem && !ifv-thrax && !ifv-miss && !ifv-chrono && !ifv-demo && !ifv-fremen && !ifv-sonic && !ifv-minigun
+		RequiresCondition: !ifv-mg && !ifv-repair && !ifv-lightsniper && !ifv-hero && !ifv-tesla && !ifv-flak && !ifv-cannon && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-fire && !ifv-chem && !ifv-thrax && !ifv-miss && !ifv-chrono && !ifv-demo && !ifv-fremen && !ifv-sonic && !ifv-minigun
 	WithSpriteTurret@MG:
 		Sequence: turret2
 		RequiresCondition: ifv-mg
@@ -4216,9 +4216,9 @@ susaexosuit:
 	WithSpriteTurret@Siege:
 		Sequence: turret6
 		RequiresCondition: ifv-flak
-	WithSpriteTurret@ra1_allies_alliedsniper:
+	WithSpriteTurret@lightsniper:
 		Sequence: turret7
-		RequiresCondition: ifv-ra1_allies_alliedsniper || ifv-hero || ifv-fremen
+		RequiresCondition: ifv-lightsniper || ifv-hero || ifv-fremen
 	Passenger:
 		Weight: 2
 		CustomPipType: blue

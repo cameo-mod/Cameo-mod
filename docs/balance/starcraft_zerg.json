@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5230",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -101,7 +102,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BehemothShoot"
+      "weapon": "BehemothShoot",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumChemicalWeapon",
+       "^HeavyMissile",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -149,6 +158,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4500",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -172,7 +182,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "BroodweaverLeech"
+      "weapon": "BroodweaverLeech",
+      "weapon_types": [
+       "^HealingWeapon"
+      ]
      }
     ],
     "armor": {
@@ -214,6 +227,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "6250",
       "reloaddelay": "50",
       "slot": "Armament",
@@ -237,7 +251,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "CorruptorSpore"
+      "weapon": "CorruptorSpore",
+      "weapon_types": [
+       "^MediumChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -279,6 +296,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
       "slot": "Armament",
@@ -338,7 +356,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SCDevourerAA"
+      "weapon": "SCDevourerAA",
+      "weapon_types": [
+       "^SwordWeapon",
+       "^MediumChemicalWeapon",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -379,6 +403,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5850",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -472,7 +497,15 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "DreadshroudSpore"
+      "weapon": "DreadshroudSpore",
+      "weapon_types": [
+       "^LightFlameWeapon",
+       "^MediumMissile",
+       "^ShrapnelWeapon",
+       "^FlakWeapon",
+       "^MediumChemicalWeapon",
+       "^LaserWeapon"
+      ]
      }
     ],
     "armor": {
@@ -514,6 +547,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1448",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -537,7 +571,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GorekrakenClaw"
+      "weapon": "GorekrakenClaw",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -579,6 +616,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
       "slot": "Armament",
@@ -629,7 +667,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GuardianShoot"
+      "weapon": "GuardianShoot",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb"
+      ]
      }
     ],
     "armor": {
@@ -670,6 +713,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "4444",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -731,7 +775,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "MutaliskSpore"
+      "weapon": "MutaliskSpore",
+      "weapon_types": [
+       "^SwordWeapon",
+       "^MediumChemicalWeapon",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -807,6 +857,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5480",
       "reloaddelay": "78",
       "slot": "Armament@Spines",
@@ -841,7 +892,11 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "QueenSpine"
+      "weapon": "QueenSpine",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -882,6 +937,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
@@ -930,7 +986,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ScourgeExplosion"
+      "weapon": "ScourgeExplosion",
+      "weapon_types": [
+       "^HeavyBomb",
+       "^ShrapnelWeapon",
+       "^RA2Grenade"
+      ]
      }
     ],
     "armor": {
@@ -1543,6 +1604,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
@@ -1605,11 +1667,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Tentacle"
+      "weapon": "Tentacle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
@@ -1651,7 +1720,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore"
+      "weapon": "Spore",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1689,6 +1763,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
@@ -1751,11 +1826,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Tentacle"
+      "weapon": "Tentacle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
@@ -1797,7 +1879,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore"
+      "weapon": "Spore",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1835,6 +1922,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
@@ -1897,11 +1985,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Tentacle"
+      "weapon": "Tentacle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
@@ -1943,7 +2038,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore"
+      "weapon": "Spore",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -1981,6 +2081,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
       "requires": "sunken",
@@ -2043,11 +2144,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Tentacle"
+      "weapon": "Tentacle",
+      "weapon_types": [
+       "^RailgunWeapon",
+       "^Chaingun",
+       "^HeavyCannon",
+       "^SwordWeapon"
+      ]
      },
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
       "requires": "spore",
@@ -2089,7 +2197,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "Spore"
+      "weapon": "Spore",
+      "weapon_types": [
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2129,6 +2242,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "9000",
       "reloaddelay": "175",
       "slot": "Armament",
@@ -2152,7 +2266,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DefilerPlague"
+      "weapon": "DefilerPlague",
+      "weapon_types": [
+       "^HeavyChemicalWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2197,6 +2314,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "5230",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
@@ -2253,11 +2371,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HydraSpit"
+      "weapon": "HydraSpit",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": false,
       "range": "5230",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
@@ -2314,7 +2439,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HydraSpit"
+      "weapon": "HydraSpit",
+      "weapon_types": [
+       "^LightChemicalWeapon",
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2359,11 +2490,14 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "2000",
       "slot": "Armament@PRIMARY",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "DemoTruckTargeting"
+      "weapon": "DemoTruckTargeting",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -2405,6 +2539,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "2225",
       "reloaddelay": "20",
       "slot": "Armament",
@@ -2428,7 +2563,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "zerg_kerrigan"
+      "weapon": "zerg_kerrigan",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2473,6 +2611,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1150",
       "reloaddelay": "11",
       "slot": "Armament",
@@ -2496,7 +2635,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ShriekStinger"
+      "weapon": "ShriekStinger",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2538,6 +2680,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "3855",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
@@ -2578,11 +2721,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SpithidSpit"
+      "weapon": "SpithidSpit",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": false,
       "range": "3855",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
@@ -2623,7 +2772,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SpithidSpit"
+      "weapon": "SpithidSpit",
+      "weapon_types": [
+       "^LightMissile",
+       "^SmallArms",
+       "^ArrowWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2665,6 +2819,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "8561",
       "reloaddelay": "80",
       "slot": "Armament",
@@ -2780,7 +2935,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SwarmlingShoot"
+      "weapon": "SwarmlingShoot",
+      "weapon_types": [
+       "^MediumChemicalWeapon",
+       "^MediumFlameWeapon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2823,6 +2988,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1680",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -2846,7 +3012,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TalonClaw"
+      "weapon": "TalonClaw",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2888,6 +3057,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1600",
       "reloaddelay": "15",
       "slot": "Armament",
@@ -2911,7 +3081,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "UltraliskHusk"
+      "weapon": "UltraliskHusk",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -2956,6 +3129,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1350",
       "reloaddelay": "11",
       "slot": "Armament",
@@ -2979,7 +3153,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "ZerglingClaw"
+      "weapon": "ZerglingClaw",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3635,6 +3812,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
       "slot": "Armament",
@@ -3658,7 +3836,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "DroneAttack"
+      "weapon": "DroneAttack",
+      "weapon_types": [
+       "^WorkerAttack"
+      ]
      }
     ],
     "armor": {
@@ -3707,6 +3888,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "1250",
       "reloaddelay": "30",
       "slot": "Armament",
@@ -3730,7 +3912,10 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "GoremawClaw"
+      "weapon": "GoremawClaw",
+      "weapon_types": [
+       "^SwordWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3822,6 +4007,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7120",
       "reloaddelay": "30",
       "slot": "Armament",
@@ -3905,7 +4091,15 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "HermitShoot"
+      "weapon": "HermitShoot",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {
@@ -3956,24 +4150,30 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "33",
       "requires": "!deployed",
       "slot": "Armament@Dummy",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LurkerTargeting"
+      "weapon": "LurkerTargeting",
+      "weapon_types": []
      },
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "6666",
       "reloaddelay": "66",
       "requires": "deployed || undeployed",
       "slot": "Armament@Deployed",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LurkerSpines"
+      "weapon": "LurkerSpines",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -4020,6 +4220,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": true,
       "range": "7740",
       "reloaddelay": "40",
       "slot": "Armament@PRIMARY",
@@ -4136,11 +4337,23 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SporemawShoot"
+      "weapon": "SporemawShoot",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "pricing": false,
       "range": "7740",
       "reloaddelay": "40",
       "slot": "Armament@GARRISONED",
@@ -4257,7 +4470,18 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "SporemawShoot"
+      "weapon": "SporemawShoot",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^MediumCannon",
+       "^HeavyCannon",
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^MediumMissile",
+       "^Chaingun",
+       "^FlakWeapon"
+      ]
      }
     ],
     "armor": {

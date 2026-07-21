@@ -1,9 +1,14 @@
-NaxiRifleLaser:
+schwarzermond_lunarsoldier_rifle:
+	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
+	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
+	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
 	Inherits: NaxiRifle
-	Inherits: ^RA2LaserWeapon
-	ReloadDelay: 60
-	Range: 4097
+	Inherits@cg: ^Chaingun
+	Inherits@laser: ^RA2LaserWeapon
+	ReloadDelay: 50
+	Range: 6000
 	Report: vpriatta.wav
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
@@ -14,6 +19,12 @@ NaxiRifleLaser:
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Water, Air
@@ -21,9 +32,9 @@ NaxiRifleLaser:
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 
-NaxiRifleLaserE:
-	Inherits: NaxiRifleLaser
-	Range: 5097
+schwarzermond_lunarsoldier_rifle_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle
+	Range: 5500
 	Burst: 2
 	BurstDelays: 3
 
@@ -888,30 +899,30 @@ Lunar_GreenSturmArty:
 	Report: laser_cannon3_4.wav
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 10000
-Lunar_YellowRifleLaser:
-	Inherits: NaxiRifleLaser
+schwarzermond_lunarsoldier_rifle_yellow:
+	Inherits: schwarzermond_lunarsoldier_rifle
 	Burst: 2
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA
 
-Lunar_YellowRifleLaserE:
-	Inherits: NaxiRifleLaserE
-	Burst: 3
-	BurstDelays: 3
-	Projectile: LaserZap
-		Color: f3e021AA
-
-Lunar_AmplifiedRifleLaser:
-	Inherits: NaxiRifleLaser
-	Burst: 3
-	BurstDelays: 3
-	Projectile: LaserZap
-		Color: f3e021AA
-
-Lunar_AmplifiedRifleLaserE:
-	Inherits: NaxiRifleLaserE
+schwarzermond_lunarsoldier_rifle_yellow_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle_elite
 	Burst: 4
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+schwarzermond_lunarsoldier_rifle_amplified:
+	Inherits: schwarzermond_lunarsoldier_rifle
+	Burst: 3
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+schwarzermond_lunarsoldier_rifle_amplified_elite:
+	Inherits: schwarzermond_lunarsoldier_rifle_elite
+	Burst: 6
 	BurstDelays: 3
 	Projectile: LaserZap
 		Color: f3e021AA

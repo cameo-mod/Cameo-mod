@@ -39,11 +39,8 @@ forgotten_silo:
 		RequiresSelection: true
 		PipCount: 8
 	RenderSprites:
-		PlayerPalette: playerra2
-	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: forgot_silo
-
 forgotten_veinhole:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell

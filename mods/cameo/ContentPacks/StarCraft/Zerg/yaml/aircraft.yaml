@@ -176,6 +176,7 @@ zerg_broodweaver:
 		VoiceSet: SCOverlordVoice
 	RenderSprites:
 		Image: zerg_broodweaver
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -188,8 +189,6 @@ zerg_broodweaver:
 	SpeedMultiplier@zerg_upgrade_pneumatizedcarapace:
 		Modifier: 150
 		RequiresCondition: zerg_upgrade_pneumatizedcarapace
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_pneumatizedcarapace, zerg_overmind
 
@@ -706,11 +705,10 @@ zerg_behemoth:
 	DeathSounds:
 	RenderSprites:
 		Image: zerg_behemoth
+		PlayerPalette: player_rgba
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	RenderSprites:
-		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: terran_upgrade_shipplatinglevel1
 	WithCargoSounds:

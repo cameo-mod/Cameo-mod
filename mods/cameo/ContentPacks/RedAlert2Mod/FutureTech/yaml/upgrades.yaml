@@ -9,11 +9,9 @@ egcnst_infiltrated.futu:
 	Buildable:
 		Description:
 	RenderSprites:
+		Image: futuretech_constructionyard
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: futuretech_constructionyard
-	RenderSprites:
-		Image: futuretech_constructionyard
-
 futuretech_doctrine_equalizerx1:
 	Inherits: ^doctrine_template
 	Tooltip:

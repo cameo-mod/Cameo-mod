@@ -374,6 +374,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "20",
       "slot": "Armament@defuse",
@@ -382,16 +384,23 @@
        "^RemovesTerrorDrone"
       ],
       "warheads": [],
-      "weapon": "DefuseKit"
+      "weapon": "DefuseKit",
+      "weapon_types": [
+       "^RemovesIvanBombs",
+       "^RemovesTerrorDrone"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "extraction_note": "no_damage_warheads",
+      "pricing": true,
       "range": "1536",
       "reloaddelay": "100",
       "slot": "Armament@leechdisinfect",
       "versus_templates": [],
       "warheads": [],
-      "weapon": "LeechDisinfect"
+      "weapon": "LeechDisinfect",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -433,6 +442,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": true,
       "range": "3072",
       "reloaddelay": "20",
       "slot": "Armament@PRIMARY",
@@ -466,11 +476,16 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "HMG_fremen"
+      "weapon": "HMG_fremen",
+      "weapon_types": [
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
       "minrange": "1100",
+      "pricing": true,
       "range": "4864",
       "reloaddelay": "45",
       "slot": "Armament@SECONDARY",
@@ -494,7 +509,10 @@
         "type": "SpreadDamage"
        }
       ],
-      "weapon": "Fremen_RPG"
+      "weapon": "Fremen_RPG",
+      "weapon_types": [
+       "^D2KMissile"
+      ]
      }
     ],
     "armor": {
@@ -529,7 +547,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
@@ -559,11 +578,16 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG"
+      "weapon": "light_inf_lmg",
+      "weapon_types": [
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": true,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@Upgrade",
@@ -605,12 +629,19 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG_upgrade"
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SmallArms",
+       "^HeavyMachineGunProjectile"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
@@ -640,12 +671,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG"
+      "weapon": "light_inf_lmg",
+      "weapon_types": [
+       "^Chaingun",
+       "^SmallArms"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "range": "4448",
+      "pricing": false,
+      "range": "4500",
       "reloaddelay": "20",
       "requires": "ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@UpgradeGARRISONED",
@@ -687,7 +723,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "LMG_upgrade"
+      "weapon": "light_inf_lmg_upgrade",
+      "weapon_types": [
+       "^HeavyCannon",
+       "^Chaingun",
+       "^SmallArms",
+       "^HeavyMachineGunProjectile"
+      ]
      }
     ],
     "armor": {
@@ -706,7 +748,7 @@
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
-     "v": "18000"
+     "v": "40000"
     },
     "name": "Light Infantry",
     "prerequisites": [
@@ -724,13 +766,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
-     "v": "52"
+     "v": "54"
     }
    },
    "trooper": {
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament",
@@ -771,11 +814,17 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper"
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
       "slot": "Armament@garrisoned",
@@ -816,7 +865,12 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_Rocket_Trooper"
+      "weapon": "D2K_Rocket_Trooper",
+      "weapon_types": [
+       "^LightMissile",
+       "^MediumMissile",
+       "^D2KRocket"
+      ]
      }
     ],
     "armor": {
@@ -1030,6 +1084,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
       "slot": "Armament",
@@ -1091,7 +1146,13 @@
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "D2K_155mm"
+      "weapon": "D2K_155mm",
+      "weapon_types": [
+       "^Grenade",
+       "^ShrapnelWeapon",
+       "^HeavyBomb",
+       "^D2K_Cannon"
+      ]
      }
     ],
     "armor": {

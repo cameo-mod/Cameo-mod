@@ -1309,6 +1309,22 @@ LMG_ordos_upgrade:
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
+
+light_inf_lmg_ordos_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: light_inf_lmg
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 40
+		ZOffset: 2047
+		Color: 00ffbb
+	ValidTargets: Ground, Water
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air

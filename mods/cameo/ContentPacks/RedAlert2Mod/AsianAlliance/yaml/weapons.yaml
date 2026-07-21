@@ -42,6 +42,50 @@ AsianGrenadeE:
 	Burst: 2
 	BurstDelays: 3
 
+asianalliance_asianmilitia_shotgun:
+	Inherits: ^RA2SmallArms
+	ReloadDelay: 50
+	Range: 4500
+	Report: aa_sshtgatt.wav
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_piffs
+		ExplosionPalette: ra2effect
+
+asianalliance_asianmilitia_shotgun_elite:
+	Inherits: asianalliance_asianmilitia_shotgun
+	Range: 5500
+	Burst: 2
+	BurstDelays: 3
+
+asianalliance_asianmilitia_grenade:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 92
+	Range: 4500
+	Report: vlasatta.wav
+	Projectile: Bullet
+		Speed: 456
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+
+asianalliance_asianmilitia_grenade_elite:
+	Inherits: asianalliance_asianmilitia_grenade
+	Range: 5500
+	Burst: 2
+	BurstDelays: 3
+
 AsianTankKillerRocket:
 	Inherits: ^RA2LightMissile
 	ReloadDelay: 75
@@ -2107,9 +2151,7 @@ asianalliance_fanatic_shotgun:
 asianalliance_fanatic_shotgun_upgrade:
 	Inherits: asianalliance_fanatic_shotgun
 	Burst: 13
-	SoundVolume: 0.077
 
 asianalliance_fanatic_shotgun_elite:
 	Inherits: asianalliance_fanatic_shotgun
-	Burst: 16
-	SoundVolume: 0.063
+	Burst: 20

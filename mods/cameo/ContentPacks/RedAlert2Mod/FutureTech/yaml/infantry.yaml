@@ -493,6 +493,7 @@ futuretech_repairdroid:
 		VoiceSet: NaxiRobotVoice
 	RenderSprites:
 		PlayerPalette: playerra2
+		Image: futuretech_repairdroid
 	Captures:
 		CaptureTypes: building, tech
 		PlayerExperience: 500
@@ -501,9 +502,6 @@ futuretech_repairdroid:
 		EnterCursor: ability
 		EnterBlockedCursor: move-blocked
 		Voice: Move
-	RenderSprites:
-		Image: futuretech_repairdroid
-
 futuretech_scoutdroid:
 	Inherits: ^Walker
 	Inherits@Template: ^ScoutVehicleTemplate
