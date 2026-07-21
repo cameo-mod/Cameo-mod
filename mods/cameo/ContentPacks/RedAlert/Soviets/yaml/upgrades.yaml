@@ -7,6 +7,11 @@ ra1_soviets_doctrine_conscription:
 		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1, !global_conscription_buff
 	RenderSprites:
 		Image: ra1_soviets_doctrine_conscription
+	ProductionIconHoverHeader:
+		Text: Tier I
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_1
+		OutlineColor: FF8C00
 	ProvidesPrerequisite@ra_soviet_doctrine_1:
 		Prerequisite: ra_soviet_doctrine_1
 	ProvidesPrerequisite@global_conscription_buff:
@@ -21,6 +26,11 @@ ra1_soviets_doctrine_industrialefficiency:
 		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1
 	RenderSprites:
 		Image: ra1_soviets_doctrine_industrialefficiency
+	ProductionIconHoverHeader:
+		Text: Tier I
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_1
+		OutlineColor: FF8C00
 	ProvidesPrerequisite@ra_soviet_doctrine_1:
 		Prerequisite: ra_soviet_doctrine_1
 
@@ -33,6 +43,11 @@ ra1_soviets_doctrine_inferno:
 		Prerequisites: ~ra1_soviets_radardome, !ra_soviet_doctrine_1
 	RenderSprites:
 		Image: ra1_soviets_doctrine_inferno
+	ProductionIconHoverHeader:
+		Text: Tier I
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_1
+		OutlineColor: FF8C00
 	ProvidesPrerequisite@ra_soviet_doctrine_1:
 		Prerequisite: ra_soviet_doctrine_1
 
@@ -45,6 +60,11 @@ ra1_soviets_doctrine_teslaandexperimentaltech:
 		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
 	RenderSprites:
 		Image: ra1_soviets_doctrine_teslaandexperimentaltech
+	ProductionIconHoverHeader:
+		Text: Tier II
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_2
+		OutlineColor: FF0000
 	ProvidesPrerequisite@ra_soviet_doctrine_2:
 		Prerequisite: ra_soviet_doctrine_2
 
@@ -57,6 +77,11 @@ ra1_soviets_doctrine_heavyarmor:
 		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
 	RenderSprites:
 		Image: ra1_soviets_doctrine_heavyarmor
+	ProductionIconHoverHeader:
+		Text: Tier II
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_2
+		OutlineColor: FF0000
 	ProvidesPrerequisite@ra_soviet_doctrine_2:
 		Prerequisite: ra_soviet_doctrine_2
 
@@ -69,6 +94,11 @@ ra1_soviets_doctrine_nuclearwar:
 		Prerequisites: ~ra1_soviets_radardome, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
 	RenderSprites:
 		Image: ra1_soviets_doctrine_nuclearwar
+	ProductionIconHoverHeader:
+		Text: Tier II
+	ProductionIconMutualExclusion:
+		Group: ra1_soviets_doctrine_tier_2
+		OutlineColor: FF0000
 	ProvidesPrerequisite@ra_soviet_doctrine_2:
 		Prerequisite: ra_soviet_doctrine_2
 

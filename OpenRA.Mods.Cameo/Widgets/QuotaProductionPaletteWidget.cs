@@ -22,8 +22,16 @@ namespace OpenRA.Mods.Cameo.Widgets
 		public readonly string MainStructureProductionGroup = "Building";
 		public readonly Color StructureCountColor = Color.Lime;
 		public readonly int2 StructureCountMargin = new(5, 4);
+		public readonly int HoverHeaderHeight = 12;
+		public readonly Color HoverHeaderBackgroundColor = Color.FromArgb(224, 24, 24, 24);
+		public readonly Color HoverHeaderBorderColor = Color.FromArgb(255, 194, 160, 64);
+		public readonly Color HoverHeaderTextColor = Color.FromArgb(255, 255, 224, 128);
+		public readonly string HoverHeaderFont = "TinyBold";
+		public readonly float MutualExclusionOutlineWidth = 2f;
 
 		SpriteFont quotaFont;
+		SpriteFont hoverHeaderFont;
+		SpriteFont symbolFont;
 
 		[ObjectCreator.UseCtor]
 		public QuotaProductionPaletteWidget(ModData modData, OrderManager orderManager, World world, WorldRenderer worldRenderer)
@@ -33,6 +41,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 		{
 			base.Initialize(args);
 			quotaFont = Game.Renderer.Fonts[OverlayFont];
+			hoverHeaderFont = Game.Renderer.Fonts[HoverHeaderFont];
+			Game.Renderer.Fonts.TryGetValue(SymbolsFont, out symbolFont);
 		}
 
 		public override bool HandleMouseInput(MouseInput mi)
@@ -86,6 +96,9 @@ namespace OpenRA.Mods.Cameo.Widgets
 		{
 			base.Draw();
 
+			DrawHoverHeader();
+			DrawMutualExclusionOutlines();
+
 			var localPlayer = World.LocalPlayer;
 			if (localPlayer == null || CurrentQueue == null)
 				return;
@@ -127,6 +140,91 @@ namespace OpenRA.Mods.Cameo.Widgets
 				var pos = icon.Pos + new float2(IconSize.X - textSize.X - 1, IconSize.Y - textSize.Y - 1);
 				quotaFont.DrawTextWithContrast(text, pos, Color.Cyan, Color.Black, 1);
 			}
+		}
+
+		void DrawMutualExclusionOutlines()
+		{
+			if (CurrentQueue == null)
+				return;
+
+			var hoveredIcon = icons.Where(i => i.Key.Contains(Viewport.LastMousePos))
+				.Select(i => i.Value).FirstOrDefault();
+			var hoveredGroup = hoveredIcon?.Actor.TraitInfoOrDefault<ProductionIconMutualExclusionInfo>()?.Group;
+			if (string.IsNullOrEmpty(hoveredGroup))
+				return;
+
+			var inset = MutualExclusionOutlineWidth / 2f;
+			foreach (var icon in icons.Values)
+			{
+				var mutualExclusion = icon.Actor.TraitInfoOrDefault<ProductionIconMutualExclusionInfo>();
+				if (mutualExclusion == null || mutualExclusion.Group != hoveredGroup)
+					continue;
+
+				var topLeft = icon.Pos + new float2(inset, inset);
+				var bottomRight = icon.Pos + IconSize.ToFloat2() - new float2(inset + 1f, inset + 1f);
+				Game.Renderer.RgbaColorRenderer.DrawRect(
+					new float3(topLeft, 0f),
+					new float3(bottomRight, 0f),
+					MutualExclusionOutlineWidth,
+					mutualExclusion.OutlineColor);
+			}
+		}
+
+		void DrawHoverHeader()
+		{
+			if (CurrentQueue == null)
+				return;
+
+			var hoveredIcon = icons.Where(i => i.Key.Contains(Viewport.LastMousePos))
+				.Select(i => i.Value).FirstOrDefault();
+			if (hoveredIcon == null)
+				return;
+
+			var header = hoveredIcon.Actor.TraitInfoOrDefault<ProductionIconHoverHeaderInfo>();
+			if (header == null || string.IsNullOrEmpty(header.Text))
+				return;
+
+			var headerRect = new Rectangle(
+				(int)hoveredIcon.Pos.X,
+				(int)hoveredIcon.Pos.Y,
+				IconSize.X,
+				HoverHeaderHeight);
+			WidgetUtils.FillRectWithColor(headerRect, HoverHeaderBackgroundColor);
+			WidgetUtils.FillRectWithColor(
+				new Rectangle(headerRect.Left, headerRect.Bottom - 1, headerRect.Width, 1),
+				HoverHeaderBorderColor);
+
+			var textSize = hoverHeaderFont.Measure(header.Text);
+			var textPos = hoveredIcon.Pos + new float2(
+				(IconSize.X - textSize.X) / 2,
+				(HoverHeaderHeight - textSize.Y) / 2);
+			hoverHeaderFont.DrawTextWithContrast(header.Text, textPos, HoverHeaderTextColor, Color.Black, 1);
+
+			RedrawQueueIndicator(hoveredIcon);
+		}
+
+		void RedrawQueueIndicator(ProductionIcon hoveredIcon)
+		{
+			var total = hoveredIcon.Queued.Count;
+			if (total == 0)
+				return;
+
+			var first = hoveredIcon.Queued[0];
+			var waiting = !CurrentQueue.IsProducing(first) && !first.Done;
+			if (first.Infinite && symbolFont != null)
+				symbolFont.DrawTextWithContrast(
+					InfiniteSymbol,
+					hoveredIcon.Pos + QueuedOffset,
+					TextColor,
+					Color.Black,
+					1);
+			else if (total > 1 || waiting)
+				quotaFont.DrawTextWithContrast(
+					total.ToStringInvariant(),
+					hoveredIcon.Pos + QueuedOffset,
+					TextColor,
+					Color.Black,
+					1);
 		}
 	}
 }
