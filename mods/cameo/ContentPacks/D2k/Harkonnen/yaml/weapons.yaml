@@ -1,3 +1,91 @@
 80mm_H:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 55
+
+HarkonnenFlameTurret:
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 50
+	Burst: 5
+	BurstDelays: 3
+	Range: 6742
+	StartBurstReport: hk_flame_turret_1.wav
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 25135
+		Versus:
+			HAZMAT: 75
+			Shield: 100
+			None: 150
+			Flak: 140
+			Plate: 130
+			Heroic: 110
+			Wood: 80
+			Concrete: 75
+			Steel: 75
+			Scout: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
+			Superheavy: 90
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 12568
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 8378
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 4189
+
+harkonnen_autogunturret:
+	Inherits: ordos_autogunturret
+	ReloadDelay: 132
+	Burst: 26
+	BurstDelays: 2
+
+DebrisMissile:
+	ReloadDelay: 60
+	Range: 7c0
+	MinRange: 0c512
+	Projectile: Missile
+		Shadow: true
+		InaccuracyType: Maximum
+		Inaccuracy: 250
+		HorizontalRateOfTurn: 20
+		RangeLimit: 10c0
+		MinimumLaunchAngle: 120
+		MaximumLaunchAngle: 250
+		VerticalRateOfTurn: 20
+		CruiseAltitude: 0
+		ExplodeWhenEmpty: false
+		Image: MISSILE2
+		TrailImage: large_trail
+		Speed: 250
+	Warhead@1Dam: SpreadDamage
+		Spread: 1c0
+		Damage: 2000
+
+ExplosiveDebris:
+	Inherits: Debris2
+	Range: 7c0
+	Projectile: Bullet
+		Image: 120mm
+		TrailImage: small_trail2
+		Speed: 50, 70
+		LaunchAngle: 150, 220
+		Inaccuracy: 2c512
+		BounceCount: 1
+	Warhead@Grenade: SpreadDamage
+		Damage: 3000
+		Spread: 1c562
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1500
+		Spread: 1c562
+	Warhead@Effect: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: EXPLSML4.WAV
+	Warhead@4Concrete: DamagesConcrete
+		Damage: 4500

@@ -1,14 +1,29 @@
 from PIL import Image
 from PIL.PngImagePlugin import PngInfo
 import numpy as np
-import sys
+import argparse
+import warnings
 
-NATIVE = r"C:\temp\dish_native.png"
-OUT    = r"C:\Users\Blackrobe\repo\Cameo-mod\mods\cameo\bits\d2k\outpost_atreides_dish.png"
-N = 30
-SCALE = 1.5
-T = int(sys.argv[1]) if len(sys.argv) > 1 else 30   # static-trim threshold
-WRITE = "--write" in sys.argv
+parser = argparse.ArgumentParser(description="Trim and uniformly scale a D2k building overlay.")
+parser.add_argument("threshold", nargs="?", type=int, default=30, help="Static-trim threshold.")
+parser.add_argument("--input", default=r"C:\temp\dish_native.png")
+parser.add_argument(
+    "--output",
+    default=r"C:\Users\Blackrobe\repo\Cameo-mod\mods\cameo\bits\d2k\ixian_outpost_atreides_dish.png")
+parser.add_argument("--preview", default=r"C:\temp\trim_preview.png")
+parser.add_argument("--frames", type=int, default=30)
+parser.add_argument("--scale", type=float, default=1.5)
+parser.add_argument("--offset-x", type=float, default=10)
+parser.add_argument("--offset-y", type=float, default=-3)
+parser.add_argument("--write", action="store_true")
+args = parser.parse_args()
+
+NATIVE = args.input
+OUT = args.output
+N = args.frames
+SCALE = args.scale
+T = args.threshold
+WRITE = args.write
 
 im = Image.open(NATIVE).convert("RGBA")
 W,H = im.size; fw=W//N; fh=H
@@ -50,7 +65,9 @@ A=np.stack(aligned).astype(np.float64)              # N,cH,cW,4
 op=A[...,3]>0
 rgb=A[...,:3]
 masked=np.where(op[...,None],rgb,np.nan)
-med=np.nan_to_num(np.nanmedian(masked,axis=0),nan=0.0)   # cH,cW,3 = static background
+with warnings.catch_warnings():
+    warnings.simplefilter("ignore", category=RuntimeWarning)
+    med=np.nan_to_num(np.nanmedian(masked,axis=0),nan=0.0)   # cH,cW,3 = static background
 diff=np.abs(rgb-med[None]).max(axis=-1)             # N,cH,cW  (how different from static bg)
 
 def dil(m):  # 3x3 binary dilation
@@ -92,11 +109,13 @@ H2,W2=prev[0].shape[:2]; cols=10; rows=(N+cols-1)//cols
 canvas=np.full((rows*(H2+2),cols*(W2+2),3),25,np.uint8)
 for i,p in enumerate(prev):
     r=i//cols;c=i%cols; canvas[r*(H2+2):r*(H2+2)+H2,c*(W2+2):c*(W2+2)+W2]=p
-Image.fromarray(canvas,"RGB").save(r"C:\temp\trim_preview.png")
+Image.fromarray(canvas,"RGB").save(args.preview)
 
 if WRITE:
     sheet=np.zeros((sH,sW*N,4),dtype=np.uint8)
     for i,s in enumerate(scaled): sheet[:,i*sW:(i+1)*sW]=s
     meta=PngInfo(); meta.add_text("FrameSize",f"{sW},{sH}"); meta.add_text("FrameAmount",str(N))
     Image.fromarray(sheet,"RGBA").save(OUT,pnginfo=meta)
-    print(f"WROTE {OUT}  FrameSize={sW},{sH}  Offset={round(10*SCALE)},{round(-3*SCALE)}")
+    print(
+        f"WROTE {OUT}  FrameSize={sW},{sH}  "
+        f"Offset={round(args.offset_x*SCALE)},{round(args.offset_y*SCALE)}")

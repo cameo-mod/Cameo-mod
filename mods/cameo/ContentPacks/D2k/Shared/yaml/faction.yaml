@@ -18,6 +18,22 @@ World:
 	#########################################
 
 Player:
+	StarportBatchProductionQueue@STARPORT:
+		Type: Starport
+		DisplayOrder: 3
+		Group: Vehicle
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		BuildDurationModifier: 50
+		ParallelProductionSlots: 3
+		InfiniteBuildLimit: 10
+		CollectionDelay: 875
+		DispatchDelay: 250
+		MaxBatchSize: 20
+		MaxPendingBatches: 3
 	ExternalCondition@BuildingsOwned:
 		Condition: BuildingsOwned
 	ProvidesPrerequisite@BuildingsOwnedVordel:

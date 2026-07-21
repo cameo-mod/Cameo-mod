@@ -107,6 +107,8 @@ ixian_munitionssilo:
 		Description: actor_d2k_munitions.description
 		IconPalette: player
 	D2kActorPreviewPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -268,6 +270,8 @@ ixian_advancedheavyfactory:
 		IconPalette: player
 	ProductionQueue@VEHICLE:
 		BuildDurationModifier: 75
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ixian_vehicle_production
 	ProvidesPrerequisite@missiletank:
 		Prerequisite: heavy.missile_tank
 	# ProvidesPrerequisite@upgrade_heavy:
@@ -283,6 +287,8 @@ ixian_repairpad:
 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 		Description: Repairs nearby vehicles.
 		IconPalette: d2kunit
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ixian_mcv_production
 	Tooltip:
 		Name: Ixian Repair Pad
 	Building:
@@ -428,6 +434,10 @@ ixian_starport:
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: ixian_vehicle_production
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: ixian_mcv_production
 	RenderSprites:
 		Image: starport.smuggler
 

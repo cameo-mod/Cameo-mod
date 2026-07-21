@@ -314,6 +314,8 @@
 		IsPlayerPalette: True
 	-ActorPreviewPlaceBuildingPreview:
 	D2kActorPreviewPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	Cloak@TScloak:
 	WithSpriteBody:
 	WithMakeAnimation:
@@ -525,6 +527,8 @@
 		AreaTypes: building
 		Adjacent: 8
 	ActorPreviewPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	RevealsShroud:
 		Range: 1c0
 	Sellable:
@@ -618,6 +622,8 @@
 		AllowInvalidPlacement: true
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,ClearDune
 	D2kActorPreviewPlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 3
@@ -997,39 +1003,23 @@
 	Exit@1:
 		SpawnOffset: 0,-480,0
 		ExitCell: 2,2
+		ProductionTypes: Starport
 	Exit@2:
 		SpawnOffset: 0,-480,0
 		ExitCell: 0,2
-	ProductionAirdrop@NORMAL:
-		Produces: Vehicle
+		ProductionTypes: Starport
+	StarportBatchAirdrop:
+		Produces: Starport
 		BaselineSpawn: true
 		ActorType: frigate
 		PauseOnCondition: lowpower
-		RequiresCondition: !classicproductionqueues
-	ProductionAirdrop@CLASSICPRODUCTIONQUEUES:
-		Produces: RAVehicle
-		BaselineSpawn: true
-		ActorType: frigate
-		PauseOnCondition: lowpower
-		RequiresCondition: classicproductionqueues
-	ParallelProductionQueue@VEHICLE:
-		Type: Vehicle
-		DisplayOrder: 3
-		Group: Vehicle
-		ReadyAudio: UnitReady
-		BlockedAudio: NoBuild
-		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
-		OnHoldAudio: OnHold
-		CancelledAudio: Cancelled
-		BuildDurationModifier: 50
-		InfiniteBuildLimit: 10
-	ProductionBar@VEHICLE:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLE:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
+		BeforeUnloadDelay: 8
+		BetweenUnloadDelay: 5
+		BlockedRetryDelay: 5
+		AfterUnloadDelay: 25
+		ReadyTextNotification: A transport frigate has arrived at the starport.
+	ProductionBar@STARPORT:
+		ProductionType: Starport
 	WithDeliveryOverlay:
 		RequiresCondition: !build-incomplete
 		#Palette: starportlights
@@ -1071,7 +1061,7 @@
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: d2kunit

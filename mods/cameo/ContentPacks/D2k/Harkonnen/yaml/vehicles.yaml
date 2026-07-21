@@ -8,7 +8,7 @@ combat_tank.harkonnen:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
-		Queue: Vehicle, RAVehicle
+		Queue: Vehicle, RAVehicle, Starport
 		BuildPaletteOrder: 40
 		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: d2kunit
@@ -53,10 +53,170 @@ combat_tank_husk.harkonnen:
 	TransformOnCapture:
 		IntoActor: combat_tank.harkonnen
 
+missile_tank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~faction.harkonnen
+		BuildPaletteOrder: 60
+		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
+		IconPalette: d2kunit
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Missile Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 64
+		TurnSpeed: 80
+	Health:
+		HP: 50000
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c256
+	Armament:
+		Weapon: mtank_pri
+		LocalOffset: -128,128,171, -128,-128,171
+	AttackFrontal:
+		FacingTolerance: 0
+		TargetFrozenActors: true
+	AutoTarget:
+		InitialStanceAI: Defend
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	Selectable:
+		Class: missiletank
+	AttractsWorms:
+		Intensity: 600
+	FireProjectilesOnDeath@debris:
+		Weapons: Debris3, Debris
+		Pieces: 0, 2
+		Range: 2c0, 3c0
+	FireProjectilesOnDeath@missiles:
+		Weapons: DebrisMissile
+		Pieces: 0, 2
+		Range: 4c0, 6c0
+	DetectCloaked:
+		Range: 4c0
+	Voiced:
+		VoiceSet: D2KMissileTank
+
+devastator:
+	Inherits@D2KT: ^D2KTank
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EXT: ^ExternalConditions
+	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
+	Inherits@AntiTank: ^PrioritizeTank
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~heavy.harkonnen, research_centre, ~techlevel.high, ~faction.harkonnen
+		BuildPaletteOrder: 100
+		BuildDuration: 1000
+		BuildDurationModifier: 100
+		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
+		IconPalette: d2kunit
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Harkonnen Devastator Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 550000
+	Repairable:
+		HpPerStep: 31250
+	DamageMultiplier@SIEGEMAMMOTHPARITY:
+		Modifier: 67
+	Armor:
+		Type: Superheavy
+	Mobile:
+		TurnSpeed: 12
+		Speed: 31
+		Locomotor: heavytracked
+		RequiresCondition: !overload
+		PauseOnCondition: notmobile || disabled || being-demolished
+	AutoCarryable:
+		RequiresCondition: !overload
+	RevealsShroud:
+		Range: 4c768
+	Armament:
+		Weapon: DevBullet
+		LocalOffset: 640,0,32
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+		IgnoreOffset: true
+	WithMuzzleGlow:
+		Color: A060E8
+		CoreColor: E8D8FF
+		Intensity: 1.5
+		CoreIntensity: 2.4
+		FlashBrightness: 1.0
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+		RequiresCondition: !overload
+	FireWarheadsOnDeath@OVERLOAD:
+		Weapon: PlasmaExplosion
+		EmptyWeapon: PlasmaExplosion
+		RequiresCondition: meltdown
+	GrantConditionOnDeploy@REACTOR:
+		DeployedCondition: overload
+		PauseOnCondition: overload
+		RequiresCondition: !unit-captured
+	WithIdleOverlay@OVERLOAD:
+		Sequence: active
+		RequiresCondition: overload
+	WithIdleOverlay@OVERLOAD2:
+		Sequence: active-2
+		RequiresCondition: overload
+	KillsSelf@MELTDOWN:
+		Delay: 150
+		RequiresCondition: overload
+		GrantsCondition: meltdown
+	AmbientSound@onMeltDown:
+		SoundFiles: DEVASTATORMELTDOWN.WAV
+		RequiresCondition: overload
+		Interval: 250
+	AttractsWorms:
+		Intensity: 700
+	ChangesHealth@SelfHealing:
+		Step: 250
+	Selectable:
+		DecorationBounds: 1408, 1216, 0, 0
+	FireProjectilesOnDeath@MELTDOWN:
+		Weapons: Debris2, Debris3, Debris4, ExplosiveDebris
+		Pieces: 7, 15
+		Range: 3c512, 6c0
+		RequiresCondition: meltdown
+	FireProjectilesOnDeath@STANDARD:
+		Weapons: Debris
+		Pieces: 1, 2
+		RequiresCondition: !meltdown
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Experience
+	Voiced:
+		VoiceSet: D2KVehicleVoice
+
 devastator_husk.harkonnen:
 	Inherits: ^D2KVehicleHusk
 	Health:
-		HP: 1250
+		HP: 10000
+	Husk:
+		Locomotor: heavytracked
 	Tooltip:
 		Name: Devastator (Destroyed)
 	TransformOnCapture:

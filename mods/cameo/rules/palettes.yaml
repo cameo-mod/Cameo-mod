@@ -89,6 +89,11 @@
 		Tileset: BARREN
 		Filename: barren.pal
 		ShadowIndex: 4
+	PaletteFromFile@terrain-volcanic:
+		Name: terrain
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
+		ShadowIndex: 4
 	PaletteFromFile@player: ##########
 		Name: player
 		Filename: temperat.pal
@@ -196,6 +201,11 @@
 		Name: staticterrain
 		Tileset: BARREN
 		Filename: barren.pal
+		ShadowIndex: 3, 4
+	PaletteFromFile@staticterrain-volcanic:
+		Name: staticterrain
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
 		ShadowIndex: 3, 4
 	PaletteFromFile@staticterrain-caribic:
 		Name: staticterrain
@@ -346,15 +356,15 @@
 		Type: PulseWeapon
 		Color: FF884488
 	RotationPaletteEffect@water:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256
 		RotationBase: 32
 		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT, RA_PLAINS ##########
 	RotationPaletteEffect@actorswater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256
 		RotationBase: 32
 		ExcludeTilesets: ARRAKIS, BARREN
 	RotationPaletteEffect@rawater:
-		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, windows256
+		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, volcanic, windows256
 		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, RA_PLAINS, RA_INHOSP, CAMEO
 	PaletteFromPaletteWithAlpha@placelinesegment:
 		Name: placelinesegment
@@ -518,6 +528,11 @@
 		Tileset: BARREN
 		Filename: barren.pal
 		ShadowIndex: 4
+	PaletteFromFile@volcanic:
+		Name: volcanic
+		Tileset: VOLCANIC
+		Filename: volcanic.pal
+		ShadowIndex: 4
 	PaletteFromFile@ra_snow:
 		Name: ra_snow
 		Filename: ra_snow.pal
@@ -545,6 +560,14 @@
 	PlayerColorPalette@temperatra:
 		BaseName: raplayer
 		BasePalette: ra
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+	PaletteFromFile@ra-noshadow:
+		Name: ra_noshadow
+		Filename: temperatra.pal
+		TransparentIndex: 0, 4
+	PlayerColorPalette@temperatra-noshadow:
+		BaseName: raplayer_noshadow
+		BasePalette: ra_noshadow
 		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
 	PaletteFromPlayerPaletteWithAlpha@racloak:
 		BaseName: racloak

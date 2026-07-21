@@ -103,6 +103,8 @@ terran_missileturret:
 		PauseOnCondition: disabled
 	-ActorPreviewPlaceBuildingPreview:
 	SequencePlaceBuildingPreview:
+		TilesetPalettes:
+			VOLCANIC: ra_temperat
 		Sequence: place
 	DamageMultiplier@2x2Shape:
 		Modifier: 50

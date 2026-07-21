@@ -44,34 +44,34 @@ ROCK7:
 T01:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T01.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T02:
 	Inherits: ^Tree
 	Inherits@2: ^MirageTarget
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T02.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T03:
 	Inherits: ^Tree
 	Inherits@2: ^MirageTarget
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T03.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T04:
 	Inherits: ^Tree
@@ -90,32 +90,32 @@ T04.Husk:
 T05:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T05.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T06:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T06.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T07:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T07.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T08:
 	Inherits: ^Tree
@@ -123,12 +123,16 @@ T08:
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: VOLCANIC
 
 T08.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
+	MapEditorData:
+		ExcludeTilesets: VOLCANIC
 
 T09:
 	Inherits: ^Tree
@@ -156,60 +160,60 @@ T10:
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T10.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T11:
 	Inherits: ^Tree
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T11.Husk:
 	Inherits: ^TreeHusk
 	Building:
 		Footprint: __ xx
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T12:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T12.Husk:
 	Inherits: ^TreeHusk
 	Building:
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T13:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T13.Husk:
 	Inherits: ^TreeHusk
 	Building:
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T14:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T14.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T15:
 	Inherits: ^Tree
@@ -217,7 +221,7 @@ T15:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T15.Husk:
 	Inherits: ^TreeHusk
@@ -225,27 +229,27 @@ T15.Husk:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T16:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T16.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T17:
 	Inherits: ^Tree
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T17.Husk:
 	Inherits: ^TreeHusk
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 T18:
 	Inherits: ^Tree
@@ -267,7 +271,7 @@ TC01:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC01.Husk:
 	Inherits: ^TreeHusk
@@ -275,7 +279,7 @@ TC01.Husk:
 		Footprint: ___ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC02:
 	Inherits: ^Tree
@@ -283,7 +287,7 @@ TC02:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC02.Husk:
 	Inherits: ^TreeHusk
@@ -291,7 +295,7 @@ TC02.Husk:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC03:
 	Inherits: ^Tree
@@ -299,7 +303,7 @@ TC03:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC03.Husk:
 	Inherits: ^TreeHusk
@@ -307,7 +311,7 @@ TC03.Husk:
 		Footprint: _x_ xx_
 		Dimensions: 3,2
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC04:
 	Inherits: ^Tree
@@ -317,7 +321,7 @@ TC04:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC04.Husk:
 	Inherits: ^TreeHusk
@@ -327,7 +331,7 @@ TC04.Husk:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC05:
 	Inherits: ^Tree
@@ -337,7 +341,7 @@ TC05:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
 	MapEditorData:
-		ExcludeTilesets: DESERT
+		ExcludeTilesets: DESERT, VOLCANIC
 
 TC05.Husk:
 	Inherits: ^TreeHusk
@@ -347,7 +351,172 @@ TC05.Husk:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
 	MapEditorData:
+		ExcludeTilesets: DESERT, VOLCANIC
+
+^VolcanicBasaltFormation:
+	Inherits: ^Tree
+	RenderSprites:
+		Palette: terrain
+	Tooltip:
+		Name: Basalt Formation
+		ShowOwnerRow: false
+	Armor:
+		Type: Concrete
+	RadarColorFromTerrain:
+		Terrain: Rock
+	AppearsOnMapPreview:
+		Terrain: Rock
+	# Reuses the D2k wind-trap explosion art and sound without damage or smudge warheads.
+	FireWarheadsOnDeath@VOLCANIC:
+		Type: Footprint
+		Weapon: VolcanicBasaltExplode
+		EmptyWeapon: VolcanicBasaltExplode
+	-WithDamageOverlay@SmallBurn:
+	-WithDamageOverlay@MediumBurn:
+	-WithDamageOverlay@LargeBurn:
+	MapEditorData:
 		ExcludeTilesets: DESERT
+		RequireTilesets: VOLCANIC
+		Categories: Basalt Formations
+
+VT01:
+	Inherits: T01
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t01
+
+VT02:
+	Inherits: T02
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t02
+	-MirageTarget:
+
+VT03:
+	Inherits: T03
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t03
+	-MirageTarget:
+
+VT05:
+	Inherits: T05
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t05
+
+VT06:
+	Inherits: T06
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t06
+
+VT07:
+	Inherits: T07
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t07
+
+VT08:
+	Inherits: T08
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t08
+	-MirageTarget:
+
+VT10:
+	Inherits: T10
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t10
+	-MirageTarget:
+
+VT11:
+	Inherits: T11
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t11
+
+VT12:
+	Inherits: T12
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t12
+
+VT13:
+	Inherits: T13
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t13
+
+VT14:
+	Inherits: T14
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t14
+
+VT15:
+	Inherits: T15
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t15
+
+VT16:
+	Inherits: T16
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t16
+
+VT17:
+	Inherits: T17
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: t17
+
+VTC01:
+	Inherits: TC01
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc01
+	Building:
+		Footprint: ___ xx_
+		Dimensions: 3,2
+
+VTC02:
+	Inherits: TC02
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc02
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+
+VTC03:
+	Inherits: TC03
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc03
+	Building:
+		Footprint: _x_ xx_
+		Dimensions: 3,2
+
+VTC04:
+	Inherits: TC04
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc04
+	Building:
+		Footprint: ____ xxx_ x___
+		Dimensions: 4,3
+
+VTC05:
+	Inherits: TC05
+	Inherits@VOLCANIC: ^VolcanicBasaltFormation
+	RenderSprites:
+		Image: tc05
+	Building:
+		Footprint: __x_ xxx_ _xx_
+		Dimensions: 4,3
 
 ####################################################################################################
 #	RA
