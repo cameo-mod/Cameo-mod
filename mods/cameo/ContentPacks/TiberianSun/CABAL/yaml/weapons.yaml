@@ -1009,6 +1009,7 @@ CabalAvatarLaser:
 
 CabalEngineerRepairBeam:
 	Inherits: ^RepairWeapon
+	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
 	ReloadDelay: 31
 	Range: 6128
 	Warhead@RepairWeapon: SpreadDamage

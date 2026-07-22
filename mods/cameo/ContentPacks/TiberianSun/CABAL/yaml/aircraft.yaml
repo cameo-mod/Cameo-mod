@@ -500,6 +500,7 @@ cabal_repair_drone:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@repair: ^PrioritizeRepair
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
@@ -527,7 +528,7 @@ cabal_repair_drone:
 		TargetRelationships: Ally
 		ForceTargetRelationships: Ally
 	AutoTarget:
-		InitialStance: Defend
+		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
 		ScanRadius: 12
 	AttackAircraft:
