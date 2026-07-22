@@ -121,7 +121,7 @@ forgotten_upgrade_tiberiumadaptability:
 		Actor: forgotten_upgrade_tiberiumadaptability_proxy_actor
 
 forgotten_upgrade_mutantsoldier:
-	Inherits: ^unit_upgrade.template
+	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: actor_forgotten_upgrade_mutantsoldier.name
 	Buildable:

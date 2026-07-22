@@ -2135,6 +2135,25 @@ template_antitank_antiair_infantry =
       Strong vs Vehicles, Aircraft
       Weak vs Infantry
 
+template_heavy_sniper_infantry =
+   .description = Heavy sniper infantry.
+      Strong vs Infantry
+      Weak vs Vehicles
+
+template_rocket_trooper_infantry =
+   .description = Rocket trooper.
+      Strong vs Vehicles, Aircraft
+      Weak vs Infantry
+
+template_archer_infantry =
+   .description = Archer infantry.
+      Strong vs Infantry, Aircraft
+      Weak vs Vehicles
+
+template_support_infantry =
+   .description = Support infantry.
+      Provides utility rather than direct combat.
+
 template_mbt =
    .description = Main battle tank.
       Strong vs Vehicles

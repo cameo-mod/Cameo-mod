@@ -1329,9 +1329,7 @@
 	RenderRangeCircle:
 		RangeCircleType: infantry
 	Buildable:
-		Description: Heavy sniper infantry.
-  Strong vs Infantry
-  Weak vs Vehicles
+		Description: template_heavy_sniper_infantry.description
 		BuildPaletteOrder: 75
 		BuildDurationModifier: 75
 		IconPalette: cameo
@@ -1357,9 +1355,7 @@
 	RevealsShroud:
 		Range: 6500
 	Buildable:
-		Description: Rocket trooper.
-  Strong vs Vehicles, Aircraft
-  Weak vs Infantry
+		Description: template_rocket_trooper_infantry.description
 		BuildPaletteOrder: 35
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1383,9 +1379,7 @@
 	RevealsShroud:
 		Range: 7000
 	Buildable:
-		Description: Archer infantry.
-  Strong vs Infantry, Aircraft
-  Weak vs Vehicles
+		Description: template_archer_infantry.description
 		BuildPaletteOrder: 50
 		BuildDurationModifier: 100
 		IconPalette: cameo
@@ -1409,9 +1403,7 @@
 	RevealsShroud:
 		Range: 6000
 	Buildable:
-		Description: Support infantry.
-  Strong vs Nothing
-  Weak vs Everything
+		Description: template_support_infantry.description
 		BuildPaletteOrder: 25
 		BuildDurationModifier: 75
 		IconPalette: cameo
