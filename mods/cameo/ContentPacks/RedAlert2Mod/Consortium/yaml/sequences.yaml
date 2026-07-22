@@ -1212,7 +1212,7 @@ steelconsortium_stalker:
 steelconsortium_whiterabbit:
 	Defaults:
 		Filename: steelconsortium_whiterabbit.shp
-		Offset: 0,36
+		Offset: 0,20
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
 	stand:
@@ -1227,6 +1227,18 @@ steelconsortium_whiterabbit:
 		Length: 10
 		Facings: 16
 		Tick: 32
+	shoot-ready:
+		Start: 265
+		Length: 1
+		Stride: 10
+		Facings: 16
+	muzzle:
+		Filename: shared_sprites|minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
 	idle1:
 		Start: 96
 		Length: 20

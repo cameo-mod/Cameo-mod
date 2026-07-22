@@ -780,11 +780,18 @@ asianalliance_pulverizermecha:
 		RequiresCondition: asianalliance_doctrine_heavypulverizerweapons
 	AttackFrontal:
 		FacingTolerance: 20
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 18
 	WithInfantryBody:
 		IdleSequences: idle1, idle2
 		MinIdleDelay: 25
 		MaxIdleDelay: 75
-		DefaultAttackSequence: shoot
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		Sequence: shoot
+		RequiresCondition: attack-animation
 	BodyOrientation:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:

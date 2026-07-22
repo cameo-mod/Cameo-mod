@@ -70,7 +70,6 @@ futuretech_gunstrider:
 		IdleSequences: idle1, idle2
 		MinIdleDelay: 90
 		MaxIdleDelay: 270
-		DefaultAttackSequence: shoot
 	BodyOrientation:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
@@ -130,11 +129,18 @@ futuretech_plasmastrider:
 	AttackFrontal:
 		FacingTolerance: 20
 		PauseOnCondition: !robotcontrol || disabled
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 18
 	WithInfantryBody:
 		IdleSequences: idle1, idle2
 		MinIdleDelay: 90
 		MaxIdleDelay: 270
-		DefaultAttackSequence: shoot
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		Sequence: shoot
+		RequiresCondition: attack-animation
 	BodyOrientation:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:

@@ -352,11 +352,24 @@ steelconsortium_whiterabbit:
 		LocalOffset: 750,250,250
 	AttackFrontal:
 		FacingTolerance: 10
+	GrantConditionOnAttack@attack-animation:
+		Condition: attack-animation
+		MaximumInstances: 1
+		RevokeDelay: 12
 	WithInfantryBody:
 		IdleSequences: idle1, idle2, idle3
 		MinIdleDelay: 25
 		MaxIdleDelay: 75
-		DefaultAttackSequence: shoot
+		RequiresCondition: !attack-animation
+	WithFacingSpriteBody@attack-animation:
+		StartSequence: shoot
+		Sequence: shoot-ready
+		RequiresCondition: attack-animation
+	WithIdleOverlay@attack-animation:
+		Sequence: muzzle
+		Palette: ra2effect
+		Offset: 750,250,250
+		RequiresCondition: attack-animation
 	BodyOrientation:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
@@ -374,8 +387,10 @@ steelconsortium_whiterabbit:
 	WithIdleOverlay@shield1:
 		Sequence: shield-complete-big
 		StartSequence: shield-starts-big
+		Offset: 0,0,341
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
+		Offset: 0,0,341
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
@@ -1499,4 +1514,3 @@ steelconsortium_dagger:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_pulseweapons, steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
-
