@@ -248,8 +248,12 @@ def load_class_rows(cls: str):
                     continue
                 # Non-buildable units (no Buildable/Queue or ~disabled/~wip) are
                 # excluded from balancing entirely (maintainer law 2026-07-22).
-                # Anchor/verifier stay in — they are calibration references.
-                if not u.get("buildable", True) and actor not in protected:
+                # EXCEPTIONS stay in: anchor/verifier (calibration refs) and units
+                # tagged design.balance_include (spawn-together siblings like
+                # molotovconscript, or support-power spawns like frank/undead —
+                # ~disabled by spawn mechanism, but real balance-relevant units).
+                if (not u.get("buildable", True) and actor not in protected
+                        and not design.get("balance_include")):
                     continue
                 hp = fnum((u.get("hp") or {}).get("v")) or 0
                 spd = fnum((u.get("speed") or {}).get("v")) or 0
@@ -296,6 +300,17 @@ def load_class_rows(cls: str):
                 row["dmg_shot0"] = sum(spread_damages(a, smallarms_only=smallarms_only) for a in priced)
                 row["dmg_filter"] = "smallarms" if smallarms_only else "all"
                 row["wc"] = 0.750 if smallarms_only else (fnum(arm.get("design_weapon_class")) or 0.75)
+                # audit_exempt (soft) units are balanced to Δ≤1 but skipped by the
+                # uniqueness enforcement (support-power spawns like frank/undead).
+                row["soft"] = bool(design.get("audit_exempt")) and not is_protected
+                row["arm_rng"] = fnum(arm.get("range")) or 0
+                # offensive warheads on the primary weapon (2000-grid split target)
+                offensive = [w for w in arm.get("warheads", [])
+                             if not str(w.get("tag", "")).lower().endswith(
+                                 ("percentage", "extradamage", "friendlyfire"))]
+                row["n_wh"] = len(offensive) or 1
+                # cross-pack shared weapon → editing its Damage/Range leaks; flag it
+                row["weapon_file"] = arm.get("defined_in", "")
                 if is_protected:
                     row["rng"] = int(spec["range0_wdist"])
                 rows.append(row)
@@ -307,32 +322,138 @@ def load_class_rows(cls: str):
 VEHICLE_TYPE_CLASSES = {"mbt"}
 
 
+def _price(spec, hp, spd, rng, dps, special, tech_tier):
+    return formula.class_baseline_price(
+        hp, spd, rng, dps, spec["hp0"], spec["speed0"], spec["range0_wdist"],
+        spec["dps0"], spec["cost0"], special=special, tech_tier=tech_tier)
+
+
+def solve_target_dps(spec, cost, hp, spd, rng, special, tech_tier):
+    """Effective DPS that makes price == cost at (hp, spd, rng). Returns None
+    when HP/range alone already over-price the unit (price(0) > cost) — DPS
+    can't close it and another stat must give."""
+    if _price(spec, hp, spd, rng, 0.0, special, tech_tier) > cost + 1:
+        return None
+    lo, hi = 0.0, 1.0
+    while _price(spec, hp, spd, rng, hi, special, tech_tier) < cost and hi < 1e7:
+        hi *= 2
+    for _ in range(80):
+        mid = (lo + hi) / 2
+        if _price(spec, hp, spd, rng, mid, special, tech_tier) > cost:
+            hi = mid
+        else:
+            lo = mid
+    return (lo + hi) / 2
+
+
+def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
+    """Two-stage: coarse per-warhead Damage on the 2000-grid + FirepowerMultiplier
+    (1% steps) reproducing target_dps. base_dps = eff-DPS at fp=1 with cur_sum SUM
+    (linear in SUM). Returns (per_warhead_damage, fp)."""
+    if base_dps <= 0 or cur_sum <= 0 or target_dps <= 0:
+        return 2000, 0.05
+    per_unit = base_dps / cur_sum               # eff-DPS per unit of SUM at fp=1
+    needed = target_dps / per_unit              # required SUM × FP
+    D = max(2000, int(round(needed / n_wh / 2000)) * 2000)
+    fp = needed / (D * n_wh)
+    fp = max(0.05, min(2.0, round(fp, 2)))
+    return D, fp
+
+
+def unique_dmg_per_shot(rows, step=0.01):
+    """Nudge FirepowerMultiplier (1% steps) so effective damage-per-shot
+    (Σwarheads × FP) is unique across non-protected, non-soft members. Small FP
+    nudges shift Δ only marginally (reported)."""
+    placed = []
+    def collides(de):
+        return any(abs(o["dmg_eff"] - de) <= 0.5 for o in placed
+                   if not o["protected"] and not o.get("soft"))
+    for r in rows:
+        if r["protected"] or r.get("soft"):
+            placed.append(r)
+            continue
+        sumv = r["dmg_shot"]
+        base_fp = r["fp"]
+        for k in range(0, 200):
+            for sign in ((1, -1) if k > 0 else (1,)):
+                fp = round(base_fp + sign * k * step, 2)
+                if not (0.05 <= fp <= 2.0):
+                    continue
+                if not collides(sumv * fp):
+                    r["fp"] = fp
+                    r["dmg_eff"] = sumv * fp
+                    r["dps_eff"] = r["per_unit"] * sumv * fp
+                    placed.append(r)
+                    break
+            else:
+                continue
+            break
+        else:
+            placed.append(r)
+
+
 def rebalance_class(cls: str):
     rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
     if not rows:
         return ""
     spd_step = 5 if cls in VEHICLE_TYPE_CLASSES else 1
     nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi, spd_step=spd_step)
-    resolve_dps_uniqueness(rows)
+    # 1. Range: protected → spec; others → clamp current into band (preserve feel).
     for r in rows:
         if r["protected"]:
             continue
-        r["rng"] = int(round(
-            formula.solve_class_baseline_range(
-                r["cost"], r["hp"], r["spd"], r["dps_eff"],
-                spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"], spec["cost0"],
-                special=r["special"], tech_tier=r["tech_tier"]
-            ) / 10
-        )) * 10
-        r["rng"] = max(band_lo, min(band_hi, r["rng"]))
-    nudge_ranges(rows, band_lo, band_hi)
-    # recompute prices/deltas
+        cur = r["rng"] or r["arm_rng"] or (band_lo + band_hi) // 2
+        r["rng"] = max(band_lo, min(band_hi, int(round(cur / 10)) * 10))
+    nudge_ranges(rows, band_lo, band_hi)     # range uniqueness (skips protected)
+    # 2. Per member: solve target eff-DPS for Δ0 at final (hp,spd,rng); decompose
+    #    to 2000-grid warhead Damage + 1% FP (cost pinned, stats trimmed law).
     for r in rows:
-        r["price"] = formula.class_baseline_price(
-            r["hp"], r["spd"], r["rng"], r["dps_eff"],
-            spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"], spec["cost0"],
-            special=r["special"], tech_tier=r["tech_tier"]
-        )
+        r["per_unit"] = (r["base_dps"] / r["dmg_shot0"]) if r["dmg_shot0"] else 0.0
+        if r["protected"]:
+            r["fp"] = r["fp0"]
+            r["dmg_shot"] = r["dmg_shot0"]
+            r["dmg_eff"] = r["dmg_shot0"] * r["fp0"]
+            r["dps_eff"] = r["base_dps"] * r["fp0"]
+            r["per_wh"] = None
+            r["trimmed"] = False
+            continue
+        tgt = solve_target_dps(spec, r["cost"], r["hp"], r["spd"], r["rng"],
+                               r["special"], r["tech_tier"])
+        if tgt is None:
+            r["per_wh"], r["fp"] = 2000, 0.05
+            r["over_priced"] = True
+            tgt = 0.0
+        else:
+            r["over_priced"] = False
+        D, fp = decompose_dps(tgt, r["base_dps"], r["dmg_shot0"] or 1, r["n_wh"])
+        if r.get("over_priced"):
+            D, fp = 2000, 0.05
+        r["per_wh"] = D
+        r["fp"] = fp
+        r["dmg_shot"] = D * r["n_wh"]
+        r["dmg_eff"] = r["dmg_shot"] * fp
+        r["dps_eff"] = r["per_unit"] * r["dmg_shot"] * fp
+        r["trimmed"] = (r["dmg_shot"] != (r["dmg_shot0"] or r["dmg_shot"]))
+    # 2b. Range fine-tune: range is a finer (10-step) Δ lever than the 1% FP.
+    #     Snap each member to the range that zeroes Δ at its trimmed DPS when
+    #     that lands in band; the DPS-trim already handled out-of-band cases.
+    for r in rows:
+        if r["protected"] or r.get("over_priced"):
+            continue
+        r0 = formula.solve_class_baseline_range(
+            r["cost"], r["hp"], r["spd"], r["dps_eff"],
+            spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"],
+            spec["cost0"], special=r["special"], tech_tier=r["tech_tier"])
+        r0 = int(round(r0 / 10)) * 10
+        if band_lo <= r0 <= band_hi:
+            r["rng"] = r0
+    nudge_ranges(rows, band_lo, band_hi)   # re-unique after snapping
+    # 3. Effective-damage-per-shot uniqueness (skips protected + soft)
+    unique_dmg_per_shot(rows)
+    # 4. Prices / deltas
+    for r in rows:
+        r["price"] = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
+                            r["special"], r["tech_tier"])
         r["delta"] = r["price"] - r["cost"]
     return render_report(rows, cls)
 
@@ -344,22 +465,37 @@ def render_report(rows, cls):
         "",
         f"Anchor spec: HP={s['hp0']}, Speed={s['speed0']}, Range={s['range0_wdist']}, eff-DPS={s['dps0']}, Cost={s['cost0']}",
         "",
-        "| actor | faction | HP | spd | rng | cost | dmg | dmg_filter | burst | rl | FP% | wc | eff DPS | formula price | Δ | note |",
-        "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+        "Converter law: cost pinned, range clamped to band + made unique, "
+        "eff-DPS trimmed to Δ≤1 via 2000-grid warhead Damage × 1% FirepowerMultiplier.",
+        "",
+        "| actor | faction | HP | spd | rng | cost | dmg/wh×n | rl | burst | FP% | eff DPS | price | Δ | flags |",
+        "|---|---|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|--:|---|",
     ]
+    worst = 0.0
     for r in rows:
+        flags = r["note"]
+        if r.get("soft"):
+            flags = (flags + " soft").strip()
+        if r.get("over_priced"):
+            flags = (flags + " OVERPRICED@min-dps").strip()
+        if "/" in str(r.get("weapon_file", "")) and "weapons/" in str(r.get("weapon_file", "")):
+            flags = (flags + " shared-wpn?").strip()
+        if not r["protected"]:
+            worst = max(worst, abs(r["delta"]))
+        dcol = f"{r.get('per_wh') or r['dmg']}×{r.get('n_wh', 1)}"
         lines.append(
             f"| `{r['actor']}` | {r['faction']} | {r['hp']} | {r['spd']} | {r['rng']} | "
-            f"{r['cost']} | {r['dmg']} | {r['dmg_filter']} | {r['burst']} | {r['rl']} | {int(round(r['fp']*100))} | "
-            f"{r['wc']:.3f} | {r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.0f} | {r['note']} |"
+            f"{r['cost']} | {dcol} | {r['rl']} | {r['burst']} | {int(round(r['fp']*100))} | "
+            f"{r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.1f} | {flags} |"
         )
-    lines += ["", "## Uniqueness check (5 raw stats — maintainer law 2026-07-22)", ""]
+    lines += ["", f"**Worst |Δ| among non-anchor members: {worst:.1f}** "
+              f"(goal ≤1).", "",
+              "## Uniqueness check (5 raw stats — soft/protected excluded)", ""]
     ok = True
-    # HP, Speed, Range, RAW ReloadDelay — each an independent dimension.
     for key, label in (("hp", "HP"), ("spd", "Speed"), ("rng", "Range"), ("rl", "raw ReloadDelay")):
         dupes = {}
         for r in rows:
-            if r["protected"]:
+            if r["protected"] or r.get("soft"):
                 continue
             dupes.setdefault(r[key], []).append(r["actor"])
         dupes = {k: v for k, v in dupes.items() if len(v) > 1}
@@ -367,9 +503,10 @@ def render_report(rows, cls):
             ok = False
             note = " (design choice — retune coarse Damage/reload by hand)" if key == "rl" else ""
             lines.append(f"- **{label} duplicates**{note}: {dupes}")
-    # Effective damage-per-shot (Σwarheads × FP) — checked SEPARATELY from reload.
     dmg_dupes = {}
     for r in rows:
+        if r["protected"] or r.get("soft"):
+            continue
         dmg_dupes.setdefault(round(r.get("dmg_eff", 0.0), 1), []).append(r["actor"])
     dmg_dupes = {k: v for k, v in dmg_dupes.items() if len(v) > 1}
     if dmg_dupes:
@@ -385,11 +522,12 @@ def render_report(rows, cls):
         trait = r["actor"].upper().replace("_", "")
         changes = [
             f"HP {r['hp']}, Speed {r['spd']}, Range {r['rng']}",
-            f"weapon Damage {r['dmg']} ({r['dmg_filter']}), ReloadDelay {r['rl']}, Burst {r['burst']}",
+            f"each offensive warhead Damage {r.get('per_wh')} (×{r.get('n_wh',1)} = "
+            f"SUM {r.get('dmg_shot')}), ReloadDelay {r['rl']}, Burst {r['burst']}",
             f"FirepowerMultiplier@{trait} {int(round(r['fp']*100))}",
         ]
-        if abs(r["delta"]) > 5:
-            changes.append(f"formula price delta {r['delta']:+.0f} (informational; cost pinned at {r['cost']})")
+        if abs(r["delta"]) > 1:
+            changes.append(f"residual Δ {r['delta']:+.1f} (cost pinned at {r['cost']})")
         lines.append(f"- `{r['actor']}`: {', '.join(changes)}")
     return "\n".join(lines) + "\n"
 
