@@ -38,7 +38,7 @@ ts_gdi_promotion_unlockzonetrooper:
 	RenderSprites:
 		Image: ts_gdi_zonetrooper
 	ProvidesPrerequisite:
-		Prerequisite: zonetrooper
+		Prerequisite: ts_gdi_promotion_unlockzonetrooper
 
 ts_gdi_promotion_unlockmammothmkii:
 	Inherits: ^promotion_upgrade.template
@@ -66,7 +66,7 @@ ts_gdi_promotion_unlockzoneorca:
 	RenderSprites:
 		Image: ts_gdi_zoneorcafighter
 	ProvidesPrerequisite:
-		Prerequisite: uupzoneorca
+		Prerequisite: ts_gdi_promotion_unlockzoneorca
 
 ts_gdi_promotion_unlockhammerhead:
 	Inherits: ^promotion_upgrade.template
