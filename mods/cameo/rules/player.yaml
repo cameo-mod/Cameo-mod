@@ -15,6 +15,7 @@ EditorPlayer:
 
 Player:
 	Inherits: ^BasePlayer
+	CameoCareerRecorder:
 	QuotaProductionManager:
 	NewConstructionOptionsNotification:
 		Notification: NewOptions

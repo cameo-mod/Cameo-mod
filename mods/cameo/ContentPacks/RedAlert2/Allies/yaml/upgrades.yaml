@@ -7,6 +7,9 @@ ra2_allies_upgrade_assaultsquadtraining:
 		Prerequisites: ~ra2_allies_airforcecommandhq, !ra2_allied_doctrine_1
 	RenderSprites:
 		Image: ra2_allies_upgrade_assaultsquadtraining
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_1
+		OutlineColor: 3B82F6
 	ProvidesPrerequisite@ra2_allied_doctrine_1:
 		Prerequisite: ra2_allied_doctrine_1
 
@@ -19,6 +22,9 @@ ra2_allies_upgrade_vanguardtraining:
 		Prerequisites: ~ra2_allies_airforcecommandhq, !ra2_allied_doctrine_1
 	RenderSprites:
 		Image: ra2_allies_upgrade_vanguardtraining
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_1
+		OutlineColor: 3B82F6
 	ProvidesPrerequisite@ra2_allied_doctrine_1:
 		Prerequisite: ra2_allied_doctrine_1
 
@@ -31,6 +37,9 @@ ra2_allies_upgrade_infiltratorstraining:
 		Prerequisites: ~ra2_allies_airforcecommandhq, !ra2_allied_doctrine_1
 	RenderSprites:
 		Image: ra2_allies_upgrade_infiltratorstraining
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_1
+		OutlineColor: 3B82F6
 	ProvidesPrerequisite@ra2_allies_upgrade_infiltratorstraining:
 		Prerequisite: infantry.upgraded
 	ProvidesPrerequisite@ra2_allied_doctrine_1:
@@ -45,6 +54,9 @@ ra2_allies_upgrade_compositearmorplating:
 		Prerequisites: ~ra2_allies_alliedbattlelab, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_compositearmorplating
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_2
+		OutlineColor: FBBF24
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
 		Prerequisite: ra2_allied_doctrine_2
 
@@ -57,6 +69,9 @@ ra2_allies_upgrade_reflectivearmorplating:
 		Prerequisites: ~ra2_allies_alliedbattlelab, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_reflectivearmorplating
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_2
+		OutlineColor: FBBF24
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
 		Prerequisite: ra2_allied_doctrine_2
 
@@ -69,6 +84,9 @@ ra2_allies_upgrade_ionpulseplating:
 		Prerequisites: ~ra2_allies_alliedbattlelab, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_ionpulseplating
+	ProductionIconMutualExclusion:
+		Group: ra2_allies_doctrine_tier_2
+		OutlineColor: FBBF24
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
 		Prerequisite: ra2_allied_doctrine_2
 

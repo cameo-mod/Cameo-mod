@@ -49,8 +49,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			SetText(widget, "FACTIONS_PLAYED_VALUE", $"{Number(factionsPlayed)} / {Number(factions.Count)}");
 			SetText(widget, "ENEMIES_KILLED_VALUE", Number(enemiesKilled));
 			SetText(widget, "BUILDINGS_DESTROYED_VALUE", Number(buildingsDestroyed));
-			SetText(widget, "RESOURCES_COLLECTED_VALUE", Number(resourcesEarned));
-			SetText(widget, "RESOURCES_SPENT_VALUE", Number(resourcesSpent));
+			SetText(widget, "RESOURCES_COLLECTED_VALUE", Metric(resourcesEarned));
+			SetText(widget, "RESOURCES_SPENT_VALUE", Metric(resourcesSpent));
 
 			var list = widget.GetOrNull<ScrollPanelWidget>("FACTION_LIST");
 			var template = list?.GetOrNull<ScrollItemWidget>("ROW_TEMPLATE");
@@ -85,6 +85,30 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		static string Number(long value)
 		{
 			return value.ToString("N0", CultureInfo.CurrentCulture);
+		}
+
+		internal static string Metric(long value)
+		{
+			var suffixes = new[] { "", "K", "M", "B", "T" };
+			var scaled = (double)value;
+			var suffix = 0;
+			while (Math.Abs(scaled) >= 1000 && suffix < suffixes.Length - 1)
+			{
+				scaled /= 1000;
+				suffix++;
+			}
+
+			if (suffix == 0)
+				return Number(value);
+
+			var rounded = Math.Round(scaled, 1, MidpointRounding.AwayFromZero);
+			if (Math.Abs(rounded) >= 1000 && suffix < suffixes.Length - 1)
+			{
+				rounded /= 1000;
+				suffix++;
+			}
+
+			return rounded.ToString("0.#", CultureInfo.CurrentCulture) + suffixes[suffix];
 		}
 
 		static bool IsRandom(FactionInfo f)

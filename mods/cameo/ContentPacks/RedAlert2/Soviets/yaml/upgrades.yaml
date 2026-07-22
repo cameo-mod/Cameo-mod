@@ -7,6 +7,9 @@ ra2_soviets_doctrine_conscription:
 		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1, !global_conscription_buff
 	RenderSprites:
 		Image: ra2_soviets_doctrine_conscription
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_1
+		OutlineColor: EF4444
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
 		Prerequisite: ra2_soviets_doctrine_1
 	ProvidesPrerequisite@global_conscription_buff:
@@ -21,6 +24,9 @@ ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1
 	RenderSprites:
 		Image: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_1
+		OutlineColor: EF4444
 	ProvidesPrerequisite@ra1_soviets_upgrade_hazmatsuits:
 		Prerequisite: ra1_soviets_upgrade_hazmatsuits
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
@@ -35,6 +41,9 @@ ra2_soviets_doctrine_shocktroopertraining:
 		Prerequisites: ~ra2_soviets_radar, !ra2_soviets_doctrine_1
 	RenderSprites:
 		Image: ra2_soviets_doctrine_shocktroopertraining
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_1
+		OutlineColor: EF4444
 	ProvidesPrerequisite@ra2_soviets_doctrine_shocktroopertraining:
 		Prerequisite: infantry.upgraded
 	ProvidesPrerequisite@ra2_soviets_doctrine_1:
@@ -49,6 +58,9 @@ ra2_soviets_doctrine_heavyarmorplatings:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_doctrine_heavyarmorplatings
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
@@ -61,6 +73,9 @@ ra2_soviets_doctrine_reactivearmor:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_doctrine_reactivearmor
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
@@ -73,6 +88,9 @@ ra2_soviets_doctrine_tesladischargearmor:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_doctrine_1, !ra2_soviets_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_doctrine_tesladischargearmor
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_soviets_doctrine_2:
 		Prerequisite: ra2_soviets_doctrine_2
 
@@ -85,6 +103,9 @@ ra2_soviets_doctrine_firemunitions:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_doctrine_firemunitions
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
@@ -97,6 +118,9 @@ ra2_soviets_doctrine_nuclearmunitions:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_doctrine_nuclearmunitions
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
@@ -109,6 +133,9 @@ ra2_soviets_doctrine_teslamunitions:
 		Prerequisites: ~ra2_soviets_battlelab, ra2_soviets_industrialplant, ra2_soviets_doctrine_2, !ra2_soviets_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_doctrine_teslamunitions
+	ProductionIconMutualExclusion:
+		Group: ra2_soviets_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_soviets_doctrine_3:
 		Prerequisite: ra2_soviets_doctrine_3
 
