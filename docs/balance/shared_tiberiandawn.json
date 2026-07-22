@@ -9,6 +9,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/aircraft.yaml#Valued.Cost",
      "v": "1500"
@@ -42,6 +43,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "200"
@@ -71,6 +73,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Light"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "25"
@@ -100,6 +103,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
@@ -134,6 +138,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "500"
@@ -167,6 +172,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Medium"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "50"
@@ -196,6 +202,7 @@
      "src": "inherited",
      "v": "Wood"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "100"
@@ -230,6 +237,7 @@
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "75"
@@ -297,13 +305,14 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Shared/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "support",
      "special": null,
      "subtype": "Infantry",
      "tech_tier": null,

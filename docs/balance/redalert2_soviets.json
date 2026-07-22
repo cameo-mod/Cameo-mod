@@ -274,6 +274,7 @@
      "src": "inherited",
      "v": "Spaceship"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "4000"
@@ -875,6 +876,7 @@
      "src": "inherited",
      "v": "Bomber"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "2000"
@@ -1484,6 +1486,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "1500"
@@ -1570,6 +1573,7 @@
      "src": "inherited",
      "v": "Helicopter"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Valued.Cost",
      "v": "3600"
@@ -1615,6 +1619,7 @@
      "src": "inherited",
      "v": "375"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
@@ -1653,6 +1658,7 @@
      "src": "inherited",
      "v": "250"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -1691,6 +1697,7 @@
      "src": "inherited",
      "v": "1500"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1725,6 +1732,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1766,6 +1774,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1800,6 +1809,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
      "v": "2000"
@@ -1838,6 +1848,7 @@
      "src": "inherited",
      "v": "750"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
      "v": "2000"
@@ -1876,6 +1887,7 @@
      "src": "inherited",
      "v": "750"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "2500"
@@ -1914,6 +1926,7 @@
      "src": "inherited",
      "v": "750"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "1000"
@@ -1948,6 +1961,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/buildings.yaml#Valued.Cost",
      "v": "600"
@@ -1985,6 +1999,7 @@
      "src": "inherited",
      "v": "500"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "2000"
@@ -2021,6 +2036,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "800"
@@ -2056,6 +2072,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "200"
@@ -2116,6 +2133,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "700"
@@ -2159,6 +2177,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -2203,6 +2222,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "10000"
@@ -2284,6 +2304,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "500"
@@ -2525,6 +2546,7 @@
      "src": "inherited",
      "v": "Steel"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "2000"
@@ -2583,13 +2605,14 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Armor.Type",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "melee",
      "special": null,
      "subtype": "Dog",
      "tech_tier": null,
@@ -2859,6 +2882,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "3000"
@@ -3002,6 +3026,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "100"
@@ -3077,13 +3102,14 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "600"
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "support",
      "special": null,
      "subtype": "MeleeInfantry",
      "tech_tier": null,
@@ -3221,6 +3247,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "700"
@@ -3296,13 +3323,14 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "500"
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "support",
      "special": null,
      "subtype": "Infantry",
      "tech_tier": null,
@@ -3584,6 +3612,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "416"
@@ -3855,6 +3884,7 @@
      "src": "inherited",
      "v": "Plate"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
@@ -3994,6 +4024,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Armor.Type",
      "v": "Light"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/naval.yaml#Valued.Cost",
      "v": "600"
@@ -4038,6 +4069,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4064,6 +4096,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4091,6 +4124,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4116,6 +4150,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4142,6 +4177,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4169,6 +4205,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4195,6 +4232,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4220,6 +4258,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4246,6 +4285,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -4273,6 +4313,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -4299,6 +4340,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -4324,6 +4366,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -4349,6 +4392,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -4375,6 +4419,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -4402,6 +4447,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "2500"
@@ -4427,6 +4473,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "2500"
@@ -4452,6 +4499,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "7500"
@@ -5127,6 +5175,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
      "v": "Superheavy"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "1750"
@@ -5453,6 +5502,7 @@
      "src": "inherited",
      "v": "Light"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "900"
@@ -5504,6 +5554,7 @@
      "src": "inherited",
      "v": "1500"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -5841,6 +5892,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
      "v": "Heavy"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "850"
@@ -5927,6 +5979,7 @@
      "src": "inherited",
      "v": "Scout"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "600"
@@ -6079,6 +6132,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "1800"
@@ -6155,6 +6209,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "900"
@@ -6248,6 +6303,7 @@
      "src": "inherited",
      "v": "500"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Valued.Cost",
      "v": "1200"

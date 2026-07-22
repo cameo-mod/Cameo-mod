@@ -49,6 +49,38 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 - **Melee range IS priced** (FORMULA_V2 §6b corrected).
 
 **To do (in order):**
+- [x] **BUILDABILITY LAW** (maintainer 2026-07-22): a unit is balance-relevant
+  ONLY if buildable — has a `Buildable` trait with a non-empty `Queue` and NO
+  disabling prereq (`~disabled`/`~wip`/…). Non-buildable units (legacy tokens
+  E1/E3 = no Queue; spawn/veterancy `_sp`/`_r4` = no Buildable; ~disabled units;
+  cost-10 XP-bag civilians) are EXCLUDED from balancing AND every audit — their
+  cost is just an XP-on-kill value. DONE: `extract_stats._is_balance_buildable`
+  writes `u["buildable"]`; `propose_class_rebalance` skips non-buildable (keeps
+  anchor/verifier). 23/280 infantry excluded. STILL TODO: apply the same filter
+  to the standalone audits (uniqueness, outliers, stat_formulas, etc.).
+- [x] **Infantry membership auto-classified** (2026-07-22, "auto-classify + review"):
+  membership = the `^…InfantryTemplate` each unit inherits (design.subtype),
+  mapped by `subtype_to_anchor` (now all 14 classes), + explicit
+  `design.class_anchor` overrides for pollutants. 257 buildable infantry classed:
+  melee 41, heavy 39, rocket 35, support 34, scout 24, commando 24, SF 16,
+  pure_sniper 16, grenadier 10, flying 7, closecombat 4, heavy_sniper 2. See
+  `docs/balance/membership_review.md`. Reclassified: engineers/medics/spies/
+  casters→support; dogs→melee; dragunov+virus→heavy_sniper; futuretech droids
+  (shotgun→closecombat, cannon→heavy, missile→rocket, scout→scout, repair→support);
+  zerg_ultralisk/wc2 knight+ogre→melee (were on the tank template); marauder→heavy.
+  OPEN CALLS: (a) terran_marine/zerg_hydralisk/terran_madcap fell to rocket_trooper
+  via their AntiTankAntiAir subtype — confirm or redirect; (b) terran_ghost/specter
+  still SF (subtype SniperInfantry) — SF or sniper?; (c) grenadier VERIFIER
+  ra1_soviets_molotovconscript is ~disabled (non-buildable) — pick a buildable
+  verifier or confirm it's upgrade-reachable; (d) 5 buildable vehicles sit in the
+  infantry section (leech/bmwbike/antitankcannon/noidharvester/engineeringarmor) —
+  handle in the vehicle pass.
+- [ ] **Populate design.special (K) + design.tech_tier** across the roster:
+  the formula APPLIES them when set (verified: madcap K=1.25, ghost tier=0.75 are
+  used) but most units are untagged → default 1.0, so specials/high-tech are
+  under-counted. The huge SF-pollutant deltas (ghost SUM 130000, specter 260000)
+  are dominated by MAX-era hot damage, not missing modifiers, but the modifiers
+  still need populating (ties into the catch-all-specials audit).
 - [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/

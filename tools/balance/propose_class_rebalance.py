@@ -63,6 +63,12 @@ def fnum(v):
 
 
 def subtype_to_anchor(st: str | None) -> str | None:
+    """Map a design.subtype (the ^<Name>Template the actor inherits) to its
+    class-anchor key. Membership is template-driven; an explicit
+    design.class_anchor override still wins over this (see load_class_rows).
+    MortarInfantry → grenadier and AntiTankAntiAir → rocket_trooper are
+    provisional (flagged for the maintainer review + the ^AntiTankAntiAir
+    split task)."""
     if not st:
         return None
     name = re.sub(r"[^A-Za-z0-9]", "", str(st)).casefold()
@@ -70,6 +76,18 @@ def subtype_to_anchor(st: str | None) -> str | None:
         "scoutinfantry": "scout",
         "closecombatinfantry": "closecombat",
         "specialforcesinfantry": "special_forces",
+        "grenadierinfantry": "grenadier",
+        "mortarinfantry": "grenadier",          # provisional (arc AoE)
+        "antitankantiairinfantry": "rocket_trooper",  # provisional (AT+AA launcher)
+        "rockettrooperinfantry": "rocket_trooper",
+        "heavyinfantry": "heavy_infantry",
+        "meleeinfantry": "melee",
+        "sniperinfantry": "pure_sniper",
+        "heavysniperinfantry": "heavy_sniper",
+        "archerinfantry": "archer",
+        "supportinfantry": "support",
+        "heroinfantry": "commando",
+        "flyinginfantry": "flying_infantry",
         "mainbattletank": "mbt",
         "linebreaker": "mbt",
     }
@@ -227,6 +245,11 @@ def load_class_rows(cls: str):
                 design = u.get("design") or {}
                 actor_cls = design.get("class_anchor") or subtype_to_anchor(design.get("subtype"))
                 if actor in EXCLUDED_ACTORS or actor_cls != cls:
+                    continue
+                # Non-buildable units (no Buildable/Queue or ~disabled/~wip) are
+                # excluded from balancing entirely (maintainer law 2026-07-22).
+                # Anchor/verifier stay in — they are calibration references.
+                if not u.get("buildable", True) and actor not in protected:
                     continue
                 hp = fnum((u.get("hp") or {}).get("v")) or 0
                 spd = fnum((u.get("speed") or {}).get("v")) or 0

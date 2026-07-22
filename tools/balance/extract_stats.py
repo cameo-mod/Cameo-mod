@@ -323,6 +323,24 @@ def weapon_entry(rs, wname: str) -> dict | None:
     return out
 
 
+# Prerequisite tokens that no building ever provides → gate the unit off.
+_DISABLING_PREREQS = {"disabled", "wip", "disable", "unavailable", "notbuildable"}
+
+
+def _is_balance_buildable(buildable) -> bool:
+    """True iff the actor can actually be built (maintainer law 2026-07-22):
+    has a Buildable trait with a non-empty Queue and no disabling prerequisite
+    (~disabled / ~wip / …). Legacy tokens (E1/E3 — Buildable but no Queue),
+    spawn/veterancy variants (no Buildable), and ~disabled units all fail."""
+    if buildable is None:
+        return False
+    if not buildable.get("Queue"):
+        return False
+    prereq = buildable.get("Prerequisites") or ""
+    toks = {t.strip().lstrip("~").strip().lower() for t in prereq.split(",")}
+    return not (toks & _DISABLING_PREREQS)
+
+
 def extract_actor(rs, key: str, section: str) -> dict | None:
     resolved = rs.resolve(key)
     if resolved is None:
@@ -358,6 +376,11 @@ def extract_actor(rs, key: str, section: str) -> dict | None:
         queue = buildable.get("Queue")
         if queue:
             u["queue"] = [q.strip() for q in queue.split(",") if q.strip()]
+    # Buildability (maintainer law 2026-07-22): a unit is balance-relevant ONLY
+    # if it can be built in some way. NON-buildable (no Buildable trait, no Queue,
+    # or a disabling prereq like ~disabled/~wip) → excluded from balancing AND all
+    # audits. Its cost is only an XP-on-kill value; its stats don't matter.
+    u["buildable"] = _is_balance_buildable(buildable)
     arms = []
     for c in resolved.children:
         if c.key == "Armament" or c.key.startswith("Armament@"):

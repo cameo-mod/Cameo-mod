@@ -13,6 +13,7 @@
      "src": "inherited",
      "v": "10"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost",
      "v": "2000"
@@ -59,6 +60,7 @@
      "src": "inherited",
      "v": "10"
     },
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -98,6 +100,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "10"
     },
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/aircraft.yaml#Valued.Cost",
      "v": "5000"
@@ -139,6 +142,7 @@
      "src": "inherited",
      "v": "1500"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "2500"
@@ -174,6 +178,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "500"
@@ -200,6 +205,7 @@
      "src": "inherited",
      "v": "125"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "500"
@@ -226,6 +232,7 @@
      "src": "inherited",
      "v": "125"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "500"
@@ -251,6 +258,7 @@
      "src": "inherited",
      "v": "125"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "500"
@@ -280,6 +288,7 @@
      "src": "inherited",
      "v": "500"
     },
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "2000"
@@ -317,6 +326,7 @@
      "src": "inherited",
      "v": "500"
     },
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
@@ -354,6 +364,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "62"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "125"
@@ -425,13 +436,14 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "inherited",
      "v": "500"
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "support",
      "special": null,
      "subtype": "Infantry",
      "tech_tier": null,
@@ -543,6 +555,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
@@ -770,6 +783,7 @@
      "src": "inherited",
      "v": "None"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
      "v": "150"
@@ -922,6 +936,7 @@
      "src": "inherited",
      "v": "Flak"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
      "v": "300"
@@ -966,6 +981,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "10000"
@@ -991,6 +1007,7 @@
      "src": "inherited",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "5000"
@@ -1020,6 +1037,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "1250"
@@ -1050,6 +1068,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "1250"
@@ -1080,6 +1099,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "1250"
@@ -1110,6 +1130,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Buildable.BuildLimit",
      "v": "1"
     },
+    "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/upgrades.yaml#Valued.Cost",
      "v": "1250"
@@ -1214,6 +1235,7 @@
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
     },
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/vehicles.yaml#Valued.Cost",
      "v": "600"
