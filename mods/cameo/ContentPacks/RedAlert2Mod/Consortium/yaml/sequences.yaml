@@ -1227,17 +1227,11 @@ steelconsortium_whiterabbit:
 		Length: 10
 		Facings: 16
 		Tick: 32
-	shoot-ready:
-		Start: 265
-		Length: 1
+	shoot-loop:
+		Start: 258
+		Length: 5
 		Stride: 10
 		Facings: 16
-	muzzle:
-		Filename: shared_sprites|minigun.shp
-		Length: 3
-		Stride: 6
-		Facings: 8
-		InterpolatedFacings: 32
 		Tick: 30
 	idle1:
 		Start: 96

@@ -362,13 +362,7 @@ steelconsortium_whiterabbit:
 		MaxIdleDelay: 75
 		RequiresCondition: !attack-animation
 	WithFacingSpriteBody@attack-animation:
-		StartSequence: shoot
-		Sequence: shoot-ready
-		RequiresCondition: attack-animation
-	WithIdleOverlay@attack-animation:
-		Sequence: muzzle
-		Palette: ra2effect
-		Offset: 750,250,250
+		Sequence: shoot-loop
 		RequiresCondition: attack-animation
 	BodyOrientation:
 		QuantizedFacings: 32
