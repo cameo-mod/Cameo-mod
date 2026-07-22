@@ -20,7 +20,7 @@
 			WC2SUMMER: bib1.tem
 			OUTPOST2: bib1.tem
 			VOLCANIC: bib1.vol
-			INTERIOR: ra2_soviets_barracks_bib3.tem
+			INTERIOR: bib1.int
 		Length: *
 
 ^WithBuildingBib2:
@@ -45,32 +45,32 @@
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 			VOLCANIC: bib2.vol
-			INTERIOR: ra2_soviets_barracks_bib3.tem
+			INTERIOR: bib2.int
 		Length: *
 
 ^WithBuildingBib3:
 	bib:
-		Filename: ra2_soviets_barracks_bib3.tem
+		Filename: bib3.tem
 		TilesetFilenames:
 			DESERT: bib3.des
 			WINTER: bib3.win
 			SNOW: bib3.sno
-			TEMPERAT: ra2_soviets_barracks_bib3.tem
+			TEMPERAT: bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
 			RA_SNOW: bib3.sno
-			RA_TEMPERAT: ra2_soviets_barracks_bib3.tem
-			RA2_TEMPERAT: ra2_soviets_barracks_bib3.tem
+			RA_TEMPERAT: bib3.tem
+			RA2_TEMPERAT: bib3.tem
 			RA_DESERT: bib3.des
 			RA_INTERIOR: bib3.int
 			ARRAKIS: bib3.des
 			ARRAKIS2: bib3.des
 			CARIBIC: bib3.jun
-			WC2SUNSET: ra2_soviets_barracks_bib3.tem
-			WC2SUMMER: ra2_soviets_barracks_bib3.tem
-			OUTPOST2: ra2_soviets_barracks_bib3.tem
+			WC2SUNSET: bib3.tem
+			WC2SUMMER: bib3.tem
+			OUTPOST2: bib3.tem
 			VOLCANIC: bib3.vol
-			INTERIOR: ra2_soviets_barracks_bib3.tem
+			INTERIOR: bib3.int
 		Length: *
 
 ^WithBuildingBibGun:

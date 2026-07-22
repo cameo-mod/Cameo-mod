@@ -221,6 +221,7 @@ ra2_soviets_teslareactor:
 		Offset: 0,0
 
 ra2_soviets_barracks:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Offset: 0,-4
 	idle:
@@ -241,15 +242,6 @@ ra2_soviets_barracks:
 		Filename: ra2_soviets_barracks_nghand.shp
 		Start: 1
 	bib:
-		Filename: ra2_soviets_barracks_bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: ra2_soviets_barracks_bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: ra2_soviets_barracks_icon.shp
