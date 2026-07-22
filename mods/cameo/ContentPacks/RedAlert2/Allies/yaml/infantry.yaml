@@ -142,7 +142,7 @@ ra2_allies_gi:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ra2_allies_gi:
-		Modifier: 33
+		Modifier: 25
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	RenderRangeCircle:
@@ -632,13 +632,13 @@ ra2_allies_seal:
 	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
 	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
 	Valued:
-		Cost: 900
+		Cost: 1162
 	Health:
-		HP: 30000
+		HP: 31000
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Mobile:
-		Speed: 60
+		Speed: 59
 	Tooltip:
 		Name: SEAL
 	UpdatesPlayerStatistics:
@@ -677,7 +677,7 @@ ra2_allies_seal:
 		Modifier: 50
 		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
 	FirepowerMultiplier@Elite:
-		Modifier: 225
+		Modifier: 93
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 0

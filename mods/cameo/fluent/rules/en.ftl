@@ -948,17 +948,22 @@ ra1_soviets_upgrade_shtoradefensesystem =
    .description = Tech Upgrade (Only affects units of own faction)
       Hammer Tanks mount the Shtora countermeasure suite: a defensive laser that periodically blinds a nearby enemy, cutting its weapon range, vision and cloak detection to 20% for a short time.
 
+actor_forgotten_upgrade_mutantsoldier =
+   .name = Mutant Soldier Upgrade
+   .description = Upgrades Forgotten Mutants to Mutant Soldiers.
+      Stronger infantry armed with armor-piercing carbines.
+
 actor_forgotten_mutant =
    .name = Mutant
    .description = Cheap mutant scavenger armed with dual pistols.
-      Replaced by the Mutant Soldier once a Chemical Plant is built.
+      Replaced by the Mutant Soldier once the Mutant Soldier upgrade is purchased.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
 actor_forgotten_mutantsoldier =
    .name = Mutant Soldier
    .description = Mutant rifleman armed with an armor-piercing carbine.
-      Requires a Chemical Plant and replaces the basic Mutant.
+      Requires the Mutant Soldier upgrade and replaces the basic Mutant.
       Strong vs Infantry
       Weak vs Tanks, Aircraft
 

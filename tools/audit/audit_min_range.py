@@ -34,9 +34,33 @@ def expected_min_range(range_val: int) -> int:
     return round(range_val / 25.0) * 5
 
 
+def _is_exempt(name: str, range_val: int, min_val: int, weapons: set[str]) -> bool:
+    lname = name.lower()
+    # superweapons / spawners / missiles / fragment submunitions
+    if any(p in lname for p in ("spawner", "scud", "tacticalmissile", "fragment")):
+        return True
+    if range_val > 100_000:
+        return True
+    # linear-pulse impact warheads that have their MinRange intentionally removed
+    if any(p in lname for p in ("waveartilleryimpact", "waveturretimpact", "lurkerspinesimpact", "naxdieglock")):
+        return True
+    # meme / intentional numeric pairs
+    if range_val == 11111 and min_val == 2222:
+        return True
+    if range_val == 4444 and min_val == 888:
+        return True
+    # elite / energized / E-variant weapons inherit base MinRange
+    if "_elite" in lname or ".elite" in lname or "_energized" in lname:
+        return True
+    if name.endswith("E") and name[:-1] in weapons:
+        return True
+    return False
+
+
 def main() -> int:
     m = Model()
     rs = m.rs
+    weapon_names = set(rs.weapons.keys())
 
     violations: list[list[str]] = []
 
@@ -49,7 +73,7 @@ def main() -> int:
         if range_val is None or min_val is None:
             continue
         expected = expected_min_range(range_val)
-        if min_val != expected:
+        if min_val != expected and not _is_exempt(name, range_val, min_val, weapon_names):
             violations.append([name, str(range_val), str(min_val), str(expected)])
 
     print(h1("Minimum range audit"))

@@ -1832,7 +1832,7 @@ ASDFGun:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
 	Report: varmatta.wav, varmattb.wav
-	Range: 7250
+	Range: 5935
 	ReloadDelay: 16
 	Burst: 3
 	BurstDelays: 2
@@ -2140,11 +2140,11 @@ asianalliance_fanatic_shotgun:
 	Projectile: Bullet
 		Inaccuracy: 800
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 

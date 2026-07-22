@@ -24,9 +24,15 @@ def eff_reload(reload_delay: float, burst: int = 1, burst_delays: float | None =
 
 
 def dps(damage: float, reload_delay: float, weapon_class: float = 1.0,
-        burst: int = 1, burst_delays: float | None = None) -> float:
-    """Burst-aware DPS. With burst=1 this is the legacy G/I*H exactly."""
-    return damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays) * weapon_class
+        burst: int = 1, burst_delays: float | None = None,
+        firepower_multiplier: float = 1.0) -> float:
+    """Burst-aware DPS. With burst=1 this is the legacy G/I*H exactly.
+
+    firepower_multiplier is the per-actor FirepowerMultiplier value
+    expressed as a factor (1.0 = 100%), used to fine-tune effective
+    damage output without leaving the 2000-step Damage grid."""
+    base = damage * max(burst, 1) / eff_reload(reload_delay, burst, burst_delays) * weapon_class
+    return base * firepower_multiplier
 
 
 def estimators(hp: float, speed: float, range_wdist: float, dps_value: float,
@@ -101,3 +107,37 @@ def class_baseline_price(hp, speed, range_wdist, dps_value,
                                         hp0, speed0, range0_wdist, dps0,
                                         cost0, special, tech_tier)
     return (o + p + q) / 3
+
+
+def solve_class_baseline_range(cost, hp, speed, dps_value,
+                               hp0, speed0, range0_wdist, dps0, cost0,
+                               special=1.0, tech_tier=1.0) -> float:
+    """Range (wdist) such that class_baseline_price == cost.
+
+    class_baseline_price is linear in the normalized range term
+    r = (range / range0_wdist) * special, so the closed form is exact:
+
+        o = (h+s+r+d) * cost0/4 * tech_tier
+        p = ((h*s) + (r*d)) * cost0/2 * tech_tier
+        q = (h*s*r*d) * cost0 * tech_tier
+        price = (o + p + q) / 3
+
+    Collecting constants and r-coefficients:
+        A = o_const + p_const   (terms without r)
+        B = o_r + p_r + q_r     (coefficients of r)
+        r = (3*cost - A) / B
+        range_wdist = (r / special) * range0_wdist
+    """
+    h = hp / hp0
+    s = speed / speed0
+    d = dps_value / dps0
+    a = (h + s + d) * cost0 / 4 * tech_tier
+    c = (h * s) * cost0 / 2 * tech_tier
+    b = cost0 / 4 * tech_tier
+    d1 = d * cost0 / 2 * tech_tier
+    e = h * s * d * cost0 * tech_tier
+    denom = b + d1 + e
+    if denom == 0:
+        raise ZeroDivisionError("class_baseline_price is range-independent for these stats")
+    r_norm = (cost * 3 - (a + c)) / denom
+    return (r_norm / special) * range0_wdist

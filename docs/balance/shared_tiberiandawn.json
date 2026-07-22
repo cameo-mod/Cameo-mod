@@ -14,8 +14,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -47,6 +49,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -75,6 +78,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -103,6 +107,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -136,6 +141,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -168,6 +174,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -196,6 +203,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -229,6 +237,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -251,6 +260,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -262,6 +272,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -269,6 +280,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -277,6 +289,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -289,8 +302,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },

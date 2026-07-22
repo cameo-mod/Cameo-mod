@@ -22,9 +22,9 @@ tkm_rifleman:
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Mobile:
-		Speed: 60
+		Speed: 61
 	Health:
-		HP: 32000
+		HP: 29000
 	ChangesHealth@SelfHealing:
 		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
@@ -32,7 +32,7 @@ tkm_rifleman:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@tkm_rifleman:
-		Modifier: 73
+		Modifier: 89
 	Armament@PRIMARY:
 		Weapon: tkm_rifleman_rifle
 		LocalOffset: 500,0,400
@@ -292,7 +292,7 @@ tkm_thermonaut:
 tkm_trooper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
-	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@Template: ^SpecialForcesInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -310,17 +310,13 @@ tkm_trooper:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Mobile:
-		Speed: 60
+		Speed: 59
 	Health:
-		HP: 32000
+		HP: 33000
 	ChangesHealth@SelfHealing:
 		Step: 32
-	DamageMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
 	FirepowerMultiplier@tkm_trooper:
-		Modifier: 40
+		Modifier: 37
 	Armament@PRIMARY: ##########
 		Weapon: tkm_trooper_ak
 		LocalOffset: 128,0,256

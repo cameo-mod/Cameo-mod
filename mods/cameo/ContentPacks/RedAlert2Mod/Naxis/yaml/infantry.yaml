@@ -78,9 +78,9 @@ naxis_naxiriflerecruit:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 45
+		Speed: 48
 	Health:
-		HP: 20000
+		HP: 21000
 	ChangesHealth@SelfHealing:
 		Step: 20
 	DamageMultiplier@ScoutInfantryBuff:
@@ -88,7 +88,7 @@ naxis_naxiriflerecruit:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@naxis_naxiriflerecruit:
-		Modifier: 81
+		Modifier: 67
 	Armament@PRIMARY:
 		Weapon: naxis_naxiriflerecruit_rifle
 		LocalOffset: 500,0,400
@@ -169,6 +169,8 @@ naxis_sssoldier:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_ostfrontexperience
 
+	FirepowerMultiplier:
+		Modifier: 186
 naxis_naxiflamer:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -1112,7 +1114,7 @@ litt_husk.nax:
 
 alien.nax:
 	Inherits: ^Soldier
-	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@Template: ^CloseCombatInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -1121,7 +1123,7 @@ alien.nax:
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
 	Valued:
-		Cost: 150
+		Cost: 110
 	Tooltip:
 		Name: Naxi Alien
 	Buildable:
@@ -1162,3 +1164,6 @@ alien.nax:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_ostfrontexperience, naxis_upgrade_massopticsintegration
 	-TakeCover:
+
+	FirepowerMultiplier:
+		Modifier: 125

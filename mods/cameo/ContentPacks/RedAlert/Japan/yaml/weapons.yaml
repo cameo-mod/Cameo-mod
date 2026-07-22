@@ -33,15 +33,15 @@ japan_imperialscoutsman_rifle:
 	ValidTargets: Ground, Water, Air
 	Report: iredweaa.wav, iredweab.wav, iredweac.wav, iredwead.wav
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 12000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 12000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 12000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 
@@ -405,6 +405,7 @@ BallistaSingleShotAir:
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		Damage: 80
 
+	MinRange: 1845
 BallistaSingleShotAirEnergized:
 	Inherits: ^LightMissile
 	Inherits: JapanMaidenBowEnergized
@@ -495,6 +496,7 @@ BallistaSingleShotAirEnergized:
 		Damage: 20000
 		Spread: 500
 
+	MinRange: 1845
 BallistaMultiShot:
 	Inherits: ^Grenade
 	Inherits: ^LightFlameWeapon
@@ -502,7 +504,7 @@ BallistaMultiShot:
 	Inherits: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
-	MinRange: 2703
+	MinRange: 2705
 	Burst: 5
 	BurstDelays: 6
 	Report: dune2smalllaser.aud
@@ -568,7 +570,7 @@ BallistaMultiShotEnergized:
 	Inherits: ^ArrowWeapon
 	ReloadDelay: 176
 	Range: 13515
-	MinRange: 2703
+	MinRange: 2705
 	Burst: 5
 	BurstDelays: 6
 	Report: dune2smalllaser.aud
@@ -631,10 +633,12 @@ BallistaTowerMultiShot:
 	Inherits: BallistaMultiShot
 	Range: 9214
 
+	MinRange: 1845
 BallistaTowerMultiShotEnergized:
 	Inherits: BallistaMultiShotEnergized
 	Range: 9214
 
+	MinRange: 1845
 RocketAngelRockets:
 	Inherits: ^TeslaWeapon
 	Inherits: ^HeavyMissile
@@ -997,7 +1001,7 @@ M60mgWaveforce:
 ZeroFighterArrows:
 	Inherits: JHindArrows
 	Range: 6615
-	MinRange: 1323
+	MinRange: 1325
 	ReloadDelay: 110
 	Burst: 2
 	BurstDelays: 9
@@ -1013,7 +1017,7 @@ ZeroFighterArrows:
 ZeroFighterArrowsEnergized:
 	Inherits: JHindArrowsEnergized
 	Range: 6615
-	MinRange: 1323
+	MinRange: 1325
 	ReloadDelay: 110
 	Burst: 2
 	BurstDelays: 9
@@ -2115,7 +2119,7 @@ NanoArtilleryAG:
 	Inherits: ^Grenade
 	ReloadDelay: 77
 	Range: 7777
-	MinRange: 1111
+	MinRange: 1555
 	Report: cannon2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -2276,7 +2280,6 @@ WaveArtilleryShell:
 WaveArtilleryImpact:
 	Inherits: ^TeslaWeapon
 	Inherits: ^RailgunWeapon
-	MinRange: 1
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water
@@ -2323,7 +2326,6 @@ WaveTurretShell:
 	Inherits: WaveArtilleryShell
 	ReloadDelay: 100
 	Range: 9825
-	MinRange: 1965
 	Projectile: WarheadTrailProjectileCA
 		Weapon: WaveTurretImpact
 		FireMode: Line
@@ -2338,9 +2340,9 @@ WaveTurretShell:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_building
 
+	MinRange: 1965
 WaveTurretImpact:
 	Inherits: WaveArtilleryImpact
-	MinRange: 1
 	Projectile: InstantHit
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water

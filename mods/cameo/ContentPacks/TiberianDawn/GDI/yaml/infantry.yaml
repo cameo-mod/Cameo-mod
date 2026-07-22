@@ -12,7 +12,7 @@ td_gdi_minigunner:
 	Mobile:
 		Speed: 63
 	Health:
-		HP: 32000
+		HP: 31000
 	ChangesHealth@SelfHealing:
 		Step: 32
 	DamageMultiplier@ScoutInfantryBuff:
@@ -20,7 +20,7 @@ td_gdi_minigunner:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@td_gdi_minigunner:
-		Modifier: 30
+		Modifier: 24
 	Tooltip:
 		Name: GDI Minigunner
 	Buildable:
@@ -357,7 +357,7 @@ td_gdi_shotgunner:
 		Weapon: td_gdi_shotgunner_shotgun
 		MuzzleSequence: garrison-muzzle
 	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
-		Modifier: 200
+		Modifier: 100
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 	RenderSprites:
@@ -383,9 +383,9 @@ td_gdi_officer:
 	Tooltip:
 		Name: GDI Officer
 	Valued:
-		Cost: 700
+		Cost: 1532
 	Mobile:
-		Speed: 80
+		Speed: 79
 	Health:
 		HP: 32000
 	ChangesHealth@SelfHealing:
@@ -435,6 +435,8 @@ td_gdi_officer:
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 
+	FirepowerMultiplier:
+		Modifier: 108
 td_gdi_havoc:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2InfantryDeathAnimations

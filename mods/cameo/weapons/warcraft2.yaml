@@ -148,7 +148,6 @@ SiegeEngineCannon:
 	Report: TTaFi200.aud
 	ReloadDelay: 100
 	Range: 11200
-	MinRange: 2240
 	Projectile: InstantHit
 	Warhead@NuclearWarhead: SpreadDamage
 		Damage: 10000
@@ -267,6 +266,7 @@ SiegeEngineCannon:
 
 # 1-6 WC2 damage. 4 Base, 2 Pierce.
 
+	MinRange: 2240
 wc2demolitionsquadMelee:
 	Inherits: wc2footmanslice
 

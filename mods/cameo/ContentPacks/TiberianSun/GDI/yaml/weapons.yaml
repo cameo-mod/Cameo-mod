@@ -3,14 +3,14 @@ TS30mm:
 	Inherits: ^FlakWeapon
 	ReloadDelay: 26
 	Burst: 3
-	Range: 5873
+	Range: 6125
 	BurstDelays: 2
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 

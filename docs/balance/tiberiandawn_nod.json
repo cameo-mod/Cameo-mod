@@ -10,6 +10,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -30,6 +31,7 @@
        }
       ],
       "weapon": "HeliGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -38,6 +40,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4501",
       "reloaddelay": "16",
@@ -59,6 +62,7 @@
        }
       ],
       "weapon": "HeliMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -73,8 +77,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -109,8 +115,10 @@
      "v": "3100"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -139,6 +147,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "18",
@@ -202,6 +211,7 @@
        }
       ],
       "weapon": "VenomLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -219,8 +229,10 @@
      "v": "900"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.5,
+     "subtype": "Helicopter",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -265,6 +277,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -303,6 +316,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -340,6 +354,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -373,6 +388,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -397,6 +413,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
@@ -461,6 +478,7 @@
        }
       ],
       "weapon": "TurretGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -470,6 +488,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "61",
@@ -553,6 +572,7 @@
        }
       ],
       "weapon": "TurretGunBlackMarket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -572,8 +592,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
@@ -611,6 +633,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -648,6 +671,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -675,6 +699,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9583333333333334,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "20",
@@ -760,6 +785,7 @@
        }
       ],
       "weapon": "NodTurretLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -779,8 +805,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
@@ -814,6 +842,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -832,6 +861,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9600",
       "reloaddelay": "96",
@@ -857,6 +887,7 @@
        }
       ],
       "weapon": "LaserObelisk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -873,8 +904,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#FirepowerMultiplier@td_nod_upgrade_elitecapacitors.Modifier",
+     "trait": "FirepowerMultiplier@td_nod_upgrade_elitecapacitors",
+     "v": 1.6
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Health.HP",
@@ -910,6 +947,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -937,6 +975,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "12193",
       "reloaddelay": "40",
@@ -969,6 +1008,7 @@
        }
       ],
       "weapon": "Dragon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^ImpactGlow",
@@ -985,8 +1025,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiAirDefense",
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
@@ -1025,6 +1067,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1066,6 +1109,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1103,6 +1147,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1132,6 +1177,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4988",
       "reloaddelay": "46",
@@ -1157,6 +1203,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -1166,6 +1213,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4988",
       "reloaddelay": "46",
@@ -1191,6 +1239,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -1205,8 +1254,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -1237,6 +1288,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.8333333333333334,
       "pricing": true,
       "range": "6006",
       "reloaddelay": "54",
@@ -1289,6 +1341,7 @@
        }
       ],
       "weapon": "ChemRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^LightChemicalWeapon",
@@ -1298,6 +1351,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.8333333333333334,
       "pricing": false,
       "range": "6006",
       "reloaddelay": "54",
@@ -1350,6 +1404,7 @@
        }
       ],
       "weapon": "ChemRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^LightChemicalWeapon",
@@ -1366,8 +1421,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -1397,6 +1454,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3414",
       "reloaddelay": "48",
@@ -1422,6 +1480,7 @@
        }
       ],
       "weapon": "Chemspray",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1429,6 +1488,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3414",
       "reloaddelay": "48",
@@ -1454,6 +1514,7 @@
        }
       ],
       "weapon": "Chemspray",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1468,8 +1529,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.75
     },
@@ -1500,6 +1563,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1510,11 +1574,13 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1523,10 +1589,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8086",
       "reloaddelay": "25",
@@ -1547,6 +1615,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1554,6 +1623,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8086",
       "reloaddelay": "25",
@@ -1574,6 +1644,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1592,8 +1663,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "HeroInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1624,6 +1697,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2085",
       "reloaddelay": "60",
@@ -1649,6 +1723,7 @@
        }
       ],
       "weapon": "Flamethrower",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -1656,6 +1731,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "2085",
       "reloaddelay": "60",
@@ -1681,6 +1757,7 @@
        }
       ],
       "weapon": "Flamethrower",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -1695,8 +1772,10 @@
      "v": "200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -1728,6 +1807,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -1753,6 +1833,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1760,6 +1841,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6030",
       "reloaddelay": "8",
@@ -1785,6 +1867,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1792,6 +1875,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6030",
       "reloaddelay": "8",
@@ -1817,12 +1901,14 @@
        }
       ],
       "weapon": "NodCommandoLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1831,6 +1917,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1847,8 +1934,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -1879,8 +1968,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "6000",
+      "range": "5524",
       "reloaddelay": "50",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -1890,7 +1980,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
@@ -1900,7 +1990,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -1910,7 +2000,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -1926,6 +2016,7 @@
        }
       ],
       "weapon": "BlackHandLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -1935,8 +2026,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "6000",
+      "range": "5524",
       "reloaddelay": "50",
       "slot": "Armament@Garrison",
       "versus_templates": [
@@ -1946,7 +2038,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
@@ -1956,7 +2048,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -1966,7 +2058,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "48000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -1982,6 +2074,7 @@
        }
       ],
       "weapon": "BlackHandLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -1998,14 +2091,21 @@
      "v": "750"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
-     "tech_tier": 0.75,
+     "subtype": "SpecialForcesInfantry",
+     "tech_tier": 0.5,
      "unit_class": 0.8
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#FirepowerMultiplier@PromotionUnit.Modifier",
+     "trait": "FirepowerMultiplier@PromotionUnit",
+     "v": 1.08
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
-     "v": "60000"
+     "v": "59000"
     },
     "name": "Laser Trooper",
     "prerequisites": [
@@ -2023,7 +2123,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "51"
     }
    },
    "td_nod_minigunner": {
@@ -2034,8 +2134,8 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4500",
-      "reloaddelay": "40",
+      "range": "4609",
+      "reloaddelay": "50",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2054,6 +2154,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2065,8 +2166,8 @@
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "4500",
-      "reloaddelay": "40",
+      "range": "4609",
+      "reloaddelay": "50",
       "requires": "!td_nod_upgrade_blackmarketupgrades",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2085,6 +2186,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2142,6 +2244,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun_laser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2202,6 +2305,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun_laser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2218,10 +2322,17 @@
      "v": "100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": "scout",
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#FirepowerMultiplier@td_nod_minigunner.Modifier",
+     "trait": "FirepowerMultiplier@td_nod_minigunner",
+     "v": 0.29
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
@@ -2248,6 +2359,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "63",
@@ -2268,6 +2380,7 @@
        }
       ],
       "weapon": "Rockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2275,6 +2388,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6368",
       "reloaddelay": "63",
@@ -2295,6 +2409,7 @@
        }
       ],
       "weapon": "Rockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2309,8 +2424,10 @@
      "v": "200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2342,8 +2459,9 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5000",
+      "range": "6480",
       "reloaddelay": "90",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2355,12 +2473,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "TeslaChargedWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "22000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2370,7 +2488,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
@@ -2380,7 +2498,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2390,12 +2508,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "22000",
         "tag": "ShrapnelWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -2405,7 +2523,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -2416,6 +2534,7 @@
        }
       ],
       "weapon": "BHRedDarts",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TankDestroyerCannon",
@@ -2429,8 +2548,9 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "5000",
+      "range": "6480",
       "reloaddelay": "90",
       "slot": "Armament@Garrison",
       "versus_templates": [
@@ -2442,12 +2562,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "TeslaChargedWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "22000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2457,7 +2577,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "TankDestroyerCannon",
         "type": "SpreadDamage"
        },
@@ -2467,7 +2587,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2477,12 +2597,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "22000",
         "tag": "ShrapnelWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -2492,7 +2612,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "22000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -2503,6 +2623,7 @@
        }
       ],
       "weapon": "BHRedDarts",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TankDestroyerCannon",
@@ -2518,13 +2639,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
-     "v": "500"
+     "v": "753"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.5,
+     "subtype": "HeavyInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.8
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 0.93
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
@@ -2561,8 +2689,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "Ship",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2597,6 +2727,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
@@ -2634,6 +2765,7 @@
        }
       ],
       "weapon": "NodTorpTube",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile"
@@ -2643,6 +2775,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "64",
@@ -2675,6 +2808,7 @@
        }
       ],
       "weapon": "NodTorpTubeBlackMarket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyMissile"
@@ -2690,8 +2824,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2725,6 +2861,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "90",
@@ -2750,6 +2887,7 @@
        }
       ],
       "weapon": "CorvetteLaserObelisk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -2759,6 +2897,7 @@
       "burst": "2",
       "burstdelays": "7",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9550",
       "reloaddelay": "35",
@@ -2780,6 +2919,7 @@
        }
       ],
       "weapon": "CorvetteDragon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -2795,8 +2935,10 @@
      "v": "2300"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "BattleShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2832,6 +2974,7 @@
       "burst": "2",
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
@@ -2912,6 +3055,7 @@
        }
       ],
       "weapon": "HonestJohn",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2930,10 +3074,17 @@
      "v": "2800"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
+     "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
+     "v": 2.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/naval.yaml#Health.HP",
@@ -2971,6 +3122,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2992,6 +3144,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3013,6 +3166,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3035,6 +3189,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3056,6 +3211,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3078,6 +3234,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3100,6 +3257,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3122,6 +3280,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3144,6 +3303,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3166,6 +3326,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3188,6 +3349,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3210,6 +3372,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3238,6 +3401,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3264,6 +3428,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3288,6 +3453,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3313,6 +3479,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3337,6 +3504,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3362,6 +3530,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3386,6 +3555,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3410,6 +3580,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3430,6 +3601,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3441,7 +3613,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
-      "minrange": "2468",
+      "design_weapon_class": 1.0,
+      "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "112",
@@ -3484,6 +3657,7 @@
        }
       ],
       "weapon": "ArtilleryShell",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon"
@@ -3491,6 +3665,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -3588,6 +3763,7 @@
        }
       ],
       "weapon": "ArtilleryShellUpgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3607,8 +3783,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -3645,6 +3823,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -3665,6 +3844,7 @@
        }
       ],
       "weapon": "MachineGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3673,6 +3853,7 @@
       "burst": "3",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4540",
       "reloaddelay": "10",
@@ -3699,6 +3880,7 @@
        }
       ],
       "weapon": "FireballLauncherBuggy",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3713,8 +3895,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.333
     },
@@ -3750,6 +3934,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -3792,6 +3977,7 @@
        }
       ],
       "weapon": "MachineGunBuggy2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3802,6 +3988,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -3860,6 +4047,7 @@
        }
       ],
       "weapon": "FireballLauncherBuggy2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^HeavyFlameWeapon",
@@ -3870,6 +4058,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
@@ -3910,6 +4099,7 @@
        }
       ],
       "weapon": "MachineGunBuggy2AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3920,6 +4110,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "5274",
       "reloaddelay": "60",
@@ -3973,6 +4164,7 @@
        }
       ],
       "weapon": "LaserBuggy2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -3983,6 +4175,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "7911",
       "reloaddelay": "60",
@@ -4034,6 +4227,7 @@
        }
       ],
       "weapon": "LaserBuggy2AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -4050,10 +4244,17 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#FirepowerMultiplier@Upgrade.Modifier",
+     "trait": "FirepowerMultiplier@Upgrade",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
@@ -4086,6 +4287,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -4102,12 +4304,14 @@
        }
       ],
       "weapon": "PDLaserBike",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "70",
@@ -4166,6 +4370,7 @@
        }
       ],
       "weapon": "ChemicalBikeRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4183,8 +4388,10 @@
      "v": "750"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -4218,6 +4425,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "minrange": "2470",
       "pricing": true,
       "range": "12345",
@@ -4282,6 +4490,7 @@
        }
       ],
       "weapon": "ChemicalHonestJohn",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyBomb",
@@ -4299,8 +4508,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
@@ -4335,6 +4546,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6962",
       "reloaddelay": "60",
@@ -4387,6 +4599,7 @@
        }
       ],
       "weapon": "ChemicalStealthTankMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumChemicalWeapon",
@@ -4403,8 +4616,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -4441,6 +4656,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/weapons/tiberiandawn.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "2390",
       "reloaddelay": "50",
@@ -4466,6 +4682,7 @@
        }
       ],
       "weapon": "BigFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -4480,8 +4697,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4518,6 +4737,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2534",
       "reloaddelay": "54",
@@ -4543,6 +4763,7 @@
        }
       ],
       "weapon": "BigFlamer2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon"
       ]
@@ -4557,8 +4778,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4593,6 +4816,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -4613,12 +4837,14 @@
        }
       ],
       "weapon": "70mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4993",
       "reloaddelay": "45",
@@ -4640,6 +4866,7 @@
        }
       ],
       "weapon": "LTNKMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -4654,8 +4881,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4690,6 +4919,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "25",
@@ -4705,10 +4935,12 @@
        }
       ],
       "weapon": "PDLaserLTNK2",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
@@ -4745,6 +4977,7 @@
        }
       ],
       "weapon": "LightTank2Cannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumCannon"
@@ -4752,6 +4985,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4903",
       "reloaddelay": "35",
@@ -4789,6 +5023,7 @@
        }
       ],
       "weapon": "LightTank2Missiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile"
@@ -4804,8 +5039,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4849,8 +5086,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4885,6 +5124,7 @@
      {
       "armament_name": "pointdefense",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "25",
@@ -4901,12 +5141,14 @@
        }
       ],
       "weapon": "PDLaserBike",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "55",
@@ -4965,6 +5207,7 @@
        }
       ],
       "weapon": "BikeRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4982,8 +5225,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -5017,6 +5262,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5061,6 +5307,7 @@
        }
       ],
       "weapon": "SpecterArtilleryShell",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5069,6 +5316,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0714285714285714,
       "minrange": "2530",
       "pricing": true,
       "range": "12640",
@@ -5187,6 +5435,7 @@
        }
       ],
       "weapon": "SpecterArtilleryShellUpgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
@@ -5209,8 +5458,10 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5247,6 +5498,7 @@
       "burst": "2",
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "minrange": "1790",
       "pricing": true,
       "range": "8940",
@@ -5327,6 +5579,7 @@
        }
       ],
       "weapon": "HonestJohn",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -5345,8 +5598,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -5391,8 +5646,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5428,6 +5685,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
@@ -5449,6 +5707,7 @@
        }
       ],
       "weapon": "StealthTankMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5457,6 +5716,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7432",
       "reloaddelay": "58",
@@ -5478,6 +5738,7 @@
        }
       ],
       "weapon": "StealthTankMissilesBlackMarket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5492,10 +5753,17 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#FirepowerMultiplier@td_nod_upgrade_guerillatactics.Modifier",
+     "trait": "FirepowerMultiplier@td_nod_upgrade_guerillatactics",
+     "v": 1.3
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/vehicles.yaml#Health.HP",
@@ -5538,8 +5806,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },

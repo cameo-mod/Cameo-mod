@@ -1310,6 +1310,116 @@
 	GrantExternalConditionToTransport:
 		Condition: ifv-lightsniper
 
+^HeavySniperInfantryTemplate:
+	# Formula v2 HEAVY SNIPER class (design 2026-07-21): long-range,
+	# high-damage ground-only sniper. Loses air targetability to the pure
+	# sniper class; range band above standard snipers.
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Armor:
+		Type: Flak
+	FirepowerMultiplier@HeavySniperInfantryBuff:
+		Modifier: 100
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 4000
+	RenderRangeCircle:
+		RangeCircleType: infantry
+	Buildable:
+		Description: Heavy sniper infantry.
+  Strong vs Infantry
+  Weak vs Vehicles
+		BuildPaletteOrder: 75
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	KeepsDistance:
+		Distance: 10
+	TooltipExtras@heavysniper:
+		Description: Heavy Sniper
+	GrantExternalConditionToTransport:
+		Condition: ifv-lightsniper
+
+^RocketTrooperInfantryTemplate:
+	# Formula v2 ROCKET TROOPER class (design 2026-07-21): dedicated
+	# missile-based anti-vehicle / anti-air infantry. Splits from the old
+	# AntiTankAntiAir template, which mixed bullet-based AA infantry into
+	# special forces.
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Armor:
+		Type: Flak
+	FirepowerMultiplier@RocketTrooperInfantryBuff:
+		Modifier: 100
+	RevealsShroud:
+		Range: 6500
+	Buildable:
+		Description: Rocket trooper.
+  Strong vs Vehicles, Aircraft
+  Weak vs Infantry
+		BuildPaletteOrder: 35
+		BuildDurationModifier: 100
+		IconPalette: cameo
+	TooltipExtras@rockettrooper:
+		Description: Rocket Trooper
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss
+
+^ArcherInfantryTemplate:
+	# Formula v2 ARCHER class (design 2026-07-21): projectile-arc infantry
+	# using the MISSILE projectile (tracks targets); arrow speed is kept at
+	# maxRange/10. Hits air. Distinct from mortar/rocket indirect fire.
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Armor:
+		Type: None
+	FirepowerMultiplier@ArcherInfantryBuff:
+		Modifier: 100
+	RevealsShroud:
+		Range: 7000
+	Buildable:
+		Description: Archer infantry.
+  Strong vs Infantry, Aircraft
+  Weak vs Vehicles
+		BuildPaletteOrder: 50
+		BuildDurationModifier: 100
+		IconPalette: cameo
+	TooltipExtras@archer:
+		Description: Archer
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss
+
+^SupportInfantryTemplate:
+	# Formula v2 SUPPORT / SPECIAL class (design 2026-07-21): medics,
+	# mechanics, engineers, casters and other ability-priced infantry.
+	# Combat stats are per-actor; the template only supplies shared
+	# armour/sight/buildable defaults. No standard weapon is inherited.
+	Inherits@EXPERIENCE: ^GainsExperienceInfantry
+	Inherits@EXT: ^ExternalConditions
+	Inherits@InfantryBuffs: ^InfantryBuffs
+	Armor:
+		Type: None
+	FirepowerMultiplier@SupportInfantryBuff:
+		Modifier: 100
+	RevealsShroud:
+		Range: 6000
+	Buildable:
+		Description: Support infantry.
+  Strong vs Nothing
+  Weak vs Everything
+		BuildPaletteOrder: 25
+		BuildDurationModifier: 75
+		IconPalette: cameo
+	TooltipExtras@support:
+		Description: Support
+	GrantExternalConditionToTransport:
+		Condition: ifv-repair
+
 ^HackableRobot:
 	Targetable@HackableRobot:
 		TargetTypes: HackableRobot

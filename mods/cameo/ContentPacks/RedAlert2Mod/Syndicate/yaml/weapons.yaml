@@ -1,6 +1,6 @@
 latinsyndicate_latinmilitia_ak47:
 	Inherits: ^RA2SmallArms
-	Range: 4500
+	Range: 5395
 	ReloadDelay: 22
 	Burst: 3
 	BurstDelays: 4
@@ -117,7 +117,7 @@ RA2NarcoPistolsE:
 NarcoGrenade:
 	Inherits: ^Grenade
 	ReloadDelay: 77
-	Range: 6300
+	Range: 5701
 	Report: M203.aud
 	Projectile: Bullet
 		Speed: 140
@@ -529,7 +529,7 @@ RA2LarsRocket:
 	Burst: 10
 	BurstDelays: 4
 	Range: 10130
-	MinRange: 2026
+	MinRange: 2025
 	Report: vmigatta.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
@@ -1041,7 +1041,7 @@ YakovlevCannonE:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 5555
-	MinRange: 1111
+	MinRange: 1110
 	Report: vwaratta.wav, vwarattb.wav
 	Projectile: Bullet
 		Image: 50CAL

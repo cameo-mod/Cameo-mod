@@ -86,7 +86,7 @@ ts_nod_elitecadre:
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
 	Valued:
-		Cost: 450
+		Cost: 435
 	Tooltip:
 		Name: Elite Cadre
 	UpdatesPlayerStatistics:
@@ -99,7 +99,7 @@ ts_nod_elitecadre:
 	Mobile:
 		Speed: 55
 	Health:
-		HP: 20000
+		HP: 21000
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
@@ -149,6 +149,8 @@ ts_nod_elitecadre:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon
 
+	FirepowerMultiplier:
+		Modifier: 93
 ts_nod_toxintrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate

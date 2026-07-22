@@ -11,7 +11,8 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
@@ -33,6 +34,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -42,7 +44,8 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
@@ -97,6 +100,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -109,6 +113,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "100",
@@ -131,6 +136,7 @@
        }
       ],
       "weapon": "JapaneseHeavyBomb",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^ImpactGlow"
@@ -141,6 +147,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "100",
@@ -194,6 +201,7 @@
        }
       ],
       "weapon": "JapanesePlasmaBomb",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -210,8 +218,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Bomber",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -241,6 +251,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
@@ -273,6 +284,7 @@
        }
       ],
       "weapon": "JHindArrows",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^ArrowWeapon"
@@ -280,6 +292,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "128",
@@ -343,6 +356,7 @@
        }
       ],
       "weapon": "JHindArrowsEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -352,6 +366,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
@@ -389,6 +404,7 @@
        }
       ],
       "weapon": "JHindCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^TankDestroyerCannon"
@@ -396,6 +412,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "32",
@@ -459,6 +476,7 @@
        }
       ],
       "weapon": "JHindPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumMissile",
@@ -468,6 +486,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
@@ -505,6 +524,7 @@
        }
       ],
       "weapon": "JHindChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^Chaingun"
@@ -512,6 +532,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3053",
       "reloaddelay": "8",
@@ -565,6 +586,7 @@
        }
       ],
       "weapon": "JHindChainGunWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -582,8 +604,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Helicopter",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -615,7 +639,8 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "110",
@@ -647,6 +672,7 @@
        }
       ],
       "weapon": "ZeroFighterArrows",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^ArrowWeapon"
@@ -656,7 +682,8 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "110",
@@ -718,6 +745,7 @@
        }
       ],
       "weapon": "ZeroFighterArrowsEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -729,7 +757,8 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
@@ -751,6 +780,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -759,7 +789,8 @@
       "burst": "12",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
-      "minrange": "1323",
+      "design_weapon_class": 1.0,
+      "minrange": "1325",
       "pricing": true,
       "range": "6615",
       "reloaddelay": "92",
@@ -814,6 +845,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -831,10 +863,17 @@
      "v": "1200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Fighter",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/aircraft.yaml#Health.HP",
@@ -875,6 +914,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -912,6 +952,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -945,6 +986,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -981,6 +1023,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1018,6 +1061,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1055,6 +1099,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1092,6 +1137,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1129,6 +1175,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1162,6 +1209,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1190,7 +1238,8 @@
       "burst": "5",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "2703",
+      "design_weapon_class": 0.8333333333333334,
+      "minrange": "1845",
       "pricing": true,
       "range": "9214",
       "reloaddelay": "176",
@@ -1256,6 +1305,7 @@
        }
       ],
       "weapon": "BallistaTowerMultiShot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -1265,7 +1315,8 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "1500",
+      "design_weapon_class": 0.75,
+      "minrange": "1845",
       "pricing": true,
       "range": "9214",
       "reloaddelay": "200",
@@ -1286,6 +1337,7 @@
        }
       ],
       "weapon": "BallistaSingleShotAir",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
@@ -1294,7 +1346,8 @@
       "burst": "5",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "2703",
+      "design_weapon_class": 1.0,
+      "minrange": "1845",
       "pricing": true,
       "range": "9214",
       "reloaddelay": "176",
@@ -1361,6 +1414,7 @@
        }
       ],
       "weapon": "BallistaTowerMultiShotEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -1370,7 +1424,8 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "1500",
+      "design_weapon_class": 0.9583333333333334,
+      "minrange": "1845",
       "pricing": true,
       "range": "9214",
       "reloaddelay": "200",
@@ -1483,6 +1538,7 @@
        }
       ],
       "weapon": "BallistaSingleShotAirEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumFlameWeapon",
@@ -1503,10 +1559,17 @@
      "v": "1400"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AdvancedDefense",
      "tech_tier": 1.0,
      "unit_class": 0.325
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#FirepowerMultiplier@japan_upgrade_energizedarrows.Modifier",
+     "trait": "FirepowerMultiplier@japan_upgrade_energizedarrows",
+     "v": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
@@ -1533,6 +1596,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6696",
       "reloaddelay": "25",
@@ -1565,6 +1629,7 @@
        }
       ],
       "weapon": "JHighV",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1575,6 +1640,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6696",
       "reloaddelay": "25",
@@ -1623,6 +1689,7 @@
        }
       ],
       "weapon": "JHighVWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -1640,8 +1707,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1681,8 +1750,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1709,6 +1780,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "1965",
       "pricing": true,
@@ -1720,6 +1792,7 @@
       ],
       "warheads": [],
       "weapon": "WaveTurretShell",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1732,10 +1805,17 @@
      "v": "3200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "AdvancedDefense",
      "tech_tier": 1.0,
      "unit_class": 0.325
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#FirepowerMultiplier@SplashCompensation.Modifier",
+     "trait": "FirepowerMultiplier@SplashCompensation",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/defenses.yaml#Health.HP",
@@ -1761,6 +1841,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -1783,6 +1864,7 @@
        }
       ],
       "weapon": "JapanMaidenBow",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
@@ -1790,6 +1872,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "minrange": "1500",
       "pricing": false,
       "range": "7500",
@@ -1812,12 +1895,14 @@
        }
       ],
       "weapon": "JapanMaidenBow",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -1925,6 +2010,7 @@
        }
       ],
       "weapon": "JapanMaidenBowEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1937,6 +2023,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1500",
       "pricing": false,
       "range": "7500",
@@ -2044,6 +2131,7 @@
        }
       ],
       "weapon": "JapanMaidenBowEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2063,8 +2151,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SniperInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2097,6 +2187,7 @@
       "burst": "3",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -2139,6 +2230,7 @@
        }
       ],
       "weapon": "Hakureiring",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2149,6 +2241,7 @@
       "burst": "1",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "100",
@@ -2189,6 +2282,7 @@
        }
       ],
       "weapon": "Hakureiring2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2200,6 +2294,7 @@
       "burst": "3",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "30",
@@ -2242,6 +2337,7 @@
        }
       ],
       "weapon": "Hakureiring",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2253,6 +2349,7 @@
       "burst": "1",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "100",
@@ -2293,6 +2390,7 @@
        }
       ],
       "weapon": "Hakureiring2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2313,8 +2411,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2346,7 +2446,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -2359,7 +2459,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
        },
@@ -2374,7 +2474,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2384,7 +2484,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2395,6 +2495,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2404,7 +2505,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "50",
@@ -2417,7 +2518,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
        },
@@ -2432,7 +2533,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2442,7 +2543,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2453,6 +2554,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2461,7 +2563,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -2474,7 +2576,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
        },
@@ -2489,7 +2591,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2499,7 +2601,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2510,6 +2612,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^RailgunWeapon",
@@ -2521,7 +2624,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "design_weapon_class": 0.75,
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "50",
@@ -2534,7 +2637,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "RailgunWeapon",
         "type": "SpreadDamage"
        },
@@ -2549,7 +2652,7 @@
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2559,7 +2662,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2570,6 +2673,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^RailgunWeapon",
@@ -2588,10 +2692,17 @@
      "v": "200"
     },
     "design": {
-     "class_anchor": "scout",
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "SpecialForcesInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#FirepowerMultiplier@ScoutInfantryBuff.Modifier",
+     "trait": "FirepowerMultiplier@ScoutInfantryBuff",
+     "v": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
@@ -2620,6 +2731,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3603",
       "reloaddelay": "35",
@@ -2646,6 +2758,7 @@
        }
       ],
       "weapon": "Flamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2655,6 +2768,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3603",
       "reloaddelay": "35",
@@ -2681,6 +2795,7 @@
        }
       ],
       "weapon": "Flamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2689,6 +2804,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3603",
       "reloaddelay": "35",
@@ -2731,6 +2847,7 @@
        }
       ],
       "weapon": "PlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -2741,6 +2858,7 @@
       "burst": "15",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3603",
       "reloaddelay": "35",
@@ -2783,6 +2901,7 @@
        }
       ],
       "weapon": "PlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -2798,8 +2917,10 @@
      "v": "200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.4
     },
@@ -2830,6 +2951,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "minrange": "920",
       "pricing": true,
       "range": "4600",
@@ -2926,6 +3048,7 @@
        }
       ],
       "weapon": "RocketAngelRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyMissile",
@@ -2945,10 +3068,17 @@
      "v": "900"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FlyingInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#FirepowerMultiplier@japan_rocketangel.Modifier",
+     "trait": "FirepowerMultiplier@japan_rocketangel",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/infantry.yaml#Health.HP",
@@ -2979,6 +3109,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1637",
       "reloaddelay": "20",
@@ -3005,6 +3136,7 @@
        }
       ],
       "weapon": "SamuraiBlade",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3012,6 +3144,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "1637",
       "reloaddelay": "20",
@@ -3038,12 +3171,14 @@
        }
       ],
       "weapon": "SamuraiBlade",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "1637",
       "reloaddelay": "20",
@@ -3086,6 +3221,7 @@
        }
       ],
       "weapon": "SamuraiBladeCharged",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^SwordWeapon"
@@ -3094,6 +3230,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "1637",
       "reloaddelay": "20",
@@ -3136,6 +3273,7 @@
        }
       ],
       "weapon": "SamuraiBladeCharged",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^SwordWeapon"
@@ -3151,8 +3289,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -3182,6 +3322,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "96",
@@ -3229,6 +3370,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3238,6 +3380,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "96",
@@ -3285,6 +3428,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3293,6 +3437,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "96",
@@ -3346,6 +3491,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannonCharged",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3355,6 +3501,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "96",
@@ -3408,6 +3555,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannonCharged",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3424,8 +3572,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -3461,6 +3611,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3483,6 +3634,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3504,6 +3656,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3526,6 +3679,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3547,6 +3701,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3569,6 +3724,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3591,6 +3747,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3613,6 +3770,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3634,6 +3792,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3656,6 +3815,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3678,6 +3838,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3700,6 +3861,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3728,6 +3890,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3752,6 +3915,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3776,6 +3940,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3800,6 +3965,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3824,6 +3990,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3848,6 +4015,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3872,6 +4040,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3896,6 +4065,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3914,6 +4084,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.9583333333333334,
       "pricing": true,
       "range": "5012",
       "reloaddelay": "8",
@@ -4017,6 +4188,7 @@
        }
       ],
       "weapon": "ArmoredCarMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ArrowWeapon",
        "^TankDestroyerCannon",
@@ -4030,6 +4202,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.9583333333333334,
       "pricing": true,
       "range": "7518",
       "reloaddelay": "8",
@@ -4126,6 +4299,7 @@
        }
       ],
       "weapon": "ArmoredCarMGAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ArrowWeapon",
        "^TankDestroyerCannon",
@@ -4139,6 +4313,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5012",
       "reloaddelay": "8",
@@ -4263,6 +4438,7 @@
        }
       ],
       "weapon": "ArmoredCarMGWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
@@ -4279,6 +4455,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7518",
       "reloaddelay": "8",
@@ -4403,6 +4580,7 @@
        }
       ],
       "weapon": "ArmoredCarMGAAWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
@@ -4427,10 +4605,17 @@
      "v": "700"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@japan_upgrade_waveforcebullets.Modifier",
+     "trait": "FirepowerMultiplier@japan_upgrade_waveforcebullets",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
@@ -4464,7 +4649,8 @@
       "burst": "5",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "2703",
+      "design_weapon_class": 0.8333333333333334,
+      "minrange": "2705",
       "pricing": true,
       "range": "13515",
       "reloaddelay": "176",
@@ -4533,6 +4719,7 @@
        }
       ],
       "weapon": "BallistaMultiShot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -4544,7 +4731,8 @@
       "burst": "5",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "2703",
+      "design_weapon_class": 1.0,
+      "minrange": "2705",
       "pricing": true,
       "range": "13515",
       "reloaddelay": "176",
@@ -4614,6 +4802,7 @@
        }
       ],
       "weapon": "BallistaMultiShotEnergized",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -4631,10 +4820,17 @@
      "v": "1150"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@japan_upgrade_energizedarrows.Modifier",
+     "trait": "FirepowerMultiplier@japan_upgrade_energizedarrows",
+     "v": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
@@ -4666,6 +4862,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5692",
       "reloaddelay": "56",
@@ -4698,6 +4895,7 @@
        }
       ],
       "weapon": "Type97Cannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -4705,6 +4903,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "5692",
       "reloaddelay": "56",
@@ -4758,6 +4957,7 @@
        }
       ],
       "weapon": "Type97PlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -4774,8 +4974,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4819,8 +5021,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4865,8 +5069,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4911,8 +5117,10 @@
      "v": "750"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4957,8 +5165,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5003,8 +5213,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5049,8 +5261,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5095,8 +5309,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5141,8 +5357,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5179,6 +5397,7 @@
       "burst": "3",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "30",
@@ -5219,6 +5438,7 @@
        }
       ],
       "weapon": "OIHakureiring",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -5229,6 +5449,7 @@
       "burst": "1",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "100",
@@ -5269,6 +5490,7 @@
        }
       ],
       "weapon": "OIHakureiring2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -5277,6 +5499,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5298,12 +5521,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5325,12 +5550,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5352,12 +5579,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5427,6 +5656,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5436,6 +5666,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5505,6 +5736,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5514,6 +5746,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -5583,6 +5816,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5594,6 +5828,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5620,6 +5855,7 @@
        }
       ],
       "weapon": "OIFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5629,6 +5865,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5655,6 +5892,7 @@
        }
       ],
       "weapon": "OIFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5663,6 +5901,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5705,6 +5944,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -5715,6 +5955,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -5757,6 +5998,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -5776,8 +6018,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
@@ -5813,6 +6057,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5184",
       "reloaddelay": "60",
@@ -5839,12 +6084,14 @@
        }
       ],
       "weapon": "BuggyGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "5184",
       "reloaddelay": "60",
@@ -5898,6 +6145,7 @@
        }
       ],
       "weapon": "BuggyPlasmaGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -5914,8 +6162,10 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -5951,6 +6201,7 @@
       "burst": "30",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -5977,6 +6228,7 @@
        }
       ],
       "weapon": "HeavyFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5985,6 +6237,7 @@
       "burst": "30",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -6027,6 +6280,7 @@
        }
       ],
       "weapon": "HeavyPlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -6042,8 +6296,10 @@
      "v": "1700"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -6078,6 +6334,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "25",
@@ -6164,6 +6421,7 @@
        }
       ],
       "weapon": "HovercraftCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6175,6 +6433,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.03125,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "25",
@@ -6294,6 +6553,7 @@
        }
       ],
       "weapon": "HovercraftPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyBomb",
@@ -6308,6 +6568,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6340,6 +6601,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlak",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -6347,6 +6609,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4876",
       "reloaddelay": "8",
@@ -6395,6 +6658,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -6404,6 +6668,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6435,6 +6700,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -6442,6 +6708,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7314",
       "reloaddelay": "8",
@@ -6490,6 +6757,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakAAkWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -6507,10 +6775,17 @@
      "v": "1500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@doublecannonsandbombs.Modifier",
+     "trait": "FirepowerMultiplier@doublecannonsandbombs",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
@@ -6543,6 +6818,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5243",
       "reloaddelay": "52",
@@ -6564,12 +6840,14 @@
        }
       ],
       "weapon": "Type89Cannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5243",
       "reloaddelay": "52",
@@ -6628,6 +6906,7 @@
        }
       ],
       "weapon": "Type89PlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^TankDestroyerCannon",
@@ -6644,8 +6923,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -6689,8 +6970,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6734,8 +7017,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6768,7 +7053,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
-      "minrange": "1111",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "1555",
       "pricing": true,
       "range": "7777",
       "reloaddelay": "77",
@@ -6821,6 +7107,7 @@
        }
       ],
       "weapon": "NanoArtilleryAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -6837,10 +7124,17 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@Nanodrones.Modifier",
+     "trait": "FirepowerMultiplier@Nanodrones",
+     "v": 0.33
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
@@ -6872,6 +7166,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "55",
@@ -6893,12 +7188,14 @@
        }
       ],
       "weapon": "OIBigCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "55",
@@ -6952,6 +7249,7 @@
        }
       ],
       "weapon": "OIBigPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -6960,6 +7258,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -6981,12 +7280,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7008,12 +7309,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7035,12 +7338,14 @@
        }
       ],
       "weapon": "OISmallCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7110,6 +7415,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7119,6 +7425,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7188,6 +7495,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7197,6 +7505,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.1875,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "45",
@@ -7266,6 +7575,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7277,6 +7587,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7303,6 +7614,7 @@
        }
       ],
       "weapon": "OIFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7312,6 +7624,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7338,6 +7651,7 @@
        }
       ],
       "weapon": "OIFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7346,6 +7660,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7388,6 +7703,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -7398,6 +7714,7 @@
       "burst": "20",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "5394",
       "reloaddelay": "60",
@@ -7440,6 +7757,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -7455,8 +7773,10 @@
      "v": "7000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -7492,6 +7812,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7513,6 +7834,7 @@
        }
       ],
       "weapon": "M60mgJapan",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -7521,6 +7843,7 @@
       "burst": "5",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5004",
       "reloaddelay": "15",
@@ -7559,6 +7882,7 @@
        }
       ],
       "weapon": "M60mgWaveforce",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -7575,8 +7899,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.333
     },
@@ -7610,6 +7936,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "300",
@@ -7635,6 +7962,7 @@
        }
       ],
       "weapon": "ExecutionerSword",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -7653,8 +7981,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "EpicVehicle",
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
@@ -7689,6 +8019,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6370",
       "reloaddelay": "50",
@@ -7789,6 +8120,7 @@
        }
       ],
       "weapon": "ShrineTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -7808,8 +8140,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7843,6 +8177,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "11111",
@@ -7851,6 +8186,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "WaveArtilleryShell",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -7863,10 +8199,17 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Artillery",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#FirepowerMultiplier@SplashCompensation.Modifier",
+     "trait": "FirepowerMultiplier@SplashCompensation",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/vehicles.yaml#Health.HP",
@@ -7899,6 +8242,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "60",
@@ -7936,6 +8280,7 @@
        }
       ],
       "weapon": "WaveforceCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -7943,6 +8288,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -7980,6 +8326,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -7987,6 +8334,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -8024,6 +8372,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -8031,6 +8380,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -8073,6 +8423,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -8088,8 +8439,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },

@@ -11,7 +11,7 @@ steelconsortium_clonetrooper:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
 	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
 	Valued:
-		Cost: 200
+		Cost: 143
 	Tooltip:
 		Name: Clone Trooper
 	Buildable:
@@ -62,7 +62,7 @@ steelconsortium_clonetrooper:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite && steelconsortium_upgrade_resonanceammo
 	FirepowerMultiplier@steelconsortium_upgrade_pulseweapons:
-		Modifier: 160
+		Modifier: 91
 	RangeMultiplier@steelconsortium_upgrade_pulseweapons:
 		Modifier: 130
 	AttackFrontal:

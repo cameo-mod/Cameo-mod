@@ -274,7 +274,7 @@ Dune_SiegeMortar:
 	Inherits: ^TankDestroyerCannon
 	ReloadDelay: 80
 	Range: 9920
-	MinRange: 1984
+	MinRange: 1985
 	Report: MORTAR1.WAV
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -486,6 +486,7 @@ DeviatorMissile:
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
 
+	MinRange: 1415
 DeviatorMissile_Artillery:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyFlameWeapon
@@ -519,6 +520,7 @@ DeviatorMissile_Artillery:
 	Warhead@OwnerChange: ChangeOwner
 		Range: 1250
 
+	MinRange: 2005
 Wraith_ToxinMissiles:
 	Inherits: DeviatorMissile_Artillery
 	Range: 8370
@@ -552,6 +554,7 @@ Wraith_ToxinMissiles:
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
 
+	MinRange: 1675
 contaminator_attack:
 	Inherits: ^SwordWeapon
 	ReloadDelay: 20
@@ -1097,10 +1100,12 @@ autogun_tank:
 		ImpactSounds: xplos.aud
 		ValidTargets: Ground, Water
 
+	MinRange: 1495
 autogun_tank_small:
 	Inherits: autogun_tank
 	Range: 6220
 
+	MinRange: 1245
 D2KAAMineExplosion:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
@@ -1159,6 +1164,7 @@ ordos_airmine:
 		Spread: 0c768
 		Damage: 10000
 
+	MinRange: 410
 ordos_lasertank:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile

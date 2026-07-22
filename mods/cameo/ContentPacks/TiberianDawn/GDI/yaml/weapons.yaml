@@ -1239,14 +1239,14 @@ OfficerMachineGun:
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 4
-	Range: 4888
+	Range: 5596
 	Report: mgun11.aud
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
@@ -1800,8 +1800,8 @@ TDIonCannonDamage:
 # base+upgrade rename law. M16/M16AP stay for their other users.
 td_gdi_minigunner_minigun:
 	Inherits: ^SmallArms
-	ReloadDelay: 45
-	Range: 4600
+	ReloadDelay: 50
+	Range: 5499
 	ValidTargets: Ground, Water
 	Burst: 4
 	BurstDelays: 3
@@ -1842,10 +1842,10 @@ td_gdi_shotgunner_shotgun:
 	Projectile: Bullet
 		Inaccuracy: 800
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1

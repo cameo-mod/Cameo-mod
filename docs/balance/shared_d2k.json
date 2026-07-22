@@ -18,8 +18,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -62,8 +64,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -99,8 +103,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -140,6 +146,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -174,6 +181,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -199,6 +207,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -224,6 +233,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -248,6 +258,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -276,6 +287,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -312,6 +324,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -348,6 +361,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -374,6 +388,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -385,6 +400,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -392,6 +408,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -400,6 +417,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -412,8 +430,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -442,6 +462,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3072",
       "reloaddelay": "20",
@@ -477,6 +498,7 @@
        }
       ],
       "weapon": "HMG_fremen",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -484,7 +506,8 @@
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.25,
+      "minrange": "975",
       "pricing": true,
       "range": "4864",
       "reloaddelay": "45",
@@ -510,6 +533,7 @@
        }
       ],
       "weapon": "Fremen_RPG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -524,8 +548,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -547,8 +573,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@PRIMARY",
@@ -579,6 +606,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -586,6 +614,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "20",
@@ -630,6 +659,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -640,8 +670,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "!ixian_upgrade_tungstenneedleguns",
       "slot": "Armament@GARRISONED",
@@ -672,6 +703,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -680,6 +712,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "20",
@@ -724,6 +757,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -741,10 +775,17 @@
      "v": "150"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#FirepowerMultiplier@light_inf.Modifier",
+     "trait": "FirepowerMultiplier@light_inf",
+     "v": 0.91
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
@@ -773,6 +814,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
@@ -815,6 +857,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -824,6 +867,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
@@ -866,6 +910,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -882,8 +927,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -926,6 +973,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -950,6 +998,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -978,6 +1027,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1007,6 +1057,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1036,6 +1087,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1065,6 +1117,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1084,6 +1137,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
@@ -1147,6 +1201,7 @@
        }
       ],
       "weapon": "D2K_155mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1164,8 +1219,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1180,7 +1237,8 @@
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",

@@ -14,8 +14,10 @@
      "v": "3600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -44,6 +46,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
@@ -102,6 +105,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -112,6 +116,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "3375",
       "reloaddelay": "6",
@@ -170,6 +175,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -187,10 +193,17 @@
      "v": "1000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
@@ -217,7 +230,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "minrange": "1308",
+      "design_weapon_class": 1.125,
+      "minrange": "1310",
       "pricing": true,
       "range": "6540",
       "reloaddelay": "16",
@@ -255,6 +269,7 @@
        }
       ],
       "weapon": "Hellfire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile"
@@ -262,7 +277,8 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "minrange": "1308",
+      "design_weapon_class": 1.125,
+      "minrange": "1310",
       "pricing": true,
       "range": "6540",
       "reloaddelay": "16",
@@ -300,6 +316,7 @@
        }
       ],
       "weapon": "HellfireCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile",
@@ -316,8 +333,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -349,6 +368,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "60",
@@ -370,6 +390,7 @@
        }
       ],
       "weapon": "RapierBombs",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -378,6 +399,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "60",
@@ -400,6 +422,7 @@
        }
       ],
       "weapon": "RapierBombsCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^CryoMissileProjectile"
@@ -410,6 +433,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
@@ -448,6 +472,7 @@
        }
       ],
       "weapon": "Aphid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -459,6 +484,7 @@
       "burst": "2",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "62",
@@ -496,6 +522,7 @@
        }
       ],
       "weapon": "AphidCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -513,10 +540,17 @@
      "v": "1300"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Bomber",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/aircraft.yaml#Health.HP",
@@ -559,6 +593,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -592,6 +627,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -628,6 +664,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -665,6 +702,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -702,6 +740,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -739,6 +778,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -776,6 +816,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -813,6 +854,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -854,6 +896,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -885,6 +928,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "11412",
       "reloaddelay": "14",
@@ -905,6 +949,7 @@
        }
       ],
       "weapon": "zsu_23",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -919,8 +964,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiAirDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -946,6 +993,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7685",
       "reloaddelay": "40",
@@ -982,6 +1030,7 @@
        }
       ],
       "weapon": "RATurretGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -997,8 +1046,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
@@ -1025,7 +1076,8 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "minrange": "2037",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2035",
       "pricing": true,
       "range": "10185",
       "reloaddelay": "80",
@@ -1077,6 +1129,7 @@
        }
       ],
       "weapon": "155mmBastion",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1086,7 +1139,8 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
-      "minrange": "2037",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2035",
       "pricing": true,
       "range": "10185",
       "reloaddelay": "80",
@@ -1138,6 +1192,7 @@
        }
       ],
       "weapon": "155mmBastionCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1155,8 +1210,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1188,8 +1245,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
@@ -1229,8 +1288,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1271,8 +1332,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1305,8 +1368,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1335,6 +1400,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
@@ -1356,6 +1422,7 @@
        }
       ],
       "weapon": "LightSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1363,6 +1430,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
@@ -1384,12 +1452,14 @@
        }
       ],
       "weapon": "LightSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "9153",
       "reloaddelay": "100",
@@ -1412,6 +1482,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1420,6 +1491,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "9153",
       "reloaddelay": "100",
@@ -1442,6 +1514,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1457,8 +1530,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "SniperInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -1490,8 +1565,9 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "5713",
+      "range": "6500",
       "reloaddelay": "48",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -1500,7 +1576,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -1510,7 +1586,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -1521,6 +1597,7 @@
        }
       ],
       "weapon": "RAVulcan",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1531,8 +1608,9 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "5713",
+      "range": "6500",
       "reloaddelay": "48",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -1541,7 +1619,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -1551,7 +1629,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -1562,6 +1640,7 @@
        }
       ],
       "weapon": "RAVulcan",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1574,17 +1653,24 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Valued.Cost",
-     "v": "400"
+     "v": "557"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 0.93
+    },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
-     "v": "20000"
+     "v": "19000"
     },
     "name": "Machine Gunner",
     "prerequisites": [
@@ -1601,7 +1687,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Mobile.Speed",
-     "v": "50"
+     "v": "49"
     }
    },
    "ra1_allies_mechanic": {
@@ -1609,6 +1695,7 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "10000",
@@ -1616,12 +1703,14 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1647,6 +1736,7 @@
        }
       ],
       "weapon": "Repair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1656,6 +1746,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1681,6 +1772,7 @@
        }
       ],
       "weapon": "Repair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1695,8 +1787,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Mechanic",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1727,6 +1821,7 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "10000",
@@ -1734,10 +1829,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -1763,6 +1860,7 @@
        }
       ],
       "weapon": "Heal",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1770,6 +1868,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -1795,6 +1894,7 @@
        }
       ],
       "weapon": "Heal",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1809,8 +1909,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Medic",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1839,6 +1941,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2560",
       "reloaddelay": "80",
@@ -1854,6 +1957,7 @@
        }
       ],
       "weapon": "SilencedPPK",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SnipeWeapon"
       ]
@@ -1868,10 +1972,12 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/infantry.yaml#Health.HP",
@@ -1901,6 +2007,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "7",
@@ -1921,6 +2028,7 @@
        }
       ],
       "weapon": "Colt45",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1930,6 +2038,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "7",
@@ -1950,6 +2059,7 @@
        }
       ],
       "weapon": "Colt45",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1957,6 +2067,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1967,11 +2078,13 @@
       ],
       "warheads": [],
       "weapon": "TanyaAttach",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1980,6 +2093,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1996,8 +2110,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2033,6 +2149,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2055,6 +2172,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2076,6 +2194,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2098,6 +2217,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2120,6 +2240,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2141,6 +2262,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2163,6 +2285,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2185,6 +2308,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2206,6 +2330,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2228,6 +2353,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2250,6 +2376,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2272,6 +2399,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2300,6 +2428,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2324,6 +2453,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2348,6 +2478,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2372,6 +2503,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2396,6 +2528,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2421,6 +2554,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2445,6 +2579,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2469,6 +2604,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2487,6 +2623,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -2541,6 +2678,7 @@
        }
       ],
       "weapon": "155mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2549,6 +2687,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "2670",
       "pricing": true,
       "range": "13350",
@@ -2602,6 +2741,7 @@
        }
       ],
       "weapon": "155mmCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2619,8 +2759,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -2654,6 +2796,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4746",
       "reloaddelay": "10",
@@ -2707,6 +2850,7 @@
        }
       ],
       "weapon": "HeavyAATankCannonAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2716,6 +2860,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7119",
       "reloaddelay": "10",
@@ -2766,6 +2911,7 @@
        }
       ],
       "weapon": "HeavyAATankCannonAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2783,10 +2929,17 @@
      "v": "1250"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@ra1_allies_alliedheavyaatank.Modifier",
+     "trait": "FirepowerMultiplier@ra1_allies_alliedheavyaatank",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2818,6 +2971,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "4720",
       "reloaddelay": "37",
@@ -2913,6 +3067,7 @@
        }
       ],
       "weapon": "25mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2932,10 +3087,17 @@
      "v": "500"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@HighExplosionShell.Modifier",
+     "trait": "FirepowerMultiplier@HighExplosionShell",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",
@@ -2967,6 +3129,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5159",
       "reloaddelay": "47",
@@ -2987,6 +3150,7 @@
        }
       ],
       "weapon": "90mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -3001,8 +3165,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -3046,8 +3212,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3091,8 +3259,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3125,6 +3295,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6819",
       "reloaddelay": "60",
@@ -3156,6 +3327,7 @@
        }
       ],
       "weapon": "AlliedTankDestroyerCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^TankDestroyerCannon"
@@ -3171,8 +3343,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -3207,6 +3381,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5915",
       "reloaddelay": "60",
@@ -3238,6 +3413,7 @@
        }
       ],
       "weapon": "TigerCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -3253,8 +3429,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -3289,6 +3467,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3359,6 +3538,7 @@
        }
       ],
       "weapon": "ChronoTusk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3370,6 +3550,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3440,6 +3621,7 @@
        }
       ],
       "weapon": "ChronoTusk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3451,6 +3633,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3518,6 +3701,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3530,6 +3714,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6102",
       "reloaddelay": "54",
@@ -3597,6 +3782,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3620,8 +3806,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "EpicVehicle",
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
@@ -3662,8 +3850,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3697,6 +3887,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "10000",
@@ -3704,6 +3895,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "dummytargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3724,8 +3916,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3760,6 +3954,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "10000",
@@ -3768,6 +3963,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RadarJammer",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3788,8 +3984,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3825,6 +4023,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
@@ -3884,6 +4083,7 @@
        }
       ],
       "weapon": "APTusk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -3894,6 +4094,7 @@
      {
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5038",
       "reloaddelay": "51",
@@ -3951,6 +4152,7 @@
        }
       ],
       "weapon": "APTuskCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -3969,8 +4171,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "SupportVehicle",
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
@@ -4007,6 +4211,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4359",
       "reloaddelay": "10",
@@ -4027,6 +4232,7 @@
        }
       ],
       "weapon": "M60mg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4041,8 +4247,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4075,6 +4283,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4188,6 +4397,7 @@
        }
       ],
       "weapon": "ReconRangerRecoillessGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4201,6 +4411,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "4925",
       "reloaddelay": "64",
@@ -4308,6 +4519,7 @@
        }
       ],
       "weapon": "CryoReconRangerRecoillessGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4330,8 +4542,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -4365,6 +4579,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -4396,6 +4611,7 @@
        }
       ],
       "weapon": "SheridanCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon"
@@ -4403,6 +4619,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -4435,6 +4652,7 @@
        }
       ],
       "weapon": "SheridanMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -4442,6 +4660,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "64",
@@ -4474,6 +4693,7 @@
        }
       ],
       "weapon": "SheridanMissilesCryo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile",
@@ -4484,6 +4704,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5023",
       "reloaddelay": "58",
@@ -4515,6 +4736,7 @@
        }
       ],
       "weapon": "SheridanVulcan",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4530,10 +4752,17 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/vehicles.yaml#Health.HP",

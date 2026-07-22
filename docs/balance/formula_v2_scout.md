@@ -1,230 +1,55 @@
-# Formula v2 — SCOUT INFANTRY class (maintainer proposal 2026-07-18)
+# Scout infantry rebalance proposal (corrected for uniqueness)
 
-**Proposed anchor (maintainer):** 20000 HP / 50 Speed / 5.0 Range /
-4000 Damage / 50 Reload → DPS 80, Cost 100. Direction: replace the
-^ScoutInfantryTemplate 50% damage-reduction knob with 2× RAW health
-(the §5b "bake" — exact equivalence for damage taken; self-heal/repair
-proportions shift slightly).
+Anchor spec: HP=20000, Speed=60, Range=5000, eff-DPS=60, Cost=100
 
-**Assessment (simulated against the real 27-member class with the
-2×-health bake applied):**
+| actor | faction | HP | spd | rng | cost | dmg | burst | rl | FP% | wc | eff DPS | formula price | Δ | note |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `naxis_naxiriflesoldier` | naxis | 29000 | 52 | 5495 | 100 | 6000 | 1 | 75 | 70 | 0.75 | 42.0 | 100 | +0 | anchor-ish baseline |
+| `forgotten_mutantsoldier` | forgotten | 40000 | 59 | 5000 | 250 | 8000 | 1 | 50 | 100 | 0.75 | 120.0 | 247 | -3 | verifier |
+| `asianalliance_asianmilitia` | asianalliance | 24000 | 57 | 4570 | 110 | 6000 | 1 | 50 | 70 | 0.75 | 63.0 | 106 | -4 |  |
+| `ixian_lightinfantry` | ixian | 35000 | 55 | 4530 | 150 | 4000 | 1 | 20 | 54 | 0.75 | 81.0 | 154 | +4 |  |
+| `ordos_lightinfantry` | ordos | 37000 | 51 | 4500 | 150 | 4000 | 1 | 20 | 55 | 0.75 | 82.5 | 153 | +3 |  |
+| `light_inf` | d2k_shared | 36000 | 54 | 4510 | 150 | 4000 | 1 | 20 | 53 | 0.75 | 79.5 | 153 | +3 |  |
+| `latinsyndicate_latinmilitia` | latinsyndicate | 25000 | 56 | 4520 | 160 | 2000 | 3 | 22 | 60 | 0.75 | 122.7 | 165 | +5 |  |
+| `naxis_naxiriflerecruit` | naxis | 20000 | 53 | 5485 | 75 | 8000 | 1 | 100 | 81 | 0.75 | 48.6 | 87 | +12 |  |
+| `ra1_soviets_ak47conscript` | ra1_soviets | 44000 | 71 | 4505 | 200 | 2000 | 3 | 11 | 20 | 0.875 | 95.5 | 241 | +41 |  |
+| `ra2_allies_gi` | ra2_allies | 50000 | 48 | 4515 | 200 | 2000 | 3 | 15 | 33 | 0.875 | 115.5 | 229 | +29 |  |
+| `ra2_soviets_conscript` | ra2_soviets | 26000 | 58 | 4525 | 100 | 2000 | 1 | 18 | 63 | 0.75 | 52.5 | 101 | +1 |  |
+| `tkm_rifleman` | tkm | 32000 | 60 | 5500 | 120 | 6000 | 1 | 75 | 73 | 0.75 | 43.8 | 120 | -0 |  |
+| `tkm_trooper` | tkm | 33000 | 61 | 5490 | 220 | 2000 | 5 | 31 | 40 | 0.875 | 112.9 | 225 | +5 |  |
+| `td_gdi_minigunner` | td_gdi | 31000 | 63 | 4750 | 100 | 2000 | 4 | 50 | 30 | 0.75 | 36.0 | 102 | +2 |  |
+| `td_nod_minigunner` | td_nod | 30000 | 66 | 4535 | 100 | 2000 | 4 | 50 | 27 | 0.75 | 32.4 | 96 | -4 |  |
+| `ra1_allies_rifleinfantry` | ra1_allies | 28000 | 50 | 5250 | 100 | 2000 | 3 | 50 | 50 | 0.75 | 45.0 | 97 | -3 |  |
+| `ra1_soviets_rifleinfantry` | ra1_soviets | 34000 | 49 | 4600 | 100 | 2000 | 3 | 50 | 55 | 0.75 | 49.5 | 106 | +6 |  |
 
-| question | answer |
-|---|---|
-| Anchor structure sound? | YES — normalized class form works; O0=P0=Q0 symmetry like the Tiger is mathematically impossible at cost 100 with playable stats (each O-term would force speed ≈ 12), and it is NOT needed: the ratios do the work. |
-| Speed 50 or 60? | **60 recommended** — every live scout runs 50–110 (median ~60); 50 sits below the whole population and skews all speed ratios upward. Median class deviation improves 215% → 170% just from this. |
-| 2×-health bake? | YES — right direction, kills a category-3 knob, makes HP honest. Sequence it BEFORE anchoring. |
-| Are the remaining deltas real? | Mostly NOT yet — two measurement gaps dominate (below). Median deviation after fixing the first: 67%. |
+## Uniqueness check
 
-**Measurement gaps to close before the class can validate:**
-1. Garrisoned armament variants double-counted DPS (fixed in the
-   simulation by skipping `Name: garrisoned` arms; the extractor gets a
-   pricing-armament flag).
-2. WeaponClass judgments are unseeded — raw burst math overstates
-   sustained DPS (e.g. MutAPRifle: 4000 dmg @ reload 8 → raw DPS 500;
-   the legacy sheet's H column existed exactly to damp this). The
-   per-weapon WeaponClass column must be seeded/judged before deltas
-   are law.
+- All uniqueness checks passed (HP, Speed, Range, effective DPS).
 
-**Validation snapshot (anchor @ speed 60, 2×HP bake, garrisoned excluded):**
+## Out-of-scope units (maintainer decisions applied)
 
-| unit | 2×HP | spd | rng | dps | cost | v2 price | Δ |
-|---|---|---|---|---|---|---|---|
-| forgotten_mutant | 36000 | 65 | 3132 | 200 | 120 | 197 | +64% |
-| forgotten_mutantsoldier | 60000 | 75 | 5146 | 500 | 250 | 1072 | +329% |
-| naxis_coneheadsknights (melee) | 40000 | 90 | 1555 | 889 | 1000 | 549 | −45% |
-| ra1_soviets_ak47conscript | 44000 | 71 | 4420 | 400 | 200 | 578 | +189% |
-| ra2_allies_gi | 50000 | 50 | 4750 | 240 | 200 | 335 | +67% |
-| tkm_trooper | 32000 | 60 | 5594 | 286 | 200 | 380 | +90% |
-| zerg_defiler | 160000 | 50 | 9000 | 171 | 1400 | 1079 | −23% |
-| zerg_spithid | 80000 | 110 | 3855 | 133 | 300 | 454 | +51% |
+- `forgotten_mutant` → reclassified to closecombat infantry (was range 3132).
+- `schwarzermond_lunarsoldier` → already moved to special forces; excluded from this scout pass.
+- `alien.nax` → civilian variant spawned from asteroids/dead aircraft; set Cost to **1000** (stats unchanged).
+- Spies, civilian Naxis variants, casters, and units priced outside the scout envelope remain for a future pass.
+- Raw Damage values are kept in 2000-step increments; effective-DPS uniqueness is enforced via per-actor FirepowerMultiplier.
 
-**Proposed execution order (on maintainer GO):**
-1. Bake: ^ScoutInfantryTemplate loses DamageMultiplier@ScoutInfantryBuff;
-   all 27 members get HP×2 through the pipeline (ledger → apply).
-2. Seed WeaponClass for the class's ~20 weapons (maintainer judgments,
-   legacy H column as the starting point).
-3. Anchor: `fit_class.py --class scout --spec 20000,60,5000,4000,50,100`
-   → validation table → sign-off → workbook prices scouts with it.
-4. Then per-unit deltas are real and the maintainer approves price/stat
-   corrections row by row.
+## Required YAML edits (per unit)
 
-Anchor registry: `scout` will be written by fit_class on step 3;
-until sign-off the class keeps the global Tiger formula.
-
----
-
-## CONVERSION LOG (the learning record — one entry per converted unit)
-
-### 1. japan_imperialscoutsman — THE LIVING BASELINE (2026-07-18, boot-verified)
-
-- Chosen by the maintainer as closest to spec: was 11000 HP / 55 spd /
-  cost 100 / CHGuardRifle (2000 dmg, 55 rl, 5547 rng).
-- Set to the exact baseline (speed corrected 50→60 by maintainer,
-  2026-07-18): **20000 HP / 60 Speed / 5.0 Range /
-  4000 Damage / 50 Reload / Cost 100** → O = P = Q = 100.000000 by the
-  per-stat-normalized construction (`formula.class_baseline_price`).
-- **Rule confirmed general**: the maintainer's O=P=Q=cost law holds for
-  ANY class baseline under this construction — the Tiger's constants
-  are exactly this construction with (100000, 100, 5000, 200, 800).
-
-Lessons captured for the next conversions:
-1. **Shared-weapon hazard**: CHGuardRifle serves civilians/generals
-   rules — the baseline got a DEDICATED weapon
-   (`japan_imperialscoutsman_rifle`). Check weapon sharing FIRST, every
-   time (grep `Weapon: <name>` repo-wide).
-2. **Knob neutralization is per-unit during the one-by-one phase**: the
-   template keeps ScoutInfantryBuff (50% dmg reduction + 110%
-   firepower) for unconverted units; converted units override BOTH to
-   100 in their own block. When all 27 are converted, delete the
-   template knobs + all overrides in one sweep.
-3. **Scale self-heal with HP**: ChangesHealth Step went 11 → 20
-   (keeps heal-rate proportional under the 2x-health bake).
-4. **LAW (maintainer): renaming a base weapon ALWAYS renames its
-   upgraded variant with it** — the scoutsman now pairs
-   japan_imperialscoutsman_rifle + japan_imperialscoutsman_rifle_waveforce
-   (the orphaned CHGuardRifleWaveforce was retired). The upgrade
-   variant's STATS still ride the upgrade pricing pass; only the
-   naming/pairing moves with the base.
-5. Sight 8000 is inherited and NOT part of the anchor spec — left
-   alone; decide later whether sight joins the formula.
-
-Next unit: maintainer picks (suggest ra2_soviets_conscript — closest
-remaining to baseline ratios), each conversion appends a log entry here.
-## CLASS REBALANCE PROPOSAL v1 (2026-07-18 — REVIEW PENDING, nothing applied)
-
-Anchor: 20000 HP / 60 Spd / 5000 rng / 4000 dmg / 50 rl, SmallArms-only
-(WC 0.75, eff DPS 60) = Cost 100 with O=P=Q=100. Laws applied: bands
-(<=150 SA/0.75; <=200 SA+CG/0.875; ceiling 200 = RA2 GI), cost 10s,
-HP 1000s (self-heal HP/1000), damage 2000s, % warhead 1% per 2000,
-burst kept as flavor with a unit-named FirepowerMultiplier so the
-effective DPS hits the formula target (the maintainer's 33% example).
-
-| unit | HP→2x | spd | rng→prop | cost | band | dmg step | burst | rl | FP-mult | eff DPS target | note |
-|---|---|---|---|---|---|---|---|---|---|---|---|
-| `alien.nax` | 15000 | 40 | | 150 | | | | | | | **special civilian variant — manual** |
-| `asianalliance_asianmilitia` | 12000→24000 | 52 | 4567→4500 | 100 | SA/0.75 | 6000 | 1 | 50 | 71% | 64 |  |
-| `conehead2.nax` | 40000 | 90 | | 500 | | | | | | | **civilian/special (500) — not a buildable scout roster unit** |
-| `forgotten_mutant` | 18000→36000 | 65 | 3132→3250 | 120 | SA/0.75 | 2000 | 2 | 18 | 38% | 57 | burst kept as flavor |
-| `forgotten_mutantsoldier` | 30000 | 75 | | 250 | | | | | | | **250 > ceiling — cap 200 (band 2) or reclassify** |
-| `futuretech_spyfutu` | 5000 | 60 | | 1000 | | | | | | | **SPY — utility pricing** |
-| `ixian_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/0.75 | 4000 | 1 | 20 | 54% | 81 |  |
-| `latinsyndicate_latinmilitia` | 13000→26000 | 52 | 4375→4500 | 130 | SA/0.75 | 2000 | 3 | 22 | 60% | 90 | burst kept as flavor |
-| `light_inf` | 18000→36000 | 52 | 4448→4500 | 150 | SA/0.75 | 4000 | 1 | 20 | 54% | 81 |  |
-| `naxis_coneheadsknights` | 20000 | 90 | | 1000 | | | | | | | **melee elite (1000) — melee/heavy class** |
-| `naxis_naxiriflerecruit` | 10000→20000 | 45 | 5501→5500 | 75 | SA/0.75 | 8000 | 1 | 100 | 81% | 48 |  |
-| `naxis_naxiriflesoldier` | 15000→30000 | 50 | 5621→5500 | 100 | SA/0.75 | 6000 | 1 | 75 | 70% | 42 |  |
-| `naxis_slaveoverseer` | 20000 | 90 | | 500 | | | | | | | **economy/support — not a rifle scout** |
-| `ordos_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/0.75 | 4000 | 1 | 20 | 54% | 81 |  |
-| `ra1_allies_raspy` | 5000 | 60 | | 500 | | | | | | | **SPY — utility pricing** |
-| `ra1_soviets_ak47conscript` | 22000→44000 | 71 | 4420→4500 | 200 | SA+CG/0.875 | 2000 | 3 | 11 | 20% | 72 | burst kept as flavor |
-| `ra2_allies_gi` | 25000→50000 | 50 | 3854→3750 | 200 | SA+CG/0.875 | 2000 | 3 | 15 | 39% | 108 | burst kept as flavor |
-| `ra2_allies_ra2spy` | 5000 | 60 | | 500 | | | | | | | **SPY — utility pricing** |
-| `ra2_soviets_conscript` | 13000→26000 | 57 | 4434→4500 | 100 | SA/0.75 | 2000 | 1 | 18 | 63% | 53 |  |
-| `schwarzermond_lunarsoldier` | 12000→24000 | 60 | 4097→4000 | 120 | SA/0.75 | 6000 | 1 | 50 | 93% | 84 |  |
-| `tkm_marine` | 20000→40000 | 60 | 5385→5500 | 300 | SA+CG/0.875 | 2000 | 5 | 16 | 32% | 139 | burst kept as flavor |
-| `tkm_rifleman` | 16000→32000 | 60 | 5753→5750 | 120 | SA/0.75 | 6000 | 1 | 75 | 70% | 42 |  |
-| `tkm_trooper` | 16000→32000 | 60 | 5594→5500 | 200 | SA+CG/0.875 | 2000 | 5 | 31 | 40% | 100 | burst kept as flavor |
-| `undead.nax` | 15000 | 50 | | 100 | | | | | | | **special civilian variant — manual** |
-| `yuri_clone` | 5000 | 50 | | 500 | | | | | | | **clone/utility (500) — manual** |
-| `zerg_defiler` | 80000 | 50 | | 1400 | | | | | | | **caster-tank (1400) — not a scout** |
-| `zerg_spithid` | 40000 | 110 | | 300 | | | | | | | **300 > ceiling — heavy class or price cut** |
-
-_15 units fully solved; reclassify/manual rows need a maintainer call first._
-
-### 2–5. The classic rifles (2026-07-19) — four unique characters at the original cost 100
-
-LAW recorded: original C&C factions keep their original prices for
-memorability (custom factions may deviate). LAW recorded: every unit
-stays within ±10% of its class baseline range (scouts 4500–5500);
-lower edge = cheapest, upper edge = most expensive in the class.
-
-| unit | HP | Spd | Rng | weapon family (paired per the rename law) | burst | FP-mult | price |
-|---|---|---|---|---|---|---|---|
-| td_gdi_minigunner | 32000 | 60 | 4750 | td_gdi_minigunner_minigun (+_ap) | 4 | 32% | 100.6 |
-| td_nod_minigunner | 30000 | 65 | 4500 | td_nod_minigunner_minigun (+_laser) | 4 | 28% | 100.0 |
-| ra1_allies_rifleinfantry | 28000 | 60 | 5250 | ra1_allies_rifleinfantry_carbine (+_cryo) | 3 | 50% | 100.5 |
-| ra1_soviets_rifleinfantry | 34000 | 55 | 4600 | ra1_soviets_rifleinfantry_carbine (+_incendiary) | 3 | 54% | 100.0 |
-
-Characters: GDI disciplined standard; Nod fast and light with the
-shortest reach (low band edge); Allies accurate with the longest scout
-rifle (high band edge, most expensive feel); Soviets tankiest and
-slowest. All four had the hidden ScoutInfantryBuff knobs (50% damage
-taken / 110% firepower) — neutralized per-unit, 2x-health bake applied.
-
-Lessons added:
-6. Detect the SELF-HEAL trait by exact tag (`ChangesHealth@SelfHealing`)
-   — resolved actors carry a dozen conditional ChangesHealth traits
-   (propaganda auras, hospital, poison); overriding the first match
-   corrupts an aura (caught in-session before commit).
-7. Old shared weapons (M16, M1Carbine) STAY for their other users;
-   only this unit's armaments repoint — the upgrade weapons of OTHER
-   users (M16AP/M16Laser/Cryo/Incendiary) also stay untouched.
-
-### Corrections + the VERIFICATION UNIT (2026-07-19, second pass)
-
-Maintainer rulings applied:
-- **Rifles out-range minigunners; minigunners out-run rifles**:
-  GDI 4600/spd 63, Nod 4500/spd 66 (miniguns) vs Allies 5400/spd 57,
-  Soviets 5100/spd 54 (rifles). FP-mults recomputed: 30/27/51/50.
-- **Infantry speeds are FREE values** (the 5-step law is vehicles-only,
-  from turn rate = speed/5); infantry turn instantly.
-- **Stat variance bands (provisional)**: Range ±10% (hard), Speed ±20%,
-  HP/damage/reload free (formula-constrained). Maintainer will tune.
-- **Price envelope: 50%–250% of the class baseline** for every
-  template (supersedes the earlier scout ceiling 200; RA2 GI stays the
-  priciest STANDARD scout, the verifier sits at the envelope top).
-- **THE VERIFICATION-UNIT LAW**: every class carries one unit at
-  exactly 2x HP + 2x damage, same range/speed, 250% cost — proving
-  O=1.5x, P=2.0x, Q=4.0x, price=2.5x. Scout verifier:
-  `forgotten_mutantsoldier` (40000 HP / 60 spd / 5000 rng /
-  8000 dmg @ 50 rl SmallArms / cost 250) — verified EXACT: price
-  250.0000. (Un-flagged from the reclassify list; its speed 75->60 and
-  weapon rework are the verification duty.)
-
-Lesson 8: inserting stat overrides at the top of a block is not enough
-— if the block already defines the trait later, the later value wins.
-Edit the existing lines (the verifier's Speed-75 trio initially
-shadowed the verification values; caught by the identity check).
-## CLASS REBALANCE PROPOSAL v2 (2026-07-19 — supersedes v1; REVIEW PENDING)
-
-All current laws applied: anchor 20000/60/5000/eff-DPS-60 @ 100;
-range clamped 4500–5500 in 10-steps; speed shown vs the ±20% band
-(48–72), infantry speeds free-valued; price envelope 50–250;
-damage 2000-steps + FP-mult compensation (burst = flavor); bands
-<=150 SA-only .75 else SA+CG .875; EVERY converted unit also loses
-air targeting + gets ground-only autotarget.
-
-| unit | HP→2x | spd (band 48–72) | rng→prop | cost | band | dmg | burst | rl | FP-mult | note |
-|---|---|---|---|---|---|---|---|---|---|---|
-| `alien.nax` | 15000 | 40 | | 150 | | | | | | **civilian variant — manual** |
-| `asianalliance_asianmilitia` | 12000→24000 | 52 | 4567→4570 | 100 | SA/.75 | 6000 | 1 | 50 | 70% | |
-| `conehead2.nax` | 40000 | 90 | | 500 | | | | | | **civilian/special — manual** |
-| `forgotten_mutant` | 18000→36000 | 65 | 3132→4500 | 120 | SA/.75 | 2000 | 2 | 18 | 27% | |
-| `forgotten_mutantsoldier` | — | — | — | — | — | — | — | — | — | ✅ VERIFIER 2x/2x (250.0000 exact) |
-| `futuretech_spyfutu` | 5000 | 60 | | 1000 | | | | | | **SPY — utility pricing** |
-| `ixian_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
-| `latinsyndicate_latinmilitia` | 13000→26000 | 52 | 4375→4500 | 130 | SA/.75 | 2000 | 3 | 22 | 60% | |
-| `light_inf` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
-| `naxis_coneheadsknights` | 20000 | 90 | | 1000 | | | | | | **melee elite (1000) — melee/heavy class** |
-| `naxis_naxiriflerecruit` | 10000→20000 | 45 ⚠band | 5501→5500 | 75 | SA/.75 | 8000 | 1 | 100 | 81% | |
-| `naxis_naxiriflesoldier` | 15000→30000 | 50 | 5621→5500 | 100 | SA/.75 | 6000 | 1 | 75 | 70% | |
-| `naxis_slaveoverseer` | 20000 | 90 | | 500 | | | | | | **economy/support — not a rifle scout** |
-| `ordos_lightinfantry` | 18000→36000 | 52 | 4448→4500 | 150 | SA/.75 | 4000 | 1 | 20 | 54% | |
-| `ra1_allies_raspy` | 5000 | 60 | | 500 | | | | | | **SPY — utility pricing** |
-| `ra1_soviets_ak47conscript` | 22000→44000 | 71 | 4420→4500 | 200 | SA+CG/.875 | 2000 | 3 | 11 | 20% | |
-| `ra2_allies_gi` | 25000→50000 | 50 | 3854→4500 | 200 | SA+CG/.875 | 2000 | 3 | 15 | 33% | |
-| `ra2_allies_ra2spy` | 5000 | 60 | | 500 | | | | | | **SPY — utility pricing** |
-| `ra2_soviets_conscript` | 13000→26000 | 57 | 4434→4500 | 100 | SA/.75 | 2000 | 1 | 18 | 63% | |
-| `schwarzermond_lunarsoldier` | 12000→24000 | 60 | 4097→4500 | 120 | SA/.75 | 6000 | 1 | 50 | 83% | |
-| `tkm_marine` | 20000 | 60 | | 300 | | | | | | **cost 300 > envelope 250 — heavy-infantry class?** |
-| `tkm_rifleman` | 16000→32000 | 60 | 5753→5500 | 120 | SA/.75 | 6000 | 1 | 75 | 73% | |
-| `tkm_trooper` | 16000→32000 | 60 | 5594→5500 | 200 | SA+CG/.875 | 2000 | 5 | 31 | 40% | |
-| `undead.nax` | 15000 | 50 | | 100 | | | | | | **civilian variant — manual** |
-| `yuri_clone` | 5000 | 50 | | 500 | | | | | | **clone/utility — manual** |
-| `zerg_defiler` | 80000 | 50 | | 1400 | | | | | | **caster-tank (1400) — not a scout** |
-| `zerg_spithid` | 40000 | 110 | | 300 | | | | | | **cost 300 > envelope 250 AND speed 110 > band 72 — reclassify** |
-
-_Reclassify/manual rows need maintainer calls; every solved row also_
-_gets: dedicated weapon family (pair law), no-air, ground autotarget,_
-_knob neutralization, self-heal = HP/1000._
+- `naxis_naxiriflesoldier`: HP 29000, Speed 52, Range 5495, weapon Damage 6000, ReloadDelay 75, Burst 1, FirepowerMultiplier@NAXISNAXIRIFLESOLDIER 70
+- `forgotten_mutantsoldier`: HP 40000, Speed 59, Range 5000, weapon Damage 8000, ReloadDelay 50, Burst 1, FirepowerMultiplier@FORGOTTENMUTANTSOLDIER 100
+- `asianalliance_asianmilitia`: HP 24000, Speed 57, Range 4570, weapon Damage 6000, ReloadDelay 50, Burst 1, FirepowerMultiplier@ASIANALLIANCEASIANMILITIA 70
+- `ixian_lightinfantry`: HP 35000, Speed 55, Range 4530, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@IXIANLIGHTINFANTRY 54
+- `ordos_lightinfantry`: HP 37000, Speed 51, Range 4500, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@ORDOSLIGHTINFANTRY 55
+- `light_inf`: HP 36000, Speed 54, Range 4510, weapon Damage 4000, ReloadDelay 20, Burst 1, FirepowerMultiplier@LIGHTINF 53
+- `latinsyndicate_latinmilitia`: HP 25000, Speed 56, Range 4520, weapon Damage 2000, ReloadDelay 22, Burst 3, FirepowerMultiplier@LATINSYNDICATELATINMILITIA 60
+- `naxis_naxiriflerecruit`: HP 20000, Speed 53, Range 5485, weapon Damage 8000, ReloadDelay 100, Burst 1, FirepowerMultiplier@NAXISNAXIRIFLERECRUIT 81, formula price delta +12 (informational; cost pinned at 75)
+- `ra1_soviets_ak47conscript`: HP 44000, Speed 71, Range 4505, weapon Damage 2000, ReloadDelay 11, Burst 3, FirepowerMultiplier@RA1SOVIETSAK47CONSCRIPT 20, formula price delta +41 (informational; cost pinned at 200)
+- `ra2_allies_gi`: HP 50000, Speed 48, Range 4515, weapon Damage 2000, ReloadDelay 15, Burst 3, FirepowerMultiplier@RA2ALLIESGI 33, formula price delta +29 (informational; cost pinned at 200)
+- `ra2_soviets_conscript`: HP 26000, Speed 58, Range 4525, weapon Damage 2000, ReloadDelay 18, Burst 1, FirepowerMultiplier@RA2SOVIETSCONSCRIPT 63
+- `tkm_rifleman`: HP 32000, Speed 60, Range 5500, weapon Damage 6000, ReloadDelay 75, Burst 1, FirepowerMultiplier@TKMRIFLEMAN 73
+- `tkm_trooper`: HP 33000, Speed 61, Range 5490, weapon Damage 2000, ReloadDelay 31, Burst 5, FirepowerMultiplier@TKMTROOPER 40
+- `td_gdi_minigunner`: HP 31000, Speed 63, Range 4750, weapon Damage 2000, ReloadDelay 50, Burst 4, FirepowerMultiplier@TDGDIMINIGUNNER 30
+- `td_nod_minigunner`: HP 30000, Speed 66, Range 4535, weapon Damage 2000, ReloadDelay 50, Burst 4, FirepowerMultiplier@TDNODMINIGUNNER 27
+- `ra1_allies_rifleinfantry`: HP 28000, Speed 50, Range 5250, weapon Damage 2000, ReloadDelay 50, Burst 3, FirepowerMultiplier@RA1ALLIESRIFLEINFANTRY 50
+- `ra1_soviets_rifleinfantry`: HP 34000, Speed 49, Range 4600, weapon Damage 2000, ReloadDelay 50, Burst 3, FirepowerMultiplier@RA1SOVIETSRIFLEINFANTRY 55, formula price delta +6 (informational; cost pinned at 100)

@@ -14,7 +14,7 @@ terran_marine:
 	Tooltip:
 		Name: Marine
 	Valued:
-		Cost: 200
+		Cost: 689
 	Power:
 		Amount: -10
 	Buildable:
@@ -22,9 +22,9 @@ terran_marine:
 		Queue: Infantry, RAInfantry
 		Description: actor_scmarine.description
 	Mobile:
-		Speed: 60
+		Speed: 61
 	Health:
-		HP: 40000
+		HP: 41000
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament@PRIMARY:
@@ -35,7 +35,7 @@ terran_marine:
 		Weapon: MarineMG
 		MuzzleSequence: muzzle
 	FirepowerMultiplier@TripleShot:
-		Modifier: 33
+		Modifier: 31
 	RangeMultiplier@Garrisoned:
 		Modifier: 125
 	GrantCondition@battlefortresspassenger:
@@ -142,7 +142,7 @@ terran_madcap:
 	Tooltip:
 		Name: Madcap
 	Valued:
-		Cost: 300
+		Cost: 1003
 	Power:
 		Amount: -15
 	Buildable:
@@ -179,6 +179,8 @@ terran_madcap:
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
 
+	FirepowerMultiplier:
+		Modifier: 108
 terran_firebat:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -374,7 +376,7 @@ terran_ghost:
 	Tooltip:
 		Name: Ghost
 	Valued:
-		Cost: 700
+		Cost: 1176
 	Power:
 		Amount: -35
 	Buildable:
@@ -384,7 +386,7 @@ terran_ghost:
 	Mobile:
 		Speed: 75
 	Health:
-		HP: 45000
+		HP: 44000
 	ChangesHealth@SelfHealing:
 		Step: 45
 	Armament@lockdown:
@@ -430,6 +432,8 @@ terran_ghost:
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
 
+	FirepowerMultiplier:
+		Modifier: 103
 terran_specter:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -446,7 +450,7 @@ terran_specter:
 	Tooltip:
 		Name: Specter
 	Valued:
-		Cost: 900
+		Cost: 1744
 	Power:
 		Amount: -45
 	Buildable:
@@ -502,6 +506,8 @@ terran_specter:
 	ActorStatValues:
 		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
 
+	FirepowerMultiplier:
+		Modifier: 106
 terran_medic:
 	Inherits: ^SCTINFANTRY
 	Inherits@Template: ^MedicTemplate

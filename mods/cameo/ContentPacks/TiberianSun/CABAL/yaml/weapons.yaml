@@ -419,12 +419,12 @@ TSDevoutChainguns:
 CabalEliminatorGatling:
 	Inherits: ^Chaingun
 	Report: chaingn1.aud
-	ReloadDelay: 32
-	Range: 6167
+	ReloadDelay: 5
+	Range: 5857
 	ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 32000
+		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16

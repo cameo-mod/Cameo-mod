@@ -23,7 +23,7 @@ ra1_soviets_ak47conscript_rifle:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 11
-	Range: 4500
+	Range: 4822
 	Burst: 3
 	BurstDelays: 2
 	SoundVolume: 0.5
@@ -557,7 +557,7 @@ SiegeMortar:
 	Inherits: ^LightFlameWeapon
 	ReloadDelay: 88
 	Range: 10830
-	MinRange: 2166
+	MinRange: 2165
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1055,7 +1055,7 @@ v1rockets:
 	Burst: 4
 	BurstDelays: 5
 	Range: 9595
-	MinRange: 1919
+	MinRange: 1920
 	Report: v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
@@ -1086,7 +1086,7 @@ v1rocketsThermobaric:
 	Burst: 4
 	BurstDelays: 5
 	Range: 9595
-	MinRange: 1919
+	MinRange: 1920
 	Report: v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
@@ -1125,7 +1125,7 @@ GradRockets:
 	Burst: 8
 	BurstDelays: 5
 	Range: 13820
-	MinRange: 2764
+	MinRange: 2765
 	Report: v1rocket.wav
 	Projectile: Bullet
 		Blockable: false
@@ -1941,7 +1941,7 @@ ArmoredYakChainGun:
 	ReloadDelay: 148
 	Burst: 10
 	Range: 6460
-	MinRange: 1292
+	MinRange: 1290
 
 IncendiaryYakChainGun:
 	Inherits: ^Chaingun
@@ -1975,7 +1975,7 @@ IncendiaryArmoredYakChainGun:
 	ReloadDelay: 148
 	Burst: 10
 	Range: 6460
-	MinRange: 1292
+	MinRange: 1290
 
 YakTeslaGun:
 	Inherits: ^LightMissile
@@ -1983,7 +1983,6 @@ YakTeslaGun:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 100
 	Range: 7000
-	MinRange: 1400
 	Burst: 8
 	BurstDelays: 3
 	Report: shktrop1.aud
@@ -2019,6 +2018,7 @@ YakTeslaGun:
 		Explosions: ra2_tesla_impact
 		ExplosionPalette: ra2effect
 
+	MinRange: 1400
 YakTeslaGunArc:
 	Inherits: YakTeslaGun
 	Warhead@TeslaArc: FireShrapnel
@@ -2397,7 +2397,7 @@ NuclearMaverick:
 	Burst: 2
 	BurstDelays: 4
 	Range: 7890
-	MinRange: 1578
+	MinRange: 1580
 	Report: missile7.aud
 	Projectile: Missile
 		Speed: 750
@@ -2438,7 +2438,7 @@ ThermobaricNuclearMaverick:
 	Burst: 2
 	BurstDelays: 4
 	Range: 7890
-	MinRange: 1578
+	MinRange: 1580
 	Report: missile7.aud
 	Projectile: Missile
 		Speed: 750
@@ -3575,7 +3575,7 @@ VolkovMagneticWeaponNuclearShells:
 	Inherits: VolkovMagneticWeapon
 	ReloadDelay: 40
 	Burst: 1
-	MinRange: 1000
+	MinRange: 1080
 	Projectile: Bullet
 		Speed: 333
 		ContrailStartColor: FFCC88FF
@@ -3793,7 +3793,7 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 	Inherits: VolkovMagneticWeapon
 	ReloadDelay: 40
 	Burst: 1
-	MinRange: 1000
+	MinRange: 1080
 	Projectile: Bullet
 		Speed: 333
 		ContrailStartColor: FF4488AA
@@ -4099,8 +4099,8 @@ MADTankDetonate:
 # rifle infantry — burst 3, heavier thump, close range. Incendiary pair.
 ra1_soviets_rifleinfantry_carbine:
 	Inherits: ^SmallArms
-	ReloadDelay: 55
-	Range: 5100
+	ReloadDelay: 50
+	Range: 4668
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 5

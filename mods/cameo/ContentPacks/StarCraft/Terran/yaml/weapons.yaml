@@ -3,7 +3,7 @@ MarineMG:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 26
-	Range: 4444
+	Range: 6105
 	Burst: 3
 	BurstDelays: 2
 	-Report:
@@ -11,19 +11,19 @@ MarineMG:
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -66,24 +66,24 @@ MadcapGun:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 25
-	Range: 4587
+	Range: 5542
 	Report: madcapshoot.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 12000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -532,7 +532,7 @@ GhostSniperLockdown:
 	Inherits: GhostSniper
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
-	ReloadDelay: 44
+	ReloadDelay: 22
 	Projectile: Bullet
 		ContrailStartWidth: 300
 		ContrailEndWidth: 150
@@ -541,12 +541,12 @@ GhostSniperLockdown:
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 2000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -556,7 +556,7 @@ GhostSniperLockdown:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -566,7 +566,7 @@ GhostSniperLockdown:
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -576,7 +576,7 @@ GhostSniperLockdown:
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -586,7 +586,7 @@ GhostSniperLockdown:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -596,7 +596,7 @@ GhostSniperLockdown:
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 20000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -668,7 +668,7 @@ SpecterSniperLockdown:
 	Inherits: SpecterSniper
 	ValidTargets: Vehicle, Air, Shielded
 	InvalidTargets: lockdowned
-	ReloadDelay: 66
+	ReloadDelay: 33
 	Projectile: Bullet
 		ContrailStartWidth: 300
 		ContrailEndWidth: 150
@@ -677,12 +677,12 @@ SpecterSniperLockdown:
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 4000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -692,7 +692,7 @@ SpecterSniperLockdown:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -702,7 +702,7 @@ SpecterSniperLockdown:
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -712,7 +712,7 @@ SpecterSniperLockdown:
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -722,7 +722,7 @@ SpecterSniperLockdown:
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -732,7 +732,7 @@ SpecterSniperLockdown:
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
-		Damage: 8000
+		Damage: 40000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -832,7 +832,6 @@ SiegeTankSiegeCannon:
 	Report: TTaFi200.aud
 	ReloadDelay: 148
 	Range: 11775
-	MinRange: 2355
 	Projectile: InstantHit
 	Warhead@NuclearWarhead: SpreadDamage
 		Damage: 10000
@@ -949,6 +948,7 @@ SiegeTankSiegeCannon:
 		ImpactSounds: ExploLrg.aud
 		ExplosionPalette: greyscale
 
+	MinRange: 2355
 GoliathMG:
 	Inherits: ^Grenade
 	Inherits: ^HeavyCannon

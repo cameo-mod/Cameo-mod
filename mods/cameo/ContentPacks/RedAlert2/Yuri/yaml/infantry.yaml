@@ -496,7 +496,7 @@ yuri_gatlingtrooper:
 	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
 	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
 	Valued:
-		Cost: 300
+		Cost: 431
 	Tooltip:
 		Name: Gatling Trooper
 	Buildable:
@@ -567,6 +567,8 @@ yuri_gatlingtrooper:
 	ActorStatValues:
 		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, yuri_upgrade_gatlingfirepowerupgrade, yuri_upgrade_gatlingspeedupgrade
 
+	FirepowerMultiplier:
+		Modifier: 108
 yuri_biotrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate

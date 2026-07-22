@@ -531,7 +531,7 @@ TSJuggerFlakAA_boat:
 	Inherits: ^FlakWeapon
 	Report: jugger1.aud
 	Range: 12834
-	MinRange: 2565
+	MinRange: 2245
 	ReloadDelay: 69
 	Burst: 2
 	BurstDelays: 3
@@ -1997,14 +1997,14 @@ TSSergGun:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 8
-	Range: 7406
+	Range: 5611
 	Report: cygun1.aud
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1

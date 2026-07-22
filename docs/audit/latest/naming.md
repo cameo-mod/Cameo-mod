@@ -10,14 +10,15 @@
 | eden | 43/43 | 100% | 0 | 2 |
 | forgotten | 77/77 | 100% | 0 | 48 |
 | futuretech | 56/56 | 100% | 0 | 36 |
-| ixian | 57/58 | 98% | 0 | 25 |
+| harkonnen | 0/0 | — | 0 | 0 |
+| ixian | 0/0 | — | 0 | 0 |
 | japan | 68/68 | 100% | 0 | 40 |
 | latinsyndicate | 65/65 | 100% | 0 | 44 |
 | naxis | 73/73 | 100% | 0 | 31 |
 | ordos | 70/70 | 100% | 0 | 31 |
 | plymouth | 44/44 | 100% | 0 | 2 |
 | protoss | 72/72 | 100% | 0 | 46 |
-| ra1_allies | 0/62 | 0% | 0 | 124 |
+| ra1_allies | 0/62 | 0% | 0 | 123 |
 | ra1_soviets | 0/106 | 0% | 0 | 181 |
 | ra2_allies | 0/66 | 0% | 0 | 233 |
 | ra2_soviets | 0/56 | 0% | 0 | 142 |
@@ -44,7 +45,8 @@
 | eden | 43/43 | 100% |
 | forgotten | 75/77 | 97% |
 | futuretech | 56/56 | 100% |
-| ixian | 41/41 | 100% |
+| harkonnen | 0/0 | — |
+| ixian | 0/0 | — |
 | japan | 64/67 | 95% |
 | latinsyndicate | 65/65 | 100% |
 | naxis | 73/73 | 100% |

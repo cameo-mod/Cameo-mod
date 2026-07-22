@@ -297,28 +297,26 @@ forgotten_mutant:
 	Inherits@MyPet: ^MyPetSmall
 	Inherits@Unity: ^Unity
 	Valued:
-		Cost: 120
+		Cost: 160
 	Tooltip:
 		Name: actor_forgotten_mutant.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~forgotten_barracks, ~!forgotten_chemicalplant
+		Prerequisites: ~forgotten_barracks, ~!forgotten_upgrade_mutantsoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_forgotten_mutant.description
 	Mobile:
 		Speed: 65
 	Health:
-		HP: 36000
+		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 36
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ScoutInfantryBuff:
-		Modifier: 100
-	FirepowerMultiplier@forgotten_mutant:
-		Modifier: 27
+		Modifier: 30
 	Armament@PRIMARY:
 		Weapon: forgotten_mutant_dualwield
 		LocalOffset: 128,0,256
@@ -360,6 +358,7 @@ forgotten_mutantsoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -390,7 +389,7 @@ forgotten_mutantsoldier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~forgotten_barracks, ~forgotten_chemicalplant
+		Prerequisites: ~forgotten_barracks, ~forgotten_upgrade_mutantsoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_forgotten_mutantsoldier.description
 	Armament@PRIMARY:
@@ -447,7 +446,7 @@ forgotten_mutantsergeant:
 	Inherits@MyPet: ^MyPetMedium
 	Inherits@Unity: ^Unity
 	Valued:
-		Cost: 750
+		Cost: 1154
 	Tooltip:
 		Name: actor_forgotten_mutantsergeant.name
 	UpdatesPlayerStatistics:
@@ -458,7 +457,7 @@ forgotten_mutantsergeant:
 		Queue: Infantry, RAInfantry
 		Description: actor_forgotten_mutantsergeant.description
 	Mobile:
-		Speed: 75
+		Speed: 74
 	Health:
 		HP: 40000
 	ChangesHealth@SelfHealing:
@@ -501,6 +500,8 @@ forgotten_mutantsergeant:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
+	FirepowerMultiplier:
+		Modifier: 108
 forgotten_zombiemutant:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate

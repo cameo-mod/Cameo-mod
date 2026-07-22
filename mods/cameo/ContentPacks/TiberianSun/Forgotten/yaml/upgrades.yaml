@@ -120,6 +120,18 @@ forgotten_upgrade_tiberiumadaptability:
 	ProvidesTeamProxyActor:
 		Actor: forgotten_upgrade_tiberiumadaptability_proxy_actor
 
+forgotten_upgrade_mutantsoldier:
+	Inherits: ^unit_upgrade.template
+	Tooltip:
+		Name: actor_forgotten_upgrade_mutantsoldier.name
+	Buildable:
+		Description: actor_forgotten_upgrade_mutantsoldier.description
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_mutantsoldier
+	RenderSprites:
+		Image: forgotten_mutantsoldier
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_upgrade_mutantsoldier
+
 ################## CABAL #########################
 
 ############ Radar

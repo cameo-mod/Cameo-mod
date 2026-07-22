@@ -321,7 +321,6 @@ RA2DiskDrain:
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 5
 	Range: 125
-	MinRange: 1
 	Report: vflolo5a.wav, vflolo5b.wav
 	ValidTargets: Ground, Water
 	InvalidTargets: DiskSteal
@@ -357,7 +356,6 @@ RA2DiskDrain:
 RA2DiskSteal:
 	ReloadDelay: 5
 	Range: 125
-	MinRange: 1
 	TargetActorCenter: true
 	ValidTargets: DiskSteal
 	Projectile: InstantHit
@@ -694,7 +692,7 @@ RA2GattlingInf:
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 15
 	ValidTargets: Ground, Air, Water
-	Range: 5086
+	Range: 5531
 	Report: iarnatta.wav, iarnattb.wav
 	Projectile: Bullet
 		Image: 50CAL
@@ -707,13 +705,13 @@ RA2GattlingInf:
 		Width: 75
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 8000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 8000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 1

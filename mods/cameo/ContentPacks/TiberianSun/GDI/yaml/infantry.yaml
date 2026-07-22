@@ -124,7 +124,7 @@ ts_gdi_falconenforcer:
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Valued:
-		Cost: 400
+		Cost: 1322
 	Tooltip:
 		Name: Falcon Enforcer
 	UpdatesPlayerStatistics:
@@ -135,7 +135,7 @@ ts_gdi_falconenforcer:
 		Queue: Infantry, RAInfantry
 		Description: Heavy infantry. Effective vs Vehicles, Aircraft.
 	Mobile:
-		Speed: 60
+		Speed: 62
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
@@ -169,6 +169,8 @@ ts_gdi_falconenforcer:
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_railgunweaponry
 
+	FirepowerMultiplier:
+		Modifier: 95
 ts_gdi_riottrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate

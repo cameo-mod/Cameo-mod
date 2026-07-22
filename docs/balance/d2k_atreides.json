@@ -16,6 +16,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -45,6 +46,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -74,6 +76,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -100,6 +103,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "25",
@@ -120,6 +124,7 @@
        }
       ],
       "weapon": "80mm_A",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -134,8 +139,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -150,7 +157,8 @@
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",

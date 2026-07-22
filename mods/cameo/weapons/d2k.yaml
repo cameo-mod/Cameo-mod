@@ -438,10 +438,12 @@ D2K_Rocket_ultimate:
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 
+	MinRange: 1280
 D2K_Rocket_Fremen:
 	Inherits: D2K_Rocket_ultimate
 	InvalidTargets: Infantry
 
+	MinRange: 1280
 mtank_pri:
 	Inherits: ^D2KMissile
 	ReloadDelay: 150
@@ -458,6 +460,7 @@ mtank_pri:
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1000
 
+	MinRange: 2050
 d2k_tyrant:
 	Inherits: ^D2KMissile
 	ReloadDelay: 130
@@ -481,6 +484,7 @@ d2k_tyrant:
 			Heavy: 100
 			Concrete: 30
 
+	MinRange: 1230
 Rocket.stealth:
 	Inherits: ^D2KMissile
 	ReloadDelay: 150
@@ -493,6 +497,7 @@ Rocket.stealth:
 	Warhead@1Dam: SpreadDamage
 		Damage: 12500
 
+	MinRange: 1845
 Rocket.stealthAA:
 	Inherits: Rocket.stealth
 	Burst: 2
@@ -524,6 +529,7 @@ d2k_APC.AG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
 
+	MinRange: 1845
 d2k_APC.AA:
 	Inherits: Rocket.stealthAA
 	Burst: 1
@@ -538,6 +544,7 @@ d2k_APCo.AG:
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 
+	MinRange: 1845
 d2k_APCo.AA:
 	Inherits: Rocket.stealthAA
 	Burst: 1
@@ -893,6 +900,7 @@ OrniMissile:
 			Concrete: 125
 	-Warhead@Shrapnel:
 
+	MinRange: 1335
 Crush:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1000
@@ -1300,7 +1308,7 @@ light_inf_lmg:
 	Inherits: ^Chaingun
 	Inherits: ^SmallArms
 	ReloadDelay: 20
-	Range: 4500
+	Range: 5475
 	Report: gun11.aud
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
@@ -1507,6 +1515,7 @@ Fremen_RPG:
 		Explosions: d2k_rocket_explosion
 		ExplosionPalette: effect75alpha
 
+	MinRange: 975
 HMG:
 	Inherits: ^Chaingun
 	Inherits: ^SmallArms
@@ -1610,12 +1619,12 @@ OrniGun:
 OrniGunC:
 	Inherits: OrniGun
 	Range: 6000
-	MinRange: 1200
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Damage: 800
 
+	MinRange: 1200
 Rocketeer:
 	Inherits: ^MG
 	Range: 4608
@@ -1859,6 +1868,7 @@ PhoenixRocket:
 		Amount: 3
 		ValidTargets: Ground, Water, Air
 
+	MinRange: 920
 PhoenixRocketShrapnel:
 	Inherits: Flamer
 	Inherits@Rad: CHFlameRadiation
@@ -1976,6 +1986,7 @@ ixian_airdrone:
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
 
+	MinRange: 1300
 d2k_heavy_air_drone:
 	Inherits: ixian_airdrone
 	Range: 7100
@@ -1984,6 +1995,7 @@ d2k_heavy_air_drone:
 	Warhead@Shrapnel: FireShrapnel
 		Amount: 4
 
+	MinRange: 1420
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75
@@ -2001,6 +2013,7 @@ d2k_kwny_fighter:
 			Concrete: 75
 	-Warhead@Shrapnel:
 
+	MinRange: 920
 d2k_laser_aa:
 	Inherits: d2k_laser
 	Range: 8192
@@ -2445,6 +2458,7 @@ omtank_pri:
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 900
 
+	MinRange: 1230
 oDeviatorMissile:
 	Inherits: ^oMissile
 	ReloadDelay: 160
@@ -2479,6 +2493,7 @@ oDeviatorMissile:
 	Warhead@5Concrete: DamagesConcrete
 		Damage: 1000
 
+	MinRange: 1025
 oSound:
 	ReloadDelay: 90
 	Range: 5120

@@ -10,6 +10,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -31,6 +32,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -39,6 +41,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -76,6 +79,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -95,8 +99,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -124,6 +130,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -145,6 +152,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -153,6 +161,7 @@
       "burst": "4",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "20",
@@ -190,6 +199,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -209,8 +219,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -245,7 +257,8 @@
       "burst": "15",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.0,
+      "minrange": "410",
       "pricing": true,
       "range": "2048",
       "reloaddelay": "132",
@@ -326,6 +339,7 @@
        }
       ],
       "weapon": "ordos_airmine",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -345,8 +359,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -375,6 +391,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -458,6 +475,7 @@
        }
       ],
       "weapon": "Laboratory_Bioball",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -468,6 +486,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -508,6 +527,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -516,6 +536,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -556,6 +577,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -572,8 +594,10 @@
      "v": "2250"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -604,6 +628,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "3905",
       "reloaddelay": "125",
@@ -688,6 +713,7 @@
        }
       ],
       "weapon": "eye_bomberguy",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^MediumChemicalWeapon",
@@ -706,8 +732,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Bomber",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -739,6 +767,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
@@ -760,6 +789,7 @@
        }
       ],
       "weapon": "d2kChainGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -768,6 +798,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6184",
       "reloaddelay": "60",
@@ -805,6 +836,7 @@
        }
       ],
       "weapon": "d2kChainGun_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -820,8 +852,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Fighter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -853,7 +887,8 @@
       "burst": "4",
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.1,
+      "minrange": "1675",
       "pricing": true,
       "range": "8370",
       "reloaddelay": "125",
@@ -939,6 +974,7 @@
        }
       ],
       "weapon": "Wraith_ToxinMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyFlameWeapon",
@@ -962,8 +998,10 @@
      "v": "7000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Spaceship",
      "tech_tier": null,
      "unit_class": null
     },
@@ -996,6 +1034,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "74",
@@ -1059,6 +1098,7 @@
        }
       ],
       "weapon": "D2K_155mm_turret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1076,8 +1116,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AdvancedDefense",
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
@@ -1105,6 +1147,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7700",
       "reloaddelay": "22",
@@ -1147,6 +1190,7 @@
        }
       ],
       "weapon": "ordos_autogunturret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -1163,8 +1207,10 @@
      "v": "1100"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "AdvancedDefense",
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
@@ -1202,6 +1248,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1235,6 +1282,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1271,6 +1319,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1308,6 +1357,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1345,6 +1395,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1382,6 +1433,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1419,6 +1471,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1460,6 +1513,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1491,6 +1545,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1524,6 +1579,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1565,6 +1621,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1599,6 +1656,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1632,6 +1690,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1658,6 +1717,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9716",
       "reloaddelay": "75",
@@ -1700,6 +1760,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AAPowered",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -1708,6 +1769,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6252",
       "reloaddelay": "50",
@@ -1760,6 +1822,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -1769,6 +1832,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9716",
       "reloaddelay": "75",
@@ -1811,6 +1875,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AAPowered",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -1820,6 +1885,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "6252",
       "reloaddelay": "50",
@@ -1872,6 +1938,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -1888,8 +1955,10 @@
      "v": "450"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1919,6 +1988,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5177",
       "reloaddelay": "75",
@@ -1944,6 +2014,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1951,6 +2022,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5177",
       "reloaddelay": "75",
@@ -1976,6 +2048,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1990,8 +2063,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -2021,6 +2096,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "20",
@@ -2046,6 +2122,7 @@
        }
       ],
       "weapon": "contaminator_attack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2053,6 +2130,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "2000",
       "reloaddelay": "20",
@@ -2078,6 +2156,7 @@
        }
       ],
       "weapon": "contaminator_attack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2092,8 +2171,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2123,6 +2204,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1450",
       "pricing": true,
       "range": "7250",
@@ -2252,6 +2334,7 @@
        }
       ],
       "weapon": "facedancer_grenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2267,6 +2350,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1450",
       "pricing": false,
       "range": "7250",
@@ -2396,6 +2480,7 @@
        }
       ],
       "weapon": "facedancer_grenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2422,8 +2507,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2453,6 +2540,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "30",
@@ -2466,6 +2554,7 @@
        }
       ],
       "weapon": "LeechJump",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2478,8 +2567,10 @@
      "v": "1100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2513,8 +2604,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@PRIMARY",
@@ -2545,6 +2637,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2552,8 +2645,9 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@Upgrade",
@@ -2599,6 +2693,7 @@
        }
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -2608,8 +2703,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "!ordos_upgrade_lasercartridges",
       "slot": "Armament@GARRISONED",
@@ -2640,6 +2736,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2648,8 +2745,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": false,
-      "range": "4500",
+      "range": "5475",
       "reloaddelay": "20",
       "requires": "ordos_upgrade_lasercartridges",
       "slot": "Armament@UpgradeGARRISONED",
@@ -2695,6 +2793,7 @@
        }
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -2711,10 +2810,17 @@
      "v": "120"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#FirepowerMultiplier@ordos_lightinfantry.Modifier",
+     "trait": "FirepowerMultiplier@ordos_lightinfantry",
+     "v": 0.67
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Health.HP",
@@ -2741,7 +2847,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1984",
+      "design_weapon_class": 1.0,
+      "minrange": "1985",
       "pricing": true,
       "range": "9920",
       "reloaddelay": "80",
@@ -2805,6 +2912,7 @@
        }
       ],
       "weapon": "Dune_SiegeMortar",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -2815,7 +2923,8 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1984",
+      "design_weapon_class": 1.0,
+      "minrange": "1985",
       "pricing": false,
       "range": "9920",
       "reloaddelay": "80",
@@ -2879,6 +2988,7 @@
        }
       ],
       "weapon": "Dune_SiegeMortar",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -2896,8 +3006,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MortarInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.6
     },
@@ -2927,6 +3039,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6185",
       "reloaddelay": "64",
@@ -2969,6 +3082,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2978,6 +3092,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/d2k.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "6185",
       "reloaddelay": "64",
@@ -3020,6 +3135,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -3036,8 +3152,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3067,6 +3185,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -3075,6 +3194,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3087,8 +3207,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3123,6 +3245,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3145,6 +3268,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3166,6 +3290,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3188,6 +3313,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3210,6 +3336,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3231,6 +3358,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3253,6 +3381,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3275,6 +3404,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3297,6 +3427,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3318,6 +3449,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3340,6 +3472,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3362,6 +3495,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3390,6 +3524,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3414,6 +3549,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3438,6 +3574,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3462,6 +3599,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3487,6 +3625,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3511,6 +3650,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3537,6 +3677,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3561,6 +3702,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3589,6 +3731,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3614,6 +3757,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3638,6 +3782,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3656,6 +3801,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -3698,6 +3844,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -3714,8 +3861,10 @@
      "v": "2100"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -3725,13 +3874,14 @@
     },
     "name": "Ordos APC",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_outpost",
      "~!ordos_promotion_unlocklaboratorycrawler"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -3750,6 +3900,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -3814,6 +3965,7 @@
        }
       ],
       "weapon": "120mm_cobra",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3824,6 +3976,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7640",
       "reloaddelay": "80",
@@ -3885,6 +4038,7 @@
        }
       ],
       "weapon": "120mm_cobra_deploy",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3902,8 +4056,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3913,13 +4069,14 @@
     },
     "name": "Cobra Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_outpost",
      "~!ordos_promotion_unlockpython"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -3940,7 +4097,8 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.1,
+      "minrange": "1245",
       "pricing": true,
       "range": "6220",
       "reloaddelay": "24",
@@ -4011,6 +4169,7 @@
        }
       ],
       "weapon": "autogun_tank_small",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2KMissile",
        "^HeavyCannon",
@@ -4030,10 +4189,17 @@
      "v": "1500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
@@ -4041,13 +4207,14 @@
     },
     "name": "Combat Autogun Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_outpost",
      "~!ordos_upgrade_heavyautoguntank"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4066,6 +4233,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5230",
       "reloaddelay": "44",
@@ -4086,6 +4254,7 @@
        }
       ],
       "weapon": "OrdosCombatTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -4100,8 +4269,10 @@
      "v": "650"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4111,12 +4282,13 @@
     },
     "name": "Ordos Combat Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "~!ordos_upgrade_heavycombattank"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4137,7 +4309,8 @@
       "burst": "3",
       "burstdelays": "25",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.1,
+      "minrange": "2005",
       "pricing": true,
       "range": "10025",
       "reloaddelay": "150",
@@ -4225,6 +4398,7 @@
        }
       ],
       "weapon": "DeviatorMissile_Artillery",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyFlameWeapon",
@@ -4244,8 +4418,10 @@
      "v": "1250"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Artillery",
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
@@ -4255,12 +4431,13 @@
     },
     "name": "Deviator Artillery",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_palace"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4279,7 +4456,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "1415",
       "pricing": true,
       "range": "7070",
       "reloaddelay": "98",
@@ -4338,6 +4516,7 @@
        }
       ],
       "weapon": "DeviatorMissile",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -4355,8 +4534,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -4366,13 +4547,14 @@
     },
     "name": "Deviator Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "~ordos_promotion_unlockdeviatortank",
      "ordos_palace"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4391,6 +4573,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -4433,6 +4616,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4449,8 +4633,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4460,12 +4646,13 @@
     },
     "name": "Dust Drone",
     "prerequisites": [
-     "~ordos_lightfactory",
+     "~ordos_light_vehicle_production",
      "~ordos_promotion_unlockdustdrone"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4486,7 +4673,8 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
-      "minrange": "1100",
+      "design_weapon_class": 1.1,
+      "minrange": "1495",
       "pricing": true,
       "range": "7480",
       "reloaddelay": "24",
@@ -4562,6 +4750,7 @@
        }
       ],
       "weapon": "autogun_tank",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2KMissile",
        "^HeavyCannon",
@@ -4581,10 +4770,17 @@
      "v": "2800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.4
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/vehicles.yaml#Health.HP",
@@ -4592,12 +4788,13 @@
     },
     "name": "Heavy Autogun Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavyautoguntank"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4616,6 +4813,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "40",
@@ -4636,6 +4834,7 @@
        }
       ],
       "weapon": "HeavyOrdosCombatTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -4644,6 +4843,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "70",
@@ -4709,6 +4909,7 @@
        }
       ],
       "weapon": "HeavyOrdosCombatTankRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -4727,8 +4928,10 @@
      "v": "950"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4738,12 +4941,13 @@
     },
     "name": "Ordos Heavy Combat Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "~ordos_upgrade_heavycombattank"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4762,6 +4966,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -4845,6 +5050,7 @@
        }
       ],
       "weapon": "Laboratory_Bioball",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4855,6 +5061,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -4895,6 +5102,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4903,6 +5111,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "42",
@@ -4943,6 +5152,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4959,8 +5169,10 @@
      "v": "4500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
@@ -4970,13 +5182,14 @@
     },
     "name": "Laboratory Crawler",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
      "~ordos_promotion_unlocklaboratorycrawler"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -4995,6 +5208,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "7275",
       "reloaddelay": "55",
@@ -5058,6 +5272,7 @@
        }
       ],
       "weapon": "ordos_lasertank",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -5075,8 +5290,10 @@
      "v": "2400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "HighTechTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5086,13 +5303,14 @@
     },
     "name": "Laser Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "~ordos_promotion_unlocklasertank",
      "ordos_ixresearchcenter"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5121,8 +5339,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5132,12 +5352,13 @@
     },
     "name": "Ordos Mobile Construction Vehicle",
     "prerequisites": [
-     "~ordos_heavyfactory",
-     "ordos_repairpad"
+     "~ordos_heavy_vehicle_production",
+     "ordos_mcv_production"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5158,6 +5379,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5219,6 +5441,7 @@
        }
       ],
       "weapon": "120mm_python",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5231,6 +5454,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9380",
       "reloaddelay": "123",
@@ -5292,6 +5516,7 @@
        }
       ],
       "weapon": "120mm_python_deploy",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5309,8 +5534,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5320,13 +5547,14 @@
     },
     "name": "Python Tank",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_outpost",
      "~ordos_promotion_unlockpython"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5347,6 +5575,7 @@
       "burst": "9",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
@@ -5368,6 +5597,7 @@
        }
       ],
       "weapon": "HMGo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5376,6 +5606,7 @@
       "burst": "9",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "8",
@@ -5424,6 +5655,7 @@
        }
       ],
       "weapon": "HMGo_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -5440,8 +5672,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -5451,12 +5685,13 @@
     },
     "name": "Ordos Raider",
     "prerequisites": [
-     "~ordos_lightfactory",
+     "~ordos_light_vehicle_production",
      "~!ordos_promotion_unlockstealthraider"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5485,8 +5720,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5497,11 +5734,12 @@
     "name": "Ordos Spice Harvester",
     "prerequisites": [
      "~spice_refinery",
-     "~ordos_heavyfactory"
+     "~ordos_heavy_vehicle_production"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5522,6 +5760,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
@@ -5554,6 +5793,7 @@
        }
       ],
       "weapon": "HMGstealth",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5563,6 +5803,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "4857",
       "reloaddelay": "33",
@@ -5610,6 +5851,7 @@
        }
       ],
       "weapon": "HMGstealth_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^SmallArms",
@@ -5626,8 +5868,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -5637,12 +5881,13 @@
     },
     "name": "Stealth Raider",
     "prerequisites": [
-     "~ordos_lightfactory",
+     "~ordos_light_vehicle_production",
      "~ordos_promotion_unlockstealthraider"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",
@@ -5661,6 +5906,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ordos/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "72",
@@ -5724,6 +5970,7 @@
        }
       ],
       "weapon": "120mm_td",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^LightChemicalWeapon",
@@ -5741,8 +5988,10 @@
      "v": "2200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5752,12 +6001,13 @@
     },
     "name": "Tank Destroyer",
     "prerequisites": [
-     "~ordos_heavyfactory",
+     "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter"
     ],
     "queue": [
      "Vehicle",
-     "RAVehicle"
+     "RAVehicle",
+     "Starport"
     ],
     "sight": {
      "src": "inherited",

@@ -71,7 +71,7 @@ HydraSpit:
 	Inherits: ^SmallArms
 	Inherits: ^ArrowWeapon
 	ReloadDelay: 15
-	Range: 5230
+	Range: 5979
 	Report: zhyfir00.aud
 	Projectile: Bullet
 		Image: scmspore
@@ -85,28 +85,28 @@ HydraSpit:
 		TrailImage: sczhsplash
 	Warhead@LightChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 18000
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		Damage: 18000
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 18000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 18000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 18000
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -989,7 +989,6 @@ LurkerSpines:
 LurkerSpinesImpact:
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^SwordWeapon
-	MinRange: 1
 	Projectile: InstantHit
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water

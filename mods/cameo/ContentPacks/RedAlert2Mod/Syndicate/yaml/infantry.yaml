@@ -18,9 +18,9 @@ latinsyndicate_latinmilitia:
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_mili.description
 	Mobile:
-		Speed: 52
+		Speed: 51
 	Health:
-		HP: 26000
+		HP: 25000
 	ChangesHealth@SelfHealing:
 		Step: 26
 	DamageMultiplier@ScoutInfantryBuff:
@@ -28,7 +28,7 @@ latinsyndicate_latinmilitia:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@latinsyndicate_latinmilitia:
-		Modifier: 60
+		Modifier: 39
 	Armament@PRIMARY:
 		Weapon: latinsyndicate_latinmilitia_ak47
 		RequiresCondition: !rank-elite
@@ -293,7 +293,7 @@ latinsyndicate_narco:
 	Tooltip:
 		Name: Narco
 	Valued:
-		Cost: 900
+		Cost: 756
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_unlocknarcos, latinsyndicate_latinempradar
@@ -354,7 +354,7 @@ latinsyndicate_narco:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@DualWeapon:
-		Modifier: 50
+		Modifier: 105
 	AmmoPool:
 		Ammo: 7
 		AmmoCondition: ammo

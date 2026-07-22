@@ -6,7 +6,8 @@ This repository is the shared source of truth for maintainers and every AI agent
 
 | Need | Canonical location | Rule |
 |---|---|---|
-| Short project orientation | `docs/PROJECT_CONTEXT.md` | Read first when joining a session; referenced primary documents remain authoritative. |
+| Lessons learned / start protocol | `docs/LESSONS_LEARNED.md` | Read first before every new task; contains required reading order and accumulated pitfalls. |
+| Short project orientation | `docs/PROJECT_CONTEXT.md` | Read after LESSONS_LEARNED; referenced primary documents remain authoritative. |
 | Current work queue | `docs/design/ROADMAP.md` | Crashes and player-visible bugs are P0 and always jump the queue. Add new issues here before implementation. |
 | Binding rules and conventions | `docs/DESIGN.md` | Read before modifying YAML, assets, naming, weapons, balance, or descriptions. |
 | Engine and custom-trait reference | `docs/Cameo_Knowledge_Base_Manual.md` | Consult before changing unfamiliar traits or C#-backed behavior. |
@@ -21,7 +22,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 
 ## Required operating sequence
 
-1. Read `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, and the relevant section of `docs/Cameo_Knowledge_Base_Manual.md` before touching rules or assets.
+1. Read `docs/LESSONS_LEARNED.md` first, then `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, and the relevant section of `docs/Cameo_Knowledge_Base_Manual.md` before touching rules or assets.
 2. Record a newly discovered crash, regression, or suspected discrepancy in `docs/design/ROADMAP.md` before proposing a fix.
 3. Treat release builds, engine logs, resolved-ruleset diffs, and current audit output as evidence. Do not promote an old raw `.txt` result to a live finding without rerunning its audit.
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.

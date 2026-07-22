@@ -20,6 +20,11 @@ factions, everything through the balance workbook. Faction reference:
 
 ---
 
+## Active documentation maintenance
+
+- [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
+- [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `MEGAPLAN.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
+
 ## P0 — Crashes (always first)
 
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
@@ -500,7 +505,7 @@ pin revert (never committed). **RESOLVED: `make.cmd all` fetched b89ae60 and reb
   gun-flakpanzer names (Kugelblitz/Wirbelwind/Ostwind) do NOT fit.
   Historically correct German AA-ROCKET names to pick from:
   **Wasserfall** (guided AA missile — recommended), **Taifun**
-  (salvo-fired unguided AA rocket — fits a line vehicle), 
+  (salvo-fired unguided AA rocket — fits a line vehicle),
   **Rheintochter** (AA missile, most distinctive sound). Awaiting the
   maintainer's pick; then one pass: id
   (schwarzermond_m200bjagerline -> schwarzermond_<name>), display name

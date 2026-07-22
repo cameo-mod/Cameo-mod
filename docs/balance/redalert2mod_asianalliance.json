@@ -10,6 +10,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "25",
@@ -58,6 +59,7 @@
        }
       ],
       "weapon": "AsianPelicanMissile",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -68,6 +70,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "25",
@@ -114,6 +117,7 @@
        }
       ],
       "weapon": "AsianPelicanMissileE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -124,6 +128,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "18",
@@ -167,6 +172,7 @@
        }
       ],
       "weapon": "AsianPelicanMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2SmallArms",
@@ -177,6 +183,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "18",
@@ -218,6 +225,7 @@
        }
       ],
       "weapon": "AsianPelicanMG_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2SmallArms",
@@ -234,8 +242,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -267,6 +277,7 @@
       "burst": "2",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "1300",
       "pricing": true,
       "range": "6500",
@@ -321,6 +332,7 @@
        }
       ],
       "weapon": "AsianPhoenixRocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^Grenade",
@@ -332,6 +344,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "1500",
       "pricing": true,
       "range": "7500",
@@ -384,6 +397,7 @@
        }
       ],
       "weapon": "AsianPhoenixRocket_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^Grenade",
@@ -400,8 +414,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -431,6 +447,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1250",
@@ -439,6 +456,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMineBomb",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -451,8 +469,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -474,6 +494,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1024",
@@ -482,6 +503,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianMineBomb2",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -494,8 +516,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -519,6 +543,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -551,6 +576,7 @@
        }
       ],
       "weapon": "AsianKamikazeChaingun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -566,8 +592,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -589,6 +617,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "7250",
@@ -597,6 +626,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ASDFKamikazeTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -609,8 +639,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -634,6 +666,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "minrange": "1400",
       "pricing": true,
       "range": "7000",
@@ -666,6 +699,7 @@
        }
       ],
       "weapon": "AsianKamikazeChaingun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -673,6 +707,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "8",
@@ -709,6 +744,7 @@
        }
       ],
       "weapon": "AsianChemicalBombs",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^RA2MediumCannon"
@@ -724,8 +760,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -765,6 +803,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -804,6 +843,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -841,6 +881,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -878,6 +919,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -911,6 +953,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -947,6 +990,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -980,6 +1024,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1016,6 +1061,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1043,6 +1089,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -1068,6 +1115,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -1084,6 +1132,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1121,6 +1170,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1158,6 +1208,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1199,6 +1250,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1225,6 +1277,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "5000",
@@ -1233,6 +1286,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianChaosTurret",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1251,6 +1305,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1284,6 +1339,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1307,6 +1363,7 @@
       "burst": "100",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "200",
@@ -1332,6 +1389,7 @@
        }
       ],
       "weapon": "AAHyperionMagnet",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -1348,6 +1406,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiAirDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1389,6 +1448,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1417,6 +1477,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -1533,6 +1594,7 @@
        }
       ],
       "weapon": "AsianTurretPlasma",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1556,6 +1618,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1581,6 +1644,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
@@ -1645,6 +1709,7 @@
        }
       ],
       "weapon": "AsianPhotonCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -1654,6 +1719,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "14000",
       "reloaddelay": "13",
@@ -1715,6 +1781,7 @@
        }
       ],
       "weapon": "AsianPhotonCannonEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -1734,6 +1801,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiAirDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1759,6 +1827,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9600",
       "reloaddelay": "10",
@@ -1784,6 +1853,7 @@
        }
       ],
       "weapon": "AsianRailgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -1800,6 +1870,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1833,6 +1904,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1858,6 +1930,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -1919,6 +1992,7 @@
        }
       ],
       "weapon": "AsianPunisherAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -1928,6 +2002,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "12",
@@ -1989,6 +2064,7 @@
        }
       ],
       "weapon": "AsianPunisherAGEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2008,6 +2084,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2044,6 +2121,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2072,6 +2150,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1345",
       "reloaddelay": "39",
@@ -2098,6 +2177,7 @@
        }
       ],
       "weapon": "AsianCrocBite",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2106,6 +2186,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1345",
       "reloaddelay": "39",
@@ -2132,6 +2213,7 @@
        }
       ],
       "weapon": "AsianCrocBiteE",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2146,8 +2228,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2178,8 +2262,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "7250",
+      "range": "5935",
       "reloaddelay": "16",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
@@ -2210,6 +2295,7 @@
        }
       ],
       "weapon": "ASDFGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2219,8 +2305,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "7250",
+      "range": "5935",
       "reloaddelay": "16",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@Upgrade",
@@ -2266,6 +2353,7 @@
        }
       ],
       "weapon": "ASDFGun2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^RA2SmallArms",
@@ -2275,6 +2363,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "7250",
@@ -2284,6 +2373,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ASDFKamikazeTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
@@ -2291,8 +2381,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "7250",
+      "range": "5935",
       "reloaddelay": "16",
       "requires": "!asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
@@ -2323,6 +2414,7 @@
        }
       ],
       "weapon": "ASDFGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2333,8 +2425,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "7250",
+      "range": "5935",
       "reloaddelay": "16",
       "requires": "asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@UpgradeGARRISONED",
@@ -2380,6 +2473,7 @@
        }
       ],
       "weapon": "ASDFGun2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^RA2SmallArms",
@@ -2393,17 +2487,24 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
-     "v": "1000"
+     "v": "357"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
-     "tech_tier": 1.0,
+     "subtype": "SniperInfantry",
+     "tech_tier": 0.75,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.09
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
-     "v": "40000"
+     "v": "39000"
     },
     "name": "ASDF",
     "prerequisites": [
@@ -2421,13 +2522,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "58"
     }
    },
    "asianalliance_asiancommando": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "100",
@@ -2504,6 +2606,7 @@
        }
       ],
       "weapon": "AsianSniperLockdown",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -2515,6 +2618,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "25",
@@ -2580,6 +2684,7 @@
        }
       ],
       "weapon": "AsianSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -2590,6 +2695,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9455",
       "reloaddelay": "50",
@@ -2651,6 +2757,7 @@
        }
       ],
       "weapon": "AsianSniperAP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -2662,6 +2769,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9455",
       "reloaddelay": "25",
@@ -2727,6 +2835,7 @@
        }
       ],
       "weapon": "AsianSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -2738,6 +2847,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "9455",
       "reloaddelay": "50",
@@ -2799,6 +2909,7 @@
        }
       ],
       "weapon": "AsianSniperAP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -2821,8 +2932,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "HeroInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2855,6 +2968,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "38",
@@ -2881,6 +2995,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2890,6 +3005,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "34",
@@ -2916,6 +3032,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2925,6 +3042,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6666",
       "reloaddelay": "30",
@@ -2951,6 +3069,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2960,6 +3079,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4444",
       "reloaddelay": "38",
@@ -2986,6 +3106,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2995,6 +3116,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5555",
       "reloaddelay": "34",
@@ -3021,6 +3143,7 @@
        }
       ],
       "weapon": "AsianFlamerTroop2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3030,6 +3153,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6666",
       "reloaddelay": "30",
@@ -3056,6 +3180,7 @@
        }
       ],
       "weapon": "AsianFlamerTurret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3070,10 +3195,17 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
@@ -3101,6 +3233,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "50",
@@ -3122,6 +3255,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_shotgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3130,6 +3264,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "50",
@@ -3151,12 +3286,14 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_shotgun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "92",
@@ -3194,6 +3331,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
@@ -3203,6 +3341,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "92",
@@ -3239,6 +3378,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
@@ -3247,6 +3387,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "50",
@@ -3268,6 +3409,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_shotgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3277,6 +3419,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5500",
       "reloaddelay": "50",
@@ -3298,6 +3441,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_shotgun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3305,6 +3449,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "4500",
       "reloaddelay": "92",
@@ -3342,6 +3487,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_grenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
@@ -3352,6 +3498,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5500",
       "reloaddelay": "92",
@@ -3388,6 +3535,7 @@
        }
       ],
       "weapon": "asianalliance_asianmilitia_grenade_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
@@ -3400,13 +3548,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Valued.Cost",
-     "v": "100"
+     "v": "110"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier@asianalliance_asianmilitia.Modifier",
+     "trait": "FirepowerMultiplier@asianalliance_asianmilitia",
+     "v": 0.83
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
@@ -3426,7 +3581,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Mobile.Speed",
-     "v": "52"
+     "v": "53"
     }
    },
    "asianalliance_asiantankkiller": {
@@ -3434,6 +3589,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6460",
       "reloaddelay": "75",
@@ -3455,6 +3611,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3462,6 +3619,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6460",
       "reloaddelay": "75",
@@ -3483,6 +3641,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3490,6 +3649,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7460",
       "reloaddelay": "75",
@@ -3511,6 +3671,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3518,6 +3679,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7460",
       "reloaddelay": "75",
@@ -3539,6 +3701,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_elite_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3546,6 +3709,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6460",
       "reloaddelay": "75",
@@ -3567,6 +3731,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3574,6 +3739,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6460",
       "reloaddelay": "75",
@@ -3595,6 +3761,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3602,6 +3769,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7460",
       "reloaddelay": "75",
@@ -3623,6 +3791,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3630,6 +3799,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7460",
       "reloaddelay": "75",
@@ -3651,6 +3821,7 @@
        }
       ],
       "weapon": "AsianTankKillerRocket_elite_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3665,8 +3836,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -3695,6 +3868,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -3706,6 +3880,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -3713,6 +3888,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -3721,6 +3897,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3733,8 +3910,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3777,7 +3956,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3787,7 +3966,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3798,6 +3977,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3818,7 +3998,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3828,7 +4008,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3839,6 +4019,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3859,7 +4040,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3869,7 +4050,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3880,6 +4061,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3902,7 +4084,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3912,7 +4094,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3923,6 +4105,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3944,7 +4127,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3954,7 +4137,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3965,6 +4148,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun_upgrade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3986,7 +4170,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3996,7 +4180,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4007,6 +4191,7 @@
        }
       ],
       "weapon": "asianalliance_fanatic_shotgun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4022,10 +4207,17 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": "closecombat",
      "special": 1.0,
+     "subtype": "CloseCombatInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/infantry.yaml#Health.HP",
@@ -4053,6 +4245,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4079,6 +4272,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword1",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4087,6 +4281,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4113,6 +4308,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword2",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4121,6 +4317,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1579",
       "reloaddelay": "40",
@@ -4147,6 +4344,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword3",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4161,8 +4359,10 @@
      "v": "350"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4194,6 +4394,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5190",
       "reloaddelay": "34",
@@ -4317,6 +4518,7 @@
        }
       ],
       "weapon": "AsianSinglePlasma",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -4333,6 +4535,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5836",
       "reloaddelay": "34",
@@ -4449,6 +4652,7 @@
        }
       ],
       "weapon": "AsianSinglePlasmaE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -4463,6 +4667,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5190",
       "reloaddelay": "34",
@@ -4586,6 +4791,7 @@
        }
       ],
       "weapon": "AsianSinglePlasma",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -4602,6 +4808,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5836",
       "reloaddelay": "34",
@@ -4718,6 +4925,7 @@
        }
       ],
       "weapon": "AsianSinglePlasmaE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -4739,8 +4947,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
@@ -4771,6 +4981,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4560",
       "reloaddelay": "25",
@@ -4797,6 +5008,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4805,6 +5017,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5560",
       "reloaddelay": "25",
@@ -4831,6 +5044,7 @@
        }
       ],
       "weapon": "AsianNinjaStarE",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4838,6 +5052,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4560",
       "reloaddelay": "25",
@@ -4864,6 +5079,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4873,6 +5089,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5560",
       "reloaddelay": "25",
@@ -4899,6 +5116,7 @@
        }
       ],
       "weapon": "AsianNinjaStarE",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4913,8 +5131,10 @@
      "v": "750"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SniperInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -4946,6 +5166,7 @@
       "burst": "3",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1350",
       "pricing": true,
       "range": "6740",
@@ -5035,6 +5256,7 @@
        }
       ],
       "weapon": "AsianMaidenBow",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -5048,6 +5270,7 @@
       "burst": "6",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1550",
       "pricing": true,
       "range": "7740",
@@ -5135,6 +5358,7 @@
        }
       ],
       "weapon": "AsianMaidenBowE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -5149,6 +5373,7 @@
       "burst": "3",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1350",
       "pricing": false,
       "range": "6740",
@@ -5238,6 +5463,7 @@
        }
       ],
       "weapon": "AsianMaidenBow",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -5252,6 +5478,7 @@
       "burst": "6",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1550",
       "pricing": false,
       "range": "7740",
@@ -5339,6 +5566,7 @@
        }
       ],
       "weapon": "AsianMaidenBowE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -5358,8 +5586,10 @@
      "v": "450"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -5393,6 +5623,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "40",
@@ -5414,6 +5645,7 @@
        }
       ],
       "weapon": "AAGunBoatCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon"
       ]
@@ -5423,6 +5655,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "40",
@@ -5445,6 +5678,7 @@
        }
       ],
       "weapon": "AAGunBoatCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2EliteEffects"
@@ -5454,6 +5688,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "18",
@@ -5510,6 +5745,7 @@
        }
       ],
       "weapon": "AAGunBoatFlak",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5521,6 +5757,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "18",
@@ -5577,6 +5814,7 @@
        }
       ],
       "weapon": "AAGunBoatFlak_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5586,6 +5824,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -5611,12 +5850,14 @@
        }
       ],
       "weapon": "DepthCharge",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -5643,6 +5884,7 @@
        }
       ],
       "weapon": "DepthCharge",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade"
       ]
@@ -5657,8 +5899,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5691,6 +5935,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "17500",
@@ -5699,6 +5944,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "KamikazeCarrierTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -5711,8 +5957,10 @@
      "v": "1750"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5747,6 +5995,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1250",
@@ -5754,6 +6003,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "AsianDemoSubTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -5766,8 +6016,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5802,6 +6054,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "120",
@@ -5838,6 +6091,7 @@
        }
       ],
       "weapon": "AsianSmallTorpedo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -5853,8 +6107,10 @@
      "v": "2400"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5889,6 +6145,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5910,6 +6167,7 @@
        }
       ],
       "weapon": "RA2120mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5919,6 +6177,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5941,6 +6200,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5956,8 +6216,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5992,6 +6254,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6053,6 +6316,7 @@
        }
       ],
       "weapon": "AsianQuasarBoatAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -6064,6 +6328,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6125,6 +6390,7 @@
        }
       ],
       "weapon": "AsianQuasarBoatAGEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -6136,6 +6402,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6197,6 +6464,7 @@
        }
       ],
       "weapon": "AsianQuasarBoatAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -6208,6 +6476,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7168",
       "reloaddelay": "22",
@@ -6269,6 +6538,7 @@
        }
       ],
       "weapon": "AsianQuasarBoatAAEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -6286,8 +6556,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "BattleShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6321,6 +6593,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "20000",
@@ -6329,6 +6602,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "JapanCarrierTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -6341,8 +6615,10 @@
      "v": "4500"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6383,6 +6659,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6405,6 +6682,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6426,6 +6704,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6447,6 +6726,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6469,6 +6749,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6491,6 +6772,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6513,6 +6795,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6535,6 +6818,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6557,6 +6841,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6579,6 +6864,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6600,6 +6886,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6622,6 +6909,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6650,6 +6938,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6674,6 +6963,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6698,6 +6988,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6722,6 +7013,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6747,6 +7039,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6772,6 +7065,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6796,6 +7090,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6820,6 +7115,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6846,6 +7142,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6870,6 +7167,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6894,6 +7192,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6915,6 +7214,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6928,6 +7228,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6941,6 +7242,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6958,6 +7260,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6979,6 +7282,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3700",
       "reloaddelay": "25",
@@ -7005,6 +7309,7 @@
        }
       ],
       "weapon": "AsianFlamerTank",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -7013,6 +7318,7 @@
       "burst": "12",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4700",
       "reloaddelay": "25",
@@ -7039,6 +7345,7 @@
        }
       ],
       "weapon": "AsianFlamerTankE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -7053,10 +7360,17 @@
      "v": "1300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/vehicles.yaml#Health.HP",
@@ -7098,8 +7412,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7139,8 +7455,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -7183,8 +7501,10 @@
      "v": "250"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7218,6 +7538,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "75",
@@ -7244,6 +7565,7 @@
        }
       ],
       "weapon": "AsianRailTank2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -7251,6 +7573,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "11111",
       "reloaddelay": "90",
@@ -7277,6 +7600,7 @@
        }
       ],
       "weapon": "AsianRailTank3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -7291,8 +7615,10 @@
      "v": "2200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7328,6 +7654,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "3200",
       "pricing": true,
       "range": "16000",
@@ -7361,6 +7688,7 @@
        }
       ],
       "weapon": "AsianHowitzerCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2HeavyCannon"
@@ -7369,6 +7697,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "4000",
       "pricing": true,
       "range": "20000",
@@ -7401,6 +7730,7 @@
        }
       ],
       "weapon": "AsianHowitzerCannonE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2HeavyCannon"
@@ -7416,8 +7746,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7453,6 +7785,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "5357",
       "reloaddelay": "55",
@@ -7549,6 +7882,7 @@
        }
       ],
       "weapon": "AsianLynxTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7563,6 +7897,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.95,
       "pricing": true,
       "range": "6357",
       "reloaddelay": "55",
@@ -7655,6 +7990,7 @@
        }
       ],
       "weapon": "AsianLynxTankCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7669,6 +8005,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5357",
       "reloaddelay": "51",
@@ -7701,6 +8038,7 @@
        }
       ],
       "weapon": "AsianLynxMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7710,6 +8048,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6357",
       "reloaddelay": "51",
@@ -7742,6 +8081,7 @@
        }
       ],
       "weapon": "AsianLynxMG_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun",
@@ -7758,8 +8098,10 @@
      "v": "850"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -7792,6 +8134,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -7799,6 +8142,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -7815,8 +8159,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Vehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7851,6 +8197,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
@@ -7893,6 +8240,7 @@
        }
       ],
       "weapon": "AsianPulverizerGatling",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -7901,6 +8249,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5517",
       "reloaddelay": "12",
@@ -7944,6 +8293,7 @@
        }
       ],
       "weapon": "AsianPulverizerGatling",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -7960,8 +8310,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -7996,6 +8348,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -8063,6 +8416,7 @@
        }
       ],
       "weapon": "AsianPulverizerMechaGatling",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumMissile",
@@ -8073,6 +8427,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7020",
       "reloaddelay": "15",
@@ -8141,6 +8496,7 @@
        }
       ],
       "weapon": "AsianPulverizerMechaGatling",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumMissile",
@@ -8159,8 +8515,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -8195,6 +8553,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -8256,6 +8615,7 @@
        }
       ],
       "weapon": "AsianQuasarAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -8265,6 +8625,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -8326,6 +8687,7 @@
        }
       ],
       "weapon": "AsianQuasarAGEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -8335,6 +8697,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
@@ -8396,6 +8759,7 @@
        }
       ],
       "weapon": "AsianQuasarAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -8405,6 +8769,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "33",
@@ -8466,6 +8831,7 @@
        }
       ],
       "weapon": "AsianQuasarAAEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -8483,8 +8849,10 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8518,6 +8886,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "60",
@@ -8544,6 +8913,7 @@
        }
       ],
       "weapon": "AsianRailTank",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -8551,6 +8921,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "75",
@@ -8577,6 +8948,7 @@
        }
       ],
       "weapon": "AsianRailTank2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -8591,8 +8963,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8627,6 +9001,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "minrange": "1700",
       "pricing": true,
       "range": "8500",
@@ -8686,6 +9061,7 @@
        }
       ],
       "weapon": "AsianMLRS",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^FlakWeapon",
@@ -8703,8 +9079,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FireSupport",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -8739,6 +9117,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "60",
@@ -8840,6 +9219,7 @@
        }
       ],
       "weapon": "AsianChemical",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -8853,6 +9233,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -8949,6 +9330,7 @@
        }
       ],
       "weapon": "AsianChemicalE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -8968,8 +9350,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9003,6 +9387,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "4567",
       "reloaddelay": "92",
@@ -9039,6 +9424,7 @@
        }
       ],
       "weapon": "AsianGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumCannon"
@@ -9054,8 +9440,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
@@ -9092,6 +9480,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "25",
@@ -9208,6 +9597,7 @@
        }
       ],
       "weapon": "AsianTwinPlasma",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -9223,6 +9613,7 @@
       "burst": "4",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "25",
@@ -9339,6 +9730,7 @@
        }
       ],
       "weapon": "AsianTwinPlasmaE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -9360,8 +9752,10 @@
      "v": "2400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },

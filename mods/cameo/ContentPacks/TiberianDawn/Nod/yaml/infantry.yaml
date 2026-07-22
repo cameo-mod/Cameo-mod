@@ -22,7 +22,7 @@ td_nod_minigunner:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@td_nod_minigunner:
-		Modifier: 27
+		Modifier: 29
 	Tooltip:
 		Name: Nod Minigunner
 	Buildable:
@@ -296,13 +296,13 @@ td_nod_lasertrooper:
 	Tooltip:
 		Name: Laser Trooper
 	Health:
-		HP: 60000
+		HP: 59000
 	ChangesHealth@SelfHealing:
 		Step: 60
 	Mobile:
-		Speed: 50
+		Speed: 51
 	FirepowerMultiplier@PromotionUnit:
-		Modifier: 100
+		Modifier: 108
 	Armament@PRIMARY:
 		Weapon: BlackHandLaser
 		LocalOffset: 600,0,450
@@ -401,7 +401,7 @@ td_nod_stealthsoldier:
 		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~td_nod_promotion_upgradeupnodstealthname
 		Description: actor_stealthsoldier.description
 	Valued:
-		Cost: 500
+		Cost: 753
 	Tooltip:
 		Name: Stealth Soldier
 	Health:
@@ -433,6 +433,8 @@ td_nod_stealthsoldier:
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
+	FirepowerMultiplier:
+		Modifier: 93
 td_nod_lasercommando:
 	Inherits: ^Soldier
 	Inherits@deathanim: ^RA2InfantryDeathAnimations

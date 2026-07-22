@@ -17,14 +17,14 @@ asianalliance_asianmilitia:
 		Name: Asian Grenadier
 		RequiresCondition: asianalliance_doctrine_modernizedinfantryequipment
 	Valued:
-		Cost: 100
+		Cost: 110
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~asianalliance_asianbarracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 52
+		Speed: 53
 	Health:
 		HP: 24000
 	ChangesHealth@SelfHealing:
@@ -34,7 +34,7 @@ asianalliance_asianmilitia:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@asianalliance_asianmilitia:
-		Modifier: 70
+		Modifier: 83
 	Armament@PRIMARY:
 		Weapon: asianalliance_asianmilitia_shotgun
 		LocalOffset: 128,0,256
@@ -330,6 +330,8 @@ asianalliance_fanatic:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode
 
+	FirepowerMultiplier:
+		Modifier: 100
 asianalliance_japanesesamurai:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -600,7 +602,7 @@ asianalliance_asdf:
 	Tooltip:
 		Name: ASDF
 	Valued:
-		Cost: 1000
+		Cost: 357
 	Buildable:
 		BuildPaletteOrder: 120
 		Prerequisites: ~asianalliance_asianbarracks, ~asianalliance_promotion_unlockasdf, asianalliance_militaryacademy
@@ -608,11 +610,11 @@ asianalliance_asdf:
 		Description: actor_boris.description
 		IconPalette: ra2cameo
 	Health:
-		HP: 40000
+		HP: 39000
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Mobile:
-		Speed: 60
+		Speed: 58
 	Armament@PRIMARY:
 		Weapon: ASDFGun
 		LocalOffset: 128,0,256
@@ -666,6 +668,8 @@ asianalliance_asdf:
 	ActorStatValues:
 		Upgrades: asianalliance_upgrade_asiandiplomacy, asianalliance_doctrine_asianphalanx, asianalliance_doctrine_modernizedinfantryequipment, asianalliance_upgrade_banzaimode
 
+	FirepowerMultiplier:
+		Modifier: 109
 asianalliance_asiancommando:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate

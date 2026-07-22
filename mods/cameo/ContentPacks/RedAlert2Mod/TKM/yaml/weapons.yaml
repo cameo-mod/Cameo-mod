@@ -1,7 +1,7 @@
 tkm_rifleman_rifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 75
-	Range: 5500
+	Range: 5042
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -169,7 +169,7 @@ tkmm16:
 tkm_trooper_ak:
 	Inherits: ^SmallArms
 	ReloadDelay: 31
-	Range: 5500
+	Range: 5191
 	Report: mgun2.aud
 	Burst: 5
 	BurstDelays: 1
@@ -586,7 +586,7 @@ HueyCryoMissiles:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
-	MinRange: 553
+	MinRange: 1105
 	Report: missile6.aud
 	Projectile: Missile
 		TrailImage: blue_smokey
@@ -646,7 +646,7 @@ HueyTwinMissiles:
 	ReloadDelay: 16
 	Burst: 2
 	Range: 5528
-	MinRange: 553
+	MinRange: 1105
 	Report: missile6.aud
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1383,7 +1383,7 @@ HeavyAATankCannontkm:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 4746
-	MinRange: 474
+	MinRange: 950
 	Report: gun13.aud
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1418,7 +1418,7 @@ tkmheavyaaturret:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
 	Range: 10588
-	MinRange: 474
+	MinRange: 2120
 	Report: gun13.aud
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1510,7 +1510,7 @@ HueyFireMissiles:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 16
 	Range: 5528
-	MinRange: 553
+	MinRange: 1105
 	Report: missile6.aud
 	Projectile: Missile
 		TrailImage: fb2

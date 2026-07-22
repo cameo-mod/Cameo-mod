@@ -752,7 +752,7 @@ RA2REVENANTAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
 	Range: 10240
-	MinRange: 512
+	MinRange: 2050
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -960,7 +960,7 @@ RA2155mm_elite:
 
 RA28Inch:
 	Inherits: ^RA2HeavyCannon
-	MinRange: 1024
+	MinRange: 615
 	ReloadDelay: 1
 	Range: 3072
 	Report: turret1.aud
@@ -2033,7 +2033,7 @@ RA2TorpTube_elite:
 ra2_soviets_conscript_carbine:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 18
-	Range: 4500
+	Range: 4898
 	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000

@@ -188,7 +188,6 @@ zerg_goremaw:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
-	Inherits@swarmer: ^ZergSwarmerUpgrades
 	Tooltip:
 		Name: Goremaw
 	Valued:
@@ -237,7 +236,7 @@ zerg_goremaw:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
 zerg_lurker:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

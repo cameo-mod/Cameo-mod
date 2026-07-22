@@ -166,11 +166,13 @@ edenTigerRailgun:
 	ReloadDelay: 40
 	Range: 8235
 
+	MinRange: 1645
 edenDefenceRailgun:
 	Inherits: edenTigerRailgun
 	Range: 7168
 	ReloadDelay: 50
 
+	MinRange: 1435
 edenEMP:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
@@ -380,7 +382,7 @@ plymouthScorpion:
 plymouthRPG:
 	ReloadDelay: 80
 	Range: 6144
-	MinRange: 512
+	MinRange: 1230
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: Missile
@@ -427,6 +429,7 @@ plymouthDefenceRPG:
 	Range: 7168
 	ReloadDelay: 50
 
+	MinRange: 1435
 plymouthSticky:
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^TankDestroyerCannon

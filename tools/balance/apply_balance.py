@@ -26,13 +26,15 @@ import argparse
 import json
 import pathlib
 import re
+import subprocess
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 LEDGER = ROOT / "docs/balance"
 
 UNIT_FIELDS = ("cost", "hp", "speed", "speed_air", "turn_speed", "sight",
-               "build_limit", "build_duration", "self_heal_step")
+               "build_limit", "build_duration", "self_heal_step",
+               "firepower_multiplier")
 WEAPON_FIELDS = {"reloaddelay": "ReloadDelay", "burst": "Burst",
                  "burstdelays": "BurstDelays", "range": "Range",
                  "minrange": "MinRange"}
@@ -80,10 +82,16 @@ class YamlEditor:
                     self.lines[i] = m.group(1) + str(value)
                     self.dirty = True
                     return f"{old} -> {value}"
+        # Insert a new unqualified FirepowerMultiplier block if requested and missing
+        if trait == "FirepowerMultiplier":
+            self.lines.insert(e, f"\tFirepowerMultiplier:")
+            self.lines.insert(e + 1, f"\t\t{field}: {value}")
+            self.dirty = True
+            return f"inserted {field} {value}"
         return f"`{trait}.{field}` not written locally"
 
     def set_weapon_field(self, weapon: str, field: str, value) -> str:
-        """Top-level weapon field (single-tab indent)."""
+        """Top-level weapon field (single-tab indent). Inserts if missing."""
         span = self._block(weapon)
         if span is None:
             return f"weapon `{weapon}` not found"
@@ -97,7 +105,10 @@ class YamlEditor:
                 self.lines[i] = m.group(1) + str(value)
                 self.dirty = True
                 return f"{old} -> {value}"
-        return f"`{field}` not written locally"
+        # Field is not defined locally: insert right after the weapon header
+        self.lines.insert(s + 1, f"\t{field}: {value}")
+        self.dirty = True
+        return f"inserted {field} {value}"
 
     def set_warhead_damage(self, weapon: str, tag: str, value) -> str:
         span = self._block(weapon)
@@ -161,6 +172,8 @@ def main() -> int:
 
     changed, skipped_inherited, problems = 0, 0, []
     for jf in sorted(LEDGER.glob("*.json")):
+        if jf.name == "class_anchors.json":
+            continue
         doc = json.loads(jf.read_text(encoding="utf-8"))
         if args.faction and args.faction not in doc["ledger"]:
             continue
@@ -182,7 +195,12 @@ def main() -> int:
                         continue
                     relfile, anchor = src.split("#", 1)
                     trait, _, tfield = anchor.partition(".")
-                    res = editor(relfile).set_field(actor, trait, tfield, slot["v"])
+                    if field == "firepower_multiplier":
+                        # OpenRA stores the Modifier as an integer percentage, e.g. 89 = 89%.
+                        val = int(round(slot["v"] * 100))
+                    else:
+                        val = slot["v"]
+                    res = editor(relfile).set_field(actor, trait, tfield, val)
                     if res == "unchanged":
                         problems.append(f"{actor}.{field}: SHADOWED — resolved "
                                         f"{rslot.get('v')} != defining line {slot['v']} "
@@ -230,8 +248,13 @@ def main() -> int:
         for ed in editors.values():
             ed.save()
         print(f"APPLIED: {changed} values written "
-              f"({skipped_inherited} inherited stats skipped). "
-              f"NOW RUN: extract_stats.py, audits, BOOT GATE before committing.")
+              f"({skipped_inherited} inherited stats skipped).")
+        print("Auto-running extract_stats.py to refresh ledgers...")
+        subprocess.run([sys.executable, str(ROOT / "tools" / "balance" / "extract_stats.py"), str(ROOT)], cwd=ROOT)
+        print("Auto-running audit_multiplier_modifiers.py...")
+        subprocess.run([sys.executable, str(ROOT / "tools" / "audit" / "audit_multiplier_modifiers.py")], cwd=ROOT)
+        print("Re-run the full audit suite (tools/audit/run_all.sh or tools/balance/_run_full_audit.py) "
+              "and the boot gate before committing.")
     else:
         print(f"DRY RUN: {changed} values would change "
               f"({skipped_inherited} inherited stats skipped). "

@@ -231,7 +231,7 @@ naxis_naxiriflesoldier_rifle_elite:
 naxis_naxiriflerecruit_rifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 100
-	Range: 5500
+	Range: 5227
 	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
 	ValidTargets: Ground, Water
 	Warhead@SmallArms: SpreadDamage
@@ -699,7 +699,7 @@ NaxMausCannon:
 	ReloadDelay: 99
 	Report: aa_bgart.wav
 	Range: 6666
-	MinRange: 1333
+	MinRange: 1335
 	Projectile: Bullet
 		Blockable: false
 		Speed: 666
@@ -759,7 +759,7 @@ NaxRatteCannon:
 	ReloadDelay: 145
 	Report: aa_bgart.wav
 	Range: 6110
-	MinRange: 1222
+	MinRange: 1220
 	Burst: 2
 	BurstDelays: 10
 	Projectile: Bullet
@@ -1160,7 +1160,7 @@ Nax120mmAssault_elite:
 
 NaxiAlienPistolE:
 	Inherits: NaxiAlienPistol
-	Range: 6136
+	Range: 3500
 	Burst: 4
 	BurstDelays: 3
 
@@ -1226,14 +1226,14 @@ NaxisDonnerschlagTarget:
 	ValidTargets: Ground, Air, Water
 	ReloadDelay: 15
 	Range: 20130
-	MinRange: 4026
+	MinRange: 4025
 	Projectile: InstantHit
 		Inaccuracy: 2013
 
 NaxisDonnerschlagTargetVisualLaser:
 	ReloadDelay: 3
 	Range: 20130
-	MinRange: 4026
+	MinRange: 4025
 	#Report: 2100rotlsr.wav
 	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
 	TargetActorCenter: true

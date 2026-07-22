@@ -314,7 +314,7 @@ ra1_allies_machinegunner:
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
 	Valued:
-		Cost: 400
+		Cost: 557
 	Tooltip:
 		Name: Machine Gunner
 	Buildable:
@@ -323,9 +323,9 @@ ra1_allies_machinegunner:
 		Description: actor_e1.description
 		Prerequisites: ~ra1_allies_alliedbarracks, ~ra1_allies_promotion_unlockmachinegunner
 	Mobile:
-		Speed: 50
+		Speed: 49
 	Health:
-		HP: 20000
+		HP: 19000
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
@@ -356,3 +356,6 @@ ra1_allies_machinegunner:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_infantryarmorplating, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_gpssatellitesupport
 	GrantExternalConditionToTransport:
 		Condition: ifv-hmg
+
+	FirepowerMultiplier:
+		Modifier: 93

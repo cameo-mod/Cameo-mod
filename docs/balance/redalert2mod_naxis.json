@@ -14,8 +14,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -37,6 +39,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "5",
@@ -121,6 +124,7 @@
        }
       ],
       "weapon": "JapanSuperBomb",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -139,8 +143,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Aircraft",
      "tech_tier": null,
      "unit_class": null
     },
@@ -165,6 +171,7 @@
       "burst": "10",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -212,6 +219,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -223,6 +231,7 @@
       "burst": "10",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -271,6 +280,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -287,8 +297,10 @@
      "v": "1100"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Fighter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -322,6 +334,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -375,6 +388,7 @@
        }
       ],
       "weapon": "NaxiInterceptorGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^FlakWeapon",
@@ -387,6 +401,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -418,6 +433,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -433,10 +449,17 @@
      "v": "1000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Fighter",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
@@ -459,6 +482,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -490,6 +514,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -500,6 +525,7 @@
       "burst": "2",
       "burstdelays": "9",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "100",
@@ -532,6 +558,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -542,6 +569,7 @@
       "burst": "10",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -589,6 +617,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -600,6 +629,7 @@
       "burst": "10",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6090",
       "reloaddelay": "127",
@@ -648,6 +678,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -664,10 +695,17 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Fighter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
@@ -698,6 +736,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "5368",
       "reloaddelay": "47",
@@ -757,6 +796,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -769,6 +809,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "47",
@@ -825,6 +866,7 @@
        }
       ],
       "weapon": "NaxQuadCannonE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -837,6 +879,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -893,6 +936,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -905,6 +949,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -961,6 +1006,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -978,10 +1024,17 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
+     "trait": "FirepowerMultiplier@FirerateCompensation",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
@@ -1024,6 +1077,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1062,6 +1116,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1087,6 +1142,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "30000",
@@ -1095,6 +1151,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxDefensivePlaneTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1113,6 +1170,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1150,6 +1208,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1191,6 +1250,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1225,6 +1285,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1251,6 +1312,7 @@
       "burst": "8",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "13200",
       "reloaddelay": "88",
@@ -1306,6 +1368,7 @@
        }
       ],
       "weapon": "NaxFlakAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1317,6 +1380,7 @@
       "burst": "8",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "8800",
       "reloaddelay": "88",
@@ -1372,6 +1436,7 @@
        }
       ],
       "weapon": "NaxFlakAG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1389,8 +1454,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -1424,6 +1491,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1449,6 +1517,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1474,6 +1543,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1491,7 +1561,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "minrange": "2468",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
@@ -1545,6 +1616,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1555,6 +1627,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -1586,6 +1659,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1595,6 +1669,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -1651,6 +1726,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1670,6 +1746,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Bunker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1711,6 +1788,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1746,6 +1824,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1782,6 +1861,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1819,6 +1899,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1846,6 +1927,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8100",
       "reloaddelay": "50",
@@ -1866,6 +1948,7 @@
        }
       ],
       "weapon": "NaxiRifleT",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1882,6 +1965,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1923,6 +2007,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1961,6 +2046,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1998,6 +2084,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2027,9 +2114,10 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "5136",
-      "reloaddelay": "50",
+      "range": "2777",
+      "reloaddelay": "54",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2037,12 +2125,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "8000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2052,7 +2140,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -2063,6 +2151,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2073,9 +2162,10 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "6136",
-      "reloaddelay": "50",
+      "range": "3500",
+      "reloaddelay": "54",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
       "versus_templates": [
@@ -2083,12 +2173,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "8000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2098,7 +2188,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -2109,6 +2199,7 @@
        }
       ],
       "weapon": "NaxiAlienPistolE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2120,9 +2211,10 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "5136",
-      "reloaddelay": "50",
+      "range": "2777",
+      "reloaddelay": "54",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2130,12 +2222,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "8000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2145,7 +2237,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -2156,6 +2248,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2167,9 +2260,10 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "6136",
-      "reloaddelay": "50",
+      "range": "3500",
+      "reloaddelay": "54",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
@@ -2177,12 +2271,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "8000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2192,7 +2286,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "8000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -2203,6 +2297,7 @@
        }
       ],
       "weapon": "NaxiAlienPistolE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2212,17 +2307,24 @@
     ],
     "armor": {
      "src": "inherited",
-     "v": "None"
+     "v": "Plate"
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
-     "v": "150"
+     "v": "110"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "closecombat",
      "special": 1.0,
+     "subtype": "CloseCombatInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -2239,7 +2341,7 @@
     ],
     "sight": {
      "src": "inherited",
-     "v": "8000"
+     "v": "5000"
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
@@ -2250,6 +2352,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -2276,12 +2379,14 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -2308,6 +2413,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2315,6 +2421,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -2341,6 +2448,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2348,6 +2456,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -2374,6 +2483,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2388,10 +2498,12 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -2419,6 +2531,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -2445,6 +2558,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2453,6 +2567,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1616",
       "reloaddelay": "37",
@@ -2479,6 +2594,7 @@
        }
       ],
       "weapon": "RA2BrutePunchE",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2486,6 +2602,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "1616",
       "reloaddelay": "37",
@@ -2511,6 +2628,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2525,8 +2643,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2555,6 +2675,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
@@ -2587,6 +2708,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2596,6 +2718,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8361",
       "reloaddelay": "75",
@@ -2627,6 +2750,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannonE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2642,8 +2766,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -2678,6 +2804,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
@@ -2708,6 +2835,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunSmall",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2717,6 +2845,7 @@
       "burst": "3",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
@@ -2747,6 +2876,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunSmallAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2762,8 +2892,10 @@
      "v": "450"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2797,6 +2929,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1555",
       "reloaddelay": "18",
@@ -2822,6 +2955,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2829,6 +2963,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5501",
       "reloaddelay": "100",
@@ -2850,6 +2985,7 @@
        }
       ],
       "weapon": "NaxiRifleCons",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2859,6 +2995,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6501",
       "reloaddelay": "100",
@@ -2880,6 +3017,7 @@
        }
       ],
       "weapon": "NaxiRifleConsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2894,10 +3032,12 @@
      "v": "1000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -2927,6 +3067,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4830",
       "reloaddelay": "60",
@@ -2953,6 +3094,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2961,6 +3103,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5830",
       "reloaddelay": "60",
@@ -2987,6 +3130,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroopE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2996,6 +3140,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4830",
       "reloaddelay": "60",
@@ -3022,6 +3167,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3031,6 +3177,7 @@
       "burst": "6",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5830",
       "reloaddelay": "60",
@@ -3057,6 +3204,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroopE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3071,8 +3219,10 @@
      "v": "225"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "HeavyInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3103,6 +3253,7 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "8970",
@@ -3114,6 +3265,7 @@
       ],
       "warheads": [],
       "weapon": "NaxiWW2MachinegunnerTargeting",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^deploytargeting"
       ]
@@ -3123,6 +3275,7 @@
       "burst": "10",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8970",
       "reloaddelay": "90",
@@ -3154,6 +3307,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3164,6 +3318,7 @@
       "burst": "20",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9970",
       "reloaddelay": "90",
@@ -3195,6 +3350,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunnerE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3205,6 +3361,7 @@
       "burst": "10",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "8970",
       "reloaddelay": "90",
@@ -3236,6 +3393,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3246,6 +3404,7 @@
       "burst": "20",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9970",
       "reloaddelay": "90",
@@ -3277,6 +3436,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunnerE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3292,8 +3452,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeavyInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
@@ -3323,6 +3485,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "120",
@@ -3344,6 +3507,7 @@
        }
       ],
       "weapon": "NaxiSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3352,6 +3516,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "120",
@@ -3373,6 +3538,7 @@
        }
       ],
       "weapon": "NaxiSniperE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3380,6 +3546,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7777",
       "reloaddelay": "120",
@@ -3401,6 +3568,7 @@
        }
       ],
       "weapon": "NaxiSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3410,6 +3578,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "8888",
       "reloaddelay": "120",
@@ -3431,6 +3600,7 @@
        }
       ],
       "weapon": "NaxiSniperE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3445,8 +3615,10 @@
      "v": "250"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "SniperInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3476,8 +3648,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "5500",
+      "range": "5227",
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3497,6 +3670,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3505,6 +3679,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "100",
@@ -3526,6 +3701,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3533,8 +3709,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "5500",
+      "range": "5227",
       "reloaddelay": "100",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -3554,6 +3731,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3563,6 +3741,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "100",
@@ -3584,6 +3763,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3598,14 +3778,21 @@
      "v": "75"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@naxis_naxiriflerecruit.Modifier",
+     "trait": "FirepowerMultiplier@naxis_naxiriflerecruit",
+     "v": 0.67
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
-     "v": "20000"
+     "v": "21000"
     },
     "name": "Naxi Rifle Recruit",
     "prerequisites": [
@@ -3621,13 +3808,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
-     "v": "45"
+     "v": "48"
     }
    },
    "naxis_naxiriflesoldier": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -3649,6 +3837,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3657,6 +3846,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6500",
       "reloaddelay": "50",
@@ -3678,6 +3868,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3685,6 +3876,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "50",
@@ -3706,6 +3898,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3715,6 +3908,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6500",
       "reloaddelay": "50",
@@ -3736,6 +3930,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3750,10 +3945,17 @@
      "v": "100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@naxis_naxiriflesoldier.Modifier",
+     "trait": "FirepowerMultiplier@naxis_naxiriflesoldier",
+     "v": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -3780,6 +3982,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "5512",
       "reloaddelay": "135",
@@ -3871,6 +4074,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -3884,6 +4088,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "6512",
       "reloaddelay": "135",
@@ -3970,6 +4175,7 @@
        }
       ],
       "weapon": "NaxiShrekConsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -3982,6 +4188,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": false,
       "range": "5512",
       "reloaddelay": "135",
@@ -4073,6 +4280,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4087,6 +4295,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": false,
       "range": "6512",
       "reloaddelay": "135",
@@ -4173,6 +4382,7 @@
        }
       ],
       "weapon": "NaxiShrekConsE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4192,8 +4402,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -4222,6 +4434,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "6805",
       "reloaddelay": "124",
@@ -4313,6 +4526,7 @@
        }
       ],
       "weapon": "NaxiShrek",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4326,6 +4540,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": true,
       "range": "7805",
       "reloaddelay": "124",
@@ -4412,6 +4627,7 @@
        }
       ],
       "weapon": "NaxiShrekE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4424,6 +4640,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": false,
       "range": "6805",
       "reloaddelay": "124",
@@ -4515,6 +4732,7 @@
        }
       ],
       "weapon": "NaxiShrek",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4529,6 +4747,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.1,
       "pricing": false,
       "range": "7805",
       "reloaddelay": "124",
@@ -4615,6 +4834,7 @@
        }
       ],
       "weapon": "NaxiShrekE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4634,8 +4854,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
@@ -4666,6 +4888,7 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "8888",
@@ -4677,6 +4900,7 @@
       ],
       "warheads": [],
       "weapon": "NaxQuadCannonTargeting",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^aadeploytargeting"
       ]
@@ -4686,6 +4910,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "8888",
       "reloaddelay": "47",
@@ -4742,6 +4967,7 @@
        }
       ],
       "weapon": "PortableFlak",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -4754,6 +4980,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9999",
       "reloaddelay": "47",
@@ -4810,6 +5037,7 @@
        }
       ],
       "weapon": "PortableFlakE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -4822,6 +5050,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": false,
       "range": "8888",
       "reloaddelay": "47",
@@ -4878,6 +5107,7 @@
        }
       ],
       "weapon": "PortableFlak",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -4890,6 +5120,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": false,
       "range": "9999",
       "reloaddelay": "47",
@@ -4946,6 +5177,7 @@
        }
       ],
       "weapon": "PortableFlakE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -4963,8 +5195,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -4995,6 +5229,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "26",
@@ -5051,6 +5286,7 @@
        }
       ],
       "weapon": "SkyMageCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5062,6 +5298,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "26",
@@ -5118,6 +5355,7 @@
        }
       ],
       "weapon": "SkyMageCannonE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5129,6 +5367,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "26",
@@ -5185,6 +5424,7 @@
        }
       ],
       "weapon": "SkyMageCannonAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5196,6 +5436,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "26",
@@ -5252,6 +5493,7 @@
        }
       ],
       "weapon": "SkyMageCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5269,10 +5511,17 @@
      "v": "1200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FlyingInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
+     "trait": "FirepowerMultiplier@FirerateCompensation",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -5300,6 +5549,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
@@ -5325,6 +5575,7 @@
        }
       ],
       "weapon": "RA2Shovel",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5332,6 +5583,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
@@ -5357,6 +5609,7 @@
        }
       ],
       "weapon": "RA2Shovel",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5371,8 +5624,10 @@
      "v": "250"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5402,6 +5657,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2500",
@@ -5410,10 +5666,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxiSlaveWhip",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5621",
       "reloaddelay": "75",
@@ -5435,6 +5693,7 @@
        }
       ],
       "weapon": "NaxiRifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5443,6 +5702,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6621",
       "reloaddelay": "75",
@@ -5464,6 +5724,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5471,6 +5732,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5621",
       "reloaddelay": "75",
@@ -5492,6 +5754,7 @@
        }
       ],
       "weapon": "NaxiRifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5501,6 +5764,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6621",
       "reloaddelay": "75",
@@ -5522,6 +5786,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5536,10 +5801,12 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -5571,7 +5838,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "4000",
+      "range": "3203",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -5581,7 +5848,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5591,7 +5858,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5602,6 +5869,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5613,7 +5881,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "4000",
+      "range": "3203",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
@@ -5622,7 +5890,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5632,7 +5900,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5643,6 +5911,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5655,7 +5924,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "4000",
+      "range": "3203",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -5665,7 +5934,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5675,7 +5944,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5686,6 +5955,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5698,7 +5968,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "4000",
+      "range": "3203",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
@@ -5707,7 +5977,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5717,7 +5987,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "4000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5728,6 +5998,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5743,10 +6014,17 @@
      "v": "240"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": "closecombat",
      "special": 1.0,
+     "subtype": "CloseCombatInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.86
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -5774,6 +6052,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5621",
       "reloaddelay": "75",
@@ -5795,6 +6074,7 @@
        }
       ],
       "weapon": "NaxiRifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5803,6 +6083,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6621",
       "reloaddelay": "75",
@@ -5824,6 +6105,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5831,6 +6113,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "5621",
       "reloaddelay": "75",
@@ -5852,6 +6135,7 @@
        }
       ],
       "weapon": "NaxiRifle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5861,6 +6145,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6621",
       "reloaddelay": "75",
@@ -5882,6 +6167,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5896,10 +6182,12 @@
      "v": "100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
@@ -5930,6 +6218,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "15000",
       "reloaddelay": "125",
@@ -5977,6 +6266,7 @@
        }
       ],
       "weapon": "NaxiMissileUboat",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -5993,10 +6283,17 @@
      "v": "2400"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#FirepowerMultiplier@BallisticMissileSubBuff.Modifier",
+     "trait": "FirepowerMultiplier@BallisticMissileSubBuff",
+     "v": 2.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/naval.yaml#Health.HP",
@@ -6029,6 +6326,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6066,6 +6364,7 @@
        }
       ],
       "weapon": "8Inch",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6075,6 +6374,7 @@
       "armament_name": "secondary",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6112,6 +6412,7 @@
        }
       ],
       "weapon": "8Inch",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6120,6 +6421,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6157,6 +6459,7 @@
        }
       ],
       "weapon": "8Inch",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6165,6 +6468,7 @@
      {
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "3000",
       "pricing": true,
       "range": "15000",
@@ -6202,6 +6506,7 @@
        }
       ],
       "weapon": "8Inch",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6217,8 +6522,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6254,6 +6561,7 @@
       "burst": "2",
       "burstdelays": "8",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "120",
@@ -6290,6 +6598,7 @@
        }
       ],
       "weapon": "AsianSmallTorpedo",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -6305,8 +6614,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6345,6 +6656,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6367,6 +6679,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6389,6 +6702,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6411,6 +6725,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6432,6 +6747,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6454,6 +6770,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6475,6 +6792,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6496,6 +6814,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6518,6 +6837,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6540,6 +6860,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6564,6 +6885,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6577,6 +6899,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6599,6 +6922,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6625,6 +6949,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6649,6 +6974,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6673,6 +6999,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6697,6 +7024,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6721,6 +7049,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6745,6 +7074,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6769,6 +7099,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6793,6 +7124,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6813,6 +7145,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6825,6 +7158,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "28",
@@ -6846,6 +7180,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -6855,6 +7190,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "28",
@@ -6877,6 +7213,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -6886,6 +7223,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
@@ -6943,6 +7281,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -6959,10 +7298,17 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#FirepowerMultiplier@tiger.nax.Modifier",
+     "trait": "FirepowerMultiplier@tiger.nax",
+     "v": 1.2
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
@@ -6998,6 +7344,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -7029,6 +7376,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7039,6 +7387,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7555",
       "reloaddelay": "60",
@@ -7070,6 +7419,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTopAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7085,8 +7435,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7121,6 +7473,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -7181,6 +7534,7 @@
        }
       ],
       "weapon": "NaxBrummbarArty",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7192,6 +7546,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "minrange": "2800",
       "pricing": true,
       "range": "15000",
@@ -7250,6 +7605,7 @@
        }
       ],
       "weapon": "NaxBrummbarArtyE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7268,8 +7624,10 @@
      "v": "1100"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -7305,8 +7663,9 @@
      {
       "armament_name": "athena-beam",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "minrange": "4026",
+      "minrange": "4025",
       "pricing": true,
       "range": "20130",
       "reloaddelay": "15",
@@ -7315,13 +7674,15 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisDonnerschlagTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "minrange": "4026",
+      "minrange": "4025",
       "pricing": true,
       "range": "20130",
       "reloaddelay": "3",
@@ -7329,6 +7690,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisDonnerschlagTargetVisualLaser",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -7341,10 +7703,17 @@
      "v": "2300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#FirepowerMultiplier@RANK-1.Modifier",
+     "trait": "FirepowerMultiplier@RANK-1",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/vehicles.yaml#Health.HP",
@@ -7380,6 +7749,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -7405,6 +7775,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -7419,8 +7790,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -7454,7 +7827,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "minrange": "2468",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
@@ -7508,6 +7882,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7518,7 +7893,8 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "minrange": "2468",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2470",
       "pricing": true,
       "range": "13333",
       "reloaddelay": "111",
@@ -7571,6 +7947,7 @@
        }
       ],
       "weapon": "NaxGrilleArtyE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7588,8 +7965,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -7626,6 +8005,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5570",
       "reloaddelay": "60",
@@ -7657,6 +8037,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7666,6 +8047,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8355",
       "reloaddelay": "60",
@@ -7696,6 +8078,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7711,8 +8094,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7745,6 +8130,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7132",
       "reloaddelay": "80",
@@ -7777,6 +8163,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -7786,6 +8173,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "80",
@@ -7818,6 +8206,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon",
@@ -7834,8 +8223,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -7870,6 +8261,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
@@ -7917,6 +8309,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7926,6 +8319,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5200",
       "reloaddelay": "28",
@@ -7947,6 +8341,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -7956,6 +8351,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6200",
       "reloaddelay": "28",
@@ -7978,6 +8374,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -7993,8 +8390,10 @@
      "v": "950"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8029,6 +8428,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7396",
       "reloaddelay": "90",
@@ -8077,6 +8477,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8087,6 +8488,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8396",
       "reloaddelay": "90",
@@ -8134,6 +8536,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8151,8 +8554,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8189,6 +8594,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5757",
       "reloaddelay": "80",
@@ -8220,6 +8626,7 @@
        }
       ],
       "weapon": "NaxiWW2KübelwagenMachinegun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8235,8 +8642,10 @@
      "v": "850"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -8270,6 +8679,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -8291,6 +8701,7 @@
        }
       ],
       "weapon": "KingNaxTigerCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -8300,6 +8711,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -8322,6 +8734,7 @@
        }
       ],
       "weapon": "KingNaxTigerCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -8337,8 +8750,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -8373,7 +8788,8 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "minrange": "1333",
+      "design_weapon_class": 1.05,
+      "minrange": "1335",
       "pricing": true,
       "range": "6666",
       "reloaddelay": "99",
@@ -8465,6 +8881,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -8479,7 +8896,8 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "minrange": "1333",
+      "design_weapon_class": 1.05,
+      "minrange": "1335",
       "pricing": true,
       "range": "7777",
       "reloaddelay": "99",
@@ -8567,6 +8985,7 @@
        }
       ],
       "weapon": "NaxMausCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -8587,8 +9006,10 @@
      "v": "4200"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -8633,8 +9054,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8669,7 +9092,8 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "minrange": "1333",
+      "design_weapon_class": 1.05,
+      "minrange": "1335",
       "pricing": true,
       "range": "6666",
       "reloaddelay": "99",
@@ -8760,6 +9184,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -8773,6 +9198,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "7000",
       "reloaddelay": "55",
@@ -8833,6 +9259,7 @@
        }
       ],
       "weapon": "LatinBuggyRocketE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -8844,6 +9271,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5555",
       "reloaddelay": "44",
@@ -8901,6 +9329,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -8921,8 +9350,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -8957,6 +9388,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "1560",
       "pricing": true,
@@ -8966,6 +9398,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "NaxisSarubianTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -8978,8 +9411,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9014,6 +9449,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7361",
       "reloaddelay": "75",
@@ -9045,6 +9481,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -9060,8 +9497,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9098,7 +9537,8 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "minrange": "1222",
+      "design_weapon_class": 1.0,
+      "minrange": "1220",
       "pricing": true,
       "range": "6110",
       "reloaddelay": "145",
@@ -9147,6 +9587,7 @@
        }
       ],
       "weapon": "NaxRatteCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9158,7 +9599,8 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
-      "minrange": "1222",
+      "design_weapon_class": 1.0,
+      "minrange": "1220",
       "pricing": true,
       "range": "7110",
       "reloaddelay": "145",
@@ -9206,6 +9648,7 @@
        }
       ],
       "weapon": "NaxRatteCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9218,6 +9661,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -9273,6 +9717,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9285,6 +9730,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -9340,6 +9786,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9361,8 +9808,10 @@
      "v": "8000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "EpicVehicle",
      "tech_tier": 0.75,
      "unit_class": 0.4
     },
@@ -9398,6 +9847,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -9419,6 +9869,7 @@
        }
       ],
       "weapon": "RA2120mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9428,6 +9879,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -9450,6 +9902,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -9458,7 +9911,8 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
-      "minrange": "2468",
+      "design_weapon_class": 1.0833333333333333,
+      "minrange": "2470",
       "pricing": true,
       "range": "12345",
       "reloaddelay": "111",
@@ -9511,6 +9965,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -9520,6 +9975,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "12000",
       "reloaddelay": "250",
@@ -9567,6 +10023,7 @@
        }
       ],
       "weapon": "NaxShoeRocket",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2Grenade",
@@ -9583,8 +10040,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "HighTechTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9619,6 +10078,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "2800",
       "pricing": true,
       "range": "14000",
@@ -9667,6 +10127,7 @@
        }
       ],
       "weapon": "NaxSturmArty",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2MediumCannon",
@@ -9683,8 +10144,10 @@
      "v": "2500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9720,6 +10183,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5289",
       "reloaddelay": "45",
@@ -9741,6 +10205,7 @@
        }
       ],
       "weapon": "RA2105mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9750,6 +10215,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6289",
       "reloaddelay": "45",
@@ -9772,6 +10238,7 @@
        }
       ],
       "weapon": "RA2105mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -9787,8 +10254,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -9823,6 +10292,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "50",
@@ -9844,6 +10314,7 @@
        }
       ],
       "weapon": "NaxTigerCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9853,6 +10324,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "50",
@@ -9875,6 +10347,7 @@
        }
       ],
       "weapon": "NaxTigerCannon_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -9890,8 +10363,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -9928,6 +10403,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "5368",
       "reloaddelay": "47",
@@ -9987,6 +10463,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9999,6 +10476,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "6368",
       "reloaddelay": "47",
@@ -10055,6 +10533,7 @@
        }
       ],
       "weapon": "NaxQuadCannonE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10067,6 +10546,7 @@
       "burst": "6",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "8052",
       "reloaddelay": "47",
@@ -10123,6 +10603,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10135,6 +10616,7 @@
       "burst": "8",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "9052",
       "reloaddelay": "47",
@@ -10191,6 +10673,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10208,8 +10691,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },

@@ -20,6 +20,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -46,6 +47,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "30",
@@ -71,6 +73,7 @@
        }
       ],
       "weapon": "RA2Shovel",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -78,6 +81,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "1500",
       "reloaddelay": "30",
@@ -103,6 +107,7 @@
        }
       ],
       "weapon": "RA2Shovel",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -119,6 +124,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -143,6 +149,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -150,6 +157,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -164,6 +172,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -189,6 +198,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -220,6 +230,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -237,6 +248,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -270,6 +282,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -290,6 +303,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -297,6 +311,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -311,6 +326,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -336,6 +352,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -367,6 +384,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -384,6 +402,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -409,6 +428,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -416,6 +436,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -430,6 +451,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -455,6 +477,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -486,6 +509,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -503,6 +527,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -529,6 +554,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -550,6 +576,7 @@
        }
       ],
       "weapon": "RA2120mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -559,6 +586,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -581,6 +609,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -589,6 +618,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -620,6 +650,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -637,6 +668,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -670,6 +702,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -702,6 +735,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -710,6 +744,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -741,6 +776,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -758,6 +794,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -791,6 +828,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -823,6 +861,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -831,6 +870,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -862,6 +902,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -879,6 +920,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -912,6 +954,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -944,6 +987,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -952,6 +996,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "4",
@@ -983,6 +1028,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -991,6 +1037,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6750",
       "reloaddelay": "6",
@@ -1022,6 +1069,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1030,6 +1078,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "4",
@@ -1061,6 +1110,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1078,6 +1128,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1110,6 +1161,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1117,6 +1169,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1131,6 +1184,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1156,6 +1210,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1187,6 +1242,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1204,6 +1260,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1229,6 +1286,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1236,6 +1294,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1250,6 +1309,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1275,6 +1335,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1306,6 +1367,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1323,6 +1385,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1348,6 +1411,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1355,6 +1419,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1369,6 +1434,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1394,6 +1460,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1425,6 +1492,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1442,6 +1510,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1467,6 +1536,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1474,6 +1544,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1488,6 +1559,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1513,6 +1585,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1544,6 +1617,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1561,6 +1635,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1586,6 +1661,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1593,6 +1669,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1607,6 +1684,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1632,6 +1710,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1663,6 +1742,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1680,6 +1760,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1705,6 +1786,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1712,6 +1794,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1726,6 +1809,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1751,6 +1835,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1782,6 +1867,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1799,6 +1885,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1824,6 +1911,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1831,6 +1919,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1845,6 +1934,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1870,6 +1960,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -1901,6 +1992,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1918,6 +2010,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1943,6 +2036,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -1950,6 +2044,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -1964,6 +2059,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1989,6 +2085,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2020,6 +2117,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2037,6 +2135,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2062,6 +2161,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2069,6 +2169,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2083,6 +2184,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2108,6 +2210,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2139,6 +2242,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2156,6 +2260,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2181,6 +2286,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2188,6 +2294,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2202,6 +2309,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2227,6 +2335,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2258,6 +2367,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2275,6 +2385,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2300,6 +2411,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2307,6 +2419,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2321,6 +2434,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2346,6 +2460,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2377,6 +2492,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2394,6 +2510,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2427,6 +2544,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2447,6 +2565,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2454,6 +2573,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2468,6 +2588,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2493,6 +2614,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2524,6 +2646,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2541,6 +2664,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2566,6 +2690,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2573,6 +2698,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2587,6 +2713,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2612,6 +2739,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2643,6 +2771,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2660,6 +2789,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2685,6 +2815,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2692,6 +2823,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2706,6 +2838,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2731,6 +2864,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2762,6 +2896,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2779,6 +2914,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2804,6 +2940,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2811,6 +2948,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2825,6 +2963,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2850,6 +2989,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -2881,6 +3021,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2898,6 +3039,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2923,6 +3065,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2930,6 +3073,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2944,6 +3088,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2969,6 +3114,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -3000,6 +3146,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3017,6 +3164,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3050,6 +3198,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3072,6 +3221,7 @@
       "burst": "5",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3000",
       "reloaddelay": "25",
@@ -3097,6 +3247,7 @@
        }
       ],
       "weapon": "RA2DepthCharge",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3113,8 +3264,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@ScoutShip.Modifier",
+     "trait": "FirepowerMultiplier@ScoutShip",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
@@ -3142,6 +3299,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3162,6 +3320,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "17500",
@@ -3170,6 +3329,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2CarrierTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3184,6 +3344,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3225,6 +3386,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3254,6 +3416,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3276,6 +3439,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -3297,6 +3461,7 @@
        }
       ],
       "weapon": "RA2155mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon"
       ]
@@ -3306,6 +3471,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "40",
@@ -3328,6 +3494,7 @@
        }
       ],
       "weapon": "RA2155mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2EliteEffects"
@@ -3336,6 +3503,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "12000",
@@ -3344,6 +3512,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2OspreyTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3358,6 +3527,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3390,6 +3560,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -3420,12 +3591,14 @@
        }
       ],
       "weapon": "SonicZap",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MagicWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "6000",
@@ -3434,6 +3607,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "SonicZapFriendly",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3448,6 +3622,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3483,6 +3658,7 @@
       "burst": "2",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "5000",
       "pricing": true,
@@ -3494,6 +3670,7 @@
       ],
       "warheads": [],
       "weapon": "DreadnoughtLaunch",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3508,8 +3685,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ArtilleryShip",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@RANK-1.Modifier",
+     "trait": "FirepowerMultiplier@RANK-1",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
@@ -3541,8 +3724,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4500",
+      "range": "4898",
       "reloaddelay": "18",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3562,6 +3746,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3570,6 +3755,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "18",
@@ -3591,6 +3777,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3600,6 +3787,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5724",
       "reloaddelay": "50",
@@ -3630,6 +3818,7 @@
        }
       ],
       "weapon": "RA2vulcan3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3647,8 +3836,9 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutInfantry",
      "tech_tier": null,
-     "unit_class": null
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
@@ -3668,7 +3858,7 @@
     },
     "speed": {
      "src": "inherited",
-     "v": "57"
+     "v": "58"
     }
    },
    "ra2gacnst.infiltrated": {
@@ -3679,6 +3869,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3700,6 +3891,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3726,6 +3918,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "1000",
       "pricing": true,
       "range": "5000",
@@ -3774,6 +3967,7 @@
        }
       ],
       "weapon": "RA2HornetMissile",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -3792,8 +3986,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@ra2hornet.Modifier",
+     "trait": "FirepowerMultiplier@ra2hornet",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
@@ -3821,6 +4021,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3854,6 +4055,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -3875,6 +4077,7 @@
        }
       ],
       "weapon": "RA2120mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -3884,6 +4087,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -3906,6 +4110,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -3914,6 +4119,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "6",
@@ -3945,6 +4151,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -3962,6 +4169,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3998,6 +4206,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4019,6 +4228,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4053,6 +4263,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4085,6 +4296,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "3333",
@@ -4093,11 +4305,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2TeslaCoilCharge_cosmetic",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -4124,6 +4338,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4131,6 +4346,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5777",
       "reloaddelay": "100",
@@ -4157,6 +4373,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4164,6 +4381,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6222",
       "reloaddelay": "100",
@@ -4190,6 +4408,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4206,6 +4425,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "HeavyInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4230,6 +4450,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -4256,12 +4477,14 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5777",
       "reloaddelay": "100",
@@ -4288,12 +4511,14 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6222",
       "reloaddelay": "100",
@@ -4320,12 +4545,14 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3333",
       "reloaddelay": "25",
@@ -4339,11 +4566,13 @@
        }
       ],
       "weapon": "RA2TeslaCoilCharge",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -4370,6 +4599,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4377,6 +4607,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5777",
       "reloaddelay": "100",
@@ -4403,6 +4634,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4410,6 +4642,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6222",
       "reloaddelay": "100",
@@ -4436,12 +4669,14 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -4450,6 +4685,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "GenericC4",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -4464,6 +4700,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "HeavyInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4486,6 +4723,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "6567",
       "reloaddelay": "45",
@@ -4507,6 +4745,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4514,6 +4753,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "6567",
       "reloaddelay": "45",
@@ -4535,6 +4775,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4542,6 +4783,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "7567",
       "reloaddelay": "45",
@@ -4563,6 +4805,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4570,6 +4813,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "7567",
       "reloaddelay": "45",
@@ -4591,6 +4835,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4607,6 +4852,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4635,6 +4881,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "1880",
       "reloaddelay": "32",
@@ -4648,11 +4895,13 @@
        }
       ],
       "weapon": "SquidPunch",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1880",
@@ -4661,6 +4910,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "SquidGrab",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -4675,6 +4925,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4707,6 +4958,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "90",
@@ -4744,6 +4996,7 @@
        }
       ],
       "weapon": "RA2TorpTube",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -4753,6 +5006,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "90",
@@ -4789,6 +5043,7 @@
        }
       ],
       "weapon": "RA2TorpTube_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -4806,6 +5061,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4846,6 +5102,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4866,6 +5123,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -4920,6 +5178,7 @@
        }
       ],
       "weapon": "MigMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -4932,6 +5191,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -5016,6 +5276,7 @@
        }
       ],
       "weapon": "MigMissiles_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -5031,6 +5292,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -5082,6 +5344,7 @@
        }
       ],
       "weapon": "MigMissiles_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -5094,6 +5357,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -5145,6 +5409,7 @@
        }
       ],
       "weapon": "MigMissiles_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -5164,8 +5429,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions.Modifier",
+     "trait": "FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
@@ -5193,6 +5464,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5229,6 +5501,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5239,6 +5512,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "5780",
       "reloaddelay": "48",
@@ -5297,6 +5571,7 @@
        }
       ],
       "weapon": "RA2Robotmm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5306,6 +5581,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6780",
       "reloaddelay": "48",
@@ -5362,6 +5638,7 @@
        }
       ],
       "weapon": "RA2Robotmm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5380,6 +5657,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5405,6 +5683,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -5436,6 +5715,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -5453,6 +5733,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5478,6 +5759,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "12288",
@@ -5486,6 +5768,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "RA2SpyCamera",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -5500,6 +5783,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5533,6 +5817,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Misc",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5565,6 +5850,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5578,6 +5864,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5591,6 +5878,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },

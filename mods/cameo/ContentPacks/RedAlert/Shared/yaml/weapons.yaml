@@ -232,34 +232,34 @@ DragunovSniper:
 	Inherits: ^HeavyCannon
 	Inherits: ^FlakWeapon
 	ReloadDelay: 85
-	Range: 6880
+	Range: 5804
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 80000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 80000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 80000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 80000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8000
+		Damage: 80000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4
@@ -671,14 +671,14 @@ RAVulcan:
 	ReloadDelay: 48
 	Burst: 5
 	BurstDelays: 3
-	Range: 5713
+	Range: 6500
 	Report: gun13.aud
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 8000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 
@@ -686,7 +686,7 @@ ZeroFighterChainGun:
 	Inherits: ^Chaingun
 	ValidTargets: Ground, Water, Air
 	Range: 6615
-	MinRange: 1323
+	MinRange: 1325
 	ReloadDelay: 92
 	Burst: 12
 	BurstDelays: 4
@@ -1378,6 +1378,7 @@ V2ExplodeIrak:
 		ImpactSounds: kaboom22.aud
 		ImpactActors: false
 
+	MinRange: 2820
 BarrelExplode:
 	Inherits: ^DamagingExplosionHE
 	Warhead@1Dam: SpreadDamage
@@ -2151,7 +2152,7 @@ ra1_allies_chronovortex:
 ra1_allies_rifleinfantry_carbine:
 	Inherits: ^SmallArms
 	ReloadDelay: 50
-	Range: 5400
+	Range: 5500
 	ValidTargets: Ground, Water
 	Burst: 3
 	BurstDelays: 4

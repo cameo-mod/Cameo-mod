@@ -115,7 +115,7 @@ zerg_hydralisk:
 	Tooltip:
 		Name: Hydralisk
 	Valued:
-		Cost: 500
+		Cost: 3314
 	Power:
 		Amount: -25
 	Buildable:
@@ -124,7 +124,7 @@ zerg_hydralisk:
 		Queue: SCZergInfantry
 		Description: actor_schydralisk.description
 	Mobile:
-		Speed: 75
+		Speed: 76
 		TurnSpeed: 30
 	Health:
 		HP: 80000
@@ -153,6 +153,8 @@ zerg_hydralisk:
 	ActorStatValues:
 		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
+	FirepowerMultiplier:
+		Modifier: 99
 zerg_spithid:
 	Inherits@zerg: ^BasicZerg
 	Inherits@decoration: ^ZergRankDecoration

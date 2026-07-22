@@ -90,7 +90,17 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   every scout weapon INCLUDING upgrade variants; units use
   ^AutoTargetGroundAssaultMove (faction consistency program).
 
-## 3b. The special-modifier system (K) — trait-derived, not guessed (maintainer 2026-07-20)
+## 3b. Promotion/special-upgrade units (global)
+
+- Units unlocked by promotion or special upgrades inherit `^PromotionUnitBuff`.
+  That buff is an **external faction buff** and is ignored by the balance
+  formula — base stats are priced, not the buffed state.
+- Such a unit's tech tier is taken from the unit's own build prerequisite,
+  **not** the upgrade's tier. T1 and T2 both use the same 1.0x tech-class
+  multiplier, so an upgrade gated at radar tier does not change the unit's
+  formula tier as long as the unit itself is buildable from a T1/T2 structure.
+
+## 3c. The special-modifier system (K) — trait-derived, not guessed (maintainer 2026-07-20)
 
 The Special factor **K** on the range ratio (§1) is **1 + Σ(special
 weights)**, computed from the actor's TRAITS so K is never guessed.
@@ -114,6 +124,12 @@ already capture.
 | Spawns an attacking sub-actor | `Warhead@…: SpawnActor` dropping an actor with its own weapon (black hole, mines, drone) | Parzival (BlackHoleMaker → hole_small.nax2) → K 1.25 |
 | Friendly aura buff | a proximity buff aura (firepower/speed/armour to nearby allies) — often VERY strong, RE-TIER to Major+ | TD GDI Officer **propaganda** |
 | Debuff warhead / designator | snare (slow), blind (vision/accuracy cut), or target-designator (marks for bonus damage) | zerg corruptor (snare), latin smoker tank (blind), GDI Predator (targeting laser) |
+
+**Legacy single-value notes (do not overwrite):**
+- `japan_exorcist` deploy-ability (spellcard) is kept at **K = 0.25**
+  per the old spreadsheet. The in-game `DamageMultiplier@SpellCard` and
+  `FirepowerMultiplier@SpellCard` are YAML balance values (currently 50)
+  and are NOT this formula K.
 
 **Heavy special — +1.0** (worth far more than a normal special):
 
@@ -169,6 +185,35 @@ LIST of detected specials + each ability's value; the sheet totals them.
 - **Scope order:** finish INFANTRY on the interim uniform weights first;
   the per-ability value table + negative specials land when we start
   VEHICLES (the program AFTER infantry).
+
+## 3d. Rebalance uniqueness & preservation rules (2026-07-21)
+
+These rules govern every class-wide stat pass. They live here, not in a
+class-specific log, because they apply to all classes.
+
+- **Uniqueness within a class**: no two units in the same class may share the
+  same HP, Speed, Range, Damage, or ReloadDelay value. Use per-actor
+  `FirepowerMultiplier` to tune effective DPS granularity without breaking the
+  2000-step damage rule.
+- **Baseline/verifier exception only**: the verification unit is exactly
+  2× HP, 2× DPS, 2.5× cost, same Range and Speed as the baseline (§2). No other
+  pair may share a stat.
+- **Preserve relative differences**: do not clamp every unit to the same band
+  edge. If a unit was the longest-ranged member, keep it the longest-ranged
+  member after shrinking; shrink the whole class toward the allowed band
+  proportionally, not uniformly.
+- **Faction personality over formula equality**: similar factions stay close
+  (e.g. RA1 Allies rifle vs RA1 Soviets rifle, TD GDI minigunner vs TD Nod
+  minigunner) but every stat must differ by at least one step. Use lore/identity
+  to choose which axis each faction emphasizes.
+- **Original C&C prices are pinned**: TD, TS, RA1, and RA2 factions keep their
+  original costs for memorability; only stats move. Custom/RA2-mod factions may
+  adjust cost in 10-credit steps inside the class envelope.
+- **Damage stays in 2000 steps**: never nudge warhead `Damage` by small amounts;
+  adjust effective DPS with `FirepowerMultiplier` or `ReloadDelay`.
+- **Outlier flag rule**: if a unit's current stats place it so far outside the
+  allowed band that fixing it would completely change its character, stop and
+  ask the maintainer before editing.
 
 ## 4. Weapon & template laws
 

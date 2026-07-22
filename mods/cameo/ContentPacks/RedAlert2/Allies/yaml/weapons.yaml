@@ -101,7 +101,7 @@ HarrierMissiles:
 	Burst: 4
 	BurstDelays: 2
 	Range: 5555
-	MinRange: 1111
+	MinRange: 1110
 	Report: vintatta.wav
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
@@ -744,7 +744,7 @@ RA2M60:
 ra2_allies_gi_mg:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 15
-	Range: 4500
+	Range: 4680
 	Burst: 3
 	BurstDelays: 2
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
@@ -841,7 +841,7 @@ RA2MP5:
 	Inherits: ^SniperWeapon
 	Report: iseaatta.wav, iseaattb.wav
 	ReloadDelay: 10
-	Range: 5000
+	Range: 6386
 	Burst: 4
 	BurstDelays: 3
 	Projectile: Bullet
@@ -852,7 +852,7 @@ RA2MP5:
 		ContrailLength: 7
 		ContrailEndColorUsePlayerColor: false
 	Warhead@SniperWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
 		Damage: 2000
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage

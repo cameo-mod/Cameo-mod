@@ -8,35 +8,17 @@ Cameo is an OpenRA crossover RTS mod. The repository is undergoing a migration t
 
 `C:\Users\AedisToru\AppData\Local\Cameo-IFV\instances\cameo\main`
 
-## Non-negotiable workflow
+## Required reading
 
-1. Crashes and player-visible regressions take priority over roadmap work.
-2. Before YAML or asset changes, read `DESIGN.md`, `audit/SUMMARY.md`, and relevant engine/custom-trait documentation in `Cameo_Knowledge_Base_Manual.md`.
-3. For refactors, compare resolved rulesets before and after with `tools/audit/dump_resolved.py`.
-4. Run targeted audits from `tools/audit/`; current reports belong in `audit/latest/`.
-5. Before any commit, boot via `launch-game.cmd`, verify the main menu, and check for new exception logs. Stage files explicitly; never stage the full working tree indiscriminately.
+Read these documents in order before any implementation work. Load all of them into context at the start of every session.
 
-## Documentation map
+1. **[LESSONS_LEARNED.md](LESSONS_LEARNED.md)** — accumulated pitfalls, safe defaults, and the required reading order.
+2. **[AGENT_WORKSPACE.md](AGENT_WORKSPACE.md)** — mandatory workflow, evidence rules, incident protocol, and commit gate.
+3. **[DESIGN.md](DESIGN.md)** — binding rules and conventions (especially before modifying YAML, assets, naming, weapons, balance, or descriptions).
+4. **[README.md](README.md)** — canonical owners and generated-artifact policy.
+5. **[design/ROADMAP.md](design/ROADMAP.md)** — active work queue; record new bugs and ownership before implementation.
 
-| Document | Purpose |
-|---|---|
-| `DESIGN.md` | Binding implementation contract: naming, actor/template rules, tech tiers, balance formulas, effects, descriptions, and migration rules. |
-| `design/ROADMAP.md` | Only active work queue. New bugs and crashes are logged here first. |
-| `audit/SUMMARY.md` | One-page live audit overview and priority order. |
-| `audit/FINDINGS.md` | Detailed audit findings and evidence. |
-| `audit/CONSISTENCY_REPORT.md` | Regression checks for prior fixes. |
-| `MASTER_REPORT.md` | Long-term architecture, bug taxonomy, audit rationale, and migration strategy. |
-| `MIGRATION.md` | Rename/split/description workflow; refactors must be resolver-verified. |
-| `FACTIONS.md` | Human-facing faction identity, gameplay, rosters, upgrades, and display-name reference. |
-| `factions/MATRIX.md` | Generated quantitative roster matrix. |
-| `Cameo_Knowledge_Base_Manual.md` | Engine and custom-mod code reference. Consult specific sections rather than reading the full multi-megabyte document for every task. |
-
-## Audit structure
-
-- `tools/audit/` contains the reusable, repository-maintained audit scripts.
-- `audit/latest/` is regenerated evidence from the current tree.
-- `audit/baseline/` is historical reference.
-- `audit/LEGACY_DEVIN_CABAL.md` indexes old external CABAL reports; they are historical only until rerun.
+Crashes and player-visible regressions always take priority over queued work.
 
 ## Current safety focus
 

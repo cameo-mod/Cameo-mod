@@ -609,7 +609,7 @@ NaxGrilleArty:
 	Inherits: ^RA2Grenade
 	ReloadDelay: 111
 	Range: 12345
-	MinRange: 2468
+	MinRange: 2470
 	Report: vdesatta.wav, vdesattb.wav
 	Projectile: Bullet
 		LaunchAngle: 111
@@ -892,25 +892,25 @@ NaxiAntiTankCannonCorrosion:
 NaxiAlienPistol:
 	Inherits: Lunar_Green105mm
 	Report: nax_aliengun.wav
-	Range: 5136
-	ReloadDelay: 50
+	Range: 2777
+	ReloadDelay: 54
 	Burst: 2
 	BurstDelays: 3
-	ValidTargets: Ground, Water, Air
+	ValidTargets: Ground, Water
 	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		ValidTargets: Ground, Water
+		Damage: 8000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		ValidTargets: Ground, Water
+		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		ValidTargets: Ground, Water
+		Damage: 8000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
+		ValidTargets: Ground, Water
 		Damage: 1
 
 NaxiV1Rocket:
@@ -1148,7 +1148,7 @@ NaxisBlackBombSmaller:
 	Inherits: ^RA2MediumCannon
 	ReloadDelay: 141
 	Range: 6666
-	MinRange: 1333
+	MinRange: 1335
 	Projectile: Bullet
 		Blockable: false
 		Speed: 666
@@ -1277,7 +1277,7 @@ RA2RTruckRocket:
 	Burst: 8
 	BurstDelays: 3
 	Range: 7777
-	MinRange: 777
+	MinRange: 1555
 	Report: vintatta.wav
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -1633,7 +1633,7 @@ naxis_sssoldier_smg:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	ReloadDelay: 75
-	Range: 4000
+	Range: 3203
 	Burst: 10
 	BurstDelays: 5
 	ValidTargets: Ground, Water
@@ -1641,11 +1641,11 @@ naxis_sssoldier_smg:
 	Projectile: Bullet
 		Inaccuracy: 600
 	Warhead@SmallArms: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
 

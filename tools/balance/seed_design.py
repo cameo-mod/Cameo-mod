@@ -30,6 +30,8 @@ NAME_MAP = LEDGER / "name_map.yaml"
 REPORT = LEDGER / "discrepancies.md"
 
 TYPE_TABS = {"Infantry": ("TD", ), "Tanks": (), "Vehicles": (), "Aircraft": (), "Defenses": ()}
+FALLBACK_CATEGORY = {"infantry": "Infantry", "vehicles": "Vehicles", "aircraft": "Aircraft",
+                     "naval": "Naval", "defenses": "Defenses"}
 # legacy type-tab columns (recon 2026-07-18): B name, D hp, S cost,
 # H weapon class, K special, L unit class, M tech tier
 # CABAL tab: A mod, B name, C actor, ... K special, L unit class, M tier, R cost
@@ -94,7 +96,8 @@ def main() -> int:
     seeded, direct, mapped, unmatched, ambiguous, dead = 0, 0, 0, [], [], []
     mismatches = []
 
-    def seed(actor, special, unit_class, tier, legacy_cost, tab, rowname):
+    def seed(actor, special, unit_class, tier, legacy_cost, tab, rowname,
+             category=None, subtype=None):
         nonlocal seeded
         if actor not in units:
             dead.append(f"{tab}: `{rowname}` -> `{actor}` (no such actor)")
@@ -102,7 +105,8 @@ def main() -> int:
         _, _, u = units[actor]
         d = u.setdefault("design", {})
         for key, val in (("special", fnum(special)), ("unit_class", fnum(unit_class)),
-                         ("tech_tier", fnum(tier))):
+                         ("tech_tier", fnum(tier)), ("category", category),
+                         ("subtype", subtype)):
             if val is not None and d.get(key) is None:
                 d[key] = val
         seeded += 1
@@ -127,9 +131,14 @@ def main() -> int:
         if tab not in wb.sheetnames:
             continue
         ws = wb[tab]
+        subtype = "Unclassified"
         for r in range(3, ws.max_row + 1):
             rowname = ws.cell(row=r, column=2).value
-            if not rowname or ws.cell(row=r, column=4).value is None:
+            hp = ws.cell(row=r, column=4).value
+            if rowname and fnum(hp) is None:
+                subtype = str(rowname).strip()
+                continue
+            if not rowname or fnum(hp) is None:
                 continue
             key = norm(rowname)
             if key in nmap:
@@ -138,19 +147,28 @@ def main() -> int:
                     continue
                 seed(target, ws.cell(row=r, column=11).value,
                      ws.cell(row=r, column=12).value, ws.cell(row=r, column=13).value,
-                     ws.cell(row=r, column=19).value, tab, rowname)
+                     ws.cell(row=r, column=19).value, tab, rowname, tab, subtype)
                 mapped += 1
                 continue
             cands = by_norm_name.get(key, [])
             if len(cands) == 1:
                 seed(cands[0], ws.cell(row=r, column=11).value,
                      ws.cell(row=r, column=12).value, ws.cell(row=r, column=13).value,
-                     ws.cell(row=r, column=19).value, tab, rowname)
+                     ws.cell(row=r, column=19).value, tab, rowname, tab, subtype)
                 mapped += 1
             elif len(cands) > 1:
                 ambiguous.append(f"{tab}: `{rowname}` -> {cands}")
             else:
                 unmatched.append(f"{tab}: `{rowname}`")
+
+    for actor, (_, section, u) in units.items():
+        category = FALLBACK_CATEGORY.get(section)
+        if category:
+            d = u.setdefault("design", {})
+            if d.get("category") is None:
+                d["category"] = category
+            if d.get("subtype") is None:
+                d["subtype"] = "Unclassified"
 
     # write ledgers back (design fields only changed)
     for name, doc in docs.items():

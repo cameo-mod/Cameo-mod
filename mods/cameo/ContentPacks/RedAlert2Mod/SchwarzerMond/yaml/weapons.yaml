@@ -14,19 +14,19 @@ schwarzermond_lunarsoldier_rifle:
 		ContrailEndColor: f55105
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
+		Damage: 24000
 		ValidTargets: Ground, Water, Air
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
+		Damage: 24000
 		ValidTargets: Ground, Water, Air
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 24000
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 2
@@ -670,6 +670,7 @@ NaxCorrosionRocketTrooperE:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 2
 
+	MinRange: 1210
 NaxCorrosionBeast:
 	Inherits: NaxCorrosionRocket
 	Range: 7984
@@ -679,6 +680,7 @@ NaxCorrosionBeast:
 	Projectile: Missile
 		Inaccuracy: 400
 
+	MinRange: 1595
 NaxCorrosionBeastE:
 	Inherits: NaxCorrosionBeast
 	Range: 8984
@@ -712,7 +714,6 @@ NaxCrystalLeechE:
 NaxDieGlocke:
 	Inherits: ^HeavyChemicalWeapon
 	Range: 2500
-	MinRange: 500
 	ReloadDelay: 60
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
@@ -1111,4 +1112,4 @@ Naxis_Jagerline_AA:
 	Inherits: Naxis_Jagerline
 	ValidTargets: Air
 	Range: 11740
-	MinRange: 2348
+	MinRange: 2350

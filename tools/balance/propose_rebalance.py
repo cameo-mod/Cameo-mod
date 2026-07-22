@@ -37,20 +37,34 @@ def unit_row(u):
     speed = fnum((u.get("speed") or {}).get("v") or (u.get("speed_air") or {}).get("v"))
     cost = fnum((u.get("cost") or {}).get("v"))
     d = u.get("design") or {}
+    fp_pct = fnum((u.get("firepower_multiplier") or {}).get("v"))
+    fp = (fp_pct / 100.0) if fp_pct is not None else 1.0
     total_dps, best_range = 0.0, 0.0
-    for arm in u.get("armaments", []):
-        if not arm.get("pricing", True):
-            continue
-        damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
-        damages = [x for x in damages if x is not None]
-        reload_ = fnum(arm.get("reloaddelay"))
-        if not damages or not reload_:
-            continue
-        total_dps += formula.dps(max(damages), reload_,
-                                 fnum(arm.get("design_weapon_class")) or 1.0,
-                                 int(fnum(arm.get("burst")) or 1),
-                                 fnum(arm.get("burstdelays")))
-        best_range = max(best_range, fnum(arm.get("range")) or 0.0)
+    arms = [a for a in u.get("armaments", []) if a.get("pricing", True)]
+    # Use the primary armament for pricing; fall back to the first pricing armament.
+    primary = next((a for a in arms if a.get("slot") == "Armament@PRIMARY"), arms[0] if arms else None)
+    if primary is not None:
+        reload_ = fnum(primary.get("reloaddelay"))
+        burst = int(fnum(primary.get("burst")) or 1)
+        best_range = fnum(primary.get("range")) or 0.0
+        if reload_:
+            # Sum the main damage warheads; ignore chip ExtraDamage and Percentage warheads.
+            damage = 0.0
+            for w in primary.get("warheads", []):
+                if w.get("type") != "SpreadDamage":
+                    continue
+                tag = w.get("tag", "")
+                if tag.endswith("ExtraDamage") or tag.endswith("Percentage"):
+                    continue
+                dmg = fnum(w.get("damage"))
+                if dmg is not None:
+                    damage += dmg
+            if damage:
+                total_dps = formula.dps(damage, reload_,
+                                        fnum(primary.get("design_weapon_class")) or 1.0,
+                                        burst,
+                                        fnum(primary.get("burstdelays")),
+                                        firepower_multiplier=fp)
     return hp, speed, best_range, total_dps, cost, d
 
 

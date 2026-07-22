@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "5230",
       "reloaddelay": "60",
@@ -103,6 +104,7 @@
        }
       ],
       "weapon": "BehemothShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -126,8 +128,10 @@
      "v": "7200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -158,6 +162,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "60",
@@ -183,6 +188,7 @@
        }
       ],
       "weapon": "BroodweaverLeech",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -197,8 +203,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -227,6 +235,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6250",
       "reloaddelay": "50",
@@ -252,6 +261,7 @@
        }
       ],
       "weapon": "CorruptorSpore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -266,8 +276,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -296,6 +308,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "100",
@@ -357,6 +370,7 @@
        }
       ],
       "weapon": "SCDevourerAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon",
        "^MediumChemicalWeapon",
@@ -374,8 +388,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -403,6 +419,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.9583333333333334,
       "pricing": true,
       "range": "5850",
       "reloaddelay": "60",
@@ -498,6 +515,7 @@
        }
       ],
       "weapon": "DreadshroudSpore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -517,8 +535,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -547,6 +567,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1448",
       "reloaddelay": "15",
@@ -572,6 +593,7 @@
        }
       ],
       "weapon": "GorekrakenClaw",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -586,8 +608,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -616,6 +640,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "60",
@@ -668,6 +693,7 @@
        }
       ],
       "weapon": "GuardianShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -684,8 +710,10 @@
      "v": "2200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -713,6 +741,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4444",
       "reloaddelay": "20",
@@ -776,6 +805,7 @@
        }
       ],
       "weapon": "MutaliskSpore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon",
        "^MediumChemicalWeapon",
@@ -793,10 +823,17 @@
      "v": "1000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/aircraft.yaml#Health.HP",
@@ -828,8 +865,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -857,6 +896,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5480",
       "reloaddelay": "78",
@@ -893,6 +933,7 @@
        }
       ],
       "weapon": "QueenSpine",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ArrowWeapon"
@@ -908,8 +949,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -937,6 +980,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "25",
@@ -987,6 +1031,7 @@
        }
       ],
       "weapon": "ScourgeExplosion",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -1003,8 +1048,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Fighter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1046,6 +1093,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1083,6 +1131,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1119,6 +1168,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1151,6 +1201,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1180,6 +1231,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1208,6 +1260,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1237,6 +1290,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1274,6 +1328,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1303,6 +1358,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1328,6 +1384,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1369,6 +1426,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1407,6 +1465,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1444,6 +1503,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1480,6 +1540,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1509,6 +1570,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1529,6 +1591,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1557,6 +1620,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1586,6 +1650,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1604,6 +1669,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -1668,6 +1734,7 @@
        }
       ],
       "weapon": "Tentacle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1678,6 +1745,7 @@
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
@@ -1721,6 +1789,7 @@
        }
       ],
       "weapon": "Spore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -1737,8 +1806,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1763,6 +1834,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -1827,6 +1899,7 @@
        }
       ],
       "weapon": "Tentacle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1837,6 +1910,7 @@
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
@@ -1880,6 +1954,7 @@
        }
       ],
       "weapon": "Spore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -1896,8 +1971,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1922,6 +1999,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -1986,6 +2064,7 @@
        }
       ],
       "weapon": "Tentacle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1996,6 +2075,7 @@
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
@@ -2039,6 +2119,7 @@
        }
       ],
       "weapon": "Spore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -2055,8 +2136,10 @@
      "v": "1250"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2081,6 +2164,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.1666666666666667,
       "pricing": true,
       "range": "7680",
       "reloaddelay": "32",
@@ -2145,6 +2229,7 @@
        }
       ],
       "weapon": "Tentacle",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2155,6 +2240,7 @@
      {
       "armament_name": "spore",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "10160",
       "reloaddelay": "34",
@@ -2198,6 +2284,7 @@
        }
       ],
       "weapon": "Spore",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^Chaingun",
@@ -2214,8 +2301,10 @@
      "v": "1250"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2242,6 +2331,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "175",
@@ -2267,6 +2357,7 @@
        }
       ],
       "weapon": "DefilerPlague",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon"
       ]
@@ -2281,8 +2372,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -2314,8 +2407,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "5230",
+      "range": "5979",
       "reloaddelay": "15",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -2326,12 +2420,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "LightChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "18000",
         "tag": "LightChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -2341,7 +2435,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -2351,7 +2445,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2361,7 +2455,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -2372,6 +2466,7 @@
        }
       ],
       "weapon": "HydraSpit",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile",
@@ -2382,8 +2477,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
-      "range": "5230",
+      "range": "5979",
       "reloaddelay": "15",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -2394,12 +2490,12 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "LightChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "18000",
         "tag": "LightChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -2409,7 +2505,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -2419,7 +2515,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2429,7 +2525,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "18000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -2440,6 +2536,7 @@
        }
       ],
       "weapon": "HydraSpit",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile",
@@ -2454,13 +2551,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Valued.Cost",
-     "v": "500"
+     "v": "3314"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 0.99
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
@@ -2479,7 +2583,7 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.Speed",
-     "v": "75"
+     "v": "76"
     },
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Mobile.TurnSpeed",
@@ -2490,6 +2594,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2497,6 +2602,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "DemoTruckTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2509,8 +2615,10 @@
      "v": "400"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2539,6 +2647,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "2225",
       "reloaddelay": "20",
@@ -2564,6 +2673,7 @@
        }
       ],
       "weapon": "zerg_kerrigan",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2582,8 +2692,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2611,6 +2723,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1150",
       "reloaddelay": "11",
@@ -2636,6 +2749,7 @@
        }
       ],
       "weapon": "ShriekStinger",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2650,8 +2764,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "FlyingInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -2680,6 +2796,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "3855",
       "reloaddelay": "15",
@@ -2722,6 +2839,7 @@
        }
       ],
       "weapon": "SpithidSpit",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2731,6 +2849,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "3855",
       "reloaddelay": "15",
@@ -2773,6 +2892,7 @@
        }
       ],
       "weapon": "SpithidSpit",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2789,10 +2909,12 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
@@ -2819,6 +2941,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.03125,
       "pricing": true,
       "range": "8561",
       "reloaddelay": "80",
@@ -2936,6 +3059,7 @@
        }
       ],
       "weapon": "SwarmlingShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
@@ -2957,8 +3081,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FlyingInfantry",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -2988,6 +3114,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1680",
       "reloaddelay": "15",
@@ -3013,6 +3140,7 @@
        }
       ],
       "weapon": "TalonClaw",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3027,8 +3155,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -3057,6 +3187,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "15",
@@ -3082,6 +3213,7 @@
        }
       ],
       "weapon": "UltraliskHusk",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3096,8 +3228,10 @@
      "v": "4400"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -3129,6 +3263,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1350",
       "reloaddelay": "11",
@@ -3154,6 +3289,7 @@
        }
       ],
       "weapon": "ZerglingClaw",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3168,10 +3304,17 @@
      "v": "200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#FirepowerMultiplier@zergling.Modifier",
+     "trait": "FirepowerMultiplier@zergling",
+     "v": 1.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/infantry.yaml#Health.HP",
@@ -3204,6 +3347,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3226,6 +3370,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3247,6 +3392,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3269,6 +3415,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3291,6 +3438,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3313,6 +3461,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3335,6 +3484,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3357,6 +3507,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3379,6 +3530,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3401,6 +3553,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3422,6 +3575,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3444,6 +3598,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3471,6 +3626,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3495,6 +3651,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3519,6 +3676,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3545,6 +3703,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3569,6 +3728,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3595,6 +3755,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3619,6 +3780,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3645,6 +3807,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3669,6 +3832,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3693,6 +3857,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3719,6 +3884,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3744,6 +3910,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3768,6 +3935,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3794,6 +3962,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3812,6 +3981,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -3837,6 +4007,7 @@
        }
       ],
       "weapon": "DroneAttack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -3855,8 +4026,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3888,6 +4061,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1250",
       "reloaddelay": "30",
@@ -3913,6 +4087,7 @@
        }
       ],
       "weapon": "GoremawClaw",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3927,8 +4102,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -3972,8 +4149,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4007,6 +4186,7 @@
       "burst": "5",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "7120",
       "reloaddelay": "30",
@@ -4092,6 +4272,7 @@
        }
       ],
       "weapon": "HermitShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4115,10 +4296,17 @@
      "v": "6000"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "EpicVehicle",
      "tech_tier": 0.75,
      "unit_class": 0.4
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.4
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/vehicles.yaml#Health.HP",
@@ -4150,6 +4338,7 @@
      {
       "armament_name": "dummy",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "6666",
@@ -4159,11 +4348,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LurkerTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "6666",
@@ -4173,6 +4364,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LurkerSpines",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -4185,8 +4377,10 @@
      "v": "1300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4220,6 +4414,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "7740",
       "reloaddelay": "40",
@@ -4338,6 +4533,7 @@
        }
       ],
       "weapon": "SporemawShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -4353,6 +4549,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Zerg/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": false,
       "range": "7740",
       "reloaddelay": "40",
@@ -4471,6 +4668,7 @@
        }
       ],
       "weapon": "SporemawShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -4493,8 +4691,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },

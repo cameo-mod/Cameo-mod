@@ -116,7 +116,7 @@ ra1_soviets_rifleinfantry:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ra1_soviets_rifleinfantry:
-		Modifier: 54
+		Modifier: 42
 	Buildable:
 		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_doctrine_conscription
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -184,7 +184,7 @@ ra1_soviets_ak47conscript:
 		Name: garrisoned
 		Weapon: ra1_soviets_ak47conscript_rifle
 	FirepowerMultiplier@ra1_soviets_ak47conscript:
-		Modifier: 20
+		Modifier: 14
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
 		RequiresCondition: !ra1_soviets_upgrade_vengeance
@@ -375,7 +375,7 @@ ra1_soviets_dragunovantimaterialsniper:
 	Tooltip:
 		Name: Dragunov Anti Material Sniper
 	Valued:
-		Cost: 400
+		Cost: 422
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -413,6 +413,8 @@ ra1_soviets_dragunovantimaterialsniper:
 	ActorStatValues:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
+	FirepowerMultiplier:
+		Modifier: 103
 ra1_soviets_firerocketsoldier:
 	Inherits: ^ra1_allies_alliedrocketsoldier
 	Inherits@FireInfantry: ^FireInfantry

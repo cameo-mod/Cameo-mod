@@ -1,31 +1,31 @@
 tsdig: ALSO-USED (3)
   mods\cameo\ContentPacks\RedAlert2Mod\TKM\yaml\sequences.yaml:1309: 		Filename: tsdig.shp
   mods\cameo\ContentPacks\TiberianSun\Nod\yaml\templates.yaml:14: 		SubterraneanTransitionImage: tsdig
-  mods\cameo\sequences\tiberiansun.yaml:1226: 		Filename: tsdig.shp
+  mods\cameo\sequences\tiberiansun.yaml:1227: 		Filename: tsdig.shp
 tsioncannon: ALSO-USED (11)
   mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\buildings.yaml:996: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1424: 		RingImage: tsioncannon
+  mods\cameo\ContentPacks\RedAlert2Mod\AsianAlliance\yaml\weapons.yaml:1468: 		RingImage: tsioncannon
   mods\cameo\ContentPacks\RedAlert2Mod\Consortium\yaml\buildings.yaml:374: 		Effect: tsioncannon
   mods\cameo\ContentPacks\StarCraft\Protoss\yaml\buildings.yaml:599: 		Effect: tsioncannon
-  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:255: 		Effect: tsioncannon
+  mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\buildings.yaml:257: 		Effect: tsioncannon
 ionsfx: ALSO-USED (3)
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1766: 		Image: ionsfx
   mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml:1770: 		TrailImage: ionsfx
-  mods\cameo\sequences\misc.yaml:3288: 		Filename: ionsfx.shp
+  mods\cameo\sequences\misc.yaml:3291: 		Filename: ionsfx.shp
 tspodring: ALSO-USED (3)
-  mods\cameo\sequences\misc.yaml:2452: 	tspodring:
-  mods\cameo\sequences\misc.yaml:2453: 		Filename: tspodring.shp
+  mods\cameo\sequences\misc.yaml:2455: 	tspodring:
+  mods\cameo\sequences\misc.yaml:2456: 		Filename: tspodring.shp
   mods\cameo\weapons\redalert2mod.yaml:344: 		HelixAnimSequence: tspodring
 tsmcnealmechdrop: ALSO-USED (1)
   mods\cameo\weapons\heroes.yaml:799: 		Image: tsmcnealmechdrop
 tsdroppod: ALSO-USED (1)
-  mods\cameo\weapons\tiberiansun.yaml:1517: 		Image: tsdroppod
+  mods\cameo\weapons\tiberiansun.yaml:1538: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:894: 		Image: hakurei_giphy
-  mods\cameo\sequences\misc.yaml:4359: 		Filename: hakurei_giphy.shp
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:927: 		Image: hakurei_giphy
+  mods\cameo\sequences\misc.yaml:4362: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:883: 		Image: hakurei_dream
-  mods\cameo\sequences\misc.yaml:4351: 		Filename: hakurei_dream.shp
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:916: 		Image: hakurei_dream
+  mods\cameo\sequences\misc.yaml:4354: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)
   mods\cameo\ContentPacks\Warcraft2\Humans\yaml\buildings.yaml:390: 		Effect: wc2_effect_sparkle
@@ -43,7 +43,7 @@ wc2_exorcism: ALSO-USED (2)
 wc2_catapult_impact: ALSO-USED (1)
   mods\cameo\sequences\warcraft2.yaml:552: 		Filename: wc2_catapult_impact.shp
 wc2_building_collapse: ALSO-USED (1)
-  mods\cameo\sequences\misc.yaml:2885: 	wc2_building_collapse:
+  mods\cameo\sequences\misc.yaml:2888: 	wc2_building_collapse:
 wc2_lightng: ALSO-USED (2)
   mods\cameo\sequences\warcraft2.yaml:392: 		Filename: wc2_lightng.shp
   mods\cameo\weapons\warcraft2.yaml:379: 		Image: wc2_lightng

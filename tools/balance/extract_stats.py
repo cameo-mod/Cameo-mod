@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import pathlib
+import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
@@ -33,6 +34,7 @@ from cameo_model import Model  # noqa: E402
 
 OUT = ROOT / "docs/balance"
 PACKS = ROOT / "mods/cameo/ContentPacks"
+DEFAULTS_YAML = ROOT / "mods/cameo/rules/defaults.yaml"
 
 # pack rules files that define balance-relevant actors (closed set,
 # DESIGN §2); weapons/sequences/ai/templates/husks are not rosters.
@@ -40,6 +42,18 @@ SECTION_FILES = ("faction", "buildings", "defenses", "infantry", "vehicles",
                  "aircraft", "naval", "upgrades", "promotions", "misc")
 SHARED_LEAVES = {"Shared", "Core"}
 
+SECTION_DEFAULT_SUBTYPE = {
+    "infantry": "Infantry",
+    "vehicles": "Vehicle",
+    "aircraft": "Aircraft",
+    "naval": "Ship",
+    "defenses": "Defense",
+    "buildings": "Building",
+    "upgrades": "Upgrade",
+    "promotions": "Promotion",
+    "misc": "Misc",
+    "faction": "Faction",
+}
 
 def rel(p) -> str:
     return str(pathlib.Path(p).resolve().relative_to(ROOT)).replace("\\", "/")
@@ -74,6 +88,176 @@ def stat(resolved, local, trait: str, field: str):
     else:
         src = "inherited"
     return {"v": v, "src": src}
+
+
+def defaults_role_templates() -> dict[str, str]:
+    """Map full role template names to subtype names from defaults.yaml.
+
+    Only unit-type templates matching ^<Name>Template: are considered, so
+    trait/behaviour templates like ^AutoTargetGroundAssaultMove are not
+    picked as subtypes.
+    """
+    cache = getattr(defaults_role_templates, "_cache", None)
+    if cache is not None:
+        return cache
+    out: dict[str, str] = {}
+    if DEFAULTS_YAML.exists():
+        for line in DEFAULTS_YAML.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+            m = re.match(r"^\^([A-Za-z0-9_]+)Template:", line)
+            if m:
+                out[f"^{m.group(1)}Template"] = m.group(1)
+    defaults_role_templates._cache = out
+    return out
+
+
+def _parent_inherits(rs, name: str):
+    """Yield the direct Inherits values of a node (template or actor)."""
+    node = rs.actor(name)
+    if node is None:
+        return
+    for c in node.children:
+        if c.key == "Inherits" or c.key.startswith("Inherits@"):
+            v = (c.value or "").strip()
+            if v:
+                yield v
+
+
+def actor_subtype(rs, local, section: str) -> str:
+    """Derive the unit subtype from the defaults.yaml role template chain.
+
+    Walks the actor's inheritance chain and returns the nearest
+    ^<Name>Template it inherits from defaults.yaml.  Units that do not
+    inherit a role template get a generic section label rather than
+    "Unclassified".
+    """
+    roles = defaults_role_templates()
+    # Start from the actor's own Inherits and walk upward breadth-first so
+    # the nearest (most specific) role template wins.
+    queue = list(_parent_inherits(rs, local.key)) if local is not None else []
+    seen: set[str] = set()
+    while queue:
+        name = queue.pop(0)
+        if name in seen:
+            continue
+        seen.add(name)
+        if name in roles:
+            return roles[name]
+        queue.extend(_parent_inherits(rs, name))
+    return SECTION_DEFAULT_SUBTYPE.get(section, "Unclassified")
+
+
+_WEAPON_CLASS_OVERRIDES = {
+    "SmallArms": 0.75,
+    "SniperWeapon": 0.75,
+    "Light": 0.75,
+    "Chaingun": 1.0,
+    "MediumCannon": 1.0,
+    "Medium": 1.0,
+    "Grenade": 1.0,
+    "FlakWeapon": 1.0,
+    "TeslaWeapon": 1.0,
+    "TeslaChargedWeapon": 1.0,
+    "LaserWeapon": 1.0,
+    "PlasmaWeapon": 1.25,
+    "ShrapnelWeapon": 1.0,
+    "RailgunWeapon": 1.25,
+    "HeavyCannon": 1.25,
+    "HeavyMissile": 1.25,
+    "Heavy": 1.25,
+    "HeavyBomb": 1.25,
+    "Superheavy": 1.5,
+    "NuclearWarhead": 5.0,
+    "Superweapon": 5.0,
+    "RepairWeapon": 1.5,
+    "Engineer": 1.5,
+}
+
+_WEAPON_CLASS_IGNORE = {
+    "ImpactGlow", "AMTProjectile", "RemovesIvanBombs", "RemovesTerrorDrone",
+    "DefuseKit", "GenericC4", "TanyaAttach",
+}
+
+
+def weapon_class_from_types(types: list[str]) -> float | None:
+    """Map a weapon's resolved ^-class templates to an arithmetic-mean H.
+
+    Returns None when no damage-bearing class template is recognised, so
+    legacy/maintainer values from the ledger take precedence and weapons
+    with only utility templates stay blank instead of defaulting to 1.
+    """
+    vals = []
+    for t in types:
+        name = t[1:] if t.startswith("^") else t
+        if name in _WEAPON_CLASS_IGNORE:
+            continue
+        if name in _WEAPON_CLASS_OVERRIDES:
+            vals.append(_WEAPON_CLASS_OVERRIDES[name])
+            continue
+        # keyword fallbacks, most specific first
+        if "Superweapon" in name or "Nuclear" in name:
+            vals.append(5.0)
+        elif "Superheavy" in name:
+            vals.append(1.5)
+        elif "Heavy" in name or "Railgun" in name or "Bomb" in name:
+            vals.append(1.25)
+        elif "Medium" in name or "Chaingun" in name or "Grenade" in name or "Flak" in name:
+            vals.append(1.0)
+        elif "SmallArms" in name or "Sniper" in name or "Light" in name:
+            vals.append(0.75)
+        elif "Repair" in name or "Engineer" in name:
+            vals.append(1.5)
+    if not vals:
+        return None
+    return sum(vals) / len(vals)
+
+
+def firepower_multiplier(resolved, local):
+    """Extract a single unconditional, locally-defined FirepowerMultiplier.
+
+    Inherited template traits like FirepowerMultiplier@GlobalBuffs are NOT
+    captured, because they are not the per-actor fine-tuning knob.  Only
+    values written directly on the actor block are balance-relevant.
+    Conditional FirepowerMultiplier traits (RequiresCondition) are also
+    ignored for pricing because they are situational buffs/debuffs.
+    The actor-specific FirepowerMultiplier@<actor> or unqualified
+    FirepowerMultiplier is preferred over template-override entries so the
+    fine-tuning knob is captured.
+    """
+    if local is None:
+        return None
+    actor = local.key
+    candidates = []
+    for c in local.children:
+        if c.key == "FirepowerMultiplier" or c.key.startswith("FirepowerMultiplier@"):
+            if c.get("RequiresCondition"):
+                continue
+            mod = c.get("Modifier")
+            if mod is None:
+                continue
+            candidates.append(c)
+    if not candidates:
+        return None
+    preferred = None
+    for c in candidates:
+        if c.key == "FirepowerMultiplier":
+            preferred = c
+            break
+        suffix = c.key.split("@", 1)[1] if "@" in c.key else ""
+        if suffix.lower() == actor.lower():
+            preferred = c
+            break
+    if preferred is None:
+        preferred = candidates[0]
+    mod = preferred.get("Modifier")
+    src = f"{rel(preferred.file)}#{preferred.key}.Modifier"
+    # Modifier is an integer percentage in YAML (e.g. 89 = 89%).
+    s = str(mod).strip()
+    if "." in s or "e" in s.lower():
+        # Legacy decimal form; treat the literal as the intended fraction.
+        v = float(s)
+    else:
+        v = float(s) / 100.0
+    return {"v": v, "src": src, "trait": preferred.key}
 
 
 def weapon_types(rs, wname: str, _seen=None) -> list[str]:
@@ -125,10 +309,21 @@ def weapon_entry(rs, wname: str) -> dict | None:
         out["versus_templates"] = [c.value for c in local.children
                                    if c.key == "Inherits" or c.key.startswith("Inherits@")]
     out["weapon_types"] = weapon_types(rs, wname)
+    wc = resolved.get("WeaponClass")
+    if wc is not None:
+        try:
+            out["design_weapon_class"] = float(wc)
+            out["weapon_class_source"] = "WeaponClass"
+        except (ValueError, TypeError):
+            out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
+            out["weapon_class_source"] = "template"
+    else:
+        out["design_weapon_class"] = weapon_class_from_types(out["weapon_types"])
+        out["weapon_class_source"] = "template"
     return out
 
 
-def extract_actor(rs, key: str) -> dict | None:
+def extract_actor(rs, key: str, section: str) -> dict | None:
     resolved = rs.resolve(key)
     if resolved is None:
         return None
@@ -186,10 +381,21 @@ def extract_actor(rs, key: str) -> dict | None:
             arms.append(entry)
     if arms:
         u["armaments"] = arms
+    fp = firepower_multiplier(resolved, local)
+    if fp:
+        u["firepower_multiplier"] = fp
+    sub = actor_subtype(rs, local, section)
     # design judgment inputs — seeded by Phase 3 from the legacy sheet;
-    # null until then (they never exist in yaml).
+    # null until then (they never exist in yaml).  Subtype is auto-derived
+    # from the nearest ^...Template the actor inherits from defaults.yaml.
     u["design"] = {"unit_class": None, "special": None, "tech_tier": None,
-                   "class_anchor": None}
+                   "class_anchor": None, "subtype": sub}
+    # Special forces always use the class weapon-class multiplier of 1.0,
+    # regardless of whether the member uses SA+CG+Laser/Railgun or a
+    # re-themed light+medium+heavy triad.
+    if sub == "SpecialForcesInfantry":
+        for arm in arms:
+            arm["design_weapon_class"] = 1.0
     return u
 
 
@@ -223,7 +429,8 @@ def load_existing_design(name: str) -> tuple[dict[str, dict], dict[str, dict]]:
     """(unit design, per-armament weapon-class judgments) from the
     committed ledger — design.* fields are judgment data (seeded from
     the legacy sheet / maintainer), NOT yaml facts, so re-extraction
-    must never wipe them."""
+    must never wipe them.  A stale "Unclassified" subtype is not kept,
+    because extract_actor now derives a real subtype from the yaml."""
     p = OUT / f"{name}.json"
     if not p.exists():
         return {}, {}
@@ -233,8 +440,13 @@ def load_existing_design(name: str) -> tuple[dict[str, dict], dict[str, dict]]:
         for sec in doc.get("sections", {}).values():
             for actor, u in sec.items():
                 d = u.get("design")
-                if d and any(v is not None for v in d.values()):
-                    out[actor] = d
+                if d:
+                    # Subtypes are always re-derived from yaml; keep only
+                    # judgment fields that yaml can never provide.
+                    kept = {k: v for k, v in d.items()
+                            if v is not None and k != "subtype"}
+                    if kept:
+                        out[actor] = kept
                 slots = {a["slot"]: a["design_weapon_class"]
                          for a in u.get("armaments", [])
                          if a.get("design_weapon_class") is not None}
@@ -256,14 +468,18 @@ def build_ledgers(model: Model, only: str | None = None) -> dict[str, dict]:
         for section, actors in sorted(info["sections"].items()):
             sec: dict = {}
             for a in sorted(set(actors)):
-                u = extract_actor(rs, a)
+                u = extract_actor(rs, a, section)
                 if u is not None:
                     if a in keep_design:
-                        u["design"] = keep_design[a]
-                    for arm in u.get("armaments", []):
-                        v = keep_wc.get(a, {}).get(arm["slot"])
-                        if v is not None:
-                            arm["design_weapon_class"] = v
+                        u["design"].update(keep_design[a])
+                    # Special-forces weapon-class is always derived from the
+                    # class rule (1.0); do not let stale ledger judgments
+                    # overwrite it.
+                    if u["design"].get("subtype") != "SpecialForcesInfantry":
+                        for arm in u.get("armaments", []):
+                            v = keep_wc.get(a, {}).get(arm["slot"])
+                            if v is not None:
+                                arm["design_weapon_class"] = v
                     sec[a] = u
             if sec:
                 sections[section] = sec

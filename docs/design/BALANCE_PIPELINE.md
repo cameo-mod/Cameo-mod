@@ -13,13 +13,23 @@ the same pipeline.
 ## 0. The core loop (maintainer's target workflow)
 
 ```
-1. pull    yaml ──► JSON ledger          (extract raw stats)
+1. pull    yaml ──► JSON ledger          python tools/balance/extract_stats.py
 2. edit    change values in the ledger (or in the generated sheet)
-3. sheet   JSON ──► cameo_balance_v2.xlsx (raw stats + live formulas)
+3. sheet   JSON ──► cameo_balance_v2.xlsx python tools/balance/build_workbook.py
 4. tune    set Cost, the sheet solves Range (or check O/P/Q deltas)
-5. import  xlsx ──► JSON                 (validated read-back)
-6. push    JSON ──► yaml                 (gated, maintainer order)
-7. verify  drift audit: yaml ≡ ledger    (runs in run_all.sh forever)
+5. import  xlsx ──► JSON                 python tools/balance/import_workbook.py
+6. push    JSON ──► yaml                 python tools/balance/apply_balance.py --confirm
+7. verify  drift audit: yaml ≡ ledger    python tools/balance/extract_stats.py --check
+8. verify  multiplier audit: all `*Multiplier Modifier` values are integer percentages    python tools/audit/audit_multiplier_modifiers.py
+9. decode  audit reports (if UTF-16)     python tools/balance/_decode_audit.py
+```
+
+Class rebalances add two extra proposal steps before the normal push:
+
+```
+A. propose  class report (markdown)    python tools/balance/propose_class_rebalance.py --class <scout|closecombat|special_forces>
+B. patch    ledger from reports        python tools/balance/_patch_ledgers_from_reports.py
+   then run steps 3–8 above.
 ```
 
 ## 1. ARCHITECTURE CORRECTION (the honest-opinion part, agreed with maintainer intent)
@@ -128,16 +138,17 @@ indented WEAPON row per armament (mirroring yaml structure):
 
 ## 4. Sync commands (tools/balance/)
 
-| command | direction | gate |
+| command | direction | gate / notes |
 |---|---|---|
-| `balance pull [--faction X]` | yaml → ledger | refuses if ledger has uncommitted edits |
-| `balance sheet [--faction X]` | ledger → xlsx | always safe (workbench regen) |
-| `balance import` | xlsx → ledger | schema + range validation, prints value diff |
-| `balance push [--faction X]` | ledger → yaml via provenance anchors | **maintainer order only**; prints diff; then boot gate + audits |
-| `balance check` | verify yaml ≡ ledger | run_all.sh member, red findings on drift |
+| `python tools/balance/extract_stats.py [--faction X]` | yaml → ledger | overwrites `docs/balance/*.json`; run `--check` to detect drift |
+| `python tools/balance/build_workbook.py` | ledger → `docs/design/cameo_balance_*.xlsx` | workbench regen; gitignored; safe to regenerate |
+| `python tools/balance/import_workbook.py` | xlsx → ledger | validates and prints every input-cell diff |
+| `python tools/balance/apply_balance.py [--faction X]` | ledger → yaml (dry-run) | prints diff; **does not write** |
+| `python tools/balance/apply_balance.py --confirm [--faction X]` | ledger → yaml | **maintainer order only**; auto-runs `extract_stats.py` + `tools/audit/audit_multiplier_modifiers.py`; full `run_all.sh` + boot gate before commit |
+| `python tools/balance/propose_class_rebalance.py --class <cls>` | ledger → `docs/balance/proposal_<cls>_infantry.md` | generates a markdown report; does not touch yaml/ledger |
+| `python tools/balance/_patch_ledgers_from_reports.py` | `proposal_*.md` → ledger | patches `docs/balance/*.json` from the three class reports |
 
-Round-trip invariants tested in CI-style: pull∘push = identity,
-sheet∘import = identity.
+Round-trip invariants tested in CI-style: `extract_stats.py` ∘ `apply_balance.py --confirm` = identity, `build_workbook.py` ∘ `import_workbook.py` = identity.
 
 ## 5. Formula v2 — per-unit-type baselines (DESIGN §12 second iteration)
 

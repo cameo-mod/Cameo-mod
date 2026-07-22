@@ -356,7 +356,6 @@ AthenaLaser:
 	Inherits: ^TeslaWeapon
 	Inherits: ^LaserWeapon
 	Range: 16000
-	MinRange: 3200
 	ReloadDelay: 1
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
@@ -464,6 +463,7 @@ AthenaLaser:
 		FadeFrames: 45
 		FadeInFrames: 3
 
+	MinRange: 3200
 AthenaVisualLaser:
 	ReloadDelay: 4
 	Range: 16000

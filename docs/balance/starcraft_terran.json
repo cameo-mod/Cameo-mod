@@ -9,6 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.6388888888888888,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -137,6 +138,7 @@
        }
       ],
       "weapon": "BCLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -152,6 +154,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.6388888888888888,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -273,6 +276,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -295,8 +299,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -332,8 +338,10 @@
      "v": "3600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -363,6 +371,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -388,6 +397,7 @@
        }
       ],
       "weapon": "MedicHeal",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -402,8 +412,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -436,6 +448,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.21875,
       "pricing": true,
       "range": "9000",
       "reloaddelay": "80",
@@ -553,6 +566,7 @@
        }
       ],
       "weapon": "PhobosLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^HeavyMissile",
@@ -567,6 +581,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.6388888888888888,
       "pricing": true,
       "range": "6800",
       "reloaddelay": "38",
@@ -688,6 +703,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -714,8 +730,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -748,6 +766,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
@@ -779,6 +798,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -798,8 +818,10 @@
      "v": "5500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.25
     },
@@ -831,6 +853,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "5",
@@ -856,6 +879,7 @@
        }
       ],
       "weapon": "RavenRepair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -870,8 +894,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -901,6 +927,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "7500",
@@ -909,10 +936,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ScienceVesselDefenseMatrix",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "7500",
@@ -921,10 +950,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ScienceVesselIrradiate",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "360",
@@ -950,6 +981,7 @@
        }
       ],
       "weapon": "ScienceVesselEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -964,8 +996,10 @@
      "v": "2200"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -994,6 +1028,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1019,12 +1054,14 @@
        }
       ],
       "weapon": "SunDogLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1089,6 +1126,7 @@
        }
       ],
       "weapon": "SunDogRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1099,6 +1137,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6060",
       "reloaddelay": "39",
@@ -1163,6 +1202,7 @@
        }
       ],
       "weapon": "SunDogRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1181,10 +1221,17 @@
      "v": "2700"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
@@ -1214,6 +1261,7 @@
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "7380",
       "reloaddelay": "67",
@@ -1267,6 +1315,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1278,6 +1327,7 @@
       "burst": "8",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "7380",
       "reloaddelay": "67",
@@ -1331,6 +1381,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1348,10 +1399,17 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/aircraft.yaml#Health.HP",
@@ -1380,6 +1438,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "32",
@@ -1405,12 +1464,14 @@
        }
       ],
       "weapon": "WraithLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "24",
@@ -1475,6 +1536,7 @@
        }
       ],
       "weapon": "WraithRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1485,6 +1547,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "5076",
       "reloaddelay": "24",
@@ -1549,6 +1612,7 @@
        }
       ],
       "weapon": "WraithRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1567,8 +1631,10 @@
      "v": "1400"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1600,6 +1666,7 @@
       "burst": "4",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.1071428571428572,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
@@ -1707,6 +1774,7 @@
        }
       ],
       "weapon": "WyvernRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1722,6 +1790,7 @@
       "burst": "4",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.1071428571428572,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "90",
@@ -1829,6 +1898,7 @@
        }
       ],
       "weapon": "WyvernRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1850,8 +1920,10 @@
      "v": "3600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -1896,6 +1968,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1929,6 +2002,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1966,6 +2040,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2002,6 +2077,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2038,6 +2114,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2067,6 +2144,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2095,6 +2173,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2131,6 +2210,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2169,6 +2249,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2202,6 +2283,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2230,6 +2312,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2258,6 +2341,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2291,8 +2375,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bunker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2332,8 +2418,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2361,6 +2449,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "11626",
       "reloaddelay": "30",
@@ -2425,6 +2514,7 @@
        }
       ],
       "weapon": "MissileTurret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2435,6 +2525,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "11626",
       "reloaddelay": "30",
@@ -2499,6 +2590,7 @@
        }
       ],
       "weapon": "MissileTurret",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2517,8 +2609,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiAirDefense",
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
@@ -2544,6 +2638,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "8181",
       "reloaddelay": "20",
@@ -2603,6 +2698,7 @@
        }
       ],
       "weapon": "NaxLaserT",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2620,8 +2716,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2651,6 +2749,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2676,6 +2775,7 @@
        }
       ],
       "weapon": "FirebatF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2684,6 +2784,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3400",
       "reloaddelay": "28",
@@ -2709,6 +2810,7 @@
        }
       ],
       "weapon": "FirebatF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2718,6 +2820,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2743,6 +2846,7 @@
        }
       ],
       "weapon": "FirebatF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2752,6 +2856,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "3400",
       "reloaddelay": "28",
@@ -2777,6 +2882,7 @@
        }
       ],
       "weapon": "FirebatF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2791,10 +2897,17 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
@@ -2822,9 +2935,10 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8428",
-      "reloaddelay": "44",
+      "reloaddelay": "22",
       "slot": "Armament@lockdown",
       "versus_templates": [
        "^TeslaChargedWeapon",
@@ -2832,12 +2946,12 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "TeslaChargedWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "20000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
        },
@@ -2847,7 +2961,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -2857,7 +2971,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -2867,7 +2981,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -2877,7 +2991,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -2887,7 +3001,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "20000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2898,6 +3012,7 @@
        }
       ],
       "weapon": "GhostSniperLockdown",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -2909,6 +3024,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8428",
       "reloaddelay": "22",
@@ -2973,6 +3089,7 @@
        }
       ],
       "weapon": "GhostSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -2984,6 +3101,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8428",
       "reloaddelay": "22",
@@ -3048,6 +3166,7 @@
        }
       ],
       "weapon": "GhostSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3063,17 +3182,24 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
-     "v": "700"
+     "v": "1176"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "SniperInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.75
     },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.03
+    },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
-     "v": "45000"
+     "v": "44000"
     },
     "name": "Ghost",
     "prerequisites": [
@@ -3099,6 +3225,7 @@
       "burst": "20",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4185",
       "reloaddelay": "47",
@@ -3140,6 +3267,7 @@
        }
       ],
       "weapon": "HarakanF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3149,6 +3277,7 @@
       "burst": "20",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "4185",
       "reloaddelay": "47",
@@ -3190,6 +3319,7 @@
        }
       ],
       "weapon": "HarakanF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3200,6 +3330,7 @@
       "burst": "20",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4185",
       "reloaddelay": "47",
@@ -3241,6 +3372,7 @@
        }
       ],
       "weapon": "HarakanF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3251,6 +3383,7 @@
       "burst": "20",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "4185",
       "reloaddelay": "47",
@@ -3292,6 +3425,7 @@
        }
       ],
       "weapon": "HarakanF",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3307,10 +3441,17 @@
      "v": "700"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
@@ -3340,6 +3481,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "7446",
       "reloaddelay": "12",
@@ -3371,6 +3513,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3381,6 +3524,7 @@
       "burst": "5",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": false,
       "range": "7446",
       "reloaddelay": "12",
@@ -3412,6 +3556,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3431,8 +3576,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -3461,8 +3608,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4587",
+      "range": "5542",
       "reloaddelay": "25",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -3472,7 +3620,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -3482,7 +3630,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3492,7 +3640,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3503,6 +3651,7 @@
        }
       ],
       "weapon": "MadcapGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3512,8 +3661,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "4587",
+      "range": "5542",
       "reloaddelay": "25",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -3523,7 +3673,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -3533,7 +3683,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3543,7 +3693,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3554,6 +3704,7 @@
        }
       ],
       "weapon": "MadcapGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3567,13 +3718,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
-     "v": "300"
+     "v": "1003"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.25,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.08
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
@@ -3601,6 +3759,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7010",
       "reloaddelay": "60",
@@ -3643,6 +3802,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3652,6 +3812,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "7010",
       "reloaddelay": "60",
@@ -3694,6 +3855,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3710,8 +3872,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -3742,8 +3906,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4444",
+      "range": "6105",
       "reloaddelay": "26",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -3753,7 +3918,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -3763,7 +3928,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3773,7 +3938,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3784,6 +3949,7 @@
        }
       ],
       "weapon": "MarineMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3795,8 +3961,9 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "4444",
+      "range": "6105",
       "reloaddelay": "26",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -3806,7 +3973,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -3816,7 +3983,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3826,7 +3993,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "2000",
+        "damage": "12000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3837,6 +4004,7 @@
        }
       ],
       "weapon": "MarineMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3850,17 +4018,24 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
-     "v": "200"
+     "v": "689"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": null,
-     "tech_tier": null,
+     "subtype": "AntiTankAntiAirInfantry",
+     "tech_tier": 1.0,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier@TripleShot.Modifier",
+     "trait": "FirepowerMultiplier@TripleShot",
+     "v": 0.31
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
-     "v": "40000"
+     "v": "41000"
     },
     "name": "Marine",
     "prerequisites": [
@@ -3877,13 +4052,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Mobile.Speed",
-     "v": "60"
+     "v": "61"
     }
    },
    "terran_medic": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "60",
@@ -3951,6 +4127,7 @@
        }
       ],
       "weapon": "MedicFlare",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -3959,6 +4136,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "10",
@@ -3984,6 +4162,7 @@
        }
       ],
       "weapon": "MedicHeal",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -3991,6 +4170,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": false,
       "range": "6000",
       "reloaddelay": "60",
@@ -4058,6 +4238,7 @@
        }
       ],
       "weapon": "MedicFlare",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4074,8 +4255,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Medic",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4104,6 +4287,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4375",
       "reloaddelay": "22",
@@ -4124,12 +4308,14 @@
        }
       ],
       "weapon": "ReaperPistols",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "4375",
       "reloaddelay": "22",
@@ -4150,12 +4336,14 @@
        }
       ],
       "weapon": "ReaperPistols",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "875",
       "pricing": true,
       "range": "4375",
@@ -4209,6 +4397,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4218,6 +4407,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4375",
       "reloaddelay": "22",
@@ -4238,6 +4428,7 @@
        }
       ],
       "weapon": "ReaperPistols",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4245,6 +4436,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": false,
       "range": "4375",
       "reloaddelay": "22",
@@ -4265,6 +4457,7 @@
        }
       ],
       "weapon": "ReaperPistols",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4272,6 +4465,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "minrange": "875",
       "pricing": false,
       "range": "4375",
@@ -4325,6 +4519,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4341,8 +4536,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "SniperInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -4371,9 +4568,10 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7922",
-      "reloaddelay": "66",
+      "reloaddelay": "33",
       "slot": "Armament@lockdown",
       "versus_templates": [
        "^TeslaChargedWeapon",
@@ -4381,12 +4579,12 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "TeslaChargedWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "4000",
+        "damage": "40000",
         "tag": "TeslaChargedExtraDamage",
         "type": "SpreadDamage"
        },
@@ -4396,7 +4594,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -4406,7 +4604,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "HeavyCannon",
         "type": "SpreadDamage"
        },
@@ -4416,7 +4614,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4426,7 +4624,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -4436,7 +4634,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "8000",
+        "damage": "40000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4447,6 +4645,7 @@
        }
       ],
       "weapon": "SpecterSniperLockdown",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -4458,6 +4657,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7922",
       "reloaddelay": "33",
@@ -4522,6 +4722,7 @@
        }
       ],
       "weapon": "SpecterSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4533,6 +4734,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7922",
       "reloaddelay": "33",
@@ -4597,6 +4799,7 @@
        }
       ],
       "weapon": "SpecterSniper",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4612,13 +4815,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Valued.Cost",
-     "v": "900"
+     "v": "1744"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "SniperInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.06
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/infantry.yaml#Health.HP",
@@ -4652,6 +4862,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4674,6 +4885,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4696,6 +4908,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4718,6 +4931,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4739,6 +4953,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4760,6 +4975,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4782,6 +4998,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4804,6 +5021,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4826,6 +5044,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4848,6 +5067,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4869,6 +5089,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4891,6 +5112,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4919,6 +5141,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4943,6 +5166,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4967,6 +5191,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4991,6 +5216,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5016,6 +5242,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5040,6 +5267,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5065,6 +5293,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5089,6 +5318,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5114,6 +5344,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5138,6 +5369,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5163,6 +5395,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5187,6 +5420,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5211,6 +5445,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5235,6 +5470,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5260,6 +5496,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5284,6 +5521,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5309,6 +5547,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5333,6 +5572,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5358,6 +5598,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5378,6 +5619,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "7320",
       "reloaddelay": "35",
@@ -5410,6 +5652,7 @@
        }
       ],
       "weapon": "CycloneRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5419,6 +5662,7 @@
       "burst": "6",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "35",
@@ -5450,6 +5694,7 @@
        }
       ],
       "weapon": "CycloneRocketsLockOn",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5465,8 +5710,10 @@
      "v": "2300"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -5502,6 +5749,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5549,6 +5797,7 @@
        }
       ],
       "weapon": "GoliathMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5559,6 +5808,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "16",
@@ -5606,6 +5856,7 @@
        }
       ],
       "weapon": "GoliathMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5614,6 +5865,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -5678,6 +5930,7 @@
        }
       ],
       "weapon": "GoliathRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -5688,6 +5941,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6000",
       "reloaddelay": "33",
@@ -5752,6 +6006,7 @@
        }
       ],
       "weapon": "GoliathRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -5770,10 +6025,17 @@
      "v": "1600"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.33
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
@@ -5807,6 +6069,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -5865,6 +6128,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5876,6 +6140,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "34",
@@ -5934,6 +6199,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5943,6 +6209,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "40",
@@ -5996,6 +6263,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6005,6 +6273,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6479",
       "reloaddelay": "40",
@@ -6058,6 +6327,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6075,10 +6345,17 @@
      "v": "2400"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/vehicles.yaml#Health.HP",
@@ -6112,6 +6389,7 @@
       "burst": "13",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5938",
       "reloaddelay": "18",
@@ -6170,6 +6448,7 @@
        }
       ],
       "weapon": "MatadorFlamer",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -6179,6 +6458,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6590",
       "reloaddelay": "39",
@@ -6205,6 +6485,7 @@
        }
       ],
       "weapon": "MatadorLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6219,8 +6500,10 @@
      "v": "1700"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -6264,8 +6547,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6298,6 +6583,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -6323,6 +6609,7 @@
        }
       ],
       "weapon": "SCVAttack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -6332,6 +6619,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -6357,6 +6645,7 @@
        }
       ],
       "weapon": "SCVRepair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6375,8 +6664,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6409,6 +6700,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6114",
       "reloaddelay": "37",
@@ -6452,6 +6744,7 @@
        }
       ],
       "weapon": "SiegeTankCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -6461,6 +6754,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.3269230769230769,
       "minrange": "2355",
       "pricing": true,
       "range": "11775",
@@ -6666,6 +6960,7 @@
        }
       ],
       "weapon": "SiegeTankSiegeCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -6693,8 +6988,10 @@
      "v": "2800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "MainBattleTank",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6727,6 +7024,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "4800",
       "reloaddelay": "25",
@@ -6796,6 +7094,7 @@
        }
       ],
       "weapon": "VultureGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -6814,8 +7113,10 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -6851,6 +7152,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "44",
@@ -6914,6 +7216,7 @@
        }
       ],
       "weapon": "SCTyr",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Chaingun",
@@ -6926,6 +7229,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Terran/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "7156",
       "reloaddelay": "84",
@@ -6984,6 +7288,7 @@
        }
       ],
       "weapon": "SCTyrAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -7001,8 +7306,10 @@
      "v": "4500"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },

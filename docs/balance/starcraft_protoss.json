@@ -9,6 +9,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "4280",
       "reloaddelay": "25",
@@ -59,6 +60,7 @@
        }
       ],
       "weapon": "ArbiterCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -69,8 +71,9 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
-      "minrange": "856",
+      "minrange": "855",
       "pricing": true,
       "range": "4280",
       "reloaddelay": "250",
@@ -78,6 +81,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "ArbiterStasis",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -94,8 +98,10 @@
      "v": "4800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -126,6 +132,7 @@
       "burst": "5",
       "burstdelays": "10",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "10000",
@@ -134,6 +141,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "InterceptorLauncher",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -146,8 +154,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 0.75,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -177,6 +187,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "1100",
       "pricing": true,
       "range": "5500",
@@ -203,6 +214,7 @@
        }
       ],
       "weapon": "CorsairEMP",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -210,6 +222,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -268,6 +281,7 @@
        }
       ],
       "weapon": "CorsairFlash",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -278,6 +292,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "65",
@@ -336,6 +351,7 @@
        }
       ],
       "weapon": "CorsairFlash",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -353,8 +369,10 @@
      "v": "2100"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -383,6 +401,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0555555555555556,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -512,6 +531,7 @@
        }
       ],
       "weapon": "EpigraphMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -527,6 +547,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0555555555555556,
       "pricing": true,
       "range": "5077",
       "reloaddelay": "36",
@@ -656,6 +677,7 @@
        }
       ],
       "weapon": "EpigraphMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -679,10 +701,17 @@
      "v": "2600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
@@ -710,6 +739,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "pricing": true,
       "range": "10000",
       "reloaddelay": "80",
@@ -824,6 +854,7 @@
        }
       ],
       "weapon": "GladiusCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -845,10 +876,17 @@
      "v": "1800"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
@@ -882,8 +920,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -913,6 +953,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -971,6 +1012,7 @@
        }
       ],
       "weapon": "ScoutMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -981,6 +1023,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "32",
@@ -1039,6 +1082,7 @@
        }
       ],
       "weapon": "ScoutMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1049,6 +1093,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
@@ -1113,6 +1158,7 @@
        }
       ],
       "weapon": "ScoutRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1124,6 +1170,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "40",
@@ -1188,6 +1235,7 @@
        }
       ],
       "weapon": "ScoutRockets",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1206,8 +1254,10 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -1243,8 +1293,10 @@
      "v": "6000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "UnarmedTransportHelicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1273,6 +1325,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "8475",
       "reloaddelay": "10",
@@ -1358,6 +1411,7 @@
        }
       ],
       "weapon": "StarshipSovereignBeam",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1381,10 +1435,17 @@
      "v": "10000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@Cryo.Modifier",
+     "trait": "FirepowerMultiplier@Cryo",
+     "v": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
@@ -1416,6 +1477,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.9166666666666666,
       "pricing": true,
       "range": "6474",
       "reloaddelay": "6",
@@ -1501,6 +1563,7 @@
        }
       ],
       "weapon": "VoidRayBeam",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1520,10 +1583,17 @@
      "v": "1400"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.5,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#FirepowerMultiplier@Cryo.Modifier",
+     "trait": "FirepowerMultiplier@Cryo",
+     "v": 0.09
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/aircraft.yaml#Health.HP",
@@ -1565,6 +1635,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1603,6 +1674,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1639,6 +1711,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1676,6 +1749,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1717,6 +1791,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1755,6 +1830,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1791,6 +1867,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1827,6 +1904,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1863,6 +1941,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1896,6 +1975,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1932,6 +2012,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1969,6 +2050,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1994,6 +2076,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -2019,6 +2102,7 @@
        }
       ],
       "weapon": "Heal",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2035,6 +2119,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2072,6 +2157,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2109,6 +2195,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2139,6 +2226,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2157,6 +2245,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "8228",
       "reloaddelay": "28",
@@ -2210,6 +2299,7 @@
        }
       ],
       "weapon": "PhotonCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -2227,8 +2317,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiAirDefense",
      "tech_tier": 1.0,
      "unit_class": 0.325
     },
@@ -2256,6 +2348,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "5250",
       "reloaddelay": "40",
@@ -2297,6 +2390,7 @@
        }
       ],
       "weapon": "GlaveCanon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2305,6 +2399,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "5250",
       "reloaddelay": "40",
@@ -2346,6 +2441,7 @@
        }
       ],
       "weapon": "GlaveCanon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2361,8 +2457,10 @@
      "v": "650"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "HeavyInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2391,6 +2489,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1840",
       "reloaddelay": "20",
@@ -2416,6 +2515,7 @@
        }
       ],
       "weapon": "WarpBladeAmaranth",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2430,8 +2530,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2461,6 +2563,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "25",
@@ -2486,6 +2589,7 @@
        }
       ],
       "weapon": "WarpBlade",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2500,8 +2604,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2531,6 +2637,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "6400",
@@ -2539,11 +2646,13 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "PsiStormCosmetic",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2569,6 +2678,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2576,6 +2686,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2601,6 +2712,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2608,6 +2720,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2633,6 +2746,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2640,6 +2754,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2665,6 +2780,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2672,6 +2788,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2697,6 +2814,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2704,6 +2822,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2729,6 +2848,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2736,6 +2856,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2761,6 +2882,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2768,6 +2890,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6400",
       "reloaddelay": "64",
@@ -2793,6 +2916,7 @@
        }
       ],
       "weapon": "PsiStorm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2807,8 +2931,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.5
     },
@@ -2837,6 +2963,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1337",
       "reloaddelay": "26",
@@ -2862,6 +2989,7 @@
        }
       ],
       "weapon": "psi_spear",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2876,8 +3004,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -2909,6 +3039,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "75",
@@ -2994,6 +3125,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3008,6 +3140,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0416666666666667,
       "pricing": false,
       "range": "5000",
       "reloaddelay": "75",
@@ -3093,6 +3226,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3116,8 +3250,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "HeroInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3149,6 +3285,7 @@
       "burst": "2",
       "burstdelays": "6",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1335",
       "reloaddelay": "30",
@@ -3174,6 +3311,7 @@
        }
       ],
       "weapon": "psi_blades",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3188,8 +3326,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
     },
@@ -3219,6 +3359,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1445",
       "reloaddelay": "24",
@@ -3244,6 +3385,7 @@
        }
       ],
       "weapon": "ZeratulSlice",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3262,8 +3404,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -3298,6 +3442,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3320,6 +3465,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3342,6 +3488,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3364,6 +3511,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3385,6 +3533,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3407,6 +3556,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3429,6 +3579,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3450,6 +3601,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3472,6 +3624,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3494,6 +3647,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3515,6 +3669,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3537,6 +3692,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Promotion",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3565,6 +3721,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3589,6 +3746,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3614,6 +3772,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3638,6 +3797,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3663,6 +3823,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3687,6 +3848,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3711,6 +3873,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3736,6 +3899,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3760,6 +3924,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3785,6 +3950,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3809,6 +3975,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3832,6 +3999,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3856,6 +4024,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3880,6 +4049,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3904,6 +4074,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3923,6 +4094,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -3948,6 +4120,7 @@
        }
       ],
       "weapon": "SCVAttack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -3957,6 +4130,7 @@
       "burst": "10",
       "burstdelays": "1",
       "defined_in": "mods/cameo/weapons/starcraft.yaml",
+      "design_weapon_class": 1.5,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "5",
@@ -3982,6 +4156,7 @@
        }
       ],
       "weapon": "SCVRepair",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -3996,8 +4171,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4031,6 +4208,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "3152",
       "reloaddelay": "20",
@@ -4056,6 +4234,7 @@
        }
       ],
       "weapon": "PsionicShockwave",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -4070,8 +4249,10 @@
      "v": "5600"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -4106,6 +4287,7 @@
       "burst": "4",
       "burstdelays": "4",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "4500",
       "reloaddelay": "28",
@@ -4175,6 +4357,7 @@
        }
       ],
       "weapon": "AtreusMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4193,8 +4376,10 @@
      "v": "2400"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -4228,6 +4413,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "40",
@@ -4278,6 +4464,7 @@
        }
       ],
       "weapon": "DragoonCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -4295,10 +4482,17 @@
      "v": "1200"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
@@ -4329,6 +4523,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -4365,6 +4560,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -4372,6 +4568,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -4408,6 +4605,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -4415,6 +4613,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "9343",
       "reloaddelay": "120",
@@ -4456,6 +4655,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -4475,10 +4675,17 @@
      "v": "2800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "EpicVehicle",
      "tech_tier": 0.75,
      "unit_class": 0.4
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@TripleBeam.Modifier",
+     "trait": "FirepowerMultiplier@TripleBeam",
+     "v": 2.23
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
@@ -4510,6 +4717,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "4780",
       "reloaddelay": "20",
@@ -4557,6 +4765,7 @@
        }
       ],
       "weapon": "ManifoldMG",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4565,6 +4774,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.0833333333333333,
       "pricing": true,
       "range": "7170",
       "reloaddelay": "20",
@@ -4610,6 +4820,7 @@
        }
       ],
       "weapon": "ManifoldMGAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4626,8 +4837,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -4671,8 +4884,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4705,6 +4920,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "5044",
       "reloaddelay": "30",
@@ -4774,6 +4990,7 @@
        }
       ],
       "weapon": "PositronGrenade",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -4792,10 +5009,17 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 2.0,
+     "subtype": "ScoutVehicle",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#FirepowerMultiplier@DualWeapon.Modifier",
+     "trait": "FirepowerMultiplier@DualWeapon",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/vehicles.yaml#Health.HP",
@@ -4827,6 +5051,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1500",
       "reloaddelay": "25",
@@ -4852,6 +5077,7 @@
        }
       ],
       "weapon": "ProbeAttack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -4870,8 +5096,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4905,6 +5133,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "90",
@@ -4963,6 +5192,7 @@
        }
       ],
       "weapon": "ScarabLaunch",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -4973,6 +5203,7 @@
      {
       "armament_name": "secondary",
       "defined_in": "mods/cameo/ContentPacks/StarCraft/Protoss/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "7777",
       "reloaddelay": "90",
@@ -4987,6 +5218,7 @@
        }
       ],
       "weapon": "ScarabLaunchDummy",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -4999,8 +5231,10 @@
      "v": "2700"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "FireSupport",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },

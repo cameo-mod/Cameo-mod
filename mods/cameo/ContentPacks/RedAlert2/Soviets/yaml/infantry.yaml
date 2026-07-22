@@ -141,7 +141,7 @@ ra2_soviets_conscript:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
-		Speed: 57
+		Speed: 58
 	Health:
 		HP: 26000
 	ChangesHealth@SelfHealing:
@@ -151,7 +151,7 @@ ra2_soviets_conscript:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ra2_soviets_conscript:
-		Modifier: 63
+		Modifier: 19
 	Armament@PRIMARY:
 		Weapon: ra2_soviets_conscript_carbine
 		LocalOffset: 128,0,256
@@ -210,7 +210,7 @@ ra2_soviets_flaktrooper:
 	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Valued:
-		Cost: 300
+		Cost: 416
 	Tooltip:
 		Name: Flak Trooper
 	Buildable:
@@ -219,7 +219,7 @@ ra2_soviets_flaktrooper:
 		Queue: Infantry, RAInfantry
 		Description: actor_flakt.description
 	Mobile:
-		Speed: 45
+		Speed: 44
 	Health:
 		HP: 10000
 	ChangesHealth@SelfHealing:
@@ -286,6 +286,8 @@ ra2_soviets_flaktrooper:
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_conscription, ra2_soviets_doctrine_harshenvironmentinfantryconditioning, ra2_soviets_doctrine_shocktroopertraining, ra2_soviets_upgrade_heavycannons
 
+	FirepowerMultiplier:
+		Modifier: 107
 ra2_soviets_crazyivan:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate

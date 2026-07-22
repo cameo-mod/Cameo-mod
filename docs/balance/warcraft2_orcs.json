@@ -11,6 +11,7 @@
       "burst": "2",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
@@ -225,6 +226,7 @@
        }
       ],
       "weapon": "wc2dragonFireVisible",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -248,6 +250,7 @@
       "burst": "3",
       "burstdelays": "0",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "pricing": true,
       "range": "5010",
       "reloaddelay": "120",
@@ -448,6 +451,7 @@
        }
       ],
       "weapon": "wc2dragonFireExplosion",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -476,8 +480,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "Spaceship",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -512,8 +518,10 @@
      "v": "350"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Helicopter",
      "tech_tier": null,
      "unit_class": null
     },
@@ -556,6 +564,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -593,6 +602,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -630,6 +640,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -659,6 +670,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -688,6 +700,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -717,6 +730,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -748,6 +762,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -785,6 +800,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -813,6 +829,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -842,6 +859,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -883,6 +901,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -925,6 +944,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -960,6 +980,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -988,6 +1009,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1021,6 +1043,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1058,6 +1081,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1085,6 +1109,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1133,6 +1158,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1142,6 +1168,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1358,6 +1385,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1386,8 +1414,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1413,6 +1443,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1461,6 +1492,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1470,6 +1502,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -1686,6 +1719,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1714,8 +1748,10 @@
      "v": "1600"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1741,6 +1777,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8750",
       "reloaddelay": "34",
@@ -1789,6 +1826,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1798,6 +1836,7 @@
      {
       "armament_name": "cannon",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.0357142857142858,
       "minrange": "2100",
       "pricing": true,
       "range": "10500",
@@ -2014,6 +2053,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -2042,8 +2082,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "BasicDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2075,8 +2117,10 @@
      "v": "300"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2099,6 +2143,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "40",
@@ -2141,6 +2186,7 @@
        }
       ],
       "weapon": "wc2deathknightFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2149,6 +2195,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": false,
       "range": "8000",
       "reloaddelay": "40",
@@ -2190,6 +2237,7 @@
        }
       ],
       "weapon": "wc2deathknightFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2198,6 +2246,7 @@
      {
       "armament_name": "deathcoil",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2239,6 +2288,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoil",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2246,6 +2296,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2287,6 +2338,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Left",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2294,6 +2346,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "80",
@@ -2335,6 +2388,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Right",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2343,6 +2397,7 @@
      {
       "armament_name": "haste",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -2357,11 +2412,13 @@
        }
       ],
       "weapon": "wc2deathknightHaste",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "deathanddecay",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "50",
@@ -2378,11 +2435,13 @@
        }
       ],
       "weapon": "wc2deathknightDeathAndDecay",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "raisedead",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -2397,6 +2456,7 @@
        }
       ],
       "weapon": "wc2deathknightRaiseDead",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2409,8 +2469,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "SniperInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2439,6 +2501,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1555",
       "reloaddelay": "18",
@@ -2464,6 +2527,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2478,10 +2542,17 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MeleeInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.75
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#FirepowerMultiplier@WC2AxeUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2AxeUpg",
+     "v": 1.3
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
@@ -2509,6 +2580,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -2584,6 +2656,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2596,6 +2669,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -2671,6 +2745,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2690,8 +2765,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -2724,6 +2801,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
@@ -2750,6 +2828,7 @@
        }
       ],
       "weapon": "wc2ogrepunch",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2757,6 +2836,7 @@
      {
       "armament_name": "eyeofkilrogg",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -2771,11 +2851,13 @@
        }
       ],
       "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -2790,11 +2872,13 @@
        }
       ],
       "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -2809,6 +2893,7 @@
        }
       ],
       "weapon": "wc2ogremageRunes",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2821,8 +2906,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "LineBreaker",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2856,6 +2943,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -2931,6 +3019,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2943,6 +3032,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -3018,6 +3108,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3037,8 +3128,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -3068,6 +3161,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6445",
       "reloaddelay": "38",
@@ -3143,6 +3237,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3155,6 +3250,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6445",
       "reloaddelay": "38",
@@ -3230,6 +3326,7 @@
        }
       ],
       "weapon": "wc2axeFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3249,8 +3346,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3281,6 +3380,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0714285714285714,
       "pricing": true,
       "range": "7711",
       "reloaddelay": "40",
@@ -3391,6 +3491,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3406,6 +3507,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0714285714285714,
       "pricing": false,
       "range": "7711",
       "reloaddelay": "40",
@@ -3516,6 +3618,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3538,8 +3641,10 @@
      "v": "1000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3568,6 +3673,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1600",
       "reloaddelay": "18",
@@ -3593,6 +3699,7 @@
        }
       ],
       "weapon": "wc2gruntslice2",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3607,10 +3714,17 @@
      "v": "1100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#FirepowerMultiplier@WC2AxeUpg.Modifier",
+     "trait": "FirepowerMultiplier@WC2AxeUpg",
+     "v": 1.3
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/infantry.yaml#Health.HP",
@@ -3647,6 +3761,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3671,6 +3786,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3697,6 +3813,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3721,6 +3838,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3747,6 +3865,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3771,6 +3890,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3797,6 +3917,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3823,6 +3944,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3848,6 +3970,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3873,6 +3996,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3898,6 +4022,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3924,6 +4049,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3948,6 +4074,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3974,6 +4101,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3998,6 +4126,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4024,6 +4153,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4049,6 +4179,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4074,6 +4205,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4099,6 +4231,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4124,6 +4257,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4150,6 +4284,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4174,6 +4309,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4200,6 +4336,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4226,6 +4363,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4245,6 +4383,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 1.0625,
       "minrange": "2680",
       "pricing": true,
       "range": "13400",
@@ -4314,6 +4453,7 @@
        }
       ],
       "weapon": "wc2catapultFire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4331,8 +4471,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.5
     },
@@ -4368,6 +4510,7 @@
      {
       "armament_name": "detonate",
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -4376,10 +4519,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "wc2demolitionsquadTargeting",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4406,6 +4551,7 @@
        }
       ],
       "weapon": "wc2demolitionsquadMelee",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4420,8 +4566,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4460,8 +4608,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4494,6 +4644,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1660",
       "reloaddelay": "20",
@@ -4520,6 +4671,7 @@
        }
       ],
       "weapon": "wc2ogrepunch",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4527,6 +4679,7 @@
      {
       "armament_name": "eyeofkilrogg",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -4541,11 +4694,13 @@
        }
       ],
       "weapon": "wc2ogremageEyeOfKilrogg",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "bloodlust",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -4560,11 +4715,13 @@
        }
       ],
       "weapon": "wc2ogremageBloodlust",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "runes",
       "defined_in": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "5120",
       "reloaddelay": "60",
@@ -4579,6 +4736,7 @@
        }
       ],
       "weapon": "wc2ogremageRunes",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -4591,8 +4749,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "LineBreaker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4627,6 +4787,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "1333",
       "reloaddelay": "15",
@@ -4652,6 +4813,7 @@
        }
       ],
       "weapon": "wc2peasantsmack",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4670,8 +4832,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4701,6 +4865,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/warcraft2.yaml",
+      "design_weapon_class": 1.3269230769230769,
       "minrange": "2240",
       "pricing": true,
       "range": "11200",
@@ -4905,6 +5070,7 @@
        }
       ],
       "weapon": "SiegeEngineCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -4932,8 +5098,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Artillery",
      "tech_tier": null,
      "unit_class": null
     },

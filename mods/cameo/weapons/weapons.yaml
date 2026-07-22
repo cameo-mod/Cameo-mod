@@ -6,6 +6,7 @@
 ###############################################
 
 ^SmallArms:
+	WeaponClass: 0.75
 	ReloadDelay: 25
 	Range: 5120
 	Report: gun8.aud
@@ -85,6 +86,7 @@
 		ValidTargets: Shielded
 
 ^SniperWeapon:
+	WeaponClass: 0.75
 	ValidTargets: Infantry, Monster, Garrisoned
 	ReloadDelay: 25
 	Range: 5120
@@ -200,6 +202,7 @@
 		ValidTargets: Shielded
 
 ^Chaingun:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -281,6 +284,7 @@
 		ValidTargets: Shielded
 
 ^FlakWeapon:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -367,6 +371,7 @@
 		ValidTargets: Shielded
 
 ^HeavyAAWeapon:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -453,6 +458,7 @@
 		ValidTargets: Shielded
 
 ^LightMissile:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -557,6 +563,7 @@
 		ValidTargets: Shielded
 
 ^MediumMissile:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -661,6 +668,7 @@
 		ValidTargets: Shielded
 
 ^HeavyMissile:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -771,6 +779,7 @@
 		FadeFrames: 15
 
 ^TankDestroyerCannon:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -866,6 +875,7 @@
 		ValidTargets: Shielded
 
 ^MediumCannon:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -961,6 +971,7 @@
 		ValidTargets: Shielded
 
 ^HeavyCannon:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -1055,6 +1066,7 @@
 		ValidTargets: Shielded
 
 ^LaserWeapon:
+	WeaponClass: 1.25
 	ReloadDelay: 25
 	Range: 5120
 	Report: obelray1.aud
@@ -1164,6 +1176,7 @@
 		ValidTargets: Shielded
 
 ^RailgunWeapon:
+	WeaponClass: 1.25
 	ReloadDelay: 25
 	Range: 5120
 	Report: bigggun1.aud
@@ -1264,6 +1277,7 @@
 		ValidTargets: Shielded
 
 ^TeslaWeapon:
+	WeaponClass: 1.25
 	Inherits@EMP: ^EMPDamage
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -1357,6 +1371,7 @@
 		ValidTargets: Shielded
 
 ^TeslaChargedWeapon:
+	WeaponClass: 1.5
 	Inherits@EMP: ^EMPDamage
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -1450,6 +1465,7 @@
 		ValidTargets: Shielded
 
 ^LightFlameWeapon:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -1579,6 +1595,7 @@
 		InternalOwner: Neutral
 
 ^MediumFlameWeapon:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -1706,6 +1723,7 @@
 		InternalOwner: Neutral
 
 ^HeavyFlameWeapon:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -1833,6 +1851,7 @@
 		InternalOwner: Neutral
 
 ^LightChemicalWeapon:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -1939,6 +1958,7 @@
 		ValidTargets: Shielded
 
 ^MediumChemicalWeapon:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -2048,6 +2068,7 @@
 		ValidTargets: Shielded
 
 ^HeavyChemicalWeapon:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -2157,6 +2178,7 @@
 		ValidTargets: Shielded
 
 ^Grenade:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -2277,6 +2299,7 @@
 		ValidTargets: Shielded
 
 ^ShrapnelWeapon:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -2391,6 +2414,7 @@
 		ValidTargets: Shielded
 
 ^HeavyBomb:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -2490,6 +2514,7 @@
 		Damage: 250
 
 ^NuclearWarhead:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	Report: nukemisl.aud
 	ReloadDelay: 25
@@ -2577,6 +2602,7 @@
 		Damage: 1000
 
 ^SwordWeapon:
+	WeaponClass: 1.0
 	ValidTargets: Ground
 	ReloadDelay: 25
 	Range: 5120
@@ -2669,6 +2695,7 @@
 		ValidTargets: Shielded
 
 ^ArrowWeapon:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -2750,6 +2777,7 @@
 		ValidTargets: Shielded
 
 ^MagicWeapon:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
 	Range: 5120
@@ -2867,6 +2895,7 @@
 		ValidTargets: Shielded
 
 ^ToxicWeapon:
+	WeaponClass: 0.5
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
 	Range: 5120
@@ -2957,6 +2986,7 @@
 		UpdatesUnitStatistics: false
 
 ^HealingWeapon:
+	WeaponClass: 1.5
 	ReloadDelay: 25
 	Range: 5120
 	Report: TMedHeal.aud
@@ -3080,6 +3110,7 @@
 		ImpactActors: true
 
 ^RepairWeapon:
+	WeaponClass: 1.5
 	ReloadDelay: 25
 	Range: 5120
 	Burst: 10
@@ -3741,7 +3772,7 @@ Patriot:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 25
 	Range: 9216
-	MinRange: 1024
+	MinRange: 1845
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -3918,6 +3949,7 @@ Demolish:
 ###############################################
 
 ^HeavyMG:
+	WeaponClass: 1.25
 	ReloadDelay: 25
 	Range: 6144
 	Report: gun8.aud
@@ -3955,6 +3987,7 @@ Pistol:
 			None: 100
 
 ^LightMG:
+	WeaponClass: 0.75
 	Inherits: ^HeavyMG
 	ReloadDelay: 20
 	Range: 4096
@@ -4744,7 +4777,7 @@ BloomExplosion:
 TSEMPulseCannon:
 	ReloadDelay: 100
 	Range: 40960
-	MinRange: 5120
+	MinRange: 8190
 	Report: plsecan2.aud
 	Projectile: Bullet
 		Speed: 425
@@ -5041,7 +5074,7 @@ GiantArtilleryTurret:
 	Inherits: ^Cannon
 	ReloadDelay: 240
 	Range: 12322
-	MinRange: 3405
+	MinRange: 2465
 	Report: tnkfire2.aud
 	Projectile: Bullet
 		Speed: 123
@@ -5073,7 +5106,6 @@ GiantBowlingTurret:
 
 BowlingTrail:
 	Range: 12288
-	MinRange: 4096
 	ReloadDelay: 240
 	Projectile: WarheadTrailProjectile
 		Weapon: GiantBowlingTurret
@@ -5085,6 +5117,7 @@ BowlingTrail:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
+	MinRange: 2460
 LeechDisinfect:
 	Projectile: InstantHit
 	ReloadDelay: 100
@@ -5193,6 +5226,7 @@ AngryMobTargeting:
 	Warhead@1Dam: TargetDamage
 
 ^TSRailgun:
+	WeaponClass: 1.25
 	ReloadDelay: 77
 	Range: 7777
 	Report: bigggun1.aud
@@ -5685,7 +5719,7 @@ PlasmaPuff:
 
 Short8Inch:
 	Inherits: 8Inch
-	MinRange: 3072
+	MinRange: 1740
 	ReloadDelay: 60
 	Projectile: Bullet
 		Inaccuracy: 1c300
@@ -5833,7 +5867,6 @@ USALaserCannonAG:
 	BurstDelays: 6
 	ReloadDelay: 50
 	Range: 7168
-	MinRange: 0
 	Report: vpalwe2d.aud
 	-Projectile:
 	Projectile: LaserZap
@@ -5853,6 +5886,7 @@ USALaserCannonAG:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 
 
+	MinRange: 1435
 SWGreenLaser:
 	Inherits: ^MissileWeapon
 	Report: awbazook1.aud
@@ -6106,6 +6140,7 @@ SpiceExplosion:
 ####################################################################
 
 ^LightDemolition:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6162,6 +6197,7 @@ SpiceExplosion:
 		UpdatesUnitStatistics: false
 
 ^MediumDemolition:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6218,6 +6254,7 @@ SpiceExplosion:
 		UpdatesUnitStatistics: false
 
 ^HeavyDemolition:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6274,6 +6311,7 @@ SpiceExplosion:
 		UpdatesUnitStatistics: false
 
 ^LightConcussion:
+	WeaponClass: 0.75
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6330,6 +6368,7 @@ SpiceExplosion:
 		UpdatesUnitStatistics: false
 
 ^MediumConcussion:
+	WeaponClass: 1.0
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120
@@ -6386,6 +6425,7 @@ SpiceExplosion:
 		UpdatesUnitStatistics: false
 
 ^HeavyConcussion:
+	WeaponClass: 1.25
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5120

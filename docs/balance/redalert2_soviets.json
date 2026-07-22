@@ -8,6 +8,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -34,12 +35,14 @@
        }
       ],
       "weapon": "RA2KirovBomb",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -83,6 +86,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyBomb",
@@ -91,6 +95,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -117,12 +122,14 @@
        }
       ],
       "weapon": "RA2KirovBomb_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -165,6 +172,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^HeavyBomb"
@@ -172,6 +180,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 3.125,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -209,6 +218,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_nuclear",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -216,6 +226,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 3.125,
       "pricing": true,
       "range": "2500",
       "reloaddelay": "50",
@@ -252,6 +263,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_nuclear_E",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -267,8 +279,10 @@
      "v": "4000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Spaceship",
      "tech_tier": null,
      "unit_class": null
     },
@@ -302,6 +316,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -356,6 +371,7 @@
        }
       ],
       "weapon": "MigMissiles",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -368,6 +384,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -452,6 +469,7 @@
        }
       ],
       "weapon": "MigMissiles_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -467,6 +485,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -518,6 +537,7 @@
        }
       ],
       "weapon": "MigMissiles_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -530,6 +550,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -581,6 +602,7 @@
        }
       ],
       "weapon": "MigMissiles_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -593,6 +615,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -644,6 +667,7 @@
        }
       ],
       "weapon": "MigMissilesE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -656,6 +680,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -707,6 +732,7 @@
        }
       ],
       "weapon": "MigMissilesE_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -719,6 +745,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7600",
       "reloaddelay": "50",
@@ -770,6 +797,7 @@
        }
       ],
       "weapon": "MigMissiles_AA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -782,6 +810,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "8600",
       "reloaddelay": "50",
@@ -833,6 +862,7 @@
        }
       ],
       "weapon": "MigMissiles_AA_ELITE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -850,8 +880,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bomber",
      "tech_tier": null,
      "unit_class": null
     },
@@ -881,6 +913,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -913,6 +946,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -920,6 +954,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "5000",
@@ -931,6 +966,7 @@
       ],
       "warheads": [],
       "weapon": "deploytargeting.5c0",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^deploytargeting"
       ]
@@ -938,6 +974,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -981,6 +1018,7 @@
        }
       ],
       "weapon": "RA160mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -989,6 +1027,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1064,6 +1103,7 @@
        }
       ],
       "weapon": "RA160mm_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -1075,6 +1115,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1117,6 +1158,7 @@
        }
       ],
       "weapon": "RA160mm_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1125,6 +1167,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "11111",
@@ -1167,6 +1210,7 @@
        }
       ],
       "weapon": "RA160mm_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1177,6 +1221,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1220,6 +1265,7 @@
        }
       ],
       "weapon": "RA160mmE_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1229,6 +1275,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.75,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1313,6 +1360,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightChemicalWeapon",
@@ -1326,6 +1374,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1369,6 +1418,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1378,6 +1428,7 @@
      {
       "armament_name": "deployed",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "minrange": "2222",
       "pricing": true,
       "range": "12345",
@@ -1421,6 +1472,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1437,10 +1489,17 @@
      "v": "1500"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#FirepowerMultiplier@FirerateCompensation.Modifier",
+     "trait": "FirepowerMultiplier@FirerateCompensation",
+     "v": 0.5
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/aircraft.yaml#Health.HP",
@@ -1468,6 +1527,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "4750",
       "reloaddelay": "3",
@@ -1499,6 +1559,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1514,8 +1575,10 @@
      "v": "3600"
     },
     "design": {
+     "category": "Aircraft",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Helicopter",
      "tech_tier": 1.0,
      "unit_class": 1.25
     },
@@ -1559,6 +1622,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1596,6 +1660,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1633,6 +1698,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1666,6 +1732,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1706,6 +1773,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1739,6 +1807,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1776,6 +1845,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1813,6 +1883,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1850,6 +1921,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1883,6 +1955,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1919,6 +1992,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Building",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1952,8 +2026,10 @@
      "v": "800"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Bunker",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1985,8 +2061,10 @@
      "v": "200"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2007,6 +2085,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "12936",
       "reloaddelay": "15",
@@ -2027,6 +2106,7 @@
        }
       ],
       "weapon": "RA2TURRETFLAKAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -2041,8 +2121,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "AntiAirDefense",
      "tech_tier": 1.0,
      "unit_class": 0.225
     },
@@ -2082,8 +2164,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2124,8 +2208,10 @@
      "v": "10000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "Defense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2155,6 +2241,7 @@
       "burst": "3",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "6577",
       "reloaddelay": "14",
@@ -2186,6 +2273,7 @@
        }
       ],
       "weapon": "RA2vulcan",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2201,8 +2289,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "BasicDefense",
      "tech_tier": 1.0,
      "unit_class": 0.35
     },
@@ -2228,6 +2318,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2254,12 +2345,14 @@
        }
       ],
       "weapon": "RA2CoilBolt",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2286,12 +2379,14 @@
        }
       ],
       "weapon": "RA2CoilBolt2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2318,12 +2413,14 @@
        }
       ],
       "weapon": "RA2CoilBolt3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2350,12 +2447,14 @@
        }
       ],
       "weapon": "RA2OPCoilBolt1",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2382,12 +2481,14 @@
        }
       ],
       "weapon": "RA2OPCoilBolt2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8842",
       "reloaddelay": "3",
@@ -2414,6 +2515,7 @@
        }
       ],
       "weapon": "RA2OPCoilBolt3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -2428,8 +2530,10 @@
      "v": "2000"
     },
     "design": {
+     "category": "Defenses",
      "class_anchor": null,
      "special": null,
+     "subtype": "AdvancedDefense",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2457,6 +2561,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "2000",
       "reloaddelay": "10",
@@ -2470,6 +2575,7 @@
        }
       ],
       "weapon": "DogJaw",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2482,8 +2588,10 @@
      "v": "200"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Dog",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2514,6 +2622,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "8167",
       "reloaddelay": "18",
@@ -2546,6 +2655,7 @@
        }
       ],
       "weapon": "BorisAKM",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2555,6 +2665,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9167",
       "reloaddelay": "18",
@@ -2586,6 +2697,7 @@
        }
       ],
       "weapon": "BorisAKME",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2595,6 +2707,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "9167",
       "reloaddelay": "18",
@@ -2626,6 +2739,7 @@
        }
       ],
       "weapon": "BorisAKM2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2636,6 +2750,7 @@
       "burst": "3",
       "burstdelays": "15",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "9167",
@@ -2645,6 +2760,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "MigTarget",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
@@ -2652,6 +2768,7 @@
       "burst": "4",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "8167",
       "reloaddelay": "18",
@@ -2684,6 +2801,7 @@
        }
       ],
       "weapon": "BorisAKM",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2694,6 +2812,7 @@
       "burst": "8",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "9167",
       "reloaddelay": "18",
@@ -2725,6 +2844,7 @@
        }
       ],
       "weapon": "BorisAKME",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2744,8 +2864,10 @@
      "v": "3000"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeroInfantry",
      "tech_tier": 0.75,
      "unit_class": 1.0
     },
@@ -2775,8 +2897,9 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4500",
+      "range": "4898",
       "reloaddelay": "18",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -2796,6 +2919,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2804,6 +2928,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.75,
       "pricing": true,
       "range": "5500",
       "reloaddelay": "18",
@@ -2825,6 +2950,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2834,6 +2960,7 @@
       "burst": "3",
       "burstdelays": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": false,
       "range": "5724",
       "reloaddelay": "50",
@@ -2864,6 +2991,7 @@
        }
       ],
       "weapon": "RA2vulcan3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2879,10 +3007,17 @@
      "v": "100"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "ScoutInfantry",
      "tech_tier": 1.0,
-     "unit_class": 0.5
+     "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#FirepowerMultiplier@ra2_soviets_conscript.Modifier",
+     "trait": "FirepowerMultiplier@ra2_soviets_conscript",
+     "v": 0.19
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
@@ -2902,13 +3037,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "57"
+     "v": "58"
     }
    },
    "ra2_soviets_crazyivan": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2917,10 +3053,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "IvanAttach",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "2000",
@@ -2931,6 +3069,7 @@
       ],
       "warheads": [],
       "weapon": "IvanAttachAir",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -2943,8 +3082,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "MeleeInfantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2973,6 +3114,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6444",
       "reloaddelay": "45",
@@ -2999,6 +3141,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3007,6 +3150,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7444",
       "reloaddelay": "45",
@@ -3033,6 +3177,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeaponE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3040,6 +3185,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6444",
       "reloaddelay": "45",
@@ -3065,6 +3211,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3079,8 +3226,10 @@
      "v": "700"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HeavyInfantry",
      "tech_tier": 0.75,
      "unit_class": 0.8
     },
@@ -3110,6 +3259,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -3121,6 +3271,7 @@
       ],
       "warheads": [],
       "weapon": "DefuseKit",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RemovesIvanBombs",
        "^RemovesTerrorDrone"
@@ -3128,6 +3279,7 @@
      },
      {
       "defined_in": "mods/cameo/weapons/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "pricing": true,
       "range": "1536",
@@ -3136,6 +3288,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "LeechDisinfect",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -3148,8 +3301,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": null,
+     "subtype": "Infantry",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3179,8 +3334,9 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "4900",
+      "range": "5627",
       "reloaddelay": "17",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3189,7 +3345,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -3200,6 +3356,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3207,6 +3364,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7834",
       "reloaddelay": "26",
@@ -3228,6 +3386,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3235,8 +3394,9 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
-      "range": "4900",
+      "range": "5627",
       "reloaddelay": "17",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -3245,7 +3405,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -3256,6 +3416,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3263,6 +3424,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "7834",
       "reloaddelay": "26",
@@ -3284,6 +3446,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3293,6 +3456,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5900",
       "reloaddelay": "17",
@@ -3303,7 +3467,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -3314,6 +3478,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3323,6 +3488,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8834",
       "reloaddelay": "26",
@@ -3344,6 +3510,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3353,6 +3520,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5900",
       "reloaddelay": "17",
@@ -3363,7 +3531,7 @@
       ],
       "warheads": [
        {
-        "damage": "8000",
+        "damage": "16000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -3374,6 +3542,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3383,6 +3552,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "8834",
       "reloaddelay": "26",
@@ -3404,6 +3574,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3415,13 +3586,20 @@
     },
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
-     "v": "300"
+     "v": "416"
     },
     "design": {
-     "class_anchor": null,
+     "category": "Infantry",
+     "class_anchor": "special_forces",
      "special": 1.0,
+     "subtype": "AntiTankAntiAirInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.5
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
+     "trait": "FirepowerMultiplier",
+     "v": 1.07
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
@@ -3441,13 +3619,14 @@
     },
     "speed": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
-     "v": "45"
+     "v": "44"
     }
    },
    "ra2_soviets_teslatrooper": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5222",
       "reloaddelay": "100",
@@ -3474,12 +3653,14 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5777",
       "reloaddelay": "100",
@@ -3506,12 +3687,14 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6222",
       "reloaddelay": "100",
@@ -3538,12 +3721,14 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "3333",
       "reloaddelay": "25",
@@ -3557,11 +3742,13 @@
        }
       ],
       "weapon": "RA2TeslaCoilCharge",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5222",
       "reloaddelay": "100",
@@ -3588,6 +3775,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3595,6 +3783,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "5777",
       "reloaddelay": "100",
@@ -3621,6 +3810,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3628,6 +3818,7 @@
      {
       "armament_name": "garrisoned",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": false,
       "range": "6222",
       "reloaddelay": "100",
@@ -3654,6 +3845,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3668,8 +3860,10 @@
      "v": "500"
     },
     "design": {
+     "category": "Infantry",
      "class_anchor": null,
      "special": 1.25,
+     "subtype": "HeavyInfantry",
      "tech_tier": 1.0,
      "unit_class": 0.8
     },
@@ -3700,6 +3894,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "13500",
       "reloaddelay": "17",
@@ -3720,12 +3915,14 @@
        }
       ],
       "weapon": "SeaScorpionAA",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "18",
@@ -3784,6 +3981,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -3801,8 +3999,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Naval",
      "class_anchor": null,
      "special": null,
+     "subtype": "BattleShip",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3845,6 +4045,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3870,6 +4071,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3896,6 +4098,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3920,6 +4123,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3945,6 +4149,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3971,6 +4176,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3996,6 +4202,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4020,6 +4227,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4045,6 +4253,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4071,6 +4280,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4096,6 +4306,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4120,6 +4331,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4144,6 +4356,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4169,6 +4382,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4195,6 +4409,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4219,6 +4434,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4243,6 +4459,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
+     "subtype": "Upgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4264,6 +4481,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4312,6 +4530,7 @@
        }
       ],
       "weapon": "RA2120xmm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4323,6 +4542,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4418,6 +4638,7 @@
        }
       ],
       "weapon": "RA2120xmm_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4433,6 +4654,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4479,6 +4701,7 @@
        }
       ],
       "weapon": "RA2120xmm_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4490,6 +4713,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "6992",
       "reloaddelay": "63",
@@ -4536,6 +4760,7 @@
        }
       ],
       "weapon": "RA2120xmm_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4546,6 +4771,7 @@
       "armament_name": "secondary",
       "burst": "2",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6100",
       "reloaddelay": "68",
@@ -4567,6 +4793,7 @@
        }
       ],
       "weapon": "RA2MammothTusk",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -4576,6 +4803,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4623,6 +4851,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4635,6 +4864,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.05,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4727,6 +4957,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4743,6 +4974,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4790,6 +5022,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4802,6 +5035,7 @@
       "burst": "4",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.125,
       "pricing": true,
       "range": "7992",
       "reloaddelay": "63",
@@ -4849,6 +5083,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4860,6 +5095,7 @@
       "armament_name": "secondary",
       "burst": "4",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7100",
       "reloaddelay": "68",
@@ -4881,6 +5117,7 @@
        }
       ],
       "weapon": "RA2MammothTusk_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -4895,10 +5132,17 @@
      "v": "1750"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "HighTechTank",
      "tech_tier": 0.75,
      "unit_class": 1.0
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions.Modifier",
+     "trait": "FirepowerMultiplier@ra2_soviets_doctrine_nuclearmunitions",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
@@ -4930,6 +5174,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "8292",
       "reloaddelay": "25",
@@ -4987,6 +5232,7 @@
        }
       ],
       "weapon": "RA2FlakTrackAAGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -4996,6 +5242,7 @@
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "5528",
       "reloaddelay": "18",
@@ -5055,6 +5302,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5066,6 +5314,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "9292",
       "reloaddelay": "25",
@@ -5122,6 +5371,7 @@
        }
       ],
       "weapon": "RA2FlakTrackAAGunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5133,6 +5383,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 0.9375,
       "pricing": true,
       "range": "6528",
       "reloaddelay": "18",
@@ -5189,6 +5440,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGunE",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5206,10 +5458,17 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "SupportVehicle",
      "tech_tier": 1.0,
      "unit_class": 1.25
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@MultiWeapon.Modifier",
+     "trait": "FirepowerMultiplier@MultiWeapon",
+     "v": 0.75
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
@@ -5250,8 +5509,10 @@
      "v": "5000"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "SupportVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5286,6 +5547,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5307,6 +5569,7 @@
        }
       ],
       "weapon": "RA2120mm",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5314,6 +5577,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5352,6 +5616,7 @@
        }
       ],
       "weapon": "RA2120mm_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5361,6 +5626,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5382,6 +5648,7 @@
        }
       ],
       "weapon": "RA2120mm_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5389,6 +5656,7 @@
      {
       "armament_name": "primary",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "5374",
       "reloaddelay": "54",
@@ -5410,6 +5678,7 @@
        }
       ],
       "weapon": "RA2120mm_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5419,6 +5688,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5441,6 +5711,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5451,6 +5722,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5488,6 +5760,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_rad",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5500,6 +5773,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5522,6 +5796,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_fire",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5532,6 +5807,7 @@
       "burst": "2",
       "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "6374",
       "reloaddelay": "54",
@@ -5554,6 +5830,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_tesla",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5569,8 +5846,10 @@
      "v": "850"
     },
     "design": {
+     "category": "Tanks",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "MainBattleTank",
      "tech_tier": 1.0,
      "unit_class": 1.0
     },
@@ -5603,6 +5882,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "40",
@@ -5617,10 +5897,12 @@
        }
       ],
       "weapon": "RA2DroneJump",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "pricing": true,
       "range": "4000",
       "reloaddelay": "10",
@@ -5637,6 +5919,7 @@
        }
       ],
       "weapon": "RA2DroneJumpE",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -5649,8 +5932,10 @@
      "v": "600"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "ScoutVehicle",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5685,6 +5970,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "7500",
       "reloaddelay": "55",
@@ -5711,6 +5997,7 @@
        }
       ],
       "weapon": "RA2TankBolt",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -5719,6 +6006,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8000",
       "reloaddelay": "55",
@@ -5745,6 +6033,7 @@
        }
       ],
       "weapon": "RA2TankBolt2",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -5753,6 +6042,7 @@
       "burst": "2",
       "burstdelays": "5",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": 1.0,
       "pricing": true,
       "range": "8500",
       "reloaddelay": "55",
@@ -5779,6 +6069,7 @@
        }
       ],
       "weapon": "RA2TankBolt3",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -5793,8 +6084,10 @@
      "v": "1800"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "FireSupport",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5827,6 +6120,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "3000",
       "pricing": true,
@@ -5837,10 +6131,12 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "V3Launch",
+      "weapon_class_source": "template",
       "weapon_types": []
      },
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/weapons.yaml",
+      "design_weapon_class": null,
       "extraction_note": "no_damage_warheads",
       "minrange": "4000",
       "pricing": true,
@@ -5851,6 +6147,7 @@
       "versus_templates": [],
       "warheads": [],
       "weapon": "V3LaunchE",
+      "weapon_class_source": "template",
       "weapon_types": []
      }
     ],
@@ -5863,10 +6160,17 @@
      "v": "900"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": 1.0,
+     "subtype": "Artillery",
      "tech_tier": 1.0,
      "unit_class": 0.25
+    },
+    "firepower_multiplier": {
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#FirepowerMultiplier@RANK-1.Modifier",
+     "trait": "FirepowerMultiplier@RANK-1",
+     "v": 1.25
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/vehicles.yaml#Health.HP",
@@ -5897,6 +6201,7 @@
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
+      "design_weapon_class": 0.875,
       "pricing": true,
       "range": "5000",
       "reloaddelay": "15",
@@ -5928,6 +6233,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -5947,8 +6253,10 @@
      "v": "1200"
     },
     "design": {
+     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
+     "subtype": "Harvester",
      "tech_tier": null,
      "unit_class": null
     },

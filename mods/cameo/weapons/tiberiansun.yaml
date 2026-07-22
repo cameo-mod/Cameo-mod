@@ -407,7 +407,7 @@ TS105mm:
 TS152mm:
 	Inherits: ^TSCannon
 	Range: 10752
-	MinRange: 3584
+	MinRange: 2150
 	ReloadDelay: 70
 	Projectile: Bullet
 		Blockable: true
@@ -1269,9 +1269,9 @@ forgotten_mutant_dualwield:
 	Inherits: ^SmallArms
 	ReloadDelay: 18
 	Burst: 2
-	BurstDelays: 2
-	Range: 4500
+	Range: 5219
 	Report: infgun3.aud, slvkgun1.aud
+	ValidTargets: Ground, Water
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage

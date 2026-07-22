@@ -754,11 +754,11 @@ RA2vulcan:
 RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
 	ReloadDelay: 17
-	Range: 4900
+	Range: 5627
 	ValidTargets: Ground, Water
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 8000
+		Damage: 16000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Damage: 4

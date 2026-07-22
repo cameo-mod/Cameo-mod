@@ -10,9 +10,9 @@ ra1_allies_rifleinfantry:
 	# anchor; class knobs neutralized (2x-health bake); burst flavor
 	# trimmed to formula DPS by the unit-named multiplier.
 	Mobile:
-		Speed: 57
+		Speed: 55
 	Health:
-		HP: 28000
+		HP: 27000
 	ChangesHealth@SelfHealing:
 		Step: 28
 	DamageMultiplier@ScoutInfantryBuff:
@@ -20,7 +20,7 @@ ra1_allies_rifleinfantry:
 	FirepowerMultiplier@ScoutInfantryBuff:
 		Modifier: 100
 	FirepowerMultiplier@ra1_allies_rifleinfantry:
-		Modifier: 51
+		Modifier: 47
 	Buildable:
 		Prerequisites: ~ra1_allies_alliedbarracks
 		Description: Basic infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles

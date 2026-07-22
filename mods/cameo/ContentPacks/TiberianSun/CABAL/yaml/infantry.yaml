@@ -948,7 +948,7 @@ cabal_eliminator800:
 	Armor@Secondary:
 		Type: Heavy
 	Valued:
-		Cost: 1250
+		Cost: 1450
 	Tooltip:
 		Name: Eliminator 800
 	Buildable:
@@ -976,7 +976,7 @@ cabal_eliminator800:
 		RegenAmount: 170
 	Mobile:
 		TurnSpeed: 16
-		Speed: 40
+		Speed: 39
 		Locomotor: chem
 		Voice: Move
 	Guard:
@@ -1037,6 +1037,8 @@ cabal_eliminator800:
 		ArmamentNames: primary, aa, garrisoned
 		RevokeDelay: 80
 
+	FirepowerMultiplier:
+		Modifier: 105
 cabal_dissolver:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
