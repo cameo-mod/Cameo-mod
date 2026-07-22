@@ -16,15 +16,15 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	[TraitLocation(SystemActors.World)]
-	[Desc("Records the local human player's final win or loss in the persistent Cameo career.",
-		"Place on the world actor.")]
+	[TraitLocation(SystemActors.Player)]
+	[Desc("Records the local human player's notified win or loss in the persistent Cameo career.",
+		"Place on the player actor.")]
 	public class CameoCareerRecorderInfo : TraitInfo
 	{
 		public override object Create(ActorInitializer init) { return new CameoCareerRecorder(); }
 	}
 
-	public class CameoCareerRecorder : ITick, IGameOver
+	public class CameoCareerRecorder : ITick, INotifyWinStateChanged
 	{
 		bool recorded;
 		int retryCount;
@@ -36,27 +36,30 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (recorded || self.World.WorldTick < nextAttemptTick)
 				return;
 
-			var world = self.World;
-			pending ??= Capture(world);
 			if (pending == null)
 				return;
 
-			TryPersist(world.WorldTick);
+			TryPersist(self.World.WorldTick);
 		}
 
-		void IGameOver.GameOver(World world)
+		void INotifyWinStateChanged.OnPlayerWon(OpenRA.Player player)
 		{
-			if (recorded)
+			CaptureAndPersist(player, "Won");
+		}
+
+		void INotifyWinStateChanged.OnPlayerLost(OpenRA.Player player)
+		{
+			CaptureAndPersist(player, "Lost");
+		}
+
+		void CaptureAndPersist(OpenRA.Player player, string outcome)
+		{
+			if (recorded || pending != null)
 				return;
 
-			pending ??= Capture(world);
-			if (pending == null)
-				return;
-
-			// EndGame stops world ticks. Make a few short final attempts so a momentary lock held by
-			// another Cameo instance cannot strand an otherwise complete match.
-			for (var i = 0; i < 5 && !recorded; i++)
-				TryPersist(world.WorldTick);
+			pending = Capture(player, outcome);
+			if (pending != null)
+				TryPersist(player.World.WorldTick);
 		}
 
 		void TryPersist(int worldTick)
@@ -70,20 +73,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		static PendingCameoCareerMatch Capture(World world)
+		static PendingCameoCareerMatch Capture(OpenRA.Player player, string outcome)
 		{
-			var player = world.LocalPlayer;
-			if (world.Type != WorldType.Regular || world.IsReplay || player == null ||
-				player.Spectating || player.NonCombatant || player.IsBot)
-				return null;
-
-			var outcome = player.WinState switch
-			{
-				WinState.Won => "Won",
-				WinState.Lost => "Lost",
-				_ => null
-			};
-			if (outcome == null)
+			var world = player.World;
+			if (world.Type != WorldType.Regular || world.IsReplay ||
+				player != world.LocalPlayer || player.Spectating || player.NonCombatant || player.IsBot)
 				return null;
 
 			var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
