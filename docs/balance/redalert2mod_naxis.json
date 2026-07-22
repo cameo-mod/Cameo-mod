@@ -5838,7 +5838,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "3203",
+      "range": "4500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -5848,7 +5848,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5858,7 +5858,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5881,7 +5881,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": true,
-      "range": "3203",
+      "range": "4500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@ELITE",
@@ -5890,7 +5890,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5900,7 +5900,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5924,7 +5924,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "3203",
+      "range": "4500",
       "reloaddelay": "75",
       "requires": "!rank-elite",
       "slot": "Armament@GARRISONED",
@@ -5934,7 +5934,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5944,7 +5944,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -5968,7 +5968,7 @@
       "defined_in": "mods/cameo/weapons/redalert2mod.yaml",
       "design_weapon_class": 0.875,
       "pricing": false,
-      "range": "3203",
+      "range": "4500",
       "reloaddelay": "75",
       "requires": "rank-elite",
       "slot": "Armament@GARRISONEDELITE",
@@ -5977,7 +5977,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -5987,7 +5987,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -6024,7 +6024,7 @@
     "firepower_multiplier": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#FirepowerMultiplier.Modifier",
      "trait": "FirepowerMultiplier",
-     "v": 1.86
+     "v": 0.95
     },
     "hp": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",

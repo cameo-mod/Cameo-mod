@@ -75,10 +75,28 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   so the anchor always cancels to 1.0 (matches the "verifier shares tier so it
   cancels" law). Until fixed, do NOT tag class members with a tech_tier ≠ the
   anchor's.
-- [ ] Reconvert the ~20 MAX-era-hot closecombat+SF members (each warhead was
+- [~] Reconvert the ~20 MAX-era-hot closecombat+SF members (each warhead was
   set = intended total → 2–3× hot under SUM). BLOCKED on membership cleanup
   first — the current subtype rosters pull in snipers/casters/spies/core-combat
   units (scout: spies+zerg_defiler; SF: dragunov sniper, terran_*, zerg_hydralisk).
+  PROGRESS 2026-07-22: **closecombat 3/4 at Δ≤1** — shotgunner/fanatic anchors
+  (Δ0), naxis_sssoldier (range 4500, FP 95%, Δ−0.8). `alien.nax` DEFERRED (Δ+67):
+  its weapon `NaxiAlienPistol` is defined in shared `mods/cameo/weapons/redalert2mod.yaml`
+  and inherited cross-pack (Naxis + SchwarzerMond) — editing it would leak.
+- [ ] **Shared-weapon ownership pass** (systemic, found 2026-07-22): many members
+  share a weapon via cross-pack `Inherits:` (e.g. NaxiAlienPistol → Naxis+SchwarzerMond).
+  Per-unit balance edits leak. Before converting such a unit, FORK it a per-unit
+  weapon (+ its `…E`/elite + garrison variants) in its own pack, repoint the
+  actor, then balance the fork. Aligns with the self-contained-pack mission goal.
+  Detect them: `apply_balance` writing to a weapon whose block lives in a shared
+  file / is inherited elsewhere.
+- [ ] **PIPELINE LAW — never hand-calc DPS; use the tools** (learned 2026-07-22):
+  effective DPS depends on ReloadDelay, Burst AND **BurstDelays** (+ FirepowerMultiplier).
+  A hand calc that skipped BurstDelays mis-set naxis_sssoldier (prescribed FP 88
+  instead of ~95). Always derive base DPS via `propose_class_rebalance.unit_dps`
+  (or armament_dps), which reads every knob; then solve FP for Δ0. Validate the
+  APPLIED state by pricing the ledger stats directly — the proposal RE-SOLVES
+  range/FP and is a generator, not a validator.
 - [ ] Restat + reconvert each infantry class to its anchor (class_anchors.json).
 - [ ] NEW BUILDING: RA1 Soviets Tier-4 dummy (forward-command-center sprite,
   placeholder `ra1_soviets_experimentaltechcenter`) unlocking the heavy-infantry
