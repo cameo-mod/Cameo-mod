@@ -53,6 +53,15 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
   closecombat/SF one-offs (LESSONS §172-176).
+- [ ] **Fix uniqueness in code** (LESSONS + FORMULA_V2 §3d corrected 2026-07-22):
+  `propose_class_rebalance.resolve_dps_uniqueness` AND the uniqueness audit must
+  key on the 5 raw stats — HP, Speed, effective-damage-per-shot (Σwarheads×FP),
+  RAW ReloadDelay, Range — NOT "effective DPS" and NOT FirepowerMultiplier.
+  Damage×FP and raw ReloadDelay are checked SEPARATELY.
+- [ ] **Speed-step in code**: `nudge_hp_spd` must step Speed by 1 for infantry
+  but 5 for vehicles/aircraft/ships (currently always 1).
+- [ ] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500)
+  during the closecombat conversion — round numbers, damage stays on the grid.
 - [ ] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2;
   japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot gate.
 - [ ] Reconvert the 20 MAX-era-hot closecombat+SF members (each warhead was

@@ -35,15 +35,15 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - When patching ledger JSONs from generated markdown balance reports, only overwrite primary damage warheads.
   - Skip `HealthPercentageDamage` warheads entirely.
   - Skip warheads whose tag contains `Friendly` (e.g., `GrenadeFriendlyFire`) to avoid corrupting friendly-fire or self-damage values.
-  - Update only `SpreadDamage` / `TargetDamage` primary warheads with the report's `dmg` value.
+  - Update only `SpreadDamage` / `TargetDamage` primary warheads with the report's damage value (the report table column is `dmg`; it maps to the YAML `Damage` field / ledger warhead `damage`).
 
 ### Zero-delta formula-price pipeline
 
 - To keep the formula price delta `Δ` at `0` or `±1`:
-  - Round solved `Range` to the nearest integer (step 1) inside the class band.
-  - Constrain the `FirepowerMultiplier` uniqueness search so `solve_class_baseline_range` stays inside the class band; otherwise the unit cannot price correctly and `Δ` will explode.
+  - Round solved `Range` to the nearest **10** (range is ALWAYS a multiple of 10) inside the class band.
+  - Solve `Range` with `solve_class_baseline_range` to hit the cost, then clamp to the band. (Uniqueness is a separate concern and is NOT about `FirepowerMultiplier` — see [Uniqueness enforcement](#uniqueness-enforcement).)
   - For auto-cost units, set `Cost` to `round(formula_price)` after the final `Range` is chosen.
-  - If the solved `Range` is outside the band, the `cost`/`stat`/`tech` combination is inconsistent — adjust one of them, not the `Range` alone.
+  - If the solved `Range` falls outside the band, do NOT just clamp `Range`. Re-balance the unit's stats **together** while preserving its feel; if several actors of the class fall outside, preserve their **relative** range order within the class. Burst count, `BurstDelays`, `ReloadDelay`, `Speed`, and `Range` are the most *memorable* stats (change sparingly); HP and damage-per-shot can be tuned more freely (especially with the fine-grained `FirepowerMultiplier`).
 
 ### Multiplier formatting
 
@@ -57,8 +57,7 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 
 - **Always syntax-check a script before running it** — `python -m py_compile <script>` catches typos that would otherwise leave the pipeline half-finished.
 - Then run Python balance scripts through `tools/balance/run_with_guard.py` (syntax pre-check + 60 s timeout guard) or, when the guard is not yet available, `python -m py_compile` + the script directly.
-- Keep curated `*_rebalance_proposal_final.py` scripts as the source of truth until the ledger JSONs are fully refreshed.
-- Do not rely on the generic `propose_class_rebalance.py` for curated classes while ledger `class_anchor`, `subtype`, and weapon stats are stale.
+- `propose_class_rebalance.py` is now the generalized dispatcher for ALL 14 classes (reads `class_anchors.json`, uses the SUM engine `formula.spread_damage_sum`). It only prices units already tagged `design.class_anchor`; membership tagging is still pending, so classify a class's units before trusting its full roster output. The old per-class `*_rebalance_proposal_final.py` one-offs are superseded and slated for archival.
 - **After every `apply_balance.py --confirm` run, `extract_stats.py` and `audit_multiplier_modifiers.py` execute automatically**. A full audit (`tools/balance/_run_full_audit.py` or `tools/audit/run_all.sh`) is still mandatory before commit.
 
 ### Data hygiene
@@ -70,15 +69,16 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 
 ### Stat granularity
 
-- Infantry Speed can use **steps of 1** (not 5; the 5-step rule is for vehicles only).
-- `FirepowerMultiplier` is the primary lever for making effective DPS unique; it can range from 5 % to 200 % (1 % integer steps).
-- Raw `Damage` should be kept in 2000-step increments for the balance pipeline.
+- **Speed step depends on the domain:** infantry use **steps of 1**; vehicles, aircraft, AND ships use **steps of 5** (their speed is divided by 5 to derive the turn-rate, so it must be a multiple of 5).
+- `Range` is always a **multiple of 10**.
+- `FirepowerMultiplier` is the **fine-tuning** lever (1 % integer steps, 5 %–200 %): after coarse-tuning warhead `Damage` on the 2000-step grid, use the FP multiplier to land the exact intended DPS. It is a multiplier and is **meaningless on its own** — it is never a uniqueness key (see [Uniqueness enforcement](#uniqueness-enforcement)).
+- Raw `Damage` should be kept in 2000-step increments for the balance pipeline (percentage warheads in 1-steps).
 
 ### DPS and formula rules
 
-- Effective DPS = `base_dps * FirepowerMultiplier`.
+- Effective DPS = `base_dps * FirepowerMultiplier`, where `base_dps` uses the SUM of all offensive warheads (SUM law).
 - `base_dps` must **not** include `FirepowerMultiplier`; compute raw base DPS first, then apply the multiplier once.
-- If `solve_class_baseline_range` returns a value outside the class band, the cost/stat/tech combination is inconsistent — adjust one of them rather than blindly clamping.
+- If `solve_class_baseline_range` returns a value outside the class band, re-balance the unit's stats together (preserving feel + relative range) rather than blindly clamping — see [Zero-delta formula-price pipeline](#zero-delta-formula-price-pipeline).
 
 ## Class-specific notes
 
@@ -90,31 +90,35 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 
 ### Closecombat
 
-- Anchor: `td_gdi_shotgunner` — HP 50000, Speed 75, Range 3500, eff-DPS 233.33, Cost 200.
-- Verifier: `asianalliance_fanatic` — HP 100000, Speed 75, Range 3500, eff-DPS 466.67, Cost 500.
-- `naxis_sssoldier` needs `FirepowerMultiplier ~136 %` and `BurstDelays = 5` to justify Cost 240 at T3/0.75 and land in the [2500,4500) band.
+- Anchor: `td_gdi_shotgunner` — HP 50000, Speed 75, Range 3500, **eff-DPS 250**, Cost 200. Weapon SA 2000 + CG 2000 (WC 0.875), Burst 5, **ReloadDelay 70** → 4000×5/70×0.875 = 250.0 (round, damage on the 2000-grid, no FP multiplier needed).
+- Verifier: `asianalliance_fanatic` — HP 100000, Speed 75, Range 3500, **eff-DPS 500**, Cost 500. Same SA 2000 + CG 2000, **Burst 10**, ReloadDelay 70 → 4000×10/70×0.875 = 500.0 (exactly 2×).
 - Band: range [2500,4500).
 
 ### Special Forces
 
 - Anchor: `japan_imperialscoutsman` — HP 15000, Speed 50, Range 6000, DPS 240, Cost 200.
 - Verifier: `schwarzermond_lunarsoldier` 2×/2× at Cost 500.
-- `td_nod_lasertrooper` is a T4/0.5× heavy trooper: HP 60000, Speed 50, Damage 48000@50, DPS 960, Cost 750, Range 6000.
+- `td_nod_lasertrooper` is a T4/0.5× heavy trooper: HP 60000, Speed 50, Cost 750, Range 6000. Weapon = CannonAP + Flak + Laser triad, each warhead **16000** → SUM **48000** @ ReloadDelay 50 → DPS **960** (4× the SF baseline's 240, and 4× HP). Under the SUM law the 48000 is the *sum* of three 16000 warheads, not 48000-per-warhead.
 - `cabal_eliminator800` rebalance: Damage 4000, ReloadDelay 5, Burst 1, no gatling, Cost ~1450.
 - Band: range 5500–6500.
 
 ## Uniqueness enforcement
 
-- Keep HP, Speed, Range, and effective DPS unique within each class.
-- Nudge `FirepowerMultiplier` across its full 5 %–200 % range to maximize separation.
-- Nudge Speed in integer steps of 1.
-- Round solved Range to the nearest integer and nudge ±1 to break ties.
+- **Exactly 5 stats must be unique within a class** — checked against each other; the uniqueness audit must enforce THESE AND ONLY THESE:
+  1. `HP`
+  2. `Speed`
+  3. **effective damage per shot** = Σ(all offensive warhead `Damage`) × `FirepowerMultiplier`
+  4. `ReloadDelay` — the RAW value, **NOT** the effective/burst-adjusted reload
+  5. `Range`
+- `FirepowerMultiplier` alone — or any single one of these values in isolation — need NOT be unique; on its own it is meaningless. This **supersedes** any earlier "make effective DPS unique via FirepowerMultiplier" rule: DPS is derived, and uniqueness lives on the 5 raw stats above, with #3 (damage×FP) and #4 (raw ReloadDelay) checked **separately** (two units may share one if they differ on the other).
+- Break ties by nudging a stat on its own grid: `Speed` steps of **1** (infantry) / **5** (vehicles, aircraft, ships), `Range` steps of **10**, `Damage` steps of **2000** (then FP-multiplier fine-tune), `HP` steps of **1000**.
+- **CODE NOTE:** `propose_class_rebalance.resolve_dps_uniqueness` and the uniqueness audit currently key on *effective DPS* — they must be updated to key on the 5 stats above (raw damage×FP and raw ReloadDelay separately).
 
 ## Dual-weapon units
 
-- Units with multiple armaments (e.g. `ra2_soviets_flaktrooper` short anti-ground / long anti-air) must keep their weapon ranges and armament slots intact.
-- Adjust effective DPS only through `FirepowerMultiplier` and `ReloadDelay` for these units, and only if the multiplier does not produce even/duplicate DPS results.
-- Avoid changing `Damage` or `Range` for dual-weapon units.
+- Units with two weapons (e.g. `ra2_soviets_flaktrooper`: short anti-ground + long anti-air) are balanced **independently — as if each weapon were its own actor**: one anti-ground-only actor and one anti-air-only actor, sharing the same `HP` and `Speed` but each with its own `Damage`, `Range`, `ReloadDelay`, and `Burst` fitted to its weapon.
+- **Range is relative between the two weapons** (e.g. anti-air range = anti-ground range × 1.5). The RATIO is the rule, so if one weapon's range must change, change **both** to preserve the ratio.
+- `FirepowerMultiplier` is **shared** — it scales BOTH weapons at once. So tune each weapon's other stats (`Damage` on the 2000-grid, `ReloadDelay`, `Burst`, `Range`) FIRST, and use the FP multiplier only for final fine-tuning, remembering every FP change hits both weapons together.
 
 ## Audit and pipeline findings from 2026-07-22
 
@@ -129,10 +133,10 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - The default rule is `MinRange = round(Range / 5)` rounded to the nearest 5.
 - **Never apply blindly.** Keep the following categories as exceptions:
   - Super-weapon / global-spawner weapons: `*Spawner*`, `*SCUD*`, `*TacticalMissile*`, and any weapon with `Range > 100 000`.
-  - Linear-pulse projectiles that mechanically need a minimum range of 1: `WaveArtilleryImpact`, `WaveTurretImpact`, `LurkerSpinesImpact`.
+  - Linear-pulse projectiles `WaveArtilleryImpact`, `WaveTurretImpact`, `LurkerSpinesImpact`: `MinRange` is **removed entirely** (maintainer 2026-07-22 — they no longer carry any minimum range; do NOT force `MinRange 1`).
   - Meme/intentional numeric pairs: e.g. `RA160mm` family (`Range 11111`, `MinRange 2222`), `YakovlevCannon` (`Range 4444`, `MinRange 888`).
   - Elite weapons should inherit `MinRange` from their base weapon unless a specific exception is documented.
-  - `RA2DiskDrain` / `RA2DiskSteal` are intentionally short-ranged; consider removing `MinRange` entirely rather than forcing 25.
+  - `RA2DiskDrain` / `RA2DiskSteal`: `MinRange` is **removed entirely** (maintainer 2026-07-22 — no minimum range; do NOT force 25).
 
 ### Weapon uniqueness
 

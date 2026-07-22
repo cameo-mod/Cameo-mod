@@ -18,13 +18,13 @@
  },
  "closecombat": {
   "anchor_actor": "td_gdi_shotgunner",
-  "comment": "LIVING BASELINE td_gdi_shotgunner 50000/75/3500 SA+CG burst5 bd0 (WC .875, eff DPS 233.33) = 200. VERIFIER asianalliance_fanatic 2x HP + 2x bursts (burst10) @ 500 (identity exact). Band [2500,4500). All members use SmallArms+Chaingun; SoundVolume = 1/burst; BurstDelays 0; damage split 2000+2000 per shot in 2000-steps. Tier factor 0.75=T3.",
+  "comment": "LIVING BASELINE td_gdi_shotgunner 50000/75/3500 SA+CG burst5 bd0 ReloadDelay 70 (WC .875) => eff DPS 250 = 200. Round-number fix (maintainer 2026-07-22): reload 75->70 lands DPS on 250 (4000x5/70x.875=250.0) with damage staying 2000+2000 on the grid, NO FP multiplier. VERIFIER asianalliance_fanatic 2x HP + 2x bursts (burst10, same ReloadDelay 70) @ 500 (4000x10/70x.875=500.0, identity exact). Band [2500,4500). All members use SmallArms+Chaingun; SoundVolume = 1/burst; BurstDelays 0; damage split 2000+2000 per shot in 2000-steps. Tier factor 0.75=T3.",
   "dps_convention": "SmallArms + Chaingun warhead damages summed, WC 0.875",
   "reveals_shroud": 5000,
   "signed_off": false,
   "spec": {
    "cost0": 200,
-   "dps0": 233.3333,
+   "dps0": 250,
    "hp0": 50000,
    "range0_wdist": 3500,
    "speed0": 75

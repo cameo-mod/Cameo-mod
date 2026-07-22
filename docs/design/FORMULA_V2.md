@@ -63,8 +63,10 @@ C₀ = cost). With ratios h,s,r,d (and r carrying the Special factor K):
   low edge = cheapest units, high edge = priciest; **steps of 10**
   (tank shells use bullet speed = range/10; tank destroyers = 2× that).
 - **Speed**: ±20% of baseline (provisional, maintainer will tune).
-  Vehicles: steps of 5 (turn rate = speed/5). **Infantry: FREE values**
-  (instant turn) — use the freedom for faction character.
+  Vehicles, aircraft, AND ships: **steps of 5** (turn rate = speed/5, so
+  speed MUST be a multiple of 5). **Infantry: steps of 1** (free integer
+  values — instant turn, no /5 constraint) — use the freedom for faction
+  character.
 - **HP**: infantry in 1000 steps; self-heal Step = HP/1000. (The
   2×-health bake replaced the ScoutInfantryBuff 50% damage reduction.)
 - **Damage**: steps of 2000; every weapon carries a
@@ -191,10 +193,14 @@ LIST of detected specials + each ability's value; the sheet totals them.
 These rules govern every class-wide stat pass. They live here, not in a
 class-specific log, because they apply to all classes.
 
-- **Uniqueness within a class**: no two units in the same class may share the
-  same HP, Speed, Range, Damage, or ReloadDelay value. Use per-actor
-  `FirepowerMultiplier` to tune effective DPS granularity without breaking the
-  2000-step damage rule.
+- **Uniqueness within a class** (EXACTLY these 5, checked against each other):
+  no two units may share the same **HP**, **Speed**, **effective damage per
+  shot** (= Σ of all offensive warhead `Damage` × `FirepowerMultiplier`),
+  **raw `ReloadDelay`** (NOT the burst-adjusted/effective reload), or **Range**.
+  `FirepowerMultiplier` on its own — like any single value — is meaningless and
+  is NEVER a uniqueness key; use it to fine-tune the effective damage-per-shot
+  without breaking the 2000-step rule. #3 (damage×FP) and #4 (raw ReloadDelay)
+  are checked SEPARATELY, so two units may share one if they differ on the other.
 - **Baseline/verifier exception only**: the verification unit is exactly
   2× HP, 2× DPS, 2.5× cost, same Range and Speed as the baseline (§2). No other
   pair may share a stat.
