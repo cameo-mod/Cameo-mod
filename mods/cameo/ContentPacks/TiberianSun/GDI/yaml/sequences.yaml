@@ -488,6 +488,8 @@ ts_gdi_wolverinemkii:
 		Filename: ts_gdi_promotion_unlockwolverinemkii_icon.png
 
 ts_gdi_mammothprototype:
+	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
@@ -524,7 +526,7 @@ ts_gdi_mammothmkii:
 
 ts_gdi_juggernaut:
 	Defaults:
-		Scale: 1.255
+		Scale: 1.25
 	idle:
 		Filename: ts_gdi_juggernaut_jugger.shp
 		Facings: -8
@@ -791,7 +793,7 @@ ts_gdi_radar:
 	Defaults:
 		Filename: ts_gdi_radar_radr.shp
 		Offset: 0, -12, 12
-		Scale: 1.15
+		Scale: 1.25
 	idle:
 		Filename: ts_gdi_radar_radr.shp
 		ShadowStart: 3

@@ -423,14 +423,14 @@ cabal_artilleryspider:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
-		LocalOffset: 300,0,800
+		LocalOffset: 300,0,1600
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: CabalArtilleryWalkerShellUpgraded
-		LocalOffset: 300,0,800
+		LocalOffset: 300,0,1600
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle

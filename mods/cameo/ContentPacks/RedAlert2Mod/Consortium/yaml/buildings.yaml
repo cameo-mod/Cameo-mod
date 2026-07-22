@@ -118,9 +118,9 @@ steelconsortium_steelbarracks:
 		Prerequisites: ~steelconsortium_consortiumconstructionyard, steelconsortium_consortiumpowerplant
 		Description: Trains infantry units.
 	Building:
-		Footprint: xx ==
-		Dimensions: 2,2
-		LocalCenterOffset: 0,-1024,0
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 	RallyPoint:
 		Path: 1,2
 	Exit@1:
