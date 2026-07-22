@@ -11,6 +11,9 @@ tkm_upgrade_berezkaarsenalupgrade:
 		Prerequisites: ~tkm_constructionyard, ~!tkm_upgrade_berezkaarsenalupgrade, ~!tkm_upgrade_titanarsenalupgrade, ~!tkm_upgrade_natoarsenalupgrade
 	RenderSprites:
 		Image: berezkaupgradeicon
+	ProductionIconMutualExclusion:
+		Group: tkm_arsenal_choice
+		OutlineColor: 22C55E
 	ProvidesPrerequisite:
 tkm_upgrade_titanarsenalupgrade:
 	Inherits: ^researched_upgrade.template
@@ -26,6 +29,9 @@ tkm_upgrade_titanarsenalupgrade:
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: titanplatingupgradeicon
+	ProductionIconMutualExclusion:
+		Group: tkm_arsenal_choice
+		OutlineColor: 22C55E
 tkm_upgrade_natoarsenalupgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -40,6 +46,9 @@ tkm_upgrade_natoarsenalupgrade:
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: natoupgradeicon
+	ProductionIconMutualExclusion:
+		Group: tkm_arsenal_choice
+		OutlineColor: 22C55E
 tkm_upgrade_semiautoriflesupgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
