@@ -49,8 +49,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			SetText(widget, "FACTIONS_PLAYED_VALUE", $"{Number(factionsPlayed)} / {Number(factions.Count)}");
 			SetText(widget, "ENEMIES_KILLED_VALUE", Number(enemiesKilled));
 			SetText(widget, "BUILDINGS_DESTROYED_VALUE", Number(buildingsDestroyed));
-			SetText(widget, "RESOURCES_COLLECTED_VALUE", Number(resourcesEarned));
-			SetText(widget, "RESOURCES_SPENT_VALUE", Number(resourcesSpent));
+			SetText(widget, "RESOURCES_COLLECTED_VALUE", Metric(resourcesEarned));
+			SetText(widget, "RESOURCES_SPENT_VALUE", Metric(resourcesSpent));
 
 			var list = widget.GetOrNull<ScrollPanelWidget>("FACTION_LIST");
 			var template = list?.GetOrNull<ScrollItemWidget>("ROW_TEMPLATE");
@@ -85,6 +85,21 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		static string Number(long value)
 		{
 			return value.ToString("N0", CultureInfo.CurrentCulture);
+		}
+
+		static string Metric(long value)
+		{
+			var magnitude = Math.Abs((double)value);
+			if (magnitude >= 1_000_000_000_000)
+				return (value / 1_000_000_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "T";
+			if (magnitude >= 1_000_000_000)
+				return (value / 1_000_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "B";
+			if (magnitude >= 1_000_000)
+				return (value / 1_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "M";
+			if (magnitude >= 1_000)
+				return (value / 1_000d).ToString("0.#", CultureInfo.CurrentCulture) + "K";
+
+			return Number(value);
 		}
 
 		static bool IsRandom(FactionInfo f)
