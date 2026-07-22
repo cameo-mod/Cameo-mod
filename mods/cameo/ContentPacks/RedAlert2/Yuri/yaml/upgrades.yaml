@@ -7,6 +7,9 @@ yuri_doctrine_psioniclegion:
 		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1, !global_conscription_buff
 	RenderSprites:
 		Image: yuri_doctrine_psioniclegion
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_1
+		OutlineColor: A855F7
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
 		Prerequisite: ra2_yuri_doctrine_1
 	ProvidesPrerequisite@global_conscription_buff:
@@ -21,6 +24,9 @@ yuri_doctrine_psionicfanatics:
 		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
 	RenderSprites:
 		Image: yuri_doctrine_psionicfanatics
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_1
+		OutlineColor: A855F7
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
 		Prerequisite: ra2_yuri_doctrine_1
 
@@ -33,6 +39,9 @@ yuri_doctrine_psionicelite:
 		Prerequisites: ~yuri_psychicsensor, !ra2_yuri_doctrine_1
 	RenderSprites:
 		Image: yuri_doctrine_psionicelite
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_1
+		OutlineColor: A855F7
 	ProvidesPrerequisite@yuri_doctrine_psionicelite:
 		Prerequisite: infantry.upgraded
 	ProvidesPrerequisite@ra2_yuri_doctrine_1:
@@ -47,6 +56,9 @@ yuri_doctrine_lasherhecannon:
 		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: yuri_doctrine_lasherhecannon
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
@@ -59,6 +71,9 @@ yuri_doctrine_lashertoxicgasshells:
 		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: yuri_doctrine_lashertoxicgasshells
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
@@ -71,6 +86,9 @@ yuri_doctrine_lasherlasercannon:
 		Prerequisites: ~yuri_battlelab, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: yuri_doctrine_lasherlasercannon
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_2
+		OutlineColor: F59E0B
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
 		Prerequisite: ra2_yuri_doctrine_2
 
@@ -83,6 +101,9 @@ yuri_doctrine_scrapvehiclearmor:
 		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: yuri_doctrine_scrapvehiclearmor
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
@@ -95,6 +116,9 @@ yuri_doctrine_chaosgasemitters:
 		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: yuri_doctrine_chaosgasemitters
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
@@ -107,6 +131,9 @@ yuri_doctrine_psionicvehicleshields:
 		Prerequisites: ~yuri_battlelab, yuri_lunarcommandcenter, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: yuri_doctrine_psionicvehicleshields
+	ProductionIconMutualExclusion:
+		Group: yuri_doctrine_tier_3
+		OutlineColor: 22D3EE
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
 		Prerequisite: ra2_yuri_doctrine_3
 
