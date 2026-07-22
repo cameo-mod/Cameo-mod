@@ -362,6 +362,7 @@ steelconsortium_whiterabbit:
 		MaxIdleDelay: 75
 		RequiresCondition: !attack-animation
 	WithFacingSpriteBody@attack-animation:
+		StartSequence: shoot-ready
 		Sequence: shoot-loop
 		RequiresCondition: attack-animation
 	BodyOrientation:
