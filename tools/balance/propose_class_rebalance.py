@@ -108,33 +108,39 @@ def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool =
 
 
 def resolve_dps_uniqueness(rows, step: float = 0.01) -> None:
+    """Tune FirepowerMultiplier so effective DAMAGE-PER-SHOT (Σwarheads × FP)
+    is unique across the class — the maintainer 5-stat uniqueness law
+    (2026-07-22). Uniqueness keys on damage-per-shot, NOT effective DPS (which
+    conflates damage with reload) and NEVER on the FP value itself. Raw
+    ReloadDelay is a SEPARATE uniqueness dimension (flagged in the report, never
+    auto-nudged — reload is a design choice). dps_eff is still derived here for
+    the pricing formula."""
     for i, r in enumerate(rows):
-        if r.get("protected"):
-            r["fp"] = r["fp0"]
-            r["dps_eff"] = r["base_dps"] * r["fp0"]
-            continue
-        if r["base_dps"] < 1.0:
-            r["fp"] = r["fp0"]
-            r["dps_eff"] = r["base_dps"] * r["fp0"]
-            continue
         base_fp = r["fp0"]
         base_dps = r["base_dps"]
-        for k in range(0, 200):
+        dmg_shot = r.get("dmg_shot0", 0.0)
+        if r.get("protected") or dmg_shot < 1.0:
+            r["fp"] = base_fp
+            r["dmg_eff"] = dmg_shot * base_fp
+            r["dps_eff"] = base_dps * base_fp
+            continue
+        for k in range(0, 400):
             signs = (1, -1) if k > 0 else (1,)
             for sign in signs:
                 fp = base_fp + sign * k * step
                 if not (0.05 <= fp <= 2.0):
                     continue
-                dps_eff = base_dps * fp
-                if all(abs(other["dps_eff"] - dps_eff) > 0.05 for other in rows[:i]):
+                dmg_eff = dmg_shot * fp
+                if all(abs(other.get("dmg_eff", -1.0) - dmg_eff) > 0.5 for other in rows[:i]):
                     r["fp"] = fp
-                    r["dps_eff"] = dps_eff
+                    r["dmg_eff"] = dmg_eff
+                    r["dps_eff"] = base_dps * fp
                     break
             else:
                 continue
             break
         else:
-            raise RuntimeError(f"Could not make effective DPS unique for {r['actor']}")
+            raise RuntimeError(f"Could not make effective damage-per-shot unique for {r['actor']}")
 
 
 def nudge_ranges(rows, lo: int, hi: int):
@@ -154,8 +160,10 @@ def nudge_ranges(rows, lo: int, hi: int):
                 r["rng"] = max(lo, min(hi, r["rng"] + direction * 10))
 
 
-def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72):
-    specs = [("hp", 1000, hp_lo, hp_hi), ("spd", 1, spd_lo, spd_hi)]
+def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=1):
+    # Speed step: 1 for infantry, 5 for vehicles/aircraft/ships (turn = speed/5),
+    # maintainer 2026-07-22. HP step is always 1000.
+    specs = [("hp", 1000, hp_lo, hp_hi), ("spd", spd_step, spd_lo, spd_hi)]
     for key, step, l, h in specs:
         # initial distribution
         groups = {}
@@ -259,6 +267,10 @@ def load_class_rows(cls: str):
                 # Scout low-cost units are SmallArms-only per FORMULA_V2 §3.
                 smallarms_only = (cls == "scout" and cost <= spec["cost0"] * 1.5)
                 row["dmg"] = int(spread_damages(arm, smallarms_only=smallarms_only))
+                # Precise per-shot damage (Σ warheads over ALL priced primary
+                # armaments) — the base for the effective-damage-per-shot
+                # uniqueness key (Σwarheads × FP), maintainer 5-stat law.
+                row["dmg_shot0"] = sum(spread_damages(a, smallarms_only=smallarms_only) for a in priced)
                 row["dmg_filter"] = "smallarms" if smallarms_only else "all"
                 row["wc"] = 0.750 if smallarms_only else (fnum(arm.get("design_weapon_class")) or 0.75)
                 if is_protected:
@@ -267,11 +279,17 @@ def load_class_rows(cls: str):
     return rows, spec, band_lo, band_hi, spd_lo, spd_hi
 
 
+# Classes whose Speed steps by 5 (vehicles/aircraft/ships: turn rate = speed/5).
+# Infantry classes step by 1. Extend as vehicle/aircraft/naval anchors land.
+VEHICLE_TYPE_CLASSES = {"mbt"}
+
+
 def rebalance_class(cls: str):
     rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
     if not rows:
         return ""
-    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi)
+    spd_step = 5 if cls in VEHICLE_TYPE_CLASSES else 1
+    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi, spd_step=spd_step)
     resolve_dps_uniqueness(rows)
     for r in rows:
         if r["protected"]:
@@ -312,9 +330,10 @@ def render_report(rows, cls):
             f"{r['cost']} | {r['dmg']} | {r['dmg_filter']} | {r['burst']} | {r['rl']} | {int(round(r['fp']*100))} | "
             f"{r['wc']:.3f} | {r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.0f} | {r['note']} |"
         )
-    lines += ["", "## Uniqueness check", ""]
+    lines += ["", "## Uniqueness check (5 raw stats — maintainer law 2026-07-22)", ""]
     ok = True
-    for key, label in (("hp", "HP"), ("spd", "Speed"), ("rng", "Range")):
+    # HP, Speed, Range, RAW ReloadDelay — each an independent dimension.
+    for key, label in (("hp", "HP"), ("spd", "Speed"), ("rng", "Range"), ("rl", "raw ReloadDelay")):
         dupes = {}
         for r in rows:
             if r["protected"]:
@@ -323,16 +342,19 @@ def render_report(rows, cls):
         dupes = {k: v for k, v in dupes.items() if len(v) > 1}
         if dupes:
             ok = False
-            lines.append(f"- **{label} duplicates**: {dupes}")
-    dps_dupes = {}
+            note = " (design choice — retune coarse Damage/reload by hand)" if key == "rl" else ""
+            lines.append(f"- **{label} duplicates**{note}: {dupes}")
+    # Effective damage-per-shot (Σwarheads × FP) — checked SEPARATELY from reload.
+    dmg_dupes = {}
     for r in rows:
-        dps_dupes.setdefault(round(r["dps_eff"], 1), []).append(r["actor"])
-    dps_dupes = {k: v for k, v in dps_dupes.items() if len(v) > 1}
-    if dps_dupes:
+        dmg_dupes.setdefault(round(r.get("dmg_eff", 0.0), 1), []).append(r["actor"])
+    dmg_dupes = {k: v for k, v in dmg_dupes.items() if len(v) > 1}
+    if dmg_dupes:
         ok = False
-        lines.append(f"- **effective DPS duplicates**: {dps_dupes}")
+        lines.append(f"- **effective damage-per-shot duplicates**: {dmg_dupes}")
     if ok:
-        lines.append("- All uniqueness checks passed (HP, Speed, Range, effective DPS).")
+        lines.append("- All 5-stat uniqueness checks passed "
+                     "(HP, Speed, Range, raw ReloadDelay, effective damage-per-shot).")
     lines += ["", "## Required YAML edits (per unit)", ""]
     for r in rows:
         if r["protected"]:

@@ -53,19 +53,32 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
   uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
   closecombat/SF one-offs (LESSONS §172-176).
-- [ ] **Fix uniqueness in code** (LESSONS + FORMULA_V2 §3d corrected 2026-07-22):
-  `propose_class_rebalance.resolve_dps_uniqueness` AND the uniqueness audit must
-  key on the 5 raw stats — HP, Speed, effective-damage-per-shot (Σwarheads×FP),
-  RAW ReloadDelay, Range — NOT "effective DPS" and NOT FirepowerMultiplier.
-  Damage×FP and raw ReloadDelay are checked SEPARATELY.
-- [ ] **Speed-step in code**: `nudge_hp_spd` must step Speed by 1 for infantry
-  but 5 for vehicles/aircraft/ships (currently always 1).
-- [ ] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500)
-  during the closecombat conversion — round numbers, damage stays on the grid.
-- [ ] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2;
-  japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot gate.
-- [ ] Reconvert the 20 MAX-era-hot closecombat+SF members (each warhead was
-  set = intended total → 2–3× hot under SUM).
+- [x] **Fix uniqueness in code** (done 2026-07-22, commit pending):
+  `propose_class_rebalance.resolve_dps_uniqueness` now keys on effective
+  damage-per-shot (Σwarheads×FP); the report checks the 5 raw stats — HP, Speed,
+  Range, RAW ReloadDelay, effective-damage-per-shot — with damage-per-shot and
+  reload as SEPARATE dimensions (reload dupes flagged, never auto-nudged). STILL
+  TODO: apply the same 5-stat metric to the standalone uniqueness AUDIT.
+- [x] **Speed-step in code** (done 2026-07-22): `nudge_hp_spd` gained `spd_step`;
+  `rebalance_class` passes 5 for `VEHICLE_TYPE_CLASSES` (mbt) else 1.
+- [x] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500) —
+  done as part of the 4-anchor restat below.
+- [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload
+  75→70; japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot
+  gate. Verified Δ0: anchors price to cost0, verifiers to 2.5×cost0. (2026-07-22)
+- [ ] **Tech-tier is applied ABSOLUTE, must be RELATIVE to the anchor's tier**
+  (found 2026-07-22 during the 4-anchor restat): `class_baseline_price` multiplies
+  by `design.tech_tier` (default 1.0). Closecombat is documented T3 (0.75) but no
+  unit is tagged, so all price at tier 1.0 and the anchor lands on cost0 — correct
+  BY ACCIDENT. The moment any closecombat unit is tagged T4, it would get absolute
+  0.5 instead of 0.5/0.75 (relative). FIX: effective tier = unit_tier / anchor_tier
+  so the anchor always cancels to 1.0 (matches the "verifier shares tier so it
+  cancels" law). Until fixed, do NOT tag class members with a tech_tier ≠ the
+  anchor's.
+- [ ] Reconvert the ~20 MAX-era-hot closecombat+SF members (each warhead was
+  set = intended total → 2–3× hot under SUM). BLOCKED on membership cleanup
+  first — the current subtype rosters pull in snipers/casters/spies/core-combat
+  units (scout: spies+zerg_defiler; SF: dragunov sniper, terran_*, zerg_hydralisk).
 - [ ] Restat + reconvert each infantry class to its anchor (class_anchors.json).
 - [ ] NEW BUILDING: RA1 Soviets Tier-4 dummy (forward-command-center sprite,
   placeholder `ra1_soviets_experimentaltechcenter`) unlocking the heavy-infantry

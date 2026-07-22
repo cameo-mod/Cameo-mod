@@ -1832,7 +1832,7 @@ td_gdi_minigunner_minigun_ap:
 td_gdi_shotgunner_shotgun:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
-	ReloadDelay: 75
+	ReloadDelay: 70
 	Range: 3500
 	Burst: 5
 	BurstDelays: 0
@@ -1842,10 +1842,10 @@ td_gdi_shotgunner_shotgun:
 	Projectile: Bullet
 		Inaccuracy: 800
 	Warhead@SmallArms: SpreadDamage
-		Damage: 4000
+		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
+		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1

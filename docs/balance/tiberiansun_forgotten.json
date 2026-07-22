@@ -1686,7 +1686,7 @@
        }
       ],
       "weapon": "TSHighVelocityTur",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"
@@ -6023,7 +6023,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -6057,7 +6057,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -6958,6 +6958,14 @@
     ]
    },
    "forgotten_upgrade_mutantsoldier": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -6969,6 +6977,9 @@
     "prerequisites": [
      "~forgotten_radar",
      "!forgotten_upgrade_mutantsoldier"
+    ],
+    "queue": [
+     "Upgrades"
     ]
    },
    "forgotten_upgrade_tiberiumadaptability": {
@@ -9177,7 +9188,7 @@
        }
       ],
       "weapon": "TSHighVelocity",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"
@@ -9520,7 +9531,7 @@
        }
       ],
       "weapon": "TSHighVelocity2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"

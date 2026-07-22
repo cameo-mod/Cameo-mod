@@ -2177,7 +2177,7 @@
        }
       ],
       "weapon": "AsianCrocBite",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2213,7 +2213,7 @@
        }
       ],
       "weapon": "AsianCrocBiteE",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3947,7 +3947,7 @@
       "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
@@ -3956,7 +3956,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -3966,7 +3966,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -3990,7 +3990,7 @@
       "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@Upgrade",
       "versus_templates": [
@@ -3998,7 +3998,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4008,7 +4008,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4032,7 +4032,7 @@
       "design_weapon_class": 0.875,
       "pricing": true,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@ELITE",
       "versus_templates": [
@@ -4040,7 +4040,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4050,7 +4050,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4075,7 +4075,7 @@
       "design_weapon_class": 0.875,
       "pricing": false,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "!rank-elite && !asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONED",
       "versus_templates": [
@@ -4084,7 +4084,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4094,7 +4094,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4119,7 +4119,7 @@
       "design_weapon_class": 0.875,
       "pricing": false,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "(rank-elite && !asianalliance_doctrine_modernizedinfantryequipment) || (!rank-elite && asianalliance_doctrine_modernizedinfantryequipment)",
       "slot": "Armament@GARRISONEDUpgrade",
       "versus_templates": [
@@ -4127,7 +4127,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4137,7 +4137,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4162,7 +4162,7 @@
       "design_weapon_class": 0.875,
       "pricing": false,
       "range": "3500",
-      "reloaddelay": "75",
+      "reloaddelay": "70",
       "requires": "rank-elite && asianalliance_doctrine_modernizedinfantryequipment",
       "slot": "Armament@GARRISONEDELITE",
       "versus_templates": [
@@ -4170,7 +4170,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "SmallArms",
         "type": "SpreadDamage"
        },
@@ -4180,7 +4180,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -4272,7 +4272,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword1",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4308,7 +4308,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword2",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4344,7 +4344,7 @@
        }
       ],
       "weapon": "AsianSamuraiSword3",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5008,7 +5008,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5044,7 +5044,7 @@
        }
       ],
       "weapon": "AsianNinjaStarE",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5079,7 +5079,7 @@
        }
       ],
       "weapon": "AsianNinjaStar",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5116,7 +5116,7 @@
        }
       ],
       "weapon": "AsianNinjaStarE",
-      "weapon_class_source": "template",
+      "weapon_class_source": "WeaponClass",
       "weapon_types": [
        "^SwordWeapon"
       ]
