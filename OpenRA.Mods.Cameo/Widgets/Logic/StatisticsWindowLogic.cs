@@ -87,19 +87,28 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			return value.ToString("N0", CultureInfo.CurrentCulture);
 		}
 
-		static string Metric(long value)
+		internal static string Metric(long value)
 		{
-			var magnitude = Math.Abs((double)value);
-			if (magnitude >= 1_000_000_000_000)
-				return (value / 1_000_000_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "T";
-			if (magnitude >= 1_000_000_000)
-				return (value / 1_000_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "B";
-			if (magnitude >= 1_000_000)
-				return (value / 1_000_000d).ToString("0.#", CultureInfo.CurrentCulture) + "M";
-			if (magnitude >= 1_000)
-				return (value / 1_000d).ToString("0.#", CultureInfo.CurrentCulture) + "K";
+			var suffixes = new[] { "", "K", "M", "B", "T" };
+			var scaled = (double)value;
+			var suffix = 0;
+			while (Math.Abs(scaled) >= 1000 && suffix < suffixes.Length - 1)
+			{
+				scaled /= 1000;
+				suffix++;
+			}
 
-			return Number(value);
+			if (suffix == 0)
+				return Number(value);
+
+			var rounded = Math.Round(scaled, 1, MidpointRounding.AwayFromZero);
+			if (Math.Abs(rounded) >= 1000 && suffix < suffixes.Length - 1)
+			{
+				rounded /= 1000;
+				suffix++;
+			}
+
+			return rounded.ToString("0.#", CultureInfo.CurrentCulture) + suffixes[suffix];
 		}
 
 		static bool IsRandom(FactionInfo f)

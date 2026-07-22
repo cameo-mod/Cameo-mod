@@ -27,39 +27,45 @@ namespace OpenRA.Mods.Cameo.Traits
 	public class CameoCareerRecorder : ITick, INotifyWinStateChanged
 	{
 		bool recorded;
+		bool outcomeNotified;
 		int retryCount;
 		int nextAttemptTick;
 		PendingCameoCareerMatch pending;
 
 		void ITick.Tick(Actor self)
 		{
-			if (recorded || self.World.WorldTick < nextAttemptTick)
+			var world = self.World;
+			if (recorded || !outcomeNotified || self != world.LocalPlayer?.PlayerActor ||
+				world.WorldTick < nextAttemptTick)
 				return;
 
+			pending ??= Capture(world);
 			if (pending == null)
 				return;
 
-			TryPersist(self.World.WorldTick);
+			TryPersist(world.WorldTick);
 		}
 
 		void INotifyWinStateChanged.OnPlayerWon(OpenRA.Player player)
 		{
-			CaptureAndPersist(player, "Won");
+			if (player == player.World.LocalPlayer)
+				outcomeNotified = true;
 		}
 
 		void INotifyWinStateChanged.OnPlayerLost(OpenRA.Player player)
 		{
-			CaptureAndPersist(player, "Lost");
+			if (player == player.World.LocalPlayer)
+				outcomeNotified = true;
 		}
 
-		void CaptureAndPersist(OpenRA.Player player, string outcome)
+		internal void FinalizeMatch(World world)
 		{
-			if (recorded || pending != null)
+			if (recorded)
 				return;
 
-			pending = Capture(player, outcome);
-			if (pending != null)
-				TryPersist(player.World.WorldTick);
+			pending ??= Capture(world);
+			for (var i = 0; pending != null && i < 5 && !recorded; i++)
+				TryPersist(world.WorldTick);
 		}
 
 		void TryPersist(int worldTick)
@@ -73,11 +79,15 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 		}
 
-		static PendingCameoCareerMatch Capture(OpenRA.Player player, string outcome)
+		static PendingCameoCareerMatch Capture(World world)
 		{
-			var world = player.World;
-			if (world.Type != WorldType.Regular || world.IsReplay ||
-				player != world.LocalPlayer || player.Spectating || player.NonCombatant || player.IsBot)
+			var player = world.LocalPlayer;
+			if (world.Type != WorldType.Regular || world.IsReplay || player == null ||
+				player.Spectating || player.NonCombatant || player.IsBot)
+				return null;
+
+			var outcome = FinalOutcome(player.WinState);
+			if (outcome == null)
 				return null;
 
 			var stats = player.PlayerActor.TraitOrDefault<PlayerStatistics>();
@@ -107,6 +117,32 @@ namespace OpenRA.Mods.Cameo.Traits
 			};
 
 			return new PendingCameoCareerMatch(new CameoCareerRepository(Platform.SupportDir), recordId, match);
+		}
+
+		internal static string FinalOutcome(WinState winState)
+		{
+			return winState switch
+			{
+				WinState.Won => "Won",
+				WinState.Lost => "Lost",
+				_ => null
+			};
+		}
+	}
+
+	[TraitLocation(SystemActors.World)]
+	[Desc("Flushes the local player's pending Cameo career result when the game ends.",
+		"Place on the world actor.")]
+	public class CameoCareerFinalizerInfo : TraitInfo
+	{
+		public override object Create(ActorInitializer init) { return new CameoCareerFinalizer(); }
+	}
+
+	public class CameoCareerFinalizer : IGameOver
+	{
+		void IGameOver.GameOver(World world)
+		{
+			world.LocalPlayer?.PlayerActor.TraitOrDefault<CameoCareerRecorder>()?.FinalizeMatch(world);
 		}
 	}
 }
