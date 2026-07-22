@@ -35,6 +35,35 @@ def dps(damage: float, reload_delay: float, weapon_class: float = 1.0,
     return base * firepower_multiplier
 
 
+def spread_damage_sum(warheads, smallarms_only: bool = False) -> float:
+    """Effective per-shot damage = SUM of every offensive SpreadDamage warhead
+    (maintainer law 2026-07-22). A multi-warhead weapon deals the ADDED damage
+    of all its warheads to a target, so the SUM — never the max — is the price
+    driver: pricing on the max would let a 10-warhead weapon deal 10x the damage
+    for the price of one. Excluded from the sum:
+      * ``*ExtraDamage``   shield-only chip damage (intentional, priced elsewhere)
+      * ``*Percentage``    HealthPercentageDamage (not SpreadDamage anyway)
+      * ``*FriendlyFire``  own-side splash, not offensive value
+    This is the ONE canonical warhead-damage reducer; every pricing tool MUST
+    call it so the MAX convention can never creep back in.
+    ``smallarms_only`` restricts the sum to SmallArms warheads (cheap scouts
+    <=150% of C0 price only their SmallArms warhead)."""
+    total = 0.0
+    for w in warheads or []:
+        if (w.get("type") or "") != "SpreadDamage":
+            continue
+        tag = (w.get("tag") or "").lower()
+        if tag.endswith(("extradamage", "percentage", "friendlyfire")):
+            continue
+        if smallarms_only and not tag.startswith("smallarms"):
+            continue
+        try:
+            total += float(w.get("damage"))
+        except (TypeError, ValueError):
+            continue
+    return total
+
+
 def estimators(hp: float, speed: float, range_wdist: float, dps_value: float,
                special: float = 1.0, unit_class: float = 1.0,
                tech_tier: float = 1.0) -> tuple[float, float, float]:

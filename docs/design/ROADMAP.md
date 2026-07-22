@@ -25,6 +25,72 @@ factions, everything through the balance workbook. Faction reference:
 - [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
 - [x] **Documentation architecture continuation** — owner: Cascade. De-mixed `MEGAPLAN.md` into a short rebalance index and moved the Dynamic Campaign vision into non-binding `VISION.md`; Formula V2, balance-pipeline, and ARMOR_SYSTEM remain canonical linked sources. Excludes the ROADMAP history split and Formula V2 roster-log migration. Validation: internal-link check and `git diff --check`.
 
+## Balance — universal class-formula program (2026-07-22, ACTIVE)
+
+**Goal:** ONE balance formula for every class; a class is re-weighted only
+by dropping in a **baseline actor** + **verifier actor** (the two calibrate
+the weights). `UnitClass` scalar is deprecated → set to 1.0 once all anchors
+are picked, then delete. Order: infantry → tanks/vehicles → aircraft →
+defenses → naval. All DPS/cost below are PROVISIONAL (maintainer tunes
+in-game); actors + stats + structure are LOCKED. Full anchor store:
+`docs/balance/class_anchors.json` (14 classes as of 2026-07-22).
+
+**Laws locked this session (bake into pre-flight + audits so they can't be skipped):**
+- **SUM law** — effective damage = Σ offensive SpreadDamage warheads (excl.
+  `*ExtraDamage`/`*Percentage`/`*FriendlyFire`), never MAX. Canonical reducer
+  `formula.spread_damage_sum` (done: propose_class_rebalance/fit_class/update_ranges route through it).
+- **Two-stage DPS tuning** — coarse: warhead `Damage` on the 2000 grid;
+  fine: `FirepowerMultiplier@<unit>` in 1% steps (1 = ×0.01). Dispatcher must emit both.
+- **Baseline @ band middle**; **verifier ≡ baseline on range+speed, exactly
+  2×HP / 2×DPS / 2.5×cost**; same tech tier as baseline so it cancels.
+- **WC/StarCraft unit costs = multiples of 20** (power = Cost/20).
+- **RevealsShroud per class = baseline range, floored to 5000** for
+  scout/closecombat/melee (helps snipers scout). Apply to each `^…Template`.
+- **Melee range IS priced** (FORMULA_V2 §6b corrected).
+
+**To do (in order):**
+- [ ] Build `tools/balance/rebalance_classes.py` dispatcher: SUM price →
+  2000-grid warheads → 1%-step FP-mult → range-solve to band (mult-of-10) →
+  uniqueness within broad TYPE → Δ (goal ≤1). Consolidates the scout/
+  closecombat/SF one-offs (LESSONS §172-176).
+- [ ] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2;
+  japan 12000→4000×3; lunar 24000→8000×3) via ledger→apply_balance→boot gate.
+- [ ] Reconvert the 20 MAX-era-hot closecombat+SF members (each warhead was
+  set = intended total → 2–3× hot under SUM).
+- [ ] Restat + reconvert each infantry class to its anchor (class_anchors.json).
+- [ ] NEW BUILDING: RA1 Soviets Tier-4 dummy (forward-command-center sprite,
+  placeholder `ra1_soviets_experimentaltechcenter`) unlocking the heavy-infantry
+  shocktrooper; ladder T3=tech center, T4=experimental. (Needs a real name.)
+- [ ] Rocket troopers: raise td_nod + td_gdi to 300 (weak at 200).
+- [ ] Heavy-sniper verifier warhead recipe (yuri_virus/ts_nod_toxintrooper):
+  sniper+chaingun+railgun templates, equal warheads; virus upgrade 1 = +light
+  chemical, upgrade 2 = +medium chemical; spawned gas = special K+0.25 (1.25×).
+- [ ] **Catch-all-specials audit** (maintainer flagged): detect EVERY special
+  reliably — granted-condition effects, FireShrapnel-spawned warheads/gas,
+  charge-delay/frontal-facing negatives — so K is never under/over-counted.
+- [ ] Then vehicle anchor proposal (MBT live; light tank / heavy / tank
+  destroyer / artillery / AA / scout / battlefortress / APC).
+- [ ] DEFERRED to elite-weapon audit: elite weapon range = base + 1000
+  (naxis elite is 6500, should be 6000).
+- [ ] **Class descriptions rework** (maintainer 2026-07-22): every unit CLASS
+  needs its own fluent `.description` (only a few exist so far —
+  scout/antitank/mbt/commando + the 4 added today: heavy_sniper/rocket_trooper/
+  archer/support). Descriptions live in `mods/cameo/fluent/rules/en.ftl`
+  (Buildable.Description is a `[FluentReference]` key, NEVER inline text; use
+  real line breaks, never `\n`). ALSO: the "Strong vs / Weak vs" matchup lines
+  belong at the END of the description, after the flavour text — needs a design
+  pass on wording/order. Support-type units get NO Strong/Weak line.
+- [ ] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
+  names must ALWAYS use `_`, NEVER `.`): rename `^…​.template` → `^…​_template`
+  and `^….husk` → `^…_husk` mod-wide (definitions + every Inherits reference,
+  via tools/rename). `unit_upgrade` already fixed 2026-07-22; remaining:
+  `promotion_upgrade.template`, `researched_upgrade.template`, `upgrade.template`,
+  all `combat_tank.husk` etc. Verify husk engine-references before renaming.
+- [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
+  the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
+  indents (→ fluent keys), `unit_upgrade.template` dangling inherit. Re-boot may
+  surface more; fix as found (master must always boot).
+
 ## P0 — Crashes (always first)
 
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);

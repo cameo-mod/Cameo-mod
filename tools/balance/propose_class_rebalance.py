@@ -1,0 +1,372 @@
+#!/usr/bin/env python3
+"""propose_class_rebalance.py — per-class infantry rebalance proposal.
+
+Reads the ledger JSONs, selects all units belonging to a given class
+(subtype or explicit class_anchor), keeps their current HP/Speed/Cost,
+resolves effective-DPS uniqueness by fine-tuning FirepowerMultiplier,
+solves the class-baseline range that makes price == cost, rounds to the
+nearest 10, clamps to the class band, and writes a markdown report.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / "tools/balance"))
+import formula  # noqa: E402
+
+LEDGER_DIR = ROOT / "docs/balance"
+ANCHORS_FILE = LEDGER_DIR / "class_anchors.json"
+
+# Actors the maintainer has explicitly retired from class rosters.
+EXCLUDED_ACTORS = {"light_inf"}
+
+CLASS_BANDS = {
+    # core ladder (contiguous, range-band-defined)
+    "scout": (4500, 5500),
+    "closecombat": (2500, 4500),
+    "special_forces": (5500, 6500),
+    "melee": (1250, 1750),
+    "mbt": (3500, 6500),
+    # role classes (band = clamp window around the anchor range; role, not range,
+    # defines membership, so overlaps with the ladder are allowed)
+    "grenadier": (5000, 6000),
+    "heavy_infantry": (4500, 5500),
+    "pure_sniper": (9000, 11000),
+    "heavy_sniper": (7000, 9000),
+    "rocket_trooper": (6000, 7000),
+    "archer": (6500, 7500),
+    "support": (0, 6000),
+    "commando": (7000, 9000),
+    "flying_infantry": (4000, 6000),
+}
+
+
+def band_for(cls: str, spec: dict) -> tuple[int, int]:
+    """Clamp window for the range solver. Falls back to anchor range ±20%."""
+    if cls in CLASS_BANDS:
+        return CLASS_BANDS[cls]
+    r0 = int(spec.get("range0_wdist") or 5000)
+    return (int(r0 * 0.8), int(r0 * 1.2))
+
+
+def fnum(v):
+    try:
+        f = float(v)
+        return int(f) if f == int(f) else f
+    except (TypeError, ValueError):
+        return None
+
+
+def subtype_to_anchor(st: str | None) -> str | None:
+    if not st:
+        return None
+    name = re.sub(r"[^A-Za-z0-9]", "", str(st)).casefold()
+    exact = {
+        "scoutinfantry": "scout",
+        "closecombatinfantry": "closecombat",
+        "specialforcesinfantry": "special_forces",
+        "mainbattletank": "mbt",
+        "linebreaker": "mbt",
+    }
+    return exact.get(name)
+
+
+def load_anchors():
+    data = json.loads(ANCHORS_FILE.read_text(encoding="utf-8"))
+    return {k: v for k, v in data.items() if isinstance(v, dict) and "spec" in v}
+
+
+def spread_damages(arm: dict, smallarms_only: bool = False):
+    """Effective per-shot damage for pricing = SUM of the weapon's offensive
+    SpreadDamage warheads. Thin wrapper over the ONE canonical reducer
+    formula.spread_damage_sum (maintainer SUM law 2026-07-22) so the convention
+    lives in a single place and MAX can never creep back in."""
+    return formula.spread_damage_sum(arm.get("warheads", []), smallarms_only=smallarms_only)
+
+
+def armament_dps(arm: dict, fp: float, base_only: bool = False, smallarms_only: bool = False, wc: float | None = None):
+    rl = fnum(arm.get("reloaddelay"))
+    burst = fnum(arm.get("burst")) or 1
+    burst_delays = fnum(arm.get("burstdelays")) or 0
+    wc = wc if wc is not None else (fnum(arm.get("design_weapon_class")) or 0.75)
+    if rl is None or rl <= 0:
+        return 0.0
+    dmg = spread_damages(arm, smallarms_only=smallarms_only)
+    return formula.dps(dmg, rl, wc, int(burst), burst_delays=burst_delays,
+                       firepower_multiplier=(1.0 if base_only else fp))
+
+
+def unit_dps(u: dict, fp: float, base_only: bool = False, smallarms_only: bool = False, wc: float | None = None):
+    return sum(armament_dps(arm, fp, base_only=base_only, smallarms_only=smallarms_only, wc=wc)
+               for arm in u.get("armaments", [])
+               if arm.get("pricing") and arm.get("slot") in ("Armament", "Armament@PRIMARY"))
+
+
+def resolve_dps_uniqueness(rows, step: float = 0.01) -> None:
+    for i, r in enumerate(rows):
+        if r.get("protected"):
+            r["fp"] = r["fp0"]
+            r["dps_eff"] = r["base_dps"] * r["fp0"]
+            continue
+        if r["base_dps"] < 1.0:
+            r["fp"] = r["fp0"]
+            r["dps_eff"] = r["base_dps"] * r["fp0"]
+            continue
+        base_fp = r["fp0"]
+        base_dps = r["base_dps"]
+        for k in range(0, 200):
+            signs = (1, -1) if k > 0 else (1,)
+            for sign in signs:
+                fp = base_fp + sign * k * step
+                if not (0.05 <= fp <= 2.0):
+                    continue
+                dps_eff = base_dps * fp
+                if all(abs(other["dps_eff"] - dps_eff) > 0.05 for other in rows[:i]):
+                    r["fp"] = fp
+                    r["dps_eff"] = dps_eff
+                    break
+            else:
+                continue
+            break
+        else:
+            raise RuntimeError(f"Could not make effective DPS unique for {r['actor']}")
+
+
+def nudge_ranges(rows, lo: int, hi: int):
+    for _ in range(100):
+        dupes = {}
+        for r in rows:
+            if r.get("protected"):
+                continue
+            dupes.setdefault(r["rng"], []).append(r)
+        dupes = {k: v for k, v in dupes.items() if len(v) > 1}
+        if not dupes:
+            break
+        for val, group in dupes.items():
+            group.sort(key=lambda r: r["actor"])
+            for i, r in enumerate(group):
+                direction = 1 if i % 2 == 0 else -1
+                r["rng"] = max(lo, min(hi, r["rng"] + direction * 10))
+
+
+def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72):
+    specs = [("hp", 1000, hp_lo, hp_hi), ("spd", 1, spd_lo, spd_hi)]
+    for key, step, l, h in specs:
+        # initial distribution
+        groups = {}
+        for r in rows:
+            groups.setdefault(r[key], []).append(r)
+        for group in groups.values():
+            group = [r for r in group if not r.get("protected")]
+            if len(group) <= 1:
+                continue
+            n = len(group)
+            offsets = [i - n // 2 for i in range(n)]
+            group.sort(key=lambda r: r["actor"])
+            for r, off in zip(group, offsets):
+                r[key] = int(round(r[key] + off * step))
+                r[key] = max(l, min(h, r[key]))
+        # clamp cleanup
+        for _ in range(100):
+            dupes = {}
+            for r in rows:
+                dupes.setdefault(r[key], []).append(r)
+            dupes = {k: v for k, v in dupes.items() if len(v) > 1}
+            if not dupes:
+                break
+            for group in dupes.values():
+                group.sort(key=lambda r: r["actor"])
+                for i, r in enumerate(group):
+                    if r.get("protected"):
+                        continue
+                    direction = 1 if i % 2 == 0 else -1
+                    r[key] = max(l, min(h, r[key] + direction * step))
+
+
+def load_class_rows(cls: str):
+    anchors = load_anchors()
+    anchor = anchors.get(cls)
+    if not anchor:
+        raise SystemExit(f"No spec anchor for class {cls}")
+    spec = anchor["spec"]
+    protected = {anchor.get("anchor_actor"), anchor.get("verifier_actor")}
+    protected.discard(None)
+    band_lo, band_hi = band_for(cls, spec)
+    spd_lo = int(spec["speed0"] * 0.8)
+    spd_hi = int(spec["speed0"] * 1.2)
+    rows = []
+    for path in sorted(LEDGER_DIR.glob("*.json")):
+        if path.name == "class_anchors.json":
+            continue
+        try:
+            doc = json.loads(path.read_text(encoding="utf-8-sig"))
+        except Exception:
+            continue
+        if not isinstance(doc, dict):
+            continue
+        ledger_name = doc.get("ledger") or path.stem
+        for section_name, section in doc.get("sections", {}).items():
+            if not isinstance(section, dict):
+                continue
+            for actor, u in section.items():
+                if not isinstance(u, dict):
+                    continue
+                design = u.get("design") or {}
+                actor_cls = design.get("class_anchor") or subtype_to_anchor(design.get("subtype"))
+                if actor in EXCLUDED_ACTORS or actor_cls != cls:
+                    continue
+                hp = fnum((u.get("hp") or {}).get("v")) or 0
+                spd = fnum((u.get("speed") or {}).get("v")) or 0
+                cost = fnum((u.get("cost") or {}).get("v")) or 0
+                rng = fnum((u.get("range") or {}).get("v")) or 0
+                fp_raw = fnum((u.get("firepower_multiplier") or {}).get("v"))
+                is_protected = actor in protected
+                fp0 = 1.0 if is_protected else (fp_raw if fp_raw is not None else 1.0)
+                # Scout low-cost units (<=1.5*C0) are SmallArms-only per FORMULA_V2 §3.
+                if cls == "scout" and cost <= spec["cost0"] * 1.5:
+                    smallarms_only = True
+                    wc = 0.75
+                else:
+                    smallarms_only = False
+                    wc = None
+                base_dps = unit_dps(u, fp0, base_only=True, smallarms_only=smallarms_only, wc=wc)
+                row = {
+                    "actor": actor,
+                    "faction": design.get("faction") or ledger_name,
+                    "hp": hp,
+                    "spd": spd,
+                    "rng": rng,
+                    "cost": cost,
+                    "fp0": fp0,
+                    "base_dps": base_dps,
+                    "special": fnum(design.get("special")) or 1.0,
+                    "tech_tier": fnum(design.get("tech_tier")) or 1.0,
+                    "protected": is_protected,
+                    "note": "anchor" if actor == anchor.get("anchor_actor") else
+                            ("verifier" if actor == anchor.get("verifier_actor") else ""),
+                }
+                # weapon display: first priced primary armament
+                priced = [a for a in u.get("armaments", []) if a.get("pricing") and a.get("slot") in ("Armament", "Armament@PRIMARY")]
+                arm = priced[0] if priced else {}
+                row["weapon"] = arm.get("weapon", "")
+                row["burst"] = fnum(arm.get("burst")) or 1
+                row["rl"] = fnum(arm.get("reloaddelay")) or 0
+                # Scout low-cost units are SmallArms-only per FORMULA_V2 §3.
+                smallarms_only = (cls == "scout" and cost <= spec["cost0"] * 1.5)
+                row["dmg"] = int(spread_damages(arm, smallarms_only=smallarms_only))
+                row["dmg_filter"] = "smallarms" if smallarms_only else "all"
+                row["wc"] = 0.750 if smallarms_only else (fnum(arm.get("design_weapon_class")) or 0.75)
+                if is_protected:
+                    row["rng"] = int(spec["range0_wdist"])
+                rows.append(row)
+    return rows, spec, band_lo, band_hi, spd_lo, spd_hi
+
+
+def rebalance_class(cls: str):
+    rows, spec, band_lo, band_hi, spd_lo, spd_hi = load_class_rows(cls)
+    if not rows:
+        return ""
+    nudge_hp_spd(rows, spd_lo=spd_lo, spd_hi=spd_hi)
+    resolve_dps_uniqueness(rows)
+    for r in rows:
+        if r["protected"]:
+            continue
+        r["rng"] = int(round(
+            formula.solve_class_baseline_range(
+                r["cost"], r["hp"], r["spd"], r["dps_eff"],
+                spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"], spec["cost0"],
+                special=r["special"], tech_tier=r["tech_tier"]
+            ) / 10
+        )) * 10
+        r["rng"] = max(band_lo, min(band_hi, r["rng"]))
+    nudge_ranges(rows, band_lo, band_hi)
+    # recompute prices/deltas
+    for r in rows:
+        r["price"] = formula.class_baseline_price(
+            r["hp"], r["spd"], r["rng"], r["dps_eff"],
+            spec["hp0"], spec["speed0"], spec["range0_wdist"], spec["dps0"], spec["cost0"],
+            special=r["special"], tech_tier=r["tech_tier"]
+        )
+        r["delta"] = r["price"] - r["cost"]
+    return render_report(rows, cls)
+
+
+def render_report(rows, cls):
+    s = load_anchors()[cls]["spec"]
+    lines = [
+        f"# {cls.replace('_', ' ').title()} infantry rebalance proposal",
+        "",
+        f"Anchor spec: HP={s['hp0']}, Speed={s['speed0']}, Range={s['range0_wdist']}, eff-DPS={s['dps0']}, Cost={s['cost0']}",
+        "",
+        "| actor | faction | HP | spd | rng | cost | dmg | dmg_filter | burst | rl | FP% | wc | eff DPS | formula price | Δ | note |",
+        "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+    ]
+    for r in rows:
+        lines.append(
+            f"| `{r['actor']}` | {r['faction']} | {r['hp']} | {r['spd']} | {r['rng']} | "
+            f"{r['cost']} | {r['dmg']} | {r['dmg_filter']} | {r['burst']} | {r['rl']} | {int(round(r['fp']*100))} | "
+            f"{r['wc']:.3f} | {r['dps_eff']:.1f} | {r['price']:.0f} | {r['delta']:+.0f} | {r['note']} |"
+        )
+    lines += ["", "## Uniqueness check", ""]
+    ok = True
+    for key, label in (("hp", "HP"), ("spd", "Speed"), ("rng", "Range")):
+        dupes = {}
+        for r in rows:
+            if r["protected"]:
+                continue
+            dupes.setdefault(r[key], []).append(r["actor"])
+        dupes = {k: v for k, v in dupes.items() if len(v) > 1}
+        if dupes:
+            ok = False
+            lines.append(f"- **{label} duplicates**: {dupes}")
+    dps_dupes = {}
+    for r in rows:
+        dps_dupes.setdefault(round(r["dps_eff"], 1), []).append(r["actor"])
+    dps_dupes = {k: v for k, v in dps_dupes.items() if len(v) > 1}
+    if dps_dupes:
+        ok = False
+        lines.append(f"- **effective DPS duplicates**: {dps_dupes}")
+    if ok:
+        lines.append("- All uniqueness checks passed (HP, Speed, Range, effective DPS).")
+    lines += ["", "## Required YAML edits (per unit)", ""]
+    for r in rows:
+        if r["protected"]:
+            continue
+        trait = r["actor"].upper().replace("_", "")
+        changes = [
+            f"HP {r['hp']}, Speed {r['spd']}, Range {r['rng']}",
+            f"weapon Damage {r['dmg']} ({r['dmg_filter']}), ReloadDelay {r['rl']}, Burst {r['burst']}",
+            f"FirepowerMultiplier@{trait} {int(round(r['fp']*100))}",
+        ]
+        if abs(r["delta"]) > 5:
+            changes.append(f"formula price delta {r['delta']:+.0f} (informational; cost pinned at {r['cost']})")
+        lines.append(f"- `{r['actor']}`: {', '.join(changes)}")
+    return "\n".join(lines) + "\n"
+
+
+def main():
+    valid = sorted(load_anchors().keys())
+    ap = argparse.ArgumentParser(
+        description="Per-class rebalance proposal. Class must exist in "
+                    "class_anchors.json with a spec. Members are units tagged "
+                    "design.class_anchor==<class> (or a mapped subtype).")
+    ap.add_argument("--class", "-c", dest="cls", required=True, choices=valid,
+                    metavar="CLASS", help="one of: " + ", ".join(valid))
+    args = ap.parse_args()
+    text = rebalance_class(args.cls)
+    if not text:
+        print(f"no units found for class {args.cls} "
+              f"(tag members with design.class_anchor=={args.cls} first)")
+        return
+    out = ROOT / "docs" / "balance" / f"proposal_{args.cls}_infantry.md"
+    out.write_text(text, encoding="utf-8")
+    print(f"wrote {out.relative_to(ROOT)}")
+
+
+if __name__ == "__main__":
+    main()

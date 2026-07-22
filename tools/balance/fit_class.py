@@ -50,12 +50,11 @@ def unit_inputs(u):
     for arm in u.get("armaments", []):
         if not arm.get("pricing", True):
             continue
-        damages = [fnum(w.get("damage")) for w in arm.get("warheads", [])]
-        damages = [x for x in damages if x is not None]
+        dmg = formula.spread_damage_sum(arm.get("warheads", []))  # SUM law, chips excluded
         reload_ = fnum(arm.get("reloaddelay"))
-        if not damages or not reload_:
+        if not dmg or not reload_:
             continue
-        total_dps += formula.dps(max(damages), reload_,
+        total_dps += formula.dps(dmg, reload_,
                                  fnum(arm.get("design_weapon_class")) or 1.0,
                                  int(fnum(arm.get("burst")) or 1),
                                  fnum(arm.get("burstdelays")))

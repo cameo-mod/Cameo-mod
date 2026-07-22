@@ -299,16 +299,20 @@ ever fall between classes again — the band DEFINES membership.
 - **Band width is a PER-CLASS property.** Scouts keep the tight ±10%
   (one weapon archetype: rifles). Melee and closecombat get WIDE
   contiguous bands because their ranges express different things:
-- **Melee range is PHYSICS, not power**: contact reach follows unit
-  size (small: shriek 1150 / zergling 1350 / zealot 1335; medium:
-  footman 1333 / knight 1420 / worker 1500; large: dogs 2000; huge
-  melee VEHICLES like the Consortium Megalodon belong to a melee-
-  vehicle class, not infantry). Size→reach convention: small
-  1250–1400, medium 1400–1700, large 1700–2500. Sub-1250 outliers
-  (zombiemutant 1127) round UP to 1250. In the MELEE formula the
-  range ratio is FIXED at 1 (reach is coupled to hitbox size — bigger
-  reach = bigger target — so it is not priced); melee pricing runs on
-  HP/speed/DPS.
+- **Melee range IS priced — like every other class** (maintainer
+  correction 2026-07-22; the earlier "fixed ratio 1 / not priced" claim
+  was WRONG and unauthored). Reach still follows unit size (small:
+  shriek 1150 / zergling 1350 / zealot 1335; medium: footman 1333 /
+  knight 1420 / worker 1500; large: dogs 2000; huge melee VEHICLES like
+  the Consortium Megalodon belong to a melee-vehicle class, not
+  infantry). Size→reach convention: small 1250–1400, medium 1400–1700,
+  large 1700–2500. Sub-1250 outliers (zombiemutant 1127) round UP to
+  1250. The reasoning: bigger units are *balanced around* having more
+  reach (grunt > footman), so range enters the formula normally — the
+  spread is just small (1250–1750). Melee ANCHOR (2026-07-22):
+  baseline `asianalliance_alligator` 27000/90/1400/DPS300 @ 280,
+  verifier `yuri_brute` 54000/90/1400/DPS600 @ 700 (both scaled to a
+  common speed 90; cost 280→700 keeps the WC/SC verifier a multiple of 20).
 - **Closecombat range IS a balance lever** (2500 SMG spray → 4500
   long shotgun): it prices normally, and the wide band follows the
   price-gradient law — cheapest members at the low edge, priciest at
