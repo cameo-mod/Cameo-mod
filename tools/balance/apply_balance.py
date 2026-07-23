@@ -253,7 +253,7 @@ def main() -> int:
         subprocess.run([sys.executable, str(ROOT / "tools" / "balance" / "extract_stats.py"), str(ROOT)], cwd=ROOT)
         print("Auto-running audit_multiplier_modifiers.py...")
         subprocess.run([sys.executable, str(ROOT / "tools" / "audit" / "audit_multiplier_modifiers.py")], cwd=ROOT)
-        print("Re-run the full audit suite (tools/audit/run_all.sh or tools/balance/_run_full_audit.py) "
+        print("Re-run the full audit suite (tools/audit/run_all.sh or tools/audit/run_all.py) "
               "and the boot gate before committing.")
     else:
         print(f"DRY RUN: {changed} values would change "

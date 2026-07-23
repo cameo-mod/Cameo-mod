@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
-"""Windows-friendly equivalent of tools/audit/run_all.sh.
+"""Windows-friendly Python equivalent of tools/audit/run_all.sh.
 
 Runs the full Cameo audit suite, writes one markdown report per audit to
 docs/audit/latest/, regenerates docs/factions/MATRIX.md, and exits non-zero
 if any blocking audit fails.
 """
-import os
 import pathlib
 import subprocess
 import sys
@@ -48,7 +47,6 @@ def run(name, script, extra_args=None):
         failed = 1
         print(f"   FAILED: {name} (exit {result.returncode})")
     else:
-        # remove empty .err files
         if err.stat().st_size == 0:
             err.unlink()
 
@@ -59,7 +57,6 @@ for a in AUDITS:
 for name, path in EXTRAS:
     run(name, path)
 
-# Generators
 for name, script, dest in [
     ("gen_damage_matrix", ROOT / "tools" / "audit" / "gen_damage_matrix.py", OUT / "damage_matrix.md"),
     ("gen_rename_maps", ROOT / "tools" / "audit" / "gen_rename_maps.py", OUT / "naming.md"),
