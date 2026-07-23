@@ -1,0 +1,123 @@
+cabal_lazerboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard
+		Queue: Naval, RANaval
+		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Laser Boat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: CabalSpiderLaser
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: DepthCharge
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_lazerboat
+		PlayerPalette: player_rgba
+
+cabal_plasmasub:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Plasma Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~cabal_navalyard, cabal_radar
+		Queue: Naval, RANaval
+		Description: actor_ra1_soviets_missilesubmarine.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: CabalSubmarinePlasma
+		LocalOffset: 800,200,0, 800,-200,0
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 1000
+	Cloak@underwater:
+		CloakDelay: 100
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	FirepowerMultiplier@BallisticMissileSubBuff:
+		Modifier: 200
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryShell
+	AmmoPool:
+		Ammo: 2
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 110
+		Count: 1
+	RenderSprites:
+		Image: cabal_plasmasub
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: naxis_upgrade_wunderwaffe
+
+####################################################################################################
+#		BUILDINGS
+####################################################################################################
+
