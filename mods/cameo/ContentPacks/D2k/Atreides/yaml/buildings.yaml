@@ -35,3 +35,16 @@ d2k_silo.atreides:
 		Description: Stores excess spice.
 	RenderSprites:
 		Image: silo.atreides
+
+atreides_heavyfactory:
+	Inherits: heavy_factory
+	Tooltip:
+		Name: Atreides Heavy Factory
+	RenderSprites:
+		Image: heavy.atreides
+	Buildable:
+		Prerequisites: ~atreides_constructionyard, refinery.atreides
+		Description: template_factory.description
+		IconPalette: player
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: heavy.atreides_combat
