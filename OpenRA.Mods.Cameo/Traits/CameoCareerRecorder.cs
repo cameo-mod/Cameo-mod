@@ -28,6 +28,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		bool recorded;
 		bool outcomeNotified;
+		bool captureScheduled;
 		int retryCount;
 		int nextAttemptTick;
 		PendingCameoCareerMatch pending;
@@ -48,14 +49,34 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void INotifyWinStateChanged.OnPlayerWon(OpenRA.Player player)
 		{
-			if (player == player.World.LocalPlayer)
-				outcomeNotified = true;
+			ScheduleCapture(player);
 		}
 
 		void INotifyWinStateChanged.OnPlayerLost(OpenRA.Player player)
 		{
-			if (player == player.World.LocalPlayer)
-				outcomeNotified = true;
+			ScheduleCapture(player);
+		}
+
+		void ScheduleCapture(OpenRA.Player player)
+		{
+			if (player != player.World.LocalPlayer || recorded)
+				return;
+
+			outcomeNotified = true;
+			if (captureScheduled)
+				return;
+
+			captureScheduled = true;
+			player.World.AddFrameEndTask(world =>
+			{
+				captureScheduled = false;
+				if (recorded)
+					return;
+
+				pending ??= Capture(world);
+				if (pending != null)
+					TryPersist(world.WorldTick);
+			});
 		}
 
 		internal void FinalizeMatch(World world)
