@@ -125,7 +125,24 @@ This is the largest category. Strategy:
 5. ✅ Added `ProvidesPrerequisite:` to `latinsyndicate_defensebureau` (actor exists but didn't provide its own prereq)
 6. ✅ Added `ProvidesPrerequisite:` to `steelconsortium_geothermalreactor` (same)
 7. ✅ Added `ProvidesPrerequisite:` to `tkm_t30`, `tkm_sandmarine`, `tkm_bigshiee` (needed for `~!` negation prereqs)
-8. ⏳ Remaining: `~construction_yard.atreides`, `~faction.harkonnen`, `~EDEN_FACTORY_CONSUMER`, `!droppod`, `~techlevel.medium/high`, `tsproc`, `~ra2fact` — these are from unloaded files or genuinely missing
+8. ⏳ Remaining unresolved prereqs (detailed analysis):
+   - `~construction_yard.atreides` — 3 refs in D2k Atreides ContentPack, not provided anywhere. Fix: add `ProvidesPrerequisite: Prerequisite: construction_yard.atreides` to the Atreides conyard actor
+   - `~EDEN_FACTORY_CONSUMER` — 3 refs in outpost2.yaml (unloaded file). Fix: rename to `~disabled-EDEN_FACTORY_CONSUMER` or load outpost2.yaml
+   - `!droppod` — 2 refs in TS GDI buildings, negation prereq. `droppod` not provided by anything. Fix: add `ProvidesPrerequisite: Prerequisite: droppod` to Player actor in player.yaml
+   - `~techlevel.medium` — 463 refs across many files. Should be provided via `ProvidesTechPrerequisite` or lobby checkbox. Fix: add `ProvidesPrerequisite@techlevel.medium: Prerequisite: techlevel.medium` to Player actor
+   - `~techlevel.high` — 245 refs, same issue. Fix: add `ProvidesPrerequisite@techlevel.high: Prerequisite: techlevel.high` to Player actor
+   - `~faction.harkonnen` — 4 refs, provided in mcvmarket.yaml (unloaded). Fix: add `ProvidesPrerequisite@faction.harkonnen: Prerequisite: faction.harkonnen` to Player actor (or load mcvmarket.yaml)
+   - `tsproc` — 1 ref in TS GDI buildings. Fix: add `ProvidesPrerequisite: Prerequisite: tsproc` to the TS GDI conyard or Player actor
+   - `~ra2fact` — 2 refs, not provided. Fix: add `ProvidesPrerequisite@ra2fact: Prerequisite: ra2fact` to Player actor
+   - `~faction.atreides` — 2 refs, provided in mcvmarket.yaml (unloaded). Fix: same as harkonnen
+   - `faction.guild` — 5 refs, provided in mcvmarket.yaml (unloaded). Fix: same
+   - `faction.corrino` — 4 refs, provided in mcvmarket.yaml (unloaded). Fix: same
+
+**Pitfall: Double-replacement bug:** When bulk-renaming `~disable` → `~disabled`, it matches within already-renamed `~disabled-wip-content` creating `~disabledd-wip-content`. Always use word-boundary-aware regex replacement or run a cleanup pass for `~disabledd` → `~disabled` afterward.
+
+**Linter stripping logic:** `LintBuildablePrerequisites.cs` strips `~` and `!` from prereq strings before checking `providedPrereqs.Contains(base)`. The check is case-sensitive (ordinal). `~disabled*` prefix is exempted before this check.
+
+**ProvidesPrerequisite default behavior:** `ProvidesPrerequisite:` without explicit `Prerequisite:` field provides the actor's own name (`info.Name`). With `Prerequisite: custom_name`, it provides `custom_name`.
 
 **Rule enforced:** Always use `~disabled*` prefix for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`. See `tools/audit/audit_yaml_lint_rules.py`
 
