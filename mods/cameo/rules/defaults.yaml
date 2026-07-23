@@ -2277,7 +2277,6 @@
 	Inherits@salvage: ^GenericSalvageBonus
 	Inherits@emergencyrepair: ^EmergencyRepairable
 	Inherits@chrono: ^Chronoshiftable
-	Inherits@unstableeffect: ^UnstableEffect
 	Inherits@LeechEggLayable: ^LeechEggLayable
 	Inherits@squid: ^SquidGrabbable
 	Inherits@GravityWeighter: ^GravityWeighter
@@ -2414,10 +2413,6 @@
 	RangedGpsDot:
 		Sequence: Vehicle
 	TeleportNetworkTransportable:
-	SpawnActorOnDeath@Scraps:
-		Probability: 100
-		Actor: glscrapcrate
-		DeathType: MakeScrapbox
 	AttractsWorms:
 		Intensity: 500
 	Targetable@disguise:
@@ -2554,7 +2549,6 @@
 	Inherits@heal: ^TechStructureHealable
 	Inherits@FrenzyPower: ^FrenzyPower
 	Inherits@chrono: ^Chronoshiftable
-	Inherits@unstableeffect: ^UnstableEffect
 	Inherits@LeechEggLayable: ^LeechEggLayable
 	Inherits@GravityWeighter: ^GravityWeighter
 	TemporaryOwnerManager:
@@ -2992,7 +2986,6 @@
 	Inherits@terrordrone: ^TerrorDronableInfantry
 	Inherits@driver-dead: ^CanCaptureDriverlessVehicles
 	Inherits@poisonable: ^Poisonable
-	Inherits@unstableeffect: ^UnstableEffect
 	Inherits@GravityWeighter: ^GravityWeighter
 	TemporaryOwnerManager:
 	OwnerLostAction:
@@ -3277,30 +3270,6 @@
 		Weapon: MutateEffect
 		EmptyWeapon: MutateEffect
 		DeathTypes: QuestionMutate
-	SpawnActorOnDeath@Contaminator:
-		Actor: ordos_contaminator
-		OwnerType: Killer
-		DeathType: ContaminatorMutate
-	SpawnActorOnDeath@Assimilator:
-		Actor: drassimilator
-		Probability: 90
-		OwnerType: Killer
-		DeathType: AssimilatorMutate
-	SpawnActorOnDeath@ZombieInfect:
-		Actor: civzombie.infect
-		Probability: 99
-		OwnerType: Killer
-		DeathType: ZombieInfection
-	SpawnActorOnDeath@QuestionMutate:
-		Actor: dtmutant
-		Probability: 90
-		OwnerType: Killer
-		DeathType: QuestionMutate
-	SpawnActorOnDeath@Wolfestein:
-		Actor: wolfe3
-		Probability: 50
-		OwnerType: Killer
-		DeathType: WolfesteinMutate
 
 ^DefaultSoldier:
 	Inherits: ^DefaultInfantry
@@ -3655,7 +3624,6 @@
 	Inherits@bounty: ^GlobalBounty
 	Inherits@shape: ^1x1Shape
 	Inherits@selection: ^SelectableBuilding
-	Inherits@unstableeffect: ^UnstableEffect
 	Inherits@Shroudable: ^Shroudable
 	Inherits@Blindable: ^Blindable
 	Inherits@jammable: ^ArtilleryJammable
@@ -3951,11 +3919,6 @@
 		RevealGeneratedShroud: False
 	RevealsShroud@GAPGEN:
 		Range: 4c0
-	SpawnActorOnDeath@ZombieInfect:
-		Actor: zombie1.infect
-		Probability: 99
-		OwnerType: Killer
-		DeathType: ZombieInfection
 	ProductionCostMultiplier@AIDefense:
 		Multiplier: 90
 		Prerequisites: defensebot
@@ -7969,10 +7932,6 @@ CPQDEBUGDUMMY:
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
-	SpawnActorOnDeath@2100ResearchSteal:
-		Probability: 99
-		Actor: 2100artifact
-		DeathType: 2100ResearchSteal
 	ProvidesPrerequisite@buildingname:
 	GrantExternalConditionToOwner@Scaled:
 		Condition: ownsweap
@@ -8051,10 +8010,6 @@ CPQDEBUGDUMMY:
 		Types: SpyInfiltrate
 	Targetable@SpyInfiltrate:
 		TargetTypes: SpyInfiltrate
-	SpawnActorOnDeath@2100ResearchSteal:
-		Probability: 99
-		Actor: 2100artifact
-		DeathType: 2100ResearchSteal
 	Production@NORMAL:
 		Produces: Aircraft
 		RequiresCondition: !classicproductionqueues
@@ -8327,10 +8282,6 @@ CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	ProvidesPrerequisite@buildingname:
 		RequiresCondition: !(powerdown || infiltrated)
-	SpawnActorOnDeath@2100ResearchSteal:
-		Probability: 50
-		Actor: 2100artifact
-		DeathType: 2100ResearchSteal
 
 ^Superweapon:
 	Inherits@IDISABLE: ^DisableOnLowPowerOrPowerDown
@@ -8411,16 +8362,6 @@ CPQDEBUGDUMMY:
 	# 	BlinkPattern: On, Off, Off, Off
 	RejectsOrders@DRIVERKILL:
 		RequiresCondition: driver-dead
-	SpawnActorOnDeath@ZombieInfect:
-		Actor: zombie1.infect
-		Probability: 80
-		OwnerType: Killer
-		DeathType: ZombieInfection
-	SpawnActorOnDeath@ZombieInfect2:
-		Actor: zombie2.infect
-		Probability: 40
-		OwnerType: Killer
-		DeathType: ZombieInfection
 
 ^GenericSalvageBonus:
 	DamageMultiplier@scrap1:
