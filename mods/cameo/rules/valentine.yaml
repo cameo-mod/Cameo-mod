@@ -755,7 +755,6 @@ valentines_sc2kmarina:
 		Name: Valentines Marina
 	Buildable:
 		BuildPaletteOrder: 57
-		Prerequisites:
 		Queue: Building, RABuilding
 		Description: Produces, and\nrepairs boats
 	Building:
@@ -846,7 +845,6 @@ valentines_netflix_n_chill:
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
-		Prerequisites:
 		Description: Provides passive income
 		BuildDuration: 1000
 		BuildDurationModifier: 100
@@ -985,7 +983,6 @@ valentines_silo:
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
-		Prerequisites:
 		Description: Provides lots of storage
 		BuildDurationModifier: 100
 	Building:
@@ -1019,7 +1016,6 @@ VAL_PBOX:
 		Name: Sweet Hearts
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites:
 		Queue: Defence, RADefence
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1070,7 +1066,6 @@ VAL_AGUN:
 		Name: Plan B
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites:
 		Queue: Defence, RADefence
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -2323,7 +2318,6 @@ valentines_teletubby_po:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
 		Description: Baby gorilla, which because of their small and morbidly obese build, \nbecame perfect subjects for a top secret experiment \ndubbed, "teletubbies". Their stomachs were removed \nand replaced with a crude malfunctioning television set, \nwhich recieved its signals from a implanted attenna \non the top of its head.
@@ -2696,7 +2690,6 @@ valentines_swan:
 	Inherits@EXT: ^ExternalConditions
 	Buildable:
 		BuildPaletteOrder: 4
-		Prerequisites:
 		Queue: Naval, RANaval
 		Description: Swan filled with explosives.
 		BuildDuration: 1250

@@ -200,7 +200,6 @@ ra2_soviets_radar:
 	AirstrikePower@spyplane:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
-		Prerequisites:
 			1: !RA2Psicorps, ~!RA2DOOM
 		IconImage: yrspyp
 		Icons:
@@ -303,7 +302,6 @@ ra2_soviets_battlelab:
 		#UseDirectionalTarget: True
 		SquadSizes:
 			1: 3
-		Prerequisites:
 			1:
 		DirectionArrowAnimation: airstrikedirection
 

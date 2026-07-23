@@ -203,7 +203,6 @@ terran_missilesilo:
 		OrderName: NukePowerInfoOrder
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: ~techlevel.superweapons
 		Cursor: nuke
 		Icons:

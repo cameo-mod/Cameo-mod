@@ -864,7 +864,6 @@ JEEP.camea:
 	Inherits: td_gdi_humvee
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: 
 	RenderSprites:
 		Image: td_gdi_humvee
 
@@ -872,7 +871,6 @@ BIKE.camea:
 	Inherits: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: 
 	RenderSprites:
 		Image: td_nod_reconbike
 
@@ -880,7 +878,6 @@ BIKE.camea:
 	Inherits: ra1_allies_alliedlighttank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: 
 	RenderSprites:
 		Image: ra1_allies_alliedlighttank
 
@@ -888,7 +885,6 @@ MTNK.camea:
 	Inherits: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: 
 	RenderSprites:
 		Image: td_gdi_battletank
 
@@ -896,7 +892,6 @@ MTNK.camea:
 	Inherits: ra1_soviets_heavytank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_heavytank
 
@@ -911,7 +906,6 @@ V2RL.camea:
 FTNK.camea:
 	Inherits: td_nod_flametank
 	Buildable:
-		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_nod_flametank
@@ -997,7 +991,6 @@ RAHELI.camea:
 	Inherits: ra1_allies_longbow
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: 
 	RenderSprites:
 		Image: ra1_allies_longbow
 
@@ -1005,14 +998,12 @@ HIND.camea:
 	Inherits: ra1_soviets_hindattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_hindattackhelicopter
 
 ORCA.camea:
 	Inherits: td_gdi_orca
 	Buildable:
-		Prerequisites: 
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: td_gdi_orca
@@ -1021,7 +1012,6 @@ YAK.camea:
 	Inherits: ra1_soviets_yakscoutplane
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_yakscoutplane
 
@@ -1037,7 +1027,6 @@ TRAN.camea:
 	Inherits: TRAN
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
-		Prerequisites: 
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:

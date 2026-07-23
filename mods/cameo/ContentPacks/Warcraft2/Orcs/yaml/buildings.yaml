@@ -478,7 +478,6 @@ wc2_orcs_templeofthedamned:
 	IonCannonPower@DEATHANDDECAY:
 		OrderName: wc2_deathanddecay
 		PauseOnCondition: lowpower
-		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: deathanddecay

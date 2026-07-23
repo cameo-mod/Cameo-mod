@@ -158,14 +158,6 @@ ra2gayard:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-ra2brik:
-	Inherits: BRIK
-	RenderSprites:
-		Image: BRIK
-	Buildable:
-		Description: Defensive wall that blocks movement.
-	-MapEditorData:
-
 ra2_awall:
 	Inherits: BRIK
 	RenderSprites:

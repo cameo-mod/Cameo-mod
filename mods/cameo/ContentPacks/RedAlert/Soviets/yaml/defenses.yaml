@@ -18,7 +18,6 @@ ra1_soviets_missilesilo:
 		OrderName: NukePowerInfoOrder
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: ~techlevel.superweapons
 		Cursor: nuke
 		Icons:
@@ -83,7 +82,6 @@ ra1_soviets_ironcurtain:
 	GrantExternalConditionPower@IRONCURTAIN:
 		OrderName: IronCurtain
 		PauseOnCondition: disabled
-		Prerequisites:
 			1:
 		Icons:
 			1: invuln
