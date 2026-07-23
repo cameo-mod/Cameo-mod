@@ -518,7 +518,7 @@ wc2_orcs_dragonroost:
 	Voiced:
 		VoiceSet: wc2orcdragonroost
 
-wc2_orcs_guardtower_2:
+wc2_orcs_guardtower_plug:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Guard Tower
@@ -533,7 +533,7 @@ wc2_orcs_guardtower_2:
 	RenderSprites:
 		Image: wc2_orcs_guardtower
 
-wc2_orcs_cannontower_2:
+wc2_orcs_cannontower_plug:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Cannon Tower
@@ -562,7 +562,7 @@ wc2_orcs_orcgoldmine:
 	RenderSprites:
 		Image: wc2_orcs_orcgoldmine
 
-wc2_orcs_orcgoldmine_2:
+wc2_orcs_orcgoldmine_bot:
 	Inherits@WC2BUILDING: wc2_orcs_orcgoldmine
 	Inherits@gar: ^ClearableGarrison
 	Valued:

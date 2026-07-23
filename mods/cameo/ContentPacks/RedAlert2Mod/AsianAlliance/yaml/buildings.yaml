@@ -343,8 +343,8 @@ asianalliance_asianairforcecommand:
 		OrderName: AAClusterBomb
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: asianalliance_upgrade_unlockclusterbombs
-			2: asianalliance_upgrade_unlockchaosbombs
+			1: asianalliance_upgrade_clusterbombs
+			2: asianalliance_upgrade_chaosbombs
 		IconImage: tankmine.asian
 		Icons:
 			1: icon
@@ -382,20 +382,20 @@ asianalliance_asianairforcecommand:
 		OrderName: aaparatroopers
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: asianalliance_upgrade_unlockmassparadrop
-			2: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic
-			3: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockplasmatrooper
-			4: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlocksamurai
-			5: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlockplasmatrooper
-			6: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai
-			7: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlocksamurai
-			8: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai
-			9: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers
-			10: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers
-			11: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers
-			12: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers, asianalliance_promotion_unlockasdf
-			13: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers, asianalliance_promotion_unlockasdf
-			14: asianalliance_upgrade_unlockmassparadrop, asianalliance_promotion_unlockfanatic, asianalliance_promotion_unlockplasmatrooper, asianalliance_promotion_unlocksamurai, asianalliance_promotion_unlockveteranarchers, asianalliance_promotion_unlockasdf
+			1: asianalliance_upgrade_massparadrop
+			2: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic
+			3: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper
+			4: asianalliance_upgrade_massparadrop, asianalliance_promotion_samurai
+			5: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper
+			6: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai
+			7: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai
+			8: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai
+			9: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			10: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			11: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers
+			12: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
+			13: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
+			14: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic, asianalliance_promotion_plasmatrooper, asianalliance_promotion_samurai, asianalliance_promotion_veteranarchers, asianalliance_promotion_asdf
 		Icons:
 			1: paratroopers
 			2: paratroopers

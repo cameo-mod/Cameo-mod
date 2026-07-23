@@ -59,14 +59,14 @@ up_team_ngbunk2.latin:
 		Description: upgrade_uplatin_ngbunk2.description
 	PlayerDisplayUpgrade:
 
-latinsyndicate_upgrade_unlockempcannon:
+latinsyndicate_upgrade_empcannon:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Emp Cannon
 	Buildable:
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Latin EMP Radar.
-		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_upgrade_unlockempcannon
+		Prerequisites: ~latinsyndicate_latinempradar, !latinsyndicate_upgrade_empcannon
 	RenderSprites:
 		Image: steelconsortium_consortiumbattlelab
 	ProvidesPrerequisite:

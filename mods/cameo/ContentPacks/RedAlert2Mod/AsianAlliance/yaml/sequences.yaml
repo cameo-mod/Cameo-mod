@@ -750,16 +750,16 @@ chaomine.asian:
 		Filename: aa_chaomine.shp
 		ZOffset: -512
 	icon:
-		Filename: asianalliance_upgrade_unlockclusterbombs_aa_chaomine_icon.shp
+		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
 tankmine.asian:
 	idle:
-		Filename: asianalliance_upgrade_unlockclusterbombs_aa_tankmine.shp
+		Filename: asianalliance_upgrade_clusterbombs_aa_tankmine.shp
 		ZOffset: -512
 	icon:
-		Filename: asianalliance_upgrade_unlockclusterbombs_icon.shp
+		Filename: asianalliance_upgrade_clusterbombs_icon.shp
 	icon2:
-		Filename: asianalliance_upgrade_unlockclusterbombs_aa_chaomine_icon.shp
+		Filename: asianalliance_upgrade_clusterbombs_aa_chaomine_icon.shp
 
 cgyard.asian:
 	Defaults:
@@ -880,7 +880,7 @@ asianalliance_asianmilitia:
 asianalliance_fanatic:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_promotion_unlockfanatic_aa_japrif.shp
+		Filename: asianalliance_promotion_fanatic_aa_japrif.shp
 		Scale: 0.75
 		Offset: 0,-16
 	stand:
@@ -942,14 +942,14 @@ asianalliance_fanatic:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: asianalliance_promotion_unlockfanatic_icon.shp
+		Filename: asianalliance_promotion_fanatic_icon.shp
 		Scale: 1
 		Offset: 0,0
 
 asianalliance_japanesesamurai:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_promotion_unlocksamurai_aa_samurai.shp
+		Filename: asianalliance_promotion_samurai_aa_samurai.shp
 		Scale: 0.9
 	stand:
 		ShadowStart: 429
@@ -1009,13 +1009,13 @@ asianalliance_japanesesamurai:
 		InterpolatedFacings: 32
 		Tick: 30
 	icon:
-		Filename: asianalliance_promotion_unlocksamurai_icon.shp
+		Filename: asianalliance_promotion_samurai_icon.shp
 		Scale: 1
 
 asianalliance_veteranarcher:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_promotion_unlockveteranarchers_aa_archer.shp
+		Filename: asianalliance_promotion_veteranarchers_aa_archer.shp
 		Scale: 0.9
 	stand:
 		ShadowStart: 549
@@ -1075,7 +1075,7 @@ asianalliance_veteranarcher:
 		InterpolatedFacings: 32
 		Tick: 30
 	icon:
-		Filename: asianalliance_promotion_unlockveteranarchers_icon.shp
+		Filename: asianalliance_promotion_veteranarchers_icon.shp
 		Scale: 1
 
 asianalliance_shinobi:
@@ -1147,7 +1147,7 @@ asianalliance_shinobi:
 asianalliance_asdf:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_promotion_unlockasdf_aa_asdf.shp
+		Filename: asianalliance_promotion_asdf_aa_asdf.shp
 	stand:
 		ShadowStart: 188
 	run:
@@ -1183,7 +1183,7 @@ asianalliance_asdf:
 		Start: 181
 		ShadowStart: 368
 	icon:
-		Filename: asianalliance_promotion_unlockasdf_icon.png
+		Filename: asianalliance_promotion_asdf_icon.png
 
 asianalliance_asiancommando:
 	Inherits: ^RA2ArmedInfantry
@@ -1216,7 +1216,7 @@ asianalliance_asiantankkiller:
 asianalliance_plasmatrooper:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asianalliance_promotion_unlockplasmatrooper_aa_plast.shp
+		Filename: asianalliance_promotion_plasmatrooper_aa_plast.shp
 	run:
 		Tick: 120
 	prone-run:
@@ -1226,7 +1226,7 @@ asianalliance_plasmatrooper:
 	die2:
 		Start: 86
 	icon:
-		Filename: asianalliance_promotion_unlockplasmatrooper_icon.shp
+		Filename: asianalliance_promotion_plasmatrooper_icon.shp
 	shoot:
 		Start: 116
 		Length: 6
@@ -1355,7 +1355,7 @@ asianalliance_lynxtank:
 asianalliance_howitzer:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: asianalliance_promotion_unlockhowitzer_aa_hotwi.shp
+		Filename: asianalliance_promotion_howitzer_aa_hotwi.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -1367,7 +1367,7 @@ asianalliance_howitzer:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: asianalliance_promotion_unlockhowitzer_icon.shp
+		Filename: asianalliance_promotion_howitzer_icon.shp
 
 panth.asian:
 	Inherits: ^RA2CannonMuzzle
@@ -1446,7 +1446,7 @@ asianalliance_pulverizer:
 ptnk.asian:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: asianalliance_promotion_unlockplasmatank_aa_ptnk.shp
+		Filename: asianalliance_promotion_plasmatank_aa_ptnk.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -1458,11 +1458,11 @@ ptnk.asian:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: asianalliance_promotion_unlockplasmatank_icon.shp
+		Filename: asianalliance_promotion_plasmatank_icon.shp
 
 asianalliance_pulverizermecha:
 	Defaults:
-		Filename: asianalliance_promotion_unlockpulverizermecha_aa_mecha.shp
+		Filename: asianalliance_promotion_pulverizermecha_aa_mecha.shp
 	idle1:
 		Start: 96
 		Length: 11
@@ -1488,7 +1488,7 @@ asianalliance_pulverizermecha:
 		Length: 9
 		Tick: 120
 	icon:
-		Filename: asianalliance_promotion_unlockpulverizermecha_icon.shp
+		Filename: asianalliance_promotion_pulverizermecha_icon.shp
 		Offset: 0,0
 
 asianalliance_phoenix:
@@ -1542,12 +1542,12 @@ asianalliance_railguntank:
 asianalliance_heavyrailguntank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: asianalliance_promotion_unlockheavyrailguntank_aa_railt2.shp
+		Filename: asianalliance_promotion_heavyrailguntank_aa_railt2.shp
 	idle:
 		Facings: 64
 		Scale: 0.75
 	icon:
-		Filename: asianalliance_promotion_unlockheavyrailguntank_icon.shp
+		Filename: asianalliance_promotion_heavyrailguntank_icon.shp
 
 asianalliance_dragonfly:
 	Inherits: ^RA2CannonMuzzle
@@ -1562,12 +1562,12 @@ asianalliance_dragonfly:
 asianalliance_asianflametank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: asianalliance_promotion_unlockflametank_aa_ftnk.shp
+		Filename: asianalliance_promotion_flametank_aa_ftnk.shp
 	idle:
 		Facings: 64
 		Scale: 0.9
 	icon:
-		Filename: asianalliance_promotion_unlockflametank_icon.shp
+		Filename: asianalliance_promotion_flametank_icon.shp
 
 asianalliance_alligator:
 	Inherits: ^RA2BasicInfantry
@@ -1773,7 +1773,7 @@ lsub.asian:
 
 asianalliance_type89mlrs:
 	Defaults:
-		Filename: asianalliance_promotion_unlockmlrs_aa_mlrs.shp
+		Filename: asianalliance_promotion_mlrs_aa_mlrs.shp
 	idle:
 		Facings: 64
 		Scale: 0.75
@@ -1793,7 +1793,7 @@ asianalliance_type89mlrs:
 		Filename: shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: asianalliance_promotion_unlockmlrs_icon.shp
+		Filename: asianalliance_promotion_mlrs_icon.shp
 
 asianalliance_doctrine_modernizedinfantryequipment:
 	icon:

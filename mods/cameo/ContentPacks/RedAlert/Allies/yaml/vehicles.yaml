@@ -12,7 +12,7 @@ ra1_allies_alliedlighttank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocksheridan
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_sheridan
 		Description: actor_ltnk.description
 	Valued:
 		Cost: 500
@@ -70,7 +70,7 @@ ra1_allies_alliedmediumtank:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_unlocktigerheavytank
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~!ra1_allies_promotion_tigerheavytank
 		BuildPaletteOrder: 110
 		Description: template_mbt.description
 	Valued:
@@ -417,7 +417,7 @@ ra1_allies_sheridanassaulttank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocksheridan
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_sheridan
 		Queue: Vehicle, RAVehicle
 		Description: actor_sheridan.description
 	Mobile:
@@ -508,7 +508,7 @@ ra1_allies_reconranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlockreconranger
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_reconranger
 		Description: actor_jeep.description2
 	Valued:
 		Cost: 500
@@ -600,7 +600,7 @@ ra1_allies_alliedtigerheavytank:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocktigerheavytank
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_tigerheavytank
 		BuildPaletteOrder: 110
 		Description: actor_tiger.description
 	Tooltip:
@@ -661,7 +661,7 @@ ra1_allies_alliedtankdestroyer:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor_tnkd.description
-		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_unlocktankdestroyer, ra1_allies_alliedradardome
+		Prerequisites: ~ra1_allies_alliedwarfactory, ~ra1_allies_promotion_tankdestroyer, ra1_allies_alliedradardome
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -719,7 +719,7 @@ ra1_allies_chronotank:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockchronotank
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_chronotank
 		Description: actor_ctnk.description
 	Valued:
 		Cost: 2000
@@ -800,7 +800,7 @@ ra1_allies_phasetransport:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockphasetransport
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_phasetransport
 		Description: actor_sapc.description
 	Valued:
 		Cost: 1800
@@ -873,7 +873,7 @@ ra1_allies_mobilegapgenerator:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mgg.description
 	Tooltip:
 		Name: Mobile Gap Generator
@@ -965,7 +965,7 @@ ra1_allies_mobileradarjammer:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedwarfactory, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_mrj.description
 	Health:
 		HP: 25000

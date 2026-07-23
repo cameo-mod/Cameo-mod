@@ -669,7 +669,7 @@ futuretech_scoutdroid:
 
 futuretech_cannondroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockcannondroid_robot_cannon.shp
+		Filename: futuretech_promotion_cannondroid_robot_cannon.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -696,12 +696,12 @@ futuretech_cannondroid:
 		BlendMode: Additive
 		Offset: 0,0
 	icon:
-		Filename: futuretech_promotion_unlockcannondroid_icon.png
+		Filename: futuretech_promotion_cannondroid_icon.png
 		Offset: 0,0
 
 futuretech_missiledroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockmissiledroid_robot_missiles.shp
+		Filename: futuretech_promotion_missiledroid_robot_missiles.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -728,12 +728,12 @@ futuretech_missiledroid:
 		BlendMode: Additive
 		Offset: 0,0
 	icon:
-		Filename: futuretech_promotion_unlockmissiledroid_icon.png
+		Filename: futuretech_promotion_missiledroid_icon.png
 		Offset: 0,0
 
 futuretech_shotgundroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockshotgundroid_robot_shotgun.shp
+		Filename: futuretech_promotion_shotgundroid_robot_shotgun.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -760,12 +760,12 @@ futuretech_shotgundroid:
 		BlendMode: Additive
 		Offset: 0,0
 	icon:
-		Filename: futuretech_promotion_unlockshotgundroid_icon.png
+		Filename: futuretech_promotion_shotgundroid_icon.png
 		Offset: 0,0
 
 futuretech_cryolegionnaire:
 	Defaults:
-		Filename: futuretech_promotion_unlockcryolegionnaire_crleg.shp
+		Filename: futuretech_promotion_cryolegionnaire_crleg.shp
 		ShadowStart: -1
 		HasShadow: false
 	stand:
@@ -813,27 +813,27 @@ futuretech_cryolegionnaire:
 		Filename: shared_sprites|invisibleitem.shp
 		ShadowStart: -1
 	die4:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_nukedie.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_nukedie.shp
 		ShadowStart: -1
 		Length: *
 		Tick: 50
 	die5:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_yuridie.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_yuridie.shp
 		ShadowStart: -1
 		Length: *
 		Tick: 80
 	die6:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_electro.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_electro.shp
 		ShadowStart: -1
 		Length: *
 		Tick: 80
 	die7:
-		Filename: futuretech_promotion_unlockcryolegionnaire_yr_virusd.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
 		ShadowStart: -1
 		Length: *
 		Tick: 80
 	die8:
-		Filename: futuretech_promotion_unlockcryolegionnaire_yr_brutdie.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_brutdie.shp
 		ShadowStart: -1
 		Length: *
 		Tick: 80
@@ -858,7 +858,7 @@ futuretech_cryolegionnaire:
 		Length: 8
 		Facings: 8
 	icon:
-		Filename: futuretech_promotion_unlockcryolegionnaire_icon.png
+		Filename: futuretech_promotion_cryolegionnaire_icon.png
 		Offset: 0,0
 		ShadowStart: -1
 	muzzle:
@@ -926,14 +926,14 @@ landcarr_drone.futu:
 futuretech_oriontank:
 	Inherits: ^RA2CannonMuzzle
 	icon:
-		Filename: futuretech_promotion_unlockoriontank_icon.png
+		Filename: futuretech_promotion_oriontank_icon.png
 
 futuretech_salamanderifv:
 	Defaults:
 		Filename: ra2_allies_ifv_repair_ra2ifv.shp
 		Scale: 0.7
 	idle:
-		Filename: futuretech_promotion_unlocksalamanderifv.shp
+		Filename: futuretech_promotion_salamanderifv.shp
 		Facings: 64
 		Scale: 0.9
 	turret-missile:
@@ -1030,7 +1030,7 @@ futuretech_salamanderifv:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: futuretech_promotion_unlocksalamanderifv_icon.png
+		Filename: futuretech_promotion_salamanderifv_icon.png
 
 futuretech_guardiantank:
 	Inherits: ^RA2CannonMuzzle
@@ -1058,7 +1058,7 @@ futuretech_riptideacv:
 futuretech_cryocopter:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: futuretech_promotion_unlockcryocopter.png
+		Filename: futuretech_promotion_cryocopter.png
 	idle:
 		Facings: 32
 		Length: 4
@@ -1071,7 +1071,7 @@ futuretech_cryocopter:
 		Tick: 160
 		Scale: 0.9
 	icon:
-		Filename: futuretech_promotion_unlockcryocopter_icon.png
+		Filename: futuretech_promotion_cryocopter_icon.png
 
 futuretech_prospector:
 	Defaults:
@@ -1097,7 +1097,7 @@ futuretech_prospector:
 
 futuretech_prospectormk2:
 	Defaults:
-		Filename: futuretech_promotion_unlockprospectormk2_harv2.png
+		Filename: futuretech_promotion_prospectormk2_harv2.png
 		Scale: 0.9
 	idle:
 		Scale: 1
@@ -1115,7 +1115,7 @@ futuretech_prospectormk2:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: futuretech_promotion_unlockprospectormk2_icon.png
+		Filename: futuretech_promotion_prospectormk2_icon.png
 
 futuretech_phalanxwip:
 	Inherits: ^RA2CannonMuzzle
@@ -1162,9 +1162,9 @@ futuretech_energizer:
 futuretech_futuretank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: futuretech_promotion_unlockfuturetank.png
+		Filename: futuretech_promotion_futuretank.png
 	idle:
-		Filename: futuretech_promotion_unlockfuturetank.png
+		Filename: futuretech_promotion_futuretank.png
 		Scale: 0.5
 		Facings: 64
 		Offset: 0,5
@@ -1174,7 +1174,7 @@ futuretech_futuretank:
 		Facings: 64
 		Offset: 0,5
 	icon:
-		Filename: futuretech_promotion_unlockfuturetank_icon.png
+		Filename: futuretech_promotion_futuretank_icon.png
 
 futuretech_spyfutu:
 	Inherits: ^RA2Infantry
@@ -1192,7 +1192,7 @@ futuretech_spyfutu:
 futuretech_blackwidow:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: futuretech_promotion_unlockblackwidow_ra2_tany_black.shp
+		Filename: futuretech_promotion_blackwidow_ra2_tany_black.shp
 	run:
 		Tick: 120
 	swim-stand:
@@ -1242,8 +1242,8 @@ futuretech_blackwidow:
 		Filename: ra2_allies_tanyaii_tanyamodes.shp
 		Start: 1
 	icon:
-		Filename: futuretech_promotion_unlockblackwidow_icon.png
-	iconchrono: futuretech_promotion_unlockblackwidow_icon.png
+		Filename: futuretech_promotion_blackwidow_icon.png
+	iconchrono: futuretech_promotion_blackwidow_icon.png
 
 futuretech_twister:
 	idle:
@@ -1261,11 +1261,11 @@ futuretech_twister:
 
 futuretech_harbingergunship:
 	Defaults:
-		Filename: futuretech_promotion_unlockharbingergunship.png
+		Filename: futuretech_promotion_harbingergunship.png
 	idle:
 		Facings: 64
 	icon:
-		Filename: futuretech_promotion_unlockharbingergunship_icon.png
+		Filename: futuretech_promotion_harbingergunship_icon.png
 
 futuretech_doctrine_equalizerx1:
 	icon:

@@ -115,7 +115,7 @@ protoss_manifold:
 	Power:
 		Amount: -30
 	Buildable:
-		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockmanifold
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_manifold
 		Queue: Vehicle, RAVehicle
 		Description: actor_scmanifold.description
 	Mobile:
@@ -191,7 +191,7 @@ protoss_analogue:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockanalogue
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_analogue
 		Queue: Vehicle, RAVehicle
 		Description: actor_scanalogue.description
 	Mobile:
@@ -273,7 +273,7 @@ protoss_idol:
 	Power:
 		Amount: -140
 	Buildable:
-		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockidol
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_idol
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: actor_scidol.description
@@ -559,7 +559,7 @@ protoss_atreus:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockatreus
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_atreus
 		Queue: Infantry, RAInfantry
 		Description: actor_scatreus.description
 	Mobile:
@@ -623,7 +623,7 @@ protoss_positron:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockpositron
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_positron
 		Queue: Vehicle, RAVehicle
 		Description: actor_scpositron.description
 	Mobile:

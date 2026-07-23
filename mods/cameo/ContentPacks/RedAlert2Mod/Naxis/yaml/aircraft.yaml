@@ -119,7 +119,7 @@ naxis_bf109:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~naxis_airfield, naxis_radar, ~!naxis_upgrade_unlockme262
+		Prerequisites: ~naxis_airfield, naxis_radar, ~!naxis_upgrade_me262
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -203,7 +203,7 @@ naxis_me262:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~naxis_airfield, ~naxis_upgrade_unlockme262
+		Prerequisites: ~naxis_airfield, ~naxis_upgrade_me262
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:

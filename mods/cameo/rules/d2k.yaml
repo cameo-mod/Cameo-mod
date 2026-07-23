@@ -3978,7 +3978,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstorminfantry
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_storminfantry
 # 	Health:
 # 		HP: 36000
 # 	ChangesHealth@SelfHealing:
@@ -4028,7 +4028,7 @@
 # 		BuildPaletteOrder: 10
 # 		Queue: Infantry, RAInfantry
 # 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockchemicaltrooper
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_chemicaltrooper
 # 		IconPalette: player
 # 	Health:
 # 		HP: 30000
@@ -4078,7 +4078,7 @@
 # 		Cost: 600
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockmortartroopers
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_mortartroopers
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_antitank_antiair_infantry.description
 # 	Health:
@@ -4300,7 +4300,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ordos_constructionyard, ~ordos_barracks, ordos_promotion_unlockcontaminator
+# 		Prerequisites: ~ordos_constructionyard, ~ordos_barracks, ordos_promotion_contaminator
 # 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 # 	Health:
 # 		HP: 75000
@@ -4834,7 +4834,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites:  ~ordos_constructionyard, ordos_promotion_unlockleecher
+# 		Prerequisites:  ~ordos_constructionyard, ordos_promotion_leecher
 # 		Description: Stealth creature that can attack infantry and infect vehicles.
 # 		IconPalette: player
 # 	Selectable:
@@ -6065,7 +6065,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_unlocklaboratorycrawler
+# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_laboratorycrawler
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	Valued:
@@ -6128,7 +6128,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklaboratorycrawler, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_laboratorycrawler, ordos_ixresearchcenter
 # 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 # 		IconPalette: windows256
 # 	Valued:
@@ -6470,7 +6470,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockbanshees, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_banshees, ordos_ixresearchcenter
 # 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 # 	Health:
 # 		HP: 37500
@@ -6554,7 +6554,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockwraith, ordos_palace
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_wraith, ordos_palace
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_nax_dieglocke.description
@@ -7934,7 +7934,7 @@
 # 		Cost: 1500
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_unlockpython
+# 		Prerequisites: ~ordos_outpost, ~!ordos_promotion_python
 # 		BuildPaletteOrder: 50
 # 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -8041,7 +8041,7 @@
 # 		Cost: 2500
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockpython, ordos_outpost
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_python, ordos_outpost
 # 		BuildPaletteOrder: 50
 # 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -8138,7 +8138,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, ixian_outpost
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixsiegetank, ixian_outpost
 # 		Description: actor_siege_tank.description
 # 		IconPalette: ra2
 # 	Health:
@@ -8562,7 +8562,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklasertank, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_lasertank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	Valued:
@@ -8627,7 +8627,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdeviatortank, ordos_ixresearchcenter
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_deviatortank, ordos_ixresearchcenter
 # 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -8964,7 +8964,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ordos_lightfactory, ~!ordos_promotion_unlockstealthraider
+# 		Prerequisites: ~ordos_lightfactory, ~!ordos_promotion_stealthraider
 # 		Description: Improved Scout\nCan carry a passenger\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 # 		IconPalette: d2kunit
 # 	UpdatesPlayerStatistics:
@@ -9018,7 +9018,7 @@
 # 	Valued:
 # 		Cost: 1300
 # 	Buildable:
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockstealthraider
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_stealthraider
 # 		BuildPaletteOrder: 30
 # 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 # 		IconPalette: d2kunit
@@ -9060,7 +9060,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdustdrone
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_dustdrone
 # 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	UpdatesPlayerStatistics:
@@ -9129,7 +9129,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_advancedheavyfactory, ~!ixian_promotion_unlockheavyixraider
+# 		Prerequisites: ~ixian_advancedheavyfactory, ~!ixian_promotion_heavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Ix Raider
@@ -9221,7 +9221,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstormraider
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_stormraider
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -10650,7 +10650,7 @@
 # 		Prerequisites: ~ixian_outpost, !ixian_upgrade_personalshield
 # 		IconPalette: ra2
 # 	RenderSprites:
-# 		Image: ixian_personal_shield_icon
+# 		Image: ixian_personalshield_icon
 
 # ixian_upgrade_generalpurposearmor:
 # 	Inherits: ^researched_upgrade.template
@@ -12474,7 +12474,7 @@
 ##############################################
 #                Upgrade Ix
 ##############################################
-# ixian_promotion_unlockrashidan:
+# ixian_promotion_rashidan:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Rashidan
@@ -12483,12 +12483,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Rashidans.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockrashidan, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_rashidan, rank1
 # 	RenderSprites:
 # 		Image: heavy_inf
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockstorminfantry:
+# ixian_promotion_storminfantry:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Infantry
@@ -12497,12 +12497,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Storm Infantry.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstorminfantry, ixian_promotion_unlockrashidan, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_storminfantry, ixian_promotion_rashidan, rank1
 # 	RenderSprites:
 # 		Image: ixian_storminfantry
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockstormraider:
+# ixian_promotion_stormraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Raider
@@ -12511,12 +12511,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Storm Raiders.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormraider, ixian_promotion_unlockstorminfantry, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_stormraider, ixian_promotion_storminfantry, rank1
 # 	RenderSprites:
 # 		Image: ixian_stormraider
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockstormlasher:
+# ixian_promotion_stormlasher:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Lasher
@@ -12525,14 +12525,14 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Storm Lashers.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_stormlasher, ixian_promotion_stormraider, rank1
 # 	RenderSprites:
 # 		Image: ixian_stormlasher
 # 	ProvidesPrerequisite:
 
 	### Military tree
 
-# ixian_promotion_unlockheavyixraider:
+# ixian_promotion_heavyixraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Heavy Ix Raider
@@ -12541,12 +12541,12 @@
 # 		Queue: Promotions
 		#IconPalette: d2kunit
 # 		Description: Enables construction of Ix Raiders.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockheavyixraider, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_heavyixraider, rank1
 # 	RenderSprites:
 # 		Image: ixian_shockraider
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockixsiegetank:
+# ixian_promotion_ixsiegetank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Siege Tank
@@ -12555,12 +12555,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ix Siege Tanks.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider, !ixian_promotion_unlockixsiegetank, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_heavyixraider, !ixian_promotion_ixsiegetank, rank1
 # 	RenderSprites:
 # 		Image: ix_siege_tank
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockneocymek:
+# ixian_promotion_neocymek:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Neo Cymek
@@ -12569,12 +12569,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Neo Cymeks.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, !ixian_promotion_unlockneocymek, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixsiegetank, !ixian_promotion_neocymek, rank1
 # 	RenderSprites:
 # 		Image: ixian_neocymek
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockixprojector:
+# ixian_promotion_ixprojector:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Projector
@@ -12583,14 +12583,14 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables construction of the Ix Projector.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, !ixian_promotion_unlockixprojector, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_neocymek, !ixian_promotion_ixprojector, rank1
 # 	RenderSprites:
 # 		Image: d2k_projector
 # 	ProvidesPrerequisite:
 
 	### Support tree
 
-# ixian_promotion_unlockixrailgundrone:
+# ixian_promotion_ixrailgundrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Railgun Drone
@@ -12598,12 +12598,12 @@
 # 		BuildPaletteOrder: 111
 # 		Queue: Promotions
 # 		Description: Enables construction of Ix Railgun Drones.
-# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockixrailgundrone, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_ixrailgundrone, rank1
 # 	RenderSprites:
 # 		Image: ixian_railgundrone
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockixianempbomber:
+# ixian_promotion_ixianempbomber:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ixian EMP Bomber
@@ -12612,12 +12612,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ixian EMP Bombers.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, !ixian_promotion_unlockixianempbomber, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixrailgundrone, !ixian_promotion_ixianempbomber, rank1
 # 	RenderSprites:
 # 		Image: ixian_empbomber
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockixresonancedrone:
+# ixian_promotion_ixresonancedrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Resonance Drone
@@ -12626,12 +12626,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of  Ix Resonance Drones.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, !ixian_promotion_unlockixresonancedrone, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixianempbomber, !ixian_promotion_ixresonancedrone, rank1
 # 	RenderSprites:
 # 		Image: ixian_resonancedrone
 # 	ProvidesPrerequisite:
 
-# ixian_promotion_unlockfarasha:
+# ixian_promotion_farasha:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Farasha
@@ -12640,7 +12640,7 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of the Farasha.
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, !ixian_promotion_unlockfarasha, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixresonancedrone, !ixian_promotion_farasha, rank1
 # 	RenderSprites:
 # 		Image: ixian_farasha
 # 	ProvidesPrerequisite:
@@ -12655,7 +12655,7 @@
 ##############################################
 #                Upgrade Ordos
 ##############################################
-# ordos_promotion_unlockchemicaltrooper:
+# ordos_promotion_chemicaltrooper:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Chemical Trooper
@@ -12664,12 +12664,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Allows training of Chemical Infantry.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockchemicaltrooper, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_chemicaltrooper, rank1
 # 	RenderSprites:
 # 		Image: chemtrooper
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockcontaminator:
+# ordos_promotion_contaminator:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Contaminator
@@ -12678,12 +12678,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Allows training of Contaminators.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockcontaminator, ordos_promotion_unlockchemicaltrooper, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_contaminator, ordos_promotion_chemicaltrooper, rank1
 # 	RenderSprites:
 # 		Image: ordos_contaminator
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockleecher:
+# ordos_promotion_leecher:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Leecher
@@ -12692,12 +12692,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Leechers.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockleecher, ordos_promotion_unlockcontaminator, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_leecher, ordos_promotion_contaminator, rank1
 # 	RenderSprites:
 # 		Image: ordos_leech
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlocklaboratorycrawler:
+# ordos_promotion_laboratorycrawler:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Laboratory Crawler
@@ -12706,12 +12706,12 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Laboratory Crawlers.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlocklaboratorycrawler, ordos_promotion_unlockleecher, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_laboratorycrawler, ordos_promotion_leecher, rank1
 # 	RenderSprites:
 # 		Image: ordos_laboratorycrawler
 # 	ProvidesPrerequisite:
 #
-# ordos_promotion_unlockdustdrone:
+# ordos_promotion_dustdrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Dust Drone
@@ -12720,12 +12720,12 @@
 # 		Queue: Promotions
 		#IconPalette: d2kunit
 # 		Description: Enables construction of Dust Drones.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockdustdrone, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_dustdrone, rank1
 # 	RenderSprites:
 # 		Image: ordos_dustdrone
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockstealthraider:
+# ordos_promotion_stealthraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Stealth Raider
@@ -12734,12 +12734,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Stealth Raider.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdustdrone, !ordos_promotion_unlockstealthraider, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_dustdrone, !ordos_promotion_stealthraider, rank1
 # 	RenderSprites:
 # 		Image: ordos_stealthraider
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlocklasertank:
+# ordos_promotion_lasertank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Laser Tank
@@ -12748,12 +12748,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Laser Tanks.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockstealthraider, !ordos_promotion_unlocklasertank, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_stealthraider, !ordos_promotion_lasertank, rank1
 # 	RenderSprites:
 # 		Image: ordos_lasertank
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockpython:
+# ordos_promotion_python:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Python
@@ -12761,13 +12761,13 @@
 # 		BuildPaletteOrder: 119
 # 		Queue: Promotions
 # 		Description: Enables construction of the Python.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlocklasertank, !ordos_promotion_unlockpython, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_lasertank, !ordos_promotion_python, rank1
 # 	RenderSprites:
 # 		Image: ordos_pythontank
 # 	ProvidesPrerequisite:
 
 #
-# ordos_promotion_unlockmortartroopers:
+# ordos_promotion_mortartroopers:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Mortar Troopers
@@ -12776,12 +12776,12 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables training of Mortar Troopers.
-# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_unlockmortartroopers, rank1
+# 		Prerequisites: ~ordos_constructionyard, !ordos_promotion_mortartroopers, rank1
 # 	RenderSprites:
 # 		Image: ordos_mortartrooper
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockdeviatortank:
+# ordos_promotion_deviatortank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Deviator Tank
@@ -12790,12 +12790,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Deviator Tanks.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockmortartroopers, !ordos_promotion_unlockdeviatortank, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_mortartroopers, !ordos_promotion_deviatortank, rank1
 # 	RenderSprites:
 # 		Image: ordos_deviatortank
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockbanshees:
+# ordos_promotion_banshees:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Banshees
@@ -12804,12 +12804,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Banshees.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockdeviatortank, !ordos_promotion_unlockbanshees, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_deviatortank, !ordos_promotion_banshees, rank1
 # 	RenderSprites:
 # 		Image: ordos_banshee
 # 	ProvidesPrerequisite:
 
-# ordos_promotion_unlockwraith:
+# ordos_promotion_wraith:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Wraith
@@ -12818,7 +12818,7 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables construction of the Wraith.
-# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_unlockbanshees, !ordos_promotion_unlockwraith, rank1
+# 		Prerequisites: ~ordos_constructionyard, ordos_promotion_banshees, !ordos_promotion_wraith, rank1
 # 	RenderSprites:
 # 		Image: ordos_wraith
 # 	ProvidesPrerequisite:
@@ -12846,7 +12846,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_scout_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockrashidan
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_rashidan
 # 	Mobile:
 # 		Speed: 50
 # 	Health:
@@ -12909,7 +12909,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstorminfantry, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_storminfantry, ixian_ixresearchcenter
 # 	Mobile:
 # 		Speed: 44
 # 	Health:
@@ -12956,7 +12956,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstormraider, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_stormraider, ixian_ixresearchcenter
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -13026,7 +13026,7 @@
 # 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_stormlasher, ixian_ixresearchcenter
 # 		BuildPaletteOrder: 750
 # 		Description: actor_storm_lasher.description
 # 		IconPalette: player
@@ -13118,7 +13118,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_heavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Heavy Ix Raider
@@ -13297,7 +13297,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_neocymek, ixian_ixresearchcenter
 # 		Description: Colossal Ixian Mech.
 # 	Mobile:
 # 		Speed: 45
@@ -13392,7 +13392,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixprojector, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixprojector, ixian_ixresearchcenter
 # 		Description: actor_ixprojector.description
 # 		IconPalette: windows256
 # 	Health:
@@ -13700,7 +13700,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, ixian_hightechfactory
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixrailgundrone, ixian_hightechfactory
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13916,7 +13916,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, ixian_launchpad, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixianempbomber, ixian_launchpad, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13993,7 +13993,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_ixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -14098,7 +14098,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockfarasha, ixian_hightechfactory, ixian_ixresearchcenter
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_farasha, ixian_hightechfactory, ixian_ixresearchcenter
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_farasha.description

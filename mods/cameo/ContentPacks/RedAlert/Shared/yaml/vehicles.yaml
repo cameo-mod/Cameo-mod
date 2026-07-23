@@ -18,7 +18,7 @@ ra1_allies_alliedapc:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra1_allies_alliedbarracks, ~!ra1_allies_promotion_unlockphasetransport
+		Prerequisites: ~ra1_allies_alliedbarracks, ~!ra1_allies_promotion_phasetransport
 		Description: actor_apc.description
 	Mobile:
 		Speed: 105

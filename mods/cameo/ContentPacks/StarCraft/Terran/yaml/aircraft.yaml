@@ -21,7 +21,7 @@ terran_wraith:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, ~!terran_promotion_unlocksundog
+		Prerequisites: ~terran_starport, ~!terran_promotion_sundog
 		Queue: Aircraft, RAAircraft
 		Description: actor_scwraith.description
 	Aircraft:
@@ -107,7 +107,7 @@ terran_sundog:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, ~terran_promotion_unlocksundog
+		Prerequisites: ~terran_starport, ~terran_promotion_sundog
 		Queue: Aircraft, RAAircraft
 		Description: actor_scsundog.description
 	Aircraft:
@@ -190,7 +190,7 @@ terran_valkyrie:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, terran_armory, ~!terran_promotion_unlockwyvern
+		Prerequisites: ~terran_starport, terran_armory, ~!terran_promotion_wyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor_scvalkyrie.description
 	Aircraft:
@@ -252,7 +252,7 @@ terran_wyvern:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, terran_armory, ~terran_promotion_unlockwyvern
+		Prerequisites: ~terran_starport, terran_armory, ~terran_promotion_wyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor_scwyvern.description
 	Aircraft:
@@ -313,7 +313,7 @@ terran_raven:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~terran_starport, ~terran_promotion_unlockraven
+		Prerequisites: ~terran_starport, ~terran_promotion_raven
 		Queue: Aircraft, RAAircraft
 		Description: actor_scraven.description
 	Aircraft:
@@ -393,7 +393,7 @@ terran_dropship:
 		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_starport, ~!terran_promotion_unlockspectreandmedivac
+		Prerequisites: ~terran_starport, ~!terran_promotion_spectreandmedivac
 		Queue: Aircraft, RAAircraft
 		Description: actor_scdropship.description
 	Aircraft:
@@ -465,7 +465,7 @@ terran_pythean:
 		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_starport, ~terran_promotion_unlockpythean
+		Prerequisites: ~terran_starport, ~terran_promotion_pythean
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		Description: actor_scpythean.description
@@ -553,7 +553,7 @@ terran_medivac:
 		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_starport, ~terran_promotion_unlockspectreandmedivac
+		Prerequisites: ~terran_starport, ~terran_promotion_spectreandmedivac
 		Queue: Aircraft, RAAircraft
 		Description: actor_scmedivac.description
 	Aircraft:
@@ -761,7 +761,7 @@ terran_phobos:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 40
-		Prerequisites: ~terran_starport, terran_sciencefacility, ~terran_promotion_unlockphobos
+		Prerequisites: ~terran_starport, terran_sciencefacility, ~terran_promotion_phobos
 		Queue: Aircraft, RAAircraft
 		Description: actor_scphobos.description
 	Aircraft:

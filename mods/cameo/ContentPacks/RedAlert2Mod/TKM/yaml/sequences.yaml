@@ -661,7 +661,7 @@ tkm_rocketeer:
 
 tkm_juggernaut:
 	Defaults:
-		Filename: tkm_promotion_unlockjuggernaut_tkmjug.shp
+		Filename: tkm_promotion_juggernaut_tkmjug.shp
 		Scale: 0.9
 	stand:
 		Facings: 8
@@ -735,7 +735,7 @@ tkm_juggernaut:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: tkm_promotion_unlockjuggernaut_icon.png
+		Filename: tkm_promotion_juggernaut_icon.png
 
 tkm_thermonaut:
 	Inherits: tkm_juggernaut
@@ -777,7 +777,7 @@ tkm_thermonaut:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: td_nod_promotion_unlockblackhandflamer_icon.shp
+		Filename: td_nod_promotion_blackhandflamer_icon.shp
 
 tkm_engineer:
 	Inherits: tkm_rifleman
@@ -837,10 +837,10 @@ tkmt72:
 
 tkmt30:
 	idle:
-		Filename: tkm_promotion_unlockt30_tkmt30body.png
+		Filename: tkm_promotion_t30_tkmt30body.png
 		Facings: -32
 	turret:
-		Filename: tkm_promotion_unlockt30_tkmt30tur.png
+		Filename: tkm_promotion_t30_tkmt30tur.png
 		Offset: 0,0,-500
 		Facings: -32
 		Scale: 1
@@ -849,7 +849,7 @@ tkmt30:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkm_promotion_unlockt30_icon.png
+		Filename: tkm_promotion_t30_icon.png
 
 tkm_abrams:
 	idle:
@@ -982,98 +982,98 @@ tkm_radartruck:
 		Scale: 0.6
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockradartruck_tkmradartruck.png
+		Filename: tkm_promotion_radartruck_tkmradartruck.png
 		Facings: 32
 	icon:
-		Filename: tkm_promotion_unlockradartruck_icon.png
+		Filename: tkm_promotion_radartruck_icon.png
 
 tkm_flakbus:
 	Defaults:
 		Scale: 0.2
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockflakbus_tkmflakbus.png
+		Filename: tkm_promotion_flakbus_tkmflakbus.png
 		Facings: -32
 	icon:
-		Filename: tkm_promotion_unlockflakbus_icon.png
+		Filename: tkm_promotion_flakbus_icon.png
 
 tkm_repairtruck:
 	Defaults:
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockrepairtruck_tkmrepairtruck.png
+		Filename: tkm_promotion_repairtruck_tkmrepairtruck.png
 		Facings: -32
 	icon:
-		Filename: tkm_promotion_unlockrepairtruck_icon.png
+		Filename: tkm_promotion_repairtruck_icon.png
 
 tkm_battlebus:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockbattlebus_tkmbattlebus.png
+		Filename: tkm_promotion_battlebus_tkmbattlebus.png
 		Facings: 32
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkm_promotion_unlockbattlebus_icon.png
+		Filename: tkm_promotion_battlebus_icon.png
 
 tkm_medictruck:
 	Defaults:
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockmedictruck_tkmmedictruckbody.png
+		Filename: tkm_promotion_medictruck_tkmmedictruckbody.png
 		Facings: -32
 	turret:
 		Scale: 1
-		Filename: tkm_promotion_unlockmedictruck_tkmmedictruckturret.png
+		Filename: tkm_promotion_medictruck_tkmmedictruckturret.png
 		Facings: -32
 	icon:
-		Filename: tkm_promotion_unlockmedictruck_icon.png
+		Filename: tkm_promotion_medictruck_icon.png
 
 tkm_sandmarine:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockthesandmarine_tkmsandmarine.png
+		Filename: tkm_promotion_thesandmarine_tkmsandmarine.png
 		Facings: -32
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
 	icon:
-		Filename: tkm_promotion_unlockthesandmarine_icon.png
+		Filename: tkm_promotion_thesandmarine_icon.png
 
 tkm_bigshiee:
 	Defaults:
 		Scale: 0.7
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockthebigshiee_tkmbigshiee.png
+		Filename: tkm_promotion_thebigshiee_tkmbigshiee.png
 		Facings: 32
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
 	icon:
-		Filename: tkm_promotion_unlockthebigshiee_icon.png
+		Filename: tkm_promotion_thebigshiee_icon.png
 
 tkm_dronepodtruck:
 	Defaults:
 		Scale: 0.6
 	idle:
 		Scale: 1
-		Filename: tkm_promotion_unlockdronepodtruck_tkmdronepodtruck.png
+		Filename: tkm_promotion_dronepodtruck_tkmdronepodtruck.png
 		Facings: -32
 	icon:
-		Filename: tkm_promotion_unlockdronepodtruck_icon.png
+		Filename: tkm_promotion_dronepodtruck_icon.png
 
 tkm_trenchtank:
 	idle:
-		Filename: tkm_promotion_unlocktrenchtank_tkmtrenchtankbody.png
+		Filename: tkm_promotion_trenchtank_tkmtrenchtankbody.png
 		Facings: -32
 		Scale: 1
 	turret:
@@ -1085,7 +1085,7 @@ tkm_trenchtank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkm_promotion_unlocktrenchtank_icon.png
+		Filename: tkm_promotion_trenchtank_icon.png
 
 berezkaupgradeicon:
 	icon:
@@ -1158,7 +1158,7 @@ tkminfantryupgradeicon:
 
 tkm_viper:
 	Defaults:
-		Filename: tkm_promotion_unlockviper_tkmviper.png
+		Filename: tkm_promotion_viper_tkmviper.png
 		Scale: 0.15
 	idle:
 		Scale: 1
@@ -1169,7 +1169,7 @@ tkm_viper:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkm_promotion_unlockviper_icon.png
+		Filename: tkm_promotion_viper_icon.png
 
 tkm_iroquois:
 	Defaults:
@@ -1301,7 +1301,7 @@ tkmratflakdeployed:
 		Facings: 32
 		Scale: 1
 	icon:
-		Filename: tkm_promotion_unlockflakbus_icon.png
+		Filename: tkm_promotion_flakbus_icon.png
 
 tkmdiglarge:
 	idle:
@@ -1356,7 +1356,7 @@ tkmtrenchtankdeployed:
 		Facings: -32
 		Scale: 0.75
 	icon:
-		Filename: tkm_promotion_unlocktrenchtank_icon.png
+		Filename: tkm_promotion_trenchtank_icon.png
 
 ####################################################################################################
 #		TKM Upgrade Icons

@@ -43,7 +43,7 @@ asianalliance_doctrine_asianphalanx:
 		Image: asianalliance_doctrine_asianphalanx
 	ProvidesPrerequisite:
 
-asianalliance_upgrade_unlockmassparadrop:
+asianalliance_upgrade_massparadrop:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Mass Paradrop
@@ -51,12 +51,12 @@ asianalliance_upgrade_unlockmassparadrop:
 		# Sequence: icon
 		Icon: paratroopers
 		Description: Allows the use of the Mass Paradrop support power from the Asian Alliance Airfield.
-		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_unlockmassparadrop
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_massparadrop
 	RenderSprites:
 		Image: icon
 	ProvidesPrerequisite:
 
-asianalliance_upgrade_unlockclusterbombs:
+asianalliance_upgrade_clusterbombs:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Cluster Bombs
@@ -64,12 +64,12 @@ asianalliance_upgrade_unlockclusterbombs:
 		# Sequence: icon
 		Icon: icon
 		Description: Allows the use of the Cluster Bombs support power from the Asian Alliance Airfield.
-		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_unlockclusterbombs
+		Prerequisites: ~asianalliance_asianradar, !asianalliance_upgrade_clusterbombs
 	RenderSprites:
 		Image: tankmine.asian
 	ProvidesPrerequisite:
 
-asianalliance_upgrade_unlockchaosbombs:
+asianalliance_upgrade_chaosbombs:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Chaos Bombs
@@ -77,7 +77,7 @@ asianalliance_upgrade_unlockchaosbombs:
 		# Sequence: icon
 		Icon: icon2
 		Description: Allows the use of the Chaos Bombs support power from the Asian Alliance Airfield.
-		Prerequisites: ~asianalliance_asianradar, asianalliance_militaryacademy, asianalliance_upgrade_unlockclusterbombs, !asianalliance_upgrade_unlockchaosbombs
+		Prerequisites: ~asianalliance_asianradar, asianalliance_militaryacademy, asianalliance_upgrade_clusterbombs, !asianalliance_upgrade_chaosbombs
 	RenderSprites:
 		Image: tankmine.asian
 	ProvidesPrerequisite:

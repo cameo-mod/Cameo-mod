@@ -247,7 +247,7 @@ ts_gdi_titan:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlocktitanmkii
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_titanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -323,7 +323,7 @@ ts_gdi_titanmkii:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ts_gdi_warfactory, ~ts_gdi_promotion_unlocktitanmkii
+		Prerequisites: ~ts_gdi_warfactory, ~ts_gdi_promotion_titanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -390,7 +390,7 @@ ts_gdi_juggernautmkii:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~ts_gdi_promotion_unlockjuggernautmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~ts_gdi_promotion_juggernautmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -467,7 +467,7 @@ ts_gdi_juggernaut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~!ts_gdi_promotion_unlockjuggernautmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~!ts_gdi_promotion_juggernautmkii
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Health:
@@ -623,7 +623,7 @@ ts_gdi_wolverine:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlockwolverinemkii
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_wolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -691,7 +691,7 @@ ts_gdi_wolverinemkii:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		Prerequisites: ~ts_gdi_warfactory, ~ts_gdi_promotion_unlockwolverinemkii
+		Prerequisites: ~ts_gdi_warfactory, ~ts_gdi_promotion_wolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -761,7 +761,7 @@ ts_gdi_mammothprototype:
 	# Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~!ts_gdi_promotion_unlockmammothmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~!ts_gdi_promotion_mammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
@@ -876,7 +876,7 @@ ts_gdi_mammothmkii:
 		Name: Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~ts_gdi_promotion_unlockmammothmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~ts_gdi_promotion_mammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.

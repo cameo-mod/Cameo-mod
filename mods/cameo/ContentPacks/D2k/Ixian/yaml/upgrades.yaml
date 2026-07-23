@@ -38,7 +38,7 @@ ixian_upgrade_personalshield:
 		Prerequisites: ~ixian_outpost, !ixian_upgrade_personalshield
 		IconPalette: ra2
 	RenderSprites:
-		Image: ixian_personal_shield_icon
+		Image: ixian_personalshield_icon
 
 ixian_upgrade_generalpurposearmor:
 	Inherits: ^researched_upgrade.template

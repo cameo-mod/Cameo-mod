@@ -129,7 +129,7 @@ zerg_creepcolony:
 	ActorStatValues:
 		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-zerg_creepcolony_2:
+zerg_creepcolony_defense:
 	Inherits: zerg_creepcolony
 	Buildable:
 		Queue: Defence, RADefence
@@ -138,7 +138,7 @@ zerg_creepcolony_2:
 		Image: zerg_creepcolony
 		PlayerPalette: player_rgba
 
-zerg_sunkencolony_2:
+zerg_sunkencolony_defense:
 	Inherits: zerg_creepcolony
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
@@ -154,7 +154,7 @@ zerg_sunkencolony_2:
 	Selectable:
 		Class: zerg_creepcolony
 	RenderSprites:
-		Image: zerg_sunkencolony_2
+		Image: zerg_sunkencolony_defense
 
 zerg_sporecolony:
 	Inherits: zerg_creepcolony

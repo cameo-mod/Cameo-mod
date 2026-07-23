@@ -36,7 +36,7 @@ td_gdi_mammothtank:
 
 td_gdi_humvee:
 	Defaults:
-		Filename: td_gdi_promotion_unlockassaultapc_jeep.shp
+		Filename: td_gdi_promotion_assaultapc_jeep.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -176,7 +176,7 @@ td_gdi_orca:
 
 a10:
 	Defaults:
-		Filename: td_gdi_upgrade_unlocka10airstrike.shp
+		Filename: td_gdi_upgrade_a10airstrike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -185,11 +185,11 @@ a10:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_upgrade_unlocka10airstrike_icon.shp
+		Filename: td_gdi_upgrade_a10airstrike_icon.shp
 
 a10carrier:
 	Defaults:
-		Filename: td_gdi_upgrade_unlocka10airstrike.shp
+		Filename: td_gdi_upgrade_a10airstrike.shp
 		Scale: 0.5
 	idle:
 		Facings: 32
@@ -199,7 +199,7 @@ a10carrier:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_upgrade_unlocka10airstrike_icon.shp
+		Filename: td_gdi_upgrade_a10airstrike_icon.shp
 
 gdifact:
 	Inherits: ^WithBuildingBib2
@@ -754,12 +754,12 @@ td_gdi_exosuit:
 
 newhumvee:
 	Defaults:
-		Filename: td_gdi_promotion_unlockhumveemkii_newhumvee.shp
+		Filename: td_gdi_promotion_humveemkii_newhumvee.shp
 	idle:
 		Facings: -64
 		Scale: 0.5
 	turret:
-		Filename: td_gdi_promotion_unlockhumveemkii_newhumvee2.shp
+		Filename: td_gdi_promotion_humveemkii_newhumvee2.shp
 		Offset: 0,10
 		Start: 64
 		Facings: 64
@@ -768,13 +768,13 @@ newhumvee:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_unlockhumveemkii_icon.shp
+		Filename: td_gdi_promotion_humveemkii_icon.shp
 
 td_gdi_officer:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 0.71
-		Filename: td_gdi_promotion_unlockgdiofficer_modofficer.shp
+		Filename: td_gdi_promotion_gdiofficer_modofficer.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -876,11 +876,11 @@ td_gdi_officer:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_unlockgdiofficer_icon.shp
+		Filename: td_gdi_promotion_gdiofficer_icon.shp
 
 td_gdi_predatortank:
 	Defaults:
-		Filename: td_gdi_promotion_unlockpredatortank_gdipredator.shp
+		Filename: td_gdi_promotion_predatortank_gdipredator.shp
 	idle:
 		Facings: -64
 		Scale: 0.25
@@ -897,11 +897,11 @@ td_gdi_predatortank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_unlockpredatortank_icon.shp
+		Filename: td_gdi_promotion_predatortank_icon.shp
 
 td_gdi_mammothtankmkiii:
 	Defaults:
-		Filename: td_gdi_promotion_unlockmammothtankmk3_gdimammoth3.shp
+		Filename: td_gdi_promotion_mammothtankmk3_gdimammoth3.shp
 	idle:
 		Facings: -64
 		Scale: 0.25
@@ -914,19 +914,19 @@ td_gdi_mammothtankmkiii:
 		Length: *
 		Scale: 1.333
 	icon:
-		Filename: td_gdi_promotion_unlockmammothtankmk3_icon.shp
+		Filename: td_gdi_promotion_mammothtankmk3_icon.shp
 
 td_gdi_sonicmissilesoldier:
 	Inherits: e3
 	Defaults:
-		Filename: td_gdi_promotion_unlockmissilesoldier.shp
+		Filename: td_gdi_promotion_missilesoldier.shp
 	icon:
-		Filename: td_gdi_promotion_unlockmissilesoldier_icon.shp
+		Filename: td_gdi_promotion_missilesoldier_icon.shp
 
 td_gdi_empgrenadier:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: td_gdi_promotion_unlockempgrenadier_tdempgrenadier.shp
+		Filename: td_gdi_promotion_empgrenadier_tdempgrenadier.shp
 		Scale: 0.96
 	stand:
 		Start: 1
@@ -1035,13 +1035,13 @@ td_gdi_empgrenadier:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: td_gdi_promotion_unlockempgrenadier_icon.shp
+		Filename: td_gdi_promotion_empgrenadier_icon.shp
 
 td_gdi_shotgunner:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 0.92
-		Filename: td_gdi_promotion_unlockshotgunner_tdshotgunner.shp
+		Filename: td_gdi_promotion_shotgunner_tdshotgunner.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -1148,11 +1148,11 @@ td_gdi_shotgunner:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: td_gdi_promotion_unlockshotgunner_icon.shp
+		Filename: td_gdi_promotion_shotgunner_icon.shp
 
 td_gdi_heavysniper:
 	Defaults:
-		Filename: td_gdi_promotion_unlocksniper_gdisniper.shp
+		Filename: td_gdi_promotion_sniper_gdisniper.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1263,16 +1263,16 @@ td_gdi_heavysniper:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: td_gdi_promotion_unlocksniper_icon.shp
+		Filename: td_gdi_promotion_sniper_icon.shp
 
 td_gdi_assaultapc:
 	Defaults:
-		Filename: td_gdi_promotion_unlockassaultapc_newapc.shp
+		Filename: td_gdi_promotion_assaultapc_newapc.shp
 	idle:
 		Facings: -64
 		Scale: 0.4
 	turret:
-		Filename: td_gdi_promotion_unlockassaultapc_jeep.shp
+		Filename: td_gdi_promotion_assaultapc_jeep.shp
 		Scale: 2
 		Start: 32
 		Facings: 32
@@ -1287,11 +1287,11 @@ td_gdi_assaultapc:
 	unload:
 		Facings: -32
 	icon:
-		Filename: td_gdi_promotion_unlockassaultapc_icon.shp
+		Filename: td_gdi_promotion_assaultapc_icon.shp
 
 td_gdi_firehawk:
 	Defaults:
-		Filename: td_gdi_promotion_unlockfirehawk_firehawk.shp
+		Filename: td_gdi_promotion_firehawk_firehawk.shp
 		Scale: 2
 	idle:
 		Facings: 64
@@ -1299,7 +1299,7 @@ td_gdi_firehawk:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_promotion_unlockfirehawk_icon.shp
+		Filename: td_gdi_promotion_firehawk_icon.shp
 
 td_gdi_havoc:
 	Inherits: ^InfantryOverlays
@@ -1435,29 +1435,29 @@ cncsyrd:
 
 td_gdi_defenserig:
 	Defaults:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
 		Facings: 64
 	deployed:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigtower.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
 		Facings: 64
 	damaged-deployed:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigtower.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
 		Facings: 64
 	turret:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigphalanx.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigphalanx.png
 		Facings: 64
 		Offset: 0,32
 		Scale: 1.5
 	make:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
 	dead:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	dot:
@@ -1473,7 +1473,7 @@ td_gdi_defenserig:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_gdi_promotion_unlockgdidefenserig_icon.png
+		Filename: td_gdi_promotion_gdidefenserig_icon.png
 
 gdirigdrone:
 	Defaults:
@@ -1537,4 +1537,4 @@ lightweightarmorplatingicon:
 
 havocexosuit:
 	icon:
-		Filename: td_gdi_promotion_unlockhavocandexosuit_icon.png
+		Filename: td_gdi_promotion_havocandexosuit_icon.png

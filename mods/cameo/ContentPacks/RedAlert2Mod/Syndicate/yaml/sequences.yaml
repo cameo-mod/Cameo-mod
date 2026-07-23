@@ -827,7 +827,7 @@ latinsyndicate_tortugatank:
 latinsyndicate_smokertank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocksmokertanks_mtnk.shp
+		Filename: latinsyndicate_promotion_smokertanks_mtnk.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -835,7 +835,7 @@ latinsyndicate_smokertank:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: latinsyndicate_promotion_unlocksmokertanks_icon.shp
+		Filename: latinsyndicate_promotion_smokertanks_icon.shp
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -867,7 +867,7 @@ latinsyndicate_diablo:
 latinsyndicate_raiderbuggy:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockraiderbuggy.shp
+		Filename: latinsyndicate_promotion_raiderbuggy.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -877,7 +877,7 @@ latinsyndicate_raiderbuggy:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: latinsyndicate_promotion_unlockraiderbuggy_icon.shp
+		Filename: latinsyndicate_promotion_raiderbuggy_icon.shp
 
 scrapcar.latin:
 	Inherits: ^RA2GatlingMuzzle
@@ -892,7 +892,7 @@ scrapcar.latin:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: latinsyndicate_promotion_unlockraiderbuggy_icon.shp
+		Filename: latinsyndicate_promotion_raiderbuggy_icon.shp
 
 scrapcar2.latin:
 	Inherits: ^RA2GatlingMuzzle
@@ -907,12 +907,12 @@ scrapcar2.latin:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: latinsyndicate_promotion_unlockraiderbuggy_icon.shp
+		Filename: latinsyndicate_promotion_raiderbuggy_icon.shp
 
 latinsyndicate_latinapc:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocklatinapc.shp
+		Filename: latinsyndicate_promotion_latinapc.shp
 		Scale: 0.65
 	idle:
 		Facings: 64
@@ -922,13 +922,13 @@ latinsyndicate_latinapc:
 		Facings: 64
 		Offset: 0,-9
 	turret-up:
-		Filename: latinsyndicate_promotion_unlocklatinapc_apctur2.shp
+		Filename: latinsyndicate_promotion_latinapc_apctur2.shp
 		Facings: 64
 		Offset: 0,-9
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: latinsyndicate_promotion_unlocklatinapc_icon.shp
+		Filename: latinsyndicate_promotion_latinapc_icon.shp
 
 latinsyndicate_narcohummer:
 	Inherits: ^RA2GatlingMuzzle
@@ -947,7 +947,7 @@ latinsyndicate_narcohummer:
 latinsyndicate_carteltruck:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockcarteltrucks.shp
+		Filename: latinsyndicate_promotion_carteltrucks.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -956,17 +956,17 @@ latinsyndicate_carteltruck:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: latinsyndicate_promotion_unlockcarteltrucks_icon.shp
+		Filename: latinsyndicate_promotion_carteltrucks_icon.shp
 
 latinsyndicate_nuketruck:
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocknuketrucks_nuketruk.shp
+		Filename: latinsyndicate_promotion_nuketrucks_nuketruk.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
 		Offset: 0,-4
 	icon:
-		Filename: latinsyndicate_promotion_unlocknuketrucks_icon.shp
+		Filename: latinsyndicate_promotion_nuketrucks_icon.shp
 
 latinsyndicate_missiletruck:
 	Inherits: ^RA2GatlingMuzzle
@@ -986,7 +986,7 @@ latinsyndicate_missiletruck:
 latinsyndicate_burrito:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockburritos.shp
+		Filename: latinsyndicate_promotion_burritos.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -996,23 +996,23 @@ latinsyndicate_burrito:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: latinsyndicate_promotion_unlockburritos_icon.shp
+		Filename: latinsyndicate_promotion_burritos_icon.shp
 
 latinsyndicate_mortarbike:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockmortarbikes.shp
+		Filename: latinsyndicate_promotion_mortarbikes.shp
 		Scale: 1
 	idle:
 		Facings: 8
 		InterpolatedFacings: 32
 	icon:
-		Filename: latinsyndicate_promotion_unlockmortarbikes_icon.shp
+		Filename: latinsyndicate_promotion_mortarbikes_icon.shp
 
 latinsyndicate_topolm:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocktopolm_scud.shp
+		Filename: latinsyndicate_promotion_topolm_scud.shp
 		Scale: 0.9
 	idle:
 		Facings: 64
@@ -1032,12 +1032,12 @@ latinsyndicate_topolm:
 		Start: 256
 		Facings: 64
 	icon:
-		Filename: latinsyndicate_promotion_unlocktopolm_icon.shp
+		Filename: latinsyndicate_promotion_topolm_icon.shp
 
 latinsyndicate_lars:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocklars.shp
+		Filename: latinsyndicate_promotion_lars.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -1047,7 +1047,7 @@ latinsyndicate_lars:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: latinsyndicate_promotion_unlocklars_icon.shp
+		Filename: latinsyndicate_promotion_lars_icon.shp
 
 latinsyndicate_collectiontruck:
 	Inherits: ^RA2MachineGunMuzzle
@@ -1185,7 +1185,7 @@ latinsyndicate_narco:
 	Inherits: ^RA2ArmedCivilian
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlocknarcos.shp
+		Filename: latinsyndicate_promotion_narcos.shp
 	idle2:
 		Start: 56
 		Length: 15
@@ -1213,7 +1213,7 @@ latinsyndicate_narco:
 		InterpolatedFacings: 32
 		Tick: 100
 	icon:
-		Filename: latinsyndicate_promotion_unlocknarcos_icon.shp
+		Filename: latinsyndicate_promotion_narcos_icon.shp
 
 latinsyndicate_latinflametrooper:
 	Inherits: ^RA2ArmedInfantry

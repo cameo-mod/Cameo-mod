@@ -98,10 +98,10 @@ yuri_bioreactor:
 		Filename: yuri_bioreactor_icon.shp
 		Offset: 0,0
 
-yuri_slaveminer_2:
+yuri_slaveminer_deployed:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: yuri_slaveminer_2_yr_smin.shp
+		Filename: yuri_slaveminer_deployed_yr_smin.shp
 	idle:
 		Start: 7
 	turret:
@@ -112,7 +112,7 @@ yuri_slaveminer_2:
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: yuri_slaveminer_2_icon.shp
+		Filename: yuri_slaveminer_deployed_icon.shp
 		Offset: 0,0
 
 yuri_barracks:
@@ -847,14 +847,14 @@ yuri_mastermind:
 yuri_slaveminer:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: yuri_slaveminer_2_yr_smin.shp
+		Filename: yuri_slaveminer_deployed_yr_smin.shp
 	idle:
 		Facings: 64
 	turret:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: yuri_slaveminer_2_icon.shp
+		Filename: yuri_slaveminer_deployed_icon.shp
 
 yuri_mobileconstructionvehicle:
 	Defaults:

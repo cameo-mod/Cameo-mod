@@ -2,7 +2,7 @@
 #		Promotions Nod
 ####################################################################################################
 
-td_nod_promotion_unlockchemicalrocketsoldier:
+td_nod_promotion_chemicalrocketsoldier:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chemical Rocket Soldier
@@ -10,13 +10,13 @@ td_nod_promotion_unlockchemicalrocketsoldier:
 		BuildPaletteOrder: 1
 		Queue: Promotions
 		Description: Allows training of Chemical Rocket Soldiers.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockchemicalrocketsoldier, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_chemicalrocketsoldier, rank1
 	RenderSprites:
 		Image: e3chem
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockchemicalrocketsoldier
+		Prerequisite: td_nod_promotion_chemicalrocketsoldier
 
-td_nod_promotion_unlockchemicalattackbike:
+td_nod_promotion_chemicalattackbike:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chemical Attack Bike
@@ -24,13 +24,13 @@ td_nod_promotion_unlockchemicalattackbike:
 		BuildPaletteOrder: 4
 		Queue: Promotions
 		Description: Allows construction of Chemical Rocket Bikes.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockchemicalattackbike, td_nod_promotion_unlockchemicalrocketsoldier, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_chemicalattackbike, td_nod_promotion_chemicalrocketsoldier, rank1
 	RenderSprites:
 		Image: td_nod_chemicalattackbike
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockchemicalattackbike
+		Prerequisite: td_nod_promotion_chemicalattackbike
 
-td_nod_promotion_unlockchemicalstealthtank:
+td_nod_promotion_chemicalstealthtank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chemical Stealth Tank
@@ -38,13 +38,13 @@ td_nod_promotion_unlockchemicalstealthtank:
 		BuildPaletteOrder: 7
 		Queue: Promotions
 		Description: Allows construction of Chemical Stealth Tanks.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockchemicalstealthtank, td_nod_promotion_unlockchemicalattackbike, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_chemicalstealthtank, td_nod_promotion_chemicalattackbike, rank1
 	RenderSprites:
 		Image: td_nod_chemicalstealthtank
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockchemicalstealthtank
+		Prerequisite: td_nod_promotion_chemicalstealthtank
 
-td_nod_promotion_unlockchemicalssmlauncher:
+td_nod_promotion_chemicalssmlauncher:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chemical SSM Launcher
@@ -52,13 +52,13 @@ td_nod_promotion_unlockchemicalssmlauncher:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Allows construction of Chemical SSM Launchers.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockchemicalssmlauncher, td_nod_promotion_unlockchemicalstealthtank, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_chemicalssmlauncher, td_nod_promotion_chemicalstealthtank, rank1
 	RenderSprites:
 		Image: td_nod_chemicalssmlauncher
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockchemicalssmlauncher
+		Prerequisite: td_nod_promotion_chemicalssmlauncher
 
-td_nod_promotion_unlockbuggymkii:
+td_nod_promotion_buggymkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Buggy Mk. II
@@ -66,13 +66,13 @@ td_nod_promotion_unlockbuggymkii:
 		BuildPaletteOrder: 2
 		Queue: Promotions
 		Description: Allows construction of the Buggy Mk. II.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockbuggymkii, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_buggymkii, rank1
 	RenderSprites:
 		Image: td_nod_buggymkii
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockbuggymkii
+		Prerequisite: td_nod_promotion_buggymkii
 
-td_nod_promotion_unlocklighttankmkii:
+td_nod_promotion_lighttankmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Light Tank Mk. II
@@ -80,13 +80,13 @@ td_nod_promotion_unlocklighttankmkii:
 		BuildPaletteOrder: 5
 		Queue: Promotions
 		Description: Allows construction of the Light Tank Mk. II.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlocklighttankmkii, td_nod_promotion_unlockbuggymkii, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_lighttankmkii, td_nod_promotion_buggymkii, rank1
 	RenderSprites:
 		Image: td_nod_lighttankmkii
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlocklighttankmkii
+		Prerequisite: td_nod_promotion_lighttankmkii
 
-td_nod_promotion_unlockflametankmkii:
+td_nod_promotion_flametankmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Flame Tank Mk. II
@@ -94,13 +94,13 @@ td_nod_promotion_unlockflametankmkii:
 		BuildPaletteOrder: 8
 		Queue: Promotions
 		Description: Allows construction of the Flame Tank Mk. II.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockflametankmkii, td_nod_promotion_unlocklighttankmkii, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_flametankmkii, td_nod_promotion_lighttankmkii, rank1
 	RenderSprites:
 		Image: td_nod_flametankmkii
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockflametankmkii
+		Prerequisite: td_nod_promotion_flametankmkii
 
-td_nod_promotion_unlocklasertrooper:
+td_nod_promotion_lasertrooper:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Laser Trooper
@@ -108,13 +108,13 @@ td_nod_promotion_unlocklasertrooper:
 		BuildPaletteOrder: 11
 		Queue: Promotions
 		Description: Allows training of Laser Troopers.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlocklasertrooper, td_nod_promotion_unlockflametankmkii, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_lasertrooper, td_nod_promotion_flametankmkii, rank1
 	RenderSprites:
 		Image: td_nod_lasertrooper
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlocklasertrooper
+		Prerequisite: td_nod_promotion_lasertrooper
 
-td_nod_promotion_unlockblackhandflamer:
+td_nod_promotion_blackhandflamer:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Black Hand Flamer
@@ -122,11 +122,11 @@ td_nod_promotion_unlockblackhandflamer:
 		BuildPaletteOrder: 3
 		Queue: Promotions
 		Description: Allows training of Black Hand Flamers.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockblackhandflamer, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_blackhandflamer, rank1
 	RenderSprites:
 		Image: td_nod_blackhandflamer
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockblackhandflamer
+		Prerequisite: td_nod_promotion_blackhandflamer
 
 td_nod_promotion_upgradeupnodstealthname:
 	Inherits: ^promotion_upgrade.template
@@ -136,13 +136,13 @@ td_nod_promotion_upgradeupnodstealthname:
 		BuildPaletteOrder: 6
 		Queue: Promotions
 		Description: upgrade_upnodstealth.description
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_upgradeupnodstealthname, td_nod_promotion_unlockblackhandflamer, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_upgradeupnodstealthname, td_nod_promotion_blackhandflamer, rank1
 	RenderSprites:
 		Image: stealthtech
 	ProvidesPrerequisite:
 		Prerequisite: td_nod_promotion_upgradeupnodstealthname
 
-td_nod_promotion_unlockspecter:
+td_nod_promotion_specter:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Specter
@@ -150,11 +150,11 @@ td_nod_promotion_unlockspecter:
 		BuildPaletteOrder: 9
 		Queue: Promotions
 		Description: Allows construction of the Specter Stealth Artillery.
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_unlockspecter, td_nod_promotion_upgradeupnodstealthname, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_specter, td_nod_promotion_upgradeupnodstealthname, rank1
 	RenderSprites:
 		Image: td_nod_specterartillery
 	ProvidesPrerequisite:
-		Prerequisite: td_nod_promotion_unlockspecter
+		Prerequisite: td_nod_promotion_specter
 
 td_nod_promotion_upgradeupnodvenomname:
 	Inherits: ^promotion_upgrade.template
@@ -164,7 +164,7 @@ td_nod_promotion_upgradeupnodvenomname:
 		BuildPaletteOrder: 12
 		Queue: Promotions
 		Description: upgrade_upnodvenom.description
-		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_upgradeupnodvenomname, td_nod_promotion_unlockspecter, rank1
+		Prerequisites: ~td_nod_constructionyard, !td_nod_promotion_upgradeupnodvenomname, td_nod_promotion_specter, rank1
 	RenderSprites:
 		Image: nodvenomlaser
 	ProvidesPrerequisite:

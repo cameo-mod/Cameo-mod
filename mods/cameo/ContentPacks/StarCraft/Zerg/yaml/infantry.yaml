@@ -21,7 +21,7 @@ zerg_zergling:
 		Amount: -10
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~zerg_spawningpool, ~!zerg_promotion_unlocktalon
+		Prerequisites: ~zerg_spawningpool, ~!zerg_promotion_talon
 		Queue: SCZergInfantry
 		AdditionalActors: zerg_zergling
 		Description: actor_sczergling.description
@@ -72,7 +72,7 @@ zerg_talon:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~zerg_spawningpool, ~zerg_promotion_unlocktalon
+		Prerequisites: ~zerg_spawningpool, ~zerg_promotion_talon
 		Queue: SCZergInfantry
 		AdditionalActors: zerg_zergling, zerg_zergling
 		Description: actor_sctalon.description
@@ -179,7 +179,7 @@ zerg_spithid:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~zerg_hydraliskden, ~zerg_promotion_unlockspithid
+		Prerequisites: ~zerg_hydraliskden, ~zerg_promotion_spithid
 		Queue: SCZergInfantry
 		Description: actor_scspithid.description
 	Mobile:
@@ -235,7 +235,7 @@ zerg_swarmling:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: zerg_greaterspire, ~zerg_hive, ~zerg_promotion_unlockswarmling
+		Prerequisites: zerg_greaterspire, ~zerg_hive, ~zerg_promotion_swarmling
 		Queue: SCZergInfantry
 		Description: actor_scswarmling.description
 	Aircraft:
@@ -485,7 +485,7 @@ zerg_shriek:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~zerg_spire, ~zerg_promotion_unlockshriek
+		Prerequisites: ~zerg_spire, ~zerg_promotion_shriek
 		Queue: SCZergInfantry
 		Description: actor_scshriek.description
 	Aircraft:

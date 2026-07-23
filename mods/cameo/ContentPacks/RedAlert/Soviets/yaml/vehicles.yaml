@@ -1095,7 +1095,7 @@ ra1_soviets_heatraytank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_upgrade_unlockheatraytank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_upgrade_heatraytank
 		Description: actor_ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1236,10 +1236,10 @@ ra1_soviets_btr80:
 		Cost: 1600
 	Tooltip:
 		Name: BTR-80
-		RequiresCondition: !ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: !ra1_soviets_promotion_gatlingtank
 	Tooltip@Gatling:
 		Name: Gatling BTR
-		RequiresCondition: ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ra1_soviets_promotion_gatlingtank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1316,28 +1316,28 @@ ra1_soviets_btr80:
 		Count: 1
 		ResetOnFire: True
 	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo < 10 && ra1_soviets_promotion_gatlingtank
 		Modifier: 80
 	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo < 6 && ra1_soviets_promotion_gatlingtank
 		Modifier: 80
 	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_gatlingtank
 		Modifier: 80
 	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo < 10 && ra1_soviets_promotion_gatlingtank
 		Modifier: 105
 	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo < 6 && ra1_soviets_promotion_gatlingtank
 		Modifier: 105
 	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_unlockgatlingtank
+		RequiresCondition: ammo <= 1 && ra1_soviets_promotion_gatlingtank
 		Modifier: 105
-	GrantConditionOnPrerequisite@ra1_soviets_promotion_unlockgatlingtank:
-		Condition: ra1_soviets_promotion_unlockgatlingtank
-		Prerequisites: ra1_soviets_promotion_unlockgatlingtank
+	GrantConditionOnPrerequisite@ra1_soviets_promotion_gatlingtank:
+		Condition: ra1_soviets_promotion_gatlingtank
+		Prerequisites: ra1_soviets_promotion_gatlingtank
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_unlockgatlingtank, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_nukedemotruck:
 	Inherits: ^Vehicle
@@ -1546,7 +1546,7 @@ ra1_soviets_gatlingtank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_promotion_unlockgatlingtank, ~!ra1_soviets_doctrine_conscription
+		Prerequisites: ~ra1_soviets_warfactory, ~ra1_soviets_promotion_gatlingtank, ~!ra1_soviets_doctrine_conscription
 		Description: actor_gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1665,7 +1665,7 @@ ra1_soviets_gatlingtank:
 	ReloadDelayMultiplier@ra1_soviets_upgrade_autoloaders:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_unlockgatlingtank, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
+		Upgrades: ra1_soviets_doctrine_industrialefficiency, ra1_soviets_doctrine_teslaandexperimentaltech, ra1_soviets_doctrine_heavyarmor, ra1_soviets_doctrine_nuclearwar, ra1_soviets_promotion_gatlingtank, ra1_soviets_upgrade_incendiarybullets, ra1_soviets_upgrade_teslaarcing, ra1_soviets_upgrade_autoloaders, ra1_soviets_upgrade_unstableisotopes, ra1_soviets_upgrade_stalinium
 
 ra1_soviets_monstertank:
 	Inherits: ^Tank
@@ -1701,7 +1701,7 @@ ra1_soviets_monstertank:
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlockmonstertank
+		Prerequisites: ~ra1_soviets_warfactory, ra1_soviets_techcenter, ~ra1_soviets_promotion_monstertank
 		BuildPaletteOrder: 120
 		Description: actor_monstertank.description
 	Valued:

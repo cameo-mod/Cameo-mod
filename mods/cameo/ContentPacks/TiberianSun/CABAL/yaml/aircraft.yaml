@@ -1,4 +1,4 @@
-cabal_overkill_gunship:
+cabal_overkillgunship:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -18,7 +18,7 @@ cabal_overkill_gunship:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_helipad, cabal_techcenter, ~cabal_promotion_overkillgunship
-		Description: actor_cabal_overkill_gunship.description
+		Description: actor_cabal_overkillgunship.description
 	Aircraft:
 		TurnSpeed: 30
 		Speed: 150
@@ -58,9 +58,9 @@ cabal_overkill_gunship:
 	Voiced:
 		VoiceSet: TSHeli
 	SpawnActorOnDeath:
-		Actor: cabal_overkill_gunship_husk
+		Actor: cabal_overkillgunship_husk
 	RenderSprites:
-		Image: cabal_overkill_gunship
+		Image: cabal_overkillgunship
 		PlayerPalette: player_rgba
 
 cabal_hunterkillermk1:
@@ -130,7 +130,7 @@ cabal_hunterkillermk1:
 		Image: cabal_hunterkillermk1
 		PlayerPalette: player_rgba
 
-cabal_hunter_drone_carrier:
+cabal_hunterdronecarrier:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -147,7 +147,7 @@ cabal_hunter_drone_carrier:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, cabal_radar, ~cabal_promotion_hunterdronecarrier
 		Queue: Aircraft, RAAircraft
-		Description: actor_cabal_hunter_drone_carrier.description
+		Description: actor_cabal_hunterdronecarrier.description
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -159,7 +159,7 @@ cabal_hunter_drone_carrier:
 		Step: 120
 	CarrierMaster:
 		ArmamentNames: primary
-		Actors: cabal_orb_drone_slave, cabal_orb_drone_slave, cabal_orb_drone_slave
+		Actors: cabal_orbdrone_slave, cabal_orbdrone_slave, cabal_orbdrone_slave
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
@@ -217,12 +217,12 @@ cabal_hunter_drone_carrier:
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
-		Actor: cabal_hunter_drone_carrier_husk
+		Actor: cabal_hunterdronecarrier_husk
 	RenderSprites:
-		Image: cabal_hunter_drone_carrier
+		Image: cabal_hunterdronecarrier
 		PlayerPalette: player_rgba
 
-cabal_hunter_drone:
+cabal_hunterdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -232,7 +232,7 @@ cabal_hunter_drone:
 	Tooltip:
 		Name: Hunter Drone
 	Buildable:
-		Description: actor_cabal_hunter_drone.description
+		Description: actor_cabal_hunterdrone.description
 	Hovers:
 	Aircraft:
 		TurnSpeed: 32
@@ -265,14 +265,14 @@ cabal_hunter_drone:
 	HitShape:
 	-MapEditorData:
 	SpawnActorOnDeath:
-		Actor: cabal_hunter_drone_husk
+		Actor: cabal_hunterdrone_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 	RenderSprites:
-		Image: cabal_hunter_drone
+		Image: cabal_hunterdrone
 		PlayerPalette: player_rgba
 
-cabal_orb_drone:
+cabal_orbdrone:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -289,7 +289,7 @@ cabal_orb_drone:
 		BuildPaletteOrder: 5
 		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
-		Description: actor_cabal_orb_drone.description
+		Description: actor_cabal_orbdrone.description
 	Aircraft:
 		TurnSpeed: 28
 		Speed: 140
@@ -310,11 +310,11 @@ cabal_orb_drone:
 		IdleSequences: idle2
 	-SpawnActorOnDeath:
 	RenderSprites:
-		Image: cabal_orb_drone
+		Image: cabal_orbdrone
 		PlayerPalette: player_rgba
 
-cabal_orb_drone_slave:
-	Inherits: cabal_orb_drone
+cabal_orbdrone_slave:
+	Inherits: cabal_orbdrone
 	-Buildable:
 	-UpdatesPlayerStatistics:
 	-MapEditorData:
@@ -326,10 +326,10 @@ cabal_orb_drone_slave:
 		LandingDistance: 6400
 	HasParent:
 	RenderSprites:
-		Image: cabal_orb_drone
+		Image: cabal_orbdrone
 		PlayerPalette: player_rgba
 
-cabal_cyborg_assassin:
+cabal_cyborgassassin:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -347,7 +347,7 @@ cabal_cyborg_assassin:
 		BuildPaletteOrder: 6
 		Prerequisites: ~cabal_cyborgfactory, cabal_radar, ~cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
-		Description: actor_cabal_cyborg_assassin.description
+		Description: actor_cabal_cyborgassassin.description
 	Aircraft:
 		TurnSpeed: 36
 		Speed: 180
@@ -381,9 +381,9 @@ cabal_cyborg_assassin:
 	Selectable:
 		Bounds: 512, 768
 	SpawnActorOnDeath:
-		Actor: cabal_cyborg_assassin_husk
+		Actor: cabal_cyborgassassin_husk
 	RenderSprites:
-		Image: cabal_cyborg_assassin
+		Image: cabal_cyborgassassin
 		PlayerPalette: playerra2
 
 cabal_mothership:
@@ -495,7 +495,7 @@ cabal_hunterkillermk1_elite:
 		PlayerPalette: player_rgba
 
 
-cabal_repair_drone:
+cabal_repairdrone:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -513,7 +513,7 @@ cabal_repair_drone:
 		BuildPaletteOrder: 25
 		Prerequisites: ~cabal_helipad, cabal_radar
 		Queue: Aircraft, RAAircraft
-		Description: actor_cabal_repair_drone.description
+		Description: actor_cabal_repairdrone.description
 	Aircraft:
 		TurnSpeed: 28
 		Speed: 140
@@ -539,5 +539,5 @@ cabal_repair_drone:
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
-		Image: cabal_repair_drone
+		Image: cabal_repairdrone
 		PlayerPalette: playerra2

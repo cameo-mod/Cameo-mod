@@ -140,22 +140,22 @@ wc2_orcs_orcwatchtower:
 	icon:
 		Start: 5
 	guard:
-		Filename: wc2_orcs_guardtower_2_wc2_orc_guard_tower.shp
+		Filename: wc2_orcs_guardtower_plug_wc2_orc_guard_tower.shp
 		Start: 3
 	cannon:
-		Filename: wc2_orcs_cannontower_2_wc2_orc_cannon_tower.shp
+		Filename: wc2_orcs_cannontower_plug_wc2_orc_cannon_tower.shp
 		Start: 3
 
 wc2_orcs_guardtower:
 	Defaults:
-		Filename: wc2_orcs_guardtower_2_wc2_orc_guard_tower.shp
+		Filename: wc2_orcs_guardtower_plug_wc2_orc_guard_tower.shp
 	Inherits: wc2_orcs_orcwatchtower
 	icon:
 		Start: 6
 
 wc2_orcs_cannontower:
 	Defaults:
-		Filename: wc2_orcs_cannontower_2_wc2_orc_cannon_tower.shp
+		Filename: wc2_orcs_cannontower_plug_wc2_orc_cannon_tower.shp
 	Inherits: wc2_orcs_orcwatchtower
 	icon:
 		Filename: wc2_cameos_orc_buildings.png
@@ -185,7 +185,7 @@ wc2_orcs_wall:
 
 wc2_orcs_orcgoldmine:
 	Defaults:
-		Filename: wc2_orcs_orcgoldmine_2_wc2_orc_goldmine.shp
+		Filename: wc2_orcs_orcgoldmine_bot_wc2_orc_goldmine.shp
 	Inherits: ^WC2OrcBuilding
 	idle:
 		Start: 2

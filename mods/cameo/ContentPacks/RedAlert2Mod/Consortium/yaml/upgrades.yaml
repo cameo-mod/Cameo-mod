@@ -57,7 +57,7 @@ steelconsortium_upgrade_ferrocretecurtain:
 		Image: steelconsortium_upgrade_ferrocretecurtain
 	ProvidesPrerequisite:
 
-steelconsortium_upgrade_unlockempcannon:
+steelconsortium_upgrade_empcannon:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Unlock Emp Cannon
@@ -68,7 +68,7 @@ steelconsortium_upgrade_unlockempcannon:
 		Queue: Research
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
-		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_unlockempcannon
+		Prerequisites: ~steelconsortium_consortiumbattlelab, !steelconsortium_upgrade_empcannon
 	RenderSprites:
 		Image: steelconsortium_consortiumbattlelab
 	ProvidesPrerequisite:

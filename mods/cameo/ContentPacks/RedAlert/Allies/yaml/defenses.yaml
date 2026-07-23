@@ -145,7 +145,7 @@ ra1_allies_pillbox:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks, ~!ra1_allies_promotion_unlockcamopillbox
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedbarracks, ~!ra1_allies_promotion_camopillbox
 		Description: actor_pbox.description
 	Valued:
 		Cost: 400
@@ -308,7 +308,7 @@ ra1_allies_camopillbox:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_unlockcamopillbox
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_camopillbox
 		Description: actor_hbox.description
 	Valued:
 		Cost: 1300
@@ -373,7 +373,7 @@ ra1_allies_bastionartillerybunker:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_unlockbastion
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ~ra1_allies_promotion_bastion
 		Description: actor_bastion.description
 	-WithTurretSearchlight:
 	Valued:
@@ -473,7 +473,7 @@ ra1_allies_gapgenerator:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_unlockgapgeneratorandradarjammer
+		Prerequisites: ~ra1_allies_alliedconstructionyard, ra1_allies_alliedtechcenter, ~ra1_allies_promotion_gapgeneratorandradarjammer
 		Description: actor_gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512

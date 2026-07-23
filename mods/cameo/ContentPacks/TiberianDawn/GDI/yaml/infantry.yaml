@@ -74,7 +74,7 @@ td_gdi_grenadier:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_unlockempgrenadier
+		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_empgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor_e2.description
 	Mobile:
@@ -118,7 +118,7 @@ td_gdi_rocketsoldier:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Buildable:
-		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_unlockmissilesoldier
+		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_missilesoldier
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY: ##########
 		Weapon: Rockets
@@ -158,7 +158,7 @@ td_gdi_commando:
 	Tooltip:
 		Name: GDI Commando
 	Buildable:
-		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockhavocandexosuit
+		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_havocandexosuit
 		Description: Elite commando unit.\n  Strong vs Infantry, Buildings\n  Can detect cloaked units
 	Armament:
 		Weapon: td_gdi_commando_sniper
@@ -198,7 +198,7 @@ td_gdi_empgrenadier:
 		Name: EMP Grenadier
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockempgrenadier
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_empgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor_empgrenadier.description
 	Mobile:
@@ -254,7 +254,7 @@ td_gdi_sonicmissilesoldier:
 		Name: Sonic Missile Soldier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockmissilesoldier
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_missilesoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_e3.description
 	Mobile:
@@ -298,7 +298,7 @@ td_gdi_heavysniper:
 		Name: GDI Heavy Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_unlocksniper
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_sniper
 		Queue: Infantry, RAInfantry
 		Description: actor_gdisniper.description
 	Mobile:
@@ -340,7 +340,7 @@ td_gdi_shotgunner:
 		Name: Shotgunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockshotgunner
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_shotgunner
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -391,7 +391,7 @@ td_gdi_officer:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Buildable:
-		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_unlockgdiofficer
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, ~td_gdi_promotion_gdiofficer
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
@@ -464,7 +464,7 @@ td_gdi_havoc:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockhavocandexosuit
+		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_havocandexosuit
 		Queue: Infantry, RAInfantry
 		Description: actor_havoc.description
 	RenderSprites:

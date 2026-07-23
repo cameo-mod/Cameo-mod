@@ -1,4 +1,4 @@
-protoss_promotion_unlocklegionnaire:
+protoss_promotion_legionnaire:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Legionnaire
@@ -6,12 +6,12 @@ protoss_promotion_unlocklegionnaire:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
 		Description: actor_uplegionnaire.description
-		Prerequisites: ~protoss_nexus, !protoss_promotion_unlocklegionnaire, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_legionnaire, rank1
 	RenderSprites:
 		Image: protoss_legionnaire
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockatreus:
+protoss_promotion_atreus:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Atreus
@@ -19,12 +19,12 @@ protoss_promotion_unlockatreus:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
 		Description: actor_upatreus.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlocklegionnaire, !protoss_promotion_unlockatreus, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_legionnaire, !protoss_promotion_atreus, rank1
 	RenderSprites:
 		Image: protoss_atreus
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockamaranth:
+protoss_promotion_amaranth:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Amaranth
@@ -32,12 +32,12 @@ protoss_promotion_unlockamaranth:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
 		Description: actor_upamaranth.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockatreus, !protoss_promotion_unlockamaranth, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_atreus, !protoss_promotion_amaranth, rank1
 	RenderSprites:
 		Image: protoss_amaranth
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockpatriarch:
+protoss_promotion_patriarch:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Patriarch
@@ -45,14 +45,14 @@ protoss_promotion_unlockpatriarch:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
 		Description: actor_uppatriarch.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockamaranth, !protoss_promotion_unlockpatriarch, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_amaranth, !protoss_promotion_patriarch, rank1
 	RenderSprites:
 		Image: protoss_patriarch
 	ProvidesPrerequisite:
 
 ### Assault Tree
 
-protoss_promotion_unlockepigraph:
+protoss_promotion_epigraph:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Epigraph
@@ -60,12 +60,12 @@ protoss_promotion_unlockepigraph:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
 		Description: actor_upepigraph.description
-		Prerequisites: ~protoss_nexus, !protoss_promotion_unlockepigraph, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_epigraph, rank1
 	RenderSprites:
 		Image: protoss_epigraph
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockvoidray:
+protoss_promotion_voidray:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Void Ray
@@ -73,12 +73,12 @@ protoss_promotion_unlockvoidray:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
 		Description: Allows construction of Void Rays.
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockepigraph, !protoss_promotion_unlockgladius, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_epigraph, !protoss_promotion_gladius, rank1
 	RenderSprites:
 		Image: protoss_voidray
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockgladius:
+protoss_promotion_gladius:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Gladius
@@ -86,12 +86,12 @@ protoss_promotion_unlockgladius:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
 		Description: actor_upgladius.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockvoidray, !protoss_promotion_unlockgladius, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_voidray, !protoss_promotion_gladius, rank1
 	RenderSprites:
 		Image: protoss_gladius
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockstarsovereign:
+protoss_promotion_starsovereign:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Star Sovereign
@@ -99,14 +99,14 @@ protoss_promotion_unlockstarsovereign:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
 		Description: actor_upstarsovereign.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockgladius, !protoss_promotion_unlockstarsovereign, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_gladius, !protoss_promotion_starsovereign, rank1
 	RenderSprites:
 		Image: protoss_starshipsovereign
 	ProvidesPrerequisite:
 
 ### Support Tree
 
-protoss_promotion_unlockpositron:
+protoss_promotion_positron:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Positron
@@ -114,12 +114,12 @@ protoss_promotion_unlockpositron:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
 		Description: actor_uppositron.description
-		Prerequisites: ~protoss_nexus, !protoss_promotion_unlockpositron, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_positron, rank1
 	RenderSprites:
 		Image: protoss_positron
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockanalogue:
+protoss_promotion_analogue:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Analogue
@@ -127,12 +127,12 @@ protoss_promotion_unlockanalogue:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
 		Description: actor_upanalogue.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockpositron, !protoss_promotion_unlockanalogue, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_positron, !protoss_promotion_analogue, rank1
 	RenderSprites:
 		Image: protoss_analogue
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockmanifold:
+protoss_promotion_manifold:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Manifold
@@ -140,12 +140,12 @@ protoss_promotion_unlockmanifold:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
 		Description: actor_upmanifold.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockanalogue, !protoss_promotion_unlockmanifold, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_analogue, !protoss_promotion_manifold, rank1
 	RenderSprites:
 		Image: protoss_manifold
 	ProvidesPrerequisite:
 
-protoss_promotion_unlockidol:
+protoss_promotion_idol:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Idol
@@ -153,7 +153,7 @@ protoss_promotion_unlockidol:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
 		Description: actor_upidol.description
-		Prerequisites: ~protoss_nexus, protoss_promotion_unlockmanifold, !protoss_promotion_unlockidol, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_manifold, !protoss_promotion_idol, rank1
 	RenderSprites:
 		Image: protoss_idol
 	ProvidesPrerequisite:

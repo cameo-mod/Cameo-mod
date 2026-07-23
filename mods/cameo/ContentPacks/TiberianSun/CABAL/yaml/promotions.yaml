@@ -112,7 +112,7 @@ cabal_promotion_cyborgassassin:
 		Prerequisites: ~cabal_constructionyard, !cabal_promotion_cyborgassassin, rank1
 		Description: actor_cabal_promotion_cyborgassassin.description
 	RenderSprites:
-		Image: cabal_cyborg_assassin
+		Image: cabal_cyborgassassin
 	ProvidesPrerequisite:
 
 cabal_promotion_hunterdronecarrier:
@@ -125,7 +125,7 @@ cabal_promotion_hunterdronecarrier:
 		Prerequisites: ~cabal_constructionyard, !cabal_promotion_hunterdronecarrier, cabal_promotion_cyborgassassin, rank1
 		Description: actor_cabal_promotion_hunterdronecarrier.description
 	RenderSprites:
-		Image: cabal_hunter_drone_carrier
+		Image: cabal_hunterdronecarrier
 	ProvidesPrerequisite:
 
 cabal_promotion_overkillgunship:
@@ -138,7 +138,7 @@ cabal_promotion_overkillgunship:
 		Prerequisites: ~cabal_constructionyard, !cabal_promotion_overkillgunship, cabal_promotion_hunterdronecarrier, rank1
 		Description: actor_cabal_promotion_overkillgunship.description
 	RenderSprites:
-		Image: cabal_overkill_gunship
+		Image: cabal_overkillgunship
 	ProvidesPrerequisite:
 
 cabal_promotion_mothership:

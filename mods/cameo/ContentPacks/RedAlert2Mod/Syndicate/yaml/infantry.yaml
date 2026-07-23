@@ -296,7 +296,7 @@ latinsyndicate_narco:
 		Cost: 756
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_unlocknarcos, latinsyndicate_latinempradar
+		Prerequisites: ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_narcos, latinsyndicate_latinempradar
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_narco.description
 	Mobile:
@@ -516,7 +516,7 @@ latinsyndicate_terrorist:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_unlockterrorists
+		Prerequisites: ~latinsyndicate_combatbarracks, ~latinsyndicate_promotion_terrorists
 		Queue: Infantry, RAInfantry
 		Description: actor_terror.description
 	Mobile:

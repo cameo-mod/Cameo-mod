@@ -89,7 +89,7 @@ futuretech_cryocopter:
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 405
-		Prerequisites: ~futuretech_warpgate, futuretech_battlelab, ~futuretech_promotion_unlockcryocopter
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab, ~futuretech_promotion_cryocopter
 		Description: actor_futuretech_cryo.description
 	Valued:
 		Cost: 900
@@ -194,7 +194,7 @@ futuretech_harbingergunship:
 	Buildable:
 		BuildAtProductionType: futuretech_harbingergunship
 		BuildPaletteOrder: 510
-		Prerequisites: ~futuretech_launchpad, futuretech_hypercore, ~futuretech_promotion_unlockharbingergunship
+		Prerequisites: ~futuretech_launchpad, futuretech_hypercore, ~futuretech_promotion_harbingergunship
 		Queue: Aircraft, RAAircraft
 		Description: actor_future_harbinger.description
 	Aircraft:

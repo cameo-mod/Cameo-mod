@@ -167,10 +167,10 @@ steelconsortium_consortiumradar:
 	DetonateWeaponPower@SteelSupportSpawner:
 		OrderName: SteelSupportSpawner
 		Prerequisites:
-			1: steelconsortium_promotion_unlocksupportlvl1
-			2: steelconsortium_promotion_unlocksupportlvl2
-			3: steelconsortium_promotion_unlocksupportlvl3
-			4: steelconsortium_promotion_unlocksupportlvl4
+			1: steelconsortium_promotion_supportlvl1
+			2: steelconsortium_promotion_supportlvl2
+			3: steelconsortium_promotion_supportlvl3
+			4: steelconsortium_promotion_supportlvl4
 		PauseOnCondition: disabled
 		Icons:
 			1: conssupp1
@@ -311,7 +311,7 @@ steelconsortium_consortiumbattlelab:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: steelconsortium_upgrade_unlockempcannon
+			1: steelconsortium_upgrade_empcannon
 		IconImage: steelconsortium_consortiumbattlelab
 		Icons:
 			1: icon2
@@ -342,7 +342,7 @@ steelconsortium_consortiumbattlelab:
 		IncomingSound:
 	SupportPowerChargeBar:
 	ActorStatValues:
-		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance, steelconsortium_upgrade_unlockempcannon
+		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance, steelconsortium_upgrade_empcannon
 
 steelconsortium_orbitalcannonactivator:
 	Inherits: ^RA2Building

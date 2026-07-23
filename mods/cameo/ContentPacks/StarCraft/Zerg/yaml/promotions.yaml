@@ -1,4 +1,4 @@
-zerg_promotion_unlocktalon:
+zerg_promotion_talon:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Talon
@@ -6,12 +6,12 @@ zerg_promotion_unlocktalon:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
 		Description: actor_uptalon.description
-		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlocktalon, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_talon, rank1
 	RenderSprites:
 		Image: zerg_talon
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockspithid:
+zerg_promotion_spithid:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Spithid
@@ -19,12 +19,12 @@ zerg_promotion_unlockspithid:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
 		Description: actor_upspithid.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlocktalon, !zerg_promotion_unlockspithid, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_talon, !zerg_promotion_spithid, rank1
 	RenderSprites:
 		Image: zerg_spithid
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockshriek:
+zerg_promotion_shriek:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shriek
@@ -32,12 +32,12 @@ zerg_promotion_unlockshriek:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
 		Description: actor_upshriek.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockspithid, !zerg_promotion_unlockshriek, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_spithid, !zerg_promotion_shriek, rank1
 	RenderSprites:
 		Image: zerg_shriek
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockswarmling:
+zerg_promotion_swarmling:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Swarmling
@@ -45,14 +45,14 @@ zerg_promotion_unlockswarmling:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
 		Description: actor_upswarmling.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockshriek, !zerg_promotion_unlockswarmling, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_shriek, !zerg_promotion_swarmling, rank1
 	RenderSprites:
 		Image: zerg_swarmling
 	ProvidesPrerequisite:
 
 ### Assault Tree
 
-zerg_promotion_unlocksporemaw:
+zerg_promotion_sporemaw:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Sporemaw
@@ -60,12 +60,12 @@ zerg_promotion_unlocksporemaw:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
 		Description: actor_upsporemaw.description
-		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlocksporemaw, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_sporemaw, rank1
 	RenderSprites:
 		Image: zerg_sporemaw
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockgoremaw:
+zerg_promotion_goremaw:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Goremaw
@@ -73,12 +73,12 @@ zerg_promotion_unlockgoremaw:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
 		Description: actor_upgoremaw.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlocksporemaw, !zerg_promotion_unlockgoremaw, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_sporemaw, !zerg_promotion_goremaw, rank1
 	RenderSprites:
 		Image: zerg_goremaw
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockgorekraken:
+zerg_promotion_gorekraken:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Gorekraken
@@ -86,12 +86,12 @@ zerg_promotion_unlockgorekraken:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
 		Description: actor_upgorekraken.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockgoremaw, !zerg_promotion_unlockgorekraken, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_goremaw, !zerg_promotion_gorekraken, rank1
 	RenderSprites:
 		Image: zerg_gorekraken
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockhermit:
+zerg_promotion_hermit:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hermit
@@ -99,14 +99,14 @@ zerg_promotion_unlockhermit:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
 		Description: actor_uphermit.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockgorekraken, !zerg_promotion_unlockhermit, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_gorekraken, !zerg_promotion_hermit, rank1
 	RenderSprites:
 		Image: zerg_hermit
 	ProvidesPrerequisite:
 
 ### Support Tree
 
-zerg_promotion_unlockbroodweaver:
+zerg_promotion_broodweaver:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Broodweaver
@@ -114,12 +114,12 @@ zerg_promotion_unlockbroodweaver:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
 		Description: actor_upbroodweaver.description
-		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlockbroodweaver, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_broodweaver, rank1
 	RenderSprites:
 		Image: zerg_broodweaver
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockcorruptor:
+zerg_promotion_corruptor:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Corruptor
@@ -127,12 +127,12 @@ zerg_promotion_unlockcorruptor:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
 		Description: actor_upcorruptor.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockbroodweaver, !zerg_promotion_unlockcorruptor, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_broodweaver, !zerg_promotion_corruptor, rank1
 	RenderSprites:
 		Image: zerg_corruptor
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockdreadshroud:
+zerg_promotion_dreadshroud:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Dreadshroud
@@ -140,12 +140,12 @@ zerg_promotion_unlockdreadshroud:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
 		Description: actor_updreadshroud.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockcorruptor, !zerg_promotion_unlockdreadshroud, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_corruptor, !zerg_promotion_dreadshroud, rank1
 	RenderSprites:
 		Image: zerg_dreadshroud
 	ProvidesPrerequisite:
 
-zerg_promotion_unlockbehemoth:
+zerg_promotion_behemoth:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Behemoth
@@ -153,7 +153,7 @@ zerg_promotion_unlockbehemoth:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
 		Description: actor_upbehemoth.description
-		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockdreadshroud, !zerg_promotion_unlockbehemoth, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_dreadshroud, !zerg_promotion_behemoth, rank1
 	RenderSprites:
 		Image: zerg_behemoth
 	ProvidesPrerequisite:

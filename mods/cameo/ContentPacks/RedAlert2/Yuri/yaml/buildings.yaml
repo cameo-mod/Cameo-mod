@@ -31,7 +31,7 @@ yuri_warfactory:
 	Tooltip:
 		Name: Yuri War Factory
 	Buildable:
-		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_deployed
 		Description: Produces vehicles.
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
@@ -209,7 +209,7 @@ yuri_psychicsensor:
 	Tooltip:
 		Name: Psychic Sensor
 	Buildable:
-		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_2
+		Prerequisites: ~yuri_constructionyard, yuri_slaveminer_deployed
 		Description: actor_napsis.description
 	Building:
 		Footprint: xx xx

@@ -699,7 +699,7 @@ light.ordos:
 chemtrooper:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: ordos_promotion_unlockchemicaltrooper_chemtrooper.shp
+		Filename: ordos_promotion_chemicaltrooper_chemtrooper.shp
 		Scale: 1.5
 	stand:
 		Facings: 8
@@ -781,7 +781,7 @@ chemtrooper:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_promotion_unlockchemicaltrooper_icon.shp
+		Filename: ordos_promotion_chemicaltrooper_icon.shp
 		Offset: 0,-1
 
 ordos_saboteur:
@@ -897,102 +897,102 @@ ordos_saboteur:
 
 ordos_leech:
 	stand:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	run:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 35
 		Scale: 1
 	jump:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		# Tick: 45
 		Scale: 1
 	shoot:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
 		Scale: 1
 	idle1:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 45
 		Scale: 1
 	idle2:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
 		Scale: 1
 	die:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die1:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die2:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die3:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die4:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die5:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die6:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die7:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die4:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die-crushed:
-		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
+		Filename: ordos_promotion_leecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	icon:
-		Filename: ordos_promotion_unlockleecher_icon.shp
+		Filename: ordos_promotion_leecher_icon.shp
 		Offset: 0,0
 
 ordos_facedancer:
@@ -1076,7 +1076,7 @@ ordos_contaminator:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: ordos_promotion_unlockcontaminator_tleilax_contaminator.png
+		Filename: ordos_promotion_contaminator_tleilax_contaminator.png
 	run:
 		Tick: 100
 		Start: 8
@@ -1108,7 +1108,7 @@ ordos_contaminator:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: ordos_promotion_unlockcontaminator_icon.shp
+		Filename: ordos_promotion_contaminator_icon.shp
 
 ordos_antiairtrooper:
 	Inherits: ^RA2ArmedInfantry
@@ -1170,7 +1170,7 @@ ordos_mortartrooper:
 		Scale: 1
 	Defaults:
 		Scale: 0.71
-		Filename: ordos_promotion_unlockmortartroopers.png
+		Filename: ordos_promotion_mortartroopers.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1214,7 +1214,7 @@ ordos_mortartrooper:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ordos_promotion_unlockmortartroopers_icon.png
+		Filename: ordos_promotion_mortartroopers_icon.png
 
 ordos_swarmerdrone:
 	Defaults:
@@ -1234,11 +1234,11 @@ ordos_swarmerdrone:
 ordos_banshee:
 	Defaults:
 	idle:
-		Filename: ordos_promotion_unlockbanshees.png
+		Filename: ordos_promotion_banshees.png
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_promotion_unlockbanshees.png
+		Filename: ordos_promotion_banshees.png
 		Facings: 64
 		Start: 64
 		Scale: 1
@@ -1248,11 +1248,11 @@ ordos_banshee:
 		Facings: 8
 		Scale: 0.7
 	icon:
-		Filename: ordos_promotion_unlockbanshees_icon.png
+		Filename: ordos_promotion_banshees_icon.png
 
 ordos_wraith:
 	Defaults:
-		Filename: ordos_promotion_unlockwraith.png
+		Filename: ordos_promotion_wraith.png
 	idle:
 		Length: 64
 		Tick: 64
@@ -1266,7 +1266,7 @@ ordos_wraith:
 		Length: 4
 		Tick: 100
 	icon:
-		Filename: ordos_promotion_unlockwraith_icon.png
+		Filename: ordos_promotion_wraith_icon.png
 
 ordos_eyeinthesky:
 	Defaults:
@@ -1354,7 +1354,7 @@ ordos_cobratank:
 
 ordos_pythontank:
 	Defaults:
-		Filename: ordos_promotion_unlockpython.png
+		Filename: ordos_promotion_python.png
 	idle:
 		Start: 64
 		Facings: 64
@@ -1369,7 +1369,7 @@ ordos_pythontank:
 		Filename: shared_sprites|invisibleitem.shp
 		ZOffset: -9999
 	icon:
-		Filename: ordos_promotion_unlockpython_icon.png
+		Filename: ordos_promotion_python_icon.png
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1380,31 +1380,31 @@ ordos_pythontank:
 
 ordos_lasertank:
 	idle:
-		Filename: ordos_promotion_unlocklasertank.png
+		Filename: ordos_promotion_lasertank.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_promotion_unlocklasertank.png
+		Filename: ordos_promotion_lasertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ordos_promotion_unlocklasertank_icon.png
+		Filename: ordos_promotion_lasertank_icon.png
 
 ordos_deviatortank:
 	idle:
-		Filename: ordos_promotion_unlockdeviatortank_deviatormk2.png
+		Filename: ordos_promotion_deviatortank_deviatormk2.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_promotion_unlockdeviatortank_deviatormk2.png
+		Filename: ordos_promotion_deviatortank_deviatormk2.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ordos_promotion_unlockdeviatortank_icon.png
+		Filename: ordos_promotion_deviatortank_icon.png
 
 ordos_apc:
 	idle:
@@ -1422,11 +1422,11 @@ ordos_apc:
 
 ordos_laboratorycrawler:
 	idle:
-		Filename: ordos_promotion_unlocklaboratorycrawler_tleilax_labcrawl.png
+		Filename: ordos_promotion_laboratorycrawler_tleilax_labcrawl.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ordos_promotion_unlocklaboratorycrawler_icon.png
+		Filename: ordos_promotion_laboratorycrawler_icon.png
 
 ordos_airmine:
 	idle:
@@ -1571,12 +1571,12 @@ ordos_stealthraider:
 ordos_dustdrone:
 	Defaults:
 	idle:
-		Filename: ordos_promotion_unlockdustdrone_scoutdrone.png
+		Filename: ordos_promotion_dustdrone_scoutdrone.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_promotion_unlockdustdrone_scoutdrone.png
+		Filename: ordos_promotion_dustdrone_scoutdrone.png
 		Length: 8
 		Facings: 8
 		Scale: 1
@@ -1589,7 +1589,7 @@ ordos_dustdrone:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_promotion_unlockdustdrone_icon.png
+		Filename: ordos_promotion_dustdrone_icon.png
 
 ordos_heavyautoguntank:
 	idle:

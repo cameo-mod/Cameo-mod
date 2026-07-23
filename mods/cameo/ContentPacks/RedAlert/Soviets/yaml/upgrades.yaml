@@ -324,53 +324,53 @@ ra1_soviets_upgrade_kotinnucleartank:
 	RenderSprites:
 		Image: ra1_soviets_kotinnucleartank
 
-ra1_soviets_upgrade_unlockcommissar:
+ra1_soviets_upgrade_commissar:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Commissar
 	Buildable:
 		Description: Unlocks the Soviet Commissar
-		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_unlockcommissar
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_conscription, !ra1_soviets_upgrade_commissar
 	RenderSprites:
 		Image: ra1_soviets_commissar
 
-ra1_soviets_upgrade_unlockheatraytank:
+ra1_soviets_upgrade_heatraytank:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Heatray Tank
 	Buildable:
 		Description: Unlocks the Heatray Tank
-		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_unlockheatraytank
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_inferno, !ra1_soviets_upgrade_heatraytank
 	RenderSprites:
 		Image: ra1_soviets_heatraytank
 
-ra1_soviets_upgrade_unlockteslayak:
+ra1_soviets_upgrade_teslayak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Tesla Yak
 	Buildable:
 		Description: Upgrades the Yak into the Tesla Yak.
-		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_unlockteslayak
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_teslaandexperimentaltech, !ra1_soviets_upgrade_teslayak
 	RenderSprites:
 		Image: ra1_soviets_teslayak
 
-ra1_soviets_upgrade_unlockarmoredyak:
+ra1_soviets_upgrade_armoredyak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Armored Yak
 	Buildable:
 		Description: Upgrades the Yak into the Armored Yak.
-		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_unlockarmoredyak
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_heavyarmor, !ra1_soviets_upgrade_armoredyak
 	RenderSprites:
 		Image: ra1_soviets_armoredyak
 
-ra1_soviets_upgrade_unlocknuclearyak:
+ra1_soviets_upgrade_nuclearyak:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Nuclear Yak
 	Buildable:
 		Description: Upgrades the Yak into the Nuclear Yak.
-		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_unlocknuclearyak
+		Prerequisites: ~ra1_soviets_radardome, ~ra1_soviets_doctrine_nuclearwar, !ra1_soviets_upgrade_nuclearyak
 	RenderSprites:
 		Image: ra1_soviets_nuclearyak
 

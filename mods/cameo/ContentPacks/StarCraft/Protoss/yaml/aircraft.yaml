@@ -158,7 +158,7 @@ protoss_scout:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_stargate, ~!protoss_promotion_unlockepigraph
+		Prerequisites: ~protoss_stargate, ~!protoss_promotion_epigraph
 		Queue: Aircraft, RAAircraft
 		Description: actor_scscout.description
 	Aircraft:
@@ -244,7 +244,7 @@ protoss_epigraph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockepigraph
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_epigraph
 		Queue: Aircraft, RAAircraft
 		Description: actor_scepigraph.description
 	Aircraft:
@@ -322,7 +322,7 @@ protoss_voidray:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockvoidray
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_voidray
 		Queue: Aircraft, RAAircraft
 		Description: Aerial assault craft whose prismatic beam intensifies while it stays on target.
 	Aircraft:
@@ -396,7 +396,7 @@ protoss_gladius:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockgladius
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_gladius
 		Queue: Aircraft, RAAircraft
 		Description: actor_scgladius.description
 	Aircraft:
@@ -586,7 +586,7 @@ protoss_starshipsovereign:
 	Buildable:
 		BuildPaletteOrder: 20
 		BuildLimit: 1
-		Prerequisites: ~protoss_fleetbeacon, ~protoss_promotion_unlockstarsovereign
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_promotion_starsovereign
 		Queue: Aircraft, RAAircraft
 		Description: actor_scstarshipsovereign.description
 	Aircraft:

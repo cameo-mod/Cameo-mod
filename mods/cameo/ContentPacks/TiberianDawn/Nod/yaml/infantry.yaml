@@ -61,7 +61,7 @@ td_nod_rocketsoldier:
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
 	Buildable:
-		Prerequisites: ~td_nod_handofnod, ~!td_nod_promotion_unlockchemicalrocketsoldier
+		Prerequisites: ~td_nod_handofnod, ~!td_nod_promotion_chemicalrocketsoldier
 		Description: Anti-tank infantry.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	ActorStatValues:
 		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
@@ -87,7 +87,7 @@ td_nod_flamethrower:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~!td_nod_promotion_unlockblackhandflamer
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~!td_nod_promotion_blackhandflamer
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Mobile:
@@ -233,7 +233,7 @@ td_nod_chemicalrocketsoldier:
 	-DamagedByTerrain:
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~td_nod_handofnod, ~td_nod_promotion_unlockchemicalrocketsoldier
+		Prerequisites: ~td_nod_handofnod, ~td_nod_promotion_chemicalrocketsoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_cheme3.description
 	Armament@PRIMARY: ##########
@@ -282,7 +282,7 @@ td_nod_lasertrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_unlocklasertrooper
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_lasertrooper
 		Description: actor_blackhandlaser.description
 	# SPECIAL-FORCES — Tier 4 heavy trooper (Formula v2, maintainer
 	# 2026-07-20): 4x the SF baseline — 60000 HP (4x 15000), 50 speed &
@@ -341,7 +341,7 @@ td_nod_blackhandflamer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~td_nod_promotion_unlockblackhandflamer
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~td_nod_promotion_blackhandflamer
 		Description: actor_blackhandflamer.description
 	Valued:
 		Cost: 600

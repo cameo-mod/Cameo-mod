@@ -18,7 +18,7 @@ terran_marine:
 	Power:
 		Amount: -10
 	Buildable:
-		Prerequisites: ~terran_barracks, ~!terran_promotion_unlockmadcap
+		Prerequisites: ~terran_barracks, ~!terran_promotion_madcap
 		Queue: Infantry, RAInfantry
 		Description: actor_scmarine.description
 	Mobile:
@@ -146,7 +146,7 @@ terran_madcap:
 	Power:
 		Amount: -15
 	Buildable:
-		Prerequisites: ~terran_barracks, ~terran_promotion_unlockmadcap
+		Prerequisites: ~terran_barracks, ~terran_promotion_madcap
 		Queue: Infantry, RAInfantry
 		Description: actor_scmadcap.description
 	Mobile:
@@ -200,7 +200,7 @@ terran_firebat:
 	Power:
 		Amount: -25
 	Buildable:
-		Prerequisites: ~terran_academy, ~!terran_promotion_unlockharakan
+		Prerequisites: ~terran_academy, ~!terran_promotion_harakan
 		Queue: Infantry, RAInfantry
 		Description: actor_scfirebat.description
 	Mobile:
@@ -266,7 +266,7 @@ terran_harakan:
 	Tooltip:
 		Name: Harakan
 	Buildable:
-		Prerequisites: ~terran_academy, ~terran_promotion_unlockharakan
+		Prerequisites: ~terran_academy, ~terran_promotion_harakan
 		Queue: Infantry, RAInfantry
 		Description: actor_scharakan.description
 	Mobile:
@@ -381,7 +381,7 @@ terran_ghost:
 		Amount: -35
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~terran_sciencefacility, ~!terran_promotion_unlockspectreandmedivac
+		Prerequisites: ~terran_sciencefacility, ~!terran_promotion_spectreandmedivac
 		Description: actor_scghost.description
 	Mobile:
 		Speed: 75
@@ -455,7 +455,7 @@ terran_specter:
 		Amount: -45
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockspectreandmedivac
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_spectreandmedivac
 		Description: actor_scsilvertongue.description
 	Mobile:
 		Speed: 80

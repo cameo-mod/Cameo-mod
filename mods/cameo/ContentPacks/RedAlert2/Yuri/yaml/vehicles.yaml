@@ -42,7 +42,7 @@ yuri_slaveminer:
 	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
 	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
 	ProvidesPrerequisite:
-		Prerequisite: yuri_slaveminer_2
+		Prerequisite: yuri_slaveminer_deployed
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -83,7 +83,7 @@ yuri_slaveminer:
 	DetectCloaked:
 		Range: 3333
 	Transforms:
-		IntoActor: yuri_slaveminer_2
+		IntoActor: yuri_slaveminer_deployed
 		Facing: 128
 		TransformSounds: uplace.wav
 		NoTransformNotification: BuildingCannotPlaceAudio
@@ -96,8 +96,8 @@ yuri_slaveminer:
 		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
 		SpawnOffset: 511,511,0, 511,511,0, 511,511,0, 511,511,0
 		PauseOnCondition: !deployed
-	ProvidesPrerequisite@yuri_slaveminer_2:
-		Prerequisite: yuri_slaveminer_2
+	ProvidesPrerequisite@yuri_slaveminer_deployed:
+		Prerequisite: yuri_slaveminer_deployed
 	Voiced:
 		VoiceSet: SlaveMinerVoice
 	DeliversCash:

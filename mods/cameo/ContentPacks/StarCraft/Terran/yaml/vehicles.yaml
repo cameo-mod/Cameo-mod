@@ -282,7 +282,7 @@ terran_matador:
 		Amount: -85
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~terran_weaponsfactory, ~terran_promotion_unlockmatador
+		Prerequisites: ~terran_weaponsfactory, ~terran_promotion_matador
 		Description: actor_scmatador.description
 	Mobile:
 		Speed: 100
@@ -395,7 +395,7 @@ terran_cyclone:
 		Amount: -115
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~terran_engineeringbay, ~terran_promotion_unlockcyclone
+		Prerequisites: ~terran_engineeringbay, ~terran_promotion_cyclone
 		Description: actor_sccyclone.description
 	Mobile:
 		Speed: 115
@@ -476,7 +476,7 @@ terran_goliath:
 		Amount: -80
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_armory, ~!terran_promotion_unlockgoliathmk2
+		Prerequisites: ~terran_armory, ~!terran_promotion_goliathmk2
 		Description: actor_scgoliath.description
 	Mobile:
 		Speed: 90
@@ -550,7 +550,7 @@ terran_goliathmk2:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_armory, ~terran_promotion_unlockgoliathmk2
+		Prerequisites: ~terran_armory, ~terran_promotion_goliathmk2
 		Description: actor_scgoliath2.description
 	Mobile:
 		Speed: 75
@@ -621,7 +621,7 @@ terran_warhound:
 		Amount: -225
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockwarhound
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_warhound
 		Description: actor_scwarhound.description
 	Mobile:
 		Speed: 45

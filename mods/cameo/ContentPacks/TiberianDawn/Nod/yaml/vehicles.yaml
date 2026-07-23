@@ -18,7 +18,7 @@ td_nod_specterartillery:
 	Tooltip:
 		Name: Specter Artillery
 	Buildable:
-		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_unlockspecter
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_specter
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
 		Description: actor_specter.description
@@ -122,7 +122,7 @@ td_nod_artillery:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_unlockspecter
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_specter
 		Queue: Vehicle, RAVehicle
 		Description: actor_arty.description
 	Mobile:
@@ -182,7 +182,7 @@ td_nod_flametank:
 		Cost: 800
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_unlockflametankmkii
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_flametankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ftnk.description
 	Mobile:
@@ -226,7 +226,7 @@ td_nod_buggy:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlockbuggymkii
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_buggymkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_bggy.description
 	Mobile:
@@ -277,7 +277,7 @@ td_nod_reconbike:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlockchemicalattackbike
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_chemicalattackbike
 		Queue: Vehicle, RAVehicle
 		Description: actor_bike.description
 	Mobile:
@@ -333,7 +333,7 @@ td_nod_lighttank:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlocklighttankmkii
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_lighttankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ltnk.description
 	Mobile:
@@ -394,7 +394,7 @@ td_nod_ssmlauncher:
 		Name: SSM Launcher
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_unlockchemicalssmlauncher
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_chemicalssmlauncher
 		Queue: Vehicle, RAVehicle
 		Description: actor_mssm.description
 		Icon: icon
@@ -470,7 +470,7 @@ td_nod_stealthtank:
 		Name: Stealth Tank
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_unlockchemicalstealthtank
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_chemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor_stnk.description
 	Mobile:
@@ -558,7 +558,7 @@ td_nod_chemicalattackbike:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlockchemicalattackbike
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_chemicalattackbike
 		Queue: Vehicle, RAVehicle
 		Description: actor_bike.description
 	Mobile:
@@ -635,7 +635,7 @@ td_nod_chemicalstealthtank:
 		Type: Medium
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~td_nod_promotion_unlockchemicalstealthtank
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~td_nod_promotion_chemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor_stnk.description
 	Armament:
@@ -679,7 +679,7 @@ td_nod_chemicalssmlauncher:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
 		Description: actor_mssm.description
-		Prerequisites: ~td_nod_airstrip, td_nod_templeprime, ~td_nod_promotion_unlockchemicalssmlauncher
+		Prerequisites: ~td_nod_airstrip, td_nod_templeprime, ~td_nod_promotion_chemicalssmlauncher
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -736,7 +736,7 @@ td_nod_buggymkii:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlockbuggymkii
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_buggymkii
 		Description: Fast raider vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
 	Valued:
 		Cost: 500
@@ -828,7 +828,7 @@ td_nod_lighttankmkii:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlocklighttankmkii
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_lighttankmkii
 		Description: actor_ltnk2.description
 	Mobile:
 		Speed: 100
@@ -894,7 +894,7 @@ td_nod_flametankmkii:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_unlockflametankmkii
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_flametankmkii
 		Description: actor_ftnk.description
 	Mobile:
 		Speed: 75

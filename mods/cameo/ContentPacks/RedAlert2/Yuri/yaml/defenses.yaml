@@ -18,7 +18,7 @@ yuri_concretebarrier:
 #   Red Alert 2 Soviet Structures
 ##############################################
 
-yuri_slaveminer_2:
+yuri_slaveminer_deployed:
 	Inherits@2: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@shape: ^2x2Shape
@@ -70,7 +70,7 @@ yuri_slaveminer_2:
 	DrawLineToTarget:
 	Selectable:
 		Bounds: 2048, 2048
-		Class: yuri_slaveminer_2
+		Class: yuri_slaveminer_deployed
 	SlaveMinerSpawnerMaster:
 		Actors: yrslav, yrslav, yrslav, yrslav
 		SlavesHaveFreeWill: true

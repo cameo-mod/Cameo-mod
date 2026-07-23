@@ -269,7 +269,7 @@ ts_gdi_zonetrooper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter, ~ts_gdi_promotion_unlockzonetrooper
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter, ~ts_gdi_promotion_zonetrooper
 		Queue: Infantry, RAInfantry
 		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
 	Mobile:

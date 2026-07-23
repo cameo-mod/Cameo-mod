@@ -312,37 +312,37 @@ steelconsortium_consortiumbattlelab:
 		Offset: -8,-8
 		Tick: 50
 	idle:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech.shp
 		Start: 1
 		ShadowStart: 3
 	idle-lights:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech_a.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech_a.shp
 		Length: 11
 		ShadowStart: 22
 		Tick: 100
 	damaged-idle-lights:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech_a.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech_a.shp
 		Length: 11
 		ShadowStart: 33
 		Tick: 100
 	make:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech_make.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech_make.shp
 		Length: 31
 		ShadowStart: 31
 	dead:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech.shp
 		Start: 1
 	icon:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech_icon.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech_icon.shp
 		Offset: 0,0
 	iconw:
-		Filename: steelconsortium_upgrade_unlockempcannon_qatech_icon.shp
+		Filename: steelconsortium_upgrade_empcannon_qatech_icon.shp
 		Offset: 0,0
 	icon2:
-		Filename: steelconsortium_upgrade_unlockempcannon_icon.shp
+		Filename: steelconsortium_upgrade_empcannon_icon.shp
 		Offset: 0,0
 
 steelconsortium_orbitalcannonactivator:
@@ -1007,7 +1007,7 @@ steelconsortium_manta:
 
 steelconsortium_barracuda:
 	Defaults:
-		Filename: steelconsortium_promotion_unlockbarracuda_manta_hunt.shp
+		Filename: steelconsortium_promotion_barracuda_manta_hunt.shp
 		Offset: 0,32
 	idle:
 		Facings: 64
@@ -1019,7 +1019,7 @@ steelconsortium_barracuda:
 	barrel:
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
-		Filename: steelconsortium_promotion_unlockbarracuda_icon.shp
+		Filename: steelconsortium_promotion_barracuda_icon.shp
 		Offset: 0,0
 	muzzle:
 		Combine:
@@ -1189,7 +1189,7 @@ steelconsortium_megalodon:
 
 steelconsortium_stalker:
 	Defaults:
-		Filename: steelconsortium_promotion_unlockstalker.png
+		Filename: steelconsortium_promotion_stalker.png
 		Offset: 0,4
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1206,7 +1206,7 @@ steelconsortium_stalker:
 		Facings: 8
 		Tick: 70
 	icon:
-		Filename: steelconsortium_promotion_unlockstalker_icon.png
+		Filename: steelconsortium_promotion_stalker_icon.png
 		Offset: 0,0
 
 steelconsortium_whiterabbit:
@@ -1313,7 +1313,7 @@ steelconsortium_empressstation:
 hummer.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: steelconsortium_promotion_unlocksupportlvl2_hummer.shp
+		Filename: steelconsortium_promotion_supportlvl2_hummer.shp
 	idle:
 		Facings: 64
 		Scale: 0.75
@@ -1323,7 +1323,7 @@ hummer.steel:
 oldqtnk.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: steelconsortium_promotion_unlocksupportlvl3_oldqtnk.shp
+		Filename: steelconsortium_promotion_supportlvl3_oldqtnk.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -1340,7 +1340,7 @@ oldqtnk.steel:
 cougar.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: steelconsortium_promotion_unlocksupportlvl1_cougar.shp
+		Filename: steelconsortium_promotion_supportlvl1_cougar.shp
 	idle:
 		Facings: 64
 		Scale: 0.6
@@ -1356,7 +1356,7 @@ cougar.steel:
 cobra.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: steelconsortium_promotion_unlocksupportlvl4_cobra.shp
+		Filename: steelconsortium_promotion_supportlvl4_cobra.shp
 	idle:
 		Facings: 64
 		Scale: 0.8
@@ -1454,7 +1454,7 @@ steelconsortium_cargoship:
 
 steelconsortium_cloudbreaker:
 	Defaults:
-		Filename: steelconsortium_promotion_unlockcloudbreaker_cruiser.shp
+		Filename: steelconsortium_promotion_cloudbreaker_cruiser.shp
 	idle:
 		Facings: 64
 		Scale: 0.90
@@ -1462,7 +1462,7 @@ steelconsortium_cloudbreaker:
 		Filename: shared_sprites|steel_energymuzzle.shp
 		Length: 14
 	icon:
-		Filename: steelconsortium_promotion_unlockcloudbreaker_icon.shp
+		Filename: steelconsortium_promotion_cloudbreaker_icon.shp
 
 cruiser_f.steel:
 	Defaults:
@@ -1478,7 +1478,7 @@ cruiser_f.steel:
 
 steelconsortium_defenderbot:
 	Defaults:
-		Filename: steelconsortium_promotion_unlockdefenderbot.shp
+		Filename: steelconsortium_promotion_defenderbot.shp
 		Offset: 4,20
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -1496,7 +1496,7 @@ steelconsortium_defenderbot:
 		Facings: 8
 		Tick: 64
 	icon:
-		Filename: steelconsortium_promotion_unlockdefenderbot_icon.shp
+		Filename: steelconsortium_promotion_defenderbot_icon.shp
 		Offset: 0,0
 
 steelconsortium_upgrade_pulseweapons:

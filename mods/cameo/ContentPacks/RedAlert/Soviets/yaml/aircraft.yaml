@@ -12,7 +12,7 @@ ra1_soviets_yakscoutplane:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_upgrade_unlockteslayak, ~!ra1_soviets_upgrade_unlockarmoredyak, ~!ra1_soviets_upgrade_unlocknuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~!ra1_soviets_upgrade_teslayak, ~!ra1_soviets_upgrade_armoredyak, ~!ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 800
@@ -122,7 +122,7 @@ ra1_soviets_teslayak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_unlockteslayak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_teslayak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -238,7 +238,7 @@ ra1_soviets_armoredyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_unlockarmoredyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_armoredyak
 		Description: actor_yak.description
 	Valued:
 		Cost: 1600
@@ -340,7 +340,7 @@ ra1_soviets_nuclearyak:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_unlocknuclearyak
+		Prerequisites: ~ra1_soviets_airfield, ~ra1_soviets_upgrade_nuclearyak
 		Description: actor_yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1133,7 +1133,7 @@ ra1_soviets_supersonicnuclearbomber:
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlocksupersonicnuclearbomber
+		Prerequisites: ~ra1_soviets_airfield, ra1_soviets_techcenter, ~ra1_soviets_promotion_supersonicnuclearbomber
 		Description: actor_mignuke.description
 	Valued:
 		Cost: 7000

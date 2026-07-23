@@ -45,10 +45,10 @@ ixian_stormlasher:
 		Remap: 54F94B
 		Start: 38
 	idle:
-		Filename: ixian_promotion_unlockstormlasher_d2k_storm_lasher.shp
+		Filename: ixian_promotion_stormlasher_d2k_storm_lasher.shp
 		Scale: 1.5
 	damaged-idle:
-		Filename: ixian_promotion_unlockstormlasher_d2k_storm_lasher.shp
+		Filename: ixian_promotion_stormlasher_d2k_storm_lasher.shp
 		Scale: 1.5
 		Start: 1
 	make:
@@ -68,19 +68,19 @@ ixian_stormlasher:
 		Offset: -32,64
 		Tick: 100
 	idle-overlay:
-		Filename: ixian_promotion_unlockstormlasher_d2k_storm_lasher.shp
+		Filename: ixian_promotion_stormlasher_d2k_storm_lasher.shp
 		Scale: 1.5
 		Start: 2
 		Length: 10
 		Tick: 100
 	muzzle:
-		Filename: ixian_promotion_unlockstormraider_ra2_wclbolt1.shp
+		Filename: ixian_promotion_stormraider_ra2_wclbolt1.shp
 		Scale: 1.5
 		Offset: -12,-12
 		Length: *
 		BlendMode: Additive
 	icon:
-		Filename: ixian_promotion_unlockstormlasher_icon.shp
+		Filename: ixian_promotion_stormlasher_icon.shp
 		Offset: 0,-1
 
 ixian_supercomputer:
@@ -755,7 +755,7 @@ ixian_twinrockettrooper:
 heavy_inf.ixian:
 	Inherits: vordel_effect
 	Defaults:
-		Filename: ixian_promotion_unlockrashidan_ixheavytrooper.png
+		Filename: ixian_promotion_rashidan_ixheavytrooper.png
 	stand:
 		Start: 0
 		Facings: 8
@@ -857,7 +857,7 @@ heavy_inf.ixian:
 		Tick: 800
 		ZOffset: -511
 	icon:
-		Filename: ixian_promotion_unlockrashidan_icon.png
+		Filename: ixian_promotion_rashidan_icon.png
 	garrison-muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -871,38 +871,38 @@ shockgunner:
 	Defaults:
 		Scale: 1.5
 	stand:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 0
 		Facings: -8
 		Offset: 8,-5
 	run:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 8
 		Length: 6
 		Facings: -8
 		Offset: 8,-5
 		Tick: 100
 	shoot:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 56
 		Length: 5
 		Facings: -8
 		Offset: 8,-5
 		Tick: 80
 	prone-stand:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 96
 		Facings: -8
 		Offset: 8,-5
 	prone-run:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 104
 		Length: 3
 		Facings: -8
 		Offset: 8,-5
 		Tick: 100
 	prone-shoot:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 128
 		Length: 5
 		Facings: -8
@@ -973,38 +973,38 @@ ixian_storminfantry:
 	Defaults:
 		Scale: 1.5
 	stand:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 0
 		Facings: -8
 		Offset: 8,-5
 	run:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 8
 		Length: 6
 		Facings: -8
 		Offset: 8,-5
 		Tick: 100
 	shoot:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 56
 		Length: 5
 		Facings: -8
 		Offset: 8,-5
 		Tick: 80
 	prone-stand:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 96
 		Facings: -8
 		Offset: 8,-5
 	prone-run:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 104
 		Length: 3
 		Facings: -8
 		Offset: 8,-5
 		Tick: 100
 	prone-shoot:
-		Filename: ixian_promotion_unlockstorminfantry_d2k_shockgunner.shp
+		Filename: ixian_promotion_storminfantry_d2k_shockgunner.shp
 		Start: 128
 		Length: 5
 		Facings: -8
@@ -1060,7 +1060,7 @@ ixian_storminfantry:
 		Tick: 800
 		ZOffset: -511
 	icon:
-		Filename: ixian_promotion_unlockstorminfantry_icon.png
+		Filename: ixian_promotion_storminfantry_icon.png
 	garrison-muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1073,13 +1073,13 @@ ixian_storminfantry:
 ixian_neocymek:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: ixian_promotion_unlockneocymek_ixcymekspritesheet.png
+		Filename: ixian_promotion_neocymek_ixcymekspritesheet.png
 		#Scale: 1
 		Offset: 0,16
 	idle:
 		Facings: 8
 	turret:
-		Filename: ixian_promotion_unlockneocymek_ixcymekaaturretspritesheet.png
+		Filename: ixian_promotion_neocymek_ixcymekaaturretspritesheet.png
 		Facings: 64
 		Offset: 2,16
 	shoot:
@@ -1098,12 +1098,12 @@ ixian_neocymek:
 		Length: *
 		Offset: 0,20
 	icon:
-		Filename: ixian_promotion_unlockneocymek_icon.png
+		Filename: ixian_promotion_neocymek_icon.png
 		Offset: 0,0
 
 ixian_railgundrone:
 	Defaults:
-		Filename: ixian_promotion_unlockixrailgundrone_ixrailgun.png
+		Filename: ixian_promotion_ixrailgundrone_ixrailgun.png
 		Offset: 0, 16
 	idle:
 		Facings: 8
@@ -1115,7 +1115,7 @@ ixian_railgundrone:
 		Length: 7
 		Tick: 60
 	icon:
-		Filename: ixian_promotion_unlockixrailgundrone_icon.png
+		Filename: ixian_promotion_ixrailgundrone_icon.png
 		Offset: 0,0
 
 ixian_airdrone:
@@ -1174,7 +1174,7 @@ harvester_husk.ixian:
 
 ix_siege_tank:
 	idle:
-		Filename: ixian_promotion_unlockixsiegetank.shp
+		Filename: ixian_promotion_ixsiegetank.shp
 		Scale: 1.5
 		Start: 0
 		Facings: -32
@@ -1186,7 +1186,7 @@ ix_siege_tank:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: ixian_promotion_unlockixsiegetank_icon.shp
+		Filename: ixian_promotion_ixsiegetank_icon.shp
 
 ix_missile_tank:
 	idle:
@@ -1203,19 +1203,19 @@ ix_missile_tank:
 
 d2k_projector:
 	idle:
-		Filename: ixian_promotion_unlockixprojector_d2k_projector.shp
+		Filename: ixian_promotion_ixprojector_d2k_projector.shp
 		Start: 0
 		Facings: -32
 		Scale: 2.5
 		Offset: 0,-3
 	spinner:
-		Filename: ixian_promotion_unlockixprojector_d2k_projector.shp
+		Filename: ixian_promotion_ixprojector_d2k_projector.shp
 		Start: 32
 		Length: 32
 		Scale: 2.5
 		Offset: 0,-3
 	icon:
-		Filename: ixian_promotion_unlockixprojector_icon.shp
+		Filename: ixian_promotion_ixprojector_icon.shp
 
 d2k_projector2:
 	idle:
@@ -1231,16 +1231,16 @@ d2k_projector2:
 		Scale: 1
 		Offset: 0,0
 	icon:
-		Filename: ixian_promotion_unlockixprojector_icon.shp
+		Filename: ixian_promotion_ixprojector_icon.shp
 
 ixian_farasha:
 	idle:
-		Filename: ixian_promotion_unlockfarasha_ixfarashaspritesheet.png
+		Filename: ixian_promotion_farasha_ixfarashaspritesheet.png
 		Scale: 1.5
 		Start: 0
 		Facings: 64
 	icon:
-		Filename: ixian_promotion_unlockfarasha_icon.png
+		Filename: ixian_promotion_farasha_icon.png
 
 farasha_husk.ixian:
 	idle:
@@ -1443,7 +1443,7 @@ ix_raider:
 		Facings: 64
 		Start: 64
 	icon:
-		Filename: ixian_promotion_unlockheavyixraider_icon.shp
+		Filename: ixian_promotion_heavyixraider_icon.shp
 
 ixian_shockraider:
 	Defaults:
@@ -1469,23 +1469,23 @@ ixian_shockraider:
 		ZOffset: -1
 		Facings: -32
 	icon:
-		Filename: ixian_promotion_unlockheavyixraider_icon.shp
+		Filename: ixian_promotion_heavyixraider_icon.shp
 
 ixian_stormraider:
 	Defaults:
 	idle:
-		Filename: ixian_promotion_unlockstormraider_ixstormtrikespritestreet.png
+		Filename: ixian_promotion_stormraider_ixstormtrikespritestreet.png
 		Facings: 64
 	muzzle:
-		Filename: ixian_promotion_unlockstormraider_ra2_wclbolt1.shp
+		Filename: ixian_promotion_stormraider_ra2_wclbolt1.shp
 		Scale: 1.5
 		Offset: -12,-12
 		Length: *
 		BlendMode: Additive
 	icon:
-		Filename: ixian_promotion_unlockstormraider_icon.png
+		Filename: ixian_promotion_stormraider_icon.png
 
-ixian_personal_shield_icon:
+ixian_personalshield_icon:
 	icon:
 		Filename: ixian_upgrade_personalshield_icon.shp
 
@@ -1511,17 +1511,17 @@ apparition.ixian:
 
 ixian_empbomber:
 	Defaults:
-		Filename: ixian_promotion_unlockixianempbomber_ixheavydrone.png
+		Filename: ixian_promotion_ixianempbomber_ixheavydrone.png
 		Offset: 0, 32
 	idle:
 		Facings: 64
 	icon:
-		Filename: ixian_promotion_unlockixianempbomber_icon.png
+		Filename: ixian_promotion_ixianempbomber_icon.png
 		Offset: 0,0
 
 ixian_resonancedrone:
 	Defaults:
-		Filename: ixian_promotion_unlockixresonancedrone_ixresonancedrone.png
+		Filename: ixian_promotion_ixresonancedrone_ixresonancedrone.png
 		Offset: 0, 4
 		Scale: 1.5
 	idle:
@@ -1532,7 +1532,7 @@ ixian_resonancedrone:
 		Length: 7
 		Tick: 60
 	icon:
-		Filename: ixian_promotion_unlockixresonancedrone_icon.png
+		Filename: ixian_promotion_ixresonancedrone_icon.png
 		Offset: 0,0
 
 ixian_upgrade_twinbazooka:

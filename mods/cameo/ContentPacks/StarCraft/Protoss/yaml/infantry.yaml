@@ -16,7 +16,7 @@ protoss_zealot:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_gateway, ~!protoss_promotion_unlocklegionnaire
+		Prerequisites: ~protoss_gateway, ~!protoss_promotion_legionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor_sczealot.description
 	Mobile:
@@ -227,7 +227,7 @@ protoss_darktemplar:
 		Amount: -30
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_citadelofadun, ~!protoss_promotion_unlockamaranth
+		Prerequisites: ~protoss_citadelofadun, ~!protoss_promotion_amaranth
 		Queue: Infantry, RAInfantry
 		Description: actor_scdarktemplar.description
 	Mobile:
@@ -323,7 +323,7 @@ protoss_amaranth:
 		Amount: -60
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~protoss_citadelofadun, ~protoss_promotion_unlockamaranth
+		Prerequisites: ~protoss_citadelofadun, ~protoss_promotion_amaranth
 		Queue: Infantry, RAInfantry
 		Description: actor_scamaranth.description
 	Mobile:
@@ -379,7 +379,7 @@ protoss_legionnaire:
 		Amount: -35
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~protoss_gateway, ~protoss_promotion_unlocklegionnaire
+		Prerequisites: ~protoss_gateway, ~protoss_promotion_legionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor_sclegionnaire.description
 	Mobile:
@@ -422,7 +422,7 @@ protoss_patriarch:
 		Amount: -200
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~protoss_templararchives, ~protoss_promotion_unlockpatriarch
+		Prerequisites: ~protoss_templararchives, ~protoss_promotion_patriarch
 		Queue: Infantry, RAInfantry
 		Description: actor_scpatriarch.description
 		BuildLimit: 1

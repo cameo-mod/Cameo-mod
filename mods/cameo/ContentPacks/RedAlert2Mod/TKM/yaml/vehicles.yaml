@@ -669,7 +669,7 @@ tkm_trenchtruck:
 		NoTransformNotification: BuildingCannotPlaceAudio
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_upgrade_berezkaarsenalupgrade, ~!tkm_promotion_unlocktrenchtank
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_upgrade_berezkaarsenalupgrade, ~!tkm_promotion_trenchtank
 		Queue: Vehicle, RAVehicle
 		Description: TKM forward base. Provides Buildable Area.
 		BuildDuration: 3000
@@ -799,7 +799,7 @@ tkm_radartruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tkm_warfactory, ~tkm_promotion_unlockradartruck
+		Prerequisites: ~tkm_warfactory, ~tkm_promotion_radartruck
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Mobile:
@@ -845,7 +845,7 @@ tkm_repairtruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 26
-		Prerequisites: ~tkm_warfactory, ~tkm_promotion_unlockrepairtruck
+		Prerequisites: ~tkm_warfactory, ~tkm_promotion_repairtruck
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Armament@repair:
@@ -908,7 +908,7 @@ tkm_medictruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 27
-		Prerequisites: ~tkm_warfactory, ~tkm_promotion_unlockmedictruck
+		Prerequisites: ~tkm_warfactory, ~tkm_promotion_medictruck
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Armament@Heal:
@@ -967,7 +967,7 @@ tkm_dronepodtruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 26
-		Prerequisites: ~tkm_warfactory, ~tkm_promotion_unlockdronepodtruck, tkm_techcenter
+		Prerequisites: ~tkm_warfactory, ~tkm_promotion_dronepodtruck, tkm_techcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Armament:
@@ -1025,7 +1025,7 @@ tkm_trenchtank:
 		NoTransformNotification: BuildingCannotPlaceAudio
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_promotion_unlocktrenchtank
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_promotion_trenchtank
 		Queue: Vehicle, RAVehicle
 		Description: TKM forward base.\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft
 		BuildDuration: 3000
@@ -1089,7 +1089,7 @@ tkm_t30:
 		Name: T-30
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_t30, ~tkm_promotion_unlockt30
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_t30, ~tkm_promotion_t30
 		Queue: Vehicle, RAVehicle
 		Description: TKM Russian heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 		BuildLimit: 1
@@ -1157,7 +1157,7 @@ tkm_battlebus:
 		OverrideActor: ra2_allies_battlefortress
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_promotion_unlockbattlebus
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~tkm_promotion_battlebus
 		Queue: Vehicle, RAVehicle
 		Description: template_opentopped.description
 	Mobile:
@@ -1219,7 +1219,7 @@ tkm_battlebus:
 # 		Name: Battle Bus
 # 	Buildable:
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_berezkaarsenalupgrade, ~tkm_promotion_unlockbattlebus
+# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_berezkaarsenalupgrade, ~tkm_promotion_battlebus
 # 		Queue: Vehicle, RAVehicle
 # 		Description: template_opentopped.description
 # 	Cargo:
@@ -1240,7 +1240,7 @@ tkm_battlebus:
 # 		Name: Battle Bus
 # 	Buildable:
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_titanarsenalupgrade, ~tkm_promotion_unlockbattlebus
+# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_titanarsenalupgrade, ~tkm_promotion_battlebus
 # 		Queue: Vehicle, RAVehicle
 # 		Description: template_opentopped.description
 # 	Cargo:
@@ -1261,7 +1261,7 @@ tkm_battlebus:
 # 		Name: Battle Bus
 # 	Buildable:
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_natoarsenalupgrade, ~tkm_promotion_unlockbattlebus
+# 		Prerequisites: ~tkm_warfactory, ~tkm_techcenter, ~tkm_upgrade_natoarsenalupgrade, ~tkm_promotion_battlebus
 # 		Queue: Vehicle, RAVehicle
 # 		Description: template_opentopped.description
 # 	Cargo:
@@ -1294,7 +1294,7 @@ tkm_sandmarine:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_sandmarine, ~tkm_promotion_unlockthesandmarine
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_sandmarine, ~tkm_promotion_thesandmarine
 		Queue: Vehicle, RAVehicle
 		Description: Subterranean super vehicle. Strong against everything ground.
 		BuildLimit: 1
@@ -1446,7 +1446,7 @@ tkm_flakbus:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tkm_warfactory, ~tkm_promotion_unlockflakbus, tkm_techcenter
+		Prerequisites: ~tkm_warfactory, ~tkm_promotion_flakbus, tkm_techcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Transforms:
@@ -1499,7 +1499,7 @@ tkm_bigshiee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_bigshiee, ~tkm_promotion_unlockthebigshiee
+		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_bigshiee, ~tkm_promotion_thebigshiee
 		Queue: Vehicle, RAVehicle
 		Description: Super Open Topped vehicle. Strong against everything ground.
 		BuildLimit: 1

@@ -73,7 +73,7 @@ zerg_sporemaw:
 		Amount: -50
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~zerg_lair, ~zerg_promotion_unlocksporemaw
+		Prerequisites: ~zerg_lair, ~zerg_promotion_sporemaw
 		Queue: SCZergInfantry
 		Description: actor_scsporemaw.description
 	Mobile:
@@ -132,7 +132,7 @@ zerg_hermit:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 80
-		Prerequisites: ~zerg_ultraliskcavern, ~zerg_promotion_unlockhermit
+		Prerequisites: ~zerg_ultraliskcavern, ~zerg_promotion_hermit
 		Queue: SCZergInfantry
 		Description: actor_schermit.description
 	Mobile:
@@ -196,7 +196,7 @@ zerg_goremaw:
 		Amount: -75
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: zerg_ultraliskcavern, ~zerg_hive, ~zerg_promotion_unlockgoremaw
+		Prerequisites: zerg_ultraliskcavern, ~zerg_hive, ~zerg_promotion_goremaw
 		Queue: SCZergInfantry
 		Description: actor_scgoremaw.description
 	Mobile:

@@ -204,9 +204,9 @@ zerg_sunkencolony:
 	Plug:
 		Type: zerg_creepcolony
 	RenderSprites:
-		Image: zerg_sunkencolony_2
+		Image: zerg_sunkencolony_defense
 
-zerg_sporecolony_2:
+zerg_sporecolony_defense:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Spore Colony

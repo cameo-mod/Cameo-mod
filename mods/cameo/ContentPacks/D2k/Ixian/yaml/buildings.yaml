@@ -1106,7 +1106,7 @@ ixian_stormlasher:
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~ixian_constructionyard, ~ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
+		Prerequisites: ~ixian_constructionyard, ~ixian_promotion_stormlasher, ixian_ixresearchcenter
 		BuildPaletteOrder: 750
 		Description: actor_storm_lasher.description
 		IconPalette: player

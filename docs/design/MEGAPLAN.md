@@ -52,3 +52,250 @@ Templates are generated from the canonical profile and level inputs, then resolv
 ## 5. Long-term product direction
 
 The non-actionable Dynamic Campaign Mode vision, including its narrative, campaign structure, co-op concept, and future balance-test harness, lives in [VISION.md](VISION.md). It is intentionally separate from this rebalance program and from the active work queue.
+
+---
+
+## 6. Naming Scheme Refactor — Promotions, Upgrades, and Actor Names
+
+### 6.0 Objective
+
+Align all actor names with DESIGN.md §1 naming convention: `[game_]faction_nameinonegroup[_variant]`, where `nameinonegroup` is a single unbroken lowercase group. Specifically fix three violation categories plus suffix standardization:
+
+1. **Promotions with "unlock"** (177 renames) — DESIGN.md §1: "Promotions never carry unlock in the id"
+2. **Upgrades with "unlock"** (12 renames) — same rule applies to upgrades
+3. **Actor names with internal underscores** (13 renames) — merge into one unbroken group
+4. **Non-standard suffix renames** (12 renames) — replace `_2`/`_3` with descriptive suffixes
+
+**Total: 214 renames across 20 factions.**
+
+### 6.1 Acceptance Criteria
+
+- All 214 renames applied across all YAML files, asset files, and fluent keys
+- `tools/audit/dump_resolved.py` before/after diff is empty (behavior preserved)
+- Game boots without errors
+- `audit_naming.py` shows 0 violations in these categories
+- No broken references (grep for old IDs returns 0 hits)
+- DESIGN.md §1 variant list updated with new suffixes
+
+### 6.2 Scope
+
+**In Scope:**
+- All YAML files loaded via `mod.yaml` and content pack `content.yaml` manifests
+- Asset files (PNG, SHP, etc.) that follow actor IDs
+- Fluent translation keys (`actor-<id>.name`, `actor-<id>.description`)
+- AI squad compositions and starting unit references
+- Map files that reference renamed actors (zerg_sunkencolony_2 used in maps)
+- DESIGN.md §1 variant list update
+
+**Out of Scope:**
+- Weapons with internal underscores (43 violations — user explicitly skipped)
+- `_proxy_actor` suffix entries (0 violations — DESIGN.md says valid)
+- Non-unlock promotions/upgrades/doctrines (405 violations — the underscore between the tech marker and the name IS a valid section separator)
+- Faction name corrections (already done)
+- C# code changes
+
+### 6.3 Constraints
+
+- **Compatibility**: All renames must be behavior-preserving — no stat, weapon, or prerequisite changes
+- **Tooling**: Use existing `tools/rename/rename_map_<faction>.yaml` + `tools/rename/apply.py` pipeline
+- **Verification**: `dump_resolved.py` diff must be empty before and after
+- **Style**: One faction at a time, curated rename maps, reviewed before apply
+- **Asset safety**: Only rename asset files proven to be used by exactly one actor (DESIGN.md §1 shared file law)
+- **Boot test**: Launch game after each faction batch, wait 30s, kill process, check for new exceptions
+- **Git**: Pre-rename baseline committed (commit `f1a12c4c1`). Renames committed as a separate commit afterwards for clean diff.
+
+### 6.4 Category 1: Promotions with "unlock" (177 renames)
+
+**Rule**: Remove `unlock` from the ID. The promotion tech marker stays, the name follows directly.
+
+**Pattern**: `faction_promotion_unlock<name>` → `faction_promotion_<name>`
+
+| Faction | Count | Example |
+|---|---|---|
+| asianalliance | 12 | `asianalliance_promotion_unlockasdf` → `asianalliance_promotion_asdf` |
+| futuretech | 12 | `futuretech_promotion_unlockblackwidow` → `futuretech_promotion_blackwidow` |
+| ixian | 12 | `ixian_promotion_unlockfarasha` → `ixian_promotion_farasha` |
+| japan | 12 | `japan_promotion_unlockarchermaiden` → `japan_promotion_archermaiden` |
+| latinsyndicate | 12 | `latinsyndicate_promotion_unlockburritos` → `latinsyndicate_promotion_burritos` |
+| ordos | 12 | `ordos_promotion_unlockbanshees` → `ordos_promotion_banshees` |
+| protoss | 12 | `protoss_promotion_unlockamaranth` → `protoss_promotion_amaranth` |
+| ra1_allies | 12 | `ra1_allies_promotion_unlockbastion` → `ra1_allies_promotion_bastion` |
+| td_gdi | 12 | `td_gdi_promotion_unlockassaultapc` → `td_gdi_promotion_assaultapc` |
+| terran | 12 | `terran_promotion_unlockcyclone` → `terran_promotion_cyclone` |
+| tkm | 12 | `tkm_promotion_unlockbattlebus` → `tkm_promotion_battlebus` |
+| zerg | 12 | `zerg_promotion_unlockbehemoth` → `zerg_promotion_behemoth` |
+| td_nod | 11 | `td_nod_promotion_unlockblackhandflamer` → `td_nod_promotion_blackhandflamer` |
+| ts_gdi | 8 | `ts_gdi_promotion_unlockhammerhead` → `ts_gdi_promotion_hammerhead` |
+| steelconsortium | 9 | `steelconsortium_promotion_unlockbarracuda` → `steelconsortium_promotion_barracuda` |
+| ra1_soviets | 6 | `ra1_soviets_promotion_unlockcyberdog` → `ra1_soviets_promotion_cyberdog` |
+
+Full list in `C:/Users/AedisToru/.windsurf/plans/categorized_output.txt` lines 3-181.
+
+### 6.5 Category 2: Upgrades with "unlock" (12 renames)
+
+**Rule**: Same as promotions — remove `unlock` from the ID.
+
+| Old ID | New ID |
+|---|---|
+| `asianalliance_upgrade_unlockchaosbombs` | `asianalliance_upgrade_chaosbombs` |
+| `asianalliance_upgrade_unlockclusterbombs` | `asianalliance_upgrade_clusterbombs` |
+| `asianalliance_upgrade_unlockmassparadrop` | `asianalliance_upgrade_massparadrop` |
+| `latinsyndicate_upgrade_unlockempcannon` | `latinsyndicate_upgrade_empcannon` |
+| `naxis_upgrade_unlockme262` | `naxis_upgrade_me262` |
+| `ra1_soviets_upgrade_unlockarmoredyak` | `ra1_soviets_upgrade_armoredyak` |
+| `ra1_soviets_upgrade_unlockcommissar` | `ra1_soviets_upgrade_commissar` |
+| `ra1_soviets_upgrade_unlockheatraytank` | `ra1_soviets_upgrade_heatraytank` |
+| `ra1_soviets_upgrade_unlocknuclearyak` | `ra1_soviets_upgrade_nuclearyak` |
+| `ra1_soviets_upgrade_unlockteslayak` | `ra1_soviets_upgrade_teslayak` |
+| `steelconsortium_upgrade_unlockempcannon` | `steelconsortium_upgrade_empcannon` |
+| `td_gdi_upgrade_unlocka10airstrike` | `td_gdi_upgrade_a10airstrike` |
+
+### 6.6 Category 3a: Actor names with internal underscores (13 renames)
+
+**Rule**: Merge the name section into one unbroken lowercase group. Preserve standard variant suffixes (`_husk`, `_slave`, `_icon`).
+
+| Old ID | New ID | Notes |
+|---|---|---|
+| `cabal_cyborg_assassin` | `cabal_cyborgassassin` | Sequence key |
+| `cabal_cyborg_assassin_husk` | `cabal_cyborgassassin_husk` | Husk variant |
+| `cabal_hunter_drone` | `cabal_hunterdrone` | Sequence key |
+| `cabal_hunter_drone_carrier` | `cabal_hunterdronecarrier` | `_carrier` merged into name (user decision) |
+| `cabal_hunter_drone_carrier_husk` | `cabal_hunterdronecarrier_husk` | Carrier husk |
+| `cabal_hunter_drone_husk` | `cabal_hunterdrone_husk` | Drone husk |
+| `cabal_orb_drone` | `cabal_orbdrone` | Sequence key |
+| `cabal_orb_drone_slave` | `cabal_orbdrone_slave` | `_slave` added as variant (user decision) |
+| `cabal_overkill_gunship` | `cabal_overkillgunship` | Sequence key |
+| `cabal_overkill_gunship_husk` | `cabal_overkillgunship_husk` | Husk variant |
+| `cabal_repair_drone` | `cabal_repairdrone` | Sequence key |
+| `ixian_personal_shield_icon` | `ixian_personalshield_icon` | Sequence key, `_icon` is sequence suffix |
+| `japan_shrine_minitank` | `japan_shrineminitank` | Vehicle actor |
+
+### 6.7 Category 3b: Non-standard suffix renames (12 renames)
+
+**Rule**: Replace non-descriptive `_2`/`_3` suffixes with descriptive variant suffixes.
+
+| Old ID | New ID | Rationale |
+|---|---|---|
+| `ra2_allies_battlefortress_2` | `ra2_allies_battlefortress_empty` | Editor-only empty variant |
+| `ra2_allies_battlefortress_3` | `ra2_allies_battlefortress_chrono` | Chrono variant |
+| `wc2_humans_guardtower_2` | `wc2_humans_guardtower_plug` | Building plug |
+| `wc2_humans_cannontower_2` | `wc2_humans_cannontower_plug` | Building plug |
+| `wc2_humans_humangoldmine_2` | `wc2_humans_humangoldmine_bot` | AI-only variant (prerequisite `~botplayer`, pre-garrisoned with 10 workers) |
+| `wc2_orcs_guardtower_2` | `wc2_orcs_guardtower_plug` | Building plug |
+| `wc2_orcs_cannontower_2` | `wc2_orcs_cannontower_plug` | Building plug |
+| `wc2_orcs_orcgoldmine_2` | `wc2_orcs_orcgoldmine_bot` | AI-only variant (prerequisite `~botplayer`, pre-garrisoned with 10 peons) |
+| `yuri_slaveminer_2` | `yuri_slaveminer_deployed` | Deployed building form of vehicle |
+| `zerg_creepcolony_2` | `zerg_creepcolony_defense` | Defense-queue variant |
+| `zerg_sporecolony_2` | `zerg_sporecolony_defense` | Defense-queue variant |
+| `zerg_sunkencolony_2` | `zerg_sunkencolony_defense` | Defense-queue variant (also in map files) |
+
+### 6.8 DESIGN.md §1 variant list additions (documentation only, no renames)
+
+The following suffixes are already in use and need to be added to the DESIGN.md §1 variant list:
+
+| Suffix | Used by | Rationale |
+|---|---|---|
+| `_slave` | `cabal_orbdrone_slave`, `japan_zerofighter_slave` | Slave unit deployed by master |
+| `_air` | `ts_nod_shadowteam_air` | Flying transform of ground unit |
+| `_backup` | 5 CABAL backup actors | Auto-rebuilding functional entity (distinct from `_husk`) |
+| `_segment` | `ts_nod_laserfence_segment` | Structural piece of a larger fence |
+| `_bomber` | `ra1_allies_cargoplane_bomber` | Bomber variant of cargoplane |
+| `_paradrop` | `ra1_allies_cargoplane_paradrop` | Paradrop variant of cargoplane |
+| `_chrono` | `ra2_allies_ifv_chrono`, `ra2_allies_battlefortress_chrono` | Chrono weapon variant |
+| `_hmg` | `ra2_allies_ifv_hmg` | Heavy machine gun garrison mode |
+| `_mg` | `ra2_allies_ifv_mg` | Machine gun garrison mode |
+| `_missile` | `ra2_allies_ifv_missile` | Missile garrison mode |
+| `_repair` | `ra2_allies_ifv_repair` | Repair garrison mode |
+| `_empty` | `ra2_allies_battlefortress_empty` | Editor-only empty variant |
+| `_plug` | 4 WC2 building plug actors (guardtower, cannontower) | Building plug attachment |
+| `_bot` | 2 WC2 goldmine AI-only actors | AI-only variant (prerequisite `~botplayer`) |
+| `_defense` | 3 Zerg defense-queue actors | Defense-queue variant of building |
+| `_deployed` | `yuri_slaveminer_deployed` | Deployed building form of vehicle |
+
+### 6.9 Implementation Plan
+
+#### Step 1: Pre-flight (DONE)
+- Baseline commit: `f1a12c4c1` (pre-rename clean state)
+- Audit script verified: 677 total violations, 214 in scope
+
+#### Step 2: Update DESIGN.md §1
+Add the 15 new variant suffixes listed in §6.8 to the variant list.
+
+#### Step 3: Create rename maps per faction
+For each faction with renames, create `tools/rename/rename_map_<faction>.yaml` entries.
+
+#### Step 4: Apply renames per faction (one at a time)
+For each faction:
+1. Add entries to `tools/rename/rename_map_<faction>.yaml`
+2. Run `python tools/rename/apply.py --faction <faction>`
+3. Use `grep_search` to find any remaining references to old IDs across ALL yaml files
+4. Manually fix any references the script missed (fluent keys, AI squads, starting units, cross-faction references, map files)
+5. Rename asset files (PNG, SHP) that match old actor IDs
+6. Run `python tools/audit/dump_resolved.py` and diff against pre-rename snapshot — must be empty
+7. Boot test: launch game, wait 30s, kill process, check for new exceptions
+
+#### Step 5: Faction processing order (smallest first to validate pipeline)
+1. **naxis** (1 upgrade)
+2. **ts_nod** (1 actor: laserfence_segment — no rename needed, just variant addition)
+3. **ixian** (12 promotions + 1 actor = 13)
+4. **japan** (12 promotions + 1 actor = 13)
+5. **ra2_allies** (2 actors: battlefortress suffix renames + 5 IFV variant additions = 2 renames)
+6. **cabal** (11 actor renames)
+7. **ra1_soviets** (6 promotions + 5 upgrades = 11)
+8. **td_gdi** (12 promotions + 1 upgrade = 13)
+9. **td_nod** (11 promotions)
+10. **ordos** (12 promotions)
+11. **protoss** (12 promotions)
+12. **terran** (12 promotions)
+13. **zerg** (12 promotions + 3 suffix renames = 15)
+14. **tkm** (12 promotions)
+15. **ts_gdi** (8 promotions)
+16. **asianalliance** (12 promotions + 3 upgrades = 15)
+17. **futuretech** (12 promotions)
+18. **latinsyndicate** (12 promotions + 1 upgrade = 13)
+19. **ra1_allies** (12 promotions)
+20. **steelconsortium** (9 promotions + 1 upgrade = 10)
+21. **wc2_humans** (3 suffix renames)
+22. **wc2_orcs** (3 suffix renames)
+23. **yuri** (1 suffix rename)
+
+#### Step 6: Post-rename verification
+1. Run `python tools/audit/dump_resolved.py` — full diff must be empty
+2. Run `python audit_naming.py` — 0 violations in categories 1-3
+3. `grep_search` for `promotion_unlock` across all YAML files — 0 hits
+4. `grep_search` for `upgrade_unlock` across all YAML files — 0 hits
+5. Full boot test with log check
+6. Run `audit_asset_files.py` (A1 must be 0)
+
+#### Step 7: Commit
+Commit all renames as a single separate commit for clean diff against baseline `f1a12c4c1`.
+
+### 6.10 What each rename touches
+
+For each actor ID rename, the following must be updated:
+
+1. **Actor definition** (the YAML node key in the faction's rules file)
+2. **Sequence definition** (the YAML node key in `sequences.yaml` — often shares the actor ID)
+3. **Cross-references** in other actors:
+   - `Prerequisites:` fields referencing the old ID
+   - `Buildable:` / `Prerequisites:` with `~` / `~!` condition prefixes
+   - `SpawnActorOnDeath:` Actor: references
+   - `Transforms:` / `IntoActor:` references
+   - `ProductionAircraft:` / `CarrierSpawnable:` references
+   - `RenderSprites:` Image: references
+   - `ProvidesPrerequisite:` entries
+4. **AI references**: `ai.yaml` squad compositions, starting units, building fractions
+5. **Faction starting units**: `faction.yaml` `StartingUnits` references
+6. **Fluent keys**: `actor-<old_id>.name` → `actor-<new_id>.name` in `.ftl` files
+7. **Asset files**: `<old_id>.png` → `<new_id>.png`, `<old_id>_icon.png` → `<new_id>_icon.png`, etc.
+8. **Map files**: Actor references in `maps/*/map.yaml` (especially `zerg_sunkencolony_2`)
+9. **Promotion grants**: `GrantPrerequisite:` / `ProductionPrerequisites:` referencing promotion IDs in other actors' `Prerequisites:`
+
+### 6.11 Risk notes
+
+- **Cross-faction references**: Some promotions/upgrades may be referenced by actors in other factions (e.g., team upgrades). The grep step must cover ALL YAML files, not just the faction's own pack.
+- **Shared YAML files**: Some actors are defined in `Shared/` packs (e.g., `ra1_allies_cargoplane_bomber` is in `RedAlert/Shared/yaml/aircraft.yaml`). These need careful handling.
+- **Fluent key migration**: Fluent keys are in multiple `.ftl` files across packs and `fluent/rules/`. Must grep all of them.
+- **Asset file safety**: Before renaming any asset file, verify it's used by exactly one actor (DESIGN.md §1 shared file law).
+- **Map files**: `zerg_sunkencolony_2` is used in 20+ actor references across `maps/delivery/map.yaml` and `maps/deliverycoop/map.yaml`. These must be updated.
+- **Sequence key vs actor key**: Some renames affect sequence keys (e.g., `cabal_hunter_drone` is a sequence key, not an actor definition). The sequence key and actor key may differ — verify which is which before renaming.

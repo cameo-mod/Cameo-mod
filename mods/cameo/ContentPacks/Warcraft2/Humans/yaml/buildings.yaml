@@ -589,7 +589,7 @@ wc2_humans_gryphonaviary:
 	Voiced:
 		VoiceSet: wc2gryphonaviaryvoice
 
-wc2_humans_guardtower_2:
+wc2_humans_guardtower_plug:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Cannon Tower
@@ -604,7 +604,7 @@ wc2_humans_guardtower_2:
 	RenderSprites:
 		Image: wc2_humans_cannontower
 
-wc2_humans_cannontower_2:
+wc2_humans_cannontower_plug:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Guard Tower
@@ -633,7 +633,7 @@ wc2_humans_humangoldmine:
 	RenderSprites:
 		Image: wc2_humans_humangoldmine
 
-wc2_humans_humangoldmine_2:
+wc2_humans_humangoldmine_bot:
 	Inherits@WC2BUILDING: wc2_humans_humangoldmine
 	Inherits@gar: ^ClearableGarrison
 	Valued:

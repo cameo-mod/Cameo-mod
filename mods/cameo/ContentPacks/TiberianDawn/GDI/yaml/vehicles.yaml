@@ -49,7 +49,7 @@ td_gdi_apc:
 		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_barracks, ~!td_gdi_promotion_unlockassaultapc
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_barracks, ~!td_gdi_promotion_assaultapc
 		Queue: Vehicle, RAVehicle
 		Description: actor_apc.description
 	Mobile:
@@ -116,7 +116,7 @@ td_gdi_humvee:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_unlockhumveemkii
+		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_humveemkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Mobile:
@@ -169,7 +169,7 @@ td_gdi_battletank:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_unlockpredatortank
+		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_predatortank
 		Queue: Vehicle, RAVehicle
 		Description: actor_mtnk.description
 	Mobile:
@@ -260,7 +260,7 @@ td_gdi_mammothtank:
 		Cost: 1600
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockmammothtankmk3
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_mammothtankmk3
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -551,7 +551,7 @@ td_gdi_assaultapc:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockassaultapc
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_assaultapc
 		Description: template_opentopped.description
 	Mobile:
 		Speed: 100
@@ -634,7 +634,7 @@ td_gdi_humveemkii:
 		Name: Humvee Mk. II
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_unlockhumveemkii
+		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_humveemkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Valued:
@@ -727,7 +727,7 @@ td_gdi_predatortank:
 		Name: Predator Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_unlockpredatortank
+		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_predatortank
 		Queue: Vehicle, RAVehicle
 		Description: actor_gdipredator.description
 	Mobile:
@@ -827,7 +827,7 @@ td_gdi_mammothtankmkiii:
 		Name: Mammoth Tank Mk. III
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockmammothtankmk3
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_mammothtankmk3
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -915,7 +915,7 @@ td_gdi_exosuit:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockhavocandexosuit
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_havocandexosuit
 		Description: actor_exosuit.description
 	Mobile:
 		TurnSpeed: 40
@@ -993,7 +993,7 @@ td_gdi_defenserig:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockgdidefenserig
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_gdidefenserig
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:

@@ -22,13 +22,13 @@ up_resurrection.nax:
 	RenderSprites:
 		Image: undead.nax
 
-naxis_upgrade_unlockme262:
+naxis_upgrade_me262:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Me 262
 	Buildable:
 		Description: Upgrades the BF 109 to the Me 262
-		Prerequisites: ~naxis_radar, !naxis_upgrade_unlockme262
+		Prerequisites: ~naxis_radar, !naxis_upgrade_me262
 	RenderSprites:
 		Image: naxis_me262
 

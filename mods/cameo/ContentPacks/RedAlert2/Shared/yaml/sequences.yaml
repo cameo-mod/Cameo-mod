@@ -3415,23 +3415,23 @@ ra2flameguy:
 
 ^RA2InfantryDeaths:
 	die4:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_nukedie.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_nukedie.shp
 		Length: *
 		Tick: 50
 	die5:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_yuridie.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_yuridie.shp
 		Length: *
 		Tick: 80
 	die6:
-		Filename: futuretech_promotion_unlockcryolegionnaire_ra2_electro.shp
+		Filename: futuretech_promotion_cryolegionnaire_ra2_electro.shp
 		Length: *
 		Tick: 80
 	die7:
-		Filename: futuretech_promotion_unlockcryolegionnaire_yr_virusd.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_virusd.shp
 		Length: *
 		Tick: 80
 	die8:
-		Filename: futuretech_promotion_unlockcryolegionnaire_yr_brutdie.shp
+		Filename: futuretech_promotion_cryolegionnaire_yr_brutdie.shp
 		Length: *
 		Tick: 80
 
@@ -3641,7 +3641,7 @@ ra2e2.black:
 ra2terror:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockterrorists_ra2_trst.shp
+		Filename: latinsyndicate_promotion_terrorists_ra2_trst.shp
 	run:
 		Tick: 120
 	shoot:
@@ -3675,7 +3675,7 @@ ra2terror:
 	idle3:
 	idle4:
 	icon:
-		Filename: latinsyndicate_promotion_unlockterrorists_icon.shp
+		Filename: latinsyndicate_promotion_terrorists_icon.shp
 
 ra2sidewind:
 	Inherits: ^RA2ArmedInfantry
@@ -4048,12 +4048,12 @@ ra2dlph:
 
 ra2dtruck:
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Filename: latinsyndicate_promotion_demolitiontrucks_ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
 	icon:
-		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_icon.shp
+		Filename: latinsyndicate_promotion_demolitiontrucks_icon.shp
 
 ra2leopard:
 	Inherits: ^RA2CannonMuzzle
@@ -4574,7 +4574,7 @@ ra2taxi:
 ra2trucka:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latinsyndicate_promotion_unlockdemolitiontrucks_ra2_bombtruck.shp
+		Filename: latinsyndicate_promotion_demolitiontrucks_ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
@@ -4870,7 +4870,7 @@ ra2mig:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkm_promotion_unlockviper_icon.png
+		Filename: tkm_promotion_viper_icon.png
 
 ### Soviets Upgrades
 

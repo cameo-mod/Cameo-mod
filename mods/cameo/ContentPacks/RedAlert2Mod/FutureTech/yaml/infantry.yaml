@@ -333,7 +333,7 @@ futuretech_blackwidow:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 335
-		Prerequisites: ~futuretech_troopgate, futuretech_transmissioncenter, ~futuretech_promotion_unlockblackwidow
+		Prerequisites: ~futuretech_troopgate, futuretech_transmissioncenter, ~futuretech_promotion_blackwidow
 		Description: actor_futuretech_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
@@ -387,7 +387,7 @@ futuretech_cryolegionnaire:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 550
-		Prerequisites: ~futuretech_troopgate, futuretech_hypercore, ~futuretech_promotion_unlockcryolegionnaire
+		Prerequisites: ~futuretech_troopgate, futuretech_hypercore, ~futuretech_promotion_cryolegionnaire
 		BuildLimit: 1
 		Description: actor_futuretech_cryoleg.description
 	RenderSprites:
@@ -592,7 +592,7 @@ futuretech_shotgundroid:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 220
-		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, ~futuretech_promotion_unlockshotgundroid
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, ~futuretech_promotion_shotgundroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_shotgun.description
 	Mobile:
@@ -678,7 +678,7 @@ futuretech_cannondroid:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 330
-		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_transmissioncenter, ~futuretech_promotion_unlockcannondroid
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_transmissioncenter, ~futuretech_promotion_cannondroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_cannon.description
 	Mobile:
@@ -752,7 +752,7 @@ futuretech_missiledroid:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 440
-		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_battlelab, ~futuretech_promotion_unlockmissiledroid
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_battlelab, ~futuretech_promotion_missiledroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_missiles.description
 	Mobile:

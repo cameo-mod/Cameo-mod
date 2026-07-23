@@ -1,6 +1,6 @@
 td_nod_buggy:
 	Defaults:
-		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
+		Filename: td_nod_promotion_buggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -688,10 +688,10 @@ td_nod_blackhandflamer:
 	Inherits: ^InfantryOverlays
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
-		Filename: td_nod_promotion_unlockblackhandflamer_tsblackhandflamer.shp
+		Filename: td_nod_promotion_blackhandflamer_tsblackhandflamer.shp
 		Scale: 1.1
 	icon:
-		Filename: td_nod_promotion_unlockblackhandflamer_icon.shp
+		Filename: td_nod_promotion_blackhandflamer_icon.shp
 
 stealthtech:
 	icon:
@@ -814,7 +814,7 @@ td_nod_stealthsoldier:
 
 td_nod_lasertrooper:
 	Defaults:
-		Filename: td_nod_promotion_unlocklasertrooper_tdlasertroop.shp
+		Filename: td_nod_promotion_lasertrooper_tdlasertroop.shp
 		Scale: 0.92
 	Inherits: ^InfantryOverlays
 	stand:
@@ -925,7 +925,7 @@ td_nod_lasertrooper:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: td_nod_promotion_unlocklasertrooper_icon.shp
+		Filename: td_nod_promotion_lasertrooper_icon.shp
 
 cncrss:
 	Defaults:
@@ -960,26 +960,26 @@ ssmsub:
 e3chem:
 	Inherits: e3
 	Defaults:
-		Filename: td_nod_promotion_unlockchemicalrocketsoldier_e3chem.shp
+		Filename: td_nod_promotion_chemicalrocketsoldier_e3chem.shp
 	icon:
-		Filename: td_nod_promotion_unlockchemicalrocketsoldier_icon.shp
+		Filename: td_nod_promotion_chemicalrocketsoldier_icon.shp
 
 td_nod_chemicalattackbike:
 	Defaults:
-		Filename: td_nod_promotion_unlockchemicalattackbike_chembike.shp
+		Filename: td_nod_promotion_chemicalattackbike_chembike.shp
 	idle:
 		Facings: -32
 		Scale: 0.55
 	muzzle:
-		Filename: td_nod_promotion_unlockchemicalattackbike_chemball2.shp
+		Filename: td_nod_promotion_chemicalattackbike_chemball2.shp
 		Length: *
 		Scale: 0.25
 	icon:
-		Filename: td_nod_promotion_unlockchemicalattackbike_icon.shp
+		Filename: td_nod_promotion_chemicalattackbike_icon.shp
 
 td_nod_specterartillery:
 	Defaults:
-		Filename: td_nod_promotion_unlockspecter_nodspecter.shp
+		Filename: td_nod_promotion_specter_nodspecter.shp
 	idle:
 		Facings: -32
 		Scale: 0.55
@@ -987,7 +987,7 @@ td_nod_specterartillery:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_nod_promotion_unlockspecter_icon.shp
+		Filename: td_nod_promotion_specter_icon.shp
 
 td_nod_venom:
 	Defaults:
@@ -1004,22 +1004,22 @@ nodvenomlaser:
 
 td_nod_chemicalstealthtank:
 	Defaults:
-		Filename: td_nod_promotion_unlockchemicalstealthtank_newstnk.shp
+		Filename: td_nod_promotion_chemicalstealthtank_newstnk.shp
 	idle:
 		Facings: -32
 	turret:
-		Filename: td_nod_promotion_unlockchemicalstealthtank_newstnktur.shp
+		Filename: td_nod_promotion_chemicalstealthtank_newstnktur.shp
 		Facings: -32
 	muzzle:
 		Filename: chemball.shp
 		Length: *
 		Scale: 0.75
 	icon:
-		Filename: td_nod_promotion_unlockchemicalstealthtank_icon.shp
+		Filename: td_nod_promotion_chemicalstealthtank_icon.shp
 
 td_nod_chemicalssmlauncher:
 	Defaults:
-		Filename: td_nod_promotion_unlockchemicalssmlauncher_chemssm.shp
+		Filename: td_nod_promotion_chemicalssmlauncher_chemssm.shp
 	idle:
 		Start: 32
 		Facings: 32
@@ -1031,17 +1031,17 @@ td_nod_chemicalssmlauncher:
 		Filename: chemball.shp
 		Length: *
 	icon:
-		Filename: td_nod_promotion_unlockchemicalssmlauncher_icon.shp
+		Filename: td_nod_promotion_chemicalssmlauncher_icon.shp
 
 td_nod_buggymkii:
 	Defaults:
-		Filename: td_nod_promotion_unlockbuggymkii_nodbuggy2.shp
+		Filename: td_nod_promotion_buggymkii_nodbuggy2.shp
 	idle:
 		Facings: -64
 		Scale: 0.35
 		Offset: 0,-12
 	turret:
-		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
+		Filename: td_nod_promotion_buggymkii_bggy.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1050,16 +1050,16 @@ td_nod_buggymkii:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: td_nod_promotion_unlockbuggymkii_icon.shp
+		Filename: td_nod_promotion_buggymkii_icon.shp
 
 td_nod_lighttankmkii:
 	Defaults:
-		Filename: td_nod_promotion_unlocklighttankmkii_renegade_ltnk.shp
+		Filename: td_nod_promotion_lighttankmkii_renegade_ltnk.shp
 	idle:
 		Facings: 64
 		Scale: 0.5
 	turret:
-		Filename: td_nod_promotion_unlocklighttankmkii_renegade_ltnk.shp
+		Filename: td_nod_promotion_lighttankmkii_renegade_ltnk.shp
 		Facings: 64
 		Start: 64
 		Scale: 0.5
@@ -1067,15 +1067,15 @@ td_nod_lighttankmkii:
 		Filename: td_shared_sprites|gunfire2.shp
 		Length: *
 	icon:
-		Filename: td_nod_promotion_unlocklighttankmkii_icon.shp
+		Filename: td_nod_promotion_lighttankmkii_icon.shp
 
 td_nod_flametankmkii:
 	Defaults:
-		Filename: td_nod_promotion_unlockflametankmkii_renegadeflamer.shp
+		Filename: td_nod_promotion_flametankmkii_renegadeflamer.shp
 	idle:
 		Facings: 64
 	turret:
-		Filename: td_nod_promotion_unlockflametankmkii_renegadeflamer.shp
+		Filename: td_nod_promotion_flametankmkii_renegadeflamer.shp
 		Start: 64
 		Facings: 64
 	muzzle:
@@ -1117,7 +1117,7 @@ td_nod_flametankmkii:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: td_nod_promotion_unlockflametankmkii_icon.shp
+		Filename: td_nod_promotion_flametankmkii_icon.shp
 
 td_nod_stealthharvester:
 	Defaults:

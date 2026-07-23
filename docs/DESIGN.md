@@ -65,8 +65,9 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   (rank-gated), `doctrine` (mutually exclusive picks). Team proxies end
   `_proxy_actor`. Promotions never carry "unlock" in the id.
 - **Variants** are structural suffixes: `_husk _sp _r4 _wild _mk2 _elite
-  _ai _water _EMP _AA _upgraded` plus dotted variants (`.husk`) and
-  paradrop twins (`para`).
+  _ai _water _EMP _AA _upgraded _slave _air _backup _segment _bomber
+  _paradrop _chrono _hmg _mg _missile _repair _empty _plug _bot _defense
+  _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`).
 - **Tooltip ↔ id consistency**: the id's name group derives from the
   Tooltip Name and both stay in sync. No two actors of a faction may share
   a Tooltip Name (audit_metadata M1). New display names are a **design

@@ -49,7 +49,7 @@ harv.destroyed:
 
 bggy.destroyed:
 	Defaults:
-		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
+		Filename: td_nod_promotion_buggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -101,7 +101,7 @@ htnk.destroyed:
 
 jeep.destroyed:
 	Defaults:
-		Filename: td_gdi_promotion_unlockassaultapc_jeep.shp
+		Filename: td_gdi_promotion_assaultapc_jeep.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -917,7 +917,7 @@ tsblackhandlaser2:
 		Scale: 1.16
 		Filename: tsblackhandlaser.shp
 	icon:
-		Filename: td_nod_promotion_unlocklasertrooper_icon.shp
+		Filename: td_nod_promotion_lasertrooper_icon.shp
 
 tsstealthsoldier2:
 	Inherits: ^BasicInfantryTibsun
@@ -1447,7 +1447,7 @@ explosion:
 
 gdirigtower:
 	Defaults:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigtower.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigtower.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
@@ -1459,16 +1459,16 @@ gdirigtower:
 		# Start: 71
 		# Length: 4
 	dead:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	make:
-		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
+		Filename: td_gdi_promotion_gdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
 	# turret:
-	# 	Filename: td_gdi_promotion_unlockgdidefenserig_gdirigphalanx.png
+	# 	Filename: td_gdi_promotion_gdidefenserig_gdirigphalanx.png
 	# 	Facings: 64
 	# 	Scale: 1.25
 	# 	Offset: 0,32

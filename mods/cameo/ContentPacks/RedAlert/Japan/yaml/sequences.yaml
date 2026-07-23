@@ -174,7 +174,7 @@ japan_tankbuster:
 
 japan_samurai:
 	Defaults:
-		Filename: japan_promotion_unlocksamurai_rasamurai.shp
+		Filename: japan_promotion_samurai_rasamurai.shp
 		Scale: 0.5
 	Inherits: ^InfantryOverlays
 	stand:
@@ -281,11 +281,11 @@ japan_samurai:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: japan_promotion_unlocksamurai_icon.shp
+		Filename: japan_promotion_samurai_icon.shp
 
 japan_archermaiden:
 	Defaults:
-		Filename: japan_promotion_unlockarchermaiden_ramaid.shp
+		Filename: japan_promotion_archermaiden_ramaid.shp
 		Scale: 0.58
 	Inherits: ^InfantryOverlays
 	stand:
@@ -392,7 +392,7 @@ japan_archermaiden:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: japan_promotion_unlockarchermaiden_icon.shp
+		Filename: japan_promotion_archermaiden_icon.shp
 
 ####################################################################################################
 #		VEHICLES
@@ -401,7 +401,7 @@ japan_archermaiden:
 japan_shogunexecutioner:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: japan_promotion_unlockshogunexecutioner.shp
+		Filename: japan_promotion_shogunexecutioner.shp
 		Scale: 2
 		Offset: 0, 18
 	idle:
@@ -424,7 +424,7 @@ japan_shogunexecutioner:
 		Length: 9
 		Tick: 60
 	icon:
-		Filename: japan_promotion_unlockshogunexecutioner_icon.png
+		Filename: japan_promotion_shogunexecutioner_icon.png
 		Offset: 0,0
 
 ramcv:
@@ -477,7 +477,7 @@ japan_scoutcar:
 
 japan_grenadebuggy:
 	Defaults:
-		Filename: japan_promotion_unlockgrenadebuggy_jbuggy.shp
+		Filename: japan_promotion_grenadebuggy_jbuggy.shp
 	idle:
 		Facings: 64
 	turret:
@@ -488,7 +488,7 @@ japan_grenadebuggy:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: japan_promotion_unlockgrenadebuggy_icon.shp
+		Filename: japan_promotion_grenadebuggy_icon.shp
 
 japan_hovercrafttransport:
 	Defaults:
@@ -509,7 +509,7 @@ japan_hovercrafttransport:
 
 japan_hovercraftflametank:
 	Defaults:
-		Filename: japan_promotion_unlockhovercraftflametank_modhovert.shp
+		Filename: japan_promotion_hovercraftflametank_modhovert.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -522,7 +522,7 @@ japan_hovercraftflametank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: japan_promotion_unlockhovercraftflametank_icon.shp
+		Filename: japan_promotion_hovercraftflametank_icon.shp
 
 japan_oitank:
 	Defaults:
@@ -588,7 +588,7 @@ japan_corewarfactory:
 
 japan_waveforceartillery:
 	Defaults:
-		Filename: japan_promotion_unlockwaveforceartillery_modwave.shp
+		Filename: japan_promotion_waveforceartillery_modwave.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -598,10 +598,10 @@ japan_waveforceartillery:
 		Facings: 64
 		Offset: 0,8
 	muzzle:
-		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
+		Filename: japan_promotion_waveforceartillery_blueartexp.shp
 		Length: *
 	icon:
-		Filename: japan_promotion_unlockwaveforceartillery_icon.shp
+		Filename: japan_promotion_waveforceartillery_icon.shp
 
 jharv:
 	Defaults:
@@ -969,7 +969,7 @@ japan_waveforceturret:
 		Length: *
 	dead:
 	muzzle:
-		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
+		Filename: japan_promotion_waveforceartillery_blueartexp.shp
 		Length: *
 		Offset: 0, 0
 	bib:
@@ -980,7 +980,7 @@ japan_waveforceturret:
 
 japan_armoredcar:
 	Defaults:
-		Filename: japan_promotion_unlockarmoredcar_jarmoredcar.shp
+		Filename: japan_promotion_armoredcar_jarmoredcar.shp
 	idle:
 		Facings: 64
 	turret:
@@ -992,7 +992,7 @@ japan_armoredcar:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: japan_promotion_unlockarmoredcar_icon.shp
+		Filename: japan_promotion_armoredcar_icon.shp
 
 japan_zerofighter:
 	Defaults:
@@ -1034,7 +1034,7 @@ japan_nanodronebuggy:
 
 japan_exorcist:
 	Defaults:
-		Filename: japan_promotion_unlockexorcist_hakurei.shp
+		Filename: japan_promotion_exorcist_hakurei.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1145,7 +1145,7 @@ japan_exorcist:
 		Facings: 8
 		Scale: 1
 	icon:
-		Filename: japan_promotion_unlockexorcist_icon.shp
+		Filename: japan_promotion_exorcist_icon.shp
 
 japan_igomediumtank:
 	Defaults:
@@ -1167,20 +1167,20 @@ japan_chihaheavytank:
 	Defaults:
 		Scale: 1.2
 	idle:
-		Filename: japan_promotion_unlockheavychihaheavytank_chihachass.shp
+		Filename: japan_promotion_heavychihaheavytank_chihachass.shp
 		Facings: 64
 	turret:
-		Filename: japan_promotion_unlockheavychihaheavytank_chihaturret.shp
+		Filename: japan_promotion_heavychihaheavytank_chihaturret.shp
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: japan_promotion_unlockheavychihaheavytank_icon.shp
+		Filename: japan_promotion_heavychihaheavytank_icon.shp
 
-japan_shrine_minitank:
+japan_shrineminitank:
 	Defaults:
-		Filename: japan_promotion_unlockshrinetank_minitank.png
+		Filename: japan_promotion_shrinetank_minitank.png
 		Offset: 0, -8
 	idle:
 		Facings: 64
@@ -1191,7 +1191,7 @@ japan_shrine_minitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: japan_promotion_unlockshrinetank_icon.png
+		Filename: japan_promotion_shrinetank_icon.png
 		Offset: 0, 0
 
 japan_waveforcetank:
@@ -1212,7 +1212,7 @@ japan_waveforcetank:
 
 japan_rocketangel:
 	Defaults:
-		Filename: japan_promotion_unlockrocketangel.shp
+		Filename: japan_promotion_rocketangel.shp
 		Scale: 0.8
 		Tick: 200
 		Offset: 0, 0, 16
@@ -1314,7 +1314,7 @@ japan_rocketangel:
 	# Fly through air squish on ground
 	icon:
 		Offset: 0,0
-		Filename: japan_promotion_unlockrocketangel_icon.png
+		Filename: japan_promotion_rocketangel_icon.png
 
 bushidodisciplineicon:
 	icon:

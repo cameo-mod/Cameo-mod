@@ -110,7 +110,7 @@ zerg_broodweaver:
 		OverrideActor: zerg_overlord
 	Buildable:
 		BuildPaletteOrder: 0
-		Prerequisites: ~zerg_hatchery, ~zerg_promotion_unlockbroodweaver
+		Prerequisites: ~zerg_hatchery, ~zerg_promotion_broodweaver
 		Queue: SCZergInfantry
 		Description: actor_scbroodweaver.description
 	Aircraft:
@@ -212,7 +212,7 @@ zerg_dreadshroud:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~zerg_spire,, ~zerg_promotion_unlockdreadshroud
+		Prerequisites: ~zerg_spire,, ~zerg_promotion_dreadshroud
 		Queue: SCZergInfantry
 		Description: actor_scdreadshroud.description
 	Aircraft:
@@ -262,7 +262,7 @@ zerg_corruptor:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_unlockcorruptor
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_corruptor
 		Queue: SCZergInfantry
 		Description: actor_sccorruptor.description
 	Aircraft:
@@ -591,7 +591,7 @@ zerg_gorekraken:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_unlockgorekraken
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_gorekraken
 		Queue: SCZergInfantry
 		Description: actor_scgorekraken.description
 	Aircraft:
@@ -650,7 +650,7 @@ zerg_behemoth:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: ~zerg_lair, ~zerg_promotion_unlockbehemoth
+		Prerequisites: ~zerg_lair, ~zerg_promotion_behemoth
 		Queue: SCZergInfantry
 		Description: actor_scbehemoth.description
 	Aircraft:

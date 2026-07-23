@@ -1,6 +1,6 @@
 ra1_soviets_mortarsoldier:
 	Defaults:
-		Filename: ra1_soviets_promotion_unlockmortarsoldier_mortarsoldier.shp
+		Filename: ra1_soviets_promotion_mortarsoldier_mortarsoldier.shp
 		Scale: 1.6
 	stand:
 		Facings: 8
@@ -95,7 +95,7 @@ ra1_soviets_mortarsoldier:
 		Start: 8
 		Facings: 8
 	icon:
-		Filename: ra1_soviets_promotion_unlockmortarsoldier_icon.png
+		Filename: ra1_soviets_promotion_mortarsoldier_icon.png
 
 ra1_soviets_grenadier:
 	Inherits: td_gdi_grenadier
@@ -180,10 +180,10 @@ ra1_soviets_attackdog:
 ra1_soviets_cyberdog:
 	Inherits: ra1_soviets_attackdog
 	Defaults:
-		Filename: ra1_soviets_promotion_unlockcyberdog.shp
+		Filename: ra1_soviets_promotion_cyberdog.shp
 		Scale: 1.25
 	icon:
-		Filename: ra1_soviets_promotion_unlockcyberdog_icon.png
+		Filename: ra1_soviets_promotion_cyberdog_icon.png
 
 ra1_soviets_volkov:
 	Inherits: ra1_general
@@ -389,7 +389,7 @@ ra1_soviets_commissar:
 		Scale: 1
 	Defaults:
 		Scale: 0.61
-		Filename: ra1_soviets_upgrade_unlockcommissar.png
+		Filename: ra1_soviets_upgrade_commissar.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -433,7 +433,7 @@ ra1_soviets_commissar:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ra1_soviets_upgrade_unlockcommissar_icon.png
+		Filename: ra1_soviets_upgrade_commissar_icon.png
 
 ra1_soviets_zapper:
 	Inherits: ^RA2ArmedInfantry
@@ -639,12 +639,12 @@ ra1_soviets_heavyteslatank:
 
 ra1_soviets_heatraytank:
 	Defaults:
-		Filename: ra1_soviets_upgrade_unlockheatraytank_sovietlasertankspritesheet.png
+		Filename: ra1_soviets_upgrade_heatraytank_sovietlasertankspritesheet.png
 	idle:
 		Facings: 32
 		#Offset: -2,8
 	icon:
-		Filename: ra1_soviets_upgrade_unlockheatraytank_icon.png
+		Filename: ra1_soviets_upgrade_heatraytank_icon.png
 
 ra1_soviets_flaktruck:
 	Defaults:
@@ -686,7 +686,7 @@ ra1_soviets_madtank:
 
 ra1_soviets_gatlingtank:
 	Defaults:
-		Filename: ra1_soviets_promotion_unlockgatlingtank_ragattlingtank.shp
+		Filename: ra1_soviets_promotion_gatlingtank_ragattlingtank.shp
 	idle:
 		Facings: 64
 	turret:
@@ -697,7 +697,7 @@ ra1_soviets_gatlingtank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: ra1_soviets_promotion_unlockgatlingtank_icon.shp
+		Filename: ra1_soviets_promotion_gatlingtank_icon.shp
 
 ra1_soviets_btr80:
 	Defaults:
@@ -1077,13 +1077,13 @@ ra1_soviets_migattackbomber:
 
 ra1_soviets_supersonicnuclearbomber:
 	Defaults:
-		Filename: ra1_soviets_promotion_unlocksupersonicnuclearbomber_u2.shp
+		Filename: ra1_soviets_promotion_supersonicnuclearbomber_u2.shp
 		Scale: 1.25
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
 	icon:
-		Filename: ra1_soviets_promotion_unlocksupersonicnuclearbomber_icon.png
+		Filename: ra1_soviets_promotion_supersonicnuclearbomber_icon.png
 
 ra1_soviets_yakscoutplane:
 	Defaults:
@@ -1313,12 +1313,12 @@ ra1_soviets_kotinnucleartank:
 ra1_soviets_monstertank:
 	Defaults:
 	idle:
-		Filename: ra1_soviets_promotion_unlockmonstertank_blackmamchassisspritesheet.png
+		Filename: ra1_soviets_promotion_monstertank_blackmamchassisspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.6
 	turret:
-		Filename: ra1_soviets_promotion_unlockmonstertank_blackmamturretspritesheet.png
+		Filename: ra1_soviets_promotion_monstertank_blackmamturretspritesheet.png
 		Facings: 64
 		ZOffset: 512
 		Scale: 1.8
@@ -1327,7 +1327,7 @@ ra1_soviets_monstertank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ra1_soviets_promotion_unlockmonstertank_icon.png
+		Filename: ra1_soviets_promotion_monstertank_icon.png
 
 ra1_soviets_stalinfist:
 	Defaults:

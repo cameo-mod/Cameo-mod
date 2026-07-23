@@ -9,7 +9,7 @@ ra1_soviets_attackdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_promotion_unlockcyberdog
+		Prerequisites: ~ra1_soviets_barracks, ~!ra1_soviets_promotion_cyberdog
 		Description: actor_dog.description
 	Valued:
 		Cost: 200
@@ -294,7 +294,7 @@ ra1_soviets_mortarsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome, ~ra1_soviets_promotion_unlockmortarsoldier
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_radardome, ~ra1_soviets_promotion_mortarsoldier
 		Description: actor_mortarsoldier.description
 	Valued:
 		Cost: 500
@@ -694,7 +694,7 @@ ra1_soviets_commissar:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Buildable:
-		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_upgrade_unlockcommissar
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_upgrade_commissar
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
@@ -767,7 +767,7 @@ ra1_soviets_cyberdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra1_soviets_promotion_unlockcyberdog, ~ra1_soviets_barracks
+		Prerequisites: ~ra1_soviets_promotion_cyberdog, ~ra1_soviets_barracks
 		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000
@@ -883,7 +883,7 @@ ra1_soviets_volkov:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		BuildPaletteOrder: 130
-		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~ra1_soviets_promotion_unlockvolkov
+		Prerequisites: ~ra1_soviets_barracks, ra1_soviets_techcenter, ~ra1_soviets_promotion_volkov
 		Description: actor_volkov.description
 	Tooltip:
 		Name: Volkov

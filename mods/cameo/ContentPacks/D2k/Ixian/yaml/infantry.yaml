@@ -184,7 +184,7 @@ ixian_shockinfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~!ixian_promotion_unlockstorminfantry
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~!ixian_promotion_storminfantry
 	Health:
 		HP: 36000
 	ChangesHealth@SelfHealing:
@@ -236,7 +236,7 @@ ixian_storminfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~ixian_promotion_unlockstorminfantry
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~ixian_promotion_storminfantry
 	Mobile:
 		Speed: 44
 	Health:
@@ -288,7 +288,7 @@ heavy_inf.ixian:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~ixian_barracks, ~ixian_promotion_unlockrashidan
+		Prerequisites: ~ixian_barracks, ~ixian_promotion_rashidan
 	Mobile:
 		Speed: 50
 	Health:

@@ -18,7 +18,7 @@ ts_gdi_orcafighter:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~ts_gdi_helipad, ~!ts_gdi_promotion_unlockzoneorca
+		Prerequisites: ~ts_gdi_helipad, ~!ts_gdi_promotion_zoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 145
@@ -92,7 +92,7 @@ ts_gdi_zoneorcafighter:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~ts_gdi_helipad, ~ts_gdi_promotion_unlockzoneorca
+		Prerequisites: ~ts_gdi_helipad, ~ts_gdi_promotion_zoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 165
@@ -163,7 +163,7 @@ ts_gdi_hammerhead:
 		Name: Hammerhead
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ts_gdi_helipad, ~ts_gdi_promotion_unlockhammerhead
+		Prerequisites: ~ts_gdi_helipad, ~ts_gdi_promotion_hammerhead
 		Queue: Aircraft, RAAircraft
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
@@ -386,7 +386,7 @@ ts_gdi_kodiakcommandship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ts_gdi_helipad, ts_gdi_upgradecenter, ~ts_gdi_promotion_unlockkodiak
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_upgradecenter, ~ts_gdi_promotion_kodiak
 		Queue: Aircraft, RAAircraft
 		Description: GDI command ship. Strong vs Everything
 		BuildLimit: 1

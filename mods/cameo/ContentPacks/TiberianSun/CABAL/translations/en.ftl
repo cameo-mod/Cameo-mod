@@ -163,13 +163,13 @@ actor_cabal_upgrade_cyberneticplating =
       Cyborg infantry gain a shield and medium armor plating.
       Increases speed by 20%.
 
-actor_cabal_orb_drone =
+actor_cabal_orbdrone =
    .name = Orb Drone
    .description = Flying drone armed with a light laser.
       Strong vs Infantry, Light armor
       Weak vs Aircraft
 
-actor_cabal_cyborg_assassin =
+actor_cabal_cyborgassassin =
    .name = Cyborg Assassin
    .description = Promoted flying cyborg assassin with enhanced speed and firepower.
       Strong vs Infantry, Light armor
@@ -398,7 +398,7 @@ actor_cabal_pillbox =
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-actor_cabal_hunter_drone =
+actor_cabal_hunterdrone =
    .description = Carrier-launched drone fighter.
       Deployed from the Overkill Carrier.
 
@@ -407,13 +407,13 @@ actor_cabal_promotion_manticore =
    .description = Promotion
       Unlocks the Heavy Reaper promoted unit.
 
-actor_cabal_overkill_gunship =
+actor_cabal_overkillgunship =
    .name = Overkill Gunship
    .description = Twin laser gunship with heavy side-mounted cannons.
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 
-actor_cabal_repair_drone =
+actor_cabal_repairdrone =
    .name = Repair Drone
    .description = Flying support drone that repairs nearby mechanical units and aircraft.
       Strong vs Nothing
@@ -425,7 +425,7 @@ actor_cabal_hunterkillermk1 =
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
 
-actor_cabal_hunter_drone_carrier =
+actor_cabal_hunterdronecarrier =
    .name = Hunter Drone Carrier
    .description = Heavy carrier with hunter drone swarm and a big moving laser.
       Strong vs Ground targets

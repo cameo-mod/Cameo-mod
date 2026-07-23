@@ -127,7 +127,7 @@ zerg_extractor:
 
 zerg_creepcolony:
 	Defaults:
-		Filename: zerg_creepcolony_2_sccreepcolony.png
+		Filename: zerg_creepcolony_defense_sccreepcolony.png
 	idle:
 		Length: *
 		Tick: 160
@@ -140,7 +140,7 @@ zerg_creepcolony:
 		Length: *
 		Tick: 160
 	shoot:
-		Filename: zerg_sunkencolony_2_scsunkencolonyshoot.png
+		Filename: zerg_sunkencolony_defense_scsunkencolonyshoot.png
 		Length: *
 	dead:
 	make:
@@ -164,9 +164,9 @@ zerg_creepcolony:
 		Tick: 80
 		AlphaFade: True
 	icon:
-		Filename: zerg_creepcolony_2_icon.png
+		Filename: zerg_creepcolony_defense_icon.png
 
-zerg_sunkencolony_2:
+zerg_sunkencolony_defense:
 	Defaults:
 		Filename: scsunkencolonyidle.png
 	idle:
@@ -174,7 +174,7 @@ zerg_sunkencolony_2:
 		Tick: 160
 	shoot:
 		Length: *
-		Filename: zerg_sunkencolony_2_scsunkencolonyshoot.png
+		Filename: zerg_sunkencolony_defense_scsunkencolonyshoot.png
 	sunken:
 		Filename: scsunkencolonyidle.png
 		Length: *
@@ -205,7 +205,7 @@ zerg_sunkencolony_2:
 		Tick: 80
 		AlphaFade: True
 	icon:
-		Filename: zerg_sunkencolony_2_icon.png
+		Filename: zerg_sunkencolony_defense_icon.png
 
 zerg_sporecolony:
 	Defaults:
@@ -243,7 +243,7 @@ zerg_sporecolony:
 		Tick: 80
 		AlphaFade: True
 	icon:
-		Filename: zerg_sporecolony_2_icon.png
+		Filename: zerg_sporecolony_defense_icon.png
 
 zerg_evolutionchamber:
 	Defaults:
@@ -614,7 +614,7 @@ zerg_zergling:
 
 zerg_dreadshroud:
 	Defaults:
-		Filename: zerg_promotion_unlockdreadshroud_scdreadshroudidle.png
+		Filename: zerg_promotion_dreadshroud_scdreadshroudidle.png
 	idle:
 		Length: 6
 		Facings: -16
@@ -625,22 +625,22 @@ zerg_dreadshroud:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockdreadshroud_icon.png
+		Filename: zerg_promotion_dreadshroud_icon.png
 
 zerg_corruptor:
 	Defaults:
-		Filename: zerg_promotion_unlockcorruptor_sccorruptoridle.png
+		Filename: zerg_promotion_corruptor_sccorruptoridle.png
 	idle:
-		Filename: zerg_promotion_unlockcorruptor_sccorruptoridle.png
+		Filename: zerg_promotion_corruptor_sccorruptoridle.png
 		Length: 6
 		Facings: -32
 		Tick: 80
 	move:
-		Filename: zerg_promotion_unlockcorruptor_sccorruptorwalk.png
+		Filename: zerg_promotion_corruptor_sccorruptorwalk.png
 		Length: 6
 		Facings: -32
 	shoot:
-		Filename: zerg_promotion_unlockcorruptor_sccorruptorshoot.png
+		Filename: zerg_promotion_corruptor_sccorruptorshoot.png
 		Length: 7
 		Facings: -32
 	die:
@@ -649,11 +649,11 @@ zerg_corruptor:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockcorruptor_icon.png
+		Filename: zerg_promotion_corruptor_icon.png
 
 zerg_swarmling:
 	Defaults:
-		Filename: zerg_promotion_unlockswarmling_scsovrelethidle.png
+		Filename: zerg_promotion_swarmling_scsovrelethidle.png
 	idle:
 		Length: 6
 		Facings: -16
@@ -664,11 +664,11 @@ zerg_swarmling:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockswarmling_icon.png
+		Filename: zerg_promotion_swarmling_icon.png
 
 zerg_shriek:
 	Defaults:
-		Filename: zerg_promotion_unlockshriek_scshriekidle.png
+		Filename: zerg_promotion_shriek_scshriekidle.png
 		Scale: 0.8
 	idle:
 		Length: 8
@@ -676,14 +676,14 @@ zerg_shriek:
 		Tick: 80
 		Combine:
 			zerg_shriek-l:
-				Filename: zerg_promotion_unlockshriek_scshriekidle.png
+				Filename: zerg_promotion_shriek_scshriekidle.png
 				Frames: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127
 			zerg_shriek-r:
-				Filename: zerg_promotion_unlockshriek_scshriekidle.png
+				Filename: zerg_promotion_shriek_scshriekidle.png
 				FlipX: True
 				Frames: 127, 126, 125, 124, 123, 122, 121, 120, 119, 118, 117, 116, 115, 114, 113, 112, 111, 110, 109, 108, 107, 106, 105, 104, 103, 102, 101, 100, 99, 98, 97, 96, 95, 94, 93, 92, 91, 90, 89, 88, 87, 86, 85, 84, 83, 82, 81, 80, 79, 78, 77, 76, 75, 74, 73, 72, 71, 70, 69, 68, 67, 66, 65, 64, 63, 62, 61, 60, 59, 58, 57, 56, 55, 54, 53, 52, 51, 50, 49, 48, 47, 46, 45, 44, 43, 42, 41, 40, 39, 38, 37, 36, 35, 34, 33, 32, 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	shoot:
-		Filename: zerg_promotion_unlockshriek_scshriekshoot.png
+		Filename: zerg_promotion_shriek_scshriekshoot.png
 		Start: 0
 		Length: 3
 		Facings: -32
@@ -694,25 +694,25 @@ zerg_shriek:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockshriek_icon.png
+		Filename: zerg_promotion_shriek_icon.png
 
 zerg_talon:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Filename: zerg_promotion_talon_sctalonidle.png
 		Offset: 0,-6
 	idle:
-		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Filename: zerg_promotion_talon_sctalonidle.png
 		Facings: -8
 	stand:
-		Filename: zerg_promotion_unlocktalon_sctalonidle.png
+		Filename: zerg_promotion_talon_sctalonidle.png
 		Facings: -8
 	run:
-		Filename: zerg_promotion_unlocktalon_sctalonwalk.png
+		Filename: zerg_promotion_talon_sctalonwalk.png
 		Length: 4
 		Facings: -8
 	shoot:
-		Filename: zerg_promotion_unlocktalon_sctalonshoot.png
+		Filename: zerg_promotion_talon_sctalonshoot.png
 		Length: 5
 		Facings: -8
 	die:
@@ -721,17 +721,17 @@ zerg_talon:
 		Tick: 70
 		Length: 7
 	deployed:
-		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Filename: zerg_promotion_talon_sctalonburrowed.png
 		Start: 4
 		Facings: 1
 		Tick: 100
 	deploy-idle:
-		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Filename: zerg_promotion_talon_sctalonburrowed.png
 		Start: 4
 		Facings: 1
 		Tick: 100
 	deploy:
-		Filename: zerg_promotion_unlocktalon_sctalonburrowed.png
+		Filename: zerg_promotion_talon_sctalonburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
@@ -739,40 +739,40 @@ zerg_talon:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	icon:
-		Filename: zerg_promotion_unlocktalon_icon.png
+		Filename: zerg_promotion_talon_icon.png
 		Offset: 0,0
 
 zerg_hermit:
 	Defaults:
-		Filename: zerg_promotion_unlockhermit_schermitidle.png
+		Filename: zerg_promotion_hermit_schermitidle.png
 	idle:
 		Facings: -8
-		Filename: zerg_promotion_unlockhermit_schermitidle.png
+		Filename: zerg_promotion_hermit_schermitidle.png
 	stand:
 		Facings: -8
-		Filename: zerg_promotion_unlockhermit_schermitidle.png
+		Filename: zerg_promotion_hermit_schermitidle.png
 	run:
 		Facings: -8
-		Filename: zerg_promotion_unlockhermit_schermitwalk.png
+		Filename: zerg_promotion_hermit_schermitwalk.png
 		Tick: 100
 		Length: 10
 	shoot:
 		Facings: -8
-		Filename: zerg_promotion_unlockhermit_schermitshoot.png
+		Filename: zerg_promotion_hermit_schermitshoot.png
 		Tick: 70
 		Length: 7
 	deployed:
-		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Filename: zerg_promotion_hermit_schermitburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
 	deploy-idle:
-		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Filename: zerg_promotion_hermit_schermitburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
 	deploy:
-		Filename: zerg_promotion_unlockhermit_schermitburrowed.png
+		Filename: zerg_promotion_hermit_schermitburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
@@ -782,39 +782,39 @@ zerg_hermit:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockhermit_icon.png
+		Filename: zerg_promotion_hermit_icon.png
 
 zerg_goremaw:
 	Defaults:
-		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+		Filename: zerg_promotion_goremaw_scgoremawidle.png
 	idle:
 		Facings: -8
-		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+		Filename: zerg_promotion_goremaw_scgoremawidle.png
 	stand:
 		Facings: -8
-		Filename: zerg_promotion_unlockgoremaw_scgoremawidle.png
+		Filename: zerg_promotion_goremaw_scgoremawidle.png
 	run:
 		Facings: -8
-		Filename: zerg_promotion_unlockgoremaw_scgoremawwalk.png
+		Filename: zerg_promotion_goremaw_scgoremawwalk.png
 		Tick: 55
 		Length: 11
 	shoot:
 		Facings: -8
-		Filename: zerg_promotion_unlockgoremaw_scgoremawshoot.png
+		Filename: zerg_promotion_goremaw_scgoremawshoot.png
 		Tick: 100
 		Length: 10
 	deployed:
-		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Filename: zerg_promotion_goremaw_scgoremawburrowed.png
 		Start: 12
 		Facings: 1
 		Tick: 100
 	deploy-idle:
-		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Filename: zerg_promotion_goremaw_scgoremawburrowed.png
 		Start: 12
 		Facings: 1
 		Tick: 100
 	deploy:
-		Filename: zerg_promotion_unlockgoremaw_scgoremawburrowed.png
+		Filename: zerg_promotion_goremaw_scgoremawburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
@@ -824,18 +824,18 @@ zerg_goremaw:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockgoremaw_icon.png
+		Filename: zerg_promotion_goremaw_icon.png
 
 zerg_gorekraken:
 	Defaults:
-		Filename: zerg_promotion_unlockgorekraken_scgorekrakenidle.png
+		Filename: zerg_promotion_gorekraken_scgorekrakenidle.png
 	idle:
-		Filename: zerg_promotion_unlockgorekraken_scgorekrakenidle.png
+		Filename: zerg_promotion_gorekraken_scgorekrakenidle.png
 		Length: 9
 		Facings: -16
 		Tick: 120
 	shoot:
-		Filename: zerg_promotion_unlockgorekraken_scgorekrakenshoot.png
+		Filename: zerg_promotion_gorekraken_scgorekrakenshoot.png
 		Length: 6
 		Facings: -16
 		Tick: 120
@@ -845,7 +845,7 @@ zerg_gorekraken:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockgorekraken_icon.png
+		Filename: zerg_promotion_gorekraken_icon.png
 
 zerg_upgrade_pneumatizedcarapace:
 	icon:
@@ -918,7 +918,7 @@ zerg_hydralisk:
 	make:
 		Filename: zerg_hydralisk_schydraliskburrowed.png
 	muzzle:
-		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Filename: zerg_promotion_sporemaw_sczhspit.shp
 		Length: 7
 		Facings: 16
 		Tick: 80
@@ -929,20 +929,20 @@ zerg_hydralisk:
 zerg_spithid:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Filename: zerg_promotion_spithid_scspithididle.png
 		Offset: 0,-6
 	idle:
-		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Filename: zerg_promotion_spithid_scspithididle.png
 		Facings: -8
 	stand:
-		Filename: zerg_promotion_unlockspithid_scspithididle.png
+		Filename: zerg_promotion_spithid_scspithididle.png
 		Facings: -8
 	run:
-		Filename: zerg_promotion_unlockspithid_scspithidwalk.png
+		Filename: zerg_promotion_spithid_scspithidwalk.png
 		Length: 7
 		Facings: -8
 	shoot:
-		Filename: zerg_promotion_unlockspithid_scspithidshoot.png
+		Filename: zerg_promotion_spithid_scspithidshoot.png
 		Start: 0
 		Length: 3
 		Facings: -8
@@ -952,17 +952,17 @@ zerg_spithid:
 		Tick: 70
 		Length: 7
 	deployed:
-		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Filename: zerg_promotion_spithid_scspithidburrow.png
 		Start: 3
 		Facings: 1
 		Tick: 100
 	deploy-idle:
-		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Filename: zerg_promotion_spithid_scspithidburrow.png
 		Start: 3
 		Facings: 1
 		Tick: 100
 	deploy:
-		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Filename: zerg_promotion_spithid_scspithidburrow.png
 		Start: 0
 		Facings: 1
 		Tick: 100
@@ -970,34 +970,34 @@ zerg_spithid:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	make:
-		Filename: zerg_promotion_unlockspithid_scspithidburrow.png
+		Filename: zerg_promotion_spithid_scspithidburrow.png
 	muzzle:
-		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Filename: zerg_promotion_sporemaw_sczhspit.shp
 		Length: 7
 		Facings: 16
 		Tick: 80
 	icon:
-		Filename: zerg_promotion_unlockspithid_icon.png
+		Filename: zerg_promotion_spithid_icon.png
 		Offset: 0,0
 
 zerg_sporemaw:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Filename: zerg_promotion_sporemaw_scsporemawidle.png
 		Offset: 0,-6
 	idle:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Filename: zerg_promotion_sporemaw_scsporemawidle.png
 		Facings: -8
 	stand:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawidle.png
+		Filename: zerg_promotion_sporemaw_scsporemawidle.png
 		Facings: -8
 	run:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawwalk.png
+		Filename: zerg_promotion_sporemaw_scsporemawwalk.png
 		Length: 7
 		Facings: -8
 		Tick: 70
 	shoot:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawshoot.png
+		Filename: zerg_promotion_sporemaw_scsporemawshoot.png
 		Start: 0
 		Length: 4
 		Facings: -8
@@ -1007,17 +1007,17 @@ zerg_sporemaw:
 		Tick: 70
 		Length: 7
 	deployed:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Filename: zerg_promotion_sporemaw_scsporemawburrowed.png
 		Start: 5
 		Facings: 1
 		Tick: 100
 	deploy-idle:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Filename: zerg_promotion_sporemaw_scsporemawburrowed.png
 		Start: 5
 		Facings: 1
 		Tick: 100
 	deploy:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Filename: zerg_promotion_sporemaw_scsporemawburrowed.png
 		Start: 0
 		Facings: 1
 		Tick: 100
@@ -1025,14 +1025,14 @@ zerg_sporemaw:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	make:
-		Filename: zerg_promotion_unlocksporemaw_scsporemawburrowed.png
+		Filename: zerg_promotion_sporemaw_scsporemawburrowed.png
 	muzzle:
-		Filename: zerg_promotion_unlocksporemaw_sczhspit.shp
+		Filename: zerg_promotion_sporemaw_sczhspit.shp
 		Length: 7
 		Facings: 16
 		Tick: 80
 	icon:
-		Filename: zerg_promotion_unlocksporemaw_icon.png
+		Filename: zerg_promotion_sporemaw_icon.png
 		Offset: 0,0
 
 zerg_mutalisk:
@@ -1274,7 +1274,7 @@ zerg_infestedterranbomber:
 
 zerg_broodweaver:
 	Defaults:
-		Filename: zerg_promotion_unlockbroodweaver_scbroodweaveridle.png
+		Filename: zerg_promotion_broodweaver_scbroodweaveridle.png
 	idle:
 		Facings: -16
 		Tick: 210
@@ -1285,7 +1285,7 @@ zerg_broodweaver:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockbroodweaver_icon.png
+		Filename: zerg_promotion_broodweaver_icon.png
 
 zerg_kerrigan:
 	Defaults:
@@ -1332,9 +1332,9 @@ zerg_hatcherydrone:
 
 zerg_behemoth:
 	Defaults:
-		Filename: zerg_promotion_unlockbehemoth_scbehemothidle.png
+		Filename: zerg_promotion_behemoth_scbehemothidle.png
 	idle:
-		Filename: zerg_promotion_unlockbehemoth_scbehemothidle.png
+		Filename: zerg_promotion_behemoth_scbehemothidle.png
 		Length: 7
 		Facings: -32
 	die:
@@ -1343,7 +1343,7 @@ zerg_behemoth:
 		Tick: 70
 		Length: 7
 	icon:
-		Filename: zerg_promotion_unlockbehemoth_icon.png
+		Filename: zerg_promotion_behemoth_icon.png
 
 zerg_upgrade_groovedspines:
 	icon:

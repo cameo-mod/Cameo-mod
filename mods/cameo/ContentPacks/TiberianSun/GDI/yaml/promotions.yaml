@@ -1,4 +1,4 @@
-ts_gdi_promotion_unlockwolverinemkii:
+ts_gdi_promotion_wolverinemkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Wolverine MKII
@@ -6,13 +6,13 @@ ts_gdi_promotion_unlockwolverinemkii:
 		BuildPaletteOrder: 1
 		Queue: Promotions
 		Description: Allows construction of Wolverines MKII.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockwolverinemkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_wolverinemkii, rank1
 	RenderSprites:
 		Image: ts_gdi_wolverinemkii
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockwolverinemkii
+		Prerequisite: ts_gdi_promotion_wolverinemkii
 
-ts_gdi_promotion_unlocktitanmkii:
+ts_gdi_promotion_titanmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Titan MKII
@@ -20,13 +20,13 @@ ts_gdi_promotion_unlocktitanmkii:
 		BuildPaletteOrder: 4
 		Queue: Promotions
 		Description: Allows construction of Titans MKII.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlocktitanmkii, ts_gdi_promotion_unlockwolverinemkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_titanmkii, ts_gdi_promotion_wolverinemkii, rank1
 	RenderSprites:
 		Image: ts_gdi_titanmkii
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlocktitanmkii
+		Prerequisite: ts_gdi_promotion_titanmkii
 
-ts_gdi_promotion_unlockzonetrooper:
+ts_gdi_promotion_zonetrooper:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Zone Trooper
@@ -34,13 +34,13 @@ ts_gdi_promotion_unlockzonetrooper:
 		BuildPaletteOrder: 7
 		Queue: Promotions
 		Description: Allows training of Zone Troopers.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockzonetrooper, ts_gdi_promotion_unlocktitanmkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_zonetrooper, ts_gdi_promotion_titanmkii, rank1
 	RenderSprites:
 		Image: ts_gdi_zonetrooper
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockzonetrooper
+		Prerequisite: ts_gdi_promotion_zonetrooper
 
-ts_gdi_promotion_unlockmammothmkii:
+ts_gdi_promotion_mammothmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Mammoth MKII
@@ -48,13 +48,13 @@ ts_gdi_promotion_unlockmammothmkii:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Allows construction of Mammoth MKII.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockmammothmkii, ts_gdi_promotion_unlockzonetrooper, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_mammothmkii, ts_gdi_promotion_zonetrooper, rank1
 	RenderSprites:
 		Image: ts_gdi_mammothmkii
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockmammothmkii
+		Prerequisite: ts_gdi_promotion_mammothmkii
 
-ts_gdi_promotion_unlockzoneorca:
+ts_gdi_promotion_zoneorca:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Zone Orca
@@ -62,13 +62,13 @@ ts_gdi_promotion_unlockzoneorca:
 		BuildPaletteOrder: 2
 		Queue: Promotions
 		Description: Allows construction of Zone Orcas.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockzoneorca, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_zoneorca, rank1
 	RenderSprites:
 		Image: ts_gdi_zoneorcafighter
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockzoneorca
+		Prerequisite: ts_gdi_promotion_zoneorca
 
-ts_gdi_promotion_unlockhammerhead:
+ts_gdi_promotion_hammerhead:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hammerhead
@@ -76,13 +76,13 @@ ts_gdi_promotion_unlockhammerhead:
 		BuildPaletteOrder: 5
 		Queue: Promotions
 		Description: Allows construction of Hammerhead.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockhammerhead, ts_gdi_promotion_unlockzoneorca, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_hammerhead, ts_gdi_promotion_zoneorca, rank1
 	RenderSprites:
 		Image: ts_gdi_hammerhead
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockhammerhead
+		Prerequisite: ts_gdi_promotion_hammerhead
 
-ts_gdi_promotion_unlockjuggernautmkii:
+ts_gdi_promotion_juggernautmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Juggernaut MKII
@@ -90,13 +90,13 @@ ts_gdi_promotion_unlockjuggernautmkii:
 		BuildPaletteOrder: 8
 		Queue: Promotions
 		Description: Allows construction of Juggernauts MKII.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockjuggernautmkii, ts_gdi_promotion_unlockhammerhead, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_juggernautmkii, ts_gdi_promotion_hammerhead, rank1
 	RenderSprites:
 		Image: ts_gdi_juggernautmkii
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockjuggernautmkii
+		Prerequisite: ts_gdi_promotion_juggernautmkii
 
-ts_gdi_promotion_unlockkodiak:
+ts_gdi_promotion_kodiak:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Kodiak
@@ -104,8 +104,8 @@ ts_gdi_promotion_unlockkodiak:
 		BuildPaletteOrder: 11
 		Queue: Promotions
 		Description: Allows construction of Kodiak.
-		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockkodiak, ts_gdi_promotion_unlockjuggernautmkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_kodiak, ts_gdi_promotion_juggernautmkii, rank1
 	RenderSprites:
 		Image: ts_gdi_kodiakcommandship
 	ProvidesPrerequisite:
-		Prerequisite: ts_gdi_promotion_unlockkodiak
+		Prerequisite: ts_gdi_promotion_kodiak

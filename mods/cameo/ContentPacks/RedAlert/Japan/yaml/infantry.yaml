@@ -216,7 +216,7 @@ japan_samurai:
 		Name: Samurai
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~japan_japanesebarracks, ~japan_promotion_unlocksamurai
+		Prerequisites: ~japan_japanesebarracks, ~japan_promotion_samurai
 		Queue: Infantry, RAInfantry
 		Description: actor_rasamurai.description
 	Mobile:
@@ -269,7 +269,7 @@ japan_archermaiden:
 		Name: Archer Maiden
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~japan_japanesebarracks, japan_japaneseradararray, ~japan_promotion_unlockarchermaiden
+		Prerequisites: ~japan_japanesebarracks, japan_japaneseradararray, ~japan_promotion_archermaiden
 		Queue: Infantry, RAInfantry
 		Description: actor_ramaid.description
 	Mobile:
@@ -330,7 +330,7 @@ japan_rocketangel:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, ~japan_promotion_unlockrocketangel
+		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, ~japan_promotion_rocketangel
 		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
 		Description: actor_rocketangel.description
 	Aircraft:
@@ -473,7 +473,7 @@ japan_exorcist:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 10
-		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, ~japan_promotion_unlockexorcist, !hasexorcist
+		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, ~japan_promotion_exorcist, !hasexorcist
 		Queue: Infantry, RAInfantry
 		Description: actor_hakurei.description
 	Mobile:

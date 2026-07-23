@@ -42,15 +42,15 @@
 	DamageMultiplier@td_gdi_upgrade_heavyaircraftarmorplating:
 		RequiresCondition: td_gdi_upgrade_heavyaircraftarmorplating
 		Modifier: 50
-	FirepowerMultiplier@td_gdi_upgrade_unlocka10airstrike:
-		RequiresCondition: td_gdi_upgrade_unlocka10airstrike
+	FirepowerMultiplier@td_gdi_upgrade_a10airstrike:
+		RequiresCondition: td_gdi_upgrade_a10airstrike
 		Modifier: 115
 	GrantConditionOnPrerequisite@td_gdi_upgrade_heavyaircraftarmorplating:
 		Condition: td_gdi_upgrade_heavyaircraftarmorplating
 		Prerequisites: td_gdi_upgrade_heavyaircraftarmorplating
-	GrantConditionOnPrerequisite@td_gdi_upgrade_unlocka10airstrike:
-		Condition: td_gdi_upgrade_unlocka10airstrike
-		Prerequisites: td_gdi_upgrade_unlocka10airstrike
+	GrantConditionOnPrerequisite@td_gdi_upgrade_a10airstrike:
+		Condition: td_gdi_upgrade_a10airstrike
+		Prerequisites: td_gdi_upgrade_a10airstrike
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_heavyaircraftarmorplating
 
@@ -152,7 +152,7 @@ td_gdi_upgrade_armorpiercingbullets:
 		Image: armorpiercingbulletsicon
 	ProvidesPrerequisite:
 
-td_gdi_upgrade_unlocka10airstrike:
+td_gdi_upgrade_a10airstrike:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Unlock A10 Airstrike
@@ -162,7 +162,7 @@ td_gdi_upgrade_unlocka10airstrike:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_a10airstrike.description
-		Prerequisites: ~td_gdi_communicationscenter, !td_gdi_upgrade_unlocka10airstrike
+		Prerequisites: ~td_gdi_communicationscenter, !td_gdi_upgrade_a10airstrike
 	RenderSprites:
 		Image: a10
 	ProvidesPrerequisite:

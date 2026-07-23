@@ -609,7 +609,7 @@ naxis_oldtank:
 	idle:
 		Facings: 64
 	icon:
-		Filename: ra2_allies_battlefortress_3_icon.shp
+		Filename: ra2_allies_battlefortress_chrono_icon.shp
 
 wirbelwind.nax:
 	Inherits: ^RA2CannonMuzzle
@@ -959,21 +959,21 @@ naxis_me262:
 	Defaults:
 		Scale: 0.8
 	idle:
-		Filename: naxis_upgrade_unlockme262.shp
+		Filename: naxis_upgrade_me262.shp
 		Facings: 64
 	move:
-		Filename: naxis_upgrade_unlockme262.shp
+		Filename: naxis_upgrade_me262.shp
 		Facings: 64
 	move-l:
-		Filename: naxis_upgrade_unlockme262.shp
+		Filename: naxis_upgrade_me262.shp
 		Facings: 64
 		Start: 64
 	move-r:
-		Filename: naxis_upgrade_unlockme262.shp
+		Filename: naxis_upgrade_me262.shp
 		Facings: 64
 		Start: 128
 	icon:
-		Filename: naxis_upgrade_unlockme262_icon.png
+		Filename: naxis_upgrade_me262_icon.png
 
 naxis_bf109:
 	Defaults:

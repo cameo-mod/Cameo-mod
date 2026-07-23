@@ -1,4 +1,4 @@
-cabal_overkill_gunship_husk:
+cabal_overkillgunship_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Overkill Gunship
@@ -9,10 +9,10 @@ cabal_overkill_gunship_husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: cabal_overkill_gunship
+		Image: cabal_overkillgunship
 		PlayerPalette: player_rgba
 
-cabal_hunter_drone_carrier_husk:
+cabal_hunterdronecarrier_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Hunter Drone Carrier
@@ -23,10 +23,10 @@ cabal_hunter_drone_carrier_husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: cabal_hunter_drone_carrier
+		Image: cabal_hunterdronecarrier
 		PlayerPalette: player_rgba
 
-cabal_hunter_drone_husk:
+cabal_hunterdrone_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Hunter Drone
@@ -34,7 +34,7 @@ cabal_hunter_drone_husk:
 		TurnSpeed: 80
 		Speed: 150
 	RenderSprites:
-		Image: cabal_hunter_drone
+		Image: cabal_hunterdrone
 		PlayerPalette: player_rgba
 
 cabal_hunterkillermk1_husk:
@@ -50,7 +50,7 @@ cabal_hunterkillermk1_husk:
 	RenderSprites:
 		Image: cabal_hunterkillermk1
 
-cabal_cyborg_assassin_husk:
+cabal_cyborgassassin_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Cyborg Assassin
@@ -58,7 +58,7 @@ cabal_cyborg_assassin_husk:
 		TurnSpeed: 80
 		Speed: 150
 	RenderSprites:
-		Image: cabal_cyborg_assassin
+		Image: cabal_cyborgassassin
 		PlayerPalette: player_rgba
 
 cabal_manticore_backup:

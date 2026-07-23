@@ -561,24 +561,24 @@ protoss_zeratul:
 
 protoss_atreus:
 	Defaults:
-		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+		Filename: protoss_promotion_atreus_scatreusidle.png
 	idle:
-		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+		Filename: protoss_promotion_atreus_scatreusidle.png
 		Length: 1
 		Tick: 80
 		Facings: -8
 	stand:
-		Filename: protoss_promotion_unlockatreus_scatreusidle.png
+		Filename: protoss_promotion_atreus_scatreusidle.png
 		Length: 1
 		Tick: 80
 		Facings: -8
 	run:
-		Filename: protoss_promotion_unlockatreus_scatreuswalk.png
+		Filename: protoss_promotion_atreus_scatreuswalk.png
 		Length: 16
 		Facings: -8
 		Tick: 64
 	shoot:
-		Filename: protoss_promotion_unlockatreus_scatreusshoot.png
+		Filename: protoss_promotion_atreus_scatreusshoot.png
 		Length: 1
 		Facings: -8
 		Tick: 60
@@ -587,25 +587,25 @@ protoss_atreus:
 		Length: 7
 		Tick: 80
 	icon:
-		Filename: protoss_promotion_unlockatreus_icon.png
+		Filename: protoss_promotion_atreus_icon.png
 		Offset: 0,0
 
 protoss_amaranth:
 	Defaults:
-		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+		Filename: protoss_promotion_amaranth_scamaranthidle.png
 	idle:
 		Facings: -8
-		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+		Filename: protoss_promotion_amaranth_scamaranthidle.png
 	stand:
 		Facings: -8
-		Filename: protoss_promotion_unlockamaranth_scamaranthidle.png
+		Filename: protoss_promotion_amaranth_scamaranthidle.png
 	run:
 		Facings: -8
-		Filename: protoss_promotion_unlockamaranth_scamaranthwalk.png
+		Filename: protoss_promotion_amaranth_scamaranthwalk.png
 		Length: 9
 	shoot:
 		Facings: -8
-		Filename: protoss_promotion_unlockamaranth_scamaranthshoot.png
+		Filename: protoss_promotion_amaranth_scamaranthshoot.png
 		Length: 8
 		Tick: 80
 	die:
@@ -613,11 +613,11 @@ protoss_amaranth:
 		Length: 7
 		Tick: 80
 	icon:
-		Filename: protoss_promotion_unlockamaranth_icon.png
+		Filename: protoss_promotion_amaranth_icon.png
 
 protoss_positron:
 	Defaults:
-		Filename: protoss_promotion_unlockpositron_scpositronidle.png
+		Filename: protoss_promotion_positron_scpositronidle.png
 	idle:
 		Length: 1
 		Facings: -8
@@ -628,25 +628,25 @@ protoss_positron:
 		Length: 1
 		Facings: -8
 	icon:
-		Filename: protoss_promotion_unlockpositron_icon.png
+		Filename: protoss_promotion_positron_icon.png
 
 protoss_legionnaire:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+		Filename: protoss_promotion_legionnaire_sclegionnaireidle.png
 	idle:
 		Facings: -8
-		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+		Filename: protoss_promotion_legionnaire_sclegionnaireidle.png
 	stand:
 		Facings: -8
-		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireidle.png
+		Filename: protoss_promotion_legionnaire_sclegionnaireidle.png
 	run:
 		Facings: -8
-		Filename: protoss_promotion_unlocklegionnaire_sclegionnairewalk.png
+		Filename: protoss_promotion_legionnaire_sclegionnairewalk.png
 		Length: 7
 	shoot:
 		Facings: -8
-		Filename: protoss_promotion_unlocklegionnaire_sclegionnaireshoot.png
+		Filename: protoss_promotion_legionnaire_sclegionnaireshoot.png
 		Length: 4
 		Tick: 80
 	die:
@@ -654,28 +654,28 @@ protoss_legionnaire:
 		Length: 7
 		Tick: 80
 	icon:
-		Filename: protoss_promotion_unlocklegionnaire_icon.png
+		Filename: protoss_promotion_legionnaire_icon.png
 		Offset: 0,0
 
 protoss_patriarch:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+		Filename: protoss_promotion_patriarch_scpatriarchidle.png
 	idle:
-		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+		Filename: protoss_promotion_patriarch_scpatriarchidle.png
 		Facings: -8
 		Tick: 140
 	stand:
-		Filename: protoss_promotion_unlockpatriarch_scpatriarchidle.png
+		Filename: protoss_promotion_patriarch_scpatriarchidle.png
 		Facings: -8
 		Tick: 140
 	run:
-		Filename: protoss_promotion_unlockpatriarch_scpatriarchwalk.png
+		Filename: protoss_promotion_patriarch_scpatriarchwalk.png
 		Length: 13
 		Facings: -8
 		Tick: 140
 	shoot:
-		Filename: protoss_promotion_unlockpatriarch_scpatriarchshoot.png
+		Filename: protoss_promotion_patriarch_scpatriarchshoot.png
 		Length: 8
 		Facings: -8
 		Tick: 100
@@ -684,39 +684,39 @@ protoss_patriarch:
 		Length: 7
 		Tick: 80
 	icon:
-		Filename: protoss_promotion_unlockpatriarch_icon.png
+		Filename: protoss_promotion_patriarch_icon.png
 		Offset: 0,0
 
 protoss_epigraph:
 	Defaults:
-		Filename: protoss_promotion_unlockepigraph_epigraphidle.png
+		Filename: protoss_promotion_epigraph_epigraphidle.png
 		Scale: 0.8
 	idle:
 		Scale: 1
 		Facings: -32
 	icon:
-		Filename: protoss_promotion_unlockepigraph_icon.png
+		Filename: protoss_promotion_epigraph_icon.png
 
 protoss_voidray:
 	Defaults:
-		Filename: protoss_promotion_unlockvoidray_scvoidray.png
+		Filename: protoss_promotion_voidray_scvoidray.png
 		Scale: 1.25
 	idle:
 		Facings: -32
 	icon:
-		Filename: protoss_promotion_unlockvoidray_icon.png
+		Filename: protoss_promotion_voidray_icon.png
 
 protoss_gladius:
 	Defaults:
-		Filename: protoss_promotion_unlockgladius_scgladius.png
+		Filename: protoss_promotion_gladius_scgladius.png
 	idle:
 		Facings: -32
 	icon:
-		Filename: protoss_promotion_unlockgladius_icon.png
+		Filename: protoss_promotion_gladius_icon.png
 
 protoss_manifold:
 	Defaults:
-		Filename: protoss_promotion_unlockmanifold_scmanifoldidle.png
+		Filename: protoss_promotion_manifold_scmanifoldidle.png
 	idle:
 		Facings: -32
 		Length: 1
@@ -730,11 +730,11 @@ protoss_manifold:
 		Facings: -32
 		Length: 1
 	icon:
-		Filename: protoss_promotion_unlockmanifold_icon.png
+		Filename: protoss_promotion_manifold_icon.png
 
 protoss_idol:
 	Defaults:
-		Filename: protoss_promotion_unlockidol_scarchitectidle.png
+		Filename: protoss_promotion_idol_scarchitectidle.png
 	idle:
 		Facings: -32
 		Length: 1
@@ -751,11 +751,11 @@ protoss_idol:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: protoss_promotion_unlockidol_icon.png
+		Filename: protoss_promotion_idol_icon.png
 
 protoss_analogue:
 	Defaults:
-		Filename: protoss_promotion_unlockanalogue_scanalogueidle.png
+		Filename: protoss_promotion_analogue_scanalogueidle.png
 	idle:
 		Facings: -32
 		Length: 1
@@ -769,18 +769,18 @@ protoss_analogue:
 		Facings: -32
 		Length: 1
 	icon:
-		Filename: protoss_promotion_unlockanalogue_icon.png
+		Filename: protoss_promotion_analogue_icon.png
 
 protoss_starshipsovereign:
 	Defaults:
-		Filename: protoss_promotion_unlockstarsovereign_scstarsovereignidle.png
+		Filename: protoss_promotion_starsovereign_scstarsovereignidle.png
 	idle:
 		Facings: -32
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
 	icon:
-		Filename: protoss_promotion_unlockstarsovereign_icon.png
+		Filename: protoss_promotion_starsovereign_icon.png
 
 ####################################################################################################
 #		UNIT ZERG
