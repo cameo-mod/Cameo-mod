@@ -1,16 +1,37 @@
+ts_gdi_ioncannonuplink:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 0
+	Tooltip:
+		Name: Ion Cannon Uplink
+	Buildable:
+		Queue: BuildingAddons
+		BuildPaletteOrder: 10
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~ts_gdi_upgradecenter, !ionc, ~techlevel.superweapons
+		Description: Unlocks the Ion Cannon superweapon.
+	Plug:
+		Type: ts_gdi_upgradecenter
+	RenderSprites:
+		Image: ts_gdi_ioncannonuplink
+		PlayerPalette: playerra2
+
+
 ts_gdi_upgradecenter:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SW: ^PrimarySuperweapon
+	Inherits@plugproducer: ^BuildingPlugProducer
 	# Inherits@hunterseeker: ^HunterSeekersPower
 	# Selectable:
 	# 	Bounds: 3072, 2048
 	# HitShape:
 	# 	TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
-		Queue: Defence, RADefence
-		BuildPaletteOrder: 140
+		Queue: Building
+		BuildPaletteOrder: 160
 		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, !tsionc, ~techlevel.superweapons
 		Description: actor_ts_gdi_upgradecenter.description
 	Tooltip:
@@ -19,11 +40,19 @@ ts_gdi_upgradecenter:
 		Footprint: xxx xxx
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
+	Pluggable:
+		Conditions:
+			ts_gdi_upgradecenter: ionc
+		Requirements:
+			ts_gdi_upgradecenter: !build-incomplete && !ionc
 	Selectable:
 		Bounds: 2048, 2048
 	RevealsShroud:
 		Range: 5c0
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@ionc:
+		Prerequisite: ionc
+		RequiresCondition: ionc
 	WithIdleOverlay@DISH:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -34,14 +63,21 @@ ts_gdi_upgradecenter:
 	WithIdleOverlay@STRIP:
 		RequiresCondition: !build-incomplete && !lowpower && !disabled
 		Sequence: idle-strip
+	WithIdleOverlay@ioncannona:
+		RequiresCondition: ionc
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-ioncannona
 	WithIdleOverlay@ioncannonb:
+		RequiresCondition: ionc
 		PauseOnCondition: lowpower || disabled
 		Sequence: idle-ioncannonb
 	WithIdleOverlay@hunterseekera:
+		RequiresCondition: hunterseeker
 		PauseOnCondition: lowpower || disabled
 		Sequence: idle-hunterseekera
 	IonCannonPower:
 		AllowMultiple: True
+		RequiresCondition: swreveal && ionc
 		PauseOnCondition: lowpower || disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
