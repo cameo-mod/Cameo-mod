@@ -1202,10 +1202,9 @@ ts_gdi_samtower:
 		Offset: 0,0
 
 ts_gdi_ioncannonuplink:
-	Defaults:
-		Filename: invisibleitem.shp
-		Scale: 1
-	idle:
-		Length: 1
 	icon:
 		Filename: ts_gdi_upgradecenter_icon.shp
+
+ts_gdi_droppoduplink:
+	icon:
+		Filename: ra2_allies_upgrade_paratroopers_tspodsicon.shp

@@ -1782,3 +1782,10 @@ ZClaw3:
 			Heavy: 30 #10
 			Concrete: 10
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
+
+DropPodExplode:
+	Warhead@1Eff: CreateEffect
+		Explosions: tspodring
+		ExplosionPalette: tseffect
+		ValidTargets: Ground, Air, Water
+		ImpactActors: false

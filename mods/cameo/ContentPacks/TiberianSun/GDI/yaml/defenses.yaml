@@ -1,7 +1,7 @@
 ts_gdi_ioncannonuplink:
 	Inherits: ^BuildingPlug
 	Valued:
-		Cost: 0
+		Cost: 1500
 	Tooltip:
 		Name: Ion Cannon Uplink
 	Buildable:
@@ -9,14 +9,36 @@ ts_gdi_ioncannonuplink:
 		BuildPaletteOrder: 10
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~ts_gdi_upgradecenter, !ionc, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, ~techlevel.superweapons
 		Description: Unlocks the Ion Cannon superweapon.
 	Plug:
-		Type: ts_gdi_upgradecenter
+		Type: ioncannon
+	Power:
+		Amount: -100
 	RenderSprites:
 		Image: ts_gdi_ioncannonuplink
 		PlayerPalette: playerra2
 
+ts_gdi_droppoduplink:
+	Inherits: ^BuildingPlug
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Drop Pod Uplink
+	Buildable:
+		Queue: BuildingAddons
+		BuildPaletteOrder: 20
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~ts_gdi_upgradecenter, !ionc, !droppod, ~techlevel.superweapons
+		Description: Deploys elite infantry from orbit.
+	Plug:
+		Type: droppod
+	Power:
+		Amount: -20
+	RenderSprites:
+		Image: ts_gdi_droppoduplink
+		PlayerPalette: playerra2
 
 ts_gdi_upgradecenter:
 	Inherits: ^BaseBuilding
@@ -24,13 +46,8 @@ ts_gdi_upgradecenter:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@plugproducer: ^BuildingPlugProducer
-	# Inherits@hunterseeker: ^HunterSeekersPower
-	# Selectable:
-	# 	Bounds: 3072, 2048
-	# HitShape:
-	# 	TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
-		Queue: Building
+		Queue: Building, RABuilding
 		BuildPaletteOrder: 160
 		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, !tsionc, ~techlevel.superweapons
 		Description: actor_ts_gdi_upgradecenter.description
@@ -42,17 +59,19 @@ ts_gdi_upgradecenter:
 		LocalCenterOffset: 0,-512,0
 	Pluggable:
 		Conditions:
-			ts_gdi_upgradecenter: ionc
+			ioncannon: ionc
+			droppod: droppod
 		Requirements:
-			ts_gdi_upgradecenter: !build-incomplete && !ionc
+			ioncannon: !build-incomplete && !ionc && !droppod
+			droppod: !build-incomplete && !droppod && !ionc
+		EditorOptions:
+			ioncannon: Ion Cannon
+			droppod: Drop Pod Reinforcements
 	Selectable:
 		Bounds: 2048, 2048
 	RevealsShroud:
 		Range: 5c0
 	ProvidesPrerequisite@buildingname:
-	ProvidesPrerequisite@ionc:
-		Prerequisite: ionc
-		RequiresCondition: ionc
 	WithIdleOverlay@DISH:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -64,25 +83,29 @@ ts_gdi_upgradecenter:
 		RequiresCondition: !build-incomplete && !lowpower && !disabled
 		Sequence: idle-strip
 	WithIdleOverlay@ioncannona:
-		RequiresCondition: ionc
+		RequiresCondition: !build-incomplete && ionc
 		PauseOnCondition: lowpower || disabled
 		Sequence: idle-ioncannona
 	WithIdleOverlay@ioncannonb:
-		RequiresCondition: ionc
+		RequiresCondition: !build-incomplete && ionc
 		PauseOnCondition: lowpower || disabled
 		Sequence: idle-ioncannonb
 	WithIdleOverlay@hunterseekera:
-		RequiresCondition: hunterseeker
+		RequiresCondition: !build-incomplete && droppod
 		PauseOnCondition: lowpower || disabled
 		Sequence: idle-hunterseekera
+	WithIdleOverlay@hunterseekerb:
+		RequiresCondition: !build-incomplete && droppod
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-hunterseekerb
 	IonCannonPower:
 		AllowMultiple: True
-		RequiresCondition: swreveal && ionc
+		RequiresCondition: ionc
 		PauseOnCondition: lowpower || disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
-			1:ioncannon
+			1: ioncannon
 		Cursor: ioncannon
 		ChargeInterval: 7500
 		WeaponDelay: 0
@@ -109,26 +132,32 @@ ts_gdi_upgradecenter:
 		TargetCircleRanges:
 			1: 6000
 		TargetCircleColor: ff000080
+	DropPodsPower:
+		RequiresCondition: droppod
+		PauseOnCondition: lowpower || disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: droppod
+		Icons:
+			1: droppod
+		Cursor: ability
+		ChargeInterval: 4500
+		UnitTypes: TSDPODE1, TSDPODE2
+		Weapon: TSDroppodSpawner
+		Names:
+			1: Drop Pods
+		Descriptions:
+			1: Deploys elite infantry from orbit.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		LaunchSpeechNotification: ReinforcementsArrived
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraActor: CAMERA.small
+		CameraRemoveDelay: 60
+		SupportPowerPaletteOrder: 30
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: tsionc
-	#Production:
-	#	Produces: UpgradeCenter.TSGDI
-	#	RequiresCondition: plugupgrade < 2
-	#ProductionQueue:
-	#	Type: UpgradeCenter.TSGDI
-	#	Group: Addon
-	#	LowPowerModifier: 200
-	#	QueueLimit: 2
-	#	ItemLimit: 2
-	#	DisplayOrder: 0
-	#GrantConditionOnProduction@plug:
-	#	Condition: plugupgrade
-	#GrantConditionOnProduction@ic:
-	#	Condition: ioncannon
-	#	Actors: ts_gdi_upgrade_ioncannonuplink
-	#GrantConditionOnProduction@hs:
-	#	Condition: hunterseeker
-	#	Actors: ts_gdi_upgrade_seekercontrol
 	RenderSprites:
 		PlayerPalette: playerra2
 
