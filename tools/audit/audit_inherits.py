@@ -71,7 +71,7 @@ def main() -> int:
     print(table(["actor", "depth", "file"], v4))
     print(h2("V5 — actors with > 2 trait removals"))
     print(table(["actor", "removals", "keys", "file"], v5))
-    return 1 if v3 else 0
+    return 1 if (v1 or v2 or v3) else 0
 
 
 if __name__ == "__main__":
