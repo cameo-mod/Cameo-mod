@@ -8755,7 +8755,6 @@ CPQDEBUGDUMMY:
 		Description: Generic upgrade
 		BuildLimit: 1
 		IconPalette: cameo
-	Interactable:
 	ProvidesPrerequisite:
 	#PopControlled:
 	#	Limit: 1
@@ -8770,7 +8769,6 @@ CPQDEBUGDUMMY:
 
 ^promotion_upgrade.template:
 	Inherits: ^upgrade.template
-	-Interactable:
 	Buildable:
 		Queue: Promotions
 		Description: Promotion unlock upgrade
