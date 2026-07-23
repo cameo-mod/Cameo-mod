@@ -1265,7 +1265,7 @@ All other factions have a single, thematically appropriate wall type.
 | RA2 Yuri | ra2_ywall | `ra2ywall` |
 | FutureTech | ra2_awall | `ra2awall` |
 | Consortium | ra2_awall | `ra2awall` |
-| Syndicate | ra2_awall (inherited) | `ra2awall` (inherited) |
+| Syndicate | ra2_swall | `ra2swall` |
 | Naxis | ra2_swall | `ra2swall` |
 | Schwarzer Mond | ra2_ywall | `ra2ywall` |
 | Asian Alliance | asianalliance_concretebarrier | `asianalliancebarrier` |

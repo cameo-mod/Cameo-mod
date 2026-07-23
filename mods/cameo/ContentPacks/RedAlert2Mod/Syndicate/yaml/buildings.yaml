@@ -845,6 +845,9 @@ latinsyndicate_syndicateconstructionyard:
 		Name: Syndicate Construction Yard
 	Transforms:
 		IntoActor: latinsyndicate_syndicatemobileconstructionvehicle
+	-ProvidesPrerequisite@ra2awall:
+	ProvidesPrerequisite@ra2swall:
+		Prerequisite: ra2swall
 	WithIdleOverlay@fans:
 	WithIdleOverlay@top:
 		Sequence: idle-top
