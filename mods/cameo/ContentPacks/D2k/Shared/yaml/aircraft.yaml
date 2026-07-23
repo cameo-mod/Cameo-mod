@@ -47,19 +47,9 @@ carryall.reinforce:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
-	GrantConditionOnPrerequisite@ixianharv:
-		Prerequisites: faction.ixian
-		Condition: carryall_cloak
 	Cloak:
 		InitialDelay: 80
 		CloakDelay: 80
-		RequiresCondition: carryall_cloak
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 130
-		RequiresCondition: faction.guild
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.guild
-		Condition: faction.guild
 	FireProjectilesOnDeath:
 		Weapons: Debris, Debris2, Debris3, Debris4
 		Pieces: 3, 6
@@ -128,12 +118,6 @@ frigate:
 	Cargo:
 		MaxWeight: 20
 	RejectsOrders:
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 140
-		RequiresCondition: faction.guild
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.guild
-		Condition: faction.guild
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true

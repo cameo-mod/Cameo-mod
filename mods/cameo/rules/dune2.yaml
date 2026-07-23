@@ -63,18 +63,6 @@ World:
 
 
 Player:
-	ProvidesPrerequisite@d2atreides:
-		Prerequisite: faction.d2atreides
-		Factions: d2atreides
-	ProvidesPrerequisite@d2harkonnen:
-		Prerequisite: faction.d2harkonnen
-		Factions: d2harkonnen
-	ProvidesPrerequisite@d2ordos:
-		Prerequisite: faction.d2ordos
-		Factions: d2ordos
-	ProvidesPrerequisite@d2corrino:
-		Prerequisite: faction.d2corrino
-		Factions: d2corrino
 
 ####################################################################################################
 #		Dune 2 Bonus
@@ -788,10 +776,8 @@ dunequad:
 		Range: 7c0
 	GrantConditionOnPrerequisite@corrino:
 		Condition: d2corrino
-		Prerequisites: faction.d2corrino
 	GrantConditionOnPrerequisite@hark:
 		Condition: d2harkonnen
-		Prerequisites: faction.d2harkonnen
 	Armament:
 		Weapon: Dune2QuadLaser
 		LocalOffset: -128, -170, 170, -128, 170, 170
@@ -2229,24 +2215,6 @@ dunecarryall.reinforce:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
-	GrantConditionOnPrerequisite@ixianharv:
-		Prerequisites: faction.ixian
-		Condition: carryall_cloak
-	Cloak:
-		InitialDelay: 80
-		CloakDelay: 80
-		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
-		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
-		Palette: d2kcloak
-		CloakedCondition: cloaked
-		RequiresCondition: carryall_cloak
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 130
-		RequiresCondition: faction.guild
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.guild
-		Condition: faction.guild
 dunecarryall.buy:
 	Inherits: dunecarryall.reinforce
 	-Carryall:

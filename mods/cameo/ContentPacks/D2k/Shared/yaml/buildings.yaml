@@ -92,7 +92,6 @@ heavy_factory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^3x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
@@ -177,7 +176,6 @@ light_factory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^3x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:

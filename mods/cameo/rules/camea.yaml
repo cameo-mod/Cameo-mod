@@ -137,8 +137,6 @@ camea_conyard:
 	-WithBuildingRepairDecoration:
 	RenderSprites:
 		Image: fact
-	ProvidesPrerequisite@camea:
-		Prerequisite: faction.camea
 	AirstrikePower@spyplane:
 		OrderName: SovietSpyPlane
 		Icon: spyplane
@@ -843,9 +841,6 @@ SHOK.camea:
 E1.para:
 	Inherits: E1
 	-Buildable:
-	GrantConditionOnPrerequisite@camea:
-		Prerequisites: faction.camea
-		Condition: faction.camea
 	RenderSprites:
 		Image: E1
 

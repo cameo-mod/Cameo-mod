@@ -1215,7 +1215,7 @@ ancientvisceroid:
 	Buildable:
 		BuildPaletteOrder: 20
 		Description: Reforms into primitive form upon death\nWill reform back after a while\n45s cooldown between deaths
-		Prerequisites: ~faction.forgotten, !1hero
+		Prerequisites: !1hero
 		IconPalette: ra2
 		BuildLimit: 1
 	Valued:
@@ -1327,7 +1327,7 @@ mutantseverus:
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: !1hero, ~faction.forgotten
+		Prerequisites: !1hero
 		Description: Unable to use his left hand and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		IconPalette: ra2
 		BuildDuration: 500
@@ -1414,7 +1414,7 @@ severuscabal:
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: !1hero, ~faction.cabal
+		Prerequisites: !1hero
 		Description: Unable to use his left hand and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		BuildDuration: 500
 		BuildDurationModifier: 100

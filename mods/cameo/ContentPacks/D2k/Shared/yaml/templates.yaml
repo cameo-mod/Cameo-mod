@@ -254,17 +254,8 @@
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@corrinoelite:
-		Prerequisites: faction.corrino, palace_emperor
+		Prerequisites: palace_emperor
 		Condition: rank-elite
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 125
-		RequiresCondition: cloakordos && cloaked
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.ordos
-		Condition: cloakordos
-	ProductionCostMultiplier@corrino:
-		Multiplier: 150
-		Prerequisites: faction.corrino
 
 ^D2KInfantryDefaultDeath:
 	WithDeathAnimation:
@@ -429,47 +420,8 @@
 	SpeedMultiplier@DAMAGED:
 		Modifier: 60
 		RequiresCondition: d2kdamage
-	GrantConditionOnPrerequisite@FREMENFACTION:
-		Condition: faction.fremen
-		Prerequisites: faction.fremen
-	GrantConditionOnPrerequisite@HARKONNENFACTION:
-		Condition: harkonnenexplode
-		Prerequisites: faction.harkonnen
-	ProductionCostMultiplier@IXIANVEHICLES:
-		Prerequisites: faction.ixian
-		Multiplier: 120
 	AttractsWorms:
-		RequiresCondition: !faction.fremen
-	AttractsWorms@fremen:
-		Intensity: 0
-		RequiresCondition: faction.fremen
-	SpeedMultiplier@ordos-stealth-bonus:
-		Modifier: 125
-		RequiresCondition: cloakordos && cloaked
-	GrantConditionOnPrerequisite@ordos:
-		Prerequisites: faction.ordos
-		Condition: cloakordos
 	Cloak@TDcloak:
-
-^D2KPrereqs:
-	ProvidesPrerequisite@atreides:
-		Prerequisite: faction.atreides
-		Factions: atreides, ixian, fremen
-	ProvidesPrerequisite@ordos:
-		Prerequisite: faction.ordos
-		Factions: ordos, tleilaxu, mercenary, smugglers
-	ProvidesPrerequisite@harkonnen:
-		Prerequisite: faction.harkonnen
-		Factions: harkonnen, corrino, guild, emperor
-	ProvidesPrerequisite@guild:
-		Prerequisite: faction.guild
-		Factions: guild
-	ProvidesPrerequisite@corrino:
-		Prerequisite: faction.corrino
-		Factions: corrino, emperor
-	ProvidesPrerequisite@atreides_conyard:
-		Prerequisite: atreides_constructionyard
-		Factions: atreides
 
 ^D2KTank:
 	Inherits@D2KV: ^D2KVehicle
@@ -982,7 +934,6 @@
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQWP: ^CPQConditionWithPrimary
-	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^3x3Shape
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited

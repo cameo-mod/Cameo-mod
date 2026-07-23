@@ -20,7 +20,6 @@ ixian_barracks:
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@ra1_soviets_barracks: ^IsBarrack
-	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
@@ -444,7 +443,6 @@ ixian_starport:
 ixian_supercomputer:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^4x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
