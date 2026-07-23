@@ -784,6 +784,7 @@ steelconsortium_geothermalreactor:
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Geothermal Reactor
+	ProvidesPrerequisite:
 	Buildable:
 		BuildLimit: 1
 		Queue: Building, RABuilding

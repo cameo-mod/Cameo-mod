@@ -1087,6 +1087,7 @@ tkm_t30:
 		Cost: 5000
 	Tooltip:
 		Name: T-30
+	ProvidesPrerequisite:
 	Buildable:
 		BuildPaletteOrder: 190
 		Prerequisites: ~tkm_warfactory, tkm_techcenter, ~!tkm_t30, ~tkm_promotion_t30
@@ -1290,6 +1291,7 @@ tkm_sandmarine:
 		Cost: 5000
 	Tooltip:
 		Name: Sand Marine
+	ProvidesPrerequisite:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1495,6 +1497,7 @@ tkm_bigshiee:
 		Cost: 5000
 	Tooltip:
 		Name: Big Shiee
+	ProvidesPrerequisite:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

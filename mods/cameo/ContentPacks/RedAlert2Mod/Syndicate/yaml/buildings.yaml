@@ -345,6 +345,7 @@ latinsyndicate_defensebureau:
 		BuildLimit: 1
 		Prerequisites: ~latinsyndicate_syndicateconstructionyard, latinsyndicate_spycenter, derricklimit
 		Description: actor_oilb.description
+	ProvidesPrerequisite:
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
