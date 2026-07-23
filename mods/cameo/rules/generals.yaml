@@ -612,7 +612,7 @@ GENE6:
 	Inherits: E6
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: E6
@@ -2709,7 +2709,7 @@ gltunnel:
 		Name: Tunnel Network
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~wip-content #glbarracks, ~techlevel.low, ~glaselected, ~!selectglatoxin
+		Prerequisites: ~disabled-wip-content #glbarracks, ~techlevel.low, ~glaselected, ~!selectglatoxin
 		Queue: Defence, RADefence
 		Description: Anti-Infantry defensive structure.\nCan protect and transport units.\n  Strong vs Infantry\n  Weak vs Tanks
 	Selectable:
@@ -2771,7 +2771,7 @@ gltunneltoxin:
 		Name: Toxin Network
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~wip-content #glbarracks, ~techlevel.low, ~glaselected, ~selectglatoxin
+		Prerequisites: ~disabled-wip-content #glbarracks, ~techlevel.low, ~glaselected, ~selectglatoxin
 	Armament@PRIMARY:
 		Weapon: GLTunnelToxinWeapon
 	RenderSprites:
@@ -5403,7 +5403,7 @@ upsneakattack:
 		BuildPaletteOrder: 250
 		Queue: Promotions
 		Description: Enables Sneak Attacks.
-		Prerequisites: ~wip-content #glpalace, !upsneakattack, rank5, rank1
+		Prerequisites: ~disabled-wip-content #glpalace, !upsneakattack, rank5, rank1
 	RenderSprites:
 		Image: upsneakattackicon
 	ProvidesPrerequisite:
@@ -9461,7 +9461,7 @@ chmnly:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 100
-		Prerequisites: ~wip-content #anypower, ~techlevel.medium, ~chselected
+		Prerequisites: ~disabled-wip-content #anypower, ~techlevel.medium, ~chselected
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -13973,7 +13973,7 @@ leangpropagandatower:
 leangtunnel:
 	Inherits: gltunnel
 	Buildable:
-		Prerequisites: ~wip-content #leangbarracks, ~techlevel.low
+		Prerequisites: ~disabled-wip-content #leangbarracks, ~techlevel.low
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: gltunnel
@@ -14298,7 +14298,7 @@ leangsneakattack:
 	Inherits: upsneakattack
 	Buildable:
 		Queue: Promotions
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 
 leangartybarrage1:
 	Inherits: upartybarrage1

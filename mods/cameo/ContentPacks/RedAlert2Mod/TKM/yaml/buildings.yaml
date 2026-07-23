@@ -313,7 +313,7 @@ tkm_trenchtruckdeployed:
 		Name: TKM Trench Truck (Deployed)
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~unbuildable
+		Prerequisites: ~disabled-unbuildable
 		Queue: Building, RABuilding
 		Description: Provides supply and stores resources
 	Armor:

@@ -610,7 +610,7 @@ tsldrone:
 		Name: Limpet drone
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~wip
+		Prerequisites: ~disabled-wip
 		Queue: Vehicle, RAVehicle
 		Description: Hovering drone that can deploy\ninto a mine.
 	Mobile:
@@ -780,7 +780,7 @@ tsaegis:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wip
+		Prerequisites: ~disabled-wip
 		Queue: Naval, RANaval
 		Description: Heavy GDI anti-aircraft warship.\n Strong vs. Aircraft
 	Mobile:

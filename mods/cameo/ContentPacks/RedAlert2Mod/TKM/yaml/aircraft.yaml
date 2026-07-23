@@ -257,7 +257,7 @@ tkmdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~unbuildable
+		Prerequisites: ~disabled-unbuildable
 		Queue: Aircraft, RAAircraft
 		Description: Scout Unit.
 	Aircraft:

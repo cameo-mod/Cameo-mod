@@ -103,7 +103,7 @@ mindclass_core:
 	Buildable:
 		Queue: Building.MindustryClassic, RABuilding.MindustryClassic
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmcmindustry

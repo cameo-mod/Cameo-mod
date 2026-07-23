@@ -1075,7 +1075,7 @@ zfort:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@factiongdi:

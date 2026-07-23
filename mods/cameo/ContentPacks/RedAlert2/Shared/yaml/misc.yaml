@@ -2010,7 +2010,7 @@ ra2e2.black:
 		Name: Black Operation Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Health:
@@ -2035,7 +2035,7 @@ ra2sidewind:
 		Name: Sidewinder
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
 		Description: actor_e3.description
 	Mobile:
@@ -2095,7 +2095,7 @@ ra2leopard:
 		Name: Leopard
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -2168,7 +2168,7 @@ ra2_c_ifv:
 		Name: Machinegunner IFV
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -2248,7 +2248,7 @@ ra2_c_hum:
 		Name: Humvee
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -2318,7 +2318,7 @@ ra2_c_abram:
 		Name: Civilian MBT
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~disable
+		Prerequisites: ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:

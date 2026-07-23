@@ -529,7 +529,7 @@ swfact.empire:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmswempire
@@ -1373,7 +1373,7 @@ swfact.rebels:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmswrebels
@@ -1824,7 +1824,7 @@ swfact.republic:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmswrepublic
@@ -2275,7 +2275,7 @@ swfact.separatist:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmswseparatist
@@ -2793,7 +2793,7 @@ swfact.hutt:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmswhutt

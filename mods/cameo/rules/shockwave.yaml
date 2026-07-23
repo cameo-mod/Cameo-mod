@@ -10783,7 +10783,7 @@ sgltrapdrop:
 sglfanatic:
 	Inherits: sglrebel
 	Buildable:
-		Prerequisites: barracks, ~sgle1prereq, ~disable
+		Prerequisites: barracks, ~sgle1prereq, ~disabled
 	RenderSprites:
 		Image: sglfanatic
 		PlayerPalette: playerra2
@@ -10937,7 +10937,7 @@ sgltoxinrebel:
 sgltoxinrebel_grey:
 	Inherits: sgltoxinrebel
 	Buildable:
-		Prerequisites: barracks, ~wip-content
+		Prerequisites: barracks, ~disabled-wip-content
 	RenderSprites:
 		Image: sgltoxinrebelgrey
 

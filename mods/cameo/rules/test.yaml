@@ -739,7 +739,7 @@ FLTENT:
 SNIPER.soviets:
 	Inherits: LightSniper
 	Buildable:
-		Prerequisites: ~wip-content
+		Prerequisites: ~disabled-wip-content
 	MustBeDestroyed:
 	Targetable:
 		TargetTypes: Disguise
