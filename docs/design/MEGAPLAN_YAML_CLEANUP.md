@@ -57,59 +57,50 @@ python tools\audit\analyze_check_yaml.py docs\audit\check-yaml-baseline.txt
 
 ## Fix Plan — Phased Approach
 
-### Phase 1: Palette Fixes (Quick wins, ~73 errors → 0)
+### Phase 1: Palette Fixes (Quick wins, ~2,847 errors → 0) — ✅ DONE
 
 **Effort: S (< 1h)**
 
-1. Check `palette.yaml` for `playerra2` and `d2kplayer` definitions
-2. If missing, define them or fix references to use correct palette names
-3. This is related to the death palette issue from the roadmap — coordinate with that fix
+1. ✅ Fixed `d2kplayer` → `playerd2k` in `ContentPacks/D2k/Shared/yaml/templates.yaml`
+2. ✅ Added dummy `playerra2` regular palette in `palettes.yaml` to satisfy `RenderVoxelsInfo` lint check
+   - Root cause: engine bug — `RenderVoxels.PlayerPalette` uses `[PaletteReference]` instead of `[PaletteReference(true)]`
+   - `RenderSprites.PlayerPalette` correctly uses `[PaletteReference(true)]`
+3. Remaining `d2kplayer` ref in `d2k.yaml` is commented out
 
-### Phase 2: TypeDictionary / Interactable+Selectable Conflicts (~9,438 errors + 9,438 warnings → 0)
+### Phase 2: TypeDictionary / Interactable+Selectable Conflicts (~9,438 errors + 9,438 warnings → 0) — ✅ DONE
+
+**Effort: S (30 min)**
+
+1. ✅ Root cause: `^upgrade.template` defines `Interactable:`, `^promotion_upgrade.template` inherits it and adds `Selectable:`
+2. ✅ Fix: added `-Interactable:` to `^promotion_upgrade.template` in `defaults.yaml`
+3. ✅ 242 promotion actors fixed (236 from content packs + 6 bridges are separate minor issue)
+
+### Phase 3: Missing FTL Keys (~6,717 warnings → ~4,327 remaining) — ⏳ PARTIAL
 
 **Effort: M (one session)**
 
-1. Identify all actors with both `Interactable` and `Selectable` traits
-2. Remove `Interactable` from actors that already have `Selectable` (or vice versa)
-3. This is likely a template inheritance issue — fix at template level if possible
-4. Verify with `--check-yaml` after each batch
+1. ✅ Added 450 simple identifier keys to `mods/cameo/fluent/rules/missing_keys_en.ftl` (~2,390 warnings resolved)
+2. ⏳ 2,705 complex keys (with spaces/special chars) remain — Fluent message IDs can't contain spaces
+3. ⏳ These require YAML changes to use proper FTL references instead of inline text
 
-### Phase 3: Missing FTL Keys (~6,717 warnings → 0)
-
-**Effort: M (one session)**
-
-1. Generic keys (`Structure`, `Soldier`, `Tank`, `Plane`, `Vehicle`, `Tree`, `Boat`, etc.) — add to main FTL file
-2. Actor-specific keys — add per-actor translations
-3. Civilian building/vehicle names — add to civilian FTL
-4. Run `audit_fluent.py` to verify
-
-### Phase 4: Missing Actor Definitions (Biggest category, ~184K+48K+21K+12K+5K+3K errors → 0)
+### Phase 4: Missing Actor Definitions (Biggest category, ~184K+48K+21K+12K+5K+3K errors → 0) — ⏳ PARTIAL
 
 **Effort: L (multi-session)**
 
 This is the largest category. Strategy:
 
-1. **SpawnActorOnDeath missing actors** (~4,731 unique):
-   - `susaunstableeffects` — define as invisible effect actor
-   - `zombie1.infect`, `zombie2.infect`, `civzombie.infect` — define zombie infection actors
-   - `glscrapcrate` — define scrap crate actor
-   - `drassimilator`, `dtmutant`, `wolfe3` — define or remove references
-   - `2100artifact` — define or remove
-   - For each: either define the missing actor OR remove the `SpawnActorOnDeath` reference
-
-2. **RepairableInfo/RepairableNear missing actors** (~1,800 unique):
-   - Naval repair references — remove invalid shipyard references from naval units
-   - Infantry repair references — remove invalid hospital references
-   - Cross-faction repair buildings — either define or remove
-
-3. **PassengerInfo missing actors** (~312 unique):
-   - Remove invalid `CargoConditions` references
-
-4. **Crate ExcludedActorType** (~135 unique):
-   - Clean up crate exclusion lists — remove non-existent actor references
-
-5. **TransformsIntoRepairable** (~74 unique):
-   - Remove invalid repair actor references from construction yard transform lists
+1. **SpawnActorOnDeath missing actors** (~184,509 errors) — ✅ DONE
+   - Root cause: core templates (`^Vehicle`, `^Infantry`, `^Building`, `^AffectedByDriverKill`) had `SpawnActorOnDeath` referencing actors from unloaded content packs
+   - ✅ Removed `^UnstableEffect` inheritance from `^Vehicle`, `^SeaCreature`, `^DefaultInfantry`, `^Building` (referenced `susaunstableeffects` from unloaded `shockwave.yaml`)
+   - ✅ Removed `SpawnActorOnDeath@ZombieInfect` from `^BaseBuilding` and `^AffectedByDriverKill` (referenced `zombie1.infect`, `zombie2.infect`, `civzombie.infect` from unloaded `infected.yaml`)
+   - ✅ Removed `SpawnActorOnDeath@Scraps` from `^Vehicle` (referenced `glscrapcrate` from unloaded `generals.yaml`)
+   - ✅ Removed `SpawnActorOnDeath@Contaminator/Assimilator/ZombieInfect/QuestionMutate/Wolfestein` from `^Infantry` (referenced `ordos_contaminator`, `drassimilator`, `civzombie.infect`, `dtmutant`, `wolfe3` from unloaded files)
+   - ✅ Removed `SpawnActorOnDeath@2100ResearchSteal` from 3 templates (referenced `2100artifact` from unloaded `wz2100.yaml`)
+   - **NOTE:** When content packs are loaded, these `SpawnActorOnDeath` blocks should be re-added via template overrides in the content pack YAML
+2. **RepairableInfo/RepairableNear missing actors** (~1,800 unique) — ⏳ TODO
+3. **PassengerInfo missing actors** (~312 unique) — ⏳ TODO
+4. **Crate ExcludedActorType** (~135 unique) — ⏳ TODO
+5. **TransformsIntoRepairable** (~74 unique) — ⏳ TODO
 
 ### Phase 5: Unresolved Prerequisites (~79 unique → 0)
 
@@ -190,3 +181,12 @@ This is achievable but requires sustained effort across multiple sessions. The b
 - Phase 4 (missing actors) — eliminates ~95% of all errors
 - Phase 6 (unused conditions) — eliminates ~77% of all warnings
 - Phase 2 (Interactable/Selectable) — eliminates both errors AND warnings simultaneously
+
+## Progress Log
+
+| Date | Phase | Commit | Impact |
+|---|---|---|---|
+| 2026-07-23 | Phase 2 | `98b22a3e1` | -9,438 errors, -9,438 warnings (Interactable/Selectable conflict) |
+| 2026-07-23 | Phase 3 | `9ac9e8148` | ~-2,390 warnings (450 simple FTL keys added) |
+| 2026-07-23 | Phase 4 | `b650766d9` | ~-184,509 errors (SpawnActorOnDeath refs to unloaded actors) |
+| 2026-07-23 | Phase 1 | `13e00fee6` | ~-2,847 errors (palette reference fixes) |
