@@ -317,6 +317,7 @@
 ^D2kUpgradeable:
 	GrantConditionOnPrerequisite@UPGRADEABLE:
 		Condition: stardecoration
+		Prerequisites: stardecoration
 	WithDecoration@upgraded:
 		RequiresCondition: stardecoration
 		Position: TopRight

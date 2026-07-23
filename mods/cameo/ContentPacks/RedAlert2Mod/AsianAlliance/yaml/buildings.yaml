@@ -1096,14 +1096,36 @@ cgyard.asian:
 		TargetTypes: Ground, Water, C4, Structure
 
 asianalliance_concretebarrier:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~asianalliancebarrier
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
 	RenderSprites:
 		Image: asianalliance_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~asianalliancebarrier
-		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

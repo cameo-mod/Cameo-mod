@@ -37,7 +37,7 @@ d2k_silo.atreides:
 		Image: silo.atreides
 
 atreides_heavyfactory:
-	Inherits: heavy_factory
+	Inherits: ^heavy_factory
 	Tooltip:
 		Name: Atreides Heavy Factory
 	RenderSprites:

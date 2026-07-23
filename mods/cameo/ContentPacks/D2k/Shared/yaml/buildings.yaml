@@ -18,33 +18,67 @@ concreteabuilding:
 		Image: concretea
 
 concreteadefense:
-	Inherits: concreteabuilding
+	Inherits: ^concrete
+	D2kBuilding:
+		Footprint: xxxx xxxx xxxx xxxx
+		Dimensions: 4,4
+	Tooltip:
+		Name: Concrete Slab
+	Valued:
+		Cost: 500
 	Buildable:
 		Queue: Defence, RADefence
+		BuildPaletteOrder: 110
+		BuildDuration: 125
+		BuildDurationModifier: 100
+		Prerequisites: ~construction_yard, ~!upgrade_conyard
 		Description: Provides flat building foundation.
+	RenderSprites:
+		Image: concretea
 
 concretebbuilding:
-	Inherits: concreteabuilding
+	Inherits: ^concrete
 	D2kBuilding:
 		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
 		Dimensions: 5,5
 	Tooltip:
 		Name: Large Concrete Slab
+	Valued:
+		Cost: 500
 	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 110
+		BuildDuration: 125
+		BuildDurationModifier: 100
 		Prerequisites: ~upgrade_conyard
 		Description: Provides flat building foundation.
 	RenderSprites:
 		Image: concreteb
 
 concretebdefense:
-	Inherits: concretebbuilding
+	Inherits: ^concrete
+	D2kBuilding:
+		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
+		Dimensions: 5,5
+	Tooltip:
+		Name: Large Concrete Slab
+	Valued:
+		Cost: 500
 	Buildable:
 		Queue: Defence, RADefence
+		BuildPaletteOrder: 110
+		BuildDuration: 125
+		BuildDurationModifier: 100
+		Prerequisites: ~upgrade_conyard
 		Description: Provides flat building foundation.
+	RenderSprites:
+		Image: concreteb
 
 OILB.d2k:
 	Inherits@D2kBLD: ^D2KBuilding
-	Inherits: OILB.Building
+	Inherits@cashtrickler: ^CashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^2x2Shape
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Buildable:
 		Prerequisites: ~construction_yard, research_centre, derricklimit
@@ -83,12 +117,11 @@ OILB.d2k:
 	WithCrumbleOverlay:
 		RequiresCondition: !build-incomplete
 	-WithDeathAnimation:
-	-ActorPreviewPlaceBuildingPreview:
 
 # Generic construction yard template. Common traits here; each faction actor below
 # sets its tooltip name, the MCV it deploys back into, and its sprite image.
 
-heavy_factory:
+^heavy_factory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -160,7 +193,7 @@ heavy_factory:
 	Production@upgrade:
 		Produces: Addons
 
-light_factory:
+^light_factory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -429,17 +462,27 @@ sietch_creep:
 		Image: sietch
 
 sietch_creep_disabled:
-	Inherits@0: sietch_creep
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Tooltip:
+		Name: Sietch Ruins
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		TerrainTypes: Cliff
+	Health:
+		HP: 250000
+	Armor:
+		Type: Concrete
+	RequiresSpecificOwners:
+		ValidOwnerNames: Creeps
 	Capturable:
 		RequiresCondition: no-capture
 	-Targetable:
-	-FireProjectilesOnDeath:
 	-Selectable:
 	Interactable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2048, 2048
-	Tooltip:
-		Name: Sietch Ruins
 	RenderSprites:
 		Palette: staticterrain
 	WithSpriteBody:
@@ -451,16 +494,12 @@ sietch_creep_disabled:
 	-Targetable@ivan:
 	-Targetable@trappable:
 	-Targetable@chrono:
-	-MobSpawnerMaster@1:
-	-MobSpawnerMaster@2:
-	-MobSpawnerMaster@3:
-	-MobSpawnerMaster@4:
-	-MobSpawnerMaster@5:
-	-MobSpawnerMaster@6:
-	-MobSpawnerMaster@7:
-	-MobSpawnerMaster@8:
-	-MobSpawnerMaster@9:
-	-MobSpawnerMaster@10:
+	-RevealsShroud@base-reveal:
+	-GrantConditionOnPrerequisite@base-reveal:
+	-GivesBuildableArea:
+	-Sellable:
+	-WithBuildingRepairDecoration:
+	-WithDeathAnimation:
 
 
 	####################################################################################################

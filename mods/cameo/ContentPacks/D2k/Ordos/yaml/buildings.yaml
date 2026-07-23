@@ -302,7 +302,7 @@ ordos_storagesilo:
 		Image: silo.ordos
 
 ordos_lightfactory:
-	Inherits: light_factory
+	Inherits: ^light_factory
 	Tooltip:
 		Name: Ordos Light Factory
 	RenderSprites:
@@ -315,7 +315,7 @@ ordos_lightfactory:
 		Prerequisite: ordos_light_vehicle_production
 
 ordos_heavyfactory:
-	Inherits: heavy_factory
+	Inherits: ^heavy_factory
 	Tooltip:
 		Name: Ordos Heavy Factory
 	RenderSprites:

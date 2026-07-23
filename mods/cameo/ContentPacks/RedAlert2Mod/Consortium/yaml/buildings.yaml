@@ -1,7 +1,9 @@
 steelconsortium_consortiumconstructionyard:
-	Inherits: ra2_allies_alliedconstructionyard
-	Inherits@water: ^SteelUnderwaterStructure
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
+	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
@@ -12,8 +14,20 @@ steelconsortium_consortiumconstructionyard:
 		LocalCenterOffset: 0,-1024,0
 	Transforms:
 		IntoActor: steelconsortium_consortiummobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+		RequiresCondition: factundeploy
+	WithBuildingPlacedOverlay:
+	WithIdleOverlay@fans:
+		Sequence: idle-fans
+		RequiresCondition: !build-incomplete
 	RenderSprites:
 		PlayerPalette: playerra2cons
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
 	ActorStatValues:
 		Upgrades: steelconsortium_upgrade_shieldresistance
 	Targetable@TechStealerInfiltrate:
@@ -21,11 +35,8 @@ steelconsortium_consortiumconstructionyard:
 	InfiltrateForSupportPower:
 		Proxy: qacst_infiltrated.steel
 		Types: TechStealerInfiltrate
-	-ProvidesPrerequisite@ra2oilderrick:
 	ProvidesPrerequisite@ra2awall:
 		Prerequisite: ra2awall
-	ActorStatValues:
-		Upgrades: steelconsortium_upgrade_naniteinfusion, steelconsortium_upgrade_ferrocretecurtain, steelconsortium_upgrade_shieldresistance
 
 steelconsortium_consortiumpowerplant:
 	Inherits: ^RA2Building

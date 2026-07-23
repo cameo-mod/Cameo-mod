@@ -252,7 +252,7 @@ ixian_munitionssilo:
 	# 	ProductionType: Upgrade
 
 ixian_advancedheavyfactory:
-	Inherits: heavy_factory
+	Inherits: ^heavy_factory
 	Tooltip:
 		Name: Ixian Advanced Heavy Factory
 	ProductionCostMultiplier@ixian:

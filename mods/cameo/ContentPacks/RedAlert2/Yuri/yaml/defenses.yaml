@@ -1,12 +1,34 @@
 yuri_concretebarrier:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~yuri_constructionyard
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
 	RenderSprites:
 		Image: yuri_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~yuri_constructionyard
-		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

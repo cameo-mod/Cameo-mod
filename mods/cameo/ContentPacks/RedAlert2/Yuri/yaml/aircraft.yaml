@@ -1,7 +1,49 @@
 yuriinvisibleplane:
-	Inherits: ra1_soviets_spyplane
-	-Contrail@1:
-	-Contrail@2:
+	Inherits: ^AirstrikePlane
+	Tooltip:
+		Name: Spy Plane
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 100000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 300
+		Repulsable: False
+		MaximumPitch: 25
+	AttackBomber:
+		FacingTolerance: 32
+	Selectable:
+	SelectionDecorations:
+	SpawnActorOnDeath:
+		Actor: U2.Husk
+	Armament:
+		Weapon: SpyPlaneTargeting
+	ParaDrop:
+		DropRange: 5c0
+		ChuteSound: chute1.aud
+	Cargo:
+		MaxWeight: 25
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	DynamicSpeedMultiplier:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: ra1_soviets_spyplane
+		PlayerPalette: raplayer
 
 yuri_floatingdisk:
 	Inherits: ^Helicopter

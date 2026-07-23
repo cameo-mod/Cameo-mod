@@ -1,11 +1,18 @@
 ra2_soviets_constructionyard:
-	Inherits: ra2_allies_alliedconstructionyard
+	Inherits: ^RA2Building
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Tooltip:
 		Name: Soviet Construction Yard
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
 	Transforms:
 		IntoActor: ra2_soviets_mobileconstructionvehicle
-	-WithIdleOverlay@fans:
+		Offset: 1,1
+		Facing: 432
+		RequiresCondition: factundeploy
 	WithIdleOverlay@top:
 		Sequence: idle-top
 		RequiresCondition: !build-incomplete
@@ -14,7 +21,11 @@ ra2_soviets_constructionyard:
 		RequiresCondition: !build-incomplete
 	WithBuildingPlacedOverlay:
 		Sequence: build
-	-ProvidesPrerequisite@ra2awall:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
 	ProvidesPrerequisite@ra2oilderrick:
 		Prerequisite: ra2oilderrick
 	ProvidesPrerequisite@ra2swall:

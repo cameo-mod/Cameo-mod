@@ -484,14 +484,36 @@ ra2_allies_grandcannon:
 		Upgrades: ra2_allies_upgrade_tanklasertargeting
 
 ra2_allies_concretebarrier:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2_allies_alliedconstructionyard
+		Queue: Defence, RADefence
+		Description: Provides flat building foundation.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
 	RenderSprites:
 		Image: ra2_allies_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~ra2_allies_alliedconstructionyard
-		Description: Provides flat building foundation.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
