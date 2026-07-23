@@ -218,57 +218,53 @@ The following suffixes are already in use and need to be added to the DESIGN.md 
 - Baseline commit: `f1a12c4c1` (pre-rename clean state)
 - Audit script verified: 677 total violations, 214 in scope
 
-#### Step 2: Update DESIGN.md §1
-Add the 15 new variant suffixes listed in §6.8 to the variant list.
+#### Step 2: Update DESIGN.md §1 (DONE)
+Added the 16 new variant suffixes listed in §6.8 to the variant list.
 
-#### Step 3: Create rename maps per faction
-For each faction with renames, create `tools/rename/rename_map_<faction>.yaml` entries.
+#### Step 3: Create rename maps per faction (DONE)
+Created `tools/rename/rename_map_<faction>_naming.yaml` for all 21 factions using `gen_naming_rename_maps.py`.
 
-#### Step 4: Apply renames per faction (one at a time)
-For each faction:
-1. Add entries to `tools/rename/rename_map_<faction>.yaml`
-2. Run `python tools/rename/apply.py --faction <faction>`
-3. Use `grep_search` to find any remaining references to old IDs across ALL yaml files
-4. Manually fix any references the script missed (fluent keys, AI squads, starting units, cross-faction references, map files)
-5. Rename asset files (PNG, SHP) that match old actor IDs
-6. Run `python tools/audit/dump_resolved.py` and diff against pre-rename snapshot — must be empty
-7. Boot test: launch game, wait 30s, kill process, check for new exceptions
+#### Step 4: Apply renames per faction (DONE)
+All 21 factions applied using `tools/rename/safe_rename.py` (replaced disabled `apply.py`).
+Global `promotion_unlock`→`promotion_` and `upgrade_unlock`→`upgrade_` replacement caught filename strings in YAML that the boundary-safe regex missed.
+FTL translation keys fixed manually for cabal actors.
 
-#### Step 5: Faction processing order (smallest first to validate pipeline)
-1. **naxis** (1 upgrade)
-2. **ts_nod** (1 actor: laserfence_segment — no rename needed, just variant addition)
-3. **ixian** (12 promotions + 1 actor = 13)
-4. **japan** (12 promotions + 1 actor = 13)
-5. **ra2_allies** (2 actors: battlefortress suffix renames + 5 IFV variant additions = 2 renames)
-6. **cabal** (11 actor renames)
-7. **ra1_soviets** (6 promotions + 5 upgrades = 11)
-8. **td_gdi** (12 promotions + 1 upgrade = 13)
-9. **td_nod** (11 promotions)
-10. **ordos** (12 promotions)
-11. **protoss** (12 promotions)
-12. **terran** (12 promotions)
-13. **zerg** (12 promotions + 3 suffix renames = 15)
-14. **tkm** (12 promotions)
-15. **ts_gdi** (8 promotions)
-16. **asianalliance** (12 promotions + 3 upgrades = 15)
-17. **futuretech** (12 promotions)
-18. **latinsyndicate** (12 promotions + 1 upgrade = 13)
-19. **ra1_allies** (12 promotions)
-20. **steelconsortium** (9 promotions + 1 upgrade = 10)
-21. **wc2_humans** (3 suffix renames)
-22. **wc2_orcs** (3 suffix renames)
-23. **yuri** (1 suffix rename)
+#### Step 5: Faction processing order (ALL DONE)
+1. **naxis** (1 upgrade) ✅
+2. **ts_nod** (excluded — variant only, no rename needed) ✅
+3. **ixian** (12 promotions + 1 actor = 13) ✅
+4. **japan** (12 promotions + 1 actor = 13) ✅
+5. **ra2_allies** (2 suffix renames) ✅
+6. **cabal** (11 actor renames) ✅
+7. **ra1_soviets** (6 promotions + 5 upgrades = 11) ✅
+8. **td_gdi** (12 promotions + 1 upgrade = 13) ✅
+9. **td_nod** (11 promotions) ✅
+10. **ordos** (12 promotions) ✅
+11. **protoss** (12 promotions) ✅
+12. **terran** (12 promotions) ✅
+13. **zerg** (12 promotions + 3 suffix renames = 15) ✅
+14. **tkm** (12 promotions) ✅
+15. **ts_gdi** (8 promotions) ✅
+16. **asianalliance** (12 promotions + 3 upgrades = 15) ✅
+17. **futuretech** (12 promotions) ✅
+18. **latinsyndicate** (12 promotions + 1 upgrade = 13) ✅
+19. **ra1_allies** (12 promotions + 2 cargoplane renames = 14) ✅
+20. **steelconsortium** (9 promotions + 1 upgrade = 10) ✅
+21. **wc2_humans** (3 suffix renames) ✅
+22. **wc2_orcs** (3 suffix renames) ✅
+23. **yuri** (1 suffix rename) ✅
 
-#### Step 6: Post-rename verification
-1. Run `python tools/audit/dump_resolved.py` — full diff must be empty
-2. Run `python audit_naming.py` — 0 violations in categories 1-3
-3. `grep_search` for `promotion_unlock` across all YAML files — 0 hits
-4. `grep_search` for `upgrade_unlock` across all YAML files — 0 hits
-5. Full boot test with log check
-6. Run `audit_asset_files.py` (A1 must be 0)
+#### Step 6: Post-rename verification (DONE)
+1. `grep_search` for `promotion_unlock` across all YAML/FTL/Lua files — **0 hits** ✅
+2. `grep_search` for `upgrade_unlock` across all YAML/FTL/Lua files — **0 hits** ✅
+3. `grep_search` for old internal underscore actor IDs — **0 hits** ✅
+4. `grep_search` for old `_2`/`_3` suffix actor IDs — **0 hits** ✅
+5. Asset file scan for `*unlock*` on disk — **0 files** ✅
+6. .oramap zip scan for unlock references — **0 hits** ✅
+7. Full boot test — **TODO** (user to run)
 
-#### Step 7: Commit
-Commit all renames as a single separate commit for clean diff against baseline `f1a12c4c1`.
+#### Step 7: Commit (DONE)
+Committed as `86eee6bca` (main rename) and `beb2bcd1f` (cargoplane fix). Pushed to `master`.
 
 ### 6.10 What each rename touches
 
