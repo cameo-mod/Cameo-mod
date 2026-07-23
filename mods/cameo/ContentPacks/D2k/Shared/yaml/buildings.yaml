@@ -125,16 +125,12 @@ heavy_factory:
 		Prerequisite: heavy.harkonnen
 	ProvidesPrerequisite@atreides_combat:
 		Prerequisite: heavy.atreides_combat
-		Factions: atreides, fremen, ixian
 	ProvidesPrerequisite@ordos_combat:
 		Prerequisite: heavy.ordos_combat
-		Factions: ordos, mercenary
 	ProvidesPrerequisite@harkonnen_combat:
 		Prerequisite: heavy.harkonnen_combat
-		Factions: harkonnen, corrino, guild
 	ProvidesPrerequisite@missile_tank:
 		Prerequisite: heavy.missile_tank
-		Factions: atreides, fremen, harkonnen, corrino, mercenary
 	RenderSprites:
 		Image: heavy.atreides
 	WithIdleOverlay@TOP:
