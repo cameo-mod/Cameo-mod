@@ -8826,6 +8826,7 @@ CPQDEBUGDUMMY:
 
 ^promotion_upgrade.template:
 	Inherits: ^upgrade.template
+	-Interactable:
 	Buildable:
 		Queue: Promotions
 		Description: Promotion unlock upgrade
