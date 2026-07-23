@@ -531,6 +531,7 @@ op2_commonore_beacon_3bar:
 	GrantExternalConditionPower@forceshield:
 		OrderName: ForceShield
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: upforceshield
 		Icons:
 			1: forceshield

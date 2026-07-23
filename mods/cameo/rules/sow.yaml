@@ -893,6 +893,7 @@ sowradar:
 		SupportPowerPaletteOrder: 40
 		StartFullyCharged: true
 		PauseOnCondition: lowpower
+		Prerequisites: 
 	AirstrikePower@Bomber:
 		OrderName: sowbomber
 		Icon: sowbomber_icon

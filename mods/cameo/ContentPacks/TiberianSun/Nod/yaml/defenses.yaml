@@ -50,6 +50,7 @@ ts_nod_missilesilo:
 	FireArmamentPower:
 		AllowMultiple: true
 		ArmamentName: superweapon
+		Prerequisites:
 			1: ~techlevel.superweapons
 			2: ts_nod_tiberiumwastefacility
 		Cursor: nuke

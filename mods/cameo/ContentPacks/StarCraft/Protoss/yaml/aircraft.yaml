@@ -706,6 +706,7 @@ protoss_arbiter:
 	RecallPower:
 		StartFullyCharged: true
 		OrderName: Recall
+		Prerequisites:
 			1: !botplayer
 		PauseOnCondition: disabled
 		IconImage: ra2_allies_chronosphere

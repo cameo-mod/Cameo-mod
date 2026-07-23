@@ -537,6 +537,7 @@
 ^DU_OrnithopterSupportPower:
 	AirstrikePower@orni:
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~upgrade_hightech
 		Icons:
 			1: ornistrike

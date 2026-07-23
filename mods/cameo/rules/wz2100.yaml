@@ -3998,6 +3998,7 @@ psc2100chopshop2:
 	Inherits: E6
 	Buildable:
 		BuildPaletteOrder: 10000
+		Prerequisites:
 		Queue: Infantry, Vehicle, RAInfantry, RAVehicle
 		Icon: 2100icon
 	RenderSprites:
@@ -5367,6 +5368,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Infantry, RAInfantry
+		Prerequisites: 
 	RenderSprites:
 		Image: 2100bus
 

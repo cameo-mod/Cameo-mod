@@ -8,6 +8,7 @@
 			1: icon
 		IconImage: cabal_upgrade_dataworm
 		PauseOnCondition: lowpower || disabled
+		Prerequisites:
 			1: cabal_upgrade_dataworm
 		ChargeInterval: 4500
 		ArmamentName: superweapon

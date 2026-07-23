@@ -463,6 +463,7 @@ taguardian:
 		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Armed infantry transport.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
@@ -532,6 +533,7 @@ tapitbull:
 		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Missile Light Buggy.\nCan attack Aircraft.\n  Strong vs Vehicles\n  Weak vs Infantry

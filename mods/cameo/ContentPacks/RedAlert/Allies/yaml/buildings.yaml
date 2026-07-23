@@ -169,6 +169,7 @@ ra1_allies_alliedtechcenter:
 	WithBuildingBib:
 	GpsPower:
 		DoorImage: ra1_allies_alliedtechcenter
+		Prerequisites:
 			1: ra1_allies_upgrade_gpssatellitesupport
 		Icons:
 			1: gps
@@ -310,6 +311,7 @@ ra1_allies_reinforcementpad:
 			1: paratroopers
 		Names:
 			1: power_reinforcements.name
+		Prerequisites:
 			1:
 		ChargeInterval: 7500
 		Descriptions:

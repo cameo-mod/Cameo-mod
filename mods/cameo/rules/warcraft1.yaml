@@ -1884,6 +1884,7 @@ wc_n_waterelemental:
 	Buildable:
 		Queue: Infantry
 		Description: Will make you wet your pants\nLiterally\nCannot be hurt by fire
+		Prerequisites:
 	Valued:
 		Cost: 1600
 	DamageMultiplier@DamageReduction:
@@ -2556,6 +2557,7 @@ wc_n_slime:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
+		Prerequisites:
 		Queue: Infantry
 		Description: Slow Booger-like creature with jump attack that splits into more upon death
 		BuildDuration: 400

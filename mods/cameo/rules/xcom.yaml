@@ -175,6 +175,7 @@ ShotgunUpgrade:
 		OrderName: ShotgunUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -211,6 +212,7 @@ ShardgunUpgrade:
 		OrderName: ShardgunUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -247,6 +249,7 @@ GrenadeUpgrade:
 		OrderName: GrenadeUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -283,6 +286,7 @@ CarapaceArmorUpgrade:
 		OrderName: CarapaceArmorUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -414,6 +418,7 @@ RocketLauncherUpgrade:
 		OrderName: RocketLauncherUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -559,6 +564,7 @@ AutoSniperUpgrade:
 		OrderName: AutoSniperUpgrade
 		OneShot: true
 		AllowMultiple: true
+		Prerequisites:
 			1:
 		Icons:
 			1: invuln
@@ -796,6 +802,7 @@ XCOMHQ:
 		Modifier: 200
 		RequiresCondition: xcom_satellite_nexus
 	GpsPower:
+		Prerequisites:
 			1: xcom_satellite_uplink
 		Icons:
 			1: gps
@@ -811,6 +818,7 @@ XCOMHQ:
 		PauseOnCondition: disabled
 		SupportPowerPaletteOrder: 90
 	ProduceActorPower@spysat:
+		Prerequisites:
 			1: xcom_satellite_nexus
 		Icons:
 			1: gps

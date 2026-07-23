@@ -145,6 +145,7 @@ td_gdi_communicationscenter:
 		RequiresCondition: !(powerdown || infiltrated)
 	AirstrikePower:
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: td_gdi_upgrade_a10airstrike
 		Icons:
 			1: airstrike
@@ -245,6 +246,7 @@ td_gdi_advancedcommunicationscenter:
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		RequiresCondition: ionc
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: ioncannon

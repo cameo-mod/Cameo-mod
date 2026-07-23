@@ -119,6 +119,7 @@ yuri_psychicdominator:
 	DetonateWeaponPowerCA@psi:
 		AllowMultiple: true
 		OrderName: PsychicDominator
+		Prerequisites:
 			1: ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:
@@ -187,6 +188,7 @@ yuri_geneticmutator:
 	DetonateWeaponPower@Mutate:
 		OrderName: GeneticMutator
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: ra2mutate

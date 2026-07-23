@@ -2130,6 +2130,7 @@ ra2caairp:
 		ValidRelationships: Neutral, Enemy
 	ParatroopersPower@ra2paratroopers:
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ra2caairp
 			2: ra2caairp, infantryairports2
 			3: ra2caairp, infantryairports3
@@ -2216,6 +2217,7 @@ ra2caairpv:
 		Name: Airport (Tank Support)
 	ParatroopersPower@ra2paratroopers:
 		OrderName: Support Tank Paratroopers
+		Prerequisites:
 			1: ra2caairpv
 			2: ra2caairpv, tankairports2
 			3: ra2caairpv, tankairports3

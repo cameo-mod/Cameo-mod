@@ -713,6 +713,7 @@ ts_gdi_upgradecenter:
 		AllowMultiple: True
 		RequiresCondition: ionc
 		PauseOnCondition: lowpower || disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: ioncannon
@@ -745,6 +746,7 @@ ts_gdi_upgradecenter:
 	DropPodsPower:
 		RequiresCondition: droppod
 		PauseOnCondition: lowpower || disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: droppod
