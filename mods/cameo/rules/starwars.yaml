@@ -362,7 +362,7 @@ swnuk2:
 		Name: Advanced Shield Plant
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium. ~disabled
+		Prerequisites: anyhq. ~disabled
 		Queue: Building, RABuilding
 		Description: Provides more power, cheaper than the\nstandard Power Plant
 	Building:
@@ -398,7 +398,7 @@ swhq:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, ~techlevel.medium
+		Prerequisites: swproc
 		Queue: None
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -547,7 +547,7 @@ swmcv.empire:
 		Name: Mobile Construction Vehicle (Empire)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, swfix
+		Prerequisites: anyhq, swfix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -586,7 +586,7 @@ swmcv.empireBot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, swfix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, swfix, ~botplayer, allowsMCV
 
 swpower:
 	Inherits: ^BaseBuilding
@@ -732,7 +732,7 @@ swhqe:
 	Inherits@sell: ^SWSpawnActorsOnSellEmpire
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, swpyle, ~techlevel.medium, swweap
+		Prerequisites: swproc, swpyle, swweap
 		Queue: Building, RABuilding
 	Building:
 		Footprint: xxx xxx ===
@@ -1385,7 +1385,7 @@ swmcv.rebels:
 		Name: Mobile Construction Vehicle (Rebel Alliance)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, swfix
+		Prerequisites: anyhq, swfix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -1399,7 +1399,7 @@ swmcv.rebelsBot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, swfix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, swfix, ~botplayer, allowsMCV
 
 swsheltre:
 	Inherits: swshelt
@@ -1566,7 +1566,7 @@ swhqre:
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, swhand, ~techlevel.medium, swweapre
+		Prerequisites: swproc, swhand, swweapre
 		Queue: Building, RABuilding
 	Building:
 		Footprint: xxx xxx ===
@@ -1836,7 +1836,7 @@ swmcv.republic:
 		Name: Mobile Construction Vehicle (Republic)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, swfix
+		Prerequisites: anyhq, swfix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -1850,7 +1850,7 @@ swmcv.republicBot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, swfix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, swfix, ~botplayer, allowsMCV
 
 swsheltr:
 	Inherits: swshelt
@@ -2028,7 +2028,7 @@ swhqr:
 	Inherits@sell: ^SWSpawnActorsOnSellRepublic
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, swpyler, ~techlevel.medium, swweapr
+		Prerequisites: swproc, swpyler, swweapr
 		Queue: Building, RABuilding
 	Building:
 		Footprint: xxx xxx ===
@@ -2287,7 +2287,7 @@ swmcv.separatist:
 		Name: Mobile Construction Vehicle (Separatist)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, swfix
+		Prerequisites: anyhq, swfix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -2303,7 +2303,7 @@ swmcv.separatistBot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, swfix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, swfix, ~botplayer, allowsMCV
 
 swsheltd:
 	Inherits: swshelt
@@ -2414,7 +2414,7 @@ swhqs:
 	Inherits@sell: ^SWSpawnActorsOnSellDroid
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, swbarrdroid, ~techlevel.medium, swweapd
+		Prerequisites: swproc, swbarrdroid, swweapd
 		Queue: Building, RABuilding
 	Building:
 		Footprint: xxx xxx ===
@@ -2664,7 +2664,7 @@ swmcv.hutt:
 		Name: Mobile Construction Vehicle (Hutt Clan)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, swfix
+		Prerequisites: anyhq, swfix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -2680,7 +2680,7 @@ swmcv.huttBot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, swfix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, swfix, ~botplayer, allowsMCV
 
 ^SWSpawnActorsOnSell:
 	SpawnActorsOnSell:
@@ -3337,7 +3337,7 @@ swhqh:
 	Inherits: swhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: swproc, ~techlevel.medium, vehicleproduction
+		Prerequisites: swproc, vehicleproduction
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: swdhq
@@ -3434,7 +3434,7 @@ sweye:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !ionc
+		Prerequisites: anyhq, !ionc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -3491,7 +3491,7 @@ sweyee:
 	Inherits: sweye
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !ionc
+		Prerequisites: anyhq, !ionc
 		Queue: Building, RABuilding
 		Description: Provides radar and Death Star support power.\nRequires power to operate.
 	IonCannonPower:
@@ -3533,7 +3533,7 @@ swtmpl:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !nodnuke
+		Prerequisites: anyhq, !nodnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Hi-Tech.\nRequires power to operate.
 	Building:
@@ -3610,7 +3610,7 @@ swdtmpl:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !nodnuke
+		Prerequisites: anyhq, !nodnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Hi-Tech.\nRequires power to operate.
 	Building:
@@ -3688,7 +3688,7 @@ swpalace:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !nodnuke
+		Prerequisites: anyhq, !nodnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Hi-Tech.\nRequires power to operate.
 	Building:
@@ -3914,7 +3914,7 @@ SWOBLI:
 		Name: Obelisk of Light
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: tek, ~techlevel.high
+		Prerequisites: tek
 		Queue: Defence, RADefence
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
@@ -3998,7 +3998,7 @@ SWATWR:
 		Name: Advanced Guard Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.medium, tek
+		Prerequisites: anyhq, tek
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks, Infantry
 	Selectable:
@@ -4126,7 +4126,7 @@ swsite:
 		Name: Tusken Raider Site
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Infantry, Tanks\n  Weak vs Aircraft\n Spawn Tusken Raiders
 	Selectable:
@@ -4255,7 +4255,7 @@ swntpuls:
 	Inherits: tsntpuls
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: tsntpuls
@@ -4353,7 +4353,7 @@ swaatower:
 		Name: AA Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -5196,7 +5196,7 @@ swrmbo:
 		Name: Mercenary
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: swfort, ~techlevel.high
+		Prerequisites: swfort
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament:
@@ -5219,7 +5219,7 @@ swgreedo:
 		Name: Bounty Hunter
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: swfort, ~techlevel.high
+		Prerequisites: swfort
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Armament@PRIMARY:
@@ -5723,7 +5723,7 @@ swltnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Aircraft Gunship with AG Laser.\n  Strong vs Tanks, Walker Mech\n  Weak vs Infantry
 		BuildDurationModifier: 50
@@ -5798,7 +5798,7 @@ swheli:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Fast Aircraft with Light Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDurationModifier: 50
@@ -5865,7 +5865,7 @@ swdroidheli:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDurationModifier: 50
@@ -5944,7 +5944,7 @@ swxwing:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, swfort, ~techlevel.medium
+		Prerequisites: hpad, anyhq, swfort
 		Queue: Aircraft, RAAircraft
 		Description: Fighter Aircraft with Medium Lasers and Missiles.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDurationModifier: 50
@@ -6018,7 +6018,7 @@ swstarfighter:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Fighter Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDurationModifier: 50
@@ -6093,7 +6093,7 @@ swstarfighterj:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, swfort, ~techlevel.medium
+		Prerequisites: hpad, swfort
 		Queue: Aircraft, RAAircraft
 		Description: Fighter Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDurationModifier: 50
@@ -6171,7 +6171,7 @@ swfalc:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, swfort, tek, ~techlevel.medium
+		Prerequisites: hpad, anyhq, swfort, tek
 		Queue: Aircraft, RAAircraft
 		Description: Hero Aircraft.\nwith Lasers, Heavy Lasers, etc.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 		BuildDuration: 4500
@@ -6266,7 +6266,7 @@ sworca:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Aircraft with Heavy Lasers.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 		BuildDurationModifier: 50
@@ -6339,7 +6339,7 @@ swtrifighter:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Aircraft with Heavy Lasers.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 		BuildDurationModifier: 50
@@ -6414,7 +6414,7 @@ swywing:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, tek, ~techlevel.medium
+		Prerequisites: hpad, anyhq, tek
 		Queue: Aircraft, RAAircraft
 		Description: Bomber Aircraft.\n  Strong vs Buildings, Tanks, Infantry\n  Weak vs AA Armament
 		BuildDurationModifier: 50
@@ -7828,7 +7828,7 @@ swpummel:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored anti Structure.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 	Mobile:
@@ -7856,7 +7856,7 @@ swpummeld:
 	Inherits: swpummel
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored anti Structure.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 	Voiced:
@@ -8095,7 +8095,7 @@ swbantha2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: swnurse, ~techlevel.medium
+		Prerequisites: swnurse
 		Queue: Infantry, RAInfantry
 		Description: Livestock animal\n Used to obtain money.\n must be kept in a nursery
 	Mobile:
@@ -8137,7 +8137,7 @@ swnerf:
 		Name: Nerf
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: swnurse, ~techlevel.medium
+		Prerequisites: swnurse
 		Queue: Infantry, RAInfantry
 		Description: Livestock animal\n Used to obtain money.\n must be kept in a nursery
 	Voiced:

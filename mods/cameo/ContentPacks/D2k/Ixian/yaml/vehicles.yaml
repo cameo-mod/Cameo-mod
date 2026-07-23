@@ -278,7 +278,7 @@ ixian_ixmissiletank:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
+# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~!faction.ixian, ~!faction.guild
 # 		BuildPaletteOrder: 60
 # 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 # 		IconPalette: d2kunit
@@ -323,7 +323,7 @@ ixian_ixmissiletank:
 # 	Inherits@AntiInf: ^PrioritizeInfantry
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: upgrade_heavy, high_tech_factory, ~flametankprereq, ~techlevel.high
+# 		Prerequisites: upgrade_heavy, high_tech_factory, ~flametankprereq
 # 		BuildPaletteOrder: 50
 # 		BuildDuration: 200
 # 		BuildDurationModifier: 100
@@ -374,7 +374,7 @@ ixian_ixmissiletank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.fremen
+# 		Prerequisites: ~heavy.atreides, research_centre, ~!faction.ixian, ~!faction.fremen
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Fires sonic shocks\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Artillery
@@ -417,21 +417,21 @@ ixian_ixmissiletank:
 # emperor_sonic_tank:
 # 	Inherits: sonic_tank
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: sonic_tank
 
 # emperor_deviator:
 # 	Inherits: ordos_deviatorartillery
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: ordos_deviatorartillery
 
 # emperor_devastator:
 # 	Inherits: devastator
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: devastator
 
@@ -786,7 +786,7 @@ ixian_heavykodatank:
 # 		Name: Silver Lion
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy.harkonnen_combat, ~faction.corrino, ~techlevel.medium
+# 		Prerequisites: ~heavy.harkonnen_combat, ~faction.corrino
 # 		Description: Corrino Multi-Purpose Main Battle Tank\nEquipped with Lower Calibre Cannon and AA/AT Missile System\n  All-Rounder
 # 	Armament:
 # 		Weapon: D2K76mm
@@ -834,7 +834,7 @@ ixian_heavykodatank:
 # combat_tank_emperor:
 # 	Inherits: combat_tank_corrino
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor
 # 	RenderSprites:
 # 		Image: combat_tank_corrino
 # combat_tank_fremen:
@@ -855,7 +855,7 @@ ixian_heavykodatank:
 # 			fedaykin: fedaykinloaded
 # 			fremen: phantomloaded
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen, ~techlevel.medium
+# 		Prerequisites: ~faction.fremen
 # 		Description: Fremen Main Battle Tank\nCan be fitted with Fremen to gain extra firepower
 # 	Armament:
 # 		Weapon: 80mm_H
@@ -925,7 +925,7 @@ ixian_heavykodatank:
 # combat_tank_fremen.bot1:
 # 	Inherits: combat_tank_fremen
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen, ~techlevel.medium, ~botplayer
+# 		Prerequisites: ~faction.fremen, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 125
 # 	Cargo:

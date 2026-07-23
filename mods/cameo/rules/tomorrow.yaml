@@ -143,7 +143,7 @@ MCV.TOMORROW:
 		Name: Mobile Construction Vehicle (Tomorrow)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -182,7 +182,7 @@ mcvtomorrow.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.ANSWER:
 	Inherits: ^Vehicle
@@ -195,7 +195,7 @@ MCV.ANSWER:
 		Name: Mobile Construction Vehicle (Answer)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -234,7 +234,7 @@ mcvanswer.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.DTUSA:
 	Inherits: ^Vehicle
@@ -247,7 +247,7 @@ MCV.DTUSA:
 		Name: Mobile Construction Vehicle (USA)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -286,7 +286,7 @@ mcvdtusa.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 RAMCV.DTRUSSIA:
 	Inherits: ^Vehicle
@@ -296,7 +296,7 @@ RAMCV.DTRUSSIA:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, ~techlevel.medium
+		Prerequisites: fix
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Valued:
@@ -336,7 +336,7 @@ ramcvdtrussia.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 MCV.DTJAPAN:
 	Inherits: ^Vehicle
@@ -349,7 +349,7 @@ MCV.DTJAPAN:
 		Name: Mobile Construction Vehicle (Japan)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -388,7 +388,7 @@ mcvdtjapan.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: anyhq, ~techlevel.medium, fix, ~botplayer, allowsMCV
+		Prerequisites: anyhq, fix, ~botplayer, allowsMCV
 
 RAFACT.DTRUSSIA:
 	GrantExternalConditionToOwner@BuildingsOwned:
@@ -1385,7 +1385,7 @@ HQ.TOMORROW:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: dtpropaganda, ~techlevel.medium
+		Prerequisites: dtpropaganda
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1403,7 +1403,7 @@ HQ.ANSWER:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: atek.answer, ~techlevel.medium
+		Prerequisites: atek.answer
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1420,7 +1420,7 @@ DOME.DTRUSSIA:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: atek.answer, ~techlevel.medium
+		Prerequisites: atek.answer
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.\nRequires power to operate.
 	RenderSprites:
@@ -1442,7 +1442,7 @@ DTSTRIKE:
 		Name: Airstrike Center
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: anyhq, ~techlevel.medium, !a10strikec
+		Prerequisites: anyhq, !a10strikec
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1572,7 +1572,7 @@ DTPROPAGANDA:
 		Name: Propaganda Center
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: dtproc, ~techlevel.high
+		Prerequisites: dtproc
 		Queue: Building, RABuilding
 		Description: Provides some Technologies
 	Building:
@@ -1654,7 +1654,7 @@ DTPOWER2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 800 #500
@@ -2179,7 +2179,7 @@ DTBIO:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
-		Prerequisites: vehicleproduction, anyhq, ~techlevel.high, !bacterialmissc
+		Prerequisites: vehicleproduction, anyhq, !bacterialmissc
 		Description: Provides Tomorrow advanced technologies
 	Valued:
 		Cost: 1500
@@ -2242,7 +2242,7 @@ ATEK.ANSWER:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 50
-		Prerequisites: dtproc, ~techlevel.high
+		Prerequisites: dtproc
 		Description: Provides Allies advanced technologies.\n  Special Ability: GPS Satellite
 	Valued:
 		Cost: 1000
@@ -2334,7 +2334,7 @@ DTOBLI:
 		Name: Question Spire
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: dtbio, ~techlevel.high
+		Prerequisites: dtbio
 		Queue: Defence, RADefence
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
@@ -2398,7 +2398,7 @@ DTEYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: dtpropaganda, ~techlevel.high, !cruisemissc
+		Prerequisites: dtpropaganda, !cruisemissc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -2467,7 +2467,7 @@ DTHQ:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: atek.answer, ~techlevel.high, !cruisemissc
+		Prerequisites: atek.answer, !cruisemissc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -2813,7 +2813,7 @@ DTRMBO:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high, dtpropaganda
+		Prerequisites: anyhq, dtpropaganda
 		Queue: Infantry, RAInfantry
 		Description: Elite sniper infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		BuildDuration: 375
@@ -2951,7 +2951,7 @@ v2rl.tomorrow:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Long-range rocket artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 		BuildDurationModifier: 50
 	Valued:
@@ -3150,7 +3150,7 @@ dtorca:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, dtstrike, ~techlevel.medium
+		Prerequisites: hpad, dtstrike
 		Queue: Aircraft, RAAircraft
 		Description: VTol Gunship with AG Missiles.\n  Strong vs Buildings, Infantry
 	Aircraft:
@@ -3552,7 +3552,7 @@ dte5:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Infantry, RAInfantry
 		Description: Advanced general-purpose infantry.\n  Strong vs all Ground units
 	Mobile:
@@ -3740,7 +3740,7 @@ dtfbik:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: anyhq, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
 	Mobile:
@@ -3774,7 +3774,7 @@ dtdtrk:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 160
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Description: Truck with actively armed nuclear\nexplosives. Has very weak armor.
 	Valued:
 		Cost: 400

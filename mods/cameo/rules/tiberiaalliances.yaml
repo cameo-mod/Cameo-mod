@@ -347,7 +347,7 @@ TASNIPE:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: Addonsbarr3, ~techlevel.medium
+		Prerequisites: Addonsbarr3
 		Queue: Infantry, RAInfantry
 		Description: Special anti-infantry unit.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	RenderSprites:
@@ -1217,7 +1217,7 @@ tajugg:
 		Name: Juggernaut
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: Addonsweap2, ~techlevel.high
+		Prerequisites: Addonsweap2
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Armament:
@@ -1312,7 +1312,7 @@ tapaladin:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -3337,7 +3337,7 @@ mcv.tagdi:
 		Name: Mobile Construction Vehicle (GDI)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -3373,7 +3373,7 @@ mcv.tanod:
 		Name: Mobile Construction Vehicle (Nod)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -3386,7 +3386,7 @@ mcv.tamutant:
 		Name: Mobile Construction Vehicle (Forgotten)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, upgrade.tamuttrade1
+		Prerequisites: anyhq, upgrade.tamuttrade1
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -3642,7 +3642,7 @@ mcv.taelectro:
 		Name: Mobile Construction Vehicle (Electronic Army)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 	Transforms:
@@ -4189,7 +4189,7 @@ tagdiweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 		Description: Trains Infantry.
 	Valued:
 		Cost: 2000 #500
@@ -4261,7 +4261,7 @@ tanodweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodref, ~techlevel.medium
+		Prerequisites: tanodref
 	Valued:
 		Cost: 2000 #500
 	Tooltip:
@@ -4292,7 +4292,7 @@ tamuttrade:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tamutref, ~techlevel.medium
+		Prerequisites: tamutref
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
@@ -4346,7 +4346,7 @@ tagdihq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1000 #500
@@ -4402,7 +4402,7 @@ tanodhq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodref, ~techlevel.medium
+		Prerequisites: tanodref
 	Production:
 		Produces: Research
 	ProductionBar:
@@ -4421,7 +4421,7 @@ tamuthq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tamutref, ~techlevel.medium
+		Prerequisites: tamutref
 	Production:
 		Produces: Research
 	ProductionBar:
@@ -4435,7 +4435,7 @@ tagdihq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium, !tagdihq2c
+		Prerequisites: anyhq, !tagdihq2c
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -4480,7 +4480,7 @@ tanodhq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2500 #500
@@ -4667,7 +4667,7 @@ tagdiskystrike:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdiskystrikesw
+		Prerequisites: tagdihq2, !tagdiskystrikesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -4734,7 +4734,7 @@ tagdifalcon:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdifalconsw
+		Prerequisites: tagdihq2, !tagdifalconsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -4819,7 +4819,7 @@ tagdiion:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdihq2, ~techlevel.medium, !tagdiionsw
+		Prerequisites: tagdihq2, !tagdiionsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2500 #500
@@ -4891,7 +4891,7 @@ tanodbladeofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tanodbladeofkanesw
+		Prerequisites: tanodhq2, !tanodbladeofkanesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -4958,7 +4958,7 @@ tanodeyeofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tagdifalconsw
+		Prerequisites: tanodhq2, !tagdifalconsw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 1500 #500
@@ -5043,7 +5043,7 @@ tafistofkane:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tanodhq2, ~techlevel.medium, !tafistofkanesw
+		Prerequisites: tanodhq2, !tafistofkanesw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 2000 #500
@@ -5131,7 +5131,7 @@ taelechq:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 	Production:
 		Produces: Research
 	ProductionBar:
@@ -5150,7 +5150,7 @@ taelechq2:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: tagdihq, ~techlevel.medium
+		Prerequisites: tagdihq
 	RenderSprites:
 		Image: tagdihq2
 	ProvidesPrerequisite@tagdihq2:
@@ -5166,7 +5166,7 @@ taelecweap:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: tagdiref, ~techlevel.medium
+		Prerequisites: tagdiref
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
@@ -5215,7 +5215,7 @@ tatacitus:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, tamutcrystal, vehicleproduction, ~techlevel.medium, !tatacitussw
+		Prerequisites: anyhq, tamutcrystal, vehicleproduction, !tatacitussw
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 5000 #500
@@ -5648,7 +5648,7 @@ tanodobelisk:
 		Name: Obelisk Artillery
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
@@ -5711,7 +5711,7 @@ tanodsam:
 		Name: Surface-to-Air Missile
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft

@@ -443,7 +443,7 @@ wh40kstrategy:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -593,7 +593,7 @@ wh40kstrategyo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -751,7 +751,7 @@ wh40kstrategym:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -902,7 +902,7 @@ wh40kstrategyc:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -1054,7 +1054,7 @@ wh40kstrategyt:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: anypower, ~techlevel.medium
+		Prerequisites: anypower
 		Description: Provides Passive income.\n Provides Base Area .\n Attacks when is Upgraded.\n  Upgradeable with Addons
 		BuildLimit: 5
 	Valued:
@@ -1241,7 +1241,7 @@ wh40kmcv:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40karmory, ~techlevel.medium
+		Prerequisites: wh40karmory
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -6324,7 +6324,7 @@ wh40kmcvm:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kupmonastery, ~techlevel.medium
+		Prerequisites: wh40kupmonastery
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -7778,7 +7778,7 @@ wh40kmcvo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kweapo, ~techlevel.medium
+		Prerequisites: wh40kweapo
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:
@@ -10694,7 +10694,7 @@ wh40kmcvc:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 210
-		Prerequisites: wh40kupmonastery, ~techlevel.medium
+		Prerequisites: wh40kupmonastery
 		BuildDurationModifier: 40
 		Description: Deploys into another Field Command.\n  Unarmed
 	Valued:

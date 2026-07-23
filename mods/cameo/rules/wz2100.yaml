@@ -164,7 +164,7 @@ Player:
 		Name: Command Center (2100)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: 2100RF, ~techlevel.high, ~littlebuilderenable
+		Prerequisites: 2100RF, ~littlebuilderenable
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 	Building:
@@ -718,7 +718,7 @@ Player:
 		Prerequisite: 2100RF
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100OIL, ~techlevel.medium
+		Prerequisites: 2100OIL
 		Queue: Building, RABuilding
 		Description: Unlocks higher-tech units and buildings.
 	Building:
@@ -764,7 +764,7 @@ Player:
 		Name: Command Relay Center
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.high
+		Prerequisites: 2100RF
 		Queue: Building, RABuilding
 		Description: \nUnlocks commander units
 	Building:
@@ -794,7 +794,7 @@ Player:
 		Name: Laser Satellite
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.high, !nasda, up2100upsypnaticdata4
+		Prerequisites: 2100RF, !nasda, up2100upsypnaticdata4
 		Queue: Building, RABuilding
 		Description: Provides Laser Satellite support power.\n
 	Building:
@@ -1362,7 +1362,7 @@ Player:
 		Name: Guard Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium
+		Prerequisites: 2100fy1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Tanks
 	RequiresBuildableArea:
@@ -1406,7 +1406,7 @@ Player:
 		Name: Radar Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium
+		Prerequisites: 2100fy1
 		Queue: Defence, RADefence
 		Description: Reveals shroud.\n  Unarmed
 	RequiresBuildableArea:
@@ -1449,7 +1449,7 @@ Player:
 		Name: Rocket Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy1, ~techlevel.medium, ~up2100uplrk1
+		Prerequisites: 2100fy1, ~up2100uplrk1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -1487,7 +1487,7 @@ Player:
 		Name: Lancer Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100RF, ~techlevel.high, ~up2100uplancer1
+		Prerequisites: 2100RF, ~up2100uplancer1
 		Queue: Defence, RADefence
 		Description: Anti-Tank base defense.\n  Strong vs Vehicles\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -1559,7 +1559,7 @@ Player:
 		Name: Pepperpot Pit
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: up2100uppepper1, ~techlevel.high
+		Prerequisites: up2100uppepper1
 		Queue: Defence, RADefence
 		BuildDurationModifier: 20
 		Description: Long range defensive structure.\nFast-firing variant of the Mortar Pit.
@@ -1590,7 +1590,7 @@ Player:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 110
-		Prerequisites: 2100FY1, ~techlevel.medium, ~up2100uphurricane1
+		Prerequisites: 2100FY1, ~up2100uphurricane1
 		Description: Anti-Air base defense.\n  Strong vs Aircraft\n  Unable to attack ground units
 	Valued:
 		Cost: 600
@@ -1698,7 +1698,7 @@ psc2100factory2:
 		Name: Command Center (Scavenger)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: 2100RF, ~techlevel.high, ~littlebuilderenable
+		Prerequisites: 2100RF, ~littlebuilderenable
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 	Building:
@@ -2036,7 +2036,7 @@ psc2100factory2:
 		Prerequisite: 2100RF
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: up2100upvtols1, ~techlevel.medium
+		Prerequisites: up2100upvtols1
 		Queue: Building, RABuilding
 		Description: Produces aircraft and unlocks higher-tech\nunits and buildings.
 	Building:
@@ -2140,7 +2140,7 @@ psc2100factory2:
 		Name: Nuke Plant
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: up2100upsypnaticdata4, up2100uppowermodule1, ~techlevel.high, !scavnuke
+		Prerequisites: up2100upsypnaticdata4, up2100uppowermodule1, !scavnuke
 		Queue: Building, RABuilding
 		Description: Provides support powers.\nUnlocks higher-tech units and buildings.
 	Building:
@@ -2402,7 +2402,7 @@ psc2100factory2:
 		Name: Rocket Turret
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: 2100ChopShop, ~techlevel.medium
+		Prerequisites: 2100ChopShop
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -2524,7 +2524,7 @@ psc2100factory2:
 		Name: Flamer Guard Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100chopshop, up2100upflamer1, ~techlevel.medium
+		Prerequisites: 2100chopshop, up2100upflamer1
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RequiresBuildableArea:
@@ -2562,7 +2562,7 @@ psc2100factory2:
 	Inherits: 2100RADT
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100chopshop, ~techlevel.medium
+		Prerequisites: 2100chopshop
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	RenderSprites:
@@ -4116,7 +4116,7 @@ psc2100chopshop2:
 		Name: MCV Python Tracks (Alpha)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.medium, 2100RR
+		Prerequisites: 2100RF, 2100RR
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 35
 		Description: Deploys into another Construction Yard.\n  Automaticaly Repairs Structures in a 3 Tile Radius
@@ -4281,7 +4281,7 @@ psc2100chopshop2:
 		Name: Lancer Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upcobra1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100upcobra1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2CH:
@@ -4293,7 +4293,7 @@ psc2100chopshop2:
 		Name: Tank Killer Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upcobra1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100upcobra1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -4306,7 +4306,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGCH:
@@ -4318,7 +4318,7 @@ psc2100chopshop2:
 		Name: Heavy MG Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upcobra1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upcobra1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MOCH:
@@ -4330,7 +4330,7 @@ psc2100chopshop2:
 		Name: Mortar Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RACH:
@@ -4342,7 +4342,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Array Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100rkarray1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100rkarray1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -4355,7 +4355,7 @@ psc2100chopshop2:
 		Name: Inferno Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AACH:
@@ -4367,7 +4367,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVCH:
@@ -4379,7 +4379,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLACH:
@@ -4391,7 +4391,7 @@ psc2100chopshop2:
 		Name: Flak AA Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDCH:
@@ -4403,7 +4403,7 @@ psc2100chopshop2:
 		Name: Needle Gun Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKCH:
@@ -4415,7 +4415,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BOMCH:
@@ -4427,7 +4427,7 @@ psc2100chopshop2:
 		Name: Bombard Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AARTCH:
@@ -4439,7 +4439,7 @@ psc2100chopshop2:
 		Name: Anti-Artillery Sensor Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbombard1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100IMOCH:
@@ -4451,7 +4451,7 @@ psc2100chopshop2:
 		Name: Incendiary Mortar Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERCH:
@@ -4463,7 +4463,7 @@ psc2100chopshop2:
 		Name: Pepperpot Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upcobra1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upcobra1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Python
@@ -4476,7 +4476,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2PT:
@@ -4488,7 +4488,7 @@ psc2100chopshop2:
 		Name: Assault Gun Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HPT:
@@ -4500,7 +4500,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACPT:
@@ -4512,7 +4512,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2PT:
@@ -4524,7 +4524,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Python Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CPT:
@@ -4536,7 +4536,7 @@ psc2100chopshop2:
 		Name: Command Turret Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100uppython1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 
@@ -4572,7 +4572,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTPT:
@@ -4584,7 +4584,7 @@ psc2100chopshop2:
 		Name: Hotwizer Python Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Cobra Hovercraft
@@ -4597,7 +4597,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Cobra Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Python Hovercraft
@@ -4610,7 +4610,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Python Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HPHOV:
@@ -4622,7 +4622,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Python Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uppython1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -4634,7 +4634,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upviper1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upviper1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith MH.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4647,7 +4647,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upviper1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upviper1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith rocket pod.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4659,7 +4659,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upcobra1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upcobra1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith light cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4672,7 +4672,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upcobra1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upcobra1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith lancer.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -4995,7 +4995,7 @@ psc2100chopshop2:
 		Name: Lancer Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2SCH:
@@ -5007,7 +5007,7 @@ psc2100chopshop2:
 		Name: Tank Killer Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -5020,7 +5020,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upscorpion1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upscorpion1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGSCH:
@@ -5032,7 +5032,7 @@ psc2100chopshop2:
 		Name: Heavy MG Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RSCH:
@@ -5044,7 +5044,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Pod Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100uplrk1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100uplrk1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100LCSCH:
@@ -5056,7 +5056,7 @@ psc2100chopshop2:
 		Name: Light Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100uplcannon1, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100uplcannon1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MOSCH:
@@ -5068,7 +5068,7 @@ psc2100chopshop2:
 		Name: Mortar Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100upscorpion1, ~up2100upmortar1
+		Prerequisites: 2100fy2, ~up2100upscorpion1, ~up2100upmortar1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 
@@ -5081,7 +5081,7 @@ psc2100chopshop2:
 		Name: Inferno Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVSCH:
@@ -5093,7 +5093,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLASCH:
@@ -5105,7 +5105,7 @@ psc2100chopshop2:
 		Name: Flak AA Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDSCH:
@@ -5117,7 +5117,7 @@ psc2100chopshop2:
 		Name: Needle Gun Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKSCH:
@@ -5129,7 +5129,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERCH:
@@ -5141,7 +5141,7 @@ psc2100chopshop2:
 		Name: Pepperpot Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upscorpion1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upscorpion1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Mantis
@@ -5154,7 +5154,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2MAT:
@@ -5166,7 +5166,7 @@ psc2100chopshop2:
 		Name: Assault Gun Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HMAT:
@@ -5178,7 +5178,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACMAT:
@@ -5190,7 +5190,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2MAT:
@@ -5202,7 +5202,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CMAT:
@@ -5214,7 +5214,7 @@ psc2100chopshop2:
 		Name: Command Turret Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100upmantis1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 
@@ -5227,7 +5227,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphurricane1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100uphurricane1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Aircraft
 2100RIPMAT:
@@ -5239,7 +5239,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTMAT:
@@ -5251,7 +5251,7 @@ psc2100chopshop2:
 		Name: Hotwizer Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Scorpion Hovercraft
@@ -5264,7 +5264,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Scorpion Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upcobra1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Mantis Hovercraft
@@ -5277,7 +5277,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Mantis Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HMAHOV:
@@ -5289,7 +5289,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Mantis Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upmantis1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -5368,7 +5368,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: 2100bus
 
@@ -5389,7 +5389,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upbug1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upbug1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith MG.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5402,7 +5402,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upbug1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upbug1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith rocket pod.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5414,7 +5414,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upscorpion1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upscorpion1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith light cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5427,7 +5427,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upscorpion1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upscorpion1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith Lancer.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5560,7 +5560,7 @@ psc2100chopshop2:
 		Name: Lancer Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100uppanther1, up2100uplancer1
+		Prerequisites: 2100fy2, ~up2100uppanther1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2PHH:
@@ -5572,7 +5572,7 @@ psc2100chopshop2:
 		Name: Tank Killer Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: 2100fy2, ~techlevel.medium, ~up2100uppanther1, up2100uptankkiller1
+		Prerequisites: 2100fy2, ~up2100uppanther1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MPHH:
@@ -5584,7 +5584,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGPHH:
@@ -5596,7 +5596,7 @@ psc2100chopshop2:
 		Name: Heavy MG Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upheavymg1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MOPHH:
@@ -5608,7 +5608,7 @@ psc2100chopshop2:
 		Name: Mortar Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upmortar1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -5621,7 +5621,7 @@ psc2100chopshop2:
 		Name: Inferno Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AAPHH:
@@ -5633,7 +5633,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphurricane1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVPHH:
@@ -5645,7 +5645,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLAPHH:
@@ -5657,7 +5657,7 @@ psc2100chopshop2:
 		Name: Flak AA Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDPHH:
@@ -5669,7 +5669,7 @@ psc2100chopshop2:
 		Name: Needle Gun Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100BNKPHH:
@@ -5681,7 +5681,7 @@ psc2100chopshop2:
 		Name: Bunker Buster Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upbunkerbuster1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERPHH:
@@ -5693,7 +5693,7 @@ psc2100chopshop2:
 		Name: Pepperpot Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100uppanther1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100uppanther1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Tiger
@@ -5706,7 +5706,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2TIT:
@@ -5718,7 +5718,7 @@ psc2100chopshop2:
 		Name: Assault Gun Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HTIT:
@@ -5730,7 +5730,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100ACTIT:
@@ -5742,7 +5742,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2TIT:
@@ -5754,7 +5754,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100CTIT:
@@ -5766,7 +5766,7 @@ psc2100chopshop2:
 		Name: Command Turret Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100uptiger1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 2100RIPTIT:
@@ -5778,7 +5778,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTTIT:
@@ -5790,7 +5790,7 @@ psc2100chopshop2:
 		Name: Hotwizer Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Panther Hovercraft
@@ -5803,7 +5803,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Panther Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100uppanther1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Tiger Hovercraft
@@ -5816,7 +5816,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Tiger Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HTIHOV:
@@ -5828,7 +5828,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Tiger Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100uptiger1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -5839,7 +5839,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upleopard1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upleopard1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5852,7 +5852,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upleopard1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upleopard1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5864,7 +5864,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100uppanther1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100uppanther1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5876,7 +5876,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100uppanther1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100uppanther1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -5995,7 +5995,7 @@ psc2100chopshop2:
 		Name: Lancer Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~2100fy2, ~techlevel.medium, ~up2100upretribution1, up2100uplancer1
+		Prerequisites: ~2100fy2, ~up2100upretribution1, up2100uplancer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100T2RTH:
@@ -6007,7 +6007,7 @@ psc2100chopshop2:
 		Name: Tank Killer Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~2100fy2, ~techlevel.medium, ~up2100upretribution1, up2100uptankkiller1
+		Prerequisites: ~2100fy2, ~up2100upretribution1, up2100uptankkiller1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Vehicles, Buildings
 2100MRTH:
@@ -6019,7 +6019,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~techlevel.medium, ~!2100oldtechdisabled2
+		Prerequisites: ~2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~!2100oldtechdisabled2
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MGRTH:
@@ -6031,7 +6031,7 @@ psc2100chopshop2:
 		Name: Heavy MG Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upheavymg1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100upheavymg1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100MORTH:
@@ -6043,7 +6043,7 @@ psc2100chopshop2:
 		Name: Mortar Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100upmortar1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100upmortar1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100RARTH:
@@ -6055,7 +6055,7 @@ psc2100chopshop2:
 		Name: Mini-Rocket Array Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~2100fy2, ~up2100rkarray1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: ~2100fy2, ~up2100rkarray1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -6068,7 +6068,7 @@ psc2100chopshop2:
 		Name: Inferno Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upinferno1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HVRTH:
@@ -6080,7 +6080,7 @@ psc2100chopshop2:
 		Name: Hyper Velocity Cannon Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uphycannon, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100FLARTH:
@@ -6092,7 +6092,7 @@ psc2100chopshop2:
 		Name: Flak AA Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upflak1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100NEDRTH:
@@ -6104,7 +6104,7 @@ psc2100chopshop2:
 		Name: Needle Gun Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100PEPPERRTH:
@@ -6116,7 +6116,7 @@ psc2100chopshop2:
 		Name: Pepperpot Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upretribution1, ~techlevel.medium
+		Prerequisites: 2100fy2, ~up2100uppepper1, ~up2100upretribution1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Vengeance
@@ -6129,7 +6129,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100A2VET:
@@ -6141,7 +6141,7 @@ psc2100chopshop2:
 		Name: Assault Gun Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HVET:
@@ -6153,7 +6153,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 
@@ -6166,7 +6166,7 @@ psc2100chopshop2:
 		Name: Command Turret Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100CRC, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1
+		Prerequisites: 2100CRC, ~up2100upvengeance1, ~up2100uptracks1
 		Queue: Vehicle, RAVehicle
 		Description: Buffs nearby allies and debuffs targeted enemies.\n Unarmed
 2100ACVET:
@@ -6178,7 +6178,7 @@ psc2100chopshop2:
 		Name: Assault Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upacannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upacannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AC2VET:
@@ -6190,7 +6190,7 @@ psc2100chopshop2:
 		Name: Twin Assault Cannon Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100AAVET:
@@ -6202,7 +6202,7 @@ psc2100chopshop2:
 		Name: Hurricane AA Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphurricane1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uphurricane1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100NEXVET:
@@ -6214,7 +6214,7 @@ psc2100chopshop2:
 		Name: Nexus Link Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100RIPVET:
@@ -6226,7 +6226,7 @@ psc2100chopshop2:
 		Name: Ripple Rockets Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upa2cannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 2100HOTTIT:
@@ -6238,7 +6238,7 @@ psc2100chopshop2:
 		Name: Hotwizer Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~2100uphotwizer1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uptracks1, ~2100uphotwizer1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Retribution Hovercraft
@@ -6251,7 +6251,7 @@ psc2100chopshop2:
 		Name: Medium Cannon Retribution Hovercraft
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~techlevel.medium, ~up2100uphover1
+		Prerequisites: 2100fy2, ~up2100upmcannon1, ~up2100upretribution1, ~up2100uphover1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 #		Vengeance Hovercraft
@@ -6264,7 +6264,7 @@ psc2100chopshop2:
 		Name: Twin Assault Gun Vengeance Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uphover1, ~up2100uptwinassaultmg1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uphover1, ~up2100uptwinassaultmg1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs Infantry
 2100HVEHOV:
@@ -6276,7 +6276,7 @@ psc2100chopshop2:
 		Name: Heavy Cannon Vengeance Hovercraft
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uphover1, ~up2100uphcannon1
+		Prerequisites: ~2100fy3, ~up2100upvengeance1, ~up2100uphover1, ~up2100uphcannon1
 		Queue: Vehicle, RAVehicle
 		Description: Strong vs ground targets
 ####################################################################################################
@@ -6287,7 +6287,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LightMGVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplrk1, ~up2100upretaliaton1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplrk1, ~up2100upretaliaton1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6300,7 +6300,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100RocketPodVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy1, ~techlevel.medium, ~up2100uplmg1, ~up2100upretaliaton1, ~up2100upvtols1
+		Prerequisites: 2100vfy1, ~up2100uplmg1, ~up2100upretaliaton1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6312,7 +6312,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LitCannonVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplcannon1, ~up2100upretribution1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplcannon1, ~up2100upretribution1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6324,7 +6324,7 @@ psc2100chopshop2:
 	Inherits@@Turret: ^2100LancerVtol
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100vfy2, ~techlevel.medium, ~up2100uplancer1, ~up2100upretribution1, ~up2100upvtols1
+		Prerequisites: 2100vfy2, ~up2100uplancer1, ~up2100upretribution1, ~up2100upvtols1
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship armed\nwith dual chainguns.\n  Strong vs Infantry, Light armor\n  Weak vs Tanks, Aircraft
 	Valued:
@@ -6690,7 +6690,7 @@ psc2100chopshop2:
 		Name: Mobile Construction Vehicle (Scavenger)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: 2100RF, ~techlevel.medium, 2100RR
+		Prerequisites: 2100RF, 2100RR
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 35
 		Description: Deploys into another Construction Yard.\n  Automaticaly Repairs Structures in a 3 Tile Radius
@@ -7090,7 +7090,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplcannon1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor2, up2100uplcannon1, 2100chopshop2, ~!2100oldtechdisabled2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7107,7 +7107,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplrk1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor2, up2100uplrk1, 2100chopshop2, ~!2100oldtechdisabled2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7124,7 +7124,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100upneedle, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100upneedle, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7141,7 +7141,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplcannon1, up2100uphover1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100uplcannon1, up2100uphover1, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7158,7 +7158,7 @@ psc2100chopshop2:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast armed transport.\n  Strong vs light vehicles\n  Weak vs Infantry, Tanks\n Can transport 3 infantry
-		Prerequisites: up2100uparmor2, up2100uplrk1, up2100uphover1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100uplrk1, up2100uphover1, 2100chopshop2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -7209,7 +7209,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uplcannon1, ~techlevel.medium, 2100chopshop2, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor3, up2100uplcannon1, 2100chopshop2, ~!2100oldtechdisabled2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7225,7 +7225,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100upmcannon1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor3, up2100upmcannon1, 2100chopshop2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7241,7 +7241,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7257,7 +7257,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2, up2100upassaultmg1, ~!2100oldtechdisabled2
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2, up2100upassaultmg1, ~!2100oldtechdisabled2
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7273,7 +7273,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor3, up2100uphycannon, ~techlevel.medium, 2100chopshop2, up2100uptwinassaultmg1
+		Prerequisites: up2100uparmor3, up2100uphycannon, 2100chopshop2, up2100uptwinassaultmg1
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7289,7 +7289,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uplancer1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100uplancer1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7305,7 +7305,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upinferno1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upinferno1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7321,7 +7321,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upbunkerbuster1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upbunkerbuster1, 2100chopshop3
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7337,7 +7337,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uplancer1, ~techlevel.medium, 2100chopshop3, up2100uphover1
+		Prerequisites: up2100uparmor4, up2100uplancer1, 2100chopshop3, up2100uphover1
 		Description: Anti-tank missile vehicle\n  Strong vs ground targets
 	AttackTurreted:
 	WithMuzzleOverlay:
@@ -7355,7 +7355,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upflamer1, up2100rkarray1, up2100uptankkiller1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upflamer1, up2100rkarray1, up2100uptankkiller1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7433,7 +7433,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100upinferno1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100upinferno1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7504,7 +7504,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor4, up2100uptwinassaultmg1, ~techlevel.high, 2100chopshop3
+		Prerequisites: up2100uparmor4, up2100uptwinassaultmg1, 2100chopshop3
 		Description: Converted heavy truck with numerous weapons.\n  Strong vs Everything
 	Mobile:
 		Speed: 97
@@ -7576,7 +7576,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor2, up2100upmortar1, ~techlevel.medium, 2100chopshop2
+		Prerequisites: up2100uparmor2, up2100upmortar1, 2100chopshop2
 		Description: Long-range self-propelled mortar.\n  Strong vs Infantry, Buildings
 	Mobile:
 		Speed: 85
@@ -7659,7 +7659,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uparmor5, up2100uphcannon1, ~techlevel.medium, 2100chopshop3
+		Prerequisites: up2100uparmor5, up2100uphcannon1, 2100chopshop3
 		Description: Large armored transport.\n  Strong vs light vehicles\n  Weak vs infantry, tanks\n Can transport 6 infantry
 	Mobile:
 		Speed: 85
@@ -7708,7 +7708,7 @@ psc2100chopshop2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Vehicle, RAVehicle
-		Prerequisites: up2100uptracks1, ~techlevel.medium, 2100CRC, 2100chopshop3
+		Prerequisites: up2100uptracks1, 2100CRC, 2100chopshop3
 		Description: Control Unit
 	AutoTarget:
 		ScanRadius: 25
@@ -7747,7 +7747,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 890
 	Buildable:
-		Prerequisites: 2100ChopShopAdv, ~techlevel.medium, ~botplayer
+		Prerequisites: 2100ChopShopAdv, ~botplayer
 	Cargo:
 		EjectOnDeath: false
 		InitialUnits: 2100scav,2100scav,2100scav
@@ -7769,7 +7769,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1100
 	Buildable:
-		Prerequisites: 2100ChopShopAdv, ~techlevel.medium, ~botplayer
+		Prerequisites: 2100ChopShopAdv, ~botplayer
 	Cargo:
 		EjectOnDeath: false
 		InitialUnits: 2100scav,2100scav,2100scav,2100scav,2100scav
@@ -7864,7 +7864,7 @@ psc2100chopshop2:
 		Name: Bp-200 Gun Chopper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: 2100ChopShop, 2100RF, ~techlevel.medium
+		Prerequisites: 2100ChopShop, 2100RF
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -8027,7 +8027,7 @@ psc2100chopshop2:
 		Name: Bp-200 Police Chopper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: 2100ChopShop, 2100RF, ~techlevel.high
+		Prerequisites: 2100ChopShop, 2100RF
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Rockets.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:

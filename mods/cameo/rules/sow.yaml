@@ -893,7 +893,7 @@ sowradar:
 		SupportPowerPaletteOrder: 40
 		StartFullyCharged: true
 		PauseOnCondition: lowpower
-		Prerequisites: ~techlevel.high
+		Prerequisites: 
 	AirstrikePower@Bomber:
 		OrderName: sowbomber
 		Icon: sowbomber_icon
@@ -919,7 +919,7 @@ sowradar:
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		StartFullyCharged: false
-		Prerequisites: advancedairstrikes, sowresearch, ~techlevel.high
+		Prerequisites: advancedairstrikes, sowresearch
 		PauseOnCondition: lowpower
 	ClassicAirstrikePower@tripler:
 		Squad:
@@ -951,7 +951,7 @@ sowradar:
 		CircleDelay: 20
 		OrderName: sowtripler
 		SupportPowerPaletteOrder: 20
-		Prerequisites: advancedairstrikes, sowresearch, ~techlevel.high
+		Prerequisites: advancedairstrikes, sowresearch
 		PauseOnCondition: lowpower
 		
 sowgoldmine:
@@ -1347,7 +1347,7 @@ sowmechfactory:
 		BuildDuration: 2250
 		Queue: Building, RABuilding
 		Description: Produces Powerful Walkers
-		Prerequisites: stateofwar, ~techlevel.high
+		Prerequisites: stateofwar
 	Building:
 		Footprint: =xx= =xx= =xx=
 		Dimensions: 4,3
@@ -1697,7 +1697,7 @@ sow_minigun_tower:
 		Name: Gatling Turret
 	Buildable:
 		BuildPaletteOrder: 4
-		Prerequisites: sowheavyfactory, ~techlevel.medium
+		Prerequisites: sowheavyfactory
 		Queue: Defence, RADefence
 		BuildDurationModifier: 50
 		Description: Advanced Long Range Ground defence
@@ -1757,7 +1757,7 @@ sow_defragmenter_tower:
 		Name: Defragmenter
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites: sowheavyfactory, hta_unlock, ~techlevel.high
+		Prerequisites: sowheavyfactory, hta_unlock
 		Queue: Defence, RADefence
 		BuildDurationModifier: 50
 		Description: Advanced Long Range Ground defence
@@ -1817,7 +1817,7 @@ sow_vulcano_tower:
 	Buildable:
 		BuildPaletteOrder: 6
 		BuildDurationModifier: 50
-		Prerequisites: sowheavyfactory, hte_unlock, ~techlevel.high
+		Prerequisites: sowheavyfactory, hte_unlock
 		Queue: Defence, RADefence
 		Description: Advanced Air Defence\nDetector
 	Building:

@@ -1411,7 +1411,7 @@ wc_h_mcv.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: ~botplayer, allowsMCV
 	RenderSprites:
 		Image: wc_h_peasant
 
@@ -1490,7 +1490,7 @@ wc_o_mcv.bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: ~techlevel.medium, ~botplayer, allowsMCV
+		Prerequisites: ~botplayer, allowsMCV
 	RenderSprites:
 		Image: wc_o_peon
 

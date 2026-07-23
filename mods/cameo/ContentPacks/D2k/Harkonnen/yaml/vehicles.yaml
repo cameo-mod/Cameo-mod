@@ -12,7 +12,7 @@ combat_tank.harkonnen:
 		BuildPaletteOrder: 40
 		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: d2kunit
-		Prerequisites: ~heavy.harkonnen_combat, ~techlevel.medium, ~!faction.guild, ~!faction.corrino
+		Prerequisites: ~heavy.harkonnen_combat, ~!faction.guild, ~!faction.corrino
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -63,7 +63,7 @@ missile_tank:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
-		Prerequisites: ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~faction.harkonnen
+		Prerequisites: ~heavy.missile_tank, upgrade_heavy, research_centre, ~faction.harkonnen
 		BuildPaletteOrder: 60
 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 		IconPalette: d2kunit
@@ -120,7 +120,7 @@ devastator:
 	Inherits@AntiTank: ^PrioritizeTank
 	Buildable:
 		Queue: Vehicle, RAVehicle, Starport
-		Prerequisites: ~heavy.harkonnen, research_centre, ~techlevel.high, ~faction.harkonnen
+		Prerequisites: ~heavy.harkonnen, research_centre, ~faction.harkonnen
 		BuildPaletteOrder: 100
 		BuildDuration: 1000
 		BuildDurationModifier: 100

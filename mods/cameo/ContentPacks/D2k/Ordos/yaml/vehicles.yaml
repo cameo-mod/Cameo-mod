@@ -159,7 +159,7 @@ ordos_mobileconstructionvehicle:
 # d2k_tleilaxu_mcv:
 # 	Inherits: d2k_mcv
 # 	Buildable:
-# 		Prerequisites: d2k_tleilaxu_tech, upgrade.mcv, ~faction.tleilaxu, ~techlevel.medium
+# 		Prerequisites: d2k_tleilaxu_tech, upgrade.mcv, ~faction.tleilaxu
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 750
@@ -1131,7 +1131,7 @@ ordos_deviatortank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy.harkonnen, ~techlevel.medium, ~faction.guild
+# 		Prerequisites: ~heavy.harkonnen, ~faction.guild
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
 # 		Description: Main Battle tank of Spacing Guild\nCan jump\n  Strong vs Vehicles, Air
@@ -1197,7 +1197,7 @@ ordos_deviatortank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, research_centre, upgrade_heavy, ~faction.harkonnen, ~techlevel.high
+# 		Prerequisites: ~heavy.harkonnen, research_centre, upgrade_heavy, ~faction.harkonnen
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\nOnly one can be built\n  Strong vs Everything
@@ -1253,7 +1253,7 @@ ordos_deviatortank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, research_centre, ~techlevel.high, ~faction.harkonnen
+# 		Prerequisites: ~heavy.harkonnen, research_centre, ~faction.harkonnen
 # 		BuildDuration: 1000
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
@@ -1342,7 +1342,7 @@ ordos_deviatortank:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, upgrade_heavy, research_centre, ~techlevel.high, ~faction.corrino
+# 		Prerequisites: ~heavy.harkonnen, upgrade_heavy, research_centre, ~faction.corrino
 # 		BuildDuration: 750
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
@@ -1389,7 +1389,7 @@ ordos_deviatortank:
 # emperor_tyrant:
 # 	Inherits: d2k_tyrant
 # 	Buildable:
-# 		Prerequisites: upgrade_heavy, research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: upgrade_heavy, research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: d2k_tyrant
 
@@ -2214,7 +2214,7 @@ combat_tank_husk.ordos:
 # 	Inherits@conyard: ^Conyard
 # 	Inherits@EXT: ^ExternalConditions
 # 	Buildable:
-# 		Prerequisites: ~techlevel.medium, allowsVordelMCV
+# 		Prerequisites: allowsVordelMCV
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 110
 # 		BuildDurationModifier: 50
@@ -2874,7 +2874,7 @@ combat_tank_husk.ordos:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 650
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.medium, ~Upgrades_apparition
+# 		Prerequisites: ~Upgrades_apparition
 # 		Description: Mysterious creature\nResistant against missiles and heavy calibre armaments
 # 		IconPalette: ra2
 # 	Valued:
@@ -2966,7 +2966,7 @@ combat_tank_husk.ordos:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry, RAVehicle, Aircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~Upgrades_aircraft_eater, ~techlevel.medium
+# 		Prerequisites: ~Upgrades_aircraft_eater
 # 		BuildDuration: 750
 # 		BuildDurationModifier: 100
 # 		Description: Mysterious Anti-Air Air Unit.\nCan consume any Aircraft Unit instantly\nNeeds time to digest after each meal\n Strong vs Air
@@ -3060,7 +3060,7 @@ combat_tank_husk.ordos:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry, RAVehicle, Aircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~Upgrades_defender, ~techlevel.medium
+# 		Prerequisites: ~Upgrades_defender
 # 		BuildDuration: 350
 # 		BuildDurationModifier: 100
 # 		Description: Air Unit\nStrong vs Infantry

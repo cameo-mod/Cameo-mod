@@ -53,7 +53,7 @@ RAMCV.WOLF:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Valued:
@@ -270,7 +270,7 @@ WOLFDOME:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 90
-		Prerequisites: wolfproc, ~techlevel.medium
+		Prerequisites: wolfproc
 		Description: Provides an overview\nof the battlefield.\nCan detect cloaked units.\nRequires power to operate.
 	Valued:
 		Cost: 1800
@@ -359,7 +359,7 @@ WOLFGUN:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
-		Prerequisites: wolfbarr, ~techlevel.medium
+		Prerequisites: wolfbarr
 		Description: Anti-Armor base defense.\nCan detect cloaked units.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 800
@@ -506,7 +506,7 @@ WOLFAPWR:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Description: Provides double the power of\na standard Power Plant.
 	Valued:
 		Cost: 800 #500
@@ -666,7 +666,7 @@ WOLFSTEK:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: vehicleproduction, anyhq, ~techlevel.high
+		Prerequisites: vehicleproduction, anyhq
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 1500
@@ -700,7 +700,7 @@ WOLFSTATUE:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: wolfstek, ~techlevel.high
+		Prerequisites: wolfstek
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 2000
@@ -749,7 +749,7 @@ WOLFSPEAR:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: wolfstek, ~techlevel.medium
+		Prerequisites: wolfstek
 		Description: Advanced base defense.\nRequires power to operate.\nCan detect cloaked units.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
 		BuildLimit: 1
 	Valued:
@@ -2149,7 +2149,7 @@ IMP:
 		Queue: Vehicle
 		BuildAtProductionType: Vehicle
 		BuildPaletteOrder: 210
-		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~techlevel.high, ~bio
+		Prerequisites: fix, ra1_allies_alliedtechcenter, ~vehicles.allies, ~bio
 		Description: A Demon that shoots salvo of plasma balls.\nStrong vs buildings vs vehicles
 	BodyOrientation:
 	Valued:

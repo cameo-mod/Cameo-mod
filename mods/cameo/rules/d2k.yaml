@@ -2359,7 +2359,7 @@
 # 	Health:
 # 		HP: 121000
 # 	Buildable:
-# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.smugglers
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~faction.smugglers
 # 		Description: Dropzone for quick reinforcements.\nEnables drop-off of supervehicles
 # 		BuildDuration: 1500
 # 		BuildDurationModifier: 100
@@ -2380,7 +2380,7 @@
 # 	Health:
 # 		HP: 145000
 # 	Buildable:
-# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.corrino
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~faction.corrino
 # 		Description: Dropzone for quick reinforcements.\nEnables drop-off of Corrino's Special Vehicles
 # 		BuildDuration: 1500
 # 		IconPalette: d2kunit
@@ -2858,7 +2858,7 @@
 # 		Name: Tamed Sandworm
 # 	Buildable:
 # 		BuildPaletteOrder: 4
-# 		Prerequisites: d2k_flesh_vat, ~faction.tleilaxu, ~techlevel.medium
+# 		Prerequisites: d2k_flesh_vat, ~faction.tleilaxu
 # 		Queue: Defence, RADefence
 # 		BuildDurationModifier: 50
 # 		BuildDuration: 1250
@@ -2905,7 +2905,7 @@
 # 		Queue: Defence, RADefence
 # 		BuildPaletteOrder: 70
 # 		BuildDuration: 200
-# 		Prerequisites: d2k_barracks, ~faction.smugglers, ~techlevel.medium
+# 		Prerequisites: d2k_barracks, ~faction.smugglers
 # 		Description: Defensive structure. Explodes when an enemy unit moves over it.\n  Strong vs Tanks\n  Weak vs Infantry\n\n  Invisible to enemy.
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -2939,7 +2939,7 @@
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~du_palace, !swpalace
+# 		Prerequisites: research_centre, ~du_palace, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 937
@@ -3285,7 +3285,7 @@
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.corrino, !swpalace
+# 		Prerequisites: research_centre, ~faction.corrino, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 937
@@ -3379,7 +3379,7 @@
 # 		Cost: 2000
 # 	-ProvidesPrerequisite@swlimit:
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Provides Death before Dishonor Support Power and passive income
 # 		BuildLimit: 1
 # 	RenderSprites:
@@ -3435,7 +3435,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.mercenary, !swpalace
+# 		Prerequisites: research_centre, ~faction.mercenary, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 1000
@@ -3568,7 +3568,7 @@
 # 	Inherits: d2k_command_center
 # 	-ProvidesPrerequisite@swlimit:
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Allows to call Mercenaries reinforcements and Bounty Hunting Support Power
 # 		BuildLimit: 1
 
@@ -3576,7 +3576,7 @@
 # 	Inherits: palace
 # 	Inherits@orni: ^DU_OrnithopterSupportPower
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Enables Fremen Guerilla and Ornithopters support powers
 # 		BuildLimit: 1
 # 	Valued:
@@ -3600,7 +3600,7 @@
 # emperor_h_palace:
 # 	Inherits: palace
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Enables Death td_nod_handofnod Missile
 # 		BuildLimit: 1
 # 	Valued:
@@ -3624,7 +3624,7 @@
 # emperor_o_palace:
 # 	Inherits: palace
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Produces Saboteur and enables Chaos Lightning Support Power
 # 		BuildLimit: 1
 # 	Valued:
@@ -4173,7 +4173,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 80
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~du_fremen
+# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~du_fremen
 # 		Icon: phantomicon
 # 		IconPalette: windows256
 # 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
@@ -4355,7 +4355,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: upgrade_barracks, ~techlevel.medium, high_tech_factory
+# 		Prerequisites: upgrade_barracks, high_tech_factory
 # 		BuildDuration: 100
 # 		BuildDurationModifier: 100
 # 		Description: Infantry armed with grenades. \nVery prone to friendly fire\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles
@@ -4395,7 +4395,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled
+# 		Prerequisites: ~palace.sardaukar, ~disabled
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
 # 		Description: Assault infantry of Emperor's Army\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
@@ -4437,7 +4437,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~techlevel.medium, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
 # 		BuildDuration: 200
 # 		BuildDurationModifier: 100
 # 	Valued:
@@ -4463,7 +4463,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor, ~techlevel.high
+# 		Prerequisites: ~faction.corrino, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Heavily Armored Elite assault infantry of Emperor's Army\nCannot lay down or be crushed\n  Strong vs Everything
@@ -4520,7 +4520,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~techlevel.medium, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
 # 		Description: Assassin equipped with Heat Blade and Crossbow\n  Strong vs Infantry
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
@@ -4732,7 +4732,7 @@
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.corrino
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.corrino
 # 		Description: Advanced infantry armed with a plasma ball launcher\n  Strong vs Tanks\n  Weak vs Artillery, Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -4764,7 +4764,7 @@
 # emperor_plasmainf:
 # 	Inherits: plasma_infantry
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory
 # 	RenderSprites:
 # 		Image: plasma_infantry
 
@@ -4782,7 +4782,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.fremen
+# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~faction.fremen
 # 		Description: Stealth Elite Fremen Guerilla infantry armed with Sonic Weapon\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Artillery, Tanks
 # 		IconPalette: d2kunit
 # 		BuildDuration: 280
@@ -4819,7 +4819,7 @@
 # emperor_fedaykin:
 # 	Inherits: fedaykin
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory
 # 	RenderSprites:
 # 		Image: fedaykin
 
@@ -4919,7 +4919,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory
 # 		Description: Flying infantry unit armed with dual assault rifle.\n Can Attack air units.\n  Strong vs Infantry\n  Weak vs Vehicles
 # 		IconPalette: d2kunit
 # 		BuildDuration: 250
@@ -5011,7 +5011,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~!faction.tleilaxu
+# 		Prerequisites: ~barracks.ordos, upgrade_barracks, high_tech_factory, ~!faction.tleilaxu
 # 		Description: Stealth Flying infantry unit armed with deadly dual machine guns\n  Strong vs Infantry, Vehicles\n  Weak vs Air
 # 		IconPalette: d2kunit
 # 		BuildDuration: 325
@@ -5048,7 +5048,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~techlevel.medium, d2k_tleilaxu_tech, upgrade.rocketeer, ~faction.tleilaxu
+# 		Prerequisites: d2k_tleilaxu_tech, upgrade.rocketeer, ~faction.tleilaxu
 # 		Description: Flying infantry unit armed with deadly dual machine guns\n\nMust resupply at Resource Center\n  Strong vs Infantry\n  Weak vs Vehicles Strong vs Everything
 # 		BuildDuration: 400
 # 		BuildDurationModifier: 100
@@ -5091,7 +5091,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 160
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, ~!faction.ordos. ~!faction.smugglers, ~techlevel.medium, high_tech_factory
+# 		Prerequisites: ~barracks.ordos, upgrade_barracks, ~!faction.ordos. ~!faction.smugglers, high_tech_factory
 # 		Description: Infantry armed with a long range rifle\nCan detect cloaked units at great distances.\nCan Deplay to grant stealth and accuracy but loses movement\n  Strong vs Infantry, Air, Vehicles\n  Weak vs Tanks\n  Special Ability: Invisibility while static
 # 		IconPalette: d2kunit
 # 		BuildDuration: 600
@@ -5205,7 +5205,7 @@
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 220
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.harkonnen
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.harkonnen
 # 		Description: Stealth Deadly unit.\nUndetected even when exiting vehicles and infiltrating.\n  Strong vs Infantry, Vehicles, Tanks, Buildings\n  Weak vs Siege\n  Special Ability: Invisibility
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -5313,7 +5313,7 @@
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
-# 		Prerequisites: upgrade_barracks, high_tech_factory, ~techlevel.medium, ~mechanic_prereq
+# 		Prerequisites: upgrade_barracks, high_tech_factory, ~mechanic_prereq
 # 		Description: Repairs nearby vehicles and buildings.\nCan enter vehicle husks to repair them.\nRemoves attached explosives from units and buildings\n  Unarmed
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -5378,7 +5378,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor, ~techlevel.high
+# 		Prerequisites: ~faction.corrino, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Witch of the Imperium. Can control enemy units using The Voice and\ninstantly kill infantry with Gom Jabbar\nCannot be poisoned nor mind controlled
@@ -5532,7 +5532,7 @@
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.medium
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -5597,7 +5597,7 @@
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium
+# 		Prerequisites: ~faction.atreides, upgrade_heavy
 # 		Description: Stealth Heavy Carrier vehicle with machine td_nod_gunturret\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
 # 		IconPalette: windows256
 # 	Valued:
@@ -5663,7 +5663,7 @@
 # d2k_atreides_apc.bot1:
 # 	Inherits: d2k_atreides_apc
 # 	Buildable:
-# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium, ~botplayer
+# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 200
 # 	Cargo:
@@ -5690,7 +5690,7 @@
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 650
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.tleilaxu, upgrade.basq, d2k_tleilaxu_tech, ~techlevel.medium
+# 		Prerequisites: ~faction.tleilaxu, upgrade.basq, d2k_tleilaxu_tech
 # 		Description: Bio hover tank\nGood against both ground and air\nResistant against missiles and heavy calibre armaments
 # 		IconPalette: ra2
 # 	Valued:
@@ -5841,7 +5841,7 @@
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~techlevel.high, ~faction.fremen
+# 		Prerequisites: ~heavy.atreides, research_centre, ~faction.fremen
 # 		Description: Fremen Quick Stealth tank armed with missile launcher and autocannon\nLow durability\n  Strong vs Vehicles, Air\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Selectable:
@@ -5929,7 +5929,7 @@
 # emperor_stealth_tank:
 # 	Inherits: d2k_stealth_tank
 # 	Buildable:
-# 		Prerequisites: upgrade_heavy, research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: upgrade_heavy, research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: d2k_stealth_tank
 
@@ -6234,7 +6234,7 @@
 # d2k_tleilaxu_mcv:
 # 	Inherits: d2k_mcv
 # 	Buildable:
-# 		Prerequisites: d2k_tleilaxu_tech, upgrade.mcv, ~faction.tleilaxu, ~techlevel.medium
+# 		Prerequisites: d2k_tleilaxu_tech, upgrade.mcv, ~faction.tleilaxu
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 750
@@ -6685,7 +6685,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~du_ornithopter, outpost, ~techlevel.medium
+# 		Prerequisites: ~du_ornithopter, outpost
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 100
 # 		Description: Powerful Aircraft armed with dual Heavy Machine Guns and Bombs.\n Strong vs Everything
@@ -6884,7 +6884,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: outpost, ~du_gunship, ~techlevel.medium
+# 		Prerequisites: outpost, ~du_gunship
 # 		BuildDuration: 512
 # 		BuildDurationModifier: 100
 # 		Description: Medium Plane armed with dual Air-To-Ground flame rockets.\n Strong vs Buildings, Vehicles, Infantry
@@ -7007,7 +7007,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: high_tech_factory, research_centre, ~techlevel.high, ~faction.guild
+# 		Prerequisites: high_tech_factory, research_centre, ~faction.guild
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Heavy fleet which fires multiple unguided rockets at its targets.\n Strong vs Ground targets
 # 		IconPalette: ra2
@@ -7071,7 +7071,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: high_tech_factory, ~techlevel.high, ~faction.guild
+# 		Prerequisites: high_tech_factory, ~faction.guild
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Fast Spaceship fighter used for aerial combat. Equipped with guided missiles\nStrong vs Everything
 # 		IconPalette: ra2
@@ -7133,7 +7133,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: high_tech_factory, research_centre, ~techlevel.high, ~anyharkonnen
+# 		Prerequisites: high_tech_factory, research_centre, ~anyharkonnen
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Base Defense equipped with Dual High Calibre Machinegun
 # 		IconPalette: ra2
@@ -8392,7 +8392,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
+# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~!faction.ixian, ~!faction.guild
 # 		BuildPaletteOrder: 60
 # 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 # 		IconPalette: d2kunit
@@ -8437,7 +8437,7 @@
 # 	Inherits@AntiInf: ^PrioritizeInfantry
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: upgrade_heavy, high_tech_factory, ~flametankprereq, ~techlevel.high
+# 		Prerequisites: upgrade_heavy, high_tech_factory, ~flametankprereq
 # 		BuildPaletteOrder: 50
 # 		BuildDuration: 200
 # 		BuildDurationModifier: 100
@@ -8488,7 +8488,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.fremen
+# 		Prerequisites: ~heavy.atreides, research_centre, ~!faction.ixian, ~!faction.fremen
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Fires sonic shocks\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks, Artillery
@@ -8531,21 +8531,21 @@
 # emperor_sonic_tank:
 # 	Inherits: sonic_tank
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: sonic_tank
 
 # emperor_deviator:
 # 	Inherits: ordos_deviatorartillery
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: ordos_deviatorartillery
 
 # emperor_devastator:
 # 	Inherits: devastator
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: devastator
 
@@ -8683,7 +8683,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy.harkonnen, ~techlevel.medium, ~faction.guild
+# 		Prerequisites: ~heavy.harkonnen, ~faction.guild
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
 # 		Description: Main Battle tank of Spacing Guild\nCan jump\n  Strong vs Vehicles, Air
@@ -8749,7 +8749,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, research_centre, upgrade_heavy, ~faction.harkonnen, ~techlevel.high
+# 		Prerequisites: ~heavy.harkonnen, research_centre, upgrade_heavy, ~faction.harkonnen
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\nOnly one can be built\n  Strong vs Everything
@@ -8805,7 +8805,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, research_centre, ~techlevel.high, ~faction.harkonnen
+# 		Prerequisites: ~heavy.harkonnen, research_centre, ~faction.harkonnen
 # 		BuildDuration: 1000
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
@@ -8894,7 +8894,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~heavy.harkonnen, upgrade_heavy, research_centre, ~techlevel.high, ~faction.corrino
+# 		Prerequisites: ~heavy.harkonnen, upgrade_heavy, research_centre, ~faction.corrino
 # 		BuildDuration: 750
 # 		BuildDurationModifier: 100
 # 		Description: Super Heavy Tank\n  Strong vs Tanks\n  Weak vs Artillery
@@ -8941,7 +8941,7 @@
 # emperor_tyrant:
 # 	Inherits: d2k_tyrant
 # 	Buildable:
-# 		Prerequisites: upgrade_heavy, research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: upgrade_heavy, research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: d2k_tyrant
 
@@ -9381,7 +9381,7 @@
 # combat_tank.atreides:
 # 	Inherits: ^combat_tank
 # 	Buildable:
-# 		Prerequisites: ~faction.atreides, ~techlevel.medium
+# 		Prerequisites: ~faction.atreides
 # 	Armament:
 # 		Weapon: 80mm_A
 
@@ -9450,7 +9450,7 @@
 # 		BuildPaletteOrder: 40
 # 		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~heavy.harkonnen_combat, ~techlevel.medium, ~!faction.guild, ~!faction.corrino
+# 		Prerequisites: ~heavy.harkonnen_combat, ~!faction.guild, ~!faction.corrino
 # 	Valued:
 # 		Cost: 600
 # 	Tooltip:
@@ -9852,7 +9852,7 @@
 # 		Name: Silver Lion
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy.harkonnen_combat, ~faction.corrino, ~techlevel.medium
+# 		Prerequisites: ~heavy.harkonnen_combat, ~faction.corrino
 # 		Description: Corrino Multi-Purpose Main Battle Tank\nEquipped with Lower Calibre Cannon and AA/AT Missile System\n  All-Rounder
 # 	Armament:
 # 		Weapon: D2K76mm
@@ -9900,7 +9900,7 @@
 # combat_tank_emperor:
 # 	Inherits: combat_tank_corrino
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor
 # 	RenderSprites:
 # 		Image: combat_tank_corrino
 # combat_tank_fremen:
@@ -9921,7 +9921,7 @@
 # 			fedaykin: fedaykinloaded
 # 			fremen: phantomloaded
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen, ~techlevel.medium
+# 		Prerequisites: ~faction.fremen
 # 		Description: Fremen Main Battle Tank\nCan be fitted with Fremen to gain extra firepower
 # 	Armament:
 # 		Weapon: 80mm_H
@@ -9991,7 +9991,7 @@
 # combat_tank_fremen.bot1:
 # 	Inherits: combat_tank_fremen
 # 	Buildable:
-# 		Prerequisites: ~faction.fremen, ~techlevel.medium, ~botplayer
+# 		Prerequisites: ~faction.fremen, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 125
 # 	Cargo:
@@ -10316,7 +10316,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm, ~techlevel.medium
+# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm
 # 		Description: Giant Sandworm
 # 		BuildLimit: 1
 # 	Inherits@EXT: ^ExternalConditions ##########
@@ -10374,7 +10374,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks, ~techlevel.medium
+# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks
 # 		Description: Giant Sandworm
 # 		BuildLimit: 5
 # 	Inherits@EXT: ^ExternalConditions ##########
@@ -11252,7 +11252,7 @@
 # 	Inherits@conyard: ^Conyard
 # 	Inherits@EXT: ^ExternalConditions
 # 	Buildable:
-# 		Prerequisites: ~techlevel.medium, allowsVordelMCV
+# 		Prerequisites: allowsVordelMCV
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 110
 # 		BuildDurationModifier: 50
@@ -11912,7 +11912,7 @@
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 650
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.medium, ~Upgrades_apparition
+# 		Prerequisites: ~Upgrades_apparition
 # 		Description: Mysterious creature\nResistant against missiles and heavy calibre armaments
 # 		IconPalette: ra2
 # 	Valued:
@@ -12004,7 +12004,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry, RAVehicle, Aircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~Upgrades_aircraft_eater, ~techlevel.medium
+# 		Prerequisites: ~Upgrades_aircraft_eater
 # 		BuildDuration: 750
 # 		BuildDurationModifier: 100
 # 		Description: Mysterious Anti-Air Air Unit.\nCan consume any Aircraft Unit instantly\nNeeds time to digest after each meal\n Strong vs Air
@@ -12098,7 +12098,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry, RAVehicle, Aircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~Upgrades_defender, ~techlevel.medium
+# 		Prerequisites: ~Upgrades_defender
 # 		BuildDuration: 350
 # 		BuildDurationModifier: 100
 # 		Description: Air Unit\nStrong vs Infantry

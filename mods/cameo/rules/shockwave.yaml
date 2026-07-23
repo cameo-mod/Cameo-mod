@@ -1764,7 +1764,7 @@ shockwave_mcv:
 			eglatechnic: glmcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: susastrategy, ~techlevel.high, ~disabled
+		Prerequisites: susastrategy, ~disabled
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -1797,7 +1797,7 @@ shockwave_mcv_usa:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: susastrategy, ~techlevel.medium, ~anysusa
+		Prerequisites: susastrategy, ~anysusa
 	Voiced:
 		VoiceSet: USAMCCVoice
 
@@ -1806,7 +1806,7 @@ shockwave_mcv_usa.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: susastrategy, ~techlevel.medium, ~anysusa, ~botplayer, allowsMCV
+		Prerequisites: susastrategy, ~anysusa, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: usamcv
 	Voiced:
@@ -1816,7 +1816,7 @@ shockwave_mcv_china:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.medium, ~anyschina
+		Prerequisites: chpropaganda, ~anyschina
 	Voiced:
 		VoiceSet: PRCMCCVoice
 
@@ -1825,7 +1825,7 @@ shockwave_mcv_china.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.medium, ~anyschina, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~anyschina, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -1835,7 +1835,7 @@ shockwave_mcv_gla:
 	Inherits: shockwave_mcv
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: glpalace, ~techlevel.medium, ~anysgla
+		Prerequisites: glpalace, ~anysgla
 	Voiced:
 		VoiceSet: WorkerVoice
 
@@ -1844,7 +1844,7 @@ shockwave_mcv_gla.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: glpalace, ~techlevel.medium, ~anysgla, ~botplayer, allowsMCV
+		Prerequisites: glpalace, ~anysgla, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: glmcv
 	Voiced:
@@ -2017,7 +2017,7 @@ susattnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_regular
+		Prerequisites: susaweap, susastrategy, ~susa_regular
 		Description: USA siege weapon\nCan be upgraded with Waypoint Targetting to relay targets to other Tomahawks nearby.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Health:
 		HP: 30000
@@ -2058,7 +2058,7 @@ susattnkp:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Description: USA siege weapon with Plasma missile\nCan be upgraded with Waypoint Targetting to relay targets to other Tomahawks nearby.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 		Icon: icon_plasma
 		IconPalette: ra2
@@ -2071,7 +2071,7 @@ susapala:
 	Inherits: usapala
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, upusapala, ~susa_regular
+		Prerequisites: susaweap, upusapala, ~susa_regular
 	Health:
 		HP: 55000
 	Repairable:
@@ -2219,14 +2219,14 @@ susafirebase:
 	Inherits: usafirebase
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~!susa_super, ~techlevel.medium
+		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~!susa_super
 	RenderSprites:
 		Image: usafirebase
 
 susafirebase.e1:
 	Inherits: susafirebase
 	Buildable:
-		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~techlevel.medium, ~botplayer
+		Prerequisites: ~anysusa, susabarracks, ~!susa_laser, ~!susa_armor, ~botplayer
 	Valued:
 		Cost: 1300
 	Cargo:
@@ -2312,7 +2312,7 @@ susacannon:
 	Inherits: usacannon
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~anysusa, usastrategy, ~techlevel.high, !particlecannon, ~!susa_super, ~!susa_laser, ~!susa_armor
+		Prerequisites: ~anysusa, usastrategy, !particlecannon, ~!susa_super, ~!susa_laser, ~!susa_armor
 	RenderSprites:
 		Image: usacannon
 
@@ -2324,7 +2324,7 @@ susacannon_super:
 		Cost: 4000
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~susa_super, usastrategy, ~techlevel.high, !particlecannon
+		Prerequisites: ~susa_super, usastrategy, !particlecannon
 		Description: Provides Particle Cannon support power.\nDeals more damage than regular Particle Cannon.\nRequires power to operate.
 		Icon: icon_super
 	RenderSprites:
@@ -2342,7 +2342,7 @@ susacannon_laser:
 		Cost: 5000
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~susa_laser, usastrategy, ~techlevel.high, !particlecannon
+		Prerequisites: ~susa_laser, usastrategy, !particlecannon
 		Description: Provides Laser Uplink Cannon support power.\nIt's very effective against Buildings\nRequires power to operate.
 	RenderSprites:
 		Image: usacannon
@@ -2696,7 +2696,7 @@ susaburton:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@injured: ^InfantryInjuries
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~anysusa, ~!susa_laser, ~!susa_armor, ~!botplayer
+		Prerequisites: susastrategy, ~anysusa, ~!susa_laser, ~!susa_armor, ~!botplayer
 	Cloak:
 		Palette: ra2cloak
 		PauseOnCondition: cloak-force-disabled || base-reveal
@@ -2735,7 +2735,7 @@ susaburton:
 susaburton.bot:
 	Inherits: susaburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~anysusa, ~!susa_laser, ~botplayer
+		Prerequisites: susastrategy, ~anysusa, ~!susa_laser, ~botplayer
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: USABurtonMG_AI
@@ -2753,7 +2753,7 @@ susaarmorburton:
 	Tooltip:
 		Name: Armor Burton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_armor, ~!botplayer
+		Prerequisites: susastrategy, ~susa_armor, ~!botplayer
 		Description: Elite commando equipped with Sniper Rifle.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
 	Armament@PRIMARY:
 		Weapon: SUSABurtonSniper
@@ -2774,7 +2774,7 @@ susaarmorburton:
 susaarmorburton.bot:
 	Inherits: susaarmorburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_armor, ~botplayer
+		Prerequisites: susastrategy, ~susa_armor, ~botplayer
 	Armament@PRIMARY:
 		Name: primary
 		Weapon: SUSABurtonSniper_AI
@@ -2898,7 +2898,7 @@ susalosathumvee:
 		OverrideActor: susalosathumvee
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~susa_regular, susastrategy, ~techlevel.medium
+		Prerequisites: ~susa_regular, susastrategy
 		Description: Fast AT Humvee.\nFires long range kinetic missiles\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Mobile:
@@ -2935,7 +2935,7 @@ susalittlebird:
 	Buildable:
 		BuildPaletteOrder: 50
 		BuildDuration: 300
-		Prerequisites: ~susa_regular, ~techlevel.medium
+		Prerequisites: ~susa_regular
 		Description: Attack Recon Helicopter with dual M134 miniguns.\nCan transport 2 soldiers who can shoot from inside\nCan be upgraded with Rocket pods\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft, Anti-Air
 		IconPalette: ra2
 	Aircraft:
@@ -3039,7 +3039,7 @@ susalittlebird.husk:
 susalittlebird.USAE1:
 	Inherits: susalittlebird
 	Buildable:
-		Prerequisites: ~susa_regular, ~techlevel.medium, ~botplayer
+		Prerequisites: ~susa_regular, ~botplayer
 	Valued:
 		Cost: 1000
 	Cargo:
@@ -3056,7 +3056,7 @@ susalittlebird.USAE3:
 susacomanche:
 	Inherits: usacomanche
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~anysusa, ~!susa_laser, ~!susa_air, ~!susa_armor
+		Prerequisites: susaairport, ~anysusa, ~!susa_laser, ~!susa_air, ~!susa_armor
 		IconPalette: ra2
 	Armament@MG:
 		LocalOffset: 950,0,-280
@@ -3094,7 +3094,7 @@ susakingcomanche:
 	Armament@rockets:
 		Weapon: SUSAComancheRockets
 	Buildable:
-		Prerequisites: ~techlevel.high, ~susa_air
+		Prerequisites: ~susa_air
 		Queue: Aircraft, RAAircraft
 		Icon: icon_king
 		IconPalette: ra2
@@ -3134,7 +3134,7 @@ susadecoydrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_regular
+		Prerequisites: susaweap, ~susa_regular
 		Queue: Vehicle, RAVehicle
 		Description: Disguised and Cloaked scout and detector robot.\nCan be upgraded with a machinegun\n Strong vs Infantry when upgraded
 		IconPalette: ra2
@@ -3327,7 +3327,7 @@ susafortifiedfirebase:
 		Dimensions: 3, 2
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_super
+		Prerequisites: usabarracks, ~susa_super
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Heavily armored garrisonable defensive structure.\n  Strong vs ground targets\n  Weak vs Aircraft
@@ -3364,7 +3364,7 @@ susafortifiedfirebase:
 susafortifiedfirebase.e1:
 	Inherits: susafortifiedfirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: usabarracks, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1750
 	Cargo:
@@ -3548,7 +3548,7 @@ susarobottank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Armored Hover Drone equipped with AT Cannon\n Strong vs Tanks
 		IconPalette: ra2
 	Mobile:
@@ -3611,7 +3611,7 @@ susamortarhmmwv:
 		OverrideActor: susamortarhmmwv
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Light Transport Vehicle equipped with mortar.\n  Strong vs Infantry, Vehicles, Buildings
 		IconPalette: ra2
 	Mobile:
@@ -3645,7 +3645,7 @@ susamortarhmmwv:
 susamortarhmmwv.e1:
 	Inherits: susamortarhmmwv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: susaweap, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1250
 	Cargo:
@@ -3683,7 +3683,7 @@ susaminigunhmmwv:
 susaminigunhmmwv.e1:
 	Inherits: susaminigunhmmwv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super, ~botplayer
+		Prerequisites: susaweap, ~susa_super, ~botplayer
 	Valued:
 		Cost: 1500
 	Cargo:
@@ -3706,7 +3706,7 @@ susamedicdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_super
+		Prerequisites: susaweap, ~susa_super
 		Description: Drone that heals nearby infantry
 		IconPalette: ra2
 	RevealsShroud:
@@ -3756,7 +3756,7 @@ susaenforcerdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_super, upsusaenforcer
+		Prerequisites: susaweap, susastrategy, ~susa_super, upsusaenforcer
 		Description: Experimental Hover Drone Tank armed with Plasma Balls that can cause unstable effects\nif used in group. Vehicle can change fire modes between Plasma Pulse\nand Plasma Ball.\nImmune to toxic and radiation\nAmphibious
 		IconPalette: ra2
 	Mobile:
@@ -3893,7 +3893,7 @@ susalockdownmlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Queue: Vehicle, RAVehicle
 		Description: Racket Artillery.\Can swap between EMP and HE rounds\n  Strong vs Ground Targets\nWeak vs Everything
 		IconPalette: ra2
@@ -3994,7 +3994,7 @@ susashatterer:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, ~susa_super, upsusashatterer
+		Prerequisites: susaweap, ~susa_super, upsusashatterer
 		Queue: Vehicle, RAVehicle
 		Description: Experimental Hovercraft armed with sonic wave cannon that can damage multiple targets in a line.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -4037,7 +4037,7 @@ upsusashatterer:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Shatterer
-		Prerequisites: !upsusashatterer, ~techlevel.high, ~susa_super, rank1
+		Prerequisites: !upsusashatterer, ~susa_super, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susashatterer
@@ -4052,7 +4052,7 @@ upsusaenforcer:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Enforcer Drone
-		Prerequisites: !upsusaenforcer, ~techlevel.high, ~susa_super, rank1
+		Prerequisites: !upsusaenforcer, ~susa_super, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susaenforcerdrone
@@ -4067,7 +4067,7 @@ upsusamammoth:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Mammoth
-		Prerequisites: !upsusamammoth, ~techlevel.high, ~susa_armor, rank1
+		Prerequisites: !upsusamammoth, ~susa_armor, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susamammoth
@@ -4093,7 +4093,7 @@ susamicrohumvee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_super
+		Prerequisites: susaweap, susastrategy, ~susa_super
 		Queue: Vehicle, RAVehicle
 		Description: Combat Support Vehicle that can disable buildings around him, clears garrisons, kills any enemy infantry nearby.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -4266,7 +4266,7 @@ susasupportstealthfighter:
 	Inherits: usastealth
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: susaairport, ~techlevel.high, upusastealth, ~susa_super
+		Prerequisites: susaairport, upusastealth, ~susa_super
 		Description: Cloaked ground attack aircraft.\nHeals infantry units beneath\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -4359,7 +4359,7 @@ susapalalaser:
 	Tooltip:
 		Name: Laser Paladin
 	Buildable:
-		Prerequisites: susaweap, susastrategy, ~techlevel.medium, ~susa_laser, upsusapalalaser
+		Prerequisites: susaweap, susastrategy, ~susa_laser, upsusapalalaser
 		BuildDurationModifier: 50
 		IconPalette: ra2
 	Health:
@@ -4457,7 +4457,7 @@ susalaserburton:
 	Inherits: susaburton
 	Inherits@focusingcrystal: ^upsusafocusingcrystal
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_laser, ~!botplayer
+		Prerequisites: susastrategy, ~susa_laser, ~!botplayer
 		Icon: icon_laser
 		IconPalette: ra2
 	Tooltip:
@@ -4476,7 +4476,7 @@ susalaserburton:
 susalaserburton.bot:
 	Inherits: susalaserburton
 	Buildable:
-		Prerequisites: susastrategy, ~techlevel.high, ~susa_laser, ~botplayer
+		Prerequisites: susastrategy, ~susa_laser, ~botplayer
 	Armament@PRIMARY:
 		Weapon: SUSALaserBurton_AI
 		-RequiresCondition:
@@ -4507,7 +4507,7 @@ susarailgunartillery:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, upsusarailgunartillery, ~susa_laser
+		Prerequisites: susaweap, susastrategy, upsusarailgunartillery, ~susa_laser
 		Queue: Vehicle, RAVehicle
 		Description: Long Range Artillery armed with Railgun that travels instantly\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -4554,7 +4554,7 @@ upsusarailgunartillery:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Railgun Artillery
-		Prerequisites: !upsusashatterer, ~techlevel.high, ~susa_laser, rank1
+		Prerequisites: !upsusashatterer, ~susa_laser, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susarailgunartillery
@@ -4632,7 +4632,7 @@ upsusafocusingcrystal:
 susalaserstealth:
 	Inherits: usastealth
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_laser
+		Prerequisites: susaairport, ~susa_laser
 		Description: Cloaked Ground Attack Aircraft armed with rapid fire Autocannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -4757,7 +4757,7 @@ susalasercomanche:
 	Inherits: susacomanche
 	Inherits@focusingcrystal: ^upsusafocusingcrystal
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_laser
+		Prerequisites: susaairport, ~susa_laser
 		Icon: laser_icon
 	AttackAircraft:
 		Armaments: primary, secondary, secondaryup
@@ -4788,7 +4788,7 @@ susalaserdesignatorbase:
 	Valued:
 		Cost: 2000
 	Buildable:
-		Prerequisites: susabarracks, ~techlevel.medium, ~susa_laser
+		Prerequisites: susabarracks, ~susa_laser
 		Queue: Defence, RADefence
 		BuildDurationModifier: 50
 		IconPalette: ra2
@@ -4806,7 +4806,7 @@ susalaserdesignatorbase:
 susalaserdesignatorbase.e1:
 	Inherits: susalaserdesignatorbase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~susa_laser, ~botplayer
+		Prerequisites: usabarracks, ~susa_laser, ~botplayer
 	Valued:
 		Cost: 2750
 	Cargo:
@@ -4849,7 +4849,7 @@ pscusapower4:
 susacrusader2:
 	Inherits: usacrusader2
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_laser
+		Prerequisites: susaweap, ~susa_laser
 	RenderSprites:
 		Image: usacrusader2
 
@@ -4874,7 +4874,7 @@ susaadvancedmicro:
 		Name: Advanced Microwave Tank
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.high, susastrategy, ~susa_laser
+		Prerequisites: susaweap, susastrategy, ~susa_laser
 		Queue: Vehicle, RAVehicle
 		Description: Support vehicle able to disable buildings and fry infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -4914,7 +4914,7 @@ susasheridan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_air
+		Prerequisites: susaweap, ~susa_air
 		Description: Light tank armed with high calibre 152mm Howitzer Cannon.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
 	Mobile:
@@ -4962,7 +4962,7 @@ susahurricane:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_air
+		Prerequisites: susaweap, susastrategy, ~susa_air
 		Description: USA siege weapon armed with long range cluster\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 		IconPalette: ra2
 	WithSpriteTurret:
@@ -5011,7 +5011,7 @@ susaraptor:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, ~techlevel.high, ~anysusa, ~!susa_air, ~!susa_armor
+		Prerequisites: susaairport, ~anysusa, ~!susa_air, ~!susa_armor
 		IconPalette: ra2
 	Health:
 		HP: 18000
@@ -5046,7 +5046,7 @@ susaraptor2:
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
-		Prerequisites: susaairport, ~techlevel.high, ~susa_air
+		Prerequisites: susaairport, ~susa_air
 	Tooltip:
 		Name: King Raptor
 	Valued:
@@ -5100,7 +5100,7 @@ susatornado:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, susastrategy, upsusatornado, ~techlevel.high, ~susa_air
+		Prerequisites: susaairport, susastrategy, upsusatornado, ~susa_air
 		IconPalette: ra2
 		Description: Ground Attack Bomber armed with powerful Cluster Bomb
 	Valued:
@@ -5269,7 +5269,7 @@ susahangar:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: susasupply, ~techlevel.medium, ~susa_air
+		Prerequisites: susasupply, ~susa_air
 		Description: Builds advanced helicopters
 		BuildDuration: 300
 		BuildDurationModifier: 100
@@ -5360,7 +5360,7 @@ susaacolytedrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_air
+		Prerequisites: susaweap, ~susa_air
 		Queue: Aircraft, RAAircraft
 		Description: Attack Drone armed with machinegun
 		IconPalette: ra2
@@ -5564,7 +5564,7 @@ upsusatornado:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Tornado
-		Prerequisites: !upsusatornado, ~techlevel.high, ~susa_air, rank1
+		Prerequisites: !upsusatornado, ~susa_air, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susatornado
@@ -5579,7 +5579,7 @@ upsusaveteranair:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: All Airplanes are trained Veteran
-		Prerequisites: !upsusaveteranair, ~techlevel.high, ~susa_air, rank1
+		Prerequisites: !upsusaveteranair, ~susa_air, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susaveteranair
@@ -5594,7 +5594,7 @@ upsusaarpetbombing:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Unlocks Carpet Bombing
-		Prerequisites: !upsusaveteranair, ~techlevel.high, ~susa_air, rank3, rank1
+		Prerequisites: !upsusaveteranair, ~susa_air, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: upsusaarpetbombing
@@ -5777,7 +5777,7 @@ susawraith:
 	Tooltip:
 		Name: Wraith
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		IconPalette: ra2
 	Valued:
 		Cost: 1000
@@ -5831,7 +5831,7 @@ susabradleyifv:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Armored light infantry carrier with autocannon.\n  Strong vs Infantry\n  Weak vs Infantry
 		IconPalette: ra2
@@ -5888,7 +5888,7 @@ susabradleyifv:
 susabradleyifv.bot:
 	Inherits: susabradleyifv
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor, ~botplayer
+		Prerequisites: susaweap, ~susa_armor, ~botplayer
 	Valued:
 		Cost: 1400
 	Cargo:
@@ -5905,7 +5905,7 @@ susastarlifter:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
-		Prerequisites: ~susa_armor, ~techlevel.medium, ~!botplayer
+		Prerequisites: ~susa_armor, ~!botplayer
 		Description: Heavy Lift Transport.\nCan Transport multiple vehicles at once\n  Unarmed
 	Valued:
 		Cost: 1000 #1100
@@ -5965,7 +5965,7 @@ susastarlifter:
 susastarlifter.bot1:
 	Inherits: susastarlifter
 	Buildable:
-		Prerequisites: ~susa_armor, ~techlevel.high, ~botplayer
+		Prerequisites: ~susa_armor, ~botplayer
 	Valued:
 		Cost: 4000
 	Cargo:
@@ -5978,7 +5978,7 @@ susastarlifter.bot1:
 susastarlifter.bot2:
 	Inherits: susastarlifter.bot1
 	Buildable:
-		Prerequisites: ~susa_armor, ~techlevel.medium, ~botplayer
+		Prerequisites: ~susa_armor, ~botplayer
 	Valued:
 		Cost: 5000
 	Cargo:
@@ -6044,7 +6044,7 @@ susamammoth:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusamammoth
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusamammoth
 		Queue: Vehicle, RAVehicle
 		Description: Super heavy tank with dual cannon\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -6116,7 +6116,7 @@ susagladiator:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor
+		Prerequisites: susaweap, susastrategy, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Air vehicle with Quad Auto Cannons\n  Strong vs Air, Infantry and Vehicles\nWeak vs Tanks
 		IconPalette: ra2
@@ -6172,7 +6172,7 @@ susatankdestroyer:
 	Tooltip:
 		Name: Tank Destroyer
 	Buildable:
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusatankdestroyer
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusatankdestroyer
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Tank Vehicle\nStrong vs Tanks
 		IconPalette: ra2
@@ -6213,7 +6213,7 @@ upsusatankdestroyer:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Tank Destroyer
-		Prerequisites: !upsusatankdestroyer, ~techlevel.high, ~susa_armor, rank3, rank1
+		Prerequisites: !upsusatankdestroyer, ~susa_armor, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susatankdestroyer
@@ -6271,7 +6271,7 @@ susahowitzer:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, susastrategy, ~techlevel.high, ~susa_armor, upsusahowitzer
+		Prerequisites: susaweap, susastrategy, ~susa_armor, upsusahowitzer
 		Queue: Vehicle, RAVehicle
 		Description: Long Range Artillery\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -6323,7 +6323,7 @@ upsusahowitzer:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Howitzer
-		Prerequisites: !upsusahowitzer, ~techlevel.high, ~susa_armor, rank1
+		Prerequisites: !upsusahowitzer, ~susa_armor, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susahowitzer
@@ -6338,7 +6338,7 @@ upsusapalalaser:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Allows production of the Laser Paladin
-		Prerequisites: !upsusapalalaser, ~techlevel.high, ~susa_laser, rank1
+		Prerequisites: !upsusapalalaser, ~susa_laser, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: susapalalaser
@@ -6353,7 +6353,7 @@ upsusapopuppatriotsp1:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Drops Pop-Up Turrets anywhere on map.\n\nRank 1: 1 Pop-Up Turret\nRank 2: 2 Pop-Up Turrets\nRank 3: 3 Pop-Up Turrets
-		Prerequisites: ~!upsusapopuppatriotsp1, ~techlevel.high, ~susa_super, rank1, rank3
+		Prerequisites: ~!upsusapopuppatriotsp1, ~susa_super, rank1, rank3
 		IconPalette: ra2
 	RenderSprites:
 		Image: susapopupturret
@@ -6386,7 +6386,7 @@ upsusahypersonicbomb:
 		BuildPaletteOrder: 200
 		Queue: Promotions.USA
 		Description: Launch Hyper Sonic Missile onto Target location
-		Prerequisites: !upsusahypersonicbomb, ~techlevel.high, ~susa_super, rank1, rank5
+		Prerequisites: !upsusahypersonicbomb, ~susa_super, rank1, rank5
 		IconPalette: ra2
 	RenderSprites:
 		Image: susahypersonicmissile
@@ -6416,7 +6416,7 @@ susastrykermedic:
 		Range: 4c0
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Support Vehicle that heals infantry units around\nSpews out chemicals that suffocates garrisons\nImmune to toxins and radiation\nCan transport infantry\n  Strong vs Garrisons
 		IconPalette: ra2
@@ -6471,7 +6471,7 @@ susastrykermedic:
 susastrykermedic.bot:
 	Inherits: susastrykermedic
 	Buildable:
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor, ~botplayer
+		Prerequisites: susaweap, ~susa_armor, ~botplayer
 	Valued:
 		Cost: 1000
 	Cargo:
@@ -6491,7 +6491,7 @@ susapredatordrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Description: Anti-Tank Drone\nImmune to toxic and radiation\nDetector
 		IconPalette: ra2
 	RevealsShroud:
@@ -6539,7 +6539,7 @@ susavulcantank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: susaweap, ~techlevel.medium, ~susa_armor
+		Prerequisites: susaweap, ~susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Anti-Personnel Vehicle equipped with minigun\n  Strong vs Air, Infantry and Vehicles\nWeak vs Tanks
 		IconPalette: ra2
@@ -6598,7 +6598,7 @@ susaphalynx:
 		Dimensions: 2, 1
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~susa_armor, ~techlevel.medium, susaweap
+		Prerequisites: ~susa_armor, susaweap
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Anti-Air Turret.\n  Strong vs Infantry, Vehicles, Aircraft
@@ -6652,7 +6652,7 @@ susablackwidow:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, ~techlevel.high, ~susa_armor
+		Prerequisites: susaairport, ~susa_armor
 		Description: Ground Fighter Jet\n  Strong vs Ground
 		IconPalette: ra2
 	Valued:
@@ -6716,7 +6716,7 @@ susaf16xl:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: susaairport, susastrategy, ~techlevel.high, ~susa_armor
+		Prerequisites: susaairport, susastrategy, ~susa_armor
 		Description: Ground Attack Bomber.\n  Strong vs Buildings
 		IconPalette: ra2
 	Valued:
@@ -6831,7 +6831,7 @@ susaconcreteslab:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: susabarracks, susastrategy, ~techlevel.medium, ~susa_armor
+		Prerequisites: susabarracks, susastrategy, ~susa_armor
 		Description: Can be upgraded with various defense systems
 		IconPalette: ra2
 	Building:
@@ -7479,7 +7479,7 @@ sglkell:
 sglamob:
 	Inherits@1: glamob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_regular
+		Prerequisites: sglpalace, ~sgla_regular
 	MobSpawnerMaster:
 		Actors: sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob2, sglaangrymob2, sglaangrymob2
 		ExitByBudding: false
@@ -7580,7 +7580,7 @@ sglaangrymob1_rocket:
 sglamob_demo:
 	Inherits@1: glamob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglpalace, ~sgla_demo
 	MobSpawnerMaster:
 		Actors: sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob1_rocket, sglaangrymob2, sglaangrymob2, sglaangrymob2
 		ExitByBudding: false
@@ -7766,7 +7766,7 @@ sglsite:
 	Inherits: glsite
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: sglbarracks, ~techlevel.medium, ~anysgla
+		Prerequisites: sglbarracks, ~anysgla
 	RenderSprites:
 		Image: glsite
 
@@ -7793,7 +7793,7 @@ sglairpad:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: sglsupply, ~techlevel.medium, ~anysgla, ~!sgla_toxin, ~!sgla_demo, ~!sgla_camo
+		Prerequisites: sglsupply, ~anysgla, ~!sgla_toxin, ~!sgla_demo, ~!sgla_camo
 		Description: Builds Air units
 		BuildDuration: 300
 		BuildDurationModifier: 100
@@ -7980,7 +7980,7 @@ sglchameleon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_regular
+		Prerequisites: sglweap, ~sgla_regular
 		Queue: Vehicle, RAVehicle
 		Description: Light Tank Destroyer\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -8101,7 +8101,7 @@ sglbggy:
 	Inherits: glbggy
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, sglpalace, ~anysgla, ~techlevel.medium
+		Prerequisites: sglweap, sglpalace, ~anysgla
 		Queue: Vehicle, RAVehicle
 	Armament@Toxin:
 		Weapon: GLRocketBuggyMissilesToxin
@@ -8149,7 +8149,7 @@ sglballoon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium, ~sglballoonprereq
+		Prerequisites: ~sglballoonprereq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -8380,7 +8380,7 @@ sgldesertfly:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~techlevel.high, ~sgla_scrap
+		Prerequisites: ~sgla_scrap
 		Description: Heavy Attack Aircraft.\n  Strong vs Infantry, Vehicles, Buildings
 		IconPalette: ra2
 	Valued:
@@ -8612,7 +8612,7 @@ sglcombatbuggy:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Fast attack vehicle.\nTakes on the weapon of passenger\nCan travel through cliffs
 		IconPalette: ra2
@@ -8691,7 +8691,7 @@ sgllatrun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: sglweap, ~techlevel.high, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Agile Artillery armed with Long Range Cannon\n  Strong vs Ground\nWeak vs Air
 		IconPalette: ra2
@@ -8784,7 +8784,7 @@ sglgadfly:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Anti-Air Artillery Vehicle.\nCannot move while firing
@@ -8910,7 +8910,7 @@ sglkrait:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: APC armed with toxin gun and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -8986,7 +8986,7 @@ sglmobilesupplytruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Mobile Drop off Point.
 		IconPalette: ra2
@@ -9091,7 +9091,7 @@ sglscarab:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Medium Tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -9386,7 +9386,7 @@ glsmaura:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -9505,7 +9505,7 @@ upsglbasilisk:
 		BuildPaletteOrder: 200
 		Queue: Promotions.GLA
 		Description: Allows production of the Basilisk
-		Prerequisites: !upsglbasilisk, ~techlevel.high, ~sgla_scrap, rank1
+		Prerequisites: !upsglbasilisk, ~sgla_scrap, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: sglbasilisk
@@ -9531,7 +9531,7 @@ sglbasilisk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, upsglbasilisk, ~techlevel.medium, ~sgla_scrap
+		Prerequisites: sglweap, upsglbasilisk, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
 		Description: Heavy tank destroyer.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -9613,7 +9613,7 @@ sglhip:
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium, ~sgla_scrap
+		Prerequisites: ~sgla_scrap
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship upgradeable with addons.\n  Strong vs Infantry\n  Weak vs Aircraft
 		IconPalette: ra2
@@ -9981,7 +9981,7 @@ sglsilo:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 135
-		Prerequisites: sglpalace, ~techlevel.high, ~sgla_scrap, !sglnuke
+		Prerequisites: sglpalace, ~sgla_scrap, !sglnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nRequires power to operate.
 	Building:
@@ -10084,7 +10084,7 @@ sglroach:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglpalace, ~sgla_demo
 		Description: Fire Support Vehicle with Long Range Missiles\Amphibious.\n  Strong vs ground and air
 		IconPalette: ra2
 	Valued:
@@ -10157,7 +10157,7 @@ sglmantis:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_demo
+		Prerequisites: sglweap, ~sgla_demo
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -10303,7 +10303,7 @@ sgltopol:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: upsgltopol, sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: upsgltopol, sglpalace, ~sgla_demo
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -10521,7 +10521,7 @@ sglcamel:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: upscudlauncher, sglpalace, ~techlevel.medium, ~sgla_demo
+		Prerequisites: upscudlauncher, sglpalace, ~sgla_demo
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -10576,7 +10576,7 @@ sgldemomaura:
 		Name: Demolition Marauder Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, upmarauder, ~techlevel.medium, ~sgla_demo
+		Prerequisites: glweap, upmarauder, ~sgla_demo
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -10669,7 +10669,7 @@ sglbombtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~sgla_demo
+		Prerequisites: glweap, ~sgla_demo
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -10833,7 +10833,7 @@ sglstorm:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: glpalace, ~techlevel.high, ~sgla_demo, !sglscudstorm
+		Prerequisites: glpalace, ~sgla_demo, !sglscudstorm
 		Queue: Building, RABuilding
 		Description: Provides Scud Storm support power.\nRequires power to operate.
 	Building:
@@ -10987,7 +10987,7 @@ sgltarantula:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: sglweap, ~sgla_toxin
 		Queue: Vehicle, RAVehicle
 		Description: APC armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
@@ -11087,7 +11087,7 @@ sglscourge:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin, upsglscourge
+		Prerequisites: sglweap, ~sgla_toxin, upsglscourge
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 		IconPalette: ra2
@@ -11249,7 +11249,7 @@ sglbiotruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: glweap, ~sgla_toxin
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -11295,7 +11295,7 @@ sglamobtoxin:
 	Tooltip:
 		Name: Toxin Angry Mob
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_toxin
+		Prerequisites: sglpalace, ~sgla_toxin
 	MobSpawnerMaster:
 		Actors: sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob1, sglaangrymob2_toxin, sglaangrymob2_toxin, sglaangrymob2_toxin, sglaangrymob2_toxin
 
@@ -11349,7 +11349,7 @@ sglfrogssm:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: glpalace, ~techlevel.medium, ~sgla_camo, ~upsglfrogssm
+		Prerequisites: glpalace, ~sgla_camo, ~upsglfrogssm
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -11583,7 +11583,7 @@ sglfundamentalist:
 	Tooltip:
 		Name: Fundamentalist
 	Buildable:
-		Prerequisites: sglpalace, ~techlevel.medium, ~sgla_camo
+		Prerequisites: sglpalace, ~sgla_camo
 		Description: Civilian fighters armed with variety of small-arms weapons
 		Icon: icon_fundamentalist
 		IconPalette: ra2
@@ -11780,7 +11780,7 @@ sglcobra:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: sglweap, ~techlevel.medium, ~sgla_camo
+		Prerequisites: sglweap, ~sgla_camo
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -12680,7 +12680,7 @@ schsilo:
 	Inherits: chsilo
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: schpropaganda, ~techlevel.high, ~anyschina, !chinanuke
+		Prerequisites: schpropaganda, ~anyschina, !chinanuke
 	RenderSprites:
 		Image: chsilo
 	ProvidesPrerequisite@generals:
@@ -12692,7 +12692,7 @@ schairport:
 	Inherits: chairport
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: schsupply, ~techlevel.medium, ~anyschina, schweap
+		Prerequisites: schsupply, ~anyschina, schweap
 	RenderSprites:
 		Image: chairport
 	ProvidesPrerequisite@generals:
@@ -12703,7 +12703,7 @@ schairport:
 scharty:
 	Inherits: charty
 	Buildable:
-		Prerequisites: schweap, ~techlevel.medium, ~anyschina, ~!schina_tank, ~!schina_nuke
+		Prerequisites: schweap, ~anyschina, ~!schina_tank, ~!schina_nuke
 	Armament@Normal:
 		RequiresCondition: !upschinfernoapupgrade || !deployed
 	Armament@AP:
@@ -12748,7 +12748,7 @@ upschnapalmstrike:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Calls squadron of Iron Dragons to bombard an area with napalm rockets
-		Prerequisites: !upschnapalmstrike, ~techlevel.high, ~schina_regular, rank3, rank1
+		Prerequisites: !upschnapalmstrike, ~schina_regular, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: chnapalmstrikeicon
@@ -13151,7 +13151,7 @@ schhackvan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schinternetcenter, ~techlevel.medium, ~shockwavehackvanprereq
+		Prerequisites: schweap, schinternetcenter, ~shockwavehackvanprereq
 		Queue: Vehicle, RAVehicle
 		Description: Secondary Economy vehicle.\nCan Shelter Hackers\nGarrisoned by 2 Hackers.
 		IconPalette: ra2
@@ -13190,7 +13190,7 @@ schhackvan:
 schhackvan.bot:
 	Inherits: schhackvan
 	Buildable:
-		Prerequisites: schweap, schinternetcenter, ~techlevel.medium, ~schina_regular, ~botplayer
+		Prerequisites: schweap, schinternetcenter, ~schina_regular, ~botplayer
 	Valued:
 		Cost: 3000
 	Cargo:
@@ -13206,7 +13206,7 @@ schempmig:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: schairport, ~techlevel.medium, ~schina_regular
+		Prerequisites: schairport, ~schina_regular
 		Description: Fighter armed with EMP Bombs.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 		IconPalette: ra2
 	Valued:
@@ -13324,7 +13324,7 @@ schtiger:
 		BuildPaletteOrder: 50
 		BuildDuration: 350
 		BuildDurationModifier: 100
-		Prerequisites: schweap, ~techlevel.medium, ~schina_regular
+		Prerequisites: schweap, ~schina_regular
 		Description: Helicopter gunship.\nCan attack air\nResistant to EMP\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 		IconPalette: ra2
 	Aircraft:
@@ -13538,7 +13538,7 @@ schpropagandatruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schpropaganda, ~techlevel.medium, ~schina_regular
+		Prerequisites: schweap, schpropaganda, ~schina_regular
 		Queue: Vehicle, RAVehicle
 		Description: Combat Support Vehicle that broadcasts Propaganda.\nCan transport infantry
 		IconPalette: ra2
@@ -13824,7 +13824,7 @@ schwarmaster:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_tank
+		Prerequisites: schweap, ~schina_tank
 		Queue: Vehicle, RAVehicle
 		Description: Chinese main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: ra2
@@ -13895,7 +13895,7 @@ upschreaper:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Reaper
-		Prerequisites: !upschreaper, ~techlevel.high, ~schina_tank, rank1
+		Prerequisites: !upschreaper, ~schina_tank, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schreaper
@@ -13923,7 +13923,7 @@ schreaper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.high, ~schina_tank, upschreaper
+		Prerequisites: schweap, ~schina_tank, upschreaper
 		Queue: Vehicle, RAVehicle
 		Description: Chinese Tank equipped with Dual AP Gattling Guns.\nCan crush smaller vehicles\n  Strong vs Vehicles, Tanks\n  Weak vs Aircraft
 		IconPalette: ra2
@@ -13991,7 +13991,7 @@ schramjet:
 		Dimensions: 1, 1
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schina_tank, ~techlevel.medium, schbarracks
+		Prerequisites: ~schina_tank, schbarracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Anti-Ground Turret.\n  Strong vs Infantry, Vehicles
@@ -14110,7 +14110,7 @@ schadvancedecm:
 		Name: Advanced ECM
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schweap, schpropaganda, ~techlevel.medium, ~schina_tank
+		Prerequisites: schweap, schpropaganda, ~schina_tank
 		IconPalette: ra2
 	Mobile:
 		Speed: 105
@@ -14144,7 +14144,7 @@ schrazerbomber:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank
+		Prerequisites: schairport, ~schina_tank
 		Description: Attack Bomber armed with Napalm Bombs.\nCreates napalm storms when grouped\n  Strong vs Buildings, Vehicles, Infantry\n  Weak vs Aircraft
 		IconPalette: ra2
 	Valued:
@@ -14264,7 +14264,7 @@ schtransporthelix:
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank
+		Prerequisites: schairport, ~schina_tank
 		Queue: Aircraft, RAAircraft
 		Description: Can transport infantry and vehicles\nShares propaganda and can be upgraded with Gattling
 		IconPalette: ra2
@@ -14422,7 +14422,7 @@ schtransporthelix.husk:
 schtransporthelix.e1:
 	Inherits: schtransporthelix
 	Buildable:
-		Prerequisites: schairport, ~techlevel.medium, ~schina_tank, ~botplayer
+		Prerequisites: schairport, ~schina_tank, ~botplayer
 	Valued:
 		Cost: 4500
 	Cargo:
@@ -14545,7 +14545,7 @@ schminigunnersquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Minigunners and Officer.\n  Strong vs Infantry, Aircraft, Buildings\n  Weak vs Vehicles, Tanks
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14566,7 +14566,7 @@ schtankhuntersquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Tank Hunters and Officer.\n  Strong vs Vehicles, Tanks, Aircraft\n  Weak vs Infantry, Turrets
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14587,7 +14587,7 @@ schredguardsquad:
 	Inherits: glamob
 	Buildable:
 		Description: Squad of Red Guards and Officer.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Air, Tanks
-		Prerequisites: schpropaganda, ~schina_inf, ~techlevel.medium
+		Prerequisites: schpropaganda, ~schina_inf
 		IconPalette: ra2
 		Queue: Infantry, RAInfantry
 		BuildDuration: 600
@@ -14672,7 +14672,7 @@ schtigershark:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_inf
+		Prerequisites: schweap, ~schina_inf
 		Queue: Vehicle, RAVehicle
 		Description: Light Tank armed with Cannon.\nGains horde bonus\n  Strong vs Vehicles\n  Weak vs Tanks, Infantry
 		IconPalette: ra2
@@ -14756,7 +14756,7 @@ schberzerkermlrs:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, schpropaganda, ~techlevel.high, ~schina_inf, upschberzerkermlrs
+		Prerequisites: schweap, schpropaganda, ~schina_inf, upschberzerkermlrs
 		Queue: Vehicle, RAVehicle
 		Description: Advanced Missile Launcher\nCan fire continuously or release full salvo at once\n  Strong vs Static Targets
 		IconPalette: ra2
@@ -14838,7 +14838,7 @@ upschberzerkermlrs:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Berzerker MLRS
-		Prerequisites: !upschberzerkermlrs, ~techlevel.high, ~schina_inf, rank1
+		Prerequisites: !upschberzerkermlrs, ~schina_inf, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schberzerkermlrs
@@ -15102,7 +15102,7 @@ schassaulthelix:
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_inf
+		Prerequisites: schairport, ~schina_inf
 		Queue: Aircraft, RAAircraft
 		Description: Can transport infantry and vehicles\nCan be upgraded with propaganda and napalm bombs
 		IconPalette: ra2
@@ -15337,7 +15337,7 @@ schnuclearbattlemaster:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schweap, ~schina_nuke
 		IconPalette: ra2
 	RevealsShroud:
 		Range: 6c0
@@ -15391,7 +15391,7 @@ schradtank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schweap, ~schina_nuke
 		IconPalette: ra2
 		Description: Anti-Personnel Tank.\nCan drop barrels
 		Queue: Vehicle, RAVehicle
@@ -15455,7 +15455,7 @@ schsiegecannon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke, schnuclearresearchplant
+		Prerequisites: schweap, ~schina_nuke, schnuclearresearchplant
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Mobile artillery.
@@ -15507,7 +15507,7 @@ schnuclearoverlord:
 		RequiresCondition: addontactical
 	-Tooltip@4:
 	Buildable:
-		Prerequisites: schpropaganda, ~techlevel.high, ~schina_nuke
+		Prerequisites: schpropaganda, ~schina_nuke
 		IconPalette: ra2
 	-Cargo:
 	Turreted:
@@ -15601,7 +15601,7 @@ schdevastator:
 	Inherits@FusionReactors: ^FusionReactors
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_nuke, upschdevastator, schnuclearresearchplant
+		Prerequisites: schweap, ~schina_nuke, upschdevastator, schnuclearresearchplant
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Heavy tank fitted with Dual Nuclear cannons\nCan crush vehicles\nCan overheat its reactor to suicide
@@ -15664,7 +15664,7 @@ upschdevastator:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Devastator
-		Prerequisites: !upschdevastator, ~techlevel.high, ~schina_nuke, rank1
+		Prerequisites: !upschdevastator, ~schina_nuke, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schdevastator
@@ -15907,7 +15907,7 @@ upschfusionreactor:
 schnuclearmig:
 	Inherits: CHMIG
 	Buildable:
-		Prerequisites: schairport, ~techlevel.medium, ~schina_nuke
+		Prerequisites: schairport, ~schina_nuke
 		Description: Fighter armed with napalm missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 		Icon: icon_nuke
 		IconPalette: ra2
@@ -15946,7 +15946,7 @@ schravagetank:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 	Mobile:
 		Speed: 120
 	Health:
@@ -16004,7 +16004,7 @@ schburatino:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Mobile artillery.
@@ -16049,7 +16049,7 @@ schleangtransporthelix:
 	Inherits: schtransporthelix
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: schairport, ~techlevel.medium, ~schina_leang
+		Prerequisites: schairport, ~schina_leang
 	RenderSprites:
 		Image: schtransporthelix
 
@@ -16078,7 +16078,7 @@ schhammercannon:
 		Name: Hammer Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schpropaganda, ~techlevel.high, upschhammercannon, ~schina_leang
+		Prerequisites: schpropaganda, upschhammercannon, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		Description: Long range artillery with incredible dange.\n Strong vs ground targets\n Weak vs Aircraft
 		IconPalette: ra2
@@ -16155,7 +16155,7 @@ upschhammercannon:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
 		Description: Allows production of the Hammer Cannon
-		Prerequisites: !upschhammercannon, ~techlevel.high, ~schina_leang, rank3, rank1
+		Prerequisites: !upschhammercannon, ~schina_leang, rank3, rank1
 		IconPalette: ra2
 	RenderSprites:
 		Image: schhammercannon
@@ -16175,7 +16175,7 @@ schanviltank:
 		Name: Anvil Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: schpropaganda, ~techlevel.high, ~schina_leang
+		Prerequisites: schpropaganda, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		Description: Heavy vehicle\nCan deploy to cause earthquakes.
 		IconPalette: ra2
@@ -16367,7 +16367,7 @@ schgrindercannon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: schweap, ~techlevel.medium, ~schina_leang
+		Prerequisites: schweap, ~schina_leang
 		Queue: Vehicle, RAVehicle
 		IconPalette: ra2
 		Description: Short range artillery that shoots Flachette Canisters which shrapnels before hitting ground\nCan swap fire mode to fire mines instead

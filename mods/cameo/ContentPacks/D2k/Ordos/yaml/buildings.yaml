@@ -766,7 +766,7 @@ ordos_palace:
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.corrino, !swpalace
+# 		Prerequisites: research_centre, ~faction.corrino, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 937
@@ -860,7 +860,7 @@ ordos_palace:
 # 		Cost: 2000
 # 	-ProvidesPrerequisite@swlimit:
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Provides Death before Dishonor Support Power and passive income
 # 		BuildLimit: 1
 # 	RenderSprites:
@@ -916,7 +916,7 @@ ordos_palace:
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.mercenary, !swpalace
+# 		Prerequisites: research_centre, ~faction.mercenary, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 1000
@@ -1049,7 +1049,7 @@ ordos_palace:
 # 	Inherits: d2k_command_center
 # 	-ProvidesPrerequisite@swlimit:
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Allows to call Mercenaries reinforcements and Bounty Hunting Support Power
 # 		BuildLimit: 1
 
@@ -1057,7 +1057,7 @@ ordos_palace:
 # 	Inherits: palace
 # 	Inherits@orni: ^DU_OrnithopterSupportPower
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Enables Fremen Guerilla and Ornithopters support powers
 # 		BuildLimit: 1
 # 	Valued:
@@ -1081,7 +1081,7 @@ ordos_palace:
 # emperor_h_palace:
 # 	Inherits: palace
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Enables Death td_nod_handofnod Missile
 # 		BuildLimit: 1
 # 	Valued:
@@ -1105,7 +1105,7 @@ ordos_palace:
 # emperor_o_palace:
 # 	Inherits: palace
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: research_centre, ~faction.emperor
 # 		Description: Produces Saboteur and enables Chaos Lightning Support Power
 # 		BuildLimit: 1
 # 	Valued:

@@ -74,7 +74,7 @@ SYRF:
 	Buildable:
 		BuildPaletteOrder: 890
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Naval Yard.
 		Icon: fake-icon
 	Tooltip:
@@ -163,7 +163,7 @@ WEAF:
 		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 920
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Queue: Defense
 		Description: Looks like a War Factory.
 		Icon: fake-icon
@@ -210,7 +210,7 @@ DOMF:
 	Buildable:
 		BuildPaletteOrder: 930
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Radar Dome.
 		Icon: fake-icon
 	Building:
@@ -234,7 +234,7 @@ FIXF:
 	Buildable:
 		BuildPaletteOrder: 940
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Service Depot.
 		Icon: fake-icon
 	Tooltip:
@@ -269,7 +269,7 @@ FAPW:
 	Buildable:
 		BuildPaletteOrder: 950
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like an Advanced Power Plant.
 		Icon: fake-icon
 	Tooltip:
@@ -308,7 +308,7 @@ ATEF:
 	Buildable:
 		BuildPaletteOrder: 970
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.high
+		Prerequisites: #~structures.france
 		Description: Looks like an Allies Tech Center.
 		Icon: fake-icon
 	Building:
@@ -398,7 +398,7 @@ FACF:
 	Buildable:
 		BuildPaletteOrder: 1000
 		Queue: Defense
-		Prerequisites: #~structures.france, ~techlevel.medium
+		Prerequisites: #~structures.france
 		Description: Looks like a Construction Yard.
 		Icon: fake-icon
 	Tooltip:

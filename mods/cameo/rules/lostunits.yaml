@@ -693,7 +693,7 @@ BHNUK2:
 	Inherits: NUK2
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides more power, cheaper than the\nstandard Power Plant
 
@@ -841,7 +841,7 @@ BHHQ:
 	Inherits: HQ
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: bhproc, ~techlevel.medium
+		Prerequisites: bhproc
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	AirstrikePower:
@@ -883,7 +883,7 @@ BHEYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nUnlocks Mammoth Tank and Commando.\nRequires power to operate.
 	RenderSprites:
@@ -904,7 +904,7 @@ BHTMPL:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	ProvidesPrerequisite@buildingname:
@@ -943,7 +943,7 @@ BHOBLI:
 	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: bhtmpl, ~techlevel.high
+		Prerequisites: bhtmpl
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: td_nod_obeliskoflight
@@ -1705,7 +1705,7 @@ galagabee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1750,7 +1750,7 @@ galagabutterfly:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1794,7 +1794,7 @@ smflamechomp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1838,7 +1838,7 @@ smangrysun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
+		Prerequisites: hpad, anyhq, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:

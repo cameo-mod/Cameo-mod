@@ -441,7 +441,7 @@ wraith_husk.ordos:
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: ~du_ornithopter, outpost, ~techlevel.medium
+# 		Prerequisites: ~du_ornithopter, outpost
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 100
 # 		Description: Powerful Aircraft armed with dual Heavy Machine Guns and Bombs.\n Strong vs Everything
@@ -584,7 +584,7 @@ eye_husk.ordos:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: high_tech_factory, research_centre, ~techlevel.high, ~faction.guild
+# 		Prerequisites: high_tech_factory, research_centre, ~faction.guild
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Heavy fleet which fires multiple unguided rockets at its targets.\n Strong vs Ground targets
 # 		IconPalette: ra2
@@ -648,7 +648,7 @@ eye_husk.ordos:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: high_tech_factory, ~techlevel.high, ~faction.guild
+# 		Prerequisites: high_tech_factory, ~faction.guild
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Fast Spaceship fighter used for aerial combat. Equipped with guided missiles\nStrong vs Everything
 # 		IconPalette: ra2
@@ -710,7 +710,7 @@ eye_husk.ordos:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: high_tech_factory, research_centre, ~techlevel.high, ~anyharkonnen
+# 		Prerequisites: high_tech_factory, research_centre, ~anyharkonnen
 # 		Queue: Aircraft, RAAircraft
 # 		Description: Base Defense equipped with Dual High Calibre Machinegun
 # 		IconPalette: ra2
@@ -875,7 +875,7 @@ carryall_huskvtol.ordos:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm, ~techlevel.medium
+# 		Prerequisites: ~faction.tleilaxu, d2k_tleilaxu_tech, upgrade.emperorworm
 # 		Description: Giant Sandworm
 # 		BuildLimit: 1
 # 	Inherits@EXT: ^ExternalConditions ##########
@@ -933,7 +933,7 @@ carryall_huskvtol.ordos:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 130
-# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks, ~techlevel.medium
+# 		Prerequisites: ~faction.fremen, high_tech_factory, upgrade_barracks
 # 		Description: Giant Sandworm
 # 		BuildLimit: 5
 # 	Inherits@EXT: ^ExternalConditions ##########

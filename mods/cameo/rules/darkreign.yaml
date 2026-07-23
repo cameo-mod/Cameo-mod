@@ -370,7 +370,7 @@ drwaterextract.freedomguard:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 120
-		Prerequisites: drfghq3, ~techlevel.medium
+		Prerequisites: drfghq3
 		Description: Provides Passive income
 	Valued:
 		Cost: 5000
@@ -408,7 +408,7 @@ drwaterextract.imperium:
 	Inherits: drwaterextract.freedomguard
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drihq3, ~techlevel.medium
+		Prerequisites: drihq3
 		Queue: Building, RABuilding
 		Description: Provides Passive income
 	RenderSprites:
@@ -928,7 +928,7 @@ mcv.imperium:
 		Name: Construction Rig (Imperium)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -1357,7 +1357,7 @@ dririft.imperium:
 		Name: Rift Generator
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: driportal.imperium, ~techlevel.high, ~!drriftlimit
+		Prerequisites: driportal.imperium, ~!drriftlimit
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -1827,7 +1827,7 @@ drptnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1020
 		BuildDurationModifier: 40
@@ -1973,7 +1973,7 @@ dramp:
 		Name: Amper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, drihosp, ~techlevel.medium
+		Prerequisites: vehicleproduction, drihosp
 		Queue: Vehicle, RAVehicle
 		Description: The Imperium’s version of first aid, this lunatic\ncyborg fires darts into dying infantry units that boost the target’s\nhealth to full, but leave the unit poisoned so that its health will steadily decrease\nuntil the unit dies. The Amper can also be used as an offensive weapon,\nbringing slow death to enemy infantry.\n\nType: Walker\nSpeed: Slow\nWeapon: Serum\nRange: Short\nArmor: Light
 	Mobile:
@@ -2029,7 +2029,7 @@ drshreder:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: A huge, hovering nightmare, the Shredder tears through infantry like a runaway saw.\nAlthough it has no ranged attack, it is fast, heavily armoured, and inflicts severe damage on any\ninfantry units foolish enough to get near it.\n\nType: Hover\nSpeed: Medium\nWeapon: Blades\nRange: Contact\nArmor: Medium
 		BuildDuration: 250
@@ -2073,7 +2073,7 @@ drttnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 100
 		BuildDuration: 1125
@@ -2135,7 +2135,7 @@ drmad:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: The M.A.D. fires bladed orbs at enemy air units.\nLike the Freedom Guard Flak Jack, it cannot fire at ground units and\nshould be defended against land attack\n\nType: Hover\nSpeed: Medium\nWeapon: Bladed Orbs\nRange: Long\nArmor: Light
 	Mobile:
@@ -2181,7 +2181,7 @@ drscarab:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: This long range weapon fires a fragmenting projectile that breaks\ninto numerous burning particles over its target. This vehicle is slow and lightly\narmoured, but it can enclose itself in a retractable armoured exoskeleton when it gets in trouble.\nThe unit cannot fire while this armour is engaged, but can weather a considerable beating while waiting for reinforcements.\n\nType: Hover\nSpeed: Slow\nWeapon: Artillery\nRange: Extrme\nArmor: Medium
 	Mobile:
@@ -2335,7 +2335,7 @@ drptnkfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 350
 		Description: Dummy unit that is used to immitate real one
@@ -2430,7 +2430,7 @@ drshrederfake:
 		Name: Fake Shredder
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2470,7 +2470,7 @@ drttnkfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 1020
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Dummy unit that is used to immitate real one
@@ -2516,7 +2516,7 @@ drmadfake:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2553,7 +2553,7 @@ drscarabfake:
 		Name: Fake S.C.A.R.A.B.
 	Buildable:
 		BuildPaletteOrder: 1000
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		Description: Dummy unit that is used to immitate real one
 	Mobile:
@@ -2594,7 +2594,7 @@ drcyclone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: The Cyclone embodies the core of the Imperium aerial force.\nThe unit is fairly rugged and can engage both air and ground units.\nHowever, the Cyclone’s neutron cannon has a limited energy source and must\nrecharge at the Re-Arming Deck.\n\nType: Flyer\nSpeed: Fast\nWeapon: Neutron Cannon\nRange: Medium\nArmor: Medium
 	Aircraft:
@@ -2644,7 +2644,7 @@ drskyfort:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Death from above. This floating platform of wreckage houses the largest\nplasma cannon known to humanity. It’s slow to recharge but makes a lasting impact.\n\nType: Flyer\nSpeed: Slow\nWeapon: Pulse Plasma Cannon\nRange: Contact\nArmor: Heavy
 	Aircraft:
@@ -2698,7 +2698,7 @@ drdrone:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Vehicle, RAVehicle
 		Description: This small unmanned drone is lightly armoured and has\nno offensive capability. It is used solely to scout enemy targets.\n\nType: Flyer\nSpeed: Medium\nWeapon: None\nRange: N/A\nArmor: Light
 	Aircraft:
@@ -2751,7 +2751,7 @@ mcv.freedomguard:
 		Name: Construction Rig (FreedomGuard)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -3889,7 +3889,7 @@ drmech:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: drfgrep, ~techlevel.medium
+		Prerequisites: drfgrep
 		Description: The Mechanic functions similarly to the Field Medic\nrepairing damaged vehicles in the field. The Mechanic has no attack capability\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	Valued:
 		Cost: 300
@@ -3936,7 +3936,7 @@ drmedi:
 	Inherits@DRShadow: ^InfantryShadows
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: drfghosp, ~techlevel.medium
+		Prerequisites: drfghosp
 		BuildPaletteOrder: 110
 		Description: The Field Medic can restore the health of\nwounded infantry units and administer an antitoxin to\ncounteract the effects of the Amper. The Field Medic will\nautomatically heal damaged units that are nearby or can\nbe directed to heal a specific unit. The Field Medic has no\nattack capability and does not wear body armour.\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	Valued:
@@ -4164,7 +4164,7 @@ drrtnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfgweap2, ~techlevel.high
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 100
 		BuildDuration: 1500
@@ -4212,7 +4212,7 @@ drarty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfgweap2, ~techlevel.medium
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		Description: The Hellstorm Artillery fires a longrange, area-effect explosive. Its range is more than four\ntimes longer than any other unit. A battery of Artillery is\ncapable of single-handedly destroying an enemy base, but,\nthe vehicle is slow and lightly armoured, so undefended\nArtillery is fodder in close combat.\n\nType: Tracked\nSpeed: Slow\nWeapon: Artillery\nRange: Extreme\nArmor: Medium
 	Mobile:
@@ -4459,7 +4459,7 @@ drjack:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: drfgweap2, ~techlevel.medium
+		Prerequisites: drfgweap2
 		Queue: Vehicle, RAVehicle
 		Description: A revamped Construction Rig outfitted with two\nshoulder mounted particle launchers. The Flak Jack\nsalvages metal from the battlefield and converts it into\nmicroscopic metallic particles that it fires in clouds which\ncause sustained damage to air units. The unit has no\ndefensive capability against ground attack, and should be\nprotected at all times\n\nType: Walker\nSpeed: Slow\nWeapon: Chaff\nRange: Long\nArmor: Light
 	Mobile:
@@ -4590,7 +4590,7 @@ drskybike:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
+		Prerequisites: drfgweap2, drfghelipad
 		Queue: Vehicle, RAVehicle
 		Description: Using a modified Spider Bike chassis, the\nFreedom Guard were able to produce cheap, fast aerial\nunits which could attack enemy ground troops and other\nflyers. Although quicker than the Imperium Cyclone, the\nSky Bike is not as heavily armoured and is outgunned in\neven combat. The speed of the Sky Bike, however, allows\nit to dictate the circumstance of conflict. This unit fires\nhigh-velocity mini-missiles and, like the Outrider, must rearm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Mini Missiles\nRange: Short\nArmor: Light
 	Aircraft:
@@ -4643,7 +4643,7 @@ droutrider:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drfgweap2, drfghelipad, ~techlevel.medium
+		Prerequisites: drfgweap2, drfghelipad
 		Queue: Vehicle, RAVehicle
 		Description: This ground attack aerial unit is slower and less\nmanoeuvrable than the Sky Bike, but considerably tougher\nand fires air to ground missiles. Deadly effective against\nImperium armour, it cannot engage other air units and\nshould be escorted by air defence units. The Outrider has\nlimited ammunition and must re-arm at the Re-Arming Deck\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
 	Aircraft:
@@ -4695,7 +4695,7 @@ drfgmcv:
 		Name: Base Mover
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium, fix
+		Prerequisites: anyhq, fix
 		Queue: Null
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -4856,7 +4856,7 @@ mcv.shadowhand:
 		Name: Construction Rig (Shadowhand)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -5226,7 +5226,7 @@ drgemenis1:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium, drmadrix.shadowhand
+		Prerequisites: vehicleproduction, drmadrix.shadowhand
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry, Aircraft
 	Mobile:
@@ -5297,7 +5297,7 @@ drfury:
 		Name: Fury
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: driweap2, ~techlevel.medium, drmadrix.shadowhand
+		Prerequisites: driweap2, drmadrix.shadowhand
 		Queue: Vehicle, RAVehicle
 		Description: Speedy, heavy mech.\n  Powerful Firepower.\n  Strong vs Ground Units\n  Weak vs Aircraft
 	Mobile:
@@ -5356,7 +5356,7 @@ drshadowblade:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 		Description: Sadic Anti Infantry, armed with\n Blades.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5398,7 +5398,7 @@ drhades:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -5448,7 +5448,7 @@ drempdisable:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: driweap2, drihelipad, ~techlevel.medium
+		Prerequisites: driweap2, drihelipad
 		Queue: Vehicle, RAVehicle
 		Description: Base Disable Unit.\n  Place it in the enemy's central building\n  Weak vs AA
 	Aircraft:
@@ -5510,7 +5510,7 @@ mcv.xenite:
 		Name: Construction Rig (Xenite)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -6251,7 +6251,7 @@ mcv.togran:
 		Name: Construction Rig (Tograns)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -6864,7 +6864,7 @@ drphasemine:
 		Name: Phase Mine
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Infantry, RAInfantry
 		Description: Speedy, heavy mech.\n  Powerful Firepower.\n  Strong vs Ground Units\n  Weak vs Aircraft
 	Mobile:
@@ -7192,7 +7192,7 @@ drsonic:
 		Name: Sonic Thumper
 	Buildable:
 		BuildPaletteOrder: 61
-		Prerequisites: driweap2, ~techlevel.medium
+		Prerequisites: driweap2
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1125
 		BuildDurationModifier: 100
@@ -7322,7 +7322,7 @@ mcv.aterrorist:
 		Name: Construction Crane (Terrorist)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium, drterrep
+		Prerequisites: drfghq2, drterrep
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Armed With Lasers\n  Better than an Construction Biot\n Special for Large Travels
@@ -7378,7 +7378,7 @@ mcv2.aterrorist:
 		Name: Construction Biot (Terrorist)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drterrep, ~techlevel.medium
+		Prerequisites: drterrep
 		Queue: Infantry, RAInfantry
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed.\n Are a Lite Construction Rig are\n Cheaper but Slower
@@ -7603,7 +7603,7 @@ drwaterextract.terror:
 	Inherits: drwaterextract.freedomguard
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drfghq3, ~techlevel.medium
+		Prerequisites: drfghq3
 		Queue: Building, RABuilding
 		Description: Provides Passive income
 	RenderSprites:
@@ -8257,7 +8257,7 @@ drtarty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Vehicles and Buildings
 	Mobile:
@@ -8369,7 +8369,7 @@ drspiner:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: drterrep2, ~techlevel.medium
+		Prerequisites: drterrep2
 		Queue: Vehicle, RAVehicle
 		Description: Helicopter\n\nType: Flyer\nSpeed: Fast\nWeapon: Guided Missile\nRange: Long\nArmor: Heavy
 	Aircraft:
@@ -8422,7 +8422,7 @@ drtertran:
 		OverrideActor: tran
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: drterrep2, ~techlevel.medium
+		Prerequisites: drterrep2
 		Queue: Vehicle, RAVehicle
 		Description: Fast Infantry Transport Helicopter.\n  Unarmed
 	Aircraft:
@@ -8571,7 +8571,7 @@ mcv.eodalien:
 		Name: Construction Gloth (Aliens)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -8615,7 +8615,7 @@ mcv2.eodalien:
 		Name: Armed Gloth (Aliens)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -10320,7 +10320,7 @@ mcv.descendants:
 		Name: Construction Rig (Descendants)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drfghq2, ~techlevel.medium
+		Prerequisites: drfghq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -10666,7 +10666,7 @@ drptnkd:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driscrap, ~techlevel.medium
+		Prerequisites: driscrap
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1020
 		BuildDurationModifier: 40
@@ -10687,7 +10687,7 @@ drmadd:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: driscrap, ~techlevel.medium
+		Prerequisites: driscrap
 		Queue: Vehicle, RAVehicle
 		Description: The M.A.D. fires bladed orbs at enemy air units.\nLike the Freedom Guard Flak Jack, it cannot fire at ground units and\nshould be defended against land attack\n\nType: Hover\nSpeed: Medium\nWeapon: Bladed Orbs\nRange: Long\nArmor: Light
 	Voiced:
@@ -10710,7 +10710,7 @@ drmechd:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: drdsupport, ~techlevel.medium
+		Prerequisites: drdsupport
 		Description: The Mechanic functions similarly to the Field Medic\nrepairing damaged vehicles in the field. The Mechanic has no attack capability\n\nType: Walker\nSpeed: Slow\nWeapon: None\nRange: N/A\nArmor: Light
 	RenderSprites:
 		Image: drmech

@@ -605,7 +605,7 @@ dunemcv:
 		Name: Mobile Construction Vehicle (Dune 2)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -1742,7 +1742,7 @@ duneradar:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: dunerefin, ~techlevel.medium
+		Prerequisites: dunerefin
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1785,7 +1785,7 @@ duneixhouse:
 		Prerequisite: duneixhouse
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -2034,7 +2034,7 @@ dunepalace:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !dunepalacesw
+		Prerequisites: anyhq, !dunepalacesw
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	Building:

@@ -321,7 +321,7 @@ ordos_mortartrooper:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 80
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~du_fremen
+# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~du_fremen
 # 		Icon: phantomicon
 # 		IconPalette: windows256
 # 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly\nDetector\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
@@ -508,7 +508,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: upgrade_barracks, ~techlevel.medium, high_tech_factory
+# 		Prerequisites: upgrade_barracks, high_tech_factory
 # 		BuildDuration: 100
 # 		BuildDurationModifier: 100
 # 		Description: Infantry armed with grenades. \nVery prone to friendly fire\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles
@@ -548,7 +548,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled
+# 		Prerequisites: ~palace.sardaukar, ~disabled
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
 # 		Description: Assault infantry of Emperor's Army\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
@@ -590,7 +590,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~techlevel.medium, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
 # 		BuildDuration: 200
 # 		BuildDurationModifier: 100
 # 	Valued:
@@ -616,7 +616,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor, ~techlevel.high
+# 		Prerequisites: ~faction.corrino, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Heavily Armored Elite assault infantry of Emperor's Army\nCannot lay down or be crushed\n  Strong vs Everything
@@ -673,7 +673,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 70
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~techlevel.medium, ~faction.corrino, high_tech_factory
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, ~faction.corrino, high_tech_factory
 # 		Description: Assassin equipped with Heat Blade and Crossbow\n  Strong vs Infantry
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
@@ -866,7 +866,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory
 # 		Description: Flying infantry unit armed with dual assault rifle.\n Can Attack air units.\n  Strong vs Infantry\n  Weak vs Vehicles
 # 		IconPalette: d2kunit
 # 		BuildDuration: 250
@@ -958,7 +958,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~!faction.tleilaxu
+# 		Prerequisites: ~barracks.ordos, upgrade_barracks, high_tech_factory, ~!faction.tleilaxu
 # 		Description: Stealth Flying infantry unit armed with deadly dual machine guns\n  Strong vs Infantry, Vehicles\n  Weak vs Air
 # 		IconPalette: d2kunit
 # 		BuildDuration: 325
@@ -995,7 +995,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 140
-# 		Prerequisites: ~techlevel.medium, d2k_tleilaxu_tech, upgrade.rocketeer, ~faction.tleilaxu
+# 		Prerequisites: d2k_tleilaxu_tech, upgrade.rocketeer, ~faction.tleilaxu
 # 		Description: Flying infantry unit armed with deadly dual machine guns\n\nMust resupply at Resource Center\n  Strong vs Infantry\n  Weak vs Vehicles Strong vs Everything
 # 		BuildDuration: 400
 # 		BuildDurationModifier: 100
@@ -1038,7 +1038,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 160
-# 		Prerequisites: ~barracks.ordos, upgrade_barracks, ~!faction.ordos. ~!faction.smugglers, ~techlevel.medium, high_tech_factory
+# 		Prerequisites: ~barracks.ordos, upgrade_barracks, ~!faction.ordos. ~!faction.smugglers, high_tech_factory
 # 		Description: Infantry armed with a long range rifle\nCan detect cloaked units at great distances.\nCan Deplay to grant stealth and accuracy but loses movement\n  Strong vs Infantry, Air, Vehicles\n  Weak vs Tanks\n  Special Ability: Invisibility while static
 # 		IconPalette: d2kunit
 # 		BuildDuration: 600
@@ -1152,7 +1152,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 220
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.harkonnen
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.harkonnen
 # 		Description: Stealth Deadly unit.\nUndetected even when exiting vehicles and infiltrating.\n  Strong vs Infantry, Vehicles, Tanks, Buildings\n  Weak vs Siege\n  Special Ability: Invisibility
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -1260,7 +1260,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
-# 		Prerequisites: upgrade_barracks, high_tech_factory, ~techlevel.medium, ~mechanic_prereq
+# 		Prerequisites: upgrade_barracks, high_tech_factory, ~mechanic_prereq
 # 		Description: Repairs nearby vehicles and buildings.\nCan enter vehicle husks to repair them.\nRemoves attached explosives from units and buildings\n  Unarmed
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -1325,7 +1325,7 @@ ordos_leech:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~faction.corrino, palace_emperor, ~techlevel.high
+# 		Prerequisites: ~faction.corrino, palace_emperor
 # 		BuildDuration: 500
 # 		BuildDurationModifier: 100
 # 		Description: Witch of the Imperium. Can control enemy units using The Voice and\ninstantly kill infantry with Gom Jabbar\nCannot be poisoned nor mind controlled
@@ -1479,7 +1479,7 @@ ordos_leech:
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.medium
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -1544,7 +1544,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium
+# 		Prerequisites: ~faction.atreides, upgrade_heavy
 # 		Description: Stealth Heavy Carrier vehicle with machine td_nod_gunturret\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
 # 		IconPalette: windows256
 # 	Valued:
@@ -1610,7 +1610,7 @@ ordos_leech:
 # d2k_atreides_apc.bot1:
 # 	Inherits: d2k_atreides_apc
 # 	Buildable:
-# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium, ~botplayer
+# 		Prerequisites: ~faction.atreides, upgrade_heavy, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 200
 # 	Cargo:
@@ -1637,7 +1637,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 650
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~faction.tleilaxu, upgrade.basq, d2k_tleilaxu_tech, ~techlevel.medium
+# 		Prerequisites: ~faction.tleilaxu, upgrade.basq, d2k_tleilaxu_tech
 # 		Description: Bio hover tank\nGood against both ground and air\nResistant against missiles and heavy calibre armaments
 # 		IconPalette: ra2
 # 	Valued:
@@ -1788,7 +1788,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~heavy.atreides, research_centre, ~techlevel.high, ~faction.fremen
+# 		Prerequisites: ~heavy.atreides, research_centre, ~faction.fremen
 # 		Description: Fremen Quick Stealth tank armed with missile launcher and autocannon\nLow durability\n  Strong vs Vehicles, Air\n  Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Selectable:
@@ -1876,7 +1876,7 @@ ordos_leech:
 # emperor_stealth_tank:
 # 	Inherits: d2k_stealth_tank
 # 	Buildable:
-# 		Prerequisites: upgrade_heavy, research_centre, ~techlevel.high, ~faction.emperor
+# 		Prerequisites: upgrade_heavy, research_centre, ~faction.emperor
 # 	RenderSprites:
 # 		Image: d2k_stealth_tank
 
@@ -2115,7 +2115,7 @@ ordos_saboteur:
 # 		BuildPaletteOrder: 100
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.corrino
+# 		Prerequisites: ~barracks.harkonnen, upgrade_barracks, high_tech_factory, ~faction.corrino
 # 		Description: Advanced infantry armed with a plasma ball launcher\n  Strong vs Tanks\n  Weak vs Artillery, Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -2147,7 +2147,7 @@ ordos_saboteur:
 # emperor_plasmainf:
 # 	Inherits: plasma_infantry
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory
 # 	RenderSprites:
 # 		Image: plasma_infantry
 
@@ -2165,7 +2165,7 @@ ordos_saboteur:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~techlevel.medium, ~faction.fremen
+# 		Prerequisites: ~barracks.atreides, upgrade_barracks, high_tech_factory, ~faction.fremen
 # 		Description: Stealth Elite Fremen Guerilla infantry armed with Sonic Weapon\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Artillery, Tanks
 # 		IconPalette: d2kunit
 # 		BuildDuration: 280
@@ -2202,6 +2202,6 @@ ordos_saboteur:
 # emperor_fedaykin:
 # 	Inherits: fedaykin
 # 	Buildable:
-# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory, ~techlevel.medium
+# 		Prerequisites: ~faction.emperor, upgrade_barracks, high_tech_factory
 # 	RenderSprites:
 # 		Image: fedaykin

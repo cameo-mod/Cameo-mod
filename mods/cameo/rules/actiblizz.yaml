@@ -59,7 +59,7 @@ mcv.actibliz:
 		Name: Construction Rig (Actibliz)
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		BuildDurationModifier: 40
 		Description: Deploys into another Construction Yard.\n  Unarmed
@@ -392,21 +392,21 @@ scsciencefacility.actibliz:
 scengineeringbay.actibliz:
 	Inherits: terran_engineeringbay
 	Buildable:
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: terran_engineeringbay
 scarmory.actibliz:
 	Inherits: terran_armory
 	Buildable:
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: terran_armory
 scacademy.actibliz:
 	Inherits: terran_academy
 	Buildable:
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: terran_academy
@@ -428,7 +428,7 @@ sctemplararchives.actibliz:
 		Prerequisite: actiblizzprotoss
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Building, RABuilding
 		Description: Unlocks Protoss Technology.
 	RenderSprites:
@@ -444,7 +444,7 @@ scfleetbeacon.actibliz:
 		Prerequisite: Fleet Beacon
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: Starport, actiblizzprotoss, ~techlevel.high, !purebeam
+		Prerequisites: Starport, actiblizzprotoss, !purebeam
 		Queue: Building, RABuilding
 		Description: Unlocks Carrier and Purifier Beam support power.
 	RenderSprites:
@@ -460,7 +460,7 @@ scroboticssupportbay.actibliz:
 		Prerequisite: Robotics Support Bay
 	Buildable:
 		BuildPaletteOrder: 110
-		Prerequisites: driweap2, actiblizzprotoss, ~techlevel.medium
+		Prerequisites: driweap2, actiblizzprotoss
 		Queue: Building, RABuilding
 		Description: Unlocks Reaver.
 	RenderSprites:
@@ -491,7 +491,7 @@ scinfestedcom.actibliz:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: drihq3, ~techlevel.high, !zergnuke
+		Prerequisites: drihq3, !zergnuke
 		Queue: Building, RABuilding
 		Description: Unlocks Zerg Stuff.
 	RenderSprites:
@@ -590,7 +590,7 @@ scghost.actibliz:
 	Inherits: terran_ghost
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: Academy, Science Facility, ~techlevel.high, dribarr2
+		Prerequisites: Academy, Science Facility, dribarr2
 	RenderSprites:
 		Image: terran_ghost
 
@@ -656,7 +656,7 @@ drfury.actibliz:
 	Inherits: drfury
 	Inherits@SCUPGRADES: ^SCDRUPGRADES2
 	Buildable:
-		Prerequisites: driweap2, ~techlevel.medium, Armory
+		Prerequisites: driweap2, Armory
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: drfury
@@ -719,7 +719,7 @@ scbattlecruiser.actibliz:
 	Inherits: terran_battlecruiser
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: Science Facility, ~techlevel.high
+		Prerequisites: Science Facility
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: terran_battlecruiser
@@ -728,7 +728,7 @@ drdrone.actibliz:
 	Inherits: drdrone
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: drihq2, ~techlevel.medium
+		Prerequisites: drihq2
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: drdrone
@@ -737,7 +737,7 @@ drhades.actibliz:
 	Inherits: drhades
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: drihq3, ~techlevel.medium
+		Prerequisites: drihq3
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: drhades
@@ -746,7 +746,7 @@ scdragoon.actibliz:
 	Inherits: protoss_dragoon
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: actiblizzprotoss, ~techlevel.medium
+		Prerequisites: actiblizzprotoss
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: actidragoon
@@ -754,7 +754,7 @@ screaver.actibliz:
 	Inherits: protoss_reaver
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
-		Prerequisites: Robotics Support Bay, driweap2, ~techlevel.medium
+		Prerequisites: Robotics Support Bay, driweap2
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: actireaver
@@ -762,7 +762,7 @@ screaver.actibliz:
 sccarrier.actibliz:
 	Inherits: protoss_carrier
 	Buildable:
-		Prerequisites: Fleet Beacon, drihq3, ~techlevel.high
+		Prerequisites: Fleet Beacon, drihq3
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: acticarrier
@@ -775,7 +775,7 @@ scscout.actibliz:
 		Name: Imperial Scout
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.high, Fleet Beacon
+		Prerequisites: Fleet Beacon
 		Queue: Aircraft, RAAircraft
 		Description: Protoss fighter aircraft.\n Strong vs Aircraft
 	Armament@PRIMARY:

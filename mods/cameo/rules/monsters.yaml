@@ -275,7 +275,7 @@ RA2DEMON:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildDurationModifier: 50
-		Prerequisites: ~RA2DOOM, ~techlevel.medium, anyhq
+		Prerequisites: ~RA2DOOM, anyhq
 		Description: Slow powerful demon. Attacks in close combat.
 	Armament:
 		Weapon: demonSlice
@@ -478,7 +478,7 @@ RA2CYBORG:
 		Cost: 1800 #1000
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~techlevel.medium, ~RA2DOOM, ra2_soviets_industrialplant
+		Prerequisites: ~RA2DOOM, ra2_soviets_industrialplant
 		BuildDurationModifier: 100
 		BuildDuration: 720
 		Description: Cybernetic infantry\nMain anti-air unit of DOOM Russia\n  Strong vs Aircraft
@@ -505,7 +505,7 @@ RA2FLOATER:
 		Name: DOOM Floater
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium, ~RA2DOOM
+		Prerequisites: ~RA2DOOM
 		Description: Basic tank of DOOM Russia\nLeaves burning traces on ground\n  Strong vs Infantry, Light Vehicles
 		BuildPaletteOrder: 1
 	Valued:
@@ -546,7 +546,7 @@ RA2TRIPOD:
 		BuildPaletteOrder: 250
 		BuildDurationModifier: 100
 		BuildDuration: 1500
-		Prerequisites: ~techlevel.high, ~RA2DOOM, ra2_soviets_industrialplant
+		Prerequisites: ~RA2DOOM, ra2_soviets_industrialplant
 		BuildLimit: 3
 		Description: Alien War Hybrid but from hell.\nLimit: 3\n Strong vs Everything.
 	Valued:

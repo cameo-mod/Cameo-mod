@@ -435,7 +435,7 @@ CITYSWATVAN:
 	Inherits: CITYPOLICECAR
 	Buildable:
 		Description: Heavy police vehicle driving S.W.A.T. to their destination\nEquipped with Taser.\nCan carry up to 4 units\nSWAT Units inside are equipped with tasers
-		Prerequisites: citylibrary, citybank, ~techlevel.high
+		Prerequisites: citylibrary, citybank
 		BuildDurationModifier: 25
 	Valued:
 		Cost: 2000
@@ -1060,7 +1060,7 @@ CITYAIRPORT:
 		Name: Airport
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: Fire Department, Police Department, ~techlevel.high, !cityair
+		Prerequisites: Fire Department, Police Department, !cityair
 		Queue: Building, RABuilding
 		Description: Provides airborne support powers.
 	Building:
@@ -1990,7 +1990,7 @@ CITYSWAT:
 		DeathTypes: DefaultDeath
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: citylibrary, citybank, ~techlevel.high, Police.sc2k, RAPolice.sc2k
+		Prerequisites: citylibrary, citybank, Police.sc2k, RAPolice.sc2k
 		Queue: Vehicle, RAVehicle
 		Description: Elite law enforcement Team armed with silenced\nsubmachine guns and EMP grenades.\n Strong vs ground targets\n Weak vs Aircraft
 	Tooltip:
@@ -2120,7 +2120,7 @@ CITYSWATGL:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 30
-		Prerequisites: citylibrary, citybank, cityairport, ~techlevel.high
+		Prerequisites: citylibrary, citybank, cityairport
 		BuildDurationModifier: 50
 		Queue: Vehicle, RAVehicle
 		Description: Stealth Elite law enforcement equipped with silenced Sniper Rifle\nCan he upgraded to get Grenade Launcher\nStrong vs Infantry, Air

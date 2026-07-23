@@ -240,7 +240,7 @@ valentines_mcv:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 250
-		Prerequisites: valentine_church_workshop, ~techlevel.medium
+		Prerequisites: valentine_church_workshop
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Description: Deploys into another Valentine Base.\n  Unarmed
@@ -278,7 +278,7 @@ valentines_mcv_bot:
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
-		Prerequisites: valentine_church_workshop, ~techlevel.medium, ~botplayer, allowsValMCV
+		Prerequisites: valentine_church_workshop, ~botplayer, allowsValMCV
 
 valentine_chocolate_refinery:
 	Inherits: ^BaseBuilding
@@ -634,7 +634,7 @@ valentine_cupido_house:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high, !satanclawzhouse
+		Prerequisites: valentine_church_workshop, !satanclawzhouse
 		Queue: Building, RABuilding
 		Description: House of Cupido himself.
 		IconPalette: ra2
@@ -1122,7 +1122,7 @@ valentine_tower_ballista:
 		Name: Ballista Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_chocolate_refinery, ~techlevel.medium
+		Prerequisites: valentine_chocolate_refinery
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Tanks
 		BuildDuration: 1000
@@ -1174,7 +1174,7 @@ valentine_tower_double:
 		Name: Double Lovelaser Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.medium
+		Prerequisites: valentine_airfield
 		Queue: Defence, RADefence
 		Description: Powerful Ground Defense.\n Strong vs everything.
 		BuildDuration: 1250
@@ -1217,7 +1217,7 @@ valentine_e7:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1252,7 +1252,7 @@ valentine_ra2tany:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 		BuildDuration: 1000
 		BuildDurationModifier: 100
@@ -1303,7 +1303,7 @@ valentine_chlotus:
 		BuildPaletteOrder: 70
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry, RAInfantry
 		Description: Elite waifu.\n Can take control of buildings\n Can disable vehicles
 	Power:
@@ -1350,7 +1350,7 @@ valentine_315amanda:
 		BuildPaletteOrder: 120
 		BuildDuration: 3000
 		BuildDurationModifier: 100
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		BuildLimit: 1
 	Mobile:
 		Speed: 100
@@ -1565,7 +1565,7 @@ valovecraft:
 		BuildPaletteOrder: 50
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Aircraft that shoots powerful love arrows.\n
 	Valued:
 		Cost: 1500
@@ -1697,7 +1697,7 @@ loveletter:
 		BuildPaletteOrder: 50
 		BuildDurationModifier: 100
 		BuildDuration: 750
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Letter from a loved one.\nWhat might be in it?\nBetter open it fast!
 	Tooltip:
 		Name: Love Letter
@@ -1739,7 +1739,7 @@ giantcupido:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: Cupid himself. Don't mess with this one!
 		BuildDuration: 3000
 		BuildDurationModifier: 100
@@ -1900,7 +1900,7 @@ cute_kirov:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: valentine_airfield, ~techlevel.high
+		Prerequisites: valentine_airfield
 		Description: From Russia with love!
 		BuildDuration: 4500
 		BuildDurationModifier: 100
@@ -1946,7 +1946,7 @@ lovealienmob:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Some would argue that to be a furry, \nyou must think and talk like one. \nEven if you go to conventions, wear a fursuit, \ndraw the art, writes the stories etc but don't talk \nusing furry lingo, you're not a furry.
-		Prerequisites: valentine_airfield, ~techlevel.medium
+		Prerequisites: valentine_airfield
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		BuildLimit: 1
@@ -2282,7 +2282,7 @@ valentine_mod4tnkgirl:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Description: Mammoth Tank Girl fights "the Patriarchy" \nand those that body-shame sexy tanks like her
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -2397,7 +2397,7 @@ valentines_white_knight:
 		Name: White Knight
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: A person with low self esteem who combats this \nwith a unwavering need to aid others \nwho may or may not need it
 		BuildLimit: 1
@@ -2448,7 +2448,7 @@ valentines_giga_chad:
 		Name: Giga Chad
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: valentine_church_workshop, ~techlevel.high
+		Prerequisites: valentine_church_workshop
 		Queue: Infantry.Valentines, RAInfantry.Valentines
 		Description: Jeezus cwrist!
 		BuildLimit: 1

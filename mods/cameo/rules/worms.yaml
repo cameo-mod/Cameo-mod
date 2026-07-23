@@ -684,7 +684,7 @@ WCONCRETEDONKEY:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		Description: Provides Concrete Donkey support power.\nRequires power to operate.
 	Building:
@@ -1292,7 +1292,7 @@ WORMDYNAMITE:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.high
+		Prerequisites: anyhq
 		Queue: Infantry, RAInfantry
 		BuildDuration: 1000
 		BuildDurationModifier: 40
@@ -1706,7 +1706,7 @@ WMISSILELAUNCHER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		Description: Long range rocket artillery.\n  Strong vs all Ground units.
 	Mobile:
@@ -1746,7 +1746,7 @@ WCANNON:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 		Description: Slow and Weak tank.\n  Strong vs all Ground units.
 	Mobile:
@@ -1778,7 +1778,7 @@ WORMS_MCV:
 		Name: Worms Mobile Construction Vehicle
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 3750
 		BuildDurationModifier: 40
@@ -1877,7 +1877,7 @@ WORMS_UFO:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:
@@ -1940,7 +1940,7 @@ WORMS_APACHE:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, ~techlevel.medium
+		Prerequisites: hpad
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Missiles.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:

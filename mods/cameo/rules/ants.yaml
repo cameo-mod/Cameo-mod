@@ -657,7 +657,7 @@ tinynest2:
 		Name: Defence Nest
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: tinynest, breednest, ~techlevel.medium
+		Prerequisites: tinynest, breednest
 		Queue: Building, RABuilding
 		BuildDurationModifier: 750
 		BuildDuration: 100

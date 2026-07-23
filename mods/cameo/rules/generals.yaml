@@ -1788,7 +1788,7 @@ GLAMCV:
 		Name: Mobile Construction Vehicle (GLA)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: glpalace, ~techlevel.high, ~glaselected
+		Prerequisites: glpalace, ~glaselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -1825,7 +1825,7 @@ GLAMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: glpalace, ~techlevel.high, ~glaselected, ~botplayer, allowsMCV
+		Prerequisites: glpalace, ~glaselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: glmcv
 	Voiced:
@@ -2410,7 +2410,7 @@ glstorm:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: glpalace, ~techlevel.high, !scudstorm, ~normalscudstorm
+		Prerequisites: glpalace, !scudstorm, ~normalscudstorm
 		Queue: Building, RABuilding
 		Description: Provides Scud Storm support power.\nRequires power to operate.
 	Building:
@@ -2584,7 +2584,7 @@ glsite:
 		Name: Stinger Site
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: glbarracks, ~techlevel.medium, ~glstingerprereq
+		Prerequisites: glbarracks, ~glstingerprereq
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Selectable:
@@ -2872,7 +2872,7 @@ glamob:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Large armed crowd, armed with pistols and Molotovs.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
-		Prerequisites: glpalace, ~techlevel.medium, ~!anysgla
+		Prerequisites: glpalace, ~!anysgla
 	Tooltip:
 		Name: Angry Mob
 	UpdatesPlayerStatistics:
@@ -3550,7 +3550,7 @@ glbggy:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, glpalace, ~techlevel.medium, ~glaselected
+		Prerequisites: glweap, glpalace, ~glaselected
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -3792,7 +3792,7 @@ glscorpion:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, ~techlevel.medium, ~glscorpionprereq
+		Prerequisites: glweap, ~glscorpionprereq
 		Queue: Vehicle, RAVehicle
 		Description: Fast, light tank.\nCan be upgraded with missiles.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -3916,7 +3916,7 @@ glmaura:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: glweap, upmarauder, ~techlevel.medium, ~glmarauderprereq
+		Prerequisites: glweap, upmarauder, ~glmarauderprereq
 		Queue: Vehicle, RAVehicle
 		Description: Medium tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -4044,7 +4044,7 @@ gltractor:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~gltractorprereq
+		Prerequisites: glweap, ~gltractorprereq
 		Queue: Vehicle, RAVehicle
 		Description: Vehicle armed with toxins.\nCan deploy to contaminate an area.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Mobile:
@@ -4591,7 +4591,7 @@ GLSCUD:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~!selectglademo, ~!selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~!selectglademo, ~!selectglatoxin, ~normalscudlauncher
 		Description: Long-range ballistic missile launcher.\n  Strong vs ground targets\n  Weak vs Aircraft
 	Valued:
 		Cost: 1200
@@ -4674,7 +4674,7 @@ GLSCUD:
 glscud.exp:
 	Inherits: GLSCUD
 	Buildable:
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~selectglademo, ~!selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~selectglademo, ~!selectglatoxin, ~normalscudlauncher
 	MissileSpawnerMaster@1:
 		-RequiresCondition:
 	-MissileSpawnerMaster@2:
@@ -4690,7 +4690,7 @@ glscud.exp:
 glscud.tox:
 	Inherits: GLSCUD
 	Buildable:
-		Prerequisites: upscudlauncher, glpalace, ~techlevel.medium, ~!selectglademo, ~selectglatoxin, ~normalscudlauncher
+		Prerequisites: upscudlauncher, glpalace, ~!selectglademo, ~selectglatoxin, ~normalscudlauncher
 	MissileSpawnerMaster@2:
 		-RequiresCondition:
 	-MissileSpawnerMaster@1:
@@ -4760,7 +4760,7 @@ glbombtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: glweap, ~techlevel.medium, ~!sgla_toxin, ~!sgla_demo
+		Prerequisites: glweap, ~!sgla_toxin, ~!sgla_demo
 		Description: Suicide vehicle.\nCan be upgraded with different explosives.\n  Strong vs Infantry, Vehicles\n  Weak vs Aircraft
 	Health:
 		HP: 8000
@@ -5689,7 +5689,7 @@ CHNMCV:
 		Name: Mobile Construction Vehicle (China)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected
+		Prerequisites: chpropaganda, ~chselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -5730,7 +5730,7 @@ CHNMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~chselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -6661,7 +6661,7 @@ chsilo:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 135
-		Prerequisites: chpropaganda, ~techlevel.high, ~chselected, !chinanuke
+		Prerequisites: chpropaganda, ~chselected, !chinanuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nRequires power to operate.
 	Building:
@@ -6740,7 +6740,7 @@ chairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: chsupply, ~techlevel.medium, ~chselected, chweap
+		Prerequisites: chsupply, ~chselected, chweap
 		Description: Produces and reloads aircraft
 	Valued:
 		Cost: 1000
@@ -7242,7 +7242,7 @@ chbattle:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: chweap, ~techlevel.medium, ~!selectchinf
+		Prerequisites: chweap, ~!selectchinf
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 375
 		BuildDurationModifier: 100
@@ -7367,7 +7367,7 @@ charty:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, ~!selectchtanks, ~techlevel.medium, ~!anyschina
+		Prerequisites: chweap, ~!selectchtanks, ~!anyschina
 		Queue: Vehicle, RAVehicle
 		Description: Long-range artillery.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -7461,7 +7461,7 @@ choverlord:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, ~genoverlordprereq
+		Prerequisites: chpropaganda, ~genoverlordprereq
 		Queue: Vehicle, RAVehicle
 		Description: Heavy Chinese tank.\nCan be upgraded with addon towers.\n  Strong vs Vehicles
 	Mobile:
@@ -7645,7 +7645,7 @@ choverlord2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, ~genoverlord2prereq
+		Prerequisites: chpropaganda, ~genoverlord2prereq
 		Queue: Vehicle, RAVehicle
 	Health:
 		HP: 150000
@@ -7754,7 +7754,7 @@ chdragon:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 		Description: Flame tank.\nCan deploy to create a fire wall.\n  Strong vs Infantry\n  Weak vs Tanks
 	Mobile:
@@ -8009,7 +8009,7 @@ choutpost:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~genlisteningoutpostprereq
+		Prerequisites: chweap, chpropaganda, ~genlisteningoutpostprereq
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\nGarrisoned by 2 Tank Hunters.
 	Mobile:
@@ -8071,7 +8071,7 @@ choutpost2:
 		Name: Attack Outpost
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~genminigunnerprereq
+		Prerequisites: chweap, chpropaganda, ~genminigunnerprereq
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\nMounted with a propaganda speaker.\nHas space for up to 8 garrisoned infantry.\nGarrisoned by 3 Tank Hunters.
 	Health:
@@ -8113,7 +8113,7 @@ checm:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chweap, chpropaganda, ~techlevel.medium, ~!schina_tank
+		Prerequisites: chweap, chpropaganda, ~!schina_tank
 		Queue: Vehicle, RAVehicle
 		Description: Disables vehicles and jams incoming missiles.
 	Mobile:
@@ -8292,7 +8292,7 @@ chnukecann:
 		Name: Nuke Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: chpropaganda, ~techlevel.high, upnukecann, ~!selectchtanks, ~!selectchinf
+		Prerequisites: chpropaganda, upnukecann, ~!selectchtanks, ~!selectchinf
 		Queue: Vehicle, RAVehicle
 		Description: Slow heavy artillery.\n Strong vs ground targets\n Weak vs Aircraft
 	Mobile:
@@ -8436,7 +8436,7 @@ upnukecann:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Nuke Cannon.
-		Prerequisites: !upnukecann, ~techlevel.high, ~!selectchtanks, ~!selectchinf, rank1
+		Prerequisites: !upnukecann, ~!selectchtanks, ~!selectchinf, rank1
 	RenderSprites:
 		Image: chnukecann
 	ProvidesPrerequisite:
@@ -8799,7 +8799,7 @@ CHMIG:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.medium, ~genmigprereq
+		Prerequisites: chairport, ~genmigprereq
 		Description: Fighter armed with napalm missiles.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Valued:
 		Cost: 1200
@@ -8908,7 +8908,7 @@ CHMIG2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.medium, ~selectchatomic
+		Prerequisites: chairport, ~selectchatomic
 		Description: Fighter jet, can be upgraded with nuclear missiles.\n  Strong vs ground targets\n  Weak vs Aircraft
 	Valued:
 		Cost: 1000
@@ -9023,7 +9023,7 @@ chhelix:
 	Inherits@heliarmorupgrade: ^HeliArmorUpgrade
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: chairport, ~techlevel.medium, ~genhelixprereq
+		Prerequisites: chairport, ~genhelixprereq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter gunship upgradeable with addons.\n  Strong vs Infantry\n  Weak vs Aircraft
 	Valued:
@@ -9461,7 +9461,7 @@ chmnly:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 100
-		Prerequisites: ~disabled #anypower, ~techlevel.medium, ~chselected
+		Prerequisites: ~disabled #anypower, ~chselected
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -9879,7 +9879,7 @@ usaburton:
 	Buildable:
 		BuildPaletteOrder: 50
 		BuildLimit: 1
-		Prerequisites: usastrategy, ~techlevel.high, ~!anysusa, ~!botplayer
+		Prerequisites: usastrategy, ~!anysusa, ~!botplayer
 		Queue: Infantry, RAInfantry
 		Description: Elite commando.\nCan switch between close and long range modes\n  Strong vs Infantry, Buildings, Vehicles\n  Weak vs Air
 	Mobile:
@@ -9957,7 +9957,7 @@ usaburton:
 usaburton.bot:
 	Inherits: usaburton
 	Buildable:
-		Prerequisites: usastrategy, ~techlevel.high, ~!anysusa, ~botplayer
+		Prerequisites: usastrategy, ~!anysusa, ~botplayer
 	Armament@PRIMARY:
 		Weapon: USABurtonMG_AI
 		-RequiresCondition:
@@ -10377,7 +10377,7 @@ usattnk:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, usastrategy, ~techlevel.medium, ~!selectusalaser, ~!anysusa
+		Prerequisites: usaweap, usastrategy, ~!selectusalaser, ~!anysusa
 		Queue: Vehicle, RAVehicle
 		Description: USA siege weapon.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Mobile:
@@ -10460,7 +10460,7 @@ usacrusader:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!susa_super, ~!susa_laser, ~!susa_armor, ~!susa_air
+		Prerequisites: usaweap, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!susa_super, ~!susa_laser, ~!susa_armor, ~!susa_air
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -10507,7 +10507,7 @@ usacrusader2:
 		Name: Laser Crusader
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~selectusalaser
+		Prerequisites: usaweap, ~selectusalaser
 		Queue: Vehicle, RAVehicle
 		Description: General-purpose USA tank.\nRequires power to operate.\n  Strong vs Vehicles and Infantry
 	Mobile:
@@ -10551,7 +10551,7 @@ usapala:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!anysusa
+		Prerequisites: usaweap, upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, ~!anysusa
 		Queue: Vehicle, RAVehicle
 		Description: Heavy USA tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Mobile:
@@ -10618,7 +10618,7 @@ usasentry:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.medium, ~!susa_armor
+		Prerequisites: usaweap, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Cloaked scout and detector robot.\nCan be upgraded with a machinegun\n Strong vs Infantry when upgraded
 	Mobile:
@@ -10712,7 +10712,7 @@ usaavenger:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: usaweap, ~techlevel.high, usastrategy, ~!susa_armor
+		Prerequisites: usaweap, usastrategy, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Laser-based air defense system.\nIncreases accuracy and firepower of nearby units.\nDazzles ground targets.\n Strong vs Aircraft
 	Mobile:
@@ -10860,7 +10860,7 @@ usamicro:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usaweap, ~techlevel.high, usastrategy, ~!susa_laser, ~!susa_armor
+		Prerequisites: usaweap, usastrategy, ~!susa_laser, ~!susa_armor
 		Queue: Vehicle, RAVehicle
 		Description: Support vehicle able to disable buildings and fry infantry.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles
 	Mobile:
@@ -10921,7 +10921,7 @@ USAMCV:
 		Name: Mobile Construction Vehicle (USA)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: usastrategy, ~techlevel.medium, ~usaselected
+		Prerequisites: usastrategy, ~usaselected
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -10960,7 +10960,7 @@ USAMCV.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: usastrategy, ~techlevel.medium, ~usaselected, ~botplayer, allowsMCV
+		Prerequisites: usastrategy, ~usaselected, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: usamcv
 	Voiced:
@@ -11834,7 +11834,7 @@ usaairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: usasupply, ~techlevel.medium, ~usaselected, usaweap
+		Prerequisites: usasupply, ~usaselected, usaweap
 		Description: Produces and reloads aircraft
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -11962,7 +11962,7 @@ usacannon:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: usastrategy, ~techlevel.high, !particlecannon, ~usaselected
+		Prerequisites: usastrategy, !particlecannon, ~usaselected
 		Queue: Building, RABuilding
 		Description: Provides Particle Cannon support power.\nRequires power to operate.
 	Building:
@@ -12261,7 +12261,7 @@ usaraptor:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: usaairport, ~techlevel.high, ~!selectusaairforce, ~!anysusa
+		Prerequisites: usaairport, ~!selectusaairforce, ~!anysusa
 		Description: Multirole fighter.\n  Strong vs Aircraft, Vehicles
 	Valued:
 		Cost: 1400
@@ -12345,7 +12345,7 @@ usaraptor2:
 	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@detect: ^GenericAirDetector
 	Buildable:
-		Prerequisites: usaairport, ~techlevel.high, ~selectusaairforce, ~!anysusa
+		Prerequisites: usaairport, ~selectusaairforce, ~!anysusa
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -12412,7 +12412,7 @@ usastealth:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: usaairport, ~techlevel.high, upusastealth, ~!anysusa
+		Prerequisites: usaairport, upusastealth, ~!anysusa
 		Description: Cloaked bomber.\n  Strong vs Buildings, Vehicles\n  Weak vs Aircraft
 	Valued:
 		Cost: 1600
@@ -12709,7 +12709,7 @@ usacomanche:
 		BuildPaletteOrder: 50
 		BuildDuration: 375
 		BuildDurationModifier: 100
-		Prerequisites: usaairport, ~techlevel.high, ~!anysusa
+		Prerequisites: usaairport, ~!anysusa
 		Description: Helicopter gunship.\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 	Aircraft:
 		TurnSpeed: 7
@@ -12835,7 +12835,7 @@ usafirebase:
 		Dimensions: 2, 2
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: usabarracks, ~techlevel.medium, ~usaselected, ~!susa_laser
+		Prerequisites: usabarracks, ~usaselected, ~!susa_laser
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Garrisonable defensive structure.\n  Strong vs ground targets\n  Weak vs Aircraft
@@ -12931,7 +12931,7 @@ usafirebase:
 usafirebase.e1:
 	Inherits: usafirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~botplayer
+		Prerequisites: usabarracks, ~botplayer
 	Valued:
 		Cost: 1300
 	Cargo:
@@ -12940,7 +12940,7 @@ usafirebase.e1:
 usafirebase.e3:
 	Inherits: usafirebase
 	Buildable:
-		Prerequisites: usabarracks, ~techlevel.medium, ~botplayer
+		Prerequisites: usabarracks, ~botplayer
 	Valued:
 		Cost: 1600
 	Cargo:
@@ -13523,7 +13523,7 @@ upusapath:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows training of Pathfinders.
-		Prerequisites: !upusapath, ~techlevel.medium, ~!susa_armor, rank3, rank1
+		Prerequisites: !upusapath, ~!susa_armor, rank3, rank1
 	RenderSprites:
 		Image: usapath
 	ProvidesPrerequisite:
@@ -13537,7 +13537,7 @@ upusapala:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Paladin Tank.
-		Prerequisites: !upusapala, ~techlevel.medium, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, rank1, ~!susa_super, ~!susa_laser, ~!susa_air, ~!susa_armor
+		Prerequisites: !upusapala, ~!selectusalaser, ~!selectusaairforce, ~!selectusasuper, rank1, ~!susa_super, ~!susa_laser, ~!susa_air, ~!susa_armor
 	RenderSprites:
 		Image: usapala
 	ProvidesPrerequisite:
@@ -13551,7 +13551,7 @@ upusastealth:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Allows production of the Stealth Fighter.
-		Prerequisites: !upusastealth, ~techlevel.medium, rank1, ~!selectusaairforce, ~!anysusa
+		Prerequisites: !upusastealth, rank1, ~!selectusaairforce, ~!anysusa
 	RenderSprites:
 		Image: usastealth
 	ProvidesPrerequisite:
@@ -13565,7 +13565,7 @@ upusaspydrone:
 		BuildPaletteOrder: 200
 		Queue: Promotions
 		Description: Enables the deployment of Spy Drones.
-		Prerequisites: !upusaspydrone, ~techlevel.medium, rank1
+		Prerequisites: !upusaspydrone, rank1
 	RenderSprites:
 		Image: usaspydrone
 	ProvidesPrerequisite:
@@ -13751,7 +13751,7 @@ leangmcv:
 		Name: Mobile Construction Vehicle (Boss)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: chpropaganda, ~techlevel.high
+		Prerequisites: chpropaganda
 		Queue: Building, RABuilding
 		Description: Builds structures and provides radar.
 		BuildDuration: 1500
@@ -13792,7 +13792,7 @@ leangmcv.bot:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: chpropaganda, ~techlevel.high, ~botplayer, allowsMCV
+		Prerequisites: chpropaganda, ~botplayer, allowsMCV
 	RenderSprites:
 		Image: chmcv
 	Voiced:
@@ -13944,7 +13944,7 @@ leangairport:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 130
-		Prerequisites: leangsupply, ~techlevel.medium
+		Prerequisites: leangsupply
 	Production@NORMAL:
 		Produces: Aircraft
 	Production@CLASSICPRODUCTIONQUEUES:
@@ -14028,7 +14028,7 @@ leangsilo:
 		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: chairport, leangweap, ~techlevel.high, !chinanuke
+		Prerequisites: chairport, leangweap, !chinanuke
 		Queue: Building, RABuilding
 	RenderSprites:
 		Image: chsilo
@@ -14051,7 +14051,7 @@ leangraptor:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: usaraptor2
 	GrantConditionOnPrerequisite@upmigarmor:
@@ -14066,7 +14066,7 @@ leangmig:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 40
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: chmig
 
@@ -14075,7 +14075,7 @@ leanghelix:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: chhelix
 
@@ -14084,7 +14084,7 @@ leangaurora:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: chairport, ~techlevel.high
+		Prerequisites: chairport
 	RenderSprites:
 		Image: usaaurora
 	GrantConditionOnPrerequisite@upmigarmor:
@@ -14156,7 +14156,7 @@ leangkell:
 	Inherits@2: ^GeneralsUSAInfantry
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangstorm, ~techlevel.high
+		Prerequisites: leangstorm
 	RenderSprites:
 		Image: glkell
 
@@ -14165,7 +14165,7 @@ leanglotus:
 	Inherits@2: ^GeneralsUSAInfantry
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangsilo, ~techlevel.high
+		Prerequisites: leangsilo
 	RenderSprites:
 		Image: chlotus
 
@@ -14173,7 +14173,7 @@ leangburton:
 	Inherits: usaburton
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: leangcannon, ~techlevel.high
+		Prerequisites: leangcannon
 	RenderSprites:
 		Image: usaburton
 
@@ -14191,7 +14191,7 @@ leangttnk:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usattnk
@@ -14200,7 +14200,7 @@ leangpala:
 	Inherits: usapala
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, upusapala, ~techlevel.medium
+		Prerequisites: leangweap, upusapala
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usapala
@@ -14209,7 +14209,7 @@ leangsentry:
 	Inherits: usasentry
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usasentry
@@ -14218,7 +14218,7 @@ leangavenger:
 	Inherits: usaavenger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: leangweap, ~techlevel.medium
+		Prerequisites: leangweap
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: usaavenger
@@ -14227,7 +14227,7 @@ leangdragon:
 	Inherits: chdragon
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: chdragon
@@ -14255,7 +14255,7 @@ leanggtnk:
 leangoverlord:
 	Inherits: choverlord
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: choverlord
@@ -14269,7 +14269,7 @@ leangoverlord:
 leangbggy:
 	Inherits: glbggy
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: glbggy
@@ -14283,7 +14283,7 @@ leangbggy:
 leangbiker:
 	Inherits: glbiker
 	Buildable:
-		Prerequisites: ~techlevel.high
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: glbiker

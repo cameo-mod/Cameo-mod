@@ -519,7 +519,7 @@ ixian_supercomputer:
 # 	Health:
 # 		HP: 121000
 # 	Buildable:
-# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.smugglers
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~faction.smugglers
 # 		Description: Dropzone for quick reinforcements.\nEnables drop-off of supervehicles
 # 		BuildDuration: 1500
 # 		BuildDurationModifier: 100
@@ -540,7 +540,7 @@ ixian_supercomputer:
 # 	Health:
 # 		HP: 145000
 # 	Buildable:
-# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.corrino
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~faction.corrino
 # 		Description: Dropzone for quick reinforcements.\nEnables drop-off of Corrino's Special Vehicles
 # 		BuildDuration: 1500
 # 		IconPalette: d2kunit
@@ -786,7 +786,7 @@ ixian_rocketturret:
 # 		Name: Tamed Sandworm
 # 	Buildable:
 # 		BuildPaletteOrder: 4
-# 		Prerequisites: d2k_flesh_vat, ~faction.tleilaxu, ~techlevel.medium
+# 		Prerequisites: d2k_flesh_vat, ~faction.tleilaxu
 # 		Queue: Defence, RADefence
 # 		BuildDurationModifier: 50
 # 		BuildDuration: 1250
@@ -833,7 +833,7 @@ ixian_rocketturret:
 # 		Queue: Defence, RADefence
 # 		BuildPaletteOrder: 70
 # 		BuildDuration: 200
-# 		Prerequisites: d2k_barracks, ~faction.smugglers, ~techlevel.medium
+# 		Prerequisites: d2k_barracks, ~faction.smugglers
 # 		Description: Defensive structure. Explodes when an enemy unit moves over it.\n  Strong vs Tanks\n  Weak vs Infantry\n\n  Invisible to enemy.
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -867,7 +867,7 @@ ixian_rocketturret:
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: research_centre, ~techlevel.high, ~du_palace, !swpalace
+# 		Prerequisites: research_centre, ~du_palace, !swpalace
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 620
 # 		BuildDuration: 937

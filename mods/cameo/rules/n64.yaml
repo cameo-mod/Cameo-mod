@@ -928,7 +928,7 @@ N64HQGDI:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: n64procgdi, ~techlevel.medium
+		Prerequisites: n64procgdi
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1000,7 +1000,7 @@ N64HQNOD:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: n64procnod, ~techlevel.medium
+		Prerequisites: n64procnod
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -1160,7 +1160,7 @@ N64EYE:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !ionc
+		Prerequisites: anyhq, !ionc
 		Queue: Building, RABuilding
 		Description: Provides radar and Orbital Ion Cannon support power.\nRequires power to operate.
 	Building:
@@ -1293,7 +1293,7 @@ N64TMPL:
 		Prerequisite: anyhq
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: anyhq, ~techlevel.high, !nodnuke
+		Prerequisites: anyhq, !nodnuke
 		Queue: Building, RABuilding
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	Building:
@@ -1532,7 +1532,7 @@ N64ATWR:
 		Name: Advanced Guard Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Selectable:
@@ -2732,7 +2732,7 @@ N64ORCA:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium
+		Prerequisites: hpad, anyhq
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with AG Missiles.\n  Strong vs Buildings, Tanks\n  Weak vs Infantry
 	Aircraft:

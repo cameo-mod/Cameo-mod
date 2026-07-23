@@ -343,7 +343,7 @@ HQ.camea:
 		Name: Communications Center
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: raproc.camea, ~techlevel.medium
+		Prerequisites: raproc.camea
 		Queue: Building, RABuilding
 		Description: Provides radar and Air Strike support power.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Health:
@@ -413,7 +413,7 @@ RAFIX.camea:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 100
-		Prerequisites: vehicleproduction, ~techlevel.medium
+		Prerequisites: vehicleproduction
 		Description: Repairs vehicles for credits.
 	Valued:
 		Cost: 1200
@@ -446,7 +446,7 @@ NUK2.camea:
 		Name: Advanced Power Plant
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: anyhq, ~techlevel.medium
+		Prerequisites: anyhq
 		Queue: Building, RABuilding
 		Description: Provides more power, cheaper than the\nstandard Power Plant
 	RenderSprites:
@@ -457,7 +457,7 @@ stek.camea:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: vehicleproduction, anyhq, ~techlevel.high
+		Prerequisites: vehicleproduction, anyhq
 		Description: Provides Soviet advanced technologies.
 	Valued:
 		Cost: 1500
@@ -689,7 +689,7 @@ HOSP.camea:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 120
-		Prerequisites: stek.camea, ~techlevel.medium
+		Prerequisites: stek.camea
 		BuildLimit: 1
 		Description: Heals nearby infantry\nLimit: 1
 	Building:
@@ -711,7 +711,7 @@ ATWR.camea:
 	Inherits: td_gdi_advancedguardtower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: vehicleproduction, ~techlevel.high
+		Prerequisites: vehicleproduction
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: td_gdi_advancedguardtower
@@ -720,7 +720,7 @@ OBLI.camea:
 	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: vehicleproduction, ~techlevel.high
+		Prerequisites: vehicleproduction
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: td_nod_obeliskoflight
@@ -729,7 +729,7 @@ TSLA.camea:
 	Inherits: ra1_soviets_teslacoil
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: vehicleproduction, ~techlevel.high
+		Prerequisites: vehicleproduction
 		Queue: Defence, RADefence
 	RenderSprites:
 		Image: ra1_soviets_teslacoil
@@ -739,7 +739,7 @@ RAGUN.camea:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 	RenderSprites:
 		Image: ra1_allies_alliedgunturret
 
@@ -748,7 +748,7 @@ HBOX.camea:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: barracks, ~techlevel.medium
+		Prerequisites: barracks
 	RenderSprites:
 		Image: ra1_allies_camopillbox
 
@@ -757,7 +757,7 @@ RASAM.camea:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 100
-		Prerequisites: hq.camea, ~techlevel.medium
+		Prerequisites: hq.camea
 		Description: Anti-Air base defense.\nRequires power to operate.\n  Strong vs Aircraft\n  Weak vs Ground units
 	RenderSprites:
 		Image: ra1_soviets_samsite
@@ -767,7 +767,7 @@ GAP.camea:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 110
-		Prerequisites: stek.camea, ~techlevel.medium
+		Prerequisites: stek.camea
 		Description: Obscures the enemy's view with shroud.\nRequires power to operate.
 	RenderSprites:
 		Image: ra1_allies_gapgenerator
@@ -778,7 +778,7 @@ MAMMOTHBUNKER.camea:
 	Inherits@shape: ^2x2Shape
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Valued:
@@ -828,7 +828,7 @@ E7.camea:
 	Inherits: ra1_allies_tanya
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 	RenderSprites:
 		Image: ra1_allies_tanya
 
@@ -836,7 +836,7 @@ SHOK.camea:
 	Inherits: ra1_soviets_shocktrooper
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 	RenderSprites:
 		Image: ra1_soviets_shocktrooper
 
@@ -852,7 +852,7 @@ E1.para:
 RMBO.camea:
 	Inherits: RMBO
 	Buildable:
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: RMBO
@@ -861,7 +861,7 @@ MECH.camea:
 	Inherits: ra1_allies_mechanic
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: hq.camea, ~techlevel.medium
+		Prerequisites: hq.camea
 	RenderSprites:
 		Image: ra1_allies_mechanic
 
@@ -869,7 +869,7 @@ JEEP.camea:
 	Inherits: td_gdi_humvee
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: td_gdi_humvee
 
@@ -877,7 +877,7 @@ BIKE.camea:
 	Inherits: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: td_nod_reconbike
 
@@ -885,7 +885,7 @@ BIKE.camea:
 	Inherits: ra1_allies_alliedlighttank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: ra1_allies_alliedlighttank
 
@@ -893,7 +893,7 @@ MTNK.camea:
 	Inherits: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: td_gdi_battletank
 
@@ -901,7 +901,7 @@ MTNK.camea:
 	Inherits: ra1_soviets_heavytank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_heavytank
 
@@ -909,14 +909,14 @@ V2RL.camea:
 	Inherits: ra1_soviets_v2rocketlauncher
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: hq.camea, ~techlevel.medium
+		Prerequisites: hq.camea
 	RenderSprites:
 		Image: ra1_soviets_v2rocketlauncher
 
 FTNK.camea:
 	Inherits: td_nod_flametank
 	Buildable:
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_nod_flametank
@@ -941,7 +941,7 @@ TTNK.camea:
 	Inherits: ra1_soviets_teslatank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: hq.camea, ~techlevel.high
+		Prerequisites: hq.camea
 	RenderSprites:
 		Image: ra1_soviets_teslatank
 
@@ -949,7 +949,7 @@ CTNK.camea:
 	Inherits: ra1_allies_chronotank
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 	RenderSprites:
 		Image: ra1_allies_chronotank
 
@@ -970,7 +970,7 @@ DTRK.camea:
 	Inherits: ra1_soviets_nukedemotruck
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: mslo.camea, ~techlevel.high
+		Prerequisites: mslo.camea
 	RenderSprites:
 		Image: ra1_soviets_nukedemotruck
 
@@ -1002,7 +1002,7 @@ RAHELI.camea:
 	Inherits: ra1_allies_longbow
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: ra1_allies_longbow
 
@@ -1010,14 +1010,14 @@ HIND.camea:
 	Inherits: ra1_soviets_hindattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_hindattackhelicopter
 
 ORCA.camea:
 	Inherits: td_gdi_orca
 	Buildable:
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: td_gdi_orca
@@ -1026,7 +1026,7 @@ YAK.camea:
 	Inherits: ra1_soviets_yakscoutplane
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 	RenderSprites:
 		Image: ra1_soviets_yakscoutplane
 
@@ -1034,7 +1034,7 @@ MIG.camea:
 	Inherits: ra1_soviets_migattackbomber
 	Buildable:
 		Queue: Aircraft, RAAircraft
-		Prerequisites: stek.camea, ~techlevel.high
+		Prerequisites: stek.camea
 	RenderSprites:
 		Image: ra1_soviets_migattackbomber
 
@@ -1042,7 +1042,7 @@ TRAN.camea:
 	Inherits: TRAN
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
-		Prerequisites: ~techlevel.medium
+		Prerequisites: 
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:

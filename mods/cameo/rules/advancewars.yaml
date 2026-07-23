@@ -4397,7 +4397,7 @@ mcv.orange:
 		Name: Mobile Construction Vehicle (Orange Star)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, ~awselected
+		Prerequisites: awlab, ~awselected
 		Queue: Vehicle, RAVehicle
 		Description: Builds structures and provides radar. \n Limit of 5
 		BuildDuration: 1500
@@ -4489,7 +4489,7 @@ mcv.bluemoon:
 		Name: Mobile Construction Vehicle (Blue Moon)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.bluemoon
@@ -4503,7 +4503,7 @@ mcv.yellowcomet:
 		Name: Mobile Construction Vehicle (Yellow Comet)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.yellowcomet
@@ -4517,7 +4517,7 @@ mcv.greenearth:
 		Name: Mobile Construction Vehicle (Green Earth)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.greenearth
@@ -4531,7 +4531,7 @@ mcv.blackhole:
 		Name: Mobile Construction Vehicle (Black Hole)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.blackhole
@@ -4545,7 +4545,7 @@ mcv.rubinelle:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.rubinelle
@@ -4557,7 +4557,7 @@ mcv.ids:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.ids
@@ -4569,7 +4569,7 @@ mcv.newrubinelle:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.newrubinelle
@@ -4581,7 +4581,7 @@ mcv.lazurian:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.lazurian
@@ -4593,7 +4593,7 @@ mcv.alliedn:
 		Name: Mobile Construction Vehicle (Days of Ruins)
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, ~techlevel.high, awselected, allowsMCV
+		Prerequisites: awlab, awselected, allowsMCV
 		Queue: Vehicle, RAVehicle
 	Transforms:
 		IntoActor: hq.alliedn
@@ -5872,7 +5872,7 @@ awlab:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: vehicleproduction, ~techlevel.high
+		Prerequisites: vehicleproduction
 		Description: Provides advanced technologies.
 	Valued:
 		Cost: 2000
@@ -6038,7 +6038,7 @@ awsilo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awsilol, ~techlevel.high
+		Prerequisites: awlab, !awsilol
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 2500
@@ -6110,7 +6110,7 @@ awvolcano:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awvolcanol, ~techlevel.high
+		Prerequisites: awlab, !awvolcanol
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -6164,7 +6164,7 @@ awsupermissile:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awsupermissile1, ~techlevel.high, ~classicblackhole
+		Prerequisites: awlab, !awsupermissile1, ~classicblackhole
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -6229,7 +6229,7 @@ awbigcrystal:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 200
-		Prerequisites: awlab, !awbigcrystal1, ~techlevel.high, ~boltguard
+		Prerequisites: awlab, !awbigcrystal1, ~boltguard
 		Description: Provides Tactical Missiles
 	Valued:
 		Cost: 5000
@@ -10076,7 +10076,7 @@ awmob:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		Description: Large armed crowd, armed with pistols and Molotovs.\n  Strong vs Buildings, Infantry\n  Weak vs Vehicles, Aircraft
-		Prerequisites: ~selectkindle, ~techlevel.medium
+		Prerequisites: ~selectkindle
 	Tooltip:
 		Name: Urban Blight
 	UpdatesPlayerStatistics:
