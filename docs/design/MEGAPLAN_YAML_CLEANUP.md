@@ -72,8 +72,9 @@ python tools\audit\analyze_check_yaml.py docs\audit\check-yaml-baseline.txt
 **Effort: S (30 min)**
 
 1. ✅ Root cause: `^upgrade.template` defines `Interactable:`, `^promotion_upgrade.template` inherits it and adds `Selectable:`
-2. ✅ Fix: added `-Interactable:` to `^promotion_upgrade.template` in `defaults.yaml`
+2. ✅ Fix: removed `Interactable:` from `^upgrade.template` (root cause), removed `-Interactable:` workaround from `^promotion_upgrade.template`
 3. ✅ 242 promotion actors fixed (236 from content packs + 6 bridges are separate minor issue)
+4. ✅ **Rule enforced:** Never have both `Interactable` and `Selectable` on the same actor. Fix at the root template, not in children. See `tools/audit/audit_yaml_lint_rules.py`
 
 ### Phase 3: Missing FTL Keys (~6,717 warnings → ~4,327 remaining) — ⏳ PARTIAL
 
@@ -96,26 +97,37 @@ This is the largest category. Strategy:
    - ✅ Removed `SpawnActorOnDeath@Scraps` from `^Vehicle` (referenced `glscrapcrate` from unloaded `generals.yaml`)
    - ✅ Removed `SpawnActorOnDeath@Contaminator/Assimilator/ZombieInfect/QuestionMutate/Wolfestein` from `^Infantry` (referenced `ordos_contaminator`, `drassimilator`, `civzombie.infect`, `dtmutant`, `wolfe3` from unloaded files)
    - ✅ Removed `SpawnActorOnDeath@2100ResearchSteal` from 3 templates (referenced `2100artifact` from unloaded `wz2100.yaml`)
+   - **NOTE:** `ordos_contaminator` was incorrectly removed and later restored — it IS loaded via ContentPacks/D2k/Ordos. Always verify actor loading status before removing.
    - **NOTE:** When content packs are loaded, these `SpawnActorOnDeath` blocks should be re-added via template overrides in the content pack YAML
-2. **RepairableInfo/RepairableNear missing actors** (~1,800 unique) — ⏳ TODO
-3. **PassengerInfo missing actors** (~312 unique) — ⏳ TODO
-4. **Crate ExcludedActorType** (~135 unique) — ⏳ TODO
-5. **TransformsIntoRepairable** (~74 unique) — ⏳ TODO
+2. **RepairableInfo/RepairableNear missing actors** (~1,800 unique) — ✅ DONE
+   - ✅ Removed non-existent repair actors from `^HospitalHealable` (`drfghosp`, `drihosp`, `drterhosp`)
+   - ✅ Removed non-existent naval repair actors from `^Ship` (`tsntyard`, `tsgtyard`, `cra2gayard`, etc.)
+   - ✅ Replaced `fix` in `^Conyard` `TransformsIntoRepairable` with full valid list
+   - ✅ Put full `RepairActors` list in `^Conyard` template, removed per-faction overrides from 4 TS ContentPack conyards
+3. **PassengerInfo missing actors** (~312 unique) — ✅ DONE
+   - ✅ Removed `susamedivacblackhawk` from `Passenger.CargoConditions` in `^DefaultInfantry` (from unloaded `shockwave.yaml`)
+4. **Crate ExcludedActorType** (~135 unique) — ✅ DONE
+   - ✅ Removed non-existent actors from `^NonClonableActors` `ExcludedActorTypes` in `misc.yaml`
+5. **TransformsIntoRepairable** (~74 unique) — ✅ DONE
+   - ✅ Replaced invalid `RepairActors` in 4 TS ContentPack conyards with valid list (now inherited from `^Conyard` template)
+   - ✅ **Rule enforced:** `RepairActors` lists belong in templates, not duplicated per-faction. See `tools/audit/audit_yaml_lint_rules.py`
 
-### Phase 5: Unresolved Prerequisites (~79 unique → 0)
+### Phase 5: Unresolved Prerequisites (~79 unique → 0) — ✅ DONE
 
 **Effort: M (one session)**
 
-1. `~wip-content` — either provide via a dummy actor or remove from buildable prereqs
-2. `~disable` — same approach
-3. `~wip` — same
-4. `latinsyndicate_defensebureau` — define this building or fix references
-5. `~construction_yard.atreides` and other D2k faction prereqs — provide or remove
-6. `~EDEN_FACTORY_CONSUMER` — provide or remove
-7. `!droppod` — provide or remove
-8. `~techlevel.medium/high` — provide or remove
-9. `tsproc`, `~ra2fact` — provide or remove
-10. `steelconsortium_geothermalreactor` — define or fix
+**Key discovery:** The linter (`LintBuildablePrerequisites.cs` line 52) exempts ANY prereq starting with `~disabled` (case-sensitive, ordinal). This is the correct way to gate actors as permanently unbuildable.
+
+1. ✅ Renamed `~wip-content` → `~disabled-wip-content` (241 replacements across 55 files)
+2. ✅ Renamed `~disable` → `~disabled` (linter auto-exempts `~disabled*` prefix)
+3. ✅ Renamed `~wip` → `~disabled-wip`
+4. ✅ Renamed `~unbuildable` → `~disabled-unbuildable`
+5. ✅ Added `ProvidesPrerequisite:` to `latinsyndicate_defensebureau` (actor exists but didn't provide its own prereq)
+6. ✅ Added `ProvidesPrerequisite:` to `steelconsortium_geothermalreactor` (same)
+7. ✅ Added `ProvidesPrerequisite:` to `tkm_t30`, `tkm_sandmarine`, `tkm_bigshiee` (needed for `~!` negation prereqs)
+8. ⏳ Remaining: `~construction_yard.atreides`, `~faction.harkonnen`, `~EDEN_FACTORY_CONSUMER`, `!droppod`, `~techlevel.medium/high`, `tsproc`, `~ra2fact` — these are from unloaded files or genuinely missing
+
+**Rule enforced:** Always use `~disabled*` prefix for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`. See `tools/audit/audit_yaml_lint_rules.py`
 
 ### Phase 6: Unused Granted Conditions (~1,600 unique → 0)
 
@@ -190,3 +202,20 @@ This is achievable but requires sustained effort across multiple sessions. The b
 | 2026-07-23 | Phase 3 | `9ac9e8148` | ~-2,390 warnings (450 simple FTL keys added) |
 | 2026-07-23 | Phase 4 | `b650766d9` | ~-184,509 errors (SpawnActorOnDeath refs to unloaded actors) |
 | 2026-07-23 | Phase 1 | `13e00fee6` | ~-2,847 errors (palette reference fixes) |
+| 2026-07-23 | Phase 4 | `eda48914b` | RepairActors, CargoConditions, ExcludedActorTypes cleanup |
+| 2026-07-23 | Phase 4 | `f6b876358` | Restore ordos_contaminator, move RepairActors to ^Conyard template |
+| 2026-07-23 | Phase 2 | `ed5b9cbca` | Fix Interactable at root (^upgrade.template) instead of child patch |
+| 2026-07-23 | Phase 5 | (pending) | ~disabled* rename (241 replacements), ProvidesPrerequisite additions |
+
+## Enforcement
+
+The following audit script enforces the rules learned during cleanup:
+```
+python tools/audit/audit_yaml_lint_rules.py
+```
+
+Checks:
+1. No banned gating prereqs (`~wip`, `~disable`, `~unbuildable`) — must use `~disabled*` prefix
+2. No Interactable + Selectable conflicts on same actor
+3. No duplicated RepairActors lists in ContentPack actors (should inherit from template)
+4. No non-disabled gating prereqs in defaults.yaml
