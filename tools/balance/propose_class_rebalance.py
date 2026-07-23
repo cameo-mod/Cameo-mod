@@ -178,15 +178,24 @@ def nudge_ranges(rows, lo: int, hi: int):
                 r["rng"] = max(lo, min(hi, r["rng"] + direction * 10))
 
 
+def _spd_snap(r, val, lo, hi):
+    """Clamp Speed to band and snap to the row's step — a multiple of 5 for
+    vehicle-turn-rate units (turn = speed/5), unchanged (step 1) for foot."""
+    step = r.get("spd_step", 1)
+    val = max(lo, min(hi, val))
+    if step > 1:
+        val = int(round(val / step)) * step
+    return int(max(lo, min(hi, val)))
+
+
 def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=1):
-    # Speed step: 1 for infantry, 5 for vehicles/aircraft/ships (turn = speed/5),
-    # maintainer 2026-07-22. HP step is always 1000.
-    specs = [("hp", 1000, hp_lo, hp_hi), ("spd", spd_step, spd_lo, spd_hi)]
-    for key, step, l, h in specs:
-        # initial distribution
+    # HP steps by 1000. Speed steps PER-ROW: 1 for foot infantry, 5 for
+    # vehicle-turn-rate units (also snapped to a multiple of 5). maintainer 2026-07-22.
+    # --- HP: uniform step 1000 ---
+    for l, h, step in ((hp_lo, hp_hi, 1000),):
         groups = {}
         for r in rows:
-            groups.setdefault(r[key], []).append(r)
+            groups.setdefault(r["hp"], []).append(r)
         for group in groups.values():
             group = [r for r in group if not r.get("protected")]
             if len(group) <= 1:
@@ -195,14 +204,10 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=
             offsets = [i - n // 2 for i in range(n)]
             group.sort(key=lambda r: r["actor"])
             for r, off in zip(group, offsets):
-                r[key] = int(round(r[key] + off * step))
-                r[key] = max(l, min(h, r[key]))
-        # clamp cleanup
+                r["hp"] = max(l, min(h, int(round(r["hp"] + off * step))))
         for _ in range(100):
-            dupes = {}
-            for r in rows:
-                dupes.setdefault(r[key], []).append(r)
-            dupes = {k: v for k, v in dupes.items() if len(v) > 1}
+            dupes = {k: v for k, v in
+                     _group_by(rows, "hp").items() if len(v) > 1}
             if not dupes:
                 break
             for group in dupes.values():
@@ -210,8 +215,36 @@ def nudge_hp_spd(rows, hp_lo=1000, hp_hi=100000, spd_lo=48, spd_hi=72, spd_step=
                 for i, r in enumerate(group):
                     if r.get("protected"):
                         continue
-                    direction = 1 if i % 2 == 0 else -1
-                    r[key] = max(l, min(h, r[key] + direction * step))
+                    r["hp"] = max(l, min(h, r["hp"] + (1 if i % 2 == 0 else -1) * step))
+    # --- Speed: per-row step; snap turn-rate units to a multiple of 5 first ---
+    for r in rows:
+        if not r.get("protected"):
+            r["spd"] = _spd_snap(r, r["spd"], spd_lo, spd_hi)
+    for _ in range(300):
+        dupes = {k: v for k, v in _group_by(rows, "spd").items() if len(v) > 1}
+        if not dupes:
+            break
+        moved = False
+        for group in dupes.values():
+            group.sort(key=lambda r: (r.get("protected", False), r["actor"]))
+            for i, r in enumerate(group):
+                if i == 0 or r.get("protected"):
+                    continue  # keep one occupant; move the rest by their own step
+                direction = 1 if i % 2 == 1 else -1
+                nv = _spd_snap(r, r["spd"] + direction * r.get("spd_step", 1),
+                               spd_lo, spd_hi)
+                if nv != r["spd"]:
+                    r["spd"] = nv
+                    moved = True
+        if not moved:
+            break
+
+
+def _group_by(rows, key):
+    groups = {}
+    for r in rows:
+        groups.setdefault(r[key], []).append(r)
+    return groups
 
 
 def load_class_rows(cls: str):
@@ -303,6 +336,14 @@ def load_class_rows(cls: str):
                 # audit_exempt (soft) units are balanced to Δ≤1 but skipped by the
                 # uniqueness enforcement (support-power spawns like frank/undead).
                 row["soft"] = bool(design.get("audit_exempt")) and not is_protected
+                # Vehicle turn-rate logic (turn = speed/5) → Speed MUST be a
+                # multiple of 5. True (foot) infantry turn instantly and may step
+                # Speed by 1. Detected by a defined Mobile.TurnSpeed (maintainer
+                # 2026-07-22): this covers actual vehicles AND the Cabal cyborgs /
+                # FutureTech droids that use vehicle locomotion, while zerglings
+                # etc. (chem locomotor but no TurnSpeed) stay foot-stepped.
+                row["vehicle_turnrate"] = bool(u.get("turn_speed"))
+                row["spd_step"] = 5 if row["vehicle_turnrate"] else 1
                 row["arm_rng"] = fnum(arm.get("range")) or 0
                 # offensive warheads on the primary weapon (2000-grid split target)
                 offensive = [w for w in arm.get("warheads", [])
@@ -344,6 +385,26 @@ def solve_target_dps(spec, cost, hp, spd, rng, special, tech_tier):
         else:
             lo = mid
     return (lo + hi) / 2
+
+
+def solve_target_speed(spec, cost, hp, rng, dps, special, tech_tier, lo, hi):
+    """Speed giving price == cost at fixed (hp, rng, dps). Price rises with
+    speed, so bisect; clamp to [lo, hi]. Used as a fine (±1) Δ lever on foot
+    infantry after DPS+range are set."""
+    def pr(s):
+        return _price(spec, hp, s, rng, dps, special, tech_tier)
+    if pr(lo) >= cost:
+        return lo
+    if pr(hi) <= cost:
+        return hi
+    a, b = lo, hi
+    for _ in range(60):
+        mid = (a + b) / 2
+        if pr(mid) > cost:
+            b = mid
+        else:
+            a = mid
+    return (a + b) / 2
 
 
 def decompose_dps(target_dps, base_dps, cur_sum, n_wh):
@@ -448,6 +509,28 @@ def rebalance_class(cls: str):
         if band_lo <= r0 <= band_hi:
             r["rng"] = r0
     nudge_ranges(rows, band_lo, band_hi)   # re-unique after snapping
+    # 2c. Speed fine-tune (FOOT infantry only, step 1): squeeze any member still
+    #     off Δ0 — the maintainer allows Speed±1 on foot infantry as a fine price
+    #     lever. Turn-rate units keep multiples of 5 (too coarse) and are left.
+    taken_spd = {r["spd"] for r in rows}
+    for r in rows:
+        if (r["protected"] or r.get("soft") or r.get("over_priced")
+                or r.get("spd_step", 1) != 1):
+            continue
+        d = _price(spec, r["hp"], r["spd"], r["rng"], r["dps_eff"],
+                   r["special"], r["tech_tier"]) - r["cost"]
+        if abs(d) <= 1:
+            continue
+        ideal = int(round(solve_target_speed(
+            spec, r["cost"], r["hp"], r["rng"], r["dps_eff"],
+            r["special"], r["tech_tier"], spd_lo, spd_hi)))
+        # pick nearest unused speed to ideal (keep speed uniqueness)
+        taken_spd.discard(r["spd"])
+        for cand in sorted(range(spd_lo, spd_hi + 1), key=lambda s: (abs(s - ideal), s)):
+            if cand not in taken_spd:
+                r["spd"] = cand
+                break
+        taken_spd.add(r["spd"])
     # 3. Effective-damage-per-shot uniqueness (skips protected + soft)
     unique_dmg_per_shot(rows)
     # 4. Prices / deltas

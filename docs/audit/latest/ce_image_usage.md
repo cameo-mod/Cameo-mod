@@ -21,10 +21,10 @@ tsmcnealmechdrop: ALSO-USED (1)
 tsdroppod: ALSO-USED (1)
   mods\cameo\weapons\tiberiansun.yaml:1538: 		Image: tsdroppod
 hakurei_giphy: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:927: 		Image: hakurei_giphy
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:931: 		Image: hakurei_giphy
   mods\cameo\sequences\misc.yaml:4362: 		Filename: hakurei_giphy.shp
 hakurei_dream: ALSO-USED (2)
-  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:916: 		Image: hakurei_dream
+  mods\cameo\ContentPacks\RedAlert\Japan\yaml\weapons.yaml:920: 		Image: hakurei_dream
   mods\cameo\sequences\misc.yaml:4354: 		Filename: hakurei_dream.shp
 ra2corpse: CE-ONLY
 wc2_effect_sparkle: ALSO-USED (5)

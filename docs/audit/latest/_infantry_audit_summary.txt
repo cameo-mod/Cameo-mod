@@ -1,0 +1,201 @@
+
+=== stat_formulas.md ===
+��# audit_stat_formulas ��� house stat formulas
+
+Violations: **788** across 1884 roster actors (reference-clean units: gdiarcher, raider.ordos)
+
+
+## F1 ��� Repairable.HpPerStep ��� HP/20  (40)
+
+| actor | actual | expected |
+|---|---|---|
+| forgotten_scoopertank | HpPerStep 10000 | expected 12500 (HP 250000/20) |
+| futuretech_beehivedronecarrier | HpPerStep 6500 | expected 6250 (HP 125000/20) |
+| ixian_empbomber | HpPerStep 5555 | expected 5550 (HP 111000/20) |
+| japan_coreairfield | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_corebarracks | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_corepowerplant | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_coreradar | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_corerefinery | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_coreservicedepot | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_coretechcenter | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| japan_corewarfactory | HpPerStep 15000 | expected 2500 (HP 50000/20) |
+| naxis_bmwbike | HpPerStep 4125 | expected 1100 (HP 22000/20) |
+| naxis_imperialturbotank | HpPerStep 3125 | expected 4125 (HP 82500/20) |
+| naxis_nokana | HpPerStep 3125 | expected 22500 (HP 450000/20) |
+| naxis_oldtank | HpPerStep 7875 | expected 5500 (HP 110000/20) |
+| naxis_shoekarn | HpPerStep 10000 | expected 7500 (HP 150000/20) |
+| naxis_sturmtiger | HpPerStep 2000 | expected 12500 (HP 250000/20) |
+| naxis_transportzepp...
+
+=== balance_drift.md ===
+��# audit_balance_drift � yaml vs committed balance ledger
+
+_clean_ � 32 ledgers match the live rules exactly.
+
+...
+
+=== min_range.md ===
+��# Minimum range audit
+
+
+## Weapons with MinRange != round(Range/5) to nearest step of 5
+
+| Weapon | Range | MinRange | Expected MinRange |
+|---|---|---|---|
+| MagicOrbHailstormSpawner | 10000 | 5000 | 2000 |
+| MagicOrbHailstormSpawner2 | 10000 | 5000 | 2000 |
+| ZeroFighterChainGun | 6615 | 1323 | 1325 |
+| ZeroFighterChainGunWaveforce | 6615 | 1323 | 1325 |
+| V2ExplodeIrak | 14110 | 2822 | 2820 |
+| SCUDIrak | 14110 | 2822 | 2820 |
+| BallistaSingleShotAir | 9214 | 1500 | 1845 |
+| BallistaSingleShotAirEnergized | 9214 | 1500 | 1845 |
+| BallistaMultiShot | 13515 | 2703 | 2705 |
+| BallistaMultiShotEnergized | 13515 | 2703 | 2705 |
+| BallistaTowerMultiShot | 9214 | 2703 | 1845 |
+| BallistaTowerMultiShotEnergized | 9214 | 2703 | 1845 |
+| ZeroFighterArrows | 6615 | 1323 | 1325 |
+| ZeroFighterArrowsEnergized | 6615 | 1323 | 1325 |
+| NanoArtilleryAG | 7777 | 1111 | 1555 |
+| WaveArtilleryImpact | 5120 | 1 | 1025 |
+| WaveTurretImpact | 5120 | 1 | 1025 |
+| SiegeMortar | 10830 | 2166 | 2165 |
+| SiegeMortarExplode | 10830 | 2166 | 2165 |
+| SiegeMortarThermobaric | 10830 | 2166 | 2165 |
+| SiegeMortarThermobaricExplode | 10830 | 2166 | 2165 |
+| v1rockets | 9595 | 1919 | 1920 |
+| v1rocketsThermobaric | 9595 | 1919 | 1920 |
+| GradRockets | 13820 | 2764 | 2765 |
+| GradHeavyRockets | 13820 | 2764 | 2765 |
+| SCUD | 14110 | 2822 | 2820 |
+| SCUDThermobaric | 14110 | 2822 | 2820 |
+| SCUDTesla | 14110 | 2822 | 2820 |
+| ArmoredYakChainGun | 6460 | 1292 | 1290 |
+| I...
+
+=== outliers.md ===
+��# audit_outliers ��� systemic numeric drift (B9)
+
+(trait,field) distributions sampled: **18** ��� robust outliers (top 25 per field): **175**, selection bounds > 5120: **0**
+
+
+## Hard screen ��� Selectable bounds above the 5x5-cell maximum
+
+_none found_
+
+
+## Robust outliers per (trait, field), |z| > 8
+
+| trait.field | actor | value | median | robust z |
+|---|---|---|---|---|
+| Aircraft.CruiseAltitude | INVISIBLEPLANE | 9000 | 2160 | 11.5 |
+| Aircraft.TurnSpeed | japan_rocketangel_husk | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | ra2rock.husk | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | yrlunr.husk | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | litt_husk.nax | 160 | 20 | 18.9 |
+| Aircraft.TurnSpeed | cabal_overkill_gunship_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_hunter_drone_carrier_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_hunter_drone_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_hunterkillermk1_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | cabal_cyborg_assassin_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | ts_nod_bansheefighter_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | ts_nod_harpy_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | ts_gdi_carryall | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | ts_gdi_orcafighter_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | ts_gdi_carryall_husk | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | forgotten_carryall | 80 | 20 | 8.1 |
+| Aircraft.TurnSpeed | forgotten_wasp | 80 | 20 | 8.1 |
+| Aircraft.TurnS...
+
+=== weapon_uniqueness.md ===
+��# Weapon uniqueness (DESIGN.md ,%�10 ��� faction identity)
+
+damaging armament weapons checked: 1394; W1 same-faction 34, W2 cross-faction 34, W3 carrier-only 101
+
+
+## W1 ��� same faction, distinct actors, identical weapon (34)
+
+| weapon | faction(s) | actors |
+|---|---|---|
+| asianflamerturret | asianalliance | asianalliance_asianflametrooper, asianalliance_asiansentryflamer |
+| asianrailtank2 | asianalliance | asianalliance_heavyrailguntank, asianalliance_railguntank |
+| bcyamatocannon | terran | terran_battlecruiser, terran_phobos |
+| cabalengineerrepairbeam | cabal | cabal_engineer, cabal_repair_drone |
+| d2k_apc_rocket | ordos | ordos_apc, ordos_dustdrone |
+| d2k_apc_rocket_aa | ordos | ordos_banshee, ordos_laboratorycrawler |
+| d2k_bazooka2 | harkonnen, ixian, ordos | heavy_rocket_raider.ixian, rocket_raider.ixian |
+| d2k_rocket_trooper | harkonnen, ixian, ordos | ixian_rockettrooper, ordos_rockettrooper, trooper |
+| futuremicrotorpedos | futuretech | futuretech_phalanxwip, futuretech_riptideacv |
+| incendiaryyakchaingun | ra1_soviets | ra1_soviets_nuclearyak, ra1_soviets_yakscoutplane |
+| jimraynormachinegun | terran | terran_jimraynor, terran_pythean |
+| laboratory_bioball | ordos | ordos_banshee, ordos_laboratorycrawler |
+| light_inf_lmg | harkonnen, ixian, ordos | ixian_lightinfantry, light_inf, ordos_lightinfantry |
+| light_inf_lmg_upgrade | harkonnen, ixian | ixian_lightinfantry, light_inf |
+| medicheal | terran | terran_medic, terran_med...
+
+=== promotion_gating.md ===
+# Promotion gating audit
+
+
+## P3 promotions gated by buildings/tech (should only use rank1 + previous promotions)
+
+| Promotion | Forbidden prerequisite | Line |
+|---|---|---|
+| ts_gdi_promotion_unlockmammothmkii | ts_gdi_promotion_unlockzonetrooper | 47 |
+| ts_gdi_promotion_unlockhammerhead | ts_gdi_promotion_unlockzoneorca | 75 |
+| protoss_promotion_unlockvoidray | !protoss_promotion_unlockgladius | 72 |
+
+
+## P2 promotions that unlock no buildable unit (missing unit prerequisite)
+
+| Promotion | Provided token | Line |
+|---|---|---|
+| ts_gdi_promotion_unlockzonetrooper | zonetrooper | 29 |
+| ts_gdi_promotion_unlockzoneorca | uupzoneorca | 57 |
+| steelconsortium_promotion_unlocksupportlvl4 | steelconsortium_promotion_unlocksupportlvl4 | 40 |
+| naxis_promotion_hortenbomberstrike_2 | naxis_promotion_hortenbomberstrike_2 | 214 |
+
+...
+
+=== balance_sheet.md ===
+��# Balance sheet cross-reference (DESIGN.md ,%�12)
+
+
+## Infantry: 99 matched, 56 mismatched, 61 unmatched, 3 ambiguous
+
+| sheet unit | actor | mismatches |
+|---|---|---|
+| Imperial Scoutsman | japan_imperialscoutsman | HP 11000 vs game 15000; Speed 55 vs game 50; Damage 4000 vs game 37025; Reload 55 vs game 50 |
+| AK-47 Conscript | ra1_soviets_ak47conscript | HP 22000 vs game 44000; Damage 4000 vs game 12075 |
+| Naxi Rifle Soldier | naxis_naxiriflesoldier | HP 15000 vs game 20000; Speed 50 vs game 60; Damage 6000 vs game 4000; Reload 75 vs game 50 |
+| Naxi Rifle Recruit | naxis_naxiriflerecruit | HP 10000 vs game 21000; Speed 45 vs game 48; Damage 4000 vs game 8000 |
+| Lunar Soldier | schwarzermond_lunarsoldier | HP 12000 vs game 30000; Speed 60 vs game 50; Damage 8000 vs game 435750; Reload 60 vs game 50 [multi-reload] |
+| G.I. | ra2_allies_gi | HP 25000 vs game 50000; Damage 6000 vs game 12075 |
+| Conscript | ra2_soviets_conscript | HP 13000 vs game 26000 |
+| Yuri Initiate | yuri_initiate | Damage 4000 vs game 8025 |
+| Asian Militia | asianalliance_asianmilitia | HP 12000 vs game 24000; Reload 52 vs game 50 |
+| EMP Grenadier | td_gdi_empgrenadier | Damage 64000 vs game 104200 |
+| Hover Board Grenadier | steelconsortium_hoverboardgrenadier | Damage 44000 vs game 29300; Reload 50 vs game 25 |
+| Mortar Bike | latinsyndicate_mortarbike | Damage 18000 vs game 36200 |
+| Mortar Team | wc2_humans_mortarteam | Reload 225 vs game 200 |
+| Sonic Missile Soldier | t...
+
+=== buildable_order.md ===
+��# audit_buildable_order ��� buildable actor order checks
+
+Buildable combat actors checked: **805**
+Prerequisite order violations: **47**
+Build palette order violations: **1047**
+
+
+## Prerequisite order violations
+
+| actor | queue | prerequisites | problem |
+|---|---|---|---|
+| asianalliance_asdf | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_unlockasdf, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
+| asianalliance_howitzer | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockhowitzer, asianalliance_militaryacademy | tech token 'asianalliance_militaryacademy' appears after promotion token |
+| asianalliance_japanesesamurai | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_unlocksamurai, asianalliance_asianradar | tech token 'asianalliance_asianradar' appears after promotion token |
+| asianalliance_plasmatrooper | Infantry, RAInfantry | ~asianalliance_asianbarracks, ~asianalliance_promotion_unlockplasmatrooper, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
+| asianalliance_type89mlrs | Vehicle, RAVehicle | ~asianalliance_asianwarfactory, ~asianalliance_promotion_unlockmlrs, asianalliance_asianbattlelab | tech token 'asianalliance_asianbattlelab' appears after promotion token |
+| asianalliance_veteranarcher | Infantry, RAInfantry | ~asianalliance_asi...

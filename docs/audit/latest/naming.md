@@ -8,7 +8,7 @@
 | asianalliance | 71/71 | 100% | 0 | 112 |
 | cabal | 80/80 | 100% | 0 | 147 |
 | eden | 43/43 | 100% | 0 | 2 |
-| forgotten | 77/77 | 100% | 0 | 48 |
+| forgotten | 78/78 | 100% | 0 | 49 |
 | futuretech | 56/56 | 100% | 0 | 36 |
 | harkonnen | 0/0 | — | 0 | 0 |
 | ixian | 0/0 | — | 0 | 0 |
@@ -21,7 +21,7 @@
 | ra1_allies | 0/62 | 0% | 0 | 123 |
 | ra1_soviets | 0/106 | 0% | 0 | 181 |
 | ra2_allies | 0/66 | 0% | 0 | 233 |
-| ra2_soviets | 0/56 | 0% | 0 | 142 |
+| ra2_soviets | 0/56 | 0% | 0 | 141 |
 | schwarzermond | 59/59 | 100% | 0 | 24 |
 | steelconsortium | 60/60 | 100% | 0 | 33 |
 | td_gdi | 0/60 | 0% | 0 | 106 |
@@ -43,7 +43,7 @@
 | asianalliance | 70/70 | 100% |
 | cabal | 80/80 | 100% |
 | eden | 43/43 | 100% |
-| forgotten | 75/77 | 97% |
+| forgotten | 76/78 | 97% |
 | futuretech | 56/56 | 100% |
 | harkonnen | 0/0 | — |
 | ixian | 0/0 | — |

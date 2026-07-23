@@ -91,8 +91,14 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   Range, RAW ReloadDelay, effective-damage-per-shot — with damage-per-shot and
   reload as SEPARATE dimensions (reload dupes flagged, never auto-nudged). STILL
   TODO: apply the same 5-stat metric to the standalone uniqueness AUDIT.
-- [x] **Speed-step in code** (done 2026-07-22): `nudge_hp_spd` gained `spd_step`;
-  `rebalance_class` passes 5 for `VEHICLE_TYPE_CLASSES` (mbt) else 1.
+- [x] **Speed-step in code** (done 2026-07-22, refined): step is PER-UNIT, not
+  per-class — 1 for foot infantry (turn instantly), 5 for vehicle-turn-rate units
+  (turn = speed/5, snapped to a multiple of 5). Detected by a defined
+  `Mobile.TurnSpeed` (`row["vehicle_turnrate"]`): catches actual vehicles AND the
+  Cabal cyborgs / FutureTech droids, while foot units (incl. zerglings, chem
+  locomotor but no TurnSpeed) stay step-1. Foot infantry also get a Speed±1
+  fine-tune as a Δ lever (maintainer 2026-07-22). `VEHICLE_TYPE_CLASSES` still
+  forces the class default where every member is a vehicle (mbt).
 - [x] Apply **closecombat ReloadDelay 75→70** (anchor DPS 250 / verifier 500) —
   done as part of the 4-anchor restat below.
 - [x] Fix the 4 anchor units to grid (shotgunner/fanatic 4000→2000×2, reload

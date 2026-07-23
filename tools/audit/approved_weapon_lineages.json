@@ -1,0 +1,99 @@
+{
+  "_comment": "Approved multi-step weapon progressions. The audit will not flag these weapon names as non-standard.",
+  "lineages": [
+    {
+      "actor_family": "steelconsortium_quantumtank",
+      "base_weapon": "SteelQuantumCannon",
+      "upgrade_weapon": "SteelQuantumCannonEMP",
+      "elite_weapon": "SteelQuantumCannon_elite",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite"
+    },
+    {
+      "actor_family": "steelconsortium_stalker",
+      "base_weapon": "SteelStalkerRailgun",
+      "upgrade_weapon": "SteelStalkerRailgunEMP",
+      "elite_weapon": "SteelStalkerRailgunE",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite (legacy E suffix approved)"
+    },
+    {
+      "actor_family": "steelconsortium_megalodon",
+      "base_weapon": "SteelMegaSword",
+      "upgrade_weapon": "SteelMegaSwordEMP",
+      "elite_weapon": "SteelMegaSwordE",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite"
+    },
+    {
+      "actor_family": "steelconsortium_katytank",
+      "base_weapon": "SteelKatyCannons",
+      "upgrade_weapon": "SteelKatyCannonsEMP",
+      "elite_weapon": "SteelKatyCannonsE",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite"
+    },
+    {
+      "actor_family": "steelconsortium_mako",
+      "base_weapon": "SteelMakoGun",
+      "upgrade_weapon": "SteelMakoGunEMP",
+      "elite_weapon": "SteelMakoGunE",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite"
+    },
+    {
+      "actor_family": "steelconsortium_skyhammer",
+      "base_weapon": "SteelAirTurret",
+      "upgrade_weapon": "SteelAirTurretEMP",
+      "elite_weapon": "SteelAirTurretE",
+      "reason": "Three-step chain: base -> EMP upgrade -> elite"
+    },
+    {
+      "actor_family": "asianalliance_railgun_tank_family",
+      "actors": ["asianalliance_railguntank", "asianalliance_heavyrailguntank"],
+      "base_weapon": "AsianRailTank1",
+      "upgrade_weapon": "AsianRailTank2",
+      "elite_weapon": "AsianRailTank3",
+      "reason": "Shared cross-unit progression"
+    },
+    {
+      "actor_family": "asianalliance_japanesesamurai",
+      "base_weapon": "AsianSamuraiSword1",
+      "upgrade_weapon": "AsianSamuraiSword2",
+      "elite_weapon": "AsianSamuraiSword3",
+      "reason": "Three-step numeric progression (doctrine gated)"
+    },
+    {
+      "actor_family": "yuri_gatling",
+      "actors": ["yuri_gatlingcannon", "yuri_gatlingtank"],
+      "base_weapon": "RA2GattlingMG1",
+      "upgrade_weapon": "RA2GattlingMG2",
+      "elite_weapon": "RA2GattlingMG3",
+      "reason": "Shared cross-unit numeric progression (gatling cannon / gatling tank)"
+    },
+    {
+      "actor_family": "latinsyndicate_grenademonkey",
+      "base_weapon": "LatinMonkeyGrenade1",
+      "upgrade_weapon": "LatinMonkeyGrenade2",
+      "elite_weapon": "LatinMonkeyGrenade3",
+      "reason": "Three-step numeric progression (rank/upgrade gated)"
+    },
+    {
+      "actor_family": "ra2_soviets_teslatank",
+      "base_weapon": "RA2TankBolt",
+      "upgrade_weapon": "RA2TankBolt2",
+      "elite_weapon": "RA2TankBolt3",
+      "reason": "Three-step numeric progression (rank + upgrade gated)"
+    },
+    {
+      "actor_family": "ra2_soviets_teslacoil",
+      "base_weapon": "RA2CoilBolt",
+      "upgrade_weapon": "RA2CoilBolt2",
+      "elite_weapon": "RA2CoilBolt3",
+      "reason": "Three-step numeric progression (charge + upgrade gated)"
+    },
+    {
+      "actor_family": "ra2_soviets_teslatrooper",
+      "actors": ["ra2_soviets_teslatrooper", "ra2shk.bot", "ra2shkhero"],
+      "base_weapon": "RA2PortaTesla",
+      "upgrade_weapon": "RA2PortaTesla2",
+      "elite_weapon": "RA2PortaTesla3",
+      "reason": "Shared cross-unit numeric progression (rank + upgrade gated)"
+    }
+  ]
+}
