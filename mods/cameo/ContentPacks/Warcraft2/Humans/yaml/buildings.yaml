@@ -635,6 +635,7 @@ wc2_humans_humangoldmine:
 
 wc2_humans_humangoldmine_2:
 	Inherits@WC2BUILDING: wc2_humans_humangoldmine
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 15000
 	Buildable:

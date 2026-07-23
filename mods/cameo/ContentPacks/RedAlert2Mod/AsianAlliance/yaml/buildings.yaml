@@ -536,7 +536,7 @@ asianalliance_asiansentryflamer:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^AASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -558,7 +558,6 @@ asianalliance_asiansentryflamer:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -585,7 +584,7 @@ cgpnch.asian:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -608,7 +607,6 @@ cgpnch.asian:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -647,7 +645,7 @@ asianalliance_pulsar:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^AASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -729,6 +727,7 @@ asianalliance_railtower:
 		RequiresCondition: !build-incomplete
 	WithTeslaChargeAnimation:
 	Turreted:
+		RealignDelay: -1
 	WithIdleOverlay@normal:
 		Sequence: idle-normal
 		PauseOnCondition: disabled
@@ -763,7 +762,7 @@ asianalliance_chaostower:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@sell: ^AASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
@@ -788,7 +787,6 @@ asianalliance_chaostower:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -818,7 +816,7 @@ asianalliance_plasmacannon:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^AASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
 	Buildable:
@@ -841,7 +839,6 @@ asianalliance_plasmacannon:
 		TurnSpeed: 12
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -872,7 +869,7 @@ asianalliance_hyperionprojector:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^AASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@CelestialPowerUpgrades: ^CelestialPowerUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -919,6 +916,7 @@ asianalliance_tankreactor:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@power: ^PowerPlant
+	Inherits@gar: ^ClearableGarrison
 	Selectable:
 		Bounds: 3072, 2048, 0, -256
 	Valued:

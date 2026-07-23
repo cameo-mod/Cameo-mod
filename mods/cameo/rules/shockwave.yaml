@@ -2816,7 +2816,7 @@ susapillbox:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Pillbox
 	Building:
@@ -6590,7 +6590,7 @@ susaphalynx:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Phalynx System
 	Building:
@@ -8452,7 +8452,7 @@ sglhornetnest:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -8515,7 +8515,7 @@ sglsa2samsite:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -11695,7 +11695,7 @@ sglmgnest:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -13078,7 +13078,7 @@ schflametower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@chaingun: ^ChaingunUpgrade
 	Inherits@mines: ^MinefieldUpgrade
 	Valued:
@@ -13983,7 +13983,7 @@ schramjet:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Tooltip:
 		Name: Ramjet Turret
 	Building:
@@ -14038,7 +14038,7 @@ schapgattling:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@chaingun: ^ChaingunUpgrade
 	Inherits@mines: ^MinefieldUpgrade
 	Valued:

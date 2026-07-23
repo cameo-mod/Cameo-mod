@@ -4118,7 +4118,7 @@
 
 ^TechBuildingGarrisonable:
 	Inherits: ^TechBuilding
-	Inherits@Garrison: ^ClearableGarrisonNeutronOnly
+	Inherits@Garrison: ^ClearableGarrison
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	-CommandBarBlacklist:
 	Health:
@@ -7050,6 +7050,11 @@ CPQDEBUGDUMMY:
 	AttackTurreted:
 		PauseOnCondition: disabled
 
+^DefenseTurretedEMP:
+	Inherits: ^TurretEMP
+	Turreted:
+		RealignDelay: -1
+
 ^FollowEMP:
 	AttackFollow:
 		PauseOnCondition: disabled
@@ -8538,18 +8543,13 @@ CPQDEBUGDUMMY:
 		EnterSounds: ugarris.wav
 		ExitSounds: ugarris.wav
 	Targetable@garrisoned:
-		TargetTypes: Garrisoned
+		TargetTypes: GarrisonedNBC
 		RequiresCondition: loaded && !untargetable
+	ActorStatValues:
+		Stats: Armor, Sight, Cargo, ReloadDelay, MaxRange, Power, Kills, Experience
 	#ExternalCondition@BunkerDisabled:
 	#	Condition: bunkerdisable
 	#	TotalCap: 1
-
-^ClearableGarrisonNeutronOnly:
-	Inherits: ^ClearableGarrison
-	Targetable@garrisoned:
-		TargetTypes: GarrisonedNBC
-	ActorStatValues:
-		Stats: Armor, Sight, Cargo, ReloadDelay, MaxRange, Power, Kills, Experience
 
 ^PointLaserDefenseSystem:
 	#Turreted@pointdefense:

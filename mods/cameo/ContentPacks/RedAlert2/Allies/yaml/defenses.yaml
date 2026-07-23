@@ -217,7 +217,7 @@ ra2_allies_chronosphere:
 
 ra2_allies_pillbox:
 	Inherits: ^RA2Defense
-	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@cargo: ^ClearableGarrison
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -276,7 +276,7 @@ ra2_allies_patriotmissilesystem:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@RenderVoxel: ^RenderVoxel
 	Inherits@sell: ^RA2ASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
 	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
 	Buildable:
@@ -299,7 +299,6 @@ ra2_allies_patriotmissilesystem:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -200,25,10
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -434,7 +433,7 @@ ra2_allies_grandcannon:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@RenderVoxel: ^RenderVoxel
 	Inherits@sell: ^RA2ASpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
 	Buildable:
@@ -457,7 +456,6 @@ ra2_allies_grandcannon:
 		TurnSpeed: 12
 		InitialFacing: 896
 		Offset: -700,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 		PauseOnCondition: lowpower || disabled

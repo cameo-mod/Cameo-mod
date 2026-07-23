@@ -155,7 +155,7 @@ forgotten_machineguntower:
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -199,7 +199,7 @@ forgotten_juggerflakwall:
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Valued:
 		Cost: 1000
@@ -248,7 +248,7 @@ forgotten_brokenrattytankturret:
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@JunkArmor: ^JunkArmor
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
@@ -308,7 +308,7 @@ forgotten_brokenwarriortankturret:
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	# Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@JunkArmor: ^JunkArmor
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
@@ -368,7 +368,7 @@ forgotten_brokenscoopertankturret:
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@JunkArmor: ^JunkArmor
 	Inherits@TiberiumBoosters: ^TiberiumBoosters

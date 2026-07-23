@@ -554,7 +554,7 @@ ixian_machinegunturret:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
@@ -584,7 +584,6 @@ ixian_machinegunturret:
 	Turreted:
 		TurnSpeed: 96
 		InitialFacing: 2048
-		RealignDelay: -1
 	Armament:
 		Weapon: HMG_turret
 		LocalOffset: 256,0,576
@@ -627,7 +626,7 @@ ixian_gunturret:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@shape: ^1x1Shape
@@ -657,7 +656,6 @@ ixian_gunturret:
 	Turreted:
 		TurnSpeed: 16
 		InitialFacing: 2048
-		RealignDelay: -1
 	Armament:
 		Weapon: 110mm_Gun
 		LocalOffset: 512,0,432
@@ -698,7 +696,7 @@ ixian_rocketturret:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@shape: ^1x1Shape
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
@@ -721,7 +719,6 @@ ixian_rocketturret:
 	Turreted:
 		TurnSpeed: 32
 		InitialFacing: 2048
-		RealignDelay: -1
 	AttackTurreted:
 	WithWallSpriteBody:
 		RequiresCondition: !build-incomplete
@@ -1100,7 +1097,7 @@ ixian_stormlasher:
 	Inherits@decoration: ^DuneRankDecoration
 	Inherits@selection: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@shape: ^2x2Shape
@@ -1139,7 +1136,6 @@ ixian_stormlasher:
 	Turreted:
 		TurnSpeed: 64
 		InitialFacing: 2048
-		RealignDelay: -1
 	Armament:
 		Weapon: d2kStormLasher
 		#LocalOffset: 0,0,512

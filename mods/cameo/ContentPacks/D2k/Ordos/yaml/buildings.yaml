@@ -487,7 +487,7 @@ ordos_artilleryplatform:
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@shape: ^1x1Shape
@@ -517,7 +517,6 @@ ordos_artilleryplatform:
 	Turreted:
 		TurnSpeed: 16
 		InitialFacing: 2048
-		RealignDelay: -1
 	Armament:
 		Weapon: D2K_155mm_turret
 		LocalOffset: 512,0,640
@@ -559,7 +558,7 @@ ordos_autogunturret:
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^1x1Shape
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -603,7 +602,6 @@ ordos_autogunturret:
 	Turreted:
 		TurnSpeed: 16
 		InitialFacing: 2048
-		RealignDelay: -1
 	Replacement:
 		ReplaceableTypes: Tower
 	WithWallSpriteBody:

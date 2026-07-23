@@ -15,7 +15,7 @@ World:
 		ClassName: Light Support
 		Factions: atreides, harkonnen, corrino
 		BaseActor: ixian_mobileconstructionvehicle
-		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, ixian_koda_tank
+		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, ixian_kodatank
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
 	StartingUnits@ixian_only_L:
@@ -23,7 +23,7 @@ World:
 		ClassName: Light Support
 		Factions: ixian
 		BaseActor: ixian_mobileconstructionvehicle
-		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, ixian_koda_tank
+		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, ixian_kodatank
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
 	StartingUnits@ixian_h:
@@ -31,7 +31,7 @@ World:
 		ClassName: Heavy Support
 		Factions: atreides, harkonnen, corrino
 		BaseActor: ixian_mobileconstructionvehicle
-		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_koda_tank, duelist_tank.ixian
+		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_kodatank, duelist_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
 	StartingUnits@ixian_only_h:
@@ -39,6 +39,6 @@ World:
 		ClassName: Heavy Support
 		Factions: ixian
 		BaseActor: ixian_mobileconstructionvehicle
-		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_koda_tank, duelist_tank.ixian
+		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, heavy_rocket_raider.ixian, ixian_kodatank, duelist_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5

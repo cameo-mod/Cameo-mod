@@ -4901,7 +4901,7 @@ awpipe:
 awminicannon:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 1500
@@ -4946,7 +4946,7 @@ awminicannon:
 awlaserbunk:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 3000
@@ -4986,7 +4986,7 @@ awtalon:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^3x2Shape
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 3000
@@ -5102,7 +5102,7 @@ awtower.javier:
 awfortress:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 4000

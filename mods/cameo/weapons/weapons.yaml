@@ -4793,12 +4793,49 @@ TSEMPulseCannon:
 		ExplosionPalette: tseffect
 		ImpactSounds: ptesto00.aud
 		ImpactActors: false
-	Warhead@2Con: GrantExternalCondition
-		Condition: empdisable
-		Duration: 250
-		Range: 6c0
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 10000
+		Spread: 2500
+		InvalidTargets: Infantry
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 5000
+		Spread: 5000
+		InvalidTargets: Infantry
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 5
+		Spread: 10000
+		InvalidTargets: Infantry
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 10000
+		Spread: 2500
+		InvalidTargets: Infantry
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 5000
+		Spread: 5000
+		InvalidTargets: Infantry
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 5
+		Spread: 10000
+		InvalidTargets: Infantry
+	Warhead@2Con: AffectsIntegrity
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 500000
+		Spread: 10000
+		InvalidTargets: Infantry
 		AffectsParent: true
-		ValidTargets: Ground, Water, Air, Underground
 
 CHFlameRadiation:
 	Warhead@Cloud: SpawnSmokeParticle

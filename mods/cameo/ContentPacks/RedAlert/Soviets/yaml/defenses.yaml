@@ -121,7 +121,7 @@ ra1_soviets_flametower:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@FireActor: ^FireActor
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1

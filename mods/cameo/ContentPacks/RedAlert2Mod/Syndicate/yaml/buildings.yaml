@@ -48,7 +48,7 @@ latinsyndicate_combatbarracks:
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@lightposts: ^LightPosts
 	-WithTurretSearchlight:
@@ -78,6 +78,7 @@ latinsyndicate_combatbarracks:
 		RequiresCondition: !build-incomplete
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -334,7 +335,7 @@ latinsyndicate_defensebureau:
 	Inherits@shape: ^3x3Shape
 	Inherits@Bot: ^BotMicromanageable
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot2: ^BotAutoDeployEvacuateCargo
 	Inherits@lightposts: ^LightPosts
 	-WithTurretSearchlight:
@@ -364,6 +365,7 @@ latinsyndicate_defensebureau:
 		AreaTypes: building, cityi
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -552,7 +554,7 @@ latinsyndicate_latinsentrygun:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
 	Buildable:
 		Queue: Defence, RADefence
@@ -574,7 +576,6 @@ latinsyndicate_latinsentrygun:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament@PRIMARY:
@@ -616,7 +617,7 @@ latinsyndicate_bunkertower:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@shape: ^1x1Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@detect: ^GenericAllDetector
 	Inherits@lightposts: ^LightPosts
@@ -636,6 +637,7 @@ latinsyndicate_bunkertower:
 		HP: 60000
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -674,7 +676,7 @@ latinsyndicate_smlturret:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Buildable:
@@ -697,7 +699,6 @@ latinsyndicate_smlturret:
 		TurnSpeed: 12
 		InitialFacing: 896
 		Offset: 0,0,333
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -742,7 +743,7 @@ latinsyndicate_latinaadefender:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
 	Buildable:
 		Queue: Defence, RADefence
@@ -764,7 +765,6 @@ latinsyndicate_latinaadefender:
 		TurnSpeed: 12
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament@1:

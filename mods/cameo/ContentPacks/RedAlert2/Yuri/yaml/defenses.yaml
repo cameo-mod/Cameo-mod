@@ -25,7 +25,7 @@ yuri_slaveminer_2:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^RA2YSpawnActorsOnSell
 	Inherits@ref: ^Refinery
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
 	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
@@ -225,6 +225,7 @@ yuri_tankbunker:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^RA2YSpawnActorsOnSell
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Selectable:
 		Bounds: 2048, 2048
@@ -299,7 +300,7 @@ yuri_gatlingcannon:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@RenderVoxel: ^RenderVoxel
 	Inherits@sell: ^RA2YSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@RA2YuriGatlingPower: ^RA2YuriGatlingPower
 	Inherits@RA2YuriGatlingSpeed: ^RA2YuriGatlingSpeed
 	Inherits@detect: ^GenericAllDetector
@@ -323,7 +324,6 @@ yuri_gatlingcannon:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -300,25,10
-		RealignDelay: -1
 	AttackTurreted:
 		PauseOnCondition: lowpower || disabled
 	Armament@1:
@@ -399,7 +399,7 @@ yuri_psychictower:
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^RA2YSpawnActorsOnSell
-	Inherits@turret: ^TurretEMP
+	Inherits@turret: ^DefenseTurretedEMP
 	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
 	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
 	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor

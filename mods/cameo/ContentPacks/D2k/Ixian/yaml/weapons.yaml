@@ -41,6 +41,27 @@ IxianCombatTankCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 2
 
+HeavyIxianCombatTankCannon:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^D2K_Cannon
+	Range: 6000
+	ReloadDelay: 40
+	Projectile: Bullet
+		Speed: 600
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 6000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+
 DuelistTankCannon:
 	Inherits: ^MediumFlameWeapon
 	Inherits: ^Grenade

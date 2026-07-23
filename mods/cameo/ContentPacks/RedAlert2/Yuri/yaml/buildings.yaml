@@ -44,6 +44,7 @@ yuri_bioreactor:
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RA2YSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
+	Inherits@gar: ^ClearableGarrison
 	Inherits@BotMicro: ^BotMicromanageable
 	HitShape:
 		TargetableOffsets: 630,299,0

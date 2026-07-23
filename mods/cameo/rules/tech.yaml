@@ -440,6 +440,7 @@ MAMMOTHBUNKER:
 		Range: 3c0
 	Turreted:
 		TurnSpeed: 8
+		RealignDelay: -1
 	AutoTarget:
 		InitialStance: AttackAnything
 	Armament@PRIMARY:
@@ -485,6 +486,7 @@ mammothbunker.husk:
 		Image: ra2caoild
 	WithSpriteTurret:
 	Turreted:
+		RealignDelay: -1
 C2KNUKE:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^5x3Shape
@@ -530,6 +532,7 @@ C2KFIREDEPARTMENT:
 		HP: 180000 #90000
 	AttackTurreted:
 	Turreted:
+		RealignDelay: -1
 	RevealsShroud:
 		Range: 7c0 #7c0
 	GpsDot:
@@ -632,6 +635,7 @@ TECHBCANNON:
 	Turreted:
 		TurnSpeed: 28
 		InitialFacing: 224
+		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	AttackTurreted:
@@ -669,6 +673,7 @@ TECHBCANNON2:
 		Name: Bomb Bowling Cannon
 	Turreted:
 		TurnSpeed: 32
+		RealignDelay: -1
 	Power:
 		Amount: -1000
 	Health:

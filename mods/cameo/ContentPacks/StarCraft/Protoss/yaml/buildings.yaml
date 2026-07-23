@@ -338,7 +338,7 @@ protoss_cyberneticscore:
 protoss_shieldbattery:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@explode: ^BuildingExplodeProtoss
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^3x2Shape
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Valued:

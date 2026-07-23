@@ -132,7 +132,7 @@ ra1_allies_pillbox:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
-	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@cargo: ^ClearableGarrison
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
@@ -155,6 +155,7 @@ ra1_allies_pillbox:
 		HasMinibib: true
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -193,7 +194,7 @@ ra1_allies_alliedgunturret:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeVehicle
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
@@ -216,7 +217,6 @@ ra1_allies_alliedgunturret:
 	Turreted:
 		TurnSpeed: 48
 		InitialFacing: 224
-		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
@@ -295,7 +295,7 @@ ra1_allies_camopillbox:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@cargo: ^ClearableGarrison
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
@@ -320,6 +320,7 @@ ra1_allies_camopillbox:
 	-WithTurretSearchlight:
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -362,7 +363,7 @@ ra1_allies_bastionartillerybunker:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems

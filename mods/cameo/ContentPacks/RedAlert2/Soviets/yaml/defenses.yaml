@@ -142,7 +142,7 @@ ra2_soviets_battlebunker:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
 	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
@@ -196,7 +196,7 @@ ra2_soviets_sentrygun:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@RenderVoxel: ^RenderVoxel
 	Inherits@sell: ^RA2SSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
 	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
@@ -221,7 +221,6 @@ ra2_soviets_sentrygun:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -250,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -251,7 +250,7 @@ ra2_soviets_flakcannon:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@RenderVoxel: ^RenderVoxel
 	Inherits@sell: ^RA2SSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Buildable:
 		Queue: Defence, RADefence
@@ -273,7 +272,6 @@ ra2_soviets_flakcannon:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -250,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:

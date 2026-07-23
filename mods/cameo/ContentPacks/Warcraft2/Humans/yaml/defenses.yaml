@@ -85,6 +85,7 @@ wc2_humans_humanscouttower:
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	AttackTurreted:
 		Armaments: primary, cannon, guard
 		PauseOnCondition: disabled

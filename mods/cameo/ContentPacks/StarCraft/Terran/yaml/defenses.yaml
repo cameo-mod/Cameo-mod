@@ -6,7 +6,7 @@ terran_bunker:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
 	Tooltip:
@@ -29,6 +29,7 @@ terran_bunker:
 		HP: 240000
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	BodyOrientation:
 		QuantizedFacings: 8
 	Cargo:
@@ -128,7 +129,7 @@ terran_sentinel:
 	Inherits@decoration: ^TerranRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@POWERDOWN: ^DisableOnPowerDown
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
@@ -153,7 +154,6 @@ terran_sentinel:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:

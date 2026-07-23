@@ -5321,7 +5321,7 @@ tatacitus:
 tabarb:
 	Inherits@1: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Selectable:
 		Bounds: 1024, 1536
@@ -5404,7 +5404,7 @@ tabrik:
 tacannonb:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gar: ^ClearableGarrison
 	Inherits@ifvbunk: ^IFVConditionsBunker
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
@@ -5476,7 +5476,7 @@ tacannonb.bot:
 taflakb:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gar: ^ClearableGarrison
 	Inherits@ifvbunk: ^IFVConditionsBunker
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
@@ -5587,7 +5587,7 @@ tamgnod:
 tanodgattling:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Valued:
 		Cost: 1000
@@ -5767,7 +5767,7 @@ tanodsam:
 tademolisher:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Valued:
 		Cost: 800
@@ -5810,7 +5810,7 @@ tademolisher:
 tareapercann:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Inherits@RenderVoxel: ^RenderVoxel
 	Valued:
@@ -5860,7 +5860,7 @@ tareapercann:
 tamutflak:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	Inherits@RenderVoxel: ^TSRenderVoxel
 	Valued:

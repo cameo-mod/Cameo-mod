@@ -5,7 +5,7 @@ ts_gdi_vulcantower:
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Valued:
 		Cost: 600
@@ -61,7 +61,7 @@ ts_gdi_rpgtower:
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@RailgunWeaponry: ^RailgunWeaponry
 	Valued:
 		Cost: 1400
@@ -117,7 +117,7 @@ ts_gdi_samtower:
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
 	Valued:
 		Cost: 800
@@ -206,14 +206,25 @@ ts_gdi_empulsecannon:
 	AttackOrderPower@Emp:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
-		Cursor: ability
-		Icon: emp
+		Prerequisites:
+			1: ts_gdi_empulsecannon
+		IconImage: tsntpuls
+		Icons:
+			1: icon2
+		Cursor: ioncannon
 		ChargeInterval: 3375
-		Name: E.M. Pulse
-		Description: Fires a pulse blast which disables\nall mechanical units in the area.
+		ActivationDelay: 50
+		ActivationSequence:
+		Names:
+			1: E.M. Pulse
+		Descriptions:
+			1: Fires a pulse blast which disables\nall mechanical units in the area.
 		EndChargeSpeechNotification: EmPulseCannonReady
 		SelectTargetSpeechNotification: SelectTarget
 		DisplayTimerRelationships: Ally, Neutral, Enemy
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
 	SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: playerra2

@@ -1115,7 +1115,7 @@ valentine_tower_ballista:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1167,7 +1167,7 @@ valentine_tower_double:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 3000
 	Tooltip:

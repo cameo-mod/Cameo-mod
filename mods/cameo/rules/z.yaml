@@ -697,7 +697,7 @@ zmlrs:
 zgattlingcan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -750,7 +750,7 @@ zgattlingcan:
 zguncan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -799,7 +799,7 @@ zguncan:
 zhotwizer:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024
@@ -848,7 +848,7 @@ zhotwizer:
 zmissilecan:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeInfantry
 	Selectable:
 		Bounds: 1024, 1024

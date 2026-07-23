@@ -565,7 +565,7 @@ drspy.imperium:
 drcamera:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@DRShadow: ^InfantryShadows
 	Valued:
 		Cost: 500
@@ -1411,7 +1411,7 @@ dririft.imperium:
 drplastur1:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -1456,7 +1456,7 @@ drneutronturret:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 3000
@@ -1506,7 +1506,7 @@ driaaturret:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1300
@@ -6671,7 +6671,7 @@ drtmissile:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1600
@@ -7809,7 +7809,7 @@ drnavyard.terror:
 drterrturret:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -8995,7 +8995,7 @@ drlife.eodalien:
 draplastur:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 600
@@ -9039,7 +9039,7 @@ drbattery:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@LowpowerReload: ^DRSlowAttackLowpower
 	Valued:
 		Cost: 1600

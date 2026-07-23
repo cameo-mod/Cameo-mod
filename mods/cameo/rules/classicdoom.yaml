@@ -355,7 +355,7 @@ WOLFPBOX:
 WOLFGUN:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70

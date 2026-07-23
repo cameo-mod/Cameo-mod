@@ -324,7 +324,7 @@ td_gdi_guardtower:
 	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Inherits@LongRangeSensors: ^LongRangeSensors
@@ -456,6 +456,7 @@ td_gdi_advancedguardtower:
 	Turreted:
 		TurnSpeed: 1023
 		Offset: 128,128,384
+		RealignDelay: -1
 	Armament@PRIMARY:
 		Weapon: TowerMissile
 		LocalOffset: 256,128,0, 256,-128,0

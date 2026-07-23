@@ -207,6 +207,9 @@ cabal_obeliskofdarkness:
 		Type: Heavy
 	RevealsShroud:
 		Range: 12c0
+	WithRangeCircle:
+		Range: 12c0
+		RequiresCondition: !build-incomplete
 	WithSpriteBody:
 	Armament:
 		Weapon: DarkObeliskLaser
@@ -248,7 +251,7 @@ cabal_obeliskofdarkness:
 
 cabal_pillbox:
 	Inherits: ^RA2Defense
-	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@cargo: ^ClearableGarrison
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -269,6 +272,7 @@ cabal_pillbox:
 		HP: 85000
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8
@@ -305,7 +309,7 @@ cabal_plasmaturret:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@RenderVoxel: ^TSRenderVoxel
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20

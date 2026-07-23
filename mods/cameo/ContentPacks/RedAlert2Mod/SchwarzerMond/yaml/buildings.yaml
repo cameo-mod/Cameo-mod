@@ -182,6 +182,7 @@ schwarzermond_airfield:
 		Range: 12000
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	Exit@1:
 		ExitCell: 1,1
 		Facing: 384
@@ -211,7 +212,7 @@ schwarzermond_lasertower:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -232,7 +233,6 @@ schwarzermond_lasertower:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -276,7 +276,7 @@ schwarzermond_sturmcannon:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^NaxisSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@PUpgrade: ^NaxiVrilPoweredWeapons
 	-WithTurretSearchlight:
 	Buildable:
@@ -299,7 +299,6 @@ schwarzermond_sturmcannon:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament@PRIMARY:

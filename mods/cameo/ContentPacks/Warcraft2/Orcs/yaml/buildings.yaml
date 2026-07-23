@@ -564,6 +564,7 @@ wc2_orcs_orcgoldmine:
 
 wc2_orcs_orcgoldmine_2:
 	Inherits@WC2BUILDING: wc2_orcs_orcgoldmine
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 15000
 	Buildable:

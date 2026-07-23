@@ -53,7 +53,7 @@ ixian_upgrade_generalpurposearmor:
 		Description: upgrade_d2k_general_purpose_armor.description
 		IconPalette: d2kunit
 	RenderSprites:
-		Image: ixian_koda_tank
+		Image: ixian_kodatank
 
 ixian_upgrade_reinforcedbarrel:
 	Inherits: ^researched_upgrade.template
@@ -82,6 +82,18 @@ ixian_upgrade_heavymissiles:
 		Description: upgrade_d2k_heavy_missile_upgrade.description
 	RenderSprites:
 		Image: ix_missile_tank
+
+ixian_upgrade_heavykodatank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Heavy Koda Tank Upgrade
+	Buildable:
+		Queue: Upgrades
+		Description: Upgrades the Koda Tank to the Heavy Koda Tank
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_heavykodatank
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: ixian_heavykodatank
 
 ixian_upgrade_advancedixiantechnology:
 	Inherits: ^upgrade.template

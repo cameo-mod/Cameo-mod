@@ -217,6 +217,7 @@ naxis_airfield:
 		Range: 12000
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	Exit@1:
 		ExitCell: 2,2
 		Facing: 640
@@ -431,7 +432,7 @@ naxis_rifletower:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@detect: ^GenericAllDetector
 	Inherits@sell: ^NaxisSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Atlantikwall: ^Atlantikwall
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
@@ -455,7 +456,6 @@ naxis_rifletower:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -483,7 +483,7 @@ naxis_flak88:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^NaxisSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@Atlantikwall: ^Atlantikwall
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
@@ -508,7 +508,6 @@ naxis_flak88:
 		TurnSpeed: 40
 		InitialFacing: 896
 		Offset: -1,1,1
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament@PRIMARY:
@@ -541,7 +540,7 @@ naxis_naxibunker:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@Atlantikwall: ^Atlantikwall
 	Inherits: ^BuildingPlugProducer
@@ -562,6 +561,7 @@ naxis_naxibunker:
 	Turreted:
 		TurnSpeed: 1023
 		Offset: 0,0,1024
+		RealignDelay: -1
 	-QuantizeFacingsFromSequence:
 	BodyOrientation:
 		QuantizedFacings: 8

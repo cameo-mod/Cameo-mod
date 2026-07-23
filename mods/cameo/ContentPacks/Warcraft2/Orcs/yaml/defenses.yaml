@@ -85,6 +85,7 @@ wc2_orcs_orcwatchtower:
 	WithSpriteTurret:
 	Turreted:
 		TurnSpeed: 1023
+		RealignDelay: -1
 	AttackTurreted:
 		Armaments: primary, cannon
 		PauseOnCondition: disabled

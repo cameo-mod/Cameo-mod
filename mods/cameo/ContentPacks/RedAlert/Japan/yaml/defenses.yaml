@@ -72,7 +72,7 @@ japan_japanesemgnest:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^1x1Shape
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -113,7 +113,6 @@ japan_japanesemgnest:
 	Turreted:
 		TurnSpeed: 25
 		InitialFacing: 200
-		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Power:
@@ -131,7 +130,7 @@ japan_ballistatower:
 	Inherits@selection: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@detect: ^GenericAllDetector
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^1x1Shape
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -195,7 +194,6 @@ japan_ballistatower:
 	Turreted:
 		TurnSpeed: 25
 		InitialFacing: 200
-		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Power:
@@ -215,7 +213,7 @@ japan_waveforceturret:
 	Inherits@selection: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@detect: ^GenericGroundDetector
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^2x2Shape
 	Inherits@AntiTank: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
@@ -239,7 +237,6 @@ japan_waveforceturret:
 		HasMinibib: true
 	Turreted:
 		TurnSpeed: 15
-		RealignDelay: -1
 	Armament@WaveTurretShell:
 		Weapon: WaveTurretShell
 		LocalOffset: 1000,0,500

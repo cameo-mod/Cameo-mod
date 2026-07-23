@@ -515,7 +515,7 @@ SteelEmpBomb:
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 300000
+		Damage: 500000
 		Spread: 10000
 		InvalidTargets: Infantry
 	Warhead@Effect: CreateEffect

@@ -1158,7 +1158,7 @@ Player:
 
 ^2100WallTurreted:
 	Inherits: ^Defense
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	WithWallSpriteBody:
 	BlocksProjectiles:
@@ -1271,7 +1271,7 @@ Player:
 2100MB:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1311,7 +1311,7 @@ Player:
 2100FB:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 400
@@ -1354,7 +1354,7 @@ Player:
 2100MT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 300
@@ -1398,7 +1398,7 @@ Player:
 2100RADT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 400
@@ -1441,7 +1441,7 @@ Player:
 2100RT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 500
@@ -1479,7 +1479,7 @@ Player:
 2100TT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 750
@@ -1518,7 +1518,7 @@ Player:
 2100MP:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 450
@@ -1551,7 +1551,7 @@ Player:
 2100PP:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 900
@@ -1585,7 +1585,7 @@ Player:
 2100AA:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Buildable:
 		Queue: Defence, RADefence
@@ -2301,7 +2301,7 @@ psc2100factory2:
 2100SCAVTURRET:
 	Inherits@1: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Selectable:
 		Bounds: 1024, 1536
@@ -2394,7 +2394,7 @@ psc2100factory2:
 2100SCAVRT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 500
@@ -2434,7 +2434,7 @@ psc2100factory2:
 2100SCAVMORT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -2516,7 +2516,7 @@ psc2100factory2:
 2100SCAVFT:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 450

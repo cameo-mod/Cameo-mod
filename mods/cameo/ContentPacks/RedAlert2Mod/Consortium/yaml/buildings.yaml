@@ -412,7 +412,7 @@ steelconsortium_consortiumsentryturret:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@water: ^SteelUnderwaterStructure
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@drones: ^ScalpelDrones
 	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
@@ -437,7 +437,6 @@ steelconsortium_consortiumsentryturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -476,7 +475,7 @@ steelconsortium_antiairquantummissileturret:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@water: ^SteelUnderwaterStructure
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@drones: ^ScalpelDrones
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
@@ -500,7 +499,6 @@ steelconsortium_antiairquantummissileturret:
 	Turreted:
 		TurnSpeed: 40
 		InitialFacing: 896
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament:
@@ -546,7 +544,7 @@ steelconsortium_quantumcannon:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@water: ^SteelUnderwaterStructure
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@drones: ^ScalpelDrones
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
@@ -570,7 +568,6 @@ steelconsortium_quantumcannon:
 	Turreted:
 		TurnSpeed: 12
 		InitialFacing: 896
-		RealignDelay: -1
 	AttackTurreted:
 		Voice: Attack
 	Armament@1:
@@ -629,7 +626,7 @@ steelconsortium_bfg10000:
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiTank: ^PrioritizeVehicle
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^4x4Shape
@@ -653,7 +650,6 @@ steelconsortium_bfg10000:
 	Turreted:
 		TurnSpeed: 10
 		InitialFacing: 224
-		RealignDelay: -1
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament@Dummy:

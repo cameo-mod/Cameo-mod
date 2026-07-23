@@ -161,7 +161,7 @@ ts_nod_laserturret:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@RenderVoxel: ^TSRenderVoxel
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Buildable:
 		Queue: Defence, RADefence
@@ -215,7 +215,7 @@ ts_nod_samsite:
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
 	Valued:
 		Cost: 800

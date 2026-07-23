@@ -777,7 +777,7 @@ iokpalace:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@camo: ^BuildingCamoLevel2
 	Inherits@fort: ^GLAFortifiable
-	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -1054,7 +1054,7 @@ IOKSITE:
 IOKGUN:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@shape: ^1x1Shape
 	Valued:
 		Cost: 600

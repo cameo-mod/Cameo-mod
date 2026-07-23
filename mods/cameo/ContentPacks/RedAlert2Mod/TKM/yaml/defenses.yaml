@@ -3,9 +3,10 @@ tkm_bunker:
 	Inherits@Template: ^BunkerTemplate
 	Inherits@exp: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
+	Inherits@gar: ^ClearableGarrison
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -59,7 +60,7 @@ tkm_quadturretbunker:
 	Inherits@exp: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Valued:
@@ -108,7 +109,7 @@ tkm_tankturretbunker:
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Valued:
@@ -156,7 +157,7 @@ tkmtrenchtankdeployed:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Valued:
@@ -200,7 +201,7 @@ tkmratflakdeployed:
 	Inherits@exp: ^GainsExperienceRA2
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@EMP: ^TurretEMP
+	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@shape: ^1x1Shape
 	Valued:
