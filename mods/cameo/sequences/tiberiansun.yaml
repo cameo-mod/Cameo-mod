@@ -734,16 +734,6 @@ tsnodmmsil:
 		Filename: glgadfly_missile.shp
 		Facings: -32
 
-ts_gdi_upgrade_ioncannonuplink:
-	Inherits: ts_gdi_upgradecenter
-	icon:
-		Filename: ts_gdi_ioncannonuplink_icon.shp
-
-ts_gdi_upgrade_seekercontrol:
-	Inherits: ts_gdi_upgradecenter
-	icon:
-		Filename: tsseekcontrolicon.shp
-
 tsapache:
 	idle:
 		Filename: invisibleitem.shp

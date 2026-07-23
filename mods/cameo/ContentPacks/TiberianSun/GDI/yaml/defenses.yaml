@@ -137,7 +137,6 @@ ts_gdi_upgradecenter:
 		PauseOnCondition: lowpower || disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: droppod
 		Icons:
 			1: droppod
 		Cursor: ability

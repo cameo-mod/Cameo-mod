@@ -1208,3 +1208,17 @@ ts_gdi_ioncannonuplink:
 ts_gdi_droppoduplink:
 	icon:
 		Filename: ts_gdi_droppoduplink_icon.shp
+
+icon:
+	droppod:
+		Filename: ts_gdi_droppoduplink_icon.shp
+
+ts_gdi_upgrade_ioncannonuplink:
+	Inherits: ts_gdi_upgradecenter
+	icon:
+		Filename: ts_gdi_ioncannonuplink_icon.shp
+
+ts_gdi_upgrade_seekercontrol:
+	Inherits: ts_gdi_upgradecenter
+	icon:
+		Filename: tsseekcontrolicon.shp

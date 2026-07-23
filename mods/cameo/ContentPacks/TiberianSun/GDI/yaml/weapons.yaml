@@ -1245,3 +1245,10 @@ TSIonbeam:
 		SpriteNumber: 5
 		HeightOffset: 5046
 		StayTicks: 39
+
+DropPodExplode:
+	Warhead@1Eff: CreateEffect
+		Explosions: tspodring
+		ExplosionPalette: tseffect
+		ValidTargets: Ground, Air, Water
+		ImpactActors: false
