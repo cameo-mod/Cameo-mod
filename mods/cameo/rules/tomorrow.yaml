@@ -575,7 +575,7 @@ FACT.TOMORROW:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmgdi
@@ -683,7 +683,7 @@ FACT.ANSWER:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod
@@ -791,7 +791,7 @@ FACT.DTUSA:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod
@@ -899,7 +899,7 @@ FACT.DTJAPAN:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmnod

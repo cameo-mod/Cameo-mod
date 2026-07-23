@@ -1604,7 +1604,7 @@
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
-# 		Prerequisites: ~disabled-wip
+# 		Prerequisites: ~disabled
 # 		Description: Produces heavy vehicles.
 # 		IconPalette: d2kunit
 # 	Tooltip:
@@ -1689,7 +1689,7 @@
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
-# 		Prerequisites: ~disabled-wip
+# 		Prerequisites: ~disabled
 # 		Description: Produces heavy vehicles.
 # 		IconPalette: d2kunit
 # 	Tooltip:
@@ -3650,7 +3650,7 @@
 # 	Buildable:
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 1000
-# 		Prerequisites: ~disabled-wip-content
+# 		Prerequisites: ~disabled
 # 		ForceFaction: atreides
 # 		IconPalette: d2kunit
 # 	RenderSprites:
@@ -3662,7 +3662,7 @@
 # 	Buildable:
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 1000
-# 		Prerequisites: ~disabled-wip-content
+# 		Prerequisites: ~disabled
 # 		ForceFaction: harkonnen
 # 		IconPalette: d2kunit
 # 	RenderSprites:
@@ -3674,7 +3674,7 @@
 # 	Buildable:
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 1000
-# 		Prerequisites: ~disabled-wip-content
+# 		Prerequisites: ~disabled
 # 		ForceFaction: ordos
 # 		IconPalette: d2kunit
 # 	RenderSprites:
@@ -4395,7 +4395,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled-wip-content
+# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
 # 		Description: Assault infantry of Emperor's Army\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
@@ -4627,7 +4627,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 100
-# 		Prerequisites: ~disabled-wip-content
+# 		Prerequisites: ~disabled
 # 		Description: Sneaky stealth infantry that can infiltrate safely, armed with explosives that can be attached to buildings\nExplodes upon death\nDetector\n  Strong vs Buildings\n  Weak vs Everything\n  Special Abilities: Destroy Buildings, Invisibility
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -8392,7 +8392,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~disabled-wip, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
+# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
 # 		BuildPaletteOrder: 60
 # 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 # 		IconPalette: d2kunit

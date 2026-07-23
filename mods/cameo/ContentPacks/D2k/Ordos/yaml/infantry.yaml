@@ -548,7 +548,7 @@ ordos_contaminator:
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled-wip-content
+# 		Prerequisites: ~palace.sardaukar, ~techlevel.high, ~disabled
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
 # 		Description: Assault infantry of Emperor's Army\n  Strong vs Infantry, Vehicles\n  Weak vs Artillery
@@ -2010,7 +2010,7 @@ ordos_saboteur:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Sneaky stealth infantry that can infiltrate safely, armed with explosives that can be attached to buildings\nExplodes upon death\nDetector\n  Strong vs Buildings\n  Weak vs Everything\n  Special Abilities: Destroy Buildings, Invisibility
 		IconPalette: d2kunit
 	Valued:

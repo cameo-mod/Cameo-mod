@@ -118,16 +118,16 @@ This is the largest category. Strategy:
 
 **Key discovery:** The linter (`LintBuildablePrerequisites.cs` line 52) exempts ANY prereq starting with `~disabled` (case-sensitive, ordinal). This is the correct way to gate actors as permanently unbuildable.
 
-1. ✅ Renamed `~wip-content` → `~disabled-wip-content` (241 replacements across 55 files)
-2. ✅ Renamed `~disable` → `~disabled` (linter auto-exempts `~disabled*` prefix)
-3. ✅ Renamed `~wip` → `~disabled-wip`
-4. ✅ Renamed `~unbuildable` → `~disabled-unbuildable`
+1. ✅ Renamed all gating prereqs (`~wip-content`, `~disable`, `~wip`, `~unbuildable`) → `~disabled` (simplified — no suffixes needed)
+   - First pass: 241 replacements to `~disabled-*` variants across 55 files
+   - Second pass: 163 replacements simplifying `~disabled-wip`, `~disabled-wip-content`, `~disabled-unbuildable` → just `~disabled`
+   - **Rule:** Always use exactly `~disabled` for ALL intentional gating. No suffixes.
 5. ✅ Added `ProvidesPrerequisite:` to `latinsyndicate_defensebureau` (actor exists but didn't provide its own prereq)
 6. ✅ Added `ProvidesPrerequisite:` to `steelconsortium_geothermalreactor` (same)
 7. ✅ Added `ProvidesPrerequisite:` to `tkm_t30`, `tkm_sandmarine`, `tkm_bigshiee` (needed for `~!` negation prereqs)
 8. ⏳ Remaining unresolved prereqs (detailed analysis):
    - `~construction_yard.atreides` — 3 refs in D2k Atreides ContentPack, not provided anywhere. Fix: add `ProvidesPrerequisite: Prerequisite: construction_yard.atreides` to the Atreides conyard actor
-   - `~EDEN_FACTORY_CONSUMER` — 3 refs in outpost2.yaml (unloaded file). Fix: rename to `~disabled-EDEN_FACTORY_CONSUMER` or load outpost2.yaml
+   - `~EDEN_FACTORY_CONSUMER` — 3 refs in outpost2.yaml (unloaded file). Fix: rename to `~disabled` or load outpost2.yaml
    - `!droppod` — 2 refs in TS GDI buildings, negation prereq. `droppod` not provided by anything. Fix: add `ProvidesPrerequisite: Prerequisite: droppod` to Player actor in player.yaml
    - `~techlevel.medium` — 463 refs across many files. Should be provided via `ProvidesTechPrerequisite` or lobby checkbox. Fix: add `ProvidesPrerequisite@techlevel.medium: Prerequisite: techlevel.medium` to Player actor
    - `~techlevel.high` — 245 refs, same issue. Fix: add `ProvidesPrerequisite@techlevel.high: Prerequisite: techlevel.high` to Player actor
@@ -144,7 +144,7 @@ This is the largest category. Strategy:
 
 **ProvidesPrerequisite default behavior:** `ProvidesPrerequisite:` without explicit `Prerequisite:` field provides the actor's own name (`info.Name`). With `Prerequisite: custom_name`, it provides `custom_name`.
 
-**Rule enforced:** Always use `~disabled*` prefix for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`. See `tools/audit/audit_yaml_lint_rules.py`
+**Rule enforced:** Always use exactly `~disabled` for intentional gating prereqs. Never use `~wip`, `~disable`, `~unbuildable`, `~disabled-wip`, `~disabled-wip-content`, `~disabled-unbuildable` — just `~disabled`. See `tools/audit/audit_yaml_lint_rules.py`
 
 ### Phase 6: Unused Granted Conditions (~1,600 unique → 0)
 

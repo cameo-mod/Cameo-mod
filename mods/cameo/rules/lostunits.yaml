@@ -675,7 +675,7 @@ BHFACT:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factionnod:
 		Prerequisite: mmbhnod
@@ -1705,7 +1705,7 @@ galagabee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled-wip-content
+		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1750,7 +1750,7 @@ galagabutterfly:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled-wip-content
+		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1794,7 +1794,7 @@ smflamechomp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled-wip-content
+		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1838,7 +1838,7 @@ smangrysun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled-wip-content
+		Prerequisites: hpad, anyhq, ~techlevel.medium, ~disabled
 		Queue: Aircraft, RAAircraft
 		Description: Light Aircraft with Lasers.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks
 	Aircraft:
@@ -1882,7 +1882,7 @@ smgoomba:
 		Queue: Infantry
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 6000 #25000
@@ -1916,7 +1916,7 @@ smgoomba2:
 		Queue: Infantry
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 7500 #25000
@@ -1949,7 +1949,7 @@ smbeetle:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 50000 #100000
@@ -1985,7 +1985,7 @@ smkoopa:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000
@@ -2021,7 +2021,7 @@ smkoopa2:
 		Queue: Infantry, Vehicle
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 30000 #100000
@@ -2060,7 +2060,7 @@ bcltnk:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 80
 	Health:
@@ -2100,7 +2100,7 @@ bcbtnk:
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
 		Description: Fast, light tank.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 120
 	Health:
@@ -2139,7 +2139,7 @@ bchtnk:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
 		Description: General-Purpose GDI Tank.\n  Strong vs Tanks, Vehicles\n  Weak vs Infantry
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Mobile:
 		Speed: 85
 	Health:
@@ -2178,10 +2178,10 @@ digdugpooka:
 		Name: Pooka
 		GenericName: Pooka
 	Buildable:
-		Queue: Infantry, Vehicle, ~disabled-wip-content
+		Queue: Infantry, Vehicle, ~disabled
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000
@@ -2223,10 +2223,10 @@ digdugfigars:
 		Name: Fygar
 		GenericName: Fygar
 	Buildable:
-		Queue: Infantry, Vehicle, ~disabled-wip-content
+		Queue: Infantry, Vehicle, ~disabled
 		BuildPaletteOrder: 10
 		BuildDurationModifier: 200
-		Prerequisites: xhosp, ~disabled-wip-content
+		Prerequisites: xhosp, ~disabled
 		Description: Slow undead. Attacks in close combat.
 	Health:
 		HP: 25000 #100000

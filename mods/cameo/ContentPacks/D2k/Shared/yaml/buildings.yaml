@@ -96,7 +96,7 @@ heavy_factory:
 	Inherits@shape: ^3x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
-		Prerequisites: ~disabled-wip
+		Prerequisites: ~disabled
 		Description: Produces heavy vehicles.
 		IconPalette: d2kunit
 	Tooltip:
@@ -181,7 +181,7 @@ light_factory:
 	Inherits@shape: ^3x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
-		Prerequisites: ~disabled-wip
+		Prerequisites: ~disabled
 		Description: Produces heavy vehicles.
 		IconPalette: d2kunit
 	Tooltip:

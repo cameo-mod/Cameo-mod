@@ -2420,7 +2420,7 @@ hq.orange:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmorangestar
@@ -8207,7 +8207,7 @@ awhaa:
 		AddToArmyValue: True
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Submerged anti-ship unit\narmed with torpedoes.\nCan detect other submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft
 	RenderSprites:
 		Image: awhaa
@@ -10582,7 +10582,7 @@ awfighter2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -11216,7 +11216,7 @@ awbcopter2:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Helicopter gunship.\n  Strong vs Infantry, Light vehicles\n  Weak vs Aircraft
 awkirov:
 	Inherits: ^Helicopter
@@ -11573,7 +11573,7 @@ awss2:
 		AddToArmyValue: True
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Queue: Naval, RANaval
 		Description: Submerged anti-ship unit\narmed with torpedoes.\nCan detect other submarines.\n  Strong vs Naval units\n  Weak vs Ground units, Aircraft
 	RenderSprites:

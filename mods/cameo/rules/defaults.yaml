@@ -3403,7 +3403,7 @@
 		Queue: Infantry
 		BuildAtProductionType: Soldier
 		BuildPaletteOrder: 10
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Monster - wild creature that attacks nearby enemies
 	Tooltip:
 		Name: Monster
@@ -3516,7 +3516,7 @@
 	Buildable:
 		Queue: Biolab
 		BuildPaletteOrder: 50
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Dinosaur - wild creature that attacks nearby enemies
 	Valued:
 		Cost: 1000
@@ -7550,7 +7550,7 @@ CPQDEBUGDUMMY:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 1000
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		Description: Builds structures
 		IconPalette: cameo
 	#CashTransferToAllies:

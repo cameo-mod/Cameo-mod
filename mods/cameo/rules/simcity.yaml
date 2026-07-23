@@ -1345,7 +1345,7 @@ CITYSTADIUM:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		BuildLimit: 1
 	Building:
 		Footprint: xxx xxx xxx
@@ -1372,7 +1372,7 @@ CITYEXPO:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		BuildLimit: 1
 	Building:
 		Footprint: xx xx
@@ -1457,7 +1457,7 @@ CITYMARIO:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~disabled-wip-content, Fire Department, Police Department, Commercial, Library, Bank, ~techlevel.superweapons
+		Prerequisites: ~disabled, Fire Department, Police Department, Commercial, Library, Bank, ~techlevel.superweapons
 		BuildLimit: 1
 	Building:
 		Footprint: xx xx
@@ -1546,7 +1546,7 @@ CITYWINDMILL:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1572,7 +1572,7 @@ CITYAMUSE:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Description: TBA
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1935,7 +1935,7 @@ CITYEXPERT:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~disabled-wip-content
+		Prerequisites: ~disabled
 		BuildDuration: 160
 		Description: Upgrades a Vehicle by 1 Rank.
 	Valued:
@@ -1966,7 +1966,7 @@ CITYELITEEXPERT:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~disabled-wip-content #Bank
+		Prerequisites: ~disabled #Bank
 		BuildDuration: 400
 		Description: Upgrades a Vehicle to Rank 4 (Elite).
 		Icon: eliteicon

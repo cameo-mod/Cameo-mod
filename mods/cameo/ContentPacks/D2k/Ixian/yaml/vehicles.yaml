@@ -278,7 +278,7 @@ ixian_ixmissiletank:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~disabled-wip, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
+# 		Prerequisites: ~disabled, ~heavy.missile_tank, upgrade_heavy, research_centre, ~techlevel.high, ~!faction.ixian, ~!faction.guild
 # 		BuildPaletteOrder: 60
 # 		Description: Rocket Artillery\n  Strong vs Vehicles, Buildings, Aircraft\n  Weak vs Infantry\nDetector
 # 		IconPalette: d2kunit
