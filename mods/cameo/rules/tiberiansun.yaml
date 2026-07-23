@@ -137,10 +137,14 @@ World:
 			DefaultDeath: 1
 			BulletDeath: 2
 			RippedApartDeath: 2
-			SmallExplosionDeath: 4
-			ExplosionDeath: 4
 			TiberiumDeath: 1
 			RA2VirusDeath: 1
+	WithDeathAnimation@EXPLOSION:
+		DeathSequencePalette: tseffect
+		DeathPaletteIsPlayerPalette: false
+		DeathTypes:
+			SmallExplosionDeath: 4
+			ExplosionDeath: 4
 	Crushable:
 		CrushSound: squish6.aud
 
