@@ -575,7 +575,7 @@ ts_gdi_silo:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
 		Description: template_silo.description
-		Prerequisites: ~ts_gdi_constructionyard, tsproc
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_tiberiumrefinery
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -634,6 +634,8 @@ ts_gdi_droppoduplink:
 		Cost: 1000
 	Tooltip:
 		Name: Drop Pod Uplink
+	ProvidesPrerequisite@droppod:
+		Prerequisite: droppod
 	Buildable:
 		Queue: BuildingAddons
 		BuildPaletteOrder: 20

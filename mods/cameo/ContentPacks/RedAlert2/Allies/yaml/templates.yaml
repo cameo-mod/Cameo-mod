@@ -16,6 +16,8 @@
 	Inherits: ^RA2Building
 	Inherits@shape: ^4x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	ProvidesPrerequisite@ra2fact:
+		Prerequisite: ra2fact
 	Tooltip:
 		Name: War Factory
 	Building:

@@ -1043,8 +1043,8 @@ EDEN_FACTORY_CONSUMER:
 		Cost: 1200
 	Tooltip:
 		Name: Eden Consumer Factory
-	#ProvidesPrerequisite:
-	#	Prerequisite:
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_FACTORY_CONSUMER
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding

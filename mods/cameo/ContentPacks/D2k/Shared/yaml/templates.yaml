@@ -453,11 +453,23 @@
 
 ^D2KPrereqs:
 	ProvidesPrerequisite@atreides:
+		Prerequisite: faction.atreides
 		Factions: atreides, ixian, fremen
 	ProvidesPrerequisite@ordos:
+		Prerequisite: faction.ordos
 		Factions: ordos, tleilaxu, mercenary, smugglers
 	ProvidesPrerequisite@harkonnen:
+		Prerequisite: faction.harkonnen
 		Factions: harkonnen, corrino, guild, emperor
+	ProvidesPrerequisite@guild:
+		Prerequisite: faction.guild
+		Factions: guild
+	ProvidesPrerequisite@corrino:
+		Prerequisite: faction.corrino
+		Factions: corrino, emperor
+	ProvidesPrerequisite@atreides_conyard:
+		Prerequisite: atreides_constructionyard
+		Factions: atreides
 
 ^D2KTank:
 	Inherits@D2KV: ^D2KVehicle

@@ -1,7 +1,7 @@
 wind_trap.atreides:
 	Inherits: ^wind_trap
 	Buildable:
-		Prerequisites: ~construction_yard.atreides
+		Prerequisites: ~atreides_constructionyard
 		Description: Provides power to the base.
 	RenderSprites:
 		Image: power.atreides
@@ -9,7 +9,7 @@ wind_trap.atreides:
 refinery.atreides:
 	Inherits: ^refinery
 	Buildable:
-		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
+		Prerequisites: ~atreides_constructionyard, wind_trap.atreides
 		Description: Processes spice into credits.
 	FreeActor:
 		Actor: ixian_spiceharvester
@@ -31,7 +31,7 @@ refinery.atreides:
 d2k_silo.atreides:
 	Inherits: ^d2k_silo
 	Buildable:
-		Prerequisites: ~construction_yard.atreides, refinery.atreides
+		Prerequisites: ~atreides_constructionyard, refinery.atreides
 		Description: Stores excess spice.
 	RenderSprites:
 		Image: silo.atreides
