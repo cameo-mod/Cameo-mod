@@ -2489,7 +2489,7 @@
 		RequiresCondition: !chronobeamed
 	-Repairable:
 	RepairableNear:
-		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_alliednavalyard, cncsyrd, ra1_soviets_subpen, cncspen, tsntyard, tsntyard2, tsgtyard, tsgtyard2, cra2gayard, cra2nayard, craspen, ccncspen, cra1syrd, ccncsyrd
+		RepairActors: yrygyard, ra2nayard, ra2gayard, ra1_allies_alliednavalyard, cncsyrd, ra1_soviets_subpen, cncspen
 	GpsDot:
 		String: Ship
 	RangedGpsDot:
@@ -3033,7 +3033,6 @@
 	Passenger:
 		CargoType: Infantry
 		CargoConditions:
-			susamedivacblackhawk: hospitalheal
 			fcom: garrisoned
 			miss: garrisoned
 			ramiss: garrisoned
@@ -7148,7 +7147,7 @@ CPQDEBUGDUMMY:
 		Condition: hospital
 		Prerequisites: hosp
 	Repairable:
-		RepairActors: drfghosp, drihosp, drihosp.actibliz, drterhosp
+		RepairActors: hosp
 
 ^MachineShopRepairable:
 	Inherits: ^TechStructureHealable
@@ -7602,7 +7601,7 @@ CPQDEBUGDUMMY:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
