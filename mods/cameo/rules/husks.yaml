@@ -1,12 +1,3 @@
-MCV.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Mobile Construction Vehicle (Destroyed)
-	TransformOnCapture:
-		IntoActor: mcv
-	RenderSprites:
-		Image: mcv.destroyed
-
 HARV.Husk:
 	Inherits: ^Husk
 	Tooltip:
@@ -208,15 +199,6 @@ HARV.EmptyHusk:
 		IntoActor: harv
 	RenderSprites:
 		Image: hhusk2
-
-RAMCV.Husk:
-	Inherits: ^Husk
-	Tooltip:
-		Name: Husk (Mobile Construction Vehicle)
-	TransformOnCapture:
-		IntoActor: mcv
-	RenderSprites:
-		Image: ramcvhusk
 
 TRAN.Husk1:
 	Inherits: ^Husk

@@ -2,6 +2,12 @@ harkonnen_constructionyard:
 	Inherits: ^construction_yard
 	Tooltip:
 		Name: Harkonnen Construction Yard
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: harkonnen_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
 	RenderSprites:
 		Image: conyard.harkonnen
 

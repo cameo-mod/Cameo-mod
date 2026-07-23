@@ -1,5 +1,10 @@
 ts_nod_mobileconstructionvehicle:
-	Inherits: ts_gdi_mobileconstructionvehicle
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@MechanicalReliability: ^MechanicalReliability
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
@@ -8,8 +13,20 @@ ts_nod_mobileconstructionvehicle:
 		Name: Nod Mobile Construction Vehicle
 	Transforms:
 		IntoActor: ts_nod_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: tsmcv
 	RenderVoxels:
 		Image: tsmcvblack
+		Scale: 15
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 ts_nod_tiberiumharvester:
 	Inherits: ^TDHARV

@@ -7591,7 +7591,7 @@ CPQDEBUGDUMMY:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete || disabled
-		IntoActor: mcv
+		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:

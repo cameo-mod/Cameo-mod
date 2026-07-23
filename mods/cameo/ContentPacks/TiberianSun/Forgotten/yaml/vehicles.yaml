@@ -1,15 +1,32 @@
 forgotten_mobileconstructionvehicle:
-	Inherits: ts_gdi_mobileconstructionvehicle
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@MechanicalReliability: ^MechanicalReliability
 	Buildable:
 		Description: actor_forgotten_mobileconstructionvehicle.description
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~forgotten_warfactory, forgotten_servicedepot
-	Transforms:
-		IntoActor: forgotten_constructionyard
-	RenderVoxels:
-		Image: tsmcvgrey
 	Tooltip:
 		Name: actor_forgotten_mobileconstructionvehicle.name
+	Transforms:
+		IntoActor: forgotten_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: tsmcv
+	RenderVoxels:
+		Image: tsmcvgrey
+		Scale: 15
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 forgotten_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -46,19 +63,69 @@ forgotten_tiberiumharvester:
 		Name: actor_forgotten_tiberiumharvester.name
 
 forgotten_scarabapc:
-	Inherits: ts_nod_subterraneanapc
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@sub: ^SubterraneanVoxelVehicle
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 1410
+	Tooltip:
+		Name: actor_forgotten_scarabapc.name
+	UpdatesPlayerStatistics:
+		OverrideActor: ts_nod_subterraneanapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_warfactory, ~disabled
+		Queue: Vehicle, RAVehicle
+		Description: Armored personnel carrier.\n  Can carry infantry
+	Mobile:
+		Locomotor: subterranean
+		PauseOnCondition: loading || being-captured || disabled
+		Speed: 60
+		TurnSpeed: 40
+	Health:
+		HP: 17500
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Medium
+	Armament@PRIMARY:
+		Weapon: TSSAPCMissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	Armament@UPGRADE:
+		Weapon: TSSAPCCoreMissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	AttackFrontal:
+		FacingTolerance: 64
+	RevealsShroud:
+		Range: 5c0
+		RequiresCondition: !submerged
+	SelectionDecorations:
+	Selectable:
+		Class: ts_nod_subterraneanapc
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		UnloadTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
+		InitialUnits: forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutantsergeant
+	Targetable@garrisoned:
+		RequiresCondition: loaded && !submerged
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
 	RenderVoxels:
 		Image: ts_nod_subterraneanapc
 	RenderSprites:
 		Image: ts_nod_subterraneanapc
-	Buildable:
-		BuildPaletteOrder: 60
-		Prerequisites: ~forgotten_warfactory, ~disabled
-		Description: Armored personnel carrier.\n  Can carry infantry
-	Cargo:
-		InitialUnits: forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutantsergeant
-	UpdatesPlayerStatistics:
-		OverrideActor: ts_nod_subterraneanapc
 
 forgotten_missilevan:
 	Inherits: ^Tank

@@ -1,10 +1,41 @@
 ts_nod_silo:
-	Inherits: ts_gdi_silo
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 150
 	Tooltip:
 		Name: Silo
+	ProvidesPrerequisite@buildingname:
 	Buildable:
-		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
 		Description: Stores excess resources.
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	StoresResources:
+		Capacity: 8000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
 	RenderSprites:
 		Image: tsgtsilo.nod
 
