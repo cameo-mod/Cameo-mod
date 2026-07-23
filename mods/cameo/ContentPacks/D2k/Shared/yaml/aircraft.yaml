@@ -47,6 +47,9 @@ carryall.reinforce:
 		Type: Circle
 			Radius: 256
 	RejectsOrders:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
 	Cloak:
 		InitialDelay: 80
 		CloakDelay: 80
