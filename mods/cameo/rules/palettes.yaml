@@ -605,6 +605,11 @@
 		BasePalette: ra2unit
 		BaseName: playerra2
 		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	# Dummy palette to satisfy RenderVoxelsInfo lint check (engine bug: PlayerPalette uses [PaletteReference] instead of [PaletteReference(true)])
+	PaletteFromPaletteWithAlpha@playerra2dummy:
+		Name: playerra2
+		BasePalette: ra2unit
+		Alpha: 1.0
 	PaletteFromPlayerPaletteWithAlpha@voxelcloak:
 		BaseName: voxelcloak
 		BasePalette: playerra2
