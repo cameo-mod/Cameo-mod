@@ -964,6 +964,39 @@ CabalCommandoPlasmaMk2:
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
 
+CabalSubmarinePlasma:
+	Inherits: ^HeavyCannon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 45
+	Range: 12000
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: cabal_greenplasma
+		Speed: 320
+		Shadow: false
+		Blockable: false
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
+
 CabalCoreDefenderLaser:
 	Inherits: ^LaserWeapon
 	Report: corefir1.aud

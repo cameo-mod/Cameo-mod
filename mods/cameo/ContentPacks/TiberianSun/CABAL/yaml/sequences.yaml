@@ -1176,6 +1176,76 @@ cabal_pillbox:
 	icon:
 		Filename: cabal_icons|cabal_pillbox_icon.png
 		Offset: 0,0
+cabal_navalyard:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Start: 33
+	damaged-idle:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Length: 15
+		Start: 33
+	make:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Length: 32
+	dead:
+		Filename: cabal_sprites|cabal_navalyard.png
+		Start: 33
+	icon:
+		Filename: cabal_icons|cabal_pillbox_icon.png
+		Offset: 0,0
+
+cabal_lazerboat:
+	idle:
+		Filename: cabal_sprites|cabal_lazerboat.png
+		Facings: 64
+	icon:
+		Filename: cabal_icons|cabal_pillbox_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+cabal_plasmasub:
+	idle:
+		Filename: cabal_sprites|cabal_plasmasub.png
+		Facings: 64
+	icon:
+		Filename: cabal_icons|cabal_pillbox_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+cabal_radar_cruiser:
+	idle:
+		Filename: cabal_sprites|cabal_radar_cruiser.png
+		Facings: 64
+	icon:
+		Filename: cabal_icons|cabal_scarabapc_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
+
+
+
 # gtsand:
 # 	Defaults:
 # 		Offset: 0, -12, 12

@@ -117,6 +117,58 @@ cabal_plasmasub:
 	ActorStatValues:
 		Upgrades: naxis_upgrade_wunderwaffe
 
+cabal_radar_cruiser:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard
+		Queue: Naval, RANaval
+		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: CABAL Sensor Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: CabalSpiderLaser
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 5
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_lazerboat
+		PlayerPalette: player_rgba
+
 ####################################################################################################
 #		BUILDINGS
 ####################################################################################################
