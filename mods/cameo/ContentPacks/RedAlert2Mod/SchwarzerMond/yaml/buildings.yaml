@@ -391,6 +391,7 @@ schwarzermond_meteortractionray:
 		AllowMultiple: true
 		OrderName: NaxiMeteor
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: ra2_soviets_nuclearmissilesilo
 		Icons:

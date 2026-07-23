@@ -355,6 +355,7 @@ cabal_radar:
 	SpawnActorPower@radarhack:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
+		Prerequisites:
 			1: cabal_upgrade_radarhack
 		Icons:
 			1: icon
@@ -543,6 +544,7 @@ cabal_core:
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		RequiresCondition: cabalnuke
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Cursor: nuke
 		Icons:

@@ -257,6 +257,7 @@ td_nod_templeofnod:
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		RequiresCondition: nuke
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: abomb

@@ -166,6 +166,7 @@ steelconsortium_consortiumradar:
 		PlayerPalette: playerra2cons
 	DetonateWeaponPower@SteelSupportSpawner:
 		OrderName: SteelSupportSpawner
+		Prerequisites:
 			1: steelconsortium_promotion_supportlvl1
 			2: steelconsortium_promotion_supportlvl2
 			3: steelconsortium_promotion_supportlvl3
@@ -309,6 +310,7 @@ steelconsortium_consortiumbattlelab:
 		AllowMultiple: false
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: steelconsortium_upgrade_empcannon
 		IconImage: steelconsortium_consortiumbattlelab
 		Icons:
@@ -360,6 +362,8 @@ steelconsortium_orbitalcannonactivator:
 	IonCannonPower:
 		AllowMultiple: True
 		PauseOnCondition: disabled
+		Prerequisites:
+		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: steelconsortium_orbitalcannonactivator
 		Icons:

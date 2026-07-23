@@ -206,6 +206,7 @@ ts_gdi_empulsecannon:
 	AttackOrderPower@Emp:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ts_gdi_empulsecannon
 		IconImage: tsntpuls
 		Icons:

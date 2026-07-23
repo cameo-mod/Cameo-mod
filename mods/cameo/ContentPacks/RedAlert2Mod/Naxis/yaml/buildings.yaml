@@ -241,6 +241,7 @@ naxis_airfield:
 	AutoTarget:
 	ParatroopersPower@paratroopers:
 		OrderName: NaxisParatroopers
+		Prerequisites:
 			1: naxis_airfield
 			2: naxis_airfield, naxis_promotion_betterparatanks
 		Icons:
@@ -277,6 +278,7 @@ naxis_airfield:
 			2: 5
 	AirstrikePower@parabombs:
 		OrderName: NaxParabombs
+		Prerequisites:
 			1: naxis_airfield, naxis_techcenter
 			2: naxis_airfield, naxis_techcenter, naxis_promotion_hortenbomberstrike
 			3: naxis_airfield, naxis_techcenter, naxis_promotion_hortenbomberstrike, naxis_promotion_hortenbomberstrike_2
@@ -358,6 +360,7 @@ naxis_techcenter:
 		Produces: Research
 	DetonateWeaponPower@NaxiSupportZombies:
 		OrderName: NaxiSupportZombies
+		Prerequisites:
 			1: naxis_techcenter
 		PauseOnCondition: disabled
 		Icons:
@@ -703,6 +706,7 @@ naxis_naxirocketsilo:
 		OrderName: NaxiV1Rocket
 		AllowMultiple: True
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: ra2_soviets_nuclearmissilesilo
 		Icons:

@@ -588,6 +588,7 @@ protoss_fleetbeacon:
 	IonCannonPower:
 		AllowMultiple: True
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: ioncannon

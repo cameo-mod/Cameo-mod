@@ -366,6 +366,8 @@ wc2_humans_church:
 	IonCannonPower@HOLYVISION:
 		OrderName: wc2_holyvision
 		PauseOnCondition: lowpower
+		Prerequisites:
+		Prerequisites:
 			1:
 		Icons:
 			1: holyvision
@@ -547,6 +549,7 @@ wc2_humans_magetower:
 	IonCannonPower@BLIZZARD:
 		OrderName: wc2_blizzard
 		PauseOnCondition: lowpower
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: blizzard

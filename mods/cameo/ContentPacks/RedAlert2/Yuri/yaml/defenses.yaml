@@ -119,6 +119,8 @@ yuri_psychicdominator:
 	DetonateWeaponPowerCA@psi:
 		AllowMultiple: true
 		OrderName: PsychicDominator
+		Prerequisites:
+		Prerequisites:
 			1: ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:

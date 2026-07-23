@@ -157,6 +157,7 @@ latinsyndicate_latinempradar:
 		AllowMultiple: false
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: latinsyndicate_upgrade_empcannon
 		IconImage: steelconsortium_consortiumbattlelab
 		Icons:
@@ -231,6 +232,7 @@ latinsyndicate_airstation:
 	AirstrikePower@spyplane:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
+		Prerequisites:
 			1: latinsyndicate_airstation
 		IconImage: yrspyp
 		Icons:
@@ -286,6 +288,7 @@ latinsyndicate_spycenter:
 		AllowMultiple: false
 		OrderName: TraitorsPower
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: latinsyndicate_spycenter
 		IconImage: latinsyndicate_spycenter
 		Icons:
@@ -419,6 +422,7 @@ latinsyndicate_recyclingcenter:
 		IconImage: latinsyndicate_raiderbuggy
 		AllowMultiple: True
 		PauseOnCondition: disabled
+		Prerequisites:
 			1:
 		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
 		Type: Car
@@ -465,6 +469,7 @@ latinsyndicate_topolsilo:
 		AllowMultiple: true
 		OrderName: 12Rockets
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: ra2_soviets_nuclearmissilesilo
 		Icons:

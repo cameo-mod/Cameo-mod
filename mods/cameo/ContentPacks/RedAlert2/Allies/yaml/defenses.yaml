@@ -85,6 +85,7 @@ ra2_allies_weathercontrolcenter:
 		AllowMultiple: true
 		OrderName: LightningStorm
 		PauseOnCondition: disabled
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: bolticon
@@ -144,6 +145,7 @@ ra2_allies_chronosphere:
 		Dimensions: 4,3
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
+		Prerequisites:
 			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2_allies_chronosphere
@@ -180,6 +182,7 @@ ra2_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
+		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2_allies_chronosphere

@@ -713,6 +713,8 @@ ts_gdi_upgradecenter:
 		AllowMultiple: True
 		RequiresCondition: ionc
 		PauseOnCondition: lowpower || disabled
+		Prerequisites:
+		Prerequisites:
 			1: ~techlevel.superweapons
 		Icons:
 			1: ioncannon
