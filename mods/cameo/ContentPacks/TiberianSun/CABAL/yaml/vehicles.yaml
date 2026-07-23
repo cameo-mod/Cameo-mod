@@ -36,10 +36,6 @@ cabal_constructionyard:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
 		RequiresForceMove: true
-	TransformsIntoRepairable:
-		RequiresCondition: factundeploy
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviets_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asianalliance_asianservicedepot, latinsyndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
-		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
 	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
