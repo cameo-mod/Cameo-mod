@@ -1184,7 +1184,7 @@ CITYAIRPORT:
 		BeaconPoster: rapinficon
 		ArrowSequence: arrow
 		ClockSequence: clock
-		UnitType: ra1_allies_cargoplane_paradrop
+		UnitType: ra1_allies_cargoplaneparadrop
 		SquadSize: 3
 		CircleSequence: circles
 		#UseDirectionalTarget: True
@@ -1630,7 +1630,7 @@ CITYZOO:
 		BeaconPoster: rapinficon
 		ArrowSequence: arrow
 		ClockSequence: clock
-		UnitType: ra1_allies_cargoplane_paradrop
+		UnitType: ra1_allies_cargoplaneparadrop
 		SquadSize: 3
 		CircleSequence: circles
 		#UseDirectionalTarget: True
@@ -2263,7 +2263,7 @@ simcity_taser:
 ####################################################################################################
 
 GreenBomber:
-	Inherits: ra1_allies_cargoplane_bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2281,7 +2281,7 @@ GreenBomber:
 		RequiresSelection: True
 
 BlueBomber:
-	Inherits: ra1_allies_cargoplane_bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2299,7 +2299,7 @@ BlueBomber:
 		RequiresSelection: True
 
 MininukeBomber:
-	Inherits: ra1_allies_cargoplane_bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
@@ -2317,7 +2317,7 @@ MininukeBomber:
 		RequiresSelection: True
 
 CasinoCrateBomber:
-	Inherits: ra1_allies_cargoplane_bomber
+	Inherits: ra1_allies_cargoplanebomber
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:

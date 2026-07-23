@@ -152,7 +152,7 @@ japan_badger:
 	ActorStatValues:
 		Upgrades: japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
 
-ra1_allies_cargoplane_bomber:
+ra1_allies_cargoplanebomber:
 	Inherits: ra1_badger_bomber
 	Tooltip:
 		Name: Cargo Plane
@@ -161,7 +161,7 @@ ra1_allies_cargoplane_bomber:
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 
-ra1_allies_cargoplane_paradrop:
+ra1_allies_cargoplaneparadrop:
 	Inherits: ra1_badger
 	Tooltip:
 		Name: Cargo Plane
