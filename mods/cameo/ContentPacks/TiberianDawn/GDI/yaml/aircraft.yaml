@@ -1,5 +1,9 @@
 td_gdi_chinooktransport:
-	Inherits: TRAN
+	Inherits: ^Helicopter
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
 	Valued:
@@ -15,13 +19,53 @@ td_gdi_chinooktransport:
 		Prerequisites: ~td_gdi_helipad
 		Queue: Aircraft, RAAircraft
 		Description: Transport vehicle.\n  Unarmed
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
 	EjectOnDeath:
 		PilotActor: td_gdi_minigunner
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,171
+		Sequence: rotor2
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,171
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 		InitialUnits: td_gdi_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_gdi_sonicmissilesoldier, td_gdi_empgrenadier, td_gdi_shotgunner, td_gdi_officer, td_gdi_heavysniper
+	SpawnActorOnDeath:
+		Actor: TRAN.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: tran
+		DecorationBounds: 1920, 1920
+	RenderSprites:
+		Image: tran
+		PlayerPalette: raplayer
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
 	ActorStatValues:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_heavyaircraftarmorplating
 

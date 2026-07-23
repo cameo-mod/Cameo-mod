@@ -154,18 +154,92 @@ fremen_creep:
 	-GrantConditionOnPrerequisite@base-reveal:
 
 engineer:
-	Inherits: E6
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@TiberiumInfusion: ^TiberiumInfusion
+	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@BulletImmune: ^BulletImmune
 	Inherits@personalshield: ^D2KPersonalShield
-	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@D2Kanim: ^D2KPaletteRenderInfantry
+	Tooltip:
+		Name: Engineer
+	Valued:
+		Cost: 500
 	Buildable:
+		BuildPaletteOrder: 30
 		Prerequisites: ~d2k_barracks
+		Queue: Infantry, RAInfantry
 		Description: Captures and repairs structures.\n  Unarmed
 		IconPalette: d2kunit
-	RenderSprites:
-		Image: engineer
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	Passenger:
+		CustomPipType: engineer
+	Garrisoner:
+		CustomPipType: engineer
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+		EnterBehaviour: Exit
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	Selectable:
+		Priority: 5
+		Class: e6
 	Voiced:
 		VoiceSet: D2KEngineerVoice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: engineer
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Stats: Armor, Sight, Speed
+	ActorStatValues:
+		Upgrades: td_gdi_upgrade_longrangesensors, td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
 # submachinegunner:
 # 	Inherits: light_inf

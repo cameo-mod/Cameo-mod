@@ -106,14 +106,31 @@ japan_japaneseorerefinery:
 		PlayerPalette: player
 
 japan_japanesewarfactory:
-	Inherits: ra1_soviets_warfactory
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
-	Tooltip:
-		Name: Japanese War Factory
 	Buildable:
+		Queue: Building, RABuilding
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
 		Description: Produces vehicles.
+	Tooltip:
+		Name: Japanese War Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
 	RenderSprites:
 		Image: jweap
 		PlayerPalette: player
@@ -143,16 +160,24 @@ japan_japaneseradararray:
 		ProductionType: Upgrades
 
 japan_japaneseairfield:
-	Inherits: ra1_soviets_airfield
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@hpad: ^IsAircraftFactory
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
-	Tooltip:
-		Name: Japanese Airfield
 	Buildable:
 		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
 		Description: Produces and repairs aircraft.
-	-AirstrikePower@spyplane:
-	-AirstrikePower@parabombs:
+	Tooltip:
+		Name: Japanese Airfield
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
 	AirstrikePower@JapanSuperBomber:
 		OrderName: JapanSuperBomber
 		Prerequisites:
@@ -210,6 +235,10 @@ japan_japaneseairfield:
 			1: japan_badger
 			2: japan_badger
 			3: japan_badger
+		SquadSizes:
+			1: 1
+			2: 1
+			3: 1
 		SquadOffset: 1792,1792,0
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:

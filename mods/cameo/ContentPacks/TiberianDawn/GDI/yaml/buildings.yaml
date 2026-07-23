@@ -485,15 +485,27 @@ td_gdi_advancedguardtower:
 		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 CNCSYRD:
-	Inherits: ra1_allies_alliednavalyard
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
 	Tooltip:
 		Name: GDI Naval Yard
 	Buildable:
 		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery, ~globalnaval
+		Queue: Building, RABuilding
 		Description: Naval production structure.
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
 		Image: cncsyrd
 		PlayerPalette: player_rgba
