@@ -4776,13 +4776,13 @@ BloomExplosion:
 
 TSEMPulseCannon:
 	ReloadDelay: 100
-	Range: 40960
-	MinRange: 8190
+	Range: 40c0
 	Report: plsecan2.aud
 	Projectile: Bullet
 		Speed: 425
 		Blockable: false
-		LaunchAngle: 165
+		Shadow: true
+		LaunchAngle: 96
 		Image: tspulsball
 	Warhead@Cam: RevealShroud
 		Radius: 6c0
@@ -4795,8 +4795,10 @@ TSEMPulseCannon:
 		ImpactActors: false
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
-		Duration: 360
-		Range: 6144
+		Duration: 250
+		Range: 6c0
+		AffectsParent: true
+		ValidTargets: Ground, Water, Air, Underground
 
 CHFlameRadiation:
 	Warhead@Cloud: SpawnSmokeParticle

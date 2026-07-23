@@ -165,8 +165,6 @@ ts_gdi_empulsecannon:
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
-	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@EMP: ^TurretEMP
 	Selectable:
 		Bounds: 2048, 2048
 	Buildable:
@@ -192,62 +190,31 @@ ts_gdi_empulsecannon:
 	Power:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
-	Armament@PRIMARY:
-		Weapon: TSEMPZapWeapon
-		LocalOffset: 100,0,600
 	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		RealignDelay: -1
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
 		Sequence: turret
+	Armament@PRIMARY:
+		Weapon: TSEMPulseCannon
+		LocalOffset: 212,0,1768
+		LocalYaw: 0,100
 	AttackTurreted:
-		OpportunityFire: false
-		PersistentTargeting: false
-	DetonateWeaponPower@Emp:
-		AllowMultiple: false
+		RequiresCondition: !build-incomplete && !empdisable && !disabled
+	AttackOrderPower@Emp:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
-		Prerequisites:
-			1: ts_gdi_empulsecannon
-		IconImage: tsntpuls
-		Icons:
-			1: icon2
-		Cursor: ioncannon
-		ChargeInterval: 6000
-		ActivationDelay: 50
-		ActivationSequence:
-		Names:
-			1: Emp Disable
-		Weapons:
-			1: SteelEmpBomb
-		Descriptions:
-			1: power_ioncannon.description
-		BeginChargeSpeechNotification: IonCannonCharging
-		EndChargeSpeechNotification: IonCannonReady
-		EndChargeSound:
+		Cursor: ability
+		Icon: emp
+		ChargeInterval: 3375
+		Name: E.M. Pulse
+		Description: Fires a pulse blast which disables\nall mechanical units in the area.
+		EndChargeSpeechNotification: EmPulseCannonReady
 		SelectTargetSpeechNotification: SelectTarget
-		InsufficientPowerSpeechNotification: InsufficientPower
-		DisplayRadarPing: True
 		DisplayTimerRelationships: Ally, Neutral, Enemy
-		CameraActor: camera.small
-		CameraRange: 6000
-		CameraRemoveDelay: 125
-		TargetCircleRanges:
-			1: 6000
-		TargetCircleColor: ff000080
-		LaunchSound:
-		IncomingSound:
 	SupportPowerChargeBar:
-	# AttackOrderPower:
-	# 	OrderName: EMPPower
-	# 	PauseOnCondition: disabled || lowpower
-	# 	Cursor: attackmove
-	# 	Icon: emp
-	# 	ChargeInterval: 3000
-	# 	Name: E.M. Pulse
-	# 	Description: Fires a pulse blast which disables\nall mechanical units in the area.
-	# 	EndChargeSpeechNotification: EmPulseCannonReady
-	# 	SelectTargetSpeechNotification: SelectTarget
-	RenderRangeCircle:
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsntpuls
