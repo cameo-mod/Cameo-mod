@@ -268,17 +268,40 @@ wc2_orcs_cannontower:
 # 	RenderSprites:
 
 wc2_orcs_wall:
-	Inherits: wc2_humans_wall
+	Inherits: ^wall
+	Valued:
+		Cost: 300
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Wall
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~wc2_orcs_greathall
 		Queue: Defence, RADefence
 		Description: Defensive wall that blocks movement.
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
 	LineBuild:
 		NodeTypes: wc2_orcs_wall
 	LineBuildNode:
 		Types: wc2_orcs_wall
 	WithWallSpriteBody:
 		Type: wc2_orcs_wall
+		RequiresCondition: !cond_timer
+	WithIdleOverlay@wc2walltimer:
+		Sequence: make
+		RequiresCondition: cond_timer
+	GrantTimedCondition@wc2walltimer:
+		Condition: cond_timer
+		Duration: 30
 	RenderSprites:
 		Palette: player

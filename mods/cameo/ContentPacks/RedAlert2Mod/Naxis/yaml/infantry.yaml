@@ -522,13 +522,116 @@ naxis_slaveoverseer:
 		Upgrades: naxis_upgrade_ostfrontexperience
 
 naxis_slave:
-	Inherits: YRSLAV
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
 	Inherits@OstfrontExperience: ^OstfrontExperience
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Slave
+		RequiresCondition: !freed
+	Tooltip@Freed:
+		Name: Freed Slave
+		RequiresCondition: freed
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~naxis_barracks, naxis_orerefinery
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_slavemaster.description
+	Mobile:
+		Speed: 60
+		Locomotor: chem
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: RA2Shovel
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Shovel
+	AttackFrontal:
+		FacingTolerance: 2
+	AutoTarget:
+		ScanRadius: 10
+		RequiresCondition: freed
+	Voiced:
+		VoiceSet: SlaveWorkerVoice
+		RequiresCondition: !freed
+	Voiced@2:
+		VoiceSet: FreedSlaveVoice
+		RequiresCondition: freed
+	SlaveMinerSpawnerSlave:
+		FreedCondition: freed
+		FreeingRelationships: Neutral, Enemy
+		FreedSound: isl1lia.wav
+		AllowOwnerChange: true
+	DamageMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	FirepowerMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	ReloadDelayMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	SpeedMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 8
+		BaleUnloadDelay: 4
+		BaleUnloadAmount: 1
+		FullyLoadedSpeed: 80
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 8
+	DockClientManager:
+		OccupancyCostModifier: 0
+	GrantConditionOnHarvest:
+		Condition: harvesting
+	WithFacingSpriteBody:
+		Sequence: harvest
+		RequiresCondition: harvesting
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+		RequiresCondition: no-tiberium && !harvesting
+	WithInfantryBody@full:
+		IdleSequences: idle1,idle2
+		StandSequences: stand
+		MoveSequence: full-run
+		DefaultAttackSequence: shoot
+		RequiresCondition: !no-tiberium && !harvesting
+	WithEnabledAnimation:
+		Sequence: cheer
+		RequiresCondition: freed
+	WithDockingAnimation:
+		DockSequence: idle
+		DockLoopSequence: idle
+	-DamagedByTerrain:
+	-TakeCover:
+	Selectable:
+		DecorationBounds: 480, 240, 0, -32
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 1
+	ActorStatValues:
+		Upgrades: yuri_doctrine_psioniclegion, yuri_doctrine_psionicfanatics, yuri_doctrine_psionicelite, yuri_upgrade_bioengineering, yuri_upgrade_geneticmodificationboost, yuri_upgrade_psychicvision, naxis_upgrade_ostfrontexperience
 	Targetable@SlaveFaster:
 		TargetTypes: SlaveFaster
 		RequiresCondition: SlaveFaster <= 3 && !untargetable
@@ -544,8 +647,6 @@ naxis_slave:
 	SpeedMultiplier@SlaveFaster3:
 		Modifier: 250
 		RequiresCondition: SlaveFaster >= 3
-	ActorStatValues:
-		Upgrades: naxis_upgrade_ostfrontexperience
 
 frank.nax:
 	Inherits: ^Soldier

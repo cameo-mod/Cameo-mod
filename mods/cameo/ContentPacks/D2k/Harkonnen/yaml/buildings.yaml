@@ -5,7 +5,7 @@ harkonnen_constructionyard:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: harkonnen_mobileconstructionvehicle
+		IntoActor: ixian_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	RenderSprites:

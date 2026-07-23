@@ -159,14 +159,36 @@ ra2gayard:
 		TargetTypes: Ground, Water, C4, Structure
 
 ra2_awall:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2awall
+		Queue: Defence, RADefence
+		Description: Defensive wall that blocks movement.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: ra2_awall
+	LineBuildNode:
+		Types: ra2_awall
 	RenderSprites:
 		Image: ra2_awall
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~ra2awall
-		Description: Defensive wall that blocks movement.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
@@ -174,14 +196,36 @@ ra2_awall:
 		Type: ra2_awall
 
 ra2_swall:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2swall
+		Queue: Defence, RADefence
+		Description: Defensive wall that blocks movement.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: ra2_swall
+	LineBuildNode:
+		Types: ra2_swall
 	RenderSprites:
 		Image: ra2_swall
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~ra2swall
-		Description: Defensive wall that blocks movement.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
@@ -189,14 +233,36 @@ ra2_swall:
 		Type: ra2_swall
 
 ra2_ywall:
-	Inherits: BRIK
+	Inherits: ^wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~ra2ywall
+		Queue: Defence, RADefence
+		Description: Defensive wall that blocks movement.
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: ra2_ywall
+	LineBuildNode:
+		Types: ra2_ywall
 	RenderSprites:
 		Image: ra2_ywall
 		Palette: ra2
 		PlayerPalette: playerra2
-	Buildable:
-		Prerequisites: ~ra2ywall
-		Description: Defensive wall that blocks movement.
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2

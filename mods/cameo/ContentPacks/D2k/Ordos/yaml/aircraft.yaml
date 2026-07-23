@@ -766,20 +766,67 @@ eye_husk.ordos:
 # 		Explosion: D2KUnitExplodeLarge
 
 carryall_reinforce.ordos:
-	Inherits: carryall.reinforce
+	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: Advanced Carryall
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 500000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		InitialFacing: 0
+		Speed: 156
+		TurnSpeed: 24
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+		IdleTurnSpeed: 4
+	-SpawnActorOnDeath:
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
 		Actor: carryall_huskvtol.ordos
 		RequiresCondition: !cruising
+	Carryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
 	RenderSprites:
 		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 75
+	Buildable:
+		Description: actor_carryall.description
+		IconPalette: d2kunit
+		BuildLimit: 10
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	Cloak:
+		InitialDelay: 80
+		CloakDelay: 80
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 6
+		Range: 1c512, 2c512
 	AttackAircraft:
 		FacingTolerance: 10
 	Armament@PRIMARY:
@@ -793,7 +840,10 @@ carryall_reinforce.ordos:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_lasercartridges
 ordos_advancedcarryall:
-	Inherits: carryall
+	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
@@ -803,15 +853,64 @@ ordos_advancedcarryall:
 		Description: Aircraft that picks up and carries vehicles.\n  Unarmed
 	Tooltip:
 		Name: Advanced Carryall
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2160
+		CruisingCondition: cruising
+		InitialFacing: 0
+		Speed: 156
+		TurnSpeed: 24
+		Repulsable: False
+		CanSlide: True
+		VTOL: True
+		IdleTurnSpeed: 4
+		MinAirborneAltitude: 400
+	-SpawnActorOnDeath:
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
 		Actor: carryall_huskvtol.ordos
 		RequiresCondition: !cruising
+	AutoCarryall:
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 15
+		LocalOffset: 0, 0, -128
 	RenderSprites:
 		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
+	ChangesHealth:
+		Step: 50
+		Delay: 3
+		StartIfBelow: 75
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	Cloak:
+		InitialDelay: 80
+		CloakDelay: 80
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 3, 6
+		Range: 1c512, 2c512
+	RevealsShroud@lifting_low:
+		Range: 2c512
+		Type: GroundPosition
+		RequiresCondition: !airborne
+	RevealsShroud@lifting_high:
+		Range: 1c256
+		Type: GroundPosition
+		RequiresCondition: !cruising
 	AttackAircraft:
 		FacingTolerance: 10
 	Armament@PRIMARY:

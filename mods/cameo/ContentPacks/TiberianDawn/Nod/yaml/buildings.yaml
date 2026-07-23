@@ -605,15 +605,29 @@ td_nod_obeliskoflight:
 		Range: 4800
 
 CNCSPEN:
-	Inherits: ra1_soviets_subpen
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 800
 	Tooltip:
 		Name: Nod Sub Pen
 	Buildable:
 		Prerequisites: ~td_nod_constructionyard, td_nod_tiberiumrefinery, ~globalnaval
+		Queue: Building, RABuilding
 		Description: Naval production structure.
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
 	RenderSprites:
 		Image: cncspen
 		PlayerPalette: player_rgba
