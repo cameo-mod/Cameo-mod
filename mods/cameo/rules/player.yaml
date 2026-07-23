@@ -214,6 +214,28 @@ Player:
 		Prerequisites: enable-shadows
 	ProvidesRadar:
 		RequiresCondition: freeminimap
+	ProvidesPrerequisite@techlevel.medium:
+		Prerequisite: techlevel.medium
+	ProvidesPrerequisite@techlevel.high:
+		Prerequisite: techlevel.high
+	ProvidesPrerequisite@droppod:
+		Prerequisite: droppod
+	ProvidesPrerequisite@tsproc:
+		Prerequisite: tsproc
+	ProvidesPrerequisite@ra2fact:
+		Prerequisite: ra2fact
+	ProvidesPrerequisite@faction.atreides:
+		Prerequisite: faction.atreides
+	ProvidesPrerequisite@faction.harkonnen:
+		Prerequisite: faction.harkonnen
+	ProvidesPrerequisite@faction.guild:
+		Prerequisite: faction.guild
+	ProvidesPrerequisite@faction.corrino:
+		Prerequisite: faction.corrino
+	ProvidesPrerequisite@construction_yard.atreides:
+		Prerequisite: construction_yard.atreides
+	ProvidesPrerequisite@EDEN_FACTORY_CONSUMER:
+		Prerequisite: EDEN_FACTORY_CONSUMER
 	PlayerStatistics:
 	FrozenActorLayer:
 	PlaceBeacon:
