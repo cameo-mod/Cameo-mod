@@ -326,6 +326,8 @@ ordos_heavyfactory:
 		IconPalette: player
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: ordos_heavy_vehicle_production
+	ProvidesPrerequisite@ordos_combat:
+		Prerequisite: heavy.ordos_combat
 
 ordos_repairpad:
 	Inherits: ^D2KBuilding

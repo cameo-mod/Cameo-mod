@@ -48,3 +48,5 @@ atreides_heavyfactory:
 		IconPalette: player
 	ProvidesPrerequisite@vehicle_production:
 		Prerequisite: heavy.atreides_combat
+	ProvidesPrerequisite@missile_tank:
+		Prerequisite: heavy.missile_tank

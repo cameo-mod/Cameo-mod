@@ -123,12 +123,6 @@ heavy_factory:
 		Prerequisite: heavy.ordos
 	ProvidesPrerequisite@harkonnen:
 		Prerequisite: heavy.harkonnen
-	ProvidesPrerequisite@ordos_combat:
-		Prerequisite: heavy.ordos_combat
-	ProvidesPrerequisite@harkonnen_combat:
-		Prerequisite: heavy.harkonnen_combat
-	ProvidesPrerequisite@missile_tank:
-		Prerequisite: heavy.missile_tank
 	RenderSprites:
 		Image: heavy.atreides
 	WithIdleOverlay@TOP:

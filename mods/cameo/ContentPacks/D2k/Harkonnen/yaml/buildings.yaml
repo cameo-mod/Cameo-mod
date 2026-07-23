@@ -57,12 +57,17 @@ harkonnen_lightfactory:
 harkonnen_heavyfactory:
 	Inherits: ordos_heavyfactory
 	-ProvidesPrerequisite@vehicle_production:
+	-ProvidesPrerequisite@ordos_combat:
 	Tooltip:
 		Name: Harkonnen Heavy Factory
 	RenderSprites:
 		Image: heavy.harkonnen
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
+	ProvidesPrerequisite@harkonnen_combat:
+		Prerequisite: heavy.harkonnen_combat
+	ProvidesPrerequisite@missile_tank:
+		Prerequisite: heavy.missile_tank
 
 harkonnen_repairpad:
 	Inherits: ordos_repairpad
