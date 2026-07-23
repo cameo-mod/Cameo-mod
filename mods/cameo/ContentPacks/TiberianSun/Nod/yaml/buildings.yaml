@@ -69,18 +69,57 @@ ts_nod_constructionyard:
 		PlayerPalette: playerra2
 
 ts_nod_tiberiumrefinery:
-	Inherits: ts_gdi_tiberiumrefinery
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@ref: ^Refinery
+	Tooltip:
+		Name: Tiberium Refinery
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
 		Queue: Building, RABuilding
 		Description: Processes ore into credits.
+	Building:
+		Footprint: xxx_ xxx= _===
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	CustomSellValue:
+		Value: 500
 	FreeActor:
 		Actor: ts_nod_tiberiumharvester
 		SpawnOffset: 2,2
 		Facing: 256
+	WithIdleOverlay@REDLIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-redlights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	WithDockingOverlay@UNLOAD:
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+		DeathPaletteIsPlayerPalette: true
 	RenderSprites:
 		Image: ts_nod_tiberiumrefinery
+		PlayerPalette: playerra2
 
 ts_nod_tiberiumwastefacility:
 	Inherits: ^BaseBuilding
@@ -333,12 +372,55 @@ ts_nod_warfactory:
 		PlayerPalette: playerra2
 
 ts_nod_servicedepot:
-	Inherits: ts_gdi_servicedepot
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Valued:
+		Cost: 800
 	Tooltip:
 		Name: Service Depot
 	Buildable:
+		BuildPaletteOrder: 60
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_warfactory
+		Queue: Building, RABuilding
 		Description: Repairs nearby vehicles.
+	Building:
+		Footprint: x++ +++
+		Dimensions: 3,2
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: ground
+	WithIdleOverlay@CIRCUITS:
+		RequiresCondition: !build-incomplete
+		Sequence: circuits
+	WithRepairOverlay@CRANE:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		StartSequence: crane-start
+		Sequence: crane-loop
+		EndSequence: crane-end
+	WithRepairOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: platform
+	WithDeathAnimation@BIB:
+		DeathSequence: dead-ground
+		DeathSequencePalette: playerra2
+		UseDeathTypeSuffix: false
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		DeathPaletteIsPlayerPalette: true

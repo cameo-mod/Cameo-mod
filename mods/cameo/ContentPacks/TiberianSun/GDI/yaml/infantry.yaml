@@ -9,10 +9,12 @@ ts_gdi_lightinfantry:
 		Upgrades: ts_gdi_upgrade_seretraining
 
 ts_gdi_medic:
-	Inherits: ra1_allies_medic
+	Inherits: ^Soldier
+	Inherits@Template: ^MedicTemplate
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@SERETraining: ^SERETraining
+	Inherits@Heal: ^PrioritizeHeal
 	Buildable:
 		Prerequisites: ~ts_gdi_barracks
 		Queue: Infantry, RAInfantry
@@ -21,6 +23,20 @@ ts_gdi_medic:
 		Cost: 500
 	Tooltip:
 		Name: Medic
+	Health:
+		HP: 10000
+	Mobile:
+		Speed: 50
+	Armament:
+		Weapon: Heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Heal
+	RenderRangeCircleCA:
+		Armaments: primary
+		RangeCircleType: heal
 	WithInfantryBody:
 		IdleSequences: idle
 		StandSequences: stand
@@ -32,6 +48,8 @@ ts_gdi_medic:
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		CrushedSequencePalette: ra2effect
+	GuardsSelection:
+		ValidTargets: Infantry
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
 

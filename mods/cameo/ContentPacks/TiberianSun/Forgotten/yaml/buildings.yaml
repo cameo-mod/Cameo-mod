@@ -288,12 +288,55 @@ forgotten_warfactory:
 		PlayerPalette: player_rgba
 
 forgotten_servicedepot:
-	Inherits: ts_gdi_servicedepot
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Valued:
+		Cost: 800
 	Tooltip:
 		Name: actor_forgotten_servicedepot.name
 	Buildable:
+		BuildPaletteOrder: 60
 		Description: actor_forgotten_servicedepot.description
 		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
+		Queue: Building, RABuilding
+	Building:
+		Footprint: x++ +++
+		Dimensions: 3,2
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: ground
+	WithIdleOverlay@CIRCUITS:
+		RequiresCondition: !build-incomplete
+		Sequence: circuits
+	WithRepairOverlay@CRANE:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		StartSequence: crane-start
+		Sequence: crane-loop
+		EndSequence: crane-end
+	WithRepairOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: platform
+	WithDeathAnimation@BIB:
+		DeathSequence: dead-ground
+		DeathSequencePalette: playerra2
+		UseDeathTypeSuffix: false
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		DeathPaletteIsPlayerPalette: true
@@ -302,14 +345,42 @@ forgotten_servicedepot:
 		PlayerPalette: playerra2
 
 forgotten_helipad:
-	Inherits: ts_gdi_helipad
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@hpad: ^IsAircraftFactory
+	Valued:
+		Cost: 1000
 	Tooltip:
 		Name: actor_forgotten_helipad.name
 	Buildable:
+		BuildPaletteOrder: 50
 		Description: actor_forgotten_helipad.description
 		Queue: Building, RABuilding
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
 	ProductionQueue@AIRCRAFT:
+	Power:
+		Amount: -10
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		DeathPaletteIsPlayerPalette: true

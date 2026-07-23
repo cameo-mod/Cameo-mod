@@ -1814,11 +1814,11 @@ cabal_hunterkillermk1:
 
 cabal_hunterdronecarrier:
 	idle:
-		Filename: cabal_sprites|cabal_hunterdrone_carrier.png
+		Filename: cabal_sprites|cabal_hunter_drone_carrier.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_icons|cabal_hunterdrone_carrier_icon.png
+		Filename: cabal_icons|cabal_hunter_drone_carrier_icon.png
 
 cabal_hunterdrone:
 	idle:
@@ -1826,7 +1826,7 @@ cabal_hunterdrone:
 		Facings: 32
 		Scale: 0.5
 	icon:
-		Filename: cabal_icons|cabal_orbdrone_icon.png
+		Filename: cabal_icons|cabal_orb_drone_icon.png
 
 cabal_repairdrone:
 	Defaults:
@@ -1840,11 +1840,11 @@ cabal_repairdrone:
 
 cabal_overkillgunship:
 	idle:
-		Filename: cabal_sprites|cabal_overkillgunship.png
+		Filename: cabal_sprites|cabal_overkill_gunship.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_icons|cabal_overkillgunship_icon.png
+		Filename: cabal_icons|cabal_overkill_gunship_icon.png
 
 cabal_mothership:
 	idle:
@@ -1859,7 +1859,7 @@ cabal_mothership:
 
 cabal_orbdrone:
 	Defaults:
-		Filename: cabal_sprites|cabal_orbdrone.png
+		Filename: cabal_sprites|cabal_orb_drone.png
 		FrameSize: 64, 64
 		Scale: 1
 		Tick: 200
@@ -1889,7 +1889,7 @@ cabal_orbdrone:
 
 cabal_cyborgassassin:
 	Defaults:
-		Filename: cabal_sprites|cabal_cyborgassassin.shp
+		Filename: cabal_sprites|cabal_cyborg_assassin.shp
 		Scale: 1
 		Tick: 200
 		Offset: 0, 0, 16
