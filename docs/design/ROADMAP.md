@@ -1654,3 +1654,16 @@ All other factions have a single, thematically appropriate wall type.
   SAM, Interceptor, Patriot) from the rename.
   Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
   Effort: M. See DESIGN.md §1.
+
+## Long-term goals
+
+- [ ] **ZERO YAML ERRORS & WARNINGS** — achieve zero errors and zero warnings
+  from `OpenRA.Utility.exe cameo --check-yaml`. Baseline saved at
+  `docs/audit/check-yaml-baseline.txt` (379,899 errors, 80,703 warnings as of
+  2026-07-23). Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
+  Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
+  Phases: (1) palette fixes, (2) Interactable/Selectable conflicts, (3) missing
+  FTL keys, (4) missing actor definitions [biggest], (5) unresolved prerequisites,
+  (6) unused granted conditions [biggest warnings], (7) VisibilityType.Footprint,
+  (8) invalid map factions, (9) MuzzleSequence/LaunchAngle/misc, (10) sequence
+  warnings, (11) unused field/trait.
