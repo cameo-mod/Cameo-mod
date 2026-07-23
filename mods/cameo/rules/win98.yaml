@@ -139,7 +139,6 @@ WIN98_POWERPLANT:
 		Prerequisite: WIN98_POWERPLANT
 	Buildable:
 		BuildPaletteOrder: 11
-		Prerequisites:
 		Queue: Building, RABuilding
 		BuildDuration: 160
 		BuildDurationModifier: 100
@@ -1434,7 +1433,6 @@ WIN98_MOUSE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites:
 		Description: Fast tank, good for scouting.\n  Strong vs Light armor\n  Weak vs Infantry, Tanks, Aircraft
 	Valued:
 		Cost: 500
@@ -1481,7 +1479,6 @@ WIN98_MINE:
 		Name: Mine
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		Description: Hovering mine that can deploy\ninto the ground.
 	Mobile:
@@ -1570,7 +1567,6 @@ WIN98_BITCOIN:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites:
 		Queue: Vehicle, RAVehicle
 		Description: Delivers 500 credits.
 	Mobile:
@@ -1757,7 +1753,6 @@ WIN98_REGEDIT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites:
 		Queue: Aircraft, RAAircraft
 		Description: Heavy win98 warship, deploys\n5 interceptor craft.\n Strong vs Vehicles, Aircraft
 	Aircraft:

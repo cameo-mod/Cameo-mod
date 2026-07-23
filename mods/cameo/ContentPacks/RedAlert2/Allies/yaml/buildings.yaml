@@ -178,7 +178,6 @@ ra2_allies_airforcecommandhq:
 		KillOnRemove: false
 	ParatroopersPower@ra2paratroopers:
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: ra2_allies_upgrade_paratroopers
 		OrderName: USA Paratroopers
 		IconImage: ra2_allies_airforcecommandhq
@@ -302,7 +301,6 @@ ra2_allies_alliedbattlelab:
 	GrantExternalConditionPower@forceshield:
 		OrderName: ForceShield
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: ra2_allies_upgrade_forceshield
 		Icons:
 			1: forceshield
@@ -361,7 +359,6 @@ ra2_allies_spysatelliteuplink:
 		Produces: SpySatellite
 	Exit:
 	ProduceActorPower@spysat:
-		Prerequisites:
 			1:
 		Icons:
 			1: gps
