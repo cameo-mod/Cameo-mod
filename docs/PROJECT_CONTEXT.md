@@ -4,9 +4,7 @@ Use this as a short orientation document. It summarizes the repository documenta
 
 ## Project
 
-Cameo is an OpenRA crossover RTS mod. The repository is undergoing a migration toward self-contained faction ContentPacks, consistent actor/asset naming, auditable balance rules, and safer rule changes. The last known-good release used for regression comparisons is:
-
-`C:\Users\AedisToru\AppData\Local\Cameo-IFV\instances\cameo\main`
+Cameo is an OpenRA crossover RTS mod. The repository is undergoing a migration toward self-contained faction ContentPacks, consistent actor/asset naming, auditable balance rules, and safer rule changes. The last known-good release used for regression comparisons is the local Cameo-IFV release install (use as golden reference for regression diffs).
 
 ## Required reading
 
@@ -28,4 +26,4 @@ Crashes and player-visible regressions always take priority over queued work.
 
 ## Multi-agent rule
 
-The repository docs are shared truth. `C:\Users\AedisToru\Documents\DevinCameoProject` is retained as an external historical/scratch folder only. Its roadmap and instructions point back to this repository; do not create or maintain a second active roadmap or audit-output tree there.
+The repository docs are shared truth. An external historical/scratch folder (DevinCameoProject) is retained only for provenance. Its roadmap and instructions point back to this repository; do not create or maintain a second active roadmap or audit-output tree there.

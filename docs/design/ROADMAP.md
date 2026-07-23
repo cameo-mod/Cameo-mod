@@ -11,8 +11,7 @@ factions, everything through the balance workbook. Faction reference:
 > **Multi-agent repo.** Three contributors touch this tree: the
 > maintainer (AedisToru), **333ggg** (i333ggg@yandex.ru — works Starcraft
 > vultures, TS GDI riot troopers, `cabal.xlsx` rows), and **Devin AI**
-> (leaves a log at `C:\Users\AedisToru\Documents\DevinCameoProject\
-> DEVELOPMENT_LOG.md`). ALWAYS `git add <files>` scoped, never `-A`.
+> (leaves a log at `DevinCameoProject/DEVELOPMENT_LOG.md` in the external scratch folder). ALWAYS `git add <files>` scoped, never `-A`.
 > Verify others' commits before building on them. Devin's 2026-07-12
 > sound pass (obelcor3/samshot1 fixes) was reviewed and TRUSTED
 > 2026-07-13; keep it. 333ggg's mine commits are self-contained (SC +
@@ -352,7 +351,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
 ### P0/P1 — User-reported issues (2026-07-15/17)
 
 > Golden reference (pre-rename, everything working):
-> `C:\Users\AedisToru\AppData\Local\Cameo-IFV\instances\cameo\main` —
+> the last Cameo-IFV release install —
 > diff against it when a rename regression is suspected. Tester reports
 > (NFWRambo) need verification before fixing.
 
@@ -594,8 +593,7 @@ line tank, Laser Tank plays as support. See the FINAL LAYOUT above.)
 
 A community contributor updated TKM (new upgrades and/or rebalance) but
 can't merge anymore after our renames. He sent his ENTIRE repo as a zip,
-extracted at `C:\Users\AedisToru\Downloads\TKuM`; his base version is
-UNKNOWN. Plan: (1) inventory his tree; (2) find his base by matching his
+extracted from a contributor's zip (base version UNKNOWN). Plan: (1) inventory his tree; (2) find his base by matching his
 files against our git history / the golden reference release; (3) his
 real changes = diff(his tree, base); (4) port onto master through the
 rename maps (old ids → tkm_*) into ContentPacks/TKM/TKM/yaml; (5)

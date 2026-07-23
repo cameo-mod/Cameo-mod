@@ -1,7 +1,7 @@
 # Shattered Paradise (SP) research — TS authenticity + CABAL reference
 
 _Research 2026-07-11 against the local SDK checkout
-(`C:\Users\AedisToru\Downloads\Shattered-Paradise-SDK-bleed`, bleed).
+(Shattered-Paradise-SDK-bleed, bleed).
 SP is the reference-quality OpenRA TS total conversion. License: code
 GPLv3 (traits are portable into our GPL assemblies with attribution).
 **ASSET LAW (design 2026-07-11): take NO art or sound from SP** — no

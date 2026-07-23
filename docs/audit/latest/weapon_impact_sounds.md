@@ -6,5 +6,5 @@ Weapons with CreateEffect but no ImpactSounds: **1**
 
 | weapon | file |
 | --- | --- |
-| SniperAP | C:\Users\AedisToru\Documents\GitHub\Cameo-mod\mods\cameo\ContentPacks\TiberianDawn\GDI\yaml\weapons.yaml |
+| SniperAP | mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/weapons.yaml |
 

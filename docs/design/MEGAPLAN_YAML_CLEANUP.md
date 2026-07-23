@@ -14,7 +14,7 @@ Achieve zero errors and zero warnings from `OpenRA.Utility.exe cameo --check-yam
 ## How to re-run the check
 
 ```powershell
-$env:MOD_SEARCH_PATHS="C:\Users\AedisToru\Documents\GitHub\Cameo-mod\mods,C:\Users\AedisToru\Documents\GitHub\Cameo-mod\engine\mods"
+$env:MOD_SEARCH_PATHS="mods,engine/mods"
 $env:ENGINE_DIR=".."
 .\bin\OpenRA.Utility.exe cameo --check-yaml 2>&1 | Out-File -FilePath docs\audit\check-yaml-baseline.txt -Encoding utf8
 ```

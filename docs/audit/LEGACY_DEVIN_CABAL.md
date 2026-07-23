@@ -2,7 +2,7 @@
 
 ## Status
 
-This document indexes material in `C:\Users\AedisToru\Documents\DevinCameoProject` that predates this shared workspace. It is **historical provenance, not current audit evidence**. The external folder contains a template README, a second local roadmap, ad-hoc scripts, and raw outputs with no guaranteed relation to the current working tree.
+This document indexes material in the external DevinCameoProject folder that predates this shared workspace. It is **historical provenance, not current audit evidence**. The external folder contains a template README, a second local roadmap, ad-hoc scripts, and raw outputs with no guaranteed relation to the current working tree.
 
 Current audits belong in `docs/audit/latest/` and are generated from `tools/audit/`. The shared operating rules are in `docs/AGENT_WORKSPACE.md`.
 
@@ -16,7 +16,7 @@ The external `DEVELOPMENT_LOG.md` records these CABAL conclusions:
 - CABAL upgrade tiers, vehicle/infantry roles, and promotion relationships require a workbook-backed rebalance pass before further stat edits.
 - Past CABAL work claimed clean menu boots and full-audit runs, but all claims must be revalidated after subsequent repository changes.
 
-The design source was `C:\Users\AedisToru\Documents\DevinCameoProject\CABAL_FACTION_DESIGN.md`. Its relevant design rules were partially carried into `docs/DESIGN.md`; if CABAL work resumes, reconcile any remaining differences before changing rules.
+The design source was `CABAL_FACTION_DESIGN.md` (in the external DevinCameoProject folder). Its relevant design rules were partially carried into `docs/DESIGN.md`; if CABAL work resumes, reconcile any remaining differences before changing rules.
 
 ## External raw-output inventory
 

@@ -129,7 +129,7 @@ Align all actor names with DESIGN.md §1 naming convention: `[game_]faction_name
 | steelconsortium | 9 | `steelconsortium_promotion_unlockbarracuda` → `steelconsortium_promotion_barracuda` |
 | ra1_soviets | 6 | `ra1_soviets_promotion_unlockcyberdog` → `ra1_soviets_promotion_cyberdog` |
 
-Full list in `C:/Users/AedisToru/.windsurf/plans/categorized_output.txt` lines 3-181.
+Full list in the categorized rename output (lines 3-181).
 
 ### 6.5 Category 2: Upgrades with "unlock" (12 renames)
 

@@ -150,8 +150,8 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   Shared assets keep their original names and move to the owning
   Shared pack instead. After every rename batch run
   `audit_asset_files.py` (A1 must be 0). Golden reference for
-  pre-rename values: `C:/Users/AedisToru/AppData/Local/Cameo-IFV/
-  instances/cameo/main` (the last release before the renames).
+  pre-rename values: the last Cameo-IFV release install (use for
+  regression diffs when a rename regression is suspected).
 - **The wall target type is lowercase `wall`** (evidence 2026-07-17:
   all TargetTypes definitions + 345 weapon refs are lowercase; treat
   it as engine-adjacent vocabulary, never capitalize).
@@ -1039,8 +1039,8 @@ detector and fixes land as ordered batches, never silently.
 
 ## 15. CABAL faction design rules
 
-The full CABAL faction design lives in the local document
-`C:\Users\AedisToru\Documents\DevinCameoProject\CABAL_FACTION_DESIGN.md`.
+The full CABAL faction design lives in a local document
+(`CABAL_FACTION_DESIGN.md` in the external DevinCameoProject folder).
 This section binds the rules that affect YAML-level auditing.
 
 **Faction identity.** CABAL is a self-contained cybernetic collective: every

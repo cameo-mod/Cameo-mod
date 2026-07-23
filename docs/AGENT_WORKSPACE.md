@@ -28,6 +28,11 @@ This repository is the shared source of truth for maintainers and every AI agent
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.
 5. Before every commit, boot with `launch-game.cmd`, verify the main menu, and confirm no new exception log was created. Stage only the files belonging to the change.
 
+## Documentation rules
+
+- **Never use absolute local file paths in any repository document.** Always use relative paths from the repository root (e.g. `mods/cameo/rules/defaults.yaml`, not `C:\Users\...\mods\cameo\rules\defaults.yaml`). Other contributors and AI agents have different local paths. Absolute paths leak personal filesystem information and break on other machines.
+- External personal folders are referenced by name only (e.g. "the external DevinCameoProject folder"), never by absolute path.
+
 ## Audit organization
 
 - `tools/audit/`: executable detectors and shared parsing/model infrastructure.

@@ -4,7 +4,7 @@
 
 ## Evidence source
 
-- Last known-good release: `C:\Users\AedisToru\AppData\Local\Cameo-IFV\instances\cameo\main`
+- Last known-good release: the local Cameo-IFV release install
 - Current checkout: this repository
 - Engine failure observed 2026-07-17:
 
