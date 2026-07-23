@@ -1409,6 +1409,7 @@ wc_h_mcv:
 wc_h_mcv.bot:
 	Inherits: wc_h_mcv
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
 		Prerequisites: ~botplayer, allowsMCV
@@ -1905,6 +1906,7 @@ wc_n_fireelemental:
 	Tooltip:
 		Name: Fire Elemental
 	Buildable:
+		Prerequisites:
 		Description: Don't play with fire.\nExtremely vulnerable against Water\nCannot be hurt by fire
 	DamageMultiplier@DamageReduction:
 		Modifier: 85

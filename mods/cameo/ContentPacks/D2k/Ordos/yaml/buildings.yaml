@@ -742,7 +742,6 @@ ordos_palace:
 		IconImage: ordos_saboteur
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: palace
 		Actors: trooper, trooper, ordos_saboteur, ordos_saboteur
 		Type: Saboteurs

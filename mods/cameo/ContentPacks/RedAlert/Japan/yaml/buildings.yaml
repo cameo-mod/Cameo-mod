@@ -185,7 +185,6 @@ japan_japaneseairfield:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	ParatroopersPower@paratroopers:
 		OrderName: japanparatroopers
-		Prerequisites:
 			1: japan_upgrade_bushidodiscipline
 			2: japan_upgrade_bushidodiscipline, japan_promotion_samurai
 			3: japan_upgrade_bushidodiscipline, japan_promotion_archermaiden

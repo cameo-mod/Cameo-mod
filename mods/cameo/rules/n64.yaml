@@ -1765,6 +1765,7 @@ N64E3GDI:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
@@ -1799,6 +1800,7 @@ N64E3NOD:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/Anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
@@ -2079,6 +2081,7 @@ N64BGGY:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 20
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry\n  Weak vs Tanks
@@ -2164,6 +2167,7 @@ N64FTNK:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 55
 		Queue: Vehicle, RAVehicle
 		Description: Heavily armored flame-throwing vehicle.\n  Strong vs Infantry, Buildings and Vehicles\n  Weak vs Tanks
@@ -2255,6 +2259,7 @@ N64STNK:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 90
 		Queue: Vehicle, RAVehicle
 		Description: Long-range missile tank that can cloak.\nCan attack Aircraft.\nHas weak armor. Can be spotted by infantry and defense structures.\n  Strong vs Vehicles, Tanks\n  Weak vs Infantry.
@@ -2783,6 +2788,7 @@ N64HELI:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 130
 		Queue: Aircraft, RAAircraft
 		Description: Helicopter Gunship with Chainguns.\n  Strong vs Infantry, Light Vehicles and\n  Aircraft\n  Weak vs Tanks

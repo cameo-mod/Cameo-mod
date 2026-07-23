@@ -1609,6 +1609,7 @@ SC2KTORNADO:
 	Selectable:
 		Bounds: 3072, 6144
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Description: Sucks and eats everything in its way.

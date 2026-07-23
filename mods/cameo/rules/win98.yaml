@@ -179,6 +179,7 @@ WIN98_BARRACKS:
 	Tooltip:
 		Name: Scanner
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 12
 		Queue: Building, RABuilding
 		Description: Trains infantry Windows 98 units
@@ -309,6 +310,7 @@ WIN98_INPUT_DEVICES:
 		Name: Input Devices
 	ProvidesPrerequisite:
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Description: Trains vehicle Windows 98 units
@@ -383,6 +385,7 @@ WIN98_POWERPLANTADVANCED:
 	ProvidesPrerequisite:
 		Prerequisite: WIN98_POWERPLANT
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 60
 		Prerequisites: win98_recyclebin
 		Queue: Building, RABuilding
@@ -1389,6 +1392,7 @@ WIN98_MCV:
 	Valued:
 		Cost: 1500
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		BuildDuration: 750
@@ -1545,6 +1549,7 @@ WIN98_KEYBOARD:
 	Tooltip:
 		Name: Mechanical Keyboard
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 110
 		Prerequisites: WIN98_RADAR
 		Queue: Vehicle, RAVehicle

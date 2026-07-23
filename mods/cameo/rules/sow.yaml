@@ -623,6 +623,7 @@ sowheavyfactory:
 	Tooltip:
 		Name: Heavy Factory
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 7
 		BuildDurationModifier: 25
 		Queue: Building, RABuilding

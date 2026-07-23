@@ -863,6 +863,7 @@ MECH.camea:
 JEEP.camea:
 	Inherits: td_gdi_humvee
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_gdi_humvee
@@ -870,6 +871,7 @@ JEEP.camea:
 BIKE.camea:
 	Inherits: td_nod_reconbike
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_nod_reconbike
@@ -877,6 +879,7 @@ BIKE.camea:
 1TNK.camea:
 	Inherits: ra1_allies_alliedlighttank
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: ra1_allies_alliedlighttank
@@ -884,6 +887,7 @@ BIKE.camea:
 MTNK.camea:
 	Inherits: td_gdi_battletank
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_gdi_battletank
@@ -891,6 +895,7 @@ MTNK.camea:
 3TNK.camea:
 	Inherits: ra1_soviets_heavytank
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: ra1_soviets_heavytank
@@ -906,6 +911,7 @@ V2RL.camea:
 FTNK.camea:
 	Inherits: td_nod_flametank
 	Buildable:
+		Prerequisites:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: td_nod_flametank
@@ -990,6 +996,7 @@ MSSM.camea:
 RAHELI.camea:
 	Inherits: ra1_allies_longbow
 	Buildable:
+		Prerequisites:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: ra1_allies_longbow
@@ -997,6 +1004,7 @@ RAHELI.camea:
 HIND.camea:
 	Inherits: ra1_soviets_hindattackhelicopter
 	Buildable:
+		Prerequisites:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: ra1_soviets_hindattackhelicopter
@@ -1004,6 +1012,7 @@ HIND.camea:
 ORCA.camea:
 	Inherits: td_gdi_orca
 	Buildable:
+		Prerequisites:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: td_gdi_orca
@@ -1011,6 +1020,7 @@ ORCA.camea:
 YAK.camea:
 	Inherits: ra1_soviets_yakscoutplane
 	Buildable:
+		Prerequisites:
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
 		Image: ra1_soviets_yakscoutplane
@@ -1027,6 +1037,7 @@ TRAN.camea:
 	Inherits: TRAN
 	Inherits@bot: ^BotMicromanageable
 	Buildable:
+		Prerequisites:
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:

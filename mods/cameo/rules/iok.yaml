@@ -995,6 +995,7 @@ IOKSITE:
 	Tooltip:
 		Name: Stinger Site
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 60
 		Prerequisites: iokbarracks
 		Queue: Defence, RADefence

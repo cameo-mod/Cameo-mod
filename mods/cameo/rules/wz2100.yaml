@@ -4114,6 +4114,7 @@ psc2100chopshop2:
 	Tooltip:
 		Name: MCV Python Tracks (Alpha)
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 100
 		Prerequisites: 2100RF, 2100RR
 		Queue: Vehicle, RAVehicle
@@ -4703,6 +4704,7 @@ psc2100chopshop2:
 	Tooltip:
 		Name: Heavy Gunner Cyborg
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Infantry, RAInfantry
 		Description: Strong vs Vehicles

@@ -381,7 +381,6 @@ asianalliance_asianairforcecommand:
 	ParatroopersPower@aaparatroopers:
 		OrderName: aaparatroopers
 		PauseOnCondition: disabled
-		Prerequisites:
 			1: asianalliance_upgrade_massparadrop
 			2: asianalliance_upgrade_massparadrop, asianalliance_promotion_fanatic
 			3: asianalliance_upgrade_massparadrop, asianalliance_promotion_plasmatrooper
@@ -982,7 +981,6 @@ asianalliance_advancedcommunicationcenter:
 	IonCannonPower:
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Prerequisites:
 		Prerequisites:
 			1: ~techlevel.superweapons
 		IconImage: asianalliance_advancedcommunicationcenter

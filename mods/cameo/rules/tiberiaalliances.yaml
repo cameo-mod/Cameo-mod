@@ -462,6 +462,7 @@ taguardian:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40
@@ -531,6 +532,7 @@ tapitbull:
 		AddToArmyValue: true
 		OverrideActor: td_gdi_apc
 	Buildable:
+		Prerequisites:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
 		BuildDurationModifier: 40

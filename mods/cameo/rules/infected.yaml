@@ -298,6 +298,7 @@ zombie.squad:
 	Valued:
 		Cost: 10000
 	Buildable:
+		Prerequisites:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 1
 		BuildDuration: 1500

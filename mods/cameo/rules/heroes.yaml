@@ -633,6 +633,7 @@ volkovcc:
 	Selectable:
 		Bounds: 2048, 2048
 	Buildable:
+		Prerequisites:
 		Queue: Heroes
 		BuildPaletteOrder: 140
 		Prerequisites: ra2_soviets_warfactory, ra2_soviets_battlelab, ~anysovietsallra, !1hero

@@ -182,7 +182,6 @@ ra2_allies_chronosphere:
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
-		Prerequisites:
 			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2_allies_chronosphere
