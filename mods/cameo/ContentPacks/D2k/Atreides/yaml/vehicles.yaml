@@ -1,6 +1,7 @@
 combat_tank.atreides:
 	Inherits: ^combat_tank
 	Buildable:
+		Prerequisites: ~heavy.atreides_combat
 		Description: Main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Armament:
 		Weapon: 80mm_A
