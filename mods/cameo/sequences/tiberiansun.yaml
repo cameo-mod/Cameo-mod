@@ -394,9 +394,9 @@ tstorpedo:
 tsnttmpl:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: tsnttmpl.shp
 		Offset: -12,-42, 42
-		Scale: 1.15
 	idle:
 		Filename: tsnttmpl.shp
 		ShadowStart: 3
@@ -437,6 +437,7 @@ tsnttmpl:
 tsctarmr:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: tsctarmr.shp
 	idle:
 		Filename: tsctarmr.shp
@@ -456,8 +457,8 @@ tsctarmr:
 
 tsnthpadmut:
 	Defaults:
+		Scale: 1.25
 		Filename: forgotten_helipad.shp
-		Scale: 1
 		Offset: 0, -24, 0
 	idle:
 		Filename: forgotten_helipad.shp
@@ -478,12 +479,15 @@ tsnthpadmut:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
+		Scale: 1
 		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
+		Scale: 1
 		Filename: invisibleitem.shp
 	dead-platform:
+		Scale: 1
 		Filename: invisibleitem.shp
 	idle-lights:
 		Filename: forgotten_helipad_b.shp
@@ -515,8 +519,8 @@ tsnthpadmut:
 tsgtsilo.gdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Offset: 4, -24, 24
 	idle:
 		Filename: tsgtsilo_a.shp
@@ -531,10 +535,12 @@ tsgtsilo.gdi:
 		Start: 4
 		Length: 4
 	idle-underlay:
+		Scale: 1
 		Filename: ts_nod_silo_tsgtsilo.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-idle-underlay:
+		Scale: 1
 		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 1
 		ShadowStart: 4
@@ -566,8 +572,8 @@ tsgtsilo.gdi:
 tsgtsilo.nod:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Offset: 4, -24, 24
 	idle:
 		Filename: ts_nod_silo.shp
@@ -581,10 +587,12 @@ tsgtsilo.nod:
 		Filename: ts_nod_silo_sd.shp
 		Length: 4
 	idle-underlay:
+		Scale: 1
 		Filename: ts_nod_silo_b.shp
 		Length: 20
 		ZOffset: -512
 	damaged-idle-underlay:
+		Scale: 1
 		Filename: ts_nod_silo_b.shp
 		Length: 20
 		ZOffset: -512
@@ -621,8 +629,8 @@ tsgtsilo.nod:
 
 tsgtdept:
 	Defaults:
-		Filename: ts_gdi_servicedepot_cabal.shp
 		Scale: 1.25
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Offset: 8, -32, 1
 	idle:
 		Filename: ts_gdi_servicedepot_cabal.shp
@@ -640,15 +648,18 @@ tsgtdept:
 		Tick: 400
 		# Offset: 0, -16, 12
 	ground:
+		Scale: 1
 		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
+		Scale: 1
 		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
+		Scale: 1
 		Filename: ts_gdi_servicedepot_cabal_bib.shp
 		Start: 2
 		ShadowStart: 5
@@ -704,9 +715,11 @@ tsgtdept:
 		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
+		Scale: 1
 		Filename: ts_gdi_servicedepot_cabal_d.shp
 		ZOffset: -1c511
 	damaged-platform:
+		Scale: 1
 		Filename: ts_gdi_servicedepot_cabal_d.shp
 		Start: 2
 		ZOffset: -1c511
@@ -879,8 +892,8 @@ tsjumpjet:
 forgot_conyard:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: forgotten_constructionyard.png
-		Scale: 1
 		Offset: 0, -20, 20
 	idle:
 		Start: 64
@@ -940,7 +953,7 @@ forgot_conyard:
 forgot_power:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Scale: 1
+		Scale: 1.25
 		Filename: forgotten_crystalpowerextractor.png
 	idle:
 		Start: 32
@@ -964,6 +977,7 @@ forgot_power:
 forgot_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: forgotten_barracks.png
 		Start: 32
@@ -987,6 +1001,7 @@ forgot_barracks:
 forgot_refin:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Offset: 0,-12
 	idle:
 		Filename: forgotten_refinery.png
@@ -1011,6 +1026,7 @@ forgot_refin:
 forgot_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: forgotten_radar.png
 		Start: 32
@@ -1034,6 +1050,7 @@ forgot_radar:
 forgot_church:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: forgotten_church.png
 		Start: 32
@@ -1057,6 +1074,7 @@ forgot_church:
 forgot_weap:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	damaged-idle:
@@ -1087,13 +1105,16 @@ forgot_weap:
 		Filename: forgotten_warfactory_buildup.png
 		Length: 32
 	bib2:
+		Scale: 1
 		Filename: forgotten_warfactory_bottom.png
 		ZOffset: -1024
 	damaged-bib2:
+		Scale: 1
 		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	dead-bib2:
+		Scale: 1
 		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
@@ -1105,6 +1126,7 @@ forgot_weap:
 forgot_silo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: forgotten_silo.png
 	idle:
 		Filename: forgotten_silo.png
@@ -1120,10 +1142,12 @@ forgot_silo:
 		Start: 45
 		Length: 12
 	idle-underlay:
+		Scale: 1
 		Filename: forgotten_silo.png
 		Start: 32
 		ZOffset: -512
 	damaged-idle-underlay:
+		Scale: 1
 		Filename: forgotten_silo.png
 		Start: 45
 		ZOffset: -512
@@ -1156,8 +1180,8 @@ tsveinsmoke:
 
 tsntpuls:
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_empulsecannon.shp
-		Scale: 1.6
 		Offset: 0,-12
 	idle:
 		Filename: ts_gdi_empulsecannon.shp
@@ -1525,6 +1549,7 @@ invisibleplane:
 
 ts_nod_laserfence_segment:
 	Defaults:
+		Scale: 1.25
 		Filename: tsntfence.shp
 	idle:
 		Length: 1

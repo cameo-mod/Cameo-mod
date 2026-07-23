@@ -401,15 +401,15 @@ ts_gdi_amphibiousapc:
 
 ts_gdi_pitbull:
 	Defaults:
-		Scale: 1
+		Scale: 1.25
 	idle:
 		Filename: ts_gdi_pitbull.png
 		Facings: 64
-		Scale: 1
+		Scale: 1.25
 	turret:
 		Filename: ts_gdi_pitbull_tur.png
 		Facings: 64
-		Scale: 1
+		Scale: 1.25
 	icon:
 		Filename: ts_gdi_pitbull_icon.png
 	muzzle:
@@ -418,6 +418,7 @@ ts_gdi_pitbull:
 
 ts_gdi_mobilesensorarray:
 	Defaults:
+		Scale: 1.25
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -426,6 +427,7 @@ ts_gdi_mobilesensorarray:
 
 ts_gdi_mobileemp:
 	Defaults:
+		Scale: 1.25
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -445,9 +447,9 @@ ts_gdi_wolverine:
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_wolverine.shp
 		Offset: 0,0,8
-		Scale: 1.25
 	stand:
 		Filename: ts_gdi_wolverine.shp
 		Start: 96
@@ -526,7 +528,7 @@ ts_gdi_mammothmkii:
 
 ts_gdi_juggernaut:
 	Defaults:
-		Scale: 1.443
+		Scale: 1.25
 	idle:
 		Filename: ts_gdi_juggernaut_jugger.shp
 		Facings: -8
@@ -548,12 +550,12 @@ ts_gdi_juggernaut:
 		Filename: ts_gdi_juggernaut_juggerbarl.shp
 		Facings: 32
 		Offset: -4, 0, 12
-		Scale: 0.5
+		Scale: 0.625
 	barrelup:
 		Filename: ts_gdi_juggernaut_juggerbarlup.shp
 		Facings: 32
 		Offset: -4, 0, 12
-		Scale: 0.5
+		Scale: 0.625
 	idletur:
 		Filename: ts_gdi_juggernaut_djugg.shp
 		ShadowStart: 3
@@ -576,6 +578,7 @@ ts_gdi_juggernaut:
 
 ts_gdi_disruptor:
 	Defaults:
+		Scale: 1.25
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: shared_sprites|invisibleitem.shp
@@ -653,9 +656,9 @@ ts_gdi_powerturbine:
 ts_gdi_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_barracks.shp
 		Offset: 0, -12, 24
-		Scale: 1.25
 	idle:
 		Filename: ts_gdi_barracks.shp
 		ShadowStart: 3
@@ -707,9 +710,9 @@ ts_gdi_barracks:
 ts_gdi_warfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_warfactory.shp
 		Offset: -4, -21, 22
-		Scale: 1.25
 	idle:
 		Filename: ts_gdi_warfactory_1.shp
 		ShadowStart: 2
@@ -764,12 +767,14 @@ ts_gdi_warfactory:
 	make:
 		Filename: ts_gdi_warfactory_make.shp
 	bib2:
+		Scale: 1
 		Filename: ts_gdi_warfactory_bib.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -4, -21, 0
 		ZRamp: 1
 	damaged-bib2:
+		Scale: 1
 		Filename: ts_gdi_warfactory_bib.shp
 		Start: 1
 		Length: 1
@@ -777,6 +782,7 @@ ts_gdi_warfactory:
 		Offset: -4, -21, 0
 		ZRamp: 1
 	dead-bib2:
+		Scale: 1
 		Filename: ts_gdi_warfactory_bib.shp
 		Start: 2
 		Length: 1
@@ -791,9 +797,9 @@ ts_gdi_warfactory:
 ts_gdi_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_radar_radr.shp
 		Offset: 0, -12, 12
-		Scale: 1.323
 	idle:
 		Filename: ts_gdi_radar_radr.shp
 		ShadowStart: 3
@@ -828,9 +834,9 @@ ts_gdi_radar:
 ts_gdi_techcenter:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_techcenter.shp
 		Offset: -16, -32, 30
-		Scale: 1.25
 	idle:
 		Filename: ts_gdi_techcenter.shp
 		ShadowStart: 3
@@ -860,9 +866,9 @@ ts_gdi_techcenter:
 
 ts_gdi_helipad:
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_helipad.shp
 		Offset: 0, -24, 1
-		Scale: 1.25
 	idle:
 		Filename: ts_gdi_helipad.shp
 		ShadowStart: 3
@@ -882,15 +888,18 @@ ts_gdi_helipad:
 		Tick: 400
 		Offset: 0, -24, 8
 	idle-platform:
+		Scale: 1
 		Filename: ts_gdi_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
+		Scale: 1
 		Filename: ts_gdi_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
+		Scale: 1
 		Filename: ts_gdi_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
@@ -957,18 +966,21 @@ ts_gdi_tiberiumrefinery:
 		Length: 16
 		Tick: 120
 	bib2:
+		Scale: 1
 		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Length: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	damaged-bib2:
+		Scale: 1
 		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	dead-bib2:
+		Scale: 1
 		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Start: 2
 		ZOffset: -1024
@@ -980,9 +992,9 @@ ts_gdi_tiberiumrefinery:
 ts_gdi_upgradecenter:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Filename: ts_gdi_upgradecenter.shp
 		Offset: 18,-4, 15
-		Scale: 1.25
 	idle:
 		Filename: ts_gdi_upgradecenter.shp
 		ShadowStart: 3
@@ -1098,8 +1110,8 @@ ts_gdi_carryall:
 
 ts_gdi_vulcantower:
 	Defaults:
-		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	idle:
 		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:
@@ -1129,8 +1141,8 @@ ts_gdi_vulcantower:
 
 ts_gdi_rpgtower:
 	Defaults:
-		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	idle:
 		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:
@@ -1160,8 +1172,8 @@ ts_gdi_rpgtower:
 
 ts_gdi_samtower:
 	Defaults:
-		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	idle:
 		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:

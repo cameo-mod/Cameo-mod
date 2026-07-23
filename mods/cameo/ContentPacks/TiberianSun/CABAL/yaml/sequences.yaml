@@ -1,7 +1,7 @@
 cabal_plasmaturret:
 	Defaults:
-		Filename: ts_nod_laserturret.shp
 		Scale: 1.25
+		Filename: ts_nod_laserturret.shp
 	idle:
 	damaged-idle:
 		Start: 1
@@ -842,8 +842,8 @@ cabal_scarabapc:
 cabal_cyborgfactory:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Offset: -12, -15, 30
 		Scale: 1.25
+		Offset: -12, -15, 30
 	idle:
 		Filename: cabal_sprites|cabal_cyborgfactory_ybbar.shp
 		ShadowStart: 3
@@ -896,8 +896,8 @@ cabal_cyborgfactory:
 cabal_mechfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Offset: -12, -21, 30
 		Scale: 1.25
+		Offset: -12, -21, 30
 	idle:
 		Filename: cabal_sprites|cabal_mechfactory_1.shp
 		ShadowStart: 2
@@ -956,15 +956,18 @@ cabal_mechfactory:
 		Filename: cabal_sprites|cabal_mechfactory_make.shp
 		Length: 25
 	bib2:
+		Scale: 1
 		Filename: cabal_sprites|cabal_mechfactory_bib.shp
 		ZOffset: -1024
 		Offset: -12, -21, 1
 	damaged-bib2:
+		Scale: 1
 		Filename: cabal_sprites|cabal_mechfactory_bib.shp
 		Start: 1
 		ZOffset: -1024
 		Offset: -12, -21, 1
 	dead-bib2:
+		Scale: 1
 		Filename: cabal_sprites|cabal_mechfactory_bib.shp
 		Start: 2
 		ZOffset: -1024
@@ -977,8 +980,8 @@ cabal_mechfactory:
 cabal_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: cabal_sprites|cabal_radar.shp
 		Scale: 1.25
+		Filename: cabal_sprites|cabal_radar.shp
 		Offset: 0, -12, 12
 	idle:
 		Filename: cabal_sprites|cabal_radar.shp
@@ -1045,6 +1048,7 @@ cabal_techcenter:
 cabal_core:
 	Inherits: ^WithBuildingBib2
 	Defaults:
+		Scale: 1.25
 		Filename: cabal_sprites|cabal_core.shp
 		Offset: -1,-21, 42
 	idle:
@@ -1150,6 +1154,7 @@ tscrys:
 cabal_pillbox:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 1.25
 		Offset: 0,-12
 	idle:
 		Filename: cabal_sprites|cabal_pillbox.shp
@@ -1506,8 +1511,8 @@ cabal_pillbox:
 
 cabal_heavycabalobelisk:
 	Defaults:
-		Filename: cabal_sprites|cabal_heavycabalobelisk_ctobel.shp
 		Scale: 1.25
+		Filename: cabal_sprites|cabal_heavycabalobelisk_ctobel.shp
 		Offset: 0, -24, 24
 	idle:
 		Filename: cabal_sprites|cabal_heavycabalobelisk_ctobel.shp
@@ -1675,8 +1680,8 @@ cabal_heavycabalobelisk:
 
 cabal_stealthgenerator:
 	Defaults:
-		Filename: cabal_sprites|cabal_stealthgenerator.shp
 		Scale: 1.25
+		Filename: cabal_sprites|cabal_stealthgenerator.shp
 		Offset: -16, -16, 1
 	idle:
 		Filename: cabal_sprites|cabal_stealthgenerator.shp
@@ -1707,8 +1712,8 @@ cabal_stealthgenerator:
 
 tsnthpadcabal:
 	Defaults:
-		Filename: cabal_sprites|cabal_helipad.shp
 		Scale: 1.25
+		Filename: cabal_sprites|cabal_helipad.shp
 		Offset: 0, -24, 0
 	idle:
 		Filename: cabal_sprites|cabal_helipad.shp
@@ -1729,15 +1734,18 @@ tsnthpadcabal:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
+		Scale: 1
 		Filename: cabal_sprites|cabal_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
+		Scale: 1
 		Filename: cabal_sprites|cabal_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
+		Scale: 1
 		Filename: cabal_sprites|cabal_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
@@ -1767,6 +1775,7 @@ tsnthpadcabal:
 cabal_refinery:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Offset: 0,48
 	idle:
 		Filename: cabal_sprites|cabal_refinery.png
@@ -1983,6 +1992,7 @@ cabal_cyborg_assassin:
 
 cabal_obeliskofdarkness:
 	Defaults:
+		Scale: 1.25
 		Filename: cabal_sprites|cabal_obeliskofdarkness.shp
 		Offset: 15, 0, 0
 	idle:

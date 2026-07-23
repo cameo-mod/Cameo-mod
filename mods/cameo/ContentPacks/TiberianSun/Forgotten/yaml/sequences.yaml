@@ -565,7 +565,6 @@ forgotten_nomadbarracks:
 	idle:
 		Filename: forgotten_nomadbarracks.png
 		Facings: 64
-		Scale: 1
 	muzzle:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
@@ -846,8 +845,8 @@ forgotten_crystalpowerextractor:
 forgotten_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Offset: -12, -15, 30
 		Scale: 1.25
+		Offset: -12, -15, 30
 	idle:
 		Filename: tambar.shp
 		ShadowStart: 2
@@ -888,6 +887,7 @@ forgotten_barracks:
 forgotten_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 		Filename: tamradr.shp
 		Offset: 0, -12, 12
 	idle:
@@ -979,18 +979,21 @@ forgotten_refinery:
 		Tick: 120
 		Reverses: True
 	bib2:
+		Scale: 1
 		Filename: tamref_bib.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	damaged-bib2:
+		Scale: 1
 		Filename: tamref_bib.shp
 		Start: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	dead-bib2:
+		Scale: 1
 		Filename: tamref_bib.shp
 		Start: 2
 		ZOffset: -1024
@@ -1054,6 +1057,7 @@ forgotten_cropplane:
 forgotten_chemicalplant:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Scale: 1.25
 	idle:
 		Filename: forgotten_chemicalplant.png
 		Start: 40
@@ -1097,6 +1101,7 @@ forgotten_veinhole:
 
 forgotten_machineguntower:
 	Defaults:
+		Scale: 1.25
 		Filename: shared_sprites|invisibleitem.shp
 	idle:
 		Filename: shared_sprites|invisibleitem.shp

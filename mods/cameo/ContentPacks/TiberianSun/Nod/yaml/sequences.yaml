@@ -100,6 +100,7 @@ ts_nod_shotguncommando:
 
 ts_nod_mobilestealthgenerator:
 	Defaults:
+		Scale: 1.25
 		Filename: shared_sprites|invisibleitem.shp
 	icon:
 		Filename: ts_nod_mobilestealthgenerator_icon.shp
@@ -125,6 +126,7 @@ ts_nod_attackbuggy:
 
 ts_nod_laserfence:
 	Defaults:
+		Scale: 1.25
 		Filename: ts_nod_laserfence_tspost.shp
 	idle:
 		Start: 0
@@ -424,15 +426,18 @@ ts_nod_warfactory:
 	make:
 		Filename: ts_nod_warfactory_make.shp
 	bib2:
+		Scale: 1
 		Filename: ts_nod_warfactory_bib.shp
 		ZOffset: -1024
 		# Offset: -12, -21, 1
 	damaged-bib2:
+		Scale: 1
 		Filename: ts_nod_warfactory_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: -12, -21, 1
 	dead-bib2:
+		Scale: 1
 		Filename: ts_nod_warfactory_bib.shp
 		Start: 2
 		ZOffset: -1024
@@ -445,8 +450,8 @@ ts_nod_warfactory:
 ts_nod_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ts_nod_radar.shp
 		Scale: 1.25
+		Filename: ts_nod_radar.shp
 		Offset: 0, -12, 12
 	idle:
 		Filename: ts_nod_radar.shp
@@ -511,8 +516,8 @@ ts_nod_techcenter:
 
 ts_nod_obeliskoflight:
 	Defaults:
-		Filename: ts_nod_obeliskoflight.shp
 		Scale: 1.25
+		Filename: ts_nod_obeliskoflight.shp
 		Offset: 0, -24, 24
 	idle:
 		Filename: ts_nod_obeliskoflight.shp
@@ -543,8 +548,8 @@ ts_nod_obeliskoflight:
 
 ts_nod_stealthgenerator:
 	Defaults:
-		Filename: ts_nod_stealthgenerator.shp
 		Scale: 1.25
+		Filename: ts_nod_stealthgenerator.shp
 		Offset: -16, -16, 1
 	idle:
 		Filename: ts_nod_stealthgenerator.shp
@@ -576,8 +581,8 @@ ts_nod_stealthgenerator:
 
 ts_nod_helipad:
 	Defaults:
-		Filename: ts_nod_helipad.shp
 		Scale: 1.25
+		Filename: ts_nod_helipad.shp
 		Offset: 0, -24, 0
 	idle:
 		Filename: ts_nod_helipad.shp
@@ -598,15 +603,18 @@ ts_nod_helipad:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
+		Scale: 1
 		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
+		Scale: 1
 		Filename: ts_nod_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
+		Scale: 1
 		Filename: ts_nod_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
@@ -649,8 +657,8 @@ ts_nod_tiberiumrefinery:
 ts_nod_tiberiumwastefacility:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: ts_nod_tiberiumwastefacility.shp
 		Scale: 1.25
+		Filename: ts_nod_tiberiumwastefacility.shp
 		Offset: 0, 0, 24
 	idle:
 		ShadowStart: 3
@@ -683,15 +691,18 @@ ts_nod_tiberiumwastefacility:
 		Length: 16
 		Tick: 120
 	bibb:
+		Scale: 1
 		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		ZOffset: -1024
 		# Offset: 0, -36, 3
 	damaged-bibb:
+		Scale: 1
 		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: 0, -36, 3
 	dead-bibb:
+		Scale: 1
 		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		Start: 2
 		ZOffset: -1024
@@ -706,8 +717,8 @@ ts_nod_tiberiumwastefacility:
 ts_nod_missilesilo:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ts_nod_missilesilo_cabal.shp
 		Scale: 1.25
+		Filename: ts_nod_missilesilo_cabal.shp
 		Offset: -4, -8, 24
 	idle:
 		Filename: ts_nod_missilesilo_cabal.shp
@@ -756,8 +767,8 @@ ts_nod_bansheefighter:
 
 ts_nod_laserturret:
 	Defaults:
-		Filename: ts_nod_laserturret.shp
 		Scale: 1.25
+		Filename: ts_nod_laserturret.shp
 	idle:
 		Filename: ts_nod_laserturret.shp
 	damaged-idle:
@@ -776,8 +787,8 @@ ts_nod_laserturret:
 
 ts_nod_samsite:
 	Defaults:
-		Filename: ts_nod_samsite.shp
 		Scale: 1.25
+		Filename: ts_nod_samsite.shp
 	idle:
 		Filename: ts_nod_samsite.shp
 	damaged-idle:
