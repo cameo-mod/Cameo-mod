@@ -23,17 +23,17 @@ Players:
 		Name: Neutral
 		OwnsWorld: True
 		NonCombatant: True
-		Faction: Randomcnc
+		Faction: Random
 	PlayerReference@Creeps:
 		Name: Creeps
 		NonCombatant: True
-		Faction: Randomcnc
+		Faction: Random
 	PlayerReference@Player:
 		Name: Player
 		AllowBots: False
 		Playable: True
 		Required: True
-		LockFaction: True
+		LockFaction: Random
 		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
@@ -41,14 +41,14 @@ Players:
 		LockSpawn: True
 	PlayerReference@SideA:
 		Name: SideA
-		LockFaction: True
+		LockFaction: Random
 		Faction: td_gdi
 		LockColor: True
 		Color: FFD700
 		Enemies: SideB
 	PlayerReference@SideB:
 		Name: SideB
-		LockFaction: True
+		LockFaction: Random
 		Faction: td_nod
 		LockColor: True
 		Color: D30000

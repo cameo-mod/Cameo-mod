@@ -21,17 +21,17 @@ Players:
 		Name: Neutral
 		OwnsWorld: True
 		NonCombatant: True
-		Faction: Randomcnc
+		Faction: Random
 	PlayerReference@Creeps:
 		Name: Creeps
 		NonCombatant: True
-		Faction: Randomcnc
+		Faction: Random
 	PlayerReference@Player:
 		Name: Player
 		AllowBots: False
 		Playable: True
 		Required: True
-		LockFaction: True
+		LockFaction: Random
 		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
@@ -40,7 +40,7 @@ Players:
 	PlayerReference@Truck:
 		Name: Truck
 		Bot: campaign
-		LockFaction: True
+		LockFaction: Random
 		Faction: td_gdi
 		LockColor: True
 		Color: F0E286
