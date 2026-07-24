@@ -26,7 +26,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Ticks after the first completed unit before the collecting batch is sealed.")]
 		public readonly int CollectionDelay = 875;
 
-		[Desc("Ticks between sealing a batch and dispatching its frigate.")]
+		[Desc("Ticks from sealing to the first dispatch, and from a completed unload to the next dispatch.")]
 		public readonly int DispatchDelay = 250;
 
 		[Desc("Maximum number of units in one delivery batch.")]
@@ -97,6 +97,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[VerifySync]
 		int dispatchRetryRemaining;
 
+		[VerifySync]
+		int postDeliveryCooldownRemaining;
+
 		public int CollectionRemaining => collectionRemaining;
 		public int CollectingCount => collecting.Count;
 		public int MaxBatchSize => info.MaxBatchSize;
@@ -111,7 +114,9 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (pending.First == null)
 					return -1;
 
-				return Math.Max(0, pending.First.Value.DispatchTick - Actor.World.WorldTick);
+				return Math.Max(
+					Math.Max(0, pending.First.Value.DispatchTick - Actor.World.WorldTick),
+					postDeliveryCooldownRemaining);
 			}
 		}
 
@@ -144,6 +149,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			if (dispatchRetryRemaining > 0)
 				dispatchRetryRemaining--;
+
+			if (postDeliveryCooldownRemaining > 0)
+				postDeliveryCooldownRemaining--;
 
 			TryDispatch();
 			TickInner(self, producers.All(p => p.Trait.IsTraitPaused));
@@ -326,7 +334,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void TryDispatch()
 		{
-			if (activeBatch != null || pending.First == null || dispatchRetryRemaining > 0)
+			if (activeBatch != null || pending.First == null ||
+				dispatchRetryRemaining > 0 || postDeliveryCooldownRemaining > 0)
 				return;
 
 			var batch = pending.First.Value;
@@ -419,6 +428,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			activeBatch = null;
+			postDeliveryCooldownRemaining = info.DispatchDelay;
 		}
 
 		internal void DeliveryFailed(int batchId)
@@ -458,6 +468,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			activeBatch = null;
 			collectionRemaining = -1;
 			dispatchRetryRemaining = 0;
+			postDeliveryCooldownRemaining = 0;
 			Refund(refund);
 		}
 
@@ -480,6 +491,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				hash = hash * 31 + (activeBatch?.Id ?? -1);
 				hash = hash * 31 + (activeBatch?.Candidates.Count ?? 0);
 				hash = hash * 31 + dispatchRetryRemaining;
+				hash = hash * 31 + postDeliveryCooldownRemaining;
 				foreach (var candidate in collecting)
 					hash = HashCandidate(hash, candidate);
 				foreach (var batch in pending)

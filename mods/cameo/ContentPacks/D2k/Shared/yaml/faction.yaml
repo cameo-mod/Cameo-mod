@@ -30,8 +30,8 @@ Player:
 		BuildDurationModifier: 50
 		ParallelProductionSlots: 3
 		InfiniteBuildLimit: 10
-		CollectionDelay: 875
-		DispatchDelay: 250
+		CollectionDelay: 1500
+		DispatchDelay: 750
 		MaxBatchSize: 20
 		MaxPendingBatches: 3
 	ExternalCondition@BuildingsOwned:
