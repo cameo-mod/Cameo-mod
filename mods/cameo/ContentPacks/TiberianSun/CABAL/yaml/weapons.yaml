@@ -2055,9 +2055,12 @@ CabalMagicNuke:
 		Duration: 20
 		Intensity: 5
 		Multiplier: 1,1
-	Warhead@FlashEffect: FlashEffect
-		Duration: 20
-		FlashType: PulseWeapon
+	Warhead@NuclearFlash: NuclearFlashEffect
+		Color: 32C8FF
+		Duration: 40
+		Radius: 0.35
+		Brightness: 1.3
+		Darkness: 0.85
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke
 		ImpactSounds: nukexplo.aud
