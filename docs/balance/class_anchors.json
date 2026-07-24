@@ -214,5 +214,21 @@
   },
   "tech_tier": 1.0,
   "verifier_actor": null
+ },
+ "mortar": {
+  "anchor_actor": "forgotten_mutantmortarman",
+  "verifier_actor": "ordos_mortartrooper",
+  "comment": "MORTAR = long-range (~10000) SLOW indirect-fire infantry, SEPARATE from grenadiers (short-range/fast). Maintainer 2026-07-25: split back out of grenadier. Baseline forgotten_mutantmortarman (kept near current: HP 30000, cost 500, range ~10000). Verifier ordos_mortartrooper fitted to 2x HP / 2x DPS / 2.5x cost, same range+speed as anchor. RA1 Soviet ra1_soviets_mortarsoldier should keep the LONGEST range in the class. dps0 = anchor current eff-DPS (provisional, test in-game).",
+  "provisional": "dps0/cost0 near current anchor; verifier needs the 2x/2x/2.5x restat; test in-game",
+  "reveals_shroud": 10000,
+  "signed_off": false,
+  "spec": {
+   "cost0": 500,
+   "dps0": 409,
+   "hp0": 30000,
+   "range0_wdist": 10000,
+   "speed0": 50
+  },
+  "tech_tier": 1.0
  }
 }
