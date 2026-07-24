@@ -107,6 +107,7 @@ futuretech_troopgate:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 18
+		BlendMode: Additive
 	damaged-idle-tele:
 		Combine:
 			0:
@@ -119,6 +120,7 @@ futuretech_troopgate:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
 		Length: 18
+		BlendMode: Additive
 	make:
 		Filename: futuretech_troopgate_make.shp
 		Length: 42
@@ -192,6 +194,7 @@ futuretech_warpgate:
 		Length: 24
 		ZOffset: 0
 		ShadowStart: -1
+		BlendMode: Additive
 	make:
 		Filename: futuretech_warpgate_make.shp
 		Length: 58
@@ -207,11 +210,12 @@ futuretech_warpgate:
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
-				Length: 32
+				Length: 16
 			2:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
-		Length: 34
+		Length: 18
+		BlendMode: Additive
 	damaged-idle-tele:
 		Combine:
 			0:
@@ -219,11 +223,12 @@ futuretech_warpgate:
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
-				Length: 32
+				Length: 16
 			2:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
-		Length: 34
+		Length: 18
+		BlendMode: Additive
 	icon:
 		Filename: futuretech_warpgate_icon.png
 		Offset: 0,0
@@ -315,15 +320,19 @@ futuretech_transmissioncenter:
 	idle-lighta:
 		Filename: futuretech_transmissioncenter_egtf_a.shp
 		Length: 18
+		BlendMode: Additive
 	damaged-idle-lighta:
 		Filename: futuretech_transmissioncenter_egtf_a.shp
 		Length: 18
+		BlendMode: Additive
 	idle-lightb:
 		Filename: futuretech_transmissioncenter_egtf_b.shp
 		Length: 18
+		BlendMode: Additive
 	damaged-idle-lightb:
 		Filename: futuretech_transmissioncenter_egtf_b.shp
 		Length: 18
+		BlendMode: Additive
 	make:
 		Filename: futuretech_transmissioncenter_make.shp
 		Length: 44
@@ -391,15 +400,19 @@ futuretech_battlelab:
 	idle-lights:
 		Filename: futuretech_battlelab_egtech_a.shp
 		Length: 15
+		BlendMode: Additive
 	damaged-idle-lights:
 		Filename: futuretech_battlelab_egtech_a.shp
 		Length: 15
+		BlendMode: Additive
 	idle-lights2:
 		Filename: futuretech_battlelab_egtech_b.shp
 		Length: 2
+		BlendMode: Additive
 	damaged-idle-lights2:
 		Filename: futuretech_battlelab_egtech_b.shp
 		Length: 2
+		BlendMode: Additive
 	make:
 		Filename: futuretech_battlelab_make.shp
 		Length: 54
@@ -429,22 +442,27 @@ futuretech_hypercore:
 		Filename: futuretech_hypercore_egshock_a.shp
 		Length: 10
 		Tick: 150
+		BlendMode: Additive
 	damaged-idle-lights:
 		Filename: futuretech_hypercore_egshock_ad.shp
 		Length: 10
 		Tick: 150
+		BlendMode: Additive
 	critical-idle-lights:
 		Filename: futuretech_hypercore_egshock_ad.shp
 		Length: 10
 		Tick: 150
+		BlendMode: Additive
 	idle-charge:
 		Filename: futuretech_hypercore_egshock_g.shp
 		Length: 25
 		Tick: 150
+		BlendMode: Additive
 	damaged-idle-charge:
 		Filename: futuretech_hypercore_egshock_gd.shp
 		Length: 25
 		Tick: 150
+		BlendMode: Additive
 	make:
 		Filename: futuretech_hypercore_make.shp
 		Length: 49

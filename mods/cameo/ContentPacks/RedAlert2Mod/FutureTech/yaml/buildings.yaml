@@ -14,7 +14,6 @@ futuretech_constructionyard:
 		IntoActor: futuretech_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
-		RequiresCondition: factundeploy
 	WithBuildingPlacedOverlay:
 	ProvidesPrerequisite@ra2awall:
 		Prerequisite: ra2awall
@@ -159,7 +158,7 @@ futuretech_warpgate:
 	WithIdleOverlay@flag2:
 		Sequence: idle-flag2
 		RequiresCondition: !build-incomplete
-	WithIdleOverlay@fan:
+	WithProductionOverlay@fan:
 		Sequence: overlay-fan
 		RequiresCondition: !build-incomplete && !warp-producing
 	WithIdleOverlay@bib:

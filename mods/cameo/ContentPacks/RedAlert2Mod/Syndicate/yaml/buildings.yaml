@@ -852,10 +852,11 @@ latinsyndicate_syndicateconstructionyard:
 		IntoActor: latinsyndicate_syndicatemobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
-		RequiresCondition: factundeploy
 	WithBuildingPlacedOverlay:
 		Sequence: build
 	WithIdleOverlay@fans:
+		Sequence: idle-fans
+		RequiresCondition: !build-incomplete
 	WithIdleOverlay@top:
 		Sequence: idle-top
 		RequiresCondition: !build-incomplete

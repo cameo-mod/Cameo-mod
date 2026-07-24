@@ -16,31 +16,13 @@ ts_gdi_constructionyard:
 	Health:
 		HP: 1000000
 	Transforms:
-		RequiresCondition: factundeploy
-		PauseOnCondition: being-demolished || build-incomplete
 		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
-	TransformsIntoMobile:
-		RequiresCondition: factundeploy
-		Locomotor: heavywheeled
-		RequiresForceMove: true
-		RedeployAfterMove: true
-	TransformsIntoPassenger:
-		RequiresCondition: factundeploy
-		CargoType: Vehicle
-		RequiresForceMove: true
-	TransferTimedExternalConditionOnTransform:
-		Condition: invulnerability
-	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
-		Condition: factundeploy
-		Prerequisites: global-factundeploy
 	WithProductionOverlay@WELDING:
 		RequiresCondition: !build-incomplete
 		Queues: Building, Defence, RABuilding, RADefence
 		Sequence: build
-	BaseProvider:
-		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
 	ProvidesPrerequisite@asianalliancebarrier:

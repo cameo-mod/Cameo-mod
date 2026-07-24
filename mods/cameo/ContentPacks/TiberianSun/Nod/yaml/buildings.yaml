@@ -16,27 +16,9 @@ ts_nod_constructionyard:
 	Health:
 		HP: 1000000
 	Transforms:
-		RequiresCondition: factundeploy
-		PauseOnCondition: being-demolished || build-incomplete
 		IntoActor: ts_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
-	TransformsIntoMobile:
-		RequiresCondition: factundeploy
-		Locomotor: heavywheeled
-		RequiresForceMove: true
-		RedeployAfterMove: true
-	TransformsIntoPassenger:
-		RequiresCondition: factundeploy
-		CargoType: Vehicle
-		RequiresForceMove: true
-	TransferTimedExternalConditionOnTransform:
-		Condition: invulnerability
-	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
-		Condition: factundeploy
-		Prerequisites: global-factundeploy
-	BaseProvider:
-		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
 	ProvidesPrerequisite@tslaserfence:
