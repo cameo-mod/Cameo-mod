@@ -203,7 +203,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   tambarmk, tampowrmk, tamradrmk, tamrefmk, tamtechmk, tsnttmplmk) with
   all YAML references updated.
 - [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
-  tooling documented in `docs/backlog_weapon_rename.md` for future
+  tooling documented in `docs/history/backlog_weapon_rename.md` for future
   continuation.
 - [x] **CABAL Orb Drone carrier-slave crash** (`ec63784bd`):
   `cabal_orb_drone` had `CarrierSlave`+`HasParent` traits while also being
@@ -249,7 +249,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   `engine/glsl/` but the file was never created. Created shader with proper
   uniforms (LightPosition, LightRadius, LightColor, Brightness, Darkness,
   SourceTexture). NOTE: file lives in engine/ which is .gitignored; must be
-  recreated after `make all` fetches engine. See AI_AGENT_HANDOFF.md.
+  recreated after `make all` fetches engine. See history/AI_AGENT_HANDOFF.md.
 
 ### P0 — Completed (2026-07-14 session)
 

@@ -18,7 +18,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 | Baseline audit evidence | `docs/audit/baseline/` | Historical comparison only. |
 | Faction reference | `docs/FACTIONS.md`, `docs/factions/MATRIX.md` | Use for display-name, faction-role, roster, and documentation checks. |
 | Migration process | `docs/MIGRATION.md` | Use for naming, actor splits, asset movement, and Fluent migrations. |
-| External-agent historical evidence | `docs/audit/LEGACY_DEVIN_CABAL.md` | Historical register only. No external output is current until rerun in this repository. |
+| External-agent historical evidence | `docs/history/LEGACY_DEVIN_CABAL.md` | Historical register only. No external output is current until rerun in this repository. |
 
 ## Required operating sequence
 
