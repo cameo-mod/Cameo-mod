@@ -484,6 +484,8 @@ harkonnen_starport:
 		Prerequisite: heavy.missile_tank
 	ProvidesPrerequisite@starport_mcv_production:
 		Prerequisite: harkonnen_mcv_production
+	ProvidesPrerequisite@starport_vehicle_production:
+		Prerequisite: harkonnen_vehicle_production
 
 harkonnen_palace:
 	Inherits: ^D2KBuilding
