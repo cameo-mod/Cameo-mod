@@ -133,7 +133,7 @@ terran_upgrade_infantryweaponslevel2:
 	RenderSprites:
 		Image: terran_upgrade_infantryweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: terran_upgrade_infantryweaponslevel1
+		Prerequisite: terran_upgrade_infantryweaponslevel2
 
 terran_upgrade_infantryarmorlevel1:
 	Inherits: ^researched_upgrade.template
@@ -165,7 +165,7 @@ terran_upgrade_infantryarmorlevel2:
 	RenderSprites:
 		Image: terran_upgrade_infantryarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: terran_upgrade_infantryarmorlevel1
+		Prerequisite: terran_upgrade_infantryarmorlevel2
 
 terran_upgrade_vehicleweaponslevel1:
 	Inherits: ^researched_upgrade.template

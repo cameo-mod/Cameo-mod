@@ -71,10 +71,6 @@ ixian_spiceharvester:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	SpawnActorOnDeath:
-		Actor: harvester_husk.ixian
-		OwnerType: InternalName
-		EffectiveOwnerFromOwner: true
 	WithHarvestOverlay:
 		Palette: effect50alpha
 	WithDockingAnimation:
@@ -963,24 +959,6 @@ ixian_heavykodatank:
 # 		RequiresCondition: !projectionrange
 # 		Delay: 20
 
-harvester_husk.ixian:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 1500
-	Tooltip:
-		Name: Spice Harvester (Destroyed)
-	TransformOnCapture:
-		IntoActor: ixian_spiceharvester
-
-missile_tank_husk.ixian:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 750
-	Tooltip:
-		Name: Missile Tank (Destroyed)
-	TransformOnCapture:
-		IntoActor: missile_tank
-
 ixian_stormraider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -1679,14 +1657,3 @@ duelist_tank.ixian:
 		Modifier: 110
 	ActorStatValues:
 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
-
-duelist_tank_husk.ixian:
-	Inherits: ^D2KVehicleHusk
-	Tooltip:
-		Name: Ix Duelist Tank (Destroyed)
-	Health:
-		HP: 1250
-	ThrowsParticle@turret:
-		Anim: turret
-	TransformOnCapture:
-		IntoActor: duelist_tank.ixian

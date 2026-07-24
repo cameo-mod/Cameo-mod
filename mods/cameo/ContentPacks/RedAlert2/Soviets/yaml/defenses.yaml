@@ -420,9 +420,6 @@ ra2_soviets_teslacoil:
 		LowPowerModifier: 200
 		QueueLimit: 1
 		ItemLimit: 1
-	GrantConditionOnProduction@teslaChargeUpgrade:
-		Condition: teslaChargeUpgrade
-		Actors: ra2teslaUpgrade
 	GrantConditionOnPrerequisite@teslaChargeUpgrade:
 		Condition: teslaChargeUpgrade
 		Prerequisites: ra2_soviets_upgrade_teslacoilchargers

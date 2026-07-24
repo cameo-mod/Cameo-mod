@@ -1083,15 +1083,6 @@
 #       HUSKS
 #######################################
 
-^combat_tank.husk:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 1000
-	Tooltip:
-		Name: Combat Tank (Destroyed)
-	ThrowsParticle@turret:
-		Anim: turret
-
 ^D2KVordelProxyUnit:
 	GrantConditionOnPowerState@LOWPOWER:
 		Condition: lowpower

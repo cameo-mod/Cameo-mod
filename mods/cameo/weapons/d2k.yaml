@@ -1987,15 +1987,6 @@ ixian_airdrone:
 		AimTargetStances: Enemy, Neutral
 
 	MinRange: 1300
-d2k_heavy_air_drone:
-	Inherits: ixian_airdrone
-	Range: 7100
-	ReloadDelay: 140
-	Burst: 8
-	Warhead@Shrapnel: FireShrapnel
-		Amount: 4
-
-	MinRange: 1420
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75

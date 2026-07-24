@@ -1,3 +1,12 @@
+atreides_constructionyard:
+	Inherits: ^construction_yard
+	Tooltip:
+		Name: Atreides Construction Yard
+	Transforms:
+		IntoActor: atreides_mobileconstructionvehicle
+	RenderSprites:
+		Image: conyard.atreides
+
 wind_trap.atreides:
 	Inherits: ^wind_trap
 	Buildable:
@@ -47,6 +56,10 @@ atreides_heavyfactory:
 		Description: template_factory.description
 		IconPalette: player
 	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: atreides_vehicle_production
+	ProvidesPrerequisite@atreides_combat:
 		Prerequisite: heavy.atreides_combat
 	ProvidesPrerequisite@missile_tank:
 		Prerequisite: heavy.missile_tank
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: atreides_mcv_production

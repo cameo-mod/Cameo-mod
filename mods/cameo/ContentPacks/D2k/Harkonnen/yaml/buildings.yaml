@@ -3,7 +3,7 @@ harkonnen_constructionyard:
 	Tooltip:
 		Name: Harkonnen Construction Yard
 	Transforms:
-		IntoActor: ixian_mobileconstructionvehicle
+		IntoActor: harkonnen_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	RenderSprites:
@@ -163,6 +163,8 @@ harkonnen_heavyfactory:
 		Sequence: production-welding
 	ProvidesPrerequisite@heavy_factory:
 		Prerequisite: heavy_factory
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: harkonnen_vehicle_production
 	ProductionBar@upgrade:
 		ProductionType: Upgrades
 	GrantConditionOnPrerequisite@UPGRADEABLE:
@@ -224,6 +226,8 @@ harkonnen_repairpad:
 		Actor: light_inf
 	ProvidesPrerequisite@repair_pad:
 		Prerequisite: harkonnen_repairpad
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: harkonnen_mcv_production
 
 harkonnen_outpost:
 	Inherits: ^D2KBuilding
@@ -478,6 +482,8 @@ harkonnen_starport:
 		Prerequisite: heavy.harkonnen_combat
 	ProvidesPrerequisite@starport_missile_tank:
 		Prerequisite: heavy.missile_tank
+	ProvidesPrerequisite@starport_mcv_production:
+		Prerequisite: harkonnen_mcv_production
 
 harkonnen_palace:
 	Inherits: ^D2KBuilding

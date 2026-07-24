@@ -3380,11 +3380,6 @@
 		MaxMoveDelay: 750
 	MapEditorData:
 		Categories: Civilian infantry
-	SpawnActorOnDeath@ZombieInfect:
-		Actor: civzombie.infect
-		Probability: 99
-		OwnerType: Killer
-		DeathType: ZombieInfection
 	Passenger:
 		CustomPipType: civilian
 
@@ -9644,7 +9639,6 @@ CPQDEBUGDUMMY:
 	Disguise:
 		DisguisedCondition: disguise
 		DisguisedAsConditions:
-			rmbo: hero
 			td_gdi_havoc: hero
 			td_nod_lasercommando: hero
 			ra1_allies_tanya: hero

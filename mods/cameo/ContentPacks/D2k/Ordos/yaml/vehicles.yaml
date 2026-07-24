@@ -1929,20 +1929,6 @@ ordos_tankdestroyer:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-deviator_husk.ordos:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 1000
-	Tooltip:
-		Name: Deviator (Destroyed)
-	TransformOnCapture:
-		IntoActor: ordos_deviatorartillery
-
-combat_tank_husk.ordos:
-	Inherits: ^combat_tank.husk
-	TransformOnCapture:
-		IntoActor: ordos_combattank
-
 ##################################
 #       PROMOTIONS
 ##################################

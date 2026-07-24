@@ -138,7 +138,7 @@ protoss_upgrade_groundweaponslevel2:
 	RenderSprites:
 		Image: protoss_upgrade_groundweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: protoss_upgrade_groundweaponslevel1
+		Prerequisite: protoss_upgrade_groundweaponslevel2
 
 protoss_upgrade_groundarmorlevel1:
 	Inherits: ^researched_upgrade.template
@@ -170,7 +170,7 @@ protoss_upgrade_groundarmorlevel2:
 	RenderSprites:
 		Image: protoss_upgrade_groundarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: protoss_upgrade_groundarmorlevel1
+		Prerequisite: protoss_upgrade_groundarmorlevel2
 
 protoss_upgrade_airweaponslevel1:
 	Inherits: ^researched_upgrade.template
@@ -202,7 +202,7 @@ protoss_upgrade_airweaponslevel2:
 	RenderSprites:
 		Image: protoss_upgrade_airweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: protoss_upgrade_airweaponslevel1
+		Prerequisite: protoss_upgrade_airweaponslevel2
 
 protoss_upgrade_airarmorlevel1:
 	Inherits: ^researched_upgrade.template
@@ -234,7 +234,7 @@ protoss_upgrade_airarmorlevel2:
 	RenderSprites:
 		Image: protoss_upgrade_airarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: protoss_upgrade_airarmorlevel1
+		Prerequisite: protoss_upgrade_airarmorlevel2
 
 	####################################################################################################
 	#		Upgrades Terrans
