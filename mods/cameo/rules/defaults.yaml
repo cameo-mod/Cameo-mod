@@ -6294,11 +6294,11 @@
 	Inherits@industry: ^IndustrySpeed
 	Inherits@police: ^CityCombatCallable
 	Inherits@berserk: ^Berserkable
-	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-	Inherits@WC2HASTE: ^wc2_o_haste_status
-	Inherits@WC2SLOW: ^wc2_h_slow_status
-	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 	-WithDecoration@WC2BLOODLUST:
 	-WithDecoration@WC2HASTE:
 	-WithDecoration@WC2SLOW:

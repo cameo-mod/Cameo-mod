@@ -38,7 +38,7 @@
 	icon:
 		Filename: wc2_cameos_orc_buildings.png
 
-^wc2_status_icons:
+^WC2StatusIcons:
 	Defaults:
 		Scale: 1.2
 	bloodlust_status_icon:
@@ -94,7 +94,7 @@
 		Start: 16
 
 ^WC2Infantry:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	stand:
 		Start: 0
 		Facings: -8
@@ -175,7 +175,7 @@
 		Filename: wc2_cameos_orc_units.png
 
 ^WC2Catapult:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	stand:
 		Frames: 0,2,4,6,8,10,12,14
 		Length: 1
@@ -209,7 +209,7 @@
 		Filename: wc2_cameos_orc_units.png
 
 ^WC2Critter:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	stand:
 		Start: 0
 		Facings: -8
@@ -230,7 +230,7 @@
 		Filename: cameos_wc2_extra.png
 
 ^WC2AirUnit:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	idle:
 		Start: 0
 		Length: 1
@@ -247,7 +247,7 @@
 		Filename: wc2_cameos_orc_units.png
 
 ^WC2Ship:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	idle:
 		Start: 0
 		Facings: -8

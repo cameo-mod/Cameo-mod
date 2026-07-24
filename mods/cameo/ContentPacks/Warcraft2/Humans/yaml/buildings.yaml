@@ -201,7 +201,7 @@ wc2_humans_castle:
 
 wc2_humans_farm:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_farm: ^wc2_farm
+	Inherits@wc2_farm: ^WC2Farm
 	Tooltip:
 		Name: Farm
 	Valued:
@@ -259,7 +259,7 @@ wc2_humans_farm:
 
 wc2_humans_barracks:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_barracks: ^wc2_barracks
+	Inherits@wc2_barracks: ^WC2Barracks
 	Tooltip:
 		Name: Barracks
 	Buildable:
@@ -273,7 +273,7 @@ wc2_humans_barracks:
 
 wc2_humans_elvenlumbermill:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Inherits@wc2_lumber_mill: ^WC2LumberMill
 	Tooltip:
 		Name: Elven Lumber Mill
 	Buildable:
@@ -307,7 +307,7 @@ wc2_humans_elvenlumbermill:
 
 wc2_humans_blacksmith:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@wc2_blacksmith: ^WC2Blacksmith
 	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
@@ -322,7 +322,7 @@ wc2_humans_blacksmith:
 
 wc2_humans_gnomishinventor:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_inventor: ^wc2_inventor
+	Inherits@wc2_inventor: ^WC2Inventor
 	Tooltip:
 		Name: Gnomish Inventor
 	Buildable:
@@ -336,7 +336,7 @@ wc2_humans_gnomishinventor:
 
 wc2_humans_stables:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_stables: ^wc2_stables
+	Inherits@wc2_stables: ^WC2Stables
 	Tooltip:
 		Name: Stables
 	Buildable:
@@ -350,7 +350,7 @@ wc2_humans_stables:
 
 wc2_humans_church:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_church: ^wc2_church
+	Inherits@wc2_church: ^WC2Church
 	Tooltip:
 		Name: Church
 	Buildable:
@@ -484,7 +484,7 @@ wc2_humans_sunwell:
 
 wc2_humans_magetower:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_temple: ^wc2_temple
+	Inherits@wc2_temple: ^WC2Temple
 	Tooltip:
 		Name: Mage Tower
 	Buildable:
@@ -576,7 +576,7 @@ wc2_humans_magetower:
 
 wc2_humans_gryphonaviary:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_nest: ^wc2_nest
+	Inherits@wc2_nest: ^WC2Nest
 	Tooltip:
 		Name: Gryphon Aviary
 	Buildable:
@@ -620,7 +620,7 @@ wc2_humans_cannontower_plug:
 
 wc2_humans_humangoldmine:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_goldmine: ^wc2_goldmine
+	Inherits@wc2_goldmine: ^WC2Goldmine
 	Tooltip:
 		Name: Human Gold Mine
 	Buildable:

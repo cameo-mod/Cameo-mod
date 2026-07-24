@@ -1,9 +1,9 @@
 wc2_humans_militiapeasant:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@WC2Template: ^wc2_peasant
+	Inherits@WC2SwordUpg: ^WC2HumansUpgradeSwordStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@WC2Template: ^WC2Peasant
 	Tooltip:
 		Name: Militia Peasant
 	Valued:
@@ -57,8 +57,8 @@ wc2_humans_footman:
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2SwordUpg: ^WC2HumansUpgradeSwordStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Footman
 	Valued:
@@ -100,8 +100,8 @@ wc2_humans_warcraft3footman:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2SwordUpg: ^WC2HumansUpgradeSwordStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Warcraft 3 Footman
 	Valued:
@@ -156,12 +156,12 @@ wc2_humans_elvenarcher:
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@WC2ArrowUpg: ^wc2_humans_upgrade_arrowstrength
-	Inherits@RLongBowUpg: ^wc2_humans_upgrade_rangerlongbow
-	Inherits@RScoutUpg: ^wc2_humans_upgrade_rangerscouting
-	Inherits@RMarksmanUpg: ^wc2_humans_upgrade_rangermarksman
-	Inherits@RangerUpg: ^wc2_humans_upgrade_ranger
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@WC2ArrowUpg: ^WC2HumansUpgradeArrowStrength
+	Inherits@RLongBowUpg: ^WC2HumansUpgradeRangerLongbow
+	Inherits@RScoutUpg: ^WC2HumansUpgradeRangerScouting
+	Inherits@RMarksmanUpg: ^WC2HumansUpgradeRangerMarksman
+	Inherits@RangerUpg: ^WC2HumansUpgradeRanger
 	Tooltip:
 		Name: Elven Archer
 	Valued:
@@ -227,12 +227,12 @@ wc2_humans_highelvenarcher:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@WC2ArrowUpg: ^wc2_humans_upgrade_arrowstrength
-	Inherits@RLongBowUpg: ^wc2_humans_upgrade_rangerlongbow
-	Inherits@RScoutUpg: ^wc2_humans_upgrade_rangerscouting
-	Inherits@RMarksmanUpg: ^wc2_humans_upgrade_rangermarksman
-	Inherits@RangerUpg: ^wc2_humans_upgrade_ranger
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@WC2ArrowUpg: ^WC2HumansUpgradeArrowStrength
+	Inherits@RLongBowUpg: ^WC2HumansUpgradeRangerLongbow
+	Inherits@RScoutUpg: ^WC2HumansUpgradeRangerScouting
+	Inherits@RMarksmanUpg: ^WC2HumansUpgradeRangerMarksman
+	Inherits@RangerUpg: ^WC2HumansUpgradeRanger
 	Tooltip:
 		Name: High Elven Archer
 	Valued:
@@ -279,8 +279,8 @@ wc2_humans_dwarvenrifleman:
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@BallUpg: ^WC2HumansUpgradeBallistaStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Dwarven Rifleman
 	Valued:
@@ -343,12 +343,12 @@ wc2_humans_knight:
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2SwordUpg: ^WC2HumansUpgradeSwordStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@PalUpg: ^wc2_humans_upgrade_paladin
-	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
-	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Inherits@PalUpg: ^WC2HumansUpgradePaladin
+	Inherits@paladin_healing_upgrade: ^WC2HumansPaladinHealing
+	Inherits@paladin_exorcism_upgrade: ^WC2HumansPaladinExorcism
 	Tooltip:
 		Name: Knight
 	Valued:
@@ -395,7 +395,7 @@ wc2_humans_knight:
 	Targetable:
 		TargetTypes: Ground, Vehicle, Monster
 	#Weapons
-	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+	Inherits@attacks_and_spells: ^WC2KnightPaladinAttacksSpells
 	ActorStatValues:
 		Upgrades: wc2_humans_upgrade_swordstrength, wc2_humans_upgrade_swordstrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii, wc2_humans_upgrade_paladin, wc2_humans_upgrade_healing, wc2_humans_upgrade_exorcism
 
@@ -406,8 +406,8 @@ wc2_humans_mortarteam:
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@BallUpg: ^WC2HumansUpgradeBallistaStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Mortar Team
 	Valued:
@@ -449,11 +449,11 @@ wc2_humans_mortarteam:
 
 wc2_humans_mage:
 	Inherits@WC2Infantry: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
-	Inherits@wc2_h_mage_polymorph: ^wc2_h_mage_polymorph
-	Inherits@wc2_h_mage_blizzard: ^wc2_h_mage_blizzard
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@wc2_h_mage_slow: ^WC2HumansMageSlow
+	Inherits@wc2_h_mage_polymorph: ^WC2HumansMagePolymorph
+	Inherits@wc2_h_mage_blizzard: ^WC2HumansMageBlizzard
 	Tooltip:
 		Name: Mage
 	Buildable:
@@ -587,11 +587,11 @@ wc2_humans_mage:
 
 wc2_humans_archmage:
 	Inherits@WC2Infantry: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
-	Inherits@wc2_h_mage_polymorph: ^wc2_h_mage_polymorph
-	Inherits@wc2_h_mage_blizzard: ^wc2_h_mage_blizzard
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@wc2_h_mage_slow: ^WC2HumansMageSlow
+	Inherits@wc2_h_mage_polymorph: ^WC2HumansMagePolymorph
+	Inherits@wc2_h_mage_blizzard: ^WC2HumansMageBlizzard
 	Tooltip:
 		Name: Archmage
 	Buildable:
@@ -727,12 +727,12 @@ wc2_humans_archmage:
 
 wc2_humans_highelfpriest:
 	Inherits@WC2Infantry: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@wc2_h_mage_slow: ^WC2HumansMageSlow
 	Inherits@EXP: ^GainsExperienceTD
-	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
-	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Inherits@paladin_healing_upgrade: ^WC2HumansPaladinHealing
+	Inherits@paladin_exorcism_upgrade: ^WC2HumansPaladinExorcism
 	Tooltip:
 		Name: High Elf priest
 	Buildable:
@@ -841,12 +841,12 @@ wc2_humans_highelfpriest:
 
 wc2_humans_highelfsorceress:
 	Inherits@WC2Infantry: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@wc2_h_mage_slow: ^WC2HumansMageSlow
 	Inherits@EXP: ^GainsExperienceTD
-	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
-	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Inherits@paladin_healing_upgrade: ^WC2HumansPaladinHealing
+	Inherits@paladin_exorcism_upgrade: ^WC2HumansPaladinExorcism
 	Tooltip:
 		Name: High Elf Sorceress
 	Buildable:

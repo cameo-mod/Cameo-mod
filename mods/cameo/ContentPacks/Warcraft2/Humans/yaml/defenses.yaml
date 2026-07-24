@@ -6,7 +6,7 @@ wc2_humans_humanscouttower:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Human Scout Tower
@@ -173,7 +173,7 @@ wc2_humans_cannontower:
 
 # wc2_humans_humanscouttower:
 # 	Inherits@WC2BUILDING: ^WC2HumanDefense
-# 	Inherits@wc2_watch_tower: ^wc2_watch_tower
+# 	Inherits@wc2_watch_tower: ^WC2WatchTower
 # 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
 # 	#Inherits@AUTOTARGET: ^AutoTargetAll
 # 	Tooltip:

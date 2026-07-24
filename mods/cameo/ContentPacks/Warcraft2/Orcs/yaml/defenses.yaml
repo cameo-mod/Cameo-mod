@@ -6,7 +6,7 @@ wc2_orcs_orcwatchtower:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Orc Watch Tower
@@ -173,7 +173,7 @@ wc2_orcs_cannontower:
 
 # wc2_orcs_orcwatchtower:
 # 	Inherits@WC2BUILDING: ^WC2OrcDefense
-# 	Inherits@wc2_watch_tower: ^wc2_watch_tower
+# 	Inherits@wc2_watch_tower: ^WC2WatchTower
 # 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
 # 	#Inherits@AUTOTARGET: ^AutoTargetAll
 # 	Tooltip:

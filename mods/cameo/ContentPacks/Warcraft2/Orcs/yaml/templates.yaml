@@ -28,13 +28,13 @@
 		AddToArmyValue: true
 	RenderSprites:
 		PlayerPalette: player
-	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-	Inherits@WC2HASTE: ^wc2_o_haste_status
-	Inherits@WC2SLOW: ^wc2_h_slow_status
-	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 
-^wc2_orcs_upgrade_throwingaxestrength:
+^WC2OrcsUpgradeThrowingAxeStrength:
 	GrantConditionOnPrerequisite@TAxeUpg:
 		Condition: throwaxe_upg
 		Prerequisites: wc2_orcs_upgrade_throwingaxestrength
@@ -48,7 +48,7 @@
 		Modifier: 135
 		RequiresCondition: throwaxe_upg2
 
-^wc2_orcs_upgrade_catapultstrength:
+^WC2OrcsUpgradeCatapultStrength:
 	GrantConditionOnPrerequisite@CatUpg:
 		Condition: cat_upg
 		Prerequisites: wc2_orcs_upgrade_catapultstrength
@@ -62,7 +62,7 @@
 		Modifier: 135
 		RequiresCondition: cat_upg2
 
-^wc2_orcs_upgrade_berserker:
+^WC2OrcsUpgradeBerserker:
 	GrantConditionOnPrerequisite@BerserkerUpg:
 		Condition: berserker_upg
 		Prerequisites: wc2_orcs_upgrade_berserker
@@ -70,7 +70,7 @@
 		Modifier: 80
 		RequiresCondition: berserker_upg
 
-^wc2_orcs_upgrade_berserkerlightaxes:
+^WC2OrcsUpgradeBerserkerLightAxes:
 	GrantConditionOnPrerequisite@BLighterUpg:
 		Condition: berserkerla_upg
 		Prerequisites: wc2_orcs_upgrade_berserkerlightaxes
@@ -78,7 +78,7 @@
 		Modifier: 120
 		RequiresCondition: berserkerla_upg
 
-^wc2_orcs_upgrade_berserkerscouting:
+^WC2OrcsUpgradeBerserkerScouting:
 	GrantConditionOnPrerequisite@BScoutUpg:
 		Condition: berserkersc_upg
 		Prerequisites: wc2_orcs_upgrade_berserkerscouting
@@ -86,7 +86,7 @@
 		Modifier: 120
 		RequiresCondition: berserkersc_upg
 
-^wc2_orcs_upgrade_berserkerregeneration:
+^WC2OrcsUpgradeBerserkerRegeneration:
 	GrantConditionOnPrerequisite@BRegenUpg:
 		Condition: berserkerregen_upg
 		Prerequisites: wc2_orcs_upgrade_berserkerregeneration
@@ -100,7 +100,7 @@
 		DamageCooldown: 5
 		RequiresCondition: berserkerregen_upg
 
-^wc2_orcs_upgrade_ogremage:
+^WC2OrcsUpgradeOgreMage:
 	GrantConditionOnPrerequisite@OMUpg:
 		Condition: ogremage_upg
 		Prerequisites: wc2_orcs_upgrade_ogremage
@@ -114,27 +114,27 @@
 		Modifier: 120
 		RequiresCondition: ogremage_upg
 
-^wc2_o_ogremage_bloodlust:
+^WC2OrcsOgreMageBloodlust:
 	GrantConditionOnPrerequisite@OBloodlustUpg:
 		Condition: ogremagebloodlust_upg
 		Prerequisites: wc2_orcs_upgrade_bloodlust
 
-^wc2_o_ogremage_runes:
+^WC2OrcsOgreMageRunes:
 	GrantConditionOnPrerequisite@ORunesUpg:
 		Condition: ogremagerunes_upg
 		Prerequisites: wc2_orcs_upgrade_runes
 
-^wc2_o_deathknight_haste:
+^WC2OrcsDeathKnightHaste:
 	GrantConditionOnPrerequisite@DHasteUpg:
 		Condition: deathknighthaste_upg
 		Prerequisites: wc2_orcs_upgrade_haste
 
-^wc2_o_deathknight_deathanddecay:
+^WC2OrcsDeathKnightDeathAndDecay:
 	GrantConditionOnPrerequisite@DDeathAndDecayUpg:
 		Condition: deathknightdeathanddecay_upg
 		Prerequisites: wc2_orcs_upgrade_deathanddecay
 
-^wc2_o_deathknight_raisedead:
+^WC2OrcsDeathKnightRaiseDead:
 	GrantConditionOnPrerequisite@DRaiseDeadUpg:
 		Condition: deathknightraisedead_upg
 		Prerequisites: wc2_orcs_upgrade_raisedead
@@ -143,7 +143,7 @@
 # WC2 SPELL/STATUS EFFECT INHERITABLES
 ###################################################################################################
 
-^wc2_farm:
+^WC2Farm:
 	Inherits@power: ^PowerPlant
 	Inherits@storage: ^StoresResources
 	Inherits@shape: ^2x2Shape
@@ -163,7 +163,7 @@
 		RequiresSelection: true
 		PipCount: 5
 
-^wc2_barracks:
+^WC2Barracks:
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
@@ -192,7 +192,7 @@
 	DamageMultiplier@wc2:
 		Modifier: 80
 
-^wc2_lumber_mill:
+^WC2LumberMill:
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
@@ -233,7 +233,7 @@
 		RequiresSelection: true
 		PipCount: 10
 
-^wc2_blacksmith:
+^WC2Blacksmith:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQCondition
 	Valued:
@@ -265,7 +265,7 @@
 	ProvidesPrerequisite@blacksmith:
 		Prerequisite: wc_blacksmith
 
-^wc2_inventor:
+^WC2Inventor:
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
@@ -293,7 +293,7 @@
 	DamageMultiplier@wc2:
 		Modifier: 80
 
-^wc2_stables:
+^WC2Stables:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQCondition
 	Valued:
@@ -327,7 +327,7 @@
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 
-^wc2_church:
+^WC2Church:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQCondition
 	Valued:
@@ -357,7 +357,7 @@
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 
-^wc2_temple:
+^WC2Temple:
 	Inherits@ra1_soviets_barracks: ^IsBarrack
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -387,7 +387,7 @@
 	ProductionQueue@INFANTRY:
 		LowPowerModifier: 10000
 
-^wc2_nest:
+^WC2Nest:
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
@@ -414,7 +414,7 @@
 	DamageMultiplier@wc2:
 		Modifier: 80
 
-^wc2_watch_tower:
+^WC2WatchTower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	-WithTurretSearchlight:
@@ -447,7 +447,7 @@
 	DetectCloaked:
 		Range: 5000
 
-^wc2_goldmine:
+^WC2Goldmine:
 	Inherits@shape: ^3x3Shape
 	Inherits@Bot: ^BotMicromanageable
 	Inherits@2: ^GainsExperienceCity
@@ -611,7 +611,7 @@
 # WC2 UNIT TEMPLATES
 ####################################################################################################
 
-^wc2_mcv:
+^WC2MCV:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
@@ -625,7 +625,7 @@
 	Power:
 		Amount: -80
 
-^wc2_peasant:
+^WC2Peasant:
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@harv: ^Harvester
@@ -638,7 +638,7 @@
 		Description: Worker unit. Gathers resources and constructs buildings.\n  Unarmed
 	#Food
 
-^wc2_demolitioner:
+^WC2Demolitioner:
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -657,7 +657,7 @@
 		Speed: 80
 	#Food
 
-^wc2_mage:
+^WC2Mage:
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
 	Inherits@EXP: ^GainsExperienceTD
@@ -678,7 +678,7 @@
 		Speed: 65
 	#Food
 
-^wc2_airscout:
+^WC2AirScout:
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@explode: ^HeliExplodeProtoss
 	Inherits@EXP: ^GainsExperienceTD
@@ -726,7 +726,7 @@
 # WC2 HUMAN BUILDINGS
 ####################################################################################################
 
-^wc2_ogre_ogremage_attacks_spells:
+^WC2OgreOgreMageAttacksSpells:
 	# Only the ogre upgraded to an ogremage, or the separate ogremage actor should be able to deploy.
 	GrantConditionOnDeploy@Clock:
 		RequiresCondition: ogremage_upg
