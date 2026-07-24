@@ -1650,12 +1650,42 @@ All other factions have a single, thematically appropriate wall type.
 ## Long-term goals
 
 - [ ] **ZERO YAML ERRORS & WARNINGS** — achieve zero errors and zero warnings
-  from `OpenRA.Utility.exe cameo --check-yaml`. Baseline saved at
-  `docs/audit/check-yaml-baseline.txt` (379,899 errors, 80,703 warnings as of
-  2026-07-23). Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
+  from `utility.cmd cameo --check-yaml`. Latest report: 2026-07-24
+  (check_yaml_v8.txt, ~89,392 errors, ~69,325 warnings).
+  Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
   Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
+
+  **Error breakdown (2026-07-24):**
+  - 72,813 UngrantedConditions — actors consume conditions not granted (biggest)
+  - 761 InvalidField — trait fields that don't exist on their trait
+  - 363 LaunchAngle — weapon projectile min/max LaunchAngle errors
+  - 234 DuplicateInteractable — bridges with duplicate InteractableInfo
+  - 209 MissingSequences — images with no sequence definitions
+  - 195 UndefinedCursor — chrono-target cursor undefined for chrono actors
+  - 64 NegativeRemoval — `-Trait` defines a value (should be empty)
+  - 55 InvalidWeaponField — WeaponClass/ValidStances/BurstDelay/Angle fields
+  - 39 UndefinedNotification — missing notification references
+  - 39 BadIndent — bad indent in miniyaml (chrome/lobby_music.yaml)
+  - 39 MissingTooltip — buildable actors with no Tooltip trait
+  - 12 CannotParse — Cannot parse `Random` into LockFaction.Boolean
+  - 11 UndefinedActor — husk actors not defined by any rule
+  - 9 InvalidOwner — map actors with wrong owner
+  - 4 InvalidChildNodes — traits with invalid child nodes
+  - 2 MissingPrereq — buildable actors with unprovided prerequisites
+  - 2 UnknownTrait — unknown traits in player.yaml
+  - 1 MissingFluentVariable — missing fluent variable
+
+  **Warning breakdown (2026-07-24):**
+  - 62,640 UnconsumedConditions — actors grant conditions not consumed (biggest)
+  - 375 UnusedFluentAttribute — unused fluent attributes in en.ftl files
+  - 1 UnusedFluentVariable — unused fluent variable
+
   Phases: (1) palette fixes, (2) Interactable/Selectable conflicts, (3) missing
   FTL keys, (4) missing actor definitions [biggest], (5) unresolved prerequisites,
   (6) unused granted conditions [biggest warnings], (7) VisibilityType.Footprint,
   (8) invalid map factions, (9) MuzzleSequence/LaunchAngle/misc, (10) sequence
   warnings, (11) unused field/trait.
+
+  **NOTE:** `utility.cmd cameo --check-yaml` takes 10+ minutes. Only run it
+  after completing ALL connected fixes and expecting 0 errors/warnings. Do NOT
+  run it repeatedly. Keep findings above updated in this section.

@@ -670,9 +670,13 @@ cheapest provider wins).
    lessons learned, etc.) BEFORE committing — check old docs for outdated
    info, inconsistencies, and contradictions, and fix them. A commit
    without updated docs is an incomplete commit. Boot-gate with
-   `launch-game.cmd` (not `utility.cmd cameo --check-yaml`) before every
-   commit: launch the game, wait for main menu, kill process, check for
-   new exception logs.
+   `launch-game.cmd` before every commit: launch the game, wait for main
+   menu, kill process, check for new exception logs. `utility.cmd cameo
+   --check-yaml` is a separate linting tool (not a boot-gate substitute) —
+   use it for verifying cosmetic refactors, checking broken prerequisites,
+   and detecting gameplay-relevant YAML issues. Goal: 0 errors AND 0
+   warnings. The utility takes a very long time — only run it when all
+   connected tasks are done and you expect 0 errors/warnings to confirm.
 10. Every new unit ships with: naming-compliant id + `_icon`, Fluent keys,
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
