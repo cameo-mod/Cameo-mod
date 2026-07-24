@@ -157,15 +157,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   real line breaks, never `\n`). ALSO: the "Strong vs / Weak vs" matchup lines
   belong at the END of the description, after the flavour text — needs a design
   pass on wording/order. Support-type units get NO Strong/Weak line.
-- [ ] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
-  names must ALWAYS use `_`, NEVER `.`): rename `^…​.template` → `^…​_template`
-  and `^….husk` → `^…_husk` mod-wide (definitions + every Inherits reference,
-  via tools/rename). `unit_upgrade` already fixed 2026-07-22; remaining:
-  `promotion_upgrade.template`, `researched_upgrade.template`, `upgrade.template`,
-  all `combat_tank.husk` etc. Verify husk engine-references before renaming.
+- [x] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
+  names must ALWAYS use `_`, NEVER `.`): renamed `^upgrade.template` → `^upgrade_template`,
+  `^researched_upgrade.template` → `^researched_upgrade_template`, `^promotion_upgrade.template`
+  → `^promotion_upgrade_template`, `^default.angry_mob` → `^default_angry_mob`,
+  `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
+  commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
+  remain (all ground husks removed in prior commit). Boot-gate clean.
 - [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
   the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
-  indents (→ fluent keys), `unit_upgrade.template` dangling inherit. Re-boot may
+  indents (→ fluent keys), `unit_upgrade_template` (was `unit_upgrade.template`). Re-boot may
   surface more; fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
