@@ -172,7 +172,7 @@ ConscriptMolotov:
 		Amount: 4000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
-		Duration: 50
+		Duration: 40
 		Speed: 8, 24
 		TurnRate: 4
 		Image: burn_l
@@ -1095,6 +1095,12 @@ JapanCarrierTarget:
 
 RAAtomic:
 	Inherits: Atomic
+	-Warhead@FlashEffect:
+	Warhead@NuclearFlash: NuclearFlashEffect
+		Duration: 50
+		Radius: 0.35
+		Brightness: 1.3
+		Darkness: 0.85
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom1.aud
 	Warhead@Effect2: CreateEffect
