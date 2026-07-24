@@ -31,7 +31,12 @@ cabal_lazerboat:
 		TurnSpeed: 24
 		Offset: 512,0,0
 	Armament@PRIMARY:
-		Weapon: CabalSpiderLaser
+		Weapon: CabalLaserBoatLaser
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+	Armament@AA:
+		Weapon: CabalLaserBoatLaserAA
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -128,7 +133,7 @@ cabal_radar_cruiser:
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_navalyard
+		Prerequisites: ~cabal_navalyard, cabal_techcenter
 		Queue: Naval, RANaval
 		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
 	Valued:
@@ -149,11 +154,21 @@ cabal_radar_cruiser:
 	Turreted:
 		TurnSpeed: 24
 		Offset: 512,0,0
-	Armament@PRIMARY:
-		Weapon: CabalSpiderLaser
-		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
-		RecoilRecovery: 26
+	Armament@Anim:
+		Weapon: TSCABALempdisable.anim
+		RequiresCondition: end_disable == 0
+		LocalOffset: -128,0,256
+	Armament@End:
+		Weapon: TSCABALempdisable.end
+		RequiresCondition: end_disable >= 1
+		LocalOffset: -128,0,256
+	GrantConditionOnAttack@End:
+		Condition: end_disable
+		RequiredShotsPerInstance: 25
+		MaximumInstances: 1
+		RevokeDelay: 10
+		RevokeAll: false
+		IsCyclic: false
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 5
@@ -166,9 +181,20 @@ cabal_radar_cruiser:
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
-		Image: cabal_lazerboat
+		Image: cabal_radar_cruiser
 		PlayerPalette: player_rgba
-
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 125
+		TicksToRevoke: 25
+		Capacity: 8
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	WithRangeCircle@MC:
+		Range: 8000
+		Type: mindcontrol
+		Color: 663399b0
 ####################################################################################################
 #		BUILDINGS
 ####################################################################################################

@@ -864,7 +864,54 @@ CabalSpiderCnc4Laser:
 		Explosions: cabal_laserimpact_l
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
-
+CabalLaserBoatLaser:
+	Inherits: ^LaserWeapon
+	Report: obelmod1.aud
+	ReloadDelay: 90
+	Range: 6147
+	Projectile: LaserZap
+		Width: 100
+		ZOffset: 2047
+		Color: CC22DDFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 42
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 3D3D77FF
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 40000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 22
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+CabalLaserBoatLaserAA:
+	Inherits: ^LaserWeapon
+	Report: obelmod1.aud
+	ReloadDelay: 90
+	Range: 7000
+	ValidTargets: Air
+	Projectile: LaserZap
+		Width: 100
+		ZOffset: 2047
+		Color: CC22DDFF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 42
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 3D3D77FF
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 36000
+		Spread: 250
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 18
+		Spread: 500
+		Delay: 5
+		ValidTargets: Air
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
 	Inherits@TANKDESTROYER: ^TankDestroyerCannon
@@ -977,22 +1024,27 @@ CabalSubmarinePlasma:
 		Speed: 320
 		Shadow: false
 		Blockable: false
+		ContrailStartColor: 27F5B0FF
+		ContrailEndColor: 27F5B0FF
+		ContrailLength: 28
+		ContrailStartWidth: 160
+		ContrailEndWidth: 36
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 50000
+		Damage: 25000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 25
+		Damage: 12
 	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 50000
+		Damage: 25000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 25000
+		Damage: 12
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 25
+		Damage: 12
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 25000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 25
+		Damage: 12
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_greenplasmaimpact
 		ImpactSounds: expnew09.aud
