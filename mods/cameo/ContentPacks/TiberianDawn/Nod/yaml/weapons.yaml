@@ -1,4 +1,4 @@
-﻿M16Laser:
+M16Laser:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
@@ -168,6 +168,8 @@ ArtilleryShellUpgrade:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 3
 	-Warhead@Effect:
+
+MachineGun:
 	Inherits: ^SmallArms
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
@@ -480,6 +482,8 @@ TurretGunBlackMarket:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 3
 	-Warhead@Effect:
+
+Dragon:
 	Inherits: ^HeavyAAWeapon
 	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
@@ -1273,6 +1277,8 @@ SpecterArtilleryShellUpgrade:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 2
 	-Warhead@Effect:
+
+VenomLaser:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^FlakWeapon
 	Inherits: ^Chaingun

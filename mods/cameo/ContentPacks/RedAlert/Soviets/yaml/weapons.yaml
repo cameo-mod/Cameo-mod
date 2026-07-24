@@ -1,4 +1,4 @@
-﻿IncendiaryM1Carbine:
+IncendiaryM1Carbine:
 	Inherits: ^LightFlameWeapon
 	Inherits: M1Carbine
 	Inherits: ^IncendiaryBulletProjectile
@@ -2724,6 +2724,8 @@ ra120mmThermobaric:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	-Warhead@Effect:
+
+ra120mmThermobaricTargetingComputer:
 	Inherits: ra120mmThermobaric
 	ValidTargets: Ground, Water
 
@@ -3055,6 +3057,8 @@ ra120mm2Thermobaric:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:
+
+ra120mm2ThermobaricTargetingComputer:
 	Inherits: ra120mm2Thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water

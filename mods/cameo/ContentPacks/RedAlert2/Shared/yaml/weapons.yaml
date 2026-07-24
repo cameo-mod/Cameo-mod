@@ -1,4 +1,4 @@
-﻿^RA2SmallArms:
+^RA2SmallArms:
 	Inherits: ^SmallArms
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Warhead@Effect: CreateEffect
@@ -1322,6 +1322,8 @@ RA2BrutePunch:
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 10
 	-Warhead@Effect:
+
+RA2BrutePunchE:
 	Inherits: RA2BrutePunch
 	Burst: 2
 	BurstDelays: 3
@@ -3023,6 +3025,8 @@ RA2BuildingExplode:
 		ImpactSounds: expnew13.wav #expnew03.wav, expnew06.wav, expnew09.wav, expnew11.wav, expnew12.wav, expnew13.wav, expnew14.wav, expnew15.wav
 		ValidTargets: Ground, Air, Water
 	-Warhead@EffectWater:
+
+KirovExplode:
 	Inherits: RA2KirovBomb
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_verylarge_twlt

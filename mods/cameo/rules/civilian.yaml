@@ -455,7 +455,6 @@ WOOD:
 
 BRIDGE1:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 165
 		DestroyedTemplate: 166
@@ -473,7 +472,6 @@ BRIDGE1:
 
 BRIDGE2:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 167
 		DestroyedTemplate: 168
@@ -491,7 +489,6 @@ BRIDGE2:
 
 BRIDGE3:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 169
 		DestroyedTemplate: 170
@@ -509,7 +506,6 @@ BRIDGE3:
 
 BRIDGE4:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 171
 		DestroyedTemplate: 172
@@ -680,7 +676,6 @@ BR3:
 BRIDGE1:
 	Inherits: ^Bridge
 	Inherits@2: ^BrokenBridge
-	-Selectable:
 	Bridge:
 		Template: 131
 		DamagedTemplate: 378
@@ -700,7 +695,6 @@ BRIDGE1:
 BRIDGE2:
 	Inherits: ^Bridge
 	Inherits@2: ^BrokenBridge
-	-Selectable:
 	Bridge:
 		Template: 133
 		DamagedTemplate: 379
@@ -719,7 +713,6 @@ BRIDGE2:
 
 BRIDGE3:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 620
 		DamagedTemplate: 621
@@ -738,7 +731,6 @@ BRIDGE3:
 
 BRIDGE4:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 624
 		DamagedTemplate: 625
@@ -757,7 +749,6 @@ BRIDGE4:
 
 SBRIDGE1:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 520
 		DamagedTemplate: 521
@@ -776,7 +767,6 @@ SBRIDGE1:
 
 SBRIDGE2:
 	Inherits: ^Bridge
-	-Selectable:
 	Bridge:
 		Template: 531
 		DamagedTemplate: 532
