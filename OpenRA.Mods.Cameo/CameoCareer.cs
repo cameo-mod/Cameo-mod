@@ -30,12 +30,15 @@ namespace OpenRA.Mods.Cameo
 		public string MapTitle = "";
 		public string ModVersion = "";
 		public int DurationTicks;
+		public int GameTimestep;
 		public int UnitsKilled;
 		public int BuildingsKilled;
 		public int UnitsLost;
 		public int BuildingsLost;
 		public long ResourcesEarned;
 		public long ResourcesSpent;
+		public long EnemyAssetsDestroyed;
+		public long AssetsOwned;
 	}
 
 	public sealed class CameoCareerProfile
@@ -118,7 +121,7 @@ namespace OpenRA.Mods.Cameo
 	// build from rewriting a career created by a newer build that it cannot understand.
 	public sealed class CameoCareerRepository : ICameoCareerAppender
 	{
-		public const int CurrentSchemaVersion = 1;
+		public const int CurrentSchemaVersion = 2;
 		public const string CareerFileName = "cameo-career.yaml";
 		public const string LegacyFileName = "cameo-statistics.yaml";
 
@@ -371,7 +374,8 @@ namespace OpenRA.Mods.Cameo
 
 			var profile = new CameoCareerProfile
 			{
-				SchemaVersion = version,
+				// Older schemas are upgraded in memory and written back on the next successful append.
+				SchemaVersion = CurrentSchemaVersion,
 				CareerId = Value(yaml, "CareerId"),
 				CreatedUtc = Value(yaml, "CreatedUtc"),
 				LastUpdatedUtc = Value(yaml, "LastUpdatedUtc")
