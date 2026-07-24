@@ -210,11 +210,11 @@ futuretech_warpgate:
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
-				Length: 32
+				Length: 16
 			2:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
-		Length: 34
+		Length: 18
 		BlendMode: Additive
 	damaged-idle-tele:
 		Combine:
@@ -223,11 +223,12 @@ futuretech_warpgate:
 				Length: 1
 			1:
 				Filename: futuretech_egweap_s.shp
-				Length: 32
+				Length: 16
 			2:
 				Filename: shared_sprites|invisibleitem.shp
 				Length: 1
-		Length: 34
+		Length: 18
+		BlendMode: Additive
 	icon:
 		Filename: futuretech_warpgate_icon.png
 		Offset: 0,0

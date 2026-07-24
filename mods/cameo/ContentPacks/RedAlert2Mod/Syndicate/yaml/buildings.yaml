@@ -855,6 +855,8 @@ latinsyndicate_syndicateconstructionyard:
 	WithBuildingPlacedOverlay:
 		Sequence: build
 	WithIdleOverlay@fans:
+		Sequence: idle-fans
+		RequiresCondition: !build-incomplete
 	WithIdleOverlay@top:
 		Sequence: idle-top
 		RequiresCondition: !build-incomplete
