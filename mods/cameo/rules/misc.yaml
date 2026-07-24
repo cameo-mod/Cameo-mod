@@ -378,6 +378,13 @@ rafactj.colorpicker:
 		Image: rafactj
 		Palette: colorpicker
 
+ra1_soviets_mammothtank.colorpicker:
+	Inherits: ra1_soviets_mammothtank
+	-MapEditorData:
+	RenderSprites:
+		Image: ra1_soviets_mammothtank
+		Palette: colorpickerra
+
 CAMERA:
 	Interactable:
 	EditorOnlyTooltip:
