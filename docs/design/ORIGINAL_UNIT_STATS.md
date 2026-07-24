@@ -24,6 +24,34 @@ strength are derived from DATA, not assumption. Companion to `FACTION_IDENTITY.m
 
 ---
 
+## The three-layer balancing framework (maintainer plan 2026-07-25)
+
+Balance interpolates THREE reference layers. The original stats are a **rough identity
+lookup, NOT a prescription** — the source games were often poorly balanced (e.g. RA1
+multiplayer devolved to main-battle-tank spam because everything else was inferior; Cameo
+instead buffed the Mammoth's HP/firepower). So we mine them for *who a unit is*, then set
+numbers ourselves.
+
+| Layer | What | Use |
+|---|---|---|
+| **1. Original-game identity** (this doc, normalized per-game) | source stats ÷ that game's basic combat unit → relative role | *who each unit/faction is* — the identity lookup (inspiration only) |
+| **2. Old-balance snapshot** (`OLD_BALANCE_STATS.md`, auto-gen from ledger) | our units' current pre-rebalance stats | *keep what already works* — only change what conflicts |
+| **3. Formula pipeline** (`FORMULA_V2.md` + converter) | class baselines, Δ≤1, 5-stat uniqueness | *the mechanical target* |
+
+**Interpolation rule (per unit):** start from Layer 2 (keep the current stat if it's fine
+and non-conflicting) → bias toward Layer 1 (its faction/role identity) → enforce Layer 3
+(Δ≤1, unique, class baseline). Result: coherent, identity-true, mechanically valid.
+
+**Cross-game comparison is invalid on raw numbers** (WC2 HP 30–150, SC 25–500, C&C in the
+thousands) — only *relative role within a game* transfers. Normalize each game to its basic
+combat unit before reading identity across games.
+
+**Sourcing gaps:** Cameo-original units (no original twin) extrapolate from the nearest
+real unit *by role* + faction identity + class baseline. Mod/new factions source from their
+parent works (see `FACTION_IDENTITY.md` citations) + FACTIONS.md.
+
+---
+
 ## StarCraft: Brood War (complete — [unitstatistics.com](https://unitstatistics.com/starcraft/), [Liquipedia](https://liquipedia.net/starcraft/Unit_Statistics))
 
 Effective HP = HP + Shield. Cost = minerals/gas. Supply in parens.

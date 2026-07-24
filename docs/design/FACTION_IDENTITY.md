@@ -108,11 +108,11 @@ Original WC2 mirrors Human/Orc; Cameo re-stats them apart. Counterpart units
 
 | Faction | Playstyle (FACTIONS.md) | HP | SPD | DMG | RNG | Special / signature |
 |---|---|:-:|:-:|:-:|:-:|---|
-| Asian Alliance | High-Tech / Mass Infantry | ・ | ＋ | ・ | ・ | Cheap, numerous infantry; high-tech late. |
-| Steel Consortium | Tech Rush / Shields | ＋ | − | ＋ | ・ | **Shields = +HP**; expensive, powerful, robotic. |
-| Latin Syndicate | Attrition / Stolen Tech | − | ＋ | ・ | ・ | Cheap, expendable, suicide/terror, stolen tech. |
-| Naxis | Turtle / Heavy Armor | ＋＋ | −− | ＋ | ・ | Very tanky, slow; undead revival superweapon. WW2-German themed. |
-| Schwarzer Mond | Timing Attack | ・ | ・ | ＋ | ・ | Burst / mid-game power spike; lunar theme. |
+| Asian Alliance | Mass Horde / Cheap / Superweapons | − | − | − | ・ | ← **Eagle Red + Generals China**: cheap, numerous, **SLOW** infantry (horde bonus), weak individually, but devastating superweapons/nuclear. (corrected from +SPD 2026-07-25.) |
+| Steel Consortium | Tech / Shields / Long-range defense | ＋ | − | ＋ | ＋ | ← **Foehn Revolt (Mental Omega) Last Bastion**: durable + **long-range area-denial** + defensive; nano-upgrades that swap roles; shields = +HP. |
+| Latin Syndicate | Turtle / Artillery / Explosives | ＋ | − | ＋ | ＋ | ← maintainer: **turtle masters** (bunker), **best artillery + huge explosive power**; black-market Soviet surplus. (corrected from −HP/+SPD 2026-07-25.) |
+| Naxis | Turtle / Heavy Armor | ＋＋ | −− | ＋ | ・ | **WW2 parody**; very tanky, slow; undead-revival superweapon. |
+| Schwarzer Mond | Timing / Anti-gravity | ・ | ＋ | ＋ | ・ | ← **Iron Sky moon-Nazis**: anti-gravity → hover/flying units + saucers (aircraft); sci-fi tech; timing/burst spike; Götterdämmerung superweapon. |
 | FutureTech | Tech Rush / Robotics | ＋ | − | ＋ | ＋ | **Droids = vehicle turn-rate (speed ×5)**; robotic, high-tech. |
 | TKM | Modular (WIP) | ・ | ・ | ・ | ・ | Modular units — flagged WIP; treat as neutral until designed. |
 
@@ -135,3 +135,4 @@ the special. This keeps every unit unique **and** lore-true.
 - StarCraft: [Gameplay of StarCraft (Wiki)](https://starcraft.fandom.com/wiki/Gameplay_of_StarCraft), [TechEdvocate deep dive](https://www.thetechedvocate.org/the-three-races-of-starcraft-a-deep-dive-into-terrans-zerg-and-protoss/)
 - Warcraft 2: [Wayward Strategy — Acute Asymmetry](https://waywardstrategy.com/2020/12/01/the-beauty-of-acute-asymmetry-in-warcraft-orcs-and-humans/), [Battle.net Orcs vs Humans](http://classic.battle.net/war2/ovh/index.shtml)
 - Outpost 2: [Cola Powered Gamer review](https://colapoweredgamer.wordpress.com/2019/03/16/review-outpost-2-divided-destiny/), [Liquisearch gameplay](https://www.liquisearch.com/outpost_2/gameplay)
+- Modded factions: [Foehn Revolt (Mental Omega Wiki)](https://moapyr.fandom.com/wiki/Foehn_Revolt) → Steel Consortium; [Generals China (StrategyWiki)](https://strategywiki.org/wiki/Command_&_Conquer:_Generals/China) + [Eagle Red (CNC Wiki)](https://cnc.fandom.com/wiki/Eagle_Red) → Asian Alliance; [Iron Sky (TV Tropes)](https://tvtropes.org/pmwiki/pmwiki.php/Film/IronSky) → Schwarzer Mond; Latin Syndicate + Naxis per maintainer.
