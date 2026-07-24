@@ -1022,7 +1022,7 @@ large_gun_turret.xcom:
 	DroneSpawnerSlave:
 
 xcom_power_generator:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Power Generator
 	Buildable:
@@ -1037,7 +1037,7 @@ xcom_power_generator:
 		Image: power.atreides
 
 xcom_mining_bay:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Mining Bay
 	Buildable:
@@ -1052,7 +1052,7 @@ xcom_mining_bay:
 		Image: d2k_spice_sifter
 
 xcom_barracks:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Barracks
 	Buildable:
@@ -1066,7 +1066,7 @@ xcom_barracks:
 		Image: ra2_allies_alliedbarracks
 
 xcom_officer_training_school:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Officer Training School
 	Buildable:
@@ -1080,7 +1080,7 @@ xcom_officer_training_school:
 		Image: aa_cgmiac
 
 xcom_infirmary:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infirmary
 	Buildable:
@@ -1094,7 +1094,7 @@ xcom_infirmary:
 		Image: ra1_allies_medic
 
 xcom_defense_matrix:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Defense Matrix
 	Buildable:
@@ -1109,7 +1109,7 @@ xcom_defense_matrix:
 		Image: medium_gun_turret
 
 xcom_quad_turrets:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Quad Turrets
 	Buildable:
@@ -1124,7 +1124,7 @@ xcom_quad_turrets:
 		Image: medium_gun_turret
 
 xcom_satellite_uplink:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Satellite Uplink
 	Buildable:
@@ -1138,7 +1138,7 @@ xcom_satellite_uplink:
 		Image: ra1_allies_alliedtechcenter
 
 xcom_satellite_nexus:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Satellite Nexus
 	Buildable:

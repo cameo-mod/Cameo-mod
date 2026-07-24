@@ -187,7 +187,7 @@ NaxiWW2MachinegunnerE:
 		ContrailEndColor: E60000
 
 NaxiWW2MachinegunnerTargeting:
-	Inherits: ^deploytargeting
+	Inherits: ^DeployTargeting
 	Range: 8970
 
 NaxiRifleE:
@@ -905,7 +905,7 @@ SkyMageCannonAAE:
 	BurstDelays: 3
 
 NaxQuadCannonTargeting:
-	Inherits: ^aadeploytargeting
+	Inherits: ^AADeployTargeting
 	Range: 8888
 
 PortableFlak:

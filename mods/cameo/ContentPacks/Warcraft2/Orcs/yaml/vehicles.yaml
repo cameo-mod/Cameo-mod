@@ -1,6 +1,6 @@
 wc2_orcs_mobileconstructionvehicleorc:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
-	Inherits@WC2Template: ^wc2_mcv
+	Inherits@WC2Template: ^WC2MCV
 	Buildable:
 		Prerequisites: ~wc2_orcs_blacksmith
 		Description: Transforms into a Great Hall.
@@ -25,8 +25,8 @@ wc2_orcs_mobileconstructionvehicleorc:
 
 wc2_orcs_peon:
 	Inherits@WC2INFANTRY: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_peasant
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2Peasant
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Peon
 	Buildable:
@@ -67,15 +67,15 @@ wc2_orcs_ogremage:
 	GrantCondition@Ogremage:
 		Condition: ogremage_upg
 	#Weapons
-	Inherits@attacks_and_spells: ^wc2_ogre_ogremage_attacks_spells
+	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
 
 wc2_orcs_catapult:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CatUpg: ^wc2_orcs_upgrade_catapultstrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Catapult
 	Valued:
@@ -125,8 +125,8 @@ wc2_orcs_siegeengine:
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CatUpg: ^wc2_orcs_upgrade_catapultstrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Siege Engine
 	Valued:
@@ -186,9 +186,9 @@ wc2_orcs_siegeengine:
 
 wc2_orcs_goblinsappers:
 	Inherits@WC2INFANTRY: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_demolitioner
-	Inherits@CatUpg: ^wc2_orcs_upgrade_catapultstrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2Demolitioner
+	Inherits@CatUpg: ^WC2OrcsUpgradeCatapultStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Goblin Sappers
 	Buildable:

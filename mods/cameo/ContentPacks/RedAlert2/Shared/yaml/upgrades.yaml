@@ -1,5 +1,5 @@
 ra2_yuri_upgrade_stealthsuits_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Infantry Stealth Suits
 	Buildable:
@@ -11,7 +11,7 @@ ra2_yuri_upgrade_stealthsuits_proxy_actor:
 		Prerequisite: yuri_upgrade_infantrystealthsuits
 
 ra2_yuri_upgrade_geneticboost_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Infantry Stealth Suits
 	Buildable:
@@ -23,7 +23,7 @@ ra2_yuri_upgrade_geneticboost_proxy_actor:
 		Prerequisite: yuri_upgrade_geneticmodificationboost
 
 ra2_yuri_upgrade_psychicvision_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Psychic Vision
 	Buildable:

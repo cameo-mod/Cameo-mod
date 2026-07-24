@@ -1,6 +1,6 @@
 wc2_humans_mobileconstructionvehiclehuman:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
-	Inherits@WC2Template: ^wc2_mcv
+	Inherits@WC2Template: ^WC2MCV
 	Buildable:
 		Prerequisites: ~wc2_humans_blacksmith
 		Description: Transforms into a Town Hall.
@@ -25,8 +25,8 @@ wc2_humans_mobileconstructionvehiclehuman:
 
 wc2_humans_peasant:
 	Inherits@WC2INFANTRY: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_peasant
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2Peasant
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Peasant
 	Buildable:
@@ -64,7 +64,7 @@ wc2_humans_paladin:
 	GrantCondition@Paladin:
 		Condition: paladin_upg
 	#Weapons
-	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+	Inherits@attacks_and_spells: ^WC2KnightPaladinAttacksSpells
 
 wc2_humans_warcraft3knight:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
@@ -72,12 +72,12 @@ wc2_humans_warcraft3knight:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_humans_upgrade_swordstrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2SwordUpg: ^WC2HumansUpgradeSwordStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@PalUpg: ^wc2_humans_upgrade_paladin
-	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
-	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Inherits@PalUpg: ^WC2HumansUpgradePaladin
+	Inherits@paladin_healing_upgrade: ^WC2HumansPaladinHealing
+	Inherits@paladin_exorcism_upgrade: ^WC2HumansPaladinExorcism
 	Tooltip:
 		Name: Warcraft 3 Knight
 	Valued:
@@ -108,7 +108,7 @@ wc2_humans_warcraft3knight:
 	Targetable:
 		TargetTypes: Ground, Vehicle, Monster
 	#Weapons
-	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+	Inherits@attacks_and_spells: ^WC2KnightPaladinAttacksSpells
 	ActorStatValues:
 		Upgrades: wc2_humans_upgrade_swordstrength, wc2_humans_upgrade_swordstrengthii, wc2_humans_upgrade_armorstrength, wc2_humans_upgrade_armorstrengthii, wc2_humans_upgrade_paladin, wc2_humans_upgrade_healing, wc2_humans_upgrade_exorcism
 
@@ -117,8 +117,8 @@ wc2_humans_ballista:
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@BallUpg: ^WC2HumansUpgradeBallistaStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Ballista
 	Valued:
@@ -164,8 +164,8 @@ wc2_humans_siegeengine:
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@BallUpg: ^WC2HumansUpgradeBallistaStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Siege Engine
 	Valued:
@@ -225,9 +225,9 @@ wc2_humans_siegeengine:
 
 wc2_humans_demolitionsquad:
 	Inherits@WC2INFANTRY: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_demolitioner
-	Inherits@BallUpg: ^wc2_humans_upgrade_ballistastrength
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2Demolitioner
+	Inherits@BallUpg: ^WC2HumansUpgradeBallistaStrength
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Demolition Squad
 	Buildable:

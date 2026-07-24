@@ -1,5 +1,5 @@
 ixian_constructionyard:
-	Inherits: ^construction_yard
+	Inherits: ^ConstructionYard
 	Tooltip:
 		Name: Ixian Construction Yard
 	Transforms:
@@ -8,7 +8,7 @@ ixian_constructionyard:
 		Image: conyard.atreides
 
 ixian_windtrap:
-	Inherits: ^wind_trap
+	Inherits: ^WindTrap
 	Buildable:
 		Prerequisites: ~ixian_constructionyard
 		Description: Provides power to the base.
@@ -64,7 +64,7 @@ ixian_barracks:
 		Range: 1c512, 2c768
 
 ixian_refineryixian:
-	Inherits: ^refinery
+	Inherits: ^D2KRefinery
 	Tooltip:
 		Name: Refinery
 	Buildable:
@@ -88,7 +88,7 @@ ixian_refineryixian:
 		Image: refinery.atreides
 
 ixian_storagesilo:
-	Inherits: ^d2k_silo
+	Inherits: ^D2KSilo
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 		Description: Stores excess resources.
@@ -252,7 +252,7 @@ ixian_munitionssilo:
 	# 	ProductionType: Upgrade
 
 ixian_advancedheavyfactory:
-	Inherits: ^heavy_factory
+	Inherits: ^HeavyFactory
 	Tooltip:
 		Name: Ixian Advanced Heavy Factory
 	ProductionCostMultiplier@ixian:
@@ -410,7 +410,7 @@ ixian_launchpad:
 		Actor: trooper
 
 ixian_ixresearchcenter:
-	Inherits: ^research_centre
+	Inherits: ^ResearchCentre
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 		Description: Unlocks advanced technology.
@@ -418,7 +418,7 @@ ixian_ixresearchcenter:
 		Image: research.gold
 
 ixian_hightechfactory:
-	Inherits: ^high_tech_factory
+	Inherits: ^HighTechFactory
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 		Description: Produces advanced vehicles.
@@ -429,7 +429,7 @@ ixian_hightechfactory:
 # prerequisite and sprite image.
 
 ixian_starport:
-	Inherits: ^starport
+	Inherits: ^Starport
 	Buildable:
 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.

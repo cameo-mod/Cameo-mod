@@ -1,5 +1,5 @@
 cabal_upgrade_mobilitymatrix:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Mobility Matrix
 	Valued:
@@ -14,7 +14,7 @@ cabal_upgrade_mobilitymatrix:
 	ProvidesPrerequisite:
 
 cabal_upgrade_darkarmament:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Dark Armament
 	Valued:
@@ -29,7 +29,7 @@ cabal_upgrade_darkarmament:
 	ProvidesPrerequisite:
 
 cabal_upgrade_neutronnuclearcatalyst:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Neutron Nuclear Catalyst
 	Valued:
@@ -44,7 +44,7 @@ cabal_upgrade_neutronnuclearcatalyst:
 	ProvidesPrerequisite:
 
 cabal_upgrade_radarhack:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Radar Hack
 	Valued:
@@ -59,7 +59,7 @@ cabal_upgrade_radarhack:
 	ProvidesPrerequisite:
 
 cabal_upgrade_networkedcombatprotocols:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Networked Combat Protocols
 	Valued:
@@ -75,7 +75,7 @@ cabal_upgrade_networkedcombatprotocols:
 ############### Lab
 
 cabal_upgrade_backupsystems:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Backup Systems
 	Valued:
@@ -90,7 +90,7 @@ cabal_upgrade_backupsystems:
 	ProvidesPrerequisite:
 
 cabal_upgrade_handof:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Hand of CABAL
 	Valued:
@@ -105,7 +105,7 @@ cabal_upgrade_handof:
 	ProvidesPrerequisite:
 
 cabal_upgrade_dataworm:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Data Worm
 	Valued:
@@ -120,7 +120,7 @@ cabal_upgrade_dataworm:
 	ProvidesPrerequisite:
 
 cabal_upgrade_firewallprotocol:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Firewall Protocol
 	Valued:
@@ -141,7 +141,7 @@ cabal_upgrade_firewallprotocol:
 # GDI ####################
 
 cabal_upgrade_reinforcedchassis:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Reinforced Chassis
 	Valued:
@@ -157,7 +157,7 @@ cabal_upgrade_reinforcedchassis:
 		Prerequisite: cabal_upgrade_reinforcedchassis
 
 cabal_upgrade_overchargedservos:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Overcharged Servos
 	Valued:
@@ -173,7 +173,7 @@ cabal_upgrade_overchargedservos:
 		Prerequisite: cabal_upgrade_overchargedservos
 
 cabal_upgrade_neuraluplink:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Neural Uplink
 	Valued:
@@ -189,7 +189,7 @@ cabal_upgrade_neuraluplink:
 		Prerequisite: cabal_upgrade_neuraluplink
 
 cabal_upgrade_reclamationprotocols:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Reclamation Protocols
 	Valued:
@@ -205,7 +205,7 @@ cabal_upgrade_reclamationprotocols:
 		Prerequisite: cabal_upgrade_reclamationprotocols
 
 cabal_upgrade_fullassimilation:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Full Assimilation
 	Valued:
@@ -221,7 +221,7 @@ cabal_upgrade_fullassimilation:
 		Prerequisite: cabal_upgrade_fullassimilation
 
 cabal_upgrade_cyberneticplating:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cybernetic Plating
 	Valued:

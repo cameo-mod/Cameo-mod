@@ -6,7 +6,7 @@
 		SoundFiles: pswrkdon.aud
 	-AutoTarget:
 
-^wc2_humans_upgrade_swordstrength:
+^WC2HumansUpgradeSwordStrength:
 	GrantConditionOnPrerequisite@WC2SwordUpg:
 		Condition: wc2sword_upg
 		Prerequisites: wc2_humans_upgrade_swordstrength
@@ -20,7 +20,7 @@
 		Modifier: 135
 		RequiresCondition: wc2sword_upg2
 
-^wc2_humans_upgrade_armorstrength:
+^WC2HumansUpgradeArmorStrength:
 	GrantConditionOnPrerequisite@WC2HShieldUpg:
 		Condition: wc2hshield_upg
 		Prerequisites: wc2_humans_upgrade_armorstrength
@@ -34,7 +34,7 @@
 		Modifier: 80
 		RequiresCondition: wc2hshield_upg2
 
-^wc2_humans_upgrade_arrowstrength:
+^WC2HumansUpgradeArrowStrength:
 	GrantConditionOnPrerequisite@WC2ArrowUpg:
 		Condition: wc2arrow_upg
 		Prerequisites: wc2_humans_upgrade_arrowstrength
@@ -48,7 +48,7 @@
 		Modifier: 135
 		RequiresCondition: wc2arrow_upg2
 
-^wc2_humans_upgrade_ballistastrength:
+^WC2HumansUpgradeBallistaStrength:
 	GrantConditionOnPrerequisite@BallUpg:
 		Condition: ballista_upg
 		Prerequisites: wc2_humans_upgrade_ballistastrength
@@ -62,7 +62,7 @@
 		Modifier: 135
 		RequiresCondition: ballista_upg2
 
-^wc2_humans_upgrade_ranger:
+^WC2HumansUpgradeRanger:
 	GrantConditionOnPrerequisite@RangerUpg:
 		Condition: ranger_upg
 		Prerequisites: wc2_humans_upgrade_ranger
@@ -70,7 +70,7 @@
 		Modifier: 80
 		RequiresCondition: ranger_upg
 
-^wc2_humans_upgrade_rangerlongbow:
+^WC2HumansUpgradeRangerLongbow:
 	GrantConditionOnPrerequisite@RLongBowUpg:
 		Condition: rangerlb_upg
 		Prerequisites: wc2_humans_upgrade_rangerlongbow
@@ -78,7 +78,7 @@
 		Modifier: 120
 		RequiresCondition: rangerlb_upg
 
-^wc2_humans_upgrade_rangerscouting:
+^WC2HumansUpgradeRangerScouting:
 	GrantConditionOnPrerequisite@RScoutUpg:
 		Condition: rangersc_upg
 		Prerequisites: wc2_humans_upgrade_rangerscouting
@@ -86,7 +86,7 @@
 		Modifier: 120
 		RequiresCondition: rangersc_upg
 
-^wc2_humans_upgrade_rangermarksman:
+^WC2HumansUpgradeRangerMarksman:
 	GrantConditionOnPrerequisite@RMarksmanUpg:
 		Condition: rangermm_upg
 		Prerequisites: wc2_humans_upgrade_rangermarksman
@@ -94,7 +94,7 @@
 		Modifier: 125
 		RequiresCondition: rangermm_upg
 
-^wc2_humans_upgrade_paladin:
+^WC2HumansUpgradePaladin:
 	GrantConditionOnPrerequisite@PalUpg:
 		Condition: paladin_upg
 		Prerequisites: wc2_humans_upgrade_paladin
@@ -108,27 +108,27 @@
 		Modifier: 120
 		RequiresCondition: paladin_upg
 
-^wc2_h_paladin_healing:
+^WC2HumansPaladinHealing:
 	GrantConditionOnPrerequisite@PHealingUpg:
 		Condition: paladinhealing_upg
 		Prerequisites: wc2_humans_upgrade_healing
 
-^wc2_h_paladin_exorcism:
+^WC2HumansPaladinExorcism:
 	GrantConditionOnPrerequisite@PExorcismUpg:
 		Condition: paladinexorcism_upg
 		Prerequisites: wc2_humans_upgrade_exorcism
 
-^wc2_h_mage_slow:
+^WC2HumansMageSlow:
 	GrantConditionOnPrerequisite@MSlowUpg:
 		Condition: mageslow_upg
 		Prerequisites: wc2_humans_upgrade_slow
 
-^wc2_h_mage_polymorph:
+^WC2HumansMagePolymorph:
 	GrantConditionOnPrerequisite@MPolymorphUpg:
 		Condition: magepolymorph_upg
 		Prerequisites: wc2_humans_upgrade_polymorph
 
-^wc2_h_mage_blizzard:
+^WC2HumansMageBlizzard:
 	GrantConditionOnPrerequisite@MBlizzardUpg:
 		Condition: mageblizzard_upg
 		Prerequisites: wc2_humans_upgrade_blizzard
@@ -137,7 +137,7 @@
 # WC2 ORC INHERITABLES
 ###############################################################
 
-^wc2_knight_paladin_attacks_spells:
+^WC2KnightPaladinAttacksSpells:
 	# Only the knight upgraded to a paladin, or the separate paladin actor should be able to deploy.
 	GrantConditionOnDeploy@Clock:
 		RequiresCondition: paladin_upg

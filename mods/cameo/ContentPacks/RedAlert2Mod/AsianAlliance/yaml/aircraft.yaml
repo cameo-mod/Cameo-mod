@@ -411,17 +411,23 @@ pelican_husk.asian:
 		PlayerPalette: playerra2
 
 bomber_minebomb.asian:
-	Inherits: ra1_badger
+	Inherits: ^AirstrikePlane
+	Selectable:
+		DecorationBounds: 1536, 1536
 	Health:
 		HP: 100000
-	Valued:
-		Cost: 5000
+	Armor:
+		Type: Bomber
 	Aircraft:
 		CruiseAltitude: 2500
 		TurnSpeed: 25
 		Speed: 250
 		Repulsable: False
 		MaximumPitch: 50
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Asian Stealth Bomber
 	AttackBomber:
 		PauseOnCondition: !ammo
 		FacingTolerance: 64
@@ -429,8 +435,6 @@ bomber_minebomb.asian:
 		Weapon: AsianMineBomb
 	AmmoPool:
 		Ammo: 1
-	Tooltip:
-		Name: Asian Stealth Bomber
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True

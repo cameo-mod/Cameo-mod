@@ -99,7 +99,7 @@ SILO:
 		PipCount: 10
 
 SBAG:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 50
 	CustomSellValue:
@@ -123,7 +123,7 @@ SBAG:
 		Type: sandbag
 
 cycl:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 75
 	CustomSellValue:
@@ -147,7 +147,7 @@ cycl:
 		Type: chain
 
 FENC:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -173,7 +173,7 @@ FENC:
 		Palette: td_temperat
 
 BRIK:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 200
 	CustomSellValue:

@@ -1,5 +1,5 @@
 japan_upgrade_bushidodiscipline:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Bushido Discipline
 	Valued:
@@ -14,7 +14,7 @@ japan_upgrade_bushidodiscipline:
 	ProvidesPrerequisite:
 
 japan_upgrade_waveforcebullets:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Waveforce Bullets
 	Valued:
@@ -29,7 +29,7 @@ japan_upgrade_waveforcebullets:
 	ProvidesPrerequisite:
 
 japan_upgrade_divinewindprotocol:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Divine Wind Protocol
 	Valued:
@@ -44,7 +44,7 @@ japan_upgrade_divinewindprotocol:
 	ProvidesPrerequisite:
 
 japan_upgrade_stealthsuitintegration:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stealth Suit Integration
 	Valued:
@@ -59,7 +59,7 @@ japan_upgrade_stealthsuitintegration:
 	ProvidesPrerequisite:
 
 japan_upgrade_energizedarrows:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Energized Arrows
 	Valued:
@@ -74,7 +74,7 @@ japan_upgrade_energizedarrows:
 	ProvidesPrerequisite:
 
 japan_upgrade_superiorwarengines:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Superior War Engines
 	Valued:
@@ -89,7 +89,7 @@ japan_upgrade_superiorwarengines:
 	ProvidesPrerequisite:
 
 japan_upgrade_advancedplasmaweapons:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Advanced Plasma Weapons
 	Valued:
@@ -104,7 +104,7 @@ japan_upgrade_advancedplasmaweapons:
 	ProvidesPrerequisite:
 
 japan_upgrade_nanotechrepairs:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nanotech Repairs
 	Valued:

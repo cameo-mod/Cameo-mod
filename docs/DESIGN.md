@@ -665,7 +665,14 @@ cheapest provider wins).
    let design choose first.
 8. Renames/refactors are proven behavior-preserving with resolved-diff
    snapshots; balance changes are never mixed into them.
-9. Clean commits, one concern each; commit when design says so.
+9. Clean commits, one concern each; commit when design says so. Always
+   update ALL relevant documentation files (ROADMAP.md, audit summaries,
+   lessons learned, etc.) BEFORE committing — check old docs for outdated
+   info, inconsistencies, and contradictions, and fix them. A commit
+   without updated docs is an incomplete commit. Boot-gate with
+   `launch-game.cmd` (not `utility.cmd cameo --check-yaml`) before every
+   commit: launch the game, wait for main menu, kill process, check for
+   new exception logs.
 10. Every new unit ships with: naming-compliant id + `_icon`, Fluent keys,
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,

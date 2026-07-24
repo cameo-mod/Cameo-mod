@@ -1,5 +1,5 @@
 ra1_allies_rifleinfantry:
-	Inherits: ^ra1_allies_rifleinfantry
+	Inherits: ^RA1AlliesRifleInfantry
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
@@ -109,7 +109,7 @@ ra1_soviets_molotovconscript:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_upgrade_vengeance, ra1_soviets_upgrade_menofsteel
 
 ra1_allies_alliedrocketsoldier:
-	Inherits: ^ra1_allies_alliedrocketsoldier
+	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
 	Inherits@InfantryArmorPlating: ^InfantryArmorPlating
 	Inherits@LaserTargetingSystems: ^LaserTargetingSystems

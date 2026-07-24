@@ -1929,26 +1929,12 @@ ordos_tankdestroyer:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-deviator_husk.ordos:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 1000
-	Tooltip:
-		Name: Deviator (Destroyed)
-	TransformOnCapture:
-		IntoActor: ordos_deviatorartillery
-
-combat_tank_husk.ordos:
-	Inherits: ^combat_tank.husk
-	TransformOnCapture:
-		IntoActor: ordos_combattank
-
 ##################################
 #       PROMOTIONS
 ##################################
 
 # d2k_striketeam2:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop II
 # 	Buildable:
@@ -1964,7 +1950,7 @@ combat_tank_husk.ordos:
 # 		Prerequisite: d2k_striketeam2
 
 # d2k_striketeam3:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop III
 # 	Buildable:
@@ -2785,7 +2771,7 @@ combat_tank_husk.ordos:
 # 		DeployTicks: 450
 # 		DeployTrigger: Attack
 # research.missile_tank_vordel:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Missile Tank
 # 	Buildable:
@@ -2803,7 +2789,7 @@ combat_tank_husk.ordos:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_apparition:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Apparition
 # 	Buildable:
@@ -2821,7 +2807,7 @@ combat_tank_husk.ordos:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_aircraft_eater:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Aircraft Eater
 # 	Buildable:
@@ -2839,7 +2825,7 @@ combat_tank_husk.ordos:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_defender:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Defender
 # 	Buildable:

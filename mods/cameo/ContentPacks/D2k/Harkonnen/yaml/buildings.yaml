@@ -1,16 +1,16 @@
 harkonnen_constructionyard:
-	Inherits: ^construction_yard
+	Inherits: ^ConstructionYard
 	Tooltip:
 		Name: Harkonnen Construction Yard
 	Transforms:
-		IntoActor: ixian_mobileconstructionvehicle
+		IntoActor: harkonnen_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	RenderSprites:
 		Image: conyard.harkonnen
 
 harkonnen_windtrap:
-	Inherits: ^wind_trap
+	Inherits: ^WindTrap
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard
 	RenderSprites:
@@ -60,7 +60,7 @@ harkonnen_barracks:
 		Range: 1c512, 2c768
 
 harkonnen_refinery:
-	Inherits: ^refinery
+	Inherits: ^D2KRefinery
 	Tooltip:
 		Name: Refinery
 	Buildable:
@@ -70,7 +70,7 @@ harkonnen_refinery:
 		Image: refinery.harkonnen
 
 harkonnen_storagesilo:
-	Inherits: ^d2k_silo
+	Inherits: ^D2KSilo
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_refinery
 		Description: Stores excess spice.
@@ -163,6 +163,8 @@ harkonnen_heavyfactory:
 		Sequence: production-welding
 	ProvidesPrerequisite@heavy_factory:
 		Prerequisite: heavy_factory
+	ProvidesPrerequisite@vehicle_production:
+		Prerequisite: harkonnen_vehicle_production
 	ProductionBar@upgrade:
 		ProductionType: Upgrades
 	GrantConditionOnPrerequisite@UPGRADEABLE:
@@ -224,6 +226,8 @@ harkonnen_repairpad:
 		Actor: light_inf
 	ProvidesPrerequisite@repair_pad:
 		Prerequisite: harkonnen_repairpad
+	ProvidesPrerequisite@mcv_production:
+		Prerequisite: harkonnen_mcv_production
 
 harkonnen_outpost:
 	Inherits: ^D2KBuilding
@@ -453,21 +457,21 @@ harkonnen_rocketturret:
 		Image: ixian_rocketturret
 
 harkonnen_hightechfactory:
-	Inherits: ^high_tech_factory
+	Inherits: ^HighTechFactory
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
 	RenderSprites:
 		Image: hightech.harkonnen
 
 harkonnen_ixresearchcenter:
-	Inherits: ^research_centre
+	Inherits: ^ResearchCentre
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_outpost
 	RenderSprites:
 		Image: research.harkonnen
 
 harkonnen_starport:
-	Inherits: ^starport
+	Inherits: ^Starport
 	Buildable:
 		Prerequisites: ~harkonnen_constructionyard, harkonnen_ixresearchcenter, derricklimit
 	RenderSprites:
@@ -478,6 +482,8 @@ harkonnen_starport:
 		Prerequisite: heavy.harkonnen_combat
 	ProvidesPrerequisite@starport_missile_tank:
 		Prerequisite: heavy.missile_tank
+	ProvidesPrerequisite@starport_mcv_production:
+		Prerequisite: harkonnen_mcv_production
 
 harkonnen_palace:
 	Inherits: ^D2KBuilding

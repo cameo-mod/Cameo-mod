@@ -157,15 +157,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   real line breaks, never `\n`). ALSO: the "Strong vs / Weak vs" matchup lines
   belong at the END of the description, after the flavour text — needs a design
   pass on wording/order. Support-type units get NO Strong/Weak line.
-- [ ] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
-  names must ALWAYS use `_`, NEVER `.`): rename `^…​.template` → `^…​_template`
-  and `^….husk` → `^…_husk` mod-wide (definitions + every Inherits reference,
-  via tools/rename). `unit_upgrade` already fixed 2026-07-22; remaining:
-  `promotion_upgrade.template`, `researched_upgrade.template`, `upgrade.template`,
-  all `combat_tank.husk` etc. Verify husk engine-references before renaming.
+- [x] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
+  names must ALWAYS use `_`, NEVER `.`): renamed `^upgrade.template` → `^upgrade_template`,
+  `^researched_upgrade.template` → `^researched_upgrade_template`, `^promotion_upgrade.template`
+  → `^promotion_upgrade_template`, `^default.angry_mob` → `^default_angry_mob`,
+  `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
+  commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
+  remain (all ground husks removed in prior commit). Boot-gate clean.
 - [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
   the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
-  indents (→ fluent keys), `unit_upgrade.template` dangling inherit. Re-boot may
+  indents (→ fluent keys), `unit_upgrade_template` (was `unit_upgrade.template`). Re-boot may
   surface more; fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
@@ -1573,26 +1574,19 @@ All other factions have a single, thematically appropriate wall type.
   - Remaining: `.oramap` map files may need `tools/fix-oramap.ps1` update.
   - Remaining: WC1 factions (`human` → `wc1human`, `orc` → `wc1orc`) not yet done.
 
-- [ ] **INHERITS-PASCAL: Convert camelCase/snake_case inherits to PascalCase**
-  — rename all inherits templates that are not yet PascalCase:
-  - RA2 Soviet: `^ra2sovietsConscription` → `^RA2SovietsConscription`,
-    `^ra2sovietsInfantryConditioning` → `^RA2SovietsInfantryConditioning`,
-    `^ra2sovietshockTrooperTraining` → `^RA2SovietsShockTrooperTraining`,
-    `^ra2sovietsFireShells` → `^RA2SovietsFireShells`, etc.
-  - CABAL: `^cabal_upgrade_radarhack` → `^CabalUpgradeRadarHack`,
-    `^cabal_upgrade_backupsystems` → `^CabalUpgradeBackupSystems`,
-    `^cabal_upgrade_cyberneticplating` → `^CabalUpgradeCyberneticPlating`,
-    `^cabal_upgrade_neutronnuclearcatalyst` → `^CabalUpgradeNeutronNuclearCatalyst`,
-    etc.
-  - WC2 Humans: `^wc2_humans_upgrade_swordstrength` →
-    `^WC2HumansUpgradeSwordStrength`, `^wc2_h_str_navyshield` →
-    `^WC2HStrNavyshield`, etc.
-  - WC2 Orcs: `^wc2_orcs_upgrade_axestrength` →
-    `^WC2OrcsUpgradeAxeStrength`, `^wc2_o_str_navyshield` →
-    `^WC2OStrNavyshield`, etc.
-  Update all `Inherits:` references across all YAML files.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1 naming convention (PascalCase for inherits).
+- [x] **INHERITS-PASCAL: Convert camelCase/snake_case inherits to PascalCase**
+  — all inherits templates converted to PascalCase per DESIGN.md §1.
+  Commit `3f5c53915` (WC2/WC1, 301 replacements/20 files): WC2 Humans
+  (`^wc2_h_*`/`^wc2_humans_*` → `^WC2Humans*`), WC2 Orcs
+  (`^wc2_o_*`/`^wc2_orcs_*` → `^WC2Orcs*`), WC2 shared (`^wc2_*` → `^WC2*`),
+  WC1 Humans (`^wc_h_*` → `^WCHumans*`). Full faction names used (no
+  single-letter abbreviations).
+  Commit `cf0e4485d` (all remaining, ~2158 replacements/126 files): RA2
+  Soviets camelCase, CABAL snake_case, Outpost 2/SOW, TKM, USA, RA1 Allies,
+  D2K, generic templates (`^wall`→`^Wall`, `^refinery`→`^Refinery`, etc.),
+  and Sidebar faction name capitalization. D2K-specific `^Refinery` renamed
+  to `^D2KRefinery` to avoid collision with base `^Refinery`. Boot-gate
+  clean (zero "Parent type not found" errors).
 
 ## Starcraft Rank Decoration Fix
 

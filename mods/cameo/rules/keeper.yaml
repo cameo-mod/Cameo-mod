@@ -1,5 +1,5 @@
 keeperdirt:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 1
 	CustomSellValue:
@@ -24,7 +24,7 @@ keeperdirt:
 		TargetTypes: Drillable
 
 keeperwall:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -49,7 +49,7 @@ keeperwall:
 		TargetTypes: Drillable, wall
 
 keeperbedrock:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 1
 	CustomSellValue:
@@ -74,7 +74,7 @@ keeperbedrock:
 		TargetTypes: NoKillable
 
 keepergold:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 15
 	CustomSellValue:
@@ -102,7 +102,7 @@ keepergold:
 		Weapon: OreExplosion
 
 keepergems:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 15
 	CustomSellValue:

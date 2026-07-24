@@ -108,66 +108,6 @@
 		Image: e3
 		PlayerPalette: raplayer
 
-^RMBO:
-	Inherits: ^Soldier
-	Inherits@anim: ^TDRAInfantry
-	Inherits@Template: ^HeroInfantryTemplate
-	Inherits@EXP: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@announce: ^AnnounceGlobal
-	Inherits@MC: ^MCImmune
-	Inherits@COMMANDOSKULL: ^CommandoSkull
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Tooltip:
-		Name: Commando
-	Valued:
-		Cost: 3000
-	Buildable:
-		BuildLimit: 1
-		BuildPaletteOrder: 50
-		Queue: Infantry, RAInfantry
-		Description: template_commando.description
-	Mobile:
-		Speed: 65
-		Voice: Move
-	Guard:
-		Voice: Move
-	Health:
-		HP: 80000
-	ChangesHealth@SelfHealing:
-		Step: 80
-	Passenger:
-		Voice: Move
-	Armament@c4:
-		Weapon: TanyaAttach
-		Name: secondary
-		Cursor: c4
-		OutsideRangeCursor: c4
-		Voice: Demolish
-	Armament@c4building:
-		Weapon: GenericC4
-		Name: secondary
-		Cursor: c4
-		OutsideRangeCursor: c4
-		Voice: Demolish
-	AttackFrontal:
-		Voice: Attack
-		FacingTolerance: 0
-	AttackMove:
-		Voice: Attack
-	WithInfantryBody:
-		-DefaultAttackSequence:
-		AttackSequences:
-			primary: shoot
-		IdleSequences: idle1,idle2,idle3
-	AnnounceOnKill:
-	ProvidesPrerequisite@rmbo:
-	Voiced:
-		VoiceSet: CommandoVoice
-	RenderSprites:
-		Image: rmbo
-
 ^TDMCV:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate

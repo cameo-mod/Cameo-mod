@@ -986,8 +986,8 @@ halloween_bat:
 		Chance: 45
 halloween_skeleton:
 	Inherits: wc_o_skeleton
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
 	Inherits@MC: ^MCImmune
 	Buildable:
 		Queue: Infantry, RAInfantry

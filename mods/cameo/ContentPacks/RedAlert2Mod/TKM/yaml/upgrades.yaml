@@ -1,5 +1,5 @@
 tkm_upgrade_berezkaarsenalupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Berezka Arsenal Upgrade
 	Valued:
@@ -16,7 +16,7 @@ tkm_upgrade_berezkaarsenalupgrade:
 		OutlineColor: 22C55E
 	ProvidesPrerequisite:
 tkm_upgrade_titanarsenalupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Titan Arsenal Upgrade
 	Valued:
@@ -33,7 +33,7 @@ tkm_upgrade_titanarsenalupgrade:
 		Group: tkm_arsenal_choice
 		OutlineColor: 22C55E
 tkm_upgrade_natoarsenalupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: NATO Arsenal Upgrade
 	Valued:
@@ -50,7 +50,7 @@ tkm_upgrade_natoarsenalupgrade:
 		Group: tkm_arsenal_choice
 		OutlineColor: 22C55E
 tkm_upgrade_semiautoriflesupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Semi Auto Rifles Upgrade
 	Valued:
@@ -64,7 +64,7 @@ tkm_upgrade_semiautoriflesupgrade:
 	RenderSprites:
 		Image: tkmsemiicon
 tkm_upgrade_twinrocketsupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Twin Rockets Upgrade
 	Valued:
@@ -78,7 +78,7 @@ tkm_upgrade_twinrocketsupgrade:
 	RenderSprites:
 		Image: tkmtwinrocketlauncher
 tkm_upgrade_titanarmorpiercingbulletsupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tungsten Core Bullets Upgrade
 	Valued:
@@ -92,7 +92,7 @@ tkm_upgrade_titanarmorpiercingbulletsupgrade:
 	RenderSprites:
 		Image: tkmapbullets
 tkm_upgrade_incendiaryrocketsupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Incendiary Rockets Upgrade
 	Valued:
@@ -106,7 +106,7 @@ tkm_upgrade_incendiaryrocketsupgrade:
 	RenderSprites:
 		Image: tkmincendiaryrockets
 tkm_upgrade_cryorocketsupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: EMP Rockets Upgrade
 	Valued:
@@ -120,7 +120,7 @@ tkm_upgrade_cryorocketsupgrade:
 	RenderSprites:
 		Image: cryorocketicon
 tkm_upgrade_technicaltankrocketaddon:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Technical Tank Rocket Addon
 	Valued:
@@ -134,7 +134,7 @@ tkm_upgrade_technicaltankrocketaddon:
 	RenderSprites:
 		Image: tkm_upgrade_technicaltankrocketaddon
 tkm_upgrade_pointdefensesystem:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Point Defense System
 	Valued:
@@ -148,7 +148,7 @@ tkm_upgrade_pointdefensesystem:
 	RenderSprites:
 		Image: tkmpointdefensesystem
 tkm_upgrade_heavytitanplating:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Depleted Uranium Plating
 	Valued:
@@ -162,7 +162,7 @@ tkm_upgrade_heavytitanplating:
 	RenderSprites:
 		Image: tkm_upgrade_heavytitanplating
 tkm_upgrade_infantryupgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: TKM Infantry Upgrade
 	Valued:
@@ -178,7 +178,7 @@ tkm_upgrade_infantryupgrade:
 		Prerequisite: tkm_upgrade_infantryupgrade
 
 tkm_upgrade_gp25upgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: GP-25 Upgrade
 	Valued:

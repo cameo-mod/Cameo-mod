@@ -152,8 +152,8 @@ futuretech_plasmastrider:
 		PlayerPalette: playerra2
 
 futuretech_salamanderifv:
+	Inherits: ^IFVBase
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits: ra2_allies_ifv
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Tooltip:
@@ -162,7 +162,6 @@ futuretech_salamanderifv:
 		Cost: 950
 	Buildable:
 		Prerequisites: ~futuretech_warpgate, ~futuretech_promotion_salamanderifv
-		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 105
 		Description: actor_futuretech_ifv.description
 	Mobile:
@@ -183,6 +182,8 @@ futuretech_salamanderifv:
 		Class: futuretech_salamanderifv
 	Voiced:
 		VoiceSet: FutureIFVVoice
+	RenderSprites:
+		PlayerPalette: playerra2
 
 futuretech_robottank:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

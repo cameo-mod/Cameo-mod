@@ -25,6 +25,8 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Uniqueness enforcement](#uniqueness-enforcement)
 - [Dual-weapon units](#dual-weapon-units)
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
+- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
+- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 
 ---
 
@@ -189,3 +191,40 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - Multiple `scout_rebalance_*.py`, `closecombat_rebalance_*.py`, and `special_forces_rebalance_*.py` scripts are redundant with the generic `propose_class_rebalance.py`.
 - Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`.
 - Do this after the current audit batch is finished and the pipeline is trusted.
+
+## Interactable trait and upgrade actors (2026-07-24)
+
+### The crash
+
+- **Removing the `Interactable` trait from upgrade actors crashes the game.** `Interactable` provides the hit-testing/mouse-interaction bounds that the engine needs for any actor that exists in the game world. Without it, the engine cannot process clicks or selection on the actor and crashes.
+- All upgrade actors inherit `Interactable` from `^upgrade.template` (`mods/cameo/rules/defaults.yaml` line 8759). This is the canonical source — do NOT remove it or add `-Interactable:` to upgrade actors.
+
+### The audit lint rule conflict
+
+- `tools/audit/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
+- However, `Interactable` and `Selectable` serve **complementary** purposes in OpenRA:
+  - `Interactable` provides the click/hit-test bounds (required for the actor to be interactive at all).
+  - `Selectable` provides selection visual feedback (selection box, health bar, decoration bounds) and **depends on** `Interactable` to function.
+- `^promotion_upgrade.template` (line 8771) previously inherited `Interactable` from `^upgrade.template` AND added `Selectable` with `DecorationBounds`. This caused duplicate `InteractableInfo` errors in `--check-yaml` for all promotion upgrades across all factions. **Resolved 2026-07-24:** `Selectable` was removed from `^promotion_upgrade.template`, eliminating ~9k errors and ~9k warnings. The remaining `Interactable + Selectable` warnings are only from 6 engine-level bridge actors (`bridge1`–`bridge4`, `sbridge1`, `sbridge2`).
+- The audit script only checks literal trait text within the same YAML block, not resolved inheritance. So `^promotion_upgrade.template` is NOT flagged (because `Interactable:` doesn't appear in its own block, only in the parent). But any actor that explicitly writes both traits in the same block would be flagged.
+
+### What needs future research
+
+- **Is the audit lint rule correct?** The rule assumes `Interactable` and `Selectable` are mutually exclusive, but the engine appears to treat them as complementary. Need to verify:
+  1. Whether OpenRA engine actually forbids both traits on the same actor (it doesn't seem to — `Selectable` requires `Interactable`).
+  2. Whether the rule should be relaxed to only flag cases where both traits are explicitly defined with conflicting `Bounds`/`DecorationBounds` values.
+  3. Whether the rule should be removed entirely or changed to a warning instead of a failure.
+- **Goal:** Be completely warnings-and-errors free without crashing the game. The current situation is: the audit flags a false-positive conflict, but removing `Interactable` to satisfy the audit crashes the game. The audit rule needs to be fixed, not the actors.
+
+## Git workflow and commit rules (2026-07-24)
+
+### Binding rules from user and co-maintainer Blackrobe
+
+- **Always fetch, pull, and merge before any commit.** The remote may have changes from other developers. If the engine pin (`mod.config` `ENGINE_VERSION`) changed, always run `make all` to fetch and build the new engine before boot-gating. Never skip the boot-gate.
+- **Always boot-gate before committing.** Launch the game with `launch-game.cmd`, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. `utility.cmd cameo --check-yaml` is NOT a substitute — only use it when debugging specific YAML parse errors. A commit that breaks the boot is not acceptable.
+- **Always update ALL relevant documentation files BEFORE committing.** This includes `docs/design/ROADMAP.md`, `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, `docs/LESSONS_LEARNED.md`, and any other docs affected by the change. Check old docs for outdated information, inconsistencies, and contradictions — fix them. A commit without updated docs is an incomplete commit.
+- **Do not spam commits on upstream master.** Use a pull request (PR) for cleaner commit history. Create a feature branch, push it, open a PR, and merge only after verification.
+- **Only merge a PR if either:** (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash. Commits that do not break the master branch are a naturally acceptable outcome.
+- **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
+- **When a task is completely done, merge the feature branch to master.** Do not leave completed work stranded on a feature branch. Ensure boot-gate passes and docs are updated before merging.
+- See also: `docs/AGENT_WORKSPACE.md` § Git workflow and commit rules.

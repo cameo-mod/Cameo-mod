@@ -588,7 +588,7 @@ tkm_t72m:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@tkm_upgrade_pointdefensesystem: ^tkm_upgrade_pointdefensesystem
+	Inherits@tkm_upgrade_pointdefensesystem: ^TKMUpgradePointDefenseSystem
 	Valued:
 		Cost: 900
 	Tooltip:

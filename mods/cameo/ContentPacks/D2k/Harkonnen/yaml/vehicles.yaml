@@ -1,3 +1,31 @@
+harkonnen_mobileconstructionvehicle:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@mcv: ^MCV
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~harkonnen_vehicle_production, harkonnen_mcv_production
+		Description: Deploys into a Construction Yard.\n  Unarmed
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Harkonnen Mobile Construction Vehicle
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+	Transforms:
+		IntoActor: harkonnen_constructionyard
+		Offset: -1,-1
+		TransformSounds: BUILD1.WAV
+		Facing: 64
+		NoTransformNotification: BuildingCannotPlaceAudio
+	-RevealOnFire:
+	Voiced:
+		VoiceSet: D2KMCV
+	RenderSprites:
+		Image: d2k_mcv
+
 combat_tank.harkonnen:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
@@ -47,11 +75,6 @@ combat_tank.harkonnen:
 		Palette: d2kcloak
 	Voiced:
 		VoiceSet: D2KCombatTank
-
-combat_tank_husk.harkonnen:
-	Inherits: ^combat_tank.husk
-	TransformOnCapture:
-		IntoActor: combat_tank.harkonnen
 
 missile_tank:
 	Inherits@D2KT: ^D2KTank
@@ -210,14 +233,3 @@ devastator:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Experience
 	Voiced:
 		VoiceSet: D2KVehicleVoice
-
-devastator_husk.harkonnen:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 10000
-	Husk:
-		Locomotor: heavytracked
-	Tooltip:
-		Name: Devastator (Destroyed)
-	TransformOnCapture:
-		IntoActor: devastator

@@ -1,7 +1,7 @@
 wc2_humans_flyingmachine:
 	Inherits@WC2AirUnit: ^WC2AirUnit
-	Inherits@WC2Template: ^wc2_airscout
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2AirScout
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
 	Tooltip:
 		Name: Flying Machine
 	Buildable:
@@ -15,7 +15,7 @@ wc2_humans_flyingmachine:
 
 wc2_humans_gyrocoptermachine:
 	Inherits@WC2AirUnit: ^WC2AirUnit
-	Inherits@WC2Template: ^wc2_airscout
+	Inherits@WC2Template: ^WC2AirScout
 	Tooltip:
 		Name: Gyrocopter Machine
 	Buildable:
@@ -30,8 +30,8 @@ wc2_humans_gryphonrider:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_humans_upgrade_armorstrength
-	Inherits@HCannonUpg: ^wc2_humans_upgrade_cannondamage
+	Inherits@WC2HShieldUpg: ^WC2HumansUpgradeArmorStrength
+	Inherits@HCannonUpg: ^WC2HumansUpgradeCannonDamage
 	Tooltip:
 		Name: Gryphon Rider
 	Valued:

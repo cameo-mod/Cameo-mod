@@ -125,7 +125,7 @@ zerg_hatchery:
 		Condition: botpowerrestriction
 		Duration: 1000
 		ShowSelectionBar: False
-		Actors: scbotoverlord
+		Actors: zerg_overlord
 	ProvidesPrerequisite@botpowerrestriction:
 		Prerequisite: botpowerrestriction
 		RequiresCondition: botpowerrestriction

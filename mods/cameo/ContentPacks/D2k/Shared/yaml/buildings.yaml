@@ -1,5 +1,5 @@
 concreteabuilding:
-	Inherits: ^concrete
+	Inherits: ^Concrete
 	D2kBuilding:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4,4
@@ -18,7 +18,7 @@ concreteabuilding:
 		Image: concretea
 
 concreteadefense:
-	Inherits: ^concrete
+	Inherits: ^Concrete
 	D2kBuilding:
 		Footprint: xxxx xxxx xxxx xxxx
 		Dimensions: 4,4
@@ -37,7 +37,7 @@ concreteadefense:
 		Image: concretea
 
 concretebbuilding:
-	Inherits: ^concrete
+	Inherits: ^Concrete
 	D2kBuilding:
 		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
 		Dimensions: 5,5
@@ -56,7 +56,7 @@ concretebbuilding:
 		Image: concreteb
 
 concretebdefense:
-	Inherits: ^concrete
+	Inherits: ^Concrete
 	D2kBuilding:
 		Footprint: xxxxx xxxxx xxxxx xxxxx xxxxx
 		Dimensions: 5,5
@@ -121,7 +121,7 @@ OILB.d2k:
 # Generic construction yard template. Common traits here; each faction actor below
 # sets its tooltip name, the MCV it deploys back into, and its sprite image.
 
-^heavy_factory:
+^HeavyFactory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -193,7 +193,7 @@ OILB.d2k:
 	Production@upgrade:
 		Produces: Addons
 
-^light_factory:
+^LightFactory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender

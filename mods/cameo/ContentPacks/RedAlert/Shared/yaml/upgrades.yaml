@@ -33,7 +33,7 @@
 		Upgrades: ra1_allies_upgrade_airsuperioritydoctrine
 
 ra1_allies_upgrade_gpssatellitesupport_proxy_actor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: ra1_allies_upgrade_gpssatellitesupport
 	RenderSprites:
@@ -86,7 +86,7 @@ ra1_allies_upgrade_gpssatellitesupport_proxy_actor:
 		Upgrades: ra1_soviets_upgrade_vengeance
 
 ra1_soviets_upgrade_menofsteel_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Men Of Steel
 	Buildable:
@@ -113,7 +113,7 @@ ra1_soviets_upgrade_menofsteel_proxy_actor:
 #############################
 
 ra1_soviets_upgrade_wareconomy_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: War Economy
 	Buildable:
@@ -146,7 +146,7 @@ ra1_soviets_upgrade_wareconomy_proxy_actor:
 #############################
 
 ra1_soviets_upgrade_scorchedearth_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Scorched Earth
 	Buildable:
@@ -158,7 +158,7 @@ ra1_soviets_upgrade_scorchedearth_proxy_actor:
 		Prerequisite: ra1_soviets_upgrade_scorchedearth
 
 ra1_soviets_upgrade_reactoroverload_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Reactor Overload
 	Buildable:
@@ -177,7 +177,7 @@ ra1_soviets_upgrade_reactoroverload_proxy_actor:
 		Upgrades: ra1_soviets_upgrade_highexplosiverockets
 
 ra1_soviets_upgrade_stalinium_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Stalinium
 	Buildable:
@@ -211,7 +211,7 @@ ra1_soviets_upgrade_stalinium_proxy_actor:
 		Upgrades: ra1_soviets_upgrade_unstableisotopes
 
 ra1_soviets_upgrade_nuclearshells_proxy_actor:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Nuclear Tank Shells
 	Buildable:
@@ -258,7 +258,7 @@ ra1_soviets_upgrade_nuclearshells_proxy_actor:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics
 
 japan_upgrade_nanotechrepairs_proxy_actor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: japan_upgrade_nanotechrepairs
 	RenderSprites:

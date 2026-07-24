@@ -67,10 +67,10 @@ Player:
 #   BUILDINGS #
 ###############
 
-^sowprodupgrade:
+^SowProdUpgrade:
 	Interactable:
 	
-^sow_upgradeable:
+^SowUpgradeable:
 	Targetable@sowupgrade:
 		TargetTypes: sowupgrade
 		RequiresCondition: !sowupgrade && !sowupgrade_1 && !sowupgrade_2 && !sowupgrade_3
@@ -142,7 +142,7 @@ Player:
 		Type: Concrete
 		RequiresCondition: sowupgrade_3
 		
-^sow_unit_lowpower:
+^SowUnitLowPower:
 	Inherits@lowpower: ^DisabledOverlay
 	DamageMultiplier@lowpower:
 		Modifier: 200
@@ -157,7 +157,7 @@ Player:
 		Modifier: 50
 		RequiresCondition: lowpower
 		
-^sowgeneric:
+^SowGeneric:
 	Inherits@AIDifficulties: ^AIDifficulties
 	Inherits@disabledoverlay: ^DisabledOverlay
 	-WithColoredOverlay@IDISABLE:
@@ -177,14 +177,14 @@ Player:
 		Condition: sowupgrade_3
 		GrantPermanently: True
 		RequiresCondition: botmicro
-^turret_destroyed:
+^TurretDestroyed:
 	VoiceAnnouncement:
-^sowresize:
+^SowResize:
 	RenderSprites:
-^sowresize_walker:
+^SowResizeWalker:
 	RenderSprites:
 		
-^sow_power_boost:
+^SowPowerBoost:
 	ProductionTimeMultiplier@power1:
 		Multiplier: 90
 		Prerequisites: sowpower
@@ -204,14 +204,14 @@ Player:
 		Multiplier: 66
 		Prerequisites: sowovercharge, sowpower
 		
-^sow_no_cd:
+^SowNoCD:
 	ProductionTimeMultiplier@powersow:
 		Multiplier: 0
 		Prerequisites: stateofwar
 	ProductionCostMultiplier@powersow:
 		Multiplier: 150
 		Prerequisites: stateofwar
-^satelliteprotection_upgrade:
+^SatelliteProtectionUpgrade:
 	GrantConditionOnPrerequisite@satelliteprotection:
 		Condition: SatelliteUpgrade
 		Prerequisites: satelliteprotection_mk1
@@ -254,10 +254,10 @@ sowheadquarters:
 	Inherits: ^BaseBuilding
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x4Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQ: ^CPQConditionWithPrimary
@@ -356,13 +356,13 @@ sowheadquarters:
 		FullSequence: pip-yellow
 sowlightfactory:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
-	Inherits@satprot: ^satelliteprotection_upgrade
+	Inherits@resize: ^SowResize
+	Inherits@satprot: ^SatelliteProtectionUpgrade
 	Inherits@shape: ^4x2Shape
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@upgradeable: ^sow_upgradeable
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@upgradeable: ^SowUpgradeable
+	Inherits@fasterprodb: ^SowPowerBoost
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Valued:
@@ -488,13 +488,13 @@ factory_sowupgrade_3:
 		
 sowmediumfactory:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
-	Inherits@satprot: ^satelliteprotection_upgrade
+	Inherits@resize: ^SowResize
+	Inherits@satprot: ^SatelliteProtectionUpgrade
 	Inherits@shape: ^4x3Shape
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@upgradeable: ^sow_upgradeable
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@upgradeable: ^SowUpgradeable
+	Inherits@fasterprodb: ^SowPowerBoost
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Valued:
@@ -609,13 +609,13 @@ sowmediumfactory:
 		
 sowheavyfactory:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
-	Inherits@satprot: ^satelliteprotection_upgrade
+	Inherits@resize: ^SowResize
+	Inherits@satprot: ^SatelliteProtectionUpgrade
 	Inherits@shape: ^5x3Shape
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@upgradeable: ^sow_upgradeable
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@upgradeable: ^SowUpgradeable
+	Inherits@fasterprodb: ^SowPowerBoost
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Valued:
@@ -731,12 +731,12 @@ sowheavyfactory:
 		
 sowabcfactory:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x3Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@fasterprodb: ^SowPowerBoost
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@SW: ^Superweapon
@@ -812,12 +812,12 @@ sowabcfactory:
 		RequiresCondition: classicproductionqueues
 sowradar:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^3x3Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@fasterprodb: ^SowPowerBoost
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
 		Cost: 1500
@@ -960,12 +960,12 @@ sowgoldmine:
 	Inherits: OILB.Building
 	-RenderSprites:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x3Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@upgradeable: ^sow_upgradeable
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@upgradeable: ^SowUpgradeable
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@2: ^CashTricklerMultipliers
@@ -1137,12 +1137,12 @@ sowgoldmine.bot:
 		
 sowpower:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
-	Inherits@upgradeable: ^sow_upgradeable
+	Inherits@resize: ^SowResize
+	Inherits@upgradeable: ^SowUpgradeable
 	Inherits@shape: ^3x3Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpower: ^DisabledOverlay
 	Valued:
@@ -1219,12 +1219,12 @@ sowpower:
 		
 sowresearch:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x2Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@upgradeable: ^sow_upgradeable
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@upgradeable: ^SowUpgradeable
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@BotMicro: ^BotMicromanageable
 	Valued:
@@ -1329,11 +1329,11 @@ sowresearch.bot:
 		
 sowmechfactory:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x3Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1403,11 +1403,11 @@ sowmechfactory:
 
 sowasteroidstation:
 	Inherits: ^BaseBuilding
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^4x4Shape
-	Inherits@satprot: ^satelliteprotection_upgrade
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@satprot: ^SatelliteProtectionUpgrade
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpower: ^DisabledOverlay
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1516,10 +1516,10 @@ sow_gun_tower:
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@EMP: ^DefenseTurretedEMP
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x1Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Selectable:
 		Bounds: 1024, 1024
@@ -1571,10 +1571,10 @@ sow_antiair_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x1Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
 	Selectable:
 		Bounds: 1024, 1024
@@ -1627,12 +1627,12 @@ sow_plasma_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x1Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Selectable:
 		Bounds: 1024, 1024
 	Valued:
@@ -1683,12 +1683,12 @@ sow_minigun_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x2Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Selectable:
 		Bounds: 1280, 1706
 	Valued:
@@ -1743,12 +1743,12 @@ sow_defragmenter_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x2Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Selectable:
 		Bounds: 1280, 1706
 	Valued:
@@ -1802,12 +1802,12 @@ sow_vulcano_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@shape: ^1x2Shape
-	Inherits@sownocd: ^sow_no_cd
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sownocd: ^SowNoCD
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Selectable:
 		Bounds: 1280, 1706
 	Valued:
@@ -1863,10 +1863,10 @@ sow_lt_cannon:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -1919,10 +1919,10 @@ sow_lt_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -1976,10 +1976,10 @@ sow_lt_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -2033,10 +2033,10 @@ sow_lt_special:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -2089,9 +2089,9 @@ sow_lt_antiair:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@resize: ^sowresize
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@resize: ^SowResize
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -2149,10 +2149,10 @@ sow_mt_cannon:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -2205,10 +2205,10 @@ sow_mt_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -2261,10 +2261,10 @@ sow_mt_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -2317,10 +2317,10 @@ sow_mt_special:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -2373,10 +2373,10 @@ sow_mt_antiair:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -2434,10 +2434,10 @@ sow_ht_cannon:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 2000
 	Selectable:
@@ -2494,10 +2494,10 @@ sow_ht_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 2400
 	Tooltip:
@@ -2554,10 +2554,10 @@ sow_ht_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 2800
 	Selectable:
@@ -2614,10 +2614,10 @@ sow_ht_special:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 3200
 	Selectable:
@@ -2673,10 +2673,10 @@ sow_ht_antiair:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@EMP: ^TurretEMP
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Selectable:
 		Bounds: 1621, 1621
 	Valued:
@@ -2742,11 +2742,11 @@ sow_ht_antiair:
 sow_abc:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@MC: ^MCImmune
 	Selectable:
 		Bounds: 1621, 1621
@@ -2820,12 +2820,12 @@ sow_advancer:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@selection: ^SelectableSupportUnit
-	Inherits@resize: ^sowresize
+	Inherits@resize: ^SowResize
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@BotMicro: ^BotMicromanageable
-	Inherits@sowaiunit: ^sowgeneric
+	Inherits@sowaiunit: ^SowGeneric
 	Inherits@MC: ^MCImmune
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -3030,7 +3030,7 @@ sow_advancer:
 
 sow_advancer_husk:
 	Inherits: ^HelicopterHusk
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	Tooltip:
 		GenericName: Destroyed Advancer
 	FallsToEarth:
@@ -3041,15 +3041,15 @@ sow_mech_avenger:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@EMP: ^TurretEMP
-	Inherits@resize: ^sowresize_walker
+	Inherits@resize: ^SowResizeWalker
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
 	Inherits@walkercrush: ^VehicleCrusher
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 2500
 	Selectable:
@@ -3162,15 +3162,15 @@ sow_mech_kodiak:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@resize: ^sowresize_walker
+	Inherits@resize: ^SowResizeWalker
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
 	Inherits@walkercrush: ^VehicleCrusher
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -3274,15 +3274,15 @@ sow_mech_gatling:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@resize: ^sowresize_walker
+	Inherits@resize: ^SowResizeWalker
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
 	Inherits@walkercrush: ^VehicleCrusher
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -3395,16 +3395,16 @@ sow_mech_jaguar:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize_walker
+	Inherits@resize: ^SowResizeWalker
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
 	Inherits@walkercrush: ^VehicleCrusher
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -3520,16 +3520,16 @@ sow_mech_achilles:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@resize: ^sowresize_walker
+	Inherits@resize: ^SowResizeWalker
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EXT: ^ExternalConditions
 	Inherits@walkercrush: ^VehicleCrusher
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
-	Inherits@lowpowerw: ^sow_unit_lowpower
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
+	Inherits@lowpowerw: ^SowUnitLowPower
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -3640,8 +3640,8 @@ sow_mech_achilles_mk2:
 sow_mcv:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
-	Inherits@sowaiunit: ^sowgeneric
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits@sowaiunit: ^SowGeneric
+	Inherits@fasterprodb: ^SowPowerBoost
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -3698,8 +3698,8 @@ sow_mcv.bot:
 #################
 
 satelliteprotection_mk1:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Satellite Protection
 	Buildable:
@@ -3718,8 +3718,8 @@ satelliteprotection_mk1:
 	ProvidesPrerequisite@upgradename:
 		
 satelliteprotection_mk2:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Satellite Protection Mk.2
 	Buildable:
@@ -3738,8 +3738,8 @@ satelliteprotection_mk2:
 	ProvidesPrerequisite@upgradename:
 		
 heavyunits:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Heavy Units
 	Buildable:
@@ -3758,8 +3758,8 @@ heavyunits:
 	ProvidesPrerequisite@upgradename:
 
 sow_invader:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Invader
 	Buildable:
@@ -3778,8 +3778,8 @@ sow_invader:
 	ProvidesPrerequisite@upgradename:
 
 sow_invader_mk2:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Invader Mk.2
 	Buildable:
@@ -3798,8 +3798,8 @@ sow_invader_mk2:
 	ProvidesPrerequisite@upgradename:
 	
 sowovercharge:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Overcharge
 	Buildable:
@@ -3818,8 +3818,8 @@ sowovercharge:
 	ProvidesPrerequisite@upgradename:
 		
 advancedairstrikes:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Advanced Air Support
 	Buildable:
@@ -3841,8 +3841,8 @@ advancedairstrikes:
 		Condition: nopower
 		Prerequisites: sowradar
 goldmineupgrade:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Gold Processing
 	Buildable:
@@ -3865,8 +3865,8 @@ goldmineupgrade:
 		Prerequisites: sowgoldmine
 		
 goldmineupgrade2:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Gold Processing Mk.2
 	Power:
@@ -3888,8 +3888,8 @@ goldmineupgrade2:
 		Condition: nopower
 		Prerequisites: sowgoldmine
 researchupgrade:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Advanced Science
 	Buildable:
@@ -3908,8 +3908,8 @@ researchupgrade:
 	ProvidesPrerequisite@upgradename:
 		
 researchupgrade2:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Advanced Science Mk.2
 	Buildable:
@@ -3928,8 +3928,8 @@ researchupgrade2:
 	ProvidesPrerequisite@upgradename:
 		
 stateofwar:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: State Of War
 	Buildable:
@@ -3948,8 +3948,8 @@ stateofwar:
 	ProvidesPrerequisite@upgradename:
 		
 mta_unlock:
-	Inherits: ^upgrade.template
-	Inherits@fasterprodb: ^sow_power_boost
+	Inherits: ^UpgradeTemplate
+	Inherits@fasterprodb: ^SowPowerBoost
 	Tooltip:
 		Name: Medium Panzer Unlock
 	Buildable:
@@ -4053,7 +4053,7 @@ hte_unlock:
 		
 sowfighter:
 	Inherits: ^RANeutralPlane
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	RenderSprites:
 	Huntable:
 	-UpdatesPlayerStatistics:
@@ -4173,7 +4173,7 @@ sowasteroid:
 		
 sowtripler:
 	Inherits: ^RANeutralPlane
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	Huntable:
 	-UpdatesPlayerStatistics:
 	AttackBomberCA:
@@ -4240,7 +4240,7 @@ sowtripler:
 
 sowtripler_husk:
 	Inherits: ^HelicopterHusk
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	Tooltip:
 		GenericName: Destroyed Tripler
 	FallsToEarth:
@@ -4251,7 +4251,7 @@ sowtripler_husk:
 		
 sowbomber:
 	Inherits: ra1_badger_bomber
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	AmbientSound:
 		SoundFiles: sowhercules.aud
 		Interval: 0
@@ -4316,7 +4316,7 @@ sowbomber:
 
 sowfighter_husk:
 	Inherits: ^PlaneHusk
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 333
@@ -4331,7 +4331,7 @@ sowfighter_husk:
 		
 sowbomber_husk:
 	Inherits: ^PlaneHusk
-	Inherits: ^sowresize
+	Inherits: ^SowResize
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 100

@@ -280,11 +280,11 @@ Player:
 		PlayerPalette: player
 	TakeCover:
 		SpeedModifier: 100
-	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-	Inherits@WC2HASTE: ^wc2_o_haste_status
-	Inherits@WC2SLOW: ^wc2_h_slow_status
-	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 	Targetable:
 		TargetTypes: Ground, Infantry, Monster
 
@@ -371,11 +371,11 @@ Player:
 	Targetable@Monster:
 		TargetTypes: Monster
 	RenderSprites:
-	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-	Inherits@WC2HASTE: ^wc2_o_haste_status
-	Inherits@WC2SLOW: ^wc2_h_slow_status
-	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 
 ^WC2Critter:
 	Inherits: ^WC2Infantry
@@ -510,7 +510,7 @@ Player:
 # WC2 HUMAN INHERITABLES
 ###############################################################
 
-^wc2_humans_upgrade_cannondamage:
+^WC2HumansUpgradeCannonDamage:
 	GrantConditionOnPrerequisite@HCannonUpg:
 		Condition: hcannon_upg
 		Prerequisites: wc2_humans_upgrade_cannondamage
@@ -524,7 +524,7 @@ Player:
 		Modifier: 135
 		RequiresCondition: hcannon_upg2
 
-^wc2_h_str_navyshield:
+^WC2HumansStrNavyshield:
 	GrantConditionOnPrerequisite@HNavySUpg:
 		Condition: hnavyshield_upg
 		Prerequisites: wc2_h_str_navyshield
@@ -538,7 +538,7 @@ Player:
 		Modifier: 80
 		RequiresCondition: hnavyshield_upg2
 
-^wc2_orcs_upgrade_axestrength:
+^WC2OrcsUpgradeAxeStrength:
 	GrantConditionOnPrerequisite@WC2AxeUpg:
 		Condition: wc2axe_upg
 		Prerequisites: wc2_orcs_upgrade_axestrength
@@ -552,7 +552,7 @@ Player:
 		Modifier: 135
 		RequiresCondition: wc2axe_upg2
 
-^wc2_orcs_upgrade_armorstrength:
+^WC2OrcsUpgradeArmorStrength:
 	GrantConditionOnPrerequisite@WC2OShieldUpg:
 		Condition: wc2oshield_upg
 		Prerequisites: wc2_orcs_upgrade_armorstrength
@@ -566,7 +566,7 @@ Player:
 		Modifier: 80
 		RequiresCondition: wc2oshield_upg2
 
-^wc2_orcs_upgrade_cannondamage:
+^WC2OrcsUpgradeCannonDamage:
 	GrantConditionOnPrerequisite@OCannonUpg:
 		Condition: ocannon_upg
 		Prerequisites: wc2_orcs_upgrade_cannondamage
@@ -580,7 +580,7 @@ Player:
 		Modifier: 135
 		RequiresCondition: ocannon_upg2
 
-^wc2_o_str_navyshield:
+^WC2OrcsStrNavyshield:
 	GrantConditionOnPrerequisite@ONavySUpg:
 		Condition: onavyshield_upg
 		Prerequisites: wc2_o_str_navyshield
@@ -594,7 +594,7 @@ Player:
 		Modifier: 80
 		RequiresCondition: onavyshield_upg2
 
-^wc2_o_bloodlust_status:
+^WC2OrcsBloodlustStatus:
 	ExternalCondition@WC2BLOODLUST:
 		Condition: wc2_cond_bloodlust
 	WithDecoration@WC2BLOODLUST:
@@ -608,7 +608,7 @@ Player:
 		TargetTypes: bloodlust_target
 		RequiresCondition: !wc2_cond_bloodlust
 
-^wc2_o_haste_status:
+^WC2OrcsHasteStatus:
 	ExternalCondition@WC2HASTE:
 		Condition: wc2_cond_haste
 	WithDecoration@WC2HASTE:
@@ -625,7 +625,7 @@ Player:
 		TargetTypes: haste_target
 		RequiresCondition: !wc2_cond_haste
 
-^wc2_h_slow_status:
+^WC2HumansSlowStatus:
 	ExternalCondition@WC2SLOW:
 		Condition: wc2_cond_slow
 	WithDecoration@WC2SLOW:
@@ -639,7 +639,7 @@ Player:
 		Modifier: 150
 		RequiresCondition: wc2_cond_slow
 
-^wc2_h_polymorph_status:
+^WC2HumansPolymorphStatus:
 	ExternalCondition@WC2POLYMORPH:
 		Condition: wc2_cond_polymorph
 	KillsSelf@WC2POLYMORPH:
@@ -664,7 +664,7 @@ Player:
 		OwnerType: InternalName
 		RequiresCondition: wc2_cond_polymorph && wc2_cond_helboar
 
-^wc2_h_invisibility_status:
+^WC2HumansInvisibilityStatus:
 	ExternalCondition@WC2INVISIBILITY:
 		Condition: wc2_cond_invisibility
 	Cloak@WC2INVISIBILITY:
@@ -676,11 +676,11 @@ Player:
 		IsPlayerPalette: true
 
 # ^ExternalConditions:
-# 	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-# 	Inherits@WC2HASTE: ^wc2_o_haste_status
-# 	Inherits@WC2SLOW: ^wc2_h_slow_status
-# 	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-# 	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+# 	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+# 	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+# 	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+# 	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+# 	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 # 	-WithDecoration@WC2BLOODLUST:
 # 	-WithDecoration@WC2HASTE:
 # 	-WithDecoration@WC2SLOW:
@@ -689,7 +689,7 @@ Player:
 # WC2 BUILDING TEMPLATES
 ####################################################################################################
 
-^wc2_shipyard:
+^WC2Shipyard:
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
@@ -712,7 +712,7 @@ Player:
 	ProductionQueue@NAVAL:
 		LowPowerModifier: 10000
 
-^wc2_foundry:
+^WC2Foundry:
 	Inherits@shape: ^3x3Shape
 	Inherits@CPQWP: ^CPQCondition
 	Valued:
@@ -748,7 +748,7 @@ Player:
 		TargetTypes: Ground, Water, C4, Structure
 	ProvidesPrerequisite@buildingname:
 
-^wc2_oil_refinery:
+^WC2OilRefinery:
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x3Shape
 	Buildable:
@@ -768,7 +768,7 @@ Player:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-^wc2_oil_platform:
+^WC2OilPlatform:
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@shape: ^3x3Shape
 	Buildable:
@@ -800,7 +800,7 @@ Player:
 		Position: BottomLeft
 		RequiresSelection: true
 
-^wc2_supplier:
+^WC2Supplier:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -820,7 +820,7 @@ Player:
 		Actor: moneycrate
 		OwnerType: InternalName
 
-^wc2_engineer:
+^WC2Engineer:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -876,7 +876,7 @@ Player:
 # WC2 SHIP TEMPLATES
 ####################################################################################################
 
-^wc2_oil_tanker:
+^WC2OilTanker:
 	Inherits@EXP: ^GainsExperienceTD
 	Buildable:
 		Description: Transports oil from platforms to refineries.\n  Unarmed
@@ -944,7 +944,7 @@ Player:
 			wc2_human_oil_platform: indoors
 			wc2_orc_oil_platform: indoors
 
-^wc2_destroyer:
+^WC2Destroyer:
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -972,7 +972,7 @@ Player:
 	Selectable:
 		DecorationBounds: 1536, 1536
 
-^wc2_transport:
+^WC2Transport:
 	Inherits@EXP: ^GainsExperienceTD
 	Buildable:
 		Description: Transport vehicle.\n  Unarmed
@@ -1005,7 +1005,7 @@ Player:
 		Position: BottomLeft
 		RequiresSelection: true
 
-^wc2_battleship:
+^WC2Battleship:
 	Inherits@Template: ^BattleShipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1033,7 +1033,7 @@ Player:
 	Selectable:
 		DecorationBounds: 1536, 1536
 
-^wc2_submarine:
+^WC2Submarine:
 	Inherits@Template: ^ScoutShipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1088,7 +1088,7 @@ wc2_camera_scanner:
 
 wc2_human_shipyard:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_shipyard: ^wc2_shipyard
+	Inherits@wc2_shipyard: ^WC2Shipyard
 	Tooltip:
 		Name: Shipyard
 	Buildable:
@@ -1100,7 +1100,7 @@ wc2_human_shipyard:
 
 wc2_human_foundry:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_foundry: ^wc2_foundry
+	Inherits@wc2_foundry: ^WC2Foundry
 	Tooltip:
 		Name: Foundry
 	Buildable:
@@ -1112,7 +1112,7 @@ wc2_human_foundry:
 
 wc2_human_oil_refinery:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_oil_refinery: ^wc2_oil_refinery
+	Inherits@wc2_oil_refinery: ^WC2OilRefinery
 	Tooltip:
 		Name: Oil Refinery
 	Buildable:
@@ -1124,7 +1124,7 @@ wc2_human_oil_refinery:
 
 wc2_human_oil_platform:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
-	Inherits@wc2_oil_platform: ^wc2_oil_platform
+	Inherits@wc2_oil_platform: ^WC2OilPlatform
 	Tooltip:
 		Name: Oil Platform
 	Buildable:
@@ -1136,8 +1136,8 @@ wc2_human_oil_platform:
 
 wc2_human_oil_tanker:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_oil_tanker
-	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Inherits@WC2Template: ^WC2OilTanker
+	Inherits@HNavySUpg: ^WC2HumansStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_human_oil_refinery
 		Queue: Naval, RANaval
@@ -1151,9 +1151,9 @@ wc2_human_oil_tanker:
 
 wc2_human_elven_destroyer:
 	Inherits@WC2SHIP: ^WC2Ship
-	Inherits@WC2Template: ^wc2_destroyer
-	Inherits@HCannonUpg: ^wc2_humans_upgrade_cannondamage
-	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Inherits@WC2Template: ^WC2Destroyer
+	Inherits@HCannonUpg: ^WC2HumansUpgradeCannonDamage
+	Inherits@HNavySUpg: ^WC2HumansStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_human_shipyard
 		Queue: Naval, RANaval
@@ -1177,8 +1177,8 @@ wc2_human_elven_destroyer:
 
 wc2_human_transport:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_transport
-	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Inherits@WC2Template: ^WC2Transport
+	Inherits@HNavySUpg: ^WC2HumansStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_human_foundry
 		Queue: Naval, RANaval
@@ -1192,9 +1192,9 @@ wc2_human_transport:
 
 wc2_human_battleship:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_battleship
-	Inherits@HCannonUpg: ^wc2_humans_upgrade_cannondamage
-	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Inherits@WC2Template: ^WC2Battleship
+	Inherits@HCannonUpg: ^WC2HumansUpgradeCannonDamage
+	Inherits@HNavySUpg: ^WC2HumansStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_human_foundry, ~wc2_humans_blacksmith ##once keep/castle are fixed, prereq will be wc2_humans_keep, wc2_human_foundry
 		Queue: Naval, RANaval
@@ -1218,9 +1218,9 @@ wc2_human_battleship:
 
 wc2_human_gnomish_submarine:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_submarine
-	Inherits@HCannonUpg: ^wc2_humans_upgrade_cannondamage
-	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Inherits@WC2Template: ^WC2Submarine
+	Inherits@HCannonUpg: ^WC2HumansUpgradeCannonDamage
+	Inherits@HNavySUpg: ^WC2HumansStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_human_foundry, ~wc2_humans_gnomishinventor
 		Queue: Naval, RANaval
@@ -1251,7 +1251,7 @@ wc2_human_gnomish_submarine:
 
 wc2_orc_shipyard:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_shipyard: ^wc2_shipyard
+	Inherits@wc2_shipyard: ^WC2Shipyard
 	Tooltip:
 		Name: Shipyard
 	Buildable:
@@ -1263,7 +1263,7 @@ wc2_orc_shipyard:
 
 wc2_orc_foundry:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_foundry: ^wc2_foundry
+	Inherits@wc2_foundry: ^WC2Foundry
 	Tooltip:
 		Name: Foundry
 	Buildable:
@@ -1275,7 +1275,7 @@ wc2_orc_foundry:
 
 wc2_orc_oil_refinery:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_oil_refinery: ^wc2_oil_refinery
+	Inherits@wc2_oil_refinery: ^WC2OilRefinery
 	Tooltip:
 		Name: Oil Refinery
 	Buildable:
@@ -1287,7 +1287,7 @@ wc2_orc_oil_refinery:
 
 wc2_orc_oil_platform:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_oil_platform: ^wc2_oil_platform
+	Inherits@wc2_oil_platform: ^WC2OilPlatform
 	Tooltip:
 		Name: Oil Platform
 	Buildable:
@@ -1333,8 +1333,8 @@ wc2_runes:
 
 wc2_orc_skeleton:
 	Inherits@wc2_orcs_grunt: wc2_orcs_grunt
-	Inherits@WC2AxeUpg: ^wc2_orcs_upgrade_axestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Skeleton
 	Buildable:
@@ -1370,8 +1370,8 @@ wc2_orc_skeleton:
 
 wc2_orc_oil_tanker:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_oil_tanker
-	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Inherits@WC2Template: ^WC2OilTanker
+	Inherits@ONavySUpg: ^WC2OrcsStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_oil_refinery
 		Queue: Naval, RANaval
@@ -1385,9 +1385,9 @@ wc2_orc_oil_tanker:
 
 wc2_orc_trolldestroyer:
 	Inherits@WC2SHIP: ^WC2Ship
-	Inherits@WC2Template: ^wc2_destroyer
-	Inherits@OCannonUpg: ^wc2_orcs_upgrade_cannondamage
-	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Inherits@WC2Template: ^WC2Destroyer
+	Inherits@OCannonUpg: ^WC2OrcsUpgradeCannonDamage
+	Inherits@ONavySUpg: ^WC2OrcsStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_shipyard
 		Queue: Naval, RANaval
@@ -1411,8 +1411,8 @@ wc2_orc_trolldestroyer:
 
 wc2_orc_transport:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_transport
-	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Inherits@WC2Template: ^WC2Transport
+	Inherits@ONavySUpg: ^WC2OrcsStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_foundry
 		Queue: Naval, RANaval
@@ -1426,9 +1426,9 @@ wc2_orc_transport:
 
 wc2_orc_ogre_juggernaught:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_battleship
-	Inherits@OCannonUpg: ^wc2_orcs_upgrade_cannondamage
-	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Inherits@WC2Template: ^WC2Battleship
+	Inherits@OCannonUpg: ^WC2OrcsUpgradeCannonDamage
+	Inherits@ONavySUpg: ^WC2OrcsStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_foundry, ~wc2_orcs_blacksmith ##once stronghold/fortress are fixed, prereq will be wc2_orcs_stronghold, wc2_orc_foundry
 		Queue: Naval, RANaval
@@ -1452,9 +1452,9 @@ wc2_orc_ogre_juggernaught:
 
 wc2_orc_giant_turtle:
 	Inherits@WC2Ship: ^WC2Ship
-	Inherits@WC2Template: ^wc2_submarine
-	Inherits@OCannonUpg: ^wc2_orcs_upgrade_cannondamage
-	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Inherits@WC2Template: ^WC2Submarine
+	Inherits@OCannonUpg: ^WC2OrcsUpgradeCannonDamage
+	Inherits@ONavySUpg: ^WC2OrcsStrNavyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_foundry, ~wc2_orcs_golbinalchemist
 		Queue: Naval, RANaval
@@ -1648,7 +1648,7 @@ wc2_neutral_daemon:
 ####################################################################################################
 
 wc2_h_str_navyshield:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Naval Armor
 	Buildable:
@@ -1663,7 +1663,7 @@ wc2_h_str_navyshield:
 	ProvidesPrerequisite:
 
 wc2_h_str_navyshield2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Naval Armor II
 	Buildable:
@@ -1678,7 +1678,7 @@ wc2_h_str_navyshield2:
 	ProvidesPrerequisite:
 
 wc2_o_str_navyshield:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Naval Armor
 	Buildable:
@@ -1693,7 +1693,7 @@ wc2_o_str_navyshield:
 	ProvidesPrerequisite:
 
 wc2_o_str_navyshield2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Naval Armor II
 	Buildable:

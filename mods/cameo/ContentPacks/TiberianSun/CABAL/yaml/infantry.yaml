@@ -7,8 +7,8 @@ cabal_engineer:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Cyborg: ^TSCyborgs
-	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@CyberneticPlating: ^CabalUpgradeCyberneticPlating
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: None
 		-RequiresCondition:
@@ -82,9 +82,9 @@ cabal_cyborginfantry:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -157,9 +157,9 @@ cabal_rocketcyborg:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -271,9 +271,9 @@ cabal_devout:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Plate
 		-RequiresCondition:
@@ -386,9 +386,9 @@ cabal_ascended:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -504,9 +504,9 @@ cabal_enlighted:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -625,10 +625,10 @@ cabal_hackercyborg:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
-	Inherits@UPLINK: ^cabal_upgrade_neuraluplink
+	Inherits@UPLINK: ^CabalUpgradeNeuralUplink
 	Inherits@EMP: ^UnitDisable
-	Inherits@td_nod_handofnod: ^cabal_upgrade_handof
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@td_nod_handofnod: ^CabalUpgradeHandOf
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: None
 		-RequiresCondition:
@@ -767,10 +767,10 @@ cabal_cyborgcommando:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@tibheal: ^TibHealable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Heroic
 		-RequiresCondition:
@@ -853,10 +853,10 @@ cabal_cyborgcommandov2:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@tibheal: ^TibHealable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Armor:
 		Type: Heroic
@@ -939,9 +939,9 @@ cabal_eliminator800:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Flak
 		-RequiresCondition:
@@ -1043,8 +1043,8 @@ cabal_dissolver:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
-	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@CyberneticPlating: ^CabalUpgradeCyberneticPlating
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Flak
 		-RequiresCondition:

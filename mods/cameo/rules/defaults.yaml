@@ -204,7 +204,7 @@
 		Prerequisites: base-reveal, !conyard
 		Condition: base-reveal
 
-^susaintelligence:
+^SUSAIntelligence:
 	ExternalCondition@susaintelligence:
 		Condition: susaintelligence
 	RevealsShroud@susaintelligence:
@@ -2094,8 +2094,8 @@
 
 ### Doctrines ###
 
-^doctrine_template:
-	Inherits: ^researched_upgrade.template
+^DoctrineTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Doctrine
 	Valued:
@@ -2111,8 +2111,8 @@
 
 ### Unit Upgrades ###
 
-^unit_upgrade_template:
-	Inherits: ^researched_upgrade.template
+^UnitUpgradeTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Unit Upgrade
 	Valued:
@@ -2128,8 +2128,8 @@
 
 ### Tech Upgrades ###
 
-^tech_upgrade_template:
-	Inherits: ^researched_upgrade.template
+^TechUpgradeTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tech Upgrade
 	Valued:
@@ -2145,8 +2145,8 @@
 
 ### Team Upgrades ###
 
-^team_upgrade_template:
-	Inherits: ^upgrade.template
+^TeamUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Team Upgrade
 	Valued:
@@ -2159,10 +2159,10 @@
 	RenderSprites:
 		Image: icon
 	ProvidesTeamProxyActor:
-		Actor: ^team_upgrade_proxy_actor
+		Actor: ^TeamUpgradeProxyActor
 
-^team_upgrade_proxy_actor:
-	Inherits: ^researched_upgrade.template
+^TeamUpgradeProxyActor:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Team Upgrade
 	Buildable:
@@ -2171,7 +2171,7 @@
 	RenderSprites:
 		Image: icon
 	ProvidesPrerequisite:
-		Prerequisite: ^team_upgrade_template
+		Prerequisite: ^TeamUpgradeTemplate
 
 ####################################################################################################
 #		Actor Templates
@@ -3380,11 +3380,6 @@
 		MaxMoveDelay: 750
 	MapEditorData:
 		Categories: Civilian infantry
-	SpawnActorOnDeath@ZombieInfect:
-		Actor: civzombie.infect
-		Probability: 99
-		OwnerType: Killer
-		DeathType: ZombieInfection
 	Passenger:
 		CustomPipType: civilian
 
@@ -4250,7 +4245,7 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo
 
-^wall:
+^Wall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@cloak: ^StealthGenCloakable
@@ -6299,11 +6294,11 @@
 	Inherits@industry: ^IndustrySpeed
 	Inherits@police: ^CityCombatCallable
 	Inherits@berserk: ^Berserkable
-	Inherits@WC2BLOODLUST: ^wc2_o_bloodlust_status
-	Inherits@WC2HASTE: ^wc2_o_haste_status
-	Inherits@WC2SLOW: ^wc2_h_slow_status
-	Inherits@WC2POLYMORPH: ^wc2_h_polymorph_status
-	Inherits@WC2INVISIBILITY: ^wc2_h_invisibility_status
+	Inherits@WC2BLOODLUST: ^WC2OrcsBloodlustStatus
+	Inherits@WC2HASTE: ^WC2OrcsHasteStatus
+	Inherits@WC2SLOW: ^WC2HumansSlowStatus
+	Inherits@WC2POLYMORPH: ^WC2HumansPolymorphStatus
+	Inherits@WC2INVISIBILITY: ^WC2HumansInvisibilityStatus
 	-WithDecoration@WC2BLOODLUST:
 	-WithDecoration@WC2HASTE:
 	-WithDecoration@WC2SLOW:
@@ -7656,7 +7651,7 @@ CPQDEBUGDUMMY:
 	ProductionBar@RADEFENCE:
 		ProductionType: RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
-	Inherits@susaintelligence: ^susaintelligence
+	Inherits@susaintelligence: ^SUSAIntelligence
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@conyard:
 		Prerequisite: conyard
@@ -8750,7 +8745,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: undeployed && !moving && !deployed
 		ArmamentNames: dummy
 
-^upgrade.template:
+^UpgradeTemplate:
 	Buildable:
 		Description: Generic upgrade
 		BuildLimit: 1
@@ -8763,18 +8758,16 @@ CPQDEBUGDUMMY:
 	UpdatesPlayerStatistics:
 		AddToSpectatorTab: true
 
-^researched_upgrade.template:
-	Inherits: ^upgrade.template
+^ResearchedUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	UpdatesPlayerStatistics:
 		AddToUpgradesTab: true
 
-^promotion_upgrade.template:
-	Inherits: ^upgrade.template
+^PromotionUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	Buildable:
 		Queue: Promotions
 		Description: Promotion unlock upgrade
-	Selectable:
-		DecorationBounds: 1024, 1024
 	PromotionUpgrade:
 
 ^Cargo:
@@ -9365,6 +9358,280 @@ CPQDEBUGDUMMY:
 		EffectSequence: idle
 		BlockedCursor: move-blocked
 
+^IFVBase:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@IFV: ^IFVConditions
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor_fv.name
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Description: actor_fv.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 150
+		TurnSpeed: 30
+		PauseOnCondition: notmobile || disabled
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Turreted:
+		TurnSpeed: 60
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		UnloadVoice: Move
+		LoadedCondition: loaded
+		LoadingCondition: notmobile
+	Armament@primary:
+		Name: primary
+		Weapon: RA2HoverMissile
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryelite:
+		Name: primary
+		Weapon: RA2HoverMissile_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryAA:
+		Name: primary
+		Weapon: RA2HoverMissileAA
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteAA:
+		Name: primary
+		Weapon: RA2HoverMissileAA_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissile
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissile_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryAAThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissileAA
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteAAThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissileAA_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missile:
+		Weapon: RA2MultiHoverMissile
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileelite:
+		Weapon: RA2MultiHoverMissile_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileAA:
+		Weapon: RA2MultiHoverMissileAA
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteAA:
+		Weapon: RA2MultiHoverMissileAA_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileThunderbolt:
+		Weapon: RA2MultiThunderboltMissile
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteThunderbolt:
+		Weapon: RA2MultiThunderboltMissile_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileAAThunderbolt:
+		Weapon: RA2MultiThunderboltMissileAA
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteAAThunderbolt:
+		Weapon: RA2MultiThunderboltMissileAA_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@mg:
+		Weapon: RA2CRM60
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-mg
+	Armament@hmg:
+		Weapon: RA2CRM60H
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-hmg
+	Armament@repair:
+		Weapon: RA2IFVRepair
+		LocalOffset: 164,0,864
+		RequiresCondition: ifv-repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@healer:
+		Weapon: MedicHeal
+		LocalOffset: 164,0,864
+		RequiresCondition: ifv-healer
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	FirepowerMultiplier@repair:
+		Modifier: 50
+		RequiresCondition: ifv-repair || ifv-healer
+	Armament@ra1_allies_alliedsniper:
+		Weapon: RA2AWP
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-ra1_allies_alliedsniper
+	Armament@hero:
+		Weapon: RA2DoublePistolsIFV
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-hero
+	Armament@tesla:
+		Weapon: TTankZap
+		RequiresCondition: ifv-tesla
+	Armament@flak:
+		Weapon: DragunovSniper
+		RequiresCondition: ifv-flak
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlefl
+		MuzzlePalette: ra2effect
+	Armament@cannon:
+		Weapon: RA2MirageGun
+		RequiresCondition: ifv-cannon
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemm
+		MuzzlePalette: ra2effect
+	Armament@fire:
+		Weapon: BigFlamer
+		RequiresCondition: ifv-fire
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlefa
+	Armament@chem:
+		Weapon: RA2RadBeamWeapon
+		RequiresCondition: ifv-chem
+	Armament@chrono:
+		Weapon: IFVChronoBeam
+		LocalOffset: 171,0,255
+		RequiresCondition: ifv-chrono
+	Armament@chronosound:
+		Weapon: IFVChronoSound
+		RequiresCondition: ifv-chrono
+	Armament@ivan:
+		Weapon: DemoTruckTargeting
+		RequiresCondition: ifv-demo
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: ifv-demo && !disabled
+	KillsSelf@ivan:
+		RequiresCondition: ifv-demo && (triggered || invulnerability)
+	FireWarheadsOnDeath@ivan:
+		Weapon: RA2DemoBomb
+		EmptyWeapon: RA2DemoBomb
+		RequiresCondition: ifv-demo && !disabled
+	WithSpriteTurret@default:
+		Sequence: turret-missile
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
+	WithSpriteTurret@mg:
+		Sequence: turret-mg
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
+	WithSpriteTurret@flame:
+		Sequence: turret-flame
+		RequiresCondition: ifv-chem || ifv-fire
+	WithSpriteTurret@engineer:
+		Sequence: turret-repair
+		RequiresCondition: ifv-repair
+	WithSpriteTurret@hitech:
+		Sequence: turret-hitech
+		RequiresCondition: ifv-chrono || ifv-misslaser || ifv-sonic || ifv-healer || ifv-spy
+	WithSpriteTurret@tesla:
+		Sequence: turret-tesla
+		RequiresCondition: ifv-tesla
+	WithSpriteTurret@bomb:
+		Sequence: turret-bomb
+		RequiresCondition: ifv-demo
+	Tooltip@MG:
+		Name: Machine Gun IFV
+		RequiresCondition: ifv-mg || ifv-thief
+	Tooltip@HMG:
+		Name: Heavy Machine Gun IFV
+		RequiresCondition: ifv-hmg
+	Tooltip@MISS:
+		Name: Missile IFV
+		RequiresCondition: ifv-miss
+	Tooltip@REP:
+		Name: Repair IFV
+		RequiresCondition: ifv-repair
+	Tooltip@SNIPE:
+		Name: Sniper IFV
+		RequiresCondition: ifv-ra1_allies_alliedsniper
+	Tooltip@HERO:
+		Name: Hero IFV
+		RequiresCondition: ifv-hero
+	WithDecoration@COMMANDOSKULL:
+		RequiresCondition: ifv-hero
+	Tooltip@FLAK:
+		Name: Flak IFV
+		RequiresCondition: ifv-flak
+	Tooltip@TESLA:
+		Name: Tesla IFV
+		RequiresCondition: ifv-tesla
+	Tooltip@CHEM:
+		Name: Chemical IFV
+		RequiresCondition: ifv-chem
+	Tooltip@CANNON:
+		Name: Cannon IFV
+		RequiresCondition: ifv-cannon
+	Tooltip@FIRE:
+		Name: Flamethrower IFV
+		RequiresCondition: ifv-fire
+	Tooltip@DEMO:
+		Name: Bomb IFV
+		RequiresCondition: ifv-demo
+	Tooltip@CHRONO:
+		Name: Chrono IFV
+		RequiresCondition: ifv-chrono
+	Tooltip@Healer:
+		Name: Healer IFV
+		RequiresCondition: ifv-healer
+	GuardsSelection@HEAL:
+		ValidTargets: Infantry
+		RequiresCondition: ifv-healer && !stance-attackanything
+	GuardsSelection@REPAIR:
+		ValidTargets: Vehicle
+		RequiresCondition: ifv-repair && !stance-attackanything
+	GuardsSelection@SPY:
+		RequiresCondition: ifv-spy
+	KeepsDistance:
+		RequiresCondition: ifv-repair || ifv-healer || ifv-spy
+	AttackTurreted:
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+
 ^SpyDisguise:
 	Inherits: ^CommandoSkull
 	WithDecoration@COMMANDOSKULL:
@@ -9372,7 +9639,6 @@ CPQDEBUGDUMMY:
 	Disguise:
 		DisguisedCondition: disguise
 		DisguisedAsConditions:
-			rmbo: hero
 			td_gdi_havoc: hero
 			td_nod_lasercommando: hero
 			ra1_allies_tanya: hero

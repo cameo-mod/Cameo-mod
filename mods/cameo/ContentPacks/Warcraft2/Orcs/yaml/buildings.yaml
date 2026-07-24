@@ -171,7 +171,7 @@ wc2_orcs_fortress:
 
 wc2_orcs_pigfarm:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_farm: ^wc2_farm
+	Inherits@wc2_farm: ^WC2Farm
 	Tooltip:
 		Name: Pigfarm
 	Valued:
@@ -229,7 +229,7 @@ wc2_orcs_pigfarm:
 
 wc2_orcs_barracks:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_barracks: ^wc2_barracks
+	Inherits@wc2_barracks: ^WC2Barracks
 	Tooltip:
 		Name: Barracks
 	Buildable:
@@ -243,7 +243,7 @@ wc2_orcs_barracks:
 
 wc2_orcs_trolllumbermill:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Inherits@wc2_lumber_mill: ^WC2LumberMill
 	Tooltip:
 		Name: Troll Lumbermill
 	Buildable:
@@ -277,7 +277,7 @@ wc2_orcs_trolllumbermill:
 
 wc2_orcs_blacksmith:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@wc2_blacksmith: ^WC2Blacksmith
 	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
@@ -292,7 +292,7 @@ wc2_orcs_blacksmith:
 
 wc2_orcs_golbinalchemist:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_inventor: ^wc2_inventor
+	Inherits@wc2_inventor: ^WC2Inventor
 	Tooltip:
 		Name: Golbin Alchemist
 	Buildable:
@@ -306,7 +306,7 @@ wc2_orcs_golbinalchemist:
 
 wc2_orcs_ogremound:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_stables: ^wc2_stables
+	Inherits@wc2_stables: ^WC2Stables
 	Tooltip:
 		Name: Ogre Mound
 	Buildable:
@@ -320,7 +320,7 @@ wc2_orcs_ogremound:
 
 wc2_orcs_altarofstorms:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_church: ^wc2_church
+	Inherits@wc2_church: ^WC2Church
 	Tooltip:
 		Name: Altar of Storms
 	Buildable:
@@ -430,7 +430,7 @@ wc2_orcs_altarofstorms:
 
 wc2_orcs_templeofthedamned:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_temple: ^wc2_temple
+	Inherits@wc2_temple: ^WC2Temple
 	Tooltip:
 		Name: Temple of the Damned
 	Buildable:
@@ -506,7 +506,7 @@ wc2_orcs_templeofthedamned:
 
 wc2_orcs_dragonroost:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_nest: ^wc2_nest
+	Inherits@wc2_nest: ^WC2Nest
 	Tooltip:
 		Name: Dragon Roost
 	Buildable:
@@ -550,7 +550,7 @@ wc2_orcs_cannontower_plug:
 
 wc2_orcs_orcgoldmine:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
-	Inherits@wc2_goldmine: ^wc2_goldmine
+	Inherits@wc2_goldmine: ^WC2Goldmine
 	Tooltip:
 		Name: Orc Gold Mine
 	Buildable:
