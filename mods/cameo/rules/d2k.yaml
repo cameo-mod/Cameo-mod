@@ -10488,7 +10488,7 @@
 
 #   Common Buildings
 # upgrade_conyard:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Construction Yard Upgrade
 # 	Buildable:
@@ -10506,7 +10506,7 @@
 # 		Image: conyard.ordos
 
 # upgrade_barracks:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Barracks Upgrade
 # 	Buildable:
@@ -10524,7 +10524,7 @@
 # 		Image: barracks.ordos
 
 # ordos_upgrade_lightfactory:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Light Factory Upgrade
 # 	Buildable:
@@ -10542,7 +10542,7 @@
 # 		Image: light.ordos
 
 # upgrade_heavy:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Factory Upgrade
 # 	Buildable:
@@ -10560,7 +10560,7 @@
 # 		Image: heavy.ordos
 
 # upgrade_hightech:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: High Tech Factory Upgrade
 # 	Buildable:
@@ -10578,7 +10578,7 @@
 # 		Image: hightech.atreides
 
 # d2k_wind_trap_upgrade:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Advanced Wind Traps
 # 	Valued:
@@ -10594,7 +10594,7 @@
 
 #   Common Upgrades
 # d2k_spice_sifter_upgrade:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Efficient Filtering
 # 	Valued:
@@ -10623,7 +10623,7 @@
 # 		Image: ixian_upgrade_twinbazooka
 
 # ixian_upgrade_tungstenneedleguns:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Tungsten Needle Guns
 # 	Valued:
@@ -10638,7 +10638,7 @@
 # 		Image: ixian_upgrade_tungstenneedleguns
 
 # ixian_upgrade_personalshield:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Personal Shield
 # 	Valued:
@@ -10653,7 +10653,7 @@
 # 		Image: ixian_personalshield_icon
 
 # ixian_upgrade_generalpurposearmor:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: General Purpose Armor
 # 	Valued:
@@ -10668,7 +10668,7 @@
 # 		Image: combat_tank.ixian
 
 # ixian_upgrade_reinforcedbarrel:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Reinforced Barrel
 # 	Valued:
@@ -10682,7 +10682,7 @@
 # 		Image: d2k_siege_tank_higher_range
 
 # ixian_upgrade_heavymissiles:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Missiles
 # 	Valued:
@@ -10696,7 +10696,7 @@
 # 		Image: ix_missile_tank
 
 # ixian_upgrade_advancedixiantechnology:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
 # 	Valued:
@@ -10713,7 +10713,7 @@
 # 		Actor: team_upgrade.d2k_advanced_ixian_technology
 
 # team_upgrade.d2k_advanced_ixian_technology:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	ProvidesPrerequisite:
 # 		Prerequisite: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
@@ -10853,7 +10853,7 @@
 # 		Upgrades: ordos_upgrade_contraband
 
 # d2k_ornithopter_upgrade:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Ornithopter Missiles
 # 	Buildable:
@@ -10986,7 +10986,7 @@
 ##################################
 
 # d2k_striketeam2:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Strike Team Paradrop II
 # 	Buildable:
@@ -11002,7 +11002,7 @@
 # 		Prerequisite: d2k_striketeam2
 
 # d2k_striketeam3:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Strike Team Paradrop III
 # 	Buildable:
@@ -11823,7 +11823,7 @@
 # 		DeployTicks: 450
 # 		DeployTrigger: Attack
 # research.missile_tank_vordel:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Missile Tank
 # 	Buildable:
@@ -11841,7 +11841,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_apparition:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Apparition
 # 	Buildable:
@@ -11859,7 +11859,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_aircraft_eater:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Aircraft Eater
 # 	Buildable:
@@ -11877,7 +11877,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_defender:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Defender
 # 	Buildable:
@@ -12475,7 +12475,7 @@
 #                Upgrade Ix
 ##############################################
 # ixian_promotion_rashidan:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Rashidan
 # 	Buildable:
@@ -12489,7 +12489,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_storminfantry:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Storm Infantry
 # 	Buildable:
@@ -12503,7 +12503,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_stormraider:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Storm Raider
 # 	Buildable:
@@ -12517,7 +12517,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_stormlasher:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Storm Lasher
 # 	Buildable:
@@ -12533,7 +12533,7 @@
 	### Military tree
 
 # ixian_promotion_heavyixraider:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Heavy Ix Raider
 # 	Buildable:
@@ -12547,7 +12547,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixsiegetank:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Ix Siege Tank
 # 	Buildable:
@@ -12561,7 +12561,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_neocymek:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Neo Cymek
 # 	Buildable:
@@ -12575,7 +12575,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixprojector:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Ix Projector
 # 	Buildable:
@@ -12591,7 +12591,7 @@
 	### Support tree
 
 # ixian_promotion_ixrailgundrone:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Ix Railgun Drone
 # 	Buildable:
@@ -12604,7 +12604,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixianempbomber:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Ixian EMP Bomber
 # 	Buildable:
@@ -12618,7 +12618,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixresonancedrone:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Ix Resonance Drone
 # 	Buildable:
@@ -12632,7 +12632,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_farasha:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Farasha
 # 	Buildable:
@@ -12656,7 +12656,7 @@
 #                Upgrade Ordos
 ##############################################
 # ordos_promotion_chemicaltrooper:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Chemical Trooper
 # 	Buildable:
@@ -12670,7 +12670,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_contaminator:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Contaminator
 # 	Buildable:
@@ -12684,7 +12684,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_leecher:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Leecher
 # 	Buildable:
@@ -12698,7 +12698,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_laboratorycrawler:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Laboratory Crawler
 # 	Buildable:
@@ -12712,7 +12712,7 @@
 # 	ProvidesPrerequisite:
 #
 # ordos_promotion_dustdrone:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Dust Drone
 # 	Buildable:
@@ -12726,7 +12726,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_stealthraider:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Stealth Raider
 # 	Buildable:
@@ -12740,7 +12740,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_lasertank:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Laser Tank
 # 	Buildable:
@@ -12754,7 +12754,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_python:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Python
 # 	Buildable:
@@ -12768,7 +12768,7 @@
 
 #
 # ordos_promotion_mortartroopers:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Mortar Troopers
 # 	Buildable:
@@ -12782,7 +12782,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_deviatortank:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Deviator Tank
 # 	Buildable:
@@ -12796,7 +12796,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_banshees:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Banshees
 # 	Buildable:
@@ -12810,7 +12810,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_wraith:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Wraith
 # 	Buildable:

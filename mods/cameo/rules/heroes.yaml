@@ -206,7 +206,7 @@ LINK:
 		RequiresCondition: mail2 && mail3
 
 LinkSword2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Master Sword
 	Buildable:
@@ -222,7 +222,7 @@ LinkSword2:
 		Prerequisite: linksword2
 
 LinkSword3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Tempered Sword
 	Buildable:
@@ -238,7 +238,7 @@ LinkSword3:
 		Prerequisite: linksword3
 
 LinkSword4:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Golden Sword
 	Buildable:
@@ -254,7 +254,7 @@ LinkSword4:
 		Prerequisite: linksword4
 
 Pegasusboots:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Pegasus Boots
 	Buildable:
@@ -270,7 +270,7 @@ Pegasusboots:
 		Prerequisite: pegasusboots
 
 Mail2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Blue Mail
 	Buildable:
@@ -286,7 +286,7 @@ Mail2:
 		Prerequisite: mail2
 
 Mail3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Red Mail
 	Buildable:
@@ -302,7 +302,7 @@ Mail3:
 		Prerequisite: mail3
 
 Bottledfairy:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Fairy in a Bottle
 	Buildable:
@@ -457,7 +457,7 @@ BLAZER:
 		RequiresCondition: blazerarmor2 && blazerarmor3 && blazerarmor4
 
 BlazerSword2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Zantetsu Sword
 	Buildable:
@@ -473,7 +473,7 @@ BlazerSword2:
 		Prerequisite: blazersword2
 
 BlazerSword3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Spirit Sword
 	Buildable:
@@ -489,7 +489,7 @@ BlazerSword3:
 		Prerequisite: blazersword3
 
 BlazerSword4:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Soul Sword
 	Buildable:
@@ -505,7 +505,7 @@ BlazerSword4:
 		Prerequisite: blazersword4
 
 BlazerArmor2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mystic Armor
 	Buildable:
@@ -521,7 +521,7 @@ BlazerArmor2:
 		Prerequisite: blazerarmor2
 
 BlazerArmor3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Light Armor
 	Buildable:
@@ -537,7 +537,7 @@ BlazerArmor3:
 		Prerequisite: blazerarmor3
 
 BlazerArmor4:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Soul Armor
 	Buildable:
@@ -553,7 +553,7 @@ BlazerArmor4:
 		Prerequisite: blazerarmor4
 
 BlazerMH:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Medical Herb
 	Buildable:
@@ -1884,7 +1884,7 @@ ShippingboxBot:
 		RequiresCondition: !jacknearby
 
 Hammer2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Golden Hammer
 	Buildable:
@@ -1900,7 +1900,7 @@ Hammer2:
 		Prerequisite: hammer2
 
 Axe2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Golden Axe
 	Buildable:
@@ -1916,7 +1916,7 @@ Axe2:
 		Prerequisite: axe2
 
 Powerberry:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Power Berry
 	Buildable:
@@ -1932,7 +1932,7 @@ Powerberry:
 		Prerequisite: powerberry
 
 Turnipseeds:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Turnip Seeds
 	#Buildable:
@@ -1948,7 +1948,7 @@ Turnipseeds:
 		Prerequisite: turnipseeds
 
 Potatoseeds:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Potato Seeds
 	#Buildable:
@@ -2080,7 +2080,7 @@ VICVIPER:
 	-Voiced:
 
 Vvspeedup:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Speed Up
 	Buildable:
@@ -2096,7 +2096,7 @@ Vvspeedup:
 		Prerequisite: vvsu
 
 Vvmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Missile
 	Buildable:
@@ -2112,7 +2112,7 @@ Vvmissile:
 		Prerequisite: vvmi
 
 Vvlaser:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Laser
 	Buildable:
@@ -2128,7 +2128,7 @@ Vvlaser:
 		Prerequisite: vvla
 
 Vvforcefield:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Force Field
 	Buildable:
@@ -2144,7 +2144,7 @@ Vvforcefield:
 		Prerequisite: vvff
 
 Vvup:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: 1UP
 	Buildable:
@@ -2288,7 +2288,7 @@ AXELAY:
 	-Voiced:
 
 Axelaysl:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Straight Laser
 	Buildable:
@@ -2304,7 +2304,7 @@ Axelaysl:
 		Prerequisite: axelaysl
 
 Axelaymm:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Macro Missile
 	Buildable:
@@ -2320,7 +2320,7 @@ Axelaymm:
 		Prerequisite: axelaymm
 
 Axelayup:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: 1UP
 	Buildable:
@@ -2336,7 +2336,7 @@ Axelayup:
 		Prerequisite: axelayup
 
 Axelayrv:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Round Vulcan
 	Buildable:
@@ -2352,7 +2352,7 @@ Axelayrv:
 		Prerequisite: Axelayrv
 
 Axelayms:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Morning Star
 	Buildable:
@@ -2707,7 +2707,7 @@ TempleBot:
 	-MapEditorData:
 
 Bowupgrade:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Bow Upgrade
 	Buildable:
@@ -2836,7 +2836,7 @@ SMASH:
 		RequiresCondition: forcefield
 
 Rockets:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: High power missile launcher
 	Buildable:
@@ -2852,7 +2852,7 @@ Rockets:
 		Prerequisite: rockets
 
 Spreader:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Multi-direction photon gun
 	Buildable:
@@ -2868,7 +2868,7 @@ Spreader:
 		Prerequisite: spreader
 
 Grenades:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Rapid fire grenade launcher
 	Buildable:
@@ -2884,7 +2884,7 @@ Grenades:
 		Prerequisite: grenades
 
 Bonuslife:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Bonus Life
 	Buildable:
@@ -2900,7 +2900,7 @@ Bonuslife:
 		Prerequisite: bonuslife
 
 Speedboost:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Speed boost
 	Buildable:
@@ -2916,7 +2916,7 @@ Speedboost:
 		Prerequisite: speedboost
 
 Orb:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Machine gun firing remote
 	Buildable:
@@ -2932,7 +2932,7 @@ Orb:
 		Prerequisite: orb
 
 Forcefield:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mobile forcefield
 	Buildable:
@@ -3083,7 +3083,7 @@ mdkkurt:
 		Group: Heroes
 
 mdkgrenade:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Grenades
 	Buildable:
@@ -3099,7 +3099,7 @@ mdkgrenade:
 		Prerequisite: mdkgrenade
 
 mdkchaingun:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: AP Bullets
 	Buildable:
@@ -3115,7 +3115,7 @@ mdkchaingun:
 		Prerequisite: mdkchaingun
 
 mdkmortar:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mortar Sniper
 	Buildable:
@@ -3130,7 +3130,7 @@ mdkmortar:
 	ProvidesPrerequisite:
 		Prerequisite: mdkmortar
 mdkmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mortar Sniper
 	Buildable:

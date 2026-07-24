@@ -3,7 +3,7 @@
 ##############################################
 
 cgcnst_infiltrated.latin:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Syndicate Buildings Plans
 	Buildable:
@@ -48,7 +48,7 @@ latinsyndicate_doctrine_lightposts:
 		Actor: up_team_ngbunk2.latin
 
 up_team_ngbunk2.latin:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: latinsyndicate_doctrine_lightposts
 	RenderSprites:
@@ -72,7 +72,7 @@ latinsyndicate_upgrade_empcannon:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_yuristolentechchainguns:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Yuri Stolen Tech: Chainguns
 	Valued:
@@ -87,7 +87,7 @@ latinsyndicate_upgrade_yuristolentechchainguns:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_sovietstolentechindustrialmethods:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Soviet Stolen Tech: Industrial Methods
 	Valued:
@@ -102,7 +102,7 @@ latinsyndicate_upgrade_sovietstolentechindustrialmethods:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Allied Stolen Tech: Extra Missiles and Miraging
 	Valued:
@@ -117,7 +117,7 @@ latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_asianalliancestolentechhotfire:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Asian Alliance Stolen Tech: Hot Fire
 	Valued:
@@ -132,7 +132,7 @@ latinsyndicate_upgrade_asianalliancestolentechhotfire:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_cashrecovery:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Cash Recovery
 	Valued:
@@ -149,7 +149,7 @@ latinsyndicate_upgrade_cashrecovery:
 		Actor: up_team_cashrecover.latin
 
 up_team_cashrecover.latin:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: latinsyndicate_upgrade_cashrecovery
 	RenderSprites:

@@ -624,7 +624,7 @@ zombie8.horde:
 	-Passenger:
 
 upzombiemutate1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate DNA
 	Buildable:
@@ -641,7 +641,7 @@ upzombiemutate1:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate1
 upzombiemutate2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate DNA 2
 	Buildable:
@@ -658,7 +658,7 @@ upzombiemutate2:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate2
 upzombiemutate3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate DNA 3
 	Buildable:
@@ -675,7 +675,7 @@ upzombiemutate3:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate3
 upzombiemutate4:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Super Mutate 1
 	Buildable:
@@ -692,7 +692,7 @@ upzombiemutate4:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate4
 upzombiemutate5:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Super Mutate 2
 	Buildable:
@@ -709,7 +709,7 @@ upzombiemutate5:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate5
 upzombiemutate6:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Super Mutate 3
 	Buildable:
@@ -726,7 +726,7 @@ upzombiemutate6:
 	ProvidesPrerequisite:
 		Prerequisite: upzombiemutate6
 upzintelligence1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate Intelligence
 	Buildable:
@@ -743,7 +743,7 @@ upzintelligence1:
 	ProvidesPrerequisite:
 		Prerequisite: upzintelligence1
 upzintelligence2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate Intelligence 2
 	Buildable:
@@ -760,7 +760,7 @@ upzintelligence2:
 	ProvidesPrerequisite:
 		Prerequisite: upzintelligence2
 upzintelligence3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Mutate Intelligence 3
 	Buildable:
@@ -778,7 +778,7 @@ upzintelligence3:
 		Prerequisite: upzintelligence3
 
 upzmsquad1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Bigger Horde 1
 	Buildable:
@@ -798,7 +798,7 @@ upzmsquad1:
 		Prerequisite: Greater Spire
 
 upzmsquad2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Bigger Horde 2
 	Buildable:
@@ -816,7 +816,7 @@ upzmsquad2:
 		Prerequisite: upzmsquad2
 
 upzmsquad3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Bigger Horde 3
 	Buildable:

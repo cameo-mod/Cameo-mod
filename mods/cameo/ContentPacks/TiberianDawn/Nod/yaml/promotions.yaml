@@ -3,7 +3,7 @@
 ####################################################################################################
 
 td_nod_promotion_chemicalrocketsoldier:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Chemical Rocket Soldier
 	Buildable:
@@ -17,7 +17,7 @@ td_nod_promotion_chemicalrocketsoldier:
 		Prerequisite: td_nod_promotion_chemicalrocketsoldier
 
 td_nod_promotion_chemicalattackbike:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Chemical Attack Bike
 	Buildable:
@@ -31,7 +31,7 @@ td_nod_promotion_chemicalattackbike:
 		Prerequisite: td_nod_promotion_chemicalattackbike
 
 td_nod_promotion_chemicalstealthtank:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Chemical Stealth Tank
 	Buildable:
@@ -45,7 +45,7 @@ td_nod_promotion_chemicalstealthtank:
 		Prerequisite: td_nod_promotion_chemicalstealthtank
 
 td_nod_promotion_chemicalssmlauncher:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Chemical SSM Launcher
 	Buildable:
@@ -59,7 +59,7 @@ td_nod_promotion_chemicalssmlauncher:
 		Prerequisite: td_nod_promotion_chemicalssmlauncher
 
 td_nod_promotion_buggymkii:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Buggy Mk. II
 	Buildable:
@@ -73,7 +73,7 @@ td_nod_promotion_buggymkii:
 		Prerequisite: td_nod_promotion_buggymkii
 
 td_nod_promotion_lighttankmkii:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Light Tank Mk. II
 	Buildable:
@@ -87,7 +87,7 @@ td_nod_promotion_lighttankmkii:
 		Prerequisite: td_nod_promotion_lighttankmkii
 
 td_nod_promotion_flametankmkii:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Flame Tank Mk. II
 	Buildable:
@@ -101,7 +101,7 @@ td_nod_promotion_flametankmkii:
 		Prerequisite: td_nod_promotion_flametankmkii
 
 td_nod_promotion_lasertrooper:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Laser Trooper
 	Buildable:
@@ -115,7 +115,7 @@ td_nod_promotion_lasertrooper:
 		Prerequisite: td_nod_promotion_lasertrooper
 
 td_nod_promotion_blackhandflamer:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Black Hand Flamer
 	Buildable:
@@ -129,7 +129,7 @@ td_nod_promotion_blackhandflamer:
 		Prerequisite: td_nod_promotion_blackhandflamer
 
 td_nod_promotion_upgradeupnodstealthname:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: upgrade_upnodstealth.name
 	Buildable:
@@ -143,7 +143,7 @@ td_nod_promotion_upgradeupnodstealthname:
 		Prerequisite: td_nod_promotion_upgradeupnodstealthname
 
 td_nod_promotion_specter:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Specter
 	Buildable:
@@ -157,7 +157,7 @@ td_nod_promotion_specter:
 		Prerequisite: td_nod_promotion_specter
 
 td_nod_promotion_upgradeupnodvenomname:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: upgrade_upnodvenom.name
 	Buildable:

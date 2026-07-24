@@ -1,5 +1,5 @@
 upgrade_conyard:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Construction Yard Upgrade
 	Buildable:
@@ -17,7 +17,7 @@ upgrade_conyard:
 		Image: conyard.ordos
 
 upgrade_barracks:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Barracks Upgrade
 	Buildable:
@@ -35,7 +35,7 @@ upgrade_barracks:
 		Image: barracks.ordos
 
 upgrade_heavy:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Heavy Factory Upgrade
 	Buildable:
@@ -53,7 +53,7 @@ upgrade_heavy:
 		Image: heavy.ordos
 
 upgrade_hightech:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: High Tech Factory Upgrade
 	Buildable:
@@ -71,7 +71,7 @@ upgrade_hightech:
 		Image: hightech.atreides
 
 d2k_wind_trap_upgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Advanced Wind Traps
 	Valued:
@@ -88,7 +88,7 @@ d2k_wind_trap_upgrade:
 #   Common Upgrades
 
 d2k_spice_sifter_upgrade:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Efficient Filtering
 	Valued:

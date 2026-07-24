@@ -523,7 +523,7 @@ OILB.RA2:
 	-WithDeathAnimation:
 
 ra2gacnst.infiltrated:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Allied Buildings Plans
 	Buildable:
@@ -575,7 +575,7 @@ ra2gayard:
 		TargetTypes: Ground, Water, C4, Structure
 
 ra2nacnst.infiltrated:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Soviet Buildings Plans
 	Buildable:
@@ -619,7 +619,7 @@ ra2nayard:
 ##############################################
 
 yrnacnst.infiltrated:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Yuri Buildings Plans
 	Buildable:
@@ -4479,7 +4479,7 @@ ra2_tree28.Husk:
 ####################################################################################################
 
 upra2aegismissiles:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Aegis Cruiser Ground Missiles
 	Valued:
@@ -4857,7 +4857,7 @@ ra2shkhero:
 # ### Tesla tree
 
 # upemptesla:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: EMP Tesla Weapons
 # 	Buildable:
@@ -4870,7 +4870,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2ttnk:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Tesla Tank
 # 	Buildable:
@@ -4883,7 +4883,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # uparctesla:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Tesla Arcing
 # 	Buildable:
@@ -4901,7 +4901,7 @@ ra2shkhero:
 # 		Prerequisites: uparctesla
 
 # ra2_soviets_upgrade_teslacoilchargers:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Tesla Coil Chargers
 # 	Buildable:
@@ -4916,7 +4916,7 @@ ra2shkhero:
 # ### Radiation tree
 
 # upra2terror:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Terrorist
 # 	Buildable:
@@ -4929,7 +4929,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2deso:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Desolator
 # 	Buildable:
@@ -4942,7 +4942,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2dtruck:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Demo Truck
 # 	Buildable:
@@ -4955,7 +4955,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_doctrine_nuclearmunitions:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Nuclear Munitions
 # 	Buildable:
@@ -4979,7 +4979,7 @@ ra2shkhero:
 # ### Industry tree
 
 # upra2mig:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock ra1_soviets_migattackbomber Bomber
 # 	Buildable:
@@ -4992,7 +4992,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_upgrade_terrordronesurprise:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Terror Drone Surprise
 # 	Buildable:
@@ -5016,7 +5016,7 @@ ra2shkhero:
 # 		Upgrades: ra2_soviets_upgrade_terrordronesurprise
 
 # upyrngindp:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Unlock Industrial Plant
 # 	Buildable:
@@ -5029,7 +5029,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_doctrine_heavyarmorplatings:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^promotion_upgrade_template
 # 	Tooltip:
 # 		Name: Heavy Soviet Armor
 # 	Buildable:

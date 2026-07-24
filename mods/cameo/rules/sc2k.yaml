@@ -3843,7 +3843,7 @@ sc2k_airhawk:
 		ValidTypes: vehicle ##########
 
 chromesc2kengine1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Small Engine
 	Buildable:
@@ -3859,7 +3859,7 @@ chromesc2kengine1:
 		Prerequisite: chromesc2kengine1
 
 chromesc2kengine2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Medium Engine
 	Buildable:
@@ -3875,7 +3875,7 @@ chromesc2kengine2:
 		Prerequisite: chromesc2kengine2
 
 chromesc2kengine3:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Big Engine
 	Buildable:
@@ -3891,7 +3891,7 @@ chromesc2kengine3:
 		Prerequisite: chromesc2kengine3
 
 chromesc2karmor:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Armor
 	Buildable:
@@ -3907,7 +3907,7 @@ chromesc2karmor:
 		Prerequisite: chromesc2karmor
 
 chromesc2kshield:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Shield
 	Buildable:
@@ -3923,7 +3923,7 @@ chromesc2kshield:
 		Prerequisite: chromesc2kshield
 
 chromesc2kmachinegun:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Machinegun
 	Buildable:
@@ -3939,7 +3939,7 @@ chromesc2kmachinegun:
 		Prerequisite: chromesc2kmachinegun
 
 chromesc2kmissile:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Missile
 	Buildable:

@@ -3,7 +3,7 @@
 ####################################################################################################
 
 ixian_promotion_rashidan:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Rashidan
 	Buildable:
@@ -17,7 +17,7 @@ ixian_promotion_rashidan:
 	ProvidesPrerequisite:
 
 ixian_promotion_storminfantry:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Storm Infantry
 	Buildable:
@@ -31,7 +31,7 @@ ixian_promotion_storminfantry:
 	ProvidesPrerequisite:
 
 ixian_promotion_stormraider:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Storm Raider
 	Buildable:
@@ -45,7 +45,7 @@ ixian_promotion_stormraider:
 	ProvidesPrerequisite:
 
 ixian_promotion_stormlasher:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Storm Lasher
 	Buildable:
@@ -61,7 +61,7 @@ ixian_promotion_stormlasher:
 	### Military tree
 
 ixian_promotion_heavyixraider:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Heavy Ix Raider
 	Buildable:
@@ -75,7 +75,7 @@ ixian_promotion_heavyixraider:
 	ProvidesPrerequisite:
 
 ixian_promotion_ixsiegetank:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ix Siege Tank
 	Buildable:
@@ -89,7 +89,7 @@ ixian_promotion_ixsiegetank:
 	ProvidesPrerequisite:
 
 ixian_promotion_neocymek:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Neo Cymek
 	Buildable:
@@ -103,7 +103,7 @@ ixian_promotion_neocymek:
 	ProvidesPrerequisite:
 
 ixian_promotion_ixprojector:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ix Projector
 	Buildable:
@@ -119,7 +119,7 @@ ixian_promotion_ixprojector:
 	### Support tree
 
 ixian_promotion_ixrailgundrone:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ix Railgun Drone
 	Buildable:
@@ -132,7 +132,7 @@ ixian_promotion_ixrailgundrone:
 	ProvidesPrerequisite:
 
 ixian_promotion_ixianempbomber:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ixian EMP Bomber
 	Buildable:
@@ -146,7 +146,7 @@ ixian_promotion_ixianempbomber:
 	ProvidesPrerequisite:
 
 ixian_promotion_ixresonancedrone:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ix Resonance Drone
 	Buildable:
@@ -160,7 +160,7 @@ ixian_promotion_ixresonancedrone:
 	ProvidesPrerequisite:
 
 ixian_promotion_farasha:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Farasha
 	Buildable:

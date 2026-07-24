@@ -1,5 +1,5 @@
 ordos_upgrade_lightfactory:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Light Factory Upgrade
 	Buildable:
@@ -95,7 +95,7 @@ ordos_upgrade_contraband:
 		Image: ordos_upgrade_para
 
 ordos_upgrade_lasercartridges:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Laser Cartridges
 	Valued:

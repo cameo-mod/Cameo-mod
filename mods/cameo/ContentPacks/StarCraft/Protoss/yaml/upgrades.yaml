@@ -1,5 +1,5 @@
 protoss_upgrade_singularitycharge:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Singularity Charge
 	Buildable:
@@ -15,7 +15,7 @@ protoss_upgrade_singularitycharge:
 		Prerequisite: protoss_upgrade_singularitycharge
 
 protoss_upgrade_resonatingglaves:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Resonating Glaves
 	Buildable:
@@ -31,7 +31,7 @@ protoss_upgrade_resonatingglaves:
 		Prerequisite: protoss_upgrade_resonatingglaves
 
 protoss_upgrade_upgradepylonlevel1:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Upgrade Pylon Level 1
 	Valued:
@@ -46,7 +46,7 @@ protoss_upgrade_upgradepylonlevel1:
 	ProvidesPrerequisite:
 
 protoss_upgrade_upgradepylonlevel2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Upgrade Pylon Level 2
 	Valued:
@@ -61,7 +61,7 @@ protoss_upgrade_upgradepylonlevel2:
 	ProvidesPrerequisite:
 
 protoss_upgrade_plasmashields:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Plasma Shields
 	Buildable:
@@ -77,7 +77,7 @@ protoss_upgrade_plasmashields:
 		Prerequisite: protoss_upgrade_plasmashields
 
 protoss_upgrade_reavercapacity:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Reaver Capacity
 	Buildable:
@@ -93,7 +93,7 @@ protoss_upgrade_reavercapacity:
 		Prerequisite: protoss_upgrade_reavercapacity
 
 protoss_upgrade_graviticpropulsion:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Gravitic Propulsion
 	Buildable:
@@ -109,7 +109,7 @@ protoss_upgrade_graviticpropulsion:
 		Prerequisite: protoss_upgrade_graviticpropulsion
 
 protoss_upgrade_groundweaponslevel1:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Ground Weapons Level 1
 	Buildable:
@@ -125,7 +125,7 @@ protoss_upgrade_groundweaponslevel1:
 		Prerequisite: protoss_upgrade_groundweaponslevel1
 
 protoss_upgrade_groundweaponslevel2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Ground Weapons Level 2
 	Buildable:
@@ -141,7 +141,7 @@ protoss_upgrade_groundweaponslevel2:
 		Prerequisite: protoss_upgrade_groundweaponslevel2
 
 protoss_upgrade_groundarmorlevel1:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Ground Armor Level 1
 	Buildable:
@@ -157,7 +157,7 @@ protoss_upgrade_groundarmorlevel1:
 		Prerequisite: protoss_upgrade_groundarmorlevel1
 
 protoss_upgrade_groundarmorlevel2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Ground Armor Level 2
 	Buildable:
@@ -173,7 +173,7 @@ protoss_upgrade_groundarmorlevel2:
 		Prerequisite: protoss_upgrade_groundarmorlevel2
 
 protoss_upgrade_airweaponslevel1:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Air Weapons Level 1
 	Buildable:
@@ -189,7 +189,7 @@ protoss_upgrade_airweaponslevel1:
 		Prerequisite: protoss_upgrade_airweaponslevel1
 
 protoss_upgrade_airweaponslevel2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Air Weapons Level 2
 	Buildable:
@@ -205,7 +205,7 @@ protoss_upgrade_airweaponslevel2:
 		Prerequisite: protoss_upgrade_airweaponslevel2
 
 protoss_upgrade_airarmorlevel1:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Air Armor Level 1
 	Buildable:
@@ -221,7 +221,7 @@ protoss_upgrade_airarmorlevel1:
 		Prerequisite: protoss_upgrade_airarmorlevel1
 
 protoss_upgrade_airarmorlevel2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Air Armor Level 2
 	Buildable:

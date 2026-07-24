@@ -1,5 +1,5 @@
 conyard_infiltrated.nax2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Schwarzer Mond Buildings Plans
 	Buildable:
@@ -9,7 +9,7 @@ conyard_infiltrated.nax2:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: schwarzermond_constructionyard
 schwarzermond_upgrade_crystallens:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Crystal Lens
 	Valued:
@@ -24,7 +24,7 @@ schwarzermond_upgrade_crystallens:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_amplifiedlens:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Amplified Lens
 	Valued:
@@ -39,7 +39,7 @@ schwarzermond_upgrade_amplifiedlens:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_vrilpoweredweapons:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Vril Powered Weapons
 	Valued:
@@ -55,7 +55,7 @@ schwarzermond_upgrade_vrilpoweredweapons:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_helium3:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Helium-3 Enrichment
 	Valued:
@@ -71,7 +71,7 @@ schwarzermond_upgrade_helium3:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_vrilinfusion:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Vril Infusion
 	Valued:
@@ -87,7 +87,7 @@ schwarzermond_upgrade_vrilinfusion:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_lunaralloys:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Lunar Alloys
 	Valued:
@@ -102,7 +102,7 @@ schwarzermond_upgrade_lunaralloys:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_moonpropaganda:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Moon Propaganda
 	Valued:
@@ -118,7 +118,7 @@ schwarzermond_upgrade_moonpropaganda:
 	ProvidesPrerequisite:
 
 schwarzermond_upgrade_cryptofascism:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Cryptofascism
 	Valued:

@@ -107,7 +107,7 @@ HOSP.Husk:
 		Image: ra2caoild
 
 hosp.proxy:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: hosp
 	RenderSprites:

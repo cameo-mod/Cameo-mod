@@ -1648,7 +1648,7 @@ wc2_neutral_daemon:
 ####################################################################################################
 
 wc2_h_str_navyshield:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Naval Armor
 	Buildable:
@@ -1663,7 +1663,7 @@ wc2_h_str_navyshield:
 	ProvidesPrerequisite:
 
 wc2_h_str_navyshield2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Naval Armor II
 	Buildable:
@@ -1678,7 +1678,7 @@ wc2_h_str_navyshield2:
 	ProvidesPrerequisite:
 
 wc2_o_str_navyshield:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Naval Armor
 	Buildable:
@@ -1693,7 +1693,7 @@ wc2_o_str_navyshield:
 	ProvidesPrerequisite:
 
 wc2_o_str_navyshield2:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Naval Armor II
 	Buildable:

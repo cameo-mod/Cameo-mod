@@ -33,7 +33,7 @@
 		Upgrades: ra1_allies_upgrade_airsuperioritydoctrine
 
 ra1_allies_upgrade_gpssatellitesupport_proxy_actor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: ra1_allies_upgrade_gpssatellitesupport
 	RenderSprites:
@@ -258,7 +258,7 @@ ra1_soviets_upgrade_nuclearshells_proxy_actor:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics
 
 japan_upgrade_nanotechrepairs_proxy_actor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: japan_upgrade_nanotechrepairs
 	RenderSprites:

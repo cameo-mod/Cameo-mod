@@ -377,7 +377,7 @@ ra1_soviets_upgrade_nuclearyak:
 #############################
 
 # ra1_soviets_doctrine_conscription:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Conscription
 # 	Valued:
@@ -392,7 +392,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_unstableisotopes:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Nuclear Engines
 # 	Valued:
@@ -407,7 +407,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_highexplosiverockets:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Rocket Enhancements
 # 	Valued:
@@ -422,7 +422,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_autoloaders:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Soviet Auto Loaders
 # 	Valued:
@@ -437,7 +437,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_doctrine_teslaandexperimentaltech:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Experimental Tesla Weaponry
 # 	Valued:
@@ -452,7 +452,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_doctrine_inferno:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	Tooltip:
 # 		Name: Advanced Thermobarics
 # 	Valued:
@@ -467,7 +467,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_stalinium:
-# 	Inherits: ^upgrade.template
+# 	Inherits: ^upgrade_template
 # 	Tooltip:
 # 		Name: Soviet Steel "Stalinium"
 # 	Valued:
@@ -484,7 +484,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 		Actor: team_upgrade.ra_upgrade_stalinium
 
 # team_upgrade.ra_upgrade_stalinium:
-# 	Inherits: ^researched_upgrade.template
+# 	Inherits: ^researched_upgrade_template
 # 	ProvidesPrerequisite:
 # 		Prerequisite: ra1_soviets_upgrade_stalinium
 # 	RenderSprites:

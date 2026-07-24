@@ -1,5 +1,5 @@
 cabal_promotion_devout:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Devout
 	Buildable:
@@ -12,7 +12,7 @@ cabal_promotion_devout:
 	ProvidesPrerequisite:
 
 cabal_promotion_ascended:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Ascended
 	Buildable:
@@ -25,7 +25,7 @@ cabal_promotion_ascended:
 	ProvidesPrerequisite:
 
 cabal_promotion_beholder:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Beholder
 	Buildable:
@@ -38,7 +38,7 @@ cabal_promotion_beholder:
 	ProvidesPrerequisite:
 
 cabal_promotion_cyborgcommandov2:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Cyborg Commando V2
 	Buildable:
@@ -51,7 +51,7 @@ cabal_promotion_cyborgcommandov2:
 	ProvidesPrerequisite:
 
 cabal_promotion_spidercnc4:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Spider CNC4
 	Buildable:
@@ -64,7 +64,7 @@ cabal_promotion_spidercnc4:
 	ProvidesPrerequisite:
 
 cabal_promotion_manticore:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Heavy Reaper
 	Buildable:
@@ -77,7 +77,7 @@ cabal_promotion_manticore:
 	ProvidesPrerequisite:
 
 cabal_promotion_widow:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Widow
 	Buildable:
@@ -90,7 +90,7 @@ cabal_promotion_widow:
 	ProvidesPrerequisite:
 
 cabal_promotion_coredefender:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Core Defender
 	Buildable:
@@ -103,7 +103,7 @@ cabal_promotion_coredefender:
 	ProvidesPrerequisite:
 
 cabal_promotion_cyborgassassin:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Cyborg Assassin
 	Buildable:
@@ -116,7 +116,7 @@ cabal_promotion_cyborgassassin:
 	ProvidesPrerequisite:
 
 cabal_promotion_hunterdronecarrier:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Hunter Drone Carrier
 	Buildable:
@@ -129,7 +129,7 @@ cabal_promotion_hunterdronecarrier:
 	ProvidesPrerequisite:
 
 cabal_promotion_overkillgunship:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Overkill Gunship
 	Buildable:
@@ -142,7 +142,7 @@ cabal_promotion_overkillgunship:
 	ProvidesPrerequisite:
 
 cabal_promotion_mothership:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Unlock Mothership
 	Buildable:

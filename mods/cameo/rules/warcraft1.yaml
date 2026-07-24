@@ -2646,7 +2646,7 @@ wc_n_slime_c:
 #######################################################
 
 wc_h_str_arrow:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
@@ -2663,7 +2663,7 @@ wc_h_str_arrow:
 	ProvidesPrerequisite:
 
 wc_h_str_arrow2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
@@ -2680,7 +2680,7 @@ wc_h_str_arrow2:
 	ProvidesPrerequisite:
 
 wc_h_str_sword:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Sword Strength
 	Buildable:
@@ -2697,7 +2697,7 @@ wc_h_str_sword:
 	ProvidesPrerequisite:
 
 wc_h_str_sword2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Sword Strength II
 	Buildable:
@@ -2714,7 +2714,7 @@ wc_h_str_sword2:
 	ProvidesPrerequisite:
 
 wc_h_str_shield:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Shield Strength
 	Buildable:
@@ -2731,7 +2731,7 @@ wc_h_str_shield:
 	ProvidesPrerequisite:
 
 wc_h_str_shield2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Shield Strength II
 	Buildable:
@@ -2748,7 +2748,7 @@ wc_h_str_shield2:
 	ProvidesPrerequisite:
 
 wc_h_horses:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Breed Faster Horses
 	Buildable:
@@ -2765,7 +2765,7 @@ wc_h_horses:
 	ProvidesPrerequisite:
 
 wc_h_horses2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Breed Faster Horses II
 	Buildable:

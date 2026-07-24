@@ -1,5 +1,5 @@
 conyard_infiltrated.nax:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Stolen Naxis Buildings Plans
 	Buildable:
@@ -9,7 +9,7 @@ conyard_infiltrated.nax:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: naxis_constructionyard
 up_resurrection.nax:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Resurrection
 	Valued:
@@ -93,7 +93,7 @@ sarubia_bomb.nax:
 ####################################################################################################
 
 naxis_upgrade_ostfrontexperience:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Ostfront Experience
 	Valued:
@@ -108,7 +108,7 @@ naxis_upgrade_ostfrontexperience:
 	ProvidesPrerequisite:
 
 naxis_upgrade_atlantikwall:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Atlantikwall
 	Valued:
@@ -123,7 +123,7 @@ naxis_upgrade_atlantikwall:
 	ProvidesPrerequisite:
 
 naxis_upgrade_tankarsenalrenovation:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Tank Arsenal Renovation
 	Valued:
@@ -138,7 +138,7 @@ naxis_upgrade_tankarsenalrenovation:
 	ProvidesPrerequisite:
 
 naxis_upgrade_massopticsintegration:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Mass Optics Integration
 	Valued:
@@ -153,7 +153,7 @@ naxis_upgrade_massopticsintegration:
 	ProvidesPrerequisite:
 
 naxis_upgrade_wunderwaffe:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Wunderwaffe
 	Valued:
@@ -168,7 +168,7 @@ naxis_upgrade_wunderwaffe:
 	ProvidesPrerequisite:
 
 naxis_upgrade_blitzkrieg:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Blitzkrieg
 	Valued:
@@ -185,7 +185,7 @@ naxis_upgrade_blitzkrieg:
 		Actor: up_team_blitzkrieg.nax
 
 up_team_blitzkrieg.nax:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	ProvidesPrerequisite:
 		Prerequisite: naxis_upgrade_blitzkrieg
 	RenderSprites:
@@ -197,7 +197,7 @@ up_team_blitzkrieg.nax:
 	PlayerDisplayUpgrade:
 
 naxis_promotion_hortenbomberstrike:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Horten Bomber Strike
 	Buildable:
@@ -210,7 +210,7 @@ naxis_promotion_hortenbomberstrike:
 	ProvidesPrerequisite:
 
 naxis_promotion_hortenbomberstrike_2:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^promotion_upgrade_template
 	Tooltip:
 		Name: Horten Bomber Strike
 	Buildable:

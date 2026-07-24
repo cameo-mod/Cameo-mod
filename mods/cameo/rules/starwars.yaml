@@ -8716,7 +8716,7 @@ swjabbaparty.e3:
 		Modifier: 125
 
 swupinfarmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Infantry Armor
 	Buildable:
@@ -8732,7 +8732,7 @@ swupinfarmor1:
 		Prerequisite: swupinfarmor1
 
 swupveharmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Vehicle Armor
 	Buildable:
@@ -8748,7 +8748,7 @@ swupveharmor1:
 		Prerequisite: swupveharmor1
 
 swupvehspeed1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Vehicle Speed
 	Buildable:
@@ -8764,7 +8764,7 @@ swupvehspeed1:
 		Prerequisite: swupvehspeed1
 
 swuplaser1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Laser Weapons Upgrade
 	Buildable:
@@ -8780,7 +8780,7 @@ swuplaser1:
 		Prerequisite: swuplaser1
 
 swupphase2clone:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Laser Weapons Upgrade
 	Buildable:
@@ -8795,7 +8795,7 @@ swupphase2clone:
 	ProvidesPrerequisite:
 		Prerequisite: swupphase2clone
 swupdroidarmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Droid Armor
 	Buildable:
@@ -8811,7 +8811,7 @@ swupdroidarmor1:
 		Prerequisite: swupdroidarmor1
 
 swupstimulant:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Stimulants
 	Buildable:
@@ -8827,7 +8827,7 @@ swupstimulant:
 		Prerequisite: swupstimulant
 
 swupgenetics:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Genetics
 	Buildable:
@@ -8843,7 +8843,7 @@ swupgenetics:
 		Prerequisite: swupgenetics
 
 swupcloning:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Cloning
 	Buildable:
@@ -8859,7 +8859,7 @@ swupcloning:
 		Prerequisite: swupcloning
 
 swupirrigation:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Irrigation
 	Buildable:

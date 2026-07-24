@@ -2095,7 +2095,7 @@
 ### Doctrines ###
 
 ^doctrine_template:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Doctrine
 	Valued:
@@ -2112,7 +2112,7 @@
 ### Unit Upgrades ###
 
 ^unit_upgrade_template:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Unit Upgrade
 	Valued:
@@ -2129,7 +2129,7 @@
 ### Tech Upgrades ###
 
 ^tech_upgrade_template:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Tech Upgrade
 	Valued:
@@ -2146,7 +2146,7 @@
 ### Team Upgrades ###
 
 ^team_upgrade_template:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Tooltip:
 		Name: Team Upgrade
 	Valued:
@@ -2162,7 +2162,7 @@
 		Actor: ^team_upgrade_proxy_actor
 
 ^team_upgrade_proxy_actor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^researched_upgrade_template
 	Tooltip:
 		Name: Team Upgrade
 	Buildable:
@@ -8745,7 +8745,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: undeployed && !moving && !deployed
 		ArmamentNames: dummy
 
-^upgrade.template:
+^upgrade_template:
 	Buildable:
 		Description: Generic upgrade
 		BuildLimit: 1
@@ -8758,13 +8758,13 @@ CPQDEBUGDUMMY:
 	UpdatesPlayerStatistics:
 		AddToSpectatorTab: true
 
-^researched_upgrade.template:
-	Inherits: ^upgrade.template
+^researched_upgrade_template:
+	Inherits: ^upgrade_template
 	UpdatesPlayerStatistics:
 		AddToUpgradesTab: true
 
-^promotion_upgrade.template:
-	Inherits: ^upgrade.template
+^promotion_upgrade_template:
+	Inherits: ^upgrade_template
 	Buildable:
 		Queue: Promotions
 		Description: Promotion unlock upgrade

@@ -3698,7 +3698,7 @@ sow_mcv.bot:
 #################
 
 satelliteprotection_mk1:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Satellite Protection
@@ -3718,7 +3718,7 @@ satelliteprotection_mk1:
 	ProvidesPrerequisite@upgradename:
 		
 satelliteprotection_mk2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Satellite Protection Mk.2
@@ -3738,7 +3738,7 @@ satelliteprotection_mk2:
 	ProvidesPrerequisite@upgradename:
 		
 heavyunits:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Heavy Units
@@ -3758,7 +3758,7 @@ heavyunits:
 	ProvidesPrerequisite@upgradename:
 
 sow_invader:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Invader
@@ -3778,7 +3778,7 @@ sow_invader:
 	ProvidesPrerequisite@upgradename:
 
 sow_invader_mk2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Invader Mk.2
@@ -3798,7 +3798,7 @@ sow_invader_mk2:
 	ProvidesPrerequisite@upgradename:
 	
 sowovercharge:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Overcharge
@@ -3818,7 +3818,7 @@ sowovercharge:
 	ProvidesPrerequisite@upgradename:
 		
 advancedairstrikes:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Advanced Air Support
@@ -3841,7 +3841,7 @@ advancedairstrikes:
 		Condition: nopower
 		Prerequisites: sowradar
 goldmineupgrade:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Gold Processing
@@ -3865,7 +3865,7 @@ goldmineupgrade:
 		Prerequisites: sowgoldmine
 		
 goldmineupgrade2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Gold Processing Mk.2
@@ -3888,7 +3888,7 @@ goldmineupgrade2:
 		Condition: nopower
 		Prerequisites: sowgoldmine
 researchupgrade:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Advanced Science
@@ -3908,7 +3908,7 @@ researchupgrade:
 	ProvidesPrerequisite@upgradename:
 		
 researchupgrade2:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Advanced Science Mk.2
@@ -3928,7 +3928,7 @@ researchupgrade2:
 	ProvidesPrerequisite@upgradename:
 		
 stateofwar:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: State Of War
@@ -3948,7 +3948,7 @@ stateofwar:
 	ProvidesPrerequisite@upgradename:
 		
 mta_unlock:
-	Inherits: ^upgrade.template
+	Inherits: ^upgrade_template
 	Inherits@fasterprodb: ^sow_power_boost
 	Tooltip:
 		Name: Medium Panzer Unlock
