@@ -34,6 +34,7 @@ Crashes and player-visible regressions always jump the queue.
 | Armor / damage-type system | `design/ARMOR_SYSTEM.md` |
 | Faction identity, lore, playstyle (curated compendium) | `FACTIONS.md` |
 | Faction BALANCE bias (how units differ within a class, source-cited) | `design/FACTION_IDENTITY.md` |
+| Original source-game unit stats (ground-truth matrix for relative balance) | `design/ORIGINAL_UNIT_STATS.md` |
 | Engine / custom-trait / C# reference | `Cameo_Knowledge_Base_Manual.md` |
 | ContentPack migration runbook | `MIGRATION.md` |
 | Accumulated pitfalls & safe defaults | `LESSONS_LEARNED.md` |

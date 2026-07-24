@@ -20,6 +20,15 @@ its source-game identity leans into, and pays for it in the opposite stat.
 - **Tech / Power** factions → **+Damage, +Range** (elite units; Protoss/Steel-Consortium "shields" read as +HP).
 - **Special mechanic** (not a stat bias — a per-unit trait, priced via the special-K multiplier): stealth, mind-control, self-heal, decoys, transforming, cyborg turn-rate, area-denial.
 
+**⚠️ Per-TYPE, not global (maintainer 2026-07-25).** A faction's lean can INVERT between
+unit types. From the source stats (`ORIGINAL_UNIT_STATS.md`): RA2 **Soviet infantry is
+frail** while Soviet *tanks* are the tankiest+slowest; **Allied infantry is tanky+slow**
+while Allied *tanks* are weak+fast; StarCraft **Terran infantry is frail** while its
+*vehicles* are tanky. **So the bias tables below are the INFANTRY leans** — vehicle and
+aircraft leans are derived separately (from the matrix) in those passes. And a unit's
+balance class always follows its in-game TEMPLATE (`LineBreaker` = vehicle, etc.), never
+an HP guess.
+
 **NO mirror factions (Cameo departs from Warcraft 2 here).** In the original WC2, Humans
 and Orcs are stat-mirrors. Cameo deliberately does **not** do this — mirror factions are
 dull. We follow the **Warcraft 3 philosophy**: every faction, and every individual unit,
