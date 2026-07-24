@@ -105,11 +105,11 @@ ra2_allies_upgrade_paratroopers:
 	Tooltip:
 		Name: Paratroopers
 	Buildable:
-		Icon: paratroopers
+		Icon: icon2
 		Description: Allows paratroopers to be accessed from the Airforce Command.
 		Prerequisites: ~ra2_allies_airforcecommandhq, !ra2_allies_upgrade_paratroopers
 	RenderSprites:
-		Image: icon
+		Image: ra2_allies_airforcecommandhq
 
 ra2_allies_upgrade_eliterocketeer:
 	Inherits: ^unit_upgrade_template

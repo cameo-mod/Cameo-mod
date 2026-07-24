@@ -248,7 +248,9 @@ asianalliance_lynxtank:
 		Upgrades: asianalliance_doctrine_asianphalanx
 
 asianalliance_oiltruck:
-	Inherits: ra1_soviets_nukedemotruck
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@anim: ^RA2Vehicle
 	Inherits@vo: ^AttackFrontalVoice
 	#Inherits@announce: ^AnnounceGlobal
@@ -257,6 +259,30 @@ asianalliance_oiltruck:
 	Inherits@DragonFireUpgrades: ^DragonFireUpgrades
 	Health:
 		HP: 20000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+	RevealsShroud:
+		Range: 5c0
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+		Voice: Attack
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
@@ -268,8 +294,6 @@ asianalliance_oiltruck:
 		Name: Oil Truck
 	Voiced:
 		VoiceSet: AsianAllianceOilTruckVoice
-	GrantConditionOnDeploy:
-		Voice: Attack
 	FireWarheadsOnDeath@bomb:
 		Weapon: AsianOilBomb
 		EmptyWeapon: AsianOilBomb

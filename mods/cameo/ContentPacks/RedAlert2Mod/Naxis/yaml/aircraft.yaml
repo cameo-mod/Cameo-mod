@@ -403,18 +403,35 @@ zep_husk.nax:
 		Explosion: KirovExplode
 	WithShadow:
 horten_bomber.nax:
-	Inherits: ra1_soviets_badger
+	Inherits: ^AirstrikePlane
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Health:
+		HP: 150000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 20
+		Speed: 175
+		Repulsable: False
+		MaximumPitch: 56
+	Valued:
+		Cost: 4000
 	Tooltip:
 		Name: Horten Bomber Plane
 	AttackBomber:
 		FacingTolerance: 32
 	Armament:
 		Weapon: JapanSuperBomb
-	RenderSprites:
-		Image: nax_horten
-		PlayerPalette: playerra2
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
 	SpawnActorOnDeath:
 		Actor: horten_husk.nax
+	RejectsOrders:
+	GivesExperience:
 	LeavesTrails@0:
 		Offsets: -250,1500,500
 		MovingInterval: 2
@@ -431,6 +448,9 @@ horten_bomber.nax:
 		SpawnAtLastPosition: False
 		TrailWhileStationary: True
 		Type: CenterPosition
+	RenderSprites:
+		Image: nax_horten
+		PlayerPalette: playerra2
 
 horten_husk.nax:
 	Inherits: ^PlaneHusk

@@ -26,7 +26,17 @@ This repository is the shared source of truth for maintainers and every AI agent
 2. Record a newly discovered crash, regression, or suspected discrepancy in `docs/design/ROADMAP.md` before proposing a fix.
 3. Treat release builds, engine logs, resolved-ruleset diffs, and current audit output as evidence. Do not promote an old raw `.txt` result to a live finding without rerunning its audit.
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.
-5. Before every commit, boot with `launch-game.cmd`, verify the main menu, and confirm no new exception log was created. Stage only the files belonging to the change.
+5. Before every commit, boot-gate with `utility.cmd cameo --check-yaml` (or `launch-game.cmd` for full verification). Fix any crashes before committing. Stage only the files belonging to the change.
+
+## Git workflow and commit rules (binding, 2026-07-24)
+
+**Co-maintainer: Blackrobe. Multiple developers work on this repository.**
+
+1. **Always fetch, pull, and merge before any commit.** The remote may have changes from other developers. If the engine pin (`mod.config` `ENGINE_VERSION`) changed, always run `make all` to fetch and build the new engine before boot-gating. Never skip the boot-gate.
+2. **Always boot-gate before committing.** Run `utility.cmd cameo --check-yaml` and fix any crashes. A commit that breaks the boot is not acceptable.
+3. **Do not spam commits on upstream master.** Use a pull request (PR) for cleaner commit history. Create a feature branch, push it, open a PR, and merge only after verification.
+4. **Only merge a PR if either:** (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash. Commits that do not break the master branch are a naturally acceptable outcome.
+5. **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
 
 ## Documentation rules
 
