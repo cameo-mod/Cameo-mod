@@ -32,7 +32,8 @@ Crashes and player-visible regressions always jump the queue.
 | Balance formula law (per-class, SUM, bands, uniqueness) | `design/FORMULA_V2.md` |
 | Balance machinery (ledger ⇄ workbook ⇄ gated apply, drift) | `design/BALANCE_PIPELINE.md` |
 | Armor / damage-type system | `design/ARMOR_SYSTEM.md` |
-| Faction identity, lore, playstyle (for uniqueness reasoning) | `FACTIONS.md` |
+| Faction identity, lore, playstyle (curated compendium) | `FACTIONS.md` |
+| Faction BALANCE bias (how units differ within a class, source-cited) | `design/FACTION_IDENTITY.md` |
 | Engine / custom-trait / C# reference | `Cameo_Knowledge_Base_Manual.md` |
 | ContentPack migration runbook | `MIGRATION.md` |
 | Accumulated pitfalls & safe defaults | `LESSONS_LEARNED.md` |
