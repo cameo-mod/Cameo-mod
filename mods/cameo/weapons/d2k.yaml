@@ -308,8 +308,7 @@ D2K_SiegeQuad:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 125
+		LaunchAngle: 125
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -1099,7 +1098,6 @@ D2KRepair:
 	ReloadDelay: 80
 	Report: fixit1.aud
 	ValidTargets: Repair, lockdowned, ivanattached, Repairing
-	ValidStances: Ally
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 250

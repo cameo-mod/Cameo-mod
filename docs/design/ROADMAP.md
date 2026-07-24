@@ -1655,18 +1655,39 @@ All other factions have a single, thematically appropriate wall type.
   Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
   Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
 
-  **Error breakdown (2026-07-24):**
+  **Fixes applied this session (2026-07-24):**
+  - [x] LaunchAngle (363→0): Converted LaunchAngle↔Min/MaxLaunchAngle per
+    projectile type; removed LaunchAngle from WarheadTrailProjectileCA; added
+    missing MaximumLaunchAngle where Min>Max.
+  - [x] UndefinedCursor chrono-target (195→0): Added `chrono-target` cursor
+    sequence alias in cursors.yaml (hyphen variant of `chrono_target`).
+  - [x] NegativeRemoval (64→0): Stripped values from `-Trait: value` removal
+    lines across 15 weapon YAML files.
+  - [x] InvalidWeaponField (55→0): Removed `WeaponClass` (40 lines, deprecated);
+    fixed `Burstdelays`→`BurstDelays` (9); `BurstDelay`→`BurstDelays` (4);
+    `Angle`→`LaunchAngle` on Bullet (1); removed weapon-level `ValidStances` (4);
+    `ChangeOwnerValidStances`→`ValidStances` (2).
+  - [x] DuplicateInteractable (234→0): Added `-Selectable:` to all bridge actors
+    to remove inherited Selectable (which includes InteractableInfo), keeping
+    only the explicit `Interactable:` with custom Bounds.
+  - [x] MissingTooltip (39→0): Added `Tooltip` trait to `camera.gpssat`.
+  - [x] OverrideActor on Tooltip (2→0): Removed invalid `OverrideActor` field
+    from Tooltip traits in TD GDI vehicles and TD Shared aircraft.
+  - [x] ProductionCost/TimeMultiplier RequiresCondition (10→0): Converted
+    `RequiresCondition`→`Prerequisites` on ProductionCostMultiplier and
+    ProductionTimeMultiplier in ^ScaledProducer template and 9 other instances.
+    These traits use `Prerequisites:` not `RequiresCondition:`.
+  - [x] ValidStances on AutoTargetPriority (3→0): Removed invalid `ValidStances`
+    fields from AutoTargetPriority traits in outpost2.yaml.
+  - [x] BadIndent (39): Investigated chrome/lobby_music.yaml — no actual
+    indentation issues found. Likely false positive from engine miniyaml parser.
+
+  **Error breakdown (2026-07-24, post-fixes):**
   - 72,813 UngrantedConditions — actors consume conditions not granted (biggest)
-  - 761 InvalidField — trait fields that don't exist on their trait
-  - 363 LaunchAngle — weapon projectile min/max LaunchAngle errors
-  - 234 DuplicateInteractable — bridges with duplicate InteractableInfo
+  - ~700 InvalidField — trait fields that don't exist on their trait (reduced
+    from 761 after OverrideActor, ValidStances, RequiresCondition fixes)
   - 209 MissingSequences — images with no sequence definitions
-  - 195 UndefinedCursor — chrono-target cursor undefined for chrono actors
-  - 64 NegativeRemoval — `-Trait` defines a value (should be empty)
-  - 55 InvalidWeaponField — WeaponClass/ValidStances/BurstDelay/Angle fields
   - 39 UndefinedNotification — missing notification references
-  - 39 BadIndent — bad indent in miniyaml (chrome/lobby_music.yaml)
-  - 39 MissingTooltip — buildable actors with no Tooltip trait
   - 12 CannotParse — Cannot parse `Random` into LockFaction.Boolean
   - 11 UndefinedActor — husk actors not defined by any rule
   - 9 InvalidOwner — map actors with wrong owner

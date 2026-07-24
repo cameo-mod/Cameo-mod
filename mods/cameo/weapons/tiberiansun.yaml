@@ -1,4 +1,4 @@
-####################################################################################################
+﻿####################################################################################################
 #		Tiberian Sun Ballisitc
 ####################################################################################################
 
@@ -373,7 +373,8 @@ TSGrenadeAA:
 		Speed: 206
 		Blockable: true
 		Shadow: true
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		Inaccuracy: 0
 		Image: BOMB
 		RangeLimit: 9c0
@@ -788,7 +789,8 @@ TSBikeMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 		ValidTargets: Ground, Water, Air
@@ -813,7 +815,8 @@ TSBikeTibMissile:
 	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
@@ -855,7 +858,8 @@ TSSAPCMissiles:
 	ReloadDelay: 18
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 		ValidTargets: Ground, Water, Air
@@ -876,7 +880,8 @@ TSSAPCCoreMissiles:
 	Inherits: ^LightChemicalWeapon
 	Inherits: TSSAPCMissiles
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 8000
@@ -968,7 +973,8 @@ TSChemAdatsMissile:
 	ReloadDelay: 54
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	ValidTargets: Ground, Water
 	Warhead@LightChemicalWeapon: SpreadDamage
@@ -1006,7 +1012,8 @@ TSChemAdatsMissile:
 TSChemAdatsMissileAA:
 	Inherits: TSAdatsMissileAA
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 6000
@@ -1730,7 +1737,7 @@ TunnelDisappear:
 
 # Viceroid claw weapons (added 2026-07-19): the loaded ruleset references
 # these via tsvissml/tsvislrg (^Viceroid) but they lived only in the
-# unloaded weapons/monsters.yaml — the stricter engine 2e0783c validates
+# unloaded weapons/monsters.yaml â€” the stricter engine 2e0783c validates
 # weapon refs eagerly at load, so the mod crashed at boot without them.
 ZClaw1:
 	ReloadDelay: 30

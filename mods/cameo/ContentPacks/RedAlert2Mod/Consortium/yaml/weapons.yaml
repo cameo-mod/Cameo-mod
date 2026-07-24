@@ -1,4 +1,4 @@
-SteelCloneGun:
+﻿SteelCloneGun:
 	Inherits: ^SteelHeavyCannon
 	Inherits: ^SteelMediumMissile
 	Inherits: ^SteelSmallArms
@@ -49,7 +49,7 @@ SteelCloneGunResonanceBounce1:
 SteelCloneGunResonanceBounce2:
 	Inherits: SteelCloneGunResonance
 	Range: 1250
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelCloneGunEResonance:
 	Inherits: SteelCloneGunE
@@ -70,7 +70,7 @@ SteelCloneGunEResonanceBounce1:
 SteelCloneGunEResonanceBounce2:
 	Inherits: SteelCloneGunEResonance
 	Range: 2000
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
@@ -115,7 +115,7 @@ SteelVulcanResonanceBounce1:
 SteelVulcanResonanceBounce2:
 	Inherits: SteelVulcanResonance
 	Range: 2222
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 ConsortiumMissileSystem:
 	Inherits: ^TeslaWeapon
@@ -281,10 +281,8 @@ SteelQuantumCannon_eliteScatter:
 	Inherits: SteelQuantumCannon_elite
 	Range: 3500
 	-Report:
-	Projectile: LaserZap
 		Color: 00EEFF88
 		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 1000
@@ -300,7 +298,7 @@ SteelQuantumCannon_eliteScatter:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 3000
-	-Warhead@Scatter: FireShrapnel
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -566,7 +564,7 @@ SteelMantaAGResonanceBounce1:
 SteelMantaAGResonanceBounce2:
 	Inherits: SteelMantaAGResonance
 	Range: 2222
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelMantaAAResonance:
 	Inherits: SteelMantaAA
@@ -587,7 +585,7 @@ SteelMantaAAResonanceBounce1:
 SteelMantaAAResonanceBounce2:
 	Inherits: SteelMantaAAResonance
 	Range: 2222
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelMantaHunterCannons:
 	Inherits: ^RA2FlakWeapon
@@ -652,7 +650,7 @@ SteelMantaHunterCannonsResonanceBounce1:
 SteelMantaHunterCannonsResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsResonance
 	Range: 2222
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelMantaHunterCannonsAAResonance:
 	Inherits: SteelMantaHunterCannonsAA
@@ -673,7 +671,7 @@ SteelMantaHunterCannonsAAResonanceBounce1:
 SteelMantaHunterCannonsAAResonanceBounce2:
 	Inherits: SteelMantaHunterCannonsAAResonance
 	Range: 2222
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelRunnerPistols:
 	Inherits: ^TeslaWeapon
@@ -750,7 +748,7 @@ SteelRunnerPistolsResonanceBounce1:
 SteelRunnerPistolsResonanceBounce2:
 	Inherits: SteelRunnerPistolsResonance
 	Range: 1550
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelRunnerPistolsEResonance:
 	Inherits: SteelRunnerPistolsE
@@ -771,7 +769,7 @@ SteelRunnerPistolsEResonanceBounce1:
 SteelRunnerPistolsEResonanceBounce2:
 	Inherits: SteelRunnerPistolsEResonance
 	Range: 2400
-	-Warhead@shrapnel: FireShrapnel
+	-Warhead@shrapnel:
 
 SteelInfRailgun:
 	Inherits: ^RA2RailgunWeapon
@@ -1221,11 +1219,9 @@ SteelAirTurretEScatter:
 	Inherits: SteelAirTurretE
 	Range: 4500
 	-Report:
-	Projectile: LaserZap
 		Color: 00EEFF88
 		Width: 64
 		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1241,7 +1237,7 @@ SteelAirTurretEScatter:
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
-	-Warhead@Scatter: FireShrapnel
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -1703,11 +1699,9 @@ SteelStalkerRailgunEScatter:
 	Inherits: SteelStalkerRailgunE
 	Range: 5000
 	-Report:
-	Projectile: LaserZap
 		Color: 00EEFF88
 		Width: 96
 		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 5000
@@ -1723,7 +1717,7 @@ SteelStalkerRailgunEScatter:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 15000
-	-Warhead@Scatter: FireShrapnel
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud

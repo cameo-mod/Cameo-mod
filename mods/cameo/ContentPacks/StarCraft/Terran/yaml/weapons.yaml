@@ -7,7 +7,6 @@ MarineMG:
 	Burst: 3
 	BurstDelays: 2
 	-Report:
-	StartBurstReport: TMaFir00.aud
 	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -942,7 +941,6 @@ SiegeTankSiegeCannon:
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: scsiegetanksiegeexplosion
 		ImpactSounds: ExploLrg.aud
@@ -1668,7 +1666,6 @@ RavenRepair:
 
 ScienceVesselDefenseMatrix:
 	ValidTargets: Vehicle, Ship, Air
-	ValidStances: Ally
 	InvalidTargets: lockdowned, shielded
 	Range: 7500
 	ReloadDelay: 260
@@ -1700,7 +1697,6 @@ ScienceVesselDefenseMatrix:
 ScienceVesselIrradiate:
 	ValidTargets: Ground
 	InvalidTargets: lockdowned
-	ValidStances: Enemy
 	Range: 7500
 	ReloadDelay: 110
 	TargetActorCenter: true
@@ -1732,7 +1728,6 @@ ScienceVesselEMP:
 	Inherits: ^TeslaChargedWeapon
 	ValidTargets: Vehicle
 	InvalidTargets: lockdowned
-	ValidStances: Enemy
 	Range: 7500
 	ReloadDelay: 360
 	TargetActorCenter: true

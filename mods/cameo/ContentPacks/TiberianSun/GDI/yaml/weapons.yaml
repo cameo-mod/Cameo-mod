@@ -1,4 +1,4 @@
-TS30mm:
+﻿TS30mm:
 	Inherits: ^MediumMissile
 	Inherits: ^FlakWeapon
 	ReloadDelay: 26
@@ -346,7 +346,7 @@ TSSonicZapWeapon:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
-	-Warhead@Effect: CreateEffect
+	-Warhead@Effect:
 
 TSSonicZapWeaponSonic:
 	Inherits: ^TeslaWeapon
@@ -380,7 +380,7 @@ TSSonicZapWeaponSonic:
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
-	-Warhead@Effect: CreateEffect
+	-Warhead@Effect:
 
 TSEMPZapWeapon:
 	Inherits: ^TeslaWeapon
@@ -807,7 +807,6 @@ TSBombSonic:
 		ValidTargets: Ground, Ship
 		Damage: 5
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: ssplash3.aud
@@ -1009,7 +1008,6 @@ TSVulcanGun:
 	BurstDelays: 2
 	Range: 6809
 	-Report:
-	StartBurstReport: tsgun4.aud
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
@@ -1031,7 +1029,6 @@ TSVulcanGunSonic:
 	BurstDelays: 2
 	Range: 6809
 	-Report:
-	StartBurstReport: tsgun4.aud
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 4000
@@ -1209,7 +1206,6 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Warhead@IonCannonAirPercentage: HealthPercentageDamage
 		Delay: 115
 	-Warhead@2Smu_impact:
-	-Warhead@5Smu_area2:
 
 TSIonBeamMini:
 	Inherits: ^TSIonBeam

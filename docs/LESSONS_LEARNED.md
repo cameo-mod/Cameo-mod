@@ -229,3 +229,38 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
 - **When a task is completely done, merge the feature branch to master.** Do not leave completed work stranded on a feature branch. Ensure boot-gate passes and docs are updated before merging.
 - See also: `docs/AGENT_WORKSPACE.md` § Git workflow and commit rules.
+
+## YAML lint rules learned (2026-07-24)
+
+### ProductionCostMultiplier / ProductionTimeMultiplier use Prerequisites, not RequiresCondition
+
+These two traits do NOT support `RequiresCondition`. They use `Prerequisites:` instead. The pattern is:
+- `GrantConditionOnPrerequisite` grants a condition when a prerequisite is met
+- Other multipliers (SpeedMultiplier, DamageMultiplier, etc.) use `RequiresCondition:` with the granted condition
+- `ProductionCostMultiplier` and `ProductionTimeMultiplier` use `Prerequisites:` directly with the prerequisite name
+
+Example (correct):
+```yaml
+GrantConditionOnPrerequisite@myupgrade:
+    Condition: myupgrade
+    Prerequisites: myupgrade
+ProductionCostMultiplier@myupgrade:
+    Multiplier: 90
+    Prerequisites: myupgrade          # NOT RequiresCondition
+SpeedMultiplier@myupgrade:
+    Modifier: 110
+    RequiresCondition: myupgrade      # This is correct for SpeedMultiplier
+```
+
+### Other YAML lint fixes applied
+- **WeaponClass**: Deprecated/removed weapon field. Remove all `WeaponClass:` lines from weapon definitions.
+- **Burstdelays**: Case typo — should be `BurstDelays` (capital B, capital D).
+- **BurstDelay**: Singular form invalid — should be `BurstDelays` (plural).
+- **Angle on Bullet**: Use `LaunchAngle` instead of `Angle` on Bullet projectiles.
+- **ValidStances on weapons**: Not a valid weapon-level field. Remove it; use `ValidRelationships` on warheads instead.
+- **ChangeOwnerValidStances**: Not a valid field on ChangeOwner warhead. Use `ValidStances` instead.
+- **ValidStances on AutoTargetPriority**: Not a valid field. Remove it; `ValidStances` belongs on `AutoTarget` trait.
+- **OverrideActor on Tooltip**: Not a valid field. Remove it.
+- **NegativeRemoval**: `-Trait: value` is invalid — removals must be empty: `-Trait:` (no value).
+- **DuplicateInteractable on bridges**: `Selectable` inherits from `Interactable` in the engine. Having both `Selectable:` (inherited from `^1x1Shape`) and `Interactable:` on the same actor creates duplicate `InteractableInfo`. Fix: add `-Selectable:` to remove the inherited one, keeping only the explicit `Interactable:` with custom Bounds.
+- **UndefinedCursor chrono-target**: Cursor sequences use underscores in definition (`chrono_target`) but traits reference hyphens (`chrono-target`). Add a hyphen-variant sequence alias in cursors.yaml.

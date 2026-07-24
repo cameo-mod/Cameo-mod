@@ -1,4 +1,4 @@
-^ExistsInWorld:
+﻿^ExistsInWorld:
 	AppearsOnRadar:
 	UpdatesPlayerStatistics:
 	CombatDebugOverlay:
@@ -1088,7 +1088,7 @@
 
 ^CloseCombatInfantryTemplate:
 	# Formula v2 CLOSE-COMBAT class (design 2026-07-19): shotgunners &
-	# SMG troopers — range band [2500,4500), between melee and scout.
+	# SMG troopers â€” range band [2500,4500), between melee and scout.
 	# Baseline td_gdi_shotgunner (50000/75/3500/SA+CG burst5 = 200);
 	# verifier asianalliance_fanatic (2x HP + 2x bursts = 500). All
 	# members use SmallArms + Chaingun warheads (WC 0.875), ground-only.
@@ -2436,7 +2436,7 @@
 		Type: GrinderCash
 		Sounds: bgrinda.wav
 
-# Shared muzzle-glow tuning for cannon/td_nod_gunturret units â€” inherited by ^Tank and by cannon defence
+# Shared muzzle-glow tuning for cannon/td_nod_gunturret units Ã¢â‚¬â€ inherited by ^Tank and by cannon defence
 # turrets so both use identical values. Geometry/fades fall back to the trait defaults;
 # tune the muzzle-flash brightness here in one place.
 ^MuzzleGlowCannon:
@@ -5689,7 +5689,7 @@
 		Prerequisites: global_conscription_buff
 		Multiplier: 75
 	FirepowerMultiplier@global_conscription_buff:
-		RequiresCondition: global_conscription_buff
+		Prerequisites: global_conscription_buff
 		Modifier: 110
 	SpeedMultiplier@global_conscription_buff:
 		RequiresCondition: global_conscription_buff
@@ -7710,34 +7710,34 @@ CPQDEBUGDUMMY:
 		Prerequisites: scaledprices
 	ProductionCostMultiplier@Scaled0:
 		Multiplier: 100
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionTimeMultiplier@Scaled0:
 		Multiplier: 100
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionCostMultiplier@Scaled1:
 		Multiplier: 200
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionTimeMultiplier@Scaled1:
 		Multiplier: 200
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionCostMultiplier@Scaled2:
 		Multiplier: 300
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionTimeMultiplier@Scaled2:
 		Multiplier: 300
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionCostMultiplier@Scaled3:
 		Multiplier: 400
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionTimeMultiplier@Scaled3:
 		Multiplier: 400
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionCostMultiplier@Scaled4:
 		Multiplier: 500
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 	ProductionTimeMultiplier@Scaled4:
 		Multiplier: 500
-		RequiresCondition: scaledprices
+		Prerequisites: scaledprices
 
 ^IsBarrack:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -8236,7 +8236,7 @@ CPQDEBUGDUMMY:
 	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
 	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
 	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
-	# -Production@Upgrades: / -ProductionBar@Upgrades: â€” see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
+	# -Production@Upgrades: / -ProductionBar@Upgrades: Ã¢â‚¬â€ see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
 	# td_nod_templeprime, terran_commandcenter, protoss_nexus, ra2gaspysat.
 	Production@Upgrades:
 		Produces: Upgrades

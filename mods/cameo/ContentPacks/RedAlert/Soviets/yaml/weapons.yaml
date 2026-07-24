@@ -1,4 +1,4 @@
-IncendiaryM1Carbine:
+﻿IncendiaryM1Carbine:
 	Inherits: ^LightFlameWeapon
 	Inherits: M1Carbine
 	Inherits: ^IncendiaryBulletProjectile
@@ -753,7 +753,7 @@ PortaTeslaFragment:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 ZapperPortaTesla:
 	Inherits: ^TeslaWeapon
@@ -789,7 +789,7 @@ ZapperPortaTeslaFragment:
 		Damage: 8
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 8000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 PointDefenseTesla:
 	Inherits: ^TeslaWeapon
@@ -852,7 +852,7 @@ TTankZapEMPArcTeslaFragment2:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 TTankZap2:
 	Inherits: ^TeslaChargedWeapon
@@ -909,7 +909,7 @@ TTankZap2EMPArcTeslaFragment2:
 		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 TeslaZap:
 	Inherits: ^TeslaWeapon
@@ -966,7 +966,7 @@ TeslaZapEMPArcTeslaFragment2:
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 HeatRayBeam1:
 	Inherits: ^LaserWeapon
@@ -1469,8 +1469,8 @@ BTRTeslaMachineGun:
 	Range: 5454
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image: DRAGON
-		-TrailImage: smokey
+		-Image:
+		-TrailImage:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1512,7 +1512,7 @@ BTRTeslaMachineGunArc:
 BTRTeslaMachineGunArcFragment1:
 	Inherits: BTRTeslaMachineGunArc
 	Range: 2727
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 BTRTeslaMachineGunAA:
 	Inherits: BTRTeslaMachineGun
@@ -1531,7 +1531,7 @@ BTRTeslaMachineGunArcAA:
 BTRTeslaMachineGunArcFragment1AA:
 	Inherits: BTRTeslaMachineGunArcAA
 	Range: 4090
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 ChainGun:
 	Inherits: ^Chaingun
@@ -1634,7 +1634,8 @@ HindMissilesThermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 300
-		LaunchAngle: 30
+		MinimumLaunchAngle: 30
+		MaximumLaunchAngle: 30
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
@@ -1703,7 +1704,8 @@ HindMissilesNuclear:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 300
-		LaunchAngle: 30
+		MinimumLaunchAngle: 30
+		MaximumLaunchAngle: 30
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
@@ -1759,7 +1761,8 @@ KamovMissilesTesla:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 300
-		LaunchAngle: 30
+		MinimumLaunchAngle: 30
+		MaximumLaunchAngle: 30
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
@@ -1841,8 +1844,8 @@ KamovTesla:
 	Range: 5528
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image: DRAGON
-		-TrailImage: smokey
+		-Image:
+		-TrailImage:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 16000
@@ -1918,7 +1921,7 @@ KamovTeslaArcFragment2:
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 YakChainGun:
 	Inherits: ^Chaingun
@@ -1987,8 +1990,8 @@ YakTeslaGun:
 	BurstDelays: 3
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image: DRAGON
-		-TrailImage: smokey
+		-Image:
+		-TrailImage:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -2065,7 +2068,7 @@ YakTeslaArcFragment2:
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 1000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 YakNapalm:
 	Inherits: ^ShrapnelWeapon
@@ -2106,7 +2109,6 @@ YakNapalm:
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
 		GlowScale: 1.5
@@ -2170,7 +2172,6 @@ YakTeslaBomb:
 		AllowDirectHit: true
 		AimTargetStances: Enemy, Neutral
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_kirovtesla
 		ExplosionPalette: ra2effect
@@ -2236,7 +2237,8 @@ Maverick:
 	Report: missile7.aud
 	Projectile: Missile
 		Acceleration: 5
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: bazooka_trail2
@@ -2254,7 +2256,8 @@ TeslaMaverick:
 	Inherits: Maverick
 	Projectile: Missile
 		Acceleration: 5
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: litning
@@ -2302,8 +2305,8 @@ TeslaMaverickFragment1:
 	Range: 2950
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image: d2k_RPG
-		-TrailImage: litning
+		-Image:
+		-TrailImage:
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -2338,7 +2341,7 @@ TeslaMaverickFragment2:
 		Damage: 2
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 ThermobaricMaverick:
 	Inherits: ^NuclearWarhead
@@ -2347,7 +2350,8 @@ ThermobaricMaverick:
 	Inherits: Maverick
 	Projectile: Missile
 		Acceleration: 5
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: bazooka_trail2
@@ -2404,7 +2408,8 @@ NuclearMaverick:
 		Acceleration: 10
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: bazooka_trail2
@@ -2445,7 +2450,8 @@ ThermobaricNuclearMaverick:
 		Acceleration: 10
 		MaximumLaunchSpeed: 250
 		MinimumLaunchSpeed: 250
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: bazooka_trail2
@@ -2682,7 +2688,6 @@ KotinCannonThermobaric:
 		MaxLevel: 2000
 		LayerName: ra2radiation
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: xplosml2.aud
@@ -2719,8 +2724,6 @@ ra120mmThermobaric:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 4
 	-Warhead@Effect:
-
-ra120mmThermobaricTargetingComputer:
 	Inherits: ra120mmThermobaric
 	ValidTargets: Ground, Water
 
@@ -2749,7 +2752,8 @@ MammothTuskThermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
@@ -2850,7 +2854,8 @@ MammothTuskTesla:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
@@ -2919,8 +2924,8 @@ MammothTuskTeslaFragment1:
 	Range: 3206
 	Report: shktrop1.aud
 	Projectile: LightningZap
-		-Image: MISSILE
-		-TrailImage: litning
+		-Image:
+		-TrailImage:
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -2979,7 +2984,7 @@ MammothTuskTeslaFragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 MammothTuskTeslaTargetingComputer:
 	Inherits: MammothTuskTesla
@@ -3050,8 +3055,6 @@ ra120mm2Thermobaric:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 8
 	-Warhead@Effect:
-
-ra120mm2ThermobaricTargetingComputer:
 	Inherits: ra120mm2Thermobaric
 	ReloadDelay: 105
 	ValidTargets: Ground, Water
@@ -3119,7 +3122,8 @@ MammothTusk2Thermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 666
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
@@ -3202,7 +3206,7 @@ MonsterTankTusk:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 125
 	Burst: 4
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 7833
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -3234,7 +3238,8 @@ MonsterTankTuskTesla:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: 88BBFF44
 		ContrailEndColor: 11223300
@@ -3318,7 +3323,8 @@ MonsterTankTuskThermobaric:
 		TrailDelay: 1
 		TrailInterval: 1
 		Speed: 641
-		LaunchAngle: 60
+		MinimumLaunchAngle: 60
+		MaximumLaunchAngle: 60
 		ContrailLength: 10
 		ContrailStartColor: FFBB8844
 		ContrailEndColor: 33221100
@@ -3406,7 +3412,7 @@ VolkovMagneticWeapon:
 	ReloadDelay: 15
 	Range: 5400
 	Burst: 2
-	Burstdelays: 5
+	BurstDelays: 5
 	Report: ramgun2.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -3446,9 +3452,9 @@ VolkovMagneticWeaponTesla:
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2
-	Burstdelays: 9
+	BurstDelays: 9
 	Projectile: LightningZap
-		-Image: 50CAL
+		-Image:
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3568,7 +3574,7 @@ VolkovMagneticWeaponTeslaFragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 VolkovMagneticWeaponNuclearShells:
 	Inherits: ^NuclearWarhead
@@ -3639,9 +3645,9 @@ VolkovMagneticWeaponIncendiaryTesla:
 	ReloadDelay: 30
 	Range: 5660
 	Burst: 2
-	Burstdelays: 9
+	BurstDelays: 9
 	Projectile: LightningZap
-		-Image: 50CAL
+		-Image:
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -3785,7 +3791,7 @@ VolkovMagneticWeaponIncendiaryTeslaFragment2:
 		Damage: 1
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 5000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 VolkovMagneticWeaponIncendiaryNuclearShells:
 	Inherits: ^MediumFlameWeapon
@@ -4033,7 +4039,7 @@ TeslaRAGatlingTankCannonArc:
 TeslaRAGatlingTankCannonArcFragment1:
 	Inherits: TeslaRAGatlingTankCannonArc
 	Range: 2500
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 TeslaRAGatlingTankCannonAA:
 	Inherits: TeslaRAGatlingTankCannon
@@ -4052,7 +4058,7 @@ TeslaRAGatlingTankCannonArcAA:
 TeslaRAGatlingTankCannonArcFragment1AA:
 	Inherits: TeslaRAGatlingTankCannonArcAA
 	Range: 3750
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 MADTankDetonate:
 	Inherits: ^NuclearWarhead
@@ -4096,7 +4102,7 @@ MADTankDetonate:
 		ImpactActors: false
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Soviet
-# rifle infantry — burst 3, heavier thump, close range. Incendiary pair.
+# rifle infantry â€” burst 3, heavier thump, close range. Incendiary pair.
 ra1_soviets_rifleinfantry_carbine:
 	Inherits: ^SmallArms
 	ReloadDelay: 50

@@ -157,12 +157,9 @@ op2_commonore_beacon_3bar:
 		HP: 7200
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
-		ValidStances: Ally
 		Priority: 2
 	AutoTargetPriority@DEFAULT:
-		ValidStances: Enemy, Neutral
 	AutoTargetPriority@ATTACKANYTHING:
-		ValidStances: Enemy, Neutral
 	AutoTarget:
 		ScanRadius: 4
 	Passenger:

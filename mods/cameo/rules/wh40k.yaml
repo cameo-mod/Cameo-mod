@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@wh40kimperial:
 		Name: Imperial Guard WH40K
 		InternalName: imperialguard
@@ -2107,7 +2107,7 @@ wh40kproc.e1:
 		Condition: wh40kupbattlecommand
 		Prerequisites: wh40kupbattlecommand
 	ProductionTimeMultiplier@wh40kupbattlecommand:
-		RequiresCondition: wh40kupbattlecommand
+		Prerequisites: wh40kupbattlecommand
 		Modifier: 90
 ^WH40KSargent:
 	DamageMultiplier@sargentarmor:
@@ -7279,7 +7279,7 @@ wh40krhino.e4:
 		Condition: wh40kupcapincrease
 		Prerequisites: wh40kupcapincrease
 	ProductionTimeMultiplier@wh40kupcapincrease:
-		RequiresCondition: wh40kupcapincrease
+		Prerequisites: wh40kupcapincrease
 		Modifier: 80
 	GrantConditionOnPrerequisite@wh40kupbionics:
 		Condition: wh40kupbionics
@@ -7347,7 +7347,7 @@ wh40krhino.e4:
 		Condition: wh40kupcapincrease2
 		Prerequisites: wh40kupcapincrease2
 	ProductionTimeMultiplier@wh40kupcapincrease2:
-		RequiresCondition: wh40kupcapincrease2
+		Prerequisites: wh40kupcapincrease2
 		Modifier: 70
 wh40kupmonastery:
 	Inherits: ^UpgradeTemplate
@@ -12281,14 +12281,14 @@ wh40kchaosmarinechamp:
 		Condition: wh40kupcapincrease
 		Prerequisites: wh40kupcapincrease
 	ProductionTimeMultiplier@wh40kupcapincrease:
-		RequiresCondition: wh40kupcapincrease
+		Prerequisites: wh40kupcapincrease
 		Modifier: 90
 ^WH40KSquadcapChaosVeh:
 	GrantConditionOnPrerequisite@wh40kupcapincrease2:
 		Condition: wh40kupcapincrease2
 		Prerequisites: wh40kupcapincrease2
 	ProductionTimeMultiplier@wh40kupcapincrease2:
-		RequiresCondition: wh40kupcapincrease2
+		Prerequisites: wh40kupcapincrease2
 		Modifier: 90
 	GrantConditionOnPrerequisite@wh40kchaosenergies:
 		Condition: wh40kchaosenergies

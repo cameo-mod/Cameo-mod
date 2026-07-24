@@ -1,4 +1,4 @@
-CryoLightSniper:
+﻿CryoLightSniper:
 	Inherits: LightSniper
 	Inherits: ^CryoMissileProjectile
 	Projectile: Bullet
@@ -401,7 +401,7 @@ APTusk:
 	Inherits: ^MediumMissile
 	ReloadDelay: 51
 	Burst: 4
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 5038
 	Report: missile6.aud
 	Warhead@TankDestroyerCannon: SpreadDamage
@@ -447,7 +447,7 @@ ChronoTusk:
 	Inherits: ^MediumMissile
 	ReloadDelay: 54
 	Burst: 4
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 6102
 	Report: missile6.aud
 	ValidTargets: Ground, Water, Air

@@ -1,4 +1,4 @@
-M16Laser:
+﻿M16Laser:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
@@ -168,8 +168,6 @@ ArtilleryShellUpgrade:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 3
 	-Warhead@Effect:
-
-MachineGun:
 	Inherits: ^SmallArms
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 10
@@ -212,7 +210,8 @@ BikeRockets:
 	Range: 6000
 	Report: bazook1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -448,7 +447,6 @@ TurretGun:
 	Projectile: Bullet
 		Speed: 771
 		-LaunchAngle:
-	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 3000
@@ -482,8 +480,6 @@ TurretGunBlackMarket:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 3
 	-Warhead@Effect:
-
-Dragon:
 	Inherits: ^HeavyAAWeapon
 	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
@@ -628,7 +624,8 @@ ChemicalBikeRockets:
 	Report: missile6.aud
 	Projectile: Missile
 		TrailImage: spittrail
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 	Warhead@TankDestroyerCannon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 8000
@@ -792,7 +789,6 @@ ChemicalHonestJohn:
 		ValidTargets: Ground, Water
 		Damage: 15
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		GlowScale: 2.0
@@ -1034,7 +1030,7 @@ FlametankExplode2:
 BlackHandLaser:
 	# Special-Forces T4 heavy-trooper weapon (maintainer 2026-07-20): the
 	# same light+medium+heavy weapon-class triad as the japan baseline, at 4x
-	# — CannonAP (light, anti-tank) + FlakWeapon (medium, anti-air) + Laser
+	# â€” CannonAP (light, anti-tank) + FlakWeapon (medium, anti-air) + Laser
 	# (heavy), 8000 each = 24000 @ reload 50 = 480 DPS (WC 1.0), 4x the
 	# baseline (6000@50, 120). Laser inherited LAST so LaserZap defines the
 	# beam. ExtraDamage warheads inherit untouched (shield-only chip; ignored
@@ -1277,8 +1273,6 @@ SpecterArtilleryShellUpgrade:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 2
 	-Warhead@Effect:
-
-VenomLaser:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^FlakWeapon
 	Inherits: ^Chaingun
@@ -1341,7 +1335,6 @@ NodCommandoLaser:
 		SecondaryBeamColor: FF8844
 		Blockable: true
 		-HitAnim:
-	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Air, Missile, BulletAS, BallisticMissile
 		Damage: 12000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -1362,7 +1355,7 @@ NodTorpTube:
 	BurstDelays: 8
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5
@@ -1391,11 +1384,11 @@ NodTorpTube:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1411,7 +1404,7 @@ NodTorpTubeBlackMarket:
 	BurstDelays: 8
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5
@@ -1438,11 +1431,11 @@ NodTorpTubeBlackMarket:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 4
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1484,7 +1477,7 @@ CorvetteDragon:
 		Explosions: small_building
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Nod
-# minigunner — burst 4, snappier rattle, shorter reach. Laser pair.
+# minigunner â€” burst 4, snappier rattle, shorter reach. Laser pair.
 td_nod_minigunner_minigun:
 	Inherits: ^SmallArms
 	ReloadDelay: 50

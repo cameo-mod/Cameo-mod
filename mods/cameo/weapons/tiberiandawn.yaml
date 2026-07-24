@@ -1,4 +1,4 @@
-^AMTProjectile:
+﻿^AMTProjectile:
 	Projectile: Missile
 		MaximumLaunchSpeed: 400
 		MinimumLaunchSpeed: 400
@@ -13,7 +13,8 @@
 		ContrailStartWidth: 75
 		ContrailEndWidth: 5
 		HomingActivationDelay: 0
-		LaunchAngle: 50
+		MinimumLaunchAngle: 50
+		MaximumLaunchAngle: 50
 
 ^HVProjectile:
 	Projectile: Bullet
@@ -217,7 +218,8 @@ FlametankExplode:
 		Shadow: true
 		TrailImage: smokey
 		Inaccuracy: 800
-		LaunchAngle: 125
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
 		Speed: 500
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air

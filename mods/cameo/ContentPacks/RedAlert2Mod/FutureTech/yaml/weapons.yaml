@@ -1,4 +1,4 @@
-ACV_Machinegun:
+﻿ACV_Machinegun:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
 	ValidTargets: Ground, Water
@@ -106,7 +106,6 @@ Future_Cryocopter_Cryo:
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
 		-HitAnim:
-	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -180,7 +179,6 @@ Future_Cryocopter_Cryo:
 		ImpactSounds: phohit00.wav
 		Volume: 0.25
 	-Warhead@Smudge:
-	-Warhead@RA2Scorch:
 
 Future_Turret_Cryo:
 	Inherits: Future_Cryocopter_Cryo
@@ -309,7 +307,7 @@ FutureMicrotorpedos:
 	BurstDelays: 8
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5
@@ -338,11 +336,11 @@ FutureMicrotorpedos:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
 		ExplosionPalette: ra2effect

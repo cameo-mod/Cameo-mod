@@ -1,4 +1,4 @@
-TS70mm:
+﻿TS70mm:
 	Inherits: ^TSCannonEffect
 	Inherits: ^MediumCannon
 	ReloadDelay: 24
@@ -871,7 +871,8 @@ TSChemRuinerMissile:
 	ReloadDelay: 50
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 10000

@@ -1,4 +1,4 @@
-NaxBrummbarArty:
+﻿NaxBrummbarArty:
 	Inherits: ^HeavyBomb
 	Inherits: ^HeavyCannon
 	Inherits: ^ShrapnelWeapon
@@ -43,7 +43,7 @@ NaxBrummbarArtyE:
 	Burst: 2
 	BurstDelays: 3
 
-NaxiWW2KübelwagenMachinegun:
+NaxiWW2KÃ¼belwagenMachinegun:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
 	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
@@ -811,7 +811,6 @@ NaxQuadCannon:
 	Report: nax_aa1.wav
 	Projectile: Bullet
 		-LaunchAngle:
-	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -1004,7 +1003,8 @@ NaxPlaneRocketsE:
 	Report: missile7.aud
 	Projectile: Missile
 		Acceleration: 5
-		LaunchAngle: 128
+		MinimumLaunchAngle: 128
+		MaximumLaunchAngle: 128
 		Image: d2k_RPG
 		Palette: d2keffect
 		TrailImage: bazooka_trail2
@@ -1067,7 +1067,7 @@ NaxShoeRocket:
 	Range: 12000
 	TargetActorCenter: true
 	ValidTargets: Ground, Water, Ship, Submarine
-	-Projectile: Missile
+	-Projectile:
 	Projectile: NukeLaunch
 		MissileWeapon: NaxShoeRocket
 		MissileImage: latin_12_miss
@@ -1081,7 +1081,6 @@ NaxShoeRocket:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
