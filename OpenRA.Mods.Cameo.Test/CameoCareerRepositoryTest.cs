@@ -54,6 +54,24 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(loaded.Profile.Matches, Has.Count.EqualTo(1));
 			Assert.That(loaded.Profile.Matches["match-one"].Faction, Is.EqualTo("atreides"));
 			Assert.That(loaded.Profile.Matches["match-one"].UnitsKilled, Is.EqualTo(12));
+			Assert.That(loaded.Profile.Matches["match-one"].GameTimestep, Is.EqualTo(40));
+			Assert.That(loaded.Profile.Matches["match-one"].EnemyAssetsDestroyed, Is.EqualTo(1200));
+			Assert.That(loaded.Profile.Matches["match-one"].AssetsOwned, Is.EqualTo(2400));
+		}
+
+		[Test]
+		public void SchemaOneCareerUpgradesOnTheNextAppend()
+		{
+			var path = Path.Combine(directory, CameoCareerRepository.CareerFileName);
+			File.WriteAllText(path, "SchemaVersion: 1\nCareerId: schema-one\n");
+			var repository = new CameoCareerRepository(directory);
+
+			Assert.That(repository.Load().Profile.SchemaVersion, Is.EqualTo(CameoCareerRepository.CurrentSchemaVersion));
+			Assert.That(repository.Append("new-match", Match("atreides", "Won", 3)),
+				Is.EqualTo(CameoCareerAppendResult.Appended));
+			Assert.That(repository.Load().Profile.SchemaVersion, Is.EqualTo(CameoCareerRepository.CurrentSchemaVersion));
+			Assert.That(File.ReadAllText(path),
+				Does.Contain($"SchemaVersion: {CameoCareerRepository.CurrentSchemaVersion}"));
 		}
 
 		[Test]
@@ -127,6 +145,44 @@ namespace OpenRA.Mods.Cameo.Test
 			Assert.That(aggregate.GamesWon, Is.EqualTo(2));
 			Assert.That(aggregate.GamesLost, Is.EqualTo(1));
 			Assert.That(aggregate.UnitsKilled, Is.EqualTo(15));
+		}
+
+		[Test]
+		public void SummaryCalculatesTopMapsGameLengthsAndAssetTotals()
+		{
+			var profile = new CameoCareerProfile();
+			var first = Match("atreides", "Won", 5);
+			first.MapUid = "map-one";
+			first.MapTitle = "Map One";
+			first.DurationTicks = 100;
+			first.EnemyAssetsDestroyed = 1000;
+			first.AssetsOwned = 2000;
+			var second = Match("atreides", "Lost", 4);
+			second.MapUid = "map-one";
+			second.MapTitle = "Map One";
+			second.DurationTicks = 200;
+			second.EnemyAssetsDestroyed = 500;
+			second.AssetsOwned = 1500;
+			var third = Match("ordos", "Won", 7);
+			third.MapUid = "map-two";
+			third.MapTitle = "Map Two";
+			third.DurationTicks = 300;
+			third.EnemyAssetsDestroyed = 2500;
+			third.AssetsOwned = 3000;
+			profile.Matches.Add("first", first);
+			profile.Matches.Add("second", second);
+			profile.Matches.Add("third", third);
+
+			var summary = CameoStatistics.Summarize(profile);
+
+			Assert.That(summary.TopMaps[0].Title, Is.EqualTo("Map One"));
+			Assert.That(summary.TopMaps[0].Games, Is.EqualTo(2));
+			Assert.That(summary.OverallGameLength.AverageMilliseconds, Is.EqualTo(8000));
+			Assert.That(summary.OverallGameLength.MedianMilliseconds, Is.EqualTo(8000));
+			Assert.That(summary.FactionGameLengths["atreides"].AverageMilliseconds, Is.EqualTo(6000));
+			Assert.That(summary.FactionGameLengths["atreides"].MedianMilliseconds, Is.EqualTo(6000));
+			Assert.That(summary.Factions["atreides"].EnemyAssetsDestroyed, Is.EqualTo(1500));
+			Assert.That(summary.Factions["atreides"].AssetsOwned, Is.EqualTo(3500));
 		}
 
 		[Test]
@@ -236,7 +292,10 @@ namespace OpenRA.Mods.Cameo.Test
 				RecordedUtc = "2026-07-21T00:00:00.0000000Z",
 				Faction = faction,
 				Outcome = outcome,
-				UnitsKilled = unitsKilled
+				UnitsKilled = unitsKilled,
+				GameTimestep = 40,
+				EnemyAssetsDestroyed = 1200,
+				AssetsOwned = 2400
 			};
 		}
 	}

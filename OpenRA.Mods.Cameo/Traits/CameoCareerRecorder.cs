@@ -129,12 +129,15 @@ namespace OpenRA.Mods.Cameo.Traits
 				MapTitle = world.Map.Title,
 				ModVersion = Game.ModData.Manifest.Metadata.Version,
 				DurationTicks = world.WorldTick,
+				GameTimestep = world.Timestep,
 				UnitsKilled = stats.UnitsKilled,
 				BuildingsKilled = stats.BuildingsKilled,
 				UnitsLost = stats.UnitsDead,
 				BuildingsLost = stats.BuildingsDead,
 				ResourcesEarned = resources?.Earned ?? 0,
-				ResourcesSpent = resources?.Spent ?? 0
+				ResourcesSpent = resources?.Spent ?? 0,
+				EnemyAssetsDestroyed = stats.KillsCost,
+				AssetsOwned = stats.AssetsValue
 			};
 
 			return new PendingCameoCareerMatch(new CameoCareerRepository(Platform.SupportDir), recordId, match);
