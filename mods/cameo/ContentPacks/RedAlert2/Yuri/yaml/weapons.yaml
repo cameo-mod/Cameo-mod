@@ -1,4 +1,4 @@
-﻿RA2LasherCannon:
+RA2LasherCannon:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^LightFlameWeapon
@@ -351,6 +351,8 @@ RA2DiskDrain:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	-Warhead@Effect:
+
+RA2DiskSteal:
 	ReloadDelay: 5
 	Range: 125
 	TargetActorCenter: true
@@ -379,6 +381,7 @@ RA2Magnet:
 		Duration: 100
 		Color: FF55F505
 		-HitAnim:
+	Warhead@LaserWeapon: SpreadDamage
 		Range: 0, 32
 		Falloff: 100, 100
 		Damage: 2000
@@ -768,6 +771,7 @@ RA2Virusgun2:
 	Inherits: RA2Virusgun
 	ValidTargets: Ground, Ship, Garrisoned
 	-InvalidTargets:
+	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Infantry, Monster, Garrisoned
 		Damage: 12000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
@@ -841,9 +845,11 @@ RA2Chemspray:
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@MediumChemicalWeaponFriendlyFire:
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@Effect:
+	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 2
 		Duration: 100
 		Speed: 4, 16
@@ -923,6 +929,7 @@ RA2CosmonautLaser:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath
 	-Warhead@Effect:
+	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
 		InvalidTargets: Vehicle, Structure, wall, Husk, Creep

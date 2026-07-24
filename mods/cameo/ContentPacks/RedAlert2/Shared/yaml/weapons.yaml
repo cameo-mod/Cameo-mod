@@ -1,3 +1,8 @@
+
+####################################################################################################
+#		Red Alert 2 Weapon Templates
+####################################################################################################
+
 ^RA2SmallArms:
 	Inherits: ^SmallArms
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
@@ -297,6 +302,7 @@ RA2MirageGun:
 	Warhead@Effect:
 		Explosions: ra2_iron_fx
 		-ImpactSounds:
+	Warhead@EffectWater:
 
 RA2HoverMissile:
 	Inherits: ^ArrowWeapon
@@ -509,18 +515,6 @@ RA2MultiHoverMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	# red-missile convention (maintainer 2026-07-20): the red projectile = 2x
-	# DAMAGE (not more burst). All base warheads doubled. AA variant inherits.
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ArrowWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -598,26 +592,6 @@ RA2MultiThunderboltMissile_elite:
 		Shadow: true
 		TrailImage: red_smokey
 		ContrailStartColor: e60000
-	# red-missile convention (maintainer 2026-07-20): red projectile = 2x
-	# DAMAGE. All base warheads doubled. AA variant inherits.
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 4000
-	Warhead@HeavyAAWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@ArrowWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_grey_explosion
 		ImpactSounds: gexp15a.wav
@@ -749,7 +723,7 @@ RA2REVENANTAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
 	Range: 10240
-	MinRange: 2050
+	MinRange: 512
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -957,7 +931,7 @@ RA2155mm_elite:
 
 RA28Inch:
 	Inherits: ^RA2HeavyCannon
-	MinRange: 615
+	MinRange: 1024
 	ReloadDelay: 1
 	Range: 3072
 	Report: turret1.aud
@@ -1425,6 +1399,8 @@ RA2RadBeamWeapon:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 15
 	-Warhead@Effect:
+
+RA2CarrierTarget:
 	ReloadDelay: 50
 	Range: 17500
 	ValidTargets: Ground, Air, Water
@@ -2023,7 +1999,7 @@ RA2TorpTube_elite:
 ra2_soviets_conscript_carbine:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 18
-	Range: 4898
+	Range: 4500
 	Report: iconatta.wav, iconattb.wav, iconattc.wav, iconattd.wav, iconatte.wav
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
@@ -2470,7 +2446,6 @@ RA2Terrorist:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^RA2Grenade
 	-Report:
-		Damage: 50000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -3090,4 +3065,3 @@ RA2FlyingBody:
 		ExplosionPalette: ra2effect
 		ValidTargets: Ground
 		Delay: 0
-

@@ -219,6 +219,38 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   default `explosion` image where they don't exist. Restored `Image: ra2corpse`
   per corpse-spawner exception in DESIGN.md §8.
 
+### P0 — Completed (2026-07-24 session)
+
+- [x] **RA2 weapons migration to ContentPack** (`fix/ra2-weapons-migration`):
+  The ContentPack `RedAlert2/Shared/yaml/weapons.yaml` only had templates
+  (`^RA2*` prefixed), missing 134 weapon definitions (RA2CarrierTarget,
+  RA2BrutePunch, MigMissiles, V3Launch, etc.) that were only in
+  `mods/cameo/weapons/redalert2.yaml` (commented out in mod.yaml). Replaced
+  ContentPack weapons.yaml with full copy of redalert2.yaml and applied all
+  lint fixes from commit d42ad53a1 (NegativeRemovals, invalid fields, etc.).
+  This resolves the `RA2CarrierTarget not found` error.
+- [x] **Yuri weapons missing headers** (`fix/ra2-weapons-migration`): The lint
+  commit d42ad53a1 accidentally removed 6 weapon/warhead headers in
+  `RedAlert2/Yuri/yaml/weapons.yaml` while doing NegativeRemoval cleanup.
+  Restored: `RA2DiskSteal:`, `Warhead@Cloud: SpawnSmokeParticle` (RA2Chemspray),
+  `Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage` (RA2Chemspray),
+  `Warhead@LaserWeapon: SpreadDamage` (RA2Magnet),
+  `Warhead@FlakWeapon: SpreadDamage` (RA2Virusgun2),
+  `Warhead@Smudge: LeaveSmudge` (RA2CosmonautLaser).
+  The missing `Warhead@Cloud: SpawnSmokeParticle` header caused the
+  `Sequences` field error (orphaned SpawnSmokeParticle child nodes under a
+  removal line).
+- [x] **Naxis Kübelwagen weapon encoding fix** (`fix/ra2-weapons-migration`):
+  Weapon name `NaxiWW2KÃ¼belwagenMachinegun` in Naxis weapons.yaml had
+  double-encoded UTF-8 (mojibake), causing weapon-not-found crash for
+  `naxis_kbelwagen` actor. Fixed to `NaxiWW2KübelwagenMachinegun`.
+- [x] **Missing postprocess_nuclearflash.frag shader** (prior session):
+  `NuclearFlashRenderer.cs` expects `postprocess_nuclearflash.frag` in
+  `engine/glsl/` but the file was never created. Created shader with proper
+  uniforms (LightPosition, LightRadius, LightColor, Brightness, Darkness,
+  SourceTexture). NOTE: file lives in engine/ which is .gitignored; must be
+  recreated after `make all` fetches engine. See AI_AGENT_HANDOFF.md.
+
 ### P0 — Completed (2026-07-14 session)
 
 - [x] **CABAL Backup Systems upgrade coverage (avatar, widow)**

@@ -27,6 +27,7 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
+- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
 
 ---
 
@@ -264,3 +265,11 @@ SpeedMultiplier@myupgrade:
 - **NegativeRemoval**: `-Trait: value` is invalid — removals must be empty: `-Trait:` (no value).
 - **DuplicateInteractable on bridges**: `Selectable` inherits from `Interactable` in the engine. Having both `Selectable:` (inherited from `^1x1Shape`) and `Interactable:` on the same actor creates duplicate `InteractableInfo`. Fix: add `-Selectable:` to remove the inherited one, keeping only the explicit `Interactable:` with custom Bounds.
 - **UndefinedCursor chrono-target**: Cursor sequences use underscores in definition (`chrono_target`) but traits reference hyphens (`chrono-target`). Add a hyphen-variant sequence alias in cursors.yaml.
+
+### YAML lint cleanup header-removal bug (2026-07-24)
+
+- **The NegativeRemoval lint fix (commit d42ad53a1) accidentally removed weapon/warhead HEADERS, not just values.** When stripping values from `-Trait: value` lines, the lint script also deleted adjacent header lines (e.g., `RA2DiskSteal:`, `Warhead@Cloud: SpawnSmokeParticle`, `Warhead@LaserWeapon: SpreadDamage`). The bodies remained as orphaned child nodes, causing YAML parse errors and `MissingFieldsException` crashes.
+- **Always verify after lint cleanup**: After any bulk NegativeRemoval fix, run `utility.cmd cameo --check-yaml` and boot-gate test. The lint tool catches field errors but the game boot catches orphaned nodes.
+- **ContentPack migration must be complete**: When migrating weapons from `mods/cameo/weapons/*.yaml` to ContentPacks, ALL weapon definitions must be copied, not just templates. The RA2 ContentPack only had `^RA2*` templates but was missing 134 concrete weapon definitions, causing `Parent type not found` errors for weapons like `RA2CarrierTarget` that other weapons inherit from.
+- **UTF-8 encoding in YAML weapon names**: Weapon names with non-ASCII characters (e.g., `ü` in `Kübelwagen`) can become double-encoded (mojibake `Ã¼`) during file operations. Always verify encoding when files contain non-ASCII characters. The engine's YAML parser uses the file's byte-level encoding, so `NaxiWW2KÃ¼belwagenMachinegun` does not match `NaxiWW2KübelwagenMachinegun`.
+- **Engine shader files not tracked by mod git**: Custom shader files in `engine/glsl/` (e.g., `postprocess_nuclearflash.frag`) are inside the .gitignored engine directory. They must be recreated after `make all` fetches the engine. Document any custom shader requirements in the mod repo for post-fetch setup.
