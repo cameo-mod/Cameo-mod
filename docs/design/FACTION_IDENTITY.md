@@ -20,10 +20,14 @@ its source-game identity leans into, and pays for it in the opposite stat.
 - **Tech / Power** factions → **+Damage, +Range** (elite units; Protoss/Steel-Consortium "shields" read as +HP).
 - **Special mechanic** (not a stat bias — a per-unit trait, priced via the special-K multiplier): stealth, mind-control, self-heal, decoys, transforming, cyborg turn-rate, area-denial.
 
-**Exception — mirror factions (Warcraft 2).** Humans and Orcs are *stat-mirrored* in the
-source game; they differ by **abilities/spells**, not base stats. WC2 counterpart units
-(Footman/Grunt, Knight/Ogre, …) should stay near-identical in HP/Speed/Damage and
-differ only in their special (Human = heal/defensive, Orc = Bloodlust/aggressive).
+**NO mirror factions (Cameo departs from Warcraft 2 here).** In the original WC2, Humans
+and Orcs are stat-mirrors. Cameo deliberately does **not** do this — mirror factions are
+dull. We follow the **Warcraft 3 philosophy**: every faction, and every individual unit,
+gets its own distinct stats (**no two units may share a stat value** — the uniqueness law,
+see `../DESIGN.md`). So WC2 Humans and Orcs are differentiated like any other pair, and
+their counterpart units (Footman vs Grunt, Knight vs Ogre, …) are re-statted apart, never
+mirrored: Humans lean **defensive / versatile / support-magic**, Orcs lean **aggressive /
+brute**.
 
 ## Faction bias table
 
@@ -74,12 +78,15 @@ Legend: **HP** / **SPD** / **DMG** / **RNG** columns are the lean (＋ high, −
 | Protoss | Tech / Power Units | ＋ | − | ＋ | ＋ | **Shields = +HP**; expensive, few, powerful; splash; late-game. |
 | Zerg | Swarm / Map Control | − | ＋ | − | − | Cheap, numerous, fast, fragile; vulnerable to AoE; weak in long fights. |
 
-### Warcraft 2 — MIRROR factions (differ by ability, not stats)
+### Warcraft 2 — distinct stats (WC3 approach, NOT mirrored)
 
-| Faction | Playstyle | Stat rule | Special |
-|---|---|---|---|
-| Humans WC2 | Balanced / Magic | **Mirror the Orc counterpart's HP/SPD/DMG** | Healing (Paladin/Mage), defensive, methodical. |
-| Orcs WC2 | Aggressive / Dark Magic | **Mirror the Human counterpart's HP/SPD/DMG** | Bloodlust + Raise Dead, aggressive/offensive. |
+Original WC2 mirrors Human/Orc; Cameo re-stats them apart. Counterpart units
+(Footman↔Grunt, Knight↔Ogre, …) must NOT share stats — split them along this lean:
+
+| Faction | Playstyle | HP | SPD | DMG | RNG | Special / signature |
+|---|---|:-:|:-:|:-:|:-:|---|
+| Humans WC2 | Defensive / Versatile / Magic | ・ | ・ | ・ | ＋ | Healing (Paladin/Mage), towers, tech; methodical, longer reach. |
+| Orcs WC2 | Aggressive / Brute | ＋ | ・ | ＋ | − | Bloodlust + Raise Dead; high-HP grunts, raw offensive power. |
 
 ### Outpost 2
 

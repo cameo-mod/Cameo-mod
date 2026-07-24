@@ -703,6 +703,17 @@ cheapest provider wins).
   actors of a faction may feel the same, and especially no two actors of
   DIFFERENT factions may feel the same. Factions express identity through
   themed actors; uniqueness is a faction-identity feature, not polish.
+- **NO mirror factions; no shared stats (Warcraft 3 approach).** Cameo
+  deliberately never mirrors one faction against another — vanilla Warcraft 2
+  makes Humans/Orcs stat-identical and that is boring. Every faction has a
+  distinct identity, AND **every individual unit has its own stats: no two
+  units may share the same value of a balance stat** (HP, Speed, effective
+  damage-per-shot = Σwarheads×FirepowerMultiplier, RAW ReloadDelay, Range)
+  within their comparison class. WC2 Human/Orc counterparts (Footman↔Grunt,
+  Knight↔Ogre) are therefore re-statted apart, never mirrored. The lore-directed
+  DIRECTION of each faction's stat lean is in `design/FACTION_IDENTITY.md`
+  (source-cited); the 5-stat uniqueness is enforced mechanically by the balance
+  pipeline.
 - Weapon-dedup findings are **balance/design work**, never mechanical
   auto-fixes: propose per-actor stat divergence options, let design
   choose, then implement.
