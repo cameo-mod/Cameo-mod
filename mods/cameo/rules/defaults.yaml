@@ -7589,7 +7589,7 @@ CPQDEBUGDUMMY:
 	ProvidesRadar:
 		RequiresCondition: !jammed && !disabled
 	Transforms:
-		RequiresCondition: factundeploy
+		RequiresCondition: factundeploy && !genericbot
 		PauseOnCondition: being-demolished || build-incomplete || disabled
 		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1

@@ -22,31 +22,13 @@ cabal_constructionyard:
 	Armor:
 		Type: Wood
 	Transforms:
-		RequiresCondition: factundeploy
-		PauseOnCondition: being-demolished || build-incomplete
 		IntoActor: cabal_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
-	TransformsIntoMobile:
-		RequiresCondition: factundeploy
-		Locomotor: heavywheeled
-		RequiresForceMove: true
-		RedeployAfterMove: true
-	TransformsIntoPassenger:
-		RequiresCondition: factundeploy
-		CargoType: Vehicle
-		RequiresForceMove: true
-	TransferTimedExternalConditionOnTransform:
-		Condition: invulnerability
-	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
-		Condition: factundeploy
-		Prerequisites: global-factundeploy
 	WithProductionOverlay@WELDING:
 		RequiresCondition: !build-incomplete
 		Queues: Building, Defence, RABuilding, RADefence
 		Sequence: build
-	BaseProvider:
-		Range: 14c0
 	ProvidesPrerequisite@tsoilderrick:
 		Prerequisite: tsoilderrick
 	ProvidesPrerequisite@tslaserfence:
