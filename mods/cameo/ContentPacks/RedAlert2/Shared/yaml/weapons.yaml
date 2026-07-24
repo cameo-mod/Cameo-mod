@@ -142,6 +142,8 @@
 ^RA2LaserWeapon:
 	Inherits: ^LaserWeapon
 	-Warhead@Effect:
+
+^RA2RailgunWeapon:
 	Inherits: ^RailgunWeapon
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_small_bang
