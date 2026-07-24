@@ -1,6 +1,6 @@
 # Cameo Knowledge Base Manual v.0.3
 
-> **Version note:** Manual v.0.3 — this edition reflects the Cameo mod source as of 2026-07-24, including the completed ContentPack migration (all factions now in ContentPacks), the YAML lint cleanup (LaunchAngle, DuplicateInteractable, NegativeRemoval, InvalidWeaponField, MissingTooltip, ProductionCostMultiplier Prerequisites fixes), PascalCase inheritance template enforcement, cross-faction inheritance violation fixes, prerequisite cleanup (~disabled policy), balance pipeline implementation, and TKM faction self-containment. File paths and class names may change in newer mod versions.
+> **Version note:** Manual v.0.3.1 — this edition reflects the Cameo mod source as of 2026-07-24, including the completed ContentPack migration (all factions now in ContentPacks), the full RA2 weapons migration to ContentPack (all 134 weapons + templates), the YAML lint cleanup (LaunchAngle, DuplicateInteractable, NegativeRemoval, InvalidWeaponField, MissingTooltip, ProductionCostMultiplier Prerequisites fixes), PascalCase inheritance template enforcement, cross-faction inheritance violation fixes, prerequisite cleanup (~disabled policy), balance pipeline implementation, TKM faction self-containment, and the NuclearFlashRenderer custom post-process shader. File paths and class names may change in newer mod versions.
 >
 > **Key changes since v.0.2 (2026-07-16):**
 > - All faction **rules** now loaded via `Include:` entries in `mod.yaml` (not direct `Rules:` entries). Faction sequences and weapons are partially migrated — some are loaded via ContentPacks, others remain direct entries in `mod.yaml`.
@@ -5183,7 +5183,7 @@ This example shows how a single YAML change flows through the ruleset system int
 | `mods/cameo/rules/promotions.yaml` | Player-level promotion rules and the `PlayerPromotions` trait. |
 | `mods/cameo/rules/starcraft.yaml` | Starcraft faction rules, including Zerg larva production (loaded via `ContentPacks/StarCraft/`). |
 | `mods/cameo/rules/redalert2.yaml` | Red Alert 2 faction rules, including drone spawners and infection (superseded by `ContentPacks/RedAlert2/Shared/yaml/` files; original file not loaded). |
-| `mods/cameo/weapons/redalert2.yaml` | Red Alert 2 weapons, including `LaserZapCA` and `PlasmaBeam` projectiles (superseded by `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml`; original file not loaded). |
+| `mods/cameo/weapons/redalert2.yaml` | Red Alert 2 weapons, including `LaserZapCA` and `PlasmaBeam` projectiles (fully migrated to `ContentPacks/RedAlert2/Shared/yaml/weapons.yaml` — all 134 weapons + templates; original file not loaded). |
 | `mods/cameo/weapons/starcraft.yaml` | Starcraft weapons, including `WarheadTrailProjectileCA` usage (still loaded directly in `mod.yaml`). |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/content.yaml` | Content pack manifest that adds the GDI faction files to the mod load. |
 | `mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/faction.yaml` | Content pack faction definition for `td_gdi`. |
@@ -7961,6 +7961,7 @@ namespace OpenRA.Mods.MyMod.Traits
 | `OpenRA.Mods.Cameo/Widgets/IngamePromotionCounterWidget.cs` | In-game promotion point/rank display. |
 | `OpenRA.Mods.Cameo/Widgets/QuotaProductionPaletteWidget.cs` | Production palette overlay that reads `QuotaProductionManager`. |
 | `OpenRA.Mods.Cameo/Traits/World/ConditionalTintPostProcessEffect.cs` | Conditional full-screen tint post-processing pass. |
+| `OpenRA.Mods.Cameo/Traits/World/NuclearFlashRenderer.cs` | Custom post-process shader that renders a nuclear flash effect. Requires `engine/glsl/postprocess_nuclearflash.frag` (not tracked by mod git — must be recreated after `make all`). |
 | `OpenRA.Mods.Cameo/Rendering/ColorPickerColorShift.cs` | Lobby color picker palette shift. |
 | `OpenRA.Mods.CA/Graphics/MindControlArc.cs` | Draws a mind-control arc above shroud when selected. |
 | `OpenRA.Mods.CA/Traits/Render/WithRangeCircleCA.cs` | CA range-circle annotation trait with player-color alpha. |
@@ -17027,7 +17028,7 @@ After studying this chapter, you should be able to:
 | `mods/cameo/weapons/redalert.yaml` | Red Alert weapons (migrated to `ContentPacks/RedAlert/Shared/`). |
 | `mods/cameo/weapons/tiberiansun.yaml` | Tiberian Sun weapons (still loaded directly in `mod.yaml`). |
 | `mods/cameo/weapons/d2k.yaml` | Dune 2000 weapons (still loaded directly in `mod.yaml`). |
-| `mods/cameo/weapons/redalert2.yaml` | Red Alert 2 weapons (migrated to `ContentPacks/RedAlert2/Shared/`). |
+| `mods/cameo/weapons/redalert2.yaml` | Red Alert 2 weapons (fully migrated to `ContentPacks/RedAlert2/Shared/` — all 134 weapons + templates). |
 | `mods/cameo/weapons/redalert2mod.yaml` | Red Alert 2 Mod weapons (still loaded directly in `mod.yaml`). |
 | `mods/cameo/weapons/starcraft.yaml` | StarCraft weapons (still loaded directly in `mod.yaml`). |
 | `mods/cameo/weapons/warcraft2.yaml` | Warcraft II weapons (still loaded directly in `mod.yaml`). |
@@ -17416,7 +17417,7 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `mods/cameo/weapons/redalert.yaml` — Red Alert weapons (migrated to `ContentPacks/RedAlert/Shared/`).
 - `mods/cameo/weapons/tiberiansun.yaml` — Tiberian Sun weapons (loaded directly in `mod.yaml`).
 - `mods/cameo/weapons/d2k.yaml` — Dune 2000 weapons (loaded directly in `mod.yaml`).
-- `mods/cameo/weapons/redalert2.yaml` — Red Alert 2 weapons (migrated to `ContentPacks/RedAlert2/Shared/`).
+- `mods/cameo/weapons/redalert2.yaml` — Red Alert 2 weapons (fully migrated to `ContentPacks/RedAlert2/Shared/` — all 134 weapons + templates).
 - `mods/cameo/weapons/redalert2mod.yaml` — Red Alert 2 Mod weapons (loaded directly in `mod.yaml`).
 - `mods/cameo/weapons/starcraft.yaml` — StarCraft weapons (loaded directly in `mod.yaml`).
 - `mods/cameo/weapons/warcraft2.yaml` — Warcraft II weapons (loaded directly in `mod.yaml`).
