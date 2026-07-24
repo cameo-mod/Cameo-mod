@@ -3,7 +3,7 @@
 ####################################################################################################
 
 qacst_infiltrated.steel:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Consortium Buildings Plans
 	Buildable:
@@ -13,7 +13,7 @@ qacst_infiltrated.steel:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: steelconsortium_consortiumconstructionyard
 steelconsortium_upgrade_pulseweapons:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Pulse Weapons
 	Valued:
@@ -28,7 +28,7 @@ steelconsortium_upgrade_pulseweapons:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_naniteinfusion:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Nanite Infusion
 	Valued:
@@ -43,7 +43,7 @@ steelconsortium_upgrade_naniteinfusion:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_ferrocretecurtain:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ferrocrete Curtain
 	Valued:
@@ -58,7 +58,7 @@ steelconsortium_upgrade_ferrocretecurtain:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_empcannon:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Unlock Emp Cannon
 	Valued:
@@ -74,7 +74,7 @@ steelconsortium_upgrade_empcannon:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_scalpeldefenders:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Scalpel Defenders
 	Valued:
@@ -89,7 +89,7 @@ steelconsortium_upgrade_scalpeldefenders:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_resonanceammo:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Resonance Ammo
 	Valued:
@@ -104,7 +104,7 @@ steelconsortium_upgrade_resonanceammo:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_quantumweaponpower:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Quantum Weapon Power
 	Valued:
@@ -119,7 +119,7 @@ steelconsortium_upgrade_quantumweaponpower:
 	ProvidesPrerequisite:
 
 steelconsortium_upgrade_shieldresistance:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield Resistance
 	Valued:
@@ -135,7 +135,7 @@ steelconsortium_upgrade_shieldresistance:
 		Actor: up_team_shielresistance.steel
 
 up_team_shielresistance.steel:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: steelconsortium_upgrade_shieldresistance
 	RenderSprites:

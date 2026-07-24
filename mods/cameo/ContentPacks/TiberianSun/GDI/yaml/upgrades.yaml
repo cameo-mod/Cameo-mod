@@ -1,5 +1,5 @@
 ts_gdi_upgrade_seretraining:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: SERE Training
 	Valued:
@@ -14,7 +14,7 @@ ts_gdi_upgrade_seretraining:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_projectileimprovements:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Projectile Improvements
 	Valued:
@@ -29,7 +29,7 @@ ts_gdi_upgrade_projectileimprovements:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_mechanicalreliability:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Mechanical Reliability
 	Valued:
@@ -44,7 +44,7 @@ ts_gdi_upgrade_mechanicalreliability:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_ceramicarmor:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ceramic Armor
 	Valued:
@@ -59,7 +59,7 @@ ts_gdi_upgrade_ceramicarmor:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_mechengineering:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Mech Engineering
 	Valued:
@@ -74,7 +74,7 @@ ts_gdi_upgrade_mechengineering:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_sonicweaponry:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Sonic Weaponry
 	Valued:
@@ -89,7 +89,7 @@ ts_gdi_upgrade_sonicweaponry:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_railgunweaponry:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Railgun Weaponry
 	Valued:
@@ -104,7 +104,7 @@ ts_gdi_upgrade_railgunweaponry:
 	ProvidesPrerequisite:
 
 ts_gdi_upgrade_modernfirecontrolsystems:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Modern Fire Control Systems
 	Valued:
@@ -121,7 +121,7 @@ ts_gdi_upgrade_modernfirecontrolsystems:
 		Actor: ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor
 
 ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: ts_gdi_upgrade_modernfirecontrolsystems
 	RenderSprites:

@@ -11,7 +11,7 @@
 #		TKM Upgrade and Inherits
 ####################################################################################################
 
-^upberezkacloakupgrade:
+^UPBerezkaCloakUpgrade:
 	GrantConditionOnPrerequisite@berezkacloak:
 		Condition: upspeed
 		Prerequisites: tkm_upgrade_berezkaarsenalupgrade
@@ -19,28 +19,28 @@
 		Modifier: 150
 		RequiresCondition: upspeed
 
-^tkm_upgrade_pointdefensesystem:
+^TKMUpgradePointDefenseSystem:
 	GrantConditionOnPrerequisite@tkm_upgrade_pointdefensesystem:
 		Condition: tkm_upgrade_pointdefensesystem
 		Prerequisites: tkm_upgrade_pointdefensesystem
 
-^tkm_upgrade_semiautoriflesupgrade:
+^TKMUpgradeSemiAutoRiflesUpgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_semiautoriflesupgrade
 
-^tkm_upgrade_twinrocketsupgrade:
+^TKMUpgradeTwinRocketsUpgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_berezkaarsenalupgrade, tkm_upgrade_twinrocketsupgrade
 
-^tkm_upgrade_titanarmorpiercingbulletsupgrade:
+^TKMUpgradeTitanArmorPiercingBulletsUpgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_titanarmorpiercingbulletsupgrade
 
-^tkm_upgrade_incendiaryrocketsupgrade:
+^TKMUpgradeIncendiaryRocketsUpgrade:
 	ActorStatValues:
 		Upgrades: tkm_upgrade_natoarsenalupgrade, tkm_upgrade_incendiaryrocketsupgrade
 
-^tkm_upgrade_infantryupgrade:
+^TKMUpgradeInfantryUpgrade:
 	DamageMultiplier@terran_upgrade_infantryweaponslevel1:
 		Modifier: 70
 		RequiresCondition: tkm_upgrade_infantryupgrade
@@ -55,7 +55,7 @@
 # TKM MCV and Construction Yard
 #######################################
 
-^tkm_upgrade_natoarsenalupgrade:
+^TKMUpgradeNATOArsenalUpgrade:
 	GrantConditionOnPrerequisite@steelalloyplating:
 		Condition: upspeed
 		Prerequisites: tkm_upgrade_natoarsenalupgrade
@@ -66,7 +66,7 @@
 		Modifier: 70
 		RequiresCondition: upspeed
 
-^tkm_upgrade_heavytitanplating:
+^TKMUpgradeHeavyTitanPlating:
 	DamageMultiplier@tkm_upgrade_heavytitanplating:
 		Modifier: 75
 		RequiresCondition: tkm_upgrade_heavytitanplating

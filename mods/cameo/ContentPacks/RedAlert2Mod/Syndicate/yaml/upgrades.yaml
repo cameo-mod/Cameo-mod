@@ -3,7 +3,7 @@
 ##############################################
 
 cgcnst_infiltrated.latin:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Syndicate Buildings Plans
 	Buildable:
@@ -13,7 +13,7 @@ cgcnst_infiltrated.latin:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: latinsyndicate_syndicateconstructionyard
 latinsyndicate_doctrine_eliteguerillas:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Elite Guerillas
 	Buildable:
@@ -24,7 +24,7 @@ latinsyndicate_doctrine_eliteguerillas:
 	ProvidesPrerequisite:
 
 latinsyndicate_doctrine_cartelrockets:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Cartel Rockets
 	Buildable:
@@ -35,7 +35,7 @@ latinsyndicate_doctrine_cartelrockets:
 	ProvidesPrerequisite:
 
 latinsyndicate_doctrine_lightposts:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Lightposts
 	Buildable:
@@ -48,7 +48,7 @@ latinsyndicate_doctrine_lightposts:
 		Actor: up_team_ngbunk2.latin
 
 up_team_ngbunk2.latin:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: latinsyndicate_doctrine_lightposts
 	RenderSprites:
@@ -60,7 +60,7 @@ up_team_ngbunk2.latin:
 	PlayerDisplayUpgrade:
 
 latinsyndicate_upgrade_empcannon:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Emp Cannon
 	Buildable:
@@ -72,7 +72,7 @@ latinsyndicate_upgrade_empcannon:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_yuristolentechchainguns:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Yuri Stolen Tech: Chainguns
 	Valued:
@@ -87,7 +87,7 @@ latinsyndicate_upgrade_yuristolentechchainguns:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_sovietstolentechindustrialmethods:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Soviet Stolen Tech: Industrial Methods
 	Valued:
@@ -102,7 +102,7 @@ latinsyndicate_upgrade_sovietstolentechindustrialmethods:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Allied Stolen Tech: Extra Missiles and Miraging
 	Valued:
@@ -117,7 +117,7 @@ latinsyndicate_upgrade_alliedstolentechextramissilesandmiraging:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_asianalliancestolentechhotfire:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Asian Alliance Stolen Tech: Hot Fire
 	Valued:
@@ -132,7 +132,7 @@ latinsyndicate_upgrade_asianalliancestolentechhotfire:
 	ProvidesPrerequisite:
 
 latinsyndicate_upgrade_cashrecovery:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Recovery
 	Valued:
@@ -149,7 +149,7 @@ latinsyndicate_upgrade_cashrecovery:
 		Actor: up_team_cashrecover.latin
 
 up_team_cashrecover.latin:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: latinsyndicate_upgrade_cashrecovery
 	RenderSprites:

@@ -1434,7 +1434,7 @@ MMAWBLACKHOLE:
 ########################################################                                                                                
 #	Orange Star             
 selectandy:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Andy
 	Buildable:
@@ -1456,7 +1456,7 @@ selectandy:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawrepairtnk
 selectmax:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Max
 	Buildable:
@@ -1476,7 +1476,7 @@ selectmax:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectsami:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sami
 	Buildable:
@@ -1498,7 +1498,7 @@ selectsami:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawifv
 selectnell:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nell
 	Buildable:
@@ -1518,7 +1518,7 @@ selectnell:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selecthachi:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hachi
 	Buildable:
@@ -1538,7 +1538,7 @@ selecthachi:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectjake:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jake
 	Buildable:
@@ -1558,7 +1558,7 @@ selectjake:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectrachel:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rachel
 	Buildable:
@@ -1578,7 +1578,7 @@ selectrachel:
 	ProvidesPrerequisite@3:
 		Prerequisite: awcarrierunlock
 selectredstar:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Red Star
 	Buildable:
@@ -1599,7 +1599,7 @@ selectredstar:
 		Prerequisite: awclassicunit
 #	Blue Moon           
 selectolaf:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Olaf
 	Buildable:
@@ -1619,7 +1619,7 @@ selectolaf:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawfrost
 selectgrit:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grit
 	Buildable:
@@ -1639,7 +1639,7 @@ selectgrit:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawsiege
 selectcolin:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Colin
 	Buildable:
@@ -1657,7 +1657,7 @@ selectcolin:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectcolin
 selectsasha:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sasha
 	Buildable:
@@ -1675,7 +1675,7 @@ selectsasha:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectsasha
 selectwhitemoon:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: White Moon
 	Buildable:
@@ -1706,7 +1706,7 @@ selectwhitemoon:
 		Prerequisite: unlockawbggy
 #	Yellow Comet              
 selectkanbei:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kanbei
 	Buildable:
@@ -1724,7 +1724,7 @@ selectkanbei:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectkanbei
 selectsonja:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sonja
 	Buildable:
@@ -1746,7 +1746,7 @@ selectsonja:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawradarvan
 selectsensei:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sensei
 	Buildable:
@@ -1766,7 +1766,7 @@ selectsensei:
 	ProvidesPrerequisite@3:
 		Prerequisite: awbcopter2unlock
 selectgrimm:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grimm
 	Buildable:
@@ -1785,7 +1785,7 @@ selectgrimm:
 		Prerequisite: selectgrimm
 #	Green Earth            
 selecteagle:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Eagle
 	Buildable:
@@ -1809,7 +1809,7 @@ selecteagle:
 	ProvidesPrerequisite@5:
 		Prerequisite: awbcopter2unlock
 selectdrake:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Drake
 	Buildable:
@@ -1829,7 +1829,7 @@ selectdrake:
 	ProvidesPrerequisite@3:
 		Prerequisite: awss2unlock
 selectjess:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jess
 	Buildable:
@@ -1847,7 +1847,7 @@ selectjess:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectjess
 selectjavier:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Javier
 	Buildable:
@@ -1866,7 +1866,7 @@ selectjavier:
 		Prerequisite: selectjavier
 #	Black Hole & Bolt Guard                         
 selectflak:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flak
 	Buildable:
@@ -1886,7 +1886,7 @@ selectflak:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectlash:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lash
 	Buildable:
@@ -1908,7 +1908,7 @@ selectlash:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawspider
 selectadder:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Adder
 	Buildable:
@@ -1928,7 +1928,7 @@ selectadder:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selecthawke:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hawke
 	Buildable:
@@ -1948,7 +1948,7 @@ selecthawke:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectjugger:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jugger
 	Buildable:
@@ -1970,7 +1970,7 @@ selectjugger:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawaitank
 selectkoal:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Koal
 	Buildable:
@@ -1992,7 +1992,7 @@ selectkoal:
 	ProvidesPrerequisite@4:
 		Prerequisite: unlockawflametank
 selectkindle:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kindle
 	Buildable:
@@ -2012,7 +2012,7 @@ selectkindle:
 	ProvidesPrerequisite@3:
 		Prerequisite: boltguard
 selectsturm:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sturm
 	Buildable:
@@ -2032,7 +2032,7 @@ selectsturm:
 	ProvidesPrerequisite@3:
 		Prerequisite: classicblackhole
 selectbolt:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Von Bolt
 	Buildable:
@@ -2054,7 +2054,7 @@ selectbolt:
 #	Rubinelle
 #	Rubinelle
 selectwill:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Will
 	Buildable:
@@ -2072,7 +2072,7 @@ selectwill:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectwill
 selectlin:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lin
 	Buildable:
@@ -2092,7 +2092,7 @@ selectlin:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawradarvan
 selectbrenner:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Brenner
 	Buildable:
@@ -2112,7 +2112,7 @@ selectbrenner:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawrepairtnk
 selectisabella:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Isabella
 	Buildable:
@@ -2133,7 +2133,7 @@ selectisabella:
 		Prerequisite: unlockawdevastator2
 #	Lazurian
 selectforsythe:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Forsythe
 	Buildable:
@@ -2151,7 +2151,7 @@ selectforsythe:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectforsythe
 selecttasha:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tasha
 	Buildable:
@@ -2169,7 +2169,7 @@ selecttasha:
 	ProvidesPrerequisite@2:
 		Prerequisite: selecttasha
 selectgage:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Gage
 	Buildable:
@@ -2190,7 +2190,7 @@ selectgage:
 		Prerequisite: unlockawsiege
 #	NRA
 selectgreyfield:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Greyfield
 	Buildable:
@@ -2208,7 +2208,7 @@ selectgreyfield:
 	ProvidesPrerequisite@2:
 		Prerequisite: selectgreyfield
 selectdavis:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Davis
 	Buildable:
@@ -2228,7 +2228,7 @@ selectdavis:
 	ProvidesPrerequisite@devast:
 		Prerequisite: unlockawdevastator2
 selectwaylon:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Waylon
 	Buildable:
@@ -2247,7 +2247,7 @@ selectwaylon:
 		Prerequisite: selectwaylon
 #	IDS
 selectpenny:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Penny
 	Buildable:
@@ -2267,7 +2267,7 @@ selectpenny:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawfrost
 selectbeast:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: The Beast
 	Buildable:
@@ -2287,7 +2287,7 @@ selectbeast:
 	ProvidesPrerequisite@3:
 		Prerequisite: unlockawbggy
 selecttabitha:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tabitha
 	Buildable:
@@ -2307,7 +2307,7 @@ selecttabitha:
 	ProvidesPrerequisite@devast:
 		Prerequisite: unlockawdevastator2
 selectcaulder:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Caulder
 	Buildable:
@@ -4857,7 +4857,7 @@ awcityids:
 #	AW Defence
 ########################################################            
 awpipe:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 150
 	CustomSellValue:
@@ -10119,13 +10119,13 @@ awmob:
 	RenderSprites:
 		Image: awe1terr
 
-^default_angry_mob.aw:
-	Inherits: ^default_angry_mob
+^DefaultAngryMobAW:
+	Inherits: ^DefaultAngryMob
 	RenderSprites:
 		Image: awe1terr
 
 awangrymob1:
-	Inherits: ^default_angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -10139,7 +10139,7 @@ awangrymob1:
 		PauseOnCondition: !ak47upgrade
 
 awangrymob2:
-	Inherits: ^default_angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -10153,7 +10153,7 @@ awangrymob2:
 		PauseOnCondition: !ak47upgrade
 
 awangrymob3:
-	Inherits: ^default_angry_mob.aw
+	Inherits: ^DefaultAngryMobAW
 	Armament:
 		Weapon: AWBuggyGrenade
 		LocalOffset: 0,0,555
@@ -11989,7 +11989,7 @@ awpiperunner:
 #	AW Upgrades
 ########################################################            
 awupduster:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Duster Bombs
 	Buildable:
@@ -12004,7 +12004,7 @@ awupduster:
 	ProvidesPrerequisite:
 		Prerequisite: awupduster
 awupcapture:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
@@ -12020,7 +12020,7 @@ awupcapture:
 		Prerequisite: upgecapture
 
 awupsystem1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Software Update 1
 	Buildable:
@@ -12035,7 +12035,7 @@ awupsystem1:
 	ProvidesPrerequisite:
 		Prerequisite: awupsystem1
 awupsystem2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Software Update 2
 	Buildable:
@@ -12050,7 +12050,7 @@ awupsystem2:
 	ProvidesPrerequisite:
 		Prerequisite: awupsystem2
 awuptiberium:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiberium Research
 	Buildable:
@@ -12066,7 +12066,7 @@ awuptiberium:
 		Prerequisite: awuptiberium
 
 awupwall:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Durable Wall Research
 	Buildable:

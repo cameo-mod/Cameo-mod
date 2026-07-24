@@ -1,5 +1,5 @@
 ra2_soviets_concretebarrier:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 200
 	CustomSellValue:
@@ -165,9 +165,9 @@ ra2_soviets_battlebunker:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@gar: ^ClearableGarrison
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Tooltip:
 		Name: Battle Bunker
 	Building:
@@ -219,9 +219,9 @@ ra2_soviets_sentrygun:
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20

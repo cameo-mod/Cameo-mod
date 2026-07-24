@@ -472,7 +472,7 @@
 	RenderSprites:
 		Palette: ra2city
 
-^ra2sovietsArmorPlatings:
+^RA2SovietsArmorPlatings:
 	SpeedMultiplier@ra2_soviets_doctrine_heavyarmorplatings:
 		Modifier: 90
 		RequiresCondition: ra2_soviets_doctrine_heavyarmorplatings
@@ -485,7 +485,7 @@
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_heavyarmorplatings
 
-^ra2sovietsReactiveArmor:
+^RA2SovietsReactiveArmor:
 	Armor@HAZMAT:
 		Type: HAZMAT
 		RequiresCondition: ra2_soviets_doctrine_reactivearmor
@@ -512,7 +512,7 @@
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_reactivearmor
 
-^ra2sovietsTeslaDischargeArmor:
+^RA2SovietsTeslaDischargeArmor:
 	Inherits@EnemyInProximity: ^EnemyInProximity
 	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
 		Modifier: 85
@@ -552,14 +552,14 @@
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_tesladischargearmor
 
-^ra2sovietsFireShells:
+^RA2SovietsFireShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_firemunitions:
 		Condition: ra2_soviets_doctrine_firemunitions
 		Prerequisites: ra2_soviets_doctrine_firemunitions
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_firemunitions
 
-^ra2sovietsRadShells:
+^RA2SovietsRadShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_nuclearmunitions:
 		Condition: ra2_soviets_doctrine_nuclearmunitions
 		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
@@ -569,7 +569,7 @@
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_nuclearmunitions
 
-^ra2sovietsTeslaShells:
+^RA2SovietsTeslaShells:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_teslamunitions:
 		Condition: ra2_soviets_doctrine_teslamunitions
 		Prerequisites: ra2_soviets_doctrine_teslamunitions

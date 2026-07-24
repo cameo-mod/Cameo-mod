@@ -1,5 +1,5 @@
 atreides_constructionyard:
-	Inherits: ^construction_yard
+	Inherits: ^ConstructionYard
 	Tooltip:
 		Name: Atreides Construction Yard
 	Transforms:
@@ -8,7 +8,7 @@ atreides_constructionyard:
 		Image: conyard.atreides
 
 wind_trap.atreides:
-	Inherits: ^wind_trap
+	Inherits: ^WindTrap
 	Buildable:
 		Prerequisites: ~atreides_constructionyard
 		Description: Provides power to the base.
@@ -16,7 +16,7 @@ wind_trap.atreides:
 		Image: power.atreides
 
 refinery.atreides:
-	Inherits: ^refinery
+	Inherits: ^D2KRefinery
 	Buildable:
 		Prerequisites: ~atreides_constructionyard, wind_trap.atreides
 		Description: Processes spice into credits.
@@ -38,7 +38,7 @@ refinery.atreides:
 		Image: refinery.atreides
 
 d2k_silo.atreides:
-	Inherits: ^d2k_silo
+	Inherits: ^D2KSilo
 	Buildable:
 		Prerequisites: ~atreides_constructionyard, refinery.atreides
 		Description: Stores excess spice.
@@ -46,7 +46,7 @@ d2k_silo.atreides:
 		Image: silo.atreides
 
 atreides_heavyfactory:
-	Inherits: ^heavy_factory
+	Inherits: ^HeavyFactory
 	Tooltip:
 		Name: Atreides Heavy Factory
 	RenderSprites:

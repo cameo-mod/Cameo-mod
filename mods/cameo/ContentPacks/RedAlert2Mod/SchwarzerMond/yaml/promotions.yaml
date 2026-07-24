@@ -11,7 +11,7 @@
 # Column 1 — Infantry
 
 schwarzermond_promotion_noidmg:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Noid MG
 	Buildable:
@@ -24,7 +24,7 @@ schwarzermond_promotion_noidmg:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_ubermensch:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Übermensch
 	Buildable:
@@ -37,7 +37,7 @@ schwarzermond_promotion_ubermensch:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_korruptesbiest:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Korruptes Biest
 	Buildable:
@@ -50,7 +50,7 @@ schwarzermond_promotion_korruptesbiest:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_parzival:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Parzival
 	Buildable:
@@ -65,7 +65,7 @@ schwarzermond_promotion_parzival:
 # Column 2 — Vehicles/Tanks
 
 schwarzermond_promotion_lunartiger:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Lunar Tiger
 	Buildable:
@@ -78,7 +78,7 @@ schwarzermond_promotion_lunartiger:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_mars:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: MARS
 	Buildable:
@@ -91,7 +91,7 @@ schwarzermond_promotion_mars:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_crystaltank:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Crystal Tank
 	Buildable:
@@ -104,7 +104,7 @@ schwarzermond_promotion_crystaltank:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_dalek:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Dalek
 	Buildable:
@@ -119,7 +119,7 @@ schwarzermond_promotion_dalek:
 # Column 3 — Aircraft/Artillery/Support
 
 schwarzermond_promotion_lasertank:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Laser Tank
 	Buildable:
@@ -132,7 +132,7 @@ schwarzermond_promotion_lasertank:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_haunebuiii:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Haunebu III
 	Buildable:
@@ -145,7 +145,7 @@ schwarzermond_promotion_haunebuiii:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_piercer:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Piercer
 	Buildable:
@@ -158,7 +158,7 @@ schwarzermond_promotion_piercer:
 	ProvidesPrerequisite:
 
 schwarzermond_promotion_dieglocke:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Die Glocke
 	Buildable:

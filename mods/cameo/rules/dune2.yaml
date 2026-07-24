@@ -564,7 +564,7 @@ dunee5mobslave:
 	Voiced:
 		VoiceSet: Dune2InfantryVoice
 updunecapture:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
@@ -1095,7 +1095,7 @@ dunehtnk:
 ####################################################################################################
 #		Dune 2 Structures
 ####################################################################################################
-^dune2concrete:
+^Dune2Concrete:
 	Interactable:
 	Building:
 		BuildSounds: dune2place.aud
@@ -1117,7 +1117,7 @@ dunehtnk:
 		Description: Provides a strong foundation that regenerates buildings on top of it.
 
 dune2concretea:
-	Inherits: ^dune2concrete
+	Inherits: ^Dune2Concrete
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1132,7 +1132,7 @@ dune2concretea:
 		Prerequisites: ~!selectatreides
 
 dune2concreteb:
-	Inherits: ^dune2concrete
+	Inherits: ^Dune2Concrete
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3

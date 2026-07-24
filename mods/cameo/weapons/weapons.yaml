@@ -4639,28 +4639,28 @@ MADTankTargeting:
 	ValidTargets: Structure
 	Range: 2500
 
-^deploytargeting:
+^DeployTargeting:
 	ValidTargets: Ground
 	ReloadDelay: 50
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 
-^aadeploytargeting:
-	Inherits: ^deploytargeting
+^AADeployTargeting:
+	Inherits: ^DeployTargeting
 	ValidTargets: Air
 	Warhead@1Dam: TargetDamage
 		ValidTargets: Air
 
 deploytargeting.5c0:
-	Inherits: ^deploytargeting
+	Inherits: ^DeployTargeting
 	Range: 5000
 
 deploytargeting.10c0:
-	Inherits: ^deploytargeting
+	Inherits: ^DeployTargeting
 	Range: 10000
 
 aadeploytargeting.8c0:
-	Inherits: ^aadeploytargeting
+	Inherits: ^AADeployTargeting
 	Range: 8000
 
 dummytargeting:

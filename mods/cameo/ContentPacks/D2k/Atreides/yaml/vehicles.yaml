@@ -27,7 +27,7 @@ atreides_mobileconstructionvehicle:
 		Image: d2k_mcv
 
 combat_tank.atreides:
-	Inherits: ^combat_tank
+	Inherits: ^CombatTank
 	Buildable:
 		Prerequisites: ~heavy.atreides_combat
 		Description: Main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry

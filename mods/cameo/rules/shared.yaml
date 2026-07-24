@@ -23,7 +23,7 @@ DummyActor:
 	TeleportNetwork:
 		Type: nydus
 
-^usa_composite_armor_upgrade:
+^USACompositeArmorUpgrade:
 	GrantConditionOnPrerequisite@usauparmor:
 		Condition: usauparmor
 		Prerequisites: usauparmor

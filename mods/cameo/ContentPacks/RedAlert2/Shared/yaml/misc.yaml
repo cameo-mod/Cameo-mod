@@ -107,7 +107,7 @@ OILB.RA2:
 	-WithDeathAnimation:
 
 ra2gacnst.infiltrated:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Allied Buildings Plans
 	Buildable:
@@ -159,7 +159,7 @@ ra2gayard:
 		TargetTypes: Ground, Water, C4, Structure
 
 ra2_awall:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 200
 	CustomSellValue:
@@ -196,7 +196,7 @@ ra2_awall:
 		Type: ra2_awall
 
 ra2_swall:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 200
 	CustomSellValue:
@@ -233,7 +233,7 @@ ra2_swall:
 		Type: ra2_swall
 
 ra2_ywall:
-	Inherits: ^wall
+	Inherits: ^Wall
 	Valued:
 		Cost: 200
 	CustomSellValue:
@@ -270,7 +270,7 @@ ra2_ywall:
 		Type: ra2_ywall
 
 ra2nacnst.infiltrated:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Soviet Buildings Plans
 	Buildable:
@@ -314,7 +314,7 @@ ra2nayard:
 ##############################################
 
 yrnacnst.infiltrated:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Yuri Buildings Plans
 	Buildable:
@@ -563,12 +563,12 @@ YRSLAV:
 ra2v3rocket:
 	Inherits: ^ShootableMissile
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Health:
 		HP: 25000
 	RevealsShroud:
@@ -1392,12 +1392,12 @@ yrbpln:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Selectable:
 	Tooltip:
 		Name: MiG Bomber
@@ -1547,7 +1547,7 @@ yrlunr.husk:
 
 yrspyp:
 	Inherits: ^AirstrikePlane
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
 	Tooltip:
 		Name: Spy Plane
 	Valued:
@@ -1652,9 +1652,9 @@ ra2cplane:
 
 ra2cplanesov:
 	Inherits: ^AirstrikePlane
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	ParaDrop:
 		DropRange: 4c0
 		ChuteSound: sparadra.wav
@@ -4034,7 +4034,7 @@ ra2_tree28.Husk:
 ####################################################################################################
 
 upra2aegismissiles:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Aegis Cruiser Ground Missiles
 	Valued:
@@ -4412,7 +4412,7 @@ ra2shkhero:
 # ### Tesla tree
 
 # upemptesla:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: EMP Tesla Weapons
 # 	Buildable:
@@ -4425,7 +4425,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2ttnk:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Tesla Tank
 # 	Buildable:
@@ -4438,7 +4438,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # uparctesla:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Tesla Arcing
 # 	Buildable:
@@ -4456,7 +4456,7 @@ ra2shkhero:
 # 		Prerequisites: uparctesla
 
 # ra2_soviets_upgrade_teslacoilchargers:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Tesla Coil Chargers
 # 	Buildable:
@@ -4471,7 +4471,7 @@ ra2shkhero:
 # ### Radiation tree
 
 # upra2terror:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Terrorist
 # 	Buildable:
@@ -4484,7 +4484,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2deso:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Desolator
 # 	Buildable:
@@ -4497,7 +4497,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # upra2dtruck:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Demo Truck
 # 	Buildable:
@@ -4510,7 +4510,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_doctrine_nuclearmunitions:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Nuclear Munitions
 # 	Buildable:
@@ -4521,7 +4521,7 @@ ra2shkhero:
 # 	RenderSprites:
 # 	ProvidesPrerequisite:
 
-# ^ra2sovietsRadShells:
+# ^RA2SovietsRadShells:
 # 	GrantConditionOnPrerequisite@RadShells:
 # 		Condition: ra2_soviets_doctrine_nuclearmunitions
 # 		Prerequisites: ra2_soviets_doctrine_nuclearmunitions
@@ -4534,7 +4534,7 @@ ra2shkhero:
 # ### Industry tree
 
 # upra2mig:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock ra1_soviets_migattackbomber Bomber
 # 	Buildable:
@@ -4547,7 +4547,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_upgrade_terrordronesurprise:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Terror Drone Surprise
 # 	Buildable:
@@ -4571,7 +4571,7 @@ ra2shkhero:
 # 		Upgrades: ra2_soviets_upgrade_terrordronesurprise
 
 # upyrngindp:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Industrial Plant
 # 	Buildable:
@@ -4584,7 +4584,7 @@ ra2shkhero:
 # 	ProvidesPrerequisite:
 
 # ra2_soviets_doctrine_heavyarmorplatings:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Soviet Armor
 # 	Buildable:
@@ -5202,8 +5202,8 @@ ra2_tractor_driveby:
 # 	Inherits@vo: ^AttackTurretedVoice
 # 	Inherits@EMP: ^TurretEMP
 # 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
-# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-# 	Inherits@armor: ^ra2sovietsArmorPlatings
+# 	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+# 	Inherits@armor: ^RA2SovietsArmorPlatings
 # 	Valued:
 # 		Cost: 1750
 # 	Tooltip:
@@ -5308,8 +5308,8 @@ ra2_tractor_driveby:
 # 	Inherits@vo: ^AttackTurretedVoice
 # 	Inherits@EMP: ^TurretEMP
 # 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
-# 	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-# 	Inherits@armor: ^ra2sovietsArmorPlatings
+# 	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+# 	Inherits@armor: ^RA2SovietsArmorPlatings
 # 	Valued:
 # 		Cost: 1750
 # 	Tooltip:

@@ -1,5 +1,5 @@
 ra2_soviets_doctrine_conscription:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Conscription
 	Buildable:
@@ -16,7 +16,7 @@ ra2_soviets_doctrine_conscription:
 		Prerequisite: global_conscription_buff
 
 ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Harsh Environment Infantry Conditioning
 	Buildable:
@@ -33,7 +33,7 @@ ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 		Prerequisite: ra2_soviets_doctrine_1
 
 ra2_soviets_doctrine_shocktroopertraining:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Shock Trooper Training
 	Buildable:
@@ -50,7 +50,7 @@ ra2_soviets_doctrine_shocktroopertraining:
 		Prerequisite: ra2_soviets_doctrine_1
 
 ra2_soviets_doctrine_heavyarmorplatings:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Heavy Armor Platings
 	Buildable:
@@ -65,7 +65,7 @@ ra2_soviets_doctrine_heavyarmorplatings:
 		Prerequisite: ra2_soviets_doctrine_2
 
 ra2_soviets_doctrine_reactivearmor:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Reactive Armor
 	Buildable:
@@ -80,7 +80,7 @@ ra2_soviets_doctrine_reactivearmor:
 		Prerequisite: ra2_soviets_doctrine_2
 
 ra2_soviets_doctrine_tesladischargearmor:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Tesla Discharge Armor
 	Buildable:
@@ -95,7 +95,7 @@ ra2_soviets_doctrine_tesladischargearmor:
 		Prerequisite: ra2_soviets_doctrine_2
 
 ra2_soviets_doctrine_firemunitions:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Fire Munitions
 	Buildable:
@@ -110,7 +110,7 @@ ra2_soviets_doctrine_firemunitions:
 		Prerequisite: ra2_soviets_doctrine_3
 
 ra2_soviets_doctrine_nuclearmunitions:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Nuclear Munitions
 	Buildable:
@@ -125,7 +125,7 @@ ra2_soviets_doctrine_nuclearmunitions:
 		Prerequisite: ra2_soviets_doctrine_3
 
 ra2_soviets_doctrine_teslamunitions:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Tesla Munitions
 	Buildable:
@@ -140,7 +140,7 @@ ra2_soviets_doctrine_teslamunitions:
 		Prerequisite: ra2_soviets_doctrine_3
 
 ra2_soviets_upgrade_terrordronesurprise:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Terror Drone Surprise
 	Buildable:
@@ -150,7 +150,7 @@ ra2_soviets_upgrade_terrordronesurprise:
 		Image: ra2_soviets_terrordrone
 
 ra2_soviets_upgrade_teslacoilchargers:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Tesla Coil Chargers
 	Buildable:
@@ -164,7 +164,7 @@ ra2_soviets_upgrade_teslacoilchargers:
 ### Battle Lab ###
 
 ra2_soviets_upgrade_teslaoverload:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Tesla Overload
 	Buildable:
@@ -174,7 +174,7 @@ ra2_soviets_upgrade_teslaoverload:
 		Image: ra2_soviets_upgrade_teslaoverload
 
 ra2_soviets_upgrade_heavycannons:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Heavy Cannons
 	Buildable:
@@ -184,7 +184,7 @@ ra2_soviets_upgrade_heavycannons:
 		Image: ra2_soviets_upgrade_heavycannons
 
 ra2_soviets_upgrade_grindertanktreads:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Grinder Tank Treads
 	Buildable:
@@ -194,7 +194,7 @@ ra2_soviets_upgrade_grindertanktreads:
 		Image: ra2_soviets_upgrade_grindertanktreads
 
 ra2_soviets_upgrade_kirovarmorplatings:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Kirov Armor Platings
 	Buildable:
@@ -204,7 +204,7 @@ ra2_soviets_upgrade_kirovarmorplatings:
 		Image: ra2_soviets_upgrade_kirovarmorplatings
 
 ra2_soviets_upgrade_gastroburners:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Gastroburners
 	Buildable:
@@ -214,7 +214,7 @@ ra2_soviets_upgrade_gastroburners:
 		Image: ra2_soviets_upgrade_gastroburners
 
 ra2_soviets_upgrade_kirovatomicbombs:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Kirov Atomic Bombs
 	Buildable:

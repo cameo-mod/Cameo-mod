@@ -173,7 +173,7 @@
 		Upgrades: td_nod_upgrade_cyberneticmodifications
 
 td_nod_upgrade_guerillatactics:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Guerilla Tactics
 	Valued:
@@ -188,7 +188,7 @@ td_nod_upgrade_guerillatactics:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_tiberiuminfusion:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tiberium Infusion
 	Valued:
@@ -203,7 +203,7 @@ td_nod_upgrade_tiberiuminfusion:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_improvedartilleries:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Improved Artilleries
 	Valued:
@@ -218,7 +218,7 @@ td_nod_upgrade_improvedartilleries:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_blackmarketupgrades:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Black Market Upgrades
 	Valued:
@@ -233,7 +233,7 @@ td_nod_upgrade_blackmarketupgrades:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_elementalwarfare:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Elemental Warfare
 	Valued:
@@ -248,7 +248,7 @@ td_nod_upgrade_elementalwarfare:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_elitecapacitors:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Elite Capacitors
 	Valued:
@@ -263,7 +263,7 @@ td_nod_upgrade_elitecapacitors:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_cyberneticmodifications:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cybernetic Modifications
 	Valued:
@@ -278,7 +278,7 @@ td_nod_upgrade_cyberneticmodifications:
 	ProvidesPrerequisite:
 
 td_nod_upgrade_advancedguerillatactics:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Guerilla Tactics
 	Valued:
@@ -295,7 +295,7 @@ td_nod_upgrade_advancedguerillatactics:
 		Actor: team_upgrade.up_advancedguerillatactics
 
 team_upgrade.up_advancedguerillatactics:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: td_nod_upgrade_advancedguerillatactics
 	RenderSprites:

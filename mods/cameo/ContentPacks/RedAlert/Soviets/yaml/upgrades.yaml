@@ -1,5 +1,5 @@
 ra1_soviets_doctrine_conscription:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Conscription Doctrine
 	Buildable:
@@ -18,7 +18,7 @@ ra1_soviets_doctrine_conscription:
 		Prerequisite: global_conscription_buff
 
 ra1_soviets_doctrine_industrialefficiency:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Industrial Efficiency Doctrine
 	Buildable:
@@ -35,7 +35,7 @@ ra1_soviets_doctrine_industrialefficiency:
 		Prerequisite: ra_soviet_doctrine_1
 
 ra1_soviets_doctrine_inferno:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Inferno Doctrine
 	Buildable:
@@ -52,7 +52,7 @@ ra1_soviets_doctrine_inferno:
 		Prerequisite: ra_soviet_doctrine_1
 
 ra1_soviets_doctrine_teslaandexperimentaltech:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Tesla and Experimental Tech Doctrine
 	Buildable:
@@ -69,7 +69,7 @@ ra1_soviets_doctrine_teslaandexperimentaltech:
 		Prerequisite: ra_soviet_doctrine_2
 
 ra1_soviets_doctrine_heavyarmor:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Heavy Armor Doctrine
 	Buildable:
@@ -86,7 +86,7 @@ ra1_soviets_doctrine_heavyarmor:
 		Prerequisite: ra_soviet_doctrine_2
 
 ra1_soviets_doctrine_nuclearwar:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Nuclear War Doctrine
 	Buildable:
@@ -103,7 +103,7 @@ ra1_soviets_doctrine_nuclearwar:
 		Prerequisite: ra_soviet_doctrine_2
 
 ra1_soviets_upgrade_hazmatsuits:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Hazmat Suits
 	Buildable:
@@ -113,7 +113,7 @@ ra1_soviets_upgrade_hazmatsuits:
 		Image: ra1_soviets_upgrade_hazmatsuits
 
 ra1_soviets_upgrade_vengeance:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Vengeance
 	Buildable:
@@ -123,7 +123,7 @@ ra1_soviets_upgrade_vengeance:
 		Image: ra1_soviets_upgrade_vengeance
 
 ra1_soviets_upgrade_menofsteel:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Men Of Steel
 	Buildable:
@@ -135,7 +135,7 @@ ra1_soviets_upgrade_menofsteel:
 		Actor: ra1_soviets_upgrade_menofsteel_proxy_actor
 
 ra1_soviets_upgrade_massproduction:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Mass Production
 	Buildable:
@@ -145,7 +145,7 @@ ra1_soviets_upgrade_massproduction:
 		Image: ra1_soviets_upgrade_massproduction
 
 ra1_soviets_upgrade_wareconomy:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: War Economy
 	Buildable:
@@ -157,7 +157,7 @@ ra1_soviets_upgrade_wareconomy:
 		Actor: ra1_soviets_upgrade_wareconomy_proxy_actor
 
 ra1_soviets_upgrade_incendiarybullets:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Incendiary Bullets
 	Buildable:
@@ -167,7 +167,7 @@ ra1_soviets_upgrade_incendiarybullets:
 		Image: ra1_soviets_upgrade_incendiarybullets
 
 ra1_soviets_upgrade_scorchedearth:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Scorched Earth
 	Buildable:
@@ -179,7 +179,7 @@ ra1_soviets_upgrade_scorchedearth:
 		Actor: ra1_soviets_upgrade_scorchedearth_proxy_actor
 
 ra1_soviets_upgrade_teslaarcing:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Tesla Arcing
 	Buildable:
@@ -189,7 +189,7 @@ ra1_soviets_upgrade_teslaarcing:
 		Image: ra1_soviets_upgrade_teslaarcing
 
 ra1_soviets_upgrade_teslarockets:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Tesla Rockets
 	Buildable:
@@ -199,7 +199,7 @@ ra1_soviets_upgrade_teslarockets:
 		Image: ra1_soviets_upgrade_teslarockets
 
 ra1_soviets_upgrade_reactoroverload:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Reactor Overload
 	Buildable:
@@ -211,7 +211,7 @@ ra1_soviets_upgrade_reactoroverload:
 		Actor: ra1_soviets_upgrade_reactoroverload_proxy_actor
 
 ra1_soviets_upgrade_autoloaders:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Autoloaders
 	Buildable:
@@ -221,7 +221,7 @@ ra1_soviets_upgrade_autoloaders:
 		Image: ra1_soviets_upgrade_autoloaders
 
 ra1_soviets_upgrade_highexplosiverockets:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: High Explosive Rockets
 	Buildable:
@@ -231,7 +231,7 @@ ra1_soviets_upgrade_highexplosiverockets:
 		Image: ra1_soviets_upgrade_highexplosiverockets
 
 ra1_soviets_upgrade_stalinium:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Stalinium
 	Buildable:
@@ -243,7 +243,7 @@ ra1_soviets_upgrade_stalinium:
 		Actor: ra1_soviets_upgrade_stalinium_proxy_actor
 
 ra1_soviets_upgrade_unstableisotopes:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Unstable Isotopes
 	Buildable:
@@ -253,7 +253,7 @@ ra1_soviets_upgrade_unstableisotopes:
 		Image: ra1_soviets_upgrade_unstableisotopes
 
 ra1_soviets_upgrade_thermonuclearrockets:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Thermonuclear Rockets
 	Buildable:
@@ -263,7 +263,7 @@ ra1_soviets_upgrade_thermonuclearrockets:
 		Image: ra1_soviets_upgrade_thermonuclearrockets
 
 ra1_soviets_upgrade_nucleartankshells:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Nuclear Tank Shells
 	Buildable:
@@ -275,7 +275,7 @@ ra1_soviets_upgrade_nucleartankshells:
 		Actor: ra1_soviets_upgrade_nuclearshells_proxy_actor
 
 ra1_soviets_upgrade_afterburners:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Afterburners
 	Buildable:
@@ -285,7 +285,7 @@ ra1_soviets_upgrade_afterburners:
 		Image: ra1_soviets_upgrade_afterburners
 
 ra1_soviets_upgrade_hammertank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Hammer Tank Upgrade
 	Buildable:
@@ -295,7 +295,7 @@ ra1_soviets_upgrade_hammertank:
 		Image: ra1_soviets_hammertank
 
 ra1_soviets_upgrade_heavyteslatank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Heavy Tesla Tank Upgrade
 	Buildable:
@@ -305,7 +305,7 @@ ra1_soviets_upgrade_heavyteslatank:
 		Image: ra1_soviets_heavyteslatank
 
 ra1_soviets_upgrade_shtoradefensesystem:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Shtora Defense System Upgrade
 	Buildable:
@@ -315,7 +315,7 @@ ra1_soviets_upgrade_shtoradefensesystem:
 		Image: ra1_soviets_upgrade_shtoradefensesystem
 
 ra1_soviets_upgrade_kotinnucleartank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Kotin Nuclear Tank Upgrade
 	Buildable:
@@ -325,7 +325,7 @@ ra1_soviets_upgrade_kotinnucleartank:
 		Image: ra1_soviets_kotinnucleartank
 
 ra1_soviets_upgrade_commissar:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Commissar
 	Buildable:
@@ -335,7 +335,7 @@ ra1_soviets_upgrade_commissar:
 		Image: ra1_soviets_commissar
 
 ra1_soviets_upgrade_heatraytank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Heatray Tank
 	Buildable:
@@ -345,7 +345,7 @@ ra1_soviets_upgrade_heatraytank:
 		Image: ra1_soviets_heatraytank
 
 ra1_soviets_upgrade_teslayak:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Tesla Yak
 	Buildable:
@@ -355,7 +355,7 @@ ra1_soviets_upgrade_teslayak:
 		Image: ra1_soviets_teslayak
 
 ra1_soviets_upgrade_armoredyak:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Armored Yak
 	Buildable:
@@ -365,7 +365,7 @@ ra1_soviets_upgrade_armoredyak:
 		Image: ra1_soviets_armoredyak
 
 ra1_soviets_upgrade_nuclearyak:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Nuclear Yak
 	Buildable:
@@ -377,7 +377,7 @@ ra1_soviets_upgrade_nuclearyak:
 #############################
 
 # ra1_soviets_doctrine_conscription:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Conscription
 # 	Valued:
@@ -392,7 +392,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_unstableisotopes:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Nuclear Engines
 # 	Valued:
@@ -407,7 +407,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_highexplosiverockets:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Rocket Enhancements
 # 	Valued:
@@ -422,7 +422,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_autoloaders:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Soviet Auto Loaders
 # 	Valued:
@@ -437,7 +437,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_doctrine_teslaandexperimentaltech:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Experimental Tesla Weaponry
 # 	Valued:
@@ -452,7 +452,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_doctrine_inferno:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Advanced Thermobarics
 # 	Valued:
@@ -467,7 +467,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 	ProvidesPrerequisite:
 
 # ra1_soviets_upgrade_stalinium:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Soviet Steel "Stalinium"
 # 	Valued:
@@ -484,7 +484,7 @@ ra1_soviets_upgrade_nuclearyak:
 # 		Actor: team_upgrade.ra_upgrade_stalinium
 
 # team_upgrade.ra_upgrade_stalinium:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	ProvidesPrerequisite:
 # 		Prerequisite: ra1_soviets_upgrade_stalinium
 # 	RenderSprites:

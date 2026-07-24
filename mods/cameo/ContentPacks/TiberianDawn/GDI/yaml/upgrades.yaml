@@ -123,7 +123,7 @@
 		Upgrades: td_gdi_upgrade_lightweightarmorplating
 
 td_gdi_upgrade_longrangesensors:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Long Range Sensors
 	Valued:
@@ -138,7 +138,7 @@ td_gdi_upgrade_longrangesensors:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_armorpiercingbullets:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Armor Piercing Bullets
 	Valued:
@@ -153,7 +153,7 @@ td_gdi_upgrade_armorpiercingbullets:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_a10airstrike:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Unlock A10 Airstrike
 	Valued:
@@ -168,7 +168,7 @@ td_gdi_upgrade_a10airstrike:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_heavyaircraftarmorplating:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Heavy Aircraft Armor Plating
 	Valued:
@@ -183,7 +183,7 @@ td_gdi_upgrade_heavyaircraftarmorplating:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_advancedmissiletargeting:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Advanced Missile Targeting
 	Valued:
@@ -198,7 +198,7 @@ td_gdi_upgrade_advancedmissiletargeting:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_cuttingedgeequipment:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cutting Edge Equipment
 	Valued:
@@ -213,7 +213,7 @@ td_gdi_upgrade_cuttingedgeequipment:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_highvelocitycannons:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: High Velocity Cannons
 	Valued:
@@ -228,7 +228,7 @@ td_gdi_upgrade_highvelocitycannons:
 	ProvidesPrerequisite:
 
 td_gdi_upgrade_lightweightarmorplating:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lightweight Armor Plating
 	Valued:
@@ -245,7 +245,7 @@ td_gdi_upgrade_lightweightarmorplating:
 	#ProvidesPrerequisite:
 
 team_upgrade.up_lightweightarmorplating:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: td_gdi_upgrade_lightweightarmorplating
 	RenderSprites:

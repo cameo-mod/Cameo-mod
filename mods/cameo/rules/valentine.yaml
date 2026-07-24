@@ -2006,7 +2006,7 @@ lovealienmob:
 		StartIfBelow: 100
 		DamageCooldown: 33
 
-^default_alien_mob:
+^DefaultAlienMob:
 	Inherits: E1
 	Inherits@MC: ^MCImmune
 	Inherits@vo: ^AttackFrontalVoice
@@ -2052,7 +2052,7 @@ lovealienmob:
 		DamageCooldown: 33
 
 svsmalien1:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	Explodes:
@@ -2060,7 +2060,7 @@ svsmalien1:
 		EmptyWeapon: GLAnthraxGreen
 
 svsmalien2:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2070,7 +2070,7 @@ svsmalien2:
 		EmptyWeapon: GLAnthraxBlue
 
 svsmalien3:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2080,7 +2080,7 @@ svsmalien3:
 		EmptyWeapon: GLAnthraxPurple
 
 svsmalien4:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2090,7 +2090,7 @@ svsmalien4:
 		EmptyWeapon: GLAnthraxLarge
 
 svsmalien5:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:
@@ -2100,7 +2100,7 @@ svsmalien5:
 		EmptyWeapon: GLAnthraxBlueLarge
 
 svsmalien6:
-	Inherits: ^default_alien_mob
+	Inherits: ^DefaultAlienMob
 	AttackFrontal:
 		FacingTolerance: 0
 	RenderSprites:

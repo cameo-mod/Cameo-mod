@@ -1,5 +1,5 @@
 ordos_upgrade_lightfactory:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Light Factory Upgrade
 	Buildable:
@@ -17,7 +17,7 @@ ordos_upgrade_lightfactory:
 		Image: light.ordos
 
 ordos_upgrade_antiairtrooper:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Anti Air Trooper Upgrade
 	Buildable:
@@ -28,7 +28,7 @@ ordos_upgrade_antiairtrooper:
 		Image: ordos_antiairtrooper
 
 ordos_upgrade_heavycombattank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Heavy Combat Tank Upgrade
 	Buildable:
@@ -40,7 +40,7 @@ ordos_upgrade_heavycombattank:
 		Image: ordos_heavycombattank
 
 ordos_upgrade_heavycombattankrockets:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Heavy Combat Tank Rockets Upgrade
 	Buildable:
@@ -51,7 +51,7 @@ ordos_upgrade_heavycombattankrockets:
 		Image: ordos_upgrade_heavycombattankrockets
 
 ordos_upgrade_heavyautoguntank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Heavy Autogun Tank Upgrade
 	Buildable:
@@ -62,7 +62,7 @@ ordos_upgrade_heavyautoguntank:
 		Image: ordos_heavyautoguntank
 
 ordos_upgrade_shields:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Ordos Shields
 	Buildable:
@@ -73,7 +73,7 @@ ordos_upgrade_shields:
 		Image: ordos_upgrade_shields
 
 ordos_upgrade_biologicalwarfare:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Biological Warfare
 	Buildable:
@@ -84,7 +84,7 @@ ordos_upgrade_biologicalwarfare:
 		Image: ordos_upgrade_biologicalwarfare
 
 ordos_upgrade_contraband:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Contraband
 	Buildable:
@@ -95,7 +95,7 @@ ordos_upgrade_contraband:
 		Image: ordos_upgrade_para
 
 ordos_upgrade_lasercartridges:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Laser Cartridges
 	Valued:
@@ -109,7 +109,7 @@ ordos_upgrade_lasercartridges:
 		Image: ordos_upgrade_lasercartridges
 
 ordos_upgrade_rapidfirearmorpiercingbelts:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Rapid Fire Armor-Piercing Belts
 	Buildable:
@@ -120,7 +120,7 @@ ordos_upgrade_rapidfirearmorpiercingbelts:
 		Image: ordos_upgrade_rapidfirearmorpiercingbelts
 
 ordos_upgrade_hoverdrive:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Hover Drive
 	Buildable:

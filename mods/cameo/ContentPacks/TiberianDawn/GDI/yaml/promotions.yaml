@@ -3,7 +3,7 @@
 ####################################################################################################
 
 td_gdi_promotion_empgrenadier:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock EMP Grenadier
 	Buildable:
@@ -17,7 +17,7 @@ td_gdi_promotion_empgrenadier:
 		Prerequisite: td_gdi_promotion_empgrenadier
 
 td_gdi_promotion_missilesoldier:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Missile Soldier
 	Buildable:
@@ -31,7 +31,7 @@ td_gdi_promotion_missilesoldier:
 		Prerequisite: td_gdi_promotion_missilesoldier
 
 td_gdi_promotion_sniper:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Sniper
 	Buildable:
@@ -45,7 +45,7 @@ td_gdi_promotion_sniper:
 		Prerequisite: td_gdi_promotion_sniper
 
 td_gdi_promotion_assaultapc:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Assault APC
 	Buildable:
@@ -59,7 +59,7 @@ td_gdi_promotion_assaultapc:
 		Prerequisite: td_gdi_promotion_assaultapc
 
 td_gdi_promotion_humveemkii:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Humvee Mk. II
 	Buildable:
@@ -73,7 +73,7 @@ td_gdi_promotion_humveemkii:
 		Prerequisite: td_gdi_promotion_humveemkii
 
 td_gdi_promotion_predatortank:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Predator Tank
 	Buildable:
@@ -87,7 +87,7 @@ td_gdi_promotion_predatortank:
 		Prerequisite: td_gdi_promotion_predatortank
 
 td_gdi_promotion_mammothtankmk3:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Mammoth Tank Mk3
 	Buildable:
@@ -101,7 +101,7 @@ td_gdi_promotion_mammothtankmk3:
 		Prerequisite: td_gdi_promotion_mammothtankmk3
 
 td_gdi_promotion_gdidefenserig:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock GDI Defense Rig
 	Buildable:
@@ -115,7 +115,7 @@ td_gdi_promotion_gdidefenserig:
 		Prerequisite: td_gdi_promotion_gdidefenserig
 
 td_gdi_promotion_shotgunner:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Shotgunner
 	Buildable:
@@ -129,7 +129,7 @@ td_gdi_promotion_shotgunner:
 		Prerequisite: td_gdi_promotion_shotgunner
 
 td_gdi_promotion_gdiofficer:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock GDI Officer
 	Buildable:
@@ -143,7 +143,7 @@ td_gdi_promotion_gdiofficer:
 		Prerequisite: td_gdi_promotion_gdiofficer
 
 td_gdi_promotion_havocandexosuit:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Havoc and Exosuit
 	Buildable:
@@ -157,7 +157,7 @@ td_gdi_promotion_havocandexosuit:
 		Prerequisite: td_gdi_promotion_havocandexosuit
 
 td_gdi_promotion_firehawk:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Firehawk
 	Buildable:

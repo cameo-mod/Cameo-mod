@@ -1,5 +1,5 @@
 ixian_upgrade_twinbazooka:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Twin Bazooka Upgrade
 	Buildable:
@@ -11,7 +11,7 @@ ixian_upgrade_twinbazooka:
 		Image: ixian_upgrade_twinbazooka
 
 ixian_upgrade_tungstenneedleguns:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tungsten Needle Guns
 	Valued:
@@ -26,7 +26,7 @@ ixian_upgrade_tungstenneedleguns:
 		Image: ixian_upgrade_tungstenneedleguns
 
 ixian_upgrade_personalshield:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Personal Shield
 	Valued:
@@ -41,7 +41,7 @@ ixian_upgrade_personalshield:
 		Image: ixian_personalshield_icon
 
 ixian_upgrade_generalpurposearmor:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: General Purpose Armor
 	Valued:
@@ -56,7 +56,7 @@ ixian_upgrade_generalpurposearmor:
 		Image: ixian_kodatank
 
 ixian_upgrade_reinforcedbarrel:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Reinforced Barrel
 	Valued:
@@ -70,7 +70,7 @@ ixian_upgrade_reinforcedbarrel:
 		Image: d2k_siege_tank_higher_range
 
 ixian_upgrade_heavymissiles:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Heavy Missiles
 	Valued:
@@ -84,7 +84,7 @@ ixian_upgrade_heavymissiles:
 		Image: ix_missile_tank
 
 ixian_upgrade_heavykodatank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Heavy Koda Tank Upgrade
 	Buildable:
@@ -96,7 +96,7 @@ ixian_upgrade_heavykodatank:
 		Image: ixian_heavykodatank
 
 ixian_upgrade_advancedixiantechnology:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Ixian Technology
 	Valued:
@@ -113,7 +113,7 @@ ixian_upgrade_advancedixiantechnology:
 		Actor: team_upgrade.d2k_advanced_ixian_technology
 
 team_upgrade.d2k_advanced_ixian_technology:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: ixian_upgrade_advancedixiantechnology
 	RenderSprites:

@@ -1,5 +1,5 @@
 ra1_allies_upgrade_advancedradarsystems:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Advanced Radar Systems
 	Valued:
@@ -14,7 +14,7 @@ ra1_allies_upgrade_advancedradarsystems:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_infantryarmorplating:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Armor Plating
 	Valued:
@@ -29,7 +29,7 @@ ra1_allies_upgrade_infantryarmorplating:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_reinforcedstructures:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Reinforced Structures
 	Valued:
@@ -44,7 +44,7 @@ ra1_allies_upgrade_reinforcedstructures:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_airsuperioritydoctrine:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Air Superiority Doctrine
 	Valued:
@@ -59,7 +59,7 @@ ra1_allies_upgrade_airsuperioritydoctrine:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_lasertargetingsystems:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Laser Targeting Systems
 	Valued:
@@ -74,7 +74,7 @@ ra1_allies_upgrade_lasertargetingsystems:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_chronoarmor:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Chrono Armor
 	Valued:
@@ -89,7 +89,7 @@ ra1_allies_upgrade_chronoarmor:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_cryomissiles:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cryo Missiles
 	Valued:
@@ -104,7 +104,7 @@ ra1_allies_upgrade_cryomissiles:
 	ProvidesPrerequisite:
 
 ra1_allies_upgrade_gpssatellitesupport:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: GPS Satellite Support
 	Valued:

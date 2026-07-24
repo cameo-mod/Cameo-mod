@@ -1592,7 +1592,7 @@ taavatarscrap4:
 # TA Upgrades Units
 #######################################
 taupsmokegrenades:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Smoke Grenade
 	Buildable:
@@ -1608,7 +1608,7 @@ taupsmokegrenades:
 		Prerequisite: taupsmokegrenades
 		
 taupmissilestorm:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Missile Storm
 	Buildable:
@@ -1624,7 +1624,7 @@ taupmissilestorm:
 		Prerequisite: taupmissilestorm
 		
 taupcharge:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Zone Trooper Charge
 	Buildable:
@@ -1640,7 +1640,7 @@ taupcharge:
 		Prerequisite: taupcharge
 		
 taupcharge2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commando Charge
 	Buildable:
@@ -1656,7 +1656,7 @@ taupcharge2:
 		Prerequisite: taupcharge2
 		
 tauplaserscope:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser Scope
 	Buildable:
@@ -1672,7 +1672,7 @@ tauplaserscope:
 		Prerequisite: tauplaserscope
 		
 taupflashbang:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flashbang
 	Buildable:
@@ -1688,7 +1688,7 @@ taupflashbang:
 		Prerequisite: taupflashbang
 		
 taupheatcannon:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT-MP-T
 	Buildable:
@@ -1704,7 +1704,7 @@ taupheatcannon:
 		Prerequisite: taupheatcannon
 		
 taupbarrage:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barrage
 	Buildable:
@@ -1720,7 +1720,7 @@ taupbarrage:
 		Prerequisite: taupbarrage
 		
 taupbatteringram:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battering Ram
 	Buildable:
@@ -1736,7 +1736,7 @@ taupbatteringram:
 		Prerequisite: taupbatteringram
 
 taupstealth1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Militant
 	Buildable:
@@ -1752,7 +1752,7 @@ taupstealth1:
 		Prerequisite: taupstealth1
 
 taupdefence1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Defense Matrix Rocket Militants
 	Buildable:
@@ -1768,7 +1768,7 @@ taupdefence1:
 		Prerequisite: taupdefence1
 
 taupflamer1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Conflagration
 	Buildable:
@@ -1783,7 +1783,7 @@ taupflamer1:
 	ProvidesPrerequisite:
 		Prerequisite: taupflamer1
 taupstealth2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Commando
 	Buildable:
@@ -1799,7 +1799,7 @@ taupstealth2:
 		Prerequisite: taupstealth2
 
 taupdefence2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Defense Matrix Confessor
 	Buildable:
@@ -1815,7 +1815,7 @@ taupdefence2:
 		Prerequisite: taupdefence2
 
 taupshield1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shields
 	Buildable:
@@ -1831,7 +1831,7 @@ taupshield1:
 		Prerequisite: taupshield1
 
 tauplasercut1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser Cutter
 	Buildable:
@@ -1846,7 +1846,7 @@ tauplasercut1:
 	ProvidesPrerequisite:
 		Prerequisite: tauplasercut1
 taupstealth3:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Specter
 	Buildable:
@@ -1862,7 +1862,7 @@ taupstealth3:
 		Prerequisite: taupstealth2
 
 tauptrade1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiberium Trade
 	Buildable:
@@ -1877,7 +1877,7 @@ tauptrade1:
 	ProvidesPrerequisite:
 		Prerequisite: tauptrade1
 tauptrade2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Crystal Trade
 	Buildable:
@@ -1892,7 +1892,7 @@ tauptrade2:
 	ProvidesPrerequisite:
 		Prerequisite: tauptrade2
 taupenergy1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Buy Energy
 	Buildable:
@@ -1908,7 +1908,7 @@ taupenergy1:
 		Prerequisite: taupenergy1
 
 taupbarbaric2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barbaric Blow
 	Buildable:
@@ -1925,7 +1925,7 @@ taupbarbaric2:
 
 
 taupbarbaric:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Barbaric Blow
 	Buildable:
@@ -1941,7 +1941,7 @@ taupbarbaric:
 		Prerequisite: taupbarbaric
 
 taupchemical1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chemical Rockets
 	Buildable:
@@ -1957,7 +1957,7 @@ taupchemical1:
 		Prerequisite: taupchemical1
 
 taupchemical2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Big Chemical Rockets
 	Buildable:
@@ -1976,7 +1976,7 @@ taupchemical2:
 # TA Upgrades Defences
 #######################################
 taupguidedmiss:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Guided Missiles
 	Buildable:
@@ -1992,7 +1992,7 @@ taupguidedmiss:
 		Prerequisite: taupguidedmiss
 
 taupsrarms1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Short-Range Arms
 	Buildable:

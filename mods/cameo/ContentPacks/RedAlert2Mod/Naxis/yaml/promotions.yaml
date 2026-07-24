@@ -1,5 +1,5 @@
 naxis_promotion_sarubiamodel:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Sarubia Model
 	Buildable:
@@ -12,7 +12,7 @@ naxis_promotion_sarubiamodel:
 	ProvidesPrerequisite:
 
 naxis_promotion_donnerschlagmodelandotheradvancedmissiles:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Donnerschlag Model and other advanced Missiles
 	Buildable:
@@ -25,7 +25,7 @@ naxis_promotion_donnerschlagmodelandotheradvancedmissiles:
 	ProvidesPrerequisite:
 
 naxis_promotion_shoekarnandking:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Shoe, Karn, and King
 	Buildable:
@@ -38,7 +38,7 @@ naxis_promotion_shoekarnandking:
 	ProvidesPrerequisite:
 
 naxis_promotion_bossestanks:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Bosses Tanks
 	Buildable:
@@ -53,7 +53,7 @@ naxis_promotion_bossestanks:
 #		Army
 
 naxis_promotion_generationiitanks:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Generation II tanks
 	Buildable:
@@ -66,7 +66,7 @@ naxis_promotion_generationiitanks:
 	ProvidesPrerequisite:
 
 naxis_promotion_heavyvehicles:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Heavy Vehicles
 	Buildable:
@@ -79,7 +79,7 @@ naxis_promotion_heavyvehicles:
 	ProvidesPrerequisite:
 
 naxis_promotion_betterparatanks:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Better Paratanks
 	Buildable:
@@ -92,7 +92,7 @@ naxis_promotion_betterparatanks:
 	ProvidesPrerequisite:
 
 naxis_promotion_theratte:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: The Ratte
 	Buildable:
@@ -107,7 +107,7 @@ naxis_promotion_theratte:
 #		Soldats
 
 naxis_promotion_partisans:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Partisans
 	Buildable:
@@ -120,7 +120,7 @@ naxis_promotion_partisans:
 	ProvidesPrerequisite:
 
 naxis_promotion_shrek:
-	Inherits: ^promotion_upgrade_template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Shrek
 	Buildable:

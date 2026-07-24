@@ -1,5 +1,5 @@
 yuri_doctrine_psioniclegion:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Psionic Legion
 	Buildable:
@@ -16,7 +16,7 @@ yuri_doctrine_psioniclegion:
 		Prerequisite: global_conscription_buff
 
 yuri_doctrine_psionicfanatics:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Psionic Fanatics
 	Buildable:
@@ -31,7 +31,7 @@ yuri_doctrine_psionicfanatics:
 		Prerequisite: ra2_yuri_doctrine_1
 
 yuri_doctrine_psionicelite:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Psionic Elite
 	Buildable:
@@ -48,7 +48,7 @@ yuri_doctrine_psionicelite:
 		Prerequisite: ra2_yuri_doctrine_1
 
 yuri_doctrine_lasherhecannon:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Lasher HE Cannon
 	Buildable:
@@ -63,7 +63,7 @@ yuri_doctrine_lasherhecannon:
 		Prerequisite: ra2_yuri_doctrine_2
 
 yuri_doctrine_lashertoxicgasshells:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Lasher Toxic Gas Shells
 	Buildable:
@@ -78,7 +78,7 @@ yuri_doctrine_lashertoxicgasshells:
 		Prerequisite: ra2_yuri_doctrine_2
 
 yuri_doctrine_lasherlasercannon:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Lasher Laser Cannon
 	Buildable:
@@ -93,7 +93,7 @@ yuri_doctrine_lasherlasercannon:
 		Prerequisite: ra2_yuri_doctrine_2
 
 yuri_doctrine_scrapvehiclearmor:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Scrap Vehicle Armor
 	Buildable:
@@ -108,7 +108,7 @@ yuri_doctrine_scrapvehiclearmor:
 		Prerequisite: ra2_yuri_doctrine_3
 
 yuri_doctrine_chaosgasemitters:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Chaos Gas Emitters
 	Buildable:
@@ -123,7 +123,7 @@ yuri_doctrine_chaosgasemitters:
 		Prerequisite: ra2_yuri_doctrine_3
 
 yuri_doctrine_psionicvehicleshields:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Psionic Vehicle Shields
 	Buildable:
@@ -138,7 +138,7 @@ yuri_doctrine_psionicvehicleshields:
 		Prerequisite: ra2_yuri_doctrine_3
 
 yuri_upgrade_initiatepowersurge:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Initiate Power Surge
 	Buildable:
@@ -148,7 +148,7 @@ yuri_upgrade_initiatepowersurge:
 		Image: yuri_upgrade_initiatepowersurge
 
 yuri_upgrade_brutestrengthmutations:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Brute Strength Mutations
 	Buildable:
@@ -159,7 +159,7 @@ yuri_upgrade_brutestrengthmutations:
 	ProvidesPrerequisite:
 
 yuri_upgrade_lasherarmorimprovements:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Lasher Armor Improvements
 	Buildable:
@@ -170,7 +170,7 @@ yuri_upgrade_lasherarmorimprovements:
 	ProvidesPrerequisite:
 
 yuri_upgrade_gatlingfirepowerupgrade:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Gatling Firepower Upgrade
 	Buildable:
@@ -181,7 +181,7 @@ yuri_upgrade_gatlingfirepowerupgrade:
 		Image: yuri_upgrade_gatlingfirepowerupgrade
 
 yuri_upgrade_meltingvirus:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Melting Virus
 	Buildable:
@@ -193,7 +193,7 @@ yuri_upgrade_meltingvirus:
 	ProvidesPrerequisite:
 
 yuri_upgrade_domination:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Domination
 	Buildable:
@@ -204,7 +204,7 @@ yuri_upgrade_domination:
 	ProvidesPrerequisite:
 
 yuri_upgrade_gatlingspeedupgrade:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Gatling Speed Upgrade
 	Buildable:
@@ -216,7 +216,7 @@ yuri_upgrade_gatlingspeedupgrade:
 	ProvidesPrerequisite:
 
 yuri_upgrade_corrosiveammo:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Corrosive Ammo
 	Buildable:
@@ -228,7 +228,7 @@ yuri_upgrade_corrosiveammo:
 	ProvidesPrerequisite:
 
 yuri_upgrade_supermagnets:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Super Magnets
 	Buildable:
@@ -240,7 +240,7 @@ yuri_upgrade_supermagnets:
 	ProvidesPrerequisite:
 
 yuri_upgrade_bioreactorefficiency:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Bio Reactor Efficiency
 	Buildable:
@@ -252,7 +252,7 @@ yuri_upgrade_bioreactorefficiency:
 	ProvidesPrerequisite:
 
 yuri_upgrade_bioengineering:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Bio Engineering
 	Buildable:
@@ -264,7 +264,7 @@ yuri_upgrade_bioengineering:
 	ProvidesPrerequisite:
 
 yuri_upgrade_psychicrange:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Psychic Range
 	Buildable:
@@ -275,7 +275,7 @@ yuri_upgrade_psychicrange:
 		Image: yuri_upgrade_psychicrange
 
 yuri_upgrade_psionicarmor:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Psionic Armor
 	Buildable:
@@ -285,7 +285,7 @@ yuri_upgrade_psionicarmor:
 		Image: yuri_upgrade_psionicarmor
 
 yuri_upgrade_toxicengines:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Toxic Engines
 	Buildable:
@@ -295,7 +295,7 @@ yuri_upgrade_toxicengines:
 		Image: yuri_upgrade_toxicengines
 
 yuri_upgrade_psionicplasmabeams:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Psionic Plasma Beams
 	Buildable:
@@ -305,7 +305,7 @@ yuri_upgrade_psionicplasmabeams:
 		Image: yuri_upgrade_psionicplasmabeams
 
 yuri_upgrade_gravitondrive:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Graviton Drive
 	Valued:
@@ -317,7 +317,7 @@ yuri_upgrade_gravitondrive:
 		Image: yuri_upgrade_gravitondrive
 
 yuri_upgrade_disksiphonattack:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Disk Siphon Attack
 	Valued:
@@ -329,7 +329,7 @@ yuri_upgrade_disksiphonattack:
 		Image: yuri_upgrade_disksiphonattack
 
 yuri_upgrade_diskhighfrequencylasers:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Disk High Frequency Lasers
 	Valued:
@@ -341,7 +341,7 @@ yuri_upgrade_diskhighfrequencylasers:
 		Image: yuri_upgrade_diskhighfrequencylasers
 
 yuri_upgrade_infantrystealthsuits:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Infantry Stealth Suits
 	Buildable:
@@ -353,7 +353,7 @@ yuri_upgrade_infantrystealthsuits:
 		Actor: ra2_yuri_upgrade_stealthsuits_proxy_actor
 
 yuri_upgrade_geneticmodificationboost:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Genetic Modification Boost
 	Buildable:
@@ -365,7 +365,7 @@ yuri_upgrade_geneticmodificationboost:
 		Actor: ra2_yuri_upgrade_geneticboost_proxy_actor
 
 yuri_upgrade_psychicvision:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Psychic Vision
 	Buildable:

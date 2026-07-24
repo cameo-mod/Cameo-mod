@@ -711,7 +711,7 @@
 #   BUILDINGS SHARED
 ###########################################
 
-# ^concrete:
+# ^Concrete:
 # 	Interactable:
 # 	D2kBuilding:
 # 		ConcreteTemplate: 856
@@ -736,7 +736,7 @@
 # 		IconPalette: d2kunit
 
 # concreteabuilding:
-# 	Inherits: ^concrete
+# 	Inherits: ^Concrete
 # 	D2kBuilding:
 # 		Footprint: xxxx xxxx xxxx xxxx
 # 		Dimensions: 4,4
@@ -820,7 +820,7 @@
 
 # Generic construction yard template. Common traits here; each faction actor below
 # sets its tooltip name, the MCV it deploys back into, and its sprite image.
-# ^construction_yard:
+# ^ConstructionYard:
 # 	Inherits@D2kBLD: ^D2KBuilding
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
@@ -876,7 +876,7 @@
 # 		-RequiresCondition:
 
 # ixian_constructionyard:
-# 	Inherits: ^construction_yard
+# 	Inherits: ^ConstructionYard
 # 	Tooltip:
 # 		Name: Ixian Construction Yard
 # 	Transforms:
@@ -885,7 +885,7 @@
 # 		Image: conyard.atreides
 
 # ordos_constructionyard:
-# 	Inherits: ^construction_yard
+# 	Inherits: ^ConstructionYard
 # 	Tooltip:
 # 		Name: Ordos Construction Yard
 # 	Transforms:
@@ -895,7 +895,7 @@
 
 # Generic wind trap template. Common traits live here; each faction actor below
 # only sets its own build prerequisite (owning construction yard) and sprite image.
-# ^wind_trap:
+# ^WindTrap:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@power: ^PowerPlant
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -951,21 +951,21 @@
 # 		Actor: light_inf
 
 # wind_trap.atreides:
-# 	Inherits: ^wind_trap
+# 	Inherits: ^WindTrap
 # 	Buildable:
 # 		Prerequisites: ~construction_yard.atreides
 # 	RenderSprites:
 # 		Image: power.atreides
 
 # ixian_windtrap:
-# 	Inherits: ^wind_trap
+# 	Inherits: ^WindTrap
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard
 # 	RenderSprites:
 # 		Image: power.atreides
 
 # ordos_windtrap:
-# 	Inherits: ^wind_trap
+# 	Inherits: ^WindTrap
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard
 # 	RenderSprites:
@@ -1262,7 +1262,7 @@
 
 # Generic spice refinery template. Common traits here; each faction actor below sets
 # its build prerequisite, its ixian_spiceharvester/delivery actors, and its sprite image.
-# ^refinery:
+# ^Refinery:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@ref: ^Refinery
@@ -1318,7 +1318,7 @@
 # 		Actor: trooper
 
 # refinery.atreides:
-# 	Inherits: ^refinery
+# 	Inherits: ^Refinery
 # 	Buildable:
 # 		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
 # 	FreeActor:
@@ -1339,7 +1339,7 @@
 # 		Image: refinery.atreides
 
 # ixian_refineryixian:
-# 	Inherits: ^refinery
+# 	Inherits: ^Refinery
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 # 	FreeActor:
@@ -1360,7 +1360,7 @@
 # 		Image: refinery.atreides
 
 # ordos_refineryordos:
-# 	Inherits: ^refinery
+# 	Inherits: ^Refinery
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 # 	FreeActor:
@@ -1382,7 +1382,7 @@
 
 # Generic storage silo template. Common traits here; each faction actor below sets
 # its build prerequisite and sprite image.
-# ^d2k_silo:
+# ^D2KSilo:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^1x1Shape
@@ -1423,21 +1423,21 @@
 # 		FullSequence: pip-yellow
 
 # d2k_silo.atreides:
-# 	Inherits: ^d2k_silo
+# 	Inherits: ^D2KSilo
 # 	Buildable:
 # 		Prerequisites: ~construction_yard.atreides, refinery.atreides
 # 	RenderSprites:
 # 		Image: silo.atreides
 
 # ixian_storagesilo:
-# 	Inherits: ^d2k_silo
+# 	Inherits: ^D2KSilo
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 	RenderSprites:
 # 		Image: silo.atreides
 
 # ordos_storagesilo:
-# 	Inherits: ^d2k_silo
+# 	Inherits: ^D2KSilo
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 	RenderSprites:
@@ -2015,7 +2015,7 @@
 # 		Actor: trooper
 
 # ordos_hightechfactory:
-# 	Inherits: ^high_tech_factory
+# 	Inherits: ^HighTechFactory
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 # 	RenderSprites:
@@ -2023,7 +2023,7 @@
 
 # Generic research centre. Common traits here; each faction actor sets its build
 # prerequisite and sprite image.
-# ^research_centre:
+# ^ResearchCentre:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@CPQ: ^CPQCondition
@@ -2070,14 +2070,14 @@
 # 		Actor: trooper
 
 # ixian_ixresearchcenter:
-# 	Inherits: ^research_centre
+# 	Inherits: ^ResearchCentre
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 	RenderSprites:
 # 		Image: research.gold
 
 # ordos_ixresearchcenter:
-# 	Inherits: ^research_centre
+# 	Inherits: ^ResearchCentre
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 # 	RenderSprites:
@@ -2085,7 +2085,7 @@
 
 # Generic high tech (aircraft) factory. Common traits here; each faction actor sets
 # its build prerequisite and sprite image.
-# ^high_tech_factory:
+# ^HighTechFactory:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -2161,7 +2161,7 @@
 # 		Actor: trooper
 
 # ixian_hightechfactory:
-# 	Inherits: ^high_tech_factory
+# 	Inherits: ^HighTechFactory
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 # 	RenderSprites:
@@ -2169,7 +2169,7 @@
 
 # Generic starport. Common traits here; each faction actor sets its build
 # prerequisite and sprite image.
-# ^starport:
+# ^Starport:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -2270,14 +2270,14 @@
 # 		Actor: light_inf
 
 # ixian_starport:
-# 	Inherits: ^starport
+# 	Inherits: ^Starport
 # 	Buildable:
 # 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 # 	RenderSprites:
 # 		Image: starport.smuggler
 
 # ordos_starport:
-# 	Inherits: ^starport
+# 	Inherits: ^Starport
 # 	Buildable:
 # 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 # 	RenderSprites:
@@ -9330,7 +9330,7 @@
 # 	ActorStatValues:
 # 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-# ^combat_tank:
+# ^CombatTank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9379,7 +9379,7 @@
 # 		VoiceSet: D2KCombatTank
 
 # combat_tank.atreides:
-# 	Inherits: ^combat_tank
+# 	Inherits: ^CombatTank
 # 	Buildable:
 # 		Prerequisites: ~faction.atreides
 # 	Armament:
@@ -10488,7 +10488,7 @@
 
 #   Common Buildings
 # upgrade_conyard:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Construction Yard Upgrade
 # 	Buildable:
@@ -10506,7 +10506,7 @@
 # 		Image: conyard.ordos
 
 # upgrade_barracks:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Barracks Upgrade
 # 	Buildable:
@@ -10524,7 +10524,7 @@
 # 		Image: barracks.ordos
 
 # ordos_upgrade_lightfactory:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Light Factory Upgrade
 # 	Buildable:
@@ -10542,7 +10542,7 @@
 # 		Image: light.ordos
 
 # upgrade_heavy:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Factory Upgrade
 # 	Buildable:
@@ -10560,7 +10560,7 @@
 # 		Image: heavy.ordos
 
 # upgrade_hightech:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: High Tech Factory Upgrade
 # 	Buildable:
@@ -10578,7 +10578,7 @@
 # 		Image: hightech.atreides
 
 # d2k_wind_trap_upgrade:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Advanced Wind Traps
 # 	Valued:
@@ -10594,7 +10594,7 @@
 
 #   Common Upgrades
 # d2k_spice_sifter_upgrade:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Efficient Filtering
 # 	Valued:
@@ -10611,7 +10611,7 @@
 #   Ixian Upgrades
 
 # ixian_upgrade_twinbazooka:
-# 	Inherits: ^unit_upgrade_template
+# 	Inherits: ^UnitUpgradeTemplate
 # 	Tooltip:
 # 		Name: Twin Bazooka Upgrade
 # 	Buildable:
@@ -10623,7 +10623,7 @@
 # 		Image: ixian_upgrade_twinbazooka
 
 # ixian_upgrade_tungstenneedleguns:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Tungsten Needle Guns
 # 	Valued:
@@ -10638,7 +10638,7 @@
 # 		Image: ixian_upgrade_tungstenneedleguns
 
 # ixian_upgrade_personalshield:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Personal Shield
 # 	Valued:
@@ -10653,7 +10653,7 @@
 # 		Image: ixian_personalshield_icon
 
 # ixian_upgrade_generalpurposearmor:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: General Purpose Armor
 # 	Valued:
@@ -10668,7 +10668,7 @@
 # 		Image: combat_tank.ixian
 
 # ixian_upgrade_reinforcedbarrel:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Reinforced Barrel
 # 	Valued:
@@ -10682,7 +10682,7 @@
 # 		Image: d2k_siege_tank_higher_range
 
 # ixian_upgrade_heavymissiles:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Missiles
 # 	Valued:
@@ -10696,7 +10696,7 @@
 # 		Image: ix_missile_tank
 
 # ixian_upgrade_advancedixiantechnology:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
 # 	Valued:
@@ -10713,7 +10713,7 @@
 # 		Actor: team_upgrade.d2k_advanced_ixian_technology
 
 # team_upgrade.d2k_advanced_ixian_technology:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	ProvidesPrerequisite:
 # 		Prerequisite: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
@@ -10727,7 +10727,7 @@
 #   Ordos Upgrades
 
 # ordos_upgrade_antiairtrooper:
-# 	Inherits: ^unit_upgrade_template
+# 	Inherits: ^UnitUpgradeTemplate
 # 	Tooltip:
 # 		Name: Anti Air Trooper Upgrade
 # 	Buildable:
@@ -10738,7 +10738,7 @@
 # 		Image: ordos_antiairtrooper
 
 # ordos_upgrade_heavycombattank:
-# 	Inherits: ^unit_upgrade_template
+# 	Inherits: ^UnitUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Combat Tank Upgrade
 # 	Buildable:
@@ -10750,7 +10750,7 @@
 # 		Image: ordos_heavycombattank
 
 # ordos_upgrade_heavycombattankrockets:
-# 	Inherits: ^unit_upgrade_template
+# 	Inherits: ^UnitUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Combat Tank Rockets Upgrade
 # 	Buildable:
@@ -10761,7 +10761,7 @@
 # 		Image: ordos_upgrade_heavycombattankrockets
 
 # ordos_upgrade_heavyautoguntank:
-# 	Inherits: ^unit_upgrade_template
+# 	Inherits: ^UnitUpgradeTemplate
 # 	Tooltip:
 # 		Name: Heavy Autogun Tank Upgrade
 # 	Buildable:
@@ -10772,7 +10772,7 @@
 # 		Image: ordos_heavyautoguntank
 
 # ordos_upgrade_shields:
-# 	Inherits: ^tech_upgrade_template
+# 	Inherits: ^TechUpgradeTemplate
 # 	Tooltip:
 # 		Name: Ordos Shields
 # 	Buildable:
@@ -10805,7 +10805,7 @@
 # 		RequiresCondition: shielded
 
 # ordos_upgrade_biologicalwarfare:
-# 	Inherits: ^tech_upgrade_template
+# 	Inherits: ^TechUpgradeTemplate
 # 	Tooltip:
 # 		Name: Biological Warfare
 # 	Buildable:
@@ -10832,7 +10832,7 @@
 # 		Upgrades: ordos_upgrade_biologicalwarfare
 
 # ordos_upgrade_contraband:
-# 	Inherits: ^tech_upgrade_template
+# 	Inherits: ^TechUpgradeTemplate
 # 	Tooltip:
 # 		Name: Contraband
 # 	Buildable:
@@ -10853,7 +10853,7 @@
 # 		Upgrades: ordos_upgrade_contraband
 
 # d2k_ornithopter_upgrade:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Ornithopter Missiles
 # 	Buildable:
@@ -10957,7 +10957,7 @@
 # 	TransformOnCapture:
 # 		IntoActor: ordos_deviatorartillery
 
-# ^combat_tank.husk:
+# ^CombatTank.husk:
 # 	Inherits: ^D2KVehicleHusk
 # 	Health:
 # 		HP: 1000
@@ -10967,17 +10967,17 @@
 # 		Anim: turret
 
 # combat_tank_husk.atreides:
-# 	Inherits: ^combat_tank.husk
+# 	Inherits: ^CombatTank.husk
 # 	TransformOnCapture:
 # 		IntoActor: combat_tank.atreides
 
 # combat_tank_husk.harkonnen:
-# 	Inherits: ^combat_tank.husk
+# 	Inherits: ^CombatTank.husk
 # 	TransformOnCapture:
 # 		IntoActor: combat_tank.harkonnen
 
 # combat_tank_husk.ordos:
-# 	Inherits: ^combat_tank.husk
+# 	Inherits: ^CombatTank.husk
 # 	TransformOnCapture:
 # 		IntoActor: ordos_combattank
 
@@ -10986,7 +10986,7 @@
 ##################################
 
 # d2k_striketeam2:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop II
 # 	Buildable:
@@ -11002,7 +11002,7 @@
 # 		Prerequisite: d2k_striketeam2
 
 # d2k_striketeam3:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop III
 # 	Buildable:
@@ -11823,7 +11823,7 @@
 # 		DeployTicks: 450
 # 		DeployTrigger: Attack
 # research.missile_tank_vordel:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Missile Tank
 # 	Buildable:
@@ -11841,7 +11841,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_apparition:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Apparition
 # 	Buildable:
@@ -11859,7 +11859,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_aircraft_eater:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Aircraft Eater
 # 	Buildable:
@@ -11877,7 +11877,7 @@
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_defender:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Defender
 # 	Buildable:
@@ -12475,7 +12475,7 @@
 #                Upgrade Ix
 ##############################################
 # ixian_promotion_rashidan:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Rashidan
 # 	Buildable:
@@ -12489,7 +12489,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_storminfantry:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Storm Infantry
 # 	Buildable:
@@ -12503,7 +12503,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_stormraider:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Storm Raider
 # 	Buildable:
@@ -12517,7 +12517,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_stormlasher:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Storm Lasher
 # 	Buildable:
@@ -12533,7 +12533,7 @@
 	### Military tree
 
 # ixian_promotion_heavyixraider:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Heavy Ix Raider
 # 	Buildable:
@@ -12547,7 +12547,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixsiegetank:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ix Siege Tank
 # 	Buildable:
@@ -12561,7 +12561,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_neocymek:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Neo Cymek
 # 	Buildable:
@@ -12575,7 +12575,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixprojector:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ix Projector
 # 	Buildable:
@@ -12591,7 +12591,7 @@
 	### Support tree
 
 # ixian_promotion_ixrailgundrone:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ix Railgun Drone
 # 	Buildable:
@@ -12604,7 +12604,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixianempbomber:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ixian EMP Bomber
 # 	Buildable:
@@ -12618,7 +12618,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_ixresonancedrone:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ix Resonance Drone
 # 	Buildable:
@@ -12632,7 +12632,7 @@
 # 	ProvidesPrerequisite:
 
 # ixian_promotion_farasha:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Farasha
 # 	Buildable:
@@ -12656,7 +12656,7 @@
 #                Upgrade Ordos
 ##############################################
 # ordos_promotion_chemicaltrooper:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Chemical Trooper
 # 	Buildable:
@@ -12670,7 +12670,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_contaminator:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Contaminator
 # 	Buildable:
@@ -12684,7 +12684,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_leecher:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Leecher
 # 	Buildable:
@@ -12698,7 +12698,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_laboratorycrawler:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Laboratory Crawler
 # 	Buildable:
@@ -12712,7 +12712,7 @@
 # 	ProvidesPrerequisite:
 #
 # ordos_promotion_dustdrone:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Dust Drone
 # 	Buildable:
@@ -12726,7 +12726,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_stealthraider:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Stealth Raider
 # 	Buildable:
@@ -12740,7 +12740,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_lasertank:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Laser Tank
 # 	Buildable:
@@ -12754,7 +12754,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_python:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Python
 # 	Buildable:
@@ -12768,7 +12768,7 @@
 
 #
 # ordos_promotion_mortartroopers:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Mortar Troopers
 # 	Buildable:
@@ -12782,7 +12782,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_deviatortank:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Deviator Tank
 # 	Buildable:
@@ -12796,7 +12796,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_banshees:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Banshees
 # 	Buildable:
@@ -12810,7 +12810,7 @@
 # 	ProvidesPrerequisite:
 
 # ordos_promotion_wraith:
-# 	Inherits: ^promotion_upgrade_template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Wraith
 # 	Buildable:

@@ -1,5 +1,5 @@
 terran_upgrade_stimpack:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stim Pack
 	Valued:
@@ -14,7 +14,7 @@ terran_upgrade_stimpack:
 	ProvidesPrerequisite:
 
 terran_upgrade_u238shells:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: U-238 Shells
 	Valued:
@@ -29,7 +29,7 @@ terran_upgrade_u238shells:
 	ProvidesPrerequisite:
 
 terran_upgrade_upgradesupplydepotlevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Upgrade Supply Depot Level 1
 	Valued:
@@ -44,7 +44,7 @@ terran_upgrade_upgradesupplydepotlevel1:
 	ProvidesPrerequisite:
 
 terran_upgrade_upgradesupplydepotlevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Upgrade Supply Depot Level 2
 	Valued:
@@ -59,7 +59,7 @@ terran_upgrade_upgradesupplydepotlevel2:
 	ProvidesPrerequisite:
 
 terran_upgrade_cloakupgrade:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cloak Upgrade
 	Valued:
@@ -74,7 +74,7 @@ terran_upgrade_cloakupgrade:
 	ProvidesPrerequisite:
 
 terran_upgrade_advancedsiegemode:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Advanced Siege Mode
 	Valued:
@@ -89,7 +89,7 @@ terran_upgrade_advancedsiegemode:
 	ProvidesPrerequisite:
 
 terran_upgrade_yamatocannonandtacticaljumpupgrade:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Yamato Cannon and Tactical Jump Upgrade
 	Valued:
@@ -104,7 +104,7 @@ terran_upgrade_yamatocannonandtacticaljumpupgrade:
 	ProvidesPrerequisite:
 
 terran_upgrade_infantryweaponslevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Weapons Level 1
 	Valued:
@@ -120,7 +120,7 @@ terran_upgrade_infantryweaponslevel1:
 		Prerequisite: terran_upgrade_infantryweaponslevel1
 
 terran_upgrade_infantryweaponslevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Weapons Level 2
 	Valued:
@@ -136,7 +136,7 @@ terran_upgrade_infantryweaponslevel2:
 		Prerequisite: terran_upgrade_infantryweaponslevel2
 
 terran_upgrade_infantryarmorlevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Armor Level 1
 	Valued:
@@ -152,7 +152,7 @@ terran_upgrade_infantryarmorlevel1:
 		Prerequisite: terran_upgrade_infantryarmorlevel1
 
 terran_upgrade_infantryarmorlevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Armor Level 2
 	Valued:
@@ -168,7 +168,7 @@ terran_upgrade_infantryarmorlevel2:
 		Prerequisite: terran_upgrade_infantryarmorlevel2
 
 terran_upgrade_vehicleweaponslevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Weapons Level 1
 	Valued:
@@ -183,7 +183,7 @@ terran_upgrade_vehicleweaponslevel1:
 	ProvidesPrerequisite:
 
 terran_upgrade_vehicleweaponslevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Weapons Level 2
 	Valued:
@@ -198,7 +198,7 @@ terran_upgrade_vehicleweaponslevel2:
 	ProvidesPrerequisite:
 
 terran_upgrade_vehicleplatinglevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Plating Level 1
 	Valued:
@@ -213,7 +213,7 @@ terran_upgrade_vehicleplatinglevel1:
 	ProvidesPrerequisite:
 
 terran_upgrade_vehicleplatinglevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Plating Level 2
 	Valued:
@@ -228,7 +228,7 @@ terran_upgrade_vehicleplatinglevel2:
 	ProvidesPrerequisite:
 
 terran_upgrade_shipweaponslevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ship Weapons Level 1
 	Valued:
@@ -243,7 +243,7 @@ terran_upgrade_shipweaponslevel1:
 	ProvidesPrerequisite:
 
 terran_upgrade_shipweaponslevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ship Weapons Level 2
 	Valued:
@@ -258,7 +258,7 @@ terran_upgrade_shipweaponslevel2:
 	ProvidesPrerequisite:
 
 terran_upgrade_shipplatinglevel1:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ship Plating Level 1
 	Valued:
@@ -273,7 +273,7 @@ terran_upgrade_shipplatinglevel1:
 	ProvidesPrerequisite:
 
 terran_upgrade_shipplatinglevel2:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ship Plating Level 2
 	Valued:

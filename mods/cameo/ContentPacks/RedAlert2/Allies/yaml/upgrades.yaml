@@ -1,5 +1,5 @@
 ra2_allies_upgrade_assaultsquadtraining:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Assault Squad Training
 	Buildable:
@@ -14,7 +14,7 @@ ra2_allies_upgrade_assaultsquadtraining:
 		Prerequisite: ra2_allied_doctrine_1
 
 ra2_allies_upgrade_vanguardtraining:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Vanguard Training
 	Buildable:
@@ -29,7 +29,7 @@ ra2_allies_upgrade_vanguardtraining:
 		Prerequisite: ra2_allied_doctrine_1
 
 ra2_allies_upgrade_infiltratorstraining:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Elite Infiltrators Training
 	Buildable:
@@ -46,7 +46,7 @@ ra2_allies_upgrade_infiltratorstraining:
 		Prerequisite: ra2_allied_doctrine_1
 
 ra2_allies_upgrade_compositearmorplating:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Composite Armor Plating
 	Buildable:
@@ -61,7 +61,7 @@ ra2_allies_upgrade_compositearmorplating:
 		Prerequisite: ra2_allied_doctrine_2
 
 ra2_allies_upgrade_reflectivearmorplating:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Reflective Armor Plating
 	Buildable:
@@ -76,7 +76,7 @@ ra2_allies_upgrade_reflectivearmorplating:
 		Prerequisite: ra2_allied_doctrine_2
 
 ra2_allies_upgrade_ionpulseplating:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Chromium Ion Pulse Plating
 	Buildable:
@@ -91,7 +91,7 @@ ra2_allies_upgrade_ionpulseplating:
 		Prerequisite: ra2_allied_doctrine_2
 
 ra2_allies_upgrade_elitegi:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Elite G.I.
 	Buildable:
@@ -101,7 +101,7 @@ ra2_allies_upgrade_elitegi:
 		Image: ra2_allies_upgrade_elitegi
 
 ra2_allies_upgrade_paratroopers:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Paratroopers
 	Buildable:
@@ -112,7 +112,7 @@ ra2_allies_upgrade_paratroopers:
 		Image: ra2_allies_airforcecommandhq
 
 ra2_allies_upgrade_eliterocketeer:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Elite Rocketeers
 	Buildable:
@@ -123,7 +123,7 @@ ra2_allies_upgrade_eliterocketeer:
 		Image: ra2_allies_upgrade_eliterocketeer
 
 ra2_allies_upgrade_prismlinking:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Prism Linking
 	Buildable:
@@ -134,7 +134,7 @@ ra2_allies_upgrade_prismlinking:
 		Image: ra2_allies_upgrade_prismlinking
 
 ra2_allies_upgrade_forceshield:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Force Shield
 	Buildable:
@@ -146,7 +146,7 @@ ra2_allies_upgrade_forceshield:
 		Image: icon
 
 ra2_allies_upgrade_heavymiragetank:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Heavy Mirage Tanks
 	Buildable:
@@ -159,7 +159,7 @@ ra2_allies_upgrade_heavymiragetank:
 ### Battle Lab ###
 
 ra2_allies_upgrade_advancedaeronautics:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Advanced Aeronautics
 	Buildable:
@@ -169,7 +169,7 @@ ra2_allies_upgrade_advancedaeronautics:
 		Image: ra2_allies_upgrade_advancedaeronautics
 
 ra2_allies_upgrade_tanklasertargeting:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Tank Laser Targeting
 	Buildable:
@@ -179,7 +179,7 @@ ra2_allies_upgrade_tanklasertargeting:
 		Image: ra2_allies_upgrade_tanklasertargeting
 
 ra2_allies_upgrade_thunderboltmissiles:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Thunderbolt Missiles
 	Buildable:
@@ -189,7 +189,7 @@ ra2_allies_upgrade_thunderboltmissiles:
 		Image: ra2_allies_upgrade_thunderboltmissiles
 
 ra2_allies_upgrade_intensifiedprismbeams:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Intensified Prism Beams
 	Buildable:
@@ -199,7 +199,7 @@ ra2_allies_upgrade_intensifiedprismbeams:
 		Image: ra2_allies_upgrade_intensifiedprismbeams
 
 ra2_allies_upgrade_prismaticbarrier:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Prismatic Barrier
 	Valued:
@@ -211,7 +211,7 @@ ra2_allies_upgrade_prismaticbarrier:
 		Image: ra2_allies_upgrade_prismaticbarrier
 
 ra2_allies_upgrade_chronoengine:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Chrono Engines
 	Valued:

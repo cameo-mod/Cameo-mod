@@ -97,7 +97,7 @@ ra1_soviets_attackdog:
 			QuestionMutate: 1
 
 ra1_soviets_rifleinfantry:
-	Inherits: ^ra1_allies_rifleinfantry
+	Inherits: ^RA1AlliesRifleInfantry
 	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -350,7 +350,7 @@ ra1_soviets_mortarsoldier:
 		Upgrades: ra1_soviets_promotion_infantrysuperoptics, ra1_soviets_doctrine_conscription, ra1_soviets_doctrine_inferno, ra1_soviets_upgrade_scorchedearth, ra1_soviets_upgrade_menofsteel
 
 ra1_soviets_rocketsoldier:
-	Inherits: ^ra1_allies_alliedrocketsoldier
+	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Tooltip:
 		Name: Soviet Rocket Soldier
@@ -416,7 +416,7 @@ ra1_soviets_dragunovantimaterialsniper:
 	FirepowerMultiplier:
 		Modifier: 103
 ra1_soviets_firerocketsoldier:
-	Inherits: ^ra1_allies_alliedrocketsoldier
+	Inherits: ^RA1AlliesAlliedRocketSoldier
 	Inherits@FireInfantry: ^FireInfantry
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiVeh: ^PrioritizeVehicle

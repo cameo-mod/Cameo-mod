@@ -2135,7 +2135,7 @@ wh40kproc.e1:
 		Color: F2FF9180
 		RequiresCondition: priestupgradei
 wh40kuphonor:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Death before Dishonor
 	Buildable:
@@ -2151,7 +2151,7 @@ wh40kuphonor:
 		Prerequisite: wh40kuphonor
 
 wh40kupguardarmor:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battle Armor
 	Buildable:
@@ -2167,7 +2167,7 @@ wh40kupguardarmor:
 		Prerequisite: wh40kupguardarmor
 
 wh40kupguardemperor:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Will of the Emperor
 	Buildable:
@@ -2183,7 +2183,7 @@ wh40kupguardemperor:
 		Prerequisite: wh40kupguardemperor
 
 wh40kupsateliterange:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Targeting Resolution
 	Buildable:
@@ -2199,7 +2199,7 @@ wh40kupsateliterange:
 		Prerequisite: wh40kupsateliterange
 
 wh40kupweapspecialization:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Weapon Specialization
 	Buildable:
@@ -2214,7 +2214,7 @@ wh40kupweapspecialization:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupweapspecialization
 wh40kuppoweredbayonets:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Powered Bayonets
 	Buildable:
@@ -2230,7 +2230,7 @@ wh40kuppoweredbayonets:
 		Prerequisite: wh40kuppoweredbayonets
 
 wh40kupbattlecommand:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battle Command
 	Buildable:
@@ -2245,7 +2245,7 @@ wh40kupbattlecommand:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbattlecommand
 wh40kupregimentalcommand:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Regimental Command
 	Buildable:
@@ -2261,7 +2261,7 @@ wh40kupregimentalcommand:
 		Prerequisite: wh40kupregimentalcommand
 
 wh40kupogrynquarters:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Ogryn Quarters
 	Buildable:
@@ -2276,7 +2276,7 @@ wh40kupogrynquarters:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupogrynquarters
 wh40kupkasrkinquarters:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kasrkin Quarters
 	Buildable:
@@ -2291,7 +2291,7 @@ wh40kupkasrkinquarters:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupkasrkinquarters
 wh40kupsentineldepot:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sentinel Depot
 	Buildable:
@@ -2306,7 +2306,7 @@ wh40kupsentineldepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupsentineldepot
 wh40kuphellhounddepot:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hellhound Depot
 	Buildable:
@@ -2321,7 +2321,7 @@ wh40kuphellhounddepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuphellhounddepot
 wh40kupbasiliskdepot:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Basilisk Depot
 	Buildable:
@@ -2336,7 +2336,7 @@ wh40kupbasiliskdepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbasiliskdepot
 wh40kupmarauderdepot:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Marauder Depot
 	Buildable:
@@ -2352,7 +2352,7 @@ wh40kupmarauderdepot:
 		Prerequisite: wh40kupmarauderdepot
 
 wh40kuplemanrussdepot:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leman Russ Depot
 	Buildable:
@@ -2367,7 +2367,7 @@ wh40kuplemanrussdepot:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuplemanrussdepot
 wh40kupfullscalewar:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Full Scale War
 	Buildable:
@@ -2382,7 +2382,7 @@ wh40kupfullscalewar:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfullscalewar
 wh40kupenergy1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Energy Upgrade 1
 	Buildable:
@@ -2397,7 +2397,7 @@ wh40kupenergy1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupenergy1
 wh40kupenergy2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Energy Upgrade 2
 	Buildable:
@@ -2413,7 +2413,7 @@ wh40kupenergy2:
 		Prerequisite: wh40kupenergy2
 
 wh40kupgenenhancement:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Genetic Enhancement
 	Buildable:
@@ -2428,7 +2428,7 @@ wh40kupgenenhancement:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupgenenhancement
 wh40kupkasrkinarmor:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Kasrkin Armor
 	Buildable:
@@ -4377,7 +4377,7 @@ wh40kmaurader.napalm:
 # Imperial Guard, Rank Bonus
 #######################################
 wh40krankguards:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Regimental Guards
 	Buildable:
@@ -4391,7 +4391,7 @@ wh40krankguards:
 		Prerequisite: wh40krankguards
 
 wh40krankcommisar:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Regimental Commissar
 	Buildable:
@@ -4405,7 +4405,7 @@ wh40krankcommisar:
 		Prerequisite: wh40krankcommisar
 
 wh40kranktechpriest:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Mars Techpriest Enginseer
 	Buildable:
@@ -4419,7 +4419,7 @@ wh40kranktechpriest:
 		Prerequisite: wh40kranktechpriest
 
 wh40krankpsyker:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Sanctioned Psyker
 	Buildable:
@@ -4433,7 +4433,7 @@ wh40krankpsyker:
 		Prerequisite: wh40krankpsyker
 
 wh40krankkars:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Veteran Kasrkin
 	Buildable:
@@ -4447,7 +4447,7 @@ wh40krankkars:
 		Prerequisite: wh40krankkars
 
 wh40krankogryn:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Bone'ead
 	Buildable:
@@ -4460,7 +4460,7 @@ wh40krankogryn:
 	ProvidesPrerequisite:
 		Prerequisite: wh40krankogryn
 wh40kranksentinel:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Sentinel
 	Buildable:
@@ -7350,7 +7350,7 @@ wh40krhino.e4:
 		RequiresCondition: wh40kupcapincrease2
 		Modifier: 70
 wh40kupmonastery:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Monastery
 	Buildable:
@@ -7365,7 +7365,7 @@ wh40kupmonastery:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmonastery
 wh40kupmonastery2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fortress Monastery
 	Buildable:
@@ -7381,7 +7381,7 @@ wh40kupmonastery2:
 		Prerequisite: wh40kupmonastery2
 
 wh40kupcapincrease:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -7396,7 +7396,7 @@ wh40kupcapincrease:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupcapincrease
 wh40kupcapincrease2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -7412,7 +7412,7 @@ wh40kupcapincrease2:
 		Prerequisite: wh40kupcapincrease2
 
 wh40kupbionics:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bionics
 	Buildable:
@@ -7427,7 +7427,7 @@ wh40kupbionics:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbionics
 wh40kupbionics2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bionics Level 2
 	Buildable:
@@ -7442,7 +7442,7 @@ wh40kupbionics2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupbionics2
 wh40ktargetfinder1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Target Finders
 	Buildable:
@@ -7457,7 +7457,7 @@ wh40ktargetfinder1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40ktargetfinder1
 wh40ktargetfinder2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Enhanced Target Finders
 	Buildable:
@@ -7472,7 +7472,7 @@ wh40ktargetfinder2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40ktargetfinder2
 wh40kpowerswords:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Swords
 	Buildable:
@@ -7487,7 +7487,7 @@ wh40kpowerswords:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kpowerswords
 wh40kpowerfists:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Fist
 	Buildable:
@@ -7502,7 +7502,7 @@ wh40kpowerfists:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kpowerfists
 wh40kscoutinfiltration:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scout Infiltration
 	Buildable:
@@ -7517,7 +7517,7 @@ wh40kscoutinfiltration:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kscoutinfiltration
 wh40kskullprobestealth:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scout Infiltration
 	Buildable:
@@ -7532,7 +7532,7 @@ wh40kskullprobestealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kskullprobestealth
 wh40kveteranupgrade1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Veteran
 	Buildable:
@@ -7547,7 +7547,7 @@ wh40kveteranupgrade1:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade1
 wh40kveteranupgrade2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Hero
 	Buildable:
@@ -7562,7 +7562,7 @@ wh40kveteranupgrade2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade2
 wh40kupmachineculticon:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Armor Deployment
 	Buildable:
@@ -7577,7 +7577,7 @@ wh40kupmachineculticon:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmachineculticon
 wh40kupfraggrenade:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frag Grenades
 	Buildable:
@@ -7592,7 +7592,7 @@ wh40kupfraggrenade:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfraggrenade
 wh40kfuriuscharge:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Furious Charge
 	Buildable:
@@ -7608,7 +7608,7 @@ wh40kfuriuscharge:
 		Prerequisite: wh40kfuriuscharge
 
 wh40kpsyinquisition:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Psychic Inquisition
 	Buildable:
@@ -7626,7 +7626,7 @@ wh40kpsyinquisition:
 # Marine, Rank Bonus
 #######################################
 wh40krankmarine:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: First Company Veteran
 	Buildable:
@@ -7640,7 +7640,7 @@ wh40krankmarine:
 		Prerequisite: wh40krankmarine
 
 wh40krankscout:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Scout Marine Squad
 	Buildable:
@@ -7654,7 +7654,7 @@ wh40krankscout:
 		Prerequisite: wh40krankscout
 
 wh40kranklandspeeder:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Land Speeder
 	Buildable:
@@ -7668,7 +7668,7 @@ wh40kranklandspeeder:
 		Prerequisite: wh40kranklandspeeder
 
 wh40kranklibrarian:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Senior Librarian Saribander
 	Buildable:
@@ -7682,7 +7682,7 @@ wh40kranklibrarian:
 		Prerequisite: wh40kranklibrarian
 
 wh40krankassault:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Veteran Assault Marine
 	Buildable:
@@ -7696,7 +7696,7 @@ wh40krankassault:
 		Prerequisite: wh40krankassault
 
 wh40krankdread:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Honor Guard: Dreadnought
 	Buildable:
@@ -9803,7 +9803,7 @@ wh40ksluggamobslave:
 		UndeployTicks: 1000
 		RequiresCondition: terran_upgrade_stimpack && !nostim
 wh40kuptankbusta:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tankbusta Ztealth
 	Buildable:
@@ -9819,7 +9819,7 @@ wh40kuptankbusta:
 		Prerequisite: wh40kuptankbusta
 
 wh40kupgretchin:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Gretchin Ztealth
 	Buildable:
@@ -9834,7 +9834,7 @@ wh40kupgretchin:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupgretchin
 wh40kupblastier:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Blastier
 	Buildable:
@@ -9850,7 +9850,7 @@ wh40kupblastier:
 		Prerequisite: wh40kupblastier
 
 wh40kupdakka1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Dakka
 	Buildable:
@@ -9866,7 +9866,7 @@ wh40kupdakka1:
 		Prerequisite: wh40kupdakka1
 
 wh40kupdakka2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Dakka
 	Buildable:
@@ -9882,7 +9882,7 @@ wh40kupdakka2:
 		Prerequisite: wh40kupdakka2
 
 wh40kupchoppy1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Choppy
 	Buildable:
@@ -9898,7 +9898,7 @@ wh40kupchoppy1:
 		Prerequisite: wh40kupchoppy1
 
 wh40kupchoppy2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Choppy
 	Buildable:
@@ -9913,7 +9913,7 @@ wh40kupchoppy2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupchoppy2
 wh40kupburny1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Burny
 	Buildable:
@@ -9929,7 +9929,7 @@ wh40kupburny1:
 		Prerequisite: wh40kupburny1
 
 wh40kupburny2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even More Burny
 	Buildable:
@@ -9944,7 +9944,7 @@ wh40kupburny2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupburny2
 wh40kupvboost:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vehicle Speed Boost
 	Buildable:
@@ -9960,7 +9960,7 @@ wh40kupvboost:
 		Prerequisite: wh40kupvboost
 
 wh40kupvextraarmor:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Extra Vehicle Armor
 	Buildable:
@@ -9976,7 +9976,7 @@ wh40kupvextraarmor:
 		Prerequisite: wh40kupvextraarmor
 
 wh40kmoresluggas:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: More Sluggas
 	Buildable:
@@ -9991,7 +9991,7 @@ wh40kmoresluggas:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kmoresluggas
 wh40kuporkyfort:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Orky Fort
 	Buildable:
@@ -10006,7 +10006,7 @@ wh40kuporkyfort:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkyfort
 wh40kuporkarmor1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 'Eavy Boy Armour
 	Buildable:
@@ -10022,7 +10022,7 @@ wh40kuporkarmor1:
 		Prerequisite: wh40kuporkarmor1
 
 wh40kuporkarmor2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super 'Eavy Boy Armour
 	Buildable:
@@ -10037,7 +10037,7 @@ wh40kuporkarmor2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkarmor2
 wh40kupbigshooty1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Big Shooty Boss Weapons
 	Buildable:
@@ -10053,7 +10053,7 @@ wh40kupbigshooty1:
 		Prerequisite: wh40kupbigshooty1
 
 wh40kuporkboss1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tougher Bosses
 	Buildable:
@@ -10069,7 +10069,7 @@ wh40kuporkboss1:
 		Prerequisite: wh40kuporkboss1
 
 wh40kuporkboss2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Even Tougher Bosses
 	Buildable:
@@ -10084,7 +10084,7 @@ wh40kuporkboss2:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kuporkboss2
 wh40kupburnabomb:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Burna Bombs
 	Buildable:
@@ -10099,7 +10099,7 @@ wh40kupburnabomb:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupburnabomb
 wh40kupcombatjuice:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Combat Juice
 	Buildable:
@@ -10455,7 +10455,7 @@ wh40ksquiggoth:
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
 	Inherits@cargo: ^CargoVehicle
-	Inherits@stomping: ^walker_stomping
+	Inherits@stomping: ^WalkerStomping
 	Inherits@boost: ^WH40KOrkVehicleUpgrades
 	Valued:
 		Cost: 5000
@@ -12297,7 +12297,7 @@ wh40kchaosmarinechamp:
 		RequiresCondition: wh40kchaosenergies
 		Modifier: 80
 wh40kcultiststealth:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cultist Stealth
 	Buildable:
@@ -12312,7 +12312,7 @@ wh40kcultiststealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kcultiststealth
 wh40kunholysight:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Unholy Sight
 	Buildable:
@@ -12327,7 +12327,7 @@ wh40kunholysight:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kunholysight
 wh40kchaosmarinestealth:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaos Marine Stealth
 	Buildable:
@@ -12342,7 +12342,7 @@ wh40kchaosmarinestealth:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kchaosmarinestealth
 wh40kfuriuschargechaos:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Furius Charge
 	Buildable:
@@ -12357,7 +12357,7 @@ wh40kfuriuschargechaos:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kfuriuschargechaos
 wh40kjetpackbooster:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Jetpack Booster
 	Buildable:
@@ -12372,7 +12372,7 @@ wh40kjetpackbooster:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kjetpackbooster
 wh40kdaemonfire:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Daemonfire
 	Buildable:
@@ -12387,7 +12387,7 @@ wh40kdaemonfire:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kdaemonfire
 wh40kupmonasteryc:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Decreased Monastery
 	Buildable:
@@ -12402,7 +12402,7 @@ wh40kupmonasteryc:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupmonastery
 wh40kupmonastery2c:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Unholy Monastery
 	Buildable:
@@ -12418,7 +12418,7 @@ wh40kupmonastery2c:
 		Prerequisite: wh40kupmonastery2
 
 wh40kupcapincreasec:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -12433,7 +12433,7 @@ wh40kupcapincreasec:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupcapincrease
 wh40kupcapincrease2c:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Squad Cap Increase
 	Buildable:
@@ -12449,7 +12449,7 @@ wh40kupcapincrease2c:
 		Prerequisite: wh40kupcapincrease2
 
 wh40kchaosenergies:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaos Energies
 	Buildable:
@@ -12465,7 +12465,7 @@ wh40kchaosenergies:
 		Prerequisite: wh40kchaosenergies
 
 wh40kfraggrenadesc:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frag Grenades
 	Buildable:
@@ -12480,7 +12480,7 @@ wh40kfraggrenadesc:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kupfraggrenade
 wh40kveteranupgrade1c:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Veteran
 	Buildable:
@@ -12495,7 +12495,7 @@ wh40kveteranupgrade1c:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade1
 wh40kveteranupgrade2c:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Commander Hero
 	Buildable:
@@ -12510,7 +12510,7 @@ wh40kveteranupgrade2c:
 	ProvidesPrerequisite:
 		Prerequisite: wh40kveteranupgrade2
 wh40kdemonstrength:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demon Strength
 	Buildable:

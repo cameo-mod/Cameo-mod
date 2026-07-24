@@ -1779,7 +1779,7 @@ wolfharv:
 	Inherits: ^Tank
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@harv: ^Harvester
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
@@ -1878,7 +1878,7 @@ wolfrobot:
 #	Wolfenstein Upgrades
 ########################################################
 wolfupdogfood:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Dog Food
 	Buildable:
@@ -1893,7 +1893,7 @@ wolfupdogfood:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupdogfood
 wolfupfood:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
@@ -1908,7 +1908,7 @@ wolfupfood:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupfood
 wolfupmedikit:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
@@ -1923,7 +1923,7 @@ wolfupmedikit:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupmedikit
 wolfupmonition:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
@@ -1938,7 +1938,7 @@ wolfupmonition:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupmonition
 wolfupguns:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Food
 	Buildable:
@@ -1953,7 +1953,7 @@ wolfupguns:
 	ProvidesPrerequisite:
 		Prerequisite: wolfupguns
 wolfuptreasure1:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 1
 	Buildable:
@@ -1969,7 +1969,7 @@ wolfuptreasure1:
 		Prerequisite: wolfuptreasure1
 
 wolfuptreasure2:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 2
 	Buildable:
@@ -1985,7 +1985,7 @@ wolfuptreasure2:
 		Prerequisite: wolfuptreasure2
 
 wolfuptreasure3:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 3
 	Buildable:
@@ -2001,7 +2001,7 @@ wolfuptreasure3:
 		Prerequisite: wolfuptreasure3
 
 wolfuptreasure4:
-	Inherits: ^upgrade_template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Valuable Treasures 4
 	Buildable:

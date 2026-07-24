@@ -1934,7 +1934,7 @@ ordos_tankdestroyer:
 ##################################
 
 # d2k_striketeam2:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop II
 # 	Buildable:
@@ -1950,7 +1950,7 @@ ordos_tankdestroyer:
 # 		Prerequisite: d2k_striketeam2
 
 # d2k_striketeam3:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Strike Team Paradrop III
 # 	Buildable:
@@ -2771,7 +2771,7 @@ ordos_tankdestroyer:
 # 		DeployTicks: 450
 # 		DeployTrigger: Attack
 # research.missile_tank_vordel:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Missile Tank
 # 	Buildable:
@@ -2789,7 +2789,7 @@ ordos_tankdestroyer:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_apparition:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Apparition
 # 	Buildable:
@@ -2807,7 +2807,7 @@ ordos_tankdestroyer:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_aircraft_eater:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Aircraft Eater
 # 	Buildable:
@@ -2825,7 +2825,7 @@ ordos_tankdestroyer:
 # 	ProvidesPrerequisite@upgradename:
 
 # Upgrades_defender:
-# 	Inherits: ^upgrade_template
+# 	Inherits: ^UpgradeTemplate
 # 	Tooltip:
 # 		Name: Defender
 # 	Buildable:

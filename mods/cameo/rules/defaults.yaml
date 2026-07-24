@@ -204,7 +204,7 @@
 		Prerequisites: base-reveal, !conyard
 		Condition: base-reveal
 
-^susaintelligence:
+^SUSAIntelligence:
 	ExternalCondition@susaintelligence:
 		Condition: susaintelligence
 	RevealsShroud@susaintelligence:
@@ -2094,8 +2094,8 @@
 
 ### Doctrines ###
 
-^doctrine_template:
-	Inherits: ^researched_upgrade_template
+^DoctrineTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Doctrine
 	Valued:
@@ -2111,8 +2111,8 @@
 
 ### Unit Upgrades ###
 
-^unit_upgrade_template:
-	Inherits: ^researched_upgrade_template
+^UnitUpgradeTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Unit Upgrade
 	Valued:
@@ -2128,8 +2128,8 @@
 
 ### Tech Upgrades ###
 
-^tech_upgrade_template:
-	Inherits: ^researched_upgrade_template
+^TechUpgradeTemplate:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tech Upgrade
 	Valued:
@@ -2145,8 +2145,8 @@
 
 ### Team Upgrades ###
 
-^team_upgrade_template:
-	Inherits: ^upgrade_template
+^TeamUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Team Upgrade
 	Valued:
@@ -2159,10 +2159,10 @@
 	RenderSprites:
 		Image: icon
 	ProvidesTeamProxyActor:
-		Actor: ^team_upgrade_proxy_actor
+		Actor: ^TeamUpgradeProxyActor
 
-^team_upgrade_proxy_actor:
-	Inherits: ^researched_upgrade_template
+^TeamUpgradeProxyActor:
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Team Upgrade
 	Buildable:
@@ -2171,7 +2171,7 @@
 	RenderSprites:
 		Image: icon
 	ProvidesPrerequisite:
-		Prerequisite: ^team_upgrade_template
+		Prerequisite: ^TeamUpgradeTemplate
 
 ####################################################################################################
 #		Actor Templates
@@ -4245,7 +4245,7 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo
 
-^wall:
+^Wall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@cloak: ^StealthGenCloakable
@@ -7651,7 +7651,7 @@ CPQDEBUGDUMMY:
 	ProductionBar@RADEFENCE:
 		ProductionType: RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
-	Inherits@susaintelligence: ^susaintelligence
+	Inherits@susaintelligence: ^SUSAIntelligence
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@conyard:
 		Prerequisite: conyard
@@ -8745,7 +8745,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: undeployed && !moving && !deployed
 		ArmamentNames: dummy
 
-^upgrade_template:
+^UpgradeTemplate:
 	Buildable:
 		Description: Generic upgrade
 		BuildLimit: 1
@@ -8758,13 +8758,13 @@ CPQDEBUGDUMMY:
 	UpdatesPlayerStatistics:
 		AddToSpectatorTab: true
 
-^researched_upgrade_template:
-	Inherits: ^upgrade_template
+^ResearchedUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	UpdatesPlayerStatistics:
 		AddToUpgradesTab: true
 
-^promotion_upgrade_template:
-	Inherits: ^upgrade_template
+^PromotionUpgradeTemplate:
+	Inherits: ^UpgradeTemplate
 	Buildable:
 		Queue: Promotions
 		Description: Promotion unlock upgrade

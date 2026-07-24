@@ -3,7 +3,7 @@
 ####################################################################################################
 
 egcnst_infiltrated.futu:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen FutureTech Building Plans
 	Buildable:
@@ -13,7 +13,7 @@ egcnst_infiltrated.futu:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: futuretech_constructionyard
 futuretech_doctrine_equalizerx1:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Equalizer X1
 	Buildable:
@@ -24,7 +24,7 @@ futuretech_doctrine_equalizerx1:
 	ProvidesPrerequisite:
 
 futuretech_doctrine_equalizerx2:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Equalizer X2
 	Buildable:
@@ -35,7 +35,7 @@ futuretech_doctrine_equalizerx2:
 	ProvidesPrerequisite:
 
 futuretech_doctrine_equalizerx3:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Equalizer X3
 	Buildable:

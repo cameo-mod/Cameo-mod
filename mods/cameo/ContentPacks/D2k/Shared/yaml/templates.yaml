@@ -579,7 +579,7 @@
 #   BUILDINGS SHARED
 ###########################################
 
-^concrete:
+^Concrete:
 	Interactable:
 	D2kBuilding:
 		ConcreteTemplate: 856
@@ -605,7 +605,7 @@
 		Description: Provides a strong foundation that reduces damage by 33% and automatically repairs buildings on top of it.
 		IconPalette: d2kunit
 
-^construction_yard:
+^ConstructionYard:
 	Inherits@D2kBLD: ^D2KBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
@@ -659,7 +659,7 @@
 	FreeActor@CPQDEBUGDUMMY:
 		-RequiresCondition:
 
-^wind_trap:
+^WindTrap:
 	Inherits: ^D2KBuilding
 	Inherits@power: ^PowerPlant
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -714,7 +714,7 @@
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 
-^refinery:
+^D2KRefinery:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@ref: ^Refinery
@@ -770,7 +770,7 @@
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
-^d2k_silo:
+^D2KSilo:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^1x1Shape
@@ -810,7 +810,7 @@
 		PipCount: 5
 		FullSequence: pip-yellow
 
-^research_centre:
+^ResearchCentre:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQ: ^CPQCondition
@@ -856,7 +856,7 @@
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
-^high_tech_factory:
+^HighTechFactory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -931,7 +931,7 @@
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
-^starport:
+^Starport:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1014,7 +1014,7 @@
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 
-^combat_tank:
+^CombatTank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -1064,7 +1064,7 @@
 		VoiceSet: D2KCombatTank
 
 # d2k_ornithopter_upgrade:
-# 	Inherits: ^researched_upgrade_template
+# 	Inherits: ^ResearchedUpgradeTemplate
 # 	Tooltip:
 # 		Name: Ornithopter Missiles
 # 	Buildable:

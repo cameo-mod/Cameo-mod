@@ -1,5 +1,5 @@
 ts_nod_upgrade_infiltrationkit:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infiltration Kit
 	Valued:
@@ -14,7 +14,7 @@ ts_nod_upgrade_infiltrationkit:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_mobilityspecialization:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Mobility Specialization
 	Valued:
@@ -29,7 +29,7 @@ ts_nod_upgrade_mobilityspecialization:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_auxiliaryweapon:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Auxiliary Weapon
 	Valued:
@@ -44,7 +44,7 @@ ts_nod_upgrade_auxiliaryweapon:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_stealthfieldsimprovements:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stealth Fields Improvements
 	Valued:
@@ -59,7 +59,7 @@ ts_nod_upgrade_stealthfieldsimprovements:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_tiberiumlenses:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tiberium Lenses
 	Valued:
@@ -74,7 +74,7 @@ ts_nod_upgrade_tiberiumlenses:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_tiberiumcoremissiles:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tiberium Core Missiles
 	Valued:
@@ -89,7 +89,7 @@ ts_nod_upgrade_tiberiumcoremissiles:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_advancedtiberiumrefinement:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Advanced Tiberium Refinement
 	Valued:
@@ -104,7 +104,7 @@ ts_nod_upgrade_advancedtiberiumrefinement:
 	ProvidesPrerequisite:
 
 ts_nod_upgrade_willofkane:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Will of Kane
 	Valued:
@@ -125,7 +125,7 @@ ts_nod_upgrade_willofkane:
 ############ Radar
 
 ts_nod_upgrade_willofkane_proxy_actor:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	ProvidesPrerequisite:
 		Prerequisite: ts_nod_upgrade_willofkane
 	RenderSprites:

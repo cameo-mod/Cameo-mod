@@ -1,5 +1,5 @@
 wc2_orcs_upgrade_betterfarm:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Better Farm
 	Valued:
@@ -14,7 +14,7 @@ wc2_orcs_upgrade_betterfarm:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_bestfarm:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Best Farm
 	Valued:
@@ -29,7 +29,7 @@ wc2_orcs_upgrade_bestfarm:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_axestrength:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Axe Strength
 	Buildable:
@@ -44,7 +44,7 @@ wc2_orcs_upgrade_axestrength:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_axestrengthii:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Axe Strength II
 	Buildable:
@@ -59,7 +59,7 @@ wc2_orcs_upgrade_axestrengthii:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_armorstrength:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Armor Strength
 	Buildable:
@@ -74,7 +74,7 @@ wc2_orcs_upgrade_armorstrength:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_armorstrengthii:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Armor Strength II
 	Buildable:
@@ -89,7 +89,7 @@ wc2_orcs_upgrade_armorstrengthii:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_throwingaxestrength:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Throwing Axe Strength
 	Buildable:
@@ -104,7 +104,7 @@ wc2_orcs_upgrade_throwingaxestrength:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_throwingaxestrengthii:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Throwing Axe Strength II
 	Buildable:
@@ -119,7 +119,7 @@ wc2_orcs_upgrade_throwingaxestrengthii:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_warcraft3grunt:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name:  Warcraft 3 Grunt
 	Buildable:
@@ -130,7 +130,7 @@ wc2_orcs_upgrade_warcraft3grunt:
 		Image: wc2_orcs_warcraft3grunt
 
 wc2_orcs_upgrade_berserker:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Berserker
 	Buildable:
@@ -145,7 +145,7 @@ wc2_orcs_upgrade_berserker:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_trollheadhunter:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Troll Headhunter
 	Buildable:
@@ -156,7 +156,7 @@ wc2_orcs_upgrade_trollheadhunter:
 		Image: wc2_orcs_trollheadhunter
 
 wc2_orcs_upgrade_berserkerlightaxes:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Berserker Light Axes
 	Buildable:
@@ -171,7 +171,7 @@ wc2_orcs_upgrade_berserkerlightaxes:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_berserkerscouting:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Berserker Scouting
 	Buildable:
@@ -186,7 +186,7 @@ wc2_orcs_upgrade_berserkerscouting:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_berserkerregeneration:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Berserker Regeneration
 	Buildable:
@@ -201,7 +201,7 @@ wc2_orcs_upgrade_berserkerregeneration:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_catapultstrength:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Catapult Strength
 	Buildable:
@@ -216,7 +216,7 @@ wc2_orcs_upgrade_catapultstrength:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_catapultstrengthii:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Catapult Strength II
 	Buildable:
@@ -231,7 +231,7 @@ wc2_orcs_upgrade_catapultstrengthii:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_cannondamage:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cannon Damage
 	Buildable:
@@ -247,7 +247,7 @@ wc2_orcs_upgrade_cannondamage:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_cannondamageii:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Cannon Damage II
 	Buildable:
@@ -262,7 +262,7 @@ wc2_orcs_upgrade_cannondamageii:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_ogremage:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Ogre-Mage
 	Buildable:
@@ -277,7 +277,7 @@ wc2_orcs_upgrade_ogremage:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_bloodlust:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Bloodlust
 	Buildable:
@@ -292,7 +292,7 @@ wc2_orcs_upgrade_bloodlust:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_runes:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Runes
 	Buildable:
@@ -307,7 +307,7 @@ wc2_orcs_upgrade_runes:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_haste:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Haste
 	Buildable:
@@ -322,7 +322,7 @@ wc2_orcs_upgrade_haste:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_deathanddecay:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Death and Decay
 	Buildable:
@@ -337,7 +337,7 @@ wc2_orcs_upgrade_deathanddecay:
 	ProvidesPrerequisite:
 
 wc2_orcs_upgrade_raisedead:
-	Inherits: ^researched_upgrade_template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Raise Dead
 	Buildable:
