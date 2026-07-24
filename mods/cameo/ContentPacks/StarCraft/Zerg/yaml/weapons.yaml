@@ -1,4 +1,4 @@
-ZerglingClaw:
+﻿ZerglingClaw:
 	Inherits: ^SwordWeapon
 	Report: zerglinghit.wav
 	SoundVolume: 3
@@ -979,7 +979,6 @@ LurkerSpines:
 		TrailImage: sczlspine
 		TrailInterval: 1
 		Blockable: true
-		LaunchAngle: 0
 		Speed: 333
 		Inaccuracy: 666
 	Warhead@Effect: CreateEffect
@@ -1066,7 +1065,8 @@ BehemothShoot:
 		Speed: 240
 		Blockable: false
 		Shadow: true
-		LaunchAngle: 80
+		MinimumLaunchAngle: 80
+		MaximumLaunchAngle: 80
 		ContrailLength: 12
 		Inaccuracy: 80
 		TrailDelay: 0

@@ -1,4 +1,4 @@
-^AirSuperiorityDoctrine:
+﻿^AirSuperiorityDoctrine:
 	DamageMultiplier@ra1_allies_upgrade_airsuperioritydoctrine:
 		RequiresCondition: ra1_allies_upgrade_airsuperioritydoctrine
 		Modifier: 85
@@ -132,7 +132,7 @@ ra1_soviets_upgrade_wareconomy_proxy_actor:
 		Prerequisites: ra1_soviets_upgrade_wareconomy
 		Multiplier: 90
 	SpeedMultiplier@ra1_soviets_upgrade_wareconomy:
-		RequiresCondition: ra1_soviets_upgrade_wareconomy
+		Prerequisites: ra1_soviets_upgrade_wareconomy
 		Modifier: 110
 	ResourceValueMultiplier@ra1_soviets_upgrade_wareconomy:
 		Modifier: 110

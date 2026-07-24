@@ -1,4 +1,4 @@
-td_gdi_commando_sniper:
+﻿td_gdi_commando_sniper:
 	Inherits: ^SniperWeapon
 	Report: ramgun2.aud
 	ReloadDelay: 25
@@ -1414,7 +1414,8 @@ GDIRigMissilePod:
 		Shadow: true
 		TrailImage: smokey
 		Inaccuracy: 800
-		LaunchAngle: 125
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
 		Speed: 500
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1796,7 +1797,7 @@ TDIonCannonDamage:
 	-Warhead@5Smu_area2:
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): GDI
-# minigunner — burst 4, disciplined cadence. Paired AP variant per the
+# minigunner â€” burst 4, disciplined cadence. Paired AP variant per the
 # base+upgrade rename law. M16/M16AP stay for their other users.
 td_gdi_minigunner_minigun:
 	Inherits: ^SmallArms

@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@orangestar:
 		Name: Orange Star AW
 		InternalName: orangestar
@@ -1014,7 +1014,7 @@ Player:
 		Multiplier: 80
 		Prerequisites: selectcolin
 	FirepowerMultiplier@selectcolin:
-		RequiresCondition: selectcolin
+		Prerequisites: selectcolin
 		Modifier: 80
 	DamageMultiplier@selectcolin:
 		RequiresCondition: selectcolin || selectgrimm

@@ -23,7 +23,6 @@
 		Explosions: ra2_flak_explosion_ground
 		ExplosionPalette: ra2unit
 		-ImpactSounds:
-		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -39,7 +38,6 @@
 	Projectile: Missile
 		Image: ra2_dragon
 		-TrailImage:
-		-TrailInterval:
 		ContrailLength: 25
 		ContrailStartWidth: 25
 		ContrailEndWidth: 1
@@ -60,7 +58,6 @@
 	Projectile: Missile
 		Image: patriot
 		-TrailImage:
-		-TrailInterval:
 		ContrailLength: 33
 		ContrailStartWidth: 33
 		ContrailEndWidth: 1
@@ -192,6 +189,7 @@ RA2GIRocketsG:
 	Projectile: Missile
 		Speed: 500
 		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
 		HorizontalRateOfTurn: 128
 		VerticalRateOfTurn: 128
 		Acceleration: 5
@@ -299,7 +297,6 @@ RA2MirageGun:
 	Warhead@Effect:
 		Explosions: ra2_iron_fx
 		-ImpactSounds:
-	Warhead@EffectWater:
 
 RA2HoverMissile:
 	Inherits: ^ArrowWeapon
@@ -1142,9 +1139,8 @@ TeslaArmorDischargeDummy:
 	ReloadDelay: 1
 	Range: 4500
 	-Report:
-	Projectile: LightningZap
-		-Image: DRAGON
-		-TrailImage: smokey
+		-Image:
+		-TrailImage:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 0
@@ -1241,7 +1237,7 @@ TeslaArmorDischargeFragment2:
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 4000
-	-Warhead@TeslaArc: FireShrapnel
+	-Warhead@TeslaArc:
 
 RA2PortaTesla:
 	Inherits: ^TeslaWeapon
@@ -1429,8 +1425,6 @@ RA2RadBeamWeapon:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 15
 	-Warhead@Effect:
-
-RA2CarrierTarget:
 	ReloadDelay: 50
 	Range: 17500
 	ValidTargets: Ground, Air, Water
@@ -1545,7 +1539,6 @@ RA2HornetMissile:
 		Damage: 1
 		ValidTargets: Ground, Water, Air
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 
 RA2GIRockets:
 	Inherits: ^RA2LightMissile
@@ -1600,7 +1593,6 @@ MigMissiles:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 4
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
@@ -1765,7 +1757,6 @@ RA2SCUD:
 	Range: 20000
 	MinRange: 4000
 	-Report:
-	-Projectile:
 	TargetActorCenter: true
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -1926,7 +1917,6 @@ YRBoomerSCUD:
 	Inherits: ^RA2Grenade
 	Inherits: ^RA2HeavyMissile
 	-Report:
-	Range: 20000
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 200
@@ -1963,7 +1953,7 @@ RA2TorpTube:
 	Range: 9000
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: Patriot
 		Arm: 5
@@ -1992,11 +1982,11 @@ RA2TorpTube:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 9
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
 		ExplosionPalette: ra2effect
@@ -2480,7 +2470,6 @@ RA2Terrorist:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^RA2Grenade
 	-Report:
-	Warhead@HeavyBomb: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 25
@@ -2497,7 +2486,6 @@ RA2Terrorist:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 25
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
@@ -2683,7 +2671,6 @@ LightningBolt:
 	Inherits: ^TeslaChargedWeapon
 	Projectile: InstantHit
 	-Report:
-	Range: 1000
 	ValidTargets: Ground, Water, Air
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Spread: 1000
@@ -2767,7 +2754,6 @@ IvanBomb:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		Damage: 15
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect

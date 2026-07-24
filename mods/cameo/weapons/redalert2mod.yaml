@@ -1,4 +1,4 @@
-####################################################################################################
+﻿####################################################################################################
 #		Red Alert 2 Asian Alliance
 ####################################################################################################
 
@@ -45,12 +45,11 @@ AsianFlameFragment:
 		Explosions: ra2_initfire
 		ExplosionPalette: ra2effect
 		-ImpactSounds:
-		ImpactActors: false
 		ValidTargets: Ground, Water
 
 AsianFlameFragment2:
 	Inherits: AsianFlameFragment
-	-Warhead@FireShrapnel: FireShrapnel
+	-Warhead@FireShrapnel:
 	Range: 3000
 
 AsianOilBombFragments:
@@ -112,7 +111,6 @@ AsianFlamerTurret:
 		Explosions: ra2_initfire
 		ExplosionPalette: ra2effect
 		-ImpactSounds:
-		ImpactActors: false
 		ValidTargets: Ground, Water
 	Warhead@FireShrapnel: FireShrapnel
 		Weapon: AsianFlameFragment
@@ -160,7 +158,7 @@ AsianSmallTorpedo:
 	BurstDelays: 8
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: MISSILE
 		Arm: 5
@@ -189,11 +187,11 @@ AsianSmallTorpedo:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 6
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
 		ExplosionPalette: ra2effect
@@ -1114,7 +1112,6 @@ MeteorFlameFragment:
 		Explosions: ra2_initfire
 		ExplosionPalette: ra2effect
 		-ImpactSounds:
-		ImpactActors: false
 		ValidTargets: Ground, Water
 
 NaxisBlackBomb:
@@ -1544,7 +1541,7 @@ RA2TraitorPower:
 		AirThreshold: 0
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure, MCImmune
-		ChangeOwnerValidStances: Neutral, Enemy
+		ValidStances: Neutral, Enemy
 
 RA2Robotmm:
 	Inherits: ^TeslaWeapon
@@ -1601,10 +1598,8 @@ RA2Robotmm_eliteScatter:
 	Inherits: RA2Robotmm_elite
 	Range: 2260
 	-Report:
-	Projectile: LaserZap
 		Color: 00EEFF88
 		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 2000
@@ -1618,7 +1613,7 @@ RA2Robotmm_eliteScatter:
 		Damage: 4000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-	-Warhead@Scatter: FireShrapnel
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -1627,7 +1622,7 @@ RA2Robotmm_eliteScatter:
 
 # CLOSE-COMBAT member weapon (Formula v2, 2026-07-19): naxis_sssoldier SMG.
 # SmallArms+Chaingun class convention (was Grenade+HeavyCannon+Chaingun);
-# burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else — renamed
+# burst 10 rapid spray, no-air. NaxiMP40 kept for nothing else â€” renamed
 # with its elite pair per the rename law.
 naxis_sssoldier_smg:
 	Inherits: ^SmallArms

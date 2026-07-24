@@ -1,4 +1,4 @@
-TSAux155mm:
+﻿TSAux155mm:
 	Inherits: TS155mm
 	Warhead@3: FireShrapnel
 		Weapon: TS155mmFrag
@@ -127,7 +127,8 @@ TSStankTusk:
 	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
 		ValidTargets: Ground, Water, Air
@@ -154,7 +155,8 @@ TSStankTibTusk:
 	ReloadDelay: 60
 	Report: misl1.aud
 	Projectile: Missile
-		LaunchAngle: 75
+		MinimumLaunchAngle: 75
+		MaximumLaunchAngle: 75
 		TrailImage: spittrail
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000

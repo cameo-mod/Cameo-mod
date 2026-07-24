@@ -1,4 +1,4 @@
-schwarzermond_lunarsoldier_rifle:
+﻿schwarzermond_lunarsoldier_rifle:
 	# SF VERIFIER weapon (maintainer 2026-07-20): SmallArms + Chaingun +
 	# Laser triad, 4000 each = 12000 @ reload 50 = 240 DPS (WC 1.0), exactly
 	# 2x the japan baseline (6000@50, 120). Range 6000, air-capable.
@@ -407,11 +407,9 @@ DalekCannonScatter:
 	Range: 4030
 	Report: tphfi201.wav, tgofi200.wav
 	-Report:
-	Projectile: LaserZap
 		Color: 00EEFF88
 		Width: 96
 		-HitAnim:
-	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 50000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -432,7 +430,7 @@ DalekCannonScatter:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 25
-	-Warhead@Scatter: FireShrapnel
+	-Warhead@Scatter:
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -500,7 +498,7 @@ NaxiBlackholeShoot:
 BlackHoleSuck:
 	Inherits: NanoReturn
 	ValidTargets: BlackHole
-	-Projectile: Bullet
+	-Projectile:
 	Projectile: Missile
 		Inaccuracy: 512
 		Image: ra2debris
@@ -802,7 +800,6 @@ NaxiCowDrop:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
 		Duration: 512
@@ -1073,7 +1070,8 @@ Naxis_Jagerline:
 		Shadow: true
 		TrailImage: smokey
 		Inaccuracy: 400
-		LaunchAngle: 125
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
 		Speed: 800
 		RangeLimit: 31300
 	Warhead@Grenade: SpreadDamage

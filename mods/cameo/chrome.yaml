@@ -1307,30 +1307,30 @@ sidebar-button-soviets-highlighted-disabled:
 
 # RA1 Japan
 
-^Sidebarjapan:
+^SidebarJapan:
 	Image: sidebar_japan.png
 sidebar-japan:
 	Inherits: sidebar
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan:
 	Inherits: sidebar-button
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan-pressed:
 	Inherits: sidebar-button-japan
 sidebar-button-japan-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan-highlighted-pressed:
 	Inherits: sidebar-button-ra2yuri-highlighted
 sidebar-button-japan-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^Sidebarjapan
+	Inherits@2: ^SidebarJapan
 sidebar-button-japan-highlighted-disabled:
 	Inherits: sidebar-button-japan-disabled
 
@@ -1495,30 +1495,30 @@ sidebar-button-ra2allies-highlighted-disabled:
 
 # RA2 Soviet
 
-^Sidebarra2soviets:
+^SidebarRA2Soviets:
 	Image: sidebar_ra2soviets.png
 sidebar-ra2soviets:
 	Inherits: sidebar
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets:
 	Inherits: sidebar-button
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets-pressed:
 	Inherits: sidebar-button-ra2soviets
 sidebar-button-ra2soviets-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets-highlighted-pressed:
 	Inherits: sidebar-button-ra2soviets-highlighted
 sidebar-button-ra2soviets-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^Sidebarra2soviets
+	Inherits@2: ^SidebarRA2Soviets
 sidebar-button-ra2soviets-highlighted-disabled:
 	Inherits: sidebar-button-ra2soviets-disabled
 
@@ -1669,30 +1669,30 @@ sidebar-button-2100-highlighted-disabled:
 
 # USA
 
-^Sidebarusa:
+^SidebarUSA:
 	Image: sidebar_usa.png
 sidebar-usa:
 	Inherits: sidebar
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa:
 	Inherits: sidebar-button
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa-pressed:
 	Inherits: sidebar-button-usa
 sidebar-button-usa-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa-highlighted-pressed:
 	Inherits: sidebar-button-usa-highlighted
 sidebar-button-usa-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^Sidebarusa
+	Inherits@2: ^SidebarUSA
 sidebar-button-usa-highlighted-disabled:
 	Inherits: sidebar-button-usa-disabled
 
@@ -1785,30 +1785,30 @@ sidebar-button-dune-highlighted-disabled:
 
 # Dune atreides
 
-^Sidebaratreides:
+^SidebarAtreides:
 	Image: sidebar_atreides.png
 sidebar-atreides:
 	Inherits: sidebar
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides:
 	Inherits: sidebar-button
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides-pressed:
 	Inherits: sidebar-button-atreides
 sidebar-button-atreides-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides-highlighted-pressed:
 	Inherits: sidebar-button-atreides-highlighted
 sidebar-button-atreides-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^Sidebaratreides
+	Inherits@2: ^SidebarAtreides
 sidebar-button-atreides-highlighted-disabled:
 	Inherits: sidebar-button-atreides-disabled
 
@@ -1872,30 +1872,30 @@ sidebar-button-ordos-highlighted-disabled:
 
 # Dune atreides New
 
-^SidebaratreidesNew:
+^SidebarAtreidesNew:
 	Image: sidebar_atreidesnew.png
 sidebar-atreidesnew:
 	Inherits: sidebar
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew:
 	Inherits: sidebar-button
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew-hover:
 	Inherits: sidebar-button-hover
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew-pressed:
 	Inherits: sidebar-button-atreidesnew
 sidebar-button-atreidesnew-highlighted:
 	Inherits: sidebar-button-highlighted
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew-highlighted-hover:
 	Inherits: sidebar-button-highlighted-hover
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew-highlighted-pressed:
 	Inherits: sidebar-button-atreidesnew-highlighted
 sidebar-button-atreidesnew-disabled:
 	Inherits: sidebar-button-disabled
-	Inherits@2: ^SidebaratreidesNew
+	Inherits@2: ^SidebarAtreidesNew
 sidebar-button-atreidesnew-highlighted-disabled:
 	Inherits: sidebar-button-atreidesnew-disabled
 

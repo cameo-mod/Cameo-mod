@@ -1,4 +1,4 @@
-Halloween_ClownBalloon:
+﻿Halloween_ClownBalloon:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 40
 	Range: 6144
@@ -128,8 +128,6 @@ halloween_bullethell:
 		LaunchAngle: 75
 		Inaccuracy: 5555
 		Image: halloween_bullethell_blue
-		MinimumLaunchAngle: 50
-		MaximumLaunchAngle: 100
 		MinimumLaunchSpeed: 50
 		MaximumLaunchSpeed: 100
 	Warhead@1Dam: SpreadDamage
@@ -164,8 +162,6 @@ halloween_bullethell2:
 		LaunchAngle: 50
 		Inaccuracy: 7777
 		Image: halloween_bullethell_red
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 75
 		MinimumLaunchSpeed: 100
 		MaximumLaunchSpeed: 150
 	Warhead@1Dam: SpreadDamage
@@ -200,8 +196,6 @@ halloween_bullethell3:
 		LaunchAngle: 25
 		Inaccuracy: 12345
 		Image: halloween_bullethell_red
-		MinimumLaunchAngle: 0
-		MaximumLaunchAngle: 50
 		MinimumLaunchSpeed: 50
 		MaximumLaunchSpeed: 150
 	Warhead@1Dam: SpreadDamage
