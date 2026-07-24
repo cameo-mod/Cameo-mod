@@ -125,7 +125,7 @@
        }
       ],
       "weapon": "JapanSuperBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -198,7 +198,7 @@
      "v": "175"
     }
    },
-   "ra1_allies_cargoplane_bomber": {
+   "ra1_allies_cargoplanebomber": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/weapons.yaml",
@@ -240,7 +240,7 @@
        }
       ],
       "weapon": "ParaBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -258,7 +258,6 @@
      "v": "4000"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Aircraft",
@@ -279,7 +278,7 @@
      "v": "175"
     }
    },
-   "ra1_allies_cargoplane_paradrop": {
+   "ra1_allies_cargoplaneparadrop": {
     "armor": {
      "src": "inherited",
      "v": "Bomber"
@@ -290,7 +289,6 @@
      "v": "4000"
     },
     "design": {
-     "category": "Aircraft",
      "class_anchor": null,
      "special": null,
      "subtype": "Aircraft",
@@ -385,7 +383,7 @@
        }
       ],
       "weapon": "ParaBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -842,7 +840,7 @@
        }
       ],
       "weapon": "Pistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -916,7 +914,7 @@
        }
       ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -958,7 +956,7 @@
        }
       ],
       "weapon": "RocketsRA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -999,7 +997,7 @@
        }
       ],
       "weapon": "RocketsRACryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile",
@@ -1042,7 +1040,7 @@
        }
       ],
       "weapon": "RocketsRACryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile",
@@ -1116,7 +1114,7 @@
        }
       ],
       "weapon": "ra1_allies_rifleinfantry_carbine",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1148,7 +1146,7 @@
        }
       ],
       "weapon": "ra1_allies_rifleinfantry_carbine",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1180,7 +1178,7 @@
        }
       ],
       "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^CryoMissileProjectile"
@@ -1214,7 +1212,7 @@
        }
       ],
       "weapon": "ra1_allies_rifleinfantry_carbine_cryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^CryoMissileProjectile"
@@ -1351,7 +1349,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -1367,7 +1365,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -1391,7 +1389,7 @@
        }
       ],
       "weapon": "Pistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -1506,7 +1504,7 @@
        }
       ],
       "weapon": "ConscriptMolotov",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -1557,7 +1555,7 @@
        }
       ],
       "weapon": "ConscriptMolotov",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -1623,7 +1621,7 @@
        }
       ],
       "weapon": "Pistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -1759,7 +1757,7 @@
        }
       ],
       "weapon": "JapanSpeedBoatGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1816,7 +1814,7 @@
        }
       ],
       "weapon": "JapanSpeedBoatGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -1852,7 +1850,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -1885,7 +1883,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -1971,7 +1969,7 @@
        }
       ],
       "weapon": "YamatoCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon"
@@ -2014,7 +2012,7 @@
        }
       ],
       "weapon": "YamatoCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon"
@@ -2043,7 +2041,7 @@
        }
       ],
       "weapon": "YamatoFlak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -2121,7 +2119,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -2153,7 +2151,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -2207,7 +2205,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2218,7 +2216,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -2275,7 +2273,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -2286,7 +2284,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -2317,7 +2315,7 @@
        }
       ],
       "weapon": "JapanCarrierFighterBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -2402,7 +2400,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -2450,7 +2448,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -2529,7 +2527,7 @@
        }
       ],
       "weapon": "Stinger",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -2562,7 +2560,7 @@
        }
       ],
       "weapon": "StingerCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow",
@@ -2597,7 +2595,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2630,7 +2628,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2704,7 +2702,7 @@
        }
       ],
       "weapon": "2Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon"
       ]
@@ -2738,7 +2736,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2895,7 +2893,7 @@
        }
       ],
       "weapon": "227mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -2994,7 +2992,7 @@
        }
       ],
       "weapon": "TorpTube",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile"
@@ -3035,7 +3033,7 @@
        }
       ],
       "weapon": "TorpTubeThermobaric",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyMissile"
@@ -3095,7 +3093,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3110,7 +3108,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3125,7 +3123,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3140,7 +3138,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3155,7 +3153,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3170,7 +3168,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3185,7 +3183,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3200,7 +3198,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3244,7 +3242,7 @@
        }
       ],
       "weapon": "APCGunAllies",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -3284,7 +3282,7 @@
        }
       ],
       "weapon": "APCGunAlliesAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -3315,7 +3313,7 @@
     "name": "Allied APC",
     "prerequisites": [
      "~ra1_allies_alliedbarracks",
-     "~!ra1_allies_promotion_unlockphasetransport"
+     "~!ra1_allies_promotion_phasetransport"
     ],
     "queue": [
      "Vehicle",
@@ -3370,7 +3368,7 @@
        }
       ],
       "weapon": "TigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"

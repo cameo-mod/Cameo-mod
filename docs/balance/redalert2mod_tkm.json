@@ -40,7 +40,7 @@
        }
       ],
       "weapon": "HueyGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^RA2Chaingun"
@@ -70,7 +70,7 @@
        }
       ],
       "weapon": "HueyMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -143,7 +143,7 @@
        }
       ],
       "weapon": "HueyCryoMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -220,7 +220,7 @@
        }
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -297,7 +297,7 @@
        }
       ],
       "weapon": "HueyTwinMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -393,7 +393,7 @@
        }
       ],
       "weapon": "ViperMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -441,7 +441,7 @@
        }
       ],
       "weapon": "ViperMissilesCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile",
@@ -489,7 +489,7 @@
        }
       ],
       "weapon": "ViperMissilesTwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile"
@@ -563,7 +563,7 @@
        }
       ],
       "weapon": "ViperMissilesFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2MediumMissile",
@@ -597,7 +597,7 @@
     "prerequisites": [
      "~tkm_airpad",
      "tkm_techcenter",
-     "~tkm_promotion_unlockviper"
+     "~tkm_promotion_viper"
     ],
     "queue": [
      "Aircraft",
@@ -617,7 +617,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Armor.Type",
      "v": "Light"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/aircraft.yaml#Valued.Cost",
      "v": "25"
@@ -636,7 +636,7 @@
     },
     "name": "Drone",
     "prerequisites": [
-     "~unbuildable"
+     "~disabled"
     ],
     "queue": [
      "Aircraft",
@@ -681,7 +681,7 @@
        }
       ],
       "weapon": "TKMDroneExplosion",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -803,7 +803,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -821,7 +821,7 @@
     },
     "name": "TKM Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1010,7 +1010,7 @@
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Armor.Type",
      "v": "Heavy"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/buildings.yaml#Valued.Cost",
      "v": "2500"
@@ -1028,7 +1028,7 @@
     },
     "name": "TKM Trench Truck (Deployed)",
     "prerequisites": [
-     "~unbuildable"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1119,7 +1119,7 @@
        }
       ],
       "weapon": "tkmbunkmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun",
        "^SmallArms"
@@ -1151,7 +1151,7 @@
        }
       ],
       "weapon": "HighVAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1228,7 +1228,7 @@
        }
       ],
       "weapon": "TKMAATurretCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -1306,7 +1306,7 @@
        }
       ],
       "weapon": "tkmturretcannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon"
@@ -1384,7 +1384,7 @@
        }
       ],
       "weapon": "FlakbusAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -1458,7 +1458,7 @@
        }
       ],
       "weapon": "tkmtrenchdepcannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -1559,7 +1559,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1594,7 +1594,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1630,7 +1630,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1667,7 +1667,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1679,7 +1679,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -1691,7 +1691,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -1707,7 +1707,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -1737,7 +1737,7 @@
        }
       ],
       "weapon": "tkm_juggernaut",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -1784,7 +1784,7 @@
        }
       ],
       "weapon": "tkmjuggap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -1815,7 +1815,7 @@
        }
       ],
       "weapon": "tkm_juggernaut",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -1863,7 +1863,7 @@
        }
       ],
       "weapon": "tkmjuggap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -1894,7 +1894,7 @@
     "name": "Juggernaut",
     "prerequisites": [
      "~tkm_barracks",
-     "tkm_promotion_unlockjuggernaut",
+     "tkm_promotion_juggernaut",
      "tkm_observationvan"
     ],
     "queue": [
@@ -1938,7 +1938,7 @@
        }
       ],
       "weapon": "tkmm16",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1969,7 +1969,7 @@
        }
       ],
       "weapon": "tkmm16ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2001,7 +2001,7 @@
        }
       ],
       "weapon": "tkmm16",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2033,7 +2033,7 @@
        }
       ],
       "weapon": "tkmm16ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2104,7 +2104,7 @@
        }
       ],
       "weapon": "tkm_rifleman_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2133,7 +2133,7 @@
        }
       ],
       "weapon": "tkm_rifleman_semiautorifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2162,7 +2162,7 @@
        }
       ],
       "weapon": "tkm_rifleman_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2239,7 +2239,7 @@
        }
       ],
       "weapon": "tkmrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2268,7 +2268,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2298,7 +2298,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2343,7 +2343,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -2374,7 +2374,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2404,7 +2404,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2435,7 +2435,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2481,7 +2481,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -2551,7 +2551,7 @@
        }
       ],
       "weapon": "tkmawp",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2580,7 +2580,7 @@
        }
       ],
       "weapon": "tkmawp",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2653,7 +2653,7 @@
        }
       ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2684,7 +2684,7 @@
        }
       ],
       "weapon": "tkmsmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2779,7 +2779,7 @@
        }
       ],
       "weapon": "ThermoF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2815,7 +2815,7 @@
        }
       ],
       "weapon": "ThermoF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2888,7 +2888,7 @@
        }
       ],
       "weapon": "tkm_trooper_ak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2919,7 +2919,7 @@
        }
       ],
       "weapon": "tkm_trooper_ak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2969,7 +2969,7 @@
        }
       ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -3021,7 +3021,7 @@
        }
       ],
       "weapon": "tkm_trooper_gp25",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon"
@@ -3153,7 +3153,7 @@
        }
       ],
       "weapon": "VonSniperLockdown",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -3231,7 +3231,7 @@
        }
       ],
       "weapon": "VonSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3304,7 +3304,7 @@
        }
       ],
       "weapon": "VonSniperAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3382,7 +3382,7 @@
        }
       ],
       "weapon": "VonSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3456,7 +3456,7 @@
        }
       ],
       "weapon": "VonSniperAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3534,7 +3534,7 @@
        }
       ],
       "weapon": "VanSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3563,7 +3563,7 @@
        }
       ],
       "weapon": "VanSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3644,7 +3644,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3678,7 +3678,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3690,7 +3690,7 @@
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Valued.Cost",
      "v": "250"
     },
     "design": {
@@ -3702,7 +3702,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Health.HP",
      "v": "10000"
     },
     "name": "Worker",
@@ -3714,13 +3714,13 @@
      "v": "5000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
     }
    }
   },
   "promotions": {
-   "tkm_promotion_unlockbattlebus": {
+   "tkm_promotion_battlebus": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3729,22 +3729,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Battle Bus",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockjuggernaut",
-     "!tkm_promotion_unlockbattlebus",
+     "tkm_promotion_juggernaut",
+     "!tkm_promotion_battlebus",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockdronepodtruck": {
+   "tkm_promotion_dronepodtruck": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3753,22 +3753,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Drone Pod Truck",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockviper",
-     "!tkm_promotion_unlockdronepodtruck",
+     "tkm_promotion_viper",
+     "!tkm_promotion_dronepodtruck",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockflakbus": {
+   "tkm_promotion_flakbus": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3777,22 +3777,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Flak Bus",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlocktrenchtank",
-     "!tkm_promotion_unlockflakbus",
+     "tkm_promotion_trenchtank",
+     "!tkm_promotion_flakbus",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockjuggernaut": {
+   "tkm_promotion_juggernaut": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3801,22 +3801,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Juggernaut",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockmedictruck",
-     "!tkm_promotion_unlockjuggernaut",
+     "tkm_promotion_medictruck",
+     "!tkm_promotion_juggernaut",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockmedictruck": {
+   "tkm_promotion_medictruck": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3825,21 +3825,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Medic Truck",
     "prerequisites": [
      "~tkm_constructionyard",
-     "!tkm_promotion_unlockmedictruck",
+     "!tkm_promotion_medictruck",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockradartruck": {
+   "tkm_promotion_radartruck": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3848,21 +3848,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Radar Truck",
     "prerequisites": [
      "~tkm_constructionyard",
-     "!tkm_promotion_unlockradartruck",
+     "!tkm_promotion_radartruck",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockrepairtruck": {
+   "tkm_promotion_repairtruck": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3871,21 +3871,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Repair Truck",
     "prerequisites": [
      "~tkm_constructionyard",
-     "!tkm_promotion_unlockrepairtruck",
+     "!tkm_promotion_repairtruck",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockt30": {
+   "tkm_promotion_t30": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3894,22 +3894,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock T30",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockdronepodtruck",
-     "!tkm_promotion_unlockt30",
+     "tkm_promotion_dronepodtruck",
+     "!tkm_promotion_t30",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockthebigshiee": {
+   "tkm_promotion_thebigshiee": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3918,22 +3918,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock the Big Shiee",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockflakbus",
-     "!tkm_promotion_unlockthebigshiee",
+     "tkm_promotion_flakbus",
+     "!tkm_promotion_thebigshiee",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockthesandmarine": {
+   "tkm_promotion_thesandmarine": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3942,22 +3942,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock the Sand Marine",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockbattlebus",
-     "!tkm_promotion_unlockthesandmarine",
+     "tkm_promotion_battlebus",
+     "!tkm_promotion_thesandmarine",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlocktrenchtank": {
+   "tkm_promotion_trenchtank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3966,22 +3966,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Trench Tank",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockrepairtruck",
-     "!tkm_promotion_unlocktrenchtank",
+     "tkm_promotion_repairtruck",
+     "!tkm_promotion_trenchtank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "tkm_promotion_unlockviper": {
+   "tkm_promotion_viper": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3990,15 +3990,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Viper",
     "prerequisites": [
      "~tkm_constructionyard",
-     "tkm_promotion_unlockradartruck",
-     "!tkm_promotion_unlockviper",
+     "tkm_promotion_radartruck",
+     "!tkm_promotion_viper",
      "rank1"
     ],
     "queue": [
@@ -4020,7 +4020,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4048,7 +4048,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4075,7 +4075,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4102,7 +4102,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4129,7 +4129,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4156,7 +4156,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4183,7 +4183,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4211,7 +4211,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4239,7 +4239,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4266,7 +4266,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4294,7 +4294,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4321,7 +4321,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4349,7 +4349,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4390,7 +4390,7 @@
        }
       ],
       "weapon": "tkmrh120gun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -4466,7 +4466,7 @@
        }
       ],
       "weapon": "as42rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -4495,7 +4495,7 @@
        }
       ],
       "weapon": "tkmcryorockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -4525,7 +4525,7 @@
        }
       ],
       "weapon": "tkmtwinrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -4570,7 +4570,7 @@
        }
       ],
       "weapon": "tkmfirerockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile"
@@ -4649,7 +4649,7 @@
        }
       ],
       "weapon": "TKMMedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -4680,7 +4680,7 @@
     "prerequisites": [
      "~tkm_warfactory",
      "tkm_techcenter",
-     "~tkm_promotion_unlockbattlebus"
+     "~tkm_promotion_battlebus"
     ],
     "queue": [
      "Vehicle",
@@ -4703,6 +4703,7 @@
     "armaments": [
      {
       "burst": "2",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -4742,7 +4743,7 @@
        }
       ],
       "weapon": "BigShieeTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon"
@@ -4750,6 +4751,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -4789,7 +4791,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -4798,6 +4800,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -4837,7 +4840,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -4846,6 +4849,7 @@
      },
      {
       "burst": "8",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.0833333333333333,
       "pricing": true,
@@ -4930,7 +4934,7 @@
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -4939,6 +4943,7 @@
      },
      {
       "burst": "8",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.0833333333333333,
       "pricing": true,
@@ -5023,7 +5028,7 @@
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5032,6 +5037,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.9375,
       "pricing": true,
@@ -5097,7 +5103,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5107,6 +5113,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.9375,
       "pricing": true,
@@ -5172,7 +5179,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5219,7 +5226,7 @@
        }
       ],
       "weapon": "bigshieemortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon"
@@ -5256,7 +5263,7 @@
      "~tkm_warfactory",
      "tkm_techcenter",
      "~!tkm_bigshiee",
-     "~tkm_promotion_unlockthebigshiee"
+     "~tkm_promotion_thebigshiee"
     ],
     "queue": [
      "Vehicle",
@@ -5321,7 +5328,7 @@
     "name": "Drone Pod Truck",
     "prerequisites": [
      "~tkm_warfactory",
-     "~tkm_promotion_unlockdronepodtruck",
+     "~tkm_promotion_dronepodtruck",
      "tkm_techcenter"
     ],
     "queue": [
@@ -5366,7 +5373,7 @@
     "name": "Flak Bus",
     "prerequisites": [
      "~tkm_warfactory",
-     "~tkm_promotion_unlockflakbus",
+     "~tkm_promotion_flakbus",
      "tkm_techcenter"
     ],
     "queue": [
@@ -5416,7 +5423,7 @@
        }
       ],
       "weapon": "TKMMedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -5446,7 +5453,7 @@
     "name": "Medic Truck",
     "prerequisites": [
      "~tkm_warfactory",
-     "~tkm_promotion_unlockmedictruck"
+     "~tkm_promotion_medictruck"
     ],
     "queue": [
      "Vehicle",
@@ -5548,7 +5555,7 @@
        }
       ],
       "weapon": "TKMQuadCannonAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -5587,7 +5594,7 @@
        }
       ],
       "weapon": "TKMQuadCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -5679,7 +5686,7 @@
     "name": "Radar Truck",
     "prerequisites": [
      "~tkm_warfactory",
-     "~tkm_promotion_unlockradartruck"
+     "~tkm_promotion_radartruck"
     ],
     "queue": [
      "Vehicle",
@@ -5731,7 +5738,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -5761,7 +5768,7 @@
     "name": "Repair Truck",
     "prerequisites": [
      "~tkm_warfactory",
-     "~tkm_promotion_unlockrepairtruck"
+     "~tkm_promotion_repairtruck"
     ],
     "queue": [
      "Vehicle",
@@ -5784,6 +5791,7 @@
     "armaments": [
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -5823,7 +5831,7 @@
        }
       ],
       "weapon": "SandmarineTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon"
@@ -5831,6 +5839,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -5870,7 +5879,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5879,6 +5888,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.125,
       "pricing": true,
@@ -5918,7 +5928,7 @@
        }
       ],
       "weapon": "SandmarineTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -5927,6 +5937,7 @@
      },
      {
       "burst": "8",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.0833333333333333,
       "pricing": true,
@@ -6011,7 +6022,7 @@
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6020,6 +6031,7 @@
      },
      {
       "burst": "8",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 1.0833333333333333,
       "pricing": true,
@@ -6104,7 +6116,7 @@
        }
       ],
       "weapon": "SandmarineTuskTwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6113,6 +6125,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.9375,
       "pricing": true,
@@ -6178,7 +6191,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6188,6 +6201,7 @@
      },
      {
       "burst": "3",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert2Mod/TKM/yaml/weapons.yaml",
       "design_weapon_class": 0.9375,
       "pricing": true,
@@ -6253,7 +6267,7 @@
        }
       ],
       "weapon": "SandmarineTuskFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ShrapnelWeapon",
@@ -6300,7 +6314,7 @@
        }
       ],
       "weapon": "sandmarinemortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^MediumFlameWeapon"
@@ -6337,7 +6351,7 @@
      "~tkm_warfactory",
      "tkm_techcenter",
      "~!tkm_sandmarine",
-     "~tkm_promotion_unlockthesandmarine"
+     "~tkm_promotion_thesandmarine"
     ],
     "queue": [
      "Vehicle",
@@ -6381,7 +6395,7 @@
        }
       ],
       "weapon": "tkmstrykermg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -6410,7 +6424,7 @@
        }
       ],
       "weapon": "tkmstrykerrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -6455,7 +6469,7 @@
        }
       ],
       "weapon": "tkmstrykerfirerockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumMissile"
@@ -6547,7 +6561,7 @@
        }
       ],
       "weapon": "t30shell",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^RailgunWeapon"
@@ -6584,7 +6598,7 @@
      "~tkm_warfactory",
      "tkm_techcenter",
      "~!tkm_t30",
-     "~tkm_promotion_unlockt30"
+     "~tkm_promotion_t30"
     ],
     "queue": [
      "Vehicle",
@@ -6651,7 +6665,7 @@
        }
       ],
       "weapon": "tkm2a46gun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -6679,7 +6693,7 @@
        }
       ],
       "weapon": "tkmkord",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -6755,7 +6769,7 @@
        }
       ],
       "weapon": "tkmtechmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -6801,7 +6815,7 @@
        }
       ],
       "weapon": "tkmtechnicalmgap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^SmallArms"
@@ -6875,7 +6889,7 @@
        }
       ],
       "weapon": "tkmltgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -6905,7 +6919,7 @@
        }
       ],
       "weapon": "tkmtwinrocketstechnicaltank",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -7034,7 +7048,7 @@
        }
       ],
       "weapon": "tkmkatyushalalauncherrockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -7071,7 +7085,7 @@
        }
       ],
       "weapon": "tkmkatyushalalauncherrocketscryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^CryoMissileProjectile",
        "^ShrapnelWeapon"
@@ -7108,7 +7122,7 @@
        }
       ],
       "weapon": "tkmkatyushalalauncherrocketstwin",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -7171,7 +7185,7 @@
        }
       ],
       "weapon": "tkmkatyushalalauncherrocketsfire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightMissile",
@@ -7263,7 +7277,7 @@
        }
       ],
       "weapon": "tkmtrenchcannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -7299,7 +7313,7 @@
     "prerequisites": [
      "~tkm_warfactory",
      "tkm_techcenter",
-     "~tkm_promotion_unlocktrenchtank"
+     "~tkm_promotion_trenchtank"
     ],
     "queue": [
      "Vehicle",
@@ -7349,7 +7363,7 @@
      "~tkm_warfactory",
      "tkm_techcenter",
      "~tkm_upgrade_berezkaarsenalupgrade",
-     "~!tkm_promotion_unlocktrenchtank"
+     "~!tkm_promotion_trenchtank"
     ],
     "queue": [
      "Vehicle",
@@ -7404,7 +7418,7 @@
        }
       ],
       "weapon": "TKMZazaCannonAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -7443,7 +7457,7 @@
        }
       ],
       "weapon": "TKMZazaCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"

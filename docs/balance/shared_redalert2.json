@@ -74,7 +74,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -108,7 +108,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -233,7 +233,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -276,12 +276,12 @@
    },
    "ra2_awall": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -292,7 +292,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -390,7 +390,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -517,7 +517,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -585,7 +585,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -618,7 +618,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -659,7 +659,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -688,7 +688,7 @@
     },
     "name": "Civilian MBT",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Vehicle",
@@ -745,7 +745,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -786,7 +786,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -815,7 +815,7 @@
     },
     "name": "Humvee",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Vehicle",
@@ -872,7 +872,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -913,7 +913,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -942,7 +942,7 @@
     },
     "name": "Civilian Humvee",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Vehicle",
@@ -999,7 +999,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1040,7 +1040,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1081,7 +1081,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1122,7 +1122,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1151,7 +1151,7 @@
     },
     "name": "Machinegunner IFV",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Vehicle",
@@ -1256,7 +1256,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1383,7 +1383,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1510,7 +1510,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1637,7 +1637,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1764,7 +1764,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1891,7 +1891,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2018,7 +2018,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2145,7 +2145,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2272,7 +2272,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2399,7 +2399,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2526,7 +2526,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2569,12 +2569,12 @@
    },
    "ra2_swall": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -2585,7 +2585,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -2683,7 +2683,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2810,7 +2810,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2937,7 +2937,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3064,7 +3064,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3191,7 +3191,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3234,12 +3234,12 @@
    },
    "ra2_ywall": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -3250,7 +3250,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -3294,7 +3294,7 @@
        }
       ],
       "weapon": "RA2DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3334,36 +3334,6 @@
      "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Aircraft.Speed",
      "v": "210"
     }
-   },
-   "ra2brik": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "200"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Misc",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "100000"
-    },
-    "name": "Concrete Barrier",
-    "prerequisites": [
-     "~ra2fact"
-    ],
-    "queue": [
-     "Defence",
-     "RADefence"
-    ]
    },
    "ra2carrier": {
     "armaments": [
@@ -3513,7 +3483,7 @@
        }
       ],
       "weapon": "RA2155mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2HeavyCannon"
       ]
@@ -3546,7 +3516,7 @@
        }
       ],
       "weapon": "RA2155mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2EliteEffects"
@@ -3644,7 +3614,7 @@
        }
       ],
       "weapon": "SonicZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MagicWeapon"
       ]
@@ -3781,7 +3751,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4898",
+      "range": "4500",
       "reloaddelay": "18",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -3801,7 +3771,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3832,7 +3802,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3873,7 +3843,7 @@
        }
       ],
       "weapon": "RA2vulcan3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3902,7 +3872,7 @@
     },
     "name": "Black Operation Soldier",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Infantry",
@@ -3913,7 +3883,7 @@
      "v": "8000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "58"
     }
    },
@@ -3926,7 +3896,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Misc",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4025,7 +3995,7 @@
        }
       ],
       "weapon": "RA2HornetMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -4137,7 +4107,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -4170,7 +4140,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -4211,7 +4181,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4240,7 +4210,7 @@
     },
     "name": "Leopard",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Vehicle",
@@ -4268,7 +4238,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Misc",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4371,111 +4341,6 @@
       "weapon": "RA2TeslaCoilCharge_cosmetic",
       "weapon_class_source": "template",
       "weapon_types": []
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "5222",
-      "reloaddelay": "100",
-      "requires": "(!ra2_soviets_upgrade_teslaoverload && !rank-elite)",
-      "slot": "Armament@GARRISONED",
-      "versus_templates": [
-       "^TeslaWeapon"
-      ],
-      "warheads": [
-       {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
-      "weapon_types": [
-       "^TeslaWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "5777",
-      "reloaddelay": "100",
-      "requires": "(ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)",
-      "slot": "Armament@GARRISONED2",
-      "versus_templates": [
-       "RA2PortaTesla"
-      ],
-      "warheads": [
-       {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "WeaponClass",
-      "weapon_types": [
-       "^TeslaWeapon"
-      ]
-     },
-     {
-      "armament_name": "garrisoned",
-      "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
-      "design_weapon_class": 1.0,
-      "pricing": false,
-      "range": "6222",
-      "reloaddelay": "100",
-      "requires": "(ra2_soviets_upgrade_teslaoverload && rank-elite)",
-      "slot": "Armament@GARRISONED3",
-      "versus_templates": [
-       "RA2PortaTesla2"
-      ],
-      "warheads": [
-       {
-        "damage": "24000",
-        "tag": "TeslaWeapon",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12000",
-        "tag": "TeslaExtraDamage",
-        "type": "SpreadDamage"
-       },
-       {
-        "damage": "12",
-        "tag": "TeslaWeaponPercentage",
-        "type": "HealthPercentageDamage"
-       }
-      ],
-      "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "WeaponClass",
-      "weapon_types": [
-       "^TeslaWeapon"
-      ]
      }
     ],
     "armor": {
@@ -4484,7 +4349,7 @@
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -4495,19 +4360,16 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "48000"
     },
     "name": "Tesla Coil Charger",
-    "prerequisites": [
-     "~ra2_soviets_radar"
-    ],
     "sight": {
      "src": "inherited",
      "v": "6000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "38"
     }
    },
@@ -4542,7 +4404,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4576,7 +4438,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4610,7 +4472,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4664,7 +4526,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4699,7 +4561,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4734,7 +4596,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4780,7 +4642,7 @@
      "v": "6000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "38"
     }
    },
@@ -4811,7 +4673,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4841,7 +4703,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4871,7 +4733,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4901,7 +4763,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -4929,7 +4791,7 @@
     },
     "name": "Sidewinder",
     "prerequisites": [
-     "~disable"
+     "~disabled"
     ],
     "queue": [
      "Infantry",
@@ -5064,7 +4926,7 @@
        }
       ],
       "weapon": "RA2TorpTube",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -5111,7 +4973,7 @@
        }
       ],
       "weapon": "RA2TorpTube_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -5172,7 +5034,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Misc",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5248,7 +5110,7 @@
        }
       ],
       "weapon": "MigMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -5346,7 +5208,7 @@
        }
       ],
       "weapon": "MigMissiles_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -5414,7 +5276,7 @@
        }
       ],
       "weapon": "MigMissiles_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -5479,7 +5341,7 @@
        }
       ],
       "weapon": "MigMissiles_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -5574,7 +5436,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Misc",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5644,7 +5506,7 @@
        }
       ],
       "weapon": "RA2Robotmm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5711,7 +5573,7 @@
        }
       ],
       "weapon": "RA2Robotmm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -5789,7 +5651,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -5797,12 +5659,12 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Armor.Type",
      "v": "Heavy"
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Valued.Cost",
      "v": "2000"
     },
     "design": {
@@ -5813,20 +5675,20 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Health.HP",
      "v": "200000"
     },
     "name": "Slave Miner",
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#RevealsShroud.Range",
      "v": "6666"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.Speed",
      "v": "50"
     },
     "turn_speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/misc.yaml#Mobile.TurnSpeed",
      "v": "10"
     }
    },
@@ -5905,7 +5767,7 @@
     "name": "Yuri Sub Pen",
     "prerequisites": [
      "~yuri_constructionyard",
-     "yuri_slaveminer_2",
+     "yuri_slaveminer_deployed",
      "~globalnaval"
     ],
     "queue": [
@@ -5928,7 +5790,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5943,7 +5805,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5958,7 +5820,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },

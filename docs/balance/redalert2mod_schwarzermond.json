@@ -115,7 +115,7 @@
        }
       ],
       "weapon": "NaxCorrosionRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -194,7 +194,7 @@
        }
       ],
       "weapon": "NaxDieGlocke",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon"
       ]
@@ -310,7 +310,7 @@
        }
       ],
       "weapon": "LunarNaxiDroneLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -399,7 +399,7 @@
        }
       ],
       "weapon": "LunarNaxiDroneMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -497,7 +497,7 @@
        }
       ],
       "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -556,7 +556,7 @@
        }
       ],
       "weapon": "NaxHaenebuQuadCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -659,7 +659,7 @@
        }
       ],
       "weapon": "NaxHaenebuQuadCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -718,7 +718,7 @@
        }
       ],
       "weapon": "NaxHaenebuQuadCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -754,7 +754,7 @@
        }
       ],
       "weapon": "NaxiCowDrop",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -867,7 +867,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -940,7 +940,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1010,7 +1010,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1080,7 +1080,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1150,7 +1150,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1220,7 +1220,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1290,7 +1290,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1360,7 +1360,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1430,7 +1430,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1500,7 +1500,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1570,7 +1570,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1640,7 +1640,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -1796,7 +1796,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1814,7 +1814,7 @@
     },
     "name": "Schwarzer Mond Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1966,7 +1966,7 @@
        }
       ],
       "weapon": "NaxLaserT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2034,7 +2034,7 @@
        }
       ],
       "weapon": "Lunar_YellowLaserT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2102,7 +2102,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedLaserT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2362,7 +2362,7 @@
        }
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2MediumCannon",
@@ -2436,7 +2436,7 @@
        }
       ],
       "weapon": "Lunar_GreenSturmArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyBomb",
@@ -2593,7 +2593,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -2695,7 +2695,7 @@
        }
       ],
       "weapon": "NaxCorrosionRocketTrooperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -2754,7 +2754,7 @@
        }
       ],
       "weapon": "NaxCorrosionRocketTrooperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -2814,7 +2814,7 @@
        }
       ],
       "weapon": "NaxCorrosionRocketTrooperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -2874,7 +2874,7 @@
        }
       ],
       "weapon": "NaxCorrosionRocketTrooperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -2973,7 +2973,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3031,7 +3031,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3089,7 +3089,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3147,7 +3147,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3205,7 +3205,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3263,7 +3263,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3322,7 +3322,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3381,7 +3381,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3440,7 +3440,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3499,7 +3499,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_yellow_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3558,7 +3558,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3617,7 +3617,7 @@
        }
       ],
       "weapon": "schwarzermond_lunarsoldier_rifle_amplified_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -3748,7 +3748,7 @@
        }
       ],
       "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -3833,7 +3833,7 @@
        }
       ],
       "weapon": "NaxiMP40LaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -3969,7 +3969,7 @@
        }
       ],
       "weapon": "NaxiMP40Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4054,7 +4054,7 @@
        }
       ],
       "weapon": "NaxiMP40LaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4139,7 +4139,7 @@
        }
       ],
       "weapon": "Lunar_YellowMP40Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4224,7 +4224,7 @@
        }
       ],
       "weapon": "Lunar_YellowMP40LaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4309,7 +4309,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedMP40Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4394,7 +4394,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedMP40LaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4479,7 +4479,7 @@
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4515,7 +4515,7 @@
        }
       ],
       "weapon": "BlackHoleMakerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4550,7 +4550,7 @@
        }
       ],
       "weapon": "BlackHoleMaker",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4587,7 +4587,7 @@
        }
       ],
       "weapon": "BlackHoleMakerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -4680,7 +4680,7 @@
        }
       ],
       "weapon": "UbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4728,7 +4728,7 @@
        }
       ],
       "weapon": "UbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4777,7 +4777,7 @@
        }
       ],
       "weapon": "UbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4826,7 +4826,7 @@
        }
       ],
       "weapon": "UbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4874,7 +4874,7 @@
        }
       ],
       "weapon": "Lunar_YellowUbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4922,7 +4922,7 @@
        }
       ],
       "weapon": "Lunar_YellowUbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -4971,7 +4971,7 @@
        }
       ],
       "weapon": "Lunar_YellowUbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5020,7 +5020,7 @@
        }
       ],
       "weapon": "Lunar_YellowUbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5068,7 +5068,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5116,7 +5116,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5165,7 +5165,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5214,7 +5214,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedUbermenschLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -5273,7 +5273,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5297,7 +5297,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5321,7 +5321,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5345,7 +5345,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5369,7 +5369,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5393,7 +5393,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5416,7 +5416,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5439,7 +5439,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5463,7 +5463,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5486,7 +5486,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5510,7 +5510,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5534,7 +5534,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5560,7 +5560,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5579,7 +5579,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5606,7 +5606,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5632,7 +5632,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5658,7 +5658,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5684,7 +5684,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5710,7 +5710,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5736,7 +5736,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5762,7 +5762,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5810,7 +5810,7 @@
        }
       ],
       "weapon": "NaxCrystalLeech",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -5846,7 +5846,7 @@
        }
       ],
       "weapon": "NaxCrystalLeechE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -5959,7 +5959,7 @@
        }
       ],
       "weapon": "DalekCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6025,7 +6025,7 @@
        }
       ],
       "weapon": "DalekCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6201,7 +6201,7 @@
        }
       ],
       "weapon": "NaxCorrosionBeast",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -6260,7 +6260,7 @@
        }
       ],
       "weapon": "NaxCorrosionBeastE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -6380,7 +6380,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6450,7 +6450,7 @@
        }
       ],
       "weapon": "NaxiBeetleLaserAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6520,7 +6520,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6590,7 +6590,7 @@
        }
       ],
       "weapon": "Lunar_YellowBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6660,7 +6660,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6730,7 +6730,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedBeetleLaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6849,7 +6849,7 @@
        }
       ],
       "weapon": "NaxiTank2Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6919,7 +6919,7 @@
        }
       ],
       "weapon": "NaxiTank2LaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6989,7 +6989,7 @@
        }
       ],
       "weapon": "Lunar_YellowTank2Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -7059,7 +7059,7 @@
        }
       ],
       "weapon": "Lunar_YellowTank2LaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -7129,7 +7129,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedTank2Laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -7199,7 +7199,7 @@
        }
       ],
       "weapon": "Lunar_AmplifiedTank2LaserAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -7310,7 +7310,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7375,7 +7375,7 @@
        }
       ],
       "weapon": "NaxGrilleArtyE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7455,7 +7455,7 @@
        }
       ],
       "weapon": "Lunar_GreenGrilleArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon",
@@ -7538,7 +7538,7 @@
        }
       ],
       "weapon": "Lunar_GreenGrilleArtyE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon",
@@ -7619,7 +7619,7 @@
        }
       ],
       "weapon": "LunarPanzerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -7652,7 +7652,7 @@
        }
       ],
       "weapon": "LunarPanzerCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -7700,7 +7700,7 @@
        }
       ],
       "weapon": "Lunar_Green105mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -7749,7 +7749,7 @@
        }
       ],
       "weapon": "Lunar_Green105mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -7870,7 +7870,7 @@
        }
       ],
       "weapon": "LunarTigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -7945,7 +7945,7 @@
        }
       ],
       "weapon": "LunarTigerCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -8035,7 +8035,7 @@
        }
       ],
       "weapon": "Lunar_GreenTigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LightChemicalWeapon",
@@ -8129,7 +8129,7 @@
        }
       ],
       "weapon": "Lunar_GreenTigerCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LightChemicalWeapon",
@@ -8250,7 +8250,7 @@
        }
       ],
       "weapon": "Naxis_Jagerline",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -8319,7 +8319,7 @@
        }
       ],
       "weapon": "Naxis_Jagerline_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -8548,7 +8548,7 @@
        }
       ],
       "weapon": "LunarNaxiJadgDestroyer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8607,7 +8607,7 @@
        }
       ],
       "weapon": "LunarNaxiJadgDestroyerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8681,7 +8681,7 @@
        }
       ],
       "weapon": "Lunar_GreenJadgDestroyer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon",
@@ -8758,7 +8758,7 @@
        }
       ],
       "weapon": "Lunar_GreenJadgDestroyerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon",

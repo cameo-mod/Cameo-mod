@@ -138,7 +138,7 @@
        }
       ],
       "weapon": "BCLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -276,7 +276,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -354,7 +354,7 @@
     "name": "Dropship",
     "prerequisites": [
      "~terran_starport",
-     "~!terran_promotion_unlockspectreandmedivac"
+     "~!terran_promotion_spectreandmedivac"
     ],
     "queue": [
      "Aircraft",
@@ -399,7 +399,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -429,7 +429,7 @@
     "name": "Medivac",
     "prerequisites": [
      "~terran_starport",
-     "~terran_promotion_unlockspectreandmedivac"
+     "~terran_promotion_spectreandmedivac"
     ],
     "queue": [
      "Aircraft",
@@ -569,7 +569,7 @@
        }
       ],
       "weapon": "PhobosLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^HeavyMissile",
@@ -706,7 +706,7 @@
        }
       ],
       "weapon": "BCYamatoCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^RailgunWeapon",
@@ -749,7 +749,7 @@
     "prerequisites": [
      "~terran_starport",
      "terran_sciencefacility",
-     "~terran_promotion_unlockphobos"
+     "~terran_promotion_phobos"
     ],
     "queue": [
      "Aircraft",
@@ -802,7 +802,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -837,7 +837,7 @@
     "name": "Pythean",
     "prerequisites": [
      "~terran_starport",
-     "~terran_promotion_unlockpythean"
+     "~terran_promotion_pythean"
     ],
     "queue": [
      "Aircraft",
@@ -884,7 +884,7 @@
        }
       ],
       "weapon": "RavenRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -914,7 +914,7 @@
     "name": "Raven",
     "prerequisites": [
      "~terran_starport",
-     "~terran_promotion_unlockraven"
+     "~terran_promotion_raven"
     ],
     "queue": [
      "Aircraft",
@@ -987,7 +987,7 @@
        }
       ],
       "weapon": "ScienceVesselEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -1061,7 +1061,7 @@
        }
       ],
       "weapon": "SunDogLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1133,7 +1133,7 @@
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1209,7 +1209,7 @@
        }
       ],
       "weapon": "SunDogRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1248,7 +1248,7 @@
     "name": "Sundog",
     "prerequisites": [
      "~terran_starport",
-     "~terran_promotion_unlocksundog"
+     "~terran_promotion_sundog"
     ],
     "queue": [
      "Aircraft",
@@ -1323,7 +1323,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1389,7 +1389,7 @@
        }
       ],
       "weapon": "ValkyrieRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -1428,7 +1428,7 @@
     "prerequisites": [
      "~terran_starport",
      "terran_armory",
-     "~!terran_promotion_unlockwyvern"
+     "~!terran_promotion_wyvern"
     ],
     "queue": [
      "Aircraft",
@@ -1473,7 +1473,7 @@
        }
       ],
       "weapon": "WraithLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1545,7 +1545,7 @@
        }
       ],
       "weapon": "WraithRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1621,7 +1621,7 @@
        }
       ],
       "weapon": "WraithRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1655,7 +1655,7 @@
     "name": "Wraith",
     "prerequisites": [
      "~terran_starport",
-     "~!terran_promotion_unlocksundog"
+     "~!terran_promotion_sundog"
     ],
     "queue": [
      "Aircraft",
@@ -1784,7 +1784,7 @@
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1908,7 +1908,7 @@
        }
       ],
       "weapon": "WyvernRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -1946,7 +1946,7 @@
     "prerequisites": [
      "~terran_starport",
      "terran_armory",
-     "~terran_promotion_unlockwyvern"
+     "~terran_promotion_wyvern"
     ],
     "queue": [
      "Aircraft",
@@ -2084,7 +2084,7 @@
      "src": "inherited",
      "v": "750"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -2102,7 +2102,7 @@
     },
     "name": "Command Center",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -2539,7 +2539,7 @@
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2615,7 +2615,7 @@
        }
       ],
       "weapon": "MissileTurret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -2724,7 +2724,7 @@
        }
       ],
       "weapon": "NaxLaserT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2802,7 +2802,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2837,7 +2837,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2873,7 +2873,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2909,7 +2909,7 @@
        }
       ],
       "weapon": "FirebatF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -2944,7 +2944,7 @@
     "name": "Firebat",
     "prerequisites": [
      "~terran_academy",
-     "~!terran_promotion_unlockharakan"
+     "~!terran_promotion_harakan"
     ],
     "queue": [
      "Infantry",
@@ -3040,7 +3040,7 @@
        }
       ],
       "weapon": "GhostSniperLockdown",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -3117,7 +3117,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3194,7 +3194,7 @@
        }
       ],
       "weapon": "GhostSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -3233,7 +3233,7 @@
     "name": "Ghost",
     "prerequisites": [
      "~terran_sciencefacility",
-     "~!terran_promotion_unlockspectreandmedivac"
+     "~!terran_promotion_spectreandmedivac"
     ],
     "queue": [
      "Infantry",
@@ -3296,7 +3296,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3348,7 +3348,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3401,7 +3401,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3454,7 +3454,7 @@
        }
       ],
       "weapon": "HarakanF",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^MediumFlameWeapon"
@@ -3490,7 +3490,7 @@
     "name": "Harakan",
     "prerequisites": [
      "~terran_academy",
-     "~terran_promotion_unlockharakan"
+     "~terran_promotion_harakan"
     ],
     "queue": [
      "Infantry",
@@ -3543,7 +3543,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3586,7 +3586,7 @@
        }
       ],
       "weapon": "JimRaynorMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon"
@@ -3682,7 +3682,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3735,7 +3735,7 @@
        }
       ],
       "weapon": "MadcapGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -3772,7 +3772,7 @@
     "name": "Madcap",
     "prerequisites": [
      "~terran_barracks",
-     "~terran_promotion_unlockmadcap"
+     "~terran_promotion_madcap"
     ],
     "queue": [
      "Infantry",
@@ -3834,7 +3834,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3887,7 +3887,7 @@
        }
       ],
       "weapon": "MarauderMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -3982,7 +3982,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4037,7 +4037,7 @@
        }
       ],
       "weapon": "MarineMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4074,7 +4074,7 @@
     "name": "Marine",
     "prerequisites": [
      "~terran_barracks",
-     "~!terran_promotion_unlockmadcap"
+     "~!terran_promotion_madcap"
     ],
     "queue": [
      "Infantry",
@@ -4161,7 +4161,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4196,7 +4196,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -4272,7 +4272,7 @@
        }
       ],
       "weapon": "MedicFlare",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -4343,7 +4343,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4371,7 +4371,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4432,7 +4432,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4463,7 +4463,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4492,7 +4492,7 @@
        }
       ],
       "weapon": "ReaperPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4554,7 +4554,7 @@
        }
       ],
       "weapon": "ReaperGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4681,7 +4681,7 @@
        }
       ],
       "weapon": "SpecterSniperLockdown",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MediumMissile",
@@ -4758,7 +4758,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4835,7 +4835,7 @@
        }
       ],
       "weapon": "SpecterSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^HeavyCannon",
@@ -4874,7 +4874,7 @@
     "name": "Specter",
     "prerequisites": [
      "~terran_sciencefacility",
-     "~terran_promotion_unlockspectreandmedivac"
+     "~terran_promotion_spectreandmedivac"
     ],
     "queue": [
      "Infantry",
@@ -4891,7 +4891,7 @@
    }
   },
   "promotions": {
-   "terran_promotion_unlockcyclone": {
+   "terran_promotion_cyclone": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4900,22 +4900,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Cyclone",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockmatador",
-     "!terran_promotion_unlockcyclone",
+     "terran_promotion_matador",
+     "!terran_promotion_cyclone",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockgoliathmk2": {
+   "terran_promotion_goliathmk2": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4924,22 +4924,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Goliath Mk2",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockcyclone",
-     "!terran_promotion_unlockgoliathmk2",
+     "terran_promotion_cyclone",
+     "!terran_promotion_goliathmk2",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockharakan": {
+   "terran_promotion_harakan": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4948,22 +4948,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Harakan",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockmadcap",
-     "!terran_promotion_unlockharakan",
+     "terran_promotion_madcap",
+     "!terran_promotion_harakan",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockmadcap": {
+   "terran_promotion_madcap": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4972,21 +4972,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Madcap",
     "prerequisites": [
      "~terran_commandcenter",
-     "!terran_promotion_unlockmadcap",
+     "!terran_promotion_madcap",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockmatador": {
+   "terran_promotion_matador": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4995,21 +4995,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Matador",
     "prerequisites": [
      "~terran_commandcenter",
-     "!terran_promotion_unlockmatador",
+     "!terran_promotion_matador",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockphobos": {
+   "terran_promotion_phobos": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5018,22 +5018,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Phobos",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockwyvern",
-     "!terran_promotion_unlockphobos",
+     "terran_promotion_wyvern",
+     "!terran_promotion_phobos",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockpythean": {
+   "terran_promotion_pythean": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5042,22 +5042,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Pythean",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockspectreandmedivac",
-     "!terran_promotion_unlockpythean",
+     "terran_promotion_spectreandmedivac",
+     "!terran_promotion_pythean",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockraven": {
+   "terran_promotion_raven": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5066,22 +5066,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Raven",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlocksundog",
-     "!terran_promotion_unlockraven",
+     "terran_promotion_sundog",
+     "!terran_promotion_raven",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockspectreandmedivac": {
+   "terran_promotion_spectreandmedivac": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5090,22 +5090,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Spectre and Medivac",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockharakan",
-     "!terran_promotion_unlockspectreandmedivac",
+     "terran_promotion_harakan",
+     "!terran_promotion_spectreandmedivac",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlocksundog": {
+   "terran_promotion_sundog": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5114,21 +5114,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Sundog",
     "prerequisites": [
      "~terran_commandcenter",
-     "!terran_promotion_unlocksundog",
+     "!terran_promotion_sundog",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockwarhound": {
+   "terran_promotion_warhound": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5137,22 +5137,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Warhound",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockgoliathmk2",
-     "!terran_promotion_unlockwarhound",
+     "terran_promotion_goliathmk2",
+     "!terran_promotion_warhound",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "terran_promotion_unlockwyvern": {
+   "terran_promotion_wyvern": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -5161,15 +5161,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Wyvern",
     "prerequisites": [
      "~terran_commandcenter",
-     "terran_promotion_unlockraven",
-     "!terran_promotion_unlockwyvern",
+     "terran_promotion_raven",
+     "!terran_promotion_wyvern",
      "rank1"
     ],
     "queue": [
@@ -5191,7 +5191,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5217,7 +5217,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5243,7 +5243,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5269,7 +5269,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5296,7 +5296,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5322,7 +5322,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5349,7 +5349,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5375,7 +5375,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5402,7 +5402,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5428,7 +5428,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5455,7 +5455,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5481,7 +5481,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5507,7 +5507,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5533,7 +5533,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5560,7 +5560,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5586,7 +5586,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5613,7 +5613,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5639,7 +5639,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5666,7 +5666,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5720,7 +5720,7 @@
        }
       ],
       "weapon": "CycloneRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5762,7 +5762,7 @@
        }
       ],
       "weapon": "CycloneRocketsLockOn",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -5793,7 +5793,7 @@
     "name": "Cyclone",
     "prerequisites": [
      "~terran_engineeringbay",
-     "~terran_promotion_unlockcyclone"
+     "~terran_promotion_cyclone"
     ],
     "queue": [
      "Vehicle",
@@ -5866,7 +5866,7 @@
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5925,7 +5925,7 @@
        }
       ],
       "weapon": "GoliathMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -5999,7 +5999,7 @@
        }
       ],
       "weapon": "GoliathRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -6075,7 +6075,7 @@
        }
       ],
       "weapon": "GoliathRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -6114,7 +6114,7 @@
     "name": "Goliath",
     "prerequisites": [
      "~terran_armory",
-     "~!terran_promotion_unlockgoliathmk2"
+     "~!terran_promotion_goliathmk2"
     ],
     "queue": [
      "Vehicle",
@@ -6198,7 +6198,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6269,7 +6269,7 @@
        }
       ],
       "weapon": "GoliathMk2MG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -6333,7 +6333,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6397,7 +6397,7 @@
        }
       ],
       "weapon": "GoliathMk2Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile",
@@ -6435,7 +6435,7 @@
     "name": "Goliath Mk2",
     "prerequisites": [
      "~terran_armory",
-     "~terran_promotion_unlockgoliathmk2"
+     "~terran_promotion_goliathmk2"
     ],
     "queue": [
      "Vehicle",
@@ -6519,7 +6519,7 @@
        }
       ],
       "weapon": "MatadorFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -6556,7 +6556,7 @@
        }
       ],
       "weapon": "MatadorLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6586,7 +6586,7 @@
     "name": "Matador",
     "prerequisites": [
      "~terran_weaponsfactory",
-     "~terran_promotion_unlockmatador"
+     "~terran_promotion_matador"
     ],
     "queue": [
      "Vehicle",
@@ -6682,7 +6682,7 @@
        }
       ],
       "weapon": "SCVAttack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -6718,7 +6718,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6818,7 +6818,7 @@
        }
       ],
       "weapon": "SiegeTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon",
@@ -7034,7 +7034,7 @@
        }
       ],
       "weapon": "SiegeTankSiegeCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",
@@ -7169,7 +7169,7 @@
        }
       ],
       "weapon": "VultureGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -7292,7 +7292,7 @@
        }
       ],
       "weapon": "SCTyr",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Chaingun",
@@ -7364,7 +7364,7 @@
        }
       ],
       "weapon": "SCTyrAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -7397,7 +7397,7 @@
     "name": "Warhound",
     "prerequisites": [
      "~terran_sciencefacility",
-     "~terran_promotion_unlockwarhound"
+     "~terran_promotion_warhound"
     ],
     "queue": [
      "Vehicle",

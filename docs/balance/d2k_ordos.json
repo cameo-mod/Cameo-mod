@@ -32,7 +32,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -79,7 +79,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -87,16 +87,16 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
     "build_limit": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Buildable.BuildLimit",
      "v": "10"
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
      "v": "5000"
     },
     "design": {
@@ -108,12 +108,12 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "500000"
     },
     "name": "Advanced Carryall",
     "self_heal_step": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth.Step",
      "v": "50"
     },
     "sight": {
@@ -121,7 +121,7 @@
      "v": "5c0"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
     }
    },
@@ -153,7 +153,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -200,7 +200,7 @@
        }
       ],
       "weapon": "d2kCarryallChainGun_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -208,16 +208,12 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "10"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Valued.Cost",
      "v": "2000"
     },
     "design": {
@@ -229,7 +225,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Health.HP",
      "v": "200000"
     },
     "name": "Advanced Carryall",
@@ -241,7 +237,7 @@
      "RAAircraft"
     ],
     "self_heal_step": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#ChangesHealth.Step",
      "v": "50"
     },
     "sight": {
@@ -249,7 +245,7 @@
      "v": "5c0"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "156"
     }
    },
@@ -341,7 +337,7 @@
        }
       ],
       "weapon": "ordos_airmine",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -478,7 +474,7 @@
        }
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -530,7 +526,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -580,7 +576,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -612,7 +608,7 @@
     "name": "Banshee",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_unlockbanshees",
+     "~ordos_promotion_banshees",
      "ordos_ixresearchcenter"
     ],
     "queue": [
@@ -717,7 +713,7 @@
        }
       ],
       "weapon": "eye_bomberguy",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumChemicalWeapon",
@@ -794,7 +790,7 @@
        }
       ],
       "weapon": "d2kChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -841,7 +837,7 @@
        }
       ],
       "weapon": "d2kChainGun_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun"
@@ -980,7 +976,7 @@
        }
       ],
       "weapon": "Wraith_ToxinMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyFlameWeapon",
@@ -1019,7 +1015,7 @@
     "name": "Wraith",
     "prerequisites": [
      "~ordos_hightechfactory",
-     "~ordos_promotion_unlockwraith",
+     "~ordos_promotion_wraith",
      "ordos_palace"
     ],
     "queue": [
@@ -1105,7 +1101,7 @@
        }
       ],
       "weapon": "D2K_155mm_turret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -1198,7 +1194,7 @@
        }
       ],
       "weapon": "ordos_autogunturret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -1285,7 +1281,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1303,7 +1299,7 @@
     },
     "name": "Ordos Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1557,9 +1553,17 @@
    "ordos_refineryordos": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -1569,16 +1573,20 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Refinery",
     "prerequisites": [
      "~ordos_constructionyard",
      "ordos_windtrap"
     ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "ordos_repairpad": {
@@ -1782,7 +1790,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AAPowered",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -1844,7 +1852,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -1897,7 +1905,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AAPowered",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -1960,7 +1968,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper_AGOnly",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -2037,7 +2045,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2071,7 +2079,7 @@
        }
       ],
       "weapon": "d2k_chemgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2101,7 +2109,7 @@
     "name": "Ordos Chemical Trooper",
     "prerequisites": [
      "~ordos_barracks",
-     "~ordos_promotion_unlockchemicaltrooper"
+     "~ordos_promotion_chemicaltrooper"
     ],
     "queue": [
      "Infantry",
@@ -2146,7 +2154,7 @@
        }
       ],
       "weapon": "contaminator_attack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2180,7 +2188,7 @@
        }
       ],
       "weapon": "contaminator_attack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2210,7 +2218,7 @@
     "name": "Contaminator",
     "prerequisites": [
      "~ordos_barracks",
-     "~ordos_promotion_unlockcontaminator"
+     "~ordos_promotion_contaminator"
     ],
     "queue": [
      "Infantry",
@@ -2359,7 +2367,7 @@
        }
       ],
       "weapon": "facedancer_grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2505,7 +2513,7 @@
        }
       ],
       "weapon": "facedancer_grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2608,7 +2616,7 @@
     "name": "Leech",
     "prerequisites": [
      "~ordos_barracks",
-     "~ordos_promotion_unlockleecher"
+     "~ordos_promotion_leecher"
     ],
     "queue": [
      "Infantry",
@@ -2664,7 +2672,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2720,7 +2728,7 @@
        }
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -2763,7 +2771,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2820,7 +2828,7 @@
        }
       ],
       "weapon": "light_inf_lmg_ordos_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -2940,7 +2948,7 @@
        }
       ],
       "weapon": "Dune_SiegeMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -3016,7 +3024,7 @@
        }
       ],
       "weapon": "Dune_SiegeMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -3049,7 +3057,7 @@
     "name": "Ordos Mortar Trooper",
     "prerequisites": [
      "~ordos_barracks",
-     "~ordos_promotion_unlockmortartroopers"
+     "~ordos_promotion_mortartroopers"
     ],
     "queue": [
      "Infantry",
@@ -3111,7 +3119,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -3164,7 +3172,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -3232,7 +3240,7 @@
      "src": "inherited",
      "v": "None"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/D2k/Ordos/yaml/infantry.yaml#Valued.Cost",
      "v": "300"
@@ -3251,7 +3259,7 @@
     },
     "name": "Saboteur",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Infantry",
@@ -3268,7 +3276,7 @@
    }
   },
   "promotions": {
-   "ordos_promotion_unlockbanshees": {
+   "ordos_promotion_banshees": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3277,22 +3285,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Banshees",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlockdeviatortank",
-     "!ordos_promotion_unlockbanshees",
+     "ordos_promotion_deviatortank",
+     "!ordos_promotion_banshees",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockchemicaltrooper": {
+   "ordos_promotion_chemicaltrooper": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3301,21 +3309,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chemical Trooper",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlockchemicaltrooper",
+     "!ordos_promotion_chemicaltrooper",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockcontaminator": {
+   "ordos_promotion_contaminator": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3324,22 +3332,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Contaminator",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlockcontaminator",
-     "ordos_promotion_unlockchemicaltrooper",
+     "!ordos_promotion_contaminator",
+     "ordos_promotion_chemicaltrooper",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockdeviatortank": {
+   "ordos_promotion_deviatortank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3348,22 +3356,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Deviator Tank",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlockmortartroopers",
-     "!ordos_promotion_unlockdeviatortank",
+     "ordos_promotion_mortartroopers",
+     "!ordos_promotion_deviatortank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockdustdrone": {
+   "ordos_promotion_dustdrone": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3372,21 +3380,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Dust Drone",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlockdustdrone",
+     "!ordos_promotion_dustdrone",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlocklaboratorycrawler": {
+   "ordos_promotion_laboratorycrawler": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3395,22 +3403,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Laboratory Crawler",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlocklaboratorycrawler",
-     "ordos_promotion_unlockleecher",
+     "!ordos_promotion_laboratorycrawler",
+     "ordos_promotion_leecher",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlocklasertank": {
+   "ordos_promotion_lasertank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3419,22 +3427,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Laser Tank",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlockstealthraider",
-     "!ordos_promotion_unlocklasertank",
+     "ordos_promotion_stealthraider",
+     "!ordos_promotion_lasertank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockleecher": {
+   "ordos_promotion_leecher": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3443,22 +3451,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Leecher",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlockleecher",
-     "ordos_promotion_unlockcontaminator",
+     "!ordos_promotion_leecher",
+     "ordos_promotion_contaminator",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockmortartroopers": {
+   "ordos_promotion_mortartroopers": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3467,21 +3475,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Mortar Troopers",
     "prerequisites": [
      "~ordos_constructionyard",
-     "!ordos_promotion_unlockmortartroopers",
+     "!ordos_promotion_mortartroopers",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockpython": {
+   "ordos_promotion_python": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3490,22 +3498,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Python",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlocklasertank",
-     "!ordos_promotion_unlockpython",
+     "ordos_promotion_lasertank",
+     "!ordos_promotion_python",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockstealthraider": {
+   "ordos_promotion_stealthraider": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3514,22 +3522,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Stealth Raider",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlockdustdrone",
-     "!ordos_promotion_unlockstealthraider",
+     "ordos_promotion_dustdrone",
+     "!ordos_promotion_stealthraider",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ordos_promotion_unlockwraith": {
+   "ordos_promotion_wraith": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3538,15 +3546,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Wraith",
     "prerequisites": [
      "~ordos_constructionyard",
-     "ordos_promotion_unlockbanshees",
-     "!ordos_promotion_unlockwraith",
+     "ordos_promotion_banshees",
+     "!ordos_promotion_wraith",
      "rank1"
     ],
     "queue": [
@@ -3568,7 +3576,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3594,7 +3602,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3620,7 +3628,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3646,7 +3654,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3673,7 +3681,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3699,7 +3707,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3727,7 +3735,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3753,7 +3761,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3783,7 +3791,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3810,7 +3818,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3836,7 +3844,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3898,7 +3906,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -3931,7 +3939,7 @@
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
-     "~!ordos_promotion_unlocklaboratorycrawler"
+     "~!ordos_promotion_laboratorycrawler"
     ],
     "queue": [
      "Vehicle",
@@ -4020,7 +4028,7 @@
        }
       ],
       "weapon": "120mm_cobra",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4093,7 +4101,7 @@
        }
       ],
       "weapon": "120mm_cobra_deploy",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4127,7 +4135,7 @@
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
-     "~!ordos_promotion_unlockpython"
+     "~!ordos_promotion_python"
     ],
     "queue": [
      "Vehicle",
@@ -4225,7 +4233,7 @@
        }
       ],
       "weapon": "autogun_tank_small",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile",
        "^HeavyCannon",
@@ -4311,7 +4319,7 @@
        }
       ],
       "weapon": "OrdosCombatTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -4456,7 +4464,7 @@
        }
       ],
       "weapon": "DeviatorMissile_Artillery",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyFlameWeapon",
@@ -4575,7 +4583,7 @@
        }
       ],
       "weapon": "DeviatorMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -4608,7 +4616,7 @@
     "name": "Deviator Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_unlockdeviatortank",
+     "~ordos_promotion_deviatortank",
      "ordos_palace"
     ],
     "queue": [
@@ -4676,7 +4684,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -4708,7 +4716,7 @@
     "name": "Dust Drone",
     "prerequisites": [
      "~ordos_light_vehicle_production",
-     "~ordos_promotion_unlockdustdrone"
+     "~ordos_promotion_dustdrone"
     ],
     "queue": [
      "Vehicle",
@@ -4811,7 +4819,7 @@
        }
       ],
       "weapon": "autogun_tank",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile",
        "^HeavyCannon",
@@ -4896,7 +4904,7 @@
        }
       ],
       "weapon": "HeavyOrdosCombatTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -4971,7 +4979,7 @@
        }
       ],
       "weapon": "HeavyOrdosCombatTankRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -5113,7 +5121,7 @@
        }
       ],
       "weapon": "Laboratory_Bioball",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5165,7 +5173,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -5215,7 +5223,7 @@
        }
       ],
       "weapon": "D2K_APC_Rocket_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -5248,7 +5256,7 @@
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_ixresearchcenter",
-     "~ordos_promotion_unlocklaboratorycrawler"
+     "~ordos_promotion_laboratorycrawler"
     ],
     "queue": [
      "Vehicle",
@@ -5336,7 +5344,7 @@
        }
       ],
       "weapon": "ordos_lasertank",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -5369,7 +5377,7 @@
     "name": "Laser Tank",
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
-     "~ordos_promotion_unlocklasertank",
+     "~ordos_promotion_lasertank",
      "ordos_ixresearchcenter"
     ],
     "queue": [
@@ -5507,7 +5515,7 @@
        }
       ],
       "weapon": "120mm_python",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5582,7 +5590,7 @@
        }
       ],
       "weapon": "120mm_python_deploy",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5616,7 +5624,7 @@
     "prerequisites": [
      "~ordos_heavy_vehicle_production",
      "ordos_outpost",
-     "~ordos_promotion_unlockpython"
+     "~ordos_promotion_python"
     ],
     "queue": [
      "Vehicle",
@@ -5664,7 +5672,7 @@
        }
       ],
       "weapon": "HMGo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5722,7 +5730,7 @@
        }
       ],
       "weapon": "HMGo_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^Chaingun",
@@ -5754,7 +5762,7 @@
     "name": "Ordos Raider",
     "prerequisites": [
      "~ordos_light_vehicle_production",
-     "~!ordos_promotion_unlockstealthraider"
+     "~!ordos_promotion_stealthraider"
     ],
     "queue": [
      "Vehicle",
@@ -5862,7 +5870,7 @@
        }
       ],
       "weapon": "HMGstealth",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5920,7 +5928,7 @@
        }
       ],
       "weapon": "HMGstealth_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^SmallArms",
@@ -5952,7 +5960,7 @@
     "name": "Stealth Raider",
     "prerequisites": [
      "~ordos_light_vehicle_production",
-     "~ordos_promotion_unlockstealthraider"
+     "~ordos_promotion_stealthraider"
     ],
     "queue": [
      "Vehicle",
@@ -6040,7 +6048,7 @@
        }
       ],
       "weapon": "120mm_td",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^LightChemicalWeapon",

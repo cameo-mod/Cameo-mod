@@ -51,7 +51,7 @@
        }
       ],
       "weapon": "harkonnen_autogunturret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -63,9 +63,9 @@
      "src": "inherited",
      "v": "Steel"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
      "v": "1100"
     },
     "design": {
@@ -76,7 +76,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
      "v": "75000"
     },
     "name": "Harkonnen Autogun Turret",
@@ -84,12 +84,8 @@
      "~harkonnen_constructionyard",
      "harkonnen_barracks"
     ],
-    "queue": [
-     "Defence",
-     "RADefence"
-    ],
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7710"
     }
    },
@@ -137,7 +133,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -155,7 +151,7 @@
     },
     "name": "Harkonnen Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -198,7 +194,7 @@
        }
       ],
       "weapon": "HarkonnenFlameTurret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -221,7 +217,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
      "v": "125000"
     },
     "name": "Harkonnen Flame Turret",
@@ -234,7 +230,7 @@
      "RADefence"
     ],
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "7979"
     }
    },
@@ -366,7 +362,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
     },
     "design": {
@@ -377,7 +373,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
      "v": "200000"
     },
     "name": "Harkonnen Light Factory",
@@ -470,8 +466,8 @@
      "~techlevel.superweapons"
     ],
     "queue": [
-     "Building",
-     "RABuilding"
+     "Defence",
+     "RADefence"
     ],
     "sight": {
      "src": "inherited",
@@ -481,9 +477,17 @@
    "harkonnen_refinery": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -493,16 +497,20 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Refinery",
     "prerequisites": [
      "~harkonnen_constructionyard",
      "harkonnen_windtrap"
     ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "harkonnen_repairpad": {
@@ -615,7 +623,7 @@
        }
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -628,9 +636,9 @@
      "src": "inherited",
      "v": "Steel"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Valued.Cost",
      "v": "1500"
     },
     "design": {
@@ -641,7 +649,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#Health.HP",
      "v": "150000"
     },
     "name": "Harkonnen Rocket Turret",
@@ -649,12 +657,8 @@
      "~harkonnen_constructionyard",
      "harkonnen_outpost"
     ],
-    "queue": [
-     "Defence",
-     "RADefence"
-    ],
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/buildings.yaml#RevealsShroud.Range",
      "v": "10684"
     }
    },
@@ -798,7 +802,7 @@
        }
       ],
       "weapon": "80mm_H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -827,10 +831,8 @@
     },
     "name": "Harkonnen Combat Tank",
     "prerequisites": [
-     "~heavy.harkonnen_combat",
-     "~techlevel.medium",
-     "~!faction.guild",
-     "~!faction.corrino"
+     "~harkonnen_vehicle_production",
+     "~heavy.harkonnen_combat"
     ],
     "queue": [
      "Vehicle",
@@ -875,7 +877,7 @@
        }
       ],
       "weapon": "DevBullet",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -907,10 +909,9 @@
     },
     "name": "Harkonnen Devastator Tank",
     "prerequisites": [
+     "~harkonnen_vehicle_production",
      "~heavy.harkonnen",
-     "research_centre",
-     "~techlevel.high",
-     "~faction.harkonnen"
+     "research_centre"
     ],
     "queue": [
      "Vehicle",
@@ -928,6 +929,54 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Harkonnen/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "12"
+    }
+   },
+   "harkonnen_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Harkonnen Mobile Construction Vehicle",
+    "prerequisites": [
+     "~harkonnen_vehicle_production",
+     "harkonnen_mcv_production"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
     }
    },
    "missile_tank": {
@@ -963,7 +1012,7 @@
        }
       ],
       "weapon": "mtank_pri",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -991,11 +1040,10 @@
     },
     "name": "Missile Tank",
     "prerequisites": [
+     "~harkonnen_vehicle_production",
      "~heavy.missile_tank",
      "upgrade_heavy",
-     "research_centre",
-     "~techlevel.high",
-     "~faction.harkonnen"
+     "research_centre"
     ],
     "queue": [
      "Vehicle",

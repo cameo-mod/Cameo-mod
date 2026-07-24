@@ -226,7 +226,7 @@
        }
       ],
       "weapon": "wc2dragonFireVisible",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -451,7 +451,7 @@
        }
       ],
       "weapon": "wc2dragonFireExplosion",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -667,7 +667,7 @@
      "v": "5c0"
     }
    },
-   "wc2_orcs_cannontower_2": {
+   "wc2_orcs_cannontower_plug": {
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -802,7 +802,7 @@
      "src": "inherited",
      "v": "750"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -820,7 +820,7 @@
     },
     "name": "Great Hall",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -831,7 +831,7 @@
      "v": "10000"
     }
    },
-   "wc2_orcs_guardtower_2": {
+   "wc2_orcs_guardtower_plug": {
     "buildable": true,
     "cost": {
      "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/buildings.yaml#Valued.Cost",
@@ -937,7 +937,7 @@
      "v": "10000"
     }
    },
-   "wc2_orcs_orcgoldmine_2": {
+   "wc2_orcs_orcgoldmine_bot": {
     "armor": {
      "src": "inherited",
      "v": "Concrete"
@@ -1176,7 +1176,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1403,7 +1403,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1511,7 +1511,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -1738,7 +1738,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -1846,7 +1846,7 @@
        }
       ],
       "weapon": "wc2_tower_arrow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2073,7 +2073,7 @@
        }
       ],
       "weapon": "wc2cannontowerFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^LightChemicalWeapon",
@@ -2130,12 +2130,12 @@
    },
    "wc2_orcs_wall": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Armor.Type",
      "v": "Heavy"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Valued.Cost",
      "v": "300"
     },
     "design": {
@@ -2147,7 +2147,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/Warcraft2/Orcs/yaml/defenses.yaml#Health.HP",
      "v": "25000"
     },
     "name": "Wall",
@@ -2208,7 +2208,7 @@
        }
       ],
       "weapon": "wc2deathknightFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2259,7 +2259,7 @@
        }
       ],
       "weapon": "wc2deathknightFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2310,7 +2310,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoil",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2360,7 +2360,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Left",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2410,7 +2410,7 @@
        }
       ],
       "weapon": "wc2deathknightDeathCoilScatter_Right",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon",
        "^TeslaChargedWeapon"
@@ -2550,7 +2550,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2680,7 +2680,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2769,7 +2769,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -2853,7 +2853,7 @@
        }
       ],
       "weapon": "wc2ogrepunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3045,7 +3045,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3134,7 +3134,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3264,7 +3264,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3353,7 +3353,7 @@
        }
       ],
       "weapon": "wc2axeFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -3418,7 +3418,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3519,7 +3519,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3545,7 +3545,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "1000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -3646,7 +3646,7 @@
        }
       ],
       "weapon": "wc2axeFirespear",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -3728,7 +3728,7 @@
        }
       ],
       "weapon": "wc2gruntslice2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3792,7 +3792,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3818,7 +3818,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3846,7 +3846,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3872,7 +3872,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3900,7 +3900,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3926,7 +3926,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3954,7 +3954,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3982,7 +3982,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4009,7 +4009,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4036,7 +4036,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4063,7 +4063,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4091,7 +4091,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4117,7 +4117,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4145,7 +4145,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4171,7 +4171,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4199,7 +4199,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4226,7 +4226,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4253,7 +4253,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4280,7 +4280,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4307,7 +4307,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4335,7 +4335,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4361,7 +4361,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4389,7 +4389,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4417,7 +4417,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4507,7 +4507,7 @@
        }
       ],
       "weapon": "wc2catapultFire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4606,7 +4606,7 @@
        }
       ],
       "weapon": "wc2demolitionsquadMelee",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4728,7 +4728,7 @@
        }
       ],
       "weapon": "wc2ogrepunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -4871,7 +4871,7 @@
        }
       ],
       "weapon": "wc2peasantsmack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5129,7 +5129,7 @@
        }
       ],
       "weapon": "SiegeEngineCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightMissile",

@@ -36,7 +36,7 @@
        }
       ],
       "weapon": "RA2DiskLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -71,7 +71,7 @@
        }
       ],
       "weapon": "RA2DiskLaser_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -122,7 +122,7 @@
        }
       ],
       "weapon": "RA2DiskDrain",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MagicWeapon",
        "^TeslaWeapon"
@@ -202,12 +202,12 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Valued.Cost",
      "v": "5000"
     },
     "design": {
@@ -219,7 +219,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Spy Plane",
@@ -228,7 +228,7 @@
      "v": "5c0"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "300"
     }
    }
@@ -396,7 +396,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -414,7 +414,7 @@
     },
     "name": "Yuri Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -536,7 +536,7 @@
     "name": "Psychic Sensor",
     "prerequisites": [
      "~yuri_constructionyard",
-     "yuri_slaveminer_2"
+     "yuri_slaveminer_deployed"
     ],
     "queue": [
      "Building",
@@ -575,7 +575,7 @@
     "name": "Yuri War Factory",
     "prerequisites": [
      "~yuri_constructionyard",
-     "yuri_slaveminer_2"
+     "yuri_slaveminer_deployed"
     ],
     "queue": [
      "Building",
@@ -590,12 +590,12 @@
   "defenses": {
    "yuri_concretebarrier": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -607,7 +607,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/defenses.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -656,7 +656,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -696,7 +696,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -736,7 +736,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -776,7 +776,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -816,7 +816,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -856,7 +856,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -1048,7 +1048,7 @@
      "v": "10000"
     }
    },
-   "yuri_slaveminer_2": {
+   "yuri_slaveminer_deployed": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -1084,7 +1084,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1105,7 +1105,6 @@
      "v": "2000"
     },
     "design": {
-     "category": "Defenses",
      "class_anchor": null,
      "special": null,
      "subtype": "BasicDefense",
@@ -1196,7 +1195,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -1238,7 +1237,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -1280,7 +1279,7 @@
        }
       ],
       "weapon": "RA2ChemsprayE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -1313,7 +1312,7 @@
        }
       ],
       "weapon": "RA2Chemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -1356,7 +1355,7 @@
        }
       ],
       "weapon": "RA2Chemspray2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -1399,7 +1398,7 @@
        }
       ],
       "weapon": "RA2ChemsprayE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -1476,7 +1475,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -1512,7 +1511,7 @@
        }
       ],
       "weapon": "RA2BrutePunchE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -1704,7 +1703,7 @@
        }
       ],
       "weapon": "RA2CosmonautLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^LaserWeapon",
@@ -1801,7 +1800,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -1813,7 +1812,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -1829,7 +1828,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Yuri/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -1869,7 +1868,7 @@
        }
       ],
       "weapon": "RA2GattlingInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1910,7 +1909,7 @@
        }
       ],
       "weapon": "RA2GattlingInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2026,7 +2025,7 @@
        }
       ],
       "weapon": "RA2PsychicJab",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2097,7 +2096,7 @@
        }
       ],
       "weapon": "RA2PsychicJab",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2167,7 +2166,7 @@
        }
       ],
       "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2237,7 +2236,7 @@
        }
       ],
       "weapon": "RA2PsychicJab_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -2331,7 +2330,7 @@
        }
       ],
       "weapon": "RA2Virusgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^SniperWeapon"
@@ -2387,7 +2386,7 @@
        }
       ],
       "weapon": "RA2Virusgun2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyChemicalWeapon",
@@ -2454,7 +2453,7 @@
        }
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2521,7 +2520,7 @@
        }
       ],
       "weapon": "RA2VirusgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2570,7 +2569,7 @@
        }
       ],
       "weapon": "RA2Virusgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^SniperWeapon"
@@ -2627,7 +2626,7 @@
        }
       ],
       "weapon": "RA2Virusgun2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyChemicalWeapon",
@@ -2695,7 +2694,7 @@
        }
       ],
       "weapon": "RA2Virusgun3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2763,7 +2762,7 @@
        }
       ],
       "weapon": "RA2VirusgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2970,7 +2969,7 @@
        }
       ],
       "weapon": "YRBoomerTorpedo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -3058,7 +3057,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3086,7 +3085,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3113,7 +3112,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3140,7 +3139,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3167,7 +3166,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3193,7 +3192,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3219,7 +3218,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3246,7 +3245,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3274,7 +3273,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3302,7 +3301,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3330,7 +3329,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3358,7 +3357,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3384,7 +3383,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3412,7 +3411,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3439,7 +3438,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3466,7 +3465,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3493,7 +3492,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3519,7 +3518,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3547,7 +3546,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3575,7 +3574,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3602,7 +3601,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3630,7 +3629,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3656,7 +3655,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3682,7 +3681,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3708,7 +3707,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3734,7 +3733,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3760,7 +3759,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3787,7 +3786,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3815,7 +3814,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3842,7 +3841,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3968,7 +3967,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4008,7 +4007,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4048,7 +4047,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4088,7 +4087,7 @@
        }
       ],
       "weapon": "RA2GattlingMG1AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4128,7 +4127,7 @@
        }
       ],
       "weapon": "RA2GattlingMG2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4168,7 +4167,7 @@
        }
       ],
       "weapon": "RA2GattlingMG3AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^RA2Chaingun"
@@ -4324,7 +4323,7 @@
        }
       ],
       "weapon": "RA2LasherCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4432,7 +4431,7 @@
        }
       ],
       "weapon": "RA2LasherCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4581,7 +4580,7 @@
        }
       ],
       "weapon": "RA2LasherToxicMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4724,7 +4723,7 @@
        }
       ],
       "weapon": "RA2LasherToxicMortar_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4778,7 +4777,7 @@
        }
       ],
       "weapon": "RA2LasherLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon"
@@ -4824,7 +4823,7 @@
        }
       ],
       "weapon": "RA2LasherLaser_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^LaserWeapon"
@@ -4907,7 +4906,7 @@
        }
       ],
       "weapon": "RA2Magnet",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4944,7 +4943,7 @@
        }
       ],
       "weapon": "RA2MagnetAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -4981,7 +4980,7 @@
        }
       ],
       "weapon": "RA2Magnet_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -5018,7 +5017,7 @@
        }
       ],
       "weapon": "RA2MagnetAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LaserWeapon"
       ]
@@ -5217,7 +5216,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"

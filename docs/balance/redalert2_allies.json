@@ -60,7 +60,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -119,7 +119,7 @@
        }
       ],
       "weapon": "BlackEagleMissiles_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -251,7 +251,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -381,7 +381,7 @@
        }
       ],
       "weapon": "BlackEagleThunderboltMissiles_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -534,7 +534,7 @@
        }
       ],
       "weapon": "HarrierMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -637,7 +637,7 @@
        }
       ],
       "weapon": "HarrierMissiles_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^Grenade",
@@ -727,7 +727,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -901,7 +901,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -919,7 +919,7 @@
     },
     "name": "Allied Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1212,12 +1212,12 @@
    },
    "ra2_allies_concretebarrier": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -1229,7 +1229,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/defenses.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -1386,7 +1386,7 @@
        }
       ],
       "weapon": "RA2GrandCannonWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^HeavyBomb",
@@ -1460,7 +1460,7 @@
        }
       ],
       "weapon": "RA2Patriot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -1546,7 +1546,7 @@
        }
       ],
       "weapon": "RA2PatriotThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -1675,7 +1675,7 @@
        }
       ],
       "weapon": "RA2Prism",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1991,7 +1991,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -2003,7 +2003,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -2019,7 +2019,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -2051,7 +2051,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_mg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2082,7 +2082,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_para",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2113,7 +2113,7 @@
        }
       ],
       "weapon": "ra2_allies_gi_para",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2154,7 +2154,7 @@
        }
       ],
       "weapon": "RA2vulcan2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2243,7 +2243,7 @@
        }
       ],
       "weapon": "GuardianGIMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2275,7 +2275,7 @@
        }
       ],
       "weapon": "GuardianGIMG2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2316,7 +2316,7 @@
        }
       ],
       "weapon": "GuardianGIMGE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2348,7 +2348,7 @@
        }
       ],
       "weapon": "GuardianGIMG2E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Chaingun"
       ]
@@ -2364,13 +2364,13 @@
       "requires": "botmicro",
       "slot": "Armament@BOTAA",
       "versus_templates": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ],
       "warheads": [],
       "weapon": "aadeploytargeting.8c0",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ]
      },
      {
@@ -2398,7 +2398,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2428,7 +2428,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2458,7 +2458,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2488,7 +2488,7 @@
        }
       ],
       "weapon": "RA2GIRocketsG_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -2629,7 +2629,7 @@
        }
       ],
       "weapon": "ra2roktgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -2709,7 +2709,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2740,7 +2740,7 @@
        }
       ],
       "weapon": "RA2MP5E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2772,7 +2772,7 @@
        }
       ],
       "weapon": "RA2MP5",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2804,7 +2804,7 @@
        }
       ],
       "weapon": "RA2MP5E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2896,7 +2896,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2925,7 +2925,7 @@
        }
       ],
       "weapon": "RA2AWPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2955,7 +2955,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2985,7 +2985,7 @@
        }
       ],
       "weapon": "RA2AWPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3058,7 +3058,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3089,7 +3089,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3153,7 +3153,7 @@
        }
       ],
       "weapon": "RA2DoublePistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3185,7 +3185,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3263,7 +3263,7 @@
        }
       ],
       "weapon": "RA2Medusa",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -3294,7 +3294,7 @@
        }
       ],
       "weapon": "RA2MedusaAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -3357,7 +3357,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3383,7 +3383,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3409,7 +3409,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3436,7 +3436,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3463,7 +3463,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3489,7 +3489,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3515,7 +3515,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3541,7 +3541,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3567,7 +3567,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3593,7 +3593,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3619,7 +3619,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3646,7 +3646,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3672,7 +3672,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3698,7 +3698,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3724,7 +3724,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3751,7 +3751,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3777,7 +3777,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3803,7 +3803,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3902,7 +3902,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3952,7 +3952,7 @@
      "v": "12"
     }
    },
-   "ra2_allies_battlefortress_2": {
+   "ra2_allies_battlefortress_chrono": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -3988,7 +3988,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4005,7 +4005,6 @@
      "v": "4000"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
      "subtype": "LineBreaker",
@@ -4038,7 +4037,7 @@
      "v": "12"
     }
    },
-   "ra2_allies_battlefortress_3": {
+   "ra2_allies_battlefortress_empty": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
@@ -4074,7 +4073,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4091,7 +4090,6 @@
      "v": "4000"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
      "subtype": "LineBreaker",
@@ -4198,7 +4196,7 @@
        }
       ],
       "weapon": "RA2105mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -4231,7 +4229,7 @@
        }
       ],
       "weapon": "RA2105mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -4360,7 +4358,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4441,7 +4439,7 @@
        }
       ],
       "weapon": "RA2HeavyMirageGun_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^ShrapnelWeapon",
@@ -4534,7 +4532,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -4588,7 +4586,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -4653,7 +4651,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4682,7 +4680,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4713,7 +4711,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4747,7 +4745,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -4825,7 +4823,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -4890,7 +4888,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -4926,7 +4924,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -4980,7 +4978,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -5106,7 +5104,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5140,7 +5138,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -5174,7 +5172,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -5242,7 +5240,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -5317,7 +5315,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -5376,7 +5374,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -5419,7 +5417,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5462,7 +5460,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5505,7 +5503,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5548,7 +5546,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -5635,7 +5633,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5722,7 +5720,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5809,7 +5807,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5896,7 +5894,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -5921,7 +5919,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -5931,12 +5929,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -5946,7 +5944,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -5956,7 +5954,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -5967,7 +5965,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6036,7 +6034,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6059,7 +6057,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -6069,12 +6067,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -6084,7 +6082,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -6094,7 +6092,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -6105,7 +6103,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -6218,7 +6216,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6245,7 +6243,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -6255,7 +6253,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -6265,7 +6263,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -6275,7 +6273,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -6285,7 +6283,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -6295,12 +6293,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -6310,7 +6308,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -6320,7 +6318,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -6331,7 +6329,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6444,7 +6442,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6471,7 +6469,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -6481,7 +6479,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -6491,7 +6489,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -6501,7 +6499,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -6511,7 +6509,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -6521,12 +6519,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -6536,7 +6534,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -6546,7 +6544,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -6557,7 +6555,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -6598,7 +6596,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -6627,7 +6625,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6639,7 +6637,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Valued.Cost",
+     "src": "inherited",
      "v": "500"
     },
     "design": {
@@ -6651,7 +6649,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Health.HP",
+     "src": "inherited",
      "v": "25000"
     },
     "name": "actor_fv.name",
@@ -6667,11 +6665,11 @@
      "v": "10000"
     },
     "speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Mobile.Speed",
+     "src": "inherited",
      "v": "150"
     },
     "turn_speed": {
-     "src": "mods/cameo/ContentPacks/RedAlert2/Allies/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "src": "inherited",
      "v": "30"
     }
    },
@@ -6714,7 +6712,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6768,7 +6766,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -6833,7 +6831,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6862,7 +6860,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6893,7 +6891,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -6927,7 +6925,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -7005,7 +7003,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -7070,7 +7068,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -7106,7 +7104,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -7160,7 +7158,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -7286,7 +7284,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7320,7 +7318,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -7354,7 +7352,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -7422,7 +7420,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -7497,7 +7495,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -7556,7 +7554,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -7599,7 +7597,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7642,7 +7640,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7685,7 +7683,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7728,7 +7726,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -7815,7 +7813,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7902,7 +7900,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -7989,7 +7987,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8076,7 +8074,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8101,7 +8099,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -8111,12 +8109,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -8126,7 +8124,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -8136,7 +8134,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -8147,7 +8145,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8216,7 +8214,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8239,7 +8237,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -8249,12 +8247,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -8264,7 +8262,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -8274,7 +8272,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -8285,7 +8283,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -8398,7 +8396,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8425,7 +8423,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -8435,7 +8433,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -8445,7 +8443,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -8455,7 +8453,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -8465,7 +8463,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -8475,12 +8473,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -8490,7 +8488,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -8500,7 +8498,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -8511,7 +8509,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8624,7 +8622,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8651,7 +8649,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -8661,7 +8659,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -8671,7 +8669,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -8681,7 +8679,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -8691,7 +8689,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -8701,12 +8699,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -8716,7 +8714,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -8726,7 +8724,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -8737,7 +8735,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -8778,7 +8776,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -8807,7 +8805,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -8896,7 +8894,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8950,7 +8948,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -9015,7 +9013,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -9044,7 +9042,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -9075,7 +9073,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -9109,7 +9107,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -9187,7 +9185,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -9252,7 +9250,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -9288,7 +9286,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -9342,7 +9340,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -9468,7 +9466,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -9502,7 +9500,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -9536,7 +9534,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -9604,7 +9602,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -9679,7 +9677,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -9738,7 +9736,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -9781,7 +9779,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9824,7 +9822,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9867,7 +9865,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9910,7 +9908,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -9997,7 +9995,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10084,7 +10082,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10171,7 +10169,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10258,7 +10256,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10283,7 +10281,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -10293,12 +10291,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -10308,7 +10306,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -10318,7 +10316,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -10329,7 +10327,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10398,7 +10396,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10421,7 +10419,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -10431,12 +10429,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -10446,7 +10444,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -10456,7 +10454,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -10467,7 +10465,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -10580,7 +10578,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10607,7 +10605,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -10617,7 +10615,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -10627,7 +10625,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -10637,7 +10635,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -10647,7 +10645,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -10657,12 +10655,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -10672,7 +10670,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -10682,7 +10680,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -10693,7 +10691,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10806,7 +10804,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10833,7 +10831,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -10843,7 +10841,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -10853,7 +10851,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -10863,7 +10861,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -10873,7 +10871,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -10883,12 +10881,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -10898,7 +10896,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -10908,7 +10906,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -10919,7 +10917,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -10960,7 +10958,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -10989,7 +10987,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11078,7 +11076,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -11132,7 +11130,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -11197,7 +11195,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -11226,7 +11224,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11257,7 +11255,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -11291,7 +11289,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -11369,7 +11367,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -11434,7 +11432,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -11470,7 +11468,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -11524,7 +11522,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -11650,7 +11648,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -11684,7 +11682,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -11718,7 +11716,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -11786,7 +11784,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -11861,7 +11859,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -11920,7 +11918,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -11963,7 +11961,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12006,7 +12004,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12049,7 +12047,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12092,7 +12090,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -12179,7 +12177,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12266,7 +12264,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12353,7 +12351,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12440,7 +12438,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12465,7 +12463,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -12475,12 +12473,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -12490,7 +12488,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -12500,7 +12498,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -12511,7 +12509,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12580,7 +12578,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12603,7 +12601,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -12613,12 +12611,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -12628,7 +12626,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -12638,7 +12636,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -12649,7 +12647,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -12762,7 +12760,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12789,7 +12787,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -12799,7 +12797,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -12809,7 +12807,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -12819,7 +12817,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -12829,7 +12827,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -12839,12 +12837,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -12854,7 +12852,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -12864,7 +12862,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -12875,7 +12873,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -12988,7 +12986,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13015,7 +13013,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -13025,7 +13023,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -13035,7 +13033,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -13045,7 +13043,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -13055,7 +13053,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -13065,12 +13063,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -13080,7 +13078,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -13090,7 +13088,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -13101,7 +13099,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -13142,7 +13140,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -13171,7 +13169,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13259,7 +13257,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -13313,7 +13311,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -13378,7 +13376,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -13407,7 +13405,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13438,7 +13436,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -13472,7 +13470,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -13550,7 +13548,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -13615,7 +13613,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -13651,7 +13649,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -13705,7 +13703,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -13831,7 +13829,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -13865,7 +13863,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -13899,7 +13897,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -13967,7 +13965,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14042,7 +14040,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -14101,7 +14099,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -14144,7 +14142,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14187,7 +14185,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14230,7 +14228,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14273,7 +14271,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -14360,7 +14358,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14447,7 +14445,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14534,7 +14532,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14621,7 +14619,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14646,7 +14644,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -14656,12 +14654,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -14671,7 +14669,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -14681,7 +14679,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -14692,7 +14690,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14761,7 +14759,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14784,7 +14782,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -14794,12 +14792,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -14809,7 +14807,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -14819,7 +14817,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -14830,7 +14828,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -14943,7 +14941,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -14970,7 +14968,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -14980,7 +14978,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -14990,7 +14988,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -15000,7 +14998,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -15010,7 +15008,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -15020,12 +15018,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -15035,7 +15033,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -15045,7 +15043,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -15056,7 +15054,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15169,7 +15167,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15196,7 +15194,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -15206,7 +15204,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -15216,7 +15214,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -15226,7 +15224,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -15236,7 +15234,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -15246,12 +15244,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -15261,7 +15259,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -15271,7 +15269,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -15282,7 +15280,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -15323,7 +15321,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -15352,7 +15350,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15440,7 +15438,7 @@
        }
       ],
       "weapon": "RA2CRM60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -15494,7 +15492,7 @@
        }
       ],
       "weapon": "RA2CRM60H",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2Chaingun",
@@ -15559,7 +15557,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -15588,7 +15586,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15619,7 +15617,7 @@
        }
       ],
       "weapon": "RA2DoublePistolsIFV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -15653,7 +15651,7 @@
        }
       ],
       "weapon": "TTankZap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -15731,7 +15729,7 @@
        }
       ],
       "weapon": "DragunovSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^RailgunWeapon",
@@ -15796,7 +15794,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -15832,7 +15830,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -15886,7 +15884,7 @@
        }
       ],
       "weapon": "SWLaserG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMG"
       ]
@@ -16012,7 +16010,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -16046,7 +16044,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -16080,7 +16078,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -16148,7 +16146,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16223,7 +16221,7 @@
        }
       ],
       "weapon": "Fremen_L",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MG"
       ]
@@ -16282,7 +16280,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -16325,7 +16323,7 @@
        }
       ],
       "weapon": "RA2HoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16368,7 +16366,7 @@
        }
       ],
       "weapon": "RA2HoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16411,7 +16409,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16454,7 +16452,7 @@
        }
       ],
       "weapon": "RA2HoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^RA2LightMissile"
@@ -16541,7 +16539,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16628,7 +16626,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16715,7 +16713,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16802,7 +16800,7 @@
        }
       ],
       "weapon": "RA2ThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -16827,7 +16825,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -16837,12 +16835,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -16852,7 +16850,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -16862,7 +16860,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -16873,7 +16871,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16942,7 +16940,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -16965,7 +16963,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -16975,12 +16973,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -16990,7 +16988,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -17000,7 +16998,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -17011,7 +17009,7 @@
        }
       ],
       "weapon": "RA2MultiHoverMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^MediumChemicalWeapon",
@@ -17124,7 +17122,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17151,7 +17149,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -17161,7 +17159,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -17171,7 +17169,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -17181,7 +17179,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -17191,7 +17189,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -17201,12 +17199,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -17216,7 +17214,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -17226,7 +17224,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -17237,7 +17235,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17350,7 +17348,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17377,7 +17375,7 @@
       ],
       "warheads": [
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyMissile",
         "type": "SpreadDamage"
        },
@@ -17387,7 +17385,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "HeavyAAWeapon",
         "type": "SpreadDamage"
        },
@@ -17397,7 +17395,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumMissile",
         "type": "SpreadDamage"
        },
@@ -17407,7 +17405,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "FlakWeapon",
         "type": "SpreadDamage"
        },
@@ -17417,7 +17415,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumCannon",
         "type": "SpreadDamage"
        },
@@ -17427,12 +17425,12 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "MediumChemicalWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "MediumChemicalWeaponFriendlyFire",
         "type": "SpreadDamage"
        },
@@ -17442,7 +17440,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "ArrowWeapon",
         "type": "SpreadDamage"
        },
@@ -17452,7 +17450,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "2000",
         "tag": "LightMissile",
         "type": "SpreadDamage"
        },
@@ -17463,7 +17461,7 @@
        }
       ],
       "weapon": "RA2MultiThunderboltMissileAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyAAWeapon",
@@ -17504,7 +17502,7 @@
        }
       ],
       "weapon": "MedicHeal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -17533,7 +17531,7 @@
        }
       ],
       "weapon": "RA2AWP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -17642,7 +17640,7 @@
        }
       ],
       "weapon": "RA2MirageGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -17707,7 +17705,7 @@
        }
       ],
       "weapon": "RA2MirageGun_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumChemicalWeapon",
@@ -17857,7 +17855,7 @@
        }
       ],
       "weapon": "RA2Comet",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -17923,7 +17921,7 @@
        }
       ],
       "weapon": "RA2Comet_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -18001,7 +17999,7 @@
        }
       ],
       "weapon": "RA2sabot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2TankDestroyerCannon"
       ]
@@ -18032,7 +18030,7 @@
        }
       ],
       "weapon": "RA2sabot_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2TankDestroyerCannon",
        "^RA2EliteEffects"

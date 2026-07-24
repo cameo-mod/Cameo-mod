@@ -4,6 +4,79 @@
  "schema": 2,
  "sections": {
   "buildings": {
+   "atreides_constructionyard": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Atreides Construction Yard",
+    "prerequisites": [
+     "~disabled"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "10000"
+    }
+   },
+   "atreides_heavyfactory": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "400000"
+    },
+    "name": "Atreides Heavy Factory",
+    "prerequisites": [
+     "~atreides_constructionyard",
+     "refinery.atreides"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    }
+   },
    "d2k_silo.atreides": {
     "armor": {
      "src": "inherited",
@@ -27,7 +100,7 @@
     },
     "name": "Storage Silo",
     "prerequisites": [
-     "~construction_yard.atreides",
+     "~atreides_constructionyard",
      "refinery.atreides"
     ],
     "queue": [
@@ -42,9 +115,17 @@
    "refinery.atreides": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -54,16 +135,20 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Spice Refinery",
     "prerequisites": [
-     "~construction_yard.atreides",
+     "~atreides_constructionyard",
      "wind_trap.atreides"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
     ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "wind_trap.atreides": {
@@ -89,7 +174,7 @@
     },
     "name": "Wind Trap",
     "prerequisites": [
-     "~construction_yard.atreides"
+     "~atreides_constructionyard"
     ],
     "queue": [
      "Building",
@@ -102,6 +187,54 @@
    }
   },
   "vehicles": {
+   "atreides_mobileconstructionvehicle": {
+    "armor": {
+     "src": "inherited",
+     "v": "Medium"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "SupportVehicle",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "300000"
+    },
+    "name": "Atreides Mobile Construction Vehicle",
+    "prerequisites": [
+     "~atreides_vehicle_production",
+     "atreides_mcv_production"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "8000"
+    },
+    "speed": {
+     "src": "inherited",
+     "v": "75"
+    },
+    "turn_speed": {
+     "src": "inherited",
+     "v": "15"
+    }
+   },
    "combat_tank.atreides": {
     "armaments": [
      {
@@ -127,7 +260,7 @@
        }
       ],
       "weapon": "80mm_A",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2K_Cannon"
       ]
@@ -156,8 +289,7 @@
     },
     "name": "Combat Tank",
     "prerequisites": [
-     "~faction.atreides",
-     "~techlevel.medium"
+     "~heavy.atreides_combat"
     ],
     "queue": [
      "Vehicle",

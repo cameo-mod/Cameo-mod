@@ -4,6 +4,87 @@
  "schema": 2,
  "sections": {
   "aircraft": {
+   "TSDPOD": {
+    "armor": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Armor.Type",
+     "v": "Light"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Valued.Cost",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Health.HP",
+     "v": "6000"
+    },
+    "name": "Drop Pod",
+    "speed_air": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Aircraft.Speed",
+     "v": "300"
+    }
+   },
+   "TSDPODE1": {
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "name": "Drop Pod",
+    "speed_air": {
+     "src": "inherited",
+     "v": "300"
+    }
+   },
+   "TSDPODE2": {
+    "armor": {
+     "src": "inherited",
+     "v": "Light"
+    },
+    "buildable": false,
+    "cost": {
+     "src": "inherited",
+     "v": "10"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Aircraft",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "name": "Drop Pod",
+    "speed_air": {
+     "src": "inherited",
+     "v": "300"
+    }
+   },
    "ts_gdi_carryall": {
     "armor": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/aircraft.yaml#Armor.Type",
@@ -68,7 +149,7 @@
        }
       ],
       "weapon": "TSHammerheadGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -98,7 +179,7 @@
     "name": "Hammerhead",
     "prerequisites": [
      "~ts_gdi_helipad",
-     "~ts_gdi_promotion_unlockhammerhead"
+     "~ts_gdi_promotion_hammerhead"
     ],
     "queue": [
      "Aircraft",
@@ -196,7 +277,7 @@
        }
       ],
       "weapon": "KodiakCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^RailgunWeapon",
@@ -319,7 +400,7 @@
        }
       ],
       "weapon": "KodiakCannonSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^RailgunWeapon",
@@ -355,7 +436,7 @@
        }
       ],
       "weapon": "KodiakAAGuns",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -390,7 +471,7 @@
     "prerequisites": [
      "~ts_gdi_helipad",
      "ts_gdi_upgradecenter",
-     "~ts_gdi_promotion_unlockkodiak"
+     "~ts_gdi_promotion_kodiak"
     ],
     "queue": [
      "Aircraft",
@@ -449,7 +530,7 @@
        }
       ],
       "weapon": "TSBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -514,7 +595,7 @@
        }
       ],
       "weapon": "TSBombSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^TeslaWeapon",
@@ -658,7 +739,7 @@
        }
       ],
       "weapon": "TSHellfire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -785,7 +866,7 @@
        }
       ],
       "weapon": "TSHellfireSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -823,7 +904,7 @@
     "name": "Orca Fighter",
     "prerequisites": [
      "~ts_gdi_helipad",
-     "~!ts_gdi_promotion_unlockzoneorca"
+     "~!ts_gdi_promotion_zoneorca"
     ],
     "queue": [
      "Aircraft",
@@ -924,7 +1005,7 @@
        }
       ],
       "weapon": "TSZoneHellfire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -1048,7 +1129,7 @@
        }
       ],
       "weapon": "TSZoneHellfireSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -1086,7 +1167,7 @@
     "name": "Zone Orca Fighter",
     "prerequisites": [
      "~ts_gdi_helipad",
-     "~ts_gdi_promotion_unlockzoneorca"
+     "~ts_gdi_promotion_zoneorca"
     ],
     "queue": [
      "Aircraft",
@@ -1147,7 +1228,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
      "v": "2500"
@@ -1165,7 +1246,7 @@
     },
     "name": "Construction Yard (GDI)",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1175,6 +1256,34 @@
      "src": "inherited",
      "v": "10000"
     }
+   },
+   "ts_gdi_droppoduplink": {
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "1000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Drop Pod Uplink",
+    "prerequisites": [
+     "~ts_gdi_upgradecenter",
+     "!ionc",
+     "!droppod",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
    },
    "ts_gdi_helipad": {
     "armor": {
@@ -1214,6 +1323,34 @@
      "src": "inherited",
      "v": "6000"
     }
+   },
+   "ts_gdi_ioncannonuplink": {
+    "build_duration": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Buildable.BuildDuration",
+     "v": "1500"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#Valued.Cost",
+     "v": "1500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Ion Cannon Uplink",
+    "prerequisites": [
+     "~ts_gdi_upgradecenter",
+     "!ionc",
+     "!droppod",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "BuildingAddons"
+    ]
    },
    "ts_gdi_powerplant": {
     "armor": {
@@ -1373,7 +1510,7 @@
     "name": "Silo",
     "prerequisites": [
      "~ts_gdi_constructionyard",
-     "tsproc"
+     "ts_gdi_tiberiumrefinery"
     ],
     "queue": [
      "Defence",
@@ -1462,6 +1599,52 @@
      "v": "6000"
     }
    },
+   "ts_gdi_upgradecenter": {
+    "armor": {
+     "src": "inherited",
+     "v": "Concrete"
+    },
+    "build_duration": {
+     "src": "inherited",
+     "v": "1500"
+    },
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "10000"
+    },
+    "design": {
+     "category": "Defenses",
+     "class_anchor": null,
+     "special": null,
+     "subtype": "Building",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "inherited",
+     "v": "1000000"
+    },
+    "name": "Upgrade Center",
+    "prerequisites": [
+     "~ts_gdi_constructionyard",
+     "ts_gdi_techcenter",
+     "!tsionc",
+     "~techlevel.superweapons"
+    ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
+    "sight": {
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/buildings.yaml#RevealsShroud.Range",
+     "v": "5c0"
+    }
+   },
    "ts_gdi_warfactory": {
     "armor": {
      "src": "inherited",
@@ -1506,38 +1689,48 @@
    "ts_gdi_empulsecannon": {
     "armaments": [
      {
-      "defined_in": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/weapons.yaml",
+      "defined_in": "mods/cameo/weapons/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
-      "range": "10205",
-      "reloaddelay": "60",
+      "range": "40c0",
+      "reloaddelay": "100",
       "slot": "Armament@PRIMARY",
-      "versus_templates": [
-       "^TeslaWeapon",
-       "TSSonicWeaponEffect"
-      ],
+      "versus_templates": [],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "10000",
         "tag": "TeslaWeapon",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1000",
+        "damage": "5000",
         "tag": "TeslaExtraDamage",
         "type": "SpreadDamage"
        },
        {
-        "damage": "1",
+        "damage": "5",
         "tag": "TeslaWeaponPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "10000",
+        "tag": "TeslaChargedWeapon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5000",
+        "tag": "TeslaChargedExtraDamage",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "5",
+        "tag": "TeslaChargedWeaponPercentage",
         "type": "HealthPercentageDamage"
        }
       ],
-      "weapon": "TSEMPZapWeapon",
-      "weapon_class_source": "WeaponClass",
-      "weapon_types": [
-       "^TeslaWeapon"
-      ]
+      "weapon": "TSEMPulseCannon",
+      "weapon_class_source": "template",
+      "weapon_types": []
      }
     ],
     "armor": {
@@ -1621,7 +1814,7 @@
        }
       ],
       "weapon": "TSRPGTower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -1688,7 +1881,7 @@
        }
       ],
       "weapon": "TSRPGTowerRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon",
@@ -1758,7 +1951,7 @@
        }
       ],
       "weapon": "TSGDIRedEye",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile"
       ]
@@ -1797,52 +1990,6 @@
     "sight": {
      "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
      "v": "12440"
-    }
-   },
-   "ts_gdi_upgradecenter": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
-    },
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "10000"
-    },
-    "design": {
-     "category": "Defenses",
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Defense",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "1000000"
-    },
-    "name": "Upgrade Center",
-    "prerequisites": [
-     "~ts_gdi_constructionyard",
-     "ts_gdi_techcenter",
-     "!tsionc",
-     "~techlevel.superweapons"
-    ],
-    "queue": [
-     "Defence",
-     "RADefence"
-    ],
-    "sight": {
-     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/defenses.yaml#RevealsShroud.Range",
-     "v": "5c0"
     }
    },
    "ts_gdi_vulcantower": {
@@ -1884,7 +2031,7 @@
        }
       ],
       "weapon": "TSVulcanGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1960,7 +2107,7 @@
        }
       ],
       "weapon": "TSVulcanGunSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2054,7 +2201,7 @@
        }
       ],
       "weapon": "TSGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumCannon"
@@ -2138,7 +2285,7 @@
        }
       ],
       "weapon": "TSGrenadeSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumCannon",
@@ -2192,7 +2339,7 @@
        }
       ],
       "weapon": "TSGrenadeG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumCannon"
@@ -2277,7 +2424,7 @@
        }
       ],
       "weapon": "TSGrenadeSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumCannon",
@@ -2384,7 +2531,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2413,7 +2560,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2496,7 +2643,7 @@
        }
       ],
       "weapon": "TS30mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -2540,7 +2687,7 @@
        }
       ],
       "weapon": "TS30mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon"
@@ -2599,7 +2746,7 @@
        }
       ],
       "weapon": "TS30mmRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2660,7 +2807,7 @@
        }
       ],
       "weapon": "TS30mmRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^FlakWeapon",
@@ -2747,7 +2894,7 @@
        }
       ],
       "weapon": "TSJumpCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon",
        "^RA2Chaingun"
@@ -2818,7 +2965,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2847,7 +2994,7 @@
        }
       ],
       "weapon": "TSMinigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2935,7 +3082,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2969,7 +3116,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2993,7 +3140,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Health.HP",
      "v": "10000"
     },
     "name": "Medic",
@@ -3009,7 +3156,7 @@
      "v": "4000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -3051,7 +3198,7 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3092,7 +3239,7 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3134,7 +3281,7 @@
        }
       ],
       "weapon": "TSCommandoRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3176,7 +3323,7 @@
        }
       ],
       "weapon": "TSCommandoRailgunRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3315,7 +3462,7 @@
        }
       ],
       "weapon": "TSShotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3414,7 +3561,7 @@
        }
       ],
       "weapon": "TSShotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3500,7 +3647,7 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3539,7 +3686,7 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3579,7 +3726,7 @@
        }
       ],
       "weapon": "TSZoneRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3619,7 +3766,7 @@
        }
       ],
       "weapon": "TSZoneRailgunRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -3650,7 +3797,7 @@
     "prerequisites": [
      "~ts_gdi_barracks",
      "ts_gdi_techcenter",
-     "~ts_gdi_promotion_unlockzonetrooper"
+     "~ts_gdi_promotion_zonetrooper"
     ],
     "queue": [
      "Infantry",
@@ -3667,7 +3814,7 @@
    }
   },
   "promotions": {
-   "ts_gdi_promotion_unlockhammerhead": {
+   "ts_gdi_promotion_hammerhead": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3676,22 +3823,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Hammerhead",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockhammerhead",
-     "ts_gdi_promotion_unlockzoneorca",
+     "!ts_gdi_promotion_hammerhead",
+     "ts_gdi_promotion_zoneorca",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockjuggernautmkii": {
+   "ts_gdi_promotion_juggernautmkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3700,22 +3847,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Juggernaut MKII",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockjuggernautmkii",
-     "ts_gdi_promotion_unlockhammerhead",
+     "!ts_gdi_promotion_juggernautmkii",
+     "ts_gdi_promotion_hammerhead",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockkodiak": {
+   "ts_gdi_promotion_kodiak": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3724,22 +3871,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Kodiak",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockkodiak",
-     "ts_gdi_promotion_unlockjuggernautmkii",
+     "!ts_gdi_promotion_kodiak",
+     "ts_gdi_promotion_juggernautmkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockmammothmkii": {
+   "ts_gdi_promotion_mammothmkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3748,22 +3895,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Mammoth MKII",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockmammothmkii",
-     "ts_gdi_promotion_unlockzonetrooper",
+     "!ts_gdi_promotion_mammothmkii",
+     "ts_gdi_promotion_zonetrooper",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlocktitanmkii": {
+   "ts_gdi_promotion_titanmkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3772,22 +3919,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Titan MKII",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlocktitanmkii",
-     "ts_gdi_promotion_unlockwolverinemkii",
+     "!ts_gdi_promotion_titanmkii",
+     "ts_gdi_promotion_wolverinemkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockwolverinemkii": {
+   "ts_gdi_promotion_wolverinemkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3796,21 +3943,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Wolverine MKII",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockwolverinemkii",
+     "!ts_gdi_promotion_wolverinemkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockzoneorca": {
+   "ts_gdi_promotion_zoneorca": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3819,21 +3966,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Zone Orca",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockzoneorca",
+     "!ts_gdi_promotion_zoneorca",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ts_gdi_promotion_unlockzonetrooper": {
+   "ts_gdi_promotion_zonetrooper": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3842,15 +3989,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Zone Trooper",
     "prerequisites": [
      "~fact.tsgdi",
-     "!ts_gdi_promotion_unlockzonetrooper",
-     "ts_gdi_promotion_unlocktitanmkii",
+     "!ts_gdi_promotion_zonetrooper",
+     "ts_gdi_promotion_titanmkii",
      "rank1"
     ],
     "queue": [
@@ -3872,7 +4019,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3898,7 +4045,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3924,7 +4071,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3950,7 +4097,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3972,7 +4119,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3991,7 +4138,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4017,7 +4164,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4043,7 +4190,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4069,7 +4216,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4120,7 +4267,7 @@
        }
       ],
       "weapon": "TSAAPCCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -4217,7 +4364,7 @@
        }
       ],
       "weapon": "TSSonicZapWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -4269,7 +4416,7 @@
        }
       ],
       "weapon": "TSSonicZapWeaponSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -4373,7 +4520,7 @@
        }
       ],
       "weapon": "TSHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^MediumMissile",
@@ -4475,7 +4622,7 @@
        }
       ],
       "weapon": "TSJugg90mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -4506,7 +4653,7 @@
     "prerequisites": [
      "~ts_gdi_warfactory",
      "ts_gdi_techcenter",
-     "~!ts_gdi_promotion_unlockjuggernautmkii"
+     "~!ts_gdi_promotion_juggernautmkii"
     ],
     "queue": [
      "Vehicle",
@@ -4559,7 +4706,7 @@
        }
       ],
       "weapon": "TSJugg120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -4590,7 +4737,7 @@
     "prerequisites": [
      "~ts_gdi_warfactory",
      "ts_gdi_techcenter",
-     "~ts_gdi_promotion_unlockjuggernautmkii"
+     "~ts_gdi_promotion_juggernautmkii"
     ],
     "queue": [
      "Vehicle",
@@ -4648,7 +4795,7 @@
        }
       ],
       "weapon": "TSMechRailgunII",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4680,7 +4827,7 @@
        }
       ],
       "weapon": "TSMammothTusk2II",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^HeavyMissile"
@@ -4723,7 +4870,7 @@
        }
       ],
       "weapon": "TSMechRailgunRailII",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4752,7 +4899,7 @@
        }
       ],
       "weapon": "TSMechMGII",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -4788,7 +4935,7 @@
      "~ts_gdi_warfactory",
      "ts_gdi_techcenter",
      "!existingmkii",
-     "~ts_gdi_promotion_unlockmammothmkii"
+     "~ts_gdi_promotion_mammothmkii"
     ],
     "queue": [
      "Vehicle",
@@ -4846,7 +4993,7 @@
        }
       ],
       "weapon": "TSMechRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4878,7 +5025,7 @@
        }
       ],
       "weapon": "TSMammothTusk2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^HeavyMissile"
@@ -4921,7 +5068,7 @@
        }
       ],
       "weapon": "TSMechRailgunRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4957,7 +5104,7 @@
      "~ts_gdi_warfactory",
      "ts_gdi_techcenter",
      "!existingmkii",
-     "~!ts_gdi_promotion_unlockmammothmkii"
+     "~!ts_gdi_promotion_mammothmkii"
     ],
     "queue": [
      "Vehicle",
@@ -5054,7 +5201,7 @@
        }
       ],
       "weapon": "TSMobileEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -5174,7 +5321,7 @@
        }
       ],
       "weapon": "PitbullRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -5297,7 +5444,7 @@
        }
       ],
       "weapon": "TS120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumCannon"
@@ -5343,7 +5490,7 @@
        }
       ],
       "weapon": "TS120mmRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RailgunWeapon"
@@ -5374,7 +5521,7 @@
     "name": "Titan",
     "prerequisites": [
      "~ts_gdi_warfactory",
-     "~!ts_gdi_promotion_unlocktitanmkii"
+     "~!ts_gdi_promotion_titanmkii"
     ],
     "queue": [
      "Vehicle",
@@ -5420,7 +5567,7 @@
        }
       ],
       "weapon": "TS120mmTal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumCannon"
@@ -5466,7 +5613,7 @@
        }
       ],
       "weapon": "TS120mmTalRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RailgunWeapon"
@@ -5497,7 +5644,7 @@
     "name": "Titan MK II",
     "prerequisites": [
      "~ts_gdi_warfactory",
-     "~ts_gdi_promotion_unlocktitanmkii"
+     "~ts_gdi_promotion_titanmkii"
     ],
     "queue": [
      "Vehicle",
@@ -5556,7 +5703,7 @@
        }
       ],
       "weapon": "TSAssaultCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun"
@@ -5633,7 +5780,7 @@
        }
       ],
       "weapon": "TSAssaultCannonSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Chaingun",
@@ -5667,7 +5814,7 @@
     "name": "Wolverine",
     "prerequisites": [
      "~ts_gdi_warfactory",
-     "~!ts_gdi_promotion_unlockwolverinemkii"
+     "~!ts_gdi_promotion_wolverinemkii"
     ],
     "queue": [
      "Vehicle",
@@ -5715,7 +5862,7 @@
        }
       ],
       "weapon": "TSAssaultCannonTal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5780,7 +5927,7 @@
        }
       ],
       "weapon": "TSAssaultCannonTalSonic",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^TeslaWeapon",
@@ -5813,7 +5960,7 @@
     "name": "Wolverine MK II",
     "prerequisites": [
      "~ts_gdi_warfactory",
-     "~ts_gdi_promotion_unlockwolverinemkii"
+     "~ts_gdi_promotion_wolverinemkii"
     ],
     "queue": [
      "Vehicle",

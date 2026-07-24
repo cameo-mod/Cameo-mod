@@ -202,12 +202,12 @@
    },
    "concreteadefense": {
     "build_duration": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -229,12 +229,12 @@
    },
    "concretebbuilding": {
     "build_duration": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -255,12 +255,12 @@
    },
    "concretebdefense": {
     "build_duration": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Buildable.BuildDuration",
      "v": "125"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -278,82 +278,6 @@
      "Defence",
      "RADefence"
     ]
-   },
-   "heavy_factory": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "500"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "inherited",
-     "v": "2000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "inherited",
-     "v": "400000"
-    },
-    "name": "Heavy Factory",
-    "prerequisites": [
-     "~wip"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    }
-   },
-   "light_factory": {
-    "armor": {
-     "src": "inherited",
-     "v": "Concrete"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "500"
-    },
-    "buildable": false,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Valued.Cost",
-     "v": "1000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Building",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "hp": {
-     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/buildings.yaml#Health.HP",
-     "v": "200000"
-    },
-    "name": "Light Factory",
-    "prerequisites": [
-     "~wip"
-    ],
-    "queue": [
-     "Building",
-     "RABuilding"
-    ],
-    "sight": {
-     "src": "inherited",
-     "v": "8000"
-    }
    },
    "wall": {
     "armor": {
@@ -438,7 +362,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -450,7 +374,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -466,7 +390,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/D2k/Shared/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -510,7 +434,7 @@
        }
       ],
       "weapon": "HMG_fremen",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -545,7 +469,7 @@
        }
       ],
       "weapon": "Fremen_RPG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -619,7 +543,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -672,7 +596,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -716,7 +640,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -770,7 +694,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -871,7 +795,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -924,7 +848,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -989,7 +913,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1015,7 +939,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1045,7 +969,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1076,7 +1000,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1107,7 +1031,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1138,7 +1062,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -1222,7 +1146,7 @@
        }
       ],
       "weapon": "D2K_155mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
