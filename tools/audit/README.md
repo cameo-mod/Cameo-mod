@@ -48,6 +48,7 @@ suite can gate CI.
 | `audit_rank_decoration.py` | §16.2 | `^GainsExperienceTD` actors missing/wrong `^*RankDecoration` |
 | `audit_dune_rank_decoration.py` | §16.2 | D2k actors specifically missing `^DuneRankDecoration` |
 | `audit_effect_warhead_names.py` | §8 | CreateEffect warhead naming violations |
+| `audit_nuclear_flash_bindings.py` | visual regression | active RA1, Ixian, and CABAL launchers retain the directional flash warhead and approved tuning |
 | `audit_weapon_suffixes.py` | §1 | weapon suffix conventions: `_elite`, `_EMP`, `_AA` |
 | `audit_balance_sheet.py` | §12 | cross-reference cameo_armor_system.xlsx vs in-game stats |
 | `audit_createeffect_image.py` *(in tools/)* | §8 | CreateEffect warheads carrying explicit `Image:` field |
