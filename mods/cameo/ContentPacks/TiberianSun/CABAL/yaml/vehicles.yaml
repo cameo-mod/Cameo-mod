@@ -60,7 +60,7 @@ cabal_mobileconstructionvehicle:
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
 	Inherits@MechanicalReliability: ^MechanicalReliability
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
@@ -99,8 +99,8 @@ cabal_cyborgreaper:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -159,7 +159,7 @@ cabal_cyborgreaper:
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Health:
 		HP: 150000
 	ChangesHealth@SelfHealing:
@@ -214,9 +214,9 @@ cabal_laserspider:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -267,9 +267,9 @@ cabal_mantis:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -323,9 +323,9 @@ cabal_manticore:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@BACKUP: ^CabalUpgradeBackupSystems
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -376,10 +376,10 @@ cabal_artilleryspider:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
+	Inherits@BACKUP: ^CabalUpgradeBackupSystems
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -439,10 +439,10 @@ cabal_tarantula:
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
+	Inherits@BACKUP: ^CabalUpgradeBackupSystems
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -513,8 +513,8 @@ cabal_scarabapc:
 	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 4775
 	Tooltip:
@@ -576,8 +576,8 @@ cabal_berserker:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@tibheal: ^TibHealable
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Selectable:
 		Bounds: 600, 600, 0, 0
 	Valued:
@@ -650,8 +650,8 @@ cabal_beholder:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
-	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
+	Inherits@CyberneticPlating: ^CabalUpgradeCyberneticPlating
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -714,9 +714,9 @@ cabal_spidercnc4:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 1500
@@ -771,8 +771,8 @@ cabal_heavyreaper:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Armor:
 		Type: Medium #Wood
@@ -834,10 +834,10 @@ cabal_avatar:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@BACKUP: ^CabalUpgradeBackupSystems
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 7500
 	Tooltip:
@@ -888,10 +888,10 @@ cabal_widow:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@BACKUP: ^CabalUpgradeBackupSystems
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 3500
 	Tooltip:
@@ -944,9 +944,9 @@ cabal_coredefender:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@ND: ^NotDevourable
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@MOBIMATRIX: ^CabalUpgradeMobilityMatrix
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 15000
 	UpdatesPlayerStatistics:
@@ -1030,10 +1030,10 @@ cabal_ravager:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@DarkArmament: ^CabalUpgradeDarkArmament
+	Inherits@RECLAMATION: ^CabalUpgradeReclamationProtocols
+	Inherits@CATALYST: ^CabalUpgradeNeutronNuclearCatalyst
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Armor:
 		Type: Plate
 		-RequiresCondition:

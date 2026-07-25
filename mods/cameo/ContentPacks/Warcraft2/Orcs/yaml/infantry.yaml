@@ -3,8 +3,8 @@ wc2_orcs_grunt:
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_orcs_upgrade_axestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Grunt
 	Valued:
@@ -46,8 +46,8 @@ wc2_orcs_warcraft3grunt:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_orcs_upgrade_axestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Warcraft 3 Grunt
 	Valued:
@@ -94,12 +94,12 @@ wc2_orcs_trollaxethrower:
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_orcs_upgrade_throwingaxestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
-	Inherits@BLighterUpg: ^wc2_orcs_upgrade_berserkerlightaxes
-	Inherits@BScoutUpg: ^wc2_orcs_upgrade_berserkerscouting
-	Inherits@BRegenUpg: ^wc2_orcs_upgrade_berserkerregeneration
-	Inherits@BerserkerUpg: ^wc2_orcs_upgrade_berserker
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
 	Tooltip:
 		Name: Troll Axethrower
 	Valued:
@@ -163,12 +163,12 @@ wc2_orcs_trollheadhunter:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_orcs_upgrade_throwingaxestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
-	Inherits@BLighterUpg: ^wc2_orcs_upgrade_berserkerlightaxes
-	Inherits@BScoutUpg: ^wc2_orcs_upgrade_berserkerscouting
-	Inherits@BRegenUpg: ^wc2_orcs_upgrade_berserkerregeneration
-	Inherits@BerserkerUpg: ^wc2_orcs_upgrade_berserker
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
 	Tooltip:
 		Name: Troll Headhunter
 	Valued:
@@ -207,12 +207,12 @@ wc2_orcs_kodobeast:
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_orcs_upgrade_throwingaxestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
-	Inherits@BLighterUpg: ^wc2_orcs_upgrade_berserkerlightaxes
-	Inherits@BScoutUpg: ^wc2_orcs_upgrade_berserkerscouting
-	Inherits@BRegenUpg: ^wc2_orcs_upgrade_berserkerregeneration
-	Inherits@BerserkerUpg: ^wc2_orcs_upgrade_berserker
+	Inherits@TAxeUpg: ^WC2OrcsUpgradeThrowingAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@BLighterUpg: ^WC2OrcsUpgradeBerserkerLightAxes
+	Inherits@BScoutUpg: ^WC2OrcsUpgradeBerserkerScouting
+	Inherits@BRegenUpg: ^WC2OrcsUpgradeBerserkerRegeneration
+	Inherits@BerserkerUpg: ^WC2OrcsUpgradeBerserker
 	-ExternalCondition@PropagandaEffect:
 	Tooltip:
 		Name: Kodo Beast
@@ -262,12 +262,12 @@ wc2_orcs_ogre:
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_orcs_upgrade_axestrength
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2AxeUpg: ^WC2OrcsUpgradeAxeStrength
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@OgremageUpg: ^wc2_orcs_upgrade_ogremage
-	Inherits@ogremage_bloodlust_upgrade: ^wc2_o_ogremage_bloodlust
-	Inherits@ogremage_runes_upgrade: ^wc2_o_ogremage_runes
+	Inherits@OgremageUpg: ^WC2OrcsUpgradeOgreMage
+	Inherits@ogremage_bloodlust_upgrade: ^WC2OrcsOgreMageBloodlust
+	Inherits@ogremage_runes_upgrade: ^WC2OrcsOgreMageRunes
 	Tooltip:
 		Name: Ogre
 	Valued:
@@ -319,7 +319,7 @@ wc2_orcs_ogre:
 	Targetable:
 		TargetTypes: Ground, Vehicle, Monster
 	#Weapons
-	Inherits@attacks_and_spells: ^wc2_ogre_ogremage_attacks_spells
+	Inherits@attacks_and_spells: ^WC2OgreOgreMageAttacksSpells
 	ActorStatValues:
 		Upgrades: wc2_orcs_upgrade_axestrength, wc2_orcs_upgrade_axestrengthii, wc2_orcs_upgrade_armorstrength, wc2_orcs_upgrade_armorstrengthii, wc2_orcs_upgrade_ogremage, wc2_orcs_upgrade_bloodlust, wc2_orcs_upgrade_runes
 
@@ -327,11 +327,11 @@ wc2_orcs_ogre:
 
 wc2_orcs_deathknight:
 	Inherits@WC2Infantry: ^WC2Infantry
-	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
-	Inherits@wc2_o_deathknight_haste: ^wc2_o_deathknight_haste
-	Inherits@wc2_o_deathknight_deathanddecay: ^wc2_o_deathknight_deathanddecay
-	Inherits@wc2_o_deathknight_raisedead: ^wc2_o_deathknight_raisedead
+	Inherits@WC2Template: ^WC2Mage
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@wc2_o_deathknight_haste: ^WC2OrcsDeathKnightHaste
+	Inherits@wc2_o_deathknight_deathanddecay: ^WC2OrcsDeathKnightDeathAndDecay
+	Inherits@wc2_o_deathknight_raisedead: ^WC2OrcsDeathKnightRaiseDead
 	Tooltip:
 		Name: Death Knight
 	Buildable:

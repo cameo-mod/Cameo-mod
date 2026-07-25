@@ -5,11 +5,11 @@ Dune 2000 to OpenRA sprite conversion tool.
 Converts individual Dune 2000 BMP frames into OpenRA-compatible PNG spritesheets.
 Handles:
   1. Pink (255,0,255) background -> transparent alpha
-  2. Hue-shifting the player-color ramp to a target hue (default 300 = magenta)
+  2. Normalizing the player-color ramp to OpenRA's reference hue (default 120 = green)
   3. Combining all frames into a single horizontal strip PNG
 
 Usage:
-  python tools/d2k_to_openra.py <input_dir> <output_png> [--hue 300] [--prefix KodaBody]
+  python tools/d2k_to_openra.py <input_dir> <output_png> [--hue 120] [--prefix KodaBody]
 
 The input directory must contain numbered BMP frames (e.g. KodaBody_0.bmp, KodaBody_1.bmp, ...).
 Frames are sorted by their numeric suffix and laid out left-to-right in the spritesheet.
@@ -20,7 +20,8 @@ are centered on a transparent canvas of the max size).
 
 Hue shifting:
   Dune 2000 sprites use a green player-color ramp (hue ~163).
-  This script shifts all pixels in that hue range to the target hue (default 300).
+  This script shifts all pixels in that hue range to OpenRA's player-color
+  reference hue (default 120).
   The saturation and value are preserved; only the hue changes.
   Pixels outside the green hue range (roughly 140-190 degrees) are left untouched,
   EXCEPT for the pink background which becomes fully transparent.
@@ -134,7 +135,7 @@ def find_frames(input_dir, prefix=None):
     return [path for _, path in frames]
 
 
-def make_spritesheet(input_dir, output_path, target_hue=300, prefix=None,
+def make_spritesheet(input_dir, output_path, target_hue=120, prefix=None,
                      do_hue_shift=True, remap_min=140, remap_max=190):
     """Convert all BMP frames in input_dir to a single horizontal PNG spritesheet."""
     frame_paths = find_frames(input_dir, prefix)
@@ -187,8 +188,8 @@ def main():
     )
     parser.add_argument("input_dir", help="Directory containing BMP frames")
     parser.add_argument("output_png", help="Output PNG spritesheet path")
-    parser.add_argument("--hue", type=float, default=300,
-                        help="Target hue for player color (default: 300 = magenta)")
+    parser.add_argument("--hue", type=float, default=120,
+                        help="Target hue for player color (default: 120 = green)")
     parser.add_argument("--prefix", default=None,
                         help="Frame filename prefix (e.g. KodaBody). If omitted, all BMPs are used.")
     parser.add_argument("--no-hue-shift", action="store_true",

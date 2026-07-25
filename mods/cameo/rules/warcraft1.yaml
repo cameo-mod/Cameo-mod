@@ -160,7 +160,7 @@ Player:
 	#Production@CLASSICPRODUCTIONQUEUES:
 	#	PauseOnCondition: lowpower
 
-^wc_h_str_sword:
+^WCHumansStrSword:
 	GrantConditionOnPrerequisite@upgrade:
 		Condition: sword_upg
 		Prerequisites: wc_h_str_sword || wc_o_str_axe
@@ -174,7 +174,7 @@ Player:
 		Modifier: 130
 		RequiresCondition: sword_upg2
 
-^wc_h_str_shield:
+^WCHumansStrShield:
 	GrantConditionOnPrerequisite@supgrade:
 		Condition: shield_upg
 		Prerequisites: wc_h_str_shield || wc_o_str_shield
@@ -187,7 +187,7 @@ Player:
 	DamageMultiplier@upgrade2:
 		Modifier: 75
 		RequiresCondition: shield_upg2
-^wc_h_str_arrow:
+^WCHumansStrArrow:
 	GrantConditionOnPrerequisite@upgrade:
 		Condition: arrow_upg
 		Prerequisites: wc_h_str_arrow || wc_o_str_spear
@@ -200,7 +200,7 @@ Player:
 	FirepowerMultiplier@upgrade2:
 		Modifier: 140
 		Condition: arrow_upg2
-^wc_h_horses:
+^WCHumansHorses:
 	GrantConditionOnPrerequisite@spupgrade:
 		Condition: horses_upg
 		Prerequisites: wc_h_horses || wc_o_wolves
@@ -414,7 +414,7 @@ wc_h_guard_tower:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@shape: ^2x2Shape
 	Inherits@BURNABLE: ^WC1Building
-	Inherits@upgrade_arrows: ^wc_h_str_arrow
+	Inherits@upgrade_arrows: ^WCHumansStrArrow
 	Selectable:
 		Bounds: 1706, 1706
 	Valued:
@@ -1231,7 +1231,7 @@ wc_h_peasant:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
 		ValidRelationships: Ally
@@ -1290,7 +1290,7 @@ wc_h_peasant_engineer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Inherits@engineer: ^EngineerDefaultWeapons
 	Inherits@isengineer: ^IsEngineer
 	AutoTargetPriority@Repair:
@@ -1441,8 +1441,8 @@ wc_h_footman:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_swords: ^wc_h_str_sword
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_swords: ^WCHumansStrSword
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -1501,8 +1501,8 @@ wc_h_archer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_arrows: ^wc_h_str_arrow
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_arrows: ^WCHumansStrArrow
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1552,9 +1552,9 @@ wc_h_knight:
 	Inherits@WC1Infantry: ^WC1Infantry
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
-	Inherits@upgrade_horses: ^wc_h_horses
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
+	Inherits@upgrade_horses: ^WCHumansHorses
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1660,7 +1660,7 @@ wc_h_conjurer:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Inherits@MC: ^MCImmune
 	Valued:
 		Cost: 1600
@@ -1713,7 +1713,7 @@ wc_h_cleric:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@upgrade_shields: ^wc_h_str_shield
+	Inherits@upgrade_shields: ^WCHumansStrShield
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -2321,8 +2321,8 @@ wc_n_spider:
 
 wc_o_skeleton:
 	Inherits@wc_h_scorpion: wc_h_scorpion
-	Inherits@upgrade_shields: ^wc_h_str_shield
-	Inherits@upgrade_swords: ^wc_h_str_sword
+	Inherits@upgrade_shields: ^WCHumansStrShield
+	Inherits@upgrade_swords: ^WCHumansStrSword
 	Inherits@MC: ^MCImmune
 	-Buildable:
 	Tooltip:
@@ -2646,7 +2646,7 @@ wc_n_slime_c:
 #######################################################
 
 wc_h_str_arrow:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
@@ -2663,7 +2663,7 @@ wc_h_str_arrow:
 	ProvidesPrerequisite:
 
 wc_h_str_arrow2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arrow Strength
 	Buildable:
@@ -2680,7 +2680,7 @@ wc_h_str_arrow2:
 	ProvidesPrerequisite:
 
 wc_h_str_sword:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sword Strength
 	Buildable:
@@ -2697,7 +2697,7 @@ wc_h_str_sword:
 	ProvidesPrerequisite:
 
 wc_h_str_sword2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sword Strength II
 	Buildable:
@@ -2714,7 +2714,7 @@ wc_h_str_sword2:
 	ProvidesPrerequisite:
 
 wc_h_str_shield:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield Strength
 	Buildable:
@@ -2731,7 +2731,7 @@ wc_h_str_shield:
 	ProvidesPrerequisite:
 
 wc_h_str_shield2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Shield Strength II
 	Buildable:
@@ -2748,7 +2748,7 @@ wc_h_str_shield2:
 	ProvidesPrerequisite:
 
 wc_h_horses:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Breed Faster Horses
 	Buildable:
@@ -2765,7 +2765,7 @@ wc_h_horses:
 	ProvidesPrerequisite:
 
 wc_h_horses2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Breed Faster Horses II
 	Buildable:

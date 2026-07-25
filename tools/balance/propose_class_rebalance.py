@@ -35,6 +35,7 @@ CLASS_BANDS = {
     # role classes (band = clamp window around the anchor range; role, not range,
     # defines membership, so overlaps with the ladder are allowed)
     "grenadier": (5000, 6000),
+    "mortar": (9000, 11000),      # long-range indirect fire (~10000), slow
     "heavy_infantry": (4500, 5500),
     "pure_sniper": (9000, 11000),
     "heavy_sniper": (7000, 9000),
@@ -77,7 +78,7 @@ def subtype_to_anchor(st: str | None) -> str | None:
         "closecombatinfantry": "closecombat",
         "specialforcesinfantry": "special_forces",
         "grenadierinfantry": "grenadier",
-        "mortarinfantry": "grenadier",          # provisional (arc AoE)
+        "mortarinfantry": "mortar",             # separate class (long-range/slow)
         "antitankantiairinfantry": "rocket_trooper",  # provisional (AT+AA launcher)
         "rockettrooperinfantry": "rocket_trooper",
         "heavyinfantry": "heavy_infantry",

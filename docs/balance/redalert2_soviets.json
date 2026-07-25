@@ -35,7 +35,7 @@
        }
       ],
       "weapon": "RA2KirovBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -86,7 +86,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyBomb",
@@ -122,7 +122,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -172,7 +172,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^HeavyBomb"
@@ -218,7 +218,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_nuclear",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -263,7 +263,7 @@
        }
       ],
       "weapon": "RA2KirovBomb_nuclear_E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb"
@@ -372,7 +372,7 @@
        }
       ],
       "weapon": "MigMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -470,7 +470,7 @@
        }
       ],
       "weapon": "MigMissiles_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyChemicalWeapon",
@@ -538,7 +538,7 @@
        }
       ],
       "weapon": "MigMissiles_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -603,7 +603,7 @@
        }
       ],
       "weapon": "MigMissiles_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -668,7 +668,7 @@
        }
       ],
       "weapon": "MigMissilesE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -733,7 +733,7 @@
        }
       ],
       "weapon": "MigMissilesE_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -798,7 +798,7 @@
        }
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -863,7 +863,7 @@
        }
       ],
       "weapon": "MigMissiles_AA_ELITE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -948,7 +948,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -964,13 +964,13 @@
       "requires": "botmicro",
       "slot": "Armament@DeployTargeter",
       "versus_templates": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ],
       "warheads": [],
       "weapon": "deploytargeting.5c0",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ]
      },
      {
@@ -1020,7 +1020,7 @@
        }
       ],
       "weapon": "RA160mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1105,7 +1105,7 @@
        }
       ],
       "weapon": "RA160mm_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -1160,7 +1160,7 @@
        }
       ],
       "weapon": "RA160mm_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1212,7 +1212,7 @@
        }
       ],
       "weapon": "RA160mm_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade"
@@ -1267,7 +1267,7 @@
        }
       ],
       "weapon": "RA160mmE_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1362,7 +1362,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^LightChemicalWeapon",
@@ -1420,7 +1420,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1474,7 +1474,7 @@
        }
       ],
       "weapon": "RA160mmE_elite_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^RA2Grenade",
@@ -1562,7 +1562,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1732,7 +1732,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1750,7 +1750,7 @@
     },
     "name": "Soviet Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -2069,12 +2069,12 @@
    },
    "ra2_soviets_concretebarrier": {
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Armor.Type",
      "v": "Concrete"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Valued.Cost",
      "v": "200"
     },
     "design": {
@@ -2086,7 +2086,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/defenses.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Concrete Barrier",
@@ -2123,7 +2123,7 @@
        }
       ],
       "weapon": "RA2TURRETFLAKAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -2293,7 +2293,7 @@
        }
       ],
       "weapon": "RA2vulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2366,7 +2366,7 @@
        }
       ],
       "weapon": "RA2CoilBolt",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2400,7 +2400,7 @@
        }
       ],
       "weapon": "RA2CoilBolt2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2434,7 +2434,7 @@
        }
       ],
       "weapon": "RA2CoilBolt3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2468,7 +2468,7 @@
        }
       ],
       "weapon": "RA2OPCoilBolt1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -2502,7 +2502,7 @@
        }
       ],
       "weapon": "RA2OPCoilBolt2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -2536,7 +2536,7 @@
        }
       ],
       "weapon": "RA2OPCoilBolt3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -2678,7 +2678,7 @@
        }
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2720,7 +2720,7 @@
        }
       ],
       "weapon": "BorisAKME",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2762,7 +2762,7 @@
        }
       ],
       "weapon": "BorisAKM2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2824,7 +2824,7 @@
        }
       ],
       "weapon": "BorisAKM",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2867,7 +2867,7 @@
        }
       ],
       "weapon": "BorisAKME",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2923,7 +2923,7 @@
       "defined_in": "mods/cameo/ContentPacks/RedAlert2/Shared/yaml/weapons.yaml",
       "design_weapon_class": 0.75,
       "pricing": true,
-      "range": "4898",
+      "range": "4500",
       "reloaddelay": "18",
       "requires": "!rank-elite",
       "slot": "Armament@PRIMARY",
@@ -2943,7 +2943,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2974,7 +2974,7 @@
        }
       ],
       "weapon": "ra2_soviets_conscript_carbine_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3015,7 +3015,7 @@
        }
       ],
       "weapon": "RA2vulcan3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3167,7 +3167,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3203,7 +3203,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeaponE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3237,7 +3237,7 @@
        }
       ],
       "weapon": "RA2RadBeamWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon"
       ]
@@ -3325,7 +3325,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -3337,7 +3337,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -3353,7 +3353,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2/Soviets/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -3384,7 +3384,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3414,7 +3414,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3444,7 +3444,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3474,7 +3474,7 @@
        }
       ],
       "weapon": "RA2FLAKAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3506,7 +3506,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3538,7 +3538,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3570,7 +3570,7 @@
        }
       ],
       "weapon": "RA2CRFlakGuyGun_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3602,7 +3602,7 @@
        }
       ],
       "weapon": "RA2FLAKAA_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -3682,7 +3682,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3716,7 +3716,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3750,7 +3750,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3804,7 +3804,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3839,7 +3839,7 @@
        }
       ],
       "weapon": "RA2PortaTesla2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3874,7 +3874,7 @@
        }
       ],
       "weapon": "RA2PortaTesla3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3945,7 +3945,7 @@
        }
       ],
       "weapon": "SeaScorpionAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon"
       ]
@@ -4011,7 +4011,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -4077,7 +4077,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4104,7 +4104,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4132,7 +4132,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4158,7 +4158,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4185,7 +4185,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4213,7 +4213,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4240,7 +4240,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4266,7 +4266,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4293,7 +4293,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4321,7 +4321,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4348,7 +4348,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4374,7 +4374,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4400,7 +4400,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4427,7 +4427,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4455,7 +4455,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4481,7 +4481,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4507,7 +4507,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "TechUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4578,7 +4578,7 @@
        }
       ],
       "weapon": "RA2120xmm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4686,7 +4686,7 @@
        }
       ],
       "weapon": "RA2120xmm_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4749,7 +4749,7 @@
        }
       ],
       "weapon": "RA2120xmm_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4808,7 +4808,7 @@
        }
       ],
       "weapon": "RA2120xmm_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -4841,7 +4841,7 @@
        }
       ],
       "weapon": "RA2MammothTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -4899,7 +4899,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5005,7 +5005,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5070,7 +5070,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5131,7 +5131,7 @@
        }
       ],
       "weapon": "RA2120xmm_elite_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5165,7 +5165,7 @@
        }
       ],
       "weapon": "RA2MammothTusk_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -5281,7 +5281,7 @@
        }
       ],
       "weapon": "RA2FlakTrackAAGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5351,7 +5351,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5420,7 +5420,7 @@
        }
       ],
       "weapon": "RA2FlakTrackAAGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5489,7 +5489,7 @@
        }
       ],
       "weapon": "RA2FlakTrackGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -5620,7 +5620,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5667,7 +5667,7 @@
        }
       ],
       "weapon": "RA2120mm_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5699,7 +5699,7 @@
        }
       ],
       "weapon": "RA2120mm_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5729,7 +5729,7 @@
        }
       ],
       "weapon": "RA2120mm_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5762,7 +5762,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5811,7 +5811,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_rad",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^RA2MediumCannon",
@@ -5847,7 +5847,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_fire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -5881,7 +5881,7 @@
        }
       ],
       "weapon": "RA2120mm_elite_tesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -6050,7 +6050,7 @@
        }
       ],
       "weapon": "RA2TankBolt",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -6086,7 +6086,7 @@
        }
       ],
       "weapon": "RA2TankBolt2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -6122,7 +6122,7 @@
        }
       ],
       "weapon": "RA2TankBolt3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -6288,7 +6288,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"

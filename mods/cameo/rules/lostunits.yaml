@@ -1114,7 +1114,7 @@ BHE1:
 		Prerequisites: foolsgems
 
 foolsgems:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: 4000 Gems
 	Buildable:

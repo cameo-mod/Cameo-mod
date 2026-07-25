@@ -1,5 +1,5 @@
 tkm_promotion_medictruck:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Medic Truck
 	Buildable:
@@ -12,7 +12,7 @@ tkm_promotion_medictruck:
 	ProvidesPrerequisite:
 
 tkm_promotion_juggernaut:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Juggernaut
 	Buildable:
@@ -25,7 +25,7 @@ tkm_promotion_juggernaut:
 	ProvidesPrerequisite:
 
 tkm_promotion_battlebus:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Battle Bus
 	Buildable:
@@ -38,7 +38,7 @@ tkm_promotion_battlebus:
 	ProvidesPrerequisite:
 
 tkm_promotion_thesandmarine:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock the Sand Marine
 	Buildable:
@@ -53,7 +53,7 @@ tkm_promotion_thesandmarine:
 ### Titan Promotion Tree
 
 tkm_promotion_repairtruck:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Repair Truck
 	Buildable:
@@ -66,7 +66,7 @@ tkm_promotion_repairtruck:
 	ProvidesPrerequisite:
 
 tkm_promotion_trenchtank:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Trench Tank
 	Buildable:
@@ -79,7 +79,7 @@ tkm_promotion_trenchtank:
 	ProvidesPrerequisite:
 
 tkm_promotion_flakbus:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Flak Bus
 	Buildable:
@@ -92,7 +92,7 @@ tkm_promotion_flakbus:
 	ProvidesPrerequisite:
 
 tkm_promotion_thebigshiee:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock the Big Shiee
 	Buildable:
@@ -107,7 +107,7 @@ tkm_promotion_thebigshiee:
 ### NATO Promotion Tree
 
 tkm_promotion_radartruck:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Radar Truck
 	Buildable:
@@ -120,7 +120,7 @@ tkm_promotion_radartruck:
 	ProvidesPrerequisite:
 
 tkm_promotion_viper:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Viper
 	Buildable:
@@ -133,7 +133,7 @@ tkm_promotion_viper:
 	ProvidesPrerequisite:
 
 tkm_promotion_dronepodtruck:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock Drone Pod Truck
 	Buildable:
@@ -146,7 +146,7 @@ tkm_promotion_dronepodtruck:
 	ProvidesPrerequisite:
 
 tkm_promotion_t30:
-	Inherits: ^promotion_upgrade.template
+	Inherits: ^PromotionUpgradeTemplate
 	Tooltip:
 		Name: Unlock T30
 	Buildable:

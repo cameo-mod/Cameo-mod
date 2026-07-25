@@ -1,8 +1,8 @@
-###############
+﻿###############
 #   UNITS    #
 ###############
 
-^sow_cannon:
+^SowCannon:
 	Projectile: InstantHit
 		Inaccuracy: 0c48
 		Width: 0c1
@@ -24,7 +24,7 @@
 		ValidTargets: Water, Underwater
 		InvalidTargets: Ship, Structure, Bridge
 		
-^sow_flame:
+^SowFlame:
 	ValidTargets: Ground, Water
 	InvalidTargets: wall
 	Projectile: Bullet
@@ -40,7 +40,7 @@
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, wall
 
-^sow_antiair:
+^SowAntiAir:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
 		InvalidTargets: Vehicle, Structure, wall, Husk
@@ -53,8 +53,8 @@
 	Projectile: MissileCA
 		TrailImage: black_smokey
 		
-^sow_antiair_mk1:
-	Inherits: ^sow_antiair
+^SowAntiAirMk1:
+	Inherits: ^SowAntiAir
 	InvalidTargets: Ground
 	ValidTargets: Air
 	Range: 7680
@@ -75,7 +75,7 @@
 		Damage: 3333
 		ValidTargets: Air
 	
-^sow_special:
+^SowSpecial:
 	Projectile: Bullet
 		Speed: 333
 		Inaccuracy: 333
@@ -84,7 +84,7 @@
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: TriggerProne, ElectricityDeath
 		
-^sow_siege:
+^SowSiege:
 	TargetActorCenter: true
 	Projectile: Bullet
 		Blockable: false
@@ -112,7 +112,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 		
 sow_lt_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 30
 	Range: 5120
 	Report: lt_cannon_shoot.aud
@@ -127,7 +127,7 @@ sow_lt_cannon:
 			Concrete: 44
 
 sow_lt_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
 	Range: 3584
 	Report: lt_flame.aud
@@ -148,7 +148,7 @@ sow_lt_flame:
 		ImpactActors: false
 		
 sow_lt_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 20
 	Burst: 2
 	BurstDelays: 5
@@ -164,7 +164,7 @@ sow_lt_antiair:
 			Concrete: 20
 		
 sow_lt_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 50
 	Range: 4096
 	Report: lt_special_shoot.aud
@@ -183,7 +183,7 @@ sow_lt_special:
 		Damage: 11111
 		
 sow_lt_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
 	Range: 7680
 	Report: lt_siege_shoot.aud
@@ -204,7 +204,7 @@ sow_lt_siege:
 		Damage: 7500
 		
 sow_mt_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 40
 	Burst: 2
 	BurstDelays: 5
@@ -221,7 +221,7 @@ sow_mt_cannon:
 			Concrete: 44
 
 sow_mt_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
 	Range: 5120
 	Report: lt_flame.aud
@@ -241,7 +241,7 @@ sow_mt_flame:
 		ImpactActors: false
 		
 sow_mt_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 5
@@ -257,7 +257,7 @@ sow_mt_antiair:
 			Concrete: 20
 			
 sow_mt_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 75
 	Burst: 2
 	BurstDelays: 5
@@ -278,7 +278,7 @@ sow_mt_special:
 		Damage: 22222
 		
 sow_mt_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
 	Range: 10240
 	MinRange: 768
@@ -300,7 +300,7 @@ sow_mt_siege:
 		Damage: 15000
 
 sow_ht_cannon:
-	Inherits: ^sow_cannon
+	Inherits: ^SowCannon
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 5
@@ -317,7 +317,7 @@ sow_ht_cannon:
 			Concrete: 44
 
 sow_ht_flame:
-	Inherits: ^sow_flame
+	Inherits: ^SowFlame
 	ReloadDelay: 7
 	Burst: 2
 	BurstDelays: 0
@@ -340,7 +340,7 @@ sow_ht_flame:
 		ImpactActors: false
 		
 sow_ht_antiair:
-	Inherits: ^sow_antiair_mk1
+	Inherits: ^SowAntiAirMk1
 	ReloadDelay: 60
 	Burst: 6
 	BurstDelays: 5
@@ -356,7 +356,7 @@ sow_ht_antiair:
 			Concrete: 20
 
 sow_ht_siege:
-	Inherits: ^sow_siege
+	Inherits: ^SowSiege
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 15
@@ -380,7 +380,7 @@ sow_ht_siege:
 		Damage: 15000
 		
 sow_ht_special:
-	Inherits: ^sow_special
+	Inherits: ^SowSpecial
 	ReloadDelay: 100
 	Burst: 3
 	BurstDelays: 10
@@ -771,7 +771,7 @@ sow_advancer_capture_mk2:
 		Spread: 75
 		Damage: 2000
 		
-^sow_advancer_upgradebeam:
+^SowAdvancerUpgradeBeam:
 	ReloadDelay: 14
 	Range: 128
 	ValidTargets: sowupgrade, sowupgrade_1, sowupgrade_2, sowupgrade_3
@@ -783,7 +783,7 @@ sow_advancer_capture_mk2:
 		Color: E6A357
 
 sow_advancer_upgrade:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade: GrantExternalCondition
 		Range: 2560
 		Condition: sowupgrade
@@ -791,7 +791,7 @@ sow_advancer_upgrade:
 		Delay: 350
 		
 sow_advancer_upgrade_1:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_1: GrantExternalCondition
 		Range: 2560
 		Condition: sowupgrade_1
@@ -799,7 +799,7 @@ sow_advancer_upgrade_1:
 		Delay: 350
 		
 sow_advancer_upgrade_2:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_2: GrantExternalCondition
 		Range: 2560
 		Condition: sowupgrade_2
@@ -807,7 +807,7 @@ sow_advancer_upgrade_2:
 		Delay: 350
 
 sow_advancer_upgrade_3:
-	Inherits: ^sow_advancer_upgradebeam
+	Inherits: ^SowAdvancerUpgradeBeam
 	Warhead@sowupgrade_3: GrantExternalCondition
 		Range: 2560
 		Condition: sowupgrade_3
@@ -1087,7 +1087,7 @@ satelliteprotection_mk2:
 sowfighter:
 	ReloadDelay: 100
 	Burst: 5
-	BurstDelay: 1
+	BurstDelays: 1
 	Range: 5120
 	Projectile: GravityBomb
 		Image: PARABOMB

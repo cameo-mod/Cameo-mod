@@ -1219,7 +1219,9 @@ latinsyndicate_collectiontruck:
 		Palette: ra2effect
 
 latinsyndicate_demolitiontruck:
-	Inherits: ra1_soviets_nukedemotruck
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@vo: ^AttackFrontalVoice
@@ -1228,12 +1230,36 @@ latinsyndicate_demolitiontruck:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^LatinFlameUpgrades
+	Health:
+		HP: 30000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+	RevealsShroud:
+		Range: 5c0
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+		Voice: Attack
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
 	Tooltip:
 		Name: Demolition Truck
 	Valued:
 		Cost: 1500
-	Health:
-		HP: 30000
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
@@ -1241,8 +1267,6 @@ latinsyndicate_demolitiontruck:
 		Description: Suicide vehicle that detonates on contact.
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
-	GrantConditionOnDeploy:
-		Voice: Attack
 	FireWarheadsOnDeathCA@bomb:
 		Weapon: RA2DemoBomb
 		EmptyWeapon: RA2DemoBomb
@@ -1258,7 +1282,9 @@ latinsyndicate_demolitiontruck:
 #   Pass those units to Syndicate
 
 latinsyndicate_nuketruck:
-	Inherits: ra1_soviets_nukedemotruck
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1268,12 +1294,36 @@ latinsyndicate_nuketruck:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@uprecover: ^LatinCashrecover
 	Inherits@flamerup: ^LatinFlameUpgrades
+	Health:
+		HP: 60000
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 100
+	RevealsShroud:
+		Range: 5c0
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+		Voice: Attack
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
 	Tooltip:
 		Name: Nuke Truck
 	Valued:
 		Cost: 3000
-	Health:
-		HP: 60000
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~latinsyndicate_syndicatefactory, ~latinsyndicate_promotion_nuketrucks, latinsyndicate_spycenter
@@ -1282,8 +1332,6 @@ latinsyndicate_nuketruck:
 		BuildDurationModifier: 50
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
-	GrantConditionOnDeploy:
-		Voice: Attack
 	FireWarheadsOnDeathCA@bomb:
 		Weapon: RA2Atomic
 		EmptyWeapon: RA2Atomic

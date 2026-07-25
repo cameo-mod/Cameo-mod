@@ -484,7 +484,7 @@ wc2_orcs_trollheadhunter:
 		Facings: 8
 
 wc2_orcs_kodobeast:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	Defaults:
 		Scale: 1
 		Filename: wc2_orcs_kodobeast_hordekodobeast.png
@@ -817,7 +817,7 @@ wc2_orcs_catapult:
 		Start: 6
 
 wc2_orcs_siegeengine:
-	Inherits: ^wc2_status_icons
+	Inherits: ^WC2StatusIcons
 	Defaults:
 		Scale: 1
 		Filename: wc2_humans_siegeengine_wc2_siege_engine.png

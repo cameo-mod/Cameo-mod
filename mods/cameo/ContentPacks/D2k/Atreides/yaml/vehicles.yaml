@@ -1,21 +1,35 @@
+atreides_mobileconstructionvehicle:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@mcv: ^MCV
+	Buildable:
+		Queue: Vehicle, RAVehicle, Starport
+		Prerequisites: ~atreides_vehicle_production, atreides_mcv_production
+		Description: Deploys into a Construction Yard.\n  Unarmed
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Atreides Mobile Construction Vehicle
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeLarge
+		EmptyWeapon: D2KUnitExplodeLarge
+	Transforms:
+		IntoActor: atreides_constructionyard
+		Offset: -1,-1
+		TransformSounds: BUILD1.WAV
+		Facing: 64
+		NoTransformNotification: BuildingCannotPlaceAudio
+	-RevealOnFire:
+	Voiced:
+		VoiceSet: D2KMCV
+	RenderSprites:
+		Image: d2k_mcv
+
 combat_tank.atreides:
-	Inherits: ^combat_tank
+	Inherits: ^CombatTank
 	Buildable:
 		Prerequisites: ~heavy.atreides_combat
 		Description: Main battle tank.\n  Strong vs Vehicles\n  Weak vs Infantry
 	Armament:
 		Weapon: 80mm_A
-
-combat_tank_husk.atreides:
-	Inherits: ^combat_tank.husk
-	TransformOnCapture:
-		IntoActor: combat_tank.atreides
-
-sonic_tank_husk.atreides:
-	Inherits: ^D2KVehicleHusk
-	Health:
-		HP: 1000
-	Tooltip:
-		Name: Sonic Tank (Destroyed)
-	TransformOnCapture:
-		IntoActor: sonic_tank

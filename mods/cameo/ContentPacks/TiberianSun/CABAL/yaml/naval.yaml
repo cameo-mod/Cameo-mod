@@ -48,8 +48,8 @@ cabal_lazerboat:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_navalyard
@@ -116,8 +116,8 @@ cabal_plasmasub:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@sub: ^Submarine
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -177,8 +177,8 @@ cabal_radar_cruiser:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@REINFORCED: ^CabalUpgradeReinforcedChassis
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServosVehicle
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_navalyard, cabal_techcenter

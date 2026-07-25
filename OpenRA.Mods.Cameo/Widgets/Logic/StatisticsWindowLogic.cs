@@ -23,7 +23,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		[ObjectCreator.UseCtor]
 		public StatisticsWindowLogic(Widget widget, World world)
 		{
-			var stats = CameoStatistics.Load();
+			var summary = CameoStatistics.LoadSummary();
+			var stats = summary.Factions;
 
 			// Selectable, non-random factions, with their localized display names. These define
 			// the per-faction rows (unplayed factions appear with zeroed totals so the player can
@@ -37,45 +38,92 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			var gamesPlayed = stats.Values.Sum(s => s.GamesPlayed);
 			var gamesWon = stats.Values.Sum(s => s.GamesWon);
 			var gamesLost = stats.Values.Sum(s => s.GamesLost);
-			var enemiesKilled = stats.Values.Sum(s => (long)s.UnitsKilled);
+			var unitsKilled = stats.Values.Sum(s => (long)s.UnitsKilled);
+			var unitsLost = stats.Values.Sum(s => (long)s.UnitsLost);
 			var buildingsDestroyed = stats.Values.Sum(s => (long)s.BuildingsKilled);
+			var buildingsLost = stats.Values.Sum(s => (long)s.BuildingsLost);
 			var resourcesEarned = stats.Values.Sum(s => s.ResourcesEarned);
 			var resourcesSpent = stats.Values.Sum(s => s.ResourcesSpent);
+			var enemyAssetsDestroyed = stats.Values.Sum(s => s.EnemyAssetsDestroyed);
+			var assetsOwned = stats.Values.Sum(s => s.AssetsOwned);
 			var factionsPlayed = stats.Count(kv => kv.Value.GamesPlayed > 0);
 
 			SetText(widget, "GAMES_PLAYED_VALUE", Number(gamesPlayed));
 			SetText(widget, "GAMES_WON_VALUE", Number(gamesWon));
 			SetText(widget, "GAMES_LOST_VALUE", Number(gamesLost));
 			SetText(widget, "FACTIONS_PLAYED_VALUE", $"{Number(factionsPlayed)} / {Number(factions.Count)}");
-			SetText(widget, "ENEMIES_KILLED_VALUE", Number(enemiesKilled));
+			SetText(widget, "UNITS_KILLED_VALUE", Number(unitsKilled));
+			SetText(widget, "UNITS_LOST_VALUE", Number(unitsLost));
 			SetText(widget, "BUILDINGS_DESTROYED_VALUE", Number(buildingsDestroyed));
+			SetText(widget, "BUILDINGS_LOST_VALUE", Number(buildingsLost));
 			SetText(widget, "RESOURCES_COLLECTED_VALUE", Metric(resourcesEarned));
 			SetText(widget, "RESOURCES_SPENT_VALUE", Metric(resourcesSpent));
+			SetText(widget, "MEDIAN_GAME_LENGTH_VALUE", FormatGameLength(summary.OverallGameLength.MedianMilliseconds));
+			SetText(widget, "AVERAGE_GAME_LENGTH_VALUE", FormatGameLength(summary.OverallGameLength.AverageMilliseconds));
+			SetText(widget, "ENEMY_ASSETS_DESTROYED_VALUE", Metric(enemyAssetsDestroyed));
+			SetText(widget, "ASSETS_OWNED_VALUE", Metric(assetsOwned));
 
-			var list = widget.GetOrNull<ScrollPanelWidget>("FACTION_LIST");
-			var template = list?.GetOrNull<ScrollItemWidget>("ROW_TEMPLATE");
-			if (list != null && template != null)
+			var maps = widget.GetOrNull<ScrollPanelWidget>("MAP_LIST");
+			var mapTemplate = maps?.GetOrNull<ScrollItemWidget>("MAP_TEMPLATE");
+			if (maps != null && mapTemplate != null)
 			{
-				list.RemoveChildren();
-				foreach (var faction in factions)
+				maps.RemoveChildren();
+				foreach (var map in summary.TopMaps)
 				{
-					stats.TryGetValue(faction.InternalName, out var s);
-
-					var name = ResolveName(faction);
-					var games = Number(s?.GamesPlayed ?? 0);
-					var wins = Number(s?.GamesWon ?? 0);
-					var kills = Number(s?.UnitsKilled ?? 0);
-					var destroyed = Number(s?.BuildingsKilled ?? 0);
-
-					var item = ScrollItemWidget.Setup(template, () => false, () => { });
-					SetText(item, "NAME", name);
-					SetText(item, "GAMES", games);
-					SetText(item, "WINS", wins);
-					SetText(item, "KILLS", kills);
-					SetText(item, "DESTROYED", destroyed);
-					list.AddChild(item);
+					var item = ScrollItemWidget.Setup(mapTemplate, () => false, () => { });
+					SetText(item, "MAP", map.Title);
+					SetText(item, "MAP_GAMES", Number(map.Games));
+					maps.AddChild(item);
 				}
 			}
+
+			var selectedFaction = factions.FirstOrDefault(f =>
+				stats.TryGetValue(f.InternalName, out var s) && s.GamesPlayed > 0) ?? factions.FirstOrDefault();
+
+			void UpdateFactionDetails()
+			{
+				if (selectedFaction == null)
+					return;
+
+				stats.TryGetValue(selectedFaction.InternalName, out var factionStats);
+				summary.FactionGameLengths.TryGetValue(selectedFaction.InternalName, out var gameLength);
+				factionStats ??= new FactionStatistics();
+				gameLength ??= new GameLengthStatistics(0, 0, 0);
+
+				SetText(widget, "FACTION_NAME", ResolveName(selectedFaction));
+				SetText(widget, "FACTION_GAMES_PLAYED_VALUE", Number(factionStats.GamesPlayed));
+				SetText(widget, "FACTION_GAMES_WON_VALUE", Number(factionStats.GamesWon));
+				SetText(widget, "FACTION_GAMES_LOST_VALUE", Number(factionStats.GamesLost));
+				SetText(widget, "FACTION_UNITS_KILLED_VALUE", Number(factionStats.UnitsKilled));
+				SetText(widget, "FACTION_UNITS_LOST_VALUE", Number(factionStats.UnitsLost));
+				SetText(widget, "FACTION_BUILDINGS_DESTROYED_VALUE", Number(factionStats.BuildingsKilled));
+				SetText(widget, "FACTION_BUILDINGS_LOST_VALUE", Number(factionStats.BuildingsLost));
+				SetText(widget, "FACTION_MEDIAN_GAME_LENGTH_VALUE", FormatGameLength(gameLength.MedianMilliseconds));
+				SetText(widget, "FACTION_AVERAGE_GAME_LENGTH_VALUE", FormatGameLength(gameLength.AverageMilliseconds));
+				SetText(widget, "FACTION_ENEMY_ASSETS_DESTROYED_VALUE", Metric(factionStats.EnemyAssetsDestroyed));
+				SetText(widget, "FACTION_ASSETS_OWNED_VALUE", Metric(factionStats.AssetsOwned));
+			}
+
+			var factionList = widget.GetOrNull<ScrollPanelWidget>("FACTION_LIST");
+			var factionTemplate = factionList?.GetOrNull<ScrollItemWidget>("FACTION_TEMPLATE");
+			if (factionList != null && factionTemplate != null)
+			{
+				factionList.RemoveChildren();
+				foreach (var faction in factions)
+				{
+					var item = ScrollItemWidget.Setup(factionTemplate,
+						() => selectedFaction == faction,
+						() =>
+						{
+							selectedFaction = faction;
+							UpdateFactionDetails();
+						});
+					SetText(item, "FACTION", ResolveName(faction));
+					factionList.AddChild(item);
+				}
+			}
+
+			UpdateFactionDetails();
 
 			var closeButton = widget.GetOrNull<ButtonWidget>("CLOSE_BUTTON");
 			if (closeButton != null)
@@ -109,6 +157,17 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			}
 
 			return rounded.ToString("0.#", CultureInfo.CurrentCulture) + suffixes[suffix];
+		}
+
+		internal static string FormatGameLength(double milliseconds)
+		{
+			if (milliseconds <= 0)
+				return "—";
+
+			var duration = TimeSpan.FromMilliseconds(milliseconds);
+			return duration.TotalHours >= 1
+				? $"{(int)duration.TotalHours}:{duration.Minutes:00}:{duration.Seconds:00}"
+				: $"{(int)duration.TotalMinutes}:{duration.Seconds:00}";
 		}
 
 		static bool IsRandom(FactionInfo f)

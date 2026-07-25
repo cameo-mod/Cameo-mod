@@ -40,6 +40,14 @@ namespace OpenRA.Mods.Cameo.Test
 			}
 		}
 
+		[TestCase(0, "—")]
+		[TestCase(65000, "1:05")]
+		[TestCase(3661000, "1:01:01")]
+		public void GameLengthUsesClockFormatting(double milliseconds, string expected)
+		{
+			Assert.That(StatisticsWindowLogic.FormatGameLength(milliseconds), Is.EqualTo(expected));
+		}
+
 		[TestCase(WinState.Undefined, null)]
 		[TestCase(WinState.Won, "Won")]
 		[TestCase(WinState.Lost, "Lost")]

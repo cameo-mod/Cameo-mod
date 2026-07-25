@@ -5,12 +5,12 @@ ra2_soviets_kirovairship:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@priority: ^PrioritizeBuilding
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
 	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
 	Inherits@RA2KirovAtomicBombs: ^RA2KirovAtomicBombs
@@ -89,12 +89,12 @@ ra2_soviets_siegechopper:
 	Inherits@Voxel: ^RenderVoxel
 	Inherits@detect: ^GenericAirDetector
 	Inherits@bot: ^BotAutoDeploySwitchMode50
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -239,12 +239,12 @@ ra2_soviets_migbomber:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Selectable:
 	Tooltip:
 		Name: MiG Bomber
@@ -387,9 +387,9 @@ ra2_soviets_transportkirov:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotAutoDeployTransport
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
 	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
 	Valued:

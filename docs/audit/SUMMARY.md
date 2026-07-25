@@ -7,7 +7,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
 | class | what | count (live tree) | severity profile |
 |---|---|---|---|
-| B8 | crash-class content | **0** distinct (was 3+ — fixed 2026-07-14: ts_nod_ticktank voxel, magicnuke sequence, ra2_cgtbnkbb/ctoutpbb missing assets; 2026-07-15: CABAL CreateEffect Image: fields removed, impact animations consolidated in misc.yaml, map actors renamed) | crash |
+| B8 | crash-class content | **0** distinct (was 3+ — fixed 2026-07-14: ts_nod_ticktank voxel, magicnuke sequence, ra2_cgtbnkbb/ctoutpbb missing assets; 2026-07-15: CABAL CreateEffect Image: fields removed, impact animations consolidated in misc.yaml, map actors renamed; 2026-07-24: RA2 weapons migrated to ContentPack, Yuri weapons headers restored, Naxis Kübelwagen encoding fixed, nuclearflash shader created) | crash |
 | B1 | cross-faction leaks | 10 L1 + 13 L3 (+1,106 shared needing owners) | balance |
 | B2 | illegal inherits | **328** concrete→concrete, 24 cross-faction, 0 dangling | balance-risk |
 | B5 | AI wiring | **200** ids defined nowhere, 620 unloaded refs, 26 factions with unwired units | balance |
@@ -52,3 +52,19 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 4. **B7/B9/B12 quick wins** (items 11, 13, 14) — ideal AI-agent batch work.
 5. **B10/B11 hygiene** (items 15, 18) — orphan purge + per-directory WAV normalization; deprecated *_old.yaml files already removed.
 6. **R2 rebalance** (items 2, 17) with tournament telemetry before touching Consortium-family numbers.
+
+## Superweapon documentation audit (2026-07-25)
+
+Full cross-reference of YAML superweapon/support power traits vs `FACTIONS.md` completed.
+Raw data: [`latest/superweapon_audit.yaml`](latest/superweapon_audit.yaml).
+
+**14 findings** (1 HIGH, 2 MEDIUM, 8 LOW, 3 INFO):
+- **SW-001 (HIGH)**: Harkonnen Palace has `^PrimarySuperweapon` + `SupportPowerChargeBar` but **no power trait** — Death Hand Missile unimplemented (parked faction).
+- **SW-002 (MED)**: Forgotten superweapon was "Tiberian Wildlife Rampage" in docs but YAML implements `NukePowerCA` (nuclear missile). FIXED in FACTIONS.md.
+- **SW-003 (MED)**: CABAL listed "Data Worm, Satellite Hack" but YAML has `NukePowerCA` (CabalMagicNuke) + `FireArmamentPower` (Data Worm). Satellite Hack not found. FIXED.
+- **SW-004–011 (LOW)**: Missing support powers in FACTIONS.md — Nod TS Cluster Missile, RA1 Allies Chrono Reinforcements, RA2 Allies Force Shield, Latin Syndicate EMP/Traitors, Schwarzer Mond name mismatch, Ordos name mismatch, WC2 Humans Slow/Invisibility, WC2 Orcs Bloodlust/Haste. ALL FIXED.
+- **SW-012–014 (INFO)**: Protoss reuses SteelIonCannon weapon, Consortium missing Federation Support Teleport in ref table, TS GDI missing Drop Pods in ref table. ALL FIXED.
+
+**Outpost 2 verified**: Supernova Missile IS implemented in `rules/outpost2.yaml` (`NukePower`, charge 9000). FACTIONS.md was correct.
+
+**WIP faction superweapons discovered** (not in FACTIONS.md): Warzone 2100 (IonCannonPower + AirstrikePower + NukePower), Worms (Sheep Strike + Concrete Donkey), Win98 (Demo Disk Strike + Red Ring of Death), Warcraft 1 (Rain of Fire + Poison Cloud), WH40K (8 Deep Strike variants + Marauder Bomber + Inquisition).

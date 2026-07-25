@@ -165,7 +165,6 @@ RA2LasherToxicMortar:
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: aa_plasgreeexp
 		ExplosionPalette: ra2effect
@@ -375,7 +374,6 @@ RA2Magnet:
 	Burst: 100
 	BurstDelays: 1
 	-Report:
-	StartBurstReport: vmagatta.wav
 	TargetActorCenter: true
 	Projectile: LaserZap
 		Shape: Flat
@@ -399,7 +397,6 @@ RA2Magnet:
 		Range: 500
 		ValidTargets: Vehicle
 	-Warhead@EffectAir:
-	-Warhead@Smudge:
 
 RA2MagnetAA:
 	Inherits: RA2Magnet
@@ -491,7 +488,6 @@ RA2PsychicJab:
 		Explosions: ra2_initfire
 		ExplosionPalette: ra2effect
 		-ImpactSounds:
-		ImpactActors: false
 		ValidTargets: Ground, Water
 
 RA2PsychicJab_elite:
@@ -625,7 +621,7 @@ YRBoomerTorpedo:
 	BurstDelays: 8
 	Report: vbooat2a.wav
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: Patriot
 		Arm: 5
@@ -654,11 +650,11 @@ YRBoomerTorpedo:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 10
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_large_watersplash
 		ExplosionPalette: ra2effect
@@ -840,7 +836,6 @@ RA2Chemspray:
 	BurstDelays: 4
 	Range: 4840
 	-Report:
-	StartBurstReport: flamtnk1.aud
 	Projectile: Bullet
 		Speed: 160
 		Image: ra2txgasg
@@ -871,7 +866,7 @@ RA2Chemspray2:
 	Warhead@HeavyChemicalWeapon: SpreadDamage
 		Damage: 4000
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
-	-Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+	-Warhead@HeavyChemicalWeaponFriendlyFire:
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 2
 		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath

@@ -1,5 +1,5 @@
 forgotten_upgrade_genomemapping:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_genomemapping.name
 	Valued:
@@ -14,7 +14,7 @@ forgotten_upgrade_genomemapping:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_chemicalfuel:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_chemicalfuel.name
 	Valued:
@@ -29,7 +29,7 @@ forgotten_upgrade_chemicalfuel:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_friendlywildlife:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_friendlywildlife.name
 	Valued:
@@ -44,7 +44,7 @@ forgotten_upgrade_friendlywildlife:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_junkarmor:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_junkarmor.name
 	Valued:
@@ -59,7 +59,7 @@ forgotten_upgrade_junkarmor:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_tiberiumboosters:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_tiberiumboosters.name
 	Valued:
@@ -74,7 +74,7 @@ forgotten_upgrade_tiberiumboosters:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_unity:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_unity.name
 	Valued:
@@ -89,7 +89,7 @@ forgotten_upgrade_unity:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_chemicalweapons:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_chemicalweapons.name
 	Valued:
@@ -104,7 +104,7 @@ forgotten_upgrade_chemicalweapons:
 	ProvidesPrerequisite:
 
 forgotten_upgrade_tiberiumadaptability:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_tiberiumadaptability.name
 	Valued:
@@ -121,7 +121,7 @@ forgotten_upgrade_tiberiumadaptability:
 		Actor: forgotten_upgrade_tiberiumadaptability_proxy_actor
 
 forgotten_upgrade_mutantsoldier:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: actor_forgotten_upgrade_mutantsoldier.name
 	Buildable:

@@ -32,7 +32,7 @@
        }
       ],
       "weapon": "Vulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -77,7 +77,7 @@
        }
       ],
       "weapon": "Napalm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
@@ -143,7 +143,7 @@
        }
       ],
       "weapon": "VulcanA10Carrier",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -188,7 +188,7 @@
        }
       ],
       "weapon": "NapalmA10Carrier",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon"
@@ -222,7 +222,7 @@
        }
       ],
       "weapon": "A10CarrierMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -291,7 +291,7 @@
        }
       ],
       "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -326,7 +326,7 @@
        }
       ],
       "weapon": "GDIRigDroneRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -382,7 +382,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
     "name": "GDI Chinook Transport",
@@ -398,7 +398,7 @@
      "v": "9000"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
     }
    },
@@ -431,7 +431,7 @@
        }
       ],
       "weapon": "FirehawkMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -465,7 +465,7 @@
        }
       ],
       "weapon": "FirehawkMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -539,7 +539,7 @@
        }
       ],
       "weapon": "FirehawkBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^NuclearWarhead",
@@ -578,7 +578,7 @@
     "prerequisites": [
      "~td_gdi_helipad",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockfirehawk"
+     "~td_gdi_promotion_firehawk"
     ],
     "queue": [
      "Aircraft",
@@ -684,7 +684,7 @@
        }
       ],
       "weapon": "OrcaMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -779,7 +779,7 @@
        }
       ],
       "weapon": "OrcaMissilesAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -1014,7 +1014,7 @@
        }
       ],
       "weapon": "TowerMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -1122,7 +1122,7 @@
        }
       ],
       "weapon": "TowerMissileAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -1253,7 +1253,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1271,7 +1271,7 @@
     },
     "name": "GDI Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1321,7 +1321,7 @@
        }
       ],
       "weapon": "HighV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1353,7 +1353,7 @@
        }
       ],
       "weapon": "HighVAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1557,7 +1557,7 @@
        }
       ],
       "weapon": "SkyshieldCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -1709,7 +1709,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1741,7 +1741,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -1772,7 +1772,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1804,7 +1804,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1870,7 +1870,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -1900,7 +1900,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -1930,7 +1930,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -1962,7 +1962,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -1993,7 +1993,7 @@
     "name": "GDI Rocket Soldier",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~!td_gdi_promotion_unlockmissilesoldier"
+     "~!td_gdi_promotion_missilesoldier"
     ],
     "sight": {
      "src": "inherited",
@@ -2062,7 +2062,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2092,7 +2092,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2137,7 +2137,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^SniperWeapon"
@@ -2184,7 +2184,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^SniperWeapon"
@@ -2196,12 +2196,12 @@
      "v": "Heroic"
     },
     "build_limit": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Valued.Cost",
      "v": "3000"
     },
     "design": {
@@ -2213,14 +2213,14 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Health.HP",
      "v": "80000"
     },
     "name": "GDI Commando",
     "prerequisites": [
      "~td_gdi_barracks",
      "td_gdi_advancedcommunicationscenter",
-     "~!td_gdi_promotion_unlockhavocandexosuit"
+     "~!td_gdi_promotion_havocandexosuit"
     ],
     "queue": [
      "Infantry",
@@ -2231,7 +2231,7 @@
      "v": "10000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
     }
    },
@@ -2357,7 +2357,7 @@
        }
       ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
@@ -2490,7 +2490,7 @@
        }
       ],
       "weapon": "EMPGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TeslaWeapon",
@@ -2532,7 +2532,7 @@
     "name": "EMP Grenadier",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~td_gdi_promotion_unlockempgrenadier"
+     "~td_gdi_promotion_empgrenadier"
     ],
     "queue": [
      "Infantry",
@@ -2577,7 +2577,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2611,7 +2611,7 @@
        }
       ],
       "weapon": "Grenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -2641,7 +2641,7 @@
     "name": "GDI Grenadier",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~!td_gdi_promotion_unlockempgrenadier"
+     "~!td_gdi_promotion_empgrenadier"
     ],
     "queue": [
      "Infantry",
@@ -2692,7 +2692,7 @@
        }
       ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2732,7 +2732,7 @@
        }
       ],
       "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -2783,7 +2783,7 @@
        }
       ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -2826,7 +2826,7 @@
        }
       ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2867,7 +2867,7 @@
        }
       ],
       "weapon": "CommandoSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -2908,7 +2908,7 @@
        }
       ],
       "weapon": "CommandoRocketLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -2960,7 +2960,7 @@
        }
       ],
       "weapon": "CommandoGrenadeLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -3004,7 +3004,7 @@
        }
       ],
       "weapon": "CommandoM16",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^Chaingun"
@@ -3060,7 +3060,7 @@
     "prerequisites": [
      "~td_gdi_barracks",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockhavocandexosuit"
+     "~td_gdi_promotion_havocandexosuit"
     ],
     "queue": [
      "Infantry",
@@ -3138,7 +3138,7 @@
        }
       ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -3208,7 +3208,7 @@
        }
       ],
       "weapon": "GDISniperRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -3242,7 +3242,7 @@
     "prerequisites": [
      "~td_gdi_barracks",
      "td_gdi_communicationscenter",
-     "~td_gdi_promotion_unlocksniper"
+     "~td_gdi_promotion_sniper"
     ],
     "queue": [
      "Infantry",
@@ -3285,7 +3285,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3317,7 +3317,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3348,7 +3348,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3380,7 +3380,7 @@
        }
       ],
       "weapon": "td_gdi_minigunner_minigun_ap",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3468,7 +3468,7 @@
        }
       ],
       "weapon": "OfficerMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3512,7 +3512,7 @@
        }
       ],
       "weapon": "OfficerMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3544,7 +3544,7 @@
        }
       ],
       "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3576,7 +3576,7 @@
        }
       ],
       "weapon": "OfficerMachineGunAP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -3612,7 +3612,7 @@
     "prerequisites": [
      "~td_gdi_barracks",
      "td_gdi_communicationscenter",
-     "~td_gdi_promotion_unlockgdiofficer"
+     "~td_gdi_promotion_gdiofficer"
     ],
     "queue": [
      "Infantry",
@@ -3653,7 +3653,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -3683,7 +3683,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -3713,7 +3713,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -3745,7 +3745,7 @@
        }
       ],
       "weapon": "RocketsAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^AMTProjectile"
@@ -3776,7 +3776,7 @@
     "name": "GDI Rocket Soldier",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~!td_gdi_promotion_unlockmissilesoldier"
+     "~!td_gdi_promotion_missilesoldier"
     ],
     "queue": [
      "Infantry",
@@ -3829,7 +3829,7 @@
        }
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3872,7 +3872,7 @@
        }
       ],
       "weapon": "td_gdi_shotgunner_shotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3908,7 +3908,7 @@
     "name": "Shotgunner",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~td_gdi_promotion_unlockshotgunner"
+     "~td_gdi_promotion_shotgunner"
     ],
     "queue": [
      "Infantry",
@@ -4008,7 +4008,7 @@
        }
       ],
       "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4101,7 +4101,7 @@
        }
       ],
       "weapon": "MissileSoldierWeapon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4135,7 +4135,7 @@
     "name": "Sonic Missile Soldier",
     "prerequisites": [
      "~td_gdi_barracks",
-     "~td_gdi_promotion_unlockmissilesoldier"
+     "~td_gdi_promotion_missilesoldier"
     ],
     "queue": [
      "Infantry",
@@ -4182,7 +4182,7 @@
        }
       ],
       "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4216,7 +4216,7 @@
        }
       ],
       "weapon": "GDIBattleshipRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -4293,7 +4293,7 @@
        }
       ],
       "weapon": "GunboatMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -4325,7 +4325,7 @@
        }
       ],
       "weapon": "GunboatMissileAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -4359,7 +4359,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -4392,7 +4392,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -4545,7 +4545,7 @@
    }
   },
   "promotions": {
-   "td_gdi_promotion_unlockassaultapc": {
+   "td_gdi_promotion_assaultapc": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4554,22 +4554,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Assault APC",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockassaultapc",
-     "td_gdi_promotion_unlocksniper",
+     "!td_gdi_promotion_assaultapc",
+     "td_gdi_promotion_sniper",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockempgrenadier": {
+   "td_gdi_promotion_empgrenadier": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4578,21 +4578,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock EMP Grenadier",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockempgrenadier",
+     "!td_gdi_promotion_empgrenadier",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockfirehawk": {
+   "td_gdi_promotion_firehawk": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4601,22 +4601,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Firehawk",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockfirehawk",
-     "td_gdi_promotion_unlockhavocandexosuit",
+     "!td_gdi_promotion_firehawk",
+     "td_gdi_promotion_havocandexosuit",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockgdidefenserig": {
+   "td_gdi_promotion_gdidefenserig": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4625,22 +4625,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock GDI Defense Rig",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockgdidefenserig",
-     "td_gdi_promotion_unlockmammothtankmk3",
+     "!td_gdi_promotion_gdidefenserig",
+     "td_gdi_promotion_mammothtankmk3",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockgdiofficer": {
+   "td_gdi_promotion_gdiofficer": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4649,22 +4649,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock GDI Officer",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockgdiofficer",
-     "td_gdi_promotion_unlockshotgunner",
+     "!td_gdi_promotion_gdiofficer",
+     "td_gdi_promotion_shotgunner",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockhavocandexosuit": {
+   "td_gdi_promotion_havocandexosuit": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4673,22 +4673,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Havoc and Exosuit",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockhavocandexosuit",
-     "td_gdi_promotion_unlockgdiofficer",
+     "!td_gdi_promotion_havocandexosuit",
+     "td_gdi_promotion_gdiofficer",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockhumveemkii": {
+   "td_gdi_promotion_humveemkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4697,21 +4697,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Humvee Mk. II",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockhumveemkii",
+     "!td_gdi_promotion_humveemkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockmammothtankmk3": {
+   "td_gdi_promotion_mammothtankmk3": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4720,22 +4720,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Mammoth Tank Mk3",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockmammothtankmk3",
-     "td_gdi_promotion_unlockpredatortank",
+     "!td_gdi_promotion_mammothtankmk3",
+     "td_gdi_promotion_predatortank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockmissilesoldier": {
+   "td_gdi_promotion_missilesoldier": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4744,22 +4744,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Missile Soldier",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockmissilesoldier",
-     "td_gdi_promotion_unlockempgrenadier",
+     "!td_gdi_promotion_missilesoldier",
+     "td_gdi_promotion_empgrenadier",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockpredatortank": {
+   "td_gdi_promotion_predatortank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4768,22 +4768,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Predator Tank",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockpredatortank",
-     "td_gdi_promotion_unlockhumveemkii",
+     "!td_gdi_promotion_predatortank",
+     "td_gdi_promotion_humveemkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlockshotgunner": {
+   "td_gdi_promotion_shotgunner": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4792,21 +4792,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Shotgunner",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlockshotgunner",
+     "!td_gdi_promotion_shotgunner",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_gdi_promotion_unlocksniper": {
+   "td_gdi_promotion_sniper": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4815,15 +4815,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Sniper",
     "prerequisites": [
      "~td_gdi_constructionyard",
-     "!td_gdi_promotion_unlocksniper",
-     "td_gdi_promotion_unlockmissilesoldier",
+     "!td_gdi_promotion_sniper",
+     "td_gdi_promotion_missilesoldier",
      "rank1"
     ],
     "queue": [
@@ -4832,6 +4832,32 @@
    }
   },
   "upgrades": {
+   "td_gdi_upgrade_a10airstrike": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/upgrades.yaml#Valued.Cost",
+     "v": "5000"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock A10 Airstrike",
+    "prerequisites": [
+     "~td_gdi_communicationscenter",
+     "!td_gdi_upgrade_a10airstrike"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
    "td_gdi_upgrade_advancedmissiletargeting": {
     "build_limit": {
      "src": "inherited",
@@ -4845,7 +4871,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4871,7 +4897,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4897,7 +4923,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4923,7 +4949,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4949,7 +4975,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5001,7 +5027,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5009,32 +5035,6 @@
     "prerequisites": [
      "~td_gdi_communicationscenter",
      "!td_gdi_upgrade_longrangesensors"
-    ],
-    "queue": [
-     "Upgrades"
-    ]
-   },
-   "td_gdi_upgrade_unlocka10airstrike": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/TiberianDawn/GDI/yaml/upgrades.yaml#Valued.Cost",
-     "v": "5000"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Upgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock A10 Airstrike",
-    "prerequisites": [
-     "~td_gdi_communicationscenter",
-     "!td_gdi_upgrade_unlocka10airstrike"
     ],
     "queue": [
      "Upgrades"
@@ -5049,7 +5049,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -5093,7 +5093,7 @@
        }
       ],
       "weapon": "APCGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -5133,7 +5133,7 @@
        }
       ],
       "weapon": "APCGunAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -5165,7 +5165,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_barracks",
-     "~!td_gdi_promotion_unlockassaultapc"
+     "~!td_gdi_promotion_assaultapc"
     ],
     "queue": [
      "Vehicle",
@@ -5264,7 +5264,7 @@
        }
       ],
       "weapon": "ArcherArtilleryShell",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^HeavyCannon",
@@ -5345,7 +5345,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5376,7 +5376,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5407,7 +5407,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5438,7 +5438,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2APAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5469,7 +5469,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockassaultapc"
+     "~td_gdi_promotion_assaultapc"
     ],
     "queue": [
      "Vehicle",
@@ -5514,7 +5514,7 @@
        }
       ],
       "weapon": "120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -5544,7 +5544,7 @@
        }
       ],
       "weapon": "120mmHV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^HVProjectile"
@@ -5574,7 +5574,7 @@
        }
       ],
       "weapon": "M1A1Missiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5604,7 +5604,7 @@
        }
       ],
       "weapon": "M1A1MissilesAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -5635,7 +5635,7 @@
        }
       ],
       "weapon": "M1A1MachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -5670,7 +5670,7 @@
     "name": "GDI Battle Tank",
     "prerequisites": [
      "~td_gdi_weaponsfactory",
-     "~!td_gdi_promotion_unlockpredatortank"
+     "~!td_gdi_promotion_predatortank"
     ],
     "queue": [
      "Vehicle",
@@ -5774,7 +5774,7 @@
        }
       ],
       "weapon": "BoxerCannonAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -5862,7 +5862,7 @@
        }
       ],
       "weapon": "BoxerCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^LightMissile",
@@ -5953,7 +5953,7 @@
        }
       ],
       "weapon": "GDIRigPDLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -5987,7 +5987,7 @@
        }
       ],
       "weapon": "GDIRigPDLaserTower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -6024,7 +6024,7 @@
        }
       ],
       "weapon": "GDIRigDroneTargeting",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6061,7 +6061,7 @@
        }
       ],
       "weapon": "GDIRigDroneTargetingTower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -6150,7 +6150,7 @@
        }
       ],
       "weapon": "GDIRigPhalanx",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^SmallArms",
@@ -6240,7 +6240,7 @@
        }
       ],
       "weapon": "GDIRigPhalanxTower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^SmallArms",
@@ -6280,7 +6280,7 @@
        }
       ],
       "weapon": "GDIRigRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -6350,7 +6350,7 @@
        }
       ],
       "weapon": "GDIRigMissilePod",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -6420,7 +6420,7 @@
        }
       ],
       "weapon": "GDIRigMissilePodAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -6459,7 +6459,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockgdidefenserig"
+     "~td_gdi_promotion_gdidefenserig"
     ],
     "queue": [
      "Vehicle",
@@ -6510,7 +6510,7 @@
        }
       ],
       "weapon": "ExosuitRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -6546,7 +6546,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockhavocandexosuit"
+     "~td_gdi_promotion_havocandexosuit"
     ],
     "queue": [
      "Vehicle",
@@ -6593,7 +6593,7 @@
        }
       ],
       "weapon": "MachineGunH",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6624,7 +6624,7 @@
        }
       ],
       "weapon": "MachineGunAPH",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6654,7 +6654,7 @@
     "name": "GDI Humvee",
     "prerequisites": [
      "~td_gdi_weaponsfactory",
-     "~!td_gdi_promotion_unlockhumveemkii"
+     "~!td_gdi_promotion_humveemkii"
     ],
     "queue": [
      "Vehicle",
@@ -6701,7 +6701,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6732,7 +6732,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6763,7 +6763,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6794,7 +6794,7 @@
        }
       ],
       "weapon": "MachineGunHumvee2APAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -6823,7 +6823,7 @@
        }
       ],
       "weapon": "RocketsHumvee2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -6852,7 +6852,7 @@
        }
       ],
       "weapon": "RocketsHumvee2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -6893,7 +6893,7 @@
        }
       ],
       "weapon": "RocketsHumvee2AMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^LightMissile",
@@ -6934,7 +6934,7 @@
        }
       ],
       "weapon": "RocketsHumvee2AMTAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^LightMissile",
@@ -6971,7 +6971,7 @@
     "name": "Humvee Mk. II",
     "prerequisites": [
      "~td_gdi_weaponsfactory",
-     "~td_gdi_promotion_unlockhumveemkii"
+     "~td_gdi_promotion_humveemkii"
     ],
     "queue": [
      "Vehicle",
@@ -7018,7 +7018,7 @@
        }
       ],
       "weapon": "120mmDual",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon"
       ]
@@ -7050,7 +7050,7 @@
        }
       ],
       "weapon": "120mmDualHV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^HVProjectile"
@@ -7084,7 +7084,7 @@
        }
       ],
       "weapon": "MammothMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -7118,7 +7118,7 @@
        }
       ],
       "weapon": "MammothMissilesAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow",
@@ -7151,7 +7151,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_advancedcommunicationscenter",
-     "~!td_gdi_promotion_unlockmammothtankmk3"
+     "~!td_gdi_promotion_mammothtankmk3"
     ],
     "queue": [
      "Vehicle",
@@ -7198,7 +7198,7 @@
        }
       ],
       "weapon": "MammothTank3Cannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon"
       ]
@@ -7230,7 +7230,7 @@
        }
       ],
       "weapon": "MammothTank3CannonsHV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^HVProjectile"
@@ -7264,7 +7264,7 @@
        }
       ],
       "weapon": "MammothTank3Missiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -7298,7 +7298,7 @@
        }
       ],
       "weapon": "MammothTank3MissilesAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow",
@@ -7331,7 +7331,7 @@
     "prerequisites": [
      "~td_gdi_weaponsfactory",
      "td_gdi_advancedcommunicationscenter",
-     "~td_gdi_promotion_unlockmammothtankmk3"
+     "~td_gdi_promotion_mammothtankmk3"
     ],
     "queue": [
      "Vehicle",
@@ -7417,7 +7417,7 @@
        }
       ],
       "weapon": "227mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -7488,7 +7488,7 @@
        }
       ],
       "weapon": "227mmAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^Grenade",
@@ -7615,7 +7615,7 @@
        }
       ],
       "weapon": "GDIPredatorTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7645,7 +7645,7 @@
        }
       ],
       "weapon": "GDIPredatorTankCannonHV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^HVProjectile"
@@ -7676,7 +7676,7 @@
        }
       ],
       "weapon": "GDIPredatorTankMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -7707,7 +7707,7 @@
        }
       ],
       "weapon": "GDIPredatorTankMissilesAMT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^AMTProjectile"
@@ -7738,7 +7738,7 @@
        }
       ],
       "weapon": "GDIPredatorMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -7787,7 +7787,7 @@
     "name": "Predator Tank",
     "prerequisites": [
      "~td_gdi_weaponsfactory",
-     "~td_gdi_promotion_unlockpredatortank"
+     "~td_gdi_promotion_predatortank"
     ],
     "queue": [
      "Vehicle",

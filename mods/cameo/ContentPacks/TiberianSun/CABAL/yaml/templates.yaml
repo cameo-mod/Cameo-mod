@@ -132,7 +132,7 @@
 		Condition: hospital
 		Prerequisites: machshop
 
-^cabal_upgrade_mobilitymatrix:
+^CabalUpgradeMobilityMatrix:
 	GrantConditionOnPrerequisite@cabal_upgrade_mobilitymatrix:
 		Condition: cabal_upgrade_mobilitymatrix
 		Prerequisites: cabal_upgrade_mobilitymatrix
@@ -145,7 +145,7 @@
 	ActorStatValues:
 		Upgrades: cabal_upgrade_mobilitymatrix
 
-^cabal_upgrade_darkarmament:
+^CabalUpgradeDarkArmament:
 	GrantConditionOnPrerequisite@cabal_upgrade_darkarmament:
 		Condition: cabal_upgrade_darkarmament
 		Prerequisites: cabal_upgrade_darkarmament
@@ -155,28 +155,28 @@
 		RequiresCondition: cabal_upgrade_darkarmament
 		Modifier: 90
 
-^cabal_upgrade_neutronnuclearcatalyst:
+^CabalUpgradeNeutronNuclearCatalyst:
 	GrantConditionOnPrerequisite@cabal_upgrade_neutronnuclearcatalyst:
 		Condition: cabal_upgrade_neutronnuclearcatalyst
 		Prerequisites: cabal_upgrade_neutronnuclearcatalyst
 	ActorStatValues:
 		Upgrades: cabal_upgrade_neutronnuclearcatalyst
 
-^cabal_upgrade_backupsystems:
+^CabalUpgradeBackupSystems:
 	GrantConditionOnPrerequisite@cabal_upgrade_backupsystems:
 		Condition: cabal_upgrade_backupsystems
 		Prerequisites: cabal_upgrade_backupsystems
 	ActorStatValues:
 		Upgrades: cabal_upgrade_backupsystems
 
-^cabal_upgrade_handof:
+^CabalUpgradeHandOf:
 	GrantConditionOnPrerequisite@cabal_upgrade_handof:
 		Condition: cabal_upgrade_handof
 		Prerequisites: cabal_upgrade_handof
 	ActorStatValues:
 		Upgrades: cabal_upgrade_handof
 
-^cabal_upgrade_cyberneticplating:
+^CabalUpgradeCyberneticPlating:
 	GrantConditionOnPrerequisite@cabal_upgrade_cyberneticplating:
 		Condition: armored
 		Prerequisites: cabal_upgrade_cyberneticplating
@@ -192,7 +192,7 @@
 	ActorStatValues:
 		Upgrades: cabal_upgrade_cyberneticplating
 
-^cabal_upgrade_reinforcedchassis:
+^CabalUpgradeReinforcedChassis:
 	GrantConditionOnPrerequisite@cabal_upgrade_reinforcedchassis:
 		Condition: cabal_upgrade_reinforcedchassis
 		Prerequisites: cabal_upgrade_reinforcedchassis
@@ -202,7 +202,7 @@
 	ActorStatValues:
 		Upgrades: cabal_upgrade_reinforcedchassis
 
-^cabal_upgrade_overchargedservos:
+^CabalUpgradeOverchargedServos:
 	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
 		Condition: cabal_upgrade_overchargedservos
 		Prerequisites: cabal_upgrade_overchargedservos
@@ -218,7 +218,7 @@
 	ActorStatValues:
 		Upgrades: cabal_upgrade_overchargedservos
 
-^cabal_upgrade_overchargedservos_vehicle:
+^CabalUpgradeOverchargedServosVehicle:
 	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
 		Condition: cabal_upgrade_overchargedservos
 		Prerequisites: cabal_upgrade_overchargedservos
@@ -233,7 +233,7 @@
 		Modifier: 85
 	ActorStatValues:
 		Upgrades: cabal_upgrade_overchargedservos
-^cabal_upgrade_neuraluplink:
+^CabalUpgradeNeuralUplink:
 	GrantConditionOnPrerequisite@cabal_upgrade_neuraluplink:
 		Condition: cabal_upgrade_neuraluplink
 		Prerequisites: cabal_upgrade_neuraluplink
@@ -243,7 +243,7 @@
 	ActorStatValues:
 		Upgrades: cabal_upgrade_neuraluplink
 
-^cabal_upgrade_reclamationprotocols:
+^CabalUpgradeReclamationProtocols:
 	GrantConditionOnPrerequisite@cabal_upgrade_reclamationprotocols:
 		Condition: cabal_upgrade_reclamationprotocols
 		Prerequisites: cabal_upgrade_reclamationprotocols

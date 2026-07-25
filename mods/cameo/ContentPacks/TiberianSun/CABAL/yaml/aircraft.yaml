@@ -5,7 +5,7 @@ cabal_overkillgunship:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@reload: ^RearmableAircraft
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -70,7 +70,7 @@ cabal_hunterkillermk1:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -136,7 +136,7 @@ cabal_hunterdronecarrier:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -278,7 +278,7 @@ cabal_orbdrone:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -335,7 +335,7 @@ cabal_cyborgassassin:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 1000
@@ -393,7 +393,7 @@ cabal_mothership:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -433,7 +433,7 @@ cabal_hunterkillermk1_elite:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 3000
@@ -502,7 +502,7 @@ cabal_repairdrone:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@repair: ^PrioritizeRepair
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^CabalUpgradeOverchargedServos
 	Valued:
 		Cost: 1000
 	Tooltip:

@@ -2,14 +2,14 @@
 	SpawnActorsOnSell:
 		ActorTypes: ra2_soviets_engineer, ra2_soviets_conscript, ra2_soviets_conscript, ra2_soviets_flaktrooper
 
-^ra2sovietsConscription:
+^RA2SovietsConscription:
 	GrantConditionOnPrerequisite@ra2_soviets_doctrine_conscription:
 		Condition: ra2_soviets_doctrine_conscription
 		Prerequisites: ra2_soviets_doctrine_conscription
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_conscription
 
-^ra2sovietsInfantryConditioning:
+^RA2SovietsInfantryConditioning:
 	ChangesHealth@ra2_soviets_doctrine_harshenvironmentinfantryconditioning:
 		Step: 15
 		Delay: 1
@@ -28,7 +28,7 @@
 	ActorStatValues:
 		Upgrades: ra2_soviets_doctrine_harshenvironmentinfantryconditioning
 
-^ra2sovietshockTrooperTraining:
+^RA2SovietsShockTrooperTraining:
 	RangeMultiplier@ra2_soviets_doctrine_shocktroopertraining:
 		Modifier: 115
 		RequiresCondition: ra2_soviets_doctrine_shocktroopertraining
@@ -106,7 +106,7 @@
 # ### Infantry tree
 
 # ra2_allies_upgrade_paratroopers:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Airborne
 # 	Buildable:
@@ -120,7 +120,7 @@
 # 	ProvidesPrerequisite:
 
 # upra2seal:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock SEAL
 # 	Buildable:
@@ -133,7 +133,7 @@
 # 	ProvidesPrerequisite:
 
 # upra2snipe:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock ra1_allies_alliedsniper
 # 	Buildable:
@@ -146,7 +146,7 @@
 # 	ProvidesPrerequisite:
 
 # ra2_allies_upgrade_elitegi:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Upgrade GIs
 # 	Buildable:
@@ -161,7 +161,7 @@
 # ### Offensive tree
 
 # upra2tnkd:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Tank Destroyer
 # 	Buildable:
@@ -174,7 +174,7 @@
 # 	ProvidesPrerequisite:
 
 # ra2_allies_upgrade_eliterocketeer:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Rocketeers
 # 	Buildable:
@@ -187,7 +187,7 @@
 # 	ProvidesPrerequisite:
 
 # ra2_allies_upgrade_heavymiragetank:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Heavy Mirage Tanks
 # 	Buildable:
@@ -200,7 +200,7 @@
 # 	ProvidesPrerequisite:
 
 # upra2beag:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Black Eagle
 # 	Buildable:
@@ -213,7 +213,7 @@
 # 	ProvidesPrerequisite:
 
 # ra2_allies_upgrade_advancedaeronautics:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Advanced Aeronautics
 # 	Buildable:
@@ -241,7 +241,7 @@
 # ### Defensive tree
 
 # ra2_allies_upgrade_prismlinking:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Prism Chaining
 # 	Buildable:
@@ -254,7 +254,7 @@
 # 	ProvidesPrerequisite:
 
 # ra2_allies_upgrade_forceshield:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Force Shield
 # 	Buildable:
@@ -268,7 +268,7 @@
 # 	ProvidesPrerequisite:
 
 # upra2gaorep:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Ore Purifier
 # 	Buildable:
@@ -281,7 +281,7 @@
 # 	ProvidesPrerequisite:
 
 # upra2gtgcan:
-# 	Inherits: ^promotion_upgrade.template
+# 	Inherits: ^PromotionUpgradeTemplate
 # 	Tooltip:
 # 		Name: Unlock Grand Cannon
 # 	Buildable:

@@ -378,6 +378,14 @@ rafactj.colorpicker:
 		Image: rafactj
 		Palette: colorpicker
 
+ra1_soviets_mammothtank.colorpicker:
+	Inherits: ra1_soviets_mammothtank
+	-Buildable:
+	-MapEditorData:
+	RenderSprites:
+		Image: ra1_soviets_mammothtank
+		Palette: colorpickerra
+
 CAMERA:
 	Interactable:
 	EditorOnlyTooltip:
@@ -533,7 +541,7 @@ Vortex:
 #		RA
 ####################################################################################################
 infantry.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Infantry Veterancy
 	Buildable:
@@ -541,7 +549,7 @@ infantry.upgraded:
 	RenderSprites:
 
 vehicles.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Vehicle Veterancy
 	Buildable:
@@ -549,7 +557,7 @@ vehicles.upgraded:
 	RenderSprites:
 
 aircraft.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Aircraft Veterancy
 	Buildable:
@@ -557,7 +565,7 @@ aircraft.upgraded:
 	RenderSprites:
 
 techbuilding.upgraded:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Tech Center Infiltration
 	Buildable:
@@ -642,6 +650,8 @@ camera.gpssat:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals map to owner)
+	Tooltip:
+		Name: GPS Satellite
 	Immobile:
 		OccupiesSpace: false
 	BodyOrientation:

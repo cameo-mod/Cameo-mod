@@ -1,4 +1,4 @@
-tkm_rifleman_rifle:
+﻿tkm_rifleman_rifle:
 	Inherits: ^SmallArms
 	ReloadDelay: 75
 	Range: 5042
@@ -550,7 +550,7 @@ t30shell:
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
-		MinimumLaunchAngle: 50
+		LaunchAngle: 50
 		MaximumLaunchSpeed: 125
 		Acceleration: 5
 	Warhead@HeavyBomb: SpreadDamage
@@ -798,8 +798,7 @@ tkmkatyushalalauncherrockets:
 		Image: d2k_missile2
 		Palette: d2keffect
 		TrailImage: large_trail
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 125
+		LaunchAngle: 125
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
@@ -849,8 +848,7 @@ tkmkatyushalalauncherrocketsfire:
 		TrailImage: fb2
 		TrailInterval: 1
 		TrailDelay: 0
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 125
+		LaunchAngle: 125
 		MaximumLaunchSpeed: 125
 		MinimumLaunchSpeed: 125
 		Acceleration: 5
@@ -882,7 +880,7 @@ SandmarineTusk:
 	Inherits: ^ShrapnelWeapon
 	ReloadDelay: 129
 	Burst: 3
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 6464
 	Report: missile6.aud
 	ValidTargets: Ground, Water
@@ -903,7 +901,7 @@ BigShieeTusk:
 	Inherits: ^ShrapnelWeapon
 	ReloadDelay: 83
 	Burst: 2
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 7238
 	Report: missile6.aud
 	ValidTargets: Ground, Water
@@ -924,7 +922,7 @@ SandmarineTuskTwin:
 	Inherits: ^MediumMissile
 	ReloadDelay: 54
 	Burst: 8
-	Burstdelays: 3
+	BurstDelays: 3
 	Range: 6102
 	Report: missile6.aud
 	ValidTargets: Ground, Water

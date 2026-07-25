@@ -95,7 +95,7 @@
        }
       ],
       "weapon": "TSApacheMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -210,7 +210,7 @@
        }
       ],
       "weapon": "TSChemApacheMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -432,7 +432,7 @@
        }
       ],
       "weapon": "TSCobraMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^TankDestroyerCannon",
@@ -547,7 +547,7 @@
        }
       ],
       "weapon": "TSChemCobraMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^HeavyCannon",
@@ -624,7 +624,7 @@
        }
       ],
       "weapon": "TSCropBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -669,7 +669,7 @@
        }
       ],
       "weapon": "TSCropBombChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon"
@@ -744,7 +744,7 @@
        }
       ],
       "weapon": "TSLocustBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -791,7 +791,7 @@
        }
       ],
       "weapon": "TSLocustBombChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon"
@@ -865,7 +865,7 @@
        }
       ],
       "weapon": "TSWaspClaw",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -1041,7 +1041,7 @@
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Armor.Type",
      "v": "Wood"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
      "v": "2500"
@@ -1059,7 +1059,7 @@
     },
     "name": "actor_forgotten_constructionyard.name",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1115,7 +1115,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
      "v": "1000"
     },
     "design": {
@@ -1272,7 +1272,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/buildings.yaml#Valued.Cost",
      "v": "800"
     },
     "design": {
@@ -1423,7 +1423,7 @@
        }
       ],
       "weapon": "TS70mmTur",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon",
@@ -1482,7 +1482,7 @@
        }
       ],
       "weapon": "TS70mmTurChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -1571,7 +1571,7 @@
        }
       ],
       "weapon": "TSScoopDualTur",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^ShrapnelWeapon",
@@ -1637,7 +1637,7 @@
        }
       ],
       "weapon": "TSScoopDualTurChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumChemicalWeapon",
@@ -1707,7 +1707,7 @@
        }
       ],
       "weapon": "TSHighVelocityTur",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"
@@ -1776,7 +1776,7 @@
        }
       ],
       "weapon": "TSJuggerFlakAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -1853,7 +1853,7 @@
        }
       ],
       "weapon": "TSMutVulcanTurret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -2026,7 +2026,7 @@
        }
       ],
       "weapon": "TSChemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2093,7 +2093,7 @@
        }
       ],
       "weapon": "TSChemsprayUp",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -2146,7 +2146,7 @@
        }
       ],
       "weapon": "TSChemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2214,7 +2214,7 @@
        }
       ],
       "weapon": "TSChemsprayUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -2320,7 +2320,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2349,7 +2349,7 @@
        }
       ],
       "weapon": "TSEngineerPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2424,7 +2424,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2474,7 +2474,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2524,7 +2524,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2575,7 +2575,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2657,7 +2657,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2707,7 +2707,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2757,7 +2757,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2808,7 +2808,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2877,7 +2877,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -2927,7 +2927,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -2963,7 +2963,7 @@
        }
       ],
       "weapon": "TSGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -3014,7 +3014,7 @@
        }
       ],
       "weapon": "TSChemGhostGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -3078,7 +3078,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3108,7 +3108,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3184,7 +3184,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3214,7 +3214,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3277,7 +3277,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3307,7 +3307,7 @@
        }
       ],
       "weapon": "forgotten_mutant_dualwield",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3439,7 +3439,7 @@
        }
       ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3518,7 +3518,7 @@
        }
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3570,7 +3570,7 @@
        }
       ],
       "weapon": "TSInfantryMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3650,7 +3650,7 @@
        }
       ],
       "weapon": "TSInfantryMortarChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -3735,7 +3735,7 @@
        }
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3776,7 +3776,7 @@
        }
       ],
       "weapon": "TSSergGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -3852,7 +3852,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3881,7 +3881,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3951,7 +3951,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3980,7 +3980,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4042,7 +4042,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4071,7 +4071,7 @@
        }
       ],
       "weapon": "TSSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -4133,7 +4133,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4162,7 +4162,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4237,7 +4237,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4266,7 +4266,7 @@
        }
       ],
       "weapon": "forgotten_mutantsoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4329,7 +4329,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -4359,7 +4359,7 @@
        }
       ],
       "weapon": "TSBazooka",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -4404,7 +4404,7 @@
        }
       ],
       "weapon": "TSChemBazooka",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -4451,7 +4451,7 @@
        }
       ],
       "weapon": "TSChemBazooka",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LightMissile"
@@ -4586,7 +4586,7 @@
        }
       ],
       "weapon": "TSMutShotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4685,7 +4685,7 @@
        }
       ],
       "weapon": "TSMutShotgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4785,7 +4785,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -4839,7 +4839,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -4908,7 +4908,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -4979,7 +4979,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5076,7 +5076,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5130,7 +5130,7 @@
        }
       ],
       "weapon": "TSFiendShard",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5199,7 +5199,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5270,7 +5270,7 @@
        }
       ],
       "weapon": "TSFiendShardUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -5397,7 +5397,7 @@
        }
       ],
       "weapon": "TSFiendShardBlue",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5485,7 +5485,7 @@
        }
       ],
       "weapon": "TSFiendShardBlue",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5599,7 +5599,7 @@
        }
       ],
       "weapon": "TSFiendShardBlueUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5716,7 +5716,7 @@
        }
       ],
       "weapon": "TSFiendShardBlueUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5814,7 +5814,7 @@
        }
       ],
       "weapon": "TSVisceroidSpray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5866,7 +5866,7 @@
        }
       ],
       "weapon": "TSVisceroidSpray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon"
@@ -5933,7 +5933,7 @@
        }
       ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -6002,7 +6002,7 @@
        }
       ],
       "weapon": "TSVisceroidSprayUP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -6071,7 +6071,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -6105,7 +6105,7 @@
        }
       ],
       "weapon": "TSZombieAttack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -6161,7 +6161,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Misc",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6212,7 +6212,7 @@
        }
       ],
       "weapon": "TSBoatcannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -6246,7 +6246,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -6279,7 +6279,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -6356,7 +6356,7 @@
        }
       ],
       "weapon": "TSJuggerFlakAA_boat",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -6392,7 +6392,7 @@
        }
       ],
       "weapon": "TSJuggerboat90mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -6426,7 +6426,7 @@
        }
       ],
       "weapon": "DepthCharge",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -6507,7 +6507,7 @@
        }
       ],
       "weapon": "TSVanMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -6559,7 +6559,7 @@
        }
       ],
       "weapon": "TSChemVanMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -6619,7 +6619,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6642,7 +6642,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6666,7 +6666,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6689,7 +6689,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6713,7 +6713,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6737,7 +6737,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6761,7 +6761,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6785,7 +6785,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6809,7 +6809,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6833,7 +6833,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6857,7 +6857,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6881,7 +6881,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6910,7 +6910,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6936,7 +6936,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6962,7 +6962,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6988,7 +6988,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7014,7 +7014,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7040,7 +7040,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7066,7 +7066,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7092,7 +7092,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7118,7 +7118,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7169,7 +7169,7 @@
        }
       ],
       "weapon": "TSMutApcCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon"
@@ -7254,7 +7254,7 @@
        }
       ],
       "weapon": "TSBowlerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -7348,7 +7348,7 @@
        }
       ],
       "weapon": "TS120mmxChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyChemicalWeapon",
@@ -7397,7 +7397,7 @@
        }
       ],
       "weapon": "TSMammothTuskChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyChemicalWeapon"
@@ -7483,7 +7483,7 @@
        }
       ],
       "weapon": "MutFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7533,7 +7533,7 @@
        }
       ],
       "weapon": "MutFlamerChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -7634,7 +7634,7 @@
        }
       ],
       "weapon": "TS120mmx",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannon",
        "^ShrapnelWeapon",
@@ -7705,7 +7705,7 @@
        }
       ],
       "weapon": "TSChem120mmx",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannon",
        "^MediumChemicalWeapon",
@@ -7740,7 +7740,7 @@
        }
       ],
       "weapon": "TSMammothTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ImpactGlow",
        "^HeavyMissile"
@@ -7842,7 +7842,7 @@
        }
       ],
       "weapon": "MutHFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon"
@@ -7925,7 +7925,7 @@
        }
       ],
       "weapon": "MutHFlamerChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyFlameWeapon",
@@ -8017,7 +8017,7 @@
        }
       ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8059,7 +8059,7 @@
        }
       ],
       "weapon": "TSAdatsMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8102,7 +8102,7 @@
        }
       ],
       "weapon": "TSAdatsMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8144,7 +8144,7 @@
        }
       ],
       "weapon": "TSAdatsMissileAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^LightMissile"
@@ -8227,7 +8227,7 @@
        }
       ],
       "weapon": "TSVanMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -8279,7 +8279,7 @@
        }
       ],
       "weapon": "TSChemVanMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -8363,7 +8363,7 @@
        }
       ],
       "weapon": "TSMLRSMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon"
       ]
@@ -8415,7 +8415,7 @@
        }
       ],
       "weapon": "TSChemMLRSMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^ShrapnelWeapon"
@@ -8539,7 +8539,7 @@
        }
       ],
       "weapon": "TSNomadGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -8619,7 +8619,7 @@
        }
       ],
       "weapon": "TSRaiderCarCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -8695,7 +8695,7 @@
        }
       ],
       "weapon": "TS70mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumCannon"
@@ -8742,7 +8742,7 @@
        }
       ],
       "weapon": "TS70mmChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -8834,7 +8834,7 @@
        }
       ],
       "weapon": "TSRuinerMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumMissile"
@@ -8912,7 +8912,7 @@
        }
       ],
       "weapon": "TSChemRuinerMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumChemicalWeapon",
@@ -8973,7 +8973,6 @@
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
-      "requires": "!ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@PRIMARY",
       "versus_templates": [
        "^Grenade",
@@ -9007,7 +9006,7 @@
        }
       ],
       "weapon": "TSSAPCMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightMissile"
@@ -9021,7 +9020,6 @@
       "pricing": true,
       "range": "5300",
       "reloaddelay": "18",
-      "requires": "ts_nod_upgrade_tiberiumcoremissiles",
       "slot": "Armament@UPGRADE",
       "versus_templates": [
        "^LightChemicalWeapon",
@@ -9070,7 +9068,7 @@
        }
       ],
       "weapon": "TSSAPCCoreMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^Grenade",
@@ -9079,12 +9077,12 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Armor.Type",
      "v": "Medium"
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Valued.Cost",
      "v": "1410"
     },
     "design": {
@@ -9096,10 +9094,10 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Health.HP",
      "v": "17500"
     },
-    "name": "Subterranean APC",
+    "name": "actor_forgotten_scarabapc.name",
     "prerequisites": [
      "~forgotten_warfactory",
      "~disabled"
@@ -9109,15 +9107,15 @@
      "RAVehicle"
     ],
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.Speed",
      "v": "60"
     },
     "turn_speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianSun/Forgotten/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "40"
     }
    },
@@ -9150,7 +9148,7 @@
        }
       ],
       "weapon": "TSScoopDual",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumCannon"
@@ -9199,7 +9197,7 @@
        }
       ],
       "weapon": "TSScoopDualChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^MediumChemicalWeapon",
@@ -9278,7 +9276,7 @@
        }
       ],
       "weapon": "TSHighVelocity",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"
@@ -9325,7 +9323,7 @@
        }
       ],
       "weapon": "TSHighVelocityChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",
@@ -9419,7 +9417,7 @@
        }
       ],
       "weapon": "TSBusMortar",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb"
@@ -9497,7 +9495,7 @@
        }
       ],
       "weapon": "TSBusMortarChem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyBomb",
@@ -9624,7 +9622,7 @@
        }
       ],
       "weapon": "TSHighVelocity2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^TankDestroyerCannon"
@@ -9676,7 +9674,7 @@
        }
       ],
       "weapon": "TSHighVelocity2Chem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TSCannonEffect",
        "^LightChemicalWeapon",

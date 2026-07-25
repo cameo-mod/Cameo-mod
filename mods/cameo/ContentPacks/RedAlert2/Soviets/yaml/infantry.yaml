@@ -88,9 +88,9 @@ ra2_soviets_attackdog:
 	Inherits@MC: ^MCImmune
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
@@ -198,9 +198,9 @@ ra2_soviets_conscript:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -275,9 +275,9 @@ ra2_soviets_flaktrooper:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Valued:
 		Cost: 416
@@ -366,9 +366,9 @@ ra2_soviets_crazyivan:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -420,9 +420,9 @@ ra2_soviets_teslatrooper:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@TeslaTargeting: ^PrioritizeTesla
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
 	AutoTargetPriority@DEFAULT:
 		InvalidTargets: NoAutoTarget, TeslaCoil
@@ -514,9 +514,9 @@ ra2_soviets_desolator:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@bot: ^BotAutoDeployOnLowHealth
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -596,9 +596,9 @@ ra2_soviets_boris:
 	Inherits@COMMANDOSKULL: ^CommandoSkull
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@ra2sovietsConscription: ^ra2sovietsConscription
-	Inherits@ra2sovietsInfantryConditioning: ^ra2sovietsInfantryConditioning
-	Inherits@ra2sovietshockTrooperTraining: ^ra2sovietshockTrooperTraining
+	Inherits@ra2sovietsConscription: ^RA2SovietsConscription
+	Inherits@ra2sovietsInfantryConditioning: ^RA2SovietsInfantryConditioning
+	Inherits@ra2sovietshockTrooperTraining: ^RA2SovietsShockTrooperTraining
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120

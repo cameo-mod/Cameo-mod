@@ -18,7 +18,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 | Baseline audit evidence | `docs/audit/baseline/` | Historical comparison only. |
 | Faction reference | `docs/FACTIONS.md`, `docs/factions/MATRIX.md` | Use for display-name, faction-role, roster, and documentation checks. |
 | Migration process | `docs/MIGRATION.md` | Use for naming, actor splits, asset movement, and Fluent migrations. |
-| External-agent historical evidence | `docs/audit/LEGACY_DEVIN_CABAL.md` | Historical register only. No external output is current until rerun in this repository. |
+| External-agent historical evidence | `docs/history/LEGACY_DEVIN_CABAL.md` | Historical register only. No external output is current until rerun in this repository. |
 
 ## Required operating sequence
 
@@ -26,7 +26,20 @@ This repository is the shared source of truth for maintainers and every AI agent
 2. Record a newly discovered crash, regression, or suspected discrepancy in `docs/design/ROADMAP.md` before proposing a fix.
 3. Treat release builds, engine logs, resolved-ruleset diffs, and current audit output as evidence. Do not promote an old raw `.txt` result to a live finding without rerunning its audit.
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.
-5. Before every commit, boot with `launch-game.cmd`, verify the main menu, and confirm no new exception log was created. Stage only the files belonging to the change.
+5. Before every commit, boot-gate with `launch-game.cmd` — launch the game, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. Fix any crashes before committing. Stage only the files belonging to the change.
+6. `utility.cmd cameo --check-yaml` is a **linting/YAML validation tool**, NOT a boot-gate substitute. Use it for: verifying cosmetic refactors (actor/template renames), checking broken prerequisites, and detecting gameplay-relevant YAML issues. **Goal: 0 errors AND 0 warnings.** The utility takes a VERY LONG TIME (10+ minutes) — only run it when you have completed ALL connected tasks from the last report and expect 0 errors/warnings to confirm. Do NOT run it repeatedly. Keep findings from the last report in ROADMAP and docs so they can be fixed without re-running. It is ABSOLUTELY NECESSARY — just choose wisely WHEN to run it.
+
+## Git workflow and commit rules (binding, 2026-07-24)
+
+**Co-maintainer: Blackrobe. Multiple developers work on this repository.**
+
+1. **Always fetch, pull, and merge before any commit.** The remote may have changes from other developers. If the engine pin (`mod.config` `ENGINE_VERSION`) changed, always run `make all` to fetch and build the new engine before boot-gating. Never skip the boot-gate.
+2. **Always boot-gate before committing.** Launch the game with `launch-game.cmd`, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. A commit that breaks the boot is not acceptable. (`utility.cmd cameo --check-yaml` is a separate linting tool — see step 6 above.)
+3. **Always update ALL relevant documentation files BEFORE committing.** This includes `docs/design/ROADMAP.md`, `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, `docs/LESSONS_LEARNED.md`, and any other docs affected by the change. Check old docs for outdated information, inconsistencies, and contradictions — fix them. A commit without updated docs is an incomplete commit.
+4. **Do not spam commits on upstream master.** Use a pull request (PR) for cleaner commit history. Create a feature branch, push it, open a PR, and merge only after verification.
+5. **Only merge a PR if either:** (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash. Commits that do not break the master branch are a naturally acceptable outcome.
+6. **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
+7. **When a task is completely done, merge the feature branch to master.** Do not leave completed work stranded on a feature branch. Ensure boot-gate passes and docs are updated before merging.
 
 ## Documentation rules
 

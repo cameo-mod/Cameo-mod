@@ -4,9 +4,9 @@ ra2_soviets_mobileconstructionvehicle:
 	Inherits@anim: ^RA2Vehicle
 	Inherits@mcv: ^MCV
 	Inherits@SHADOWS: ^Shadows
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Tooltip:
@@ -38,12 +38,12 @@ ra2_soviets_rhinoheavytank:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -167,9 +167,9 @@ ra2_soviets_flaktrack:
 	Inherits@EMP: ^TurretEMP
 	Inherits@cargo: ^CargoVehicle
 	Inherits@bot: ^BotAutoDeployTransport
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -250,12 +250,12 @@ ra2_soviets_apocalypsetank:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -395,12 +395,12 @@ ra2_soviets_v3rocketlauncher:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
-	Inherits@ra2sovietsRadShells: ^ra2sovietsRadShells
-	Inherits@ra2sovietsFireShells: ^ra2sovietsFireShells
-	Inherits@ra2sovietsTeslaShells: ^ra2sovietsTeslaShells
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsRadShells: ^RA2SovietsRadShells
+	Inherits@ra2sovietsFireShells: ^RA2SovietsFireShells
+	Inherits@ra2sovietsTeslaShells: ^RA2SovietsTeslaShells
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Buildable:
 		Queue: Vehicle, RAVehicle
@@ -486,9 +486,9 @@ ra2_soviets_teslatank:
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@TeslaTargeting: ^PrioritizeTesla
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
@@ -555,9 +555,9 @@ ra2_soviets_warminer:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@SHADOWS: ^Shadows
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Valued:
@@ -613,9 +613,9 @@ ra2_soviets_terrordrone:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
-	Inherits@ra2sovietsArmorPlatings: ^ra2sovietsArmorPlatings
-	Inherits@ra2sovietsReactiveArmor: ^ra2sovietsReactiveArmor
-	Inherits@ra2sovietsTeslaDischargeArmor: ^ra2sovietsTeslaDischargeArmor
+	Inherits@ra2sovietsArmorPlatings: ^RA2SovietsArmorPlatings
+	Inherits@ra2sovietsReactiveArmor: ^RA2SovietsReactiveArmor
+	Inherits@ra2sovietsTeslaDischargeArmor: ^RA2SovietsTeslaDischargeArmor
 	Valued:
 		Cost: 600
 	Tooltip:

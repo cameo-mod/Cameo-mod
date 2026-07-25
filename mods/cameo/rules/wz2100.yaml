@@ -1097,7 +1097,7 @@ Player:
 ####################################################################################################
 2100WALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^wall
+	Inherits: ^Wall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 200
@@ -2242,7 +2242,7 @@ psc2100factory2:
 		RequiresCondition: !chronobeamed
 2100SCAVWALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^wall
+	Inherits: ^Wall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 150
@@ -8394,7 +8394,7 @@ psc2100chopshop2:
 		SelectionShares: 1
 		UseCashTick: true
 up2100uplmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Machinegun Research
 	Buildable:
@@ -8409,7 +8409,7 @@ up2100uplmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg1
 up2100uptwinmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Machinegun Research
 	Buildable:
@@ -8424,7 +8424,7 @@ up2100uptwinmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptwinmg1
 up2100uphurricane1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hurricane AA Research
 	Buildable:
@@ -8439,7 +8439,7 @@ up2100uphurricane1:
 	ProvidesPrerequisite:
 		Prerequisite: 2100uphurricane
 up2100upheavymg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Machinegun Research
 	Buildable:
@@ -8454,7 +8454,7 @@ up2100upheavymg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upheavymg1
 up2100upassaultmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Assault Machinegun Research
 	Buildable:
@@ -8469,7 +8469,7 @@ up2100upassaultmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upassaultmg1
 up2100uptwinassaultmg1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Assault Machinegun Research
 	Buildable:
@@ -8484,7 +8484,7 @@ up2100uptwinassaultmg1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptwinassaultmg1
 up2100upflamer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flamer Research
 	Buildable:
@@ -8500,7 +8500,7 @@ up2100upflamer1:
 		Prerequisite: up2100upflamer1
 
 up2100upflamer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel
 	Buildable:
@@ -8515,7 +8515,7 @@ up2100upflamer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer2
 up2100upflamer3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel MK2
 	Buildable:
@@ -8530,7 +8530,7 @@ up2100upflamer3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer3
 up2100upflamer4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flamer Autoloader
 	Buildable:
@@ -8545,7 +8545,7 @@ up2100upflamer4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer4
 up2100upflamer5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: High Temeperature Gel MK3
 	Buildable:
@@ -8560,7 +8560,7 @@ up2100upflamer5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer5
 up2100upflamer6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel
 	Buildable:
@@ -8575,7 +8575,7 @@ up2100upflamer6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflamer6
 up2100upinferno1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Inferno Flamer Research
 	Buildable:
@@ -8590,7 +8590,7 @@ up2100upinferno1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upinferno1
 up2100upinferno2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel MK2
 	Buildable:
@@ -8606,7 +8606,7 @@ up2100upinferno2:
 		Prerequisite: up2100upinferno2
 
 up2100upinferno3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: SuperHot Gel MK3
 	Buildable:
@@ -8621,7 +8621,7 @@ up2100upinferno3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upinferno3
 up2100uplmg2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hardened MG Bullets
 	Buildable:
@@ -8636,7 +8636,7 @@ up2100uplmg2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg2
 up2100uplmg3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APDSB MG Bullets
 	Buildable:
@@ -8651,7 +8651,7 @@ up2100uplmg3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg3
 up2100uplmg4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APDSB MG Bullets MK2
 	Buildable:
@@ -8666,7 +8666,7 @@ up2100uplmg4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg4
 up2100uplmg5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chaingun Upgrade
 	Buildable:
@@ -8681,7 +8681,7 @@ up2100uplmg5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg5
 up2100uplmg6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rapid Fire Chaingun
 	Buildable:
@@ -8696,7 +8696,7 @@ up2100uplmg6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg6
 up2100uplmg7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hiper Fire Chaingun
 	Buildable:
@@ -8711,7 +8711,7 @@ up2100uplmg7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplmg7
 up2100upengine1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine
 	Buildable:
@@ -8726,7 +8726,7 @@ up2100upengine1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine1
 up2100upengine2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine MK2
 	Buildable:
@@ -8741,7 +8741,7 @@ up2100upengine2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine2
 up2100upengine3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Injection Engine MK3
 	Buildable:
@@ -8756,7 +8756,7 @@ up2100upengine3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengine3
 up2100upengine4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Turbo Charger Engine
 	Buildable:
@@ -8772,7 +8772,7 @@ up2100upengine4:
 		Prerequisite: up2100upengine4
 
 up2100uplrk1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mini-Rocket Pod Research
 	Buildable:
@@ -8788,7 +8788,7 @@ up2100uplrk1:
 		Prerequisite: up2100uplrk1
 
 up2100uplrk2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets
 	Buildable:
@@ -8803,7 +8803,7 @@ up2100uplrk2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk2
 up2100uplrk3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets MK2
 	Buildable:
@@ -8818,7 +8818,7 @@ up2100uplrk3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk3
 up2100uplrk4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Rockets MK3
 	Buildable:
@@ -8833,7 +8833,7 @@ up2100uplrk4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk4
 up2100uplrk5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stabilized Rockets
 	Buildable:
@@ -8848,7 +8848,7 @@ up2100uplrk5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplrk5
 up2100uplancer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lancer AT Research
 	Buildable:
@@ -8863,7 +8863,7 @@ up2100uplancer1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer1
 up2100uplancer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead
 	Buildable:
@@ -8878,7 +8878,7 @@ up2100uplancer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer2
 up2100uplancer3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Rocket Wire Guidance
 	Buildable:
@@ -8893,7 +8893,7 @@ up2100uplancer3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer3
 up2100uplancer4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead MK2
 	Buildable:
@@ -8908,7 +8908,7 @@ up2100uplancer4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer4
 up2100uplancer5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Rocket Warhead MK3
 	Buildable:
@@ -8923,7 +8923,7 @@ up2100uplancer5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplancer5
 up2100upbunkerbuster1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Lancer AT Research
 	Buildable:
@@ -8938,7 +8938,7 @@ up2100upbunkerbuster1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbunkerbuster1
 up2100uptankkiller1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Killer Research
 	Buildable:
@@ -8953,7 +8953,7 @@ up2100uptankkiller1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptankkiller1
 up2100rkarray1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mini-Rockets Array Research
 	Buildable:
@@ -8969,7 +8969,7 @@ up2100rkarray1:
 		Prerequisite: up2100rkarray1
 
 up2100uparmor1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys
 	Buildable:
@@ -8984,7 +8984,7 @@ up2100uparmor1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor1
 up2100uparmor2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys MK2
 	Buildable:
@@ -8999,7 +8999,7 @@ up2100uparmor2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor2
 up2100uparmor3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Alloys MK3
 	Buildable:
@@ -9014,7 +9014,7 @@ up2100uparmor3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor3
 up2100uparmor4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Dense Composite Alloys
 	Buildable:
@@ -9029,7 +9029,7 @@ up2100uparmor4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor4
 up2100uparmor5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys
 	Buildable:
@@ -9044,7 +9044,7 @@ up2100uparmor5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor5
 up2100uparmor6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys MK2
 	Buildable:
@@ -9059,7 +9059,7 @@ up2100uparmor6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor6
 up2100uparmor7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Dense Composite Alloys MK3
 	Buildable:
@@ -9074,7 +9074,7 @@ up2100uparmor7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uparmor7
 up2100upengineer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Engineering
 	Buildable:
@@ -9089,7 +9089,7 @@ up2100upengineer1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengineer1
 up2100upengineer2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Engineering
 	Buildable:
@@ -9104,7 +9104,7 @@ up2100upengineer2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upengineer2
 up2100upwall1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Wall Research
 	Buildable:
@@ -9119,7 +9119,7 @@ up2100upwall1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall1
 up2100upwall2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete
 	Buildable:
@@ -9134,7 +9134,7 @@ up2100upwall2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall2
 up2100upwall3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete MK2
 	Buildable:
@@ -9149,7 +9149,7 @@ up2100upwall3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall3
 up2100upwall4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Improved Hardcrete MK3
 	Buildable:
@@ -9164,7 +9164,7 @@ up2100upwall4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall4
 up2100upwall5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete
 	Buildable:
@@ -9180,7 +9180,7 @@ up2100upwall5:
 		Prerequisite: up2100upwall5
 
 up2100upwall6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete MK2
 	Buildable:
@@ -9196,7 +9196,7 @@ up2100upwall6:
 		Prerequisite: up2100upwall6
 
 up2100upwall7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supercrete MK3
 	Buildable:
@@ -9211,7 +9211,7 @@ up2100upwall7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upwall7
 up2100upstructure1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials
 	Buildable:
@@ -9226,7 +9226,7 @@ up2100upstructure1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure1
 up2100upstructure2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials MK2
 	Buildable:
@@ -9241,7 +9241,7 @@ up2100upstructure2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure2
 up2100upstructure3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Reinforced Base Structure Materials MK3
 	Buildable:
@@ -9256,7 +9256,7 @@ up2100upstructure3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upstructure3
 up2100uplcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Light Cannon Research
 	Buildable:
@@ -9271,7 +9271,7 @@ up2100uplcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon1
 up2100uplcannon2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells
 	Buildable:
@@ -9286,7 +9286,7 @@ up2100uplcannon2:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon2
 up2100uplcannon3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells MK2
 	Buildable:
@@ -9301,7 +9301,7 @@ up2100uplcannon3:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon3
 up2100uplcannon4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAT Cannon Shells MK3
 	Buildable:
@@ -9316,7 +9316,7 @@ up2100uplcannon4:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon4
 up2100uplcannon5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APFSDS Cannon Rounds
 	Buildable:
@@ -9331,7 +9331,7 @@ up2100uplcannon5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon5
 up2100uplcannon6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: APFSDS Cannon Rounds MK2
 	Buildable:
@@ -9346,7 +9346,7 @@ up2100uplcannon6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon6
 up2100uplcannon7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cannon Autoloader
 	Buildable:
@@ -9361,7 +9361,7 @@ up2100uplcannon7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uplcannon7
 up2100upmcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Medium Cannon Research
 	Buildable:
@@ -9376,7 +9376,7 @@ up2100upmcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmcannon1
 up2100uphcannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Heavy Cannon Research
 	Buildable:
@@ -9391,7 +9391,7 @@ up2100uphcannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphcannon1
 up2100upacannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Assault Cannon Research
 	Buildable:
@@ -9407,7 +9407,7 @@ up2100upacannon1:
 		Prerequisite: up2100upacannon1
 
 up2100uphycannon:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hyper Velocity Cannon Research
 	Buildable:
@@ -9422,7 +9422,7 @@ up2100uphycannon:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphycannon
 up2100upneedle:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Needle Gun Research
 	Buildable:
@@ -9437,7 +9437,7 @@ up2100upneedle:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upneedle
 up2100upflak1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: AA Flak Cannon Research
 	Buildable:
@@ -9452,7 +9452,7 @@ up2100upflak1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upflak
 up2100upa2cannon1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Twin Assault Cannon Research
 	Buildable:
@@ -9467,7 +9467,7 @@ up2100upa2cannon1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upa2cannon1
 up2100upmortar1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Research
 	Buildable:
@@ -9482,7 +9482,7 @@ up2100upmortar1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar1
 up2100upmortar2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research
 	Buildable:
@@ -9498,7 +9498,7 @@ up2100upmortar2:
 		Prerequisite: up2100upmortar2
 
 up2100upmortar3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research MK2
 	Buildable:
@@ -9514,7 +9514,7 @@ up2100upmortar3:
 		Prerequisite: up2100upmortar3
 
 up2100upmortar4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Targeting Computer
 	Buildable:
@@ -9530,7 +9530,7 @@ up2100upmortar4:
 		Prerequisite: up2100upmortar4
 
 up2100upmortar5:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HE Mortar Research MK2
 	Buildable:
@@ -9545,7 +9545,7 @@ up2100upmortar5:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar5
 up2100upmortar6:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mortar Autoloader
 	Buildable:
@@ -9560,7 +9560,7 @@ up2100upmortar6:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar6
 up2100upmortar7:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: HEAP Mortar Shells
 	Buildable:
@@ -9575,7 +9575,7 @@ up2100upmortar7:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmortar7
 up2100upbombard1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bombard Research
 	Buildable:
@@ -9590,7 +9590,7 @@ up2100upbombard1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbombard1
 up2100uppepper1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pepperpot Research
 	Buildable:
@@ -9605,7 +9605,7 @@ up2100uppepper1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppepper1
 2100uphotwizer1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hotwizer Research
 	Buildable:
@@ -9620,7 +9620,7 @@ up2100uppepper1:
 	ProvidesPrerequisite:
 		Prerequisite: 2100uphotwizer1
 up2100uptracks1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tracks Propulsion Research
 	Buildable:
@@ -9635,7 +9635,7 @@ up2100uptracks1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uptracks1
 up2100uphover1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hover Propulsion Research
 	Buildable:
@@ -9650,7 +9650,7 @@ up2100uphover1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uphover1
 up2100upvtols1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vtol Propulsion Research
 	Buildable:
@@ -9665,7 +9665,7 @@ up2100upvtols1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upvtols1
 up2100upviper1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Viper Light Body Research
 	Buildable:
@@ -9680,7 +9680,7 @@ up2100upviper1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upviper1
 up2100upbug1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bug Light Body Research
 	Buildable:
@@ -9695,7 +9695,7 @@ up2100upbug1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upbug1
 up2100upcobra1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cobra Medium Body Research
 	Buildable:
@@ -9710,7 +9710,7 @@ up2100upcobra1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upcobra1
 up2100uppython1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Python Heavy Body Research
 	Buildable:
@@ -9725,7 +9725,7 @@ up2100uppython1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppython1
 up2100upscorpion1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scorpion Medium Body Research
 	Buildable:
@@ -9740,7 +9740,7 @@ up2100upscorpion1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upscorpion1
 up2100upmantis1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mantis Heavy Body Research
 	Buildable:
@@ -9755,7 +9755,7 @@ up2100upmantis1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upmantis1
 up2100upleopard1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leopard Light Body Research
 	Buildable:
@@ -9770,7 +9770,7 @@ up2100upleopard1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upleopard1
 up2100uppanther1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Panther Medium Body Research
 	Buildable:
@@ -9785,7 +9785,7 @@ up2100uppanther1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppanther1
 up2100uptiger1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tiger Heavy Body Research
 	Buildable:
@@ -9801,7 +9801,7 @@ up2100uptiger1:
 		Prerequisite: up2100uptiger1
 
 up2100upretaliaton1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Retaliation Light Body Research
 	Buildable:
@@ -9816,7 +9816,7 @@ up2100upretaliaton1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upretaliaton1
 up2100upretribution1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Retribution Medium Body Research
 	Buildable:
@@ -9831,7 +9831,7 @@ up2100upretribution1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upretribution1
 up2100upvengeance1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Vengeance Heavy Body Research
 	Buildable:
@@ -9846,7 +9846,7 @@ up2100upvengeance1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upvengeance1
 up2100uppowermodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Power Module Research
 	Buildable:
@@ -9861,7 +9861,7 @@ up2100uppowermodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100uppowermodule1
 up2100upfactorymodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Factory Module Research
 	Buildable:
@@ -9876,7 +9876,7 @@ up2100upfactorymodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upfactorymodule1
 up2100upresearchmodule1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Research Center Module Research
 	Buildable:
@@ -9891,7 +9891,7 @@ up2100upresearchmodule1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upresearchmodule1
 up2100upsypnaticdata1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis
 	Buildable:
@@ -9906,7 +9906,7 @@ up2100upsypnaticdata1:
 	ProvidesPrerequisite:
 		Prerequisite: up2100upsypnaticdata1
 up2100upsypnaticdata2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis Mk2
 	Buildable:
@@ -9922,7 +9922,7 @@ up2100upsypnaticdata2:
 		Prerequisite: up2100upsypnaticdata2
 
 up2100upsypnaticdata3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Synaptic Link Data Analysis Mk3
 	Buildable:
@@ -9938,7 +9938,7 @@ up2100upsypnaticdata3:
 		Prerequisite: up2100upsypnaticdata3
 
 up2100upsypnaticdata4:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neural Synapse Research Brain
 	Buildable:

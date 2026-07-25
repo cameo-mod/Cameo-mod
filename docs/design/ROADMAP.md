@@ -19,6 +19,22 @@ factions, everything through the balance workbook. Faction reference:
 
 ---
 
+## ★ MAJOR PROGRAM (2026-07-25): mod-synthesis balance overhaul — see [`BALANCE_SYNTHESIS.md`](BALANCE_SYNTHESIS.md)
+
+Big multi-session effort to fix Cameo's extreme-value balance by synthesizing extracted mods into
+class anchors. Full plan + the new binding laws (spread-width, baseline-only, class↔weapon binding,
+AA-gating, rock-paper-scissors) are captured in `BALANCE_SYNTHESIS.md` + `ORIGINAL_UNIT_STATS.md`
+(reference map + extracted data) + memory. Work items, in order:
+1. **Extract remaining sources** — CnC Reloaded (`Tools/Map Editor/rulesmd.ini`), Romanov's Vengeance
+   (`mods/rv/rules`+`weapons`), Dune games, Outpost 2. **Extend tooling to weapons/warheads/versus**
+   (currently HP/Cost/Speed only) — the full spreadsheet stat set.
+2. **Normalized full reference tables** per mod per faction (÷ each mod's basic rifleman).
+3. **Synthesize per-class/faction targets** → **re-derive class anchors** (tightened spread band).
+4. **Weapon/warhead rework** — class↔weapon binding matrix, grow the warhead library, remove wild
+   mixes (audit `weapons.yaml` vs mod versus-values + `ARMOR_SYSTEM.md`).
+5. **AA class-gating** (§9) + **bake out per-class multipliers** into baselines (§7).
+6. **Promote the §6–§10 laws into `DESIGN.md`** (binding). Then rerun the formula per class → apply.
+
 ## Active documentation maintenance
 
 - [x] **Documentation architecture quick wins** — owner: Cascade. Added `docs/README.md`; reduced `PROJECT_CONTEXT.md` to orientation and canonical links; kept the complete startup, evidence, incident, and commit-gate protocol in `AGENT_WORKSPACE.md`. Validation: checked links in the entry documents and ran `git diff --check`.
@@ -157,15 +173,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   real line breaks, never `\n`). ALSO: the "Strong vs / Weak vs" matchup lines
   belong at the END of the description, after the flavour text — needs a design
   pass on wording/order. Support-type units get NO Strong/Weak line.
-- [ ] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
-  names must ALWAYS use `_`, NEVER `.`): rename `^…​.template` → `^…​_template`
-  and `^….husk` → `^…_husk` mod-wide (definitions + every Inherits reference,
-  via tools/rename). `unit_upgrade` already fixed 2026-07-22; remaining:
-  `promotion_upgrade.template`, `researched_upgrade.template`, `upgrade.template`,
-  all `combat_tank.husk` etc. Verify husk engine-references before renaming.
+- [x] **Naming: dots → underscores** (maintainer 2026-07-22 — actor/template
+  names must ALWAYS use `_`, NEVER `.`): renamed `^upgrade.template` → `^upgrade_template`,
+  `^researched_upgrade.template` → `^researched_upgrade_template`, `^promotion_upgrade.template`
+  → `^promotion_upgrade_template`, `^default.angry_mob` → `^default_angry_mob`,
+  `^default.alien_mob` → `^default_alien_mob` mod-wide (76 files, 1183 replacements,
+  commit `7f704c981`). `unit_upgrade` already fixed 2026-07-22. No dotted husk templates
+  remain (all ground husks removed in prior commit). Boot-gate clean.
 - [ ] **Engine 910e50de migration** — the engine pin bump broke boot in places
   the stricter parser now rejects. Fixed 2026-07-22: 4 template Description
-  indents (→ fluent keys), `unit_upgrade.template` dangling inherit. Re-boot may
+  indents (→ fluent keys), `unit_upgrade_template` (was `unit_upgrade.template`). Re-boot may
   surface more; fix as found (master must always boot).
 
 ## P0 — Crashes (always first)
@@ -202,7 +219,7 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   tambarmk, tampowrmk, tamradrmk, tamrefmk, tamtechmk, tsnttmplmk) with
   all YAML references updated.
 - [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
-  tooling documented in `docs/backlog_weapon_rename.md` for future
+  tooling documented in `docs/history/backlog_weapon_rename.md` for future
   continuation.
 - [x] **CABAL Orb Drone carrier-slave crash** (`ec63784bd`):
   `cabal_orb_drone` had `CarrierSlave`+`HasParent` traits while also being
@@ -217,6 +234,38 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   cleanup, causing engine to look for `death_a`-`death_f` sequences in the
   default `explosion` image where they don't exist. Restored `Image: ra2corpse`
   per corpse-spawner exception in DESIGN.md §8.
+
+### P0 — Completed (2026-07-24 session)
+
+- [x] **RA2 weapons migration to ContentPack** (`fix/ra2-weapons-migration`):
+  The ContentPack `RedAlert2/Shared/yaml/weapons.yaml` only had templates
+  (`^RA2*` prefixed), missing 134 weapon definitions (RA2CarrierTarget,
+  RA2BrutePunch, MigMissiles, V3Launch, etc.) that were only in
+  `mods/cameo/weapons/redalert2.yaml` (commented out in mod.yaml). Replaced
+  ContentPack weapons.yaml with full copy of redalert2.yaml and applied all
+  lint fixes from commit d42ad53a1 (NegativeRemovals, invalid fields, etc.).
+  This resolves the `RA2CarrierTarget not found` error.
+- [x] **Yuri weapons missing headers** (`fix/ra2-weapons-migration`): The lint
+  commit d42ad53a1 accidentally removed 6 weapon/warhead headers in
+  `RedAlert2/Yuri/yaml/weapons.yaml` while doing NegativeRemoval cleanup.
+  Restored: `RA2DiskSteal:`, `Warhead@Cloud: SpawnSmokeParticle` (RA2Chemspray),
+  `Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage` (RA2Chemspray),
+  `Warhead@LaserWeapon: SpreadDamage` (RA2Magnet),
+  `Warhead@FlakWeapon: SpreadDamage` (RA2Virusgun2),
+  `Warhead@Smudge: LeaveSmudge` (RA2CosmonautLaser).
+  The missing `Warhead@Cloud: SpawnSmokeParticle` header caused the
+  `Sequences` field error (orphaned SpawnSmokeParticle child nodes under a
+  removal line).
+- [x] **Naxis Kübelwagen weapon encoding fix** (`fix/ra2-weapons-migration`):
+  Weapon name `NaxiWW2KÃ¼belwagenMachinegun` in Naxis weapons.yaml had
+  double-encoded UTF-8 (mojibake), causing weapon-not-found crash for
+  `naxis_kbelwagen` actor. Fixed to `NaxiWW2KübelwagenMachinegun`.
+- [x] **Missing postprocess_nuclearflash.frag shader** (prior session):
+  `NuclearFlashRenderer.cs` expects `postprocess_nuclearflash.frag` in
+  `engine/glsl/` but the file was never created. Created shader with proper
+  uniforms (LightPosition, LightRadius, LightColor, Brightness, Darkness,
+  SourceTexture). NOTE: file lives in engine/ which is .gitignored; must be
+  recreated after `make all` fetches engine. See history/AI_AGENT_HANDOFF.md.
 
 ### P0 — Completed (2026-07-14 session)
 
@@ -1573,26 +1622,19 @@ All other factions have a single, thematically appropriate wall type.
   - Remaining: `.oramap` map files may need `tools/fix-oramap.ps1` update.
   - Remaining: WC1 factions (`human` → `wc1human`, `orc` → `wc1orc`) not yet done.
 
-- [ ] **INHERITS-PASCAL: Convert camelCase/snake_case inherits to PascalCase**
-  — rename all inherits templates that are not yet PascalCase:
-  - RA2 Soviet: `^ra2sovietsConscription` → `^RA2SovietsConscription`,
-    `^ra2sovietsInfantryConditioning` → `^RA2SovietsInfantryConditioning`,
-    `^ra2sovietshockTrooperTraining` → `^RA2SovietsShockTrooperTraining`,
-    `^ra2sovietsFireShells` → `^RA2SovietsFireShells`, etc.
-  - CABAL: `^cabal_upgrade_radarhack` → `^CabalUpgradeRadarHack`,
-    `^cabal_upgrade_backupsystems` → `^CabalUpgradeBackupSystems`,
-    `^cabal_upgrade_cyberneticplating` → `^CabalUpgradeCyberneticPlating`,
-    `^cabal_upgrade_neutronnuclearcatalyst` → `^CabalUpgradeNeutronNuclearCatalyst`,
-    etc.
-  - WC2 Humans: `^wc2_humans_upgrade_swordstrength` →
-    `^WC2HumansUpgradeSwordStrength`, `^wc2_h_str_navyshield` →
-    `^WC2HStrNavyshield`, etc.
-  - WC2 Orcs: `^wc2_orcs_upgrade_axestrength` →
-    `^WC2OrcsUpgradeAxeStrength`, `^wc2_o_str_navyshield` →
-    `^WC2OStrNavyshield`, etc.
-  Update all `Inherits:` references across all YAML files.
-  Verify with `tools/audit/dump_resolved.py` before/after diffs (empty).
-  Effort: M. See DESIGN.md §1 naming convention (PascalCase for inherits).
+- [x] **INHERITS-PASCAL: Convert camelCase/snake_case inherits to PascalCase**
+  — all inherits templates converted to PascalCase per DESIGN.md §1.
+  Commit `3f5c53915` (WC2/WC1, 301 replacements/20 files): WC2 Humans
+  (`^wc2_h_*`/`^wc2_humans_*` → `^WC2Humans*`), WC2 Orcs
+  (`^wc2_o_*`/`^wc2_orcs_*` → `^WC2Orcs*`), WC2 shared (`^wc2_*` → `^WC2*`),
+  WC1 Humans (`^wc_h_*` → `^WCHumans*`). Full faction names used (no
+  single-letter abbreviations).
+  Commit `cf0e4485d` (all remaining, ~2158 replacements/126 files): RA2
+  Soviets camelCase, CABAL snake_case, Outpost 2/SOW, TKM, USA, RA1 Allies,
+  D2K, generic templates (`^wall`→`^Wall`, `^refinery`→`^Refinery`, etc.),
+  and Sidebar faction name capitalization. D2K-specific `^Refinery` renamed
+  to `^D2KRefinery` to avoid collision with base `^Refinery`. Boot-gate
+  clean (zero "Parent type not found" errors).
 
 ## Starcraft Rank Decoration Fix
 
@@ -1656,12 +1698,80 @@ All other factions have a single, thematically appropriate wall type.
 ## Long-term goals
 
 - [ ] **ZERO YAML ERRORS & WARNINGS** — achieve zero errors and zero warnings
-  from `OpenRA.Utility.exe cameo --check-yaml`. Baseline saved at
-  `docs/audit/check-yaml-baseline.txt` (379,899 errors, 80,703 warnings as of
-  2026-07-23). Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
+  from `utility.cmd cameo --check-yaml`. Latest report: 2026-07-24
+  (check_yaml_v8.txt, ~89,392 errors, ~69,325 warnings).
+  Full phased plan in `docs/design/MEGAPLAN_YAML_CLEANUP.md`.
   Analysis tool: `tools/audit/analyze_check_yaml.py`. Effort: L (multi-session).
+
+  **Fixes applied this session (2026-07-24):**
+  - [x] LaunchAngle (363→0): Converted LaunchAngle↔Min/MaxLaunchAngle per
+    projectile type; removed LaunchAngle from WarheadTrailProjectileCA; added
+    missing MaximumLaunchAngle where Min>Max.
+  - [x] UndefinedCursor chrono-target (195→0): Added `chrono-target` cursor
+    sequence alias in cursors.yaml (hyphen variant of `chrono_target`).
+  - [x] NegativeRemoval (64→0): Stripped values from `-Trait: value` removal
+    lines across 15 weapon YAML files.
+  - [x] InvalidWeaponField (55→0): Removed `WeaponClass` (40 lines, deprecated);
+    fixed `Burstdelays`→`BurstDelays` (9); `BurstDelay`→`BurstDelays` (4);
+    `Angle`→`LaunchAngle` on Bullet (1); removed weapon-level `ValidStances` (4);
+    `ChangeOwnerValidStances`→`ValidStances` (2).
+  - [x] DuplicateInteractable (234→0): Added `-Selectable:` to all bridge actors
+    to remove inherited Selectable (which includes InteractableInfo), keeping
+    only the explicit `Interactable:` with custom Bounds.
+  - [x] MissingTooltip (39→0): Added `Tooltip` trait to `camera.gpssat`.
+  - [x] OverrideActor on Tooltip (2→0): Removed invalid `OverrideActor` field
+    from Tooltip traits in TD GDI vehicles and TD Shared aircraft.
+  - [x] ProductionCost/TimeMultiplier RequiresCondition (10→0): Converted
+    `RequiresCondition`→`Prerequisites` on ProductionCostMultiplier and
+    ProductionTimeMultiplier in ^ScaledProducer template and 9 other instances.
+    These traits use `Prerequisites:` not `RequiresCondition:`.
+  - [x] ValidStances on AutoTargetPriority (3→0): Removed invalid `ValidStances`
+    fields from AutoTargetPriority traits in outpost2.yaml.
+  - [x] BadIndent (39): Investigated chrome/lobby_music.yaml — no actual
+    indentation issues found. Likely false positive from engine miniyaml parser.
+
+  **Error breakdown (2026-07-24, post-fixes):**
+  - 72,813 UngrantedConditions — actors consume conditions not granted (biggest)
+  - ~700 InvalidField — trait fields that don't exist on their trait (reduced
+    from 761 after OverrideActor, ValidStances, RequiresCondition fixes)
+  - 209 MissingSequences — images with no sequence definitions
+  - 39 UndefinedNotification — missing notification references
+  - 12 CannotParse — Cannot parse `Random` into LockFaction.Boolean
+  - 11 UndefinedActor — husk actors not defined by any rule
+  - 9 InvalidOwner — map actors with wrong owner
+  - 4 InvalidChildNodes — traits with invalid child nodes
+  - 2 MissingPrereq — buildable actors with unprovided prerequisites
+  - 2 UnknownTrait — unknown traits in player.yaml
+  - 1 MissingFluentVariable — missing fluent variable
+
+  **Warning breakdown (2026-07-24):**
+  - 62,640 UnconsumedConditions — actors grant conditions not consumed (biggest)
+  - 375 UnusedFluentAttribute — unused fluent attributes in en.ftl files
+  - 1 UnusedFluentVariable — unused fluent variable
+
   Phases: (1) palette fixes, (2) Interactable/Selectable conflicts, (3) missing
   FTL keys, (4) missing actor definitions [biggest], (5) unresolved prerequisites,
   (6) unused granted conditions [biggest warnings], (7) VisibilityType.Footprint,
   (8) invalid map factions, (9) MuzzleSequence/LaunchAngle/misc, (10) sequence
   warnings, (11) unused field/trait.
+
+  **NOTE:** `utility.cmd cameo --check-yaml` takes 10+ minutes. Only run it
+  after completing ALL connected fixes and expecting 0 errors/warnings. Do NOT
+  run it repeatedly. Keep findings above updated in this section.
+
+---
+
+## Superweapon Documentation Audit (2026-07-25, COMPLETED)
+
+Full cross-reference of all superweapon and support power YAML traits vs
+`FACTIONS.md`. Raw data: `docs/audit/latest/superweapon_audit.yaml`.
+Summary: `docs/audit/SUMMARY.md` § "Superweapon documentation audit".
+
+**14 findings** — all FACTIONS.md discrepancies FIXED:
+- SW-001 (HIGH): Harkonnen Palace has `^PrimarySuperweapon` but no power trait (parked faction, not a regression)
+- SW-002 (MED): Forgotten superweapon corrected from "Tiberian Wildlife Rampage" to "Nuclear Missile"
+- SW-003 (MED): CABAL corrected — added Nuclear Missile, removed unimplemented "Satellite Hack"
+- SW-004–011 (LOW): Added missing support powers (Cluster Missile, Chrono Reinforcements, Force Shield, EMP Disable, Traitors, Slow, Invisibility, Bloodlust, Haste) + fixed name mismatches (Meteor Blitzkrieg, Chaos Storm)
+- SW-012–014 (INFO): Added Drop Pods, Federation Support Teleport to reference table; noted Protoss reuses SteelIonCannon
+
+**WIP factions discovered** (not in FACTIONS.md): Warzone 2100, Worms, Win98, Warcraft 1, WH40K all have superweapon traits in rules/ YAML. Document when factions become active.

@@ -125,7 +125,7 @@
        }
       ],
       "weapon": "JapanSuperBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -136,12 +136,12 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Armor.Type",
      "v": "Bomber"
     },
     "buildable": false,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Valued.Cost",
      "v": "4000"
     },
     "design": {
@@ -153,7 +153,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Health.HP",
      "v": "150000"
     },
     "name": "Horten Bomber Plane",
@@ -162,7 +162,7 @@
      "v": "5c0"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "175"
     }
    },
@@ -221,7 +221,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -282,7 +282,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -315,7 +315,7 @@
     "prerequisites": [
      "~naxis_airfield",
      "naxis_radar",
-     "~!naxis_upgrade_unlockme262"
+     "~!naxis_upgrade_me262"
     ],
     "queue": [
      "Aircraft",
@@ -391,7 +391,7 @@
        }
       ],
       "weapon": "NaxiInterceptorGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^FlakWeapon",
@@ -436,7 +436,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -518,7 +518,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -562,7 +562,7 @@
        }
       ],
       "weapon": "NaxPlaneRocketsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^D2KRocket"
@@ -621,7 +621,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -682,7 +682,7 @@
        }
       ],
       "weapon": "NaxPlanegunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -719,7 +719,7 @@
     "name": "Me 262",
     "prerequisites": [
      "~naxis_airfield",
-     "~naxis_upgrade_unlockme262"
+     "~naxis_upgrade_me262"
     ],
     "queue": [
      "Aircraft",
@@ -755,7 +755,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -801,7 +801,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -825,7 +825,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -871,7 +871,7 @@
        }
       ],
       "weapon": "NaxQuadCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -895,7 +895,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -941,7 +941,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -965,7 +965,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -1011,7 +1011,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1289,7 +1289,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1307,7 +1307,7 @@
     },
     "name": "Naxis Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1334,7 +1334,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -1380,7 +1380,7 @@
        }
       ],
       "weapon": "NaxFlakAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1402,7 +1402,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -1448,7 +1448,7 @@
        }
       ],
       "weapon": "NaxFlakAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1632,7 +1632,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1675,7 +1675,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -1696,7 +1696,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -1742,7 +1742,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -1969,7 +1969,7 @@
        }
       ],
       "weapon": "NaxiRifleT",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2176,7 +2176,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2224,7 +2224,7 @@
        }
       ],
       "weapon": "NaxiAlienPistolE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2273,7 +2273,7 @@
        }
       ],
       "weapon": "NaxiAlienPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2322,7 +2322,7 @@
        }
       ],
       "weapon": "NaxiAlienPistolE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RA2MediumCannon",
@@ -2405,7 +2405,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2439,7 +2439,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2474,7 +2474,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2509,7 +2509,7 @@
        }
       ],
       "weapon": "RA2PortaTesla",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2585,7 +2585,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2621,7 +2621,7 @@
        }
       ],
       "weapon": "RA2BrutePunchE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2655,7 +2655,7 @@
        }
       ],
       "weapon": "RA2BrutePunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2738,7 +2738,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2780,7 +2780,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -2866,7 +2866,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunSmall",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2907,7 +2907,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunSmallAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -2987,7 +2987,7 @@
        }
       ],
       "weapon": "wc2gruntslice",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3017,7 +3017,7 @@
        }
       ],
       "weapon": "NaxiRifleCons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3049,7 +3049,7 @@
        }
       ],
       "weapon": "NaxiRifleConsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3127,7 +3127,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3163,7 +3163,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroopE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3200,7 +3200,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroop",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3237,7 +3237,7 @@
        }
       ],
       "weapon": "NaxiFlamerTroopE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3295,13 +3295,13 @@
       "requires": "!deployed",
       "slot": "Armament@Dummy",
       "versus_templates": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ],
       "warheads": [],
       "weapon": "NaxiWW2MachinegunnerTargeting",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ]
      },
      {
@@ -3341,7 +3341,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3384,7 +3384,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunnerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3427,7 +3427,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegunner",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3470,7 +3470,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunnerE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -3542,7 +3542,7 @@
        }
       ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3573,7 +3573,7 @@
        }
       ],
       "weapon": "NaxiSniperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3603,7 +3603,7 @@
        }
       ],
       "weapon": "NaxiSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3635,7 +3635,7 @@
        }
       ],
       "weapon": "NaxiSniperE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3706,7 +3706,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3737,7 +3737,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3767,7 +3767,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3799,7 +3799,7 @@
        }
       ],
       "weapon": "naxis_naxiriflerecruit_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3874,7 +3874,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3905,7 +3905,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3935,7 +3935,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3967,7 +3967,7 @@
        }
       ],
       "weapon": "naxis_naxiriflesoldier_rifle_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4112,7 +4112,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4213,7 +4213,7 @@
        }
       ],
       "weapon": "NaxiShrekConsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4318,7 +4318,7 @@
        }
       ],
       "weapon": "NaxiShrekCons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4420,7 +4420,7 @@
        }
       ],
       "weapon": "NaxiShrekConsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4565,7 +4565,7 @@
        }
       ],
       "weapon": "NaxiShrek",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4666,7 +4666,7 @@
        }
       ],
       "weapon": "NaxiShrekE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4771,7 +4771,7 @@
        }
       ],
       "weapon": "NaxiShrek",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4873,7 +4873,7 @@
        }
       ],
       "weapon": "NaxiShrekE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyFlameWeapon",
@@ -4936,13 +4936,13 @@
       "requires": "!deployed",
       "slot": "Armament@Dummy",
       "versus_templates": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ],
       "warheads": [],
       "weapon": "NaxQuadCannonTargeting",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ]
      },
      {
@@ -4961,7 +4961,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5007,7 +5007,7 @@
        }
       ],
       "weapon": "PortableFlak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5031,7 +5031,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5077,7 +5077,7 @@
        }
       ],
       "weapon": "PortableFlakE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5101,7 +5101,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5147,7 +5147,7 @@
        }
       ],
       "weapon": "PortableFlak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5171,7 +5171,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5217,7 +5217,7 @@
        }
       ],
       "weapon": "PortableFlakE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5281,7 +5281,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5327,7 +5327,7 @@
        }
       ],
       "weapon": "SkyMageCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5350,7 +5350,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5396,7 +5396,7 @@
        }
       ],
       "weapon": "SkyMageCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5419,7 +5419,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5465,7 +5465,7 @@
        }
       ],
       "weapon": "SkyMageCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5488,7 +5488,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -5534,7 +5534,7 @@
        }
       ],
       "weapon": "SkyMageCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -5617,7 +5617,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5651,7 +5651,7 @@
        }
       ],
       "weapon": "RA2Shovel",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -5663,7 +5663,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Valued.Cost",
      "v": "250"
     },
     "design": {
@@ -5675,7 +5675,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Health.HP",
      "v": "10000"
     },
     "name": "Slave",
@@ -5692,7 +5692,7 @@
      "v": "5000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Naxis/yaml/infantry.yaml#Mobile.Speed",
      "v": "60"
     }
    },
@@ -5736,7 +5736,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5767,7 +5767,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5797,7 +5797,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5829,7 +5829,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -5913,7 +5913,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5955,7 +5955,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -5999,7 +5999,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -6042,7 +6042,7 @@
        }
       ],
       "weapon": "naxis_sssoldier_smg_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -6119,7 +6119,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6150,7 +6150,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6180,7 +6180,7 @@
        }
       ],
       "weapon": "NaxiRifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6212,7 +6212,7 @@
        }
       ],
       "weapon": "NaxiRifleE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -6314,7 +6314,7 @@
        }
       ],
       "weapon": "NaxiMissileUboat",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyBomb",
@@ -6413,7 +6413,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6461,7 +6461,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6508,7 +6508,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6555,7 +6555,7 @@
        }
       ],
       "weapon": "8Inch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^Grenade"
@@ -6648,7 +6648,7 @@
        }
       ],
       "weapon": "AsianSmallTorpedo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^RA2HeavyMissile"
@@ -6708,7 +6708,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6732,7 +6732,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6756,7 +6756,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6780,7 +6780,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6803,7 +6803,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6827,7 +6827,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6850,7 +6850,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6873,7 +6873,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6897,7 +6897,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6921,7 +6921,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6947,7 +6947,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6962,7 +6962,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6986,7 +6986,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7014,7 +7014,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7040,7 +7040,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7066,7 +7066,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7077,6 +7077,32 @@
     ],
     "queue": [
      "Research"
+    ]
+   },
+   "naxis_upgrade_me262": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Me 262",
+    "prerequisites": [
+     "~naxis_radar",
+     "!naxis_upgrade_me262"
+    ],
+    "queue": [
+     "Upgrades"
     ]
    },
    "naxis_upgrade_ostfrontexperience": {
@@ -7092,7 +7118,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7118,7 +7144,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7129,32 +7155,6 @@
     ],
     "queue": [
      "Research"
-    ]
-   },
-   "naxis_upgrade_unlockme262": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "2500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Upgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Me 262",
-    "prerequisites": [
-     "~naxis_radar",
-     "!naxis_upgrade_unlockme262"
-    ],
-    "queue": [
-     "Upgrades"
     ]
    },
    "naxis_upgrade_wunderwaffe": {
@@ -7170,7 +7170,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7196,7 +7196,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7218,7 +7218,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7253,7 +7253,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -7286,7 +7286,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -7354,7 +7354,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -7450,7 +7450,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTop",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7493,7 +7493,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunTopAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7609,7 +7609,7 @@
        }
       ],
       "weapon": "NaxBrummbarArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7680,7 +7680,7 @@
        }
       ],
       "weapon": "NaxBrummbarArtyE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -7852,7 +7852,7 @@
        }
       ],
       "weapon": "RA2IFVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -7960,7 +7960,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8025,7 +8025,7 @@
        }
       ],
       "weapon": "NaxGrilleArtyE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8116,7 +8116,7 @@
        }
       ],
       "weapon": "NaxiWW2Machinegun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8157,7 +8157,7 @@
        }
       ],
       "weapon": "NaxiWW2MachinegunAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8243,7 +8243,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -8286,7 +8286,7 @@
        }
       ],
       "weapon": "NaxiHetzerDestroyer_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon",
@@ -8390,7 +8390,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8422,7 +8422,7 @@
        }
       ],
       "weapon": "Nax120mmAssault",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -8455,7 +8455,7 @@
        }
       ],
       "weapon": "Nax120mmAssault_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -8486,8 +8486,7 @@
     "name": "Imperial Turbo Tank",
     "prerequisites": [
      "~naxis_warfactory",
-     "naxis_radar",
-     "!disabled"
+     "naxis_radar"
     ],
     "queue": [
      "Vehicle",
@@ -8559,7 +8558,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8618,7 +8617,7 @@
        }
       ],
       "weapon": "NaxiJadgDestroyer_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -8709,7 +8708,7 @@
        }
       ],
       "weapon": "NaxiWW2KübelwagenMachinegun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8785,7 +8784,7 @@
        }
       ],
       "weapon": "KingNaxTigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -8818,7 +8817,7 @@
        }
       ],
       "weapon": "KingNaxTigerCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -8966,7 +8965,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9070,7 +9069,7 @@
        }
       ],
       "weapon": "NaxMausCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9271,7 +9270,7 @@
        }
       ],
       "weapon": "NaxMausCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -9346,7 +9345,7 @@
        }
       ],
       "weapon": "LatinBuggyRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -9416,7 +9415,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -9570,7 +9569,7 @@
        }
       ],
       "weapon": "NaxiAntiTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^RA2TankDestroyerCannon"
@@ -9677,7 +9676,7 @@
        }
       ],
       "weapon": "NaxRatteCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9738,7 +9737,7 @@
        }
       ],
       "weapon": "NaxRatteCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^HeavyBomb",
@@ -9761,7 +9760,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -9807,7 +9806,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9830,7 +9829,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -9876,7 +9875,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -9960,7 +9959,7 @@
        }
       ],
       "weapon": "RA2120mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9993,7 +9992,7 @@
        }
       ],
       "weapon": "RA2120mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10056,7 +10055,7 @@
        }
       ],
       "weapon": "NaxGrilleArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -10114,7 +10113,7 @@
        }
       ],
       "weapon": "NaxShoeRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2Grenade",
@@ -10219,7 +10218,7 @@
        }
       ],
       "weapon": "NaxSturmArty",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2MediumCannon",
@@ -10298,7 +10297,7 @@
        }
       ],
       "weapon": "RA2105mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -10331,7 +10330,7 @@
        }
       ],
       "weapon": "RA2105mm_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10408,7 +10407,7 @@
        }
       ],
       "weapon": "NaxTigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -10441,7 +10440,7 @@
        }
       ],
       "weapon": "NaxTigerCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon",
        "^RA2EliteEffects"
@@ -10512,7 +10511,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -10558,7 +10557,7 @@
        }
       ],
       "weapon": "NaxQuadCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10582,7 +10581,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -10628,7 +10627,7 @@
        }
       ],
       "weapon": "NaxQuadCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10652,7 +10651,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -10698,7 +10697,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",
@@ -10722,7 +10721,7 @@
       ],
       "warheads": [
        {
-        "damage": "2000",
+        "damage": "1000",
         "tag": "Grenade",
         "type": "SpreadDamage"
        },
@@ -10768,7 +10767,7 @@
        }
       ],
       "weapon": "NaxQuadCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile",

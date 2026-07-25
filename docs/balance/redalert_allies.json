@@ -106,7 +106,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -176,7 +176,7 @@
        }
       ],
       "weapon": "ChainGunMH60",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Grenade",
@@ -271,7 +271,7 @@
        }
       ],
       "weapon": "Hellfire",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile"
@@ -318,7 +318,7 @@
        }
       ],
       "weapon": "HellfireCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyMissile",
@@ -393,7 +393,7 @@
        }
       ],
       "weapon": "RapierBombs",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb"
       ]
@@ -425,7 +425,7 @@
        }
       ],
       "weapon": "RapierBombsCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^CryoMissileProjectile"
@@ -475,7 +475,7 @@
        }
       ],
       "weapon": "Aphid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -525,7 +525,7 @@
        }
       ],
       "weapon": "AphidCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^ImpactGlow",
@@ -564,7 +564,7 @@
     "prerequisites": [
      "~ra1_allies_alliedhelipad",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockrapierjumpjet"
+     "~ra1_allies_promotion_rapierjumpjet"
     ],
     "queue": [
      "Aircraft",
@@ -625,7 +625,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -643,7 +643,7 @@
     },
     "name": "Allied Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -921,7 +921,7 @@
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockreinforcementpad",
+     "~ra1_allies_promotion_reinforcementpad",
      "derricklimit"
     ],
     "queue": [
@@ -962,7 +962,7 @@
        }
       ],
       "weapon": "zsu_23",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon"
       ]
@@ -1044,7 +1044,7 @@
        }
       ],
       "weapon": "RATurretGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^HeavyCannon"
@@ -1144,7 +1144,7 @@
        }
       ],
       "weapon": "155mmBastion",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1207,7 +1207,7 @@
        }
       ],
       "weapon": "155mmBastionCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -1240,7 +1240,7 @@
     "name": "Bastion Artillery Bunker",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "~ra1_allies_promotion_unlockbastion"
+     "~ra1_allies_promotion_bastion"
     ],
     "queue": [
      "Defence",
@@ -1276,7 +1276,7 @@
     "name": "Camo Pillbox",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "~ra1_allies_promotion_unlockcamopillbox"
+     "~ra1_allies_promotion_camopillbox"
     ],
     "queue": [
      "Defence",
@@ -1366,7 +1366,7 @@
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockgapgeneratorandradarjammer"
+     "~ra1_allies_promotion_gapgeneratorandradarjammer"
     ],
     "queue": [
      "Defence",
@@ -1403,7 +1403,7 @@
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
      "ra1_allies_alliedbarracks",
-     "~!ra1_allies_promotion_unlockcamopillbox"
+     "~!ra1_allies_promotion_camopillbox"
     ],
     "queue": [
      "Defence",
@@ -1442,7 +1442,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1472,7 +1472,7 @@
        }
       ],
       "weapon": "LightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1502,7 +1502,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1534,7 +1534,7 @@
        }
       ],
       "weapon": "CryoLightSniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon",
        "^CryoMissileProjectile"
@@ -1618,7 +1618,7 @@
        }
       ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1661,7 +1661,7 @@
        }
       ],
       "weapon": "RAVulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1697,7 +1697,7 @@
     "name": "Machine Gunner",
     "prerequisites": [
      "~ra1_allies_alliedbarracks",
-     "~ra1_allies_promotion_unlockmachinegunner"
+     "~ra1_allies_promotion_machinegunner"
     ],
     "queue": [
      "Infantry",
@@ -1758,7 +1758,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1794,7 +1794,7 @@
        }
       ],
       "weapon": "Repair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -1883,7 +1883,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -1917,7 +1917,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2053,7 +2053,7 @@
        }
       ],
       "weapon": "Colt45",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2084,7 +2084,7 @@
        }
       ],
       "weapon": "Colt45",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -2167,7 +2167,7 @@
    }
   },
   "promotions": {
-   "ra1_allies_promotion_unlockbastion": {
+   "ra1_allies_promotion_bastion": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2176,22 +2176,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Bastion",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockbastion",
-     "ra1_allies_promotion_unlockphasetransport",
+     "!ra1_allies_promotion_bastion",
+     "ra1_allies_promotion_phasetransport",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockcamopillbox": {
+   "ra1_allies_promotion_camopillbox": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2200,21 +2200,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Camo Pillbox",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockcamopillbox",
+     "!ra1_allies_promotion_camopillbox",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockchronotank": {
+   "ra1_allies_promotion_chronotank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2223,22 +2223,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chrono Tank",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockchronotank",
-     "ra1_allies_promotion_unlocktankdestroyer",
+     "!ra1_allies_promotion_chronotank",
+     "ra1_allies_promotion_tankdestroyer",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockgapgeneratorandradarjammer": {
+   "ra1_allies_promotion_gapgeneratorandradarjammer": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2247,22 +2247,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Gap Generator and Radar Jammer",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockgapgeneratorandradarjammer",
-     "ra1_allies_promotion_unlockbastion",
+     "!ra1_allies_promotion_gapgeneratorandradarjammer",
+     "ra1_allies_promotion_bastion",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockmachinegunner": {
+   "ra1_allies_promotion_machinegunner": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2271,21 +2271,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Machine Gunner",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockmachinegunner",
+     "!ra1_allies_promotion_machinegunner",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockphasetransport": {
+   "ra1_allies_promotion_phasetransport": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2294,22 +2294,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Phase Transport",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockphasetransport",
-     "ra1_allies_promotion_unlockcamopillbox",
+     "!ra1_allies_promotion_phasetransport",
+     "ra1_allies_promotion_camopillbox",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockrapierjumpjet": {
+   "ra1_allies_promotion_rapierjumpjet": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2318,22 +2318,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Rapier Jumpjet",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockrapierjumpjet",
-     "ra1_allies_promotion_unlocksheridan",
+     "!ra1_allies_promotion_rapierjumpjet",
+     "ra1_allies_promotion_sheridan",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockreconranger": {
+   "ra1_allies_promotion_reconranger": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2342,21 +2342,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Recon Ranger.",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockreconranger",
+     "!ra1_allies_promotion_reconranger",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlockreinforcementpad": {
+   "ra1_allies_promotion_reinforcementpad": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2365,22 +2365,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Reinforcement Pad",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlockreinforcementpad",
-     "ra1_allies_promotion_unlockrapierjumpjet",
+     "!ra1_allies_promotion_reinforcementpad",
+     "ra1_allies_promotion_rapierjumpjet",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlocksheridan": {
+   "ra1_allies_promotion_sheridan": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2389,22 +2389,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Sheridan",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlocksheridan",
-     "ra1_allies_promotion_unlockmachinegunner",
+     "!ra1_allies_promotion_sheridan",
+     "ra1_allies_promotion_machinegunner",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlocktankdestroyer": {
+   "ra1_allies_promotion_tankdestroyer": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2413,22 +2413,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Tank Destroyer",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlocktankdestroyer",
-     "ra1_allies_promotion_unlocktigerheavytank",
+     "!ra1_allies_promotion_tankdestroyer",
+     "ra1_allies_promotion_tigerheavytank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ra1_allies_promotion_unlocktigerheavytank": {
+   "ra1_allies_promotion_tigerheavytank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -2437,15 +2437,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Tiger Heavy Tank",
     "prerequisites": [
      "~ra1_allies_alliedconstructionyard",
-     "!ra1_allies_promotion_unlocktigerheavytank",
-     "ra1_allies_promotion_unlockreconranger",
+     "!ra1_allies_promotion_tigerheavytank",
+     "ra1_allies_promotion_reconranger",
      "rank1"
     ],
     "queue": [
@@ -2467,7 +2467,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2493,7 +2493,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2519,7 +2519,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2545,7 +2545,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2598,7 +2598,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2624,7 +2624,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2650,7 +2650,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -2724,7 +2724,7 @@
        }
       ],
       "weapon": "155mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2787,7 +2787,7 @@
        }
       ],
       "weapon": "155mmCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -2897,7 +2897,7 @@
        }
       ],
       "weapon": "HeavyAATankCannonAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2958,7 +2958,7 @@
        }
       ],
       "weapon": "HeavyAATankCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3115,7 +3115,7 @@
        }
       ],
       "weapon": "25mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3155,7 +3155,7 @@
     "name": "Allied Light Tank",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~!ra1_allies_promotion_unlocksheridan"
+     "~!ra1_allies_promotion_sheridan"
     ],
     "queue": [
      "Vehicle",
@@ -3199,7 +3199,7 @@
        }
       ],
       "weapon": "90mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -3229,7 +3229,7 @@
     "name": "Allied Medium Tank",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~!ra1_allies_promotion_unlocktigerheavytank"
+     "~!ra1_allies_promotion_tigerheavytank"
     ],
     "queue": [
      "Vehicle",
@@ -3379,7 +3379,7 @@
        }
       ],
       "weapon": "AlliedTankDestroyerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon",
        "^TankDestroyerCannon"
@@ -3410,7 +3410,7 @@
     "name": "Allied Tank Destroyer",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~ra1_allies_promotion_unlocktankdestroyer",
+     "~ra1_allies_promotion_tankdestroyer",
      "ra1_allies_alliedradardome"
     ],
     "queue": [
@@ -3466,7 +3466,7 @@
        }
       ],
       "weapon": "TigerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -3497,7 +3497,7 @@
     "name": "Allied Tiger Heavy Tank",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~ra1_allies_promotion_unlocktigerheavytank"
+     "~ra1_allies_promotion_tigerheavytank"
     ],
     "queue": [
      "Vehicle",
@@ -3520,6 +3520,7 @@
     "armaments": [
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.05,
       "pricing": true,
@@ -3592,7 +3593,7 @@
        }
       ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3603,6 +3604,7 @@
      },
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.05,
       "pricing": true,
@@ -3675,7 +3677,7 @@
        }
       ],
       "weapon": "ChronoTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3686,6 +3688,7 @@
      },
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.05,
       "pricing": true,
@@ -3755,7 +3758,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3767,6 +3770,7 @@
      },
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.05,
       "pricing": true,
@@ -3836,7 +3840,7 @@
        }
       ],
       "weapon": "ChronoTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -3876,7 +3880,7 @@
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockchronotank"
+     "~ra1_allies_promotion_chronotank"
     ],
     "queue": [
      "Vehicle",
@@ -3988,7 +3992,7 @@
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockgapgeneratorandradarjammer"
+     "~ra1_allies_promotion_gapgeneratorandradarjammer"
     ],
     "queue": [
      "Vehicle",
@@ -4057,7 +4061,7 @@
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockgapgeneratorandradarjammer"
+     "~ra1_allies_promotion_gapgeneratorandradarjammer"
     ],
     "queue": [
      "Vehicle",
@@ -4080,6 +4084,7 @@
     "armaments": [
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4141,7 +4146,7 @@
        }
       ],
       "weapon": "APTusk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -4151,6 +4156,7 @@
      },
      {
       "burst": "4",
+      "burstdelays": "3",
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Allies/yaml/weapons.yaml",
       "design_weapon_class": 1.0,
       "pricing": true,
@@ -4210,7 +4216,7 @@
        }
       ],
       "weapon": "APTuskCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^Grenade",
@@ -4245,7 +4251,7 @@
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
      "ra1_allies_alliedtechcenter",
-     "~ra1_allies_promotion_unlockphasetransport"
+     "~ra1_allies_promotion_phasetransport"
     ],
     "queue": [
      "Vehicle",
@@ -4291,7 +4297,7 @@
        }
       ],
       "weapon": "M60mg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -4457,7 +4463,7 @@
        }
       ],
       "weapon": "ReconRangerRecoillessGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4579,7 +4585,7 @@
        }
       ],
       "weapon": "CryoReconRangerRecoillessGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4617,7 +4623,7 @@
     "name": "Recon Ranger",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~ra1_allies_promotion_unlockreconranger"
+     "~ra1_allies_promotion_reconranger"
     ],
     "queue": [
      "Vehicle",
@@ -4672,7 +4678,7 @@
        }
       ],
       "weapon": "SheridanCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon"
@@ -4713,7 +4719,7 @@
        }
       ],
       "weapon": "SheridanMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile"
@@ -4754,7 +4760,7 @@
        }
       ],
       "weapon": "SheridanMissilesCryo",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^LightMissile",
@@ -4797,7 +4803,7 @@
        }
       ],
       "weapon": "SheridanVulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4833,7 +4839,7 @@
     "name": "Sheridan Assault Tank",
     "prerequisites": [
      "~ra1_allies_alliedwarfactory",
-     "~ra1_allies_promotion_unlocksheridan"
+     "~ra1_allies_promotion_sheridan"
     ],
     "queue": [
      "Vehicle",

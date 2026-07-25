@@ -61,3 +61,8 @@ __pycache__/
 /gen_*.py
 /inventory_*.py
 /rename_old_*.py
+/fix_*.py
+/study_*.py
+
+# Audit runner artifacts (generated, not source)
+docs/audit/latest/*.err

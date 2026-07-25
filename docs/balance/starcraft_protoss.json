@@ -60,7 +60,7 @@
        }
       ],
       "weapon": "ArbiterCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -216,7 +216,7 @@
        }
       ],
       "weapon": "CorsairEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -283,7 +283,7 @@
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -353,7 +353,7 @@
        }
       ],
       "weapon": "CorsairFlash",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -534,7 +534,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -680,7 +680,7 @@
        }
       ],
       "weapon": "EpigraphMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ArrowWeapon",
@@ -724,7 +724,7 @@
     "name": "Epigraph",
     "prerequisites": [
      "~protoss_stargate",
-     "~protoss_promotion_unlockepigraph"
+     "~protoss_promotion_epigraph"
     ],
     "queue": [
      "Aircraft",
@@ -858,7 +858,7 @@
        }
       ],
       "weapon": "GladiusCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -900,7 +900,7 @@
     "name": "Gladius",
     "prerequisites": [
      "~protoss_stargate",
-     "~protoss_promotion_unlockgladius"
+     "~protoss_promotion_gladius"
     ],
     "queue": [
      "Aircraft",
@@ -1018,7 +1018,7 @@
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1088,7 +1088,7 @@
        }
       ],
       "weapon": "ScoutMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -1164,7 +1164,7 @@
        }
       ],
       "weapon": "ScoutRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1241,7 +1241,7 @@
        }
       ],
       "weapon": "ScoutRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^FlakWeapon",
@@ -1275,7 +1275,7 @@
     "name": "Scout",
     "prerequisites": [
      "~protoss_stargate",
-     "~!protoss_promotion_unlockepigraph"
+     "~!protoss_promotion_epigraph"
     ],
     "queue": [
      "Aircraft",
@@ -1419,7 +1419,7 @@
        }
       ],
       "weapon": "StarshipSovereignBeam",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1463,7 +1463,7 @@
     "name": "Starship Sovereign",
     "prerequisites": [
      "~protoss_fleetbeacon",
-     "~protoss_promotion_unlockstarsovereign"
+     "~protoss_promotion_starsovereign"
     ],
     "queue": [
      "Aircraft",
@@ -1572,7 +1572,7 @@
        }
       ],
       "weapon": "VoidRayBeam",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1612,7 +1612,7 @@
     "name": "Void Ray",
     "prerequisites": [
      "~protoss_stargate",
-     "~protoss_promotion_unlockvoidray"
+     "~protoss_promotion_voidray"
     ],
     "queue": [
      "Aircraft",
@@ -1914,7 +1914,7 @@
      "src": "inherited",
      "v": "750"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1932,7 +1932,7 @@
     },
     "name": "Nexus",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -2124,7 +2124,7 @@
        }
       ],
       "weapon": "Heal",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HealingWeapon"
       ]
@@ -2325,7 +2325,7 @@
        }
       ],
       "weapon": "PhotonCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -2417,7 +2417,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2468,7 +2468,7 @@
        }
       ],
       "weapon": "GlaveCanon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon"
@@ -2543,7 +2543,7 @@
        }
       ],
       "weapon": "WarpBladeAmaranth",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2573,7 +2573,7 @@
     "name": "Amaranth",
     "prerequisites": [
      "~protoss_citadelofadun",
-     "~protoss_promotion_unlockamaranth"
+     "~protoss_promotion_amaranth"
     ],
     "queue": [
      "Infantry",
@@ -2618,7 +2618,7 @@
        }
       ],
       "weapon": "WarpBlade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -2648,7 +2648,7 @@
     "name": "Dark Templar",
     "prerequisites": [
      "~protoss_citadelofadun",
-     "~!protoss_promotion_unlockamaranth"
+     "~!protoss_promotion_amaranth"
     ],
     "queue": [
      "Infantry",
@@ -2708,7 +2708,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2742,7 +2742,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2776,7 +2776,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2810,7 +2810,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2844,7 +2844,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2878,7 +2878,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2912,7 +2912,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -2946,7 +2946,7 @@
        }
       ],
       "weapon": "PsiStorm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon"
       ]
@@ -3020,7 +3020,7 @@
        }
       ],
       "weapon": "psi_spear",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3050,7 +3050,7 @@
     "name": "Legionnaire",
     "prerequisites": [
      "~protoss_gateway",
-     "~protoss_promotion_unlocklegionnaire"
+     "~protoss_promotion_legionnaire"
     ],
     "queue": [
      "Infantry",
@@ -3157,7 +3157,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3258,7 +3258,7 @@
        }
       ],
       "weapon": "PatriarchShoot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3297,7 +3297,7 @@
     "name": "Patriarch",
     "prerequisites": [
      "~protoss_templararchives",
-     "~protoss_promotion_unlockpatriarch"
+     "~protoss_promotion_patriarch"
     ],
     "queue": [
      "Infantry",
@@ -3344,7 +3344,7 @@
        }
       ],
       "weapon": "psi_blades",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3374,7 +3374,7 @@
     "name": "Zealot",
     "prerequisites": [
      "~protoss_gateway",
-     "~!protoss_promotion_unlocklegionnaire"
+     "~!protoss_promotion_legionnaire"
     ],
     "queue": [
      "Infantry",
@@ -3419,7 +3419,7 @@
        }
       ],
       "weapon": "ZeratulSlice",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3469,7 +3469,7 @@
    }
   },
   "promotions": {
-   "protoss_promotion_unlockamaranth": {
+   "protoss_promotion_amaranth": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3478,22 +3478,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Amaranth",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockatreus",
-     "!protoss_promotion_unlockamaranth",
+     "protoss_promotion_atreus",
+     "!protoss_promotion_amaranth",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockanalogue": {
+   "protoss_promotion_analogue": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3502,22 +3502,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Analogue",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockpositron",
-     "!protoss_promotion_unlockanalogue",
+     "protoss_promotion_positron",
+     "!protoss_promotion_analogue",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockatreus": {
+   "protoss_promotion_atreus": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3526,22 +3526,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Atreus",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlocklegionnaire",
-     "!protoss_promotion_unlockatreus",
+     "protoss_promotion_legionnaire",
+     "!protoss_promotion_atreus",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockepigraph": {
+   "protoss_promotion_epigraph": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3550,21 +3550,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Epigraph",
     "prerequisites": [
      "~protoss_nexus",
-     "!protoss_promotion_unlockepigraph",
+     "!protoss_promotion_epigraph",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockgladius": {
+   "protoss_promotion_gladius": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3573,22 +3573,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Gladius",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockvoidray",
-     "!protoss_promotion_unlockgladius",
+     "protoss_promotion_voidray",
+     "!protoss_promotion_gladius",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockidol": {
+   "protoss_promotion_idol": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3597,22 +3597,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Idol",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockmanifold",
-     "!protoss_promotion_unlockidol",
+     "protoss_promotion_manifold",
+     "!protoss_promotion_idol",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlocklegionnaire": {
+   "protoss_promotion_legionnaire": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3621,21 +3621,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Legionnaire",
     "prerequisites": [
      "~protoss_nexus",
-     "!protoss_promotion_unlocklegionnaire",
+     "!protoss_promotion_legionnaire",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockmanifold": {
+   "protoss_promotion_manifold": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3644,22 +3644,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Manifold",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockanalogue",
-     "!protoss_promotion_unlockmanifold",
+     "protoss_promotion_analogue",
+     "!protoss_promotion_manifold",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockpatriarch": {
+   "protoss_promotion_patriarch": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3668,22 +3668,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Patriarch",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockamaranth",
-     "!protoss_promotion_unlockpatriarch",
+     "protoss_promotion_amaranth",
+     "!protoss_promotion_patriarch",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockpositron": {
+   "protoss_promotion_positron": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3692,21 +3692,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Positron",
     "prerequisites": [
      "~protoss_nexus",
-     "!protoss_promotion_unlockpositron",
+     "!protoss_promotion_positron",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockstarsovereign": {
+   "protoss_promotion_starsovereign": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3715,22 +3715,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Star Sovereign",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockgladius",
-     "!protoss_promotion_unlockstarsovereign",
+     "protoss_promotion_gladius",
+     "!protoss_promotion_starsovereign",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "protoss_promotion_unlockvoidray": {
+   "protoss_promotion_voidray": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3739,15 +3739,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Void Ray",
     "prerequisites": [
      "~protoss_nexus",
-     "protoss_promotion_unlockepigraph",
-     "!protoss_promotion_unlockgladius",
+     "protoss_promotion_epigraph",
+     "!protoss_promotion_gladius",
      "rank1"
     ],
     "queue": [
@@ -3769,7 +3769,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3795,7 +3795,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3822,7 +3822,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3848,7 +3848,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3875,7 +3875,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3901,7 +3901,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3927,7 +3927,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3954,7 +3954,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3980,7 +3980,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4007,7 +4007,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4033,7 +4033,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4058,7 +4058,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4084,7 +4084,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4110,7 +4110,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4136,7 +4136,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4182,7 +4182,7 @@
        }
       ],
       "weapon": "SCVAttack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -4218,7 +4218,7 @@
        }
       ],
       "weapon": "SCVRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -4248,7 +4248,7 @@
     "name": "Analogue",
     "prerequisites": [
      "~protoss_cyberneticscore",
-     "~protoss_promotion_unlockanalogue"
+     "~protoss_promotion_analogue"
     ],
     "queue": [
      "Vehicle",
@@ -4297,7 +4297,7 @@
        }
       ],
       "weapon": "PsionicShockwave",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -4421,7 +4421,7 @@
        }
       ],
       "weapon": "AtreusMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4455,7 +4455,7 @@
     "name": "Atreus",
     "prerequisites": [
      "~protoss_cyberneticscore",
-     "~protoss_promotion_unlockatreus"
+     "~protoss_promotion_atreus"
     ],
     "queue": [
      "Infantry",
@@ -4529,7 +4529,7 @@
        }
       ],
       "weapon": "DragoonCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^HeavyCannon",
@@ -4626,7 +4626,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -4671,7 +4671,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -4721,7 +4721,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -4761,7 +4761,7 @@
     "name": "Idol",
     "prerequisites": [
      "~protoss_cyberneticscore",
-     "~protoss_promotion_unlockidol"
+     "~protoss_promotion_idol"
     ],
     "queue": [
      "Vehicle",
@@ -4832,7 +4832,7 @@
        }
       ],
       "weapon": "ManifoldMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4887,7 +4887,7 @@
        }
       ],
       "weapon": "ManifoldMGAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyCannon",
@@ -4919,7 +4919,7 @@
     "name": "Manifold",
     "prerequisites": [
      "~protoss_cyberneticscore",
-     "~protoss_promotion_unlockmanifold"
+     "~protoss_promotion_manifold"
     ],
     "queue": [
      "Vehicle",
@@ -5059,7 +5059,7 @@
        }
       ],
       "weapon": "PositronGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon",
@@ -5098,7 +5098,7 @@
     "name": "Positron",
     "prerequisites": [
      "~protoss_cyberneticscore",
-     "~protoss_promotion_unlockpositron"
+     "~protoss_promotion_positron"
     ],
     "queue": [
      "Vehicle",
@@ -5147,7 +5147,7 @@
        }
       ],
       "weapon": "ProbeAttack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WorkerAttack"
       ]
@@ -5263,7 +5263,7 @@
        }
       ],
       "weapon": "ScarabLaunch",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",

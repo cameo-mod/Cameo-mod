@@ -85,7 +85,7 @@
        }
       ],
       "weapon": "SteelFighterRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RA2RailgunWeapon",
@@ -195,7 +195,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -305,7 +305,7 @@
        }
       ],
       "weapon": "SteelScalpelRailgunAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -459,7 +459,7 @@
        }
       ],
       "weapon": "SteelScalpelRailgunEMPAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -563,7 +563,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -709,7 +709,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -818,7 +818,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRailEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -896,7 +896,7 @@
        }
       ],
       "weapon": "SteelCargoshipCannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelSmallArms",
        "^SteelChaingun"
@@ -1000,7 +1000,7 @@
        }
       ],
       "weapon": "SteelCruiserCannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1064,7 +1064,7 @@
        }
       ],
       "weapon": "SteelCruiserCannonsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^SmallArms",
@@ -1113,7 +1113,7 @@
        }
       ],
       "weapon": "SteelCruiserArtillery",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumCannon",
        "^RA2Grenade"
@@ -1161,7 +1161,7 @@
        }
       ],
       "weapon": "SteelCruiserArtilleryE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumCannon",
        "^RA2Grenade"
@@ -1198,7 +1198,7 @@
     "prerequisites": [
      "~steelconsortium_consortiumairpad",
      "steelconsortium_geothermalreactor",
-     "~steelconsortium_promotion_unlockcloudbreaker"
+     "~steelconsortium_promotion_cloudbreaker"
     ],
     "queue": [
      "Aircraft",
@@ -1268,7 +1268,7 @@
        }
       ],
       "weapon": "SteelInspectorIonCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TeslaWeapon"
@@ -1370,7 +1370,7 @@
        }
       ],
       "weapon": "SteelAirTurret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -1436,7 +1436,7 @@
        }
       ],
       "weapon": "SteelAirTurretEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -1502,7 +1502,7 @@
        }
       ],
       "weapon": "SteelAirTurretE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -1633,7 +1633,7 @@
        }
       ],
       "weapon": "SteelTwisterMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1720,7 +1720,7 @@
        }
       ],
       "weapon": "SteelTwisterMissilesE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1853,7 +1853,7 @@
        }
       ],
       "weapon": "ConsortiumMissileSystem",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^ArrowWeapon",
@@ -1923,7 +1923,7 @@
        }
       ],
       "weapon": "ConsortiumMissileSystemEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^ArrowWeapon",
@@ -2058,7 +2058,7 @@
        }
       ],
       "weapon": "bfg10kCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
@@ -2157,7 +2157,7 @@
        }
       ],
       "weapon": "superbfg10kCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^MagicWeapon",
@@ -2328,7 +2328,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -2346,7 +2346,7 @@
     },
     "name": "Consortium Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -2533,7 +2533,7 @@
        }
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -2585,7 +2585,7 @@
        }
       ],
       "weapon": "SteelVulcanResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -2879,7 +2879,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -2994,7 +2994,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRail",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -3104,7 +3104,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRailEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -3214,7 +3214,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRailEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -3348,7 +3348,7 @@
        }
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3401,7 +3401,7 @@
        }
       ],
       "weapon": "SteelCloneGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3455,7 +3455,7 @@
        }
       ],
       "weapon": "SteelCloneGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3509,7 +3509,7 @@
        }
       ],
       "weapon": "SteelCloneGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3560,7 +3560,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3613,7 +3613,7 @@
        }
       ],
       "weapon": "SteelCloneGunEResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3665,7 +3665,7 @@
        }
       ],
       "weapon": "SteelCloneGunResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3719,7 +3719,7 @@
        }
       ],
       "weapon": "SteelCloneGunEResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelMediumMissile",
@@ -3813,7 +3813,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -3825,7 +3825,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -3841,7 +3841,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -3919,7 +3919,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -3998,7 +3998,7 @@
        }
       ],
       "weapon": "SteelMakoGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -4079,7 +4079,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -4159,7 +4159,7 @@
        }
       ],
       "weapon": "SteelMakoGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -4268,7 +4268,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -4379,7 +4379,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -4491,7 +4491,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -4603,7 +4603,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -4724,7 +4724,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4793,7 +4793,7 @@
        }
       ],
       "weapon": "SteelInfRailgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -4953,7 +4953,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5113,7 +5113,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5138,13 +5138,13 @@
       "requires": "botmicro",
       "slot": "Armament@BOTAA",
       "versus_templates": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ],
       "warheads": [],
       "weapon": "aadeploytargeting.8c0",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^aadeploytargeting"
+       "^AADeployTargeting"
       ]
      },
      {
@@ -5212,7 +5212,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5282,7 +5282,7 @@
        }
       ],
       "weapon": "SteelInfRailgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5443,7 +5443,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5604,7 +5604,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -5683,7 +5683,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5753,7 +5753,7 @@
        }
       ],
       "weapon": "SteelInfRailgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -5914,7 +5914,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -6075,7 +6075,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -6194,7 +6194,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6262,7 +6262,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6333,7 +6333,7 @@
        }
       ],
       "weapon": "SteelRunnerPistols",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6402,7 +6402,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6470,7 +6470,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6538,7 +6538,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsEResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6607,7 +6607,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6676,7 +6676,7 @@
        }
       ],
       "weapon": "SteelRunnerPistolsEResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -6729,6 +6729,53 @@
    }
   },
   "promotions": {
+   "steelconsortium_promotion_barracuda": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Barracuda",
+    "prerequisites": [
+     "~steelconsortium_consortiumconstructionyard",
+     "!steelconsortium_promotion_barracuda",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "steelconsortium_promotion_cloudbreaker": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Cloud Breaker",
+    "prerequisites": [
+     "~steelconsortium_consortiumconstructionyard",
+     "steelconsortium_promotion_stalker",
+     "!steelconsortium_promotion_cloudbreaker",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
    "steelconsortium_promotion_daggerartillery": {
     "build_limit": {
      "src": "inherited",
@@ -6738,15 +6785,39 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Dagger Artillery",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlockbarracuda",
+     "steelconsortium_promotion_barracuda",
      "!steelconsortium_promotion_daggerartillery",
+     "rank1"
+    ],
+    "queue": [
+     "Promotions"
+    ]
+   },
+   "steelconsortium_promotion_defenderbot": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "PromotionUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Defender Bot",
+    "prerequisites": [
+     "~steelconsortium_consortiumconstructionyard",
+     "steelconsortium_promotion_quantumtank",
+     "!steelconsortium_promotion_defenderbot",
      "rank1"
     ],
     "queue": [
@@ -6762,7 +6833,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6786,7 +6857,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -6800,7 +6871,7 @@
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlockbarracuda": {
+   "steelconsortium_promotion_stalker": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6809,93 +6880,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Barracuda",
-    "prerequisites": [
-     "~steelconsortium_consortiumconstructionyard",
-     "!steelconsortium_promotion_unlockbarracuda",
-     "rank1"
-    ],
-    "queue": [
-     "Promotions"
-    ]
-   },
-   "steelconsortium_promotion_unlockcloudbreaker": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Promotion",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Cloud Breaker",
-    "prerequisites": [
-     "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlockstalker",
-     "!steelconsortium_promotion_unlockcloudbreaker",
-     "rank1"
-    ],
-    "queue": [
-     "Promotions"
-    ]
-   },
-   "steelconsortium_promotion_unlockdefenderbot": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Promotion",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Defender Bot",
-    "prerequisites": [
-     "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_quantumtank",
-     "!steelconsortium_promotion_unlockdefenderbot",
-     "rank1"
-    ],
-    "queue": [
-     "Promotions"
-    ]
-   },
-   "steelconsortium_promotion_unlockstalker": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Stalker",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlockdefenderbot",
-     "!steelconsortium_promotion_unlockstalker",
+     "steelconsortium_promotion_defenderbot",
+     "!steelconsortium_promotion_stalker",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlocksupportlvl1": {
+   "steelconsortium_promotion_supportlvl1": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6904,21 +6904,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Support LVL1",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "!steelconsortium_promotion_unlocksupportlvl1",
+     "!steelconsortium_promotion_supportlvl1",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlocksupportlvl2": {
+   "steelconsortium_promotion_supportlvl2": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6927,22 +6927,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Support LVL2",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlocksupportlvl1",
-     "!steelconsortium_promotion_unlocksupportlvl2",
+     "steelconsortium_promotion_supportlvl1",
+     "!steelconsortium_promotion_supportlvl2",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlocksupportlvl3": {
+   "steelconsortium_promotion_supportlvl3": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6951,22 +6951,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Support LVL3",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlocksupportlvl2",
-     "!steelconsortium_promotion_unlocksupportlvl3",
+     "steelconsortium_promotion_supportlvl2",
+     "!steelconsortium_promotion_supportlvl3",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlocksupportlvl4": {
+   "steelconsortium_promotion_supportlvl4": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6975,22 +6975,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Support LVL4",
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
-     "steelconsortium_promotion_unlocksupportlvl3",
-     "!steelconsortium_promotion_unlocksupportlvl4",
+     "steelconsortium_promotion_supportlvl3",
+     "!steelconsortium_promotion_supportlvl4",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "steelconsortium_promotion_unlockwhiterabbit": {
+   "steelconsortium_promotion_whiterabbit": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -6999,7 +6999,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7007,7 +7007,7 @@
     "prerequisites": [
      "~steelconsortium_consortiumconstructionyard",
      "steelconsortium_promotion_katytank",
-     "!steelconsortium_promotion_unlockwhiterabbit",
+     "!steelconsortium_promotion_whiterabbit",
      "rank1"
     ],
     "queue": [
@@ -7025,11 +7025,37 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Stolen Consortium Buildings Plans"
+   },
+   "steelconsortium_upgrade_empcannon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/upgrades.yaml#Valued.Cost",
+     "v": "7500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "ResearchedUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Emp Cannon",
+    "prerequisites": [
+     "~steelconsortium_consortiumbattlelab",
+     "!steelconsortium_upgrade_empcannon"
+    ],
+    "queue": [
+     "Research"
+    ]
    },
    "steelconsortium_upgrade_ferrocretecurtain": {
     "build_limit": {
@@ -7044,7 +7070,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7070,7 +7096,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7096,7 +7122,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7122,7 +7148,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7148,7 +7174,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7174,7 +7200,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7213,32 +7239,6 @@
      "Research"
     ]
    },
-   "steelconsortium_upgrade_unlockempcannon": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Consortium/yaml/upgrades.yaml#Valued.Cost",
-     "v": "7500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Upgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Emp Cannon",
-    "prerequisites": [
-     "~steelconsortium_consortiumbattlelab",
-     "!steelconsortium_upgrade_unlockempcannon"
-    ],
-    "queue": [
-     "Research"
-    ]
-   },
    "up_team_shielresistance.steel": {
     "build_limit": {
      "src": "inherited",
@@ -7248,7 +7248,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -7356,7 +7356,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRailEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -7464,7 +7464,7 @@
        }
       ],
       "weapon": "SteelQuantumTurretRailEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyChemicalWeapon",
@@ -7566,7 +7566,7 @@
        }
       ],
       "weapon": "SteelVulcan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelHeavyCannon",
        "^SteelSmallArms",
@@ -7656,7 +7656,7 @@
        }
       ],
       "weapon": "SteelHoverMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^SteelLightMissile"
@@ -7698,7 +7698,7 @@
        }
       ],
       "weapon": "SteelHoverMissile_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^SteelLightMissile"
@@ -7809,7 +7809,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -7898,7 +7898,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -7939,7 +7939,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -7990,7 +7990,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -8042,7 +8042,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -8084,7 +8084,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -8125,7 +8125,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2FlakWeapon",
        "^SteelChaingun"
@@ -8176,7 +8176,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -8228,7 +8228,7 @@
        }
       ],
       "weapon": "SteelMantaHunterCannonsAAResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumMissile",
        "^RA2FlakWeapon",
@@ -8265,7 +8265,7 @@
     "name": "Barracuda",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_unlockbarracuda"
+     "~steelconsortium_promotion_barracuda"
     ],
     "queue": [
      "Vehicle",
@@ -8456,7 +8456,7 @@
        }
       ],
       "weapon": "SteelDaggerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
@@ -8536,7 +8536,7 @@
        }
       ],
       "weapon": "SteelDaggerCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^ShrapnelWeapon",
@@ -8655,7 +8655,7 @@
        }
       ],
       "weapon": "SteelInfRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -8724,7 +8724,7 @@
        }
       ],
       "weapon": "SteelInfRailgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2RailgunWeapon",
        "^RA2FlakWeapon",
@@ -8884,7 +8884,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -9044,7 +9044,7 @@
        }
       ],
       "weapon": "SteelInfRailgunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -9083,7 +9083,7 @@
     "name": "Defender Bot",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_unlockdefenderbot",
+     "~steelconsortium_promotion_defenderbot",
      "steelconsortium_consortiumradar"
     ],
     "queue": [
@@ -9129,7 +9129,7 @@
        }
       ],
       "weapon": "HammerheadTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -9186,7 +9186,7 @@
        }
       ],
       "weapon": "HammerheadArtillery",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^HeavyBomb",
@@ -9204,13 +9204,13 @@
       "requires": "botmicro",
       "slot": "Armament@BOT",
       "versus_templates": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ],
       "warheads": [],
       "weapon": "deploytargeting.10c0",
       "weapon_class_source": "template",
       "weapon_types": [
-       "^deploytargeting"
+       "^DeployTargeting"
       ]
      }
     ],
@@ -9319,7 +9319,7 @@
        }
       ],
       "weapon": "SteelKatyCannons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -9384,7 +9384,7 @@
        }
       ],
       "weapon": "SteelKatyCannonsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -9476,7 +9476,7 @@
        }
       ],
       "weapon": "SteelKatyCannonsEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^TeslaWeapon",
@@ -9568,7 +9568,7 @@
        }
       ],
       "weapon": "SteelKatyCannonsEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^TeslaWeapon",
@@ -9696,7 +9696,7 @@
        }
       ],
       "weapon": "SteelMakoGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -9775,7 +9775,7 @@
        }
       ],
       "weapon": "SteelMakoGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^RA2Grenade",
@@ -9884,7 +9884,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -9995,7 +9995,7 @@
        }
       ],
       "weapon": "SteelMakoGunEMPE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^TeslaWeapon",
@@ -10107,7 +10107,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10171,7 +10171,7 @@
        }
       ],
       "weapon": "SteelMantaAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10232,7 +10232,7 @@
        }
       ],
       "weapon": "SteelMantaAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10293,7 +10293,7 @@
        }
       ],
       "weapon": "SteelMantaAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10355,7 +10355,7 @@
        }
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10417,7 +10417,7 @@
        }
       ],
       "weapon": "SteelMantaAGResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10479,7 +10479,7 @@
        }
       ],
       "weapon": "SteelMantaAAResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10541,7 +10541,7 @@
        }
       ],
       "weapon": "SteelMantaAAResonance",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelLightMissile",
        "^SteelSmallArms",
@@ -10579,7 +10579,7 @@
     "name": "Manta",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~!steelconsortium_promotion_unlockbarracuda"
+     "~!steelconsortium_promotion_barracuda"
     ],
     "queue": [
      "Vehicle",
@@ -10661,7 +10661,7 @@
        }
       ],
       "weapon": "SteelMegaSword",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^LaserWeapon",
@@ -10729,7 +10729,7 @@
        }
       ],
       "weapon": "SteelMegaSwordEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^LaserWeapon",
@@ -10811,7 +10811,7 @@
        }
       ],
       "weapon": "SteelMegaSwordE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^HeavyChemicalWeapon",
@@ -10890,7 +10890,7 @@
        }
       ],
       "weapon": "SteelFortressWeapons",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SteelMediumCannon"
       ]
@@ -10987,7 +10987,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -11054,7 +11054,7 @@
        }
       ],
       "weapon": "SteelQuantumCannonEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -11121,7 +11121,7 @@
        }
       ],
       "weapon": "SteelQuantumCannon_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -11219,7 +11219,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^RailgunWeapon"
@@ -11285,7 +11285,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgunEMP",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -11351,7 +11351,7 @@
        }
       ],
       "weapon": "SteelStalkerRailgunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^LaserWeapon",
@@ -11387,7 +11387,7 @@
     "name": "Stalker",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_unlockstalker",
+     "~steelconsortium_promotion_stalker",
      "steelconsortium_consortiumbattlelab"
     ],
     "queue": [
@@ -11536,7 +11536,7 @@
        }
       ],
       "weapon": "WhiteRabbitGatling",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -11574,7 +11574,7 @@
     "name": "White Rabbit",
     "prerequisites": [
      "~steelconsortium_consortiumwarfactory",
-     "~steelconsortium_promotion_unlockwhiterabbit",
+     "~steelconsortium_promotion_whiterabbit",
      "steelconsortium_consortiumbattlelab"
     ],
     "queue": [

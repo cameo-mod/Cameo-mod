@@ -136,7 +136,7 @@ op2_commonore_beacon_3bar:
 #		INHERITABLES
 ####################################################################################################
 
-^op2_engineer:
+^OP2Engineer:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -157,12 +157,9 @@ op2_commonore_beacon_3bar:
 		HP: 7200
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
-		ValidStances: Ally
 		Priority: 2
 	AutoTargetPriority@DEFAULT:
-		ValidStances: Enemy, Neutral
 	AutoTargetPriority@ATTACKANYTHING:
-		ValidStances: Enemy, Neutral
 	AutoTarget:
 		ScanRadius: 4
 	Passenger:
@@ -201,7 +198,7 @@ op2_commonore_beacon_3bar:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: false
 
-^op2_supplier:
+^OP2Supplier:
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -251,7 +248,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_tokamak:
+^OP2BaseTokamak:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
@@ -273,7 +270,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_smelter_common:
+^OP2BaseSmelterCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^Refinery
@@ -295,7 +292,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_agridome:
+^OP2BaseAgridome:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -317,7 +314,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_residence:
+^OP2BaseResidence:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -341,7 +338,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_basic_lab:
+^OP2BaseBasicLab:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -363,7 +360,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_factory_vehicle:
+^OP2BaseFactoryVehicle:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
@@ -395,7 +392,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_garage:
+^OP2BaseGarage:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@shape: ^3x3Shape
@@ -440,7 +437,7 @@ op2_commonore_beacon_3bar:
 		Amount: -50
 	ProvidesPrerequisite@buildingname:
 
-^op2base_nursery:
+^OP2BaseNursery:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -462,7 +459,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_university:
+^OP2BaseUniversity:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -484,7 +481,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_lab_standard:
+^OP2BaseLabStandard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -506,7 +503,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_dirt:
+^OP2BaseDirt:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -559,7 +556,7 @@ op2_commonore_beacon_3bar:
 		IncomingTextNotification: Warning: Force shield activated.
 		BlockedCursor: move-blocked
 
-^op2base_rcc:
+^OP2BaseRCC:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -580,7 +577,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_gorf:
+^OP2BaseGorf:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -603,7 +600,7 @@ op2_commonore_beacon_3bar:
 		Modifier: 25
 	ProvidesPrerequisite@buildingname:
 
-^op2base_lab_advanced:
+^OP2BaseLabAdvanced:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -630,7 +627,7 @@ op2_commonore_beacon_3bar:
 		RequiresCondition: !chronobeamed
 	ProvidesPrerequisite@buildingname:
 
-^op2base_spaceport:
+^OP2BaseSpaceport:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^4x4Shape
 	Inherits@STATUS: ^OP2Building
@@ -688,7 +685,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_solararray:
+^OP2BaseSolarArray:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -714,7 +711,7 @@ op2_commonore_beacon_3bar:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_smelter_rare:
+^OP2BaseSmelterRare:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -740,7 +737,7 @@ op2_commonore_beacon_3bar:
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_light_tower:
+^OP2BaseLightTower:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
 	Inherits@STATUS: ^OP2Building
@@ -774,7 +771,7 @@ op2_commonore_beacon_3bar:
 	-AcceptsDeliveredCash:
 	ProvidesPrerequisite@buildingname:
 
-^op2base_mine_common:
+^OP2BaseMineCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
@@ -805,7 +802,7 @@ op2_commonore_beacon_3bar:
 		MaxRange: 2
 	ProvidesPrerequisite@buildingname:
 
-^op2base_storage_common:
+^OP2BaseStorageCommon:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
 	Inherits@STATUS: ^OP2Building
@@ -856,7 +853,7 @@ EDEN_FACTORY_STRUCTURE:
 		Image: eden_factory_structure
 
 EDEN_TOKAMAK:
-	Inherits: ^op2base_tokamak
+	Inherits: ^OP2BaseTokamak
 	Tooltip:
 		Name: Eden Tokamak
 	ProvidesPrerequisite:
@@ -878,7 +875,7 @@ EDEN_TOKAMAK:
 		LocalCenterOffset: 0,-512,0
 
 EDEN_SMELTER_COMMON:
-	Inherits: ^op2base_smelter_common
+	Inherits: ^OP2BaseSmelterCommon
 	Tooltip:
 		Name: Eden Common Ore Smelter
 	ProvidesPrerequisite:
@@ -898,7 +895,7 @@ EDEN_SMELTER_COMMON:
 		Palette: placelinesegment
 
 EDEN_AGRIDOME:
-	Inherits: ^op2base_agridome
+	Inherits: ^OP2BaseAgridome
 	Tooltip:
 		Name: Eden Agridome
 	ProvidesPrerequisite:
@@ -912,7 +909,7 @@ EDEN_AGRIDOME:
 		Description: eden_agridome.description
 
 EDEN_RESIDENCE:
-	Inherits: ^op2base_residence
+	Inherits: ^OP2BaseResidence
 	Tooltip:
 		Name: Eden Residence
 	ProvidesPrerequisite:
@@ -926,7 +923,7 @@ EDEN_RESIDENCE:
 		Description: actor_eden_residence.description
 
 EDEN_LAB_BASIC:
-	Inherits: ^op2base_basic_lab
+	Inherits: ^OP2BaseBasicLab
 	Tooltip:
 		Name: Eden Basic Lab
 	ProvidesPrerequisite:
@@ -940,7 +937,7 @@ EDEN_LAB_BASIC:
 		Description: actor_eden_lab_basic.description
 
 EDEN_FACTORY_VEHICLE:
-	Inherits: ^op2base_factory_vehicle
+	Inherits: ^OP2BaseFactoryVehicle
 	Tooltip:
 		Name: Eden Vehicle Factory
 	ProvidesPrerequisite:
@@ -952,7 +949,7 @@ EDEN_FACTORY_VEHICLE:
 		Description: actor_eden_factory_vehicle.description
 
 EDEN_GARAGE:
-	Inherits: ^op2base_garage
+	Inherits: ^OP2BaseGarage
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_FACTORY_VEHICLE
@@ -961,7 +958,7 @@ EDEN_GARAGE:
 		Description: actor_eden_garage.description
 
 EDEN_NURSERY:
-	Inherits: ^op2base_nursery
+	Inherits: ^OP2BaseNursery
 	Tooltip:
 		Name: Eden Nursery
 	ProvidesPrerequisite:
@@ -975,7 +972,7 @@ EDEN_NURSERY:
 		Description: eden_nursery.description
 
 EDEN_UNIVERSITY:
-	Inherits: ^op2base_university
+	Inherits: ^OP2BaseUniversity
 	Tooltip:
 		Name: Eden University
 	ProvidesPrerequisite:
@@ -989,7 +986,7 @@ EDEN_UNIVERSITY:
 		Description: eden_university.description
 
 EDEN_LAB_STANDARD:
-	Inherits: ^op2base_lab_standard
+	Inherits: ^OP2BaseLabStandard
 	Tooltip:
 		Name: Eden Standard Lab
 	ProvidesPrerequisite:
@@ -1003,7 +1000,7 @@ EDEN_LAB_STANDARD:
 		Description: eden_lab_standard.description
 
 EDEN_DIRT:
-	Inherits: ^op2base_dirt
+	Inherits: ^OP2BaseDirt
 	Tooltip:
 		Name: Eden Dirt
 	ProvidesPrerequisite:
@@ -1015,7 +1012,7 @@ EDEN_DIRT:
 		Description: eden_dirt.description
 
 EDEN_RCC:
-	Inherits: ^op2base_rcc
+	Inherits: ^OP2BaseRCC
 	Tooltip:
 		Name: Eden Robot Command Center
 	ProvidesPrerequisite:
@@ -1107,7 +1104,7 @@ EDEN_FACTORY_CONSUMER:
 		Palette: placelinesegment
 
 EDEN_GORF:
-	Inherits: ^op2base_gorf
+	Inherits: ^OP2BaseGorf
 	Tooltip:
 		Name: Eden GORF
 	ProvidesPrerequisite:
@@ -1119,7 +1116,7 @@ EDEN_GORF:
 		Description: eden_gorf.description
 
 EDEN_LAB_ADVANCED:
-	Inherits: ^op2base_lab_advanced
+	Inherits: ^OP2BaseLabAdvanced
 	#1800
 	Tooltip:
 		Name: Eden Advanced Lab
@@ -1134,7 +1131,7 @@ EDEN_LAB_ADVANCED:
 		Description: eden_lab_advanced.description
 
 EDEN_SPACEPORT:
-	Inherits: ^op2base_spaceport
+	Inherits: ^OP2BaseSpaceport
 	#1800
 	Tooltip:
 		Name: Eden Space Port
@@ -1147,7 +1144,7 @@ EDEN_SPACEPORT:
 		Description: eden_spaceport.description
 
 EDEN_SOLAR_ARRAY:
-	Inherits: ^op2base_solararray
+	Inherits: ^OP2BaseSolarArray
 	Tooltip:
 		Name: Eden Solar Array
 	ProvidesPrerequisite:
@@ -1159,7 +1156,7 @@ EDEN_SOLAR_ARRAY:
 		Description: eden_solar_array.description
 
 EDEN_SMELTER_RARE:
-	Inherits: ^op2base_smelter_rare
+	Inherits: ^OP2BaseSmelterRare
 	#1800
 	Tooltip:
 		Name: Eden Rare Ore Smelter
@@ -1174,7 +1171,7 @@ EDEN_SMELTER_RARE:
 # #		DEFENCE EDEN
 # ####################################################################################################
 EDEN_LIGHT_TOWER:
-	Inherits: ^op2base_light_tower
+	Inherits: ^OP2BaseLightTower
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure
@@ -1182,7 +1179,7 @@ EDEN_LIGHT_TOWER:
 		Description: eden_light_tower.description
 
 EDEN_MINE_COMMON:
-	Inherits: ^op2base_mine_common
+	Inherits: ^OP2BaseMineCommon
 	Tooltip:
 		Name: Eden Common Ore Mine
 	ProvidesPrerequisite:
@@ -1194,7 +1191,7 @@ EDEN_MINE_COMMON:
 		Description: eden_mine_common.description
 
 EDEN_STORAGE_COMMON:
-	Inherits: ^op2base_storage_common
+	Inherits: ^OP2BaseStorageCommon
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure, EDEN_SMELTER_COMMON
@@ -2079,7 +2076,7 @@ PLYMOUTH_STRUCTURE_FACTORY:
 		Image: plymouth_structure_factory
 
 PLYMOUTH_TOKAMAK:
-	Inherits: ^op2base_tokamak
+	Inherits: ^OP2BaseTokamak
 	Tooltip:
 		Name: Plymouth Tokamak
 	ProvidesPrerequisite:
@@ -2091,7 +2088,7 @@ PLYMOUTH_TOKAMAK:
 		Description: actor_tokamak.description
 
 PLYMOUTH_SMELTER_COMMON:
-	Inherits: ^op2base_smelter_common
+	Inherits: ^OP2BaseSmelterCommon
 	Tooltip:
 		Name: Plymouth Common Ore Smelter
 	ProvidesPrerequisite:
@@ -2107,7 +2104,7 @@ PLYMOUTH_SMELTER_COMMON:
 		Facing: 64
 
 PLYMOUTH_AGRIDOME:
-	Inherits: ^op2base_agridome
+	Inherits: ^OP2BaseAgridome
 	Tooltip:
 		Name: Plymouth Agridome
 	ProvidesPrerequisite:
@@ -2121,7 +2118,7 @@ PLYMOUTH_AGRIDOME:
 		Description: plymouth_agridome.description
 
 PLYMOUTH_RESIDENCE:
-	Inherits: ^op2base_residence
+	Inherits: ^OP2BaseResidence
 	Tooltip:
 		Name: Plymouth Residence
 	ProvidesPrerequisite:
@@ -2135,7 +2132,7 @@ PLYMOUTH_RESIDENCE:
 		Description: plymouth_residence.description
 
 PLYMOUTH_BASIC_LAB:
-	Inherits: ^op2base_basic_lab
+	Inherits: ^OP2BaseBasicLab
 	Tooltip:
 		Name: Plymouth Basic Lab
 	ProvidesPrerequisite:
@@ -2149,7 +2146,7 @@ PLYMOUTH_BASIC_LAB:
 		Description: plymouth_basic_lab.description
 
 PLYMOUTH_FACTORY_VEHICLE:
-	Inherits: ^op2base_factory_vehicle
+	Inherits: ^OP2BaseFactoryVehicle
 	Tooltip:
 		Name: Plymouth Vehicle Factory
 	ProvidesPrerequisite:
@@ -2162,7 +2159,7 @@ PLYMOUTH_FACTORY_VEHICLE:
 		Description: plymouth_factory_vehicle.description
 
 PLYMOUTH_GARAGE:
-	Inherits: ^op2base_garage
+	Inherits: ^OP2BaseGarage
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_FACTORY_VEHICLE
@@ -2171,7 +2168,7 @@ PLYMOUTH_GARAGE:
 		Description: plymouth_garage.description
 
 PLYMOUTH_NURSERY:
-	Inherits: ^op2base_nursery
+	Inherits: ^OP2BaseNursery
 	Tooltip:
 		Name: Plymouth Nursery
 	ProvidesPrerequisite:
@@ -2185,7 +2182,7 @@ PLYMOUTH_NURSERY:
 		Description: plymouth_nursery.description
 
 PLYMOUTH_UNIVERSITY:
-	Inherits: ^op2base_university
+	Inherits: ^OP2BaseUniversity
 	Tooltip:
 		Name: Plymouth University
 	ProvidesPrerequisite:
@@ -2199,7 +2196,7 @@ PLYMOUTH_UNIVERSITY:
 		Description: plymouth_university.description
 
 PLYMOUTH_LAB_STANDARD:
-	Inherits: ^op2base_lab_standard
+	Inherits: ^OP2BaseLabStandard
 	Tooltip:
 		Name: Plymouth Standard Lab
 	ProvidesPrerequisite:
@@ -2212,7 +2209,7 @@ PLYMOUTH_LAB_STANDARD:
 		Description: plymouth_lab_standard.description
 
 PLYMOUTH_DIRT:
-	Inherits: ^op2base_dirt
+	Inherits: ^OP2BaseDirt
 	Tooltip:
 		Name: Plymouth Dirt
 	ProvidesPrerequisite:
@@ -2224,7 +2221,7 @@ PLYMOUTH_DIRT:
 		Description: plymouth_dirt.description
 
 PLYMOUTH_RCC:
-	Inherits: ^op2base_rcc
+	Inherits: ^OP2BaseRCC
 	Tooltip:
 		Name: Plymouth Robot Command Center
 	ProvidesPrerequisite:
@@ -2279,7 +2276,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 		ExitCell: 2,2
 
 PLYMOUTH_GORF:
-	Inherits: ^op2base_gorf
+	Inherits: ^OP2BaseGorf
 	Tooltip:
 		Name: Plymouth GORF
 	ProvidesPrerequisite:
@@ -2291,7 +2288,7 @@ PLYMOUTH_GORF:
 		Description: plymouth_gorf.description
 
 PLYMOUTH_LAB_ADVANCED:
-	Inherits: ^op2base_lab_advanced
+	Inherits: ^OP2BaseLabAdvanced
 	#1800
 	Tooltip:
 		Name: Plymouth Advanced Lab
@@ -2306,7 +2303,7 @@ PLYMOUTH_LAB_ADVANCED:
 		Description: plymouth_lab_advanced.description
 
 PLYMOUTH_SPACEPORT:
-	Inherits: ^op2base_spaceport
+	Inherits: ^OP2BaseSpaceport
 	#1800
 	Tooltip:
 		Name: Plymouth Space Port
@@ -2319,7 +2316,7 @@ PLYMOUTH_SPACEPORT:
 		Description: plymouth_spaceport.description
 
 PLYMOUTH_SOLARARRAY:
-	Inherits: ^op2base_solararray
+	Inherits: ^OP2BaseSolarArray
 	Tooltip:
 		Name: Plymouth Solar Array
 	ProvidesPrerequisite:
@@ -2331,7 +2328,7 @@ PLYMOUTH_SOLARARRAY:
 		Description: plymouth_solar_array.description
 
 PLYMOUTH_SMELTER_RARE:
-	Inherits: ^op2base_smelter_rare
+	Inherits: ^OP2BaseSmelterRare
 	#1800
 	Tooltip:
 		Name: Plymouth Rare Ore Smelter
@@ -2348,7 +2345,7 @@ PLYMOUTH_SMELTER_RARE:
 # #		DEFENCE PLYMOUTH
 # ####################################################################################################
 PLYMOUTH_LIGHT_TOWER:
-	Inherits: ^op2base_light_tower
+	Inherits: ^OP2BaseLightTower
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~plymouth_structure_factory
@@ -2356,7 +2353,7 @@ PLYMOUTH_LIGHT_TOWER:
 		Description: plymouth_light_tower.description
 
 PLYMOUTH_MINE_COMMON:
-	Inherits: ^op2base_mine_common
+	Inherits: ^OP2BaseMineCommon
 	Tooltip:
 		Name: Plymouth Common Ore Mine
 	ProvidesPrerequisite:
@@ -2368,7 +2365,7 @@ PLYMOUTH_MINE_COMMON:
 		Description: plymouth_mine_common.description
 
 PLYMOUTH_STORAGE_COMMON:
-	Inherits: ^op2base_storage_common
+	Inherits: ^OP2BaseStorageCommon
 	Buildable:
 		BuildPaletteOrder: 5
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
@@ -2632,7 +2629,7 @@ PLYMOUTH_SCOUT:
 
 # PLYMOUTH_TECH_PLATFORM:
 # 	Inherits: ^Soldier
-# 	Inherits@OP2Template: ^op2_engineer
+# 	Inherits@OP2Template: ^OP2Engineer
 # 	Mobile:
 # 		Speed: 72
 # 	Tooltip:
@@ -2652,7 +2649,7 @@ PLYMOUTH_SCOUT:
 
 # PLYMOUTH_CASH_PLATFORM:
 # 	Inherits: ^Soldier
-# 	Inherits@OP2Template: ^op2_supplier
+# 	Inherits@OP2Template: ^OP2Supplier
 # 	Tooltip:
 # 		Name: Cash Platform
 # 	Buildable:

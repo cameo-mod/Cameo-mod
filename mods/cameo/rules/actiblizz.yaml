@@ -411,14 +411,14 @@ scacademy.actibliz:
 	RenderSprites:
 		Image: terran_academy
 
-^actiblizzprotoss:
+^ActiBlizzProtoss:
 	Tooltip:
 		Name: Protoss Archives
 	ProvidesPrerequisite:
 		Prerequisite: actiblizzprotoss
 		
 sctemplararchives.actibliz:
-	Inherits: ^actiblizzprotoss
+	Inherits: ^ActiBlizzProtoss
 	Inherits: protoss_templararchives
 	Valued:
 		Cost: 1600

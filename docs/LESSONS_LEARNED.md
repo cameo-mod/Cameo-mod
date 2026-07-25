@@ -25,6 +25,10 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Uniqueness enforcement](#uniqueness-enforcement)
 - [Dual-weapon units](#dual-weapon-units)
 - [Audit and pipeline findings from 2026-07-22](#audit-and-pipeline-findings-from-2026-07-22)
+- [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
+- [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
+- [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
+- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
 
 ---
 
@@ -189,3 +193,92 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - Multiple `scout_rebalance_*.py`, `closecombat_rebalance_*.py`, and `special_forces_rebalance_*.py` scripts are redundant with the generic `propose_class_rebalance.py`.
 - Plan: consolidate the helpers into one `tools/balance/rebalance_classes.py` dispatcher that calls `extract` → `propose` → `patch` → `apply` (dry-run/confirm) → `build_workbook`.
 - Do this after the current audit batch is finished and the pipeline is trusted.
+
+## Interactable trait and upgrade actors (2026-07-24)
+
+### The crash
+
+- **Removing the `Interactable` trait from upgrade actors crashes the game.** `Interactable` provides the hit-testing/mouse-interaction bounds that the engine needs for any actor that exists in the game world. Without it, the engine cannot process clicks or selection on the actor and crashes.
+- All upgrade actors inherit `Interactable` from `^upgrade.template` (`mods/cameo/rules/defaults.yaml` line 8759). This is the canonical source — do NOT remove it or add `-Interactable:` to upgrade actors.
+
+### The audit lint rule conflict
+
+- `tools/audit/audit_yaml_lint_rules.py` check 4 (`find_interactable_selectable_conflicts`) flags any actor that has BOTH `Interactable` and `Selectable` traits in the same YAML block as a "conflict".
+- However, `Interactable` and `Selectable` serve **complementary** purposes in OpenRA:
+  - `Interactable` provides the click/hit-test bounds (required for the actor to be interactive at all).
+  - `Selectable` provides selection visual feedback (selection box, health bar, decoration bounds) and **depends on** `Interactable` to function.
+- `^promotion_upgrade.template` (line 8771) previously inherited `Interactable` from `^upgrade.template` AND added `Selectable` with `DecorationBounds`. This caused duplicate `InteractableInfo` errors in `--check-yaml` for all promotion upgrades across all factions. **Resolved 2026-07-24:** `Selectable` was removed from `^promotion_upgrade.template`, eliminating ~9k errors and ~9k warnings. The remaining `Interactable + Selectable` warnings are only from 6 engine-level bridge actors (`bridge1`–`bridge4`, `sbridge1`, `sbridge2`).
+- The audit script only checks literal trait text within the same YAML block, not resolved inheritance. So `^promotion_upgrade.template` is NOT flagged (because `Interactable:` doesn't appear in its own block, only in the parent). But any actor that explicitly writes both traits in the same block would be flagged.
+
+### What needs future research
+
+- **Is the audit lint rule correct?** The rule assumes `Interactable` and `Selectable` are mutually exclusive, but the engine appears to treat them as complementary. Need to verify:
+  1. Whether OpenRA engine actually forbids both traits on the same actor (it doesn't seem to — `Selectable` requires `Interactable`).
+  2. Whether the rule should be relaxed to only flag cases where both traits are explicitly defined with conflicting `Bounds`/`DecorationBounds` values.
+  3. Whether the rule should be removed entirely or changed to a warning instead of a failure.
+- **Goal:** Be completely warnings-and-errors free without crashing the game. The current situation is: the audit flags a false-positive conflict, but removing `Interactable` to satisfy the audit crashes the game. The audit rule needs to be fixed, not the actors.
+
+## Git workflow and commit rules (2026-07-24)
+
+### Binding rules from user and co-maintainer Blackrobe
+
+- **Always fetch, pull, and merge before any commit.** The remote may have changes from other developers. If the engine pin (`mod.config` `ENGINE_VERSION`) changed, always run `make all` to fetch and build the new engine before boot-gating. Never skip the boot-gate.
+- **Always boot-gate before committing.** Launch the game with `launch-game.cmd`, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. A commit that breaks the boot is not acceptable.
+- **`utility.cmd cameo --check-yaml` is a linting/YAML validation tool, NOT a boot-gate substitute.** Use it for: verifying cosmetic refactors (actor/template renames), checking broken prerequisites, and detecting gameplay-relevant YAML issues. **Goal: 0 errors AND 0 warnings.** The utility takes a VERY LONG TIME (10+ minutes) — only run it when you have completed ALL connected tasks from the last report and expect 0 errors/warnings to confirm. Do NOT run it repeatedly. Keep findings from the last report in ROADMAP and docs so they can be fixed without re-running. It is ABSOLUTELY NECESSARY — just choose wisely WHEN to run it.
+- **Always update ALL relevant documentation files BEFORE committing.** This includes `docs/design/ROADMAP.md`, `docs/DESIGN.md`, `docs/audit/SUMMARY.md`, `docs/LESSONS_LEARNED.md`, and any other docs affected by the change. Check old docs for outdated information, inconsistencies, and contradictions — fix them. A commit without updated docs is an incomplete commit.
+- **Do not spam commits on upstream master.** Use a pull request (PR) for cleaner commit history. Create a feature branch, push it, open a PR, and merge only after verification.
+- **Only merge a PR if either:** (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash. Commits that do not break the master branch are a naturally acceptable outcome.
+- **Commit titles must be self-explanatory to all developers.** Terms like "Phase 5", "A2 audit", "Fix B5", or "X/Y law" are only understood internally by Aedis and their agent. If such internal pointers are necessary, elaborate where to find the definition (e.g. "see docs/audit/SUMMARY.md bug class B5") and what kind of project it links to.
+- **When a task is completely done, merge the feature branch to master.** Do not leave completed work stranded on a feature branch. Ensure boot-gate passes and docs are updated before merging.
+- See also: `docs/AGENT_WORKSPACE.md` § Git workflow and commit rules.
+
+## YAML lint rules learned (2026-07-24)
+
+### ProductionCostMultiplier / ProductionTimeMultiplier use Prerequisites, not RequiresCondition
+
+These two traits do NOT support `RequiresCondition`. They use `Prerequisites:` instead. The pattern is:
+- `GrantConditionOnPrerequisite` grants a condition when a prerequisite is met
+- Other multipliers (SpeedMultiplier, DamageMultiplier, etc.) use `RequiresCondition:` with the granted condition
+- `ProductionCostMultiplier` and `ProductionTimeMultiplier` use `Prerequisites:` directly with the prerequisite name
+
+Example (correct):
+```yaml
+GrantConditionOnPrerequisite@myupgrade:
+    Condition: myupgrade
+    Prerequisites: myupgrade
+ProductionCostMultiplier@myupgrade:
+    Multiplier: 90
+    Prerequisites: myupgrade          # NOT RequiresCondition
+SpeedMultiplier@myupgrade:
+    Modifier: 110
+    RequiresCondition: myupgrade      # This is correct for SpeedMultiplier
+```
+
+### Other YAML lint fixes applied
+- **WeaponClass**: Deprecated/removed weapon field. Remove all `WeaponClass:` lines from weapon definitions.
+- **Burstdelays**: Case typo — should be `BurstDelays` (capital B, capital D).
+- **BurstDelay**: Singular form invalid — should be `BurstDelays` (plural).
+- **Angle on Bullet**: Use `LaunchAngle` instead of `Angle` on Bullet projectiles.
+- **ValidStances on weapons**: Not a valid weapon-level field. Remove it; use `ValidRelationships` on warheads instead.
+- **ChangeOwnerValidStances**: Not a valid field on ChangeOwner warhead. Use `ValidStances` instead.
+- **ValidStances on AutoTargetPriority**: Not a valid field. Remove it; `ValidStances` belongs on `AutoTarget` trait.
+- **OverrideActor on Tooltip**: Not a valid field. Remove it.
+- **NegativeRemoval**: `-Trait: value` is invalid — removals must be empty: `-Trait:` (no value).
+- **DuplicateInteractable on bridges**: `Selectable` inherits from `Interactable` in the engine. Having both `Selectable:` (inherited from `^1x1Shape`) and `Interactable:` on the same actor creates duplicate `InteractableInfo`. Fix: add `-Selectable:` to remove the inherited one, keeping only the explicit `Interactable:` with custom Bounds.
+- **UndefinedCursor chrono-target**: Cursor sequences use underscores in definition (`chrono_target`) but traits reference hyphens (`chrono-target`). Add a hyphen-variant sequence alias in cursors.yaml.
+
+### YAML lint cleanup header-removal bug (2026-07-24)
+
+- **The NegativeRemoval lint fix (commit d42ad53a1) accidentally removed weapon/warhead HEADERS, not just values.** When stripping values from `-Trait: value` lines, the lint script also deleted adjacent header lines (e.g., `RA2DiskSteal:`, `Warhead@Cloud: SpawnSmokeParticle`, `Warhead@LaserWeapon: SpreadDamage`). The bodies remained as orphaned child nodes, causing YAML parse errors and `MissingFieldsException` crashes.
+- **Always verify after lint cleanup**: After any bulk NegativeRemoval fix, run `utility.cmd cameo --check-yaml` and boot-gate test. The lint tool catches field errors but the game boot catches orphaned nodes.
+- **ContentPack migration must be complete**: When migrating weapons from `mods/cameo/weapons/*.yaml` to ContentPacks, ALL weapon definitions must be copied, not just templates. The RA2 ContentPack only had `^RA2*` templates but was missing 134 concrete weapon definitions, causing `Parent type not found` errors for weapons like `RA2CarrierTarget` that other weapons inherit from.
+- **UTF-8 encoding in YAML weapon names**: Weapon names with non-ASCII characters (e.g., `ü` in `Kübelwagen`) can become double-encoded (mojibake `Ã¼`) during file operations. Always verify encoding when files contain non-ASCII characters. The engine's YAML parser uses the file's byte-level encoding, so `NaxiWW2KÃ¼belwagenMachinegun` does not match `NaxiWW2KübelwagenMachinegun`.
+- **Engine shader files not tracked by mod git**: Custom shader files in `engine/glsl/` (e.g., `postprocess_nuclearflash.frag`) are inside the .gitignored engine directory. They must be recreated after `make all` fetches the engine. Document any custom shader requirements in the mod repo for post-fetch setup.
+
+### Superweapon documentation audit (2026-07-25)
+
+- **FACTIONS.md can be stale — YAML is ground truth**: A full cross-reference of all superweapon and support power YAML traits against `FACTIONS.md` found 14 discrepancies. The docs had incorrect names (e.g., "Tiberian Wildlife Rampage" for Forgotten's actual nuclear missile, "Satellite Hack" for CABAL which was unimplemented), missing support powers (Force Shield, Chrono Reinforcements, EMP Disable, Traitors, Slow, Invisibility, Bloodlust, Haste), and missing reference table entries (Drop Pods, Federation Support Teleport). Always verify against YAML before trusting documentation.
+- **Harkonnen Palace has `^PrimarySuperweapon` but NO power trait**: The building inherits the superweapon template and has `SupportPowerChargeBar` but no actual `NukePower`/`DetonateWeaponPower`/etc. The Death Hand Missile described in faction YAML is unimplemented. This is a parked faction, not a regression.
+- **WIP faction superweapons exist in `rules/` YAML**: Warzone 2100, Worms, Win98, Warcraft 1, and WH40K all have superweapon traits in `rules/*.yaml` (not yet migrated to ContentPacks). These should be documented in FACTIONS.md only when the factions become active.
+- **Outpost 2 superweapon is in `rules/outpost2.yaml`, not ContentPacks**: The Supernova Missile uses `NukePower` with `supernova_missile_super` weapon, charge 9000, on `EDEN_OBSERVATORY` and `PLYMOUTH_OBSERVATORY`. FACTIONS.md was already correct for this.
+- **Audit raw data location**: `docs/audit/latest/superweapon_audit.yaml` contains the full cross-reference with all primary/secondary superweapons, support powers, critical findings, and WIP faction discoveries.

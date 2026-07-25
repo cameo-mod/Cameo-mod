@@ -2191,7 +2191,7 @@ CITYE6:
 ########################################
 
 simcity_smg:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Submachine Guns
 	Buildable:
@@ -2208,7 +2208,7 @@ simcity_smg:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_bpv:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bulletproof vests
 	Buildable:
@@ -2225,7 +2225,7 @@ simcity_bpv:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_gl:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Grenade Launcher
 	Buildable:
@@ -2242,7 +2242,7 @@ simcity_gl:
 	ProvidesPrerequisite@upgradename:
 	
 simcity_taser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Taser Speed
 	Buildable:

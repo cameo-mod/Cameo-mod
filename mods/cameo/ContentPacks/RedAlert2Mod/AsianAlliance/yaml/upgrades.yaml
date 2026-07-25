@@ -3,7 +3,7 @@
 ####################################################################################################
 
 cgcnst_infiltrated.asian:
-	Inherits: ^researched_upgrade.template
+	Inherits: ^ResearchedUpgradeTemplate
 	Tooltip:
 		Name: Stolen Asian Buildings Plans
 	Buildable:
@@ -13,7 +13,7 @@ cgcnst_infiltrated.asian:
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: asianalliance_asianconstructionyard
 asianalliance_doctrine_modernizedinfantryequipment:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Modernized Infantry Equipment
 	Buildable:
@@ -23,7 +23,7 @@ asianalliance_doctrine_modernizedinfantryequipment:
 		Image: asianalliance_doctrine_modernizedinfantryequipment
 
 asianalliance_doctrine_heavypulverizerweapons:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Heavy Pulverizer Weapons
 	Buildable:
@@ -33,7 +33,7 @@ asianalliance_doctrine_heavypulverizerweapons:
 		Image: asianalliance_doctrine_heavypulverizerweapons
 
 asianalliance_doctrine_asianphalanx:
-	Inherits: ^doctrine_template
+	Inherits: ^DoctrineTemplate
 	Tooltip:
 		Name: Asian Phalanx
 	Buildable:
@@ -44,7 +44,7 @@ asianalliance_doctrine_asianphalanx:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_massparadrop:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Mass Paradrop
 	Buildable:
@@ -57,7 +57,7 @@ asianalliance_upgrade_massparadrop:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_clusterbombs:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Cluster Bombs
 	Buildable:
@@ -70,7 +70,7 @@ asianalliance_upgrade_clusterbombs:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_chaosbombs:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Unlock Chaos Bombs
 	Buildable:
@@ -83,7 +83,7 @@ asianalliance_upgrade_chaosbombs:
 	ProvidesPrerequisite:
 
 up_tsunami.asian:
-	Inherits: ^unit_upgrade_template
+	Inherits: ^UnitUpgradeTemplate
 	Tooltip:
 		Name: Tsunami Carrier Upgrade
 	Buildable:
@@ -94,7 +94,7 @@ up_tsunami.asian:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_dragonfire:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Dragon Fire
 	Buildable:
@@ -105,7 +105,7 @@ asianalliance_upgrade_dragonfire:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_celestialpower:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Celestial Power
 	Buildable:
@@ -116,7 +116,7 @@ asianalliance_upgrade_celestialpower:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_banzaimode:
-	Inherits: ^tech_upgrade_template
+	Inherits: ^TechUpgradeTemplate
 	Tooltip:
 		Name: Banzai Mode
 	Buildable:
@@ -127,7 +127,7 @@ asianalliance_upgrade_banzaimode:
 	ProvidesPrerequisite:
 
 asianalliance_upgrade_wayofthedragon:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Way of the Dragon
 	Buildable:
@@ -139,7 +139,7 @@ asianalliance_upgrade_wayofthedragon:
 		Actor: up_dragonway_proxy_actor.asian
 
 up_dragonway_proxy_actor.asian:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Way of the Dragon
 	Buildable:
@@ -151,7 +151,7 @@ up_dragonway_proxy_actor.asian:
 		Prerequisite: asianalliance_upgrade_wayofthedragon
 
 asianalliance_upgrade_asiandiplomacy:
-	Inherits: ^team_upgrade_template
+	Inherits: ^TeamUpgradeTemplate
 	Tooltip:
 		Name: Asian Diplomacy
 	Buildable:
@@ -163,7 +163,7 @@ asianalliance_upgrade_asiandiplomacy:
 		Actor: up_team_diplomacy_proxy_actor.asian
 
 up_team_diplomacy_proxy_actor.asian:
-	Inherits: ^team_upgrade_proxy_actor
+	Inherits: ^TeamUpgradeProxyActor
 	Tooltip:
 		Name: Asian Diplomacy
 	Buildable:

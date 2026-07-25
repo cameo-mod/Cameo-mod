@@ -1,4 +1,4 @@
-########################################################
+﻿########################################################
 #	SW Meet CNC
 ########################################################
 
@@ -810,7 +810,7 @@ SWArtilleryShell3:
 SWNapalm:
 	ReloadDelay: 10
 	Burst: 3
-	BurstDelay: 1
+	BurstDelays: 1
 	Range: 3072
 	Inherits: Napalm
 	Burst: 3
@@ -839,7 +839,7 @@ SWNapalm:
 SWNapalm2:
 	ReloadDelay: 10
 	Burst: 5
-	BurstDelay: 1
+	BurstDelays: 1
 	Range: 5120
 	Inherits: Napalm
 	Burst: 5
@@ -863,7 +863,7 @@ SWNapalm2:
 SWNapalm3:
 	ReloadDelay: 10
 	Burst: 4
-	BurstDelay: 1
+	BurstDelays: 1
 	Range: 4096
 	Inherits: Napalm
 	Burst: 4

@@ -352,9 +352,7 @@
 	CloakPaletteEffect:
 	FlashPostProcessEffect@Nuke:
 		Type: Nuke
-	FlashPostProcessEffect@PulseWeapon:
-		Type: PulseWeapon
-		Color: FF884488
+	NuclearFlashRenderer:
 	RotationPaletteEffect@water:
 		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, volcanic, windows256
 		RotationBase: 32
@@ -561,6 +559,11 @@
 		BaseName: raplayer
 		BasePalette: ra
 		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+	ColorPickerPalette@colorpickerra:
+		Name: colorpickerra
+		BasePalette: ra
+		RemapIndex: 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95
+		AllowModifiers: false
 	PaletteFromFile@ra-noshadow:
 		Name: ra_noshadow
 		Filename: temperatra.pal

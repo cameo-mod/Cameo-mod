@@ -308,8 +308,7 @@ D2K_SiegeQuad:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-		MinimumLaunchAngle: 25
-		MaximumLaunchAngle: 125
+		LaunchAngle: 125
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -1099,7 +1098,6 @@ D2KRepair:
 	ReloadDelay: 80
 	Report: fixit1.aud
 	ValidTargets: Repair, lockdowned, ivanattached, Repairing
-	ValidStances: Ally
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 250
@@ -1987,15 +1985,6 @@ ixian_airdrone:
 		AimTargetStances: Enemy, Neutral
 
 	MinRange: 1300
-d2k_heavy_air_drone:
-	Inherits: ixian_airdrone
-	Range: 7100
-	ReloadDelay: 140
-	Burst: 8
-	Warhead@Shrapnel: FireShrapnel
-		Amount: 4
-
-	MinRange: 1420
 d2k_kwny_fighter:
 	Inherits: PhoenixRocket
 	ReloadDelay: 75
@@ -2221,7 +2210,7 @@ d2k_sard_crossbow:
 #       OG DUNE 2000
 ###################################################
 
-^oCannon:
+^OCannon:
 	Inherits: ^MediumCannon
 	ReloadDelay: 50
 	Range: 4096
@@ -2245,7 +2234,7 @@ d2k_sard_crossbow:
 		Damage: 540
 
 o110mm_Gun:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 	ReloadDelay: 35
 	Range: 5120
 	Report: TURRET1.WAV
@@ -2258,18 +2247,18 @@ o110mm_Gun:
 		Damage: 2900
 
 o80mm_A:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 
 o80mm_H:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 	ReloadDelay: 55
 
 o80mm_O:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 	ReloadDelay: 45
 
 oDevBullet:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 	ReloadDelay: 75
 	Report: TANKHVY1.WAV
 	Projectile: Bullet
@@ -2296,7 +2285,7 @@ oDevBullet:
 		ImpactSounds: EXPLMD4.WAV
 
 o155mm:
-	Inherits: ^oCannon
+	Inherits: ^OCannon
 	ReloadDelay: 80
 	Range: 5632
 	Report: MORTAR1.WAV
@@ -2330,7 +2319,7 @@ o155mm:
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
 
-^oRocket:
+^ORocket:
 	ReloadDelay: 40
 	Range: 3072
 	Report: ROCKET1.WAV
@@ -2368,8 +2357,8 @@ o155mm:
 	Warhead@3Concrete: DamagesConcrete
 		Damage: 240
 
-^oMissile:
-	Inherits: ^oRocket
+^OMissile:
+	Inherits: ^ORocket
 	ReloadDelay: 60
 	Range: 5500
 	MinRange: 1100
@@ -2404,10 +2393,10 @@ o155mm:
 		ImpactSounds: EXPLSML1.WAV
 
 oBazooka:
-	Inherits: ^oRocket
+	Inherits: ^ORocket
 
 oRocket:
-	Inherits: ^oRocket
+	Inherits: ^ORocket
 	ReloadDelay: 30
 	Range: 3584
 	Projectile: Bullet
@@ -2431,7 +2420,7 @@ oRocket:
 		ExplosionPalette: effect75alpha
 
 oTowerMissile:
-	Inherits: ^oMissile
+	Inherits: ^OMissile
 	ReloadDelay: 60
 	Burst: 2
 	BurstDelays: 60
@@ -2443,7 +2432,7 @@ oTowerMissile:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 
 omtank_pri:
-	Inherits: ^oMissile
+	Inherits: ^OMissile
 	ReloadDelay: 115
 	Burst: 2
 	BurstDelays: 115
@@ -2460,7 +2449,7 @@ omtank_pri:
 
 	MinRange: 1230
 oDeviatorMissile:
-	Inherits: ^oMissile
+	Inherits: ^OMissile
 	ReloadDelay: 160
 	Range: 5120
 	Report: MISSLE1.WAV
@@ -2777,7 +2766,7 @@ oPlasmaExplosion:
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 20000
 
-^oMG:
+^OMG:
 	ReloadDelay: 30
 	Range: 2560
 	Report: MGUN2.WAV
@@ -2803,10 +2792,10 @@ oPlasmaExplosion:
 		Damage: 1250
 
 oLMG:
-	Inherits: ^oMG
+	Inherits: ^OMG
 
 oFremen_S:
-	Inherits: ^oMG
+	Inherits: ^OMG
 	ReloadDelay: 40
 	Report: FREMODD1.WAV
 	Warhead@2Eff: CreateEffect
@@ -2814,7 +2803,7 @@ oFremen_S:
 		ExplosionPalette: effect75alpha
 
 oM_LMG:
-	Inherits: ^oMG
+	Inherits: ^OMG
 	ReloadDelay: 40
 
 oM_LMG_H:
@@ -2822,7 +2811,7 @@ oM_LMG_H:
 	ReloadDelay: 50
 
 oM_HMG:
-	Inherits: ^oMG
+	Inherits: ^OMG
 	ReloadDelay: 40
 	Range: 3584
 	Report: 20MMGUN1.WAV
@@ -2854,7 +2843,7 @@ oFremen_L:
 		Explosions: small_explosion
 
 oHMG:
-	Inherits: ^oMG
+	Inherits: ^OMG
 	ReloadDelay: 20
 	Range: 3072
 	Report: 20MMGUN1.WAV
@@ -3510,6 +3499,9 @@ PulseMissile:
 		Duration: 20
 		Intensity: 5
 		Multiplier: 1,1
-	Warhead@FlashEffect: FlashEffect
-		Duration: 20
-		FlashType: PulseWeapon
+	Warhead@NuclearFlash: NuclearFlashEffect
+		Color: 32C8FF
+		Duration: 40
+		Radius: 0.35
+		Brightness: 1.3
+		Darkness: 0.85

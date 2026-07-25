@@ -40,7 +40,7 @@
        }
       ],
       "weapon": "BlackHawkCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -152,7 +152,7 @@
        }
       ],
       "weapon": "MigMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -217,7 +217,7 @@
        }
       ],
       "weapon": "MigMissilesE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -282,7 +282,7 @@
        }
       ],
       "weapon": "MigMissiles_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -347,7 +347,7 @@
        }
       ],
       "weapon": "MigMissiles_AA_ELITE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -458,7 +458,7 @@
        }
       ],
       "weapon": "YakovlevCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -525,7 +525,7 @@
        }
       ],
       "weapon": "YakovlevCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -592,7 +592,7 @@
        }
       ],
       "weapon": "YakovlevCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -876,7 +876,7 @@
        }
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^RA2FlakWeapon"
@@ -918,7 +918,7 @@
        }
       ],
       "weapon": "LatinAADefenderCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^RA2FlakWeapon"
@@ -1052,7 +1052,7 @@
        }
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -1105,7 +1105,7 @@
        }
       ],
       "weapon": "LatinSentryMGE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -1367,7 +1367,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1385,7 +1385,7 @@
     },
     "name": "Syndicate Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1564,7 +1564,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Valued.Cost",
      "v": "500"
     },
     "design": {
@@ -1576,7 +1576,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Health.HP",
      "v": "5000"
     },
     "name": "Engineer",
@@ -1592,7 +1592,7 @@
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/infantry.yaml#Mobile.Speed",
      "v": "50"
     }
    },
@@ -1646,7 +1646,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1699,7 +1699,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1758,7 +1758,7 @@
        }
       ],
       "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -1815,7 +1815,7 @@
        }
       ],
       "weapon": "RA2FreedomRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -1871,7 +1871,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1925,7 +1925,7 @@
        }
       ],
       "weapon": "RA2FreedomAK47E",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -1984,7 +1984,7 @@
        }
       ],
       "weapon": "RA2FreedomRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -2041,7 +2041,7 @@
        }
       ],
       "weapon": "RA2FreedomRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^ShrapnelWeapon",
@@ -2156,7 +2156,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2220,7 +2220,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2284,7 +2284,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2349,7 +2349,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2414,7 +2414,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2479,7 +2479,7 @@
        }
       ],
       "weapon": "LatinMonkeyGrenade3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -2590,7 +2590,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2658,7 +2658,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncherE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2729,7 +2729,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2798,7 +2798,7 @@
        }
       ],
       "weapon": "SyndicateFireballLauncherE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -2873,7 +2873,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2904,7 +2904,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -2986,7 +2986,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3070,7 +3070,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3105,7 +3105,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3137,7 +3137,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_ak47_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms"
       ]
@@ -3220,7 +3220,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3305,7 +3305,7 @@
        }
       ],
       "weapon": "latinsyndicate_latinmilitia_molotov_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3384,7 +3384,7 @@
        }
       ],
       "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3414,7 +3414,7 @@
        }
       ],
       "weapon": "LatinTankKillerRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3444,7 +3444,7 @@
        }
       ],
       "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3474,7 +3474,7 @@
        }
       ],
       "weapon": "LatinTankKillerRocket_elite",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2LightMissile"
       ]
@@ -3549,7 +3549,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3585,7 +3585,7 @@
        }
       ],
       "weapon": "NarcoGrenadeE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3614,7 +3614,7 @@
        }
       ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3645,7 +3645,7 @@
        }
       ],
       "weapon": "RA2NarcoPistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3680,7 +3680,7 @@
        }
       ],
       "weapon": "NarcoGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3717,7 +3717,7 @@
        }
       ],
       "weapon": "NarcoGrenadeE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -3747,7 +3747,7 @@
        }
       ],
       "weapon": "RA2NarcoPistol",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3779,7 +3779,7 @@
        }
       ],
       "weapon": "RA2NarcoPistolsE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -3814,7 +3814,7 @@
     "name": "Narco",
     "prerequisites": [
      "~latinsyndicate_combatbarracks",
-     "~latinsyndicate_promotion_unlocknarcos",
+     "~latinsyndicate_promotion_narcos",
      "latinsyndicate_latinempradar"
     ],
     "queue": [
@@ -3877,7 +3877,7 @@
     "name": "Terrorist",
     "prerequisites": [
      "~latinsyndicate_combatbarracks",
-     "~latinsyndicate_promotion_unlockterrorists"
+     "~latinsyndicate_promotion_terrorists"
     ],
     "queue": [
      "Infantry",
@@ -3953,7 +3953,7 @@
        }
       ],
       "weapon": "Rammax_Sabot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -4018,7 +4018,7 @@
        }
       ],
       "weapon": "Rammax_Sabot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^LaserWeapon",
@@ -4124,7 +4124,7 @@
        }
       ],
       "weapon": "RA2AkulaRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^RA2Grenade",
@@ -4231,7 +4231,7 @@
        }
       ],
       "weapon": "LatinSentryMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -4284,7 +4284,7 @@
        }
       ],
       "weapon": "LatinSentryMGE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^RA2SmallArms",
@@ -4336,7 +4336,7 @@
    }
   },
   "promotions": {
-   "latinsyndicate_promotion_unlockburritos": {
+   "latinsyndicate_promotion_burritos": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4345,22 +4345,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Burritos",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlockburritos",
-     "latinsyndicate_promotion_unlockcarteltrucks",
+     "!latinsyndicate_promotion_burritos",
+     "latinsyndicate_promotion_carteltrucks",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlockcarteltrucks": {
+   "latinsyndicate_promotion_carteltrucks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4369,22 +4369,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Cartel Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlockcarteltrucks",
-     "latinsyndicate_promotion_unlocknarcos",
+     "!latinsyndicate_promotion_carteltrucks",
+     "latinsyndicate_promotion_narcos",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlockdemolitiontrucks": {
+   "latinsyndicate_promotion_demolitiontrucks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4393,22 +4393,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Demolition Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "latinsyndicate_promotion_unlockterrorists",
-     "!latinsyndicate_promotion_unlockdemolitiontrucks",
+     "latinsyndicate_promotion_terrorists",
+     "!latinsyndicate_promotion_demolitiontrucks",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocklars": {
+   "latinsyndicate_promotion_lars": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4417,22 +4417,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock LARS",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlocklars",
-     "latinsyndicate_promotion_unlocklatinapc",
+     "!latinsyndicate_promotion_lars",
+     "latinsyndicate_promotion_latinapc",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocklatinapc": {
+   "latinsyndicate_promotion_latinapc": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4441,22 +4441,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Latin APC.",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlocklatinapc",
-     "latinsyndicate_promotion_unlocksmokertanks",
+     "!latinsyndicate_promotion_latinapc",
+     "latinsyndicate_promotion_smokertanks",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlockmortarbikes": {
+   "latinsyndicate_promotion_mortarbikes": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4465,21 +4465,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Mortar Bikes",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlockmortarbikes",
+     "!latinsyndicate_promotion_mortarbikes",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocknarcos": {
+   "latinsyndicate_promotion_narcos": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4488,22 +4488,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Narcos",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlocknarcos",
-     "latinsyndicate_promotion_unlockmortarbikes",
+     "!latinsyndicate_promotion_narcos",
+     "latinsyndicate_promotion_mortarbikes",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocknuketrucks": {
+   "latinsyndicate_promotion_nuketrucks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4512,22 +4512,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Nuke Trucks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "latinsyndicate_promotion_unlockdemolitiontrucks",
-     "!latinsyndicate_promotion_unlocknuketrucks",
+     "latinsyndicate_promotion_demolitiontrucks",
+     "!latinsyndicate_promotion_nuketrucks",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlockraiderbuggy": {
+   "latinsyndicate_promotion_raiderbuggy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4536,21 +4536,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Raider Buggy",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlockraiderbuggy",
+     "!latinsyndicate_promotion_raiderbuggy",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocksmokertanks": {
+   "latinsyndicate_promotion_smokertanks": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4559,22 +4559,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Smoker Tanks",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlocksmokertanks",
-     "latinsyndicate_promotion_unlockraiderbuggy",
+     "!latinsyndicate_promotion_smokertanks",
+     "latinsyndicate_promotion_raiderbuggy",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlockterrorists": {
+   "latinsyndicate_promotion_terrorists": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4583,21 +4583,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Terrorists",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "!latinsyndicate_promotion_unlockterrorists",
+     "!latinsyndicate_promotion_terrorists",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "latinsyndicate_promotion_unlocktopolm": {
+   "latinsyndicate_promotion_topolm": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -4606,15 +4606,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock TOPOL M",
     "prerequisites": [
      "~latinsyndicate_syndicateconstructionyard",
-     "latinsyndicate_promotion_unlocknuketrucks",
-     "!latinsyndicate_promotion_unlocktopolm",
+     "latinsyndicate_promotion_nuketrucks",
+     "!latinsyndicate_promotion_topolm",
      "rank1"
     ],
     "queue": [
@@ -4632,7 +4632,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4651,7 +4651,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4677,7 +4677,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4703,7 +4703,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "Doctrine",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4729,7 +4729,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4755,7 +4755,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4794,6 +4794,32 @@
      "Research"
     ]
    },
+   "latinsyndicate_upgrade_empcannon": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Unlock Emp Cannon",
+    "prerequisites": [
+     "~latinsyndicate_latinempradar",
+     "!latinsyndicate_upgrade_empcannon"
+    ],
+    "queue": [
+     "Upgrades"
+    ]
+   },
    "latinsyndicate_upgrade_sovietstolentechindustrialmethods": {
     "build_limit": {
      "src": "inherited",
@@ -4807,7 +4833,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4818,32 +4844,6 @@
     ],
     "queue": [
      "Research"
-    ]
-   },
-   "latinsyndicate_upgrade_unlockempcannon": {
-    "build_limit": {
-     "src": "inherited",
-     "v": "1"
-    },
-    "buildable": true,
-    "cost": {
-     "src": "inherited",
-     "v": "2500"
-    },
-    "design": {
-     "class_anchor": null,
-     "special": null,
-     "subtype": "Upgrade",
-     "tech_tier": null,
-     "unit_class": null
-    },
-    "name": "Unlock Emp Cannon",
-    "prerequisites": [
-     "~latinsyndicate_latinempradar",
-     "!latinsyndicate_upgrade_unlockempcannon"
-    ],
-    "queue": [
-     "Upgrades"
     ]
    },
    "latinsyndicate_upgrade_yuristolentechchainguns": {
@@ -4859,7 +4859,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4881,7 +4881,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4896,7 +4896,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4991,7 +4991,7 @@
        }
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^ShrapnelWeapon",
@@ -5086,7 +5086,7 @@
        }
       ],
       "weapon": "RA2RBurritoRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^ShrapnelWeapon",
@@ -5126,7 +5126,7 @@
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
      "latinsyndicate_defensebureau",
-     "~latinsyndicate_promotion_unlockburritos"
+     "~latinsyndicate_promotion_burritos"
     ],
     "queue": [
      "Vehicle",
@@ -5171,7 +5171,7 @@
        }
       ],
       "weapon": "RA2Narco60mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5202,7 +5202,7 @@
        }
       ],
       "weapon": "RA2Narco60mmE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumCannon"
       ]
@@ -5233,7 +5233,7 @@
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
      "latinsyndicate_spycenter",
-     "~latinsyndicate_promotion_unlockcarteltrucks"
+     "~latinsyndicate_promotion_carteltrucks"
     ],
     "queue": [
      "Vehicle",
@@ -5316,12 +5316,8 @@
      }
     ],
     "armor": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
      "v": "Light"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
     },
     "buildable": true,
     "cost": {
@@ -5348,7 +5344,7 @@
     "name": "Demolition Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlockdemolitiontrucks",
+     "~latinsyndicate_promotion_demolitiontrucks",
      "latinsyndicate_latinempradar"
     ],
     "queue": [
@@ -5356,11 +5352,11 @@
      "RAVehicle"
     ],
     "sight": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#RevealsShroud.Range",
      "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.Speed",
      "v": "100"
     },
     "turn_speed": {
@@ -5428,7 +5424,7 @@
        }
       ],
       "weapon": "DiabloCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5493,7 +5489,7 @@
        }
       ],
       "weapon": "DiabloCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5556,7 +5552,7 @@
        }
       ],
       "weapon": "DiabloCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5621,7 +5617,7 @@
        }
       ],
       "weapon": "DiabloCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -5744,7 +5740,7 @@
        }
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KRocket",
        "^HeavyAAWeapon",
@@ -5824,7 +5820,7 @@
        }
       ],
       "weapon": "RA2LarsRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KRocket",
        "^HeavyAAWeapon",
@@ -5863,7 +5859,7 @@
     "name": "LARS",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlocklars",
+     "~latinsyndicate_promotion_lars",
      "latinsyndicate_defensebureau"
     ],
     "queue": [
@@ -5942,7 +5938,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6006,7 +6002,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6068,7 +6064,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannonAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6132,7 +6128,7 @@
        }
       ],
       "weapon": "RA2APCFlakCannonAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^TankDestroyerCannon",
@@ -6177,7 +6173,7 @@
        }
       ],
       "weapon": "RA2APCMachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6219,7 +6215,7 @@
        }
       ],
       "weapon": "RA2APCMachineGunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6261,7 +6257,7 @@
        }
       ],
       "weapon": "RA2APCMachineGunAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6303,7 +6299,7 @@
        }
       ],
       "weapon": "RA2APCMachineGunAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -6368,7 +6364,7 @@
        }
       ],
       "weapon": "RA2APCRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6432,7 +6428,7 @@
        }
       ],
       "weapon": "RA2APCRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6496,7 +6492,7 @@
        }
       ],
       "weapon": "RA2APCRocketAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6560,7 +6556,7 @@
        }
       ],
       "weapon": "RA2APCRocketAAE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyAAWeapon",
@@ -6593,7 +6589,7 @@
     "name": "Latin APC",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlocklatinapc",
+     "~latinsyndicate_promotion_latinapc",
      "latinsyndicate_spycenter"
     ],
     "queue": [
@@ -6689,7 +6685,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -6772,7 +6768,7 @@
        }
       ],
       "weapon": "RA2RTruckRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2Grenade",
        "^LightFlameWeapon",
@@ -6811,7 +6807,7 @@
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
      "latinsyndicate_latinempradar",
-     "~!latinsyndicate_promotion_unlockburritos"
+     "~!latinsyndicate_promotion_burritos"
     ],
     "queue": [
      "Vehicle",
@@ -6932,7 +6928,7 @@
        }
       ],
       "weapon": "RA2MortarBike",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7039,7 +7035,7 @@
        }
       ],
       "weapon": "RA2MortarBikeE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7079,7 +7075,7 @@
     "name": "Mortar Bike",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlockmortarbikes"
+     "~latinsyndicate_promotion_mortarbikes"
     ],
     "queue": [
      "Vehicle",
@@ -7137,7 +7133,7 @@
        }
       ],
       "weapon": "RA2NarcoAKM",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7179,7 +7175,7 @@
        }
       ],
       "weapon": "RA2NarcoAKME",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7211,7 +7207,7 @@
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
      "latinsyndicate_spycenter",
-     "~!latinsyndicate_promotion_unlockcarteltrucks"
+     "~!latinsyndicate_promotion_carteltrucks"
     ],
     "queue": [
      "Vehicle",
@@ -7247,12 +7243,8 @@
      }
     ],
     "armor": {
-     "src": "inherited",
-     "v": "Superheavy"
-    },
-    "build_duration": {
-     "src": "inherited",
-     "v": "1500"
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Armor.Type",
+     "v": "Light"
     },
     "build_limit": {
      "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Buildable.BuildLimit",
@@ -7278,7 +7270,7 @@
     "name": "Nuke Truck",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlocknuketrucks",
+     "~latinsyndicate_promotion_nuketrucks",
      "latinsyndicate_spycenter"
     ],
     "queue": [
@@ -7286,11 +7278,11 @@
      "RAVehicle"
     ],
     "sight": {
-     "src": "inherited",
-     "v": "8000"
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#RevealsShroud.Range",
+     "v": "5c0"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/yaml/vehicles.yaml#Mobile.Speed",
      "v": "100"
     },
     "turn_speed": {
@@ -7337,7 +7329,7 @@
        }
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7379,7 +7371,7 @@
        }
       ],
       "weapon": "LatinBuggyMGE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -7442,7 +7434,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -7504,7 +7496,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -7579,7 +7571,7 @@
        }
       ],
       "weapon": "LatinBuggyRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7653,7 +7645,7 @@
        }
       ],
       "weapon": "LatinBuggyRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -7691,7 +7683,7 @@
     "name": "Raider Buggy",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlockraiderbuggy"
+     "~latinsyndicate_promotion_raiderbuggy"
     ],
     "queue": [
      "Vehicle",
@@ -7759,7 +7751,7 @@
        }
       ],
       "weapon": "RA2Gren60mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2MediumCannon",
@@ -7813,7 +7805,7 @@
        }
       ],
       "weapon": "RA2Gren60mmE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2HeavyCannon",
        "^RA2MediumCannon",
@@ -7844,7 +7836,7 @@
        }
       ],
       "weapon": "LatinRusherRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -7873,7 +7865,7 @@
        }
       ],
       "weapon": "LatinRusherRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -7903,7 +7895,7 @@
     "name": "Rusher Tank",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~!latinsyndicate_promotion_unlocksmokertanks"
+     "~!latinsyndicate_promotion_smokertanks"
     ],
     "queue": [
      "Vehicle",
@@ -8019,7 +8011,7 @@
        }
       ],
       "weapon": "LatinSmokerCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumFlameWeapon",
@@ -8122,7 +8114,7 @@
        }
       ],
       "weapon": "LatinSmokerCannonE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^MediumFlameWeapon",
@@ -8186,7 +8178,7 @@
        }
       ],
       "weapon": "RA2GrenadePack",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^Grenade",
@@ -8245,7 +8237,7 @@
        }
       ],
       "weapon": "RA2GrenadePackE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^Grenade",
@@ -8277,7 +8269,7 @@
        }
       ],
       "weapon": "LatinSmokerRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -8306,7 +8298,7 @@
        }
       ],
       "weapon": "LatinSmokerRocketE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2MediumMissile"
       ]
@@ -8341,7 +8333,7 @@
     "name": "Smoker Tank",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlocksmokertanks"
+     "~latinsyndicate_promotion_smokertanks"
     ],
     "queue": [
      "Vehicle",
@@ -8525,7 +8517,7 @@
        }
       ],
       "weapon": "RA2TOPOLCuba",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^NuclearWarhead",
        "^HeavyBomb",
@@ -8564,7 +8556,7 @@
     "name": "Topol-M",
     "prerequisites": [
      "~latinsyndicate_syndicatefactory",
-     "~latinsyndicate_promotion_unlocktopolm",
+     "~latinsyndicate_promotion_topolm",
      "latinsyndicate_defensebureau"
     ],
     "queue": [
@@ -8623,7 +8615,7 @@
        }
       ],
       "weapon": "LatinBuggyMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8665,7 +8657,7 @@
        }
       ],
       "weapon": "LatinBuggyMGE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -8728,7 +8720,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -8790,7 +8782,7 @@
        }
       ],
       "weapon": "LatinBuggyChaingunE",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -8929,7 +8921,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"
@@ -9058,7 +9050,7 @@
        }
       ],
       "weapon": "RA220mmrapid",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RA2SmallArms",
        "^RA2Chaingun"

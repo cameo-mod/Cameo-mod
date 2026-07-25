@@ -31,7 +31,7 @@
        }
       ],
       "weapon": "HeliGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -62,7 +62,7 @@
        }
       ],
       "weapon": "HeliMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -125,7 +125,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Health.HP",
      "v": "100000"
     },
     "name": "Nod Chinook Transport",
@@ -141,7 +141,7 @@
      "v": "9000"
     },
     "speed_air": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/aircraft.yaml#Aircraft.Speed",
      "v": "150"
     }
    },
@@ -213,7 +213,7 @@
        }
       ],
       "weapon": "VenomLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^FlakWeapon",
@@ -275,7 +275,7 @@
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/buildings.yaml#Valued.Cost",
      "v": "800"
     },
     "design": {
@@ -387,7 +387,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -405,7 +405,7 @@
     },
     "name": "Nod Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -434,7 +434,7 @@
       ],
       "warheads": [
        {
-        "damage": "6000",
+        "damage": "1000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -485,7 +485,7 @@
        }
       ],
       "weapon": "TurretGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^Grenade",
@@ -528,7 +528,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "6000",
+        "damage": "1000",
         "tag": "ShrapnelWeapon",
         "type": "SpreadDamage"
        },
@@ -579,7 +579,7 @@
        }
       ],
       "weapon": "TurretGunBlackMarket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyCannon",
@@ -795,7 +795,7 @@
        }
       ],
       "weapon": "NodTurretLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -899,7 +899,7 @@
        }
       ],
       "weapon": "LaserObelisk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1022,7 +1022,7 @@
        }
       ],
       "weapon": "Dragon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^ImpactGlow",
@@ -1221,7 +1221,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -1257,7 +1257,7 @@
        }
       ],
       "weapon": "BlackHandFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -1288,7 +1288,7 @@
     "prerequisites": [
      "~td_nod_handofnod",
      "td_nod_communicationscenter",
-     "~td_nod_promotion_unlockblackhandflamer"
+     "~td_nod_promotion_blackhandflamer"
     ],
     "queue": [
      "Infantry",
@@ -1360,7 +1360,7 @@
        }
       ],
       "weapon": "ChemRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightChemicalWeapon",
@@ -1423,7 +1423,7 @@
        }
       ],
       "weapon": "ChemRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightChemicalWeapon",
@@ -1455,7 +1455,7 @@
     "name": "Chemical Rocket Soldier",
     "prerequisites": [
      "~td_nod_handofnod",
-     "~td_nod_promotion_unlockchemicalrocketsoldier"
+     "~td_nod_promotion_chemicalrocketsoldier"
     ],
     "queue": [
      "Infantry",
@@ -1500,7 +1500,7 @@
        }
       ],
       "weapon": "Chemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1534,7 +1534,7 @@
        }
       ],
       "weapon": "Chemspray",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon"
       ]
@@ -1636,7 +1636,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1665,7 +1665,7 @@
        }
       ],
       "weapon": "td_gdi_commando_sniper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SniperWeapon"
       ]
@@ -1676,12 +1676,12 @@
      "v": "Heroic"
     },
     "build_limit": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Buildable.BuildLimit",
      "v": "1"
     },
     "buildable": true,
     "cost": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Valued.Cost",
      "v": "3000"
     },
     "design": {
@@ -1693,7 +1693,7 @@
      "unit_class": null
     },
     "hp": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Health.HP",
      "v": "80000"
     },
     "name": "Nod Commando",
@@ -1711,7 +1711,7 @@
      "v": "10000"
     },
     "speed": {
-     "src": "inherited",
+     "src": "mods/cameo/ContentPacks/TiberianDawn/Nod/yaml/infantry.yaml#Mobile.Speed",
      "v": "65"
     }
    },
@@ -1745,7 +1745,7 @@
        }
       ],
       "weapon": "Flamethrower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -1779,7 +1779,7 @@
        }
       ],
       "weapon": "Flamethrower",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -1810,7 +1810,7 @@
     "prerequisites": [
      "~td_nod_handofnod",
      "td_nod_communicationscenter",
-     "~!td_nod_promotion_unlockblackhandflamer"
+     "~!td_nod_promotion_blackhandflamer"
     ],
     "queue": [
      "Infantry",
@@ -1840,7 +1840,7 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
+        "damage": "1000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -1856,7 +1856,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1874,7 +1874,7 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
+        "damage": "1000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -1890,7 +1890,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -1908,7 +1908,7 @@
       ],
       "warheads": [
        {
-        "damage": "12000",
+        "damage": "1000",
         "tag": "LaserWeapon",
         "type": "SpreadDamage"
        },
@@ -1924,7 +1924,7 @@
        }
       ],
       "weapon": "NodCommandoLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -2040,7 +2040,7 @@
        }
       ],
       "weapon": "BlackHandLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -2098,7 +2098,7 @@
        }
       ],
       "weapon": "BlackHandLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^FlakWeapon",
@@ -2136,7 +2136,7 @@
     "prerequisites": [
      "~td_nod_handofnod",
      "td_nod_templeprime",
-     "~td_nod_promotion_unlocklasertrooper"
+     "~td_nod_promotion_lasertrooper"
     ],
     "queue": [
      "Infantry",
@@ -2179,7 +2179,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2211,7 +2211,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -2269,7 +2269,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun_laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2330,7 +2330,7 @@
        }
       ],
       "weapon": "td_nod_minigunner_minigun_laser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -2406,7 +2406,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2435,7 +2435,7 @@
        }
       ],
       "weapon": "Rockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile"
       ]
@@ -2465,7 +2465,7 @@
     "name": "Nod Rocket Soldier",
     "prerequisites": [
      "~td_nod_handofnod",
-     "~!td_nod_promotion_unlockchemicalrocketsoldier"
+     "~!td_nod_promotion_chemicalrocketsoldier"
     ],
     "queue": [
      "Infantry",
@@ -2561,7 +2561,7 @@
        }
       ],
       "weapon": "BHRedDarts",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TankDestroyerCannon",
@@ -2650,7 +2650,7 @@
        }
       ],
       "weapon": "BHRedDarts",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon",
        "^TankDestroyerCannon",
@@ -2794,7 +2794,7 @@
        }
       ],
       "weapon": "NodTorpTube",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^HeavyMissile"
@@ -2837,7 +2837,7 @@
        }
       ],
       "weapon": "NodTorpTubeBlackMarket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^HeavyMissile"
@@ -2917,7 +2917,7 @@
        }
       ],
       "weapon": "CorvetteLaserObelisk",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon"
       ]
@@ -2949,7 +2949,7 @@
        }
       ],
       "weapon": "CorvetteDragon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^ImpactGlow"
@@ -3086,7 +3086,7 @@
        }
       ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -3146,7 +3146,7 @@
    }
   },
   "promotions": {
-   "td_nod_promotion_unlockblackhandflamer": {
+   "td_nod_promotion_blackhandflamer": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3155,21 +3155,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Black Hand Flamer",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockblackhandflamer",
+     "!td_nod_promotion_blackhandflamer",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockbuggymkii": {
+   "td_nod_promotion_buggymkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3178,21 +3178,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Buggy Mk. II",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockbuggymkii",
+     "!td_nod_promotion_buggymkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockchemicalattackbike": {
+   "td_nod_promotion_chemicalattackbike": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3201,22 +3201,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chemical Attack Bike",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockchemicalattackbike",
-     "td_nod_promotion_unlockchemicalrocketsoldier",
+     "!td_nod_promotion_chemicalattackbike",
+     "td_nod_promotion_chemicalrocketsoldier",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockchemicalrocketsoldier": {
+   "td_nod_promotion_chemicalrocketsoldier": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3225,21 +3225,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chemical Rocket Soldier",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockchemicalrocketsoldier",
+     "!td_nod_promotion_chemicalrocketsoldier",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockchemicalssmlauncher": {
+   "td_nod_promotion_chemicalssmlauncher": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3248,22 +3248,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chemical SSM Launcher",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockchemicalssmlauncher",
-     "td_nod_promotion_unlockchemicalstealthtank",
+     "!td_nod_promotion_chemicalssmlauncher",
+     "td_nod_promotion_chemicalstealthtank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockchemicalstealthtank": {
+   "td_nod_promotion_chemicalstealthtank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3272,22 +3272,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Chemical Stealth Tank",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockchemicalstealthtank",
-     "td_nod_promotion_unlockchemicalattackbike",
+     "!td_nod_promotion_chemicalstealthtank",
+     "td_nod_promotion_chemicalattackbike",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockflametankmkii": {
+   "td_nod_promotion_flametankmkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3296,22 +3296,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Flame Tank Mk. II",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockflametankmkii",
-     "td_nod_promotion_unlocklighttankmkii",
+     "!td_nod_promotion_flametankmkii",
+     "td_nod_promotion_lighttankmkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlocklasertrooper": {
+   "td_nod_promotion_lasertrooper": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3320,22 +3320,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Laser Trooper",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlocklasertrooper",
-     "td_nod_promotion_unlockflametankmkii",
+     "!td_nod_promotion_lasertrooper",
+     "td_nod_promotion_flametankmkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlocklighttankmkii": {
+   "td_nod_promotion_lighttankmkii": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3344,22 +3344,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Light Tank Mk. II",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlocklighttankmkii",
-     "td_nod_promotion_unlockbuggymkii",
+     "!td_nod_promotion_lighttankmkii",
+     "td_nod_promotion_buggymkii",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "td_nod_promotion_unlockspecter": {
+   "td_nod_promotion_specter": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3368,14 +3368,14 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Specter",
     "prerequisites": [
      "~td_nod_constructionyard",
-     "!td_nod_promotion_unlockspecter",
+     "!td_nod_promotion_specter",
      "td_nod_promotion_upgradeupnodstealthname",
      "rank1"
     ],
@@ -3392,7 +3392,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3400,7 +3400,7 @@
     "prerequisites": [
      "~td_nod_constructionyard",
      "!td_nod_promotion_upgradeupnodstealthname",
-     "td_nod_promotion_unlockblackhandflamer",
+     "td_nod_promotion_blackhandflamer",
      "rank1"
     ],
     "queue": [
@@ -3416,7 +3416,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3424,7 +3424,7 @@
     "prerequisites": [
      "~td_nod_constructionyard",
      "!td_nod_promotion_upgradeupnodvenomname",
-     "td_nod_promotion_unlockspecter",
+     "td_nod_promotion_specter",
      "rank1"
     ],
     "queue": [
@@ -3474,7 +3474,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3500,7 +3500,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3527,7 +3527,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3553,7 +3553,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3580,7 +3580,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3606,7 +3606,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3632,7 +3632,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3654,7 +3654,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3710,7 +3710,7 @@
        }
       ],
       "weapon": "ArtilleryShell",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon"
@@ -3816,7 +3816,7 @@
        }
       ],
       "weapon": "ArtilleryShellUpgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -3852,7 +3852,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_communicationscenter",
-     "~!td_nod_promotion_unlockspecter"
+     "~!td_nod_promotion_specter"
     ],
     "queue": [
      "Vehicle",
@@ -3898,7 +3898,7 @@
        }
       ],
       "weapon": "MachineGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -3934,7 +3934,7 @@
        }
       ],
       "weapon": "FireballLauncherBuggy",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -3964,7 +3964,7 @@
     "name": "Nod Buggy",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~!td_nod_promotion_unlockbuggymkii"
+     "~!td_nod_promotion_buggymkii"
     ],
     "queue": [
      "Vehicle",
@@ -4032,7 +4032,7 @@
        }
       ],
       "weapon": "MachineGunBuggy2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4102,7 +4102,7 @@
        }
       ],
       "weapon": "FireballLauncherBuggy2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^HeavyFlameWeapon",
@@ -4154,7 +4154,7 @@
        }
       ],
       "weapon": "MachineGunBuggy2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4219,7 +4219,7 @@
        }
       ],
       "weapon": "LaserBuggy2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -4282,7 +4282,7 @@
        }
       ],
       "weapon": "LaserBuggy2AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile",
@@ -4319,7 +4319,7 @@
     "name": "Nod Buggy Mk. II",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~td_nod_promotion_unlockbuggymkii"
+     "~td_nod_promotion_buggymkii"
     ],
     "queue": [
      "Vehicle",
@@ -4426,7 +4426,7 @@
        }
       ],
       "weapon": "ChemicalBikeRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -4459,7 +4459,7 @@
     "name": "Chemical Attack Bike",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~td_nod_promotion_unlockchemicalattackbike"
+     "~td_nod_promotion_chemicalattackbike"
     ],
     "queue": [
      "Vehicle",
@@ -4547,7 +4547,7 @@
        }
       ],
       "weapon": "ChemicalHonestJohn",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyBomb",
@@ -4581,7 +4581,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_templeprime",
-     "~td_nod_promotion_unlockchemicalssmlauncher"
+     "~td_nod_promotion_chemicalssmlauncher"
     ],
     "queue": [
      "Vehicle",
@@ -4657,7 +4657,7 @@
        }
       ],
       "weapon": "ChemicalStealthTankMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^MediumChemicalWeapon",
@@ -4690,7 +4690,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_templeofnod",
-     "~td_nod_promotion_unlockchemicalstealthtank"
+     "~td_nod_promotion_chemicalstealthtank"
     ],
     "queue": [
      "Vehicle",
@@ -4741,7 +4741,7 @@
        }
       ],
       "weapon": "BigFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -4772,7 +4772,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_communicationscenter",
-     "~!td_nod_promotion_unlockflametankmkii"
+     "~!td_nod_promotion_flametankmkii"
     ],
     "queue": [
      "Vehicle",
@@ -4823,7 +4823,7 @@
        }
       ],
       "weapon": "BigFlamer2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyFlameWeapon"
       ]
@@ -4854,7 +4854,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_communicationscenter",
-     "~td_nod_promotion_unlockflametankmkii"
+     "~td_nod_promotion_flametankmkii"
     ],
     "queue": [
      "Vehicle",
@@ -4898,7 +4898,7 @@
        }
       ],
       "weapon": "70mm",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -4927,7 +4927,7 @@
        }
       ],
       "weapon": "LTNKMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -4957,7 +4957,7 @@
     "name": "Nod Light Tank",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~!td_nod_promotion_unlocklighttankmkii"
+     "~!td_nod_promotion_lighttankmkii"
     ],
     "queue": [
      "Vehicle",
@@ -5039,7 +5039,7 @@
        }
       ],
       "weapon": "LightTank2Cannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightChemicalWeapon",
        "^MediumCannon"
@@ -5085,7 +5085,7 @@
        }
       ],
       "weapon": "LightTank2Missiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumMissile"
@@ -5116,7 +5116,7 @@
     "name": "Light Tank Mk. II",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~td_nod_promotion_unlocklighttankmkii"
+     "~td_nod_promotion_lighttankmkii"
     ],
     "queue": [
      "Vehicle",
@@ -5271,7 +5271,7 @@
        }
       ],
       "weapon": "BikeRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^ShrapnelWeapon",
@@ -5304,7 +5304,7 @@
     "name": "Recon Bike",
     "prerequisites": [
      "~td_nod_airstrip",
-     "~!td_nod_promotion_unlockchemicalattackbike"
+     "~!td_nod_promotion_chemicalattackbike"
     ],
     "queue": [
      "Vehicle",
@@ -5372,7 +5372,7 @@
        }
       ],
       "weapon": "SpecterArtilleryShell",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5500,7 +5500,7 @@
        }
       ],
       "weapon": "SpecterArtilleryShellUpgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumChemicalWeapon",
        "^MediumFlameWeapon",
@@ -5539,7 +5539,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_communicationscenter",
-     "~td_nod_promotion_unlockspecter"
+     "~td_nod_promotion_specter"
     ],
     "queue": [
      "Vehicle",
@@ -5645,7 +5645,7 @@
        }
       ],
       "weapon": "HonestJohn",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumFlameWeapon",
@@ -5680,7 +5680,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_templeofnod",
-     "~!td_nod_promotion_unlockchemicalssmlauncher"
+     "~!td_nod_promotion_chemicalssmlauncher"
     ],
     "queue": [
      "Vehicle",
@@ -5775,7 +5775,7 @@
        }
       ],
       "weapon": "StealthTankMissiles",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5806,7 +5806,7 @@
        }
       ],
       "weapon": "StealthTankMissilesBlackMarket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile"
       ]
@@ -5842,7 +5842,7 @@
     "prerequisites": [
      "~td_nod_airstrip",
      "td_nod_templeofnod",
-     "~!td_nod_promotion_unlockchemicalstealthtank"
+     "~!td_nod_promotion_chemicalstealthtank"
     ],
     "queue": [
      "Vehicle",

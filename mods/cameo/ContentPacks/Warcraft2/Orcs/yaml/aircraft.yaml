@@ -1,7 +1,7 @@
 wc2_orcs_goblinzeppelin:
 	Inherits@WC2AirUnit: ^WC2AirUnit
-	Inherits@WC2Template: ^wc2_airscout
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
+	Inherits@WC2Template: ^WC2AirScout
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
 	Tooltip:
 		Name: Goblin Zeppelin
 	Buildable:
@@ -18,8 +18,8 @@ wc2_orcs_dragon:
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2OShieldUpg: ^wc2_orcs_upgrade_armorstrength
-	Inherits@OCannonUpg: ^wc2_orcs_upgrade_cannondamage
+	Inherits@WC2OShieldUpg: ^WC2OrcsUpgradeArmorStrength
+	Inherits@OCannonUpg: ^WC2OrcsUpgradeCannonDamage
 	Tooltip:
 		Name: Dragon
 	Valued:

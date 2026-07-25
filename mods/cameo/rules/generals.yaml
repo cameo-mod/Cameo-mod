@@ -593,7 +593,7 @@ GLAHole2x2Defense:
 	RenderSprites:
 		Image: glhole
 upgecapture:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Capture Building
 	Buildable:
@@ -677,7 +677,7 @@ GENE6:
 	# 	StartFullyCharged: true
 	SupportPowerChargeBar:
 
-^usa_switchable_upgrades:
+^USASwitchableUpgrades:
 	GrantConditionOnPrerequisite@usabombardmentc:
 		Condition: usabombardmentc
 		Prerequisites: usabombardmentc
@@ -1384,7 +1384,7 @@ GENE6:
 
 
 upemergencyrepair1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair
 	Buildable:
@@ -1398,7 +1398,7 @@ upemergencyrepair1:
 		Prerequisite: upemergencyrepair1
 
 upemergencyrepair2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair 2
 	Buildable:
@@ -1412,7 +1412,7 @@ upemergencyrepair2:
 		Prerequisite: upemergencyrepair2
 
 upemergencyrepair3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Emergency Repair 3
 	Buildable:
@@ -1688,7 +1688,7 @@ usabomber.motherbomb:
 ##################################################
 
 selectglanormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal General
 	Buildable:
@@ -1705,7 +1705,7 @@ selectglanormal:
 		Prerequisite: selectglanormal
 
 selectglatoxin:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Toxin General
 	Buildable:
@@ -1726,7 +1726,7 @@ selectglatoxin:
 		Prerequisite: upantraxbeta
 
 selectglademo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demolition General
 	Buildable:
@@ -1745,7 +1745,7 @@ selectglademo:
 		Prerequisite: upglatrap
 
 selectglacamo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth General
 	Buildable:
@@ -2918,7 +2918,7 @@ glamob:
 	RenderSprites:
 		Image: glamob
 
-^default.angry_mob:
+^DefaultAngryMob:
 	Inherits: E1
 	Inherits@MC: ^MCImmune
 	Inherits@vo: ^AttackFrontalVoice
@@ -2958,7 +2958,7 @@ glamob:
 	-Armament@PRIMARY: ##########
 
 angrymob1:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -2972,7 +2972,7 @@ angrymob1:
 		PauseOnCondition: !ak47upgrade
 
 angrymob2:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantConditionOnPrerequisite@uparmthemob:
@@ -2994,7 +2994,7 @@ angrymob2:
 		Modifier: 125
 
 angrymob3:
-	Inherits: ^default.angry_mob
+	Inherits: ^DefaultAngryMob
 	Armament:
 		Weapon: GLAngryMobMolotov
 		LocalOffset: 0,0,555
@@ -3113,7 +3113,7 @@ GLE1toxin:
 		VoiceSet: ToxinRebelVoice
 
 upglatrap:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Booby Traps
 	Buildable:
@@ -4983,7 +4983,7 @@ glworker:
 	GainsExperience:
 		LevelUpNotification: LevelUpRA2
 upscorpionrocket:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scorpion Rocket
 	Buildable:
@@ -4999,7 +4999,7 @@ upscorpionrocket:
 		Prerequisite: upscorpionrocket
 
 uparmthemob:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Arm the Mob
 	Buildable:
@@ -5015,7 +5015,7 @@ uparmthemob:
 		Prerequisite: upscorpionrocket
 
 uprebelcamo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camouflage
 	Buildable:
@@ -5031,7 +5031,7 @@ uprebelcamo:
 		Prerequisite: uprebelcamo
 
 upcamonetting:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camo Netting
 	Buildable:
@@ -5047,7 +5047,7 @@ upcamonetting:
 		Prerequisite: upcamonetting
 
 upcamonetting2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Camo Netting
 	Buildable:
@@ -5065,7 +5065,7 @@ upcamonetting2:
 		Prerequisite: upcamonetting2
 
 upglfort:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fortified Structure
 	Buildable:
@@ -5081,7 +5081,7 @@ upglfort:
 		Prerequisite: upglfort
 
 uparmorpiercingrocket:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Armor-Piercing Rockets
 	Buildable:
@@ -5097,7 +5097,7 @@ uparmorpiercingrocket:
 		Prerequisite: uparmorpiercingrocket
 
 uparmorpiercingbullet:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Armor-Piercing Bullets
 	Buildable:
@@ -5113,7 +5113,7 @@ uparmorpiercingbullet:
 		Prerequisite: uparmorpiercingbullet
 
 upjunkrepair:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Junk Repair
 	Buildable:
@@ -5129,7 +5129,7 @@ upjunkrepair:
 		Prerequisite: upjunkrepair
 
 uptoxinshells:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Toxin Shells
 	Buildable:
@@ -5145,7 +5145,7 @@ uptoxinshells:
 		Prerequisite: uptoxinshells
 
 upantraxbeta:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Beta
 	Buildable:
@@ -5161,7 +5161,7 @@ upantraxbeta:
 		Prerequisite: upantraxbeta
 
 updemolition:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Demolition
 	Buildable:
@@ -5177,7 +5177,7 @@ updemolition:
 		Prerequisite: updemolition
 
 upnewshoes:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Worker Shoes
 	Buildable:
@@ -5193,7 +5193,7 @@ upnewshoes:
 		Prerequisite: upnewshoes
 
 upbuggyammo:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Buggy Ammo
 	Buildable:
@@ -5209,7 +5209,7 @@ upbuggyammo:
 		Prerequisite: upbuggyammo
 
 upantraxgamma:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Gamma
 	Buildable:
@@ -5225,7 +5225,7 @@ upantraxgamma:
 		Prerequisite: upantraxgamma
 
 upradarvanscan:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Radar Van Scan
 	Buildable:
@@ -5242,7 +5242,7 @@ upradarvanscan:
 		Prerequisite: upradarvanscan
 
 upmarauder:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Marauder Tank
 	Buildable:
@@ -5256,7 +5256,7 @@ upmarauder:
 		Prerequisite: upmarauder
 
 uptechnical:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Technical Training
 	Buildable:
@@ -5270,7 +5270,7 @@ uptechnical:
 		Prerequisite: uptechnical
 
 upscudlauncher:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Scud Launcher
 	Buildable:
@@ -5284,7 +5284,7 @@ upscudlauncher:
 		Prerequisite: upscudlauncher
 
 uphijack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hijacker
 	Buildable:
@@ -5298,7 +5298,7 @@ uphijack:
 		Prerequisite: uphijacker
 
 uprebelambush1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush 1
 	Buildable:
@@ -5312,7 +5312,7 @@ uprebelambush1:
 		Prerequisite: uprebelambush1
 
 uprebelambush2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush 2
 	Buildable:
@@ -5326,7 +5326,7 @@ uprebelambush2:
 		Prerequisite: uprebelambush2
 
 uprebelambush3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rebel Ambush
 	Buildable:
@@ -5340,7 +5340,7 @@ uprebelambush3:
 		Prerequisite: uprebelambush3
 
 upglabounty1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty 1
 	Buildable:
@@ -5354,7 +5354,7 @@ upglabounty1:
 		Prerequisite: upglabounty1
 
 upglabounty2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty 2
 	Buildable:
@@ -5368,7 +5368,7 @@ upglabounty2:
 		Prerequisite: upglabounty2
 
 upglabounty3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Bounty
 	Buildable:
@@ -5382,7 +5382,7 @@ upglabounty3:
 		Prerequisite: upglabounty3
 
 upanthraxbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Anthrax Bomb
 	Buildable:
@@ -5396,7 +5396,7 @@ upanthraxbomb:
 		Prerequisite: upanthraxbomb
 
 upsneakattack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sneak Attack
 	Buildable:
@@ -5410,7 +5410,7 @@ upsneakattack:
 		Prerequisite: upsneakattack
 
 upgpscram:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: GPS Scrambler
 	Buildable:
@@ -5595,7 +5595,7 @@ GLTRUK:
 ##################################################
 
 selectchnormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal China
 	Buildable:
@@ -5612,7 +5612,7 @@ selectchnormal:
 		Prerequisite: selectchnormal
 
 selectchtanks:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank General
 	Buildable:
@@ -5631,7 +5631,7 @@ selectchtanks:
 		Prerequisite: canselectrepair
 
 selectchinf:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Infantry General
 	Buildable:
@@ -5650,7 +5650,7 @@ selectchinf:
 		Prerequisite: canselectfrenzy
 
 selectchatomic:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuke General
 	Buildable:
@@ -7232,7 +7232,7 @@ chbattle:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@EMP: ^TurretEMP #
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Inherits@upschreactivearmor: ^ReactiveArmorUpgrade
 	Valued:
 		Cost: 800
@@ -7442,7 +7442,7 @@ choverlord:
 	Inherits@crush: ^VehicleCrusher
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@cargo: ^CargoVehicle
-	Inherits@upschnucleartanks: ^upschnucleartanks
+	Inherits@upschnucleartanks: ^UPSCHNuclearTanks
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -8387,7 +8387,7 @@ chnukecann.Husk:
 		Image: chnukecann
 
 upredguard:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Red Guard Training
 	Buildable:
@@ -8401,7 +8401,7 @@ upredguard:
 		Prerequisite: upredguard
 
 upcharty:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Training
 	Buildable:
@@ -8415,7 +8415,7 @@ upcharty:
 		Prerequisite: upcharty
 
 upbattlemaster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Battlemaster Training
 	Buildable:
@@ -8429,7 +8429,7 @@ upbattlemaster:
 		Prerequisite: upbattlemaster
 
 upnukecann:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuke Cannon
 	Buildable:
@@ -8443,7 +8443,7 @@ upnukecann:
 		Prerequisite: upnukecann
 
 upcashhack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cash Hack
 	Buildable:
@@ -8457,7 +8457,7 @@ upcashhack:
 		Prerequisite: upcashhack
 
 uptankdrop:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tank Drop
 	Buildable:
@@ -8471,7 +8471,7 @@ uptankdrop:
 		Prerequisite: uptankdrop
 
 upminigunnerdrop:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Infantry Paradrop
 	Buildable:
@@ -8485,7 +8485,7 @@ upminigunnerdrop:
 		Prerequisite: upminigunnerdrop
 
 upartybarrage1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage 1
 	Buildable:
@@ -8499,7 +8499,7 @@ upartybarrage1:
 		Prerequisite: upartybarrage1
 
 upartybarrage2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage 2
 	Buildable:
@@ -8513,7 +8513,7 @@ upartybarrage2:
 		Prerequisite: upartybarrage2
 
 upartybarrage3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Artillery Barrage
 	Buildable:
@@ -8527,7 +8527,7 @@ upartybarrage3:
 		Prerequisite: upartybarrage3
 
 upfrenzy1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy
 	Buildable:
@@ -8541,7 +8541,7 @@ upfrenzy1:
 		Prerequisite: upfrenzy1
 
 upfrenzy2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy 2
 	Buildable:
@@ -8555,7 +8555,7 @@ upfrenzy2:
 		Prerequisite: upfrenzy2
 
 upfrenzy3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Frenzy 3
 	Buildable:
@@ -8569,7 +8569,7 @@ upfrenzy3:
 		Prerequisite: upfrenzy3
 
 upchaingun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chainguns
 	Buildable:
@@ -8588,7 +8588,7 @@ upchaingun:
 		Prerequisites: selectchatomic
 
 upnationalism:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nationalism
 	Buildable:
@@ -8607,7 +8607,7 @@ upnationalism:
 		Prerequisites: selectchatomic
 
 upuraniumshell:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Uranium Shells
 	Buildable:
@@ -8623,7 +8623,7 @@ upuraniumshell:
 		Prerequisite: upuraniumshell
 
 upatomictank:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Nuclear Tanks
 	Buildable:
@@ -8639,7 +8639,7 @@ upatomictank:
 		Prerequisite: upatomictank
 
 upisotopestability:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Isotope Stability
 	Buildable:
@@ -8655,7 +8655,7 @@ upisotopestability:
 		Prerequisite: isotopestability
 
 upbluefire:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Black Napalm
 	Buildable:
@@ -8674,7 +8674,7 @@ upbluefire:
 		Prerequisites: selectchatomic
 
 upneutronshell:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Shells
 	Buildable:
@@ -8690,7 +8690,7 @@ upneutronshell:
 		Prerequisite: upneutronshell
 
 upmigarmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: MiG Armor
 	Buildable:
@@ -8706,7 +8706,7 @@ upmigarmor:
 		Prerequisite: upmigarmor
 
 upautoload:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Auto Loader
 	Buildable:
@@ -8722,7 +8722,7 @@ upautoload:
 		Prerequisite: upautoload
 
 upsubliminal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Subliminal Messaging
 	Buildable:
@@ -8742,7 +8742,7 @@ upsubliminal:
 		Queue: Infantry, RAInfantry
 
 upmignuke:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Tactical Nuke MiG
 	Buildable:
@@ -8758,7 +8758,7 @@ upmignuke:
 		Prerequisite: upmignuke
 
 upsathack:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Hack 1
 	Buildable:
@@ -8774,7 +8774,7 @@ upsathack:
 		Prerequisite: upsathack
 
 upsathack2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Satellite Hack 2
 	Buildable:
@@ -9512,7 +9512,7 @@ chminv.minefield:
 		RequiresCondition: neutronmines
 
 uplandmines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Land Mines
 	Buildable:
@@ -9528,7 +9528,7 @@ uplandmines:
 		Prerequisite: uplandmines
 
 upneutronmines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Neutron Mines
 	Buildable:
@@ -9544,7 +9544,7 @@ upneutronmines:
 		Prerequisite: upneutronmines
 
 upcarpetbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Carpet Bombing
 	Buildable:
@@ -9558,7 +9558,7 @@ upcarpetbomb:
 		Prerequisite: upcarpetbomb
 
 upchemp:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: EMP Strike
 	Buildable:
@@ -9572,7 +9572,7 @@ upchemp:
 		Prerequisite: upchemp
 
 upchminebomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Cluster Mines
 	Buildable:
@@ -9590,7 +9590,7 @@ upchminebomb:
 ##################################################
 
 selectusanormal:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Normal USA
 	Buildable:
@@ -9607,7 +9607,7 @@ selectusanormal:
 		Prerequisite: selectusanormal
 
 selectusaairforce:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Airforce General
 	Buildable:
@@ -9628,7 +9628,7 @@ selectusaairforce:
 		Prerequisite: canselectrepair
 
 selectusalaser:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser General
 	Buildable:
@@ -9645,7 +9645,7 @@ selectusalaser:
 		Prerequisite: selectusalaser
 
 selectusasuper:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Super Weapons General
 	Buildable:
@@ -9700,7 +9700,7 @@ USAE1:
 	Inherits@cap: ^BuildingCaptureUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -9756,8 +9756,8 @@ USAE3:
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -9820,7 +9820,7 @@ usapath:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -9868,7 +9868,7 @@ usaburton:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
 	Inherits@MC: ^MCImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Inherits@bot: ^BotMicromanageable
 	Valued:
 		Cost: 1500
@@ -9974,7 +9974,7 @@ usapilot:
 	Inherits@EXP: ^GainsExperience
 	Inherits@EXT: ^ExternalConditions
 	Inherits@USAInfantry: ^GeneralsUSAInfantry
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -10038,8 +10038,8 @@ usajeep:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@cargo: ^CargoVehicle
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -10269,11 +10269,11 @@ pscdrones3:
 	KillsSelf:
 		RemoveInstead: true
 
-^generalsdrone:
+^GeneralsDrone:
 	Inherits: ^RANeutralPlane
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	-Selectable:
 	Interactable:
 	RevealsShroud:
@@ -10316,7 +10316,7 @@ pscdrones3:
 		Condition: haspointdefense
 		Prerequisites: susaupdronepointdefense
 usadrone:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -10330,7 +10330,7 @@ usadrone:
 		Armaments: primary, pointdefense
 
 usahellfire:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -10342,7 +10342,7 @@ usahellfire:
 		Armaments: primary, pointdefense
 
 usaspydrone:
-	Inherits: ^generalsdrone
+	Inherits: ^GeneralsDrone
 	Inherits@2: ^GenericAirDetector
 	Valued:
 		Cost: 100
@@ -10367,8 +10367,8 @@ usattnk:
 	Inherits@EMP: ^TurretEMP
 	Inherits@Announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 1100
 	Tooltip:
@@ -10450,8 +10450,8 @@ usacrusader:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -10500,7 +10500,7 @@ usacrusader:
 usacrusader2:
 	Inherits: usacrusader
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -10541,8 +10541,8 @@ usapala:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -10608,8 +10608,8 @@ usasentry:
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@snipe: ^DriverKillImmune
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -10698,9 +10698,9 @@ usaavenger:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	AutoTargetPriority@AA:
 		ValidTargets: Missile, Air
 		Priority: 2
@@ -10784,8 +10784,8 @@ usaambulan:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@cargo: ^CargoVehicle
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -10850,8 +10850,8 @@ usamicro:
 	Inherits@emp: ^TurretEMP
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -10913,8 +10913,8 @@ USAMCV:
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
 	Inherits@conyard: ^Conyard
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
-	Inherits@compositearmorusa: ^usa_composite_armor_upgrade
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
+	Inherits@compositearmorusa: ^USACompositeArmorUpgrade
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -11351,7 +11351,7 @@ usalasertur:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@EMP: ^DefenseTurretedEMP
 	Inherits@gensound: ^GeneralsDamageBuilding
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -11477,7 +11477,7 @@ usahook:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Inherits@SHADOWS: ^Shadows
 	Targetable@helicopter:
 		TargetTypes: Helicopter
@@ -12020,7 +12020,7 @@ usacannon.beam:
 	Inherits@2: ^SpriteActor
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotMicromanageable
-	Inherits@focusingcrystal: ^upsusafocusingcrystal
+	Inherits@focusingcrystal: ^UPSUSAFocusingCrystal
 	-UpdatesPlayerStatistics:
 	RenderSprites:
 	-QuantizeFacingsFromSequence:
@@ -12257,7 +12257,7 @@ usaraptor:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@LGM: ^LaserMissilesUpgrade
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
@@ -12408,7 +12408,7 @@ usastealth:
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@LGM: ^LaserMissilesUpgrade
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
@@ -12538,7 +12538,7 @@ usaaurora:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
 	Inherits@PLD: ^PointLaserDefenseSystem
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
@@ -12697,7 +12697,7 @@ usacomanche:
 	Inherits@training: ^AdvancedTrainingUpgrade
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@CM: ^CountermeasuresUpgrade
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -12947,7 +12947,7 @@ usafirebase.e3:
 		InitialUnits: usae1, usae1, usae1, usae3
 
 usaupgrenade:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Flash-bang grenades
 	Buildable:
@@ -12963,7 +12963,7 @@ usaupgrenade:
 		Prerequisite: usaupgrenade
 
 usauptowmiss:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: TOW Missile
 	Buildable:
@@ -12979,7 +12979,7 @@ usauptowmiss:
 		Prerequisite: usauptowmiss
 
 usaupdronegun:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Sentry Drone Gun
 	Buildable:
@@ -12995,7 +12995,7 @@ usaupdronegun:
 		Prerequisite: usaupdronegun
 
 usaupchemsuit:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Chemical Suit
 	Buildable:
@@ -13011,7 +13011,7 @@ usaupchemsuit:
 		Prerequisite: usaupchemsuit
 
 usauparmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Composite Armor
 	Buildable:
@@ -13027,7 +13027,7 @@ usauparmor:
 		Prerequisite: usauparmor
 
 usauplasmiss:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Laser-Guided Missiles
 	Buildable:
@@ -13043,7 +13043,7 @@ usauplasmiss:
 		Prerequisite: usauplasmiss
 
 usaupsupplylines:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Supply lines
 	Buildable:
@@ -13059,7 +13059,7 @@ usaupsupplylines:
 		Prerequisite: usaupsupplylines
 
 usabombardament:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bombardment (Battle Plan)
 	Buildable:
@@ -13075,7 +13075,7 @@ usabombardament:
 		Prerequisite: usabombardmentc
 
 usasearchndestroy:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Search and Destroy (Battle Plan)
 	Buildable:
@@ -13091,7 +13091,7 @@ usasearchndestroy:
 		Prerequisite: usasearchndestroyc
 
 usaholdtheline:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Hold the Line (Battle Plan)
 	Buildable:
@@ -13107,7 +13107,7 @@ usaholdtheline:
 		Prerequisite: usaholdthelinec
 
 usaupbunkerbuster:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Bunker Busters
 	Buildable:
@@ -13121,7 +13121,7 @@ usaupbunkerbuster:
 		Image: usabunkerbustericon
 
 usaupcounter:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Countermeasures
 	Buildable:
@@ -13137,7 +13137,7 @@ usaupcounter:
 		Prerequisite: usaupcounter
 
 usauptraining:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Advanced Training
 	Buildable:
@@ -13153,7 +13153,7 @@ usauptraining:
 		Prerequisite: usauptraining
 
 usaupdronearmor:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Drone Armor
 	Buildable:
@@ -13172,7 +13172,7 @@ usaupdronearmor:
 		Prerequisites: selectusaairforce
 
 upstealthcomanche:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Comanche
 	Buildable:
@@ -13225,7 +13225,7 @@ usagunboat:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -13287,7 +13287,7 @@ usabattleship:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -13359,7 +13359,7 @@ usacarrier:
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
-	Inherits@switchableupgrades: ^usa_switchable_upgrades
+	Inherits@switchableupgrades: ^USASwitchableUpgrades
 	Valued:
 		Cost: 6000
 	Tooltip:
@@ -13516,7 +13516,7 @@ usauwusupply:
 		RequiresSelection: true
 
 upusapath:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Pathfinder
 	Buildable:
@@ -13530,7 +13530,7 @@ upusapath:
 		Prerequisite: upusapath
 
 upusapala:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paladin Tank
 	Buildable:
@@ -13544,7 +13544,7 @@ upusapala:
 		Prerequisite: upusapala
 
 upusastealth:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Stealth Fighter
 	Buildable:
@@ -13558,7 +13558,7 @@ upusastealth:
 		Prerequisite: upusastealth
 
 upusaspydrone:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spy Drone
 	Buildable:
@@ -13572,7 +13572,7 @@ upusaspydrone:
 		Prerequisite: upusaspydrone
 
 upusaparadrop1:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop 1
 	Buildable:
@@ -13586,7 +13586,7 @@ upusaparadrop1:
 		Prerequisite: upusaparadrop1
 
 upusaparadrop2:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop 2
 	Buildable:
@@ -13600,7 +13600,7 @@ upusaparadrop2:
 		Prerequisite: upusaparadrop2
 
 upusaparadrop3:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Paradrop
 	Buildable:
@@ -13614,7 +13614,7 @@ upusaparadrop3:
 		Prerequisite: upusaparadrop3
 
 upusaa101:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 1
 	Buildable:
@@ -13628,7 +13628,7 @@ upusaa101:
 		Prerequisite: upusaa101
 
 upusaa102:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 2
 	Buildable:
@@ -13642,7 +13642,7 @@ upusaa102:
 		Prerequisite: upusaa102
 
 upusaa103:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: A10 Strike 3
 	Buildable:
@@ -13656,7 +13656,7 @@ upusaa103:
 		Prerequisite: upusaa103
 
 upusagunship:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Spectre Gunship
 	Buildable:
@@ -13670,7 +13670,7 @@ upusagunship:
 		Prerequisite: upusagunship
 
 upusaleaflet:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Leaflet Drop
 	Buildable:
@@ -13689,7 +13689,7 @@ upusaleaflet_1:
 		Prerequisites: !upusaleaflet, rank3, rank1, ~susa_super
 
 upusafuelbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Fuel Air Bomb
 	Buildable:
@@ -13703,7 +13703,7 @@ upusafuelbomb:
 		Prerequisite: upusafuelbomb
 
 upusamotherbomb:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Mother Of All Bombs
 	Buildable:
@@ -13719,7 +13719,7 @@ upusamotherbomb:
 		Prerequisite: upusamotherbomb
 
 usaupmisspod:
-	Inherits: ^upgrade.template
+	Inherits: ^UpgradeTemplate
 	Tooltip:
 		Name: Rocket Pods
 	Buildable:

@@ -7,8 +7,8 @@ tkm_rifleman:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@speed: ^upberezkacloakupgrade
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@speed: ^UPBerezkaCloakUpgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 120
 	Tooltip:
@@ -89,7 +89,7 @@ tkm_marine:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 300
 	Buildable:
@@ -157,7 +157,7 @@ tkm_juggernaut:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -232,7 +232,7 @@ tkm_thermonaut:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -297,7 +297,7 @@ tkm_trooper:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 200
 	Buildable:
@@ -357,8 +357,8 @@ tkm_rocketeer:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@speed: ^upberezkacloakupgrade
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@speed: ^UPBerezkaCloakUpgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -476,8 +476,8 @@ tkm_engineer:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
-	Inherits@speed: ^upberezkacloakupgrade
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@speed: ^UPBerezkaCloakUpgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 500
 	Buildable:
@@ -633,7 +633,7 @@ tkm_sniper:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -693,7 +693,7 @@ tkm_von:
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Tooltip:
 		Name: Von
 	Valued:
@@ -792,7 +792,7 @@ tkm_spetsnaz:
 	Inherits@anim: ^RA2Infantry
 	# Inherits@swim: ^WithSwimsuit
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Valued:
 		Cost: 900
 	Health:
@@ -982,7 +982,7 @@ tkmvan:
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@infantryweapon: ^tkm_upgrade_infantryupgrade
+	Inherits@infantryweapon: ^TKMUpgradeInfantryUpgrade
 	Tooltip:
 		Name: Van
 	Valued:

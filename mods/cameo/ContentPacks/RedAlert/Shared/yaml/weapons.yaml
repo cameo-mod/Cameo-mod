@@ -1,4 +1,4 @@
-^CryoMissileProjectile:
+﻿^CryoMissileProjectile:
 	TargetActorCenter: true
 	Projectile: Missile
 		TrailImage: blue_smokey
@@ -172,7 +172,7 @@ ConscriptMolotov:
 		Amount: 4000
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
-		Duration: 50
+		Duration: 40
 		Speed: 8, 24
 		TurnRate: 4
 		Image: burn_l
@@ -335,8 +335,6 @@ ReimuYinYangOrb:
 		Inaccuracy: 1280
 		RangeLimit: 12800
 		HorizontalRateOfTurn: 8
-		MinimumLaunchAngle: 128
-		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 128
 		MinimumLaunchSpeed: 128
 		LaunchAngle: 128
@@ -534,8 +532,6 @@ MagicOrb:
 		Inaccuracy: 1280
 		RangeLimit: 12800
 		HorizontalRateOfTurn: 8
-		MinimumLaunchAngle: 128
-		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 128
 		MinimumLaunchSpeed: 128
 		LaunchAngle: 128
@@ -590,8 +586,6 @@ MagicOrb2:
 		Inaccuracy: 1280
 		RangeLimit: 12800
 		HorizontalRateOfTurn: 8
-		MinimumLaunchAngle: 128
-		MaximumLaunchAngle: 128
 		MaximumLaunchSpeed: 128
 		MinimumLaunchSpeed: 128
 		LaunchAngle: 128
@@ -706,7 +700,6 @@ ZeroFighterChainGunWaveforce:
 	Inherits: ^WaveforceBulletProjectile
 	Projectile: Bullet
 		-LaunchAngle:
-	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
@@ -1095,6 +1088,11 @@ JapanCarrierTarget:
 
 RAAtomic:
 	Inherits: Atomic
+	-Warhead@FlashEffect:
+		Duration: 50
+		Radius: 0.35
+		Brightness: 1.3
+		Darkness: 0.85
 	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom1.aud
 	Warhead@Effect2: CreateEffect
@@ -1366,7 +1364,6 @@ RASniper:
 V2ExplodeIrak:
 	Inherits: SCUD
 	-Report:
-	Warhead@1Dam: SpreadDamage
 		InvalidTargets: TerrorDrone
 	Warhead@1Radiation: CreateTintedCells
 		Spread: 1c512
@@ -1739,7 +1736,6 @@ PsionicShells:
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
 		-ImpactSounds:
-	Warhead@5OwnerChange: ChangeOwner
 		Range: 512
 		Duration: 130
 		ValidTargets: Ground
@@ -1765,7 +1761,7 @@ TorpTube:
 	Range: 10000
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: v2
 		Arm: 5
@@ -1794,11 +1790,11 @@ TorpTube:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1812,7 +1808,7 @@ TorpTubeThermobaric:
 	Range: 10000
 	Report: torpedo1.aud
 	ValidTargets: Water, Underwater, Bridge
-	-Projectile: Missile
+	-Projectile:
 	Projectile: Missile
 		Image: v2
 		Arm: 5
@@ -1839,13 +1835,13 @@ TorpTubeThermobaric:
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Water, Underwater, Bridge, Structure
-	-Warhead@Smudge: LeaveSmudge
+	-Warhead@Smudge:
 	Warhead@Effect: CreateEffect
 		ValidTargets: Ship, Structure, Bridge, Ground
 		ImpactActors: true
 		Explosions: nuke_small
 		ImpactSounds: kaboom22.aud
-	-Warhead@EffectAir: CreateEffect
+	-Warhead@EffectAir:
 	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -1923,7 +1919,6 @@ DepthCharge:
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 20
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
 		Explosions: building
 		ImpactSounds: kaboom15.aud
 
@@ -2009,7 +2004,6 @@ YamatoCannon:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 10
 	-Warhead@Effect2:
-	Warhead@Effect: CreateEffect
 		Explosions: building
 		ImpactSounds: kaboom15.aud
 
@@ -2139,16 +2133,14 @@ ra1_allies_chronovortex:
 		Range: 12345
 		ValidRelationships: Enemy, Neutral, Ally
 		ValidTargets: Ground, Water, Air
-	-Warhead@Effect: CreateEffect
+	-Warhead@Effect:
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	# The Scorch smudge layer spawns animated flames (scorch_flames); strip the inherited
 	# Scorch smudges so this cryo superweapon doesn't leave a patch of fire on impact.
 	-Warhead@Smudge:
-	-Warhead@Smudge2:
 
 # CLASSIC-RIFLE FAMILY (Formula v2 scout conversion 2026-07-19): Allied
-# rifle infantry — burst 3, accurate, longest scout reach. Cryo pair.
+# rifle infantry â€” burst 3, accurate, longest scout reach. Cryo pair.
 ra1_allies_rifleinfantry_carbine:
 	Inherits: ^SmallArms
 	ReloadDelay: 50

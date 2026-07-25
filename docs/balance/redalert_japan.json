@@ -34,7 +34,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -89,7 +89,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -100,7 +100,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -136,7 +136,7 @@
        }
       ],
       "weapon": "JapaneseHeavyBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^ImpactGlow"
@@ -201,7 +201,7 @@
        }
       ],
       "weapon": "JapanesePlasmaBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon",
@@ -285,7 +285,7 @@
        }
       ],
       "weapon": "JHindArrows",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^ArrowWeapon"
@@ -357,7 +357,7 @@
        }
       ],
       "weapon": "JHindArrowsEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -405,7 +405,7 @@
        }
       ],
       "weapon": "JHindCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ShrapnelWeapon",
        "^TankDestroyerCannon"
@@ -477,7 +477,7 @@
        }
       ],
       "weapon": "JHindPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumMissile",
@@ -525,7 +525,7 @@
        }
       ],
       "weapon": "JHindChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^Chaingun"
@@ -587,7 +587,7 @@
        }
       ],
       "weapon": "JHindChainGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -674,7 +674,7 @@
        }
       ],
       "weapon": "ZeroFighterArrows",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumMissile",
        "^ArrowWeapon"
@@ -747,7 +747,7 @@
        }
       ],
       "weapon": "ZeroFighterArrowsEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^TeslaWeapon",
@@ -782,7 +782,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun"
       ]
@@ -836,7 +836,7 @@
         "type": "HealthPercentageDamage"
        },
        {
-        "damage": "4000",
+        "damage": "6000",
         "tag": "Chaingun",
         "type": "SpreadDamage"
        },
@@ -847,7 +847,7 @@
        }
       ],
       "weapon": "ZeroFighterChainGunWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^Grenade",
@@ -984,7 +984,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -1002,7 +1002,7 @@
     },
     "name": "Japanese Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1317,7 +1317,7 @@
        }
       ],
       "weapon": "BallistaTowerMultiShot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -1349,7 +1349,7 @@
        }
       ],
       "weapon": "BallistaSingleShotAir",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
@@ -1426,7 +1426,7 @@
        }
       ],
       "weapon": "BallistaTowerMultiShotEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -1550,7 +1550,7 @@
        }
       ],
       "weapon": "BallistaSingleShotAirEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumFlameWeapon",
@@ -1642,7 +1642,7 @@
        }
       ],
       "weapon": "JHighV",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1702,7 +1702,7 @@
        }
       ],
       "weapon": "JHighVWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -1880,7 +1880,7 @@
        }
       ],
       "weapon": "JapanMaidenBow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
@@ -1911,7 +1911,7 @@
        }
       ],
       "weapon": "JapanMaidenBow",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon"
       ]
@@ -2026,7 +2026,7 @@
        }
       ],
       "weapon": "JapanMaidenBowEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2147,7 +2147,7 @@
        }
       ],
       "weapon": "JapanMaidenBowEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon",
@@ -2169,7 +2169,7 @@
     },
     "design": {
      "category": "Infantry",
-     "class_anchor": null,
+     "class_anchor": "archer",
      "special": 1.0,
      "subtype": "SniperInfantry",
      "tech_tier": 1.0,
@@ -2183,7 +2183,7 @@
     "prerequisites": [
      "~japan_japanesebarracks",
      "japan_japaneseradararray",
-     "~japan_promotion_unlockarchermaiden"
+     "~japan_promotion_archermaiden"
     ],
     "queue": [
      "Infantry",
@@ -2247,7 +2247,7 @@
        }
       ],
       "weapon": "Hakureiring",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2299,7 +2299,7 @@
        }
       ],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2354,7 +2354,7 @@
        }
       ],
       "weapon": "Hakureiring",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2407,7 +2407,7 @@
        }
       ],
       "weapon": "Hakureiring2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -2444,7 +2444,7 @@
     "prerequisites": [
      "~japan_japanesebarracks",
      "japan_japanesetechcenter",
-     "~japan_promotion_unlockexorcist",
+     "~japan_promotion_exorcist",
      "!hasexorcist"
     ],
     "queue": [
@@ -2513,7 +2513,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2572,7 +2572,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon",
        "^Chaingun",
@@ -2630,7 +2630,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^RailgunWeapon",
@@ -2691,7 +2691,7 @@
        }
       ],
       "weapon": "japan_imperialscoutsman_rifle_waveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^RailgunWeapon",
@@ -2777,7 +2777,7 @@
        }
       ],
       "weapon": "Flamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2814,7 +2814,7 @@
        }
       ],
       "weapon": "Flamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon"
       ]
@@ -2866,7 +2866,7 @@
        }
       ],
       "weapon": "PlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -2920,7 +2920,7 @@
        }
       ],
       "weapon": "PlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^MediumChemicalWeapon"
@@ -3068,7 +3068,7 @@
        }
       ],
       "weapon": "RocketAngelRockets",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyMissile",
@@ -3109,7 +3109,7 @@
     "prerequisites": [
      "~japan_japanesebarracks",
      "japan_japanesetechcenter",
-     "~japan_promotion_unlockrocketangel"
+     "~japan_promotion_rocketangel"
     ],
     "queue": [
      "Infantry",
@@ -3157,7 +3157,7 @@
        }
       ],
       "weapon": "SamuraiBlade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3192,7 +3192,7 @@
        }
       ],
       "weapon": "SamuraiBlade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -3242,7 +3242,7 @@
        }
       ],
       "weapon": "SamuraiBladeCharged",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^SwordWeapon"
@@ -3294,7 +3294,7 @@
        }
       ],
       "weapon": "SamuraiBladeCharged",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^SwordWeapon"
@@ -3325,7 +3325,7 @@
     "name": "Samurai",
     "prerequisites": [
      "~japan_japanesebarracks",
-     "~japan_promotion_unlocksamurai"
+     "~japan_promotion_samurai"
     ],
     "queue": [
      "Infantry",
@@ -3392,7 +3392,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3450,7 +3450,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^MediumCannon",
@@ -3513,7 +3513,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannonCharged",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3577,7 +3577,7 @@
        }
       ],
       "weapon": "TankBusterBeamCannonCharged",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3626,7 +3626,7 @@
    }
   },
   "promotions": {
-   "japan_promotion_unlockarchermaiden": {
+   "japan_promotion_archermaiden": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3635,22 +3635,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Archer Maiden",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockarchermaiden",
-     "japan_promotion_unlocksamurai",
+     "!japan_promotion_archermaiden",
+     "japan_promotion_samurai",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockarmoredcar": {
+   "japan_promotion_armoredcar": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3659,21 +3659,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Armored Car",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockarmoredcar",
+     "!japan_promotion_armoredcar",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockexorcist": {
+   "japan_promotion_exorcist": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3682,22 +3682,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Exorcist",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockexorcist",
-     "japan_promotion_unlockrocketangel",
+     "!japan_promotion_exorcist",
+     "japan_promotion_rocketangel",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockgrenadebuggy": {
+   "japan_promotion_grenadebuggy": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3706,21 +3706,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Grenade Buggy",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockgrenadebuggy",
+     "!japan_promotion_grenadebuggy",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockheavychihaheavytank": {
+   "japan_promotion_heavychihaheavytank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3729,22 +3729,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Heavy Chi-Ha Heavy Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockheavychihaheavytank",
-     "japan_promotion_unlockarmoredcar",
+     "!japan_promotion_heavychihaheavytank",
+     "japan_promotion_armoredcar",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockhovercraftflametank": {
+   "japan_promotion_hovercraftflametank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3753,22 +3753,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Hovercraft Flametank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockhovercraftflametank",
-     "japan_promotion_unlockheavychihaheavytank",
+     "!japan_promotion_hovercraftflametank",
+     "japan_promotion_heavychihaheavytank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockrocketangel": {
+   "japan_promotion_rocketangel": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3777,22 +3777,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Rocket Angel",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockrocketangel",
-     "japan_promotion_unlockarchermaiden",
+     "!japan_promotion_rocketangel",
+     "japan_promotion_archermaiden",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlocksamurai": {
+   "japan_promotion_samurai": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3801,21 +3801,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Samurai",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlocksamurai",
+     "!japan_promotion_samurai",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockshogunexecutioner": {
+   "japan_promotion_shogunexecutioner": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3824,22 +3824,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Shogun Executioner",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockshogunexecutioner",
-     "japan_promotion_unlockhovercraftflametank",
+     "!japan_promotion_shogunexecutioner",
+     "japan_promotion_hovercraftflametank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockshrinetank": {
+   "japan_promotion_shrinetank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3848,22 +3848,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Shrine Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockshrinetank",
-     "japan_promotion_unlockgrenadebuggy",
+     "!japan_promotion_shrinetank",
+     "japan_promotion_grenadebuggy",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockwaveforceartillery": {
+   "japan_promotion_waveforceartillery": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3872,22 +3872,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Waveforce Artillery",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockwaveforceartillery",
-     "japan_promotion_unlockwaveforcetank",
+     "!japan_promotion_waveforceartillery",
+     "japan_promotion_waveforcetank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "japan_promotion_unlockwaveforcetank": {
+   "japan_promotion_waveforcetank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3896,15 +3896,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Waveforce Tank",
     "prerequisites": [
      "~japan_japaneseconstructionyard",
-     "!japan_promotion_unlockwaveforcetank",
-     "japan_promotion_unlockshrinetank",
+     "!japan_promotion_waveforcetank",
+     "japan_promotion_shrinetank",
      "rank1"
     ],
     "queue": [
@@ -3926,7 +3926,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3952,7 +3952,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3978,7 +3978,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4004,7 +4004,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4056,7 +4056,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4082,7 +4082,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4108,7 +4108,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -4231,7 +4231,7 @@
        }
       ],
       "weapon": "ArmoredCarMG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^TankDestroyerCannon",
@@ -4342,7 +4342,7 @@
        }
       ],
       "weapon": "ArmoredCarMGAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^ArrowWeapon",
        "^TankDestroyerCannon",
@@ -4481,7 +4481,7 @@
        }
       ],
       "weapon": "ArmoredCarMGWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
@@ -4623,7 +4623,7 @@
        }
       ],
       "weapon": "ArmoredCarMGAAWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyAAWeapon",
        "^WaveforceBulletWarhead",
@@ -4668,7 +4668,7 @@
     "name": "Armored Car",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_unlockarmoredcar"
+     "~japan_promotion_armoredcar"
     ],
     "queue": [
      "Vehicle",
@@ -4763,7 +4763,7 @@
        }
       ],
       "weapon": "BallistaMultiShot",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^LightFlameWeapon",
@@ -4846,7 +4846,7 @@
        }
       ],
       "weapon": "BallistaMultiShotEnergized",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MediumFlameWeapon",
@@ -4940,7 +4940,7 @@
        }
       ],
       "weapon": "Type97Cannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^MediumCannon"
@@ -5002,7 +5002,7 @@
        }
       ],
       "weapon": "Type97PlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -5034,7 +5034,7 @@
     "name": "Chi-Ha Heavy Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_unlockheavychihaheavytank"
+     "~japan_promotion_heavychihaheavytank"
     ],
     "queue": [
      "Vehicle",
@@ -5492,7 +5492,7 @@
        }
       ],
       "weapon": "OIHakureiring",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -5544,7 +5544,7 @@
        }
       ],
       "weapon": "OIHakureiring2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon",
@@ -5575,7 +5575,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -5604,7 +5604,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -5633,7 +5633,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -5710,7 +5710,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5790,7 +5790,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5870,7 +5870,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -5909,7 +5909,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5946,7 +5946,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -5998,7 +5998,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -6052,7 +6052,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -6088,7 +6088,7 @@
     "prerequisites": [
      "~japan_japanesewarfactory",
      "japan_japanesetechcenter",
-     "~japan_promotion_unlockexorcist",
+     "~japan_promotion_exorcist",
      "!hasexorcist"
     ],
     "queue": [
@@ -6139,7 +6139,7 @@
        }
       ],
       "weapon": "BuggyGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade"
       ]
@@ -6200,7 +6200,7 @@
        }
       ],
       "weapon": "BuggyPlasmaGrenade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyBomb",
        "^ShrapnelWeapon",
@@ -6232,7 +6232,7 @@
     "name": "Grenade Buggy",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_unlockgrenadebuggy"
+     "~japan_promotion_grenadebuggy"
     ],
     "queue": [
      "Vehicle",
@@ -6284,7 +6284,7 @@
        }
       ],
       "weapon": "HeavyFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -6336,7 +6336,7 @@
        }
       ],
       "weapon": "HeavyPlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -6368,7 +6368,7 @@
     "prerequisites": [
      "~japan_japanesewarfactory",
      "japan_japaneseradararray",
-     "~japan_promotion_unlockhovercraftflametank"
+     "~japan_promotion_hovercraftflametank"
     ],
     "queue": [
      "Vehicle",
@@ -6478,7 +6478,7 @@
        }
       ],
       "weapon": "HovercraftCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun",
@@ -6610,7 +6610,7 @@
        }
       ],
       "weapon": "HovercraftPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyBomb",
@@ -6658,7 +6658,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlak",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -6715,7 +6715,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -6757,7 +6757,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakAA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^FlakWeapon"
@@ -6814,7 +6814,7 @@
        }
       ],
       "weapon": "JapaneseHovercraftFlakAAkWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -6853,7 +6853,7 @@
     "prerequisites": [
      "~japan_japanesewarfactory",
      "japan_japaneseradararray",
-     "~japan_promotion_unlockarchermaiden"
+     "~japan_promotion_archermaiden"
     ],
     "queue": [
      "Vehicle",
@@ -6898,7 +6898,7 @@
        }
       ],
       "weapon": "Type89Cannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -6964,7 +6964,7 @@
        }
       ],
       "weapon": "Type89PlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^TankDestroyerCannon",
@@ -6996,7 +6996,7 @@
     "name": "I-Go Medium Tank",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~!japan_promotion_unlockheavychihaheavytank"
+     "~!japan_promotion_heavychihaheavytank"
     ],
     "queue": [
      "Vehicle",
@@ -7168,7 +7168,7 @@
        }
       ],
       "weapon": "NanoArtilleryAG",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^ShrapnelWeapon",
@@ -7250,7 +7250,7 @@
        }
       ],
       "weapon": "OIBigCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon"
       ]
@@ -7311,7 +7311,7 @@
        }
       ],
       "weapon": "OIBigPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -7342,7 +7342,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7371,7 +7371,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7400,7 +7400,7 @@
        }
       ],
       "weapon": "OISmallCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumCannon"
       ]
@@ -7477,7 +7477,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7557,7 +7557,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7637,7 +7637,7 @@
        }
       ],
       "weapon": "OISmallPlasmaCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^TeslaWeapon",
@@ -7676,7 +7676,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7713,7 +7713,7 @@
        }
       ],
       "weapon": "OIFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon"
       ]
@@ -7765,7 +7765,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -7819,7 +7819,7 @@
        }
       ],
       "weapon": "OIPlasmaFlamer",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -7897,7 +7897,7 @@
        }
       ],
       "weapon": "M60mgJapan",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms"
       ]
@@ -7945,7 +7945,7 @@
        }
       ],
       "weapon": "M60mgWaveforce",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^WaveforceBulletWarhead",
        "^SmallArms",
@@ -7977,7 +7977,7 @@
     "name": "Scout Car",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~!japan_promotion_unlockarmoredcar"
+     "~!japan_promotion_armoredcar"
     ],
     "queue": [
      "Vehicle",
@@ -8026,7 +8026,7 @@
        }
       ],
       "weapon": "ExecutionerSword",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SwordWeapon"
       ]
@@ -8060,7 +8060,7 @@
     "name": "Shogun Executioner",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_unlockshogunexecutioner",
+     "~japan_promotion_shogunexecutioner",
      "japan_japanesetechcenter"
     ],
     "queue": [
@@ -8080,7 +8080,7 @@
      "v": "26"
     }
    },
-   "japan_shrine_minitank": {
+   "japan_shrineminitank": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/RedAlert/Japan/yaml/weapons.yaml",
@@ -8185,7 +8185,7 @@
        }
       ],
       "weapon": "ShrineTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon",
@@ -8206,7 +8206,6 @@
      "v": "1600"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
      "subtype": "MainBattleTank",
@@ -8220,7 +8219,7 @@
     "name": "Shrine Minitank",
     "prerequisites": [
      "~japan_japanesewarfactory",
-     "~japan_promotion_unlockshrinetank"
+     "~japan_promotion_shrinetank"
     ],
     "queue": [
      "Vehicle",
@@ -8286,7 +8285,7 @@
     "prerequisites": [
      "~japan_japanesewarfactory",
      "japan_japanesetechcenter",
-     "~japan_promotion_unlockwaveforceartillery"
+     "~japan_promotion_waveforceartillery"
     ],
     "queue": [
      "Vehicle",
@@ -8347,7 +8346,7 @@
        }
       ],
       "weapon": "WaveforceCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -8393,7 +8392,7 @@
        }
       ],
       "weapon": "WaveforceCannonChargedLaser",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^RailgunWeapon"
@@ -8439,7 +8438,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyCannon"
@@ -8490,7 +8489,7 @@
        }
       ],
       "weapon": "WaveforceCannonDistortedBeam2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyChemicalWeapon",
        "^HeavyFlameWeapon"
@@ -8522,7 +8521,7 @@
     "prerequisites": [
      "~japan_japanesewarfactory",
      "japan_japanesetechcenter",
-     "~japan_promotion_unlockwaveforcetank"
+     "~japan_promotion_waveforcetank"
     ],
     "queue": [
      "Vehicle",

@@ -68,7 +68,7 @@
        }
       ],
       "weapon": "farasha_drone.ixian",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -195,7 +195,7 @@
        }
       ],
       "weapon": "ixian_airdrone",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^LightChemicalWeapon",
@@ -254,7 +254,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile",
        "^SmallArms",
@@ -320,7 +320,7 @@
        }
       ],
       "weapon": "d2k_air_drone_guns_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^D2KMissile",
@@ -425,7 +425,7 @@
        }
       ],
       "weapon": "IxianEmpBomb",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^HeavyBomb",
@@ -456,7 +456,7 @@
     },
     "name": "Ixian EMP Bomber",
     "prerequisites": [
-     "~ixian_promotion_unlockixianempbomber",
+     "~ixian_promotion_ixianempbomber",
      "~ixian_launchpad",
      "ixian_ixresearchcenter"
     ],
@@ -568,7 +568,7 @@
        }
       ],
       "weapon": "ixian_farasha",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -636,7 +636,7 @@
        }
       ],
       "weapon": "d2k_farasha_aa",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^HeavyFlameWeapon",
@@ -671,7 +671,7 @@
     },
     "name": "Farasha",
     "prerequisites": [
-     "~ixian_promotion_unlockfarasha",
+     "~ixian_promotion_farasha",
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter"
     ],
@@ -751,7 +751,7 @@
        }
       ],
       "weapon": "IxRailgunDroneBullet",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^FlakWeapon",
        "^TankDestroyerCannon",
@@ -783,7 +783,7 @@
     },
     "name": "Ixian Railgun Drone",
     "prerequisites": [
-     "~ixian_promotion_unlockixrailgundrone",
+     "~ixian_promotion_ixrailgundrone",
      "~ixian_hightechfactory"
     ],
     "queue": [
@@ -831,7 +831,7 @@
        }
       ],
       "weapon": "ResonanceDroneRepair",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RepairWeapon"
       ]
@@ -860,7 +860,7 @@
     },
     "name": "Ixian Resonance Drone",
     "prerequisites": [
-     "~ixian_promotion_unlockixresonancedrone",
+     "~ixian_promotion_ixresonancedrone",
      "~ixian_hightechfactory",
      "ixian_ixresearchcenter"
     ],
@@ -962,7 +962,7 @@
      "src": "inherited",
      "v": "Concrete"
     },
-    "buildable": true,
+    "buildable": false,
     "cost": {
      "src": "inherited",
      "v": "5000"
@@ -980,7 +980,7 @@
     },
     "name": "Ixian Construction Yard",
     "prerequisites": [
-     "~wip-content"
+     "~disabled"
     ],
     "queue": [
      "Building",
@@ -1038,7 +1038,7 @@
        }
       ],
       "weapon": "110mm_Gun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -1236,7 +1236,7 @@
        }
       ],
       "weapon": "HMG_turret",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -1290,7 +1290,7 @@
        }
       ],
       "weapon": "HMG_turret_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -1410,9 +1410,17 @@
    "ixian_refineryixian": {
     "armor": {
      "src": "inherited",
-     "v": "Wood"
+     "v": "Concrete"
     },
-    "buildable": false,
+    "build_duration": {
+     "src": "inherited",
+     "v": "750"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "3000"
+    },
     "design": {
      "class_anchor": null,
      "special": null,
@@ -1422,16 +1430,20 @@
     },
     "hp": {
      "src": "inherited",
-     "v": "40000"
+     "v": "300000"
     },
     "name": "Refinery",
     "prerequisites": [
      "~ixian_constructionyard",
      "ixian_windtrap"
     ],
+    "queue": [
+     "Building",
+     "RABuilding"
+    ],
     "sight": {
      "src": "inherited",
-     "v": "5c0"
+     "v": "6000"
     }
    },
    "ixian_repairpad": {
@@ -1544,7 +1556,7 @@
        }
       ],
       "weapon": "D2K_TowerMissile",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -1712,7 +1724,7 @@
        }
       ],
       "weapon": "d2kStormLasher",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -1743,7 +1755,7 @@
     "name": "Storm Lasher",
     "prerequisites": [
      "~ixian_constructionyard",
-     "~ixian_promotion_unlockstormlasher",
+     "~ixian_promotion_stormlasher",
      "ixian_ixresearchcenter"
     ],
     "queue": [
@@ -1897,7 +1909,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -1984,7 +1996,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2055,7 +2067,7 @@
        }
       ],
       "weapon": "RashinanGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2143,7 +2155,7 @@
        }
       ],
       "weapon": "RashinanGun_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyMissile",
        "^HeavyCannon",
@@ -2179,7 +2191,7 @@
     "name": "Rashidan",
     "prerequisites": [
      "~ixian_barracks",
-     "~ixian_promotion_unlockrashidan"
+     "~ixian_promotion_rashidan"
     ],
     "queue": [
      "Infantry",
@@ -2231,7 +2243,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2284,7 +2296,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2328,7 +2340,7 @@
        }
       ],
       "weapon": "light_inf_lmg",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Chaingun",
        "^SmallArms"
@@ -2382,7 +2394,7 @@
        }
       ],
       "weapon": "light_inf_lmg_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^Chaingun",
@@ -2481,7 +2493,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2534,7 +2546,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^MediumMissile",
@@ -2611,7 +2623,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -2645,7 +2657,7 @@
        }
       ],
       "weapon": "D2K_ShockGunInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^RailgunWeapon"
       ]
@@ -2676,7 +2688,7 @@
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
-     "~!ixian_promotion_unlockstorminfantry"
+     "~!ixian_promotion_storminfantry"
     ],
     "queue": [
      "Infantry",
@@ -2737,7 +2749,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2788,7 +2800,7 @@
        }
       ],
       "weapon": "D2K_StormGunInf",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -2820,7 +2832,7 @@
     "prerequisites": [
      "~ixian_barracks",
      "ixian_ixresearchcenter",
-     "~ixian_promotion_unlockstorminfantry"
+     "~ixian_promotion_storminfantry"
     ],
     "queue": [
      "Infantry",
@@ -2882,7 +2894,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -2944,7 +2956,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -2997,7 +3009,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper1",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^FlakWeapon",
@@ -3060,7 +3072,7 @@
        }
       ],
       "weapon": "D2K_Rocket_Trooper2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^RailgunWeapon",
@@ -3109,7 +3121,7 @@
    }
   },
   "promotions": {
-   "ixian_promotion_unlockfarasha": {
+   "ixian_promotion_farasha": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3118,22 +3130,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Farasha",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockixresonancedrone",
-     "!ixian_promotion_unlockfarasha",
+     "ixian_promotion_ixresonancedrone",
+     "!ixian_promotion_farasha",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockheavyixraider": {
+   "ixian_promotion_heavyixraider": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3142,21 +3154,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Heavy Ix Raider",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockheavyixraider",
+     "!ixian_promotion_heavyixraider",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockixianempbomber": {
+   "ixian_promotion_ixianempbomber": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3165,22 +3177,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Ixian EMP Bomber",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockixrailgundrone",
-     "!ixian_promotion_unlockixianempbomber",
+     "ixian_promotion_ixrailgundrone",
+     "!ixian_promotion_ixianempbomber",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockixprojector": {
+   "ixian_promotion_ixprojector": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3189,22 +3201,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Ix Projector",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockneocymek",
-     "!ixian_promotion_unlockixprojector",
+     "ixian_promotion_neocymek",
+     "!ixian_promotion_ixprojector",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockixrailgundrone": {
+   "ixian_promotion_ixrailgundrone": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3213,21 +3225,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Ix Railgun Drone",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockixrailgundrone",
+     "!ixian_promotion_ixrailgundrone",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockixresonancedrone": {
+   "ixian_promotion_ixresonancedrone": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3236,22 +3248,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Ix Resonance Drone",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockixianempbomber",
-     "!ixian_promotion_unlockixresonancedrone",
+     "ixian_promotion_ixianempbomber",
+     "!ixian_promotion_ixresonancedrone",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockixsiegetank": {
+   "ixian_promotion_ixsiegetank": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3260,22 +3272,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Ix Siege Tank",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockheavyixraider",
-     "!ixian_promotion_unlockixsiegetank",
+     "ixian_promotion_heavyixraider",
+     "!ixian_promotion_ixsiegetank",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockneocymek": {
+   "ixian_promotion_neocymek": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3284,22 +3296,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Neo Cymek",
     "prerequisites": [
      "~ixian_constructionyard",
-     "ixian_promotion_unlockixsiegetank",
-     "!ixian_promotion_unlockneocymek",
+     "ixian_promotion_ixsiegetank",
+     "!ixian_promotion_neocymek",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockrashidan": {
+   "ixian_promotion_rashidan": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3308,21 +3320,21 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Rashidan",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockrashidan",
+     "!ixian_promotion_rashidan",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockstorminfantry": {
+   "ixian_promotion_storminfantry": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3331,22 +3343,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Storm Infantry",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockstorminfantry",
-     "ixian_promotion_unlockrashidan",
+     "!ixian_promotion_storminfantry",
+     "ixian_promotion_rashidan",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockstormlasher": {
+   "ixian_promotion_stormlasher": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3355,22 +3367,22 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Storm Lasher",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockstormlasher",
-     "ixian_promotion_unlockstormraider",
+     "!ixian_promotion_stormlasher",
+     "ixian_promotion_stormraider",
      "rank1"
     ],
     "queue": [
      "Promotions"
     ]
    },
-   "ixian_promotion_unlockstormraider": {
+   "ixian_promotion_stormraider": {
     "build_limit": {
      "src": "inherited",
      "v": "1"
@@ -3379,15 +3391,15 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Promotion",
+     "subtype": "PromotionUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
     "name": "Unlock Storm Raider",
     "prerequisites": [
      "~ixian_constructionyard",
-     "!ixian_promotion_unlockstormraider",
-     "ixian_promotion_unlockstorminfantry",
+     "!ixian_promotion_stormraider",
+     "ixian_promotion_storminfantry",
      "rank1"
     ],
     "queue": [
@@ -3436,7 +3448,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3447,6 +3459,32 @@
     ],
     "queue": [
      "Research"
+    ]
+   },
+   "ixian_upgrade_heavykodatank": {
+    "build_limit": {
+     "src": "inherited",
+     "v": "1"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "inherited",
+     "v": "2500"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "UnitUpgrade",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "name": "Heavy Koda Tank Upgrade",
+    "prerequisites": [
+     "~ixian_outpost",
+     "!ixian_upgrade_heavykodatank"
+    ],
+    "queue": [
+     "Upgrades"
     ]
    },
    "ixian_upgrade_heavymissiles": {
@@ -3462,7 +3500,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3488,7 +3526,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3514,7 +3552,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3540,7 +3578,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3566,7 +3604,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "UnitUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3588,7 +3626,7 @@
     "design": {
      "class_anchor": null,
      "special": null,
-     "subtype": "Upgrade",
+     "subtype": "ResearchedUpgrade",
      "tech_tier": null,
      "unit_class": null
     },
@@ -3665,7 +3703,7 @@
        }
       ],
       "weapon": "d2k_basq",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3737,7 +3775,7 @@
        }
       ],
       "weapon": "d2k_basq_AA",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightFlameWeapon",
        "^MediumChemicalWeapon",
@@ -3872,7 +3910,7 @@
        }
       ],
       "weapon": "DuelistTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^MediumFlameWeapon",
        "^Grenade",
@@ -3969,7 +4007,7 @@
        }
       ],
       "weapon": "HMG_Duelist",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LightMissile",
        "^Grenade",
@@ -4100,7 +4138,7 @@
        }
       ],
       "weapon": "HMG_Duelist_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^LaserWeapon",
        "^HeavyMissile",
@@ -4190,7 +4228,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -4232,7 +4270,7 @@
        }
       ],
       "weapon": "RaiderGuns",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^SmallArms",
        "^Chaingun"
@@ -4286,7 +4324,7 @@
        }
       ],
       "weapon": "RaiderGuns_upgrade",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^HeavyCannon",
        "^SmallArms",
@@ -4324,7 +4362,7 @@
     "name": "Heavy Ix Raider",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_unlockheavyixraider"
+     "~ixian_promotion_heavyixraider"
     ],
     "queue": [
      "Vehicle",
@@ -4342,6 +4380,104 @@
     "turn_speed": {
      "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
      "v": "28"
+    }
+   },
+   "ixian_heavykodatank": {
+    "armaments": [
+     {
+      "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
+      "design_weapon_class": 1.25,
+      "pricing": true,
+      "range": "6000",
+      "reloaddelay": "40",
+      "slot": "Armament",
+      "versus_templates": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^D2K_Cannon"
+      ],
+      "warheads": [
+       {
+        "damage": "6000",
+        "tag": "TankDestroyerCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "TankDestroyerCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "HeavyCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "HeavyCannonPercentage",
+        "type": "HealthPercentageDamage"
+       },
+       {
+        "damage": "6000",
+        "tag": "MediumCannon",
+        "type": "SpreadDamage"
+       },
+       {
+        "damage": "3",
+        "tag": "MediumCannonPercentage",
+        "type": "HealthPercentageDamage"
+       }
+      ],
+      "weapon": "HeavyIxianCombatTankCannon",
+      "weapon_class_source": "template",
+      "weapon_types": [
+       "^TankDestroyerCannon",
+       "^HeavyCannon",
+       "^D2K_Cannon"
+      ]
+     }
+    ],
+    "armor": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Armor.Type",
+     "v": "Heavy"
+    },
+    "buildable": true,
+    "cost": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Valued.Cost",
+     "v": "1100"
+    },
+    "design": {
+     "class_anchor": null,
+     "special": null,
+     "subtype": "MainBattleTank",
+     "tech_tier": null,
+     "unit_class": null
+    },
+    "hp": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Health.HP",
+     "v": "95000"
+    },
+    "name": "Heavy Koda Tank",
+    "prerequisites": [
+     "~ixian_vehicle_production",
+     "~ixian_upgrade_heavykodatank"
+    ],
+    "queue": [
+     "Vehicle",
+     "RAVehicle",
+     "Starport"
+    ],
+    "sight": {
+     "src": "inherited",
+     "v": "6000"
+    },
+    "speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.Speed",
+     "v": "58"
+    },
+    "turn_speed": {
+     "src": "mods/cameo/ContentPacks/D2k/Ixian/yaml/vehicles.yaml#Mobile.TurnSpeed",
+     "v": "12"
     }
    },
    "ixian_ixcombatsiege": {
@@ -4401,7 +4537,7 @@
        }
       ],
       "weapon": "D2K_155mm3",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -4511,7 +4647,7 @@
        }
       ],
       "weapon": "mtank_pri2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4614,7 +4750,7 @@
        }
       ],
       "weapon": "empdisable.end",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaChargedWeapon"
       ]
@@ -4648,7 +4784,7 @@
     "name": "Ix Projector",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_unlockixprojector",
+     "~ixian_promotion_ixprojector",
      "ixian_ixresearchcenter"
     ],
     "queue": [
@@ -4744,7 +4880,7 @@
        }
       ],
       "weapon": "D2K_155mm2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^MediumFlameWeapon",
@@ -4777,7 +4913,7 @@
     "name": "Ix Siege Tank",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_unlockixsiegetank",
+     "~ixian_promotion_ixsiegetank",
      "ixian_outpost"
     ],
     "queue": [
@@ -4798,7 +4934,7 @@
      "v": "12"
     }
    },
-   "ixian_koda_tank": {
+   "ixian_kodatank": {
     "armaments": [
      {
       "defined_in": "mods/cameo/ContentPacks/D2k/Ixian/yaml/weapons.yaml",
@@ -4845,7 +4981,7 @@
        }
       ],
       "weapon": "IxianCombatTankCannon",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TankDestroyerCannon",
        "^HeavyCannon",
@@ -4863,7 +4999,6 @@
      "v": "800"
     },
     "design": {
-     "category": "Vehicles",
      "class_anchor": null,
      "special": null,
      "subtype": "MainBattleTank",
@@ -4877,7 +5012,7 @@
     "name": "Koda Tank",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~!d2k_duelist_tank_upgrade"
+     "~!ixian_upgrade_heavykodatank"
     ],
     "queue": [
      "Vehicle",
@@ -5063,7 +5198,7 @@
        }
       ],
       "weapon": "MongooseRocket",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^ShrapnelWeapon",
@@ -5168,7 +5303,7 @@
        }
       ],
       "weapon": "D2K_StormGunCymek",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5238,7 +5373,7 @@
        }
       ],
       "weapon": "D2K_RocketsCymek",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^Grenade",
        "^FlakWeapon",
@@ -5276,7 +5411,7 @@
     "name": "Neo Cymek",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~ixian_promotion_unlockneocymek",
+     "~ixian_promotion_neocymek",
      "ixian_ixresearchcenter"
     ],
     "queue": [
@@ -5343,7 +5478,7 @@
        }
       ],
       "weapon": "D2K_ShockGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5375,7 +5510,7 @@
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
-     "~!ixian_promotion_unlockstormraider"
+     "~!ixian_promotion_stormraider"
     ],
     "queue": [
      "Vehicle",
@@ -5489,7 +5624,7 @@
        }
       ],
       "weapon": "D2K_ShockGun2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^RailgunWeapon"
@@ -5539,7 +5674,7 @@
        }
       ],
       "weapon": "D2K_StormGun",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^TeslaWeapon",
        "^MagicWeapon"
@@ -5576,7 +5711,7 @@
     "prerequisites": [
      "~ixian_vehicle_production",
      "ixian_ixresearchcenter",
-     "~ixian_promotion_unlockstormraider"
+     "~ixian_promotion_stormraider"
     ],
     "queue": [
      "Vehicle",
@@ -5622,7 +5757,7 @@
        }
       ],
       "weapon": "D2K_Bazooka2",
-      "weapon_class_source": "WeaponClass",
+      "weapon_class_source": "template",
       "weapon_types": [
        "^D2KMissile"
       ]
@@ -5652,7 +5787,7 @@
     "name": "Ix Raider",
     "prerequisites": [
      "~ixian_vehicle_production",
-     "~!ixian_promotion_unlockheavyixraider"
+     "~!ixian_promotion_heavyixraider"
     ],
     "queue": [
      "Vehicle",

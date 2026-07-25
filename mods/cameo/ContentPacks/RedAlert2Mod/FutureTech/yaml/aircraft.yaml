@@ -308,13 +308,46 @@ harbinger_husk.futu:
 		PlayerPalette: player_rgba
 
 landcarr_drone.futu:
-	Inherits: ra2hornet
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Valued:
+		Cost: 1250
+	Tooltip:
+		Name: Hornet
+	Buildable:
+		Description: template_carrier_slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 225
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+		VTOL: true
 	Health:
 		HP: 10000
 	ChangesHealth@SelfHealing:
 		Step: 4
-	Aircraft:
-		VTOL: true
+	Armament@PRIMARY:
+		Weapon: RA2HornetMissile
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@ra2hornet:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: ra2hornet.Husk
+	Voiced:
+		VoiceSet: NighthawkVoice
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
 	-AutoTarget:
 	AutoTarget:
 		InitialStanceAI: Defend

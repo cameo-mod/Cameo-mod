@@ -665,7 +665,18 @@ cheapest provider wins).
    let design choose first.
 8. Renames/refactors are proven behavior-preserving with resolved-diff
    snapshots; balance changes are never mixed into them.
-9. Clean commits, one concern each; commit when design says so.
+9. Clean commits, one concern each; commit when design says so. Always
+   update ALL relevant documentation files (ROADMAP.md, audit summaries,
+   lessons learned, etc.) BEFORE committing — check old docs for outdated
+   info, inconsistencies, and contradictions, and fix them. A commit
+   without updated docs is an incomplete commit. Boot-gate with
+   `launch-game.cmd` before every commit: launch the game, wait for main
+   menu, kill process, check for new exception logs. `utility.cmd cameo
+   --check-yaml` is a separate linting tool (not a boot-gate substitute) —
+   use it for verifying cosmetic refactors, checking broken prerequisites,
+   and detecting gameplay-relevant YAML issues. Goal: 0 errors AND 0
+   warnings. The utility takes a very long time — only run it when all
+   connected tasks are done and you expect 0 errors/warnings to confirm.
 10. Every new unit ships with: naming-compliant id + `_icon`, Fluent keys,
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
@@ -692,6 +703,17 @@ cheapest provider wins).
   actors of a faction may feel the same, and especially no two actors of
   DIFFERENT factions may feel the same. Factions express identity through
   themed actors; uniqueness is a faction-identity feature, not polish.
+- **NO mirror factions; no shared stats (Warcraft 3 approach).** Cameo
+  deliberately never mirrors one faction against another — vanilla Warcraft 2
+  makes Humans/Orcs stat-identical and that is boring. Every faction has a
+  distinct identity, AND **every individual unit has its own stats: no two
+  units may share the same value of a balance stat** (HP, Speed, effective
+  damage-per-shot = Σwarheads×FirepowerMultiplier, RAW ReloadDelay, Range)
+  within their comparison class. WC2 Human/Orc counterparts (Footman↔Grunt,
+  Knight↔Ogre) are therefore re-statted apart, never mirrored. The lore-directed
+  DIRECTION of each faction's stat lean is in `design/FACTION_IDENTITY.md`
+  (source-cited); the 5-stat uniqueness is enforced mechanically by the balance
+  pipeline.
 - Weapon-dedup findings are **balance/design work**, never mechanical
   auto-fixes: propose per-actor stat divergence options, let design
   choose, then implement.
@@ -1636,7 +1658,7 @@ Countered by: Early Game Rush, Aircraft
 Special Units: Parzival, Dalek, Die Glocke
 Special Buildings: Moon Dairy Farm, Gravity Core
 Team Upgrades: Cryptofascism, Lunar Alloys
-Support powers: Gravity Core, Meteor Traction Beam
+Support powers: Gravity Core, Meteor Blitzkrieg
 ```
 
 Other RA2Mod factions (Consortium, Asian Alliance, Syndicate, FutureTech,

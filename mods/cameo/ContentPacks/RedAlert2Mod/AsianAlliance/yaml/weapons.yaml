@@ -93,6 +93,7 @@ AsianTankKillerRocket:
 	Projectile: Missile
 		Speed: 500
 		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
 		Acceleration: 5
 	Warhead@LightMissile: SpreadDamage
 		Damage: 34000
@@ -2089,7 +2090,8 @@ AsianMLRS:
 		Shadow: true
 		TrailImage: smokey
 		Inaccuracy: 600
-		LaunchAngle: 125
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
 		Speed: 300
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -2124,7 +2126,7 @@ AsianMLRS:
 ####################################################################################################
 
 # CLOSE-COMBAT VERIFICATION WEAPON (Formula v2, 2026-07-19): asianalliance_
-# fanatic proves the class identity — 2x HP + 2x DPS (via DOUBLE bursts,
+# fanatic proves the class identity â€” 2x HP + 2x DPS (via DOUBLE bursts,
 # not double damage) @ 250% cost = 500. base burst 10; upgrade/elite tiers
 # ride the upgrade pass (pair law: all three dedicated).
 asianalliance_fanatic_shotgun:

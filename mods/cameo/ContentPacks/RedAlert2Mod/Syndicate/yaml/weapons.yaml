@@ -1,4 +1,4 @@
-latinsyndicate_latinmilitia_ak47:
+﻿latinsyndicate_latinmilitia_ak47:
 	Inherits: ^RA2SmallArms
 	Range: 5395
 	ReloadDelay: 22
@@ -70,6 +70,7 @@ LatinTankKillerRocket:
 	Projectile: Missile
 		Speed: 666
 		MinimumLaunchAngle: 222
+		MaximumLaunchAngle: 222
 		Acceleration: 6
 	Warhead@LightMissile: SpreadDamage
 		Damage: 26000
@@ -507,7 +508,6 @@ RA2RBurritoRocket:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
@@ -1471,7 +1471,7 @@ RA2AkulaRockets:
 	Range: 24000
 	TargetActorCenter: true
 	ValidTargets: Ground, Water, Ship, Submarine
-	-Projectile: Missile
+	-Projectile:
 	Projectile: NukeLaunch
 		MissileWeapon: RA2AkulaRockets
 		MissileImage: latin_12_miss
@@ -1485,7 +1485,6 @@ RA2AkulaRockets:
 		TrailInterval: 1
 		Inaccuracy: 15000
 	-Warhead@Effect1:
-	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect

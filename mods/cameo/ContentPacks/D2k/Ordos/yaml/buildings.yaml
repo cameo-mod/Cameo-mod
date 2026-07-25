@@ -1,5 +1,5 @@
 ordos_constructionyard:
-	Inherits: ^construction_yard
+	Inherits: ^ConstructionYard
 	Tooltip:
 		Name: Ordos Construction Yard
 	Transforms:
@@ -11,7 +11,7 @@ ordos_constructionyard:
 # only sets its own build prerequisite (owning construction yard) and sprite image.
 
 ordos_windtrap:
-	Inherits: ^wind_trap
+	Inherits: ^WindTrap
 	Buildable:
 		Prerequisites: ~ordos_constructionyard
 		Description: Provides power to the base.
@@ -267,7 +267,7 @@ ordos_barracks:
 # its build prerequisite, its ixian_spiceharvester/delivery actors, and its sprite image.
 
 ordos_refineryordos:
-	Inherits: ^refinery
+	Inherits: ^D2KRefinery
 	Tooltip:
 		Name: Refinery
 	Buildable:
@@ -294,7 +294,7 @@ ordos_refineryordos:
 # its build prerequisite and sprite image.
 
 ordos_storagesilo:
-	Inherits: ^d2k_silo
+	Inherits: ^D2KSilo
 	Buildable:
 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: Stores excess resources.
@@ -302,7 +302,7 @@ ordos_storagesilo:
 		Image: silo.ordos
 
 ordos_lightfactory:
-	Inherits: ^light_factory
+	Inherits: ^LightFactory
 	Tooltip:
 		Name: Ordos Light Factory
 	RenderSprites:
@@ -315,7 +315,7 @@ ordos_lightfactory:
 		Prerequisite: ordos_light_vehicle_production
 
 ordos_heavyfactory:
-	Inherits: ^heavy_factory
+	Inherits: ^HeavyFactory
 	Tooltip:
 		Name: Ordos Heavy Factory
 	RenderSprites:
@@ -445,7 +445,7 @@ ordos_outpost:
 		SquadOffset: 1792,1792,0
 
 ordos_hightechfactory:
-	Inherits: ^high_tech_factory
+	Inherits: ^HighTechFactory
 	Buildable:
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Produces advanced vehicles.
@@ -456,7 +456,7 @@ ordos_hightechfactory:
 # prerequisite and sprite image.
 
 ordos_ixresearchcenter:
-	Inherits: ^research_centre
+	Inherits: ^ResearchCentre
 	Buildable:
 		Prerequisites: ~ordos_constructionyard, ordos_outpost
 		Description: Unlocks advanced technology.
@@ -467,7 +467,7 @@ ordos_ixresearchcenter:
 # its build prerequisite and sprite image.
 
 ordos_starport:
-	Inherits: ^starport
+	Inherits: ^Starport
 	Buildable:
 		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 		Description: Purchase units from off-world suppliers.
