@@ -697,10 +697,14 @@ in full; §12/§16 are superseded where they conflict with this section.
 
 ### 18.1 "Epic" is a ROLE, not a high HP number — Apocalypse is NOT epic
 
-- **Epic units in Cameo** = hero-like: **build limit 1**, unlocked behind a **Tier-4 promotion (4
-  promotion points)**, and *deliberately allowed to be far stronger than everything else.* They are
-  a heavy investment and **easily focus-fired down** (everyone shoots the one unit). **This is
-  working as intended.**
+- **Epic units in Cameo** = hero-like: **build limit 1**, *deliberately allowed to be far stronger
+  than everything else*, a heavy investment, **easily focus-fired down**. **Working as intended.**
+  - **The reliable signal is `BuildLimit: 1`, NOT the promotion.** MOST epics sit behind a Tier-4
+    promotion (4 promo points), but **not all** — e.g. the **RA1 Soviet MAD Tank** is epic with **no
+    promotion** (so far).
+  - **Hero infantry split the same way:** some (**Volkov, Exorcist**) need a **Tier-4 promotion**;
+    others (**Commando, Tanya**) are **regular hero units, no promotion.** Detect epic/hero from
+    `BuildLimit`/the hero template; treat the promotion as an *optional tech-tier* attribute.
 - **Monster Tank at 1,000,000 HP is FINE** — it's an epic (build-limit-1, promotion-gated), and has
   *never* been particularly strong in practice. My §12 "Monster 50× = unstoppable" was **WRONG**.
 - **The Apocalypse is a REGULAR unit** (no build limit), so its category is **NOT `^EpicVehicle`** —
@@ -761,6 +765,21 @@ ceiling 400.
 it's formula-native, and it preserves design intent. It **supersedes §12.4's hard HP bands** (those
 become *descriptive* "where units tend to land," not caps). Pair it with the upgrade fix (18.5).
 
+**★ Refinement — it's a BASEBAND, not just two points (maintainer 2026-07-25):** the baseline and the
+verifier define a **band where most units should live**, and the distribution is deliberately uneven:
+- **Sweet spot = 100%–250% cost** (baseline → verifier): **~80% of all units** should land here,
+  and **skewed toward the baseline** (100%). This is where the formula is most trustworthy.
+- **Hard caps = 50%–400%** — only a **few** units below baseline or above the verifier.
+- **★ The formula BREAKS DOWN below ~75% cost** — units get too weak for their price. Real examples:
+  a **600-credit tank** against an 800 baseline, and the **Naxis Rifle Recruit at 75¢** vs the 100¢
+  base version — both already *extremely* weak. So **75% is the practical floor**, not 50%.
+- **High end is more forgiving:** a unit with **4× HP + 4× firepower that only reaches ~3.5× cost** is
+  very strong but *acceptable* — gate it behind a **later tech tier**. (Above the verifier = "pays a
+  tech-tier tax," not "banned.")
+- **Implication for the pipeline:** the class **verifier** should be placed so that 2× HP + 2× DPS
+  lands near **2.5× cost** (upper-middle of the band), and the fit tool should **flag any member
+  priced below ~75%** as a break-down risk, not just clamp at 50%.
+
 ### 18.5 Revised work-items (this section supersedes §12's conclusions)
 
 1. **Fix defensive-upgrade stacking** — audit armor(damage-mult) / regen(nanobots,self-heal) /
@@ -782,3 +801,59 @@ baselines, MO re-stats every faction's basic units — **Conscript 205 ≠ GI**,
 inf:MBT ratio = 500/205 = **2.4×** (matches vanilla) but its Apoc is only **3.0× rifle** (vs vanilla
 6.4×) — MO compressed the top. **MO is now a first-class synthesis voice** for the RA2 factions and
 the template for how Cameo should de-homogenise per faction.
+
+---
+
+## 19. INTER-CLASS COMPARISON — do Cameo's classes relate correctly? (2026-07-25)
+
+The maintainer's question: we found the **rifle** is 5000 in CA / vanilla-OpenRA-TD/RA1 vs Cameo's
+**20000** (Cameo = 4× that base). But is the **4× consistent across every class**, or did some
+classes drift? I.e. **do scout↔MBT↔helicopter↔defense relate to each other in Cameo the way they do
+in the source games?** Method: normalize each class to **its own game's rifle**, then compare the
+per-class multiple. If Cameo's multiple ≠ the reference's, that class has drifted *relative to
+infantry*. (RA2 used as the primary reference — most Cameo factions are RA2-engine; TD/RA1 era-caveat
+below.)
+
+| Class (representative) | Reference RA2 ÷rifle(125) | Cameo ÷rifle(20000) | **Distortion (Cameo÷Ref)** |
+|---|--:|--:|:--:|
+| rifle / scout | 1.00 | 1.00 anchor (factions 1.2–1.3) | ~1.1× |
+| **MBT** (Grizzly) | 2.4 | 5.0 | **2.1×** |
+| heavy tank (Rhino) | 3.2 | 6.5 | **2.0×** |
+| Apocalypse | 6.4 | 17.5 | **2.7×** |
+| artillery (V3) | 1.2 | 1.9 | 1.6× |
+| **aircraft** (attack heli/jet) | 1.2–1.6 | 2.9–4.25 | **~2.5×** |
+| basic defense (Pillbox/Sentry) | 3.2 | 5.0 | 1.6× |
+| advanced defense (Tesla/Prism) | 4.8 | 6.0–6.75 | ~1.3× |
+
+### 19.1 ★ The answer — the 4× is NOT uniform; tanks & aircraft drifted UP relative to infantry
+
+Ordered by how much Cameo inflated each class *relative to its own infantry*:
+
+> **infantry ~1.1× < advanced-defense ~1.3× < artillery / basic-defense ~1.6× < tanks ~2.0× <
+> aircraft ~2.5× < Apocalypse-class ~2.7×.**
+
+- **Infantry are on-scale** (~1× the reference ratio) — the 20000 rifle is a faithful 4×/160× lift.
+- **Tanks are ~2× over.** In RA2 an MBT is worth **2.4 riflemen** of HP; in Cameo it's **5.0**. So
+  **Cameo infantry are ~2× weaker vs armor** than the source intends → armor feels dominant, infantry
+  feel disposable against tanks. This is the clearest inter-class break.
+- **Aircraft are ~2.5× over** — RA2 aircraft were deliberately *fragile* (1.2–1.6× rifle, killed fast
+  by AA); Cameo made them **2.9–4.25×**, so air is far harder to shoot down relative to everything
+  else. (Compounds the §14 "AA is everywhere" issue from the *other* side.)
+- **Defenses drifted the LEAST** (1.3–1.6×) — closest to reference. Note buildings *also* get the §7
+  damage-exemption, so their *effective* durability is a bit higher than the HP ratio alone shows.
+
+### 19.2 Era caveat + what it means for the pipeline
+
+- **Era caveat (§17):** this is the RA2 reference. TD/RA1 units have a *wide* native ratio (MBT
+  9×), so Cameo's TD tanks are **less** distorted vs their own era. But Cameo is **one battlefield**,
+  so the RA2 tanks sitting at 5× while the unified target is ~3–4× is the real inconsistency.
+- **Pipeline consequence — this is exactly the data the class anchors need.** To make classes relate
+  correctly, the **vehicle and aircraft anchors must come DOWN relative to the infantry anchor**:
+  - **MBT anchor** → ~**2.5–3× rifle** (50–60k), not the current ~5× (100k).
+  - **Aircraft anchor** → ~**1.5–2× rifle**, not the current ~3–4×.
+  - **Defenses** → roughly keep (they're near reference); mind the §7 damage-exemption interaction.
+  - **Infantry anchors** → keep (on-scale).
+- **HP-only caveat:** inter-class balance also rides DPS + cost; the **cost-band (§18.4)** governs
+  aggregate power, and this HP finding says *where the HP portion of the vehicle/aircraft anchors
+  should sit.* Feed both into the anchor re-derivation — never hand-set. This makes the classes
+  **relate to each other** the way the source games (and thus real RTS balance) intend.
