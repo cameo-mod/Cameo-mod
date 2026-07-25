@@ -1244,7 +1244,15 @@ cabal_radar_cruiser:
 		Filename: shared_sprites|gunfire2.shp
 		Length: 5
 
-
+cabal_lcraft:
+	idle:
+		Filename: cabal_sprites|cabal_lcraft.png
+		Facings: 64
+	icon:
+		Filename: cabal_icons|cabal_lcraft_icon.png
+	muzzle:
+		Filename: shared_sprites|gunfire2.shp
+		Length: 5
 
 # gtsand:
 # 	Defaults:

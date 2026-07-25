@@ -1,3 +1,46 @@
+cabal_lcraft:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^CargoVehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Landing Craft
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_navalyard
+		Queue: Naval, RANaval
+		Description: Naval Transport, indefense
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		PassengerFacing: 0
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: player_rgba
+
 cabal_lazerboat:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate
@@ -11,11 +54,11 @@ cabal_lazerboat:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_navalyard
 		Queue: Naval, RANaval
-		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
+		Description: Light hydroboat, high firepower, can shoot air and ground units
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Laser Boat
+		Name: Laser Hydroboat
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -25,19 +68,21 @@ cabal_lazerboat:
 	Armor:
 		Type: Medium
 	Mobile:
-		Speed: 120
-		TurnSpeed: 24
+		Speed: 100
+		TurnSpeed: 12
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
 	Turreted:
 		TurnSpeed: 24
 		Offset: 512,0,0
 	Armament@PRIMARY:
 		Weapon: CabalLaserBoatLaser
-		LocalOffset: 350,-30,250, 350,30,250
+		LocalOffset: 350,-5,10, 350,5,10
 		Recoil: 128
 		RecoilRecovery: 26
 	Armament@AA:
 		Weapon: CabalLaserBoatLaserAA
-		LocalOffset: 350,-30,250, 350,30,250
+		LocalOffset: 350,-5,10, 350,5,10
 		Recoil: 128
 		RecoilRecovery: 26
 	Armament@SECONDARY:
@@ -58,6 +103,9 @@ cabal_lazerboat:
 	RenderSprites:
 		Image: cabal_lazerboat
 		PlayerPalette: player_rgba
+	Hovers:
+	Targetable@Hover:
+		TargetTypes: Water, Ship
 
 cabal_plasmasub:
 	Inherits: ^BoatUnit
@@ -80,7 +128,7 @@ cabal_plasmasub:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cabal_navalyard, cabal_radar
 		Queue: Naval, RANaval
-		Description: actor_ra1_soviets_missilesubmarine.description
+		Description: Heavy Siege Submarine, shoots plasma and only attacks ground
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -135,11 +183,10 @@ cabal_radar_cruiser:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_navalyard, cabal_techcenter
 		Queue: Naval, RANaval
-		Description: Siege light boat, attacks air and ground, long range aganist ground, can attack submarines
-	Valued:
+		Description: Can hacks other Navy units and capture and buildings
 		Cost: 2500
 	Tooltip:
-		Name: CABAL Sensor Cruiser
+		Name: CABAL Hacker Cruiser
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
