@@ -49,10 +49,18 @@ ruling.** Also note the §7 building damage-exemption (defenses effectively tank
 1. **Defense mobility term** — speed 100 placeholder, or the footprint/power-draw substitute (pipeline §5)?
 2. **FireSupport + LineBreaker verifiers** — thin candidates in the RA2/TD/RA1 pull (both are more TS/
    CABAL concepts). Name the intended baseline/verifier, or I pull the TS/CABAL ledgers.
-3. **Support (both `^SupportVehicle` + `^SupportInfantry`) = FULLY EXEMPT** (maintainer 2026-07-25):
-   support units deal no consistent (or no) damage ⇒ nothing to calculate ⇒ **not in the balance
-   pipeline at all.** They are the ONE class outside every balancing effort. `check_band.py` already
-   skips them (dps0/range0 = 0); remove them from any anchor/verifier requirement.
+3. **Support (medics / mechanics / casters / mind-control / spies) = FULLY EXEMPT** (maintainer
+   2026-07-25): no consistent (or no) damage ⇒ nothing to calculate ⇒ **not in the balance pipeline
+   at all.** The ONE class outside every balancing effort. `check_band.py` already skips them.
+3b. **★ CARGO-PRICING RULE (maintainer 2026-07-25) — cargo units ARE balanced, deterministically.**
+   Any **cargo vehicle or aircraft** (APC, troop transport, Battle Fortress, etc.) is priced at the
+   **SUM of the infantry it carries at full capacity** — *even if it has no weapon.* This is a FIXED
+   rule, separate from the damage formula. Verified: Battle Fortress `Cargo.MaxWeight 6` @ 4000¢,
+   GDI APC `MaxWeight 8`. So an **unarmed transport is NOT exempt** (that's the passenger-sum rule);
+   only NON-cargo support (medics/casters) is exempt (#3). **New pipeline rule** (encode into
+   `check_band`/pricing): if an actor has a `Cargo:` trait, its cost target = Σ(passenger costs at
+   capacity), and it is checked against THAT, not the class formula. *(Confirm the per-slot reference
+   infantry cost — capacity 6 → 4000¢ implies ~667¢/slot, i.e. an elite loadout assumption.)*
 4. **Bunker** — damage comes from garrisoned infantry, so it may be baseline-only (HP + cost only).
 5. **commando (infantry)** — needs a verifier (currently null). Propose: commando verifier =
    a 2×/2×/2.5× hero sibling. (Support is exempt per #3 — no verifier.)

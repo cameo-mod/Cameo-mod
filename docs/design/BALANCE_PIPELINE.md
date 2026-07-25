@@ -331,6 +331,17 @@ data, each via `fit_class.py` + a maintainer-confirmed anchor unit + sign-off:
   formula meanwhile. Suggested order: **mbt → high-tech → light/TD/AA/arty tanks → aircraft →
   defenses → infantry confirmations.**
 
+### 8.4b Fixed pricing rules that BYPASS the class formula (maintainer laws)
+
+Two unit kinds are NOT priced by the class-baseline formula:
+- **Support** (medics / mechanics / casters / mind-control / spies) — **fully EXEMPT.** No consistent
+  or no damage ⇒ nothing to compute. Never anchor/verify/band-check. The one class outside balancing.
+- **Cargo vehicles + aircraft** (any actor with a `Cargo:` trait — APC, transport, Battle Fortress) —
+  priced at the **SUM of the infantry carried at full capacity**, *even if unarmed.* A FIXED rule:
+  `cost target = Σ(passenger costs at Cargo.MaxWeight)`. `check_band` must detect `Cargo:` and check
+  the passenger-sum, not the class formula. (Verified: Battle Fortress MaxWeight 6 @ 4000¢.) So an
+  unarmed transport is *balanced* (passenger-sum), unlike exempt support.
+
 ### 8.5 New guards to build (wire all into `run_all.sh`)
 
 - **`check_band.py`** — the §8.1 baseband validator.
