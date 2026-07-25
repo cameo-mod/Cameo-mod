@@ -251,3 +251,86 @@ First customer: the SM full rebalance (ROADMAP P1b) runs on Phases
   sheet's WeaponClass stays the design scalar. Formalizing versus
   into pricing is a Formula-v3 question, deliberately out of scope.
 - xlsx never committed → no binary merge conflicts, ever.
+
+## 8. HARDENING — deterministic, agent-independent, memory-free (2026-07-25)
+
+Maintainer directive: the pipeline must **run identically no matter who starts it or which AI agent
+is used**, be **absolutely stable**, and **never be disrupted by wrong memories.** The architecture
+above already resists silent drift; this section closes the remaining gaps so the pipeline is truly
+foolproof, and fixes the ORDER of operations. Reference data behind the anchor targets:
+`BALANCE_SYNTHESIS.md` §12–§19.
+
+### 8.1 The BASEBAND law — encode it, stop trusting it to discipline
+
+The class **baseline** (100% cost) and **verifier** (250% cost = 2× HP + 2× DPS) bound a *band where
+most units live*. Distribution is deliberately uneven:
+- **Sweet spot 100%–250% cost** — ~**80% of all units**, skewed toward the **baseline (100%)**.
+- **Hard caps 50%–400%** — only a few units below baseline or above the verifier.
+- **★ The formula BREAKS DOWN below ~75% cost** — units become too weak for their price (a
+  600¢ tank vs an 800¢ base; the Naxis Rifle Recruit at 75¢). **75% is the practical FLOOR**, not 50.
+- **High end is forgiving:** a 4×HP+4×firepower unit landing at ~3.5× cost is strong-but-OK if it's
+  **gated to a later tech tier**. Above the verifier ⇒ "pays a tech-tier tax," not "banned."
+- **→ NEW VALIDATOR (`tools/balance/check_band.py`):** for every unit, compute its class-formula
+  price and the ratio price/cost0. **Emit a finding for any member priced < 75% (breakdown risk) or
+  > 400% (needs tech-tier gate); report the 100–250% occupancy %** (target ≥ 80%). Wire into
+  `run_all.sh`. This turns the baseband from a remembered rule into an **enforced gate**.
+
+### 8.2 Determinism & agent-independence (the anti-"wrong memory" rules)
+
+1. **Three authorities, and ONLY three:** `formula.py` (the math), `class_anchors.json` (the
+   numbers), and this doc + `DESIGN.md` (the laws). **Memories are hints, never authority.** If a
+   memory and these disagree, these win — always verify against them before acting.
+2. **Every command is idempotent + guarded.** `extract_stats.py --check`, the single-writer
+   `.session` state, and the drift audit mean a re-run or a wrong-state run **aborts with
+   instructions** rather than half-applying. Same inputs → same outputs, every agent, every time.
+3. **The guardrails catch mistakes regardless of belief:** drift audit (yaml≡ledger) + the new band
+   validator (§8.1) + anchor-completeness (§8.5) + the boot gate. An agent acting on a wrong memory
+   **cannot land** an inconsistent state silently — a guard goes red.
+4. **No step requires judgment that isn't recorded.** Anchor picks, `design.*` inputs, and sign-offs
+   live in the ledger/anchors JSON, not in an agent's head — so the next agent reproduces them.
+
+### 8.3 ORDER OF OPERATIONS (maintainer law) — base units + defenses FIRST, upgrades LAST
+
+**Upgrades are priced ON TOP of finished unit stats.** If a unit's stats change, every upgrade's
+effect (armor mult, regen, weapon swap) changes too — so pricing upgrades before units are final
+means re-doing them. Therefore the strict sequence:
+
+1. **Rebalance all BASE units + DEFENSES** (this whole §8.4 anchor pass) → validate band → apply →
+   boot-gate → commit.
+2. **THEN** price upgrades on the finished baselines (incl. the defensive-upgrade-stacking fix,
+   `BALANCE_SYNTHESIS.md` §18.2 — the actual "unkillable" cause). **Do not start upgrades early.**
+
+### 8.4 Anchor-finalization sequence (grounded in §12–§19, one class at a time)
+
+Most `class_anchors.json` entries are still `signed_off: false`. Finalize them using the synthesis
+data, each via `fit_class.py` + a maintainer-confirmed anchor unit + sign-off:
+
+- **Infantry anchors → keep** (§19: infantry are on-scale, ~1× rifle). Confirm + sign the existing
+  provisional infantry anchors.
+- **★ Vehicle anchors → bring DOWN** (§19: tanks are ~2× over relative to infantry): **MBT ≈ 2.5–3×
+  rifle (~50–60k HP)**, not the current ~5× (100k); heavy/high-tech scale up modestly from there.
+- **★ Aircraft anchors → bring DOWN** (§19: air ~2.5× over): **≈ 1.5–2× rifle**.
+- **Defenses → roughly keep** (§19: near reference) — but account for the §7 building damage-exemption
+  so effective durability isn't double-counted.
+- **Epic / hero → not band-limited** (`BuildLimit: 1`, §18.1) — priced separately, deliberately extreme.
+- Each class: `fit_class.py --class X --anchor <unit>` → review `formula_v2_X.md` + `check_band.py`
+  → maintainer sets `signed_off: true`. **One class at a time**; unfitted classes keep the Tiger
+  formula meanwhile. Suggested order: **mbt → high-tech → light/TD/AA/arty tanks → aircraft →
+  defenses → infantry confirmations.**
+
+### 8.5 New guards to build (wire all into `run_all.sh`)
+
+- **`check_band.py`** — the §8.1 baseband validator.
+- **anchor-completeness** — fail if any ledger unit tagged `design.class_anchor = X` belongs to a
+  class whose anchor is missing or `signed_off: false` once that class is declared "done" (prevents
+  half-finalized classes shipping).
+- **new-template registration** — the 4 new vehicle templates (`^LightTank`, `^TankDestroyer`,
+  `^AntiAirTank`, `^ArtilleryTank`) + the `^SupportVehicle` redefinition must exist in
+  `defaults.yaml` before their class anchors can sign off (boot-gated yaml task).
+
+### 8.6 The one-command runbook (what "anyone can run it" means)
+
+The end-state: a single guarded entry (e.g. `balance` wrapper) runs
+`extract_stats --check → check_band → audit_balance_drift → (report)` read-only for a **status**, and
+the gated `apply_balance --confirm` for a **write** — both fully deterministic, both refusing to
+proceed on a stale `.session` or a red guard. No memory, no tribal knowledge, no per-agent variance.
