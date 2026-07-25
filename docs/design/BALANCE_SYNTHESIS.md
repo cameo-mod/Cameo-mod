@@ -356,3 +356,118 @@ same treatment; a low-HP unit can still be oppressive via damage. (b) The epic t
 (c) CA's wide gap shows some mods deliberately spread more; the 20× target is a judgement call the
 maintainer signs off, not a law from the data. (d) Numbers are **proposals for the pipeline**, not
 applied — no yaml/anchor was edited to produce this section.
+
+---
+
+## 13. GROUNDED WARHEAD LIBRARY + class↔weapon binding (2026-07-25)
+
+The versus profiles the §8 rework needs, pulled from CnCR (RA2+TS combined, the richest set) and
+cross-checked against RA2/YR/RV. Armor order below: **none · flak · plate · light · medium ·
+heavy · wood · steel · concrete** (first three = infantry armors, light/medium/heavy = vehicle
+armors, wood/steel/concrete = structures). All normalized to a 100-scale.
+
+### 13.1 The rock-paper-scissors CORE triad (this IS §10's mechanism)
+
+| Warhead | none flak plate · light med heavy · wood steel conc | Beats | Loses to |
+|---|---|---|---|
+| **SA** (small arms) | `100 80 80 · 25 13 13 · 38 25 13` | infantry | **all armor** |
+| **AP** (armor-piercing cannon) | `25 25 15 · 75 100 100 · 65 45 60` | vehicles | **infantry** |
+| **HE** (high-explosive splash) | `100 100 100 · 70 70 35 · 75 40 20` | infantry + light veh | **heavy armor** |
+
+**This is a complete rock-paper-scissors already:** SA shreds infantry but pings off tanks; AP kills
+tanks but wastes on infantry; HE covers the middle (infantry + light) but bounces off heavy armor.
+**Each warhead has a built-in weakness — as long as a unit carries only ONE.** This is the whole
+argument for the binding law: it's not our versus values that are broken, it's *mixing*.
+
+**Proof that mixing erases the weakness** (the §8 core problem, quantified): averaging SA+AP →
+`62 52 47 · 50 56 56 · …` — now roughly *flat* ~50 vs everything, **no weakness left**. A unit with
+both is good against all targets. That is exactly StarCraft Ghost / WC2 archers / Nod LightTank Mk2.
+
+### 13.2 The extended warhead library (each with a real trade-off)
+
+| Warhead | Profile (none/plate · light/med/heavy · struct) | Role | Weakness |
+|---|---|---|---|
+| **Fire / Flame** | `100 80 60 · 15 9 10 · struct 50` | anti-infantry + anti-structure | armor |
+| **Chemical / Toxin** | `100 100 100 · 25 20 15 · 10-25` | anti-infantry (ignores inf armor tiers) | armor, and no-op vs robotic |
+| **Radiation** (Desolator) | `100 100 100 · 70 15 15` | anti-inf + anti-light | heavy armor |
+| **Tesla / Electric** | `low inf · light 100 heavy 75 · struct 65-100` | anti-armor + anti-structure | infantry |
+| **Prism / Laser** | `100 100 100 · 75 50 50 · wood 200` | general + anti-structure | heavy armor (dmg falloff) |
+| **Sniper** (targets infantry only) | `100 · 50 · heavy 25` + ValidTargets:infantry | pure anti-infantry, huge/shot | **cannot target vehicles at all** |
+| **Sonic / Wave** | broad, ignores some armor | general anti-armor | (specialty — cost-gate) |
+| **AA (Flak/SAM/rocket)** | reuses a ground profile + **ValidTargets:air** | anti-air | **class-gated (§9), ground-limited** |
+
+**Key structural finding:** **AA is a *targeting gate*, not a versus profile.** CnCR AA weapons
+just reuse ground warheads with `ValidTargets=air` (GaussAA→SSA anti-inf, DualAABazooka→TTAP
+anti-armor, TSSuperHE→general). So §9's "which classes may hit air" is enforced by ValidTargets on
+the armament, exactly as planned — we do **not** need special AA versus columns, just the class gate.
+
+### 13.3 The class ↔ weapon binding matrix (the §8 law, made concrete)
+
+Each Cameo class binds to ONE primary warhead (mix only via upgrade / flagged exception, §8):
+
+| Cameo class | Primary warhead | Role | Air? (§9) |
+|---|---|---|:--:|
+| scout / rifle | **SA** | anti-infantry | no |
+| closecombat | **SA (+Chaingun, both anti-inf)** | anti-infantry brawler | no |
+| grenadier | **HE / Grenade** | splash, anti-inf + light | no |
+| mortar | **HE (indirect arc)** | long-range anti-inf/structure | no |
+| pure_sniper | **Sniper (inf-only)** | anti-infantry, per-shot | no |
+| heavy_sniper | **AP / Railgun** | all-ground anti-armor | no |
+| heavy_infantry (tesla/shock) | **Tesla/Electric** | anti-armor + structure | no |
+| rocket_trooper | **AP-rocket** | anti-armor **+ AA** | **yes** |
+| archer | **arrow (arc)** | anti-inf **+ AA** | **yes** |
+| special_forces | ⚠️ see flag below | versatile | **yes** |
+| melee | **melee (inf-only)** | anti-infantry, no range | no |
+| flying_infantry | per-unit | varies | (self) |
+| commando | **C4 / pistol** | anti-inf + demolition vs buildings | no |
+| support | none | — | no |
+| **MBT** | **AP cannon** | anti-armor | no |
+| light / scout vehicle | **SA autocannon** | anti-inf **+ AA** | **yes** |
+| artillery vehicle | **HE (indirect)** | anti-inf/structure | no |
+| flame vehicle | **Fire** | anti-inf/structure | no |
+| heavy / Mammoth tank | **AP + limited AA rocket** | anti-armor (+situational AA) | **limited** |
+| dedicated AA vehicle | **AA (Flak/SAM)** | anti-air | **yes (primary)** |
+
+**⚠️ FLAG for the maintainer — the special_forces class contradicts the binding law.** Cameo's SF
+template deliberately SUMs SA+Chaingun+Railgun (anti-inf + anti-armor + anti-air) — precisely the
+"good against everything, no weakness" pattern §8 outlaws. Options: (a) declare SF the *one marked
+class-wide exception* (versatile is its identity, costed accordingly), or (b) bind SF to a single
+warhead + make its versatility an upgrade. This is a real design decision, not a bug to silently
+fix — **needs a maintainer ruling.** (closecombat's SA+Chaingun is fine — both are anti-inf, so no
+weakness is averaged away.)
+
+**Work remaining on §8:** audit `mods/cameo/weapons/weapons.yaml` against this matrix (which actors
+violate their binding), grow the template library to cover every row above, convert real thematic
+mixes (Chem Bike, Incendiary Bullets) to upgrade-gated, and remove the wild ones. Then the DPS
+side (§4 damage numbers) gets the same normalize→synthesize pass as HP got in §12.
+
+---
+
+## 14. AA-GATING AUDIT — first scan (2026-07-25)
+
+§9 says only **Special Forces / Archer / Rocket** infantry may hit air. First scan across the whole
+mod (detect armaments whose weapon has `ValidTargets: … Air …`, then cross-reference infantry
+actors):
+
+- **632 AA-capable weapon templates** mod-wide; **4856** air-targeting armament lines total.
+- **190 INFANTRY actors carry an AA weapon** — far more than the SF/archer/rocket gate allows.
+- A crude role-keyword filter flags **~141 as candidate violations.** Clear offenders (not
+  false-positives): `ordos_lightinfantry` (basic LMG rifleman), `schwarzermond_lunarsoldier` (basic
+  rifle), `ra2_soviets_crazyivan` (**IvanBomb** — a demolition charge targeting *air*),
+  `yuri_initiate` (**PsychicJab** melee hitting air), `protoss_hightemplar` (**PsiStorm** AoE hitting
+  air), `terran_jimraynor` / `latinsyndicate_narco` (pistols), `latinsyndicate_freedomfighter`
+  (AK-47 + rocket both AA). **Basic rifle/pistol/melee/bomb weapons should never target air.**
+
+**This confirms §9 is widely violated at the infantry level** — a major, concrete source of "AA is
+everywhere / air is useless" imbalance. **BUT the per-actor list needs a refined, dedicated audit
+tool** (the keyword filter has false positives — legit snipers like `asianalliance_asiancommando`
+got flagged; and some `…AA`/`…SmallAA` weapons are the *intended* AA variant). 
+
+**Next step (scripted, not manual):** add `tools/audit/audit_aa_gating.py` to the suite that (a)
+resolves each armed actor's Cameo **class** (via the `class_anchor`/`balance_include` tags or
+template inheritance, not a name heuristic), (b) lists actors whose class is NOT in the §9
+air-allowed set yet carry an unconditional (non-upgrade) AA armament, and (c) emits to
+`docs/audit/latest/aa_gating.md` **via `run_all.sh`** (bash only — PowerShell `>` writes UTF-16,
+[[cameo-powershell-utf16-hazard]]). The vehicle/aircraft gate (support/scout/hi-tank; no
+flying-artillery AA) is the same check over `vehicles.yaml`/`aircraft.yaml`. This tool is the
+clean way to enforce §9 mod-wide; the scan above is only the scoping evidence that it's needed.
