@@ -113,6 +113,10 @@ FileSystem: DefaultFileSystem
 MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
+Shellmaps:
+	desert-shellmap-2.oramap
+	shellmap_v2.oramap
+	shellmap_v3.oramap
 # Faction content packs Ã¢â‚¬â€ the Include order below defines the lobby faction
 # selector order (the lobby groups factions by Side and lists them in load
 # order). Unmigrated themes are loaded via include-only wrapper packs so every
