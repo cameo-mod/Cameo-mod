@@ -1742,3 +1742,20 @@ All other factions have a single, thematically appropriate wall type.
   **NOTE:** `utility.cmd cameo --check-yaml` takes 10+ minutes. Only run it
   after completing ALL connected fixes and expecting 0 errors/warnings. Do NOT
   run it repeatedly. Keep findings above updated in this section.
+
+---
+
+## Superweapon Documentation Audit (2026-07-25, COMPLETED)
+
+Full cross-reference of all superweapon and support power YAML traits vs
+`FACTIONS.md`. Raw data: `docs/audit/latest/superweapon_audit.yaml`.
+Summary: `docs/audit/SUMMARY.md` § "Superweapon documentation audit".
+
+**14 findings** — all FACTIONS.md discrepancies FIXED:
+- SW-001 (HIGH): Harkonnen Palace has `^PrimarySuperweapon` but no power trait (parked faction, not a regression)
+- SW-002 (MED): Forgotten superweapon corrected from "Tiberian Wildlife Rampage" to "Nuclear Missile"
+- SW-003 (MED): CABAL corrected — added Nuclear Missile, removed unimplemented "Satellite Hack"
+- SW-004–011 (LOW): Added missing support powers (Cluster Missile, Chrono Reinforcements, Force Shield, EMP Disable, Traitors, Slow, Invisibility, Bloodlust, Haste) + fixed name mismatches (Meteor Blitzkrieg, Chaos Storm)
+- SW-012–014 (INFO): Added Drop Pods, Federation Support Teleport to reference table; noted Protoss reuses SteelIonCannon
+
+**WIP factions discovered** (not in FACTIONS.md): Warzone 2100, Worms, Win98, Warcraft 1, WH40K all have superweapon traits in rules/ YAML. Document when factions become active.

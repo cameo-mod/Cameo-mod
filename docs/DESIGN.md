@@ -1658,7 +1658,7 @@ Countered by: Early Game Rush, Aircraft
 Special Units: Parzival, Dalek, Die Glocke
 Special Buildings: Moon Dairy Farm, Gravity Core
 Team Upgrades: Cryptofascism, Lunar Alloys
-Support powers: Gravity Core, Meteor Traction Beam
+Support powers: Gravity Core, Meteor Blitzkrieg
 ```
 
 Other RA2Mod factions (Consortium, Asian Alliance, Syndicate, FutureTech,

@@ -1,6 +1,6 @@
-# Cameo Knowledge Base Manual v.0.3
+# Cameo Knowledge Base Manual v.0.4
 
-> **Version note:** Manual v.0.3.1 — this edition reflects the Cameo mod source as of 2026-07-24, including the completed ContentPack migration (all factions now in ContentPacks), the full RA2 weapons migration to ContentPack (all 134 weapons + templates), the YAML lint cleanup (LaunchAngle, DuplicateInteractable, NegativeRemoval, InvalidWeaponField, MissingTooltip, ProductionCostMultiplier Prerequisites fixes), PascalCase inheritance template enforcement, cross-faction inheritance violation fixes, prerequisite cleanup (~disabled policy), balance pipeline implementation, TKM faction self-containment, and the NuclearFlashRenderer custom post-process shader. File paths and class names may change in newer mod versions.
+> **Version note:** Manual v.0.4 — this edition is a comprehensive expansion that mirrors all project documentation into a single super-wiki. In addition to the v.0.3.1 content (ContentPack migration, RA2 weapons migration, YAML lint cleanup, PascalCase enforcement, cross-faction inheritance fixes, ~disabled policy, balance pipeline, TKM self-containment, NuclearFlashRenderer shader), this version adds nine new appendices (Q–Y) covering: Project Governance and Agent Workflow, Binding Design Rules and Conventions, the complete Balance System (Formula v2, Armor System, Pipeline), Lessons Learned and Recurring Pitfalls, the ContentPack Migration Process, Audit Status and Bug Class Reference, a Faction Compendium with lore and gameplay profiles, the Long-term Vision for Dynamic Campaign Mode, and the AI Agent Handoff Log. All information has been cross-checked against the live codebase and source documents as of 2026-07-24.
 >
 > **Key changes since v.0.2 (2026-07-16):**
 > - All faction **rules** now loaded via `Include:` entries in `mod.yaml` (not direct `Rules:` entries). Faction sequences and weapons are partially migrated — some are loaded via ContentPacks, others remain direct entries in `mod.yaml`.
@@ -80,6 +80,15 @@ This single-file edition combines the Cameo Knowledge Base Manual chapters into 
 - [Appendix N — Official Mod Terrain Tile Reference](#file-appendices-Appendix_N_Official_Terrain_Tile_Reference)
 - [Appendix O — Official Mod Environmental Actors](#file-appendices-Appendix_O_Official_Environmental_Actors)
 - [Appendix P — Cameo Faction Actor Visual Reference](#file-appendices-Appendix_P_Cameo_Faction_Actor_Visual_Reference)
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance)
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules)
+- [Appendix S — Balance System: Formula, Armor, and Pipeline](#file-appendices-Appendix_S_Balance_System)
+- [Appendix T — Lessons Learned and Recurring Pitfalls](#file-appendices-Appendix_T_Lessons_Learned)
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration)
+- [Appendix V — Audit Status and Bug Class Reference](#file-appendices-Appendix_V_Audit_Status)
+- [Appendix W — Faction Compendium](#file-appendices-Appendix_W_Faction_Compendium)
+- [Appendix X — Long-term Vision and Campaign Mode](#file-appendices-Appendix_X_Vision)
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff)
 
 ---
 
@@ -188,6 +197,15 @@ This single-file edition combines the Cameo Knowledge Base Manual chapters into 
 - `appendices/Appendix_N_Official_Terrain_Tile_Reference.md` — Official OpenRA mod terrain tile reference.
 - `appendices/Appendix_O_Official_Environmental_Actors.md` — Official OpenRA mod environmental actor reference.
 - `appendices/Appendix_P_Cameo_Faction_Actor_Visual_Reference.md` — Cameo active-faction actor visual reference with cameo/unit previews.
+- `appendices/Appendix_Q_Project_Governance.md` — Project governance, agent workflow, commit gates, and operational protocols.
+- `appendices/Appendix_R_Design_Rules.md` — Binding design rules and conventions (naming, stats, tech tiers, upgrades, assets).
+- `appendices/Appendix_S_Balance_System.md` — Balance system: Formula v2, armor system, and balance pipeline v2.
+- `appendices/Appendix_T_Lessons_Learned.md` — Hard-won lessons, safe defaults, and recurring pitfalls.
+- `appendices/Appendix_U_Migration.md` — ContentPack migration process (dynamic faction loading).
+- `appendices/Appendix_V_Audit_Status.md` — Audit status, bug class taxonomy, and fix prioritization.
+- `appendices/Appendix_W_Faction_Compendium.md` — Faction compendium with lore, gameplay profiles, and roster stats.
+- `appendices/Appendix_X_Vision.md` — Long-term vision for dynamic campaign mode ("The Singularity Crisis").
+- `appendices/Appendix_Y_Agent_Handoff.md` — AI agent handoff log with engine/build info and project state.
 
 
 
@@ -404,6 +422,15 @@ When reading the OpenRA manual, treat the baseline engine behavior as correct, t
 - [Master Index](#file-MASTER_INDEX) — single-page navigation for this manual.
 - [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence) — concise reference of all Cameo differences from upstream OpenRA.
 - `build files/CAMEO_DIVERGENCE.md` — raw divergence inventory used to plan and maintain this manual.
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance) — repository ownership, agent workflow rules, commit gates, and operational protocols.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — naming conventions, stat rules, tech tiers, upgrade/promotion rules, and asset norms.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) — Formula v2, Armor System, and Balance Pipeline v2.
+- [Appendix T — Lessons Learned and Recurring Pitfalls](#file-appendices-Appendix_T_Lessons_Learned) — hard-won lessons, safe defaults, and recurring pitfalls.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) — dynamic faction loading and ContentPack migration.
+- [Appendix V — Audit Status and Bug Class Reference](#file-appendices-Appendix_V_Audit_Status) — audit bug taxonomy and fix prioritization.
+- [Appendix W — Faction Compendium](#file-appendices-Appendix_W_Faction_Compendium) — lore, gameplay profiles, and roster stats for all factions.
+- [Appendix X — Long-term Vision and Campaign Mode](#file-appendices-Appendix_X_Vision) — the "Singularity Crisis" dynamic campaign vision.
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff) — engine/build info, project state, and handoff notes for AI agents.
 
 
 ---
@@ -2985,6 +3012,9 @@ The Cameo mod preserves the upstream OpenRA combat pipeline (attack order -> `At
 - [Part 1.2 — Activities and the Game Loop](#file-chapters-Part_01_Chapter_02_Activities)
 - [Part 2.4 — Rulesets, Actors, and Weapons](#file-chapters-Part_02_Chapter_04_Rules_Weapons)
 - [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence)
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — weapon-class triads, Versus table construction rules, and exclusivity laws.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) — Formula v2, Armor System (weapon-class Versus law), and Balance Pipeline v2.
+- [Appendix T — Lessons Learned and Recurring Pitfalls](#file-appendices-Appendix_T_Lessons_Learned) — weapon uniqueness rules, MinRange exceptions, and garrison weapon pitfalls.
 - [OpenRA playtest weapons reference](https://docs.openra.net/en/playtest/weapons/)
 - [OpenRA playtest traits reference](https://docs.openra.net/en/playtest/traits/)
 
@@ -2993,6 +3023,8 @@ The Cameo mod preserves the upstream OpenRA combat pipeline (attack order -> `At
 - [Part 1.2 — Activities and the Game Loop (Cameo)](#file-chapters-Part_01_Chapter_02_Activities) for the custom activities that drive these combat traits.
 - [Part 8.2 — Bot Modules (Cameo)](#file-chapters-Part_08_Chapter_02_Bot_Modules) for the AI that decides which units to build and attack with.
 - [Part 8.3 — Bot Squads and Combat Heuristics (Cameo)](#file-chapters-Part_08_Chapter_03_Squads) for how the Cameo AI groups units into combat squads.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) for the weapon-class triads and Versus table rules that govern weapon construction.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) for the armor system, weapon-class Versus tables, and the balance formula that governs damage and HP values.
 
 
 ---
@@ -3714,6 +3746,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - Now that you understand the MiniYaml grammar, AST, and inheritance rules, read [Part 2.2 — Manifest, ModData, Ruleset, and RulesetCache](#file-chapters-Part_02_Chapter_02_Manifest) to learn how the engine uses MiniYaml files to assemble a complete mod.
 - For the next step in the data pipeline, read [Part 2.3 — FieldLoader and Type Conversions](#file-chapters-Part_02_Chapter_03_FieldLoader) to see how MiniYaml values are converted into C# trait and weapon fields.
 - Now that you can read and write MiniYaml for actors and weapons, read [Part 2.4 — Rulesets, Actors, and Weapons](#file-chapters-Part_02_Chapter_04_Rules_Weapons) to learn how `ActorInfo` and `WeaponInfo` are produced from the parsed YAML.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) for the naming conventions (underscores as section separators, PascalCase for inheritance templates) that govern all YAML content in the project.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) for how faction YAML files are being migrated from direct `mod.yaml` entries into self-contained ContentPacks.
 
 
 ---
@@ -4409,6 +4443,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - [Appendix H — Asset Visual Reference](#file-appendices-Appendix_H_Asset_Visual_Reference): for a categorical lookup of the asset manifest keys (Sequences, TileSets, Cursors, Chrome, Voices, Notifications, Music, etc.) and their engine loaders.
 - Git history: commit `82a9d69a51` ("Remove RulesetCache and push rule parsing to background thread.") removed `RulesetCache` and moved its logic into `Ruleset.cs`.
 - `CAMEO_DIVERGENCE.md` sections 2 and 4: for the full catalog of Cameo custom C# traits and asset layout.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) for the ongoing migration of faction manifests from direct `mod.yaml` entries into self-contained ContentPacks with their own `content.yaml` partial manifests.
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance) for the binding rules and commit gates that govern changes to the manifest and project structure.
 
 
 ---
@@ -5056,6 +5092,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - [Part 2.4 — Rulesets, Actors, and Weapons](#file-chapters-Part_02_Chapter_04_Rules_Weapons): FieldLoader and ObjectCreator are the bridge that produces the `ActorInfo` and `WeaponInfo` objects stored in the ruleset.
 - [Part 2.1 — MiniYaml Parser and Inheritance](#file-chapters-Part_02_Chapter_01_MiniYaml): the AST and merge/inheritance algorithms that supply the `MiniYaml` nodes consumed by `FieldLoader`.
 - [Part 2.2 — Manifest, ModData, Ruleset, and RulesetCache](#file-chapters-Part_02_Chapter_02_Manifest): learn how `ModData` creates the `ObjectCreator` and invokes the ruleset load that uses FieldLoader.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) for the naming conventions and field-mapping rules that govern how YAML keys become C# trait properties.
+- [Appendix V — Audit Status and Bug Class Reference](#file-appendices-Appendix_V_Audit_Status) for the bug taxonomy including metadata rot and field-loading issues that affect ruleset integrity.
 
 
 ---
@@ -5612,6 +5650,24 @@ Each `@` instance registers one lobby faction. Factions can reference translatio
 
 ### Custom promotion and upgrade conditions (`PlayerPromotions`, `PromotionUpgrade`)
 
+## References
+
+- [Part 2.1 — MiniYaml Parser and Inheritance](#file-chapters-Part_02_Chapter_01_MiniYaml) — how YAML inheritance and merge work under the hood.
+- [Part 2.2 — Manifest, ModData, Ruleset](#file-chapters-Part_02_Chapter_02_Manifest) — how `mod.yaml` manifest lists become runtime dictionaries.
+- [Part 2.3 — FieldLoader and ObjectCreator](#file-chapters-Part_02_Chapter_03_FieldLoader) — how YAML fields map to C# trait and weapon info classes.
+- [Part 1.6 — Combat and Damage Resolution](#file-chapters-Part_01_Chapter_06_Combat_Damage) — how weapons and warheads function at runtime.
+- [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence) — high-level summary of Cameo-specific additions vs upstream OpenRA.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — naming conventions for actors, weapons, and templates; weapon-class triads and exclusivity rules.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) — Formula v2, the Armor System (weapon-class Versus law), and the Balance Pipeline v2.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) — how factions are migrated into self-contained ContentPacks.
+- [Appendix V — Audit Status and Bug Class Reference](#file-appendices-Appendix_V_Audit_Status) — audit bug taxonomy including ruleset-related issues (cross-faction leaks, illegal inherits, metadata rot).
+
+## What to read next
+
+- [Part 1.6 — Combat and Damage Resolution](#file-chapters-Part_01_Chapter_06_Combat_Damage) for how the weapons and actors defined here behave in combat.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) for the naming conventions and weapon-class rules that govern new actors and weapons.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) for the armor system and balance formula that determine Versus tables, damage, and HP values.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) for the ongoing migration of faction rules into ContentPacks.
 
 
 ---
@@ -6231,6 +6287,10 @@ If any of the concepts above feel unclear, review the relevant section before co
 - `CameoMod.sln` — solution that combines engine and mod projects.
 - `fetch-engine.sh` — engine dependency management.
 - `Makefile` / `make.ps1` — build scripts.
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance) — repository ownership, agent workflow rules, commit gates, and operational protocols.
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — naming conventions, asset norms, and file organization rules that apply to the project structure.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) — the ongoing migration of faction content into self-contained ContentPacks, directly relevant to the `mods/cameo/ContentPacks/` layout described here.
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff) — engine/build info, project state, and handoff notes for AI agents working on the mod.
 
 ## What to read next
 
@@ -6238,6 +6298,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - For the engine internals behind `Manifest` and `ModData`, continue to [Part 2.2 — Manifest, ModData, Ruleset, and RulesetCache](#file-chapters-Part_02_Chapter_02_Manifest).
 - Now that you can load a mod project, read [Part 3.3 — Build Pipeline and Packaging](#file-chapters-Part_03_Chapter_03_Build_Packaging) to learn how the SDK compiles, packages, and ships a mod from the project structure defined here.
 - For the Cameo-specific asset and trait code, continue with the Cameo assembly chapters once they are available.
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance) for the binding rules and commit gates that govern changes to the project structure.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) for the migration plan that is reshaping the `mods/cameo/ContentPacks/` directory.
 
 
 
@@ -14364,6 +14426,8 @@ If any of the concepts above feel unclear, review the relevant section before co
 - [Part 8.2 — Bot Modules](#file-chapters-Part_08_Chapter_02_Bot_Modules) for the individual modules that `ModularBot` coordinates.
 - [Part 8.4 — Bot Order Flow](#file-chapters-Part_08_Chapter_04_Order_Flow) for how bot orders enter the lockstep pipeline.
 - [Part 9.1 — OrderManager and Lockstep Foundation](#file-chapters-Part_09_Chapter_01_OrderManager) for the network frame pacing that makes bot orders deterministic.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) for the armor system and balance formula that parameterize bot combat decisions.
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff) for engine/build info, project state, and handoff notes for AI agents working on bot modules.
 
 
 ---
@@ -14793,6 +14857,14 @@ For build planning, `UnitCompositionsBotModule` provides a parsed composition st
 - `OpenRA.Mods.Common/TraitsInterfaces.cs`
 - `OpenRA.Mods.Common/AIUtils.cs`
 - [Part 8.3 — Bot Squads and Combat Heuristics](#file-chapters-Part_08_Chapter_03_Squads)
+
+## What to read next
+
+- [Part 8.1 — Bot Architecture and IBot](#file-chapters-Part_08_Chapter_01_IBot) for the `ModularBot` coordinator that drives these modules.
+- [Part 8.3 — Bot Squads and Combat Heuristics](#file-chapters-Part_08_Chapter_03_Squads) for how `SquadManagerBotModuleCA` turns produced units into combat forces.
+- [Part 8.4 — Bot Order Flow](#file-chapters-Part_08_Chapter_04_Order_Flow) for how bot module orders enter the lockstep pipeline.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) for the armor system and balance formula that parameterize unit production and base-building decisions.
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff) for engine/build info, project state, and handoff notes for AI agents working on bot modules.
 
 
 ---
@@ -15457,6 +15529,8 @@ Override `SquadManagerBotModuleCA.FindClosestEnemy` or `FindHighValueTarget`, or
 - [Part 8.2 — Bot Modules](#file-chapters-Part_08_Chapter_02_Bot_Modules) for how `SquadManagerBotModuleCA` fits into the broader Cameo bot module architecture.
 - [Part 8.4 — Bot Order Flow](#file-chapters-Part_08_Chapter_04_Order_Flow) for how squad states translate into `Order` objects.
 - [Part 1.5 — Pathfinding and Movement](#file-chapters-Part_01_Chapter_05_Pathfinding_Movement) for the pathfinding and locomotor rules that affect squad movement.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) for the armor system and formula that determine the combat outcomes the squad heuristic evaluates.
+- [Appendix W — Faction Compendium](#file-appendices-Appendix_W_Faction_Compendium) for the faction unit rosters that govern squad composition and target selection.
 
 ## Summary
 
@@ -15820,6 +15894,8 @@ Set `IsImmediate = true` for orders that should not cross the lockstep pipeline 
 - [Part 1.2 — Activity System](#file-chapters-Part_01_Chapter_02_Activities) for how orders become actor activities once they reach the simulation.
 - [Part 8.1 — Bot Architecture and IBot](#file-chapters-Part_08_Chapter_01_IBot) for the broader `IBot` and `ModularBot` architecture.
 - [Part 8.3 — Bot Squads and Combat Heuristics](#file-chapters-Part_08_Chapter_03_Squads) for the squad state machines that issue the `AttackMove` orders described in this chapter.
+- [Appendix Q — Project Governance and Agent Workflow](#file-appendices-Appendix_Q_Project_Governance) for the binding rules and commit gates that govern changes to the bot order pipeline.
+- [Appendix Y — AI Agent Handoff Log](#file-appendices-Appendix_Y_Agent_Handoff) for engine/build info, project state, and handoff notes for AI agents working on bot order flow.
 
 ## Summary
 
@@ -29462,6 +29538,13 @@ When the OpenRA manual and the Cameo manual conflict on a specific trait, the Ca
 - [OpenRA Knowledge Base Manual v.5](https://github.com/Renegade1993/OpenRA-Knowledge-Base-Manual) — upstream OpenRA engine and official mod documentation.
 - Cameo source: `Cameo-mod` (main branch, 2026-07-24) — the authoritative source for all Cameo-specific behavior.
 
+### See also
+
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — naming conventions, stat rules, and asset norms that define how Cameo content is structured.
+- [Appendix S — Balance System](#file-appendices-Appendix_S_Balance_System) — Formula v2, Armor System, and Balance Pipeline v2 that govern Cameo's custom balance layer.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) — the migration from direct `mod.yaml` entries to self-contained ContentPacks, a major structural divergence from upstream OpenRA.
+- [Appendix V — Audit Status and Bug Class Reference](#file-appendices-Appendix_V_Audit_Status) — audit bug taxonomy tracking cross-faction leaks, illegal inherits, and other divergence-related issues.
+
 
 ---
 
@@ -40953,3 +41036,1496 @@ This appendix covers only the active (non-random) factions defined in the Cameo 
 - [Appendix M — Official Mod Actor Reference](#file-appendices-Appendix_M_Official_Actor_Reference) — the same treatment for the four bundled OpenRA mods.
 
 
+<!-- --- FILE: appendices/Appendix_Q_Project_Governance.md --- -->
+
+<a id="file-appendices-Appendix_Q_Project_Governance"></a>
+
+# Appendix Q — Project Governance and Agent Workflow {#file-appendices-Appendix_Q_Project_Governance}
+
+## Purpose
+
+This appendix consolidates the project's governance structure, agent workflow rules, commit gates, and operational protocols into a single reference. It mirrors and supersedes the content of `docs/AGENT_WORKSPACE.md`, `docs/PROJECT_CONTEXT.md`, `docs/README.md`, and binding rules established by the maintainer and co-maintainer.
+
+## Q.1 — Repository Ownership and Canonical Sources
+
+The repository is the **single source of truth**. External scratch folders (e.g., `DevinCameoProject/`) are historical provenance only and must not be treated as current without re-running the repo audit.
+
+**Canonical document locations:**
+
+| Document | Path | Role |
+|---|---|---|
+| Design contract | `docs/DESIGN.md` | Binding rules for all YAML, naming, stats, balance |
+| Work queue | `docs/design/ROADMAP.md` | Ordered, resumable task list |
+| Agent workspace protocol | `docs/AGENT_WORKSPACE.md` | Mandatory workflow, evidence rules, commit gate |
+| Project orientation | `docs/PROJECT_CONTEXT.md` | Entry point and canonical links |
+| Documentation index | `docs/README.md` | Overview of all docs and their ownership |
+| Balance program index | `docs/design/MEGAPLAN.md` | Non-binding rebalance sequencing index |
+| Balance machinery | `docs/design/BALANCE_PIPELINE.md` | Pipeline architecture and sync commands |
+| Balance law book | `docs/design/FORMULA_V2.md` | Per-class formula, stat laws, special modifiers |
+| Armor system | `docs/design/ARMOR_SYSTEM.md` | Weapon-class Versus law and explosion families |
+| Long-term vision | `docs/design/VISION.md` | Non-binding product direction (Dynamic Campaign) |
+| Faction compendium | `docs/FACTIONS.md` | Lore, gameplay profiles, roster stats for all factions |
+| Lessons learned | `docs/LESSONS_LEARNED.md` | Hard-won lessons, safe defaults, recurring pitfalls |
+| Migration board | `docs/MIGRATION.md` | ContentPack migration status and pipeline |
+| Audit summary | `docs/audit/SUMMARY.md` | Bug classes and top findings |
+| Audit tooling | `tools/audit/` | Scripts for automated checking |
+| Generated evidence | `docs/audit/latest/` | Current audit run outputs |
+| Human summaries | `docs/audit/FINDINGS.md`, `CONSISTENCY_REPORT.md` | Curated audit findings |
+| Balance tools | `tools/balance/` | Extract, build, import, apply, propose scripts |
+| Balance ledger | `docs/balance/*.json` | Raw stat ledger (provenance-tracked) |
+| Class anchors | `docs/balance/class_anchors.json` | Per-class baseline and verifier actors |
+| This manual | `docs/Cameo_Knowledge_Base_Manual.md` | Comprehensive super-wiki (this document) |
+
+## Q.2 — Required Reading Order
+
+Every new task — whether for a human contributor or an AI agent — must begin by reading these documents **in order**:
+
+1. `docs/LESSONS_LEARNED.md` — hard-won lessons and recurring pitfalls
+2. `docs/AGENT_WORKSPACE.md` — mandatory workflow and commit gate
+3. `docs/PROJECT_CONTEXT.md` — project orientation
+4. `docs/DESIGN.md` — **the entire file**, not a grep or summary (binding design contract)
+5. `docs/design/ROADMAP.md` — current work queue
+6. `docs/Cameo_Knowledge_Base_Manual.md` — engine/code reference (this manual)
+7. `docs/audit/SUMMARY.md` — current known-issue state
+
+**Critical:** Before touching ANY YAML file, you MUST read the ENTIRE `docs/DESIGN.md` into your context. This is non-negotiable.
+
+## Q.3 — Multi-Agent Environment
+
+The repository is maintained by multiple contributors:
+
+- **AedisToru** (maintainer) — project owner, design decisions, final authority
+- **333ggg** (contributor) — works StarCraft Vultures, TS GDI Riot Troopers, `cabal.xlsx` rows
+- **Devin AI** (contributor) — leaves a log at `DevinCameoProject/DEVELOPMENT_LOG.md` in the external scratch folder
+- **Cascade / AI agents** — automated agents for documentation, linting, balance, and implementation tasks
+
+**Rules for multi-agent operation:**
+- ALWAYS `git add <files>` scoped, never `git add -A` — the maintainer usually has live uncommitted edits
+- Verify others' commits before building on them
+- Do NOT spam commits on upstream master — use feature branches and PRs
+- Commit titles must be self-explanatory to ALL developers, not just Aedis and their agent
+
+## Q.4 — Binding Commit Rules (2026-07-24)
+
+These rules are **binding** and apply to every commit, no exceptions:
+
+1. **Fetch and pull** before any commit — always `git fetch && git pull && git merge` before pushing.
+2. **Boot gate** — launch the game (`launch-game.cmd`), wait for the main menu (confirm `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. The `utility.cmd cameo --check-yaml` is NOT a substitute for the boot gate.
+3. **Update ALL relevant documentation** before committing — `ROADMAP.md`, `DESIGN.md`, audit summaries, lessons learned, etc. Check old docs for outdated info, inconsistencies, and contradictions. **Fix them.** A commit without updated docs is incomplete.
+4. **Do NOT spam commits** on upstream master — use feature branches.
+5. **Do a PR** (pull request) for cleaner commit history instead of pushing directly to master.
+6. **Only merge PR** if either: (a) you no longer detect regression caused by the changes, or (b) launching the game no longer results in a crash.
+7. **Commit titles** must be self-explanatory to ALL developers.
+8. **When a task is COMPLETELY done**, merge the feature branch to master. Do not leave completed work stranded on a feature branch.
+
+## Q.5 — Boot Gate Protocol
+
+The boot gate is the **primary quality gate** for every commit. The Python resolver and YAML linter do NOT catch all issues — only the engine parses every faction at boot.
+
+### Pre-boot snapshot
+1. List files in `%APPDATA%/OpenRA/Logs` before launching — this is your baseline.
+2. If C# sources changed or were pulled, rebuild first: `dotnet build -c Release --nologo -p:TargetPlatform=win-x64`. Stale DLLs crash the boot with `Cannot locate type: …Info`.
+
+### Boot procedure
+1. Run `launch-game.cmd`.
+2. Wait for the main menu (approximately 30 seconds).
+3. Confirm `perf.log` ends with `MenuPostProcessEffect.PostWorldLoaded`.
+4. Kill the process.
+5. Check for NEW `exception-*.log` files vs. the baseline snapshot.
+6. If any new exception logs exist, **do not commit** — fix the issue first.
+
+### When to rebuild
+- After any C# source change (engine or mod assemblies)
+- After pulling upstream changes that touch C# files
+- After `make all` engine sync
+
+## Q.6 — YAML Lint Utility Usage
+
+`utility.cmd cameo --check-yaml` is a powerful linting tool but takes a very long time (10+ minutes).
+
+**When to run:**
+- When you have completed ALL tasks connected to findings from the last report
+- When you expect errors/warnings to be at 0 and want to confirm
+- For linting, cosmetic refactoring verification (actor renames, template renames), checking broken prerequisites
+
+**When NOT to run:**
+- Do NOT run it repeatedly — it's a huge time waster
+- Do NOT use it as a substitute for the boot gate
+- Do NOT run it for debugging specific YAML parse errors (use the boot gate instead)
+
+**Goal:** 0 errors AND 0 warnings.
+
+Keep the most important findings from the latest utility report in memory, `ROADMAP.md`, and other docs so they can be easily fixed without re-running the utility.
+
+## Q.7 — Evidence and Incident Protocol
+
+### Evidence rules
+- Every claim about code state must be backed by a file path + line range or a tool output
+- Audit scripts produce evidence in `docs/audit/latest/`
+- Human-readable summaries go in `docs/audit/SUMMARY.md`, `FINDINGS.md`, `CONSISTENCY_REPORT.md`
+
+### Incident protocol
+When a commit breaks master:
+1. Identify the root cause (do not guess — use audit tools and log inspection)
+2. Fix the root cause, not the symptom
+3. Re-run the boot gate
+4. Document the incident in `LESSONS_LEARNED.md`
+5. Update `ROADMAP.md` to reflect the fix
+
+## Q.8 — Git Workflow
+
+### Feature branch workflow
+1. Create a feature branch from master: `git checkout -b feature/<description>`
+2. Make changes with scoped `git add <files>` commits
+3. Before merging: fetch, pull, merge upstream, resolve conflicts
+4. Run the boot gate
+5. Create a PR
+6. Merge only when no regressions are detected
+
+### Scoping commits
+- `git add <specific files>` — NEVER `git add -A`
+- One logical change per commit
+- Commit message format: `<scope>: <self-explanatory description>`
+
+## Q.9 — Planning and Task Management
+
+- **`docs/design/MEGAPLAN.md`** is the single source of truth for planning. Do NOT use `.windsurf/plans/` or other locations.
+- **`docs/design/ROADMAP.md`** is the ordered work queue — pick from the top (crashes always jump the queue)
+- Rule zero: **crashes and bugs ALWAYS jump the queue**
+- Every completed item gets its commit hash recorded in the ROADMAP
+- Every new design order lands in the ROADMAP first
+
+## Q.10 — Token Efficiency Guidelines
+
+To spend fewer tokens without losing quality:
+- Batch mechanical sweeps into scripts over the model/registry, never file-by-file reading
+- Keep rules in `DESIGN.md` and plans in `ROADMAP.md` instead of re-deriving them each session; read them FIRST
+- Bundle many small design orders into one implementation pass
+- Verify with the audit suite (cheap) rather than re-reading YAML
+- Subagents on cheaper models are only worth it for self-contained batch jobs big enough to amortize their cold-start context
+
+
+<!-- --- FILE: appendices/Appendix_R_Design_Rules.md --- -->
+
+<a id="file-appendices-Appendix_R_Design_Rules"></a>
+
+# Appendix R — Binding Design Rules and Conventions {#file-appendices-Appendix_R_Design_Rules}
+
+## Purpose
+
+This appendix consolidates all binding design rules from `docs/DESIGN.md` into the Knowledge Base Manual. These rules are the **law of the project** — when code and this document disagree, the document wins unless an audit baseline explicitly defers the fix.
+
+## R.1 — Naming Conventions (§1)
+
+### Actor ID format
+```
+unit/building id :=  [game_]faction_nameinonegroup[_variant]
+tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
+```
+
+### Core naming rules
+- **Name is ONE lowercase group without separators**: `ra_heatraytank`, `forgotten_ghoststalker`
+- **Underscores separate SECTIONS, never within names**: exactly three sections — `[game_]faction_actorname[_variant]`
+- **Faction names and actor names are each a single unbroken lowercase group** with NO internal underscores
+  - Correct: `td_gdi_lighttank`, `asianalliance_quasar`, `steelconsortium_manta`
+  - Wrong: `asian_alliance_quasar` (underscore inside faction name)
+- **Faction InternalName must match** the faction section of actor prefixes exactly
+- **Game prefix only on actual collisions**: `td_gdi` vs `ts_gdi`, `ra1_soviets` vs `ra2_soviets`. Unique factions (cabal, forgotten, yuri, ordos, terran…) take no game prefix
+- **Tech markers are full words**: `upgrade` (cash research), `promotion` (rank-gated), `doctrine` (mutually exclusive picks). Team proxies end `_proxy_actor`. Promotions never carry "unlock" in the id
+- **Hyphens are banned** in all naming we own — actor ids, asset file names, fluent keys, and every yaml reference. Exception: identifiers the ENGINE defines (built-in condition names like `build-incomplete`, C#-derived fluent keys)
+
+### Transliteration
+- Umlauts and non-ASCII letters TRANSLITERATE, never drop: Ü→u, ü→u, Ö→o, ö→o, Ä→a, ä→a, ß→ss
+- Example: `Übermensch` → `schwarzermond_ubermensch`
+- DISPLAY names (Tooltip `Name:`, fluent text) keep their proper umlauts
+
+### Variant suffixes
+Structural suffixes: `_husk _sp _r4 _wild _mk2 _elite _ai _water _EMP _AA _upgraded _slave _air _backup _segment _bomber _paradrop _chrono _hmg _mg _missile _repair _empty _plug _bot _defense _deployed` plus dotted variants (`.husk`) and paradrop twins (`para`)
+
+### Weapon naming
+- Weapon names must include the full actor id as a prefix: `<actor_id>_<weapon_descriptive_name>`
+- Weapon class templates keep PascalCase `^` prefix: `^SmallArms`, `^MediumCannon`, `^HeavyMissile`
+- Faction-level weapon templates use PascalCase with faction prefix: `^CabalMissile`, `^RA2RadShell`
+- Elite weapon variants append `_elite` — the ONLY accepted suffix for elite weapons
+- EMP weapon variants append `_EMP`
+- AA weapon variants append `_AA`
+- Upgraded weapon variants append `_upgraded` or the upgrade name
+- Combined suffixes order: `<weapon_name>_AA_EMP_elite`
+
+### Asset file naming
+- Body sprite: `<id>.<ext>`, icon: `<id>_icon.<ext>`
+- Asset suffix words are ALWAYS full words: `_make` (not `_mk`), `_bib` (not `_bb`)
+- Exception: `_mk2`/`_mk3` as unit variant markers (Mark II/III)
+- Sequence filenames must match their actor and sequence name
+- **Shared files are NEVER renamed** — files in `shared_sprites|`, `ts_shared_sprites|`, etc. stay as-is
+- **Cross-actor namespaces are sacred**: voice sets, notifications, shared art are NEVER renamed with a unit
+
+### Tooltip consistency
+- The id's name group derives from the Tooltip Name and both stay in sync
+- No two actors of a faction may share a Tooltip Name (audit_metadata M1)
+- New display names are a **design decision** — propose options and let design choose
+
+## R.2 — Content Pack Layout (§2)
+
+### Folder structure
+Each faction is a self-contained ContentPack:
+```
+mods/cameo/ContentPacks/<Theme>/<Faction>/
+  yaml/          — faction rules (vehicles.yaml, buildings.yaml, infantry.yaml, etc.)
+  files/         — faction-specific assets (sprites, voxels, audio)
+  translations/  — fluent localization (en.ftl)
+  content.yaml   — ContentPack manifest
+```
+
+### Shared packs
+- `ContentPacks/<Theme>/Shared/` contains assets and rules shared across factions in a theme
+- Shared weapons, sequences, and sprites stay in Shared/ packs
+- Cross-faction effects are loaded from Shared/ packs
+
+### mod.yaml loading
+- `mod.yaml` loads ContentPacks via `Include:` entries, not direct `Rules:` entries
+- 39 ContentPack `content.yaml` manifests across 11 themes
+- Some sequences and weapons files remain direct entries in `mod.yaml` (partial migration)
+
+## R.3 — House Stat Formulas (§3)
+
+### Repair rate
+- Buildings: `RepairRate = HP / 5000` (per second, costs 1 credit per 100 HP repaired)
+- Vehicles: repaired by Repair Drones / Service Depots at fixed rates per faction
+
+### Self-heal
+- Infantry self-heal: `ChangesHealth@SelfHealing` with `Step: 1` per 25 ticks (conditional on various traits)
+- Vehicles: no passive self-heal unless faction-specific (e.g., CABAL Backup Systems, Forgotten Tiberium Adaptability)
+
+### Shields
+- Steel Consortium: all vehicles have `Shielded` trait with regeneration
+- Protoss: all units and structures have plasma shields
+
+### Vision
+- `RevealsShroud` per class = baseline range, floored to 5000 for scout/closecombat/melee
+
+### Power
+- Conyards always use `^Conyard` template Power (100)
+- Power consumption per building defined in faction YAML
+
+### Turning
+- TurnSpeed formulas:
+  - Turretless vehicles: `TurnSpeed = 2 * Speed / 5`
+  - Turreted vehicles: `TurnSpeed = Speed / 5`
+  - Helicopters/spaceships: `TurnSpeed = Speed / 5`
+  - Fighters/bombers: `TurnSpeed = Speed / 15`
+
+## R.4 — Stat Laws (§12, FORMULA_V2)
+
+### Speed
+- Vehicles/aircraft/ships: steps of 5
+- Infantry (foot): steps of 1
+- Vehicle turn-rate units (defined `Mobile.TurnSpeed`): step 5
+- Foot infantry (no TurnSpeed): step 1, also get Speed±1 as a Δ fine-tune lever
+
+### HP
+- Vehicles/aircraft: steps of 2500
+- Infantry: steps of 1000
+
+### Damage
+- Warhead `Damage` on the 2000 grid (steps of 2000)
+- Fine-tune effective DPS with `FirepowerMultiplier` in 1% steps (1 = ×0.01)
+- Never nudge warhead `Damage` by small amounts
+
+### Price
+- Steps of 10 credits, prefer 100 if unique
+- WC/StarCraft unit costs = multiples of 20 (power = Cost/20)
+- Original C&C prices are PINNED for TD, TS, RA1, RA2 factions — only stats move
+- Custom/RA2-mod factions may adjust cost in 10-credit steps inside the class envelope
+
+### Range
+- Range bands: ±10% of baseline, steps of 10 (wdist)
+- Range stays in raw wdist (5000, not 5.0) in the ledger
+- Melee range IS priced (1250–2500 band, size-derived)
+
+### ReloadDelay
+- Raw `ReloadDelay` is a uniqueness dimension (NOT burst-adjusted/effective reload)
+- Effective reload = `ReloadDelay + BurstDelays * (Burst - 1)`
+
+### Burst
+- Burst is flavor — tuned by `FirepowerMultiplier`
+- `SoundVolume` law: 1/burst for base weapon
+
+## R.5 — Tech Tier Rules (§4)
+
+### Tier definitions
+| Tier | Multiplier | Description |
+|---|---|---|
+| T1 | 1.0 | Basic units, no tech building required |
+| T2 | 1.0 | Requires tech building (e.g., Barracks/War Factory) |
+| T3 | 0.75 | Requires advanced tech (e.g., Tech Center / Battle Lab) |
+| T4 | 0.5 | Requires experimental/epic tech building |
+
+- Tech tier is applied ABSOLUTE but must be RELATIVE to the anchor's tier (known bug: `class_baseline_price` multiplies by `design.tech_tier` absolutely — fix: effective tier = unit_tier / anchor_tier)
+- Promotion/special-upgrade units: tech tier taken from the unit's own build prerequisite, not the upgrade's tier
+- T1 and T2 both use the same 1.0x multiplier
+
+### Starting units
+Each faction defines starting units in `faction.yaml` with `StartingUnits` entries. Composition varies by faction design.
+
+## R.6 — Upgrades, Promotions, and Power Curve (§5)
+
+### Upgrade types
+- **Upgrade** (cash research): `faction_upgrade_<name>` — purchased with credits
+- **Promotion** (rank-gated): `faction_promotion_<name>` — unlocked by building prerequisites
+- **Doctrine** (mutually exclusive): `faction_doctrine_<name>` — pick one of several
+
+### Stat modifiers
+- `FirepowerMultiplier`: adjusts effective damage (1% steps)
+- `DamageMultiplier`: adjusts damage taken
+- `SpeedMultiplier`: adjusts movement speed
+- `RangeMultiplier`: adjusts weapon range
+- Knob hierarchy: `^GlobalBuffs` → per-class (`^InfantryBuffs`, `^VehicleBuffs`, etc.) → per-subclass
+
+### Promotion units
+- Promotion units must be **strictly stronger** than base units
+- No direct unit-to-unit inheritance for promotions (CABAL rule) — all use class templates + `PromotionUnitBuff`
+- Promotion buffs are ignored by the balance formula (priced separately)
+
+### ActorStatValues
+- `ActorStatValues` provides in-game stat display
+- Must be kept in sync with actual YAML values
+
+## R.7 — Descriptions and Localization (§6)
+
+### Fluent files
+- Unit/weapon descriptions live in fluent files (`fluent/**/en.ftl`), never inline in YAML
+- `Buildable.Description` is a `[FluentReference]` key — NEVER inline text
+- Use REAL line breaks in fluent files, never `\n` escape sequences
+- Descriptions carry NO `\n`
+
+### Localization coverage
+- Expanded `en.ftl` descriptions exist for most factions
+- Coverage varies: Forgotten 98%, RA2 Allies 10%, most others 0-4%
+- WC2, StarCraft, Outpost 2 have dedicated fluent files
+
+## R.8 — Assets and Audio (§7)
+
+### Audio norms
+- WAV files normalized to standard volume
+- Voice sets are shared across actors and NEVER renamed with a unit
+- `SoundVolume` law: 1/burst for base weapon
+
+### Sprite norms
+- PNG metadata preserved during conversion
+- PngSheets used for sprite compilation
+- Palette rules: `ra2player` vs `playerra2` — death palette must match player palette
+- Effect randomness: use `Sequence` with random frame selection for impact effects
+
+### Dune 2000 to OpenRA sprite conversion
+- Tool: `tools/d2k_to_openra.py`
+- PNG metadata preserved
+- Hue shifting applied for faction color customization
+
+## R.9 — Effect-Warhead Naming Law (§8)
+
+### Canonical names
+- `CreateEffect` warheads use canonical effect names
+- Effect + Sound pairing: each effect has an associated sound
+- Frame-fit checks: ensure animation frame counts match sequence definitions
+
+### Image field rules
+- `CreateEffect` `Image:` field: omit when the effect image name matches the sequence name
+- Impact animations live in `misc.yaml`
+- Shared-Image exception: shared effect images stay as-is
+- Corpse-Spawner exception: corpse spawners reference shared corpse sequences
+
+## R.10 — Operating Rules for Agents (§9)
+
+1. **Read ENTIRE `docs/DESIGN.md`** before touching any YAML
+2. **Rebalancing**: use the balance formula, never hand-calc DPS
+3. **Audits**: run audit scripts before and after changes
+4. **Clean commits**: scoped `git add`, self-explanatory messages
+5. **Doc updates**: update ALL relevant documentation before every commit
+6. **Boot gate**: launch game, confirm menu, check for exceptions
+7. **`check-yaml`**: run only when you expect 0 errors/warnings
+8. **Definition of Done**: code changed + docs updated + boot gate passed + audit clean
+
+## R.11 — Actor and Faction Uniqueness (§10)
+
+- No two actors of a faction may share identical weapons or stats
+- 5 uniqueness dimensions: HP, Speed, effective damage per shot, raw ReloadDelay, Range
+- `FirepowerMultiplier` on its own is NEVER a uniqueness key
+- Damage-per-shot and reload are checked SEPARATELY
+- Baseline/verifier exception: exactly 2× HP, 2× DPS, 2.5× cost, same Range and Speed
+- Preserve relative differences: don't clamp every unit to the same band edge
+- Faction personality over formula equality: similar factions stay close but every stat must differ by at least one step
+
+## R.12 — Garrison Weapons (§11)
+
+- `Armament@GARRISONED` rules: garrisoned weapons use `RequiresCondition: garrisoned`
+- IFV: adapts weapon based on passenger infantry type
+- Battle Fortress: mobile bunker that crushes vehicles
+- Robot Tank: immune to mind control (critical vs Yuri)
+
+## R.13 — Map Props (§13)
+
+- `Obstacle` target type for map props
+- Map actor naming: current IDs, rename maps, Lua script updates
+- `zerg_sunkencolony_2` used in 20+ actor references across map files — must be updated during renames
+
+## R.14 — CABAL Faction Design Rules (§17)
+
+### Identity
+- Cyborg-heavy force with laser weapons, plasma cannons, spider walkers
+- 3×4 Promotion Grid: Infantry, Vehicles, Aircraft each have 4 tiers
+- No direct unit-to-unit inheritance for promotions — all use class templates + `PromotionUnitBuff`
+
+### Backup Systems
+- Destroyed vehicles spawn a high-HP backup wreck on death
+- Backup wreck can be repaired and auto-reanimated
+- Working backup actors: Manticore, Artillery Spider, Tarantula, Avatar, Widow
+- Pattern: `Inherits@BACKUP` + `SpawnActorOnDeath@backup` + `<unit>_backup` actor definition
+
+### Dual-armor system
+- Cyborg infantry with dual-armor (primary + secondary armor types)
+- `Cybernetic Plating` upgrade
+
+### Weapon identity
+- Laser weapons (various colors)
+- Plasma cannons
+- No weapon inheritance between units
+
+### Unique mechanics
+- CABAL Core serves as T4 tech gate
+- Core Defender (epic walker, limited to 1)
+- Mothership (epic air unit)
+- Hunter Killer MK1/MK2 (autonomous aircraft)
+- 27 upgrades (most of any TS faction)
+
+## R.15 — Rank Decorations and Elite Weapons (§16)
+
+### Systems
+- TD/TS use the TD rank decoration system
+- RA2 uses the RA2 rank decoration system
+- Decoration images must match the correct system
+
+### Elite weapon patterns
+- Elite weapon variants append `_elite`
+- Elite weapon range = base + 1000
+- Legacy PascalCase weapons with `E` suffix must be migrated to `_elite` when touched
+
+### Inheritance rules
+- Elite weapons inherit from base weapon + apply `FirepowerMultiplier`
+- Promotion visibility and prerequisites defined per faction
+
+## R.16 — Schwarzer Mond Faction Design (§18)
+
+- Space-faring/occult-science Naxis subfaction
+- Laser upgrade system: Crystal Lens (+1 burst at radar tier) + Amplified Lens (+1 burst at tech tier) for ALL yellow laser weapons
+- Cannon upgrade: Vril Powered Weapons at tech tier
+- Economy: Cryptofascism (1 credit per 25 ticks per unit, tech tier)
+- Every unit must have at least 2 upgrade hooks; Cryptofascism counts as one
+- Uses `^PromotionUnitBuff` on all combat units
+- Design documented in DESIGN.md §18
+
+
+<!-- --- FILE: appendices/Appendix_S_Balance_System.md --- -->
+
+<a id="file-appendices-Appendix_S_Balance_System"></a>
+
+# Appendix S — Balance System: Formula, Armor, and Pipeline {#file-appendices-Appendix_S_Balance_System}
+
+## Purpose
+
+This appendix consolidates the three pillars of the Cameo balance system: the **Formula v2** (law book), the **Armor System** (weapon-class Versus law), and the **Balance Pipeline** (machinery). It mirrors `docs/design/FORMULA_V2.md`, `docs/design/ARMOR_SYSTEM.md`, and `docs/design/BALANCE_PIPELINE.md`.
+
+## S.1 — Formula v2 Overview
+
+### Core principle
+The formula ensures **O = P = Q = cost** always holds for baseline units. Price is linear in each single stat:
+
+- **O** = offensive power (DPS contribution)
+- **P** = protective power (HP contribution)
+- **Q** = quality/mobility (speed + range contribution)
+- **Cost = Cost₀ × (O/O₀ + P/P₀ + Q/Q₀) / 3** (exact at each class anchor)
+
+### Class anchor system
+Each unit class has:
+- A **baseline actor** (anchor) with round numbers where O=P=Q=Cost₀
+- A **verifier actor** at exactly 2× HP, 2× DPS, 2.5× cost, same Range and Speed
+- Both at the same tech tier so it cancels
+
+### Class registry (15 classes as of 2026-07-25)
+Stored in `docs/balance/class_anchors.json`:
+
+| Class | Anchor | Cost₀ | Range₀ | Verifier | Signed Off |
+|---|---|---|---|---|---|
+| MBT | Naxis Tiger Tank | 800 | — | — | Yes (global reference) |
+| Closecombat | td_gdi_shotgunner | 200 | 3500 | asianalliance_fanatic | No |
+| Scout | naxis_naxiriflesoldier | 100 | 5000 | forgotten_mutantsoldier | No |
+| Special Forces | japan_imperialscoutsman | 200 | 6000 | schwarzermond_lunarsoldier | No |
+| Melee | asianalliance_alligator | 280 | 1500 | yuri_brute | No |
+| Grenadier | td_gdi_grenadier | 200 | 5500 | ra1_soviets_molotovconscript | No |
+| Heavy Infantry | ra1_soviets_shocktrooper | 800 | 5000 | ra1_soviets_zapper | No |
+| Pure Sniper | naxis_naximercenarysniper | 320 | 10000 | ra2_allies_sniper | No |
+| Heavy Sniper | td_gdi_heavysniper | 700 | 8000 | yuri_virus | No (blocked on warhead rework) |
+| Rocket Trooper | ra1_allies_alliedrocketsoldier | 300 | 6500 | cabal_rocketcyborg | No |
+| Archer | japan_archermaiden | 500 | 7000 | asianalliance_veteranarcher | No |
+| Mortar | forgotten_mutantmortarman | 500 | 10000 | ordos_mortartrooper | No |
+| Support | engineer | 500 | 0 | n/a (ability-priced) | No |
+| Flying Infantry | ra2_allies_rocketeer | 600 | 5000 | yuri_cosmonaut | No |
+| Hero/Commando | td_gdi_commando | 3000 | 8000 | n/a (baseline-only) | No (weights frozen) |
+
+### Infantry class ladder (range bands)
+Contiguous half-open range bands — no unit can fall between classes:
+
+| Class | Range Band | Anchor r₀ | Notes |
+|---|---|---|---|
+| Melee | [1250, 1750] | 1500 | Size-derived reach; bigger units get more reach |
+| Closecombat | [2500, 4500) | 3500 | SMG/shotgun |
+| Scout | [4500, 5500] | 5000 | Rifles |
+| Special Forces | [5500, 6500] | 6000 | Can hit air |
+| Grenadier | TBD | TBD | Grenade/demolition |
+| Heavy Infantry | TBD | TBD | Very high HP |
+| Pure Sniper | TBD (long) | TBD | Infantry only |
+| Heavy Sniper | TBD (long) | TBD | All ground, no air |
+| Rocket Trooper | TBD | TBD | Dedicated rocket/AA |
+| Archer | Scales | TBD | Projectile-arc, hits air |
+| Support | n/a | n/a | Ability-priced |
+| Flying Infantry | n/a | n/a | Over-terrain |
+| Hero/Commando | ~2000 | TBD | Unique high-cost |
+
+**Boundary rule:** A weapon at exactly 2500 is closecombat; exactly 4500 is scout (half-open bands).
+
+### Vehicle classes (FUTURE — after infantry)
+| Class | Notes |
+|---|---|
+| MBT | LIVE anchor: Naxis Tiger |
+| Light Tank | Fast, cheap, low-armour raider |
+| Battlefortress | Slow bunker on tracks |
+| Anti-Air Vehicle | Dedicated mobile AA |
+| Tank Destroyer | AP glass-cannon, frontal weapon (−0.25 special) |
+
+## S.2 — Special Modifier System (K)
+
+The Special factor **K** on the range ratio is `1 + Σ(special weights)`, computed from the actor's TRAITS so K is never guessed.
+
+### Standard specials — +0.25 each
+| Special | Detection | Example |
+|---|---|---|
+| Deploy / mode-switch | `GrantConditionOnDeploy` + deploy-gated Armament | G.I., Guardian G.I. |
+| Demolition / C4 | C4/GenericC4 demolition armament | Navy Seal, Tanya |
+| Stealth / cloak | `Cloak` trait | Stealth Soldier |
+| Status-effect warhead | EMP/tesla/fire/virus-toxin/radiation | EMP Grenadier |
+| Support-power / drone / kamikaze | `SupportPower` trait or drone/kamikaze armament | ASDF, kamikaze |
+| Caster ability | Activated non-damage ability (heal/MC/polymorph) | High Templar |
+| Gatling spin-up / ramp | `^GatlingSpeedUpUnitBehavior` | Gatling Trooper |
+| Sniper instakill / lockdown | Lockdown attach or instakill-vs-infantry | Ghost, Allied Sniper |
+| Point-defense | Point-defense trait (intercepts projectiles) | Laser Commando |
+| Spawns attacking sub-actor | `SpawnActor` warhead with own weapon | Parzival (black hole) |
+| Friendly aura buff | Proximity buff aura | TD GDI Officer (propaganda) |
+| Debuff warhead / designator | Snare, blind, or target-designator | Zerg Corruptor (snare) |
+
+### Heavy special — +1.0
+| Special | Detection | Example |
+|---|---|---|
+| All-terrain movement | `Mobile: Locomotor: fakeaircraft` | Reaper → K 2.0 |
+
+### NOT a special
+- Hitting air with the PRIMARY weapon (Marine = K 1.0)
+- Only a SEPARATE weapon/mode or an ability counts
+
+### Negative specials (FUTURE / vehicle scope)
+- Very long charge delay (Obelisk-style) = −0.25
+- Frontal-facing (non-turreted) vehicle weapon = −0.25
+
+### Validation examples
+- Laser Commando = cloak + point-defense + C4 + gatling = 4×0.25 → **K 2.0** ✓
+- Stealth Soldier = cloak + EMP warhead = 2×0.25 → **K 1.5** ✓
+- Reaper = fakeaircraft locomotor = +1.0 → **K 2.0** ✓
+
+## S.3 — Stat Laws (Binding)
+
+### Uniqueness within a class (5 dimensions)
+No two units may share the same:
+1. **HP**
+2. **Speed**
+3. **Effective damage per shot** (= Σ all offensive warhead `Damage` × `FirepowerMultiplier`)
+4. **Raw `ReloadDelay`** (NOT burst-adjusted/effective reload)
+5. **Range**
+
+Dimensions 3 and 4 are checked SEPARATELY — two units may share one if they differ on the other.
+
+### Damage rules
+- **SUM law**: effective damage = Σ offensive SpreadDamage warheads (excl. `*ExtraDamage`/`*Percentage`/`*FriendlyFire`), never MAX
+- Damage stays in 2000 steps
+- `*ExtraDamage` warheads are KEPT but EXCLUDED from pricing — shield-only chip damage
+- A "weapon class" (WC 1.0) = a light + medium + heavy warhead TRIAD
+
+### Two-stage DPS tuning
+- **Coarse**: warhead `Damage` on the 2000 grid
+- **Fine**: `FirepowerMultiplier@<unit>` in 1% steps (1 = ×0.01)
+
+### Buildability law
+A unit is balance-relevant ONLY if buildable — has a `Buildable` trait with a non-empty `Queue` and NO disabling prereq (`~disabled`/`~wip`/…). Non-buildable units are EXCLUDED from balancing AND every audit.
+
+### Preservation rules
+- Preserve relative differences: don't clamp every unit to the same band edge
+- Faction personality over formula equality: similar factions stay close but every stat must differ by at least one step
+- Original C&C prices are pinned for TD, TS, RA1, RA2 factions
+- Outlier flag rule: if a unit's stats are so far outside the band that fixing it would change its character, stop and ask the maintainer
+
+## S.4 — Armor System
+
+### Weapon-class Versus law
+Every damage weapon's Versus table is determined by two orthogonal axes:
+
+**LEVEL** (step size of effectiveness falloff):
+| Level | Step Size | Floor (vs standard) | Shield |
+|---|---|---|---|
+| Light | 6 | 10 | 110 |
+| Medium | 5 | 25 | 125 |
+| Heavy | 4 | 40 | 140 |
+
+**PROFILE** (armor type order):
+Standard armor orderings for different weapon profiles:
+- Anti-infantry: None → Flak → Plate → Light → Medium → Heavy → Concrete
+- Universal: balanced across all types
+- HE/anti-vehicle: strong vs vehicles, weak vs infantry
+- AP/anti-heavy: strong vs heavy armor
+- Anti-structure: strong vs Concrete
+- AA: anti-air specific
+
+### HealthPercentageDamage warhead
+Scales with the same levels — percentage-based damage that bypasses normal armor calculations.
+
+### Explosion families
+Two consolidated explosion families:
+- **DEMOLITION** (anti-structure): used by demolition charges, C4, siege weapons
+- **CONCUSSION** (universal): used by general explosives, artillery shells
+
+### Consequences for new templates
+- Generate Versus tables from LEVEL + PROFILE, never hand-type
+- Standard armor orderings must be followed
+- New weapon templates must specify both LEVEL and PROFILE
+
+## S.5 — Balance Pipeline v2
+
+### Core loop
+1. **Extract**: `python tools/balance/extract_stats.py [--faction X]` — YAML → JSON ledger
+2. **Edit**: Modify ledger/sheet with raw stats
+3. **Build workbook**: `python tools/balance/build_workbook.py` — ledger → xlsx (gitignored)
+4. **Tune**: Adjust values in the workbook (the workbench)
+5. **Import**: `python tools/balance/import_workbook.py` — xlsx → ledger
+6. **Apply**: `python tools/balance/apply_balance.py --confirm [--faction X]` — ledger → YAML
+7. **Verify**: Drift audit + multiplier audit + boot gate
+
+### Architecture principles
+- **Single writer at any moment** — no concurrent edits
+- **Workbook is a workbench, not a source of truth** — xlsx is gitignored, never committed
+- **Ledger stores only raw YAML stats** with provenance — no derived values
+- **Derived quantities** (DPS, effective reload, price) exist ONLY as formula cells in the sheet and `formula.py` functions — computed, never stored
+- Range stays in **raw wdist** (5000, not 5.0) in the ledger
+
+### Sync commands
+| Command | Direction | Gate/Notes |
+|---|---|---|
+| `extract_stats.py [--faction X]` | yaml → ledger | Overwrites `docs/balance/*.json`; `--check` detects drift |
+| `build_workbook.py` | ledger → xlsx | Workbench regen; gitignored; safe to regenerate |
+| `import_workbook.py` | xlsx → ledger | Validates and prints every input-cell diff |
+| `apply_balance.py [--faction X]` | ledger → yaml (dry-run) | Prints diff; does NOT write |
+| `apply_balance.py --confirm [--faction X]` | ledger → yaml | Maintainer order only; auto-runs extract + audit |
+| `propose_class_rebalance.py --class <cls>` | ledger → markdown report | Does not touch yaml/ledger |
+| `_patch_ledgers_from_reports.py` | proposal → ledger | Patches ledger from class reports |
+
+### Round-trip invariants
+- `extract_stats.py` ∘ `apply_balance.py --confirm` = identity
+- `build_workbook.py` ∘ `import_workbook.py` = identity
+
+### Workbook v2 format
+Per-faction tabs with UNIT rows followed by indented WEAPON rows per armament:
+- Columns A–C: identity (locked)
+- Columns D–H: raw stats + design inputs
+- Columns I–N: weapon raw stats
+- Columns O–V: helper formulas (DPS, price, Δ, range-solver)
+- Constants tab: armor ladder, weapon-class tables, class-anchor baselines
+
+### Modifier normalization program
+83 templates carry multiplier traits, split into three kinds:
+1. **Cross-cutting systems** — KEEP, out of pipeline scope (veterancy, crate buffs, debuffs)
+2. **Sanctioned knob hierarchy** — KEEP, becomes PIPELINE-OWNED (`^GlobalBuffs` → class → subclass)
+3. **Ad-hoc formula-gap patches** — BAKE & DELETE via Formula v2 (fold into raw stats, reset to 100)
+
+### Phases
+| Phase | Deliverable | Status |
+|---|---|---|
+| 1 | Extractor: raw-stat ledger, multi-armament, provenance | Done |
+| 2 | Workbook builder: raw columns + helpers + solver + locks | Done |
+| 3 | Legacy comparator: seed design inputs | Done |
+| 4 | Sync commands + round-trip invariants + gated push | Done |
+| 5 | Formula v2 program: class registry, anchor fitting | In progress (infantry) |
+| 6 | Enforcement: balance check in run_all, retire old audits | Pending |
+
+## S.6 — Conversion Process (Per Unit)
+
+1. Read the class conversion log (`docs/balance/formula_v2_<class>.md`)
+2. Check weapon sharing → dedicate the weapon family (pair law)
+3. Apply stat laws (bands, steps, bake, no-air for scouts)
+4. Neutralize class knobs per-unit (Modifier: 100) until the whole class is converted
+5. Scale `ChangesHealth` — exact tag `ChangesHealth@SelfHealing`
+6. Edit EXISTING stat lines; a block's later same-trait definition shadows anything above
+7. Verify price via resolver + formula BEFORE boot (target ±2%)
+8. Ledger sync, boot gate, scoped commit, push, append conversion-log entry
+
+
+<!-- --- FILE: appendices/Appendix_T_Lessons_Learned.md --- -->
+
+<a id="file-appendices-Appendix_T_Lessons_Learned"></a>
+
+# Appendix T — Lessons Learned and Recurring Pitfalls {#file-appendices-Appendix_T_Lessons_Learned}
+
+## Purpose
+
+This appendix consolidates the hard-won lessons, safe defaults, and recurring pitfalls from `docs/LESSONS_LEARNED.md`. These are binding lessons — ignoring them leads to known failure modes.
+
+## T.1 — Required Reading Order
+
+Every new task must begin by reading these documents in order:
+1. `docs/LESSONS_LEARNED.md` (this content)
+2. `docs/AGENT_WORKSPACE.md`
+3. `docs/PROJECT_CONTEXT.md`
+4. `docs/DESIGN.md` (the ENTIRE file)
+5. `docs/design/ROADMAP.md`
+6. `docs/Cameo_Knowledge_Base_Manual.md` (this manual)
+7. `docs/audit/SUMMARY.md`
+
+## T.2 — Ledger Patching Safety
+
+- The ledger (`docs/balance/*.json`) stores raw YAML stats with provenance — never derived values
+- Always run `extract_stats.py --check` after YAML changes to detect drift
+- Never hand-edit derived values into the ledger
+- Multi-armament units keep EVERY armament with its condition (`requires`)
+
+## T.3 — Zero-Delta Formula-Price Pipeline
+
+- `O = P = Q = cost` must hold for baseline units
+- Price is linear in each single stat
+- `Δ = Price − Cost` should be ≤1 for converted units
+- Never hand-calc DPS; use `propose_class_rebalance.unit_dps` which reads every knob
+
+## T.4 — Multiplier Formatting
+
+- `FirepowerMultiplier` values are in 1% steps (1 = ×0.01, 100 = ×1.00, 150 = ×1.50)
+- `DamageMultiplier` for damage taken (lower = more resistant)
+- `ProductionCostMultiplier` and `ProductionTimeMultiplier` use `Prerequisites:` not `RequiresCondition:`
+- Knob hierarchy: `^GlobalBuffs` → class → subclass — one-value correction system
+
+## T.5 — Data Hygiene
+
+- UTF-8 encoding must be preserved — mojibake (double-encoded UTF-8) causes "weapon not found" errors
+- Engine shader files are NOT tracked by mod git — they live in `engine/glsl/`
+- YAML lint cleanup can accidentally remove weapon/warhead headers — always verify after lint passes
+- `NegativeRemoval` lines must follow correct syntax — invalid lines cause parse errors
+
+## T.6 — Stat Granularity
+
+- Speed: steps of 5 (vehicles/aircraft/ships) or 1 (infantry)
+- HP: steps of 2500 (vehicles/aircraft) or 1000 (infantry)
+- Damage: steps of 2000
+- Price: steps of 10, prefer 100 if unique
+- Range: steps of 10 (wdist), ±10% of baseline
+- TurnSpeed: formulas per unit type (see Appendix R.3)
+
+## T.7 — DPS and Formula Rules
+
+- **SUM law**: effective damage = Σ offensive SpreadDamage warheads, never MAX
+- `*ExtraDamage` warheads excluded from pricing (shield-only chip damage)
+- BurstDelays matter: effective reload = `ReloadDelay + BurstDelays * (Burst - 1)`
+- A hand calc that skipped BurstDelays mis-set a unit (prescribed FP 88 instead of ~95)
+- Always derive base DPS via tools, then solve FP for Δ0
+
+## T.8 — Class-Specific Notes
+
+### Scout
+- No air capability (air is SF class trait)
+- Tight ±10% range band (one weapon archetype: rifles)
+- Baseline: naxis_naxiriflesoldier @ 100
+
+### Closecombat
+- Wide range band (2500–4500): SMG spray → long shotgun
+- Range is a balance lever — cheapest at low edge, priciest at high edge
+- Baseline: td_gdi_shotgunner @ 200
+
+### Special Forces
+- CAN hit air (air is the SF class trait, baked into baseline)
+- Hitting air is NEVER a per-unit special
+- Baseline: japan_imperialscoutsman @ 200
+
+## T.9 — Uniqueness Enforcement
+
+- 5 stats must be unique within a class: HP, Speed, effective damage per shot, raw ReloadDelay, Range
+- `FirepowerMultiplier` alone is NEVER a uniqueness key
+- Damage-per-shot and reload are SEPARATE dimensions
+- Use `FirepowerMultiplier` to fine-tune effective damage without breaking the 2000-step rule
+
+## T.10 — Dual-Weapon Units
+
+- Multi-armament units keep EVERY armament with its condition
+- The old single-Damage flattening is retired
+- Which armaments count toward pricing is a design flag per armament (default: unconditional + primary-upgrade ones)
+
+## T.11 — Audit and Pipeline Findings (2026-07-22)
+
+- Audit report encoding: ensure UTF-8 throughout
+- MinRange rule: most weapons have no MinRange — exceptions are specific (flamethrowers, melee)
+- Weapon uniqueness: checked across ALL factions, not just within one
+- Buildable-order audit: verify `Buildable` queue ordering
+- `propose_class_rebalance.py` fixes: SUM law implementation, effective damage calculation
+- Script hygiene: keep tools deterministic and idempotent
+
+## T.12 — Interactable Trait and Upgrade Actors
+
+- `Interactable` and `Selectable` traits conflict
+- Fix at the ROOT template, not in children
+- Remove `Interactable` from `^upgrade_template` rather than adding `-Interactable:` to children
+- Crash cause: having both traits on the same actor
+
+## T.13 — Git Workflow and Commit Rules
+
+- Binding rules from user and co-maintainer Blackrobe (2026-07-24)
+- ALWAYS fetch/pull/merge before any commit
+- ALWAYS boot gate before commit
+- ALWAYS update ALL relevant documentation before commit
+- Do NOT spam commits on upstream master — use PRs
+- Commit titles must be self-explanatory to ALL developers
+- When done, merge feature branch to master
+
+## T.14 — YAML Lint Rules
+
+### `~disabled` prefix
+- Use exactly `~disabled` for ALL intentional gating prereqs
+- No suffixes needed: never `~wip`, `~disable`, `~unbuildable`, `~disabled-wip`
+- The linter exempts any prereq starting with `~disabled` (case-sensitive)
+
+### ProvidesPrerequisite
+- `ProvidesPrerequisite:` (no explicit field) → provides the actor's own name
+- `ProvidesPrerequisite: Prerequisite: custom_name` → provides `custom_name`
+- When an actor is referenced as a negation prereq (`~!actor`), the actor MUST have `ProvidesPrerequisite:`
+
+### Core templates
+- Templates in `defaults.yaml` are always loaded
+- They must NOT reference actors from unloaded content packs in:
+  - `SpawnActorOnDeath.Actor`
+  - `RepairActors` / `RearmActors`
+  - `Passenger.CargoConditions`
+  - `ExcludedActorTypes`
+
+### RepairActors
+- Put the full valid `RepairActors` list in the `^Conyard` template
+- ContentPack conyards should inherit, not override with their own list
+
+### RenderVoxels.PlayerPalette bug
+- Engine bug: uses `[PaletteReference]` instead of `[PaletteReference(true)]`
+- Workaround: add a dummy regular palette with the same name using `PaletteFromPaletteWithAlpha`
+
+### Double-replacement bug
+- When doing bulk string replacement (e.g., `~disable` → `~disabled`), it matches within already-renamed strings
+- Always use word-boundary-aware replacement or run a cleanup pass
+
+### Preserve empty Prerequisites line
+- When removing prerequisites and the line becomes empty, KEEP the empty `Prerequisites:` line
+- Do NOT delete it — this applies to BOTH support powers AND regular Buildable actors
+- Exception: when an actor is being entirely deleted
+
+## T.15 — Engine Shader Files
+
+- Engine shader files (`engine/glsl/*.frag`, `*.vert`) are NOT tracked by mod git
+- They must be created manually if missing (e.g., `postprocess_nuclearflash.frag`)
+- After `make all`, verify shader files are present
+- Missing shaders cause crashes when the corresponding post-process trait is active
+
+
+<!-- --- FILE: appendices/Appendix_U_Migration.md --- -->
+
+<a id="file-appendices-Appendix_U_Migration"></a>
+
+# Appendix U — ContentPack Migration Process {#file-appendices-Appendix_U_Migration}
+
+## Purpose
+
+This appendix documents the ContentPack migration process — the mission of making every faction a self-contained ContentPack to reduce RAM usage and enable dynamic faction loading. It mirrors `docs/MIGRATION.md`.
+
+## U.1 — Mission
+
+The migration transforms the monolithic ruleset into a collection of self-contained ContentPacks. Each faction becomes a ContentPack with its own `yaml/`, `files/`, and `translations/` subfolders, loaded via `content.yaml` manifests.
+
+**Goals:**
+- Reduce RAM usage by loading only needed factions
+- Enable dynamic faction loading
+- Make each faction self-contained (own assets, rules, translations)
+- Long-term: de-share cross-faction effects
+
+## U.2 — Target Folder Structure
+
+```
+mods/cameo/ContentPacks/<Theme>/<Faction>/
+  yaml/              — faction rules
+    vehicles.yaml
+    buildings.yaml
+    infantry.yaml
+    aircraft.yaml
+    defenses.yaml
+    upgrades.yaml
+    weapons.yaml
+  files/             — faction-specific assets
+    sprites/
+    voxels/
+    audio/
+  translations/
+    en.ftl
+  content.yaml       — ContentPack manifest
+```
+
+### Shared packs
+```
+mods/cameo/ContentPacks/<Theme>/Shared/
+  yaml/              — shared rules, weapons, sequences
+  files/             — shared assets
+  content.yaml
+```
+
+## U.3 — ContentPack Manifest (content.yaml)
+
+Each `content.yaml` includes:
+```yaml
+Rules:
+  - yaml/vehicles.yaml
+  - yaml/buildings.yaml
+  - yaml/infantry.yaml
+  - yaml/aircraft.yaml
+  - yaml/defenses.yaml
+  - yaml/upgrades.yaml
+Sequences:
+  - yaml/sequences.yaml
+Weapons:
+  - yaml/weapons.yaml
+TileSets:
+  - yaml/tilesets.yaml
+Translations:
+  - translations/en.ftl
+```
+
+## U.4 — mod.yaml Loading
+
+- `mod.yaml` loads ContentPacks via `Include:` entries
+- 39 ContentPack manifests across 11 themes
+- Some sequences and weapons files remain direct entries (partial migration)
+- Faction rules are fully migrated — no direct `Rules:` entries for faction rules
+
+### Themes
+| Theme | Factions |
+|---|---|
+| TiberianDawn | GDI, Nod, Shared |
+| TiberianSun | GDI, Nod, Forgotten, CABAL, Shared |
+| RedAlert | Allies, Soviets, Japan, Shared |
+| RedAlert2 | Allies, Soviets, Yuri, Shared |
+| RedAlert2Mod | AsianAlliance, Consortium, Syndicate, Naxis, SchwarzerMond, FutureTech, Shared |
+| D2k | Ordos, Ixian, Shared |
+| StarCraft | Terran, Protoss, Zerg, Shared |
+| Warcraft2 | Humans, Orcs, Shared |
+| Outpost2 | Eden, Plymouth, Shared |
+
+## U.5 — Per-Faction Pipeline (Rename, Split, Describe)
+
+### Step 1: Rename
+- Use `tools/rename/rename_map_<faction>.yaml` + `tools/rename/safe_rename.py`
+- Verify with `tools/audit/dump_resolved.py` before/after diffs (must be empty)
+- Asset safety: only rename files proven to be used by exactly one actor
+- Boot test after each faction batch
+
+### Step 2: Split
+- Move faction-specific YAML from shared files into ContentPack `yaml/` folder
+- Move faction-specific assets into ContentPack `files/` folder
+- Update `content.yaml` manifest
+- Keep shared assets in Shared/ packs
+
+### Step 3: Describe
+- Write faction descriptions in fluent files (`translations/en.ftl`)
+- Convert inline YAML descriptions to fluent references
+- Update faction YAML to reference fluent keys
+
+## U.6 — AI Module Split (Blocked)
+
+The AI module split is currently blocked. The AI (`ai.yaml`) references actors across factions in squad compositions, starting units, and building fractions.
+
+**Candidate solution:** Custom `GrantConditionOnFaction` trait
+- Each AI squad entry would conditionally activate based on the player's faction
+- This would allow per-faction AI definitions without cross-references
+
+## U.7 — Standing Design Decisions
+
+- **Naming schemes**: follow DESIGN.md §1 (see Appendix R.1)
+- **Pack layout**: `yaml/` and `files/` subfolders per ContentPack
+- **`bits/` folder**: legacy asset folder, being phased out in favor of ContentPack `files/`
+- **Shared assets**: stay in Shared/ packs, never renamed after one user
+- **Cross-faction effects**: currently shared, long-term goal to de-share
+
+## U.8 — Migration Status
+
+| Faction | Rules Migrated | Assets Migrated | Translations | Status |
+|---|---|---|---|---|
+| GDI TD | Yes | In progress | ContentPack | Active |
+| Nod TD | Yes | In progress | ContentPack | Active |
+| GDI TS | Yes | In progress | Shared fluent | Active |
+| Nod TS | Yes | In progress | Shared fluent | Active |
+| Forgotten | Yes | In progress | ContentPack (98%) | Active |
+| CABAL | Yes | In progress | ContentPack | Active |
+| Allies RA1 | Yes | In progress | Shared fluent | Active |
+| Soviets RA1 | Yes | In progress | Shared fluent | Active |
+| Japan RA1 | Yes | In progress | Shared fluent | Active |
+| Allies RA2 | Yes | In progress | Shared fluent | Active |
+| Soviets RA2 | Yes | In progress | Shared fluent | Active |
+| Yuri | Yes | In progress | Shared fluent | Active |
+| Asian Alliance | Yes | In progress | ContentPack | Active |
+| Steel Consortium | Yes | In progress | ContentPack | Active |
+| Latin Syndicate | Yes | In progress | ContentPack | Active |
+| Naxis | Yes | In progress | ContentPack | Active |
+| Schwarzer Mond | Yes | In progress | ContentPack | Active |
+| FutureTech | Yes | In progress | ContentPack | Active |
+| TKM | Partial | Not started | Dedicated fluent | WIP |
+| Ordos | Yes | In progress | Shared fluent | Active |
+| Ixians | Yes | In progress | Shared fluent | Active |
+| Terran | Partial | Not started | Dedicated fluent | Active |
+| Protoss | Partial | Not started | Dedicated fluent | Active |
+| Zerg | Partial | Not started | Dedicated fluent | Active |
+| Humans WC2 | Partial | Not started | Dedicated fluent | Active |
+| Orcs WC2 | Partial | Not started | Dedicated fluent | Active |
+| Eden | Partial | Not started | Dedicated fluent | WIP |
+| Plymouth | Partial | Not started | Dedicated fluent | WIP |
+
+
+<!-- --- FILE: appendices/Appendix_V_Audit_Status.md --- -->
+
+<a id="file-appendices-Appendix_V_Audit_Status"></a>
+
+# Appendix V — Audit Status and Bug Class Reference {#file-appendices-Appendix_V_Audit_Status}
+
+## Purpose
+
+This appendix provides a categorical reference to all known bug classes, audit findings, and the current state of the audit system. It mirrors `docs/audit/SUMMARY.md` and incorporates findings from `docs/audit/FINDINGS.md` and `CONSISTENCY_REPORT.md`.
+
+## V.1 — Bug Class Taxonomy
+
+| Class | Code | Description | Status |
+|---|---|---|---|
+| Crash-class content | B1 | Missing assets, broken sequences, invalid references | Mostly fixed (July 2026) |
+| Cross-faction leaks | B2 | Faction assets/rules leaking into other factions | Ongoing |
+| Illegal inherits | B3 | Actors inheriting from other factions' templates | Ongoing |
+| AI wiring | B4 | AI squad compositions, starting units, building fractions | Ongoing |
+| Upgrade direction | B5 | Upgrades pointing to wrong actors or missing prerequisites | Ongoing |
+| Art/sequence refs | B6 | Broken image/sequence references | Mostly fixed |
+| Metadata rot | B7 | Stale tooltips, descriptions, buildable metadata | Ongoing |
+| Numeric drift | B8 | Stats drifted from formula values | Active (balance program) |
+| Dead content | B9 | Unused actors, weapons, sequences | Ongoing |
+| Asset norms | B10 | Non-standard asset naming, missing icons | Ongoing |
+| Localization | B11 | Missing fluent translations, inline descriptions | Ongoing |
+| Stacked multipliers | B12 | Multiple multiplier traits stacking unexpectedly | Fixed (normalization program) |
+| Weapon uniqueness | B13 | Weapons shared across units/factions | Ongoing |
+| Garrison weapons | B14 | Garrison weapon issues | Mostly fixed |
+
+## V.2 — Top Findings (from baseline audit)
+
+1. Cross-faction inheritance violations (Latin Syndicate, D2k, TS factions) — fixed
+2. `Interactable` + `Selectable` conflict on upgrade templates — fixed
+3. Missing weapon/warhead headers after lint cleanup — fixed
+4. Mojibake (double-encoded UTF-8) in weapon names — fixed
+5. `NegativeRemoval` invalid syntax — fixed
+6. `ProductionCostMultiplier` using `RequiresCondition` instead of `Prerequisites` — fixed
+7. `RenderVoxels.PlayerPalette` palette lint errors — workaround applied
+8. Double-replacement bug during `~disable` → `~disabled` migration — fixed
+9. Core templates referencing unloaded actors — fixed
+10. Duplicated `RepairActors` in ContentPack conyards — fixed
+11. Missing `ProvidesPrerequisite` for negation prereqs — partially fixed
+12. Banned gating prereqs (`~wip`, `~disable`, etc.) — fixed (canonical `~disabled`)
+13. Engine shader files not tracked by mod git — documented
+14. `LaunchAngle` field on non-applicable projectiles — fixed
+15. `DuplicateInteractable` conflicts — fixed
+16. `InvalidWeaponField` on weapons — fixed
+17. `MissingTooltip` on actors — fixed
+18. Death palette mismatch (`ra2player` vs `playerra2`) — partially fixed (TS correct, others reverted)
+19. Shared-weapon ownership leaks during balance edits — ongoing
+20. `~disabled` prefix not consistently applied — fixed
+
+## V.3 — Recommended Fix Order
+
+1. **Crash-class bugs** (B1) — always first, always jump the queue
+2. **Cross-faction leaks** (B2) and **illegal inherits** (B3) — structural integrity
+3. **AI wiring** (B4) — gameplay functionality
+4. **Upgrade direction** (B5) — gameplay correctness
+5. **Art/sequence refs** (B6) — visual integrity
+6. **Metadata rot** (B7) and **localization** (B11) — user experience
+7. **Numeric drift** (B8) — balance program (Formula v2)
+8. **Dead content** (B9) — cleanup
+9. **Asset norms** (B10) — polish
+10. **Weapon uniqueness** (B13) — balance program
+
+## V.4 — Audit Tooling
+
+| Script | Path | Purpose |
+|---|---|---|
+| `audit_yaml_lint_rules.py` | `tools/audit/` | Checks banned gating prereqs, Interactable+Selectable conflicts, duplicated RepairActors |
+| `dump_resolved.py` | `tools/audit/` | Dumps resolved YAML for before/after rename diffs |
+| `audit_asset_files.py` | `tools/audit/` | Scans asset file references (A1 must be 0) |
+| `audit_multiplier_modifiers.py` | `tools/audit/` | Checks multiplier trait stacking |
+| `audit_consistency_report.py` | `tools/audit/` | Checks C6-C11 (faction naming consistency) |
+| `gen_faction_matrix.py` | `tools/audit/` | Generates faction roster matrix |
+
+## V.5 — Remaining Unresolved Prerequisites
+
+These prerequisites are still unresolved (not in any `providedPrereqs`):
+- `~construction_yard.atreides`
+- `~EDEN_FACTORY_CONSUMER`
+- `!droppod`
+- `~techlevel.medium`
+- `~techlevel.high`
+- `~faction.harkonnen`
+- `tsproc`
+- `~ra2fact`
+- `~faction.atreides`
+- `faction.guild`
+- `faction.corrino`
+
+**Fix approach:** Add `ProvidesPrerequisite` to Player actor in `player.yaml` for faction/techlevel ones, or rename to `~disabled` for genuinely unused ones.
+
+
+<!-- --- FILE: appendices/Appendix_W_Faction_Compendium.md --- -->
+
+<a id="file-appendices-Appendix_W_Faction_Compendium"></a>
+
+# Appendix W — Faction Compendium {#file-appendices-Appendix_W_Faction_Compendium}
+
+## Purpose
+
+This appendix provides a comprehensive reference to all playable factions in Cameo, including lore, gameplay profiles, roster stats, unique mechanics, superweapons, and signature units. It mirrors `docs/FACTIONS.md`.
+
+## W.1 — Quick Reference Table
+
+| Faction | Units | Buildings | Upgrades | AI Wired | Fluent | Difficulty | Playstyle |
+|---|---|---|---|---|---|---|---|
+| GDI TD | 31 | 18 | 20 | 28/30 | 1% | ©© | Brute Force |
+| Nod TD | 33 | 20 | 20 | 30/32 | 4% | ©©© | Rush/Stealth |
+| GDI TS | 33 | 16 | 16 | 31/32 | 0% | ©© | Turtle/Positional |
+| Nod TS | 23 | 19 | 8 | 20/22 | 2% | ©©©© | Stealth/Hit&Run |
+| Forgotten | 41 | 18 | 20 | 38/40 | 98% | ©©© | Adaptive/Promotion |
+| CABAL | 39 | 16 | 27 | 36/38 | 0% | ©©©©© | Tech Rush/Promotion |
+| Allies RA1 | 32 | 22 | 20 | 29/31 | 1% | ©©© | Tech/Mobility/Naval |
+| Soviets RA1 | 53 | 21 | 44 | 50/52 | 1% | ©© | Brute Force |
+| Japan RA1 | 40 | 16 | 20 | 37/39 | 1% | ©©© | Rush/Mobility |
+| Allies RA2 | 32 | 19 | 18 | 30/31 | 10% | ©©© | Mobility/Garrison |
+| Soviets RA2 | 23 | 19 | 17 | 21/22 | 1% | ©© | Brute Force/Tank Rush |
+| Yuri | 20 | 16 | 30 | 18/19 | 3% | ©©©©© | Mind Control |
+| Asian Alliance | 32 | 21 | 23 | 30/31 | Expanded | ©©©© | High-Tech/Mass Infantry |
+| Steel Consortium | 27 | 15 | 20 | 25/26 | Expanded | ©©©©© | Tech Rush/Shields |
+| Latin Syndicate | 33 | 16 | 21 | 31/32 | Expanded | ©©© | Attrition/Stolen Tech |
+| Naxis | 40 | 18 | 19 | 37/39 | Expanded | ©©©© | Turtle/Heavy Armor |
+| Schwarzer Mond | 28 | 13 | 8 | 26/27 | Expanded | ©©© | Timing Attack |
+| FutureTech | 31 | 13 | 15 | 29/30 | Expanded | ©©©©© | Tech Rush/Robotics |
+| TKM | 36 | 13 | 25 | 34/35 | 1% | TBD | Modular (WIP) |
+| Ordos | 48 | 15 | 29 | 42/43 | 0% | ©©© | Mobility/Stealth |
+| Ixians | 37 | 19 | 25 | 31/32 | 0% | ©©©© | Turtle/Tech Rush |
+| Terran | 32 | 16 | 31 | 30/31 | 0% | ©©©© | Turtle/Positional |
+| Protoss | 30 | 17 | 27 | 28/29 | 0% | ©©© | Tech/Power Units |
+| Zerg | 29 | 22 | 26 | Yes | 0% | ©©© | Swarm/Map Control |
+| Humans WC2 | 25 | 21 | 25 | 23/24 | Expanded | ©©© | Balanced/Magic |
+| Orcs WC2 | 18 | 20 | 24 | 16/17 | Expanded | ©©© | Aggressive/Dark Magic |
+| Eden | 20 | 25 | 0 | 1/19 | 0% | ©©©© | Colony/Tech Rush |
+| Plymouth | 21 | 25 | 0 | 1/20 | 0% | ©©©© | Colony/Area Denial |
+
+## W.2 — Superweapon Reference
+
+| Faction | Superweapon(s) |
+|---|---|
+| GDI TD | Ion Cannon, Airstrike |
+| Nod TD | Nuclear Strike |
+| GDI TS | Ion Cannon, Drop Pods |
+| Nod TS | Cluster Missile, Chemical Missile |
+| Forgotten | Nuclear Missile (Veinhole) |
+| CABAL | Nuclear Missile, Data Worm |
+| Allies RA1 | Chronosphere, Chrono Reinforcements, Chrono Vortex |
+| Soviets RA1 | Atomic Bomb, Iron Curtain, Parabombs |
+| Japan RA1 | Magic Orb Hailstorm, Super Bomber Airstrike |
+| Allies RA2 | Chronosphere, Lightning Storm, Force Shield |
+| Soviets RA2 | Nuclear Missile, Iron Curtain |
+| Yuri | Psychic Dominator, Genetic Mutator |
+| Asian Alliance | Chaos Storm, Ion Cannon |
+| Steel Consortium | Orbital Cannon, EMP Cannon, BFG 10000, Federation Support Teleport |
+| Latin Syndicate | Topol Strike, EMP Disable, Traitors |
+| Naxis | Revive the Undead Warriors, V1 Rocket |
+| Schwarzer Mond | Gravity Core, Meteor Blitzkrieg |
+| FutureTech | Paradrop (planned: Sigma Harmonizer) |
+| Ordos | Chaos Storm |
+| Ixians | Pulse Missile |
+| Terran | Nuclear Strike |
+| Protoss | Purifier Beam |
+| Zerg | N/A (swarm) |
+| Humans WC2 | Blizzard, Holy Vision, Healing, Slow, Invisibility |
+| Orcs WC2 | Death and Decay, Eye of Kilrogg, Runes, Bloodlust, Haste |
+| Eden | Supernova Missile |
+| Plymouth | Supernova Missile |
+
+## W.3 — Unique Mechanic Reference
+
+| Faction | Unique Mechanic |
+|---|---|
+| Allies RA1 | 1 doctrine (Air Superiority) |
+| Soviets RA1 | Largest roster (53u), most upgrades (44up) |
+| Forgotten | Promotion chain system, 98% Fluent, Unity aura, Tiberium Adaptability, Tiberian Wildlife Rampage |
+| CABAL | 3×4 promotion grid, Backup Systems (auto-reanimate wrecks) |
+| Yuri | Mind control, slave economy, cloning vats |
+| Latin Syndicate | Stolen tech system (from Yuri, Soviets, Allies, Asian Alliance) |
+| Schwarzer Mond | Crystal Lens/Amplified Lens laser upgrade system, Cryptofascism economy |
+| Steel Consortium | Personal shields on all vehicles, Quantum railguns, Nanite regeneration, Federation support teleport |
+| Asian Alliance | Photon Cannon (multi-damage plasma), Asian Phalanx aura, deep promotion tree, Banzai Mode |
+| Naxis | Turtle bunkers, Ratte super-heavy tank, Revive Undead Warriors |
+| FutureTech | Robot Tank (MC immune, hovers), Robot Control dependency |
+| Ordos | Self-repair, Deviator (temporary MC), mercenary desertion |
+| Ixians | Farasha drone swarms, Ixian Projector (holographic decoys) |
+| Terran | Supply Depot system, liftable buildings, Siege Tank transform |
+| Protoss | Plasma shields (all units), Pylon power, Warp-in |
+| Zerg | Larva parallel production, Creep requirement, biological regen, Burrow |
+| Humans WC2 | 3-resource economy (Gold/Wood/Oil), Mage spells, Paladin abilities |
+| Orcs WC2 | 3-resource economy, Death Knight spells, Ogre-Mage Bloodlust |
+| Eden/Plymouth | Colony-building mechanics, modular vehicle chassis, morale system |
+
+## W.4 — Faction Details (Selected Highlights)
+
+### GDI TD
+- **Internal Name:** `td_gdi` (actors: `td_gdi_*`)
+- **Source:** Command & Conquer: Tiberian Dawn (1995)
+- **Playstyle:** Brute Force / Heavy Armor
+- **Signature Units:** Mammoth Tank, Orca, Medium Tank, Advanced Guard Tower
+- **Superweapons:** Ion Cannon, Airstrike
+
+### Nod TD
+- **Internal Name:** `td_nod` (actors: `td_nod_*`)
+- **Source:** Tiberian Dawn (1995)
+- **Playstyle:** Rush / Hit and Run / Stealth / Area Denial
+- **Signature Units:** Stealth Tank, Flame Tank, Obelisk of Light, Nod Artillery
+- **Superweapons:** Nuclear Strike
+
+### CABAL
+- **Internal Name:** `cabal` (actors: `cabal_*`)
+- **Source:** Tiberian Sun (Firestorm expansion)
+- **Playstyle:** Tech Rush / Promotion Grid / Attrition
+- **Roster:** 39 units, 16 buildings, 27 upgrades (most of any TS faction)
+- **Signature Units:** Core Defender, Mothership, Cyborg Commando v2, Spider walkers
+- **Unique:** 3×4 Promotion Grid, Backup Systems, dual-armor cyborg infantry, CABAL Core T4 gate
+
+### Soviets RA1
+- **Internal Name:** `ra1_soviets` (actors: `ra1_soviets_*`)
+- **Source:** Red Alert (1996)
+- **Playstyle:** Brute Force / Steamrolling / Timing Push
+- **Roster:** 53 units (largest in game), 21 buildings, 44 upgrades (most of any faction)
+- **Signature Units:** Mammoth Tank, Tesla Tank, Volkov, MiG, Shock Trooper, Desolator
+- **Superweapons:** Atomic Bomb, Iron Curtain, Parabombs
+
+### Yuri
+- **Internal Name:** `yuri` (actors: `yuri_*`)
+- **Source:** Yuri's Revenge (2001)
+- **Playstyle:** Mind Control / Area Denial / Economic Warfare
+- **Roster:** 20 units, 16 buildings, 30 upgrades (most of any RA2 faction)
+- **Signature Units:** Yuri Clone, Mastermind, Floating Disc, Brute, Magnetron, Boomer Submarine
+- **Unique:** Mind control, slave economy, cloning vats, booby traps, gattling system
+
+### Asian Alliance
+- **Internal Name:** `asianalliance` (actors: `asianalliance_*`)
+- **Source:** Cameo original (Eagle Red Mod inspired)
+- **Playstyle:** High-Tech / Mass Infantry / Promotion Tree
+- **Roster:** 32 units, 21 buildings, 23 upgrades
+- **Signature Units:** Quasar, Dragonfly, Lynx Tank, Samurai, War Turtle
+- **Unique:** Photon Cannon, Asian Phalanx aura, deep promotion tree, Banzai Mode
+
+### Steel Consortium
+- **Internal Name:** `steelconsortium` (actors: `steelconsortium_*`)
+- **Source:** Cameo original (Reign of Steel Mod inspired)
+- **Playstyle:** Tech Rush / Shields / Quantum Weapons
+- **Roster:** 27 units, 15 buildings, 20 upgrades
+- **Signature Units:** Katy Tank, Stalker, White Rabbit, Defenderbot
+- **Unique:** Personal shields on all vehicles, quantum railguns, nanite regeneration, underwater transit
+
+### Zerg
+- **Internal Name:** `zerg` (actors: `zerg_*`)
+- **Source:** StarCraft (1998)
+- **Playstyle:** Swarm / Map Control / Economic Overwhelm
+- **Roster:** 29 units, 22 buildings, 26 upgrades
+- **Signature Units:** Zergling, Hydralisk, Mutalisk, Ultralisk, Lurker, Defiler
+- **Unique:** Larva-based parallel production, Creep requirement, biological regeneration, Burrow, only faction with full AI wiring
+
+## W.5 — Meta-Factions
+
+These are not playable factions but random-select groups:
+
+| Meta-Faction | Members | Notes |
+|---|---|---|
+| Random | 26 members | All selectable factions |
+| Randomcnc | 2 | TD GDI, TD Nod |
+| RandomDU | 2 | Ordos, Ixians |
+| Randomra | 3 | RA1 Allies, Soviets, Japan |
+| Randomra2 | 3 | RA2 Allies, Soviets, Yuri |
+| Randomra2mod | 6 | Asian Alliance, Consortium, Syndicate, Naxis, Schwarzer Mond, FutureTech |
+| RandomSC | 3 | Terran, Protoss, Zerg |
+| RandomTS | 4 | GDI TS, Nod TS, Forgotten, CABAL |
+| RandomWC2 | 2 | Humans, Orcs |
+| RandomTournament | 25 | All Tournament-eligible factions |
+
+## See also
+
+- [Appendix R — Binding Design Rules and Conventions](#file-appendices-Appendix_R_Design_Rules) — faction naming conventions, actor ID format, and uniqueness rules that govern faction content.
+- [Appendix U — ContentPack Migration Process](#file-appendices-Appendix_U_Migration) — migration status board for each faction's ContentPack.
+- [Appendix L — Cameo Divergence](#file-appendices-Appendix_L_Cameo_Divergence) — high-level summary of Cameo-specific additions vs upstream OpenRA.
+- [Appendix P — Cameo Faction Actor Visual Reference](#file-appendices-Appendix_P_Cameo_Faction_Actor_Visual_Reference) — visual sprites and cameos for Cameo faction actors.
+
+
+<!-- --- FILE: appendices/Appendix_X_Vision.md --- -->
+
+<a id="file-appendices-Appendix_X_Vision"></a>
+
+# Appendix X — Long-term Vision and Campaign Mode {#file-appendices-Appendix_X_Vision}
+
+## Purpose
+
+This appendix documents the long-term, non-binding product intent for the Cameo mod. It mirrors `docs/design/VISION.md`. This is **not** an implementation queue, balance law, or release commitment — it is a design north star.
+
+## X.1 — Dynamic Campaign Mode: "The Singularity Crisis"
+
+### Concept
+A replayable, turn-based campaign blending strategic overworld, pre-battle army building, and boss-gauntlet structures. The narrative centers on the "Convergence" — various RTS universes merging, where the player's faction acquires assets from other dimensions.
+
+### Narrative
+The Convergence brings together factions from Tiberian Dawn, Tiberian Sun, Red Alert, Red Alert 2, Dune 2000, StarCraft, Warcraft 2, and Outpost 2 into a single multiverse. The player's faction must navigate this crisis, acquiring technology and units from other dimensions to survive.
+
+## X.2 — Strategic Layer
+
+- **Multiverse map**: dimensions representing factions from different source games
+- **Target selection**: player chooses which dimension to attack
+- **Three-mission arcs**: each dimension has a three-mission storyline
+- **Threat scaling**: difficulty increases as the player progresses
+
+## X.3 — Pre-Battle Setup
+
+- **Meta-progression**: Meta-Credits earned from missions
+- **Universal meta-tech**: upgrades that persist across missions
+- **Tactical tech**: mission-specific technology choices
+
+## X.4 — Tactical Layer
+
+Three mission types:
+1. **Beachhead** — establish a foothold in a new dimension
+2. **Asymmetric objective** — special-objective missions (escort, sabotage, defense)
+3. **Artifact/commander assault** — boss-gauntlet missions against enemy commanders
+
+## X.5 — Co-op Mode
+
+The campaign supports cooperative play, allowing multiple players to tackle missions together.
+
+## X.6 — Long-term Technical Directions
+
+- **Handcrafting missions**: start with carefully designed individual missions
+- **Lua templates**: develop reusable Lua script templates for mission logic
+- **Limited dimensions first**: start with a small set of dimensions and expand
+- **Automated balance-test harnesses**: investigate in-game automated balance testing
+- **Investigate**: procedural mission generation as a stretch goal
+
+
+<!-- --- FILE: appendices/Appendix_Y_Agent_Handoff.md --- -->
+
+<a id="file-appendices-Appendix_Y_Agent_Handoff"></a>
+
+# Appendix Y — AI Agent Handoff Log {#file-appendices-Appendix_Y_Agent_Handoff}
+
+## Purpose
+
+This appendix provides a reference for AI agent handoff information, summarizing the state of the project for new agents picking up work. It mirrors the content of `docs/history/AI_AGENT_HANDOFF.md`.
+
+## Y.1 — Engine and Build
+
+- **Engine commit hash:** `b1d04ea76a1ee6c3c3f538bc40b6b77c8b6a977a`
+- **Build command:** `make all` (or `dotnet build -c Release --nologo -p:TargetPlatform=win-x64`)
+- **Launch command:** `launch-game.cmd`
+- **Custom post-process shaders:** `engine/glsl/postprocess_nuclearflash.frag` (must be created manually if missing)
+
+## Y.2 — Recent Work (as of 2026-07-24)
+
+### Completed
+- ContentPack migration: all faction rules loaded via ContentPacks
+- RA2 weapons migration: all 134 weapons + templates migrated to ContentPacks
+- YAML lint cleanup: LaunchAngle, DuplicateInteractable, NegativeRemoval, InvalidWeaponField, MissingTooltip, ProductionCostMultiplier fixes
+- PascalCase inheritance template enforcement
+- Cross-faction inheritance violation fixes (Latin Syndicate, D2k, TS factions)
+- Prerequisite cleanup: `~disabled` canonical policy
+- Balance pipeline implementation (tools/balance/)
+- TKM faction self-containment
+- NuclearFlashRenderer custom post-process shader
+- Naming scheme refactor: 214 renames across 21 factions (promotions, upgrades, actors)
+- Dots → underscores in template names (76 files, 1183 replacements)
+- Infantry class rebalance: closecombat, scout, special forces, melee anchors live
+- 14 class anchors registered in `class_anchors.json`
+- 257 buildable infantry auto-classified into 14 classes
+- Buildability law implemented (23/280 infantry excluded)
+
+### In Progress
+- Infantry rebalance: converting remaining classes to anchors
+- Shared-weapon ownership pass (forking cross-pack shared weapons)
+- Tech-tier relative-to-anchor fix
+- Class descriptions rework (fluent descriptions for each unit class)
+
+### Pending
+- Vehicle anchor proposal (MBT live; light tank, heavy, tank destroyer, artillery, AA, scout, battlefortress, APC)
+- Aircraft and defense class programs
+- Naval class program
+- Catch-all-specials audit
+- Dynamic Campaign Mode (long-term, non-binding)
+
+## Y.3 — Key Files and Locations
+
+| Item | Path |
+|---|---|
+| Engine pin | `engine/` directory at commit `b1d04ea76a1ee6c3c3f538bc40b6b77c8b6a977a` |
+| Mod root | `mods/cameo/` |
+| mod.yaml | `mods/cameo/mod.yaml` |
+| ContentPacks | `mods/cameo/ContentPacks/<Theme>/<Faction>/` |
+| Balance tools | `tools/balance/` |
+| Audit tools | `tools/audit/` |
+| Rename tools | `tools/rename/` |
+| Balance ledger | `docs/balance/*.json` |
+| Class anchors | `docs/balance/class_anchors.json` |
+| Conversion logs | `docs/balance/formula_v2_<class>.md` |
+| Membership review | `docs/balance/membership_review.md` |
+| Custom traits | `OpenRA.Mods.Cameo/` (C# assembly) |
+
+## Y.4 — Known Issues and Risks
+
+- **Shared-weapon ownership**: many units share weapons via cross-pack inheritance; per-unit balance edits leak. Must fork weapons before converting.
+- **Tech-tier absolute vs relative**: `class_baseline_price` multiplies by `design.tech_tier` absolutely. Fix needed: effective tier = unit_tier / anchor_tier.
+- **MAX-era hot damage**: ~20 closecombat+SF members have warhead damage set = intended total (2-3× hot under SUM). Need reconversion.
+- **Unresolved prerequisites**: 11 prereqs still not in `providedPrereqs` (see Appendix V.5).
+- **AI module split**: blocked on cross-faction AI references. Candidate: `GrantConditionOnFaction` trait.
+- **Engine 910e50de migration**: stricter parser may reject previously valid YAML. Fix as found.
+
+## Y.5 — Shader Recreation Instructions
+
+If `engine/glsl/postprocess_nuclearflash.frag` is missing:
+
+1. Create the file at `engine/glsl/postprocess_nuclearflash.frag`
+2. Implement a nuclear flash post-process shader (white flash that fades)
+3. Rebuild the engine: `make all`
+4. Verify the shader is present after build
+5. Boot test to confirm no crash
+
+The `NuclearFlashRenderer` trait in the mod references this shader. Without it, the game crashes on boot when the trait is active.
+
+## Y.6 — Next Steps for New Agents
+
+1. Read all documents in the required reading order (Appendix Q.2)
+2. Check `docs/design/ROADMAP.md` for the current work queue
+3. Run `git fetch && git pull` to get the latest state
+4. Check for any new exception logs from the last boot
+5. Pick up the next item from the ROADMAP (crashes jump the queue)
+6. Follow the binding commit rules (Appendix Q.4)
+7. Use the balance pipeline tools, never hand-calc DPS

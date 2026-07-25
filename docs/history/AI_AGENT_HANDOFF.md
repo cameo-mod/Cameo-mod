@@ -1,6 +1,6 @@
 # AI Agent Handoff — Comprehensive Session Log
 
-> **Last updated:** 2026-07-24, 23:45 UTC+02:00
+> **Last updated:** 2026-07-25, 12:15 UTC+02:00
 >
 > **Purpose:** This document gives the next AI agent (or human contributor) a complete
 > picture of everything that happened on and around 2026-07-24, so they can pick up
@@ -17,7 +17,7 @@
 | **Branch** | `master` (feature branch `fix/ra2-weapons-migration` was merged) |
 | **HEAD commit** | `46e4b140e` — "Fix RA2 YAML crashes: migrate weapons to ContentPack, restore Yuri headers, fix Kübelwagen encoding, add AI agent handoff doc" |
 | **Master status** | Clean, pushed, up to date with `origin/master` |
-| **Uncommitted changes** | `docs/Cameo_Knowledge_Base_Manual.md` (NuclearFlashRenderer entry + version bump to v.0.3.1); `check-yaml-output.txt` (untracked temp file — delete before commit) |
+| **Uncommitted changes** | `docs/FACTIONS.md` (superweapon audit corrections); `docs/audit/latest/superweapon_audit.yaml` (new audit file); `docs/audit/SUMMARY.md` (audit section added); `docs/design/ROADMAP.md` (audit task marked complete); `docs/LESSONS_LEARNED.md` (audit lessons added); `docs/history/AI_AGENT_HANDOFF.md` (this file, updated); `docs/Cameo_Knowledge_Base_Manual.md` (NuclearFlashRenderer entry + version bump to v.0.3.1); `check-yaml-output.txt` (untracked temp file — delete before commit) |
 | **Engine pin** | `b1d04ea76a1ee6c3c3f538bc40b6b77c8b6a977a` (in `mod.config` → `ENGINE_VERSION`; also must be in `engine/VERSION` after `make all`) |
 
 ---
@@ -452,3 +452,65 @@ void main()
 | **Orphaned nodes** | YAML child nodes whose parent header was accidentally deleted, causing them to be interpreted as children of the wrong parent. |
 | **Engine pin** | The specific engine commit hash that the mod is built against. Stored in `mod.config` → `ENGINE_VERSION` and `engine/VERSION`. |
 | **`make all`** | Fetches the pinned engine version, builds it, and sets up the mod for development. Wipes custom files in `engine/glsl/`. |
+
+---
+
+## 12. 2026-07-25 Session — Superweapon Documentation Audit
+
+### 12.1 What Was Done
+
+A comprehensive cross-reference audit of all superweapon and support power YAML traits against `docs/FACTIONS.md` was completed. This was a documentation-only audit — no game files were modified.
+
+**Files modified (all uncommitted):**
+- `docs/audit/latest/superweapon_audit.yaml` — new file, raw audit data (607 lines)
+- `docs/FACTIONS.md` — 14 discrepancies corrected across detailed faction sections and the superweapon reference table
+- `docs/audit/SUMMARY.md` — added "Superweapon documentation audit" section
+- `docs/design/ROADMAP.md` — added "Superweapon Documentation Audit (2026-07-25, COMPLETED)" section
+- `docs/LESSONS_LEARNED.md` — added "Superweapon documentation audit (2026-07-25)" section
+- `docs/history/AI_AGENT_HANDOFF.md` — this update
+
+### 12.2 Audit Findings (14 total)
+
+| ID | Severity | Faction | Issue | Status |
+|---|---|---|---|---|
+| SW-001 | HIGH | D2K Harkonnen | Palace has `^PrimarySuperweapon` but no power trait — Death Hand Missile unimplemented | Parked faction, not a regression |
+| SW-002 | MED | TS Forgotten | Docs said "Tiberian Wildlife Rampage" but YAML has `NukePowerCA` (nuclear missile) | FIXED in FACTIONS.md |
+| SW-003 | MED | TS CABAL | Docs said "Data Worm, Satellite Hack" but YAML has `NukePowerCA` + `FireArmamentPower` (Data Worm). Satellite Hack not found | FIXED — added Nuclear Missile, removed Satellite Hack |
+| SW-004 | LOW | TS Nod | Docs only listed "Chemical Missile" but YAML has Cluster Missile + Chemical Missile | FIXED — added Cluster Missile |
+| SW-005 | LOW | RA1 Allies | Docs missing "Chrono Reinforcements" support power | FIXED |
+| SW-006 | LOW | RA2 Allies | Docs missing "Force Shield" support power | FIXED |
+| SW-007 | LOW | Latin Syndicate | Docs missing "EMP Disable" and "Traitors" support powers | FIXED |
+| SW-008 | LOW | Schwarzer Mond | Docs said "Meteor Traction Beam" but YAML power name is "Meteor Blitzkrieg" | FIXED |
+| SW-009 | LOW | D2K Ordos | Docs said "Chaos Lightning" but YAML uses AsianChaosSuperweapon (same as Asian Alliance's "Chaos Storm") | FIXED — renamed to "Chaos Storm" |
+| SW-010 | LOW | WC2 Humans | Docs missing "Slow" and "Invisibility" support powers | FIXED |
+| SW-011 | LOW | WC2 Orcs | Docs missing "Bloodlust" and "Haste" support powers | FIXED |
+| SW-012 | INFO | SC Protoss | Docs call it "Purifier Beam" but YAML reuses SteelIonCannon weapon | Noted in docs |
+| SW-013 | INFO | Steel Consortium | Reference table missing "Federation Support Teleport" (4-tier support power) | FIXED — added to reference table |
+| SW-014 | INFO | TS GDI | Reference table only said "Ion Cannon" but DropPodsPower is also implemented | FIXED — added Drop Pods to reference table |
+
+### 12.3 WIP Faction Superweapons Discovered
+
+These are documented in the audit YAML but NOT in FACTIONS.md (factions are WIP):
+- **Warzone 2100** (`rules/wz2100.yaml`): IonCannonPower (charge 4000), AirstrikePower (charge 3000), NukePower (charge 9000)
+- **Worms** (`rules/worms.yaml`): AirstrikePower/Sheep Strike (charge 6000), NukePower/Concrete Donkey (charge 9000)
+- **Win98** (`rules/win98.yaml`): DetonateWeaponPower/Demo Disk Strike (charge 9000), DetonateWeaponPower/Red Ring of Death (charge 9000)
+- **Warcraft 1** (`rules/warcraft1.yaml`): NukePower/Rain of Fire (charge 9000), NukePower/Poison Cloud (charge 9000)
+- **WH40K** (`rules/wh40k.yaml`): 8 Deep Strike variants on `wh40korbitalrelay`, AirstrikePower/Marauder Bomber (charge 6000), IonCannonPower/Inquisition (charge 10000)
+
+### 12.4 Outpost 2 Verification
+
+The Supernova Missile IS implemented in `rules/outpost2.yaml` (not yet migrated to ContentPacks):
+- Building: `EDEN_OBSERVATORY` (and `PLYMOUTH_OBSERVATORY`)
+- Power trait: `NukePower`
+- Weapon: `supernova_missile_super`
+- Charge interval: 9000
+- Missile delay: 11
+- FACTIONS.md was already correct for both Eden and Plymouth.
+
+### 12.5 What Needs To Be Done Next
+
+1. **Commit the documentation changes** — all audit files are uncommitted. Stage and commit with a descriptive message like "Superweapon documentation audit: cross-reference YAML vs FACTIONS.md, fix 14 discrepancies". Remember to:
+   - Delete `check-yaml-output.txt` before committing
+   - Boot-gate before committing
+   - Use scoped `git add <files>`, never `git add -A`
+2. **Pick up the next task from ROADMAP.md** — the superweapon audit is complete. The next priorities per ROADMAP are the balance class-formula program (infantry restat pass) and the remaining check-yaml error fixes.

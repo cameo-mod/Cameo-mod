@@ -27,7 +27,8 @@ while Allied *tanks* are weak+fast; StarCraft **Terran infantry is frail** while
 *vehicles* are tanky. **So the bias tables below are the INFANTRY leans** — vehicle and
 aircraft leans are derived separately (from the matrix) in those passes. And a unit's
 balance class always follows its in-game TEMPLATE (`LineBreaker` = vehicle, etc.), never
-an HP guess.
+an HP guess. (The **StarCraft / Warcraft 2 / Red Alert 1** leans below are now
+Layer-1-verified against `ORIGINAL_UNIT_STATS.md`; the other factions await their pull.)
 
 **NO mirror factions (Cameo departs from Warcraft 2 here).** In the original WC2, Humans
 and Orcs are stat-mirrors. Cameo deliberately does **not** do this — mirror factions are
@@ -58,9 +59,9 @@ Legend: **HP** / **SPD** / **DMG** / **RNG** columns are the lean (＋ high, −
 
 | Faction | Playstyle | HP | SPD | DMG | RNG | Special / signature |
 |---|---|:-:|:-:|:-:|:-:|---|
-| Allies RA1 | Tech / Mobility / Naval | − | ＋ | ・ | ＋ | Faster-weaker tanks; naval (Cruiser long-range); Chronosphere. Weak ground defense. |
-| Soviets RA1 | Brute Force | ＋ | − | ＋ | ・ | Durable/slow/expensive vehicles; Tesla; Iron Curtain; heavy air. |
-| Japan RA1 | Rush / Mobility | − | ＋ | ・ | ・ | **Samurai melee (one-slash)**, imperial discipline, speed/flexibility. |
+| Allies RA1 | Tech / Mobility / Naval | ・ | ・ | ・ | ・ | **Infantry = utility** (Medic/Spy/Thief/Mechanic), *no durability edge — shared 50-HP rifleman*. Identity lives in **vehicles (−HP/+SPD light-fast) + navy (Cruiser 700)** → vehicle/naval pass. |
+| Soviets RA1 | Brute Force | ・ | ＋ | ＋ | ・ | **Infantry = faster + more offensive variety** (Grenadier/Flamethrower/Shock Trooper), cheap fodder — *not tankier* (same 50 HP, spd 5 > Allied 4). Identity lives in **vehicles (+HP/−SPD, Mammoth monopoly) + air** → vehicle/air pass. |
+| Japan RA1 | Rush / Mobility (← RA3 Empire) | − | ＋ | ・ | ・ | ← **RA3 Empire** (web-verified): **core units individually weak → fast + massed**; **transforming** units, naval/air dominance, psionics (Yuriko); Samurai / Rocket Angel / Tsunami / Mecha. |
 
 ### Red Alert 2 / Yuri
 
@@ -69,6 +70,14 @@ Legend: **HP** / **SPD** / **DMG** / **RNG** columns are the lean (＋ high, −
 | Allies RA2 | Mobility / Garrison | − | ＋ | ・ | ＋ | Hit-and-run, micro, air force, versatile tech, GI garrison. |
 | Soviets RA2 | Brute Force / Tank Rush | ＋ | − | ＋ | ・ | Heavy defense, macro; tanks, flak, Desolator. |
 | Yuri | Mind Control | ・ | ＋ | ＋ | ・ | **Mind control**; cheap-but-strong psychic Initiates; Brutes = melee anti-tank; Gattling ramp-up. |
+
+**Layer-1 correction (RA1 — `ORIGINAL_UNIT_STATS.md`):** RA1 infantry are **not** a
+durability differentiator — both factions share the 50-HP rifleman and 25-HP engineer. The
+old "Allies −HP / Soviets +HP" rows described the **vehicle** lean and were per-type-wrong for
+infantry (Soviet infantry are actually *faster*: spd 5 vs 4). The tanky-Allied / frail-Soviet
+**infantry** split is an **RA2-era development**, absent in RA1. *Open choice for the maintainer:*
+if RA1↔RA2 franchise coherence is wanted, apply a mild **Allied +HP / Soviet −HP** infantry
+shift; RA1 source data alone keeps them near-shared.
 
 ### Dune (Dune 2000 / Emperor)
 
@@ -83,9 +92,14 @@ Legend: **HP** / **SPD** / **DMG** / **RNG** columns are the lean (＋ high, −
 
 | Faction | Playstyle | HP | SPD | DMG | RNG | Special / signature |
 |---|---|:-:|:-:|:-:|:-:|---|
-| Terran | Turtle / Positional | ・ | ・ | ・ | ＋ | Mobile & adaptable; hold positions; siege/range; "regular" (near-reference). |
-| Protoss | Tech / Power Units | ＋ | − | ＋ | ＋ | **Shields = +HP**; expensive, few, powerful; splash; late-game. |
-| Zerg | Swarm / Map Control | − | ＋ | − | − | Cheap, numerous, fast, fragile; vulnerable to AoE; weak in long fights. |
+| Terran | Turtle / Positional | − | ・ | ・ | ・ | **Infantry FRAIL** (Marine 40 HP, cheapest); *mech/vehicles invert to +HP tanky* (Siege 150, Goliath 125); Ghost/Siege = +RNG. |
+| Protoss | Tech / Power Units | ＋ | − | ＋ | ＋ | **Shields → eff-HP 160–450 (tanky every type, confirmed)**; expensive, few, powerful. Melee Zealot = short-range exception. |
+| Zerg | Swarm / Map Control | − | ＋ | − | − | Swarm infantry frailest/cheapest (Zergling 35, Scourge 25); *heavy Zerg use the LineBreaker VEHICLE template → monster-tanks (Ultralisk 400) handled in the vehicle pass, not here.* |
+
+**Layer-1 verified (`ORIGINAL_UNIT_STATS.md`):** Protoss eff-HP (160–450) ≫ Terran (40–150)
+≈ Zerg-small (25–125). Terran & Zerg rows are the **infantry** read; both **invert to +HP for
+their vehicle-template heavies** (Siege Tank, Ultralisk). Protoss shields make it tanky in
+*every* type.
 
 ### Warcraft 2 — distinct stats (WC3 approach, NOT mirrored)
 
@@ -96,6 +110,11 @@ Original WC2 mirrors Human/Orc; Cameo re-stats them apart. Counterpart units
 |---|---|:-:|:-:|:-:|:-:|---|
 | Humans WC2 | Defensive / Versatile / Magic | ・ | ・ | ・ | ＋ | Healing (Paladin/Mage), towers, tech; methodical, longer reach. |
 | Orcs WC2 | Aggressive / Brute | ＋ | ・ | ＋ | − | Bloodlust + Raise Dead; high-HP grunts, raw offensive power. |
+
+**Layer-1 verified (`ORIGINAL_UNIT_STATS.md`):** original WC2 is a stat **MIRROR** (Footman =
+Grunt 60 HP, Knight = Ogre 90, Archer = Axethrower 40, …) — so there is **no source lean to
+inherit**. The Human-defensive / Orc-aggressive split is a **Cameo design choice (WC3
+direction)**, magnitudes to be refined by the pending **WC3 pull**.
 
 ### Outpost 2
 
@@ -108,7 +127,7 @@ Original WC2 mirrors Human/Orc; Cameo re-stats them apart. Counterpart units
 
 | Faction | Playstyle (FACTIONS.md) | HP | SPD | DMG | RNG | Special / signature |
 |---|---|:-:|:-:|:-:|:-:|---|
-| Asian Alliance | Mass Horde / Cheap / Superweapons | − | − | − | ・ | ← **Eagle Red + Generals China**: cheap, numerous, **SLOW** infantry (horde bonus), weak individually, but devastating superweapons/nuclear. (corrected from +SPD 2026-07-25.) |
+| Asian Alliance | Mass Horde / Cheap / Superweapons | − | − | − | ・ | ← **Eagle Red + Generals China** (web-verified): cheap, numerous, **SLOW** mass infantry (**horde bonus**), weak individually; heavy tanks (Overlord) + strong artillery, **weak air**, nuclear/superweapon finish. |
 | Steel Consortium | Tech / Shields / Long-range defense | ＋ | − | ＋ | ＋ | ← **Foehn Revolt (Mental Omega) Last Bastion**: durable + **long-range area-denial** + defensive; nano-upgrades that swap roles; shields = +HP. |
 | Latin Syndicate | Turtle / Artillery / Explosives | ＋ | − | ＋ | ＋ | ← maintainer: **turtle masters** (bunker), **best artillery + huge explosive power**; black-market Soviet surplus. (corrected from −HP/+SPD 2026-07-25.) |
 | Naxis | Turtle / Heavy Armor | ＋＋ | −− | ＋ | ・ | **WW2 parody**; very tanky, slow; undead-revival superweapon. |
@@ -122,8 +141,9 @@ The converter (`propose_class_rebalance.py`) currently makes stats unique by arb
 nudging. The next step is to bias the uniqueness step by the acting unit's faction lean
 above: e.g. in the scout class, GDI/Soviet/Naxis scouts take the high-HP/low-speed end
 of the spread, Nod/Ordos/Zerg scouts the high-speed/low-HP end — all still Δ≤1, all still
-5-stat unique. Mirror factions (WC2) keep their counterpart's stats and differ only in
-the special. This keeps every unit unique **and** lore-true.
+5-stat unique. **WC2 counterparts (Footman↔Grunt, …) are re-statted APART** along the
+Human-defensive / Orc-aggressive lean — never mirrored (no-mirror law). This keeps every
+unit unique **and** lore-true.
 
 ## Sources
 

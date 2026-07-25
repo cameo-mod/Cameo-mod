@@ -28,6 +28,7 @@ Do not modify rules, assets, or balance numbers until these documents are in con
 - [Interactable trait and upgrade actors (2026-07-24)](#interactable-trait-and-upgrade-actors-2026-07-24)
 - [Git workflow and commit rules (2026-07-24)](#git-workflow-and-commit-rules-2026-07-24)
 - [YAML lint cleanup header-removal bug (2026-07-24)](#yaml-lint-cleanup-header-removal-bug-2026-07-24)
+- [Superweapon documentation audit (2026-07-25)](#superweapon-documentation-audit-2026-07-25)
 
 ---
 
@@ -273,3 +274,11 @@ SpeedMultiplier@myupgrade:
 - **ContentPack migration must be complete**: When migrating weapons from `mods/cameo/weapons/*.yaml` to ContentPacks, ALL weapon definitions must be copied, not just templates. The RA2 ContentPack only had `^RA2*` templates but was missing 134 concrete weapon definitions, causing `Parent type not found` errors for weapons like `RA2CarrierTarget` that other weapons inherit from.
 - **UTF-8 encoding in YAML weapon names**: Weapon names with non-ASCII characters (e.g., `ü` in `Kübelwagen`) can become double-encoded (mojibake `Ã¼`) during file operations. Always verify encoding when files contain non-ASCII characters. The engine's YAML parser uses the file's byte-level encoding, so `NaxiWW2KÃ¼belwagenMachinegun` does not match `NaxiWW2KübelwagenMachinegun`.
 - **Engine shader files not tracked by mod git**: Custom shader files in `engine/glsl/` (e.g., `postprocess_nuclearflash.frag`) are inside the .gitignored engine directory. They must be recreated after `make all` fetches the engine. Document any custom shader requirements in the mod repo for post-fetch setup.
+
+### Superweapon documentation audit (2026-07-25)
+
+- **FACTIONS.md can be stale — YAML is ground truth**: A full cross-reference of all superweapon and support power YAML traits against `FACTIONS.md` found 14 discrepancies. The docs had incorrect names (e.g., "Tiberian Wildlife Rampage" for Forgotten's actual nuclear missile, "Satellite Hack" for CABAL which was unimplemented), missing support powers (Force Shield, Chrono Reinforcements, EMP Disable, Traitors, Slow, Invisibility, Bloodlust, Haste), and missing reference table entries (Drop Pods, Federation Support Teleport). Always verify against YAML before trusting documentation.
+- **Harkonnen Palace has `^PrimarySuperweapon` but NO power trait**: The building inherits the superweapon template and has `SupportPowerChargeBar` but no actual `NukePower`/`DetonateWeaponPower`/etc. The Death Hand Missile described in faction YAML is unimplemented. This is a parked faction, not a regression.
+- **WIP faction superweapons exist in `rules/` YAML**: Warzone 2100, Worms, Win98, Warcraft 1, and WH40K all have superweapon traits in `rules/*.yaml` (not yet migrated to ContentPacks). These should be documented in FACTIONS.md only when the factions become active.
+- **Outpost 2 superweapon is in `rules/outpost2.yaml`, not ContentPacks**: The Supernova Missile uses `NukePower` with `supernova_missile_super` weapon, charge 9000, on `EDEN_OBSERVATORY` and `PLYMOUTH_OBSERVATORY`. FACTIONS.md was already correct for this.
+- **Audit raw data location**: `docs/audit/latest/superweapon_audit.yaml` contains the full cross-reference with all primary/secondary superweapons, support powers, critical findings, and WIP faction discoveries.

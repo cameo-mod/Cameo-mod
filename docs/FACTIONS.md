@@ -241,7 +241,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Base Defenses, Detection, Air Superiority
 
 **Superweapons & Support Powers:**
-- Chemical Missile (Tiberium-based area superweapon)
+- Cluster Missile (default tactical missile, area superweapon)
+- Chemical Missile (Tiberium-based area superweapon, requires Tiberium Waste Facility)
 
 **Signature Units:**
 - Cyborg Commando (one of the most powerful infantry units in the game)
@@ -293,7 +294,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Early Pressure, Tech Rushes
 
 **Superweapons & Support Powers:**
-- Tiberian Wildlife Rampage (unleashes mutant wildlife)
+- Nuclear Missile (Veinhole superweapon, fires raatomic missile)
 
 **Signature Units:**
 - Ghost Stalker (commando with railgun and C4)
@@ -348,8 +349,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Early Aggression, Air Rushes, Artillery
 
 **Superweapons & Support Powers:**
-- Data Worm
-- Satellite Hack
+- Nuclear Missile (CabalMagicNuke, fires cabalatomic missile)
+- Data Worm (Hunter Seeker autonomous unit)
 
 **Signature Units:**
 - Core Defender (epic walker, limited to 1, devastating area damage)
@@ -406,9 +407,10 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Early Tank Rushes, Air Superiority
 
 **Superweapons & Support Powers:**
-- GPS Satellite (reveals entire map)
+- GPS Satellite (reveals entire map, requires upgrade)
 - Chronosphere (teleport units across the battlefield)
-- Chrono Vortex
+- Chrono Reinforcements (deploy reinforcements via chronoshift)
+- Chrono Vortex (uncontrolled area-denial vortex)
 
 **Signature Units:**
 - Tanya (commando with C4 and dual pistols)
@@ -495,7 +497,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 |---|---|
 | **Internal Name** | `modjapan` (actors: `japan_*`) |
 | **Display Name** | Japan RA |
-| **Source Game** | Red Alert (custom faction) |
+| **Source Game** | Cameo original — a reimagined RA3 *Empire of the Rising Sun* as if it existed in the RA1 era (identity & lore sourced from RA3 Empire, not RA1) |
 | **Side** | Red Alert |
 | **Roster** | 40 units, 16 buildings, 20 upgrades |
 | **AI Wired** | 37/39 units |
@@ -567,6 +569,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 **Superweapons & Support Powers:**
 - Chronosphere (teleport units across the map)
 - Lightning Storm (devastating weather superweapon from Weather Control Device)
+- Force Shield (temporary area invulnerability, from Battle Lab, requires upgrade)
 
 **Signature Units:**
 - Tanya (commando with C4 and dual pistols, can swim)
@@ -868,7 +871,9 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Tech Rushes, Air Superiority, Artillery
 
 **Superweapons & Support Powers:**
-- Topol Strike (tactical ballistic missile)
+- Topol Strike (tactical ballistic missile, 12 rockets)
+- EMP Disable (support power from EMP Radar, requires upgrade)
+- Traitors (mind-control support power from Spy Center, converts enemies)
 
 **Signature Units:**
 - Diablo (chaingun vehicle, benefits from Chaingun upgrade)
@@ -971,8 +976,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - **Countered by:** Early Game Rush, Aircraft, Aggressive Pushes
 
 **Superweapons & Support Powers:**
-- Gravity Core (gravity manipulation in target area)
-- Meteor Traction Beam (pulls meteors to target area)
+- Gravity Core (passive gravity manipulation, debuffs enemies in range)
+- Meteor Blitzkrieg (targeted meteor strike superweapon)
 
 **Signature Units:**
 - Parzival (anti-ground hero walker, creates black holes, limited to 1)
@@ -1084,13 +1089,19 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 
 ## Dune
 
+_The Westwood Dune 2000 houses are **Atreides, Harkonnen, and Ordos**. Only **Ordos** is
+currently an active playable faction; the **Atreides** and **Harkonnen** ContentPacks
+(`D2k/Atreides`, `D2k/Harkonnen`) and their balance ledgers exist but are parked and will
+be re-added later — document them here when they return. **Ixians** are a Cameo-original
+faction drawn from Dune-universe lore (House Ix), not a playable Westwood faction._
+
 ### House Ordos
 
 | Attribute | Value |
 |---|---|
 | **Internal Name** | `ordos` (actors: `d2k_ordos_*`) |
 | **Display Name** | House Ordos |
-| **Source Game** | Dune 2000 / Emperor: Battle for Dune |
+| **Source Game** | Dune 2000 (1998) — Westwood original faction |
 | **Side** | Dune |
 | **Roster** | 48 units, 15 buildings, 29 upgrades |
 | **AI Wired** | 42/43 units |
@@ -1113,7 +1124,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 
 **Superweapons & Support Powers:**
 - Saboteur (infiltrator that disables enemy structures)
-- Chaos Lightning (disruptive area superweapon)
+- Chaos Storm (disruptive area superweapon, uses AsianChaosSuperweapon)
 
 **Signature Units:**
 - Wraith (cloaked fighter)
@@ -1142,7 +1153,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 |---|---|
 | **Internal Name** | `ixian` (actors: `d2k_ixian_*`) |
 | **Display Name** | Ixians |
-| **Source Game** | Dune 2000 / Emperor: Battle for Dune |
+| **Source Game** | Cameo original (House Ix — Dune-universe lore only; never a playable Westwood faction, so no source-game stats exist → extrapolate) |
 | **Side** | Dune |
 | **Roster** | 37 units, 19 buildings, 25 upgrades |
 | **AI Wired** | 31/32 units |
@@ -1386,6 +1397,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Holy Vision (comsat-style reveal, via Church/IonCannonPower)
 - Healing (support power, via Church/IonCannonPower)
 - Blizzard (superweapon, via Church/IonCannonPower)
+- Slow (support power, slows enemy units in target area)
+- Invisibility (support power, cloaks friendly units in target area)
 
 **Signature Units:**
 - Paladin (holy warrior with healing and holy vision)
@@ -1404,7 +1417,7 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Shipyard and naval units (Transports, Destroyers, Battleships, Juggernauts)
 - Mage spells: Blizzard (area damage), Polymorph (transforms enemy), Flame Strike
 - Paladin abilities: Holy Vision, Healing, Exorcism
-- Church provides Holy Vision and Healing support powers
+- Church provides Holy Vision, Healing, Slow, and Invisibility support powers
 - Blizzard superweapon via IonCannonPower
 
 ---
@@ -1440,6 +1453,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Eye of Kilrogg (comsat-style reveal, via Temple/IonCannonPower)
 - Runes (support power, via Temple/IonCannonPower)
 - Death and Decay (superweapon, via Temple/IonCannonPower)
+- Bloodlust (support power, buffs friendly units' damage)
+- Haste (support power, buffs friendly units' speed)
 
 **Signature Units:**
 - Ogre-Mage (heavy melee with Bloodlust and Runes)
@@ -1461,6 +1476,8 @@ _Scoring scale: © = 1/5 (weak) to ©©©©© = 5/5 (excellent). Scores are rela
 - Death and Decay superweapon via IonCannonPower (massive expanding wave pattern)
 - Eye of Kilrogg: scouting support power
 - Runes: trap-like support power
+- Bloodlust: damage buff support power
+- Haste: speed buff support power
 
 ---
 
@@ -1624,29 +1641,29 @@ These are not playable factions but random-select groups that choose from their 
 |---|---|
 | GDI TD | Ion Cannon, Airstrike |
 | Nod TD | Nuclear Strike |
-| GDI TS | Ion Cannon |
-| Nod TS | Chemical Missile |
-| Forgotten | Tiberian Wildlife Rampage |
-| CABAL | Data Worm, Satellite Hack |
-| Allies RA1 | Chronosphere, Atomic Bomb (doctrine), Chrono Vortex |
+| GDI TS | Ion Cannon, Drop Pods |
+| Nod TS | Cluster Missile, Chemical Missile |
+| Forgotten | Nuclear Missile (Veinhole) |
+| CABAL | Nuclear Missile, Data Worm |
+| Allies RA1 | Chronosphere, Chrono Reinforcements, Chrono Vortex |
 | Soviets RA1 | Atomic Bomb, Iron Curtain, Parabombs |
 | Japan RA1 | Magic Orb Hailstorm, Super Bomber Airstrike |
-| Allies RA2 | Chronosphere, Lightning Storm |
+| Allies RA2 | Chronosphere, Lightning Storm, Force Shield |
 | Soviets RA2 | Nuclear Missile, Iron Curtain |
 | Yuri | Psychic Dominator, Genetic Mutator |
 | Asian Alliance | Chaos Storm, Ion Cannon |
-| Steel Consortium | Orbital Cannon (enhanced Ion Cannon), EMP Cannon |
-| Latin Syndicate | Topol Strike |
+| Steel Consortium | Orbital Cannon (enhanced Ion Cannon), EMP Cannon, BFG 10000, Federation Support Teleport |
+| Latin Syndicate | Topol Strike, EMP Disable, Traitors |
 | Naxis | Revive the Undead Warriors, V1 Rocket |
-| Schwarzer Mond | Gravity Core, Meteor Traction Beam |
-| FutureTech | Paradrop (planned: Sigma Harmonizer, Robot Energize) |
-| Ordos | Chaos Lightning |
+| Schwarzer Mond | Gravity Core, Meteor Blitzkrieg |
+| FutureTech | Paradrop (planned: Sigma Harmonizer) |
+| Ordos | Chaos Storm |
 | Ixians | Pulse Missile |
 | Terran | Nuclear Strike |
 | Protoss | Purifier Beam |
 | Zerg | N/A (swarm) |
-| Humans WC2 | Blizzard |
-| Orcs WC2 | Death and Decay |
+| Humans WC2 | Blizzard, Holy Vision, Healing, Slow, Invisibility |
+| Orcs WC2 | Death and Decay, Eye of Kilrogg, Runes, Bloodlust, Haste |
 | Eden | Supernova Missile |
 | Plymouth | Supernova Missile |
 
@@ -1654,12 +1671,12 @@ These are not playable factions but random-select groups that choose from their 
 
 | Faction | Unique Mechanic |
 |---|---|
-| Allies RA1 | 6 swap-able doctrines |
+| Allies RA1 | 1 doctrine (Air Superiority) |
 | Soviets RA1 | Largest roster (53u), most upgrades (44up) |
-| Forgotten | Promotion chain system, 98% Fluent, Unity aura, Tiberium Adaptability |
+| Forgotten | Promotion chain system, 98% Fluent, Unity aura, Tiberium Adaptability, Tiberian Wildlife Rampage |
 | CABAL | 3x4 promotion grid, Backup Systems (auto-reanimate wrecks) |
-| Yuri | Mind control, slave economy, cloning vats, stolen tech |
-| Latin Syndicate | Stolen tech system (from Yuri, Asian Alliance, Soviets) |
+| Yuri | Mind control, slave economy, cloning vats |
+| Latin Syndicate | Stolen tech system (from Yuri, Soviets, Allies, Asian Alliance) |
 | Schwarzer Mond | Crystal Lens/Amplified Lens laser upgrade system, Cryptofascism economy |
 | Steel Consortium | Personal shields on all vehicles, Quantum railguns, Nanite regeneration, Federation support teleport |
 | Asian Alliance | Photon Cannon (multi-damage plasma), Asian Phalanx aura, deep promotion tree, Banzai Mode |
