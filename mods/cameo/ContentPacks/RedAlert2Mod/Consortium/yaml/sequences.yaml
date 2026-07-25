@@ -595,13 +595,11 @@ steelconsortium_consortiummobileconstructionvehicle:
 	idle:
 		Length: 10
 		Facings: -8
-		InterpolatedFacings: 32
 		Tick: 9999
 		ShadowStart: 80
 	move:
 		Length: 10
 		Facings: -8
-		InterpolatedFacings: 32
 		Tick: 80
 		ShadowStart: 80
 	icon:
@@ -614,21 +612,17 @@ steelconsortium_consortiumminer:
 		Offset: 0,32
 	idle:
 		Facings: -8
-		InterpolatedFacings: 32
 		ShadowStart: 88
 	dock:
 		Facings: -8
-		InterpolatedFacings: 32
 		ShadowStart: 88
 	dock-loop:
 		Facings: -8
-		InterpolatedFacings: 32
 		ShadowStart: 88
 	move:
 		Start: 8
 		Length: 10
 		Facings: -8
-		InterpolatedFacings: 32
 		Tick: 80
 		ShadowStart: 96
 	harvesting:
