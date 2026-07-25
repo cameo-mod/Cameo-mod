@@ -38,6 +38,7 @@ Crashes and player-visible regressions always jump the queue.
 | Faction BALANCE bias (how units differ within a class, source-cited) | `design/FACTION_IDENTITY.md` |
 | Original source-game unit stats (ground-truth matrix for relative balance) | `design/ORIGINAL_UNIT_STATS.md` |
 | Mod-synthesis balance overhaul plan (sources per faction, weapon/AA/spread laws, methodology) | `design/BALANCE_SYNTHESIS.md` |
+| Document 1 — every source unit RAW, translated to Cameo naming + category (generated) | `design/ORIGINAL_UNITS_RAW.md` |
 | Engine / custom-trait / C# reference | `Cameo_Knowledge_Base_Manual.md` |
 | ContentPack migration runbook | `MIGRATION.md` |
 | Accumulated pitfalls & safe defaults | `LESSONS_LEARNED.md` |
