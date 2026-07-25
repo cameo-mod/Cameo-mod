@@ -38,7 +38,9 @@ mod numbers — we normalize, reason, and extrapolate them into Cameo's own syst
 | **Mental Omega 3.3.6** | RA2 (Allied/Soviet/Epsilon/Foehn) | Ares/YR | `expandmo99.mix` (content-scan → `mo_ini/*.ini`) | `extract_all.py`→`ini_full.py` | ✅ HP/Cost/Speed; weapons split across mix entries (partial) |
 | **CnC Reloaded 2.7.0** | **RA2 + TS combined** | Ares/YR | `Downloads\CnCReloaded-2.7.0\Tools\Map Editor\rulesmd.ini` (loose, full) | `ini_full.py` | ✅ **full weapons** (`cncr_units.csv`) |
 | **Romanov's Vengeance** | **RA2 remake** | **OpenRA** | `Downloads\Romanovs-Vengeance-master\mods\rv\rules\` + `\weapons\` | `openra_full.py` | ✅ **full weapons** (`rv_units.csv`) |
-| Dune II / Dune 2000 / Emperor | Dune | Westwood | TBD (need INIs) | — | ⏳ TODO |
+| **OpenRA vanilla TD/RA1/TS** | TD, RA1, TS | **OpenRA (ref engine)** | `Downloads\OpenRA-bleed\mods\cnc`,`ra`,`ts` | `openra_full.py` | ✅ **full weapons** (`ora_cnc/ra/ts_units.csv`) — independent TD/RA1/TS voices |
+| **Dune 2000 (OpenRA)** | Dune (Atr/Hark/Ordos) | **OpenRA** | `Downloads\OpenRA-bleed\mods\d2k` | `openra_full.py` | ✅ **full weapons** (`ora_d2k_units.csv`) — Ordos/Dune reference |
+| Dune II / Emperor | Dune | Westwood | TBD (maintainer has no local copy) | — | ⏳ blocked (no folder) |
 | Outpost 2 | — | Sierra | TBD | — | ⏳ TODO |
 | SC2 / Cosmonarchy / WC3 | — | Blizzard | web | web | ⏳ identity-only |
 
@@ -285,9 +287,9 @@ homogeneity insight, now quantified. Cameo violates this at both ends:
 | Mammoth / super-heavy | – | Mammoth 4.8 | 4tnk 4.8 | 2TNK 9.4* | G4TNK 7.2 | **~4.8** |
 | Apocalypse / epic | Apoc(YR/CnCR) 6.4 | – | apoc 6.4 | – | – | **~6.4** |
 
-\* CA runs a deliberately **wider inf↔vehicle gap** (its rifle is a fragile 5000) — an outlier, kept
-for reference but **excluded from the consensus**. Per-mod scale normalization (the maintainer's
-warning) matters exactly here.
+\* CA's wide inf↔vehicle gap is **NOT an outlier — it faithfully reflects the TD/RA1 era** (see the
+CORRECTION in §17). CA is built on OpenRA's TD/RA1 base, where the MBT is genuinely ~9–10× rifle.
+The "consensus" in this table is **RA2-era-specific**; the TD/RA1 era has its own, much wider ladder.
 
 **Consensus vehicle ladder (RA2-family + TS agree tightly):** light **2.0–2.4×** · MBT **2.4–3.2×**
 · heavy **3.2×** · Mammoth **4.8×** · Apocalypse/epic **6.4×**. **The whole tank ladder lives in a
@@ -490,9 +492,21 @@ system (Strength→**HP**, ROF→**ReloadDelay**, Verses→**Versus**, etc.). Co
 BurstDelays · ReloadDelay · Range · MinRange · Warhead · Versus-profile · **Cameo category** ·
 **Description**`
 
-- **Cameo category** = one of the **48 class templates** (§15.3) — every source unit is filed into
-  Main Battle Tank / High Tech Tank / Line Breaker / Tank Destroyer / Epic / Scout Vehicle / Support
-  Vehicle / Artillery / Fire Support / the infantry classes / aircraft / ships / defenses.
+- **Cameo category** = one of the class templates in `defaults.yaml`. **Maintainer ruling
+  (2026-07-25) — the vehicle taxonomy expands; these templates are TO BE CREATED** (a downstream
+  boot-gated `defaults.yaml` task) and used as category names now:
+  - **`^LightTankTemplate`** (NEW) — light tank, distinct from and below the MBT.
+  - **`^MainBattleTankTemplate`** — the MBT.
+  - **`^HighTechTankTemplate`** — advanced/high-tech tank.
+  - **`^TankDestroyerTemplate`** (NEW) — dedicated AP anti-armor glass-cannon.
+  - **`^AntiAirTankTemplate`** (NEW) — mobile AA tank (HAS a weapon); **moved OUT of Support
+    Vehicle.**
+  - **`^ArtilleryTankTemplate`** (NEW) — *between* tank and artillery (tanky, indirect-ish).
+  - **`^ArtilleryTemplate`** — real artillery (fragile, long-range, indirect).
+  - **`^SupportVehicleTemplate`** — **REDEFINED: unarmed transports / real support only, NO weapon.**
+  - Plus existing `^LineBreakerTemplate`, `^FireSupportTemplate`, `^EpicVehicleTemplate`,
+    `^ScoutVehicleTemplate`, `^HarvesterTemplate`, and the infantry / aircraft / ship / defense
+    templates.
 - **Description** = a **short deep-web-researched blurb** per unit (role, faction, what makes it
   distinct in its own game). This is the one column that needs manual/web fill — auto-fill the rest.
 
@@ -604,3 +618,66 @@ Future Tank (32×), Exorcist (37×) — resolves the bulk of the "unkillable/uns
 scale-trap avoided (weapon identity read by role, not number) and the remake double-count caught.
 Next: run this generation over **all** units (tooling), fill Document 1 descriptions from deep web
 research, and produce the ranked "how far off is every Cameo unit" report (§15.3).
+
+---
+
+## 17. OpenRA-vanilla extraction + the ERA-DEPENDENT ratio (2026-07-25) — corrects §12
+
+Extracted the **vanilla OpenRA** implementations from `Downloads\OpenRA-bleed\mods\` (the reference
+engine's own TD/RA1/TS + Dune 2000) via `openra_full.py` → `ora_cnc/ra/ts/d2k_units.csv`. Four new
+**independent voices**, plus the **Dune 2000 reference** for the Dune factions.
+
+### 17.1 Per-game tank ladder (HP ÷ that game's rifle)
+
+| Source | rifle | light | **MBT** | heavy | mammoth | epic/apoc |
+|---|--:|--:|--:|--:|--:|--:|
+| TD (Westwood raw) | 50 | – | **8.0×** (400) | – | 12.0× (600) | – |
+| TD (OpenRA cnc) | 5000 | 6.4× | **9.0×** | – | 17.4× | – |
+| RA1 (OpenRA ra) | 5000 | 4.6× | **9.2×** | 12.0× | 18.0× | – |
+| RA1 (Combined Arms) | 5000 | 5.4× | **10.4×** | 9.4× | 19.0× | – |
+| RA2 (vanilla INI) | 125 | – | **2.4×** | 3.2× | – | – |
+| RA2 (Yuri / CnCR) | 125 | – | **2.4×** | 3.2× | – | 6.4× |
+| RA2 (Romanov's V) | 12500 | 2.0× | **2.4×** | 3.2× | 4.8× | 6.4× |
+| Dune 2000 (OpenRA) | 6000 | – | **3.2–4.8×** (Ordos 3.2 / Atreides 3.7 / Harkonnen 4.8) | – | (Devastator ~8×) | – |
+
+### 17.2 ★ The finding — the inf:tank ratio is ERA-DEPENDENT, and it corrects §12
+
+- **TD/RA1 era:** frail infantry → **MBT ≈ 9–10× rifle, mammoth ≈ 17–19×.** Agreed by Westwood-raw,
+  OpenRA-cnc/ra, AND Combined Arms.
+- **RA2 era:** tanky infantry → **MBT ≈ 2.4×, heavy 3.2×, mammoth 4.8×, apoc 6.4×.** Agreed by
+  RA2/YR/CnCR/RV.
+- **Cause:** Westwood ~2.5×'d infantry HP from TD (50) to RA2 (125) while tank HP held flat (TD
+  Medium 400 ≈ RA2 Grizzly 300), so the ratio compressed ~4×.
+- **★ CORRECTION to §12.2:** I earlier flagged CA's ~10× MBT as a *wide-gap outlier*. **It is not** —
+  CA (and DTA, and OpenRA-cnc/ra) faithfully reproduce the TD/RA1 era's genuinely wide ratio. §12's
+  "MBT ≈ 2.4–3.2×" is **RA2-era-specific**, and must be labelled as such; there is no single
+  cross-era MBT multiple.
+
+### 17.3 ★ The implication for Cameo — it needs ONE unified vehicle ladder
+
+Cameo uses **one rifle anchor (20000) for every faction on one battlefield.** The eras disagree ~4×
+on inf:MBT, so Cameo **cannot preserve both** (TD Medium at 9× → 180k HP while an RA2 Grizzly at
+2.4× → 48k would be incoherent when they fight side by side). Therefore:
+
+- **Infantry: keep normalizing to the source rifle** — infantry sit at **0.5–1.8× in every era**
+  (stable; §12.1), so the rifle-multiple transfers cleanly.
+- **Vehicles: do NOT copy the source rifle-multiple** (it's era-dependent). Set the Cameo **vehicle
+  class anchors by cross-era judgement**, preserving only each game's **within-roster ORDER**
+  (mammoth > heavy > MBT > light). Recommended unified ladder (consistent with §12.4): **light 2×,
+  MBT 3×, heavy 4×, mammoth 5×, epic 6–8× rifle.** This lands between the RA2 (narrow) and TD/RA1
+  (wide) eras, leaning RA2 because Cameo's rifle anchor is itself tanky-infantry-scaled (like RA2's
+  125, not TD's 50).
+- **Nuance this exposes:** Cameo's *RA2* units are over-scaled vs their own era (Apoc 17.5× vs 6.4×,
+  Grizzly 5× vs 2.4×), while Cameo's *TD* Mammoth (11.25×) actually sits *below* its native 17–19×.
+  So "bring the tanks down" is really **"harmonize every faction's tanks onto the one unified
+  ladder"** — some RA2 units come way down, a few TD heavies barely move. Pure-Cameo epics (Monster
+  50×, Tortuga 44×) exceed every era and come down hardest.
+
+### 17.4 Dune 2000 reference (for the Dune factions)
+
+Rifle = `light_inf` 6000. Infantry: light_inf 1.0×, trooper 1.17×, grenadier 1.0×, **sardaukar
+1.67×** (elite). Vehicles: trike 1.5×, quad 1.83×, siege_tank 1.9×, missile_tank 2.17×, **combat
+tank — Ordos 3.2× / Atreides 3.7× / Harkonnen 4.8×** (the house durability order), Devastator ~8×.
+This is the **Ordos** synthesis anchor (Dune faction). Note the house identity is already in the HP:
+Harkonnen tankiest, Ordos lightest — matches `FACTION_IDENTITY.md`. Dune II + Emperor still needed
+(maintainer has no local copy) for the full Dune synthesis; D2K-OpenRA covers the core now.
