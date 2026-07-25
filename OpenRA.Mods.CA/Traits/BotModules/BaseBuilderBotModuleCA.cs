@@ -232,6 +232,7 @@ namespace OpenRA.Mods.CA.Traits
 		public Dictionary<string, int> BuildingsBeingProduced = [];
 		public IBotBaseExpansion[] BaseExpansionModules;
 		public ResourceMapBotModule ResourceMapModule;
+		public Actor RelocationHoldConyard { get; set; }
 
 		readonly World world;
 		readonly Player player;
@@ -347,6 +348,11 @@ namespace OpenRA.Mods.CA.Traits
 				ResourceMapModule = bot.Player.PlayerActor.TraitsImplementing<ResourceMapBotModule>().FirstOrDefault(t => t.IsTraitEnabled());
 				firstTick = false;
 			}
+
+			if (RelocationHoldConyard != null &&
+				(!RelocationHoldConyard.IsInWorld || RelocationHoldConyard.IsDead ||
+				!BaseExpansionModules.Any(be => be.IsConyardRelocationPending(RelocationHoldConyard))))
+				RelocationHoldConyard = null;
 
 			if (--assignRallyPointsTicks <= 0)
 			{
