@@ -28,6 +28,7 @@ This repository is the shared source of truth for maintainers and every AI agent
 4. For refactors, compare `tools/audit/dump_resolved.py` output before and after. For content changes, run the targeted audit first and the full suite when practical.
 5. Before every commit, boot-gate with `launch-game.cmd` — launch the game, wait for the main menu (perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`), kill the process, then check for NEW `exception-*.log` files in `%APPDATA%/OpenRA/Logs`. Fix any crashes before committing. Stage only the files belonging to the change.
 6. `utility.cmd cameo --check-yaml` is a **linting/YAML validation tool**, NOT a boot-gate substitute. Use it for: verifying cosmetic refactors (actor/template renames), checking broken prerequisites, and detecting gameplay-relevant YAML issues. **Goal: 0 errors AND 0 warnings.** The utility takes a VERY LONG TIME (10+ minutes) — only run it when you have completed ALL connected tasks from the last report and expect 0 errors/warnings to confirm. Do NOT run it repeatedly. Keep findings from the last report in ROADMAP and docs so they can be fixed without re-running. It is ABSOLUTELY NECESSARY — just choose wisely WHEN to run it.
+7. After any bulk YAML lint cleanup, run `python tools/audit/audit_nuclear_flash_bindings.py`. It resolves the active `mod.yaml` graph and blocks removal of the RA1, Ixian, or CABAL directional flash warhead. The full audit suite includes the same check.
 
 ## Git workflow and commit rules (binding, 2026-07-24)
 

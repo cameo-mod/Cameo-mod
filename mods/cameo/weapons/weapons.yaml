@@ -3979,7 +3979,7 @@ Pistol:
 #           SUPERWEAPONS
 ###############################################
 
-Atomic:
+^AtomicCore:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
 	ValidTargets: Ground, Air
@@ -4484,6 +4484,9 @@ Atomic:
 	Warhead@FlashEffect: FlashEffect
 		Duration: 20
 		FlashType: Nuke
+
+Atomic:
+	Inherits: ^AtomicCore
 
 IonCannon:
 	Inherits: ^TeslaChargedWeapon

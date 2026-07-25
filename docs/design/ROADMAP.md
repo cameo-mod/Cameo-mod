@@ -235,6 +235,16 @@ in-game); actors + stats + structure are LOCKED. Full anchor store:
   default `explosion` image where they don't exist. Restored `Image: ra2corpse`
   per corpse-spawner exception in DESIGN.md §8.
 
+### P0 — Completed (2026-07-26 session)
+
+- [x] **RA1 Soviet atomic bomb lost its directional flash**: bulk YAML lint
+  commit `d42ad53a1` deleted the `Warhead@NuclearFlash` header from active
+  `RAAtomic`, leaving its tuning fields under a removal node. Split the shared
+  weapon into `^AtomicCore` and an `Atomic` wrapper so `RAAtomic` can define the
+  approved 40-tick effect without a regex-fragile negative removal. Added an
+  active-ruleset contract audit covering RA1 `RAAtomic`, Ixian `PulseMissile`,
+  and CABAL `CabalMagicNuke`.
+
 ### P0 — Completed (2026-07-24 session)
 
 - [x] **RA2 weapons migration to ContentPack** (`fix/ra2-weapons-migration`):

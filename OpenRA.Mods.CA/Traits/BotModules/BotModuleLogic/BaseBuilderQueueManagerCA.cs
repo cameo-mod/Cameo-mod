@@ -90,7 +90,8 @@ namespace OpenRA.Mods.CA.Traits
 			// If we can't place any structures, give a nudge to BaseExpansionModules and hope it gets fixed.
 			if (failCount >= baseBuilder.Info.MaximumFailedPlacementAttempts)
 			{
-				if (baseBuilder.BaseExpansionModules != null && baseCenterKeepsFailing != null)
+				if (baseBuilder.BaseExpansionModules != null && baseCenterKeepsFailing != null &&
+					baseBuilder.RelocationHoldConyard == null)
 				{
 					// we should not give a nudge for defence
 					if (!baseBuilder.Info.DefenseTypes.Contains(lastFailedBuilding))
@@ -101,8 +102,18 @@ namespace OpenRA.Mods.CA.Traits
 
 						if (stuckConyard != null)
 						{
+							baseBuilder.RelocationHoldConyard = stuckConyard;
+							foreach (var queue in stuckConyard.TraitsImplementing<ProductionQueue>())
+							{
+								foreach (var item in queue.AllQueued().ToArray())
+									bot.QueueOrder(Order.CancelProduction(queue.Actor, item.Item, 1));
+							}
+
 							foreach (var be in baseBuilder.BaseExpansionModules)
 								be.UpdateExpansionParams(bot, false, true, stuckConyard);
+
+							failCount = 0;
+							return;
 						}
 					}
 
@@ -177,6 +188,9 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool TickQueue(IBot bot, ProductionQueue queue)
 		{
+			if (queue.Actor == baseBuilder.RelocationHoldConyard)
+				return false;
+
 			var currentBuilding = queue.AllQueued().FirstOrDefault();
 
 			// Waiting to build something
