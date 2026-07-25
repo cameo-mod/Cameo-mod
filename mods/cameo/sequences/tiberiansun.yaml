@@ -45,10 +45,6 @@
 		Start: 149
 		Length: 15
 		ShadowStart: 441
-	die3:
-		Start: 149
-		Length: 15
-		ShadowStart: 441
 	die6:
 		Start: 149
 		Length: 15
@@ -93,6 +89,10 @@ tsengineer:
 	Inherits: ^TSBasicInfantry
 	Defaults:
 		Filename: ts_gdi_engineer_tsengineer.shp
+	die3:
+		Start: 149
+		Length: 15
+		ShadowStart: 441
 	icon:
 		Filename: ts_gdi_engineer_icon.shp
 
