@@ -69,9 +69,11 @@ speed+range:
   formula (o 1.5 / p 2 / q 4 → mean 2.5).
 
 **⚠ Pricing-flag cleanup (both units):** all 10/8 armaments are `pricing=True` (base gun + Targeting-
-Computer/Thermobaric/Tesla upgrade variants + the AA MammothTusk). Only the **base main gun** should
-price for the anchor DPS (500); the upgrade variants are upgrade-gated, the AA tusk is the limited-AA
-secondary (§9). Fix the pricing flags so DPS isn't summed across all variants.
+Computer/Thermobaric/Tesla upgrade variants + the AA MammothTusk). Anchor DPS = **500** from the base
+main gun. Upgrade variants are upgrade-gated (excluded). **★ AG/AA PAIR LAW (maintainer 2026-07-25):
+a unit's anti-ground and anti-air base weapons must be IDENTICAL** (same Damage, Burst, BurstDelays,
+WeaponClass) **and count as ONE for pricing — never summed**, because they can't fire on the same
+target. So Mammoth main gun (AG) = MammothTusk (AA) in stats, priced once (DPS 500), not 500+500.
 **Other Soviet mammoth variants:** only these two exist in the RA1 Soviet roster; the per-armament
 upgrade variants inherit the base damage (20000 baseline / 40000 verifier) + their upgrade modifiers.
 - Ladder so far: LightTank 400 · MBT 800 · **HighTechTank 2000**. (Maintainer called 2000 "twice the
@@ -79,11 +81,23 @@ upgrade variants inherit the base damage (20000 baseline / 40000 verifier) + the
 - **Apocalypse** sits as a heavy *member*, not the baseline.
 - **Turreted tanks are ALWAYS Light / MBT / HighTech** (maintainer rule).
 
-## ✅ TankDestroyer — DEFINITION LOCKED (baseline TBD)
+## ✅ TankDestroyer — LOCKED 2026-07-25
 
-**Role:** **frontal-facing (no turret), long range, anti-tank.** All the same kind.
-**Members:** `ra1_allies_alliedtankdestroyer`, `ra2_allies_tankdestroyer`, `naxis_hetzer`,
-`naxis_jagdpanzer`, Ordos Tank Destroyer. (Baseline/verifier pick next.)
+**Role:** frontal-facing (no turret), long range, anti-tank. **Baseline = the cheapest/budget TD
+(Hetzer); verifier = RA2 Tank Destroyer.**
+
+| | Unit | HP | Speed | Range | Dmg | Burst | Reload | **cost0** | DPS |
+|---|---|--:|--:|--:|--:|--:|--:|--:|--:|
+| **Baseline** | `naxis_hetzer` | **75000** | 60 | 7000 | 20000 | 1 | 80 | **600** | 250 |
+| **Verifier** | `ra2_allies_tankdestroyer` | **150000** | 60 | 7000 | 40000 | 1 | 80 | **1500** | 500 |
+
+- Range band **6500–7500**. ✓ identity: 2×HP + 2×DPS, same spd/rng → 2.5× cost (600 → 1500).
+- **Ladder now:** LightTank 400 · **TankDestroyer 600** · MBT 800 · HighTechTank 2000 (Hetzer is a
+  budget unit, cheaper than the MBT — intended).
+- **Other TDs in between** (600–1500): `ra1_allies_alliedtankdestroyer`, `naxis_jagdpanzer`.
+- **Ordos Tank Destroyer = MORE expensive** — it's **cloaked** → carries a special modifier (K>1),
+  so it prices above the plain band.
+- **Neo Jagdpanzer → Dreadnought** (450k HP Superheavy — too tanky for a TD).
 
 ## Taxonomy clarifications (maintainer 2026-07-25)
 
