@@ -857,3 +857,73 @@ Ordered by how much Cameo inflated each class *relative to its own infantry*:
   aggregate power, and this HP finding says *where the HP portion of the vehicle/aircraft anchors
   should sit.* Feed both into the anchor re-derivation — never hand-set. This makes the classes
   **relate to each other** the way the source games (and thus real RTS balance) intend.
+
+### 19.3 ⚠️ MAINTAINER PUSHBACK (2026-07-25) — the baseline ratios are probably FINE
+
+The maintainer's call on §19.1: **the baseline inter-class ratios are acceptable as-is.** Scout
+baseline 20k HP / 100¢ vs Tiger MBT 100k / 800¢ (a **5× HP** tank, 2.5× helicopter) "seems really
+fair." So the "bring vehicle/aircraft anchors DOWN to the RA2 reference" recommendation is **NOT a
+mandate** — it's descriptive. The more likely problem is **specific later-game units scaling too
+much with HP**, not the class *baselines*. **Approach: change nothing wholesale; test alternatives
+in-game.** §19.1 stays as reference data (Cameo tanks *are* ~2× the RA2 ratio), but acting on it is a
+per-case, test-driven decision, not an anchor cut. The §8.4 "vehicle anchors down" step is
+**downgraded to "review, don't presume."**
+
+---
+
+## 20. PRICE COMPARISON + the NOSTALGIA↔UNIQUENESS resolution (2026-07-25)
+
+The maintainer's core design tension: **keep units close to their original games (nostalgic) AND
+make each faction as unique as possible (interesting)** — informed by how DTA Enhanced / Mental Omega
+did it. These pull opposite ways. Grounding data first, then a framework that dissolves the conflict.
+
+### 20.1 How close ARE Cameo's prices to the originals? (RA2 family)
+
+| Unit | Cameo ¢ | YR ¢ | CnCR ¢ | MO ¢ | Cameo/orig | verdict |
+|---|--:|--:|--:|--:|--:|---|
+| Apocalypse | 1750 | 1750 | 1750 | 1600 | **1.00×** | nostalgic |
+| Conscript | 100 | 100 | 100 | 60 | **1.00×** | nostalgic |
+| Grizzly | 750 | 700 | 700 | – | 1.07× | nostalgic |
+| Rhino | 850 | 900 | – | 900 | 0.94× | nostalgic |
+| War Miner | 1200 | 1400 | 1400 | 1400 | 0.86× | nostalgic |
+| Terror Drone | 600 | 500 | 500 | 500 | 1.20× | ~nostalgic |
+| Flak Trooper | 416 | 300 | 300 | 150 | 1.39× | deviated |
+| Tesla Tank | 1800 | 1200 | 1200 | – | **1.50×** | deviated (specialist) |
+| Mirage Tank | 1600 | 1000 | 1000 | – | **1.60×** | deviated (specialist) |
+| Prism Tank | 2000 | 1200 | 1200 | – | **1.67×** | deviated (specialist) |
+
+**★ Finding — Cameo ALREADY threads the needle, and it does it by a principle:** the **iconic core**
+(Apocalypse, Conscript, Grizzly, Rhino, War Miner) stays at **~1.0× the original price**, while the
+**specialist / high-tech units** (Mirage stealth, Prism, Tesla) are re-priced **1.5–1.67× up** to pay
+for added power/identity. That's not drift — it's *nostalgic core + priced-up specialists.* The mods
+agree: **MO** re-prices along **economy identity** (Conscript **60¢** — cheaper, Soviet spam-doctrine
+— *and* tankier at 205 HP), showing price itself is a legitimate uniqueness lever when it expresses a
+faction's economy.
+
+### 20.2 The framework — three tiers of deviation freedom (dissolves the conflict)
+
+The tension is only real if nostalgia and uniqueness compete on the **same** axis. Split the axes:
+
+| Layer | Nostalgia rule | Uniqueness freedom |
+|---|---|---|
+| **Role + silhouette** | **NEVER change** — a Rhino is always a heavy Soviet tank, an Apocalypse always a slow super-heavy. This recognizability *is* the nostalgia. | none — this is the anchor |
+| **Stat-mix (HP/spd/rng/DPS at a given cost)** | default = the original feel | **ALWAYS free** — express faction character (tanky-slow vs fast-frail) at the same role/cost. **"Free" uniqueness:** the formula holds cost stable while the mix varies. This is the PRIMARY lever (how MO/DTA de-homogenise). |
+| **Price** | default = the **original price** for iconic units (nostalgic, recognizable) | **deviate PURPOSEFULLY** — (a) for genuine power/role enhancements (Mirage/Prism/Tesla ↑), or (b) for faction **economy identity** (spam-faction ↓ cheaper, elite-faction ↑ pricier). Never random, always in-band. |
+
+**★ The guarantee that makes this safe:** the **formula + cost-band (§18.4) mean you cannot make a
+unit that is unique-but-broken.** Every stat-mix and every price gets priced and band-checked
+(`check_band.py`), so *pursue uniqueness freely* — the pipeline is the safety net. Nostalgia is the
+**default**; uniqueness is a **deliberate, priced deviation from it**; the formula keeps every
+deviation honest.
+
+### 20.3 The operating rule (feeds Documents 1–3)
+
+1. **Document 1** already carries every unit's **original price** — that is the nostalgic anchor.
+2. **Default a Cameo unit to its original price + role.** Keep it unless a faction-identity reason
+   moves it.
+3. **Spend uniqueness on the stat-mix first** (free, formula-stable), on **price second** (only for
+   real enhancements or economy identity), and **never on role/silhouette.**
+4. **Synthesis (Document 3)** proposes, per unit, `original → (stat-mix deviation for faction X) →
+   priced by formula`, and the Δ report shows how far each landed from nostalgic — so the maintainer
+   sees the nostalgia cost of each uniqueness choice explicitly. **Nostalgic where it can be, unique
+   where it should be, balanced always.**

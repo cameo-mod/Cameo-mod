@@ -268,12 +268,19 @@ most units live*. Distribution is deliberately uneven:
 - **Hard caps 50%–400%** — only a few units below baseline or above the verifier.
 - **★ The formula BREAKS DOWN below ~75% cost** — units become too weak for their price (a
   600¢ tank vs an 800¢ base; the Naxis Rifle Recruit at 75¢). **75% is the practical FLOOR**, not 50.
-- **High end is forgiving:** a 4×HP+4×firepower unit landing at ~3.5× cost is strong-but-OK if it's
-  **gated to a later tech tier**. Above the verifier ⇒ "pays a tech-tier tax," not "banned."
+- **★ Price ⇒ tech-tier GATE mapping (maintainer 2026-07-25).** Cost above the baseline must be
+  *earned* by a gate (the 2.5× verifier already is — e.g. the Forgotten Soldier is an upgrade-unlock
+  on Tier-2/Radar while its baseline is a plain Tier-1 unit). The rule:
+  - **100%–200% cost** — allowed **ungated** (plain Tier-1, no promotion/upgrade).
+  - **200%–300% cost** — MUST have **≥1 gate**: a promotion, an upgrade-unlock, **or** Tier 3+.
+  - **> 300% cost** — **end-game**: MUST be gated by a promotion, upgrade-unlock, **or** the latest
+    tech tier (3+). (Power is allowed to scale with tier; the gate scales with the price.)
 - **→ NEW VALIDATOR (`tools/balance/check_band.py`):** for every unit, compute its class-formula
-  price and the ratio price/cost0. **Emit a finding for any member priced < 75% (breakdown risk) or
-  > 400% (needs tech-tier gate); report the 100–250% occupancy %** (target ≥ 80%). Wire into
-  `run_all.sh`. This turns the baseband from a remembered rule into an **enforced gate**.
+  price ratio price/cost0. **Findings:** priced **< 75%** (breakdown risk); priced **> 200% while
+  ungated** (plain Tier-1, no promotion/upgrade → must gate); priced **> 300%** not end-game-gated.
+  Report the **100–200% ungated occupancy** (target ≥ 80%). Gate detection = `design.tech_tier ≥ 3`,
+  a promotion/upgrade token in `prerequisites`, or `build_limit`/hero template. Wire into
+  `run_all.sh`. This turns the baseband + tier-gate from remembered rules into an **enforced gate**.
 
 ### 8.2 Determinism & agent-independence (the anti-"wrong memory" rules)
 
@@ -307,11 +314,17 @@ data, each via `fit_class.py` + a maintainer-confirmed anchor unit + sign-off:
 
 - **Infantry anchors → keep** (§19: infantry are on-scale, ~1× rifle). Confirm + sign the existing
   provisional infantry anchors.
-- **★ Vehicle anchors → bring DOWN** (§19: tanks are ~2× over relative to infantry): **MBT ≈ 2.5–3×
-  rifle (~50–60k HP)**, not the current ~5× (100k); heavy/high-tech scale up modestly from there.
-- **★ Aircraft anchors → bring DOWN** (§19: air ~2.5× over): **≈ 1.5–2× rifle**.
+- **Vehicle / aircraft anchors → REVIEW, don't presume (maintainer 2026-07-25).** §19 shows Cameo
+  tanks ~2× / aircraft ~2.5× the RA2 *reference* ratio, BUT the maintainer judges the **baselines
+  fair** (scout 20k/100¢ vs Tiger 100k/800¢ = 5× is intended). So **do NOT cut the class baselines**;
+  the reference is context, not a target. The real suspect is **specific later-game units scaling too
+  much with HP** — handle per-case, **test in-game**, keep the Tiger MBT anchor (100k, cost0 800)
+  unless testing says otherwise. (`BALANCE_SYNTHESIS.md` §19.3.)
 - **Defenses → roughly keep** (§19: near reference) — but account for the §7 building damage-exemption
   so effective durability isn't double-counted.
+- **Price default = ORIGINAL price** (`BALANCE_SYNTHESIS.md` §20): each unit defaults to its
+  source-game cost; deviate only for real power enhancements or faction economy-identity, always
+  in-band. Uniqueness rides the **stat-mix** (formula-stable), not the role/silhouette.
 - **Epic / hero → not band-limited** (`BuildLimit: 1`, §18.1) — priced separately, deliberately extreme.
 - Each class: `fit_class.py --class X --anchor <unit>` → review `formula_v2_X.md` + `check_band.py`
   → maintainer sets `signed_off: true`. **One class at a time**; unfitted classes keep the Tiger
